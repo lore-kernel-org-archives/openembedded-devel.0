@@ -1,17 +1,32 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GFVZh-00077v-Gz for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Aug 2006 14:41:45 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 9C20D401B40; Tue, 22 Aug 2006 05:21:42 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
+	id 1GFeXS-0001ry-En for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Aug 2006 00:16:02 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id B9BFB98C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Aug 2006 00:14:37 +0200 (CEST)
+Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
+	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 07149-09 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Aug 2006 00:14:37 +0200 (CEST)
+Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
+	[141.2.14.64])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 9C00597B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Aug 2006 00:14:37 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060822122142.9C20D401B40@tinman.treke.net>
-Date: Tue, 22 Aug 2006 05:21:42 -0700 (PDT)
-X-Mailman-Approved-At: Tue, 22 Aug 2006 23:24:39 +0200
-Subject: [Bug 1266] Updated h4000.conf
+In-Reply-To: <E1GFeQg-0001om-Nn@linuxtogo.org>
+References: <E1GFeQg-0001om-Nn@linuxtogo.org>
+Organization: VanilleMedia
+Date: Wed, 23 Aug 2006 00:14:37 +0200
+Message-Id: <1156284877.17332.51.camel@gandalf.tm.informatik.uni-frankfurt.de>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
+X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
+Subject: Re: [oe-commits] org.oe.dev task-angstrom: mask out broken packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -24,28 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Aug 2006 12:41:45 -0000
+X-List-Received-Date: Tue, 22 Aug 2006 22:16:02 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-http://bugs.openembedded.org/show_bug.cgi?id=1266
+> @@ -142,7 +142,7 @@ RDEPENDS_angstrom-task-office := "\
+>      gnumeric \
+>      abiword \
+>      imposter \
+> -    evince \
+> +#    evince \
+>      gqview"
 
+Does that really work that way? Isn't '\' just concatenating the lines
+so we end up with
 
-openembedded@hrw.one.pl changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
-         Resolution|                            |FIXED
-
-
-
-
-------- Comment #4 from openembedded@hrw.one.pl  2006-08-22 05:21 -------
-pushed into .dev
-
+angstrom-task-office = "gnumeric abiword imposter evince # gqview" which
+isn't what we want or is it?
 
 -- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+Regards,
+
+Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
+
+
 
 
