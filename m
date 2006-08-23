@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GFug6-0008FL-99 for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Aug 2006 17:30:02 +0200
+	id 1GFyzF-00034Q-AH for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Aug 2006 22:06:05 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 46D67401B3F; Wed, 23 Aug 2006 08:09:42 -0700 (PDT)
+	id 4B131401B40; Wed, 23 Aug 2006 12:45:38 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060823150942.46D67401B3F@tinman.treke.net>
-Date: Wed, 23 Aug 2006 08:09:42 -0700 (PDT)
-Subject: [Bug 1353] New: gpe-session-scripts shouldn't depend on gpe-bluetooth
+Message-Id: <20060823194538.4B131401B40@tinman.treke.net>
+Date: Wed, 23 Aug 2006 12:45:38 -0700 (PDT)
+Subject: [Bug 1195] faad2-2.0-r1 fails to compile due to function declaration mismatch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,52 +25,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Aug 2006 15:30:03 -0000
+X-List-Received-Date: Wed, 23 Aug 2006 20:06:05 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1353
-
-           Summary: gpe-session-scripts shouldn't depend on gpe-bluetooth
-           Product: Openembedded
-           Version: OpenZaurus 3.5.4.x
-          Platform: ARM
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P4
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: hma@syd.odn.ne.jp
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=1195
 
 
-gpe-session-scripts is essential package to login to /logout from GPE.
-Now the package depends on gpe-bluetooth.
 
-SL-C700 doesn't have bluetooth facility.
-I want more free space rather than unused package,
-so tried to remove gpe-bluetooth package.
-After that, I can't login to GPE, because gpe-session-scripts also removed.
 
-I replaced the lines in gpe-session-scripts_0.66.bb.
-Is this reasonable solution?
 
-#RDEPENDS_${PN} = "matchbox gpe-session-starter gpe-bluetooth xstroke xtscal
-gpe
--question gpe-clock matchbox-applet-inputmanager xrandr xmodmap xdpyinfo
-xserver
--common"
-RDEPENDS_${PN} = "matchbox gpe-session-starter xstroke xtscal gpe-question
-gpe-c
-lock matchbox-applet-inputmanager xrandr xmodmap xdpyinfo xserver-common"
-
-and
-
--DEPENDS = "matchbox-wm matchbox-panel gpe-bluetooth xstroke xtscal
-gpe-question
- matchbox-applet-inputmanager gpe-clock xrandr xmodmap xdpyinfo xserver-common"
-+DEPENDS = "matchbox-wm matchbox-panel xstroke xtscal gpe-question
-matchbox-apple
-t-inputmanager gpe-clock xrandr xmodmap xdpyinfo xserver-common"
+------- Comment #1 from papercrane@reversefold.com  2006-08-23 12:45 -------
+I also ran into this today. It's interesting to mention that it compiles fine
+in .oz354x.
 
 
 -- 
