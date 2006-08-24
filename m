@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GG1i9-0005d0-8Z for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Aug 2006 01:00:37 +0200
+	id 1GG337-0006sY-84 for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Aug 2006 02:26:21 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 69680401B3F; Wed, 23 Aug 2006 15:40:12 -0700 (PDT)
+	id 605FD401B3F; Wed, 23 Aug 2006 17:05:51 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060823224012.69680401B3F@tinman.treke.net>
-Date: Wed, 23 Aug 2006 15:40:12 -0700 (PDT)
-Subject: [Bug 1354] New: glibc fails to build
+Message-Id: <20060824000551.605FD401B3F@tinman.treke.net>
+Date: Wed, 23 Aug 2006 17:05:51 -0700 (PDT)
+Subject: [Bug 1355] New: Add explicit command separators in populate-volatile.sh
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,63 +25,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Aug 2006 23:00:38 -0000
+X-List-Received-Date: Thu, 24 Aug 2006 00:26:21 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1354
+http://bugs.openembedded.org/show_bug.cgi?id=1355
 
-           Summary: glibc fails to build
+           Summary: Add explicit command separators in populate-volatile.sh
            Product: Openembedded
-           Version: OpenZaurus 3.5.4.x
-          Platform: Other
+           Version: Angstrom
+          Platform: ARM
         OS/Version: Linux
             Status: NEW
           Severity: normal
           Priority: P2
-         Component: Build
+         Component: Distributions
         AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: bugs.openembedded.org@rolf.leggewie.biz
+        ReportedBy: pmiscml@gmail.com
          QAContact: tinderbox-oe@gmx.net
 
 
-NOTE: package glibc-2.3.5+cvs20050627: started
-NOTE: package glibc-2.3.5+cvs20050627-r12: task do_fetch: started
-NOTE: package glibc-2.3.5+cvs20050627-r12: task do_fetch: completed
-Updating
-/export/interim/openembedded/tmp/stamps/arm-linux/glibc-2.3.5+cvs20050627-r12.do_fetch
-NOTE: package glibc-2.3.5+cvs20050627-r12: task do_unpack: started
-NOTE: Unpacking
-/export/interim/openembedded/sources/stash_libc_sources.redhat.com__20050627.tar.gz
-to /export/interim/openembedded/tmp/work/arm-linux/glibc-2.3.5+cvs20050627-r12/
-NOTE: Unpacking
-/export/interim/openembedded/sources/stash_ports_sources.redhat.com__20050627.tar.gz
-to /export/interim/openembedded/tmp/work/arm-linux/glibc-2.3.5+cvs20050627-r12/
-NOTE: Unpacking
-/export/interim/openembedded/org.openembedded.dev/packages/glibc/files/etc/ld.so.conf
-to /export/interim/openembedded/tmp/work/arm-linux/glibc-2.3.5+cvs20050627-r12/
-NOTE: Unpacking
-/export/interim/openembedded/org.openembedded.dev/packages/glibc/files/generate-supported.mk
-to /export/interim/openembedded/tmp/work/arm-linux/glibc-2.3.5+cvs20050627-r12/
-NOTE: package glibc-2.3.5+cvs20050627-r12: task do_unpack: completed
-Updating
-/export/interim/openembedded/tmp/stamps/arm-linux/glibc-2.3.5+cvs20050627-r12.do_unpack
-NOTE: package glibc-2.3.5+cvs20050627-r12: task do_munge: started
-ERROR: function do_munge failed
-ERROR: log data follows
-(/export/interim/openembedded/tmp/work/arm-linux/glibc-2.3.5+cvs20050627-r12/temp/log.do_munge.21570)
-| mv: cannot overwrite directory
-`/export/interim/openembedded/tmp/work/arm-linux/glibc-2.3.5+cvs20050627-r12/libc/ports'
-NOTE: Task failed:
-/export/interim/openembedded/tmp/work/arm-linux/glibc-2.3.5+cvs20050627-r12/temp/log.do_munge.21570
-NOTE: package glibc-2.3.5+cvs20050627-r12: task do_munge: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package glibc-2.3.5+cvs20050627-r12: task do_clean: started
-NOTE: removing
-/export/interim/openembedded/tmp/work/arm-linux/glibc-2.3.5+cvs20050627-r12
-NOTE: removing
-/export/interim/openembedded/tmp/stamps/arm-linux/glibc-2.3.5+cvs20050627-r12.*
-NOTE: package glibc-2.3.5+cvs20050627-r12: task do_clean: completed
-NOTE: package glibc-2.3.5+cvs20050627: failed
-ERROR: Build of altboot failed
+Built an Angstrom bootstrap image for h4000 lately, during boot there were
+quite few errors, yet need to investigate. What's interesting is that I got
+funky files like "root.root" in / .
+
+A look at populate-volatile.sh showed that it could use some semicolons to
+separate commands which otherwise could get folded into one if argument is
+empty. I really not sure why this happen - maybe due to populate-volatile.sh
+caching, maybe due to busybox peculiarities, but the fact it does.
 
 
 -- 
