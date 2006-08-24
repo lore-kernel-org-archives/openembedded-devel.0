@@ -1,16 +1,24 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [66.249.82.230] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GGG1m-00033D-AL for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Aug 2006 16:17:50 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 82824401B3F; Thu, 24 Aug 2006 06:57:11 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060824135711.82824401B3F@tinman.treke.net>
-Date: Thu, 24 Aug 2006 06:57:11 -0700 (PDT)
-Subject: [Bug 1356] New: new ja.po files are ready for some gpe-* packages
+	(envelope-from <mattjreimer@gmail.com>) id 1GGNSN-0001o0-Cz
+	for openembedded-devel@openembedded.org; Fri, 25 Aug 2006 00:13:47 +0200
+Received: by wx-out-0506.google.com with SMTP id s19so624632wxc
+	for <openembedded-devel@openembedded.org>;
+	Thu, 24 Aug 2006 15:12:10 -0700 (PDT)
+Received: by 10.90.79.6 with SMTP id c6mr489313agb;
+	Thu, 24 Aug 2006 15:12:10 -0700 (PDT)
+Received: by 10.90.25.19 with HTTP; Thu, 24 Aug 2006 15:12:10 -0700 (PDT)
+Message-ID: <f383264b0608241512n6c151903q9ce027ce2db18f7f@mail.gmail.com>
+Date: Thu, 24 Aug 2006 15:12:10 -0700
+From: "Matt Reimer" <mattjreimer@gmail.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <1156267818.5920.21.camel@localhost.localdomain>
+MIME-Version: 1.0
+References: <E1GEBoO-0004rL-CK@linuxtogo.org>
+	<1156267818.5920.21.camel@localhost.localdomain>
+Cc: openembedded-devel@openembedded.org, oe@handhelds.org
+Subject: Re: [Oe-commits] org.oe.dev swig-native: add a bb file for 1.3.29.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,54 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2006 14:17:50 -0000
+X-List-Received-Date: Thu, 24 Aug 2006 22:13:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1356
+On 8/22/06, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Fri, 2006-08-18 at 23:23 +0200, mreimer commit wrote:
+> > swig-native: add a bb file for 1.3.29.
+> >
+> > Author: mreimer@openembedded.org
+>
+> > ============================================================
+> > --- packages/swig/swig-native_1.3.29.bb       89569bd5aec701a45a7c326cb76e3cc22761dd61
+> > +++ packages/swig/swig-native_1.3.29.bb       89569bd5aec701a45a7c326cb76e3cc22761dd61
+> > @@ -0,0 +1,7 @@
+> > +require swig_${PV}.bb
+>
+> Could you add swig_1.3.29.bb please? :)
+>
+> Richard
 
-           Summary: new ja.po files are ready for some gpe-* packages
-           Product: Openembedded
-           Version: unspecified
-          Platform: All
-               URL: http://hp.vector.co.jp/authors/VA014481/team-ja/
-        OS/Version: Linux
-            Status: NEW
-          Severity: enhancement
-          Priority: P3
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: hma@syd.odn.ne.jp
-         QAContact: tinderbox-oe@gmx.net
+Looks like pH5 beat me to it. Thanks pH5!
 
-
-Hi, I prepared Japanese message catalog file for some gpe related packages.
-They are placed at:
-http://hp.vector.co.jp/authors/VA014481/team-ja/
-
-The message catalogs include:
-
-gpe-clock-0.6.ja.po
-gpe-edit-0.13.ja.po
-gpe-go-0.05.ja.po
-gpe-login-0.60.ja.po
-gpe-ownerinfo-0.22.ja.po
-gpe-package-0.3.ja.po
-gpe-su-0.09.ja.po
-gpe-todo-0.54.ja.po
-gpe-todo-0.55.ja.po
-
-As you can see, most of them are some versions behind the newest.
-It is because the newest POT files are not praced in Translation Project.
-If you, package mainteners have to (re-)read the procedure to let POT file
-keep track after new releases, please refer the following URL:
-http://www.iro.umontreal.ca/translation/HTML/maintainers.html
-
-I hope above ja.po files are included in each packages and help
-Japanese people to use the packages.
-
-
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+Matt
 
 
