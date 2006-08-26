@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GH0Mk-0002YH-8Y for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 17:46:34 +0200
+	id 1GH0su-0002ni-Ly for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Aug 2006 18:19:48 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 3EAE34014D2; Sat, 26 Aug 2006 08:25:28 -0700 (PDT)
+	id 4E1BF4014D4; Sat, 26 Aug 2006 08:58:42 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060826152528.3EAE34014D2@tinman.treke.net>
-Date: Sat, 26 Aug 2006 08:25:28 -0700 (PDT)
-Subject: [Bug 1363] New: konqueror-embedded_20030705 fails in configure stage (no qte library found)
+Message-Id: <20060826155842.4E1BF4014D4@tinman.treke.net>
+Date: Sat, 26 Aug 2006 08:58:42 -0700 (PDT)
+Subject: [Bug 1353] gpe-session-scripts shouldn't depend on gpe-bluetooth
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,58 +25,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 15:46:34 -0000
+X-List-Received-Date: Sat, 26 Aug 2006 16:19:49 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1363
-
-           Summary: konqueror-embedded_20030705 fails in configure stage (no
-                    qte library found)
-           Product: Openembedded
-           Version: OpenZaurus 3.5.4.x
-          Platform: ARM
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: manuel.teira@telefonica.net
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=1353
 
 
-Running:
 
-bitbake -b
-../org.openembedded.dev/packages/konqueror/konqueror-embedded_20030705.bb
 
-Fails with message:
-...
-| checking for libjpeg6b... no
-| checking for libjpeg... -ljpeg
-| checking for Qt... configure: error: Qt (>= Qt 2.2.2) (library qte) not
-found. Please check your installation!
-| For more details about this problem, look at the end of config.log.
-| FATAL: oe_runconf failed
 
-It seems that the library to be linked should be libqte-mt. I workarrounded it
-with the following patch:
+------- Comment #5 from bugs.openembedded.org@rolf.leggewie.biz  2006-08-26 08:58 -------
+(In reply to comment #1)
+> 1. patch gpe-auto-bluetooth.sh to fail silently when gpe-bluetooth is not
+> installed, rather than producing an error; and
 
---- org.openembedded.dev/packages/konqueror/konqueror-embedded_20030705.bb     
-2006-08-03 13:38:14.000000000 +0200
-+++ konqueror-embedded_20030705.bb      2006-08-26 17:42:21.000000000 +0200
-@@ -39,7 +39,7 @@
-                 --with-extra-includes=${STAGING_INCDIR}
---with-extra-libs=${STAGING_LIBDIR}     \
-                 --with-ssl-version=0.9.7c --with-ssl-dir=${STAGING_LIBDIR}/.. 
-                 \
-                 --with-qt-dir=${QTDIR} --with-qtopia-dir=${OPIEDIR}           
-                 \
--               --enable-libsuffix=""                                          
-                '
-+               --enable-threading --enable-mt --enable-libsuffix=""           
-                '
+Would that be hard to do?  Since ...
 
- CXXFLAGS += "-DOPIE_NO_ERASE_RECT_HACKFIX -DOPIE_NEW_MALLOC"
+> 2. move gpe-bluetooth from RDEPENDS to RRECOMMENDS in the gpe-session-scripts
+> packaging.
+
+... I guess this would be easy (even for me ;-)) 
 
 
 -- 
