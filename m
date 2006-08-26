@@ -1,16 +1,22 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GGvnY-0002uf-SS for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 12:53:57 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id C93504014D4; Sat, 26 Aug 2006 03:32:49 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <philipp.zabel@gmail.com>) id 1GGw4V-00031F-MT
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Aug 2006 13:11:27 +0200
+Received: by py-out-1112.google.com with SMTP id i75so1398437pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Aug 2006 04:09:41 -0700 (PDT)
+Received: by 10.35.108.12 with SMTP id k12mr7264281pym;
+	Sat, 26 Aug 2006 04:09:41 -0700 (PDT)
+Received: by 10.35.96.8 with HTTP; Sat, 26 Aug 2006 04:09:41 -0700 (PDT)
+Message-ID: <74d0deb30608260409g586bf16bk73c652d3256df6c3@mail.gmail.com>
+Date: Sat, 26 Aug 2006 13:09:41 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060826103249.C93504014D4@tinman.treke.net>
-Date: Sat, 26 Aug 2006 03:32:49 -0700 (PDT)
-Subject: [Bug 1353] gpe-session-scripts shouldn't depend on gpe-bluetooth
+In-Reply-To: <44EFAE66.2040102@free.fr>
+MIME-Version: 1.0
+References: <44EFAE66.2040102@free.fr>
+Subject: Re: busybox-1.2.1 fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,30 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 10:53:57 -0000
+X-List-Received-Date: Sat, 26 Aug 2006 11:11:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1353
+On 8/26/06, Mohammed Amine SAYA <amine.saya@free.fr> wrote:
+> Hi all,
+> I am trying to build an opie image but busybox fails.
+> I got this :
+[...]
+> |
+> /home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/image/usr/share/udhcpc:
+>
+> | default.script
+> | mv: cannot overwrite directory
 
+Cannot overwrite directory?
+Sounds like a permission problem.
+Did you build as root once?
+Try to manually rm -rf
+/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/image
 
-
-
-
-------- Comment #1 from pb@reciva.com  2006-08-26 03:32 -------
-No, this is not a reasonable solution.  Your proposed patch will simply break
-bluetooth support for everyone else.
-
-If you want to make bluetooth optional then you would need to:
-
-1. patch gpe-auto-bluetooth.sh to fail silently when gpe-bluetooth is not
-installed, rather than producing an error; and
-
-2. move gpe-bluetooth from RDEPENDS to RRECOMMENDS in the gpe-session-scripts
-packaging.
-
-
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+regards
+Philipp
 
 
