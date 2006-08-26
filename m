@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GH0AE-0002SX-EK for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 17:33:38 +0200
+	id 1GH0Dp-0002Tv-5K for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Aug 2006 17:37:21 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 95270401B3B; Sat, 26 Aug 2006 08:12:32 -0700 (PDT)
+	id 46DC9401B3B; Sat, 26 Aug 2006 08:16:15 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060826151232.95270401B3B@tinman.treke.net>
-Date: Sat, 26 Aug 2006 08:12:32 -0700 (PDT)
-Subject: [Bug 1362] New: Meta-bug: Get some of the goodies from openzaurus-ja into OE itself
+Message-Id: <20060826151615.46DC9401B3B@tinman.treke.net>
+Date: Sat, 26 Aug 2006 08:16:15 -0700 (PDT)
+Subject: [Bug 1362] Meta-bug: Get some of the goodies from openzaurus-ja into OE itself
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,44 +25,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 15:33:39 -0000
+X-List-Received-Date: Sat, 26 Aug 2006 15:37:21 -0000
 
 http://bugs.openembedded.org/show_bug.cgi?id=1362
 
-           Summary: Meta-bug: Get some of the goodies from openzaurus-ja
-                    into OE itself
-           Product: Openembedded
-           Version: OpenZaurus 3.5.4.x
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: bugs.openembedded.org@rolf.leggewie.biz
-         QAContact: tinderbox-oe@gmx.net
-                CC: ppc8260@gmail.com
-OtherBugsDependingO 1094
-             nThis:
+
+bugs.openembedded.org@rolf.leggewie.biz changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |ASSIGNED
 
 
-Our Japanese friends at http://openzaurus-ja.sourceforge.jp have created a
-couple of patches and made them available at
-http://cvs.sourceforge.jp/cgi-bin/viewcvs.cgi/openzaurus-ja/bbfile/packages-ja/
- These should really be fed back into OE itself and I will try to do get them
-into OE one after the other.
 
-Tota-san, can you please encourage your peers at openzaurus-ja to contribute
-back to OE.  We should not duplicate efforts and getting openzaurus-ja's
-patches into OE itself will make things easier for all of you.
 
-If the English language is a problem, I am always willing to help.  Also, if
-you have technical questions related on how to contribute patches, let me know.
- I might not always answer immediately, but eventually I will ;-)
+------- Comment #1 from bugs.openembedded.org@rolf.leggewie.biz  2006-08-26 08:16 -------
+One comment I received from main devs at OE.  You guys at openzaurus-ja tend to
+name your bb files ozja-$PN-$PV.bb which as I was told creates problems in OE
+and bitbake.  Just name your bb files $PN-$PV.bb
 
-This bug report will serve as a meta-bug, I will open new bug reports for the
-individual packages as I prepare them to be included in OE.
+$PN: name of the package
+$PV: version of the package
 
 
 -- 
