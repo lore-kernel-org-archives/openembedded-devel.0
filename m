@@ -1,20 +1,16 @@
-Received: from [212.27.42.30] (helo=smtp4-g19.free.fr)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <amine.saya@free.fr>) id 1GGmg2-0002tq-0K
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 03:09:34 +0200
-Received: from [82.243.163.8] (cag06-3-82-243-163-8.fbx.proxad.net
-	[82.243.163.8])
-	by smtp4-g19.free.fr (Postfix) with ESMTP id D95E84AA99
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Aug 2006 03:07:50 +0200 (CEST)
-Message-ID: <44EFAE66.2040102@free.fr>
-Date: Sat, 26 Aug 2006 04:13:58 +0200
-From: Mohammed Amine SAYA <amine.saya@free.fr>
-User-Agent: Thunderbird 1.5.0.5 (X11/20060719)
-MIME-Version: 1.0
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GGvnY-0002uf-SS for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Aug 2006 12:53:57 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id C93504014D4; Sat, 26 Aug 2006 03:32:49 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
-Subject: busybox-1.2.1 fails
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060826103249.C93504014D4@tinman.treke.net>
+Date: Sat, 26 Aug 2006 03:32:49 -0700 (PDT)
+Subject: [Bug 1353] gpe-session-scripts shouldn't depend on gpe-bluetooth
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -29,55 +25,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 01:09:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 26 Aug 2006 10:53:57 -0000
 
-Hi all,
-I am trying to build an opie image but busybox fails.
-I got this :
-
-| 
-/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/image/usr/sbin: 
-
-| chroot
-| fbset
-| rdate
-| udhcpd
-|
-| 
-/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/image/usr/share: 
-
-| udhcpc
-|
-| 
-/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/image/usr/share/udhcpc: 
-
-| default.script
-| mv: cannot overwrite directory 
-`/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/image/busybox/bin' 
+http://bugs.openembedded.org/show_bug.cgi?id=1353
 
 
-| mv: cannot overwrite directory 
-`/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/image/busybox/sbin' 
 
 
-| mv: cannot overwrite directory 
-`/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/image/busybox/usr' 
+
+------- Comment #1 from pb@reciva.com  2006-08-26 03:32 -------
+No, this is not a reasonable solution.  Your proposed patch will simply break
+bluetooth support for everyone else.
+
+If you want to make bluetooth optional then you would need to:
+
+1. patch gpe-auto-bluetooth.sh to fail silently when gpe-bluetooth is not
+installed, rather than producing an error; and
+
+2. move gpe-bluetooth from RDEPENDS to RRECOMMENDS in the gpe-session-scripts
+packaging.
 
 
-NOTE: Task failed: 
-/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/arm-linux/busybox-1.2.1-r1/temp/log.do_install.19657 
-
-NOTE: package busybox-1.2.1-r1: task do_package: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package busybox-1.2.1: failed
-ERROR: Build of opie-image failed
-
-
-Any hint please ?
-
-
-Amine.
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
