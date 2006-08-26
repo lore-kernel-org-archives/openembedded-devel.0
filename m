@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GGzNH-0005ua-UE for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 16:43:04 +0200
+	id 1GGze1-00060p-6S for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Aug 2006 17:00:21 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 8F86C4014D4; Sat, 26 Aug 2006 07:21:58 -0700 (PDT)
+	id 6DBFA401B3B; Sat, 26 Aug 2006 07:39:15 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060826142158.8F86C4014D4@tinman.treke.net>
-Date: Sat, 26 Aug 2006 07:21:58 -0700 (PDT)
-Subject: [Bug 832] subversion can't be built because of apr outdated URIs.
+Message-Id: <20060826143915.6DBFA401B3B@tinman.treke.net>
+Date: Sat, 26 Aug 2006 07:39:15 -0700 (PDT)
+Subject: [Bug 1353] gpe-session-scripts shouldn't depend on gpe-bluetooth
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,23 +25,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 14:43:04 -0000
+X-List-Received-Date: Sat, 26 Aug 2006 15:00:22 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=832
-
-
-yuecelm@ee.ethz.ch changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
-         Resolution|                            |FIXED
+http://bugs.openembedded.org/show_bug.cgi?id=1353
 
 
 
 
-------- Comment #10 from yuecelm@ee.ethz.ch  2006-08-26 07:21 -------
-apr uses now an apache mirror, no problem with downloading...
+
+------- Comment #3 from hma@syd.odn.ne.jp  2006-08-26 07:39 -------
+It is good news for SL-C series of Zaurus users if bluetooth is going to be
+optional.
+* SL-C860, SL-C760, SL-C750, SL-C700
+* SL-C3200, SL-C3100, SL-C3000
+* SL-C1000
+In OpenZaurus machine name, they are c7x0, terrier, borzoi, spitz, akita.
+They don't have built-in Bluetooth facility.
+In these machines, bluetooth packages should be recommended instead of depended
+on.
+Especially it is effective for c7x0, as noted by Rolf, flash area for 
+root partition is small.
+
+SL-6000W has built-in bluetooth facility.
+In this machine bluetooth may be depended on.
+
+At a glance, gpe-auto-bluetooth is already non-bluefish-package ready.
+Isn't it?
+/etc/sysconfig/bluetooth exists for non-bluetooth machines?
 
 
 -- 
