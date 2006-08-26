@@ -1,23 +1,16 @@
-Received: from [212.27.42.28] (helo=smtp2-g19.free.fr)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <amine.saya@free.fr>) id 1GH3eC-0000y9-A8
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 21:16:48 +0200
-Received: from [82.243.163.8] (cag06-3-82-243-163-8.fbx.proxad.net
-	[82.243.163.8])
-	by smtp2-g19.free.fr (Postfix) with ESMTP id ABD2F75BDA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Aug 2006 21:15:00 +0200 (CEST)
-Message-ID: <44F0AD2B.1010401@free.fr>
-Date: Sat, 26 Aug 2006 22:20:59 +0200
-From: Mohammed Amine SAYA <amine.saya@free.fr>
-User-Agent: Thunderbird 1.5.0.5 (X11/20060719)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-References: <44F06A3D.8030102@free.fr>
-In-Reply-To: <44F06A3D.8030102@free.fr>
-Subject: Re: sysvinit-2.86 fails
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GH5OS-0003V2-Te for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Aug 2006 23:08:41 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 7156C4014D2; Sat, 26 Aug 2006 13:47:31 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060826204731.7156C4014D2@tinman.treke.net>
+Date: Sat, 26 Aug 2006 13:47:31 -0700 (PDT)
+Subject: [Bug 1365] New: altboot does not find CF card
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -32,41 +25,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 19:16:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 26 Aug 2006 21:08:41 -0000
 
-Mohammed Amine SAYA wrote:
-> I got this :
->
->  ln: 
-> `/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/at91sam9261-linux/sysvinit-2.86-r28/image/etc/rc2.d/S99stop-bootlogd': 
-> File exists
->
-> I tried to fix it in sysvinit-2.86.bb file but with no success.
-> I tried to replace ln -s ../init.d/stop-bootlogd 
-> ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd with ln -sf ....
-> but It doesn't work either. I mean It builds successfully but 
-> tmp/work/at91sam9261-linux/sysvinit-2.86-r28/image/etc/ is empty !!!
->   
-Hi all,
+http://bugs.openembedded.org/show_bug.cgi?id=1365
 
-As I said before, sysvinit don't build successfully so I replaced
-
-ln -s ../init.d/stop-bootlogd ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd 
-
-with 
-
-ln -sf ../init.d/stop-bootlogd ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd
+           Summary: altboot does not find CF card
+           Product: Openembedded
+           Version: OpenZaurus 3.5.4.x
+          Platform: Other
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Distributions
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: bugs.openembedded.org@rolf.leggewie.biz
+         QAContact: tinderbox-oe@gmx.net
+OtherBugsDependingO 1093
+             nThis:
 
 
-But I am not sure that is the right way ? Any comment on this workaround please ?
+Hi,
+
+using altboot compiled from the latest sources in .dev  My feed is at
+http://oz.leggewie.org/ipk/  Quite obviously, this might be something I did
+wrong but on the other hand it might also be that I caught a newly introduced
+bug early.
+
+Upon reboot, altboot (or some other software) will usually fail to mount the CF
+card and thus fail to boot the loop image on the CF card.  To remedy the
+situation, I boot either the installation in flash or another one on SD.  On
+the next reboot, the CF card will usually be recognized.
+
+Regards
+
+Rolf
 
 
-Regards,
-
-Amine.
-
-
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
