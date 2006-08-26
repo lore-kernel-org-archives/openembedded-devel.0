@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GH0Ec-0002Up-Ci for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 17:38:10 +0200
+	id 1GH0Fu-0002W3-IE for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Aug 2006 17:39:30 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 7E6434014D4; Sat, 26 Aug 2006 08:17:04 -0700 (PDT)
+	id A36AF4014D2; Sat, 26 Aug 2006 08:18:24 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060826151704.7E6434014D4@tinman.treke.net>
-Date: Sat, 26 Aug 2006 08:17:04 -0700 (PDT)
-Subject: [Bug 1362] Meta-bug: Get some of the goodies from openzaurus-ja into OE itself
+Message-Id: <20060826151824.A36AF4014D2@tinman.treke.net>
+Date: Sat, 26 Aug 2006 08:18:24 -0700 (PDT)
+Subject: [Bug 1123] rotated qpf-unismall
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,9 +25,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 15:38:10 -0000
+X-List-Received-Date: Sat, 26 Aug 2006 15:39:30 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1362
+http://bugs.openembedded.org/show_bug.cgi?id=1123
 
 
 bugs.openembedded.org@rolf.leggewie.biz changed:
@@ -36,7 +36,7 @@ bugs.openembedded.org@rolf.leggewie.biz changed:
 ----------------------------------------------------------------------------
          AssignedTo|openembedded-               |bugs.openembedded.org@rolf.l
                    |devel@lists.openembedded.org|eggewie.biz
-             Status|ASSIGNED                    |NEW
+             Status|REOPENED                    |NEW
 
 
 
