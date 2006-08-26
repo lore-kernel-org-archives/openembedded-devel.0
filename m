@@ -1,16 +1,23 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [212.27.42.28] (helo=smtp2-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GH2bp-0004LK-KR for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 20:10:17 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 229EF4014D2; Sat, 26 Aug 2006 10:49:00 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060826174900.229EF4014D2@tinman.treke.net>
-Date: Sat, 26 Aug 2006 10:49:00 -0700 (PDT)
-Subject: [Bug 1364] New: localegen errors out with LC_ADDRESS: field `lang_ab' must not be defined
+	(envelope-from <amine.saya@free.fr>) id 1GH3eC-0000y9-A8
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Aug 2006 21:16:48 +0200
+Received: from [82.243.163.8] (cag06-3-82-243-163-8.fbx.proxad.net
+	[82.243.163.8])
+	by smtp2-g19.free.fr (Postfix) with ESMTP id ABD2F75BDA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Aug 2006 21:15:00 +0200 (CEST)
+Message-ID: <44F0AD2B.1010401@free.fr>
+Date: Sat, 26 Aug 2006 22:20:59 +0200
+From: Mohammed Amine SAYA <amine.saya@free.fr>
+User-Agent: Thunderbird 1.5.0.5 (X11/20060719)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+References: <44F06A3D.8030102@free.fr>
+In-Reply-To: <44F06A3D.8030102@free.fr>
+Subject: Re: sysvinit-2.86 fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,38 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 18:10:18 -0000
+X-List-Received-Date: Sat, 26 Aug 2006 19:16:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-http://bugs.openembedded.org/show_bug.cgi?id=1364
+Mohammed Amine SAYA wrote:
+> I got this :
+>
+>  ln: 
+> `/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/at91sam9261-linux/sysvinit-2.86-r28/image/etc/rc2.d/S99stop-bootlogd': 
+> File exists
+>
+> I tried to fix it in sysvinit-2.86.bb file but with no success.
+> I tried to replace ln -s ../init.d/stop-bootlogd 
+> ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd with ln -sf ....
+> but It doesn't work either. I mean It builds successfully but 
+> tmp/work/at91sam9261-linux/sysvinit-2.86-r28/image/etc/ is empty !!!
+>   
+Hi all,
 
-           Summary: localegen errors out with LC_ADDRESS: field `lang_ab'
-                    must not be defined
-           Product: Openembedded
-           Version: Angstrom
-          Platform: Other
-        OS/Version: All
-            Status: NEW
-          Severity: blocker
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: koen@dominion.kabel.utwente.nl
-         QAContact: tinderbox-oe@gmx.net
+As I said before, sysvinit don't build successfully so I replaced
 
+ln -s ../init.d/stop-bootlogd ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd 
 
-NOTE: generating locale tt_RU (UTF-8)
-NOTE: generating locale so_SO (UTF-8)
-NOTE: generating locale so_SO (ISO-8859-1)
-NOTE: generating locale gez_ET@abegede (UTF-8)
-LC_ADDRESS: field `lang_ab' must not be defined
-NOTE: Task failed: localedef returned an error.
-NOTE: package glibc-2.4-r10: task do_package: failed
-ERROR: TaskFailed event exception, aborting
+with 
+
+ln -sf ../init.d/stop-bootlogd ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd
 
 
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+But I am not sure that is the right way ? Any comment on this workaround please ?
+
+
+Regards,
+
+Amine.
+
+
 
 
