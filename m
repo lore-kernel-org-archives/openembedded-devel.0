@@ -1,23 +1,16 @@
-Received: from [64.233.166.177] (helo=py-out-1112.google.com)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <philipp.zabel@gmail.com>) id 1GHFPQ-00089V-AM
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Aug 2006 09:50:22 +0200
-Received: by py-out-1112.google.com with SMTP id i75so1675655pye
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Aug 2006 00:48:28 -0700 (PDT)
-Received: by 10.35.109.2 with SMTP id l2mr9390080pym;
-	Sun, 27 Aug 2006 00:48:28 -0700 (PDT)
-Received: by 10.35.96.8 with HTTP; Sun, 27 Aug 2006 00:48:28 -0700 (PDT)
-Message-ID: <74d0deb30608270048t1098d042ne95ed5df666fae7a@mail.gmail.com>
-Date: Sun, 27 Aug 2006 09:48:28 +0200
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: "Using the OpenEmbedded metadata to build Linux Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <44F0AD2B.1010401@free.fr>
-MIME-Version: 1.0
-References: <44F06A3D.8030102@free.fr> <44F0AD2B.1010401@free.fr>
-Subject: Re: sysvinit-2.86 fails
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GHFZ8-0008Dd-Dd for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Aug 2006 10:00:22 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 082CB4014D4; Sun, 27 Aug 2006 00:39:02 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060827073902.082CB4014D4@tinman.treke.net>
+Date: Sun, 27 Aug 2006 00:39:02 -0700 (PDT)
+Subject: [Bug 1316] Touchscreen unstable for Tosa OZ 3.5.4.2 RC1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -32,50 +25,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Aug 2006 07:50:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sun, 27 Aug 2006 08:00:23 -0000
 
-On 8/26/06, Mohammed Amine SAYA <amine.saya@free.fr> wrote:
-> Mohammed Amine SAYA wrote:
-> > I got this :
-> >
-> >  ln:
-> > `/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/at91sam9261-linux/sysvinit-2.86-r28/image/etc/rc2.d/S99stop-bootlogd':
-> > File exists
-> >
-> > I tried to fix it in sysvinit-2.86.bb file but with no success.
-> > I tried to replace ln -s ../init.d/stop-bootlogd
-> > ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd with ln -sf ....
-> > but It doesn't work either. I mean It builds successfully but
-> > tmp/work/at91sam9261-linux/sysvinit-2.86-r28/image/etc/ is empty !!!
-> >
-> Hi all,
->
-> As I said before, sysvinit don't build successfully so I replaced
->
-> ln -s ../init.d/stop-bootlogd ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd
->
-> with
->
-> ln -sf ../init.d/stop-bootlogd ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd
->
->
-> But I am not sure that is the right way ? Any comment on this workaround please ?
+http://bugs.openembedded.org/show_bug.cgi?id=1316
 
-I think the problem lies here:
 
-NOTE: package sysvinit-2.86-r28: task do_install: started
-NOTE: package sysvinit-2.86-r28: task do_install: completed
-NOTE: package sysvinit-2.86-r28: task do_package: started
-ERROR: function do_install failed
+adolf.j.winterer@inn-salzach.de changed:
 
-PACKAGEFUNCS in package.bbclass contains do_install as first element,
-so do_install is run twice. After removing do_install from
-PACKAGEFUNCS, installation works fine.
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |adolf.j.winterer@inn-
+                   |                            |salzach.de
 
-regards
-Philipp
+
+
+
+------- Comment #4 from adolf.j.winterer@inn-salzach.de  2006-08-27 00:39 -------
+My SL6000-L (tosa with 3.5.4.2-RC1) shows exactly the same erratic touchscreen
+positions.
+
+Horizontal lines show "spikes", vertical lines draw ok.
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
