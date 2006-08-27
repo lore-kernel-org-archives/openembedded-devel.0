@@ -1,16 +1,23 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [64.233.166.177] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GH5OS-0003V2-Te for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Aug 2006 23:08:41 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 7156C4014D2; Sat, 26 Aug 2006 13:47:31 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060826204731.7156C4014D2@tinman.treke.net>
-Date: Sat, 26 Aug 2006 13:47:31 -0700 (PDT)
-Subject: [Bug 1365] New: altboot does not find CF card
+	(envelope-from <philipp.zabel@gmail.com>) id 1GHFPQ-00089V-AM
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Aug 2006 09:50:22 +0200
+Received: by py-out-1112.google.com with SMTP id i75so1675655pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Aug 2006 00:48:28 -0700 (PDT)
+Received: by 10.35.109.2 with SMTP id l2mr9390080pym;
+	Sun, 27 Aug 2006 00:48:28 -0700 (PDT)
+Received: by 10.35.96.8 with HTTP; Sun, 27 Aug 2006 00:48:28 -0700 (PDT)
+Message-ID: <74d0deb30608270048t1098d042ne95ed5df666fae7a@mail.gmail.com>
+Date: Sun, 27 Aug 2006 09:48:28 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <44F0AD2B.1010401@free.fr>
+MIME-Version: 1.0
+References: <44F06A3D.8030102@free.fr> <44F0AD2B.1010401@free.fr>
+Subject: Re: sysvinit-2.86 fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,46 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2006 21:08:41 -0000
+X-List-Received-Date: Sun, 27 Aug 2006 07:50:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1365
+On 8/26/06, Mohammed Amine SAYA <amine.saya@free.fr> wrote:
+> Mohammed Amine SAYA wrote:
+> > I got this :
+> >
+> >  ln:
+> > `/home/users/asaya/Work/OpenEmbedded/OpenEmbedded-Dev1-mnt028/build/tmp/work/at91sam9261-linux/sysvinit-2.86-r28/image/etc/rc2.d/S99stop-bootlogd':
+> > File exists
+> >
+> > I tried to fix it in sysvinit-2.86.bb file but with no success.
+> > I tried to replace ln -s ../init.d/stop-bootlogd
+> > ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd with ln -sf ....
+> > but It doesn't work either. I mean It builds successfully but
+> > tmp/work/at91sam9261-linux/sysvinit-2.86-r28/image/etc/ is empty !!!
+> >
+> Hi all,
+>
+> As I said before, sysvinit don't build successfully so I replaced
+>
+> ln -s ../init.d/stop-bootlogd ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd
+>
+> with
+>
+> ln -sf ../init.d/stop-bootlogd ${D}${sysconfdir}/rc$level.d/S99stop-bootlogd
+>
+>
+> But I am not sure that is the right way ? Any comment on this workaround please ?
 
-           Summary: altboot does not find CF card
-           Product: Openembedded
-           Version: OpenZaurus 3.5.4.x
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: bugs.openembedded.org@rolf.leggewie.biz
-         QAContact: tinderbox-oe@gmx.net
-OtherBugsDependingO 1093
-             nThis:
+I think the problem lies here:
 
+NOTE: package sysvinit-2.86-r28: task do_install: started
+NOTE: package sysvinit-2.86-r28: task do_install: completed
+NOTE: package sysvinit-2.86-r28: task do_package: started
+ERROR: function do_install failed
 
-Hi,
+PACKAGEFUNCS in package.bbclass contains do_install as first element,
+so do_install is run twice. After removing do_install from
+PACKAGEFUNCS, installation works fine.
 
-using altboot compiled from the latest sources in .dev  My feed is at
-http://oz.leggewie.org/ipk/  Quite obviously, this might be something I did
-wrong but on the other hand it might also be that I caught a newly introduced
-bug early.
-
-Upon reboot, altboot (or some other software) will usually fail to mount the CF
-card and thus fail to boot the loop image on the CF card.  To remedy the
-situation, I boot either the installation in flash or another one on SD.  On
-the next reboot, the CF card will usually be recognized.
-
-Regards
-
-Rolf
-
-
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+regards
+Philipp
 
 
