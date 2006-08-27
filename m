@@ -1,16 +1,31 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GHUE8-0002Mb-L8 for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Aug 2006 01:39:40 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 561504014D2; Sun, 27 Aug 2006 16:18:14 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060827231814.561504014D2@tinman.treke.net>
-Date: Sun, 27 Aug 2006 16:18:14 -0700 (PDT)
-Subject: [Bug 1368] New: kopi and kapi help files not available?
+	(envelope-from <lenehan@twibble.org>) id 1GHUFp-0002Or-Aw
+	for openembedded-devel@openembedded.org; Mon, 28 Aug 2006 01:41:27 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id A1E4486268
+	for <openembedded-devel@openembedded.org>;
+	Mon, 28 Aug 2006 09:39:29 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 05194-04 for <openembedded-devel@openembedded.org>;
+	Mon, 28 Aug 2006 09:39:27 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id C8E59861CC
+	for <openembedded-devel@openembedded.org>;
+	Mon, 28 Aug 2006 09:39:27 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id BED5ED98F5B; Mon, 28 Aug 2006 09:39:27 +1000 (EST)
+Date: Mon, 28 Aug 2006 09:39:27 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20060827233927.GA9807@twibble.org>
+References: <E1GGZOX-0002WU-1s@linuxtogo.org>
+Mime-Version: 1.0
+In-Reply-To: <E1GGZOX-0002WU-1s@linuxtogo.org>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: Section list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,44 +40,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Aug 2006 23:39:41 -0000
+X-List-Received-Date: Sun, 27 Aug 2006 23:41:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1368
+On Fri, Aug 25, 2006 at 12:58:37PM +0200, "mickeyl commit" wrote:
+> nfs-utils: s/networking/network/
+[...]
 
-           Summary: kopi and kapi help files not available?
-           Product: Openembedded
-           Version: OpenZaurus 3.5.4.x
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: bugs.openembedded.org@rolf.leggewie.biz
-         QAContact: tinderbox-oe@gmx.net
+Ah, good. I went through the sections used by all the recipes a while
+back and generated a list and some suggested renames. I'll include it
+here, along with the suggested renaming for some of the existing
+sections.
 
+I'll add this to the user manual once everyone is happy with it. I
+also think it would be a good idea might to emit a warning if someone
+tries to use a section name which is not definied in the list, so I
+might code that up as well.
 
-Hi,
-
-I installed kopi and kapi and did not see any recommended packages that I
-possibly could have forgotten.  On my collie, when I click any of the help
-entries (except for the about entry) the help files do not open.  Are they
-installed at all?  I cannot see anything in /usr/lib/ipkg/info/kopi.list.
-
-BTW, the homepage seems to be stale for about a year.  Is this project still
-active?  Is there a better alternative?  I am just about to switch and would
-prefer to go for the best option going forward.  Sorry for this shameless
-request for support and advice.
-
-Regards
-
-Rolf
-
+    * admin
+    * applications		-> Really should find some other section?
+    * apps			-> REPLACE with applications
+    * base
+    * base/shell
+    * bootloader
+    * console
+    * console/editors
+    * console/games
+    * console/multimedia
+    * console/net		-> REPLACE with console/network
+    * console/network
+    * console/networking	-> REPLACE with console/network
+    * console/scientific
+    * console/shells
+    * console/telephony
+    * console/tools
+    * console/util		-> REPLACE with console/utils
+    * console/utils
+    * devel
+    * devel/libs
+    * devel/python
+    * devel/rexx
+    * devel/ruby
+    * devel/tcltk
+    * dev-lang			-> REPALCE with devel
+    * doc
+    * e/apps
+    * e/libs
+    * e/utils
+    * games
+    * games/arcade
+    * gnome/libs
+    * gnome/multimedia
+    * gpe
+    * gpe/applications
+    * gpe/base
+    * gpe/games
+    * gpe/libs
+    * gpe/multimedia
+    * gui
+    * interpreters
+    * kde
+    * kde/dev
+    * kernel
+    * kernel/module		-> REPALCE with kernel/modules
+    * kernel/modules
+    * kernel/userland
+    * libs
+    * libs/inputmethod		-> REPALCE with kernel/inputmethods
+    * libs/inputmethods
+    * libs/multimedia
+    * libs/network
+    * media-gfx			-> Find an existing category?
+    * multimedia
+    * net: Use network
+    * net-misc			-> REPALCE with network/misc
+    * net/misc			-> REPALCE with nerwork/misc
+    * network
+    * network/cms
+    * network/misc
+    * opie
+    * opie/applets
+    * opie/applications
+    * opie/base
+    * opie/codecs
+    * opie/datebook
+    * opie/decorations
+    * opie/fontfactories
+    * opie/fonts
+    * opie/games
+    * opie/help
+    * opie/inputmethods
+    * opie/libs
+    * opie/multimedia
+    * opie/network
+    * opie/pim
+    * opie/security
+    * opie/settings
+    * opie/shell
+    * opie/Shell		-> REPLACE with opie/shell
+    * opie/styles
+    * opie/today
+    * unknown			-> Should make it a known section...
+    * utility			-> REPLACE with utils
+    * utils
+    * x11
+    * x11/apps			-> Really should be x11/applications and probably should go somewhere else
+    * x11/base
+    * x11/data
+    * x11/fonts
+    * x11/games
+    * x11/gnome
+    * x11/gnome/libs
+    * x11/graphics
+    * x11/libs
+    * x11-misc			-> Use x11/apps or other appropriate type?
+    * x11/multimedia
+    * x11/network
+    * x11/office
+    * x11/scientific
+    * x11/utils
+    * x11/wm 
 
 -- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+ Jamie Lenehan <lenehan@twibble.org>
 
 
