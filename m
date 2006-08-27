@@ -1,16 +1,30 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GHOVE-0006CB-VO for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Aug 2006 19:32:57 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 88D1B401B3B; Sun, 27 Aug 2006 10:11:34 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060827171134.88D1B401B3B@tinman.treke.net>
-Date: Sun, 27 Aug 2006 10:11:34 -0700 (PDT)
-Subject: [Bug 1353] gpe-session-scripts shouldn't depend on gpe-bluetooth
+	(envelope-from <rpurdie@rpsys.net>) id 1GHSUD-0000pD-MA
+	for openembedded-devel@openembedded.org; Sun, 27 Aug 2006 23:48:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.6) with ESMTP id k7RLkF4q013483
+	for <openembedded-devel@openembedded.org>;
+	Sun, 27 Aug 2006 22:46:15 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 13397-03 for <openembedded-devel@openembedded.org>;
+	Sun, 27 Aug 2006 22:46:13 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.6) with ESMTP id k7RLk8uU013473
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Sun, 27 Aug 2006 22:46:08 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Sun, 27 Aug 2006 22:46:10 +0100
+Message-Id: <1156715171.5536.60.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: What is task-base?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,25 +39,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Aug 2006 17:32:57 -0000
+X-List-Received-Date: Sun, 27 Aug 2006 21:48:10 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-http://bugs.openembedded.org/show_bug.cgi?id=1353
+I've been asked to explain exactly what my last commits did. Basically,
+I broke us free from being tied to task-bootstrap by creating
+MACHINE_TASK_PROVIDER which you can set to the task-bootstrap like
+provider of your choice. It defaults to task-bootstrap so nothing
+changes in that respect.
+
+I then changed the zaurus machines to use a new alternative called
+task-base. Instead of having each machine setting a ton of duplicate
+variables, this aims to allow a machine to specify its features and
+task-base builds it a customised task-bootstrap like package based on
+what the machine needs along with what the distro supports. At present,
+task-base supports the Zaurus 2.6 models but adding support for other
+machines should be straightforward.
+
+To illustrate, the distro.conf file can say:
+
+DISTO_FEATURES = "nfs smbfs ipsec wifi ppp alsa bluetooth ext2 irda
+pcmcia usbgadget usbhost"
+
+and the machine.conf:
+
+MACHINE_FEATURES = "kernel26 apm alsa pcmcia bluetooth irda usbgadget"
+
+and the resulting task-base would support say pcmcia but not usbhost.
+task-base details exactly which options are either machine or distro
+settings (or need to be in both). Machine options are meant to reflect
+capabilities of the machine, distro options, things distribution
+maintainers might want to add or remove from their distros images.
+Hopefully this will let people create customised versions of
+"task-bootstrap" without impacting other OE users/distros.
+
+As one extreme, if you want to create an extremely minimal image, you
+could set DISTRO_FEATURES = "" and you'd stop a lot of packages making
+it into the image.
+
+Its not perfect yet but we needed to set the ball rolling somehow :)
+
+Cheers,
+
+Richard
 
 
 
-
-
-------- Comment #7 from pb@reciva.com  2006-08-27 10:11 -------
-Wrapping it in an "if [ -x .. ]" would be best.
-
-Just adding "|| true" would stop the script from breaking, but you'd still get
-"gpe-auto-bluetooth: command not found" messages showing up in
-.xsession-errors, which might lead to user confusion.
-
-
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
 
 
