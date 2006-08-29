@@ -1,22 +1,25 @@
 Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <lenehan@twibble.org>) id 1GHsGy-0007vP-T8
-	for openembedded-devel@openembedded.org; Tue, 29 Aug 2006 03:20:13 +0200
+	(envelope-from <lenehan@twibble.org>) id 1GHsHg-0007wb-Fm
+	for openembedded-devel@openembedded.org; Tue, 29 Aug 2006 03:20:57 +0200
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 6C162AD92C;
-	Tue, 29 Aug 2006 11:18:10 +1000 (EST)
+	by birgitte.twibble.org (Postfix) with ESMTP id 90BB8AD945
+	for <openembedded-devel@openembedded.org>;
+	Tue, 29 Aug 2006 11:18:54 +1000 (EST)
 Received: from birgitte.twibble.org ([127.0.0.1])
 	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 18854-02; Tue, 29 Aug 2006 11:18:08 +1000 (EST)
+	with ESMTP id 18714-05 for <openembedded-devel@openembedded.org>;
+	Tue, 29 Aug 2006 11:18:52 +1000 (EST)
 Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 636C5AD91F;
-	Tue, 29 Aug 2006 11:18:08 +1000 (EST)
+	by birgitte.twibble.org (Postfix) with ESMTP id DAB10AD92C
+	for <openembedded-devel@openembedded.org>;
+	Tue, 29 Aug 2006 11:18:52 +1000 (EST)
 Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 562EBF35144; Tue, 29 Aug 2006 11:18:08 +1000 (EST)
-Date: Tue, 29 Aug 2006 11:18:08 +1000
+	id D2949F35147; Tue, 29 Aug 2006 11:18:52 +1000 (EST)
+Date: Tue, 29 Aug 2006 11:18:52 +1000
 From: Jamie Lenehan <lenehan@twibble.org>
 To: openembedded-devel@openembedded.org
-Message-ID: <20060829011808.GB31668@twibble.org>
+Message-ID: <20060829011852.GC31668@twibble.org>
 References: <E1GGZOX-0002WU-1s@linuxtogo.org>
 	<20060827233927.GA9807@twibble.org>
 	<200608281147.01329.openembedded@hrw.one.pl>
@@ -40,127 +43,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2006 01:20:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 29 Aug 2006 01:20:57 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Updated list, including your changes.
+This time I'll send this to the list...
 
-These sections are to be changed:
+On Mon, Aug 28, 2006 at 11:47:00AM +0200, Marcin Juszkiewicz wrote:
+> Dnia poniedzia=C5=82ek, 28 sierpnia 2006 01:39, Jamie Lenehan napisa=C5=
+=82:
+[...]
+> >     * console/shells
+>=20
+> base/shell and console/shells? I would choose one.
 
-    * applications		-> Replace with appropriate section
-    * apps			-> Replace with appropriate section
-    * bootloader		-> Replace with bootloaders
-    * console/shells		-> Replace with base/shell
-    * console/net		-> Replace with console/network
-    * console/networking	-> Replace with console/network
-    * console/util		-> Replace with console/utils
-    * dev-lang			-> Replace with devel
-    * gnome/libs		-> Replace with x11/libs?
-    * gnome/multimedia		-> Replace with x11/multimedia?
-    * gui			-> Replace with appropriate section
-    * kernel/module		-> Replace with kernel/modules
-    * kde/dev			-> Replace with kde/devel
-    * libs/inputmethod		-> Replace with libs/inputmethods
-    * media-gfx			-> Replace with appropriate section
-    * multimedia		-> Replace with appropriate section
-    * net			-> Replace with network
-    * net-misc			-> Replace with network/misc
-    * net/misc			-> Replace with nerwork/misc
-    * opie/Shell		-> Replace with opie/shell
-    * unknown			-> Replace with appropriate section
-    * utility			-> Replace with utils
-    * x11-misc			-> Replace with appropriate section
-    * x11/gnome			-> Replace with x11?
-    * x11/gnome/libs		-> Replace with x11/libs?
+base/shell is the most common, only fush uses console/shells, so make
+this one base/shell.
 
-That leaves us with these as the available sections:
+[...]
+> >     * kernel
+> >     * kernel/module		-> REPALCE with kernel/modules
+> >     * kernel/modules
+>=20
+> virtual/kernel modules -> kernel, out-of-tree modules -> kernel/modules=
+=20
+>=20
+> What do you think?
 
-    * admin
-    * base
-    * base/shell
-    * bootloaders		-> NEW, replaces bootloader
-    * console
-    * console/editors
-    * console/games
-    * console/multimedia
-    * console/network
-    * console/scientific
-    * console/telephony
-    * console/tools
-    * console/utils
-    * devel
-    * devel/libs
-    * devel/perl		-> NEW
-    * devel/python
-    * devel/rexx
-    * devel/ruby
-    * devel/scheme		-> I missed this one before
-    * devel/tcltk
-    * doc
-    * e/apps
-    * e/libs
-    * e/utils
-    * fonts			-> NEW, for fonts that are not X11 or OPIE specific (truetype for exmaple)
-    * games
-    * games/arcade
-    * gpe
-    * gpe/applications
-    * gpe/base
-    * gpe/games
-    * gpe/libs
-    * gpe/multimedia
-    * interpreters
-    * kde
-    * kde/devel			-> NEW, replaces kde/dev
-    * kernel
-    * kernel/modules
-    * kernel/userland
-    * libs
-    * libs/inputmethods
-    * libs/multimedia
-    * libs/network
-    * network
-    * network/cms
-    * network/misc
-    * opie
-    * opie/applets
-    * opie/applications
-    * opie/base
-    * opie/codecs
-    * opie/datebook
-    * opie/decorations
-    * opie/fontfactories
-    * opie/fonts
-    * opie/games
-    * opie/help
-    * opie/inputmethods
-    * opie/libs
-    * opie/multimedia
-    * opie/network
-    * opie/pim
-    * opie/security
-    * opie/settings
-    * opie/shell
-    * opie/styles
-    * opie/today
-    * utils
-    * x11
-    * x11/apps			-> Really should be x11/applications and probably should go somewhere else
-    * x11/base
-    * x11/data
-    * x11/fonts
-    * x11/games
-    * x11/graphics
-    * x11/libs
-    * x11/multimedia
-    * x11/network
-    * x11/office
-    * x11/scientific
-    * x11/utils
-    * x11/wm 
+I don't think that makes much sense. I would go to section "kernel"
+to find a new kernel and to "kernel/modules" to find modules for the
+kernel. I don't think it matters to the end user where those modules
+were from.
 
--- 
+[...]
+> >     * x11/gnome
+> >     * x11/gnome/libs
+>=20
+> How does those two differ from other "gnome" ones? Can we move x11/gnom=
+e=20
+> to x11/* and x11/gnome/libs -> x11/libs?
+
+Hmm, yeah there are a few gnomes:
+
+    * gnome/libs
+    * gnome/multimedia
+    * x11/gnome
+    * x11/gnome/libs
+
+The gnome core puts itself in x11/gnome/* while apps/libraries from other
+people seem to put themselves in gnome/*. So you think this is the best w=
+ay
+to handle this?:
+
+    * gnome/libs		-> x11/libs
+    * gnome/multimedia		-> x11/multimedia
+    * x11/gnome			-> x11
+    * x11/gnome/libs		-> x11/libs
+
+--=20
  Jamie Lenehan <lenehan@twibble.org>
 
 
