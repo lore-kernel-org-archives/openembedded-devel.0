@@ -1,24 +1,16 @@
-Received: from [64.233.162.197] (helo=nz-out-0102.google.com)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <pmiscml@gmail.com>) id 1GI8Bc-0000OE-2u
-	for openembedded-devel@openembedded.org; Tue, 29 Aug 2006 20:19:44 +0200
-Received: by nz-out-0102.google.com with SMTP id v1so1414150nzb
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Aug 2006 11:17:38 -0700 (PDT)
-Received: by 10.65.112.5 with SMTP id p5mr8882112qbm;
-	Tue, 29 Aug 2006 11:17:37 -0700 (PDT)
-Received: from CUBE ( [82.193.96.237])
-	by mx.gmail.com with ESMTP id m1sm6828008nzf.2006.08.29.11.17.36;
-	Tue, 29 Aug 2006 11:17:37 -0700 (PDT)
-Date: Tue, 29 Aug 2006 21:17:54 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <10110188445.20060829211754@gmail.com>
-To: Keith Packard <keithp@keithp.com>, Phil Blundell <pb@handhelds.org>, 
-	Matthew Allum <mallum@gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Xserver source tree ghosting issues
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GIC6Q-0006jj-KF for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Aug 2006 00:30:39 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 30004401B3E; Tue, 29 Aug 2006 15:08:38 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060829220838.30004401B3E@tinman.treke.net>
+Date: Tue, 29 Aug 2006 15:08:38 -0700 (PDT)
+Subject: [Bug 1372] New: uinput module for 2.6 tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -33,39 +25,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2006 18:19:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Aug 2006 22:30:39 -0000
 
-Greetings,
+http://bugs.openembedded.org/show_bug.cgi?id=1372
 
-  It appears that freedesktop.org used to host two Xserver CVS trees:
-http://webcvs.freedesktop.org/xorg/xserver/xorg
-http://webcvs.freedesktop.org/xserver/xserver/
-
-  They apparently were used for different purposes, were not synced
-(much) and were used by different projects. Now, "xorg/xserver" was
-migrated to GIT, and serves as the base for the releases. The projects
-which previously used "xserver" tree switched to these releases and
-the GIT tree, just to find out that they lost some code.
-
-  This is in particular the case for Familiar/OpenEmbedded projects,
-and an example of the feature which was in "xserver" bit not in
-"xorg/xserver", is xcalibrate kdrive server extension by Phil
-Blundell,
-http://webcvs.freedesktop.org/xserver/xserver/Xext/xcalibrate.c?hideattic=0&view=log .
+           Summary: uinput module for 2.6 tosa
+           Product: Openembedded
+           Version: unspecified
+          Platform: Other
+        OS/Version: All
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Build
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: jgrant@ibtechsolutions.com
+         QAContact: tinderbox-oe@gmx.net
 
 
-  Please consider the issue of xcalibrate in particular (there's a
-patch against GIT in openebedded repo, xcalibrate.patch), and in
-general, the issue of the two trees, one of which appears to be
-forsaken, while contains/may contain important changes.
+please add the foillowing to
+packages/linux/linux-openzaurus-2.6.17/defconfig-tosa
 
+CONFIG_INPUT_MISC=y
+CONFIG_INPUT_UINPUT=m
 
-Thank you,
+This will allow for the building of the kernel-module-uinput.
+
 
 -- 
- Paul                          mailto:pmiscml@gmail.com
-
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
