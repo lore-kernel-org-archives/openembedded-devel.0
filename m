@@ -1,32 +1,16 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <rpurdie@rpsys.net>) id 1GHy6w-0000xS-T1
-	for openembedded-devel@openembedded.org; Tue, 29 Aug 2006 09:34:15 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.6) with ESMTP id k7T7WC3M020803
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Aug 2006 08:32:12 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 20441-08 for <openembedded-devel@openembedded.org>;
-	Tue, 29 Aug 2006 08:32:09 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.6) with ESMTP id k7T7W77c020796
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Aug 2006 08:32:07 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <E1GHnvw-0007xb-EL@linuxtogo.org>
-References: <E1GHnvw-0007xb-EL@linuxtogo.org>
-Date: Tue, 29 Aug 2006 08:32:06 +0100
-Message-Id: <1156836726.5562.1.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [oe-commits] org.oe.dev Machine config for the dht-walnut	(ppc) board
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GHzRV-0006At-OM for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Aug 2006 10:59:33 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 39C5D401B3E; Tue, 29 Aug 2006 01:37:46 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060829083746.39C5D401B3E@tinman.treke.net>
+Date: Tue, 29 Aug 2006 01:37:46 -0700 (PDT)
+Subject: [Bug 1346] New package libesmtp-1.0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -41,20 +25,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2006 07:34:15 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Aug 2006 08:59:34 -0000
 
-On Mon, 2006-08-28 at 22:42 +0200, ifaistos commit wrote:
-> +IPKG_ARCHS = "all powerpc ${MACHINE}"
+http://bugs.openembedded.org/show_bug.cgi?id=1346
 
-Whilst this will work, I suspect you'd be better off using
-IPKG_EXTRA_ARCHS and in actual fact, you don't have any extra ones so
-you can just leave it unset and use the default.
 
-Cheers,
 
-Richard
 
+
+------- Comment #3 from mickeyl@handhelds.org  2006-08-29 01:37 -------
+Why a new package? I already 1.0.4 a couple of weeks ago. You overwrote my
+improved version. I just reverted it. Please look in advance before overwriting
+stuff.
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
