@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GHx4T-00049W-OH for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Aug 2006 08:27:38 +0200
+	id 1GHxEN-0004Lw-CN for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Aug 2006 08:37:51 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 5BA0E4014D2; Mon, 28 Aug 2006 23:05:47 -0700 (PDT)
+	id A83E04014D4; Mon, 28 Aug 2006 23:16:04 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060829060547.5BA0E4014D2@tinman.treke.net>
-Date: Mon, 28 Aug 2006 23:05:47 -0700 (PDT)
-Subject: [Bug 1370] zsafe-2.1.3.bb file
+Message-Id: <20060829061604.A83E04014D4@tinman.treke.net>
+Date: Mon, 28 Aug 2006 23:16:04 -0700 (PDT)
+Subject: [Bug 1357] misging dependency for libxine-x11 (libpng)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,9 +25,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2006 06:27:38 -0000
+X-List-Received-Date: Tue, 29 Aug 2006 06:37:52 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1370
+http://bugs.openembedded.org/show_bug.cgi?id=1357
 
 
 openembedded@hrw.one.pl changed:
@@ -40,8 +40,8 @@ openembedded@hrw.one.pl changed:
 
 
 
-------- Comment #1 from openembedded@hrw.one.pl  2006-08-28 23:05 -------
-pushed into .oz354x and .dev
+------- Comment #1 from openembedded@hrw.one.pl  2006-08-28 23:16 -------
+thx - pushed into .dev and .oz354x
 
 
 -- 
