@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GHzl1-0006RK-SL for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Aug 2006 11:19:44 +0200
+	id 1GI1zw-0005eG-9Z for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Aug 2006 13:43:16 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 2CB03401B3E; Tue, 29 Aug 2006 01:57:56 -0700 (PDT)
+	id D186C401B44; Tue, 29 Aug 2006 04:21:22 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060829085756.2CB03401B3E@tinman.treke.net>
-Date: Tue, 29 Aug 2006 01:57:56 -0700 (PDT)
-Subject: [Bug 366] ImageMagick package bb file
+Message-Id: <20060829112122.D186C401B44@tinman.treke.net>
+Date: Tue, 29 Aug 2006 04:21:22 -0700 (PDT)
+Subject: [Bug 1366] Python* is missing appropriate PACKAGES_DYNAMIC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,23 +25,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2006 09:19:44 -0000
+X-List-Received-Date: Tue, 29 Aug 2006 11:43:17 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=366
+http://bugs.openembedded.org/show_bug.cgi?id=1366
 
 
-koen@dominion.kabel.utwente.nl changed:
+mickeyl@handhelds.org changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
+             Status|ASSIGNED                    |RESOLVED
          Resolution|                            |FIXED
 
 
 
 
-------- Comment #5 from koen@dominion.kabel.utwente.nl  2006-08-29 01:57 -------
-I commited a fixed version
+------- Comment #2 from mickeyl@handhelds.org  2006-08-29 04:21 -------
+66f4e0ab9111d2b6004a362cd4ce9ada04063719
 
 
 -- 
