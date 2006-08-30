@@ -1,16 +1,24 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [81.255.54.11] (helo=mx.laposte.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GIS1N-0003JT-K4 for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Aug 2006 17:30:29 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id B17C7401B3E; Wed, 30 Aug 2006 08:08:22 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060830150822.B17C7401B3E@tinman.treke.net>
-Date: Wed, 30 Aug 2006 08:08:22 -0700 (PDT)
-Subject: [Bug 1373] New: gpe-bluetooth-0.54 doesn't build for Angstrom
+	(envelope-from <c.romain@laposte.net>) id 1GIVRw-0004Xk-4d
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Aug 2006 21:10:08 +0200
+Received: from [192.168.2.2] (86.201.6.191) by mx.laposte.net (7.2.060.1)
+	(authenticated as c.romain)
+	id 44F4DE1A000C27B2; Wed, 30 Aug 2006 21:07:56 +0200
+Message-ID: <44F5D42E.5060505@laposte.net>
+Date: Wed, 30 Aug 2006 20:08:46 +0200
+From: cyril Romain <c.romain@laposte.net>
+User-Agent: Mail/News 1.5 (X11/20060114)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+References: <20060828235951.GA16344@twibble.org>	<20060829004122.GA22529@twibble.org>
+	<44F54AA0.9050901@dominion.kabel.utwente.nl>
+In-Reply-To: <44F54AA0.9050901@dominion.kabel.utwente.nl>
+Cc: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+Subject: Re: patcher changes - quilt patching breakage?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,90 +33,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Aug 2006 15:30:30 -0000
+X-List-Received-Date: Wed, 30 Aug 2006 19:10:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-http://bugs.openembedded.org/show_bug.cgi?id=1373
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Jamie Lenehan schreef:
+>   
+>> On Tue, Aug 29, 2006 at 09:59:51AM +1000, Jamie Lenehan wrote:
+>>     
+>>> I've got huge amounts of breakage from quilt due to the patching
+>>> related changs. Is anyone else seeing this. It looks like I can't
+>>> apply any patches more than one.. which is rather wierd.
+>>>       
+>> The problem is that my build directory is:
+>>
+>>  /data/oe/build/titan-glibc-24
+>>
+>> and I have a directory called:
+>>
+>>  /data/oe/patches
+>>
+>> It appears that quilt searches throught he path for a directory
+>> called "patches" and uses that for all it's patches. So the patches
+>> are being stored in my /data/oe/patches directory instead of in the
+>> package itself.
+>>
+>> The patch command used to mkdir the patches directory, but this is no
+>> longer happening. The following patch appears to make things work
+>> again - does this look correct to people who understand this patch
+>> class?
+>>     
+>
+> That patch isn't quite right yet, consider this recipe:
+>
+> - --------
+> MAINTAINER = "Koen Kooi <koen@linuxtogo.org>"
+> PV = ${DISTRO_VERSION}
+>
+> do_compile() {
+>         mkdir -p ${D}${sysconfdir}
+>         echo "Angstrom ${DISTRO_VERSION}" > ${D}${sysconfdir}/angstrom-version
+>
+> }
+> - ---------
+>
+>
+> that blows up. Does python have an os.mkdirhier?
+>
+>   
+For that, python has os.makedirs(dir)
 
-           Summary: gpe-bluetooth-0.54 doesn't build for Angstrom
-           Product: Openembedded
-           Version: Angstrom
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: liam.girdwood@wolfsonmicro.com
-         QAContact: tinderbox-oe@gmx.net
+*makedirs*( 	path[, mode])
 
+    Recursive directory creation function. Like mkdir(), but makes all
+    intermediate-level directories needed to contain the leaf directory.
+    Throws an error exception if the leaf directory already exists or
+    cannot be created. The default mode is |0777| (octal). On some
+    systems, mode is ignored. Where it is used, the current umask value
+    is first masked out. *Note:* makedirs() will become confused if the
+    path elements to create include os.pardir. New in version 1.5.2.
+    Changed in version 2.3: This function now handles UNC paths correctly.
 
-gpe-bluetooth-0.54 build fails with the following error
+You you may also use bb.mkdirhier(dir)
+____
+def mkdirhier(dir):
+    """Create a directory like 'mkdir -p', but does not complain if
+    directory already exists like os.makedirs
+    """
 
-| if arm-angstrom-linux-gnueabi-gcc -march=armv6 -mtune=arm1136jf-s -mfpu=vfp
--DPACKAGE_NAME=\"gpe-bluetooth\" -DPACKAGE_TARNAME=\"gpe-bluetooth\"
--DPACKAGE_VERSION=\"0.54\" -DPACKAGE_STRING=\"gpe-bluetooth\ 0.54\"
--DPACKAGE_BUGREPORT=\"gpe@handhelds.org\" -DPACKAGE=\"gpe-bluetooth\"
--DVERSION=\"0.54\" -DSTDC_HEADERS=1 -DGETTEXT_PACKAGE=\"gpe-bluetooth\"
--DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1
--DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1
--DHAVE_UNISTD_H=1 -DHAVE_LOCALE_H=1 -DHAVE_LC_MESSAGES=1
--DHAVE_BIND_TEXTDOMAIN_CODESET=1 -DHAVE_GETTEXT=1 -DHAVE_DCGETTEXT=1
--DENABLE_NLS=1 -DHAVE_DBUS_MESSAGE_ITER_GET_BASIC=1  -I.
--I/home/liam/oe/imx31ads-vfp/work/armv6-linux-gnueabi/gpe-bluetooth-0.54-r1/gpe-bluetooth-0.54
--pthread
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/gtk-2.0
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/lib/gtk-2.0/include
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/atk-1.0
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/cairo
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/pango-1.0
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/glib-2.0
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/lib/glib-2.0/include
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/freetype2
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/libpng12
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/lib/../include
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/mimedir-1.0
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/dbus-1.0
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/lib/dbus-1.0/include
--I/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include/libglade-2.0
- 
--I/home/liam/oe/imx31ads-vfp/work/armv6-linux-gnueabi/gpe-bluetooth-0.54-r1/gpe-bluetooth-0.54/gpe
--I/home/liam/oe/imx31ads-vfp/work/armv6-linux-gnueabi/gpe-bluetooth-0.54-r1/gpe-bluetooth-0.54
--DPREFIX=\"/usr\" -D_GNU_SOURCE -DGPE_BLUETOOTH -DDBUS_API_SUBJECT_TO_CHANGE
--DPACKAGE_LOCALE_DIR=\"/usr/share/locale\" 
--isystem/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include 
--isystem/home/liam/oe/imx31ads-vfp/staging/arm-angstrom-linux-gnueabi/include
--fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -MT
-pin-ui.o -MD -MP -MF ".deps/pin-ui.Tpo" -c -o pin-ui.o pin-ui.c; \
-| then mv -f ".deps/pin-ui.Tpo" ".deps/pin-ui.Po"; else rm -f
-".deps/pin-ui.Tpo"; exit 1; fi
-| In file included from rfcomm.c:23:
-| main.h:41: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or
-‘__attribute__’ before ‘*’ token
-| make[1]: *** [rfcomm.o] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-| make[1]: Leaving directory
-`/home/liam/oe/imx31ads-vfp/work/armv6-linux-gnueabi/gpe-bluetooth-0.54-r1/gpe-bluetooth-0.54'
-| make: *** [all-recursive] Error 1
-| FATAL: oe_runmake failed
-NOTE: Task failed:
-/home/liam/oe/imx31ads-vfp/work/armv6-linux-gnueabi/gpe-bluetooth-0.54-r1/temp/log.do_compile.5063
-NOTE: package gpe-bluetooth-0.54-r1: task do_compile: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package gpe-bluetooth-0.54: failed
-ERROR: Build of gpe-image failed
-
-
-It looks like main.h is missing an external header that defines the typedef
-below:- 
-
-extern sdp_session_t *sdp_session;
+    debug(3, "mkdirhier(%s)" % dir)
+    try:
+        os.makedirs(dir)
+        debug(2, "created " + dir)
+    except OSError, e:
+        if e.errno != 17: raise e
+____
 
 
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+Regards,
+
+  Cyril
 
 
