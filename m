@@ -1,25 +1,16 @@
-Received: from [212.27.42.27] (helo=smtp1-g19.free.fr)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <alain2210@free.fr>) id 1GIW3z-0001AK-7p
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Aug 2006 21:49:27 +0200
-Received: from imp5-g19.free.fr (imp5-g19.free.fr [212.27.42.5])
-	by smtp1-g19.free.fr (Postfix) with ESMTP id 354AB9AD75;
-	Wed, 30 Aug 2006 21:47:16 +0200 (CEST)
-Received: by imp5-g19.free.fr (Postfix, from userid 33)
-	id 283DB10358; Wed, 30 Aug 2006 21:47:16 +0200 (CEST)
-Received: from AMontsouris-153-1-19-224.w86-212.abo.wanadoo.fr
-	(AMontsouris-153-1-19-224.w86-212.abo.wanadoo.fr [86.212.18.224]) 
-	by imp5-g19.free.fr (IMP) with HTTP 
-	for <alain2210@127.0.0.1>; Wed, 30 Aug 2006 21:47:16 +0200
-Message-ID: <1156967236.44f5eb4411b36@imp5-g19.free.fr>
-Date: Wed, 30 Aug 2006 21:47:16 +0200
-From: Alain2210 <alain2210@free.fr>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) 3.2.5
-X-Originating-IP: 86.212.18.224
-Subject: gd package and cross compile badness
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GIhZJ-0003dE-3T for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Aug 2006 10:06:33 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 7F6C1401B44; Thu, 31 Aug 2006 00:44:11 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060831074411.7F6C1401B44@tinman.treke.net>
+Date: Thu, 31 Aug 2006 00:44:11 -0700 (PDT)
+Subject: [Bug 1373] gpe-bluetooth-0.54 doesn't build for Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -34,26 +25,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Aug 2006 19:49:27 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 31 Aug 2006 08:06:33 -0000
 
-Hello,
+http://bugs.openembedded.org/show_bug.cgi?id=1373
 
-I'm trying to compile tetex with org.openembedded.dev but it needs to com=
-pile gd
-(gd_2.0.33) but it does not work. It seems to be a problem in configure. =
-In the
-config.log
-I can see
-CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
-cc1: internal compiler error: Aborted
 
-I have not well understood the message on http://www.openembedded.org/
-about this. So I'm writing to this list.
+philipp.zabel@gmail.com changed:
 
-Thanks,
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|                            |FIXED
 
-Alain
+
+
+
+------- Comment #2 from philipp.zabel@gmail.com  2006-08-31 00:44 -------
+fixed in .dev, b85e20731701ef2d7dc18d059fe5b5cd0e2eb8ac.
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
