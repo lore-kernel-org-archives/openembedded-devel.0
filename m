@@ -1,28 +1,20 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [137.79.94.127] (helo=s383.jpl.nasa.gov)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GJAhv-0002WU-TD
-	for openembedded-devel@openembedded.org; Fri, 01 Sep 2006 17:13:23 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k81FAvkO017572 for <openembedded-devel@openembedded.org>;
-	Fri, 1 Sep 2006 17:10:58 +0200
-Message-ID: <44F84D80.5030706@dominion.kabel.utwente.nl>
-Date: Fri, 01 Sep 2006 17:10:56 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.5 (Macintosh/20060719)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-References: <1156715171.5536.60.camel@localhost.localdomain>	<200608281131.31893.openembedded@hrw.one.pl>
-	<74d0deb30609010756u38a55166kb2a7354641d9ae08@mail.gmail.com>
-In-Reply-To: <74d0deb30609010756u38a55166kb2a7354641d9ae08@mail.gmail.com>
-X-Enigmail-Version: 0.94.0.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: What is task-base?
+	(envelope-from <ehovland@s383.jpl.nasa.gov>) id 1GJCZt-0004lk-W7
+	for openembedded-devel@openembedded.org; Fri, 01 Sep 2006 19:13:14 +0200
+Received: from mage.jpl.nasa.gov (mage [137.78.15.62])
+	by s383.jpl.nasa.gov (8.12.10/8.12.10) with ESMTP id k81HAoHG004991
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 1 Sep 2006 10:10:51 -0700 (PDT)
+Received: by mage.jpl.nasa.gov (Postfix, from userid 4960)
+	id E083A300016C; Fri,  1 Sep 2006 10:10:50 -0700 (PDT)
+Date: Fri, 1 Sep 2006 10:10:50 -0700
+From: Erik Hovland <erik@hovland.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20060901171050.GC27218@mage.jpl.nasa.gov>
+Mime-Version: 1.0
+User-Agent: Mutt/1.5.9i
+Subject: familiar and h3600 conf file hacking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -37,32 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Sep 2006 15:13:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 01 Sep 2006 17:13:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I am just taking the pulse of the maintainership of the familiar files
+in org.openembedded.dev.
 
-pHilipp Zabel schreef:
-> On 8/28/06, Marcin Juszkiewicz <openembedded@hrw.one.pl> wrote:
->> I think that we lack "serial" in MACHINE_FEATURES - this would be needed
->> by "irda" feature but will be also useful for machines which have normal
->> serial (RS232/RS485) here we can put lrzsz.
-> 
-> Are there machines that have neither serial nor irda?
+So if you claim to be a maintainer of those files let me know.
 
-my WAP54G for example :)
+I am trying to catch that branch up with the familiar git tree on hh.org
+and I would like it to better reflect where familiar is at.
 
-regards,
+For example, I would like to peg glibc at what shipped with 0.8.4
+(2.3.5+cvs20050627) and I would like to up the version of h3900 and h3600
+kernels. But I would like to work with the OE community and I really
+don't want to mess up anyone else.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
+Advice appreciated.
 
-iD8DBQFE+E2AMkyGM64RGpERAubQAKCn67Dxw5xaKAJp8Hqyh9XOLTVl7gCfT/5K
-pQ+tpJZ5w1K5Pq+VRtY37l4=
-=7mCl
------END PGP SIGNATURE-----
+Thanks
+
+E
+
+-- 
+Erik Hovland
+mail: erik AT hovland DOT org
+web: http://hovland.org/
+PGP/GPG public key available on request
 
 
