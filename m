@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GJw7F-0006gk-HK for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Sep 2006 19:50:42 +0200
+	id 1GJxEv-0003Wm-TL for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Sep 2006 21:02:42 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 80E864014D2; Sun,  3 Sep 2006 10:27:27 -0700 (PDT)
+	id 130704014D4; Sun,  3 Sep 2006 11:39:31 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060903172727.80E864014D2@tinman.treke.net>
-Date: Sun,  3 Sep 2006 10:27:27 -0700 (PDT)
-Subject: [Bug 1285] Boot image from sd hangs.
+Message-Id: <20060903183931.130704014D4@tinman.treke.net>
+Date: Sun,  3 Sep 2006 11:39:31 -0700 (PDT)
+Subject: [Bug 1279] Build of zudoku failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,17 +25,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Sep 2006 17:50:44 -0000
+X-List-Received-Date: Sun, 03 Sep 2006 19:02:42 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1285
-
-
+http://bugs.openembedded.org/show_bug.cgi?id=1279
 
 
 
-------- Comment #1 from xpaytubi@gmail.com  2006-09-03 10:27 -------
-I test on 3.5.4 rc2 and it has the same bug.
-Thanks.
+
+
+------- Comment #3 from gfellerpatrik@gmx.net  2006-09-03 11:39 -------
+(In reply to comment #2)
+> ... this fixed it @ my system; please re-view:
+
+on tree oz354x it works w/o the patch - however, in .dev I need it.
 
 
 -- 
