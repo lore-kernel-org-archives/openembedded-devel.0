@@ -1,15 +1,15 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GJu6F-0004li-Jv for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Sep 2006 17:41:31 +0200
+	id 1GJuE3-0004t6-8Z for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Sep 2006 17:49:35 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 776BB4014D2; Sun,  3 Sep 2006 08:18:23 -0700 (PDT)
+	id 1BF5A4014D2; Sun,  3 Sep 2006 08:26:27 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060903151823.776BB4014D2@tinman.treke.net>
-Date: Sun,  3 Sep 2006 08:18:23 -0700 (PDT)
+Message-Id: <20060903152627.1BF5A4014D2@tinman.treke.net>
+Date: Sun,  3 Sep 2006 08:26:27 -0700 (PDT)
 Subject: [Bug 1376] cairo 1.2.4 + cairo-fixed.patch fails to render
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
@@ -25,7 +25,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Sep 2006 15:41:34 -0000
+X-List-Received-Date: Sun, 03 Sep 2006 15:49:35 -0000
 
 http://bugs.openembedded.org/show_bug.cgi?id=1376
 
@@ -33,9 +33,10 @@ http://bugs.openembedded.org/show_bug.cgi?id=1376
 
 
 
-------- Comment #6 from koen@dominion.kabel.utwente.nl  2006-09-03 08:18 -------
-To muddy the waters a bit: I'm not seeing it with Xw100 + Ångström EABI.
-Should we start comparing X+gtk+cairo installed stuff?
+------- Comment #7 from mreimer@vpop.net  2006-09-03 08:26 -------
+I was using xserver-kdrive-fbdev, gtk+-2.8.9/2.8.16, and cairo 1.2.2/1.2.4. Gtk
+version didn't matter. Downgrading to cairo 1.2.2 fixed the problem, as did
+1.2.4 when not using the patch.
 
 
 -- 
