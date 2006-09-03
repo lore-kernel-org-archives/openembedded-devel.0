@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GJo6w-0003OF-6Q for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Sep 2006 11:17:50 +0200
+	id 1GJrx0-0002qh-L1 for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Sep 2006 15:23:50 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 08C464014D2; Sun,  3 Sep 2006 01:54:42 -0700 (PDT)
+	id E96DB4014D2; Sun,  3 Sep 2006 06:00:39 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060903085442.08C464014D2@tinman.treke.net>
-Date: Sun,  3 Sep 2006 01:54:42 -0700 (PDT)
-Subject: [Bug 1382] New: qmake does not exist in oe
+Message-Id: <20060903130039.E96DB4014D2@tinman.treke.net>
+Date: Sun,  3 Sep 2006 06:00:39 -0700 (PDT)
+Subject: [Bug 1376] cairo 1.2.4 + cairo-fixed.patch fails to render
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,30 +25,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Sep 2006 09:17:50 -0000
+X-List-Received-Date: Sun, 03 Sep 2006 13:23:51 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1382
-
-           Summary: qmake does not exist in oe
-           Product: Openembedded
-           Version: unspecified
-          Platform: Other
-        OS/Version: All
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: yotamgil@gmail.com
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=1376
 
 
-I wish to do native compilation, but it appears that qmake does not exist in
-the oe repository.
-please add qmake sources/bitbake files, whatever is needed...
 
-Thanx,
-YoG.
+
+
+------- Comment #2 from rpurdie@rpsys.net  2006-09-03 06:00 -------
+Which DISTRO/ABI was this with? I have reports of it working with Angstrom and
+OZ softfloat so I'm unsure which combinations aren't working...
 
 
 -- 
