@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GJWEv-0006u2-0I for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Sep 2006 16:12:53 +0200
+	id 1GJo6w-0003OF-6Q for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Sep 2006 11:17:50 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 230E1401B3E; Sat,  2 Sep 2006 06:50:01 -0700 (PDT)
+	id 08C464014D2; Sun,  3 Sep 2006 01:54:42 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060902135001.230E1401B3E@tinman.treke.net>
-Date: Sat,  2 Sep 2006 06:50:01 -0700 (PDT)
-Subject: [Bug 1380] HEAD uClibc build fails on uClibc install
+Message-Id: <20060903085442.08C464014D2@tinman.treke.net>
+Date: Sun,  3 Sep 2006 01:54:42 -0700 (PDT)
+Subject: [Bug 1382] New: qmake does not exist in oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,17 +25,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Sep 2006 14:12:53 -0000
+X-List-Received-Date: Sun, 03 Sep 2006 09:17:50 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1380
+http://bugs.openembedded.org/show_bug.cgi?id=1382
+
+           Summary: qmake does not exist in oe
+           Product: Openembedded
+           Version: unspecified
+          Platform: Other
+        OS/Version: All
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Build
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: yotamgil@gmail.com
+         QAContact: tinderbox-oe@gmx.net
 
 
+I wish to do native compilation, but it appears that qmake does not exist in
+the oe repository.
+please add qmake sources/bitbake files, whatever is needed...
 
-
-
-------- Comment #1 from jonesml@fastmail.to  2006-09-02 06:50 -------
-By the way, libcrt1.o does seem to exist in the WORKDIR/uClibc-0.9.28/lib
-directory, but for whatever reason isn't found by the linker.
+Thanx,
+YoG.
 
 
 -- 
