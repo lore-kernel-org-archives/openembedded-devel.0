@@ -1,25 +1,21 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GKWKc-0002ek-Ns
-	for openembedded-devel@openembedded.org; Tue, 05 Sep 2006 10:30:54 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k858S8kO006506 for <openembedded-devel@openembedded.org>;
-	Tue, 5 Sep 2006 10:28:09 +0200
-Message-ID: <44FD3519.7000000@dominion.kabel.utwente.nl>
-Date: Tue, 05 Sep 2006 10:28:09 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.5 (Macintosh/20060719)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.94.0.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: gtk 2.6/2.8 vs 2.10
+	(envelope-from <dp@xora.org.uk>) id 1GKWbg-0002xw-E2
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Sep 2006 10:48:32 +0200
+Received: from xora.org.uk ([::ffff:81.178.213.77])
+	(AUTH: CRAM-MD5 dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Tue, 05 Sep 2006 09:45:40 +0100
+	id 00068404.44FD3934.00004C6D
+Date: Tue, 5 Sep 2006 09:49:52 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20060905084952.GA8359@stygia.hyboria>
+References: <44FD3519.7000000@dominion.kabel.utwente.nl>
+Mime-Version: 1.0
+In-Reply-To: <44FD3519.7000000@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.11+cvs20060403
+Subject: Re: gtk 2.6/2.8 vs 2.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -34,37 +30,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Sep 2006 08:30:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 05 Sep 2006 08:48:33 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, Sep 05, 2006 at 10:28:09AM +0200, Koen Kooi wrote:
+> A lot of these problems can be solved with 'preferred-gtk-2.8-versions.inc', but ideally
+> we'd want a way to get the gtk PV from inside other recipes (e.g. gtk-engines).
+> 
+> Does anyone have a good idea on how to handle all this?
+> 
+I just checked my gtk+-2.10.0 and gtk+-2.0.pc contans the following
+line.
 
-Hi,
+gtk_binary_version=2.10.0
 
-A while ago gtk 2.10 was added to OE with a negative default preference since not all the
-patches have been forward ported yet. Gtk 2.10 also bumped their ABI version to 2.10,
-which leads to some interesting problems:
+If this exists for all gtk+ we could parse ths file in install and set
+${LIBV} with it.
 
-* do_install for packages dependant on gtk+ breaks since ${libdir}/gtk-2.0/2.4.0/ is now
-${libdir}/gtk-2.0/2.10.0/
-* some package build against 2.8 but not against 2.10 and vice versa
+G
 
-A lot of these problems can be solved with 'preferred-gtk-2.8-versions.inc', but ideally
-we'd want a way to get the gtk PV from inside other recipes (e.g. gtk-engines).
-
-Does anyone have a good idea on how to handle all this?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFE/TUZMkyGM64RGpERAq9tAKCVdIPsK2OeEDbS2O5ClutsTZaTHgCdGNPz
-UykeTPjT7Z5bCfrdKGPZGsM=
-=ElKm
------END PGP SIGNATURE-----
 
 
