@@ -1,33 +1,16 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <rpurdie@rpsys.net>) id 1GKXPd-00030E-8m
-	for openembedded-devel@openembedded.org; Tue, 05 Sep 2006 11:40:09 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.6) with ESMTP id k859bPhx002130
-	for <openembedded-devel@openembedded.org>;
-	Tue, 5 Sep 2006 10:37:25 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 02054-02 for <openembedded-devel@openembedded.org>;
-	Tue,  5 Sep 2006 10:37:23 +0100 (BST)
-Received: from dynamic2.rpnet.com (dynamic2.rpnet.com [192.168.1.32])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.6) with ESMTP id k859bKkP002123
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 5 Sep 2006 10:37:20 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-In-Reply-To: <44FD3519.7000000@dominion.kabel.utwente.nl>
-References: <44FD3519.7000000@dominion.kabel.utwente.nl>
-Date: Tue, 05 Sep 2006 10:37:19 +0100
-Message-Id: <1157449040.26547.6.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: gtk 2.6/2.8 vs 2.10
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GKYs4-0008I8-Eg for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Sep 2006 13:13:37 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 44BF04014D4; Tue,  5 Sep 2006 03:49:55 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060905104955.44BF04014D4@tinman.treke.net>
+Date: Tue,  5 Sep 2006 03:49:55 -0700 (PDT)
+Subject: [Bug 1383] [PATCH] packages ztenv and libeb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -42,31 +25,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Sep 2006 09:40:09 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 Sep 2006 11:13:37 -0000
 
-On Tue, 2006-09-05 at 10:28 +0200, Koen Kooi wrote:
-> A while ago gtk 2.10 was added to OE with a negative default preference since not all the
-> patches have been forward ported yet. Gtk 2.10 also bumped their ABI version to 2.10,
-> which leads to some interesting problems:
-> 
-> * do_install for packages dependant on gtk+ breaks since ${libdir}/gtk-2.0/2.4.0/ is now
-> ${libdir}/gtk-2.0/2.10.0/
+http://bugs.openembedded.org/show_bug.cgi?id=1383
 
-I think Graeme's solution should solve this.
 
-> * some package build against 2.8 but not against 2.10 and vice versa
 
-These need versioned DEPENDS eg. DEPENDS = "gtk+ (>= 2.10.0)". Could
-someone try and see if it breaks anything with the current bitbake? I'd
-like to see the metadata starting to contain this data, even if bitbake
-itself doesn't use it yet so when we do implement it, it should all just
-work...
 
-Cheers,
 
-Richard
+------- Comment #8 from bugs.openembedded.org@rolf.leggewie.biz  2006-09-05 03:49 -------
+koen, thanks for the reworked libeb.
 
+This breaks compilation of ztenv which would need to be revised as well.
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
