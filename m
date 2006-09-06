@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GKgAl-0000IA-JP for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Sep 2006 21:01:23 +0200
+	id 1GKn2a-0006vx-VC for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Sep 2006 04:21:25 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 154164014D4; Tue,  5 Sep 2006 11:37:42 -0700 (PDT)
+	id 1E1AB401B2B; Tue,  5 Sep 2006 18:57:35 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060905183742.154164014D4@tinman.treke.net>
-Date: Tue,  5 Sep 2006 11:37:42 -0700 (PDT)
-Subject: [Bug 1387] 3.5.4.2RC2 Tosa - system lockup at screen calibration
+Message-Id: <20060906015735.1E1AB401B2B@tinman.treke.net>
+Date: Tue,  5 Sep 2006 18:57:35 -0700 (PDT)
+Subject: [Bug 1388] New: sound problem with the rc2 release on SL-5600
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,35 +25,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Sep 2006 19:01:24 -0000
+X-List-Received-Date: Wed, 06 Sep 2006 02:21:26 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1387
+http://bugs.openembedded.org/show_bug.cgi?id=1388
+
+           Summary: sound problem with the rc2 release on SL-5600
+           Product: Openembedded
+           Version: OpenZaurus 3.5.4.x
+          Platform: ARM
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Build
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: michael_barnes@programmer.net
+         QAContact: tinderbox-oe@gmx.net
 
 
-bazmi.husain@gmail.com changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
-         Resolution|                            |FIXED
-
-
-
-
-------- Comment #2 from bazmi.husain@gmail.com  2006-09-05 11:37 -------
-(In reply to comment #1)
-> Is this with opie or gpe? Do both fail or only one?
-> 
-
-oops, sorry. was with opie. gpe works just fine..
-
-just downloaded the modified image of opie and that too is ok (back to the
-situation where after the first boot, system will hang after the last cursor
-press for screen alignment but a subsequent reset and reboot allows it to
-proceed)
-
-i guess this bug should be changed to resolved as the first boot problem is
-already reported as a separate bug. thanks guys.
+I just flashed the latest 2.6 release; rc2. I'm running an SL-5600 (poodle). I
+am using the GPE image. the sound does not work on my PDA, but works perfectly
+with the previous rc1 release of the 2.6 kernel. I've tried mplayer and gxine,
+using all available audio outputs (oss, alsa, pcm, etc...) and there is no
+sound.
 
 
 -- 
