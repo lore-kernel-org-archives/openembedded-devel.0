@@ -1,20 +1,16 @@
-Received: from [195.234.128.72] (helo=scotty.chl-informatik.de)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <christopher.lang@plus.cablesurf.de>)
-	id 1GL4rO-00022F-HY
-	for openembedded-devel@openembedded.org; Wed, 06 Sep 2006 23:23:02 +0200
-Received: from linux64.chl-informatik.de (linux64.chl-informatik.de
-	[192.168.10.17])
-	by scotty.chl-informatik.de (8.12.3/8.12.3/SuSE Linux 0.6) with ESMTP
-	id k86KUQVR004232 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Sep 2006 22:30:26 +0200
-From: Christopher Lang <christopher.lang@plus.cablesurf.de>
-To: openembedded-devel@openembedded.org
-Date: Wed, 6 Sep 2006 23:24:32 +0200
-User-Agent: KMail/1.9.1
-MIME-Version: 1.0
-Message-Id: <200609062324.33029.christopher.lang@plus.cablesurf.de>
-Subject: error: #error "TLS support is required." while building glibc-initial-2.4 on x86_64
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GL5MF-0002Gd-Hk for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Sep 2006 23:54:55 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 8B60E401B46; Wed,  6 Sep 2006 14:30:57 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060906213057.8B60E401B46@tinman.treke.net>
+Date: Wed,  6 Sep 2006 14:30:57 -0700 (PDT)
+Subject: [Bug 1115] libgcrypt_1.2.2.bb fails to compile with MACHINE=native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -29,64 +25,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2006 21:23:03 -0000
-Content-Disposition: inline
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 Sep 2006 21:54:56 -0000
+
+http://bugs.openembedded.org/show_bug.cgi?id=1115
 
 
-I tried to start a fully renewed oe build system today with bitbake 1.6 and up 
-to date oe checkout. I am using minimal distro/machine files. 
-While building bootstrap-image/glibc-initial-2.4 on an x86_64 (AMD X2) machine 
-for TARGET_ARCH = "i586" I get the following error:
+yamaken@bp.iij4u.or.jp changed:
 
-|          
-> /home/chris/tmp/OpenEmbedded/build/tmp/work/glibc-initial-2.4-r10/build-i586-oe-linux/Versions.v.iT
-| In file included from include/tls.h:6,
-|                  from <stdin>:1:
-| nptl/sysdeps/i386/tls.h:65:3: error: #error "TLS support is required."
-| make[1]: *** 
-[/home/chris/tmp/OpenEmbedded/build/tmp/work/glibc-initial-2.4-r10/build-i586-oe-linux/Versions.v.i] 
-Fehler 1
-| make[1]: Leaving directory 
-`/home/chris/tmp/OpenEmbedded/build/tmp/work/glibc-initial-2.4-r10/glibc-2.4'
-| make: *** [sysdeps/gnu/errlist.c] Fehler 2
-NOTE: Task 
-failed: /home/chris/tmp/OpenEmbedded/build/tmp/work/glibc-initial-2.4-r10/temp/log.do_configure.5203
-NOTE: package glibc-initial-2.4-r10: task do_configure: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package glibc-initial-2.4: failed
-ERROR: Build of bootstrap-image failed
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|                            |WORKSFORME
 
 
-I think it is related to the configure script which cannot test TLS support on 
-the x86_64 host properly:
-
-| checking for i386 TLS support... no
 
 
-The full error output is on 
-
-http://pastebin.ca/162754
-
-
-any hint on how to resolve that problem is appreciated.
-
-many thanks
-
-Chris
-
+------- Comment #3 from yamaken@bp.iij4u.or.jp  2006-09-06 14:30 -------
+libgcrypt-1.2.2-r0 has successfully been built with clean tmp on
+not-locally-modified recent OE tree. Thanks for responding.
 
 OE Build Configuration:
-BB_VERSION     = "1.6.0"
-OE_REVISION    = "6be0c561dac329e3cd7624dfd7f1133f9af8ae63"
-TARGET_ARCH    = "i586"
+BB_VERSION     = "1.6.1"
+OE_REVISION    = "5c42f9ce62648e7c8f6308ada5e7d7d7eb900b36"
+TARGET_ARCH    = "i686"
 TARGET_OS      = "linux"
-MACHINE        = "i586-OE-MACHINE"
-DISTRO         = "i586-OE-DISTRO"
-DISTRO_VERSION = "1.0"
-TARGET_FPU     = ""
+MACHINE        = "native"
+DISTRO         = "openzaurus"
+DISTRO_VERSION = ".dev-snapshot-20060906"
+TARGET_FPU     = "soft"
 
+This build has succeeded all four AC_CHECK_SIZEOF previously failed (= set to
+zero). I don't know what affected previous failure of AC_CHECK_SIZEOF. The
+latent bug of original libgcrypt-1.2.2 source (which my patch works on) will
+re-appear only if OE build environment failed to AC_CHECK_SIZEOF.
+
+tmp/work/i686-linux/libgcrypt-1.2.2-r0/libgcrypt-1.2.2/config.h (previous
+build):
+----------------------------------------------------------------
+/* The size of a `unsigned int', as computed by sizeof. */
+#define SIZEOF_UNSIGNED_INT 0
+
+/* The size of a `unsigned long', as computed by sizeof. */
+#define SIZEOF_UNSIGNED_LONG 0
+
+/* The size of a `unsigned long long', as computed by sizeof. */
+#define SIZEOF_UNSIGNED_LONG_LONG 0
+
+/* The size of a `unsigned short', as computed by sizeof. */
+#define SIZEOF_UNSIGNED_SHORT 0
+----------------------------------------------------------------
+
+
+tmp/work/i686-linux/libgcrypt-1.2.2-r0/libgcrypt-1.2.2/config.h (current
+build):
+----------------------------------------------------------------
+/* The size of a `unsigned int', as computed by sizeof. */
+#define SIZEOF_UNSIGNED_INT 4
+
+/* The size of a `unsigned long', as computed by sizeof. */
+#define SIZEOF_UNSIGNED_LONG 4
+
+/* The size of a `unsigned long long', as computed by sizeof. */
+#define SIZEOF_UNSIGNED_LONG_LONG 8
+
+/* The size of a `unsigned short', as computed by sizeof. */
+#define SIZEOF_UNSIGNED_SHORT 2
+----------------------------------------------------------------
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
