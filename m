@@ -1,16 +1,20 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [195.234.128.72] (helo=scotty.chl-informatik.de)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GL4O5-0005bA-8z for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Sep 2006 22:52:45 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 32417401B2B; Wed,  6 Sep 2006 13:28:43 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060906202843.32417401B2B@tinman.treke.net>
-Date: Wed,  6 Sep 2006 13:28:43 -0700 (PDT)
-Subject: [Bug 1392] New: Opie-eye : Do_install fails due to "no such file or directory"
+	(envelope-from <christopher.lang@plus.cablesurf.de>)
+	id 1GL4rO-00022F-HY
+	for openembedded-devel@openembedded.org; Wed, 06 Sep 2006 23:23:02 +0200
+Received: from linux64.chl-informatik.de (linux64.chl-informatik.de
+	[192.168.10.17])
+	by scotty.chl-informatik.de (8.12.3/8.12.3/SuSE Linux 0.6) with ESMTP
+	id k86KUQVR004232 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Sep 2006 22:30:26 +0200
+From: Christopher Lang <christopher.lang@plus.cablesurf.de>
+To: openembedded-devel@openembedded.org
+Date: Wed, 6 Sep 2006 23:24:32 +0200
+User-Agent: KMail/1.9.1
+MIME-Version: 1.0
+Message-Id: <200609062324.33029.christopher.lang@plus.cablesurf.de>
+Subject: error: #error "TLS support is required." while building glibc-initial-2.4 on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,41 +29,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2006 20:52:45 -0000
-
-http://bugs.openembedded.org/show_bug.cgi?id=1392
-
-           Summary: Opie-eye : Do_install fails due to "no such file or
-                    directory"
-           Product: Openembedded
-           Version: unspecified
-          Platform: All
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: kristoffer_e1@hotmail.com
-         QAContact: tinderbox-oe@gmx.net
+X-List-Received-Date: Wed, 06 Sep 2006 21:23:03 -0000
+Content-Disposition: inline
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
 
-ERROR: function do_install failed
-ERROR: log data follows
-(/work/dev/donkey/6xx/tmp/work/sh3-linux/opie-eye-1.2.2-r0/temp/log.do_install.6617)
-| install: target
-`/work/dev/donkey/6xx/tmp/work/sh3-linux/opie-eye-1.2.2-r0/image/opt/QtPalmtop/bin/'
-is not a directory: No such file or directory
-NOTE: Task failed:
-/work/dev/donkey/6xx/tmp/work/sh3-linux/opie-eye-1.2.2-r0/temp/log.do_install.6617
-NOTE: package opie-eye-1.2.2-r0: task do_install: failed
+I tried to start a fully renewed oe build system today with bitbake 1.6 and up 
+to date oe checkout. I am using minimal distro/machine files. 
+While building bootstrap-image/glibc-initial-2.4 on an x86_64 (AMD X2) machine 
+for TARGET_ARCH = "i586" I get the following error:
+
+|          
+> /home/chris/tmp/OpenEmbedded/build/tmp/work/glibc-initial-2.4-r10/build-i586-oe-linux/Versions.v.iT
+| In file included from include/tls.h:6,
+|                  from <stdin>:1:
+| nptl/sysdeps/i386/tls.h:65:3: error: #error "TLS support is required."
+| make[1]: *** 
+[/home/chris/tmp/OpenEmbedded/build/tmp/work/glibc-initial-2.4-r10/build-i586-oe-linux/Versions.v.i] 
+Fehler 1
+| make[1]: Leaving directory 
+`/home/chris/tmp/OpenEmbedded/build/tmp/work/glibc-initial-2.4-r10/glibc-2.4'
+| make: *** [sysdeps/gnu/errlist.c] Fehler 2
+NOTE: Task 
+failed: /home/chris/tmp/OpenEmbedded/build/tmp/work/glibc-initial-2.4-r10/temp/log.do_configure.5203
+NOTE: package glibc-initial-2.4-r10: task do_configure: failed
 ERROR: TaskFailed event exception, aborting
-NOTE: package opie-eye-1.2.2: failed
+NOTE: package glibc-initial-2.4: failed
+ERROR: Build of bootstrap-image failed
 
 
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+I think it is related to the configure script which cannot test TLS support on 
+the x86_64 host properly:
+
+| checking for i386 TLS support... no
+
+
+The full error output is on 
+
+http://pastebin.ca/162754
+
+
+any hint on how to resolve that problem is appreciated.
+
+many thanks
+
+Chris
+
+
+OE Build Configuration:
+BB_VERSION     = "1.6.0"
+OE_REVISION    = "6be0c561dac329e3cd7624dfd7f1133f9af8ae63"
+TARGET_ARCH    = "i586"
+TARGET_OS      = "linux"
+MACHINE        = "i586-OE-MACHINE"
+DISTRO         = "i586-OE-DISTRO"
+DISTRO_VERSION = "1.0"
+TARGET_FPU     = ""
+
 
 
