@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GL5MF-0002Gd-Hk for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Sep 2006 23:54:55 +0200
+	id 1GLCZZ-0000CC-IH for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Sep 2006 07:37:10 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 8B60E401B46; Wed,  6 Sep 2006 14:30:57 -0700 (PDT)
+	id B75F5401B48; Wed,  6 Sep 2006 22:12:56 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060906213057.8B60E401B46@tinman.treke.net>
-Date: Wed,  6 Sep 2006 14:30:57 -0700 (PDT)
-Subject: [Bug 1115] libgcrypt_1.2.2.bb fails to compile with MACHINE=native
+Message-Id: <20060907051256.B75F5401B48@tinman.treke.net>
+Date: Wed,  6 Sep 2006 22:12:56 -0700 (PDT)
+Subject: [Bug 1393] New: OZ 3.5.4.1/GPE on Akita: A bug in GPE-Contacts app
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,72 +25,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2006 21:54:56 -0000
+X-List-Received-Date: Thu, 07 Sep 2006 05:37:11 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1115
+http://bugs.openembedded.org/show_bug.cgi?id=1393
 
-
-yamaken@bp.iij4u.or.jp changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
-         Resolution|                            |WORKSFORME
-
-
-
-
-------- Comment #3 from yamaken@bp.iij4u.or.jp  2006-09-06 14:30 -------
-libgcrypt-1.2.2-r0 has successfully been built with clean tmp on
-not-locally-modified recent OE tree. Thanks for responding.
-
-OE Build Configuration:
-BB_VERSION     = "1.6.1"
-OE_REVISION    = "5c42f9ce62648e7c8f6308ada5e7d7d7eb900b36"
-TARGET_ARCH    = "i686"
-TARGET_OS      = "linux"
-MACHINE        = "native"
-DISTRO         = "openzaurus"
-DISTRO_VERSION = ".dev-snapshot-20060906"
-TARGET_FPU     = "soft"
-
-This build has succeeded all four AC_CHECK_SIZEOF previously failed (= set to
-zero). I don't know what affected previous failure of AC_CHECK_SIZEOF. The
-latent bug of original libgcrypt-1.2.2 source (which my patch works on) will
-re-appear only if OE build environment failed to AC_CHECK_SIZEOF.
-
-tmp/work/i686-linux/libgcrypt-1.2.2-r0/libgcrypt-1.2.2/config.h (previous
-build):
-----------------------------------------------------------------
-/* The size of a `unsigned int', as computed by sizeof. */
-#define SIZEOF_UNSIGNED_INT 0
-
-/* The size of a `unsigned long', as computed by sizeof. */
-#define SIZEOF_UNSIGNED_LONG 0
-
-/* The size of a `unsigned long long', as computed by sizeof. */
-#define SIZEOF_UNSIGNED_LONG_LONG 0
-
-/* The size of a `unsigned short', as computed by sizeof. */
-#define SIZEOF_UNSIGNED_SHORT 0
-----------------------------------------------------------------
+           Summary: OZ 3.5.4.1/GPE on Akita: A bug in GPE-Contacts app
+           Product: Openembedded
+           Version: OpenZaurus 3.5.4.x
+          Platform: Other
+        OS/Version: Linux
+            Status: NEW
+          Severity: major
+          Priority: P2
+         Component: Distributions
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: re-miel@runbox.com
+         QAContact: tinderbox-oe@gmx.net
 
 
-tmp/work/i686-linux/libgcrypt-1.2.2-r0/libgcrypt-1.2.2/config.h (current
-build):
-----------------------------------------------------------------
-/* The size of a `unsigned int', as computed by sizeof. */
-#define SIZEOF_UNSIGNED_INT 4
+After running the Contacts app, I click on "Properties" and in the brought up
+window choose the "Editing Layout" tab. There I create any new field, for
+example I create a field titled "Nickname:" with tag "NICKNAME" in the section
+titled "General". 
+The field promptly appears, and I can fill it in both when editing the old
+Contact entries and when entering new ones. 
+However, when I quit the Contacts app and then run it again, the created field
+("Nickname:") is
+no longer in the layout, as can be verified by clicking on "Properties" and not
+finding it anywhere in the "Editing Layout" tab. Apparently it (the layout)
+just doesn't get saved when quitting the app.
 
-/* The size of a `unsigned long', as computed by sizeof. */
-#define SIZEOF_UNSIGNED_LONG 4
-
-/* The size of a `unsigned long long', as computed by sizeof. */
-#define SIZEOF_UNSIGNED_LONG_LONG 8
-
-/* The size of a `unsigned short', as computed by sizeof. */
-#define SIZEOF_UNSIGNED_SHORT 2
-----------------------------------------------------------------
+For me, this renders app useless, as I really need to have more fields than in
+the (very basic) default layout.
 
 
 -- 
