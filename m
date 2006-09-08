@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GLffk-00051g-7G for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Sep 2006 14:41:28 +0200
+	id 1GLfzL-0005GE-1M for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Sep 2006 15:01:44 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 89D75401B46; Fri,  8 Sep 2006 05:17:01 -0700 (PDT)
+	id 01C83401B45; Fri,  8 Sep 2006 05:37:19 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060908121701.89D75401B46@tinman.treke.net>
-Date: Fri,  8 Sep 2006 05:17:01 -0700 (PDT)
-Subject: [Bug 1402] New: 3.5.4.1 on collie will not bring up the GUI
+Message-Id: <20060908123720.01C83401B45@tinman.treke.net>
+Date: Fri,  8 Sep 2006 05:37:19 -0700 (PDT)
+Subject: [Bug 722] Collie Special-Keys (X11)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,30 +25,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Sep 2006 12:41:28 -0000
+X-List-Received-Date: Fri, 08 Sep 2006 13:01:49 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1402
-
-           Summary: 3.5.4.1 on collie will not bring up the GUI
-           Product: Openembedded
-           Version: OpenZaurus 3.5.4.x
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: bugs.openembedded.org@rolf.leggewie.biz
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=722
 
 
-http://ewi546.ewi.utwente.nl/tmp/hrw/3.5.4x-experimental/collie/opie-image-3.5.4.1-collie.rootfs.tar.gz
-will boot but not bring up the GUI.
 
-I mounted the loop image on my desktop and set a few things like IP, root
-password, etc.  I can not log in via ssh or ping the Z so it looks like
-networking is not brought up.
+
+
+------- Comment #5 from bugs.openembedded.org@rolf.leggewie.biz  2006-09-08 05:37 -------
+Patrick, thank you for your contribution.
+
+OK, but what is the value in your remapping?  Is this of general interest to
+the wider OE community?
 
 
 -- 
