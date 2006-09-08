@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GLf4q-0008IQ-Dw for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Sep 2006 14:03:20 +0200
+	id 1GLfD0-0008MO-63 for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Sep 2006 14:11:46 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 38EC1401B45; Fri,  8 Sep 2006 04:38:58 -0700 (PDT)
+	id DC78D401B45; Fri,  8 Sep 2006 04:47:23 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060908113858.38EC1401B45@tinman.treke.net>
-Date: Fri,  8 Sep 2006 04:38:58 -0700 (PDT)
-Subject: [Bug 1399] altboot in 3.5.4.1 on collie
+Message-Id: <20060908114723.DC78D401B45@tinman.treke.net>
+Date: Fri,  8 Sep 2006 04:47:23 -0700 (PDT)
+Subject: [Bug 1400] New: Can not get 3.5.4.2-rc1 to work on collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,18 +25,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Sep 2006 12:03:20 -0000
+X-List-Received-Date: Fri, 08 Sep 2006 12:11:46 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1399
+http://bugs.openembedded.org/show_bug.cgi?id=1400
+
+           Summary: Can not get 3.5.4.2-rc1 to work on collie
+           Product: Openembedded
+           Version: OpenZaurus 3.5.4.x
+          Platform: ARM
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Distributions
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: pavel@ucw.cz
+         QAContact: tinderbox-oe@gmx.net
 
 
+Wow, and big thanks to openzaurus team.
 
+Well, and then some problems... I'm testing 3.5.4.2-rc1 (perhaps some shorter
+versions would be nice?).
 
+bootstrap image complains about no altboot config, wrong kernel, then hangs
+with splashscreen. I'll have to figure out how to turn the splash off... some
+hint (alt-leftarrow) flashes there briefly, but I do not know how to press alt
+on collie. fn-lshift-left nor fn-rshift-left helps (AFAICT, my keyboard is old
+and arrows are no longer reliable).
 
-------- Comment #1 from bugs.openembedded.org@rolf.leggewie.biz  2006-09-08 04:38 -------
-Well, it looks like the request for ENTER is coming from the altboot on the
-file system in flash.  I think it would be best if altboot just continued
-booting into the newly created loop filesystem.
+opie image also stops in splash screen, this time with "ln /etc/resolv.conf: No
+space left on device". I lost my patience after 4 minutes-or-so.
+
+Ok, moving on to gpe image.. wow, gpe got past "splashscreen", I'm now
+calibrating touchscreen... except that touchscreen does not work at this point.
+Is there some trick? But X seem to work, and that is good. I'll need to figure
+out how to break into shell somewhere.
 
 
 -- 
