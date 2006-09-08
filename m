@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GLTun-0005Gj-Mt for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Sep 2006 02:08:13 +0200
+	id 1GLclw-00068o-9m for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Sep 2006 11:35:40 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id CA785401B45; Thu,  7 Sep 2006 16:43:54 -0700 (PDT)
+	id 94646401B46; Fri,  8 Sep 2006 02:11:15 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060907234354.CA785401B45@tinman.treke.net>
-Date: Thu,  7 Sep 2006 16:43:54 -0700 (PDT)
-Subject: [Bug 1398] New: Missing spectrum24 firmware on poodle's 3.5.4.2RC2
+Message-Id: <20060908091115.94646401B46@tinman.treke.net>
+Date: Fri,  8 Sep 2006 02:11:15 -0700 (PDT)
+Subject: [Bug 1391] minimo package bit rotted badly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,33 +25,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Sep 2006 00:08:14 -0000
+X-List-Received-Date: Fri, 08 Sep 2006 09:35:40 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1398
-
-           Summary: Missing spectrum24 firmware on poodle's 3.5.4.2RC2
-           Product: Openembedded
-           Version: OpenZaurus 3.5.4.x
-          Platform: Other
-        OS/Version: All
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: laurent@laurent.ca
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=1391
 
 
-OpenZaurus 3.5.4.2RC2 on Poodle (5600).
 
-When I insert my Symbol Spectrum24 LS-4137 CF wifi card, I get this in dmesg:
-pccard: PCMCIA card inserted into slot 0
-pcmcia: registering new device pcmcia0.0
-spectrum_cs: Cannot find firmware: symbol_sp24t_prim_fw
-spectrum_cs: Firmware download failed
 
-So the card is unusable.
+
+------- Comment #14 from koen@dominion.kabel.utwente.nl  2006-09-08 02:11 -------
+(In reply to comment #13)
+> For some reason the patch included in your new diff does not patch to the
+
+patch appended minimo.patch to minimo.patch, so your seeing the same problem as
+I had before.
+
+I checked in the latest version to make it easier for people to test.
 
 
 -- 
