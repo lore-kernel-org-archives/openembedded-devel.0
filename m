@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GLclw-00068o-9m for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Sep 2006 11:35:40 +0200
+	id 1GLecU-00082s-HC for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Sep 2006 13:34:02 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 94646401B46; Fri,  8 Sep 2006 02:11:15 -0700 (PDT)
+	id 9CF41401B46; Fri,  8 Sep 2006 04:09:40 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060908091115.94646401B46@tinman.treke.net>
-Date: Fri,  8 Sep 2006 02:11:15 -0700 (PDT)
-Subject: [Bug 1391] minimo package bit rotted badly
+Message-Id: <20060908110940.9CF41401B46@tinman.treke.net>
+Date: Fri,  8 Sep 2006 04:09:40 -0700 (PDT)
+Subject: [Bug 1380] HEAD uClibc build fails on uClibc install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,22 +25,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Sep 2006 09:35:40 -0000
+X-List-Received-Date: Fri, 08 Sep 2006 11:34:02 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1391
-
-
+http://bugs.openembedded.org/show_bug.cgi?id=1380
 
 
+fransmeulenbroeks@yahoo.com changed:
 
-------- Comment #14 from koen@dominion.kabel.utwente.nl  2006-09-08 02:11 -------
-(In reply to comment #13)
-> For some reason the patch included in your new diff does not patch to the
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|                            |FIXED
 
-patch appended minimo.patch to minimo.patch, so your seeing the same problem as
-I had before.
 
-I checked in the latest version to make it easier for people to test.
+
+
+------- Comment #2 from fransmeulenbroeks@yahoo.com  2006-09-08 04:09 -------
+fixed.
+
+renamed do_stage to do_install_prepend 
+
+(do_stage used to be before do_install, but nowadays it is after, which broke
+things for uclibc).
 
 
 -- 
