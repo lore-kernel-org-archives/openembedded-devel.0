@@ -1,30 +1,16 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GM2xw-0001gZ-EM for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Sep 2006 15:33:48 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 2658296E;
-	Sat,  9 Sep 2006 15:30:40 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 32433-05; Sat,  9 Sep 2006 15:30:36 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 4CECE93F;
-	Sat,  9 Sep 2006 15:30:36 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: openembedded-devel@lists.openembedded.org, Martin Dietze <di@fh-wedel.de>
-In-Reply-To: <20060909044327.GA10580@twibble.org>
-References: <E1GLfnq-00056C-UM@linuxtogo.org>
-	<20060909044327.GA10580@twibble.org>
-Organization: VanilleMedia
-Date: Sat, 09 Sep 2006 15:30:35 +0200
-Message-Id: <1157808636.32698.3.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Subject: Re: [oe-commits] PCRE breakage [libpcre: added new port]
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GM3WT-0001uO-FA for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Sep 2006 16:09:29 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 64CAD401B2B; Sat,  9 Sep 2006 06:44:46 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060909134446.64CAD401B2B@tinman.treke.net>
+Date: Sat,  9 Sep 2006 06:44:46 -0700 (PDT)
+Subject: [Bug 1406] New: opie-mediaplayer1 circular dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -39,47 +25,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Sep 2006 13:33:48 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 09 Sep 2006 14:09:29 -0000
 
-(NOTE: Forwarded to Martin Dietze since I'm not sure whether he's
-subscribed to the list yet)
+http://bugs.openembedded.org/show_bug.cgi?id=1406
 
-Am Samstag, den 09.09.2006, 14:43 +1000 schrieb Jamie Lenehan:
-> On Fri, Sep 08, 2006 at 02:49:50PM +0200, "MartinDietze commit" wrote:
-> > libpcre: added new port.
-> 
-> You added libpcre and removed pcre and in the process you've also:
-> 
->  - Broken 20+ recipes which DEPEND on pcre. These would all need to
->    be modified to depend on libpcre now instead.
-> 
->  - Removed the clearning of PARALLEL_MAKE so libpcre no longer builds
->    for anyone doing parallel builds.
-> 
->  - It looks like you've also removed the fix which was added to stop
->    libtool linking against the host libriares when somethings it
->    attempts to link in libpcre on x86_64 hosts.
-> - Removed the LICENSE field from the recipe as well.
-> 
-> I think the change of name is ok, since it's only a library and the
-> new naming matches what happens on other platforms but you really
-> should also fix up all of the above issues.
+           Summary: opie-mediaplayer1 circular dependencies
+           Product: Openembedded
+           Version: OpenZaurus 3.5.4.x
+          Platform: Other
+        OS/Version: Linux
+            Status: NEW
+          Severity: minor
+          Priority: P4
+         Component: Distributions
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: pasky@ucw.cz
+         QAContact: tinderbox-oe@gmx.net
 
-Martin, can you please fix these things?
 
-If you don't have already, make sure you subscribe to this list -- we
-have made it a policy that all people with commit access also need to be
-subscribed here in order to see comments to their commits.
+opie-mediaplayer1 is strangled in circular dependencies:
 
-Thanks,
+Package opie-mediaplayer1 is depended upon by packages:
+        opie-mediaplayer1-libmadplugin
+        opie-mediaplayer1-libmodplugin
+        opie-mediaplayer1-libtremorplugin
+        opie-mediaplayer1-libwavplugin
+
+Package opie-mediaplayer1-libmadplugin is depended upon by packages:
+        opie-mediaplayer1
+
+...(repeat for each of those lib packages)...
+
 
 -- 
-Regards,
-
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
-
-
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
