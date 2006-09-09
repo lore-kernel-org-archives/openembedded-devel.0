@@ -1,23 +1,27 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <freyther@inf.fu-berlin.de>) id 1GMB0D-0000Mh-Lb
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Sep 2006 00:08:41 +0200
-Received: from [91.64.167.72] (helo=[192.168.1.100])
-	by coruscant.onosendai.de with esmtpsa (TLS-1.0:RSA_ARCFOUR_SHA1:16)
-	(Exim 4.60) (envelope-from <freyther@inf.fu-berlin.de>)
-	id 1GMAx9-0001YQ-4b for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Sep 2006 00:05:31 +0200
-Mime-Version: 1.0 (Apple Message framework v752.2)
-X-Gpgmail-State: !signed
-Message-Id: <515E53C3-61FE-4845-8DAF-1F274F173334@inf.fu-berlin.de>
-From: Holger Freyther <freyther@inf.fu-berlin.de>
-Date: Sun, 10 Sep 2006 00:04:08 +0200
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GMB7d-0000Qx-MJ
+	for openembedded-devel@openembedded.org; Sun, 10 Sep 2006 00:16:21 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k89MD5kO007552 for <openembedded-devel@openembedded.org>;
+	Sun, 10 Sep 2006 00:13:05 +0200
+Message-ID: <45033C70.7050101@dominion.kabel.utwente.nl>
+Date: Sun, 10 Sep 2006 00:13:04 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.5 (Macintosh/20060719)
+MIME-Version: 1.0
 To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.752.2)
-X-Broken-Reverse-DNS: no host name found for IP address 91.64.167.72
-Subject: BitTest advertisement
+	<openembedded-devel@openembedded.org>
+References: <515E53C3-61FE-4845-8DAF-1F274F173334@inf.fu-berlin.de>
+In-Reply-To: <515E53C3-61FE-4845-8DAF-1F274F173334@inf.fu-berlin.de>
+X-Enigmail-Version: 0.94.0.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: BitTest advertisement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -32,67 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Sep 2006 22:08:41 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Sat, 09 Sep 2006 22:16:21 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-after having posted results of BitTest and it being available from  
-BitBake SVN for almost a year I had to recognize it was almost unknown.
+Holger Freyther schreef:
 
-What is BitTest?
-	- BitTest allows to parse BitBake files and to run checks in many  
-different configurations on the data.
-	- We have checks to check if patches apply, source is available, - 
-native packages depending on non-native packages, sections, license,  
-etc. are right...
-	- One can easily write new tests by implementing your own module.  
-Even a skeleton exists.
-	- BitTest can write the test result into a txt file or send it as a  
-report to the TinderBox
-	- One can easily write new output formats
-	- It uses default BitBake classes to load, parse and execute tasks
+> 	You can currently get it from here http://handhelds.org/~zecke/ 
+> bitbake-qa-0.1.tar.bz2 until I have found a better home
 
-Issues of BitTest:
-	As it uses the BitBake library PYTHONPATH had to be set correctly to  
-point to bitbake/lib and BBPATH had to point to the bitbake_qa  
-directory and the OpenEmbedded meta-data. Also a testrun.conf had to  
-be written. This file is needed if you want to run tests for more  
-than one TARGET_OS, TARGET_ARCH, DISTRO or MACHINE at once. A big  
-iron could run a specific check for all machine and distro  
-combinations we currently have.
+Both openembedded.org and berlios have enough of space left to host that.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
-
-As people started to reinvent the wheel I decided to remove this tool  
-from SVN as it went unnoticied anyway, as configuration seemed to be  
-too hard I have writen 'bittest_signle' which tries to set the  
-PYTHONPATH manually and extracts the current configuration  
-(TARGET_ARCH,TARGET_OS,MACHINE and DISTRO) from local.conf (we can't  
-load bitbake.conf as openzaurus.inc resets DISTRO...)
-
-
-
-How to get it:
-	You can currently get it from here http://handhelds.org/~zecke/ 
-bitbake-qa-0.1.tar.bz2 until I have found a better home
-
-
-How to use it:
-	- Make sure bitbake is in your PATH (e.g. adding bitbake/bin)
-	- Make sure bittest    is in your PATH
-	- Make sure BBPATH is setup properly
-	- Make sure you have a local.conf
-
-
-	Invoking "bitest_single -r TestReportTinder  depends_checker" will  
-check all BBFILES and send the test result to the tinderbox (if you  
-have setup local.conf correctly)
-
-
-
-
-peace and pleasure
-	h.
+iD8DBQFFAzxwMkyGM64RGpERApY0AJ9VV227Isp7FjMxEvVj4g68wCN1oQCgoHIA
+4tzhWXy/vFTsbdpi12yGD0A=
+=UYju
+-----END PGP SIGNATURE-----
 
 
