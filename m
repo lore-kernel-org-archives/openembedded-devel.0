@@ -1,32 +1,32 @@
 Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <lenehan@twibble.org>) id 1GLt3P-0004za-VJ
-	for openembedded-devel@openembedded.org; Sat, 09 Sep 2006 04:58:48 +0200
+	(envelope-from <lenehan@twibble.org>)
+	id 1GLujl-0006Ux-E6; Sat, 09 Sep 2006 06:46:37 +0200
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 59F489F43A;
-	Sat,  9 Sep 2006 12:55:36 +1000 (EST)
+	by birgitte.twibble.org (Postfix) with ESMTP id 32D1CA7AB2;
+	Sat,  9 Sep 2006 14:43:30 +1000 (EST)
 Received: from birgitte.twibble.org ([127.0.0.1])
 	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 14066-08; Sat, 9 Sep 2006 12:55:34 +1000 (EST)
+	with ESMTP id 15777-08; Sat, 9 Sep 2006 14:43:28 +1000 (EST)
 Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 2691171D43;
-	Sat,  9 Sep 2006 12:55:34 +1000 (EST)
+	by birgitte.twibble.org (Postfix) with ESMTP id 709EE9AEBE;
+	Sat,  9 Sep 2006 14:43:28 +1000 (EST)
 Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 099A6F24367; Sat,  9 Sep 2006 12:55:34 +1000 (EST)
-Date: Sat, 9 Sep 2006 12:55:34 +1000
+	id 53717FD7350; Sat,  9 Sep 2006 14:43:28 +1000 (EST)
+Date: Sat, 9 Sep 2006 14:43:28 +1000
 From: Jamie Lenehan <lenehan@twibble.org>
-To: Christopher Lang <christopher.lang@plus.cablesurf.de>
-Message-ID: <20060909025533.GA4524@twibble.org>
+To: MartinDietze commit <openembedded-commits@lists.openembedded.org>
+Message-ID: <20060909044327.GA10580@twibble.org>
 Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
-	Christopher Lang <christopher.lang@plus.cablesurf.de>,
-	openembedded-devel@openembedded.org
-References: <200609062324.33029.christopher.lang@plus.cablesurf.de>
+	MartinDietze commit <openembedded-commits@lists.openembedded.org>,
+	openembedded-devel@lists.openembedded.org
+References: <E1GLfnq-00056C-UM@linuxtogo.org>
 Mime-Version: 1.0
-In-Reply-To: <200609062324.33029.christopher.lang@plus.cablesurf.de>
+In-Reply-To: <E1GLfnq-00056C-UM@linuxtogo.org>
 User-Agent: Mutt/1.4.2.1i
 X-Virus-Scanned: by amavisd at twibble.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: error: #error "TLS support is required." while building glibc-initial-2.4 on x86_64
+Cc: openembedded-devel@lists.openembedded.org
+Subject: PCRE breakage [libpcre: added new port]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -41,23 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Sep 2006 02:58:48 -0000
+X-List-Received-Date: Sat, 09 Sep 2006 04:46:38 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, Sep 06, 2006 at 11:24:32PM +0200, Christopher Lang wrote:
-> 
-> I tried to start a fully renewed oe build system today with bitbake 1.6 and up 
-> to date oe checkout. I am using minimal distro/machine files. 
-> While building bootstrap-image/glibc-initial-2.4 on an x86_64 (AMD X2) machine 
-> for TARGET_ARCH = "i586" I get the following error:
+On Fri, Sep 08, 2006 at 02:49:50PM +0200, "MartinDietze commit" wrote:
+> libpcre: added new port.
 
-You need to use make 3.81 to build glibc 2.4 for x86 targets on x86_64.
+You added libpcre and removed pcre and in the process you've also:
 
-I've added make 3.81 to OE (by copying all the 3.80 releated make
-files to 3.81 versions - no changes necessary) and then do a "bitbake
-make-native" prior to building rather than update the host version of
-make.
+ - Broken 20+ recipes which DEPEND on pcre. These would all need to
+   be modified to depend on libpcre now instead.
+
+ - Removed the clearning of PARALLEL_MAKE so libpcre no longer builds
+   for anyone doing parallel builds.
+
+ - It looks like you've also removed the fix which was added to stop
+   libtool linking against the host libriares when somethings it
+   attempts to link in libpcre on x86_64 hosts.
+
+I think the change of name is ok, since it's only a library and the
+new naming matches what happens on other platforms but you really
+should also fix up all of the above issues.
 
 -- 
  Jamie Lenehan <lenehan@twibble.org>
