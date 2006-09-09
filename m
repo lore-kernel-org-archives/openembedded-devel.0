@@ -1,33 +1,25 @@
-Received: from [64.233.166.181] (helo=py-out-1112.google.com)
+Received: from [64.233.166.182] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <pmiscml@gmail.com>) id 1GM1s6-0004s6-1m
+	(envelope-from <philipp.zabel@gmail.com>) id 1GM2B7-00051w-P2
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Sep 2006 14:23:42 +0200
-Received: by py-out-1112.google.com with SMTP id i75so1150006pye
+	Sat, 09 Sep 2006 14:43:21 +0200
+Received: by py-out-1112.google.com with SMTP id i75so1155831pye
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Sep 2006 05:20:33 -0700 (PDT)
-Received: by 10.35.90.20 with SMTP id s20mr4821559pyl;
-	Sat, 09 Sep 2006 05:20:33 -0700 (PDT)
-Received: from CUBE ( [82.193.96.237])
-	by mx.gmail.com with ESMTP id m1sm3076148nzf.2006.09.09.05.20.32;
-	Sat, 09 Sep 2006 05:20:33 -0700 (PDT)
-Date: Sat, 9 Sep 2006 15:20:31 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <597749586.20060909152031@gmail.com>
-To: Koen Kooi <koen@dominion.kabel.utwente.nl>, 
-	Jamie Lenehan <lenehan@twibble.org>
-In-Reply-To: <45028D5D.4020906@dominion.kabel.utwente.nl>
-References: <E1GGZOX-0002WU-1s@linuxtogo.org>
-	<20060827233927.GA9807@twibble.org>
-	<200608281147.01329.openembedded@hrw.one.pl>
-	<20060829011415.GA31668@twibble.org>
-	<20060829011808.GB31668@twibble.org>
-	<45028D5D.4020906@dominion.kabel.utwente.nl>
+	Sat, 09 Sep 2006 05:40:13 -0700 (PDT)
+Received: by 10.35.40.10 with SMTP id s10mr4872400pyj;
+	Sat, 09 Sep 2006 05:40:12 -0700 (PDT)
+Received: by 10.35.96.8 with HTTP; Sat, 9 Sep 2006 05:40:12 -0700 (PDT)
+Message-ID: <74d0deb30609090540l27c7675q8a6b4a2c2d85da2b@mail.gmail.com>
+Date: Sat, 9 Sep 2006 14:40:12 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	"Jamie Lenehan" <lenehan@twibble.org>
+In-Reply-To: <20060909044554.GA10625@twibble.org>
 MIME-Version: 1.0
-Cc: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Section list
+References: <E1GLfnq-00056C-UM@linuxtogo.org>
+	<20060909044327.GA10580@twibble.org>
+	<20060909044554.GA10625@twibble.org>
+Subject: Re: PCRE breakage [libpcre: added new port]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -42,66 +34,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Sep 2006 12:23:42 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 09 Sep 2006 12:43:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Koen,
+On 9/9/06, Jamie Lenehan <lenehan@twibble.org> wrote:
+> On Sat, Sep 09, 2006 at 02:43:28PM +1000, Jamie Lenehan wrote:
+> > On Fri, Sep 08, 2006 at 02:49:50PM +0200, "MartinDietze commit" wrote:
+> > > libpcre: added new port.
+> >
+> > You added libpcre and removed pcre and in the process you've also:
+> >
+> >  - Broken 20+ recipes which DEPEND on pcre. These would all need to
+> >    be modified to depend on libpcre now instead.
 
-Saturday, September 9, 2006, 12:46:05 PM, you wrote:
+I tried to fix this one in 38f8d73bd80424075b07707fb224234553155085.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-
-> Jamie Lenehan schreef:
->> Updated list, including your changes:
-
-> <list>
-
-> Don't forget to mention that you added it do the usermanual:
-> http://www.openembedded.org/user-manual&dpage=ch07s09 :)
-
-
-  ... And I just wanted to write that it would be nice to add the
-proposed list to http://www.openembedded.org/wiki/Policies . Maybe
-it's better to let it stay for some time as RFC before adding to
-the documentation? Organizing a good taxonomy is not an easy task,
-would need some testing on existing package base, and even after that,
-it's probably good idea to be prepared to refactors of it.
-
-  Last week, I myself went thru few recipes to add/tweak SECTIONs for
-them, and there already were few questions.
-
-  One good example, is that ignorant user part of me is a bit
-concerned with x11 section being so broard, with an SDL game, ye olde
-MOTIF app and contemporary GNOME/GTK+ app would go into it. That
-loses a bit deal of descreptivism. I know, that such taxonomy is
-(wonder if there will be chance to say "was") pretty common, and I'm
-afraid I don't have elegant proposal for split up. But my ignorant
-user part, not concerned with formal correctness, but rather
-with pragmatic convenience, says, that there might be possible to have
-a "gnome" section (warning: do not mix with GNOME/Gnome ;-) ) for apps
-written using contemporary GUI toolkit, like (and mostly) GTK+.
-
-  So, is there any rational idea in that or should my ignorant user
-part just shut up?
-
-
-  Either way, as mood permits, I'm going to continue monkey's job of
-applying SECTIONs, based on the list proposed. Just in case, I in
-advance apoligize if my selections won't be every time 100% perfect -
-as I told, we just should accept this as an iterative process. The
-initial aim would be to offload default "base" section off stuff which
-easily can be put elsewhere.
-
-> regards,
-
-> Koen
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+> >  - Removed the clearning of PARALLEL_MAKE so libpcre no longer builds
+> >    for anyone doing parallel builds.
+> >
+> >  - It looks like you've also removed the fix which was added to stop
+> >    libtool linking against the host libriares when somethings it
+> >    attempts to link in libpcre on x86_64 hosts.
+>
+> And another one:
+>
+>    - Removed the LICENSE field from the recipe as well.
+>
+> --
+>  Jamie Lenehan <lenehan@twibble.org>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
