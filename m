@@ -1,16 +1,36 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GMXLA-0004nb-SB for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Sep 2006 23:59:49 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 7E186401B45; Sun, 10 Sep 2006 14:34:45 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060910213445.7E186401B45@tinman.treke.net>
-Date: Sun, 10 Sep 2006 14:34:45 -0700 (PDT)
-Subject: [Bug 1326] libpng doesn't build for x86
+	(envelope-from <lenehan@twibble.org>) id 1GMYNz-0001Sd-CC
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Sep 2006 01:06:47 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id CB1317322F;
+	Mon, 11 Sep 2006 09:03:29 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 10250-05; Mon, 11 Sep 2006 09:03:26 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 1B96D4E482;
+	Mon, 11 Sep 2006 09:03:26 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 13A9BE67448; Mon, 11 Sep 2006 09:03:26 +1000 (EST)
+Date: Mon, 11 Sep 2006 09:03:26 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
+To: Martin Dietze <di@fh-wedel.de>
+Message-ID: <20060910230325.GA9890@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	Martin Dietze <di@fh-wedel.de>,
+	openembedded-devel@lists.openembedded.org
+References: <E1GLfnq-00056C-UM@linuxtogo.org>
+	<20060909044327.GA10580@twibble.org>
+	<1157808636.32698.3.camel@gandalf.tm.informatik.uni-frankfurt.de>
+	<20060910085502.GH17558@fh-wedel.de>
+Mime-Version: 1.0
+In-Reply-To: <20060910085502.GH17558@fh-wedel.de>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] PCRE breakage [libpcre: added new port]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,33 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Sep 2006 21:59:49 -0000
+X-List-Received-Date: Sun, 10 Sep 2006 23:06:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1326
+On Sun, Sep 10, 2006 at 10:55:02AM +0200, Martin Dietze wrote:
+> On Sat, September 09, 2006, Michael 'Mickey' Lauer wrote:
+> 
+> > > You added libpcre and removed pcre and in the process you've also:
+> > > 
+> > >  - Broken 20+ recipes which DEPEND on pcre. These would all need to
+> > >    be modified to depend on libpcre now instead.
+> 
+> Something made me think there was no such package (pcre). Seems 
 
+Ah, that make sense. I could have fixed this all up when you
+submitted it, but I could not decide on exactly what you were doing,
+so wanted some confirmation on that first.
 
-pmiscml@gmail.com changed:
+> like I need to reduce my number of working hours :/ 
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|RESOLVED                    |REOPENED
-         Resolution|FIXED                       |
+I think we all need that ;)
 
+> Will fix this as first thing on Monday.
 
+Others have fixed most of it by now (the missing LICENSE is about all
+that needs to be added now). It's probably a good idea to just
+compare the old (now deleted) pcre/pcre_4.4.bb with your new
+libpcre/libpcre_4.4.bb and make sure everything from the old one is
+in there.
 
-
-------- Comment #4 from pmiscml@gmail.com  2006-09-10 14:34 -------
-It seems like following happened: autotool support was added libpng just pretty
-recently, after 1.2.8. But .bb for 1.2.12 was just a cut&paste, trying to
-compile it in adhoc way.
-
-Reassigning to myself, as I deal w/this right now. Will attach patch for review
-here.
-
+Thanks.
 
 -- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+ Jamie Lenehan <lenehan@twibble.org>
 
 
