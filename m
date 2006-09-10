@@ -1,35 +1,28 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [213.39.232.198] (helo=moskovskaya.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <lenehan@twibble.org>) id 1GMIJf-0007kM-NH
+	(envelope-from <di@mail.fh-wedel.de>) id 1GML8q-000656-1r
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Sep 2006 07:57:16 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 59DD3A9711
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Sep 2006 15:54:02 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 17706-07
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Sep 2006 15:54:00 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id AF648A278C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Sep 2006 15:54:00 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 81F2AFE0507; Sun, 10 Sep 2006 15:54:00 +1000 (EST)
-Date: Sun, 10 Sep 2006 15:54:00 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20060910055359.GA24278@twibble.org>
-Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
-	openembedded-devel@lists.openembedded.org
-References: <E1GLgJs-0001ek-EZ@linuxtogo.org>
+	Sun, 10 Sep 2006 10:58:16 +0200
+Received: from di by moskovskaya.fh-wedel.de with local (Exim 4.50)
+	id 1GML5i-0003XA-Fi; Sun, 10 Sep 2006 10:55:02 +0200
+Date: Sun, 10 Sep 2006 10:55:02 +0200
+From: Martin Dietze <di@fh-wedel.de>
+To: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+Message-ID: <20060910085502.GH17558@fh-wedel.de>
+References: <E1GLfnq-00056C-UM@linuxtogo.org>
+	<20060909044327.GA10580@twibble.org>
+	<1157808636.32698.3.camel@gandalf.tm.informatik.uni-frankfurt.de>
 Mime-Version: 1.0
-In-Reply-To: <E1GLgJs-0001ek-EZ@linuxtogo.org>
-User-Agent: Mutt/1.4.2.1i
-X-Virus-Scanned: by amavisd at twibble.org
-Subject: Re: [oe-commits] org.oe.dev hostap-daemon and madwifi: fix compatibility problems on mtx platforms
+In-Reply-To: <1157808636.32698.3.camel@gandalf.tm.informatik.uni-frankfurt.de>
+X-PGP-Fingerprint: C98D 598A DA73 DF9F 610D  632E 4468 B911 BF9B 8D95
+X-PGP-Key-ID: 0xBF9B8D95
+User-Agent: Mutt/1.5.9i
+Sender: Martin Dietze <di@mail.fh-wedel.de>
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: di@mail.fh-wedel.de
+X-Mailman-Approved-At: Sun, 10 Sep 2006 11:02:52 +0200
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] PCRE breakage [libpcre: added new port]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -44,22 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Sep 2006 05:57:16 -0000
+X-List-Received-Date: Sun, 10 Sep 2006 08:58:16 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Fri, Sep 08, 2006 at 03:22:56PM +0200, "MartinDietze commit" wrote:
-[...]
-> packages/madwifi/madwifi-modules_cvs-bsd.bb
-> packages/madwifi/madwifi-modules_cvs.bb
+On Sat, September 09, 2006, Michael 'Mickey' Lauer wrote:
 
-Are you actually using these? 
+> > You added libpcre and removed pcre and in the process you've also:
+> > 
+> >  - Broken 20+ recipes which DEPEND on pcre. These would all need to
+> >    be modified to depend on libpcre now instead.
 
-The CVS URL's in them don't appear valid and I believe everyone else
-is now using the SVN snapshots. I had been planning on deleting these
-cvs files.
+Something made me think there was no such package (pcre). Seems 
+like I need to reduce my number of working hours :/ 
+Will fix this as first thing on Monday.
+
+Sorry,
+
+Martin
 
 -- 
- Jamie Lenehan <lenehan@twibble.org>
+-------------- Martin Dietze --------------- / -- 4G Systeme GmbH Hamburg ---
+-- martin@the-little-red-haired-girl.org -- / ---- dietze@4g-systems.com ----
+------------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
+Old programmers don't die; they just branch to a new address.
 
 
