@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GMFMt-0000JI-Ao for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Sep 2006 04:48:23 +0200
+	id 1GMH6s-0002Cx-Lf for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Sep 2006 06:39:59 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 4005B401B45; Sat,  9 Sep 2006 19:23:32 -0700 (PDT)
+	id 74238401B45; Sat,  9 Sep 2006 21:15:10 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060910022332.4005B401B45@tinman.treke.net>
-Date: Sat,  9 Sep 2006 19:23:32 -0700 (PDT)
-Subject: [Bug 1326] libpng doesn't build for x86
+Message-Id: <20060910041510.74238401B45@tinman.treke.net>
+Date: Sat,  9 Sep 2006 21:15:10 -0700 (PDT)
+Subject: [Bug 1238] libxml2 ships spurious debug info
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,9 +25,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Sep 2006 02:48:23 -0000
+X-List-Received-Date: Sun, 10 Sep 2006 04:39:59 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1326
+http://bugs.openembedded.org/show_bug.cgi?id=1238
 
 
 lenehan@twibble.org changed:
@@ -40,9 +40,8 @@ lenehan@twibble.org changed:
 
 
 
-------- Comment #3 from lenehan@twibble.org  2006-09-09 19:23 -------
-Commited fix in 0cce8d25e8250927bef25b432c8b90d25e3b1a3c
-Used to simplier fix of disabling the assembler code.
+------- Comment #1 from lenehan@twibble.org  2006-09-09 21:15 -------
+Fixed in revision 6dc1b7742ac81eb2cd1685382c450d0f6bb5f3f9
 
 
 -- 
