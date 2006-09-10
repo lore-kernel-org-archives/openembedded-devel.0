@@ -1,16 +1,35 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GMI5p-0007gF-Qm for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Sep 2006 07:42:58 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 076A1401B45; Sat,  9 Sep 2006 22:18:09 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <lenehan@twibble.org>) id 1GMIJf-0007kM-NH
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Sep 2006 07:57:16 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id 59DD3A9711
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Sep 2006 15:54:02 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 17706-07
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Sep 2006 15:54:00 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id AF648A278C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Sep 2006 15:54:00 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 81F2AFE0507; Sun, 10 Sep 2006 15:54:00 +1000 (EST)
+Date: Sun, 10 Sep 2006 15:54:00 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060910051809.076A1401B45@tinman.treke.net>
-Date: Sat,  9 Sep 2006 22:18:09 -0700 (PDT)
-Subject: [Bug 948] lftp 3.0.x source no longer available, update to 3.1.x
+Message-ID: <20060910055359.GA24278@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	openembedded-devel@lists.openembedded.org
+References: <E1GLgJs-0001ek-EZ@linuxtogo.org>
+Mime-Version: 1.0
+In-Reply-To: <E1GLgJs-0001ek-EZ@linuxtogo.org>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: Re: [oe-commits] org.oe.dev hostap-daemon and madwifi: fix compatibility problems on mtx platforms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,29 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Sep 2006 05:42:58 -0000
+X-List-Received-Date: Sun, 10 Sep 2006 05:57:16 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=948
+On Fri, Sep 08, 2006 at 03:22:56PM +0200, "MartinDietze commit" wrote:
+[...]
+> packages/madwifi/madwifi-modules_cvs-bsd.bb
+> packages/madwifi/madwifi-modules_cvs.bb
 
+Are you actually using these? 
 
-lenehan@twibble.org changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
-         Resolution|                            |FIXED
-
-
-
-
-------- Comment #2 from lenehan@twibble.org  2006-09-09 22:18 -------
-Version 3.5.1 has already been submitted into OE and therefore this is now
-invalid.
-
+The CVS URL's in them don't appear valid and I believe everyone else
+is now using the SVN snapshots. I had been planning on deleting these
+cvs files.
 
 -- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+ Jamie Lenehan <lenehan@twibble.org>
 
 
