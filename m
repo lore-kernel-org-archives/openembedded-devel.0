@@ -1,27 +1,16 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GMOe8-0000yU-Ur
-	for openembedded-devel@openembedded.org; Sun, 10 Sep 2006 14:42:49 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k8ACdVkO031639 for <openembedded-devel@openembedded.org>;
-	Sun, 10 Sep 2006 14:39:32 +0200
-Message-ID: <45040783.7080103@dominion.kabel.utwente.nl>
-Date: Sun, 10 Sep 2006 14:39:31 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.5 (Macintosh/20060719)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.94.0.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	k8ACdVkO031639
-Subject: mtn: fatal: St11logic_error: database.cc:845: invariant 'I(cancel_size < pending_writes_size)' violated
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GMQaK-0002sn-U6 for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Sep 2006 16:47:01 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 062CA401B2B; Sun, 10 Sep 2006 07:22:02 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060910142202.062CA401B2B@tinman.treke.net>
+Date: Sun, 10 Sep 2006 07:22:02 -0700 (PDT)
+Subject: [Bug 1407] socat-1.3.2.1 xioinitialize failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -36,45 +25,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Sep 2006 12:42:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 10 Sep 2006 14:47:02 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+http://bugs.openembedded.org/show_bug.cgi?id=1407
 
-[11:02] koen: mtn: fatal: St11logic_error: database.cc:845: invariant 'I(=
-cancel_size <
-pending_writes_size)' violated
-[11:02] =E2=80=A2 koen wonders
-[11:05] njs: what version are you using?
-[11:05] koen: monotone 0.29 (base revision: 796bc8596d6c5c68828fbfb6a620a=
-09a3af15ded)
-[11:06] koen: I'm suddenly getting 131 revs in
-[11:06] njs: oh, dude, 0.29 has that bug?
-[11:06] koen: and the invariant trips on 35/131
-[11:06] njs: huh, I guess it does, just events conspire to make it really=
- hard to hit
-[11:06] njs: it's a very stupid bug, that "<" should be "<=3D"
-[11:07] njs: but I didn't realize it was possible to trigger it in 0.29 (=
-I ran into it
-while doing the roster cache stuff, because it changed the data flow patt=
-erns so the bug
-got hit every time)
 
-So, these are your options:
 
-* downgrade to 0.28
-* upgrade to head
-* rebuild with 'I(cancel_size <=3D pending_writes_size)' instead of 'I(ca=
-ncel_size <
-pending_writes_size)'
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
 
-iD8DBQFFBAeDMkyGM64RGpERAlBfAJ92FLBJyyq8WzuHdo6MqXc1Qxy1QgCfWCsB
-VOl2KmZt3Za2meZzJUEeo8A=3D
-=3DXFbh
------END PGP SIGNATURE-----
+
+------- Comment #3 from koen@dominion.kabel.utwente.nl  2006-09-10 07:22 -------
+The .bb file is missing xiopen.patch. After removing that line I get:
+
+| xiohelp.c:30: error: static declaration of 'addressgroupnames' follows
+non-static declaration
+| xioopen.h:45: error: previous declaration of 'addressgroupnames' was here
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
