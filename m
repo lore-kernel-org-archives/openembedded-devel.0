@@ -1,20 +1,16 @@
-Received: from [84.12.140.56] (helo=moneypenny.softoption.local)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <Mark.Howells@softoption.com>) id 1GMkGw-0005HJ-Q8
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Sep 2006 13:48:18 +0200
-MIME-Version: 1.0
-Date: Mon, 11 Sep 2006 12:43:46 +0100
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Message-ID: <5144EF5B0ABC6745BEE64C74E43ABD8F11A140@moneypenny.softoption.local>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Quick question on SRC_URI in bitbake files
-Thread-Index: AcbVjKTL2IOVxDQdTmWTu5f/OxeMuwACopTQ
-From: "Mark Howells" <Mark.Howells@softoption.com>
-To: "Using the OpenEmbedded metadata to build Linux Distributions"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Quick question on SRC_URI in bitbake files
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GMo2H-0000K7-2v for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Sep 2006 17:49:25 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 6A26A401B45; Mon, 11 Sep 2006 08:24:10 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060911152410.6A26A401B45@tinman.treke.net>
+Date: Mon, 11 Sep 2006 08:24:10 -0700 (PDT)
+Subject: [Bug 1410] New: Boost DEPENDs on Python and thus on x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -29,40 +25,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Sep 2006 11:48:19 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="windows-1250"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Sep 2006 15:49:25 -0000
 
-=20
+http://bugs.openembedded.org/show_bug.cgi?id=1410
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org=20
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On=20
-> Behalf Of Michael 'Mickey' Lauer
-> Sent: 11 September 2006 11:25
-> Subject: Re: [oe] Quick question on SRC_URI in bitbake files
->=20
-> Am Montag, den 11.09.2006, 10:27 +0100 schrieb Mark Howells:
-> > Does anyone know how I can tell bitbake how to use the=20
-> > Mercurial repository manager to get sources
->=20
-> That sounds rather like you want to add a new fetcher (for mercurial
-> repositories) in bitbake.
+           Summary: Boost DEPENDs on Python and thus on x11
+           Product: Openembedded
+           Version: unspecified
+          Platform: Other
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Build
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: di@fh-wedel.de
+         QAContact: tinderbox-oe@gmx.net
 
-Indeed it does. I _think_ I can can see how to do this - I'll have a go =
-and see how I get on...
 
-Cheers
+There is only one recipe for two flavours of boost: C++ and Python. This leads
+to the problem that even if only building Boost I need to build x11 in order to
+build Python. Since my distro (nylon) does not support x11, I cannot build
+boost. I suggest to use two separate boost recipes instead.
 
-Mark
 
---=20
-No virus found in this outgoing message.
-Checked by AVG Anti-Virus.
-Version: 7.1.406 / Virus Database: 268.12.2/442 - Release Date: =
-08/09/2006
-=20
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
