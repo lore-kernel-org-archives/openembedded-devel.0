@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GN5kW-00075X-Tj for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Sep 2006 12:44:17 +0200
+	id 1GN6lB-0003mX-Tl for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Sep 2006 13:49:02 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 56406401B45; Tue, 12 Sep 2006 03:18:54 -0700 (PDT)
+	id 9F253401B45; Tue, 12 Sep 2006 04:23:38 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060912101854.56406401B45@tinman.treke.net>
-Date: Tue, 12 Sep 2006 03:18:54 -0700 (PDT)
-Subject: [Bug 1411] build of libx11 should fail if native build of makekeys fails
+Message-Id: <20060912112338.9F253401B45@tinman.treke.net>
+Date: Tue, 12 Sep 2006 04:23:38 -0700 (PDT)
+Subject: [Bug 1188] opie-image build breaks during opie-bluepin-1.2.2-r0: task do_compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,16 +25,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Sep 2006 10:44:17 -0000
+X-List-Received-Date: Tue, 12 Sep 2006 11:49:02 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1411
-
-
+http://bugs.openembedded.org/show_bug.cgi?id=1188
 
 
 
-------- Comment #1 from di@fh-wedel.de  2006-09-12 03:18 -------
-The same applies to libxt and maybe others.
+
+
+------- Comment #4 from stefan@datenfreihafen.org  2006-09-12 04:23 -------
+Thanks. The patch fix the compiling for me. No chance to test it yet.
 
 
 -- 
