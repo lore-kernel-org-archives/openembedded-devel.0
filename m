@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GN4Iu-0005PV-5y for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Sep 2006 11:11:40 +0200
+	id 1GN4g6-0001rx-RR for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Sep 2006 11:35:39 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 86FBC401B45; Tue, 12 Sep 2006 01:46:18 -0700 (PDT)
+	id EEBD0401B48; Tue, 12 Sep 2006 02:10:16 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060912084618.86FBC401B45@tinman.treke.net>
-Date: Tue, 12 Sep 2006 01:46:18 -0700 (PDT)
-Subject: [Bug 1412] New: libx11: missing flag to make command for native makekeys
+Message-Id: <20060912091016.EEBD0401B48@tinman.treke.net>
+Date: Tue, 12 Sep 2006 02:10:16 -0700 (PDT)
+Subject: [Bug 1391] minimo package bit rotted badly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,32 +25,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Sep 2006 09:11:40 -0000
+X-List-Received-Date: Tue, 12 Sep 2006 09:35:39 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1412
-
-           Summary: libx11: missing flag to make command for native makekeys
-           Product: Openembedded
-           Version: unspecified
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: di@fh-wedel.de
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=1391
 
 
-The make command for makekeys fails on my system because the variable
-X11_CFLAGS is not overridden in the make command. I thus suggest to call make
-like this:
+alain2210@free.fr changed:
 
-[libx11_X11R7.1-1.0.1.bb]
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |alain2210@free.fr
 
-oe_runmake -C src/util 'X11_CFLAGS=' 'CC=${BUILD_CC}' [...]
-                       ^^^^^^^^^^^^^^
+
+
+
+------- Comment #15 from alain2210@free.fr  2006-09-12 02:10 -------
+Hello,
+
+it put here also the comment made on handhelds :
+
+It seems that the
+small screen rendering is not working. I succeed in making it work with theses
+changes :
+1)in minimo_20060720.bb add
+install -m 0644 res/smallScreen.css ${D}${mozdir}/res
+install -m 0644 res/sites.css ${D}${mozdir}/res
+2) modifying minimo.patch such that
+a) mozilla/minimo/Makefile contains
+DIRS = config components chrome locales customization base
+b) mozilla/minimo/components/Makefile
+DIRS = ssr
+c) mozilla/minimo/components/ssr/Makefile
+MODULE_NAME     = SSRModule
 
 
 -- 
