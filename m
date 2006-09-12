@@ -1,25 +1,16 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <freyther@inf.fu-berlin.de>) id 1GN9s1-0002TV-Pd
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Sep 2006 17:08:17 +0200
-Received: from [145.253.107.2] (helo=[192.168.61.154])
-	by coruscant.onosendai.de with esmtpsa (TLS-1.0:RSA_ARCFOUR_SHA1:16)
-	(Exim 4.60) (envelope-from <freyther@inf.fu-berlin.de>)
-	id 1GN9oh-00062j-9n for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Sep 2006 17:04:51 +0200
-Mime-Version: 1.0 (Apple Message framework v752.2)
-In-Reply-To: <200609121630.39520.christopher.lang@chl-informatik.de>
-References: <200609121630.39520.christopher.lang@chl-informatik.de>
-X-Gpgmail-State: !signed
-Message-Id: <055A7B53-12FA-4B78-88F9-9F65132BE966@inf.fu-berlin.de>
-From: Holger Freyther <freyther@inf.fu-berlin.de>
-Date: Tue, 12 Sep 2006 17:03:23 +0200
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.752.2)
-X-Broken-Reverse-DNS: no host name found for IP address 145.253.107.2
-Subject: Re: relative paths in Openembedded/bitbake
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GN9uZ-0002Ww-4U for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Sep 2006 17:10:55 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id B2CFC401B45; Tue, 12 Sep 2006 07:45:29 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060912144529.B2CFC401B45@tinman.treke.net>
+Date: Tue, 12 Sep 2006 07:45:29 -0700 (PDT)
+Subject: [Bug 1413] package ntp is not created
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -34,58 +25,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Sep 2006 15:08:17 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Sep 2006 15:10:55 -0000
+
+http://bugs.openembedded.org/show_bug.cgi?id=1413
 
 
-Am 12.09.2006 um 16:30 schrieb Christopher Lang:
+pmiscml@gmail.com changed:
 
->
->> From what I can see all paths in OE/bitbake are absolute paths.  
->> This makes it
-> difficult to move an OE build directory to another location.
->
-> Questions:
->
-> - which paths in which files do I need to change to move an entire  
-> build
-> directory? (conf files of course, any other files?)
->
-> - Is it possible to set up an OE build directory based on relative  
-> paths?
->
-> - If the 2nd question was answered with no, are there any plans to  
-> enable
-> OE/bitbake to be able to handle an entire build directory with  
-> relative
-> paths?
->
-
-
-Hi,
-
-take a look at bugs.openembedded.org as we have a bug for that  
-already. Let us take a look at the first package we build:
-	quilt-native
-		Quilt runs autoconf and hardcodes absolute paths into its scripts.
-
-So after building the first package you may not move your tree  
-anymore.  You could symlinks and see how far you get but I think I  
-remember difficulties with that.
-
-I think we have three uses cases here:
-	- Share one Build tree between multiple Operating Systems and Users
-	- Move and avoid rebuilding
-
-Both have the same issues: One is the packages we have built require  
-the absolute path e.g. hardcoded filenames (like quilt), hardcoded  
-rpath to the native staging libdir. And one could be BitBake  
-(unlikely though).
-
-h.
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |pmiscml@gmail.com
+             Status|ASSIGNED                    |NEW
 
 
 
+
+------- Comment #2 from pmiscml@gmail.com  2006-09-12 07:45 -------
+Not exactly, this is not related to runstrip(). This is due to duplicate
+package declaration, I'm working on this.
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
