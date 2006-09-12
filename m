@@ -1,20 +1,16 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GN5YZ-00070S-5j
-	for openembedded-devel@openembedded.org; Tue, 12 Sep 2006 12:31:55 +0200
-Received: (qmail 4761 invoked by uid 813007); 12 Sep 2006 10:28:28 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 12 Sep 2006 10:28:28 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GN5k4-00074R-MN for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Sep 2006 12:43:48 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 1AE5C401B45; Tue, 12 Sep 2006 03:18:26 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Sep 2006 12:28:25 +0200
-User-Agent: KMail/1.9.4
-MIME-Version: 1.0
-Organization: OpenEmbedded
-Message-Id: <200609121228.26077.openembedded@hrw.one.pl>
-Subject: Paid support offer
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060912101826.1AE5C401B45@tinman.treke.net>
+Date: Tue, 12 Sep 2006 03:18:26 -0700 (PDT)
+Subject: [Bug 1412] libx11: missing flag to make command for native makekeys
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -29,42 +25,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Sep 2006 10:31:55 -0000
-Content-Disposition: inline
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Sep 2006 10:43:48 -0000
+
+http://bugs.openembedded.org/show_bug.cgi?id=1412
 
 
-I started own business. Main area will be OpenEmbedded consulting
-as I'm one of core developers of this buildsystem.
 
-Things which I want to cover are:
 
-* device support
-* bug fixing
-* adding/altering packages
-* maintenance of external branches
 
-Those kinds of things are nothing new to me - I maintain own branch
-used to build OpenZaurus, added few hundreds of packages (and changed
-countless of them).
+------- Comment #1 from di@fh-wedel.de  2006-09-12 03:18 -------
+The same applies to libxt (in this case: XT_CFLAGS should be unset), maybe
+others, too.
 
-Currently I prefer remote work due to fact that I still have full time job.
-Payments can be solved in two ways:
-
-- payment per needed hours (this can be hard to count because some of it
-  takes waiting for build)
-- one price for whole work
-
-I can provide invoice.
 
 -- 
-JID: hrw-jabber.org
-Sharp Zaurus C-760 (OZ 3.5.x)
-OpenEmbedded/OpenZaurus/OPIE developer
-
-Vi has two modes: the one in which it beeps, and the one in which it 
-doesn't.
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
