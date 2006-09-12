@@ -1,22 +1,16 @@
-Received: from [195.234.128.72] (helo=scotty.chl-informatik.de)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <christopher.lang@plus.cablesurf.de>)
-	id 1GNA7x-0007Mw-QL
-	for openembedded-devel@openembedded.org; Tue, 12 Sep 2006 17:24:45 +0200
-Received: from linux64.chl-informatik.de (linux64.chl-informatik.de
-	[192.168.10.17])
-	by scotty.chl-informatik.de (8.12.3/8.12.3/SuSE Linux 0.6) with ESMTP
-	id k8CEVbVR015947; Tue, 12 Sep 2006 16:31:38 +0200
-From: Christopher Lang <christopher.lang@plus.cablesurf.de>
-To: openembedded-devel@openembedded.org
-Date: Tue, 12 Sep 2006 17:26:12 +0200
-User-Agent: KMail/1.9.1
-References: <200609121630.39520.christopher.lang@chl-informatik.de>
-	<055A7B53-12FA-4B78-88F9-9F65132BE966@inf.fu-berlin.de>
-In-Reply-To: <055A7B53-12FA-4B78-88F9-9F65132BE966@inf.fu-berlin.de>
-MIME-Version: 1.0
-Message-Id: <200609121726.12582.christopher.lang@plus.cablesurf.de>
-Subject: Re: relative paths in Openembedded/bitbake
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GNArX-0007in-3o for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Sep 2006 18:11:51 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 064AD401B45; Tue, 12 Sep 2006 08:46:25 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060912154625.064AD401B45@tinman.treke.net>
+Date: Tue, 12 Sep 2006 08:46:25 -0700 (PDT)
+Subject: [Bug 1413] package ntp is not created
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -31,72 +25,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Sep 2006 15:24:46 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Sep 2006 16:11:51 -0000
+
+http://bugs.openembedded.org/show_bug.cgi?id=1413
 
 
-Hi Holger,
+pmiscml@gmail.com changed:
 
-I looked up he bug (#1167). Too bad, relative paths would be nice to have. 
-I'll try the symlink approach some time...
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|                            |FIXED
 
-Chris
 
 
 
-Am Dienstag, 12. September 2006 17:03 schrieb Holger Freyther:
-> Am 12.09.2006 um 16:30 schrieb Christopher Lang:
-> >> From what I can see all paths in OE/bitbake are absolute paths.
-> >> This makes it
-> >
-> > difficult to move an OE build directory to another location.
-> >
-> > Questions:
-> >
-> > - which paths in which files do I need to change to move an entire
-> > build
-> > directory? (conf files of course, any other files?)
-> >
-> > - Is it possible to set up an OE build directory based on relative
-> > paths?
-> >
-> > - If the 2nd question was answered with no, are there any plans to
-> > enable
-> > OE/bitbake to be able to handle an entire build directory with
-> > relative
-> > paths?
->
-> Hi,
->
-> take a look at bugs.openembedded.org as we have a bug for that
-> already. Let us take a look at the first package we build:
-> 	quilt-native
-> 		Quilt runs autoconf and hardcodes absolute paths into its scripts.
->
-> So after building the first package you may not move your tree
-> anymore.  You could symlinks and see how far you get but I think I
-> remember difficulties with that.
->
-> I think we have three uses cases here:
-> 	- Share one Build tree between multiple Operating Systems and Users
-> 	- Move and avoid rebuilding
->
-> Both have the same issues: One is the packages we have built require
-> the absolute path e.g. hardcoded filenames (like quilt), hardcoded
-> rpath to the native staging libdir. And one could be BitBake
-> (unlikely though).
->
-> h.
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+------- Comment #3 from pmiscml@gmail.com  2006-09-12 08:46 -------
+Fixed in 3e2ce2d7251972891d2ea2ce5c8e998bbd9d3edb.
+So yes, this was due to "ntp" appearing twice in PACKAGES (once by default
+assignment of PN to PACKAGES, another by +=). This is error in metadata.
+Mentioning on IRC, I was told it was discussed and found worth to be a fatal to
+build. But as we don't know how many such packages now, this was made a visible
+ERROR for now (there was check, it just needed soem revamping).
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
