@@ -1,33 +1,16 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <lenehan@twibble.org>) id 1GMvc6-0000rH-Qm
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Sep 2006 01:54:55 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 34A7CA311B;
-	Tue, 12 Sep 2006 09:51:31 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 16550-07; Tue, 12 Sep 2006 09:51:29 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 91B3FA3114;
-	Tue, 12 Sep 2006 09:51:29 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 75A7F105EB4E; Tue, 12 Sep 2006 09:51:29 +1000 (EST)
-Date: Tue, 12 Sep 2006 09:51:28 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GN3zG-0005Aw-P3 for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Sep 2006 10:51:22 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 4A396401B45; Tue, 12 Sep 2006 01:25:57 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20060911235128.GA24833@twibble.org>
-Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
-	openembedded-devel@lists.openembedded.org,
-	cyril Romain <c.romain@laposte.net>
-References: <20060910234900.GA25953@twibble.org>
-	<4505DEB3.1080407@laposte.net> <4505E0ED.4060608@laposte.net>
-Mime-Version: 1.0
-In-Reply-To: <4505E0ED.4060608@laposte.net>
-User-Agent: Mutt/1.4.2.1i
-X-Virus-Scanned: by amavisd at twibble.org
-Subject: Re: sanitize.py
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060912082557.4A396401B45@tinman.treke.net>
+Date: Tue, 12 Sep 2006 01:25:57 -0700 (PDT)
+Subject: [Bug 1411] New: build of libx11 should fail if native build of makekeys fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -42,22 +25,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Sep 2006 23:54:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Sep 2006 08:51:23 -0000
 
-On Tue, Sep 12, 2006 at 12:19:25AM +0200, cyril Romain wrote:
-> Another try for the attachment: the script itself this time.
+http://bugs.openembedded.org/show_bug.cgi?id=1411
 
-It doesn't seem to be making though the list!
-I've tested and submitted this version now though.
+           Summary: build of libx11 should fail if native build of makekeys
+                    fails
+           Product: Openembedded
+           Version: unspecified
+          Platform: Other
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Distributions
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: di@fh-wedel.de
+         QAContact: tinderbox-oe@gmx.net
 
-The changelog is all mine, so blame me for what that says!
 
-It's working much better on some of my recipes now!
-Thanks.
+I suggest something like this:
+
+[libx11_X11R7.1-1.0.1.bb]
+
+do_compile() {
+        (
+                unset CC LD CXX CCLD
+                oe_runmake -C src/util [...] makekeys
+        ) || exit 1
+        rm -f ${STAGING_INCDIR}/X11/Xlib.h
+        oe_runmake
+}
+
 
 -- 
- Jamie Lenehan <lenehan@twibble.org>
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
