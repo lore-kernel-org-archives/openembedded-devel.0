@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GNbyC-0003w8-3A for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Sep 2006 23:08:32 +0200
+	id 1GNc4S-000402-RH for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Sep 2006 23:15:01 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 7DC90401B48; Wed, 13 Sep 2006 13:42:47 -0700 (PDT)
+	id 278B1401B48; Wed, 13 Sep 2006 13:49:16 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060913204247.7DC90401B48@tinman.treke.net>
-Date: Wed, 13 Sep 2006 13:42:47 -0700 (PDT)
-Subject: [Bug 1407] socat-1.3.2.1 xioinitialize failed
+Message-Id: <20060913204916.278B1401B48@tinman.treke.net>
+Date: Wed, 13 Sep 2006 13:49:16 -0700 (PDT)
+Subject: [Bug 1408] New package to create tor
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,9 +25,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2006 21:08:32 -0000
+X-List-Received-Date: Wed, 13 Sep 2006 21:15:01 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1407
+http://bugs.openembedded.org/show_bug.cgi?id=1408
 
 
 koen@dominion.kabel.utwente.nl changed:
@@ -40,7 +40,7 @@ koen@dominion.kabel.utwente.nl changed:
 
 
 
-------- Comment #5 from koen@dominion.kabel.utwente.nl  2006-09-13 13:42 -------
+------- Comment #2 from koen@dominion.kabel.utwente.nl  2006-09-13 13:49 -------
 committed, thanks
 
 
