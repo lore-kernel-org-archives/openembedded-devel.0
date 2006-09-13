@@ -1,16 +1,30 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [64.233.162.193] (helo=nz-out-0102.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GNWyz-0003E1-OJ for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Sep 2006 17:49:02 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 65EC0401B49; Wed, 13 Sep 2006 08:23:20 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060913152320.65EC0401B49@tinman.treke.net>
-Date: Wed, 13 Sep 2006 08:23:20 -0700 (PDT)
-Subject: [Bug 1326] libpng doesn't build for x86
+	(envelope-from <papercrane@gmail.com>) id 1GNXHE-0003Q4-W7
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Sep 2006 18:07:53 +0200
+Received: by nz-out-0102.google.com with SMTP id m22so836950nzf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Sep 2006 09:04:19 -0700 (PDT)
+Received: by 10.35.95.1 with SMTP id x1mr13245387pyl;
+	Wed, 13 Sep 2006 09:04:19 -0700 (PDT)
+Received: by 10.35.119.19 with HTTP; Wed, 13 Sep 2006 09:04:19 -0700 (PDT)
+Message-ID: <432beae0609130904y233c2021k540a8a91fff5f3a1@mail.gmail.com>
+Date: Wed, 13 Sep 2006 09:04:19 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <4507EEAA.2030004@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+References: <74d0deb30609122310t64dc8b51wecfa7749806be097@mail.gmail.com>
+	<1158139503.5540.10.camel@localhost.localdomain>
+	<74d0deb30609130352p4c1c38cdk5415c04d1e0d3035@mail.gmail.com>
+	<4507E64D.3040105@dominion.kabel.utwente.nl>
+	<74d0deb30609130425qa0394bbl9d5e8374e97793ae@mail.gmail.com>
+	<4507EEAA.2030004@dominion.kabel.utwente.nl>
+Cc: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+Subject: Re: machine-specific udev packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,83 +39,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2006 15:49:02 -0000
+X-List-Received-Date: Wed, 13 Sep 2006 16:07:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1326
+On 9/13/06, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> pHilipp Zabel schreef:
+> > On 9/13/06, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> >> -----BEGIN PGP SIGNED MESSAGE-----
+> >> Hash: SHA1
+> >>
+> >> pHilipp Zabel schreef:
+> >>
+> >>> btw,
+> >>> http://www.openembedded.org/repo/org.openembedded.dev/packages/udev/files/mount.sh
+> >>> returns a 403
+> >> We'd welcome input from apachache/web savvy people on how to get .sh/.py/.php files to
+> >> display as text when accessed from http://www.openembedded.org/repo/ or
+> >> http://www.openembedded.org/filebrowser.
+> >
+> > I'm not -savvy, but perhaps this could work:
+> >
+> > AddType text/plain sh
+> > AddType text/plain py
+> > AddType text/plain php
+> >
+> > in repo/.htaccess
+>
+> That doesn't work :(
+>
 
-
-
-
-
-------- Comment #8 from leoncamel@gmail.com  2006-09-13 08:23 -------
-I build "libxine-fb" failed today. I digg into it and find that, the
-"libpng-config" report the wrong path. Please look at the following message:
-----------------------------------------------------------------------------
- ccache arm-linux-gcc -march=armv5te -mtune=xscale -DHAVE_CONFIG_H -I.
--I/home/leon/oe/test.dev/tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0/src/libxinevdec
--I../..
--I/home/leon/oe/test.dev/tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0
--I../../include
--I/home/leon/oe/test.dev/tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0/include
--I/home/leon/oe/test.dev/tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0/src
--I../../src/xine-engine
--I/home/leon/oe/test.dev/tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0/src/xine-engine
--I/home/leon/oe/test.dev/tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0/src/xine-utils
--I../../src/input
--I/home/leon/oe/test.dev/tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0/src/input
--I/home/leon/oe/test.dev/tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0/lib
--isystem/home/leon/oe/test.dev/tmp/staging/arm-linux/include -O2 -fsigned-char
--ffast-math -march=armv4 -mtune=xscale -fomit-frame-pointer -fthread-jumps
--fregmove -Wall -DNDEBUG -D_REENTRANT -D_FILE_OFFSET_BITS=64 -DXINE_COMPILE
--Wpointer-arith -Wnested-externs -Wcast-align -Wchar-subscripts
--Wmissing-declarations -Wmissing-prototypes
--isystem/home/leon/oe/test.dev/tmp/staging/arm-linux/include
--fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -MT
-bitplane.lo -MD -MP -MF .deps/bitplane.Tpo -c bitplane.c  -fPIC -DPIC -o
-.libs/bitplane.o
-CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/libpng12
-cc1: internal compiler error: Aborted
-Please submit a full bug report,
-with preprocessed source if appropriate.
-See <URL:http://gcc.gnu.org/bugs.html> for instructions.
-make[3]: *** [xineplug_decode_image_la-image.lo] Error 1
-make[3]: *** Waiting for unfinished jobs....
----------------------------------------------------------------------------
-
-And , here is detail information for this bug:
-
----------------------------------------------------------------------------
-leon@build-server:~/oe/test.dev$ vi
-tmp/work/armv5te-linux/libxine-fb-1.0-r1/xine-lib-1.0/configure.ac
-
-   1010 dnl ---------------------------------------------
-   1011 dnl PNG lib.
-   1012 dnl ---------------------------------------------
-   1013
-   1014 AC_PATH_PROG(LIBPNG_CONFIG, libpng-config, no)
-   1015 if test "$LIBPNG_CONFIG" = "no" ; then
-   1016   AC_CHECK_LIB(png, png_create_read_struct,
-   1017                   have_libpng=yes
-   1018                   PNG_LIBS="-lpng",
-   1019   AC_MSG_RESULT([*** All libpng dependent parts will be disabled ***]))
-   1020 else
-   1021   PNG_CFLAGS=`$LIBPNG_CONFIG --cflags`
-   1022   PNG_LIBS=`$LIBPNG_CONFIG --libs`
-   1023   have_libpng="yes"
-   1024   AC_DEFINE(HAVE_LIBPNG,1,[Define this if you have png library])
-   1025 fi
-
-leon@build-server:~/oe/test.dev$ ./tmp/staging/i686-linux/bin/libpng-config
---cflags
--I/usr/include/libpng12
-leon@build-server:~/oe/test.dev$ ./tmp/staging/i686-linux/bin/libpng-config
---I_opts
--I/usr/include/libpng12
-
+Hmmm, works for me. Perhaps you have a rule set elsewhere that is
+disallowing access to potentially dangerous files such as sh and py?
+You should be able to override it for this directory and make them
+text/plain instead.
 
 -- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+Justin Patrin
 
 
