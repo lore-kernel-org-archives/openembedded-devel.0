@@ -1,20 +1,16 @@
-Received: from [64.233.166.180] (helo=py-out-1112.google.com)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <philipp.zabel@gmail.com>) id 1GNO0p-0004H0-Tu
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Sep 2006 08:14:20 +0200
-Received: by py-out-1112.google.com with SMTP id i75so2752465pye
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Sep 2006 23:10:49 -0700 (PDT)
-Received: by 10.35.96.7 with SMTP id y7mr12370221pyl;
-	Tue, 12 Sep 2006 23:10:49 -0700 (PDT)
-Received: by 10.35.96.8 with HTTP; Tue, 12 Sep 2006 23:10:49 -0700 (PDT)
-Message-ID: <74d0deb30609122310t64dc8b51wecfa7749806be097@mail.gmail.com>
-Date: Wed, 13 Sep 2006 08:10:49 +0200
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GNQPn-0000Le-PG for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Sep 2006 10:48:16 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 84A98401B48; Wed, 13 Sep 2006 01:22:34 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: machine-specific udev packages
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060913082234.84A98401B48@tinman.treke.net>
+Date: Wed, 13 Sep 2006 01:22:34 -0700 (PDT)
+Subject: [Bug 1414] New: Working version of ixp_npe microcode generator
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -29,33 +25,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2006 06:14:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 Sep 2006 08:48:16 -0000
 
-Hi,
+http://bugs.openembedded.org/show_bug.cgi?id=1414
 
-I only recently noticed that udev packages are machine specific now
-due to the machine specific mount.blacklist file. It looks like most
-machines blacklist the same devices, namely:
+           Summary: Working version of ixp_npe microcode generator
+           Product: Openembedded
+           Version: unspecified
+          Platform: ARM
+               URL: http://www.zen98237.zen.co.uk/ixp-npe.tgz
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Distributions
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: jonesml@fastmail.to
+         QAContact: tinderbox-oe@gmx.net
 
-/dev/mtdblock*
-/dev/loop*
-/dev/ram*
 
-Only spitz and slugos differ significantly.
-(/dev/hda* on spitz, hd[a-z], sd[a-z] on slugos)
+Can packages/ixp4xx/ixp4xx-npe_0.1.bb be deleted and the files present in the
+tgz archive be placed inside the ixp4xx directory?
 
-I'd like to add /dev/mtdblock to the default mount.blacklist and
-remove the specialization for akita, amsdelta, c7x0, h2200,
-ipaq-pxa270 and tosa.
+The purpose of this package is to extract and package the NPE-B firmware
+allowing it to be loaded by hotplug on boot.
 
-Is there any good way to avoid spitz and slugos specific udev packages
-that are only due mount.blacklist? Maybe this could be part of
-base-files or some other package?
 
-regards
-Philipp
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
