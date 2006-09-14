@@ -1,26 +1,25 @@
-Received: from [213.39.232.198] (helo=moskovskaya.fh-wedel.de)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <di@mail.fh-wedel.de>) id 1GNszj-0003m8-RZ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Sep 2006 17:19:15 +0200
-Received: from di by moskovskaya.fh-wedel.de with local (Exim 4.50)
-	id 1GNswD-0007Bx-Ei for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Sep 2006 17:15:37 +0200
-Date: Thu, 14 Sep 2006 17:15:37 +0200
-From: Martin Dietze <di@fh-wedel.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20060914151537.GA13921@fh-wedel.de>
-References: <20060914130233.GA10260@fh-wedel.de>
-	<1158239761.5399.1.camel@localhost.localdomain>
-Mime-Version: 1.0
-In-Reply-To: <1158239761.5399.1.camel@localhost.localdomain>
-X-PGP-Fingerprint: C98D 598A DA73 DF9F 610D  632E 4468 B911 BF9B 8D95
-X-PGP-Key-ID: 0xBF9B8D95
-User-Agent: Mutt/1.5.9i
-Sender: Martin Dietze <di@mail.fh-wedel.de>
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: di@mail.fh-wedel.de
-Subject: Re: postinst jobs and "exit 1"
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GNtD6-0000C8-MP
+	for openembedded-devel@openembedded.org; Thu, 14 Sep 2006 17:33:04 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k8EFTKw4012129 for <openembedded-devel@openembedded.org>;
+	Thu, 14 Sep 2006 17:29:20 +0200
+Message-ID: <45097550.40702@dominion.kabel.utwente.nl>
+Date: Thu, 14 Sep 2006 17:29:20 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.5 (Macintosh/20060719)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.0.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: uclibc questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -35,31 +34,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2006 15:19:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Sep 2006 15:33:04 -0000
+Content-Type: multipart/mixed; boundary="------------060906060304000807010504"
 
-On Thu, September 14, 2006, Richard Purdie wrote:
+--------------060906060304000807010504
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-> Based on that are there any specific examples giving cause for concern?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The problem was somewhere else. Since there is some checking
-for errors after having performed the offline installation into
-the image's root file system I got an error after an "exit 1"
-in a postinst job. As it turned out the problem was not the
-action performed but the fact that there had been a `set -x'
-before it in the recipe. Took me half a day to find out :)
-Sorry for having bothered you with this.
+Hi,
 
-Cheers,
+For the past week I've been trying to build against uclibc svn, and with a lot of help
+from Adrian and googling I now have a nano ipk in my deploydir. I did need the attached
+patch (which lacks DEPENDS += virtual/kernel), and I'm wondering if that's the right way
+to solve it. Any comments from people that are using uclibc?
 
-Martin
+regards,
 
--- 
--------------- Martin Dietze --------------- / -- 4G Systeme GmbH Hamburg ---
--- martin@the-little-red-haired-girl.org -- / ---- dietze@4g-systems.com ----
-------------- / http://herbert.the-little-red-haired-girl.org / -------------
-=+= 
-Yoda of Borg I am. Assimilated you will be.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
+iD8DBQFFCXVQMkyGM64RGpERAq8CAKCz5KsVzvEMXLUIf5snuD6Erk8pygCffj9y
+lKlngTp9h8xO2ppmJE5f2w0=
+=8N2p
+-----END PGP SIGNATURE-----
+# 
+# old_revision [48ef04347217f482864106eff428115a91d608d0]
+# 
+# patch "packages/uclibc/uclibc_svn.bb"
+#  from [5a7f4512e8db684a2b373962bc1087b490106a06]
+#    to [6b0058e8cb24e58ce64a906da9911d86d52264e7]
+# 
+============================================================
+--- packages/uclibc/uclibc_svn.bb	5a7f4512e8db684a2b373962bc1087b490106a06
++++ packages/uclibc/uclibc_svn.bb	6b0058e8cb24e58ce64a906da9911d86d52264e7
+@@ -9,29 +9,22 @@ PR = "r2"
+ UCLIBC_BASE ?= "0.9.28"
+ PV = "${UCLIBC_BASE}+svn${SRCDATE}"
+ PR = "r2"
++
+ #DEFAULT_PREFERENCE is 0 (empty), releases have a preference of 1 so take
+ # precedence.
+ 
+ require uclibc.inc
+ 
++PROVIDES += "virtual/${TARGET_PREFIX}libc-for-gcc"
++
++#recent versions uclibc require real kernel headers 
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+ FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-cvs', '${FILE_DIRNAME}/uclibc-${UCLIBC_BASE}', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+ 
+-# This is the correct KERNEL_SOURCE location, if the uClibc
+-# fix_includes.sh script is run (see nokernelheader.patch below)
+-# this must be correct.
+-KERNEL_SOURCE = "${CROSS_DIR}/${TARGET_SYS}"
++#as stated above, uclibc needs real kernel-headers
++KERNEL_SOURCE = "${STAGING_KERNEL_DIR}"
+ 
+ SRC_URI += "svn://uclibc.org/trunk;module=uClibc"
+ 
+ S = "${WORKDIR}/uClibc"
+ 
+-#*** PATCHES ***
+-#
+-# The nokernelheadercheck patch removes the check on the include
+-# files in ${KERNEL_SOURCE}, however this check seems to be
+-# functioning correct now so the patch is not included.  It may
+-# be necessary to add this for architectures which do not initially
+-# have a 'good' set of kernel header files in the cross directory.
+-#UCLIBC_PATCHES += "file://nokernelheadercheck.patch;patch=1"
+-#
+-
 
+--------------060906060304000807010504--
