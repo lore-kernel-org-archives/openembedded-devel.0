@@ -1,16 +1,23 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [213.39.232.198] (helo=moskovskaya.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GNpuo-0004q1-UB for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Sep 2006 14:01:59 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id D9DD8401B48; Thu, 14 Sep 2006 04:36:04 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <di@mail.fh-wedel.de>) id 1GNqux-0001g9-Hs
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Sep 2006 15:06:11 +0200
+Received: from di by moskovskaya.fh-wedel.de with local (Exim 4.50)
+	id 1GNqrR-0005Nw-Fe for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Sep 2006 15:02:33 +0200
+Date: Thu, 14 Sep 2006 15:02:33 +0200
+From: Martin Dietze <di@fh-wedel.de>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060914113604.D9DD8401B48@tinman.treke.net>
-Date: Thu, 14 Sep 2006 04:36:04 -0700 (PDT)
-Subject: [Bug 662] hostap-daemon compile fails at driver_madwifi.c
+Message-ID: <20060914130233.GA10260@fh-wedel.de>
+Mime-Version: 1.0
+X-PGP-Fingerprint: C98D 598A DA73 DF9F 610D  632E 4468 B911 BF9B 8D95
+X-PGP-Key-ID: 0xBF9B8D95
+User-Agent: Mutt/1.5.9i
+Sender: Martin Dietze <di@mail.fh-wedel.de>
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: di@mail.fh-wedel.de
+Subject: postinst jobs and "exit 1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,28 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2006 12:01:59 -0000
+X-List-Received-Date: Thu, 14 Sep 2006 13:06:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=662
+Hi,
 
+ lots of packages start their postinst jobs like this:
 
-di@fh-wedel.de changed:
+| test -z "$D" || exit 1
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
-         Resolution|                            |FIXED
+When creating firmware images using recent OE recipes (nylon
+distro and mtx-2 hardware), this seems to cause problems,
+either bitbake complains about "exit 1" in the log file when
+doing the rootfs or lots of postinst jobs are not run after
+installing the image. 
 
+Is the above test deprecated and should be replaced by
+something not exit'ing at all? If yes, who is going to adapt
+all the existing packages still doing this?
 
+Cheers,
 
-
-------- Comment #3 from di@fh-wedel.de  2006-09-14 04:36 -------
-Corrected in revision d54f42654eeb09635541659baf2e2803b3b1de4e
-
+Martin
 
 -- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+-------------- Martin Dietze --------------- / -- 4G Systeme GmbH Hamburg ---
+-- martin@the-little-red-haired-girl.org -- / ---- dietze@4g-systems.com ----
+------------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
+Ed, the greatest WYGIWYG editor of all.
 
 
