@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GNpfk-0004co-CR for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Sep 2006 13:46:24 +0200
+	id 1GNpi2-0004el-An for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Sep 2006 13:48:46 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 7EF1B401B48; Thu, 14 Sep 2006 04:20:30 -0700 (PDT)
+	id 6A96D401B48; Thu, 14 Sep 2006 04:22:52 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060914112030.7EF1B401B48@tinman.treke.net>
-Date: Thu, 14 Sep 2006 04:20:30 -0700 (PDT)
-Subject: [Bug 710] ${KERNEL_OBJECT_SUFFIX} not defined in module_strip.bbclass
+Message-Id: <20060914112252.6A96D401B48@tinman.treke.net>
+Date: Thu, 14 Sep 2006 04:22:52 -0700 (PDT)
+Subject: [Bug 665] prism2-firmware-update: link broken in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,9 +25,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2006 11:46:24 -0000
+X-List-Received-Date: Thu, 14 Sep 2006 11:48:46 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=710
+http://bugs.openembedded.org/show_bug.cgi?id=665
 
 
 di@fh-wedel.de changed:
@@ -40,8 +40,8 @@ di@fh-wedel.de changed:
 
 
 
-------- Comment #1 from di@fh-wedel.de  2006-09-14 04:20 -------
-Seems to have been addressed by now, error no longer occurs.
+------- Comment #2 from di@fh-wedel.de  2006-09-14 04:22 -------
+Fixed by now.
 
 
 -- 
