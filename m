@@ -1,16 +1,32 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [88.198.38.109] (helo=mail.mwagner.info)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GNtfz-0000Sl-Aj for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Sep 2006 18:02:55 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id AB277401B48; Thu, 14 Sep 2006 08:36:58 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <markus@mwagner.info>) id 1GNtkW-0000VH-B1
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Sep 2006 18:07:36 +0200
+Received: from localhost (mwagner.info [127.0.0.1])
+	by mail.mwagner.info (Postfix) with ESMTP id 4CB6FB8EA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Sep 2006 18:03:59 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mwagner.info
+Received: from mail.mwagner.info ([127.0.0.1])
+	by localhost (mail.mwagner.info [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4yhEzH2Di8ax
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Sep 2006 18:03:52 +0200 (CEST)
+Received: from swordfish (dslb-088-064-191-242.pools.arcor-ip.net
+	[88.64.191.242])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.mwagner.info (Postfix) with ESMTP id DEA02B8E2B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Sep 2006 18:03:51 +0200 (CEST)
+From: Markus Wagner <markus@mwagner.info>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060914153658.AB277401B48@tinman.treke.net>
-Date: Thu, 14 Sep 2006 08:36:58 -0700 (PDT)
-Subject: [Bug 1417] New: slugos patch to udhcp startup script causes dhcp server ip starvation
+Date: Thu, 14 Sep 2006 18:03:49 +0200
+User-Agent: KMail/1.9.4
+MIME-Version: 1.0
+Message-Id: <200609141803.49476.markus@mwagner.info>
+Subject: qemu-native / gcc 4.x issue (not selecting 3.x)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,41 +41,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2006 16:02:55 -0000
+X-List-Received-Date: Thu, 14 Sep 2006 16:07:36 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1417
-
-           Summary: slugos patch to udhcp startup script causes dhcp server
-                    ip starvation
-           Product: Openembedded
-           Version: unspecified
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: minor
-          Priority: P2
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: anoah@pfeiffer.edu
-         QAContact: tinderbox-oe@gmx.net
-
-
-slug running openslug HEAD, when first bringing up eth0 interface on dhcp,
-should
-set the ip to 0.0.0.0. this is how the original /etc/udhcpc.d/50default works.
-
-slugos-specific patch changes to just 'up' the interface. this causes interface
-to keep old ip when doing `ifdown eth0; ifup eth0`. dhcp server will ping the
-ip before re-issuing lease, but the slug responds, causing server to issue a
-new lease for a different ip.
-
-net result, if you have a script or use serial to up/down the interface alot,
-your ip keeps changing, and you suck up all the ips in the dhcp range.
-
-
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+VGhvdWdodCB0aGlzIGlzIG1vcmUgYW4gb2UgaXNzdWUsIHRoYW4gYSBmYW1pbGlhciBpc3N1ZTsg
+c29ycnkgZm9yIHRoZSBjcm9zcyAKcG9zdCB0aG91Z2guCgpPbiBXZWRuZXNkYXkgMDUgSnVseSAy
+MDA2IDIyOjUyLCBSZW5lIFdhZ25lciB3cm90ZToKPiBPbiBXZWQsIDIwMDYtMDctMDUgYXQgMTk6
+MzUgKzAyMDAsIENocmlzdGlhbiBIZW56IHdyb3RlOgo+ID4gSSBub3RpY2VkIGEgcHJvYmxlbSB3
+aGVuIGNvbXBpbGluZyBxZW11LW5hdGl2ZS4gVGhlIGNoZWNrIGZvciBnY2MKPiA+IGNvcnJlY3Rs
+eSBmaW5kcyBnY2MtMy4zLCBidXQgYWZ0ZXJ3YXJkcyAke0VYVFJBX09FQ09ORn0gaXMgZW1wdHkg
+d2hlbgo+ID4gY29uZmlndXJlIGlzIHJ1biwgZXZlbnR1YWxseSByZXN1bHRpbmcgaW4gYSBjb21w
+aWxhdGlvbiBlcnJvciBiZWNhdXNlIG15Cj4gPiBkZWZhdWx0IGdjYyBpcyBnY2MtNC4wLgo+Cj4g
+VGhhbmtzIGZvciBzcG90dGluZy4gU2hvdWxkIGJlIGZpeGVkIG5vdy4KClNlZW1zIHRvIG1lLCB0
+aGF0IHRoaXMgdmVyc2lvbiBvZiBxZW11IGlzIChzdGlsbC9hZ2Fpbi9hbHNvKSBoYXZpbmcgdGhp
+cyAKcHJvYmxlbSAtIGJ1dCBDaHJpc3RpYW5zIHNvbHV0aW9uIGRvZXNuJ3Qgd29yayBmb3IgbWUg
+KGFueW1vcmUpLiAoV2FzOiBhZGRpbmcgCkVYVFJBX09FQ09ORj0iIC0tY2M9Z2NjLTMuMyAiIHRv
+IHRoZSAuYmIgZmlsZSkKCkFueSBoaW50cyB3aGF0IHRvIGRvPwoKTXkgZ2VudG9vIGhvc3Qgbm9y
+bWFsbHkgdXNlcyA0LjEueCAoY3VycmVudGx5KS4gQnV0IGlzIHRoaXMgdGhlIGdjYyB2ZXJzaW9u
+IAp1c2VkIGJ5IGJpdGJha2UgdG8gYnVpbGQgZXZlcnl0aGluZz8hIElzbid0IHRoZXJlIGEgc3Bl
+Y2lhbCB2ZXJzaW9uIGZvciBjcm9zcyAKY29tcGlsaW5nPyBEbyBJIGhhdmUgdG8gc2V0dXAgYSAz
+LnkgdmVyc2lvbiBwYXJhbGxlbHkgb24gbXkgaG9zdD8KClRoeCwKoCBNCgpOT1RFOiBtdWx0aXBs
+ZSBwcm92aWRlcnMgYXJlIGF2YWlsYWJsZSAocWVtdS1uYXRpdmUsIHFlbXUtcW9wLW5vZ2Z4LW5h
+dGl2ZSk7Ck5PVEU6IGNvbnNpZGVyIGRlZmluaW5nIFBSRUZFUlJFRF9QUk9WSURFUl9xZW11LW5h
+dGl2ZQpOT1RFOiBwYWNrYWdlIHFlbXUtbmF0aXZlLTAuOC4yK2N2czIwMDYwNzIzOiBzdGFydGVk
+Ck5PVEU6IHBhY2thZ2UgcWVtdS1uYXRpdmUtMC44LjIrY3ZzMjAwNjA3MjMtcjA6IHRhc2sgZG9f
+ZmV0Y2g6IHN0YXJ0ZWQKTk9URTogcGFja2FnZSBxZW11LW5hdGl2ZS0wLjguMitjdnMyMDA2MDcy
+My1yMDogdGFzayBkb19mZXRjaDogY29tcGxldGVkClVwZGF0aW5nIC9vZS90bXAvc3RhbXBzL2k2
+ODYtbGludXgvcWVtdS1uYXRpdmUtMC44LjIrY3ZzMjAwNjA3MjMtcjAuZG9fZmV0Y2gKTk9URTog
+cGFja2FnZSBxZW11LW5hdGl2ZS0wLjguMitjdnMyMDA2MDcyMy1yMDogdGFzayBkb191bnBhY2s6
+IHN0YXJ0ZWQKTk9URTogClVucGFja2luZyAvaG9tZS9tYXJrdXMvc291cmNlcy9xZW11X2N2cy5z
+YXZhbm5haC5ub25nbnUub3JnX18yMDA2MDcyMy50YXIuZ3ogCnRvIC9vZS90bXAvd29yay9pNjg2
+LWxpbnV4L3FlbXUtbmF0aXZlLTAuOC4yK2N2czIwMDYwNzIzLXIwLwpOT1RFOiBwYWNrYWdlIHFl
+bXUtbmF0aXZlLTAuOC4yK2N2czIwMDYwNzIzLXIwOiB0YXNrIGRvX3VucGFjazogY29tcGxldGVk
+ClVwZGF0aW5nIC9vZS90bXAvc3RhbXBzL2k2ODYtbGludXgvcWVtdS1uYXRpdmUtMC44LjIrY3Zz
+MjAwNjA3MjMtcjAuZG9fdW5wYWNrCk5PVEU6IHBhY2thZ2UgcWVtdS1uYXRpdmUtMC44LjIrY3Zz
+MjAwNjA3MjMtcjA6IHRhc2sgZG9fcGF0Y2g6IHN0YXJ0ZWQKTk9URTogQXBwbHlpbmcgcGF0Y2gg
+J2NvbmZpZ3VyZS5wYXRjaCcKTk9URTogQXBwbHlpbmcgcGF0Y2ggJ3BsMTEwX3JnYi1yMC5wYXRj
+aCcKTk9URTogQXBwbHlpbmcgcGF0Y2ggJ2FybV9ucHRsLnBhdGNoJwpOT1RFOiBwYWNrYWdlIHFl
+bXUtbmF0aXZlLTAuOC4yK2N2czIwMDYwNzIzLXIwOiB0YXNrIGRvX3BhdGNoOiBjb21wbGV0ZWQK
+VXBkYXRpbmcgL29lL3RtcC9zdGFtcHMvaTY4Ni1saW51eC9xZW11LW5hdGl2ZS0wLjguMitjdnMy
+MDA2MDcyMy1yMC5kb19wYXRjaApOT1RFOiBwYWNrYWdlIHFlbXUtbmF0aXZlLTAuOC4yK2N2czIw
+MDYwNzIzLXIwOiB0YXNrIGRvX2NvbmZpZ3VyZTogc3RhcnRlZApFUlJPUjogZnVuY3Rpb24gZG9f
+Y29uZmlndXJlIGZhaWxlZApFUlJPUjogbG9nIGRhdGEgZm9sbG93cyAKKC9vZS90bXAvd29yay9p
+Njg2LWxpbnV4L3FlbXUtbmF0aXZlLTAuOC4yK2N2czIwMDYwNzIzLXIwL3RlbXAvbG9nLmRvX2Nv
+bmZpZ3VyZS4yMzMzNSkKfCBOT1RFOiAKUnVubmluZyAvb2UvdG1wL3dvcmsvaTY4Ni1saW51eC9x
+ZW11LW5hdGl2ZS0wLjguMitjdnMyMDA2MDcyMy1yMC9xZW11L2NvbmZpZ3VyZSCgIKAgoCCgIKAg
+oCCgIKAgoCCgIC0tYnVpbGQ9aTY4Ni1saW51eCCgIKAgoCCgIKAgoCCgLS1ob3N0PWk2ODYtbGlu
+dXggoCCgIKAgoCCgIKAgoCAtLXRhcmdldD1pNjg2LWxpbnV4IKAgoCCgIKAgoCCgIKAgoCCgIKAt
+LXByZWZpeD0vb2UvdG1wL3N0YWdpbmcvaTY4Ni1saW51eCCgIKAgoCCgIKAgoCCgLS1leGVjX3By
+ZWZpeD0vb2UvdG1wL3N0YWdpbmcvaTY4Ni1saW51eCCgIKAgoCCgIKAgoCCgIKAtLWJpbmRpcj0v
+b2UvdG1wL3N0YWdpbmcvaTY4Ni1saW51eC9iaW4goCCgIKAgoCCgIKAgoCCgIC0tc2JpbmRpcj0v
+b2UvdG1wL3N0YWdpbmcvaTY4Ni1saW51eC9iaW4goCCgIKAgLS1saWJleGVjZGlyPS9vZS90bXAv
+c3RhZ2luZy9pNjg2LWxpbnV4L2xpYmV4ZWMgoCCgIKAgoCCgIKAgoCCgIKAtLWRhdGFkaXI9L29l
+L3RtcC9zdGFnaW5nL2k2ODYtbGludXgvc2hhcmUgoCCgIKAgoCCgIKAgoC0tc3lzY29uZmRpcj0v
+b2UvdG1wL3N0YWdpbmcvaTY4Ni1saW51eC9ldGMgoCCgIKAgoCCgIKAgoCCgIKAgoCAtLXNoYXJl
+ZHN0YXRlZGlyPS9vZS90bXAvc3RhZ2luZy9pNjg2LWxpbnV4L2NvbSCgIKAgoCCgIKAgoCCgIKAg
+LS1sb2NhbHN0YXRlZGlyPS9vZS90bXAvc3RhZ2luZy9pNjg2LWxpbnV4L3ZhciCgIKAgoCCgIKAg
+oCCgIKAgoC0tbGliZGlyPS9vZS90bXAvc3RhZ2luZy9pNjg2LWxpbnV4L2xpYiCgIKAgoCCgIKAg
+oCCgIKAgLS1pbmNsdWRlZGlyPS9vZS90bXAvc3RhZ2luZy9pNjg2LWxpbnV4L2luY2x1ZGUgoCCg
+IKAgoCCgIKAgoCCgIC0tb2xkaW5jbHVkZWRpcj0vb2UvdG1wL3N0YWdpbmcvaTY4Ni1saW51eC9p
+bmNsdWRlIKAgoCCgIKAgoCCgIKAtLWluZm9kaXI9L29lL3RtcC9zdGFnaW5nL2k2ODYtbGludXgv
+c2hhcmUvaW5mbyCgIKAgoCCgIKAgoCCgIKAgLS1tYW5kaXI9L29lL3RtcC9zdGFnaW5nL2k2ODYt
+bGludXgvc2hhcmUvbWFuIKAgoCCgIKAgoCCgIKAgoCCgIC4uLgp8IEVSUk9SOiAiZ2NjIiBsb29r
+cyBsaWtlIGdjYyA0LngKfCBRRU1VIGlzIGtub3duIHRvIGhhdmUgcHJvYmxlbXMgd2hlbiBjb21w
+aWxlZCB3aXRoIGdjYyA0LngKfCBJdCBpcyByZWNvbW1lbmRlZCB0aGF0IHlvdSB1c2UgZ2NjIDMu
+eCB0byBidWlsZCBRRU1VCnwgVG8gdXNlIHRoaXMgY29tcGlsZXIgYW55d2F5LCBjb25maWd1cmUg
+d2l0aCAtLWRpc2FibGUtZ2NjLWNoZWNrCnwgRkFUQUw6IG9lX3J1bmNvbmYgZmFpbGVkCk5PVEU6
+IFRhc2sgCmZhaWxlZDogL29lL3RtcC93b3JrL2k2ODYtbGludXgvcWVtdS1uYXRpdmUtMC44LjIr
+Y3ZzMjAwNjA3MjMtcjAvdGVtcC9sb2cuZG9fY29uZmlndXJlLjIzMzM1Ck5PVEU6IHBhY2thZ2Ug
+cWVtdS1uYXRpdmUtMC44LjIrY3ZzMjAwNjA3MjMtcjA6IHRhc2sgZG9fY29uZmlndXJlOiBmYWls
+ZWQKRVJST1I6IFRhc2tGYWlsZWQgZXZlbnQgZXhjZXB0aW9uLCBhYm9ydGluZwpOT1RFOiBwYWNr
+YWdlIHFlbXUtbmF0aXZlLTAuOC4yK2N2czIwMDYwNzIzOiBmYWlsZWQK
 
 
