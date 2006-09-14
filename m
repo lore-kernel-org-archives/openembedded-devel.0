@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GNpjZ-0004h1-J4 for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Sep 2006 13:50:21 +0200
+	id 1GNpuo-0004q1-UB for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Sep 2006 14:01:59 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id AB567401B48; Thu, 14 Sep 2006 04:24:27 -0700 (PDT)
+	id D9DD8401B48; Thu, 14 Sep 2006 04:36:04 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060914112427.AB567401B48@tinman.treke.net>
-Date: Thu, 14 Sep 2006 04:24:27 -0700 (PDT)
-Subject: [Bug 661] busybox: do_install fails on nylon (and may on others)
+Message-Id: <20060914113604.D9DD8401B48@tinman.treke.net>
+Date: Thu, 14 Sep 2006 04:36:04 -0700 (PDT)
+Subject: [Bug 662] hostap-daemon compile fails at driver_madwifi.c
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,9 +25,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2006 11:50:21 -0000
+X-List-Received-Date: Thu, 14 Sep 2006 12:01:59 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=661
+http://bugs.openembedded.org/show_bug.cgi?id=662
 
 
 di@fh-wedel.de changed:
@@ -40,8 +40,8 @@ di@fh-wedel.de changed:
 
 
 
-------- Comment #3 from di@fh-wedel.de  2006-09-14 04:24 -------
-Fixed by revision 1549b22844f4db1482928817575ec0c4731417ee.
+------- Comment #3 from di@fh-wedel.de  2006-09-14 04:36 -------
+Corrected in revision d54f42654eeb09635541659baf2e2803b3b1de4e
 
 
 -- 
