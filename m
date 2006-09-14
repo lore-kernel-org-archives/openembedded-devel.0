@@ -1,27 +1,25 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [213.39.232.198] (helo=moskovskaya.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GNrvq-0006v1-8j
-	for openembedded-devel@openembedded.org; Thu, 14 Sep 2006 16:11:10 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k8EE7Uw4029155 for <openembedded-devel@openembedded.org>;
-	Thu, 14 Sep 2006 16:07:30 +0200
-Message-ID: <45096222.1060907@dominion.kabel.utwente.nl>
-Date: Thu, 14 Sep 2006 16:07:30 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.5 (Macintosh/20060719)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
+	(envelope-from <di@mail.fh-wedel.de>) id 1GNszj-0003m8-RZ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Sep 2006 17:19:15 +0200
+Received: from di by moskovskaya.fh-wedel.de with local (Exim 4.50)
+	id 1GNswD-0007Bx-Ei for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Sep 2006 17:15:37 +0200
+Date: Thu, 14 Sep 2006 17:15:37 +0200
+From: Martin Dietze <di@fh-wedel.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20060914151537.GA13921@fh-wedel.de>
 References: <20060914130233.GA10260@fh-wedel.de>
 	<1158239761.5399.1.camel@localhost.localdomain>
+Mime-Version: 1.0
 In-Reply-To: <1158239761.5399.1.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.0.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+X-PGP-Fingerprint: C98D 598A DA73 DF9F 610D  632E 4468 B911 BF9B 8D95
+X-PGP-Key-ID: 0xBF9B8D95
+User-Agent: Mutt/1.5.9i
+Sender: Martin Dietze <di@mail.fh-wedel.de>
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: di@mail.fh-wedel.de
 Subject: Re: postinst jobs and "exit 1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
@@ -37,48 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2006 14:11:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Sep 2006 15:19:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, September 14, 2006, Richard Purdie wrote:
 
-Richard Purdie schreef:
-> On Thu, 2006-09-14 at 15:02 +0200, Martin Dietze wrote:
->>  lots of packages start their postinst jobs like this:
->>
->> | test -z "$D" || exit 1
->>
->> When creating firmware images using recent OE recipes (nylon
->> distro and mtx-2 hardware), this seems to cause problems,
->> either bitbake complains about "exit 1" in the log file when
->> doing the rootfs or lots of postinst jobs are not run after
->> installing the image. 
->>
->> Is the above test deprecated and should be replaced by
->> something not exit'ing at all? If yes, who is going to adapt
->> all the existing packages still doing this?
-> 
-> Packages do this if the postinst should run on the device and should not
-> be during do_rootfs. If the postinst can be safely run during postinst,
-> you wouldn't have a line like this.
+> Based on that are there any specific examples giving cause for concern?
 
-isn't the 'if x$D == x' test preferred over the above test?[1]
+The problem was somewhere else. Since there is some checking
+for errors after having performed the offline installation into
+the image's root file system I got an error after an "exit 1"
+in a postinst job. As it turned out the problem was not the
+action performed but the fact that there had been a `set -x'
+before it in the recipe. Took me half a day to find out :)
+Sorry for having bothered you with this.
 
-regards,
+Cheers,
 
-Koen
+Martin
 
-
-[1] I really don't know
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFCWIiMkyGM64RGpERAq1mAJ0TI7T1qOlBi9tb7A8oPc6dmLwGdACffKeU
-cPxJYtR3N37AylFrzjSniUA=
-=N/7O
------END PGP SIGNATURE-----
+-- 
+-------------- Martin Dietze --------------- / -- 4G Systeme GmbH Hamburg ---
+-- martin@the-little-red-haired-girl.org -- / ---- dietze@4g-systems.com ----
+------------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
+Yoda of Borg I am. Assimilated you will be.
 
 
