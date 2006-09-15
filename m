@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GO9iK-0004JS-Ab for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Sep 2006 11:10:26 +0200
+	id 1GO9iR-0004JY-MU for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Sep 2006 11:10:32 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id B08CF401B48; Fri, 15 Sep 2006 01:44:12 -0700 (PDT)
+	id 1D6D3401B48; Fri, 15 Sep 2006 01:44:24 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060915084412.B08CF401B48@tinman.treke.net>
-Date: Fri, 15 Sep 2006 01:44:12 -0700 (PDT)
-Subject: [Bug 1412] libx11: missing flag to make command for native makekeys
+Message-Id: <20060915084424.1D6D3401B48@tinman.treke.net>
+Date: Fri, 15 Sep 2006 01:44:24 -0700 (PDT)
+Subject: [Bug 1411] build of libx11 should fail if native build of makekeys fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,9 +25,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Sep 2006 09:10:29 -0000
+X-List-Received-Date: Fri, 15 Sep 2006 09:10:33 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1412
+http://bugs.openembedded.org/show_bug.cgi?id=1411
 
 
 di@fh-wedel.de changed:
