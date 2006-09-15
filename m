@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GNyTs-0001GC-P6 for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Sep 2006 23:10:45 +0200
+	id 1GO9iK-0004JS-Ab for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Sep 2006 11:10:26 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id B9D13401B48; Thu, 14 Sep 2006 13:44:40 -0700 (PDT)
+	id B08CF401B48; Fri, 15 Sep 2006 01:44:12 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060914204440.B9D13401B48@tinman.treke.net>
-Date: Thu, 14 Sep 2006 13:44:40 -0700 (PDT)
-Subject: [Bug 1416] Slugos udevsynth does not work during boot
+Message-Id: <20060915084412.B08CF401B48@tinman.treke.net>
+Date: Fri, 15 Sep 2006 01:44:12 -0700 (PDT)
+Subject: [Bug 1412] libx11: missing flag to make command for native makekeys
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,26 +25,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2006 21:10:45 -0000
+X-List-Received-Date: Fri, 15 Sep 2006 09:10:29 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1416
-
-
+http://bugs.openembedded.org/show_bug.cgi?id=1412
 
 
+di@fh-wedel.de changed:
 
-------- Comment #1 from anoah@pfeiffer.edu  2006-09-14 13:44 -------
-the mount script _does_ seem to work, but any udev script that attempts to
-modify files on the rootfs fails, because rootfs is mounted read-only at the
-time udevsynthesize is run.
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|                            |FIXED
 
-i think running udevsynth AFTER rootfs is remounted rw might be a better
-solution,
-but i bet that wont work for setups where rootfs is pivoted to external drive,
-and the external drive must be discovered via udev.
 
-perhaps run udevsynth twice? that is what i am doing now, just after syslog
-starts. i can grab the udev output, and see that it works.
+
+
+------- Comment #2 from di@fh-wedel.de  2006-09-15 01:44 -------
+Fixed by 5734e6f735b9a9b347d13c6e31473aed54ec52f6.
 
 
 -- 
