@@ -1,16 +1,22 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [64.233.166.180] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GOFJa-00015f-QO for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Sep 2006 17:09:15 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 79F7E401B49; Fri, 15 Sep 2006 07:43:03 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <papercrane@gmail.com>) id 1GORnh-0005VD-SR
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Sep 2006 06:29:10 +0200
+Received: by py-out-1112.google.com with SMTP id i75so4031556pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Sep 2006 21:25:22 -0700 (PDT)
+Received: by 10.35.18.3 with SMTP id v3mr18729729pyi;
+	Fri, 15 Sep 2006 21:25:22 -0700 (PDT)
+Received: by 10.35.119.19 with HTTP; Fri, 15 Sep 2006 21:25:22 -0700 (PDT)
+Message-ID: <432beae0609152125r35136b2fv408e710704a8a4c8@mail.gmail.com>
+Date: Fri, 15 Sep 2006 21:25:22 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060915144303.79F7E401B49@tinman.treke.net>
-Date: Fri, 15 Sep 2006 07:43:03 -0700 (PDT)
-Subject: [Bug 1418] checkroot.sh and /proc/mounts issue
+In-Reply-To: <E1GMhrf-0002WF-E9@linuxtogo.org>
+MIME-Version: 1.0
+References: <E1GMhrf-0002WF-E9@linuxtogo.org>
+Subject: Re: [oe-commits] org.oe.dev uclibc.inc: allow EABI uclibc builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,62 +31,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Sep 2006 15:09:15 -0000
+X-List-Received-Date: Sat, 16 Sep 2006 04:29:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1418
+On 9/11/06, koen commit <openembedded-commits@lists.openembedded.org> wrote:
+> uclibc.inc: allow EABI uclibc builds
+>
+> Author: koen@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: ff6f66dceec5bbb396856d2556a977d4b646133e
+> ViewMTN: http://monotone.openembedded.org/revision.psp?id=ff6f66dceec5bbb396856d2556a977d4b646133e
+> Files:
+> 1
+> packages/uclibc/uclibc.inc
+> Diffs:
+>
+> #
+> # mt diff -r249c870178059ac049fdc94d1fcde51bef64c82f -rff6f66dceec5bbb396856d2556a977d4b646133e
+> #
+> #
+> #
+> # patch "packages/uclibc/uclibc.inc"
+> #  from [d3b4db2b20b54cff2f4ae3c48eaf7aa4efc444fc]
+> #    to [1a72fe185fb5b708ab4ff019b342ac4da284ece5]
+> #
+> ============================================================
+> --- packages/uclibc/uclibc.inc  d3b4db2b20b54cff2f4ae3c48eaf7aa4efc444fc
+> +++ packages/uclibc/uclibc.inc  1a72fe185fb5b708ab4ff019b342ac4da284ece5
+> @@ -14,7 +14,7 @@ python __anonymous () {
+>
+>  python __anonymous () {
+>      import bb, re
+> -    uc_os = (re.match('.*uclibc$', bb.data.getVar('TARGET_OS', d, 1)) != None)
+> +    uc_os = (re.match('.*uclibc*', bb.data.getVar('TARGET_OS', d, 1)) != None)
 
-
-
-
-
-------- Comment #1 from shanevolpe@gmail.com  2006-09-15 07:43 -------
-"checkroot.sh right before it is finished checks the privs. of rootfs in
-/proc/modules."
-
-This is a typo:  It should be:
-"checkroot.sh right before it is finished checks the privs. of rootfs in
-/proc/mounts" 
-
-Sorry for the confusion.
-Regards,
-Shane
-
-> checkroot.sh right before it is finished checks the privs. of rootfs in
-> /proc/modules.  If the rootfs is rw then checkroot.sh exits otherwise it
-> remounts it as rw.
-> When my system enters this script this is what /proc/mounts looks like:
->     rootfs / rootfs rw 0 0
->     /dev/root / jffs2 ro 0 0 
->     proc /proc proc rw 0 0
-> checkroot.sh does its check and sees rootfs is rw so it exists with out
-> mounting  "/" as rw.  However /dev/root is the real "/" and it is mounted as ro
-> so it does need to be remounted as rw or the system comes up with the root file
-> system in ro mode.
-> 
-> I modified checkroot.sh as follows:
-> Line: 153
-> --       if [ $(grep rootfs /proc/mounts | awk '{print $4}') = rw ]; then
-> ++       if [ $(grep "/dev/root" /proc/mounts | awk '{print $4}') = rw ]; then
->          exit 0
->        fi
->        echo "Remounting root file system..."
->        mount -n -o remount,$rootmode /
-> 
-> I do not believe this is the best long term solution but it is a temporary one
-> for me that works. I would like to hear other people's options on this matter. 
-> 
-> Why are there two entries in the /proc/mounts for "/"?  
-> I verified they are present the minute sysinit calls the first run level
-> script.
-> 
-> Regards,
-> Shane
-> 
-
+"c*" seems a bit strange here....should it be "c.*" or am I
+mis-reading this regex dialect?
 
 -- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+Justin Patrin
 
 
