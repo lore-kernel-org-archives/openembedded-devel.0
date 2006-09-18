@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GPJDh-0000Oy-Vt for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Sep 2006 15:31:34 +0200
+	id 1GPPLt-0006SN-IL for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Sep 2006 22:04:25 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 6A2BB401B45; Mon, 18 Sep 2006 06:04:37 -0700 (PDT)
+	id D1FED401B45; Mon, 18 Sep 2006 12:37:20 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060918130437.6A2BB401B45@tinman.treke.net>
-Date: Mon, 18 Sep 2006 06:04:37 -0700 (PDT)
-Subject: [Bug 1404] Compilation of libxml-parser-perl-native fails
+Message-Id: <20060918193720.D1FED401B45@tinman.treke.net>
+Date: Mon, 18 Sep 2006 12:37:20 -0700 (PDT)
+Subject: [Bug 1422] New: Sudo (sudo-1.6.8p12) fails oe_runconf (configure)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,23 +25,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Sep 2006 13:31:34 -0000
+X-List-Received-Date: Mon, 18 Sep 2006 20:04:26 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1404
+http://bugs.openembedded.org/show_bug.cgi?id=1422
+
+           Summary: Sudo (sudo-1.6.8p12) fails oe_runconf (configure)
+           Product: Openembedded
+           Version: unspecified
+          Platform: ARM
+        OS/Version: All
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Build
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: joshin@hotmail.com
+         QAContact: tinderbox-oe@gmx.net
 
 
-bugs.openembedded.org@rolf.leggewie.biz changed:
+When building sudo-1.6.8p12 I get the following error:
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
-         Resolution|                            |FIXED
+checking for long long support...
+/home/josh/slug/openslug/tmp/work/sudo-1.6.8p12-r0/sudo-1.6.8p12/configure:
+line 26554: syntax error near unexpected token `newline'
+/home/josh/slug/openslug/tmp/work/sudo-1.6.8p12-r0/sudo-1.6.8p12/configure:
+line 26554: `?*'
+FATAL: oe_runconf failed
 
 
-
-
-------- Comment #1 from bugs.openembedded.org@rolf.leggewie.biz  2006-09-18 06:04 -------
-Seems to have been fixed in the meantime.
+This happens for builds of openzaurus on a 64-bit Amd64 Gentoo system as well
+for builds of openslug on a 32-bit P3 Gentoo system.  Koen is having the same
+error.
 
 
 -- 
