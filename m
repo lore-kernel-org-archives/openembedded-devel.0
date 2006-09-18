@@ -1,19 +1,21 @@
-Received: from [84.12.140.56] (helo=moneypenny.softoption.local)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <Mark.Howells@softoption.com>) id 1GOtD3-00071e-TL
+	(envelope-from <leoncamel@gmail.com>) id 1GPDPh-000656-Em
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Sep 2006 11:45:09 +0200
+	Mon, 18 Sep 2006 09:19:33 +0200
+Received: by nf-out-0910.google.com with SMTP id l23so3000519nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Sep 2006 00:15:33 -0700 (PDT)
+Received: by 10.48.210.20 with SMTP id i20mr16567653nfg;
+	Mon, 18 Sep 2006 00:15:33 -0700 (PDT)
+Received: by 10.48.215.2 with HTTP; Mon, 18 Sep 2006 00:15:31 -0700 (PDT)
+Message-ID: <ad39a30f0609180015wc6ba838vff48fef6d7d41f7d@mail.gmail.com>
+Date: Mon, 18 Sep 2006 15:15:31 +0800
+From: "Leon Zhang" <leoncamel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Sun, 17 Sep 2006 10:38:35 +0100
-Message-ID: <5144EF5B0ABC6745BEE64C74E43ABD8F11A202@moneypenny.softoption.local>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Heavy packet loss using Slugos head
-Thread-Index: AcbaPQw0JrzHbfzsQfKbDsGpb/sfWg==
-From: "Mark Howells" <Mark.Howells@softoption.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Heavy packet loss using Slugos head
+X-Content-Filtered-By: Mailman/MimeDel 2.1.8
+Subject: opie-freetype issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -28,52 +30,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Sep 2006 09:45:10 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="windows-1250"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 18 Sep 2006 07:19:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
-=20
-I think my slug is dropping packets. I have been having lots of problems =
-with NFS (slow performance, crashing). Messing with rsize,wsize settings =
-for the mount seemed to point to larger packets being less =
-reliable/slower. Flooging the slug (from a desktop Gentoo client) with a =
-couple of ping statements gives the following
-=20
-zeus ~ # ping -f -s 1400 192.168.0.5
-PING 192.168.0.5 (192.168.0.5) 1400(1428) bytes of data.
-....................................
---- 192.168.0.5 ping statistics ---
-2327 packets transmitted, 2291 received, 1% packet loss, time 2543ms
-rtt min/avg/max/mdev =3D 0.644/0.792/1.173/0.089 ms, ipg/ewma =
-1.093/0.739 ms
+Dear all.
 
-zeus ~ # ping -f -s 50000 192.168.0.5
-PING 192.168.0.5 (192.168.0.5) 50000(50028) bytes of data.
-.........................................................................=
-.............
---- 192.168.0.5 ping statistics ---
-204 packets transmitted, 118 received, 42% packet loss, time 2386ms
-rtt min/avg/max/mdev =3D 10.863/11.218/11.643/0.167 ms, pipe 2, ipg/ewma =
-11.755/11.282 ms
+      hey, I am trying to fix the bug about opie-freetype. I found that the
+current package can't install anything into "tmp/work/armv5te-linux/opie-
+freetype-1.2.2-r0/install/". So, I write a patch which add "do_install"
+function to install something into the directory. Here is the patch,
 
-Notice that the larger packet size is has a huge loss. Flooding another =
-PC from the same client gives zero percent loss - so it looks like the =
-slug is responsible for the loss. I'd appreciate a steer in the right =
-direction to track this down as network analysis isn't my area of =
-expertise.
+============================================================
+--- packages/opie-freetype/opie-freetype.inc
+a267aa16819e3160b8aca21e71fbf96494a2af34
++++ packages/opie-freetype/opie-freetype.inc
+13950b3a59934d606aa73d29d0cd21b9e03137f5
+@@ -11,4 +11,11 @@ inherit opie
 
-Thanks
+ inherit opie
 
-Mark
++
++do_install () {
++       install -d ${D}${palmtopdir}/bin/
++       install -d ${D}${palmtopdir}/lib/
++       oe_libinstall -so libfreetypefactory ${D}${palmtopdir}/lib
++}
++
+ EXTRA_QMAKEVARS_POST += "INCLUDEPATH+=${STAGING_INCDIR}/freetype2"
 
---=20
-No virus found in this outgoing message.
-Checked by AVG Anti-Virus.
-Version: 7.1.406 / Virus Database: 268.12.4/449 - Release Date: =
-15/09/2006
-=20
+------------------------------------------------------------------------
 
+and then, i tried to rebuild the *opie-freetype*.:
+
+------------------------------------------------------------------------
+leon@build-server:~/oe/test.dev$ bitbake opie-freetype -c rebuild
+NOTE: Using cache in '/home/leon/oe/test.dev/tmp/cache'
+NOTE: Handling BitBake files: / (3987/3987) [100 %]
+NOTE: Parsing finished. 3847 cached, 0 parsed, 140 skipped, 0 masked.
+
+NOTE: build 200609181513: started
+
+OE Build Configuration:
+BB_VERSION     = "1.6.1"
+OE_REVISION    = "ddfe4434adf5911bc0607ac50123d539b22ff997"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "paraphone-xscale"
+DISTRO         = "paraphone-gen"
+DISTRO_VERSION = ".dev-snapshot-20060918"
+TARGET_FPU     = "soft"
+
+NOTE: package opie-freetype-1.2.2: started
+NOTE: package opie-freetype-1.2.2-r0: task do_rebuild: started
+NOTE: package opie-freetype-1.2.2-r0: task do_clean: started
+NOTE: removing /home/leon/oe/test.dev/tmp/work/armv5te-linux/opie-
+freetype-1.2.2-r0
+NOTE: removing /home/leon/oe/test.dev/tmp/stamps/armv5te-linux/opie-
+freetype-1.2.2-r0.*
+NOTE: package opie-freetype-1.2.2-r0: task do_clean: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_fetch: started
+NOTE: package opie-freetype-1.2.2-r0: task do_fetch: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_unpack: started
+NOTE: Unpacking
+/home/leon/sources/opie.freetype_anoncvs.handhelds.org_v1_2_2_.tar.gz to
+/home/leon/oe/test.dev/tmp/work/armv5te-linux/opie-freetype-1.2.2-r0/
+NOTE: package opie-freetype-1.2.2-r0: task do_unpack: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_patch: started
+NOTE: package opie-freetype-1.2.2-r0: task do_patch: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_configure: started
+NOTE: package opie-freetype-1.2.2-r0: task do_configure: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_compile: started
+NOTE: package opie-freetype-1.2.2-r0: task do_compile: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_install: started
+NOTE: package opie-freetype-1.2.2-r0: task do_install: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_package: started
+NOTE: Not creating empty archive for opie-freetype-dbg-1.2.2-r0
+Packaged contents of opie-freetype into
+/home/leon/oe/test.dev/tmp/deploy/ipk/libfreetypefactory1_1.2.2-r0_armv5te.ipk
+NOTE: Not creating empty archive for opie-freetype-doc-1.2.2-r0
+NOTE: Not creating empty archive for opie-freetype-dev-1.2.2-r0
+NOTE: Not creating empty archive for opie-freetype-locale-1.2.2-r0
+NOTE: Not creating empty archive for opie-freetype-dbg-1.2.2-r0
+./
+./opt/
+./opt/QtPalmtop/
+./opt/QtPalmtop/bin/
+./opt/QtPalmtop/lib/
+./opt/QtPalmtop/lib/libfreetypefactory.so
+./opt/QtPalmtop/lib/libfreetypefactory.so.1
+./opt/QtPalmtop/lib/libfreetypefactory.so.1.0
+./opt/QtPalmtop/lib/libfreetypefactory.so.1.0.1
+./opt/QtPalmtop/lib/.debug/
+./opt/QtPalmtop/lib/.debug/libfreetypefactory.so.1.0.1
+NOTE: Not creating empty archive for opie-freetype-doc-1.2.2-r0
+NOTE: Not creating empty archive for opie-freetype-dev-1.2.2-r0
+NOTE: Not creating empty archive for opie-freetype-locale-1.2.2-r0
+NOTE: package opie-freetype-1.2.2-r0: task do_package: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_opie_install: started
+NOTE: Section='Fontfactories', bindir='/plugins/fontfactories',
+desktopdir='None', name='freetypefactory', type='plugin'
+NOTE: package opie-freetype-1.2.2-r0: task do_opie_install: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_populate_staging: started
+NOTE: package opie-freetype-1.2.2-r0: task do_populate_staging: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_build: started
+NOTE: package opie-freetype-1.2.2-r0: task do_build: completed
+NOTE: package opie-freetype-1.2.2-r0: task do_rebuild: completed
+NOTE: package opie-freetype-1.2.2: completed
+NOTE: build 200609181513: completed
+Build statistics:
+  Attempted builds: 1
+leon@build-server:~/oe/test.dev$
+
+
+Hmm, I don't know why, it pakcaged contents into *libfreetypefactory*
+instead of *opie-freetype*. So, why ?
 
