@@ -1,22 +1,16 @@
-Received: from [64.233.166.183] (helo=py-out-1112.google.com)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <philipp.zabel@gmail.com>) id 1GQ234-0005yn-6X
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Sep 2006 15:23:34 +0200
-Received: by py-out-1112.google.com with SMTP id i75so300215pye
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2006 06:19:20 -0700 (PDT)
-Received: by 10.35.72.6 with SMTP id z6mr28497642pyk;
-	Wed, 20 Sep 2006 06:19:20 -0700 (PDT)
-Received: by 10.35.96.4 with HTTP; Wed, 20 Sep 2006 06:19:20 -0700 (PDT)
-Message-ID: <74d0deb30609200619qa5e4972oa6642a4a4d73ea07@mail.gmail.com>
-Date: Wed, 20 Sep 2006 15:19:20 +0200
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GQ5u4-0001j0-D1 for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Sep 2006 19:30:32 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 91E2E401B45; Wed, 20 Sep 2006 10:02:58 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1GPih1-0005v2-VO@linuxtogo.org>
-MIME-Version: 1.0
-References: <E1GPih1-0005v2-VO@linuxtogo.org>
-Subject: Re: [oe-commits] org.oe.dev xserver-kdrive git supply EXTRA_OECONF_x86 since w100 xserver doesn't build for x86
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20060920170258.91E2E401B45@tinman.treke.net>
+Date: Wed, 20 Sep 2006 10:02:58 -0700 (PDT)
+Subject: [Bug 1428] New: gpe-plucker 0.2 forces gcc-3.4.4 cc1 fatal error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -31,88 +25,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Sep 2006 13:23:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Sep 2006 17:30:32 -0000
 
-On 9/19/06, mickeyl commit <openembedded-commits@lists.openembedded.org> wrote:
-> xserver-kdrive git supply EXTRA_OECONF_x86 since w100 xserver doesn't build for x86
->
-> Author: mickeyl@openembedded.org
-> Branch: org.openembedded.dev
-> Revision: f0737756bbfbfe54e5b782f6775b364ed83b8412
-> ViewMTN: http://monotone.openembedded.org/revision.psp?id=f0737756bbfbfe54e5b782f6775b364ed83b8412
-> Files:
-> 1
-> packages/xorg-xserver/xserver-kdrive_git.bb
-> Diffs:
->
-> #
-> # mt diff -ra682c5391a248c9727d17094fe5a8ea2e9236051 -rf0737756bbfbfe54e5b782f6775b364ed83b8412
-> #
-> #
-> #
-> # patch "packages/xorg-xserver/xserver-kdrive_git.bb"
-> #  from [0086c9b6ad103fdd1c2291786635535bcd106081]
-> #    to [4b79c674eaa33054940dce02a7d3bbd9f8e6bf22]
-> #
-> ============================================================
-> --- packages/xorg-xserver/xserver-kdrive_git.bb 0086c9b6ad103fdd1c2291786635535bcd106081
-> +++ packages/xorg-xserver/xserver-kdrive_git.bb 4b79c674eaa33054940dce02a7d3bbd9f8e6bf22
-> @@ -1,7 +1,7 @@ DEFAULT_PREFERENCE = "-2"
->  PV = "1.1.0+git${SRCDATE}"
->  DEFAULT_PREFERENCE = "-2"
->
-> -PR = "r5"
-> +PR = "r6"
->
->  LICENSE = "MIT"
->  DEPENDS = "tslib virtual/libsdl libxkbfile xproto libxdmcp xextproto xtrans libxau virtual/libx11 libxext libxrandr fixesproto damageproto libxfont resourceproto compositeproto libxcalibrate recordproto videoproto scrnsaverproto"
-> @@ -56,7 +56,7 @@ inherit autotools pkgconfig
->
->  inherit autotools pkgconfig
->
-> -EXTRA_OECONF = "--enable-composite --enable-kdrive \
-> +EXTRA_OECONF = "--enable-composite --enable-sdl --enable-kdrive \
->                 --disable-dga --disable-dri --disable-xinerama \
->                 --disable-xf86misc --disable-xf86vidmode \
->                 --disable-xorg --disable-xorgcfg \
-> @@ -67,3 +67,14 @@ EXTRA_OECONF = "--enable-composite --ena
->                 --enable-tslib --enable-xcalibrate \
->                 ac_cv_file__usr_share_X11_sgml_defs_ent=no"
->
-> +# w100 doesn't build for x86
-> +EXTRA_OECONF_x86 = "--enable-composite --enable-sdl --enable-kdrive \
-> +                --disable-dga --disable-dri --disable-xinerama \
-> +                --disable-xf86misc --disable-xf86vidmode \
-> +                --disable-xorg --disable-xorgcfg \
-> +                --disable-xkb --disable-xnest --disable-xvfb \
-> +                --disable-xevie --disable-xprint --disable-xtrap \
-> +                --disable-dmx --disable-w100 \
-> +                --with-default-font-path=built-ins \
-> +                --enable-tslib --enable-xcalibrate \
-> +                ac_cv_file__usr_share_X11_sgml_defs_ent=no"
+http://bugs.openembedded.org/show_bug.cgi?id=1428
 
-Hmm, couldn't this be done with _append?
+           Summary: gpe-plucker 0.2 forces gcc-3.4.4 cc1 fatal error
+           Product: Openembedded
+           Version: unspecified
+          Platform: ARM
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Build
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: tom@openhardware.net
+         QAContact: tinderbox-oe@gmx.net
 
-EXTRA_OECONF = "--enable-composite --enable-sdl --enable-kdrive \
-                --disable-dga --disable-dri --disable-xinerama \
-                --disable-xf86misc --disable-xf86vidmode \
-                --disable-xorg --disable-xorgcfg \
-                --disable-xkb --disable-xnest --disable-xvfb \
-                --disable-xevie --disable-xprint --disable-xtrap \
-                --disable-dmx \
-                --with-default-font-path=built-ins \
-                --enable-tslib --enable-xcalibrate \
-                ac_cv_file__usr_share_X11_sgml_defs_ent=no"
 
-# EXTRA_OECONF_append_x86 = " --disable-w100" (isn't w100 disabled by default?)
-EXTRA_OECONF_append_arm = " --enable-w100"
+Compile of gpe-plucker v0.2 crashes gcc-3.4.4 with "cc1: internal compiler
+error: Aborted"
 
-Or even apply the w100.patch only on arm?
+gpe-plucker 0.4 builds with no problems.
 
-cheers
-Philipp
+=================== begin ======================
+arm-linux-gcc -march=armv4t -mtune=arm920t -mcpu=arm920t
+-isystem/home/tom/OpenEmbedded/tmp/staging/arm-linux/include
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2
+-isystem/home/tom/OpenEmbedded/tmp/staging/arm-linux/include
+-D_XOPEN_SOURCE=500
+-I/home/tom/OpenEmbedded/tmp/staging/arm-linux/include/gtk-2.0
+-I/home/tom/OpenEmbedded/tmp/staging/arm-linux/lib/gtk-2.0/include
+-I/home/tom/OpenEmbedded/tmp/staging/arm-linux/include
+-I/home/tom/OpenEmbedded/tmp/staging/arm-linux/include/atk-1.0
+-I/home/tom/OpenEmbedded/tmp/staging/arm-linux/include/pango-1.0
+-I/home/tom/OpenEmbedded/tmp/staging/arm-linux/include/freetype2
+-I/home/tom/OpenEmbedded/tmp/staging/arm-linux/include/glib-2.0
+-I/home/tom/OpenEmbedded/tmp/staging/arm-linux/lib/glib-2.0/include  
+-Iunpluck/ -DUSE_GPE -D_GNU_SOURCE -Wall -Os -fomit-frame-pointer
+-I/usr/include/gpe -DPACKAGE=\"gpe-plucker\" -DPREFIX=\"/usr\"
+-DPACKAGE_LOCALE_DIR=\"/usr/share/locale\" -c image.c -o image.o
+CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/gpe
+cc1: internal compiler error: Aborted
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <URL:http://gcc.gnu.org/bugs.html> for instructions.
+make: *** [image.o] Error 1
+FATAL: oe_runmake failed
+====================== snip ======================
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
