@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GPnek-0007Ej-3b for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Sep 2006 00:01:30 +0200
+	id 1GPysU-0002QV-F2 for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Sep 2006 12:00:26 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 19CD8401B45; Tue, 19 Sep 2006 14:34:03 -0700 (PDT)
+	id 65354401B45; Wed, 20 Sep 2006 02:32:57 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060919213403.19CD8401B45@tinman.treke.net>
-Date: Tue, 19 Sep 2006 14:34:03 -0700 (PDT)
-Subject: [Bug 1422] Sudo (sudo-1.6.8p12) fails oe_runconf (configure)
+Message-Id: <20060920093257.65354401B45@tinman.treke.net>
+Date: Wed, 20 Sep 2006 02:32:57 -0700 (PDT)
+Subject: [Bug 1427] New: passwd crashes when changing password
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,20 +25,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2006 22:01:30 -0000
+X-List-Received-Date: Wed, 20 Sep 2006 10:00:26 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1422
+http://bugs.openembedded.org/show_bug.cgi?id=1427
+
+           Summary: passwd crashes when changing password
+           Product: Openembedded
+           Version: OpenZaurus 3.5.4.x
+          Platform: Other
+        OS/Version: All
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Distributions
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: dp@xora.org.uk
+         QAContact: tinderbox-oe@gmx.net
 
 
+Doesnt seem to depend on the password entered.
 
-
-
-------- Comment #2 from joshin@hotmail.com  2006-09-19 14:34 -------
-That patch worked perfectly!  Hope to see it merged soon.
-
-Thanks Jamie!
-
--J
+Running passwd g
+dp@c7x0:~$ passwd
+Changing password for dp
+Old password:
+Enter the new password (minimum of 5, maximum of 8 characters)
+Please use a combination of upper and lower case letters and numbers.
+Enter new password:
+*** glibc detected *** passwd: free(): invalid next size (fast): 0x0001f8f8 ***
+Aborted
 
 
 -- 
