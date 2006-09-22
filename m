@@ -1,16 +1,28 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [203.66.140.6] (helo=mtcmail.mitac-mtc.com.tw)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GQXan-0002GZ-O9 for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Sep 2006 01:04:29 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 76959401B45; Thu, 21 Sep 2006 15:36:41 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <Axel.Lin@mitac-mtc.com.tw>) id 1GQdL4-0000U4-Ef
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Sep 2006 07:12:39 +0200
+Received: from taipei7.mitac-mtc.com.tw ([10.68.90.7])
+	by mtcmail.mitac-mtc.com.tw with ESMTP id k8M588xO072319
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Sep 2006 13:08:08 +0800 (CST)
+	(envelope-from Axel.Lin@mitac-mtc.com.tw)
+Received: by taipei7.mitac-mtc.com.tw with Internet Mail Service (5.5.2657.72)
+	id <SFFWXZYF>; Fri, 22 Sep 2006 13:08:48 +0800
+Message-ID: <45136FA6.6080201@mitac-mtc.com.tw>
+From: "Axel.Lin" <Axel.Lin@mitac-mtc.com.tw>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060921223641.76959401B45@tinman.treke.net>
-Date: Thu, 21 Sep 2006 15:36:41 -0700 (PDT)
-Subject: [Bug 1431] New: Build of ixp4xx-kernel includes non-fatal depmod error
+Date: Fri, 22 Sep 2006 13:07:50 +0800
+MIME-Version: 1.0
+X-Mailer: Internet Mail Service (5.5.2657.72)
+x-originalarrivaltime: 22 Sep 2006 05:08:01.0947 (UTC)
+	FILETIME=[14108EB0:01C6DE05]
+user-agent: Thunderbird 1.5.0.5 (X11/20060728)
+X-MAIL: mtcmail.mitac-mtc.com.tw k8M588xO072319
+X-Mailman-Approved-At: Fri, 22 Sep 2006 11:19:03 +0200
+X-Content-Filtered-By: Mailman/MimeDel 2.1.8
+Subject: which branch/distro for mainstone ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,38 +37,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Sep 2006 23:04:30 -0000
+X-List-Received-Date: Fri, 22 Sep 2006 05:12:39 -0000
+Content-Type: text/plain;
+	charset="BIG5"
 
-http://bugs.openembedded.org/show_bug.cgi?id=1431
+hi,
+I'm trying to use OE on a mainstone develop board.
+I'd like to build gpe-image & opei-image.
+Which branch should I use?
+Which distro should I use?
 
-           Summary: Build of ixp4xx-kernel includes non-fatal depmod error
-           Product: Openembedded
-           Version: unspecified
-          Platform: All
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: jonesml@fastmail.to
-         QAContact: tinderbox-oe@gmx.net
-
-
-Currently building ixp4xx-kernel_2.6.18 in OE HEAD.
-
-I'm getting an error 'armeb-linux-depmod not found' in the kernel build
-process. This seems to stem back to the Kernel bbclass and the fact that the
-depmod executable in my tmp/cross/bin folder is called armeb-linux-depmod-2.6.
-
-Thanks,
-
-blaster8
-
-
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
-
+Regards,
+Axel
 
