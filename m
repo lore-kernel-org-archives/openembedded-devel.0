@@ -1,30 +1,19 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [213.4.149.66] (helo=ctsmtpout1.frontal.correo)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GSA0C-0001yp-D4 for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Sep 2006 12:17:24 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 4BE70C04;
-	Tue, 26 Sep 2006 12:12:37 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 26698-10; Tue, 26 Sep 2006 12:12:33 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id AF924C03;
-	Tue, 26 Sep 2006 12:12:33 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: Joaquim Duran <joaquinduran@adtelecom.es>
-In-Reply-To: <45190895.4020706@adtelecom.es>
-References: <45190895.4020706@adtelecom.es>
-Organization: VanilleMedia
-Date: Tue, 26 Sep 2006 12:12:33 +0200
-Message-Id: <1159265553.18705.56.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: List of dependent packages and RandR protocol.
+	(envelope-from <joaquinduran@adtelecom.es>) id 1GSAAW-0006sH-5G
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Sep 2006 12:28:04 +0200
+Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout1.frontal.correo
+	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
+	id 4517ACDD0002D241 for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Sep 2006 12:26:46 +0200
+Message-ID: <45190D58.2020807@adtelecom.es>
+Date: Tue, 26 Sep 2006 12:22:00 +0100
+From: Joaquim Duran <joaquinduran@adtelecom.es>
+User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Subject: List of dependent packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -39,35 +28,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Sep 2006 10:17:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 26 Sep 2006 10:28:04 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Forwarding this to the correct list... Joaquim, please see the list
-migration news at the website.
+Dear all,
 
-Am Dienstag, den 26.09.2006, 12:01 +0100 schrieb Joaquim Duran:
-> Dear all,
-> 
-> I've two questions about OE:
-> 
-> - Is there any way to know the set of packages to be included in an 
-> image? Or more generally, how can I list the set of packages (with 
-> recursion) that are needed for one specified package?
-> 
-> The option should not generate any package nor image.
-> 
-> - I'm interested to include RandR protocol in X11. How can I do?
-> 
-> 
-> Thanks and Best Regards,
-> Joaquim Duran
+Is there any way to know the set of packages to be included in an
+image? Or more generally, how can I list the set of packages (with
+recursion) that are needed for one specified package?
 
--- 
-Regards,
+This should be done once processed the config file and updated the cache 
+and before the compilation of packages.
 
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
-
+Thanks and Best Regards,
+Joaquim Duran
 
 
 
