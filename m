@@ -1,21 +1,23 @@
 Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GSDR1-0006P8-4V
-	for openembedded-devel@openembedded.org; Tue, 26 Sep 2006 15:57:19 +0200
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GSDTZ-0006Qz-SY
+	for openembedded-devel@openembedded.org; Tue, 26 Sep 2006 15:59:57 +0200
 Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
 	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k8QDqSfd019450 for <openembedded-devel@openembedded.org>;
-	Tue, 26 Sep 2006 15:52:28 +0200
-Message-ID: <4519309D.7050602@dominion.kabel.utwente.nl>
-Date: Tue, 26 Sep 2006 15:52:29 +0200
+	k8QDt7fd020261 for <openembedded-devel@openembedded.org>;
+	Tue, 26 Sep 2006 15:55:07 +0200
+Message-ID: <4519313C.7050409@dominion.kabel.utwente.nl>
+Date: Tue, 26 Sep 2006 15:55:08 +0200
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
 User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
 MIME-Version: 1.0
 To: Using the OpenEmbedded metadata to build Linux Distributions
 	<openembedded-devel@openembedded.org>
-References: <4518B426.6070905@mitac-mtc.com.tw>	<1159265456.18705.53.camel@gandalf.tm.informatik.uni-frankfurt.de>	<4519283E.5010001@dominion.kabel.utwente.nl>
-	<1159277450.5573.67.camel@localhost.localdomain>
-In-Reply-To: <1159277450.5573.67.camel@localhost.localdomain>
+References: <4518B426.6070905@mitac-mtc.com.tw>
+	<1159265456.18705.53.camel@gandalf.tm.informatik.uni-frankfurt.de>
+	<4519283E.5010001@dominion.kabel.utwente.nl>
+	<1784392143.20060926164929@gmail.com>
+In-Reply-To: <1784392143.20060926164929@gmail.com>
 X-Enigmail-Version: 0.94.1.0
 X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
 	helpdesk@ITBE.utwente.nl for more information.
@@ -37,29 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Sep 2006 13:57:19 -0000
+X-List-Received-Date: Tue, 26 Sep 2006 13:59:58 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Richard Purdie schreef:
-> On Tue, 2006-09-26 at 15:16 +0200, Koen Kooi wrote:
-
+Paul Sokolovsky schreef:
+> Hello Koen,
+> 
+> Tuesday, September 26, 2006, 4:16:46 PM, you wrote:
+> 
+> []
+> 
 >> Is anybody still using dbus 0.23.x in .dev? I'd like to move it to packages/obsolete/dbus
 >> to avoid people falling in this trap over and over again. D-bus 1.0 (with a stable API) is
 >>  going to be released soon(TM), so people should really adapt their apps to the 0.9x (and
 >> thus 1.0) API.
 > 
-> I'd vote for removing it. Nobody should be using that now and if they
-> anyone does need it, we have an SCM for a reason...
-> 
-> One of my builds has also fallen down this hole :-(.
+>   Thanks for moving it away, but not removing. I'd still like to work
+> on migration path for Familiar, and 0.8.4 uses 0.23.
 
-I moved it to packages/obsolete and will remove it later. Do we have a policy on how to
-mark stuff obsolete/deprecated? I know the linux people have a file in Documentation that
-mark obsolete stuff and the date it'll go away, do we want a similar thing in OE?
+Florian updated .oz354x recently to dbus 0.9x, so you could extract that patch. AFAICT all
+packages using dbus in .dev are ready for 0.9x, Philipp Zabel and I have been running gpe
+with a recent dbus for some time now.
 
 regards,
 
@@ -67,9 +71,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.1 (Darwin)
 
-iD8DBQFFGTCdMkyGM64RGpERAoyvAKC3CPXvfm5Pn4Qsn1ME//+QdCuobACgja7Q
-T7zsRtAaJewYvFSGPD+gCfI=
-=crsQ
+iD8DBQFFGTE8MkyGM64RGpERAuIqAJ40+FIRsZIIgSGgmnjW4t7ScCvomQCfYcqB
+mOuy6jfA8HMpSgFmQhxL0KQ=
+=/QeU
 -----END PGP SIGNATURE-----
 
 
