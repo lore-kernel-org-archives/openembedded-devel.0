@@ -1,41 +1,30 @@
-Received: from [24.71.223.10] (helo=pd5mo1so.prod.shaw.ca)
+Received: from [64.233.166.180] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <rayl@mail.com>) id 1GSZwR-000656-FU
+	(envelope-from <philipp.zabel@gmail.com>) id 1GScgG-0005Jx-G1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Sep 2006 15:59:15 +0200
-Received: from pd2mr5so.prod.shaw.ca (pd2mr5so-qfe3.prod.shaw.ca [10.0.141.8])
-	by l-daemon (Sun ONE Messaging Server 6.0 HotFix 1.01 (built Mar 15
-	2004)) with ESMTP id <0J69001UL7XIG630@l-daemon> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	27 Sep 2006 07:53:42 -0600 (MDT)
-Received: from pn2ml4so.prod.shaw.ca ([10.0.121.148])
-	by pd2mr5so.prod.shaw.ca (Sun ONE Messaging Server 6.0 HotFix 1.01
-	(built Mar
-	15 2004)) with ESMTP id <0J69005D17XIZII0@pd2mr5so.prod.shaw.ca> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	27 Sep 2006 07:53:42 -0600 (MDT)
-Received: from ray.lehtiniemi.com ([68.147.121.172])
-	by l-daemon (Sun ONE Messaging Server 6.0 HotFix 1.01 (built Mar 15
-	2004)) with ESMTP id <0J6900DNJ7XIR7B0@l-daemon> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	27 Sep 2006 07:53:42 -0600 (MDT)
-Received: from [192.168.5.101] (siconix [68.146.203.109])
-	(using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(Client did not present a certificate)	by ray.lehtiniemi.com (Postfix)
-	with ESMTP id D5D044E327F	for
-	<openembedded-devel@lists.openembedded.org>; 
-	Wed, 27 Sep 2006 07:53:41 -0600 (MDT)
-Date: Wed, 27 Sep 2006 07:53:41 -0600
-From: Ray Lehtiniemi <rayl@mail.com>
-In-reply-to: <200609270745.13235.rayl@mail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <200609270753.41280.rayl@mail.com>
-Organization: Disorganized
-MIME-version: 1.0
-References: <45190D58.2020807@adtelecom.es> <451A29EA.1080309@adtelecom.es>
-	<200609270745.13235.rayl@mail.com>
-User-Agent: KMail/1.8.2
-Subject: Re: List of dependent packages
+	Wed, 27 Sep 2006 18:54:44 +0200
+Received: by py-out-1112.google.com with SMTP id i75so321741pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Sep 2006 09:49:48 -0700 (PDT)
+Received: by 10.35.131.4 with SMTP id i4mr1172362pyn;
+	Wed, 27 Sep 2006 09:49:41 -0700 (PDT)
+Received: by 10.35.96.4 with HTTP; Wed, 27 Sep 2006 09:49:41 -0700 (PDT)
+Message-ID: <74d0deb30609270949s1137417ft1cbabcb9145360c4@mail.gmail.com>
+Date: Wed, 27 Sep 2006 18:49:41 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <451A6E3A.8080502@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+References: <1156715171.5536.60.camel@localhost.localdomain>
+	<200608281131.31893.openembedded@hrw.one.pl>
+	<44F2B9FC.6040404@dominion.kabel.utwente.nl>
+	<44F8411B.10405@dominion.kabel.utwente.nl>
+	<74d0deb30609010806q5c5c55bagfcac92228408f4c7@mail.gmail.com>
+	<451A6E3A.8080502@dominion.kabel.utwente.nl>
+Cc: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+Subject: Re: What is task-base?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -50,50 +39,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Sep 2006 13:59:15 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: 7bit
-Content-disposition: inline
+X-List-Received-Date: Wed, 27 Sep 2006 16:54:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Wednesday 27 September 2006 07:45, Ray Lehtiniemi wrote:
-> On Wednesday 27 September 2006 01:36, Joaquim Duran wrote:
-
-> > myFilterProvider preferred_versions[pn] =
-> > bb.providers.findBestProvider(pn, pkg_pn)[2:4] TypeError:
-> > findBestProvider() takes at least 3 arguments (2 given)
+On 9/27/06, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> i've found that there are several files under lib/bb/ with this problem.
+> pHilipp Zabel schreef:
+> > On 9/1/06, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> >> -----BEGIN PGP SIGNED MESSAGE-----
+> >> Hash: SHA1
+> >>
+> >> Koen Kooi schreef:
+> >>> Marcin Juszkiewicz schreef:
+> >>> <snip>
+> >>>
+> >>>
+> >>>>> "wifi" feature need some work too. There are machines which does no=
+t have
+> >>>>> Prism based wifi cards (so no need for hostap-utils) or do not supp=
+ort
+> >>>>> WPA (wpa-supplicant is not needed then). h4000 has internal wifi on
+> >>>>> ACX100 chipset (iirc) so it need only wireless-tools to have it wor=
+king
+> >>>>> (chipset related packages should be listed in machine config).
+> >>> Which leads to the question: "how should they be listed?". At the mom=
+ent a lot of machines
+> >>> just put those modules in BOOTSTRAP_*, which isn't going to work for =
+things that don't use
+> >>> task-bootstrap (the =C5ngstr=F6m distribution for example). A few wee=
+ks ago I introduced the
+> >>> 'BOOT_MODULES' variable for that, should we add that to all machines,=
+ or is there a nicer
+> >>> way to do that?
+> >> And I ask again, before wasting my time implementing it: "should we ad=
+d that to all
+> >> machines, or is there a nicer way to do that?"
+> >
+> > I wonder if this shouldn't be modularized a bit, the modules could be
+> > assigned to different base tasks. The ipaq-pxa270.conf puts the
+> > following modules into BOOTMODULES_RRECOMMENDS currently:
+> >
+> > PXA270_MODULES =3D "g_ether g_file_storage g_serial gadgetfs pxa27x_udc=
+ \
+> >                   snd_pcm_oss snd_mixer_oss evdev mmc_block pcmcia hidp=
+ \
+> >                   nls_cp437 nls_iso8859-1 nls_utf8 af_key"
+> > HX4700_MODULES =3D "i2c-pxa hx4700_voltage acx hx4700_acx snd_hx4700_au=
+dio"
+> >
+> > g_ether, g_file_storage, g_serial and gadgetfs are already in
+> > task-base-usbgadget-rrecommends.
+> > snd_pcm_oss and snd_mixer_oss are in task-base-alsa-rrecommends.
+> > hidp is in task-base-bluetooth-rrecommends
+> >
+> > This leaves us with
+> >
+> > pxa27x_udc evdev mmc_block pcmcia nls_cp437 nls_iso8859-1 nls_utf8 af_k=
+ey
+> > i2c-pxa hx4700_voltage acx hx4700_acx snd_hx4700_audio
+> >
+> > I propose to put pxa27x_udc in task-base-usbgadget-rrecommends (similar=
+ to
+> > task-base-irda-rrecommends containing kernel-module-pxaficp-ir).
+> > But what about the rest?
 >
-> this patch is cut and pasted, so is probably whitespace mangled....
+> Yes, what about the rest?
 
-whoops, ignore that last patch.  upon closer inspection, i was actually seeing 
-a different error with bb.providers.findBestProvider than you are...  mine 
-looked like this:
+kernel-module-pxa27x_udc: task-base-usbgadget-rrecommends
+kernel-module-pcmcia: task-base-pcmcia-rrecommends
 
+Compile in evdev, mmc_block, i2c-pxa and af_key and be done with it?
 
-Traceback (most recent call last):
-  File "/opt/oe/bitbake/bin/bitbake", line 1161, in ?
-    main()
-  File "/opt/oe/bitbake/bin/bitbake", line 1156, in main
-    cooker.cook( BBConfiguration( options ), args[1:] )
-  File "/opt/oe/bitbake/bin/bitbake", line 888, in cook
-    self.interactiveMode()
-  File "/opt/oe/bitbake/bin/bitbake", line 793, in interactiveMode
-    shell.start( self )
-  File "/opt/oe/bitbake/lib/bb/shell.py", line 804, in start
-    bbshell.main()
-  File "/opt/oe/bitbake/lib/bb/shell.py", line 779, in main
-    self.processCommand( tokens[0], tokens[1:] or "" )
-  File "/opt/oe/bitbake/lib/bb/shell.py", line 736, in processCommand
-    result = function( self.commands, params )
-  File "/opt/oe/bitbake/lib/bb/shell.py", line 532, in which
-    lv, lf, pv, pf = bb.providers.findBestProvider(preferred, 
-cooker.configuration.data, cooker.status, cooker.build_cache_fail)
-NameError: global name 'bb' is not defined
+kernel modules could rrecommend evdev if it was
+compiled as a module, same goes for mmc_block
+(let pxamci and asic3_mmc rrecommend it) and i2c-pxa.
 
+kernel-module-pcmcia: task-base-pcmcia-rrecommends
 
-
-ray
-
+regards
+Philipp
 
 
