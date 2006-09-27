@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GSTVh-0002Zd-EB for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Sep 2006 09:07:13 +0200
+	id 1GSV3Q-0004Qk-5F for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Sep 2006 10:46:08 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 76C06401B45; Tue, 26 Sep 2006 23:37:59 -0700 (PDT)
+	id 3617A401B45; Wed, 27 Sep 2006 01:16:57 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20060927063759.76C06401B45@tinman.treke.net>
-Date: Tue, 26 Sep 2006 23:37:59 -0700 (PDT)
-Subject: [Bug 1441] New: busybox vs. initscripts date weirdness
+Message-Id: <20060927081657.3617A401B45@tinman.treke.net>
+Date: Wed, 27 Sep 2006 01:16:57 -0700 (PDT)
+Subject: [Bug 1440] multimachine.bbclass ignores TARGET_VENDOR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,50 +25,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Sep 2006 07:07:13 -0000
+X-List-Received-Date: Wed, 27 Sep 2006 08:46:08 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1441
-
-           Summary: busybox vs. initscripts date  weirdness
-           Product: Openembedded
-           Version: unspecified
-          Platform: All
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: tom@openhardware.net
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=1440
 
 
-I'm not sure how far back this problem may extend into the busybox versions,
-but since the body of initscripts is in OE, and not a downloadable package
-source, this issue may be an OE issue.
+koen@dominion.kabel.utwente.nl changed:
 
-The initscripts save_rtc.sh currently formats the /etc/timestamp as
-"%2m%2d%2H%2M%Y", while busybox-1.2.1 will only accept a string formatted as
-"%2m%2d%2H%2M00%4Y"
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|                            |FIXED
 
-One difference in the strings being that the seconds must be present and have a
-value of zero. The other difference is that a 4 digit year is required. Feeding
-busybox date with a string outside of those two conditions results in "invalid
-date".
 
-I suggest that the initscripts save_rtc.sh be patched as:
-============================================================
---- packages/initscripts/initscripts-1.0/save-rtc.sh   
-353d869c5dce5dc015a458b99ee7526623ac136b
-+++ packages/initscripts/initscripts-1.0/save-rtc.sh   
-72506cf424a935fe56e1b11be5e4b9acbc50e513
-@@ -12,5 +12,5 @@ then
- then
-        echo "Will restore RCT from /etc/timestamp on next boot"
-        echo "Delete that file to disable this feature."
--        date +%2m%2d%2H%2M%Y > /etc/timestamp
-+        date +%2m%2d%2H%2M00%4Y > /etc/timestamp
- fi
+
+
+------- Comment #1 from koen@dominion.kabel.utwente.nl  2006-09-27 01:16 -------
+fixed in rf4888077cbab5110be4966aa09c8bea4a75438e1.
+It will trigger a full rebuild, so grab something to eat and some 5 star sudoku
+puzzles.
 
 
 -- 
