@@ -1,20 +1,39 @@
-Received: from [213.4.149.66] (helo=ctsmtpout4.frontal.correo)
+Received: from [24.71.223.10] (helo=pd5mo3so.prod.shaw.ca)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <joaquinduran@adtelecom.es>) id 1GSZ60-0000dG-IG
+	(envelope-from <rayl@mail.com>) id 1GSZni-0005oN-FY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Sep 2006 15:05:04 +0200
-Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout4.frontal.correo
-	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
-	id 45197045000263B7 for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Sep 2006 15:00:06 +0200
-Message-ID: <451A8390.1050704@adtelecom.es>
-Date: Wed, 27 Sep 2006 14:58:40 +0100
-From: Joaquim Duran <joaquinduran@adtelecom.es>
-User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-Subject: Error detecting generated glibc.
+	Wed, 27 Sep 2006 15:50:14 +0200
+Received: from pd2mr7so.prod.shaw.ca (pd2mr7so-qfe3.prod.shaw.ca [10.0.141.10])
+	by l-daemon (Sun ONE Messaging Server 6.0 HotFix 1.01 (built Mar 15
+	2004)) with ESMTP id <0J6900IRP7JJDUC0@l-daemon> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	27 Sep 2006 07:45:19 -0600 (MDT)
+Received: from pn2ml4so.prod.shaw.ca ([10.0.121.148])
+	by pd2mr7so.prod.shaw.ca (Sun ONE Messaging Server 6.0 HotFix 1.01
+	(built Mar
+	15 2004)) with ESMTP id <0J6900BQG7JJVQJ0@pd2mr7so.prod.shaw.ca> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	27 Sep 2006 07:45:19 -0600 (MDT)
+Received: from ray.lehtiniemi.com ([68.147.121.172])
+	by l-daemon (Sun ONE Messaging Server 6.0 HotFix 1.01 (built Mar 15
+	2004)) with ESMTP id <0J69004SH7JJK150@l-daemon> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	27 Sep 2006 07:45:19 -0600 (MDT)
+Received: from [192.168.5.101] (siconix [68.146.203.109])
+	(using TLSv1 with cipher RC4-MD5 (128/128 bits))
+	(Client did not present a certificate)	by ray.lehtiniemi.com (Postfix)
+	with ESMTP id 32EC54E2ED0; Wed, 27 Sep 2006 07:45:19 -0600 (MDT)
+Date: Wed, 27 Sep 2006 07:45:13 -0600
+From: Ray Lehtiniemi <rayl@mail.com>
+In-reply-to: <451A29EA.1080309@adtelecom.es>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <200609270745.13235.rayl@mail.com>
+Organization: Disorganized
+MIME-version: 1.0
+References: <45190D58.2020807@adtelecom.es> <451948D7.6000904@adtelecom.es>
+	<451A29EA.1080309@adtelecom.es>
+User-Agent: KMail/1.8.2
+Subject: Re: List of dependent packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -29,49 +48,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Sep 2006 13:05:04 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 27 Sep 2006 13:50:14 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: 7bit
+Content-disposition: inline
 
-Hello,
+On Wednesday 27 September 2006 01:36, Joaquim Duran wrote:
+> Hello,
+>
+> As I've the impression that Bitbake is very related to OE. I post the
+> bug here.
+>
+> I execute: bitbake -g boostrap-image.
+> Output:
+>
+> NOTE: Parsing finished. 3962 cached, 0 parsed, 139 skipped, 27 masked.
+>
+> Traceback (most recent call last):
+>    File "/home/qduran/oe/bitbake/bin/bitbake", line 1161, in ?
+>      main()
+>    File "/home/qduran/oe/bitbake/bin/bitbake", line 1156, in main
+>      cooker.cook( BBConfiguration( options ), args[1:] )
+>    File "/home/qduran/oe/bitbake/bin/bitbake", line 962, in cook
+>      self.generateDotGraph( pkgs_to_build,
+> self.configuration.ignored_dot_deps )
+>    File "/home/qduran/oe/bitbake/bin/bitbake", line 544, in
+> generateDotGraph add_depends( pkgs_to_build )
+>    File "/home/qduran/oe/bitbake/bin/bitbake", line 467, in add_depends
+>      fn = myFilterProvider(providers, package)[0]
+>    File "/home/qduran/oe/bitbake/bin/bitbake", line 413, in
+> myFilterProvider preferred_versions[pn] = bb.providers.findBestProvider(pn,
+> pkg_pn)[2:4] TypeError: findBestProvider() takes at least 3 arguments (2
+> given)
+>
 
-I'm trying to build images using the following compiler, library and 
-binutils:
+i've found that there are several files under lib/bb/ with this problem.
 
-PREFERRED_VERSION_gcc-cross = "3.3.2"
-PREFERRED_VERSION_gcc-cross-initial = "3.3.2"
-PREFERRED_VERSION_gcc = "3.3.2"
-PREFERRED_VERSION_glibc = "2.3.2-pxa27x"
-PREFERRED_VERSION_glibc-initial = "2.3.2-pxa27x"
+this patch is cut and pasted, so is probably whitespace mangled....
 
-PREFERRED_VERSION_binutils-cross = "2.14.90.driscoll"
-PREFERRED_VERSION_binutils = "2.14.90.driscoll"
-PREFERRED_VERSION_linux-libc-headers = "2.6.11.1"
+Index: lib/bb/shell.py
+===================================================================
+--- lib/bb/shell.py     (revision 612)
++++ lib/bb/shell.py     (working copy)
+@@ -57,6 +57,8 @@
+ except NameError:
+     from sets import Set as set
+ import sys, os, readline, socket, httplib, urllib, commands, popen2, copy, 
+shlex, Queue, fnmatch
++
++import bb
+ from bb import data, parse, build, fatal
 
-The compiler and the library are generated with no problems. The 
-problems appears that before compiling a package, bitbake checks its 
-dependences. It determines that the glic-2.3.2-pxa27x insn't existing 
-and then starts to build glic-2.4 (it is not possible due to gcc version).
+ __version__ = "0.5.3.1"
+Index: lib/bb/providers.py
+===================================================================
+--- lib/bb/providers.py (revision 612)
++++ lib/bb/providers.py (working copy)
+@@ -23,8 +23,8 @@
+ # Place, Suite 330, Boston, MA 02111-1307 USA.
 
-A sample of the logs are provided:
+ import os, re
++import bb
+ from bb import data, utils
+-import bb
 
-DEBUG: already built 
-/home/qduran/oe/org.openembedded.dev/packages/quilt/quilt-native_0.45.bb 
-in this run
-DEBUG: Additional runtime dependencies for ncurses-native are:
-DEBUG: Additional runtime dependencies for ncurses are:
-DEBUG: providers for virtual/libintl are: ['glibc', 'gettext']
-DEBUG: update_data()
-NOTE: preferred version 2.3.2-pxa27x of glibc not available
-DEBUG: update_data()
-DEBUG: selecting 
-/home/qduran/oe/org.openembedded.dev/packages/glibc/glibc_2.4.bb to 
-satisfy virtual/libintl
-
-Why does it happens?
+ class NoProvider(Exception):
+     """Exception raised when no provider can be found"""
 
 
-Thanks and Best Regards,
-Joaquim Duran
+
+
+hope it helps
+
+ray
+
 
 
