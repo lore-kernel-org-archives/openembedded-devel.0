@@ -1,25 +1,27 @@
-Received: from [213.4.149.66] (helo=ctsmtpout4.frontal.correo)
+Received: from [203.66.140.6] (helo=mtcmail.mitac-mtc.com.tw)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <joaquinduran@adtelecom.es>) id 1GSpl0-0006PC-SQ
+	(envelope-from <Axel.Lin@mitac-mtc.com.tw>) id 1GSrVy-0000VE-Qb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Sep 2006 08:52:31 +0200
-Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout4.frontal.correo
-	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
-	id 4519704500041449 for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Sep 2006 08:47:32 +0200
-Message-ID: <451B7DC2.5070304@adtelecom.es>
-Date: Thu, 28 Sep 2006 08:46:10 +0100
-From: Joaquim Duran <joaquinduran@adtelecom.es>
-User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
+	Thu, 28 Sep 2006 10:45:08 +0200
+Received: from taipei7.mitac-mtc.com.tw ([10.68.90.7])
+	by mtcmail.mitac-mtc.com.tw with ESMTP id k8S8drHn066458
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Sep 2006 16:39:53 +0800 (CST)
+	(envelope-from Axel.Lin@mitac-mtc.com.tw)
+Received: by taipei7.mitac-mtc.com.tw with Internet Mail Service (5.5.2657.72)
+	id <SFFW8K7L>; Thu, 28 Sep 2006 16:40:37 +0800
+Message-ID: <451B8A47.6030405@mitac-mtc.com.tw>
+From: "Axel.Lin" <Axel.Lin@mitac-mtc.com.tw>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 28 Sep 2006 16:39:35 +0800
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-References: <45190D58.2020807@adtelecom.es>
-	<1865823264.20060926150138@gmail.com>
-	<451948D7.6000904@adtelecom.es> <451A29EA.1080309@adtelecom.es>
-	<661829260.20060927221730@gmail.com>
-In-Reply-To: <661829260.20060927221730@gmail.com>
-Subject: Re: List of dependent packages
+X-Mailer: Internet Mail Service (5.5.2657.72)
+x-originalarrivaltime: 28 Sep 2006 08:39:53.0133 (UTC)
+	FILETIME=[AB001DD0:01C6E2D9]
+user-agent: Thunderbird 1.5.0.5 (X11/20060728)
+X-MAIL: mtcmail.mitac-mtc.com.tw k8S8drHn066458
+X-Content-Filtered-By: Mailman/MimeDel 2.1.8
+Subject: package xserver-xorg-X11R7.1-1.1.0-r0: task do_configure: failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -34,121 +36,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Sep 2006 06:52:31 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Sep 2006 08:45:08 -0000
+Content-Type: text/plain;
+	charset="BIG5"
 
-Hello,
-
-Changing the filter I get interesting results:
-
-$bitbake -n -v bootstrap-image|grep "Selecting"
-
-NOTE: Selecting already-staged ipkg-native (0.99.163-r1) to satisfy 
-ipkg-native
-NOTE: Selecting already-staged pkgconfig-native (0.15.0-r2) to satisfy 
-pkgconfig-native
-NOTE: Selecting already-staged autoconf-native (2.59-r5) to satisfy 
-autoconf-native
-NOTE: Selecting already-staged m4-native (1.4.2-r0) to satisfy m4-native
-NOTE: Selecting already-staged gnu-config-native (0.1+cvs20050701-r4) to 
-satisfy gnu-config-native
-NOTE: Selecting already-staged automake-native (1.9.3-r5) to satisfy 
-automake-native
-NOTE: Selecting already-staged libtool-native (1.5.10-r4) to satisfy 
-libtool-native
-[...]
-
-It displays the list of packages selected with its version.
+hi list,
+I'm using mainstone/generic config.
+When I try to build gpe-image, I got failed message as below.
+xaw7 package is missing.
+How to fix this issue?
 
 
-$bitbake -n -v bootstrap-image|grep "[Ss]electing"
+| checking for XDMCP... yes
+| checking for XdmcpWrap in -lXdmcp... no
+| checking for XSERVERCFLAGS... yes
+| checking for XSERVERLIBS... yes
+| checking if SVR4 needs to be defined... no
+| checking whether to build Xdmx DDX... checking for DMXMODULES... yes
+| yes
+| checking linux/input.h usability... yes
+| checking linux/input.h presence... yes
+| checking for linux/input.h... yes
+| checking linux/keyboard.h usability... yes
+| checking linux/keyboard.h presence... yes
+| checking for linux/keyboard.h... yes
+| checking for XDMXCONFIG_DEP... Package xaw7 was not found in the
+pkg-config search path.
+| Perhaps you should add the directory containing `xaw7.pc'
+| to the PKG_CONFIG_PATH environment variable
+| No package 'xaw7' found
+| configure: error: Package requirements (xaw7 xmu xt xpm x11) were not met:
+|
+|
+|
+| Consider adjusting the PKG_CONFIG_PATH environment variable if you
+| installed software in a non-standard prefix.
+|
+| Alternatively, you may set the environment variables XDMXCONFIG_DEP_CFLAGS
+| and XDMXCONFIG_DEP_LIBS to avoid the need to call pkg-config.
+| See the pkg-config man page for more details.
+|
+| FATAL: oe_runconf failed
+NOTE: Task failed:
+/opt/oe/build/tmp/work/iwmmxt-linux/xserver-xorg-X11R7.1-1.1.0-r0/temp/log.d
+o_configure.8897
+NOTE: package xserver-xorg-X11R7.1-1.1.0-r0: task do_configure: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package xserver-xorg-X11R7.1-1.1.0: failed
+ERROR: Build of gpe-image failed
 
-NOTE: Selecting already-staged file-native (4.16-r1) to satisfy file-native
-NOTE: Selecting already-staged gcc-cross (3.3.2-r1) to satisfy 
-virtual/arm-linux-gcc
-NOTE: selecting gcc-cross to satisfy virtual/arm-linux-gcc due to 
-PREFERRED_PROVIDERS
-NOTE: Selecting already-staged binutils-cross (2.14.90.driscoll-r0) to 
-satisfy virtual/arm-linux-binutils
-NOTE: selecting binutils-cross to satisfy virtual/arm-linux-binutils due 
-to PREFERRED_PROVIDERS
+Thanks for your help.
 
-It displays the list of packages selected with its version and indicates 
-which packages has been selected by configuration settings.
-
-
-Thanks for your comment.
-
-
-Thanks and Best Regards,
-Joaquim Duran
-
-
-
-En/na Paul Sokolovsky ha escrit:
-> Hello Joaquim,
-> 
-> Wednesday, September 27, 2006, 10:36:10 AM, you wrote:
-> 
->> Hello,
-> 
->> As I've the impression that Bitbake is very related to OE. I post the 
->> bug here.
-> 
->> I execute: bitbake -g boostrap-image.
-> 
->   Have to say I didn't try -g myself yet. --dry-run --verbose what I
-> usually use, as was suggested on this last before. And I just tried
-> that it actuially works without any packages built. Specifically:
-> 
-> bitbake --dry-run --verbose gpe-image|grep "current path"
-> 
-> NOTE: current path: gpe-image (gpe-image)
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-native (ipkg-native)
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-native (ipkg-native) -> pkgconfig-native (pkgconfig-native)
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-native (ipkg-native) -> pkgconfig-native (pkgconfig-native) -> autoconf-nati
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-native (ipkg-native) -> pkgconfig-native (pkgconfig-native) -> autoconf-nati
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-native (ipkg-native) -> pkgconfig-native (pkgconfig-native) -> autoconf-nati
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-native (ipkg-native) -> pkgconfig-native (pkgconfig-native) -> autoconf-nati
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-native (ipkg-native) -> pkgconfig-native (pkgconfig-native) -> automake-nati
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-native (ipkg-native) -> pkgconfig-native (pkgconfig-native) -> libtool-nativ
-> NOTE: current path: gpe-image (gpe-image) -> ipkg-utils-native (ipkg-utils-native)
-> NOTE: current path: gpe-image (gpe-image) -> fakeroot-native (fakeroot-native)
-> NOTE: current path: gpe-image (gpe-image) -> file-native (file-native)
-> 
-> Just in case, I'm using bitbake 1.6.1 (from SVN).
-> 
-> 
->> Output:
-> 
->> NOTE: Parsing finished. 3962 cached, 0 parsed, 139 skipped, 27 masked.
-> 
->> Traceback (most recent call last):
->>    File "/home/qduran/oe/bitbake/bin/bitbake", line 1161, in ?
->>      main()
->>    File "/home/qduran/oe/bitbake/bin/bitbake", line 1156, in main
->>      cooker.cook( BBConfiguration( options ), args[1:] )
->>    File "/home/qduran/oe/bitbake/bin/bitbake", line 962, in cook
->>      self.generateDotGraph( pkgs_to_build, 
->> self.configuration.ignored_dot_deps )
->>    File "/home/qduran/oe/bitbake/bin/bitbake", line 544, in generateDotGraph
->>      add_depends( pkgs_to_build )
->>    File "/home/qduran/oe/bitbake/bin/bitbake", line 467, in add_depends
->>      fn = myFilterProvider(providers, package)[0]
->>    File "/home/qduran/oe/bitbake/bin/bitbake", line 413, in myFilterProvider
->>      preferred_versions[pn] = bb.providers.findBestProvider(pn, pkg_pn)[2:4]
->> TypeError: findBestProvider() takes at least 3 arguments (2 given)
-> 
->   Needs to be fixed, sure. Worth a bugreport at
-> http://bugs.openembedded.org .
-
-Done
-
->> Hope this helps.
-> 
-> 
-> 
-
+Axel
 
 
