@@ -1,28 +1,16 @@
-Received: from [64.233.166.177] (helo=py-out-1112.google.com)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <pmiscml@gmail.com>) id 1GTgOn-0003gZ-3V
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Sep 2006 17:05:05 +0200
-Received: by py-out-1112.google.com with SMTP id i75so1537555pye
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Sep 2006 07:59:52 -0700 (PDT)
-Received: by 10.35.135.12 with SMTP id m12mr2980025pyn;
-	Sat, 30 Sep 2006 07:59:52 -0700 (PDT)
-Received: from CUBE ( [85.202.124.203])
-	by mx.gmail.com with ESMTP id c1sm3600764nzd.2006.09.30.07.59.51;
-	Sat, 30 Sep 2006 07:59:52 -0700 (PDT)
-Date: Sat, 30 Sep 2006 17:59:49 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <310040615.20060930175949@gmail.com>
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <451D7FC2.8070600@dominion.kabel.utwente.nl>
-References: <451D6EA3.5000609@dominion.kabel.utwente.nl>
-	<11437084.20060929230541@gmail.com>
-	<451D7FC2.8070600@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
-Subject: Re: Did someone break X ?
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GTpTb-00065s-UT for openembedded-devel@lists.openembedded.org;
+	Sun, 01 Oct 2006 02:46:40 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id D809B401B45; Sat, 30 Sep 2006 17:16:28 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20061001001628.D809B401B45@tinman.treke.net>
+Date: Sat, 30 Sep 2006 17:16:28 -0700 (PDT)
+Subject: [Bug 1425] libfontconfig picks up host's /usr/lib/libz.la (but then fails)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -37,40 +25,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Sep 2006 15:05:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 01 Oct 2006 00:46:40 -0000
 
-Hello Koen,
-
-Friday, September 29, 2006, 11:19:14 PM, you wrote:
+http://bugs.openembedded.org/show_bug.cgi?id=1425
 
 
->>> ERROR: No providers of runtime build target xserver-kdrive after filtering (for
->>> ['/home/koen/OE/monotone/org.openembedded.dev/packages/xorg-xserver/xserver-kdrive_X11R7.1-1.1.0.bb'])
-[]
->>
->>     Well, it's not easy to grasp anything form these messages. While I
->> hacked xserver-kdrive_X11R7.1-1.1.0.bb (rather, it's patches)
->> yesterday, that was to make it build (do_configure) for angstrom arm.
->> 
->>    What about suspecting --enable-w100 switch Michael Lauer had to
->> disable in xserver-kdrive_git.bb to make it build for x86?
+likewise@gmx.net changed:
 
-> Mickeyl had a problem *during* build, OE isn't letting me *start* a build right now, while
-> it did do that yesterday. I looks like something changed with (R)DEPENDS.
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|                            |INVALID
 
-  Ok, turned out that I missed to commit xcalibrateext_git.bb (did it
-some time ago and forgot since). Fixed now. Worth doing
-"mtn ls unknown" regularly...
 
-> regards,
 
-> Koen
+
+------- Comment #1 from likewise@gmx.net  2006-09-30 17:16 -------
+Although the error does indeed occur, it is a chainr eaction of the bitbake
+process failing earlier, but not bailing out.
+
+As I have no clear idea where the chain reaction starts, I cannot file a new
+bug currently.
+
 
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
