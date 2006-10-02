@@ -1,31 +1,20 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [64.233.166.183] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GU1Mc-0000MM-EY for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Oct 2006 15:28:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 16B1FBB4;
-	Sun,  1 Oct 2006 15:22:57 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 16215-09; Sun,  1 Oct 2006 15:22:53 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 46942BAD;
-	Sun,  1 Oct 2006 15:22:53 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: =?UTF-8?Q?=E9=BB=84_=E5=8B=87?= <hakehuang@hotmail.com>
-In-Reply-To: <1159708594.6791.53.camel@gandalf.tm.informatik.uni-frankfurt.de>
-References: <BAY112-F21A1A41405810A5DE63282BD1E0@phx.gbl>
-	<1159708594.6791.53.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Organization: VanilleMedia
-Date: Sun, 01 Oct 2006 15:22:53 +0200
-Message-Id: <1159708973.6791.55.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: problem with OE build amd db1200
+	(envelope-from <axel.lin@gmail.com>) id 1GUDoj-00044O-Dr
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Oct 2006 04:46:05 +0200
+Received: by py-out-1112.google.com with SMTP id i75so2025247pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 01 Oct 2006 19:40:44 -0700 (PDT)
+Received: by 10.35.48.15 with SMTP id a15mr6485372pyk;
+	Sun, 01 Oct 2006 19:40:44 -0700 (PDT)
+Received: by 10.35.15.17 with HTTP; Sun, 1 Oct 2006 19:40:44 -0700 (PDT)
+Message-ID: <427d64720610011940nfe910ds579d206522176340@mail.gmail.com>
+Date: Mon, 2 Oct 2006 10:40:44 +0800
+From: "axel lin" <axel.lin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: package gcc-cross-4.1.1-r6: task do_compile: failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -40,69 +29,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Oct 2006 13:28:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 02 Oct 2006 02:46:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Am Sonntag, den 01.10.2006, 15:16 +0200 schrieb Michael 'Mickey' Lauer:
-> Forwarding this to the correct list.
->=20
-> Am Sonntag, den 01.10.2006, 17:25 +0800 schrieb =E9=BB=84 =E5=8B=87:
-> > Hi all,
-> >=20
-> > I am trying to make db1200 using OE but ....
-> >=20
-> > /tmp/work/glibc-2.3.5+cvs20050627-r0/build-arm-linux/bits/stdio_lim.h=
-T=20
-> > | In file included from ./bits/types.h:28,=20
-> > | from ./posix/sys/types.h:31,=20
-> > | from include/sys/types.h:1,=20
-> > | from misc/sys/uio.h:24,=20
-> > | from <stdin>:3:=20
-> > | ./bits/wordsize.h:1:2: #error "This file must be written based on t=
-he=20
-> > data type sizes of the target"=20
-> > | In file included from ./posix/sys/types.h:31,=20
-> > | from include/sys/types.h:1,=20
-> > | from misc/sys/uio.h:24,=20
-> > | from <stdin>:3:=20
-> > | ./bits/types.h:132:3: #error=20
-> > | In file included from ./string/endian.h:37,=20
-> > | from include/endian.h:1,=20
-> > | from ./posix/sys/types.h:213,=20
-> > | from include/sys/types.h:1,=20
-> > | from misc/sys/uio.h:24,=20
-> > | from <stdin>:3:=20
-> > | ./bits/endian.h:13:2: #error Machine byte order unknown.=20
-> > | make[1]: ***=20
-> > [/usr/.home/cyrus/development/build/tmp/work/glibc-2.3.5+cvs20050627-=
-r0/build-arm-linux/bits/stdio_lim.st]=20
-> > Error 1=20
-> > | make[1]: Leaving directory=20
-> > `/usr/.home/cyrus/development/build/tmp/work/glibc-2.3.5+cvs20050627-=
-r0/libc'=20
-> >=20
-> > | make: *** [all] Error 2=20
-> > | FATAL: oe_runmake failed=20
-> >=20
-> >=20
-> >=20
-> > Any one can help me? Thanks a lot
-> >=20
-> > _________________________________________________________________
-> > =E4=B8=8E=E8=81=94=E6=9C=BA=E7=9A=84=E6=9C=8B=E5=8F=8B=E8=BF=9B=E8=A1=
-=8C=E4=BA=A4=E6=B5=81=EF=BC=8C=E8=AF=B7=E4=BD=BF=E7=94=A8 MSN Messenger: =
- http://messenger.msn.com/cn =20
-> >=20
-> > _______________________________________________
-> > Oe mailing list
-> > Oe@handhelds.org
-> > https://www.handhelds.org/mailman/listinfo/oe
---=20
-Regards,
+hi list,
+     I'm trying mainstone/angstrom-2007.1  now.
+I got below build error messages:
+ make[3]: Leaving directory
+`/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/build.i686-linux.arm-angstrom-linux-gnueabi/gcc'
+| echo timestamp > stmp-multilib
+| (SHLIB_LINK='/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/build.i686-linux.arm-angstrom-linux-gnueabi/./gcc/xgcc
+-B/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/build.i686-linux.arm-angstrom-linux-gnueabi/./gcc/
+-B/opt/oe/build/tmp/cross/arm-angstrom-linux-gnueabi/bin/
+-B/opt/oe/build/tmp/cross/arm-angstrom-linux-gnueabi/lib/ -isystem
+/opt/oe/build/tmp/cross/arm-angstrom-linux-gnueabi/include -isystem
+/opt/oe/build/tmp/cross/arm-angstrom-linux-gnueabi/sys-include -O2  -g
+-Os -DIN_GCC -DCROSS_COMPILE   -W -Wall -Wwrite-strings
+-Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition
+-isystem ./include  -fPIC -g -DHAVE_GTHR_DEFAULT -DIN_LIBGCC2
+-D__GCC_FLOAT_NOT_NEEDED -Dinhibit_libc -shared -nodefaultlibs
+-Wl,--soname=@shlib_base_name@.so.1
+-Wl,--version-script=@shlib_map_file@ -o
+@multilib_dir@/@shlib_base_name@.so.1.tmp @multilib_flags@
+@shlib_objs@ -lc && rm -f @multilib_dir@/@shlib_base_name@.so && if [
+-f @multilib_dir@/@shlib_base_name@.so.1 ]; then mv -f
+@multilib_dir@/@shlib_base_name@.so.1
+@multilib_dir@/@shlib_base_name@.so.1.backup; else true; fi && mv
+@multilib_dir@/@shlib_base_name@.so.1.tmp
+@multilib_dir@/@shlib_base_name@.so.1 && ln -s @shlib_base_name@.so.1
+@multilib_dir@/@shlib_base_name@.so' \
+|       SHLIB_MULTILIB=''; \
+|       ccache gcc -c
+-isystem/opt/oe/build/tmp/staging/i686-linux/include -Os -DIN_GCC
+-DCROSS_COMPILE  -W -Wall -Wwrite-strings -Wstrict-prototypes
+-Wmissing-prototypes -pedantic -Wno-long-long -Wno-variadic-macros
+-Wold-style-definition -Wmissing-format-attribute    -DHAVE_CONFIG_H
+-I. -I. -I/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc
+-I/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc/.
+-I/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc/../include
+-I/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc/../libcpp/include
+-I/opt/oe/build/tmp/staging/i686-linux/include
+-isystem/opt/oe/build/tmp/staging/i686-linux/include
+-DSTANDARD_STARTFILE_PREFIX=\"../../../\"
+-DSTANDARD_EXEC_PREFIX=\"/opt/oe/build/tmp/cross/lib/gcc/\"
+-DSTANDARD_LIBEXEC_PREFIX=\"/opt/oe/build/tmp/cross/libexec/gcc/\"
+-DDEFAULT_TARGET_VERSION=\"4.1.1\"
+-DDEFAULT_TARGET_MACHINE=\"arm-angstrom-linux-gnueabi\"
+-DSTANDARD_BINDIR_PREFIX=\"/opt/oe/build/tmp/cross/bin/\"
+-DTOOLDIR_BASE_PREFIX=\"../../../../\"  `test "X${SHLIB_LINK}" = "X"
+|| test "yes" != "yes" || echo "-DENABLE_SHARED_LIBGCC"` `test
+"X${SHLIB_MULTILIB}" = "X" || echo "-DNO_SHARED_LIBGCC_MULTILIB"` \
+|               -I. -I.
+-I/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc
+-I/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc/.
+-I/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc/../include
+-I/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc/../libcpp/include
+-I/opt/oe/build/tmp/staging/i686-linux/include
+/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/gcc/cp/g++spec.c)
+| /opt/oe/build/tmp/cross/bin/arm-angstrom-linux-gnueabi-as:
+unrecognized option `-Qy'
+| make[2]: *** [g++spec.o] Error 1
+| make[2]: Leaving directory
+`/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/build.i686-linux.arm-angstrom-linux-gnueabi/gcc'
+| make[1]: *** [all-gcc] Error 2
+| make[1]: Leaving directory
+`/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/gcc-4.1.1/build.i686-linux.arm-angstrom-linux-gnueabi'
+| make: *** [all] Error 2
+| FATAL: oe_runmake failed
+NOTE: Task failed:
+/opt/oe/build/tmp/work/iwmmxt-angstrom-linux-gnueabi/gcc-cross-4.1.1-r6/temp/log.do_compile.10499
+NOTE: package gcc-cross-4.1.1-r6: task do_compile: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package gcc-cross-4.1.1: failed
+ERROR: Build of gpe-image failed
 
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
-
-
+thanks for your help.
+Axel
 
 
