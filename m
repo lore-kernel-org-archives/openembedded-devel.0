@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GUUyT-0007wl-8x for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Oct 2006 23:05:17 +0200
+	id 1GUhgH-0007kB-Ud for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Oct 2006 12:39:22 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id A5E19401B45; Mon,  2 Oct 2006 13:34:41 -0700 (PDT)
+	id EFB6F401B46; Tue,  3 Oct 2006 03:08:33 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20061002203441.A5E19401B45@tinman.treke.net>
-Date: Mon,  2 Oct 2006 13:34:41 -0700 (PDT)
-Subject: [Bug 1446] zlib-native-1.2.3.bb does not stage zlib.h
+Message-Id: <20061003100833.EFB6F401B46@tinman.treke.net>
+Date: Tue,  3 Oct 2006 03:08:33 -0700 (PDT)
+Subject: [Bug 1439] perl 5.8.7 fails during configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,25 +25,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Oct 2006 21:05:17 -0000
+X-List-Received-Date: Tue, 03 Oct 2006 10:39:22 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1446
+http://bugs.openembedded.org/show_bug.cgi?id=1439
 
 
-likewise@gmx.net changed:
+mickeyl@handhelds.org changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
+             Status|ASSIGNED                    |RESOLVED
          Resolution|                            |FIXED
 
 
 
 
-------- Comment #1 from likewise@gmx.net  2006-10-02 13:34 -------
-Koen Kooi fixed these two issues.
-
-Tested to work.
+------- Comment #7 from mickeyl@handhelds.org  2006-10-03 03:08 -------
+Thanks very much. Closing this bug as FIXED.
 
 
 -- 
