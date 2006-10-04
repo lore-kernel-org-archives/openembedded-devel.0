@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GVDqv-0003mO-7z for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Oct 2006 23:00:29 +0200
+	id 1GVFit-00067m-1r for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Oct 2006 01:00:19 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 784C5401B45; Wed,  4 Oct 2006 13:29:23 -0700 (PDT)
+	id EBC54401B45; Wed,  4 Oct 2006 15:29:11 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20061004202923.784C5401B45@tinman.treke.net>
-Date: Wed,  4 Oct 2006 13:29:23 -0700 (PDT)
-Subject: [Bug 1454] New: [SuperH] - Gcc 4.1.1 failed to build
+Message-Id: <20061004222911.EBC54401B45@tinman.treke.net>
+Date: Wed,  4 Oct 2006 15:29:11 -0700 (PDT)
+Subject: [Bug 1448] GLIBC_2.4+NPTL missing pthread_kill external declaration in header file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,53 +25,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Oct 2006 21:00:30 -0000
+X-List-Received-Date: Wed, 04 Oct 2006 23:00:19 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1454
-
-           Summary: [SuperH] - Gcc 4.1.1 failed to build
-           Product: Openembedded
-           Version: unspecified
-          Platform: SuperH
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: kristoffer_e1@hotmail.com
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=1448
 
 
-1/gcc/fixproto
-/work/dev/donkey/6xx/tmp/work/sh3-linux/gcc-4.1.1-r6/image/usr/libexec/gcc/sh3-linux/4.1.1/install-tools/fixproto
-; \
-|   /work/dev/donkey/6xx/tmp/staging/i686-linux/bin/install -c build/fix-header
-\
-|      
-/work/dev/donkey/6xx/tmp/work/sh3-linux/gcc-4.1.1-r6/image/usr/libexec/gcc/sh3-linux/4.1.1/install-tools/fix-header
-; \
-| else :; fi
-| /work/dev/donkey/6xx/tmp/staging/i686-linux/bin/install-sh: build/fix-header
-does not exist.
-| make[2]: *** [install-mkheaders] Error 1
-| make[2]: Leaving directory
-`/work/dev/donkey/6xx/tmp/work/sh3-linux/gcc-4.1.1-r6/gcc-4.1.1/build.sh3-linux.sh3-linux/gcc'
-| make[1]: *** [install-gcc] Error 2
-| make[1]: Leaving directory
-`/work/dev/donkey/6xx/tmp/work/sh3-linux/gcc-4.1.1-r6/gcc-4.1.1/build.sh3-linux.sh3-linux'
-| make: *** [install] Error 2
-| + die 'oe_runmake failed'
-| + oefatal 'oe_runmake failed'
-| + echo FATAL: 'oe_runmake failed'
-| FATAL: oe_runmake failed
-| + exit 1
-NOTE: Task failed:
-/work/dev/donkey/6xx/tmp/work/sh3-linux/gcc-4.1.1-r6/temp/log.do_install.6060
-NOTE: package gcc-4.1.1-r6: task do_install: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package gcc-4.1.1: failed
-ERROR: Build of gcc-4.1.1 failed
+
+
+
+------- Comment #1 from lenehan@twibble.org  2006-10-04 15:29 -------
+[nynaeve][ 8:29AM]/data/oe/build/titan-glibc-24%> find
+tmp/staging/sh4-linux/include -exec grep -HI pthread_kill {} \;
+tmp/staging/sh4-linux/include/bits/sigthread.h:extern int pthread_kill
+(pthread_t __threadid, int __signo) __THROW;
+
+pthread.h includes signal.h which includes bits/sigthread.h
+
+This matches what's on my host system as well. The include of bits/sigthread.h
+is protected by this though:
+
+#if defined __USE_POSIX199506 || defined __USE_UNIX98
+
+I'm unable to check further since version included in OE is no longer available
+at the specific SRC_URI (replaced with a 1.0.0-rc1 version now).
 
 
 -- 
