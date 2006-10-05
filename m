@@ -1,19 +1,16 @@
-Received: from [203.16.214.66] (helo=mail.internode.on.net)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <duncan.grove@internode.on.net>) id 1GVQO5-000367-EI
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Oct 2006 12:23:34 +0200
-Received: from [192.168.1.4] (unverified [121.44.96.149]) 
-	by mail.internode.on.net (SurgeMail 3.2f) with ESMTP id 239458984 
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Oct 2006 19:47:50 +0930 (CST)
-Message-ID: <4524DBC4.8030707@internode.on.net>
-Date: Thu, 05 Oct 2006 19:47:40 +0930
-From: Duncan Grove <duncan.grove@internode.on.net>
-User-Agent: Thunderbird 1.5.0.7 (Windows/20060909)
-MIME-Version: 1.0
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GVV3Y-0003jg-Bc for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Oct 2006 17:22:40 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 9B9C3401B45; Thu,  5 Oct 2006 07:51:18 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
-Subject: anoncvs access problems?
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20061005145118.9B9C3401B45@tinman.treke.net>
+Date: Thu,  5 Oct 2006 07:51:18 -0700 (PDT)
+Subject: [Bug 1455] New: Patches to fix gtk-engines hardcoded GTK+ binary version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -28,22 +25,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Oct 2006 10:23:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Oct 2006 15:22:40 -0000
 
-Hi,
+http://bugs.openembedded.org/show_bug.cgi?id=1455
 
-I've just tried to do an OE build (bitbake nano) which failed trying to 
-get ipkg-utils via cvs from anoncvs.handhelds.org. Trying to telnet 
-anoncvs.handhelds.org 2401 I get a connection timed out, but I don't 
-think it's me (firewalls, etc) as I can eg telnet anoncvs.netbsd.org 
-2401 and get cvs access fine. Has anyone else been having any trouble? 
-The weird thing is that from the logs at www.handhelds.org it looks like 
-other people have been checking things in without a hitch -- perhaps 
-it's just an access problem from my part of the world?
+           Summary: Patches to fix gtk-engines hardcoded GTK+ binary version
+           Product: Openembedded
+           Version: unspecified
+          Platform: Other
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Build
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: dp@xora.org.uk
+         QAContact: tinderbox-oe@gmx.net
 
-TIA,
-Duncan
+
+Here, is a .bbclass and a diff to gtk-engines to make it work wether the gtk+
+binary version is 2.4.0 (as 2.6.X is) or 2.10.0 (as 2.10.X is).
+
+I thought I would post here for comments as my python is terrible.
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
