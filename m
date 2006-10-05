@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GVV3Y-0003jg-Bc for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Oct 2006 17:22:40 +0200
+	id 1GVaPn-0006Pu-8V for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Oct 2006 23:05:59 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id 9B9C3401B45; Thu,  5 Oct 2006 07:51:18 -0700 (PDT)
+	id EB752401C8B; Thu,  5 Oct 2006 13:34:33 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20061005145118.9B9C3401B45@tinman.treke.net>
-Date: Thu,  5 Oct 2006 07:51:18 -0700 (PDT)
-Subject: [Bug 1455] New: Patches to fix gtk-engines hardcoded GTK+ binary version
+Message-Id: <20061005203433.EB752401C8B@tinman.treke.net>
+Date: Thu,  5 Oct 2006 13:34:33 -0700 (PDT)
+Subject: [Bug 202] Kernel Module in fbvncserver-kmodule incorectly named
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,28 +25,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Oct 2006 15:22:40 -0000
+X-List-Received-Date: Thu, 05 Oct 2006 21:05:59 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1455
-
-           Summary: Patches to fix gtk-engines hardcoded GTK+ binary version
-           Product: Openembedded
-           Version: unspecified
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: dp@xora.org.uk
-         QAContact: tinderbox-oe@gmx.net
+http://bugs.openembedded.org/show_bug.cgi?id=202
 
 
-Here, is a .bbclass and a diff to gtk-engines to make it work wether the gtk+
-binary version is 2.4.0 (as 2.6.X is) or 2.10.0 (as 2.10.X is).
 
-I thought I would post here for comments as my python is terrible.
+
+
+------- Comment #7 from bugs.openembedded.org@rolf.leggewie.biz  2006-10-05 13:34 -------
+Time to reclose the bug since Stefan did not report back?
 
 
 -- 
