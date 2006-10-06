@@ -1,16 +1,22 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [213.4.149.66] (helo=ctsmtpout3.frontal.correo)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GVoG2-0002Zc-9v for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Oct 2006 13:52:50 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id C260F401C8B; Fri,  6 Oct 2006 04:21:19 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
-To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20061006112119.C260F401C8B@tinman.treke.net>
-Date: Fri,  6 Oct 2006 04:21:19 -0700 (PDT)
-Subject: [Bug 1458] New: pkg_postinst_ipkg() does not work with /bin/dash
+	(envelope-from <joaquinduran@adtelecom.es>) id 1GVp5Z-0008Nk-DA
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 06 Oct 2006 14:46:05 +0200
+Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout3.frontal.correo
+	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
+	id 452611020000EA30 for openembedded-devel@lists.openembedded.org;
+	Fri, 6 Oct 2006 14:40:18 +0200
+Message-ID: <45265C6C.7090704@adtelecom.es>
+Date: Fri, 06 Oct 2006 14:38:52 +0100
+From: Joaquim Duran <joaquinduran@adtelecom.es>
+User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+References: <452622B1.2070203@adtelecom.es>
+In-Reply-To: <452622B1.2070203@adtelecom.es>
+Subject: Re: Specify X11 include and libs directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,40 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Oct 2006 11:52:50 -0000
+X-List-Received-Date: Fri, 06 Oct 2006 12:46:05 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
 
-http://bugs.openembedded.org/show_bug.cgi?id=1458
+Dear all,
 
-           Summary: pkg_postinst_ipkg() does not work with /bin/dash
-           Product: Openembedded
-           Version: unspecified
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Distributions
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: di@fh-wedel.de
-         QAContact: tinderbox-oe@gmx.net
+I've resolved the problem using the variables ${STAGING_INCDIR} and 
+${STAGING_LIBDIR}.
+
+Thanks and Best Regards,
+Joaquim Duran
 
 
-Consider the following code:
+En/na Joaquim Duran ha escrit:
+> Dear all,
+> 
+> I'm writting a .bb file for FLTK version 1.1.7. While executing the 
+> ./configure script, I should specify the include and lib directories of 
+> X in the cross development.
+> 
+> I know how specify the parameter to ./configure script, but the problem 
+> is that I don't know how specify these directories using variables to be 
+> flexible and from which folder from BUILD dir.
+> 
+> How can I specify them? Any help will be appreciated.
+> 
+> Thanks and Best Regards,
+> Joaquim Duran
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
-echo -e "#!/bin/sh 
-ipkg-cl configure
-" > ${IMAGE_ROOTFS}/${sysconfdir}/rcS.d/S${IPKG_INIT_POSITION}configure
-
-This fails if /bin/sh points to /bin/dash, because obviously /bin/dash has its
-own, builtin echo. I suggest either to remove the -e, it is not used anyway, or
-use /bin/echo or \echo instead. This is a principal issue, we should not always
-rely on having a particular version of /bin/sh offering whatever non-standard
-facilities.
-
-
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
 
 
