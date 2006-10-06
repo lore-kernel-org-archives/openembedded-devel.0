@@ -1,16 +1,16 @@
 Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
 	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GVoCa-0002Vu-Ft for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Oct 2006 13:49:16 +0200
+	id 1GVoG2-0002Zc-9v for openembedded-devel@lists.openembedded.org;
+	Fri, 06 Oct 2006 13:52:50 +0200
 Received: by tinman.treke.net (Postfix, from userid 33)
-	id BC1A4401C8B; Fri,  6 Oct 2006 04:17:43 -0700 (PDT)
+	id C260F401C8B; Fri,  6 Oct 2006 04:21:19 -0700 (PDT)
 X-Bugzilla-Reason: AssignedTo
 To: openembedded-devel@lists.openembedded.org
 From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20061006111743.BC1A4401C8B@tinman.treke.net>
-Date: Fri,  6 Oct 2006 04:17:43 -0700 (PDT)
-Subject: [Bug 1457] New: Stream redirection in log_check() does not work with /bin/sh
+Message-Id: <20061006112119.C260F401C8B@tinman.treke.net>
+Date: Fri,  6 Oct 2006 04:21:19 -0700 (PDT)
+Subject: [Bug 1458] New: pkg_postinst_ipkg() does not work with /bin/dash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,12 +25,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Oct 2006 11:49:17 -0000
+X-List-Received-Date: Fri, 06 Oct 2006 11:52:50 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=1457
+http://bugs.openembedded.org/show_bug.cgi?id=1458
 
-           Summary: Stream redirection in log_check() does not work with
-                    /bin/sh
+           Summary: pkg_postinst_ipkg() does not work with /bin/dash
            Product: Openembedded
            Version: unspecified
           Platform: Other
@@ -46,9 +45,15 @@ http://bugs.openembedded.org/show_bug.cgi?id=1457
 
 Consider the following code:
 
-if (echo "$lf_txt" | grep -v log_check | grep "$keyword_die") &>/dev/null 
+echo -e "#!/bin/sh 
+ipkg-cl configure
+" > ${IMAGE_ROOTFS}/${sysconfdir}/rcS.d/S${IPKG_INIT_POSITION}configure
 
-This fails if /bin/sh points to a dumb shell, like e.g. /bin/dash.
+This fails if /bin/sh points to /bin/dash, because obviously /bin/dash has its
+own, builtin echo. I suggest either to remove the -e, it is not used anyway, or
+use /bin/echo or \echo instead. This is a principal issue, we should not always
+rely on having a particular version of /bin/sh offering whatever non-standard
+facilities.
 
 
 -- 
