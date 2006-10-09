@@ -1,16 +1,21 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GWpId-00035H-50 for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Oct 2006 09:11:43 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id A647F40654F; Sun,  8 Oct 2006 23:39:29 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <dp@xora.org.uk>) id 1GWqRb-0004hy-Ax
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Oct 2006 10:25:03 +0200
+Received: from xora.org.uk ([::ffff:85.210.161.143])
+	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Mon, 09 Oct 2006 09:18:52 +0100
+	id 000041DE.452A05EC.000043ED
+Date: Mon, 9 Oct 2006 09:14:46 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20061009063929.A647F40654F@tinman.treke.net>
-Date: Sun,  8 Oct 2006 23:39:29 -0700 (PDT)
-Subject: [Bug 1463] New: libqte.a not stanged!
+Message-ID: <20061009081446.GA2541@stygia.hyboria>
+References: <45296EB8.7070704@dominion.kabel.utwente.nl>
+Mime-Version: 1.0
+In-Reply-To: <45296EB8.7070704@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.11
+Subject: Re: [RFC] Removing MAINTAINER field from recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,83 +30,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Oct 2006 07:11:43 -0000
+X-List-Received-Date: Mon, 09 Oct 2006 08:25:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1463
+I shall start by saying that I do not like this proposal.
 
-           Summary: libqte.a not stanged!
-           Product: Openembedded
-           Version: unspecified
-          Platform: Other
-        OS/Version: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P2
-         Component: Build
-        AssignedTo: openembedded-devel@lists.openembedded.org
-        ReportedBy: michael.illing@tietoenator.com
-         QAContact: tinderbox-oe@gmx.net
+>  * A lot of the MAINTAINER fields are stale
+Not a reason to nuke fields of files where they are not stale.
 
+>  * Not all people listed in the MAINTAINER fields (want to) have commit access
+Then there should be a policy of only having a MAINTAINER field with
+your email address if you are an oe developer.
 
-I tried to build mplayer when package "libqpe-opie-1.2.2+cvs-20061009-r0"
-failed to compile:
+>  * People have blindly copied recipes without contacting the respective MAINTAINER
+This is due to the above staleness and peoples lack of commit status.
 
-------------------------------------
+>  * Certain MAINTAINER only care about supporting their $DISTRO
+Then they should no claim MAINTAINER of generic packages.
 
-...
-ERROR: log data follows
-(/data/embedded2.1/oetmp/work/libqpe-opie-1.2.2+cvs-20061009-r0/temp/log.do_compile.6365)
-| NOTE: make -j3 MAKEFLAGS=
-MOC=/data/embedded2.1/oetmp/staging/i686-linux/bin/moc
-UIC=/data/embedded2.1/oetmp/staging/i686-linux/bin/uic
-| rm -f libqpe.so.1.5.0 libqpe.so libqpe.so.1 libqpe.so.1.5
-| ccache i486-linux-gcc -L/data/embedded2.1/oetmp/staging/i486-linux/lib
--Wl,-rpath-link,/data/embedded2.1/oetmp/staging/i486-linux/lib -Wl,-O1  
--Wl,-rpath-link,/data/embedded2.1/oetmp/staging/i486-linux/qt2/lib -shared
--Wl,-soname,libqpe.so.1 -o libqpe.so.1.5.0 calendar.o global.o xmlreader.o
-mimetype.o menubutton.o network.o networkinterface.o filemanager.o
-fontmanager.o qdawg.o datebookmonth.o fileselector.o imageedit.o resource.o
-qpedecoration_qws.o qcopenvelope_qws.o qpeapplication.o qpestyle.o qpedialog.o
-lightstyle.o config.o applnk.o sound.o tzselect.o qmath.o datebookdb.o
-alarmserver.o password.o process.o process_unix.o timestring.o fontdatabase.o
-power.o storage.o qpemessagebox.o timeconversion.o qpedebug.o qpemenubar.o
-qpetoolbar.o categories.o stringutil.o palmtoprecord.o task.o event.o contact.o
-categorymenu.o categoryedit_p.o categoryselect.o categorywidget.o ir.o
-vcc_yacc.o vobject.o findwidget_p.o finddialog.o lnkproperties.o
-locationcombo.o widget_showing.o quuid.o qlibrary.o qlibrary_unix.o
-rohfeedback.o passwordbase_p.o categoryeditbase_p.o findwidgetbase_p.o
-lnkpropertiesbase_p.o moc_menubutton.o moc_datebookmonth.o moc_fileselector.o
-moc_fileselector_p.o moc_imageedit.o moc_qpedecoration_qws.o
-moc_qpeapplication.o moc_qpedialog.o moc_tzselect.o moc_process.o moc_storage.o
-moc_qpemenubar.o moc_qpetoolbar.o moc_categories.o moc_categorymenu.o
-moc_categoryedit_p.o moc_categoryselect.o moc_ir.o moc_findwidget_p.o
-moc_finddialog.o moc_lnkproperties.o moc_locationcombo.o moc_qlibrary_p.o
-moc_rohfeedback.o moc_passwordbase_p.o moc_categoryeditbase_p.o
-moc_findwidgetbase_p.o moc_lnkpropertiesbase_p.o 
--L/data/embedded2.1/oetmp/staging/i486-linux/qt2/lib  -ldl -lcrypt -lm -lsupc++
--lqte
-|
-/data/embedded2.1/oetmp/cross/lib/gcc/i486-linux/4.1.1/../../../../i486-linux/bin/ld:
-cannot find -lqte
-| collect2: ld returned 1 exit status
-| make: *** [libqpe.so.1.5.0] Fehler 1
-| FATAL: oe_runmake failed
+>  * The SCM (monotone) holds all the information about who added the recipes and who edited
+> them.
+> 
+Not normally in a nice easy to read manner.
 
--------------------------------------
+All the packages that I am listed as maintainer on I actively try and
+maintain and improve the quality of. I would like people to feel they
+can contact me to moan and complain about their lack of workingness on
+their machine or distro of choice. I can then try and work with the
+distro maintainers to get a fix into the generic .dev and then pushed
+out into the distro that needs it.
 
-The file "libqte.a" is missing in "staging/i486-linux/qt2/lib" but it's present
-in 
+I feel rather than nuking the MAINTAINER field which I feel is a useful
+peice of information. That it would be more productive to come up with a
+set of policies governing peoples MAINTAINERSHIP. I cant see debian for
+example dropping all package maintainers overnight.
 
-work/qmake-native-1.07a-r3/qt-embedded-free-3.3.5/lib/libqte.la
-work/uicmoc-native-2.3.10-r2/qt-2.3.10/lib/libqte.a
-work/qte-mt-static-2.3.12-r3/qt-2.3.10-snapshot-20060120/lib/libqte.a
+Maybe for example for people who dont want OE access but want to fix up
+software we start some form of sponsorship where an OE dev with an
+interest in that package can list as MAINTAINER but pass out bugs etc to
+the actual MAINTAINER.
 
-Manually copying it into "staging/i486-linux/qt2/lib" solves the problem.
+Thanks
 
+Graeme
 
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
+List of packages as like original proposers.
+
+kismet, links. dillo, mplayer, sulpheed, sylpheed-claws, gqview, fbpanel
+tightvnc, epdfview, xmms-tremor, xmms-mad
+
 
 
