@@ -1,25 +1,16 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GWgMv-0000jg-BY
-	for openembedded-devel@openembedded.org; Sun, 08 Oct 2006 23:39:33 +0200
-Received: from [130.89.7.86] (vpn007086.vpn.utwente.nl [130.89.7.86])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k98LXTfd020262 for <openembedded-devel@openembedded.org>;
-	Sun, 8 Oct 2006 23:33:29 +0200
-Message-ID: <45296EB8.7070704@dominion.kabel.utwente.nl>
-Date: Sun, 08 Oct 2006 23:33:44 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: [RFC] Removing MAINTAINER field from recipes
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GWndp-0004fs-0x for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Oct 2006 07:25:29 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id A94B840654F; Sun,  8 Oct 2006 21:53:12 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20061009045312.A94B840654F@tinman.treke.net>
+Date: Sun,  8 Oct 2006 21:53:12 -0700 (PDT)
+Subject: [Bug 1462] New: sudo 1.6.8p12 failed to configure on Powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -34,58 +25,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Oct 2006 21:39:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Oct 2006 05:25:29 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+http://bugs.openembedded.org/show_bug.cgi?id=1462
 
-Hi,
+           Summary: sudo 1.6.8p12 failed to configure on Powerpc
+           Product: Openembedded
+           Version: unspecified
+          Platform: Other
+        OS/Version: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P2
+         Component: Distributions
+        AssignedTo: openembedded-devel@lists.openembedded.org
+        ReportedBy: m3l3m01t@gmail.com
+         QAContact: tinderbox-oe@gmx.net
 
-After some discussion about the actual meaning of the MAINTAINER field in OE we have
-formulated a proposal:
 
-  'All MAINTAINER fields will be removed from the recipes in org.openembedded.dev, and
-will only be valid in a distro config file'
+the "configure" script generated is invalid. it's caused by "SUDO_LONG_LONG"
+defined in aclocal.m4
 
-We have a number of reasons for doing this:
+see following patch file:
 
- * A lot of the MAINTAINER fields are stale
- * Not all people listed in the MAINTAINER fields (want to) have commit access
- * People have blindly copied recipes without contacting the respective MAINTAINER
- * Certain MAINTAINER only care about supporting their $DISTRO
- * The SCM (monotone) holds all the information about who added the recipes and who edited
-them.
+Index: sudo-1.6.8p12/aclocal.m4
+===================================================================
+--- sudo-1.6.8p12.orig/aclocal.m4
++++ sudo-1.6.8p12/aclocal.m4
+@@ -304,15 +304,23 @@ dnl check for "long long"
+ dnl XXX hard to cache since it includes 2 tests
+ dnl
 
-For monotone-challenged people and tarball snapshots we will add a file into the metadata
-that will like names, contact information and interested areas, for example:
+-AC_DEFUN([SUDO_LONG_LONG], [AC_MSG_CHECKING(for long long support)
+-AC_LINK_IFELSE([long long foo = 1000; foo /= 10;],
+-       AC_DEFINE(HAVE_LONG_LONG, 1, [Define if your compiler supports the
+"long long" type.])
+-       AC_CHECK_SIZEOF([long])
+-       AC_CHECK_SIZEOF([long long])
+-       if x"$ac_cv_sizeof_long" = x"$ac_cv_sizeof_long_long"; then
+-           AC_DEFINE(LONG_IS_QUAD, 1, [Define if sizeof(long) == sizeof(long
+long).])
+-       fi
+-, AC_MSG_RESULT(yes), AC_MSG_RESULT(no))])
++AC_DEFUN([SUDO_LONG_LONG],
++[
++       AC_CACHE_CHECK([for long long], ac_cv_type_long_long,
++               [AC_TRY_LINK([long long ll = 1LL; int i = 63;],
++                       [long long llmax = (long long) -1;
++                       return ll << i | ll >> i | llmax / ll | llmax % ll;],
++                       ac_cv_type_long_long=yes,
++                       ac_cv_type_long_long=no)])
++       if test $ac_cv_type_long_long = yes; then
++               AC_DEFINE(HAVE_LONG_LONG, 1, [Define if you have the 'long
+long' type.])
++               AC_CHECK_SIZEOF([long])
++               AC_CHECK_SIZEOF([long long])
++               if x"$ac_cv_sizeof_long" = x"$ac_cv_sizeof_long_long"; then
++                       AC_DEFINE(LONG_IS_QUAD, 1, [Define if sizeof(long) ==
+sizeof(long long).])
++               fi
++        fi
++])
 
-- ---
+ dnl
+ dnl append a libpath to an LDFLAGS style variable
 
-Koen Kooi <koen@openembedded.org>
 
-	* abiword, abiword-plugins
-	* angstrom distro and task files
-	* h2200, hx4700, efika, ep93xx, netbook-pro machines
-
-Michael 'mickeyl' Lauer <mickeyl@openembedded.org>
-
-	* everything python related
-- ---
-
-You can view the patch implementing said proposal at
-http://www.openembedded.org/~koen/OE/remove-maintainers.patch
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFKW6PMkyGM64RGpERAk25AJ0bzxc8HfJSvZxLGklgMm6Ewy9CggCfU1jp
-z+tRO3+ZMjepQ3oXPUKRGs4=
-=Ar2h
------END PGP SIGNATURE-----
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
