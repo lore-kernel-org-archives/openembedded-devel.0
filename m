@@ -1,35 +1,30 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <rpurdie@rpsys.net>) id 1GWr3W-0005M6-Jy
-	for openembedded-devel@openembedded.org; Mon, 09 Oct 2006 11:04:14 +0200
+	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
+	id 1GWsJM-00074b-QF for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Oct 2006 12:24:40 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.6) with ESMTP id k998w84E008597
-	for <openembedded-devel@openembedded.org>;
-	Mon, 9 Oct 2006 09:58:08 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 08504-03 for <openembedded-devel@openembedded.org>;
-	Mon,  9 Oct 2006 09:58:04 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.6) with ESMTP id k998w2XB008584
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 9 Oct 2006 09:58:02 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-In-Reply-To: <74d0deb30610090140g40716743k35a2cddb555018d4@mail.gmail.com>
-References: <45296EB8.7070704@dominion.kabel.utwente.nl>
-	<1160382102.5741.19.camel@localhost.localdomain>
-	<74d0deb30610090140g40716743k35a2cddb555018d4@mail.gmail.com>
-Date: Mon, 09 Oct 2006 09:58:01 +0100
-Message-Id: <1160384282.5741.22.camel@localhost.localdomain>
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 413EEADC
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  9 Oct 2006 12:18:37 +0200 (CEST)
+Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
+	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 16467-02 for <openembedded-devel@lists.openembedded.org>;
+	Mon,  9 Oct 2006 12:18:15 +0200 (CEST)
+Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
+	[141.2.14.64])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id CBE35B48
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  9 Oct 2006 12:17:58 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+To: openembedded-devel@lists.openembedded.org
+Organization: VanilleMedia
+Date: Mon, 09 Oct 2006 12:17:58 +0200
+Message-Id: <1160389078.21755.22.camel@gandalf.tm.informatik.uni-frankfurt.de>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [RFC] Removing MAINTAINER field from recipes
+X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
+X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
+Subject: Mailing List Restructuring
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -44,27 +39,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Oct 2006 09:04:14 -0000
+X-List-Received-Date: Mon, 09 Oct 2006 10:24:40 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2006-10-09 at 10:40 +0200, pHilipp Zabel wrote:
-> On 10/9/06, Richard Purdie <rpurdie@rpsys.net> wrote:
-> > MAINTAINER would still exists but would become a distro variable so
-> > distros would still use it to set the maintainer of distributed packages
-> > but since this is usually a distro contact, setting it in a distro.conf
-> > file shouldn't be a problem (and it can be overridden on a per package
-> > basis MAINTAINER_pn-linux-opnzaurus = "").
-> 
-> Does this mean we'll have additional per-distro .conf files
-> which contain hundreds of MAINTAINER_pn-foo variables?
+I finally had time to do the mailing list restructuring that has
+been pending since day one after moving from handhelds.org to
+linuxtogo.org.
 
-That is something for a distro to decide. In most cases, I see a distro
-wanting a single point of contact so whilst it would be possible, I
-don't see it happening. All current distros try and setup a single point
-of contact as far as I know.
+Having just one mailing list has always been a bugger for a lot of
+people,
+especially ones that were afraid of posting "newbie" questions to the
+almighty -devel list, but also for those who were overwhelmed by the
+amount
+of issues reported by our bugzilla.
 
-Richard
+We now have the following five mailing lists:.
+
+1.) openembedded-commits -- automatic SCM commit mails -- high volume
+
+2.) openembedded-devel -- for developing OpenEmbedded, i.e. all people
+with commit access should be on this list -- medium volume
+
+3.) [NEW] openembedded-announce -- only for announcements -- low volume
+
+4.) [NEW] openembedded-users -- for new users and people who are not yet
+contributing to the metadata -- medium volume
+
+5.) [NEW] openembedded-issues -- automatic bugzilla mails -- high volume
+
+Note to all people with commit access: please be sure to subscribe at
+least to -devel and to -issues, it would be reasonable to subscribe to
+-users as well though.
+
+I will take care about bugzilla sending out issues to the new -issues
+list, could someone please update GettingStarted and the
+openembedded.org top page?
+
+-- 
+Regards,
+
+Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
+
 
 
 
