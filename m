@@ -1,28 +1,16 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [192.216.230.225] (helo=tinman.treke.net)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GWxhH-0000pW-96
-	for openembedded-devel@openembedded.org; Mon, 09 Oct 2006 18:09:43 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k99G3ZZS017526 for <openembedded-devel@openembedded.org>;
-	Mon, 9 Oct 2006 18:03:36 +0200
-Message-ID: <452A72E8.6050502@dominion.kabel.utwente.nl>
-Date: Mon, 09 Oct 2006 18:03:52 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-References: <45296EB8.7070704@dominion.kabel.utwente.nl>	<1160382102.5741.19.camel@localhost.localdomain>
-	<20061009082645.GB2541@stygia.hyboria>
-In-Reply-To: <20061009082645.GB2541@stygia.hyboria>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] Removing MAINTAINER field from recipes
+	(envelope-from <bugzilla-daemon@tinman.treke.net>)
+	id 1GWzuK-0008KA-Dx for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Oct 2006 20:31:20 +0200
+Received: by tinman.treke.net (Postfix, from userid 33)
+	id 5D55C406554; Mon,  9 Oct 2006 10:58:55 -0700 (PDT)
+X-Bugzilla-Reason: AssignedTo
+To: openembedded-devel@lists.openembedded.org
+From: bugzilla-daemon@tinman.treke.net
+Message-Id: <20061009175855.5D55C406554@tinman.treke.net>
+Date: Mon,  9 Oct 2006 10:58:55 -0700 (PDT)
+Subject: [Bug 1421] Compilation of glibc-2.4 fails for collie (TLS support?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -37,30 +25,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Oct 2006 16:09:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Oct 2006 18:31:20 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+http://bugs.openembedded.org/show_bug.cgi?id=1421
 
-Graeme Gregory schreef:
-<snip>
 
-> I second this proposal, it covers the issues I raised with my earlier
-> email and gives still a point of contact which I like.
 
-Any comments about the patch?
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
+------- Comment #5 from bugs.openembedded.org@rolf.leggewie.biz  2006-10-09 10:58 -------
+I have the following arm-linux-gcc on my system:
 
-iD8DBQFFKnLnMkyGM64RGpERApOnAJ9yDHEaRjo0yRA9MU2PSwG6Z6FohQCePMR6
-+nu91pDrDKPP+6xlEhjDexI=
-=Ug7l
------END PGP SIGNATURE-----
+/export/interim/openembedded/tmp/work/i686-linux/gcc-cross-initial-4.1.1-r6/image/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
+/export/interim/openembedded/tmp/work/i686-linux/gcc-cross-4.1.1-r6/image/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
+/export/interim/openembedded/tmp/work/i686-linux/gcc-cross-initial-4.1.1-r7/image/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
+/export/interim/openembedded/tmp/work/i686-linux/gcc-cross-4.1.1-r7/image/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
+/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
+
+When called with --version, they all report
+
+arm-linux-gcc (GCC) 4.1.1
+Copyright (C) 2006 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+-- 
+Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
+------- You are receiving this mail because: -------
+You are the assignee for the bug, or are watching the assignee.
 
 
