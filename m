@@ -1,20 +1,27 @@
-Received: from [213.4.149.66] (helo=ctsmtpout3.frontal.correo)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <joaquinduran@adtelecom.es>) id 1GXIl9-0001rZ-W9
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Oct 2006 16:39:08 +0200
-Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout3.frontal.correo
-	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
-	id 45269CF300068280 for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Oct 2006 16:32:53 +0200
-Message-ID: <452BBCC8.5090505@adtelecom.es>
-Date: Tue, 10 Oct 2006 16:31:20 +0100
-From: Joaquim Duran <joaquinduran@adtelecom.es>
-User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GXIoU-0001uR-22
+	for openembedded-devel@openembedded.org; Tue, 10 Oct 2006 16:42:34 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k9AEaJZS025654 for <openembedded-devel@openembedded.org>;
+	Tue, 10 Oct 2006 16:36:20 +0200
+Message-ID: <452BAFF4.5050705@dominion.kabel.utwente.nl>
+Date: Tue, 10 Oct 2006 16:36:36 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
 MIME-Version: 1.0
 To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-Subject: Problem of configuration of X locale with Kdrive
+	<openembedded-devel@openembedded.org>
+References: <452BBCC8.5090505@adtelecom.es>
+In-Reply-To: <452BBCC8.5090505@adtelecom.es>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: Problem of configuration of X locale with Kdrive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -29,30 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Oct 2006 14:39:08 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+X-List-Received-Date: Tue, 10 Oct 2006 14:42:34 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Dear all,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I don't know if this is an off-topic of this list, but I'll post.
+Joaquim Duran schreef:
 
-I'm trying to start the Kdrive xserver (v. X11R7.1) with a window 
-manager (twm), generated from xterminal image. 'xinit' is also 
-installed, with fonts. Each time that I run 'startx' or 'xinit' the 
-following message is shown by kdrive:
+> I've observed that if library hasn't any application depending on it, 
+> the bitbake doesn't include the library to the image. Is this a bug?
 
-Warning: X locale modifiers not supported, using default
-Warning: Unable to load any usable fontset
-Error: Aborting: no fontset found
+Is there any reason why you expect it to be included?
 
-How can I set up this locale? Any help will be appreciated.
+regards,
 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
-I've observed that if library hasn't any application depending on it, 
-the bitbake doesn't include the library to the image. Is this a bug?
-
-Thanks and Best Regards,
-Joaquim Duran
+iD8DBQFFK6/0MkyGM64RGpERAuKvAJ9oze7jhbyUgDQOIcru83Ll2iGm3QCgkBLu
+bh7L3drStYsRi7myeiuQ+kU=
+=+AxJ
+-----END PGP SIGNATURE-----
 
 
