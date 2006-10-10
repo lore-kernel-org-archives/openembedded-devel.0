@@ -1,16 +1,24 @@
-Received: from [192.216.230.225] (helo=tinman.treke.net)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <bugzilla-daemon@tinman.treke.net>)
-	id 1GWzuK-0008KA-Dx for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Oct 2006 20:31:20 +0200
-Received: by tinman.treke.net (Postfix, from userid 33)
-	id 5D55C406554; Mon,  9 Oct 2006 10:58:55 -0700 (PDT)
-X-Bugzilla-Reason: AssignedTo
+	(envelope-from <dp@xora.org.uk>) id 1GXCZ0-0002YJ-Uc
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Oct 2006 10:02:10 +0200
+Received: from xora.org.uk ([::ffff:85.210.161.143])
+	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Tue, 10 Oct 2006 08:55:54 +0100
+	id 000041DE.452B520A.00005084
+Date: Tue, 10 Oct 2006 08:55:44 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-From: bugzilla-daemon@tinman.treke.net
-Message-Id: <20061009175855.5D55C406554@tinman.treke.net>
-Date: Mon,  9 Oct 2006 10:58:55 -0700 (PDT)
-Subject: [Bug 1421] Compilation of glibc-2.4 fails for collie (TLS support?)
+Message-ID: <20061010075544.GC2541@stygia.hyboria>
+References: <45296EB8.7070704@dominion.kabel.utwente.nl>
+	<1160382102.5741.19.camel@localhost.localdomain>
+	<20061009082645.GB2541@stygia.hyboria>
+	<452A72E8.6050502@dominion.kabel.utwente.nl>
+Mime-Version: 1.0
+In-Reply-To: <452A72E8.6050502@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.11
+Subject: Re: [RFC] Removing MAINTAINER field from recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -25,34 +33,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Oct 2006 18:31:20 -0000
+X-List-Received-Date: Tue, 10 Oct 2006 08:02:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=1421
+On Mon, Oct 09, 2006 at 06:03:52PM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Graeme Gregory schreef:
+> <snip>
+> 
+> > I second this proposal, it covers the issues I raised with my earlier
+> > email and gives still a point of contact which I like.
+> 
+> Any comments about the patch?
+> 
+A quick scan of the patch and it looks fine to me.
 
+G
 
-
-
-
-------- Comment #5 from bugs.openembedded.org@rolf.leggewie.biz  2006-10-09 10:58 -------
-I have the following arm-linux-gcc on my system:
-
-/export/interim/openembedded/tmp/work/i686-linux/gcc-cross-initial-4.1.1-r6/image/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
-/export/interim/openembedded/tmp/work/i686-linux/gcc-cross-4.1.1-r6/image/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
-/export/interim/openembedded/tmp/work/i686-linux/gcc-cross-initial-4.1.1-r7/image/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
-/export/interim/openembedded/tmp/work/i686-linux/gcc-cross-4.1.1-r7/image/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
-/export/interim/openembedded/tmp/cross/bin/arm-linux-gcc
-
-When called with --version, they all report
-
-arm-linux-gcc (GCC) 4.1.1
-Copyright (C) 2006 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-
--- 
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=email
-------- You are receiving this mail because: -------
-You are the assignee for the bug, or are watching the assignee.
 
 
