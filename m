@@ -1,34 +1,25 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <lenehan@twibble.org>) id 1GXPuc-0006RY-Dw
+	(envelope-from <papercrane@gmail.com>) id 1GXQRM-00034g-JZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Oct 2006 00:17:22 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id F2D0CAD8FF;
-	Wed, 11 Oct 2006 08:11:08 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 23569-10; Wed, 11 Oct 2006 08:11:07 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 53CE6AD89F;
-	Wed, 11 Oct 2006 08:11:07 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 4B1E7122F691; Wed, 11 Oct 2006 08:11:07 +1000 (EST)
-Date: Wed, 11 Oct 2006 08:11:07 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Message-ID: <20061010221107.GB20799@twibble.org>
-Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
-	Koen Kooi <koen@dominion.kabel.utwente.nl>,
-	openembedded-devel@lists.openembedded.org
-References: <20060914001918.GA8432@twibble.org>
-	<452B83DC.2020503@dominion.kabel.utwente.nl>
-Mime-Version: 1.0
-In-Reply-To: <452B83DC.2020503@dominion.kabel.utwente.nl>
-User-Agent: Mutt/1.4.2.1i
-X-Virus-Scanned: by amavisd at twibble.org
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: site/* Common site files
+	Wed, 11 Oct 2006 00:51:12 +0200
+Received: by py-out-1112.google.com with SMTP id i75so25384pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Oct 2006 15:44:59 -0700 (PDT)
+Received: by 10.35.60.15 with SMTP id n15mr129826pyk;
+	Tue, 10 Oct 2006 15:44:59 -0700 (PDT)
+Received: by 10.35.118.16 with HTTP; Tue, 10 Oct 2006 15:44:59 -0700 (PDT)
+Message-ID: <432beae0610101544g5f7bc4eco819ebbcb25f7f75d@mail.gmail.com>
+Date: Tue, 10 Oct 2006 15:44:59 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
+	<openembedded-devel@lists.openembedded.org>, 
+	"Jamie Lenehan" <lenehan@twibble.org>, "Nicolas FR" <nicolasfr@gmail.com>
+In-Reply-To: <20061010220601.GA20799@twibble.org>
+MIME-Version: 1.0
+References: <b9481e140610100631u25d9bc4dm7f6483c20e3c482d@mail.gmail.com>
+	<20061010220601.GA20799@twibble.org>
+Subject: Re: Bitbaking a recipe which refers to a missing bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -43,28 +34,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Oct 2006 22:17:22 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 10 Oct 2006 22:51:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Tue, Oct 10, 2006 at 01:28:28PM +0200, Koen Kooi wrote:
-[...]
-> 
-> The consensus is that we want this in OE, how to we proceed to get this added into .dev?
+On 10/10/06, Jamie Lenehan <lenehan@twibble.org> wrote:
+> On Tue, Oct 10, 2006 at 03:31:42PM +0200, "Nicolas FR" wrote:
+> > Hi,
+> >
+> > I have noticed that when bitbaking a recipe which refers to a missing
+> > .bbclass definition, there where no warning / error.
+>
+> I've noticed the same thing and I agree that it's rather annoying.
+> I'd much rather it fail then continue on and do something else.
+>
 
-If my implementation was ok then I can push it in over a few days.
-The order being:
+Try:
 
- - add config_info.bbclass
+Index: lib/bb/parse/parse_py/BBHandler.py
+===================================================================
+--- lib/bb/parse/parse_py/BBHandler.py  (revision 618)
++++ lib/bb/parse/parse_py/BBHandler.py  (working copy)
+@@ -62,7 +62,7 @@
+         if not file in __inherit_cache.split():
+             debug(2, "BB %s:%d: inheriting %s" % (fn, lineno, file))
+             __inherit_cache += " %s" % file
+-            include(fn, file, d)
++            include(fn, file, d, True)
+     data.setVar('__inherit_cache', __inherit_cache, d)
 
- - modify recipes that use the site file directly to use config_info instead.
 
- - update autotools.bbclass to use config_info.bbclass
-
-Then it's ready to actually use. Merging those x86 site files would
-be a good place to start.
+This should show a big ERROR while parsing (but it doesn't bail, it
+will just fail saying that there is no provider for this package as it
+doesn't seem to make it into the cache now).
 
 -- 
- Jamie Lenehan <lenehan@twibble.org>
+Justin Patrin
 
 
