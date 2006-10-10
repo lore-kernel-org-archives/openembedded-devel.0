@@ -1,24 +1,25 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <dp@xora.org.uk>) id 1GXCZ0-0002YJ-Uc
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Oct 2006 10:02:10 +0200
-Received: from xora.org.uk ([::ffff:85.210.161.143])
-	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Tue, 10 Oct 2006 08:55:54 +0100
-	id 000041DE.452B520A.00005084
-Date: Tue, 10 Oct 2006 08:55:44 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20061010075544.GC2541@stygia.hyboria>
-References: <45296EB8.7070704@dominion.kabel.utwente.nl>
-	<1160382102.5741.19.camel@localhost.localdomain>
-	<20061009082645.GB2541@stygia.hyboria>
-	<452A72E8.6050502@dominion.kabel.utwente.nl>
-Mime-Version: 1.0
-In-Reply-To: <452A72E8.6050502@dominion.kabel.utwente.nl>
-User-Agent: Mutt/1.5.11
-Subject: Re: [RFC] Removing MAINTAINER field from recipes
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GXDIe-00083y-O7
+	for openembedded-devel@openembedded.org; Tue, 10 Oct 2006 10:49:20 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k9A8h9ZS027254 for <openembedded-devel@openembedded.org>;
+	Tue, 10 Oct 2006 10:43:09 +0200
+Message-ID: <452B5D2B.3000806@dominion.kabel.utwente.nl>
+Date: Tue, 10 Oct 2006 10:43:23 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: [RFC] removing pre-modular X from .dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -33,26 +34,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Oct 2006 08:02:11 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 10 Oct 2006 08:49:21 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Mon, Oct 09, 2006 at 06:03:52PM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Graeme Gregory schreef:
-> <snip>
-> 
-> > I second this proposal, it covers the issues I raised with my earlier
-> > email and gives still a point of contact which I like.
-> 
-> Any comments about the patch?
-> 
-A quick scan of the patch and it looks fine to me.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-G
+Hi,
 
+A number of users have been seeing problems with their builds due to mixing pre-modular X
+stuff with Xorg 7.x stuff. I want to propose the following:
+
+  'Remove all pre-modular X servers, libraries, proto's and extentsions from .dev'
+
+There are a number of reasons to do this:
+
+ * premodular X is using unsupported releases
+ * when pulling from cvs, we use a unsupported and obsoleted cvs tree
+ * Xorg 7.x is present and supported in distributions like debian and suse, while the
+premodular X stuff we use is not
+ * Accidentily building xextensions will break your Xorg 7.x build in non-obvious ways.
+
+I've been wanting to send this RFC to this list for a long while, but was prompted by
+something on IRC: The git-version didn't fetch due to firewall issues, so let's use the
+cvs version.
+
+The change will basically consist of removing the recipes mentioned in
+http://www.openembedded.org/repo/org.openembedded.dev/conf/distro/include/preferred-x-versions-pre-X11R7.inc
+
+comments?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
+
+iD8DBQFFK10rMkyGM64RGpERAscBAJ4gUXl8V8QdCySgzOzRf4STIwL4gACfWTPF
+G8GdnV9F5JR9SmRm6j6pK1w=
+=plXa
+-----END PGP SIGNATURE-----
 
 
