@@ -1,28 +1,33 @@
-Received: from [66.249.82.226] (helo=wx-out-0506.google.com)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <pmiscml@gmail.com>) id 1GXKFM-0007hY-CW
+	(envelope-from <lenehan@twibble.org>) id 1GXPph-0006ND-6g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Oct 2006 18:14:24 +0200
-Received: by wx-out-0506.google.com with SMTP id h30so2076097wxd
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Oct 2006 09:08:13 -0700 (PDT)
-Received: by 10.70.83.8 with SMTP id g8mr13732638wxb;
-	Tue, 10 Oct 2006 09:08:12 -0700 (PDT)
-Received: from CUBE ( [82.193.96.236])
-	by mx.google.com with ESMTP id i5sm496145nzi.2006.10.10.09.08.10;
-	Tue, 10 Oct 2006 09:08:11 -0700 (PDT)
-Date: Tue, 10 Oct 2006 19:08:14 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1646477210.20061010190814@gmail.com>
-To: Graeme Gregory <dp@xora.org.uk>
-In-Reply-To: <20061010153918.GD2541@stygia.hyboria>
-References: <45296EB8.7070704@dominion.kabel.utwente.nl>
-	<20061010153918.GD2541@stygia.hyboria>
-MIME-Version: 1.0
-Cc: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC] Removing MAINTAINER field from recipes
+	Wed, 11 Oct 2006 00:12:17 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id 7FFA7ADA0A;
+	Wed, 11 Oct 2006 08:06:03 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 23590-01; Wed, 11 Oct 2006 08:06:01 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id D51FBAD9F4;
+	Wed, 11 Oct 2006 08:06:01 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id CCCC7122F691; Wed, 11 Oct 2006 08:06:01 +1000 (EST)
+Date: Wed, 11 Oct 2006 08:06:01 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
+To: Nicolas FR <nicolasfr@gmail.com>
+Message-ID: <20061010220601.GA20799@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	Nicolas FR <nicolasfr@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <b9481e140610100631u25d9bc4dm7f6483c20e3c482d@mail.gmail.com>
+Mime-Version: 1.0
+In-Reply-To: <b9481e140610100631u25d9bc4dm7f6483c20e3c482d@mail.gmail.com>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Bitbaking a recipe which refers to a missing bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -37,63 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Oct 2006 16:14:24 -0000
+X-List-Received-Date: Tue, 10 Oct 2006 22:12:17 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Graeme,
+On Tue, Oct 10, 2006 at 03:31:42PM +0200, "Nicolas FR" wrote:
+> Hi,
+> 
+> I have noticed that when bitbaking a recipe which refers to a missing
+> .bbclass definition, there where no warning / error.
 
-Tuesday, October 10, 2006, 6:39:18 PM, you wrote:
-
-> A suggestion as to a possible format for MAINTAINERS file.
-
-> I tried to be machine parsable and human parsable.
-
-> DEVELOPER {
-> NAME="Koen Kooi"
-> NICK="koen"
-> EMAIL="Koen Kooi <koen@openembedded.org>
-> MACHINE="h2200 ipaq-pxa270"
-> DISTRO="angstrom.*"
-> RECPIPES="gnome/.* gnumeric/.*"
-> }
-
-  Well, just a note: this seems just like *too much machine* parsable
-;-). As far as got from idea of removing the var, intention of the
-list to be machine parsable was simple things, like sorting it
-in some order or rendering in HTML. Not being able to write
-a script which, for any given package, will return a maintainer for
-it. In other words, I understood that intention was that maintainer
-list's contents were intended for human consumption, and only syntax
-of it should be machine-readable.
-
-  Because otherwise, MAINTAINER field could have stayed the way it
-was.
-
-  Please correct me if I'm wrong.
-
-
-Marcin Juszkiewicz wrote:
-
-> Person:     Koen Kooi
-> Mail:       koen@openembedded.org
-> Website:    http://dominion.kabel.utwente.nl/koen/cms
-> Machines:   h2200, ipaq-pxa270, efika, ep93xx, netbook-pro
-> Distros:    Angstrom
-> Recipes:    OpenSync,, GNOME, GPE, Matchbox
-> Recipes:    abiword, bootchart, dia, farsight, freeciv, fuse, galago, geda,
-> Recipes:    gimp, gnumeric, (g)obby, imposter, inkscape
-> Recipes:    telepathy, tilibs, xchat, xournal. 
-
-
-> Cheers
-
-> G
-
+I've noticed the same thing and I agree that it's rather annoying.
+I'd much rather it fail then continue on and do something else.
 
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+ Jamie Lenehan <lenehan@twibble.org>
 
 
