@@ -1,27 +1,26 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GY1sG-0004mG-U0
-	for openembedded-devel@openembedded.org; Thu, 12 Oct 2006 16:49:28 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9CEgsZS012551 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Oct 2006 16:42:59 +0200
-Message-ID: <452E5483.1000006@dominion.kabel.utwente.nl>
-Date: Thu, 12 Oct 2006 16:43:15 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+	(envelope-from <pmiscml@gmail.com>) id 1GY3lU-0000HA-Au
+	for openembedded-devel@openembedded.org; Thu, 12 Oct 2006 18:50:38 +0200
+Received: by wx-out-0506.google.com with SMTP id s19so615966wxc
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Oct 2006 09:44:12 -0700 (PDT)
+Received: by 10.70.33.10 with SMTP id g10mr3269363wxg;
+	Thu, 12 Oct 2006 09:44:11 -0700 (PDT)
+Received: from CUBE ( [85.202.124.214])
+	by mx.google.com with ESMTP id 22sm1123298nzn.2006.10.12.09.44.10;
+	Thu, 12 Oct 2006 09:44:11 -0700 (PDT)
+Date: Thu, 12 Oct 2006 19:44:08 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1167982954.20061012194408@gmail.com>
+To: Koen Kooi <koen@dominion.kabel.utwente.nl>
+In-Reply-To: <452E0947.4070605@dominion.kabel.utwente.nl>
+References: <452E0947.4070605@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
+Cc: Using the OpenEmbedded metadata to build Linux Distributions
 	<openembedded-devel@openembedded.org>
-References: <427d64720610120724q5c533520y1afeafdd2bc8f462@mail.gmail.com>
-In-Reply-To: <427d64720610120724q5c533520y1afeafdd2bc8f462@mail.gmail.com>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: package strace-4.5.14-r3: task do_compile: failed
+Subject: Re: [Openembedded-announce] kernel maintainers: COMPATIBLE_MACHINE field will become mandatory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -36,107 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2006 14:49:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 Oct 2006 16:50:41 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-axel lin schreef:
-> hi list,
->    I got below compile error when compile strace.
->    I also tried to compile strace-4.5.12, but it shows the same error messages.
->    Could someone give me some suggestions to fix this.
+Thursday, October 12, 2006, 12:22:15 PM, you wrote:
 
-Could you file these (and future) bugs into the bugtracker at http://bugs.openembedded.org
- please?
+[]
 
-regards,
+> Hi,
 
-Koen
+> At the OEDEM conference we decided that the COMPATIBLE_MACHINE field will be mandatory for
+>  kernel recipes. If you maintain a kernel recipe: add the appropriate COMPATIBLE_MACHINE
+> field. If you don't maintain a kernel recipe, but want to help: patches welcome.
+
+> The COMPATIBLE_MACHINE machine field tells bitbake for which machines this is a valid
+> kernel to avoid surprises for some reason the
+> PREFERRED_PROVIDER_virtual/kernel gets broken.
+> A lot of kernels already have that field, so have a look at first if you any questions.
+
+  Just a question - should there be already machine conf file in OE
+for anything added to COMPATIBLE_MACHINE, or can something be added as
+an informative, "for-future", annotation?
+
+> regards,
+
+> Koen
 
 
->    thanks,
-> Axel
-> 
-> axel@kdc:/opt/oe/build$ bitbake bootstrap-image
-> NOTE: Using cache in '/opt/oe/build/tmp/cache'
-> NOTE: Handling BitBake files: - (4052/4052) [100 %]
-> NOTE: Parsing finished. 3923 cached, 0 parsed, 129 skipped, 0 masked.
-> 
-> NOTE: build 200610122212: started
-> 
-> OE Build Configuration:
-> BB_VERSION     = "1.6.1"
-> OE_REVISION    = "format_version "1"
-> 
-> new_manifest [0000000000000000000000000000000000000004]
-> 
-> old_revision [e9d250facb6ebff3bad1043f7e81fb2ce892c899]"
-> TARGET_ARCH    = "arm"
-> TARGET_OS      = "linux-gnueabi"
-> MACHINE        = "mainstone"
-> DISTRO         = "angstrom"
-> DISTRO_VERSION = "test-20061012"
-> TARGET_FPU     = "soft"
-> 
-> NOTE: preferred version 2.5 of glibc not available
-> NOTE: package strace-4.5.14: started
-> NOTE: package strace-4.5.14-r3: task do_compile: started
-> ERROR: function do_compile failed
-> ERROR: log data follows (/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/s
-> trace-4.5.14-r3/temp/log.do_compile.20013)
-> | NOTE: make
-> | make  all-am
-> | make[1]: Entering directory `/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnu
-> eabi/strace-4.5.14-r3/strace-4.5.14'
-> | if ccache arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=xscale -DHAVE_C
-> ONFIG_H -I. -I/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/strace-4.5.1
-> 4-r3/strace-4.5.14 -I. -Ilinux/arm -I/opt/oe/build/tmp/work/armv5te-angstrom-lin
-> ux-gnueabi/strace-4.5.14-r3/strace-4.5.14/linux/arm -Ilinux -I/opt/oe/build/tmp/
-> work/armv5te-angstrom-linux-gnueabi/strace-4.5.14-r3/strace-4.5.14/linux  -isyst
-> em/opt/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/include -Wall -isystem/op
-> t/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/include -fexpensive-optimizati
-> ons -fomit-frame-pointer -frename-registers -Os -MT strace.o -MD -MP -MF ".deps/
-> strace.Tpo" -c -o strace.o strace.c; \
-> |       then mv -f ".deps/strace.Tpo" ".deps/strace.Po"; else rm -f ".deps/strac
-> e.Tpo"; exit 1; fi
-> | strace.c: In function 'trace':
-> | strace.c: In function 'trace':
-> | strace.c:2259: error: 'PT_CR_IPSR' undeclared (first use in this function)
-> | strace.c:2259: error: (Each undeclared identifier is reported only once
-> | strace.c:2259: error: for each function it appears in.)
-> | strace.c:2259: warning: pointer targets in passing argument 3 of 'upeek' diffe
-> r in signednesstrace-4.5.14: failed
-> | strace.c:2260: error: 'PT_CR_IIP' undeclared (first use in this function)
-> | strace.c:2260: warning: pointer targets in passing argument 3 of 'upeek' diffe
-> r in signedness
-> | strace.c:2262: warning: right shift count >= width of type
-> | make[1]: *** [strace.o] Error 1
-> | make[1]: Leaving directory `/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnue
-> abi/strace-4.5.14-r3/strace-4.5.14'
-> | make: *** [all] Error 2
-> | FATAL: oe_runmake failed
-> NOTE: Task failed: /opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/strace-
-> 4.5.14-r3/temp/log.do_compile.20013
-> NOTE: package strace-4.5.14-r3: task do_compile: failed
-> ERROR: TaskFailed event exception, aborting
-> NOTE: package strace-4.5.14: failed
-> ERROR: Build of bootstrap-image failed
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFLlSCMkyGM64RGpERAoMKAKCvS3DUntk/rev1xlxhu5voOVSlLACfZcE/
-htUwGg49+/wh1gLtwdQ4kno=
-=tncL
------END PGP SIGNATURE-----
 
 
