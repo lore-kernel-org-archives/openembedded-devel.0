@@ -1,32 +1,23 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [64.233.162.201] (helo=nz-out-0102.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GYKtB-0005DA-9M for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Oct 2006 13:07:41 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 38E94D3C
+	(envelope-from <nicolasfr@gmail.com>) id 1GYL59-0004nq-AI
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Oct 2006 13:20:03 +0200
+Received: by nz-out-0102.google.com with SMTP id m22so309769nzf
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Oct 2006 13:01:14 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 10385-02 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Oct 2006 13:01:08 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 9694FD40
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Oct 2006 13:01:07 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: Using the OpenEmbedded metadata to build Linux Distributions
+	Fri, 13 Oct 2006 04:13:33 -0700 (PDT)
+Received: by 10.65.239.13 with SMTP id q13mr4729124qbr;
+	Fri, 13 Oct 2006 04:13:32 -0700 (PDT)
+Received: by 10.65.197.7 with HTTP; Fri, 13 Oct 2006 04:13:32 -0700 (PDT)
+Message-ID: <b9481e140610130413veefc66aua40a4accd90417ee@mail.gmail.com>
+Date: Fri, 13 Oct 2006 13:13:32 +0200
+From: "Nicolas FR" <nicolasfr@gmail.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
 	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <b9481e140610111346xc062befs848d9e1c3bd35075@mail.gmail.com>
+In-Reply-To: <1160737267.21755.92.camel@gandalf.tm.informatik.uni-frankfurt.de>
+MIME-Version: 1.0
 References: <b9481e140610111346xc062befs848d9e1c3bd35075@mail.gmail.com>
-Organization: VanilleMedia
-Date: Fri, 13 Oct 2006 13:01:07 +0200
-Message-Id: <1160737267.21755.92.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
+	<1160737267.21755.92.camel@gandalf.tm.informatik.uni-frankfurt.de>
 Subject: Re: Help with bitebaking latest python-dbus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
@@ -42,28 +33,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Oct 2006 11:07:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 13 Oct 2006 11:20:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Am Mittwoch, den 11.10.2006, 22:46 +0200 schrieb Nicolas FR:
-> I am trying to bitbake python-dbus_0.71 with a simple bb, but I am
-> stuck on a cryptic error (seems to lie in how distutils tries to
-> compile the package). Could someone help me building this new version?
+Bug submitted:
+http://bugs.openembedded.org/show_bug.cgi?id=1479
 
-Add a bug and I'll have a look over the weekend. (pretty busy atm.)
->     sources = self.swig_sources(sources, ext)
-> TypeError: swig_sources() takes exactly 2 arguments (3 given)
+Thanks for you help Mickey.
 
-This is a mismatch of swig and Distutils -- perhaps we need to upgrade
-(or downgrade) either one. It might be worth checking in the swig
-changelog whether something changed.
+Nicolas.
 
--- 
-Regards,
-
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
-
-
+> Add a bug and I'll have a look over the weekend. (pretty busy atm.)
+>
+> --
+> Regards,
+>
+> Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
 
 
