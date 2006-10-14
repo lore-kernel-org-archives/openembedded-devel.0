@@ -1,26 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.166.182] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GYesY-0001z4-Rx
-	for openembedded-devel@openembedded.org; Sat, 14 Oct 2006 10:28:22 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9E8LfZS028103 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Oct 2006 10:21:46 +0200
-Message-ID: <45309E2B.2020901@dominion.kabel.utwente.nl>
-Date: Sat, 14 Oct 2006 10:22:03 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+	(envelope-from <pmiscml@gmail.com>) id 1GYipi-00007k-C4
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 14 Oct 2006 14:41:42 +0200
+Received: by py-out-1112.google.com with SMTP id i75so1409166pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Oct 2006 05:34:35 -0700 (PDT)
+Received: by 10.65.191.7 with SMTP id t7mr6706987qbp;
+	Sat, 14 Oct 2006 05:34:35 -0700 (PDT)
+Received: from CUBE ( [85.202.124.214])
+	by mx.google.com with ESMTP id m1sm1015164nzf.2006.10.14.05.34.34;
+	Sat, 14 Oct 2006 05:34:35 -0700 (PDT)
+Date: Sat, 14 Oct 2006 15:34:34 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <687683143.20061014153434@gmail.com>
+To: Jamie Lenehan <lenehan@twibble.org>
+In-Reply-To: <20061010221107.GB20799@twibble.org>
+References: <20060914001918.GA8432@twibble.org>
+	<452B83DC.2020503@dominion.kabel.utwente.nl>
+	<20061010221107.GB20799@twibble.org>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <20061014063527.GA4522@twibble.org>
-In-Reply-To: <20061014063527.GA4522@twibble.org>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: bugzilla & word wrapped text
+Cc: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: site/* Common site files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -35,39 +38,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Oct 2006 08:28:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 14 Oct 2006 12:41:42 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Jamie,
 
-Jamie Lenehan schreef:
-> Is there anyway to stop bugzilla from word wrapping the text that's
-> placed in bug reports? It makes any sort of command output and
-> code/patches etc pretty damn difficult to make sense of.
+Wednesday, October 11, 2006, 1:11:07 AM, you wrote:
 
-You can, by using the 'attach' feature, which is sadly only visible after creating the
-inition bugreport. It's like inline patches in email, the kernel dudes love'em, I hate
-them :). The ideal bugreport would be:
+> On Tue, Oct 10, 2006 at 01:28:28PM +0200, Koen Kooi wrote:
+> [...]
+>> 
+>> The consensus is that we want this in OE, how to we proceed to get this added into .dev?
 
-* someone files bug and puts a summarized error message in the comment
-* that person opens the bug again and attaches full log
-* some guru has a fix and attaches the path
-* patch will be applied and bug closed.
+> If my implementation was ok then I can push it in over a few days.
+> The order being:
 
-Sounds good?
+>  - add config_info.bbclass
 
-regards,
+>  - modify recipes that use the site file directly to use config_info instead.
 
-Koen
+>  - update autotools.bbclass to use config_info.bbclass
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
+> Then it's ready to actually use. Merging those x86 site files would
+> be a good place to start.
 
-iD8DBQFFMJ4rMkyGM64RGpERAjAvAJ4jXHx9SD+2D+yoL0KokF/wT13PLQCdFIte
-Sy7Oq0HCL2fHO8EjMsGLXEs=
-=IxHy
------END PGP SIGNATURE-----
+
+  I can second that Jamie's site/* and config_info work would very
+useful for anyone adding a new target to OE. We just went thru some
+implementation details of it (I started this off list to not protract
+the merge with ungrounded concerns), and once again see that the
+framework Jamie put together is very flexible and ready to cover broad
+usecases (for example, site files can be overriden down to a package
+level (keyword: if needed)).
+
+
+  So, please count my voice for near-term merge.
+
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
