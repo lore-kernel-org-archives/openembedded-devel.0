@@ -1,27 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.166.176] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GYqil-0006DI-Qt
-	for openembedded-devel@openembedded.org; Sat, 14 Oct 2006 23:07:03 +0200
-Received: from [130.89.7.128] (vpn007128.vpn.utwente.nl [130.89.7.128])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9EL0MZS016816 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Oct 2006 23:00:25 +0200
-Message-ID: <45313D68.6030509@dominion.kabel.utwente.nl>
-Date: Sat, 14 Oct 2006 21:41:28 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+	(envelope-from <papercrane@gmail.com>) id 1GYsGd-0000jk-3i
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Oct 2006 00:46:07 +0200
+Received: by py-out-1112.google.com with SMTP id i75so1565423pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Oct 2006 15:38:57 -0700 (PDT)
+Received: by 10.35.102.18 with SMTP id e18mr9027586pym;
+	Sat, 14 Oct 2006 15:38:57 -0700 (PDT)
+Received: by 10.35.118.16 with HTTP; Sat, 14 Oct 2006 15:38:57 -0700 (PDT)
+Message-ID: <432beae0610141538p3b722a9bx552942eeac2d44ff@mail.gmail.com>
+Date: Sat, 14 Oct 2006 15:38:57 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <45313D68.6030509@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-References: <698474498.20061013195107@gmail.com>	<20061013173454.GA25324@mage.jpl.nasa.gov>	<137495124.20061014162300@gmail.com>	<20061014151143.GA15562@hovland.org>	<74d0deb30610140817w417b787dpa80f702436bf136a@mail.gmail.com>	<20061014153521.GB15562@hovland.org>
+References: <698474498.20061013195107@gmail.com>
+	<20061013173454.GA25324@mage.jpl.nasa.gov>
+	<137495124.20061014162300@gmail.com>
+	<20061014151143.GA15562@hovland.org>
+	<74d0deb30610140817w417b787dpa80f702436bf136a@mail.gmail.com>
+	<20061014153521.GB15562@hovland.org>
 	<1160854551.1649.1.camel@gandalf.tm.informatik.uni-frankfurt.de>
-In-Reply-To: <1160854551.1649.1.camel@gandalf.tm.informatik.uni-frankfurt.de>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<45313D68.6030509@dominion.kabel.utwente.nl>
 Subject: Re: OT: why cc:?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
@@ -37,28 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Oct 2006 21:07:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 14 Oct 2006 22:46:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 10/14/06, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> Michael 'Mickey' Lauer schreef:
+> > Out of interest, why are you cc'ing to
+> > openembedded-devel@openembedded.org? That way we get duplicated mails.
+> > Please only use openembedded-devel@lists.openembedded.org -- the shorter
+> > form only works by coincidance -- it's not intented.
+>
+> Broken mailer + reply all + too lazy to check who you are sending mail to == madness
+>
 
-Michael 'Mickey' Lauer schreef:
-> Out of interest, why are you cc'ing to
-> openembedded-devel@openembedded.org? That way we get duplicated mails.
-> Please only use openembedded-devel@lists.openembedded.org -- the shorter
-> form only works by coincidance -- it's not intented.
+Try: "Mailer that doesn't include a feature that the one mailer that
+koen uses happens to implement".
 
-Broken mailer + reply all + too lazy to check who you are sending mail to == madness
+As for the reply-all, if people would stop e-mailing the non-"lists"
+addresses this problem would go away.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
+Wow, hey, look at that. *Koen* is sending to
+openembedded-devel@openembedded.org instead of
+openembedded-devel@lists.openembedded.org (lots of others seem to be
+too). Stop sending to the incorrect address and the problem is solved.
 
-iD8DBQFFMT1XMkyGM64RGpERAuzKAKCMaBqu3q0USAluS5n8wY2GDVBnggCcDDbq
-kGkS3dnTu4+mXSc3ID0YBIs=
-=+kEM
------END PGP SIGNATURE-----
-
+-- 
+Justin Patrin
 
 
