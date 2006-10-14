@@ -1,22 +1,30 @@
-Received: from [137.79.94.127] (helo=s383.jpl.nasa.gov)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <ehovland@s383.jpl.nasa.gov>) id 1GYR2B-0001A2-UK
-	for openembedded-devel@openembedded.org; Fri, 13 Oct 2006 19:41:24 +0200
-Received: from mage.jpl.nasa.gov (mage [137.78.15.62])
-	by s383.jpl.nasa.gov (8.12.10/8.12.10) with ESMTP id k9DHYswg012844
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Oct 2006 10:34:54 -0700 (PDT)
-Received: by mage.jpl.nasa.gov (Postfix, from userid 4960)
-	id 62EEE300100C; Fri, 13 Oct 2006 10:34:54 -0700 (PDT)
-Date: Fri, 13 Oct 2006 10:34:54 -0700
-From: Erik Hovland <erik@hovland.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1GYXkZ-0005fC-Ob
+	for openembedded-devel@openembedded.org; Sat, 14 Oct 2006 02:51:39 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1GYXeA-0004dY-H6
+	for openembedded-devel@openembedded.org; Sat, 14 Oct 2006 02:45:03 +0200
+Received: from h24-207-7-221.primesignal.com ([24.207.7.221])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 14 Oct 2006 02:45:02 +0200
+Received: from dfoley by h24-207-7-221.primesignal.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 14 Oct 2006 02:45:02 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Message-ID: <20061013173454.GA25324@mage.jpl.nasa.gov>
-References: <698474498.20061013195107@gmail.com>
+From: Dallas Foley <dfoley@techsol.ca>
+Date: Fri, 13 Oct 2006 17:29:21 -0700
+Message-ID: <egpb13$ob$1@sea.gmane.org>
 Mime-Version: 1.0
-In-Reply-To: <698474498.20061013195107@gmail.com>
-User-Agent: Mutt/1.5.9i
-Subject: Re: [RFC] handhelds-pxa-2.6 -> linux-handhelds-2.6
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: h24-207-7-221.primesignal.com
+User-Agent: Thunderbird 1.5.0.7 (X11/20060927)
+Sender: news <news@sea.gmane.org>
+Subject: watchdog
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -31,25 +39,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Oct 2006 17:41:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 14 Oct 2006 00:51:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 13, 2006 at 07:51:07PM +0300, Paul Sokolovsky wrote:
-> 2. "pxa" there is misleading, as 2.6 tree supports different
-> architectures. Handhelds.org tree as of now supports PXA, SA, and S3
-> (Samsung) devices. To the various degrees, but that's improving.
+only 5.2.6 exists
+SRC_URI = "http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/${P}.tar.gz
 
-Technically, the pxa is not misleading per se. That recipe only builds a
-kernel for pxa devices. But since we are not really targeting one kernel
-for several handhelds, I don't see a problem with what you propose.
-
-E
-
--- 
-Erik Hovland
-mail: erik AT hovland DOT org
-web: http://hovland.org/
-PGP/GPG public key available on request
 
 
