@@ -1,43 +1,23 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GZ1eS-00005y-Jm for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Oct 2006 10:47:20 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 3EF0EDEB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2006 10:40:42 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 20194-10 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2006 10:40:36 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 02825DD8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2006 10:40:36 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <20061015003148.GA12655@twibble.org>
-References: <698474498.20061013195107@gmail.com>
-	<20061013173454.GA25324@mage.jpl.nasa.gov>
-	<137495124.20061014162300@gmail.com>
-	<20061014151143.GA15562@hovland.org>
-	<74d0deb30610140817w417b787dpa80f702436bf136a@mail.gmail.com>
-	<20061014153521.GB15562@hovland.org>
-	<1160854551.1649.1.camel@gandalf.tm.informatik.uni-frankfurt.de>
-	<45313D68.6030509@dominion.kabel.utwente.nl>
-	<432beae0610141538p3b722a9bx552942eeac2d44ff@mail.gmail.com>
-	<20061015002837.GA12632@twibble.org>
-	<20061015003148.GA12655@twibble.org>
-Organization: VanilleMedia
-Date: Sun, 15 Oct 2006 10:40:35 +0200
-Message-Id: <1160901635.1649.8.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Subject: Re: OT: why cc:?
+	(envelope-from <openembedded@hrw.one.pl>) id 1GZ3IK-0003DF-Fl
+	for openembedded-devel@openembedded.org; Sun, 15 Oct 2006 12:32:36 +0200
+Received: (qmail 15401 invoked by uid 813007); 15 Oct 2006 10:25:56 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 15 Oct 2006 10:25:56 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: Jamie Lenehan <lenehan@twibble.org>,
+	openembedded-devel@lists.openembedded.org
+Date: Sun, 15 Oct 2006 12:26:08 +0200
+User-Agent: KMail/1.9.5
+References: <200610142209.32403.openembedded@hrw.one.pl>
+	<20061015010729.GA17887@twibble.org>
+In-Reply-To: <20061015010729.GA17887@twibble.org>
+MIME-Version: 1.0
+Message-Id: <200610151226.09721.openembedded@hrw.one.pl>
+Subject: Re: Review of revision cdf57334d92107e67da0a4fcde849921042f581a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -52,38 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Oct 2006 08:47:20 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 15 Oct 2006 10:32:36 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Am Sonntag, den 15.10.2006, 10:31 +1000 schrieb Jamie Lenehan:
-> On Sun, Oct 15, 2006 at 10:28:37AM +1000, Jamie Lenehan wrote:
-> [...]
-> > What are these non-"lists" address you talk about and what are these
-> > duplicates? I don't seem to see any?
-> 
-> Oh, I think I see what those duplicates are now... I have had this in
-> my .procmailrc for ever:
-> 
->  #
->  # Weed out duplicates...
->  #
->  :0 Whc: $HOME/Mail/msgid.lock
->  | formail -D 65536 $HOME/Mail/cache.dupes
->  :0 a:
->  dupes
-> 
-> which means I never see duplicates. So I take the duplicates you are
-> talking about happen from emails being sent to both
-> openembedded-devel@lists.openembedded.org and
-> openembedded-devel@openembedded.org ?
+Dnia niedziela, 15 pa=C5=BAdziernika 2006 03:07, Jamie Lenehan napisa=C5=82:
+> On Sat, Oct 14, 2006 at 10:09:30PM +0200, Marcin Juszkiewicz wrote:
 
-Exactly.
+> > Can someone look at revision cdf57334d92107e67da0a4fcde849921042f581a
+> > to check my hack?
+>
+> Looks wrong... you are building for arm right? With your hack and
+> building on i486 I get:
 
--- 
-Regards,
+>   | io_getevents.c:25: error: previous definition of =E2=80=98io_getevent=
+s_0_4=E2=80=99
 
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
+> I think the real problem is a typo in syscall-arm.h
+
+> This file is added by 00_arches.patch. So updating that patch with
+> the one line change above should be enough.
+
+Thx - pushed fix into .dev tree. I will also notify Debian maintainer=20
+about this (patch was taken from Debian).
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+                 A dream to some... A nightmare to others!
+                 		-- Merlin
 
 
 
