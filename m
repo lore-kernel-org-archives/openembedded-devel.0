@@ -1,28 +1,43 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GZ1CN-0007HW-Mo
-	for openembedded-devel@openembedded.org; Sun, 15 Oct 2006 10:18:19 +0200
-Received: from [130.89.7.128] (vpn007128.vpn.utwente.nl [130.89.7.128])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9F8BcJG025650 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2006 10:11:38 +0200
-Message-ID: <4531ED53.1050506@dominion.kabel.utwente.nl>
-Date: Sun, 15 Oct 2006 10:12:03 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
-MIME-Version: 1.0
+	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
+	id 1GZ1eS-00005y-Jm for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Oct 2006 10:47:20 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 3EF0EDEB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Oct 2006 10:40:42 +0200 (CEST)
+Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
+	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 20194-10 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Oct 2006 10:40:36 +0200 (CEST)
+Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
+	[141.2.14.64])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 02825DD8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Oct 2006 10:40:36 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
 To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1GYf1g-00024R-9w@linuxtogo.org>
-	<20061015003742.GB12679@twibble.org>
-In-Reply-To: <20061015003742.GB12679@twibble.org>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev strace: bump pr after last patch
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <20061015003148.GA12655@twibble.org>
+References: <698474498.20061013195107@gmail.com>
+	<20061013173454.GA25324@mage.jpl.nasa.gov>
+	<137495124.20061014162300@gmail.com>
+	<20061014151143.GA15562@hovland.org>
+	<74d0deb30610140817w417b787dpa80f702436bf136a@mail.gmail.com>
+	<20061014153521.GB15562@hovland.org>
+	<1160854551.1649.1.camel@gandalf.tm.informatik.uni-frankfurt.de>
+	<45313D68.6030509@dominion.kabel.utwente.nl>
+	<432beae0610141538p3b722a9bx552942eeac2d44ff@mail.gmail.com>
+	<20061015002837.GA12632@twibble.org>
+	<20061015003148.GA12655@twibble.org>
+Organization: VanilleMedia
+Date: Sun, 15 Oct 2006 10:40:35 +0200
+Message-Id: <1160901635.1649.8.camel@gandalf.tm.informatik.uni-frankfurt.de>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
+X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
+Subject: Re: OT: why cc:?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -37,37 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Oct 2006 08:18:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 15 Oct 2006 08:47:20 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Jamie Lenehan schreef:
-> On Sat, Oct 14, 2006 at 10:37:48AM +0200, "koen commit" wrote:
->> strace: bump pr after last patch
+Am Sonntag, den 15.10.2006, 10:31 +1000 schrieb Jamie Lenehan:
+> On Sun, Oct 15, 2006 at 10:28:37AM +1000, Jamie Lenehan wrote:
+> [...]
+> > What are these non-"lists" address you talk about and what are these
+> > duplicates? I don't seem to see any?
 > 
-> Was there some reason for this? (Just to make sure I didn't miss
-> something!) In this case it had no effect on any existing strace
-> build (the change is a no-op for glibc < 2.5) and since glibc 2.5
-> didn't build previously it can't have had any change on glibc 2.5
-> built strace's...
+> Oh, I think I see what those duplicates are now... I have had this in
+> my .procmailrc for ever:
+> 
+>  #
+>  # Weed out duplicates...
+>  #
+>  :0 Whc: $HOME/Mail/msgid.lock
+>  | formail -D 65536 $HOME/Mail/cache.dupes
+>  :0 a:
+>  dupes
+> 
+> which means I never see duplicates. So I take the duplicates you are
+> talking about happen from emails being sent to both
+> openembedded-devel@lists.openembedded.org and
+> openembedded-devel@openembedded.org ?
 
-People who's build broke (like me :) ) wouldn't get past it because OE tries to finish
-building the unpatched version. I was trying to avoid the 'I updated and it still fails'
-bugreports.
+Exactly.
 
-regards,
+-- 
+Regards,
 
-Koen
+Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
 
-iD8DBQFFMezqMkyGM64RGpERAu91AKCQi9TdvwBitbJJenZZNnG+qmzU6gCfdsI7
-kKmgwCXTcn1sWuiz8BPbKzc=
-=yhek
------END PGP SIGNATURE-----
 
 
