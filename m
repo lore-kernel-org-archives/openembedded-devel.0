@@ -1,30 +1,25 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GZ6Xb-0001KX-Fu for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Oct 2006 16:00:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id D198DE0F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2006 15:53:55 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 25501-06 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2006 15:53:51 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id B8065E0E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2006 15:53:51 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: openembedded-devel@lists.openembedded.org
-Organization: VanilleMedia
-Date: Sun, 15 Oct 2006 15:53:51 +0200
-Message-Id: <1160920431.1649.11.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Subject: OEDEM Report
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GZAEM-00089T-Ia
+	for openembedded-devel@openembedded.org; Sun, 15 Oct 2006 19:56:58 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k9FHoDZS022543 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Oct 2006 19:50:15 +0200
+Message-ID: <453274EF.60100@dominion.kabel.utwente.nl>
+Date: Sun, 15 Oct 2006 19:50:39 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: OE website status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -39,129 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Oct 2006 14:00:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 15 Oct 2006 17:56:58 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-The 1st annual OpenEmbedded Developers
-European Meeting has taken place from
-5th to 8th of October, 2006 in Berlin.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I want to thank Holger 'Zecke' Freyther
-and Henning 'Woglinde' Heinold for the
-local organization -- it was a pleasant
-event and we all enjoyed ourselves.
+Hi,
 
-It was an open meeting and the following
-people found their way to the conference
-venue:
+At OEDEM we discussed the status of the OE website[1] and the wiki[2] and we have made
+some decisions:
 
-Florian Boor
-Holger 'Zecke' Freyther
-Tomas Frydrych
-Henning 'Woglinde' Heinold
-Marcin 'Hrw' Juszkiewicz
-Koen Kooi
-Michael 'Mickey' Lauer
-Richard 'RP' Purdie
-Rolf 'Laibsch' Leggewie
+  The website team will allow people to register so their name doesn't show up as
+'anonymous' in the logs. Till the 'register' link appears you can send a mail to
+'koen@openembedded.org' with your firstname and last name.
 
-There were 8 sessions cramped within
-only two days which made the schedule
-very tight -- but we managed to stay
-reasonably on topic and on time. The actual
-program time was slightly enhanced to
-cover the major part between 10:00 and 19:00
-with only short but regular pauses in between.
+  The website team also has positions available, so if you want to do more than edit the
+wiki, like unbreaking the stylesheets or design a sane menustructure, let us know.
 
-Most of the sessions had a (small) presentation
-part and a (larger) discussion part. The basic idea
-was to identify key issues and proposals
-which then should be discussed in the more broad
-forum of this mailing list.
+  The bugteam is also accepting positions for people that want to triage bugs and poke the
+developers responsible for that area.
 
-The session chairs will therefore launch
-specific RFCs on the mailing list in the
-near future (i.e. the next couple of days).
+regards,
 
-The following is a brief summary of each and
-every session from OEDEM'06:
+Koen
 
-* 1th Session: OE Survey Results [Marcin]
+[1] http://www.openembedded.org/
+[2] http://www.openembedded.org/wiki/
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
-Results of OE Survey were discussed and some subjects for next sessions 
-were added. Topics included mailing lists, a stable branch, bug days
-and 
-OE policies.
-
-* 2nd Session: OE Steering [Richard and Mickey]
-
-Various current issues for OE were discussed and some proposals were
-made. There was overlap with other sessions but topics included mailing
-lists, MAINTAINERS, a stable branch, bug days and OE policies. RFC
-documents and/or summaries of the discussions will follow.
-
-* 3rd Session: BitBake Steering [Richard]
-
-We considered bitbake's past, present and possible futures. In summary,
-we're pleased with the current position but identified current problems
-and priorities for future development. 
-
-* 4th Session: OE Book [Mickey]
-Mickey presented the motives and a preliminary
-table of contents for his upcoming book
-"Developing and Building Software for Embedded Linux"
-(find the slides here).
-
-* 5th Session: OE PR Launch 2007 [Marcin and Mickey]
-We will look into being much more present
-on conferences next year. We want to produce
-a "conference kit" that contains the most
-important things usable for people presenting
-OE.
-
-We will definitely be present at FOSDEM 2007 with
-an own booth and two presentations in the Embedded Room.
-
-The entry page of the openembedded.org website
-has been adjusted to make it more clear
-what OE is about, how to get it, how to use it,
-and how to contribute to it.
-
-* 6th Session: OE and the community [Koen]
-
-This session was largely about how users perceive various aspects of OE.
-We discussed the look and feel of various OE webservices and looked at
-areas of
-improvement. We also talked about things that are confusing to users,
-like the
-MAINTAINER field. We are going to work on those areas together with the
-users.
-
-* 7th Session: OE and commercial activities [Florian]
-
-As there are multiple commercial organisations using OE and this
-with multiple commercial interests, it would be very useful to define
-strict rules about how to behave and to document the most important
-things
-that should be avoided to support OE and commercial activities.
-
-The OpenEmbedded project itself does not intend to do any business
-itself in the future.
-
-* 8th Session: OE Registered Association [Holger and Henning]
-
-During this session we discussed if and how a registered association
-could help improving and increasing the usage of OpenEmbedded.
-We have discussed which goals and tasks such an association should have
-and how and where to setup such an entity.
-
-
--- 
-Regards,
-
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
-
-
+iD8DBQFFMnTvMkyGM64RGpERAtWEAJ4kdzWOQ7EjFEQa27cmfmdlf6vREwCfTICt
+B9j6uOVVRDcQAMd5WEiwbJk=
+=qGUm
+-----END PGP SIGNATURE-----
 
 
