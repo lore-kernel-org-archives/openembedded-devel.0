@@ -1,23 +1,32 @@
-Received: from [64.233.182.187] (helo=nf-out-0910.google.com)
+Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1GZU3P-0004K0-H5
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Oct 2006 17:06:59 +0200
-Received: by nf-out-0910.google.com with SMTP id l23so2511463nfc
+	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
+	id 1GZWTy-0000cM-Dz for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Oct 2006 19:42:34 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id DEE3DE29
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2006 08:00:13 -0700 (PDT)
-Received: by 10.49.19.18 with SMTP id w18mr12329197nfi;
-	Mon, 16 Oct 2006 08:00:11 -0700 (PDT)
-Received: from CUBE ( [85.202.124.214])
-	by mx.google.com with ESMTP id b1sm984285nfe.2006.10.16.08.00.04;
-	Mon, 16 Oct 2006 08:00:06 -0700 (PDT)
-Date: Mon, 16 Oct 2006 18:00:05 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1810005940.20061016180005@gmail.com>
+	Mon, 16 Oct 2006 19:35:47 +0200 (CEST)
+Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
+	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 20668-06 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Oct 2006 19:35:43 +0200 (CEST)
+Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
+	[141.2.14.64])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 83F88E21
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Oct 2006 19:35:43 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: [RFC] Annotate machines with amount of RAM
+In-Reply-To: <1810005940.20061016180005@gmail.com>
+References: <1810005940.20061016180005@gmail.com>
+Organization: VanilleMedia
+Date: Mon, 16 Oct 2006 19:35:43 +0200
+Message-Id: <1161020143.1649.80.camel@gandalf.tm.informatik.uni-frankfurt.de>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
+X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
+Subject: Re: [RFC] Annotate machines with amount of RAM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,28 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2006 15:07:00 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 16 Oct 2006 17:42:34 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello openembedded-devel,
+Am Montag, den 16.10.2006, 18:00 +0300 schrieb Paul Sokolovsky:
+>   I'd like to propose to add setting like RAM_SIZE which would list
+> available RAM. Generally, that would be in line with more comprehensive
+> declaritive machine descriptions we move towards with introduction of
+> MACHINE_FEATURES. Clever distro could use RAM_SIZE to select
+> alternative packages/settings. For example, if we ever come to
+> Firefox/Minimo being default browser for distros, RAM_SIZE="32"
+> machines may still prefer something smaller.
 
-  Another small RFC from me. We already have ROOT_FLASH_SIZE variable
-for machines, which specifies builtin flash size. Distros may use it to
-decide what to put into rootfs, check its size, etc.
+This is a good idea. We definitely need something standardised here in
+order to prevent even more growth of hand-selected variables.
 
-  I'd like to propose to add setting like RAM_SIZE which would list
-available RAM. Generally, that would be in line with more comprehensive
-declaritive machine descriptions we move towards with introduction of
-MACHINE_FEATURES. Clever distro could use RAM_SIZE to select
-alternative packages/settings. For example, if we ever come to
-Firefox/Minimo being default browser for distros, RAM_SIZE="32"
-machines may still prefer something smaller.
+Which features do we need to describe? At first glance, I could think
+about
 
+VOLATILE_STORAGE_SIZE (RAM)
+NON_VOLATILE_STORAGE_SIZE (Flash, HD, etc.)
+DISPLAY_TYPE (Touchscreen or not)
+DISPLAY_RESOLUTION
+
+We shouldn't stop here. With several groups working on device daemon
+standards towards interoperable platforms, it could make sense to
+describe
+
+INPUT_METHODS
+
+as well (buttons, keyboard, touchscreen, microphone).
+
+Last but not least GSM and (A)GPS should make its way into
+MACHINE_FEATURES pretty soon as well...
 
 -- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+Regards,
+
+Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
+
 
 
 
