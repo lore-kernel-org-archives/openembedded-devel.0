@@ -1,22 +1,28 @@
-Received: from [203.8.2.122] (helo=mail.einfosolutions.com)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.61)
-	(envelope-from <Richard.How@einfosolutions.com>) id 1GZHSY-0004cZ-OY
+	(envelope-from <pmiscml@gmail.com>) id 1GZIGL-0006CP-7W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Oct 2006 03:40:07 +0200
-Received: from Ubiquitous.localnet ([203.8.2.80] RDNS failed) by
-	mail.einfosolutions.com with Microsoft SMTPSVC(5.0.2195.6713); 
-	Mon, 16 Oct 2006 11:08:21 +0930
-Date: Mon, 16 Oct 2006 11:02:46 +0930
-From: Richard How <Richard.How@einfosolutions.com>
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <20061016110246.73bc9292.Richard.How@einfosolutions.com>
-In-Reply-To: <20061015145613.ovhqbcfhdndc888c@webmail.neophob.com>
-References: <20061015145613.ovhqbcfhdndc888c@webmail.neophob.com>
-X-Mailer: Sylpheed version 2.2.9 (GTK+ 2.6.10; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-OriginalArrivalTime: 16 Oct 2006 01:38:21.0859 (UTC)
-	FILETIME=[C3A97730:01C6F0C3]
-Subject: Re: build cairo
+	Mon, 16 Oct 2006 04:31:33 +0200
+Received: by nf-out-0910.google.com with SMTP id l23so2320753nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Oct 2006 19:24:50 -0700 (PDT)
+Received: by 10.49.93.13 with SMTP id v13mr11301121nfl;
+	Sun, 15 Oct 2006 19:24:50 -0700 (PDT)
+Received: from CUBE ( [85.202.124.214])
+	by mx.google.com with ESMTP id p72sm480371nfc.2006.10.15.19.24.47;
+	Sun, 15 Oct 2006 19:24:48 -0700 (PDT)
+Date: Mon, 16 Oct 2006 05:24:49 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <686010435.20061016052449@gmail.com>
+To: Koen Kooi <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <1160951360.8144.2.camel@lieve>
+References: <1156715171.5536.60.camel@localhost.localdomain>
+	<200610151544.28474.openembedded@hrw.one.pl>
+	<161534574.20061016010222@gmail.com>
+	<1160951360.8144.2.camel@lieve>
+MIME-Version: 1.0
+Subject: Re: What is task-base?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.8
 Precedence: list
@@ -30,39 +36,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2006 01:40:07 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Mon, 16 Oct 2006 02:31:33 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Sun, 15 Oct 2006 14:56:13 +0200
-michu@neophob.com wrote:
+Hello Koen,
 
-> | CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/directfb
-> | cc1: internal compiler error: in add_path, at c-incpath.c:362
-> | Please submit a full bug report,
-> | with preprocessed source if appropriate.
-> | See <URL:http://gcc.gnu.org/bugs.html> for instructions.
+Monday, October 16, 2006, 1:29:20 AM, you wrote:
 
-I have been wrestling with this problem for a week now. Our development
-board has changed from pxa255 arm processor to mipsel and I have
-managed to bitbake meta-gpe and run it successfully. Now I need to bitbake
-FBReader which requires enca. The configuration stage shows this in the
-config.log
+> Op ma, 16-10-2006 te 01:02 +0300, schreef Paul Sokolovsky:
 
-Extract from config.log in enca-1.9
+>>    If it can be made so clean, why do we have so tangled configs for
+>> many machines, at least for PocketPC-based?
 
-configure:20864: checking for sqrt in -lm
-configure:20894: mipsel-linux-gcc -Os -mips2 -o conftest -Wall -W -pedantic -isystem/stuff/build/tmp/staging/mipsel-linux/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -isystem/stuff/build/tmp/staging/mipsel-linux/include -I/usr/include -L/stuff/build/tmp/staging/mipsel-linux/lib -Wl,-rpath-link,/stuff/build/tmp/staging/mipsel-linux/lib -Wl,-O1 -L/usr/lib conftest.c -lm   >&5
-CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
-cc1: internal compiler error: Aborted
-Please submit a full bug report,
-with preprocessed source if appropriate.
-See <URL:http://gcc.gnu.org/bugs.html> for instructions.
+> Historical reason, and we'd welcome a cleanup
 
-I have found examples mentioning this problem but so far no solution.
-Any help or advice would be much appreciated :)
+>>  Do we need more strict
+>> policy of what goes into machine configs and about the order of
+>> variables? 
 
-Regards Richard
+> Yes :)
+
+  Ok, to start with, I've reordered vars in h2200.conf & h4000.conf,
+(plus moved weird-looking LAB setting to include file). Please tell me
+if it looks ok, and I'll apply it to other files (pocketpc-based
+devices at least).
+
+>> For example, I doubt it's good idea to have IMAGE_FSTYPES
+>> in machine configs - how that can be machine's property? 
+
+> Some bootloaders can be quite demanding, like the one for the spitz
+> machine only likes tar.gz, not tar.bz2. It should be overridable,
+> though.
+
+  Ok. But again, for any PocketPC one would use jffs2 for flash
+install, tar.bz2 for secondary storage (card) install, ext2 for
+initrd-like booting. As it is consistent for all devices, it can be
+omitted from machine files, and controlled by distro and local.conf.
+If there will be added support to build adhoc image reflash formats of
+native pocketpc bootloaders, I agree, it is worth to add it
+per-device, at least, as a kind of annotation.
+
+> regards,
+
+> Koen
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
