@@ -1,27 +1,24 @@
-Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1GZa21-0007b4-Dv
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1GZaBr-0007is-6x
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Oct 2006 23:29:57 +0200
-Received: by nf-out-0910.google.com with SMTP id l23so41233nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2006 14:23:09 -0700 (PDT)
-Received: by 10.49.93.13 with SMTP id v13mr267041nfl;
-	Mon, 16 Oct 2006 14:23:09 -0700 (PDT)
-Received: from CUBE ( [85.202.124.214])
-	by mx.google.com with ESMTP id m16sm372322nfc.2006.10.16.14.23.08;
-	Mon, 16 Oct 2006 14:23:08 -0700 (PDT)
-Date: Tue, 17 Oct 2006 00:23:11 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <299122878.20061017002311@gmail.com>
-To: Koen Kooi <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <4533C686.8020600@dominion.kabel.utwente.nl>
-References: <1810005940.20061016180005@gmail.com>
-	<1161020143.1649.80.camel@gandalf.tm.informatik.uni-frankfurt.de>
-	<4533C686.8020600@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
-Subject: Re: [RFC] Annotate machines with amount of RAM
+	Mon, 16 Oct 2006 23:40:07 +0200
+Received: from [88.134.98.23] (helo=[192.168.1.103])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <freyther@inf.fu-berlin.de>)
+	id 1GZa5H-0006Vl-Bk; Mon, 16 Oct 2006 23:33:19 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+X-Gpgmail-State: !signed
+Message-Id: <E94509B5-D500-4838-A900-72815CB93ADE@inf.fu-berlin.de>
+From: Holger Freyther <freyther@inf.fu-berlin.de>
+Date: Mon, 16 Oct 2006 23:31:34 +0200
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.752.3)
+X-Broken-Reverse-DNS: no host name found for IP address 88.134.98.23
+Cc: monotone-devel@nongnu.org, openembedded-core@lists.openembedded.org
+Subject: [ANN] Bonsai like service available - source included, batteries not
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,65 +32,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2006 21:29:57 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 16 Oct 2006 21:40:07 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello Koen,
+Hey,
 
-Monday, October 16, 2006, 8:51:02 PM, you wrote:
+I proudly present my first web application ever.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+It is currently called: tinderboxserver/bonsai
 
-> Michael 'Mickey' Lauer schreef:
+What is it?
+    Currently it indexes SVN and MTN SCM trees and provides a way to  
+monitor and query these trees and provides RSS feeds for your queries.
 
->> Which features do we need to describe? At first glance, I could think
->> about
->> 
->> VOLATILE_STORAGE_SIZE (RAM)
->> NON_VOLATILE_STORAGE_SIZE (Flash, HD, etc.)
->> DISPLAY_TYPE (Touchscreen or not)
->> DISPLAY_RESOLUTION
+Why?
+    The primary use-case is to have something like the Attic from  
+CVS. Using a query you will easily find files you have deleted or  
+moved away. This is a feature I have missed in both subversion and  
+monotone.
+Also I need to write a tinderbox which will be sane and not use perl.  
+So I wanted to play with python and python frameworks
 
-> and please let us not fall in to the same trap over and over again by ignoring DPI. My
-> a780 and h2200 are both qvga, but it's 100dpi versus 160dpi, which makes a huge difference.
+How?
+    I have decided to use python2.4 as this is my favorite scripting  
+language. I have not evaluated ruby at this point as this started as  
+one of my many weekend projects which I never publish. I have decided  
+to use Django from the www.djangoproject.org as this allows me to  
+easily abstract from the database implementations. All I had to do  
+was define a model for my Bonsai and call manage.py syncdb to  
+actually create the database. There is one script to add SCM systems  
+to the Bonsai and another one to update it.
 
-  Still, exact pixel resolution is primary thing from the software
-point fo view ;-). But I guess, current GUI_MACHINE_CLASS indeed may
-survive some more time.
+How to use it?
+    Currently a flat browse of SCMs is supported, queries for files,  
+authors and descriptions. Querying diffs is on the todolist.
 
->> 
->> We shouldn't stop here. With several groups working on device daemon
->> standards towards interoperable platforms, it could make sense to
->> describe
->> 
->> INPUT_METHODS
->> 
->> as well (buttons, keyboard, touchscreen, microphone).
+    http://www.openembedded.org/bonsai/view/scms - This will show you  
+all tracked SCM systems
+    http://www.openembedded.org/bonsai/query/author/njs/ - This willl  
+search for CSets by njs
+    http://www.openembedded.org/bonsai/query/author/njs@pobox.com/? 
+exact=1 will match exactly
+    http://www.openembedded.org/bonsai/query/file/ChangeLog/?exact=1  
+will search for the ChangeLog
+    http://www.openembedded.org/bonsai/query/description/zecke/ will  
+sarch for a log message containing this word
 
-> MACHINE_FEATURES = "keyboard" exists :)
+    from the Query Pages you can easily get to the RSS feed.  
+Alternatively go to http:/www.openembedded.org/bonsai/feeds/author/ 
+njs@pobox.com/ and you get an RSS feed, Atoms will also be easy to  
+implement.
 
-  touchscreen, too. But "buttons" and "microphone" would be nice
-additions.
+  And everything is cross referenced, but a nice and sane query input  
+and sorting is missing.
 
->> 
->> Last but not least GSM and (A)GPS should make its way into
->> MACHINE_FEATURES pretty soon as well...
-
-> Right, I nuked smartphone-common.conf today and I was thinking how to funnel it into
-> task-base :)
-
-  Well, I'd say, the benefits of task-base are now pretty visible!
-
-> regards,
-
-> Koen
+Common options:
+    items=XX number of items, but don't DOS the box ;)
+    scm_id=XX filter to a specific tree. YOu get the tree ID by using  
+view/scms and taking a look at the ID
+    exact=1 will use = instead of like on the db query
 
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+    author=XX will filter on the author
 
+
+Where to get it?
+     The license is MIT (if this somehow applys to scripting  
+labguages) and it can be found at http://www.openembedded.org/dl/ 
+tinderbox-server.tar.bz2 , http://code.djangoproject.com/ticket/2912
+
+
+Requirements?
+     It uses python2.4, pysvn for SVN indexing and obviously django 
++patch (for the RSS generation)
+
+
+Future?
+    Comments, ideas, patches, sane templates, donations, getting  
+stuff send from my amazone wishlist (yes woglinde, I'm evil, I even  
+have a payback card!)
+
+   Seriously I will improve the python code, implement a sane query  
+page, will allow further filtering and sorting of the results and  
+will implement my tinderbox/dashboard using Django as well. If  
+someone feels contributing more than one single patch, or a better  
+template  I will use mtn to allow people to contribute.
+
+
+kind regards, rock and peace
+    zaed
+
+PS: I will be happy to assist you to setup a bonsai as well
 
 
