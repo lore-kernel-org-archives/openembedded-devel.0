@@ -1,26 +1,26 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GZWiP-0000zS-Jc
-	for openembedded-devel@openembedded.org; Mon, 16 Oct 2006 19:57:29 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9GHoaZS017868 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2006 19:50:39 +0200
-Message-ID: <4533C686.8020600@dominion.kabel.utwente.nl>
-Date: Mon, 16 Oct 2006 19:51:02 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <pmiscml@gmail.com>) id 1GZa21-0007b4-Dv
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Oct 2006 23:29:57 +0200
+Received: by nf-out-0910.google.com with SMTP id l23so41233nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Oct 2006 14:23:09 -0700 (PDT)
+Received: by 10.49.93.13 with SMTP id v13mr267041nfl;
+	Mon, 16 Oct 2006 14:23:09 -0700 (PDT)
+Received: from CUBE ( [85.202.124.214])
+	by mx.google.com with ESMTP id m16sm372322nfc.2006.10.16.14.23.08;
+	Mon, 16 Oct 2006 14:23:08 -0700 (PDT)
+Date: Tue, 17 Oct 2006 00:23:11 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <299122878.20061017002311@gmail.com>
+To: Koen Kooi <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <4533C686.8020600@dominion.kabel.utwente.nl>
 References: <1810005940.20061016180005@gmail.com>
 	<1161020143.1649.80.camel@gandalf.tm.informatik.uni-frankfurt.de>
-In-Reply-To: <1161020143.1649.80.camel@gandalf.tm.informatik.uni-frankfurt.de>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<4533C686.8020600@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
 Subject: Re: [RFC] Annotate machines with amount of RAM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,54 +35,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2006 17:57:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Oct 2006 21:29:57 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Michael 'Mickey' Lauer schreef:
+Monday, October 16, 2006, 8:51:02 PM, you wrote:
 
-> Which features do we need to describe? At first glance, I could think
-> about
-> 
-> VOLATILE_STORAGE_SIZE (RAM)
-> NON_VOLATILE_STORAGE_SIZE (Flash, HD, etc.)
-> DISPLAY_TYPE (Touchscreen or not)
-> DISPLAY_RESOLUTION
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
-and please let us not fall in to the same trap over and over again by ignoring DPI. My
-a780 and h2200 are both qvga, but it's 100dpi versus 160dpi, which makes a huge difference.
+> Michael 'Mickey' Lauer schreef:
 
-> 
-> We shouldn't stop here. With several groups working on device daemon
-> standards towards interoperable platforms, it could make sense to
-> describe
-> 
-> INPUT_METHODS
-> 
-> as well (buttons, keyboard, touchscreen, microphone).
+>> Which features do we need to describe? At first glance, I could think
+>> about
+>> 
+>> VOLATILE_STORAGE_SIZE (RAM)
+>> NON_VOLATILE_STORAGE_SIZE (Flash, HD, etc.)
+>> DISPLAY_TYPE (Touchscreen or not)
+>> DISPLAY_RESOLUTION
 
-MACHINE_FEATURES = "keyboard" exists :)
+> and please let us not fall in to the same trap over and over again by ignoring DPI. My
+> a780 and h2200 are both qvga, but it's 100dpi versus 160dpi, which makes a huge difference.
 
-> 
-> Last but not least GSM and (A)GPS should make its way into
-> MACHINE_FEATURES pretty soon as well...
+  Still, exact pixel resolution is primary thing from the software
+point fo view ;-). But I guess, current GUI_MACHINE_CLASS indeed may
+survive some more time.
 
-Right, I nuked smartphone-common.conf today and I was thinking how to funnel it into
-task-base :)
+>> 
+>> We shouldn't stop here. With several groups working on device daemon
+>> standards towards interoperable platforms, it could make sense to
+>> describe
+>> 
+>> INPUT_METHODS
+>> 
+>> as well (buttons, keyboard, touchscreen, microphone).
 
-regards,
+> MACHINE_FEATURES = "keyboard" exists :)
 
-Koen
+  touchscreen, too. But "buttons" and "microphone" would be nice
+additions.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
+>> 
+>> Last but not least GSM and (A)GPS should make its way into
+>> MACHINE_FEATURES pretty soon as well...
 
-iD8DBQFFM8aGMkyGM64RGpERAh9TAKCpyAJ33NZ66rfd5rl1qu7aQOZJ2QCeNgN7
-OImzQ9bzBfcmsO6cF+v4DRM=
-=sxZi
------END PGP SIGNATURE-----
+> Right, I nuked smartphone-common.conf today and I was thinking how to funnel it into
+> task-base :)
+
+  Well, I'd say, the benefits of task-base are now pretty visible!
+
+> regards,
+
+> Koen
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
