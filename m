@@ -1,33 +1,20 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [64.233.166.181] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <lenehan@twibble.org>) id 1Ga4Zy-0003A4-Tb
+	(envelope-from <axel.lin@gmail.com>) id 1Ga4qk-0004Q8-Pp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Oct 2006 08:07:03 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 7CA92CC936;
-	Wed, 18 Oct 2006 16:00:06 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 04989-02; Wed, 18 Oct 2006 16:00:03 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 695ADCC8FB;
-	Wed, 18 Oct 2006 16:00:03 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 578C112CB76E; Wed, 18 Oct 2006 16:00:03 +1000 (EST)
-Date: Wed, 18 Oct 2006 16:00:03 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: axel lin <axel.lin@gmail.com>
-Message-ID: <20061018060003.GA26266@twibble.org>
-Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
-	axel lin <axel.lin@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <427d64720610172256kbad5556n6ac7caf4bc9b965a@mail.gmail.com>
-Mime-Version: 1.0
-In-Reply-To: <427d64720610172256kbad5556n6ac7caf4bc9b965a@mail.gmail.com>
-User-Agent: Mutt/1.4.2.1i
-X-Virus-Scanned: by amavisd at twibble.org
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: why the files in rootfs /dev folder are regular files
+	Wed, 18 Oct 2006 08:24:22 +0200
+Received: by py-out-1112.google.com with SMTP id i75so217497pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Oct 2006 23:17:23 -0700 (PDT)
+Received: by 10.35.98.6 with SMTP id a6mr17031390pym;
+	Tue, 17 Oct 2006 23:17:23 -0700 (PDT)
+Received: by 10.35.15.3 with HTTP; Tue, 17 Oct 2006 23:17:23 -0700 (PDT)
+Message-ID: <427d64720610172317t1e89518bx16ffbdae70fdbfb4@mail.gmail.com>
+Date: Wed, 18 Oct 2006 14:17:23 +0800
+From: "axel lin" <axel.lin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: Fail to start dropbear
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,22 +28,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2006 06:07:03 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 18 Oct 2006 06:24:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Oct 18, 2006 at 01:56:04PM +0800, "axel lin" wrote:
-> hi list,
->     I'm using angstrom/mainstone config.
->     After build a bootstrap-image, I found that the files in
-> rootfs/dev folder are all regular files. Is this OE bug?
+hi list,
+I got below messages when start dropbear... ( config is angstrom/mainstone)
+how to fix this?
 
-That's  expected.
-See the fakeroot in the reference section of the user manual:
+root@mainstone:/$ /etc/init.d/dropbear start
+Starting Dropbear SSH server: Will output 1024 bit rsa secret key to
+'/etc/dropbear/dropbear_rsa_host_key'
+Generating key, this may take a while...
+Exited: couldn't open random device
 
-  http://www.openembedded.org/user-manual&dpage=ch07s04
-
--- 
- Jamie Lenehan <lenehan@twibble.org>
+Thanks for your help.
+Axel
 
 
