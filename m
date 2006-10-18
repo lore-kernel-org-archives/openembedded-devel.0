@@ -1,24 +1,25 @@
-Received: from [64.233.162.198] (helo=nz-out-0102.google.com)
+Received: from [137.79.94.127] (helo=s383.jpl.nasa.gov)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <nicolasfr@gmail.com>) id 1GaIVq-0004DY-5N
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Oct 2006 22:59:42 +0200
-Received: by nz-out-0102.google.com with SMTP id q3so169185nzb
+	(envelope-from <ehovland@s383.jpl.nasa.gov>) id 1GaJK9-0006Mp-1U
+	for openembedded-devel@openembedded.org; Wed, 18 Oct 2006 23:51:41 +0200
+Received: from mage.jpl.nasa.gov (mage [137.78.15.62])
+	by s383.jpl.nasa.gov (8.12.10/8.12.10) with ESMTP id k9ILifhS002419
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Oct 2006 13:52:42 -0700 (PDT)
-Received: by 10.64.253.12 with SMTP id a12mr15252237qbi;
-	Wed, 18 Oct 2006 13:52:42 -0700 (PDT)
-Received: by 10.65.197.7 with HTTP; Wed, 18 Oct 2006 13:52:42 -0700 (PDT)
-Message-ID: <b9481e140610181352ufe50bd6ja3d1950a3623c3ac@mail.gmail.com>
-Date: Wed, 18 Oct 2006 22:52:42 +0200
-From: "Nicolas FR" <nicolasfr@gmail.com>
-To: "Using the OpenEmbedded metadata to build Linux Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <1161203833.1649.114.camel@gandalf.tm.informatik.uni-frankfurt.de>
-MIME-Version: 1.0
-References: <b9481e140610181332p11dbbd7ybec6afd31d9e2260@mail.gmail.com>
-	<1161203833.1649.114.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Subject: Pytgtk2: follow up
+	Wed, 18 Oct 2006 14:44:41 -0700 (PDT)
+Received: by mage.jpl.nasa.gov (Postfix, from userid 4960)
+	id 10D4C300016E; Wed, 18 Oct 2006 14:44:41 -0700 (PDT)
+Date: Wed, 18 Oct 2006 14:44:41 -0700
+From: Erik Hovland <erik@hovland.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20061018214440.GB29528@mage.jpl.nasa.gov>
+References: <427d64720610172317t1e89518bx16ffbdae70fdbfb4@mail.gmail.com>
+	<200610180827.46349.openembedded@hrw.one.pl>
+	<427d64720610180022p431603abpd3c035f0c79b8f5c@mail.gmail.com>
+	<20061018203453.GA29721@twibble.org>
+Mime-Version: 1.0
+In-Reply-To: <20061018203453.GA29721@twibble.org>
+User-Agent: Mutt/1.5.9i
+Subject: Re: Fail to start dropbear
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,75 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2006 20:59:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Oct 2006 21:51:41 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-As suggested by Mickey, this might be of public interest.
+On Thu, Oct 19, 2006 at 06:34:53AM +1000, Jamie Lenehan wrote:
+> On Wed, Oct 18, 2006 at 03:22:41PM +0800, "axel lin" wrote:
+> [...]
+> > Thanks, Marcin.
+> > I fixed it by manually create the device file.
+> > How to config OE to add a device file, then I don't have to manually add it.
+> 
+> If you are using udev then udev should be creating /dev/random and
+> /dev/urandom (along with lots of other stuff). I don't think anything
+> special is required to get udev to created this.
+> 
+> If you really do want to add device nodes manually (which is probably wrong)
+> then see the "Device (/dev) nodes" section of the "image_ipkg class"
+> in the user manual:
+> 
+>   http://www.openembedded.org/user-manual&dpage=ch07s05
 
-Basically I asked Mickey for help to make a receipe for
-python-pygtk2_2.10.0 which adds support for the gtk.StatusIcon class
-which 'should' allow to use statusicon in panels which follow the
-freedesktop.org directives (hint: matchbox!).
+I seem to recall that /dev/zero and /dev/console have to be made
+manually just to boot an initrd enabled image. Just to give you an idea
+of an exception to the rule. Otherwise, I definitely agree.
 
-python-pygtk2_2.10.0 currently in OE, compiles fine but after
-installing it and trying in python to "import gtk", it would complain
-about missing pangocairo module.
+E
 
-After checking in log_do_configure I noticed that indeed that
-pangocairo was not found. After some research, I realised the
-pycairo.pc was missing from
-staging/arm-angstrom-linux-gnueabi/share/pkgconfig
-
-Now I know that pkconfig is used to install .pc files
-(http://www.openembedded.org/user-manual&dpage=ch07s07), so basically
-python-pycairo should just inherit pkgconfig to solve the problem?
-
-Is that it Mickey?
-
-
----------- Forwarded message ----------
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-Date: Oct 18, 2006 10:37 PM
-Subject: Re: Pytgtk2: follow up
-To: Nicolas FR <nicolasfr@gmail.com>
-
-
-> I finally made some progress to compile Pygtk2 with pangocairo
-> support. I made a simple recipe for pycairo-native but the problem is
-> that pycairo.pc is not installed in
-> "/opt/OE/build/tmp/staging/arm-angstrom-linux-gnueabi/share/pkgconfig".
-> Copying the file manually there solves the problem.
->
-> Of course I can add a rule in the do_staging to copy the file, but I'd
-> like to understand why the *.pc files do get copied for other packages
-> (pygobject for example) and not for pycairo? Any idea?
-
-Seems like pycairo.bb doesn't inherit pkgconfig.
-
-> Here is the .bb I made for python-pycairo-native_1.2.2.bb:
->
-> ----------
-> require python-pycairo_${PV}.bb
->
-> DEPENDS = "python-native"
->
-> do_stage() {
->         BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
->         ${STAGING_BINDIR}/python setup.py install
-> --prefix=${STAGING_LIBDIR}/.. --install-data=${STAGING_DATADIR} || \
->         oefatal "python setup.py install execution failed."
-> }
-
-Why would we need pycairo-native in addition to pycairo?
-
-Btw., I think these things are of public interest, we better switch to
-using openembedded-devel@lists.openembedded.org
-
---
-Regards,
-
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
+-- 
+Erik Hovland
+mail: erik AT hovland DOT org
+web: http://hovland.org/
+PGP/GPG public key available on request
 
 
