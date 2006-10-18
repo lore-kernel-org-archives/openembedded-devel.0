@@ -1,20 +1,21 @@
-Received: from [64.233.166.181] (helo=py-out-1112.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <axel.lin@gmail.com>) id 1Ga4qk-0004Q8-Pp
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Oct 2006 08:24:22 +0200
-Received: by py-out-1112.google.com with SMTP id i75so217497pye
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2006 23:17:23 -0700 (PDT)
-Received: by 10.35.98.6 with SMTP id a6mr17031390pym;
-	Tue, 17 Oct 2006 23:17:23 -0700 (PDT)
-Received: by 10.35.15.3 with HTTP; Tue, 17 Oct 2006 23:17:23 -0700 (PDT)
-Message-ID: <427d64720610172317t1e89518bx16ffbdae70fdbfb4@mail.gmail.com>
-Date: Wed, 18 Oct 2006 14:17:23 +0800
-From: "axel lin" <axel.lin@gmail.com>
+	(envelope-from <openembedded@hrw.one.pl>) id 1Ga50S-0004Wo-U6
+	for openembedded-devel@openembedded.org; Wed, 18 Oct 2006 08:34:25 +0200
+Received: (qmail 16052 invoked by uid 813007); 18 Oct 2006 06:27:27 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 18 Oct 2006 06:27:27 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
+Date: Wed, 18 Oct 2006 08:27:45 +0200
+User-Agent: KMail/1.9.5
+References: <427d64720610172317t1e89518bx16ffbdae70fdbfb4@mail.gmail.com>
+In-Reply-To: <427d64720610172317t1e89518bx16ffbdae70fdbfb4@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Fail to start dropbear
+Message-Id: <200610180827.46349.openembedded@hrw.one.pl>
+Subject: Re: Fail to start dropbear
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,22 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2006 06:24:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Oct 2006 06:34:25 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-hi list,
-I got below messages when start dropbear... ( config is angstrom/mainstone)
-how to fix this?
+Dnia =B6roda, 18 pa=BCdziernika 2006 08:17, axel lin napisa=B3:
 
-root@mainstone:/$ /etc/init.d/dropbear start
-Starting Dropbear SSH server: Will output 1024 bit rsa secret key to
-'/etc/dropbear/dropbear_rsa_host_key'
-Generating key, this may take a while...
-Exited: couldn't open random device
+> I got below messages when start dropbear... ( config is
+> angstrom/mainstone) how to fix this?
 
-Thanks for your help.
-Axel
+> root@mainstone:/$ /etc/init.d/dropbear start
+> Starting Dropbear SSH server: Will output 1024 bit rsa secret key to
+> '/etc/dropbear/dropbear_rsa_host_key'
+> Generating key, this may take a while...
+> Exited: couldn't open random device
+
+Looks like your machine system lack /dev/(u)random
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+               Heavy, adj.:
+               	Seduced by the chocolate side of the Force.
+
+
 
 
