@@ -1,26 +1,21 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [64.233.162.203] (helo=nz-out-0102.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <freyther@inf.fu-berlin.de>) id 1Ga6YD-0000vK-TC
+	(envelope-from <nicolasfr@gmail.com>) id 1Ga7IP-0003a4-Fc
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Oct 2006 10:13:21 +0200
-Received: from [88.134.98.23] (helo=[192.168.1.103])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <freyther@inf.fu-berlin.de>) id 1Ga6RV-0001uh-PJ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Oct 2006 10:06:25 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <eh4jbk$29v$1@sea.gmane.org>
-References: <eh4jbk$29v$1@sea.gmane.org>
-X-Gpgmail-State: !signed
-Message-Id: <7F472693-4FC3-45EA-BD5E-484D9817C17D@inf.fu-berlin.de>
-From: Holger Freyther <freyther@inf.fu-berlin.de>
-Date: Wed, 18 Oct 2006 10:04:40 +0200
-To: Using the OpenEmbedded metadata to build Linux Distributions
+	Wed, 18 Oct 2006 11:01:05 +0200
+Received: by nz-out-0102.google.com with SMTP id q3so72092nzb
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Oct 2006 01:54:09 -0700 (PDT)
+Received: by 10.64.156.1 with SMTP id d1mr14008148qbe;
+	Wed, 18 Oct 2006 01:54:08 -0700 (PDT)
+Received: by 10.65.197.7 with HTTP; Wed, 18 Oct 2006 01:54:08 -0700 (PDT)
+Message-ID: <b9481e140610180154r5a3c5c0do543863a9b0b4c059@mail.gmail.com>
+Date: Wed, 18 Oct 2006 10:54:08 +0200
+From: "Nicolas FR" <nicolasfr@gmail.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
 	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 88.134.98.23
-Subject: Re: Bitbake-1.6 crashes on 'which'.
+MIME-Version: 1.0
+Subject: Bitbake: say who you are cooking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,22 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2006 08:13:22 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed
+X-List-Received-Date: Wed, 18 Oct 2006 09:01:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+Hi,
 
-Am 18.10.2006 um 09:02 schrieb Rob Kramer:
+A suggestion for Bitbake:
 
-> Heya,
->
-> I had to patch 1.6 as below, copied from trunk/bitbake.
->
+When we start to bitbake a recipe, let's say "bitbake foo", bitbakes
+starts compiling dependencies without telling which version of foo he
+will finally compile.
 
-Hey Richard,
+I find this frustating, because quite often (wrong preferred provider,
+...) I end up bitbaking the wrong version of a recipe, and bb won't
+tell you this before having successfully compiled all the
+dependencies.
 
-any idea?
+It would be nice to have bitbake print which version he will bitbake
+before actually compiling the dependencies.
 
-holger
+Eg:
+# bitbake foo
+Note: parsing foo_2.0.1.bb
+...
+
+What do you think?
 
 
