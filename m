@@ -1,32 +1,35 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GaI7X-0003dK-0N for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Oct 2006 22:34:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 283BACDE;
-	Wed, 18 Oct 2006 22:27:36 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 08630-04; Wed, 18 Oct 2006 22:27:32 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 3D4E3CDC;
-	Wed, 18 Oct 2006 22:27:32 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: Diego Municio <dmunicio@gmail.com>
-In-Reply-To: <262223130610160133s51eeea80k819793d7f141ce7f@mail.gmail.com>
-References: <AcbgdPkAHP4dlY5cSUiFjMaSV5PieQ==>
-	<2A29FD26542C3F4895D9B9370CB2828702D47553@DB-Exchange01.DataBalk.local>
-	<262223130610160133s51eeea80k819793d7f141ce7f@mail.gmail.com>
-Organization: VanilleMedia
-Date: Wed, 18 Oct 2006 22:27:32 +0200
-Message-Id: <1161203252.1649.111.camel@gandalf.tm.informatik.uni-frankfurt.de>
+	(envelope-from <lenehan@twibble.org>) id 1GaIEd-0003lB-MI
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Oct 2006 22:41:56 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id B5BE98150C;
+	Thu, 19 Oct 2006 06:34:55 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 29227-08; Thu, 19 Oct 2006 06:34:54 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 0486B8150B;
+	Thu, 19 Oct 2006 06:34:54 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id EDEAB12CB988; Thu, 19 Oct 2006 06:34:53 +1000 (EST)
+Date: Thu, 19 Oct 2006 06:34:53 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
+To: axel lin <axel.lin@gmail.com>
+Message-ID: <20061018203453.GA29721@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	axel lin <axel.lin@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <427d64720610172317t1e89518bx16ffbdae70fdbfb4@mail.gmail.com>
+	<200610180827.46349.openembedded@hrw.one.pl>
+	<427d64720610180022p431603abpd3c035f0c79b8f5c@mail.gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
+In-Reply-To: <427d64720610180022p431603abpd3c035f0c79b8f5c@mail.gmail.com>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Segmentation fault before main
+Subject: Re: Fail to start dropbear
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,49 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2006 20:34:35 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Oct 2006 20:41:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-oe@handhelds.org is no longer the right mailing list. Please adjust
-addresses
+On Wed, Oct 18, 2006 at 03:22:41PM +0800, "axel lin" wrote:
+[...]
+> Thanks, Marcin.
+> I fixed it by manually create the device file.
+> How to config OE to add a device file, then I don't have to manually add it.
 
-Am Montag, den 16.10.2006, 10:33 +0200 schrieb Diego Municio:
-> I changed glibc version.. and it worked. It seems to be something
-> about pthreads..
-> 
-> Good luck
-> 
-> 2006/9/25, Koert Gielen <K.Gielen@databalk.nl>:
->         Hi,
->         
->         Have you been able to solve this problem?
->         
->         We have the same problem on Red Hat AS 4 (update 4). Sqlplus
->         is calling _sysctl and exits with a SIGSEGV.
->         
->         Regards,
->         
->         Koert
->         
->         
->         
->         _______________________________________________
->         Oe mailing list
->         Oe@handhelds.org
->         https://www.handhelds.org/mailman/listinfo/oe
->         
->         
-> 
-> _______________________________________________
-> Oe mailing list
-> Oe@handhelds.org
-> https://www.handhelds.org/mailman/listinfo/oe
+If you are using udev then udev should be creating /dev/random and
+/dev/urandom (along with lots of other stuff). I don't think anything
+special is required to get udev to created this.
+
+If you really do want to add device nodes manually (which is probably wrong)
+then see the "Device (/dev) nodes" section of the "image_ipkg class"
+in the user manual:
+
+  http://www.openembedded.org/user-manual&dpage=ch07s05
+
 -- 
-Regards,
-
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
-
-
+ Jamie Lenehan <lenehan@twibble.org>
 
 
