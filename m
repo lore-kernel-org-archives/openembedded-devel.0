@@ -1,27 +1,25 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [64.233.166.177] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GaRyn-0004Sm-BK
-	for openembedded-devel@openembedded.org; Thu, 19 Oct 2006 09:06:13 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9J6x7Fh008427 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Oct 2006 08:59:07 +0200
-Message-ID: <45372259.7070807@dominion.kabel.utwente.nl>
-Date: Thu, 19 Oct 2006 08:59:37 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+	(envelope-from <axel.lin@gmail.com>) id 1GaUV3-0000zW-Fd
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Oct 2006 11:47:41 +0200
+Received: by py-out-1112.google.com with SMTP id i75so705416pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Oct 2006 02:40:38 -0700 (PDT)
+Received: by 10.35.77.18 with SMTP id e18mr12319163pyl;
+	Thu, 19 Oct 2006 02:40:38 -0700 (PDT)
+Received: by 10.35.15.3 with HTTP; Thu, 19 Oct 2006 02:40:38 -0700 (PDT)
+Message-ID: <427d64720610190240r55311809y2a313d4055a10cc2@mail.gmail.com>
+Date: Thu, 19 Oct 2006 17:40:38 +0800
+From: "axel lin" <axel.lin@gmail.com>
+To: "axel lin" <axel.lin@gmail.com>, openembedded-devel@lists.openembedded.org
+In-Reply-To: <20061018203453.GA29721@twibble.org>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1160999847.1649.32.camel@gandalf.tm.informatik.uni-frankfurt.de>
-	<1161209075.5556.253.camel@localhost.localdomain>
-In-Reply-To: <1161209075.5556.253.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [Bitbake-dev] bitbake version comparison broken?
+References: <427d64720610172317t1e89518bx16ffbdae70fdbfb4@mail.gmail.com>
+	<200610180827.46349.openembedded@hrw.one.pl>
+	<427d64720610180022p431603abpd3c035f0c79b8f5c@mail.gmail.com>
+	<20061018203453.GA29721@twibble.org>
+Subject: Re: Fail to start dropbear
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,41 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Oct 2006 07:06:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 19 Oct 2006 09:47:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Thank you, Jamie.
+I found the root cause of missing /dev/(u)random issue.
+It is caused by missing "tmpfs" support in my kernel, as a result the
+udev doesn't work.
 
-Richard Purdie schreef:
-> On Mon, 2006-10-16 at 13:57 +0200, Michael 'Mickey' Lauer wrote:
->> Using bitbake trunk I just saw the following:
->>
->> NOTE: gtk+ (2.10.3-r0) already staged but upgrading to 2.8.9-r4 to
->> satisfy gtk+
->>
->> Can we fix that?
-> 
-> For the archives we discussed this on irc and the problem is
-> gtk_2.10.3.bb sets DEFAULT_PREFERENCE = "-1". This means 2.8.9 is the
-> preferred version when no preference is set and it would overwrite the
-> previously built version.
-> 
-> Its a classic example of a message in bitbake that needs at the very
-> least rewording.
+Regards,
+Axel
 
-s/upgrading to/replacing with/ ?
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFNyJZMkyGM64RGpERAiX5AJ907PKY2TF8x6frraR6T2BKAHvcxwCfeOyJ
-VOEFNr0NOE7VQ5YXl/D/tIE=
-=vaxs
------END PGP SIGNATURE-----
+2006/10/19, Jamie Lenehan <lenehan@twibble.org>:
+> On Wed, Oct 18, 2006 at 03:22:41PM +0800, "axel lin" wrote:
+> [...]
+> > Thanks, Marcin.
+> > I fixed it by manually create the device file.
+> > How to config OE to add a device file, then I don't have to manually add it.
+>
+> If you are using udev then udev should be creating /dev/random and
+> /dev/urandom (along with lots of other stuff). I don't think anything
+> special is required to get udev to created this.
+>
+> If you really do want to add device nodes manually (which is probably wrong)
+> then see the "Device (/dev) nodes" section of the "image_ipkg class"
+> in the user manual:
+>
+>   http://www.openembedded.org/user-manual&dpage=ch07s05
+>
+> --
+>  Jamie Lenehan <lenehan@twibble.org>
+>
 
 
