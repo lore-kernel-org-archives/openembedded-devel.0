@@ -1,29 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1GaJdO-0006f6-Rx
-	for openembedded-devel@openembedded.org; Thu, 19 Oct 2006 00:11:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id k9IM4YqR028485;
-	Wed, 18 Oct 2006 23:04:34 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 28231-06; Wed, 18 Oct 2006 23:04:32 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id k9IM4WQA028476
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Wed, 18 Oct 2006 23:04:32 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: "Michael 'Mickey' Lauer" <mickey@tm.informatik.uni-frankfurt.de>
-In-Reply-To: <1160999847.1649.32.camel@gandalf.tm.informatik.uni-frankfurt.de>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GaRyn-0004Sm-BK
+	for openembedded-devel@openembedded.org; Thu, 19 Oct 2006 09:06:13 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k9J6x7Fh008427 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Oct 2006 08:59:07 +0200
+Message-ID: <45372259.7070807@dominion.kabel.utwente.nl>
+Date: Thu, 19 Oct 2006 08:59:37 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <1160999847.1649.32.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Date: Wed, 18 Oct 2006 23:04:34 +0100
-Message-Id: <1161209075.5556.253.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@openembedded.org, bitbake-dev@lists.berlios.de
+	<1161209075.5556.253.camel@localhost.localdomain>
+In-Reply-To: <1161209075.5556.253.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [Bitbake-dev] bitbake version comparison broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,27 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2006 22:11:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 19 Oct 2006 07:06:13 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2006-10-16 at 13:57 +0200, Michael 'Mickey' Lauer wrote:
-> Using bitbake trunk I just saw the following:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Richard Purdie schreef:
+> On Mon, 2006-10-16 at 13:57 +0200, Michael 'Mickey' Lauer wrote:
+>> Using bitbake trunk I just saw the following:
+>>
+>> NOTE: gtk+ (2.10.3-r0) already staged but upgrading to 2.8.9-r4 to
+>> satisfy gtk+
+>>
+>> Can we fix that?
 > 
-> NOTE: gtk+ (2.10.3-r0) already staged but upgrading to 2.8.9-r4 to
-> satisfy gtk+
+> For the archives we discussed this on irc and the problem is
+> gtk_2.10.3.bb sets DEFAULT_PREFERENCE = "-1". This means 2.8.9 is the
+> preferred version when no preference is set and it would overwrite the
+> previously built version.
 > 
-> Can we fix that?
+> Its a classic example of a message in bitbake that needs at the very
+> least rewording.
 
-For the archives we discussed this on irc and the problem is
-gtk_2.10.3.bb sets DEFAULT_PREFERENCE = "-1". This means 2.8.9 is the
-preferred version when no preference is set and it would overwrite the
-previously built version.
+s/upgrading to/replacing with/ ?
 
-Its a classic example of a message in bitbake that needs at the very
-least rewording.
+regards,
 
-Richard
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
+iD8DBQFFNyJZMkyGM64RGpERAiX5AJ907PKY2TF8x6frraR6T2BKAHvcxwCfeOyJ
+VOEFNr0NOE7VQ5YXl/D/tIE=
+=vaxs
+-----END PGP SIGNATURE-----
 
 
