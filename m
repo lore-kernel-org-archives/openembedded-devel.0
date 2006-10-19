@@ -1,25 +1,35 @@
-Received: from [64.233.166.177] (helo=py-out-1112.google.com)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <axel.lin@gmail.com>) id 1GaUV3-0000zW-Fd
+	(envelope-from <lenehan@twibble.org>) id 1Gafir-0000Nx-DN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Oct 2006 11:47:41 +0200
-Received: by py-out-1112.google.com with SMTP id i75so705416pye
+	Thu, 19 Oct 2006 23:46:41 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id 3742022163
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Oct 2006 02:40:38 -0700 (PDT)
-Received: by 10.35.77.18 with SMTP id e18mr12319163pyl;
-	Thu, 19 Oct 2006 02:40:38 -0700 (PDT)
-Received: by 10.35.15.3 with HTTP; Thu, 19 Oct 2006 02:40:38 -0700 (PDT)
-Message-ID: <427d64720610190240r55311809y2a313d4055a10cc2@mail.gmail.com>
-Date: Thu, 19 Oct 2006 17:40:38 +0800
-From: "axel lin" <axel.lin@gmail.com>
-To: "axel lin" <axel.lin@gmail.com>, openembedded-devel@lists.openembedded.org
-In-Reply-To: <20061018203453.GA29721@twibble.org>
-MIME-Version: 1.0
-References: <427d64720610172317t1e89518bx16ffbdae70fdbfb4@mail.gmail.com>
-	<200610180827.46349.openembedded@hrw.one.pl>
-	<427d64720610180022p431603abpd3c035f0c79b8f5c@mail.gmail.com>
-	<20061018203453.GA29721@twibble.org>
-Subject: Re: Fail to start dropbear
+	Fri, 20 Oct 2006 07:39:35 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 06776-08
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Oct 2006 07:39:33 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 17DF31289C
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Oct 2006 07:39:33 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 0C83313AD473; Fri, 20 Oct 2006 07:39:33 +1000 (EST)
+Date: Fri, 20 Oct 2006 07:39:32 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20061019213932.GA30714@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	openembedded-devel@lists.openembedded.org
+References: <E1GadpR-0005SF-6I@linuxtogo.org>
+Mime-Version: 1.0
+In-Reply-To: <E1GadpR-0005SF-6I@linuxtogo.org>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: Re: [oe-commits] org.oe.dev glibc: drop 2.4, since it is confirmed to be nonworking on arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,39 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Oct 2006 09:47:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Oct 2006 21:46:41 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Thank you, Jamie.
-I found the root cause of missing /dev/(u)random issue.
-It is caused by missing "tmpfs" support in my kernel, as a result the
-udev doesn't work.
+On Thu, Oct 19, 2006 at 09:45:21PM +0200, "koen commit" wrote:
+> glibc: drop 2.4, since it is confirmed to be nonworking on arm
 
-Regards,
-Axel
+Hmm, was this really necessary? Surely marking it broken for arm
+would have been enough for now?
 
+I'm sure I'm not the only one running glibc 2.4 on lots of non-arm
+devices and now have to either add glibc 2.4 back in to OE locally
+and/or get all my devices upgraded (which will happen, once I've
+finished testing with glibc 2.5, no other glibc's build here except
+2.4 and 2.5.)
 
-2006/10/19, Jamie Lenehan <lenehan@twibble.org>:
-> On Wed, Oct 18, 2006 at 03:22:41PM +0800, "axel lin" wrote:
-> [...]
-> > Thanks, Marcin.
-> > I fixed it by manually create the device file.
-> > How to config OE to add a device file, then I don't have to manually add it.
->
-> If you are using udev then udev should be creating /dev/random and
-> /dev/urandom (along with lots of other stuff). I don't think anything
-> special is required to get udev to created this.
->
-> If you really do want to add device nodes manually (which is probably wrong)
-> then see the "Device (/dev) nodes" section of the "image_ipkg class"
-> in the user manual:
->
->   http://www.openembedded.org/user-manual&dpage=ch07s05
->
-> --
->  Jamie Lenehan <lenehan@twibble.org>
->
+And I'm sure there'll be a lot of people wondering why OE is suddenly
+building an older version of glibc.
+
+-- 
+ Jamie Lenehan <lenehan@twibble.org>
 
 
