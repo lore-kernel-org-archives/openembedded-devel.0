@@ -1,29 +1,17 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [195.70.105.99] (helo=mail.skidata.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GapU4-0000dC-NK
-	for openembedded-devel@openembedded.org; Fri, 20 Oct 2006 10:12:04 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9K84rFh002944 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2006 10:04:54 +0200
-Message-ID: <45388347.3090009@dominion.kabel.utwente.nl>
-Date: Fri, 20 Oct 2006 10:05:27 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <E1GadpR-0005SF-6I@linuxtogo.org>	<20061019213932.GA30714@twibble.org>
-	<200610200904.08999.openembedded@hrw.one.pl>
-In-Reply-To: <200610200904.08999.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	k9K84rFh002944
-Subject: Re: [oe-commits] org.oe.dev glibc: drop 2.4, since it is confirmed to be nonworking on arm
+	(envelope-from <FALE@skidata.com>) id 1GariK-0006a9-Oa
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Oct 2006 12:34:56 +0200
+X-SEF-Processed: 5_0_0_713__2006_10_20_12_27_48
+From: Leopold Faschalek <fale@skidata.com>
+To: openembedded-devel@lists.openembedded.org
+Organization: SKIDATA AG
+Date: Fri, 20 Oct 2006 13:26:19 +0200
+Message-Id: <1161343579.28578.3.camel@ubuntu>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+Subject: cvs proxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,53 +25,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Oct 2006 08:12:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Oct 2006 10:34:57 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Marcin Juszkiewicz schreef:
-> Dnia czwartek, 19 pa=C5=BAdziernika 2006 23:39, Jamie Lenehan napisa=C5=
-=82:
->> On Thu, Oct 19, 2006 at 09:45:21PM +0200, "koen commit" wrote:
->>> glibc: drop 2.4, since it is confirmed to be nonworking on arm
->=20
-> Koen: next time *check* does something use what you plan to remove.=20
-> Especially with such *important* packages like toolchain/libc ones.
+after installing OE I tried with 'bitbake task-bootstrap' and got
+following output after a second run:
 
-Right, sorry about that.
+NOTE: Using cache in '/stuff/tmp/cache'
+NOTE: Handling BitBake files: | (3983/3983) [100 %]
+NOTE: Parsing finished. 3866 cached, 0 parsed, 117 skipped, 0 masked.
 
->> Hmm, was this really necessary? Surely marking it broken for arm
->> would have been enough for now?
->=20
-> Should be enough.
+NOTE: build 200610201320: started
 
-Actually, no. Given the breadth and seriousness of the breakage we should=
- start
-whitelisting architectures (or may be even machines).
+OE Build Configuration:
+BB_VERSION     = "1.6.1"
+OE_REVISION    = "b4deec430ac4a640c372471057dbd7e0973f41e5"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "collie"
+DISTRO         = "familiar"
+DISTRO_VERSION = "unstable-20061020"
+TARGET_FPU     = ""
+
+NOTE: package ipkg-utils-native-1.6+cvs20050404: started
+NOTE: package ipkg-utils-native-1.6+cvs20050404-r8: task do_fetch:
+started
+NOTE: fetch
+http://www.oesources.org/source/current/ipkg-utils_anoncvs.handhelds.org__20050930.tar.gz
+--13:20:50--
+http://www.oesources.org/source/current/ipkg-utils_anoncvs.handhelds.org__20050930.tar.gz
+           =>
+`/home/fale/sources/ipkg-utils_anoncvs.handhelds.org__20050930.tar.gz'
+Connecting to 172.16.10.104:8080... connected.
+Proxy request sent, awaiting response... 504 Proxy Timeout ( The
+connection timed out. For more information about this event, see ISA
+Server Help.  )
+13:21:11 ERROR 504: Proxy Timeout ( The connection timed out. For more
+information about this event, see ISA Server Help.  ).
+
+NOTE: Fetch
+cvs://anoncvs:anoncvs@anoncvs.handhelds.org/cvs;module=ipkg-utils
+cvs [checkout aborted]: connect to
+anoncvs.handhelds.org(128.31.0.23):2401 failed: No route to host
+NOTE: Task failed: Fetch failed: ipkg-utils
+NOTE: package ipkg-utils-native-1.6+cvs20050404-r8: task do_fetch:
+failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package ipkg-utils-native-1.6+cvs20050404: failed
+ERROR: Build of task-bootstrap failed
+
+any suggestions?
+
+many thanks
+
+Leopold Faschalek
+fale at skidata dot com
 
 
-> I reverted koen's changeset and added DEFAULT_PREFERENCE_arm =3D "-1" s=
-o ARM=20
-> builds will skip it.
-
-That's untrue as well. I added a compatible_host mask to make it only bui=
-ld for x86 (hi
-mickey!) and shX (hi Jamie!)
-
-regards,
-
-Koen
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFOINHMkyGM64RGpERAjHXAKC6ERbJ9m6067RRBGKCBM6VDajyUwCeNXcb
-wJUrok6d9qTZnXZfUprJg5w=3D
-=3DqjEZ
------END PGP SIGNATURE-----
 
 
