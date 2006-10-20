@@ -1,21 +1,28 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GaoWs-0007J8-5T
-	for openembedded-devel@openembedded.org; Fri, 20 Oct 2006 09:10:54 +0200
-Received: (qmail 1906 invoked by uid 813007); 20 Oct 2006 07:03:46 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 20 Oct 2006 07:03:45 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Oct 2006 09:04:08 +0200
-User-Agent: KMail/1.9.5
-References: <E1GadpR-0005SF-6I@linuxtogo.org>
-	<20061019213932.GA30714@twibble.org>
-In-Reply-To: <20061019213932.GA30714@twibble.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GapU4-0000dC-NK
+	for openembedded-devel@openembedded.org; Fri, 20 Oct 2006 10:12:04 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k9K84rFh002944 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Oct 2006 10:04:54 +0200
+Message-ID: <45388347.3090009@dominion.kabel.utwente.nl>
+Date: Fri, 20 Oct 2006 10:05:27 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
 MIME-Version: 1.0
-Message-Id: <200610200904.08999.openembedded@hrw.one.pl>
+To: openembedded-devel@openembedded.org
+References: <E1GadpR-0005SF-6I@linuxtogo.org>	<20061019213932.GA30714@twibble.org>
+	<200610200904.08999.openembedded@hrw.one.pl>
+In-Reply-To: <200610200904.08999.openembedded@hrw.one.pl>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	k9K84rFh002944
 Subject: Re: [oe-commits] org.oe.dev glibc: drop 2.4, since it is confirmed to be nonworking on arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,41 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Oct 2006 07:10:54 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Fri, 20 Oct 2006 08:12:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia czwartek, 19 pa=BCdziernika 2006 23:39, Jamie Lenehan napisa=B3:
-> On Thu, Oct 19, 2006 at 09:45:21PM +0200, "koen commit" wrote:
-> > glibc: drop 2.4, since it is confirmed to be nonworking on arm
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Koen: next time *check* does something use what you plan to remove.=20
-Especially with such *important* packages like toolchain/libc ones.
+Marcin Juszkiewicz schreef:
+> Dnia czwartek, 19 pa=C5=BAdziernika 2006 23:39, Jamie Lenehan napisa=C5=
+=82:
+>> On Thu, Oct 19, 2006 at 09:45:21PM +0200, "koen commit" wrote:
+>>> glibc: drop 2.4, since it is confirmed to be nonworking on arm
+>=20
+> Koen: next time *check* does something use what you plan to remove.=20
+> Especially with such *important* packages like toolchain/libc ones.
 
-> Hmm, was this really necessary? Surely marking it broken for arm
-> would have been enough for now?
+Right, sorry about that.
 
-Should be enough.
+>> Hmm, was this really necessary? Surely marking it broken for arm
+>> would have been enough for now?
+>=20
+> Should be enough.
 
-> I'm sure I'm not the only one running glibc 2.4 on lots of non-arm
-> devices and now have to either add glibc 2.4 back in to OE locally
-> and/or get all my devices upgraded (which will happen, once I've
-> finished testing with glibc 2.5, no other glibc's build here except
-> 2.4 and 2.5.)
-
-> And I'm sure there'll be a lot of people wondering why OE is suddenly
-> building an older version of glibc.
-
-I reverted koen's changeset and added DEFAULT_PREFERENCE_arm =3D "-1" so AR=
-M=20
-builds will skip it.
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Actually, no. Given the breadth and seriousness of the breakage we should=
+ start
+whitelisting architectures (or may be even machines).
 
 
+> I reverted koen's changeset and added DEFAULT_PREFERENCE_arm =3D "-1" s=
+o ARM=20
+> builds will skip it.
+
+That's untrue as well. I added a compatible_host mask to make it only bui=
+ld for x86 (hi
+mickey!) and shX (hi Jamie!)
+
+regards,
+
+Koen
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
+
+iD8DBQFFOINHMkyGM64RGpERAjHXAKC6ERbJ9m6067RRBGKCBM6VDajyUwCeNXcb
+wJUrok6d9qTZnXZfUprJg5w=3D
+=3DqjEZ
+-----END PGP SIGNATURE-----
 
 
