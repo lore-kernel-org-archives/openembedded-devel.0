@@ -1,33 +1,22 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [64.233.184.238] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GavFE-0008Po-9M for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Oct 2006 16:21:10 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 35644DAB
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2006 16:13:59 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 19296-07 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2006 16:13:54 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 366E4D91
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2006 16:13:54 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+	(envelope-from <papercrane@gmail.com>) id 1GavtU-0006ND-56
+	for openembedded-devel@openembedded.org; Fri, 20 Oct 2006 17:02:44 +0200
+Received: by wr-out-0506.google.com with SMTP id i31so251634wra
+	for <openembedded-devel@openembedded.org>;
+	Fri, 20 Oct 2006 07:55:34 -0700 (PDT)
+Received: by 10.35.76.9 with SMTP id d9mr732567pyl;
+	Fri, 20 Oct 2006 07:55:32 -0700 (PDT)
+Received: by 10.35.118.16 with HTTP; Fri, 20 Oct 2006 07:55:32 -0700 (PDT)
+Message-ID: <432beae0610200755x31b0caa0i389bf5b8972e98a@mail.gmail.com>
+Date: Fri, 20 Oct 2006 07:55:32 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1187003130.20061020150851@gmail.com>
-References: <E1Gat5Z-0000PW-3y@linuxtogo.org>
-	<1187003130.20061020150851@gmail.com>
-Organization: VanilleMedia
-Date: Fri, 20 Oct 2006 16:13:53 +0200
-Message-Id: <1161353634.1649.174.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Subject: Re: [oe-commits] org.oe.dev qemu: sync with poky, remove	obsolete ones
+In-Reply-To: <200610201608.42551.christopher.lang@plus.cablesurf.de>
+MIME-Version: 1.0
+References: <200610201608.42551.christopher.lang@plus.cablesurf.de>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: inherit both kernel and autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,27 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Oct 2006 14:21:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 20 Oct 2006 15:02:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> The same type of question which occurs on list/IRC oftentimes now -
-> is it so unavoidable to remove just everything? What about the last
-> release version? It may contain known defficiencies for *some* archs
-> and configs, but it is still the last release version, not a random
-> snapshot which doesn't have obvious issues from the first look.
+On 10/20/06, Christopher Lang <christopher.lang@plus.cablesurf.de> wrote:
+>
+> Hi,
+>
+> In a .bb recipe, if I write: "inherit kernel autotools", which one of the two
+> overlapping exported methods "do_configure" and "do_install" will be the ones
+> used when bitbaking the .bb file?
+>
+> The methods from kernel or autotools?
+>
+> Does it depend on the order of the two classes? "kernel autotools" or
+> "autotools kernel"?
+>
+>
+> kernel.bbclass: EXPORT_FUNCTIONS do_compile do_install do_stage do_configure
+> autotools.bbclass: EXPORT_FUNCTIONS do_configure do_install
+>
 
-In principle I agree and normally I preserve the last stable release
-when I add newer version of packages. In this particular case though for
-some reason (which I can't remember other than that it was in middle of
-the night where I should've rather counted sheeps) I didn't :)
+I would think that the last one inherited would override the other.
+This isn't hard to test yourself, though.
 
-I'll bring 0.8.2 back the second 0.8.2+cvs20060723 breaks for anyone.
 -- 
-Regards,
-
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
-
-
+Justin Patrin
 
 
