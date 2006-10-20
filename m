@@ -1,32 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1Gax7Z-0000yL-2q
-	for openembedded-devel@openembedded.org; Fri, 20 Oct 2006 18:21:21 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id k9KGEBWp000453
-	for <openembedded-devel@openembedded.org>;
-	Fri, 20 Oct 2006 17:14:11 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30418-10 for <openembedded-devel@openembedded.org>;
-	Fri, 20 Oct 2006 17:14:09 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id k9KGE7Y6000445
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Fri, 20 Oct 2006 17:14:07 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <E1Gax3g-0008H7-No@linuxtogo.org>
-References: <E1Gax3g-0008H7-No@linuxtogo.org>
-Date: Fri, 20 Oct 2006 17:14:08 +0100
-Message-Id: <1161360848.6639.60.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [oe-commits] org.oe.dev package.bbclass: Split into two tasks, one which prepares the packages and then package_write which actually	generates the packages. The two stage approach allows us to avoid circular	dependency issues from classes like debian.bbclass. As the data being	emitted into pkgdata/ changed, you need to either wipe tmp or rerun the	do_package tasks (wipe the do_package stamps). Everything will repackage	anyway due to the new task.
+	(envelope-from <pmiscml@gmail.com>) id 1Gb26d-00015d-4y
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Oct 2006 23:40:43 +0200
+Received: by nf-out-0910.google.com with SMTP id l23so1565006nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Oct 2006 14:33:32 -0700 (PDT)
+Received: by 10.49.75.2 with SMTP id c2mr8836849nfl;
+	Fri, 20 Oct 2006 14:33:31 -0700 (PDT)
+Received: from CUBE ( [85.202.124.214])
+	by mx.google.com with ESMTP id n23sm2623995nfc.2006.10.20.14.33.31;
+	Fri, 20 Oct 2006 14:33:31 -0700 (PDT)
+Date: Sat, 21 Oct 2006 00:33:31 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <595433076.20061021003331@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: [RFC] Preferring tar.bz2 over tar.gz if there's a choice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,24 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Oct 2006 16:21:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 20 Oct 2006 21:40:43 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2006-10-20 at 18:17 +0200, rpurdie commit wrote:
-> package.bbclass: Split into two tasks, one which prepares the packages
-> and then package_write which actually generates the packages. The two
-> stage approach allows us to avoid circular dependency issues from
-> classes like debian.bbclass. As the data being emitted into pkgdata/
-> changed, you need to either wipe tmp or rerun the do_package tasks
-> (wipe the do_package stamps). Everything will repackage anyway due to
-> the new task.
+Hello openembedded-devel,
 
-As koen points out, you need to rerun do_install as well as do_package.
+  Nowadays, with multimegabyte software downloads, many projects
+provide both tar.bz2 and tar.gz archives for downloads. I'd like to
+make a proposal that we prefer tar.bz2 over .gz for obvious reason of
+saving bandwidth and disk space for lots of people using OE. In
+particular, I'd like to propose that it's ok to change .gz to .bz2 if
+such case is spotted.
 
-Cheers,
+  We should be reasonably safe with this, as gzip can be considered
+pretty well a legacy archiver for big downloads now. The projects
+which started use bzip2 hardly give it up. And of course, many
+projects alreday use bzip2 solely, so it's not like adding a new
+dependency for OE.
 
-Richard
+  Specifically, I have such patches for gdb_6.4 and libxml2_2.6.26 now
+in my tree.
+
+  (One would ask - why do I care up to the level of patchuing existing
+recipes? I'm exactly one of bandwidth-challenged, so try to use cheap
+local mirrors, and the mirrors of course usually have .bz2. I checked
+taht upstream actually provides .bz2, of course.)
+
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
 
