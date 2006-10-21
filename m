@@ -1,30 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1GbFnx-0005zj-2w
-	for openembedded-devel@openembedded.org; Sat, 21 Oct 2006 14:18:21 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id k9LCB29R024417;
-	Sat, 21 Oct 2006 13:11:02 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 22091-09; Sat, 21 Oct 2006 13:10:59 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id k9LCAtWt024410
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Sat, 21 Oct 2006 13:10:55 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <eh4kc9$63q$1@sea.gmane.org>
-References: <eh4jbk$29v$1@sea.gmane.org>  <eh4kc9$63q$1@sea.gmane.org>
-Date: Sat, 21 Oct 2006 13:10:55 +0100
-Message-Id: <1161432655.6643.2.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: Rob Kramer <robk@starhub.net.sg>
-Subject: Re: Bitbake-1.6 crashes on 'which'.
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GbPW3-000808-DR
+	for openembedded-devel@openembedded.org; Sun, 22 Oct 2006 00:40:32 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k9LMWxFh002611 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Oct 2006 00:33:01 +0200
+Message-ID: <453AA01B.5040300@dominion.kabel.utwente.nl>
+Date: Sun, 22 Oct 2006 00:32:59 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: [Fwd: [oe-commits] org.oe.dev package.bbclass: Fix split_locales to	remove spurious references to -dbg packages. The way it	selects the principle package name needs totally reworking as	the current code is flawed but apply a workaround for now	(this is unrelated to other changes to package.bbclass)]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,26 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Oct 2006 12:18:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 21 Oct 2006 22:40:34 -0000
+Content-Type: multipart/mixed; boundary="------------050805080800080809060400"
+
+--------------050805080800080809060400
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2006-10-18 at 15:19 +0800, Rob Kramer wrote:
-> Rob Kramer wrote:
-> 
-> > I had to patch 1.6 as below, copied from trunk/bitbake.
-> 
-> Or not; this dies elsewhere. Am I supposed to use 1.6 branch in the first
-> place? I'll try trunk for now..
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The patch in 1.7 is for a different problem. I've just updated the 1.6
-branch with the correct fix (add import bb to the top of shell.py).
+Hi,
 
-Thanks for reporting it.
+Should we bump PR on affected packages if this fix works?
 
-Cheers,
+regards,
 
-Richard
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
+iD8DBQFFOqAbMkyGM64RGpERAgfsAJ4ikdEB49SiHUvsj1YNlUaZ1ahnuQCfSLcg
+ZemD5f12rZ9CmXTO47MFibU=
+=UWrB
+-----END PGP SIGNATURE-----
 
-
+--------------050805080800080809060400--
