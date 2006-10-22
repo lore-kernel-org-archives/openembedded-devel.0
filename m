@@ -1,33 +1,24 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GbiEl-0004Tn-Mv for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Oct 2006 20:39:55 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id F3DA3E37;
-	Sun, 22 Oct 2006 20:32:33 +0200 (CEST)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 04691-07; Sun, 22 Oct 2006 20:32:30 +0200 (CEST)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 3E10BE35;
-	Sun, 22 Oct 2006 20:32:30 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1161538860.5545.7.camel@localhost.localdomain>
-References: <eh4jbk$29v$1@sea.gmane.org> <eh4kc9$63q$1@sea.gmane.org>
-	<1161432655.6643.2.camel@localhost.localdomain>
-	<ehemhq$f0s$1@sea.gmane.org>
-	<1161538860.5545.7.camel@localhost.localdomain>
-Organization: VanilleMedia
-Date: Sun, 22 Oct 2006 20:32:29 +0200
-Message-Id: <1161541950.1649.248.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Bitbake-1.6 crashes on 'which'.
+Received: from [70.96.188.114] (helo=outbound-mail-14.bluehost.com)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <matt@kiatoa.com>) id 1GbiQm-0004sp-9d
+	for openembedded-devel@openembedded.org; Sun, 22 Oct 2006 20:52:20 +0200
+Received: (qmail 16660 invoked by uid 0); 22 Oct 2006 18:44:53 -0000
+Received: from unknown (HELO box25.bluehost.com) (70.96.188.25)
+	by mailproxy1.bluehost.com with SMTP; 22 Oct 2006 18:44:53 -0000
+Received: from 71-37-217-5.phnx.qwest.net ([71.37.217.5] helo=tang)
+	by box25.bluehost.com with esmtpsa (SSLv3:EXP1024-RC4-SHA:128)
+	(Exim 4.52) id 1GbiJF-0003PF-MQ
+	for openembedded-devel@openembedded.org; Sun, 22 Oct 2006 12:44:36 -0600
+From: Matthew Welland <matt@kiatoa.com>
+Organization: kiatoa.com
+To: openembedded-devel@openembedded.org
+Date: Sun, 22 Oct 2006 11:45:06 -0700
+User-Agent: KMail/1.9.1
+MIME-Version: 1.0
+Message-Id: <200610221145.07238.matt@kiatoa.com>
+X-Identified-User: {32296:box25.bluehost.com:kiatoaco:kiatoa.com} {sentby:smtp
+	auth 71.37.217.5 authed with matt+kiatoa.com}
+Subject: bitbake gpe-image fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,32 +32,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Oct 2006 18:39:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 22 Oct 2006 18:52:20 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Am Sonntag, den 22.10.2006, 18:41 +0100 schrieb Richard Purdie:
-> On Sun, 2006-10-22 at 10:57 +0800, Rob Kramer wrote:
-> > Richard Purdie wrote:
-> > > The patch in 1.7 is for a different problem. I've just updated the 1.6
-> > > branch with the correct fix (add import bb to the top of shell.py).
-> > 
-> > Thanks for that, it works again now. I still got the crash below, but that
-> > was after a bunch of reparse commands, which might have upset bitbake a bit
-> > perhaps.
-> 
-> I can't seem to reproduce that. Can you give a sequence of commands
-> which result in the failure?
-> 
-> Mickey: I suspect this is some problem with the shell's internal state?
+I'm a little unsure whether this is apropriate for this list. If it
+isn't please point me in the right direction.
 
-I'm afraid so, yes. This will get better in the future with our
-frontend/backend separation strategy...
+I'm trying to build gpe-image. Currently it fails with the following
+errors. Any pointers on how to proceed appreciated.
 
--- 
-Regards,
+| Successfully terminated.
+| Collected errors:
+| ERROR: Cannot satisfy the following dependencies for gpe-task-base:
+|        libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4)
+| ERROR: Cannot satisfy the following dependencies for gpe-task-pim:
+|        libgcc1 (>= 3.4.4)
+| ERROR: Cannot satisfy the following dependencies for gpe-task-settings:
+|        libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4)
+| ERROR: Cannot satisfy the following dependencies for gpe-task-apps:
+|        libgcc1 (>= 3.4.4)
+| ERROR: Cannot satisfy the following dependencies for xserver-kdrive-fbdev:
+|        libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
+(>= 3.4.4)
+| ERROR: Cannot satisfy the following dependencies for 
+gpe-task-connectivity:
+|        libgcc1 (>= 3.4.4)
+| 
+NOTE: Task 
+failed: /home/matt/oe/tmp/work/h2200-linux/gpe-image-1.0-r20/temp/log.do_rootfs.16082
+NOTE: package gpe-image-1.0-r20: task do_rootfs: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package gpe-image-1.0: failed
+ERROR: Build of gpe-image failed
+matt@tang:~/oe$ bitbake libgcc1
+NOTE: Using cache in '/home/matt/oe/tmp/cache'
+NOTE: Parsing finished. 3877 cached, 0 parsed, 134 skipped, 0 masked.
+ERROR: conflicting preferences for virtual/libsdl: both libsdl-x11 and 
+libsdl-qpe specified
+NOTE: build 200610221125: started
 
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
+OE Build Configuration:
+BB_VERSION     = "1.4.4"
+OE_REVISION    = "a5d88999da9e4228eb53cd801f79b3036a490f74"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "h2200"
+DISTRO         = "familiar"
+DISTRO_VERSION = "unstable-20061022"
+TARGET_FPU     = ""
+
+ERROR: Nothing provides dependency libgcc1
+matt@tang:~/oe$ 
 
 
 
