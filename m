@@ -1,28 +1,27 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <freyther@inf.fu-berlin.de>) id 1GbiV5-0004v5-Au
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Oct 2006 20:56:47 +0200
-Received: from [88.134.98.23] (helo=[192.168.1.103])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <freyther@inf.fu-berlin.de>) id 1GbiNx-0000rb-6d
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Oct 2006 20:49:25 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <453BB676.1020100@dominion.kabel.utwente.nl>
-References: <453AA01B.5040300@dominion.kabel.utwente.nl>	<453AA142.4070002@dominion.kabel.utwente.nl>
-	<1161538687.5545.5.camel@localhost.localdomain>
-	<453BB676.1020100@dominion.kabel.utwente.nl>
-X-Gpgmail-State: !signed
-Message-Id: <E40B9975-E36D-4C14-B6B4-7B245A3FF7DB@inf.fu-berlin.de>
-From: Holger Freyther <freyther@inf.fu-berlin.de>
-Date: Sun, 22 Oct 2006 20:47:34 +0200
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 88.134.98.23
-Subject: Re: [Fwd: [oe-commits] org.oe.dev package.bbclass:	Fix	split_locales to	remove spurious references to -dbg packages.
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gbiv6-0006Dw-J8
+	for openembedded-devel@openembedded.org; Sun, 22 Oct 2006 21:23:40 +0200
+Received: from [130.89.6.158] (vpn006158.vpn.utwente.nl [130.89.6.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k9MJGAFh028664 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Oct 2006 21:16:10 +0200
+Message-ID: <453BC378.1000406@dominion.kabel.utwente.nl>
+Date: Sun, 22 Oct 2006 21:16:08 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <453AA01B.5040300@dominion.kabel.utwente.nl>	<453AA142.4070002@dominion.kabel.utwente.nl>	<1161538687.5545.5.camel@localhost.localdomain>	<453BB676.1020100@dominion.kabel.utwente.nl>
+	<E40B9975-E36D-4C14-B6B4-7B245A3FF7DB@inf.fu-berlin.de>
+In-Reply-To: <E40B9975-E36D-4C14-B6B4-7B245A3FF7DB@inf.fu-berlin.de>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [Fwd: [oe-commits] org.oe.dev	package.bbclass:	Fix	split_locales to	remove spurious	references to -dbg packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,24 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Oct 2006 18:56:47 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Sun, 22 Oct 2006 19:23:40 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am 22.10.2006 um 20:20 schrieb Koen Kooi:
+Holger Freyther schreef:
+> Am 22.10.2006 um 20:20 schrieb Koen Kooi:
+> 
+> 
+>> It would be quite easy to write a script that looks for .debug/  
+>> entries in packages, and
+>> file bugs against the offending packages.
+> 
+> Could you check if INHERIT += insane detects these packages? I think  
+> line 56 needs to be changed to path.contains('.debug')
 
+For future reference: you need python 2.4 for that.
 
->
-> It would be quite easy to write a script that looks for .debug/  
-> entries in packages, and
-> file bugs against the offending packages.
+regards,
 
-Could you check if INHERIT += insane detects these packages? I think  
-line 56 needs to be changed to path.contains('.debug')
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
-
-regards
-	h.
+iD8DBQFFO8N4MkyGM64RGpERAkoqAJ9yMheYxEzm5QdFUobYPWf8SEpz5wCgp8e5
+haGCHNVdjIzaDcZ0NfUBZgA=
+=q3Bu
+-----END PGP SIGNATURE-----
 
 
