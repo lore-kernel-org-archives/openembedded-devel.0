@@ -1,24 +1,28 @@
-Received: from [70.96.188.114] (helo=outbound-mail-14.bluehost.com)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <matt@kiatoa.com>) id 1GbiQm-0004sp-9d
-	for openembedded-devel@openembedded.org; Sun, 22 Oct 2006 20:52:20 +0200
-Received: (qmail 16660 invoked by uid 0); 22 Oct 2006 18:44:53 -0000
-Received: from unknown (HELO box25.bluehost.com) (70.96.188.25)
-	by mailproxy1.bluehost.com with SMTP; 22 Oct 2006 18:44:53 -0000
-Received: from 71-37-217-5.phnx.qwest.net ([71.37.217.5] helo=tang)
-	by box25.bluehost.com with esmtpsa (SSLv3:EXP1024-RC4-SHA:128)
-	(Exim 4.52) id 1GbiJF-0003PF-MQ
-	for openembedded-devel@openembedded.org; Sun, 22 Oct 2006 12:44:36 -0600
-From: Matthew Welland <matt@kiatoa.com>
-Organization: kiatoa.com
-To: openembedded-devel@openembedded.org
-Date: Sun, 22 Oct 2006 11:45:06 -0700
-User-Agent: KMail/1.9.1
-MIME-Version: 1.0
-Message-Id: <200610221145.07238.matt@kiatoa.com>
-X-Identified-User: {32296:box25.bluehost.com:kiatoaco:kiatoa.com} {sentby:smtp
-	auth 71.37.217.5 authed with matt+kiatoa.com}
-Subject: bitbake gpe-image fails
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1GbiV5-0004v5-Au
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Oct 2006 20:56:47 +0200
+Received: from [88.134.98.23] (helo=[192.168.1.103])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1GbiNx-0000rb-6d
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Oct 2006 20:49:25 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <453BB676.1020100@dominion.kabel.utwente.nl>
+References: <453AA01B.5040300@dominion.kabel.utwente.nl>	<453AA142.4070002@dominion.kabel.utwente.nl>
+	<1161538687.5545.5.camel@localhost.localdomain>
+	<453BB676.1020100@dominion.kabel.utwente.nl>
+X-Gpgmail-State: !signed
+Message-Id: <E40B9975-E36D-4C14-B6B4-7B245A3FF7DB@inf.fu-berlin.de>
+From: Holger Freyther <freyther@inf.fu-berlin.de>
+Date: Sun, 22 Oct 2006 20:47:34 +0200
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.752.3)
+X-Broken-Reverse-DNS: no host name found for IP address 88.134.98.23
+Subject: Re: [Fwd: [oe-commits] org.oe.dev package.bbclass:	Fix	split_locales to	remove spurious references to -dbg packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,74 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Oct 2006 18:52:20 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Sun, 22 Oct 2006 18:56:47 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-I'm a little unsure whether this is apropriate for this list. If it
-isn't please point me in the right direction.
-
-I'm trying to build gpe-image. Currently it fails with the following
-errors. Any pointers on how to proceed appreciated.
-
-| Successfully terminated.
-| Collected errors:
-| ERROR: Cannot satisfy the following dependencies for gpe-task-base:
-|        libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4)
-| ERROR: Cannot satisfy the following dependencies for gpe-task-pim:
-|        libgcc1 (>= 3.4.4)
-| ERROR: Cannot satisfy the following dependencies for gpe-task-settings:
-|        libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4)
-| ERROR: Cannot satisfy the following dependencies for gpe-task-apps:
-|        libgcc1 (>= 3.4.4)
-| ERROR: Cannot satisfy the following dependencies for xserver-kdrive-fbdev:
-|        libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 (>= 3.4.4) libgcc1 
-(>= 3.4.4)
-| ERROR: Cannot satisfy the following dependencies for 
-gpe-task-connectivity:
-|        libgcc1 (>= 3.4.4)
-| 
-NOTE: Task 
-failed: /home/matt/oe/tmp/work/h2200-linux/gpe-image-1.0-r20/temp/log.do_rootfs.16082
-NOTE: package gpe-image-1.0-r20: task do_rootfs: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package gpe-image-1.0: failed
-ERROR: Build of gpe-image failed
-matt@tang:~/oe$ bitbake libgcc1
-NOTE: Using cache in '/home/matt/oe/tmp/cache'
-NOTE: Parsing finished. 3877 cached, 0 parsed, 134 skipped, 0 masked.
-ERROR: conflicting preferences for virtual/libsdl: both libsdl-x11 and 
-libsdl-qpe specified
-NOTE: build 200610221125: started
-
-OE Build Configuration:
-BB_VERSION     = "1.4.4"
-OE_REVISION    = "a5d88999da9e4228eb53cd801f79b3036a490f74"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux"
-MACHINE        = "h2200"
-DISTRO         = "familiar"
-DISTRO_VERSION = "unstable-20061022"
-TARGET_FPU     = ""
-
-ERROR: Nothing provides dependency libgcc1
-matt@tang:~/oe$ 
 
 
+Am 22.10.2006 um 20:20 schrieb Koen Kooi:
+
+
+>
+> It would be quite easy to write a script that looks for .debug/  
+> entries in packages, and
+> file bugs against the offending packages.
+
+Could you check if INHERIT += insane detects these packages? I think  
+line 56 needs to be changed to path.contains('.debug')
+
+
+regards
+	h.
 
 
