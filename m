@@ -1,27 +1,24 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gbiv6-0006Dw-J8
-	for openembedded-devel@openembedded.org; Sun, 22 Oct 2006 21:23:40 +0200
-Received: from [130.89.6.158] (vpn006158.vpn.utwente.nl [130.89.6.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9MJGAFh028664 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Oct 2006 21:16:10 +0200
-Message-ID: <453BC378.1000406@dominion.kabel.utwente.nl>
-Date: Sun, 22 Oct 2006 21:16:08 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <453AA01B.5040300@dominion.kabel.utwente.nl>	<453AA142.4070002@dominion.kabel.utwente.nl>	<1161538687.5545.5.camel@localhost.localdomain>	<453BB676.1020100@dominion.kabel.utwente.nl>
-	<E40B9975-E36D-4C14-B6B4-7B245A3FF7DB@inf.fu-berlin.de>
-In-Reply-To: <E40B9975-E36D-4C14-B6B4-7B245A3FF7DB@inf.fu-berlin.de>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [Fwd: [oe-commits] org.oe.dev	package.bbclass:	Fix	split_locales to	remove spurious	references to -dbg packages.
+	(envelope-from <husamsenussi@gmail.com>) id 1Gbnt4-0006JC-6k
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Oct 2006 02:41:54 +0200
+Received: by ug-out-1314.google.com with SMTP id m3so377483ugc
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Oct 2006 17:34:30 -0700 (PDT)
+Received: by 10.66.220.17 with SMTP id s17mr6383316ugg;
+	Sun, 22 Oct 2006 17:34:30 -0700 (PDT)
+Received: from ?192.168.0.5? ( [217.206.111.105])
+	by mx.google.com with ESMTP id x37sm264190ugc.2006.10.22.17.34.29;
+	Sun, 22 Oct 2006 17:34:30 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <DEA11AFB-E095-47C8-9B9C-084A19506435@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+From: HuaM Senussi <husamsenussi@gmail.com>
+Date: Mon, 23 Oct 2006 01:34:27 +0100
+X-Mailer: Apple Mail (2.752.3)
+X-Mailman-Approved-At: Mon, 23 Oct 2006 03:03:28 +0200
+Subject: Build GPE image in Mac OS X 10.4.8 (intel)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,35 +32,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Oct 2006 19:23:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Oct 2006 00:41:54 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Holger Freyther schreef:
-> Am 22.10.2006 um 20:20 schrieb Koen Kooi:
-> 
-> 
->> It would be quite easy to write a script that looks for .debug/  
->> entries in packages, and
->> file bugs against the offending packages.
-> 
-> Could you check if INHERIT += insane detects these packages? I think  
-> line 56 needs to be changed to path.contains('.debug')
+Does anyone manage to build gpe image in Mac OS X, or at less cross  
+compiler.
 
-For future reference: you need python 2.4 for that.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFO8N4MkyGM64RGpERAkoqAJ9yMheYxEzm5QdFUobYPWf8SEpz5wCgp8e5
-haGCHNVdjIzaDcZ0NfUBZgA=
-=q3Bu
------END PGP SIGNATURE-----
+Thanks
 
 
