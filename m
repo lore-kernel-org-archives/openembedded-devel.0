@@ -1,21 +1,25 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <papercrane@gmail.com>) id 1Gc4PB-0004lE-7C
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Oct 2006 20:20:09 +0200
-Received: by py-out-1112.google.com with SMTP id i75so195869pye
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Oct 2006 11:12:39 -0700 (PDT)
-Received: by 10.35.80.20 with SMTP id h20mr7045295pyl;
-	Mon, 23 Oct 2006 11:12:38 -0700 (PDT)
-Received: by 10.35.118.16 with HTTP; Mon, 23 Oct 2006 11:12:38 -0700 (PDT)
-Message-ID: <432beae0610231112q5726443dqf7cb8e13846426ac@mail.gmail.com>
-Date: Mon, 23 Oct 2006 11:12:38 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <33FB6E9E-FD6B-4373-AE62-071FA433989B@gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gc5fG-0007SS-05
+	for openembedded-devel@openembedded.org; Mon, 23 Oct 2006 21:40:50 +0200
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	k9NJXIFh025033 for <openembedded-devel@openembedded.org>;
+	Mon, 23 Oct 2006 21:33:18 +0200
+Message-ID: <453D18FF.4070902@dominion.kabel.utwente.nl>
+Date: Mon, 23 Oct 2006 21:33:19 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
 MIME-Version: 1.0
-References: <33FB6E9E-FD6B-4373-AE62-071FA433989B@gmail.com>
+To: openembedded-devel@openembedded.org
+References: <DEA11AFB-E095-47C8-9B9C-084A19506435@gmail.com>
+In-Reply-To: <DEA11AFB-E095-47C8-9B9C-084A19506435@gmail.com>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: Build GPE image in Mac OS X 10.4.8 (intel)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,29 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Oct 2006 18:20:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 23 Oct 2006 19:40:50 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Please send your messages to the list only once.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 10/23/06, HuaM Senussi <husamsenussi@gmail.com> wrote:
+HuaM Senussi schreef:
 > Hi,
->
-> Does anyone manage to build gpe image in Mac OS X, or at less cross
+> 
+> Does anyone manage to build gpe image in Mac OS X, or at less cross  
 > compiler.
->
-> Thanks
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
+Typing 'OSX' into the search form on openembedded.org gives me this:
+http://www.openembedded.org/wiki/BuildOnOSX
 
--- 
-Justin Patrin
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
+
+iD8DBQFFPRj/MkyGM64RGpERAv6lAKCI26xI6CIIjU2hzBz5v6mGeduJMQCfQDYr
+sO0Q2+Q7Y+QzFt3r1wZPMe8=
+=e5xX
+-----END PGP SIGNATURE-----
 
 
