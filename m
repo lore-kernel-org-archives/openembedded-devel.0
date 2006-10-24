@@ -1,25 +1,31 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GcIQB-0005Cg-3z
-	for openembedded-devel@openembedded.org; Tue, 24 Oct 2006 11:18:07 +0200
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9O9AX8a016066 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Oct 2006 11:10:34 +0200
-Message-ID: <453DD889.2040209@dominion.kabel.utwente.nl>
-Date: Tue, 24 Oct 2006 11:10:33 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1GcLU7-00049e-FQ
+	for openembedded-devel@openembedded.org; Tue, 24 Oct 2006 14:34:23 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1GcLTb-0005AU-57
+	for openembedded-devel@openembedded.org; Tue, 24 Oct 2006 14:33:51 +0200
+Received: from v2ab5.v.pppool.de ([89.57.42.181])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 24 Oct 2006 14:33:51 +0200
+Received: from no2spam by v2ab5.v.pppool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 24 Oct 2006 14:33:51 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 24 Oct 2006 14:33:14 +0200
+Message-ID: <ehl16f$dp7$1@sea.gmane.org>
 References: <453DD6D1.8080407@dominion.kabel.utwente.nl>
-In-Reply-To: <453DD6D1.8080407@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<453DD889.2040209@dominion.kabel.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: v2ab5.v.pppool.de
+User-Agent: Thunderbird 1.5.0.7 (X11/20060922)
+In-Reply-To: <453DD889.2040209@dominion.kabel.utwente.nl>
+Sender: news <news@sea.gmane.org>
 Subject: Re: unset MACHINE before building bintutils-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,34 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Oct 2006 09:18:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Oct 2006 12:34:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi wrote:
 
-Koen Kooi schreef:
-> Hi,
+> The above is a bit confusing, to trigger the bug you need to do:
 > 
-> There's a subtle bug in OE/binutils which will pickup $MACHINE from your shell environment
-> and mess up binutils. In my case binutils thought is was built for 'arm:hx4700' instead of
-> 'arm', making glibc-intermediate fail during configure.
-> A big thanks to Holger for pointing me in the right direction.
+> export MACHINE=hx4700 ; bitbake glibc
 
-The above is a bit confusing, to trigger the bug you need to do:
+Maybe take a look at bug 1110?  Or is that bug invalid?
 
-export MACHINE=hx4700 ; bitbake glibc
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFPdiJMkyGM64RGpERAjiGAJ49af3agd5y0DQktyjVFufZqyXkXACeNvia
-lDaDm4PMoSvyo9jxatrF4F4=
-=wws3
------END PGP SIGNATURE-----
 
 
