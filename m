@@ -1,20 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1Gcciz-0001nG-Ca
-	for openembedded-devel@openembedded.org; Wed, 25 Oct 2006 08:58:53 +0200
-Received: (qmail 940 invoked by uid 813007); 25 Oct 2006 06:58:45 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 25 Oct 2006 06:58:44 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Oct 2006 08:59:18 +0200
-User-Agent: KMail/1.9.5
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1GcfOi-0006ta-Ss
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Oct 2006 11:50:08 +0200
+Received: from [145.253.107.2] (helo=[192.168.61.154])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1GcfOc-0005EO-Ia
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Oct 2006 11:50:02 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <200610250859.19316.openembedded@hrw.one.pl>
 References: <453EAEE0.8020704@dominion.kabel.utwente.nl>
-In-Reply-To: <453EAEE0.8020704@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
-Message-Id: <200610250859.19316.openembedded@hrw.one.pl>
+	<200610250859.19316.openembedded@hrw.one.pl>
+X-Gpgmail-State: !signed
+Message-Id: <2110BC65-EBCC-4FFB-B029-B5ED4B62DD08@inf.fu-berlin.de>
+From: Holger Freyther <freyther@inf.fu-berlin.de>
+Date: Wed, 25 Oct 2006 11:48:10 +0200
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.752.3)
+X-Broken-Reverse-DNS: no host name found for IP address 145.253.107.2
 Subject: Re: Report of QA issues with 'bitbake angstrom-image'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,41 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Oct 2006 06:58:53 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Oct 2006 09:50:09 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia =B6roda, 25 pa=BCdziernika 2006 02:25, Koen Kooi napisa=B3:
 
-> I decided to use insane.bbclass to hunt down spurious .debug/ entries
-> in .debug packages, but insane.bbclass is so cool that I want to share
-> the full list with you:
->
-> http://ewi546.ewi.utwente.nl/tmp/QA-issues.txt
+Am 25.10.2006 um 08:59 schrieb Marcin Juszkiewicz:
 
-nice list
+> We also need to change insane.bbclass to print PN/PV on each line  
+> as many
+> packages are renamed by debian.bbclass. Not duplicating info would be
+> also usefull.
 
-> I suspect we can ignore the .so warning for modules (gnumeric-plugins,
-> abiword-plugins) and debug packages, but that still leave a fair deal
-> of packages to investigate.
+Actually this sounds more like you want to have ${FILE} printed.  
+Actually all these scanners are stateless at the momemnt and for now  
+I would like to keep it, until the results are a bit better and we  
+have some more tests. Then I will improve reporting.
 
-We also need to change insane.bbclass to print PN/PV on each line as many=20
-packages are renamed by debian.bbclass. Not duplicating info would be=20
-also usefull.
 
-> Do we want to have bugs files against the offending packages, or are we
-> going to work trough this list the next few weeks?
-
-Metabug + bugraport per recipe sounds good to me.
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-                     Zwi=EAd=B3e r=F3=BFe te=BF k=B3uj=B1...
-
+h.
 
 
 
