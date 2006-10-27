@@ -1,26 +1,20 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.166.182] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GdCPh-0006dG-BS
-	for openembedded-devel@openembedded.org; Thu, 26 Oct 2006 23:05:21 +0200
-Received: from [192.168.21.150] (cp1080952-a.ndwrt1.lb.home.nl [84.30.9.91])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	k9QL53vD006915 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Oct 2006 23:05:04 +0200
-Message-ID: <454122FF.5030507@dominion.kabel.utwente.nl>
-Date: Thu, 26 Oct 2006 23:05:03 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+	(envelope-from <axel.lin@gmail.com>) id 1GdMIJ-0000Pz-9N
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Oct 2006 09:38:23 +0200
+Received: by py-out-1112.google.com with SMTP id i75so467972pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Oct 2006 00:38:05 -0700 (PDT)
+Received: by 10.35.52.18 with SMTP id e18mr135003pyk;
+	Fri, 27 Oct 2006 00:38:05 -0700 (PDT)
+Received: by 10.35.15.3 with HTTP; Fri, 27 Oct 2006 00:38:05 -0700 (PDT)
+Message-ID: <427d64720610270038y6dca8347j657397752817c163@mail.gmail.com>
+Date: Fri, 27 Oct 2006 15:38:05 +0800
+From: "axel lin" <axel.lin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <453EAEE0.8020704@dominion.kabel.utwente.nl>
-In-Reply-To: <453EAEE0.8020704@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Report of QA issues with 'bitbake angstrom-image'
+Subject: package minimo-0.016+cvs20060720-r0: task do_compile: failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,39 +28,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Oct 2006 21:05:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 27 Oct 2006 07:38:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+bug submitted: package minimo-0.016+cvs20060720-r0: task do_compile: failed
+http://bugs.openembedded.org/show_bug.cgi?id=1532
 
-Koen Kooi schreef:
-> Hi,
-> 
-> I decided to use insane.bbclass to hunt down spurious .debug/ entries in .debug packages,
-> but insane.bbclass is so cool that I want to share the full list with you:
-> 
-> http://ewi546.ewi.utwente.nl/tmp/QA-issues.txt
-> 
-> I suspect we can ignore the .so warning for modules (gnumeric-plugins, abiword-plugins)
-> and debug packages, but that still leave a fair deal of packages to investigate.
-
-After filtering out modules:
-
-http://ewi546.ewi.utwente.nl/tmp/QA-issues-2.log
-
-Lots of low-hanging fruit to be picked :)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFQSL+MkyGM64RGpERAn0zAKCDg0P8ZN/XtKLmKd4Fl2LqB4DuygCeOW4x
-njJi7m4gK+A5vUf3rS7ZMFM=
-=YnDZ
------END PGP SIGNATURE-----
+| make[7]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom/typelib/xpt/tools'
+| make[6]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom/typelib/xpt/tools'
+| make[5]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom/typelib/xpt'
+| make[5]: Entering directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom/typelib/xpidl'
+| make[6]: Entering directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom/typelib/xpidl'
+| ccache gcc -o host_xpidl
+-isystem/opt/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/include
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os
+-DXP_UNIX -O3  -I/opt/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/include/libIDL-2.0
+-I/opt/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/include/glib-2.0
+-I/opt/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/lib/glib-2.0/include
+  -DMDCPUCFG=\"md/_linux.cfg\"  host_xpidl.o host_xpidl_idl.o
+host_xpidl_util.o host_xpidl_header.o host_xpidl_typelib.o
+host_xpidl_doc.o host_xpidl_java.o ../../../dist/host/lib/libhostxpt.a
+-L/opt/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/lib   -lIDL-2
+-lglib-2.0
+| /usr/bin/ld: skipping incompatible
+/opt/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/lib/libIDL-2.so
+when searching for -lIDL-2
+| /usr/bin/ld: skipping incompatible
+/opt/oe/build/tmp/staging/arm-angstrom-linux-gnueabi/lib/libIDL-2.a
+when searching for -lIDL-2
+| /usr/bin/ld: cannot find -lIDL-2
+| collect2: ld returned 1 exit status
+| make[6]: *** [host_xpidl] Error 1
+| make[6]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom/typelib/xpidl'
+| make[5]: *** [export] Error 2
+| make[5]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom/typelib/xpidl'
+| make[4]: *** [export] Error 2
+| make[4]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom/typelib'
+| make[3]: *** [export] Error 2
+| make[3]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla/xpcom'
+| make[2]: *** [tier_2] Error 2
+| make[2]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla'
+| make[1]: *** [default] Error 2
+| make[1]: Leaving directory
+`/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/mozilla'
+| make: *** [build] Error 2
+| FATAL: oe_runmake failed
+NOTE: Task failed:
+/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/temp/log.do_compile.2610
+NOTE: package minimo-0.016+cvs20060720-r0: task do_compile: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package minimo-0.016+cvs20060720: failed
+ERROR: Build of minimo failed
 
 
