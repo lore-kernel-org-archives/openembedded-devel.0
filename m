@@ -1,21 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GdU9s-0006FR-Vy
-	for openembedded-devel@openembedded.org; Fri, 27 Oct 2006 18:02:13 +0200
-Received: (qmail 24269 invoked by uid 813007); 27 Oct 2006 16:01:53 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 27 Oct 2006 16:01:53 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
+	id 1GdXcF-0004jA-4r for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Oct 2006 21:43:43 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 7C714CE8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Oct 2006 21:43:20 +0200 (CEST)
+Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
+	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 06685-04 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Oct 2006 21:43:14 +0200 (CEST)
+Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
+	[141.2.14.64])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id A7853C96
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Oct 2006 21:43:14 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Oct 2006 18:01:51 +0200
-User-Agent: KMail/1.9.5
-MIME-Version: 1.0
-X-UID: 21
-Organization: OpenEmbedded
-Message-Id: <200610271801.52172.openembedded@hrw.one.pl>
-Subject: RFC: More granular libraries packaging
+In-Reply-To: <200610271801.52172.openembedded@hrw.one.pl>
+References: <200610271801.52172.openembedded@hrw.one.pl>
+Organization: VanilleMedia
+Date: Fri, 27 Oct 2006 21:43:14 +0200
+Message-Id: <1161978194.1649.335.camel@gandalf.tm.informatik.uni-frankfurt.de>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
+X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
+Subject: Re: RFC: More granular libraries packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,42 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2006 16:02:13 -0000
-Content-Disposition: inline
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Fri, 27 Oct 2006 19:43:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+Am Freitag, den 27.10.2006, 18:01 +0200 schrieb Marcin Juszkiewicz:
+> My proposition is - let split each library to separate package. This will 
+> enlarge feeds (so ipkg will get hurt more ;( but in some situations can 
+> give us smaller rootfs.
 
-One of our strong points is granular packaging. We have extra packages for 
-locales, documentation, development stuff etc. But we can improve it a bit 
-more.
++1 from me, however would this be explicit or implicit, i.e. do we need
+to opt-in for it to happen (e.g. by inheriting package_libs) or do we
+need to opt-out for it _not_ to happen (e.g. by defining
+PACKAGE_LIBS_AUTOMATIC = "0").
 
-Many packages has multiple libraries in package. Not everytime it is 
-useful - for example libusb had dependency on libstdc++ just because it 
-had libusbpp in same package as libusb.
+If we are going to make it opt-in, then for the sake of consistency I'd
+favour something along the lines of autotools_stage_all, i.e.
 
-My proposition is - let split each library to separate package. This will 
-enlarge feeds (so ipkg will get hurt more ;( but in some situations can 
-give us smaller rootfs.
-
-Probably best solution to get this done will be some extra code in 
-package_ipk.bbclass.
-
-Example of package to 'fix' is obexftp:
-
-NOTE: Multiple libraries (libbfb.so.0, libcobexbfb.so.0, libcobexpe.so.0, 
-libobexftp.so.0) found and LEAD_SONAME not defined
-Packaged contents of obexftp 
-into /home/hrw/devel/build/3541-feed/tmp/deploy/ipk/obexftp_0.10.3-r1_arm.ipk
-
-
+do_package() {
+    package_libs_all
+}
 -- 
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Regards,
 
-   Fear leads to anger, anger leads to hate, hate... leads to suffering.
-   		-- Yoda
+Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
 
 
 
