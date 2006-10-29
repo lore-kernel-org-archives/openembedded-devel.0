@@ -1,19 +1,20 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GeBey-00078s-Ah
-	for openembedded-devel@openembedded.org; Sun, 29 Oct 2006 15:29:12 +0100
-Received: (qmail 15531 invoked by uid 813007); 29 Oct 2006 14:28:40 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 29 Oct 2006 14:28:40 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+	(envelope-from <acassis@gmail.com>) id 1GeGmX-0008OQ-7U
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Oct 2006 20:57:21 +0100
+Received: by nf-out-0910.google.com with SMTP id l23so2008893nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Oct 2006 11:56:48 -0800 (PST)
+Received: by 10.78.160.2 with SMTP id i2mr3526240hue;
+	Sun, 29 Oct 2006 11:56:48 -0800 (PST)
+Received: by 10.78.194.14 with HTTP; Sun, 29 Oct 2006 11:56:48 -0800 (PST)
+Message-ID: <37367b3a0610291156r1a2655b8h1f24f176b281160b@mail.gmail.com>
+Date: Sun, 29 Oct 2006 13:56:48 -0600
+From: "Alan Carvalho de Assis" <acassis@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Oct 2006 15:28:39 +0100
-User-Agent: KMail/1.9.5
 MIME-Version: 1.0
-Message-Id: <200610291528.40663.openembedded@hrw.one.pl>
-Subject: RFC: handling of machine/distro features stuff
+Subject: Game to GPE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -27,44 +28,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Oct 2006 14:29:12 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Sun, 29 Oct 2006 19:57:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
+Hi All,
+I found this post:
 
-Currently OpenEmbedded use overrides based on DISTRO, MACHINE, TARGET_ARCH 
-and few others. I want to suggest start of using also 
-{MACHINE,DISTRO}_FEATURES because we have some stuff in metadata which 
-make sense only on some targets only - for example madwifi is limited to 
-PCI devices only.
-
-Why do this at all? Let me take wpa-supplicant 0.5.x as example.
-
-I'm building own distribution for my PDA devices and want to use latest 
-possible software. But wpa-supplicant 0.5.1 depends on madwifi which 
-cannot be build because my target device does not have PCI bus support. If 
-I remove madwifi stuff from wpa-supplicant recipe then I will get working 
-version. But this cannot be pushed back into repo because NSLU2 related 
-distros want version with madwifi support.
-
-Solution can be adding checking for pci support in 
-{MACHINE,DISTRO}_FEATURES and only then enable madwifi support:
-
-DEPENDS = "gnutls \ 
-${@base_contains("DISTRO_FEATURES", "pci", "madwifi", "",d)}"
-
-Same stuff can go into madwifi recipe so it will get skipped if target 
-device lack PCI support.
+http://www.oesf.org/forums/lofiversion/index.php?t17170.html
 
 
--- 
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+I want know if ipatience will be add to oe or gpe?
 
-               Life's not fair. But the root password helps.
+Cheers,
 
-
+Alan
 
 
