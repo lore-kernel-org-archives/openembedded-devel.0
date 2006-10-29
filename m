@@ -1,30 +1,19 @@
-Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1Gdwba-0005cA-09
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Oct 2006 00:24:42 +0200
-Received: by nf-out-0910.google.com with SMTP id l23so1746336nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Oct 2006 15:24:15 -0700 (PDT)
-Received: by 10.49.75.2 with SMTP id c2mr2268209nfl;
-	Sat, 28 Oct 2006 15:24:14 -0700 (PDT)
-Received: from CUBE ( [82.193.96.236])
-	by mx.google.com with ESMTP id v20sm2886523nfc.2006.10.28.15.24.13;
-	Sat, 28 Oct 2006 15:24:14 -0700 (PDT)
-Date: Sun, 29 Oct 2006 01:24:13 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1025557584.20061029012413@gmail.com>
-To: Bernhard Fischer <rep.nop@aon.at>
-In-Reply-To: <20061025153503.GB5673@aon.at>
-References: <OFC1EB4E10.63CD3677-ON8525720D.00622299-8525720D.00627058@us.ibm.com>
-	<200610240136.41311.paul@codesourcery.com>
-	<1893885600.20061024043855@gmail.com>
-	<200610241928.47477.rob@landley.net>
-	<557987790.20061025031831@gmail.com> <20061025153503.GB5673@aon.at>
+	(envelope-from <openembedded@hrw.one.pl>) id 1GeBey-00078s-Ah
+	for openembedded-devel@openembedded.org; Sun, 29 Oct 2006 15:29:12 +0100
+Received: (qmail 15531 invoked by uid 813007); 29 Oct 2006 14:28:40 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 29 Oct 2006 14:28:40 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 29 Oct 2006 15:28:39 +0100
+User-Agent: KMail/1.9.5
 MIME-Version: 1.0
-Cc: busybox@busybox.net, openembedded-devel@lists.openembedded.org
-Subject: busybox "ps ax" woes, was: Re[2]: [Qemu-devel] Config file support
+Message-Id: <200610291528.40663.openembedded@hrw.one.pl>
+Subject: RFC: handling of machine/distro features stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,70 +27,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Oct 2006 22:24:42 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-Hello Bernhard,
-
-Wednesday, October 25, 2006, 6:35:04 PM, you wrote:
-
-> On Wed, Oct 25, 2006 at 03:18:31AM +0300, Paul Sokolovsky wrote:
-
->>  Oh, and while we still talking (and to add even more confusion),
->>how'd you guys managed to kill "ps ax" to work in busybox 1.2.1? I
->>really miss it here, when loading my embedded images into QEMU...
-
-> Just unset PS_FEATURE_WIDE.
-
-> In principle, i agree that we should enhance it to allow for
-> disregarding any non-options.
-
-  Thanks for your response! I actually had a suspicion that some
-busybox config option was mis-set. We're using it here with
-OpenEmbedded automated build system, and well, when doing system
-integration, the distance from configs of individual packages
-to the developers increases ;-).
-
-  But we actually had issues with that besides mere command-line
-nuisance: some of our init.d scripts has "ps -e" or something, and as
-a workaround we had to switch to procps ;-(.
-
-  Again, thanks for your hint, from the context where it was written,
-I couldn't expect to get an answer ;-)
-
-> Something like
-> Index: libbb/getopt32.c
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> --- libbb/getopt32.c    (revision 16432)
-> +++ libbb/getopt32.c    (working copy)
-> @@ -72,6 +72,9 @@
->          env -i ls -d /
->          Here we want env to process just the '-i', not the '-d'.
-> =20
-> + "_"    If the first character in the applet_opts string is an underscor=
-e,
-> +               ignore all non-option arguments.
-> +
->  const struct option *applet_long_options
-> =20
->          This struct allows you to define long options.  The syntax for
+X-List-Received-Date: Sun, 29 Oct 2006 14:29:12 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 
+Currently OpenEmbedded use overrides based on DISTRO, MACHINE, TARGET_ARCH 
+and few others. I want to suggest start of using also 
+{MACHINE,DISTRO}_FEATURES because we have some stuff in metadata which 
+make sense only on some targets only - for example madwifi is limited to 
+PCI devices only.
 
-> Alternatively you can rewrite ps to match the procps' big ps better.
-> I need to be able to see the full commandline if i do `ps ww=B4, not only
-> the first 25 chars of them.
+Why do this at all? Let me take wpa-supplicant 0.5.x as example.
 
-> HTH,
+I'm building own distribution for my PDA devices and want to use latest 
+possible software. But wpa-supplicant 0.5.1 depends on madwifi which 
+cannot be build because my target device does not have PCI bus support. If 
+I remove madwifi stuff from wpa-supplicant recipe then I will get working 
+version. But this cannot be pushed back into repo because NSLU2 related 
+distros want version with madwifi support.
+
+Solution can be adding checking for pci support in 
+{MACHINE,DISTRO}_FEATURES and only then enable madwifi support:
+
+DEPENDS = "gnutls \ 
+${@base_contains("DISTRO_FEATURES", "pci", "madwifi", "",d)}"
+
+Same stuff can go into madwifi recipe so it will get skipped if target 
+device lack PCI support.
 
 
+-- 
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
---=20
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+               Life's not fair. But the root password helps.
+
 
 
 
