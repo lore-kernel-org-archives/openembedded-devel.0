@@ -1,22 +1,30 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GeTgi-00010i-Lg
-	for openembedded-devel@openembedded.org; Mon, 30 Oct 2006 10:44:12 +0100
-Received: (qmail 16627 invoked by uid 813007); 30 Oct 2006 09:43:33 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 30 Oct 2006 09:43:33 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
+	id 1GeTzq-0001A6-La for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Oct 2006 11:03:58 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id C96C3C72
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Oct 2006 11:03:22 +0100 (CET)
+Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
+	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 01371-08 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Oct 2006 11:03:18 +0100 (CET)
+Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
+	[141.2.14.64])
+	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id BADF3C6C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Oct 2006 11:03:18 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Oct 2006 11:43:31 +0200
-User-Agent: KMail/1.9.5
-References: <200610292344.10844.openembedded@hrw.one.pl>
-In-Reply-To: <200610292344.10844.openembedded@hrw.one.pl>
-Organization: OpenEmbedded
-MIME-Version: 1.0
-Message-Id: <200610301043.32043.openembedded@hrw.one.pl>
-Subject: Re: Debian and RPM packages for easier start with OpenEmbedded
+Organization: VanilleMedia
+Date: Mon, 30 Oct 2006 11:03:18 +0100
+Message-Id: <1162202598.1649.387.camel@gandalf.tm.informatik.uni-frankfurt.de>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
+X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
+Subject: ATT: dbus-glib 0.72
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,44 +38,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Oct 2006 09:44:12 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Oct 2006 10:03:59 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia niedziela, 29 pa=BCdziernika 2006 23:44, Marcin Juszkiewicz napisa=B3:
-> For one of my customers I prepared packages which have to make starting
-> with OpenEmbedded easier. The idea is to install one metapackage which
-> will depend on all required tools.
->
-> There are two formats provided:
->
-> - deb for Debian and Debian based distros
+changed it's command line UI for dbus-binding-tool. If you stumble about
+problems,
+then prefer dus-glib-native-0.71.
 
-> Debian ones will be provided as APT repository so users will be able to
-> just 'apt-get install openembedded-essential'.=20
+-- 
+Regards,
 
-Add this line to APT sources:
-
-deb http://www.openembedded.org/dl/ packages/
-
-(you can add it into /etc/apt/sources.list file or =20
-in /etc/apt/sources.list.d/ directory as oe.list)
-
-Then do "apt-get update; apt-get install openembedded-essential" to get it=
-=20
-installed.
-
-Let me know if any problems appear or if you have suggestions what to=20
-change.
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-               Beware of Programmers who carry screwdrivers.
-               		-- Leonard Brandwein
+Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
 
 
 
