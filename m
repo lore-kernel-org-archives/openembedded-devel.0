@@ -1,30 +1,26 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GeTzq-0001A6-La for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Oct 2006 11:03:58 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id C96C3C72
+	(envelope-from <pmiscml@gmail.com>) id 1GeZkF-00042m-8m
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Oct 2006 17:12:15 +0100
+Received: by ug-out-1314.google.com with SMTP id m3so983549ugc
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2006 11:03:22 +0100 (CET)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 01371-08 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2006 11:03:18 +0100 (CET)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id BADF3C6C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2006 11:03:18 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: openembedded-devel@lists.openembedded.org
-Organization: VanilleMedia
-Date: Mon, 30 Oct 2006 11:03:18 +0100
-Message-Id: <1162202598.1649.387.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Subject: ATT: dbus-glib 0.72
+	Mon, 30 Oct 2006 08:11:38 -0800 (PST)
+Received: by 10.82.126.19 with SMTP id y19mr650017buc;
+	Mon, 30 Oct 2006 08:11:37 -0800 (PST)
+Received: from CUBE ( [85.202.124.214])
+	by mx.google.com with ESMTP id m15sm8406583nfc.2006.10.30.08.11.36;
+	Mon, 30 Oct 2006 08:11:37 -0800 (PST)
+Date: Mon, 30 Oct 2006 18:11:37 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <105613014.20061030181137@gmail.com>
+To: "Alan Carvalho de Assis" <acassis@gmail.com>
+In-Reply-To: <37367b3a0610291156r1a2655b8h1f24f176b281160b@mail.gmail.com>
+References: <37367b3a0610291156r1a2655b8h1f24f176b281160b@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Game to GPE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,19 +34,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Oct 2006 10:03:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 30 Oct 2006 16:12:15 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-changed it's command line UI for dbus-binding-tool. If you stumble about
-problems,
-then prefer dus-glib-native-0.71.
+Hello Alan,
+
+Sunday, October 29, 2006, 9:56:48 PM, you wrote:
+
+> Hi All,
+> I found this post:
+
+> http://www.oesf.org/forums/lofiversion/index.php?t17170.html
+
+
+> I want know if ipatience will be add to oe or gpe?
+
+  Yes, if someone (preferably the author) posts recipes needed for
+that to http://bugs.openembedded.org . Unknown, otherwise.
+
+  I, for example, care to make Linux/OE an "ultimate gaming platform",
+lol (mostly, to attract users). As I don't have time to play games, I
+used to entertain myself with looking into porting some of them. Now I
+don't have time to proceed even with that. But ideally, yes, it would
+be nice to have someone who cares for that.
+
+> Cheers,
+
+> Alan
+
 
 -- 
-Regards,
-
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
-
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
