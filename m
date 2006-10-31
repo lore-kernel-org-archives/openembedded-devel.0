@@ -1,26 +1,30 @@
-Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1GeZkF-00042m-8m
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Oct 2006 17:12:15 +0100
-Received: by ug-out-1314.google.com with SMTP id m3so983549ugc
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2006 08:11:38 -0800 (PST)
-Received: by 10.82.126.19 with SMTP id y19mr650017buc;
-	Mon, 30 Oct 2006 08:11:37 -0800 (PST)
-Received: from CUBE ( [85.202.124.214])
-	by mx.google.com with ESMTP id m15sm8406583nfc.2006.10.30.08.11.36;
-	Mon, 30 Oct 2006 08:11:37 -0800 (PST)
-Date: Mon, 30 Oct 2006 18:11:37 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <105613014.20061030181137@gmail.com>
-To: "Alan Carvalho de Assis" <acassis@gmail.com>
-In-Reply-To: <37367b3a0610291156r1a2655b8h1f24f176b281160b@mail.gmail.com>
-References: <37367b3a0610291156r1a2655b8h1f24f176b281160b@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Game to GPE
+	(envelope-from <rpurdie@rpsys.net>) id 1GewJb-0004NY-03
+	for openembedded-devel@openembedded.org; Tue, 31 Oct 2006 17:18:18 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id k9VGHNl2023649
+	for <openembedded-devel@openembedded.org>; Tue, 31 Oct 2006 16:17:23 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 23558-02 for <openembedded-devel@openembedded.org>;
+	Tue, 31 Oct 2006 16:17:21 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id k9VGHGH3023640
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Tue, 31 Oct 2006 16:17:16 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200610271801.52172.openembedded@hrw.one.pl>
+References: <200610271801.52172.openembedded@hrw.one.pl>
+Date: Tue, 31 Oct 2006 16:17:16 +0000
+Message-Id: <1162311437.5541.39.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: RFC: More granular libraries packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,39 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Oct 2006 16:12:15 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 31 Oct 2006 16:18:18 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello Alan,
+On Fri, 2006-10-27 at 18:01 +0200, Marcin Juszkiewicz wrote:
+> One of our strong points is granular packaging. We have extra packages for 
+> locales, documentation, development stuff etc. But we can improve it a bit 
+> more.
+> 
+> Many packages has multiple libraries in package. Not everytime it is 
+> useful - for example libusb had dependency on libstdc++ just because it 
+> had libusbpp in same package as libusb.
+> 
+> My proposition is - let split each library to separate package. This will 
+> enlarge feeds (so ipkg will get hurt more ;( but in some situations can 
+> give us smaller rootfs.
 
-Sunday, October 29, 2006, 9:56:48 PM, you wrote:
+In some specific cases, splitting packaging per lib makes a lot of
+sense. I'd certainly agree in the case of libusb. I'm not sure splitting
+all libs is a good idea though as most libs packages are currently
+interdependent and there is nothing to be gained by splitting.
 
-> Hi All,
-> I found this post:
+I'm therefore thinking of an opt in class/PACKAGEFUNC to handle this
+only in the cases we identify as needing it but others seem to have a
+different opinion :)
 
-> http://www.oesf.org/forums/lofiversion/index.php?t17170.html
+Richard
 
-
-> I want know if ipatience will be add to oe or gpe?
-
-  Yes, if someone (preferably the author) posts recipes needed for
-that to http://bugs.openembedded.org . Unknown, otherwise.
-
-  I, for example, care to make Linux/OE an "ultimate gaming platform",
-lol (mostly, to attract users). As I don't have time to play games, I
-used to entertain myself with looking into porting some of them. Now I
-don't have time to proceed even with that. But ideally, yes, it would
-be nice to have someone who cares for that.
-
-> Cheers,
-
-> Alan
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
 
 
 
