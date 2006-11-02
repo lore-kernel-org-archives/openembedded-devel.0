@@ -1,22 +1,32 @@
-Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mpanczyk@gmail.com>) id 1GfaP9-0007Ay-Ez
+	(envelope-from <lenehan@twibble.org>) id 1GfmRL-0005QU-Aq
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Nov 2006 12:06:39 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so27821ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Nov 2006 03:05:45 -0800 (PST)
-Received: by 10.67.97.18 with SMTP id z18mr401362ugl.1162465545533;
-	Thu, 02 Nov 2006 03:05:45 -0800 (PST)
-Received: by 10.66.225.9 with HTTP; Thu, 2 Nov 2006 03:05:45 -0800 (PST)
-Message-ID: <abf5c18a0611020305x541169d2j66bdebebe2079a73@mail.gmail.com>
-Date: Thu, 2 Nov 2006 12:05:45 +0100
-From: "Michal Panczyk" <mpanczyk@gmail.com>
+	Fri, 03 Nov 2006 00:57:43 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id 8F4A4B7502;
+	Fri,  3 Nov 2006 10:56:45 +1100 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 18772-02; Fri, 3 Nov 2006 10:56:43 +1100 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 968ECB74ED;
+	Fri,  3 Nov 2006 10:56:43 +1100 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 886E72ACAD; Fri,  3 Nov 2006 10:56:43 +1100 (EST)
+Date: Fri, 3 Nov 2006 10:56:43 +1100
+From: Jamie Lenehan <lenehan@twibble.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <abf5c18a0611011617i67e29487u897f42738677a986@mail.gmail.com>
-MIME-Version: 1.0
-References: <abf5c18a0611011617i67e29487u897f42738677a986@mail.gmail.com>
-Subject: no signs of kernel in opie-image
+Message-ID: <20061102235643.GA30907@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	openembedded-devel@lists.openembedded.org,
+	Martin Dietze <di@fh-wedel.de>
+References: <E1GfdiZ-0005X2-My@linuxtogo.org>
+Mime-Version: 1.0
+In-Reply-To: <E1GfdiZ-0005X2-My@linuxtogo.org>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: Re: [oe-commits] org.oe.dev libintl-perl: added do_compile() function needed for crosscompilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,22 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Nov 2006 11:06:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Nov 2006 23:57:43 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hi all !
-I have a stupid question about an annoying thing:
-I went through long and buggy process of bitbaking a opie-image for
-h2200 and at the end I found out that the /boot dir in all my images
-(ext2 tar jffs2) is empty. There are no signs of any zImage. The same
-goes for modules in /lib dir - there is no such dir as /lib/modules.
-Is this a feature,bug or have I missed something ?
+On Thu, Nov 02, 2006 at 03:38:55PM +0100, "MartinDietze commit" wrote:
+> libintl-perl: added do_compile() function needed for crosscompilation
+> - the function has obviously been forgotten to add for version 1.16
 
-Michal
+Hi Martin,
 
-PS. I have tried sending this message to openembedded-users list but
-this list seems to be dead...
+this should not be needed. I've updated clasess/cpan.bbclass to pass
+the correct values during configure so that this don't need to be
+done in all the perl modules. It works for the few targets I test.
+
+It might by the ld flags that are the problem for you - whatever you
+are building for might need the s/ld/gcc/ changes, which I've only
+made apply for sh3/sh4 at the moment (but plan to turn on for all
+archs to make all the perl stuff a bit simplier).
+
+If you could send me what errors you got without this change and let
+me know what target you are building for I'll see if I update
+classes/cpan.bbclass to do the right thing. This wuill make sure all
+the perl modules build for your target and remove the need to put
+this stuff thoughout the perl modules.
+
+-- 
+ Jamie Lenehan <lenehan@twibble.org>
 
 
