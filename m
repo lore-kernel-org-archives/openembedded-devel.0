@@ -1,32 +1,26 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [64.233.182.188] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <lenehan@twibble.org>) id 1GfmRL-0005QU-Aq
+	(envelope-from <pmiscml@gmail.com>) id 1GgHkE-0008W4-K0
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Nov 2006 00:57:43 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 8F4A4B7502;
-	Fri,  3 Nov 2006 10:56:45 +1100 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 18772-02; Fri, 3 Nov 2006 10:56:43 +1100 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 968ECB74ED;
-	Fri,  3 Nov 2006 10:56:43 +1100 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 886E72ACAD; Fri,  3 Nov 2006 10:56:43 +1100 (EST)
-Date: Fri, 3 Nov 2006 10:56:43 +1100
-From: Jamie Lenehan <lenehan@twibble.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20061102235643.GA30907@twibble.org>
-Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
-	openembedded-devel@lists.openembedded.org,
-	Martin Dietze <di@fh-wedel.de>
-References: <E1GfdiZ-0005X2-My@linuxtogo.org>
-Mime-Version: 1.0
-In-Reply-To: <E1GfdiZ-0005X2-My@linuxtogo.org>
-User-Agent: Mutt/1.4.2.1i
-X-Virus-Scanned: by amavisd at twibble.org
-Subject: Re: [oe-commits] org.oe.dev libintl-perl: added do_compile() function needed for crosscompilation
+	Sat, 04 Nov 2006 10:23:18 +0100
+Received: by nf-out-0910.google.com with SMTP id l23so1643787nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 04 Nov 2006 01:22:13 -0800 (PST)
+Received: by 10.49.43.2 with SMTP id v2mr2647559nfj.1162632133566;
+	Sat, 04 Nov 2006 01:22:13 -0800 (PST)
+Received: from CUBE ( [85.202.124.214])
+	by mx.google.com with ESMTP id c1sm5198029nfe.2006.11.04.01.22.12;
+	Sat, 04 Nov 2006 01:22:13 -0800 (PST)
+Date: Sat, 4 Nov 2006 11:22:12 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1719138359.20061104112212@gmail.com>
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <4532752A.8080609@dominion.kabel.utwente.nl>
+References: <4532752A.8080609@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Subject: Re: [RFC] OE bugdays
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,32 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Nov 2006 23:57:43 -0000
+X-List-Received-Date: Sat, 04 Nov 2006 09:23:18 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 02, 2006 at 03:38:55PM +0100, "MartinDietze commit" wrote:
-> libintl-perl: added do_compile() function needed for crosscompilation
-> - the function has obviously been forgotten to add for version 1.16
+Hello,
 
-Hi Martin,
+Sunday, October 15, 2006, 7:51:38 PM, you wrote:
 
-this should not be needed. I've updated clasess/cpan.bbclass to pass
-the correct values during configure so that this don't need to be
-done in all the perl modules. It works for the few targets I test.
+> Hi,
 
-It might by the ld flags that are the problem for you - whatever you
-are building for might need the s/ld/gcc/ changes, which I've only
-made apply for sh3/sh4 at the moment (but plan to turn on for all
-archs to make all the perl stuff a bit simplier).
+> At the OEDEM conference we discussed the bugdays and have formulated a proposal:
 
-If you could send me what errors you got without this change and let
-me know what target you are building for I'll see if I update
-classes/cpan.bbclass to do the right thing. This wuill make sure all
-the perl modules build for your target and remove the need to put
-this stuff thoughout the perl modules.
+>   Bugdays will be held at the first weekend of the month (where weekend means 'friday
+> through monday').
+
+  Ok, this appears to be this weekend! Let's hack? ;-)
+
+> We will try to actively encourage developers and users to submit, triage and fix bugs
+> during that time. This does NOT mean that people aren't allowed to fix bugs at other
+> times. You can fix bugs anytime you want, of course :)
+> You can subscribe to the OE event calendar[1] to see the dates of the bugdays and other OE
+> related events.
+
+> regards,
+
+> Koen
+
+
 
 -- 
- Jamie Lenehan <lenehan@twibble.org>
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
