@@ -1,26 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <freyther@gmx.net>) id 1GghwW-000557-6K
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Nov 2006 14:21:44 +0100
-Received: (qmail invoked by alias); 05 Nov 2006 13:20:32 -0000
-Received: from 88-134-98-23-dynip.superkabel.de (EHLO [192.168.1.103])
-	[88.134.98.23]
-	by mail.gmx.net (mp019) with SMTP; 05 Nov 2006 14:20:32 +0100
-X-Authenticated: #1949623
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>
-References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>
-X-Gpgmail-State: !signed
-Message-Id: <B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Sun, 5 Nov 2006 14:18:24 +0100
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
-X-Mailman-Approved-At: Sun, 05 Nov 2006 15:45:41 +0100
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: Problems creating a bitbake package
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GgkZt-0002Hv-V9
+	for openembedded-devel@openembedded.org; Sun, 05 Nov 2006 17:10:34 +0100
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kA5G9HLr022915 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 5 Nov 2006 17:09:17 +0100
+Message-ID: <454E0CB0.4050007@dominion.kabel.utwente.nl>
+Date: Sun, 05 Nov 2006 17:09:20 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <4532752A.8080609@dominion.kabel.utwente.nl>
+	<1719138359.20061104112212@gmail.com>
+In-Reply-To: <1719138359.20061104112212@gmail.com>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [RFC] OE bugdays
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,43 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Nov 2006 13:21:44 -0000
-Content-Type: text/plain;
-	charset=US-ASCII;
-	delsp=yes;
-	format=flowed
+X-List-Received-Date: Sun, 05 Nov 2006 16:10:34 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am 04.11.2006 um 18:31 schrieb Alan Carvalho de Assis:
+Paul Sokolovsky schreef:
+> Hello,
+> 
+> Sunday, October 15, 2006, 7:51:38 PM, you wrote:
+> 
+>> Hi,
+> 
+>> At the OEDEM conference we discussed the bugdays and have formulated a proposal:
+> 
+>>   Bugdays will be held at the first weekend of the month (where weekend means 'friday
+>> through monday').
+> 
+>   Ok, this appears to be this weekend! Let's hack? ;-)
 
-> SRC_URI = "http://augusta.ece.ufrgs.br/ipatience-0.1.tar.gz"
->
-> inherit gpe
->
-> My first problem:
-> "bitbake ipatience" command don't obey my SRC_URI tag, this tried
-> download ipatience-0.1.tar.gz from openembedded server and fault.
->
-> To "solve" this first problem I copied ipatience.tar.gz to my
-> oeworkspace/sources and create the md5 to it, then bitbake used it
-> correctly. Why bitbake don't obey the SRC_URI?
+You can follow the status via http://tinyurl.com/yhosqg
 
-because you inherit gpe.bbclass after setting the SRC_URI and the  
-SRC_URI will be overwritten. Take a look at the gpe.bbclass
+right now we're at 46 bugs closed :)
 
+regards,
 
-h.
+KOen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
-
---
-Holger 'zecke' Freyther
-geek, QA monkey, OpenEmbedded Engineer
-
-Me http://www.openembedded.org/~zecke
-Blog http://zecke.blogspot.com
-
-
-
+iD8DBQFFTgyvMkyGM64RGpERAmI3AJ0Wahx+yaOaMenIMVTvXtPZ4lOTGACgtgqa
+juX5jMD3hEEE1+iLM+NIT/Y=
+=gtAL
+-----END PGP SIGNATURE-----
 
 
