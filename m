@@ -1,27 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [89.149.200.90] (helo=mail.kynisk.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gh2ri-0003Ue-RZ
-	for openembedded-devel@openembedded.org; Mon, 06 Nov 2006 12:42:11 +0100
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kA6BenLr016146 for <openembedded-devel@openembedded.org>;
-	Mon, 6 Nov 2006 12:40:49 +0100
-Message-ID: <454F1F41.7060501@dominion.kabel.utwente.nl>
-Date: Mon, 06 Nov 2006 12:40:49 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+	(envelope-from <repvik@kynisk.com>) id 1Gh619-0002ci-7f
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Nov 2006 16:04:07 +0100
+Received: from localhost (mail.kynisk.com [89.149.200.90])
+	by mail.kynisk.com (Postfix) with ESMTP id D2F449A9EB
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Nov 2006 16:02:44 +0100 (CET)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200611061111.13491.valentin.longchamp@epfl.ch>	<454F0DCA.7040202@dominion.kabel.utwente.nl>
-	<200611061221.28202.valentin.longchamp@epfl.ch>
-In-Reply-To: <200611061221.28202.valentin.longchamp@epfl.ch>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Problem in building compiler
+Date: Mon, 6 Nov 2006 16:02:43 +0100
+From: =?ISO-8859-1?Q?=C3=98yvind?= Repvik <repvik@kynisk.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: 454EEA21.7050108@dominion.kabel.utwente.nl
+Message-ID: <38b0b82df67844c51f0670adaa5be8a1@mail.kynisk.com>
+X-Sender: repvik@kynisk.com
+User-Agent: RoundCube Webmail/0.1-20051021
+Subject: Re: [RFC] New MACHINE_FEATURe: 'screen'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,54 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Nov 2006 11:42:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 06 Nov 2006 15:04:07 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Valentin Longchamp schreef:
-> Koen Kooi wrote:
+
+On Mon, 06 Nov 2006 08:54:09 +0100, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
->> Does the same error happen with MACHINE=mx31ads and DISTRO=angstrom-2007.1
->> ? I recommend using that configuration and adding 'branding' later on when
->> it's proven to work.
->>
+> Hi,
 > 
-> Sorry for the double-post, but it looks like the attached error file didn't 
-> make it through the mailing-list this time. So I past it here (and attach it 
-> once more).
-> 
-> So the config file, tells to use glibc-2.5, but the compilation fails on the 
-> same package (glibc-intermediate).
-> 
-> The error is visible in the attach error log.
+> I was building an Ångström bootstrap image for my loft[1]
+> and noticed it was building
+> psplash. Since the loft lacks support for graphical output (except usb-vga
+> adaptors), it
+> would be nice to leave out stuff like bootsplashes. What do you think
+> about adding
+> 'screen' to MACHINE_FEATURES?
 > 
 
->> | /home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wo
->> |rk/armv6-angstrom-linux-gnueabi/glibc-intermediate-2.5-r1/build-arm-angstr
->> |om-linux-gnueabi/sysd-sorted-tmp mawk: scripts/gen-sorted.awk: line 19:
->> | regular expression compile failed (bad class -- [], [^] or [) /[^
->> | mawk: scripts/gen-sorted.awk: line 19: syntax error at or near ]
->> | mawk: scripts/gen-sorted.awk: line 19: runaway regular expression /, "",
+I think it is a good idea, considering the available devices that does not have screen (eg. dsmg600, nas100d, nslu2, n2100)
 
-For some reason glibc needs 'gawk' and breaks with 'mawk' (which is the default on
-debian). Could you try installing gawk? A recent .dev tree should warn you about that[1].
-
-regards,
-
-Koen
+Regards,
+Øyvind
 
 
-[1]
-http://www.openembedded.org/viewmtn/revision.psp?id=0c89fbedbb59ef7e1b229b833813e59080b4952a
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD4DBQFFTx9AMkyGM64RGpERAhsAAJwL725GpVVWoUB26GZlutIpNR//OACXWHKj
-yfFGVBu0i93HaGCP7Pcg1Q==
-=plsI
------END PGP SIGNATURE-----
 
 
