@@ -1,26 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gh1hZ-00012o-3e
-	for openembedded-devel@openembedded.org; Mon, 06 Nov 2006 11:27:37 +0100
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kA6AQILr003520 for <openembedded-devel@openembedded.org>;
-	Mon, 6 Nov 2006 11:26:18 +0100
-Message-ID: <454F0DCA.7040202@dominion.kabel.utwente.nl>
-Date: Mon, 06 Nov 2006 11:26:18 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+	(envelope-from <acassis@gmail.com>) id 1Gh27G-0001ZL-D3
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Nov 2006 11:54:10 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so704206ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Nov 2006 02:52:53 -0800 (PST)
+Received: by 10.78.157.8 with SMTP id f8mr6572303hue.1162810372810;
+	Mon, 06 Nov 2006 02:52:52 -0800 (PST)
+Received: by 10.78.194.14 with HTTP; Mon, 6 Nov 2006 02:52:52 -0800 (PST)
+Message-ID: <37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>
+Date: Mon, 6 Nov 2006 08:52:52 -0200
+From: "Alan Carvalho de Assis" <acassis@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200611061111.13491.valentin.longchamp@epfl.ch>
-In-Reply-To: <200611061111.13491.valentin.longchamp@epfl.ch>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Problem in building compiler
+References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>
+	<B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>
+Subject: Re: Problems creating a bitbake package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,33 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Nov 2006 10:27:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 06 Nov 2006 10:54:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Holger,
 
-Valentin Longchamp schreef:
-> Hello,
+On 11/5/06, Holger Freyther <freyther@gmx.net> wrote:
+>
+> because you inherit gpe.bbclass after setting the SRC_URI and the
+> SRC_URI will be overwritten. Take a look at the gpe.bbclass
+>
 
-[snip problem]
+Sure, it solve the first one problem.
 
-> Anyone has an idea, according to my config files regarding the cross-compiler, 
-> of what is wrong here ?
+Do you have some idea to solve these undefined references in libfltk.so:
+undefined reference to `XUnsetICFocus'
+undefined reference to `XGetIMValues'
+undefined reference to `XSetICValues'
+undefined reference to `Xutf8LookupString'
+undefined reference to `XSetICFocus'
+undefined reference to `XVaCreateNestedList'
 
-Does the same error happen with MACHINE=mx31ads and DISTRO=angstrom-2007.1 ? I recommend
-using that configuration and adding 'branding' later on when it's proven to work.
+>
+> h.
+>
 
-regards,
+Cheers,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
+> --
+> Holger 'zecke' Freyther
+> geek, QA monkey, OpenEmbedded Engineer
+>
 
-iD8DBQFFTw3JMkyGM64RGpERAmyeAKCyqifnJi7eCyjbQZGEQ/afwK99IQCfdMkE
-azRiNMiBSckUi4Tetr33tEI=
-=U1jz
------END PGP SIGNATURE-----
+Alan
 
 
