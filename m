@@ -1,27 +1,32 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gh7oI-0001Si-1B
-	for openembedded-devel@openembedded.org; Mon, 06 Nov 2006 17:58:58 +0100
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kA6GvaLr012226 for <openembedded-devel@openembedded.org>;
-	Mon, 6 Nov 2006 17:57:36 +0100
-Message-ID: <454F697F.7060006@dominion.kabel.utwente.nl>
-Date: Mon, 06 Nov 2006 17:57:35 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1GhCS0-0006J0-5R
+	for openembedded-devel@openembedded.org; Mon, 06 Nov 2006 22:56:19 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kA6Lsqe2006985
+	for <openembedded-devel@openembedded.org>; Mon, 6 Nov 2006 21:54:52 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 25678-07 for <openembedded-devel@openembedded.org>;
+	Mon,  6 Nov 2006 21:54:49 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kA6Lskjc006926
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Mon, 6 Nov 2006 21:54:46 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-References: <200611061111.13491.valentin.longchamp@epfl.ch>	<200611061221.28202.valentin.longchamp@epfl.ch>	<454F1F41.7060501@dominion.kabel.utwente.nl>
-	<200611061653.05316.valentin.longchamp@epfl.ch>
-In-Reply-To: <200611061653.05316.valentin.longchamp@epfl.ch>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Problem in building compiler
+In-Reply-To: <454EEA21.7050108@dominion.kabel.utwente.nl>
+References: <454EEA21.7050108@dominion.kabel.utwente.nl>
+Date: Mon, 06 Nov 2006 21:54:48 +0000
+Message-Id: <1162850089.5544.18.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	kA6Lsqe2006985
+Subject: Re: [RFC] New MACHINE_FEATURE: 'screen'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,100 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Nov 2006 16:58:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 06 Nov 2006 21:56:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, 2006-11-06 at 08:54 +0100, Koen Kooi wrote:
+> I was building an =C5ngstr=F6m bootstrap image for my loft[1] and notic=
+ed it was building
+> psplash. Since the loft lacks support for graphical output (except usb-=
+vga adaptors), it
+> would be nice to leave out stuff like bootsplashes. What do you think a=
+bout adding
+> 'screen' to MACHINE_FEATURES?
 
-Valentin Longchamp schreef:
-> Koen Kooi wrote:
->> For some reason glibc needs 'gawk' and breaks with 'mawk' (which is the
->> default on debian). Could you try installing gawk? A recent .dev tree
->> should warn you about that[1].
->>
-> 
-> Ok, I've updated my openembedded tree and installed gawk. However, I now 
-> cannot go any further than package gcc-cross-4.1.1 (which used to work with 
-> my last week org.openembedded.dev):
-> 
->>         gcc -c  
->> -isystem/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/
->> tmp/staging/i686-linux/include -Os -DIN_GCC -DCROSS_COMPILE  -W -Wall
->> -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -pedantic
->> -Wno-long-long -Wno-variadic-macros -Wold-style-definition
->> -Wmissing-format-attribute    -DHAVE_CONFIG_H -I. -I.
->> -I/home/valentin/EPFL/iMXBoard/linux/openembedded/bu
->> ild/mx31ADS/conf/tmp/work/armv6-angstrom-linux-gnueabi/gcc-cross-4.1.1-r7/g
->> cc-4.1.1/gcc
->> -I/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wo
->> rk/armv6-angstrom-linux-gnueabi/gc c-cross-4.1.1-r7/gcc-4.1.1/gcc/.
->> -I/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wo
->> rk/armv6-angstrom-linux-gnueabi/gcc-cross-4.1.1-r7/gcc-4.1.1/gcc/../include
->> -I/home/valen
->> tin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/work/armv6-angs
->> trom-linux-gnueabi/gcc-cross-4.1.1-r7/gcc-4.1.1/gcc/../libcpp/include
->> -I/home/valentin/EPFL/iMXBoard/linux/openembedded/bu
->> ild/mx31ADS/conf/tmp/staging/i686-linux/include
->> -isystem/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/
->> tmp/staging/i686-linux/include   -DSTANDARD_STARTFILE_PREFIX=\"../../../\"
->> -DSTANDARD_EXEC_PREFIX=\"/home/valentin/EPFL/iMXBoard/linux/openembedded/bu
->> ild/mx31ADS/conf/tmp/cross/lib/gcc/\"
->> -DSTANDARD_LIBEXEC_PREFIX=\"/home/valentin/EPFL/iMXBoard/linux/openembedded
->> /build/m x31ADS/conf/tmp/cross/libexec/gcc/\"
->> -DDEFAULT_TARGET_VERSION=\"4.1.1\"
->> -DDEFAULT_TARGET_MACHINE=\"arm-angstrom-linux-gnueabi\"
->> -DSTANDARD_BINDIR_PREFIX=\"/home/valentin/EPFL/iMXBoard/linux/openemb
->> edded/build/mx31ADS/conf/tmp/cross/bin/\"
->> -DTOOLDIR_BASE_PREFIX=\"../../../../\"  `test "X${SHLIB_LINK}" = "X" ||
->> test "yes" != "yes" || echo "-DENABLE_SHARED_LIBGCC"` `test
->> "X${SHLIB_MULTILIB}" = "X" || echo "-DNO_SHARED_LIBGCC_MULTILIB"` \
->>                 -I. -I.
->> -I/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wo
->> rk/armv6-angstrom-linux-gnueabi/gcc-cross-4.1.1-r7/gcc-4.1.1/gcc
->> -I/home/valentin/EPFL/iMXBoard/li
->> nux/openembedded/build/mx31ADS/conf/tmp/work/armv6-angstrom-linux-gnueabi/g
->> cc-cross-4.1.1-r7/gcc-4.1.1/gcc/.
->> -I/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wo
->> rk/armv6-angs trom-linux-gnueabi/gcc-cross-4.1.1-r7/gcc-4.1.1/gcc/../include
->> -I/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wo
->> rk/armv6-angstrom-linux-gnueabi/gcc-cross-4.1.1-r7/gcc-4.1.
->> 1/gcc/../libcpp/include
->> -I/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/st
->> aging/i686-linux/include
->> /home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wo
->> rk/armv6-angstrom-linux-gnueabi/gcc-cross-4.1.1-r7/gcc-4.1.1/gcc/cp/g++spec
->> .c)
->> /home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/cros
->> s/bin/arm-angstrom-linux-gnueabi-as: unrecognized option `-Qy' make[2]: ***
->> [g++spec.o] Error 1
->> make[2]: Leaving directory
->> `/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wor
->> k/armv6-angstrom-linux-gnueabi/gcc-cross-4.1.1-r7/gcc-4.1.1/build.i686-linux
->> .arm-angstrom-linux -gnueabi/gcc'
->> make[1]: *** [all-gcc] Error 2
->> make[1]: Leaving directory
->> `/home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wor
->> k/armv6-angstrom-linux-gnueabi/gcc-cross-4.1.1-r7/gcc-4.1.1/build.i686-linux
->> .arm-angstrom-linux -gnueabi'
->> make: *** [all] Error 2
->> FATAL: oe_runmake failed
-> 
-> Any idea of what is wrong here ? maybe because of armv6 (I see there is no 
-> armv6 profile on angstrom, only armv4 and armv5te) ?
+I think you've illustrated the need :)
 
-I think you can get around that with a rebuild from scratch.
+Cheers,
 
-regards,
+Richard
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
-
-iD8DBQFFT2l/MkyGM64RGpERAjGjAKCc27+4KT1eAo8J10LxlxWwTmUmKwCfdTY1
-IfCurslLm/bg1LH/BkGIftM=
-=f1jL
------END PGP SIGNATURE-----
 
 
