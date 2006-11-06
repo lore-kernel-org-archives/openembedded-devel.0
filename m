@@ -1,22 +1,27 @@
-Received: from [213.4.149.66] (helo=ctsmtpout3.frontal.correo)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <joaquinduran@adtelecom.es>) id 1Gh2aH-00037B-HW
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Nov 2006 12:24:09 +0100
-Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout3.frontal.correo
-	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
-	id 4541EE940014A0AC for openembedded-devel@lists.openembedded.org;
-	Mon, 6 Nov 2006 12:22:52 +0100
-Message-ID: <454F2893.50107@adtelecom.es>
-Date: Mon, 06 Nov 2006 12:20:35 +0000
-From: Joaquim Duran <joaquinduran@adtelecom.es>
-User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gh2ri-0003Ue-RZ
+	for openembedded-devel@openembedded.org; Mon, 06 Nov 2006 12:42:11 +0100
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kA6BenLr016146 for <openembedded-devel@openembedded.org>;
+	Mon, 6 Nov 2006 12:40:49 +0100
+Message-ID: <454F1F41.7060501@dominion.kabel.utwente.nl>
+Date: Mon, 06 Nov 2006 12:40:49 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>	<B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>
-	<37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>
-In-Reply-To: <37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>
-Subject: Re: Problems creating a bitbake package
+To: openembedded-devel@openembedded.org
+References: <200611061111.13491.valentin.longchamp@epfl.ch>	<454F0DCA.7040202@dominion.kabel.utwente.nl>
+	<200611061221.28202.valentin.longchamp@epfl.ch>
+In-Reply-To: <200611061221.28202.valentin.longchamp@epfl.ch>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: Problem in building compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,60 +35,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Nov 2006 11:24:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 06 Nov 2006 11:42:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Alan,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think that the library Xext is not installed. The dependency line of 
-the file should be similar to:
-
-DEPENDS = "zlib jpeg libpng libxext"
-
-Well, I'm trying to build FLTK with support for anti aliased fonts. ASAP 
-the build image is created successfully, I'll submit the patch.
-
-Thanks and Best Regards,
-Joaquim Duran
-
-
-
-En/na Alan Carvalho de Assis ha escrit:
-> Hi Holger,
+Valentin Longchamp schreef:
+> Koen Kooi wrote:
 > 
-> On 11/5/06, Holger Freyther <freyther@gmx.net> wrote:
->> because you inherit gpe.bbclass after setting the SRC_URI and the
->> SRC_URI will be overwritten. Take a look at the gpe.bbclass
+>> Does the same error happen with MACHINE=mx31ads and DISTRO=angstrom-2007.1
+>> ? I recommend using that configuration and adding 'branding' later on when
+>> it's proven to work.
 >>
 > 
-> Sure, it solve the first one problem.
+> Sorry for the double-post, but it looks like the attached error file didn't 
+> make it through the mailing-list this time. So I past it here (and attach it 
+> once more).
 > 
-> Do you have some idea to solve these undefined references in libfltk.so:
-> undefined reference to `XUnsetICFocus'
-> undefined reference to `XGetIMValues'
-> undefined reference to `XSetICValues'
-> undefined reference to `Xutf8LookupString'
-> undefined reference to `XSetICFocus'
-> undefined reference to `XVaCreateNestedList'
+> So the config file, tells to use glibc-2.5, but the compilation fails on the 
+> same package (glibc-intermediate).
 > 
->> h.
->>
-> 
-> Cheers,
-> 
->> --
->> Holger 'zecke' Freyther
->> geek, QA monkey, OpenEmbedded Engineer
->>
-> 
-> Alan
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> The error is visible in the attach error log.
 > 
 
+>> | /home/valentin/EPFL/iMXBoard/linux/openembedded/build/mx31ADS/conf/tmp/wo
+>> |rk/armv6-angstrom-linux-gnueabi/glibc-intermediate-2.5-r1/build-arm-angstr
+>> |om-linux-gnueabi/sysd-sorted-tmp mawk: scripts/gen-sorted.awk: line 19:
+>> | regular expression compile failed (bad class -- [], [^] or [) /[^
+>> | mawk: scripts/gen-sorted.awk: line 19: syntax error at or near ]
+>> | mawk: scripts/gen-sorted.awk: line 19: runaway regular expression /, "",
+
+For some reason glibc needs 'gawk' and breaks with 'mawk' (which is the default on
+debian). Could you try installing gawk? A recent .dev tree should warn you about that[1].
+
+regards,
+
+Koen
+
+
+[1]
+http://www.openembedded.org/viewmtn/revision.psp?id=0c89fbedbb59ef7e1b229b833813e59080b4952a
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
+
+iD4DBQFFTx9AMkyGM64RGpERAhsAAJwL725GpVVWoUB26GZlutIpNR//OACXWHKj
+yfFGVBu0i93HaGCP7Pcg1Q==
+=plsI
+-----END PGP SIGNATURE-----
 
 
