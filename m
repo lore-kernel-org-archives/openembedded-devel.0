@@ -1,22 +1,32 @@
-Received: from [213.4.149.66] (helo=ctsmtpout1.frontal.correo)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <joaquinduran@adtelecom.es>) id 1GhQVH-0000nO-NI
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Nov 2006 13:56:35 +0100
-Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout1.frontal.correo
-	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
-	id 45420A740016DF70 for openembedded-devel@lists.openembedded.org;
-	Tue, 7 Nov 2006 15:52:58 +0100
-Message-ID: <45508FBC.3000407@adtelecom.es>
-Date: Tue, 07 Nov 2006 13:53:00 +0000
-From: Joaquim Duran <joaquinduran@adtelecom.es>
-User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>	<B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>	<37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>	<454F2893.50107@adtelecom.es>	<37367b3a0611070219n3fb80edcva6572bcb8baa993@mail.gmail.com>	<455084CF.9020102@adtelecom.es>
-	<45507958.6060202@dominion.kabel.utwente.nl>
-In-Reply-To: <45507958.6060202@dominion.kabel.utwente.nl>
-Subject: Re: Problems creating a bitbake package
+	(envelope-from <rpurdie@rpsys.net>) id 1GhYSU-0005nv-G7
+	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 22:26:14 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kA7LOnhf013748;
+	Tue, 7 Nov 2006 21:24:49 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 13054-10-2; Tue,  7 Nov 2006 21:24:44 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kA7LOXc5013701
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Tue, 7 Nov 2006 21:24:33 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+In-Reply-To: <20061010221107.GB20799@twibble.org>
+References: <20060914001918.GA8432@twibble.org>
+	<452B83DC.2020503@dominion.kabel.utwente.nl>
+	<20061010221107.GB20799@twibble.org>
+Date: Tue, 07 Nov 2006 21:24:33 +0000
+Message-Id: <1162934673.5714.5.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: site/* Common site files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,36 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2006 12:56:35 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
+X-List-Received-Date: Tue, 07 Nov 2006 21:26:14 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+On Wed, 2006-10-11 at 08:11 +1000, Jamie Lenehan wrote:
+> On Tue, Oct 10, 2006 at 01:28:28PM +0200, Koen Kooi wrote:
+> > 
+> > The consensus is that we want this in OE, how to we proceed to get this added into .dev?
+> 
+> If my implementation was ok then I can push it in over a few days.
+
+I did a little experimenting with this. I did find some of it a little
+overcomplex for what we need so I came up with a slightly modified
+version:
+
+http://www.rpsys.net/openzaurus/temp/oe_site_reorg-r0.patch
+
+The main difference is instead of a set of separate options, you provide
+a list of compatible site files for each target. You can add more than
+one alias which was a key limitation of the previous version I wanted to
+avoid.
+
+As you can see, I started to move the site files around too (for
+testing). I've not stress tested it yet but my gut instinct says it can
+be safely pushed.
+
+If Jamie is ok with the changes I made and nobody else objects, I'll
+push sometime soon :)
+
+Richard
 
 
-En/na Koen Kooi ha escrit:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Joaquim Duran schreef:
->> Alan,
->>
->> Yesterday, I submitted the patch, but it has not been integrated with 
->> the repository (http://bugs.openembedded.org/show_bug.cgi?id=1555).
->>
->> No, I'm not an FLTK programmer. I would like to use FLTK because in the 
->> company that I'm working, it's interested in develop a portable 
->> oscilloscope. I needed a plot widget to represent the data acquired, and 
->> FLTK had one.
-> 
-> http://gtkextra.sourceforge.net/ has one as well and is in OE.
-> 
-> regards,
-> 
-> Koen
-> 
-  I'll take a look
-
-Joaquim Duran
 
 
 
