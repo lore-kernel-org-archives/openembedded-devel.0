@@ -1,24 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GhPs0-000495-Cx
-	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 13:16:00 +0100
-Received: (qmail 22770 invoked by uid 813007); 7 Nov 2006 12:14:33 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 7 Nov 2006 12:14:33 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-Organization: OpenEmbedded
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 7 Nov 2006 13:14:17 +0100
-User-Agent: KMail/1.9.5
-References: <454EEA21.7050108@dominion.kabel.utwente.nl>
-	<1162850089.5544.18.camel@localhost.localdomain>
-	<455069C5.10807@dominion.kabel.utwente.nl>
-In-Reply-To: <455069C5.10807@dominion.kabel.utwente.nl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GhPup-00081W-8K
+	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 13:18:55 +0100
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kA7CHTox004565 for <openembedded-devel@openembedded.org>;
+	Tue, 7 Nov 2006 13:17:29 +0100
+Message-ID: <45507958.6060202@dominion.kabel.utwente.nl>
+Date: Tue, 07 Nov 2006 13:17:28 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
 MIME-Version: 1.0
-Message-Id: <200611071314.17986.openembedded@hrw.one.pl>
-Subject: Re: [RFC] New MACHINE_FEATURE: 'screen'
+To: openembedded-devel@openembedded.org
+References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>	<B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>	<37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>	<454F2893.50107@adtelecom.es>	<37367b3a0611070219n3fb80edcva6572bcb8baa993@mail.gmail.com>
+	<455084CF.9020102@adtelecom.es>
+In-Reply-To: <455084CF.9020102@adtelecom.es>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: Problems creating a bitbake package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,27 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2006 12:16:00 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Nov 2006 12:18:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia wtorek, 7 listopada 2006 12:11, Koen Kooi napisa=C5=82:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> I've added 'screen' and 'pci' to MACHINE_FEATURES. I ran into troubles
-> with wpa-supplicant 0.5.1, that needs 'pci' for depending on madwifi-ng.
-> Both are still unused in the metadata, but at least task-base lists them
-> now
+Joaquim Duran schreef:
+> Alan,
+> 
+> Yesterday, I submitted the patch, but it has not been integrated with 
+> the repository (http://bugs.openembedded.org/show_bug.cgi?id=1555).
+> 
+> No, I'm not an FLTK programmer. I would like to use FLTK because in the 
+> company that I'm working, it's interested in develop a portable 
+> oscilloscope. I needed a plot widget to represent the data acquired, and 
+> FLTK had one.
 
-'pci' featured machines got pciutils in task-base
+http://gtkextra.sourceforge.net/ has one as well and is in OE.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+regards,
 
-         You can close your eyes to reality, but not to memories.
+Koen
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
+iD8DBQFFUHlYMkyGM64RGpERAlUeAKCYXYG/BzxddACFViXblByn78KgHgCeLNCl
+FyeffqUgn2zhTZ0Hnr13ltk=
+=nKgP
+-----END PGP SIGNATURE-----
 
 
