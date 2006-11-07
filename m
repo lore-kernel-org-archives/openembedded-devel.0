@@ -1,29 +1,22 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [213.4.149.66] (helo=ctsmtpout3.frontal.correo)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GhOsW-0006Hj-7l
-	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 12:12:28 +0100
-Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kA7BB1ox022159 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 7 Nov 2006 12:11:02 +0100
-Message-ID: <455069C5.10807@dominion.kabel.utwente.nl>
-Date: Tue, 07 Nov 2006 12:11:01 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
+	(envelope-from <joaquinduran@adtelecom.es>) id 1GhPmB-0001V4-Df
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Nov 2006 13:09:59 +0100
+Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout3.frontal.correo
+	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
+	id 4541EE94001827EC for openembedded-devel@lists.openembedded.org;
+	Tue, 7 Nov 2006 13:08:36 +0100
+Message-ID: <455084CF.9020102@adtelecom.es>
+Date: Tue, 07 Nov 2006 13:06:23 +0000
+From: Joaquim Duran <joaquinduran@adtelecom.es>
+User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <454EEA21.7050108@dominion.kabel.utwente.nl>
-	<1162850089.5544.18.camel@localhost.localdomain>
-In-Reply-To: <1162850089.5544.18.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.1.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	kA7BB1ox022159
-Subject: Re: [RFC] New MACHINE_FEATURE: 'screen'
+To: openembedded-devel@lists.openembedded.org
+References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>	<B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>	<37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>	<454F2893.50107@adtelecom.es>
+	<37367b3a0611070219n3fb80edcva6572bcb8baa993@mail.gmail.com>
+In-Reply-To: <37367b3a0611070219n3fb80edcva6572bcb8baa993@mail.gmail.com>
+Subject: Re: Problems creating a bitbake package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,40 +30,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2006 11:12:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 07 Nov 2006 12:09:59 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Alan,
 
-Richard Purdie schreef:
-> On Mon, 2006-11-06 at 08:54 +0100, Koen Kooi wrote:
->> I was building an =C3=85ngstr=C3=B6m bootstrap image for my loft[1] an=
-d noticed it was building
->> psplash. Since the loft lacks support for graphical output (except usb=
--vga adaptors), it
->> would be nice to leave out stuff like bootsplashes. What do you think =
-about adding
->> 'screen' to MACHINE_FEATURES?
->=20
-> I think you've illustrated the need :)
+Yesterday, I submitted the patch, but it has not been integrated with 
+the repository (http://bugs.openembedded.org/show_bug.cgi?id=1555).
 
-I've added 'screen' and 'pci' to MACHINE_FEATURES. I ran into troubles wi=
-th wpa-supplicant
-0.5.1, that needs 'pci' for depending on madwifi-ng.
-Both are still unused in the metadata, but at least task-base lists them =
-now
+No, I'm not an FLTK programmer. I would like to use FLTK because in the 
+company that I'm working, it's interested in develop a portable 
+oscilloscope. I needed a plot widget to represent the data acquired, and 
+FLTK had one. I've write a prototype but seen the philosophy of the 
+FTLK, I'll not use if I can.
 
-regards,
+Some days ago I compiled qwt4.2 rc1 with qte 2.3.10 and qpe1. I'm 
+thinking to switch this environment. Next steps:
+- Port QWT 4.2.0 to qte2
+- Make a step over and use QTopia 4.2 (that someone else ported) and 
+port qwt 5 to qtopia 4.2 (released today, I think).
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (Darwin)
+Joaquim Duran
 
-iD8DBQFFUGnEMkyGM64RGpERAp7XAJ9RF1r8+Yo/oJ3KOidKjQqEJ8S6XQCdFkkj
-z2wBGCKZ41O2YS9cdsnjbyM=3D
-=3DQ0Ec
------END PGP SIGNATURE-----
+
+En/na Alan Carvalho de Assis ha escrit:
+> Hi Joaquim,
+> 
+> On 11/6/06, Joaquim Duran <joaquinduran@adtelecom.es> wrote:
+>> Alan,
+>>
+>> I think that the library Xext is not installed. The dependency line of
+>> the file should be similar to:
+>>
+>> DEPENDS = "zlib jpeg libpng libxext"
+>>
+> 
+> Thank you very much.
+> 
+>> Well, I'm trying to build FLTK with support for anti aliased fonts. ASAP
+>> the build image is created successfully, I'll submit the patch.
+>>
+> 
+> Sure, good work. Anyway after I will port ipatience to use GTK because
+> everything in gpe use it and FLTK is not so much used.
+> 
+> Joaquim, do you are a FLTK programmer?
+> 
+>> Thanks and Best Regards,
+> 
+> Cheers,
+> 
+>> Joaquim Duran
+>>
+> 
+> Alan
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+
 
 
