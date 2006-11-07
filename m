@@ -1,32 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1GhYSU-0005nv-G7
-	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 22:26:14 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kA7LOnhf013748;
-	Tue, 7 Nov 2006 21:24:49 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13054-10-2; Tue,  7 Nov 2006 21:24:44 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kA7LOXc5013701
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Tue, 7 Nov 2006 21:24:33 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-In-Reply-To: <20061010221107.GB20799@twibble.org>
-References: <20060914001918.GA8432@twibble.org>
-	<452B83DC.2020503@dominion.kabel.utwente.nl>
-	<20061010221107.GB20799@twibble.org>
-Date: Tue, 07 Nov 2006 21:24:33 +0000
-Message-Id: <1162934673.5714.5.camel@localhost.localdomain>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <Patrick.Ohly@gmx.de>) id 1GhZ9D-0006GC-VR
+	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 23:10:24 +0100
+Received: (qmail invoked by alias); 07 Nov 2006 22:08:58 -0000
+Received: from c-134-176-149.d.dsl.de.ignite.net (EHLO ip6-localhost)
+	[62.134.176.149]
+	by mail.gmx.net (mp020) with SMTP; 07 Nov 2006 23:08:58 +0100
+X-Authenticated: #489940
+Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
+	id 1GhYzB-0003we-00; Tue, 07 Nov 2006 23:00:01 +0100
+From: Patrick Ohly <Patrick.Ohly@gmx.de>
+To: OpenEmbedded <openembedded-devel@openembedded.org>
+Date: Tue, 07 Nov 2006 23:00:01 +0100
+Message-Id: <1162936801.4808.78.camel@ip6-localhost>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: site/* Common site files
+X-Mailer: Evolution 2.6.3 
+Sender: Patrick Ohly <patrick@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: cross-compiling for x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,38 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2006 21:26:14 -0000
+X-List-Received-Date: Tue, 07 Nov 2006 22:10:27 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2006-10-11 at 08:11 +1000, Jamie Lenehan wrote:
-> On Tue, Oct 10, 2006 at 01:28:28PM +0200, Koen Kooi wrote:
-> > 
-> > The consensus is that we want this in OE, how to we proceed to get this added into .dev?
-> 
-> If my implementation was ok then I can push it in over a few days.
+Hi all,
 
-I did a little experimenting with this. I did find some of it a little
-overcomplex for what we need so I came up with a slightly modified
-version:
+I tried to build a cross-compilation SDK on a 32 bit Debian stable host
+with x86_64 as target. My idea is to regularly test 64 compilation of a
+project that I work on.
 
-http://www.rpsys.net/openzaurus/temp/oe_site_reorg-r0.patch
+I had considerable problems getting libc-initial and libc-immediate to
+build. Most of the problems seemed to be related to not having the right
+(kernel?) header files in place. After working around some problems it
+completely failed in the end.
 
-The main difference is instead of a set of separate options, you provide
-a list of compatible site files for each target. You can add more than
-one alias which was a key limitation of the previous version I wanted to
-avoid.
+Is this something that someone has done already and perhaps can share a
+local.conf for? Should I try again and report my problems in more
+detail?
 
-As you can see, I started to move the site files around too (for
-testing). I've not stress tested it yet but my gut instinct says it can
-be safely pushed.
-
-If Jamie is ok with the changes I made and nobody else objects, I'll
-push sometime soon :)
-
-Richard
-
-
-
+-- 
+Bye, Patrick Ohly
+--  
+Patrick.Ohly@gmx.de
+http://www.estamos.de/
 
 
