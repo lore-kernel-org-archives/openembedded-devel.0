@@ -1,25 +1,29 @@
-Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <acassis@gmail.com>) id 1GhO4b-0000OV-Si
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Nov 2006 11:20:53 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so978910ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Nov 2006 02:19:30 -0800 (PST)
-Received: by 10.78.166.7 with SMTP id o7mr8051924hue.1162894770551;
-	Tue, 07 Nov 2006 02:19:30 -0800 (PST)
-Received: by 10.78.194.14 with HTTP; Tue, 7 Nov 2006 02:19:30 -0800 (PST)
-Message-ID: <37367b3a0611070219n3fb80edcva6572bcb8baa993@mail.gmail.com>
-Date: Tue, 7 Nov 2006 08:19:30 -0200
-From: "Alan Carvalho de Assis" <acassis@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <454F2893.50107@adtelecom.es>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GhOsW-0006Hj-7l
+	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 12:12:28 +0100
+Received: from [172.20.1.6] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kA7BB1ox022159 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 7 Nov 2006 12:11:02 +0100
+Message-ID: <455069C5.10807@dominion.kabel.utwente.nl>
+Date: Tue, 07 Nov 2006 12:11:01 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.7 (Macintosh/20060909)
 MIME-Version: 1.0
-References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>
-	<B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>
-	<37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>
-	<454F2893.50107@adtelecom.es>
-Subject: Re: Problems creating a bitbake package
+To: openembedded-devel@openembedded.org
+References: <454EEA21.7050108@dominion.kabel.utwente.nl>
+	<1162850089.5544.18.camel@localhost.localdomain>
+In-Reply-To: <1162850089.5544.18.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.1.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	kA7BB1ox022159
+Subject: Re: [RFC] New MACHINE_FEATURE: 'screen'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,40 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2006 10:20:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Nov 2006 11:12:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Joaquim,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 11/6/06, Joaquim Duran <joaquinduran@adtelecom.es> wrote:
-> Alan,
->
-> I think that the library Xext is not installed. The dependency line of
-> the file should be similar to:
->
-> DEPENDS = "zlib jpeg libpng libxext"
->
+Richard Purdie schreef:
+> On Mon, 2006-11-06 at 08:54 +0100, Koen Kooi wrote:
+>> I was building an =C3=85ngstr=C3=B6m bootstrap image for my loft[1] an=
+d noticed it was building
+>> psplash. Since the loft lacks support for graphical output (except usb=
+-vga adaptors), it
+>> would be nice to leave out stuff like bootsplashes. What do you think =
+about adding
+>> 'screen' to MACHINE_FEATURES?
+>=20
+> I think you've illustrated the need :)
 
-Thank you very much.
+I've added 'screen' and 'pci' to MACHINE_FEATURES. I ran into troubles wi=
+th wpa-supplicant
+0.5.1, that needs 'pci' for depending on madwifi-ng.
+Both are still unused in the metadata, but at least task-base lists them =
+now
 
-> Well, I'm trying to build FLTK with support for anti aliased fonts. ASAP
-> the build image is created successfully, I'll submit the patch.
->
+regards,
 
-Sure, good work. Anyway after I will port ipatience to use GTK because
-everything in gpe use it and FLTK is not so much used.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (Darwin)
 
-Joaquim, do you are a FLTK programmer?
-
-> Thanks and Best Regards,
-
-Cheers,
-
-> Joaquim Duran
->
-
-Alan
+iD8DBQFFUGnEMkyGM64RGpERAp7XAJ9RF1r8+Yo/oJ3KOidKjQqEJ8S6XQCdFkkj
+z2wBGCKZ41O2YS9cdsnjbyM=3D
+=3DQ0Ec
+-----END PGP SIGNATURE-----
 
 
