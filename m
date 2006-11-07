@@ -1,22 +1,24 @@
-Received: from [213.4.149.66] (helo=ctsmtpout3.frontal.correo)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <joaquinduran@adtelecom.es>) id 1GhPmB-0001V4-Df
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Nov 2006 13:09:59 +0100
-Received: from [194.179.62.31] (217.126.70.245) by ctsmtpout3.frontal.correo
-	(7.2.056.6) (authenticated as joaquinduran$adtelecom.es)
-	id 4541EE94001827EC for openembedded-devel@lists.openembedded.org;
-	Tue, 7 Nov 2006 13:08:36 +0100
-Message-ID: <455084CF.9020102@adtelecom.es>
-Date: Tue, 07 Nov 2006 13:06:23 +0000
-From: Joaquim Duran <joaquinduran@adtelecom.es>
-User-Agent: Mozilla Thunderbird 1.5.0.7 (X11/20060926)
-MIME-Version: 1.0
+	(envelope-from <openembedded@hrw.one.pl>) id 1GhPs0-000495-Cx
+	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 13:16:00 +0100
+Received: (qmail 22770 invoked by uid 813007); 7 Nov 2006 12:14:33 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 7 Nov 2006 12:14:33 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+Organization: OpenEmbedded
 To: openembedded-devel@lists.openembedded.org
-References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>	<B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>	<37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>	<454F2893.50107@adtelecom.es>
-	<37367b3a0611070219n3fb80edcva6572bcb8baa993@mail.gmail.com>
-In-Reply-To: <37367b3a0611070219n3fb80edcva6572bcb8baa993@mail.gmail.com>
-Subject: Re: Problems creating a bitbake package
+Date: Tue, 7 Nov 2006 13:14:17 +0100
+User-Agent: KMail/1.9.5
+References: <454EEA21.7050108@dominion.kabel.utwente.nl>
+	<1162850089.5544.18.camel@localhost.localdomain>
+	<455069C5.10807@dominion.kabel.utwente.nl>
+In-Reply-To: <455069C5.10807@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200611071314.17986.openembedded@hrw.one.pl>
+Subject: Re: [RFC] New MACHINE_FEATURE: 'screen'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,67 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2006 12:09:59 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Nov 2006 12:16:00 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Alan,
+Dnia wtorek, 7 listopada 2006 12:11, Koen Kooi napisa=C5=82:
 
-Yesterday, I submitted the patch, but it has not been integrated with 
-the repository (http://bugs.openembedded.org/show_bug.cgi?id=1555).
+> I've added 'screen' and 'pci' to MACHINE_FEATURES. I ran into troubles
+> with wpa-supplicant 0.5.1, that needs 'pci' for depending on madwifi-ng.
+> Both are still unused in the metadata, but at least task-base lists them
+> now
 
-No, I'm not an FLTK programmer. I would like to use FLTK because in the 
-company that I'm working, it's interested in develop a portable 
-oscilloscope. I needed a plot widget to represent the data acquired, and 
-FLTK had one. I've write a prototype but seen the philosophy of the 
-FTLK, I'll not use if I can.
+'pci' featured machines got pciutils in task-base
 
-Some days ago I compiled qwt4.2 rc1 with qte 2.3.10 and qpe1. I'm 
-thinking to switch this environment. Next steps:
-- Port QWT 4.2.0 to qte2
-- Make a step over and use QTopia 4.2 (that someone else ported) and 
-port qwt 5 to qtopia 4.2 (released today, I think).
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Joaquim Duran
+         You can close your eyes to reality, but not to memories.
 
-
-En/na Alan Carvalho de Assis ha escrit:
-> Hi Joaquim,
-> 
-> On 11/6/06, Joaquim Duran <joaquinduran@adtelecom.es> wrote:
->> Alan,
->>
->> I think that the library Xext is not installed. The dependency line of
->> the file should be similar to:
->>
->> DEPENDS = "zlib jpeg libpng libxext"
->>
-> 
-> Thank you very much.
-> 
->> Well, I'm trying to build FLTK with support for anti aliased fonts. ASAP
->> the build image is created successfully, I'll submit the patch.
->>
-> 
-> Sure, good work. Anyway after I will port ipatience to use GTK because
-> everything in gpe use it and FLTK is not so much used.
-> 
-> Joaquim, do you are a FLTK programmer?
-> 
->> Thanks and Best Regards,
-> 
-> Cheers,
-> 
->> Joaquim Duran
->>
-> 
-> Alan
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
 
 
 
