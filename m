@@ -1,32 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1GhCS0-0006J0-5R
-	for openembedded-devel@openembedded.org; Mon, 06 Nov 2006 22:56:19 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kA6Lsqe2006985
-	for <openembedded-devel@openembedded.org>; Mon, 6 Nov 2006 21:54:52 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 25678-07 for <openembedded-devel@openembedded.org>;
-	Mon,  6 Nov 2006 21:54:49 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kA6Lskjc006926
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Mon, 6 Nov 2006 21:54:46 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <454EEA21.7050108@dominion.kabel.utwente.nl>
-References: <454EEA21.7050108@dominion.kabel.utwente.nl>
-Date: Mon, 06 Nov 2006 21:54:48 +0000
-Message-Id: <1162850089.5544.18.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
-	kA6Lsqe2006985
-Subject: Re: [RFC] New MACHINE_FEATURE: 'screen'
+	(envelope-from <acassis@gmail.com>) id 1GhO4b-0000OV-Si
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Nov 2006 11:20:53 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so978910ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Nov 2006 02:19:30 -0800 (PST)
+Received: by 10.78.166.7 with SMTP id o7mr8051924hue.1162894770551;
+	Tue, 07 Nov 2006 02:19:30 -0800 (PST)
+Received: by 10.78.194.14 with HTTP; Tue, 7 Nov 2006 02:19:30 -0800 (PST)
+Message-ID: <37367b3a0611070219n3fb80edcva6572bcb8baa993@mail.gmail.com>
+Date: Tue, 7 Nov 2006 08:19:30 -0200
+From: "Alan Carvalho de Assis" <acassis@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <454F2893.50107@adtelecom.es>
+MIME-Version: 1.0
+References: <37367b3a0611040931y1820bd19y6e19e0b9890ed716@mail.gmail.com>
+	<B19DF804-070B-4506-A2D4-217EFAEF505E@gmx.net>
+	<37367b3a0611060252qf813f34y9db9bddb4ae60cb2@mail.gmail.com>
+	<454F2893.50107@adtelecom.es>
+Subject: Re: Problems creating a bitbake package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,24 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Nov 2006 21:56:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 07 Nov 2006 10:20:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, 2006-11-06 at 08:54 +0100, Koen Kooi wrote:
-> I was building an =C5ngstr=F6m bootstrap image for my loft[1] and notic=
-ed it was building
-> psplash. Since the loft lacks support for graphical output (except usb-=
-vga adaptors), it
-> would be nice to leave out stuff like bootsplashes. What do you think a=
-bout adding
-> 'screen' to MACHINE_FEATURES?
+Hi Joaquim,
 
-I think you've illustrated the need :)
+On 11/6/06, Joaquim Duran <joaquinduran@adtelecom.es> wrote:
+> Alan,
+>
+> I think that the library Xext is not installed. The dependency line of
+> the file should be similar to:
+>
+> DEPENDS = "zlib jpeg libpng libxext"
+>
+
+Thank you very much.
+
+> Well, I'm trying to build FLTK with support for anti aliased fonts. ASAP
+> the build image is created successfully, I'll submit the patch.
+>
+
+Sure, good work. Anyway after I will port ipatience to use GTK because
+everything in gpe use it and FLTK is not so much used.
+
+Joaquim, do you are a FLTK programmer?
+
+> Thanks and Best Regards,
 
 Cheers,
 
-Richard
+> Joaquim Duran
+>
 
+Alan
 
 
