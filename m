@@ -1,23 +1,31 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <Patrick.Ohly@gmx.de>) id 1GhZ9D-0006GC-VR
-	for openembedded-devel@openembedded.org; Tue, 07 Nov 2006 23:10:24 +0100
-Received: (qmail invoked by alias); 07 Nov 2006 22:08:58 -0000
-Received: from c-134-176-149.d.dsl.de.ignite.net (EHLO ip6-localhost)
-	[62.134.176.149]
-	by mail.gmx.net (mp020) with SMTP; 07 Nov 2006 23:08:58 +0100
-X-Authenticated: #489940
-Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
-	id 1GhYzB-0003we-00; Tue, 07 Nov 2006 23:00:01 +0100
-From: Patrick Ohly <Patrick.Ohly@gmx.de>
-To: OpenEmbedded <openembedded-devel@openembedded.org>
-Date: Tue, 07 Nov 2006 23:00:01 +0100
-Message-Id: <1162936801.4808.78.camel@ip6-localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-Sender: Patrick Ohly <patrick@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: cross-compiling for x86_64
+Received: from [205.178.146.53] (helo=omr3.networksolutionsemail.com)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <chatchai@allit.info>) id 1GhiyE-0007QP-GN
+	for openembedded-devel@openembedded.org; Wed, 08 Nov 2006 09:39:42 +0100
+Received: from mail.networksolutionsemail.com (ns-omr3.mgt.netsolmail.com
+	[10.49.6.66])
+	by omr3.networksolutionsemail.com (8.13.6/8.13.6) with SMTP id
+	kA88cEMi002444 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 8 Nov 2006 03:38:14 -0500
+Received: (qmail 31658 invoked by uid 78); 8 Nov 2006 08:38:14 -0000
+Received: from unknown (HELO webmail21) (205.178.146.50)
+	by ns-omr3.lb.hosting.dc2.netsol.com with SMTP;
+	8 Nov 2006 08:38:14 -0000
+Received: from 61.7.137.176 (chatchai@allit.info [61.7.137.176])
+	by webmail21 (EdgeDesk 4.04) with WEBMAIL id 2441;
+	Wed, 08 Nov 2006 08:38:13 +0000
+From: chatchai@allit.info
+To: openembedded-devel@openembedded.org
+Importance: Normal
+Sensitivity: Normal
+Message-ID: <W74093306724411162975093@webmail21>
+X-Mailer: Mintersoft EdgeDesk, Build 4.03.0105
+X-Originating-IP: [61.7.137.176]
+X-Forwarded-For: [192.168.2.202, 61.7.137.176]
+Date: Wed, 08 Nov 2006 08:38:13 +0000
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: openomap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,29 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2006 22:10:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 08 Nov 2006 08:39:42 -0000
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-Hi all,
+Hi list
 
-I tried to build a cross-compilation SDK on a 32 bit Debian stable host
-with x86_64 as target. My idea is to regularly test 64 compilation of a
-project that I work on.
+I have built both linux-omap-2.6.18-omap1.bb and linux-omap-2.8.28+git.bb. Both of them build successfully, but when I start a kernel, it said 
+Uncompressing Kernel Image ... Error: inflate() returned -3
+GUNZIP ERROR - must RESET board to recover
+So, I compiled a kernel from source using available in source directory (of openembedded), and using toolcain from openembedded, compile 
+is successd,build image using git version of uboot, and booting is also work.
 
-I had considerable problems getting libc-initial and libc-immediate to
-build. Most of the problems seemed to be related to not having the right
-(kernel?) header files in place. After working around some problems it
-completely failed in the end.
+Another ploblem is, dorpbear isn't work. I start dropbear (/etc/init.d/dropbear start) and check it using ps, nothing about dropbear. I connect to 
+omap (osk) using putty, it said connection refused.
 
-Is this something that someone has done already and perhaps can share a
-local.conf for? Should I try again and report my problems in more
-detail?
+Anybody experienced these kind of ploblem please tell me what is the ploblem.
 
--- 
-Bye, Patrick Ohly
---  
-Patrick.Ohly@gmx.de
-http://www.estamos.de/
+Tanks and regard
+
+Chatchai
+All Infomation Technologies, Thailand
+
+
+
+
+
 
 
