@@ -1,23 +1,26 @@
-Received: from [66.249.82.238] (helo=wx-out-0506.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <myopiate@gmail.com>) id 1Gi5Nz-0000yl-33
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Nov 2006 09:35:47 +0100
-Received: by wx-out-0506.google.com with SMTP id t14so116788wxc
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Nov 2006 00:34:12 -0800 (PST)
-Received: by 10.70.8.8 with SMTP id 8mr253876wxh.1163061252467;
-	Thu, 09 Nov 2006 00:34:12 -0800 (PST)
-Received: by 10.70.130.3 with HTTP; Thu, 9 Nov 2006 00:34:12 -0800 (PST)
-Message-ID: <e83232070611090034w5e22d6f0i92743439c9a5f7bf@mail.gmail.com>
-Date: Thu, 9 Nov 2006 16:34:12 +0800
-From: "Roderick Taylor" <myopiate@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4552AB62.3080106@gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gi5qN-0001De-I1
+	for openembedded-devel@openembedded.org; Thu, 09 Nov 2006 10:05:07 +0100
+Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kA993Tox016108 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 9 Nov 2006 10:03:30 +0100
+Message-ID: <4552EEE1.6030201@dominion.kabel.utwente.nl>
+Date: Thu, 09 Nov 2006 10:03:29 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-References: <4552AB62.3080106@gmail.com>
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: What machine/distro should I use for my PXA270 board?
+Subject: [Fwd: [oe-commits] org.oe.dev file: add 4.18 version]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,45 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2006 08:35:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 09 Nov 2006 09:05:07 -0000
+Content-Type: multipart/mixed; boundary="------------080705060403040307050606"
+
+--------------080705060403040307050606
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Angstrom should be good.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Look at the ENABLE_BINARY_LOCAL_GENERATION option in your local.conf
+Hi,
 
-Disabling this option stops the building of qemu-native.  The problem you
-could be having is that qemu-native needs GCC < 4.0 to compile properly and
-your distro uses > 4.0
+Both file-native 4.18 and file 4.18 don't build for me (and Marcin) as indicated in
+http://bugs.openembedded.org/show_bug.cgi?id=1559, so I'm dissapproving this revision till
+someone comes up with a working version.
 
-I got an Angstrom bootstrap-image to build an h2200 (quite a while ago, but
-I had a similar issue)
+regards,
 
-I don't know if firefox or minimo will work though...
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Rod
+iD8DBQFFUu7gMkyGM64RGpERApTzAJ9YOx1pLNb9OiZWQSyRt64CJSxX6ACcCxYr
+M/qjsBgqi90NYE/Bp5EXV5k=
+=LMHp
+-----END PGP SIGNATURE-----
 
-On 11/9/06, DAMWID <damwid@gmail.com> wrote:
->
-> Hi all,
->
-> I'm new to openembedded, try to build a root filesystem with gnueabi
-> support for my pxa270 board, and don't care about the kernel. I have
-> tried spitz/angstrom, but failed to build qemu, also tried
-> spitz/openomap, but firefox failed to run with error "Illegal
-> instruction" and minimo segfault. So, which machine/distro pair should I
-> use? Can anyone help?
->
-> Thanks,
->
-> Damwid
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
+--------------080705060403040307050606--
