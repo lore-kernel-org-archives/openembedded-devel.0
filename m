@@ -1,11 +1,10 @@
-Received: from [212.227.126.177] (helo=moutng.kundenserver.de)
+Received: from [212.227.126.188] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <Dirk@Opfer-Online.de>) id 1Gi7Z4-0003nq-OJ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Nov 2006 11:55:22 +0100
+	(envelope-from <Dirk@Opfer-Online.de>) id 1Gi7Z5-0003nv-GA
+	for openembedded-devel@openembedded.org; Thu, 09 Nov 2006 11:55:23 +0100
 Received: from [217.197.85.204] (helo=mail.opfer.lan)
 	by mrelayeu.kundenserver.de (node=mrelayeu2) with ESMTP (Nemesis),
-	id 0MKwtQ-1Gi7XW2E4l-0007Xd; Thu, 09 Nov 2006 11:53:48 +0100
+	id 0MKwtQ-1Gi7XW2DwR-0007az; Thu, 09 Nov 2006 11:53:48 +0100
 Received: from localhost ([127.0.0.1] helo=217.197.85.204)
 	by mail.opfer.lan with esmtpa (Exim 4.60)
 	(envelope-from <Dirk@Opfer-Online.de>)
@@ -24,7 +23,7 @@ X-Priority: 3 (Normal)
 Importance: Normal
 X-Scan-Signature: c4a7480a0c37d5da60fc194ea3667ca6
 X-Spam-Score: -1.4 (-)
-Message-ID: <0MKwtQ-1Gi7XW2E4l-0007Xd@mrelayeu.kundenserver.de>
+Message-ID: <0MKwtQ-1Gi7XW2DwR-0007az@mrelayeu.kundenserver.de>
 X-Provags-ID: kundenserver.de abuse@kundenserver.de
 	login:abbc603a6e91cd1633ce36f01b2128aa
 Cc: Using the OpenEmbedded metadata to build Linux Distributions
@@ -43,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2006 10:55:22 -0000
+X-List-Received-Date: Thu, 09 Nov 2006 10:55:23 -0000
 Content-Type: text/plain;charset=iso-8859-1
 Content-Transfer-Encoding: 8bit
 
