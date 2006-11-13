@@ -1,26 +1,26 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <nils.faerber@kernelconcepts.de>) id 1GjgLL-0002qB-Q6
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Nov 2006 19:15:40 +0100
-Received: from [212.60.202.194] (helo=[192.168.2.28])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1Gjgp5-0007Bl-04
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Nov 2006 19:46:23 +0100
-Message-ID: <4558B5D3.2090609@kernelconcepts.de>
-Date: Mon, 13 Nov 2006 19:13:39 +0100
-From: Nils Faerber <nils.faerber@kernelconcepts.de>
-Organization: kernel concepts
-User-Agent: Thunderbird 1.5.0.7 (X11/20060922)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gjimv-0006xR-SH
+	for openembedded-devel@openembedded.org; Mon, 13 Nov 2006 21:52:17 +0100
+Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kADKoEox005637 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Nov 2006 21:50:14 +0100
+Message-ID: <4558DA84.5030003@dominion.kabel.utwente.nl>
+Date: Mon, 13 Nov 2006 21:50:12 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <45566FBC.1030206@kernelconcepts.de>	<45586AF5.8060800@kernelconcepts.de>	<45589A63.9030808@kernelconcepts.de>
-	<200611131725.11432.openembedded@hrw.one.pl>
-In-Reply-To: <200611131725.11432.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.94.0.0
-X-Mailman-Approved-At: Mon, 13 Nov 2006 21:42:24 +0100
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+To: openembedded-devel@openembedded.org
+References: <45566FBC.1030206@kernelconcepts.de>	<45586AF5.8060800@kernelconcepts.de>	<45589A63.9030808@kernelconcepts.de>	<200611131725.11432.openembedded@hrw.one.pl>
+	<4558B5D3.2090609@kernelconcepts.de>
+In-Reply-To: <4558B5D3.2090609@kernelconcepts.de>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: ARM EABI SDK build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,54 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Nov 2006 18:15:40 -0000
-Content-Type: multipart/mixed; boundary="------------060106010200070009050605"
+X-List-Received-Date: Mon, 13 Nov 2006 20:52:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---------------060106010200070009050605
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: 8bit
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-OK, that was indeed fixed.
-But I still have the problem that gcc-cross-sdk-4.1.1 fails to compile
-due to problems with sys/types.h
-This is really strange since this originates from glibc.
-
-Koen: Didn't you build an EABI-softfloat toolchain already?
-
-Cheers
-  nils
-
-Marcin Juszkiewicz schrieb:
-> Dnia poniedzia³ek, 13 listopada 2006 17:16, Nils Faerber napisa³:
+Nils Faerber schreef:
+> OK, that was indeed fixed.
+> But I still have the problem that gcc-cross-sdk-4.1.1 fails to compile
+> due to problems with sys/types.h
+> This is really strange since this originates from glibc.
 > 
->> I forgot to report: "file_4.16.bb"  and "file-native-4.16.bb" need to be
->> updated since the server does not carry 4.16 anmore - only 4.17 and
->> 4.18.
-> 
-> I suggest updating metadata:
-> 
-> Revision: fa302963f7d41e6cdf3efbde3458b3731e8ec5ae
-> Ancestor: 3d7e2cab9dc312dae9852afc664f3bbdb5d4c9e9
-> Author: xora@openembedded.org
-> Date: 2006-11-09T10:37:33
-> Branch: org.openembedded.dev
-> 
-> Added files:
->         packages/file/file-native_4.18.bb packages/file/file_4.18.bb
->         packages/file/files/dump packages/file/files/filesystems
-> 
-> ChangeLog:
-> 
-> file, file-native 4.18 : replaced the magic files for filesystems and dump
-> for the ones for 4.16. The stuff that doesnt compile in 4.18 is new so it
-> looks like a lack of QA on part of this release that they dont work.
-> 
+> Koen: Didn't you build an EABI-softfloat toolchain already?
+
+Riku did:
+http://dominion.kabel.utwente.nl/koen/cms/using-openembedded-toolchains-in-scratchbox
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFWNqEMkyGM64RGpERArWvAKCprelLRvf6IYt+s/qtCwc0u6HlkACfZnlQ
+KKjheV9i8rV/e+D5vG5FnTE=
+=+ENC
+-----END PGP SIGNATURE-----
 
 
--- 
-kernel concepts GbR      Tel: +49-271-771091-12
-Dreisbachstr. 24         Fax: +49-271-771091-19
-D-57250 Netphen          Mob: +49-176-21024535
---
-
---------------060106010200070009050605--
