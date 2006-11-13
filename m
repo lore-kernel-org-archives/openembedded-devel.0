@@ -1,30 +1,24 @@
-Received: from [141.2.4.18] (helo=mail.tm.informatik.uni-frankfurt.de)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@tm.informatik.uni-frankfurt.de>)
-	id 1GjK4p-000558-2x for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Nov 2006 19:29:07 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 417ACC46;
-	Sun, 12 Nov 2006 19:27:13 +0100 (CET)
-Received: from mail.tm.informatik.uni-frankfurt.de ([127.0.0.1])
-	by localhost (mail [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 08216-03; Sun, 12 Nov 2006 19:27:06 +0100 (CET)
-Received: from [141.2.14.64] (gandalf.tm.informatik.uni-frankfurt.de
-	[141.2.14.64])
-	by mail.tm.informatik.uni-frankfurt.de (Postfix) with ESMTP id 2C9C4C40;
-	Sun, 12 Nov 2006 19:27:06 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-To: Bernhard Rosenkraenzer <bero@arklinux.org>
-In-Reply-To: <200611121700.28434.bero@arklinux.org>
-References: <200611121700.28434.bero@arklinux.org>
-Organization: VanilleMedia
-Date: Sun, 12 Nov 2006 19:27:05 +0100
-Message-Id: <1163356026.1649.720.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.7.2.1-3mdv2007.0 
-X-Virus-Scanned: by amavisd-new at tm.informatik.uni-frankfurt.de
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: PDA Hardware recommendations?
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1GjbMJ-0003yw-NI
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Nov 2006 13:56:19 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1Gjbq1-0006hR-KK
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Nov 2006 14:27:01 +0100
+Message-ID: <45586AF5.8060800@kernelconcepts.de>
+Date: Mon, 13 Nov 2006 13:54:13 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.7 (X11/20060922)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <45566FBC.1030206@kernelconcepts.de>
+In-Reply-To: <45566FBC.1030206@kernelconcepts.de>
+X-Enigmail-Version: 0.94.0.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: ARM EABI SDK build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,53 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Nov 2006 18:29:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 13 Nov 2006 12:56:20 -0000
+Content-Type: multipart/mixed; boundary="------------030907070703010205060103"
+
+--------------030907070703010205060103
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-NOTE: Forwarding this to the correct list address -- please update your
-bookmarks.
+Hi,
 
-Am Sonntag, den 12.11.2006, 17:00 +0100 schrieb Bernhard Rosenkraenzer:
-> Hi,
-> we're looking for a PDA for a small scale project - unfortunately, we're 
-> extremely low on funding, so we can't just try out loads of different 
-> hardware or put lots of work into porting the OS.
+Nils Faerber schrieb:
+> The first problem I stepped over is that gcc4-build-sdk.inc still has
+> the line
 > 
-> Any recommendations for the best PDAs to run Linux (2.6) on?
+> SRC_URI += 'file://602-sdk-libstdc++-includes.patch;patch=1'
 > 
-> Requirements for our project:
-> - Must be able to run Linux/OE
-> - It must be possible to completely kill off Windoze CE (preferrably it
->   shouldn't be on there in the first place, we hate throwing money at M$
->   as much as everyone else -- but that would limit choice quite a bit...)
-> - Built-in GPS receiver (alternatively, working bluetooth port for use
->   with a bluetooth GPS receiver)
-> - Built-in WLAN
-> - Decent CPU (>= 300 MHz)
-> - CF- and/or SD card reader+writer
-> - Affordable price
-> 
-> Nice to have, but not 100% required:
-> - GPRS and/or UMTS for internet access
-> - bootable from CF/SD card
-> 
-> Of course any modifications we make to OE/Opie/... and any extra apps (with 
-> one possible exception -- that will contain 3rd party code where we don't 
-> have a lot of influence on the license) will be given back to the community 
-> instantly.
-> 
-> Thanks,
-> bero
-> _______________________________________________
-> Oe mailing list
-> Oe@handhelds.org
-> https://www.handhelds.org/mailman/listinfo/oe
+> or in fact without the 602- prefix. But this patch is already included
+> in the gcc_4.1.1.bb. So I commented that out.
+
+this seems to be fixed now, i get a different message:
+
+NOTE: Applying patch '300-libstdc++-pic.patch'
+ERROR: Error in executing:
+/home/fuchs/Projekte/oe/dev/packages/gcc/gcc-cross-sdk_4.1.1.bb
+ERROR: Exception:__builtin__.CmdError Message:Command Error: exit status: 1  Output:
+Patch headers differ:
+@@ -1,4 +1,2 @@
+ # DP: Build and install libstdc++_pic.a library.
+
+Sounds like a broken patch to me.
+I use bitbake 1.6.2 and the up to date stuff from org.openembedded.dev
+(9c4dc2162967f7102e29135dc8da502dd80d01ac).
+
+The full error message is attached...
+
+Greetings
+
+Florian
+
 -- 
-Regards,
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-14
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
-Michael 'Mickey' Lauer | FreeLancer | http://www.Vanille-Media.de
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
-
-
-
+--------------030907070703010205060103--
