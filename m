@@ -1,26 +1,20 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GjuHY-0007HD-SU
-	for openembedded-devel@openembedded.org; Tue, 14 Nov 2006 10:08:40 +0100
-Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kAE96ZLr023204 for <openembedded-devel@openembedded.org>;
-	Tue, 14 Nov 2006 10:06:35 +0100
-Message-ID: <45598719.3040108@dominion.kabel.utwente.nl>
-Date: Tue, 14 Nov 2006 10:06:33 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+	(envelope-from <acassis@gmail.com>) id 1GjwQP-0006Ef-NG
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Nov 2006 12:25:57 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so244550nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Nov 2006 03:23:53 -0800 (PST)
+Received: by 10.78.201.15 with SMTP id y15mr891314huf.1163503433255;
+	Tue, 14 Nov 2006 03:23:53 -0800 (PST)
+Received: by 10.78.194.14 with HTTP; Tue, 14 Nov 2006 03:23:53 -0800 (PST)
+Message-ID: <37367b3a0611140323i77b82228j328e9ecfab710711@mail.gmail.com>
+Date: Tue, 14 Nov 2006 09:23:53 -0200
+From: "Alan Carvalho de Assis" <acassis@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200611141038.01935.giancarlo.formicuccia@gmail.com>
-In-Reply-To: <200611141038.01935.giancarlo.formicuccia@gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Networking problem with glibc 2.5 and old arm ABI
+Subject: Ipatience needs fltk with libXext
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,39 +28,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Nov 2006 09:08:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Nov 2006 11:25:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Koen,
 
-Giancarlo Formicuccia schreef:
-> Hi *,
-> 
-> I hit a libc bug building an image for arm with old ABI; the problem is the 
-> same described here:
-> http://sources.redhat.com/ml/libc-ports/2006-10/msg00038.html
-> In my case the assert is triggered by applications using networking (i.e. 
-> ssh, ...)
-> 
-> I applied the patch described here
-> http://sources.redhat.com/ml/libc-ports/2006-10/msg00069.html
-> and the problem seems to be fixed.
-> 
-> Maybe the patch should be included to the dev repository?
+I forget to add a dependence to ipatience.
+The current fltk has a bug, it need libXext but it is not defined on .bb.
 
-Done.
+Juan has submitted a fix to fltk, but it is not applied:
 
-regards,
+http://bugs.openembedded.org/show_bug.cgi?id=3D1555
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Can you please verify it?
 
-iD8DBQFFWYcZMkyGM64RGpERAg6vAKC3QI+FemknDzcvjfP5aVQPGUsgFQCbBWg9
-PA7ibpqYj2wQ5PhlZlN9Jog=
-=3zw8
------END PGP SIGNATURE-----
+Cheers,
+
+--=20
+------------------------------------------------------------
+|                     Alan Carvalho de Assis                |
+------------------------------------------------------------
+--
+N=E3o importa o que os outros ir=E3o pensar,
+A cura para a infelicidade =E9 a felicidade
 
 
