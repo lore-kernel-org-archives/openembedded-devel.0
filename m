@@ -1,26 +1,19 @@
-Received: from [195.130.137.75] (helo=europa.telenet-ops.be)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <peter@bist2.be>) id 1Gkl0M-0007ar-E7
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Nov 2006 18:26:26 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by europa.telenet-ops.be (Postfix) with SMTP id 56ADF41C2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2006 18:24:09 +0100 (CET)
-Received: from [192.168.1.107] (d51A5E421.access.telenet.be [81.165.228.33])
-	by europa.telenet-ops.be (Postfix) with ESMTP id 39775417C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2006 18:24:08 +0100 (CET)
-From: Peter Leemans <peter@bist2.be>
+	(envelope-from <openembedded@hrw.one.pl>) id 1GkmsP-0001oA-1a
+	for openembedded-devel@openembedded.org; Thu, 16 Nov 2006 20:26:21 +0100
+Received: (qmail 22096 invoked by uid 813007); 16 Nov 2006 19:24:02 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 16 Nov 2006 19:24:02 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0611160830s1ca8f393o2e41b427c80c4f06@mail.gmail.com>
-References: <1163693473.1649.807.camel@gandalf.tm.informatik.uni-frankfurt.de>
-	<c384c5ea0611160830s1ca8f393o2e41b427c80c4f06@mail.gmail.com>
-Date: Thu, 16 Nov 2006 18:24:07 +0100
-Message-Id: <1163697847.6223.25.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-Subject: Re: FOSDEM'07
+Date: Thu, 16 Nov 2006 20:23:19 +0100
+User-Agent: KMail/1.9.5
+MIME-Version: 1.0
+Message-Id: <200611162023.23012.openembedded@hrw.one.pl>
+Subject: RFC: KERNELORG_MIRROR variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,33 +27,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2006 17:26:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 16 Nov 2006 19:26:21 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 
+We have several mirrors defined in base.bbclass like SourceForge mirror, 
+GNU mirror etc. There are also mirrors defined for few popular sources 
+(gnutls for example).
 
-On Thu, 2006-11-16 at 17:30 +0100, Leon Woestenberg wrote:
-> On 11/16/06, Michael 'Mickey' Lauer
-> <mickey@tm.informatik.uni-frankfurt.de> wrote:
-> > I want to have three people at the stand during the day, but at the same
-> > time being able for everyone to have enough time wandering around @
-> >
+I want to introduce kernel.org mirror variable: KERNELORG_MIRROR because 
+currently we use:
 
-> > Who else would like to be there and present OE?
-> >
-> I do not consider myself a OE developer in the same league as yours
-> truly and consortium, but if you need people at the booth you can hire
-> m... ehh... count me in as a volunteer. Otherwise, I will probably be
-> hanging out on the frontside of the booth anyway.
+http://ftp.kernel.org/
+ftp://ftp.kernel.org/
+http://kernel.org/
 
-Hi All,
+and only second one is listed in base.bbclass
 
-If I can be of any use, I'll be glad to help.
-I'll be at fosdem anyway, so better make myself usefull.
+I would push changeset with it during weekend.
 
-Regards,
-Peter Leemans
+-- 
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+                 punk's not dead. it just smells that way.
 
 
 
