@@ -1,30 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [195.130.137.75] (helo=europa.telenet-ops.be)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1Gkky7-0007YP-BJ
-	for openembedded-devel@openembedded.org; Thu, 16 Nov 2006 18:24:07 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAGHLoZi011717
-	for <openembedded-devel@openembedded.org>; Thu, 16 Nov 2006 17:21:50 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11213-08 for <openembedded-devel@openembedded.org>;
-	Thu, 16 Nov 2006 17:21:48 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAGHLlRP011710
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Thu, 16 Nov 2006 17:21:47 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
+	(envelope-from <peter@bist2.be>) id 1Gkl0M-0007ar-E7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Nov 2006 18:26:26 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by europa.telenet-ops.be (Postfix) with SMTP id 56ADF41C2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Nov 2006 18:24:09 +0100 (CET)
+Received: from [192.168.1.107] (d51A5E421.access.telenet.be [81.165.228.33])
+	by europa.telenet-ops.be (Postfix) with ESMTP id 39775417C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Nov 2006 18:24:08 +0100 (CET)
+From: Peter Leemans <peter@bist2.be>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <c384c5ea0611160830s1ca8f393o2e41b427c80c4f06@mail.gmail.com>
 References: <1163693473.1649.807.camel@gandalf.tm.informatik.uni-frankfurt.de>
 	<c384c5ea0611160830s1ca8f393o2e41b427c80c4f06@mail.gmail.com>
-Date: Thu, 16 Nov 2006 17:21:48 +0000
-Message-Id: <1163697708.5389.45.camel@localhost.localdomain>
+Date: Thu, 16 Nov 2006 18:24:07 +0100
+Message-Id: <1163697847.6223.25.camel@localhost.localdomain>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+X-Mailer: Evolution 2.6.3 
 Subject: Re: FOSDEM'07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,12 +34,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2006 17:24:07 -0000
+X-List-Received-Date: Thu, 16 Nov 2006 17:26:26 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+
+
 On Thu, 2006-11-16 at 17:30 +0100, Leon Woestenberg wrote:
-> Michael et al,
+> On 11/16/06, Michael 'Mickey' Lauer
+> <mickey@tm.informatik.uni-frankfurt.de> wrote:
+> > I want to have three people at the stand during the day, but at the same
+> > time being able for everyone to have enough time wandering around @
+> >
+
 > > Who else would like to be there and present OE?
 > >
 > I do not consider myself a OE developer in the same league as yours
@@ -52,17 +54,13 @@ On Thu, 2006-11-16 at 17:30 +0100, Leon Woestenberg wrote:
 > m... ehh... count me in as a volunteer. Otherwise, I will probably be
 > hanging out on the frontside of the booth anyway.
 
-We just need people who've used and can talk about OE so you should be
-more than qualified. At any given time, we'll try to ensure one of the
-"core devs" is around so you should never be in a position where you're
-out of your depth as you can refer people to them in case anyone worries
-about that.
+Hi All,
 
-Mickey: Count me in :)
+If I can be of any use, I'll be glad to help.
+I'll be at fosdem anyway, so better make myself usefull.
 
-Cheers,
-
-Richard
+Regards,
+Peter Leemans
 
 
 
