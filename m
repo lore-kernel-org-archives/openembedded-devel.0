@@ -1,20 +1,26 @@
-Received: from [64.233.166.178] (helo=py-out-1112.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <axel.lin@gmail.com>) id 1Gke59-0004od-GR
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Nov 2006 11:02:57 +0100
-Received: by py-out-1112.google.com with SMTP id n39so299176pyh
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2006 02:00:39 -0800 (PST)
-Received: by 10.35.57.5 with SMTP id j5mr433692pyk.1163671239701;
-	Thu, 16 Nov 2006 02:00:39 -0800 (PST)
-Received: by 10.35.15.3 with HTTP; Thu, 16 Nov 2006 02:00:38 -0800 (PST)
-Message-ID: <427d64720611160200n179c885cme530417c46cd492e@mail.gmail.com>
-Date: Thu, 16 Nov 2006 18:00:38 +0800
-From: "axel lin" <axel.lin@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GkeDs-0004vn-Sk
+	for openembedded-devel@openembedded.org; Thu, 16 Nov 2006 11:11:56 +0100
+Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kAGA9dLr011670 for <openembedded-devel@openembedded.org>;
+	Thu, 16 Nov 2006 11:09:39 +0100
+Message-ID: <455C38E0.7060809@dominion.kabel.utwente.nl>
+Date: Thu, 16 Nov 2006 11:09:36 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-Subject: minimo Segmentation fault on pxa270 board
+To: openembedded-devel@openembedded.org
+References: <427d64720611160200n179c885cme530417c46cd492e@mail.gmail.com>
+In-Reply-To: <427d64720611160200n179c885cme530417c46cd492e@mail.gmail.com>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: minimo Segmentation fault on pxa270 board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,92 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2006 10:02:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 16 Nov 2006 10:11:57 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-hi list,
-    Is anyone sucessfuly run minimo on pxa270 board? ( I'm using
-angstrom disrto)
-    I always got "Segmentation fault" when start minimo.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-    BTW,  the path of minimo files are not correct.
+axel lin schreef:
+> hi list,
+>     Is anyone sucessfuly run minimo on pxa270 board? ( I'm using
+> angstrom disrto)
+>     I always got "Segmentation fault" when start minimo.
 
-root@mainstone:/usr/lib$ ipkg files minimo
-Package minimo (0.016+cvs20060720-r0) is installed on root and has the
-following files:
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-audio.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/entityTables/transliterate.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/.debug/libssl3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/greprefs/all.js
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/greprefs/security-prefs.js
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/arrow.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/entityTables/html40Latin1.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-image.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/unixcharset.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/toolkit.jar
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-movie.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/minimo
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libnspr4.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/langGroups.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libnss3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libssl3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/classic.jar
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libnssckbi.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/.debug/libsoftokn3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/.debug/libsmime3.so
-/usr/bin/minimo
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libsmime3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/fonts/pangoFontEncoding.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libplds4.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/dtd/xhtml11.dtd
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/.debug/libnss3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/components/all.xpt
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/ua.css
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/forms.css
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-sound.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/language.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/fonts/fontEncoding.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-binary.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/minimo-skin.jar
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/entityTables/html40Symbols.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libplc4.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-telnet.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/.debug/libfreebl3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/entityTables/html40Special.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/.debug/libnssckbi.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/charsetData.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/broken-image.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/charsetalias.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/arrowd.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libfreebl3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/libsoftokn3.so
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/minimo-skin.manifest
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/quirk.css
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/en-US.jar
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/toolkit.manifest
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/entityTables/htmlEntityVersions.properties
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/minimo-skin-vga.manifest
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/minimo.jar
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-text.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/components/nsHelperAppDlg.js
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-menu.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/pippki.manifest
-/usr/share/pixmaps/minimo.png
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-unknown.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/components/nsProgressDialog.js
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/loading-image.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/en-US.manifest
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/classic.manifest
-/usr/share/applications/minimo.desktop
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html.css
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/res/html/gopher-find.gif
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/pippki.jar
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/minimo.manifest
-/opt/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/minimo-0.016+cvs20060720-r0/image/usr/lib/mozilla-minimo/chrome/minimo-skin-vga.jar
+You should have catchsegv, strace and gdb present in your rootfs :)
 
-Regards,
-Axel
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFXDjgMkyGM64RGpERAm5iAJ9j8SN8y6hXTa2nD8gfwvdRbehF0gCdEszt
+G0JnJv+bPC/5pNzVz2ehFOQ=
+=mu8N
+-----END PGP SIGNATURE-----
 
 
