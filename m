@@ -1,27 +1,24 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gl5lK-0001TH-PA
-	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 16:36:18 +0100
-Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kAHFXrox032473 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Nov 2006 16:33:54 +0100
-Message-ID: <455DD65E.7090807@dominion.kabel.utwente.nl>
-Date: Fri, 17 Nov 2006 16:33:50 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+	(envelope-from <jim.rayner@gmail.com>) id 1Gl5pD-0001X0-6y
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Nov 2006 16:40:19 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so1435996nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Nov 2006 07:37:56 -0800 (PST)
+Received: by 10.82.152.16 with SMTP id z16mr242269bud.1163777876313;
+	Fri, 17 Nov 2006 07:37:56 -0800 (PST)
+Received: by 10.82.161.2 with HTTP; Fri, 17 Nov 2006 07:37:56 -0800 (PST)
+Message-ID: <41e5b4c20611170737p4b1138c0m8798ea67e67d449@mail.gmail.com>
+Date: Fri, 17 Nov 2006 15:37:56 +0000
+From: "Jim Rayner" <oe@jrayner.com>
+Sender: jim.rayner@gmail.com
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <d46153c40611170647m2be6b5f6jd7cbe86ccdfc5dc@mail.gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1163693473.1649.807.camel@gandalf.tm.informatik.uni-frankfurt.de>
-	<200611171628.27843.openembedded@hrw.one.pl>
-In-Reply-To: <200611171628.27843.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: FOSDEM'07
+References: <d46153c40611170647m2be6b5f6jd7cbe86ccdfc5dc@mail.gmail.com>
+X-Google-Sender-Auth: 12e5c20c4d6b24a5
+Subject: Re: Problem building dbus-glib-0.72
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,36 +32,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Nov 2006 15:36:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 17 Nov 2006 15:40:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 11/17/06, Andrew Paulsen <andrew.paulsen@gmail.com> wrote:
+> I'm getting some errors building gpe-image, specifically on the
+> dbus-glib-0.72 package, that seem to be related to include path
+> problems.
 
-Marcin Juszkiewicz schreef:
+Maybe lacking
 
-> Which hotel you guys propose? I heard about Astrid [1] and Notovel [2], 
-> both looks as similiar price.
+export DBUS_CFLAGS = " -I${STAGING_DIR}/${TARGET_SYS}/include/dbus-1.0"
 
-both charge around 80 euros per night, including breakfast
+or something similar from the dbus-glib-0.72.bb file
 
-> 1. http://www.astridhotel.be/en/home.htm
-> 2. http://www.novotel.com/
+Also some similarity to http://bugs.openembedded.org/show_bug.cgi?id=1371
 
-We could ask for a volume discount, since >10 OE people are going to need a room.
-
-regards,
-
-Koen
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFXdZeMkyGM64RGpERAofAAJ9wzsuM5A0fosPSRBsPILl4WrafSwCfXDqA
-CEYqQkAckTuzyoqX2ZDeFMc=
-=ZT7K
------END PGP SIGNATURE-----
+Jim
 
 
