@@ -1,22 +1,21 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <papercrane@gmail.com>) id 1Gkr35-0000Hj-BE
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Nov 2006 00:53:39 +0100
-Received: by py-out-1112.google.com with SMTP id n39so412567pyh
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2006 15:51:20 -0800 (PST)
-Received: by 10.35.49.15 with SMTP id b15mr2135173pyk.1163721080123;
-	Thu, 16 Nov 2006 15:51:20 -0800 (PST)
-Received: by 10.35.118.16 with HTTP; Thu, 16 Nov 2006 15:51:20 -0800 (PST)
-Message-ID: <432beae0611161551g2f69d6edmacf41d3b436c0a1b@mail.gmail.com>
-Date: Thu, 16 Nov 2006 15:51:20 -0800
-From: "Justin Patrin" <papercrane@gmail.com>
+	(envelope-from <openembedded@hrw.one.pl>) id 1GkrCO-0000No-N7
+	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 01:03:16 +0100
+Received: (qmail 24110 invoked by uid 813007); 17 Nov 2006 00:00:58 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 17 Nov 2006 00:00:58 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200611170042.29062.openembedded@hrw.one.pl>
+Date: Fri, 17 Nov 2006 01:01:05 +0100
+User-Agent: KMail/1.9.5
+References: <200610291528.40663.openembedded@hrw.one.pl>
+In-Reply-To: <200610291528.40663.openembedded@hrw.one.pl>
 MIME-Version: 1.0
-References: <200611170042.29062.openembedded@hrw.one.pl>
-Subject: Re: RFC: /removal.txt - list of metadata planned for removal
+Message-Id: <200611170101.06186.openembedded@hrw.one.pl>
+Subject: Re: RFC: handling of machine/distro features stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,33 +29,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2006 23:53:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 Nov 2006 00:03:17 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On 11/16/06, Marcin Juszkiewicz <openembedded@hrw.one.pl> wrote:
->
-> During this week I'm fetching sources for whole 'world' and noticed many
-> unfetchable things. Because just dropping them from metadata is not best
-> way I was thinking about creating file with informations which parts of
-> metadata will be removed. File will be named 'removal.txt' and will
-> reside in / of repository.
->
-> Proposed format:
->
-> Package Name:   plinciv
-> Removal Date:   2006-11-20
-> Maintainer:     none
-> Reason:         Unfetchable version from 2003 year.
->
->
-> What do you think about it?
->
+Dnia niedziela, 29 pa=BCdziernika 2006 15:28, Marcin Juszkiewicz napisa=B3:
+> Currently OpenEmbedded use overrides based on DISTRO, MACHINE,
+> TARGET_ARCH and few others. I want to suggest start of using also
+> {MACHINE,DISTRO}_FEATURES because we have some stuff in metadata which
+> make sense only on some targets only - for example madwifi is limited
+> to PCI devices only.
 
-Looks good to me.
+Holger 'zecke' Freyther pointed me to MacPorts and their 'variants'. After=
+=20
+looking at them I think that those are other kind of our overrides.
 
--- 
-Justin Patrin
+Which points me to this idea: how about adding COMBINED_FEATURES into=20
+overrides? I do not know will it slow down BitBake or make metadata bit=20
+more ugly but it is kind of solution.
+
+do_configure() {
+	do something
+}
+
+do_configure_pci() {
+	do something
+	do something PCI related
+}
+
+would solve wpa-supplicant example.=20
+
+What do you think?
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+        "To be or not to be that is the question.":
+         every programmer knows the answer $2b or (not $2b) is $ff.
+
+
 
 
