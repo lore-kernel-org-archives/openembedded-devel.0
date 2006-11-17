@@ -1,20 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GkrCO-0000No-N7
-	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 01:03:16 +0100
-Received: (qmail 24110 invoked by uid 813007); 17 Nov 2006 00:00:58 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 17 Nov 2006 00:00:58 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Nov 2006 01:01:05 +0100
-User-Agent: KMail/1.9.5
+	(envelope-from <rpurdie@rpsys.net>) id 1Gl00y-0001Dc-6O
+	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 10:28:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAH9Ph9o030970
+	for <openembedded-devel@openembedded.org>; Fri, 17 Nov 2006 09:25:43 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 30470-10 for <openembedded-devel@openembedded.org>;
+	Fri, 17 Nov 2006 09:25:41 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAH9PeH2030963
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 17 Nov 2006 09:25:40 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200611170101.06186.openembedded@hrw.one.pl>
 References: <200610291528.40663.openembedded@hrw.one.pl>
-In-Reply-To: <200610291528.40663.openembedded@hrw.one.pl>
-MIME-Version: 1.0
-Message-Id: <200611170101.06186.openembedded@hrw.one.pl>
+	<200611170101.06186.openembedded@hrw.one.pl>
+Date: Fri, 17 Nov 2006 09:25:39 +0000
+Message-Id: <1163755540.5551.4.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	kAH9Ph9o030970
 Subject: Re: RFC: handling of machine/distro features stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,47 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Nov 2006 00:03:17 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Fri, 17 Nov 2006 09:28:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia niedziela, 29 pa=BCdziernika 2006 15:28, Marcin Juszkiewicz napisa=B3:
-> Currently OpenEmbedded use overrides based on DISTRO, MACHINE,
-> TARGET_ARCH and few others. I want to suggest start of using also
-> {MACHINE,DISTRO}_FEATURES because we have some stuff in metadata which
-> make sense only on some targets only - for example madwifi is limited
-> to PCI devices only.
-
-Holger 'zecke' Freyther pointed me to MacPorts and their 'variants'. After=
+On Fri, 2006-11-17 at 01:01 +0100, Marcin Juszkiewicz wrote:
+> Dnia niedziela, 29 pa=C5=BAdziernika 2006 15:28, Marcin Juszkiewicz nap=
+isa=C5=82:
+> > Currently OpenEmbedded use overrides based on DISTRO, MACHINE,
+> > TARGET_ARCH and few others. I want to suggest start of using also
+> > {MACHINE,DISTRO}_FEATURES because we have some stuff in metadata whic=
+h
+> > make sense only on some targets only - for example madwifi is limited
+> > to PCI devices only.
+>=20
+> Holger 'zecke' Freyther pointed me to MacPorts and their 'variants'. Af=
+ter=20
+> looking at them I think that those are other kind of our overrides.
+>=20
+> Which points me to this idea: how about adding COMBINED_FEATURES into=20
+> overrides? I do not know will it slow down BitBake or make metadata bit=
 =20
-looking at them I think that those are other kind of our overrides.
+> more ugly but it is kind of solution.
 
-Which points me to this idea: how about adding COMBINED_FEATURES into=20
-overrides? I do not know will it slow down BitBake or make metadata bit=20
-more ugly but it is kind of solution.
+Personally, I think its a bad idea as we have too many variables in this
+field and it could end up with too much namespace pollution. We need to
+keep our overrides lean :)
 
-do_configure() {
-	do something
-}
+Also, this would automatically make any package machine specific and
+make multimachine pointless (anything using COMBINED_FEATURES is machine
+specific).
 
-do_configure_pci() {
-	do something
-	do something PCI related
-}
-
-would solve wpa-supplicant example.=20
-
-What do you think?
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-        "To be or not to be that is the question.":
-         every programmer knows the answer $2b or (not $2b) is $ff.
-
+Richard
 
 
 
