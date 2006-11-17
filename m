@@ -1,24 +1,26 @@
-Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <andrew.paulsen@gmail.com>) id 1Gl7w1-0002js-Mb
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Nov 2006 18:55:29 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so672721ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Nov 2006 09:53:06 -0800 (PST)
-Received: by 10.78.117.10 with SMTP id p10mr2151837huc.1163785985939;
-	Fri, 17 Nov 2006 09:53:05 -0800 (PST)
-Received: by 10.78.159.2 with HTTP; Fri, 17 Nov 2006 09:53:05 -0800 (PST)
-Message-ID: <d46153c40611170953g28ddc98dp91bcd1944f171ede@mail.gmail.com>
-Date: Fri, 17 Nov 2006 11:53:05 -0600
-From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <74d0deb30611170944j7b93a8ecm3b2b036111a0b6dd@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gl841-0002oj-4o
+	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 19:03:45 +0100
+Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kAHI1Fox020607 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Nov 2006 19:01:15 +0100
+Message-ID: <455DF8E8.4060801@dominion.kabel.utwente.nl>
+Date: Fri, 17 Nov 2006 19:01:12 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-References: <d46153c40611170647m2be6b5f6jd7cbe86ccdfc5dc@mail.gmail.com>
-	<41e5b4c20611170737p4b1138c0m8798ea67e67d449@mail.gmail.com>
-	<d46153c40611170917k1dd90d89ob384306caeada009@mail.gmail.com>
-	<74d0deb30611170944j7b93a8ecm3b2b036111a0b6dd@mail.gmail.com>
+To: openembedded-devel@openembedded.org
+References: <d46153c40611170647m2be6b5f6jd7cbe86ccdfc5dc@mail.gmail.com>	<41e5b4c20611170737p4b1138c0m8798ea67e67d449@mail.gmail.com>	<d46153c40611170917k1dd90d89ob384306caeada009@mail.gmail.com>	<74d0deb30611170944j7b93a8ecm3b2b036111a0b6dd@mail.gmail.com>
+	<d46153c40611170953g28ddc98dp91bcd1944f171ede@mail.gmail.com>
+In-Reply-To: <d46153c40611170953g28ddc98dp91bcd1944f171ede@mail.gmail.com>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: Problem building dbus-glib-0.72
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,24 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Nov 2006 17:55:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 17 Nov 2006 18:03:45 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-> I think dbus-glib 0.72 needs dbus >= 0.94.
-> The dbus-1.0 in the include path only denotes the protocol version.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Andrew Paulsen schreef:
+>> I think dbus-glib 0.72 needs dbus >= 0.94.
+>> The dbus-1.0 in the include path only denotes the protocol version.
+>>
+>> regards
+>> Philipp
 >
-> regards
-> Philipp
+> Ok, I'll rephrase my question then.  How do I change the package
+> versions that are being built?
+>
+> Again, my local.conf contains:
+> MACHINE = "compulab-pxa270"
+> DISTRO = "familiar-unstable"
+>
+> and I'm trying to "bitbake gpe-image"
 
-Ok, I'll rephrase my question then.  How do I change the package
-versions that are being built?
+Familiar is unmaintained in OE, so your error messages don't surprise us.
 
-Again, my local.conf contains:
-MACHINE = "compulab-pxa270"
-DISTRO = "familiar-unstable"
+You could try
 
-and I'm trying to "bitbake gpe-image"
+DISTRO=angstrom-2007.1
+DISTRO=celinux-test
+DISTRO=generic
+DISTRO=openzaurus-unstable
+
+To get a distro that regularly checked for problems.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFXfjoMkyGM64RGpERAtaiAKCMvS1ZIhFUXepS/WmcVx+JUHbhaQCfbvj6
+ZBxWeLlFiSK/YTc45Ulezpo=
+=xN40
+-----END PGP SIGNATURE-----
 
 
