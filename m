@@ -1,26 +1,26 @@
-Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+Received: from [137.79.94.127] (helo=s383.jpl.nasa.gov)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <andrew.paulsen@gmail.com>) id 1Gl9Ur-0005Nd-Sv
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Nov 2006 20:35:33 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so696031ugf
+	(envelope-from <ehovland@s383.jpl.nasa.gov>) id 1Gl9cY-0005VH-TO
+	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 20:43:31 +0100
+Received: from mage.jpl.nasa.gov (mage [137.78.15.62])
+	by s383.jpl.nasa.gov (8.12.10/8.12.10) with ESMTP id kAHJf6d7022147
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Nov 2006 11:33:09 -0800 (PST)
-Received: by 10.78.128.15 with SMTP id a15mr2273417hud.1163791989389;
-	Fri, 17 Nov 2006 11:33:09 -0800 (PST)
-Received: by 10.78.159.2 with HTTP; Fri, 17 Nov 2006 11:33:09 -0800 (PST)
-Message-ID: <d46153c40611171133g68e02b77u5e812a30a8807513@mail.gmail.com>
-Date: Fri, 17 Nov 2006 13:33:09 -0600
-From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <455DF8E8.4060801@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
+	Fri, 17 Nov 2006 11:41:06 -0800 (PST)
+Received: by mage.jpl.nasa.gov (Postfix, from userid 4960)
+	id AFE6F300016B; Fri, 17 Nov 2006 11:41:06 -0800 (PST)
+Date: Fri, 17 Nov 2006 11:41:06 -0800
+From: Erik Hovland <erik@hovland.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20061117194106.GA25171@mage.jpl.nasa.gov>
 References: <d46153c40611170647m2be6b5f6jd7cbe86ccdfc5dc@mail.gmail.com>
 	<41e5b4c20611170737p4b1138c0m8798ea67e67d449@mail.gmail.com>
 	<d46153c40611170917k1dd90d89ob384306caeada009@mail.gmail.com>
 	<74d0deb30611170944j7b93a8ecm3b2b036111a0b6dd@mail.gmail.com>
 	<d46153c40611170953g28ddc98dp91bcd1944f171ede@mail.gmail.com>
 	<455DF8E8.4060801@dominion.kabel.utwente.nl>
+Mime-Version: 1.0
+In-Reply-To: <455DF8E8.4060801@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.9i
 Subject: Re: Problem building dbus-glib-0.72
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,26 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Nov 2006 19:35:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 Nov 2006 19:43:31 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On 11/17/06, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+On Fri, Nov 17, 2006 at 07:01:12PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Andrew Paulsen schreef:
+> >> I think dbus-glib 0.72 needs dbus >= 0.94.
+> >> The dbus-1.0 in the include path only denotes the protocol version.
+> >>
+> >> regards
+> >> Philipp
+> >
+> > Ok, I'll rephrase my question then.  How do I change the package
+> > versions that are being built?
+> >
+> > Again, my local.conf contains:
+> > MACHINE = "compulab-pxa270"
+> > DISTRO = "familiar-unstable"
+> >
+> > and I'm trying to "bitbake gpe-image"
+> 
 > Familiar is unmaintained in OE, so your error messages don't surprise us.
->
-> You could try
->
-> DISTRO=angstrom-2007.1
-> DISTRO=celinux-test
-> DISTRO=generic
-> DISTRO=openzaurus-unstable
->
-> To get a distro that regularly checked for problems.
 
-Ok, I've got angstrom-2007.1 building right now.  I tried Familiar
-first since it was the example in local.conf.sample - maybe that
-should be changed to something that is maintained if you're not
-surprised that it doesn't work.
+I try to keep up, but I am afraid I have too many chores to keep
+familiar as fresh as I would like in OE.
+
+It is maintained here though:
+http://familiar.handhelds.org/#build
+
+E
+
+-- 
+Erik Hovland
+mail: erik AT hovland DOT org
+web: http://hovland.org/
+PGP/GPG public key available on request
 
 
