@@ -1,33 +1,20 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1Gl00y-0001Dc-6O
-	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 10:28:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAH9Ph9o030970
-	for <openembedded-devel@openembedded.org>; Fri, 17 Nov 2006 09:25:43 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30470-10 for <openembedded-devel@openembedded.org>;
-	Fri, 17 Nov 2006 09:25:41 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAH9PeH2030963
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 17 Nov 2006 09:25:40 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200611170101.06186.openembedded@hrw.one.pl>
-References: <200610291528.40663.openembedded@hrw.one.pl>
-	<200611170101.06186.openembedded@hrw.one.pl>
-Date: Fri, 17 Nov 2006 09:25:39 +0000
-Message-Id: <1163755540.5551.4.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
-	kAH9Ph9o030970
-Subject: Re: RFC: handling of machine/distro features stuff
+	(envelope-from <andrew.paulsen@gmail.com>) id 1Gl52E-00005U-IT
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Nov 2006 15:49:42 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so625428ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Nov 2006 06:47:20 -0800 (PST)
+Received: by 10.78.204.7 with SMTP id b7mr1974257hug.1163774839282;
+	Fri, 17 Nov 2006 06:47:19 -0800 (PST)
+Received: by 10.78.159.2 with HTTP; Fri, 17 Nov 2006 06:47:19 -0800 (PST)
+Message-ID: <d46153c40611170647m2be6b5f6jd7cbe86ccdfc5dc@mail.gmail.com>
+Date: Fri, 17 Nov 2006 08:47:19 -0600
+From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: Problem building dbus-glib-0.72
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,38 +28,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Nov 2006 09:28:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 17 Nov 2006 14:49:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Fri, 2006-11-17 at 01:01 +0100, Marcin Juszkiewicz wrote:
-> Dnia niedziela, 29 pa=C5=BAdziernika 2006 15:28, Marcin Juszkiewicz nap=
-isa=C5=82:
-> > Currently OpenEmbedded use overrides based on DISTRO, MACHINE,
-> > TARGET_ARCH and few others. I want to suggest start of using also
-> > {MACHINE,DISTRO}_FEATURES because we have some stuff in metadata whic=
-h
-> > make sense only on some targets only - for example madwifi is limited
-> > to PCI devices only.
->=20
-> Holger 'zecke' Freyther pointed me to MacPorts and their 'variants'. Af=
-ter=20
-> looking at them I think that those are other kind of our overrides.
->=20
-> Which points me to this idea: how about adding COMBINED_FEATURES into=20
-> overrides? I do not know will it slow down BitBake or make metadata bit=
-=20
-> more ugly but it is kind of solution.
+I'm getting some errors building gpe-image, specifically on the
+dbus-glib-0.72 package, that seem to be related to include path
+problems.
 
-Personally, I think its a bad idea as we have too many variables in this
-field and it could end up with too much namespace pollution. We need to
-keep our overrides lean :)
+My local.conf has these settings:
+MACHINE = "compulab-pxa270"
+DISTRO = "familiar-unstable"
 
-Also, this would automatically make any package machine specific and
-make multimachine pointless (anything using COMBINED_FEATURES is machine
-specific).
+And the log leading up to the error is:
+NOTE: package dbus-glib-0.72: started
+NOTE: package dbus-glib-0.72-r0: task do_compile: started
+NOTE: SITE files
+/home/packet/OpenEmbedded/org.openembedded.dev/site/endian-little
+/home/packet/OpenEmbedded/org.openembedded.dev/site/arm-linux
+ERROR: function do_compile failed
+ERROR: log data follows
+(/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/temp/log.do_compile.7567)
+| NOTE: make
+| make  all-recursive
+| make[1]: Entering directory
+`/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/dbus-glib-0.72'
+| Making all in dbus
+| make[2]: Entering directory
+`/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/dbus-glib-0.72/dbus'
+| make  all-recursive
+| make[3]: Entering directory
+`/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/dbus-glib-0.72/dbus'
+| Making all in .
+| make[4]: Entering directory
+`/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/dbus-glib-0.72/dbus'
+| if /bin/sh ../arm-linux-libtool --tag=CC --mode=compile
+arm-linux-gcc -march=armv5te -mtune=xscale -DHAVE_CONFIG_H -I.
+-I/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/dbus-glib-0.72/dbus
+-I.. -I/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/dbus-glib-0.72
+-I..  -I/home/packet/OpenEmbedded/build/tmp/staging/arm-linux/include/glib-2.0
+-I/home/packet/OpenEmbedded/build/tmp/staging/arm-linux/lib/glib-2.0/include
+   -DDBUS_COMPILATION=1 -DDBUS_LOCALEDIR=\"/usr/share/locale\"
+-DDBUS_API_SUBJECT_TO_CHANGE=1
+-isystem/home/packet/OpenEmbedded/build/tmp/staging/arm-linux/include
+-isystem/home/packet/OpenEmbedded/build/tmp/staging/arm-linux/include
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2
+-Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes
+-Wnested-externs -Wpointer-arith -Wcast-align -Wfloat-equal
+-Wsign-compare -MT dbus-glib.lo -MD -MP -MF ".deps/dbus-glib.Tpo" -c
+-o dbus-glib.lo dbus-glib.c; \
+|       then mv -f ".deps/dbus-glib.Tpo" ".deps/dbus-glib.Plo"; else
+rm -f ".deps/dbus-glib.Tpo"; exit 1; fi
+|  arm-linux-gcc -march=armv5te -mtune=xscale -DHAVE_CONFIG_H -I.
+-I/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/dbus-glib-0.72/dbus
+-I.. -I/home/packet/OpenEmbedded/build/tmp/work/armv5te-linux/dbus-glib-0.72-r0/dbus-glib-0.72
+-I.. -I/home/packet/OpenEmbedded/build/tmp/staging/arm-linux/include/glib-2.0
+-I/home/packet/OpenEmbedded/build/tmp/staging/arm-linux/lib/glib-2.0/include
+-DDBUS_COMPILATION=1 -DDBUS_LOCALEDIR=\"/usr/share/locale\"
+-DDBUS_API_SUBJECT_TO_CHANGE=1
+-isystem/home/packet/OpenEmbedded/build/tmp/staging/arm-linux/include
+-isystem/home/packet/OpenEmbedded/build/tmp/staging/arm-linux/include
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2
+-Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes
+-Wnested-externs -Wpointer-arith -Wcast-align -Wfloat-equal
+-Wsign-compare -MT dbus-glib.lo -MD -MP -MF .deps/dbus-glib.Tpo -c
+dbus-glib.c  -fPIC -DPIC -o .libs/dbus-glib.o
+| In file included from dbus-glib.c:25:
+| dbus-glib.h:28:30: dbus/dbus-shared.h: No such file or directory
 
-Richard
+<...and a bunch more of these...>
 
+
+Sure enough, the missing files aren't in the -I paths:
+packet@linuxdev0:~/OpenEmbedded/build/$ find tmp -name dbus-shared.h
+tmp/work/i686-linux/dbus-native-0.94-r0/dbus-0.94/dbus/dbus-shared.h
+tmp/work/armv5te-linux/dbus-0.92-r1/dbus-0.92/dbus/dbus-shared.h
+tmp/work/armv5te-linux/dbus-0.92-r1/install/dbus-dev/usr/include/dbus-1.0/dbus/dbus-shared.h
+tmp/staging/i686-linux/include/dbus-1.0/dbus/dbus-shared.h
+tmp/staging/arm-linux/include/dbus-1.0/dbus/dbus-shared.h
+
+
+I'm new to this so I would really appreciate some guidance.
 
 
