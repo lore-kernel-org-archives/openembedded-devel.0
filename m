@@ -1,21 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1Gl5g5-0001Pd-Kw
-	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 16:30:53 +0100
-Received: (qmail 26281 invoked by uid 813007); 17 Nov 2006 15:28:30 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 17 Nov 2006 15:28:30 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Nov 2006 16:28:27 +0100
-User-Agent: KMail/1.9.5
-References: <1163693473.1649.807.camel@gandalf.tm.informatik.uni-frankfurt.de>
-In-Reply-To: <1163693473.1649.807.camel@gandalf.tm.informatik.uni-frankfurt.de>
-Organization: OpenEmbedded
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gl5lK-0001TH-PA
+	for openembedded-devel@openembedded.org; Fri, 17 Nov 2006 16:36:18 +0100
+Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kAHFXrox032473 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Nov 2006 16:33:54 +0100
+Message-ID: <455DD65E.7090807@dominion.kabel.utwente.nl>
+Date: Fri, 17 Nov 2006 16:33:50 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-Message-Id: <200611171628.27843.openembedded@hrw.one.pl>
+To: openembedded-devel@openembedded.org
+References: <1163693473.1649.807.camel@gandalf.tm.informatik.uni-frankfurt.de>
+	<200611171628.27843.openembedded@hrw.one.pl>
+In-Reply-To: <200611171628.27843.openembedded@hrw.one.pl>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: FOSDEM'07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,41 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Nov 2006 15:30:53 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 17 Nov 2006 15:36:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia czwartek, 16 listopada 2006 17:11, Michael 'Mickey' Lauer napisa=B3:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> I just confirmation that the OpenEmbedded team managed to acquire a
-> stand at FOSDEM'07. I'm very excited about this opportunity to present
-> our achievements to a broad developer audience.
+Marcin Juszkiewicz schreef:
 
-So now we need to prepare some marketing materials and posters.
+> Which hotel you guys propose? I heard about Astrid [1] and Notovel [2], 
+> both looks as similiar price.
 
-> I know that February is still a bit away, but I want to get into
-> planning this event asap.
+both charge around 80 euros per night, including breakfast
 
-And we need to book planes, hotels.=20
+> 1. http://www.astridhotel.be/en/home.htm
+> 2. http://www.novotel.com/
 
-I will fly from Warsaw rather then from Berlin (Pozna=F1, where I live,=20
-has "migration" flights to UK rather then to useful places).
+We could ask for a volume discount, since >10 OE people are going to need a room.
 
-Which hotel you guys propose? I heard about Astrid [1] and Notovel [2],=20
-both looks as similiar price.
+regards,
 
-1. http://www.astridhotel.be/en/home.htm
-2. http://www.novotel.com/
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-                 Try not! Do, or do not! There is no try!
-                 		-- Yoda
+Koen
 
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFXdZeMkyGM64RGpERAofAAJ9wzsuM5A0fosPSRBsPILl4WrafSwCfXDqA
+CEYqQkAckTuzyoqX2ZDeFMc=
+=ZT7K
+-----END PGP SIGNATURE-----
 
 
