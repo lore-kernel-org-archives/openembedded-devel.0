@@ -1,26 +1,21 @@
-Received: from [64.233.182.188] (helo=nf-out-0910.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1GlS9g-0006QY-1d
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Nov 2006 16:30:56 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so1765349nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Nov 2006 07:28:27 -0800 (PST)
-Received: by 10.48.210.4 with SMTP id i4mr3312379nfg.1163863707485;
-	Sat, 18 Nov 2006 07:28:27 -0800 (PST)
-Received: from CUBE ( [82.193.96.239])
-	by mx.google.com with ESMTP id a23sm14280143nfc.2006.11.18.07.28.25;
-	Sat, 18 Nov 2006 07:28:26 -0800 (PST)
-Date: Sat, 18 Nov 2006 17:28:25 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <4810341202.20061118172825@gmail.com>
-To: Rob Neild <b@bigbob.org.uk>
-In-Reply-To: <20061118070941.lg9b2be6g13484w4@bigbob.org.uk>
-References: <20061118070941.lg9b2be6g13484w4@bigbob.org.uk>
+	(envelope-from <openembedded@hrw.one.pl>) id 1GlSt2-0006oS-0n
+	for openembedded-devel@openembedded.org; Sat, 18 Nov 2006 17:17:48 +0100
+Received: (qmail 28723 invoked by uid 813007); 18 Nov 2006 16:15:19 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 18 Nov 2006 16:15:18 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 18 Nov 2006 17:15:35 +0100
+User-Agent: KMail/1.9.5
+References: <31406A3C-DA2A-420F-8DDC-D57F0B6FC345@inf.fu-berlin.de>
+In-Reply-To: <31406A3C-DA2A-420F-8DDC-D57F0B6FC345@inf.fu-berlin.de>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Which head ?
+Message-Id: <200611181715.36451.openembedded@hrw.one.pl>
+Subject: Re: I need your number(s), BitBake/OE parsing speed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,54 +29,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Nov 2006 15:30:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Nov 2006 16:17:48 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello Rob,
+Dnia sobota, 18 listopada 2006 11:52, Holger Freyther napisa=C5=82:
 
-Saturday, November 18, 2006, 2:09:41 PM, you wrote:
+> 1.) time bitbake -p opie-image   and do that three times and save the
+> numbers
 
+15:30 hrw@home:umbaumba$  for f in `seq 1 3`;do touch conf/local.conf;=20
+time bitbake -p opie-image;done
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
 
-> rob@rob-server:~/openembedded$ ../monotone-0.31/mtn --db=OE.mtn pull  
-> monotone.openembedded.org org.openembedded.dev
-> mtn: doing anonymous pull; use -kKEYNAME if you need authentication
-> mtn: connecting to monotone.openembedded.org
-> mtn: finding items to synchronize:
-> mtn: certificates | keys | revisions
-> mtn:       30,065 |   38 |     9,918
-> mtn:  bytes in | bytes out | certs in | revs in
-> mtn:     1.3 k |     1.4 k |      0/0 |     0/0
-> mtn: successful exchange with monotone.openembedded.org
+NOTE: Requested parsing .bb files only.  Exiting.
 
+real    6m2.803s
+user    5m9.364s
+sys     0m9.919s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
 
-> rob@rob-server:~/openembedded$ ../monotone-0.31/mtn --db=OE.mtn  
-> checkout --branch=org.openembedded.dev
-> mtn: branch org.openembedded.dev has multiple heads:
-> mtn:   0c958ec238b24c796d57fb29b8683551a9ed05a5 hrw@openembedded.org  
-> 2006-11-18T09:48:40
-> mtn:   dcbd942b827e66bb27a6282eae5ee1e2f4c927e3 koen@openembedded.org
-> 2006-11-18T10:10:57
-> mtn: choose one with 'mtn checkout -r<id>'
-> mtn: error: branch org.openembedded.dev has multiple heads
-> rob@rob-server:~/openembedded$
+NOTE: Requested parsing .bb files only.  Exiting.
 
-  This was fixed. Otherwise, it's just a normal working situation,
-which is fixed at most in few hours after being introduced (as we have
-a convention of merging before pushing, so even if some developer
-missed that, it will be fixed by the next).
+real    5m55.859s
+user    5m2.017s
+sys     0m9.308s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.=20
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
 
-  So, next time feel free to just as mtn suggests - choose any of
-the head (arbitrarily), and get going. It doesn't even worth a mail
-report (but feel free to ping on IRC).
+NOTE: Requested parsing .bb files only.  Exiting.
 
-> Rob
+real    5m42.314s
+user    5m1.642s
+sys     0m9.346s
 
 
+> 2.) apply the oe_less_anon.patch to OpenEmbedded
+> 3.) time bitbake -p opie-image and do that three times and save the
+> numbers
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+15:48 hrw@home:umbaumba$  for f in `seq 1 3`;do touch conf/local.conf;=20
+time bitbake -p opie-image;done
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
+to increase performance.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %][[D
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    5m39.058s
+user    4m47.243s
+sys     0m9.186s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
+to increase performance.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    5m34.047s
+user    4m46.000s
+sys     0m8.915s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
+to increase performance.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    5m40.806s
+user    4m45.463s
+sys     0m8.957s
+16:12 hrw@home:umbaumba$
+
+> 4.) apply the BitBake patch (it should apply to 1.6 as well)
+> 5.) time bitbake -p opie-image and do that three times and save the
+> numbers
+
+16:57 hrw@home:umbaumba$  for f in `seq 1 3`;do touch conf/local.conf;=20
+time bitbake -p opie-image;done
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
+to increase performance.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    6m19.770s
+user    4m38.340s
+sys     0m9.419s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
+to increase performance.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    5m15.508s
+user    4m36.294s
+sys     0m8.546s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
+to increase performance.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    5m40.875s
+user    4m37.985s
+sys     0m8.901s
+17:14 hrw@home:umbaumba$
+
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+    42? 7 and a half million years and all you can come up with is 42?!
+
 
 
 
