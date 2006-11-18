@@ -1,20 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.233.182.186] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GlSt2-0006oS-0n
-	for openembedded-devel@openembedded.org; Sat, 18 Nov 2006 17:17:48 +0100
-Received: (qmail 28723 invoked by uid 813007); 18 Nov 2006 16:15:19 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 18 Nov 2006 16:15:18 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Nov 2006 17:15:35 +0100
-User-Agent: KMail/1.9.5
+	(envelope-from <pmiscml@gmail.com>) id 1GlUwi-00027Z-Ma
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Nov 2006 19:29:44 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so1810028nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Nov 2006 10:27:11 -0800 (PST)
+Received: by 10.48.242.19 with SMTP id p19mr3536239nfh.1163874431847;
+	Sat, 18 Nov 2006 10:27:11 -0800 (PST)
+Received: from CUBE ( [82.193.96.239])
+	by mx.google.com with ESMTP id c1sm15784659nfe.2006.11.18.10.27.09;
+	Sat, 18 Nov 2006 10:27:11 -0800 (PST)
+Date: Sat, 18 Nov 2006 20:27:07 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <445085120.20061118202707@gmail.com>
+To: Holger Freyther <freyther@gmx.net>
+In-Reply-To: <8AE3EAEE-5469-405E-8510-AAB99B47D328@gmx.net>
 References: <31406A3C-DA2A-420F-8DDC-D57F0B6FC345@inf.fu-berlin.de>
-In-Reply-To: <31406A3C-DA2A-420F-8DDC-D57F0B6FC345@inf.fu-berlin.de>
+	<200611181458.18269.openembedded@hrw.one.pl>
+	<8AE3EAEE-5469-405E-8510-AAB99B47D328@gmx.net>
 MIME-Version: 1.0
-Message-Id: <200611181715.36451.openembedded@hrw.one.pl>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: I need your number(s), BitBake/OE parsing speed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,131 +36,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Nov 2006 16:17:48 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sat, 18 Nov 2006 18:29:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dnia sobota, 18 listopada 2006 11:52, Holger Freyther napisa=C5=82:
+Hello Holger,
 
-> 1.) time bitbake -p opie-image   and do that three times and save the
-> numbers
+Saturday, November 18, 2006, 4:23:53 PM, you wrote:
 
-15:30 hrw@home:umbaumba$  for f in `seq 1 3`;do touch conf/local.conf;=20
-time bitbake -p opie-image;done
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
-NOTE: Handling BitBake files: \ (4043/4043) [100 %]
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+> Am 18.11.2006 um 14:58 schrieb Marcin Juszkiewicz:
+> Thanks,
 
-NOTE: Requested parsing .bb files only.  Exiting.
+> please do it again an put CACHE=""  in your local.conf...
 
-real    6m2.803s
-user    5m9.364s
-sys     0m9.919s
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
-NOTE: Handling BitBake files: \ (4043/4043) [100 %]
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+  I knew it's no that easy ;-)
 
-NOTE: Requested parsing .bb files only.  Exiting.
+1. Unpatched, cache is being killed before each run:
 
-real    5m55.859s
-user    5m2.017s
-sys     0m9.308s
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.=20
-NOTE: Handling BitBake files: \ (4043/4043) [100 %]
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+$ time ~/linux-ppc/bitbake/bin/bitbake -p opie-image
 
-NOTE: Requested parsing .bb files only.  Exiting.
+real    5m55.958s
+user    0m20.940s
+sys     5m31.190s
 
-real    5m42.314s
-user    5m1.642s
-sys     0m9.346s
+real    5m33.998s
+user    0m18.310s
+sys     5m10.850s
 
+real    5m39.153s
+user    0m18.140s
+sys     5m16.650s
 
-> 2.) apply the oe_less_anon.patch to OpenEmbedded
-> 3.) time bitbake -p opie-image and do that three times and save the
-> numbers
+2. Applied oe_less_anons.patch and glib-2.0.inc
 
-15:48 hrw@home:umbaumba$  for f in `seq 1 3`;do touch conf/local.conf;=20
-time bitbake -p opie-image;done
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
-to increase performance.
-NOTE: Handling BitBake files: \ (4043/4043) [100 %][[D
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+real    5m18.270s
+user    0m24.590s
+sys     4m50.210s
 
-NOTE: Requested parsing .bb files only.  Exiting.
+real    5m18.651s
+user    0m17.270s
+sys     4m58.080s
 
-real    5m39.058s
-user    4m47.243s
-sys     0m9.186s
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
-to increase performance.
-NOTE: Handling BitBake files: \ (4043/4043) [100 %]
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+real    5m26.934s
+user    0m16.670s
+sys     5m5.440s
 
-NOTE: Requested parsing .bb files only.  Exiting.
+3. Applied bitbake_one_queue.patch
 
-real    5m34.047s
-user    4m46.000s
-sys     0m8.915s
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
-to increase performance.
-NOTE: Handling BitBake files: \ (4043/4043) [100 %]
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
+real    5m22.281s
+user    0m17.420s
+sys     5m1.330s
 
-NOTE: Requested parsing .bb files only.  Exiting.
+real    5m12.338s
+user    0m24.290s
+sys     4m44.470s
 
-real    5m40.806s
-user    4m45.463s
-sys     0m8.957s
-16:12 hrw@home:umbaumba$
-
-> 4.) apply the BitBake patch (it should apply to 1.6 as well)
-> 5.) time bitbake -p opie-image and do that three times and save the
-> numbers
-
-16:57 hrw@home:umbaumba$  for f in `seq 1 3`;do touch conf/local.conf;=20
-time bitbake -p opie-image;done
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
-to increase performance.
-NOTE: Handling BitBake files: \ (4043/4043) [100 %]
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
-
-NOTE: Requested parsing .bb files only.  Exiting.
-
-real    6m19.770s
-user    4m38.340s
-sys     0m9.419s
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
-to increase performance.
-NOTE: Handling BitBake files: \ (4043/4043) [100 %]
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
-
-NOTE: Requested parsing .bb files only.  Exiting.
-
-real    5m15.508s
-user    4m36.294s
-sys     0m8.546s
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it=20
-to increase performance.
-NOTE: Handling BitBake files: \ (4043/4043) [100 %]
-NOTE: Parsing finished. 0 cached, 3885 parsed, 158 skipped, 0 masked.
-
-NOTE: Requested parsing .bb files only.  Exiting.
-
-real    5m40.875s
-user    4m37.985s
-sys     0m8.901s
-17:14 hrw@home:umbaumba$
+real    5m12.112s
+user    0m16.080s
+sys     4m52.810s
 
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+> h.
 
-    42? 7 and a half million years and all you can come up with is 42?!
 
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
