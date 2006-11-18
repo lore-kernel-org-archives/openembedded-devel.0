@@ -1,30 +1,21 @@
-Received: from [209.59.181.203] (helo=host2.dedicated4less.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <b@bigbob.org.uk>) id 1GlP3g-0001PF-Vj
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Nov 2006 13:12:33 +0100
-Received: from cpanel by host2.dedicated4less.com with local (Exim 4.52)
-	id 1GlP1I-0002bk-75 for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Nov 2006 07:09:41 -0500
-Received: from 84.12.180.149 ([84.12.180.149]) by bigbob.org.uk (Horde MIME
-	library) with HTTP; Sat, 18 Nov 2006 07:09:41 -0500
-Message-ID: <20061118070941.lg9b2be6g13484w4@bigbob.org.uk>
-Date: Sat, 18 Nov 2006 07:09:41 -0500
-From: Rob Neild <b@bigbob.org.uk>
+	(envelope-from <openembedded@hrw.one.pl>) id 1GlQkL-0003yM-Oo
+	for openembedded-devel@openembedded.org; Sat, 18 Nov 2006 15:00:49 +0100
+Received: (qmail 13840 invoked by uid 813007); 18 Nov 2006 13:58:11 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 18 Nov 2006 13:58:10 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
+Date: Sat, 18 Nov 2006 14:58:17 +0100
+User-Agent: KMail/1.9.5
+References: <31406A3C-DA2A-420F-8DDC-D57F0B6FC345@inf.fu-berlin.de>
+In-Reply-To: <31406A3C-DA2A-420F-8DDC-D57F0B6FC345@inf.fu-berlin.de>
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) H3 (4.1.3)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - host2.dedicated4less.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [32001 501] / [47 12]
-X-AntiAbuse: Sender Address Domain - bigbob.org.uk
-X-Source: /usr/local/cpanel/3rdparty/bin/php
-X-Source-Args: /usr/local/cpanel/3rdparty/bin/php
-	/usr/local/cpanel/base/horde/imp/compose.php 
-X-Source-Dir: :/base/horde/imp
-Subject: Which head ?
+Message-Id: <200611181458.18269.openembedded@hrw.one.pl>
+Subject: Re: I need your number(s), BitBake/OE parsing speed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,40 +29,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Nov 2006 12:12:33 -0000
-Content-Type: text/plain;
-	charset=ISO-8859-1;
-	DelSp="Yes";
-	format="flowed"
+X-List-Received-Date: Sat, 18 Nov 2006 14:00:51 -0000
 Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dnia sobota, 18 listopada 2006 11:52, Holger Freyther napisa=C5=82:
+
+Athlon64 3200+ 64bit:
+
+> 1.) time bitbake -p opie-image   and do that three times and save the
+> numbers
+
+14:37 hrw@home:umbaumba$ for f in `seq 1 3`;do time bitbake -p=20
+opie-image;done
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3885 cached, 0 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m11.991s
+user    0m9.832s
+sys     0m0.553s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3885 cached, 0 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m12.177s
+user    0m9.797s
+sys     0m0.577s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3885 cached, 0 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m11.711s
+user    0m9.707s
+sys     0m0.582s
 
 
+> 2.) apply the oe_less_anon.patch to OpenEmbedded
 
-rob@rob-server:~/openembedded$ ../monotone-0.31/mtn --db=OE.mtn pull  
-monotone.openembedded.org org.openembedded.dev
-mtn: doing anonymous pull; use -kKEYNAME if you need authentication
-mtn: connecting to monotone.openembedded.org
-mtn: finding items to synchronize:
-mtn: certificates | keys | revisions
-mtn:       30,065 |   38 |     9,918
-mtn:  bytes in | bytes out | certs in | revs in
-mtn:     1.3 k |     1.4 k |      0/0 |     0/0
-mtn: successful exchange with monotone.openembedded.org
+and copy glib-2.0.inc into packages/glib-2.0/
+
+> 3.) time bitbake -p opie-image and do that three times and save the
+> numbers
+
+14:51 hrw@home:umbaumba$  for f in `seq 1 3`;do time bitbake -p=20
+opie-image;done
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3870 cached, 15 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m12.251s
+user    0m10.686s
+sys     0m0.566s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3885 cached, 0 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m11.041s
+user    0m9.583s
+sys     0m0.538s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3885 cached, 0 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m11.208s
+user    0m9.640s
+sys     0m0.585s
+14:54 hrw@home:umbaumba$=20
 
 
-rob@rob-server:~/openembedded$ ../monotone-0.31/mtn --db=OE.mtn  
-checkout --branch=org.openembedded.dev
-mtn: branch org.openembedded.dev has multiple heads:
-mtn:   0c958ec238b24c796d57fb29b8683551a9ed05a5 hrw@openembedded.org  
-2006-11-18T09:48:40
-mtn:   dcbd942b827e66bb27a6282eae5ee1e2f4c927e3 koen@openembedded.org  
-2006-11-18T10:10:57
-mtn: choose one with 'mtn checkout -r<id>'
-mtn: error: branch org.openembedded.dev has multiple heads
-rob@rob-server:~/openembedded$
+> 4.) apply the BitBake patch (it should apply to 1.6 as well)
 
-Rob
+> 5.) time bitbake -p opie-image and do that three times and save the
+> numbers
+
+14:54 hrw@home:umbaumba$  for f in `seq 1 3`;do time bitbake -p=20
+opie-image;done
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3885 cached, 0 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m11.052s
+user    0m9.561s
+sys     0m0.521s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3885 cached, 0 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m10.978s
+user    0m9.483s
+sys     0m0.550s
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.=20
+NOTE: Handling BitBake files: \ (4043/4043) [100 %]
+NOTE: Parsing finished. 3885 cached, 0 parsed, 158 skipped, 0 masked.
+
+NOTE: Requested parsing .bb files only.  Exiting.
+
+real    0m11.020s
+user    0m9.505s
+sys     0m0.571s
+14:56 hrw@home:umbaumba$
+
+
+> 6.) send me either a postcard with the numbers on it, or use email to
+> transport the numbers
+
+This time I choose email.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+       I'm broken. Please show this to someone who can fix me [TeX]
+
 
 
 
