@@ -1,27 +1,25 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GlLCW-0004bf-K9
-	for openembedded-devel@openembedded.org; Sat, 18 Nov 2006 09:05:24 +0100
-Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kAI82tox026138 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Nov 2006 09:02:56 +0100
-Message-ID: <455EBE2A.2080907@dominion.kabel.utwente.nl>
-Date: Sat, 18 Nov 2006 09:02:50 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200611170042.29062.openembedded@hrw.one.pl>
-	<272662824.20061118033637@gmail.com>
-In-Reply-To: <272662824.20061118033637@gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: RFC: /removal.txt - list of metadata planned for removal
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1GlNt7-0008K7-3V
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Nov 2006 11:57:33 +0100
+Received: from [88.134.98.23] (helo=[192.168.1.100])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1GlNqi-0008Df-SM
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Nov 2006 11:55:05 +0100
+Mime-Version: 1.0 (Apple Message framework v752.3)
+X-Gpgmail-State: !signed
+Message-Id: <31406A3C-DA2A-420F-8DDC-D57F0B6FC345@inf.fu-berlin.de>
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+From: Holger Freyther <freyther@inf.fu-berlin.de>
+Date: Sat, 18 Nov 2006 11:52:38 +0100
+X-Mailer: Apple Mail (2.752.3)
+X-Broken-Reverse-DNS: no host name found for IP address 88.134.98.23
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: I need your number(s), BitBake/OE parsing speed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,38 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Nov 2006 08:05:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Nov 2006 10:57:33 -0000
+Content-Type: text/plain;
+	charset=UTF-8;
+	delsp=yes;
+	format=flowed
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hey,
 
-Paul Sokolovsky schreef:
-> Hello Marcin,
-> 
-> Friday, November 17, 2006, 1:42:28 AM, you wrote:
-> 
->> During this week I'm fetching sources for whole 'world' and noticed many
->> unfetchable things. Because just dropping them from metadata is not best
->> way I was thinking about creating file with informations which parts of
->> metadata will be removed.
-> 
->   I hope, "removed unless fixed"?
+if I got through your spam filter here is what I want you to do
 
-I think 'removed because obsolete' or 'removed because nasty hack' would be valid reasons
-to get on that list as well.
+1.) time bitbake -p opie-image   and do that three times and save the =20=
 
-regards,
+numbers
+2.) apply the oe_less_anon.patch to OpenEmbedded
+3.) time bitbake -p opie-image and do that three times and save the =20
+numbers
+4.) apply the BitBake patch (it should apply to 1.6 as well)
+5.) time bitbake -p opie-image and do that three times and save the =20
+numbers
 
-Koen
+6.) send me either a postcard with the numbers on it, or use email to =20=
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+transport the numbers
 
-iD8DBQFFXr4qMkyGM64RGpERAr46AJwNT2kvbOM+WtJPtc9lpebMoS6OLACff2ey
-vxb9Ao+vs8AF8Bip2mz9W/s=
-=3TdN
------END PGP SIGNATURE-----
+z.
+
+=EF=BF=BC=EF=BF=BC
+--
+Holger Freyther
+freyther@inf.fu-berlin.de
+
+
 
 
