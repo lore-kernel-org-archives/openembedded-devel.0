@@ -1,24 +1,26 @@
-Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1GlFAe-0005Eu-2G
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Nov 2006 02:39:04 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so1593528nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Nov 2006 17:36:39 -0800 (PST)
-Received: by 10.49.58.13 with SMTP id l13mr2938557nfk.1163813798916;
-	Fri, 17 Nov 2006 17:36:38 -0800 (PST)
-Received: from CUBE ( [82.193.96.239])
-	by mx.google.com with ESMTP id c10sm13318833nfb.2006.11.17.17.36.37;
-	Fri, 17 Nov 2006 17:36:38 -0800 (PST)
-Date: Sat, 18 Nov 2006 03:36:37 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <272662824.20061118033637@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200611170042.29062.openembedded@hrw.one.pl>
-References: <200611170042.29062.openembedded@hrw.one.pl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GlLCW-0004bf-K9
+	for openembedded-devel@openembedded.org; Sat, 18 Nov 2006 09:05:24 +0100
+Received: from [172.20.0.22] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kAI82tox026138 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Nov 2006 09:02:56 +0100
+Message-ID: <455EBE2A.2080907@dominion.kabel.utwente.nl>
+Date: Sat, 18 Nov 2006 09:02:50 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <200611170042.29062.openembedded@hrw.one.pl>
+	<272662824.20061118033637@gmail.com>
+In-Reply-To: <272662824.20061118033637@gmail.com>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: RFC: /removal.txt - list of metadata planned for removal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,40 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Nov 2006 01:39:04 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 18 Nov 2006 08:05:24 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hello Marcin,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Friday, November 17, 2006, 1:42:28 AM, you wrote:
+Paul Sokolovsky schreef:
+> Hello Marcin,
+> 
+> Friday, November 17, 2006, 1:42:28 AM, you wrote:
+> 
+>> During this week I'm fetching sources for whole 'world' and noticed many
+>> unfetchable things. Because just dropping them from metadata is not best
+>> way I was thinking about creating file with informations which parts of
+>> metadata will be removed.
+> 
+>   I hope, "removed unless fixed"?
 
-> During this week I'm fetching sources for whole 'world' and noticed many
-> unfetchable things. Because just dropping them from metadata is not best
-> way I was thinking about creating file with informations which parts of
-> metadata will be removed.
+I think 'removed because obsolete' or 'removed because nasty hack' would be valid reasons
+to get on that list as well.
 
-  I hope, "removed unless fixed"?
+regards,
 
-> File will be named 'removal.txt' and will 
-> reside in / of repository.
+Koen
 
-> Proposed format:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-> Package Name:   plinciv
-> Removal Date:   2006-11-20
-> Maintainer:     none
-> Reason:         Unfetchable version from 2003 year.
-
-
-> What do you think about it?
-
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+iD8DBQFFXr4qMkyGM64RGpERAr46AJwNT2kvbOM+WtJPtc9lpebMoS6OLACff2ey
+vxb9Ao+vs8AF8Bip2mz9W/s=
+=3TdN
+-----END PGP SIGNATURE-----
 
 
