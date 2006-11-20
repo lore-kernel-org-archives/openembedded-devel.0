@@ -1,22 +1,22 @@
-Received: from [64.233.162.207] (helo=nz-out-0102.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Gm5Cb-00034T-4H
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Nov 2006 10:12:33 +0100
-Received: by nz-out-0102.google.com with SMTP id z6so779043nzd
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Nov 2006 01:09:54 -0800 (PST)
-Received: by 10.65.224.11 with SMTP id b11mr7525793qbr.1164013793243;
-	Mon, 20 Nov 2006 01:09:53 -0800 (PST)
-Received: by 10.65.243.9 with HTTP; Mon, 20 Nov 2006 01:09:53 -0800 (PST)
-Message-ID: <c384c5ea0611200109i719a94cega65377b7b4d26b43@mail.gmail.com>
-Date: Mon, 20 Nov 2006 10:09:53 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	(envelope-from <openembedded@hrw.one.pl>) id 1Gm5bn-0004BM-UH
+	for openembedded-devel@openembedded.org; Mon, 20 Nov 2006 10:38:36 +0100
+Received: (qmail 21358 invoked by uid 813007); 20 Nov 2006 09:35:56 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 20 Nov 2006 09:35:56 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1163982989.5560.86.camel@localhost.localdomain>
+Date: Mon, 20 Nov 2006 10:35:54 +0100
+User-Agent: KMail/1.9.5
+References: <1163904090.7453.9.camel@inkdev>
+In-Reply-To: <1163904090.7453.9.camel@inkdev>
+Organization: OpenEmbedded
 MIME-Version: 1.0
-References: <1163982989.5560.86.camel@localhost.localdomain>
-Subject: Re: RFC: Bitbake dependency graph output
+Message-Id: <200611201035.55298.openembedded@hrw.one.pl>
+Subject: Re: Failure building hostap-modules-0.4.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,39 +30,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Nov 2006 09:12:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Nov 2006 09:38:36 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Hello,
+Dnia niedziela, 19 listopada 2006 03:41, Peter Bell napisa=B3:
 
-I use the depgraph very often to tweak and remove the dependencies by
-editing the package or its configuration, or even patches. (i.e. what
-Gentoo does by  USE - flags, I do manually).
+> I've just started trying to use oe, and am attempting to build a
+> distribution for the Freescale MX31ADS development board.
 
-Therefore I like the current package dependencies. I am not per se
-interested in the bitbake tasks for that job.
+Please update your metadata and rebuild. I removed 'hostap-modules'=20
+dependency from 'hostap-utils' so your config should be buildable.
 
-However, for future use, like a real-time graphical progress
-indicator, the bitbake tasks dependencies are in fact very useful.
+Revision: e7c3c58ffc25bb74008c4dda3d77ba4eae16e8f0
+Ancestor: 73d70f59f2e6cdd251e1e656d513bb2feb1a7656
+Author: hrw@openembedded.org
+Date: 2006-11-20T09:29:50
+Branch: org.openembedded.dev
 
-Any chance both are achievable?
+Modified files:
+        packages/hostap/hostap-utils.inc
+        packages/hostap/hostap-utils_0.3.7.bb
+        packages/hostap/hostap-utils_0.4.0.bb
 
-> * Should -I IGNORED_DOT_DEPS become a more general commandline option to
-> be appended to ASSUME_PROVIDED (which my replacement graph code does
-> internally atm)? Do we want this to support regexps?
->
-I would like that, I think it is very handy for ignoring for example
-all '*-native' packages.
+ChangeLog:
 
-> http://www.rpsys.net/openzaurus/temp/bitbake_depgraph.patch is the patch
-> I have atm.
->
-(I think independently from this) here is my local regexp patch:
+hostap-utils: removed rrecommending hostap-modules
+=2D most of our target devices run kernels newer then 2.6.14 so they have
+  hostap modules from kernel as kernel-module-hostap*
+=2D hostap modules and utils are now both added into dependency of task-base
+  for machines with pcmcia or pci feature
 
-http://www.sidebranch.com/openembedded/bitbake/bitbake_graph_ignore_regexp.patch
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Leon.
+           Despair is just another word for 'not enough coffee'=20
+           		Wally
+
+
 
 
