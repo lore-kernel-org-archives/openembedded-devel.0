@@ -1,19 +1,20 @@
 Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GmAXE-00045A-C7
-	for openembedded-devel@openembedded.org; Mon, 20 Nov 2006 15:54:12 +0100
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GmAjk-0004Ej-4w
+	for openembedded-devel@openembedded.org; Mon, 20 Nov 2006 16:07:08 +0100
 Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
 	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kAKEpILr003718 for <openembedded-devel@openembedded.org>;
-	Mon, 20 Nov 2006 15:51:19 +0100
-Message-ID: <4561C0E1.1030001@dominion.kabel.utwente.nl>
-Date: Mon, 20 Nov 2006 15:51:13 +0100
+	kAKF4NLr006560 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Nov 2006 16:04:23 +0100
+Message-ID: <4561C3F2.9040100@dominion.kabel.utwente.nl>
+Date: Mon, 20 Nov 2006 16:04:18 +0100
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
 User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
 References: <0EC479DC-CDAB-4F46-8910-E02AB1D9017B@inf.fu-berlin.de>
-In-Reply-To: <0EC479DC-CDAB-4F46-8910-E02AB1D9017B@inf.fu-berlin.de>
+	<4561C0E1.1030001@dominion.kabel.utwente.nl>
+In-Reply-To: <4561C0E1.1030001@dominion.kabel.utwente.nl>
 X-Enigmail-Version: 0.94.1.2
 X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
 	helpdesk@ITBE.utwente.nl for more information.
@@ -34,49 +35,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Nov 2006 14:54:12 -0000
+X-List-Received-Date: Mon, 20 Nov 2006 15:07:08 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Holger Freyther schreef:
-> Hey,
+Koen Kooi schreef:
+> Holger Freyther schreef:
+>> Hey,
 > 
-> you have done a lot and we are at 459 parser errors and here is the  
-> list. If you fix it you can officially punch me to finish the parser.
+>> you have done a lot and we are at 459 parser errors and here is the  
+>> list. If you fix it you can officially punch me to finish the parser.
+> 
+> Only 182 ones left in rcf74582c2f1f66b88ee6661c6cdf7de75b0df961
 
-Only 182 ones left in rcf74582c2f1f66b88ee6661c6cdf7de75b0df961
-:
+and 'only' 160 left in revision f063ce041e967738f1bcdd3b31280fbe36c8681b, thanks to Marcin
 
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/cxcrypt/cxcrypt_1.0.bb:4
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/freeze/freeze.bb:37
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/freeze/unfreeze.bb:26
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/geode-drivers/geode-v4l2lx_2.6.11.bb:16
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/e-image.bb:6
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/gpe-image.bb:23
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/nylon-image-extended.bb:85
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/sectest-gpe-image.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/twin-image.bb:18
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/uml-image.bb:12
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/xfce-image.bb:15
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/xterminal-image.bb:11
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/ircp/ircp_0.3.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/lcdproc/lcdproc_0.5.0.bb:16
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libaio/libaio_0.3.103.bb:12
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libeventdb/libeventdb_cvs.bb:14
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libgpeplugin/libgpeplugin_cvs.bb:9
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libhandoff/libhandoff_cvs.bb:14
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmikey/libmikey0_svn.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmimedir/libmimedir_0.3.1.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmimedir/libmimedir_0.4.0-20060804.bb:26
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmimedir/libmimedir_cvs.bb:10
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmnetutil/libmnetutil0_svn.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmsip/libmsip0_svn.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libpng/libpng_1.2.12.bb:12
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libpng/libpng_1.2.8.bb:11
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/librcf/librcf_0.4.bb:4
+/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/gpe-image.bb:42
+/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmimedir/libmimedir_0.3.1.bb:22
+/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmimedir/libmimedir_cvs.bb:25
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libxsettings-client/libxsettings-client_0.14.bb:11
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/LAB-kernel_cvs.bb:26
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-24-8_2.4.18-rmk7-pxa3-embedix20030509.bb:1
@@ -154,7 +136,7 @@ Only 182 ones left in rcf74582c2f1f66b88ee6661c6cdf7de75b0df961
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libalgorithm-diff-perl-native_1.1902.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libarchive-tar-perl-native_1.30.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libcache-cache-perl-native_1.05.bb:5
-...
+/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libclass-container-perl-native_0.12.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libclass-data-inheritable-perl-native_0.06.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libcompress-zlib-perl-native_1.42.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libdata-optlist-perl-native_0.101.bb:5
@@ -176,7 +158,6 @@ Only 182 ones left in rcf74582c2f1f66b88ee6661c6cdf7de75b0df961
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libparams-util-perl-native_0.20.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libparams-validate-perl-native_0.86.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libsub-exporter-perl-native_0.970.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libsub-install-perl-native_0.922.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libsub-uplevel-perl-native_0.13.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libtext-diff-perl-native_0.35.bb:5
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libversion-perl-native_0.6701.bb:5
@@ -232,16 +213,12 @@ Only 182 ones left in rcf74582c2f1f66b88ee6661c6cdf7de75b0df961
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/vlc/vlc-gpe_0.8.4.bb:16
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/xorg-lib/liblbxutil_X11R7.1-1.0.1.bb:3
 /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/xorg-lib/libxft_X11R7.0-2.1.8.2.bb:13
-
-regards,
-
-Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFFYcDhMkyGM64RGpERAg/3AJ9/tV1UzsEiZmMJfnSDSgl7Up4gAACeILs6
-cdnu9oQ/jbBbwI6wlxi2B4Q=
-=6o+b
+iD8DBQFFYcPyMkyGM64RGpERAoOfAJ9PQUvKT5ww82VAErsLvoJb5lqWCwCfT3EL
+pWGUioWLOhGU6J4KyO+YDWQ=
+=L8lr
 -----END PGP SIGNATURE-----
 
 
