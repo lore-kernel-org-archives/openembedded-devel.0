@@ -1,26 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GmAjk-0004Ej-4w
-	for openembedded-devel@openembedded.org; Mon, 20 Nov 2006 16:07:08 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kAKF4NLr006560 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Nov 2006 16:04:23 +0100
-Message-ID: <4561C3F2.9040100@dominion.kabel.utwente.nl>
-Date: Mon, 20 Nov 2006 16:04:18 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <openembedded@hrw.one.pl>) id 1GmBW8-0005lO-Ur
+	for openembedded-devel@openembedded.org; Mon, 20 Nov 2006 16:57:09 +0100
+Received: (qmail 28219 invoked by uid 813007); 20 Nov 2006 15:54:27 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 20 Nov 2006 15:54:27 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+Organization: OpenEmbedded
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 20 Nov 2006 16:54:18 +0100
+User-Agent: KMail/1.9.5
 References: <0EC479DC-CDAB-4F46-8910-E02AB1D9017B@inf.fu-berlin.de>
 	<4561C0E1.1030001@dominion.kabel.utwente.nl>
-In-Reply-To: <4561C0E1.1030001@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<4561C3F2.9040100@dominion.kabel.utwente.nl>
+In-Reply-To: <4561C3F2.9040100@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200611201654.19160.openembedded@hrw.one.pl>
 Subject: Re: ParseErrors, Continued
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,190 +32,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Nov 2006 15:07:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Nov 2006 15:57:09 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia poniedzia=B3ek, 20 listopada 2006 16:04, Koen Kooi napisa=B3:
+> Koen Kooi schreef:
+> > Holger Freyther schreef:
 
-Koen Kooi schreef:
-> Holger Freyther schreef:
->> Hey,
-> 
->> you have done a lot and we are at 459 parser errors and here is the  
->> list. If you fix it you can officially punch me to finish the parser.
-> 
-> Only 182 ones left in rcf74582c2f1f66b88ee6661c6cdf7de75b0df961
+> >> you have done a lot and we are at 459 parser errors and here is the
+> >> list. If you fix it you can officially punch me to finish the parser.
 
-and 'only' 160 left in revision f063ce041e967738f1bcdd3b31280fbe36c8681b, thanks to Marcin
+> and 'only' 160 left in revision
 
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/cxcrypt/cxcrypt_1.0.bb:4
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/geode-drivers/geode-v4l2lx_2.6.11.bb:16
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/e-image.bb:6
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/gpe-image.bb:42
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmimedir/libmimedir_0.3.1.bb:22
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libmimedir/libmimedir_cvs.bb:25
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/libxsettings-client/libxsettings-client_0.14.bb:11
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/LAB-kernel_cvs.bb:26
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-24-8_2.4.18-rmk7-pxa3-embedix20030509.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-32-0_2.4.18-rmk7-pxa3-embedix20030509.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-32-32_2.4.18-rmk7-pxa3-embedix20030509.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-40-24_2.4.18-rmk7-pxa3-embedix20030509.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-48-16_2.4.18-rmk7-pxa3-embedix20030509.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-58-6-debug_2.4.18-rmk7-pxa3-embedix20030509.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-58-6_2.4.18-rmk7-pxa3-embedix20030509.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/collie-kernel-64-0_2.4.18-rmk7-pxa3-embedix20030509.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/linux-ezx_2.6.16.13.bb:33
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/linux-geodelx_2.6.11.bb:13
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/linux-gumstix_2.6.15.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/opensimpad_2.4.25-vrs2-pxa1-jpm1.bb:47
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/opensimpad_2.4.27-vrs1-pxa1-jpm1.bb:56
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/linux/openzaurus-sa_2.4.18-rmk7-pxa3-embedix20030509.bb:56
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/lockstat/lockstat_1.4.10.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/ltrace/ltrace_0.4.bb:21
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/maemo/audiofile_0.2.6-3osso4.bb:18
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/maemo/libosso-help_1.0.01.bb:11
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/maemo/osso-af-startup_0.28-1.bb:13
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/maemo/osso-app-killer_0.4-3.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/maemo/osso-esd_0.5.bb:10
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/maemo/osso-gnome-vfs2_2.8.4.4-1.bb:18
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/maemo/osso-sounds_0.3-1.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/maemo/sapwood_1.20-1.bb:13
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-applet-tasks/mb-applet-tasks_1.0.0.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-common/matchbox_0.8.1.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-common/matchbox_0.9.1.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-common/matchbox_0.9.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-desktop/matchbox-desktop_0.9.1.bb:21
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-desktop/matchbox-desktop_svn.bb:14
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-keyboard/matchbox-keyboard_svn.bb:11
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-panel/matchbox-panel_0.9.3.bb:4
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-panel/matchbox-panel_svn.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-stroke/matchbox-stroke_svn.bb:12
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/matchbox-themes-extra/matchbox-themes-extra_0.3.bb:14
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-e-x11-core.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-e-x11.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-gpe-extras.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-maemo.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-opie-all.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-opie.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-sdk.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-sdl.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/meta-toolchain.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/nylon-feed.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/package-index.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/slugos-packages.bb:22
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/unslung-binary-kernel-packages.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/unslung-packages.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/meta/xbase-clients.bb:4
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/mii-diag/mii-diag_2.11.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/minipredict/minipredict.bb:14
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/minisip/minisip-video_svn.bb:10
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/minisip/minisip_svn.bb:9
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/mozilla/minimo_cvs.bb:20
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/mozilla/thunderbird_1.0.7.bb:23
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/mtd/mtd-utils_0.0.0+cvs20050801.bb:9
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/mtd/mtd-utils_0.0.0+cvs20060223.bb:9
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/mutt/mutt_1.5.9i.bb:24
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/networkmanager/networkmanager_0.6.4.bb:26
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/omniorb/omniorb-native_4.0.7.bb:6
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/omniorb/omniorb_4.0.7.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/openh323/openh323_1.13.5.4.bb:15
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/openldap/openldap_2.2.29.bb:111
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/openldap/openldap_2.3.11.bb:126
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/openzaurus/openzaurus-version.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/opie-notes/opie-notes_0.4.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pbltool/pbltool-native_0.2.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pcmcia-cs/pcmcia-cs_3.2.8.bb:32
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pcmciautils/pcmciautils_010.bb:18
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pcmciautils/pcmciautils_013.bb:20
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pcmciautils/pcmciautils_014.bb:20
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libalgorithm-diff-perl-native_1.1902.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libarchive-tar-perl-native_1.30.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libcache-cache-perl-native_1.05.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libclass-container-perl-native_0.12.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libclass-data-inheritable-perl-native_0.06.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libcompress-zlib-perl-native_1.42.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libdata-optlist-perl-native_0.101.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libdevel-stacktrace-perl-native_1.13.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libdigest-sha1-perl-native_2.11.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/liberror-perl-native_0.17004.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libexception-class-perl-native_1.23.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libextutils-cbuilder-perl-native_0.18.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libextutils-parsexs-perl-native_2.16.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libintl-perl-native_1.11.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libintl-perl-native_1.16.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libio-zlib-perl-native_1.04.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libipc-sharelite-perl-native_0.09.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/liblocale-gettext-perl-native_1.05.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/liblog-dispatch-perl-native_2.13.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/liblog-log4perl-perl-native_1.06.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libmodule-build-perl-native_0.2805.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libnet-ip-perl-native_1.25.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libparams-util-perl-native_0.20.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libparams-validate-perl-native_0.86.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libsub-exporter-perl-native_0.970.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libsub-uplevel-perl-native_0.13.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libtext-diff-perl-native_0.35.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libversion-perl-native_0.6701.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libxml-parser-perl-native_2.34.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/libyaml-perl-native_0.62.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/perl/perl_5.8.7.bb:78
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/portabase/portabase_1.9.bb:25
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/powermanga/powermanga_0.79.bb:15
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/ppp/ppp_2.4.1.bb:25
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/prboom/prboom_2.3.1.bb:10
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pvrusb2-mci/pvrusb2-mci_20050921.bb:6
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pvrusb2-mci/pvrusb2-mci_20060903.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pwlib/pwlib_1.5.2.bb:21
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/pwlib/pwlib_1.6.6.4.bb:24
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/python/python-native_2.4.0.bb:19
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/python/python-numarray_1.1.1.bb:7
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/qpf-fonts/terminus.bb:10
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/qplot/qplot_2.0.1+cvs20020420.bb:6
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/redfang/redfang.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/rxvt/rxvt_2.7.9.bb:14
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/rxvt/rxvt_2.8.0.bb:14
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/samba/samba-essential_3.0.20.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/sharprom-toolchain/sharprom-toolchain-native_1.0.bb:4
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/socat/socat_1.3.2.1.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/subversion/subversion_1.3.1.bb:12
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/subversion/subversion_1.4.0.bb:13
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/sylpheed/sylpheed-claws-plugin-gtkhtml2-viewer-0.10.1_2.3.0.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/sylpheed/sylpheed-claws-plugin-gtkhtml2-viewer-0.10.2_2.4.0.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/sylpheed/sylpheed-claws-plugin-maildir-0.24.1_2.3.0.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/sylpheed/sylpheed-claws-plugin-maildir-0.24.1_2.4.0.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/sylpheed/sylpheed-claws-plugin-rssyl-0.5_2.3.0.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/sylpheed/sylpheed-claws-plugin-rssyl-0.6_2.4.0.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/syslinux/syslinux-native_3.11.bb:22
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tapioca/libjingle-tapioca_svn.bb:5
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-bootstrap-unionroot.bb:11
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-bootstrap.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-dvb.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-e-x11.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-gpe.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-mythfront.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-opie.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-ossie.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-pivotboot.bb:8
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-python-everything_20060425.bb:83
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-qpe.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-sdk.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-sdl.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-xfce-base.bb:6
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tasks/task-xterminal.bb:1
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tetex/tetex_3.0.bb:10
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/tin/tin_1.9.1.bb:15
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/vde/vde_2.0.2.bb:2
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/vlc/vlc-gpe_0.8.4.bb:16
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/xorg-lib/liblbxutil_X11R7.1-1.0.1.bb:3
-/Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/xorg-lib/libxft_X11R7.0-2.1.8.2.bb:13
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+35 errors left but I think that now parser need fixing.
 
-iD8DBQFFYcPyMkyGM64RGpERAoOfAJ9PQUvKT5ww82VAErsLvoJb5lqWCwCfT3EL
-pWGUioWLOhGU6J4KyO+YDWQ=
-=L8lr
------END PGP SIGNATURE-----
+ParseError: geode-drivers/geode-v4l2lx_2.6.11.bb :16=20
+ParseError: images/e-image.bb :6=20
+ParseError: tin/tin_1.9.1.bb :15=20
+
+Those looks like this:
+
+export EXTRA_CFLAGS +=3D " -DLINUX_2_6=3D1"
+
+And those ones are:
+
+require ${@bb.data.getVar('P', d , 1).replace('-native-', '_')}.bb
+
+
+ParseError: perl/libalgorithm-diff-perl-native_1.1902.bb :5=20
+ParseError: perl/libarchive-tar-perl-native_1.30.bb :5=20
+ParseError: perl/libcache-cache-perl-native_1.05.bb :5=20
+ParseError: perl/libclass-container-perl-native_0.12.bb :5=20
+ParseError: perl/libclass-data-inheritable-perl-native_0.06.bb :5=20
+ParseError: perl/libcompress-zlib-perl-native_1.42.bb :5=20
+ParseError: perl/libdata-optlist-perl-native_0.101.bb :5=20
+ParseError: perl/libdevel-stacktrace-perl-native_1.13.bb :5=20
+ParseError: perl/libdigest-sha1-perl-native_2.11.bb :5=20
+ParseError: perl/liberror-perl-native_0.17004.bb :5=20
+ParseError: perl/libexception-class-perl-native_1.23.bb :5=20
+ParseError: perl/libextutils-cbuilder-perl-native_0.18.bb :5=20
+ParseError: perl/libextutils-parsexs-perl-native_2.16.bb :5=20
+ParseError: perl/libintl-perl-native_1.11.bb :5=20
+ParseError: perl/libintl-perl-native_1.16.bb :5=20
+ParseError: perl/libio-zlib-perl-native_1.04.bb :5=20
+ParseError: perl/libipc-sharelite-perl-native_0.09.bb :5=20
+ParseError: perl/liblocale-gettext-perl-native_1.05.bb :5=20
+ParseError: perl/liblog-dispatch-perl-native_2.13.bb :5=20
+ParseError: perl/liblog-log4perl-perl-native_1.06.bb :5=20
+ParseError: perl/libmodule-build-perl-native_0.2805.bb :5=20
+ParseError: perl/libnet-ip-perl-native_1.25.bb :5=20
+ParseError: perl/libparams-util-perl-native_0.20.bb :5=20
+ParseError: perl/libparams-validate-perl-native_0.86.bb :5=20
+ParseError: perl/libsub-exporter-perl-native_0.970.bb :5=20
+ParseError: perl/libsub-install-perl-native_0.922.bb :5=20
+ParseError: perl/libsub-uplevel-perl-native_0.13.bb :5=20
+ParseError: perl/libtext-diff-perl-native_0.35.bb :5=20
+ParseError: perl/libversion-perl-native_0.6701.bb :5=20
+ParseError: perl/libxml-parser-perl-native_2.34.bb :5=20
+ParseError: perl/libyaml-perl-native_0.62.bb :5
+=20
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+     This may seem a bit weird, but that's okay, because it is weird.
+                     -- Perl documentation
+
+
 
 
