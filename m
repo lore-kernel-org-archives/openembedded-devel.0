@@ -1,24 +1,30 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.59.181.203] (helo=host2.dedicated4less.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GmBW8-0005lO-Ur
-	for openembedded-devel@openembedded.org; Mon, 20 Nov 2006 16:57:09 +0100
-Received: (qmail 28219 invoked by uid 813007); 20 Nov 2006 15:54:27 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 20 Nov 2006 15:54:27 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-Organization: OpenEmbedded
+	(envelope-from <s@bigbob.org.uk>) id 1GmEGj-0002G5-IG
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Nov 2006 19:53:25 +0100
+Received: from cpanel by host2.dedicated4less.com with local (Exim 4.52)
+	id 1GmEE4-0007Aj-2i for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Nov 2006 13:50:18 -0500
+Received: from 84.12.180.149 ([84.12.180.149]) by bigbob.org.uk (Horde MIME
+	library) with HTTP; Mon, 20 Nov 2006 13:50:15 -0500
+Message-ID: <20061120135015.ckbllosdeokgk8gc@bigbob.org.uk>
+Date: Mon, 20 Nov 2006 13:50:15 -0500
+From: Rob Neild <s@bigbob.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Nov 2006 16:54:18 +0100
-User-Agent: KMail/1.9.5
-References: <0EC479DC-CDAB-4F46-8910-E02AB1D9017B@inf.fu-berlin.de>
-	<4561C0E1.1030001@dominion.kabel.utwente.nl>
-	<4561C3F2.9040100@dominion.kabel.utwente.nl>
-In-Reply-To: <4561C3F2.9040100@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-Message-Id: <200611201654.19160.openembedded@hrw.one.pl>
-Subject: Re: ParseErrors, Continued
+User-Agent: Internet Messaging Program (IMP) H3 (4.1.3)
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - host2.dedicated4less.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [32001 501] / [47 12]
+X-AntiAbuse: Sender Address Domain - bigbob.org.uk
+X-Source: /usr/local/cpanel/3rdparty/bin/php
+X-Source-Args: /usr/local/cpanel/3rdparty/bin/php
+	/usr/local/cpanel/base/horde/imp/compose.php 
+X-Source-Dir: :/base/horde/imp
+Subject: cannot run strip
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,76 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Nov 2006 15:57:09 -0000
+X-List-Received-Date: Mon, 20 Nov 2006 18:53:25 -0000
 Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+	charset=ISO-8859-1;
+	DelSp="Yes";
+	format="flowed"
 Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=B3ek, 20 listopada 2006 16:04, Koen Kooi napisa=B3:
-> Koen Kooi schreef:
-> > Holger Freyther schreef:
+What am I doing wrong? The build can't find strip...
 
-> >> you have done a lot and we are at 459 parser errors and here is the
-> >> list. If you fix it you can officially punch me to finish the parser.
+BBPATH=/home/rob/openembedded/build:/home/rob/openembedded/org.openembedded.oz354x
 
-> and 'only' 160 left in revision
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "akita"
+DISTRO         = "openzaurus"
+DISTRO_VERSION = "3.5.4.1"
+TARGET_FPU     = "soft"
 
-35 errors left but I think that now parser need fixing.
+NOTE: package qemu-native-0.8.2: started
+NOTE: package qemu-native-0.8.2-r1: task do_fetch: started
+NOTE: package qemu-native-0.8.2-r1: task do_fetch: completed
+NOTE: package qemu-native-0.8.2-r1: task do_populate_staging: started
+ERROR: function do_stage failed
 
-ParseError: geode-drivers/geode-v4l2lx_2.6.11.bb :16=20
-ParseError: images/e-image.bb :6=20
-ParseError: tin/tin_1.9.1.bb :15=20
-
-Those looks like this:
-
-export EXTRA_CFLAGS +=3D " -DLINUX_2_6=3D1"
-
-And those ones are:
-
-require ${@bb.data.getVar('P', d , 1).replace('-native-', '_')}.bb
-
-
-ParseError: perl/libalgorithm-diff-perl-native_1.1902.bb :5=20
-ParseError: perl/libarchive-tar-perl-native_1.30.bb :5=20
-ParseError: perl/libcache-cache-perl-native_1.05.bb :5=20
-ParseError: perl/libclass-container-perl-native_0.12.bb :5=20
-ParseError: perl/libclass-data-inheritable-perl-native_0.06.bb :5=20
-ParseError: perl/libcompress-zlib-perl-native_1.42.bb :5=20
-ParseError: perl/libdata-optlist-perl-native_0.101.bb :5=20
-ParseError: perl/libdevel-stacktrace-perl-native_1.13.bb :5=20
-ParseError: perl/libdigest-sha1-perl-native_2.11.bb :5=20
-ParseError: perl/liberror-perl-native_0.17004.bb :5=20
-ParseError: perl/libexception-class-perl-native_1.23.bb :5=20
-ParseError: perl/libextutils-cbuilder-perl-native_0.18.bb :5=20
-ParseError: perl/libextutils-parsexs-perl-native_2.16.bb :5=20
-ParseError: perl/libintl-perl-native_1.11.bb :5=20
-ParseError: perl/libintl-perl-native_1.16.bb :5=20
-ParseError: perl/libio-zlib-perl-native_1.04.bb :5=20
-ParseError: perl/libipc-sharelite-perl-native_0.09.bb :5=20
-ParseError: perl/liblocale-gettext-perl-native_1.05.bb :5=20
-ParseError: perl/liblog-dispatch-perl-native_2.13.bb :5=20
-ParseError: perl/liblog-log4perl-perl-native_1.06.bb :5=20
-ParseError: perl/libmodule-build-perl-native_0.2805.bb :5=20
-ParseError: perl/libnet-ip-perl-native_1.25.bb :5=20
-ParseError: perl/libparams-util-perl-native_0.20.bb :5=20
-ParseError: perl/libparams-validate-perl-native_0.86.bb :5=20
-ParseError: perl/libsub-exporter-perl-native_0.970.bb :5=20
-ParseError: perl/libsub-install-perl-native_0.922.bb :5=20
-ParseError: perl/libsub-uplevel-perl-native_0.13.bb :5=20
-ParseError: perl/libtext-diff-perl-native_0.35.bb :5=20
-ParseError: perl/libversion-perl-native_0.6701.bb :5=20
-ParseError: perl/libxml-parser-perl-native_2.34.bb :5=20
-ParseError: perl/libyaml-perl-native_0.62.bb :5
-=20
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-     This may seem a bit weird, but that's okay, because it is weird.
-                     -- Perl documentation
-
+| install qemu.1 qemu-img.1  
+"/home/rob/openembedded/tmp/staging/i686-linux/share/man/man1"
+| mkdir -p "/home/rob/openembedded/tmp/staging/i686-linux/bin"
+| install -m 755 -s qemu-img  
+"/home/rob/openembedded/tmp/staging/i686-linux/bin"
+| install: cannot run strip: No such file or directory
+| install: strip failed
+| make: *** [install] Error 1
+| FATAL: oe_runmake failed
 
 
 
