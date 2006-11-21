@@ -1,30 +1,22 @@
-Received: from [209.59.181.203] (helo=host2.dedicated4less.com)
+Received: from [203.8.2.122] (helo=mail.einfosolutions.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <s@bigbob.org.uk>) id 1GmEGj-0002G5-IG
+	(envelope-from <Richard.How@einfosolutions.com>) id 1GmKfw-0004P4-MK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Nov 2006 19:53:25 +0100
-Received: from cpanel by host2.dedicated4less.com with local (Exim 4.52)
-	id 1GmEE4-0007Aj-2i for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Nov 2006 13:50:18 -0500
-Received: from 84.12.180.149 ([84.12.180.149]) by bigbob.org.uk (Horde MIME
-	library) with HTTP; Mon, 20 Nov 2006 13:50:15 -0500
-Message-ID: <20061120135015.ckbllosdeokgk8gc@bigbob.org.uk>
-Date: Mon, 20 Nov 2006 13:50:15 -0500
-From: Rob Neild <s@bigbob.org.uk>
+	Tue, 21 Nov 2006 02:43:53 +0100
+Received: from Ubiquitous.localnet ([203.8.2.80] RDNS failed) by
+	mail.einfosolutions.com with Microsoft SMTPSVC(5.0.2195.6713); 
+	Tue, 21 Nov 2006 12:16:16 +1030
+Date: Tue, 21 Nov 2006 12:10:36 +1030
+From: Richard How <Richard.How@einfosolutions.com>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) H3 (4.1.3)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - host2.dedicated4less.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [32001 501] / [47 12]
-X-AntiAbuse: Sender Address Domain - bigbob.org.uk
-X-Source: /usr/local/cpanel/3rdparty/bin/php
-X-Source-Args: /usr/local/cpanel/3rdparty/bin/php
-	/usr/local/cpanel/base/horde/imp/compose.php 
-X-Source-Dir: :/base/horde/imp
-Subject: cannot run strip
+Message-Id: <20061121121036.51999b8a.Richard.How@einfosolutions.com>
+In-Reply-To: <45619EA0.2090801@kernelconcepts.de>
+References: <45619EA0.2090801@kernelconcepts.de>
+X-Mailer: Sylpheed version 2.2.10 (GTK+ 2.6.10; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-OriginalArrivalTime: 21 Nov 2006 01:46:16.0203 (UTC)
+	FILETIME=[D5439DB0:01C70D0E]
+Subject: Re: MIPS32 big endian support?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,40 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Nov 2006 18:53:25 -0000
-Content-Type: text/plain;
-	charset=ISO-8859-1;
-	DelSp="Yes";
-	format="flowed"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 21 Nov 2006 01:43:53 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-What am I doing wrong? The build can't find strip...
+On Mon, 20 Nov 2006 13:25:04 +0100
+Nils Faerber <nils.faerber@kernelconcepts.de> wrote:
 
-BBPATH=/home/rob/openembedded/build:/home/rob/openembedded/org.openembedded.oz354x
+> Hi!
+> Has anyone already experience with OE and MIPS32 big endian configurations?
+> I have a board here which runs big endian for which I might want to
+> create a config for toolchain (SDK) and distribution...
+> 
+> So if anyone has tried that already I would be happy to read a " yes,
+> works like a charm!" ;)
+> 
+> Cheers
+>   nils faerber
 
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux"
-MACHINE        = "akita"
-DISTRO         = "openzaurus"
-DISTRO_VERSION = "3.5.4.1"
-TARGET_FPU     = "soft"
+Hi Nils, works like a charm :) I have MIPS32 big endian development board
+and have succeeded with bitbake meta-gpe, FBReader, sylpheed and
+epdfview. Still awaiting full size screen and touch panel so I can't test
+thoroughly yet, but I have ssh-ed to the board and run GPE apps
+successfully.
 
-NOTE: package qemu-native-0.8.2: started
-NOTE: package qemu-native-0.8.2-r1: task do_fetch: started
-NOTE: package qemu-native-0.8.2-r1: task do_fetch: completed
-NOTE: package qemu-native-0.8.2-r1: task do_populate_staging: started
-ERROR: function do_stage failed
+Regards
 
-| install qemu.1 qemu-img.1  
-"/home/rob/openembedded/tmp/staging/i686-linux/share/man/man1"
-| mkdir -p "/home/rob/openembedded/tmp/staging/i686-linux/bin"
-| install -m 755 -s qemu-img  
-"/home/rob/openembedded/tmp/staging/i686-linux/bin"
-| install: cannot run strip: No such file or directory
-| install: strip failed
-| make: *** [install] Error 1
-| FATAL: oe_runmake failed
-
+Richard
 
 
