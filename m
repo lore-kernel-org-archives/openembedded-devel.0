@@ -1,21 +1,24 @@
-Received: from [203.8.2.122] (helo=mail.einfosolutions.com)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <Richard.How@einfosolutions.com>) id 1GmKfw-0004P4-MK
+	(envelope-from <nils.faerber@kernelconcepts.de>) id 1GmUIP-0003yp-GD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Nov 2006 02:43:53 +0100
-Received: from Ubiquitous.localnet ([203.8.2.80] RDNS failed) by
-	mail.einfosolutions.com with Microsoft SMTPSVC(5.0.2195.6713); 
-	Tue, 21 Nov 2006 12:16:16 +1030
-Date: Tue, 21 Nov 2006 12:10:36 +1030
-From: Richard How <Richard.How@einfosolutions.com>
+	Tue, 21 Nov 2006 13:00:28 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.28])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1GmUmt-0006L3-Sh
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Nov 2006 13:31:43 +0100
+Message-ID: <4562E9A8.4090400@kernelconcepts.de>
+Date: Tue, 21 Nov 2006 12:57:28 +0100
+From: Nils Faerber <nils.faerber@kernelconcepts.de>
+Organization: kernel concepts
+User-Agent: Thunderbird 1.5.0.7 (X11/20060922)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20061121121036.51999b8a.Richard.How@einfosolutions.com>
-In-Reply-To: <45619EA0.2090801@kernelconcepts.de>
 References: <45619EA0.2090801@kernelconcepts.de>
-X-Mailer: Sylpheed version 2.2.10 (GTK+ 2.6.10; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-OriginalArrivalTime: 21 Nov 2006 01:46:16.0203 (UTC)
-	FILETIME=[D5439DB0:01C70D0E]
+	<20061121121036.51999b8a.Richard.How@einfosolutions.com>
+In-Reply-To: <20061121121036.51999b8a.Richard.How@einfosolutions.com>
+X-Enigmail-Version: 0.94.0.0
 Subject: Re: MIPS32 big endian support?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,32 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Nov 2006 01:43:53 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 21 Nov 2006 12:00:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Mon, 20 Nov 2006 13:25:04 +0100
-Nils Faerber <nils.faerber@kernelconcepts.de> wrote:
-
-> Hi!
-> Has anyone already experience with OE and MIPS32 big endian configurations?
-> I have a board here which runs big endian for which I might want to
-> create a config for toolchain (SDK) and distribution...
+Richard How schrieb:
+> On Mon, 20 Nov 2006 13:25:04 +0100
+> Nils Faerber <nils.faerber@kernelconcepts.de> wrote:
+>> Has anyone already experience with OE and MIPS32 big endian configurations?
+>> I have a board here which runs big endian for which I might want to
+>> create a config for toolchain (SDK) and distribution...
+>>
+>> So if anyone has tried that already I would be happy to read a " yes,
+>> works like a charm!" ;)
 > 
-> So if anyone has tried that already I would be happy to read a " yes,
-> works like a charm!" ;)
-> 
-> Cheers
->   nils faerber
+> Hi Nils, works like a charm :) I have MIPS32 big endian development board
+> and have succeeded with bitbake meta-gpe, FBReader, sylpheed and
+> epdfview. Still awaiting full size screen and touch panel so I can't test
+> thoroughly yet, but I have ssh-ed to the board and run GPE apps
+> successfully.
 
-Hi Nils, works like a charm :) I have MIPS32 big endian development board
-and have succeeded with bitbake meta-gpe, FBReader, sylpheed and
-epdfview. Still awaiting full size screen and touch panel so I can't test
-thoroughly yet, but I have ssh-ed to the board and run GPE apps
-successfully.
+Cool!
+Which distribution and machine config did you use? I did not find any
+big endian configs in standard OpenEmbedded...
+Did you use uclibc? Gcc compile failed with uclibc and I had to add two
+minor patches...
 
-Regards
+> Regards
+> Richard
+Cheers
+  nils faerber
 
-Richard
+-- 
+kernel concepts GbR      Tel: +49-271-771091-12
+Dreisbachstr. 24         Fax: +49-271-771091-19
+D-57250 Netphen          Mob: +49-176-21024535
+--
 
 
