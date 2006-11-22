@@ -1,21 +1,24 @@
-Received: from [64.233.182.184] (helo=nf-out-0910.google.com)
+Received: from [64.233.162.198] (helo=nz-out-0102.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <shanevolpe@gmail.com>) id 1Gmice-0003YL-6y
+	(envelope-from <lazy.gopher@googlemail.com>) id 1GmnCg-0002I9-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Nov 2006 04:18:04 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so372383nfc
+	Wed, 22 Nov 2006 09:11:34 +0100
+Received: by nz-out-0102.google.com with SMTP id m22so64380nzf
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Nov 2006 19:15:15 -0800 (PST)
-Received: by 10.78.157.8 with SMTP id f8mr7273438hue.1164165314689;
-	Tue, 21 Nov 2006 19:15:14 -0800 (PST)
-Received: by 10.78.148.13 with HTTP; Tue, 21 Nov 2006 19:15:14 -0800 (PST)
-Message-ID: <8c7950360611211915h39bd4e9bl888c4aeb2b01e006@mail.gmail.com>
-Date: Tue, 21 Nov 2006 22:15:14 -0500
-From: shanevolpe@gmail.com
+	Wed, 22 Nov 2006 00:08:44 -0800 (PST)
+Received: by 10.65.233.16 with SMTP id k16mr11974068qbr.1164182924017;
+	Wed, 22 Nov 2006 00:08:44 -0800 (PST)
+Received: by 10.65.182.17 with HTTP; Wed, 22 Nov 2006 00:08:43 -0800 (PST)
+Message-ID: <5df06e1c0611220008w36d2ec6fp82db43ec6075c82c@mail.gmail.com>
+Date: Wed, 22 Nov 2006 09:08:43 +0100
+From: "Maxim Parkachov" <lazy.gopher@gmail.com>
+Sender: lazy.gopher@googlemail.com
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <200611211944.29813.openembedded@hrw.one.pl>
 MIME-Version: 1.0
 References: <200611211944.29813.openembedded@hrw.one.pl>
+X-Google-Sender-Auth: a550aa3d59363185
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
 Subject: Re: [ERROR] some recipes are unfetchable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,130 +33,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Nov 2006 03:18:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 22 Nov 2006 08:11:35 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-I would prefer not to see directfb removed as I'm currently using it.
-I will submit a patch in the next week or two to update directfb to
-1.0.
+Hi,
+
+I use open323 in my application.
+
+packages/openh323/*
+
+If you could leave this package it would be great.
+I will submit patch in next couple of weeks to make it working again.
+
 Regards,
-Shane
-
-On 11/21/06, Marcin Juszkiewicz <openembedded@hrw.one.pl> wrote:
->
-> Currently I work on creating source mirror and it is progressing nicely.
-> During that time I collected list of unfetchable packages which need
-> fixing or removal.
->
-> Biggest problem is Maemo stuff - we have old (first?) release of it in OE
-> and it is mostly unfetchable currently. Someone need to update it to
-> IT2006 (or newer) or we will remove most of it.
->
-> Next common problem - old Qtopia related applications and games. Many of
-> them are unmaintained upstream so it is also had to find someone who will
-> want to work on fixing them. We will drop them rather.
->
-> Other are misc packages - some of them was not touched during years, most
-> of them has newer version upstream, some was dropped upstream.
->
-> Some packages are machine related but not marked as ones with
-> COMPATIBLE_MACHINE stuff.
->
-> The list:
-> -------------------------------------------------------------------------
-> packages/apr/apr_1.1.1.bb
-> packages/arpwatch/arpwatch_2.1a13.bb
-> packages/billiardz/billiardz_0.1.4.bb
-> packages/bluesnarfer/bluesnarfer.bb
-> packages/ccache/ccache_2.3.bb
-> packages/cdtool/cdtool_2.1.8pre4.bb
-> packages/directfb/directfb_0.9.25.1.bb
-> packages/ekg/ekg_1.5.bb
-> packages/emelfm2/emelfm2_0.0.8.bb
-> packages/ethereal/ethereal_0.99.0.bb
-> packages/gbluezconf/gbluezconf_00.10.bb
-> packages/geode-drivers/geode-v4l2lx_2.6.11.bb
-> packages/giac/giac_0.5.0.bb
-> packages/giftcurs/giftcurs_0.6.2.bb
-> packages/gpe-themes/gpe-theme-foxbox_0.1.bb
-> packages/hvsc/hvsc_5.8.bb
-> packages/ica/ica-bin_8.0.bb
-> packages/intercom/intercom_0.15.bb
-> packages/irssi/xirssi_cvs.bb
-> packages/ixp4xx/ixp-osal_2.1.bb
-> packages/ixp4xx/ixp4xx-npe-native_2.3.bb
-> packages/juce/juce_1.29.bb
-> packages/libedit/libedit_20050118.bb
-> packages/libeina/libeina_0.96.7.bb
-> packages/libmikey/libmikey0_0.3.2.bb
-> packages/libmikey/libmikey_0.1a.bb
-> packages/libmnetutil/libmnetutil0_0.2.2.bb
-> packages/libnet/libnet_1.0.2a.bb
-> packages/libnet/libnet_1.1.2.1.bb
-> packages/libqanava/libqanava_0.0.7.bb
-> packages/librcf/librcf_0.4.bb
-> packages/libtomcrypt/libtomcrypt_0.97b.bb
-> packages/linphone/linphone_1.3.99.8.bb
-> packages/live555/live555_20051005.bb
-> packages/lm_sensors/lmsensors-apps_2.10.0.bb
-> packages/maradns/maradns_1.0.23.bb
-> packages/masqmail/masqmail_0.2.20.bb
-> packages/matchbox-applet-cards/matchbox-applet-cards_1.0.2.bb
-> packages/micro-emacs/micro-emacs_20040301.bb
-> packages/militaryalphabet/militaryalphabet_0.2.1.bb
-> packages/mono/mono-native_1.0.bb
-> packages/ncftp/ncftp_3.1.9.bb
-> packages/nvidia-drivers/nvidia-display_1.0-8756.bb
-> packages/nvidia-drivers/nvidia-nforce_1.0-0310.bb
-> packages/nylon/nylon-scripts_cvs.bb
-> packages/olsr/olsr_0.3-1.bb
-> packages/opencvs/opencvs_cvs.bb
-> packages/openh323/openh323_1.13.5.4.bb
-> packages/pdm/pdm_1.0.bb
-> packages/phalanx/phalanx_22.bb
-> packages/pmount/pmount_0.9.4.bb
-> packages/pmtools/pmtools_20050926.bb
-> packages/poboxserver/poboxserver_1.2.5.bb
-> packages/prism54/prism54-module_cvs.bb
-> packages/puzzles/puzzles_r6727.bb
-> packages/python/python-sip4_4.4.5.bb
-> packages/qc-usb/qc-usb-messenger_1.1.bb
-> packages/rlpr/rlpr_2.05.bb
-> packages/rp-pppoe/rp-pppoe_3.5.bb
-> packages/rsync/rsync_2.6.8.bb
-> packages/sane-backends/sane-backends_1.0.15.bb
-> packages/scummvm/opie-scummvm_1.0.1.bb
-> packages/scw/scw_0.4.2.bb
-> packages/silo/silo_1.4.8.bb
-> packages/socat/socat_1.3.2.1.bb
-> packages/spca5xx/spca5xx_20060202.bb
-> packages/tapioca/libjingle-tapioca_svn.bb
-> packages/tickypip/tickypip_0.1.2.bb
-> packages/u2nl/u2nl_1.1.bb
-> packages/uml-utilities/uml-utilities_20040406.bb
-> packages/wrt/wrt-utils.bb
-> packages/xerces-c/xerces-c_2.6.0.bb
-> packages/xscreensaver/xscreensaver_4.22.bb
->
->
-> --
-> JID: hrw-jabber.org
-> OpenEmbedded developer/consultant
->
->  BSD is for people who love Unix. Linux is for people who hate Microsoft.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
--- 
-Registered Linux User: #293401
-
+Maxim Parkachov.
 
