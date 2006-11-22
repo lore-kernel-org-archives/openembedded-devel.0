@@ -1,40 +1,22 @@
-Received: from [62.5.255.22] (helo=umail.ru)
+Received: from [66.249.92.173] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <abondarenko@gmail.com>) id 1Gmwrp-00005h-Sc
+	(envelope-from <andrew.paulsen@gmail.com>) id 1GmzYd-00053f-NJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Nov 2006 19:30:42 +0100
-Received: from [85.141.163.75] (HELO localhost)
-	by fe02-umail.umail.ru (CommuniGate Pro SMTP 5.0.12)
-	with ESMTP id 48023329 for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Nov 2006 21:27:39 +0300
-Received: from localhost.localdomain (localhost [127.0.0.1])
-	by localhost.localdomain (Postfix) with ESMTP id 3168EBB52E1
+	Wed, 22 Nov 2006 22:23:03 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so263993ugf
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Nov 2006 21:27:39 +0300 (MSK)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by localhost (Postfix) with ESMTP id 3CA2ABB52E0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Nov 2006 21:27:29 +0300 (MSK)
-From: Andrey A Bondarenko <abondarenko@gmail.com>
+	Wed, 22 Nov 2006 13:20:10 -0800 (PST)
+Received: by 10.78.128.11 with SMTP id a11mr8277939hud.1164230409466;
+	Wed, 22 Nov 2006 13:20:09 -0800 (PST)
+Received: by 10.78.159.2 with HTTP; Wed, 22 Nov 2006 13:20:09 -0800 (PST)
+Message-ID: <d46153c40611221320l1226d03dtb2948a8f42a04cdd@mail.gmail.com>
+Date: Wed, 22 Nov 2006 15:20:09 -0600
+From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Organization: KL
-Date: Wed, 22 Nov 2006 21:27:28 +0300
-Message-Id: <1164220048.821.1.camel@localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.8.1.1 (2.8.1.1-3.fc6) 
-X-SpamTest-Envelope-From: abondarenko@gmail.com
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 496 [Nov 22 2006]
-X-SpamTest-Method: none
-X-SpamTest-Rate: 0
-X-SpamTest-SPF: pass
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0242], KAS30/Release
-X-Anti-Virus: Kaspersky Anti-Virus for MailServers 5.5.10/RELEASE,
-	bases: 22112006 #230201, status: clean
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Glibc for Angstrom fails to build
+In-Reply-To: <d46153c40611220800m4e715362v713c24f5853238@mail.gmail.com>
+MIME-Version: 1.0
+References: <d46153c40611220800m4e715362v713c24f5853238@mail.gmail.com>
+Subject: Re: Angstrom, compulab-pxa270, and gpe-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -48,60 +30,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Nov 2006 18:30:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 22 Nov 2006 21:23:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello!
+On 11/22/06, Andrew Paulsen <andrew.paulsen@gmail.com> wrote:
+> I'm trying to "bitbake gpe-image" using the Angstrom distribution and
+> the computlab-pxa270 machine.
+>
+> The error I'm getting is:
+>
+> NOTE: build 200611220923: started
+>
+> OE Build Configuration:
+> BB_VERSION     = "1.6.3"
+> OE_REVISION    = "2735a1770517f8ac5497ef178efb990839a57508"
+> TARGET_ARCH    = "arm"
+> TARGET_OS      = "linux-gnueabi"
+> MACHINE        = "compulab-pxa270"
+> DISTRO         = "angstrom"
+> DISTRO_VERSION = "test-20061122"
+> TARGET_FPU     = "soft"
+>
+> <snip>
+>
+> | make[2]: Entering directory
+> `/home/packet/OpenEmbedded/build/tmp/work/compulab-pxa270-angstrom-linux-gnueabi/compulab-pxa270-2.6.16-r2/linux-2.6.16'
+> |   CC      drivers/block/rd.o
+> |   CC      drivers/block/loop.o
+> | make[3]: Entering directory
+> `/home/packet/OpenEmbedded/build/tmp/work/compulab-pxa270-angstrom-linux-gnueabi/compulab-pxa270-2.6.16-r2/linux-2.6.16'
+> |   CC      drivers/block/cl_flash/cl_nordev.o
+> | drivers/block/cl_flash/cl_nordev.c:359: warning: initialization from
+> incompatible pointer type
+> | drivers/block/cl_flash/cl_nordev.c:29: warning: 'major' defined but not used
+> | drivers/block/cl_flash/cl_nordev.c:163: warning: 'do_flash_request'
+> defined but not used
+> | drivers/block/cl_flash/cl_nordev.c:76: warning: 'flash_fops' defined
+> but not used
+> | drivers/block/cl_flash/cl_nordev.c:86: warning: 'flash_gendisk'
+> defined but not used
+> | drivers/block/cl_flash/cl_nordev.c:87: warning: 'flash_lock' defined
+> but not used
+> | drivers/block/cl_flash/cl_nordev.c:88: warning: 'flash_queue'
+> defined but not used
+> |   CC      drivers/block/cl_flash/cl_blkdev.o
+> | drivers/block/cl_flash/cl_blkdev.c: In function 'cl_nand_ioctl':
+> | drivers/block/cl_flash/cl_blkdev.c:529: warning: ISO C90 forbids
+> mixed declarations and code
+> |   CC      drivers/block/cl_flash/cl_nanddev_x270.o
+> |   LD      drivers/block/cl_flash/fdrv.o
+> | arm-angstrom-linux-gnueabi-ld: ERROR:
+> drivers/block/cl_flash/CL_FlashDrv uses FPA instructions, whereas
+> drivers/block/cl_flash/fdrv.o does not
+> | arm-angstrom-linux-gnueabi-ld: failed to merge target specific data
+> of file drivers/block/cl_flash/CL_FlashDrv
+> | make[3]: *** [drivers/block/cl_flash/fdrv.o] Error 1
+> | make[3]: Leaving directory
+> `/home/packet/OpenEmbedded/build/tmp/work/compulab-pxa270-angstrom-linux-gnueabi/compulab-pxa270-2.6.16-r2/linux-2.6.16'
+> | make[2]: *** [drivers/block/cl_flash] Error 2
+> | make[2]: Leaving directory
+> `/home/packet/OpenEmbedded/build/tmp/work/compulab-pxa270-angstrom-linux-gnueabi/compulab-pxa270-2.6.16-r2/linux-2.6.16'
+> | make[1]: *** [drivers/block] Error 2
+> | make[1]: Leaving directory
+> `/home/packet/OpenEmbedded/build/tmp/work/compulab-pxa270-angstrom-linux-gnueabi/compulab-pxa270-2.6.16-r2/linux-2.6.16'
+> | make: *** [drivers] Error 2
+> | FATAL: oe_runmake failed
+> NOTE: Task failed:
+> /home/packet/OpenEmbedded/build/tmp/work/compulab-pxa270-angstrom-linux-gnueabi/compulab-pxa270-2.6.16-r2/temp/log.do_compile.22708
+> NOTE: package compulab-pxa270-2.6.16-r2: task do_compile: failed
+>
 
-I am just fallowing the manual on the oe.org site. I can not build glibc
-(i.e. can not build anything). I am using gcc 3.4 on Fedora Core 6.
+Upon further inspection, it appears that the distribution is built
+with attributes [VFP float format] [software FP], while the
+CL_FlashDrv binary from Compulab has attributes [FPA float format]
+[software FP], thus the error.
 
-[shaman@localhost build]$ bitbake gpe-image
-NOTE: Using cache in '/OE/build/tmp/cache/hx4700'
-NOTE: Handling BitBake files: / (4045/4045) [100 %]
-NOTE: Parsing finished. 3882 cached, 0 parsed, 163 skipped, 0 masked.
-
-NOTE: build 200611222009: started
-
-OE Build Configuration:
-BB_VERSION     = "1.6.3"
-OE_REVISION    = "7faa9e1500d9ce5c29c1b92c2545f05b296a34ea"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux-gnueabi"
-MACHINE        = "hx4700"
-DISTRO         = "angstrom"
-DISTRO_VERSION = "test-20061122"
-TARGET_FPU     = "soft"
-
-NOTE: preferred version 2.5 of glibc not available
-NOTE: package glibc-2.5: started
-NOTE: package glibc-2.5-r3: task do_compile: started
-NOTE: SITE
-files /OE/org.openembedded.dev/site/endian-little /OE/org.openembedded.dev/site/arm-linux 
-NOTE: package glibc-2.5-r3: task do_compile: completed
-NOTE: package glibc-2.5-r3: task do_install: started
-NOTE: SITE
-files /OE/org.openembedded.dev/site/endian-little /OE/org.openembedded.dev/site/arm-linux 
-NOTE: package glibc-2.5-r3: task do_install: completed
-NOTE: package glibc-2.5-r3: task do_package: started
-NOTE: preparing tree for binary locale generation
-NOTE: SITE
-files /OE/org.openembedded.dev/site/endian-little /OE/org.openembedded.dev/site/arm-linux 
-NOTE: generating locale es_NI (UTF-8)
-NOTE: Task failed: localedef returned an error (command was
-PATH="/OE/build/tmp/staging/i686-linux/bin/arm-angstrom-linux-gnueabi:/OE/build/tmp/staging/i686-linux/bin:/OE/build/tmp/cross/bin:/OE/bitbake/bin/:/usr/lib/qt-3.3/bin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/shaman/bin" I18NPATH="/usr/share/i18n" qemu-arm -r 2.6.16 -L /OE/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.5-r3/locale-tree /OE/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.5-r3/locale-tree/bin/localedef --force --old-style --no-archive --prefix=/OE/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.5-r3/locale-tree --inputfile=/usr/share/i18n/locales/es_NI --charmap=UTF-8 es_NI).
-NOTE: package glibc-2.5-r3: task do_package: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package glibc-2.5: failed
-ERROR: Build of gpe-image failed
-
--- 
-WBR,
-Andrey "Shaman007" Bondarenko
-
-http://mobilelinux.ru
-http://mobilelinux.ru/wiki
-
+Is there a way around this?
 
 
