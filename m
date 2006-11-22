@@ -1,26 +1,24 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.82.230] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GmaiL-0007ZL-LY
-	for openembedded-devel@openembedded.org; Tue, 21 Nov 2006 19:51:25 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kALImbLr029088 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Nov 2006 19:48:37 +0100
-Message-ID: <45634A00.1010307@dominion.kabel.utwente.nl>
-Date: Tue, 21 Nov 2006 19:48:32 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+	(envelope-from <papercrane@gmail.com>) id 1GmgNz-0007uV-C4
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Nov 2006 01:54:47 +0100
+Received: by wx-out-0506.google.com with SMTP id t14so45909wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Nov 2006 16:51:58 -0800 (PST)
+Received: by 10.90.65.11 with SMTP id n11mr6325301aga.1164156718622;
+	Tue, 21 Nov 2006 16:51:58 -0800 (PST)
+Received: by 10.35.119.19 with HTTP; Tue, 21 Nov 2006 16:51:58 -0800 (PST)
+Message-ID: <432beae0611211651g6b538150x518608f9c8b56dc0@mail.gmail.com>
+Date: Tue, 21 Nov 2006 16:51:58 -0800
+From: "Justin Patrin" <papercrane@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4561C0E1.1030001@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200611211944.29813.openembedded@hrw.one.pl>
-In-Reply-To: <200611211944.29813.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [ERROR] some recipes are unfetchable
+References: <0EC479DC-CDAB-4F46-8910-E02AB1D9017B@inf.fu-berlin.de>
+	<4561C0E1.1030001@dominion.kabel.utwente.nl>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: ParseErrors, Continued
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,51 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Nov 2006 18:51:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Nov 2006 00:54:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 11/20/06, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> Holger Freyther schreef:
+> > Hey,
+> >
+> > you have done a lot and we are at 459 parser errors and here is the
+> > list. If you fix it you can officially punch me to finish the parser.
+>
+> Only 182 ones left in rcf74582c2f1f66b88ee6661c6cdf7de75b0df961
+> :
+>
+> /Users/koen/Projects/OpenEmbedded/org.openembedded.dev/packages/images/e-image.bb:6
 
-Marcin Juszkiewicz schreef:
-> Currently I work on creating source mirror and it is progressing nicely. 
-> During that time I collected list of unfetchable packages which need 
-> fixing or removal.
-> 
-> Biggest problem is Maemo stuff - we have old (first?) release of it in OE 
-> and it is mostly unfetchable currently. Someone need to update it to 
-> IT2006 (or newer) or we will remove most of it.
+Is this an error? It has always worked just fine. I'm guessing that
+the combination of export and += is causing the error. I just ran a
+"peek" in bitbake -i and it seems to be working as expected.
 
-Right, it's listed in removal.txt
-
-> 
-> Next common problem - old Qtopia related applications and games. Many of 
-> them are unmaintained upstream so it is also had to find someone who will 
-> want to work on fixing them. We will drop them rather.
-
-Add those to removal.txt
-
-> Other are misc packages - some of them was not touched during years, most 
-> of them has newer version upstream, some was dropped upstream.
-
-Add those to removal.txt as well
-
-
-> Some packages are machine related but not marked as ones with 
-> COMPATIBLE_MACHINE stuff.
-
-Let's add COMPATIBLE_MACHINE to those.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFY0oAMkyGM64RGpERAjZaAKCRbnouhkFszxZ2Ivx6ryJJ296ZIgCgsnRV
-5LPmj9UKr2+RCV06QQ5bs1g=
-=ApMI
------END PGP SIGNATURE-----
+-- 
+Justin Patrin
 
 
