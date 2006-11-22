@@ -1,25 +1,34 @@
-Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cliff.brake@gmail.com>) id 1Gn0zf-0007Ab-KT
+	(envelope-from <lenehan@twibble.org>) id 1Gn1Ex-0007OM-T7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Nov 2006 23:55:03 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so280863ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Nov 2006 14:52:10 -0800 (PST)
-Received: by 10.78.69.7 with SMTP id r7mr8324339hua.1164235929928;
-	Wed, 22 Nov 2006 14:52:09 -0800 (PST)
-Received: by 10.78.164.9 with HTTP; Wed, 22 Nov 2006 14:52:09 -0800 (PST)
-Message-ID: <f96d234e0611221452u6d2a8e01i6df017ce235624a4@mail.gmail.com>
-Date: Wed, 22 Nov 2006 17:52:09 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d46153c40611221336h2fcb9ae3rabf5776b260a494d@mail.gmail.com>
-MIME-Version: 1.0
-References: <d46153c40611220800m4e715362v713c24f5853238@mail.gmail.com>
-	<d46153c40611221320l1226d03dtb2948a8f42a04cdd@mail.gmail.com>
-	<f96d234e0611221324o352521ddj229fb267b995396b@mail.gmail.com>
-	<d46153c40611221336h2fcb9ae3rabf5776b260a494d@mail.gmail.com>
-Subject: Re: Angstrom, compulab-pxa270, and gpe-image
+	Thu, 23 Nov 2006 00:10:52 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id 4A370BD4BE;
+	Thu, 23 Nov 2006 10:07:57 +1100 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 04219-08; Thu, 23 Nov 2006 10:07:55 +1100 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 03CE0BD4BD;
+	Thu, 23 Nov 2006 10:07:55 +1100 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id EEE781631DA4; Thu, 23 Nov 2006 10:07:54 +1100 (EST)
+Date: Thu, 23 Nov 2006 10:07:54 +1100
+From: Jamie Lenehan <lenehan@twibble.org>
+To: Paul Sokolovsky <pmiscml@gmail.com>
+Message-ID: <20061122230754.GA20164@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	Paul Sokolovsky <pmiscml@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20061120043254.GA19760@twibble.org>
+	<1616846329.20061122174526@gmail.com>
+Mime-Version: 1.0
+In-Reply-To: <1616846329.20061122174526@gmail.com>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Changes to populate-volatile.sh / new volatiles class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,27 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Nov 2006 22:55:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Nov 2006 23:10:52 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On 11/22/06, Andrew Paulsen <andrew.paulsen@gmail.com> wrote:
-> On 11/22/06, Cliff Brake <cliff.brake@gmail.com> wrote:
-> > Things are working here with a non-EABI toolchain -- you may want to try that.
-> >
->
-> Can you tell me how to do this?  Do I just make a change to the
-> local.conf or is it more involved than that?
+On Wed, Nov 22, 2006 at 05:45:26PM +0200, Paul Sokolovsky wrote:
+[...]
+>   Jamie, doing something about populate-volatile.sh is good. Once I
+> found it to be taking pretty long time on load, but it was with
+> Familiar. I know that OE uses cache and that should help. Still,
+> didn't you think about nice short populate-volatile.c? I guess, config
 
-Try the generic distro.  I have not updated my tree in probably 2
-weeks, but it may work.
+I haven't really noticed any issues with it from a speed point of
+view (too busy noticing it not working when I add packages) so I
+didn't think about a C version. That update-alternatives thing on the
+other hand I have definately been thinking about redoing in C when I
+get a chance - it's painfully slow. But yeah, it should be pretty
+trivial to do populate-volatiles in C and that would remove the need
+for the cache thing altogether.
 
-Cliff
+For now I'm probably more concerned with fixing the things that are
+broken then making things work faster ;)
 
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+ Jamie Lenehan <lenehan@twibble.org>
 
 
