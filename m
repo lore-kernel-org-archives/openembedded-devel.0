@@ -1,23 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GndZT-0005kU-0m
-	for openembedded-devel@openembedded.org; Fri, 24 Nov 2006 17:06:35 +0100
-Received: (qmail 13817 invoked by uid 813007); 24 Nov 2006 16:03:30 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 24 Nov 2006 16:03:30 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Nov 2006 17:03:26 +0100
-User-Agent: KMail/1.9.5
+	(envelope-from <rpurdie@rpsys.net>) id 1GnfKU-0007mw-Ir
+	for openembedded-devel@openembedded.org; Fri, 24 Nov 2006 18:59:14 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAOHuArG001891
+	for <openembedded-devel@openembedded.org>; Fri, 24 Nov 2006 17:56:10 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 01459-06 for <openembedded-devel@openembedded.org>;
+	Fri, 24 Nov 2006 17:56:08 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAOHu5gM001866
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 24 Nov 2006 17:56:05 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200611241703.26332.openembedded@hrw.one.pl>
 References: <200610291528.40663.openembedded@hrw.one.pl>
 	<200611170101.06186.openembedded@hrw.one.pl>
 	<1163755540.5551.4.camel@localhost.localdomain>
-In-Reply-To: <1163755540.5551.4.camel@localhost.localdomain>
-Organization: OpenEmbedded
-MIME-Version: 1.0
-Message-Id: <200611241703.26332.openembedded@hrw.one.pl>
+	<200611241703.26332.openembedded@hrw.one.pl>
+Date: Fri, 24 Nov 2006 17:56:11 +0000
+Message-Id: <1164390972.26934.33.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: RFC: handling of machine/distro features stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,49 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Nov 2006 16:06:35 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Nov 2006 17:59:14 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=C4=85tek, 17 listopada 2006 10:25, Richard Purdie napisa=C5=82:
-> > Which points me to this idea: how about adding COMBINED_FEATURES into
-> > overrides? I do not know will it slow down BitBake or make metadata
-> > bit more ugly but it is kind of solution.
+On Fri, 2006-11-24 at 17:03 +0100, Marcin Juszkiewicz wrote:
+> Koen suggested other solution - marking packages MACHINE specific when
+> COMBINED_FEATURES are used. For example wpa-supplicant will get this:
+>[...]
+> Opinions?
 
-> Also, this would automatically make any package machine specific and
-> make multimachine pointless (anything using COMBINED_FEATURES is machine
-> specific).
+Looks good to me.
 
-Koen suggested other solution - marking packages MACHINE specific when
-COMBINED_FEATURES are used. For example wpa-supplicant will get this:
+Cheers,
 
-DEPENDS =3D "gnutls ${@base_contains('COMBINED_FEATURES', 'pci', 'madwifi-n=
-g', '',d)}"
-PACKAGE_ARCH =3D "${@base_contains('COMBINED_FEATURES', 'pci', ${MACHINE}, =
-${TARGET_ARCH}, d)}"
-
-export HAS_PCI =3D ${@base_contains('COMBINED_FEATURES', 'pci', 1, 0,d)}
-
-do_configure () {
-        install -m 0755 ${WORKDIR}/defconfig-gnutls  .config
-
-        if [ "x$HAS_PCI" =3D=3D "x1" ] then; do
-                echo "CONFIG_DRIVER_MADWIFI=3Dy" >> .config
-                echo "CFLAGS +=3D -I${STAGING_INCDIR}/madwifi-ng" >> .config
-        fi
-}
-
-Opinions?
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-        "To be or not to be that is the question.":
-         every programmer knows the answer $2b or (not $2b) is $ff.
-
+Richard
 
 
 
