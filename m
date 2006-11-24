@@ -1,26 +1,24 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gnbxk-0003rm-K3
-	for openembedded-devel@openembedded.org; Fri, 24 Nov 2006 15:23:32 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kAOEKOox027590 for <openembedded-devel@openembedded.org>;
-	Fri, 24 Nov 2006 15:20:25 +0100
-Message-ID: <4566FFA2.2030209@dominion.kabel.utwente.nl>
-Date: Fri, 24 Nov 2006 15:20:18 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+	(envelope-from <openembedded@hrw.one.pl>) id 1GndZT-0005kU-0m
+	for openembedded-devel@openembedded.org; Fri, 24 Nov 2006 17:06:35 +0100
+Received: (qmail 13817 invoked by uid 813007); 24 Nov 2006 16:03:30 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 24 Nov 2006 16:03:30 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Nov 2006 17:03:26 +0100
+User-Agent: KMail/1.9.5
+References: <200610291528.40663.openembedded@hrw.one.pl>
+	<200611170101.06186.openembedded@hrw.one.pl>
+	<1163755540.5551.4.camel@localhost.localdomain>
+In-Reply-To: <1163755540.5551.4.camel@localhost.localdomain>
+Organization: OpenEmbedded
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1164377635.26934.25.camel@localhost.localdomain>
-In-Reply-To: <1164377635.26934.25.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: STAGING_BINDIR
+Message-Id: <200611241703.26332.openembedded@hrw.one.pl>
+Subject: Re: RFC: handling of machine/distro features stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,30 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Nov 2006 14:23:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Nov 2006 16:06:35 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia pi=C4=85tek, 17 listopada 2006 10:25, Richard Purdie napisa=C5=82:
+> > Which points me to this idea: how about adding COMBINED_FEATURES into
+> > overrides? I do not know will it slow down BitBake or make metadata
+> > bit more ugly but it is kind of solution.
 
-Richard Purdie schreef:
+> Also, this would automatically make any package machine specific and
+> make multimachine pointless (anything using COMBINED_FEATURES is machine
+> specific).
 
-> What happens when we start using packaged staging and ${HOST_SYS}/bin
-> contains arm binaries? Our staging generally doesn't at the moment but
-> is likely to in future and we do not want arm binaries in PATH.
+Koen suggested other solution - marking packages MACHINE specific when
+COMBINED_FEATURES are used. For example wpa-supplicant will get this:
 
-Ncurses seems to cause exactly that when used with packaged-staging :(
+DEPENDS =3D "gnutls ${@base_contains('COMBINED_FEATURES', 'pci', 'madwifi-n=
+g', '',d)}"
+PACKAGE_ARCH =3D "${@base_contains('COMBINED_FEATURES', 'pci', ${MACHINE}, =
+${TARGET_ARCH}, d)}"
 
-regards,
+export HAS_PCI =3D ${@base_contains('COMBINED_FEATURES', 'pci', 1, 0,d)}
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+do_configure () {
+        install -m 0755 ${WORKDIR}/defconfig-gnutls  .config
 
-iD8DBQFFZv+hMkyGM64RGpERAo6IAJ9hGAK5SKLY0ojq6NKjfueoZfmsFQCgluYP
-8xrnYljfuiJCTnFroZzPXpc=
-=kOC0
------END PGP SIGNATURE-----
+        if [ "x$HAS_PCI" =3D=3D "x1" ] then; do
+                echo "CONFIG_DRIVER_MADWIFI=3Dy" >> .config
+                echo "CFLAGS +=3D -I${STAGING_INCDIR}/madwifi-ng" >> .config
+        fi
+}
+
+Opinions?
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+        "To be or not to be that is the question.":
+         every programmer knows the answer $2b or (not $2b) is $ff.
+
+
 
 
