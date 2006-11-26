@@ -1,20 +1,23 @@
-Received: from [67.19.73.58] (helo=pug.o-hand.com)
+Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <richard@openedhand.com>) id 1Gnajw-0001I9-BJ
-	for openembedded-devel@openembedded.org; Fri, 24 Nov 2006 14:05:12 +0100
-Received: from max.rpnet.com (tim.rpsys.net [194.106.48.114])
-	(using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id 34D3D10CC42F;
-	Fri, 24 Nov 2006 08:12:35 -0500 (EST)
-From: Richard Purdie <richard@openedhand.com>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Fri, 24 Nov 2006 13:01:57 +0000
-Message-Id: <1164373318.26934.14.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Mailman-Approved-At: Sat, 25 Nov 2006 18:27:00 +0100
-Subject: STAGING_BINDIR
+	(envelope-from <mpanczyk@gmail.com>) id 1Go86s-00058f-4K
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 26 Nov 2006 01:43:06 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so755555ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Nov 2006 16:39:52 -0800 (PST)
+Received: by 10.66.255.7 with SMTP id c7mr9734230ugi.1164501591929;
+	Sat, 25 Nov 2006 16:39:51 -0800 (PST)
+Received: by 10.66.225.10 with HTTP; Sat, 25 Nov 2006 16:39:51 -0800 (PST)
+Message-ID: <abf5c18a0611251639j135fe977g630e7c815d25ff20@mail.gmail.com>
+Date: Sun, 26 Nov 2006 01:39:51 +0100
+From: "Michal Panczyk" <mpanczyk@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1164220048.821.1.camel@localhost>
+MIME-Version: 1.0
+References: <1164220048.821.1.camel@localhost>
+X-Mailman-Approved-At: Sun, 26 Nov 2006 12:13:00 +0100
+Subject: Re: Glibc for Angstrom fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,74 +31,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Nov 2006 13:05:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 26 Nov 2006 00:43:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+Hi !
+I am not sure if You still need help with that.
+I had similar problems while building image for h2200.
 
-I have hit a problem. At first I thought it was going to be a simple one
-but it isn't and raises a question I've wondered about for a long time.
+Have You tried playing with Your build config like
 
-The problem is I had both an x86 build and an arm build in the same tree
-with multimachine. In theory, this should work and it very nearly does
-except I see odd compile failures in gnutls. The compile failures turn
-out to be from x86 assembler. The x86 assembler is creeping in due to
-corrupted include parameters from gcc. The corrupted parameters are
-coming from running the "libgcrypt-config" binary. 
+# adding qemu-native to ASSUME_PROVIDED
+ENABLE_BINARY_LOCALE_GENERATION = "0"
+ASSUME_PROVIDED += "qemu-native"
 
-To make things more interesting, this only happens if you build x86,
-then arm. If you build arm first, it all works...
+?
 
-Basically we have a race. Both the armv5te libgcrypt build and the x86
-libgcrypt build install the "libgcrypt-config" binary into
-STAGING_BINDIR.
+My problem was that image for h2200 was build with gcc >v4 (inside the
+OE). Additionally to the config above You need to have the qemu
+package on Your system which is not going to be a problem if You are
+using gcc3.
 
-from bitbake.conf we see:
+I hope it helps ...
 
-STAGING_DIR = "${TMPDIR}/staging"
-STAGING_BINDIR = "${STAGING_DIR}/${BUILD_SYS}/bin"
-STAGING_LIBDIR = "${STAGING_DIR}/${HOST_SYS}/lib"
-STAGING_INCDIR = "${STAGING_DIR}/${HOST_SYS}/include"
-STAGING_DATADIR = "${STAGING_DIR}/${HOST_SYS}/share"
-STAGING_LOADER_DIR = "${STAGING_DIR}/${HOST_SYS}/loader"
-STAGING_FIRMWARE_DIR = "${STAGING_DIR}/${HOST_SYS}/firmware"
+Michal
 
-which has always struck me as odd - BINDIR uses ${BUILD_SYS} rather than
-${HOST_SYS}. I did discuss this a long time ago when I was a lot newer
-to OE. multimachine wasn't as widely supported than and it was argued
-that since binaries installed there were to be run on ${BUILD_SYS}
-rather than ${HOST_SYS}, this was really ok. If we change this to
-${HOST_SYS}, my build issues would disappear as the arm and x86 versions
-will end up in different places. I think the time has come to do
-something about this but its not that simple :)
+On 11/22/06, Andrey A Bondarenko <abondarenko@gmail.com> wrote:
+> Hello!
+>
+> I am just fallowing the manual on the oe.org site. I can not build glibc
+> (i.e. can not build anything). I am using gcc 3.4 on Fedora Core 6.
+>
+> [shaman@localhost build]$ bitbake gpe-image
+> NOTE: Using cache in '/OE/build/tmp/cache/hx4700'
+> NOTE: Handling BitBake files: / (4045/4045) [100 %]
+> NOTE: Parsing finished. 3882 cached, 0 parsed, 163 skipped, 0 masked.
+>
+> NOTE: build 200611222009: started
+>
+> OE Build Configuration:
+> BB_VERSION     = "1.6.3"
+> OE_REVISION    = "7faa9e1500d9ce5c29c1b92c2545f05b296a34ea"
+> TARGET_ARCH    = "arm"
+> TARGET_OS      = "linux-gnueabi"
+> MACHINE        = "hx4700"
+> DISTRO         = "angstrom"
+> DISTRO_VERSION = "test-20061122"
+> TARGET_FPU     = "soft"
+>
+> NOTE: preferred version 2.5 of glibc not available
+> NOTE: package glibc-2.5: started
+> NOTE: package glibc-2.5-r3: task do_compile: started
+> NOTE: SITE
+> files /OE/org.openembedded.dev/site/endian-little /OE/org.openembedded.dev/site/arm-linux
+> NOTE: package glibc-2.5-r3: task do_compile: completed
+> NOTE: package glibc-2.5-r3: task do_install: started
+> NOTE: SITE
+> files /OE/org.openembedded.dev/site/endian-little /OE/org.openembedded.dev/site/arm-linux
+> NOTE: package glibc-2.5-r3: task do_install: completed
+> NOTE: package glibc-2.5-r3: task do_package: started
+> NOTE: preparing tree for binary locale generation
+> NOTE: SITE
+> files /OE/org.openembedded.dev/site/endian-little /OE/org.openembedded.dev/site/arm-linux
+> NOTE: generating locale es_NI (UTF-8)
+> NOTE: Task failed: localedef returned an error (command was
+> PATH="/OE/build/tmp/staging/i686-linux/bin/arm-angstrom-linux-gnueabi:/OE/build/tmp/staging/i686-linux/bin:/OE/build/tmp/cross/bin:/OE/bitbake/bin/:/usr/lib/qt-3.3/bin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/shaman/bin" I18NPATH="/usr/share/i18n" qemu-arm -r 2.6.16 -L /OE/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.5-r3/locale-tree /OE/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.5-r3/locale-tree/bin/localedef --force --old-style --no-archive --prefix=/OE/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.5-r3/locale-tree --inputfile=/usr/share/i18n/locales/es_NI --charmap=UTF-8 es_NI).
+> NOTE: package glibc-2.5-r3: task do_package: failed
+> ERROR: TaskFailed event exception, aborting
+> NOTE: package glibc-2.5: failed
+> ERROR: Build of gpe-image failed
+>
+> --
+> WBR,
+> Andrey "Shaman007" Bondarenko
+>
+> http://mobilelinux.ru
+> http://mobilelinux.ru/wiki
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-The -native packages install to ${BUILD_SYS}/bin and the arch specific
-ones to ${HOST_SYS}/bin. So we add both to PATH, problem solved?
 
-What happens when we start using packaged staging and ${HOST_SYS}/bin
-contains arm binaries? Our staging generally doesn't at the moment but
-is likely to in future and we do not want arm binaries in PATH.
+-- 
 
-My proposal is therefore to use:
-
-STAGING_BINDIR = "${STAGING_DIR}/${BUILD_SYS}/bin/${HOST_SYS}" and have
-native.bbclass override this with ${BUILD_SYS}/bin
-
-We'd then add both ${BUILD_SYS}/bin and ${BUILD_SYS}/bin/${HOST_SYS} to
-the PATH.
-
-Does anyone see a better way to handle this?
-
-I suspect there are going to be problems with binaries missing from
-${STAGING_BINDIR} when we switch to packages staging. I just wonder why
-we haven't see those problems with packaged staging yet? Is anyone
-actively using/testing it?
-
-Regards,
-
-Richard
-
-
+Michal
 
 
