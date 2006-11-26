@@ -1,30 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1GoRSg-0004q7-Qk
-	for openembedded-devel@openembedded.org; Sun, 26 Nov 2006 22:22:55 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAQLMqiJ014505
-	for <openembedded-devel@openembedded.org>; Sun, 26 Nov 2006 21:22:52 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13874-08 for <openembedded-devel@openembedded.org>;
-	Sun, 26 Nov 2006 21:22:50 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kAQLMkO0014494
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 26 Nov 2006 21:22:46 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1164377635.26934.25.camel@localhost.localdomain>
-References: <1164377635.26934.25.camel@localhost.localdomain>
-Date: Sun, 26 Nov 2006 21:22:48 +0000
-Message-Id: <1164576168.5554.22.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: STAGING_BINDIR
+	(envelope-from <openembedded@hrw.one.pl>) id 1GoRSr-0004qM-LP
+	for openembedded-devel@openembedded.org; Sun, 26 Nov 2006 22:23:05 +0100
+Received: (qmail 29090 invoked by uid 813007); 26 Nov 2006 21:23:00 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 26 Nov 2006 21:23:00 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 26 Nov 2006 22:22:58 +0100
+User-Agent: KMail/1.9.5
+References: <1163693473.1649.807.camel@gandalf.tm.informatik.uni-frankfurt.de>
+	<200611171628.27843.openembedded@hrw.one.pl>
+	<455DD65E.7090807@dominion.kabel.utwente.nl>
+In-Reply-To: <455DD65E.7090807@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200611262222.59863.openembedded@hrw.one.pl>
+Subject: Re: FOSDEM'07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,109 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Nov 2006 21:22:55 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 26 Nov 2006 21:23:05 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Fri, 2006-11-24 at 14:13 +0000, Richard Purdie wrote:
-> STAGING_DIR = "${TMPDIR}/staging"
-> STAGING_BINDIR = "${STAGING_DIR}/${BUILD_SYS}/bin"
-> STAGING_LIBDIR = "${STAGING_DIR}/${HOST_SYS}/lib"
-> STAGING_INCDIR = "${STAGING_DIR}/${HOST_SYS}/include"
-> STAGING_DATADIR = "${STAGING_DIR}/${HOST_SYS}/share"
-> STAGING_LOADER_DIR = "${STAGING_DIR}/${HOST_SYS}/loader"
-> STAGING_FIRMWARE_DIR = "${STAGING_DIR}/${HOST_SYS}/firmware"
-> [...]
-> My proposal is therefore to use:
-> 
-> STAGING_BINDIR = "${STAGING_DIR}/${BUILD_SYS}/bin/${HOST_SYS}" and have
-> native.bbclass override this with ${BUILD_SYS}/bin
-> 
-> We'd then add both ${BUILD_SYS}/bin and ${BUILD_SYS}/bin/${HOST_SYS} to
-> the PATH.
-> 
-> Does anyone see a better way to handle this?
+Dnia pi=B1tek, 17 listopada 2006 16:33, Koen Kooi napisa=B3:
+> > Which hotel you guys propose? I heard about Astrid [1] and Notovel
+> > [2], both looks as similiar price.
+>
+> both charge around 80 euros per night, including breakfast
+>
+> > 1. http://www.astridhotel.be/en/home.htm
+> > 2. http://www.novotel.com/
+>
+> We could ask for a volume discount, since >10 OE people are going to
+> need a room.
 
-I've done some experimentation and had a brief discussion with mickeyl
-on irc. I'm going to update this proposal with the result of this and
-some real world testing.
+*bump*
 
-We need three staging binary directories:
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-1. STAGING_BINDIR = "${STAGING_DIR}/${HOST_SYS}/bin"
+    First they ignore you. Then they laugh at you. Then they fight you.
+    Then you win.
 
-HOST_SYS binaries (say arm) go here. This is *not* in PATH. We never
-want to run arm binaries on x86 for example.
-
-2. STAGING_BINDIR_CROSS = "${STAGING_DIR}/${BUILD_SYS}/bin/${HOST_SYS}"
-
-Binaries that run on BUILD_SYS (x86) but produce results for HOST_SYS
-(e.g. gcrypt-config or *-config) go here. The path might change into
-somewhere in CROSS_DIR at some point once I work out more about the
-structure there but that is easy if everything references the right
-variable.
-
-This is in PATH before 3. below.
-
-3. STAGING_BINDIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}/bin"
-
-Anything generated by the -native builds (to run on x86) goes here. This
-appears in PATH, after STAGING_BINDIR_CROSS.
-
-In native.bbclass we set STAGING_BINDIR = STAGING_BINDIR_NATIVE =
-STAGING_BINDIR_CROSS. This means we have the same path twice in PATH but
-apart from that several nice things happen. Native programs access
-native *-config files in the NATIVE bindir for example. Also, this means
--native packages need no changes to work with the new variables! :).
-
-
-How do we go about this change? I propose to start to split the current
-references to STAGING_BINDIR into these three types. Initially we update
-binbake.conf to say:
-
-STAGING_BINDIR = "${STAGING_DIR}/${HOST_SYS}/bin"
-STAGING_BINDIR_NATIVE = "${STAGING_DIR}/${HOST_SYS}/bin"
-STAGING_BINDIR_CROSS = "${STAGING_DIR}/${HOST_SYS}/bin"
-
-which means nothing breaks whilst we rename variables. I have a patch
-which starts to do this.
-
-As some point we then throw a switch and try out the new values I
-mentioned above which will work with multimachine. This should give us a
-structured transition.
-
-This has important future implications for packaged staging. It means
-installed packages can put arm binaries in STAGING_BINDIR and we won't
-corrupt PATH with unexecutable binaries. It does mean we will need to
-mark packages with cross binaries to install so packaged staging can
-either be somehow supplemented with a cross package to install (or the
-staging package is different from the installable package). If we have
-references to STAGING_BINDIR_CROSS in the affected packages, this makes
-that process easier.
-
-My testing did show some interesting cases we're going to have to catch.
-Taking libidl as an example, its do_stage does a "make install bindir=
-${STAGING_BINDIR}". This is fine but libIDL-config-2 is a cross script
-and should be in STAGING_BINDIR_CROSS and is installed into the wrong
-place. My local copy has do_stage updated to read:
-
-cp ${STAGING_BINDIR}/libIDL-config-2 ${STAGING_BINDIR}/libIDL-config-2.orig
-cat ${STAGING_BINDIR}/libIDL-config-2.orig | sed -e 's:${includedir}:${STAGING_INCDIR}:' > ${STAGING_BINDIR}/libIDL-config-2
-
-if [ "${STAGING_BINDIR}" != "${STAGING_BINDIR_CROSS}" ]; then
-   mv ${STAGING_BINDIR}/libIDL-config-2 ${STAGING_BINDIR_CROSS}/libIDL-config-2
-fi
-
-(the file has to handle the native and non-native cases, hence the if)
-
-As always, I'm open to alternative suggestions, help and assistance.
-Does anyone have a problem with the changes to at least use the three
-different variable names? That shouldn't break anything whilst we set
-them all equal in bitbake.conf, yet lets us clean up the metadata.
-
-Cheers,
-
-Richard
 
 
 
