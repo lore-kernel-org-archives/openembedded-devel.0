@@ -1,24 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Goj3E-0002i1-I4
-	for openembedded-devel@openembedded.org; Mon, 27 Nov 2006 17:09:48 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kARG9cLr031111 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Nov 2006 17:09:39 +0100
-Message-ID: <456B0DC2.90300@dominion.kabel.utwente.nl>
-Date: Mon, 27 Nov 2006 17:09:38 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+	(envelope-from <nicolasfr@gmail.com>) id 1Gonf3-00071P-RN
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Nov 2006 22:05:09 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so1072868ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Nov 2006 13:05:01 -0800 (PST)
+Received: by 10.78.117.10 with SMTP id p10mr92271huc.1164661500380;
+	Mon, 27 Nov 2006 13:05:00 -0800 (PST)
+Received: by 10.78.160.8 with HTTP; Mon, 27 Nov 2006 13:05:00 -0800 (PST)
+Message-ID: <b9481e140611271305j26d156e8r3fb35fb3ff35be68@mail.gmail.com>
+Date: Mon, 27 Nov 2006 22:05:00 +0100
+From: "Nicolas FR" <nicolasfr@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: To be removed recipes
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Small fix for sharprom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,28 +29,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Nov 2006 16:09:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 27 Nov 2006 21:05:10 -0000
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_62780_26118828.1164661500332"
+
+------=_Part_62780_26118828.1164661500332
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The bugtracker seems down for a few days, so I post this here.
 
-Hi,
+I have been playing with disto = sharprom-compatible for a few days.
+So here is a small patch to palmtop.bbclass to make gcc-2.95 happy
+when building opie stuff (seem the first patch made here was wrong,
+removing libstd++ instead of removing libsupc++):
 
-In case people didn't notice,
-http://www.openembedded.org/repo/org.openembedded.dev/removal.txt has a few entries now,
-which will be removed on the specified dates.
+Nicolas.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFaw3CMkyGM64RGpERAkMGAJ4hjr51AKY9EkIYhpIxWkVOYa+aSgCfVY5w
-jEJ/Uye9HB1AtrNGMbnWeI0=
-=/ihV
------END PGP SIGNATURE-----
-
-
+------=_Part_62780_26118828.1164661500332--
