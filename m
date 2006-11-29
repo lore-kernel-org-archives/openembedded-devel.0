@@ -1,27 +1,29 @@
-Received: from [64.233.184.233] (helo=wr-out-0506.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <andrew.paulsen@gmail.com>) id 1GpAA0-00043v-3w
+	(envelope-from <mickey@vanille-media.de>) id 1GpJc1-00019B-Fp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Nov 2006 22:06:36 +0100
-Received: by wr-out-0506.google.com with SMTP id i32so466794wra
+	Wed, 29 Nov 2006 08:12:09 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 8104A28C022; Wed, 29 Nov 2006 08:09:26 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from PROMETHEUS (e180191202.adsl.alicedsl.de [85.180.191.202])
+	by srv043.dedi23.de (Postfix) with ESMTP id 1809528C021
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Nov 2006 13:06:22 -0800 (PST)
-Received: by 10.78.204.1 with SMTP id b1mr1363833hug.1164747980896;
-	Tue, 28 Nov 2006 13:06:20 -0800 (PST)
-Received: by 10.78.159.2 with HTTP; Tue, 28 Nov 2006 13:06:20 -0800 (PST)
-Message-ID: <d46153c40611281306u1022c0adjeb2e6304feeec399@mail.gmail.com>
-Date: Tue, 28 Nov 2006 15:06:20 -0600
-From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d46153c40611280954w12514252o8897ac47f706266c@mail.gmail.com>
+	Wed, 29 Nov 2006 08:09:23 +0100 (CET)
+Date: Wed, 29 Nov 2006 08:11:51 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1875053643.20061129081151@vanille-media.de>
+To: hrw commit <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <E1GpA2Z-0003yv-73@linuxtogo.org>
+References: <E1GpA2Z-0003yv-73@linuxtogo.org>
 MIME-Version: 1.0
-References: <d46153c40611220800m4e715362v713c24f5853238@mail.gmail.com>
-	<d46153c40611221320l1226d03dtb2948a8f42a04cdd@mail.gmail.com>
-	<f96d234e0611221324o352521ddj229fb267b995396b@mail.gmail.com>
-	<d46153c40611221336h2fcb9ae3rabf5776b260a494d@mail.gmail.com>
-	<f96d234e0611221452u6d2a8e01i6df017ce235624a4@mail.gmail.com>
-	<d46153c40611280954w12514252o8897ac47f706266c@mail.gmail.com>
-Subject: Re: Angstrom, compulab-pxa270, and gpe-image
+Subject: Re: [oe-commits] org.oe.dev libpcap: added forgotten patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,26 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Nov 2006 21:06:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 29 Nov 2006 07:12:09 -0000
+Content-Type: text/plain; charset=iso-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-On 11/28/06, Andrew Paulsen <andrew.paulsen@gmail.com> wrote:
-> On 11/22/06, Cliff Brake <cliff.brake@gmail.com> wrote:
-> > Try the generic distro.  I have not updated my tree in probably 2
-> > weeks, but it may work.
->
-> I just tried the "generic" distro and that fails to build in the same
-> way that my original Familiar build failed:
->
+Yo Hrw!
 
-I added the following two lines to my
-/stuff/org.openembedded.dev/conf/distro/generic.conf file:
-PREFERRED_VERSION_dbus ?= "1.0.1"
-PREFERRED_VERSION_dbus-glib ?= "0.71"
-and it got past the dbus compilation errors.  I don't see where the
-previous versions (dbus 0.92 and incompatible dbus-glib 0.72) were
-being set so I'm not sure what the procedure is to fix this correctly.
+hrw commit wrote:
+> packages/libpcap/libpcap-0.9.5/shared.patch=09ed60ac94d9b795deef9f49409e1=
+1c11ddab0fe9e
+
+This is version 0.9.5.
+
+> ++# some defines for shared library compilation - FIXME, if not matching
+> ++MAJ=3D0.9
+> ++MIN=3D3
+
+This builds version 0.9.3 -- please do what my comment in the patch suggest=
+s :))
+
+Cheers,
+
+:M:
+--=20
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
