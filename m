@@ -1,22 +1,20 @@
-Received: from [62.169.194.2] (helo=fesscrpp1.tellas.gr)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1Gpm75-0007Gc-Gb
-	for openembedded-devel@openembedded.org; Thu, 30 Nov 2006 14:38:07 +0100
-Received: from dias (62.169.211.226) by fesscrpp1.tellas.gr (7.3.117)
-	id 45261701013EE882 for openembedded-devel@openembedded.org;
-	Thu, 30 Nov 2006 15:37:03 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Thu, 30 Nov 2006 15:37:44 +0200
-Message-ID: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>
+	(envelope-from <openembedded@hrw.one.pl>) id 1Gq6qK-0001AM-7S
+	for openembedded-devel@openembedded.org; Fri, 01 Dec 2006 12:46:12 +0100
+Received: (qmail 22733 invoked by uid 813007); 1 Dec 2006 11:45:42 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 1 Dec 2006 11:45:42 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 1 Dec 2006 12:45:39 +0100
+User-Agent: KMail/1.9.5
+Organization: OpenEmbedded
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2962
-In-Reply-To: <200611171628.27843.openembedded@hrw.one.pl>
-Importance: Normal
-Subject: Re: FOSDEM'07
+Message-Id: <200612011245.39477.openembedded@hrw.one.pl>
+Subject: BugDays weekend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,24 +28,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Nov 2006 13:38:07 -0000
+X-List-Received-Date: Fri, 01 Dec 2006 11:46:12 -0000
 Content-Type: text/plain;
-	charset="iso-8859-2"
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-
->
-> So now we need to prepare some marketing materials and posters.
->
+Content-Disposition: inline
 
 
-If someone could provide the text and some pics for a flyer i could arrange
-some of out graphic designers to come up with a couple of ideas.
-I can also "sponsor" printing a few hundred of them.
+I want to remind that during this weekend we have BugDays like in each 
+first weekend of month. By weekend we mean friday->monday (4 days in 
+total).
 
-Same for posters etc. (will also need size)
+We will try to actively encourage developers and users to submit, triage 
+and fix bugs during that time. This does NOT mean that people aren't 
+allowed to fix bugs at other times. 
+
+If you need assistance then join #oe channel on Freenode IRC network - some 
+of us are available there - mostly during GMT day.
 
 
-Stelios
+
+You can subscribe to the OE event calendar[1] to see the dates of the 
+bugdays and other OE related events.
+
+1. http://openembedded.org/ical/oe-events.ics
+
+-- 
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+       We're here to give you a computer, not a religion.
+       		-- Bob Pariseau, at the introduction of the Amiga
+
 
 
 
