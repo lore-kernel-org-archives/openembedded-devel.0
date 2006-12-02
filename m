@@ -1,27 +1,23 @@
-Received: from [209.225.8.181] (helo=mtai01.charter.net)
+Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <erik@hovland.org>) id 1GqbOc-0006FF-SH
+	(envelope-from <acassis@gmail.com>) id 1Gqbh4-0006Od-0j
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Dec 2006 21:23:39 +0100
-Received: from aa07.charter.net ([10.20.200.159]) by mtai01.charter.net
-	(InterMail vM.6.01.06.01 201-2131-130-101-20060113) with ESMTP
-	id <20061202202301.BYFY29434.mtai01.charter.net@aa07.charter.net>;
-	Sat, 2 Dec 2006 15:23:01 -0500
-Received: from charter.net ([71.92.202.52]) by aa07.charter.net with SMTP
-	id <20061202202301.TFGI10732.aa07.charter.net@charter.net>;
-	Sat, 2 Dec 2006 15:23:01 -0500
-Received: by charter.net (nbSMTP-1.00) for uid 1000
-	erik@hovland.org; Sat,  2 Dec 2006 12:23:01 -0800 (PST)
-Date: Sat, 2 Dec 2006 12:22:56 -0800
-From: Erik Hovland <erik@hovland.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20061202202256.GI25780@hovland.org>
-References: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
+	Sat, 02 Dec 2006 21:42:42 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so2323601ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 02 Dec 2006 12:42:00 -0800 (PST)
+Received: by 10.78.201.2 with SMTP id y2mr6107469huf.1165092120406;
+	Sat, 02 Dec 2006 12:42:00 -0800 (PST)
+Received: by 10.78.175.3 with HTTP; Sat, 2 Dec 2006 12:42:00 -0800 (PST)
+Message-ID: <37367b3a0612021242l1f5cf616o1a8274dc38730d06@mail.gmail.com>
+Date: Sat, 2 Dec 2006 20:42:00 +0000
+From: "Alan Carvalho de Assis" <acassis@gmail.com>
+To: "Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <27383573.20061202211547@vanille-media.de>
 MIME-Version: 1.0
-In-Reply-To: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-Chzlrs: 0
-Cc: Vladimir <vovan888@gmail.com>
+References: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
+	<27383573.20061202211547@vanille-media.de>
+Cc: openembedded-devel@lists.openembedded.org, Vladimir <vovan888@gmail.com>
 Subject: Re: New palm environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,38 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Dec 2006 20:23:39 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 02 Dec 2006 20:42:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Sat, Dec 02, 2006 at 06:13:50PM +0000, Alan Carvalho de Assis wrote:
-> Dear developers,
-> I want know if is of worth start a new project to develop a palm/phone
-> environment using FLTK toolkit.
+Hi Michael,
 
-Honestly, GPE and FLTK can co-exist on the same handheld. There are FLTK
-libraries and apps available on both familiar and OpenZaurus.
+2006/12/2, Michael 'Mickey' Lauer <mickey@vanille-media.de>:
+> Alan Carvalho de Assis wrote:
+> I don't think the UI toolkit is the reason that GPE and Opie are
+> sluggish. I think both contain a lot of code from people whose
+> contributions were the first after they started programming for
+> embedded systems.
+>
 
-> This idea appeared when me and Vladimir (who ported Linux to Siemens
-> SX1 phone) are speaking about Qt/Embedded and GPE performance on SX1.
-> 
-> Some possible toolkit are: FLTK2, pixil or minigui. We think FLTK is a
-> good option, because it has some modern features and still small and
-> fast.
-> 
-> I want know what you think about it?
+But GTK is become very fat and slow. If memory is not a problem ok,
+then GPE need an option to still the application on memory to fast
+start-up, like this we have in Opie.
 
-Scratch your itch. There is enough room in the community for another
-environment. But please consider why GPE or Opie can't do what you need
-before taking on what could be a huge task.
+> If you really want to start something new, go ahead and do it. It's a
+> fantastic learning experience! But please, do yourself a favour and
+> wait a bit more until the OpenMoko folks and the Access folks go live
+> with their platforms -- perhaps there is something where you could
+> jump on the bandwagon.
+>
+> Of course, jumping on the bandwagon is not that honorable as being the
+> inventor of something, but at the end of the day, it may help to get
+> things actually done, and that's what all want, don't we? :)
+>
+> Regards,
+>
 
-E
+Ok, I agree it, seems sensible!
 
--- 
-Erik Hovland
-mail: erik@hovland.org
-web: http://hovland.org/
-PGP/GPG public key available on request
+> :M:
+> --
+> Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+>
+>
 
+Cheers,
+
+Alan
 
 
