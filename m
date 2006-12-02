@@ -1,19 +1,28 @@
-Received: from [64.233.182.186] (helo=nf-out-0910.google.com)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <nicolasfr@gmail.com>) id 1Gqqeo-0002iC-OH
-	for openembedded-devel@openembedded.org; Sun, 03 Dec 2006 13:41:22 +0100
-Received: by nf-out-0910.google.com with SMTP id p77so4402279nfc
-	for <openembedded-devel@openembedded.org>;
-	Sun, 03 Dec 2006 04:40:41 -0800 (PST)
-Received: by 10.78.146.11 with SMTP id t11mr6709680hud.1165149640964;
-	Sun, 03 Dec 2006 04:40:40 -0800 (PST)
-Received: by 10.78.160.8 with HTTP; Sun, 3 Dec 2006 04:40:40 -0800 (PST)
-Message-ID: <b9481e140612030440q4cd679e2l9c5ae7b3f2e7f423@mail.gmail.com>
-Date: Sun, 3 Dec 2006 13:40:40 +0100
-From: "Nicolas FR" <nicolasfr@gmail.com>
-To: openembedded-devel@openembedded.org
+	(envelope-from <vovan888@gmail.com>) id 1Gqbby-0006Lb-IN
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 02 Dec 2006 21:37:26 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so2323175ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 02 Dec 2006 12:36:49 -0800 (PST)
+Received: by 10.67.97.7 with SMTP id z7mr9347662ugl.1165091809088;
+	Sat, 02 Dec 2006 12:36:49 -0800 (PST)
+Received: from home888 ( [213.141.159.251])
+	by mx.google.com with ESMTP id k30sm27503345ugc.2006.12.02.12.36.48;
+	Sat, 02 Dec 2006 12:36:48 -0800 (PST)
+Date: Sat, 02 Dec 2006 23:35:03 +0300
+To: "Erik Hovland" <erik@hovland.org>,
+	openembedded-devel@lists.openembedded.org
+From: Vovan <vovan888@gmail.com>
 MIME-Version: 1.0
-Subject: libqte-sharprom in OE (attn Mickey)
+References: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
+	<20061202202256.GI25780@hovland.org>
+Message-ID: <op.tjx8spx2dbah4f@home888>
+In-Reply-To: <20061202202256.GI25780@hovland.org>
+User-Agent: Opera Mail/9.02 (Win32)
+X-Mailman-Approved-At: Sun, 03 Dec 2006 13:51:58 +0100
+Subject: Re: New palm environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -27,32 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Dec 2006 12:41:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 02 Dec 2006 20:37:26 -0000
+Content-Type: text/plain; format=flowed; delsp=yes; charset=windows-1251
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Mickey,
+On Sat, 02 Dec 2006 23:22:56 +0300, Erik Hovland <erik@hovland.org> wrote:
 
-I came accross an old post of yours on OESF:
+> Scratch your itch. There is enough room in the community for another
+> environment. But please consider why GPE or Opie can't do what you need
+> before taking on what could be a huge task.
+>
 
-"I have just commited a necessary glue package to use a 2.95.3
-toolchain in OE. This glue package has been sitting in my tree for a
-while and I'm using it to build my python distribution for the
-SharpROM without needing any additional hacks.
+My main problem is perfomance. For example:in Symbian "addressbook"  
+application
+starts in less than a second; in Qtopia it starts something about 2..3  
+seconds!
+That is not acceptible for me :) I dont have 400 mhz CPU in SX1, I only  
+have 120mhz
+so it is a problem...
 
-To make OE build SharpROM compatible QtE applications, just add two or
-three dedicated packages, i.e. qte-sharprom and libqpe-sharprom - that
-should be all."
 
-As I am fighting with some qte apps compiling for sharprom under OE
-(in fact they compile but then on the Zaurus complains about missing
-exports), I wanted to know what you meant in the last sentence "add
-two or three dedicated packages, i.e. qte-sharprom and
-libqpe-sharprom". Did you mean copy the libs from the Zaurus and put
-it in the OE tree?
-
-Regards,
-Nicolas.
+-- 
+Vladimir
 
 
