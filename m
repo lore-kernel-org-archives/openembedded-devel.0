@@ -1,23 +1,23 @@
-Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
+Received: from [64.233.182.186] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <acassis@gmail.com>) id 1Gqbh4-0006Od-0j
+	(envelope-from <acassis@gmail.com>) id 1Gqc66-0006ZU-IH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Dec 2006 21:42:42 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so2323601ugf
+	Sat, 02 Dec 2006 22:08:34 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so3785630nfc
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Dec 2006 12:42:00 -0800 (PST)
-Received: by 10.78.201.2 with SMTP id y2mr6107469huf.1165092120406;
-	Sat, 02 Dec 2006 12:42:00 -0800 (PST)
-Received: by 10.78.175.3 with HTTP; Sat, 2 Dec 2006 12:42:00 -0800 (PST)
-Message-ID: <37367b3a0612021242l1f5cf616o1a8274dc38730d06@mail.gmail.com>
-Date: Sat, 2 Dec 2006 20:42:00 +0000
+	Sat, 02 Dec 2006 13:07:57 -0800 (PST)
+Received: by 10.78.201.2 with SMTP id y2mr6149053huf.1165093676617;
+	Sat, 02 Dec 2006 13:07:56 -0800 (PST)
+Received: by 10.78.175.3 with HTTP; Sat, 2 Dec 2006 13:07:56 -0800 (PST)
+Message-ID: <37367b3a0612021307k9a2ed55t5eb927752d376104@mail.gmail.com>
+Date: Sat, 2 Dec 2006 21:07:56 +0000
 From: "Alan Carvalho de Assis" <acassis@gmail.com>
-To: "Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <27383573.20061202211547@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20061202202256.GI25780@hovland.org>
 MIME-Version: 1.0
 References: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
-	<27383573.20061202211547@vanille-media.de>
-Cc: openembedded-devel@lists.openembedded.org, Vladimir <vovan888@gmail.com>
+	<20061202202256.GI25780@hovland.org>
+Cc: Vladimir <vovan888@gmail.com>
 Subject: Re: New palm environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,44 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Dec 2006 20:42:42 -0000
+X-List-Received-Date: Sat, 02 Dec 2006 21:08:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi Michael,
+Hi Erik,
 
-2006/12/2, Michael 'Mickey' Lauer <mickey@vanille-media.de>:
-> Alan Carvalho de Assis wrote:
-> I don't think the UI toolkit is the reason that GPE and Opie are
-> sluggish. I think both contain a lot of code from people whose
-> contributions were the first after they started programming for
-> embedded systems.
+2006/12/2, Erik Hovland <erik@hovland.org>:
+> On Sat, Dec 02, 2006 at 06:13:50PM +0000, Alan Carvalho de Assis wrote:
+>
+> Honestly, GPE and FLTK can co-exist on the same handheld. There are FLTK
+> libraries and apps available on both familiar and OpenZaurus.
 >
 
-But GTK is become very fat and slow. If memory is not a problem ok,
-then GPE need an option to still the application on memory to fast
-start-up, like this we have in Opie.
+Yes, the co-existence is not the a problem. Currently I run FLTK
+programs (ipatience for example) on GPE and it work fine.
 
-> If you really want to start something new, go ahead and do it. It's a
-> fantastic learning experience! But please, do yourself a favour and
-> wait a bit more until the OpenMoko folks and the Access folks go live
-> with their platforms -- perhaps there is something where you could
-> jump on the bandwagon.
->
-> Of course, jumping on the bandwagon is not that honorable as being the
-> inventor of something, but at the end of the day, it may help to get
-> things actually done, and that's what all want, don't we? :)
->
-> Regards,
+The problem is how to run Linux on low end devices? In example if I
+have a smarthphone with 8MB of RAM, how to run Linux on it? Is
+possible run kdrive and GTK applications on it? I think no.
+
+> Scratch your itch. There is enough room in the community for another
+> environment. But please consider why GPE or Opie can't do what you need
+> before taking on what could be a huge task.
 >
 
-Ok, I agree it, seems sensible!
+Just my consideration above. I am happy with GPE on my iPaq, my
+question is just about how to run GPE on devices with low memory.
+Maybe my question can be irrelevant because memory is become very
+cheap and processors become very speed. Anyway there is a gap that
+Linux can fit if we will have a small and fast palm environment.
 
-> :M:
+Hey, it is not a frame-war.
+I am just considering if is feasible to create a new environment. But
+as we can see it don't seems.
+
+
+> E
+>
 > --
-> Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
->
+> Erik Hovland
+> mail: erik@hovland.org
+> web: http://hovland.org/
+> PGP/GPG public key available on request
 >
 
 Cheers,
