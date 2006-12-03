@@ -1,27 +1,28 @@
-Received: from [69.89.21.23] (helo=outbound-mail-63.bluehost.com)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <matt@kiatoa.com>) id 1GqxTg-0004Ew-9y
-	for openembedded-devel@openembedded.org; Sun, 03 Dec 2006 20:58:20 +0100
-Received: (qmail 5163 invoked by uid 0); 3 Dec 2006 19:57:36 -0000
-Received: from unknown (HELO box25.bluehost.com) (70.96.188.25)
-	by mailproxy4.bluehost.com with SMTP; 3 Dec 2006 19:57:36 -0000
-Received: from ip70-162-89-160.ph.ph.cox.net ([70.162.89.160]
-	helo=[192.168.1.150])
-	by box25.bluehost.com with esmtpsa (SSLv3:EXP1024-RC4-SHA:128)
-	(Exim 4.52) id 1GqxSx-0008N8-Hd
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <vovan888@gmail.com>) id 1GqwA5-0002hj-H6
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Dec 2006 12:57:35 -0700
-From: Matthew Welland <matt@kiatoa.com>
-Organization: kiatoa.com
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 3 Dec 2006 12:57:46 -0700
-User-Agent: KMail/1.9.1
-References: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
-In-Reply-To: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
+	Sun, 03 Dec 2006 19:34:01 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so2418132ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 Dec 2006 10:33:19 -0800 (PST)
+Received: by 10.66.243.4 with SMTP id q4mr10689608ugh.1165170798680;
+	Sun, 03 Dec 2006 10:33:18 -0800 (PST)
+Received: from localhost ( [213.141.159.251])
+	by mx.google.com with ESMTP id 53sm26281838ugn.2006.12.03.10.33.17;
+	Sun, 03 Dec 2006 10:33:17 -0800 (PST)
+Date: Sun, 03 Dec 2006 21:30:58 +0300
+To: "Paul Sokolovsky" <pmiscml@gmail.com>,
+	"Alan Carvalho de Assis" <acassis@gmail.com>
+From: Vovan <vovan888@gmail.com>
 MIME-Version: 1.0
-Message-Id: <200612031257.46505.matt@kiatoa.com>
-X-Identified-User: {32296:box25.bluehost.com:kiatoaco:kiatoa.com} {sentby:smtp
-	auth 70.162.89.160 authed with matt+kiatoa.com}
+References: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
+	<12210507408.20061203200626@gmail.com>
+Message-ID: <op.tjzxpw1bdbah4f@localhost>
+In-Reply-To: <12210507408.20061203200626@gmail.com>
+User-Agent: Opera Mail/9.02 (Linux)
+X-Mailman-Approved-At: Sun, 03 Dec 2006 22:56:43 +0100
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: New palm environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,52 +37,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Dec 2006 19:58:20 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sun, 03 Dec 2006 18:34:01 -0000
+Content-Type: text/plain; format=flowed; delsp=yes; charset=windows-1251
+Content-Transfer-Encoding: 8bit
 
-If you do decide to pursue fltk for handhelds perhaps you could resurrect 
-some of the agenda vr3 stuff to get going?
+03.12.06 в 21:06 Paul Sokolovsky в своём письме писал(а):
 
-http://agendawiki.com/
+OK, I agree that writing a new GUI is not a simple task
+and I agree that optimizing Opie or Gpe will be more beneficial, but
+is there any way to use Opie or Gpe without touchscreen? I have only
+keypad on my SX1 :) And only 16 MB of RAM and only 120 Mhz CPU....
 
-Since fltk is supported by Chicken Scheme a fltk based PDA environment would 
-be appreciated by me.
-
-Matt
---
-
-On Saturday 02 December 2006 11:13, Alan Carvalho de Assis wrote:
-> Dear developers,
-> I want know if is of worth start a new project to develop a palm/phone
-> environment using FLTK toolkit.
->
-> GPE and Opie are powerful projects, but some devices with small
-> footprint and slow processors don't work very well with it.
->
-> This idea appeared when me and Vladimir (who ported Linux to Siemens
-> SX1 phone) are speaking about Qt/Embedded and GPE performance on SX1.
->
-> Some possible toolkit are: FLTK2, pixil or minigui. We think FLTK is a
-> good option, because it has some modern features and still small and
-> fast.
->
-> I want know what you think about it?
->
-> Cheers,
->
-> Alan
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+PS: Of course the easiest way is to sell my old SX1 and buy something with  
+400mhz CPU
+and 64 Mb SDRAM and to be happy with it ))
 
 -- 
-http://www.kiatoa.com, a self-governing site where *you* can be the boss!
-  You make and choose the stories and the classifieds are always free.
-     Also, many "best of" polls. Come join in the ballot stuffing!
+Vladimir Ananiev
 
 
