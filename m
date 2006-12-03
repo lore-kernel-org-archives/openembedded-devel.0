@@ -1,23 +1,22 @@
-Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <acassis@gmail.com>) id 1GqzYP-0007ST-Mo
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Dec 2006 23:11:21 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so2446875ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Dec 2006 14:10:38 -0800 (PST)
-Received: by 10.78.134.12 with SMTP id h12mr7094694hud.1165183837361;
-	Sun, 03 Dec 2006 14:10:37 -0800 (PST)
-Received: by 10.78.175.3 with HTTP; Sun, 3 Dec 2006 14:10:37 -0800 (PST)
-Message-ID: <37367b3a0612031410j2baf9b36mf8101625473e690c@mail.gmail.com>
-Date: Sun, 3 Dec 2006 22:10:37 +0000
-From: "Alan Carvalho de Assis" <acassis@gmail.com>
-To: "Paul Sokolovsky" <pmiscml@gmail.com>
-In-Reply-To: <12210507408.20061203200626@gmail.com>
-MIME-Version: 1.0
+	(envelope-from <openembedded@hrw.one.pl>) id 1Gqzfs-0007Zv-9y
+	for openembedded-devel@openembedded.org; Sun, 03 Dec 2006 23:19:04 +0100
+Received: (qmail 19979 invoked by uid 813007); 3 Dec 2006 22:18:20 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 3 Dec 2006 22:18:20 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 3 Dec 2006 23:18:18 +0100
+User-Agent: KMail/1.9.5
 References: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>
 	<12210507408.20061203200626@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, Vladimir <vovan888@gmail.com>
+	<37367b3a0612031410j2baf9b36mf8101625473e690c@mail.gmail.com>
+In-Reply-To: <37367b3a0612031410j2baf9b36mf8101625473e690c@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200612032318.19874.openembedded@hrw.one.pl>
 Subject: Re: New palm environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,95 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Dec 2006 22:11:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 03 Dec 2006 22:19:04 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Hi Paul,
-(sorry by pre-posting)
+Dnia niedziela, 3 grudnia 2006 23:10, Alan Carvalho de Assis napisa=B3:
+> Do you know if exists some project or people trying to improve GTK
+> performance?
+>
+> I found it:
+> http://www.linuxjournal.com/article/4870
+>
+> But it is old and based on GTK 1.2.
 
-Do you know if exists some project or people trying to improve GTK performa=
-nce?
+And that post is also nearly 5 years old. So probably no one work on it=20
+currently.
 
-I found it:
-http://www.linuxjournal.com/article/4870
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-But it is old and based on GTK 1.2.
-
-Alan
-
-2006/12/3, Paul Sokolovsky <pmiscml@gmail.com>:
-> Hello Alan,
->
->
->       [There were few cheerful replies, so let me show the other side
-> of it, and do a bit of cold shower. Note that it's only rhetoric
-> exercise - you will still do what you're bound to ;-) .]
->
->
-> Saturday, December 2, 2006, 8:13:50 PM, you wrote:
->
-> > Dear developers,
-> > I want know if is of worth start a new project to develop a palm/phone
-> > environment using FLTK toolkit.
->
->   No.
->
-> > GPE and Opie are powerful projects, but some devices with small
-> > footprint and slow processors don't work very well with it.
->
->   What makes you think they will work better with something else? More
-> specifically, what makes you think they will work better with framework
-> of the order of magnitude/scale as OPIE or GPE?
->
->   For example, do you think that OPIE/GPE authors set it as the aim to
-> write fat slow frameworks? Or they have secret conspiracy to do it so?
-> In this case, they are must be involved with proverbial Microsoft too
-> - it has own UI system, by pretty different technology, but it shows
-> the same problems!
->
-> > This idea appeared when me and Vladimir (who ported Linux to Siemens
-> > SX1 phone) are speaking about Qt/Embedded and GPE performance on SX1.
->
->   You know, such bright ideas appear to someone every other week ;-I.
-> For example, another Vladimir (who ported PalmT3) just couldn't resist
-> to start his own toy: http://hackndev.com/node/571 .
->
-> > Some possible toolkit are: FLTK2, pixil or minigui. We think FLTK is a
-> > good option, because it has some modern features and still small and
-> > fast.
->
->   Now, that's interesting. *Some* modern features - I will trust your
-> word, obviously, how could you expect for 2nd-rate GUI toolkit to
-> provide all modern features? But fast - that's interesting. Do you
-> have real-world profiling data with good interpretation, preferably,
-> all yours? Or you trust FLTK authors by word too?
->
-> > I want know what you think about it?
->
->   I think that spending time on optimizing existing full-fledged UI
-> framework, like OPIE or GPE, would be much more beneficial for both
-> persons who would do that, and for community. YMMV.
->
-> > Cheers,
->
-> > Alan
->
->
-> --
-> Best regards,
->  Paul                            mailto:pmiscml@gmail.com
->
->
+               Life's not fair. But the root password helps.
 
 
---=20
-------------------------------------------------------------
-|                     Alan Carvalho de Assis                |
-------------------------------------------------------------
---
-N=E3o importa o que os outros ir=E3o pensar,
-A cura para a infelicidade =E9 a felicidade
 
 
