@@ -1,31 +1,29 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1GrDov-0004y8-Qo
-	for openembedded-devel@openembedded.org; Mon, 04 Dec 2006 14:25:22 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kB4DOZNa011073
-	for <openembedded-devel@openembedded.org>; Mon, 4 Dec 2006 13:24:35 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 10112-09 for <openembedded-devel@openembedded.org>;
-	Mon,  4 Dec 2006 13:24:32 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kB4DOVZK011059
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Mon, 4 Dec 2006 13:24:31 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <4573F8B3.3070207@dominion.kabel.utwente.nl>
-References: <c384c5ea0612031500o3ee66a23x89d72a948f418532@mail.gmail.com>
-	<4573F8B3.3070207@dominion.kabel.utwente.nl>
-Date: Mon, 04 Dec 2006 13:24:31 +0000
-Message-Id: <1165238672.15272.5.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Recent OBJDUMP changes
+	(envelope-from <mickey@vanille-media.de>) id 1GrDpv-00050y-J5
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Dec 2006 14:26:23 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 12F4D28C022; Mon,  4 Dec 2006 14:22:58 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from PROMETHEUS (e180133007.adsl.alicedsl.de [85.180.133.7])
+	by srv043.dedi23.de (Postfix) with ESMTP id 43C2428C021
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Dec 2006 14:22:54 +0100 (CET)
+Date: Mon, 4 Dec 2006 14:25:34 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <299907395.20061204142534@vanille-media.de>
+To: Nicolas FR <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <b9481e140612030440q4cd679e2l9c5ae7b3f2e7f423@mail.gmail.com>
+References: <b9481e140612030440q4cd679e2l9c5ae7b3f2e7f423@mail.gmail.com>
+MIME-Version: 1.0
+Subject: Re: libqte-sharprom in OE (attn Mickey)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,29 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Dec 2006 13:25:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 04 Dec 2006 13:26:24 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2006-12-04 at 11:30 +0100, Koen Kooi wrote:
-> I have something like this:
-> 
-> - --- conf/bitbake.conf   a55e0d456ecb5fa95185e35580c90bcc9513ed8d
-> +++ conf/bitbake.conf   e3d238d78a95629037ad0f48ce24e3a7382e540e
-> @@ -454,3 +454,6 @@ COMBINED_FEATURES = "\
->      ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "usbgadget", d)} \
->      ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "usbhost", d)}"
-> 
-> +
-> +export OBJDUMP := "${HOST_PREFIX}objdump"
-> +
-> 
-> 
-> That should fix the issues, but isn't the right way.
+Nicolas FR wrote:
+> I came accross an old post of yours on OESF:
+[...]
+> As I am fighting with some qte apps compiling for sharprom under OE
+> (in fact they compile but then on the Zaurus complains about missing
+> exports), I wanted to know what you meant in the last sentence "add
+> two or three dedicated packages, i.e. qte-sharprom and
+> libqpe-sharprom". Did you mean copy the libs from the Zaurus and put
+> it in the OE tree?
 
-What issue does that fix?
+Something like that -- see how we are doing it with the sharprom
+binary-only camera drivers. Basically you need to upload the libraries
+and include files to some site and make a .bb file download them and
+copy them into staging.
 
-Richard
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
