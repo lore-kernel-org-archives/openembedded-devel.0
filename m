@@ -1,23 +1,20 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [64.233.162.228] (helo=nz-out-0102.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1GrKWy-0006NN-Re
+	(envelope-from <andrew.paulsen@gmail.com>) id 1GrLtr-0007yT-Ch
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Dec 2006 21:35:16 +0100
-Received: by py-out-1112.google.com with SMTP id n39so2335638pyh
+	Mon, 04 Dec 2006 23:02:59 +0100
+Received: by nz-out-0102.google.com with SMTP id m22so1850183nzf
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Dec 2006 12:34:27 -0800 (PST)
-Received: by 10.35.126.7 with SMTP id d7mr16041997pyn.1165264467480;
-	Mon, 04 Dec 2006 12:34:27 -0800 (PST)
-Received: by 10.65.230.8 with HTTP; Mon, 4 Dec 2006 12:34:27 -0800 (PST)
-Message-ID: <c384c5ea0612041234u5fd7e6d6w5de1efc385cacbd7@mail.gmail.com>
-Date: Mon, 4 Dec 2006 21:34:27 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	Mon, 04 Dec 2006 14:02:09 -0800 (PST)
+Received: by 10.78.83.13 with SMTP id g13mr8125524hub.1165269728243;
+	Mon, 04 Dec 2006 14:02:08 -0800 (PST)
+Received: by 10.78.166.11 with HTTP; Mon, 4 Dec 2006 14:02:08 -0800 (PST)
+Message-ID: <d46153c40612041402o2e1ed6fdmdd1a8fa8261d15ce@mail.gmail.com>
+Date: Mon, 4 Dec 2006 16:02:08 -0600
+From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1165238625.15272.3.camel@localhost.localdomain>
 MIME-Version: 1.0
-References: <c384c5ea0612031500o3ee66a23x89d72a948f418532@mail.gmail.com>
-	<1165238625.15272.3.camel@localhost.localdomain>
-Subject: Re: Recent OBJDUMP changes
+Subject: madwifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,31 +28,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Dec 2006 20:35:17 -0000
+X-List-Received-Date: Mon, 04 Dec 2006 22:03:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello,
+Does anyone have any tips for including madwifi into a gpe-image build?
 
-On 12/4/06, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Mon, 2006-12-04 at 00:00 +0100, Leon Woestenberg wrote:
->
-My assumption was wrong, the correct (cross-toolchain) objdump is used.
+I can "bitbake madwifi-ng" by itself and that appears to work.
 
-However, the shlibs system seems to fail elsewhere, this is what I see
-if I disable the objdump command error redirection "2>/dev/null" in
-package.bbclass:
+If I add
+BOOTSTRAP_EXTRA_RDEPENDS = "madwifi-ng"
+to my machine.conf, or add
 
-NOTE: SITE files
-/home/leon/sandbox/ixp4xx/openembedded/../../openembedded/org.openembedded.dev/site/endian-big
-/home/leon/sandbox/ixp4xx/openembedded/../../openembedded/org.openembedded.dev/site/armeb-linux
-NOTE: Couldn't find shared library provider for libncurses.so.5
-NOTE: Couldn't find shared library provider for libgcc_s.so.1
-NOTE: Couldn't find shared library provider for libc.so.6
+GPE_EXTRA_INSTALL += "madwifi-ng"
+to my gpe-image.bb, I get an:
 
-I am looking into that now.
+"ERROR: Nothing provides runtime dependency madwifi-ng"
 
-Leon.
+Is there a better way to add packages to an image?
 
 
