@@ -1,24 +1,28 @@
-Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+Received: from [62.70.27.18] (helo=esparsett.troll.no)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <nicolasfr@gmail.com>) id 1GrHdl-00085L-Nj
+	(envelope-from <lpotter@trolltech.com>) id 1GrIh5-0003R4-99
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Dec 2006 18:30:05 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so2654719ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Dec 2006 09:29:15 -0800 (PST)
-Received: by 10.78.81.20 with SMTP id e20mr7898649hub.1165253350458;
-	Mon, 04 Dec 2006 09:29:10 -0800 (PST)
-Received: by 10.78.160.8 with HTTP; Mon, 4 Dec 2006 09:29:10 -0800 (PST)
-Message-ID: <b9481e140612040929n31703190rd4036277d6d089be@mail.gmail.com>
-Date: Mon, 4 Dec 2006 18:29:10 +0100
-From: "Nicolas FR" <nicolasfr@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <el1a7i$707$1@sea.gmane.org>
+	Mon, 04 Dec 2006 19:37:35 +0100
+Received: from esparsett.troll.no (localhost [127.0.0.1])
+	by localhost (Postfix) with SMTP
+	id BA2CF6000A; Mon,  4 Dec 2006 19:36:46 +0100 (CET)
+Received: from mail.trolltech.com.au (unknown [10.1.1.12])
+	by esparsett.troll.no (Postfix) with ESMTP
+	id 485C860035; Mon,  4 Dec 2006 19:36:46 +0100 (CET)
+Received: from [172.18.1.6] (unknown [172.18.1.6])
+	by mail.trolltech.com.au (Postfix) with ESMTP id 00673296963;
+	Tue,  5 Dec 2006 04:36:43 +1000 (EST)
+Message-ID: <45746ACC.7050001@trolltech.com>
+Date: Tue, 05 Dec 2006 04:37:00 +1000
+From: Lorn Potter <lpotter@trolltech.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1) Gecko/20061101 SeaMonkey/1.1b
 MIME-Version: 1.0
-References: <b9481e140612030440q4cd679e2l9c5ae7b3f2e7f423@mail.gmail.com>
-	<299907395.20061204142534@vanille-media.de>
-	<el1a7i$707$1@sea.gmane.org>
-Subject: Re: libqte-sharprom in OE (attn Mickey)
+To: openembedded-devel@lists.openembedded.org
+References: <37367b3a0612021013p700b017bmdaa382eb76527c8e@mail.gmail.com>	<20061202202256.GI25780@hovland.org>
+	<op.tjx8spx2dbah4f@home888>
+In-Reply-To: <op.tjx8spx2dbah4f@home888>
+Subject: Re: New palm environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,27 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Dec 2006 17:30:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 04 Dec 2006 18:37:35 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Fine, I'll start putting some infos on linuxtogo's wiki.
 
-Please contact me on irc (#OE) it would be usefull if you can comment
-/ test / if what I put on the wiki works for you (as my environment
-works I don't want to break it and start from scratch).
 
-> Nicolas,
->
-> could you write up some summary of what problems one can encounter
-> compiling for Sharp ROM and how to deal with them and put that up in the
-> wiki so everyone benefits and can improve the info?  I am still
-> struggling with getting the app to compile all the way through, so I
-> cannot comment yet on running the thing.
->
-> Regards
->
-> Rolf
+Vovan wrote:
+> On Sat, 02 Dec 2006 23:22:56 +0300, Erik Hovland <erik@hovland.org> wrote:
+> 
+>> Scratch your itch. There is enough room in the community for another
+>> environment. But please consider why GPE or Opie can't do what you need
+>> before taking on what could be a huge task.
+>>
+> 
+> My main problem is perfomance. For example:in Symbian "addressbook"  
+> application
+> starts in less than a second; in Qtopia it starts something about 2..3  
+> seconds!
+
+Actually, if you use the 'fast load' option, which loads certain apps at 
+startup, you will get a faster startup speed, which is the same way 
+symbian loads apps, and gives you the perception that it is faster. You 
+can also configure apps to be quicklaunched. For best results, configure 
+Qtopia as 'singleexec' which gives the best performance memory size and 
+startup speed.
+
+
+> That is not acceptible for me :) I dont have 400 mhz CPU in SX1, I only  
+> have 120mhz
+> so it is a problem...
+> 
+> 
 
 
