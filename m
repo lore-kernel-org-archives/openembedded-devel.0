@@ -1,26 +1,27 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1GrDoA-0004wI-W5
-	for openembedded-devel@openembedded.org; Mon, 04 Dec 2006 14:24:35 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1GrDov-0004y8-Qo
+	for openembedded-devel@openembedded.org; Mon, 04 Dec 2006 14:25:22 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kB4DNmwq010959
-	for <openembedded-devel@openembedded.org>; Mon, 4 Dec 2006 13:23:48 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kB4DOZNa011073
+	for <openembedded-devel@openembedded.org>; Mon, 4 Dec 2006 13:24:35 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 10112-08 for <openembedded-devel@openembedded.org>;
-	Mon,  4 Dec 2006 13:23:45 +0000 (GMT)
+	id 10112-09 for <openembedded-devel@openembedded.org>;
+	Mon,  4 Dec 2006 13:24:32 +0000 (GMT)
 Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kB4DNjDX010947
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kB4DOVZK011059
 	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Mon, 4 Dec 2006 13:23:45 GMT
+	for <openembedded-devel@openembedded.org>; Mon, 4 Dec 2006 13:24:31 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <c384c5ea0612031500o3ee66a23x89d72a948f418532@mail.gmail.com>
+In-Reply-To: <4573F8B3.3070207@dominion.kabel.utwente.nl>
 References: <c384c5ea0612031500o3ee66a23x89d72a948f418532@mail.gmail.com>
-Date: Mon, 04 Dec 2006 13:23:45 +0000
-Message-Id: <1165238625.15272.3.camel@localhost.localdomain>
+	<4573F8B3.3070207@dominion.kabel.utwente.nl>
+Date: Mon, 04 Dec 2006 13:24:31 +0000
+Message-Id: <1165238672.15272.5.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.6.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -38,48 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Dec 2006 13:24:35 -0000
+X-List-Received-Date: Mon, 04 Dec 2006 13:25:22 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2006-12-04 at 00:00 +0100, Leon Woestenberg wrote: 
-> Hello,
+On Mon, 2006-12-04 at 11:30 +0100, Koen Kooi wrote:
+> I have something like this:
 > 
-> I seem to hit upon a recent change involving finding shlib
-> dependencies using the objdump | grep NEEDED approach by Graeme
-> Gregory/XorA:
+> - --- conf/bitbake.conf   a55e0d456ecb5fa95185e35580c90bcc9513ed8d
+> +++ conf/bitbake.conf   e3d238d78a95629037ad0f48ce24e3a7382e540e
+> @@ -454,3 +454,6 @@ COMBINED_FEATURES = "\
+>      ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "usbgadget", d)} \
+>      ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "usbhost", d)}"
 > 
-> http://www.openembedded.org/viewmtn/revision.psp?id=1fb8812d36f505cfabe9ee2335441ada60e32f83
+> +
+> +export OBJDUMP := "${HOST_PREFIX}objdump"
+> +
 > 
-> Shouldn't (BUILD_)OBJDUMP be defined instead with a BUILD_PREFIX?
+> 
+> That should fix the issues, but isn't the right way.
 
-BUILD_OBJDUMP would use BUILD_PREFIX
-HOST_OBJDUMP (or OBJDUMP) should use HOST_PREFIX
-
-> OBJDUMP uses HOST_PREFIX, which seems undefined during packaging
-> (using package_ipk).
-
-HOST_PREFIX should never be undefined. How are you working out its
-undefined?
-
-When running an arm build, HOST_PREFIX might be "arm-linux-" so the
-objdump used would be arm-linux-objdump. Note that if arm-linux-objdump
-isn't in PATH, that would be a problem.
-
-For comparison BUILD_PREFIX would be "i686-linux-" on my system and
-using "i686-linux-objdump" which wouldn't make sense on arm binaries
-when packaging.
-
-Cheers,
+What issue does that fix?
 
 Richard
-
-
-
-
-
-
-
 
 
 
