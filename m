@@ -1,25 +1,19 @@
-Received: from [64.233.162.233] (helo=nz-out-0102.google.com)
+Received: from [84.12.140.56] (helo=moneypenny.softoption.local)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <andrew.paulsen@gmail.com>) id 1GrcQo-0001dA-2m
+	(envelope-from <Mark.Howells@softoption.com>) id 1Grctq-00021e-2M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Dec 2006 16:42:06 +0100
-Received: by nz-out-0102.google.com with SMTP id m22so1989386nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Dec 2006 07:41:12 -0800 (PST)
-Received: by 10.78.201.2 with SMTP id y2mr9084595huf.1165333271124;
-	Tue, 05 Dec 2006 07:41:11 -0800 (PST)
-Received: by 10.78.166.11 with HTTP; Tue, 5 Dec 2006 07:41:11 -0800 (PST)
-Message-ID: <d46153c40612050741h4710f432yd984fb92e57fa931@mail.gmail.com>
-Date: Tue, 5 Dec 2006 09:41:11 -0600
-From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <45758A01.1030203@linuxdevelopment.de>
+	Tue, 05 Dec 2006 17:12:06 +0100
 MIME-Version: 1.0
-References: <d46153c40612041402o2e1ed6fdmdd1a8fa8261d15ce@mail.gmail.com>
-	<432beae0612050150u64499772m14fefdeb8ccd6e2f@mail.gmail.com>
-	<d46153c40612050629v8bdfcd2i32fa9858f916605f@mail.gmail.com>
-	<45758A01.1030203@linuxdevelopment.de>
-Subject: Re: madwifi
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Date: Tue, 5 Dec 2006 16:10:26 -0000
+Message-ID: <5144EF5B0ABC6745BEE64C74E43ABD8F11AA9E@moneypenny.softoption.local>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] e2fsprogs won't build [SOLVED]
+Thread-Index: AccYXaLzrExj8BLxT6G+0S1MxIAH8QAKNLEA
+From: "Mark Howells" <Mark.Howells@softoption.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: e2fsprogs won't build [SOLVED]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,31 +27,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Dec 2006 15:42:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 05 Dec 2006 16:12:06 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="windows-1250"
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-On 12/5/06, Robert W=F6rle <robert@linuxdevelopment.de> wrote:
-> Dear Andrew
->
-> Is there a specific reason why you work with the .oz354 tree ?
-> This tree is old and i think not maintained anymore ,, ( people correct
-> me if am wrong )
->
-> Also that you miss tmp/work/ARCHITECURE directory tells me that you
-> should consider a
-> mtn update in order to sync your tree to the current state .. then
-> please use .dev tree .
->
-> btw : how is your compulab ?  we also evaluate it here and i am getting
-> good results also using the current .dev tree
+=20
 
-Our Compulab board is working very well so far, I just got the LCD up
-and running yesterday and I'll add a touch screen today.  And
-hopefully wifi support :)
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org=20
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On=20
+> Behalf Of Mark Howells
+> Sent: 05 December 2006 11:08
+>=20
+> I think _hope_ this is just a quickie - when I try to build=20
+> e2fsprogs I see the following
+> =20
+> [snip]
+> Packaged contents of e2fsprogs-doc into=20
+> /home/mark/slugos-head/openslug/tmp/deploy/ipk/e2fsprogs-doc_1
+> .38-r6_armeb.ipk
+> NOTE: Not creating empty archive for e2fsprogs-dev-1.38-r6
+> ERROR: Error in executing:=20
+> /home/mark/slugos-head/openembedded/packages/e2fsprogs/e2fspro
+> gs_1.38.bb
+> ERROR: Exception:exceptions.OSError Message:[Errno 2] No such=20
+> file or directory:=20
+> '/home/mark/slugos-head/openslug/tmp/work/e2fsprogs-1.38-r6/in
+> stall/e2fsprogs-locale'
 
-I am NOT using .oz354, I am using org.openembedded.dev, sorry for the mista=
-ke.
+I don't know what had happened, but I couldn't see anything wrong with =
+the bb file so I cd'd to the e2fsprogs directory and did
+
+zeus$> bb -c clean -b e2fsprogs_1.38.bb
+zeus$> bb -b e2fsprogs_1.38.bb
+
+And then ran
+
+zeus$> make openslug-image=20
+
+As before and all seems to be working.
+
+Cheers
+
+Mark
+
+--=20
+No virus found in this outgoing message.
+Checked by AVG.
+Version: 7.5.432 / Virus Database: 268.15.6/568 - Release Date: =
+04/12/2006 15:20
+=20
 
 
