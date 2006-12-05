@@ -1,23 +1,23 @@
-Received: from [212.227.126.177] (helo=moutng.kundenserver.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <robert@linuxdevelopment.de>) id 1Grbpx-0000Bk-9r
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Dec 2006 16:04:01 +0100
-Received: from [84.155.135.48] (helo=[172.16.0.14])
-	by mrelayeu.kundenserver.de (node=mrelayeu6) with ESMTP (Nemesis),
-	id 0ML29c-1Grbp23wu7-0008UY; Tue, 05 Dec 2006 16:03:07 +0100
-Message-ID: <45758A01.1030203@linuxdevelopment.de>
-Date: Tue, 05 Dec 2006 16:02:25 +0100
-From: =?ISO-8859-1?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; de-AT; rv:1.7.13) Gecko/20060411
-X-Accept-Language: de, en
-MIME-Version: 1.0
+	(envelope-from <openembedded@hrw.one.pl>) id 1GrcNr-0001Yf-R0
+	for openembedded-devel@openembedded.org; Tue, 05 Dec 2006 16:39:03 +0100
+Received: (qmail 2010 invoked by uid 813007); 5 Dec 2006 15:38:09 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 5 Dec 2006 15:38:09 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+Organization: OpenEmbedded
 To: openembedded-devel@lists.openembedded.org
-References: <d46153c40612041402o2e1ed6fdmdd1a8fa8261d15ce@mail.gmail.com>	<432beae0612050150u64499772m14fefdeb8ccd6e2f@mail.gmail.com>
+Date: Tue, 5 Dec 2006 16:38:04 +0100
+User-Agent: KMail/1.9.5
+References: <d46153c40612041402o2e1ed6fdmdd1a8fa8261d15ce@mail.gmail.com>
 	<d46153c40612050629v8bdfcd2i32fa9858f916605f@mail.gmail.com>
-In-Reply-To: <d46153c40612050629v8bdfcd2i32fa9858f916605f@mail.gmail.com>
-X-Provags-ID: kundenserver.de abuse@kundenserver.de
-	login:3a738c603c23670681f156cc7e748d26
+	<45758A01.1030203@linuxdevelopment.de>
+In-Reply-To: <45758A01.1030203@linuxdevelopment.de>
+MIME-Version: 1.0
+Message-Id: <200612051638.04744.openembedded@hrw.one.pl>
 Subject: Re: madwifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,68 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Dec 2006 15:04:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 Dec 2006 15:39:04 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Dear Andrew
+Dnia wtorek, 5 grudnia 2006 16:02, Robert W=F6rle napisa=B3:
 
-Is there a specific reason why you work with the .oz354 tree ?
-This tree is old and i think not maintained anymore ,, ( people correct
-me if am wrong )
+> Is there a specific reason why you work with the .oz354 tree ?
+> This tree is old and i think not maintained anymore ,, ( people correct
+> me if am wrong )
 
-Also that you miss tmp/work/ARCHITECURE directory tells me that you
-should consider a
-mtn update in order to sync your tree to the current state .. then
-please use .dev tree .
+Tree is maintained but have very small amount of changes. It should not be=
+=20
+used for non-OpenZaurus supported machines anyway.
 
-btw : how is your compulab ?  we also evaluate it here and i am getting
-good results also using the current .dev tree
+I suggest using .dev for any development. .oz354x tree is used to maintain=
+=20
+OpenZaurus updates.
 
-rob_w
-> Ok, I tried a few more things this morning, but I'm still getting
-> errors.  Here's what I'm working with:
->
-> OE Build Configuration:
-> BB_VERSION     = "1.6.3"
-> OE_REVISION    = "dbe2d7e445c33fd9403d6edaf6ec36d1857ada98"
-> TARGET_ARCH    = "arm"
-> TARGET_OS      = "linux"
-> MACHINE        = "compulab-pxa270"
-> DISTRO         = "generic"
-> DISTRO_VERSION = ".dev-snapshot-20061205"
-> TARGET_FPU     = "soft"
-> I am using the .oz354x branch of OE.
->
-> I first tried adding the following to my machine.conf file:
-> BOOTSTRAP_EXTRA_RDEPENDS = "madwifi-ng"
-> DEPENDS += "madwifi-ng"
->
-> Which promptly broke my build with a circular dependency:
-> ERROR: /stuff/org.openembedded.dev/packages/quilt/quilt-native_0.45.bb
-> depends on itself (eventually)
-> ERROR: upwards chain is: gpe-image (gpe-image) -> ipkg-native
-> (ipkg-native) -> pkgconfig-native (pkgconfig-native) ->
-> autoconf-native (autoconf-native) -> quilt-native (quilt-native) ->
-> madwifi-ng (madwifi-ng) -> ipkg-utils-native (ipkg-utils-native)
->
-> I then tried adding the following to my gpe-image.bb file:
-> GPE_EXTRA_INSTALL += "madwifi-ng"
-> DEPENDS += "madwifi-ng"
->
-> I also tried a few combinations of adding madwifi-ng to
-> GPE_EXTRA_INSTALL, DEPENDS, and RDEPENDS to gpe-image.bb to see if
-> dumb luck would help ... it didn't.
->
-> Other than the circular dependency error, I always get:
-> ERROR: Nothing provides runtime dependency madwifi-ng
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->   
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+            That must be wonderful! I don understand it at all.
+
 
 
 
