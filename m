@@ -1,22 +1,23 @@
-Received: from [64.233.162.233] (helo=nz-out-0102.google.com)
+Received: from [212.227.126.177] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <andrew.paulsen@gmail.com>) id 1GrbJb-0008J4-Py
+	(envelope-from <robert@linuxdevelopment.de>) id 1Grbpx-0000Bk-9r
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Dec 2006 15:30:35 +0100
-Received: by nz-out-0102.google.com with SMTP id m22so1973993nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Dec 2006 06:29:42 -0800 (PST)
-Received: by 10.78.200.3 with SMTP id x3mr9004050huf.1165328981030;
-	Tue, 05 Dec 2006 06:29:41 -0800 (PST)
-Received: by 10.78.166.11 with HTTP; Tue, 5 Dec 2006 06:29:40 -0800 (PST)
-Message-ID: <d46153c40612050629v8bdfcd2i32fa9858f916605f@mail.gmail.com>
-Date: Tue, 5 Dec 2006 08:29:40 -0600
-From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <432beae0612050150u64499772m14fefdeb8ccd6e2f@mail.gmail.com>
+	Tue, 05 Dec 2006 16:04:01 +0100
+Received: from [84.155.135.48] (helo=[172.16.0.14])
+	by mrelayeu.kundenserver.de (node=mrelayeu6) with ESMTP (Nemesis),
+	id 0ML29c-1Grbp23wu7-0008UY; Tue, 05 Dec 2006 16:03:07 +0100
+Message-ID: <45758A01.1030203@linuxdevelopment.de>
+Date: Tue, 05 Dec 2006 16:02:25 +0100
+From: =?ISO-8859-1?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; de-AT; rv:1.7.13) Gecko/20060411
+X-Accept-Language: de, en
 MIME-Version: 1.0
-References: <d46153c40612041402o2e1ed6fdmdd1a8fa8261d15ce@mail.gmail.com>
-	<432beae0612050150u64499772m14fefdeb8ccd6e2f@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+References: <d46153c40612041402o2e1ed6fdmdd1a8fa8261d15ce@mail.gmail.com>	<432beae0612050150u64499772m14fefdeb8ccd6e2f@mail.gmail.com>
+	<d46153c40612050629v8bdfcd2i32fa9858f916605f@mail.gmail.com>
+In-Reply-To: <d46153c40612050629v8bdfcd2i32fa9858f916605f@mail.gmail.com>
+X-Provags-ID: kundenserver.de abuse@kundenserver.de
+	login:3a738c603c23670681f156cc7e748d26
 Subject: Re: madwifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,74 +32,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Dec 2006 14:30:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 05 Dec 2006 15:04:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 12/5/06, Justin Patrin <papercrane@gmail.com> wrote:
-> On 12/4/06, Andrew Paulsen <andrew.paulsen@gmail.com> wrote:
-> > Does anyone have any tips for including madwifi into a gpe-image build?
-> >
-> > I can "bitbake madwifi-ng" by itself and that appears to work.
-> >
-> > If I add
-> > BOOTSTRAP_EXTRA_RDEPENDS = "madwifi-ng"
-> > to my machine.conf, or add
-> >
-> > GPE_EXTRA_INSTALL += "madwifi-ng"
-> > to my gpe-image.bb, I get an:
-> >
-> > "ERROR: Nothing provides runtime dependency madwifi-ng"
-> >
-> > Is there a better way to add packages to an image?
-> >
+Dear Andrew
+
+Is there a specific reason why you work with the .oz354 tree ?
+This tree is old and i think not maintained anymore ,, ( people correct
+me if am wrong )
+
+Also that you miss tmp/work/ARCHITECURE directory tells me that you
+should consider a
+mtn update in order to sync your tree to the current state .. then
+please use .dev tree .
+
+btw : how is your compulab ?  we also evaluate it here and i am getting
+good results also using the current .dev tree
+
+rob_w
+> Ok, I tried a few more things this morning, but I'm still getting
+> errors.  Here's what I'm working with:
 >
-> The problem you're facing is that you're adding only a runtime
-> (install-time) dependency and not a compile-time dependency. If you're
-> compiling in the .dev branch then this is likely a bug (if you're
-> using BOOTSTRAP_EXTRA_RDEPENDS). If you're using the .oz354x branch
-> then you need to add madwifi-ng to the DEPENDS of the file you're
-> editing too.
+> OE Build Configuration:
+> BB_VERSION     = "1.6.3"
+> OE_REVISION    = "dbe2d7e445c33fd9403d6edaf6ec36d1857ada98"
+> TARGET_ARCH    = "arm"
+> TARGET_OS      = "linux"
+> MACHINE        = "compulab-pxa270"
+> DISTRO         = "generic"
+> DISTRO_VERSION = ".dev-snapshot-20061205"
+> TARGET_FPU     = "soft"
+> I am using the .oz354x branch of OE.
 >
-> --
-> Justin Patrin
+> I first tried adding the following to my machine.conf file:
+> BOOTSTRAP_EXTRA_RDEPENDS = "madwifi-ng"
+> DEPENDS += "madwifi-ng"
+>
+> Which promptly broke my build with a circular dependency:
+> ERROR: /stuff/org.openembedded.dev/packages/quilt/quilt-native_0.45.bb
+> depends on itself (eventually)
+> ERROR: upwards chain is: gpe-image (gpe-image) -> ipkg-native
+> (ipkg-native) -> pkgconfig-native (pkgconfig-native) ->
+> autoconf-native (autoconf-native) -> quilt-native (quilt-native) ->
+> madwifi-ng (madwifi-ng) -> ipkg-utils-native (ipkg-utils-native)
+>
+> I then tried adding the following to my gpe-image.bb file:
+> GPE_EXTRA_INSTALL += "madwifi-ng"
+> DEPENDS += "madwifi-ng"
+>
+> I also tried a few combinations of adding madwifi-ng to
+> GPE_EXTRA_INSTALL, DEPENDS, and RDEPENDS to gpe-image.bb to see if
+> dumb luck would help ... it didn't.
+>
+> Other than the circular dependency error, I always get:
+> ERROR: Nothing provides runtime dependency madwifi-ng
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>   
 
-Ok, I tried a few more things this morning, but I'm still getting
-errors.  Here's what I'm working with:
-
-OE Build Configuration:
-BB_VERSION     = "1.6.3"
-OE_REVISION    = "dbe2d7e445c33fd9403d6edaf6ec36d1857ada98"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux"
-MACHINE        = "compulab-pxa270"
-DISTRO         = "generic"
-DISTRO_VERSION = ".dev-snapshot-20061205"
-TARGET_FPU     = "soft"
-I am using the .oz354x branch of OE.
-
-I first tried adding the following to my machine.conf file:
-BOOTSTRAP_EXTRA_RDEPENDS = "madwifi-ng"
-DEPENDS += "madwifi-ng"
-
-Which promptly broke my build with a circular dependency:
-ERROR: /stuff/org.openembedded.dev/packages/quilt/quilt-native_0.45.bb
-depends on itself (eventually)
-ERROR: upwards chain is: gpe-image (gpe-image) -> ipkg-native
-(ipkg-native) -> pkgconfig-native (pkgconfig-native) ->
-autoconf-native (autoconf-native) -> quilt-native (quilt-native) ->
-madwifi-ng (madwifi-ng) -> ipkg-utils-native (ipkg-utils-native)
-
-I then tried adding the following to my gpe-image.bb file:
-GPE_EXTRA_INSTALL += "madwifi-ng"
-DEPENDS += "madwifi-ng"
-
-I also tried a few combinations of adding madwifi-ng to
-GPE_EXTRA_INSTALL, DEPENDS, and RDEPENDS to gpe-image.bb to see if
-dumb luck would help ... it didn't.
-
-Other than the circular dependency error, I always get:
-ERROR: Nothing provides runtime dependency madwifi-ng
 
 
