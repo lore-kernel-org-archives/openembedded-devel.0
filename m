@@ -1,19 +1,22 @@
-Received: from [84.12.140.56] (helo=moneypenny.softoption.local)
+Received: from [62.169.194.2] (helo=fesscrpp1.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <Mark.Howells@softoption.com>) id 1Grctq-00021e-2M
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Dec 2006 17:12:06 +0100
+	(envelope-from <skoroneos@digital-opsis.com>) id 1Grx4u-000362-I3
+	for openembedded-devel@openembedded.org; Wed, 06 Dec 2006 14:44:52 +0100
+Received: from dias (62.169.211.226) by fesscrpp1.tellas.gr (7.3.117)
+	id 45261701014B404A for openembedded-devel@openembedded.org;
+	Wed, 6 Dec 2006 15:43:12 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Wed, 6 Dec 2006 15:43:52 +0200
+Message-ID: <HOECLKEKOHLAMMGDLLBHCEFKJCAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Tue, 5 Dec 2006 16:10:26 -0000
-Message-ID: <5144EF5B0ABC6745BEE64C74E43ABD8F11AA9E@moneypenny.softoption.local>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] e2fsprogs won't build [SOLVED]
-Thread-Index: AccYXaLzrExj8BLxT6G+0S1MxIAH8QAKNLEA
-From: "Mark Howells" <Mark.Howells@softoption.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: e2fsprogs won't build [SOLVED]
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2962
+In-Reply-To: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>
+Importance: Normal
+Subject: Re: FOSDEM'07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -27,57 +30,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Dec 2006 16:12:06 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Wed, 06 Dec 2006 13:44:52 -0000
 Content-Type: text/plain;
-	charset="windows-1250"
-Content-Transfer-Encoding: quoted-printable
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-=20
+Just a reminder for the matter
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org=20
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On=20
-> Behalf Of Mark Howells
-> Sent: 05 December 2006 11:08
->=20
-> I think _hope_ this is just a quickie - when I try to build=20
-> e2fsprogs I see the following
-> =20
-> [snip]
-> Packaged contents of e2fsprogs-doc into=20
-> /home/mark/slugos-head/openslug/tmp/deploy/ipk/e2fsprogs-doc_1
-> .38-r6_armeb.ipk
-> NOTE: Not creating empty archive for e2fsprogs-dev-1.38-r6
-> ERROR: Error in executing:=20
-> /home/mark/slugos-head/openembedded/packages/e2fsprogs/e2fspro
-> gs_1.38.bb
-> ERROR: Exception:exceptions.OSError Message:[Errno 2] No such=20
-> file or directory:=20
-> '/home/mark/slugos-head/openslug/tmp/work/e2fsprogs-1.38-r6/in
-> stall/e2fsprogs-locale'
+> >
+> > So now we need to prepare some marketing materials and posters.
+> >
+> 
+> 
+> If someone could provide the text and some pics for a flyer i 
+> could arrange
+> some of out graphic designers to come up with a couple of ideas.
+> I can also "sponsor" printing a few hundred of them.
+> 
+> Same for posters etc. (will also need size)
+> 
+> 
+> Stelios
 
-I don't know what had happened, but I couldn't see anything wrong with =
-the bb file so I cd'd to the e2fsprogs directory and did
-
-zeus$> bb -c clean -b e2fsprogs_1.38.bb
-zeus$> bb -b e2fsprogs_1.38.bb
-
-And then ran
-
-zeus$> make openslug-image=20
-
-As before and all seems to be working.
-
-Cheers
-
-Mark
-
---=20
-No virus found in this outgoing message.
-Checked by AVG.
-Version: 7.5.432 / Virus Database: 268.15.6/568 - Release Date: =
-04/12/2006 15:20
-=20
 
 
