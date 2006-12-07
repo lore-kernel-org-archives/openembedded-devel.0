@@ -1,21 +1,24 @@
-Received: from [67.121.157.153] (helo=integratus.com)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <andy@protium.com>) id 1GsZJq-00085y-Le
-	for openembedded-devel@openembedded.org; Fri, 08 Dec 2006 07:34:51 +0100
-Received: (qmail 8749 invoked from network); 8 Dec 2006 06:33:20 -0000
-Received: from pool-71-116-66-86.snfcca.dsl-w.verizon.net (HELO
-	?192.168.1.10?) (andy@71.116.66.86)
-	by integratus.com with AES256-SHA encrypted SMTP;
-	8 Dec 2006 06:33:20 -0000
-Message-ID: <45790737.8010509@protium.com>
-Date: Thu, 07 Dec 2006 22:33:27 -0800
-From: Andy Wilcox <andy@protium.com>
-User-Agent: Thunderbird 1.5.0.4 (X11/20060516)
-MIME-Version: 1.0
+Received: from [128.210.5.246] (helo=mailhub246.itcs.purdue.edu)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <cndougla@purdue.edu>) id 1Gs7s8-0003sn-Su
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Dec 2006 02:16:25 +0100
+Received: from [192.168.1.103] ([74.140.123.144]) (authenticated bits=0)
+	by mailhub246.itcs.purdue.edu (8.13.7/8.13.7/external-auth-smtp) with
+	ESMTP id kB71FLRK030033
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Dec 2006 20:15:22 -0500
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <C45FD47D-6063-4EA5-888D-80ACBBD641D9@purdue.edu>
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.4090.1165535189.29767.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.4090.1165535189.29767.openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe-commits] org.oe.dev site/powerpc-linux: additions for apache2, modphp, and samba cross compile.
+From: Chase Douglas <cndougla@purdue.edu>
+Date: Wed, 6 Dec 2006 20:14:40 -0500
+X-Mailer: Apple Mail (2.752.3)
+X-PMX-Version: 5.2.1.279297
+X-PerlMx-Virus-Scanned: Yes
+X-Mailman-Approved-At: Fri, 08 Dec 2006 10:05:50 +0100
+Subject: Staging does not include all packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,24 +32,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Dec 2006 06:34:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 07 Dec 2006 01:16:25 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
+I'm trying to create an image, yet the resulting tarball is missing  
+many things such as busybox and alsamixer. The image bb file is:
 
-Mickey writes:
-> awilcox commit wrote:
->> > site/powerpc-linux: additions for apache2, modphp, and samba cross compile.
->>     
->
-> Are these powerpc specific? If not, should they rather go into our new
-> common site file?
-Some of these might be powerpc specific.  I'll sort them out and commit
-updates (to the appropriate places) shortly.
+IMAGE_BASENAME="9XM"
+IMAGE_LINGUAS=""
+LICENSE="GPL"
+IPKG_INSTALL="task-9xm"
+RDEPENDS="${IPKG_INSTALL}"
 
-Cheers,
-Andy
+inherit image_ipk
 
+The task file is:
 
+DESCRIPTION = "9XM Root Filesystem"
+PR = "r1"
+
+PACKAGES = "task-9xm"
+
+ALLOW_EMPTY = "1"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+MACHINE_FEATURES ?= "kernel26"
+DISTRO_FEATURES ?= ""
+DISTRO_CORE_PACKAGE ?= "task-base-core-default"
+
+DISTRO_EXTRA_RDEPENDS ?= ""
+DISTRO_EXTRA_RRECOMMENDS ?= ""
+MACHINE_EXTRA_RDEPENDS ?= ""
+MACHINE_EXTRA_RRECOMMENDS ?= ""
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
+
+RDEPENDS = "\
+     ${DISTRO_CORE_PACKAGE} \
+     kernel \
+     udev \
+     sysfsutils \
+     module-init-tools \
+     apm \
+     apmd \
+     hdparm \
+     e2fsprogs \
+     e2fsprogs-e2fsck \
+     e2fsprogs-mke2fs \
+     alsa-utils-alsactl \
+     alsa-utils-alsamixer \
+     alsa-conf \
+     irda-utils \
+     usbutils \
+     dropbear \
+     base-files \
+     base-passwd \
+     busybox \
+     initscripts \
+     netbase \
+     sysvinit \
+     sysvinit-pidof \
+     tinylogin \
+     modutils-initscripts \
+     fuser \
+     setserial \
+     wireless-tools \
+     wpa-supplicant \
+     portmap \
+     lrzsz \
+     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
+     ${MACHINE_EXTRA_RDEPENDS} \
+     ${DISTRO_EXTRA_RDEPENDS}"
+
+RRECOMMENDS = "\
+     ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
+     ${MACHINE_EXTRA_RRECOMMENDS} \
+     ${DISTRO_EXTRA_RRECOMMENDS}"
+
+The bitbake version is 1.62. What could be going wrong?
+
+Thanks,
+Chase Douglas
 
 
