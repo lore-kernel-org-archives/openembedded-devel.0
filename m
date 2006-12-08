@@ -1,29 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1Gsff6-0007lz-MS
+	(envelope-from <pmiscml@gmail.com>) id 1GsiL7-00080z-E7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Dec 2006 14:21:12 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id C044828C022; Fri,  8 Dec 2006 14:17:14 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180147124.adsl.alicedsl.de [85.180.147.124])
-	by srv043.dedi23.de (Postfix) with ESMTP id 4E38228C021
+	Fri, 08 Dec 2006 17:12:45 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so1111138nfc
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Dec 2006 14:17:11 +0100 (CET)
-Date: Fri, 8 Dec 2006 14:19:58 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
+	Fri, 08 Dec 2006 08:11:34 -0800 (PST)
+Received: by 10.48.162.15 with SMTP id k15mr702977nfe.1165594293997;
+	Fri, 08 Dec 2006 08:11:33 -0800 (PST)
+Received: from CUBE ( [85.202.124.214])
+	by mx.google.com with ESMTP id q27sm10535588nfc.2006.12.08.08.11.32;
+	Fri, 08 Dec 2006 08:11:33 -0800 (PST)
+Date: Fri, 8 Dec 2006 18:11:33 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 X-Priority: 3 (Normal)
-Message-ID: <63497983.20061208141958@vanille-media.de>
+Message-ID: <36300198.20061208181133@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <elbohi$a8k$1@sea.gmane.org>
-References: <elbohi$a8k$1@sea.gmane.org>
+In-Reply-To: <1165496944.5601.32.camel@localhost.localdomain>
+References: <456B0DC2.90300@dominion.kabel.utwente.nl>
+	<45780B2E.4020906@dominion.kabel.utwente.nl>
+	<1165496944.5601.32.camel@localhost.localdomain>
 MIME-Version: 1.0
-Subject: Re: RFC: encourage switch away from heanet.sf.net
+Subject: Re: To be removed recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,106 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Dec 2006 13:21:12 -0000
+X-List-Received-Date: Fri, 08 Dec 2006 16:12:45 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie wrote:
-> it occurred to me today that Sourceforge is not using that intermediate
-> page anymore where it lists all the mirrors for a file to be downloaded.
->     It used to be necessary that you click on one of the mirrors there
-> to actually start the download from the browser. Instead they 
-> automatically 302 you now.
+Hello Richard,
 
-If that's true, then +1 from me.
+Thursday, December 7, 2006, 3:09:03 PM, you wrote:
 
-Regards,
+>> Only 5 days left till the first batch gets removed.
 
-:M:
+[]
+
+>> Package Name:   mono
+>> Reason:         Obsolete version - 1.2 is current, 1.0 is not fetchable
+
+> non-working - ultimately we probably want mono
+
+  I'd second this - I would be interested to update it, but won't have
+a chance for some time. But it's pretty important package to remove
+any trace of it from HEAD.
+
+
+[]
+
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
