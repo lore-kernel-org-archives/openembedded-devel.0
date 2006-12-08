@@ -1,21 +1,25 @@
-Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1GsiL7-00080z-E7
+	(envelope-from <mickey@vanille-media.de>) id 1Gsj5k-0000pg-F8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Dec 2006 17:12:45 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so1111138nfc
+	Fri, 08 Dec 2006 18:01:13 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 7499F28C022; Fri,  8 Dec 2006 17:56:57 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.9 required=5.0 tests=MISSING_HEADERS,
+	RCVD_IN_NJABL_DUL,RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from PROMETHEUS (e180147124.adsl.alicedsl.de [85.180.147.124])
+	by srv043.dedi23.de (Postfix) with ESMTP id 894EA28C021
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Dec 2006 08:11:34 -0800 (PST)
-Received: by 10.48.162.15 with SMTP id k15mr702977nfe.1165594293997;
-	Fri, 08 Dec 2006 08:11:33 -0800 (PST)
-Received: from CUBE ( [85.202.124.214])
-	by mx.google.com with ESMTP id q27sm10535588nfc.2006.12.08.08.11.32;
-	Fri, 08 Dec 2006 08:11:33 -0800 (PST)
-Date: Fri, 8 Dec 2006 18:11:33 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
+	Fri,  8 Dec 2006 17:56:51 +0100 (CET)
+Date: Fri, 8 Dec 2006 17:59:39 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
+Organization: Vanille-Media
 X-Priority: 3 (Normal)
-Message-ID: <36300198.20061208181133@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Message-ID: <444521399.20061208175939@vanille-media.de>
+CC: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1165496944.5601.32.camel@localhost.localdomain>
 References: <456B0DC2.90300@dominion.kabel.utwente.nl>
 	<45780B2E.4020906@dominion.kabel.utwente.nl>
@@ -35,33 +39,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Dec 2006 16:12:45 -0000
+X-List-Received-Date: Fri, 08 Dec 2006 17:01:32 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hello Richard,
-
-Thursday, December 7, 2006, 3:09:03 PM, you wrote:
-
+Richard Purdie wrote:
+> On Thu, 2006-12-07 at 13:38 +0100, Koen Kooi wrote:
+>> > In case people didn't notice,
+>> > http://www.openembedded.org/repo/org.openembedded.dev/removal.txt has a few entries now,
+>> > which will be removed on the specified dates.
+>> 
 >> Only 5 days left till the first batch gets removed.
 
-[]
+>> Package Name:   Maemo
+>> Reason:         Unfetchable, obsoleted by IT2006 release.
 
->> Package Name:   mono
->> Reason:         Obsolete version - 1.2 is current, 1.0 is not fetchable
+> I don't know what we should do with these for the best. The end result
+> will be maemo being near enough totally removed from OE which sends out
+> the wrong message. I would ultimately like to see maemo in OE...
 
-> non-working - ultimately we probably want mono
+> Maybe a contender for moving to non-working?
 
-  I'd second this - I would be interested to update it, but won't have
-a chance for some time. But it's pretty important package to remove
-any trace of it from HEAD.
+I agree.
 
+>> Package Name:   bluez*2.*
+>> Reason:         Obsolete by, and conflicts with bluez 3.7               
 
-[]
+> Fine with me.
 
+This can be a problem for Opie, since we used the no-dbus version for
+quite some time to save space.
+
+>> Package Name:   zeecookbook
+>> Reason:         Not maintained upstream, not fetchable
+
+Regards,
+
+:M:
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
