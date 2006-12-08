@@ -1,31 +1,24 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1Gsj5k-0000pg-F8
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Dec 2006 18:01:13 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 7499F28C022; Fri,  8 Dec 2006 17:56:57 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=MISSING_HEADERS,
-	RCVD_IN_NJABL_DUL,RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180147124.adsl.alicedsl.de [85.180.147.124])
-	by srv043.dedi23.de (Postfix) with ESMTP id 894EA28C021
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Dec 2006 17:56:51 +0100 (CET)
-Date: Fri, 8 Dec 2006 17:59:39 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <444521399.20061208175939@vanille-media.de>
-CC: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1165496944.5601.32.camel@localhost.localdomain>
-References: <456B0DC2.90300@dominion.kabel.utwente.nl>
-	<45780B2E.4020906@dominion.kabel.utwente.nl>
-	<1165496944.5601.32.camel@localhost.localdomain>
-MIME-Version: 1.0
-Subject: Re: To be removed recipes
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <freyther@gmx.net>) id 1Gsmzu-0006Ns-QT
+	for openembedded-devel@openembedded.org; Fri, 08 Dec 2006 22:11:10 +0100
+Received: (qmail invoked by alias); 08 Dec 2006 21:09:58 -0000
+Received: from 88-134-98-23-dynip.superkabel.de (EHLO [192.168.1.100])
+	[88.134.98.23]
+	by mail.gmx.net (mp033) with SMTP; 08 Dec 2006 22:09:58 +0100
+X-Authenticated: #1949623
+In-Reply-To: <1165536521.5601.146.camel@localhost.localdomain>
+References: <1165536521.5601.146.camel@localhost.localdomain>
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <86661F3E-02CA-43CC-BC8E-707668C5A73D@gmx.net>
+From: Holger Freyther <freyther@gmx.net>
+Date: Fri, 8 Dec 2006 22:06:59 +0100
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.752.3)
+X-Y-GMX-Trusted: 0
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: RFC: Bitbake and UIs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,45 +32,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Dec 2006 17:01:32 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 08 Dec 2006 21:11:10 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Thu, 2006-12-07 at 13:38 +0100, Koen Kooi wrote:
->> > In case people didn't notice,
->> > http://www.openembedded.org/repo/org.openembedded.dev/removal.txt has a few entries now,
->> > which will be removed on the specified dates.
->> 
->> Only 5 days left till the first batch gets removed.
 
->> Package Name:   Maemo
->> Reason:         Unfetchable, obsoleted by IT2006 release.
+Am 08.12.2006 um 01:08 schrieb Richard Purdie:
 
-> I don't know what we should do with these for the best. The end result
-> will be maemo being near enough totally removed from OE which sends out
-> the wrong message. I would ultimately like to see maemo in OE...
+> Hi,
+>
+> After the threading changes, the current bitbake "UI" of lack thereof
+> has become a major issue to the extent I don't want to release bitbake
+> in its current state. We therefore finally need to step back and
+> consider what to do with all the messages it generates. I've made some
+> changes to message handling in trunk and whilst they've helped
+> standardise certain things, we need to do more. I have some ideas to
+> address this (and some other random thoughts as well):
+>
+> 1. Turn cooker into a class/module of its own. I did this last  
+> night ;-)
+>
+> 2. Have bin/bitbake error if its version is not equal to the lib/bb
+> version. This should stop people who've installed old versions from
+> having issues.
 
-> Maybe a contender for moving to non-working?
+hmm, do people still hit this? I thought I have prepended everything  
+to the python path.
+How do you define that core and bin/bitbake are compatible? If the  
+version numbers just match?
+I will blow up released badly as I will only upgrade one version and  
+not both :)
 
-I agree.
 
->> Package Name:   bluez*2.*
->> Reason:         Obsolete by, and conflicts with bluez 3.7               
+>
+> 3. Expand event.py to handle more events. Also expand the data these
+> events contain. For example, at the moment handler code in  
+> base.bbclass
+> generates the actual strings describing an event - I'd like to see  
+> some
+> of that in bitbake itself.
+>
+> The idea here is that the UI can listen for events and display them to
+> the user. In theory we could support multiple UIs and attach/detach  
+> UIs
+> at will. Add some kind of IPC to transport the event data and you have
+> remote interfaces.
+>
+> This means flooding the event channels with the likes of bb.msg.debug
+> data. The default tty UI can collapse these events back into a  
+> stream of
+> test to stdout.
+>
+> An example of a new event would be parsing status - an event might get
+> sent out every percentage complete, its up to the UI what to display.
 
-> Fine with me.
+ack
 
-This can be a problem for Opie, since we used the no-dbus version for
-quite some time to save space.
+>
+> 4. Rewrite (remove) the TmpHandler(e) code as it makes me feel ill  
+> (and
+> has a hidden embedded tab that will bite us one day). If you agree to
+> use a global method scope for handlers, we could do something  
+> similar to
+> the anonymous handlers? any ideas/gotchas here zecke?
+>
 
->> Package Name:   zeecookbook
->> Reason:         Not maintained upstream, not fetchable
+Hmm we had some disagreement on this on IRC today. We will write down
+our thoughts and try to find a solution. In worst case you are  
+invited to a death
+match at FOSDEM :)
 
-Regards,
+Basicly my questions are:
+	-Do we want to continue to have handlers per BitBake file or a list  
+of to be used event handlers
+	-Do we want persistance. Currently there is no way to store  
+information across two events.
+	  Both tinderclient.bbclass and icecc.bbclass could benefit from  
+this one
+	-Do we want return values for events. In this case an event handler  
+could do decisions as well
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
+
+> 5. To facilitate some of the above, introduce a HANDLER_TRANSITION
+> variable so we can alter the handler code in OE.dev to support the new
+> bitbake whilst maintaining backwards compatibility with bitbake 1.6.
+>
+> 6. Add a ConfigParsed style event which runs after the basic
+> configuration has been parsed. The idea is to use it for the
+> sanity.bbclass checks instead of running them once per build.
+
+sure. Adding Events and firing them is 'cheap'.
+
+
+>
+> 7. Add some kind of UI helper module which listens to events as  
+> ahandler
+> and records certain data. The UIs can use the helper to query and
+> display things to the user. It would record which tasks were run where
+> to find the logs configure for task X for example. This would be to  
+> try
+> and factor out common code from the UIs. UIs will also handle some
+> events directly themselves for example to display them in status
+> windows.
+>
+> 8. Add a commands.py module which would consist of bits of cooker and
+> shell. This would form the other half of the IPC, taking commands from
+> the UI.
+>
+> Other issues:
+>
+> We also need to consider where the initial configuration will come  
+> from
+> and how/where it gets stored. At the moment its generated by bin/ 
+> bitbake
+> but should we modularise that too?
+
+yes but not now?
+
+
+h.
 
 
