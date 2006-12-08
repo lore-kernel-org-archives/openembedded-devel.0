@@ -1,24 +1,29 @@
-Received: from [128.210.5.246] (helo=mailhub246.itcs.purdue.edu)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cndougla@purdue.edu>) id 1Gs7s8-0003sn-Su
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Dec 2006 02:16:25 +0100
-Received: from [192.168.1.103] ([74.140.123.144]) (authenticated bits=0)
-	by mailhub246.itcs.purdue.edu (8.13.7/8.13.7/external-auth-smtp) with
-	ESMTP id kB71FLRK030033
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Dec 2006 20:15:22 -0500
-Mime-Version: 1.0 (Apple Message framework v752.3)
-Message-Id: <C45FD47D-6063-4EA5-888D-80ACBBD641D9@purdue.edu>
-To: openembedded-devel@lists.openembedded.org
-From: Chase Douglas <cndougla@purdue.edu>
-Date: Wed, 6 Dec 2006 20:14:40 -0500
-X-Mailer: Apple Mail (2.752.3)
-X-PMX-Version: 5.2.1.279297
-X-PerlMx-Virus-Scanned: Yes
-X-Mailman-Approved-At: Fri, 08 Dec 2006 10:05:50 +0100
-Subject: Staging does not include all packages
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Gsfb3-0003pH-IV
+	for openembedded-devel@openembedded.org; Fri, 08 Dec 2006 14:17:01 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1GsfZm-0002aQ-Q4
+	for openembedded-devel@openembedded.org; Fri, 08 Dec 2006 14:15:42 +0100
+Received: from r76b7.r.ppp-pool.de ([89.54.118.183])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 08 Dec 2006 14:15:42 +0100
+Received: from no2spam by r76b7.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 08 Dec 2006 14:15:42 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 08 Dec 2006 14:15:27 +0100
+Message-ID: <elbohi$a8k$1@sea.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: r76b7.r.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.8 (X11/20061117)
+Sender: news <news@sea.gmane.org>
+Subject: RFC: encourage switch away from heanet.sf.net
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,88 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Dec 2006 01:16:25 -0000
+X-List-Received-Date: Fri, 08 Dec 2006 13:17:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
-I'm trying to create an image, yet the resulting tarball is missing  
-many things such as busybox and alsamixer. The image bb file is:
+Hi,
 
-IMAGE_BASENAME="9XM"
-IMAGE_LINGUAS=""
-LICENSE="GPL"
-IPKG_INSTALL="task-9xm"
-RDEPENDS="${IPKG_INSTALL}"
+it occurred to me today that Sourceforge is not using that intermediate 
+page anymore where it lists all the mirrors for a file to be downloaded. 
+    It used to be necessary that you click on one of the mirrors there 
+to actually start the download from the browser. Instead they 
+automatically 302 you now.
 
-inherit image_ipk
+Mirrors are there for a reason.  Unfortunately, sf.net forced us in the 
+past to use heanet.sourceforge.net for download since it was the only 
+complete mirror.  This is not the case any more, we can use 
+downloads.sf.net but still be sure to get the files we need (assuming 
+that sf.net will only redirect us to mirrors that *do* have the file).
 
-The task file is:
+I therefore suggest to change bitbake.conf in the following way and 
+request your comments on the matter (especially from hrw since RP 
+suggested you are the most knowledgeable about sf.net and the 
+associated, past problems).  This would set the IMHO sane default from 
+which users can still deviate via local.conf and site.conf
 
-DESCRIPTION = "9XM Root Filesystem"
-PR = "r1"
+- SOURCEFORGE_MIRROR = "http://heanet.dl.sourceforge.net/sourceforge"
++ SOURCEFORGE_MIRROR = "http://downloads.sf.net"
 
-PACKAGES = "task-9xm"
+For what it is worth, I for one have switched (via site.conf so far).
 
-ALLOW_EMPTY = "1"
+Regards
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+Rolf
 
-MACHINE_FEATURES ?= "kernel26"
-DISTRO_FEATURES ?= ""
-DISTRO_CORE_PACKAGE ?= "task-base-core-default"
-
-DISTRO_EXTRA_RDEPENDS ?= ""
-DISTRO_EXTRA_RRECOMMENDS ?= ""
-MACHINE_EXTRA_RDEPENDS ?= ""
-MACHINE_EXTRA_RRECOMMENDS ?= ""
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
-
-RDEPENDS = "\
-     ${DISTRO_CORE_PACKAGE} \
-     kernel \
-     udev \
-     sysfsutils \
-     module-init-tools \
-     apm \
-     apmd \
-     hdparm \
-     e2fsprogs \
-     e2fsprogs-e2fsck \
-     e2fsprogs-mke2fs \
-     alsa-utils-alsactl \
-     alsa-utils-alsamixer \
-     alsa-conf \
-     irda-utils \
-     usbutils \
-     dropbear \
-     base-files \
-     base-passwd \
-     busybox \
-     initscripts \
-     netbase \
-     sysvinit \
-     sysvinit-pidof \
-     tinylogin \
-     modutils-initscripts \
-     fuser \
-     setserial \
-     wireless-tools \
-     wpa-supplicant \
-     portmap \
-     lrzsz \
-     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
-     ${MACHINE_EXTRA_RDEPENDS} \
-     ${DISTRO_EXTRA_RDEPENDS}"
-
-RRECOMMENDS = "\
-     ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
-     ${MACHINE_EXTRA_RRECOMMENDS} \
-     ${DISTRO_EXTRA_RRECOMMENDS}"
-
-The bitbake version is 1.62. What could be going wrong?
-
-Thanks,
-Chase Douglas
 
 
