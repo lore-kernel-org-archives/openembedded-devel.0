@@ -1,34 +1,28 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GsSwf-0007Bj-5m
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Dec 2006 00:46:29 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 1A5FF28C022; Fri,  8 Dec 2006 00:42:36 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180172106.adsl.alicedsl.de [85.180.172.106])
-	by srv043.dedi23.de (Postfix) with ESMTP id 0AAED28C021
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Dec 2006 00:42:32 +0100 (CET)
-Date: Fri, 8 Dec 2006 00:45:17 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1896374565.20061208004517@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1165532018.5601.98.camel@localhost.localdomain>
-References: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>
-	<HOECLKEKOHLAMMGDLLBHCEFKJCAA.skoroneos@digital-opsis.com>
-	<c384c5ea0612070902o7dbb71e8v63cd137b5b611815@mail.gmail.com>
-	<1825230355.20061207183653@vanille-media.de>
-	<c384c5ea0612071104q1cd27beckd9bddfbb112c1d9d@mail.gmail.com>
-	<1165532018.5601.98.camel@localhost.localdomain>
-MIME-Version: 1.0
-Subject: Re: FOSDEM'07
+	(envelope-from <rpurdie@rpsys.net>) id 1GsTJH-0007Mm-GP
+	for openembedded-devel@openembedded.org; Fri, 08 Dec 2006 01:09:51 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kB808hQX015218;
+	Fri, 8 Dec 2006 00:08:43 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15010-06; Fri,  8 Dec 2006 00:08:41 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kB808cfH015209
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Fri, 8 Dec 2006 00:08:38 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel <openembedded-devel@openembedded.org>
+Date: Fri, 08 Dec 2006 00:08:41 +0000
+Message-Id: <1165536521.5601.146.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: RFC: Bitbake and UIs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,56 +36,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Dec 2006 23:46:29 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 08 Dec 2006 00:09:51 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Ok, let's get it started. Tempus fugit!
+Hi,
 
-Two sites I found helpful are:
+After the threading changes, the current bitbake "UI" of lack thereof
+has become a major issue to the extent I don't want to release bitbake
+in its current state. We therefore finally need to step back and
+consider what to do with all the messages it generates. I've made some
+changes to message handling in trunk and whilst they've helped
+standardise certain things, we need to do more. I have some ideas to
+address this (and some other random thoughts as well):
 
-http://www.swarthmore.edu/NatSci/cpurrin1/posteradvice.htm
+1. Turn cooker into a class/module of its own. I did this last night ;-)
 
-http://www.ncsu.edu/project/posters/NewSite/
+2. Have bin/bitbake error if its version is not equal to the lib/bb
+version. This should stop people who've installed old versions from
+having issues.
 
-I'd like to suggest having at least three huge images on the poster to attract
-guys that are wandering buy:
+3. Expand event.py to handle more events. Also expand the data these
+events contain. For example, at the moment handler code in base.bbclass
+generates the actual strings describing an event - I'd like to see some
+of that in bitbake itself.
 
-1.) A flow chart illustrating how different file types are mungled
-into a flashable image that gets onto your device. For that I have an
-idea that I can sketch you on a piece of paper. We'd need someone with
-graphic talent to make it look stunning though.
+The idea here is that the UI can listen for events and display them to
+the user. In theory we could support multiple UIs and attach/detach UIs
+at will. Add some kind of IPC to transport the event data and you have
+remote interfaces.
 
-2.) A developer board (without a case) running an OE-built distro
-(splash screen on display, either real or cut'n'paste ;)
+This means flooding the event channels with the likes of bb.msg.debug
+data. The default tty UI can collapse these events back into a stream of
+test to stdout.
 
-3.) A mobile phone or a handheld running an OE-built distro (splash
-screen on display, either real or cut'n'paste ;)
+An example of a new event would be parsing status - an event might get
+sent out every percentage complete, its up to the UI what to display.
 
-The rest could be filled with huge text, not much, but enough to show
-some of the cool things, i.e. at least
+4. Rewrite (remove) the TmpHandler(e) code as it makes me feel ill (and
+has a hidden embedded tab that will bite us one day). If you agree to
+use a global method scope for handlers, we could do something similar to
+the anonymous handlers? any ideas/gotchas here zecke?
 
-4.) The simplicity of .bb files,
-5.) bitbake invocation for one target,
-6.) and a [short] example output.
+5. To facilitate some of the above, introduce a HANDLER_TRANSITION
+variable so we can alter the handler code in OE.dev to support the new
+bitbake whilst maintaining backwards compatibility with bitbake 1.6.
 
-Some buzzwords could be:
+6. Add a ConfigParsed style event which runs after the basic
+configuration has been parsed. The idea is to use it for the
+sanity.bbclass checks instead of running them once per build.
 
-* efficiency (takes all the hassle out of cross-compiling, write on
-configuration file and leverage ten thousands of packages without
-any further "porting")
-* conciseness (split nasty things into classes and conf files => use
-of abstraction)
-* synergie effects (kernel and userland guys coming together, hardware
-and software guys meeting in the OE ecosystem, every change benefits a
-lot of architectures)
-* ... ?
+7. Add some kind of UI helper module which listens to events as ahandler
+and records certain data. The UIs can use the helper to query and
+display things to the user. It would record which tasks were run where
+to find the logs configure for task X for example. This would be to try
+and factor out common code from the UIs. UIs will also handle some
+events directly themselves for example to display them in status
+windows.
 
-Regards,
+8. Add a commands.py module which would consist of bits of cooker and
+shell. This would form the other half of the IPC, taking commands from
+the UI. 
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Other issues:
+
+We also need to consider where the initial configuration will come from
+and how/where it gets stored. At the moment its generated by bin/bitbake
+but should we modularise that too?
+
+After commands.py is created, what happens to the rest of shell? I guess
+it will remain as a UI helper set of functions?
+
+cooker.py needs the statistics section removing and turning into a
+proper module. This might be the ui helper I've mentioned above so I've
+left it alone for now.
+
+I see a rough directory structure looking like:
+
+lib/bb/commands.py    - handles IPC input
+lib/bb/events.py      - handles IPC output in the form of events
+lib/bb/ui/notty.py    - dumps data to stdout, no input (current bitbake)
+lib/bb/ui/tty.py      - dumps data to stdout, interactive shell (bitbake -i)
+lib/bb/ui/ncurses.py  - new and main UI
+lib/bb/ui/helper.py   - common UI helper functions. Logs data about 
+                        builds for later queries from UI. Not UI specific
+
+Discussion with Mickey suggest the IPC will be xmlrpc based. I know
+nothing on the subject (yet) :)
+
+Note all the above are rough ideas off the top of my head. Some might
+work, some might adapt, some might not work at all. I've very open to
+thoughts/discussion on how else to do this as there are some major
+changes here...
+
+I'd also like to thank Mickey for the python curses example code he gave
+me which is going to be extremely useful. I'm extremely impressed with
+it and I think bitbake will start to look the part when we do this - its
+given me some real encouragement and it does look how I imagined!
+Personally, I'm going to make you all wait until it works with real
+bitbake data before you see it though ;-).
+
+The holdup is trying to feed data to the UI in a sane way. It is going
+to need fairly invasive changes to the bitbake core to do this nicely
+but I want to take time, do it once and do it right! I suspect if we get
+it right, ncurses will quickly be followed by a PyGTK+ and other
+interfaces.
+
+Cheers,
+
+Richard
+
 
 
 
