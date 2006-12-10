@@ -1,30 +1,31 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GtXLW-0008NI-Jy
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Dec 2006 23:40:34 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 6FB6328C025; Sun, 10 Dec 2006 23:36:17 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180179125.adsl.alicedsl.de [85.180.179.125])
-	by srv043.dedi23.de (Postfix) with ESMTP id 4D7BF28C022
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Dec 2006 23:36:14 +0100 (CET)
-Date: Sun, 10 Dec 2006 23:39:08 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1577930607.20061210233908@vanille-media.de>
-To: "Using the OpenEmbedded metadata to build Linux Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <b9481e140612101208i6ddcdcbbv258e5b597d6b1e83@mail.gmail.com>
-References: <b9481e140612101208i6ddcdcbbv258e5b597d6b1e83@mail.gmail.com>
-MIME-Version: 1.0
-Subject: Re: Add sharprom-compatible as distro in bugtracker
+	(envelope-from <rpurdie@rpsys.net>) id 1GtXen-00007W-03
+	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 00:00:53 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBAMwwvt013497;
+	Sun, 10 Dec 2006 22:58:58 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 13306-03; Sun, 10 Dec 2006 22:58:56 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBAMwrhL013486
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Sun, 10 Dec 2006 22:58:53 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <86661F3E-02CA-43CC-BC8E-707668C5A73D@gmx.net>
+References: <1165536521.5601.146.camel@localhost.localdomain>
+	<86661F3E-02CA-43CC-BC8E-707668C5A73D@gmx.net>
+Date: Sun, 10 Dec 2006 22:58:54 +0000
+Message-Id: <1165791534.5604.58.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: RFC: Bitbake and UIs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,29 +39,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Dec 2006 22:40:34 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 10 Dec 2006 23:00:57 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Nicolas FR wrote:
-> For a few days I have been posting bugs and recipes on bugtracker for
-> sharprom-compatible. I noticed I was not the only one, showing that a
-> few people are still interested in maintaining good support for this
-> distro.
+On Fri, 2006-12-08 at 22:06 +0100, Holger Freyther wrote:
+> > 2. Have bin/bitbake error if its version is not equal to the lib/bb
+> > version. This should stop people who've installed old versions from
+> > having issues.
+> 
+> hmm, do people still hit this? I thought I have prepended everything  
+> to the python path.
 
-Fine with me.
+Not sure, it just makes me nervous.
 
-> Could it be possible to add it to the list of distros in the
-> bugtracker (in the listbox, when submitting a bug for openembedded)?
-> That would make easier to filter bugs to solve.
+> How do you define that core and bin/bitbake are compatible? If the  
+> version numbers just match?
 
-Done.
+Yes.
 
-Regards,
+> I will blow up released badly as I will only upgrade one version and  
+> not both :)
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+You'd test before releasing and the error check would catch this though?
+
+> > 4. Rewrite (remove) the TmpHandler(e) code as it makes me feel ill  
+> > (and
+> > has a hidden embedded tab that will bite us one day). If you agree to
+> > use a global method scope for handlers, we could do something  
+> > similar to
+> > the anonymous handlers? any ideas/gotchas here zecke?
+> >
+> 
+> Hmm we had some disagreement on this on IRC today. We will write down
+> our thoughts and try to find a solution. In worst case you are  
+> invited to a death match at FOSDEM :)
+
+:)
+
+> 
+> Basicly my questions are:
+> 	-Do we want to continue to have handlers per BitBake file or a list  
+> of to be used event handlers
+
+We will need a list of "system" event handlers for things like each
+connected UI etc.
+
+> 	-Do we want persistance. Currently there is no way to store  
+> information across two events.
+
+I think this is a bad idea and I don't know how it would work in
+practise. When would this data get reset? Thinking tinderclient here and
+it might be that becomes a "UI" to bitbake which would let it have other
+ways of storing persistence data. The disadvantage is it becomes more
+than a .bbclass and moves from OE into bitbake :-/.
+
+I honestly don't see a workable way of having persistent class data
+though.
+
+> 	  Both tinderclient.bbclass and icecc.bbclass could benefit from  
+> this one
+> 	-Do we want return values for events. In this case an event handler  
+> could do decisions as well
+
+The problem with return values is that the handler is totally unaware of
+what else might also want to see the event and has no way to know what
+else is listening. I'd therefore say return values are a definite no.
+
+> > We also need to consider where the initial configuration will come  
+> > from
+> > and how/where it gets stored. At the moment its generated by bin/ 
+> > bitbake
+> > but should we modularise that too?
+> 
+> yes but not now?
+
+Agreed. On the "to do sometime list" :)
+
+Cheers,
+
+Richard
 
 
 
