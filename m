@@ -1,31 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GtZrS-0001FA-7A
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Dec 2006 02:21:42 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 2409428C025; Mon, 11 Dec 2006 02:17:24 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180179125.adsl.alicedsl.de [85.180.179.125])
-	by srv043.dedi23.de (Postfix) with ESMTP id 8128028C022
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2006 02:17:21 +0100 (CET)
-Date: Mon, 11 Dec 2006 02:20:16 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <438368241.20061211022016@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <eliasu$4re$1@sea.gmane.org>
-References: <b9481e140612101208i6ddcdcbbv258e5b597d6b1e83@mail.gmail.com>
-	<1577930607.20061210233908@vanille-media.de>
-	<eliasu$4re$1@sea.gmane.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GtgRc-0007CX-9r
+	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 09:23:28 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kBB8Lnox015104 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Dec 2006 09:21:49 +0100
+Message-ID: <457D151B.3050405@dominion.kabel.utwente.nl>
+Date: Mon, 11 Dec 2006 09:21:47 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-Subject: Re: Add sharprom-compatible as distro in bugtracker
+To: openembedded-devel@openembedded.org
+References: <c384c5ea0612081523k416385a5mf40fc87f9f8a24bc@mail.gmail.com>
+	<1165789441.5604.39.camel@localhost.localdomain>
+In-Reply-To: <1165789441.5604.39.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: {PACKAGE,TARGET_{,PACKAGE_,EXTRA_}}ARCH blues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,30 +35,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2006 01:21:42 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 11 Dec 2006 08:23:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie wrote:
-> Michael 'Mickey' Lauer wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->>> Could it be possible to add it to the list of distros in the
->>> bugtracker (in the listbox, when submitting a bug for openembedded)?
->>> That would make easier to filter bugs to solve.
->> 
->> Done.
+Richard Purdie schreef:
+> On Sat, 2006-12-09 at 00:23 +0100, Leon Woestenberg wrote:
+>> In my case, an IXP4xx target, with big-endian ARCH_BYTE_SEX I have this:
+>>
+>> from conf/machine/ixp4xx.conf sets:
+>>
+>> TARGET_ARCH = armeb
+>> TARGET_PACKAGE_ARCH = armv5teb
+>>
+>> conf/machine/ixp4xx.conf then sets (overrides):
+>> PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5e armv5te ixp4xx${ARCH_BYTE_SEX}"
 
-> Thanks.  I guess that kind of makes bug 1657 unnecessary, right?  Should
-> it be set to fixed?
+This is bogus since the first 4 entries are LE while the last one can be BE.
 
-It doesn't hurt to have this bug still open as well. We should close it when
-all SharpROM-compatible issues are closed.
+>> conf/bitbake.conf then sets PACKAGE_ARCHS to this:
+>>
+>> PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS}
+>> ${MACHINE}"
+> [...]
+>> end I end up with a full set of 'armv5teb' packages, which fail to
+>> install to my image.
+>>
+>> I can work around this by twiddling with the variable definitions and
+>> settings, but I rather want to discuss what is the proper fix here?
+>>
+>> Should PACKAGE_EXTRA_ARCH be appended by TARGET_PACKAGE_ARCH?
+> 
+> conf/machine/include/ixp4xx.conf is the only file in my openembedded
+> directory which references this "TARGET_PACKAGE_ARCH" variable so its an
+> ixp4xx issue. The name sounds very confused so I'd suggest just getting
+> rid of it and set PACKAGE_EXTRA_ARCHS to contain everything you need. An
+> example might be:
+> 
+> PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5e armv5te{ARCH_BYTE_SEX} ixp4xx{ARCH_BYTE_SEX}"
 
-Regards,
+armv5tele and armv5tebe don't exist in OE.
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+> which probably isn't right but you get the idea. 
+> 
+> Someone familiar with what the ixp builds should be doing should really
+> look at this. I've cc'd rwhitby who should know the right person to deal
+> with this.
+> 
+> This machine might not want PACKAGE_ARCHS containing ${MACHINE} so it
+> might want to override that...
 
+I think conf/machine/ixp4xx.conf shouldn't be used, but conf/machine/ixp4xxbe.conf or
+ixp4xxle.conf should be used instead. Each of those machines should set PACKAGE_EXTRA_ARCH
+independantly.
+
+regards,
+
+Koen
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFfRUbMkyGM64RGpERAqWmAKCEJbe2xFAPOwtMI0JBsqUu0uZdBgCgi5Nd
+Jyb4OTX2iF5H59YyJpFJKKg=
+=po3W
+-----END PGP SIGNATURE-----
 
 
