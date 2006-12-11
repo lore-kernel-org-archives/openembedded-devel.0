@@ -1,31 +1,32 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1GtXen-00007W-03
-	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 00:00:53 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBAMwwvt013497;
-	Sun, 10 Dec 2006 22:58:58 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13306-03; Sun, 10 Dec 2006 22:58:56 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBAMwrhL013486
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Sun, 10 Dec 2006 22:58:53 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1GtZdU-0003kr-7f
+	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 02:07:16 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1GtZbv-0001uz-VA
+	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 02:05:39 +0100
+Received: from r77a2.r.ppp-pool.de ([89.54.119.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 11 Dec 2006 02:05:39 +0100
+Received: from no2spam by r77a2.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 11 Dec 2006 02:05:39 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <86661F3E-02CA-43CC-BC8E-707668C5A73D@gmx.net>
-References: <1165536521.5601.146.camel@localhost.localdomain>
-	<86661F3E-02CA-43CC-BC8E-707668C5A73D@gmx.net>
-Date: Sun, 10 Dec 2006 22:58:54 +0000
-Message-Id: <1165791534.5604.58.camel@localhost.localdomain>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 11 Dec 2006 02:05:24 +0100
+Message-ID: <eliasu$4re$1@sea.gmane.org>
+References: <b9481e140612101208i6ddcdcbbv258e5b597d6b1e83@mail.gmail.com>
+	<1577930607.20061210233908@vanille-media.de>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: RFC: Bitbake and UIs
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: r77a2.r.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.8 (X11/20061117)
+In-Reply-To: <1577930607.20061210233908@vanille-media.de>
+Sender: news <news@sea.gmane.org>
+Subject: Re: Add sharprom-compatible as distro in bugtracker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,86 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Dec 2006 23:00:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 11 Dec 2006 01:07:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2006-12-08 at 22:06 +0100, Holger Freyther wrote:
-> > 2. Have bin/bitbake error if its version is not equal to the lib/bb
-> > version. This should stop people who've installed old versions from
-> > having issues.
+Michael 'Mickey' Lauer wrote:
+
+>> Could it be possible to add it to the list of distros in the
+>> bugtracker (in the listbox, when submitting a bug for openembedded)?
+>> That would make easier to filter bugs to solve.
 > 
-> hmm, do people still hit this? I thought I have prepended everything  
-> to the python path.
+> Done.
 
-Not sure, it just makes me nervous.
-
-> How do you define that core and bin/bitbake are compatible? If the  
-> version numbers just match?
-
-Yes.
-
-> I will blow up released badly as I will only upgrade one version and  
-> not both :)
-
-You'd test before releasing and the error check would catch this though?
-
-> > 4. Rewrite (remove) the TmpHandler(e) code as it makes me feel ill  
-> > (and
-> > has a hidden embedded tab that will bite us one day). If you agree to
-> > use a global method scope for handlers, we could do something  
-> > similar to
-> > the anonymous handlers? any ideas/gotchas here zecke?
-> >
-> 
-> Hmm we had some disagreement on this on IRC today. We will write down
-> our thoughts and try to find a solution. In worst case you are  
-> invited to a death match at FOSDEM :)
-
-:)
-
-> 
-> Basicly my questions are:
-> 	-Do we want to continue to have handlers per BitBake file or a list  
-> of to be used event handlers
-
-We will need a list of "system" event handlers for things like each
-connected UI etc.
-
-> 	-Do we want persistance. Currently there is no way to store  
-> information across two events.
-
-I think this is a bad idea and I don't know how it would work in
-practise. When would this data get reset? Thinking tinderclient here and
-it might be that becomes a "UI" to bitbake which would let it have other
-ways of storing persistence data. The disadvantage is it becomes more
-than a .bbclass and moves from OE into bitbake :-/.
-
-I honestly don't see a workable way of having persistent class data
-though.
-
-> 	  Both tinderclient.bbclass and icecc.bbclass could benefit from  
-> this one
-> 	-Do we want return values for events. In this case an event handler  
-> could do decisions as well
-
-The problem with return values is that the handler is totally unaware of
-what else might also want to see the event and has no way to know what
-else is listening. I'd therefore say return values are a definite no.
-
-> > We also need to consider where the initial configuration will come  
-> > from
-> > and how/where it gets stored. At the moment its generated by bin/ 
-> > bitbake
-> > but should we modularise that too?
-> 
-> yes but not now?
-
-Agreed. On the "to do sometime list" :)
-
-Cheers,
-
-Richard
+Thanks.  I guess that kind of makes bug 1657 unnecessary, right?  Should 
+it be set to fixed?
 
 
 
