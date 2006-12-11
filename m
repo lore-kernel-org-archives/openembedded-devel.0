@@ -1,33 +1,37 @@
 Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GttsP-0004L2-PS
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Dec 2006 23:44:01 +0100
+	(envelope-from <mickey@vanille-media.de>) id 1Gttsz-0004N9-DL
+	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 23:44:37 +0100
 Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 6EF2D28C025; Mon, 11 Dec 2006 23:39:36 +0100 (CET)
+	id 51D3628C025; Mon, 11 Dec 2006 23:40:12 +0100 (CET)
 X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
 X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=MISSING_HEADERS,
-	RCVD_IN_NJABL_DUL,RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
 Received: from PROMETHEUS (e180136174.adsl.alicedsl.de [85.180.136.174])
-	by srv043.dedi23.de (Postfix) with ESMTP id 0733428C022
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2006 23:39:33 +0100 (CET)
-Date: Mon, 11 Dec 2006 23:42:30 +0100
+	by srv043.dedi23.de (Postfix) with ESMTP id E609C28C022
+	for <openembedded-devel@openembedded.org>;
+	Mon, 11 Dec 2006 23:40:08 +0100 (CET)
+Date: Mon, 11 Dec 2006 23:43:06 +0100
 From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
 Organization: Vanille-Media
 X-Priority: 3 (Normal)
-Message-ID: <271280084.20061211234230@vanille-media.de>
-CC: openembedded-devel@lists.openembedded.org
-In-Reply-To: <elklbk$b2n$1@sea.gmane.org>
-References: <b9481e140612101208i6ddcdcbbv258e5b597d6b1e83@mail.gmail.com>
-	<1577930607.20061210233908@vanille-media.de>
-	<eliasu$4re$1@sea.gmane.org>
-	<438368241.20061211022016@vanille-media.de>
-	<elklbk$b2n$1@sea.gmane.org>
+Message-ID: <1293737186.20061211234306@vanille-media.de>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <457DA76C.2050904@am.sony.com>
+References: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>
+	<HOECLKEKOHLAMMGDLLBHCEFKJCAA.skoroneos@digital-opsis.com>
+	<c384c5ea0612070902o7dbb71e8v63cd137b5b611815@mail.gmail.com>
+	<1825230355.20061207183653@vanille-media.de>
+	<c384c5ea0612071104q1cd27beckd9bddfbb112c1d9d@mail.gmail.com>
+	<1165532018.5601.98.camel@localhost.localdomain>
+	<c384c5ea0612081410u598cdbd9nbe72c19740a06d0c@mail.gmail.com>
+	<c384c5ea0612081411x7f198370u5e2b248a6d8a183e@mail.gmail.com>
+	<457A926E.5080005@programming-perl.de>
+	<457DA76C.2050904@am.sony.com>
 MIME-Version: 1.0
-Subject: Re: Add sharprom-compatible as distro in bugtracker
+Subject: Re: FOSDEM'07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,21 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2006 22:44:01 -0000
+X-List-Received-Date: Mon, 11 Dec 2006 22:44:37 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie wrote:
-> Michael 'Mickey' Lauer wrote:
+Tim Bird wrote:
+> Bastian Ballmann wrote:
+>> OpenEmbedded
+>>    Because embedded devices want to be free
 
->> We should close it when all SharpROM-compatible issues are closed.
+> I think I understand the sentiment, but this is not
+> a tag line that will make OE popular with CE companies.
+> (I'm not sure if that's a goal, but I don't think
+> we should preclude it.)
 
-> I wonder if that is ever going to happen...
-
-Probably never. Then again, OE was not designed to build packages for
-ancient systems such as the SharpROM. OE actually does a good job in
-supporting existing binary-only distributions, but where it shines is
-not that but rather creating modern distributions from scratch.
+May I suggest moving from tag lines to some actual content?
 
 Regards,
 
