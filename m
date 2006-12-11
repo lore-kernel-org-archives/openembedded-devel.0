@@ -1,29 +1,32 @@
-Received: from [64.233.182.187] (helo=nf-out-0910.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1Gtsh2-0002j8-3I
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Dec 2006 22:28:12 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so30384nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2006 13:26:41 -0800 (PST)
-Received: by 10.49.41.12 with SMTP id t12mr132692nfj.1165872401427;
-	Mon, 11 Dec 2006 13:26:41 -0800 (PST)
-Received: from CUBE ( [82.193.96.237])
-	by mx.google.com with ESMTP id g1sm408810nfe.2006.12.11.13.26.40;
-	Mon, 11 Dec 2006 13:26:41 -0800 (PST)
-Date: Mon, 11 Dec 2006 23:26:42 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <7310051684.20061211232642@gmail.com>
-To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-In-Reply-To: <200612112150.15571.openembedded@hrw.one.pl>
-References: <456B0DC2.90300@dominion.kabel.utwente.nl>
-	<444521399.20061208175939@vanille-media.de>
-	<1165789899.5604.43.camel@localhost.localdomain>
-	<200612112150.15571.openembedded@hrw.one.pl>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: To be removed recipes
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1GttTG-00039S-9U
+	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 23:18:02 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1GttRj-0004PP-61
+	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 23:16:28 +0100
+Received: from r7639.r.ppp-pool.de ([89.54.118.57])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 11 Dec 2006 23:16:27 +0100
+Received: from no2spam by r7639.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 11 Dec 2006 23:16:27 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 11 Dec 2006 23:16:19 +0100
+Message-ID: <elklbk$b2n$1@sea.gmane.org>
+References: <b9481e140612101208i6ddcdcbbv258e5b597d6b1e83@mail.gmail.com>	<1577930607.20061210233908@vanille-media.de>	<eliasu$4re$1@sea.gmane.org>
+	<438368241.20061211022016@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: r7639.r.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.8 (X11/20061117)
+In-Reply-To: <438368241.20061211022016@vanille-media.de>
+Sender: news <news@sea.gmane.org>
+Subject: Re: Add sharprom-compatible as distro in bugtracker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,46 +40,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2006 21:28:12 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Dec 2006 22:18:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello Marcin,
+Michael 'Mickey' Lauer wrote:
 
-Monday, December 11, 2006, 10:50:15 PM, you wrote:
+> We should close it when all SharpROM-compatible issues are closed.
 
-> Dnia niedziela, 10 grudnia 2006 23:31, Richard Purdie napisa=B3:
->> On Fri, 2006-12-08 at 17:59 +0100, Michael 'Mickey' Lauer wrote:
->> > Richard Purdie wrote:
-
->> > >> Package Name:   bluez*2.*
->> > >> Reason:         Obsolete by, and conflicts with bluez 3.7
->> > >
->> > > Fine with me.
->> >
->> > This can be a problem for Opie, since we used the no-dbus version for
->> > quite some time to save space.
->>
->> In that case we can't remove the no-dbus version needed by opie.
-
-> Does someone tested OPIE with dbus version at all? How much does extra
-> packages take etc? Without such testing sentence 'do not remove=20
-> bluez*nodbus because OPIE needs it' does not have sense.
-
-> I also would like to get rid of bluez 2.x because it will be unmaintained
-> software soon due to fact that everyone switched to 3.x versions.
-
-  I agree here, but removing it in such manner hardly helpful either.
-Is anything magic in those 2 weeks which are given stuff in
-removal.txt? We can have 1 month, 2 month, 3 months, 6 months, 1 year
-removal periods. That "6 months" fits bluez2 pretty well, IMHO.
-
-
-
-
---=20
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+I wonder if that is ever going to happen...
 
 
 
