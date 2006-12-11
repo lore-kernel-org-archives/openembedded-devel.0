@@ -1,26 +1,36 @@
-Received: from [194.231.67.162] (helo=lucy.chaostal.de)
+Received: from [213.199.154.10] (helo=mail53-dub-R.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <bastian.ballmann@programming-perl.de>)
-	id 1Gszdc-0000KL-28
-	for openembedded-devel@openembedded.org; Sat, 09 Dec 2006 11:41:00 +0100
-Received: from [192.168.3.199] (root@localhost.localdomain [127.0.0.1])
-	by lucy.chaostal.de (8.13.4/8.13.4/Debian-3sarge3) with ESMTP id
-	kB9Ab0bC032404 for <openembedded-devel@openembedded.org>;
-	Sat, 9 Dec 2006 11:37:01 +0100
-Message-ID: <457A926E.5080005@programming-perl.de>
-Date: Sat, 09 Dec 2006 11:39:42 +0100
-From: Bastian Ballmann <bastian.ballmann@programming-perl.de>
-User-Agent: Thunderbird 1.5.0.7 (X11/20060918)
+	(envelope-from <tim.bird@am.sony.com>) id 1Gtq9y-0000G3-Rm
+	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 19:45:54 +0100
+Received: from mail53-dub (localhost.localdomain [127.0.0.1])
+	by mail53-dub-R.bigfish.com (Postfix) with ESMTP id E42B1818322;
+	Mon, 11 Dec 2006 18:44:24 +0000 (UTC)
+X-BigFish: V
+Received: by mail53-dub (MessageSwitch) id 1165862664732143_22078;
+	Mon, 11 Dec 2006 18:44:24 +0000 (UCT)
+Received: from mail8.fw-bc.sony.com (mail8.fw-bc.sony.com [160.33.98.75])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail53-dub.bigfish.com (Postfix) with ESMTP id A98DF11080C8;
+	Mon, 11 Dec 2006 18:44:23 +0000 (UTC)
+Received: from mail3.sjc.in.sel.sony.com (mail3.sjc.in.sel.sony.com
+	[43.134.1.211])
+	by mail8.fw-bc.sony.com (8.12.11/8.12.11) with ESMTP id kBBIiLVd007013; 
+	Mon, 11 Dec 2006 18:44:21 GMT
+Received: from [43.134.85.135] ([43.134.85.135])
+	by mail3.sjc.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
+	kBBIiLX7015524; Mon, 11 Dec 2006 18:44:21 GMT
+Message-ID: <457DA76C.2050904@am.sony.com>
+Date: Mon, 11 Dec 2006 10:46:04 -0800
+From: Tim Bird <tim.bird@am.sony.com>
+User-Agent: Thunderbird 1.5.0.4 (X11/20060614)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>	<HOECLKEKOHLAMMGDLLBHCEFKJCAA.skoroneos@digital-opsis.com>	<c384c5ea0612070902o7dbb71e8v63cd137b5b611815@mail.gmail.com>	<1825230355.20061207183653@vanille-media.de>	<c384c5ea0612071104q1cd27beckd9bddfbb112c1d9d@mail.gmail.com>	<1165532018.5601.98.camel@localhost.localdomain>	<c384c5ea0612081410u598cdbd9nbe72c19740a06d0c@mail.gmail.com>
-	<c384c5ea0612081411x7f198370u5e2b248a6d8a183e@mail.gmail.com>
-In-Reply-To: <c384c5ea0612081411x7f198370u5e2b248a6d8a183e@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+References: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>	<HOECLKEKOHLAMMGDLLBHCEFKJCAA.skoroneos@digital-opsis.com>	<c384c5ea0612070902o7dbb71e8v63cd137b5b611815@mail.gmail.com>	<1825230355.20061207183653@vanille-media.de>	<c384c5ea0612071104q1cd27beckd9bddfbb112c1d9d@mail.gmail.com>	<1165532018.5601.98.camel@localhost.localdomain>	<c384c5ea0612081410u598cdbd9nbe72c19740a06d0c@mail.gmail.com>	<c384c5ea0612081411x7f198370u5e2b248a6d8a183e@mail.gmail.com>
+	<457A926E.5080005@programming-perl.de>
+In-Reply-To: <457A926E.5080005@programming-perl.de>
 X-Enigmail-Version: 0.94.0.0
-OpenPGP: id=BBECF6AD
-X-Virus-Scanned: ClamAV 0.88.6/2311/Sat Dec 9 10:47:31 2006 on lucy.chaostal.de
-X-Virus-Status: Clean
-X-Mailman-Approved-At: Mon, 11 Dec 2006 14:57:27 +0100
+Cc: openembedded-devel@openembedded.org
 Subject: Re: FOSDEM'07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,37 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Dec 2006 10:41:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Dec 2006 18:45:55 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Bastian Ballmann wrote:
+> OpenEmbedded
+>    Because embedded devices want to be free
 
-Morning,
+I think I understand the sentiment, but this is not
+a tag line that will make OE popular with CE companies.
+(I'm not sure if that's a goal, but I don't think
+we should preclude it.)
 
-just a few ideas of mine:
-
-OpenEmbedded
-   Big in a small world
-
-OpenEmbedded
-   Because embedded devices want to be free
-
-OpenEmbedded
-   Cross Compiling Concerns
-
-
-happy hacking out there!
-
-balle
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.3 (GNU/Linux)
-
-iD8DBQFFepJtEQHD8bvs9q0RAtcHAKCTZX1bW+VoasAosqlDNSewI3M/7gCgm28+
-ILOBdyqUceQhTM9PYQIXmks=
-=W3Oi
------END PGP SIGNATURE-----
+=============================
+Tim Bird
+Architecture Group Chair, CE Linux Forum
+Senior Staff Engineer, Sony Electronics
+=============================
 
 
 
