@@ -1,37 +1,29 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1Gttsz-0004N9-DL
-	for openembedded-devel@openembedded.org; Mon, 11 Dec 2006 23:44:37 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 51D3628C025; Mon, 11 Dec 2006 23:40:12 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180136174.adsl.alicedsl.de [85.180.136.174])
-	by srv043.dedi23.de (Postfix) with ESMTP id E609C28C022
-	for <openembedded-devel@openembedded.org>;
-	Mon, 11 Dec 2006 23:40:08 +0100 (CET)
-Date: Mon, 11 Dec 2006 23:43:06 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1293737186.20061211234306@vanille-media.de>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <457DA76C.2050904@am.sony.com>
-References: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>
-	<HOECLKEKOHLAMMGDLLBHCEFKJCAA.skoroneos@digital-opsis.com>
-	<c384c5ea0612070902o7dbb71e8v63cd137b5b611815@mail.gmail.com>
-	<1825230355.20061207183653@vanille-media.de>
-	<c384c5ea0612071104q1cd27beckd9bddfbb112c1d9d@mail.gmail.com>
-	<1165532018.5601.98.camel@localhost.localdomain>
-	<c384c5ea0612081410u598cdbd9nbe72c19740a06d0c@mail.gmail.com>
-	<c384c5ea0612081411x7f198370u5e2b248a6d8a183e@mail.gmail.com>
-	<457A926E.5080005@programming-perl.de>
-	<457DA76C.2050904@am.sony.com>
+	(envelope-from <rod@whitby.id.au>) id 1GtuAR-0004X0-Hf
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Dec 2006 00:02:39 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id C2A7F4DE1F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Dec 2006 18:01:06 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by out1.internal (MEProxy); Mon, 11 Dec 2006 18:01:07 -0500
+X-Sasl-enc: OtU3rfgc+EMyaOqQRJLhEQFAz/gaVarhfY7FhhNOy+rT 1165878059
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id DB4F9149F4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Dec 2006 18:00:58 -0500 (EST)
+Message-ID: <457DE327.2050209@whitby.id.au>
+Date: Tue, 12 Dec 2006 09:30:55 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.8 (Windows/20061025)
 MIME-Version: 1.0
-Subject: Re: FOSDEM'07
+To: openembedded-devel@lists.openembedded.org
+References: <c384c5ea0612081523k416385a5mf40fc87f9f8a24bc@mail.gmail.com>	<1165789441.5604.39.camel@localhost.localdomain>
+	<457D151B.3050405@dominion.kabel.utwente.nl>
+In-Reply-To: <457D151B.3050405@dominion.kabel.utwente.nl>
+Subject: Re: {PACKAGE,TARGET_{,PACKAGE_,EXTRA_}}ARCH blues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -45,27 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2006 22:44:37 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 11 Dec 2006 23:02:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Tim Bird wrote:
-> Bastian Ballmann wrote:
->> OpenEmbedded
->>    Because embedded devices want to be free
+>>> Someone familiar with what the ixp builds should be doing should really
+>>> look at this. I've cc'd rwhitby who should know the right person to deal
+>>> with this.
+>>>
+>>> This machine might not want PACKAGE_ARCHS containing ${MACHINE} so it
+>>> might want to override that...
+> 
+> I think conf/machine/ixp4xx.conf shouldn't be used, but conf/machine/ixp4xxbe.conf or
+> ixp4xxle.conf should be used instead. Each of those machines should set PACKAGE_EXTRA_ARCH
+> independantly.
 
-> I think I understand the sentiment, but this is not
-> a tag line that will make OE popular with CE companies.
-> (I'm not sure if that's a goal, but I don't think
-> we should preclude it.)
+Agreed.
 
-May I suggest moving from tag lines to some actual content?
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+-- Rod
 
 
