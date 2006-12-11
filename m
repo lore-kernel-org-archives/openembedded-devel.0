@@ -1,29 +1,49 @@
-Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
+Received: from [213.199.154.16] (helo=outbound4-dub-R.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1GtuAR-0004X0-Hf
+	(envelope-from <tim.bird@am.sony.com>) id 1GtuqP-0005pX-Uu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Dec 2006 00:02:39 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id C2A7F4DE1F
+	Tue, 12 Dec 2006 00:46:02 +0100
+Received: from outbound4-dub.bigfish.com (localhost.localdomain [127.0.0.1])
+	by outbound4-dub-R.bigfish.com (Postfix) with ESMTP id 2E4925BDFB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2006 18:01:06 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by out1.internal (MEProxy); Mon, 11 Dec 2006 18:01:07 -0500
-X-Sasl-enc: OtU3rfgc+EMyaOqQRJLhEQFAz/gaVarhfY7FhhNOy+rT 1165878059
-Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id DB4F9149F4
+	Mon, 11 Dec 2006 23:44:31 +0000 (UTC)
+Received: from mail56-dub-R.bigfish.com (unknown [10.5.252.3])
+	by outbound4-dub.bigfish.com (Postfix) with ESMTP id 24FB01800051
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2006 18:00:58 -0500 (EST)
-Message-ID: <457DE327.2050209@whitby.id.au>
-Date: Tue, 12 Dec 2006 09:30:55 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.8 (Windows/20061025)
+	Mon, 11 Dec 2006 23:44:31 +0000 (UTC)
+Received: from mail56-dub (localhost.localdomain [127.0.0.1])
+	by mail56-dub-R.bigfish.com (Postfix) with ESMTP id 160A284020A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Dec 2006 23:44:30 +0000 (UTC)
+X-BigFish: V
+Received: by mail56-dub (MessageSwitch) id 1165880669252647_1456;
+	Mon, 11 Dec 2006 23:44:29 +0000 (UCT)
+Received: from mail8.fw-sd.sony.com (mail8.fw-sd.sony.com [160.33.66.75])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail56-dub.bigfish.com (Postfix) with ESMTP id ECCC31B18094
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Dec 2006 23:44:27 +0000 (UTC)
+Received: from mail3.sjc.in.sel.sony.com (mail3.sjc.in.sel.sony.com
+	[43.134.1.211])
+	by mail8.fw-sd.sony.com (8.12.11/8.12.11) with ESMTP id kBBNiPes005539
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Dec 2006 23:44:25 GMT
+Received: from [43.134.85.135] ([43.134.85.135])
+	by mail3.sjc.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
+	kBBNiPED011132 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Dec 2006 23:44:25 GMT
+Message-ID: <457DEDC1.808@am.sony.com>
+Date: Mon, 11 Dec 2006 15:46:09 -0800
+From: Tim Bird <tim.bird@am.sony.com>
+User-Agent: Thunderbird 1.5.0.4 (X11/20060614)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <c384c5ea0612081523k416385a5mf40fc87f9f8a24bc@mail.gmail.com>	<1165789441.5604.39.camel@localhost.localdomain>
-	<457D151B.3050405@dominion.kabel.utwente.nl>
-In-Reply-To: <457D151B.3050405@dominion.kabel.utwente.nl>
-Subject: Re: {PACKAGE,TARGET_{,PACKAGE_,EXTRA_}}ARCH blues
+References: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>	<HOECLKEKOHLAMMGDLLBHCEFKJCAA.skoroneos@digital-opsis.com>	<c384c5ea0612070902o7dbb71e8v63cd137b5b611815@mail.gmail.com>	<1825230355.20061207183653@vanille-media.de>	<c384c5ea0612071104q1cd27beckd9bddfbb112c1d9d@mail.gmail.com>	<1165532018.5601.98.camel@localhost.localdomain>	<c384c5ea0612081410u598cdbd9nbe72c19740a06d0c@mail.gmail.com>	<c384c5ea0612081411x7f198370u5e2b248a6d8a183e@mail.gmail.com>	<457A926E.5080005@programming-perl.de>	<457DA76C.2050904@am.sony.com>
+	<1293737186.20061211234306@vanille-media.de>
+In-Reply-To: <1293737186.20061211234306@vanille-media.de>
+X-Enigmail-Version: 0.94.0.0
+Subject: Re: FOSDEM'07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,23 +57,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2006 23:02:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Dec 2006 23:46:02 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
->>> Someone familiar with what the ixp builds should be doing should really
->>> look at this. I've cc'd rwhitby who should know the right person to deal
->>> with this.
->>>
->>> This machine might not want PACKAGE_ARCHS containing ${MACHINE} so it
->>> might want to override that...
+Michael 'Mickey' Lauer wrote:
+> Tim Bird wrote:
+>> Bastian Ballmann wrote:
+>>> OpenEmbedded
+>>>    Because embedded devices want to be free
 > 
-> I think conf/machine/ixp4xx.conf shouldn't be used, but conf/machine/ixp4xxbe.conf or
-> ixp4xxle.conf should be used instead. Each of those machines should set PACKAGE_EXTRA_ARCH
-> independantly.
+>> I think I understand the sentiment, but this is not
+>> a tag line that will make OE popular with CE companies.
+>> (I'm not sure if that's a goal, but I don't think
+>> we should preclude it.)
+> 
+> May I suggest moving from tag lines to some actual content?
 
-Agreed.
+I don't understand your question.  I did not suggest a
+tagline, but was providing some (hopefully useful) feedback
+on one that was suggested.  Is the request for "some actual
+content" directed at me or Bastian?
 
--- Rod
+CELF members have been using OE, and CELF has promoted OE
+and funded work on OE, at my direction.
+
+=============================
+Tim Bird
+Architecture Group Chair, CE Linux Forum
+Senior Staff Engineer, Sony Electronics
+=============================
+
 
 
