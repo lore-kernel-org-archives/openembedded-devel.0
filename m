@@ -1,22 +1,29 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <andrew.paulsen@gmail.com>) id 1GuApm-0005v9-AW
+	(envelope-from <mickey@vanille-media.de>) id 1GuD9A-0001BI-Ju
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Dec 2006 17:50:26 +0100
-Received: by an-out-0708.google.com with SMTP id c5so371153anc
+	Tue, 12 Dec 2006 20:18:36 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 4637F28C025; Tue, 12 Dec 2006 20:14:04 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from PROMETHEUS (e180190218.adsl.alicedsl.de [85.180.190.218])
+	by srv043.dedi23.de (Postfix) with ESMTP id DA55828C022
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Dec 2006 08:48:50 -0800 (PST)
-Received: by 10.78.178.5 with SMTP id a5mr4146328huf.1165942129665;
-	Tue, 12 Dec 2006 08:48:49 -0800 (PST)
-Received: by 10.78.159.2 with HTTP; Tue, 12 Dec 2006 08:48:49 -0800 (PST)
-Message-ID: <d46153c40612120848t81f6129l5860a9678553eb0b@mail.gmail.com>
-Date: Tue, 12 Dec 2006 10:48:49 -0600
-From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <7b4fff750612120832t2688cd5ft4e3be102faf75d24@mail.gmail.com>
+	Tue, 12 Dec 2006 20:14:00 +0100 (CET)
+Date: Tue, 12 Dec 2006 20:17:00 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <747437870.20061212201700@vanille-media.de>
+To: koen commit <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <E1Gu4iF-0003Rn-TF@linuxtogo.org>
+References: <E1Gu4iF-0003Rn-TF@linuxtogo.org>
 MIME-Version: 1.0
-References: <7b4fff750612120832t2688cd5ft4e3be102faf75d24@mail.gmail.com>
-Subject: Re: "bitburn nano" fails: ERROR: function do_stage failed
+Subject: Re: [oe-commits] org.oe.dev libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,52 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Dec 2006 16:50:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 12 Dec 2006 19:18:37 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 12/12/06, Sam Green <samgreen@gmail.com> wrote:
-> I am trying to cross-compile on OE for my iPAQ 3800/Familiar PDA. I have
-> carefully followed http://www.openembedded.org/wiki/GettingStarted, but I
-> can not get past the "bitbake nano" step. I get:
->
-> ###################################################
-> sbgree@ubuntu:/openembedded/build$ bitbake nano
-> NOTE: Using cache in '/openembedded/build/tmp/cache/h3800'
-> NOTE: Handling BitBake files: \ (4092/4092) [100 %]
-> NOTE: Parsing finished. 0 cached, 3919 parsed, 173 skipped, 0 masked.
->
-> NOTE: build 200612121006: started
->
-> OE Build Configuration:
-> BB_VERSION     = "1.6.3"
-> OE_REVISION    = "d3a4f1285a8d621925836a8a2ea609ea62d1cc9d"
-> TARGET_ARCH    = "arm"
-> TARGET_OS      = "linux"
-> MACHINE        = "h3800"
-> DISTRO         = "familiar"
-> DISTRO_VERSION = ""
-> TARGET_FPU     = "soft"
->
-> NOTE: package quilt-native-0.45: started
-> NOTE: package quilt-native-0.45-r0: task do_populate_staging: started
-> NOTE: SITE files /openembedded/org.openembedded.dev/site/endian-little
-> /openembedded/org.openembedded.dev/site/ix86-common
-> ERROR: function do_stage failed
-> ERROR: log data follows (/openembedded/build/tmp/work/quilt-native-0.45-r0
-> /temp/log.do_stage.5991)
-> | NOTE: make install
-> | make: *** No rule to make target `install'. Stop.
-> | FATAL: oe_runmake failed
-> NOTE: Task failed: /openembedded/build/tmp/work/quilt-native-0.45-r0
-> /temp/log.do_stage.5991
-> NOTE: package quilt-native-0.45-r0: task do_populate_staging: failed
-> ERROR: TaskFailed event exception, aborting
-> NOTE: package quilt-native-0.45: failed
-> ERROR: Build of nano failed
-> ###################################################
+koen commit wrote:
+> libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
 
-I think I got around this by installing gcc-3.4 on my Ubuntu build system.
+This change breaks building libX11 for me. TARGET=armv4
+
+
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
