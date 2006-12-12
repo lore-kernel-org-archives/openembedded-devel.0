@@ -1,29 +1,22 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1Gu935-0002om-Kw
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Dec 2006 15:56:03 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id E9CD128C025; Tue, 12 Dec 2006 15:51:32 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180191223.adsl.alicedsl.de [85.180.191.223])
-	by srv043.dedi23.de (Postfix) with ESMTP id 1C7B128C022
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Dec 2006 15:51:29 +0100 (CET)
-Date: Tue, 12 Dec 2006 15:54:28 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1595034009.20061212155428@vanille-media.de>
-To: hrw commit <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <E1Gu8wd-0002jZ-1S@linuxtogo.org>
-References: <E1Gu8wd-0002jZ-1S@linuxtogo.org>
+	(envelope-from <openembedded@hrw.one.pl>) id 1Gu9U7-00047t-4s
+	for openembedded-devel@openembedded.org; Tue, 12 Dec 2006 16:23:59 +0100
+Received: (qmail 22892 invoked by uid 813007); 12 Dec 2006 15:22:24 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 12 Dec 2006 15:22:24 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Dec 2006 16:22:23 +0100
+User-Agent: KMail/1.9.5
+References: <200611162023.23012.openembedded@hrw.one.pl>
+In-Reply-To: <200611162023.23012.openembedded@hrw.one.pl>
+Organization: OpenEmbedded
 MIME-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev pcmciautils: simplify recipes
+Message-Id: <200612121622.23201.openembedded@hrw.one.pl>
+Subject: Re: RFC: KERNELORG_MIRROR variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,24 +30,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Dec 2006 14:56:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Dec 2006 15:23:59 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-hrw commit wrote:
-> pcmciautils: simplify recipes
+Dnia czwartek, 16 listopada 2006 20:23, Marcin Juszkiewicz napisa=B3:
 
-[...]
+> I would push changeset with it during weekend.
 
-Thanks Marcin, this is much appreciated!
+=46inally pushed in 89819f9979e4ce42d678a887b2cb1a7daf6b614f
 
-We should add cleaning-days to the bug-days ;)
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Regards,
+               Beware of Programmers who carry screwdrivers.
+               		-- Leonard Brandwein
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
