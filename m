@@ -1,28 +1,26 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GuD9A-0001BI-Ju
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Dec 2006 20:18:36 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 4637F28C025; Tue, 12 Dec 2006 20:14:04 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180190218.adsl.alicedsl.de [85.180.190.218])
-	by srv043.dedi23.de (Postfix) with ESMTP id DA55828C022
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Dec 2006 20:14:00 +0100 (CET)
-Date: Tue, 12 Dec 2006 20:17:00 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <747437870.20061212201700@vanille-media.de>
-To: koen commit <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <E1Gu4iF-0003Rn-TF@linuxtogo.org>
-References: <E1Gu4iF-0003Rn-TF@linuxtogo.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GuDTM-0002Ue-3Z
+	for openembedded-devel@openembedded.org; Tue, 12 Dec 2006 20:39:28 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kBCJbiLr031907 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Dec 2006 20:37:44 +0100
+Message-ID: <457F0505.9010201@dominion.kabel.utwente.nl>
+Date: Tue, 12 Dec 2006 20:37:41 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <E1Gu4iF-0003Rn-TF@linuxtogo.org>
+	<747437870.20061212201700@vanille-media.de>
+In-Reply-To: <747437870.20061212201700@vanille-media.de>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [oe-commits] org.oe.dev libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -37,21 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Dec 2006 19:18:37 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 12 Dec 2006 19:39:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-koen commit wrote:
-> libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This change breaks building libX11 for me. TARGET=armv4
+Michael 'Mickey' Lauer schreef:
+> koen commit wrote:
+>> libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
+> 
+> This change breaks building libX11 for me. TARGET=armv4
 
+There is indeed a small thinko in that patch, since the Makefile looks for makekeys.o.
+I'll have to think about a proper fix, if someone doesn't beat me to it.
 
-Regards,
+regards,
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFFfwUFMkyGM64RGpERAkKUAJ9Jh94KkYorrG4VTWIEIgc3dbiArwCfXVNj
+9YtiCXLioYy5IGK4uQ7A4hM=
+=5D3L
+-----END PGP SIGNATURE-----
 
 
