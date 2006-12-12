@@ -1,24 +1,21 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1Gu9Zf-0004BQ-4J
-	for openembedded-devel@openembedded.org; Tue, 12 Dec 2006 16:29:43 +0100
-Received: (qmail 29201 invoked by uid 813007); 12 Dec 2006 15:28:08 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 12 Dec 2006 15:28:08 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-Organization: OpenEmbedded
+	(envelope-from <samgreen@gmail.com>) id 1GuAaQ-0005ht-3e
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Dec 2006 17:34:34 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so258927nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Dec 2006 08:32:59 -0800 (PST)
+Received: by 10.82.127.15 with SMTP id z15mr759807buc.1165941178871;
+	Tue, 12 Dec 2006 08:32:58 -0800 (PST)
+Received: by 10.82.175.5 with HTTP; Tue, 12 Dec 2006 08:32:58 -0800 (PST)
+Message-ID: <7b4fff750612120832t2688cd5ft4e3be102faf75d24@mail.gmail.com>
+Date: Tue, 12 Dec 2006 10:32:58 -0600
+From: "Sam Green" <samgreen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Dec 2006 16:28:07 +0100
-User-Agent: KMail/1.9.5
-References: <c384c5ea0612031500o3ee66a23x89d72a948f418532@mail.gmail.com>
-	<1165238625.15272.3.camel@localhost.localdomain>
-	<c384c5ea0612041234u5fd7e6d6w5de1efc385cacbd7@mail.gmail.com>
-In-Reply-To: <c384c5ea0612041234u5fd7e6d6w5de1efc385cacbd7@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <200612121628.07309.openembedded@hrw.one.pl>
-Subject: Re: Recent OBJDUMP changes
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: "bitburn nano" fails: ERROR: function do_stage failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,56 +29,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Dec 2006 15:29:43 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Dec 2006 16:34:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia poniedzia=B3ek, 4 grudnia 2006 21:34, Leon Woestenberg napisa=B3:
+I am trying to cross-compile on OE for my iPAQ 3800/Familiar PDA. I have
+carefully followed http://www.openembedded.org/wiki/GettingStarted, but I
+can not get past the "bitbake nano" step. I get:
 
-> My assumption was wrong, the correct (cross-toolchain) objdump is used.
->
-> However, the shlibs system seems to fail elsewhere, this is what I see
-> if I disable the objdump command error redirection "2>/dev/null" in
-> package.bbclass:
+###################################################
+sbgree@ubuntu:/openembedded/build$ bitbake nano
+NOTE: Using cache in '/openembedded/build/tmp/cache/h3800'
+NOTE: Handling BitBake files: \ (4092/4092) [100 %]
+NOTE: Parsing finished. 0 cached, 3919 parsed, 173 skipped, 0 masked.
 
-> NOTE: Couldn't find shared library provider for libc.so.6
+NOTE: build 200612121006: started
 
-Does someone found better fix then mine?
+OE Build Configuration:
+BB_VERSION     = "1.6.3"
+OE_REVISION    = "d3a4f1285a8d621925836a8a2ea609ea62d1cc9d"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "h3800"
+DISTRO         = "familiar"
+DISTRO_VERSION = ""
+TARGET_FPU     = "soft"
 
-[hrw@misc1 classes]$ mtn dif package.bbclass
-#
-# old_revision [76f1fdf6dff425bfdddcd67c4430bf4bc23ab36c]
-#
-# patch "classes/package.bbclass"
-#  from [b4538ccc18abcaa057513563f37b2d25fdce5784]
-#    to [969285b9af2e3bc59048d34cf396dd529e496c1e]
-#
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=2D-- classes/package.bbclass     b4538ccc18abcaa057513563f37b2d25fdce5784
-+++ classes/package.bbclass     969285b9af2e3bc59048d34cf396dd529e496c1e
-@@ -576,6 +576,7 @@ python package_do_shlibs() {
-                                path =3D os.path.join(root, file)
-                                if os.access(path, os.X_OK) or lib_re.match=
-(file):
-                                        cmd =3D bb.data.getVar('OBJDUMP', d=
-, 1) + " -p " + path + " 2>/dev/null"
-+                                       cmd =3D "PATH=3D\"%s\" %s" % (bb.da=
-ta.getVar('PATH', d, 1), cmd)
-                                        fd =3D os.popen(cmd)
-                                        lines =3D fd.readlines()
-                                        fd.close()
-[hrw@misc1 classes]$
+NOTE: package quilt-native-0.45: started
+NOTE: package quilt-native-0.45-r0: task do_populate_staging: started
+NOTE: SITE files /openembedded/org.openembedded.dev/site/endian-little
+/openembedded/org.openembedded.dev/site/ix86-common
+ERROR: function do_stage failed
+ERROR: log data follows (/openembedded/build/tmp/work/quilt-native-0.45-r0
+/temp/log.do_stage.5991)
+| NOTE: make install
+| make: *** No rule to make target `install'. Stop.
+| FATAL: oe_runmake failed
+NOTE: Task failed: /openembedded/build/tmp/work/quilt-native-0.45-r0
+/temp/log.do_stage.5991
+NOTE: package quilt-native-0.45-r0: task do_populate_staging: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package quilt-native-0.45: failed
+ERROR: Build of nano failed
+###################################################
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+I suspect my local.conf is my problem:
 
-      I don't know. I don't care. And it doesn't make any difference.
+###################################################
+DL_DIR = "/home/sbgree/sources"
+BBFILES = "/openembedded/org.openembedded.dev/packages/*/*.bb"
+TARGET_OS = "linux"
+TARGET_ARCH = "arm"
+TARGET_FPU = "soft"
+MACHINE = "h3800"
+DISTRO = "familiar"
+IMAGE_FSTYPES = "jffs2 tar"
+BBINCLUDELOGS = "yes"
+###################################################
 
+Can someone please give me a pointer?
 
-
+Thanks,
+Sam Green
 
