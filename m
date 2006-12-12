@@ -1,25 +1,30 @@
-Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1GuEZ8-0004Ak-4n
+	(envelope-from <mickey@vanille-media.de>) id 1GuEkz-0004Jh-TS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Dec 2006 21:49:30 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so314967nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Dec 2006 12:47:54 -0800 (PST)
-Received: by 10.49.107.8 with SMTP id j8mr1822042nfm.1165956474156;
-	Tue, 12 Dec 2006 12:47:54 -0800 (PST)
-Received: from CUBE ( [82.193.96.237])
-	by mx.google.com with ESMTP id y24sm4365283nfb.2006.12.12.12.47.53;
-	Tue, 12 Dec 2006 12:47:53 -0800 (PST)
-Date: Tue, 12 Dec 2006 22:47:55 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
+	Tue, 12 Dec 2006 22:01:46 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id CF5EB28C025; Tue, 12 Dec 2006 21:57:12 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from PROMETHEUS (e180190218.adsl.alicedsl.de [85.180.190.218])
+	by srv043.dedi23.de (Postfix) with ESMTP id 5CEBD28C022;
+	Tue, 12 Dec 2006 21:57:09 +0100 (CET)
+Date: Tue, 12 Dec 2006 22:00:07 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
+Organization: Vanille-Media
 X-Priority: 3 (Normal)
-Message-ID: <26264111.20061212224755@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <457F1191.2050208@dominion.kabel.utwente.nl>
+Message-ID: <193365758.20061212220007@vanille-media.de>
+To: Paul Sokolovsky <pmiscml@gmail.com>
+In-Reply-To: <26264111.20061212224755@gmail.com>
 References: <E1GuDwk-0002kI-IJ@linuxtogo.org>
 	<457F1191.2050208@dominion.kabel.utwente.nl>
+	<26264111.20061212224755@gmail.com>
 MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [oe-commits] org.oe.dev removal.txt: Push bluez*2.* removal to a month later, as it is known to be used by OPIE.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,51 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Dec 2006 20:49:30 -0000
+X-List-Received-Date: Tue, 12 Dec 2006 21:01:49 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hello Koen,
+Paul Sokolovsky wrote:
+>> You're free to re-add the fixed version that doesn't break apps depending on bluez-libs,
+>> but not the broken version.
 
-Tuesday, December 12, 2006, 10:31:13 PM, you wrote:
+>   I'll probably will eat my dogfood of maintainer of a bit bitrotted
+> stuff, and won't put outdated stuff back, but will look into
+> upgrading OPIE to bluez3, when I get to that.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Not much action in upgrading necessary. The issue was (and still
+remains) that bluez3 depends on dbus which in turn brings glib with it
+and this is relatively huge.
 
-> pfalcon commit schreef:
->> removal.txt: Push bluez*2.* removal to a month later, as it is known to be used by OPIE. 
->> * Suggested by Marcin Juszkiewicz
+The advantage of Opie fitting into 14.5MB flash like on Sharp SL5500 would
+be void then.
 
->>  Proposed by:    Koen Kooi
->                    ^^^^^^^^^
-> If you're going to sneak in that commit when I'm offline at least have the decency to
-> notify me explicitly, so I know to do push the removal cset.
+Regards,
 
-  Well, I don't sneak anything, that's nothing but indeed a concurrent
-(or close to concurrent) update. As commit message tells, that move was
-suggested by Marcin in a private mail. And yes, I wanted to cc: you,
-but after all, I thought that he speaks as OE maintainer too, so you
-likely have that communicated already.
-
-> You're free to re-add the fixed version that doesn't break apps depending on bluez-libs,
-> but not the broken version.
-
-  I'll probably will eat my dogfood of maintainer of a bit bitrotted
-stuff, and won't put outdated stuff back, but will look into
-upgrading OPIE to bluez3, when I get to that.
-
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-
-> iD8DBQFFfxGRMkyGM64RGpERAsFGAJ9mjlQhjzqkHdgyyXng4EsMeE4YZwCcDsyf
-> /c2lRE3VVUOLqlXbnhz9beg=
-> =y1bm
-> -----END PGP SIGNATURE-----
-
-
+:M:
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
