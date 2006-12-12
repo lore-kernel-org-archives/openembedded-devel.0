@@ -1,31 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Gu6YG-0006sP-0V
-	for openembedded-devel@openembedded.org; Tue, 12 Dec 2006 13:16:04 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Gu6Wb-0001cH-UO
-	for openembedded-devel@openembedded.org; Tue, 12 Dec 2006 13:14:21 +0100
-Received: from r773d.r.ppp-pool.de ([89.54.119.61])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 12 Dec 2006 13:14:21 +0100
-Received: from no2spam by r773d.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 12 Dec 2006 13:14:21 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 12 Dec 2006 13:14:04 +0100
-Message-ID: <elm6ed$i25$1@sea.gmane.org>
-References: <elbohi$a8k$1@sea.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: r773d.r.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.8 (X11/20061117)
-In-Reply-To: <elbohi$a8k$1@sea.gmane.org>
-Sender: news <news@sea.gmane.org>
-Subject: Re: RFC: encourage switch away from heanet.sf.net
+	(envelope-from <openembedded@hrw.one.pl>) id 1Gu80j-0001Fs-8P
+	for openembedded-devel@openembedded.org; Tue, 12 Dec 2006 14:49:33 +0100
+Received: (qmail 4317 invoked by uid 813007); 12 Dec 2006 13:47:56 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 12 Dec 2006 13:47:56 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+Organization: OpenEmbedded
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Dec 2006 14:47:54 +0100
+User-Agent: KMail/1.9.5
+References: <456B0DC2.90300@dominion.kabel.utwente.nl>
+	<45780B2E.4020906@dominion.kabel.utwente.nl>
+	<1165496944.5601.32.camel@localhost.localdomain>
+In-Reply-To: <1165496944.5601.32.camel@localhost.localdomain>
+MIME-Version: 1.0
+Message-Id: <200612121447.54446.openembedded@hrw.one.pl>
+Subject: Re: To be removed recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,16 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Dec 2006 12:16:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Dec 2006 13:49:33 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Rolf Leggewie wrote:
+Dnia czwartek, 7 grudnia 2006 14:09, Richard Purdie napisa=B3:
+> > Package Name: =A0 task-bootstrap*
+> > Reason: =A0 =A0 =A0 =A0 Obsoleted by task-base
+>
+> Have we anyone still using this? I'm nervous removing this just yet...
 
-> - SOURCEFORGE_MIRROR = "http://heanet.dl.sourceforge.net/sourceforge"
-> + SOURCEFORGE_MIRROR = "http://downloads.sf.net"
+http://www.hrw.one.pl/2006/12/12/how-to-use-task-base/=20
 
-pushed after successful tests from Marcin.
+This can be good read for those which still use task-bootstrap.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+        Happiness? Happiness is an illusion. It is an empty dream.
+        A word without meaning. It is nothing. Or everything.
+
 
 
 
