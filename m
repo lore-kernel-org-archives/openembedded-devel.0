@@ -1,39 +1,21 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [62.169.194.3] (helo=fesscrpp2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GtuzP-0005wU-1w
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Dec 2006 00:55:19 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 774F828C025; Tue, 12 Dec 2006 00:50:53 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180136174.adsl.alicedsl.de [85.180.136.174])
-	by srv043.dedi23.de (Postfix) with ESMTP id 28A2E28C022;
-	Tue, 12 Dec 2006 00:50:50 +0100 (CET)
-Date: Tue, 12 Dec 2006 00:53:47 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1839508393.20061212005347@vanille-media.de>
-To: Tim Bird <tim.bird@am.sony.com>
-In-Reply-To: <457DEDC1.808@am.sony.com>
-References: <HOECLKEKOHLAMMGDLLBHEEFLJAAA.skoroneos@digital-opsis.com>
-	<HOECLKEKOHLAMMGDLLBHCEFKJCAA.skoroneos@digital-opsis.com>
-	<c384c5ea0612070902o7dbb71e8v63cd137b5b611815@mail.gmail.com>
-	<1825230355.20061207183653@vanille-media.de>
-	<c384c5ea0612071104q1cd27beckd9bddfbb112c1d9d@mail.gmail.com>
-	<1165532018.5601.98.camel@localhost.localdomain>
-	<c384c5ea0612081410u598cdbd9nbe72c19740a06d0c@mail.gmail.com>
-	<c384c5ea0612081411x7f198370u5e2b248a6d8a183e@mail.gmail.com>
-	<457A926E.5080005@programming-perl.de>
-	<457DA76C.2050904@am.sony.com>
-	<1293737186.20061211234306@vanille-media.de>
-	<457DEDC1.808@am.sony.com>
+	(envelope-from <skoroneos@digital-opsis.com>) id 1Gu3Cn-0001hu-7V
+	for openembedded-devel@openembedded.org; Tue, 12 Dec 2006 09:41:41 +0100
+Received: from dias (62.169.211.226) by fesscrpp2.tellas.gr (7.3.117)
+	id 4511536901EF4E2E; Tue, 12 Dec 2006 10:39:26 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>,
+	"Tim Bird" <tim.bird@am.sony.com>
+Date: Tue, 12 Dec 2006 10:40:06 +0200
+Message-ID: <HOECLKEKOHLAMMGDLLBHGEAPJEAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2962
+In-Reply-To: <356766153.20061212005023@vanille-media.de>
+Importance: Normal
 Subject: Re: FOSDEM'07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -48,27 +30,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2006 23:55:19 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 12 Dec 2006 08:41:41 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Tim Bird wrote:
-> CELF members have been using OE, and CELF has promoted OE
-> and funded work on OE, at my direction.
+I would appreciate any photos from devices running OE and also any photos
+you think can be used.
+(i.e displaying initial logo etc)
+The higher the resolution the better.
 
-I'm aware of that and it's a very good thing. I can't wait to see some
-open CE devices using OE appearing. I have some ideas in the pipeline
-I'd like to seen realized, but I don't know who would be interested.
-Perhaps we can talk a bit next year. Atm., I'm 100% enaged in the OpenMoko
-project.
+please send them to skoroneos at digital-opsis dot com
 
-Can you make it to FOSDEM'07, btw.?
+I'll try and get a draft leaflet design by early next week
 
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
