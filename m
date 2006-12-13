@@ -1,21 +1,26 @@
-Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <samgreen@gmail.com>) id 1GuZX2-0002DI-EH
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Dec 2006 20:12:44 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so244077ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Dec 2006 11:11:03 -0800 (PST)
-Received: by 10.82.113.6 with SMTP id l6mr233670buc.1166037062588;
-	Wed, 13 Dec 2006 11:11:02 -0800 (PST)
-Received: by 10.82.175.5 with HTTP; Wed, 13 Dec 2006 11:11:02 -0800 (PST)
-Message-ID: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
-Date: Wed, 13 Dec 2006 13:11:02 -0600
-From: "Sam Green" <samgreen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GudEM-0008MW-PT
+	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 00:09:42 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kBDN7tox005599 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Dec 2006 00:07:56 +0100
+Message-ID: <458087C8.4010208@dominion.kabel.utwente.nl>
+Date: Thu, 14 Dec 2006 00:07:52 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Looking for Familiar/iPAQ local.conf example
+To: openembedded-devel@openembedded.org
+References: <20061213152259.GR5148@stygia.hyboria>
+In-Reply-To: <20061213152259.GR5148@stygia.hyboria>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [RFC] Correct the .la files produced by gcc cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,54 +34,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2006 19:12:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 13 Dec 2006 23:09:42 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I have followed http://www.openembedded.org/wiki/GettingStarted _very_
-carefully, but I am unable to get past the "bitbake nano" step. Here is the
-output:
+Graeme Gregory schreef:
+> In my libstdc++.la file in tmp/cross/${TARGET_SYS}/lib/
+> 
+> The following badness occurs.
+> 
+> dependency_libs='
+> -L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/src
+> -L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/src/.libs
+> -lm -lm -lm
+> -L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/./gcc
+> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/arm-angstrom-linux-gnueabi/bin
+> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/arm-angstrom-linux-gnueabi/lib
+> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.1
+> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.1/../../../../arm-angstrom-linux-gnueabi/lib
+> -lgcc_s -lc -lgcc_s -lm -lgcc_s -lc -lgcc_s  '
+> 
+> Which you will note leads the linker to start using
+> tmp/staging/${BUILD_SYS}/lib which is not a compatible architecure in
+> most cases. And for me causes libtool linking to fail when it looks at
+> x86_64 .so files while linking for arm executables.
+> 
+> I think this line should be sed magiced to something along the lines of
+> 
+> dependency_libs='
+> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/${TARGET_SYS}/lib
+> -lgcc_s -lc -lm'
+> 
+> What are the clever peoples thoughts on this.
 
-kmu@debian:~/dev/oe/build$ bitbake nano
-NOTE: Using cache in '/home/kmu/dev/oe/build/tmp/cache/h3800'
-NOTE: Handling BitBake files: \ (4072/4072) [100 %]
-NOTE: Parsing finished. 0 cached, 3899 parsed, 173 skipped, 0 masked.
+I'm seeing the same with powerpc:
 
-NOTE: build 200612131210: started
+| powerpc-angstrom-linux-g++ -mcpu=603e -shared -nostdlib
+/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib/crti.o
+/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/crtbeginS.o
+ .libs/usbpp.o  -Wl,--rpath
+- -Wl,/data/build/koen/OE/build/tmp/angstrom/staging/powerpc-angstrom-linux/lib -Wl,--rpath
+-
+-Wl,/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib
+- -Wl,--rpath
+-
+-Wl,/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib
+- -L/data/build/koen/OE/build/tmp/angstrom/cross/powerpc-angstrom-linux/lib
+- -L/data/build/koen/OE/build/tmp/angstrom/cross/powerpc-angstrom-linux/bin
+-
+-L/data/build/koen/OE/build/tmp/angstrom/work/ppc603e-angstrom-linux/gcc-cross-4.1.1-r8/gcc-4.1.1/build.i686-linux.powerpc-angstrom-linux/./gcc
+- -L/data/build/koen/OE/build/tmp/angstrom/staging/i686-linux/lib
+-
+-L/data/build/koen/OE/build/tmp/angstrom/work/ppc603e-angstrom-linux/gcc-cross-4.1.1-r8/gcc-4.1.1/build.i686-linux.powerpc-angstrom-linux/powerpc-angstrom-linux/libstdc++-v3/src/.libs
+-
+-L/data/build/koen/OE/build/tmp/angstrom/work/ppc603e-angstrom-linux/gcc-cross-4.1.1-r8/gcc-4.1.1/build.i686-linux.powerpc-angstrom-linux/powerpc-angstrom-linux/libstdc++-v3/src
+- -L/data/build/koen/OE/build/tmp/angstrom/staging/powerpc-angstrom-linux/lib
+/data/build/koen/OE/build/tmp/angstrom/staging/powerpc-angstrom-linux/lib/libusb.so
+- -L/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1
+-
+-L/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib
+/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib/libstdc++.so
+- -lm -lc -lgcc_s
+/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/crtsavres.o
+/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/crtendS.o
+/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib/crtn.o
+ -mcpu=603e -Wl,-rpath-link
+- -Wl,/data/build/koen/OE/build/tmp/angstrom/staging/powerpc-angstrom-linux/lib -Wl,-O1
+- -Wl,-soname -Wl,libusbpp-0.1.so.4 -o .libs/libusbpp-0.1.so.4.4.4
 
-OE Build Configuration:
-BB_VERSION     = "1.6.3"
-OE_REVISION    = "7dc5c6145f5a9f64aba3521e24e1a0b1ff7f0e0e"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux"
-MACHINE        = "h3800"
-DISTRO         = "familiar"
-DISTRO_VERSION = "0.8.4"
-TARGET_FPU     = "soft"
 
-NOTE: package quilt-native-0.45: started
-NOTE: package quilt-native-0.45-r0: task do_populate_staging: started
-NOTE: SITE files /home/kmu/dev/oe/org.openembedded.dev/site/endian-little
-/home/kmu/dev/oe/org.openembedded.dev/site/ix86-common
-ERROR: function do_stage failed
-ERROR: log data follows (/home/kmu/dev/oe/build/tmp/work/quilt-
-native-0.45-r0/temp/log.do_stage.4017)
-| NOTE: make install
-| make: *** No rule to make target `install'.  Stop.
-| FATAL: oe_runmake failed
-NOTE: Task failed: /home/kmu/dev/oe/build/tmp/work/quilt-native-0.45-r0
-/temp/log.do_stage.4017
-NOTE: package quilt-native-0.45-r0: task do_populate_staging: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package quilt-native-0.45: failed
-ERROR: Build of nano failed
+The sed trick sounds like a good idea.
 
-I think my problem is my local.conf. Can someone developing for
-Familiar/iPAQ post theirs?
+regards,
 
-Thanks,
-Sam
+Koen.
+
+PS: when will we rewrite bitbake in sed?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFgIfIMkyGM64RGpERAom/AJ9XPCnlrnjCnDW+LLOdHVNjq7TcTgCdGxEv
+fWa+ZfeCNLrphkozFfXBLac=
+=e+iL
+-----END PGP SIGNATURE-----
+
 
