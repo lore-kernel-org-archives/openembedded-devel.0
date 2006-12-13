@@ -1,22 +1,18 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GuSmv-0007rO-Bu
-	for openembedded-devel@openembedded.org; Wed, 13 Dec 2006 13:00:55 +0100
-Received: (qmail 8991 invoked by uid 813007); 13 Dec 2006 11:54:19 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 13 Dec 2006 11:54:19 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-Organization: OpenEmbedded
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Dec 2006 12:54:18 +0100
-User-Agent: KMail/1.9.5
-X-PRIORITY: 2 (High)
-Priority: urgent
-MIME-Version: 1.0
-Message-Id: <200612131254.18279.openembedded@hrw.one.pl>
-Subject: Unifing recipes
+	(envelope-from <dp@xora.org.uk>) id 1GuVsL-00043z-5V
+	for openembedded-devel@openembedded.org; Wed, 13 Dec 2006 16:18:29 +0100
+Received: from xora.org.uk ([::ffff:85.210.128.96])
+	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Wed, 13 Dec 2006 15:16:31 +0000
+	id 0003850E.4580194F.0000670F
+Date: Wed, 13 Dec 2006 15:22:59 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@openembedded.org
+Message-ID: <20061213152259.GR5148@stygia.hyboria>
+Mime-Version: 1.0
+User-Agent: Mutt/1.5.11
+Subject: [RFC] Correct the .la files produced by gcc cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,33 +26,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2006 12:01:18 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Wed, 13 Dec 2006 15:18:29 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
+In my libstdc++.la file in tmp/cross/${TARGET_SYS}/lib/
 
-One of things on my todo list was 'improve dbus packaging'. But when 
-I looked into packages/dbus/ I discovered 6 recipes of same software (in 
-misc versions) without common things moved into one included file.
+The following badness occurs.
 
-Does it was really hard to create common dbus.inc when 2nd or 3rd recipe 
-was added? 
+dependency_libs='
+-L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/src
+-L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/src/.libs
+-lm -lm -lm
+-L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/./gcc
+-L/home/gg/zaurus/build-terrier-ang/tmp/cross/arm-angstrom-linux-gnueabi/bin
+-L/home/gg/zaurus/build-terrier-ang/tmp/cross/arm-angstrom-linux-gnueabi/lib
+-L/home/gg/zaurus/build-terrier-ang/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.1
+-L/home/gg/zaurus/build-terrier-ang/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.1/../../../../arm-angstrom-linux-gnueabi/lib
+-lgcc_s -lc -lgcc_s -lm -lgcc_s -lc -lgcc_s  '
 
-I know that 'cp old.bb new.bb' is easiest way of adding new version but 
-sooner or later we will came into situation when we will have many recipes 
-which will be hard to fix without splitting first.
+Which you will note leads the linker to start using
+tmp/staging/${BUILD_SYS}/lib which is not a compatible architecure in
+most cases. And for me causes libtool linking to fail when it looks at
+x86_64 .so files while linking for arm executables.
 
-So if you are a developer - please create common PN.inc file when you are 
-adding new recipe for other version of application.
+I think this line should be sed magiced to something along the lines of
 
--- 
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+dependency_libs='
+-L/home/gg/zaurus/build-terrier-ang/tmp/cross/${TARGET_SYS}/lib
+-lgcc_s -lc -lm'
 
-                 Don't panic. Count to ten ... then panic!
+What are the clever peoples thoughts on this.
 
+Graeme
 
 
 
