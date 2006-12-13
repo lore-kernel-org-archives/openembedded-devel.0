@@ -1,24 +1,22 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GuShO-0007nU-L9
-	for openembedded-devel@openembedded.org; Wed, 13 Dec 2006 12:54:58 +0100
-Received: (qmail 1026 invoked by uid 813007); 13 Dec 2006 11:48:34 -0000
+	(envelope-from <openembedded@hrw.one.pl>) id 1GuSmv-0007rO-Bu
+	for openembedded-devel@openembedded.org; Wed, 13 Dec 2006 13:00:55 +0100
+Received: (qmail 8991 invoked by uid 813007); 13 Dec 2006 11:54:19 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
 	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 13 Dec 2006 11:48:34 -0000
+	by smtp.host4.kei.pl with ESMTPA; 13 Dec 2006 11:54:19 -0000
 From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 Organization: OpenEmbedded
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Dec 2006 12:48:27 +0100
+Date: Wed, 13 Dec 2006 12:54:18 +0100
 User-Agent: KMail/1.9.5
-References: <E1GuDwk-0002kI-IJ@linuxtogo.org>
-	<193365758.20061212220007@vanille-media.de>
-	<200612130851.38002.openembedded@hrw.one.pl>
-In-Reply-To: <200612130851.38002.openembedded@hrw.one.pl>
+X-PRIORITY: 2 (High)
+Priority: urgent
 MIME-Version: 1.0
-Message-Id: <200612131248.27578.openembedded@hrw.one.pl>
-Subject: Re: [oe-commits] org.oe.dev removal.txt: Push bluez*2.* removal to a month later, as it is known to be used by OPIE.
+Message-Id: <200612131254.18279.openembedded@hrw.one.pl>
+Subject: Unifing recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,35 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2006 11:54:58 -0000
+X-List-Received-Date: Wed, 13 Dec 2006 12:01:18 -0000
 Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia =B6roda, 13 grudnia 2006 08:51, Marcin Juszkiewicz napisa=B3:
-> Dnia wtorek, 12 grudnia 2006 22:00, Michael 'Mickey' Lauer napisa=B3:
 
-> > The advantage of Opie fitting into 14.5MB flash like on Sharp SL5500
-> > would be void then.
+One of things on my todo list was 'improve dbus packaging'. But when 
+I looked into packages/dbus/ I discovered 6 recipes of same software (in 
+misc versions) without common things moved into one included file.
 
-> OPIE from .dev already is hard to fit - qte-mt with Japanese support is
-> larger.
+Does it was really hard to create common dbus.inc when 2nd or 3rd recipe 
+was added? 
 
-16.469.224 opie-image-collie-20061213112019.rootfs.jffs2
+I know that 'cp old.bb new.bb' is easiest way of adding new version but 
+sooner or later we will came into situation when we will have many recipes 
+which will be hard to fix without splitting first.
 
-Thats openzaurus-unstable/collie build of today.=20
+So if you are a developer - please create common PN.inc file when you are 
+adding new recipe for other version of application.
 
-OPIE is hard to build from .dev - rtti/no-rtti problems from time to time=20
-(opie-alarm/qcop/rdesktop are not buildable without linking with g++ or=20
-changing CFLAGS).
-
-=2D-=20
+-- 
 JID: hrw-jabber.org
 OpenEmbedded developer/consultant
 
-             I do not fear computers. I fear the lack of them.
-             		-- Isaac Asimov
+                 Don't panic. Count to ten ... then panic!
 
 
 
