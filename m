@@ -1,27 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GuXnn-0008UL-Fx
-	for openembedded-devel@openembedded.org; Wed, 13 Dec 2006 18:21:55 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBDHKCLr027689 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Dec 2006 18:20:13 +0100
-Message-ID: <4580364A.9020809@dominion.kabel.utwente.nl>
-Date: Wed, 13 Dec 2006 18:20:10 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+	(envelope-from <samgreen@gmail.com>) id 1GuZX2-0002DI-EH
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Dec 2006 20:12:44 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so244077ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Dec 2006 11:11:03 -0800 (PST)
+Received: by 10.82.113.6 with SMTP id l6mr233670buc.1166037062588;
+	Wed, 13 Dec 2006 11:11:02 -0800 (PST)
+Received: by 10.82.175.5 with HTTP; Wed, 13 Dec 2006 11:11:02 -0800 (PST)
+Message-ID: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
+Date: Wed, 13 Dec 2006 13:11:02 -0600
+From: "Sam Green" <samgreen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <E1Gu4iF-0003Rn-TF@linuxtogo.org>	<747437870.20061212201700@vanille-media.de>
-	<457F0505.9010201@dominion.kabel.utwente.nl>
-In-Reply-To: <457F0505.9010201@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Looking for Familiar/iPAQ local.conf example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,33 +29,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2006 17:21:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 13 Dec 2006 19:12:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-Koen Kooi schreef:
-> Michael 'Mickey' Lauer schreef:
->> koen commit wrote:
->>> libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
->> This change breaks building libX11 for me. TARGET=armv4
-> 
-> There is indeed a small thinko in that patch, since the Makefile looks for makekeys.o.
-> I'll have to think about a proper fix, if someone doesn't beat me to it.
+I have followed http://www.openembedded.org/wiki/GettingStarted _very_
+carefully, but I am unable to get past the "bitbake nano" step. Here is the
+output:
 
-I reverted it in the meantime.
+kmu@debian:~/dev/oe/build$ bitbake nano
+NOTE: Using cache in '/home/kmu/dev/oe/build/tmp/cache/h3800'
+NOTE: Handling BitBake files: \ (4072/4072) [100 %]
+NOTE: Parsing finished. 0 cached, 3899 parsed, 173 skipped, 0 masked.
 
-regards,
+NOTE: build 200612131210: started
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+OE Build Configuration:
+BB_VERSION     = "1.6.3"
+OE_REVISION    = "7dc5c6145f5a9f64aba3521e24e1a0b1ff7f0e0e"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "h3800"
+DISTRO         = "familiar"
+DISTRO_VERSION = "0.8.4"
+TARGET_FPU     = "soft"
 
-iD8DBQFFgDZKMkyGM64RGpERAjbZAJ4/hflpOfCGkU0lHRYVdUuG56D2kwCcDqpN
-0Ea5QFPcWEQ9g3wLW6w5KNM=
-=CFXf
------END PGP SIGNATURE-----
+NOTE: package quilt-native-0.45: started
+NOTE: package quilt-native-0.45-r0: task do_populate_staging: started
+NOTE: SITE files /home/kmu/dev/oe/org.openembedded.dev/site/endian-little
+/home/kmu/dev/oe/org.openembedded.dev/site/ix86-common
+ERROR: function do_stage failed
+ERROR: log data follows (/home/kmu/dev/oe/build/tmp/work/quilt-
+native-0.45-r0/temp/log.do_stage.4017)
+| NOTE: make install
+| make: *** No rule to make target `install'.  Stop.
+| FATAL: oe_runmake failed
+NOTE: Task failed: /home/kmu/dev/oe/build/tmp/work/quilt-native-0.45-r0
+/temp/log.do_stage.4017
+NOTE: package quilt-native-0.45-r0: task do_populate_staging: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package quilt-native-0.45: failed
+ERROR: Build of nano failed
 
+I think my problem is my local.conf. Can someone developing for
+Familiar/iPAQ post theirs?
+
+Thanks,
+Sam
 
