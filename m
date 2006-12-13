@@ -1,21 +1,27 @@
-Received: from [66.249.92.173] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <nicolasfr@gmail.com>) id 1GuXE2-00075D-Vx
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Dec 2006 17:44:59 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so207599ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Dec 2006 08:43:13 -0800 (PST)
-Received: by 10.78.193.19 with SMTP id q19mr801273huf.1166027759794;
-	Wed, 13 Dec 2006 08:35:59 -0800 (PST)
-Received: by 10.78.159.1 with HTTP; Wed, 13 Dec 2006 08:35:59 -0800 (PST)
-Message-ID: <b9481e140612130835p4c1ba46ja07c53d7cb473092@mail.gmail.com>
-Date: Wed, 13 Dec 2006 17:35:59 +0100
-From: "Nicolas FR" <nicolasfr@gmail.com>
-To: "Using the OpenEmbedded metadata to build Linux Distributions"
-	<openembedded-devel@lists.openembedded.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GuXnn-0008UL-Fx
+	for openembedded-devel@openembedded.org; Wed, 13 Dec 2006 18:21:55 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kBDHKCLr027689 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Dec 2006 18:20:13 +0100
+Message-ID: <4580364A.9020809@dominion.kabel.utwente.nl>
+Date: Wed, 13 Dec 2006 18:20:10 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-Subject: task-base extra stuff
+To: openembedded-devel@openembedded.org
+References: <E1Gu4iF-0003Rn-TF@linuxtogo.org>	<747437870.20061212201700@vanille-media.de>
+	<457F0505.9010201@dominion.kabel.utwente.nl>
+In-Reply-To: <457F0505.9010201@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,22 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2006 16:44:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 13 Dec 2006 17:21:55 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-After reading HRW's interesting article:
-http://www.hrw.one.pl/2006/12/12/how-to-use-task-base/
-I have a question: I made an image for x86 target and used task base.
-I understand how to add extra stuff with
-MACHINE_EXTRA_RDEPENDS/MACHINE_EXTRA_RRECOMMENDS but is it possible to
-do the reverse:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I do not want to pull psplash even if my machine features "screen". Is
-it possible? (I tried ASSUME_PROVIDED += psplash in local.conf but
-psplash is always added to the rootfs image).
+Koen Kooi schreef:
+> Michael 'Mickey' Lauer schreef:
+>> koen commit wrote:
+>>> libx11: don't use oe_runmake to build makekeys since that fails for cross-endian builds
+>> This change breaks building libX11 for me. TARGET=armv4
+> 
+> There is indeed a small thinko in that patch, since the Makefile looks for makekeys.o.
+> I'll have to think about a proper fix, if someone doesn't beat me to it.
 
-Nicolas.
+I reverted it in the meantime.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFgDZKMkyGM64RGpERAjbZAJ4/hflpOfCGkU0lHRYVdUuG56D2kwCcDqpN
+0Ea5QFPcWEQ9g3wLW6w5KNM=
+=CFXf
+-----END PGP SIGNATURE-----
 
 
