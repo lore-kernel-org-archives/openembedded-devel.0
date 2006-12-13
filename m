@@ -1,18 +1,26 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <dp@xora.org.uk>) id 1GuVsL-00043z-5V
-	for openembedded-devel@openembedded.org; Wed, 13 Dec 2006 16:18:29 +0100
-Received: from xora.org.uk ([::ffff:85.210.128.96])
-	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Wed, 13 Dec 2006 15:16:31 +0000
-	id 0003850E.4580194F.0000670F
-Date: Wed, 13 Dec 2006 15:22:59 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@openembedded.org
-Message-ID: <20061213152259.GR5148@stygia.hyboria>
-Mime-Version: 1.0
-User-Agent: Mutt/1.5.11
-Subject: [RFC] Correct the .la files produced by gcc cross
+	(envelope-from <goxboxlive@gmail.com>) id 1GuVu4-00046R-36
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Dec 2006 16:20:16 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so185824ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Dec 2006 07:18:35 -0800 (PST)
+Received: by 10.82.136.4 with SMTP id j4mr174151bud.1166023114431;
+	Wed, 13 Dec 2006 07:18:34 -0800 (PST)
+Received: by 10.82.108.8 with HTTP; Wed, 13 Dec 2006 07:18:34 -0800 (PST)
+Message-ID: <7221c7d80612130718m71fec682gc773383b88810927@mail.gmail.com>
+Date: Wed, 13 Dec 2006 16:18:34 +0100
+From: "GoXbox Live" <goxboxlive@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200612131248.27578.openembedded@hrw.one.pl>
+MIME-Version: 1.0
+References: <E1GuDwk-0002kI-IJ@linuxtogo.org>
+	<193365758.20061212220007@vanille-media.de>
+	<200612130851.38002.openembedded@hrw.one.pl>
+	<200612131248.27578.openembedded@hrw.one.pl>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: [oe-commits] org.oe.dev removal.txt: Push bluez*2.* removal to a month later, as it is known to be used by OPIE.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -26,40 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2006 15:18:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Dec 2006 15:20:16 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed
+Content-Transfer-Encoding: base64
 Content-Disposition: inline
 
-In my libstdc++.la file in tmp/cross/${TARGET_SYS}/lib/
-
-The following badness occurs.
-
-dependency_libs='
--L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/src
--L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/src/.libs
--lm -lm -lm
--L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/./gcc
--L/home/gg/zaurus/build-terrier-ang/tmp/cross/arm-angstrom-linux-gnueabi/bin
--L/home/gg/zaurus/build-terrier-ang/tmp/cross/arm-angstrom-linux-gnueabi/lib
--L/home/gg/zaurus/build-terrier-ang/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.1
--L/home/gg/zaurus/build-terrier-ang/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.1/../../../../arm-angstrom-linux-gnueabi/lib
--lgcc_s -lc -lgcc_s -lm -lgcc_s -lc -lgcc_s  '
-
-Which you will note leads the linker to start using
-tmp/staging/${BUILD_SYS}/lib which is not a compatible architecure in
-most cases. And for me causes libtool linking to fail when it looks at
-x86_64 .so files while linking for arm executables.
-
-I think this line should be sed magiced to something along the lines of
-
-dependency_libs='
--L/home/gg/zaurus/build-terrier-ang/tmp/cross/${TARGET_SYS}/lib
--lgcc_s -lc -lm'
-
-What are the clever peoples thoughts on this.
-
-Graeme
-
-
-
+VGhhdCd0IHRoZSBzYW1lIGhhcHBlbmluZyB3aGVuIHVzaW5nIEZhbWlsaWFyIGFzIGRpc3Ryby4K
+QnV0IHdoZW4gYnVpbGRpbmcgd2l0aCBBbmdzdHJvbSBhcyBkaXN0cm8gaXQgYnVpbGRzIHdpdGgg
+bm8gaGFja3MuCgpnb3hib3hsaXZlCgoyMDA2LzEyLzEzLCBNYXJjaW4gSnVzemtpZXdpY3ogPG9w
+ZW5lbWJlZGRlZEBocncub25lLnBsPjoKPgo+IERuaWEgJiM2NTUzMztyb2RhLCAxMyBncnVkbmlh
+IDIwMDYgMDg6NTEsIE1hcmNpbiBKdXN6a2lld2ljeiBuYXBpc2EmIzY1NTMzOzoKPiA+IERuaWEg
+d3RvcmVrLCAxMiBncnVkbmlhIDIwMDYgMjI6MDAsIE1pY2hhZWwgJ01pY2tleScgTGF1ZXIgbmFw
+aXNhJiM2NTUzMzs6Cj4KPiA+ID4gVGhlIGFkdmFudGFnZSBvZiBPcGllIGZpdHRpbmcgaW50byAx
+NC41TUIgZmxhc2ggbGlrZSBvbiBTaGFycCBTTDU1MDAKPiA+ID4gd291bGQgYmUgdm9pZCB0aGVu
+Lgo+Cj4gPiBPUElFIGZyb20gLmRldiBhbHJlYWR5IGlzIGhhcmQgdG8gZml0IC0gcXRlLW10IHdp
+dGggSmFwYW5lc2Ugc3VwcG9ydCBpcwo+ID4gbGFyZ2VyLgo+Cj4gMTYuNDY5LjIyNCBvcGllLWlt
+YWdlLWNvbGxpZS0yMDA2MTIxMzExMjAxOS5yb290ZnMuamZmczIKPgo+IFRoYXRzIG9wZW56YXVy
+dXMtdW5zdGFibGUvY29sbGllIGJ1aWxkIG9mIHRvZGF5Lgo+Cj4gT1BJRSBpcyBoYXJkIHRvIGJ1
+aWxkIGZyb20gLmRldiAtIHJ0dGkvbm8tcnR0aSBwcm9ibGVtcyBmcm9tIHRpbWUgdG8gdGltZQo+
+IChvcGllLWFsYXJtL3Fjb3AvcmRlc2t0b3AgYXJlIG5vdCBidWlsZGFibGUgd2l0aG91dCBsaW5r
+aW5nIHdpdGggZysrIG9yCj4gY2hhbmdpbmcgQ0ZMQUdTKS4KPgo+IC0tCj4gSklEOiBocnctamFi
+YmVyLm9yZwo+IE9wZW5FbWJlZGRlZCBkZXZlbG9wZXIvY29uc3VsdGFudAo+Cj4gICAgICAgICAg
+ICAgIEkgZG8gbm90IGZlYXIgY29tcHV0ZXJzLiBJIGZlYXIgdGhlIGxhY2sgb2YgdGhlbS4KPiAg
+ICAgICAgICAgICAgICAgICAgICAgICAtLSBJc2FhYyBBc2ltb3YKPgo+Cj4KPiBfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IE9wZW5lbWJlZGRlZC1kZXZl
+bCBtYWlsaW5nIGxpc3QKPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
+Zwo+IGh0dHA6Ly9saXN0cy5saW51eHRvZ28ub3JnL2NnaS1iaW4vbWFpbG1hbi9saXN0aW5mby9v
+cGVuZW1iZWRkZWQtZGV2ZWwKPgo=
