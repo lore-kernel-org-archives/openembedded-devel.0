@@ -1,26 +1,26 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [204.127.200.84] (helo=sccrmhc14.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GudEM-0008MW-PT
-	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 00:09:42 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBDN7tox005599 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2006 00:07:56 +0100
-Message-ID: <458087C8.4010208@dominion.kabel.utwente.nl>
-Date: Thu, 14 Dec 2006 00:07:52 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
-MIME-Version: 1.0
+	(envelope-from <3rdshift@comcast.net>) id 1GuhJh-0006bz-Ek
+	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 04:31:29 +0100
+Received: from dollar.3rdshift.com
+	(c-69-251-178-175.hsd1.md.comcast.net[69.251.178.175])
+	by comcast.net (sccrmhc14) with ESMTP
+	id <200612140329450140043ddle>; Thu, 14 Dec 2006 03:29:45 +0000
+Received: from dollar.3rdshift.com (localhost.localdomain [127.0.0.1])
+	by dollar.3rdshift.com (8.13.7/8.13.6) with ESMTP id kBE3TiQK006439
+	for <openembedded-devel@openembedded.org>;
+	Wed, 13 Dec 2006 22:29:45 -0500
+Received: (from vlg@localhost)
+	by dollar.3rdshift.com (8.13.7/8.13.7/Submit) id kBE3Tifc006438
+	for openembedded-devel@openembedded.org; Wed, 13 Dec 2006 22:29:44 -0500
+From: VLG <3rdshift@comcast.net>
 To: openembedded-devel@openembedded.org
-References: <20061213152259.GR5148@stygia.hyboria>
-In-Reply-To: <20061213152259.GR5148@stygia.hyboria>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] Correct the .la files produced by gcc cross
+Organization: 3rdShift Inc.
+Date: Wed, 13 Dec 2006 22:29:44 -0500
+Message-Id: <1166066984.2740.21.camel@dollar.3rdshift.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 (2.6.3-1.fc5.5) 
+Subject: .bb file syntax question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,91 +34,159 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Dec 2006 23:09:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Dec 2006 03:31:30 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Graeme Gregory schreef:
-> In my libstdc++.la file in tmp/cross/${TARGET_SYS}/lib/
-> 
-> The following badness occurs.
-> 
-> dependency_libs='
-> -L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/src
-> -L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/src/.libs
-> -lm -lm -lm
-> -L/home/gg/zaurus/build-terrier-ang/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.1.1-r8/gcc-4.1.1/build.x86_64-linux.arm-angstrom-linux-gnueabi/./gcc
-> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/arm-angstrom-linux-gnueabi/bin
-> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/arm-angstrom-linux-gnueabi/lib
-> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.1
-> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.1/../../../../arm-angstrom-linux-gnueabi/lib
-> -lgcc_s -lc -lgcc_s -lm -lgcc_s -lc -lgcc_s  '
-> 
-> Which you will note leads the linker to start using
-> tmp/staging/${BUILD_SYS}/lib which is not a compatible architecure in
-> most cases. And for me causes libtool linking to fail when it looks at
-> x86_64 .so files while linking for arm executables.
-> 
-> I think this line should be sed magiced to something along the lines of
-> 
-> dependency_libs='
-> -L/home/gg/zaurus/build-terrier-ang/tmp/cross/${TARGET_SYS}/lib
-> -lgcc_s -lc -lm'
-> 
-> What are the clever peoples thoughts on this.
+I am looking for a working example of a .bb file that builds a .ipk
+package by pulling project from Sourceforge-hosted CVS. Somehow, what I
+tried so far for my project (http://granule.sf.net) simply doesn't work:
 
-I'm seeing the same with powerpc:
+granule_cvs.bb
+---------------------------------------------------------
+DESCRIPTION = "Generic memory training with flash cards.  Automatic
+scheduling algorithm."
+AUTHOR = "Vladislav Grinchenko <vlg@users.sourceforge.net>"
+HOMEPAGE = "http://granule.sf.net"
+SECTION = "x11/apps"
+PRIORITY = "optional"
+LICENSE = "GPLv2"
+DEPENDS = "glib-2.0-native intltool-native gtkmm libxml2 libassa"
+PR = "r0"
+PV = "1.1+cvs"
 
-| powerpc-angstrom-linux-g++ -mcpu=603e -shared -nostdlib
-/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib/crti.o
-/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/crtbeginS.o
- .libs/usbpp.o  -Wl,--rpath
-- -Wl,/data/build/koen/OE/build/tmp/angstrom/staging/powerpc-angstrom-linux/lib -Wl,--rpath
--
--Wl,/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib
-- -Wl,--rpath
--
--Wl,/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib
-- -L/data/build/koen/OE/build/tmp/angstrom/cross/powerpc-angstrom-linux/lib
-- -L/data/build/koen/OE/build/tmp/angstrom/cross/powerpc-angstrom-linux/bin
--
--L/data/build/koen/OE/build/tmp/angstrom/work/ppc603e-angstrom-linux/gcc-cross-4.1.1-r8/gcc-4.1.1/build.i686-linux.powerpc-angstrom-linux/./gcc
-- -L/data/build/koen/OE/build/tmp/angstrom/staging/i686-linux/lib
--
--L/data/build/koen/OE/build/tmp/angstrom/work/ppc603e-angstrom-linux/gcc-cross-4.1.1-r8/gcc-4.1.1/build.i686-linux.powerpc-angstrom-linux/powerpc-angstrom-linux/libstdc++-v3/src/.libs
--
--L/data/build/koen/OE/build/tmp/angstrom/work/ppc603e-angstrom-linux/gcc-cross-4.1.1-r8/gcc-4.1.1/build.i686-linux.powerpc-angstrom-linux/powerpc-angstrom-linux/libstdc++-v3/src
-- -L/data/build/koen/OE/build/tmp/angstrom/staging/powerpc-angstrom-linux/lib
-/data/build/koen/OE/build/tmp/angstrom/staging/powerpc-angstrom-linux/lib/libusb.so
-- -L/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1
--
--L/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib
-/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib/libstdc++.so
-- -lm -lc -lgcc_s
-/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/crtsavres.o
-/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/crtendS.o
-/data/build/koen/OE/build/tmp/angstrom/cross/lib/gcc/powerpc-angstrom-linux/4.1.1/../../../../powerpc-angstrom-linux/lib/crtn.o
- -mcpu=603e -Wl,-rpath-link
-- -Wl,/data/build/koen/OE/build/tmp/angstrom/staging/powerpc-angstrom-linux/lib -Wl,-O1
-- -Wl,-soname -Wl,libusbpp-0.1.so.4 -o .libs/libusbpp-0.1.so.4.4.4
+EXTRA_OECONF += "--enable-pda=yes"
+
+SRC_URI =
+"cvs://anonymous@granule.cvs.sourceforge.net/cvsroot/granule;method=pserver;module=granule"
+
+inherit autotools pkgconfig
+
+---------------------------------------------------------
+
+However, if I define SRC_URI to point to a local file, I get my package
+built:
+
+SRC_URI =
+"file:///extra/stuff/org.openembedded.dev/packages/granule/granule-1.2.4.tar.gz"
 
 
-The sed trick sounds like a good idea.
+Here is the failing output log:
+=========================================================
+[vlg@dollar]/extra/stuff> bitbake granule
+NOTE: Using cache in '/extra/stuff/tmp/cache/collie'
+NOTE: Handling BitBake files: \ (4100/4100) [100 %]
+NOTE: Parsing finished. 3945 cached, 0 parsed, 155 skipped, 0 masked.
 
-regards,
+NOTE: build 200612132221: started
 
-Koen.
+OE Build Configuration:
+BB_VERSION     = "1.6.3"
+OE_REVISION    = "dc5138ded31c9c1aacd6c0bf37d83ec11d95747c"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "collie"
+DISTRO         = "openzaurus"
+DISTRO_VERSION = ".dev-snapshot-20061214"
+TARGET_FPU     = "soft"
 
-PS: when will we rewrite bitbake in sed?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+NOTE: multiple providers are available (glibc, glibc-intermediate);
+NOTE: consider defining
+PREFERRED_PROVIDER_virtual/arm-linux-libc-for-gcc
+NOTE: multiple providers are available (db3-native, db-native);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/db-native
+NOTE: multiple providers are available (db3, db);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/db
+NOTE: package granule-1.1+cvs: started
+NOTE: package granule-1.1+cvs-r0: task do_fetch: started
+NOTE: fetch
+http://ewi546.ewi.utwente.nl/mirror/www.openzaurus.org/official/unstable/3.5.4/sources/granule_granule.cvs.sourceforge.net__20061214.tar.gz
+--22:21:52--
+http://ewi546.ewi.utwente.nl/mirror/www.openzaurus.org/official/unstable/3.5.4/sources/granule_granule.cvs.sourceforge.net__20061214.tar.gz
+           =>
+`/extra/stuff/sources/granule_granule.cvs.sourceforge.net__20061214.tar.gz'
+Resolving ewi546.ewi.utwente.nl... 130.89.145.130
+Connecting to ewi546.ewi.utwente.nl|130.89.145.130|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+22:21:52 ERROR 404: Not Found.
 
-iD8DBQFFgIfIMkyGM64RGpERAom/AJ9XPCnlrnjCnDW+LLOdHVNjq7TcTgCdGxEv
-fWa+ZfeCNLrphkozFfXBLac=
-=e+iL
------END PGP SIGNATURE-----
+NOTE: Update
+cvs://anonymous@granule.cvs.sourceforge.net/cvsroot/granule;method=pserver;module=granule
+cvs update: Updating .
+cvs update: Updating debian
+cvs update: Updating debian.hildon
+cvs update: Updating docs
+cvs update: Updating docs/C
+cvs update: Updating hildon
+cvs update: Updating hildon/icons
+cvs update: Updating hildon/icons/26x26
+cvs update: Updating hildon/icons/40x40
+cvs update: Updating hildon/icons/scalable
+cvs update: Updating pixmaps
+cvs update: Updating po
+cvs update: Updating src
+NOTE: package granule-1.1+cvs-r0: task do_fetch: completed
+NOTE: package granule-1.1+cvs-r0: task do_unpack: started
+NOTE:
+Unpacking /extra/stuff/sources/granule_granule.cvs.sourceforge.net__20061214.tar.gz to /extra/stuff/tmp/work/arm-linux/granule-1.1+cvs-r0/
+NOTE: package granule-1.1+cvs-r0: task do_unpack: completed
+NOTE: package granule-1.1+cvs-r0: task do_patch: started
+NOTE: package granule-1.1+cvs-r0: task do_patch: completed
+NOTE: package granule-1.1+cvs-r0: task do_bootstrap: started
+NOTE: SITE
+files /extra/stuff/org.openembedded.dev/site/endian-little /extra/stuff/org.openembedded.dev/site/arm-linux
+NOTE: package granule-1.1+cvs-r0: task do_bootstrap: completed
+NOTE: package granule-1.1+cvs-r0: task do_configure: started
+NOTE: SITE
+files /extra/stuff/org.openembedded.dev/site/endian-little /extra/stuff/org.openembedded.dev/site/arm-linux
+NOTE: package granule-1.1+cvs-r0: task do_configure: completed
+NOTE: package granule-1.1+cvs-r0: task do_compile: started
+NOTE: SITE
+files /extra/stuff/org.openembedded.dev/site/endian-little /extra/stuff/org.openembedded.dev/site/arm-linux
+NOTE: package granule-1.1+cvs-r0: task do_compile: completed
+NOTE: package granule-1.1+cvs-r0: task do_install: started
+NOTE: SITE
+files /extra/stuff/org.openembedded.dev/site/endian-little /extra/stuff/org.openembedded.dev/site/arm-linux
+ERROR: function do_install failed
+ERROR: log data follows (/extra/stuff/tmp/work/arm-linux/granule-1.1
++cvs-r0/temp/log.do_install.5506)
+| NOTE: make DESTDIR=/extra/stuff/tmp/work/arm-linux/granule-1.1
++cvs-r0/image install
+| make: *** No rule to make target `install'.  Stop.
+| FATAL: oe_runmake failed
+NOTE: Task failed: /extra/stuff/tmp/work/arm-linux/granule-1.1
++cvs-r0/temp/log.do_install.5506
+NOTE: package granule-1.1+cvs-r0: task do_install: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package granule-1.1+cvs: failed
+ERROR: Build of granule failed
+===================================================================
+
+Looking further down, 
+
+[vlg@dollar]> ls /extra/stuff/tmp/work/arm-linux/granule-1.1+cvs-r0/
+
+drwxr-xr-x 11 vlg 4.0K Dec 13 22:22 granule/           <- source pulled
+from CVS
+drwxr-xr-x  3 vlg 4.0K Dec 13 22:21 granule-1.1+cvs/   <- empty  (????)
+drwxr-xr-x  2 vlg 4.0K Dec 13 22:22 image/
+drwxr-xr-x  2 vlg 4.0K Dec 13 22:22 temp/
+
+
+Another pecurliar thing I noted was that do_compile stage completes
+awfully fast - it takes about 40 seconds on my machine to build the
+package on a regular basis whereas in this case it's the blink of an
+eye.
+
+[vlg@dollar]/extra/stuff> bitbake --version
+BitBake Build Tool Core version 1.6.3, bitbake version 1.6.3
+
+I'm building with the latest unstable collie.
+
+Any ideas will be very welcomed.
+thanks,
+-Vlad
 
 
