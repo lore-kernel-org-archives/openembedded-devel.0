@@ -1,25 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GusBd-00029Y-J3
-	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 16:07:53 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBEF5uLr002321 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2006 16:05:56 +0100
-Message-ID: <45816854.1000901@dominion.kabel.utwente.nl>
-Date: Thu, 14 Dec 2006 16:05:56 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <mickey@vanille-media.de>) id 1GusMT-0002IS-VB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Dec 2006 16:19:05 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 12F3828C022; Thu, 14 Dec 2006 16:14:19 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from PROMETHEUS (e180165193.adsl.alicedsl.de [85.180.165.193])
+	by srv043.dedi23.de (Postfix) with ESMTP id 9E38A28C021
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Dec 2006 16:14:15 +0100 (CET)
+Date: Thu, 14 Dec 2006 16:17:18 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1676775768.20061214161718@vanille-media.de>
+To: Koen Kooi <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <45816854.1000901@dominion.kabel.utwente.nl>
 References: <7AD6822B-1A67-42E9-880A-628023D78C70@inf.fu-berlin.de>
-In-Reply-To: <7AD6822B-1A67-42E9-880A-628023D78C70@inf.fu-berlin.de>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<45816854.1000901@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
 Subject: Re: RFC Lightning Talk at FOSDEM 2007
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,32 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2006 15:07:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Dec 2006 15:19:06 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi wrote:
+> Holger Freyther schreef:
+>> Hi,
+>> 
+>> as OE can only have one talk http://www.fosdem.org/2007/node/22 I'm  
+>> asking you if the following is okay for you. 
 
-Holger Freyther schreef:
-> Hi,
-> 
-> as OE can only have one talk http://www.fosdem.org/2007/node/22 I'm  
-> asking you if the following is okay for you. 
+> Any volunteers for an OE talk in the embedded room?
 
-Any volunteers for an OE talk in the embedded room? OE has some pretty advanced QA stuff
-(insane.bbclass, sanity.bbclass and the fail-fast overrides) that could use some more PR.
+I'd like to do it, if you don't mind. My idea is to present a list of
+advances throughout the last 12 months and how they change the way we
+get things done with OE.
 
-regards,
+Regards,
 
-Koen
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFgWhTMkyGM64RGpERAuEpAJ0VGNrHnjbNI3wCCBrAvfPaDCS3OwCfaODr
-oJEHsG8DyAmBGxYDXakuN4E=
-=eNdk
------END PGP SIGNATURE-----
 
 
