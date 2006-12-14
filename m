@@ -1,30 +1,31 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [209.225.8.186] (helo=mtao01.charter.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GusMT-0002IS-VB
+	(envelope-from <erik@hovland.org>) id 1Gusdy-0003TS-Gq
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Dec 2006 16:19:05 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 12F3828C022; Thu, 14 Dec 2006 16:14:19 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180165193.adsl.alicedsl.de [85.180.165.193])
-	by srv043.dedi23.de (Postfix) with ESMTP id 9E38A28C021
+	Thu, 14 Dec 2006 16:37:10 +0100
+Received: from aa02.charter.net ([10.20.200.154]) by mtao01.charter.net
+	(InterMail vM.6.01.06.01 201-2131-130-101-20060113) with ESMTP
+	id <20061214153519.VVMH1329.mtao01.charter.net@aa02.charter.net>
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2006 16:14:15 +0100 (CET)
-Date: Thu, 14 Dec 2006 16:17:18 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1676775768.20061214161718@vanille-media.de>
-To: Koen Kooi <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <45816854.1000901@dominion.kabel.utwente.nl>
-References: <7AD6822B-1A67-42E9-880A-628023D78C70@inf.fu-berlin.de>
-	<45816854.1000901@dominion.kabel.utwente.nl>
+	Thu, 14 Dec 2006 10:35:19 -0500
+Received: from charter.net ([71.92.202.52]) by aa02.charter.net with SMTP
+	id <20061214153519.DZR1463.aa02.charter.net@charter.net>
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Dec 2006 10:35:19 -0500
+Received: by charter.net (nbSMTP-1.00) for uid 1000
+	erik@hovland.org; Thu, 14 Dec 2006 07:35:19 -0800 (PST)
+Date: Thu, 14 Dec 2006 07:35:14 -0800
+From: Erik Hovland <erik@hovland.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20061214153514.GB20845@hovland.org>
+References: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
+	<200612141339.15619.ranaldo@unina.it>
+	<513284098.20061214134623@vanille-media.de>
 MIME-Version: 1.0
-Subject: Re: RFC Lightning Talk at FOSDEM 2007
+In-Reply-To: <513284098.20061214134623@vanille-media.de>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+X-Chzlrs: 0
+Subject: Re: Looking for Familiar/iPAQ local.conf example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,28 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2006 15:19:06 -0000
+X-List-Received-Date: Thu, 14 Dec 2006 15:37:11 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> Holger Freyther schreef:
->> Hi,
->> 
->> as OE can only have one talk http://www.fosdem.org/2007/node/22 I'm  
->> asking you if the following is okay for you. 
+On Thu, Dec 14, 2006 at 01:46:23PM +0100, Michael 'Mickey' Lauer wrote:
+> Guys,
+> 
+> I think the time has come to either remove familiar DISTRO
+> configuration or to substitute it with one that's known compatible.
+> 
+> Please don't come with any political reasons for objecting against
+> either of these options, I'm tired of them. This is a technical issue
+> and a support issue and I want this to be sorted out NOW.
+> 
+> So a) or b) ?
 
-> Any volunteers for an OE talk in the embedded room?
+a
 
-I'd like to do it, if you don't mind. My idea is to present a list of
-advances throughout the last 12 months and how they change the way we
-get things done with OE.
+E
 
-Regards,
-
-:M:
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Erik Hovland
+mail: erik@hovland.org
+web: http://hovland.org/
+PGP/GPG public key available on request
 
 
 
