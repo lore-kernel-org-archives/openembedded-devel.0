@@ -1,29 +1,22 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [192.132.34.13] (helo=amail.unina.it)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1Guq0Q-000766-VH
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Dec 2006 13:48:10 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id A3FC728C022; Thu, 14 Dec 2006 13:43:24 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180165193.adsl.alicedsl.de [85.180.165.193])
-	by srv043.dedi23.de (Postfix) with ESMTP id 3F5E828C021
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2006 13:43:21 +0100 (CET)
-Date: Thu, 14 Dec 2006 13:46:23 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <513284098.20061214134623@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200612141339.15619.ranaldo@unina.it>
+	(envelope-from <ranaldo@unina.it>) id 1GuriQ-0001or-08
+	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 15:37:42 +0100
+Received: from blaster.unina.it ([192.132.34.15]) (authenticated bits=0)
+	by amail.unina.it (8.13.4/8.13.4) with ESMTP id kBEHMJ8D007238
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 14 Dec 2006 18:22:19 +0100
+From: Nicola Ranaldo <ranaldo@unina.it>
+To: openembedded-devel@openembedded.org
+Date: Thu, 14 Dec 2006 15:35:50 +0100
+User-Agent: KMail/1.9.5
 References: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
 	<200612141339.15619.ranaldo@unina.it>
+	<513284098.20061214134623@vanille-media.de>
+In-Reply-To: <513284098.20061214134623@vanille-media.de>
 MIME-Version: 1.0
+Message-Id: <200612141535.50309.ranaldo@unina.it>
 Subject: Re: Looking for Familiar/iPAQ local.conf example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,26 +31,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2006 12:48:11 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 14 Dec 2006 14:37:42 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Guys,
+On Thursday 14 December 2006 13:46, Michael 'Mickey' Lauer wrote:
 
-I think the time has come to either remove familiar DISTRO
-configuration or to substitute it with one that's known compatible.
+> Please don't come with any political reasons for objecting against
+> either of these options, I'm tired of them. This is a technical issue
+> and a support issue and I want this to be sorted out NOW.
+>
+> So a) or b) ?
 
-Please don't come with any political reasons for objecting against
-either of these options, I'm tired of them. This is a technical issue
-and a support issue and I want this to be sorted out NOW.
+For me it would be to have a familiar compatible configuration file, with an 
+auto explaining name, eg. "familiar-compatible". 
 
-So a) or b) ?
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+	Nicola Ranaldo
 
 
