@@ -1,23 +1,23 @@
-Received: from [192.132.34.13] (helo=amail.unina.it)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <ranaldo@unina.it>) id 1GuriQ-0001or-08
-	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 15:37:42 +0100
-Received: from blaster.unina.it ([192.132.34.15]) (authenticated bits=0)
-	by amail.unina.it (8.13.4/8.13.4) with ESMTP id kBEHMJ8D007238
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 14 Dec 2006 18:22:19 +0100
-From: Nicola Ranaldo <ranaldo@unina.it>
-To: openembedded-devel@openembedded.org
-Date: Thu, 14 Dec 2006 15:35:50 +0100
-User-Agent: KMail/1.9.5
-References: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
-	<200612141339.15619.ranaldo@unina.it>
-	<513284098.20061214134623@vanille-media.de>
-In-Reply-To: <513284098.20061214134623@vanille-media.de>
-MIME-Version: 1.0
-Message-Id: <200612141535.50309.ranaldo@unina.it>
-Subject: Re: Looking for Familiar/iPAQ local.conf example
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1Gus2p-00021D-2Z
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Dec 2006 15:58:47 +0100
+Received: from [145.253.107.2] (helo=[192.168.61.165])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <freyther@inf.fu-berlin.de>) id 1Gus16-0006lq-SB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Dec 2006 15:57:00 +0100
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <7AD6822B-1A67-42E9-880A-628023D78C70@inf.fu-berlin.de>
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+From: Holger Freyther <freyther@inf.fu-berlin.de>
+Date: Thu, 14 Dec 2006 15:53:56 +0100
+X-Mailer: Apple Mail (2.752.3)
+X-Broken-Reverse-DNS: no host name found for IP address 145.253.107.2
+Subject: RFC Lightning Talk at FOSDEM 2007
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,23 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2006 14:37:42 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 14 Dec 2006 14:58:47 -0000
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
-On Thursday 14 December 2006 13:46, Michael 'Mickey' Lauer wrote:
+Hi,
 
-> Please don't come with any political reasons for objecting against
-> either of these options, I'm tired of them. This is a technical issue
-> and a support issue and I want this to be sorted out NOW.
->
-> So a) or b) ?
+as OE can only have one talk http://www.fosdem.org/2007/node/22 I'm  
+asking you if the following is okay for you. I would send the  
+following to lightningtalks@lists.fosdem.org (and yes the idea is  
+property of chris larson)
 
-For me it would be to have a familiar compatible configuration file, with an 
-auto explaining name, eg. "familiar-compatible". 
 
-	Nicola Ranaldo
+
+Name: Holger Hans Peter Freyther
+WebSite: http://www.openembedded.org
+
+Description: Deterministic and flexible system to build Embedded  
+Linux Distributions, Toolchains and Packages
+
+Content: OpenEmbedded can be classified as build-system. It heavily  
+relies on build-systems of Free Software projects. Exactly this will  
+be the content of the lightning talk. We will take a look at badly  
+written buildsystems including fontconfig and glibc, understand why  
+these things are bad and how these issues can be resolved. At the end  
+we will look into some requirements you should take into account when  
+picking a buildsystem for your project.
+
+Bio: Born in Berlin, 23 years old, contributor to handhelds.org,  
+openembedded.org, OpenSnyc, Qt and KDE
+
+Photo: Think of wookey and worsen this image
 
 
