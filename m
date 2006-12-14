@@ -1,31 +1,27 @@
-Received: from [209.225.8.186] (helo=mtao01.charter.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <erik@hovland.org>) id 1Gusdy-0003TS-Gq
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Dec 2006 16:37:10 +0100
-Received: from aa02.charter.net ([10.20.200.154]) by mtao01.charter.net
-	(InterMail vM.6.01.06.01 201-2131-130-101-20060113) with ESMTP
-	id <20061214153519.VVMH1329.mtao01.charter.net@aa02.charter.net>
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2006 10:35:19 -0500
-Received: from charter.net ([71.92.202.52]) by aa02.charter.net with SMTP
-	id <20061214153519.DZR1463.aa02.charter.net@charter.net>
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2006 10:35:19 -0500
-Received: by charter.net (nbSMTP-1.00) for uid 1000
-	erik@hovland.org; Thu, 14 Dec 2006 07:35:19 -0800 (PST)
-Date: Thu, 14 Dec 2006 07:35:14 -0800
-From: Erik Hovland <erik@hovland.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20061214153514.GB20845@hovland.org>
-References: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
-	<200612141339.15619.ranaldo@unina.it>
-	<513284098.20061214134623@vanille-media.de>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GutCh-0003pb-26
+	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 17:13:03 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kBEGBDox014242 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Dec 2006 17:11:13 +0100
+Message-ID: <458177A1.2050207@dominion.kabel.utwente.nl>
+Date: Thu, 14 Dec 2006 17:11:13 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-In-Reply-To: <513284098.20061214134623@vanille-media.de>
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-Chzlrs: 0
-Subject: Re: Looking for Familiar/iPAQ local.conf example
+To: openembedded-devel@openembedded.org
+References: <7AD6822B-1A67-42E9-880A-628023D78C70@inf.fu-berlin.de>	<45816854.1000901@dominion.kabel.utwente.nl>
+	<1676775768.20061214161718@vanille-media.de>
+In-Reply-To: <1676775768.20061214161718@vanille-media.de>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: RFC Lightning Talk at FOSDEM 2007
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,31 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2006 15:37:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Dec 2006 16:13:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 14, 2006 at 01:46:23PM +0100, Michael 'Mickey' Lauer wrote:
-> Guys,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Michael 'Mickey' Lauer schreef:
+> Koen Kooi wrote:
+>> Holger Freyther schreef:
+>>> Hi,
+>>>
+>>> as OE can only have one talk http://www.fosdem.org/2007/node/22 I'm  
+>>> asking you if the following is okay for you. 
 > 
-> I think the time has come to either remove familiar DISTRO
-> configuration or to substitute it with one that's known compatible.
+>> Any volunteers for an OE talk in the embedded room?
 > 
-> Please don't come with any political reasons for objecting against
-> either of these options, I'm tired of them. This is a technical issue
-> and a support issue and I want this to be sorted out NOW.
-> 
-> So a) or b) ?
+> I'd like to do it, if you don't mind. My idea is to present a list of
+> advances throughout the last 12 months and how they change the way we
+> get things done with OE.
 
-a
+Will that include things like the cool bonsai/tinderbox/coverage matrix stuff in the pipeline?
 
-E
+regards,
 
--- 
-Erik Hovland
-mail: erik@hovland.org
-web: http://hovland.org/
-PGP/GPG public key available on request
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFFgXehMkyGM64RGpERAiCVAJ44up+RzNa5pkl7skN55FsMwS2oOwCeImUw
+oLQol0M9aDim8ZmJryyN8gs=
+=kFOA
+-----END PGP SIGNATURE-----
 
 
