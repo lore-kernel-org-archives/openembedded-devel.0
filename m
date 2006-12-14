@@ -1,26 +1,23 @@
-Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <samgreen@gmail.com>) id 1GutJ1-0003vH-Cc
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <freyther@gmx.net>) id 1Guv7L-00076o-5z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Dec 2006 17:19:35 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so835304nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2006 08:17:46 -0800 (PST)
-Received: by 10.82.127.15 with SMTP id z15mr285983buc.1166113066444;
-	Thu, 14 Dec 2006 08:17:46 -0800 (PST)
-Received: by 10.82.175.5 with HTTP; Thu, 14 Dec 2006 08:17:46 -0800 (PST)
-Message-ID: <7b4fff750612140817y4b0e9a9cxb5da0c97ab031355@mail.gmail.com>
-Date: Thu, 14 Dec 2006 10:17:46 -0600
-From: "Sam Green" <samgreen@gmail.com>
+	Thu, 14 Dec 2006 19:15:39 +0100
+Received: (qmail invoked by alias); 14 Dec 2006 18:13:52 -0000
+Received: from unknown (EHLO [192.168.61.154]) [145.253.107.2]
+	by mail.gmx.net (mp045) with SMTP; 14 Dec 2006 19:13:52 +0100
+X-Authenticated: #1949623
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <45816854.1000901@dominion.kabel.utwente.nl>
+References: <7AD6822B-1A67-42E9-880A-628023D78C70@inf.fu-berlin.de>
+	<45816854.1000901@dominion.kabel.utwente.nl>
+Message-Id: <FB82DB9C-556B-407D-9992-FAE842DD2496@gmx.net>
+From: Holger Freyther <freyther@gmx.net>
+Date: Thu, 14 Dec 2006 19:10:43 +0100
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20061214153514.GB20845@hovland.org>
-MIME-Version: 1.0
-References: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
-	<200612141339.15619.ranaldo@unina.it>
-	<513284098.20061214134623@vanille-media.de>
-	<20061214153514.GB20845@hovland.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: Looking for Familiar/iPAQ local.conf example
+X-Mailer: Apple Mail (2.752.3)
+X-Y-GMX-Trusted: 0
+Subject: Re: RFC Lightning Talk at FOSDEM 2007
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,47 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2006 16:19:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 14 Dec 2006 18:15:39 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-Oh well, thank you for the responses -- especially Nicola. My main intention
-is to learn about development with embedded Linux. I think I need to focus
-my time on a device with more active community support. I'll probably be
-getting one of the Neo1973s when they come out.
-
-~Sam
 
 
-On 12/14/06, Erik Hovland <erik@hovland.org> wrote:
+Am 14.12.2006 um 16:05 schrieb Koen Kooi:
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> On Thu, Dec 14, 2006 at 01:46:23PM +0100, Michael 'Mickey' Lauer wrote:
-> > Guys,
-> >
-> > I think the time has come to either remove familiar DISTRO
-> > configuration or to substitute it with one that's known compatible.
-> >
-> > Please don't come with any political reasons for objecting against
-> > either of these options, I'm tired of them. This is a technical issue
-> > and a support issue and I want this to be sorted out NOW.
-> >
-> > So a) or b) ?
+> Holger Freyther schreef:
+>> Hi,
+>>
+>> as OE can only have one talk http://www.fosdem.org/2007/node/22 I'm
+>> asking you if the following is okay for you.
 >
-> a
->
-> E
->
-> --
-> Erik Hovland
-> mail: erik@hovland.org
-> web: http://hovland.org/
-> PGP/GPG public key available on request
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Any volunteers for an OE talk in the embedded room? OE has some  
+> pretty advanced QA stuff
+> (insane.bbclass, sanity.bbclass and the fail-fast overrides) that  
+> could use some more PR.
+
+I will send an abstract for that as well. I will talk to mickeyl to  
+not have any conflicts on the topics. E.g. in the situation OE only  
+gets only one slot for the talk we should make sure mickeyl's talk  
+gets chosen.
+
+h.
+
 
