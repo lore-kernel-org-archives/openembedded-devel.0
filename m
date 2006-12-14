@@ -1,27 +1,26 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GutCh-0003pb-26
-	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 17:13:03 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBEGBDox014242 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2006 17:11:13 +0100
-Message-ID: <458177A1.2050207@dominion.kabel.utwente.nl>
-Date: Thu, 14 Dec 2006 17:11:13 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+	(envelope-from <samgreen@gmail.com>) id 1GutJ1-0003vH-Cc
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Dec 2006 17:19:35 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so835304nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Dec 2006 08:17:46 -0800 (PST)
+Received: by 10.82.127.15 with SMTP id z15mr285983buc.1166113066444;
+	Thu, 14 Dec 2006 08:17:46 -0800 (PST)
+Received: by 10.82.175.5 with HTTP; Thu, 14 Dec 2006 08:17:46 -0800 (PST)
+Message-ID: <7b4fff750612140817y4b0e9a9cxb5da0c97ab031355@mail.gmail.com>
+Date: Thu, 14 Dec 2006 10:17:46 -0600
+From: "Sam Green" <samgreen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20061214153514.GB20845@hovland.org>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <7AD6822B-1A67-42E9-880A-628023D78C70@inf.fu-berlin.de>	<45816854.1000901@dominion.kabel.utwente.nl>
-	<1676775768.20061214161718@vanille-media.de>
-In-Reply-To: <1676775768.20061214161718@vanille-media.de>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: RFC Lightning Talk at FOSDEM 2007
+References: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
+	<200612141339.15619.ranaldo@unina.it>
+	<513284098.20061214134623@vanille-media.de>
+	<20061214153514.GB20845@hovland.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: Looking for Familiar/iPAQ local.conf example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,38 +34,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2006 16:13:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Dec 2006 16:19:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Oh well, thank you for the responses -- especially Nicola. My main intention
+is to learn about development with embedded Linux. I think I need to focus
+my time on a device with more active community support. I'll probably be
+getting one of the Neo1973s when they come out.
 
-Michael 'Mickey' Lauer schreef:
-> Koen Kooi wrote:
->> Holger Freyther schreef:
->>> Hi,
->>>
->>> as OE can only have one talk http://www.fosdem.org/2007/node/22 I'm  
->>> asking you if the following is okay for you. 
-> 
->> Any volunteers for an OE talk in the embedded room?
-> 
-> I'd like to do it, if you don't mind. My idea is to present a list of
-> advances throughout the last 12 months and how they change the way we
-> get things done with OE.
+~Sam
 
-Will that include things like the cool bonsai/tinderbox/coverage matrix stuff in the pipeline?
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFgXehMkyGM64RGpERAiCVAJ44up+RzNa5pkl7skN55FsMwS2oOwCeImUw
-oLQol0M9aDim8ZmJryyN8gs=
-=kFOA
------END PGP SIGNATURE-----
-
+On 12/14/06, Erik Hovland <erik@hovland.org> wrote:
+>
+> On Thu, Dec 14, 2006 at 01:46:23PM +0100, Michael 'Mickey' Lauer wrote:
+> > Guys,
+> >
+> > I think the time has come to either remove familiar DISTRO
+> > configuration or to substitute it with one that's known compatible.
+> >
+> > Please don't come with any political reasons for objecting against
+> > either of these options, I'm tired of them. This is a technical issue
+> > and a support issue and I want this to be sorted out NOW.
+> >
+> > So a) or b) ?
+>
+> a
+>
+> E
+>
+> --
+> Erik Hovland
+> mail: erik@hovland.org
+> web: http://hovland.org/
+> PGP/GPG public key available on request
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
