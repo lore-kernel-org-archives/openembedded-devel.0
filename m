@@ -1,29 +1,33 @@
-Received: from [204.127.225.91] (helo=alnrmhc11.comcast.net)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <3rdshift@comcast.net>) id 1Gv3Xg-0002xs-PM
-	for openembedded-devel@openembedded.org; Fri, 15 Dec 2006 04:15:24 +0100
-Received: from dollar.3rdshift.com
-	(c-69-251-178-175.hsd1.md.comcast.net[69.251.178.175])
-	by comcast.net (alnrmhc11) with ESMTP
-	id <20061215031334b1100k43pje>; Fri, 15 Dec 2006 03:13:35 +0000
-Received: from dollar.3rdshift.com (localhost.localdomain [127.0.0.1])
-	by dollar.3rdshift.com (8.13.7/8.13.6) with ESMTP id kBF3DYlw005611
-	for <openembedded-devel@openembedded.org>;
-	Thu, 14 Dec 2006 22:13:34 -0500
-Received: (from vlg@localhost)
-	by dollar.3rdshift.com (8.13.7/8.13.7/Submit) id kBF3DXZk005610
-	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 22:13:33 -0500
-From: VLG <3rdshift@comcast.net>
+	(envelope-from <rpurdie@rpsys.net>) id 1Gv96B-0002zC-Fa
+	for openembedded-devel@openembedded.org; Fri, 15 Dec 2006 10:11:23 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBF99Wcr011236
+	for <openembedded-devel@openembedded.org>; Fri, 15 Dec 2006 09:09:32 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11113-03 for <openembedded-devel@openembedded.org>;
+	Fri, 15 Dec 2006 09:09:26 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBF99NRe011223
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 15 Dec 2006 09:09:23 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <432beae0612132324w36ad746bib4182c11f323072e@mail.gmail.com>
-References: <1166066984.2740.21.camel@dollar.3rdshift.com>
-	<432beae0612132324w36ad746bib4182c11f323072e@mail.gmail.com>
-Organization: 3rdShift Inc.
-Date: Thu, 14 Dec 2006 22:13:33 -0500
-Message-Id: <1166152413.4156.2.camel@dollar.3rdshift.com>
+In-Reply-To: <200612121628.07309.openembedded@hrw.one.pl>
+References: <c384c5ea0612031500o3ee66a23x89d72a948f418532@mail.gmail.com>
+	<1165238625.15272.3.camel@localhost.localdomain>
+	<c384c5ea0612041234u5fd7e6d6w5de1efc385cacbd7@mail.gmail.com>
+	<200612121628.07309.openembedded@hrw.one.pl>
+Date: Fri, 15 Dec 2006 09:09:22 +0000
+Message-Id: <1166173763.5437.1.camel@localhost.localdomain>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 (2.6.3-1.fc5.5) 
-Subject: Re: .bb file syntax question
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Recent OBJDUMP changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,23 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Dec 2006 03:15:25 -0000
+X-List-Received-Date: Fri, 15 Dec 2006 09:11:24 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Justin,
+On Tue, 2006-12-12 at 16:28 +0100, Marcin Juszkiewicz wrote:
+> Does someone found better fix then mine?
+> 
+> [hrw@misc1 classes]$ mtn dif package.bbclass
+> --- classes/package.bbclass     b4538ccc18abcaa057513563f37b2d25fdce5784
+> +++ classes/package.bbclass     969285b9af2e3bc59048d34cf396dd529e496c1e
+> @@ -576,6 +576,7 @@ python package_do_shlibs() {
+>                                 path = os.path.join(root, file)
+>                                 if os.access(path, os.X_OK) or lib_re.match(file):
+>                                         cmd = bb.data.getVar('OBJDUMP', d, 1) + " -p " + path + " 2>/dev/null"
+> +                                       cmd = "PATH=\"%s\" %s" % (bb.data.getVar('PATH', d, 1), cmd)
+>                                         fd = os.popen(cmd)
+>                                         lines = fd.readlines()
+>                                         fd.close()
 
-thanks for the answer - that did the trick.
+FWIW, this is the correct fix. Ideally, bitbake should have some helper
+functions to set up PATH and run a program but at the moment it doesn't
+so we need to do this.
 
--Vlad
+Cheers,
 
-On Wed, 2006-12-13 at 23:24 -0800, Justin Patrin wrote:
-> On 12/13/06, VLG <3rdshift@comcast.net> wrote:
-> > Hi,
-> >
-> > I am looking for a working example of a .bb file that builds a .ipk
-> > package by pulling project from Sourceforge-hosted CVS. Somehow, what I
-> > tried so far for my project (http://granule.sf.net) simply doesn't work:
-> >
+Richard
+
 
 
