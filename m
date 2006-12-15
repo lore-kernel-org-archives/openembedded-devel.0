@@ -1,23 +1,29 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <freyther@gmx.net>) id 1Guv7L-00076o-5z
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Dec 2006 19:15:39 +0100
-Received: (qmail invoked by alias); 14 Dec 2006 18:13:52 -0000
-Received: from unknown (EHLO [192.168.61.154]) [145.253.107.2]
-	by mail.gmx.net (mp045) with SMTP; 14 Dec 2006 19:13:52 +0100
-X-Authenticated: #1949623
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <45816854.1000901@dominion.kabel.utwente.nl>
-References: <7AD6822B-1A67-42E9-880A-628023D78C70@inf.fu-berlin.de>
-	<45816854.1000901@dominion.kabel.utwente.nl>
-Message-Id: <FB82DB9C-556B-407D-9992-FAE842DD2496@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Thu, 14 Dec 2006 19:10:43 +0100
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
-Subject: Re: RFC Lightning Talk at FOSDEM 2007
+Received: from [204.127.225.91] (helo=alnrmhc11.comcast.net)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <3rdshift@comcast.net>) id 1Gv3Xg-0002xs-PM
+	for openembedded-devel@openembedded.org; Fri, 15 Dec 2006 04:15:24 +0100
+Received: from dollar.3rdshift.com
+	(c-69-251-178-175.hsd1.md.comcast.net[69.251.178.175])
+	by comcast.net (alnrmhc11) with ESMTP
+	id <20061215031334b1100k43pje>; Fri, 15 Dec 2006 03:13:35 +0000
+Received: from dollar.3rdshift.com (localhost.localdomain [127.0.0.1])
+	by dollar.3rdshift.com (8.13.7/8.13.6) with ESMTP id kBF3DYlw005611
+	for <openembedded-devel@openembedded.org>;
+	Thu, 14 Dec 2006 22:13:34 -0500
+Received: (from vlg@localhost)
+	by dollar.3rdshift.com (8.13.7/8.13.7/Submit) id kBF3DXZk005610
+	for openembedded-devel@openembedded.org; Thu, 14 Dec 2006 22:13:33 -0500
+From: VLG <3rdshift@comcast.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <432beae0612132324w36ad746bib4182c11f323072e@mail.gmail.com>
+References: <1166066984.2740.21.camel@dollar.3rdshift.com>
+	<432beae0612132324w36ad746bib4182c11f323072e@mail.gmail.com>
+Organization: 3rdShift Inc.
+Date: Thu, 14 Dec 2006 22:13:33 -0500
+Message-Id: <1166152413.4156.2.camel@dollar.3rdshift.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 (2.6.3-1.fc5.5) 
+Subject: Re: .bb file syntax question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,32 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2006 18:15:39 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Fri, 15 Dec 2006 03:15:25 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+Justin,
 
-Am 14.12.2006 um 16:05 schrieb Koen Kooi:
+thanks for the answer - that did the trick.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Holger Freyther schreef:
->> Hi,
->>
->> as OE can only have one talk http://www.fosdem.org/2007/node/22 I'm
->> asking you if the following is okay for you.
->
-> Any volunteers for an OE talk in the embedded room? OE has some  
-> pretty advanced QA stuff
-> (insane.bbclass, sanity.bbclass and the fail-fast overrides) that  
-> could use some more PR.
+-Vlad
 
-I will send an abstract for that as well. I will talk to mickeyl to  
-not have any conflicts on the topics. E.g. in the situation OE only  
-gets only one slot for the talk we should make sure mickeyl's talk  
-gets chosen.
-
-h.
+On Wed, 2006-12-13 at 23:24 -0800, Justin Patrin wrote:
+> On 12/13/06, VLG <3rdshift@comcast.net> wrote:
+> > Hi,
+> >
+> > I am looking for a working example of a .bb file that builds a .ipk
+> > package by pulling project from Sourceforge-hosted CVS. Somehow, what I
+> > tried so far for my project (http://granule.sf.net) simply doesn't work:
+> >
 
 
