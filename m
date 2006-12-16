@@ -1,33 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1Gv96B-0002zC-Fa
-	for openembedded-devel@openembedded.org; Fri, 15 Dec 2006 10:11:23 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBF99Wcr011236
-	for <openembedded-devel@openembedded.org>; Fri, 15 Dec 2006 09:09:32 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11113-03 for <openembedded-devel@openembedded.org>;
-	Fri, 15 Dec 2006 09:09:26 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBF99NRe011223
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 15 Dec 2006 09:09:23 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GvXEg-0002n3-CF
+	for openembedded-devel@openembedded.org; Sat, 16 Dec 2006 11:57:46 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kBGAtjox026744 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Dec 2006 11:55:46 +0100
+Message-ID: <4583D0B0.2080203@dominion.kabel.utwente.nl>
+Date: Sat, 16 Dec 2006 11:55:44 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-In-Reply-To: <200612121628.07309.openembedded@hrw.one.pl>
-References: <c384c5ea0612031500o3ee66a23x89d72a948f418532@mail.gmail.com>
-	<1165238625.15272.3.camel@localhost.localdomain>
-	<c384c5ea0612041234u5fd7e6d6w5de1efc385cacbd7@mail.gmail.com>
-	<200612121628.07309.openembedded@hrw.one.pl>
-Date: Fri, 15 Dec 2006 09:09:22 +0000
-Message-Id: <1166173763.5437.1.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Recent OBJDUMP changes
+References: <456B0DC2.90300@dominion.kabel.utwente.nl>	<45780B2E.4020906@dominion.kabel.utwente.nl>
+	<1165496944.5601.32.camel@localhost.localdomain>
+In-Reply-To: <1165496944.5601.32.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: To be removed recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,32 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Dec 2006 09:11:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 16 Dec 2006 10:57:46 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2006-12-12 at 16:28 +0100, Marcin Juszkiewicz wrote:
-> Does someone found better fix then mine?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Richard Purdie schreef:
+
+ >> Package Name:   task-bootstrap*
+>> Reason:         Obsoleted by task-base
 > 
-> [hrw@misc1 classes]$ mtn dif package.bbclass
-> --- classes/package.bbclass     b4538ccc18abcaa057513563f37b2d25fdce5784
-> +++ classes/package.bbclass     969285b9af2e3bc59048d34cf396dd529e496c1e
-> @@ -576,6 +576,7 @@ python package_do_shlibs() {
->                                 path = os.path.join(root, file)
->                                 if os.access(path, os.X_OK) or lib_re.match(file):
->                                         cmd = bb.data.getVar('OBJDUMP', d, 1) + " -p " + path + " 2>/dev/null"
-> +                                       cmd = "PATH=\"%s\" %s" % (bb.data.getVar('PATH', d, 1), cmd)
->                                         fd = os.popen(cmd)
->                                         lines = fd.readlines()
->                                         fd.close()
+> Have we anyone still using this? I'm nervous removing this just yet...
 
-FWIW, this is the correct fix. Ideally, bitbake should have some helper
-functions to set up PATH and run a program but at the moment it doesn't
-so we need to do this.
+I pushed back removal to next week, but I still haven't noticed anyone using it, so it
+will go away next week.
 
-Cheers,
+regards,
 
-Richard
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFFg9CwMkyGM64RGpERAijDAKC5kn0RFTCEVDykUv7UaLQnGEMh8gCeKRtx
+fOuTb9aHfrbg5NHG/rRgD7M=
+=NgBm
+-----END PGP SIGNATURE-----
 
 
