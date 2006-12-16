@@ -1,27 +1,40 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GvXEg-0002n3-CF
-	for openembedded-devel@openembedded.org; Sat, 16 Dec 2006 11:57:46 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBGAtjox026744 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Dec 2006 11:55:46 +0100
-Message-ID: <4583D0B0.2080203@dominion.kabel.utwente.nl>
-Date: Sat, 16 Dec 2006 11:55:44 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
+	(envelope-from <mickey@vanille-media.de>) id 1GvaRN-0008Mi-LB
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Dec 2006 15:23:05 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id C528728C028; Sat, 16 Dec 2006 15:18:02 +0100 (CET)
+X-Spam-Flag: YES
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: *****
+X-Spam-Status: Yes, score=5.5 required=5.0 tests=RCVD_IN_DSBL,
+	RCVD_IN_NJABL_DUL,RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+X-Spam-Report: =?ISO-8859-1?Q?
+	*  2.0 RCVD_IN_SORBS_DUL RBL: SORBS: Senderechner nur tempor=e4r mit
+	*      Internet verbunden
+	*      [85.180.169.234 listed in dnsbl.sorbs.net]
+	*  1.8 RCVD_IN_DSBL RBL: Transportiert via Rechner in Liste von
+	*      list.dsbl.org
+	*      [<http://dsbl.org/listing?85.180.169.234>]
+	*  1.7 RCVD_IN_NJABL_DUL RBL: NJABL: Senderechner nur tempor=e4r mit
+	*      Internet verbunden
+	*      [85.180.169.234 listed in combined.njabl.org]?=
+Received: from PROMETHEUS (e180169234.adsl.alicedsl.de [85.180.169.234])
+	by srv043.dedi23.de (Postfix) with ESMTP id 558FA28C025
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Dec 2006 15:17:59 +0100 (CET)
+Date: Sat, 16 Dec 2006 15:21:06 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1714613746.20061216152106@vanille-media.de>
+To: Laibsch commit <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <E1GvaCY-0007Dp-Ur@linuxtogo.org>
+References: <E1GvaCY-0007Dp-Ur@linuxtogo.org>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <456B0DC2.90300@dominion.kabel.utwente.nl>	<45780B2E.4020906@dominion.kabel.utwente.nl>
-	<1165496944.5601.32.camel@localhost.localdomain>
-In-Reply-To: <1165496944.5601.32.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: To be removed recipes
+Subject: Re: [oe-commits] org.oe.dev autoconf: unify recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,32 +48,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Dec 2006 10:57:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 16 Dec 2006 14:23:05 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Laibsch commit wrote:
+> [...] unify recipes
 
-Richard Purdie schreef:
+Thanks for the cleanup!
 
- >> Package Name:   task-bootstrap*
->> Reason:         Obsoleted by task-base
-> 
-> Have we anyone still using this? I'm nervous removing this just yet...
+Regards,
 
-I pushed back removal to next week, but I still haven't noticed anyone using it, so it
-will go away next week.
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFg9CwMkyGM64RGpERAijDAKC5kn0RFTCEVDykUv7UaLQnGEMh8gCeKRtx
-fOuTb9aHfrbg5NHG/rRgD7M=
-=NgBm
------END PGP SIGNATURE-----
 
 
