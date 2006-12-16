@@ -1,40 +1,24 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [212.227.126.188] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GvaRN-0008Mi-LB
+	(envelope-from <robert@linuxdevelopment.de>) id 1GvaTH-0008PF-W9
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Dec 2006 15:23:05 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id C528728C028; Sat, 16 Dec 2006 15:18:02 +0100 (CET)
-X-Spam-Flag: YES
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: *****
-X-Spam-Status: Yes, score=5.5 required=5.0 tests=RCVD_IN_DSBL,
-	RCVD_IN_NJABL_DUL,RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-X-Spam-Report: =?ISO-8859-1?Q?
-	*  2.0 RCVD_IN_SORBS_DUL RBL: SORBS: Senderechner nur tempor=e4r mit
-	*      Internet verbunden
-	*      [85.180.169.234 listed in dnsbl.sorbs.net]
-	*  1.8 RCVD_IN_DSBL RBL: Transportiert via Rechner in Liste von
-	*      list.dsbl.org
-	*      [<http://dsbl.org/listing?85.180.169.234>]
-	*  1.7 RCVD_IN_NJABL_DUL RBL: NJABL: Senderechner nur tempor=e4r mit
-	*      Internet verbunden
-	*      [85.180.169.234 listed in combined.njabl.org]?=
-Received: from PROMETHEUS (e180169234.adsl.alicedsl.de [85.180.169.234])
-	by srv043.dedi23.de (Postfix) with ESMTP id 558FA28C025
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Dec 2006 15:17:59 +0100 (CET)
-Date: Sat, 16 Dec 2006 15:21:06 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1714613746.20061216152106@vanille-media.de>
-To: Laibsch commit <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <E1GvaCY-0007Dp-Ur@linuxtogo.org>
-References: <E1GvaCY-0007Dp-Ur@linuxtogo.org>
+	Sat, 16 Dec 2006 15:25:04 +0100
+Received: from [85.212.137.120] (helo=[10.0.0.4])
+	by mrelayeu.kundenserver.de (node=mrelayeu1) with ESMTP (Nemesis),
+	id 0MKwpI-1GvaRN3Vrl-0006gs; Sat, 16 Dec 2006 15:23:06 +0100
+Message-ID: <4584015A.2000502@linuxdevelopment.de>
+Date: Sat, 16 Dec 2006 15:23:22 +0100
+From: Robert Woerle <robert@linuxdevelopment.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; de-AT; rv:1.7.13) Gecko/20060411
+X-Accept-Language: de, en
 MIME-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev autoconf: unify recipes
+To: openembedded-devel@lists.openembedded.org
+References: <456B0DC2.90300@dominion.kabel.utwente.nl>	<45780B2E.4020906@dominion.kabel.utwente.nl>	<1165496944.5601.32.camel@localhost.localdomain>
+	<4583D0B0.2080203@dominion.kabel.utwente.nl>
+In-Reply-To: <4583D0B0.2080203@dominion.kabel.utwente.nl>
+X-Provags-ID: kundenserver.de abuse@kundenserver.de
+	login:3a738c603c23670681f156cc7e748d26
+Subject: Re: To be removed recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -48,20 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Dec 2006 14:23:05 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 16 Dec 2006 14:25:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Laibsch commit wrote:
-> [...] unify recipes
 
-Thanks for the cleanup!
+Koen Kooi schrieb:
+> Richard Purdie schreef:
+>
+>  >> Package Name:   task-bootstrap*
+> >>> Reason:         Obsoleted by task-base
+> >> Have we anyone still using this? I'm nervous removing this just yet...
+>
+> I pushed back removal to next week, but I still haven't noticed anyone
+> using it, so it
+> will go away next week.
+Dear Koen
 
-Regards,
+I was using it in order to create a small image for my pxa270
+development which  i do currently .
+but i was not satisfied with the installation afterwards when i
+installed gtk and X onto it.
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+I bet task-base will do the same for my needs. I planned to use the
+minimlistic image i can get and then only install my additions one by
+one and end up with the smallest
+footprint possible, but i am sure task-base will do that trick also
+
+Cheers
+>
+> regards,
+>
+> Koen
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
 
