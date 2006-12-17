@@ -1,24 +1,33 @@
-Received: from [212.227.126.188] (helo=moutng.kundenserver.de)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <robert@linuxdevelopment.de>) id 1GvaTH-0008PF-W9
+	(envelope-from <lenehan@twibble.org>) id 1GvjUX-0006nv-Tz
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Dec 2006 15:25:04 +0100
-Received: from [85.212.137.120] (helo=[10.0.0.4])
-	by mrelayeu.kundenserver.de (node=mrelayeu1) with ESMTP (Nemesis),
-	id 0MKwpI-1GvaRN3Vrl-0006gs; Sat, 16 Dec 2006 15:23:06 +0100
-Message-ID: <4584015A.2000502@linuxdevelopment.de>
-Date: Sat, 16 Dec 2006 15:23:22 +0100
-From: Robert Woerle <robert@linuxdevelopment.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; de-AT; rv:1.7.13) Gecko/20060411
-X-Accept-Language: de, en
-MIME-Version: 1.0
+	Sun, 17 Dec 2006 01:02:58 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id BEB6D8CF56
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Dec 2006 11:00:56 +1100 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 25931-01
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Dec 2006 11:00:55 +1100 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id AD6C149B2B
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Dec 2006 11:00:55 +1100 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 9697E1654E56; Sun, 17 Dec 2006 11:00:55 +1100 (EST)
+Date: Sun, 17 Dec 2006 11:00:55 +1100
+From: Jamie Lenehan <lenehan@twibble.org>
 To: openembedded-devel@lists.openembedded.org
-References: <456B0DC2.90300@dominion.kabel.utwente.nl>	<45780B2E.4020906@dominion.kabel.utwente.nl>	<1165496944.5601.32.camel@localhost.localdomain>
-	<4583D0B0.2080203@dominion.kabel.utwente.nl>
-In-Reply-To: <4583D0B0.2080203@dominion.kabel.utwente.nl>
-X-Provags-ID: kundenserver.de abuse@kundenserver.de
-	login:3a738c603c23670681f156cc7e748d26
-Subject: Re: To be removed recipes
+Message-ID: <20061217000055.GA30417@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: madwifi_ng: security issue, CVE-2006-6332
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,44 +41,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Dec 2006 14:25:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Dec 2006 00:02:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Anyone using madwifi should upgrade to r1844-20061208 to get the fix for
+CVE-2006-6332. From the announcement on madwifi.org:
+
+ Release 0.9.2.1 fixes critical security issue
+
+ A critical security flaw (CVE-2006-6332) has been discovered which can be
+ exploited from remote and allows arbitrary code injection. The fix has been
+ committed to trunk in r1842. In addition, we released v0.9.2.1 (v0.9.2 plus
+ the fix for the issue), which is available for download from sf.net.
+
+ All users should upgrade as soon as possible.
 
 
-Koen Kooi schrieb:
-> Richard Purdie schreef:
->
->  >> Package Name:   task-bootstrap*
-> >>> Reason:         Obsoleted by task-base
-> >> Have we anyone still using this? I'm nervous removing this just yet...
->
-> I pushed back removal to next week, but I still haven't noticed anyone
-> using it, so it
-> will go away next week.
-Dear Koen
+----- Forwarded message from "\"lenehan commit\"" <openembedded-commits@lists.openembedded.org> -----
 
-I was using it in order to create a small image for my pxa270
-development which  i do currently .
-but i was not satisfied with the installation afterwards when i
-installed gtk and X onto it.
+From: openembedded-commits@lists.openembedded.org ("lenehan commit")
+Subject: [oe-commits] org.oe.dev madwifi-ng r1844: Add svn snapshot 1844
+	which is the same as the 0.9.2.1
+Date: Sun, 17 Dec 2006 00:58:12 +0100
 
-I bet task-base will do the same for my needs. I planned to use the
-minimlistic image i can get and then only install my additions one by
-one and end up with the smallest
-footprint possible, but i am sure task-base will do that trick also
+madwifi-ng r1844: Add svn snapshot 1844 which is the same as the 0.9.2.1
+release. This includes a critical fix for CVE-2006-6332 which is a remotely
+exploitable stack-based buffer overflow bug.
 
-Cheers
->
-> regards,
->
-> Koen
+Author: lenehan@openembedded.org
+Branch: org.openembedded.dev
+Revision: af1d7cf6768b5e5205f07a7a63b6767971ccb1b7
+ViewMTN: http://monotone.openembedded.org/revision.psp?id=af1d7cf6768b5e5205f07a7a63b6767971ccb1b7
+Files:
+1
+packages/madwifi/madwifi-ng-r1844-20061208
+packages/madwifi/madwifi-ng-r1844-20061208/10-xscale-be-elf-copts.patch
+packages/madwifi/madwifi-ng-r1844-20061208/10-xscale-le-elf-copts.patch
+packages/madwifi/madwifi-ng_r1844-20061208.bb
+[...]
+----- End forwarded message -----
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+-- 
+ Jamie Lenehan <lenehan@twibble.org>
 
 
