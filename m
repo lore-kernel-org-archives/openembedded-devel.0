@@ -1,20 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1GwJfU-00077V-Bw
-	for openembedded-devel@openembedded.org; Mon, 18 Dec 2006 15:40:40 +0100
-Received: (qmail 30552 invoked by uid 813007); 18 Dec 2006 14:38:29 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 18 Dec 2006 14:38:29 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@openembedded.org
-Date: Mon, 18 Dec 2006 15:38:26 +0100
-User-Agent: KMail/1.9.5
-Organization: OpenEmbedded
+	(envelope-from <mickeyl@linuxtogo.org>) id 1GwfBQ-0003hU-Di
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Dec 2006 14:39:04 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 6862F28C022; Tue, 19 Dec 2006 14:33:37 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from PROMETHEUS (e180176131.adsl.alicedsl.de [85.180.176.131])
+	by srv043.dedi23.de (Postfix) with ESMTP id 0011228C021
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Dec 2006 14:33:30 +0100 (CET)
+Date: Tue, 19 Dec 2006 14:36:48 +0100
+From: Michael 'Mickey' Lauer <mickeyl@linuxtogo.org>
+X-Mailer: The Bat! (v3.85.03) UNREG / CD5BF9353B3B7091
+Organization: LinuxToGo
+X-Priority: 3 (Normal)
+Message-ID: <1666569854.20061219143648@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Message-Id: <200612181538.26399.openembedded@hrw.one.pl>
-Subject: Self hosted build of OE
+Subject: FYI: Garmin Job Opportunity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,54 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2006 14:40:40 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Tue, 19 Dec 2006 13:39:04 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+Guys,
 
-Hi
+https://my.garmin.com/iRecruitment/jobdetails.htm?vacancyId=265
 
-During weekend I was working on getting self hosted build of OpenEmbedded. 
-I built Angstrom-2007.1 for progear and chrooted into resulting image. 
-Then installed some packages, copied OE metadata, archives for SRC_URI and 
-finished 'bitbake nano' build.
+sounds like an exciting opportunity for one of us.
 
-Some packages was needed to be installed - I added them into new task 
-named 'task-self-hosting' which should contain everything needed to get 
-self hosted build running.
+Regards,
 
-But there are some problems:
-
-1. glibc-utils/rpcgen require 'cpp'
-
-This can be solved by adding RDEPENDS_glibc-utils = "cpp" into glibc.bb 
-recipe. But this is theory because we need 'glibc' to build 'gcc' so 
-dependency chain is result.
-
-2. glibc-dev 'conflict' libc-linux-headers-dev 
-
-Few headers exists in both packages - I do not know which one are more 
-important. In my build I forced glibc-dev ones.
-
-3. binutils-symlinks 'conflict' busybox (and elfutils)
-
-#1465 has details
-
-4. subversion has problems with building - I need to check do I have some 
-not-yet-commited patches for apr(-util) and subversion.
-
-5. Perl is too granulated - I installed all 861 perl packages to get 
-quilt-native happy instead of checking which are needed.
-
+:M:
 -- 
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-       We're here to give you a computer, not a religion.
-       		-- Bob Pariseau, at the introduction of the Amiga
-
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
