@@ -1,20 +1,25 @@
-Received: from [64.233.162.231] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Gx7OT-0001Qk-Ar
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Dec 2006 20:46:25 +0100
-Received: by nz-out-0506.google.com with SMTP id m22so877351nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Dec 2006 11:44:02 -0800 (PST)
-Received: by 10.65.254.13 with SMTP id g13mr849274qbs.1166643842398;
-	Wed, 20 Dec 2006 11:44:02 -0800 (PST)
-Received: by 10.65.230.8 with HTTP; Wed, 20 Dec 2006 11:44:01 -0800 (PST)
-Message-ID: <c384c5ea0612201144l76d8be60ta172cf6397ed866d@mail.gmail.com>
-Date: Wed, 20 Dec 2006 20:44:01 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1GxRhY-0000O1-F5
+	for openembedded-devel@openembedded.org; Thu, 21 Dec 2006 18:27:28 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kBLHOsox029041 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Dec 2006 18:24:55 +0100
+Message-ID: <458AC366.3030405@dominion.kabel.utwente.nl>
+Date: Thu, 21 Dec 2006 18:24:54 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
 MIME-Version: 1.0
-Subject: metalink support for OE package source mirrors
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: [RFC] Enable tune-thumb.inc for all armv5t and armv6t machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,43 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Dec 2006 19:46:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 21 Dec 2006 17:27:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I am new to metalink, but I think this system might be interesting for OE.
+Hi,
 
-Regards,
+Today I seperated the thumb bits from conf/machine/include/ipx4xx.conf into
+conf/machine/include/. I'd like to enable for all >=v5t machines, but I'm unsure about
+using positive or negative logic.
 
-Leon.
+* positive logic: might break for (soft)fpa distros that don't disable it, no problem for
+EABI distros
+* negative logic: no difference to status quo, but having negative logic in tune-* files
+feels a bit wrong.
 
+If you need numbers: http://ewi546.ewi.utwente.nl/tmp/thumb/comparison.txt (package:
+<thumb size> <regular size> (<unit>))
 
+what do you all think?
 
-Metalink is a system which attempts to improve the download process by
-increasing availability and guaranteeing integrity. It can give your
-users a more reliable download by providing multiple links to the same
-file, which can be switched to if one server is down or fails during
-transmission. It can also make downloads faster by using multiple
-resources at once.
+regards,
 
-Metalink lists mirrors with machine readable information on priority
-and location so their efficient use can be automated by download
-programs. It can list mirrors around the world, but will automatically
-default to mirrors closer to you and by priority. The checksum
-verification process, usually manual and arcane to most people, is
-automated with Metalink, so files are guaranteed to be an exact copy
-of the file you downloaded, free of errors. Metalinks can also contain
-publisher information, Operating System and architecture, language,
-file descriptions, mutliple files (to be added to a download queue),
-partial file checksums, and so on. All this extra information allows
-download programs to do interesting things.
+Koen
 
-Linux Kernel Metalink downloads (All):
-http://download.packages.ro/metalink/kernel/
-More details..."Downloading bliss with Metalink":
-http://www.linux.com/article.pl?sid=06/11/01/1641247
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFisNmMkyGM64RGpERAuh4AKC8UlGx15HTLJFrqRY9HKJoM1iKXACdEznx
+VN+VBxsPrhMx8p6cOVGIgwg=
+=tUsi
+-----END PGP SIGNATURE-----
 
 
