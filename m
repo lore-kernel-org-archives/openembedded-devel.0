@@ -1,27 +1,42 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [131.188.3.181] (helo=max71.rrze.uni-erlangen.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gxga9-00014C-Kb
-	for openembedded-devel@openembedded.org; Fri, 22 Dec 2006 10:20:49 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBM9IFox014785 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2006 10:18:15 +0100
-Message-ID: <458BA2D4.3050107@dominion.kabel.utwente.nl>
-Date: Fri, 22 Dec 2006 10:18:12 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.8 (Macintosh/20061025)
-MIME-Version: 1.0
+	(envelope-from <Gilbert.Forkel@e-technik.stud.uni-erlangen.de>)
+	id 1GxkGm-00004q-5m
+	for openembedded-devel@openembedded.org; Fri, 22 Dec 2006 14:17:04 +0100
+Received: from max71.rrze.uni-erlangen.de (max71.rrze.uni-erlangen.de
+	[131.188.3.181]) by max71.rrze.uni-erlangen.de with ESMTP for
+	openembedded-devel@openembedded.org; Fri, 22 Dec 2006 14:13:23 +0100
+Received: from max71.rrze.uni-erlangen.de ([131.188.3.181])
+	by max71.rrze.uni-erlangen.de (max71.rrze.uni-erlangen.de [127.0.0.1])
+	(amavisd-new)
+	with ESMTP id 12637-08 for <openembedded-devel@openembedded.org>;
+	Fri, 22 Dec 2006 14:13:23 +0100 (MET)
+Received: from studmail.uni-erlangen.de ([131.188.3.207] [131.188.3.207]) by
+	smtp.uni-erlangen.de with ESMTP for
+	openembedded-devel@openembedded.org; Fri, 22 Dec 2006 14:13:23 +0100
+Received: from 84.148.98.51 (SquirrelMail authenticated user 
+	Gilbert.Forkel@e-technik.stud.uni-erlangen.de)
+	by studmail.uni-erlangen.de with HTTP;
+	Fri, 22 Dec 2006 14:13:23 +0100 (MET)
+Message-Id: <57817.84.148.98.51.1166793203.squirrel@studmail.uni-erlangen.de>
+Date: Fri, 22 Dec 2006 14:13:23 +0100 (MET)
+From: Gilbert.Forkel@e-technik.stud.uni-erlangen.de
 To: openembedded-devel@openembedded.org
-References: <458AC366.3030405@dominion.kabel.utwente.nl>	<1151969252.20061221194402@gmail.com>	<458AD0BE.2090100@dominion.kabel.utwente.nl>
-	<161362296.20061222011234@gmail.com>
-In-Reply-To: <161362296.20061222011234@gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] Enable tune-thumb.inc for all armv5t and armv6t	machines
+User-Agent: SquirrelMail/1.4.9 [CVS]
+MIME-Version: 1.0
+X-Virus-Scanned: by amavisd-new-20030616 (RRZE) on max71.rrze.uni-erlangen.de
+X-Spam-PYZOR: Reported 0 times.
+X-Spam-DCC: rrze-dcc:boeck2 1202; Body=1 Fuz1=1 Fuz2=1
+X-Spam-Checker-Version: SpamAssassin 3.1.7-rrze_40 (2006-10-05) on
+	boeck2.rrze.uni-erlangen.de
+X-Spam-Status: No, score=-2.8 tests=ALL_TRUSTED=-3.3, BAYES_50=0.001,
+	NO_REAL_NAME=0.461 autolearn=ham
+X-Spam-RBL: 
+X-Spam-Eval: ham 
+X-Spam-RRZE-Info: Diese Mail wurde einer automatischen Spam-Analyse unterzogen, 
+	siehe: http://www.rrze.uni-erlangen.de/dienste/e-mail/spam-analyse/
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Cifs support for mountnfs.sh initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,58 +50,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Dec 2006 09:20:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Dec 2006 13:17:04 -0000
+Content-Type: multipart/mixed;boundary="----=_20061222141323_22907"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+------=_20061222141323_22907
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
 
-Paul Sokolovsky schreef:
-> Hello Koen,
-> 
-> Thursday, December 21, 2006, 8:21:50 PM, you wrote:
-> 
-> []
-> 
->>>> Today I seperated the thumb bits from
->>>> conf/machine/include/ipx4xx.conf into
->>>> conf/machine/include/. I'd like to enable for all >=v5t machines, but I'm unsure about
->>>> using positive or negative logic.
->>>   What about armv4t?
-> 
->> The codesourcery people are telling horror stories to everyone about armv4t, but I don't
->> believe them anymore after
->> http://www.openembedded.org/repo/org.openembedded.dev/packages/gcc/gcc-4.1.1/unbreak-armv4t.patch
->> 'fixed' EABI on armv4t. I get the distinct feeling csl is trying to strongarm people into
->> using armv5 and armv6.
-> 
->>>  plus, thumb has known drawback of reduced performance.
-> 
->> I know the 'bx' insn causes a pipeline flush on xscales, any other drawbacks? And more
->> importantly, any numbers?
-> 
->   Well common Thumb intros usually have something like "Using Thumb
-> can usually reduce code size 1.5 times, while reducing performance by
-> 20% because of longer instruction sequences for some operations.".
+Hello,
+modified the mountnfs.sh script to handle cifs, the successor of the
+popular smb filesystem.
 
-Yeah, that's what you'd usually see. When I was attending a talk about DSPs[1] at SPS, the
-speaker declared "[..] using thumb for better performance." which amused me and other
-attendees :)
+regards
+Gilbert Forkel
 
-It's all about which kool-aid you drink.
-
-regards,
-
-Koen
-
-[1] http://acivs.org/sps2006/AbstractList.php?type=regular#159
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFi6LUMkyGM64RGpERAiyGAKCoIoe0p2tAqbJ1J6iPPFnIghzcWACfXdt/
-QK9W1UbPFtwgqKc4iiF+Fn8=
-=2vJM
------END PGP SIGNATURE-----
-
-
+------=_20061222141323_22907--
