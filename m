@@ -1,27 +1,25 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [134.102.201.18] (helo=informatik.uni-bremen.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Gy5X8-0001vR-6Z
-	for openembedded-devel@openembedded.org; Sat, 23 Dec 2006 12:59:22 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBNBxFLr027871 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Dec 2006 12:59:16 +0100
-Message-ID: <458D1A13.8010304@dominion.kabel.utwente.nl>
-Date: Sat, 23 Dec 2006 12:59:15 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
+	(envelope-from <rw@handhelds.org>) id 1GyDLF-0006L1-Qe
+	for openembedded-devel@openembedded.org; Sat, 23 Dec 2006 21:19:37 +0100
+Received: from [10.0.1.101] (p5489FD78.dip.t-dialin.net [84.137.253.120])
+	(authenticated bits=0)
+	by informatik.uni-bremen.de (8.13.4/8.13.2) with ESMTP id
+	kBNKJQCq010753
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Sat, 23 Dec 2006 21:19:28 +0100 (CET)
+From: Rene Wagner <rw@handhelds.org>
 To: openembedded-devel@openembedded.org
-References: <BAY102-W7D12C0528A63863A6E8F3D6E40@phx.gbl>	<456EA72F.1060507@sun.com>	<456EBA6B.90501@dominion.kabel.utwente.nl>	<456F10F2.5060807@sun.com>	<458BF100.1090602@dominion.kabel.utwente.nl>
-	<emj54a$b6s$1@sea.gmane.org>
-In-Reply-To: <emj54a$b6s$1@sea.gmane.org>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Initial attempt to get cdc to build in OE
+In-Reply-To: <513284098.20061214134623@vanille-media.de>
+References: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
+	<200612141339.15619.ranaldo@unina.it>
+	<513284098.20061214134623@vanille-media.de>
+Date: Sat, 23 Dec 2006 21:19:30 +0100
+Message-Id: <1166905170.21425.31.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+X-Virus-Scanned: by amavisd-new
+Subject: Re: Looking for Familiar/iPAQ local.conf example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,39 +33,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Dec 2006 11:59:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Dec 2006 20:19:37 -0000
+X-Groupsio-MsgNum: 1008
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-PS/tcM4xfKI4UGUnCenM"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-PS/tcM4xfKI4UGUnCenM
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-Rolf Leggewie schreef:
-> Koen Kooi wrote:
-> 
->> I was getting very annoyed with all the people complaining "OMG! we need java!!!!! LOL", 
->> but doing absolutely nothing to help getting java into OE (and hence making it available 
->> to the neo1973). So I decided to actually do something:
->>
->> http://www.openembedded.org/~koen/java/
->>
->> It errors out somewhere in do_compile, probably because kaffeh isn't sun j2se (on my build 
->> machine).
-> 
-> I tried unsuccessfully to get kaffe compiled on OE.  I doubt it will be 
-> much help, but what I have done is available in bug 410.
+Hi Mickey,
 
-That is only sideways related, since you need some form of j2se on your host system.
+On Thu, 2006-12-14 at 13:46 +0100, Michael 'Mickey' Lauer wrote:
+> I think the time has come to either remove familiar DISTRO
+> configuration or to substitute it with one that's known compatible.
+[...]
+> So a) or b) ?
 
-regards,
+I'm not entirely sure what a) or b) would be, so I'll just quote myself
+in case anyone is interested in my take on this (from a posting to the
+oe list).
 
-Koen
+On Tue, 2006-05-23 at 22:40 +0200, Rene Wagner wrote:=20
+> I don't want to make this decision on my own, but as far as I'm
+> concerned, please go ahead and remove familiar*.conf.
+
+That still holds.=20
+
+Regards,
+
+Rene
+
+--=20
+Rene Wagner
+rw at handhelds dot org
+4F33 7FD7 93B3 166B BADA  D6F8 71A1 FEA8 58B4 36D0
+
+--=-PS/tcM4xfKI4UGUnCenM
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFFjRoTMkyGM64RGpERAj9VAJ92zPng11Js9+1c/mO/yNNlknp3FgCfVvMO
-9cTw1i70aAv7meiukX7XkTo=
-=g2mY
+iD8DBQBFjY9RcaH+qFi0NtARAsZAAJ0V/BALTqX1qi3q4NBZOtZPLWeVpQCePS/u
+9ege5j8D/S70M2viwNNYWOU=
+=U3pC
 -----END PGP SIGNATURE-----
 
-
+--=-PS/tcM4xfKI4UGUnCenM--
