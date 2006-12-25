@@ -1,32 +1,21 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [82.195.149.148] (helo=xen.inhex.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1GyGD7-0003Wb-DM
-	for openembedded-devel@openembedded.org; Sun, 24 Dec 2006 00:23:25 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id A36DD28C022; Sun, 24 Dec 2006 00:19:56 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from PROMETHEUS (e180149243.adsl.alicedsl.de [85.180.149.243])
-	by srv043.dedi23.de (Postfix) with ESMTP id B41C928C021;
-	Sun, 24 Dec 2006 00:19:53 +0100 (CET)
-Date: Sun, 24 Dec 2006 00:21:13 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.85.03) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1044375425.20061224002113@vanille-media.de>
-To: Rene Wagner <rw@handhelds.org>
-In-Reply-To: <1166905170.21425.31.camel@localhost.localdomain>
-References: <7b4fff750612131111t3e58ec7fo51fd8cee1a436628@mail.gmail.com>
-	<200612141339.15619.ranaldo@unina.it>
-	<513284098.20061214134623@vanille-media.de>
-	<1166905170.21425.31.camel@localhost.localdomain>
+	(envelope-from <dion@inhex.net>) id 1GydVh-0007Ow-AJ
+	for openembedded-devel@openembedded.org; Mon, 25 Dec 2006 01:16:09 +0100
+Received: from localhost ([127.0.0.1]:1393 helo=debian.deb)
+	by xen.inhex.net with esmtp (Exim 4.63)
+	(envelope-from <dion@inhex.net>) id 1GydVw-0004vw-Kz
+	for openembedded-devel@openembedded.org; Mon, 25 Dec 2006 00:16:28 +0000
+Received: from dion by debian.deb with local (Exim 4.63)
+	(envelope-from <dion@inhex.net>) id 1GydWL-0005se-1t
+	for openembedded-devel@openembedded.org; Mon, 25 Dec 2006 02:16:49 +0200
+Date: Mon, 25 Dec 2006 02:16:48 +0200
+From: Dmitry Nezhevenko <dion@inhex.net>
+To: openembedded-devel@openembedded.org
+Message-ID: <20061225001648.GA21942@debian.deb>
 MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: Looking for Familiar/iPAQ local.conf example
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Subject: Trying to build opie-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,25 +29,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Dec 2006 23:23:25 -0000
+X-List-Received-Date: Mon, 25 Dec 2006 00:16:09 -0000
+X-Groupsio-MsgNum: 1010
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="dDRMvlgZJXvWKvBx"
+Content-Disposition: inline
+
+--dDRMvlgZJXvWKvBx
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yo Rene,
+Hi. I'm just trying to build target opie-image. After some time of
+building i get:
 
-> On Tue, 2006-05-23 at 22:40 +0200, Rene Wagner wrote:
->> I don't want to make this decision on my own, but as far as I'm
->> concerned, please go ahead and remove familiar*.conf.
+OE Build Configuration:
+BB_VERSION     =3D "1.6.3"
+OE_REVISION    =3D "8eaefa4f638dc67e29fb59fca3c6a98e4049eb09"
+TARGET_ARCH    =3D "arm"
+TARGET_OS      =3D "linux"
+MACHINE        =3D "a780"
+DISTRO         =3D "ezx"
+DISTRO_VERSION =3D ".dev-snapshot-20061225"
+TARGET_FPU     =3D "soft"
 
-> That still holds.
+NOTE: multiple providers are available (glibc, glibc-intermediate);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/arm-linux-libc-for-gcc
+ERROR: Nothing provides dependency task-bootstrap
+ERROR: dependency task-bootstrap (for opie-image) not satisfied
+NOTE: no buildable providers for opie-image
 
-So mote it be. Consider it being done.
+Any ideas?
 
-Regards,
+--=20
+WBR, Dmitry
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+--dDRMvlgZJXvWKvBx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
 
+iD8DBQFFjxhw0T/aIlRaJQYRAn7rAJ9TPoTz8o5IQEy+iqlzBPzroEa8QQCaA0mK
+WdUGW4/3CHVqcY4CXD0ugvk=
+=Msd6
+-----END PGP SIGNATURE-----
 
+--dDRMvlgZJXvWKvBx--
