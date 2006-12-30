@@ -1,26 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H0gHb-0007bw-OG
-	for openembedded-devel@openembedded.org; Sat, 30 Dec 2006 16:38:03 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBUFbALr028664 for <openembedded-devel@openembedded.org>;
-	Sat, 30 Dec 2006 16:37:10 +0100
-Message-ID: <459687A6.9020202@dominion.kabel.utwente.nl>
-Date: Sat, 30 Dec 2006 16:37:10 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1162936801.4808.78.camel@ip6-localhost>	<1163273077.4395.96.camel@ip6-localhost>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <Patrick.Ohly@gmx.de>) id 1H0gzz-0000mW-Rn
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Dec 2006 17:23:55 +0100
+Received: (qmail invoked by alias); 30 Dec 2006 16:23:09 -0000
+Received: from c-134-233-96.f.dsl.de.ignite.net (EHLO ip6-localhost)
+	[62.134.233.96]
+	by mail.gmx.net (mp020) with SMTP; 30 Dec 2006 17:23:09 +0100
+X-Authenticated: #489940
+Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
+	id 1H0gqH-0002e2-00; Sat, 30 Dec 2006 17:13:53 +0100
+From: Patrick Ohly <Patrick.Ohly@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <459687A6.9020202@dominion.kabel.utwente.nl>
+References: <1162936801.4808.78.camel@ip6-localhost>
+	<1163273077.4395.96.camel@ip6-localhost>
 	<1167491568.4160.16.camel@ip6-localhost>
-In-Reply-To: <1167491568.4160.16.camel@ip6-localhost>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<459687A6.9020202@dominion.kabel.utwente.nl>
+Date: Sat, 30 Dec 2006 17:13:53 +0100
+Message-Id: <1167495233.4160.20.camel@ip6-localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+Sender: Patrick Ohly <patrick@gmx.de>
+X-Y-GMX-Trusted: 0
 Subject: Re: cross-compiling for x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,33 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Dec 2006 15:38:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 30 Dec 2006 16:23:56 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Patrick Ohly schreef:
-> Hi all,
+On Sat, 2006-12-30 at 16:37 +0100, Koen Kooi wrote:
+> Patrick Ohly schreef:
+> > Hi all,
+> > 
+> > I have had some time over the holidays to investigate this again and
+> > have come up with patches that solves the problem for me. I'm attaching
+> > them in the hope that someone else will find them useful and/or commit
+> > them on dev.
 > 
-> I have had some time over the holidays to investigate this again and
-> have come up with patches that solves the problem for me. I'm attaching
-> them in the hope that someone else will find them useful and/or commit
-> them on dev.
+> Could you attach them to the bugtracker? The mailinglist has a really short memory for
+> patches...
 
-Could you attach them to the bugtracker? The mailinglist has a really short memory for
-patches...
+Done: see http://bugs.openembedded.org/show_bug.cgi?id=1728
 
-regards,
+I wasn't sure whether you'd want work which seems to be unrelated to
+what everyone else does with OE in your tracker.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFloemMkyGM64RGpERAkuHAJ4gbGO/sIivEJUIquFq49qx94ziiwCfemmu
-sKtKhMm92BYjYaVAtvXQqNA=
-=TiX3
------END PGP SIGNATURE-----
+-- 
+Bye, Patrick Ohly
+--  
+Patrick.Ohly@gmx.de
+http://www.estamos.de/
 
 
