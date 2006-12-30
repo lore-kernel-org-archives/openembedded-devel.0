@@ -1,22 +1,32 @@
-Received: from [64.233.182.188] (helo=nf-out-0910.google.com)
+Received: from [209.225.8.186] (helo=mtao01.charter.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cliff.brake@gmail.com>) id 1H0mmH-0004Lm-GC
+	(envelope-from <erik@hovland.org>) id 1H0nKQ-0004vh-8P
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Dec 2006 23:34:09 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so5888047nfc
+	Sun, 31 Dec 2006 00:09:26 +0100
+Received: from aa06.charter.net ([10.20.200.158]) by mtao01.charter.net
+	(InterMail vM.6.01.06.01 201-2131-130-101-20060113) with ESMTP
+	id <20061230230837.JSUU1329.mtao01.charter.net@aa06.charter.net>
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Dec 2006 14:33:21 -0800 (PST)
-Received: by 10.78.204.1 with SMTP id b1mr4316140hug.1167518001194;
-	Sat, 30 Dec 2006 14:33:21 -0800 (PST)
-Received: by 10.78.167.3 with HTTP; Sat, 30 Dec 2006 14:33:21 -0800 (PST)
-Message-ID: <f96d234e0612301433u641540f7ma1cf8438ecbae53c@mail.gmail.com>
-Date: Sat, 30 Dec 2006 17:33:21 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Sat, 30 Dec 2006 18:08:37 -0500
+Received: from charter.net ([71.92.202.52]) by aa06.charter.net with SMTP
+	id <20061230230837.JMID22316.aa06.charter.net@charter.net>
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Dec 2006 18:08:37 -0500
+Received: by charter.net (nbSMTP-1.00) for uid 1000
+	erik@hovland.org; Sat, 30 Dec 2006 15:08:37 -0800 (PST)
+Date: Sat, 30 Dec 2006 15:08:34 -0800
+From: Erik Hovland <erik@hovland.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200612300001.09642.openembedded@hrw.one.pl>
+Message-ID: <20061230230834.GG30598@hovland.org>
+References: <20061230051641.GA30225@hezmatt.org>
+	<1167506369.5626.46.camel@localhost.localdomain>
+	<20061230214326.GE15188@hezmatt.org>
+	<4596E33D.306@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-References: <200612300001.09642.openembedded@hrw.one.pl>
-Subject: Re: [REMOVAL] devkitidp-pxa255 machine
+In-Reply-To: <4596E33D.306@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+X-Chzlrs: 0
+Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,30 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Dec 2006 22:34:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 30 Dec 2006 23:09:26 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On 12/29/06, Marcin Juszkiewicz <openembedded@hrw.one.pl> wrote:
+On Sat, Dec 30, 2006 at 11:07:57PM +0100, Koen Kooi wrote:
+> > On Sat, Dec 30, 2006 at 07:19:29PM +0000, Richard Purdie wrote:
+> 
+> >> It does mean you shouldn't be committing changes locally via monotone.
+> >> If you do this you will have to pull and then merge every time. That
+> >> isn't a problem in itself but if you do get direct commit access, we
+> >> will not be happy adding hundreds of extra merges to the main
+> >> repository.
+> > 
+> > WTF?  Why are you using a distributed revision control system, if I'm not
+> > supposed to be committing locally?  If everything I do is supposed to be
+> > bundled up into a patch and sent to the bugzilla, how am I meant to maintain
+> > my own tree of fixes while I wait for them all to be applied to dev?  Quilt? 
+> > That might make sense if I'm stuck interacting with SVN, but with a DRCS in
+> > the mix I expect *it* to be able to take on that role.
+> 
+> Do what virtually every DSCM does to support that: make a branch
 
-> One of serious problems is 'devkitidp-pxa255' machine. It use own kernel
-> patches and own patches to u-boot - both are unfetchable. If someone
-> maintain this MACHINE then please submit fixes/patches.
->
-> I will add this machine into removal queue in January 2007 if no one will
-> bother with fixing it.
+Strange. Git nor mercucial require you to branch.
 
-Marcin,
-
-This is in my queue -- I'll try to get it fixed up in the next week.
-
-Thanks,
-Cliff
+E
 
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Erik Hovland
+mail: erik@hovland.org
+web: http://hovland.org/
+PGP/GPG public key available on request
+
 
 
