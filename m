@@ -1,25 +1,34 @@
-Received: from [70.85.129.92] (helo=sasquatch.hezmatt.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mpalmer@hezmatt.org>) id 1H0o7r-00073v-Ae
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Dec 2006 01:00:38 +0100
-Received: from [10.6.66.6] (helo=hezmatt.org)
-	by sasquatch.hezmatt.org with esmtp (Exim 3.35 #1 (Debian))
-	id 1H0o73-0003j4-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Dec 2006 10:59:42 +1100
-Received: by hezmatt.org (Postfix, from userid 1000)
-	id A70824AE70; Sun, 31 Dec 2006 10:59:38 +1100 (EST)
-Date: Sun, 31 Dec 2006 10:59:38 +1100
-From: Matthew Palmer <mpalmer@hezmatt.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20061230235938.GC16490@hezmatt.org>
+	(envelope-from <rpurdie@rpsys.net>) id 1H0oAc-00078e-8E
+	for openembedded-devel@openembedded.org; Sun, 31 Dec 2006 01:03:23 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBV02Qqe011236
+	for <openembedded-devel@openembedded.org>; Sun, 31 Dec 2006 00:02:26 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 10921-05 for <openembedded-devel@openembedded.org>;
+	Sun, 31 Dec 2006 00:02:23 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBV02N0s011228
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Sun, 31 Dec 2006 00:02:23 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20061230234052.GB16490@hezmatt.org>
 References: <20061230051641.GA30225@hezmatt.org>
 	<1167506369.5626.46.camel@localhost.localdomain>
 	<20061230214326.GE15188@hezmatt.org>
 	<4596E33D.306@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
-In-Reply-To: <4596E33D.306@dominion.kabel.utwente.nl>
-User-Agent: Mutt/1.5.11
+	<20061230230834.GG30598@hovland.org>
+	<20061230234052.GB16490@hezmatt.org>
+Date: Sun, 31 Dec 2006 00:02:26 +0000
+Message-Id: <1167523346.5626.56.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,78 +43,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Dec 2006 00:00:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 31 Dec 2006 00:03:23 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Sat, Dec 30, 2006 at 11:07:57PM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Matthew Palmer schreef:
-> > On Sat, Dec 30, 2006 at 07:19:29PM +0000, Richard Purdie wrote:
-> 
-> >> It does mean you shouldn't be committing changes locally via monotone.
-> >> If you do this you will have to pull and then merge every time. That
-> >> isn't a problem in itself but if you do get direct commit access, we
-> >> will not be happy adding hundreds of extra merges to the main
-> >> repository.
+On Sun, 2006-12-31 at 10:40 +1100, Matthew Palmer wrote:
+> On Sat, Dec 30, 2006 at 03:08:34PM -0800, Erik Hovland wrote:
+> > On Sat, Dec 30, 2006 at 11:07:57PM +0100, Koen Kooi wrote:
+> > > > On Sat, Dec 30, 2006 at 07:19:29PM +0000, Richard Purdie wrote:
+> > > 
+> > > >> It does mean you shouldn't be committing changes locally via monotone.
+> > > >> If you do this you will have to pull and then merge every time. That
+> > > >> isn't a problem in itself but if you do get direct commit access, we
+> > > >> will not be happy adding hundreds of extra merges to the main
+> > > >> repository.
+> > > > 
+> > > > WTF?  Why are you using a distributed revision control system, if I'm not
+> > > > supposed to be committing locally?  If everything I do is supposed to be
+> > > > bundled up into a patch and sent to the bugzilla, how am I meant to maintain
+> > > > my own tree of fixes while I wait for them all to be applied to dev?  Quilt? 
+> > > > That might make sense if I'm stuck interacting with SVN, but with a DRCS in
+> > > > the mix I expect *it* to be able to take on that role.
+> > > 
+> > > Do what virtually every DSCM does to support that: make a branch
 > > 
-> > WTF?  Why are you using a distributed revision control system, if I'm not
-> > supposed to be committing locally?  If everything I do is supposed to be
-> > bundled up into a patch and sent to the bugzilla, how am I meant to maintain
-> > my own tree of fixes while I wait for them all to be applied to dev?  Quilt? 
-> > That might make sense if I'm stuck interacting with SVN, but with a DRCS in
-> > the mix I expect *it* to be able to take on that role.
+> > Strange. Git nor mercucial require you to branch.
 > 
-> Do what virtually every DSCM does to support that: make a branch
+> Add darcs and bzr to the "no need to explicitly branch" list.  But then
+> again, it's not a fundamental failing of the tool if you need to say "Please
+> branch now", especially when, like monotone, you've got the ability to have
+> this "micro-branch" thing with the multiple "heads".
 
-You seem right on with that "virtually" bit:
+You don't have to branch. It simply means you will have to merge every
+time you pull from upstream. This is the same as git, I'm not familiar
+with the others. All I've tried to do it make you aware of what you're
+doing and which a) you will need to always merge after pulling and b)
+why you won't be allowed to push to trunk with such a repository. If
+neither thing concerns you, please go ahead.
 
-$ mtn help |grep -i branch
-$
+This isn't a unique problem to monotone. git handles this by allowing
+you to rebase commits against a new base revision. I'm not sure if
+monotone has a way to handle this or not. If it doesn't, it should have
+but that is something for the monotone people to consider.
 
-Oh, commit with a --branch option.  Cute, if not exactly discoverable. 
-Monotone certainly seems to have read from the Tom Lord manual of Interface
-Design.
+As for the problem of patch interchange using the actual SCM without
+trunk write access, this is something that needs careful thought. You
+can share a repository and I guess we'd pull into a local branch, then
+merge with trunk. I'd be interested in the monotone people's thoughts on
+how to handle this tbh. Currently we have no good solution but it would
+be nice to have one. Its probably an education problem on both ends.
+FWIW, the linux kernel has similar issues with git and developers still
+exchange patches rather than git repositories. 
 
-Note also that Richard said that I shouldn't be doing *any* commits locally
--- no mention of branching or any other way to take advantage of the
-benefits of a DRCS.  (Not having a go at you, Richard, just explaining my
-thought processes.)
+Richard
 
-So having solved The Mystery Of The Branch, how do I make the completed
-branch available for the core devs to merge back into the trunk?  (If it
-involves copying a huge monotone database to my webserver and running
-mtnserve, I'll just give up now -- I don't have the resources to spare for
-that).  What's the naming policy for branches -- presumably, since my branch
-names will end up "polluting" the main database if you propagate my changes,
-I can't just go naming my branches any old thing (since it appears that it's
-a single global namespace for branches).  How do I manage separate feature
-branches (so that each branch is kept clean for merging) while still having
-a comglomerate branch I can use for building from?  I suppose I can
-propagate each feature branch back into a dirty work branch, but that just
-seems... labour-intensive.
 
-Do you understand my frustration?  I know what I've got to do, but I can't
-find any docs in the wiki that cater to anyone other than OE core devs
-(MonotonePhraseBook) -- which I'm certainly not going to be any time soon --
-so I'm left either working everything out from first principles (wasting
-time that I could be spending fixing things, not to mention making a pile of
-screwups -- like committing to the main branch, creating a second head -- in
-the meantime), writing slightly pissy e-mails on mailing lists (and getting
-equally pissy responses back), or just giving up, converting the dev branch
-to darcs, and not bothering to contribute my fixes back in any meaningful
-manner because it's just Too Damn Hard.
 
-In short, how do *you* want to be worked with?  I'm happy to work in
-whatever reasonable way works best for you, but I need to know what that
-process is first.
-
-- Matt
-
--- 
-It fsck's the volume or it gets the format again.
-		-- Don Quixote, in the Monastery
 
 
