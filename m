@@ -1,30 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1H19Rr-0002Y3-Ud
-	for openembedded-devel@openembedded.org; Sun, 31 Dec 2006 23:46:36 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBVMjgYm011911
-	for <openembedded-devel@openembedded.org>; Sun, 31 Dec 2006 22:45:42 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11203-09 for <openembedded-devel@openembedded.org>;
-	Sun, 31 Dec 2006 22:45:40 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBVMjdOA011904
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 31 Dec 2006 22:45:39 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H19mj-0002j5-HG
+	for openembedded-devel@openembedded.org; Mon, 01 Jan 2007 00:08:09 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	kBVN79Lr025413 for <openembedded-devel@openembedded.org>;
+	Mon, 1 Jan 2007 00:07:10 +0100
+Message-ID: <4598429E.1030703@dominion.kabel.utwente.nl>
+Date: Mon, 01 Jan 2007 00:07:10 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-In-Reply-To: <E1H19G7-0002Ph-6z@linuxtogo.org>
 References: <E1H19G7-0002Ph-6z@linuxtogo.org>
-Date: Sun, 31 Dec 2006 22:45:41 +0000
-Message-Id: <1167605141.5592.37.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [oe-commits] org.oe.dev Split STAGING_BINDIR into CROSS and	NATIVE versions. This means there is no need to rename -config scripts and	multimachine won't break with binconfig.bbclass. ***NOTE: This change will	require staging to be rebuilt***
+	<1167605141.5592.37.camel@localhost.localdomain>
+In-Reply-To: <1167605141.5592.37.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev Split STAGING_BINDIR into CROSS and	NATIVE versions. This means there is no need to rename	-config scripts and	multimachine won't break with	binconfig.bbclass. ***NOTE: This change will	require staging	to be rebuilt***
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,37 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Dec 2006 22:46:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 31 Dec 2006 23:08:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2006-12-31 at 23:34 +0100, rpurdie commit wrote:
-> Split STAGING_BINDIR into CROSS and NATIVE versions. This means there
-> is no need to rename -config scripts and multimachine won't break with
-> binconfig.bbclass. ***NOTE: This change will require staging to be
-> rebuilt***
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Please note the above. Peoples staging are potentially broken now as all
-the *-config files have moved around and been renamed.
+Richard Purdie schreef:
 
-Also, can people please be careful with STAGING_BINDIR now. To
-illustrate, if building arm images on an i686 box:
+> Happy New Year!
 
-An ARM binary goes into STAGING_BINDIR.
-An i686 (native) binary goes into STAGING_BINDIR_NATIVE.
-A cross binary (runs on i686 but provides ARM results) goes into
-STAGING_BINDIR_CROSS.
+Indeed, Happy New Year!
 
-STAGING_BINDIR_CROSS and STAGING_BINDIR_NATIVE are in PATH for cross
-compiling (with CROSS having priority). Only STAGING_BINDIR_NATIVE is in
-PATH for native packages.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-This was disucssed on this list a while back, I've just finally got
-around to committing it.
-
-Happy New Year!
-
-Richard
-
+iD8DBQFFmEKeMkyGM64RGpERAhhCAJ9B22u70Uz6BJ7mJDrg9M0xm6XtzwCeOVpM
+zLhflzM6eBiFxK76yR74Ns4=
+=tOLs
+-----END PGP SIGNATURE-----
 
 
