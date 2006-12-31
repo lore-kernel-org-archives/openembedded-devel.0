@@ -1,28 +1,30 @@
-Received: from [70.85.129.92] (helo=sasquatch.hezmatt.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mpalmer@hezmatt.org>) id 1H0ycc-0001GP-HA
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Dec 2006 12:12:58 +0100
-Received: from [10.6.66.6] (helo=hezmatt.org)
-	by sasquatch.hezmatt.org with esmtp (Exim 3.35 #1 (Debian))
-	id 1H0ybm-0005I5-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Dec 2006 22:12:06 +1100
-Received: by hezmatt.org (Postfix, from userid 1000)
-	id 13E2B4AE70; Sun, 31 Dec 2006 22:12:03 +1100 (EST)
-Date: Sun, 31 Dec 2006 22:12:03 +1100
-From: Matthew Palmer <mpalmer@hezmatt.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20061231111203.GB22098@hezmatt.org>
-References: <20061230051641.GA30225@hezmatt.org>
-	<1167506369.5626.46.camel@localhost.localdomain>
-	<20061230214326.GE15188@hezmatt.org>
-	<4596E33D.306@dominion.kabel.utwente.nl>
-	<20061230230834.GG30598@hovland.org>
-	<459784AC.2030908@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
-In-Reply-To: <459784AC.2030908@dominion.kabel.utwente.nl>
-User-Agent: Mutt/1.5.11
-Subject: Re: A question of workflow
+	(envelope-from <rpurdie@rpsys.net>) id 1H11wA-0002dm-6o
+	for openembedded-devel@openembedded.org; Sun, 31 Dec 2006 15:45:22 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBVEiUTI029816
+	for <openembedded-devel@openembedded.org>; Sun, 31 Dec 2006 14:44:30 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29289-07 for <openembedded-devel@openembedded.org>;
+	Sun, 31 Dec 2006 14:44:25 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id kBVEiL6J029797
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Sun, 31 Dec 2006 14:44:21 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <45a44e480612302025n36a2057fs9b70e8f6cdebf054@mail.gmail.com>
+References: <45a44e480612302025n36a2057fs9b70e8f6cdebf054@mail.gmail.com>
+Date: Sun, 31 Dec 2006 14:44:21 +0000
+Message-Id: <1167576261.5592.23.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Feedback for patch adding softsqueeze recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,40 +38,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Dec 2006 11:12:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 31 Dec 2006 14:45:22 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Sun, Dec 31, 2006 at 10:36:44AM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Hi,
+
+On Sat, 2006-12-30 at 23:25 -0500, Jaya Kumar wrote:
+> I had submited a patch adding a recipe for softsqueeze. This is under bug 1717.
+> http://bugs.openembedded.org/show_bug.cgi?id=1717
 > 
-> Erik Hovland schreef:
-> > On Sat, Dec 30, 2006 at 11:07:57PM +0100, Koen Kooi wrote:
-> >>> On Sat, Dec 30, 2006 at 07:19:29PM +0000, Richard Purdie wrote:
-> >>>> It does mean you shouldn't be committing changes locally via monotone.
-> >>>> If you do this you will have to pull and then merge every time. That
-> >>>> isn't a problem in itself but if you do get direct commit access, we
-> >>>> will not be happy adding hundreds of extra merges to the main
-> >>>> repository.
-> >>> WTF?  Why are you using a distributed revision control system, if I'm not
-> >>> supposed to be committing locally?  If everything I do is supposed to be
-> >>> bundled up into a patch and sent to the bugzilla, how am I meant to maintain
-> >>> my own tree of fixes while I wait for them all to be applied to dev?  Quilt? 
-> >>> That might make sense if I'm stuck interacting with SVN, but with a DRCS in
-> >>> the mix I expect *it* to be able to take on that role.
-> >> Do what virtually every DSCM does to support that: make a branch
-> > 
-> > Strange. Git nor mercucial require you to branch.
-> 
-> Actually git branches the moment when you pull, it just hides that.
+> I would welcome your advice and feedback if it is ok before I try
+> doing other stuff.
 
-That's what bzr and darcs do, too.  You can't really have a DRCS without
-either implicit or explicit branching on retrieval.  In reality, monotone is
-branching implicitly just like git, bzr, and darcs.  It's just that monotone
-has two levels of branching: "heads", which are nothing more than unnamed
-microbranches, and the more coarse-grained named branch.
+Hmm. You didn't pick a very easy package to build ;-). Firstly, this .bb
+file doesn't build softsqueeze, it builds squeezeslave which is
+something different. I was wondering since softsqueeze is a java app... 
 
-- Matt
+Style wise I did wonder why you used "DEPENDS +=" ? Its not wrong as
+such but not the usual style. I also didn't like the sed magic for
+makefile.linux. I've changed that to use a patch because its easier to
+see whats going on and if upstream changes, you will be more likely to
+see the change when the patch fails to apply. Also, when you do this,
+you find you patched $(LDFLAGS) into "make clean" and some other places
+it isn't needed ;-).
+
+I totally agree with using OE's own flac, vorbis and ogg libs. I'd go
+further and add portaudio to OE as a separate package too. I'd also like
+to see libslimproto packaged as a separate package and dynamically
+linked to.
+
+I'll add a version that implements some of the above to OE.dev shortly
+(access to the server appears to be broken atm). Perhaps you could look
+at sorting out a proper portaudio package?
+
+I tried running the package on ARM and found a bug that stopped the
+program running. I've not tested much more that this as I don't have
+working sound on the device atm.
+
+Its nice to see someone looking at using the Slim Devices software in
+OE. I did some hacking on SlimServer and wrote the protocol information
+softsqueeze was based on a few years ago :)
+
+Richard		
+
 
 
