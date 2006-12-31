@@ -1,26 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [70.85.129.92] (helo=sasquatch.hezmatt.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H0xH5-0007X1-Bs
-	for openembedded-devel@openembedded.org; Sun, 31 Dec 2006 10:46:39 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	kBV9jiLr014825 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Dec 2006 10:45:44 +0100
-Message-ID: <459786C7.70000@dominion.kabel.utwente.nl>
-Date: Sun, 31 Dec 2006 10:45:43 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <20061230051641.GA30225@hezmatt.org>	<1167506369.5626.46.camel@localhost.localdomain>	<20061230214326.GE15188@hezmatt.org>	<4596E33D.306@dominion.kabel.utwente.nl>	<20061230235938.GC16490@hezmatt.org>
+	(envelope-from <mpalmer@hezmatt.org>) id 1H0yRY-00014b-3T
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 31 Dec 2006 12:01:32 +0100
+Received: from [10.6.66.6] (helo=hezmatt.org)
+	by sasquatch.hezmatt.org with esmtp (Exim 3.35 #1 (Debian))
+	id 1H0yQf-0005Fl-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 31 Dec 2006 22:00:37 +1100
+Received: by hezmatt.org (Postfix, from userid 1000)
+	id C89984AE70; Sun, 31 Dec 2006 22:00:33 +1100 (EST)
+Date: Sun, 31 Dec 2006 22:00:33 +1100
+From: Matthew Palmer <mpalmer@hezmatt.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20061231110033.GA22098@hezmatt.org>
+References: <20061230051641.GA30225@hezmatt.org>
+	<1167506369.5626.46.camel@localhost.localdomain>
+	<20061230214326.GE15188@hezmatt.org>
+	<4596E33D.306@dominion.kabel.utwente.nl>
+	<20061230235938.GC16490@hezmatt.org>
 	<1167523571.5626.59.camel@localhost.localdomain>
-In-Reply-To: <1167523571.5626.59.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<459786C7.70000@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+In-Reply-To: <459786C7.70000@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.11
 Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,37 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Dec 2006 09:46:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 31 Dec 2006 11:01:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Richard Purdie schreef:
-> On Sun, 2006-12-31 at 10:59 +1100, Matthew Palmer wrote:
->> Note also that Richard said that I shouldn't be doing *any* commits locally
->> -- no mention of branching or any other way to take advantage of the
->> benefits of a DRCS.  (Not having a go at you, Richard, just explaining my
->> thought processes.)
+On Sun, Dec 31, 2006 at 10:45:43AM +0100, Koen Kooi wrote:
+> Richard Purdie schreef:
+> > On Sun, 2006-12-31 at 10:59 +1100, Matthew Palmer wrote:
+> >> Note also that Richard said that I shouldn't be doing *any* commits locally
+> >> -- no mention of branching or any other way to take advantage of the
+> >> benefits of a DRCS.  (Not having a go at you, Richard, just explaining my
+> >> thought processes.)
+> > 
+> > This is simply because we have no established way of receiving data
+> > through the SCM for merging into trunk without direct write access. As
+> > my other email says, I'd like to find a way of supporting that but its
+> > probably an education issue on both sides.
 > 
-> This is simply because we have no established way of receiving data
-> through the SCM for merging into trunk without direct write access. As
-> my other email says, I'd like to find a way of supporting that but its
-> probably an education issue on both sides.
+> And the fact that we usually have to tweak 80% if the patches we receive.
 
-And the fact that we usually have to tweak 80% if the patches we receive. Attaching them
-to the bugtracker makes it easy to search for, view and comment on patches, and most
-importantly, view their status.
-It doesn't matter which SCM we use with that workflow.
+So you propagate the contributed branch to the dev tree, then make the
+changes that are needed to fix it up as a separate changeset.  That
+maintains full history for everyone.
 
+> Attaching them to the bugtracker makes it easy to search for, view and
+> comment on patches, and most importantly, view their status.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+The problem with just dealing in raw patches is that when I'm maintaining my
+local tree, a branch of the upstream repo, my patches come back to me after
+getting applied upstream without any context, so that I get all manner of
+spurious conflicts.  It looks as though all I can do to try and avoid this
+is disapprove patches, I can't "unpropagate" a whole branch to prevent the
+conflict -- and that assumes that I know in advance that the patch is coming
+back down.  Far better to have the SCM do that all for me.
 
-iD8DBQFFl4bHMkyGM64RGpERAqP/AJ4p9m4FAbXgtVOiACLMQEKScGYqmwCgqC/4
-9Oee1LelN+CNy3/fWLqDRn8=
-=fv68
------END PGP SIGNATURE-----
+> It doesn't matter which SCM we use with that workflow.
+
+Which does make me wonder why you went with monotone instead of the
+lowest-common-denominator, since you don't appear to be using any of
+monotone's more interesting features?
+
+- Matt
 
 
