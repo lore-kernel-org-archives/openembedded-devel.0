@@ -1,29 +1,31 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1H1Pso-0005MV-Ax
-	for openembedded-devel@openembedded.org; Mon, 01 Jan 2007 17:19:30 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l01GIVJo008013
-	for <openembedded-devel@openembedded.org>; Mon, 1 Jan 2007 16:18:31 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 07967-01 for <openembedded-devel@openembedded.org>;
-	Mon,  1 Jan 2007 16:18:29 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l01GISA8008006
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Mon, 1 Jan 2007 16:18:29 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1H1R3o-0003Wl-AM
+	for openembedded-devel@openembedded.org; Mon, 01 Jan 2007 18:34:56 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1H1R2j-0003h9-Nc
+	for openembedded-devel@openembedded.org; Mon, 01 Jan 2007 18:33:49 +0100
+Received: from r77a2.r.ppp-pool.de ([89.54.119.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 01 Jan 2007 18:33:49 +0100
+Received: from no2spam by r77a2.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 01 Jan 2007 18:33:49 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <enba1v$ldr$1@sea.gmane.org>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 01 Jan 2007 18:33:40 +0100
+Message-ID: <enbglm$6je$1@sea.gmane.org>
 References: <enba1v$ldr$1@sea.gmane.org>
-Date: Mon, 01 Jan 2007 16:18:29 +0000
-Message-Id: <1167668309.5601.31.camel@localhost.localdomain>
+	<1167668309.5601.31.camel@localhost.localdomain>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: r77a2.r.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.8 (X11/20061115)
+In-Reply-To: <1167668309.5601.31.camel@localhost.localdomain>
+Sender: news <news@sea.gmane.org>
 Subject: Re: Reverse-engineering SD specs for collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,27 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jan 2007 16:19:30 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Jan 2007 17:34:56 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Richard Purdie wrote:
+> Its a time problem :-/.
 
-On Mon, 2007-01-01 at 16:40 +0100, Rolf Leggewie wrote:
-> I just stumbled across 
-> http://cambuca.ldhs.cetuc.puc-rio.br/~miguel/zaurus/ (found it mentioned 
-> in the OZ wiki) and http://josejx.net/collie/.  They are dealing with 
-> reverse-engineering the SD slot on the collie.  I was wondering if 
-> developpers are aware of this and if this could potentially mean that 
-> collie has a future in angstrom as well.
+I am glad this has turned from a knowledge to a time problem.  This is 
+progress.
 
-It is known about. We need someone with the time to develop a 2.6 driver
-based on this information and asking appropriate questions. Its a time
-problem :-/.
-
-Cheers,
-
-Richard
+Would it make sense to set up a bounty to encourage someone to pick this 
+up?  I pledge 20€.
 
 
 
