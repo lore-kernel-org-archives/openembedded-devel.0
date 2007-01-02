@@ -1,25 +1,31 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H1iXu-0002dC-H0
-	for openembedded-devel@openembedded.org; Tue, 02 Jan 2007 13:15:19 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l02CE5Lr004192 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Jan 2007 13:14:06 +0100
-Message-ID: <459A4C8C.7080007@dominion.kabel.utwente.nl>
-Date: Tue, 02 Jan 2007 13:14:04 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Bugdays this weekend!
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1H1jqQ-0006JN-TU
+	for openembedded-devel@openembedded.org; Tue, 02 Jan 2007 14:38:22 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1H1jpJ-0003bJ-Vz
+	for openembedded-devel@openembedded.org; Tue, 02 Jan 2007 14:37:13 +0100
+Received: from r776d.r.ppp-pool.de ([89.54.119.109])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 02 Jan 2007 14:37:13 +0100
+Received: from no2spam by r776d.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 02 Jan 2007 14:37:13 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 02 Jan 2007 14:36:56 +0100
+Message-ID: <endn5s$e4u$1@sea.gmane.org>
+References: <459A4C53.3090401@dominion.kabel.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: r776d.r.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.8 (X11/20061115)
+In-Reply-To: <459A4C53.3090401@dominion.kabel.utwente.nl>
+Sender: news <news@sea.gmane.org>
+Subject: Re: [RFC] code sprints or focus-weeks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,26 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jan 2007 12:15:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 02 Jan 2007 13:38:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi wrote:
 
-Hi,
+> Looking at the development of OE the last year it seems that major improvements were
+> either sponsored (o-hand dudes, google SoC) or by people with supernatural focus (Holger).
 
-The OE calendar tells us that there will be bugdays this weekend. Lets squish some bugs!
+good time to step back and take a look at HOW things are getting done.
 
-regards,
+> what do you think?
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I think this is a great idea.
 
-iD8DBQFFmkyMMkyGM64RGpERAgmpAJ9EDqFoabb+lZxpZZlufrFT3AHadgCcCIxI
-0R4Yt/5ZzUURDpEcNSEbeTg=
-=lyvD
------END PGP SIGNATURE-----
+I hope you do not mind if I add another; Set up a good system for 
+accepting bounties.  OE is getting more and more widely used, I think 
+there would be some revenue there.  I believe it might make sense to use 
+an external site/tool for managing the bounties or at least learn from 
+how they process it.  What do you think?
+
 
 
