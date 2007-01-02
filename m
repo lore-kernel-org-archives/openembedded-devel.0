@@ -1,20 +1,26 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <dp@xora.org.uk>) id 1H1XYG-0004kZ-U9
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jan 2007 01:30:56 +0100
-Received: from xora.org.uk ([::ffff:81.179.98.244])
-	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Tue, 02 Jan 2007 00:29:35 +0000
-	id 0007001D.4599A76F.00004A79
-Date: Tue, 2 Jan 2007 00:29:38 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070102002938.GA5825@stygia.hyboria>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H1gxd-0001fT-CQ
+	for openembedded-devel@openembedded.org; Tue, 02 Jan 2007 11:33:37 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l02AWRLr016630 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 2 Jan 2007 11:32:27 +0100
+Message-ID: <459A34B9.1030703@dominion.kabel.utwente.nl>
+Date: Tue, 02 Jan 2007 11:32:25 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <E1H1X7P-0006QB-FN@linuxtogo.org>
-Mime-Version: 1.0
-In-Reply-To: <E1H1X7P-0006QB-FN@linuxtogo.org>
-User-Agent: Mutt/1.5.11
+	<20070102002938.GA5825@stygia.hyboria>
+In-Reply-To: <20070102002938.GA5825@stygia.hyboria>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [oe-commits] org.oe.dev aspell: fix compilation for powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,25 +35,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jan 2007 00:31:03 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 02 Jan 2007 10:33:38 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tue, Jan 02, 2007 at 01:03:03AM +0100, koen commit wrote:
->  inherit autotools
->  
-> +export CXXFLAGS += "-lstdc++"
-> +
->  do_compile_prepend() {
->  	install ${WORKDIR}/mk-dirs_h.py ${S}/common/mk-dirs_h
->  }
-> 
-As this package seems to work for other platforms, isnt the bug
-elsewhere. I dont like this sort of unexplained "fix" for one particular
-platform. This type of "fix" to me just dirties the metadata.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Graeme (XorA)
+Graeme Gregory schreef:
+> On Tue, Jan 02, 2007 at 01:03:03AM +0100, koen commit wrote:
+>>  inherit autotools
+>>  
+>> +export CXXFLAGS += "-lstdc++"
+>> +
+>>  do_compile_prepend() {
+>>  	install ${WORKDIR}/mk-dirs_h.py ${S}/common/mk-dirs_h
+>>  }
+>>
+> As this package seems to work for other platforms, isnt the bug
+> elsewhere.
 
+I suspect it's due to broken .la files in cross/. Could you apply your sed fix?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFmjS5MkyGM64RGpERAjHKAKCZ1DUHJgk4eG9NSp/c2B4NtVmfDACcCEob
+5PmZwAjBizHtxdzoaciX2UU=
+=IaLn
+-----END PGP SIGNATURE-----
 
 
