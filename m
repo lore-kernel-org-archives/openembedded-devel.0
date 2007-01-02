@@ -1,22 +1,21 @@
-Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cliff.brake@gmail.com>) id 1H1XAi-0006SU-Le
+	(envelope-from <dp@xora.org.uk>) id 1H1XYG-0004kZ-U9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jan 2007 01:06:28 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so6530043nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Jan 2007 16:05:28 -0800 (PST)
-Received: by 10.78.204.1 with SMTP id b1mr1822414hug.1167696328471;
-	Mon, 01 Jan 2007 16:05:28 -0800 (PST)
-Received: by 10.78.164.9 with HTTP; Mon, 1 Jan 2007 16:05:28 -0800 (PST)
-Message-ID: <f96d234e0701011605y4628caej8c85532117f40827@mail.gmail.com>
-Date: Mon, 1 Jan 2007 19:05:28 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Tue, 02 Jan 2007 01:30:56 +0100
+Received: from xora.org.uk ([::ffff:81.179.98.244])
+	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Tue, 02 Jan 2007 00:29:35 +0000
+	id 0007001D.4599A76F.00004A79
+Date: Tue, 2 Jan 2007 00:29:38 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20061230051641.GA30225@hezmatt.org>
-MIME-Version: 1.0
-References: <20061230051641.GA30225@hezmatt.org>
-Subject: Re: A question of workflow
+Message-ID: <20070102002938.GA5825@stygia.hyboria>
+References: <E1H1X7P-0006QB-FN@linuxtogo.org>
+Mime-Version: 1.0
+In-Reply-To: <E1H1X7P-0006QB-FN@linuxtogo.org>
+User-Agent: Mutt/1.5.11
+Subject: Re: [oe-commits] org.oe.dev aspell: fix compilation for powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,30 +29,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jan 2007 00:06:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 02 Jan 2007 00:31:03 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On 12/30/06, Matthew Palmer <mpalmer@hezmatt.org> wrote:
+On Tue, Jan 02, 2007 at 01:03:03AM +0100, koen commit wrote:
+>  inherit autotools
+>  
+> +export CXXFLAGS += "-lstdc++"
+> +
+>  do_compile_prepend() {
+>  	install ${WORKDIR}/mk-dirs_h.py ${S}/common/mk-dirs_h
+>  }
+> 
+As this package seems to work for other platforms, isnt the bug
+elsewhere. I dont like this sort of unexplained "fix" for one particular
+platform. This type of "fix" to me just dirties the metadata.
 
-> * (The biggie) is there a guide on the wiki or somewhere describing the
->   preferred workflow for making changes and working effectively with the rest
->   of the OE developer community?  (Google wasn't at all illuminating)
+Graeme (XorA)
 
-Many of us use bbcollections to keep any OE changes in a completely
-separate OE tree and don't modify the dev tree.  The components in the
-custom tree are given higher priority and in effect replace the
-components in the dev tree.  This works very well for the case where
-you are working on a project and have quite a bit of custom
-development that will never get pushed into dev.  This is far from
-ideal, but is the best solution I've found.
-
-Cliff
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
 
 
