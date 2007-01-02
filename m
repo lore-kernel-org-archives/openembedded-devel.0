@@ -1,25 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H1pp9-0001DZ-2H
-	for openembedded-devel@openembedded.org; Tue, 02 Jan 2007 21:01:31 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l02K0HLr016857 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Jan 2007 21:00:18 +0100
-Message-ID: <459AB9D0.2090904@dominion.kabel.utwente.nl>
-Date: Tue, 02 Jan 2007 21:00:16 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <pmiscml@gmail.com>) id 1H1puY-0001KG-2J
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Jan 2007 21:07:02 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so6802945nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Jan 2007 12:05:56 -0800 (PST)
+Received: by 10.48.217.20 with SMTP id p20mr23442735nfg.1167768356392;
+	Tue, 02 Jan 2007 12:05:56 -0800 (PST)
+Received: from CUBE ( [82.193.96.233])
+	by mx.google.com with ESMTP id r34sm69748265nfc.2007.01.02.12.05.55;
+	Tue, 02 Jan 2007 12:05:56 -0800 (PST)
+Date: Tue, 2 Jan 2007 22:06:11 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <285929428.20070102220611@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	<angstrom-distro-devel@linuxtogo.org>
+In-Reply-To: <4596E33D.306@dominion.kabel.utwente.nl>
+References: <20061230051641.GA30225@hezmatt.org>
+	<1167506369.5626.46.camel@localhost.localdomain>
+	<20061230214326.GE15188@hezmatt.org>
+	<4596E33D.306@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Spurious merges with monotone
+Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,24 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jan 2007 20:01:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 02 Jan 2007 20:07:02 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Hi,
+Sunday, December 31, 2006, 12:07:57 AM, you wrote:
 
-Someone (or something) just pushed over 170 csets consisting only of merges. Looking at
-the key that committed them it seems that it was a automatic merge. Could the guilty admin
-stop that please?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+[]
+> Do what virtually every DSCM does to support that: make a branch
 
-iD8DBQFFmrnQMkyGM64RGpERAjylAKC8QEZVBZ53FSKtFyfJ0Rb2bd5jwQCfVlfC
-MIUipKpq3Gtgz7pLa922pDU=
-=O2yb
------END PGP SIGNATURE-----
+  Well, that's what I wanted to ask for a long time: if I make my
+private branch in the local OE checkout, do I need to do some steps to
+ensure it won't be pushed to the upstream repo (assuming I have commit to
+.dev branch)?
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
