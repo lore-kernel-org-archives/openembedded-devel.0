@@ -1,32 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1H1R3o-0003Wl-AM
-	for openembedded-devel@openembedded.org; Mon, 01 Jan 2007 18:34:56 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1H1R2j-0003h9-Nc
-	for openembedded-devel@openembedded.org; Mon, 01 Jan 2007 18:33:49 +0100
-Received: from r77a2.r.ppp-pool.de ([89.54.119.162])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 01 Jan 2007 18:33:49 +0100
-Received: from no2spam by r77a2.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 01 Jan 2007 18:33:49 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 01 Jan 2007 18:33:40 +0100
-Message-ID: <enbglm$6je$1@sea.gmane.org>
-References: <enba1v$ldr$1@sea.gmane.org>
-	<1167668309.5601.31.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: r77a2.r.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.8 (X11/20061115)
-In-Reply-To: <1167668309.5601.31.camel@localhost.localdomain>
-Sender: news <news@sea.gmane.org>
-Subject: Re: Reverse-engineering SD specs for collie
+	(envelope-from <cliff.brake@gmail.com>) id 1H1XAi-0006SU-Le
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Jan 2007 01:06:28 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so6530043nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Jan 2007 16:05:28 -0800 (PST)
+Received: by 10.78.204.1 with SMTP id b1mr1822414hug.1167696328471;
+	Mon, 01 Jan 2007 16:05:28 -0800 (PST)
+Received: by 10.78.164.9 with HTTP; Mon, 1 Jan 2007 16:05:28 -0800 (PST)
+Message-ID: <f96d234e0701011605y4628caej8c85532117f40827@mail.gmail.com>
+Date: Mon, 1 Jan 2007 19:05:28 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20061230051641.GA30225@hezmatt.org>
+MIME-Version: 1.0
+References: <20061230051641.GA30225@hezmatt.org>
+Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,18 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jan 2007 17:34:56 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 02 Jan 2007 00:06:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Richard Purdie wrote:
-> Its a time problem :-/.
+On 12/30/06, Matthew Palmer <mpalmer@hezmatt.org> wrote:
 
-I am glad this has turned from a knowledge to a time problem.  This is 
-progress.
+> * (The biggie) is there a guide on the wiki or somewhere describing the
+>   preferred workflow for making changes and working effectively with the rest
+>   of the OE developer community?  (Google wasn't at all illuminating)
 
-Would it make sense to set up a bounty to encourage someone to pick this 
-up?  I pledge 20€.
+Many of us use bbcollections to keep any OE changes in a completely
+separate OE tree and don't modify the dev tree.  The components in the
+custom tree are given higher priority and in effect replace the
+components in the dev tree.  This works very well for the case where
+you are working on a project and have quite a bit of custom
+development that will never get pushed into dev.  This is far from
+ideal, but is the best solution I've found.
 
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
