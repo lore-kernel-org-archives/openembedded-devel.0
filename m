@@ -1,28 +1,26 @@
-Received: from [216.243.110.194] (helo=redwood.mza.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <anthony.seward@ieee.org>) id 1H28td-0008VE-1Z
-	for openembedded-devel@openembedded.org; Wed, 03 Jan 2007 17:23:21 +0100
-Received: from [10.5.5.59] (monkeytree.mza.com [216.243.106.138])
-	(authenticated bits=0)
-	by redwood.mza.com (8.13.1/8.13.1) with ESMTP id l03GMA50023824
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 3 Jan 2007 09:22:10 -0700
-From: Anthony Joseph Seward <anthony.seward@ieee.org>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <459B7067.3070202@gmx.net>
-References: <enba1v$ldr$1@sea.gmane.org>
-	<1167668309.5601.31.camel@localhost.localdomain>
-	<enbglm$6je$1@sea.gmane.org>  <459B7067.3070202@gmx.net>
-Date: Wed, 03 Jan 2007 09:22:01 -0700
-Message-Id: <1167841321.13059.2.camel@fleuret>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.8.2.1 (2.8.2.1-2.fc6) 
-X-Virus-Scanned: ClamAV 0.83/2410/Wed Jan  3 05:58:16 2007 on redwood.mza.com
-X-Virus-Status: Clean
-X-MIME-Autoconverted: from 8bit to quoted-printable by redwood.mza.com id
-	l03GMA50023824
-Subject: Re: Reverse-engineering SD specs for collie
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H29Hk-0001Jw-Vb
+	for openembedded-devel@openembedded.org; Wed, 03 Jan 2007 17:48:17 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l03GkpLr025117; Wed, 3 Jan 2007 17:46:51 +0100
+Message-ID: <459BDDF9.3080001@dominion.kabel.utwente.nl>
+Date: Wed, 03 Jan 2007 17:46:49 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+MIME-Version: 1.0
+To: angstrom-distro-devel@linuxtogo.org
+References: <200701031425.00509.openembedded@hrw.one.pl>
+In-Reply-To: <200701031425.00509.openembedded@hrw.one.pl>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [Angstrom-devel] Results of my mass build of all OE targets for Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,43 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2007 16:23:22 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Jan 2007 16:48:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-I'd pay too.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Wed, 2007-01-03 at 09:59 +0100, Patrik Gfeller wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> =20
-> Rolf Leggewie wrote:
-> |
-> | Would it make sense to set up a bounty to encourage someone to pick t=
-his
-> | up?  I pledge 20=E2=82=AC.
-> ... as I am a collie user as well I would also like to contribute to=20
-> such a bounty - is there a place were we could register such?
->=20
-> I would contribute with 25=E2=82=AC.
->=20
-> regards,
-> Patrik
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (MingW32)
-> =20
-> iD8DBQFFm3BiLkt4gT2qbbYRAu61AKC0ZGwFoj4JiefqUeVwbY0etdn1tACg1gmB
-> IH7P1zSVYM2PdYQEXJ3TbtY=3D
-> =3DgO55
-> -----END PGP SIGNATURE-----
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
+Marcin Juszkiewicz schreef:
+> Before X-mas break I started one big build running on build machine offered 
+> to me by CELF. It was build of 'task-base' (ALL machines) 
+> and 'bootstrap-image' (most of machines - building them now) for ALL OE 
+> machines and Angstrom-2007.1 distribution.
 
+Thanks for doing this. One small niggle: 'bootstrap-image' is unsupported by angstrom.
+Right not only 'angstrom-bootstrap-image' and 'angstrom-gpe-image' (soon to be replaced
+with angstrom-x11-base-image) are supported.
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFm934MkyGM64RGpERAlawAJ9RlBeMqdlLIq9/i+FPSr1w1skI+ACbBxob
+t6o8zFwkmZ3IYv9dfQsZWGU=
+=h5Ym
+-----END PGP SIGNATURE-----
 
 
