@@ -1,28 +1,32 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [132.190.32.66] (helo=eagle.uk.varian.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1H1sJ7-00070c-J2
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jan 2007 23:40:33 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id 048335A4F3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jan 2007 17:37:11 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by out1.internal (MEProxy); Tue, 02 Jan 2007 17:37:11 -0500
-X-Sasl-enc: H+06Xb0uA5bxWcOJc3C+kf8zUEwpT0zar2TVAZuMYBcX 1167777430
-Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id 3990812A99
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jan 2007 17:37:09 -0500 (EST)
-Message-ID: <459ADF1C.4060506@whitby.id.au>
-Date: Wed, 03 Jan 2007 09:09:24 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
+	(envelope-from <gfellerpatrik@gmx.net>) id 1H221H-0005pf-4p
+	for openembedded-devel@openembedded.org; Wed, 03 Jan 2007 10:02:47 +0100
+Received: from sentinel.varian.com (sentinel.varian.com [132.190.92.7])
+	by eagle.uk.varian.com (8.12.11.20060308/8.11.6) with SMTP id
+	l0391bVx013998
+	for <openembedded-devel@openembedded.org>; Wed, 3 Jan 2007 09:01:38 GMT
+Received: from solan.ch.varian.com(132.190.185.172) by sentinel.varian.com via
+	smtp id 75d2_040e96ee_9b09_11db_99c6_001143de74ba;
+	Wed, 03 Jan 2007 09:01:36 +0000
+Received: from [127.0.0.1] (zg5l005.vms.ad.varian.com [132.190.187.168])
+	by solan.ch.varian.com (8.11.6/8.11.6) with ESMTP id l0391Zb30719;
+	Wed, 3 Jan 2007 09:01:35 GMT
+Message-ID: <459B7067.3070202@gmx.net>
+Date: Wed, 03 Jan 2007 09:59:19 +0100
+From: Patrik Gfeller <gfellerpatrik@gmx.net>
+Organization: Varian Medical Systems Int. AG
+User-Agent: Thunderbird 1.5 (Windows/20051201)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <459AB9D0.2090904@dominion.kabel.utwente.nl>
-In-Reply-To: <459AB9D0.2090904@dominion.kabel.utwente.nl>
-Subject: Re: Spurious merges with monotone
+To: openembedded-devel@openembedded.org
+References: <enba1v$ldr$1@sea.gmane.org>	<1167668309.5601.31.camel@localhost.localdomain>
+	<enbglm$6je$1@sea.gmane.org>
+In-Reply-To: <enbglm$6je$1@sea.gmane.org>
+X-Enigmail-Version: 0.94.0.0
+X-MIME-Autoconverted: from 8bit to quoted-printable by eagle.uk.varian.com id
+	l0391bVx013998
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Reverse-engineering SD specs for collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,37 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jan 2007 22:40:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Jan 2007 09:02:47 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Koen Kooi wrote:
-> Someone (or something) just pushed over 170 csets consisting only of merges. Looking at
-> the key that committed them it seems that it was a automatic merge. Could the guilty admin
-> stop that please?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+=20
+Rolf Leggewie wrote:
+|
+| Would it make sense to set up a bounty to encourage someone to pick thi=
+s
+| up?  I pledge 20=80.
+... as I am a collie user as well I would also like to contribute to=20
+such a bounty - is there a place were we could register such?
 
-Apologies - that was (inadvertently) me.
+I would contribute with 25=80.
 
-RP pushed a bitbake change, and I updated it on our autobuilder machine
-(cause that's where the bitbake problem was being exhibited, so it was
-the quickest place to test the fix).  I then did a "make push-bitbake"
-to update our org.nslu2-linux.bitbake branch.
+regards,
+Patrik
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (MingW32)
+=20
+iD8DBQFFm3BiLkt4gT2qbbYRAu61AKC0ZGwFoj4JiefqUeVwbY0etdn1tACg1gmB
+IH7P1zSVYM2PdYQEXJ3TbtY=3D
+=3DgO55
+-----END PGP SIGNATURE-----
 
-Unfortunately, an oversight in our Master Makefile meant that "make
-push-bitbake" did not push just the bitbake branch, but pushed all
-branches (which meant that it pushed all the auto-merges that the
-autobuilder does when org.openembedded.dev has multiple heads).
 
-I have corrected the Makefile so that it only pushes the branch
-requested.  Note that the autobuilder still doesn't auto-push anything -
-it was (and continues to be) a manual choice (and a manual step) to push
-anything back from the autobuilder.
-
-And our monotone.nslu2-linux.org server does not do any merging (it
-leaves multiple heads as-is for developers to deal with), so it cannot
-be the source of such merge cset pushes (unless some other human pushes
-such csets through it).
-
--- Rod
 
 
