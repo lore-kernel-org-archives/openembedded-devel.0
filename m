@@ -1,25 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [212.159.14.132] (helo=pih-relay05.plus.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H29Hk-0001Jw-Vb
-	for openembedded-devel@openembedded.org; Wed, 03 Jan 2007 17:48:17 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l03GkpLr025117; Wed, 3 Jan 2007 17:46:51 +0100
-Message-ID: <459BDDF9.3080001@dominion.kabel.utwente.nl>
-Date: Wed, 03 Jan 2007 17:46:49 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: angstrom-distro-devel@linuxtogo.org
+	(envelope-from <alban@mycroft1.plus.com>) id 1H2GCP-0005xQ-3i
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Jan 2007 01:11:13 +0100
+Received: from [84.92.249.223] (helo=[192.168.0.10])
+	by pih-relay05.plus.net with esmtp (Exim) id 1H2GBE-0006pe-T9
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Jan 2007 00:10:01 +0000
+From: Alban J Pearce <alban@mycroft1.plus.com>
+Organization: Chaos
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 4 Jan 2007 00:10:03 +0000
+User-Agent: KMail/1.9.5
 References: <200701031425.00509.openembedded@hrw.one.pl>
-In-Reply-To: <200701031425.00509.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Cc: openembedded-devel@openembedded.org
+	<459BDDF9.3080001@dominion.kabel.utwente.nl>
+In-Reply-To: <459BDDF9.3080001@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200701040010.03219.alban@mycroft1.plus.com>
 Subject: Re: [Angstrom-devel] Results of my mass build of all OE targets for Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,33 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2007 16:48:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 04 Jan 2007 00:11:13 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Will there be a 'angstrom-opie-image'    or is this dead ??
 
-Marcin Juszkiewicz schreef:
-> Before X-mas break I started one big build running on build machine offered 
-> to me by CELF. It was build of 'task-base' (ALL machines) 
-> and 'bootstrap-image' (most of machines - building them now) for ALL OE 
-> machines and Angstrom-2007.1 distribution.
 
-Thanks for doing this. One small niggle: 'bootstrap-image' is unsupported by angstrom.
-Right not only 'angstrom-bootstrap-image' and 'angstrom-gpe-image' (soon to be replaced
-with angstrom-x11-base-image) are supported.
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFm934MkyGM64RGpERAlawAJ9RlBeMqdlLIq9/i+FPSr1w1skI+ACbBxob
-t6o8zFwkmZ3IYv9dfQsZWGU=
-=h5Ym
------END PGP SIGNATURE-----
+On Wednesday 03 January 2007 16:46, Koen Kooi wrote:
+> Marcin Juszkiewicz schreef:
+> > Before X-mas break I started one big build running on build machine
+> > offered to me by CELF. It was build of 'task-base' (ALL machines)
+> > and 'bootstrap-image' (most of machines - building them now) for ALL OE
+> > machines and Angstrom-2007.1 distribution.
+>
+> Thanks for doing this. One small niggle: 'bootstrap-image' is unsupported
+> by angstrom. Right not only 'angstrom-bootstrap-image' and
+> 'angstrom-gpe-image' (soon to be replaced with angstrom-x11-base-image) are
+> supported.
+>
+> regards,
+>
+> Koen
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> ===========================================================
+> This email has been verified as Virus free
+> Virus Protection and more available at http://www.plus.net
+> ===========================================================
 
 
