@@ -1,23 +1,26 @@
-Received: from [70.85.129.92] (helo=sasquatch.hezmatt.org)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mpalmer@hezmatt.org>) id 1H2Nx3-0004BZ-GC
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jan 2007 09:27:53 +0100
-Received: from [10.6.66.6] (helo=hezmatt.org)
-	by sasquatch.hezmatt.org with esmtp (Exim 3.35 #1 (Debian))
-	id 1H2Nvq-00009J-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jan 2007 19:26:39 +1100
-Received: by hezmatt.org (Postfix, from userid 1000)
-	id 909EA4C2D3; Thu,  4 Jan 2007 19:26:32 +1100 (EST)
-Date: Thu, 4 Jan 2007 19:26:32 +1100
-From: Matthew Palmer <mpalmer@hezmatt.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070104082632.GA11300@hezmatt.org>
-References: <193b6ba30701032221u5d680767q8bc3db738ba89b47@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H2VJT-0000is-0u
+	for openembedded-devel@openembedded.org; Thu, 04 Jan 2007 17:19:31 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l04GI9Lr010152 for <openembedded-devel@openembedded.org>;
+	Thu, 4 Jan 2007 17:18:09 +0100
+Message-ID: <459D28BF.3000208@dominion.kabel.utwente.nl>
+Date: Thu, 04 Jan 2007 17:18:07 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-In-Reply-To: <193b6ba30701032221u5d680767q8bc3db738ba89b47@mail.gmail.com>
-User-Agent: Mutt/1.5.11
-Subject: Re: Help me
+To: openembedded-devel@openembedded.org
+References: <E1H2VAZ-0000cW-1g@linuxtogo.org>
+In-Reply-To: <E1H2VAZ-0000cW-1g@linuxtogo.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev madwifi-ng: add slugos support and bump to	latest snapshot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,37 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2007 08:27:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 04 Jan 2007 16:19:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-[For your own benefit, I'd suggest a better choice of subject line in future]
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Thu, Jan 04, 2007 at 03:21:57PM +0900, Debasree Mallick wrote:
-> Hi,
-> When i try to run this command
-> mtn --db=OE.mtn co -b org.openembedded.dev
-> It givs a error..Error is
-> 
-> mtn: misuse: layout of database /stuff/OE.mtn doesn't match this version
-> of monotone
+mwester commit schreef:
+> madwifi-ng: add slugos support and bump to latest snapshot
 
-You're running a newer version of monotone than the version which was used
-to create the database.  If you just want to get the source, and don't have
-commit access, I've found that:
+> packages/madwifi/files/slugos-VFP-wackelf.patch
+> packages/madwifi/files/slugos-xscale-be-elf-copts.patch
+> packages/madwifi/files/slugos-xscale-le-elf-copts.patch
+> packages/madwifi/madwifi-ng_r1871-20061229.bb
 
-> mtn: misuse: try 'mtn db migrate' to upgrade
+> +SRC_URI_slugos = "http://snapshots.madwifi.org/${PN}/${PN}-${PV}.tar.gz \
+> +		  file://slugos-xscale-be-elf-copts.patch;patch=1 \
+> +		  file://slugos-xscale-le-elf-copts.patch;patch=1 \
+> +		  file://slugos-VFP-wackelf.patch;patch=1"
+> +
 
-Does a nice job of making everything work again (I'm using mtn 0.32).
+Ehm, shouldn't those be machine specific? what happens if I build slugos for powerpc?
 
-I've got no idea if things will still work properly if you're pushing
-changes back to trunk, since I'm not So Blessed.
+regards,
 
-- Matt
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-I don't do veggies if I can help it.			-- stevo
-If you could see your colon, you'd be horrified.	-- Iain Broadfoot
-If he could see his colon, he'd be management.		-- David Scheidt
+iD8DBQFFnSi+MkyGM64RGpERAurmAJ9shLtzRB9T1PoZBtzFEVIR7vqg0QCgndOp
+a2JCeIISh0ZghHjD31o7CFA=
+=PmaW
+-----END PGP SIGNATURE-----
 
 
