@@ -1,21 +1,23 @@
-Received: from [66.249.82.235] (helo=wx-out-0506.google.com)
+Received: from [70.85.129.92] (helo=sasquatch.hezmatt.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <debasreeat@gmail.com>) id 1H2M0N-0000XC-Fi
+	(envelope-from <mpalmer@hezmatt.org>) id 1H2Nx3-0004BZ-GC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jan 2007 07:23:11 +0100
-Received: by wx-out-0506.google.com with SMTP id t14so6586932wxc
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Jan 2007 22:21:57 -0800 (PST)
-Received: by 10.90.52.18 with SMTP id z18mr6398503agz.1167891717872;
-	Wed, 03 Jan 2007 22:21:57 -0800 (PST)
-Received: by 10.90.93.16 with HTTP; Wed, 3 Jan 2007 22:21:57 -0800 (PST)
-Message-ID: <193b6ba30701032221u5d680767q8bc3db738ba89b47@mail.gmail.com>
-Date: Thu, 4 Jan 2007 15:21:57 +0900
-From: "Debasree Mallick" <debasreeat@gmail.com>
+	Thu, 04 Jan 2007 09:27:53 +0100
+Received: from [10.6.66.6] (helo=hezmatt.org)
+	by sasquatch.hezmatt.org with esmtp (Exim 3.35 #1 (Debian))
+	id 1H2Nvq-00009J-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Jan 2007 19:26:39 +1100
+Received: by hezmatt.org (Postfix, from userid 1000)
+	id 909EA4C2D3; Thu,  4 Jan 2007 19:26:32 +1100 (EST)
+Date: Thu, 4 Jan 2007 19:26:32 +1100
+From: Matthew Palmer <mpalmer@hezmatt.org>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070104082632.GA11300@hezmatt.org>
+References: <193b6ba30701032221u5d680767q8bc3db738ba89b47@mail.gmail.com>
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Help me
+In-Reply-To: <193b6ba30701032221u5d680767q8bc3db738ba89b47@mail.gmail.com>
+User-Agent: Mutt/1.5.11
+Subject: Re: Help me
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,26 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2007 06:23:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Jan 2007 08:27:53 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hi,
-When i try to run this command
-mtn --db=OE.mtn co -b org.openembedded.dev
-It givs a error..Error is
+[For your own benefit, I'd suggest a better choice of subject line in future]
 
-mtn: misuse: layout of database /stuff/OE.mtn doesn't match this version
-of monotone
-mtn: misuse: wanted schema ae196843d368d042f475e3dadfed11e9d7f9f01e, got
-48fd5d84f1e5a949ca093e87e5ac558da6e5956d
-mtn: misuse: try 'mtn db migrate' to upgrade
-mtn: misuse: (this is irreversible; you may want to make a backup copy
-first)
+On Thu, Jan 04, 2007 at 03:21:57PM +0900, Debasree Mallick wrote:
+> Hi,
+> When i try to run this command
+> mtn --db=OE.mtn co -b org.openembedded.dev
+> It givs a error..Error is
+> 
+> mtn: misuse: layout of database /stuff/OE.mtn doesn't match this version
+> of monotone
 
-I am using Fedora5...
-Please help me to solve this problem..
-Thanks
-Debasree
+You're running a newer version of monotone than the version which was used
+to create the database.  If you just want to get the source, and don't have
+commit access, I've found that:
+
+> mtn: misuse: try 'mtn db migrate' to upgrade
+
+Does a nice job of making everything work again (I'm using mtn 0.32).
+
+I've got no idea if things will still work properly if you're pushing
+changes back to trunk, since I'm not So Blessed.
+
+- Matt
+
+-- 
+I don't do veggies if I can help it.			-- stevo
+If you could see your colon, you'd be horrified.	-- Iain Broadfoot
+If he could see his colon, he'd be management.		-- David Scheidt
+
 
