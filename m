@@ -1,25 +1,27 @@
-Received: from [64.233.184.232] (helo=wr-out-0506.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <bernardo@bandos.net>) id 1H2pPC-00063Z-2w
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jan 2007 14:46:46 +0100
-Received: by wr-out-0506.google.com with SMTP id 58so1252684wri
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jan 2007 05:45:24 -0800 (PST)
-Received: by 10.78.181.13 with SMTP id d13mr6242121huf.1168004723934;
-	Fri, 05 Jan 2007 05:45:23 -0800 (PST)
-Received: by 10.78.57.6 with HTTP; Fri, 5 Jan 2007 05:45:23 -0800 (PST)
-Message-ID: <3ef3a7ad0701050545s191e3105k3d73ac8494df20a4@mail.gmail.com>
-Date: Fri, 5 Jan 2007 13:45:23 +0000
-From: "=?ISO-8859-1?Q?Jos=E9_Bernardo_Bandos_Rodrigues?=" <bernardo@bandos.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200701040010.03219.alban@mycroft1.plus.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H2pvN-0006Na-N0
+	for openembedded-devel@openembedded.org; Fri, 05 Jan 2007 15:20:01 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l05EIbox008189 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 5 Jan 2007 15:18:38 +0100
+Message-ID: <459E5E3A.5030709@dominion.kabel.utwente.nl>
+Date: Fri, 05 Jan 2007 15:18:34 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-References: <200701031425.00509.openembedded@hrw.one.pl>
-	<459BDDF9.3080001@dominion.kabel.utwente.nl>
-	<200701040010.03219.alban@mycroft1.plus.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: [Angstrom-devel] Results of my mass build of all OE targets for Angstrom
+To: openembedded-devel@openembedded.org
+References: <E1H1X7P-0006QB-FN@linuxtogo.org>	<20070102002938.GA5825@stygia.hyboria>	<1167757388.5592.15.camel@localhost.localdomain>	<459A987C.9050902@dominion.kabel.utwente.nl>
+	<20070102202458.GB5825@stygia.hyboria>
+In-Reply-To: <20070102202458.GB5825@stygia.hyboria>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev aspell: fix compilation for	powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,53 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2007 13:46:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 05 Jan 2007 14:20:02 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-I'm pretty afraid it's dead (or at least unsupported). Too bad, I really
-don't like gpe, too "gnomish" for my taste, but since I can't do the porting
-of opie I can't really complain.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-2007/1/4, Alban J Pearce <alban@mycroft1.plus.com>:
->
-> Will there be a 'angstrom-opie-image'    or is this dead ??
->
->
-> On Wednesday 03 January 2007 16:46, Koen Kooi wrote:
-> > Marcin Juszkiewicz schreef:
-> > > Before X-mas break I started one big build running on build machine
-> > > offered to me by CELF. It was build of 'task-base' (ALL machines)
-> > > and 'bootstrap-image' (most of machines - building them now) for ALL
-> OE
-> > > machines and Angstrom-2007.1 distribution.
-> >
-> > Thanks for doing this. One small niggle: 'bootstrap-image' is
-> unsupported
-> > by angstrom. Right not only 'angstrom-bootstrap-image' and
-> > 'angstrom-gpe-image' (soon to be replaced with angstrom-x11-base-image)
-> are
-> > supported.
-> >
-> > regards,
-> >
-> > Koen
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> > ===========================================================
-> > This email has been verified as Virus free
-> > Virus Protection and more available at http://www.plus.net
-> > ===========================================================
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Graeme Gregory schreef:
+> On Tue, Jan 02, 2007 at 06:38:04PM +0100, Koen Kooi wrote:
+>> Can we agree that .la files shouldn't contain references to tmp/work? Any volunteers for
+>> adding the necessary logic to the appropriate bbclass?
+>>
+>> regards,
+>>
+> 
+> I think adding some sed along the lines of this in gcc staging should
+> cure the problem. As I beleive the "wrongness" leaks out of gcc when
+> libtool starts making other .la files (it seem to just concatentate
+> lines from dependant .la files)
+> 
+> sed -e "s|dependency_libs\s*=\s*.*|dependency_libs = '
+> -L${CROSS_DIR}/${HOST_SYS}/lib -lgcc_s -lc -lgcc_s -lm -lgcc_s -lc
+> -lgcc_s '|"
+> 
+> I have previously used this in my build personally to fix such problems,
+> but would appreciate someone giving a second look over and someone
+> familiar with the appropriate .bbclasses to put it in the right place.
+
+I think this can go into the do_stage_append() method of packages/gcc/gcc3-build-cross.inc
+for libgcc, libgcc_s, libstdc++ and libsupc++.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFnl46MkyGM64RGpERApOiAKCVwR+zEIrDmo1tdrxSw/I0nHcpVgCdHi+a
++XRVPWUAmgz5z6wo6E7CmXg=
+=G0jt
+-----END PGP SIGNATURE-----
+
 
