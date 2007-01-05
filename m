@@ -1,16 +1,16 @@
-Received: from [66.249.82.231] (helo=wx-out-0506.google.com)
+Received: from [66.249.82.233] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <debasreeat@gmail.com>) id 1H2jZ9-0006fK-Ut
+	(envelope-from <debasreeat@gmail.com>) id 1H2jZf-0006gy-Aa
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jan 2007 08:32:40 +0100
-Received: by wx-out-0506.google.com with SMTP id t14so6908831wxc
+	Fri, 05 Jan 2007 08:33:11 +0100
+Received: by wx-out-0506.google.com with SMTP id t14so6908989wxc
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jan 2007 23:31:20 -0800 (PST)
-Received: by 10.90.78.1 with SMTP id a1mr573615agb.1167982280106;
-	Thu, 04 Jan 2007 23:31:20 -0800 (PST)
-Received: by 10.90.95.17 with HTTP; Thu, 4 Jan 2007 23:31:20 -0800 (PST)
-Message-ID: <193b6ba30701042331p6ca582e9qcdec83caa9445dba@mail.gmail.com>
-Date: Fri, 5 Jan 2007 16:31:20 +0900
+	Thu, 04 Jan 2007 23:31:51 -0800 (PST)
+Received: by 10.90.49.19 with SMTP id w19mr610890agw.1167982311362;
+	Thu, 04 Jan 2007 23:31:51 -0800 (PST)
+Received: by 10.90.95.17 with HTTP; Thu, 4 Jan 2007 23:31:51 -0800 (PST)
+Message-ID: <193b6ba30701042331sf7ae4e6v87943eae232dfa17@mail.gmail.com>
+Date: Fri, 5 Jan 2007 16:31:51 +0900
 From: "Debasree Mallick" <debasreeat@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <20070104082632.GA11300@hezmatt.org>
@@ -18,7 +18,7 @@ MIME-Version: 1.0
 References: <193b6ba30701032221u5d680767q8bc3db738ba89b47@mail.gmail.com>
 	<20070104082632.GA11300@hezmatt.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: Help me
+Subject: Help me
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2007 07:32:40 -0000
+X-List-Received-Date: Fri, 05 Jan 2007 07:33:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
