@@ -1,24 +1,23 @@
-Received: from [66.249.82.233] (helo=wx-out-0506.google.com)
+Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <debasreeat@gmail.com>) id 1H2jZf-0006gy-Aa
+	(envelope-from <pmiscml@gmail.com>) id 1H2jb6-0006l2-TU
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jan 2007 08:33:11 +0100
-Received: by wx-out-0506.google.com with SMTP id t14so6908989wxc
+	Fri, 05 Jan 2007 08:34:40 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so7615446nfc
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jan 2007 23:31:51 -0800 (PST)
-Received: by 10.90.49.19 with SMTP id w19mr610890agw.1167982311362;
-	Thu, 04 Jan 2007 23:31:51 -0800 (PST)
-Received: by 10.90.95.17 with HTTP; Thu, 4 Jan 2007 23:31:51 -0800 (PST)
-Message-ID: <193b6ba30701042331sf7ae4e6v87943eae232dfa17@mail.gmail.com>
-Date: Fri, 5 Jan 2007 16:31:51 +0900
-From: "Debasree Mallick" <debasreeat@gmail.com>
+	Thu, 04 Jan 2007 23:33:21 -0800 (PST)
+Received: by 10.49.68.6 with SMTP id v6mr14932055nfk.1167982401258;
+	Thu, 04 Jan 2007 23:33:21 -0800 (PST)
+Received: from CUBE ( [82.193.96.238])
+	by mx.google.com with ESMTP id y24sm95188486nfb.2007.01.04.23.33.20;
+	Thu, 04 Jan 2007 23:33:21 -0800 (PST)
+Date: Fri, 5 Jan 2007 09:33:34 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <76520598.20070105093334@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20070104082632.GA11300@hezmatt.org>
 MIME-Version: 1.0
-References: <193b6ba30701032221u5d680767q8bc3db738ba89b47@mail.gmail.com>
-	<20070104082632.GA11300@hezmatt.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Help me
+Subject: Fixing ipkg-make-index slowness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,60 +31,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2007 07:33:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 05 Jan 2007 07:34:41 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi,
-monotone has installed..
-But when i try to run bitbake nano command
-it shows some error at the end..
-Errors r
-ERROR: TaskFailed event exception, aborting
-NOTE: package fakeroot-native-1.2.13: failed
-ERROR: Build of nano failed
+Hello ,
 
-If u can then please help me out...
-Thanks
-Debasree
+      I bragged some time ago on IRC that I sped up ipkg-make-index
+few times, and recently, question of ipkg-make-index slowness was
+brought on ML too. So, I grasped my old patches wanting to submit it,
+but of course it appeared not that easy. I've identified two causes of
+slowness, each discussed separately below.
 
-On 1/4/07, Matthew Palmer <mpalmer@hezmatt.org> wrote:
->
-> [For your own benefit, I'd suggest a better choice of subject line in
-> future]
->
-> On Thu, Jan 04, 2007 at 03:21:57PM +0900, Debasree Mallick wrote:
-> > Hi,
-> > When i try to run this command
-> > mtn --db=OE.mtn co -b org.openembedded.dev
-> > It givs a error..Error is
-> >
-> > mtn: misuse: layout of database /stuff/OE.mtn doesn't match this version
-> > of monotone
->
-> You're running a newer version of monotone than the version which was used
-> to create the database.  If you just want to get the source, and don't
-> have
-> commit access, I've found that:
->
-> > mtn: misuse: try 'mtn db migrate' to upgrade
->
-> Does a nice job of making everything work again (I'm using mtn 0.32).
->
-> I've got no idea if things will still work properly if you're pushing
-> changes back to trunk, since I'm not So Blessed.
->
-> - Matt
->
-> --
-> I don't do veggies if I can help it.                    -- stevo
-> If you could see your colon, you'd be horrified.        -- Iain Broadfoot
-> If he could see his colon, he'd be management.          -- David Scheidt
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+      All benchmarking was done on ipk repo of 5886 files and 245MB
+total size, by running "bitbake package-index".
+
+
+1. md5sum thrashing
+
+In the summer, RP introduced patch for i-m-i ironically called
+index_speedup.patch:
+http://www.openembedded.org/bonsai/view/rev/17477/
+It does following: If there's already Packages file exists, i-m-i
+takes metadata from it, instead of parsing ipk's themselves. Before
+this patch, such a cache was used simply when ipk file's name matched
+filename recorded in Packages. RP added check for filesize, and also
+for md5sum of the ipk's content. That means if you have Packages
+file, and want to index few new ipk's, i-m-i will happily thrash over
+each byte of entire package repo you have (like 26Gb). On my
+repo running "bitbake package-index" with already existing and
+up-to-date Packages led to:
+
+i-m-i/md5sum
+real    2m1.219s
+
+i-m-i/no-md5sum
+real    0m53.294s
+
+
+Richard, what were the reasons for such conservative file matching?
+Filename matching should be just enough, as per OE convention, any
+package source changes leading to changes in the package metadata must
+lead to bumping of package recipe's PR, and that in turn updates package
+filename. Whoever don't follow PR update convention either call for
+trouble, and no checks could really help them, or know what they do
+(like bother to rebuild Packages from scratch). In this regard,
+checking ipk size is the great convenience for adventurous, because
+it's really high probability that update of any package metadata will
+lead to change of file size due to compression. In other words, I
+propose to remove md5sum check.
+
+
+2. Unix process thrashing
+
+Ok, that was cause of slowdown with already made Packages. Now, major
+annoyance is (re)creating it or adding large number of packages. This
+due to ar, tar, gz, being spawned for each ipk. Multiple Unix process
+handling inefficiency by thousands files, and we get what we have.
+
+So, I just took tarfile module from Python 2.3+, created arfile which
+is not in Python, and I even failed to google it, and made them work
+recursively one on another. Results:
+
+i-m-i/spawn
+real    14m30.239s
+
+i-m-i/tarfile
+real    5m21.950s
+
+(Btw, I swear I was getting 6-7 times speed when I initially tried it
+on Familiar buildtree.)
+
+There's a small regression though: with this change, only deb-style
+ipk's are supported. This shouldn't be an issue, as OE (and current
+ipkg) generates exactly such ipks. And I envy people who used to know
+and still remember what is the other ipk format ;-).
+
+The patch is posted as:
+http://bugs.openembedded.org/show_bug.cgi?id=1751
+
+
+I hope that this analysis and changes/patches proposed will be of use
+to someone.
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
+
+
 
