@@ -1,30 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.184.232] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1H2neF-0002ai-OA
-	for openembedded-devel@openembedded.org; Fri, 05 Jan 2007 12:54:11 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l05Bqpa0003309
-	for <openembedded-devel@openembedded.org>; Fri, 5 Jan 2007 11:52:51 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 03108-05 for <openembedded-devel@openembedded.org>;
-	Fri,  5 Jan 2007 11:52:49 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l05BqiWS003301
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 5 Jan 2007 11:52:44 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <76520598.20070105093334@gmail.com>
-References: <76520598.20070105093334@gmail.com>
-Date: Fri, 05 Jan 2007 11:52:44 +0000
-Message-Id: <1167997964.5601.31.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Fixing ipkg-make-index slowness
+	(envelope-from <bernardo@bandos.net>) id 1H2pPC-00063Z-2w
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Jan 2007 14:46:46 +0100
+Received: by wr-out-0506.google.com with SMTP id 58so1252684wri
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Jan 2007 05:45:24 -0800 (PST)
+Received: by 10.78.181.13 with SMTP id d13mr6242121huf.1168004723934;
+	Fri, 05 Jan 2007 05:45:23 -0800 (PST)
+Received: by 10.78.57.6 with HTTP; Fri, 5 Jan 2007 05:45:23 -0800 (PST)
+Message-ID: <3ef3a7ad0701050545s191e3105k3d73ac8494df20a4@mail.gmail.com>
+Date: Fri, 5 Jan 2007 13:45:23 +0000
+From: "=?ISO-8859-1?Q?Jos=E9_Bernardo_Bandos_Rodrigues?=" <bernardo@bandos.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200701040010.03219.alban@mycroft1.plus.com>
+MIME-Version: 1.0
+References: <200701031425.00509.openembedded@hrw.one.pl>
+	<459BDDF9.3080001@dominion.kabel.utwente.nl>
+	<200701040010.03219.alban@mycroft1.plus.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: [Angstrom-devel] Results of my mass build of all OE targets for Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,44 +33,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2007 11:54:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 05 Jan 2007 13:46:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Paul,
+I'm pretty afraid it's dead (or at least unsupported). Too bad, I really
+don't like gpe, too "gnomish" for my taste, but since I can't do the porting
+of opie I can't really complain.
 
-On Fri, 2007-01-05 at 09:33 +0200, Paul Sokolovsky wrote:
-> 1. md5sum thrashing
-> 
-> In the summer, RP introduced patch for i-m-i ironically called
-> index_speedup.patch:
-
-There is nothing ironic about it, it does speed up the process ;-).
-md5suming the files was faster than actually parsing them.
-
-> Richard, what were the reasons for such conservative file matching?
-> Filename matching should be just enough, as per OE convention, any
-> package source changes leading to changes in the package metadata must
-> lead to bumping of package recipe's PR, and that in turn updates package
-> filename. Whoever don't follow PR update convention either call for
-> trouble, and no checks could really help them, or know what they do
-> (like bother to rebuild Packages from scratch). In this regard,
-> checking ipk size is the great convenience for adventurous, because
-> it's really high probability that update of any package metadata will
-> lead to change of file size due to compression. In other words, I
-> propose to remove md5sum check.
-
-See Koen's reply.
-
-The way forward is to store more information in the index, namely the
-last modified timestamp for the file. If you add that and compare
-timestamp+size, you can safely skip the md5sum check.
-
-I can't remember why I didn't do that, it could have been a time thing.
-It does mean adding a new field to the Packages file and that could also
-have had implications elsewhere, I can't remember...
-
-Richard
-
-
+2007/1/4, Alban J Pearce <alban@mycroft1.plus.com>:
+>
+> Will there be a 'angstrom-opie-image'    or is this dead ??
+>
+>
+> On Wednesday 03 January 2007 16:46, Koen Kooi wrote:
+> > Marcin Juszkiewicz schreef:
+> > > Before X-mas break I started one big build running on build machine
+> > > offered to me by CELF. It was build of 'task-base' (ALL machines)
+> > > and 'bootstrap-image' (most of machines - building them now) for ALL
+> OE
+> > > machines and Angstrom-2007.1 distribution.
+> >
+> > Thanks for doing this. One small niggle: 'bootstrap-image' is
+> unsupported
+> > by angstrom. Right not only 'angstrom-bootstrap-image' and
+> > 'angstrom-gpe-image' (soon to be replaced with angstrom-x11-base-image)
+> are
+> > supported.
+> >
+> > regards,
+> >
+> > Koen
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> > ===========================================================
+> > This email has been verified as Virus free
+> > Virus Protection and more available at http://www.plus.net
+> > ===========================================================
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
