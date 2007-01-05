@@ -1,27 +1,26 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H2ltB-0002LI-8M
-	for openembedded-devel@openembedded.org; Fri, 05 Jan 2007 11:01:42 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l05A01ox025466 for <openembedded-devel@openembedded.org>;
-	Fri, 5 Jan 2007 11:00:01 +0100
-Message-ID: <459E219E.3000104@dominion.kabel.utwente.nl>
-Date: Fri, 05 Jan 2007 10:59:58 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <philipp.zabel@gmail.com>) id 1H2m8S-000274-Vy
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Jan 2007 11:17:21 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so5279913ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Jan 2007 02:15:56 -0800 (PST)
+Received: by 10.78.164.13 with SMTP id m13mr2883987hue.1167992156630;
+	Fri, 05 Jan 2007 02:15:56 -0800 (PST)
+Received: by 10.78.194.1 with HTTP; Fri, 5 Jan 2007 02:15:56 -0800 (PST)
+Message-ID: <74d0deb30701050215t42ea20d6w9d3ae78d9817cea4@mail.gmail.com>
+Date: Fri, 5 Jan 2007 11:15:56 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <459E1747.8000500@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <76520598.20070105093334@gmail.com>	<459E18AF.5040308@dominion.kabel.utwente.nl>
-	<1725097716.20070105113313@gmail.com>
-In-Reply-To: <1725097716.20070105113313@gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Fixing ipkg-make-index slowness
+References: <53610736.20061228191750@gmail.com>
+	<1167392044.5616.16.camel@localhost.localdomain>
+	<271237233.20070104210332@gmail.com>
+	<200701050941.46341.openembedded@hrw.one.pl>
+	<459E1747.8000500@dominion.kabel.utwente.nl>
+Subject: Re: [Angstrom-devel] [RFC] Get rid of adhoc machine-specific messing with [linux-handhelds-2.6] kernel packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,48 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2007 10:01:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 05 Jan 2007 10:17:23 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Paul Sokolovsky schreef:
-> Hello Koen,
-> 
-> Friday, January 5, 2007, 11:21:51 AM, you wrote:
-> 
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
-> 
->> Paul Sokolovsky schreef:
-> 
->>> Richard, what were the reasons for such conservative file matching?
->>> Filename matching should be just enough, as per OE convention, any
->>> package source changes leading to changes in the package metadata must
->>> lead to bumping of package recipe's PR, and that in turn updates package
->>> filename.
-> 
->> It isn't enough. If you repackages the exact same files at a later date, the timestamps in
->> the tarball have changed, and hence the md5 will be different. When a user will download a
->> package ipkg will check the md5sum present in the index and abort if it doesn't match.
-> 
->   Then we probably need to separate image building from feed
-> creation/setup. IIRC, i-m-i currently run during image building
-> too, and it steals precious minutes from each developer (vs
-> distro/feed maintainer) multiple times a day. Having Packages
-> to be updated only by explicit "bitbake package-index" seems
-> like good compromise and corresponds to the docs which suggest
-> to do that explicitly.
-
-You just broke image creation with your suggestion.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFniGeMkyGM64RGpERAuWLAJ4y9QdBlHDOykCtrTeaXUlAIt43swCggJEw
-0hcn6JzjHod58DCGCLNtJ64=
-=9Gmb
------END PGP SIGNATURE-----
+T24gMS81LzA3LCBLb2VuIEtvb2kgPGtvZW5AZG9taW5pb24ua2FiZWwudXR3ZW50ZS5ubD4gd3Jv
+dGU6Cj4gLS0tLS1CRUdJTiBQR1AgU0lHTkVEIE1FU1NBR0UtLS0tLQo+IEhhc2g6IFNIQTEKPgo+
+IE1hcmNpbiBKdXN6a2lld2ljeiBzY2hyZWVmOgo+ID4gRG5pYSBjendhcnRlaywgNCBzdHljem5p
+YSAyMDA3IDIwOjAzLCBQYXVsIFNva29sb3Zza3kgbmFwaXNhszoKPgo+ID4+ICAgQnV0IGFueXdh
+eSwgSSB0aGluayB0aGF0IFJPT1RGU19QT1NUUFJPQ0VTU19DT01NQU5EICs9Cj4gPj4gInJlbW92
+ZV96aW1hZ2VzOyAiIHRoaW5nIGlzIHN0aWxsIHVzZWZ1bC4gSXQgZG9lc24ndCBtZWFuIHRoYXQg
+bWFjaGluZXMKPiA+PiBzaG91bGQgc3dpdGNoIHRvIGl0LCBidXQgaXQgb2ZmZXJzIG5pY2UsIHBv
+dGVudGlhbGx5Cj4gPj4gbWFjaGluZS1pbmRlcGVuZGVudCwgd2F5IHRvIHJlbW92ZSB6SW1hZ2Ug
+ZmlsZSBmcm9tIHRoZSBpbWFnZS4KPiA+Cj4gPiBXaGljaCB3aWxsIGdldCBiYWNrIHdoZW4gdXNl
+ciB1cGRhdGUga2VybmVsLWltYWdlIHBhY2thZ2UuIFdoaWNoIGlzIEJBRC4KPgo+IEkgdGhpbmsg
+dGhlIGVhc2llc3Qgc29sdXRpb24gaXMgdG8gcmVtb3ZlIGVtcHR5IGtlcm5lbC1pbWFnZSogZmls
+ZXMgZnJvbSB0aGUgZmVlZHMuCgpCdXQgd2UgdGhlbiBzb21laG93IGhhdmUgdG8gcHJvdmlkZSB1
+c2VycyB3aXRoIHRoZSBlbXB0eSBrZXJuZWwtaW1hZ2UgcGFja2FnZXMKdG9nZXRoZXIgd2l0aCB0
+aGUgekltYWdlIHNvIHRoYXQgdGhleSBjYW4gdXBkYXRlIHRoZWlyIG1vZHVsZSBwYWNrYWdlcwpm
+cm9tIHRoZSBmZWVkcwpiZWZvcmUgZmxhc2hpbmcgYSBuZXcga2VybmVsLgoKcmVnYXJkcwpQaGls
+aXBwCg==
 
 
