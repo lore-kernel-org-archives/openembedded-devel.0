@@ -1,24 +1,22 @@
-Received: from [70.85.129.92] (helo=sasquatch.hezmatt.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mpalmer@hezmatt.org>) id 1H2kgc-0000HP-D1
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jan 2007 09:44:26 +0100
-Received: from [10.6.66.6] (helo=hezmatt.org)
-	by sasquatch.hezmatt.org with esmtp (Exim 3.35 #1 (Debian))
-	id 1H2kfJ-00048g-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jan 2007 19:43:05 +1100
-Received: by hezmatt.org (Postfix, from userid 1000)
-	id 478C74B576; Fri,  5 Jan 2007 19:43:03 +1100 (EST)
-Date: Fri, 5 Jan 2007 19:43:03 +1100
-From: Matthew Palmer <mpalmer@hezmatt.org>
+	(envelope-from <openembedded@hrw.one.pl>) id 1H2krr-0000OW-FE
+	for openembedded-devel@openembedded.org; Fri, 05 Jan 2007 09:56:03 +0100
+Received: (qmail 22995 invoked by uid 813007); 5 Jan 2007 08:54:42 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.100?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 5 Jan 2007 08:54:42 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070105084303.GA3124@hezmatt.org>
+Date: Fri, 5 Jan 2007 09:54:41 +0100
+User-Agent: KMail/1.9.5
 References: <193b6ba30701050001t75ae1356s3bfb93e4834e1ba7@mail.gmail.com>
-	<432beae0701050004n59458e75s53436646452806c0@mail.gmail.com>
 	<193b6ba30701050014t25df7b5cw16cd8b1eb40995ef@mail.gmail.com>
+	<20070105084303.GA3124@hezmatt.org>
+In-Reply-To: <20070105084303.GA3124@hezmatt.org>
 MIME-Version: 1.0
-In-Reply-To: <193b6ba30701050014t25df7b5cw16cd8b1eb40995ef@mail.gmail.com>
-User-Agent: Mutt/1.5.11
+Message-Id: <200701050954.42436.openembedded@hrw.one.pl>
 Subject: Re: Please help me
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,47 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2007 08:44:26 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 05 Jan 2007 08:56:03 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-[Again, a relevant subject line would help]
+Dnia pi=B1tek, 5 stycznia 2007 09:43, Matthew Palmer napisa=B3:
 
-On Fri, Jan 05, 2007 at 05:14:18PM +0900, Debasree Mallick wrote:
-> When i type bitbake nano...then
+> Ooooh bugger. =A0It looks like the source mirror has lost the fakeroot
+> tarball;
 
-[snip]
+OpenZaurus website moved from SourceForge to LinuxToGo. I'm now populating=
+=20
+old mirror content.
 
-> NOTE: package fakeroot-native-1.2.13: started
-> NOTE: package fakeroot-native-1.2.13-r1: task do_fetch: started
-> NOTE: fetch http://openzaurus.org/mirror/fakeroot_1.2.13.tar.gz
-> --17:11:00--  http://openzaurus.org/mirror/fakeroot_1.2.13.tar.gz
->            => `/root/sources/fakeroot_1.2.13.tar.gz'
-> Resolving openzaurus.org... 85.214.40.226
-> Connecting to openzaurus.org|85.214.40.226|:80... connected.
-> HTTP request sent, awaiting response... 302 Found
-> Location: http://openzaurus.linuxtogo.org/mirror/fakeroot_1.2.13.tar.gz[following]
-> --17:11:01--  http://openzaurus.linuxtogo.org/mirror/fakeroot_1.2.13.tar.gz
->            => `/root/sources/fakeroot_1.2.13.tar.gz'
-> Resolving openzaurus.linuxtogo.org... 85.214.40.226
-> Reusing existing connection to openzaurus.org:80.
-> HTTP request sent, awaiting response... 404 Not Found
-> 17:11:02 ERROR 404: Not Found.
+> but that's a pretty old version of fakeroot -- I'm surprised there isn't
+> a newer version in the tree. =20
 
-Ooooh bugger.  It looks like the source mirror has lost the fakeroot
-tarball; but that's a pretty old version of fakeroot -- I'm surprised there
-isn't a newer version in the tree.  I've never needed to build fakeroot to
-build things like nano, though.  That might be because I've already got
-fakeroot installed on my machine, though, so perhaps you could give that a
-shot?  It's not a /solution/, as such, but it'll at least get you going. 
-Meanwhile, someone probably needs to either find that source tarball again,
-or update the tree to use a newer version of fakeroot.
+patches welcome
 
-- Matt
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
--- 
-With enough people around there's a probability ~=1 that one of them is an
-MCSE and will give you the wrong answer to your problem.
-	-- Toni Lassila, in the Monastery
+                    Resistance Is Useless! (If < 1 ohm)
+
+
 
 
