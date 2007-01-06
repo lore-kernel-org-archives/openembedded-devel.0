@@ -1,18 +1,36 @@
-Received: from [198.82.23.9] (helo=www.balister.org)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <philip@balister.org>) id 1H2u78-0006eC-7U
-	for openembedded-devel@openembedded.org; Fri, 05 Jan 2007 19:48:26 +0100
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by www.balister.org (8.13.8/8.13.8) with ESMTP id l05IkmEc004277
-	for <openembedded-devel@openembedded.org>;
-	Fri, 5 Jan 2007 13:46:48 -0500
-Message-ID: <459E9D17.6020701@balister.org>
-Date: Fri, 05 Jan 2007 13:46:47 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 1.5.0.9 (X11/20061219)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-Subject: OE merchandise for sale at FOSDEM
+	(envelope-from <lenehan@twibble.org>) id 1H31vs-0005WO-S3
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Jan 2007 04:09:21 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id 79310D430F
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Jan 2007 14:07:55 +1100 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 31049-08
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 6 Jan 2007 14:07:53 +1100 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 9D5C0D430E
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Jan 2007 14:07:53 +1100 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 87D03163D445; Sat,  6 Jan 2007 14:07:53 +1100 (EST)
+Date: Sat, 6 Jan 2007 14:07:53 +1100
+From: Jamie Lenehan <lenehan@twibble.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070106030753.GA17260@twibble.org>
+Mail-Followup-To: Jamie Lenehan <lenehan@twibble.org>,
+	openembedded-devel@lists.openembedded.org
+References: <20061229001129.GA5501@hezmatt.org>
+	<1167394324.5616.20.camel@localhost.localdomain>
+Mime-Version: 1.0
+In-Reply-To: <1167394324.5616.20.camel@localhost.localdomain>
+User-Agent: Mutt/1.4.2.1i
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: Re: What's with the symlinks?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -26,102 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2007 18:48:26 -0000
-X-Groupsio-MsgNum: 1107
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms030201030503060709050801"
+X-List-Received-Date: Sat, 06 Jan 2007 03:09:21 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------ms030201030503060709050801
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+On Fri, Dec 29, 2006 at 12:12:03PM +0000, Richard Purdie wrote:
+> On Fri, 2006-12-29 at 11:11 +1100, Matthew Palmer wrote:
+> > Everywhere I go while assembling my OE build tree, I see admonishments not
+> > to use a path that has symlinks in it.  For such a major problem, the only
+> > real information on the actual problem is a fairly cryptic entry in the FAQ,
+> > about a failure to build libtool-native.
+> > 
+> > Being an intensely curious kind of person, and not enjoying arbitrary
+> > limits, I'm very interested to know what the *real* reason behind being so
+> > strongly against the much-maligned symlink.  Can anyone enlighten me?
+> 
+> People have explained the reason but you can use paths with symlinks in
+> *if* you're careful. Basically, you need to ensure the environmental
 
-I was poking around the web and found mention of some of the other 
-organizations with booths at FOSDEM having items to give away or sell. 
-Now, since we do not have any serious revenue coming from OE, giving 
-stuff away isn't a great idea :)
+It's also possible to use bind mounts, which lets you mount one
+subdirectory over another subdirectory, to achieve a similiar sort of
+effect. I have my oe stuff in ~/devel/oe which is a bind mount from a
+seperate disk:
 
-However, we could try selling stuff, such as T-shirts, ouse pads etc at 
-FOSDEM to generate some cash to benefit the OE project.
+  [nynaeve][ 2:02PM]~/devel/oe%> df -h .
+  Filesystem            Size  Used Avail Use% Mounted on
+  /u/5QF1E359/oe        294G   69G  226G  24% /home/lenehan/devel/oe
+  [nynaeve][ 2:02PM]~/devel/oe%> cat /etc/fstab | grep oe
+  /u/5QF1E359/oe          /home/lenehan/devel/oe  none    bind            0 0
+  [nynaeve][ 2:04PM]~/devel/oe%> mount | grep 5QF1E359
+  /dev/sdc2 on /u/5QF1E359 type ext3 (rw)
+  /u/5QF1E359/oe on /home/lenehan/devel/oe type none (rw,bind)
 
-Unfortunately, I am coming to FOSDEM from the US, so I can't really take 
-care of getting stuff made and bringing it over. Furthermore, I am 
-artistically impaired so I can't supply cool artwork. I would be glad to 
-help man the booth and try to sell stuff.
+So instead of a symlink from ~/devel/oe to /u/5QF1E359/oe I mounted (via a
+bind mount) /u/5QF1E359/oe on ~/devel/oe
 
-So I have three questions:
+-- 
+ Jamie Lenehan <lenehan@twibble.org>
 
-1) Do people with actual FOSDEM experience believe we could actually 
-sale enough OE merchandise to make money?
 
-2) Does anyone have any good ideas for things to sell?
-
-3) Does anyone have the time/knowledge/funding to make merchandise?
-
-Philip
-
---------------ms030201030503060709050801
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEBHvMir6xnUSDyiLP20+hb4wDQYJKoZIhvcNAQEEBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA2MDQxNDEyNDMyNVoXDTA3MDQxNDEyNDMy
-NVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq3dpPM5m9xXgeamg5R4O98aJ573uQPAU0hARVdQQeipeYZTD
-642AZkuc0T+u+pTHVGp2RYX8/2ihbnSxqDMXiYsaKG5q+7QVXIe/gIQSD1WhmDUcDaZ9cFU04ogh
-SosFnIQFDzgde1Npi0hixmAUR/W0yJ/h1qAw4Gl5+RA+XMD7bSQ8JzbnaVyxzHa7lWz2TtT7SG7U
-+xBKaxUoPiujB86EZplhKaK/aBNi1Qexo6ibCzr5L0MalCyTY0wyvLkuB8fVLneGmS9k+FixKnET
-n/AI5dv1Rvnw98pT1iLdxD9bxaygntLM43B+MFrk7ovEUS5kKnIaOVq8szeo/eRUXwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEEBQADgYEAieX+0Zb3MOoVi4spKQb4SE/qINe6cqFUBKcQWh5AjcOlr8UQlKr5kv2KXGlg786S
-s6svdkqqI8ecfLbzT/mi1fSHAIoXIRwoVZATRto7UUW7RjHq9too/h2Ady0cFMCheKA/qRZ6ptRh
-8JCIoqnvD5EGexK1Tk4OPeeBlK9QuocwggL9MIICZqADAgECAhAR7zIq+sZ1Eg8oiz9tPoW+MA0G
-CSqGSIb3DQEBBAUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wNjA0MTQxMjQzMjVaFw0wNzA0MTQxMjQzMjVaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKt3aTzOZvcV
-4HmpoOUeDvfGiee97kDwFNIQEVXUEHoqXmGUw+uNgGZLnNE/rvqUx1RqdkWF/P9ooW50sagzF4mL
-Gihuavu0FVyHv4CEEg9VoZg1HA2mfXBVNOKIIUqLBZyEBQ84HXtTaYtIYsZgFEf1tMif4dagMOBp
-efkQPlzA+20kPCc252lcscx2u5Vs9k7U+0hu1PsQSmsVKD4rowfOhGaZYSmiv2gTYtUHsaOomws6
-+S9DGpQsk2NMMry5LgfH1S53hpkvZPhYsSpxE5/wCOXb9Ub58PfKU9Yi3cQ/W8WsoJ7SzONwfjBa
-5O6LxFEuZCpyGjlavLM3qP3kVF8CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBAUAA4GBAInl/tGW9zDqFYuLKSkG+EhP6iDX
-unKhVASnEFoeQI3Dpa/FEJSq+ZL9ilxpYO/OkrOrL3ZKqiPHnHy280/5otX0hwCKFyEcKFWQE0ba
-O1FFu0Yx6vbaKP4dgHctHBTAoXigP6kWeqbUYfCQiKKp7w+RBnsStU5ODj3ngZSvULqHMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAR7zIq+sZ1Eg8oiz9tPoW+MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MDEwNTE4
-NDY0N1owIwYJKoZIhvcNAQkEMRYEFLi3meJyf+kK9yLISn+FFVjMSxPJMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQEe8yKvrGdRIPKIs/bT6FvjCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQEe8yKvrGdRIPKIs/bT6F
-vjANBgkqhkiG9w0BAQEFAASCAQAlJUZf1iQZcslcHILaQ24TbEhy0Ii5BJIOZnth29RdRWaQ0dz/
-TlLiIKp/VkMD+1QqY+jWXYSYrISIWSWtvXU9gtFM/UzfIX2GgnbLA+SgX0PX3BVQZGGHKILYqXM+
-Aqs4K53L/tDeNj7i6cc5PNn801FfJwgOqyg/VYGKzCvLGEZjBknLb9U5drjgFU1PduhOCoutuYwy
-03tXitNAjSJ84V/zIX9G85KZXwdLQJ/g7kYKG8w/wnsMTH13i1kT6RspA8DLMyXAHNvLCIqYUiTU
-K43lAG+YXZiis/tYa1yYDLkGJjsVoCocWg803UhY2Y6MaW3lHA2RoXauIk8dy/3GAAAAAAAA
-
---------------ms030201030503060709050801--
