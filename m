@@ -1,16 +1,16 @@
 Received: from [209.242.20.70] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1H3FAc-0007kn-FT
+	(envelope-from <mwester@dls.net>) id 1H3FBD-0007lz-RK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Jan 2007 18:17:26 +0100
+	Sat, 06 Jan 2007 18:18:03 +0100
 Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 7E3954125F8
+	by green.dls.net (Postfix) with ESMTP id BB8D541287A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Jan 2007 11:16:03 -0600 (CST)
-Message-ID: <0b4101c731b6$3d339cb0$6e01a8c0@twilight>
+	Sat,  6 Jan 2007 11:16:40 -0600 (CST)
+Message-ID: <0b4201c731b6$537d7bd0$6e01a8c0@twilight>
 From: "Mike \(mwester\)" <mwester@dls.net>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 6 Jan 2007 11:15:18 -0600
+Date: Sat, 6 Jan 2007 11:15:51 -0600
 MIME-Version: 1.0
 X-Priority: 3
 X-MSMail-Priority: Normal
@@ -30,45 +30,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Jan 2007 17:17:26 -0000
+X-List-Received-Date: Sat, 06 Jan 2007 17:18:04 -0000
 Content-Type: text/plain;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-> mwester commit schreef:
-> > madwifi-ng: add slugos support and bump to latest snapshot
->
-[snip]
->
-> Ehm, shouldn't those be machine specific? what happens if  I build slugos
-for powerpc?
->
-> regards,
->
-> Koen
+> Is there a reason why these patches are slugos-specific? I'm
+> wondering because this new version of madwifi does not build for me
+> anymore because the xscale patches are out of date. It does work if I
+> use the slugos patches though.  The wackelf patch is handy as well.
 
-Er, actually it's worse than that.  You can also ask what happens if you
-build slugos with gcc 3.x?  Or if you simply change the floating point
-options when building slugos?
+I'm glad the changes are more generally useful than I originally thought -
+they are only slugos specific to keep them from "polluting" the builds for
+other devices/toolchains.
 
-The problem is that the correct fix to apply depends on the machine,
-toolchain, and the fp options -- and just to spice it up even more, the
-state of the files being patched in ".../hal/public" seem to be somewhat in
-flux; so those patches will have to change in order to even sucessfully
-apply to each successive snapshot (hopefully that will stabilize at some
-point, though).
-
-If someone has a good way to encapsulate such a specific patchset based on
-the parameters above, that would be ideal.  I opted for the less-elegant
-approach -- the argument being that, at this point, in time, "slugos"
-implicity defines the machine (ARM Xscale), the toolchain versions (gcc
-4.x), and the floating point options (soft float, FPA).
-
-(Frankly, the root of this problem is the pre-compiled proprietary HAL stuff
-for the atheros chipset; the right solution is to get rid of that
-proprietary stuff as soon as somebody reverse-engineers it, an effort I
-understand is underway.  Or, for those with money to burn, replace the
-atheros NIC that came in the device with something more open.)
+What target are you building?  Perhaps, as Koen observed, there needs to be
+a different means to select the set of patches to apply, rather than using
+"slugos".  Perhaps there's a very easy way to express such a conditional:
+"if building xscale && compiler version >= 4 && soft_float" might do it?
 
 Mike (mwester)
 
