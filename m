@@ -1,18 +1,18 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <Patrick.Ohly@gmx.de>) id 1H3fnn-0006Tu-LW
+Received: from [70.85.129.92] (helo=sasquatch.hezmatt.org)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <mpalmer@hezmatt.org>) id 1H3g8h-0006iV-6Y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jan 2007 22:43:39 +0100
-Received: (qmail invoked by alias); 07 Jan 2007 21:42:05 -0000
-Received: from c-134-228-76.d.dsl.de.ignite.net (EHLO ip6-localhost)
-	[62.134.228.76]
-	by mail.gmx.net (mp046) with SMTP; 07 Jan 2007 22:42:05 +0100
-X-Authenticated: #489940
-Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
-	id 1H3fl5-0004xX-00; Sun, 07 Jan 2007 22:40:51 +0100
-From: Patrick Ohly <Patrick.Ohly@gmx.de>
+	Sun, 07 Jan 2007 23:05:15 +0100
+Received: from [10.6.66.6] (helo=hezmatt.org)
+	by sasquatch.hezmatt.org with esmtp (Exim 3.35 #1 (Debian))
+	id 1H3g79-00056D-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Jan 2007 09:03:39 +1100
+Received: by hezmatt.org (Postfix, from userid 1000)
+	id C75244C220; Mon,  8 Jan 2007 09:03:33 +1100 (EST)
+Date: Mon, 8 Jan 2007 09:03:33 +1100
+From: Matthew Palmer <mpalmer@hezmatt.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1662139633.20070107231632@gmail.com>
+Message-ID: <20070107220333.GC6625@hezmatt.org>
 References: <20061230051641.GA30225@hezmatt.org>
 	<1167506369.5626.46.camel@localhost.localdomain>
 	<20061230214326.GE15188@hezmatt.org>
@@ -22,12 +22,9 @@ References: <20061230051641.GA30225@hezmatt.org>
 	<459786C7.70000@dominion.kabel.utwente.nl>
 	<1168200264.15021.54.camel@ip6-localhost>
 	<1662139633.20070107231632@gmail.com>
-Date: Sun, 07 Jan 2007 22:40:50 +0100
-Message-Id: <1168206051.18289.14.camel@ip6-localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-Sender: Patrick Ohly <patrick@gmx.de>
-X-Y-GMX-Trusted: 0
+MIME-Version: 1.0
+In-Reply-To: <1662139633.20070107231632@gmail.com>
+User-Agent: Mutt/1.5.11
 Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,48 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jan 2007 21:43:39 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 07 Jan 2007 22:05:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On So, 2007-01-07 at 23:16 +0200, Paul Sokolovsky wrote:
-> Hello Patrick,
-> > What do you think? Did I miss something?
-> 
+On Sun, Jan 07, 2007 at 11:16:32PM +0200, Paul Sokolovsky wrote:
 >   Well, why would OE core developers (err, what about non-core
 > developers - we also care for contributed patches - after all, to get
 > commit access to OE, you first contribute bunch of patches) - well, why
-> would they do that?
+> would they do that? OE is open-source project, there's no position of
+> "patch processor", and people do what they find useful, leaving some
+> share of their for patch processing. Any complex and artificial rules
+> won't work.
 
-Perhaps because they care enough about external contributions to make
-life easier for the people preparing patches? The fact that their own
-changes would also be tracked by monotone is probably less important.
+The only reason I can think of for the core devs to follow a particular
+workflow is to make it ultimately easier for external contributors to
+produce and submit patches.  The more external patches that come in, the
+less work the core devs have to do (or the more 'other' things they can do). 
+For example, a few days ago Marcin asked for a patch to make a build of a
+newer version of fakeroot; I'd have whipped that patch up by now except that
+I know that it's going to cause a conflict when the change comes back down,
+so I'm loathe to make the change until I work out how I can manage the patch
+flow, because it's going to cause me pain without any benefit.  I'm just not
+that masochistic.
 
-I'm aware that this is not something that can be requested from
-volunteers, but at least it can be suggested and perhaps someone will
-find it useful and (more important) doable.
-
-> Just in case, there's always another alternative - contributors
-> just should submit patches in the perfect form, suitable for merging w/o
-> tweaks.
-
-I'm not so sure that this will work - As Koen said, having to tweak a
-patch is the rule, not the exception. Just doing those tweaks instead of
-striving for perfect patches might be less work also for the core
-developers.
-
->  Obviously, it's just the same not attainable, nor it's really
-> *that* important - we want people contribute more than either us or them
-> to follow strict rules.
-
-Of course, these shouldn't be strict rules, but having some guidelines
-wouldn't hurt either. I think I have seen questions about "how to
-contribute patches" several times on this list already.
-
--- 
-Bye, Patrick Ohly
---  
-Patrick.Ohly@gmx.de
-http://www.estamos.de/
+- Matt
 
 
