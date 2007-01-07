@@ -1,27 +1,23 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H3WMA-0002cA-BQ
-	for openembedded-devel@openembedded.org; Sun, 07 Jan 2007 12:38:30 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l07Banox015975 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 7 Jan 2007 12:36:51 +0100
-Message-ID: <45A0DB4D.3040104@dominion.kabel.utwente.nl>
-Date: Sun, 07 Jan 2007 12:36:45 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <gfellerpatrik@gmx.net>) id 1H3WXu-0002ng-II
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 07 Jan 2007 12:50:38 +0100
+Received: (qmail invoked by alias); 07 Jan 2007 11:49:06 -0000
+Received: from 129.149.78.83.cust.bluewin.ch (EHLO [192.168.1.33])
+	[83.78.149.129]
+	by mail.gmx.net (mp018) with SMTP; 07 Jan 2007 12:49:06 +0100
+X-Authenticated: #1952393
+From: Patrik Gfeller <gfellerpatrik@gmx.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 7 Jan 2007 12:48:57 +0100
+User-Agent: KMail/1.9.5
+References: <1168146083.2742.8.camel@dollar.3rdshift.com>
+In-Reply-To: <1168146083.2742.8.camel@dollar.3rdshift.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <E1H1X7P-0006QB-FN@linuxtogo.org>	<20070102002938.GA5825@stygia.hyboria>	<1167757388.5592.15.camel@localhost.localdomain>	<459A987C.9050902@dominion.kabel.utwente.nl>	<20070102202458.GB5825@stygia.hyboria>
-	<459E5E3A.5030709@dominion.kabel.utwente.nl>
-In-Reply-To: <459E5E3A.5030709@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev aspell: fix compilation for	powerpc
+Message-Id: <200701071249.02379.gfellerpatrik@gmx.net>
+X-Y-GMX-Trusted: 0
+Subject: Re: qemu-native-0.8.2-r2 fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,49 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jan 2007 11:38:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 07 Jan 2007 11:50:39 -0000
+X-Groupsio-MsgNum: 1118
+Content-Type: multipart/signed; boundary="nextPart2927335.8TrkdDFHSR";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--nextPart2927335.8TrkdDFHSR
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi schreef:
-> Graeme Gregory schreef:
->> On Tue, Jan 02, 2007 at 06:38:04PM +0100, Koen Kooi wrote:
->>> Can we agree that .la files shouldn't contain references to tmp/work? Any volunteers for
->>> adding the necessary logic to the appropriate bbclass?
->>>
->>> regards,
->>>
->> I think adding some sed along the lines of this in gcc staging should
->> cure the problem. As I beleive the "wrongness" leaks out of gcc when
->> libtool starts making other .la files (it seem to just concatentate
->> lines from dependant .la files)
-> 
->> sed -e "s|dependency_libs\s*=\s*.*|dependency_libs = '
->> -L${CROSS_DIR}/${HOST_SYS}/lib -lgcc_s -lc -lgcc_s -lm -lgcc_s -lc
->> -lgcc_s '|"
-> 
->> I have previously used this in my build personally to fix such problems,
->> but would appreciate someone giving a second look over and someone
->> familiar with the appropriate .bbclasses to put it in the right place.
-> 
-> I think this can go into the do_stage_append() method of packages/gcc/gcc3-build-cross.inc
-> for libgcc, libgcc_s, libstdc++ and libsupc++.
+On Sunday 07 January 2007 06:01, VLG wrote:
+... I remember that I also had problems with this; you may try the following in local.conf:
+***
+ENABLE_BINARY_LOCALE_GENERATION = "0"
+ASSUME_PROVIDED += "qemu-native"
+***
+If you have a working qemu in your build machine distro you may even set ENABLE_BINARY_LOCALE_GENERATION = "1", but 1st I recommend to try without.
 
-Tested for libstc++ and libsupc++ and committed.
+hope this helps,
+Patrik
 
-regards,
-
-Koen
+--nextPart2927335.8TrkdDFHSR
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.2 (GNU/Linux)
 
-iD8DBQFFoNtNMkyGM64RGpERAvSaAJ9U93Vk8WkySw/T5go7lOJBS2bypQCeIMhO
-jM27KV4se99PFDWJwEReyLc=
-=lcIp
+iD8DBQBFoN4uLkt4gT2qbbYRAmNzAKC+4wiEK/NC09kmPLrASsxAdmK/yACfZLUx
+uC93VZfdSX9v5hnT3ztzm4g=
+=C76r
 -----END PGP SIGNATURE-----
 
-
+--nextPart2927335.8TrkdDFHSR--
