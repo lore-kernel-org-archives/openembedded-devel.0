@@ -1,24 +1,35 @@
-Received: from [137.79.94.127] (helo=s383.jpl.nasa.gov)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <ehovland@s383.jpl.nasa.gov>) id 1H3z0h-0002ii-Jy
-	for openembedded-devel@openembedded.org; Mon, 08 Jan 2007 19:14:16 +0100
-Received: from mage.jpl.nasa.gov (mage [137.78.15.62])
-	by s383.jpl.nasa.gov (8.12.10/8.12.10) with ESMTP id l08ICZpg013046
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 8 Jan 2007 10:12:35 -0800 (PST)
-Received: by mage.jpl.nasa.gov (Postfix, from userid 4960)
-	id 36959300016B; Mon,  8 Jan 2007 10:12:35 -0800 (PST)
-Date: Mon, 8 Jan 2007 10:12:35 -0800
-From: Erik Hovland <erik@hovland.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20070108181234.GB13059@mage.jpl.nasa.gov>
-References: <200701081618.46665.openembedded@hrw.one.pl>
-	<432beae0701080803u389b13d8o1eb6e8b0e921b684@mail.gmail.com>
-	<45A26C83.2080801@dominion.kabel.utwente.nl>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <Patrick.Ohly@gmx.de>) id 1H3zAr-00047o-1V
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jan 2007 19:24:45 +0100
+Received: (qmail invoked by alias); 08 Jan 2007 18:23:05 -0000
+Received: from c-134-230-227.f.dsl.de.ignite.net (EHLO ip6-localhost)
+	[62.134.230.227]
+	by mail.gmx.net (mp001) with SMTP; 08 Jan 2007 19:23:05 +0100
+X-Authenticated: #489940
+Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
+	id 1H3yve-0001Ro-00; Mon, 08 Jan 2007 19:09:02 +0100
+From: Patrick Ohly <Patrick.Ohly@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ens65m$i2b$1@sea.gmane.org>
+References: <20061230051641.GA30225@hezmatt.org>
+	<1167506369.5626.46.camel@localhost.localdomain>
+	<20061230214326.GE15188@hezmatt.org>
+	<4596E33D.306@dominion.kabel.utwente.nl>
+	<20061230235938.GC16490@hezmatt.org>
+	<1167523571.5626.59.camel@localhost.localdomain>
+	<459786C7.70000@dominion.kabel.utwente.nl>
+	<1168200264.15021.54.camel@ip6-localhost>
+	<1662139633.20070107231632@gmail.com>
+	<20070107220333.GC6625@hezmatt.org> <ens65m$i2b$1@sea.gmane.org>
+Date: Mon, 08 Jan 2007 19:09:01 +0100
+Message-Id: <1168279741.4526.12.camel@ip6-localhost>
 Mime-Version: 1.0
-In-Reply-To: <45A26C83.2080801@dominion.kabel.utwente.nl>
-User-Agent: Mutt/1.5.9i
-Subject: Re: Status of ARM machines in OE
+X-Mailer: Evolution 2.6.3 
+Sender: Patrick Ohly <patrick@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,27 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2007 18:14:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 08 Jan 2007 18:24:45 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jan 08, 2007 at 05:08:35PM +0100, Koen Kooi wrote:
-> > What about the Zaurii?
+On Mon, 2007-01-08 at 02:18 +0100, Rolf Leggewie wrote:
+> The way I handled this before having rw access was to use quilt and it 
+> worked nicely for me.  Actually, I still use this for stuff I cannot be 
+> sure to fix in one setting to commit right after.
 > 
-> I suppose you mean 'zauri', 'zaurus' or 'zauruses', right? Or do you insist on using
-> made-up words and languages instead of English or Latin?
+> Workflow (optimistically assuming no loops and pauses here)
+> 
+>   quilt new some.patch
+>   quilt edit packages/somepackage/some.bb
+>   quilt refresh
+> 
+> and then send the patch to the bug tracker.  Before updating monotone, I 
+> back out all quilt patches (cron does this for me daily)
+> 
+>   quilt pop -a && mtn pull && mtn update && quilt push -a
+> 
+> Maybe this is workable for others as well?
 
-Seeing how malleable English is, that zaurus is a product name invented
-by people who speak Japanese natively and that zaurus is not an english
-word - you might want to go a little softer on the zaurus v. zauruses v.
-zauri v. zaurii thing.
+I have done the same before, the only difference was that I used Holger
+Schurig's "patcher". The method has some drawbacks:
+      * you have to keep track of which patches have been applied, and
+        you cannot let tools do it for you
+      * you cannot easily(*) find out how your patch was modified after
+        you submitted it; this implies that learning how to write better
+        patches requires extra effort and thus becomes harder (more
+        unlikely?) and that mistakes made by the core developer when
+        merging the patch might not be detected by the external
+        developer (hey, it might happen, so for the sake of the argument
+        bear we me when I mention it ;-)
 
-E
+(*) Instead of one working copy of the sources you would need two, the
+upstream version and the last version which you patched yourself. It's
+just not the same as having that information in the revision control
+system.
 
 -- 
-Erik Hovland
-mail: erik AT hovland DOT org
-web: http://hovland.org/
-PGP/GPG public key available on request
+Bye, Patrick Ohly
+--  
+Patrick.Ohly@gmx.de
+http://www.estamos.de/
 
 
