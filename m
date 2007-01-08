@@ -1,27 +1,36 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H3zMU-0004Kz-8e
-	for openembedded-devel@openembedded.org; Mon, 08 Jan 2007 19:36:46 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l08IZ0Lr006575 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 8 Jan 2007 19:35:01 +0100
-Message-ID: <45A28ED1.3060703@dominion.kabel.utwente.nl>
-Date: Mon, 08 Jan 2007 19:34:57 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200701081618.46665.openembedded@hrw.one.pl>	<f96d234e0701080819q7a8017d3q922b055670163c54@mail.gmail.com>	<45A26FE1.9050705@dominion.kabel.utwente.nl>	<1168278774.5605.127.camel@localhost.localdomain>	<45A2892E.5030906@dominion.kabel.utwente.nl>
-	<47203419.20070108202351@gmail.com>
-In-Reply-To: <47203419.20070108202351@gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Status of ARM machines in OE
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <Patrick.Ohly@gmx.de>) id 1H3zPT-0004Pc-Mj
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jan 2007 19:39:51 +0100
+Received: (qmail invoked by alias); 08 Jan 2007 18:38:11 -0000
+Received: from c-134-230-227.f.dsl.de.ignite.net (EHLO ip6-localhost)
+	[62.134.230.227]
+	by mail.gmx.net (mp002) with SMTP; 08 Jan 2007 19:38:11 +0100
+X-Authenticated: #489940
+Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
+	id 1H3zEv-0001Tn-00; Mon, 08 Jan 2007 19:28:57 +0100
+From: Patrick Ohly <Patrick.Ohly@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <432beae0701071446p377665c8x810644467cf7f234@mail.gmail.com>
+References: <20061230051641.GA30225@hezmatt.org>
+	<1167506369.5626.46.camel@localhost.localdomain>
+	<20061230214326.GE15188@hezmatt.org>
+	<4596E33D.306@dominion.kabel.utwente.nl>
+	<20061230235938.GC16490@hezmatt.org>
+	<1167523571.5626.59.camel@localhost.localdomain>
+	<459786C7.70000@dominion.kabel.utwente.nl>
+	<1168200264.15021.54.camel@ip6-localhost>
+	<1662139633.20070107231632@gmail.com>
+	<20070107220333.GC6625@hezmatt.org>
+	<432beae0701071446p377665c8x810644467cf7f234@mail.gmail.com>
+Date: Mon, 08 Jan 2007 19:28:57 +0100
+Message-Id: <1168280937.4526.32.camel@ip6-localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+Sender: Patrick Ohly <patrick@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,46 +44,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2007 18:36:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 08 Jan 2007 18:39:51 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sun, 2007-01-07 at 14:46 -0800, Justin Patrin wrote:
+> One thing I could see us doing is possibly comitting a patch as-is and
+> then making changes and comitting that. (Of course, we wouldn't push
+> until it's all finished) but I don't know how well that will merge.
 
-Paul Sokolovsky schreef:
-> Hello Koen,
+I think it would merge as well (or bad) as committing to a branch first.
+The reason why I didn't mention this possibility is that it means that
+the core developer's revision of the trunk gets temporarily "polluted"
+with an unchecked and possibly incomplete patch. That might prevent
+finishing and pushing some other, more important work. I also don't know
+how easy it would be to back out the patch completely.
+
+> Monotone uses the revision graph to deal with merging and your local
+> commit still wouldn't likely be the same revision as what the dev
+> comitted.
+
+I'm on thin ice here because I don't know monotone well enough, but
+isn't a common ancestor enough to do the three-way merge that has a much
+better chance of avoiding merge conflicts? There is guaranteed to be a
+common ancestor for external and core OE developer even if both work
+with branches because both share the same OE trunk.
+
+> Hmmm, now that I think of it this workflow might work:
 > 
-> Monday, January 8, 2007, 8:10:54 PM, you wrote:
-> 
-> []
-> 
->> Note that you can run eabi on strongarm by forcing
->> -no-thumb-interwork, which requires
->> some glibc hacking to remove -Werror from various makefiles. This doesn't buy you much,
->> since you still need seperate feeds for armv4, armv4t, armv5te and armv6 (and powerpc,
->> x86, etc).
-> 
->   But that's not an issue, as Angstrom  already maintains bunch of
-> feeds, and adding "armv4" won't be lots of trouble, right?
+> Contributor:
+> 1) notes current (.dev) revision they are using in their workspace
+> 2) makes changes
 
-We're going to do it a little different:
+As you said, this assumes that the contributor always develops the patch
+against the oe.dev branch. The more likely situation with an active
+contributor is that he has multiple pending patches that he needs to
+continue with his work. He might store them using quilt/patcher or in a
+monotone branch, but in either case the base revision of a patch is not
+something found on the oe.dev branch.
 
-PACKAGE_ARCH = "arm-oabi"
-PACKAGE_EXTRA_ARCHS = "arm-oabi"
+> OE dev (assuming patch and change is ok):
+> 5) updates their workspace to revision from 1)
 
-That makes the angstrom EABI and OABI feeds incompatible for the package manager.
+Even if the contributor is able to provide a revision, isn't that going
+to be a lot slower for the core developer? It implies going back to an
+older revision and then recompiling all sources necessary to check the
+patch (okay, that could be skipped, but that's not desirable).
 
-regards,
+In my "temporarily branch on commit" proposal the developer would be
+able to keep working with the currently checked out and compiled
+revision of the meta data, although admittedly reusing the same branch
+name requires some more thought - I'm not exactly sure how to do that
+with monotone.
 
-Koen
+Anyway, all of this is idle speculation unless one or more of the core
+developers are willing to adopt such a method.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFoo7RMkyGM64RGpERAn3HAJ9mkiJbmd4yY2NE3oWbj5kunwINnwCff1Fj
-FCmFOnxF86/8hpM3IqzV88k=
-=jV5u
------END PGP SIGNATURE-----
+-- 
+Bye, Patrick Ohly
+--  
+Patrick.Ohly@gmx.de
+http://www.estamos.de/
 
 
