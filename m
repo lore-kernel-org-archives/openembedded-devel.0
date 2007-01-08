@@ -1,21 +1,31 @@
-Received: from [64.233.184.239] (helo=wr-out-0506.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <philipp.zabel@gmail.com>) id 1H3yAg-00009X-Um
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Jan 2007 18:20:31 +0100
-Received: by wr-out-0506.google.com with SMTP id i31so113678wra
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jan 2007 09:18:48 -0800 (PST)
-Received: by 10.78.185.7 with SMTP id i7mr4118386huf.1168276728198;
-	Mon, 08 Jan 2007 09:18:48 -0800 (PST)
-Received: by 10.78.194.1 with HTTP; Mon, 8 Jan 2007 09:18:47 -0800 (PST)
-Message-ID: <74d0deb30701080918i23d8e07fiea3b431849d82f17@mail.gmail.com>
-Date: Mon, 8 Jan 2007 18:18:47 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200701081618.46665.openembedded@hrw.one.pl>
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1H3yhh-0002Pn-Oy
+	for openembedded-devel@openembedded.org; Mon, 08 Jan 2007 18:54:38 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l08Hqurb022492
+	for <openembedded-devel@openembedded.org>; Mon, 8 Jan 2007 17:52:56 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 22377-02 for <openembedded-devel@openembedded.org>;
+	Mon,  8 Jan 2007 17:52:54 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l08Hqrub022484
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Mon, 8 Jan 2007 17:52:53 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <45A26FE1.9050705@dominion.kabel.utwente.nl>
 References: <200701081618.46665.openembedded@hrw.one.pl>
+	<f96d234e0701080819q7a8017d3q922b055670163c54@mail.gmail.com>
+	<45A26FE1.9050705@dominion.kabel.utwente.nl>
+Date: Mon, 08 Jan 2007 17:52:53 +0000
+Message-Id: <1168278774.5605.127.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: Status of ARM machines in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,28 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2007 17:20:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 08 Jan 2007 17:54:38 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 1/8/07, Marcin Juszkiewicz <openembedded@hrw.one.pl> wrote:
->
-> magician is OK - builds without problem.
+On Mon, 2007-01-08 at 17:22 +0100, Koen Kooi wrote:
+> only (soft)fpa, not (soft)vfp.
+> 
+> > I recently added a note in the kernel bb.  Softfloat is
+> > working fine.  Is there any easy way in angstrom to specify oabi?
+> 
+> DISTRO="angstrom-2007.1-oabi"
 
-That is nice to hear. I'll throw away my months old gpe image and
-start to build a fresh one to see wether it only builds, or even
-actually works  without problems :)
+Perhaps its time to introduce some kind of marking in the machine.conf
+files like:
 
-> But as this is HTC Magician then
-> maybe we should rename it to htcmagician to follow other htc phones
-> (htcblueangel, htcuniversal) which are in OE?
+COMPATIBLE_ARM_ABI = "(oabi|eabi)" which angstrom can then error on
+accordingly?
 
-Please no, I wouldn't want hx4700 to be renamed to hpipaqhx4700,
-and pretty much for the same reasons I strongly prefer the name
-magician. It is easier to type and easier on the eyes.
+Richard
 
-regards
-Philipp
+
 
 
