@@ -1,35 +1,29 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <Patrick.Ohly@gmx.de>) id 1H3zAr-00047o-1V
+Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <pmiscml@gmail.com>) id 1H3zBT-00049O-JK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Jan 2007 19:24:45 +0100
-Received: (qmail invoked by alias); 08 Jan 2007 18:23:05 -0000
-Received: from c-134-230-227.f.dsl.de.ignite.net (EHLO ip6-localhost)
-	[62.134.230.227]
-	by mail.gmx.net (mp001) with SMTP; 08 Jan 2007 19:23:05 +0100
-X-Authenticated: #489940
-Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
-	id 1H3yve-0001Ro-00; Mon, 08 Jan 2007 19:09:02 +0100
-From: Patrick Ohly <Patrick.Ohly@gmx.de>
+	Mon, 08 Jan 2007 19:25:23 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so8754598nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Jan 2007 10:23:43 -0800 (PST)
+Received: by 10.49.41.12 with SMTP id t12mr10536479nfj.1168280623824;
+	Mon, 08 Jan 2007 10:23:43 -0800 (PST)
+Received: from CUBE ( [82.193.96.238])
+	by mx.google.com with ESMTP id x24sm107906297nfb.2007.01.08.10.23.42;
+	Mon, 08 Jan 2007 10:23:43 -0800 (PST)
+Date: Mon, 8 Jan 2007 20:23:51 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <47203419.20070108202351@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ens65m$i2b$1@sea.gmane.org>
-References: <20061230051641.GA30225@hezmatt.org>
-	<1167506369.5626.46.camel@localhost.localdomain>
-	<20061230214326.GE15188@hezmatt.org>
-	<4596E33D.306@dominion.kabel.utwente.nl>
-	<20061230235938.GC16490@hezmatt.org>
-	<1167523571.5626.59.camel@localhost.localdomain>
-	<459786C7.70000@dominion.kabel.utwente.nl>
-	<1168200264.15021.54.camel@ip6-localhost>
-	<1662139633.20070107231632@gmail.com>
-	<20070107220333.GC6625@hezmatt.org> <ens65m$i2b$1@sea.gmane.org>
-Date: Mon, 08 Jan 2007 19:09:01 +0100
-Message-Id: <1168279741.4526.12.camel@ip6-localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-Sender: Patrick Ohly <patrick@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: A question of workflow
+In-Reply-To: <45A2892E.5030906@dominion.kabel.utwente.nl>
+References: <200701081618.46665.openembedded@hrw.one.pl>
+	<f96d234e0701080819q7a8017d3q922b055670163c54@mail.gmail.com>
+	<45A26FE1.9050705@dominion.kabel.utwente.nl>
+	<1168278774.5605.127.camel@localhost.localdomain>
+	<45A2892E.5030906@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Subject: Re: Status of ARM machines in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,49 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2007 18:24:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 08 Jan 2007 18:25:23 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2007-01-08 at 02:18 +0100, Rolf Leggewie wrote:
-> The way I handled this before having rw access was to use quilt and it 
-> worked nicely for me.  Actually, I still use this for stuff I cannot be 
-> sure to fix in one setting to commit right after.
-> 
-> Workflow (optimistically assuming no loops and pauses here)
-> 
->   quilt new some.patch
->   quilt edit packages/somepackage/some.bb
->   quilt refresh
-> 
-> and then send the patch to the bug tracker.  Before updating monotone, I 
-> back out all quilt patches (cron does this for me daily)
-> 
->   quilt pop -a && mtn pull && mtn update && quilt push -a
-> 
-> Maybe this is workable for others as well?
+Hello Koen,
 
-I have done the same before, the only difference was that I used Holger
-Schurig's "patcher". The method has some drawbacks:
-      * you have to keep track of which patches have been applied, and
-        you cannot let tools do it for you
-      * you cannot easily(*) find out how your patch was modified after
-        you submitted it; this implies that learning how to write better
-        patches requires extra effort and thus becomes harder (more
-        unlikely?) and that mistakes made by the core developer when
-        merging the patch might not be detected by the external
-        developer (hey, it might happen, so for the sake of the argument
-        bear we me when I mention it ;-)
+Monday, January 8, 2007, 8:10:54 PM, you wrote:
 
-(*) Instead of one working copy of the sources you would need two, the
-upstream version and the last version which you patched yourself. It's
-just not the same as having that information in the revision control
-system.
+[]
+
+> Note that you can run eabi on strongarm by forcing
+> -no-thumb-interwork, which requires
+> some glibc hacking to remove -Werror from various makefiles. This doesn't buy you much,
+> since you still need seperate feeds for armv4, armv4t, armv5te and armv6 (and powerpc,
+> x86, etc).
+
+  But that's not an issue, as Angstrom  already maintains bunch of
+feeds, and adding "armv4" won't be lots of trouble, right?
+
+  So, I just hope that SA machine people (or someone else) will hack
+in EABI support eventually to gcc/glibc/etc. ...
+
+> regards,
+
+> Koen
+
 
 -- 
-Bye, Patrick Ohly
---  
-Patrick.Ohly@gmx.de
-http://www.estamos.de/
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
