@@ -1,26 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H42pP-00039s-Do
-	for openembedded-devel@openembedded.org; Mon, 08 Jan 2007 23:18:51 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l08MH8Lr008793 for <openembedded-devel@openembedded.org>;
-	Mon, 8 Jan 2007 23:17:08 +0100
-Message-ID: <45A2C2E0.6020309@dominion.kabel.utwente.nl>
-Date: Mon, 08 Jan 2007 23:17:04 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <openembedded@hrw.one.pl>) id 1H42t6-0004WE-6l
+	for openembedded-devel@openembedded.org; Mon, 08 Jan 2007 23:22:40 +0100
+Received: (qmail 4011 invoked by uid 813007); 8 Jan 2007 22:20:59 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 8 Jan 2007 22:20:59 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: Paul Sokolovsky <pmiscml@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+User-Agent: KMail/1.9.5
+References: <200701082227.08898.openembedded@hrw.one.pl>
+	<837928192.20070108234054@gmail.com>
+In-Reply-To: <837928192.20070108234054@gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200701082227.08898.openembedded@hrw.one.pl>	<45A2BBB0.4070607@dominion.kabel.utwente.nl>
-	<1809961602.20070109000215@gmail.com>
-In-Reply-To: <1809961602.20070109000215@gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+Date: Mon, 8 Jan 2007 23:20:58 +0100
+Message-Id: <200701082320.59702.openembedded@hrw.one.pl>
 Subject: Re: RFC: get rid of virtual/libsdl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,39 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2007 22:18:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Jan 2007 22:22:40 -0000
+Content-Disposition: inline
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia poniedzia=B3ek, 8 stycznia 2007 22:40, Paul Sokolovsky napisa=B3:
+> =A0 Well, that was one of questions I had in mind: why there're separate
+> builds of SDL apps for GPE and OPIE - it would be kinda natural to
+> expect SDL ABI to be the same on both.
 
-Paul Sokolovsky schreef:
-> Hello Koen,
-> 
-> 
->> Marcin Juszkiewicz schreef:
->>> I see more and more reports where people has problems with building SDL 
->>> stuff just because they have 'virtual/libsdl == libsdl-qpe' in build 
-> 
-> []
-> 
->> move libsql-qpe to packages/obsolete/libsdl/, that way people that want it can still build
->> it and innocent bystanders don't get hit by the issues you mentioned.
-> 
->   Isn't that too much of action for the original problem of people
-> selecting it to build SDL apps and having problems due to this?
+ABI is same - backends differ. libsdl-x11 is normal pure upstream version=20
+configured for X11 backend. libsdl-qpe is overhacked version configured=20
+for QT/E 2.x - and in current .dev it gives too many linking problems.
 
-People have to select libsdl-x11, otherwise -qpe gets built. Given its current
-unmaintained and problematic state it'd rather drop it completely. But since we are
-supposed to by nice to OE users, lets move it to obsolete instead.
+> But of course it would be nice if this RFC would let for some time
+> to do such testing.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Which kind of testing you suggest? I can run build and provide results.
 
-iD8DBQFFosLgMkyGM64RGpERAsypAJ9W9eA5EgJn9j8fTtzhp8OgtzepLACbBAnW
-LwE6pAvEGW0XxhF+Iiz/z6U=
-=tJdl
------END PGP SIGNATURE-----
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+           time is what keeps things from happening all at once
+
+
 
 
