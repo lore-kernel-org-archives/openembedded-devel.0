@@ -1,30 +1,37 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H42S3-0002Xz-Sp
-	for openembedded-devel@openembedded.org; Mon, 08 Jan 2007 22:54:43 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l08LqxLr004942; Mon, 8 Jan 2007 22:52:59 +0100
-Message-ID: <45A2BD37.7020901@dominion.kabel.utwente.nl>
-Date: Mon, 08 Jan 2007 22:52:55 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: gtk-devel-list@gnome.org
-References: <45A27A56.1030907@dominion.kabel.utwente.nl>	
-	<1168278614.6655.0.camel@localhost>	
-	<45A28709.6040609@dominion.kabel.utwente.nl>
-	<1168283637.5781.9.camel@home>
-In-Reply-To: <1168283637.5781.9.camel@home>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Cc: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-Subject: Re: Patch to make cross-compiling easier with libtool
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <Patrick.Ohly@gmx.de>) id 1H42SC-0002Yn-Mz
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jan 2007 22:54:52 +0100
+Received: (qmail invoked by alias); 08 Jan 2007 21:53:12 -0000
+Received: from c-134-230-227.f.dsl.de.ignite.net (EHLO ip6-localhost)
+	[62.134.230.227]
+	by mail.gmx.net (mp017) with SMTP; 08 Jan 2007 22:53:12 +0100
+X-Authenticated: #489940
+Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
+	id 1H42HS-0002XZ-00; Mon, 08 Jan 2007 22:43:46 +0100
+From: Patrick Ohly <Patrick.Ohly@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <45A2B3EA.2070502@dominion.kabel.utwente.nl>
+References: <20061230051641.GA30225@hezmatt.org>
+	<4596E33D.306@dominion.kabel.utwente.nl>
+	<20061230235938.GC16490@hezmatt.org>
+	<1167523571.5626.59.camel@localhost.localdomain>
+	<459786C7.70000@dominion.kabel.utwente.nl>
+	<1168200264.15021.54.camel@ip6-localhost>
+	<1662139633.20070107231632@gmail.com>	<20070107220333.GC6625@hezmatt.org>
+	<432beae0701071446p377665c8x810644467cf7f234@mail.gmail.com>
+	<1168280937.4526.32.camel@ip6-localhost>
+	<432beae0701081111n490d67e2oebcaf44f4fe45e04@mail.gmail.com>
+	<1168290172.4526.66.camel@ip6-localhost>
+	<45A2B3EA.2070502@dominion.kabel.utwente.nl>
+Date: Mon, 08 Jan 2007 22:43:45 +0100
+Message-Id: <1168292626.4526.75.camel@ip6-localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+Sender: Patrick Ohly <patrick@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: A question of workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,50 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2007 21:54:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 08 Jan 2007 21:54:52 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, 2007-01-08 at 22:13 +0100, Koen Kooi wrote:
+> So after every first commmit the tree is in a broken state, where-as if a developers
+> applied a fixed patch in one go it wouldn't be.
 
-Behdad Esfahbod schreef:
-> On Mon, 2007-01-08 at 13:01 -0500, Koen Kooi wrote:
-> Gustavo J. A. M. Carneiro schreef:
->>>> On Seg, 2007-01-08 at 18:07 +0100, Koen Kooi wrote:
->>>>> -----BEGIN PGP SIGNED MESSAGE-----
->>>>> Hash: SHA1
->>>>>
->>>>> Hi,
->>>>>
->>>>> When adding gtk+ 2.10.7 to OpenEmbedded today I had to rediff a few patches and this one
->>>>> seemed usefull to have upstream:
->>>>>
->>>>> http://www.openembedded.org/repo/org.openembedded.dev/packages/gtk+/gtk+-2.10.7/hardcoded_libtool.patch
->>>>  BTW, maybe it's more correct to use $(LIBTOOL) instead
->>>> of ./$host_alias-libtool ?
-> No idea, sorry.
-> 
->> How is ./$host_alias-libtool supposed to work?  I don't
->> see ./i386-redhat-linux-libtool in my Gtk+ tree.  The answer is one of
->> $(LIBTOOL)
+That's exactly why I had suggested that a developer should commit on a
+branch, fix the patch there and then propagate all changes from the
+branch. As I learned since then this does not work with monotone because
+monotone only propagates the final revision.
 
-ok
+What do you think about commiting the original patch, fixing it,
+commiting again, and then pushing all these changes? This is the model
+suggested by Justin.
 
->> or "use your libtoolize and run autogen.sh to get the
->> correct ./libtool".
+>  Sounds like your concept is badly broken.
 
-That's what we do (gnu-confize, libtoolize, autoreconf) and gives me $host-alias-libtool
+So what do you suggest should be done instead?
 
-regards,
+Ignore anything that a revision control system might be able to do and
+let external contributors sort it out manually or with quilt/patcher?
+Sorry, that doesn't sound very encouraging.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFor03MkyGM64RGpERAikcAKC5ip3Y0YPRovDtJ79MMgp7EETU2wCdHjP8
-/uSehGD4NzYyQ0+KWaNfGEM=
-=ooPb
------END PGP SIGNATURE-----
+-- 
+Bye, Patrick Ohly
+--  
+Patrick.Ohly@gmx.de
+http://www.estamos.de/
 
 
