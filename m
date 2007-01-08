@@ -1,32 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1H3jML-0005k5-5C
-	for openembedded-devel@openembedded.org; Mon, 08 Jan 2007 02:31:33 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1H3jG7-0007Oe-0K
-	for openembedded-devel@openembedded.org; Mon, 08 Jan 2007 02:25:07 +0100
-Received: from r7753.r.ppp-pool.de ([89.54.119.83])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 08 Jan 2007 02:25:06 +0100
-Received: from no2spam by r7753.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 08 Jan 2007 02:25:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 08 Jan 2007 02:18:43 +0100
-Message-ID: <ens65m$i2b$1@sea.gmane.org>
-References: <20061230051641.GA30225@hezmatt.org>	<1167506369.5626.46.camel@localhost.localdomain>	<20061230214326.GE15188@hezmatt.org>	<4596E33D.306@dominion.kabel.utwente.nl>	<20061230235938.GC16490@hezmatt.org>	<1167523571.5626.59.camel@localhost.localdomain>	<459786C7.70000@dominion.kabel.utwente.nl>	<1168200264.15021.54.camel@ip6-localhost>	<1662139633.20070107231632@gmail.com>
-	<20070107220333.GC6625@hezmatt.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: r7753.r.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
-In-Reply-To: <20070107220333.GC6625@hezmatt.org>
-Sender: news <news@sea.gmane.org>
-Subject: Re: A question of workflow
+	(envelope-from <mickey@vanille-media.de>) id 1H3okz-0006ey-IX
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jan 2007 08:17:21 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id ACBF928C012; Mon,  8 Jan 2007 08:11:48 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from [192.168.2.128] (e180169094.adsl.alicedsl.de [85.180.169.94])
+	by srv043.dedi23.de (Postfix) with ESMTP id D80B728C011;
+	Mon,  8 Jan 2007 08:11:44 +0100 (CET)
+Date: Mon, 8 Jan 2007 08:15:40 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <682962313.20070108081540@vanille-media.de>
+To: Richard Purdie <rpurdie@rpsys.net>
+In-Reply-To: <1168195833.5610.46.camel@localhost.localdomain>
+References: <1168195833.5610.46.camel@localhost.localdomain>
+MIME-Version: 1.0
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: Bitbake task dependency stamp handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,33 +38,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2007 01:31:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 08 Jan 2007 07:17:21 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Matthew Palmer wrote:
-> For example, a few days ago Marcin asked for a patch to make a build of a
-> newer version of fakeroot; I'd have whipped that patch up by now except that
-> I know that it's going to cause a conflict when the change comes back down,
-> so I'm loathe to make the change until I work out how I can manage the patch
-> flow
+Richard Purdie wrote:
+> I had some interesting thoughts regarding tasks and their timestamps.
+> Bitbake's current method of dealing with timestamps walks the task
+> digraph structure which only knows about a single .bb file. The result
+> is if you change an earlier task, say do_patch, later tasks like
+> do_compile would rerun. If you rebuild gtk, the rest of your system
+> linking to gtk doesn't rebuild though.
 
-The way I handled this before having rw access was to use quilt and it 
-worked nicely for me.  Actually, I still use this for stuff I cannot be 
-sure to fix in one setting to commit right after.
+> If we move away from the digraph which isn't really needed anymore,
+> taskData has the complete dependency tree available to it and the option
+> of rebuilding the whole system if you recompile gtk becomes possible.
 
-Workflow (optimistically assuming no loops and pauses here)
+Excellent!
 
-  quilt new some.patch
-  quilt edit packages/somepackage/some.bb
-  quilt refresh
+> At face value this sounds really useful. I'd guess that almost every OE
+> developer would find it insanely annoying in practise though?
 
-and then send the patch to the bug tracker.  Before updating monotone, I 
-back out all quilt patches (cron does this for me daily)
+Not at all. I prefer waiting a bit more than having link or structure
+mismatched due to changes in headers and libraries.
 
-  quilt pop -a && mtn pull && mtn update && quilt push -a
+If it doesn't involve leaving too much code in, then I'd love to see a
+way to turn it off to the old behaviour though.
 
-Maybe this is workable for others as well?
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
