@@ -1,33 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1H4GX4-0006ZR-Bv
-	for openembedded-devel@openembedded.org; Tue, 09 Jan 2007 13:56:50 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1H4GVK-0008DM-4w
-	for openembedded-devel@openembedded.org; Tue, 09 Jan 2007 13:55:02 +0100
-Received: from r76b2.r.ppp-pool.de ([89.54.118.178])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 09 Jan 2007 13:55:02 +0100
-Received: from no2spam by r76b2.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 09 Jan 2007 13:55:02 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 09 Jan 2007 13:54:11 +0100
-Message-ID: <eo039k$pe7$1@sea.gmane.org>
-References: <20061230051641.GA30225@hezmatt.org>	<1167506369.5626.46.camel@localhost.localdomain>	<20061230214326.GE15188@hezmatt.org>	<4596E33D.306@dominion.kabel.utwente.nl>	<20061230235938.GC16490@hezmatt.org>	<1167523571.5626.59.camel@localhost.localdomain>	<459786C7.70000@dominion.kabel.utwente.nl>	<1168200264.15021.54.camel@ip6-localhost>	<1662139633.20070107231632@gmail.com>	<20070107220333.GC6625@hezmatt.org>
-	<ens65m$i2b$1@sea.gmane.org>
-	<1168279741.4526.12.camel@ip6-localhost>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: r76b2.r.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
-In-Reply-To: <1168279741.4526.12.camel@ip6-localhost>
-Sender: news <news@sea.gmane.org>
-Subject: Re: A question of workflow
+	(envelope-from <openembedded@hrw.one.pl>) id 1H4H5Y-0008Fm-K6
+	for openembedded-devel@openembedded.org; Tue, 09 Jan 2007 14:32:28 +0100
+Received: (qmail 22342 invoked by uid 813007); 9 Jan 2007 13:30:42 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 9 Jan 2007 13:30:42 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+Organization: OpenEmbedded
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 9 Jan 2007 14:30:30 +0100
+User-Agent: KMail/1.9.5
+References: <200701081618.46665.openembedded@hrw.one.pl>
+	<f96d234e0701080819q7a8017d3q922b055670163c54@mail.gmail.com>
+	<200701082034.43447.openembedded@hrw.one.pl>
+In-Reply-To: <200701082034.43447.openembedded@hrw.one.pl>
+MIME-Version: 1.0
+Message-Id: <200701091430.38026.openembedded@hrw.one.pl>
+Subject: Re: Status of ARM machines in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,17 +32,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jan 2007 12:56:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Jan 2007 13:32:29 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Patrick Ohly wrote:
->       * you have to keep track of which patches have been applied, and
->         you cannot let tools do it for you
+Dnia poniedzia=B3ek, 8 stycznia 2007 20:34, Marcin Juszkiewicz napisa=B3:
 
-Did you mean you wanted to know which of your patches have been applied 
-in OE?  That one is also easy.  They are the ones that quilt cannot 
-apply anymore when doing "quilt push -a" ;-)
+> > Is there any easy way in angstrom to specify oabi?
+>
+> Yes - DISTRO=3D"angstrom-2007.1-oabi" makes it. I will do such build soon
+> for armv4 and compulab-pxa270 machines.
+
+I did "angstrom-2007.1-oabi" build for collie, h3600, h3800, simpad,
+compulab-pxa270. Results:
+
+collie, h3600, compulab-pxa270: built
+
+h3800, simpad: broke in same way as h1910/htcbluengel/rx3000 in previous run
+
+Someone who maintain linux-handhelds kernel need this patch applied:
+
+[hrw@misc1 org.openembedded.dev]$ mtn dif packages/linux/linux-handhelds-2.=
+6.inc
+#
+# old_revision [6a7ee07ba76c72b981330c44ab8b4d0ab285b2da]
+#
+# patch "packages/linux/linux-handhelds-2.6.inc"
+#  from [7b2de315c55f5138116f295bfab2563cbd48e6e9]
+#    to [1feef0116d4e092c87c44d63f6925be52126cf9c]
+#
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=2D-- packages/linux/linux-handhelds-2.6.inc      7b2de315c55f5138116f295bf=
+ab2563cbd48e6e9
++++ packages/linux/linux-handhelds-2.6.inc      1feef0116d4e092c87c44d63f69=
+25be52126cf9c
+@@ -1,9 +1,9 @@ COMPATIBLE_HOST =3D "arm.*-linux"
+ SECTION =3D "kernel"
+ DESCRIPTION =3D "handhelds.org Linux kernel 2.6 for PocketPCs and other co=
+nsumer handheld devices."
+ LICENSE =3D "GPL"
+
+ COMPATIBLE_HOST =3D "arm.*-linux"
+=2DCOMPATIBLE_MACHINE ?=3D '(asus730|h1910|h2200|h3600|h3900|h4000|h5000|ht=
+cblueangel|htcuniversal|hx4700|jornada56x|magician|simpad)'
++COMPATIBLE_MACHINE ?=3D '(asus730|h1910|h2200|h3600|h3900|h4000|h5000|htcb=
+lueangel|htcuniversal|hx4700|jornada56x|magician|simpad|rx3000|h3800)'
+
+ # SRC_URI *must* be overriden in includer, but this is a good reference
+ SRC_URI ?=3D "${HANDHELDS_CVS};module=3Dlinux/kernel26;tag=3D${@'K' + bb.d=
+ata.getVar('PV',d,1).replace('.', '-')} \
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+          As a computer, I find your faith in technology amusing.
+
 
 
 
