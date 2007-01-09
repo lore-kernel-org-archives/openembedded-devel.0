@@ -1,23 +1,28 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1H4H5Y-0008Fm-K6
-	for openembedded-devel@openembedded.org; Tue, 09 Jan 2007 14:32:28 +0100
-Received: (qmail 22342 invoked by uid 813007); 9 Jan 2007 13:30:42 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 9 Jan 2007 13:30:42 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-Organization: OpenEmbedded
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 9 Jan 2007 14:30:30 +0100
-User-Agent: KMail/1.9.5
-References: <200701081618.46665.openembedded@hrw.one.pl>
-	<f96d234e0701080819q7a8017d3q922b055670163c54@mail.gmail.com>
-	<200701082034.43447.openembedded@hrw.one.pl>
-In-Reply-To: <200701082034.43447.openembedded@hrw.one.pl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H4H9E-0008JO-KF
+	for openembedded-devel@openembedded.org; Tue, 09 Jan 2007 14:36:16 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l09DYTLr028035 for <openembedded-devel@openembedded.org>;
+	Tue, 9 Jan 2007 14:34:30 +0100
+Message-ID: <45A399E0.3020609@dominion.kabel.utwente.nl>
+Date: Tue, 09 Jan 2007 14:34:24 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-Message-Id: <200701091430.38026.openembedded@hrw.one.pl>
+To: openembedded-devel@openembedded.org
+References: <200701081618.46665.openembedded@hrw.one.pl>	<f96d234e0701080819q7a8017d3q922b055670163c54@mail.gmail.com>	<200701082034.43447.openembedded@hrw.one.pl>
+	<200701091430.38026.openembedded@hrw.one.pl>
+In-Reply-To: <200701091430.38026.openembedded@hrw.one.pl>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l09DYTLr028035
 Subject: Re: Status of ARM machines in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,66 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jan 2007 13:32:29 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Tue, 09 Jan 2007 13:36:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia poniedzia=B3ek, 8 stycznia 2007 20:34, Marcin Juszkiewicz napisa=B3:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> > Is there any easy way in angstrom to specify oabi?
->
-> Yes - DISTRO=3D"angstrom-2007.1-oabi" makes it. I will do such build soon
-> for armv4 and compulab-pxa270 machines.
+Marcin Juszkiewicz schreef:
+> Dnia poniedzia=C5=82ek, 8 stycznia 2007 20:34, Marcin Juszkiewicz napis=
+a=C5=82:
+>=20
+>>> Is there any easy way in angstrom to specify oabi?
+>> Yes - DISTRO=3D"angstrom-2007.1-oabi" makes it. I will do such build s=
+oon
+>> for armv4 and compulab-pxa270 machines.
+>=20
+> I did "angstrom-2007.1-oabi" build for collie, h3600, h3800, simpad,
+> compulab-pxa270. Results:
+>=20
+> collie, h3600, compulab-pxa270: built
+>=20
+> h3800, simpad: broke in same way as h1910/htcbluengel/rx3000 in previou=
+s run
+>=20
+> Someone who maintain linux-handhelds kernel need this patch applied:
 
-I did "angstrom-2007.1-oabi" build for collie, h3600, h3800, simpad,
-compulab-pxa270. Results:
+I don't maintain it, but added the line you pasted on irc anyway.
 
-collie, h3600, compulab-pxa270: built
+regards,
 
-h3800, simpad: broke in same way as h1910/htcbluengel/rx3000 in previous run
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Someone who maintain linux-handhelds kernel need this patch applied:
-
-[hrw@misc1 org.openembedded.dev]$ mtn dif packages/linux/linux-handhelds-2.=
-6.inc
-#
-# old_revision [6a7ee07ba76c72b981330c44ab8b4d0ab285b2da]
-#
-# patch "packages/linux/linux-handhelds-2.6.inc"
-#  from [7b2de315c55f5138116f295bfab2563cbd48e6e9]
-#    to [1feef0116d4e092c87c44d63f6925be52126cf9c]
-#
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=2D-- packages/linux/linux-handhelds-2.6.inc      7b2de315c55f5138116f295bf=
-ab2563cbd48e6e9
-+++ packages/linux/linux-handhelds-2.6.inc      1feef0116d4e092c87c44d63f69=
-25be52126cf9c
-@@ -1,9 +1,9 @@ COMPATIBLE_HOST =3D "arm.*-linux"
- SECTION =3D "kernel"
- DESCRIPTION =3D "handhelds.org Linux kernel 2.6 for PocketPCs and other co=
-nsumer handheld devices."
- LICENSE =3D "GPL"
-
- COMPATIBLE_HOST =3D "arm.*-linux"
-=2DCOMPATIBLE_MACHINE ?=3D '(asus730|h1910|h2200|h3600|h3900|h4000|h5000|ht=
-cblueangel|htcuniversal|hx4700|jornada56x|magician|simpad)'
-+COMPATIBLE_MACHINE ?=3D '(asus730|h1910|h2200|h3600|h3900|h4000|h5000|htcb=
-lueangel|htcuniversal|hx4700|jornada56x|magician|simpad|rx3000|h3800)'
-
- # SRC_URI *must* be overriden in includer, but this is a good reference
- SRC_URI ?=3D "${HANDHELDS_CVS};module=3Dlinux/kernel26;tag=3D${@'K' + bb.d=
-ata.getVar('PV',d,1).replace('.', '-')} \
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-          As a computer, I find your faith in technology amusing.
-
-
+iD8DBQFFo5ngMkyGM64RGpERAj7TAJ9RMxZNVf5oSpqAF5XF/6Hjv+PpjACcCUf1
+wYhM8rcYhj24CLOsQ8QtneQ=3D
+=3DzuGD
+-----END PGP SIGNATURE-----
 
 
