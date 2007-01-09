@@ -1,31 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1H4PC6-0006tA-It
-	for openembedded-devel@openembedded.org; Tue, 09 Jan 2007 23:11:46 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1H4PAM-0000ZS-Qj
-	for openembedded-devel@openembedded.org; Tue, 09 Jan 2007 23:09:58 +0100
-Received: from r76b2.r.ppp-pool.de ([89.54.118.178])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 09 Jan 2007 23:09:58 +0100
-Received: from no2spam by r76b2.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 09 Jan 2007 23:09:58 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 09 Jan 2007 23:09:45 +0100
-Message-ID: <eo13rb$pkn$1@sea.gmane.org>
-References: <200701081618.46665.openembedded@hrw.one.pl>	<f96d234e0701080819q7a8017d3q922b055670163c54@mail.gmail.com>	<200701082034.43447.openembedded@hrw.one.pl>
+	(envelope-from <openembedded@hrw.one.pl>) id 1H4POL-0008HI-Mt
+	for openembedded-devel@openembedded.org; Tue, 09 Jan 2007 23:24:25 +0100
+Received: (qmail 30445 invoked by uid 813007); 9 Jan 2007 22:22:38 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 9 Jan 2007 22:22:38 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 9 Jan 2007 23:22:34 +0100
+User-Agent: KMail/1.9.5
+References: <200701081618.46665.openembedded@hrw.one.pl>
 	<200701091430.38026.openembedded@hrw.one.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: r76b2.r.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
-In-Reply-To: <200701091430.38026.openembedded@hrw.one.pl>
-Sender: news <news@sea.gmane.org>
+	<eo13rb$pkn$1@sea.gmane.org>
+In-Reply-To: <eo13rb$pkn$1@sea.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200701092322.34825.openembedded@hrw.one.pl>
 Subject: Re: Status of ARM machines in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,16 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jan 2007 22:11:47 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Jan 2007 22:24:26 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Marcin Juszkiewicz wrote:
+Dnia wtorek, 9 stycznia 2007 23:09, Rolf Leggewie napisa=B3:
+> > I did "angstrom-2007.1-oabi" build for collie, h3600, h3800, simpad,
+> > compulab-pxa270. Results:
+>
+> Do I see signs of collie being supported in angstrom?
 
-> I did "angstrom-2007.1-oabi" build for collie, h3600, h3800, simpad,
-> compulab-pxa270. Results:
+If collie will meet common rules then yes.=20
 
-Do I see signs of collie being supported in angstrom?
+Common rules:
+
+=2D 2.6 kernel
+=2D atleast 2 machine mentors in Angstrom
+=2D usable for users
+
+Currently collie meet only first...
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+    Progress (n.): The process through which the Internet has evolved=20
+    from smart people in front of dumb terminals to dumb people=20
+    in front of smart terminals.                          [obscurity]
+
 
 
 
