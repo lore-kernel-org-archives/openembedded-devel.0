@@ -1,24 +1,31 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <Patrick.Ohly@gmx.de>) id 1H4PW3-0008PI-VE
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <mickey@vanille-media.de>) id 1H4PjJ-00005V-Nb
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jan 2007 23:32:24 +0100
-Received: (qmail invoked by alias); 09 Jan 2007 22:30:37 -0000
-Received: from c-134-225-158.d.dsl.de.ignite.net (EHLO ip6-localhost)
-	[62.134.225.158]
-	by mail.gmx.net (mp032) with SMTP; 09 Jan 2007 23:30:37 +0100
-X-Authenticated: #489940
-Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
-	id 1H4PTy-0001uP-00; Tue, 09 Jan 2007 23:30:14 +0100
-From: Patrick Ohly <Patrick.Ohly@gmx.de>
-To: OpenEmbedded <openembedded-devel@lists.openembedded.org>
-Date: Tue, 09 Jan 2007 23:30:14 +0100
-Message-Id: <1168381814.4166.49.camel@ip6-localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-Sender: Patrick Ohly <patrick@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: eds-dbus + dbus-glib-native version conflict
+	Tue, 09 Jan 2007 23:46:05 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 833F328C012; Tue,  9 Jan 2007 23:40:19 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from [192.168.2.128] (e180135155.adsl.alicedsl.de [85.180.135.155])
+	by srv043.dedi23.de (Postfix) with ESMTP id 836C428C011
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Jan 2007 23:40:16 +0100 (CET)
+Date: Tue, 9 Jan 2007 23:44:16 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1104787648.20070109234416@vanille-media.de>
+To: Vladislav Grinchenko <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <1168376718.23671.54.camel@zorro>
+References: <1168361761.23671.36.camel@zorro>
+	<1562609309.20070109175743@vanille-media.de>
+	<1168376718.23671.54.camel@zorro>
+MIME-Version: 1.0
+Subject: Re: Q: build/install gpe-image from dev branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,27 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jan 2007 22:32:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 09 Jan 2007 22:46:06 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi,
+> The thingy depends on  arm-linux-gcc-2.95 which it couldn't find?
 
-FYI: the "generic" distro picks up the latest eds-dbus from subversion
-and dbus-glib[-native] 0.72. eds-dbus fails to compile because
-dbus-binding-tool is called without --prefix parameter, which apparently
-became obligatory in 0.72. I went back to 0.71 and then got eds-dbus
-compiled:
-  PREFERRED_VERSION_dbus-glib ?= "0.71"
-  PREFERRED_VERSION_dbus-glib-native ?= "0.71"
+Please take a look at the OpenZaurus wiki and/or local.conf.sample.
 
-Not sure whether anything should be done about this in the OE meta data.
-Getting it fixed in eds-dbus seems like the easier solution.
+> So, the question is how do I tell bitbake to build only a gpe-image?
 
+An image is a combined entity that is tightly coupled to a kernel.
+
+Regards,
+
+:M:
 -- 
-Bye, Patrick Ohly
---  
-Patrick.Ohly@gmx.de
-http://www.estamos.de/
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
