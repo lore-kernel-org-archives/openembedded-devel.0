@@ -1,32 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1H4d6A-0000AL-6j
-	for openembedded-devel@openembedded.org; Wed, 10 Jan 2007 14:02:34 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1H4d4E-0003eZ-0R
-	for openembedded-devel@openembedded.org; Wed, 10 Jan 2007 14:00:34 +0100
-Received: from dialin108123.justdsl.de ([85.25.108.123])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 10 Jan 2007 14:00:34 +0100
-Received: from no2spam by dialin108123.justdsl.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 10 Jan 2007 14:00:34 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 10 Jan 2007 14:00:22 +0100
-Message-ID: <eo2o1a$9v4$1@sea.gmane.org>
-References: <200701081618.46665.openembedded@hrw.one.pl>	<200701091430.38026.openembedded@hrw.one.pl>	<eo13rb$pkn$1@sea.gmane.org>
+	(envelope-from <openembedded@hrw.one.pl>) id 1H4daa-00054n-19
+	for openembedded-devel@openembedded.org; Wed, 10 Jan 2007 14:34:00 +0100
+Received: (qmail 26936 invoked by uid 813007); 10 Jan 2007 13:32:08 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 10 Jan 2007 13:32:08 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+Organization: OpenEmbedded
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 10 Jan 2007 14:32:06 +0100
+User-Agent: KMail/1.9.5
+References: <200701081618.46665.openembedded@hrw.one.pl>
 	<200701092322.34825.openembedded@hrw.one.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: dialin108123.justdsl.de
-User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
-In-Reply-To: <200701092322.34825.openembedded@hrw.one.pl>
-Sender: news <news@sea.gmane.org>
+	<eo2o1a$9v4$1@sea.gmane.org>
+In-Reply-To: <eo2o1a$9v4$1@sea.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200701101432.06542.openembedded@hrw.one.pl>
 Subject: Re: Status of ARM machines in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,29 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2007 13:02:34 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Jan 2007 13:34:00 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Marcin Juszkiewicz wrote:
+Dnia =B6roda, 10 stycznia 2007 14:00, Rolf Leggewie napisa=B3:
+> Marcin Juszkiewicz wrote:
+> >> Do I see signs of collie being supported in angstrom?
+> >
+> > If collie will meet common rules then yes.
+> >
+> > Common rules:
+> >
+> > - 2.6 kernel
+>
+> but still no SD, right?
 
->> Do I see signs of collie being supported in angstrom?
-> 
-> If collie will meet common rules then yes. 
-> 
-> Common rules:
-> 
-> - 2.6 kernel
+What does rule 'Machine must have working 2.6 kernel' has to do with SD?=20
+There are machines which run Angstrom which does not have SD slot.
 
-but still no SD, right?
+> > - atleast 2 machine mentors in Angstrom
+> > - usable for users
+> >
+> > Currently collie meet only first...
 
-> - atleast 2 machine mentors in Angstrom
-> - usable for users
-> 
-> Currently collie meet only first...
+> What is the status on the last two? =20
 
-What is the status on the last two?  What is necessary to become machine 
-mentor?  What is not usable for users in collie angstrom?
+> What is necessary to become machine mentor?=20
+
+Contact Angstrom maintainers, test machine images, help fixing bugs and=20
+improve machine support.
+
+> What is not usable for users in collie angstrom?=20
+
+There is no MMC/SD support, few other things are not finished in 2.6 port=20
+too. Before those get fixed collie is unusable for users.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+           Despair is just another word for 'not enough coffee'=20
+           		Wally
+
 
 
 
