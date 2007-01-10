@@ -1,23 +1,29 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1H4daa-00054n-19
-	for openembedded-devel@openembedded.org; Wed, 10 Jan 2007 14:34:00 +0100
-Received: (qmail 26936 invoked by uid 813007); 10 Jan 2007 13:32:08 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO ?192.168.1.90?)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 10 Jan 2007 13:32:08 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-Organization: OpenEmbedded
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jan 2007 14:32:06 +0100
-User-Agent: KMail/1.9.5
+	(envelope-from <pmiscml@gmail.com>) id 1H4e7k-0003UT-Ga
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Jan 2007 15:08:16 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so486710nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Jan 2007 06:06:26 -0800 (PST)
+Received: by 10.49.20.15 with SMTP id x15mr1196454nfi.1168437986134;
+	Wed, 10 Jan 2007 06:06:26 -0800 (PST)
+Received: from CUBE ( [82.193.96.238])
+	by mx.google.com with ESMTP id c1sm4009541nfe.2007.01.10.06.06.25;
+	Wed, 10 Jan 2007 06:06:25 -0800 (PST)
+Date: Wed, 10 Jan 2007 16:06:38 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1132961128.20070110160638@gmail.com>
+To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+In-Reply-To: <200701092322.34825.openembedded@hrw.one.pl>
 References: <200701081618.46665.openembedded@hrw.one.pl>
+	<200701091430.38026.openembedded@hrw.one.pl>
+	<eo13rb$pkn$1@sea.gmane.org>
 	<200701092322.34825.openembedded@hrw.one.pl>
-	<eo2o1a$9v4$1@sea.gmane.org>
-In-Reply-To: <eo2o1a$9v4$1@sea.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200701101432.06542.openembedded@hrw.one.pl>
+Cc: openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org
 Subject: Re: Status of ARM machines in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,51 +38,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2007 13:34:00 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Wed, 10 Jan 2007 14:08:16 -0000
+Content-Type: text/plain; charset=iso-8859-2
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia =B6roda, 10 stycznia 2007 14:00, Rolf Leggewie napisa=B3:
-> Marcin Juszkiewicz wrote:
-> >> Do I see signs of collie being supported in angstrom?
-> >
-> > If collie will meet common rules then yes.
-> >
-> > Common rules:
-> >
-> > - 2.6 kernel
->
-> but still no SD, right?
+Hello Marcin,
 
-What does rule 'Machine must have working 2.6 kernel' has to do with SD?=20
-There are machines which run Angstrom which does not have SD slot.
+Wednesday, January 10, 2007, 12:22:34 AM, you wrote:
 
-> > - atleast 2 machine mentors in Angstrom
-> > - usable for users
-> >
-> > Currently collie meet only first...
+> Dnia wtorek, 9 stycznia 2007 23:09, Rolf Leggewie napisa=B3:
+>> > I did "angstrom-2007.1-oabi" build for collie, h3600, h3800, simpad,
+>> > compulab-pxa270. Results:
+>>
+>> Do I see signs of collie being supported in angstrom?
 
-> What is the status on the last two? =20
+> If collie will meet common rules then yes.=20
 
-> What is necessary to become machine mentor?=20
+> Common rules:
 
-Contact Angstrom maintainers, test machine images, help fixing bugs and=20
-improve machine support.
+> - 2.6 kernel
+> - atleast 2 machine mentors in Angstrom
 
-> What is not usable for users in collie angstrom?=20
+  Now, 2? Isn't that too steep? It's understood when 2 or more people
+required to support some big software system, but what about machines?
+Such requirement is simply not realistic for most of them. Of HH.org
+machines, only hx4700 would qualify fully. Even for h2200 that would
+be questionable, but thanks god, Koen has it, so assuming Matt Reimer
+mentors it, it is safe.
 
-There is no MMC/SD support, few other things are not finished in 2.6 port=20
-too. Before those get fixed collie is unusable for users.
+  With such rules, there won't be Linux for PDA any time soon, only
+Linux for Zauruses, Linux for iPaq hx4700, and other toy Linuxes.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+  What's really required here is a point of view change. It would be
+ludicrous to think that Debian would require two maintainers for each
+motherboard model of each vendor. Debian simply doesn't deal with such
+things as motherboards. It supports specific CPU architectures, that's
+enough. And at the same time Linux distros for PDAs are obsessed over
+PDA motherboards. There's even animism tendencies considering that
+"machine" is something more than a tag given to some motherboard
+implementation of the architecture, but also a bootloader spirit lives
+there, and by conjuring it away one can beshrew rage of gods, etc.,
+etc.
 
-           Despair is just another word for 'not enough coffee'=20
-           		Wally
+  So, stepping away from that towards architecture implementations as
+such, I may offer myself as a mentor for all handhelds.org-maintained
+machines. In 2.6 kernels, we have all the needed commonality and
+generality (and work towards more) to treat all our machines
+consistently. So, what's really required is someone to physically test
+boot on a machine, and that's enough. Not boot means upstream (hh.org)
+kernel problem, otherwise, it works (bugs are either common or due to
+specific kernel bug also).
 
+
+
+--=20
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
