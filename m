@@ -1,24 +1,26 @@
-Received: from [66.249.92.173] (helo=ug-out-1314.google.com)
+Received: from [64.233.182.188] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <philipp.zabel@gmail.com>) id 1H4YzY-00010c-1n
+	(envelope-from <pmiscml@gmail.com>) id 1H4cyU-0008Us-UZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Jan 2007 09:39:28 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so34971ugf
+	Wed, 10 Jan 2007 13:54:38 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so468864nfc
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2007 00:37:38 -0800 (PST)
-Received: by 10.78.187.17 with SMTP id k17mr20959huf.1168418258724;
-	Wed, 10 Jan 2007 00:37:38 -0800 (PST)
-Received: by 10.78.194.1 with HTTP; Wed, 10 Jan 2007 00:37:38 -0800 (PST)
-Message-ID: <74d0deb30701100037g1fd50d6y240a4765dd3bf874@mail.gmail.com>
-Date: Wed, 10 Jan 2007 09:37:38 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	Wed, 10 Jan 2007 04:52:48 -0800 (PST)
+Received: by 10.49.65.19 with SMTP id s19mr1144692nfk.1168433568789;
+	Wed, 10 Jan 2007 04:52:48 -0800 (PST)
+Received: from CUBE ( [82.193.96.238])
+	by mx.google.com with ESMTP id a23sm3814218nfc.2007.01.10.04.52.48;
+	Wed, 10 Jan 2007 04:52:48 -0800 (PST)
+Date: Wed, 10 Jan 2007 14:53:03 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <9510564690.20070110145303@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1727737376.20070110090801@vanille-media.de>
-MIME-Version: 1.0
 References: <E1H4Y6N-0007ih-CH@linuxtogo.org>
 	<1727737376.20070110090801@vanille-media.de>
-Cc: pH5 commit <openembedded-commits@lists.openembedded.org>
-Subject: Re: [oe-commits] org.oe.dev linux-handhelds-2.6: magician defconfig: I2C_PXA=y
+MIME-Version: 1.0
+Subject: Few spurious commits lately, was org.oe.dev linux-handhelds-2.6: magician defconfig: I2C_PXA=y
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,21 +34,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2007 08:39:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 10 Jan 2007 12:54:39 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 1/10/07, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
-> ?
->
-> Regards,
->
-> :M:
+Hello Michael,
 
-Fixed. Thanks for the notice.
+Wednesday, January 10, 2007, 10:08:01 AM, you wrote:
 
-regards
-Philipp
+>> packages/base-files/base-files/magician
+>> packages/multimachine
+>> packages/netbase/netbase/hx4700
+>> packages/netbase/netbase/magician
+>> packages/openswan/openswan-2.4.4
+>> packages/poweroffkey
+
+[]
+
+  Well, it seems there was few such commits lately, worth a note that
+mtn doesn't work like CVS/SVN, where omitting a path for commit means
+"this directory and subdirectory". Instead, mtn/git treat this as
+"commit the whole tree". To get familiar behavior, please use "." for
+commit:
+
+       mtn commit .
+
+  And besides, mtn shows list of files it will commit when editing
+commit message, so *not* using "-m" makes sense ;-).
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
