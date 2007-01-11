@@ -1,20 +1,20 @@
-Received: from [64.233.162.225] (helo=nz-out-0506.google.com)
+Received: from [64.233.184.235] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <sdgvulpes@gmail.com>) id 1H4px0-0001jA-8z
+	(envelope-from <andrew.paulsen@gmail.com>) id 1H52cg-0001DD-Ar
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Jan 2007 03:45:59 +0100
-Received: by nz-out-0506.google.com with SMTP id m22so228045nzf
+	Thu, 11 Jan 2007 17:17:50 +0100
+Received: by wr-out-0506.google.com with SMTP id i22so340105wra
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2007 18:44:04 -0800 (PST)
-Received: by 10.65.251.2 with SMTP id d2mr1431648qbs.1168483444379;
-	Wed, 10 Jan 2007 18:44:04 -0800 (PST)
-Received: by 10.64.209.2 with HTTP; Wed, 10 Jan 2007 18:44:04 -0800 (PST)
-Message-ID: <f34f85580701101844x1efe4edcp4f6c458cfb8263d3@mail.gmail.com>
-Date: Wed, 10 Jan 2007 21:44:04 -0500
-From: "Todd Blumer" <sdgvulpes@gmail.com>
+	Thu, 11 Jan 2007 08:15:53 -0800 (PST)
+Received: by 10.78.180.16 with SMTP id c16mr544345huf.1168532152428;
+	Thu, 11 Jan 2007 08:15:52 -0800 (PST)
+Received: by 10.78.159.2 with HTTP; Thu, 11 Jan 2007 08:15:52 -0800 (PST)
+Message-ID: <d46153c40701110815r63a6dcaal1d3162e202fe7ad6@mail.gmail.com>
+Date: Thu, 11 Jan 2007 10:15:52 -0600
+From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Subject: SDK problem
+Subject: ext3 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,24 +28,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jan 2007 02:46:01 -0000
+X-List-Received-Date: Thu, 11 Jan 2007 16:17:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Just for the record (for those who might google for this topic), I was
-trying to build Qtopia using the OE SDK (meta-sdk). It was failing
-with unresolved symbols of __dlsym, __dlopen, etc. The problem is that
-the SDK symlinks for some of the libraries are incorrect (dead
-symlinks). I would have thought that the linker would complain about
-not finding a resolvable library, but apparently does not. The staging
-directory libs have the correct symlinks, but not the SDK. Don't know
-why that is at this point, but manually fixing the symlinks causes the
-unresolved symbols to go away (as you would expect).
+I don't know if anyone else is interested, but ext3 seems to work if
+you add journaling to an ext2 rootfs image.  Here is my attempt at
+supporting this from OpenEmbedded:
 
-Hope this helps someone else save some time.
---
-Todd Blumer
-SDG Systems
+EXTRA_IMAGECMD_ext3 ?= ""
+IMAGE_DEPENDS_ext3 = "genext2fs-native e2fsprogs-native"
+IMAGE_CMD_ext3 = "genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS}
+${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3; \
+        tune2fs -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3;
+${EXTRA_IMAGECMD}"
+
+It builds the depends and rootfs and the kernel recognizes it as an
+ext3 file system.
 
 
