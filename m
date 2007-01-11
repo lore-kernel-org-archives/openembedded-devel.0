@@ -1,27 +1,19 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [137.79.94.127] (helo=s383.jpl.nasa.gov)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H547L-00041A-N6
-	for openembedded-devel@openembedded.org; Thu, 11 Jan 2007 18:53:35 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l0BHpWLr027316 for <openembedded-devel@openembedded.org>;
-	Thu, 11 Jan 2007 18:51:32 +0100
-Message-ID: <45A6791E.60802@dominion.kabel.utwente.nl>
-Date: Thu, 11 Jan 2007 18:51:26 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1168532784.21840.4.camel@localhost>
-	<1168537022.8701.10.camel@localhost>
-In-Reply-To: <1168537022.8701.10.camel@localhost>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Nokia 770, GPE, Angstrom
+	(envelope-from <ehovland@s383.jpl.nasa.gov>) id 1H56ap-0001cU-07
+	for openembedded-devel@openembedded.org; Thu, 11 Jan 2007 21:32:11 +0100
+Received: from mage.jpl.nasa.gov (mage [137.78.15.62])
+	by s383.jpl.nasa.gov (8.12.10/8.12.10) with ESMTP id l0BKUBpg012676;
+	Thu, 11 Jan 2007 12:30:11 -0800 (PST)
+Received: by mage.jpl.nasa.gov (Postfix, from userid 4960)
+	id 305E8300016B; Thu, 11 Jan 2007 12:30:11 -0800 (PST)
+Date: Thu, 11 Jan 2007 12:30:11 -0800
+From: Erik Hovland <erik@hovland.org>
+To: familiar-dev@handhelds.org, openembedded-devel@openembedded.org
+Message-ID: <20070111203010.GB336@mage.jpl.nasa.gov>
+Mime-Version: 1.0
+User-Agent: Mutt/1.5.9i
+Subject: [announce] new tagged version of ipkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,33 +27,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jan 2007 17:53:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Jan 2007 20:32:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I have commited my recent work to improve the stability and general
+robustness of the ipkg code base.
 
-Andrew Barr schreef:
-> Does updated, plain Kdrive
-> support the OMAP / Nokia 770 graphics 
+The cvs repo has been tagged with V0-99-164.
 
-Iirc not
+Feel free to try it out on your favorite ipkg based distro today.
 
-> or do I need to figure out how to
-> build (or file a bug against) the old Xomap server to run OE on my 770?
+I will gladly take feedback associated to any commit I made to take the
+load off of Pigi (the current maintainer). So please either open a bug
+in the handhelds.org bugzilla and assign the bug to me initially or
+contact me directly if you find a problem.
 
-Try building the latest Xomap from the nokia sources.
+Thanks!
 
-Regards,
+E
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFpnkeMkyGM64RGpERAnWAAJ9zgHsHDAibQL/OJFPzSeQEw3bQ1gCgitei
-XLpdQ7aKt03hvzpmtfCuQws=
-=smce
------END PGP SIGNATURE-----
+-- 
+Erik Hovland
+mail: erik AT hovland DOT org
+web: http://hovland.org/
+PGP/GPG public key available on request
 
 
