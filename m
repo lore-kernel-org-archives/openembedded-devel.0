@@ -1,25 +1,26 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H4n8W-0007BB-Sl
-	for openembedded-devel@openembedded.org; Thu, 11 Jan 2007 00:45:40 +0100
-Received: from lieve.dominion.void (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l0ANhdox001041 for <openembedded-devel@openembedded.org>;
-	Thu, 11 Jan 2007 00:43:39 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <E1H4mEX-0005Jg-Pk@linuxtogo.org>
-References: <E1H4mEX-0005Jg-Pk@linuxtogo.org>
-Date: Thu, 11 Jan 2007 00:43:07 +0100
-Message-Id: <1168472587.5483.2.camel@lieve>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev packages/parted/parted_1.8.0.bb:	Addition of mem allocation patch
+	(envelope-from <papercrane@gmail.com>) id 1H4nfE-0007Z9-Ly
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Jan 2007 01:19:28 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so256910ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Jan 2007 16:17:35 -0800 (PST)
+Received: by 10.78.185.15 with SMTP id i15mr286753huf.1168474655458;
+	Wed, 10 Jan 2007 16:17:35 -0800 (PST)
+Received: by 10.78.39.8 with HTTP; Wed, 10 Jan 2007 16:17:35 -0800 (PST)
+Message-ID: <432beae0701101617h2fa97c8cj4caf5965af87ff4c@mail.gmail.com>
+Date: Wed, 10 Jan 2007 16:17:35 -0800
+From: "Justin Patrin" <papercrane@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <193b6ba30701092313geb37716ma1a9329bb2c808cf@mail.gmail.com>
+MIME-Version: 1.0
+References: <193b6ba30701050001t75ae1356s3bfb93e4834e1ba7@mail.gmail.com>
+	<432beae0701050004n59458e75s53436646452806c0@mail.gmail.com>
+	<193b6ba30701050014t25df7b5cw16cd8b1eb40995ef@mail.gmail.com>
+	<20070105084303.GA3124@hezmatt.org>
+	<193b6ba30701092313geb37716ma1a9329bb2c808cf@mail.gmail.com>
+Subject: Re: Please help me
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,57 +34,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2007 23:45:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 11 Jan 2007 00:19:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Could you also add the actual patch?
+On 1/9/07, Debasree Mallick <debasreeat@gmail.com> wrote:
+> Hi Matthew,
+>
+> I want to use the prebuilt toolchain for ARM 9 target...But i could
+> not....As i skip the command
+> #bitbake world  as it will take 35GB
+> will it necessary to use the pre buitd toolchain in OE?????...
 
-Op wo, 10-01-2007 te 23:47 +0100, schreef kristoffer commit:
-> packages/parted/parted_1.8.0.bb: Addition of mem allocation patch
-> * Currently parted 1.8.0 doesnt work on ARM devices
->   when using glibc 2.5. This patch although it didnt solve the
->   issue is an update from their maintainer.
-> 
-> Author: kristoffer@openembedded.org
-> Branch: org.openembedded.dev
-> Revision: ab8f78229862d338d098dfcf3f16220f581fc88d
-> ViewMTN: http://monotone.openembedded.org/revision.psp?id=ab8f78229862d338d098dfcf3f16220f581fc88d
-> Files:
-> 1
-> packages/parted/parted_1.8.0.bb
-> Diffs:
-> 
-> #
-> # mt diff -rece70fc7a4ae5629717d10fd851fa3b219086494 -rab8f78229862d338d098dfcf3f16220f581fc88d
-> #
-> # 
-> # 
-> # patch "packages/parted/parted_1.8.0.bb"
-> #  from [896f73b9e4a2aaef2af4e2ce3de9ada7960e4e2c]
-> #    to [02861e9f7b662a601a0e16446d7e975a28746824]
-> # 
-> ============================================================
-> --- packages/parted/parted_1.8.0.bb	896f73b9e4a2aaef2af4e2ce3de9ada7960e4e2c
-> +++ packages/parted/parted_1.8.0.bb	02861e9f7b662a601a0e16446d7e975a28746824
-> @@ -5,7 +5,8 @@ PR = "r0"
->  DEPENDS = "readline e2fsprogs-libs"
->  PR = "r0"
->  
-> -SRC_URI = "${GNU_MIRROR}/parted/parted-${PV}.tar.gz"
-> +SRC_URI = "${GNU_MIRROR}/parted/parted-${PV}.tar.gz \
-> +           file://memory_allocation.patch;patch=0"
->  
->  EXTRA_OECONF = "--disable-Werror"
->  #export CFLAGS = "-mstructure-size-boundary=8"
-> 
-> 
-> 
+I'm sorry, I'm not sure how all that connects.
+
+If you want to use a prebuilt toolchain you should be able to as long
+as it is in your path and you set ASSUME_PROVIDED to included the
+toolchain recipes.
+
+If you don't want to bitbake world you don't have to. Just bitbake the
+specific things you want.
+
+It is not necessary to use a pre-built toolchain but you are welcome
+to if you wish.
+
+>
+> If u can please ans me...
+> Thanks
+> Debasree
+>
+> On 1/5/07, Matthew Palmer <mpalmer@hezmatt.org> wrote:
+> >
+> > [Again, a relevant subject line would help]
+> >
+> > On Fri, Jan 05, 2007 at 05:14:18PM +0900, Debasree Mallick wrote:
+> > > When i type bitbake nano...then
+> >
+> > [snip]
+> >
+> > > NOTE: package fakeroot-native-1.2.13: started
+> > > NOTE: package fakeroot-native-1.2.13-r1: task do_fetch: started
+> > > NOTE: fetch http://openzaurus.org/mirror/fakeroot_1.2.13.tar.gz
+> > > --17:11:00--  http://openzaurus.org/mirror/fakeroot_1.2.13.tar.gz
+> > >            => `/root/sources/fakeroot_1.2.13.tar.gz'
+> > > Resolving openzaurus.org... 85.214.40.226
+> > > Connecting to openzaurus.org|85.214.40.226|:80... connected.
+> > > HTTP request sent, awaiting response... 302 Found
+> > > Location:
+> > http://openzaurus.linuxtogo.org/mirror/fakeroot_1.2.13.tar.gz[following]
+> > > --17:11:01--
+> > http://openzaurus.linuxtogo.org/mirror/fakeroot_1.2.13.tar.gz
+> > >            => `/root/sources/fakeroot_1.2.13.tar.gz'
+> > > Resolving openzaurus.linuxtogo.org... 85.214.40.226
+> > > Reusing existing connection to openzaurus.org:80.
+> > > HTTP request sent, awaiting response... 404 Not Found
+> > > 17:11:02 ERROR 404: Not Found.
+> >
+> > Ooooh bugger.  It looks like the source mirror has lost the fakeroot
+> > tarball; but that's a pretty old version of fakeroot -- I'm surprised
+> > there
+> > isn't a newer version in the tree.  I've never needed to build fakeroot to
+> > build things like nano, though.  That might be because I've already got
+> > fakeroot installed on my machine, though, so perhaps you could give that a
+> > shot?  It's not a /solution/, as such, but it'll at least get you going.
+> > Meanwhile, someone probably needs to either find that source tarball
+> > again,
+> > or update the tree to use a newer version of fakeroot.
+> >
+> > - Matt
+> >
+> > --
+> > With enough people around there's a probability ~=1 that one of them is an
+> > MCSE and will give you the wrong answer to your problem.
+> >         -- Toni Lassila, in the Monastery
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
 > _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
-> 
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
+
+-- 
+Justin Patrin
 
 
