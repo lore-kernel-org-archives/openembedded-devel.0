@@ -1,23 +1,24 @@
-Received: from [137.79.94.127] (helo=s383.jpl.nasa.gov)
+Received: from [64.233.184.238] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <ehovland@s383.jpl.nasa.gov>) id 1H59h4-00088D-8D
-	for openembedded-devel@openembedded.org; Fri, 12 Jan 2007 00:50:50 +0100
-Received: from mage.jpl.nasa.gov (mage [137.78.15.62])
-	by s383.jpl.nasa.gov (8.12.10/8.12.10) with ESMTP id l0BNmopg016171;
-	Thu, 11 Jan 2007 15:48:50 -0800 (PST)
-Received: by mage.jpl.nasa.gov (Postfix, from userid 4960)
-	id 44041300016B; Thu, 11 Jan 2007 15:48:50 -0800 (PST)
-Date: Thu, 11 Jan 2007 15:48:50 -0800
-From: Erik Hovland <erik@hovland.org>
-To: familiar@handhelds.org, openembedded-devel@openembedded.org
-Message-ID: <20070111234850.GI336@mage.jpl.nasa.gov>
+	(envelope-from <mattjreimer@gmail.com>) id 1H5Re5-0005JJ-Ev
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Jan 2007 20:01:08 +0100
+Received: by wr-out-0506.google.com with SMTP id i23so431372wra
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Jan 2007 10:58:53 -0800 (PST)
+Received: by 10.78.185.16 with SMTP id i16mr586428huf.1168628314660;
+	Fri, 12 Jan 2007 10:58:34 -0800 (PST)
+Received: by 10.78.178.8 with HTTP; Fri, 12 Jan 2007 10:58:34 -0800 (PST)
+Message-ID: <f383264b0701121058n43be78dbu15871cb892681801@mail.gmail.com>
+Date: Fri, 12 Jan 2007 10:58:34 -0800
+From: "Matt Reimer" <mattjreimer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20070111214849.GD336@mage.jpl.nasa.gov>
+MIME-Version: 1.0
 References: <20070111203010.GB336@mage.jpl.nasa.gov>
 	<45A6A0C2.2080400@dominion.kabel.utwente.nl>
 	<20070111214849.GD336@mage.jpl.nasa.gov>
-	<24388092.20070111225131@vanille-media.de>
-Mime-Version: 1.0
-In-Reply-To: <24388092.20070111225131@vanille-media.de>
-User-Agent: Mutt/1.5.9i
+Cc: openembedded-devel@openembedded.org, familiar@handhelds.org
 Subject: Re: [announce] new tagged version of ipkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,24 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jan 2007 23:50:51 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 12 Jan 2007 19:01:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thu, Jan 11, 2007 at 10:51:31PM +0100, Michael 'Mickey' Lauer wrote:
-> Cool, thanks. Any plans to improve the speed problems?
+On 1/11/07, Erik Hovland <erik@hovland.org> wrote:
+> > Tarball?
+>
+> No tarball at this time. If one is desired it can be facilitated.
+>
+> > ChangeLog?
+>
+> The ipkg/C/ChangeLog has been updated:
+>
+> 2007-01-11 erik ( erik@hovland.org)
+>         * Version update to 0.99.164
+>         * Fixed usage of temporary files to be more secure
+>         * Closed several potential memory/file descriptor leaks
+>         * Cleaned up warnings in several parts of the code
+>         * Added checking to libbb/unzip.c so it did not use tainted data
+>         * Changed code in several places where it is possible to dereference an invalid pointer
 
-No plans. But I might be convinced if bugs started showing up in
-trackers that pointed at some specifics. The biggest interest to me is
-seeing ipkg get to a '1.0' version. But I could see how speed might be
-one of the goals of that.
+I'd like to see this added to the ChangeLog:
 
-E
+* Converted from storing metadata in flat files to storing it in an sqlite db
 
--- 
-Erik Hovland
-mail: erik AT hovland DOT org
-web: http://hovland.org/
-PGP/GPG public key available on request
+Of course, a bit of work might be needed to actually make that a true
+statement. ;-)
+
+Matt
 
 
