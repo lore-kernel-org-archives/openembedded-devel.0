@@ -1,27 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1H5SKv-0007EF-4A
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Jan 2007 20:45:19 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 6404F28C012; Fri, 12 Jan 2007 20:39:03 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from [192.168.2.128] (e180132211.adsl.alicedsl.de [85.180.132.211])
-	by srv043.dedi23.de (Postfix) with ESMTP id 8575F28C011
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jan 2007 20:39:00 +0100 (CET)
-Date: Fri, 12 Jan 2007 20:43:08 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.95.6) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1888834532.20070112204308@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H5Sya-0000XB-6L
+	for openembedded-devel@openembedded.org; Fri, 12 Jan 2007 21:26:12 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l0CKO4Lr014148 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Jan 2007 21:24:04 +0100
+Message-ID: <45A7EE5C.2050800@dominion.kabel.utwente.nl>
+Date: Fri, 12 Jan 2007 21:23:56 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-Subject: Gtk+ 2.6.10 w/ newer Glibs
+To: openembedded-devel@openembedded.org
+References: <20070111203010.GB336@mage.jpl.nasa.gov>	<45A6A0C2.2080400@dominion.kabel.utwente.nl>	<20070111214849.GD336@mage.jpl.nasa.gov>
+	<f383264b0701121058n43be78dbu15871cb892681801@mail.gmail.com>
+In-Reply-To: <f383264b0701121058n43be78dbu15871cb892681801@mail.gmail.com>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [announce] new tagged version of ipkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,71 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jan 2007 19:45:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 12 Jan 2007 20:26:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Since .dev upgraded gnome-vfs and removed gnome-vfs-dbus, gnome-vfs is
-no longer buildable against an old (<=3D 2.9.4) glib. Gtk+ 2.6.10 (which is=
- still
-in wide use today) again is not buildable against newer glib variants.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Any glib / Gtk+ experts to fix the problem? The first issue out is
-here:
+Matt Reimer schreef:
+> On 1/11/07, Erik Hovland <erik@hovland.org> wrote:
+>>> Tarball?
+>> No tarball at this time. If one is desired it can be facilitated.
+>>
+>>> ChangeLog?
+>> The ipkg/C/ChangeLog has been updated:
+>>
+>> 2007-01-11 erik ( erik@hovland.org)
+>>         * Version update to 0.99.164
+>>         * Fixed usage of temporary files to be more secure
+>>         * Closed several potential memory/file descriptor leaks
+>>         * Cleaned up warnings in several parts of the code
+>>         * Added checking to libbb/unzip.c so it did not use tainted data
+>>         * Changed code in several places where it is possible to dereference an invalid pointer
+> 
+> I'd like to see this added to the ChangeLog:
+> 
+> * Converted from storing metadata in flat files to storing it in an sqlite db
+> 
+> Of course, a bit of work might be needed to actually make that a true
+> statement. ;-)
 
-|  arm-linux-gcc -march=3Darmv4t -mtune=3Darm920t -DHAVE_CONFIG_H -I. -I/lo=
-cal/pkg/openmoko/gta01/tmp/work/armv4t-linux/gtk+-2.6.10-r4/gtk+-2.6.10/mod=
-ules/engines/pixbuf -I../../.. -I/local/pkg/openmoko/gta01/tmp/work/armv4t-=
-linux/gtk+-2.6.10-r4/gtk+-2.6.10 -I/local/pkg/openmoko/gta01/tmp/work/armv4=
-t-linux/gtk+-2.6.10-r4/gtk+-2.6.10/gdk -I../../../gdk -DG_DISABLE_DEPRECATE=
-D -DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -pthread -I/loca=
-l/pkg/openmoko/gta01/tmp/staging/arm-linux/include/glib-2.0 -I/local/pkg/op=
-enmoko/gta01/tmp/staging/arm-linux/lib/glib-2.0/include -I/local/pkg/openmo=
-ko/gta01/tmp/staging/arm-linux/include/pango-1.0 -I/local/pkg/openmoko/gta0=
-1/tmp/staging/arm-linux/include -I/local/pkg/openmoko/gta01/tmp/staging/arm=
--linux/include/freetype2 -I/local/pkg/openmoko/gta01/tmp/staging/arm-linux/=
-include/atk-1.0 -I/local/pkg/openmoko/gta01/tmp/staging/arm-linux/include -=
-I/local/pkg/openmoko/gta01/tmp/staging/arm-linux/include -isystem/local/pkg=
-/openmoko/gta01/tmp/staging/arm-linux/include -isystem/local/pkg/openmoko/g=
-ta01/tmp/staging/arm-linux/include -fexpensive-optimizations -fomit-frame-p=
-ointer -frename-registers -O2 -Wall -MT pixbuf-draw.lo -MD -MP -MF .deps/pi=
-xbuf-draw.Tpo -c pixbuf-draw.c  -fPIC -DPIC -o .libs/pixbuf-draw.o
-| In file included from ../../../gtk/gtk.h:60,
-|                  from pixbuf.h:23,
-|                  from pixbuf-draw.c:28:
-| ../../../gtk/gtkclist.h:155: error: expected specifier-qualifier-list bef=
-ore 'GMemChunk'
-| In file included from ../../../gtk/gtk.h:152,
-|                  from pixbuf.h:23,
-|                  from pixbuf-draw.c:28:
-| ../../../gtk/gtkstatusbar.h:68: error: expected specifier-qualifier-list =
-before 'GMemChunk'
-| make[4]: *** [pixbuf-draw.lo] Fehler 1
-| make[4]: Leaving directory `/local/pkg/openmoko/gta01/tmp/work/armv4t-lin=
-ux/gtk+-2.6.10-r4/gtk+-2.6.10/modules/engines/pixbuf'
-| make[3]: *** [all-recursive] Fehler 1
-| make[3]: Leaving directory `/local/pkg/openmoko/gta01/tmp/work/armv4t-lin=
-ux/gtk+-2.6.10-r4/gtk+-2.6.10/modules/engines'
-| make[2]: *** [all-recursive] Fehler 1
-| make[2]: Leaving directory `/local/pkg/openmoko/gta01/tmp/work/armv4t-lin=
-ux/gtk+-2.6.10-r4/gtk+-2.6.10/modules'
-| make[1]: *** [all-recursive] Fehler 1
-| make[1]: Leaving directory `/local/pkg/openmoko/gta01/tmp/work/armv4t-lin=
-ux/gtk+-2.6.10-r4/gtk+-2.6.10'
-| make: *** [all] Fehler 2
-| FATAL: oe_runmake failed
-NOTE: Task failed: /local/pkg/openmoko/gta01/tmp/work/armv4t-linux/gtk+-2.6=
-.10-r4/temp/log.do_compile.30492
-NOTE: package gtk+-2.6.10-r4: task do_compile: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package gtk+-2.6.10: failed
-ERROR: Build of 'gtk+' failed
+Marcin and I already have that information in a sqlite3 database for the feedbrowser we
+wrote. All it needs it a wrapper that read the information and spawns 'ipkg install
+http://foo/bar.ipk'
 
-Regards,
+regards,
 
-:M:
---=20
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Koen
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFp+5cMkyGM64RGpERAqBoAJ0RD6+IbqU7HT11aMvm6lcGsEVFpQCeJIug
+mUZPTqKS5OzOtQ1+EJFtXX8=
+=Lbl6
+-----END PGP SIGNATURE-----
 
 
