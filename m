@@ -1,33 +1,32 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1H5VUz-0004zi-H1
-	for openembedded-devel@openembedded.org; Sat, 13 Jan 2007 00:07:49 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0CN5aJC010024;
-	Fri, 12 Jan 2007 23:05:36 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09801-07; Fri, 12 Jan 2007 23:05:33 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0CN5VTb010010
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Fri, 12 Jan 2007 23:05:32 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org, familiar@handhelds.org
-In-Reply-To: <1589219206.20070112213137@gmail.com>
-References: <20070111203010.GB336@mage.jpl.nasa.gov>
-	<45A6A0C2.2080400@dominion.kabel.utwente.nl>
-	<20070111214849.GD336@mage.jpl.nasa.gov>
-	<f383264b0701121058n43be78dbu15871cb892681801@mail.gmail.com>
-	<1589219206.20070112213137@gmail.com>
-Date: Fri, 12 Jan 2007 23:05:33 +0000
-Message-Id: <1168643133.5861.35.camel@localhost.localdomain>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1H5VfL-00059n-I6
+	for openembedded-devel@openembedded.org; Sat, 13 Jan 2007 00:18:31 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1H5VdG-00025o-QC
+	for openembedded-devel@openembedded.org; Sat, 13 Jan 2007 00:16:22 +0100
+Received: from 87.193.68.139 ([87.193.68.139])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 13 Jan 2007 00:16:22 +0100
+Received: from no2spam by 87.193.68.139 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 13 Jan 2007 00:16:22 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sat, 13 Jan 2007 00:16:12 +0100
+Message-ID: <eo94rt$dlu$1@sea.gmane.org>
+References: <459A4C53.3090401@dominion.kabel.utwente.nl>	<endn5s$e4u$1@sea.gmane.org>
+	<200701122236.26612.openembedded@hrw.one.pl>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [Familiar] Re: [announce] new tagged version of ipkg
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: 87.193.68.139
+User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
+In-Reply-To: <200701122236.26612.openembedded@hrw.one.pl>
+Sender: news <news@sea.gmane.org>
+Subject: Re: [RFC] code sprints or focus-weeks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,29 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jan 2007 23:07:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 12 Jan 2007 23:18:31 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2007-01-12 at 21:31 +0200, Paul Sokolovsky wrote:
-> > * Converted from storing metadata in flat files to storing it in an sqlite db
-> 
-> > Of course, a bit of work might be needed to actually make that a true
-> > statement. ;-)
-> 
->   I really have an itch for that myself, I just wonder if less steep
-> start can be made here, like to add separate simple hash-based index for
-> Packages file, so it was quick to look up package by name. Of course,
-> if that could help depends on ipkg code, and I didn't yet have chance
-> to peek at...
+Marcin Juszkiewicz wrote:
 
-I've wondered about this too. I'd like to see it but its a lot of work
-and it will turn into an ipkg fork as the original ipkg was supposed to
-stay true to Debian.
+>> I hope you do not mind if I add another; Set up a good system for
+>> accepting bounties.
 
-Regards,
+> Good idea - can you do some research and check some of such sites?
 
-Richard
+I already did.
+
+<q http://permalink.gmane.org/gmane.comp.handhelds.openembedded/14385>
+http://www.opensourcexperts.com/
+https://launchpad.net/bounties/
+http://bountycounty.org/
+https://www.bountysource.com/
+http://donorge.org/
+</q>
+
+None of them were a clear winner, though.
 
 
 
