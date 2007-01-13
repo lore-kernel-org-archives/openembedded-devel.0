@@ -1,29 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1H5fbu-00008M-1A
-	for openembedded-devel@openembedded.org; Sat, 13 Jan 2007 10:55:51 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0D9qj36029206;
-	Sat, 13 Jan 2007 09:52:45 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 28547-09; Sat, 13 Jan 2007 09:52:43 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0D9qead029197
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Sat, 13 Jan 2007 09:52:40 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org,
-	"Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-In-Reply-To: <1888834532.20070112204308@vanille-media.de>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H5lZr-00064q-Vw
+	for openembedded-devel@openembedded.org; Sat, 13 Jan 2007 17:17:56 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l0DGFgox002380 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Jan 2007 17:15:43 +0100
+Message-ID: <45A905A7.4070300@dominion.kabel.utwente.nl>
+Date: Sat, 13 Jan 2007 17:15:35 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <1888834532.20070112204308@vanille-media.de>
-Date: Sat, 13 Jan 2007 09:52:39 +0000
-Message-Id: <1168681959.5868.4.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<1168681959.5868.4.camel@localhost.localdomain>
+In-Reply-To: <1168681959.5868.4.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: Gtk+ 2.6.10 w/ newer Glibs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,38 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jan 2007 09:55:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 13 Jan 2007 16:17:56 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2007-01-12 at 20:43 +0100, Michael 'Mickey' Lauer wrote:
-> Since .dev upgraded gnome-vfs and removed gnome-vfs-dbus, gnome-vfs is
-> no longer buildable against an old (<= 2.9.4) glib. Gtk+ 2.6.10 (which is still
-> in wide use today) again is not buildable against newer glib variants.
-> 
-> Any glib / Gtk+ experts to fix the problem? The first issue out is
-> here:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I asked someone:
+Richard Purdie schreef:
 
-> |  arm-linux-gcc ... -DG_DISABLE_DEPRECATED
+> To fix this there needs to be a patch that removes
+> -DG_DISABLE_DEPRECATED from every Makefile.am.
 
-G_DISABLE_DEPRECATED tells GLib to hide all deprecated functions.  They
-still exist in the library, but they are hidden in the headers.  It's
-considered bad form to do this in release code, because sometimes people
-want to run older apps against newer libraries.
+patch? sed! :)
 
-> | ../../../gtk/gtkstatusbar.h:68: error: expected
-specifier-qualifier-list before 'GMemChunk'
+regards,
 
-GMemChunk was deprecated in GLib 2.10.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-To fix this there needs to be a patch that removes
--DG_DISABLE_DEPRECATED from every Makefile.am.
-
-Cheers,
-
-Richard
-
+iD8DBQFFqQWnMkyGM64RGpERAhWQAJ0Yz8MgM8LI685bY6OeLc98/KIf/QCeLIa3
+4lvbv2nlpod5CwW72zmvJrc=
+=iWJb
+-----END PGP SIGNATURE-----
 
 
