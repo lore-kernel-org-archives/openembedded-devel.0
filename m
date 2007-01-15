@@ -1,21 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1H6E8b-0004Aw-1E
-	for openembedded-devel@openembedded.org; Sun, 14 Jan 2007 23:47:41 +0100
-Received: (qmail 4674 invoked by uid 813007); 14 Jan 2007 22:45:24 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO c3-24.icpnet.pl)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 14 Jan 2007 22:45:24 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Jan 2007 23:45:20 +0100
-User-Agent: KMail/1.9.5
-References: <eoe96g$1aj$1@sea.gmane.org>
-In-Reply-To: <eoe96g$1aj$1@sea.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200701142345.21112.openembedded@hrw.one.pl>
-Subject: Re: RFC: move m4 up to version 1.4.4
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <Patrick.Ohly@gmx.de>) id 1H6XDz-0007YG-Ri
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Jan 2007 20:10:32 +0100
+Received: (qmail invoked by alias); 15 Jan 2007 19:08:10 -0000
+Received: from c-134-227-90.d.dsl.de.ignite.net (EHLO ip6-localhost)
+	[62.134.227.90]
+	by mail.gmx.net (mp040) with SMTP; 15 Jan 2007 20:08:10 +0100
+X-Authenticated: #489940
+Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
+	id 1H6Wyh-0003vz-00; Mon, 15 Jan 2007 19:54:43 +0100
+From: Patrick Ohly <Patrick.Ohly@gmx.de>
+To: OpenEmbedded <openembedded-devel@lists.openembedded.org>
+Date: Mon, 15 Jan 2007 19:54:43 +0100
+Message-Id: <1168887283.14505.24.camel@ip6-localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+Sender: Patrick Ohly <patrick@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Maemo compatible toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,39 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Jan 2007 22:47:41 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Jan 2007 19:10:32 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia niedziela, 14 stycznia 2007 23:00, Rolf Leggewie napisa=B3:
-> I would like to propose moving m4 up to version 1.4.4.
->
-> It seems 1.4.2 that we are using now is causing problems at times ->
-> bug 837. =A0The latest version is even 1.4.8 but anything past 1.4.4
-> depends on autoconf >=3D 2.60.
->
-> I have seen that there is a bb file in OE for 2.61 but with preference
-> of -1 so I suspect something is not working. =A0Therefore I propose to go
-> up to the latest version which works with the autoconf we have. =A0I
-> prepared the bb files (same as 1.4.2 but SRC_URI without the patch
-> file) and verified that m4 and m4-native do compile.
+Hi,
 
-Build of gpe-image would be better test (as there will be some stuff which=
-=20
-will use m4). I started such build and it can be tracked on OE tinderbox:
+in July 2005 Florian Boor announced the maemo-1.0 distro for the Nokia
+770. If I read the posting and the .txt file right, this replaced the
+official Nokia image for the device. Is this effort still pursued by
+someone?
 
-http://ewi546.ewi.utwente.nl/tinderbox/showbuilds.pl?tree=3DAngstrom
+While a worthwhile goal, I am more interested in building packages with
+OE that work on the official image because I want my software to be
+usable by "normal" users without having to reflash their devices.
+There's Scratchbox of course, but it currently does not work for me
+(known incompatibility with 2.6.18 kernel). Is compiling for Maemo with
+OE something that has been tried before?
 
-It's "hrw-test-m4-1.4.4 Linux 2.6.9-34.0.1.EL Dep" one.
+The problem would be to keep a list of the preferred versions of all
+libraries and (as far as necessary) the toolchain and ensure that the
+corresponding .bb files remain around and buildable.
+org.openembedded.dev is probably changing too quickly for that - is
+there a stable branch which is still in use by some other distro and
+might have more of the older revisions? org.openembedded.oz354x perhaps?
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-  I don't know what your problem is, but I'll bet it's hard to pronounce.
-
-
+-- 
+Bye, Patrick Ohly
+--  
+Patrick.Ohly@gmx.de
+http://www.estamos.de/
 
 
