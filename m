@@ -1,22 +1,26 @@
 Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <patrick_fischer@gmx.de>) id 1H5qJT-0007iV-GF
+	(envelope-from <Patrick.Ohly@gmx.de>) id 1H6vZk-00062l-AF
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Jan 2007 22:21:19 +0100
-Received: (qmail invoked by alias); 13 Jan 2007 21:19:09 -0000
-Received: from i577A10FF.versanet.de (EHLO [192.168.1.9]) [87.122.16.255]
-	by mail.gmx.net (mp052) with SMTP; 13 Jan 2007 22:19:09 +0100
-X-Authenticated: #1735141
-Message-ID: <45A94CCC.5060605@gmx.de>
-Date: Sat, 13 Jan 2007 22:19:08 +0100
-From: Patrick Fischer <patrick_fischer@gmx.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.0.7) Gecko/20060918 Thunderbird/1.5.0.7 Mnenhy/0.7.4.0
-MIME-Version: 1.0
+	Tue, 16 Jan 2007 22:10:36 +0100
+Received: (qmail invoked by alias); 16 Jan 2007 21:08:08 -0000
+Received: from unknown (EHLO ip6-localhost) [62.134.214.131]
+	by mail.gmx.net (mp044) with SMTP; 16 Jan 2007 22:08:08 +0100
+X-Authenticated: #489940
+Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
+	id 1H6vNy-0001lT-00; Tue, 16 Jan 2007 21:58:26 +0100
+From: Patrick Ohly <Patrick.Ohly@gmx.de>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1168900952.5860.107.camel@localhost.localdomain>
+References: <1168887283.14505.24.camel@ip6-localhost>
+	<1168900952.5860.107.camel@localhost.localdomain>
+Date: Tue, 16 Jan 2007 21:58:26 +0100
+Message-Id: <1168981106.3819.28.camel@ip6-localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+Sender: Patrick Ohly <patrick@gmx.de>
 X-Y-GMX-Trusted: 0
-X-Mailman-Approved-At: Tue, 16 Jan 2007 09:30:58 +0100
-Subject: testing with qemu
+Subject: Re: Maemo compatible toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,36 +34,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jan 2007 21:21:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 16 Jan 2007 21:10:36 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello
-I have a question about testing my own disti with qemu.
+On Mon, 2007-01-15 at 22:42 +0000, Richard Purdie wrote:
+> On Mon, 2007-01-15 at 19:54 +0100, Patrick Ohly wrote:
+> > ork on the official image because I want my software to be
+> > usable by "normal" users without having to reflash their devices.
+> > There's Scratchbox of course, but it currently does not work for me
+> > (known incompatibility with 2.6.18 kernel). Is compiling for Maemo
+> > with
+> > OE something that has been tried before?
+> 
+> As far as toolchains go, poky has a POKYMODE (eabi5) which roughly
+> corresponds to maemo's csl 'EABI' toolchain. I think those versions of
+> the csl packages were added into OE by me.
 
-This is a good description by it dosn't work for me. I have a x86 based 
-system.
-http://www.rpsys.net/openzaurus/qemu/
+Thanks for the pointer, I might try that next. My previous attempts were
+not successful enough to get more than the simplest executables running
+on the Nokia 770 (generic distro + nokia770 device + a few preferred
+versions => glibc-intermediate fails to compile; angstrom-2007.1 +
+nokia770 => almost works, but too recent glibc to run a full
+SyncEvolution binary on the 770).
 
-I have created my own x86 based disti with
-bitbake task-bootstrap
-bitbake bootstrap-image
+As interesting as playing around with OE is, time is up now and I guess
+I will just install a suitable kernel and resurrect my Scratchbox
+installation to make some progress with my real issue (DBus (?) timeouts
+in certain eds-dbus API calls that SyncEvolution depends on).
 
-My machine is
-MACHINE = "qemux86"
-
-I have created
-bzImage-2.6.18-qemux86-20070112211142.bin
-and
-modules-2.6.18-qemux86.tgz
-
-how can i test the image with qemu?
-
-Is there an other way to test my image without qemu?
-maybe with vmware?
-
-
-Best regards
-Patrick Fischer
+-- 
+Bye, Patrick Ohly
+--  
+Patrick.Ohly@gmx.de
+http://www.estamos.de/
 
 
