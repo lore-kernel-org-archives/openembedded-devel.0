@@ -1,21 +1,25 @@
-Received: from [66.249.82.230] (helo=wx-out-0506.google.com)
+Received: from [212.227.126.188] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <debasreeat@gmail.com>) id 1H7ORf-00056g-5n
+	(envelope-from <fischer@4g-systems.com>) id 1H7wV4-0003gM-38
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jan 2007 05:00:13 +0100
-Received: by wx-out-0506.google.com with SMTP id t14so76161wxc
+	Fri, 19 Jan 2007 17:21:58 +0100
+Received: from [213.238.49.68] (helo=dehamox1a.intra.4g-systems.com)
+	by mrelayeu.kundenserver.de (node=mrelayeu6) with ESMTP (Nemesis),
+	id 0ML29c-1H7wV234FZ-0006lE; Fri, 19 Jan 2007 17:21:57 +0100
+Received: from [172.31.20.70] (deham-pc1070.intra.4g-systems.com
+	[172.31.20.70])
+	by dehamox1a.intra.4g-systems.com (Postfix) with ESMTP id ED67E610B20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jan 2007 19:57:35 -0800 (PST)
-Received: by 10.90.75.10 with SMTP id x10mr610015aga.1169092655567;
-	Wed, 17 Jan 2007 19:57:35 -0800 (PST)
-Received: by 10.90.83.12 with HTTP; Wed, 17 Jan 2007 19:57:35 -0800 (PST)
-Message-ID: <193b6ba30701171957p24a8519aoea73b2feaa404683@mail.gmail.com>
-Date: Thu, 18 Jan 2007 12:57:35 +0900
-From: "Debasree Mallick" <debasreeat@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Fri, 19 Jan 2007 17:21:49 +0100 (CET)
+Message-ID: <45B0F024.7060402@4g-systems.com>
+Date: Fri, 19 Jan 2007 17:21:56 +0100
+From: Patrick Fischer <fischer@4g-systems.com>
+User-Agent: Icedove 1.5.0.9 (X11/20061220)
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: zaurus kernel porting problem.
+To: openembedded-devel@lists.openembedded.org
+X-Provags-ID: kundenserver.de abuse@kundenserver.de
+	login:2073f051fc1b72daa8cde2c9d21098b2
+Subject: striping some libs and modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,32 +33,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jan 2007 04:00:29 -0000
+X-List-Received-Date: Fri, 19 Jan 2007 16:21:58 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi,
-I make a kernel image from openembadded using command bitbake virtual/kernel
-and follow the instruction as mension here
-www.openembedded.org/wiki/ZaurusKernels.
-I am using a SDK of touch screen..It has similar CPU configuration like
-zaurus PDA SL-C1000.
-I did test my kernel image at zaurus Sl-C1000 with Uboot and itis working
-....
-But when i try to use this kernel image at my touch screen SDK , I found its
-rebootinng and aging rebooting...rebooting...its seems it could not find the
-kernel image....I am trying to boot it from CF...
+Hello
+I would like to discuss about striping some libs and modules.
 
-In my
-SDK CPU is Intel Xscale PXA270 416 MHZ..
-Memory 64 MB
-Boot Derive =Compact Flash Card 128 MB..
- BTD in my sdk , there is a already prepare boot loader so i am not using U
-boot form openembedded...
+I know i can't stip everything like object symbols,
+but here is my stip suggestion:
 
-Can anybody tell me ,can i use this zaurus kernel image in some other sdk of
-same configuration of zaurus SL-C1000...
-Should i do some changes during kernel building process...
-If any body knows please reply me...
+mipsel-linux-strip -g -S -d --strip-debug $FILES
+mipsel-linux-strip --remove-section=.comment --remove-section=.note 
+--strip-unneeded $FILES
+
+It will remove all debug, comment, note and unnedded code.
+
+
+First of all there is the libstdc++
+
+#ls -l tmp/rootfs/usr/lib/libstdc++.so.5.0.6
+-rwxr-xr-x 1 pf pf 4636996 Jan 19 16:41 
+tmp/rootfs/usr/lib/libstdc++.so.5.0.6
+#mipsel-linux-strip -g -S -d --strip-debug tmp/rootfs/usr/lib/libstdc++.so.5
+#ls -l tmp/rootfs/usr/lib/libstdc++.so.5.0.6
+-rwxr-xr-x 1 pf pf 1249844 Jan 19 16:41 
+tmp/rootfs/usr/lib/libstdc++.so.5.0.6
+#mipsel-linux-strip --remove-section=.comment --remove-section=.note 
+--strip-unneeded tmp/rootfs/usr/lib/libstdc++.so.5.0.6
+#ls -l tmp/rootfs/usr/lib/libstdc++.so.5.0.6
+-rwxr-xr-x 1 pf pf 1029184 Jan 19 16:41 
+tmp/rootfs/usr/lib/libstdc++.so.5.0.6
+
+it was 4636996 byte, after striping it is only  1029184 byte
+
+This is very much!
+Can any body tell my why i shouldn't do this?
+
+There are a log of libs and modules which are not stiped.
+Go to your rootfs and call this line to see which files are not stiped:
+find . -exec file '{}' \; | grep "not stripped"
+
+I think there is potential. I have tested it quickly. Works fine until now.
+
+Best regards
+Patrick Fischer
+
+
 
