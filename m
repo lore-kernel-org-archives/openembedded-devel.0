@@ -1,25 +1,19 @@
-Received: from [212.227.126.188] (helo=moutng.kundenserver.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <fischer@4g-systems.com>) id 1H7wV4-0003gM-38
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Jan 2007 17:21:58 +0100
-Received: from [213.238.49.68] (helo=dehamox1a.intra.4g-systems.com)
-	by mrelayeu.kundenserver.de (node=mrelayeu6) with ESMTP (Nemesis),
-	id 0ML29c-1H7wV234FZ-0006lE; Fri, 19 Jan 2007 17:21:57 +0100
-Received: from [172.31.20.70] (deham-pc1070.intra.4g-systems.com
-	[172.31.20.70])
-	by dehamox1a.intra.4g-systems.com (Postfix) with ESMTP id ED67E610B20
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jan 2007 17:21:49 +0100 (CET)
-Message-ID: <45B0F024.7060402@4g-systems.com>
-Date: Fri, 19 Jan 2007 17:21:56 +0100
-From: Patrick Fischer <fischer@4g-systems.com>
-User-Agent: Icedove 1.5.0.9 (X11/20061220)
+	(envelope-from <openembedded@hrw.one.pl>) id 1H8P4A-0007YL-J8
+	for openembedded-devel@openembedded.org; Sat, 20 Jan 2007 23:52:06 +0100
+Received: (qmail 10431 invoked by uid 813007); 20 Jan 2007 22:52:05 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 20 Jan 2007 22:52:05 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@openembedded.org
+Date: Sat, 20 Jan 2007 23:52:06 +0100
+User-Agent: KMail/1.9.5
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Provags-ID: kundenserver.de abuse@kundenserver.de
-	login:2073f051fc1b72daa8cde2c9d21098b2
-Subject: striping some libs and modules
+Message-Id: <200701202352.07461.openembedded@hrw.one.pl>
+Subject: RFC: new section on website - 'pressroom'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,51 +27,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jan 2007 16:21:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 20 Jan 2007 22:52:06 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-
-Hello
-I would like to discuss about striping some libs and modules.
-
-I know i can't stip everything like object symbols,
-but here is my stip suggestion:
-
-mipsel-linux-strip -g -S -d --strip-debug $FILES
-mipsel-linux-strip --remove-section=.comment --remove-section=.note 
---strip-unneeded $FILES
-
-It will remove all debug, comment, note and unnedded code.
+Content-Disposition: inline
 
 
-First of all there is the libstdc++
+Many people wrote interesting articles about OpenEmbedded, project is also 
+often mentioned in other texts. Most of them are available online in 
+blogs, websites etc. Users on #oe often give selected links for new 
+users, etc..
 
-#ls -l tmp/rootfs/usr/lib/libstdc++.so.5.0.6
--rwxr-xr-x 1 pf pf 4636996 Jan 19 16:41 
-tmp/rootfs/usr/lib/libstdc++.so.5.0.6
-#mipsel-linux-strip -g -S -d --strip-debug tmp/rootfs/usr/lib/libstdc++.so.5
-#ls -l tmp/rootfs/usr/lib/libstdc++.so.5.0.6
--rwxr-xr-x 1 pf pf 1249844 Jan 19 16:41 
-tmp/rootfs/usr/lib/libstdc++.so.5.0.6
-#mipsel-linux-strip --remove-section=.comment --remove-section=.note 
---strip-unneeded tmp/rootfs/usr/lib/libstdc++.so.5.0.6
-#ls -l tmp/rootfs/usr/lib/libstdc++.so.5.0.6
--rwxr-xr-x 1 pf pf 1029184 Jan 19 16:41 
-tmp/rootfs/usr/lib/libstdc++.so.5.0.6
+I want to propose new section in OE website which will provide links to 
+such texts. It can be named 'Press room' but this is not proper name 
+rather because only some part of page will be links to press articles.
 
-it was 4636996 byte, after striping it is only  1029184 byte
+We need to find a name for it and gather links. Then split links into 
+sections and create such page. It will be available via Wiki but someone 
+would have to keep control over it so it will filled with good content.
 
-This is very much!
-Can any body tell my why i shouldn't do this?
+What do you think?
 
-There are a log of libs and modules which are not stiped.
-Go to your rootfs and call this line to see which files are not stiped:
-find . -exec file '{}' \; | grep "not stripped"
+Examples:
 
-I think there is potential. I have tested it quickly. Works fine until now.
+Introduction to OpenEmbedded part 1
+http://bec-systems.com/web/content/view/63/9/
 
-Best regards
-Patrick Fischer
+How to build GNU/Linux for an embedded x86 computer
+http://bec-systems.com/web/content/view/57/9/
+
+How to use task-base
+http://www.hrw.one.pl/2006/12/12/how-to-use-task-base/
+
+My OpenEmbedded environment II
+http://www.hrw.one.pl/2006/11/22/my-openembedded-environment-ii/
+
+My OpenEmbedded environment
+http://www.hrw.one.pl/2005/10/31/my-openembedded-enviroment/
+
+-- 
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+          Cats are like people: the females are the prickly ones
+          and the males are good-natured idiots. 
+
 
 
 
