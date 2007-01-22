@@ -1,26 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <Patrick.Ohly@gmx.de>) id 1H8YgH-0000qM-0Z
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <rod@whitby.id.au>) id 1H8mnS-0002pC-UK
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Jan 2007 10:08:05 +0100
-Received: (qmail invoked by alias); 21 Jan 2007 09:08:04 -0000
-Received: from c-134-232-84.f.dsl.de.ignite.net (EHLO ip6-localhost)
-	[62.134.232.84]
-	by mail.gmx.net (mp054) with SMTP; 21 Jan 2007 10:08:04 +0100
-X-Authenticated: #489940
-Received: from patrick by ip6-localhost with local (Exim 3.36 #1 (Debian))
-	id 1H8Ybr-00046u-00; Sun, 21 Jan 2007 10:03:31 +0100
-From: Patrick Ohly <Patrick.Ohly@gmx.de>
+	Mon, 22 Jan 2007 01:12:27 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 349038D3E4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Jan 2007 19:12:26 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by out1.internal (MEProxy); Sun, 21 Jan 2007 19:12:26 -0500
+X-Sasl-enc: Oj5rqV0TmnbD5dF14/vdF+OpjzLL+G4qibsVJONhIlT0 1169424745
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id 6835614DAC
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Jan 2007 19:12:25 -0500 (EST)
+Message-ID: <45B40165.6000506@whitby.id.au>
+Date: Mon, 22 Jan 2007 10:42:21 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0701201646v68ef3fcevf0f6905fd46b6a13@mail.gmail.com>
-References: <c384c5ea0701201646v68ef3fcevf0f6905fd46b6a13@mail.gmail.com>
-Date: Sun, 21 Jan 2007 10:03:31 +0100
-Message-Id: <1169370211.4172.7.camel@ip6-localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-Sender: Patrick Ohly <patrick@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: Interest for x86_64 target?
+X-Enigmail-Version: 0.94.0.0
+Subject: RFC: Adding a new global MACHINE_ENDIAN variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,28 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jan 2007 09:08:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 22 Jan 2007 00:12:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2007-01-21 at 01:46 +0100, Leon Woestenberg wrote:
-> any of the OE devs interested in adding x86_64 target support?
->
-> I am, but I cannot pull this off alone due to time restrictions.
-> However, if there is a group of ppl willing to go forward on this, I
-> am in.
+There exist machines (like the ixp4xx range of processors) which can be
+run in either little-endian or big-endian mode, and both modes are
+supported by OE.
 
-FYI, if you search the list for "cross-compiling for x86_64" you will
-find a thread about my building an SDK for x86_64. It required some
-patches, recorded under [1]. The scope was pretty limited though (I only
-need the EDS-DBus libs).
+I propose a new "MACHINE_ENDIAN" (naming courtesy of RP) variable to do
+this selection (i.e. for machines that support both, the build can be
+selected in local.conf).
 
-[1] http://bugs.openembedded.org/show_bug.cgi?id=1728
+NSLU2-Linux has previously had an "ARCH_BYTE_SEX" variable for this
+purpose - I would move all instances of that to the new variable name.
+I would also update Angstrom to use the new global variable name instead
+of reusing the nslu2-linux-specific variable (which will be deprecated).
 
--- 
-Bye, Patrick Ohly
---  
-Patrick.Ohly@gmx.de
-http://www.estamos.de/
+The supported values of the variable would be "be" and "le".
+
+-- Rod
 
 
