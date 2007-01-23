@@ -1,29 +1,28 @@
 Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1H99Fd-0007au-38
+	(envelope-from <rod@whitby.id.au>) id 1H9EOW-0001SI-OL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jan 2007 01:11:01 +0100
+	Tue, 23 Jan 2007 06:40:32 +0100
 Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id 8E58F93CB9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jan 2007 19:11:00 -0500 (EST)
+	by out1.messagingengine.com (Postfix) with ESMTP id 1897A93FE4;
+	Tue, 23 Jan 2007 00:40:32 -0500 (EST)
 Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by out1.internal (MEProxy); Mon, 22 Jan 2007 19:11:00 -0500
-X-Sasl-enc: thSQL8AwqB+j2j+u7uLUZufjQGMmdm3G5ygm84uR/gHQ 1169511060
+	by out1.internal (MEProxy); Tue, 23 Jan 2007 00:40:32 -0500
+X-Sasl-enc: MZpFWp53TPHt4ax2/pk83ZyAseDQh6xstcy8Kd+5rkZL 1169530831
 Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id B4FDA10CC8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jan 2007 19:10:59 -0500 (EST)
-Message-ID: <45B5528F.3050108@whitby.id.au>
-Date: Tue, 23 Jan 2007 10:40:55 +1030
+	by mail.messagingengine.com (Postfix) with ESMTP id 77C57C9C5;
+	Tue, 23 Jan 2007 00:40:29 -0500 (EST)
+Message-ID: <45B59FD0.1000207@whitby.id.au>
+Date: Tue, 23 Jan 2007 16:10:32 +1030
 From: Rod Whitby <rod@whitby.id.au>
 User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>
-	<45B518A5.8000500@dominion.kabel.utwente.nl>
-In-Reply-To: <45B518A5.8000500@dominion.kabel.utwente.nl>
-Subject: Deprecating ixp4xx, nslu2 in favour of endian-specific machine settings (Was: RFC on MACHINE_ENDIAN)
+References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>	<45B518A5.8000500@dominion.kabel.utwente.nl>
+	<45B5528F.3050108@whitby.id.au>
+In-Reply-To: <45B5528F.3050108@whitby.id.au>
+Cc: John Bowler <jbowler@acm.org>, nslu2-developers@yahoogroups.com
+Subject: Removal of the proprietary Intel IXP ethernet driver (ixp4{00, 25}-eth, ixp-osal, ixp4xx-csr) from OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,52 +36,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2007 00:11:01 -0000
+X-List-Received-Date: Tue, 23 Jan 2007 05:40:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Rod Whitby schreef:
->>> Koen, with that extra information and context, is your input to the
->>> consensus still the same?
-> 
-> I think adding two machines adheres to the principle of least surprise and makes is
-> possible to build for the 2 machines in parallel (/me hugs bitbake trunk + machine-via-env).
-> Also take a look at the amount of python in ixp4xx.conf to translate endianness into
-> various settings. With 2 machines, you can do without the python, which makes it for new
-> OE users look less arcane, and easier for python n00bs like me to modify.
+For a long time, the only way to use the internal ethernet port for
+ixp4xx devices was to use the proprietary intel driver.  The driver
+could not be linked with the kernel, and tainted the kernel.
 
-OK, based on a good IRC conversation with Koen this morning, we're going
-to do the following:
+Thankfully, that has now changed with the development of the open source
+ixp npe kernel driver, which is GPL and can be freely linked with the
+kernel.  Note that the microcode firmware blob (ixp4xx-npe) which needs
+to be loaded by the driver is still Intel Proprietary and requires a
+click-through license on any firmware image that includes it.
 
-1) Replace ARCH_BYTE_SEX with IXP4XX_MACHINE_ENDIAN throughout OE
+The ixp4xx-kernel package (as of 2.6.19) now supports this new driver.
+It has been tested on the NSLU2, NAS100d, and Loft devices, and as of
+the 0.3.1 version is considered stable.
 
-2) Set IXP4XX_MACHINE_ENDIAN in conf/machine/{ixp4xx,nslu2}{be,le}.conf
-and deprecate conf/machine/{ixp4xx,nslu2}.conf in favour of the
-endian-specific machines.
+Accordingly, I propose to remove the Intel Proprietary driver from the
+OpenEmbedded metadata.  I also propose to remove versions of the
+ixp4xx-kernel earlier than 2.6.19.
 
-2) Make sure that any ixp4xx-specific file that uses
-IXP4XX_MACHINE_ENDIAN also has a COMPATIBLE_MACHINE setting to match.
+The following packages will be obsoleted, and then removed:
 
-3) Replace any usage of IXP4XX_MACHINE_ENDIAN in a non-ixp4xx-specific
-file with autofoo stuff to determine the endianness.
+ixp425-eth/ixp400-eth_1.4
+ixp425-eth/ixp400-eth_1.5
+ixp425-eth/ixp400-eth_1.5.1
+ixp425-eth/ixp425-eth_1.1
+ixp425-eth/ixp425-eth_1.2
+ixp4xx/ixp-osal_1.5
+ixp4xx/ixp-osal_2.0
+ixp4xx/ixp-osal_2.1
+ixp4xx/ixp-osal_2.1.1
+ixp4xx/ixp4xx-csr_1.4
+ixp4xx/ixp4xx-csr_1.5
+ixp4xx/ixp4xx-csr_2.0
+ixp4xx/ixp4xx-csr_2.1
+ixp4xx/ixp4xx-csr_2.1.1
+linux/ixp4xx-kernel_2.6.15.3
+linux/ixp4xx-kernel_2.6.16
+linux/ixp4xx-kernel_2.6.17
+linux/ixp4xx-kernel_2.6.18
 
-4) Clean up conf/machine/include/ixp4xx to use tune-xscale and
-tune-thumb, and remove other variables which already have global OE
-equivalents.
+Any objections?
 
-5) Replace _ixp4xx overrides with _ixp4xxle and _ixp4xxbe overrides
-instead.  Similarly for nslu2.  This will be done as a second step (in
-the meantime, I'll just add ixp4xx directly to the overrides as well as
-${MACHINE}).
-
-*** Note that this means that "ixp4xx" or "nslu2" will no longer be
-valid MACHINE settings - you must use "ixp4xxle", "ixp4xxbe", "nslu2le",
-or "nslu2be" instead.
-
-
-Last chance for objections .... commits will start in 6 hours.
+[Note that this will not affect anyone's ability to build from the
+SlugOS binary release source code archives - they are in SVN.]
 
 -- Rod
+
+
 
 
