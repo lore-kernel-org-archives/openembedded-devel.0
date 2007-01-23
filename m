@@ -1,27 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1H95OY-0008AF-SZ
-	for openembedded-devel@openembedded.org; Mon, 22 Jan 2007 21:03:58 +0100
-Received: from [130.89.7.3] (vpn007003.vpn.utwente.nl [130.89.7.3])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l0MK3qLr032038 for <openembedded-devel@openembedded.org>;
-	Mon, 22 Jan 2007 21:03:53 +0100
-Message-ID: <45B518A5.8000500@dominion.kabel.utwente.nl>
-Date: Mon, 22 Jan 2007 21:03:49 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <rod@whitby.id.au>) id 1H99Fd-0007au-38
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jan 2007 01:11:01 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 8E58F93CB9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jan 2007 19:11:00 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by out1.internal (MEProxy); Mon, 22 Jan 2007 19:11:00 -0500
+X-Sasl-enc: thSQL8AwqB+j2j+u7uLUZufjQGMmdm3G5ygm84uR/gHQ 1169511060
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id B4FDA10CC8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jan 2007 19:10:59 -0500 (EST)
+Message-ID: <45B5528F.3050108@whitby.id.au>
+Date: Tue, 23 Jan 2007 10:40:55 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>
-	<45B50D16.8060001@whitby.id.au>
-In-Reply-To: <45B50D16.8060001@whitby.id.au>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: RFC: Adding a new global MACHINE_ENDIAN variable
+To: openembedded-devel@lists.openembedded.org
+References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>
+	<45B518A5.8000500@dominion.kabel.utwente.nl>
+In-Reply-To: <45B518A5.8000500@dominion.kabel.utwente.nl>
+Subject: Deprecating ixp4xx, nslu2 in favour of endian-specific machine settings (Was: RFC on MACHINE_ENDIAN)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,70 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jan 2007 20:03:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Jan 2007 00:11:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Rod Whitby schreef:
-> Koen Kooi wrote:
->> Rod Whitby schreef:
->>>> There exist machines (like the ixp4xx range of processors) which can be
->>>> run in either little-endian or big-endian mode, and both modes are
->>>> supported by OE.
->>>>
->>>> I propose a new "MACHINE_ENDIAN" (naming courtesy of RP) variable to do
->>>> this selection (i.e. for machines that support both, the build can be
->>>> selected in local.conf).
->> No, that's just needles confusion, just make a .inc file (like ixp4xx.inc) that has the
->> common bits and 2 machine files that set up the appropriate endiannes stuff. That way you
->> can use machine overrides to configure stuff instead of putting more anonymous python
->> functions in the metadata.
+Koen Kooi wrote:
+> Rod Whitby schreef:
+>>> Koen, with that extra information and context, is your input to the
+>>> consensus still the same?
 > 
-> There currently is an ARCH_BYTE_SEX "magic" variable (which nslu2-linux
-> added), which is used 77 times in OE as it stands today (mostly in
-> SlugOS files).  First thing I will do is replace that with
-> MACHINE_ENDIAN (as it's a better name).
-> 
-> As for MACHINE_ENDIAN as a magic variable, to do as you suggest requires
-> that there be an easy way to have a "machine architecture" override
-> (i.e. ixp4xx) as well as the usual "actual machine/board" override (i.e.
-> nslu2le).  Currently there is only one such override in place, which
-> means that in *every* place that there currently is an _ixp4xx override
-> in the metadata, that needs to have 2 other duplicates of that line (one
-> for _nslu2le and one for _nslu2be) added in each of those .bb files.
-> 
-> I'm happy to go down that path instead of the MACHINE_ENDIAN path (if
-> that's the consensus of all the OE core team members - RP and koen
-> currently have diametrically opposed opinions on this - what do others
-> think?).  But I will need a way of inserting "ixp4xxle/be" and "ixp4xx"
-> in the set of overrides for both nslu2le and nslu2be machines.  I expect
-> this will need to be done in the ixp4xx.conf file by some hacky python
-> which looks for ${MACHINE} in the override list and adds "ixp4xxle/be"
-> and "ixp4xx" after it.
-> 
-> Koen, with that extra information and context, is your input to the
-> consensus still the same?
+> I think adding two machines adheres to the principle of least surprise and makes is
+> possible to build for the 2 machines in parallel (/me hugs bitbake trunk + machine-via-env).
+> Also take a look at the amount of python in ixp4xx.conf to translate endianness into
+> various settings. With 2 machines, you can do without the python, which makes it for new
+> OE users look less arcane, and easier for python n00bs like me to modify.
 
-I think adding two machines adheres to the principle of least surprise and makes is
-possible to build for the 2 machines in parallel (/me hugs bitbake trunk + machine-via-env).
-Also take a look at the amount of python in ixp4xx.conf to translate endianness into
-various settings. With 2 machines, you can do without the python, which makes it for new
-OE users look less arcane, and easier for python n00bs like me to modify.
+OK, based on a good IRC conversation with Koen this morning, we're going
+to do the following:
 
-regards,
+1) Replace ARCH_BYTE_SEX with IXP4XX_MACHINE_ENDIAN throughout OE
 
-Koen
+2) Set IXP4XX_MACHINE_ENDIAN in conf/machine/{ixp4xx,nslu2}{be,le}.conf
+and deprecate conf/machine/{ixp4xx,nslu2}.conf in favour of the
+endian-specific machines.
+
+2) Make sure that any ixp4xx-specific file that uses
+IXP4XX_MACHINE_ENDIAN also has a COMPATIBLE_MACHINE setting to match.
+
+3) Replace any usage of IXP4XX_MACHINE_ENDIAN in a non-ixp4xx-specific
+file with autofoo stuff to determine the endianness.
+
+4) Clean up conf/machine/include/ixp4xx to use tune-xscale and
+tune-thumb, and remove other variables which already have global OE
+equivalents.
+
+5) Replace _ixp4xx overrides with _ixp4xxle and _ixp4xxbe overrides
+instead.  Similarly for nslu2.  This will be done as a second step (in
+the meantime, I'll just add ixp4xx directly to the overrides as well as
+${MACHINE}).
+
+*** Note that this means that "ixp4xx" or "nslu2" will no longer be
+valid MACHINE settings - you must use "ixp4xxle", "ixp4xxbe", "nslu2le",
+or "nslu2be" instead.
 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Last chance for objections .... commits will start in 6 hours.
 
-iD8DBQFFtRilMkyGM64RGpERAu07AKC2oMsHFQ3rD9MXFMhb2Yd3k7pHmgCeO6nf
-SBy9UW8sKfS04A6NMS+IMjU=
-=jUws
------END PGP SIGNATURE-----
+-- Rod
 
 
