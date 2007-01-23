@@ -1,23 +1,30 @@
-Received: from [212.227.126.186] (helo=moutng.kundenserver.de)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <robert@linuxdevelopment.de>) id 1H9REc-0004Nq-RE
+	(envelope-from <rod@whitby.id.au>) id 1H9RSW-0004h3-1y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jan 2007 20:23:10 +0100
-Received: from [85.212.167.5] (helo=[10.0.0.7])
-	by mrelayeu.kundenserver.de (node=mrelayeu5) with ESMTP (Nemesis),
-	id 0ML25U-1H9REZ38OA-0005Eb; Tue, 23 Jan 2007 20:23:10 +0100
-Message-ID: <45B6609B.5080909@linuxdevelopment.de>
-Date: Tue, 23 Jan 2007 20:23:07 +0100
-From: =?ISO-8859-1?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
-User-Agent: Thunderbird 1.5.0.8 (X11/20060911)
+	Tue, 23 Jan 2007 20:37:32 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 7DBD9946B8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jan 2007 14:37:31 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by out1.internal (MEProxy); Tue, 23 Jan 2007 14:37:31 -0500
+X-Sasl-enc: tAYs0hYMIFYfXZ0YGrcO2Gx6WARShLvId5UZpFuEveAX 1169581051
+Received: from [192.168.0.11] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id C666710F0B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jan 2007 14:37:30 -0500 (EST)
+Message-ID: <45B663F8.5030901@whitby.id.au>
+Date: Wed, 24 Jan 2007 06:07:28 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>	<45B518A5.8000500@dominion.kabel.utwente.nl>	<45B5528F.3050108@whitby.id.au>
-	<45B59FD0.1000207@whitby.id.au>
-In-Reply-To: <45B59FD0.1000207@whitby.id.au>
-X-Provags-ID: kundenserver.de abuse@kundenserver.de
-	login:3a738c603c23670681f156cc7e748d26
-Subject: Re: Removal of the proprietary Intel IXP ethernet driver (ixp4{00, 25}-eth, ixp-osal, ixp4xx-csr) from OE
+	<1169550792.5845.8.camel@localhost.localdomain>
+In-Reply-To: <1169550792.5845.8.camel@localhost.localdomain>
+Subject: Re: Deprecating ixp4xx, nslu2 in favour of endian-specific	machine settings (Was: RFC on	MACHINE_ENDIAN)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,33 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2007 19:23:11 -0000
+X-List-Received-Date: Tue, 23 Jan 2007 19:37:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Rod Whitby schrieb:
-> For a long time, the only way to use the internal ethernet port for
-> ixp4xx devices was to use the proprietary intel driver.  The driver
-> could not be linked with the kernel, and tainted the kernel.
->
-> Thankfully, that has now changed with the development of the open source
-> ixp npe kernel driver, which is GPL and can be freely linked with the
-> kernel.  Note that the microcode firmware blob (ixp4xx-npe) which needs
-> to be loaded by the driver is still Intel Proprietary and requires a
-> click-through license on any firmware image that includes it.
->   
-Dear Rod
+Richard Purdie wrote:
+> On Tue, 2007-01-23 at 10:40 +1030, Rod Whitby wrote:
+>> Last chance for objections .... commits will start in 6 hours.
+> 
+> For the record, no objections from me. After consideration, I think Koen
+> is right and two machines make sense in this case. Koen has had the
+> experience of trying this in practise which often helps! :)
+> 
+> Where possible I would like to see it using the siteinfo check so the
+> metadata is generic.
 
-Im not having such hardware but i am  interested in this drivers setup.
-Do you think this code can be of any example ? I am in a similar
-situation where i am confronted with a propriatory hardware driver.
-Maybe that intel code as such is able to show me an good example of a
-"firmware loading gpl module" and i could alter my code in such similar
-way . Maybe the manufacturer looks at this and can go free with it also .
-Could you explain to me the "click-through" license ?  Does one need to
-agree on that on every module load or when will this come to play ?
+Are you referring to the existing SITEINFO_ENDIANESS (sic) variable
+(which I only just found ...) ?
 
-kind regards
-rob_w
+Sure, if that is a guaranteed supported variable I can easily use that
+one instead throughout.
+
+-- Rod
 
 
