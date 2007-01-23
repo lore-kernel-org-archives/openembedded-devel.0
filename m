@@ -1,36 +1,22 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [69.57.146.91] (helo=srv02.velocera.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1H9SLt-0006vw-Va
-	for openembedded-devel@openembedded.org; Tue, 23 Jan 2007 21:34:46 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0NKYag4008776
-	for <openembedded-devel@openembedded.org>; Tue, 23 Jan 2007 20:34:36 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 08524-06 for <openembedded-devel@openembedded.org>;
-	Tue, 23 Jan 2007 20:34:34 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(envelope-from <marc@levelstar.com>) id 1H9Tku-0000wC-4q
+	for openembedded-devel@openembedded.org; Tue, 23 Jan 2007 23:04:40 +0100
+Received: from Marc (pbx.levelstar.com [65.121.41.186] (may be forged))
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0NKYWG8008765
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 23 Jan 2007 20:34:32 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <45B663F8.5030901@whitby.id.au>
-References: <45B40165.6000506@whitby.id.au>
-	<45B4EDCD.1060609@dominion.kabel.utwente.nl>
-	<45B50D16.8060001@whitby.id.au>
-	<45B518A5.8000500@dominion.kabel.utwente.nl>
-	<45B5528F.3050108@whitby.id.au>
-	<1169550792.5845.8.camel@localhost.localdomain>
-	<45B663F8.5030901@whitby.id.au>
-Date: Tue, 23 Jan 2007 20:34:32 +0000
-Message-Id: <1169584472.5845.40.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Deprecating ixp4xx, nslu2 in favour of	endian-specific	machine settings (Was: RFC on	MACHINE_ENDIAN)
+	by srv02.velocera.com (8.13.1/8.13.1) with ESMTP id l0NM9ZGa028568
+	for <openembedded-devel@openembedded.org>;
+	Tue, 23 Jan 2007 16:09:56 -0600
+Message-Id: <200701232209.l0NM9ZGa028568@srv02.velocera.com>
+From: "Marc Mulcahy" <marc@levelstar.com>
+To: "Using the OpenEmbedded metadata to build Linux Distributions"
+	<openembedded-devel@openembedded.org>
+Date: Tue, 23 Jan 2007 15:04:16 -0700
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook, Build 11.0.5510
+Thread-Index: Acc/OmyFqneM6nJCQh6xelBju1AEog==
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2962
+Subject: Helix Build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,28 +30,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2007 20:34:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 23 Jan 2007 22:04:40 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2007-01-24 at 06:07 +1030, Rod Whitby wrote:
-> Are you referring to the existing SITEINFO_ENDIANESS (sic) variable
-> (which I only just found ...) ?
+Hi All:
 
-Yes.
+Is anyone working on getting Helix Player to build in OE?
 
-> Sure, if that is a guaranteed supported variable I can easily use that
-> one instead throughout.
+Thanks,
 
-Its a recent addition and was a spinoff from the siteinfo changes which
-tried to merge the site files for big/little endian etc. (it came
-basically for free). Its certainly supported and I'm encouraging its
-use. The big benefit is any new arch would need site files and if you
-add site files this all just then works :)
-
-Cheers,
-
-Richard
+Marc
 
 
 
