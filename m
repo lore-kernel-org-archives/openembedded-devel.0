@@ -1,30 +1,29 @@
-Received: from [62.70.27.18] (helo=esparsett.troll.no)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <lpotter@trolltech.com>) id 1H9Zg8-0004p3-9N
-	for openembedded-devel@openembedded.org; Wed, 24 Jan 2007 05:24:08 +0100
-Received: from esparsett.troll.no (localhost [127.0.0.1])
-	by localhost (Postfix) with SMTP id B016C60020
-	for <openembedded-devel@openembedded.org>;
-	Wed, 24 Jan 2007 05:24:07 +0100 (CET)
-Received: from mail.trolltech.com.au (unknown [10.1.1.12])
-	by esparsett.troll.no (Postfix) with ESMTP id 2408E60002
-	for <openembedded-devel@openembedded.org>;
-	Wed, 24 Jan 2007 05:24:07 +0100 (CET)
-Received: from polarbear.trolltech.com.au (polarbear.trolltech.com.au
-	[10.1.1.48])
-	by mail.trolltech.com.au (Postfix) with ESMTP id C38222BC5DF
-	for <openembedded-devel@openembedded.org>;
-	Wed, 24 Jan 2007 14:24:05 +1000 (EST)
-From: Lorn Potter <lpotter@trolltech.com>
-Organization: Trolltech Pty Ltd
-To: openembedded-devel@openembedded.org
-User-Agent: KMail/1.9.1
+	(envelope-from <rod@whitby.id.au>) id 1H9bp3-0000IM-M8
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Jan 2007 07:41:29 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 0870A944E1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Jan 2007 01:41:29 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by out1.internal (MEProxy); Wed, 24 Jan 2007 01:41:29 -0500
+X-Sasl-enc: /Sr1Yb7V21HgbSc+0HEuD8oEh6Di4MCPXkloldFS32vk 1169620888
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id 463AE292FB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Jan 2007 01:41:27 -0500 (EST)
+Message-ID: <45B6FF94.8050500@whitby.id.au>
+Date: Wed, 24 Jan 2007 17:11:24 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
 MIME-Version: 1.0
-X-Length: 947
-X-UID: 3562
-Date: Wed, 24 Jan 2007 14:24:04 +1000
-Message-Id: <200701241424.05348.lpotter@trolltech.com>
-Subject: developer wanted
+To: openembedded-devel@lists.openembedded.org
+References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>	<45B518A5.8000500@dominion.kabel.utwente.nl>	<45B5528F.3050108@whitby.id.au>	<1169550792.5845.8.camel@localhost.localdomain>	<45B663F8.5030901@whitby.id.au>
+	<1169584472.5845.40.camel@localhost.localdomain>
+In-Reply-To: <1169584472.5845.40.camel@localhost.localdomain>
+Subject: SITEINFO_ENDIAN(N)ESS (NN, not N)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,27 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2007 04:24:08 -0000
-Content-Disposition: inline
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 24 Jan 2007 06:41:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-<spam>
-Trolltech is in need of another developer for its hardware/resource group 
-based in Brisbane, Australia.
-If you love playing with hardware, please apply...
+Richard Purdie wrote:
+> On Wed, 2007-01-24 at 06:07 +1030, Rod Whitby wrote:
+>> Are you referring to the existing SITEINFO_ENDIANESS (sic) variable
+>> (which I only just found ...) ?
+> 
+> Yes.
 
-https://www.webcruiter.no/wcmain/advertviewpublic.aspx?oppdragsnr=149262607&culture_id=EN
+Shouldn't it be spelled SITEINFO_ENDIANNESS? (i.e. double N)
 
-If you want a few more details, reply only to me.
+(Both Google and Wikipedia say that it is endianness, not endianess)
 
-</spam>
+Anyone object to me changing the 4 places it's currently used, before I
+use it in 73 new places?
 
--- 
-Lorn 'ljp' Potter
-Trolltech Software Engineer, MES, Hardware Group
-Opie Core Developer
-http://qtopia.net
+-- Rod
 
 
