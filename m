@@ -1,27 +1,28 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [216.243.110.194] (helo=redwood.mza.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1H9koO-0000fL-4E
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Jan 2007 17:17:24 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 17D5A28C012; Wed, 24 Jan 2007 17:12:51 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from [192.168.2.128] (e180133030.adsl.alicedsl.de [85.180.133.30])
-	by srv043.dedi23.de (Postfix) with ESMTP id 6B5C428C011
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2007 17:12:47 +0100 (CET)
-Date: Wed, 24 Jan 2007 17:17:22 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.95.6) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <982289855.20070124171722@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: FOSDEM 2007 Planning
+	(envelope-from <anthony.seward@ieee.org>) id 1H9mSH-0004QW-W0
+	for openembedded-devel@openembedded.org; Wed, 24 Jan 2007 19:02:42 +0100
+Received: from [10.5.5.59] (monkeytree.mza.com [216.243.106.138])
+	(authenticated bits=0)
+	by redwood.mza.com (8.13.1/8.13.1) with ESMTP id l0OI2ekw001736
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 24 Jan 2007 11:02:41 -0700
+From: Anthony Joseph Seward <anthony.seward@ieee.org>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <459F5FB0.70003@gmx.net>
+References: <enba1v$ldr$1@sea.gmane.org>
+	<1167668309.5601.31.camel@localhost.localdomain>
+	<enbglm$6je$1@sea.gmane.org>	<459B7067.3070202@gmx.net>
+	<1167841321.13059.2.camel@fleuret> <enjbgu$c1o$1@sea.gmane.org>
+	<459F5FB0.70003@gmx.net>
+Date: Wed, 24 Jan 2007 11:02:14 -0700
+Message-Id: <1169661734.4293.6.camel@fleuret>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.8.2.1 (2.8.2.1-3.fc6) 
+X-Virus-Scanned: ClamAV 0.83/2487/Wed Jan 24 08:53:17 2007 on redwood.mza.com
+X-Virus-Status: Clean
+Subject: Re: Reverse-engineering SD specs for collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,27 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2007 16:17:24 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 24 Jan 2007 18:02:42 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi guys,
+I've added mine too
 
-due to some unforeseen circumstances, the public defence of my
-doctoral thesis will happen on the 22nd of February this year -- which
-is one day before I'm flying to FOSDEM. It won't hinder my appearance
-and talk there, however since I need to prepare a lot for this
-defence, I won't be able to organize anything for the OpenEmbedded
-booth.
+http://wiki.openzaurus.org/FAQ#Which_SD_Cards_work_with_OpenZaurus
 
-I'd be grateful if someone else could take the wheel in organizing
-that event.
-
-Thanks,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+On Sat, 2007-01-06 at 09:37 +0100, Patrik Gfeller wrote:
+> Rolf Leggewie wrote:
+> > Anthony and Patrik, great.  Thank you.
+> >
+> > I made a little entry on the FAQ page at wiki.openzaurus.org shortly 
+> > after sending out my mail.  Maybe you want to commit to your pledge 
+> > there as well.  http://wiki.openzaurus.org/FAQ
+> >   
+> ... done.
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 
 
