@@ -1,28 +1,21 @@
-Received: from [216.243.110.194] (helo=redwood.mza.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <anthony.seward@ieee.org>) id 1H9mSH-0004QW-W0
-	for openembedded-devel@openembedded.org; Wed, 24 Jan 2007 19:02:42 +0100
-Received: from [10.5.5.59] (monkeytree.mza.com [216.243.106.138])
-	(authenticated bits=0)
-	by redwood.mza.com (8.13.1/8.13.1) with ESMTP id l0OI2ekw001736
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 24 Jan 2007 11:02:41 -0700
-From: Anthony Joseph Seward <anthony.seward@ieee.org>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <459F5FB0.70003@gmx.net>
-References: <enba1v$ldr$1@sea.gmane.org>
-	<1167668309.5601.31.camel@localhost.localdomain>
-	<enbglm$6je$1@sea.gmane.org>	<459B7067.3070202@gmx.net>
-	<1167841321.13059.2.camel@fleuret> <enjbgu$c1o$1@sea.gmane.org>
-	<459F5FB0.70003@gmx.net>
-Date: Wed, 24 Jan 2007 11:02:14 -0700
-Message-Id: <1169661734.4293.6.camel@fleuret>
+	(envelope-from <dp@xora.org.uk>) id 1H9nKY-0006Ls-DG
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Jan 2007 19:58:46 +0100
+Received: from xora.org.uk ([::ffff:85.210.190.44])
+	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Wed, 24 Jan 2007 18:58:31 +0000
+	id 00070013.45B7AC57.00002510
+Date: Wed, 24 Jan 2007 19:03:05 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070124190305.GA4747@stygia.hyboria>
+References: <E1H9l3p-0002C8-ES@linuxtogo.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.8.2.1 (2.8.2.1-3.fc6) 
-X-Virus-Scanned: ClamAV 0.83/2487/Wed Jan 24 08:53:17 2007 on redwood.mza.com
-X-Virus-Status: Clean
-Subject: Re: Reverse-engineering SD specs for collie
+In-Reply-To: <E1H9l3p-0002C8-ES@linuxtogo.org>
+User-Agent: Mutt/1.5.12-2006-07-14
+Subject: Re: [oe-commits] org.oe.dev pulse-audio: inherit pkgconfig and stage headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,29 +29,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2007 18:02:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 24 Jan 2007 18:58:46 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I've added mine too
-
-http://wiki.openzaurus.org/FAQ#Which_SD_Cards_work_with_OpenZaurus
-
-On Sat, 2007-01-06 at 09:37 +0100, Patrik Gfeller wrote:
-> Rolf Leggewie wrote:
-> > Anthony and Patrik, great.  Thank you.
-> >
-> > I made a little entry on the FAQ page at wiki.openzaurus.org shortly 
-> > after sending out my mail.  Maybe you want to commit to your pledge 
-> > there as well.  http://wiki.openzaurus.org/FAQ
-> >   
-> ... done.
+On Wed, Jan 24, 2007 at 05:33:21PM +0100, koen commit wrote:
+> pulse-audio: inherit pkgconfig and stage headers
 > 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Because your not online, but pulseaudio just doesnt seem able
+to supply esd.h or esound.pc which is required for esound apps.
+
+Graeme
 
 
 
