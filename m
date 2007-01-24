@@ -1,22 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <freyther@gmx.net>) id 1H9frR-0007pC-AF
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <mickey@vanille-media.de>) id 1H9koO-0000fL-4E
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Jan 2007 12:00:15 +0100
-Received: (qmail invoked by alias); 24 Jan 2007 11:00:11 -0000
-Received: from dsl-62-220-14-162.berlikomm.net (EHLO [192.168.1.23])
-	[62.220.14.162]
-	by mail.gmx.net (mp019) with SMTP; 24 Jan 2007 12:00:11 +0100
-X-Authenticated: #1949623
-Mime-Version: 1.0 (Apple Message framework v752.3)
-Message-Id: <CAB376A3-DE98-4D06-B23B-3D04A4708748@gmx.net>
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-From: Holger Freyther <freyther@gmx.net>
-Date: Wed, 24 Jan 2007 11:59:59 +0100
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
-Subject: Advertising Policy on mailinglists
+	Wed, 24 Jan 2007 17:17:24 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 17D5A28C012; Wed, 24 Jan 2007 17:12:51 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from [192.168.2.128] (e180133030.adsl.alicedsl.de [85.180.133.30])
+	by srv043.dedi23.de (Postfix) with ESMTP id 6B5C428C011
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Jan 2007 17:12:47 +0100 (CET)
+Date: Wed, 24 Jan 2007 17:17:22 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <982289855.20070124171722@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: FOSDEM 2007 Planning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,24 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2007 11:00:24 -0000
+X-List-Received-Date: Wed, 24 Jan 2007 16:17:24 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
-Hi pals,
+Hi guys,
 
-We should create an advertising policy for our mailinglists. I think  
-this a technical mailing list and everything not technical is off topic.
-I think we should adopt point 7 of http://www.arm.linux.org.uk/ 
-mailinglists/etiquette.php#e7 to avoid further disturbance.
+due to some unforeseen circumstances, the public defence of my
+doctoral thesis will happen on the 22nd of February this year -- which
+is one day before I'm flying to FOSDEM. It won't hinder my appearance
+and talk there, however since I need to prepare a lot for this
+defence, I won't be able to organize anything for the OpenEmbedded
+booth.
 
-If there is real need for posting job offers we could ask our friends  
-at linuxtogo to create a market place mailinglist where product  
-announcements, job offers, are on topic and wanted.
+I'd be grateful if someone else could take the wheel in organizing
+that event.
 
-thanks for listening and do you have any comments?
+Thanks,
 
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
-	h.
 
 
