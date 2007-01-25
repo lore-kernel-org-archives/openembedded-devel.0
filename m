@@ -1,30 +1,29 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HA6b5-0004vq-5N
-	for openembedded-devel@openembedded.org; Thu, 25 Jan 2007 16:33:08 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0PFX6eP004535
-	for <openembedded-devel@openembedded.org>; Thu, 25 Jan 2007 15:33:06 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 04494-01 for <openembedded-devel@openembedded.org>;
-	Thu, 25 Jan 2007 15:33:03 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0PFWxIs004524
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Thu, 25 Jan 2007 15:32:59 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <45B8C9F4.30402@gmail.com>
-References: <45B8C9F4.30402@gmail.com>
-Date: Thu, 25 Jan 2007 15:32:59 +0000
-Message-Id: <1169739179.6182.17.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: thumb
+	(envelope-from <hvontres@gmail.com>) id 1HA7rs-000725-8o
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Jan 2007 17:54:32 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so464139ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Jan 2007 08:54:31 -0800 (PST)
+Received: by 10.82.135.13 with SMTP id i13mr1256825bud.1169744070895;
+	Thu, 25 Jan 2007 08:54:30 -0800 (PST)
+Received: by 10.82.185.2 with HTTP; Thu, 25 Jan 2007 08:54:30 -0800 (PST)
+Message-ID: <a7f8874a0701250854w63d46b5fmf97c552bd4d1a8ef@mail.gmail.com>
+Date: Thu, 25 Jan 2007 08:54:30 -0800
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <45B820C1.1090100@whitby.id.au>
+MIME-Version: 1.0
+References: <45B40165.6000506@whitby.id.au>
+	<45B4EDCD.1060609@dominion.kabel.utwente.nl>
+	<45B50D16.8060001@whitby.id.au>
+	<45B518A5.8000500@dominion.kabel.utwente.nl>
+	<45B5528F.3050108@whitby.id.au> <45B59FD0.1000207@whitby.id.au>
+	<45B6609B.5080909@linuxdevelopment.de> <45B66852.6020801@whitby.id.au>
+	<45B820C1.1090100@whitby.id.au>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: RFC: customisable pivot-root functionality
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,26 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jan 2007 15:33:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 Jan 2007 16:54:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
-
-On Thu, 2007-01-25 at 18:17 +0300, Sergey Lapin wrote:
-> Developing for small-RAM device, how could I have
-> ARM_INSTRUCTION_SET="thumb" for most packages and
-> ARM_INSTRUCTION_SET="arm" for packages like zlib and jpeg.
-
-ARM_INSTRUCTION_SET = "thumb"
-ARM_INSTRUCTION_SET_pn-zlib = "arm"
-ARM_INSTRUCTION_SET_pn-jpeg = "arm"
-
-?
-
-Cheers,
-
-Richard
+>
+> 1) Is there similar functionality elsewhere in OE that I haven't seen,
+> and could just use as-is?
+>
+>
+> Have you looked at altboot? it uses custom init-scripts and can be
+configured to do the kind of things you were looking at. Originally it was
+written to allow Zaurus machines to boot from loop-images on SD or even over
+NFS. I have it set up to boot a kenel and rootfs on my SD card.
 
 
+I hope this helps,
+
+Henry
 
