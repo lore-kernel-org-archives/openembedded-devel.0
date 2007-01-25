@@ -1,17 +1,17 @@
-Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
+Received: from [64.233.184.224] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <papercrane@gmail.com>) id 1H9vfs-00077F-Or
+	(envelope-from <cliff.brake@gmail.com>) id 1HA3ya-0007MI-BS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Jan 2007 04:53:20 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so732267nfc
+	Thu, 25 Jan 2007 13:45:43 +0100
+Received: by wr-out-0506.google.com with SMTP id i7so393812wra
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2007 19:53:20 -0800 (PST)
-Received: by 10.48.14.4 with SMTP id 4mr2829627nfn.1169697199523;
-	Wed, 24 Jan 2007 19:53:19 -0800 (PST)
-Received: by 10.48.246.2 with HTTP; Wed, 24 Jan 2007 19:53:19 -0800 (PST)
-Message-ID: <432beae0701241953m6d28ef08pa8247756ecf65234@mail.gmail.com>
-Date: Wed, 24 Jan 2007 19:53:19 -0800
-From: "Justin Patrin" <papercrane@gmail.com>
+	Thu, 25 Jan 2007 04:45:10 -0800 (PST)
+Received: by 10.82.152.16 with SMTP id z16mr1020670bud.1169729108059;
+	Thu, 25 Jan 2007 04:45:08 -0800 (PST)
+Received: by 10.78.170.8 with HTTP; Thu, 25 Jan 2007 04:45:08 -0800 (PST)
+Message-ID: <f96d234e0701250445h75a9aec6qc0a6a1f0c729a9e5@mail.gmail.com>
+Date: Thu, 25 Jan 2007 07:45:08 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <45B820C1.1090100@whitby.id.au>
 MIME-Version: 1.0
@@ -36,7 +36,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jan 2007 03:53:21 -0000
+X-List-Received-Date: Thu, 25 Jan 2007 12:46:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
@@ -49,124 +49,31 @@ On 1/24/07, Rod Whitby <rod@whitby.id.au> wrote:
 > at least is not tied to one specific NSLU2 distribution).  At a minimum,
 > I want to use it for a derivative of Angstrom, which I'm calling
 > "MokoSlug" and possible retro-fit it into the Unslung firmware too.
->
-> First I'll describe how it currently works, and then I'll ask for input
-> on how the same functionality might be useful on other OE platforms.
->
-> When an NSLU2 boots the OpenEmbedded-based SlugOS firmware, the kernel
-> and rootfs are loaded from internal flash.  The JFFS2 rootfs is
-> functional as-is on first boot, and has enough functionality
-> out-of-the-box to run ipkg update and ipkg install.  The trouble is that
-> there is not much room in an 8MB flash for a kernel, functional rootfs,
-> and additional packages.  Also, you don't want to be continually writing
-> to the internal flash (yes, you can use ramdisks for some things, but
-> you often want persistant regular changes to your rootfs that don't
-> require a copy-on-shutdown to preserve the information).
->
-> So we have a script called "turnup" which allows you to modify the jffs2
-> rootfs's /linuxrc file to load the rootfs from an external disk (or over
-> nfs for that matter).  I've included the help text from turnup at the
-> end of this message.
->
-> Then on the next boot, the new /linuxrc file is executed, and the rootfs
-> is loaded from external disk - giving you all the room in the world to
-> install new packages (without having to go through ipkg-link or bind
-> mount contortions).
->
-> The other advantage of this scheme is that if your external disk fails
-> (or is unplugged), then the boot falls back to the internal flash, which
-> has enough functionality to debug and fix the reasons why the boot from
-> external disk failed (assuming it wasn't your cat unplugging the usb cable).
->
-> So the questions are:
->
-> 1) Is there similar functionality elsewhere in OE that I haven't seen,
-> and could just use as-is?
->
-
-There was a pivot-root image in OE at one time which was used for the
-C3000 to pivot from the flash to the hard drive. It may still be in OE
-(and if it isn't it's in the history). You can look there for some of
-what has been previously donw.
+...
 
 > 2) Would this functionality be of use to any other devices that use OE?
 
-Not for me, but I can imagine other uses like with your slugs.
+Yes.
 
->
 > 3) Who else is interested in giving input to, and reviewing the output
 > of, this effort?
->
-> Thanks,
->
-> -- Rod
->
-> [turnup script help follows]
->
-> root@nslu2:~$ turnup
-> usage: turnup command [options]
->  commands:
->   help
->     output this help
->   init
->     correct errors in network information
->     initialise network information when DHCP is not available
->     change network information
->   disk [-i] [-s<seconds>] <device>|<uuid> [mount options]
->     With -i make <device> a bootable file system then (with or
->     without -i) arrange for the next reboot to use that device.
->     The device must already be formatted as a file system, with
->     -i it must be completely empty, without it must contain an
->     apparently bootable file system. -s (for example -s5)
->     specifies a delay in seconds to wait at boot time before
->     mounting the device.
->   memstick [-i] <device>|<uuid> [mount options]
->     Behaves as disk however options appropriate to a flash memory
->     stick are automatically added
->   nfs [-i] <nfs mount path> [mount options]
->     <nfs mount path> must be a mountable NFS file system.  With
->     -i the partition must be empty and is initialised with a
->     bootable file system.  Without -i the partition must already
->     contain a bootable file system.  In either case the NFS
->     partition must be available to be mounted without root id
->     sqashing (i.e. root must be root) and it will be selected
->     as the root file system for subsequent reboots.
->     A default set of -o options are provided, additional options
->     may be given on the command line (multiple -o options will
->     be combined into a single -o).
->   flash
->     Revert to booting from the flash disk on next reboot.
->   ram
->     Boot (once) into a ramdisk, subsequent boots will be to
->     the flash file system.
->   preserve
->     Save the system configuration to the SysConf partition, you
->     will need to create the SysConf partition from the boot loader
->     before using this if SysConf does not already exist.  This
->     just runs 'sysconf save'.
->   restore
->     Restore a previously saved system configuration.  This just
->     runs 'sysconf restore'.
->  disk formatting:
->   The argument to 'nfs' or 'disk' must be an empty partition
->   of sufficient size to hold the root file system (at least
->   16MByte but more is recommended to allow package installation).
->   An appropriate ext3 partition can be made using the command:
->
->     mke2fs -j <device>  # for example: /dev/sda1
->
->   An appropriate NFS partition can be emptied using 'rm', but
->   must be set up (exported) on the NFS server.
-> root@nslu2:~$
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
+Yes, I'm currently working on two projects that will required the
+ability to do field updates -- (stick a USB stick in the device and it
+updates itself).  I'm currently planning to have a small RO update
+image (which never gets updated) that is smart enough to update the
+main rootfs and then pivot-root to it.  It would be nice if this could
+be made somewhat general as it is probably a fairly common
+requirement.  Another reason for the RO update image is to be able to
+easily recover if the main image gets corrupted.  I'm not sure if
+there is anything in common with your slug work, but It would be nice
+to have a general framework available to do the pivot-root stuff.
+
+Cliff
 
 -- 
-Justin Patrin
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
