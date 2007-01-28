@@ -1,30 +1,26 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HB9LN-00033j-Pz
+	(envelope-from <pmiscml@gmail.com>) id 1HBHbk-00043C-RO
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Jan 2007 13:41:13 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id 7E181997E5
+	Sun, 28 Jan 2007 22:30:44 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so1689470nfc
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jan 2007 07:41:13 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by out1.internal (MEProxy); Sun, 28 Jan 2007 07:41:13 -0500
-X-Sasl-enc: U2r2cpkVRBxsK6X+HcoebS8V49hRRTJoF5FH/XdpvDpa 1169988072
-Received: from [192.168.0.11] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id 8F9932BF7E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jan 2007 07:41:12 -0500 (EST)
-Message-ID: <45BC99E1.7080208@whitby.id.au>
-Date: Sun, 28 Jan 2007 23:11:05 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
+	Sun, 28 Jan 2007 13:30:40 -0800 (PST)
+Received: by 10.49.28.3 with SMTP id f3mr8388312nfj.1170019840288;
+	Sun, 28 Jan 2007 13:30:40 -0800 (PST)
+Received: from CUBE ( [82.193.96.236])
+	by mx.google.com with ESMTP id n23sm1023604nfc.2007.01.28.13.30.39;
+	Sun, 28 Jan 2007 13:30:40 -0800 (PST)
+Date: Sun, 28 Jan 2007 23:30:41 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <492827442.20070128233041@gmail.com>
+To: Phil Blundell <pb@reciva.com>
+In-Reply-To: <E1HBHQ2-0002RA-CZ@linuxtogo.org>
+References: <E1HBHQ2-0002RA-CZ@linuxtogo.org>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>	<45B518A5.8000500@dominion.kabel.utwente.nl>	<45B5528F.3050108@whitby.id.au>
-	<1169550792.5845.8.camel@localhost.localdomain>
-In-Reply-To: <1169550792.5845.8.camel@localhost.localdomain>
-Subject: Re: Deprecating ixp4xx, nslu2 in favour of endian-specific	machine settings (Was: RFC on	MACHINE_ENDIAN)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [oe-commits] org.oe.dev package.bbclass: remove directories named in FILES from image after file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,26 +34,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Jan 2007 12:41:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 28 Jan 2007 21:30:46 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Tue, 2007-01-23 at 10:40 +1030, Rod Whitby wrote:
->> Last chance for objections .... commits will start in 6 hours.
-> 
-> For the record, no objections from me. After consideration, I think Koen
-> is right and two machines make sense in this case. Koen has had the
-> experience of trying this in practise which often helps! :)
-> 
-> Where possible I would like to see it using the siteinfo check so the
-> metadata is generic.
+Hello Phil,
 
-This has now been done (using SITEINFO_ENDIANESS).
+      What's the idea behind this change? How would if handle non-empty
+dirs?
 
-Neither ARCH_BYTE_SEX or IXP4XX_MACHINE_ENDIAN exist anywhere in OE any
-more.
 
--- Rod
+This is a forwarded message
+From: pb commit <openembedded-commits@lists.openembedded.org>
+To: openembedded-commits@lists.openembedded.org
+Date: Sunday, January 28, 2007, 11:18:34 PM
+Subject: [oe-commits] org.oe.dev package.bbclass: remove directories named in FILES from image after file
+
+===8<==============Original message text===============
+package.bbclass: remove directories named in FILES from image after file 
+migration
+
+Author: pb@openembedded.org
+Branch: org.openembedded.dev
+Revision: e03e452c09311f78ce177e8febeb9963f30bc1ef
+ViewMTN: http://monotone.openembedded.org/revision.psp?id=e03e452c09311f78ce177e8febeb9963f30bc1ef
+Files:
+1
+classes/package.bbclass
+Diffs:
+
+#
+# mt diff -r27b46e6b2f1768296232a9d2ce04946cd1d5514e -re03e452c09311f78ce177e8febeb9963f30bc1ef
+#
+# 
+# 
+# patch "classes/package.bbclass"
+#  from [e59caa16e5f65d4574477c54a942e64e26296223]
+#    to [edf00c41e2683d3180be274fedde142ed3837c83]
+# 
+============================================================
+--- classes/package.bbclass     e59caa16e5f65d4574477c54a942e64e26296223
++++ classes/package.bbclass     edf00c41e2683d3180be274fedde142ed3837c83
+@@ -387,6 +387,7 @@ python populate_packages () {
+                bb.mkdirhier(root)
+                filesvar = bb.data.getVar('FILES', localdata, 1) or ""
+                files = filesvar.split()
++               cleandirs = []
+                for file in files:
+                        if os.path.isabs(file):
+                                file = '.' + file
+@@ -395,6 +396,7 @@ python populate_packages () {
+                                        newfiles =  [ os.path.join(file,x) for x in os.listdir(file) ]
+                                        if newfiles:
+                                                files += newfiles
++                                               cleandirs = [file] + cleandirs
+                                                continue
+                        globbed = glob.glob(file)
+                        if globbed:
+@@ -409,6 +411,8 @@ python populate_packages () {
+                        ret = bb.movefile(file,fpath)
+                        if ret is None or ret == 0:
+                                raise bb.build.FuncFailed("File population failed")
++               for dir in cleandirs:
++                       os.rmdir(dir)
+                del localdata
+        os.chdir(workdir)
+ 
+
+
+
+_______________________________________________
+Openembedded-commits mailing list
+Openembedded-commits@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+
+===8<===========End of original message text===========
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
