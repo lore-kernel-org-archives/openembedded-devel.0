@@ -1,25 +1,30 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HAolU-0002MQ-Df
-	for openembedded-devel@openembedded.org; Sat, 27 Jan 2007 15:42:50 +0100
-Received: from [130.89.6.106] (vpn006106.vpn.utwente.nl [130.89.6.106])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l0REgcLr027853 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2007 15:42:38 +0100
-Message-ID: <45BB64DC.1080601@dominion.kabel.utwente.nl>
-Date: Sat, 27 Jan 2007 15:42:36 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <rod@whitby.id.au>) id 1HB9LN-00033j-Pz
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Jan 2007 13:41:13 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 7E181997E5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Jan 2007 07:41:13 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by out1.internal (MEProxy); Sun, 28 Jan 2007 07:41:13 -0500
+X-Sasl-enc: U2r2cpkVRBxsK6X+HcoebS8V49hRRTJoF5FH/XdpvDpa 1169988072
+Received: from [192.168.0.11] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id 8F9932BF7E
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Jan 2007 07:41:12 -0500 (EST)
+Message-ID: <45BC99E1.7080208@whitby.id.au>
+Date: Sun, 28 Jan 2007 23:11:05 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: RFC: diet-x11, small-x11 and fat-x11
+To: openembedded-devel@lists.openembedded.org
+References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>	<45B518A5.8000500@dominion.kabel.utwente.nl>	<45B5528F.3050108@whitby.id.au>
+	<1169550792.5845.8.camel@localhost.localdomain>
+In-Reply-To: <1169550792.5845.8.camel@localhost.localdomain>
+Subject: Re: Deprecating ixp4xx, nslu2 in favour of endian-specific	machine settings (Was: RFC on	MACHINE_ENDIAN)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,32 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2007 14:42:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 28 Jan 2007 12:41:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Richard Purdie wrote:
+> On Tue, 2007-01-23 at 10:40 +1030, Rod Whitby wrote:
+>> Last chance for objections .... commits will start in 6 hours.
+> 
+> For the record, no objections from me. After consideration, I think Koen
+> is right and two machines make sense in this case. Koen has had the
+> experience of trying this in practise which often helps! :)
+> 
+> Where possible I would like to see it using the siteinfo check so the
+> metadata is generic.
 
-Hi,
+This has now been done (using SITEINFO_ENDIANESS).
 
-I'd like to propose to split diet-x11 and libx11 into the following:
+Neither ARCH_BYTE_SEX or IXP4XX_MACHINE_ENDIAN exist anywhere in OE any
+more.
 
-diet-x11: as small as possible, without stuff like cms and xkb
-small-x11: small, but with cms and xkb, usefull for highend palmtops and small settop-boxes
-fat-x11: biggest version, usefull for big-bad-workstation images.
-
-what do you think about it?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFu2TcMkyGM64RGpERAhNpAJ9IkgRiU747JFiNqaRu7nGIbhh2UACfd+RQ
-9wOPv/sei/R/hz/p4C1YCtM=
-=EPN3
------END PGP SIGNATURE-----
+-- Rod
 
 
