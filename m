@@ -1,25 +1,23 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1HBIOn-0004AL-AA
+	(envelope-from <nelsoneci@gmail.com>) id 1HBaUH-0007OF-6I
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Jan 2007 23:21:21 +0100
-Received: from cpc2-cmbg6-0-0-cust429.cmbg.cable.ntl.com ([81.107.33.174]
-	helo=[192.168.2.189])
-	by crown.reciva.com with esmtpsa (TLS-1.0:RSA_ARCFOUR_MD5:16)
-	(Exim 4.50) id 1HBIOm-0007qv-Kl; Sun, 28 Jan 2007 22:21:20 +0000
-From: Phil Blundell <pb@reciva.com>
-To: Paul Sokolovsky <pmiscml@gmail.com>
-In-Reply-To: <153772577.20070129001424@gmail.com>
-References: <E1HBHQ2-0002RA-CZ@linuxtogo.org>
-	<492827442.20070128233041@gmail.com>
-	<1170022193.4354.0.camel@mebius.reciva.com>
-	<153772577.20070129001424@gmail.com>
-Date: Sun, 28 Jan 2007 22:22:35 +0000
-Message-Id: <1170022955.4354.2.camel@mebius.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev package.bbclass: remove	directories named in FILES from image after file
+	Mon, 29 Jan 2007 18:40:13 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so1217960ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Jan 2007 09:40:12 -0800 (PST)
+Received: by 10.82.163.13 with SMTP id l13mr3632091bue.1170092411478;
+	Mon, 29 Jan 2007 09:40:11 -0800 (PST)
+Received: by 10.78.185.1 with HTTP; Mon, 29 Jan 2007 09:40:11 -0800 (PST)
+Message-ID: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
+Date: Mon, 29 Jan 2007 12:40:11 -0500
+From: "Nelson Castillo" <nelson@emqbit.com>
+Sender: nelsoneci@gmail.com
+To: openembedded-devel@lists.openembedded.org, 
+	"Stefano Parusso" <stefano@ir3arp.net>
+MIME-Version: 1.0
+X-Google-Sender-Auth: 5ceb7e7e39e07944
+Subject: Stable versions of OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,30 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Jan 2007 22:21:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 29 Jan 2007 17:40:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, 2007-01-29 at 00:14 +0200, Paul Sokolovsky wrote:
-> Hello Phil,
-> 
-> Monday, January 29, 2007, 12:09:52 AM, you wrote:
-> 
-> > There shouldn't be any non-empty dirs.  If you're encountering some,
-> > that must be a bug.  Do you have a testcase?
-> 
->   Sure: I create a new .bb and just debug packaging. I'd prefer it
-> didn't throw Python exception in my face ;-). Or: I'm sure there're
-> few .bb which don't package all the stuff which is installed by
-> "make install". One such example is busybox, which creates hoards of
-> symlinks, but we don't packages (all of) them, instead relying on
-> update-alternatives.
+Hi.
 
-I just built busybox 1.2.1 and didn't see any problem.  Can you be more
-specific about what exactly is going wrong for you?
+I've been following this document (http://wiki.emqbit.com//openembedded)
+by Stefano Parusso that explains how to build OE for a ARM board[1].
 
-p.
+It works for the snapshot for November the 7th and not for the most recent
+one. I read in the Getting Started wiki page[3]:
 
+  Once you have a "known good" version that works well on your
+  system, keep it! To update, clone a new copy; don't overwrite
+  that working version until it's known to be safe.
 
+So, I guess it means I should stay with the old metadata.
+
+My questions are:
+
+  * Does OE ever do "stable" releases?
+
+  * If not, how do you make "stable" releases for yur plataforms?
+
+Regards,
+Nelson.-
+
+[1] http://wiki.emqbit.com/free-ecb-at91
+[2] http://www.openembedded.org/snapshots/OE-this-is-for-mtn-0.30.mtn.bz2
+[3] http://www.openembedded.org/wiki/GettingStarted
+
+-- 
+ http://arhuaco.org
+http://emQbit.com
 
 
