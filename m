@@ -1,23 +1,20 @@
-Received: from [66.249.92.173] (helo=ug-out-1314.google.com)
+Received: from [131.246.120.220] (helo=mailgw1.uni-kl.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cliff.brake@gmail.com>) id 1HBc8l-0002u5-Qn
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Jan 2007 20:26:07 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so1243758ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jan 2007 11:26:07 -0800 (PST)
-Received: by 10.82.139.17 with SMTP id m17mr3862139bud.1170098766505;
-	Mon, 29 Jan 2007 11:26:06 -0800 (PST)
-Received: by 10.78.167.3 with HTTP; Mon, 29 Jan 2007 11:26:06 -0800 (PST)
-Message-ID: <f96d234e0701291126n4ae5f840m49d29e7185b3fc3a@mail.gmail.com>
-Date: Mon, 29 Jan 2007 14:26:06 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
+	(envelope-from <p_pichot@informatik.uni-kl.de>) id 1HBcQ5-00034T-IY
+	for openembedded-devel@openembedded.org; Mon, 29 Jan 2007 20:44:01 +0100
+Received: from [131.246.80.76] (vpn-80-076.rhrk.uni-kl.de [131.246.80.76])
+	by mailgw1.uni-kl.de (8.13.4/8.13.4/Debian-3sarge3) with ESMTP id
+	l0TJhr2a017999 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Jan 2007 20:43:54 +0100
+Message-ID: <45BE4E7C.6050703@informatik.uni-kl.de>
+Date: Mon, 29 Jan 2007 20:43:56 +0100
+From: Paul Pichota <p_pichot@informatik.uni-kl.de>
+User-Agent: Mail/News 1.5.0.9 (X11/20070124)
 MIME-Version: 1.0
-References: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
-Cc: Stefano Parusso <stefano@ir3arp.net>
-Subject: Re: Stable versions of OE
+To: openembedded-devel@openembedded.org
+X-Enigmail-Version: 0.94.1.0
+OpenPGP: id=F7BF2802
+Subject: Packages: provide openssl 0.9.8?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,50 +28,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jan 2007 19:26:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 29 Jan 2007 19:44:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 1/29/07, Nelson Castillo <nelson@emqbit.com> wrote:
-> Hi.
->
-> I've been following this document (http://wiki.emqbit.com//openembedded)
-> by Stefano Parusso that explains how to build OE for a ARM board[1].
->
-> It works for the snapshot for November the 7th and not for the most recent
-> one. I read in the Getting Started wiki page[3]:
->
->   Once you have a "known good" version that works well on your
->   system, keep it! To update, clone a new copy; don't overwrite
->   that working version until it's known to be safe.
->
-> So, I guess it means I should stay with the old metadata.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Current versions of OE are quite stable for ARM.  Chances are you have
-something configured incorrectly.  Hop on the IRC channel and post the
-error and it will probably be easy to fix.
+Hi,
 
-> My questions are:
->
->   * Does OE ever do "stable" releases?
+I wonder if openssl 0.9.8 could be added to the packages, since it
+supports Diffie-Hellman with Elliptic Curves.
+I have been able to build it with Nylon, a build environment for the 4G
+Access Cube which is based on OpenEmbedded. After applying patches
+distributed by the OpenWRT project and editing the .bb file the libaries
+were created and the package built.
 
-Not that I know of.
+Kind Regards,
+Paul Pichota
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
->   * If not, how do you make "stable" releases for yur plataforms?
-
-I generally follow the tip of dev early in the development.  At some
-point once things are working pretty well, I record the version of the
-OE meta data and bitbake I am using and then stick with it.  I can
-still update the database, but I always make sure I check out that
-revision.  This brings up a good question -- are the revision hashs in
-OE valid forever?
-
-Cliff
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+iD8DBQFFvk5umH6TS/e/KAIRAu/+AJ9ImCQADDD8VDEfKB83gBG3HxgvVwCfZLBs
+vzs5/B1Mql57ER7JtFG/MRc=
+=lCU7
+-----END PGP SIGNATURE-----
 
 
