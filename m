@@ -1,23 +1,29 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <freyther@gmx.net>) id 1HBdje-0005Vz-0o
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <mickey@vanille-media.de>) id 1HBemv-0007lj-J4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Jan 2007 22:08:18 +0100
-Received: (qmail invoked by alias); 29 Jan 2007 21:08:17 -0000
-Received: from dsl-62-220-14-162.berlikomm.net (EHLO [192.168.1.23])
-	[62.220.14.162]
-	by mail.gmx.net (mp048) with SMTP; 29 Jan 2007 22:08:17 +0100
-X-Authenticated: #1949623
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <f96d234e0701291126n4ae5f840m49d29e7185b3fc3a@mail.gmail.com>
+	Mon, 29 Jan 2007 23:15:45 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id CA11628C012; Mon, 29 Jan 2007 23:11:00 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from [192.168.2.128] (e180135091.adsl.alicedsl.de [85.180.135.91])
+	by srv043.dedi23.de (Postfix) with ESMTP id 0449228C011;
+	Mon, 29 Jan 2007 23:10:56 +0100 (CET)
+Date: Mon, 29 Jan 2007 23:13:39 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <142423136.20070129231339@vanille-media.de>
+To: "Nelson Castillo" <nelson@emqbit.com>
+In-Reply-To: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
 References: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
-	<f96d234e0701291126n4ae5f840m49d29e7185b3fc3a@mail.gmail.com>
-Message-Id: <729B694F-8DB0-488B-B2CE-36E58D6D522A@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Mon, 29 Jan 2007 22:08:13 +0100
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
+MIME-Version: 1.0
+Cc: Stefano Parusso <stefano@ir3arp.net>,
+	openembedded-devel@lists.openembedded.org
 Subject: Re: Stable versions of OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,19 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jan 2007 21:08:18 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Mon, 29 Jan 2007 22:15:45 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
+Nelson Castillo wrote:
+> My questions are:
+>   * Does OE ever do "stable" releases?
 
-Am 29.01.2007 um 20:26 schrieb Cliff Brake:
+Soon. During the first OEDEM we decided to prepare quarterly
+snapshots. We just dont't have the necessary infrastructure
+(stabilization phases, unit tests) for that in place yet.
 
-> This brings up a good question -- are the revision hashs in
-> OE valid forever?
+>   * If not, how do you make "stable" releases for yur plataforms?
 
-They changed during the 0.26 rosterify. So it might be a good idea to  
-tag them?
+I start off with a snapshot and then integrate relevant changes from
+later revisions by monotone "cherry picking".
 
-h.
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
