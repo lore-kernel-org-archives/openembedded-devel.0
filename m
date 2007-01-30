@@ -1,30 +1,32 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [203.10.110.92] (helo=mail.netspace.net.au)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HBemv-0007lj-J4
+	(envelope-from <oe@tucuxi.org>) id 1HBjbD-0001xF-Tr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Jan 2007 23:15:45 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id CA11628C012; Mon, 29 Jan 2007 23:11:00 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from [192.168.2.128] (e180135091.adsl.alicedsl.de [85.180.135.91])
-	by srv043.dedi23.de (Postfix) with ESMTP id 0449228C011;
-	Mon, 29 Jan 2007 23:10:56 +0100 (CET)
-Date: Mon, 29 Jan 2007 23:13:39 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.95.6) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <142423136.20070129231339@vanille-media.de>
-To: "Nelson Castillo" <nelson@emqbit.com>
-In-Reply-To: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
-References: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
+	Tue, 30 Jan 2007 04:24:00 +0100
+Received: from frontalis.tucuxi.org (220-253-146-206.VIC.netspace.net.au
+	[220.253.146.206])
+	by mail.netspace.net.au (Postfix) with ESMTP id 9D06D17056B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jan 2007 14:23:56 +1100 (EST)
+Received: from localhost ([127.0.0.1])
+	by frontalis.tucuxi.org with esmtpa (Exim 4.63)
+	(envelope-from <oe@tucuxi.org>) id 1HBjbA-0002lr-BY
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Jan 2007 14:23:56 +1100
+Message-ID: <45BEBA4B.8060901@tucuxi.org>
+Date: Tue, 30 Jan 2007 14:23:55 +1100
+From: Ben Stewart <oe@tucuxi.org>
+User-Agent: Icedove 1.5.0.9 (X11/20061220)
 MIME-Version: 1.0
-Cc: Stefano Parusso <stefano@ir3arp.net>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: Stable versions of OE
+To: openembedded-devel@lists.openembedded.org
+References: <45BE4E7C.6050703@informatik.uni-kl.de>
+In-Reply-To: <45BE4E7C.6050703@informatik.uni-kl.de>
+X-Enigmail-Version: 0.94.2.0
+X-SA-Exim-Connect-IP: 127.0.0.1
+X-SA-Exim-Mail-From: oe@tucuxi.org
+X-SA-Exim-Scanned: No (on frontalis.tucuxi.org);
+	SAEximRunCond expanded to false
+Subject: Re: Packages: provide openssl 0.9.8?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,28 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jan 2007 22:15:45 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 30 Jan 2007 03:24:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Nelson Castillo wrote:
-> My questions are:
->   * Does OE ever do "stable" releases?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Soon. During the first OEDEM we decided to prepare quarterly
-snapshots. We just dont't have the necessary infrastructure
-(stabilization phases, unit tests) for that in place yet.
+Paul,
 
->   * If not, how do you make "stable" releases for yur plataforms?
+Paul Pichota wrote:
+> I wonder if openssl 0.9.8 could be added to the packages, since it
+> supports Diffie-Hellman with Elliptic Curves.
+> I have been able to build it with Nylon, a build environment for the 4G
+> Access Cube which is based on OpenEmbedded. After applying patches
+> distributed by the OpenWRT project and editing the .bb file the libaries
+> were created and the package built.
 
-I start off with a snapshot and then integrate relevant changes from
-later revisions by monotone "cherry picking".
+By the sounds of things, you've got 0.9.8 to build? If so, chuck your
+.bb file on the OE bugtracker as a patch:
 
-Regards,
+<http://bugs.openembedded.org/enter_bug.cgi>
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+- - Ben
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iD8DBQFFvrpLUXHDLmlSHegRAl5mAJ4iExAcc/LjG9KpE5DklUmyhMU8GgCgmvjS
+qHZqy4M96Yzc5kR/qgIjTFk=
+=2DyY
+-----END PGP SIGNATURE-----
 
 
