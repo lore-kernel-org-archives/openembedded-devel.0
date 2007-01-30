@@ -1,32 +1,26 @@
-Received: from [203.10.110.92] (helo=mail.netspace.net.au)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <oe@tucuxi.org>) id 1HBjbl-0001xf-21
+	(envelope-from <nelsoneci@gmail.com>) id 1HBkDt-0002LL-12
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Jan 2007 04:24:33 +0100
-Received: from frontalis.tucuxi.org (220-253-146-206.VIC.netspace.net.au
-	[220.253.146.206])
-	by mail.netspace.net.au (Postfix) with ESMTP id 031411701F3
+	Tue, 30 Jan 2007 05:03:57 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so1343085ugf
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2007 14:24:31 +1100 (EST)
-Received: from localhost ([127.0.0.1])
-	by frontalis.tucuxi.org with esmtpa (Exim 4.63)
-	(envelope-from <oe@tucuxi.org>) id 1HBjbi-0002mG-88
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Jan 2007 14:24:30 +1100
-Message-ID: <45BEBA6E.7050408@tucuxi.org>
-Date: Tue, 30 Jan 2007 14:24:30 +1100
-From: Ben Stewart <oe@tucuxi.org>
-User-Agent: Icedove 1.5.0.9 (X11/20061220)
-MIME-Version: 1.0
+	Mon, 29 Jan 2007 20:03:56 -0800 (PST)
+Received: by 10.78.178.5 with SMTP id a5mr4655522huf.1170129836168;
+	Mon, 29 Jan 2007 20:03:56 -0800 (PST)
+Received: by 10.78.185.1 with HTTP; Mon, 29 Jan 2007 20:03:56 -0800 (PST)
+Message-ID: <2accc2ff0701292003s813dfcey2c908e0319f1d710@mail.gmail.com>
+Date: Mon, 29 Jan 2007 23:03:56 -0500
+From: "Nelson Castillo" <nelson@emqbit.com>
+Sender: nelsoneci@gmail.com
 To: openembedded-devel@lists.openembedded.org
-References: <20070126091637.dsyf5wsolc0w4kcs@webmail.jerryweb.org>
-In-Reply-To: <20070126091637.dsyf5wsolc0w4kcs@webmail.jerryweb.org>
-X-Enigmail-Version: 0.94.2.0
-X-SA-Exim-Connect-IP: 127.0.0.1
-X-SA-Exim-Mail-From: oe@tucuxi.org
-X-SA-Exim-Scanned: No (on frontalis.tucuxi.org);
-	SAEximRunCond expanded to false
-Subject: Re: [website] Problem with filebrowser and "+" sign
+In-Reply-To: <142423136.20070129231339@vanille-media.de>
+MIME-Version: 1.0
+References: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
+	<142423136.20070129231339@vanille-media.de>
+X-Google-Sender-Auth: 3e2899f9f9c3b73e
+Cc: Stefano Parusso <stefano@ir3arp.net>, andres@emqbit.com
+Subject: Re: Stable versions of OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,49 +34,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2007 03:24:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Jan 2007 04:03:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 1/29/07, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
+> Nelson Castillo wrote:
+> > My questions are:
+> >   * Does OE ever do "stable" releases?
+>
+> Soon. During the first OEDEM we decided to prepare quarterly
+> snapshots. We just dont't have the necessary infrastructure
+> (stabilization phases, unit tests) for that in place yet.
 
-Jeremy,
+This will be nice.
 
-Jeremy Lain=E9 wrote:
-> It looks as though there is a problem with the web interface to the
-> MTN repository, I am unable to browse the following directory:
+> >   * If not, how do you make "stable" releases for yur plataforms?
+>
+> I start off with a snapshot and then integrate relevant changes from
+> later revisions by monotone "cherry picking".
 
-It appears that whereever you got the link to the gtk+ package did not
-correctly escape the + as required by the HTTP specification, and the
-file browser does not support the character even if encoded.
+Thanks. Well, we'll do that and when ready (catching up with
+the latest snapshot) we will send the files for the new board
+asking you to include them. We might ask for help if needed.
 
-A note to the developer of the file browser - it appears the OE.org
-filebrowser uses PHP (from the response headers), and the appropriate
-encoding can be accomplished by using the function urlencode(), and the
-output thereof should be encoded with htmlentities() before being dumped
-to the browser.
+Thank you all for your replies,
+Nelson.-  (Who will start following this mailing list from today).
 
-Additionally, decoding the PATH_INFO to determine which directory to
-show in the file browser can be accomplished by using urldecode(). Feel
-free to drop me an email if there are any queries.
-
-The 'proper' address for the directory in question would be as follows,
-as the + character in the URL denotes a space (character 0x20)
-
-http://www.openembedded.org/filebrowser/org.openembedded.dev/packages/gtk=
-%2b
-
-Regards
-
-Ben Stewart
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFFvrptUXHDLmlSHegRAvrgAJ9TlwznnzOyGme8jnmmLZqJacvq5gCdEm8u
-Sbf1e/K65eh5i+EVzcXBnMg=3D
-=3DSmhk
------END PGP SIGNATURE-----
+-- 
+http://arhuaco.org
+http://emQbit.com
 
 
