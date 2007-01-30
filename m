@@ -1,32 +1,32 @@
 Received: from [203.10.110.92] (helo=mail.netspace.net.au)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <oe@tucuxi.org>) id 1HBjbD-0001xF-Tr
+	(envelope-from <oe@tucuxi.org>) id 1HBjbl-0001xf-21
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Jan 2007 04:24:00 +0100
+	Tue, 30 Jan 2007 04:24:33 +0100
 Received: from frontalis.tucuxi.org (220-253-146-206.VIC.netspace.net.au
 	[220.253.146.206])
-	by mail.netspace.net.au (Postfix) with ESMTP id 9D06D17056B
+	by mail.netspace.net.au (Postfix) with ESMTP id 031411701F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2007 14:23:56 +1100 (EST)
+	Tue, 30 Jan 2007 14:24:31 +1100 (EST)
 Received: from localhost ([127.0.0.1])
 	by frontalis.tucuxi.org with esmtpa (Exim 4.63)
-	(envelope-from <oe@tucuxi.org>) id 1HBjbA-0002lr-BY
+	(envelope-from <oe@tucuxi.org>) id 1HBjbi-0002mG-88
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Jan 2007 14:23:56 +1100
-Message-ID: <45BEBA4B.8060901@tucuxi.org>
-Date: Tue, 30 Jan 2007 14:23:55 +1100
+	Tue, 30 Jan 2007 14:24:30 +1100
+Message-ID: <45BEBA6E.7050408@tucuxi.org>
+Date: Tue, 30 Jan 2007 14:24:30 +1100
 From: Ben Stewart <oe@tucuxi.org>
 User-Agent: Icedove 1.5.0.9 (X11/20061220)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <45BE4E7C.6050703@informatik.uni-kl.de>
-In-Reply-To: <45BE4E7C.6050703@informatik.uni-kl.de>
+References: <20070126091637.dsyf5wsolc0w4kcs@webmail.jerryweb.org>
+In-Reply-To: <20070126091637.dsyf5wsolc0w4kcs@webmail.jerryweb.org>
 X-Enigmail-Version: 0.94.2.0
 X-SA-Exim-Connect-IP: 127.0.0.1
 X-SA-Exim-Mail-From: oe@tucuxi.org
 X-SA-Exim-Scanned: No (on frontalis.tucuxi.org);
 	SAEximRunCond expanded to false
-Subject: Re: Packages: provide openssl 0.9.8?
+Subject: Re: [website] Problem with filebrowser and "+" sign
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,36 +40,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2007 03:24:01 -0000
+X-List-Received-Date: Tue, 30 Jan 2007 03:24:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Paul,
+Jeremy,
 
-Paul Pichota wrote:
-> I wonder if openssl 0.9.8 could be added to the packages, since it
-> supports Diffie-Hellman with Elliptic Curves.
-> I have been able to build it with Nylon, a build environment for the 4G
-> Access Cube which is based on OpenEmbedded. After applying patches
-> distributed by the OpenWRT project and editing the .bb file the libaries
-> were created and the package built.
+Jeremy Lain=E9 wrote:
+> It looks as though there is a problem with the web interface to the
+> MTN repository, I am unable to browse the following directory:
 
-By the sounds of things, you've got 0.9.8 to build? If so, chuck your
-.bb file on the OE bugtracker as a patch:
+It appears that whereever you got the link to the gtk+ package did not
+correctly escape the + as required by the HTTP specification, and the
+file browser does not support the character even if encoded.
 
-<http://bugs.openembedded.org/enter_bug.cgi>
+A note to the developer of the file browser - it appears the OE.org
+filebrowser uses PHP (from the response headers), and the appropriate
+encoding can be accomplished by using the function urlencode(), and the
+output thereof should be encoded with htmlentities() before being dumped
+to the browser.
 
-- - Ben
+Additionally, decoding the PATH_INFO to determine which directory to
+show in the file browser can be accomplished by using urldecode(). Feel
+free to drop me an email if there are any queries.
+
+The 'proper' address for the directory in question would be as follows,
+as the + character in the URL denotes a space (character 0x20)
+
+http://www.openembedded.org/filebrowser/org.openembedded.dev/packages/gtk=
+%2b
+
+Regards
+
+Ben Stewart
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.6 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFFvrpLUXHDLmlSHegRAl5mAJ4iExAcc/LjG9KpE5DklUmyhMU8GgCgmvjS
-qHZqy4M96Yzc5kR/qgIjTFk=
-=2DyY
+iD8DBQFFvrptUXHDLmlSHegRAvrgAJ9TlwznnzOyGme8jnmmLZqJacvq5gCdEm8u
+Sbf1e/K65eh5i+EVzcXBnMg=3D
+=3DSmhk
 -----END PGP SIGNATURE-----
 
 
