@@ -1,26 +1,28 @@
-Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <nelsoneci@gmail.com>) id 1HBkDt-0002LL-12
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Jan 2007 05:03:57 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so1343085ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jan 2007 20:03:56 -0800 (PST)
-Received: by 10.78.178.5 with SMTP id a5mr4655522huf.1170129836168;
-	Mon, 29 Jan 2007 20:03:56 -0800 (PST)
-Received: by 10.78.185.1 with HTTP; Mon, 29 Jan 2007 20:03:56 -0800 (PST)
-Message-ID: <2accc2ff0701292003s813dfcey2c908e0319f1d710@mail.gmail.com>
-Date: Mon, 29 Jan 2007 23:03:56 -0500
-From: "Nelson Castillo" <nelson@emqbit.com>
-Sender: nelsoneci@gmail.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <142423136.20070129231339@vanille-media.de>
+	(envelope-from <mickey@vanille-media.de>)
+	id 1HBpdb-0006OK-6W; Tue, 30 Jan 2007 10:50:54 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 7CA3E28C012; Tue, 30 Jan 2007 10:46:05 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from [192.168.2.128] (e180173175.adsl.alicedsl.de [85.180.173.175])
+	by srv043.dedi23.de (Postfix) with ESMTP id 3312228C011;
+	Tue, 30 Jan 2007 10:46:02 +0100 (CET)
+Date: Tue, 30 Jan 2007 10:48:45 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <136216082.20070130104845@vanille-media.de>
+To: "pb commit" <openembedded-commits@lists.openembedded.org>
+In-Reply-To: <E1HBTcw-0006py-Gd@linuxtogo.org>
+References: <E1HBTcw-0006py-Gd@linuxtogo.org>
 MIME-Version: 1.0
-References: <2accc2ff0701290940nbdceb0dkf25db7ea19826895@mail.gmail.com>
-	<142423136.20070129231339@vanille-media.de>
-X-Google-Sender-Auth: 3e2899f9f9c3b73e
-Cc: Stefano Parusso <stefano@ir3arp.net>, andres@emqbit.com
-Subject: Re: Stable versions of OE
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev package.bbclass: add workaround for wrongly globbed symlinks in FILES causing python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,36 +36,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2007 04:03:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 30 Jan 2007 09:51:00 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 1/29/07, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
-> Nelson Castillo wrote:
-> > My questions are:
-> >   * Does OE ever do "stable" releases?
->
-> Soon. During the first OEDEM we decided to prepare quarterly
-> snapshots. We just dont't have the necessary infrastructure
-> (stabilization phases, unit tests) for that in place yet.
+pb commit wrote:
+> package.bbclass: add workaround for wrongly globbed symlinks in FILES causing python
+> traceback spew during population
 
-This will be nice.
+> Author: pb@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 77212e456a021803396d11bcad7616c51e5c6d25
+> ViewMTN:
+> http://monotone.openembedded.org/revision.psp?id=77212e456a021803396d11bcad7616c51e5c6d25
+> Files:
+> 1
+> classes/package.bbclass
+> Diffs:
 
-> >   * If not, how do you make "stable" releases for yur plataforms?
->
-> I start off with a snapshot and then integrate relevant changes from
-> later revisions by monotone "cherry picking".
+> #
+> # mt diff -r4babe1caf820e719d27c7ed13d9518351ba729f3
+> -r77212e456a021803396d11bcad7616c51e5c6d25
+> #
+> # 
+> # 
+> # patch "classes/package.bbclass"
+> #  from [edf00c41e2683d3180be274fedde142ed3837c83]
+> #    to [4c30e72ec3dcec6b3bddaaa4e5dc3cb458993749]
+> # 
+> ============================================================
+> --- classes/package.bbclass    
+> edf00c41e2683d3180be274fedde142ed3837c83
+> +++ classes/package.bbclass    
+> 4c30e72ec3dcec6b3bddaaa4e5dc3cb458993749
+> @@ -408,11 +408,16 @@ python populate_packages () {
+>                         fpath = os.path.join(root,file)
+>                         dpath = os.path.dirname(fpath)
+>                         bb.mkdirhier(dpath)
+> +                       if file in cleandirs:
+> +                               cleandirs.remove(file)
+>                         ret = bb.movefile(file,fpath)
+>                         if ret is None or ret == 0:
+>                                 raise bb.build.FuncFailed("File population failed")
+>                 for dir in cleandirs:
+> -                       os.rmdir(dir)
+> +                       if os.path.isdir(dir):
+> +                               os.rmdir(dir)
+> +                       else:
+> +                               bb.note("ERROR: directory %s went
+> away unexpectedly during package population" % dir)
+>                 del localdata
+>         os.chdir(workdir)
+>  
 
-Thanks. Well, we'll do that and when ready (catching up with
-the latest snapshot) we will send the files for the new board
-asking you to include them. We might ask for help if needed.
+This seems break with base-files:
 
-Thank you all for your replies,
-Nelson.-  (Who will start following this mailing list from today).
+NOTE: package base-files-3.0.14-r58: task do_package: started
+ERROR: Error in executing: /home/stefan/Projekte/OpenEZX/oe/org.openembedded.dev/packages/base-files/base-files_3.0.14.bb
+ERROR: Exception:exceptions.OSError Message:[Errno 22] Invalid argument: './'
+ERROR: Printing the environment of the function
+ERROR:  0113:                   if ret is None or ret == 0:
+ERROR:  0114:                           raise bb.build.FuncFailed("File population failed")
+ERROR:  0115:           for dir in cleandirs:
+ERROR:  0116:                   if os.path.isdir(dir):
+ERROR:  0117:                           os.rmdir(dir)
+ERROR:  0118:                   else:
+ERROR:  0119:                           bb.note("ERROR: directory %s went away unexpectedly during package population" % dir)
+ERROR:  0120:           del localdata
+ERROR:  0121:   os.chdir(workdir)
+ERROR: Error in executing: /home/stefan/Projekte/OpenEZX/oe/org.openembedded.dev/packages/base-files/base-files_3.0.14.bb
+ERROR: Exception:exceptions.OSError Message:[Errno 22] Invalid argument: './'
 
+
+Regards,
+
+:M:
 -- 
-http://arhuaco.org
-http://emQbit.com
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
