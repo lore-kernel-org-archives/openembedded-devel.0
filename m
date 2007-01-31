@@ -1,29 +1,21 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [204.127.225.96] (helo=alnrmhc16.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HCKSd-0003Hx-2N
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Jan 2007 19:45:35 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 348A028C012; Wed, 31 Jan 2007 19:40:46 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=MISSING_HEADERS,
-	RCVD_IN_NJABL_DUL,RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from [192.168.2.128] (e180132203.adsl.alicedsl.de [85.180.132.203])
-	by srv043.dedi23.de (Postfix) with ESMTP id BE99928C011;
-	Wed, 31 Jan 2007 19:40:43 +0100 (CET)
-Date: Wed, 31 Jan 2007 19:43:32 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.95.6) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <784776954.20070131194332@vanille-media.de>
-In-Reply-To: <1169900668.5796.17.camel@localhost.localdomain>
-References: <1169900668.5796.17.camel@localhost.localdomain>
+	(envelope-from <golly@stellarwerx.com>) id 1HCNfk-00021w-Qj
+	for openembedded-devel@openembedded.org; Wed, 31 Jan 2007 23:11:20 +0100
+Received: from gatekeeper.stellarwerx.com
+	(c-68-57-212-205.hsd1.in.comcast.net[68.57.212.205])
+	by comcast.net (alnrmhc16) with ESMTP
+	id <20070131221119b16005m9she>; Wed, 31 Jan 2007 22:11:19 +0000
+Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
+	id 0224A2E31; Wed, 31 Jan 2007 17:15:36 -0500 (EST)
+From: "Mark Gollahon" <golly@stellarwerx.com>
+To: openembedded-devel@openembedded.org
+X-Originating-IP: 192.168.253.203
+X-Mailer: Usermin 1.230
+Message-Id: <1170281735.26425@gatekeeper.stellarwerx.com>
+Date: Wed, 31 Jan 2007 17:15:35 -0500 (EST)
 MIME-Version: 1.0
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: Interactive task handling in Bitbake
+Subject: New IXP4XX-based Machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,21 +29,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jan 2007 18:45:35 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 31 Jan 2007 22:11:21 -0000
+Content-Type: multipart/mixed; boundary="bound1170281735"
+
+--bound1170281735
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-[...]
-> Does anyone see a better way of handling this (or object to this plan)?
+Hello!
 
-No, I think your plan should work out.
+As I have stated before, I am a bit new, so please bear with me.
 
-Regards,
+I am trying to bring up OE on a new IXP4XX-based machine and having a little trouble with the "proper" way to do it.  For example, I created a whole new machine config, inserting what I think should be machine-specific settings, and importing the (now somewhat-defunct) ixp4xx.conf configuration (and later the ixp4xxbe.conf configuration).  My bootstrap-image gets everything compiled, but when it goes to build the rootfs, ipkg fails looking for task-base.
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+My question is not so much about getting ipkg to work (I have found several ways), but more about the "proper" way so that I don't go "spinning into the grass" in the future.  I noticed that during the rootfs build that the "ixp4xxbe" "arch" was not in the ipkg config file, so all of my "*_ixp4xxbe.ipk" files were completely ignored - stuff like "task-base"!  I ultimately had to append "armv5te" and "ixp4xxbe" to PACKAGE_EXTRA_ARCHS and that worked, but I worked on this on-and-off for over a week to figure it out.  I really don't want to do that again when/if I try to bring up another machine.
 
+My question is - should I even be attempting to define a new machine and including ixp4xxbe.conf in it?  Should I define my own machine by copying the contents of ixp4xxbe.conf?  Should I have specified the "ixp4xxbe" machine file in my local.conf along with the extra (what I think should be) machine config?  Or should I define my own distro and put that machine config there?  What is the most appropriate way to do this?
 
+Thank you!
+-Mark Gollahon
 
+--bound1170281735--
