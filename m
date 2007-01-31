@@ -1,32 +1,20 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.82.231] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HCDtk-00049N-IU
-	for openembedded-devel@openembedded.org; Wed, 31 Jan 2007 12:45:16 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0VBj88n002959
-	for <openembedded-devel@openembedded.org>; Wed, 31 Jan 2007 11:45:08 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 02535-07 for <openembedded-devel@openembedded.org>;
-	Wed, 31 Jan 2007 11:45:06 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l0VBj5WY002952
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 31 Jan 2007 11:45:05 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <74d0deb30701310334q3478a077m4147b2afc7e7dabe@mail.gmail.com>
-References: <1170240380.5809.15.camel@localhost.localdomain>
-	<20070131112150.GD21515@stygia.hyboria>
-	<74d0deb30701310334q3478a077m4147b2afc7e7dabe@mail.gmail.com>
-Date: Wed, 31 Jan 2007 11:45:04 +0000
-Message-Id: <1170243905.5809.36.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: RFC: Xorg Version Numbering
+	(envelope-from <philipp.zabel@gmail.com>) id 1HCHZe-0004gU-Qk
+	for openembedded-devel@openembedded.org; Wed, 31 Jan 2007 16:40:40 +0100
+Received: by wx-out-0506.google.com with SMTP id t13so218331wxc
+	for <openembedded-devel@openembedded.org>;
+	Wed, 31 Jan 2007 07:40:37 -0800 (PST)
+Received: by 10.90.56.14 with SMTP id e14mr1309178aga.1170258037647;
+	Wed, 31 Jan 2007 07:40:37 -0800 (PST)
+Received: by 10.90.92.2 with HTTP; Wed, 31 Jan 2007 07:40:37 -0800 (PST)
+Message-ID: <74d0deb30701310740p73af77a7j25a8b4597345903a@mail.gmail.com>
+Date: Wed, 31 Jan 2007 16:40:37 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Cc: openembedded-devel@openembedded.org
+Subject: [PATCH] Epoch support for bitbake (was: Re: RFC: Xorg Version Numbering)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,33 +28,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jan 2007 11:45:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 Jan 2007 15:40:43 -0000
+X-Groupsio-MsgNum: 1307
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_5077_23295422.1170258037584"
+
+------=_Part_5077_23295422.1170258037584
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2007-01-31 at 12:34 +0100, pHilipp Zabel wrote:
-> On 1/31/07, Graeme Gregory <dp@xora.org.uk> wrote:
-> > My memory of why X11R7.X ended up in the PV is that at the time bitbake
-> > didnt support an epoch in the PV. This was a hack to make sure that xorg
-> > 6.X stuff upgraded to 7.X properly.
-> >
-> > I guess this opens the discussion on bitbake and epochs again.
-> >
-> > Graeme
-> 
-> Right, that was the reason.
-> I'd absolutely prefer to switch to the individual release versions and
-> set an epoch if somebody could add epoch support to bitbake.
+On 1/31/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> Can anyone remember the specifics of the problem with bitbake? I guess
+> its easy enough to test and find out...
+>
+> /me adds looking at this to his todo list...
+> (unless anyone beats me to it ;-)
 
-Can anyone remember the specifics of the problem with bitbake? I guess
-its easy enough to test and find out...
+After some discussion on IRC, I came up with the attached patch.
+It adds support for a new integer variable PE (package epoch) in the
+version comparison code and bitbake cache.
+It also changes the code that handles PREFERRED_VERSION to optionally
+allow specifying PE (similar to how it is done with PR already).
+Especially the provider.py part is just a quick proof of concept. It
+always selects
+the package with the highest epoch first if the epoch is not
+explicitly mentioned
+in PREFERRED_VERSION.
 
-/me adds looking at this to his todo list...
-(unless anyone beats me to it ;-)
+So given we have a provider foo with PE="0" (default), PV="1.0",
+PR="r0" (1.0-r0)
+and a second provider foo with PE="1", PV="1.0", PR="r0" (1:1.0-r0), setting
+PREFERRED_VERSION_foo = "0:1.0_r0" will select foo 1.0-r0, setting
+PREFERRED_VERSION_foo = "1:1.0_r0" will select foo 1:1.0-r0, and setting
+PREFERRED_VERSION_foo = "1.0" will select foo 1:1.0-r0. The last example
+is open to discussion. Should an omitted epoch in PREFERRED_VERSION
+be considered as PE="0", or should the provider with the greatest PE
+be selected?
 
-Cheers,
+regards
+Philipp
 
-Richard
+------=_Part_5077_23295422.1170258037584
+Content-Type: text/x-patch; name=bitbake-epoch.patch; charset=ANSI_X3.4-1968
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_exlxbrdo
+Content-Disposition: attachment; filename="bitbake-epoch.patch"
 
+SW5kZXg6IGxpYi9iYi91dGlscy5weQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci0tLSBsaWIvYmIvdXRpbHMucHkJKHJl
+dmlzaW9uIDc1MykKKysrIGxpYi9iYi91dGlscy5weQkod29ya2luZyBjb3B5KQpAQCAtNjIsMTEg
+KzYyLDEzIEBACiAgICAgICAgICAgICByZXR1cm4gLTEKIAogZGVmIHZlcmNtcCh0YSwgdGIpOgot
+ICAgICh2YSwgcmEpID0gdGEKLSAgICAodmIsIHJiKSA9IHRiCisgICAgKGVhLCB2YSwgcmEpID0g
+dGEKKyAgICAoZWIsIHZiLCByYikgPSB0YgogCi0gICAgciA9IHZlcmNtcF9wYXJ0KHZhLCB2YikK
+KyAgICByID0gZWEtZWIKICAgICBpZiAociA9PSAwKToKKyAgICAgICAgciA9IHZlcmNtcF9wYXJ0
+KHZhLCB2YikKKyAgICBpZiAociA9PSAwKToKICAgICAgICAgciA9IHZlcmNtcF9wYXJ0KHJhLCBy
+YikKICAgICByZXR1cm4gcgogCkluZGV4OiBsaWIvYmIvY2FjaGUucHkKPT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQotLS0g
+bGliL2JiL2NhY2hlLnB5CShyZXZpc2lvbiA3NTMpCisrKyBsaWIvYmIvY2FjaGUucHkJKHdvcmtp
+bmcgY29weSkKQEAgLTM5LDcgKzM5LDcgQEAKICAgICBpbXBvcnQgcGlja2xlCiAgICAgYmIubXNn
+Lm5vdGUoMSwgYmIubXNnLmRvbWFpbi5DYWNoZSwgIkltcG9ydGluZyBjUGlja2xlIGZhaWxlZC4g
+RmFsbGluZyBiYWNrIHRvIGEgdmVyeSBzbG93IGltcGxlbWVudGF0aW9uLiIpCiAKLV9fY2FjaGVf
+dmVyc2lvbl9fID0gIjEyNSIKK19fY2FjaGVfdmVyc2lvbl9fID0gIjEyNiIKIAogY2xhc3MgQ2Fj
+aGU6CiAgICAgIiIiCkBAIC0yNTEsNiArMjUxLDcgQEAKICAgICAgICAgIiIiCiAKICAgICAgICAg
+cG4gICAgICAgPSBzZWxmLmdldFZhcignUE4nLCBmaWxlX25hbWUsIFRydWUpCisgICAgICAgIHBl
+ICAgICAgID0gaW50KHNlbGYuZ2V0VmFyKCdQRScsIGZpbGVfbmFtZSwgVHJ1ZSkgb3IgIjAiKQog
+ICAgICAgICBwdiAgICAgICA9IHNlbGYuZ2V0VmFyKCdQVicsIGZpbGVfbmFtZSwgVHJ1ZSkKICAg
+ICAgICAgcHIgICAgICAgPSBzZWxmLmdldFZhcignUFInLCBmaWxlX25hbWUsIFRydWUpCiAgICAg
+ICAgIGRwICAgICAgID0gaW50KHNlbGYuZ2V0VmFyKCdERUZBVUxUX1BSRUZFUkVOQ0UnLCBmaWxl
+X25hbWUsIFRydWUpIG9yICIwIikKQEAgLTI3Miw3ICsyNzMsNyBAQAogCiAgICAgICAgICMgYnVp
+bGQgRmlsZU5hbWUgdG8gUGFja2FnZU5hbWUgbG9va3VwIHRhYmxlCiAgICAgICAgIGNhY2hlRGF0
+YS5wa2dfZm5bZmlsZV9uYW1lXSA9IHBuCi0gICAgICAgIGNhY2hlRGF0YS5wa2dfcHZwcltmaWxl
+X25hbWVdID0gKHB2LHByKQorICAgICAgICBjYWNoZURhdGEucGtnX3BlcHZwcltmaWxlX25hbWVd
+ID0gKHBlLHB2LHByKQogICAgICAgICBjYWNoZURhdGEucGtnX2RwW2ZpbGVfbmFtZV0gPSBkcAog
+CiAgICAgICAgICMgQnVpbGQgZm9yd2FyZCBhbmQgcmV2ZXJzZSBwcm92aWRlciBoYXNoZXMKQEAg
+LTQwNyw3ICs0MDgsNyBAQAogICAgICAgICBzZWxmLnBvc3NpYmxlX3dvcmxkID0gW10KICAgICAg
+ICAgc2VsZi5wa2dfcG4gPSB7fQogICAgICAgICBzZWxmLnBrZ19mbiA9IHt9Ci0gICAgICAgIHNl
+bGYucGtnX3B2cHIgPSB7fQorICAgICAgICBzZWxmLnBrZ19wZXB2cHIgPSB7fQogICAgICAgICBz
+ZWxmLnBrZ19kcCA9IHt9CiAgICAgICAgIHNlbGYucG5fcHJvdmlkZXMgPSB7fQogICAgICAgICBz
+ZWxmLmFsbF9kZXBlbmRzID0gU2V0KCkKSW5kZXg6IGxpYi9iYi9wcm92aWRlcnMucHkKPT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PQotLS0gbGliL2JiL3Byb3ZpZGVycy5weQkocmV2aXNpb24gNzUzKQorKysgbGliL2JiL3By
+b3ZpZGVycy5weQkod29ya2luZyBjb3B5KQpAQCAtNjEsMTkgKzYxLDI3IEBACiAKICAgICBwcmVm
+ZXJyZWRfdiA9IGJiLmRhdGEuZ2V0VmFyKCdQUkVGRVJSRURfVkVSU0lPTl8lcycgJSBwbiwgbG9j
+YWxkYXRhLCBUcnVlKQogICAgIGlmIHByZWZlcnJlZF92OgotICAgICAgICBtID0gcmUubWF0Y2go
+JyguKilfKC4qKScsIHByZWZlcnJlZF92KQorICAgICAgICBtID0gcmUubWF0Y2goJyhcZCs6KSoo
+LiopKF8uKikqJywgcHJlZmVycmVkX3YpCiAgICAgICAgIGlmIG06Ci0gICAgICAgICAgICBwcmVm
+ZXJyZWRfdiA9IG0uZ3JvdXAoMSkKLSAgICAgICAgICAgIHByZWZlcnJlZF9yID0gbS5ncm91cCgy
+KQorICAgICAgICAgICAgaWYgbS5ncm91cCgxKToKKyAgICAgICAgICAgICAgICBwcmVmZXJyZWRf
+ZSA9IGludChtLmdyb3VwKDEpWzotMV0pCisgICAgICAgICAgICBlbHNlOgorICAgICAgICAgICAg
+ICAgIHByZWZlcnJlZF9lID0gTm9uZQorICAgICAgICAgICAgcHJlZmVycmVkX3YgPSBtLmdyb3Vw
+KDIpCisgICAgICAgICAgICBpZiBtLmdyb3VwKDMpOgorICAgICAgICAgICAgICAgIHByZWZlcnJl
+ZF9yID0gbS5ncm91cCgzKVsxOl0KKyAgICAgICAgICAgIGVsc2U6CisgICAgICAgICAgICAgICAg
+cHJlZmVycmVkX3IgPSBOb25lCiAgICAgICAgIGVsc2U6CisgICAgICAgICAgICBwcmVmZXJyZWRf
+ZSA9IE5vbmUKICAgICAgICAgICAgIHByZWZlcnJlZF9yID0gTm9uZQogCiAgICAgICAgIGZvciBm
+aWxlX3NldCBpbiB0bXBfcG46CiAgICAgICAgICAgICBmb3IgZiBpbiBmaWxlX3NldDoKLSAgICAg
+ICAgICAgICAgICBwdixwciA9IGRhdGFDYWNoZS5wa2dfcHZwcltmXQotICAgICAgICAgICAgICAg
+IGlmIHByZWZlcnJlZF92ID09IHB2IGFuZCAocHJlZmVycmVkX3IgPT0gcHIgb3IgcHJlZmVycmVk
+X3IgPT0gTm9uZSk6CisgICAgICAgICAgICAgICAgcGUscHYscHIgPSBkYXRhQ2FjaGUucGtnX3Bl
+cHZwcltmXQorICAgICAgICAgICAgICAgIGlmIHByZWZlcnJlZF92ID09IHB2IGFuZCAocHJlZmVy
+cmVkX3IgPT0gcHIgb3IgcHJlZmVycmVkX3IgPT0gTm9uZSkgYW5kIChwcmVmZXJyZWRfZSA9PSBw
+ZSBvciBwcmVmZXJyZWRfZSA9PSBOb25lKToKICAgICAgICAgICAgICAgICAgICAgcHJlZmVycmVk
+X2ZpbGUgPSBmCi0gICAgICAgICAgICAgICAgICAgIHByZWZlcnJlZF92ZXIgPSAocHYsIHByKQor
+ICAgICAgICAgICAgICAgICAgICBwcmVmZXJyZWRfdmVyID0gKHBlLCBwdiwgcHIpCiAgICAgICAg
+ICAgICAgICAgICAgIGJyZWFrCiAgICAgICAgICAgICBpZiBwcmVmZXJyZWRfZmlsZToKICAgICAg
+ICAgICAgICAgICBicmVhazsKQEAgLTgxLDYgKzg5LDggQEAKICAgICAgICAgICAgIHB2X3N0ciA9
+ICclcy0lcycgJSAocHJlZmVycmVkX3YsIHByZWZlcnJlZF9yKQogICAgICAgICBlbHNlOgogICAg
+ICAgICAgICAgcHZfc3RyID0gcHJlZmVycmVkX3YKKyAgICAgICAgaWYgbm90IChwcmVmZXJyZWRf
+ZSBpcyBOb25lKToKKyAgICAgICAgICAgIHB2X3N0ciA9ICclZDolcycgJSAocHJlZmVycmVkX2Us
+IHB2X3N0cikKICAgICAgICAgaXRlbXN0ciA9ICIiCiAgICAgICAgIGlmIGl0ZW06CiAgICAgICAg
+ICAgICBpdGVtc3RyID0gIiAoZm9yIGl0ZW0gJXMpIiAlIGl0ZW0KQEAgLTk3LDExICsxMDcsMTEg
+QEAKICAgICBsYXRlc3RfcCA9IDAKICAgICBsYXRlc3RfZiA9IE5vbmUKICAgICBmb3IgZmlsZV9u
+YW1lIGluIGZpbGVzOgotICAgICAgICBwdixwciA9IGRhdGFDYWNoZS5wa2dfcHZwcltmaWxlX25h
+bWVdCisgICAgICAgIHBlLHB2LHByID0gZGF0YUNhY2hlLnBrZ19wZXB2cHJbZmlsZV9uYW1lXQog
+ICAgICAgICBkcCA9IGRhdGFDYWNoZS5wa2dfZHBbZmlsZV9uYW1lXQogCi0gICAgICAgIGlmIChs
+YXRlc3QgaXMgTm9uZSkgb3IgKChsYXRlc3RfcCA9PSBkcCkgYW5kICh1dGlscy52ZXJjbXAobGF0
+ZXN0LCAocHYsIHByKSkgPCAwKSkgb3IgKGRwID4gbGF0ZXN0X3ApOgotICAgICAgICAgICAgbGF0
+ZXN0ID0gKHB2LCBwcikKKyAgICAgICAgaWYgKGxhdGVzdCBpcyBOb25lKSBvciAoKGxhdGVzdF9w
+ID09IGRwKSBhbmQgKHV0aWxzLnZlcmNtcChsYXRlc3QsIChwZSwgcHYsIHByKSkgPCAwKSkgb3Ig
+KGRwID4gbGF0ZXN0X3ApOgorICAgICAgICAgICAgbGF0ZXN0ID0gKHBlLCBwdiwgcHIpCiAgICAg
+ICAgICAgICBsYXRlc3RfZiA9IGZpbGVfbmFtZQogICAgICAgICAgICAgbGF0ZXN0X3AgPSBkcAog
+ICAgIGlmIHByZWZlcnJlZF9maWxlIGlzIE5vbmU6CkBAIC0xNjIsNyArMTcyLDcgQEAKICAgICAj
+IGlmIHNvLCBidW1wIGl0IHRvIHRoZSBoZWFkIG9mIHRoZSBxdWV1ZQogICAgIGZvciBwIGluIHBy
+b3ZpZGVyczoKICAgICAgICAgcG4gPSBkYXRhQ2FjaGUucGtnX2ZuW3BdCi0gICAgICAgIHB2LCBw
+ciA9IGRhdGFDYWNoZS5wa2dfcHZwcltwXQorICAgICAgICBwZSwgcHYsIHByID0gZGF0YUNhY2hl
+LnBrZ19wZXB2cHJbcF0KIAogICAgICAgICBzdGFtcCA9ICclcy5kb19wb3B1bGF0ZV9zdGFnaW5n
+JyAlIGRhdGFDYWNoZS5zdGFtcFtwXQogICAgICAgICBpZiBvcy5wYXRoLmV4aXN0cyhzdGFtcCk6
+CkBAIC0xNzEsNyArMTgxLDExIEBACiAgICAgICAgICAgICAgICAgIyBwYWNrYWdlIHdhcyBtYWRl
+IGluZWxpZ2libGUgYnkgYWxyZWFkeS1mYWlsZWQgY2hlY2sKICAgICAgICAgICAgICAgICBjb250
+aW51ZQogICAgICAgICAgICAgb2xkdmVyID0gIiVzLSVzIiAlIChwdiwgcHIpCi0gICAgICAgICAg
+ICBuZXd2ZXIgPSAnLScuam9pbihuZXd2ZXJzKQorICAgICAgICAgICAgaWYgcGUgPiAwOgorICAg
+ICAgICAgICAgICAgIG9sZHZlciA9ICIlZDolcyIgJSAocGUsIG9sZHZlcikKKyAgICAgICAgICAg
+IG5ld3ZlciA9ICIlcy0lcyIgJSAobmV3dmVyc1sxXSwgbmV3dmVyc1syXSkKKyAgICAgICAgICAg
+IGlmIG5ld3ZlcnNbMF0gPiAwOgorICAgICAgICAgICAgICAgIG5ld3ZlciA9ICIlZDolcyIgJSAo
+bmV3dmVyc1swXSwgbmV3dmVyKQogICAgICAgICAgICAgaWYgKG5ld3ZlciAhPSBvbGR2ZXIpOgog
+ICAgICAgICAgICAgICAgIGV4dHJhX2NoYXQgPSAiJXMgKCVzKSBhbHJlYWR5IHN0YWdlZCBidXQg
+dXBncmFkaW5nIHRvICVzIHRvIHNhdGlzZnkgJXMiICUgKHBuLCBvbGR2ZXIsIG5ld3ZlciwgaXRl
+bSkKICAgICAgICAgICAgIGVsc2U6Cg==
 
-
+------=_Part_5077_23295422.1170258037584--
