@@ -1,20 +1,22 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [64.233.184.236] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <dp@xora.org.uk>) id 1HCDRu-0002Da-9q
+	(envelope-from <philipp.zabel@gmail.com>) id 1HCDj7-0003u1-Pv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Jan 2007 12:16:26 +0100
-Received: from xora.org.uk ([::ffff:81.178.202.178])
-	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,128bits,AES128-SHA)
-	by xora.org.uk with esmtp; Wed, 31 Jan 2007 11:16:00 +0000
-	id 00078162.45C07A75.000046AC
-Date: Wed, 31 Jan 2007 11:21:50 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Wed, 31 Jan 2007 12:34:09 +0100
+Received: by wr-out-0506.google.com with SMTP id i30so175312wra
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Jan 2007 03:34:08 -0800 (PST)
+Received: by 10.90.84.17 with SMTP id h17mr895889agb.1170243248141;
+	Wed, 31 Jan 2007 03:34:08 -0800 (PST)
+Received: by 10.90.92.2 with HTTP; Wed, 31 Jan 2007 03:34:08 -0800 (PST)
+Message-ID: <74d0deb30701310334q3478a077m4147b2afc7e7dabe@mail.gmail.com>
+Date: Wed, 31 Jan 2007 12:34:08 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070131112150.GD21515@stygia.hyboria>
+In-Reply-To: <20070131112150.GD21515@stygia.hyboria>
+MIME-Version: 1.0
 References: <1170240380.5809.15.camel@localhost.localdomain>
-Mime-Version: 1.0
-In-Reply-To: <1170240380.5809.15.camel@localhost.localdomain>
-User-Agent: Mutt/1.5.12-2006-07-14
+	<20070131112150.GD21515@stygia.hyboria>
 Subject: Re: RFC: Xorg Version Numbering
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,29 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jan 2007 11:16:30 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 31 Jan 2007 11:34:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Jan 31, 2007 at 10:46:19AM +0000, Richard Purdie wrote:
-> My question is therefore does it make sense to have X11R7.x in PV?
-> 
-> If people want a build compatible with X11R.x, it would be easy to write
-> a preferred-version-X11R7.1.inc with the appropriate PREFERRED_VERSIONs
-> set. In fact you could have a script autogenerate that.
-> 
-> I realise removing X11Rx from the PV will break upgrades but I think if
-> we don't do that, we could be storing up trouble in the long run which
-> we could change now.
-> 
-My memory of why X11R7.X ended up in the PV is that at the time bitbake
-didnt support an epoch in the PV. This was a hack to make sure that xorg
-6.X stuff upgraded to 7.X properly.
+On 1/31/07, Graeme Gregory <dp@xora.org.uk> wrote:
+> On Wed, Jan 31, 2007 at 10:46:19AM +0000, Richard Purdie wrote:
+> > My question is therefore does it make sense to have X11R7.x in PV?
+> >
+> > If people want a build compatible with X11R.x, it would be easy to write
+> > a preferred-version-X11R7.1.inc with the appropriate PREFERRED_VERSIONs
+> > set. In fact you could have a script autogenerate that.
+> >
+> > I realise removing X11Rx from the PV will break upgrades but I think if
+> > we don't do that, we could be storing up trouble in the long run which
+> > we could change now.
+> >
+> My memory of why X11R7.X ended up in the PV is that at the time bitbake
+> didnt support an epoch in the PV. This was a hack to make sure that xorg
+> 6.X stuff upgraded to 7.X properly.
+>
+> I guess this opens the discussion on bitbake and epochs again.
+>
+> Graeme
 
-I guess this opens the discussion on bitbake and epochs again.
+Right, that was the reason.
+I'd absolutely prefer to switch to the individual release versions and
+set an epoch if somebody could add epoch support to bitbake.
 
-Graeme
-
+regards
+Philipp
 
 
