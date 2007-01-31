@@ -1,20 +1,29 @@
-Received: from [66.249.82.231] (helo=wx-out-0506.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <philipp.zabel@gmail.com>) id 1HCHZe-0004gU-Qk
-	for openembedded-devel@openembedded.org; Wed, 31 Jan 2007 16:40:40 +0100
-Received: by wx-out-0506.google.com with SMTP id t13so218331wxc
-	for <openembedded-devel@openembedded.org>;
-	Wed, 31 Jan 2007 07:40:37 -0800 (PST)
-Received: by 10.90.56.14 with SMTP id e14mr1309178aga.1170258037647;
-	Wed, 31 Jan 2007 07:40:37 -0800 (PST)
-Received: by 10.90.92.2 with HTTP; Wed, 31 Jan 2007 07:40:37 -0800 (PST)
-Message-ID: <74d0deb30701310740p73af77a7j25a8b4597345903a@mail.gmail.com>
-Date: Wed, 31 Jan 2007 16:40:37 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <mickey@vanille-media.de>) id 1HCKSd-0003Hx-2N
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Jan 2007 19:45:35 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 348A028C012; Wed, 31 Jan 2007 19:40:46 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.9 required=5.0 tests=MISSING_HEADERS,
+	RCVD_IN_NJABL_DUL,RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from [192.168.2.128] (e180132203.adsl.alicedsl.de [85.180.132.203])
+	by srv043.dedi23.de (Postfix) with ESMTP id BE99928C011;
+	Wed, 31 Jan 2007 19:40:43 +0100 (CET)
+Date: Wed, 31 Jan 2007 19:43:32 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <784776954.20070131194332@vanille-media.de>
+In-Reply-To: <1169900668.5796.17.camel@localhost.localdomain>
+References: <1169900668.5796.17.camel@localhost.localdomain>
 MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: [PATCH] Epoch support for bitbake (was: Re: RFC: Xorg Version Numbering)
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: Interactive task handling in Bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,142 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jan 2007 15:40:43 -0000
-X-Groupsio-MsgNum: 1307
-Content-Type: multipart/mixed; 
-	boundary="----=_Part_5077_23295422.1170258037584"
-
-------=_Part_5077_23295422.1170258037584
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 31 Jan 2007 18:45:35 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 1/31/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> Can anyone remember the specifics of the problem with bitbake? I guess
-> its easy enough to test and find out...
->
-> /me adds looking at this to his todo list...
-> (unless anyone beats me to it ;-)
+Richard Purdie wrote:
+[...]
+> Does anyone see a better way of handling this (or object to this plan)?
 
-After some discussion on IRC, I came up with the attached patch.
-It adds support for a new integer variable PE (package epoch) in the
-version comparison code and bitbake cache.
-It also changes the code that handles PREFERRED_VERSION to optionally
-allow specifying PE (similar to how it is done with PR already).
-Especially the provider.py part is just a quick proof of concept. It
-always selects
-the package with the highest epoch first if the epoch is not
-explicitly mentioned
-in PREFERRED_VERSION.
+No, I think your plan should work out.
 
-So given we have a provider foo with PE="0" (default), PV="1.0",
-PR="r0" (1.0-r0)
-and a second provider foo with PE="1", PV="1.0", PR="r0" (1:1.0-r0), setting
-PREFERRED_VERSION_foo = "0:1.0_r0" will select foo 1.0-r0, setting
-PREFERRED_VERSION_foo = "1:1.0_r0" will select foo 1:1.0-r0, and setting
-PREFERRED_VERSION_foo = "1.0" will select foo 1:1.0-r0. The last example
-is open to discussion. Should an omitted epoch in PREFERRED_VERSION
-be considered as PE="0", or should the provider with the greatest PE
-be selected?
+Regards,
 
-regards
-Philipp
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
-------=_Part_5077_23295422.1170258037584
-Content-Type: text/x-patch; name=bitbake-epoch.patch; charset=ANSI_X3.4-1968
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_exlxbrdo
-Content-Disposition: attachment; filename="bitbake-epoch.patch"
 
-SW5kZXg6IGxpYi9iYi91dGlscy5weQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci0tLSBsaWIvYmIvdXRpbHMucHkJKHJl
-dmlzaW9uIDc1MykKKysrIGxpYi9iYi91dGlscy5weQkod29ya2luZyBjb3B5KQpAQCAtNjIsMTEg
-KzYyLDEzIEBACiAgICAgICAgICAgICByZXR1cm4gLTEKIAogZGVmIHZlcmNtcCh0YSwgdGIpOgot
-ICAgICh2YSwgcmEpID0gdGEKLSAgICAodmIsIHJiKSA9IHRiCisgICAgKGVhLCB2YSwgcmEpID0g
-dGEKKyAgICAoZWIsIHZiLCByYikgPSB0YgogCi0gICAgciA9IHZlcmNtcF9wYXJ0KHZhLCB2YikK
-KyAgICByID0gZWEtZWIKICAgICBpZiAociA9PSAwKToKKyAgICAgICAgciA9IHZlcmNtcF9wYXJ0
-KHZhLCB2YikKKyAgICBpZiAociA9PSAwKToKICAgICAgICAgciA9IHZlcmNtcF9wYXJ0KHJhLCBy
-YikKICAgICByZXR1cm4gcgogCkluZGV4OiBsaWIvYmIvY2FjaGUucHkKPT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQotLS0g
-bGliL2JiL2NhY2hlLnB5CShyZXZpc2lvbiA3NTMpCisrKyBsaWIvYmIvY2FjaGUucHkJKHdvcmtp
-bmcgY29weSkKQEAgLTM5LDcgKzM5LDcgQEAKICAgICBpbXBvcnQgcGlja2xlCiAgICAgYmIubXNn
-Lm5vdGUoMSwgYmIubXNnLmRvbWFpbi5DYWNoZSwgIkltcG9ydGluZyBjUGlja2xlIGZhaWxlZC4g
-RmFsbGluZyBiYWNrIHRvIGEgdmVyeSBzbG93IGltcGxlbWVudGF0aW9uLiIpCiAKLV9fY2FjaGVf
-dmVyc2lvbl9fID0gIjEyNSIKK19fY2FjaGVfdmVyc2lvbl9fID0gIjEyNiIKIAogY2xhc3MgQ2Fj
-aGU6CiAgICAgIiIiCkBAIC0yNTEsNiArMjUxLDcgQEAKICAgICAgICAgIiIiCiAKICAgICAgICAg
-cG4gICAgICAgPSBzZWxmLmdldFZhcignUE4nLCBmaWxlX25hbWUsIFRydWUpCisgICAgICAgIHBl
-ICAgICAgID0gaW50KHNlbGYuZ2V0VmFyKCdQRScsIGZpbGVfbmFtZSwgVHJ1ZSkgb3IgIjAiKQog
-ICAgICAgICBwdiAgICAgICA9IHNlbGYuZ2V0VmFyKCdQVicsIGZpbGVfbmFtZSwgVHJ1ZSkKICAg
-ICAgICAgcHIgICAgICAgPSBzZWxmLmdldFZhcignUFInLCBmaWxlX25hbWUsIFRydWUpCiAgICAg
-ICAgIGRwICAgICAgID0gaW50KHNlbGYuZ2V0VmFyKCdERUZBVUxUX1BSRUZFUkVOQ0UnLCBmaWxl
-X25hbWUsIFRydWUpIG9yICIwIikKQEAgLTI3Miw3ICsyNzMsNyBAQAogCiAgICAgICAgICMgYnVp
-bGQgRmlsZU5hbWUgdG8gUGFja2FnZU5hbWUgbG9va3VwIHRhYmxlCiAgICAgICAgIGNhY2hlRGF0
-YS5wa2dfZm5bZmlsZV9uYW1lXSA9IHBuCi0gICAgICAgIGNhY2hlRGF0YS5wa2dfcHZwcltmaWxl
-X25hbWVdID0gKHB2LHByKQorICAgICAgICBjYWNoZURhdGEucGtnX3BlcHZwcltmaWxlX25hbWVd
-ID0gKHBlLHB2LHByKQogICAgICAgICBjYWNoZURhdGEucGtnX2RwW2ZpbGVfbmFtZV0gPSBkcAog
-CiAgICAgICAgICMgQnVpbGQgZm9yd2FyZCBhbmQgcmV2ZXJzZSBwcm92aWRlciBoYXNoZXMKQEAg
-LTQwNyw3ICs0MDgsNyBAQAogICAgICAgICBzZWxmLnBvc3NpYmxlX3dvcmxkID0gW10KICAgICAg
-ICAgc2VsZi5wa2dfcG4gPSB7fQogICAgICAgICBzZWxmLnBrZ19mbiA9IHt9Ci0gICAgICAgIHNl
-bGYucGtnX3B2cHIgPSB7fQorICAgICAgICBzZWxmLnBrZ19wZXB2cHIgPSB7fQogICAgICAgICBz
-ZWxmLnBrZ19kcCA9IHt9CiAgICAgICAgIHNlbGYucG5fcHJvdmlkZXMgPSB7fQogICAgICAgICBz
-ZWxmLmFsbF9kZXBlbmRzID0gU2V0KCkKSW5kZXg6IGxpYi9iYi9wcm92aWRlcnMucHkKPT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PQotLS0gbGliL2JiL3Byb3ZpZGVycy5weQkocmV2aXNpb24gNzUzKQorKysgbGliL2JiL3By
-b3ZpZGVycy5weQkod29ya2luZyBjb3B5KQpAQCAtNjEsMTkgKzYxLDI3IEBACiAKICAgICBwcmVm
-ZXJyZWRfdiA9IGJiLmRhdGEuZ2V0VmFyKCdQUkVGRVJSRURfVkVSU0lPTl8lcycgJSBwbiwgbG9j
-YWxkYXRhLCBUcnVlKQogICAgIGlmIHByZWZlcnJlZF92OgotICAgICAgICBtID0gcmUubWF0Y2go
-JyguKilfKC4qKScsIHByZWZlcnJlZF92KQorICAgICAgICBtID0gcmUubWF0Y2goJyhcZCs6KSoo
-LiopKF8uKikqJywgcHJlZmVycmVkX3YpCiAgICAgICAgIGlmIG06Ci0gICAgICAgICAgICBwcmVm
-ZXJyZWRfdiA9IG0uZ3JvdXAoMSkKLSAgICAgICAgICAgIHByZWZlcnJlZF9yID0gbS5ncm91cCgy
-KQorICAgICAgICAgICAgaWYgbS5ncm91cCgxKToKKyAgICAgICAgICAgICAgICBwcmVmZXJyZWRf
-ZSA9IGludChtLmdyb3VwKDEpWzotMV0pCisgICAgICAgICAgICBlbHNlOgorICAgICAgICAgICAg
-ICAgIHByZWZlcnJlZF9lID0gTm9uZQorICAgICAgICAgICAgcHJlZmVycmVkX3YgPSBtLmdyb3Vw
-KDIpCisgICAgICAgICAgICBpZiBtLmdyb3VwKDMpOgorICAgICAgICAgICAgICAgIHByZWZlcnJl
-ZF9yID0gbS5ncm91cCgzKVsxOl0KKyAgICAgICAgICAgIGVsc2U6CisgICAgICAgICAgICAgICAg
-cHJlZmVycmVkX3IgPSBOb25lCiAgICAgICAgIGVsc2U6CisgICAgICAgICAgICBwcmVmZXJyZWRf
-ZSA9IE5vbmUKICAgICAgICAgICAgIHByZWZlcnJlZF9yID0gTm9uZQogCiAgICAgICAgIGZvciBm
-aWxlX3NldCBpbiB0bXBfcG46CiAgICAgICAgICAgICBmb3IgZiBpbiBmaWxlX3NldDoKLSAgICAg
-ICAgICAgICAgICBwdixwciA9IGRhdGFDYWNoZS5wa2dfcHZwcltmXQotICAgICAgICAgICAgICAg
-IGlmIHByZWZlcnJlZF92ID09IHB2IGFuZCAocHJlZmVycmVkX3IgPT0gcHIgb3IgcHJlZmVycmVk
-X3IgPT0gTm9uZSk6CisgICAgICAgICAgICAgICAgcGUscHYscHIgPSBkYXRhQ2FjaGUucGtnX3Bl
-cHZwcltmXQorICAgICAgICAgICAgICAgIGlmIHByZWZlcnJlZF92ID09IHB2IGFuZCAocHJlZmVy
-cmVkX3IgPT0gcHIgb3IgcHJlZmVycmVkX3IgPT0gTm9uZSkgYW5kIChwcmVmZXJyZWRfZSA9PSBw
-ZSBvciBwcmVmZXJyZWRfZSA9PSBOb25lKToKICAgICAgICAgICAgICAgICAgICAgcHJlZmVycmVk
-X2ZpbGUgPSBmCi0gICAgICAgICAgICAgICAgICAgIHByZWZlcnJlZF92ZXIgPSAocHYsIHByKQor
-ICAgICAgICAgICAgICAgICAgICBwcmVmZXJyZWRfdmVyID0gKHBlLCBwdiwgcHIpCiAgICAgICAg
-ICAgICAgICAgICAgIGJyZWFrCiAgICAgICAgICAgICBpZiBwcmVmZXJyZWRfZmlsZToKICAgICAg
-ICAgICAgICAgICBicmVhazsKQEAgLTgxLDYgKzg5LDggQEAKICAgICAgICAgICAgIHB2X3N0ciA9
-ICclcy0lcycgJSAocHJlZmVycmVkX3YsIHByZWZlcnJlZF9yKQogICAgICAgICBlbHNlOgogICAg
-ICAgICAgICAgcHZfc3RyID0gcHJlZmVycmVkX3YKKyAgICAgICAgaWYgbm90IChwcmVmZXJyZWRf
-ZSBpcyBOb25lKToKKyAgICAgICAgICAgIHB2X3N0ciA9ICclZDolcycgJSAocHJlZmVycmVkX2Us
-IHB2X3N0cikKICAgICAgICAgaXRlbXN0ciA9ICIiCiAgICAgICAgIGlmIGl0ZW06CiAgICAgICAg
-ICAgICBpdGVtc3RyID0gIiAoZm9yIGl0ZW0gJXMpIiAlIGl0ZW0KQEAgLTk3LDExICsxMDcsMTEg
-QEAKICAgICBsYXRlc3RfcCA9IDAKICAgICBsYXRlc3RfZiA9IE5vbmUKICAgICBmb3IgZmlsZV9u
-YW1lIGluIGZpbGVzOgotICAgICAgICBwdixwciA9IGRhdGFDYWNoZS5wa2dfcHZwcltmaWxlX25h
-bWVdCisgICAgICAgIHBlLHB2LHByID0gZGF0YUNhY2hlLnBrZ19wZXB2cHJbZmlsZV9uYW1lXQog
-ICAgICAgICBkcCA9IGRhdGFDYWNoZS5wa2dfZHBbZmlsZV9uYW1lXQogCi0gICAgICAgIGlmIChs
-YXRlc3QgaXMgTm9uZSkgb3IgKChsYXRlc3RfcCA9PSBkcCkgYW5kICh1dGlscy52ZXJjbXAobGF0
-ZXN0LCAocHYsIHByKSkgPCAwKSkgb3IgKGRwID4gbGF0ZXN0X3ApOgotICAgICAgICAgICAgbGF0
-ZXN0ID0gKHB2LCBwcikKKyAgICAgICAgaWYgKGxhdGVzdCBpcyBOb25lKSBvciAoKGxhdGVzdF9w
-ID09IGRwKSBhbmQgKHV0aWxzLnZlcmNtcChsYXRlc3QsIChwZSwgcHYsIHByKSkgPCAwKSkgb3Ig
-KGRwID4gbGF0ZXN0X3ApOgorICAgICAgICAgICAgbGF0ZXN0ID0gKHBlLCBwdiwgcHIpCiAgICAg
-ICAgICAgICBsYXRlc3RfZiA9IGZpbGVfbmFtZQogICAgICAgICAgICAgbGF0ZXN0X3AgPSBkcAog
-ICAgIGlmIHByZWZlcnJlZF9maWxlIGlzIE5vbmU6CkBAIC0xNjIsNyArMTcyLDcgQEAKICAgICAj
-IGlmIHNvLCBidW1wIGl0IHRvIHRoZSBoZWFkIG9mIHRoZSBxdWV1ZQogICAgIGZvciBwIGluIHBy
-b3ZpZGVyczoKICAgICAgICAgcG4gPSBkYXRhQ2FjaGUucGtnX2ZuW3BdCi0gICAgICAgIHB2LCBw
-ciA9IGRhdGFDYWNoZS5wa2dfcHZwcltwXQorICAgICAgICBwZSwgcHYsIHByID0gZGF0YUNhY2hl
-LnBrZ19wZXB2cHJbcF0KIAogICAgICAgICBzdGFtcCA9ICclcy5kb19wb3B1bGF0ZV9zdGFnaW5n
-JyAlIGRhdGFDYWNoZS5zdGFtcFtwXQogICAgICAgICBpZiBvcy5wYXRoLmV4aXN0cyhzdGFtcCk6
-CkBAIC0xNzEsNyArMTgxLDExIEBACiAgICAgICAgICAgICAgICAgIyBwYWNrYWdlIHdhcyBtYWRl
-IGluZWxpZ2libGUgYnkgYWxyZWFkeS1mYWlsZWQgY2hlY2sKICAgICAgICAgICAgICAgICBjb250
-aW51ZQogICAgICAgICAgICAgb2xkdmVyID0gIiVzLSVzIiAlIChwdiwgcHIpCi0gICAgICAgICAg
-ICBuZXd2ZXIgPSAnLScuam9pbihuZXd2ZXJzKQorICAgICAgICAgICAgaWYgcGUgPiAwOgorICAg
-ICAgICAgICAgICAgIG9sZHZlciA9ICIlZDolcyIgJSAocGUsIG9sZHZlcikKKyAgICAgICAgICAg
-IG5ld3ZlciA9ICIlcy0lcyIgJSAobmV3dmVyc1sxXSwgbmV3dmVyc1syXSkKKyAgICAgICAgICAg
-IGlmIG5ld3ZlcnNbMF0gPiAwOgorICAgICAgICAgICAgICAgIG5ld3ZlciA9ICIlZDolcyIgJSAo
-bmV3dmVyc1swXSwgbmV3dmVyKQogICAgICAgICAgICAgaWYgKG5ld3ZlciAhPSBvbGR2ZXIpOgog
-ICAgICAgICAgICAgICAgIGV4dHJhX2NoYXQgPSAiJXMgKCVzKSBhbHJlYWR5IHN0YWdlZCBidXQg
-dXBncmFkaW5nIHRvICVzIHRvIHNhdGlzZnkgJXMiICUgKHBuLCBvbGR2ZXIsIG5ld3ZlciwgaXRl
-bSkKICAgICAgICAgICAgIGVsc2U6Cg==
 
-------=_Part_5077_23295422.1170258037584--
