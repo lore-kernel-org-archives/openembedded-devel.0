@@ -1,27 +1,24 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [63.240.77.84] (helo=sccrmhc14.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HCjBH-0007vl-Mr
+	(envelope-from <golly@stellarwerx.com>) id 1HCkfl-0003Wj-AS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Feb 2007 22:09:19 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id CDDDD9D961
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Feb 2007 16:09:18 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by out1.internal (MEProxy); Thu, 01 Feb 2007 16:09:18 -0500
-X-Sasl-enc: +3fP2bUNaiESI4i8uE/8xztHesyLQO3roSPJ1zipLAcJ 1170364158
-Received: from [192.168.0.11] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id 1169E18D74
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Feb 2007 16:09:17 -0500 (EST)
-Message-ID: <45C256FA.5080504@whitby.id.au>
-Date: Fri, 02 Feb 2007 07:39:14 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
-MIME-Version: 1.0
+	Thu, 01 Feb 2007 23:44:53 +0100
+Received: from gatekeeper.stellarwerx.com
+	(c-68-57-212-205.hsd1.in.comcast.net?[68.57.212.205])
+	by comcast.net (sccrmhc14) with ESMTP
+	id <2007020122445201400s172le>; Thu, 1 Feb 2007 22:44:52 +0000
+Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
+	id 1F87F3893; Thu,  1 Feb 2007 17:48:27 -0500 (EST)
+From: "Mark Gollahon" <golly@stellarwerx.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: RFC: New version of linphone (console only unless there are objections)
+Cc: 
+X-Originating-IP: 68.79.172.62
+X-Mailer: Usermin 1.230
+Message-Id: <1170370106.14763@gatekeeper.stellarwerx.com>
+In-Reply-To: <45C2548A.2050801@whitby.id.au>
+Date: Thu, 01 Feb 2007 17:48:26 -0500 (EST)
+MIME-Version: 1.0
+Subject: Re: New IXP4XX-based Machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,32 +32,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Feb 2007 21:09:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 01 Feb 2007 22:44:53 -0000
+Content-Type: multipart/mixed; boundary="bound1170370106"
+
+--bound1170370106
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
-I have checked in linphone_1.6.0.bb for your edification (with
-preferred_version = -1).  This will be used with yeaphone-0.1.bb to
-allow a cheap usb handset connected to an NSLU2 to be a VoIP solution.
+Rod Whitby wrote ..
+> Mark Gollahon wrote:
+> > I am trying to bring up OE on a new IXP4XX-based machine and having a
+> > little trouble with the "proper" way to do it.  For example, I
+> > created a whole new machine config, inserting what I think should be
+> > machine-specific settings, and importing the (now somewhat-defunct)
+> > ixp4xx.conf configuration (and later the ixp4xxbe.conf
+> > configuration).  My bootstrap-image gets everything compiled, but
+> > when it goes to build the rootfs, ipkg fails looking for task-base.
+> > 
+> > My question is not so much about getting ipkg to work (I have found
+> > several ways), but more about the "proper" way so that I don't go
+> > "spinning into the grass" in the future.  I noticed that during the
+> > rootfs build that the "ixp4xxbe" "arch" was not in the ipkg config
+> > file, so all of my "*_ixp4xxbe.ipk" files were completely ignored -
+> > stuff like "task-base"!  I ultimately had to append "armv5te" and
+> > "ixp4xxbe" to PACKAGE_EXTRA_ARCHS and that worked, but I worked on
+> > this on-and-off for over a week to figure it out.  I really don't
+> > want to do that again when/if I try to bring up another machine.
+> 
+> That was a bug in the newly rewritten ixp4xx conf which I believe is now
+> fixed.
 
-I am just packaging this - the work was done by Thomas Reitmayr (see
-http://www.devbase.at/voip/yeaphone.php for details).
+Great!  When was the diff applied?  I'd like to get it.
 
-There are commented-out sections for GPE support, but (as far as I know)
- they have never been tested.
+> > My question is - should I even be attempting to define a new machine
+> > and including ixp4xxbe.conf in it?  Should I define my own machine by
+> > copying the contents of ixp4xxbe.conf?  Should I have specified the
+> > "ixp4xxbe" machine file in my local.conf along with the extra (what I
+> > think should be) machine config?  Or should I define my own distro
+> > and put that machine config there?  What is the most appropriate way
+> > to do this?
+> 
+> Is there anything specific which means that you can't just use the
+> ixp4xxbe.conf as it is?
 
-Unless anyone objects (i.e. they want GPE support, and are willing to
-test it in 1.6.0 and maintain it), I propose removing the
-default_preference=-1 in a couple of days time and making the
-console-only 1.6.0 version the default version in OE.
+Right now its not much more than a bunch of MACHINE_EXTRA_RDEPENDS and
+MACHINE_EXTRA_RRECOMMENDS settings thanks to your changes.  However, there
+is an embedded four-port eth switch chip in the box.  Since the
+manufacturer had to patch a number of areas in the Intel drivers to get it
+to work originally, I am expecting to have to do the same with the GPL
+ixp4xx eth drivers.  That would mean kernel patches, which would probably
+mean its own kernel .bb, etc.  From what I've seen of OE, it seems easier
+to support a new machine .conf along with its own kernel .bb than trying
+to shim a new kernel config in an old machine .conf (oh, BTW, to build for
+*this machine*, you have to use *that machine's* .conf file, but make
+PREFERRED_PROVIDER_virtual/kernel be *this*).  Newbies are already 
+overwhelmed by OE's sheer configurability, throwing yet another exception
+in on this just doesn't seem right to me.
 
-If someone does object and is willing to maintain the GPE version, then
-I am happy to rename the console-only version to linphone-console, and
-to split out the common bits to a .inc file.  But *only* if someone is
-willing to maintain the GPE version as I have no OE device with a GUI (yet).
+> I'm willing to work with you to get this right.
 
-Any objections?
+I know - thank you.  I just wish I had discovered what was the issue with
+building the root filesys image before now....
 
--- Rod
+Regards,
+-Mark Gollahon
 
-
+--bound1170370106--
