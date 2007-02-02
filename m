@@ -1,30 +1,19 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HCoOG-0002ts-IF
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Feb 2007 03:43:04 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 0651B28C012; Fri,  2 Feb 2007 03:38:12 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from [192.168.2.128] (e180162083.adsl.alicedsl.de [85.180.162.83])
-	by srv043.dedi23.de (Postfix) with ESMTP id 9F55F28C011
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Feb 2007 03:38:09 +0100 (CET)
-Date: Fri, 2 Feb 2007 03:41:02 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.95.6) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <755878652.20070202034102@vanille-media.de>
-To: Michael 'Mickey' Lauer <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <484336471.20070126213403@vanille-media.de>
-References: <982289855.20070124171722@vanille-media.de>
-	<484336471.20070126213403@vanille-media.de>
+Received: from [59.160.240.225] (helo=rediffmail.com)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <suhas7860@rediffmail.com>) id 1HCthI-00063H-Pf
+	for openembedded-devel@openembedded.org; Fri, 02 Feb 2007 09:23:05 +0100
+Received: (qmail 3433 invoked by uid 510); 2 Feb 2007 08:20:09 -0000
+Comment: DomainKeys? See http://antispam.yahoo.com/domainkeys
+Date: 2 Feb 2007 08:20:09 -0000
+Message-ID: <20070202082009.3431.qmail@webmail103.rediffmail.com>
+Received: from unknown (221.243.162.19) by rediffmail.com via HTTP;
+	02 feb 2007 08:20:09 -0000
 MIME-Version: 1.0
-Subject: Re: FOSDEM 2007 Planning
+From: "Mr. Suhas Ghosh" <suhas7860@rediffmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Cc: openembedded-users@lists.openembedded.org
+Subject: Conf File help
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,17 +27,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Feb 2007 02:43:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-
-Ping?
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+X-List-Received-Date: Fri, 02 Feb 2007 08:23:07 -0000
+Content-Type: text/plain;
+	charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
 
+Hi All,
+   I want to build kernal image for ARM926EJ-S.
+   I have written conf file in build/conf, machine and distro.
+   I specified my machine neme as "emm213".
+   Inside machine and distro conf file name is emm113.conf
+   But when I try to run "bitbake bootstrap-image" command
+   it gives the following error.
+   ERROR: Unable to open conf/bitbake.conf
+   but my path setting is OK.
+   I used=20
+   export PATH=3D/stuff/bitbake/bin:$PATH
+   export BBPATH=3D/stuff/build:/stuff/org.openembedded.dev
 
+   When I am testing with 'bitbake nano' command it is running.
+   Is it possible to give my own machine name?
+   Hope to get help from you.
+   Thanking you in advance.
+                             with best regards
+                                Suhas Ghosh  
+  =20
+    
+
+
+From freyther@gmx.net Fri Feb 02 10:21:56 2007
+Received: from [213.165.64.20] (helo
