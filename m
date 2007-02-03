@@ -1,26 +1,32 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>)
-	id 1HD3Ae-0002B2-Gs; Fri, 02 Feb 2007 19:30:00 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l12ITwLr019250; Fri, 2 Feb 2007 19:29:58 +0100
-Message-ID: <45C38324.9070305@dominion.kabel.utwente.nl>
-Date: Fri, 02 Feb 2007 19:29:56 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: Using OE <openembedded-users@openembedded.org>
-References: <20070202082009.3431.qmail@webmail103.rediffmail.com>
-In-Reply-To: <20070202082009.3431.qmail@webmail103.rediffmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [oe-users] Conf File help
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1HDHXB-0007Ej-NY
+	for openembedded-devel@openembedded.org; Sat, 03 Feb 2007 10:50:13 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1HDHX5-0007pL-13
+	for openembedded-devel@openembedded.org; Sat, 03 Feb 2007 10:50:07 +0100
+Received: from r7792.r.ppp-pool.de ([89.54.119.146])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 03 Feb 2007 10:50:07 +0100
+Received: from no2spam by r7792.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 03 Feb 2007 10:50:07 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sat, 03 Feb 2007 10:49:55 +0100
+Message-ID: <eq1ls4$2ei$1@sea.gmane.org>
+References: <982289855.20070124171722@vanille-media.de>	<484336471.20070126213403@vanille-media.de>	<755878652.20070202034102@vanille-media.de>
+	<75517CEE-95F0-4103-9031-D4EA8FE2F168@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: r7792.r.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
+In-Reply-To: <75517CEE-95F0-4103-9031-D4EA8FE2F168@gmx.net>
+Sender: news <news@sea.gmane.org>
+Subject: Re: FOSDEM 2007 Planning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,24 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Feb 2007 18:30:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 03 Feb 2007 09:50:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Holger Freyther wrote:
 
-Mr. Suhas Ghosh schreef:
+> What I can show:
 
-<something>
+If there is interest, I could show the Z acting as a Japanese mobile 
+dictionary (including Japanese HWR/keyboard input).  I am also working 
+on software to have the Z as a mobile study aid (think flash cards).  I 
+am in Brussels from Friday evening to late Saturday night.
 
-DO NOT CROSSPOST!
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFw4MkMkyGM64RGpERAtlWAJ9pGWTfbfe9F+xo6bT2gCnDsASWawCglGPM
-Le3oQzYXdpUgR2uyH1GE+lg=
-=wxyX
------END PGP SIGNATURE-----
 
 
