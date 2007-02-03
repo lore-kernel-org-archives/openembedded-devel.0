@@ -1,31 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HDHXB-0007Ej-NY
-	for openembedded-devel@openembedded.org; Sat, 03 Feb 2007 10:50:13 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1HDHX5-0007pL-13
-	for openembedded-devel@openembedded.org; Sat, 03 Feb 2007 10:50:07 +0100
-Received: from r7792.r.ppp-pool.de ([89.54.119.146])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 03 Feb 2007 10:50:07 +0100
-Received: from no2spam by r7792.r.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 03 Feb 2007 10:50:07 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 03 Feb 2007 10:49:55 +0100
-Message-ID: <eq1ls4$2ei$1@sea.gmane.org>
-References: <982289855.20070124171722@vanille-media.de>	<484336471.20070126213403@vanille-media.de>	<755878652.20070202034102@vanille-media.de>
-	<75517CEE-95F0-4103-9031-D4EA8FE2F168@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: r7792.r.ppp-pool.de
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1HDLSN-00077A-UQ
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Feb 2007 15:01:33 +0100
+Received: from [125.98.76.2] (helo=[1.244.144.156])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1HDLZ4-0003ur-GN
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Feb 2007 15:08:27 +0100
+Message-ID: <45C49598.6060405@kernelconcepts.de>
+Date: Sat, 03 Feb 2007 15:00:56 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
 User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
-In-Reply-To: <75517CEE-95F0-4103-9031-D4EA8FE2F168@gmx.net>
-Sender: news <news@sea.gmane.org>
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <982289855.20070124171722@vanille-media.de>
+In-Reply-To: <982289855.20070124171722@vanille-media.de>
+X-Enigmail-Version: 0.94.0.0
 Subject: Re: FOSDEM 2007 Planning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,18 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Feb 2007 09:50:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 03 Feb 2007 14:01:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Holger Freyther wrote:
+Hi,
 
-> What I can show:
+Michael 'Mickey' Lauer wrote:
+> I'd be grateful if someone else could take the wheel in organizing
+> that event.
 
-If there is interest, I could show the Z acting as a Japanese mobile 
-dictionary (including Japanese HWR/keyboard input).  I am also working 
-on software to have the Z as a mobile study aid (think flash cards).  I 
-am in Brussels from Friday evening to late Saturday night.
+i can't do that much for preparing the event but unless something really bad
+happens i'll be there the whole time.
+Like i promised i bring a TFT display with me that can be connected to a PC to
+show OE in action or whatever we need it for. Apart from that i dig for the most
+interesting devices in my offices :-)
+I guess i could print some flyers as well, do we have a template for these already?
 
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-14
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
