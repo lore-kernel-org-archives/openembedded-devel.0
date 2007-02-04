@@ -1,29 +1,25 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HDe8e-0005Dc-1W
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Feb 2007 10:58:24 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id 88320A2964
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Feb 2007 04:58:23 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by out1.internal (MEProxy); Sun, 04 Feb 2007 04:58:23 -0500
-X-Sasl-enc: O9xgxcHlzjyPCX+7lkKnUbHRTM5nRF57cXg+iu6quRqk 1170583103
-Received: from [192.168.0.11] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id C02A92055F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Feb 2007 04:58:22 -0500 (EST)
-Message-ID: <45C5AE3E.1060300@whitby.id.au>
-Date: Sun, 04 Feb 2007 20:28:22 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HDqjV-00086S-8o
+	for openembedded-devel@openembedded.org; Mon, 05 Feb 2007 00:25:17 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l14NPBLr030944 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 5 Feb 2007 00:25:13 +0100
+Message-ID: <45C66B59.3060006@dominion.kabel.utwente.nl>
+Date: Mon, 05 Feb 2007 00:25:13 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <45C256FA.5080504@whitby.id.au>
-In-Reply-To: <45C256FA.5080504@whitby.id.au>
-Subject: Re: RFC: New version of linphone (console only unless there are	objections)
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: LDFLAGS += "--as-needed" ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,24 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Feb 2007 09:58:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 04 Feb 2007 23:25:17 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Rod Whitby wrote:
-> I have checked in linphone_1.6.0.bb for your edification (with
-> preferred_version = -1).  This will be used with yeaphone-0.1.bb to
-> allow a cheap usb handset connected to an NSLU2 to be a VoIP solution.
-> 
-> Unless anyone objects (i.e. they want GPE support, and are willing to
-> test it in 1.6.0 and maintain it), I propose removing the
-> default_preference=-1 in a couple of days time and making the
-> console-only 1.6.0 version the default version in OE.
-> 
-> Any objections?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-As there were no objections, this will happen later today.
+Hi,
 
--- Rod
+I have encountered a few packages that have unnecessary dependencies due to excessive
+linking. A while back we discussed passing '--as-needed' to ld to get rid of those. My
+question is: what happens when software uses gcc to link?
+
+Do we want to enable such a thing globally?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFxmtZMkyGM64RGpERAkU0AJ9dUyLBgjeFsLXUNgppjRoE2kwZawCZAWR3
+xalcH4cdKcmkIqiZZJVLIEc=
+=DJfZ
+-----END PGP SIGNATURE-----
 
 
