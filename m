@@ -1,31 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [209.242.20.70] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HE5RV-00081k-Pu
-	for openembedded-devel@openembedded.org; Mon, 05 Feb 2007 16:07:42 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l15F7fqR005022
-	for <openembedded-devel@openembedded.org>; Mon, 5 Feb 2007 15:07:41 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 04460-06 for <openembedded-devel@openembedded.org>;
-	Mon,  5 Feb 2007 15:07:38 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l15F7boS005014
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Mon, 5 Feb 2007 15:07:38 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <45C7267D.7060906@4g-systems.com>
-References: <995082.46394.qm@web15204.mail.cnb.yahoo.com>
-	<45C7267D.7060906@4g-systems.com>
-Date: Mon, 05 Feb 2007 15:07:37 +0000
-Message-Id: <1170688058.5801.82.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: How to use the qemu-arm to run an image which was built	in oe?
+	(envelope-from <mwester@dls.net>) id 1HE5nj-0001s1-RI
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Feb 2007 16:30:45 +0100
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id 6B6934120F5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  5 Feb 2007 09:30:42 -0600 (CST)
+Message-ID: <059601c7493a$835d2940$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+References: <45C6E906.9090602@whitby.id.au>
+Date: Mon, 5 Feb 2007 09:30:00 -0600
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1807
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
+Subject: Re: How will OE handle the US timezone change?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,38 +31,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Feb 2007 15:07:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 05 Feb 2007 15:30:50 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2007-02-05 at 13:43 +0100, Patrick Fischer wrote:
-> zechao wang wrote:
-> > Hello:
-> > The image was based on arm. I was told that the qemu-arm could run it, but i don't know how?
-> >   
-> *Hello
-> http://www.rpsys.net/openzaurus/qemu/
+> Are there any OE developers in the US who know enough and care enough to
+>  fix it properly?  Our someone else who is gracious enough to help our
+> US friends out of their timezone mess?
 
-That page is way out of date. I'll fix it...
+Yes, there is.  I raised the issue originally, based on questions from
+concerned users.
 
-> Please let me know if it works for you. I cound not get it working.
-> Using Debian Etch or Ubuntu 6.10
+I've made a proposal on the NSLU2 lists.  I understand it annoyed koen.  As
+the proposal suggested, constructive feedback on what should be done to
+improve it would be appreciated, and gratefully accepted.  (Being annoyed is
+an indication of concern, but I'm having difficulty converting that to
+constructive feedback :)
 
-http://svn.o-hand.com/view/poky/trunk/scripts/
-and more specifically
-http://svn.o-hand.com/view/poky/trunk/scripts/poky-qemu.README?rev=1146&view=auto
+The proposal was to fix the problem specifically for OpenSlug (hence posted
+originally only on the NSLU2 lists), as I cannot pretend to know about the
+needs of every other potential OE user.  And given the nature of timezones
+themselves (regional with a smattering of politics), it seems doubtful to me
+that there is any solution that is not also regional, and smelling of
+politics.
 
-A qemu deb and a poky standalone scripts deb for edgy are available at:
-http://debian.o-hand.com/edgy/
+> At the moment, there seems to be a timezones package which downloads
+> binary files from some OPIE site.  I've heard that timezone data is
+> endian specific, so it seems that some better solution might be required.
 
-http://debian.o-hand.com/edgy/poky-scripts_2_all.deb
-http://debian.o-hand.com/edgy/qemu_0.8.2-3oh5_i386.deb
+The existing package downloads very old data.  It is packaged in a somewhat
+arbitrary manner.  It is also binary, thus cannot be updated by just
+pointing to updated source data.
 
-Other distros have repositories there but might not be as up to date.
+Going into a small bit of specifics, the proposal suggests that we create a
+new package (as the newer timezone data does not match the structure of the
+existing package).  The obvious critisism of this approach doesn't need to
+be mentioned.  The hard part is to figure out what would be a reasonable way
+to split the package, given the structure.  Take a look at
+/usr/share/zoneinfo on any recent Linux system for a quick glimpse -- there
+are very clear and obvious ways to split the data for some items ("africa",
+"northamerica", "europe", etc), but what to do with all the links?
 
-Cheers,
+Empirical testing indicates that endian issues are not present, but if
+anyone has more certain knowlege one way or another, that would be good
+information to have.  It would change how the data needs to be generated for
+the package.
 
-Richard
+Thanks,
+Mike (mwester)
+
 
 
 
