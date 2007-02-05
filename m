@@ -1,27 +1,19 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HDz6S-000182-Ph
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Feb 2007 09:21:32 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id 008BACCB88
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Feb 2007 03:21:31 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by out1.internal (MEProxy); Mon, 05 Feb 2007 03:21:32 -0500
-X-Sasl-enc: ZcyQQX9UuObIU8E76ubh1u5yr8iu4TUBVvB3/23WlIsq 1170663691
-Received: from [192.168.0.11] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id 334EFFA11
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Feb 2007 03:21:30 -0500 (EST)
-Message-ID: <45C6E906.9090602@whitby.id.au>
-Date: Mon, 05 Feb 2007 18:51:26 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
+Received: from [59.160.240.219] (helo=rediffmail.com)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <suhas7860@rediffmail.com>) id 1HE0N0-0003gL-BZ
+	for openembedded-devel@openembedded.org; Mon, 05 Feb 2007 10:42:42 +0100
+Received: (qmail 27996 invoked by uid 510); 5 Feb 2007 09:39:43 -0000
+Comment: DomainKeys? See http://antispam.yahoo.com/domainkeys
+Date: 5 Feb 2007 09:39:43 -0000
+Message-ID: <20070205093943.27977.qmail@webmail94.rediffmail.com>
+Received: from unknown (221.243.162.19) by rediffmail.com via HTTP;
+	05 feb 2007 09:39:43 -0000
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: How will OE handle the US timezone change?
+From: "Mr. Suhas Ghosh" <suhas7860@rediffmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	openembedded-users@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Steps to Build a kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,22 +27,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Feb 2007 08:21:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 05 Feb 2007 09:42:42 -0000
+Content-Type: text/plain;
+	charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Not that I really care (not living in the US), but people using distros
-built from OE are getting concerned about how the new US DST timezone
-thing is going to be handled.
+Hi All,
+   I want to make a simple kernel for ARM926EJ-s.
+   I checked the Getting Started in the site.
+   But all are not clear and I also tried the First Project
+   mentioned there.=20
+   I think I have to write three conf files=20
+   and then from inside build I have to run bitbake bootstrap-image.
+   If I am wrong I need your help.=20
+   Three conf files are like this
+   1.build/conf/local.conf=20
+   2.org.openembedded.dev/conf/machine/machinename.conf
+   3.org.openembedded.dev/conf/distro/machinename.conf
 
-Are there any OE developers in the US who know enough and care enough to
- fix it properly?  Our someone else who is gracious enough to help our
-US friends out of their timezone mess?
+My path is like that
+  /home/suhas/openembed/org.openembedded.dev
+  /home/suhas/openembed/build
+  /home/suhas/openembed/bitbake
+  /home/suhas/openembed/OE.mtn
+and I use these two export command
+export BBPATH=3D/home/suhas/openembed/build:/home/suhas/openembed/org.open=
+embedded.dev
+export PATH=3D/home/suhas/openembed/bitbake/bin:$PATH
 
-At the moment, there seems to be a timezones package which downloads
-binary files from some OPIE site.  I've heard that timezone data is
-endian specific, so it seems that some better solution might be required.
+Now when I tried to run bitbake bootstrap-image from huild it always givin=
+g
+ERROR:unable to open /bitbake/conf/bitbake.conf files.
 
--- Rod
+But when I am using the default conf file and running
+bitbake nano it is running.
 
+I can not fing out where is the problem.
+So please help.
 
+                                Thanking you in advance
+                                      suhas
+  =20
+From janjans321@gmail.com Mon Feb 05 11:09:06 2007
+Received: from [64.233.162.239] (helo
