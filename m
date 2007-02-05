@@ -1,28 +1,22 @@
-Received: from [212.227.126.171] (helo=moutng.kundenserver.de)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <fischer@4g-systems.com>) id 1HE3CA-0002QJ-A9
+	(envelope-from <cliff.brake@gmail.com>) id 1HE3OQ-0002d9-Bh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Feb 2007 13:43:42 +0100
-Received: from [213.238.49.68] (helo=dehamox1a.intra.4g-systems.com)
-	by mrelayeu.kundenserver.de (node=mrelayeu4) with ESMTP (Nemesis),
-	id 0ML21M-1HE3C933T1-0002Pa; Mon, 05 Feb 2007 13:43:41 +0100
-Received: from [172.31.20.70] (deham-pc1070.intra.4g-systems.com
-	[172.31.20.70])
-	by dehamox1a.intra.4g-systems.com (Postfix) with ESMTP id 89077610B32
+	Mon, 05 Feb 2007 13:56:22 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so1247819ugf
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Feb 2007 13:43:36 +0100 (CET)
-Message-ID: <45C7267D.7060906@4g-systems.com>
-Date: Mon, 05 Feb 2007 13:43:41 +0100
-From: Patrick Fischer <fischer@4g-systems.com>
-User-Agent: Icedove 1.5.0.9 (X11/20061220)
-MIME-Version: 1.0
+	Mon, 05 Feb 2007 04:56:21 -0800 (PST)
+Received: by 10.78.178.5 with SMTP id a5mr1066299huf.1170680181123;
+	Mon, 05 Feb 2007 04:56:21 -0800 (PST)
+Received: by 10.78.167.3 with HTTP; Mon, 5 Feb 2007 04:56:21 -0800 (PST)
+Message-ID: <f96d234e0702050456q4211fa3bub2c42dc804726e5c@mail.gmail.com>
+Date: Mon, 5 Feb 2007 07:56:21 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <995082.46394.qm@web15204.mail.cnb.yahoo.com>
-In-Reply-To: <995082.46394.qm@web15204.mail.cnb.yahoo.com>
-X-Provags-ID: kundenserver.de abuse@kundenserver.de
-	login:2073f051fc1b72daa8cde2c9d21098b2
-X-Provags-ID2: V01U2FsdGVkX1/JGY5JiO3S1g98PVeQPOzDbMbpQtAI0rJUunrxtnWbgt0cwJakyyIzE6OJr0MAxKyP3SaWf01284yOqieFnx1+0QrIZfVIE1C2HTqi2wz5lw==
-Subject: Re: How to use the qemu-arm to run an image which was built in oe?
+In-Reply-To: <45C6E906.9090602@whitby.id.au>
+MIME-Version: 1.0
+References: <45C6E906.9090602@whitby.id.au>
+Subject: Re: How will OE handle the US timezone change?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,22 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Feb 2007 12:43:42 -0000
-Content-Type: text/plain; charset=GB2312
+X-List-Received-Date: Mon, 05 Feb 2007 12:56:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-zechao wang wrote:
-> Hello:
-> The image was based on arm. I was told that the qemu-arm could run it, but i don't know how?
->   
-*Hello
-http://www.rpsys.net/openzaurus/qemu/
+On 2/5/07, Rod Whitby <rod@whitby.id.au> wrote:
+> Not that I really care (not living in the US), but people using distros
+> built from OE are getting concerned about how the new US DST timezone
+> thing is going to be handled.
+>
+> Are there any OE developers in the US who know enough and care enough to
+>  fix it properly?  Our someone else who is gracious enough to help our
+> US friends out of their timezone mess?
 
-Please let me know if it works for you. I cound not get it working.
-Using Debian Etch or Ubuntu 6.10
+Yes, I'll start looking into it as I have several customers that need
+this fixed.
 
-Best Regards
-Patrick Fischer
-*
+Thanks,
+Cliff
+
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
