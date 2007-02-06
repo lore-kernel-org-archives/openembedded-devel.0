@@ -1,24 +1,23 @@
-Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
+Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <papercrane@gmail.com>) id 1HEVoE-0005gp-HW
+	(envelope-from <andrew.paulsen@gmail.com>) id 1HEWpx-00011E-2g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Feb 2007 20:16:54 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so252461nfc
+	Tue, 06 Feb 2007 21:22:45 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so1666383ugf
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Feb 2007 11:16:54 -0800 (PST)
-Received: by 10.82.169.4 with SMTP id r4mr2798566bue.1170789413225;
-	Tue, 06 Feb 2007 11:16:53 -0800 (PST)
-Received: by 10.48.246.2 with HTTP; Tue, 6 Feb 2007 11:16:52 -0800 (PST)
-Message-ID: <432beae0702061116q5538abefk23dcf674810eef28@mail.gmail.com>
-Date: Tue, 6 Feb 2007 11:16:52 -0800
-From: "Justin Patrin" <papercrane@gmail.com>
+	Tue, 06 Feb 2007 12:22:44 -0800 (PST)
+Received: by 10.78.136.9 with SMTP id j9mr1915884hud.1170793363585;
+	Tue, 06 Feb 2007 12:22:43 -0800 (PST)
+Received: by 10.78.159.2 with HTTP; Tue, 6 Feb 2007 12:22:43 -0800 (PST)
+Message-ID: <d46153c40702061222r3567dcecr2f1166ec6ac17128@mail.gmail.com>
+Date: Tue, 6 Feb 2007 14:22:43 -0600
+From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <148197990.20070206195603@vanille-media.de>
+In-Reply-To: <45C8B9C8.3010706@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-References: <E1HEUN1-0002rH-4T@linuxtogo.org>
-	<864406179.20070206184751@vanille-media.de>
-	<148197990.20070206195603@vanille-media.de>
-Subject: Re: [oe-commits] org.oe.dev ecore: add missing patch
+References: <d46153c40702060903l5dab58b4ha7a237730d51da66@mail.gmail.com>
+	<45C8B9C8.3010706@dominion.kabel.utwente.nl>
+Subject: Re: GNU Classpath, gconf-dbus inconsistency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,45 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Feb 2007 19:16:54 -0000
+X-List-Received-Date: Tue, 06 Feb 2007 20:22:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On 2/6/07, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
-> Michael 'Mickey' Lauer wrote:
-> > justinp commit wrote:
-> >> ecore: add missing patch
+On 2/6/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> Andrew Paulsen schreef:
+> > Which is somewhat interesting since
+> > $ bitbake gconf -crebuild
+> > ...
+> > NOTE: package gconf-dbus-2.10.0+svn20060719: started
+> > ...
+> > NOTE: package gconf-dbus-2.10.0+svn20060719: completed
+> >
+> > Which actually builds version 2.6.4.14, not 2.10 as the recipe
+> > suggests.  I don't know if there is a reason for this or how to fix
+> > this if it is a bug, so I submitted bug 1851.
 >
-> >> Author: justinp@openembedded.org
-> >> Branch: org.openembedded.dev
-> >> Revision: b9a2e7516cc3620c51495eadf5a2d938086881a9
-> >> ViewMTN:
-> >> http://monotone.openembedded.org/revision.psp?id=b9a2e7516cc3620c51495eadf5a2d938086881a9
-> >> Files:
-> >> 1
-> >> packages/efl/ecore/remove-bad-code.patch
-> > ok
-> >> packages/glibc/glibc.inc
-> > ????
-> >> packages/gpsd/gpsd.inc
-> > ??????
-> >> packages/images/gpe-image.bb
-> > ?????????????
-> >> packages/linux/linux-rp-2.6.18/defconfig-spitz
-> > ?????????????????????
-> >> packages/linux/linux-rp_2.6.18.bb
-> > ???????????????????????????????
->
-> > Please disapprove this revision and please be more careful when
-> > committing changes next time.
->
-> I disapproved before it gets complicated due to new leafs. Please commit your efl patch again.
->
+> Right, I made that (somewhat stupid) change to work around a bitbake bug a while back. I
+> have tried to find a newer gconf-dbus, but I can't seem to find it. Any hints on that?
 
-Damn. Sorry, I forgot to add a restriction.... thanks for catching it.
+Unfortunately, no.  The latest version I see on http://svn.gnome.org/
+is 23 months old.  Apparently it never caught on.  Any ideas on
+satisfying Classpath's (gconf >= 2.11.2) requirement?
 
--- 
-Justin Patrin
+Andrew
 
 
