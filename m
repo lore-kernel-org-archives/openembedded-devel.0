@@ -1,22 +1,26 @@
-Received: from [62.169.194.2] (helo=fesscrpp1.tellas.gr)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1HEKvk-00036j-Ob
-	for openembedded-devel@openembedded.org; Tue, 06 Feb 2007 08:39:58 +0100
-Received: from dias (62.169.211.226) by fesscrpp1.tellas.gr (7.3.117)
-	id 4526170101D6874F for openembedded-devel@openembedded.org;
-	Tue, 6 Feb 2007 09:39:09 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Tue, 6 Feb 2007 09:39:54 +0200
-Message-ID: <HOECLKEKOHLAMMGDLLBHOEHNKAAA.skoroneos@digital-opsis.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HENNj-0008O5-Q7
+	for openembedded-devel@openembedded.org; Tue, 06 Feb 2007 11:16:59 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l16AGsLr004678 for <openembedded-devel@openembedded.org>;
+	Tue, 6 Feb 2007 11:16:55 +0100
+Message-ID: <45C85593.3060603@dominion.kabel.utwente.nl>
+Date: Tue, 06 Feb 2007 11:16:51 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
-In-Reply-To: <45C71BD0.9060509@dominion.kabel.utwente.nl>
-Importance: Normal
-Subject: Re: Steps to Build a kernel
+To: openembedded-devel@openembedded.org
+References: <45BB64DC.1080601@dominion.kabel.utwente.nl>
+In-Reply-To: <45BB64DC.1080601@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: RFC: diet-x11, small-x11 and fat-x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,22 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Feb 2007 07:39:59 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Tue, 06 Feb 2007 10:17:00 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
->
-> > Now when I tried to run bitbake bootstrap-image from huild it
-> always giving
-> > ERROR:unable to open /bitbake/conf/bitbake.conf files.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Most probable cause is that one of your config files has tabs/whitespaces
-mixed
+Koen Kooi schreef:
+> Hi,
+> 
+> I'd like to propose to split diet-x11 and libx11 into the following:
+> 
+> diet-x11: as small as possible, without stuff like cms and xkb
+> small-x11: small, but with cms and xkb, usefull for highend palmtops and small settop-boxes
+> fat-x11: biggest version, usefull for big-bad-workstation images.
+> 
+> what do you think about it?
 
-Stelios
+Nobody is thinking something?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
+iD8DBQFFyFWSMkyGM64RGpERArJMAJ9cvjzYMcYk0FpRgD1U611t6x2ebACfT4Ho
+2EdPSG1Cz7DhP89qC6vIXPw=
+=Q8zQ
+-----END PGP SIGNATURE-----
 
 
