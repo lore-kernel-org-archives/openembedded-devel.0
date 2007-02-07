@@ -1,25 +1,25 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HEms0-0004sb-0O
-	for openembedded-devel@openembedded.org; Wed, 07 Feb 2007 14:29:56 +0100
-Received: from lieve.dominion.void (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l17DTqLr019324 for <openembedded-devel@openembedded.org>;
-	Wed, 7 Feb 2007 14:29:52 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <f34f85580702070514u42b2b887qf416466c5b7bf83d@mail.gmail.com>
-References: <f34f85580702070514u42b2b887qf416466c5b7bf83d@mail.gmail.com>
-Date: Wed, 07 Feb 2007 14:22:09 +0100
-Message-Id: <1170854529.3226.1.camel@lieve>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: tzdata.bb
+	(envelope-from <andrew.paulsen@gmail.com>) id 1HEnsb-0007AY-7w
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Feb 2007 15:34:37 +0100
+Received: by wx-out-0506.google.com with SMTP id t14so209207wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Feb 2007 06:34:36 -0800 (PST)
+Received: by 10.78.203.13 with SMTP id a13mr22077hug.1170858858736;
+	Wed, 07 Feb 2007 06:34:18 -0800 (PST)
+Received: by 10.78.159.2 with HTTP; Wed, 7 Feb 2007 06:34:18 -0800 (PST)
+Message-ID: <d46153c40702070634v59c02b26u89276d4a2df0007b@mail.gmail.com>
+Date: Wed, 7 Feb 2007 08:34:18 -0600
+From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <45C8E767.9000506@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+References: <d46153c40702060903l5dab58b4ha7a237730d51da66@mail.gmail.com>
+	<45C8B9C8.3010706@dominion.kabel.utwente.nl>
+	<d46153c40702061222r3567dcecr2f1166ec6ac17128@mail.gmail.com>
+	<45C8E767.9000506@dominion.kabel.utwente.nl>
+Subject: Re: GNU Classpath, gconf-dbus inconsistency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,34 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Feb 2007 13:29:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 Feb 2007 14:34:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Op wo, 07-02-2007 te 08:14 -0500, schreef Todd Blumer:
-> Because of the impending changes to daylight savings time (DST) here
-> in the US, I was motivated to work on creating a new timezone package.
-> In the base package I tried to put a city in every timezone around the
-> world. This package replaces the 'timezone' package used by Opie, so
-> some other packages will need to be changed to depend on tzdata
-> instead of timezone. (I used 'tzdata' since that is the Debian name
-> and in case some developers were not ready to switch over to tzdata.)
-> 
-> Someone with write access to oe (something I should probably get
-> eventually :-) can commit this to dev if you feel it is appropriate to
-> do so. I have tested the US Eastern time.
-> 
-> I'm sure more work could be done here. Feedback is welcome.
+On 2/6/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> It's located here: http://developer.imendio.com/projects/misc/gconf-dbus, but still 2.6.x.x
 
-2 small things:
+Does this version even work with dbus 1.x?  I just tried to run
+gconftool-2 on my target system and I'm getting:
 
-* don't use cp -a, that breaks on non-GNU buildsystems
-* don't rely on /usr/bin/zic being present, but provide a zic-native
-recipe
+$ gconftool-2 -R /apps
+(process:5130): GConf-WARNING **: Client failed to connect to the D-BUS daemon:
+Failed to execute dbus-launch to autolaunch D-Bus session
 
-regards,
+(process:5130): GConf-WARNING **: Client failed to connect to the D-BUS daemon:
+Failed to execute dbus-launch to autolaunch D-Bus session
+Failure listing entries in `/apps': No D-BUS daemon running
 
-Koe
 
+But dbus-daemon is running and dbus-launch seems to work:
+
+$ dbus-launch
+DBUS_SESSION_BUS_ADDRESS=unix:path=/tmp/dbus-UrHL5MiZOc,guid=c32ef74496031f67cd2b64003b232bd3
+DBUS_SESSION_BUS_PID=5323
+
+I really don't know much about dbus or gconf so there is a good chance
+that I'm just missing something here.
+
+Andrew
 
 
