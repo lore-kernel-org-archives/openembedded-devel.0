@@ -1,27 +1,21 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [64.233.184.235] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HEX5q-0001Dn-Sw
-	for openembedded-devel@openembedded.org; Tue, 06 Feb 2007 21:39:11 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l16Kd6ox009250 for <openembedded-devel@openembedded.org>;
-	Tue, 6 Feb 2007 21:39:06 +0100
-Message-ID: <45C8E767.9000506@dominion.kabel.utwente.nl>
-Date: Tue, 06 Feb 2007 21:39:03 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <sdgvulpes@gmail.com>) id 1HEmd2-00038e-CT
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Feb 2007 14:14:29 +0100
+Received: by wr-out-0506.google.com with SMTP id i20so188952wra
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Feb 2007 05:14:27 -0800 (PST)
+Received: by 10.114.12.9 with SMTP id 9mr1692666wal.1170854066569;
+	Wed, 07 Feb 2007 05:14:26 -0800 (PST)
+Received: by 10.114.180.7 with HTTP; Wed, 7 Feb 2007 05:14:26 -0800 (PST)
+Message-ID: <f34f85580702070514u42b2b887qf416466c5b7bf83d@mail.gmail.com>
+Date: Wed, 7 Feb 2007 08:14:26 -0500
+From: "Todd Blumer" <sdgvulpes@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <d46153c40702060903l5dab58b4ha7a237730d51da66@mail.gmail.com>	<45C8B9C8.3010706@dominion.kabel.utwente.nl>
-	<d46153c40702061222r3567dcecr2f1166ec6ac17128@mail.gmail.com>
-In-Reply-To: <d46153c40702061222r3567dcecr2f1166ec6ac17128@mail.gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: GNU Classpath, gconf-dbus inconsistency
+Cc: Rene Wagner <rw@handhelds.org>
+Subject: tzdata.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,55 +29,159 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Feb 2007 20:39:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 Feb 2007 13:14:29 -0000
+X-Groupsio-MsgNum: 1355
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_1056_29757513.1170854066542"
+
+------=_Part_1056_29757513.1170854066542
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Because of the impending changes to daylight savings time (DST) here
+in the US, I was motivated to work on creating a new timezone package.
+In the base package I tried to put a city in every timezone around the
+world. This package replaces the 'timezone' package used by Opie, so
+some other packages will need to be changed to depend on tzdata
+instead of timezone. (I used 'tzdata' since that is the Debian name
+and in case some developers were not ready to switch over to tzdata.)
 
-Andrew Paulsen schreef:
-> On 2/6/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
->> Andrew Paulsen schreef:
->>> Which is somewhat interesting since
->>> $ bitbake gconf -crebuild
->>> ...
->>> NOTE: package gconf-dbus-2.10.0+svn20060719: started
->>> ...
->>> NOTE: package gconf-dbus-2.10.0+svn20060719: completed
->>>
->>> Which actually builds version 2.6.4.14, not 2.10 as the recipe
->>> suggests.  I don't know if there is a reason for this or how to fix
->>> this if it is a bug, so I submitted bug 1851.
->> Right, I made that (somewhat stupid) change to work around a bitbake bug a while back. I
->> have tried to find a newer gconf-dbus, but I can't seem to find it. Any hints on that?
-> 
-> Unfortunately, no.  The latest version I see on http://svn.gnome.org/
-> is 23 months old.  
+Someone with write access to oe (something I should probably get
+eventually :-) can commit this to dev if you feel it is appropriate to
+do so. I have tested the US Eastern time.
 
-It's located here: http://developer.imendio.com/projects/misc/gconf-dbus, but still 2.6.x.x
+I'm sure more work could be done here. Feedback is welcome.
+--
+Todd Blumer
+SDG Systems
 
-regards,
+------=_Part_1056_29757513.1170854066542
+Content-Type: application/octet-stream; name=tzdata_2007a.bb
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_exvrtnmv
+Content-Disposition: attachment; filename="tzdata_2007a.bb"
 
-Koen
+REVTQ1JJUFRJT04gPSAidHpkYXRhIHByb3ZpZGVzIHRpbWV6b25lIGRhdGEiClNFQ1RJT04gPSAi
+YmFzZSIKUFJJT1JJVFkgPSAib3B0aW9uYWwiClBSID0gInIwIgoKIyBmdHA6Ly9lbHNpZS5uY2ku
+bmloLmdvdi9wdWIvdHpjb2RlMjAwN2EudGFyLmd6ClNSQ19VUkkgPSAiZnRwOi8vZWxzaWUubmNp
+Lm5paC5nb3YvcHViL3R6ZGF0YTIwMDdhLnRhci5neiIKClMgPSAiJHtXT1JLRElSfSIKCiMgcGFj
+a2FnZXMgcHJpbWFyaWx5IG9yZ2FuaXplZCBieSBkaXJlY3RvcnkKIyB3aXRoIGEgbWFqb3IgY2l0
+eSBpbiBtb3N0IHRpbWUgem9uZXMgaW4gdGhlIAojIGJhc2UgcGFja2FnZQojClBST1ZJREVTID0g
+InR6ZGF0YSB0emRhdGEtbWlzYyB0emRhdGEtcG9zaXggdHpkYXRhLXJpZ2h0IHR6ZGF0YS1hZnJp
+Y2EgXAogICAgdHpkYXRhLWFtZXJpY2FzIHR6ZGF0YS1hbnRhcmN0aWNhIHR6ZGF0YS1hcmN0aWMg
+dHpkYXRhLWFzaWEgXAogICAgdHpkYXRhLWF0bGFudGljIHR6ZGF0YS1hdXN0cmFsaWEgdHpkYXRh
+LWV1cm9wZSB0emRhdGEtcGFjaWZpYyIKClJQUk9WSURFUyA9ICJ0emRhdGEiCgpQQUNLQUdFUyA9
+ICJ0emRhdGEgdHpkYXRhLW1pc2MgdHpkYXRhLXBvc2l4IHR6ZGF0YS1yaWdodCB0emRhdGEtYWZy
+aWNhIFwKICAgIHR6ZGF0YS1hbWVyaWNhcyB0emRhdGEtYW50YXJjdGljYSB0emRhdGEtYXJjdGlj
+IHR6ZGF0YS1hc2lhIFwKICAgIHR6ZGF0YS1hdGxhbnRpYyB0emRhdGEtYXVzdHJhbGlhIHR6ZGF0
+YS1ldXJvcGUgdHpkYXRhLXBhY2lmaWMiCgpGSUxFU190emRhdGEtYWZyaWNhICs9ICIvdXNyL3No
+YXJlL3pvbmVpbmZvL0FmcmljYS8qIgpSUFJPVklERVNfdHpkYXRhLWFmcmljYSA9ICJ0emRhdGEt
+YWZyaWNhIgoKRklMRVNfdHpkYXRhLWFtZXJpY2FzICs9ICIvdXNyL3NoYXJlL3pvbmVpbmZvL0Ft
+ZXJpY2EvKiAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9VUy8qICAgICAg
+ICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vQnJhemlsLyog
+ICAgICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0NhbmFkYS8q
+ICAgICAgICAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9NZXhpY28v
+KiAgICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vQ2hpbGUv
+KiIKUlBST1ZJREVTX3R6ZGF0YS1hbWVyaWNhcyA9ICJ0emRhdGEtYW1lcmljYXMiCgpGSUxFU190
+emRhdGEtYW50YXJjdGljYSArPSAiL3Vzci9zaGFyZS96b25laW5mby9BbnRhcmN0aWNhLyoiClJQ
+Uk9WSURFU190emRhdGEtYW50YXJjdGljYSA9ICJ0emRhdGEtYW50YXJjdGljYSIKCkZJTEVTX3R6
+ZGF0YS1hcmN0aWMgKz0gIi91c3Ivc2hhcmUvem9uZWluZm8vQXJjdGljLyoiClJQUk9WSURFU190
+emRhdGEtYXJjdGljID0gInR6ZGF0YS1hcmN0aWMiCgpGSUxFU190emRhdGEtYXNpYSArPSAiL3Vz
+ci9zaGFyZS96b25laW5mby9Bc2lhLyogICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hh
+cmUvem9uZWluZm8vSW5kaWFuLyogICAgICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3No
+YXJlL3pvbmVpbmZvL01pZGVhc3QvKiIKUlBST1ZJREVTX3R6ZGF0YS1hc2lhID0gInR6ZGF0YS1h
+c2lhIgoKRklMRVNfdHpkYXRhLWF0bGFudGljICs9ICIvdXNyL3NoYXJlL3pvbmVpbmZvL0F0bGFu
+dGljLyoiClJQUk9WSURFU190emRhdGEtYXRsYW50aWMgPSAidHpkYXRhLWF0bGFudGljIgoKRklM
+RVNfdHpkYXRhLWF1c3RyYWxpYSArPSAiL3Vzci9zaGFyZS96b25laW5mby9BdXN0cmFsaWEvKiIK
+UlBST1ZJREVTX3R6ZGF0YS1hdXN0cmFsaWEgPSAidHpkYXRhLWF1c3RyYWxpYSIKCkZJTEVTX3R6
+ZGF0YS1ldXJvcGUgKz0gIi91c3Ivc2hhcmUvem9uZWluZm8vRXVyb3BlLyoiClJQUk9WSURFU190
+emRhdGEtZXVyb3BlID0gInR6ZGF0YS1ldXJvcGUiCgpGSUxFU190emRhdGEtcGFjaWZpYyArPSAi
+L3Vzci9zaGFyZS96b25laW5mby9QYWNpZmljLyoiClJQUk9WSURFU190emRhdGEtcGFjaWZpYyA9
+ICJ0emRhdGEtcGFjaWZpYyIKCkZJTEVTX3R6ZGF0YS1wb3NpeCArPSAiL3Vzci9zaGFyZS96b25l
+aW5mby9wb3NpeC8qIgpSUFJPVklERVNfdHpkYXRhLXBvc2l4ID0gInR6ZGF0YS1wb3NpeCIKCkZJ
+TEVTX3R6ZGF0YS1yaWdodCArPSAiL3Vzci9zaGFyZS96b25laW5mby9yaWdodC8qIgpSUFJPVklE
+RVNfdHpkYXRhLXJpZ2h0ID0gInR6ZGF0YS1yaWdodCIKCgpGSUxFU190emRhdGEtbWlzYyArPSAi
+L3Vzci9zaGFyZS96b25laW5mby9DdWJhICAgICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNy
+L3NoYXJlL3pvbmVpbmZvL0VneXB0ICAgICAgICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91
+c3Ivc2hhcmUvem9uZWluZm8vRWlyZSAgICAgICAgICAgICAgICAgXAogICAgICAgICAgICAgICAg
+L3Vzci9zaGFyZS96b25laW5mby9GYWN0b3J5ICAgICAgICAgICAgICBcCiAgICAgICAgICAgICAg
+ICAvdXNyL3NoYXJlL3pvbmVpbmZvL0dCLUVpcmUgICAgICAgICAgICAgIFwKICAgICAgICAgICAg
+ICAgIC91c3Ivc2hhcmUvem9uZWluZm8vSG9uZ2tvbmcgICAgICAgICAgICAgXAogICAgICAgICAg
+ICAgICAgL3Vzci9zaGFyZS96b25laW5mby9JY2VsYW5kICAgICAgICAgICAgICBcCiAgICAgICAg
+ICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0lyYW4gICAgICAgICAgICAgICAgIFwKICAgICAg
+ICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vSXNyYWVsICAgICAgICAgICAgICAgXAogICAg
+ICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9KYW1haWNhICAgICAgICAgICAgICBcCiAg
+ICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0phcGFuICAgICAgICAgICAgICAgIFwK
+ICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vS3dhamFsZWluICAgICAgICAgICAg
+XAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9MaWJ5YSAgICAgICAgICAgICAg
+ICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL05hdmFqbyAgICAgICAgICAg
+ICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vUG9sYW5kICAgICAgICAg
+ICAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9Qb3J0dWdhbCAgICAg
+ICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL1NpbmdhcG9yZSAg
+ICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vVHVya2V5IgpS
+UFJPVklERVNfdHpkYXRhLW1pc2MgPSAidHpkYXRhLW1pc2MiCgoKRklMRVNfJHtQTn0gKz0gIi91
+c3Ivc2hhcmUvem9uZWluZm8vUGFjaWZpYy9Ib25vbHVsdSAgICAgXAogICAgICAgICAgICAgICAg
+L3Vzci9zaGFyZS96b25laW5mby9BbWVyaWNhL0FuY2hvcmFnZSAgICBcCiAgICAgICAgICAgICAg
+ICAvdXNyL3NoYXJlL3pvbmVpbmZvL0FtZXJpY2EvTG9zX0FuZ2VsZXMgIFwKICAgICAgICAgICAg
+ICAgIC91c3Ivc2hhcmUvem9uZWluZm8vQW1lcmljYS9EZW52ZXIgICAgICAgXAogICAgICAgICAg
+ICAgICAgL3Vzci9zaGFyZS96b25laW5mby9BbWVyaWNhL0NoaWNhZ28gICAgICBcCiAgICAgICAg
+ICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0FtZXJpY2EvTmV3X1lvcmsgICAgIFwKICAgICAg
+ICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vQW1lcmljYS9DYXJhY2FzICAgICAgXAogICAg
+ICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9BbWVyaWNhL1Nhb19QYXVsbyAgICBcCiAg
+ICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0V1cm9wZS9Mb25kb24gICAgICAgIFwK
+ICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vRXVyb3BlL1BhcmlzICAgICAgICAg
+XAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9BZnJpY2EvQ2Fpcm8gICAgICAg
+ICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0V1cm9wZS9Nb3Njb3cgICAg
+ICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vQXNpYS9EdWJhaSAgICAg
+ICAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9Bc2lhL0thcmFjaGkg
+ICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0FzaWEvRGhha2Eg
+ICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vQXNpYS9CYW5r
+b2sgICAgICAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9Bc2lhL0hv
+bmdfS29uZyAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0FzaWEv
+VG9reW8gICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vQXVz
+dHJhbGlhL1N5ZG5leSAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9Q
+YWNpZmljL05vdW1lYSAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZv
+L0NFVCAgICAgICAgICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWlu
+Zm8vQ1NUNkNEVCAgICAgICAgICAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25l
+aW5mby9FRVQgICAgICAgICAgICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pv
+bmVpbmZvL0VTVCAgICAgICAgICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUv
+em9uZWluZm8vRVNUNUVEVCAgICAgICAgICAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFy
+ZS96b25laW5mby9HQiAgICAgICAgICAgICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3No
+YXJlL3pvbmVpbmZvL0dNVCAgICAgICAgICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Iv
+c2hhcmUvem9uZWluZm8vR01UKzAgICAgICAgICAgICAgICAgXAogICAgICAgICAgICAgICAgL3Vz
+ci9zaGFyZS96b25laW5mby9HTVQtMCAgICAgICAgICAgICAgICBcCiAgICAgICAgICAgICAgICAv
+dXNyL3NoYXJlL3pvbmVpbmZvL0dNVDAgICAgICAgICAgICAgICAgIFwKICAgICAgICAgICAgICAg
+IC91c3Ivc2hhcmUvem9uZWluZm8vR3JlZW53aWNoICAgICAgICAgICAgXAogICAgICAgICAgICAg
+ICAgL3Vzci9zaGFyZS96b25laW5mby9IU1QgICAgICAgICAgICAgICAgICBcCiAgICAgICAgICAg
+ICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL01FVCAgICAgICAgICAgICAgICAgIFwKICAgICAgICAg
+ICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vTVNUICAgICAgICAgICAgICAgICAgXAogICAgICAg
+ICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9NU1Q3TURUICAgICAgICAgICAgICBcCiAgICAg
+ICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL05aICAgICAgICAgICAgICAgICAgIFwKICAg
+ICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vTlotQ0hBVCAgICAgICAgICAgICAgXAog
+ICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9QUkMgICAgICAgICAgICAgICAgICBc
+CiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL1BTVDhQRFQgICAgICAgICAgICAg
+IFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vUk9DICAgICAgICAgICAgICAg
+ICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9ST0sgICAgICAgICAgICAg
+ICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL1VDVCAgICAgICAgICAg
+ICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vVVRDICAgICAgICAg
+ICAgICAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9Vbml2ZXJzYWwg
+ICAgICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL1ctU1UgICAg
+ICAgICAgICAgICAgIFwKICAgICAgICAgICAgICAgIC91c3Ivc2hhcmUvem9uZWluZm8vV0VUICAg
+ICAgICAgICAgICAgICAgXAogICAgICAgICAgICAgICAgL3Vzci9zaGFyZS96b25laW5mby9adWx1
+ICAgICAgICAgICAgICAgICBcCiAgICAgICAgICAgICAgICAvdXNyL3NoYXJlL3pvbmVpbmZvL0V0
+Yy8qIgoKZG9fY29tcGlsZSAoKSB7CiAgICAgICAgZm9yIHpvbmUgaW4gYWZyaWNhIGFudGFyY3Rp
+Y2EgYXNpYSBhdXN0cmFsYXNpYSBldXJvcGUgbm9ydGhhbWVyaWNhIHNvdXRoYW1lcmljYSBldGNl
+dGVyYSBmYWN0b3J5IHNvbGFyODcgc29sYXI4OCBzb2xhcjg5IGJhY2t3YXJkIHN5c3RlbXYgOyBk
+byBcCiAgICAgICAgICAgICAgICAvdXNyL3NiaW4vemljIC1kICR7V09SS0RJUn0vdXNyL3NoYXJl
+L3pvbmVpbmZvIC1MIC9kZXYvbnVsbCAteSAke1N9L3llYXJpc3R5cGUuc2ggJHtTfS8ke3pvbmV9
+IDsgXAogICAgICAgICAgICAgICAgL3Vzci9zYmluL3ppYyAtZCAke1dPUktESVJ9L3Vzci9zaGFy
+ZS96b25laW5mby9wb3NpeCAtTCAvZGV2L251bGwgLXkgJHtTfS95ZWFyaXN0eXBlLnNoICR7U30v
+JHt6b25lfSA7IFwKICAgICAgICAgICAgICAgIC91c3Ivc2Jpbi96aWMgLWQgJHtXT1JLRElSfS91
+c3Ivc2hhcmUvem9uZWluZm8vcmlnaHQgLUwgJHtTfS9sZWFwc2Vjb25kcyAteSAke1dPUktESVJ9
+L3Vzci9zaGFyZS96b25laW5mby95ZWFyaXN0eXBlLnNoICR7U30vJHt6b25lfSA7IFwKICAgICAg
+ICBkb25lCn0KCmRvX2luc3RhbGwgKCkgewogICAgICAgIGluc3RhbGwgLWQgJHtEfS91c3IgXAog
+ICAgICAgICAgICAgICAgJHtEfS91c3Ivc2hhcmUgXAogICAgICAgICAgICAgICAgJHtEfS91c3Iv
+c2hhcmUvem9uZWluZm8KICAgICAgICBjcCAtYSAke1N9L3VzciAke0R9Lwp9Cg==
 
-> Apparently it never caught on.  Any ideas on
-> satisfying Classpath's (gconf >= 2.11.2) requirement?
-> 
-> Andrew
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFFyOdnMkyGM64RGpERAq4wAKCWs+i2iw+HZDxLaR4gWMypIqqdiQCeNI9z
-acu6IesTzhpA1rEaARjBxqM=
-=hweW
------END PGP SIGNATURE-----
-
-
+------=_Part_1056_29757513.1170854066542--
