@@ -1,23 +1,28 @@
-Received: from [213.39.232.198] (helo=moskovskaya.fh-wedel.de)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <di@mail.fh-wedel.de>) id 1HF7V3-00033A-GQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Feb 2007 12:31:37 +0100
-Received: from di by moskovskaya.fh-wedel.de with local (Exim 4.50)
-	id 1HF7V2-0000VB-T4 for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Feb 2007 12:31:36 +0100
-Date: Thu, 8 Feb 2007 12:31:36 +0100
-From: Martin Dietze <di@fh-wedel.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070208113136.GA1408@fh-wedel.de>
-Mime-Version: 1.0
-X-PGP-Fingerprint: C98D 598A DA73 DF9F 610D  632E 4468 B911 BF9B 8D95
-X-PGP-Key-ID: 0xBF9B8D95
-User-Agent: Mutt/1.5.9i
-Sender: Martin Dietze <di@mail.fh-wedel.de>
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: di@mail.fh-wedel.de
-Subject: Thread-support in perl-native often breaks libintl-perl
+	(envelope-from <mickey@vanille-media.de>)
+	id 1HFBwO-0004BC-UY; Thu, 08 Feb 2007 17:16:09 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 48ACF28C012; Thu,  8 Feb 2007 17:11:02 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from [192.168.2.128] (e180141030.adsl.alicedsl.de [85.180.141.30])
+	by srv043.dedi23.de (Postfix) with ESMTP id E3A7B28C011;
+	Thu,  8 Feb 2007 17:10:58 +0100 (CET)
+Date: Thu, 8 Feb 2007 17:16:07 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <27757870.20070208171607@vanille-media.de>
+To: "florian commit" <openembedded-commits@lists.openembedded.org>
+In-Reply-To: <E1HFBa1-0003l3-Va@linuxtogo.org>
+References: <E1HFBa1-0003l3-Va@linuxtogo.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev gtk+: Add some patches to improve focus control using keyboard for 2.6.10.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,40 +36,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Feb 2007 11:31:38 -0000
+X-List-Received-Date: Thu, 08 Feb 2007 16:16:10 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-Hi,
+florian commit wrote:
+> gtk+: Add some patches to improve focus control using keyboard for 2.6.10.
 
- on most platforms thread support is turned off for the
-cross-compiled perl packages. However it is always turned 
-on in the perl-native package. Since libraries like
-libintl-perl depend on perl-native since they include their
-headers from staging/[my-platform]-linux/lib/perl5 we get
-an inconsistent configuration: the shared lib gettext_xs.so
-is cross-compiled with headers with thread support turned
-on while the actual (non-native) perl has it turned off. In
-the end libintl-perl will not work:
+Can you elaborate on that? Where do they come from, btw.?
 
-| /var/bin/perl: relocation error: /var/lib/perl5/auto/Locale/gettext_xs/gettext_xs.so: undefined symbol: Perl_Gthr_key_ptr
+Regards,
 
-Removing the `-Dusethreads' from the perl-native recipe solves
-this problem, but will it cause problems for others?
-
-BTW, where is bugs.openembedded.org - it has not been up for a 
-longer while...
-
-Cheers,
-
-Martin
-
+:M:
 -- 
--------------- Martin Dietze --------------- / -- 4G Systeme GmbH Hamburg ---
--- martin@the-little-red-haired-girl.org -- / ---- dietze@4g-systems.com ----
-------------- / http://herbert.the-little-red-haired-girl.org / -------------
-=+= 
-- Are you attempting to tell me my duty, sir?
-- No. Just having fun trying to guess what they are.
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
