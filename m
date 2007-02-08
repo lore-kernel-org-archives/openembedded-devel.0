@@ -1,28 +1,26 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1HFBwO-0004BC-UY; Thu, 08 Feb 2007 17:16:09 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 48ACF28C012; Thu,  8 Feb 2007 17:11:02 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from [192.168.2.128] (e180141030.adsl.alicedsl.de [85.180.141.30])
-	by srv043.dedi23.de (Postfix) with ESMTP id E3A7B28C011;
-	Thu,  8 Feb 2007 17:10:58 +0100 (CET)
-Date: Thu, 8 Feb 2007 17:16:07 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.95.6) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <27757870.20070208171607@vanille-media.de>
-To: "florian commit" <openembedded-commits@lists.openembedded.org>
-In-Reply-To: <E1HFBa1-0003l3-Va@linuxtogo.org>
-References: <E1HFBa1-0003l3-Va@linuxtogo.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>)
+	id 1HFCv2-0006VI-MT; Thu, 08 Feb 2007 18:18:48 +0100
+Received: from [130.89.6.180] (vpn006180.vpn.utwente.nl [130.89.6.180])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l18HIhox006099; Thu, 8 Feb 2007 18:18:43 +0100
+Message-ID: <45CB5B67.1050001@dominion.kabel.utwente.nl>
+Date: Thu, 08 Feb 2007 18:18:31 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev gtk+: Add some patches to improve focus control using keyboard for 2.6.10.
+To: openembedded-devel@openembedded.org
+References: <E1HFBZs-0003jR-57@linuxtogo.org>
+In-Reply-To: <E1HFBZs-0003jR-57@linuxtogo.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] org.oe.dev bitbake.conf: Add GPE Phone Edition mirror.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,20 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Feb 2007 16:16:10 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 08 Feb 2007 17:18:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-florian commit wrote:
-> gtk+: Add some patches to improve focus control using keyboard for 2.6.10.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Can you elaborate on that? Where do they come from, btw.?
+florian commit schreef:
+> bitbake.conf: Add GPE Phone Edition mirror.
 
-Regards,
+>  GPE_MIRROR = "http://gpe.linuxtogo.org/download/source"
+>  GPEPHONE_MIRROR = "http://gpephone.linuxtogo.org/download/gpephone"
+>  GPE_SVN = "svn://projects.linuxtogo.org/svn/gpe/trunk/base;module=${PN}"
+> +GPEPHONE_MIRROR = "http://gpephone.linuxtogo.org/download"
+> +GPEPHONE_SVN = "svn://projects.linuxtogo.org/svn/gpephone/trunk/source;module=${PN}"
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Ehm.... Why did you add another (wrong) GPEPHONE_MIRROR? The one present was working
+pretty well.
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFy1tnMkyGM64RGpERAgUjAKCFiyAZq6loocZ76UHhlUVpw+19LQCfRzSN
+7OTIhn+V3LzKtp1WDLecsdM=
+=f2tu
+-----END PGP SIGNATURE-----
 
 
