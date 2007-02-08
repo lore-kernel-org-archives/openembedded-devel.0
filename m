@@ -1,24 +1,23 @@
-Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
+Received: from [213.39.232.198] (helo=moskovskaya.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mattjreimer@gmail.com>) id 1HEyJz-0006hO-WE
+	(envelope-from <di@mail.fh-wedel.de>) id 1HF7V3-00033A-GQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Feb 2007 02:43:36 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so345768ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Feb 2007 17:43:35 -0800 (PST)
-Received: by 10.78.204.7 with SMTP id b7mr3560151hug.1170899015248;
-	Wed, 07 Feb 2007 17:43:35 -0800 (PST)
-Received: by 10.78.184.6 with HTTP; Wed, 7 Feb 2007 17:43:34 -0800 (PST)
-Message-ID: <f383264b0702071743s3a37ae9dxfebadd9e88771dd3@mail.gmail.com>
-Date: Wed, 7 Feb 2007 17:43:34 -0800
-From: "Matt Reimer" <mattjreimer@gmail.com>
+	Thu, 08 Feb 2007 12:31:37 +0100
+Received: from di by moskovskaya.fh-wedel.de with local (Exim 4.50)
+	id 1HF7V2-0000VB-T4 for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Feb 2007 12:31:36 +0100
+Date: Thu, 8 Feb 2007 12:31:36 +0100
+From: Martin Dietze <di@fh-wedel.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <f34f85580702070642n5c91bdc1xf907f18940ae45e4@mail.gmail.com>
-MIME-Version: 1.0
-References: <f34f85580702070514u42b2b887qf416466c5b7bf83d@mail.gmail.com>
-	<1170854529.3226.1.camel@lieve>
-	<f34f85580702070642n5c91bdc1xf907f18940ae45e4@mail.gmail.com>
-Subject: Re: tzdata.bb
+Message-ID: <20070208113136.GA1408@fh-wedel.de>
+Mime-Version: 1.0
+X-PGP-Fingerprint: C98D 598A DA73 DF9F 610D  632E 4468 B911 BF9B 8D95
+X-PGP-Key-ID: 0xBF9B8D95
+User-Agent: Mutt/1.5.9i
+Sender: Martin Dietze <di@mail.fh-wedel.de>
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: di@mail.fh-wedel.de
+Subject: Thread-support in perl-native often breaks libintl-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,21 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Feb 2007 01:43:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 08 Feb 2007 11:31:38 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On 2/7/07, Todd Blumer <sdgvulpes@gmail.com> wrote:
-> On 2/7/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> >
-> > * don't use cp -a, that breaks on non-GNU buildsystems
-> >
->
-> Suggestions for replacement?
+Hi,
 
-For FreeBSD "cp -pR" is close.
+ on most platforms thread support is turned off for the
+cross-compiled perl packages. However it is always turned 
+on in the perl-native package. Since libraries like
+libintl-perl depend on perl-native since they include their
+headers from staging/[my-platform]-linux/lib/perl5 we get
+an inconsistent configuration: the shared lib gettext_xs.so
+is cross-compiled with headers with thread support turned
+on while the actual (non-native) perl has it turned off. In
+the end libintl-perl will not work:
 
-Matt
+| /var/bin/perl: relocation error: /var/lib/perl5/auto/Locale/gettext_xs/gettext_xs.so: undefined symbol: Perl_Gthr_key_ptr
+
+Removing the `-Dusethreads' from the perl-native recipe solves
+this problem, but will it cause problems for others?
+
+BTW, where is bugs.openembedded.org - it has not been up for a 
+longer while...
+
+Cheers,
+
+Martin
+
+-- 
+-------------- Martin Dietze --------------- / -- 4G Systeme GmbH Hamburg ---
+-- martin@the-little-red-haired-girl.org -- / ---- dietze@4g-systems.com ----
+------------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
+- Are you attempting to tell me my duty, sir?
+- No. Just having fun trying to guess what they are.
 
 
