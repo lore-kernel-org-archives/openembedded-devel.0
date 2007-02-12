@@ -1,23 +1,26 @@
-Received: from [64.233.182.187] (helo=nf-out-0910.google.com)
+Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <slapinid@gmail.com>) id 1HGM4p-0007aw-VP
+	(envelope-from <rod@whitby.id.au>) id 1HGVeA-0004xa-2u
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Feb 2007 22:17:40 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so1739283nfc
+	Mon, 12 Feb 2007 08:31:00 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 857DA1AAA63
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Feb 2007 13:17:39 -0800 (PST)
-Received: by 10.82.155.10 with SMTP id c10mr8267350bue.1171228658801;
-	Sun, 11 Feb 2007 13:17:38 -0800 (PST)
-Received: from ?172.21.138.241? ( [217.66.145.217])
-	by mx.google.com with ESMTP id x24sm26675722nfb.2007.02.11.13.17.36;
-	Sun, 11 Feb 2007 13:17:38 -0800 (PST)
-Message-ID: <45CF87EA.1020309@gmail.com>
-Date: Mon, 12 Feb 2007 00:17:30 +0300
-From: Sergey Lapin <slapinid@gmail.com>
-User-Agent: Icedove 1.5.0.9 (X11/20061220)
+	Mon, 12 Feb 2007 02:30:43 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by out1.internal (MEProxy); Mon, 12 Feb 2007 02:30:43 -0500
+X-Sasl-enc: 9eZbJXGzPATHTlYXPf5mg4ph0hQTLbBMJPkZ57O4pCY4 1171265443
+Received: from [192.168.0.11] (unknown [58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id C1538112EE
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Feb 2007 02:30:42 -0500 (EST)
+Message-ID: <45D01799.2020101@whitby.id.au>
+Date: Mon, 12 Feb 2007 18:00:33 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: getting core files
+Subject: Major changes to ixp4xx and nslu2 machines, and slugos distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,18 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Feb 2007 21:17:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 12 Feb 2007 07:31:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi!
-What should be done in image to make core dumps work?
+The "ixp4xx" OE machine selection is now deprecated, and will tell you
+to either use "ixp4xxbe" or "ixp4xxle" if you try to use it.
 
-I set
-  sysctl -w kernel.core_uses_pid=1 kernel.core_pattern=/oldroot/%e.%p.core
+The "nslu2" OE machine selection is now deprecated, and will tell you to
+either use "nslu2be" or "nslu2le" if you try to use it.
 
-do kill -11 <somepid> and see no cores in /tmp.
-Any ideas? (ulimit -c is unlimited in startup scripts)
+The "openslug" and "debianslug" OE distro selections are now deprecated
+- you should replace them with "slugos".
+
+SlugOS packages currently end in _arm.ipk or _armeb.ipk - this has now
+changed to _armv5te.ipk and _armv5teb.ipk
+
+The "ucslugc" distro is effectively unmaintained (and has been for a
+long time).  If no-one steps up to maintain it, I'll be moving it to the
+obsolete directory.
+
+-- Rod Whitby
+-- NSLU2-Linux Project Lead
 
 
 
