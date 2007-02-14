@@ -1,22 +1,29 @@
-Received: from [64.62.194.115] (helo=netgate.com)
+Received: from [195.121.247.12] (helo=psmtp03.wxs.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <jim@netgate.com>) id 1HHT0N-0004w6-8h
+	(envelope-from <gerwin@vanderkruis.net>) id 1HHTNp-0005HX-1M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Feb 2007 23:53:39 +0100
-Received: from [192.168.2.198] (rrcs-67-52-77-54.west.biz.rr.com [67.52.77.54])
-	by netgate.com (Postfix) with ESMTP id 0B1B228006A;
-	Wed, 14 Feb 2007 14:53:37 -0800 (PST)
-In-Reply-To: <45D38F2C.1030700@dominion.kabel.utwente.nl>
-References: <1171051575.3886.12.camel@localhost.localdomain>	<200702141311.17165.openembedded@hrw.one.pl>	<1171489223.1692.501.camel@localhost.localdomain>	<1171489873.11033.7.camel@localhost.localdomain>	<45D38BB9.5070709@am.sony.com>
+	Thu, 15 Feb 2007 00:17:53 +0100
+Received: from [10.0.0.152] (ip5457b30e.direct-adsl.nl [84.87.179.14])
+	by psmtp03.wxs.nl
+	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006))
+	with ESMTP id <0JDH00BGC7D0EH@psmtp03.wxs.nl> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	15 Feb 2007 00:17:26 +0100 (MET)
+Date: Thu, 15 Feb 2007 00:17:17 +0100
+From: gerwin van der kruis <gerwin@vanderkruis.net>
+In-reply-to: <6385CB83-3092-471F-B579-BDD8A2A65133@netgate.com>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <1171495037.11033.19.camel@localhost.localdomain>
+MIME-version: 1.0
+X-Mailer: Evolution 2.8.3 (2.8.3-1.fc6)
+References: <1171051575.3886.12.camel@localhost.localdomain>
+	<200702141311.17165.openembedded@hrw.one.pl>
+	<1171489223.1692.501.camel@localhost.localdomain>
+	<1171489873.11033.7.camel@localhost.localdomain>
+	<45D38BB9.5070709@am.sony.com>
 	<96763D62-00DF-440D-8688-E237E1CE0BB8@netgate.com>
 	<45D38F2C.1030700@dominion.kabel.utwente.nl>
-Mime-Version: 1.0 (Apple Message framework v752.3)
-Message-Id: <6385CB83-3092-471F-B579-BDD8A2A65133@netgate.com>
-From: Jim Thompson <jim@netgate.com>
-Date: Wed, 14 Feb 2007 12:53:21 -1000
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-Cc: openembedded-devel@openembedded.org
+	<6385CB83-3092-471F-B579-BDD8A2A65133@netgate.com>
 Subject: Re: OE Booth during fosdem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,74 +38,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Feb 2007 22:53:40 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Feb 2007 23:17:53 -0000
+Content-type: text/plain
+Content-transfer-encoding: 7BIT
+
+Op woensdag 14-02-2007 om 12:53 uur [tijdzone -1000], schreef Jim
+Thompson:
+ 
+> And I'm willing to throw cash, hardware and time at this.
+> 
+> Yes, we sell WRAP boards, but I'm not looking to get a bunch-o-free  
+> development out of the process.  (We sell a Gateworks ixp42x board  
+> too, just to be perfectly honest.)
+> 
+> Years ago, I ran (and owned) 'musenki' (google for it or look here:  
+> http://he-colo.netgate.com/~jim/Musenki/.  We had build a  set of  
+> Motorola 8245/8241 boards, and I'd made linux run on them.  I  
+> remember spending a horrific amount of time with a (very) early  
+> version of "buildroot".  OE is so much more sophisticated that I'm a  
+> bit taken aback.
+> 
+> The OE learning curve is still quite steep, but I think it would be  
+> less steep with a) a bit more documentation and b) an EZ way to start  
+> creating "little distros" that
+> run on PCs using it.
+
+I remember we had this discussion before , the problem is the
+bootloader, for example grub requires some extra handlings to get 
+installed probarly. 
+
+I also experimented a bit with disk on modules which were much 
+faster than the compact flash and much cheaper as well. 
+
+I think if you write a script which automate the installation of for
+example grub and than copies automatically the files over to cf you are
+finished , I did it once long time ago for an embedded voip pabx. 
+
+As Koen said I am working on x86 projects like wifi-radio (with a
+mini-itx board and some small additions) a set top box and a thin
+client.So we are working on it !!
+
+I will have a look if I still can find the software I made that time 
+for putting the image directly on the flash (I wrote it to produce some
+goods)
+
+Regards, 
+
+Gerwin 
+ 
 
 
-On Feb 14, 2007, at 12:37 PM, Koen Kooi wrote:
-
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Jim Thompson schreef:
-
->> Ya know, I'd consider donating hardware (see www.netgate.com for what
->> we have) and/or cash if someone would put up a
->> "build the bootable ISO so you can boot-n-install an OE image on a
->> HD on ye-olde-random PeeCee" set of patches, or even a recipe for  
->> same
->>
->> Or, equivalently, an image (complete with boot sector) that one could
->> DD onto a CF card or actual IDE drive that would boot a given root
->> image on ye-olde-PeeCee.
->>
->> OpenEmbedded would go a lot faster if people could experiment on
->> garden-variety PCs rather than go through the "fun" of getting it up-
->> n-running on more esoteric hardware.
->
-> Marcin, Jamie, Phil, Gerwin and I are using OE to build for vairous  
-> x86 machines
-> (MACHINE={guinness,epia,x86). For some graphic pleasure:
-> http://dominion.kabel.utwente.nl/koen/cms/madness
-
-I know about the guinness and wrap MACHINEs.
-
-What I'm looking for is a short-cut to getting a distro *onto* the disk.
-
-Yes, I'm sure most people could "figure it out" with some time and  
-effort, but what I want is to make it easier.
-
-If OE would build an x86 disk image that could be 'dd'-ed to a CF  
-card, then building OE images for Soekris or WRAP boards would be EZ.
-
-If OE would build an x86 disk image that could be 'dd'-ed to an IDE  
-drive (likely the same as above), then building OE images for  
-"ordinary PCs" would be trivial.
-
-If OE would build a bootable ISO image that could partition and label  
-an attached IDE drive, then install the image *onto* that drive, ....  
-well, I could see all *sorts* of uses for that.
-
-And I'm willing to throw cash, hardware and time at this.
-
-Yes, we sell WRAP boards, but I'm not looking to get a bunch-o-free  
-development out of the process.  (We sell a Gateworks ixp42x board  
-too, just to be perfectly honest.)
-
-Years ago, I ran (and owned) 'musenki' (google for it or look here:  
-http://he-colo.netgate.com/~jim/Musenki/.  We had build a  set of  
-Motorola 8245/8241 boards, and I'd made linux run on them.  I  
-remember spending a horrific amount of time with a (very) early  
-version of "buildroot".  OE is so much more sophisticated that I'm a  
-bit taken aback.
-
-The OE learning curve is still quite steep, but I think it would be  
-less steep with a) a bit more documentation and b) an EZ way to start  
-creating "little distros" that
-run on PCs using it.
-
-Jim
 
 
 
