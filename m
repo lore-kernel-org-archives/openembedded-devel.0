@@ -1,22 +1,22 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <freyther@gmx.net>) id 1HHRUJ-0000fF-7J
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Feb 2007 22:16:28 +0100
-Received: (qmail invoked by alias); 14 Feb 2007 21:16:26 -0000
-X-Provags-ID: V01U2FsdGVkX187fctVkck79YlrZK9RxOt4rdHW+nI5viLxhf/iHV
-	sBjQ==
-Mime-Version: 1.0 (Apple Message framework v752.3)
-Message-Id: <41B2A1A2-D92C-4B4B-B709-FBB9B26AE564@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Wed, 14 Feb 2007 22:16:19 +0100
-To: bitbake-dev <bitbake-dev@lists.berlios.de>
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
-Cc: openembedded-users@lists.openembedded.org,
-	Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-Subject: [ANN] BitBake 1.6.4 released and ready for consumption
+Received: from [62.142.5.108] (helo=emh02.mail.saunalahti.fi)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <philippedeswert@scarlet.be>) id 1HHRrv-0002UF-Le
+	for openembedded-devel@openembedded.org; Wed, 14 Feb 2007 22:40:51 +0100
+Received: from [192.168.0.105] (a91-153-17-113.elisa-laajakaista.fi
+	[91.153.17.113])
+	by emh02.mail.saunalahti.fi (Postfix) with ESMTP id 561722BF37
+	for <openembedded-devel@openembedded.org>;
+	Wed, 14 Feb 2007 23:40:50 +0200 (EET)
+From: Philippe De Swert <philippedeswert@scarlet.be>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200702141311.17165.openembedded@hrw.one.pl>
+References: <1171051575.3886.12.camel@localhost.localdomain>
+	<200702141311.17165.openembedded@hrw.one.pl>
+Date: Wed, 14 Feb 2007 23:40:23 +0200
+Message-Id: <1171489223.1692.501.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+Subject: Re: OE Booth during fosdem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,29 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Feb 2007 21:16:29 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Wed, 14 Feb 2007 21:40:52 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hey Pals,
+Hi,
 
-thanks to the hard labor of our BitBake MVP Richard and Marcin I'm  
-glad to do the release of BitBake 1.6.4.
+On Wed, 2007-02-14 at 13:11 +0100, Marcin Juszkiewicz wrote:
 
-This is a stable release from the stable branch. It has been tested  
-by various people for some days, only the packaging has not  
-undergone  testing.
+> > Is it a good idea to make a hardware donation box where companies
+> > donate hardware that we port to openembedded ?
+> 
+> idea like idea - we need to consider how to server such requests
 
-This release is featuring updates to the CVS and SVN fetcher and some  
-updates to the interactive shell.
+Do think of promoting this beforehand. I don't think there will be many
+people going: "Oh I have this ${DEVICE} in my bag somewhere with all
+cables and power supply. Please have it." People usually don't carry
+surplus HW with them. A little money donation box might be a good idea
+as well. It is easier to organize and people usually carry money to
+FOSDEM (you just need to convince them to give it to you instead of
+O'Reilly :-)
 
-It can be downloaded from the usual [1] place. So enjoy this release
+Cheers,
 
-h.
+Philippe
 
-[1] https://developer.berlios.de/project/showfiles.php?group_id=2701
+PS: /me hopes to have some time to drop by and say hello
 
-20111843897cad38a739321467d4f32b1528682f  bitbake-1.6.4.tar.gz
-MD5 (bitbake-1.6.4.tar.gz) = dbf6ca1f09e04b85b66aca2441696c4f
 
 
