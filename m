@@ -1,30 +1,18 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <lenehan@twibble.org>) id 1HH91h-0007xV-SB
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Feb 2007 02:33:42 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 728F5207A5;
-	Wed, 14 Feb 2007 12:33:40 +1100 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 02860-04; Wed, 14 Feb 2007 12:33:38 +1100 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id DB07418350;
-	Wed, 14 Feb 2007 12:33:38 +1100 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id E1A16B701CA; Wed, 14 Feb 2007 12:34:42 +1100 (EST)
-Date: Wed, 14 Feb 2007 12:34:42 +1100
-From: Jamie Lenehan <lenehan@twibble.org>
-To: Martin Dietze <di@fh-wedel.de>
-Message-ID: <20070214013442.GA1347@twibble.org>
-References: <20070208113136.GA1408@fh-wedel.de>
+Received: from [59.160.240.215] (helo=rediffmail.com)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <suhas7860@rediffmail.com>) id 1HHCdD-0007li-97
+	for openembedded-devel@openembedded.org; Wed, 14 Feb 2007 06:24:39 +0100
+Received: (qmail 18455 invoked by uid 510); 14 Feb 2007 05:21:34 -0000
+Comment: DomainKeys? See http://antispam.yahoo.com/domainkeys
+Date: 14 Feb 2007 05:21:34 -0000
+Message-ID: <20070214052134.18453.qmail@webmail90.rediffmail.com>
+Received: from unknown (221.243.162.19) by rediffmail.com via HTTP;
+	14 feb 2007 05:21:34 -0000
 MIME-Version: 1.0
-In-Reply-To: <20070208113136.GA1408@fh-wedel.de>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Thread-support in perl-native often breaks libintl-perl
+From: "Mr. Suhas Ghosh" <suhas7860@rediffmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: busy box failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,41 +26,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Feb 2007 01:33:42 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 14 Feb 2007 05:24:39 -0000
+Content-Type: text/plain;
+	charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Thu, Feb 08, 2007 at 12:31:36PM +0100, Martin Dietze wrote:
-> Hi,
-> 
->  on most platforms thread support is turned off for the
-> cross-compiled perl packages. However it is always turned 
-> on in the perl-native package. Since libraries like
-> libintl-perl depend on perl-native since they include their
-> headers from staging/[my-platform]-linux/lib/perl5 we get
-> an inconsistent configuration: the shared lib gettext_xs.so
-> is cross-compiled with headers with thread support turned
-> on while the actual (non-native) perl has it turned off. In
-> the end libintl-perl will not work:
-> 
-> | /var/bin/perl: relocation error: /var/lib/perl5/auto/Locale/gettext_xs/gettext_xs.so: undefined symbol: Perl_Gthr_key_ptr
-> 
-> Removing the `-Dusethreads' from the perl-native recipe solves
-> this problem, but will it cause problems for others?
+Hi
+I am trying to make a simple kernel for ARM926EJ-S using=20
+OEM..I used simpad machine name and generic distro.
+I have already got success to create bootstrap image using this configurat=
+ion in my i386 32 bits laptop.When I treied to run same conf in my this X86=
+_64 I got this following error
+I used:-
+monotone-0.31-2.fc5 in X86_64 but in my i386 32 bit laptop I uesed 0.32 ve=
+rsion.
+Here is my machine configuration(simpad.conf)
+-----------------------------------------------
+MACHINE_KERNEL_VERSION ?=3D "2.4"
+require conf/machine/include/simpad-${MACHINE_KERNEL_VERSION}.conf
 
-For sh4 I turned on threading for perl which is probably why I didn't
-have this issue. I can't remember if I turned it on because of this
-issue or if I needed it for somethings else. It probably doesn't
-matter much anymore for my situation because I've since rewrote the
-perl management application I was working on in C, so I only use perl
-a lot of simpler things now.
+TARGET_ARCH =3D "arm"
+BOOTSTRAP_EXTRA_RDEPENDS +=3D "kernel"
+#This is needed for the ramdisk script to work
+BOOTSTRAP_EXTRA_RDEPENDS +=3D "e2fsprogs-mke2fs"
+SERIAL_CONSOLE =3D "ttySA0 115200 vt100"
+USE_DEVFS =3D "1"
+USE_VT =3D "0"
+require conf/machine/include/tune-strongarm.conf
+--------------------------------------------------=20
+I give the command
+[suhas@l5ac197 build]$ bitbake -D bootstrap-image
+After long time I got the following error
+make[1]: Entering directory `/home/suhas/openembed/build/tmp/work/arm-linu=
+x/busybox-1.2.1-r11/busybox-1.2.1'
+  HOSTLINK scripts/bb_mkdep
+  GEN .depend
+  LINK busybox_unstripped
+/home/suhas/openembed/build/tmp/work/arm-linux/busybox-1.2.1-r11/busybox-1=
+.2.1/coreutils/df.c: In function &#65533;df_main&#65533;:
+/home/suhas/openembed/build/tmp/work/arm-linux/busybox-1.2.1-r11/busybox-1=
+.2.1/coreutils/df.c:119: warning: passing argument 1 of &#65533;find_block_=
+device&#65533; discards qualifiers from pointer target type
+/home/suhas/openembed/build/tmp/work/arm-linux/busybox-1.2.1-r11/busybox-1=
+.2.1/networking/udhcp/dhcpc.c: In function &#65533;udhcpc_main&#65533;:
+/home/suhas/openembed/build/tmp/work/arm-linux/busybox-1.2.1-r11/busybox-1=
+.2.1/networking/udhcp/dhcpc.c:180: warning: pointer targets in passing argu=
+ment 1 of &#65533;__builtin_strncpy&#65533; differ in signedness
+arm-linux-gcc: Internal error: Killed (program cc1)
+Please submit a full bug report.
+See <URL:http://gcc.gnu.org/bugs.html> for instructions.
+make[1]: *** [busybox_unstripped] Error 1
+make[1]: Leaving directory `/home/suhas/openembed/build/tmp/work/arm-linux=
+/busybox-1.2.1-r11/busybox-1.2.1'
+make: *** [_all] Error 2
++ die 'oe_runmake failed'
++ oefatal 'oe_runmake failed'
++ echo FATAL: 'oe_runmake failed'
+FATAL: oe_runmake failed
++ exit 1
+ERROR: function do_compile failed
+ERROR: see log in /home/suhas/openembed/build/tmp/work/arm-linux/busybox-1=
+.2.1-r11/temp/log.do_compile.18686
+NOTE: Task failed: /home/suhas/openembed/build/tmp/work/arm-linux/busybox-=
+1.2.1-r11/temp/log.do_compile.18686
+NOTE: package busybox-1.2.1-r11: task do_compile: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package busybox-1.2.1: failed
+ERROR: Build of bootstrap-image failed.
+So please help me what to do now.
+            Thanks in advance
+               Suhas
 
-I agree that we probably need to make perl and perl-native agree on
-this. If everything appears to be ok with it turned off in
-perl-native then I'd be fine with that (and would turn it of for the
-sh4 perl as well.)
-
--- 
- Jamie Lenehan <lenehan@twibble.org>
-
-
+From gerwin@vanderkruis.net Wed Feb 14 07:43:26 2007
+Received: from [195.121.247.4] (helo
