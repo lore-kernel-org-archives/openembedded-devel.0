@@ -1,20 +1,28 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HHIyW-0003zT-Oh
-	for openembedded-devel@openembedded.org; Wed, 14 Feb 2007 13:11:04 +0100
-Received: (qmail 18690 invoked by uid 813007); 14 Feb 2007 12:11:01 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 14 Feb 2007 12:11:01 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: gerwin van der kruis <gerwin@vanderkruis.net>
-Date: Wed, 14 Feb 2007 13:11:14 +0100
-User-Agent: KMail/1.9.6
+	(envelope-from <mickey@vanille-media.de>) id 1HHKs8-0003aS-8s
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Feb 2007 15:12:36 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 6862328C012; Wed, 14 Feb 2007 15:07:16 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
+Received: from [192.168.2.128] (e180184207.adsl.alicedsl.de [85.180.184.207])
+	by srv043.dedi23.de (Postfix) with ESMTP id 03C6F28C011;
+	Wed, 14 Feb 2007 15:07:12 +0100 (CET)
+Date: Wed, 14 Feb 2007 15:12:33 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <523051801.20070214151233@vanille-media.de>
+To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+In-Reply-To: <200702141311.17165.openembedded@hrw.one.pl>
 References: <1171051575.3886.12.camel@localhost.localdomain>
-In-Reply-To: <1171051575.3886.12.camel@localhost.localdomain>
+	<200702141311.17165.openembedded@hrw.one.pl>
 MIME-Version: 1.0
-Message-Id: <200702141311.17165.openembedded@hrw.one.pl>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: OE Booth during fosdem
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -30,47 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Feb 2007 12:11:05 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 14 Feb 2007 14:12:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=B1tek, 9 lutego 2007, gerwin van der kruis napisa=B3:
+Could anyone skilled in Wiki markup add a table for the booth
+attendance? Something like
 
-> After a discussion on irc , it was decided that I will take the wheel
-> for the booth on fosdem.
+---------Saturday|Sunday|
+- 10-12
+- 12-14
+- 14-16
+- 16-18
 
-> Would you like to man our booth and at which time or date are you
-> available ?
+and then we can insert on which slots we can stand. We should aim
+for 2, better 3 persons at any time.
 
-I will be at booth. My current fosdem plans:
+Thanks,
 
-Saturday:
-
-16:00 - Embedded: Analysing Embedded Memory Use
-17:00 - Embedded: OpenMoko
-
-Sunday:
-
-10:00 - OpenSUSE: Suspend to disk and to RAM
-11:00 - OpenSUSE: OpenSync
-12:00 - Embedded: Open Source Embedded Development with Qtopia
-13:00 - GPG/PGP Key Signing session.
-
-Other then then I will be free and plan to be at booth.
-
-> Is it a good idea to make a hardware donation box where companies
-> donate hardware that we port to openembedded ?
-
-idea like idea - we need to consider how to server such requests
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-         Shell to DOS... Come in DOS, do you copy? Shell to DOS...
-
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
