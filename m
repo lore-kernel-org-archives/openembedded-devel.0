@@ -1,26 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.62.194.115] (helo=netgate.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HHSkp-0004l7-IC
-	for openembedded-devel@openembedded.org; Wed, 14 Feb 2007 23:37:35 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1EMbWLr008729 for <openembedded-devel@openembedded.org>;
-	Wed, 14 Feb 2007 23:37:32 +0100
-Message-ID: <45D38F2C.1030700@dominion.kabel.utwente.nl>
-Date: Wed, 14 Feb 2007 23:37:32 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <jim@netgate.com>) id 1HHT0N-0004w6-8h
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Feb 2007 23:53:39 +0100
+Received: from [192.168.2.198] (rrcs-67-52-77-54.west.biz.rr.com [67.52.77.54])
+	by netgate.com (Postfix) with ESMTP id 0B1B228006A;
+	Wed, 14 Feb 2007 14:53:37 -0800 (PST)
+In-Reply-To: <45D38F2C.1030700@dominion.kabel.utwente.nl>
 References: <1171051575.3886.12.camel@localhost.localdomain>	<200702141311.17165.openembedded@hrw.one.pl>	<1171489223.1692.501.camel@localhost.localdomain>	<1171489873.11033.7.camel@localhost.localdomain>	<45D38BB9.5070709@am.sony.com>
 	<96763D62-00DF-440D-8688-E237E1CE0BB8@netgate.com>
-In-Reply-To: <96763D62-00DF-440D-8688-E237E1CE0BB8@netgate.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<45D38F2C.1030700@dominion.kabel.utwente.nl>
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <6385CB83-3092-471F-B579-BDD8A2A65133@netgate.com>
+From: Jim Thompson <jim@netgate.com>
+Date: Wed, 14 Feb 2007 12:53:21 -1000
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.752.3)
+Cc: openembedded-devel@openembedded.org
 Subject: Re: OE Booth during fosdem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,70 +31,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Feb 2007 22:37:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 14 Feb 2007 22:53:40 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Jim Thompson schreef:
-> On Feb 14, 2007, at 12:22 PM, Tim Bird wrote:
-> 
->> gerwin van der kruis wrote:
->>>>>> Is it a good idea to make a hardware donation box where companies
->>>>>> donate hardware that we port to openembedded ?
->>>>> idea like idea - we need to consider how to server such requests
->>>> Do think of promoting this beforehand. I don't think there will  
->>>> be many
->>>> people going: "Oh I have this ${DEVICE} in my bag somewhere with all
->>>> cables and power supply. Please have it." People usually don't carry
->>>> surplus HW with them. A little money donation box might be a good  
->>>> idea
->>>> as well. It is easier to organize and people usually carry money to
->>>> FOSDEM (you just need to convince them to give it to you instead of
->>>> O'Reilly :-)
->>>>
->>> Maybe an idea to promote it on linuxdevices.com ?
->>>
->>> Do we have a fund where we can store the funds we get ?
->>>
->>> I was thinking to set up like a hardware distribution list
->> FYI - I'm not offering anything specific at the moment,
->> but CELF has a fund for making hardware donations for
->> interesting OSS projects.  If there's some piece of hardware
->> that someone thinks would really advance the goals of
->> the OE project, please let me know, and I can have CELF
->> consider donating it.
-> 
-> Ya know, I'd consider donating hardware (see www.netgate.com for what  
-> we have) and/or cash if someone would put up a
-> "build the bootable ISO so you can boot-n-install an OE image on a   
-> HD on ye-olde-random PeeCee" set of patches, or even a recipe for same
-> 
-> Or, equivalently, an image (complete with boot sector) that one could  
-> DD onto a CF card or actual IDE drive that would boot a given root  
-> image on ye-olde-PeeCee.
-> 
-> OpenEmbedded would go a lot faster if people could experiment on  
-> garden-variety PCs rather than go through the "fun" of getting it up- 
-> n-running on more esoteric hardware.
+On Feb 14, 2007, at 12:37 PM, Koen Kooi wrote:
 
-Marcin, Jamie, Phil, Gerwin and I are using OE to build for vairous x86 machines
-(MACHINE={guinness,epia,x86). For some graphic pleasure:
-http://dominion.kabel.utwente.nl/koen/cms/madness
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Jim Thompson schreef:
 
-regards,
+>> Ya know, I'd consider donating hardware (see www.netgate.com for what
+>> we have) and/or cash if someone would put up a
+>> "build the bootable ISO so you can boot-n-install an OE image on a
+>> HD on ye-olde-random PeeCee" set of patches, or even a recipe for  
+>> same
+>>
+>> Or, equivalently, an image (complete with boot sector) that one could
+>> DD onto a CF card or actual IDE drive that would boot a given root
+>> image on ye-olde-PeeCee.
+>>
+>> OpenEmbedded would go a lot faster if people could experiment on
+>> garden-variety PCs rather than go through the "fun" of getting it up-
+>> n-running on more esoteric hardware.
+>
+> Marcin, Jamie, Phil, Gerwin and I are using OE to build for vairous  
+> x86 machines
+> (MACHINE={guinness,epia,x86). For some graphic pleasure:
+> http://dominion.kabel.utwente.nl/koen/cms/madness
 
-Koen
+I know about the guinness and wrap MACHINEs.
 
+What I'm looking for is a short-cut to getting a distro *onto* the disk.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Yes, I'm sure most people could "figure it out" with some time and  
+effort, but what I want is to make it easier.
 
-iD8DBQFF048sMkyGM64RGpERApEnAJ9QwECkBsyqvVnEVOjIsOyOILzOKACeJ2/d
-9XVCEnRaOqvOSfCUMHHhC1s=
-=A1VM
------END PGP SIGNATURE-----
+If OE would build an x86 disk image that could be 'dd'-ed to a CF  
+card, then building OE images for Soekris or WRAP boards would be EZ.
+
+If OE would build an x86 disk image that could be 'dd'-ed to an IDE  
+drive (likely the same as above), then building OE images for  
+"ordinary PCs" would be trivial.
+
+If OE would build a bootable ISO image that could partition and label  
+an attached IDE drive, then install the image *onto* that drive, ....  
+well, I could see all *sorts* of uses for that.
+
+And I'm willing to throw cash, hardware and time at this.
+
+Yes, we sell WRAP boards, but I'm not looking to get a bunch-o-free  
+development out of the process.  (We sell a Gateworks ixp42x board  
+too, just to be perfectly honest.)
+
+Years ago, I ran (and owned) 'musenki' (google for it or look here:  
+http://he-colo.netgate.com/~jim/Musenki/.  We had build a  set of  
+Motorola 8245/8241 boards, and I'd made linux run on them.  I  
+remember spending a horrific amount of time with a (very) early  
+version of "buildroot".  OE is so much more sophisticated that I'm a  
+bit taken aback.
+
+The OE learning curve is still quite steep, but I think it would be  
+less steep with a) a bit more documentation and b) an EZ way to start  
+creating "little distros" that
+run on PCs using it.
+
+Jim
+
 
 
