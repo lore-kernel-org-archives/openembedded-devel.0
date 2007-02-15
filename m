@@ -1,37 +1,23 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [206.18.177.54] (helo=alnrmhc14.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HHk60-0003Kw-AT
+	(envelope-from <golly@stellarwerx.com>) id 1HHlWc-0007fU-OS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Feb 2007 18:08:36 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 0E18128C014; Thu, 15 Feb 2007 18:03:14 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7 (2006-10-05) on srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7
-Received: from [192.168.2.128] (e180152102.adsl.alicedsl.de [85.180.152.102])
-	by srv043.dedi23.de (Postfix) with ESMTP id A33B528C013
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Feb 2007 18:03:10 +0100 (CET)
-Date: Thu, 15 Feb 2007 18:08:34 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.95.6) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <897340395.20070215180834@vanille-media.de>
+	Thu, 15 Feb 2007 19:40:11 +0100
+Received: from gatekeeper.stellarwerx.com
+	(c-68-57-212-205.hsd1.in.comcast.net[68.57.212.205])
+	by comcast.net (alnrmhc14) with ESMTP
+	id <20070215184008b1400a1pa5e>; Thu, 15 Feb 2007 18:40:09 +0000
+Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
+	id 944FD7D65; Thu, 15 Feb 2007 13:46:10 -0500 (EST)
+From: "Mark Gollahon" <golly@stellarwerx.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <45D3FFBA.10504@dominion.kabel.utwente.nl>
-References: <1171051575.3886.12.camel@localhost.localdomain>
-	<200702141311.17165.openembedded@hrw.one.pl>
-	<1171489223.1692.501.camel@localhost.localdomain>
-	<1171489873.11033.7.camel@localhost.localdomain>
-	<45D38BB9.5070709@am.sony.com>
-	<96763D62-00DF-440D-8688-E237E1CE0BB8@netgate.com>
-	<45D38F2C.1030700@dominion.kabel.utwente.nl>
-	<6385CB83-3092-471F-B579-BDD8A2A65133@netgate.com>
-	<45D3FFBA.10504@dominion.kabel.utwente.nl>
+Cc: 
+X-Originating-IP: 68.79.172.62
+X-Mailer: Usermin 1.230
+Message-Id: <1171565169.18829@gatekeeper.stellarwerx.com>
+Date: Thu, 15 Feb 2007 13:46:09 -0500 (EST)
 MIME-Version: 1.0
-Subject: Re: OE Booth during fosdem
+Subject: Building Distros Directly To HD (Was: Re: OE Booth during fosdem)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -45,20 +31,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Feb 2007 17:08:36 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 15 Feb 2007 18:40:13 -0000
+Content-Type: multipart/mixed; boundary="bound1171565169"
+
+--bound1171565169
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
-Tim, thanks for the table.
+Jim Thompson wrote ..
+> 
+> On Feb 14, 2007, at 1:17 PM, gerwin van der kruis wrote:
+> 
+> > Op woensdag 14-02-2007 om 12:53 uur [tijdzone -1000], schreef Jim
+> > Thompson:
+> >
+> >> And I'm willing to throw cash, hardware and time at this.
+> >>
+> >> Yes, we sell WRAP boards, but I'm not looking to get a bunch-o-free
+> >> development out of the process.  (We sell a Gateworks ixp42x board
+> >> too, just to be perfectly honest.)
+> >>
+> >> Years ago, I ran (and owned) 'musenki' (google for it or look here:
+> >> http://he-colo.netgate.com/~jim/Musenki/.  We had build a  set of
+> >> Motorola 8245/8241 boards, and I'd made linux run on them.  I
+> >> remember spending a horrific amount of time with a (very) early
+> >> version of "buildroot".  OE is so much more sophisticated that I'm a
+> >> bit taken aback.
+> >>
+> >> The OE learning curve is still quite steep, but I think it would be
+> >> less steep with a) a bit more documentation and b) an EZ way to start
+> >> creating "little distros" that
+> >> run on PCs using it.
+> >
+> > I remember we had this discussion before , the problem is the
+> > bootloader, for example grub requires some extra handlings to get
+> > installed probarly.
+> 
+> There appears to be a decent start on "here are the set of steps"  
+> here: http://kbarr.net/bochs
+> 
+> (I've only recently discovered this.)
 
-I just added myself to some slots,
-guys, please do the same :)
+I've done this "a million times" when I was building Gentoo for WRAPs and Routerboards.  Its not hard to throw files onto a HD or CF, chroot into the "image", and push grub to install itself.  The three things needed were:
+
+(1) x86-based PC that had a Pentium or better processor,
+(2) IDE connection for the target media (i.e. CF-to-IDE adapter board for CF cards to be recognized as IDE HDs in the afore-mentioned PC), and
+(3) the Linux<->grub drive mapping (usually very easy to figure out, but there are situations...).
+
+Trying to do the grub install via a USB reader/external HD was touchy, but I did manage to figure out how to DD grub's stage 1 and 1.5 and make it work.  However, the CF-to-IDE adapter was much more reliable (but had the down-side of rebooting to change the CF card).
+
+I'll see if I can dig up the instructions and post them.
+
+> > I think if you write a script which automate the installation of for
+> > example grub and than copies automatically the files over to cf you 
+> > are
+> > finished , I did it once long time ago for an embedded voip pabx.
+> 
+> I once made 'lilo' work with a buildroot-based system.  The makefile  
+> is attached.
+> 
+> I never could get 'grub' to do the same thing, though I prefer grub  
+> to lilo.
+
+The scripts I had did all of the work except for the grub part.  Shouldn't be too difficult to resurrect the DD instructions for grub, though.
+
+> > As Koen said I am working on x86 projects like wifi-radio (with a
+> > mini-itx board and some small additions) a set top box and a thin
+> > client.So we are working on it !!
+> 
+> Is the wifi-radio tree available anywhere?
+
+Yea, I'd like to see that, too.
 
 Regards,
+-Mark Gollahon
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
-
-
+--bound1171565169--
