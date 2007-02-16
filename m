@@ -1,22 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HHxdA-0002hN-Ca
-	for openembedded-devel@openembedded.org; Fri, 16 Feb 2007 08:35:44 +0100
-Received: (qmail 25623 invoked by uid 813007); 16 Feb 2007 07:35:43 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 16 Feb 2007 07:35:43 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Feb 2007 08:35:40 +0100
-User-Agent: KMail/1.9.6
-References: <1171565169.18829@gatekeeper.stellarwerx.com>
-	<e83232070702152025v7de70216j32d24db89ba686b7@mail.gmail.com>
-In-Reply-To: <e83232070702152025v7de70216j32d24db89ba686b7@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HHy7y-0007WK-IY
+	for openembedded-devel@openembedded.org; Fri, 16 Feb 2007 09:07:51 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l1G87Sox007609 for <openembedded-devel@openembedded.org>;
+	Fri, 16 Feb 2007 09:07:29 +0100
+Message-ID: <45D5663E.5080909@dominion.kabel.utwente.nl>
+Date: Fri, 16 Feb 2007 09:07:26 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-Message-Id: <200702160835.41453.openembedded@hrw.one.pl>
-Subject: Re: Building Distros Directly To HD (Was: Re: OE Booth during fosdem)
+To: openembedded-devel@openembedded.org
+References: <E1HHusH-0003vr-5o@linuxtogo.org>
+In-Reply-To: <E1HHusH-0003vr-5o@linuxtogo.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev libxslt: add native package. Closes 1839.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,36 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Feb 2007 07:35:47 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Feb 2007 08:07:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=B1tek, 16 lutego 2007, Roderick Taylor napisa=B3:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Using QEMU has helped me navigate the learning curve.
->
-> The fiddly part is writing the filesystem to a QEMU virtual hard disk.
->  To do this I first boot qemu with a ploplinux iso image, start the
-> network, fdisk, mkfs, wget the oe file system and extract files to the
-> virtual disk.  Once I've got an intial OE image on there, I just use
-> ipkg to upgrade and test any other software I need to stick on there.
+Tom commit schreef:
+> libxslt: add native package.  Closes 1839.
 
-Poky has scripts which make it VERY easy:
+> +require libxslt_${PV}.bb
 
-poky-qemu bzImage-qemux86.bin ANY-image-qemux86.rootfs.ext2
+ERROR: Could not include required file libxslt_1.1.17.bb while parsing
+/home/koen/OE/monotone/org.openembedded.dev/packages/libxslt/libxslt-native_1.1.17.bb
 
-do ALL work ;)
+could someone please fix that?
 
-http://www.rpsys.net/openzaurus/qemu/ is MUST read for using Qemu with OE.
+regards,
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-          Warning: Dates in calendar are closer than they appear.
-
-
+iD8DBQFF1WY+MkyGM64RGpERAstVAJsENci4+arZVCTXwT1mrqBNu7zKwQCdG8Cc
+XCqNRnp00TBRjPdukc17NSY=
+=pHmk
+-----END PGP SIGNATURE-----
 
 
