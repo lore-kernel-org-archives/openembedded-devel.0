@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.121.247.12] (helo=psmtp03.wxs.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HIBHm-0000W3-9t
-	for openembedded-devel@openembedded.org; Fri, 16 Feb 2007 23:10:34 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1HIBHZ-0003yi-EC
-	for openembedded-devel@openembedded.org; Fri, 16 Feb 2007 23:10:21 +0100
-Received: from p4020-ipbf2103marunouchi.tokyo.ocn.ne.jp ([122.17.98.20])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 16 Feb 2007 23:10:21 +0100
-Received: from no2spam by p4020-ipbf2103marunouchi.tokyo.ocn.ne.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 16 Feb 2007 23:10:21 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 17 Feb 2007 07:10:05 +0900
-Message-ID: <er5a40$vcc$1@sea.gmane.org>
-References: <1171051575.3886.12.camel@localhost.localdomain>	<200702141311.17165.openembedded@hrw.one.pl>	<523051801.20070214151233@vanille-media.de>	<45D33F93.9060400@am.sony.com>	<9610318964.20070214181321@vanille-media.de>
-	<45D355A2.8030306@am.sony.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: p4020-ipbf2103marunouchi.tokyo.ocn.ne.jp
-User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
-In-Reply-To: <45D355A2.8030306@am.sony.com>
-Sender: news <news@sea.gmane.org>
-Subject: Re: OE Booth during fosdem
+	(envelope-from <gerwin@vanderkruis.net>) id 1HIEnf-0000YM-Fg
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Feb 2007 02:55:43 +0100
+Received: from [10.0.0.152] (ip5457b30e.direct-adsl.nl [84.87.179.14])
+	by psmtp03.wxs.nl
+	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006))
+	with ESMTP id <0JDL00KCN40P19@psmtp03.wxs.nl> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	17 Feb 2007 02:55:40 +0100 (MET)
+Date: Sat, 17 Feb 2007 02:55:30 +0100
+From: gerwin van der kruis <gerwin@vanderkruis.net>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <1171677331.4857.23.camel@localhost.localdomain>
+MIME-version: 1.0
+X-Mailer: Evolution 2.8.3 (2.8.3-1.fc6)
+Subject: OE-Booth summary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,19 +29,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Feb 2007 22:10:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 17 Feb 2007 01:55:46 -0000
+Content-type: text/plain
+Content-transfer-encoding: 7BIT
 
-Tim Bird wrote:
+Okay hereby a small summary:
 
->>>> Could anyone skilled in Wiki markup add a table for the booth
->>>> attendance? 
+-There will be a box for donating money
+-There will be a possibility for donating hardware (Gerwinin will write
+programm for this + gerwinin will place announcement on linuxdevices + )
+-Gerwinin, hrw, Laibsch, MickeyL, Crofton, Likewise will man the booth
+so far (hope I haven't forgotten anyone)
 
-> It took me a while to figure out which wiki syntax to use,
-> but a first pass of it is on the page now.
+-Hardware that will be shown: Mini-itx (Gerwinin), progear
+webpad(hrw),Japanese stuff on z (Laibsch)
 
-Changed it so that everything is in a single table.
+What do we still need ?
+
+-It would be nice to have some more hardware that we can show on the
+booth
+-I was thinking of organising some small workshops for oe 
+-Is there space for a discussion to make a foundation for oe ?
+-Posters and flyers
+-T-shirts for people manning the booth
+
+If you have more let me know , also comments feedback are welcome 
+
+regards, 
+
+Gerwin
+
 
 
 
