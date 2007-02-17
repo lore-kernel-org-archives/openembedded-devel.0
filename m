@@ -1,41 +1,26 @@
-Received: from [65.254.253.133] (helo=mailout16.yourhostingaccount.com)
-	by linuxtogo.org with esmtp (Exim 4.63) (envelope-from
-	<SRS0=yJUEIq=HZ=thegnar.org=markgross@yourhostingaccount.com>)
-	id 1HIU2k-0004RC-VK for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Feb 2007 19:12:21 +0100
-Received: from mailscan34.yourhostingaccount.com ([10.1.15.34]
-	helo=mailscan34.yourhostingaccount.com)
-	by mailout16.yourhostingaccount.com with esmtp (Exim)
-	id 1HIU2k-0008Na-1Y for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Feb 2007 13:12:18 -0500
-Received: from authsmtp11.yourhostingaccount.com ([10.1.18.11] ident=exim)
-	by mailscan34.yourhostingaccount.com with spamscanlookuphost (Exim)
-	id 1HIU2k-0006cp-3Q for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Feb 2007 13:12:18 -0500
-Received: from authsmtp11.yourhostingaccount.com ([10.1.18.11]
-	helo=authsmtp11.yourhostingaccount.com)
-	by mailscan34.yourhostingaccount.com with esmtp (Exim)
-	id 1HIU2j-0006ch-10 for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Feb 2007 13:12:17 -0500
-Received: from pool-71-117-247-154.ptldor.fios.verizon.net ([71.117.247.154]
-	helo=mgross-desktop)
-	by authsmtp11.yourhostingaccount.com with esmtpa (Exim)
-	id 1HIU2i-0000B2-Ln for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Feb 2007 13:12:16 -0500
-Received: by mgross-desktop (Postfix, from userid 1000)
-	id 1ADBFC2E39; Sat, 17 Feb 2007 10:12:08 -0800 (PST)
-Date: Sat, 17 Feb 2007 10:12:08 -0800
-From: Mark Gross <markgross@thegnar.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070217181208.GA4616@thegnar.org>
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HIU8z-0004XA-FS
+	for openembedded-devel@openembedded.org; Sat, 17 Feb 2007 19:18:45 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l1HIIgLr032647 for <openembedded-devel@openembedded.org>;
+	Sat, 17 Feb 2007 19:18:42 +0100
+Message-ID: <45D74702.1060905@dominion.kabel.utwente.nl>
+Date: Sat, 17 Feb 2007 19:18:42 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.11
-X-EN-UserInfo: 797c2c580f2f40de3d8825fee4eaf462:2545611f8b0606d1227160eb92fd62ea
-X-EN-AuthUser: markgross
-Sender: Mark Gross <markgross@thegnar.org>
-X-EN-OrigIP: 71.117.247.154
-X-EN-OrigHost: pool-71-117-247-154.ptldor.fios.verizon.net
-Subject: getting started with bug reports in OE
+To: openembedded-devel@openembedded.org
+References: <20070217181208.GA4616@thegnar.org>
+In-Reply-To: <20070217181208.GA4616@thegnar.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: getting started with bug reports in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,52 +34,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Feb 2007 18:12:27 -0000
-X-Groupsio-MsgNum: 1405
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gKMricLos+KVdGMg"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 17 Feb 2007 18:18:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---gKMricLos+KVdGMg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm moving from nslug to oe .dev branch and I'm trying to ramp up on all
-the bitbake and configuration details.  While bringing up a build of
-slugos-image I had to debug an issue with udev-100.
+Mark Gross schreef:
+> I'm moving from nslug to oe .dev branch and I'm trying to ramp up on all
+> the bitbake and configuration details.  While bringing up a build of
+> slugos-image I had to debug an issue with udev-100.
+> 
+> udev-100 would fail on the comple because of a link time issue relating
+> to extras/volume_id.  I hacked a quick fix into packages/udev/udev_100.bb, where I changed
+> 
+> UDEV_EXTRAS = "extras/firmware/ extras/scsi_id/ extras/volume_id/ extras/run_directory/"
+> to
+> UDEV_EXTRAS = "extras/firmware/ extras/scsi_id/ extras/run_directory/"
+> 
+> This is good for my build, but my questions are now
+> 1) is this the right way to fix this?
+> and if so then 
+> 2) how do I share this fix back to the OE community?
 
-udev-100 would fail on the comple because of a link time issue relating
-to extras/volume_id.  I hacked a quick fix into packages/udev/udev_100.bb, =
-where I changed
+On 2: we encourage people to attach patches to bugzilla (http://bugs.openembedded.org)
+because mailed patches tend to get lost or forgotten after a while.
 
-UDEV_EXTRAS =3D "extras/firmware/ extras/scsi_id/ extras/volume_id/ extras/=
-run_directory/"
-to
-UDEV_EXTRAS =3D "extras/firmware/ extras/scsi_id/ extras/run_directory/"
+regards,
 
-This is good for my build, but my questions are now
-1) is this the right way to fix this?
-and if so then=20
-2) how do I share this fix back to the OE community?
-
-Thanks for any advice.
-
-
---mgross
-
-
---gKMricLos+KVdGMg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
+KOen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.2.2 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFF10V4hK5OsmQOmSARAiRdAJsHl8X6x4VpAxk30wFNo0w27M5t+ACfZTRc
-LNqciQ3VRuA8CMXwguktVVQ=
-=jnj1
+iD8DBQFF10cCMkyGM64RGpERAkjQAJ4qJuXKTC2uAGs//vPt2mZwICd/qwCfT0tQ
+HSwQEXygFDvv5kOi99+ZuKE=
+=wFmH
 -----END PGP SIGNATURE-----
 
---gKMricLos+KVdGMg--
+
