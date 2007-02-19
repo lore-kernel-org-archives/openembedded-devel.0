@@ -1,29 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HJ7el-00087w-4E
-	for openembedded-devel@openembedded.org; Mon, 19 Feb 2007 13:30:13 +0100
-Received: from [172.20.0.21] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1JCU5Lr002936 for <openembedded-devel@openembedded.org>;
-	Mon, 19 Feb 2007 13:30:06 +0100
-Message-ID: <45D9984C.6090705@dominion.kabel.utwente.nl>
-Date: Mon, 19 Feb 2007 13:30:04 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1HJ8vb-0003q3-ET
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Feb 2007 14:52:05 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1HJ95K-0006Mu-U8
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Feb 2007 15:01:42 +0100
+Message-ID: <45D9AB5D.1080505@kernelconcepts.de>
+Date: Mon, 19 Feb 2007 14:51:25 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.9 (X11/20070104)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <45D98799.1080309@dominion.kabel.utwente.nl>
-	<200702191259.25200.openembedded@hrw.one.pl>
-In-Reply-To: <200702191259.25200.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	l1JCU5Lr002936
-Subject: Re: RFC: splitting deploy/ipk into subarchs
+To: openembedded-devel@lists.openembedded.org
+References: <1171677331.4857.23.camel@localhost.localdomain>
+In-Reply-To: <1171677331.4857.23.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.0.0
+Subject: Re: OE-Booth summary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,43 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Feb 2007 12:30:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 19 Feb 2007 13:52:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Marcin Juszkiewicz schreef:
-> Dnia poniedzia=C5=82ek, 19 lutego 2007, Koen Kooi napisa=C5=82:
->=20
->> When using multimachine and ipkg deploy/ipk gets awfully crowded after
->> a while. I want to propose sorting it by subarch. Attached is a patch
->> that adds support for that to rootfs_ipk.bbclass.
->>
->> What do you think about that?
->=20
-> I like this idea. ipkg-make-index is slow enough already.
->=20
-> Attached fixed, tested version of your rootfs_ipk.bbclass change. Also=20
-> added patch to package_ipk.bbclass which will store package in proper=20
-> dir.
+gerwin van der kruis schrieb:
+> -Gerwinin, hrw, Laibsch, MickeyL, Crofton, Likewise will man the booth
+> so far (hope I haven't forgotten anyone)
 
-Nice
+I can help there as well, but I did not manage to create a schedule for myself yet.
 
-> -	echo "src oe file:${DEPLOY_DIR_IPK}" > ${T}/ipkg.conf
+> -Hardware that will be shown: Mini-itx (Gerwinin), progear
+> webpad(hrw),Japanese stuff on z (Laibsch)
+> 
+> What do we still need ?
+> 
+> -It would be nice to have some more hardware that we can show on the
+> booth
 
-This breaks backward compat, could you add that back in?
+I guess I can help there too: An old Zaurus SL-5000, one or two iPAQs, a HTC
+Universal and a skeye.integral MDE might be a good start. A Nokia 770 would be
+interesting to show as well, but I'm quite sure I won't manage to build an image
+for it this week.
 
-regards,
+> -I was thinking of organising some small workshops for oe 
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Hmm.. creating a new GPE image for the 770 ;)
 
-iD8DBQFF2ZhMMkyGM64RGpERAtwOAJ0d4gxAt3a/XFjsJP+5xFvsapJdswCePBQN
-QCZEkVp954PrWVq1QERxVtQ=3D
-=3DQtcf
------END PGP SIGNATURE-----
+> -Is there space for a discussion to make a foundation for oe ?
+
+I hope so, this is a quite important topic.
+
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-14
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
