@@ -1,25 +1,25 @@
-Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <nelsoneci@gmail.com>) id 1HIxFL-0001va-36
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Feb 2007 02:23:15 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so497952ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Feb 2007 17:23:14 -0800 (PST)
-Received: by 10.78.170.17 with SMTP id s17mr259681hue.1171848192324;
-	Sun, 18 Feb 2007 17:23:12 -0800 (PST)
-Received: by 10.78.178.6 with HTTP; Sun, 18 Feb 2007 17:23:12 -0800 (PST)
-Message-ID: <2accc2ff0702181723s1b272080mfc8ab1ee2ea4fa41@mail.gmail.com>
-Date: Sun, 18 Feb 2007 20:23:12 -0500
-From: "Nelson Castillo" <nelson@emqbit.com>
-Sender: nelsoneci@gmail.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <45D8C301.200@dominion.kabel.utwente.nl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HJ6Xl-0004FP-UR
+	for openembedded-devel@openembedded.org; Mon, 19 Feb 2007 12:18:54 +0100
+Received: from [172.20.0.21] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l1JBIpLr022257 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Feb 2007 12:18:51 +0100
+Message-ID: <45D98799.1080309@dominion.kabel.utwente.nl>
+Date: Mon, 19 Feb 2007 12:18:49 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-References: <2accc2ff0702181229p739ebee1ke3ea6c6264cf9b0f@mail.gmail.com>
-	<45D8C301.200@dominion.kabel.utwente.nl>
-X-Google-Sender-Auth: 9a85a04bab626c8c
-Subject: Re: Trying to package Appweb 2.1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: RFC: splitting deploy/ipk into subarchs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,84 +33,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Feb 2007 01:23:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 19 Feb 2007 11:18:54 -0000
+Content-Type: multipart/mixed; boundary="------------010307020602090108060602"
+
+--------------010307020602090108060602
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 2/18/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Nelson Castillo schreef:
-> > Hi.
-> >
-> > We've been trying to package Appweb 2.1.0. This package works
-> > (We haven't thought of PHP5).
-> >
-> > We tried to get rid of /usr/mime.types in the commented code that
-> > follows but we could not.
-> >
-> > #FILES_${PN} += " /etc/appWeb/appWeb.conf /etc/appWeb/mime.types"
-> > FILES_${PN} += " /usr/appWeb.conf /usr/mime.types"
->
-> /etc (or rather ${sysconfdir}) always gets includes, so you need to override FILES_${PN}
-> ('=') instead of appending to it ('+=').
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Koen. This did not work.
+Hi,
 
-BTW, when I remove the package it seems to do a "rm /var/www/*". Nasty!
+When using multimachine and ipkg deploy/ipk gets awfully crowded after a while. I want to
+propose sorting it by subarch. Attached is a patch that adds support for that to
+rootfs_ipk.bbclass.
 
+What do you think about that?
 
-NOTE: the following files were installed but not shipped in any package:
-NOTE:   /etc/rc0.d/K15appWeb
-NOTE:   /etc/rc1.d/K15appWeb
-NOTE:   /etc/rc2.d/K15appWeb
-NOTE:   /etc/rc3.d/K15appWeb
-NOTE:   /etc/rc4.d/K15appWeb
-NOTE:   /etc/rc5.d/S81appWeb
-NOTE:   /etc/rc6.d/K15appWeb
-NOTE:   /etc/init.d/appWeb
-NOTE:   /var/www/upload.html
-NOTE:   /var/www/test.esp
-NOTE:   /var/www/index.html
-NOTE:   /var/www/inc.js
-NOTE:   /var/www/upload.esp
-NOTE:   /var/www/features.esp
-NOTE:   /var/www/inc.esp
-NOTE:   /var/www/simple.esp
-NOTE:   /usr/COPYRIGHT.TXT
-NOTE:   /usr/LICENSE.TXT
-NOTE:   /usr/README.TXT
-NOTE:   /usr/appWeb.bmp
-NOTE:   /usr/appWeb.ico
-NOTE:   /usr/remove
-NOTE:   /usr/groups.db
-NOTE:   /usr/users.db
-NOTE:   /usr/install
-NOTE:   /usr/appWeb.conf
-NOTE:   /usr/mime.types
-NOTE:   /usr/bin/libdirModule.so
-NOTE:   /usr/bin/libputModule.so
-NOTE:   /usr/bin/libcgiModule.so
-NOTE:   /usr/bin/libappWeb.so.1
-NOTE:   /usr/bin/libegiModule.so
-NOTE:   /usr/bin/libcopyModule.so
-NOTE:   /usr/bin/libadminModule.so
-NOTE:   /usr/bin/libauthModule.so
-NOTE:   /usr/bin/libcapiModule.so
-NOTE:   /usr/lib/libappWeb.so.1
-NOTE:   /usr/lib/libappWeb.so.1.0.0
-NOTE:   /usr/sbin/httpClient
-NOTE:   /usr/sbin/httpComp
-NOTE:   /usr/sbin/appWeb
-NOTE:   /usr/sbin/httpPassword
+regards,
 
-Regards,
-Nelson.-
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-http://arhuaco.org
-http://emQbit.com
+iD8DBQFF2YeZMkyGM64RGpERAjYCAJ9nBjdpcvTlvijaQ7o/UlZGWg68tgCdHw4m
+IzGLM3yx+X9k/ZgMo+WqT6E=
+=N6sc
+-----END PGP SIGNATURE-----
 
+--------------010307020602090108060602
+Content-Type: text/x-patch; x-mac-type="0"; x-mac-creator="0";
+ name="rootfs-ipk-with-sorted-deploy.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="rootfs-ipk-with-sorted-deploy.patch"
 
+# 
+# old_revision [bc83c51286e87a2b8aa3f79f074cadc05dedb7de]
+# 
+# patch "classes/rootfs_ipk.bbclass"
+#  from [7824b4ee6ac7524e12d7411575e8bbf4b8a9d321]
+#    to [016f168e95ecc8150984cc48a14ecbd73a5fd9ed]
+# 
+============================================================
+--- classes/rootfs_ipk.bbclass	7824b4ee6ac7524e12d7411575e8bbf4b8a9d321
++++ classes/rootfs_ipk.bbclass	016f168e95ecc8150984cc48a14ecbd73a5fd9ed
+@@ -18,17 +18,26 @@ fakeroot rootfs_ipk_do_rootfs () {
+ 		
+ 	mkdir -p ${IMAGE_ROOTFS}/dev
+ 
+-	if [ -z "${DEPLOY_KEEP_PACKAGES}" ]; then
++	ipkgarchs="${PACKAGE_ARCHS}"
++
++        if [ -z "${DEPLOY_KEEP_PACKAGES}" ]; then
+ 		touch ${DEPLOY_DIR_IPK}/Packages
+ 		ipkg-make-index -r ${DEPLOY_DIR_IPK}/Packages -p ${DEPLOY_DIR_IPK}/Packages -l ${DEPLOY_DIR_IPK}/Packages.filelist -m ${DEPLOY_DIR_IPK}
+-	fi
++		if [-e ${DEPLOY_DIR_IPK}/$arch/] ; then 
++			touch ${DEPLOY_DIR_IPK}/$arch/Packages
++			ipkg-make-index -r ${DEPLOY_DIR_IPK}/$arch/Packages -p ${DEPLOY_DIR_IPK}/$arch/Packages -l ${DEPLOY_DIR_IPK}/$arch/Packages.filelist -m ${DEPLOY_DIR_IPK}/$arch
++                fi
++        fi
++	
+ 	mkdir -p ${T}
+ 	echo "src oe file:${DEPLOY_DIR_IPK}" > ${T}/ipkg.conf
+-	ipkgarchs="${PACKAGE_ARCHS}"
+ 	priority=1
+ 	for arch in $ipkgarchs; do
+ 		echo "arch $arch $priority" >> ${T}/ipkg.conf
+ 		priority=$(expr $priority + 5)
++		if [-e ${DEPLOY_DIR_IPK}/$arch/Packages] ; then
++		        echo "src oe file:${DEPLOY_DIR_IPK}/$arch" >> ${T}/ipkg.conf
++	        fi
+ 	done
+ 	ipkg-cl ${IPKG_ARGS} update
+ 	if [ ! -z "${LINGUAS_INSTALL}" ]; then
+
+--------------010307020602090108060602--
