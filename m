@@ -1,27 +1,21 @@
-Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HJ6g4-0005vW-Ek
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Feb 2007 12:27:28 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so2313434nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Feb 2007 03:27:27 -0800 (PST)
-Received: by 10.49.20.5 with SMTP id x5mr5627838nfi.1171884447843;
-	Mon, 19 Feb 2007 03:27:27 -0800 (PST)
-Received: from CUBE ( [82.193.98.2])
-	by mx.google.com with ESMTP id a23sm26178800nfc.2007.02.19.03.27.26;
-	Mon, 19 Feb 2007 03:27:26 -0800 (PST)
-Date: Mon, 19 Feb 2007 13:27:28 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1338737578.20070219132728@gmail.com>
-To: Jamie Lenehan <lenehan@twibble.org>
-In-Reply-To: <20070214013442.GA1347@twibble.org>
-References: <20070208113136.GA1408@fh-wedel.de>
-	<20070214013442.GA1347@twibble.org>
+	(envelope-from <openembedded@hrw.one.pl>) id 1HJ7Aw-0006FZ-J8
+	for openembedded-devel@openembedded.org; Mon, 19 Feb 2007 12:59:22 +0100
+Received: (qmail 10759 invoked by uid 813007); 19 Feb 2007 11:59:20 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 19 Feb 2007 11:59:20 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Feb 2007 12:59:23 +0100
+User-Agent: KMail/1.9.6
+References: <45D98799.1080309@dominion.kabel.utwente.nl>
+In-Reply-To: <45D98799.1080309@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Thread-support in perl-native often breaks libintl-perl
+Message-Id: <200702191259.25200.openembedded@hrw.one.pl>
+Subject: Re: RFC: splitting deploy/ipk into subarchs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,38 +29,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Feb 2007 11:27:28 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 19 Feb 2007 11:59:22 -0000
+X-Groupsio-MsgNum: 1412
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_dEZ2FbBRTpfn+kx"
+
+--Boundary-00=_dEZ2FbBRTpfn+kx
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+Dnia poniedzia=B3ek, 19 lutego 2007, Koen Kooi napisa=B3:
+
+> When using multimachine and ipkg deploy/ipk gets awfully crowded after
+> a while. I want to propose sorting it by subarch. Attached is a patch
+> that adds support for that to rootfs_ipk.bbclass.
+>
+> What do you think about that?
+
+I like this idea. ipkg-make-index is slow enough already.
+
+Attached fixed, tested version of your rootfs_ipk.bbclass change. Also=20
+added patch to package_ipk.bbclass which will store package in proper=20
+dir.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+         Great minds discuss ideas; average minds discuss events;
+         small minds discuss people.
+
+--Boundary-00=_dEZ2FbBRTpfn+kx
+Content-Type: text/x-diff;
+  charset="iso-8859-2";
+  name="build-rootfs-from-split-ipkdir.diff"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="build-rootfs-from-split-ipkdir.diff"
 
-Hello Jamie,
+# 
+# old_revision [bc83c51286e87a2b8aa3f79f074cadc05dedb7de]
+# 
+# patch "classes/rootfs_ipk.bbclass"
+#  from [7824b4ee6ac7524e12d7411575e8bbf4b8a9d321]
+#    to [a30d56a031d7b85d13bb62d4956e77252a4b79fa]
+# 
+============================================================
+--- classes/rootfs_ipk.bbclass	7824b4ee6ac7524e12d7411575e8bbf4b8a9d321
++++ classes/rootfs_ipk.bbclass	a30d56a031d7b85d13bb62d4956e77252a4b79fa
+@@ -18,17 +18,25 @@ fakeroot rootfs_ipk_do_rootfs () {
+ 		
+ 	mkdir -p ${IMAGE_ROOTFS}/dev
+ 
+-	if [ -z "${DEPLOY_KEEP_PACKAGES}" ]; then
+-		touch ${DEPLOY_DIR_IPK}/Packages
+-		ipkg-make-index -r ${DEPLOY_DIR_IPK}/Packages -p ${DEPLOY_DIR_IPK}/Packages -l ${DEPLOY_DIR_IPK}/Packages.filelist -m ${DEPLOY_DIR_IPK}
+-	fi
++	ipkgarchs="${PACKAGE_ARCHS}"
++
++	for arch in $ipkgarchs; do
++		if [ -z "${DEPLOY_KEEP_PACKAGES}" ]; then
++			if [ -e ${DEPLOY_DIR_IPK}/$arch/ ] ; then 
++				touch ${DEPLOY_DIR_IPK}/$arch/Packages
++				ipkg-make-index -r ${DEPLOY_DIR_IPK}/$arch/Packages -p ${DEPLOY_DIR_IPK}/$arch/Packages -l ${DEPLOY_DIR_IPK}/$arch/Packages.filelist -m ${DEPLOY_DIR_IPK}/$arch/
++			fi
++		fi
++	done
++
+ 	mkdir -p ${T}
+-	echo "src oe file:${DEPLOY_DIR_IPK}" > ${T}/ipkg.conf
+-	ipkgarchs="${PACKAGE_ARCHS}"
+ 	priority=1
+ 	for arch in $ipkgarchs; do
+ 		echo "arch $arch $priority" >> ${T}/ipkg.conf
+ 		priority=$(expr $priority + 5)
++		if [ -e ${DEPLOY_DIR_IPK}/$arch/Packages ] ; then
++		        echo "src oe-$arch file:${DEPLOY_DIR_IPK}/$arch" >> ${T}/ipkg.conf
++	    fi
+ 	done
+ 	ipkg-cl ${IPKG_ARGS} update
+ 	if [ ! -z "${LINGUAS_INSTALL}" ]; then
 
-Wednesday, February 14, 2007, 3:34:42 AM, you wrote:
+--Boundary-00=_dEZ2FbBRTpfn+kx
+Content-Type: text/x-diff;
+  charset="iso-8859-2";
+  name="store-package-in-proper-ipkdir.diff"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="store-package-in-proper-ipkdir.diff"
 
-[]
+# 
+# old_revision [bc83c51286e87a2b8aa3f79f074cadc05dedb7de]
+# 
+# patch "classes/package_ipk.bbclass"
+#  from [6f5d44fb7cf065ce7b680009e5c9bcb554f760c4]
+#    to [57535d540caec17311adeb1e15f49d290d6cc8ac]
+# 
+============================================================
+--- classes/package_ipk.bbclass	6f5d44fb7cf065ce7b680009e5c9bcb554f760c4
++++ classes/package_ipk.bbclass	57535d540caec17311adeb1e15f49d290d6cc8ac
+@@ -75,6 +75,9 @@ python do_package_ipk () {
+ 	if not outdir:
+ 		bb.error("DEPLOY_DIR_IPK not defined, unable to package")
+ 		return
++
++	arch = bb.data.getVar('PACKAGE_ARCH', d, 1)
++	outdir = "%s/%s" % (outdir, arch)
+ 	bb.mkdirhier(outdir)
+ 
+ 	dvar = bb.data.getVar('D', d, 1)
 
-> For sh4 I turned on threading for perl which is probably why I didn't
-> have this issue. I can't remember if I turned it on because of this
-> issue or if I needed it for somethings else. It probably doesn't
-> matter much anymore for my situation because I've since rewrote the
-> perl management application I was working on in C, so I only use perl
-> a lot of simpler things now.
-
-> I agree that we probably need to make perl and perl-native agree on
-> this. If everything appears to be ok with it turned off in
-> perl-native then I'd be fine with that (and would turn it of for the
-> sh4 perl as well.)
-
-  Maybe make that some "global" config option, and have it on by
-default after all (after bit of QA of course)? These days, lack of
-multithreadedness is a defect, and even while it's Perl, maybe it
-shouldn't be crippled such? ;-)  (No, I don't volunteer to do QA on it
-;-) ).
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
-
-
+--Boundary-00=_dEZ2FbBRTpfn+kx--
