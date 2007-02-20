@@ -1,27 +1,19 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HJVMS-0007nf-6O
-	for openembedded-devel@openembedded.org; Tue, 20 Feb 2007 14:48:52 +0100
-Received: from [172.20.0.21] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1KDmfox028274 for <openembedded-devel@openembedded.org>;
-	Tue, 20 Feb 2007 14:48:42 +0100
-Message-ID: <45DAFC38.40000@dominion.kabel.utwente.nl>
-Date: Tue, 20 Feb 2007 14:48:40 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <openembedded@hrw.one.pl>) id 1HJWkS-00024E-0q
+	for openembedded-devel@openembedded.org; Tue, 20 Feb 2007 16:17:44 +0100
+Received: (qmail 29096 invoked by uid 813007); 20 Feb 2007 15:17:42 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 20 Feb 2007 15:17:42 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 20 Feb 2007 16:17:39 +0100
+User-Agent: KMail/1.9.6
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <45D98799.1080309@dominion.kabel.utwente.nl>	<200702191259.25200.openembedded@hrw.one.pl>	<45D9984C.6090705@dominion.kabel.utwente.nl>
-	<45DAAEF4.50701@dominion.kabel.utwente.nl>
-In-Reply-To: <45DAAEF4.50701@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: RFC: splitting deploy/ipk into subarchs
+Message-Id: <200702201617.42247.openembedded@hrw.one.pl>
+Subject: Linux kernel recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,41 +27,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Feb 2007 13:48:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 Feb 2007 15:17:45 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Koen Kooi schreef:
+Some time ago I added packages/linux/linux_2.6.19.bb (currently 
+linux_2.6.20.bb) as some kind of generic Linux kernel recipe. Currently 
+it is used for Progear and Simpad targets.
 
-> Marcin and I merged a slightly different version of this today.
+Today we got linux-x86_2.6.20.bb which differ in just one thing.. NAME. It 
+does not contain any patches - just source archive and kernel 
+configuration file. Can it be merged into linux_2.6.20.bb?
 
-As some people found out, their upload scripts broke with this change. I'm sorry that
-happened, but those scripts are more easily fixed than ipkg-utils :(
-Due to bug in ipkg-utils being I haven't been using a straight rsync for a while now, so
-for the curious:
+We have few other 2.6.20 recipes but they are more machine specific 
+(efika, ixp4xx, dht-walnut).
 
-rsync -az . user@remote.host:/feed/location/unsorted ; ssh user@remote.host 'cd
-feed/location/unsorted ; sh sort.sh'
+Second thing is list of kernels. We have 149 files in packages/linux/ - 
+some targets have few kernels there - can we get rid of not used ones? 
+Many machines want 1-2 kernels (stable one and development one) so why we 
+have 4-6 kernels for one machine? Can this be cleared in some way?
 
-where sort.sh is http://www.angstrom-distribution.org/unstable/feed/unsorted/sort.sh.txt
+-- 
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-And while you're at it, check wether your rsync uses --delete, and if not, check if you
-remove Packages* before running ipkg-make-index. If that wasn't the case you have been
-unknowingly suffering for a buggy Packages* for a while now. Combined with ipkg .163 on
-the device I suspect 'ipkg upgrade' doesn't behave as deterministically as you might think.
+       In theory there is no difference between practice and theory
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFF2vw3MkyGM64RGpERAv9OAJ4ij31yxqCC8M855mQ8hUvhdj56UQCfVk4z
-zfpTSMD0IajJc9VRF2dyuQA=
-=rvcF
------END PGP SIGNATURE-----
 
 
