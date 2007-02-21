@@ -1,20 +1,25 @@
-Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <arkaitzj@gmail.com>) id 1HJwd9-0005jq-KR
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Feb 2007 19:55:55 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so1117130ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2007 10:55:55 -0800 (PST)
-Received: by 10.66.216.20 with SMTP id o20mr10111284ugg.1172084155000;
-	Wed, 21 Feb 2007 10:55:55 -0800 (PST)
-Received: by 10.67.102.12 with HTTP; Wed, 21 Feb 2007 10:55:54 -0800 (PST)
-Message-ID: <7ceeaed30702211055q3f2c8c2dt869fe8a5c2f6bb8a@mail.gmail.com>
-Date: Wed, 21 Feb 2007 19:55:54 +0100
-From: Arkaitz <arkaitzj@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HJxwm-0008CH-93
+	for openembedded-devel@openembedded.org; Wed, 21 Feb 2007 21:20:17 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l1LKKALr030219 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Feb 2007 21:20:10 +0100
+Message-ID: <45DCA97A.8000701@dominion.kabel.utwente.nl>
+Date: Wed, 21 Feb 2007 21:20:10 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-Subject: Migrating ucslugc to gcc 4.1.0
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: RFC: stop mounting /dev/mtdblockX but mount mtdX (without /dev) instead
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,33 +33,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2007 18:55:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 21 Feb 2007 20:20:17 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
 Hi,
-I was using gcc version 3.4.4 and compiling tar package the compiler
-failed giving "mc_ucontext incomplete type" or something like
-that(i've not here) so i decided to try switching to a newer gcc,
-although with this version i manage to compile the full image and lots
-of packages after some patches.
-The gcc 4.1.1 failed with "internal compiler error: in
-thumb_find_work_register, at config/arm/arm.c:3348" when compiling gcc
-so i am trying with 4.1.0 now.
-But when i was compiling with 4.1.0 the uclibc do_install failed with:
-cd lib && tar -cf - *.so.* | tar -xf - -C
-/mnt/almacen/Arkaitz/src/ucslugc/tmp/work/ixp4xxbe-linux-uclibc/uclibc-0.9.28+svn20070221-r4/image/lib
-  CC utils/readelf
-/mnt/almacen/Arkaitz/src/ucslugc/tmp/cross/lib/gcc/armeb-linux-uclibc/4.1.0/../../../../armeb-linux-uclibc/bin/ld:
-unrecognised emulation mode: armelf_linux
-Supported emulations: armelfb_linux armelfb
-collect2: ld returned 1 exit status
 
-Now i am stucked here and i don't know how to continue with this. I
-hope that somebody can give me a hint.
-Thanks for your time
--- 
-Arkaitz
+Chris Ball from the OLPC project was kind (and patient) enough to explain the first item
+of http://www.linux-mtd.infradead.org/archive/tech/faq.html to me.
+
+It seems that most machines in OE with MTD have something like:
+
+/dev/mtdblock2  /               jffs2   defaults        1  1
+/dev/mtdblock3  /home   	jffs2   defaults        1  1
+
+in their fstab, which apparently is wrong. The trick to understanding the FAQ entry is not
+to think in terms of actual devices and controllers, but in terms of fstab. So 'block
+devices' translate to the emulated block devices present as /dev/mtdblockX and 'mtd'
+refers to mtdX.
+
+The correct fstab should be:
+
+mtd2  /         jffs2   defaults        1  1
+mtd3  /home   	jffs2   defaults        1  1
+
+I don't know which kernel version introduced it, but it seems to work on 2.6.16.
+
+What do you think?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFF3Kl6MkyGM64RGpERAhiaAKCdBvq8lwBfM2lzzt+vGS28KcY1VwCeNgvN
+Fyi+w99uUA+KF2bZOdDLBq0=
+=bELj
+-----END PGP SIGNATURE-----
 
 
