@@ -1,26 +1,25 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HK0An-000704-3l
-	for openembedded-devel@openembedded.org; Wed, 21 Feb 2007 23:42:53 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1LMgoLr018694 for <openembedded-devel@openembedded.org>;
-	Wed, 21 Feb 2007 23:42:50 +0100
-Message-ID: <45DCCAEB.9010603@dominion.kabel.utwente.nl>
-Date: Wed, 21 Feb 2007 23:42:51 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1HK0WL-0007JW-2a
+	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 00:05:09 +0100
+Received: from [87.193.44.191] (helo=[192.168.7.104])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50)
+	id 1HK0gW-0005QU-Ls; Thu, 22 Feb 2007 00:15:41 +0100
+Message-ID: <45DCD020.1050002@kernelconcepts.de>
+Date: Thu, 22 Feb 2007 00:05:04 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <45DCC76A.7000002@dominion.kabel.utwente.nl>
-In-Reply-To: <45DCC76A.7000002@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: QA issues with pkgconfig files
+To: Richard Purdie <rpurdie@rpsys.net>
+References: <E1HFb2e-0007GK-Jp@linuxtogo.org>	
+	<45D9CFF7.8060502@kernelconcepts.de>
+	<1908706584.20070220225528@gmail.com>
+	<1172009681.5884.108.camel@localhost.localdomain>
+In-Reply-To: <1172009681.5884.108.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.0.0
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [oe-commits] org.oe.dev xserver-common 1.13: Re-add	calibrate-only-if-ts.patch after merge.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,41 +33,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2007 22:42:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 21 Feb 2007 23:05:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Koen Kooi schreef:
+Richard Purdie wrote:
 
-> Possible solutions:
-> 
-> 1) set PKG_CONFIG_PATH to ${STAGING_LIBDIR}/pkgconfig
->    +easy fix
->    -requires to re-run do_pupulate_staging for all packages
-> 2) symlink one dir to the other
->    +fixes hardcoded paths
->    -requires manual intervention to fixup files present and/or complete rebuild
-> 3) have pkgconfig.bbclass delete one dir each run
->    -requires every packages that has .pc files to inherit pkgconfig
->    -ugly
->    -error-prone
-> 
-> Do you have any other solutions, and if not, which solution do you prefer?
+> My intention was to standardise all 2.6 kernels using udev to use the
+> udev rule, use /dev/touchscreen* and therefore remove the need for
+> detect-stylus and machine specific ts-conf packages. I have no problem
+> having custom tslib conf files for a 2.4 device which needs to work
+> differently. I have now changed the defaults to reflect what the
+> majority of new users will be using though.
 
-4) have pkgconfig.bbclass sed _every_ .pc file in staging each run.
+right, basically a good idea I like as well, but not a hack that is likely
+break things.
 
-regards,
+> As for xserver-common, I'd like to see the standard version of the
+> scripts remain detect-stylus free as it can work on the majority of
+> targets supported by OE without that now. If some legacy devices need
+> it, lets give them a machine specific customised xserver-common like
+> tslib. OE can handle that kind of thing really easily.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+It should not be necessary to have machine specific versions of that package
+which is something we should try to avoid where ever possible.
+Just make that patch a little bit more smart... maybe check if TSLIB_TSDEVICE is
+set and honor is in this case.
 
-iD8DBQFF3MrrMkyGM64RGpERAhy+AKCZIduV69i0NBVTtPgSRejWPxuuOwCdGMfN
-5ZLOhkb6HKJEs+jzJ6o1nNI=
-=w7yI
------END PGP SIGNATURE-----
+> needs even if not acceptable "upstream". Issues like this is one reason
+> poky "forked" those scripts as we knew our needs might not always match
+
+Well... in this case it is that easy to avoid forking, so why wasting
+time maintaining a fork?
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-14
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
