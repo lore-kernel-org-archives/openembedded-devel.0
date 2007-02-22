@@ -1,27 +1,26 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [64.233.182.184] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HK8Ie-00012m-AA
-	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 08:23:32 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1M7NSox017815 for <openembedded-devel@openembedded.org>;
-	Thu, 22 Feb 2007 08:23:29 +0100
-Message-ID: <45DD44EF.30504@dominion.kabel.utwente.nl>
-Date: Thu, 22 Feb 2007 08:23:27 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <pmiscml@gmail.com>) id 1HK8cI-0001CV-Us
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Feb 2007 08:43:50 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so442202nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Feb 2007 23:43:50 -0800 (PST)
+Received: by 10.49.92.18 with SMTP id u18mr3093025nfl.1172130228903;
+	Wed, 21 Feb 2007 23:43:48 -0800 (PST)
+Received: from CUBE ( [77.122.177.58])
+	by mx.google.com with ESMTP id p20sm4963445nfc.2007.02.21.23.43.48;
+	Wed, 21 Feb 2007 23:43:48 -0800 (PST)
+Date: Thu, 22 Feb 2007 09:43:53 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <455328392.20070222094353@gmail.com>
+To: Koen Kooi <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <45DCCAEB.9010603@dominion.kabel.utwente.nl>
+References: <45DCC76A.7000002@dominion.kabel.utwente.nl>
+	<45DCCAEB.9010603@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <E1HFb2e-0007GK-Jp@linuxtogo.org>	<45D9CFF7.8060502@kernelconcepts.de>	<1908706584.20070220225528@gmail.com>	<1172009681.5884.108.camel@localhost.localdomain>	<45DCD020.1050002@kernelconcepts.de>
-	<1172105348.5790.71.camel@localhost.localdomain>
-In-Reply-To: <1172105348.5790.71.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev xserver-common	1.13:	Re-add	calibrate-only-if-ts.patch after merge.
+Subject: Re: QA issues with pkgconfig files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,40 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2007 07:23:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Feb 2007 07:43:51 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Richard Purdie schreef:
-> On Thu, 2007-02-22 at 00:05 +0100, Florian Boor wrote:
->> Richard Purdie wrote:
+Thursday, February 22, 2007, 12:42:51 AM, you wrote:
 
-> I didn't and don't want to spend time having to justify whatever changes
-> we make in poky in that area to OE/GPE/whoever. I can guarantee I've
-> already spent more time in this thread than any time I've spent
-> maintaining that "fork". I say "fork" as I'm not blocking changes
-> passing to/from poky, I actively encourage it and if I made any
-> fundamental changes useful to upstream I would pass them on. I just know
-> we need certain changes in Poky but I know upstream won't like certain
-> changes and therefore I choose not to sync them. Some of the changes
-> we're discussing originated in poky which kind of proves my point :-(.
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
-FWIW, I synced back 'upstream' changes to the xserver-kdrive-common in OE, and I plan to
-do the reverse when I get some time. So no fixes are getting lost and we all can be happy
-using whichever version we want :)
+> Koen Kooi schreef:
 
-regards,
+>> Possible solutions:
+>> 
+>> 1) set PKG_CONFIG_PATH to ${STAGING_LIBDIR}/pkgconfig
+>>    +easy fix
+>>    -requires to re-run do_pupulate_staging for all packages
+>> 2) symlink one dir to the other
+>>    +fixes hardcoded paths
+>>    -requires manual intervention to fixup files present and/or complete rebuild
+>> 3) have pkgconfig.bbclass delete one dir each run
+>>    -requires every packages that has .pc files to inherit pkgconfig
+>>    -ugly
+>>    -error-prone
+>> 
+>> Do you have any other solutions, and if not, which solution do you prefer?
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> 4) have pkgconfig.bbclass sed _every_ .pc file in staging each run.
 
-iD8DBQFF3UTvMkyGM64RGpERAk3xAJ9y4wCHLuXkFExKF+kBactvpeNnfQCZAUnO
-TIADUi5+67peDzNgeCdOaKE=
-=dIg8
------END PGP SIGNATURE-----
+  Why staging? Shouldn't we add sanitize_XXX(filename) where XXX is
+any type of file insane.bbclass checks for, and call it around
+do_install? Plus, add sanitize_XXX_recursive() for lazy folks, who
+will search for broken stuff in install dir itself - just like insane
+currently does, except it will fix it on spot ;-)
+
+> regards,
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
