@@ -1,25 +1,26 @@
-Received: from [64.233.182.184] (helo=nf-out-0910.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HK8cI-0001CV-Us
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Feb 2007 08:43:50 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so442202nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2007 23:43:50 -0800 (PST)
-Received: by 10.49.92.18 with SMTP id u18mr3093025nfl.1172130228903;
-	Wed, 21 Feb 2007 23:43:48 -0800 (PST)
-Received: from CUBE ( [77.122.177.58])
-	by mx.google.com with ESMTP id p20sm4963445nfc.2007.02.21.23.43.48;
-	Wed, 21 Feb 2007 23:43:48 -0800 (PST)
-Date: Thu, 22 Feb 2007 09:43:53 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <455328392.20070222094353@gmail.com>
-To: Koen Kooi <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <45DCCAEB.9010603@dominion.kabel.utwente.nl>
-References: <45DCC76A.7000002@dominion.kabel.utwente.nl>
-	<45DCCAEB.9010603@dominion.kabel.utwente.nl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HK8fw-0001Gb-Ki
+	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 08:47:36 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l1M7lVox022228 for <openembedded-devel@openembedded.org>;
+	Thu, 22 Feb 2007 08:47:31 +0100
+Message-ID: <45DD4A91.3060909@dominion.kabel.utwente.nl>
+Date: Thu, 22 Feb 2007 08:47:29 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <45DCC76A.7000002@dominion.kabel.utwente.nl>	<45DCCAEB.9010603@dominion.kabel.utwente.nl>
+	<455328392.20070222094353@gmail.com>
+In-Reply-To: <455328392.20070222094353@gmail.com>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: QA issues with pkgconfig files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,48 +35,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2007 07:43:51 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 22 Feb 2007 07:47:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hello Koen,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Thursday, February 22, 2007, 12:42:51 AM, you wrote:
+Paul Sokolovsky schreef:
+> Hello Koen,
+> 
+> Thursday, February 22, 2007, 12:42:51 AM, you wrote:
+> 
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+> 
+>> Koen Kooi schreef:
+> 
+>>> Possible solutions:
+>>>
+>>> 1) set PKG_CONFIG_PATH to ${STAGING_LIBDIR}/pkgconfig
+>>>    +easy fix
+>>>    -requires to re-run do_pupulate_staging for all packages
+>>> 2) symlink one dir to the other
+>>>    +fixes hardcoded paths
+>>>    -requires manual intervention to fixup files present and/or complete rebuild
+>>> 3) have pkgconfig.bbclass delete one dir each run
+>>>    -requires every packages that has .pc files to inherit pkgconfig
+>>>    -ugly
+>>>    -error-prone
+>>>
+>>> Do you have any other solutions, and if not, which solution do you prefer?
+> 
+>> 4) have pkgconfig.bbclass sed _every_ .pc file in staging each run.
+> 
+>   Why staging? 
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Because the problem only manifests itself in staging. Have a look at pkgconfig.bbclass and
+you can see why.
 
-> Koen Kooi schreef:
+regards,
 
->> Possible solutions:
->> 
->> 1) set PKG_CONFIG_PATH to ${STAGING_LIBDIR}/pkgconfig
->>    +easy fix
->>    -requires to re-run do_pupulate_staging for all packages
->> 2) symlink one dir to the other
->>    +fixes hardcoded paths
->>    -requires manual intervention to fixup files present and/or complete rebuild
->> 3) have pkgconfig.bbclass delete one dir each run
->>    -requires every packages that has .pc files to inherit pkgconfig
->>    -ugly
->>    -error-prone
->> 
->> Do you have any other solutions, and if not, which solution do you prefer?
+Koen
 
-> 4) have pkgconfig.bbclass sed _every_ .pc file in staging each run.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-  Why staging? Shouldn't we add sanitize_XXX(filename) where XXX is
-any type of file insane.bbclass checks for, and call it around
-do_install? Plus, add sanitize_XXX_recursive() for lazy folks, who
-will search for broken stuff in install dir itself - just like insane
-currently does, except it will fix it on spot ;-)
-
-> regards,
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+iD8DBQFF3UqRMkyGM64RGpERAhAqAJ9SaJ4nGMeadURDP9Ag2WRlLxbmcgCeJIWI
+6KoDZcJ8JlnwqYGq8d7wb84=
+=bwuZ
+-----END PGP SIGNATURE-----
 
 
