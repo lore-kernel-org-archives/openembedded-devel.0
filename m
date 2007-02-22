@@ -1,23 +1,27 @@
-Received: from [206.18.177.52] (helo=alnrmhc12.comcast.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <golly@stellarwerx.com>) id 1HKFAL-0000wx-22
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Feb 2007 15:43:25 +0100
-Received: from gatekeeper.stellarwerx.com
-	(c-68-57-212-205.hsd1.in.comcast.net[68.57.212.205])
-	by comcast.net (alnrmhc12) with ESMTP
-	id <20070222144324b1200b7p26e>; Thu, 22 Feb 2007 14:43:24 +0000
-Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
-	id E49AA6A50; Thu, 22 Feb 2007 09:49:30 -0500 (EST)
-From: "Mark Gollahon" <golly@stellarwerx.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: 
-X-Originating-IP: 68.79.172.62
-X-Mailer: Usermin 1.230
-Message-Id: <1172155769.7346@gatekeeper.stellarwerx.com>
-Date: Thu, 22 Feb 2007 09:49:29 -0500 (EST)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HKFdx-0001NW-VY
+	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 16:14:02 +0100
+Received: from [130.89.136.185] (wlan136185.mobiel.utwente.nl [130.89.136.185])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l1MFDvox009989 for <openembedded-devel@openembedded.org>;
+	Thu, 22 Feb 2007 16:13:58 +0100
+Message-ID: <45DDB334.2050008@dominion.kabel.utwente.nl>
+Date: Thu, 22 Feb 2007 16:13:56 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-Subject: QA issue with *.PC file
+To: openembedded-devel@openembedded.org
+References: <45DCC76A.7000002@dominion.kabel.utwente.nl>
+	<45DD7D8B.6040906@dominion.kabel.utwente.nl>
+In-Reply-To: <45DD7D8B.6040906@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: QA issues with pkgconfig files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,38 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2007 14:43:26 -0000
-Content-Type: multipart/mixed; boundary="bound1172155770"
-
---bound1172155770
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Thu, 22 Feb 2007 15:14:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Ok, I know I'm going to get heckled on this one.  However, has the *.pc sanity check been fixed for later versions of udev when building angstrom?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Regards,
--Mark Gollahon
+Koen Kooi schreef:
+> Koen Kooi schreef:
+> 
+>> Possible solutions:
+> 
+>> 1) set PKG_CONFIG_PATH to ${STAGING_LIBDIR}/pkgconfig
+>>    +easy fix
+>>    -requires to re-run do_pupulate_staging for all packages
+> 
+> This seems to fix it in a clean way. Any objections to this going in today?
 
-===========================================================
+Speak now or be silent forever....
 
-OE Build Configuration:
-BB_VERSION     = "1.6.6"
-OE_REVISION    = "b3d0613a356ef781ed84bdb1cd373059e4210cdd"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux-gnueabi"
-MACHINE        = "spitz"
-DISTRO         = "angstrom"
-DISTRO_VERSION = "test-20070222"
-TARGET_FPU     = "soft"
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-NOTE: preferred version 2.5 of glibc not available
-NOTE: package udev-092: started
-NOTE: package udev-092-r15: task do_qa_staging: started
-NOTE: QA checking staging
-ERROR: QA issue: libvolume_id.pc failed sanity test (reference to /usr/include or workdir)
-ERROR: QA staging was broken by the package built above
-ERROR: Error in executing: /var/tmp/OpenEmbedded/org.openembedded.dev/packages/udev/udev_092.bb
-ERROR: Exception:exceptions.SystemExit Message:1
-ERROR: Printing the environment of the function
+iD8DBQFF3bM0MkyGM64RGpERAj+6AKCMDxx8a7wKvUTT90kr84En2R4HXQCgqfkX
+YnxlmEKeyQBQ8stwIVw/YHs=
+=ZvIf
+-----END PGP SIGNATURE-----
 
---bound1172155770--
+
