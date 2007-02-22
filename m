@@ -1,17 +1,17 @@
 Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HK9WJ-0003UC-PM
-	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 09:41:43 +0100
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HKC4O-0001ig-Q9
+	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 12:25:04 +0100
 Received: from [172.20.0.21] (dominion.kabel.utwente.nl [130.89.193.158])
 	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1M8fcLr003159 for <openembedded-devel@openembedded.org>;
-	Thu, 22 Feb 2007 09:41:38 +0100
-Message-ID: <45DD5741.5070009@dominion.kabel.utwente.nl>
-Date: Thu, 22 Feb 2007 09:41:37 +0100
+	l1MBP0Lr029042; Thu, 22 Feb 2007 12:25:01 +0100
+Message-ID: <45DD7D8B.6040906@dominion.kabel.utwente.nl>
+Date: Thu, 22 Feb 2007 12:24:59 +0100
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
 User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+To: openembedded-devel@openembedded.org,
+	Holger Freyther <freyther@inf.fu-berlin.de>
 References: <45DCC76A.7000002@dominion.kabel.utwente.nl>
 In-Reply-To: <45DCC76A.7000002@dominion.kabel.utwente.nl>
 X-Enigmail-Version: 0.94.1.2
@@ -34,7 +34,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2007 08:41:44 -0000
+X-List-Received-Date: Thu, 22 Feb 2007 11:25:05 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -44,22 +44,26 @@ Hash: SHA1
 Koen Kooi schreef:
 
 > Possible solutions:
+> 
+> 1) set PKG_CONFIG_PATH to ${STAGING_LIBDIR}/pkgconfig
+>    +easy fix
+>    -requires to re-run do_pupulate_staging for all packages
 
-> 2) symlink one dir to the other
->    +fixes hardcoded paths
->    -requires manual intervention to fixup files present and/or complete rebuild
-
-No go, symlinks don't work well when using install -d...
+This seems to fix it in a clean way. Any objections to this going in today?
+Holger, can we disable the insane check for .pc files as well since pkgconfig.bbclass
+already sanitizes them?
 
 regards,
 
 Koen
+
+
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFF3VdAMkyGM64RGpERAn2gAJ4nBfGTPmPQ+smsH5nx51NIRdMTngCfY1S8
-w6Hp2BL7SbVi3lMoj+3K3c4=
-=cH6f
+iD8DBQFF3X2LMkyGM64RGpERApCrAJ0bOZrPqRZvEYd2L7GfCNUaxy+dXgCffOlE
+LQ7SMuVhiEr2c5372pIWA1M=
+=u4NS
 -----END PGP SIGNATURE-----
 
 
