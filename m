@@ -1,26 +1,22 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HKFdx-0001NW-VY
-	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 16:14:02 +0100
-Received: from [130.89.136.185] (wlan136185.mobiel.utwente.nl [130.89.136.185])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1MFDvox009989 for <openembedded-devel@openembedded.org>;
-	Thu, 22 Feb 2007 16:13:58 +0100
-Message-ID: <45DDB334.2050008@dominion.kabel.utwente.nl>
-Date: Thu, 22 Feb 2007 16:13:56 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <freyther@gmx.net>) id 1HKG0f-0003LD-3S
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Feb 2007 16:37:29 +0100
+Received: (qmail invoked by alias); 22 Feb 2007 15:37:28 -0000
+X-Provags-ID: V01U2FsdGVkX19GbvU/9+FGEkZP3DRmQMCfNUHgVGELLGdr/4HMTo
+	7raQ==
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <45DDB334.2050008@dominion.kabel.utwente.nl>
 References: <45DCC76A.7000002@dominion.kabel.utwente.nl>
 	<45DD7D8B.6040906@dominion.kabel.utwente.nl>
-In-Reply-To: <45DD7D8B.6040906@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<45DDB334.2050008@dominion.kabel.utwente.nl>
+Message-Id: <DB0B4478-5567-4F24-80CE-30935F922A79@gmx.net>
+From: Holger Freyther <freyther@gmx.net>
+Date: Thu, 22 Feb 2007 16:37:23 +0100
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.752.3)
+X-Y-GMX-Trusted: 0
 Subject: Re: QA issues with pkgconfig files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,32 +31,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2007 15:14:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Feb 2007 15:37:29 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Koen Kooi schreef:
-> Koen Kooi schreef:
-> 
->> Possible solutions:
-> 
->> 1) set PKG_CONFIG_PATH to ${STAGING_LIBDIR}/pkgconfig
->>    +easy fix
->>    -requires to re-run do_pupulate_staging for all packages
-> 
-> This seems to fix it in a clean way. Any objections to this going in today?
+Am 22.02.2007 um 16:13 schrieb Koen Kooi:
 
-Speak now or be silent forever....
+> Speak now or be silent forever....
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+"now or be be silent forever...."
 
-iD8DBQFF3bM0MkyGM64RGpERAj+6AKCMDxx8a7wKvUTT90kr84En2R4HXQCgqfkX
-YnxlmEKeyQBQ8stwIVw/YHs=
-=ZvIf
------END PGP SIGNATURE-----
+gotta love group thinking, why did I say this?
+
+h.
 
 
