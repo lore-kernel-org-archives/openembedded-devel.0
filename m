@@ -1,29 +1,30 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HKDQ1-0004aP-LA
-	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 13:51:29 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1MCpTU2031711;
-	Thu, 22 Feb 2007 12:51:29 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 31703-01; Thu, 22 Feb 2007 12:51:26 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1MCpNnn031681
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Thu, 22 Feb 2007 12:51:23 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1HKDVB-0004ge-LS
+	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 13:56:49 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1HKDV5-0001WO-SU
+	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 13:56:43 +0100
+Received: from cm74.kappa84.maxonline.com.sg ([58.182.84.74])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 22 Feb 2007 13:56:43 +0100
+Received: from robk by cm74.kappa84.maxonline.com.sg with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 22 Feb 2007 13:56:43 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <erjv1k$sm8$1@sea.gmane.org>
-References: <erjv1k$sm8$1@sea.gmane.org>
-Date: Thu, 22 Feb 2007 12:51:23 +0000
-Message-Id: <1172148683.5837.60.camel@localhost.localdomain>
+From: Rob Kramer <robk@starhub.net.sg>
+Date: Thu, 22 Feb 2007 20:56:16 +0800
+Message-ID: <erk3tt$eha$1@sea.gmane.org>
+References: <erjv1k$sm8$1@sea.gmane.org> <109483350.20070222141407@gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: Rob Kramer <robk@starhub.net.sg>
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: cm74.kappa84.maxonline.com.sg
+User-Agent: KNode/0.10.4
+Sender: news <news@sea.gmane.org>
 Subject: Re: How to specify RDEPENDS properly?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,91 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2007 12:51:30 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Feb 2007 12:56:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7Bit
 
-On Thu, 2007-02-22 at 19:32 +0800, Rob Kramer wrote:
-> I'm trying to build my custom image after updating OE (it worked several
-> months back :). I've already converted several things to the new style, but
-> I can't get my RDEPENDS right. There are about 4 problematic packages, but
-> let's pick readline.
+Hi Paul,
+
+Paul Sokolovsky wrote:
+>   So, libreadline4 must work.
 > 
-> I want libreadline.so in my image, so I include readline as follows: 
+>   General hint: if you have any weird problems with packaging images,
+> first dumb thing you can try is to remove Packages* files and retry.
 > 
-> export PACKAGE_INSTALL = "... readline ..."
-> RDEPENDS = "${PACKAGE_INSTALL}"
-> 
-> That doesn't work though:
-> 
-> | Collected errors:
-> | Cannot find package readline.
-> | Check the spelling or perhaps run 'ipkg update'
-[...]
-> export PACKAGE_INSTALL = "... libreadline ..."
-> RDEPENDS = "${PACKAGE_INSTALL}"
-> 
-> That doesn't work either:
-> 
-> BB>> build display-image
-> SHELL: This command needs to parse bbfiles...
-> NOTE: Using cache in '/bulk/home/rob/oe/dev/build-epia/tmp/cache/rob-epia'
-> NOTE: Handling BitBake files: | (4243/4243) [100 %]
-> NOTE: Parsing finished. 3315 cached, 1 parsed, 196 skipped, 731 masked.
-> 
-> SHELL: Building display-image
-> ERROR: Nothing provides runtime dependency libreadline
-> NOTE: no buildable providers for display-image
-> 
-> Neither does 'libreadline4'.
-> 
-> I looked at how all the other images/tasks do this, but it seems readline is
-> not RDEPENDed anywhere...?
-> 
-> How should I do this, or where to RTFM, if explained there?
+>   That's because ipkg and ipkg-utils have bugs tracking actual state
+> of package. For example, each  time you do "bitbake -c rebuild", and
+> then create image with that package(s), you *must* kill Packages*.
 
-Paul's explanation is nearly correct although not quite.
+Thanks for the elaborate explanation! Killing Packages* did the trick,
+though I had to do a 'rebuild package-index' as well, to get them back.
 
-There are two namespaces in OE, (build) DEPENDS and (runtime) RDEPENDS.
-DEPENDS comes from the package names (PN), RDEPENDS comes from PACKAGES.
-Anything you put in RDEPENDS should match something in PACKAGES.
+Cheers!
 
-The correct line is therefore:
-
-export PACKAGE_INSTALL = "... libreadline ..."
-RDEPENDS = "${PACKAGE_INSTALL}"
-
-but as you point out, this didn't work. The reason is debian.bbclass 's
-package renaming which changes libreadline_4.3-r3_i586.ipk into
-libreadline4_4.3-r3_i586.ipk.
-
-You therefore need libreadline4 in PACKAGE_INSTALL but readline in
-RDEPENDS.
-
-This highlights a nice bug since its not possible to easily add
-debian.bbclass renamed packages directly to an image in PACKAGE_INSTALL.
-People have hinted at there being some problem for a while but I only
-now realise exactly what it is (nobody shown me a failure case until
-now).
-
-The reason most people don't hit this is they declare tasks eg:
-
-PACKAGES = "task-myimage"
-
-RDEPENDS_task-myimage = "readline"
-
-in some task-myimage.bb and then use PACKAGE_INSTALL = "task-myimage".
-There is magic behind the scenes which will convert readline into
-libreadline4 when its written out to a package.
-
-Armed with the above info, you should at least be able to work around
-this. I'll give some thought to processing PACKAGE_INSTALL so we can
-convert references in it into proper package names...
-
-Cheers,
-
-Richard
-
+    Rob
 
 
 
