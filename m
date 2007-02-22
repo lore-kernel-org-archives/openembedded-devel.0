@@ -1,25 +1,34 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1HK0WL-0007JW-2a
-	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 00:05:09 +0100
-Received: from [87.193.44.191] (helo=[192.168.7.104])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50)
-	id 1HK0gW-0005QU-Ls; Thu, 22 Feb 2007 00:15:41 +0100
-Message-ID: <45DCD020.1050002@kernelconcepts.de>
-Date: Thu, 22 Feb 2007 00:05:04 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.9 (X11/20070103)
-MIME-Version: 1.0
-To: Richard Purdie <rpurdie@rpsys.net>
-References: <E1HFb2e-0007GK-Jp@linuxtogo.org>	
+	(envelope-from <rpurdie@rpsys.net>) id 1HK29C-0003AT-H7
+	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 01:49:23 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1M0nC1L026269;
+	Thu, 22 Feb 2007 00:49:12 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 25528-07; Thu, 22 Feb 2007 00:49:09 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1M0n8Wf026261
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Thu, 22 Feb 2007 00:49:08 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Florian Boor <florian.boor@kernelconcepts.de>
+In-Reply-To: <45DCD020.1050002@kernelconcepts.de>
+References: <E1HFb2e-0007GK-Jp@linuxtogo.org>
 	<45D9CFF7.8060502@kernelconcepts.de>
 	<1908706584.20070220225528@gmail.com>
 	<1172009681.5884.108.camel@localhost.localdomain>
-In-Reply-To: <1172009681.5884.108.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.0.0
+	<45DCD020.1050002@kernelconcepts.de>
+Date: Thu, 22 Feb 2007 00:49:08 +0000
+Message-Id: <1172105348.5790.71.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Cc: openembedded-devel@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev xserver-common 1.13: Re-add	calibrate-only-if-ts.patch after merge.
+Subject: Re: [oe-commits] org.oe.dev xserver-common 1.13:	Re-add	calibrate-only-if-ts.patch after merge.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,51 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2007 23:05:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 22 Feb 2007 00:49:23 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On Thu, 2007-02-22 at 00:05 +0100, Florian Boor wrote:
+> Richard Purdie wrote:
+> > As for xserver-common, I'd like to see the standard version of the
+> > scripts remain detect-stylus free as it can work on the majority of
+> > targets supported by OE without that now. If some legacy devices need
+> > it, lets give them a machine specific customised xserver-common like
+> > tslib. OE can handle that kind of thing really easily.
+> 
+> It should not be necessary to have machine specific versions of that package
+> which is something we should try to avoid where ever possible.
+> Just make that patch a little bit more smart... maybe check if TSLIB_TSDEVICE is
+> set and honor is in this case.
 
-Richard Purdie wrote:
+If it references detect-stylus in the script, it RDEPENDS on
+detect-stylus and we have a needless dependency. This is why I'm
+suggesting two versions as a lot of devices don't need that dependency.
 
-> My intention was to standardise all 2.6 kernels using udev to use the
-> udev rule, use /dev/touchscreen* and therefore remove the need for
-> detect-stylus and machine specific ts-conf packages. I have no problem
-> having custom tslib conf files for a 2.4 device which needs to work
-> differently. I have now changed the defaults to reflect what the
-> majority of new users will be using though.
+> > needs even if not acceptable "upstream". Issues like this is one reason
+> > poky "forked" those scripts as we knew our needs might not always match
+> 
+> Well... in this case it is that easy to avoid forking, so why wasting
+> time maintaining a fork?
 
-right, basically a good idea I like as well, but not a hack that is likely
-break things.
+I didn't and don't want to spend time having to justify whatever changes
+we make in poky in that area to OE/GPE/whoever. I can guarantee I've
+already spent more time in this thread than any time I've spent
+maintaining that "fork". I say "fork" as I'm not blocking changes
+passing to/from poky, I actively encourage it and if I made any
+fundamental changes useful to upstream I would pass them on. I just know
+we need certain changes in Poky but I know upstream won't like certain
+changes and therefore I choose not to sync them. Some of the changes
+we're discussing originated in poky which kind of proves my point :-(.
 
-> As for xserver-common, I'd like to see the standard version of the
-> scripts remain detect-stylus free as it can work on the majority of
-> targets supported by OE without that now. If some legacy devices need
-> it, lets give them a machine specific customised xserver-common like
-> tslib. OE can handle that kind of thing really easily.
+Cheers,
 
-It should not be necessary to have machine specific versions of that package
-which is something we should try to avoid where ever possible.
-Just make that patch a little bit more smart... maybe check if TSLIB_TSDEVICE is
-set and honor is in this case.
+Richard
 
-> needs even if not acceptable "upstream". Issues like this is one reason
-> poky "forked" those scripts as we knew our needs might not always match
-
-Well... in this case it is that easy to avoid forking, so why wasting
-time maintaining a fork?
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-14
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
