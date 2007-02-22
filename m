@@ -1,25 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HKD0P-0004Fg-MK
-	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 13:25:02 +0100
-Received: from [172.20.0.21] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1MCOuLr006316 for <openembedded-devel@openembedded.org>;
-	Thu, 22 Feb 2007 13:24:56 +0100
-Message-ID: <45DD8B97.1010406@dominion.kabel.utwente.nl>
-Date: Thu, 22 Feb 2007 13:24:55 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1HKDQ1-0004aP-LA
+	for openembedded-devel@openembedded.org; Thu, 22 Feb 2007 13:51:29 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1MCpTU2031711;
+	Thu, 22 Feb 2007 12:51:29 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 31703-01; Thu, 22 Feb 2007 12:51:26 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1MCpNnn031681
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Thu, 22 Feb 2007 12:51:23 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-References: <erjv1k$sm8$1@sea.gmane.org> <109483350.20070222141407@gmail.com>
-In-Reply-To: <109483350.20070222141407@gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+In-Reply-To: <erjv1k$sm8$1@sea.gmane.org>
+References: <erjv1k$sm8$1@sea.gmane.org>
+Date: Thu, 22 Feb 2007 12:51:23 +0000
+Message-Id: <1172148683.5837.60.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: Rob Kramer <robk@starhub.net.sg>
 Subject: Re: How to specify RDEPENDS properly?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,84 +38,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2007 12:25:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Feb 2007 12:51:30 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, 2007-02-22 at 19:32 +0800, Rob Kramer wrote:
+> I'm trying to build my custom image after updating OE (it worked several
+> months back :). I've already converted several things to the new style, but
+> I can't get my RDEPENDS right. There are about 4 problematic packages, but
+> let's pick readline.
+> 
+> I want libreadline.so in my image, so I include readline as follows: 
+> 
+> export PACKAGE_INSTALL = "... readline ..."
+> RDEPENDS = "${PACKAGE_INSTALL}"
+> 
+> That doesn't work though:
+> 
+> | Collected errors:
+> | Cannot find package readline.
+> | Check the spelling or perhaps run 'ipkg update'
+[...]
+> export PACKAGE_INSTALL = "... libreadline ..."
+> RDEPENDS = "${PACKAGE_INSTALL}"
+> 
+> That doesn't work either:
+> 
+> BB>> build display-image
+> SHELL: This command needs to parse bbfiles...
+> NOTE: Using cache in '/bulk/home/rob/oe/dev/build-epia/tmp/cache/rob-epia'
+> NOTE: Handling BitBake files: | (4243/4243) [100 %]
+> NOTE: Parsing finished. 3315 cached, 1 parsed, 196 skipped, 731 masked.
+> 
+> SHELL: Building display-image
+> ERROR: Nothing provides runtime dependency libreadline
+> NOTE: no buildable providers for display-image
+> 
+> Neither does 'libreadline4'.
+> 
+> I looked at how all the other images/tasks do this, but it seems readline is
+> not RDEPENDed anywhere...?
+> 
+> How should I do this, or where to RTFM, if explained there?
 
-Paul Sokolovsky schreef:
-> Hello Rob,
-> 
-> Thursday, February 22, 2007, 1:32:55 PM, you wrote:
-> 
->> Hi all,
-> 
->> I'm trying to build my custom image after updating OE (it worked several
->> months back :). I've already converted several things to the new style, but
->> I can't get my RDEPENDS right. There are about 4 problematic packages, but
->> let's pick readline.
-> 
-> []
-> 
->> I don't really understand when to use the package name (readline), and when
->> to use the ipk name (libreadline[4]). Several months back I had to RDEPEND
->> on libreadline, so try that again:
-> 
->   First thing to understand is that OE deals with 2 distinct
-> namespaces: one is for recipes, another is for packages. Each recipes
-> may build one or more packages. Names of recipes and packages are
-> connected, but not the same. Well, it's fair to say that recipe's name
-> is usually appears as substring in package name, though bitbake really
-> can build package named arbitrarily from any recipe.
-> 
->   So, what you specify in DEPENDS in recipe name. What you specify in
-> RDEPENDS and other R* friends in package name.
-> 
->> export PACKAGE_INSTALL = "... libreadline ..."
->> RDEPENDS = "${PACKAGE_INSTALL}"
-> 
->> That doesn't work either:
-> 
-> BB>>> build display-image
->> SHELL: This command needs to parse bbfiles...
->> NOTE: Using cache in
->> '/bulk/home/rob/oe/dev/build-epia/tmp/cache/rob-epia'
->> NOTE: Handling BitBake files: | (4243/4243) [100 %]
->> NOTE: Parsing finished. 3315 cached, 1 parsed, 196 skipped, 731 masked.
-> 
->> SHELL: Building display-image
->> ERROR: Nothing provides runtime dependency libreadline
->> NOTE: no buildable providers for display-image
-> 
->> Neither does 'libreadline4'.
-> 
->   There's no magic, let's see together: explode
-> libreadline4_4.3-r3_i586.ipk you have (it's essentiall .deb; if in
-> doubt, use ar followed by tar -z). Look for DEBIAN/control file:
-> ----
-> Provides: libreadline4
-> ----
-> that's in addition to implicit provision of package name (which
-> matches with explicit one here).
-> 
->   So, libreadline4 must work.
+Paul's explanation is nearly correct although not quite.
 
-Right, but you don't want RDEPENDS = "libreadline4" since not everyone is using debian
-style shlib renaming.
+There are two namespaces in OE, (build) DEPENDS and (runtime) RDEPENDS.
+DEPENDS comes from the package names (PN), RDEPENDS comes from PACKAGES.
+Anything you put in RDEPENDS should match something in PACKAGES.
 
-regards,
+The correct line is therefore:
 
-Koen
+export PACKAGE_INSTALL = "... libreadline ..."
+RDEPENDS = "${PACKAGE_INSTALL}"
 
-PS: Paul, sending 1 reply to the list is enough, 2 is overkill
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+but as you point out, this didn't work. The reason is debian.bbclass 's
+package renaming which changes libreadline_4.3-r3_i586.ipk into
+libreadline4_4.3-r3_i586.ipk.
 
-iD8DBQFF3YuXMkyGM64RGpERAiM0AJ9PBu1IGezIuOxiAr7vjZxUC0GwPwCfZvWL
-A20OVsfkXKvXHv4u0qlC1Bc=
-=47WT
------END PGP SIGNATURE-----
+You therefore need libreadline4 in PACKAGE_INSTALL but readline in
+RDEPENDS.
+
+This highlights a nice bug since its not possible to easily add
+debian.bbclass renamed packages directly to an image in PACKAGE_INSTALL.
+People have hinted at there being some problem for a while but I only
+now realise exactly what it is (nobody shown me a failure case until
+now).
+
+The reason most people don't hit this is they declare tasks eg:
+
+PACKAGES = "task-myimage"
+
+RDEPENDS_task-myimage = "readline"
+
+in some task-myimage.bb and then use PACKAGE_INSTALL = "task-myimage".
+There is magic behind the scenes which will convert readline into
+libreadline4 when its written out to a package.
+
+Armed with the above info, you should at least be able to work around
+this. I'll give some thought to processing PACKAGE_INSTALL so we can
+convert references in it into proper package names...
+
+Cheers,
+
+Richard
+
+
 
 
