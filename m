@@ -1,22 +1,36 @@
-Received: from [204.127.225.94] (helo=alnrmhc14.comcast.net)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <golly@stellarwerx.com>) id 1HKLCc-00052p-Df
+	(envelope-from <oe@hentges.net>) id 1HKQ9i-0001k0-Da
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Feb 2007 22:10:10 +0100
-Received: from gatekeeper.stellarwerx.com (failure[68.57.212.205])
-	by comcast.net (alnrmhc14) with ESMTP
-	id <20070222211008b140063g0ue>; Thu, 22 Feb 2007 21:10:09 +0000
-Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
-	id E3A8D6A50; Thu, 22 Feb 2007 16:15:55 -0500 (EST)
-From: "Mark Gollahon" <golly@stellarwerx.com>
+	Fri, 23 Feb 2007 03:27:30 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id F1E52308214
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Feb 2007 03:27:29 +0100 (CET)
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 19437-02 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Feb 2007 03:27:27 +0100 (CET)
+Received: from mhcln04.hentges.priv (xdsl-213-196-246-16.netcologne.de
+	[213.196.246.16]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id D7C0F3081E6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Feb 2007 03:27:06 +0100 (CET)
+From: Matthias Hentges <oe@hentges.net>
 To: openembedded-devel@lists.openembedded.org
-Cc: 
-X-Originating-IP: 68.79.172.62
-X-Mailer: Usermin 1.230
-Message-Id: <1172178954.8592@gatekeeper.stellarwerx.com>
-Date: Thu, 22 Feb 2007 16:15:54 -0500 (EST)
-MIME-Version: 1.0
-Subject: AM_GNU_GETTEXT Undefined During e2fsprogs Config Step
+In-Reply-To: <45DAFC38.40000@dominion.kabel.utwente.nl>
+References: <45D98799.1080309@dominion.kabel.utwente.nl>
+	<200702191259.25200.openembedded@hrw.one.pl>
+	<45D9984C.6090705@dominion.kabel.utwente.nl>
+	<45DAAEF4.50701@dominion.kabel.utwente.nl>
+	<45DAFC38.40000@dominion.kabel.utwente.nl>
+Date: Fri, 23 Feb 2007 03:26:04 +0100
+Message-Id: <1172197564.5203.11.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
+Subject: Re: RFC: splitting deploy/ipk into subarchs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,108 +44,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2007 21:10:10 -0000
-Content-Type: multipart/mixed; boundary="bound1172178955"
-
---bound1172178955
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Fri, 23 Feb 2007 02:27:30 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-I'm trying to build a Spitz Angstrom distro and receiving this when building e2fsprogs: 
+Am Dienstag, den 20.02.2007, 14:48 +0100 schrieb Koen Kooi:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Koen Kooi schreef:
+> 
+> > Marcin and I merged a slightly different version of this today.
+> 
+> As some people found out, their upload scripts broke with this change. I'm sorry that
+> happened, but those scripts are more easily fixed than ipkg-utils :(
+> Due to bug in ipkg-utils being I haven't been using a straight rsync for a while now, so
+> for the curious:
 
------------------------------------------------------------
-OE Build Configuration:
-BB_VERSION     = "1.6.6"
-OE_REVISION    = "4b0e693188daff03f827e74d152209f6c65eed49"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux-gnueabi"
-MACHINE        = "spitz"
-DISTRO         = "angstrom"
-DISTRO_VERSION = "test-20070222"
-TARGET_FPU     = "soft"
+Why not make this change optional via a variable 
+(ie: SPLIT_DEPLOYDIR_IPK = -1 to turn it off) ?
 
-NOTE: preferred version 2.5 of glibc not available
-NOTE: package e2fsprogs-1.38: started
-NOTE: package e2fsprogs-1.38-r8: task do_configure: started
-ERROR: function do_configure failed
-ERROR: log data follows (/var/tmp/OpenEmbedded/Spitz/tmp/work/armv5te-angstrom-linux-gnueabi/e2fsprogs-1.38-r8/temp/log.do_configure.29720)
-| automake (GNU automake) 1.9.3
-| Written by Tom Tromey <tromey@redhat.com>.
-|
-| Copyright 2004 Free Software Foundation, Inc.
-| This is free software; see the source for copying conditions.  There is NO
-| warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-| AUTOV is 1.9
-| NOTE: Executing autoreconf --verbose --install --force --exclude=autopoint -I /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal-1.9 -I /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal
-| autoreconf: Entering directory `.'
-| autoreconf: configure.in: not using Gettext
-| autoreconf: running: aclocal -I /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal-1.9 -I /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal --force
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:45: warning: underquoted definition of AC_LBL_C_INIT
-|   run info '(automake)Extending aclocal'
-|   or see http://sources.redhat.com/automake/automake.html#Extending-aclocal
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:172: warning: underquoted definition of AC_LBL_C_INLINE
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:228: warning: underquoted definition of AC_LBL_LIBPCAP
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:296: warning: underquoted definition of AC_LBL_TYPE_SIGNAL
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:326: warning: underquoted definition of AC_LBL_FIXINCLUDES
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:372: warning: underquoted definition of AC_LBL_LEX_AND_YACC
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:425: warning: underquoted definition of AC_LBL_UNION_WAIT
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:454: warning: underquoted definition of AC_LBL_SOCKADDR_SA_LEN
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:479: warning: underquoted definition of AC_LBL_SOCKADDR_STORAGE
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:512: warning: underquoted definition of AC_LBL_HP_PPA_INFO_T_DL_MODULE_ID_1
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:538: warning: underquoted definition of AC_LBL_HAVE_RUN_PATH
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:564: warning: underquoted definition of AC_LBL_CHECK_TYPE
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:593: warning: underquoted definition of AC_LBL_UNALIGNED_ACCESS
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:698: warning: underquoted definition of AC_LBL_DEVEL
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:828: warning: underquoted definition of AC_LBL_LIBRARY_NET
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:851: warning: underquoted definition of AC_C___ATTRIBUTE__
-| /var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal/libpcap.m4:889: warning: underquoted definition of AC_LBL_TPACKET_STATS
-| aclocal:configure.in:500: warning: macro `AM_GNU_GETTEXT' not found in library
-| autoreconf: configure.in: tracing
-| configure.in:582: warning: AC_RUN_IFELSE called without default to allow cross compiling
-| autoconf/general.m4:2282: AC_RUN_IFELSE is expanded from...
-| autoconf/general.m4:1800: AC_CACHE_VAL is expanded from...
-| autoconf/general.m4:1809: AC_CACHE_CHECK is expanded from...
-| autoconf/types.m4:445: AC_CHECK_SIZEOF is expanded from...
-| configure.in:582: the top level
-| configure.in:583: warning: AC_RUN_IFELSE called without default to allow cross compiling
-| configure.in:583: the top level
-| configure.in:584: warning: AC_RUN_IFELSE called without default to allow cross compiling
-| configure.in:584: the top level
-| configure.in:585: warning: AC_RUN_IFELSE called without default to allow cross compiling
-| configure.in:585: the top level
-| autoreconf: configure.in: not using Libtool
-| autoreconf: running: /var/tmp/OpenEmbedded/Spitz/tmp/staging/i686-linux/bin/autoconf --include=/var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal-1.9 --include=/var/tmp/OpenEmbedded/Spitz/tmp/staging/arm-angstrom-linux-gnueabi/share/aclocal --force --warnings=cross
-| configure.in:582: warning: AC_RUN_IFELSE called without default to allow cross compiling
-| autoconf/general.m4:2282: AC_RUN_IFELSE is expanded from...
-| autoconf/general.m4:1800: AC_CACHE_VAL is expanded from...
-| autoconf/general.m4:1809: AC_CACHE_CHECK is expanded from...
-| autoconf/types.m4:445: AC_CHECK_SIZEOF is expanded from...
-| configure.in:582: the top level
-| configure.in:583: warning: AC_RUN_IFELSE called without default to allow cross compiling
-| configure.in:583: the top level
-| configure.in:584: warning: AC_RUN_IFELSE called without default to allow cross compiling
-| configure.in:584: the top level
-| configure.in:585: warning: AC_RUN_IFELSE called without default to allow cross compiling
-| configure.in:585: the top level
-| configure.in:500: error: possibly undefined macro: AM_GNU_GETTEXT
-|       If this token and others are legitimate, please use m4_pattern_allow.
-|       See the Autoconf documentation.
-| autoreconf: /var/tmp/OpenEmbedded/Spitz/tmp/staging/i686-linux/bin/autoconf failed with exit status: 1
-| FATAL: autoreconf execution failed.
-NOTE: Task failed: /var/tmp/OpenEmbedded/Spitz/tmp/work/armv5te-angstrom-linux-gnueabi/e2fsprogs-1.38-r8/temp/log.do_configure.29720
-NOTE: package e2fsprogs-1.38-r8: task do_configure: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package e2fsprogs-1.38: failed
-ERROR: Build of angstrom-bootstrap-image failed
------------------------------------------------------------
+The current version breaks local OE feeds and requires needless
+post-processing.
 
-According to
+A slugos deploy dir looks like this now:
 
-http://freelords.sourceforge.net/cgi-bin/moin.cgi/Installation
+all
+armv5te
+i686
+ixp4xxle
 
-I should execute "aclocal --force -I <pwd>/m4" to fix.  Shouldn't bitbake/OE be doing that for me?
+I honestly don't see any advantage to the previous mode of operation. If
+it is needed for unique situations like the rare case of a multi-machine
+build, it should be off by default and - by all means - optional.
 
-Regards,
--Mark Gollahon
+My 2 cents
+--
+Matthias Hentges
 
---bound1172178955--
+
+
