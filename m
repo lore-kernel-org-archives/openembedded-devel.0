@@ -1,35 +1,26 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <oe@hentges.net>) id 1HKQ9i-0001k0-Da
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Feb 2007 03:27:30 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id F1E52308214
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2007 03:27:29 +0100 (CET)
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 19437-02 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2007 03:27:27 +0100 (CET)
-Received: from mhcln04.hentges.priv (xdsl-213-196-246-16.netcologne.de
-	[213.196.246.16]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id D7C0F3081E6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2007 03:27:06 +0100 (CET)
-From: Matthias Hentges <oe@hentges.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <45DAFC38.40000@dominion.kabel.utwente.nl>
-References: <45D98799.1080309@dominion.kabel.utwente.nl>
-	<200702191259.25200.openembedded@hrw.one.pl>
-	<45D9984C.6090705@dominion.kabel.utwente.nl>
-	<45DAAEF4.50701@dominion.kabel.utwente.nl>
-	<45DAFC38.40000@dominion.kabel.utwente.nl>
-Date: Fri, 23 Feb 2007 03:26:04 +0100
-Message-Id: <1172197564.5203.11.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HKVQg-0006ZF-0e
+	for openembedded-devel@openembedded.org; Fri, 23 Feb 2007 09:05:22 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l1N85JLr027563 for <openembedded-devel@openembedded.org>;
+	Fri, 23 Feb 2007 09:05:19 +0100
+Message-ID: <45DEA03E.8070903@dominion.kabel.utwente.nl>
+Date: Fri, 23 Feb 2007 09:05:18 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <45D98799.1080309@dominion.kabel.utwente.nl>	<200702191259.25200.openembedded@hrw.one.pl>	<45D9984C.6090705@dominion.kabel.utwente.nl>	<45DAAEF4.50701@dominion.kabel.utwente.nl>	<45DAFC38.40000@dominion.kabel.utwente.nl>
+	<1172197564.5203.11.camel@localhost.localdomain>
+In-Reply-To: <1172197564.5203.11.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: RFC: splitting deploy/ipk into subarchs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -44,43 +35,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Feb 2007 02:27:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 23 Feb 2007 08:05:22 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Am Dienstag, den 20.02.2007, 14:48 +0100 schrieb Koen Kooi:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Matthias Hentges schreef:
+> Am Dienstag, den 20.02.2007, 14:48 +0100 schrieb Koen Kooi:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Koen Kooi schreef:
+>>
+>>> Marcin and I merged a slightly different version of this today.
+>> As some people found out, their upload scripts broke with this change. I'm sorry that
+>> happened, but those scripts are more easily fixed than ipkg-utils :(
+>> Due to bug in ipkg-utils being I haven't been using a straight rsync for a while now, so
+>> for the curious:
 > 
-> Koen Kooi schreef:
+> Why not make this change optional via a variable 
+> (ie: SPLIT_DEPLOYDIR_IPK = -1 to turn it off) ?
 > 
-> > Marcin and I merged a slightly different version of this today.
+> The current version breaks local OE feeds
+
+People's feeds are outside the scope of OE. Repeat after me: deploy never was, isn't and
+never will be a feed.
+
+> and requires needless post-processing.
+
+As I pointed out before, you needed postprocessing anyway due to bugs in ipkg and
+ipkg-utils, so your point is moot.
+
+
+> A slugos deploy dir looks like this now:
 > 
-> As some people found out, their upload scripts broke with this change. I'm sorry that
-> happened, but those scripts are more easily fixed than ipkg-utils :(
-> Due to bug in ipkg-utils being I haven't been using a straight rsync for a while now, so
-> for the curious:
+> all
+> armv5te
+> i686
+> ixp4xxle
+> 
+> I honestly don't see any advantage to the previous mode of operation.
 
-Why not make this change optional via a variable 
-(ie: SPLIT_DEPLOYDIR_IPK = -1 to turn it off) ?
+Go read the openembedded-devel list some time.
 
-The current version breaks local OE feeds and requires needless
-post-processing.
 
-A slugos deploy dir looks like this now:
+> If
+> it is needed for unique situations 
 
-all
-armv5te
-i686
-ixp4xxle
+No
 
-I honestly don't see any advantage to the previous mode of operation. If
-it is needed for unique situations like the rare case of a multi-machine
-build, it should be off by default and - by all means - optional.
+> like the rare case of a multi-machine build
 
-My 2 cents
---
-Matthias Hentges
+Apart from that now being the point, it actually isn't rare, the majority of the
+(maintained) distros in OE use it (celinux. generic, angstrom, openmoko, openzaurus,
+slugos and jline).
 
+> it should be off by default and - by all means - optional.
+
+No it should not. Next time respond to the RFCs instead of starting some uninformed rant
+afterward.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFF3qA+MkyGM64RGpERAsq1AJ9jkjFqiolnJWv/Mul6S59sCG2gZwCcDWRi
+WEqSA0lYqeEuhz/9vBImS00=
+=EmZ6
+-----END PGP SIGNATURE-----
 
 
