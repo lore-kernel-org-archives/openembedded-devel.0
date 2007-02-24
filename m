@@ -1,23 +1,38 @@
-Received: from [204.127.225.96] (helo=alnrmhc16.comcast.net)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <golly@stellarwerx.com>) id 1HKhCG-0001QZ-Vw
+	(envelope-from <oe@hentges.net>) id 1HKkPl-0000KM-B6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Feb 2007 21:39:17 +0100
-Received: from gatekeeper.stellarwerx.com
-	(c-68-57-212-205.hsd1.in.comcast.net[68.57.212.205])
-	by comcast.net (alnrmhc16) with ESMTP
-	id <20070223203915b1600c6roue>; Fri, 23 Feb 2007 20:39:15 +0000
-Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
-	id 9A67C2D8A; Fri, 23 Feb 2007 15:45:22 -0500 (EST)
-From: "Mark Gollahon" <golly@stellarwerx.com>
+	Sat, 24 Feb 2007 01:05:25 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id A3EA63081E8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Feb 2007 01:05:24 +0100 (CET)
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 08779-04 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Feb 2007 01:05:21 +0100 (CET)
+Received: from mhcln04.hentges.priv (xdsl-213-196-246-16.netcologne.de
+	[213.196.246.16]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id 936BB3081E6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Feb 2007 01:05:00 +0100 (CET)
+From: Matthias Hentges <oe@hentges.net>
 To: openembedded-devel@lists.openembedded.org
-Cc: 
-X-Originating-IP: 68.79.172.62
-X-Mailer: Usermin 1.230
-Message-Id: <1172263520.17511@gatekeeper.stellarwerx.com>
-Date: Fri, 23 Feb 2007 15:45:21 -0500 (EST)
-MIME-Version: 1.0
-Subject: Freetype Fails Config on a Spitz/Angstrom Build
+In-Reply-To: <45DEA03E.8070903@dominion.kabel.utwente.nl>
+References: <45D98799.1080309@dominion.kabel.utwente.nl>
+	<200702191259.25200.openembedded@hrw.one.pl>
+	<45D9984C.6090705@dominion.kabel.utwente.nl>
+	<45DAAEF4.50701@dominion.kabel.utwente.nl>
+	<45DAFC38.40000@dominion.kabel.utwente.nl>
+	<1172197564.5203.11.camel@localhost.localdomain>
+	<45DEA03E.8070903@dominion.kabel.utwente.nl>
+Date: Sat, 24 Feb 2007 01:03:53 +0100
+Message-Id: <1172275433.5203.17.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
+Subject: Re: RFC: splitting deploy/ipk into subarchs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,107 +46,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Feb 2007 20:39:17 -0000
-Content-Type: multipart/mixed; boundary="bound1172263521"
-
---bound1172263521
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Sat, 24 Feb 2007 00:05:25 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Now freetype is failing during config.  I'm stuck, so can anyone tell me why?
+Am Freitag, den 23.02.2007, 09:05 +0100 schrieb Koen Kooi:
 
-Regards,
--Mark Gollahon
+> Matthias Hentges schreef:
+> > Am Dienstag, den 20.02.2007, 14:48 +0100 schrieb Koen Kooi:
+> >> -----BEGIN PGP SIGNED MESSAGE-----
+> >> Hash: SHA1
+> >>
+> >> Koen Kooi schreef:
+> >> 
+> > Why not make this change optional via a variable 
+> > (ie: SPLIT_DEPLOYDIR_IPK = -1 to turn it off) ?
+> > 
+> > The current version breaks local OE feeds
+> 
+> People's feeds are outside the scope of OE. Repeat after me: deploy never was, isn't and
+> never will be a feed.
+
+It worked just fine as a feed before the change and people were using
+it as such, deal with it.
+
+> > and requires needless post-processing.
+> 
+> As I pointed out before, you needed postprocessing anyway due to bugs in ipkg and
+> ipkg-utils, so your point is moot.
+
+You may have needed post-processing, I personally never did. Not even
+when I was building for 4 machines.... As I said, the old deploy
+directory worked just fine as a feed out of the box. If people weren't
+using it as a feed, please explain the existence of
+meta/package-index.bb.
+
+> 
+> > A slugos deploy dir looks like this now:
+> > 
+> > all
+> > armv5te
+> > i686
+> > ixp4xxle
+> > 
+> > I honestly don't see any advantage to the previous mode of operation.
+> 
+> Go read the openembedded-devel list some time.
+
+Well, If I wouldn't read it from time to time, I wouldn't have
+responded to this thread in the first place.
+Sounds logical, now, doesn't it?
+
+> 
+> > If
+> > it is needed for unique situations 
+> 
+> No
+
+Oh yes.
+
+> > like the rare case of a multi-machine build
+> 
+> Apart from that now being the point, 
+
+Yes, that's exactly the point. A change benefiting very few people
+affecting basically every one in a mostly negative way.
+
+> it actually isn't rare, the majority of the
+> (maintained) distros in OE use it (celinux. generic, angstrom, openmoko, openzaurus,
+> slugos and jline).
+
+Oh right, because the majority of OE users are distribution maintainers,
+right!
+And every maintainer always builds every machine in existance. Sorry, I
+forgot!
+</sarcasm>
+
+Your SlugOS exsample is pretty braindead as I had already shown you in
+my previous email that slugos builds _suffer_ from the change, they
+don't benefit from it. You do actually _read_ the emails you are
+"responding" to, right?
+
+SlugOS doesn't even use multi-machine magic to build images for
+multiple supported machines (it may or may not use it for LE/BE
+builds). You might wanna check with reality from time to time before
+spouting nonsense.
+
+> > it should be off by default and - by all means - optional.
+> 
+> No it should not. Next time respond to the RFCs instead of starting some uninformed rant
+> afterward.
+
+a) Not even 24 hours passed between the first email and the resulting
+commit. What kind of RFC is that? How are people supposed to actually
+comment on it (you know, the C part of RFC? ) if the commit is out
+before most subscribers even noticed what was going on?
+
+b) I do have other things on my mind than to read this mailinglist on
+a daily basis. I only do so from time to time and respond to matters
+of my concern and / or interest.
+
+c) It wasn't a "rant", I was stating facts, even if you are too
+close-minded to see it.
+
+d) It was in no way uninformed. You may remember me maintaining my own
+bloody distribution for multiple machines in the past? How much more
+informed about this matter do you want me to get? I even gave a very
+informed short example ( in the form of SlugOS ) of why I think the
+change should be optional. If anyone is posting uninformed "rants", it
+is you.
+
+e) If you do not want any comments, then by all means, don't request
+them! But if you actually _do_ care what other people think about a
+certain matter, please stop responding like a know-all-be-all impolite
+smart-ass that puts down other people for not thinking 100% alike.
 
 
-$ bitbake freetype
-NOTE: Using cache in '/var/tmp/OpenEmbedded/Spitz/tmp/cache/spitz'
-NOTE: Handling BitBake files: / (4216/4216) [100 %]
-NOTE: Parsing finished. 4042 cached, 0 parsed, 174 skipped, 0 masked.
 
-NOTE: build 200702231529: started
 
-OE Build Configuration:
-BB_VERSION     = "1.6.6"
-OE_REVISION    = "7bd9b617a6b57c3119453e5a6b2ae93264ba00a6"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux-gnueabi"
-MACHINE        = "spitz"
-DISTRO         = "angstrom"
-DISTRO_VERSION = "test-20070223"
-TARGET_FPU     = "soft"
-
-NOTE: preferred version 2.5 of glibc not available
-NOTE: package freetype-2.3.0: started
-NOTE: package freetype-2.3.0-r0: task do_configure: started
-ERROR: function do_configure failed
-ERROR: log data follows (/var/tmp/OpenEmbedded/Spitz/tmp/work/armv5te-angstrom-linux-gnueabi/freetype-2.3.0-r0/temp/log.do_configure.25468)
-| configure.ac:125: warning: AC_CANONICAL_TARGET was called before AC_CHECK_TARGET_TOOL
-| autoconf/types.m4:401: AC_CHECK_TARGET_TOOL is expanded from...
-| autoconf/types.m4:407: AC_PROG_SIZE is expanded from...
-| configure.ac:125: AC_PROG_SIZE is required by...
-| autoconf/types.m4:445: AC_CHECK_SIZEOF is expanded from...
-| configure.ac:125: the top level
-| configure.ac:125: warning: AC_CANONICAL_TARGET was called before AC_CHECK_TARGET_TOOL
-| autoconf/types.m4:401: AC_CHECK_TARGET_TOOL is expanded from...
-| autoconf/types.m4:407: AC_PROG_SIZE is expanded from...
-| configure.ac:125: AC_PROG_SIZE is required by...
-| autoconf/types.m4:445: AC_CHECK_SIZEOF is expanded from...
-| configure.ac:125: the top level
-| configure.ac:125: warning: AC_CANONICAL_TARGET was called before AC_CHECK_TARGET_TOOL
-| autoconf/types.m4:401: AC_CHECK_TARGET_TOOL is expanded from...
-| autoconf/types.m4:407: AC_PROG_SIZE is expanded from...
-| configure.ac:125: AC_PROG_SIZE is required by...
-| autoconf/types.m4:445: AC_CHECK_SIZEOF is expanded from...
-| configure.ac:125: the top level
-| NOTE: Running /var/tmp/OpenEmbedded/Spitz/tmp/work/armv5te-angstrom-linux-gnueabi/freetype-2.3.0-r0/freetype-2.3.0/configure              --build=i686-linux     --host=arm-angstrom-linux-gnueabi                --target=arm-angstrom-linux-gnueabi                     --prefix=/usr                   --exec_prefix=/usr     --bindir=/usr/bin                --sbindir=/usr/sbin                     --libexecdir=/usr/libexec               --datadir=/usr/share                    --sysconfdir=/etc               --sharedstatedir=/usr/com               --localstatedir=/var                    --libdir=/usr/lib               --includedir=/usr/include               --oldincludedir=/usr/include                    --infodir=/usr/share/info               --mandir=/usr/share/man                     --without-zlib              ...
-|
-| FreeType build system -- automatic system detection
-|
-| The following settings are used:
-|
-|   platform                    unix
-|   compiler                    arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=xscale
-|   configuration directory     ./builds/unix
-|   configuration rules         ./builds/unix/unix.mk
-|
-| If this does not correspond to your system or settings please remove the file
-| `config.mk' from this directory then read the INSTALL file for help.
-|
-| Otherwise, simply type `make' again to build the library,
-| or `make refdoc' to build the API reference (the latter needs python).
-|
-| cd builds/unix; ./configure  "--build=i686-linux" "--host=arm-angstrom-linux-gnueabi" "--target=arm-angstrom-linux-gnueabi" "--prefix=/usr" "--exec_prefix=/usr" "--bindir=/usr/bin" "--sbindir=/usr/sbin" "--libexecdir=/usr/libexec" "--datadir=/usr/share" "--sysconfdir=/etc" "--sharedstatedir=/usr/com" "--localstatedir=/var" "--libdir=/usr/lib" "--includedir=/usr/include" "--oldincludedir=/usr/include" "--infodir=/usr/share/info" "--mandir=/usr/share/man" "--without-zlib"
-| configure: loading site script /var/tmp/OpenEmbedded/org.openembedded.dev/site/endian-little
-| configure: loading site script /var/tmp/OpenEmbedded/org.openembedded.dev/site/common-glibc
-| configure: loading site script /var/tmp/OpenEmbedded/org.openembedded.dev/site/arm-common
-| configure: loading site script /var/tmp/OpenEmbedded/org.openembedded.dev/site/arm-linux
-| configure: loading site script /var/tmp/OpenEmbedded/org.openembedded.dev/site/common
-| configure: loading site script /var/tmp/OpenEmbedded/org.openembedded.dev/site/common
-| checking build system type... i686-pc-linux-gnu
-| checking host system type... arm-angstrom-linux-gnueabi
-| checking target system type... arm-angstrom-linux-gnueabi
-| checking for arm-angstrom-linux-gnueabi-gcc... arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=xscale
-| checking for C compiler default output file name... a.out
-| checking whether the C compiler works... yes
-| checking whether we are cross compiling... yes
-| checking for suffix of executables...
-| checking for suffix of object files... o
-| checking whether we are using the GNU C compiler... yes
-| checking whether arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=xscale accepts -g... yes
-| checking for arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=xscale option to accept ANSI C... none needed
-| checking how to run the C preprocessor... arm-angstrom-linux-gnueabi-gcc -E
-| checking for i686-pc-linux-gnu-gcc... i686-pc-linux-gnu
-| checking for i686-pc-linux-gnu-gcc... (cached) i686-pc-linux-gnu
-| checking for i686-pc-linux-gnu-gcc... (cached) i686-pc-linux-gnu
-| checking for suffix of native executables... ./configure: line 2943: i686-pc-linux-gnu: command not found
-| configure: error: native C compiler is not working
-| make: *** [setup] Error 1
-| FATAL: oe_runconf failed
-NOTE: Task failed: /var/tmp/OpenEmbedded/Spitz/tmp/work/armv5te-angstrom-linux-gnueabi/freetype-2.3.0-r0/temp/log.do_configure.25468
-NOTE: package freetype-2.3.0-r0: task do_configure: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package freetype-2.3.0: failed
-ERROR: Build of freetype failed
-
---bound1172263521--
