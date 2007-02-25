@@ -1,23 +1,26 @@
-Received: from [212.23.3.141] (helo=heisenberg.zen.co.uk)
+Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mroz@callnetuk.com>) id 1HKuuo-00088D-2X
+	(envelope-from <rod@whitby.id.au>) id 1HLGBZ-0006Ik-SY
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Feb 2007 12:18:10 +0100
-Received: from [217.155.205.243] (helo=[192.168.1.1])
-	by heisenberg.zen.co.uk with esmtp (Exim 4.50) id 1HKuun-00050r-7W
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Feb 2007 11:18:09 +0000
-Message-ID: <45E01EFD.1020707@callnetuk.com>
-Date: Sat, 24 Feb 2007 11:18:21 +0000
-From: Michael Rozdoba <mroz@callnetuk.com>
+	Sun, 25 Feb 2007 11:01:30 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 2D4201D04C0;
+	Sun, 25 Feb 2007 05:00:53 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by out1.internal (MEProxy); Sun, 25 Feb 2007 05:00:53 -0500
+X-Sasl-enc: SX5VsynFgkqNLv2JHxS9tYezxKitVy3r9dWwgMKEQAuQ 1172397652
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id E70B213EDF;
+	Sun, 25 Feb 2007 05:00:51 -0500 (EST)
+Message-ID: <45E15E45.5060800@whitby.id.au>
+Date: Sun, 25 Feb 2007 20:30:37 +1030
+From: Rod Whitby <rod@whitby.id.au>
 User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <45D98799.1080309@dominion.kabel.utwente.nl>	<200702191259.25200.openembedded@hrw.one.pl>	<45D9984C.6090705@dominion.kabel.utwente.nl>	<45DAAEF4.50701@dominion.kabel.utwente.nl>	<45DAFC38.40000@dominion.kabel.utwente.nl>	<1172197564.5203.11.camel@localhost.localdomain>
-	<45DEA03E.8070903@dominion.kabel.utwente.nl>
-In-Reply-To: <45DEA03E.8070903@dominion.kabel.utwente.nl>
-X-Originating-Heisenberg-IP: [217.155.205.243]
-Subject: Re: RFC: splitting deploy/ipk into subarchs
+Cc: "openmoko-devel@lists.openmoko.org" <openmoko-devel@lists.openmoko.org>
+Subject: Should rm_work be moved after do_deploy, or is ${WORKDIR} not available in do_deploy?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,36 +34,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Feb 2007 11:18:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 25 Feb 2007 10:02:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Matthias Hentges schreef:
->> Am Dienstag, den 20.02.2007, 14:48 +0100 schrieb Koen Kooi:
->>> -----BEGIN PGP SIGNED MESSAGE-----
+[Follow-ups to openembedded-devel@lists.openembedded.org only, please.]
 
->> it should be off by default and - by all means - optional.
-> 
-> No it should not. Next time respond to the RFCs instead of starting some uninformed rant
-> afterward.
+A question for the OE core team representatives on the list:  Is
+do_deploy prohibited from being able to get at things in ${WORKDIR}, or
+should rm_work happen after do_deploy?
 
-Matthias's post did not read as a rant.
+Details follow:
 
-A response earlier certainly would have been more helpful, however as he 
-points out, if the preceding procedure was meant to be a RFC the period 
-allowed for this was very short.
+There is this neat rm_work.bbclass in OpenEmbedded which removes each
+individual build/tmp/work/... directory as each package is successfully
+built (this saves a *lot* of space, especially with the openmoko svnnow
+paradigm which will quickly fill your disk with multiple build copies of
+openmoko packages).
 
-How long should be allowed for feedback is an issue I'm not qualified to 
-comment on, however given the time allowed it is certainly unreasonable 
-at the very least to complain when constructive feedback is received 
-after the event.
+Unfortunately (at least with bitbake 1.6 head), rm_work is called before
+do_deploy, so the do_deploy() function in OpenMoko's
+sjf2410-linux-native.bb fails:
 
--- 
-Michael
-m r o z a t u k g a t e w a y d o t n e t
+do_deploy() {
+        install -d ${DEPLOY_DIR_IMAGE}
+        install -m 0755 sjf2410 ${DEPLOY_DIR_IMAGE}/sjf2410
+}
+
+The sjf2410 executable no longer exists at that point, cause rm_work has
+deleted it.
+
+Should rm_work be moved to after do_deploy, or should
+sjf2410-linux-native.bb (and all other packages that assume that the
+contents of ${WORKDIR} are still available in do_deploy) be fixed?
+
+(For example, the same problem occurs in ixp4xx-kernel ...)
+
+-- Rod
 
 
