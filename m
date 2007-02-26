@@ -1,30 +1,21 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [192.132.34.13] (helo=amail.unina.it)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HLden-0001NL-SW
-	for openembedded-devel@openembedded.org; Mon, 26 Feb 2007 12:04:38 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1QB41JM027577;
-	Mon, 26 Feb 2007 11:04:01 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 26519-09; Mon, 26 Feb 2007 11:03:58 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1QB3tpU027564
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 26 Feb 2007 11:03:55 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <45E16336.8060205@whitby.id.au>
-References: <45E15E45.5060800@whitby.id.au>  <45E16336.8060205@whitby.id.au>
-Date: Mon, 26 Feb 2007 11:03:55 +0000
-Message-Id: <1172487835.5824.16.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: "openmoko-devel@lists.openmoko.org" <openmoko-devel@lists.openmoko.org>
-Subject: Re: Should rm_work be moved after do_deploy, or is ${WORKDIR}	not available in do_deploy?
+	(envelope-from <ranaldo@unina.it>) id 1HLdqS-0001XE-03
+	for openembedded-devel@openembedded.org; Mon, 26 Feb 2007 12:16:40 +0100
+Received: from blaster.unina.it ([192.132.34.15]) (authenticated bits=0)
+	by amail.unina.it (8.13.4/8.13.4) with ESMTP id l1QBGcEb017598
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 26 Feb 2007 12:16:38 +0100
+From: Nicola Ranaldo <ranaldo@unina.it>
+To: Paul Sokolovsky <pmiscml@gmail.com>, openembedded-devel@openembedded.org
+Date: Mon, 26 Feb 2007 12:15:07 +0100
+User-Agent: KMail/1.9.6
+References: <200702231326.37015.ranaldo@unina.it>
+	<7010259346.20070225203430@gmail.com>
+In-Reply-To: <7010259346.20070225203430@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200702261215.07980.ranaldo@unina.it>
+Subject: testing with qemu, was Re: Angstrom and h2200
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,46 +29,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Feb 2007 11:04:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Feb 2007 11:16:40 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Sun, 2007-02-25 at 20:51 +1030, Rod Whitby wrote:
-> Rod Whitby wrote:
-> > A question for the OE core team representatives on the list:  Is
-> > do_deploy prohibited from being able to get at things in ${WORKDIR}, or
-> > should rm_work happen after do_deploy?
-> 
-> Never mind - it was simply the fact that do_deploy is badly placed in
-> sjf2410-linux-native.bb, nothing to do with base OE or bitbake
-> functionality.
-> 
-> Reported as
-> http://bugzilla.openmoko.org/cgi-bin/bugzilla/show_bug.cgi?id=211
-> and work-around added to MokoMakefile.
-> 
-> Sorry for the noise.
+On Sunday 25 February 2007 19:34:30 Paul Sokolovsky wrote:
+[...]
+> > * the last, may i use some kind of emulator before deploying the fs image
+> > to the ipaq?
+>
+>   Yes, QEMU.
 
-addtask deploy before do_build after do_compile
+I already use it to emulate x86 machines, but i was not able before to find 
+the qemu-system-arm command!!! the poky-runqemu documentation seems to be 
+complex, to run the test images at 
+http://www.angstrom-distribution.org/unstable/images/20070120/qemuarm/  i 
+simply used the following command:
 
-is actually correct as far as dependencies go but interacts badly with
-rm_work.
+qemu-system-arm -M versatilepb -kernel 
+zImage-2.6.18-qemuarm-20070120215313.bin -hda 
+Angstrom-gpe-image-test-20070120-qemuarm.rootfs.ext2  -append "root=/dev/sda"
+When the system asked to calibrate to touchscreen i pressed ESC and gpe 
+appeared!
+I did not use the file modules-2.6.18-qemuarm.tgz.... is there a reason it's 
+there?
 
-This raises a long standing issue. do_rm_work should run as the last
-task, just before do_build. Currently we have difficulty in inserting
-that task into the task structure since the do_deploy isn't always
-defined. The planned solution is to allow syntax like:
+thanks
 
-addtask rm_work after do_package do_deploy
-
-and then lots of these tricky ordering issues can be solved in an easier
-way. I've not remembered about this at the right time to implement it so
-far though...
-
-Cheers,
-
-Richard
-
-
+	Nicola Ranaldo
 
 
