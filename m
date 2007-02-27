@@ -1,33 +1,21 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [195.121.247.10] (helo=smtp19.wxs.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HLn2O-0007Gr-E0
-	for openembedded-devel@openembedded.org; Mon, 26 Feb 2007 22:05:36 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1QL5aPZ024593
-	for <openembedded-devel@openembedded.org>; Mon, 26 Feb 2007 21:05:36 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 23458-09 for <openembedded-devel@openembedded.org>;
-	Mon, 26 Feb 2007 21:05:32 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1QL5UJI024585
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Mon, 26 Feb 2007 21:05:30 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <45E2CC8E.5040505@4g-systems.com>
-References: <200702231326.37015.ranaldo@unina.it>
-	<7010259346.20070225203430@gmail.com>
-	<200702261215.07980.ranaldo@unina.it>
-	<45E2CC8E.5040505@4g-systems.com>
-Date: Mon, 26 Feb 2007 21:05:31 +0000
-Message-Id: <1172523931.24429.6.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: testing with qemu, was Re: Angstrom and h2200
+	(envelope-from <gerwin@vanderkruis.net>) id 1HM4xM-0004CC-9j
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Feb 2007 17:13:36 +0100
+Received: from [10.0.0.155] (ip5457b30e.direct-adsl.nl [84.87.179.14])
+	by smtp19.wxs.nl
+	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006)) with
+	ESMTP id <0JE400EZJQEL36@smtp19.wxs.nl> for
+	openembedded-devel@lists.openembedded.org; 
+	Tue, 27 Feb 2007 17:13:35 +0100 (CET)
+Date: Tue, 27 Feb 2007 17:13:24 +0100
+From: gerwin van der kruis <gerwin@vanderkruis.net>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <1172592804.3002.1.camel@localhost.localdomain>
+MIME-version: 1.0
+X-Mailer: Evolution 2.8.3 (2.8.3-1.fc6)
+Subject: Fosdem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,47 +29,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Feb 2007 21:05:37 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Feb 2007 16:13:37 -0000
+X-Groupsio-MsgNum: 1478
+Content-type: multipart/mixed; boundary="Boundary_(ID_P1fQADU9q8m/PZ9JLhJQeQ)"
 
-On Mon, 2007-02-26 at 13:03 +0100, Patrick Fischer wrote: 
-> Nicola Ranaldo wrote:
-> > I already use it to emulate x86 machines, but i was not able before to find 
-> > the qemu-system-arm command!!! the poky-runqemu documentation seems to be 
-> > complex, to run the test images at 
-> > http://www.angstrom-distribution.org/unstable/images/20070120/qemuarm/  i 
-> > simply used the following command:
-> >
-> > qemu-system-arm -M versatilepb -kernel 
-> > zImage-2.6.18-qemuarm-20070120215313.bin -hda 
-> > Angstrom-gpe-image-test-20070120-qemuarm.rootfs.ext2  -append "root=/dev/sda"
-> > When the system asked to calibrate to touchscreen i pressed ESC and gpe 
-> > appeared!
-> >
-> This is my test script for qemu
+--Boundary_(ID_P1fQADU9q8m/PZ9JLhJQeQ)
+Content-type: text/plain
+Content-transfer-encoding: 7BIT
 
-> ./testqemu.sh tmp/deploy/images/bzImage-qemux86.bin tmp/deploy/images/bootstrap-image-qemux86-20070112211142.rootfs.ext2.gz
+Dear all, 
 
-Lets reinvent the wheel too...
+Please find attached a summary of our fosdem visit. 
 
-This should work just the same as 
-poky-runqemu tmp/deploy/images/bzImage-qemux86.bin tmp/deploy/images/bootstrap-image-qemux86-20070112211142.rootfs.ext2
+Thanks all for helping !!!
 
-(except the same command works with qemuarm and several zaurus images if
-you have the right qemu)
+I was not there on sunday so if somebody can add sunday experiences to
+it 
 
-Note you have to use an ext2 image, not a gzipped one but my setup
-generates ext2 files, not ext2.gz ones...
+Regards, 
 
-> > I did not use the file modules-2.6.18-qemuarm.tgz.... is there a 
-> > reason it's there?
+Gerwin
 
-Anyone developing a kernel finds it useful, otherwise just ignore it. 
+--Boundary_(ID_P1fQADU9q8m/PZ9JLhJQeQ)
+Content-type: text/plain; name=verslagfosdem; charset=UTF-8
+Content-transfer-encoding: 7BIT
+Content-disposition: attachment; filename=verslagfosdem
 
-Regards,
+Openembedded at fosdem 2007
 
-Richard
+Openembedded was at fosdem 2007 and it was a succes. 
+
+Fosdem started out with a meeting on the market of Brussels, because de 
+"Roy d'Espagne" was kind of full the oe people decided to meet at another place. 
+After some phonecalls me and Likewise where able to find the place. 
+
+In the place we had all together a homemade beer from the house and talked about 
+various issues. It was great to see each other because for example I had never seen
+most people before. 
+
+After some beers most of us left for the astridhotel and me Xora and Likewise left 
+to see some some other pubs. 
+
+On saturday morning we went to the university and we went to our booth, I was the first to
+arrive at the booth thanks to the friend of Klaas van Gent who gave me a lift. We had sufficient 
+time to take care of our booth and Laibsch, Koen, Xora , Likewise, Hrw,Zecke took with me care of the booth. In the beginning we had some trouble with Belgium power outlets but hapilly Jan was so kind to donate power outlets to us !!.  
+
+Saturday was the most busy day we had a constant stream of visitors to our booth and we received 
+two donations of hardware and a couple of donations are comming up. We received a donation from Trolltech who donated the greenphone to us and we received some flashcards and a orinoco wireless-card. Furthermore we talked with the guy from the one laptop per child initiative, maybe we will get one to put support for it in oe. Furthermore there was a guy who will send us a palm treo. 
+
+The openmoko presentation was visited by many more people as we expected and not everybody that 
+wanted to get in was able to get in. Overall my conclussion is that the fosdem for oe was quite 
+succesfull, somethings we need to do better in the future, we need to have more space (one table was not enough) and we need to have more promotional material. 
 
 
 
+ 
+
+
+
+
+
+
+
+--Boundary_(ID_P1fQADU9q8m/PZ9JLhJQeQ)--
