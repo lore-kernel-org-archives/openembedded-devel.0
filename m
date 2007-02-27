@@ -1,27 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.184.236] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HM5QR-0006BJ-TV
-	for openembedded-devel@openembedded.org; Tue, 27 Feb 2007 17:43:39 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1RGhVLr031576 for <openembedded-devel@openembedded.org>;
-	Tue, 27 Feb 2007 17:43:31 +0100
-Message-ID: <45E45FB3.5060206@dominion.kabel.utwente.nl>
-Date: Tue, 27 Feb 2007 17:43:31 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <andrew.paulsen@gmail.com>) id 1HM5ak-0006LV-Ci
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Feb 2007 17:54:18 +0100
+Received: by wr-out-0506.google.com with SMTP id i21so707618wra
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Feb 2007 08:54:17 -0800 (PST)
+Received: by 10.115.78.1 with SMTP id f1mr1187468wal.1172595255617;
+	Tue, 27 Feb 2007 08:54:15 -0800 (PST)
+Received: by 10.114.39.6 with HTTP; Tue, 27 Feb 2007 08:54:15 -0800 (PST)
+Message-ID: <d46153c40702270854k14f92b56x1c31eafdbea7b6e2@mail.gmail.com>
+Date: Tue, 27 Feb 2007 10:54:15 -0600
+From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <45D266A3.4040102@whitby.id.au>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1172592804.3002.1.camel@localhost.localdomain>
-	<20070227163419.GA29189@stygia.hyboria>
-In-Reply-To: <20070227163419.GA29189@stygia.hyboria>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Fosdem
+References: <45D1574C.8090009@whitby.id.au> <20070214012158.GA906@twibble.org>
+	<45D266A3.4040102@whitby.id.au>
+Subject: Re: RFC: madwifi-ng patch rationalisation and version update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,45 +31,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2007 16:43:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 27 Feb 2007 16:54:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 2/13/07, Rod Whitby <rod@whitby.id.au> wrote:
+> Jamie Lenehan wrote:
+> > On Tue, Feb 13, 2007 at 04:44:36PM +1030, Rod Whitby wrote:
+> > [...]
+> >> We also intend updating madwifi-ng to a later snapshot (e.g.
+> >> r2100-20070210), cause the current version won't build against 2.6.20
+> >> due to changes in the INIT_WORK kernel macro.
+> >
+> > I've been waiting for them to fix this for a while now so I can move
+> > forward to newer kernels - so I definitely want the newer verison.
+> >
+> > I think it'd would be a good idea to remove all the older versions as
+> > well, apart from perhaps r1844 which corrosponds to the last actual
+> > madwifi release (0.9.2.1). This should help get us back to one set of
+> > patches as well since in version r1844 they changed the file that arm
+> > is patching, requiring different patches for r1844 and newer.
+> >
+> > Actually looking at it now it appears as if someone patched the
+> > version in the files directory for a newer version so the older
+> > versions (prior to r1844) won't build anymore anyway (patching will
+> > fail). So the older versions of madwifi-ng and all the version
+> > specific subdirs can all go as well.
+>
+> OK, I'll do this too.
+>
+> So the only madwifi-ng versions remaining will be
+> madwifi-ng_r1844-20061208.bb and madwifi-ng_r2100-20070210.bb and they
+> will use common patches from the files directory.
+>
+> I'll let someone else deal with madwifi-modules ...
+>
+> -- Rod
 
-Graeme Gregory schreef:
-> On Tue, Feb 27, 2007 at 05:13:24PM +0100, gerwin van der kruis wrote:
->> I was not there on sunday so if somebody can add sunday experiences to
->> it 
->>
-> Sunday was a lot quieter than saturday, I guess a lot of people only
-> came in for one day.
-> 
-> We still had a fairly steady stream of people passing the booth though.
-> 
-> We had one cash donation to the OE project which Florian handled.
-> 
-> Hrw got donated a n770 (lucky bugger)
-> 
-> No-one in OE managed to score the pepperpad :-(
-> 
-> The Dark Rum drinking session ended up not happening as we didnt find a
-> pub with dark rum.
-
-And the pub was even called "Rhum Rhum" for crying out loud!
-
-We still had a good time though :)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFF5F+zMkyGM64RGpERAitSAKCBPSRBStQCuKqWh2RtSVc+/DbN1ACffWSR
-Jk1xR+7RR1IpK4NWmMdKkKQ=
-=VMds
------END PGP SIGNATURE-----
+This cleanup appears to have been repealed.  Is there a reason for the change?
 
 
