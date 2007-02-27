@@ -1,25 +1,25 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HM95P-0007It-ON
-	for openembedded-devel@openembedded.org; Tue, 27 Feb 2007 21:38:11 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l1RKc9Lr008443 for <openembedded-devel@openembedded.org>;
-	Tue, 27 Feb 2007 21:38:09 +0100
-Message-ID: <45E496B2.5020109@dominion.kabel.utwente.nl>
-Date: Tue, 27 Feb 2007 21:38:10 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <pmiscml@gmail.com>) id 1HM9Fw-0007XA-Hx
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Feb 2007 21:49:06 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so300552nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Feb 2007 12:49:01 -0800 (PST)
+Received: by 10.49.8.15 with SMTP id l15mr1922136nfi.1172609340998;
+	Tue, 27 Feb 2007 12:49:00 -0800 (PST)
+Received: from CUBE ( [82.193.98.4])
+	by mx.google.com with ESMTP id c28sm3166237nfb.2007.02.27.12.48.59;
+	Tue, 27 Feb 2007 12:49:00 -0800 (PST)
+Date: Tue, 27 Feb 2007 22:49:07 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <149482102.20070227224907@gmail.com>
+To: Koen Kooi <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <45E496B2.5020109@dominion.kabel.utwente.nl>
 References: <407130732.20070227223500@gmail.com>
-In-Reply-To: <407130732.20070227223500@gmail.com>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<45E496B2.5020109@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
 Subject: Re: [RFC] base_less_or_equal() for numerical value testing in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,25 +34,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2007 20:38:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 27 Feb 2007 20:49:08 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Paul Sokolovsky schreef:
+Tuesday, February 27, 2007, 10:38:10 PM, you wrote:
 
->   This code was committed, as it doesn't affect any existing aspect of
-> OE. Please feel free to tweak it, and of course use!
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
-So this isn't an RFC, just a statement of fact
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> Paul Sokolovsky schreef:
 
-iD8DBQFF5JayMkyGM64RGpERAr3xAJ9GmFW1O1X4UtnMtWdERJwNagHo6QCfaexb
-C8qQu91uU9fxaC9iOs4uDdU=
-=NDpg
------END PGP SIGNATURE-----
+>>   This code was committed, as it doesn't affect any existing aspect of
+>> OE. Please feel free to tweak it, and of course use!
+
+> So this isn't an RFC, just a statement of fact
+
+  I had it in my tree for a week now, tested, so just decided to
+commit it, taking into account that it follows existing
+base_conditional() signature, doesn't affect anything else, and
+offers capability both needed and simple.
+
+>> Please feel free to tweak it, and of course use!
+
+   I mean this. If there're better ideas on naming, etc., these can
+be easily applied or discussed. We may want to discuss the whole
+situation with such checks in OE: anything else needed/missing? are
+we satisfied with such a solution for checks? etc, etc.
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
