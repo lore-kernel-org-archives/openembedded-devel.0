@@ -1,23 +1,23 @@
-Received: from [64.233.184.236] (helo=wr-out-0506.google.com)
+Received: from [64.233.182.187] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <andrew.paulsen@gmail.com>) id 1HM5ak-0006LV-Ci
+	(envelope-from <pmiscml@gmail.com>) id 1HM92C-0007C2-Db
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Feb 2007 17:54:18 +0100
-Received: by wr-out-0506.google.com with SMTP id i21so707618wra
+	Tue, 27 Feb 2007 21:34:53 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so296507nfc
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2007 08:54:17 -0800 (PST)
-Received: by 10.115.78.1 with SMTP id f1mr1187468wal.1172595255617;
-	Tue, 27 Feb 2007 08:54:15 -0800 (PST)
-Received: by 10.114.39.6 with HTTP; Tue, 27 Feb 2007 08:54:15 -0800 (PST)
-Message-ID: <d46153c40702270854k14f92b56x1c31eafdbea7b6e2@mail.gmail.com>
-Date: Tue, 27 Feb 2007 10:54:15 -0600
-From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
+	Tue, 27 Feb 2007 12:34:51 -0800 (PST)
+Received: by 10.49.64.18 with SMTP id r18mr1837963nfk.1172608491247;
+	Tue, 27 Feb 2007 12:34:51 -0800 (PST)
+Received: from CUBE ( [82.193.98.4])
+	by mx.google.com with ESMTP id a24sm3128118nfc.2007.02.27.12.34.50;
+	Tue, 27 Feb 2007 12:34:50 -0800 (PST)
+Date: Tue, 27 Feb 2007 22:35:00 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <407130732.20070227223500@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <45D266A3.4040102@whitby.id.au>
 MIME-Version: 1.0
-References: <45D1574C.8090009@whitby.id.au> <20070214012158.GA906@twibble.org>
-	<45D266A3.4040102@whitby.id.au>
-Subject: Re: RFC: madwifi-ng patch rationalisation and version update
+Subject: [RFC] base_less_or_equal() for numerical value testing in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,44 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2007 16:54:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 27 Feb 2007 20:34:53 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 2/13/07, Rod Whitby <rod@whitby.id.au> wrote:
-> Jamie Lenehan wrote:
-> > On Tue, Feb 13, 2007 at 04:44:36PM +1030, Rod Whitby wrote:
-> > [...]
-> >> We also intend updating madwifi-ng to a later snapshot (e.g.
-> >> r2100-20070210), cause the current version won't build against 2.6.20
-> >> due to changes in the INIT_WORK kernel macro.
-> >
-> > I've been waiting for them to fix this for a while now so I can move
-> > forward to newer kernels - so I definitely want the newer verison.
-> >
-> > I think it'd would be a good idea to remove all the older versions as
-> > well, apart from perhaps r1844 which corrosponds to the last actual
-> > madwifi release (0.9.2.1). This should help get us back to one set of
-> > patches as well since in version r1844 they changed the file that arm
-> > is patching, requiring different patches for r1844 and newer.
-> >
-> > Actually looking at it now it appears as if someone patched the
-> > version in the files directory for a newer version so the older
-> > versions (prior to r1844) won't build anymore anyway (patching will
-> > fail). So the older versions of madwifi-ng and all the version
-> > specific subdirs can all go as well.
->
-> OK, I'll do this too.
->
-> So the only madwifi-ng versions remaining will be
-> madwifi-ng_r1844-20061208.bb and madwifi-ng_r2100-20070210.bb and they
-> will use common patches from the files directory.
->
-> I'll let someone else deal with madwifi-modules ...
->
-> -- Rod
+Hello openembedded-devel,
 
-This cleanup appears to have been repealed.  Is there a reason for the change?
+  OE has base_conditional() function which is kind of C's ternary ?:
+operator, with equality of two value as a condition (it is a bit
+misnamed in this respect, it'd rather be base_equals() ).
+
+  There're few other such conditional functions, for example for set
+containment check. What we lack however is simple numeric less/greater
+check. Having it would be important for us to continue started work of
+using generalized machine feature checks to decide on some aspects of
+image/package building, instead of hardcoding tests for specific
+machines.
+
+  So, hitting such need yet another time, I proceeded to add
+base_less_or_equal() to base.bbclass, and used it to tweak locale
+package install for Angstrom:
+
+# Also, it appears that no locales fit in 16Mb for now. "C" locale rules!
+IMAGE_LINGUAS = '${@base_less_or_equal("ROOT_FLASH_SIZE", "16", "", "en-gb", d)}'
+
+  This shows common usecase, and makes clear why exactly
+base_less_or_equal() was added - I don't have a usecase for
+base_less() now at all.
+
+
+  This code was committed, as it doesn't affect any existing aspect of
+OE. Please feel free to tweak it, and of course use!
+
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
+
 
 
