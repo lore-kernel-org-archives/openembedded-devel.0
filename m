@@ -1,25 +1,29 @@
-Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HM9Fw-0007XA-Hx
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Feb 2007 21:49:06 +0100
-Received: by nf-out-0910.google.com with SMTP id l24so300552nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2007 12:49:01 -0800 (PST)
-Received: by 10.49.8.15 with SMTP id l15mr1922136nfi.1172609340998;
-	Tue, 27 Feb 2007 12:49:00 -0800 (PST)
-Received: from CUBE ( [82.193.98.4])
-	by mx.google.com with ESMTP id c28sm3166237nfb.2007.02.27.12.48.59;
-	Tue, 27 Feb 2007 12:49:00 -0800 (PST)
-Date: Tue, 27 Feb 2007 22:49:07 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <149482102.20070227224907@gmail.com>
-To: Koen Kooi <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <45E496B2.5020109@dominion.kabel.utwente.nl>
+	(envelope-from <rpurdie@rpsys.net>) id 1HM9GB-0007XU-I4
+	for openembedded-devel@openembedded.org; Tue, 27 Feb 2007 21:49:22 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1RKnEvo028624;
+	Tue, 27 Feb 2007 20:49:14 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 28411-05; Tue, 27 Feb 2007 20:49:09 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l1RKn0LI028577
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Tue, 27 Feb 2007 20:49:01 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Paul Sokolovsky <pmiscml@gmail.com>
+In-Reply-To: <407130732.20070227223500@gmail.com>
 References: <407130732.20070227223500@gmail.com>
-	<45E496B2.5020109@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
+Date: Tue, 27 Feb 2007 20:49:01 +0000
+Message-Id: <1172609341.28406.169.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@openembedded.org
 Subject: Re: [RFC] base_less_or_equal() for numerical value testing in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,41 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2007 20:49:08 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 27 Feb 2007 20:49:24 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello Koen,
+On Tue, 2007-02-27 at 22:35 +0200, Paul Sokolovsky wrote:
+> This code was committed, as it doesn't affect any existing aspect of
+> OE. Please feel free to tweak it, and of course use!
 
-Tuesday, February 27, 2007, 10:38:10 PM, you wrote:
+So its not really a RFC, is it? ;-)
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+I think base_conditional was added but left pretty dumb since we worried
+that if it was too generic it might get too many users. Inline python in
+the variables hits bitbake and parsing hard and its not something I'd
+like to encourage. Holger might have more specific comments. There are
+usually better ways to achieve the end result in a more bitbake like
+way. Also, personally I find the inline python really hard to read too.
 
-> Paul Sokolovsky schreef:
+If we are going to do it, I'd prefer to see a set functions in their own
+class inherited by base.
 
->>   This code was committed, as it doesn't affect any existing aspect of
->> OE. Please feel free to tweak it, and of course use!
+Yes, I realise I was guilty of adding a couple of these functions with
+task-base. They're mainly used in a couple of specific .bb files rather
+than the core classes and hopefully their usefulness outweights any
+speed penalty though...
 
-> So this isn't an RFC, just a statement of fact
+Cheers,
 
-  I had it in my tree for a week now, tested, so just decided to
-commit it, taking into account that it follows existing
-base_conditional() signature, doesn't affect anything else, and
-offers capability both needed and simple.
+Richard 
 
->> Please feel free to tweak it, and of course use!
-
-   I mean this. If there're better ideas on naming, etc., these can
-be easily applied or discussed. We may want to discuss the whole
-situation with such checks in OE: anything else needed/missing? are
-we satisfied with such a solution for checks? etc, etc.
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
 
 
 
