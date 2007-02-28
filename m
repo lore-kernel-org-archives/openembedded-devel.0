@@ -1,26 +1,27 @@
-Received: from [212.27.42.65] (helo=smtp8-g19.free.fr)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <alain2210@free.fr>) id 1HMN72-0006Fs-Vn
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Feb 2007 12:36:49 +0100
-Received: from imp6-g19.free.fr (imp6-g19.free.fr [212.27.42.6])
-	by smtp8-g19.free.fr (Postfix) with ESMTP id 93BB7166EA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2007 12:36:48 +0100 (CET)
-Received: by imp6-g19.free.fr (Postfix, from userid 33)
-	id 50888115FE; Wed, 28 Feb 2007 12:36:48 +0100 (CET)
-Received: from AMontsouris-151-1-82-44.w83-202.abo.wanadoo.fr
-	(AMontsouris-151-1-82-44.w83-202.abo.wanadoo.fr [83.202.114.44]) 
-	by imp.free.fr (IMP) with HTTP 
-	for <alain2210@127.0.0.1>; Wed, 28 Feb 2007 12:36:48 +0100
-Message-ID: <1172662608.45e569504186d@imp.free.fr>
-Date: Wed, 28 Feb 2007 12:36:48 +0100
-From: Alain2210 <alain2210@free.fr>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HMOYR-0007ja-0Q
+	for openembedded-devel@openembedded.org; Wed, 28 Feb 2007 14:09:11 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l1SD98ox016956 for <openembedded-devel@openembedded.org>;
+	Wed, 28 Feb 2007 14:09:08 +0100
+Message-ID: <45E57EF4.9050706@dominion.kabel.utwente.nl>
+Date: Wed, 28 Feb 2007 14:09:08 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) 3.2.5
-X-Originating-IP: 83.202.114.44
-Subject: problem with fakeroot-native
+To: openembedded-devel@openembedded.org
+References: <407130732.20070227223500@gmail.com>	<1172609341.28406.169.camel@localhost.localdomain>
+	<1828813817.20070227233137@gmail.com>
+In-Reply-To: <1828813817.20070227233137@gmail.com>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [RFC] base_less_or_equal() for numerical value testing in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,42 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2007 11:36:49 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Feb 2007 13:09:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm trying to use oe for making an image for a wl500g with distro asusoe
-(this is only a try) that use linux-uclibc.
-Bitbake want to make fakeroot-1.2.13 and it begins with fakeroot-native. =
-I get
-an errror :
-| checking target system type... Invalid configuration `i686-uclibc': sys=
-tem
-`uclibc' not recognized
-| configure: error: /bin/sh
-/mnt/devel/oe/build-dev/tmp/work/fakeroot-native-1.2.13-r1/fakeroot-1.2.1=
-3/config.sub
-i686-uclibc failed
+Paul Sokolovsky schreef:
+> Hello Richard,
+> 
+> Tuesday, February 27, 2007, 10:49:01 PM, you wrote:
+> 
+>> On Tue, 2007-02-27 at 22:35 +0200, Paul Sokolovsky wrote:
+>>> This code was committed, as it doesn't affect any existing aspect of
+>>> OE. Please feel free to tweak it, and of course use!
+> 
+>> So its not really a RFC, is it? ;-)
+> 
+>   Disapprove is easy if it's wrong.
 
-Seeing the log.do_configure :
-NOTE: Running
-/mnt/devel/oe/build-dev/tmp/work/fakeroot-native-1.2.13-r1/fakeroot-1.2.1=
-3/configure
-                 --build=3Di686-linux              --host=3Di686-linux   =
-          =20
---target=3Di686-uclibc                  =20
---prefix=3D/mnt/devel/oe/build-dev/tmp/staging  <snip>
+To illustrate the point: your commit broke building for machines that don't set root flash
+size (e.g. machines that don't have flash).
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-This target --target=3Di686-uclibc seems to be the origin of the problem.=
- Is is
-normal for a native package ? Should it be --target=3Di686-linux ? How ca=
-n I
-correct this ?
-
-Thanks,
-
-Alain
+iD8DBQFF5X70MkyGM64RGpERAiiOAJ9BQhhTkQRDjkBZOFwiSEBQMXofXQCgt+3B
+B3ddYIOI+Blw0Z5tX9R0WfE=
+=E2kF
+-----END PGP SIGNATURE-----
 
 
