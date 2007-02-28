@@ -1,22 +1,19 @@
-Received: from [62.169.194.60] (helo=cp3a.criticalpath.priv)
+Received: from [192.132.34.13] (helo=amail.unina.it)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1HMKT9-0000Rx-4n
-	for openembedded-devel@openembedded.org; Wed, 28 Feb 2007 09:47:27 +0100
-Received: from dias (62.169.211.226) by cp3a.criticalpath.priv (7.3.118.3)
-	id 45DF0D5500039C1B for openembedded-devel@openembedded.org;
-	Wed, 28 Feb 2007 10:46:37 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Wed, 28 Feb 2007 10:47:25 +0200
-Message-ID: <HOECLKEKOHLAMMGDLLBHAECLKEAA.skoroneos@digital-opsis.com>
+	(envelope-from <ranaldo@unina.it>) id 1HMLmC-00024C-3i
+	for openembedded-devel@openembedded.org; Wed, 28 Feb 2007 11:11:12 +0100
+Received: from blaster.unina.it ([192.132.34.15]) (authenticated bits=0)
+	by amail.unina.it (8.13.4/8.13.4) with ESMTP id l1SABARp013380
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Feb 2007 11:11:11 +0100
+From: Nicola Ranaldo <ranaldo@unina.it>
+To: openembedded-devel@openembedded.org
+Date: Wed, 28 Feb 2007 11:09:25 +0100
+User-Agent: KMail/1.9.6
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
-In-Reply-To: <d46153c40702270854k14f92b56x1c31eafdbea7b6e2@mail.gmail.com>
-Importance: Normal
-Subject: Add soft-float support for powerpc targets without fpu
+Message-Id: <200702281109.25161.ranaldo@unina.it>
+Subject: OE and the developing host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,30 +27,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2007 08:47:27 -0000
+X-List-Received-Date: Wed, 28 Feb 2007 10:11:12 -0000
 Content-Type: text/plain;
-	charset="us-ascii"
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I have posted 2 patches on the bugtracker that provide soft-float support
-for powerpc targets
-http://bugs.openembedded.org/show_bug.cgi?id=1918
+I use OE on a gentoo box. This morning i updated the system, and the new 
+linux-headers package removed /usr/include/asm/page.h. So when building my 
+angstrom image it failed with perl asking to include that file. This problem 
+was discussed on the gentoo bug and after applying a simple workaround i was 
+able to emerge perl on the gentoo box and perl native on OE.
+After a while the oe build stopped on esound, this was caused by a malfunction 
+of /usr/lib/libosp.so.5 on gentoo, i reemerged it and solved the problem. Now 
+the armstrong-gpe-image is complete. But this introduced a doubt. OE build 
+some tools directly, and use other directly from the build host, so it could 
+be teoretically possible to produce different images on different host. Is 
+there a way or a plan to avoid it and make OE build host independant 
+(supposing i was correct)? If not, what's the most used/supported distro by 
+OE developers?
 
-I have been testing the patches for a couple of weeks now, both on powerpc
-targets and others (x86 variants mainly) without problems,but as these can
-be
-considered "system wide changes" (although the patches will be only applied
-to
-powerpc targets) i decided to post them to the bug tracker first for peer
-review.
+Regards
 
-Please do test if they effect your distro/build in any way and post any
-comments findings on the bugtracker.
-If there are no major problems i plan to push them into OE during the next
-"bug hunting weekend"
-
-Stelios
-
-
+	Niko
 
 
