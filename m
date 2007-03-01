@@ -1,22 +1,21 @@
-Received: from [209.242.20.70] (helo=green.dls.net)
+Received: from [64.233.184.235] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1HMoxs-0002Gw-Ii
+	(envelope-from <papercrane@gmail.com>) id 1HMpc7-0007vW-2F
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Mar 2007 18:21:12 +0100
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id A5DDF41229F
+	Thu, 01 Mar 2007 19:02:47 +0100
+Received: by wr-out-0506.google.com with SMTP id i21so792268wra
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Mar 2007 11:21:16 -0600 (CST)
-Message-ID: <06b101c75c25$edc2a410$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 1 Mar 2007 11:20:37 -0600
+	Thu, 01 Mar 2007 10:02:46 -0800 (PST)
+Received: by 10.115.17.1 with SMTP id u1mr74337wai.1172772162138;
+	Thu, 01 Mar 2007 10:02:42 -0800 (PST)
+Received: by 10.115.91.10 with HTTP; Thu, 1 Mar 2007 10:02:42 -0800 (PST)
+Message-ID: <432beae0703011002t7c31c646g15bc2344e28ee68c@mail.gmail.com>
+Date: Thu, 1 Mar 2007 10:02:42 -0800
+From: "Justin Patrin" <papercrane@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1807
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
-Subject: mtd-utils change: missing lzo1x.h
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [oe-commits] org.oe.dev rootfs_ipk.bbclass: Implements a sensational new feature called 'oe-feed' which, for the first time ever, actually lets you use your ipk deploy dir as a feed in ipkg.conf./mtcommit ../classes/rootfs_ipk.bbclass Oh wai
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,24 +29,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2007 17:21:12 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Thu, 01 Mar 2007 18:02:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-The latest changes to mtd-utils isn't working; complains about a missing
-header file (lzo1x.h).  Is there a missing dependency somewhere, or perhaps
-a PR didn't get bumped?   I can't find that file anywhere (oh, a google
-search finds many copies, but I expect that's not the right way to fix this
-;-)   And it really didn't give me a good hint as to what package that file
-might be contained in so I could add the dependency...
+On 3/1/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> coredump2 commit schreef:
+> > rootfs_ipk.bbclass: Implements a  sensational new feature called 'oe-feed' which
+>
+> OEs feed management tools were removed a few years ago since it was decided that feed
+> management was out of scope. That still holds.
 
-FWIW using PREFERRED_VERSION to go back to the original isn't working
-either; bbimage now apparently requires the newest mtd-utils-native:
-mkfs.jffs2: Unknown compressor name lzo
+The deploy/ipk directory has always been usable as a feed previously.
+This is, of course, *how images are made*.
 
-Mike (mwester)
-
-
+-- 
+Justin Patrin
 
 
