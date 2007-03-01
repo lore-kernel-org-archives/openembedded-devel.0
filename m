@@ -1,28 +1,26 @@
-Received: from [64.233.184.227] (helo=wr-out-0506.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <papercrane@gmail.com>) id 1HMYTs-00007p-4K
-	for openembedded-devel@openembedded.org; Thu, 01 Mar 2007 00:45:19 +0100
-Received: by wr-out-0506.google.com with SMTP id i31so455925wra
-	for <openembedded-devel@openembedded.org>;
-	Wed, 28 Feb 2007 15:45:07 -0800 (PST)
-Received: by 10.114.26.1 with SMTP id 1mr150869waz.1172706298011;
-	Wed, 28 Feb 2007 15:44:58 -0800 (PST)
-Received: by 10.115.91.10 with HTTP; Wed, 28 Feb 2007 15:44:57 -0800 (PST)
-Message-ID: <432beae0702281544s71f39e17uf3c0ddb689781990@mail.gmail.com>
-Date: Wed, 28 Feb 2007 15:44:57 -0800
-From: "Justin Patrin" <papercrane@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1172697027.16062.149.camel@localhost.localdomain>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HMgku-0004Sr-8b
+	for openembedded-devel@openembedded.org; Thu, 01 Mar 2007 09:35:16 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l218ZCox025217 for <openembedded-devel@openembedded.org>;
+	Thu, 1 Mar 2007 09:35:12 +0100
+Message-ID: <45E6903F.6040708@dominion.kabel.utwente.nl>
+Date: Thu, 01 Mar 2007 09:35:11 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-References: <200702281109.25161.ranaldo@unina.it>
-	<1172658483.16062.23.camel@localhost.localdomain>
-	<45E559E9.4040302@dominion.kabel.utwente.nl>
-	<a7f8874a0702280758p7003f1dev8be920e13ea23e95@mail.gmail.com>
-	<5.1.1.6.2.20070228132146.0302d9e8@mail.phnx.qwest.net>
-	<1172694619.2999.33.camel@localhost.localdomain>
-	<1172697027.16062.149.camel@localhost.localdomain>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Newbie Question
+To: openembedded-devel@openembedded.org
+References: <E1HMatS-0005Qf-5q@linuxtogo.org>
+In-Reply-To: <E1HMatS-0005Qf-5q@linuxtogo.org>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev rootfs_ipk.bbclass: Implements a	sensational new feature called 'oe-feed' which, for the first time ever, actually lets you use your ipk deploy dir as a feed in	ipkg.conf./mtcommit ../classes/rootfs_ipk.bbclass Oh	wait......we already could do that in the past, now couldn't we?? Set DEPLOY_ENABLE_OEFEED=1 in your shell env or	local.conf to activate fast oe-feed/Packages creation, set DEPLOY_ENABLE_OEFEED=2 to enable traditional (and slooooow) oe-feed/Packages creation.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,31 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2007 23:45:32 -0000
-X-List-Received-Date: Wed, 28 Feb 2007 23:45:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 01 Mar 2007 08:35:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 2/28/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Wed, 2007-02-28 at 21:30 +0100, gerwin van der kruis wrote:
-> > Op woensdag 28-02-2007 om 13:27 uur [tijdzone -0700], schreef Lee
-> > Studley:
-> > > Hi,
-> > > As a newbie, what is the opinion for an easier jump on the learning curve:
-> > >
-> > > Using open embedded with ubunto or gentoo ?
-> >
-> > I would say ubuntu
->
-> Agreed, Ubuntu is less of a moving target and known to work.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Gentoo has worked fine for me for quite some time, but if you are new
-to it you may want to go with ubuntu to lessen your "get up to speed"
-time.
+coredump2 commit schreef:
+> rootfs_ipk.bbclass: Implements a  sensational new feature called 'oe-feed' which
 
--- 
-Justin Patrin
+OEs feed management tools were removed a few years ago since it was decided that feed
+management was out of scope. That still holds.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFF5pA/MkyGM64RGpERAl19AKCiEPA77iqbTftvDodtwkNY/ht1eQCfSDCb
+yMBVcYX011R0J6ZCXeUthho=
+=35QD
+-----END PGP SIGNATURE-----
 
 
