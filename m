@@ -1,28 +1,29 @@
-Received: from [65.170.132.200] (helo=EXCHANGEVS1.comtechtel.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <vladislav.grinchenko@comtechmobile.com>)
-	id 1HMmbt-0000ww-9p for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Mar 2007 15:50:21 +0100
-Received: from 10.5.0.222 ([10.5.0.222]) by EXCHANGEVS1.comtechtel.com
-	([10.10.0.15]) via Exchange Front-End Server
-	mail.comtechtel.com ([10.10.0.168]) with Microsoft Exchange
-	Server HTTP-DAV ; Thu,  1 Mar 2007 14:50:29 +0000
-Received: from zorro.comtechtel.com by mail.comtechtel.com;
-	01 Mar 2007 09:49:51 -0500
-From: Vladislav Grinchenko <vladislav.grinchenko@comtechmobile.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <5.1.1.6.2.20070228132146.0302d9e8@mail.phnx.qwest.net>
-References: <a7f8874a0702280758p7003f1dev8be920e13ea23e95@mail.gmail.com>
-	<200702281109.25161.ranaldo@unina.it>
-	<1172658483.16062.23.camel@localhost.localdomain>
-	<45E559E9.4040302@dominion.kabel.utwente.nl>
-	<a7f8874a0702280758p7003f1dev8be920e13ea23e95@mail.gmail.com>
-	<5.1.1.6.2.20070228132146.0302d9e8@mail.phnx.qwest.net>
-Date: Thu, 01 Mar 2007 09:49:50 -0500
-Message-Id: <1172760590.2932.8.camel@zorro>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 (2.6.3-1.fc5.5) 
-Subject: Re: Newbie Question
+	(envelope-from <mickey@vanille-media.de>)
+	id 1HMnct-0003EQ-5J; Thu, 01 Mar 2007 16:55:27 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id C046928C012; Thu,  1 Mar 2007 16:49:33 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
+Received: from [192.168.2.128] (e180130225.adsl.alicedsl.de [85.180.130.225])
+	by srv043.dedi23.de (Postfix) with ESMTP id 535F028C011;
+	Thu,  1 Mar 2007 16:49:30 +0100 (CET)
+Date: Thu, 1 Mar 2007 16:55:25 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.95.6) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1439152940.20070301165525@vanille-media.de>
+To: "koen commit" <openembedded-commits@lists.openembedded.org>
+In-Reply-To: <E1HMgkl-0004SM-Gs@linuxtogo.org>
+References: <E1HMgkl-0004SM-Gs@linuxtogo.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev rootfs_ipk: as per OE policy: remove feed management tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,35 +37,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2007 14:50:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 01 Mar 2007 15:55:27 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Lee, 
+koen commit wrote:
+> rootfs_ipk: as per OE policy: remove feed management tools
 
-On Wed, 2007-02-28 at 13:27 -0700, Lee Studley wrote:
-> Hi,
-> As a newbie, what is the opinion for an easier jump on the learning curve:
-> 
-> Using open embedded with ubunto or gentoo ?
-> 
+Guys, please don't play games. Since it is a handy feature indeed,
+can we perhaps agree on making this a seperate bbclass to keep both of
+you satisfied?
 
-neither - try Fedora Core 6 instead.
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
-here's the instructions:
-
-http://home.comcast.net/~3rdshift/articles/OE-Devel-Notes-1.0.html
-
-scroll down to "Install and Build SDK ..." section
-
--Vlad
-
-> Thanks, -Lee
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
