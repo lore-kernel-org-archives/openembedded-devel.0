@@ -1,26 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [65.170.132.200] (helo=EXCHANGEVS1.comtechtel.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HMiHv-0007eu-RF
-	for openembedded-devel@openembedded.org; Thu, 01 Mar 2007 11:13:27 +0100
-Received: from [172.20.0.21] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l21ADPLr016332 for <openembedded-devel@openembedded.org>;
-	Thu, 1 Mar 2007 11:13:25 +0100
-Message-ID: <45E6A744.5090305@dominion.kabel.utwente.nl>
-Date: Thu, 01 Mar 2007 11:13:24 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <E1HMiCo-0007Wl-Q4@linuxtogo.org>
-In-Reply-To: <E1HMiCo-0007Wl-Q4@linuxtogo.org>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev linux: Add linux-turbostation
+	(envelope-from <vladislav.grinchenko@comtechmobile.com>)
+	id 1HMmbt-0000ww-9p for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Mar 2007 15:50:21 +0100
+Received: from 10.5.0.222 ([10.5.0.222]) by EXCHANGEVS1.comtechtel.com
+	([10.10.0.15]) via Exchange Front-End Server
+	mail.comtechtel.com ([10.10.0.168]) with Microsoft Exchange
+	Server HTTP-DAV ; Thu,  1 Mar 2007 14:50:29 +0000
+Received: from zorro.comtechtel.com by mail.comtechtel.com;
+	01 Mar 2007 09:49:51 -0500
+From: Vladislav Grinchenko <vladislav.grinchenko@comtechmobile.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <5.1.1.6.2.20070228132146.0302d9e8@mail.phnx.qwest.net>
+References: <a7f8874a0702280758p7003f1dev8be920e13ea23e95@mail.gmail.com>
+	<200702281109.25161.ranaldo@unina.it>
+	<1172658483.16062.23.camel@localhost.localdomain>
+	<45E559E9.4040302@dominion.kabel.utwente.nl>
+	<a7f8874a0702280758p7003f1dev8be920e13ea23e95@mail.gmail.com>
+	<5.1.1.6.2.20070228132146.0302d9e8@mail.phnx.qwest.net>
+Date: Thu, 01 Mar 2007 09:49:50 -0500
+Message-Id: <1172760590.2932.8.camel@zorro>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 (2.6.3-1.fc5.5) 
+Subject: Re: Newbie Question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,28 +36,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2007 10:13:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 01 Mar 2007 14:50:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Lee, 
 
-nail commit schreef:
-> linux: Add  linux-turbostation
+On Wed, 2007-02-28 at 13:27 -0700, Lee Studley wrote:
+> Hi,
+> As a newbie, what is the opinion for an easier jump on the learning curve:
+> 
+> Using open embedded with ubunto or gentoo ?
+> 
 
-Do we really need a seperate recipe for each and every device? OE can override via
-filespatch and src_uri for a very good reason....
+neither - try Fedora Core 6 instead.
 
-regards,
+here's the instructions:
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+http://home.comcast.net/~3rdshift/articles/OE-Devel-Notes-1.0.html
 
-iD8DBQFF5qdEMkyGM64RGpERArIzAJ9Gjh4YCxhHWqlLlp++T/kREAivHQCgmwRe
-MMX9u7kSoEmThlzUWUnaysI=
-=gjVI
------END PGP SIGNATURE-----
+scroll down to "Install and Build SDK ..." section
+
+-Vlad
+
+> Thanks, -Lee
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
