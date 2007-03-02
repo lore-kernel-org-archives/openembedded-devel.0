@@ -1,27 +1,25 @@
-Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HN41M-0001hH-7V
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Mar 2007 10:25:48 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id BDD831F4CA1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2007 04:25:47 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by out1.internal (MEProxy); Fri, 02 Mar 2007 04:25:47 -0500
-X-Sasl-enc: 4wSv7mRklSbriNbHMmJs8Z8n+e8g1jNP0O6a03buTbRd 1172827547
-Received: from [127.0.0.1] (unknown [58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id BAE3B245C1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2007 04:25:46 -0500 (EST)
-Message-ID: <45E7ED77.2090103@whitby.id.au>
-Date: Fri, 02 Mar 2007 19:55:11 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HN4Mk-0001ua-Ot
+	for openembedded-devel@openembedded.org; Fri, 02 Mar 2007 10:47:54 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l229loox005842 for <openembedded-devel@openembedded.org>;
+	Fri, 2 Mar 2007 10:47:50 +0100
+Message-ID: <45E7F2C4.9030300@dominion.kabel.utwente.nl>
+Date: Fri, 02 Mar 2007 10:47:48 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <HOECLKEKOHLAMMGDLLBHIEJEKEAA.skoroneos@digital-opsis.com>
-In-Reply-To: <HOECLKEKOHLAMMGDLLBHIEJEKEAA.skoroneos@digital-opsis.com>
+To: openembedded-devel@openembedded.org
+References: <45E77A73.5020800@protium.com>
+In-Reply-To: <45E77A73.5020800@protium.com>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [oe-commits] org.oe.dev rootfs_ipk: as per OE, policy:	remove feed management tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,46 +34,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2007 09:25:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 02 Mar 2007 09:47:55 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Stelios Koroneos wrote:
-> I am not sure how many of you are building multimachine distro's but the old
-> system was not a very good solution.
-> We are building a distro for a number of machines x86 arch (i486, i585,
-> i686), a number of powerpc targets  and recently mipsel and puttinng
-> everything in a giant ipk pool is not the best of solutions.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Andy Wilcox schreef:
+> Mickey writes:
+>> Guys, please don't play games. Since it is a handy feature indeed,
+>> can we perhaps agree on making this a seperate bbclass to keep both of
+>> you satisfied?
+>>   
+> Agreed.  Any big behavior change like this should have much more discussion.
+> It might be wrong, but sometimes bugs become features.  Get used to it.
 > 
-> As far as i can understand its a case where  single machine distro's made
-> use of this OE feature while multimachine distros had to look for other ways
-> (i.e post processing).
+> Feed generation is one way I sold OE internally and one reason why
+> it is so terribly useful.  If it has to come out for some policy, then 
+> perhaps the
+> policy should be revisited.
 
-Perhaps when multimachine was added, the deploy ipk feed support should
-have been updated to continue to work, instead of later breaking single
-machine feed support.
+As I said, OE still generates 'feeds' in subdirs of deploy/ipk, in contrary of what people
+seem to claim on the mailinglist.
 
-Just because it works for some, doesn't mean it works for all.  Just
-because it doesn't work for some, doesn't mean it's not useful for others.
+Using deploy/ipk/ as feed will give you the following problems:
 
-> From what i read so far there seems to be 2 solutions
-> Either allow for the old behaviur of OE through some 'switch' and let the
-> distro mainter decide what do to or document the new way of handling feeds.
-> In my case i would prefer the second option, as both single and multimachine
-> distro's could use the same mechanism to update their feeds
+1) ipkg doesn't handle upgrades properly if the versions between multiple archtectures
+don't match
+2) ipkg doesn't handle upgrades proberly when you don't use '-m' (OE does now, but I can
+see people 'optimizing' it and removing '-m' to get more speed)
+3) if you rebuild a package and forget to regenerate Packages your target will freak out
+due to mismatched md5sums
+4) Packages.filelist can only be generated from scratch, so the former
+deploy/ipk/Packages.filelist was broken
 
-The third (and my preferred) option is not just to document the new way
-of handling feeds, but fix OE to handle feeds in the multimachine case.
- OE is meant to make things easier and more consistent, not meant to
-force people to *all* do postprocessing to do a common action (like
-having a development feed or a simply rsync'ed public feed).
+That are the easy things, lets look at other problems:
 
-If a feature is commonly used, and fervently wanted by those who use it,
-then breaking or deleting it is not a way to keep developers using OE
-... especially in corporate situations like Andy recounted, where ease
-of development feeds is a selling feature internally against other
-home-grown build solutions.
+a) shlib renaming madness. Every now and then something goes wrong with shlib renaming,
+e.g. an app starts shipping an extra util and renaming doesn't work anymore. So you end up
+with 'jpeg_6b.ipk' instead of 'libjpeg6_6b.ipk'. This means you have to edit your Packages
+file to add 'Provides: jpeg' since OE will shlib rename 'RPROVIDES += jpeg' to 'Provides:
+libjpeg6'
+b) Packaging changes without PR bump. If you just blindly rsync, different users will get
+different contents of what appears to be the same package.
 
--- Rod
+We aren't even mentioning stripping 'Source:' fields to make ipkg consume less RAM and
+storage.
+
+So, knowing all this, do people still want to pretend that a single deploy/ipk feed has no
+problems at all and OE should support it?
+
+On the feed-management tools:
+
+The splitting scripts (to split feeds into gpe/ and opie/ and varous other ways) got
+removed and I was told "it's out of scope" by Chris (not to mention the surprise when
+'bitbake world' mangles deploy/ipk). package-index.bb, however serves a different purpose
+for me: being able to regenerate Packages so I can look at several control files at once,
+instead of using dpkg-deb or ar -x to extract single ones. I'll happily remove it Matthias
+keeps claiming it's a feed management tool.
+
+Again: the ability to use deploy as a feed is still present, it only moved to subdirectories.
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFF5/LEMkyGM64RGpERAlvcAJ0cMcDEBXGznkAUTbV+aBA4+HmJrgCgs6J5
+iwQP4Ko2H18hcZTB/VnLoN4=
+=Zdv6
+-----END PGP SIGNATURE-----
 
 
