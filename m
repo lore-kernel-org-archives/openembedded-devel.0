@@ -1,22 +1,26 @@
-Received: from [62.169.194.2] (helo=fesscrpp1.tellas.gr)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1HN32M-0007ct-LU
-	for openembedded-devel@openembedded.org; Fri, 02 Mar 2007 09:22:48 +0100
-Received: from dias (62.169.211.226) by fesscrpp1.tellas.gr (7.3.117)
-	id 45DB18DD00147E9E for openembedded-devel@openembedded.org;
-	Fri, 2 Mar 2007 10:21:56 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Fri, 2 Mar 2007 10:22:44 +0200
-Message-ID: <HOECLKEKOHLAMMGDLLBHIEJEKEAA.skoroneos@digital-opsis.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HN3oG-0008LC-Ru
+	for openembedded-devel@openembedded.org; Fri, 02 Mar 2007 10:12:16 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l229CCox031435 for <openembedded-devel@openembedded.org>;
+	Fri, 2 Mar 2007 10:12:12 +0100
+Message-ID: <45E7EA6A.7030108@dominion.kabel.utwente.nl>
+Date: Fri, 02 Mar 2007 10:12:10 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
-Importance: Normal
-In-Reply-To: <45E77A73.5020800@protium.com>
-Subject: Re: [oe-commits] org.oe.dev rootfs_ipk: as per OE, policy:	remove feed management tools
+To: openembedded-devel@openembedded.org
+References: <07ee01c75c94$15472dd0$6e01a8c0@twilight>
+In-Reply-To: <07ee01c75c94$15472dd0$6e01a8c0@twilight>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: fuse package broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,36 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2007 08:22:50 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Fri, 02 Mar 2007 09:12:17 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Just my 2 euro cents
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I am not sure how many of you are building multimachine distro's but the old
-system was not a very good solution.
-We are building a distro for a number of machines x86 arch (i486, i585,
-i686), a number of powerpc targets  and recently mipsel and puttinng
-everything in a giant ipk pool is not the best of solutions.
+Mike (mwester) schreef:
+> Is anyone using the fuse packages currently?
+> 
+> The latest version in OE doesn't build correctly for me (it immediately
+> starts building fuse-module -- which is no longer necessary since the fuse
+> kernel module is in recent kernels already 
 
-As far as i can understand its a case where  single machine distro's made
-use of this OE feature while multimachine distros had to look for other ways
-(i.e post processing).
-With the recent changes it seems that single machine distro's also need to
-do some post-processing in order to get going and people are upset about
-that
+But not in the 2.4 kernels which I targetted when adding fuse. However, every machine I
+have seems to support a recent 2.6 kernel nowadays, so I could care less about 2.4. I
+think the standalone module can be removed, unless some volunteer steps up to maintain it
+for the 2.4 machines.
 
-From what i read so far there seems to be 2 solutions
-Either allow for the old behaviur of OE through some 'switch' and let the
-distro mainter decide what do to or document the new way of handling feeds.
-In my case i would prefer the second option, as both single and multimachine
-distro's could use the same mechanism to update their feeds
+regards,
 
-Stelios
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
-
-
+iD8DBQFF5+pqMkyGM64RGpERAsFHAJ9sVLQbeVimZTm84ZtDNT2/XIvh6gCfekY0
+4L0Tk0tjBsg5tO4uPTycRTU=
+=CLV4
+-----END PGP SIGNATURE-----
 
 
