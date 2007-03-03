@@ -1,33 +1,30 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <oe@hentges.net>) id 1HNXvB-0007JE-Tg
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Mar 2007 18:21:25 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1HNZoF-0003u6-2A
+	for openembedded-devel@openembedded.org; Sat, 03 Mar 2007 20:22:23 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id 967C4308212
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Mar 2007 18:21:25 +0100 (CET)
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 03011-10 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 3 Mar 2007 18:21:22 +0100 (CET)
-Received: from mhcln04.hentges.priv (xdsl-213-196-243-194.netcologne.de
-	[213.196.243.194]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id DB4713081E9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Mar 2007 18:21:01 +0100 (CET)
-From: Matthias Hentges <oe@hentges.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <45E7F5C9.2000507@dominion.kabel.utwente.nl>
-References: <HOECLKEKOHLAMMGDLLBHIEJEKEAA.skoroneos@digital-opsis.com>
-	<45E7ED77.2090103@whitby.id.au>
-	<45E7F5C9.2000507@dominion.kabel.utwente.nl>
-Date: Sat, 03 Mar 2007 18:19:36 +0100
-Message-Id: <1172942376.11398.107.camel@localhost.localdomain>
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l23JMMEh002370
+	for <openembedded-devel@openembedded.org>; Sat, 3 Mar 2007 19:22:22 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 01823-04 for <openembedded-devel@openembedded.org>;
+	Sat,  3 Mar 2007 19:22:19 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l23JMIWB002360
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Sat, 3 Mar 2007 19:22:18 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <45E7F2C4.9030300@dominion.kabel.utwente.nl>
+References: <45E77A73.5020800@protium.com>
+	<45E7F2C4.9030300@dominion.kabel.utwente.nl>
+Date: Sat, 03 Mar 2007 19:22:18 +0000
+Message-Id: <1172949738.5942.57.camel@localhost.localdomain>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: [oe-commits] org.oe.dev rootfs_ipk: as per OE, policy:	remove feed management tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,119 +39,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2007 17:21:26 -0000
+X-List-Received-Date: Sat, 03 Mar 2007 19:22:23 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-I'm going to spare you a detailed reply to your previous email
-regarding problems w/ ipkg feeds (all of which are either OE or ipkg
-bugs, very few of which can be effectively caught via any type of
-post-processing, rendering yet again your whole argument mute)
+On Fri, 2007-03-02 at 10:47 +0100, Koen Kooi wrote:
+> As I said, OE still generates 'feeds' in subdirs of deploy/ipk, in contrary of what people
+> seem to claim on the mailinglist.
 
-Am Freitag, den 02.03.2007, 11:00 +0100 schrieb Koen Kooi:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+What people are claiming in that the format of deploy/ipk changes from a
+single to multiple feeds. This is a behaviour change and people relied
+on the old behaviour.
+
+> Using deploy/ipk/ as feed will give you the following problems:
 > 
-> Rod Whitby schreef:
-> > Stelios Koroneos wrote:
-> >> I am not sure how many of you are building multimachine distro's but the old
-> >> system was not a very good solution.
-> >> We are building a distro for a number of machines x86 arch (i486, i585,
-> >> i686), a number of powerpc targets  and recently mipsel and puttinng
-> >> everything in a giant ipk pool is not the best of solutions.
+> 1) ipkg doesn't handle upgrades properly if the versions between multiple archtectures
+> don't match
 
-Ahh, finally someone with _real_ arguments in favor of the change. I do
-feel your pain, I really do. I can see that the change makes life easier
-for multi-machine / multi-arch builders. I don't have any problems with
-that at all, only with the way it was implemented.
+An ipkg bug which should be filed somewhere...
 
-> >> As far as i can understand its a case where  single machine distro's made
-> >> use of this OE feature while multimachine distros had to look for other ways
-> >> (i.e post processing).
+> 2) ipkg doesn't handle upgrades proberly when you don't use '-m' (OE does now, but I can
+> see people 'optimizing' it and removing '-m' to get more speed)
 
-Exactly.
+What does the -m option to ipkg do?
 
-> > Perhaps when multimachine was added, the deploy ipk feed support should
-> > have been updated to continue to work, instead of later breaking single
-> > machine feed support.
+> 3) if you rebuild a package and forget to regenerate Packages your target will freak out
+> due to mismatched md5sums
 
-Correct again. It is however my _personal_ experience that
-multi-machine.bb causes more problem than it solves (of course YMMV).
-Most of them are caused by faulty/problematic package .bb's (not OE or
-ipkg bugs) but IMO these errors are very hard to catch and it is almost
-impossible to review all 4336 .bb's currently residing in OE.
+That is a usage problem and one that is easily fixed...
 
-The only way to build clean and (almost) guaranteed-working feeds is to
-build each MACHINE in its own tmpdir. You'll get many duplicated
-packages for sure but the feed will be consistent.
+> 4) Packages.filelist can only be generated from scratch, so the former
+> deploy/ipk/Packages.filelist was broken
 
-> Again, it didn't break anything that was *supported*. 
+What uses that file?
 
-Who decides what is "supported" and what isn't? 
-Where can I read black on white what is supported or not?
-
-> Rootfs generation continued to work.
-> However, rootfs_ipk.bbclass is *not* the place to put in feed management. That class is
-> supposed to build a rootfs from ipkgs, which it does by treating deploy/ipk/<arch> as
-> feeds. I can think of ways to do rootfs generation without Packages.* (e.g sqlite), and if
-> they prove to be faster and more robust I _will_ replace the old methods.
-
-The current feed-style "installation" of the rootfs has the huge
-advantage of checking the feed for broken packages at _image-generation
-time_.
-
-Removing this important check will likely cause endless pains to feed
-and distro maintainers for barely any benefit.
-
-> So my proposal:
+> That are the easy things, lets look at other problems:
 > 
-> Make a contrib/deploy-ipkg-feed.bb that basically does:
+> a) shlib renaming madness. Every now and then something goes wrong with shlib renaming,
+> e.g. an app starts shipping an extra util and renaming doesn't work anymore. So you end up
+> with 'jpeg_6b.ipk' instead of 'libjpeg6_6b.ipk'. This means you have to edit your Packages
+> file to add 'Provides: jpeg' since OE will shlib rename 'RPROVIDES += jpeg' to 'Provides:
+> libjpeg6'
+
+This is a problem although it mainly affects long standing distro feeds
+rather than people using tmp/deploy as a feed which will probably be
+unaffected by such a problem.
+
+> b) Packaging changes without PR bump. If you just blindly rsync, different users will get
+> different contents of what appears to be the same package.
+
+Again this is a usage problem. I think people using the feeds directly
+will be intelligent enough to be able to deal with this. 
+
+> We aren't even mentioning stripping 'Source:' fields to make ipkg consume less RAM and
+> storage.
+
+We could probably improve the OE image feed handling to address that.
+
+> So, knowing all this, do people still want to pretend that a single deploy/ipk feed has no
+> problems at all and OE should support it?
+
+Nobody is pretending it has no problems, there are some. People are
+saying they're prepared to live with those problems as they need the
+feature more.
+
+> On the feed-management tools:
 > 
-> cd ${DEPLOY_DIR_IPK}
-> find */ -name  "*.ipk" -exec cp  '{}'  ./ \;
-> rm Packages*
-> ipkg-make-index -p Packages -l Packages.filelist -m .
-> 
-> and add the problems mentioned in other mails as comments.
-> 
-> This way people wanting a single feed get it with a simple 'bitbake -b
-> contrib/deploy-ipkg-feed.bb' without the impression it's officially supported in OE.
-> 
-> Does anyone have problems with this proposal?
+> The splitting scripts (to split feeds into gpe/ and opie/ and varous other ways) got
+> removed and I was told "it's out of scope" by Chris (not to mention the surprise when
+> 'bitbake world' mangles deploy/ipk).
 
-Well, since you asked...
+That kind of feed splitting is out of scope. It would belong in contrib.
 
-- Putting comments inside a .bb file is less-than-ideal as nobody opens
-up a .bb when it's working as expected. oe.warn() might be what you are
-looking for. Not that I agree that there is anything a user should be
-"warned" of when building a feed. 
+>  package-index.bb, however serves a different purpose for me: being able to regenerate 
+> Packages so I can look at several control files at once,
+> instead of using dpkg-deb or ar -x to extract single ones. I'll happily remove it Matthias
+> keeps claiming it's a feed management tool.
 
-- Even if you call it a ".bb", it is just a script for _manual_
-post-processing. Exactly how is this different than requiring the user
-to run as shell script to generate the feed? Hint: It isn't.
+IMO, it should stay, it is a useful tool.
 
-- The only acceptable way is an automatic method, integrated into the
-image-generation process as before, which the user can enable/disable if
-he choose to.
+> Again: the ability to use deploy as a feed is still present, it only moved to subdirectories.
 
-Not that there is much of a reason to disable this perfectly fine
-feature since oe-feed could live happily side-by-side w/ deploy/ipk....
+Which changed a behaviour people were relying on.
 
-But for some reason you (and as I understand it, it is _only_ you) have
-a problem with that. 
+My view on this is currently that:
 
-You reverted my _optional_ OFF BY DEFAULT _compromise_ cset, you even
-revoked my commit access to OE ( until someone intervened, that is )
+* Being able to use tmp/deploy/ipk as a feed is a useful feature
+* we should continue to allow that (as developer use only, not for
+building real feeds off)
 
-For every one else who would like his once-working oe feed back, I might
-suggest applying the oe-feed patch at
-http://stuff.pimp-your-penguin.org/oe-patches/dev/
+Since a number of people want the older single feed behaviour, I think
+we should have some way of allowing that. I understand why people want
+the split feed behaviour too and we should allow people to select that
+too. Which should be default I don't really care about.
 
-It is basically the cset koen reverted, usage instructions inside.
-Should even work fine for multi-machine and multi-arch builds w/ barely
-any added time to the feed-generation process. Oh, it lives in
-deploy/oe-feed and is triggered by package-index.bb and image creation.
+Cheers,
 
+Richard
 
 
 
