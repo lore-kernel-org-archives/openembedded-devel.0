@@ -1,26 +1,24 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [204.127.192.83] (helo=rwcrmhc13.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HNzbv-0006GB-Ez
-	for openembedded-devel@openembedded.org; Sun, 04 Mar 2007 23:55:23 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l24MtGLr009517 for <openembedded-devel@openembedded.org>;
-	Sun, 4 Mar 2007 23:55:16 +0100
-Message-ID: <45EB4E52.2000107@dominion.kabel.utwente.nl>
-Date: Sun, 04 Mar 2007 23:55:14 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+	(envelope-from <golly@stellarwerx.com>) id 1HNzd2-0006HA-Rp
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 04 Mar 2007 23:56:33 +0100
+Received: from gatekeeper.stellarwerx.com
+	(c-68-57-212-205.hsd1.in.comcast.net[68.57.212.205])
+	by comcast.net (rwcrmhc13) with ESMTP
+	id <20070304225631m13008spn3e>; Sun, 4 Mar 2007 22:56:31 +0000
+Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
+	id 807FA94CD8; Sun,  4 Mar 2007 18:02:43 -0500 (EST)
+From: "Mark Gollahon" <golly@stellarwerx.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: 
+X-Originating-IP: 192.168.253.158
+X-Mailer: Usermin 1.230
+Message-Id: <1173049360.27812@gatekeeper.stellarwerx.com>
+In-Reply-To: <45EA8629.8080804@dominion.kabel.utwente.nl>
+Date: Sun, 04 Mar 2007 18:02:41 -0500 (EST)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200703042228.03665.openembedded@hrw.one.pl>
-In-Reply-To: <200703042228.03665.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: RFC: Task-base rewrite
+Subject: Re: Fixing QA Errors?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,51 +32,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2007 22:55:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 04 Mar 2007 22:56:33 -0000
+Content-Type: multipart/mixed; boundary="bound1173049361"
+
+--bound1173049361
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen:
 
-Marcin Juszkiewicz schreef:
-> During last two months I was working on new version of task-base. It was 
-> done from time to time without too much testing as I had many other 
-> things on my todo list.
-> 
-> The main problem of task-base is that it give one package as result so if 
-> you want to create smaller rootfs for only few features you need to 
-> create own-task-base and base image on it.
-> 
-> My version create several task-base-*, task-distro-* packages which cover 
-> several features one by one. Some features contain extra stuff only if 
-> other features are available (for example Bluetooth on USB bus only if 
-> distro supports BT and device support USB Host).
-> 
-> Code needs cleanup, changes here and there but it should be better then 
-> current implementation. Recent changes made to task-base in .dev are not 
-> in my version yet.
-> 
-> Opinions? Ideas? Patches? Suggestions?
-> 
-> 
-> 
-> ------------------------------------------------------------------------
-> 
-> DESCRIPTION = "Merge machine and distro options to create a basic machine task/package"
-> PR = "r17.6"
+I've tried several different combinations for the FILES_ stuff, but I am still getting both errors.  Since the errors show up when QA checking the libqtaux2 package (as opposed to checking the *-dev, *-doc, etc., packages), could this be more of a problem of the files not getting installed to the right place, or is that what the FILES_* spec is supposed to do?
 
-PRs are cheap, no need to go beyond the decimal point :)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFF605SMkyGM64RGpERAsK+AKCc2AbDLqBzKq4jMBiJKzak2lB7igCdGOrE
-DWvfAAh7vZW+MTAhveI+iTM=
-=ROC0
------END PGP SIGNATURE-----
+Regards,
+-Mark Gollahon
 
 
+Koen Kooi wrote ..
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Mark Gollahon schreef:
+> > A question for the insane.bbclass developers - how do I go about fixing
+> these errors?  Do we have any generalized information about what they mean
+> (I can't find any on the wiki or via google...)?
+> 
+> There's not one definitive doc I can point you too. I can however show
+> you an example on
+> how to solve the errors you are seeing.
+> 
+> > ERROR: QA Issue: non -dev package contains symlink .so: libqtaux2 path
+> '/work/armv5te-angstrom-linux-gnueabi/libqtaux2-1.2.2-r0/install/libqtaux2/opt/QtPalmtop/lib/libqtaux2.so'
+> 
+> FILES_${PN}-dev += "/opt/QtPalmtop/lib/*.so"
+> 
+> > ERROR: QA Issue: non debug package contains .debug directory: libqtaux2
+> path /work/armv5te-angstrom-linux-gnueabi/libqtaux2-1.2.2-r0/install/libqtaux2/opt/QtPalmtop/lib/.debug/libqtaux2.so.1.0.0
+> 
+> FILES_${PN}-dbg += "/opt/QtPalmtop/lib/.debug"
+> 
+> I'm not sure if the first FILES statement is correct, since I don't know
+> about qtopia
+> details, but the second one is correct.
+> 
+> regards,
+> 
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> 
+> iD8DBQFF6oYpMkyGM64RGpERAk03AJ46ZBPW0OOD9lRe0R0G0t1TF5I8JgCgpL3D
+> tbiDHrz0k37RqfzXAAU1csg=
+> =OzEM
+> -----END PGP SIGNATURE-----
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--bound1173049361--
