@@ -1,26 +1,24 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [89.149.220.217] (helo=mail.kynisk.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HNsD3-0004Cm-W5
-	for openembedded-devel@openembedded.org; Sun, 04 Mar 2007 16:01:59 +0100
-Received: from [172.20.0.21] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l24F17Lr032404 for <openembedded-devel@openembedded.org>;
-	Sun, 4 Mar 2007 16:01:07 +0100
-Message-ID: <45EADF33.1060409@dominion.kabel.utwente.nl>
-Date: Sun, 04 Mar 2007 16:01:07 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <45E77A73.5020800@protium.com>	<45E7F2C4.9030300@dominion.kabel.utwente.nl>	<1172949738.5942.57.camel@localhost.localdomain>	<45EA86BE.2030002@dominion.kabel.utwente.nl>	<1173005960.5832.17.camel@localhost.localdomain>	<45EAAE13.4070308@dominion.kabel.utwente.nl>
+	(envelope-from <repvik@kynisk.com>) id 1HNsLn-0004OL-J4
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 04 Mar 2007 16:10:15 +0100
+Received: from [192.168.1.21] (54.84-48-194.nextgentel.com [84.48.194.54])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.kynisk.com (Postfix) with ESMTP id BDC9D1BF29C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  4 Mar 2007 16:10:15 +0100 (CET)
+From: =?iso-8859-1?q?=D8yvind_Repvik?= <repvik@kynisk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 4 Mar 2007 16:10:02 +0100
+User-Agent: KMail/1.9.5
+References: <45E77A73.5020800@protium.com>
 	<1173019764.11398.143.camel@localhost.localdomain>
-In-Reply-To: <1173019764.11398.143.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<45EADF33.1060409@dominion.kabel.utwente.nl>
+In-Reply-To: <45EADF33.1060409@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200703041610.02456.repvik@kynisk.com>
 Subject: Re: [oe-commits] org.oe.dev rootfs_ipk: as per OE, policy:	remove feed management tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,30 +33,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2007 15:02:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 04 Mar 2007 15:10:15 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sunday 04 March 2007 16:01, Koen Kooi wrote:
+> Matthias Hentges schreef:
+> > Am Sonntag, den 04.03.2007, 12:31 +0100 schrieb Koen Kooi:
+> >> Assuming the above didn't break, what about this:
+> >>
+> >> 'bitbake package-index' will generate a deploy/bogofeed, everything el=
+se
+> >> stays as it is now.
+> >
+> > My reverted cset did exactly the above, it didn't even so much as touch
+> > your holy new ipk directory.
+>
+> But you put it in do_rootfs, where it doesn't belong.
 
-Matthias Hentges schreef:
-> Am Sonntag, den 04.03.2007, 12:31 +0100 schrieb Koen Kooi:
+Well, why didn't you say that in the first place, instead of all this silly=
+=20
+bickering? This argument has been extremely un-constructive, and the only=20
+reason I can see for your arguments when they are all summed up is that you=
+=20
+made a mistake and you're trying to cover your ass. Get over it already, mo=
+ve=20
+it away from do_rootfs, but make it possible to choose.
 
->> Assuming the above didn't break, what about this:
->>
->> 'bitbake package-index' will generate a deploy/bogofeed, everything else stays as it is now.
-> 
-> My reverted cset did exactly the above, it didn't even so much as touch
-> your holy new ipk directory.
-
-But you put it in do_rootfs, where it doesn't belong.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFF6t8yMkyGM64RGpERAtJyAKCLvpQRXnPVj5fN1A6mmbHtCGfBbgCgqEHU
-gPSso5b2k0TVv/uT9cFlRfk=
-=DODQ
------END PGP SIGNATURE-----
+Regards,
+=D8yvind Repvik
 
 
