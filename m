@@ -1,27 +1,34 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HNmJm-0007WE-3f
-	for openembedded-devel@openembedded.org; Sun, 04 Mar 2007 09:43:46 +0100
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l248hhLr011699 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 4 Mar 2007 09:43:43 +0100
-Message-ID: <45EA86BE.2030002@dominion.kabel.utwente.nl>
-Date: Sun, 04 Mar 2007 09:43:42 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>
-References: <45E77A73.5020800@protium.com>	<45E7F2C4.9030300@dominion.kabel.utwente.nl>
-	<1172949738.5942.57.camel@localhost.localdomain>
-In-Reply-To: <1172949738.5942.57.camel@localhost.localdomain>
-X-Enigmail-Version: 0.94.1.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	(envelope-from <rpurdie@rpsys.net>) id 1HNoAc-0003OV-9b
+	for openembedded-devel@openembedded.org; Sun, 04 Mar 2007 11:42:26 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l24AgQTe009214
+	for <openembedded-devel@openembedded.org>; Sun, 4 Mar 2007 10:42:26 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 08529-04 for <openembedded-devel@openembedded.org>;
+	Sun,  4 Mar 2007 10:42:23 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l24AgKfG009206
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Sun, 4 Mar 2007 10:42:20 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1172966900.11398.124.camel@localhost.localdomain>
+References: <HOECLKEKOHLAMMGDLLBHIEJEKEAA.skoroneos@digital-opsis.com>
+	<45E7ED77.2090103@whitby.id.au>
+	<45E7F5C9.2000507@dominion.kabel.utwente.nl>
+	<1172942376.11398.107.camel@localhost.localdomain>
+	<1172962072.5942.68.camel@localhost.localdomain>
+	<1172966900.11398.124.camel@localhost.localdomain>
+Date: Sun, 04 Mar 2007 10:42:19 +0000
+Message-Id: <1173004939.5832.4.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: [oe-commits] org.oe.dev rootfs_ipk: as per OE, policy:	remove feed management tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,78 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2007 08:43:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 04 Mar 2007 10:42:26 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sun, 2007-03-04 at 01:08 +0100, Matthias Hentges wrote:
+> Using a very large ipk feed does indeed work nicely to generate images.
+> However, generating Packages can take ages ( and so do image rebuilds
+> because of this ). That's about the only problem I see w/ One Giant Feed
 
-Richard Purdie schreef:
-> On Fri, 2007-03-02 at 10:47 +0100, Koen Kooi wrote:
+We speeded that up quite a bit and there is another speedup planned
+which should remove that obstacle. Its been discussed here in the past.
 
->> Again: the ability to use deploy as a feed is still present, it only moved to subdirectories.
->
-> Which changed a behaviour people were relying on.
->
-> My view on this is currently that:
->
-> * Being able to use tmp/deploy/ipk as a feed is a useful feature
-> * we should continue to allow that (as developer use only, not for
-> building real feeds off)
+> > My personal experience says multimachine works well and I use if for
+> > everything as standard these days. Have you any specific examples or
+> > problems? I have been dealing with them as and when I've seen them but I
+> > haven't seen any in quite a whiie... 
+> 
+> I wasn't exactly running into real ipkg bugs. I had problems with
+> packages using machine-specific stuff for some models ( say all
+> sl-c3x00) and hence having their ARCH set as $MACHINE, but not for other
+> models ( like collie, poodle ) having their ARCH set as $ARCH. 
+> 
+> It's a packaging bug, not an ipkg bug but annoying in any case ;)
 
-Sure, but people wanting that can do 'bitbake -b contrib/oe-ipkg-feed.bb'. Building a feed
-not used for rootfs assembling during do_rootfs is plain wrong. Can we at least agree on
-it being out of scope for do_rootfs?
+Some packages work like this as a feature, ts-conf now being one of
+them. The standard one can be overridden by a machine specific package.
+It should just require that the ipkg Architectures are in the right
+order. There could also be an issue for ipkg deciding whether it should
+use an  arch specific package or latest version in a case where packages
+that used to be machine specific no longer are. If ipkg can't handle
+that, I'd say ipkg needs fixing.
 
-> Since a number of people want the older single feed behaviour, I think
-> we should have some way of allowing that.
+Cheers,
 
-'bitbake -b contrib/oe-ipkg-feed.bb' which is only a few chars more as 'bitbake
-package-index'. Same amount of commands and 'post-processing'
+Richard
 
-> I understand why people want
-> the split feed behaviour too and we should allow people to select that
-> too. Which should be default I don't really care about.
-
-People keep saying that do_rootfs should build a feed that can be used as a feed, but what
-is the point in that? OE builds only stuff that's put in the images, so the feed would
-almost be a 1:1 copy of the image you install on your device. If you start building more
-packages and run do_rootfs again you're getting into the territory of what you called
-"long standing distro feeds" and associated bugs.
-
-Think about the situation for a moment:
-
-* OE builds packages and puts those somewhere
-* OE uses said packages to make a rootfs
-
-As a side effect you get something you could use a feed after do_rootfs has run.
-Or you ran manually ran 'bitbake package-index'.
-
-So it always required an extra command (either 'bitbake <foo>-image' or 'bitbake
-package-index'), since the index wasn't refreshed automagically after you built a package.
-
-However, there is one thing that breaks, which is the upload scripts people were using. My
-suggestion that scripts can be changed didn't go over to well, so I don't have a solution
-for that.
-
-I don't disagree with having a way in OE to generate a feed out of the contents in
-deploy/, but given the problems raised OE should make clear you'll have no warranty and it
-will eat your dog. What about having an OE way that creates 'deploy/bogofeed', in the
-spirit of linux' bogomips?
-
-regards,
-
-Koen
-
-PS: Now I think of it, not using TARGET_VENDOR breaks host = target situations....
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFF6oa+MkyGM64RGpERAmotAJ0ZG5yAEwSgnHmnYSWo06gSPIUGIwCgmZWV
-LgJLBfxNp9e1y6A1ipfti7M=
-=D0Av
------END PGP SIGNATURE-----
 
 
