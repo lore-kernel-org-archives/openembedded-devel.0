@@ -1,29 +1,28 @@
-Received: from [64.233.162.235] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HOA6o-000676-K5
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2007 11:07:58 +0100
-Received: by nz-out-0506.google.com with SMTP id m22so1355760nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2007 02:07:57 -0800 (PST)
-Received: by 10.35.93.1 with SMTP id v1mr2288802pyl.1173089277249;
-	Mon, 05 Mar 2007 02:07:57 -0800 (PST)
-Received: from cube ( [82.193.98.6])
-	by mx.google.com with ESMTP id 38sm8589137nzf.2007.03.05.02.07.55;
-	Mon, 05 Mar 2007 02:07:56 -0800 (PST)
-Date: Mon, 5 Mar 2007 12:07:53 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1598867211.20070305120753@gmail.com>
-To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-In-Reply-To: <200703050912.44261.openembedded@hrw.one.pl>
-References: <407130732.20070227223500@gmail.com>
-	<1173051658.5832.26.camel@localhost.localdomain>
-	<45EBBF38.4020704@dominion.kabel.utwente.nl>
-	<200703050912.44261.openembedded@hrw.one.pl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HOAt0-0008Ox-Kf
+	for openembedded-devel@openembedded.org; Mon, 05 Mar 2007 11:57:46 +0100
+Received: from [172.20.0.21] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l25Autox032558; Mon, 5 Mar 2007 11:56:57 +0100
+Message-ID: <45EBF776.3090505@dominion.kabel.utwente.nl>
+Date: Mon, 05 Mar 2007 11:56:54 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] base_less_or_equal() for numerical value testing in OE
+To: Harald Welte <laforge@openmoko.org>
+References: <45E6EA03.8040804@dominion.kabel.utwente.nl>
+	<20070304221355.GM25845@prithivi.gnumonks.org>
+In-Reply-To: <20070304221355.GM25845@prithivi.gnumonks.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Cc: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>, distro-devel@lists.openmoko.org
+Subject: Re: Merging openmoko into OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,108 +36,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2007 10:07:58 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 05 Mar 2007 10:57:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello Marcin,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Monday, March 5, 2007, 10:12:43 AM, you wrote:
+[DANGER: cross-post]
 
-> Dnia poniedzia³ek, 5 marca 2007, Koen Kooi napisa³:
->> Richard Purdie schreef:
->> > On Mon, 2007-03-05 at 01:30 +0200, Paul Sokolovsky wrote:
+Harald Welte schreef:
+> On Thu, Mar 01, 2007 at 03:58:11PM +0100, Koen Kooi wrote:
 
->> > You only ask for screen size but I can guarantee that wouldn't be the
->> > last request. I'm dead set against this.
+>> What are the plans, and how can the community help with carrying those out?
+> 
+> Our current agenda is more focussed on "getting things working at all"
+> rather than "doing everything correct in the first run".  I wish it was
+> different, but we're really under a lot of pressure here.
+> 
+> As far as the buildsystem is addressed, there are some distinct features
+> which we're lacking currently.  I have hired an experienced python
+> hacker to add those things properly to bitbake and then talk to you guys
+> about how this code can be merged.
+> 
+> Our primary requirements, with regard to the build system, are:
+> 
+> 1) do proper and reliable caching, dependency resolving, and decisions
+>    on when to build what, while staying in-sync with upstream
+>    repositories.  We're working on somce code that adds methods to the
+>    fetchers (so far: only svn) to determine the 'last changed date' of
+>    the upstream repo.  Then we create a string as concatentation of all
+>    source uri repositories, and use that as PR.  This gets rid of the
+>    bogus timestamps and neverending rebuilds of the same source code.
+> 
+>    Also, the tarballs in 'sources' (which get mirrored to
+>    downloads.openmoko.org/sources) will then contain e.g. the svn
+>    revision number, not the checkout date.
+> 
+>    This whole logic will be optional, and only be active for
+>    SRCDATE="now" packages.
+> 
+>    Using this method we can e.g. only rebuild the uboot package if
+>    either upstream git or our quilt patchset in svn have changed.
+> 
+>    I know this might conflict with where bitbake is heading, or what is
+>    currently in 1.7.x.  We will investigate this later, once we have
+>    something that fits our needs first.  I know this is very
+>    un-free-software-like, but we really are short of months of time [and
+>    staff] and have to compromise somewhere.
+> 
+> 2) run automatized builds on one of our buildhosts, continuously,
+>    sending reports about build failures directly into bugzilla.
 
->> Me too, since you will get something like this:
-
-> -1 from me too
-
->> application_1.4.5-r5_bigscreen.ipk
->> application_1.4.5-r5_ppc603e.ipk
->> application_1.4.5-r5_armv5te.ipk
->> application_1.4.5-r5_smallscreen.ipk
-
->> Now Marcin wants to install 'application' on his webpad and it doesn't
->> run. Why? Because 'application_1.4.5-r5_bigscreen.ipk' secretly is ARM
->> instead of x86.
-
-> And what is bigscreen? VGA? SVGA? XGA? or maybe 1680x1050 which I use 
-> under OE/x86 chroot system?
-
-> Instead of using crypto names like smallscreen/bigscreen we should use
-> MACHINE_ namespace instead:
-
-> MACHINE_SCREEN_RESOLUTION = "vga/svga/qvga/xga/wxga/hvga" etc
-> MACHINE_SCREEN_DPI = "100/280/75"
-
-  I spelled my IMHO on this already too:
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2007-February/001539.html
-
-
-  Let me factor it out if that mail was too long:
-
-"IMHO, "smallscreen" and "bigscreen" heuristic designators we use now
-are the best thing we could have in our situation. There were
-proposals on adding absolute screen properties, but IMHO, that
-wouldn't give us much use, because 1) for most machines values will be
-still approximate at best, and 2) we'd quickly decide that it's cool that
-we have that info now, but bitbake sucks, and it's too inefficient to
-actually use those info, so we shouldn't use it.
-  And besides, simple "smallscreen" vs "bigscreen" dichotomy
-corresponds to what packages actually provides in real life - mostly,
-just 2 sets of icons, etc."
-
-  So, why I'm personally proponent of using objective parameters
-whenever possible, in this case, using subjective, heuristic values
-like "smallscreen" and "bigscreen" will save us from interpretation
-complexities.
+Holger has modified(/rewritten) tinderbox code to do such a thing. It need a recent
+bugzilla with xmlrpc turned on.
 
 
+> 3) find a cleaner way for the deploy/images directory.  There need to be
+>    per-release symlinks so that an automatized flashing tool can always
+>    assume that the current kernel for one release/snapshot/branch has a
+>    fixed name (can be symlinks). 
 
-  As for definition of what "smallscreen" and "bigscreen", it must be
-simple and just capture what we already have:
+Ok, that's not too hard, I recall Richard making a start with that for the zaurus machines.
 
-"There're guidelines (see appendix 1) of choosing
-smallscreen/bigscreen for a given display device, plus, as usual, new
-devices should be consistent with already existent assignments. But
-ultimately, the selection is upon machine maintainer's choice and
-consciousness.
+>    Also, the statically linked native
+>    openocd, dfu-util and sjf2410 binaries need to go to a different
+>    directory.
 
-Appendix 1:
-1. If display device has relatively low DPI resolution, "smallscreen"
-is a good choice regardless of actual pixel dimensions, as that will
-allow to save screen real estate for more user information.
-2. If display device has relatively low (sub-VGA) pixel dimensions,
-use "smallscreen" as it is just too small to use bigger fonts, icons,
-etc.
-3. If display device has relatively high DPI resolution, use
-"bigscreen" to save users' health.
-4. If display device has relatively pixel dimensions, and following
-guideline #1 will lead to awkward usability (like, easily
-distinguishable for eyes icons, but which still can be lost in big
-screen space), use "bigscreen"
-"
+Rod is looking into proper statical linking. We probably need a DEPLOY_DIR_TOOLS or
+something where the tools will live.
 
 
-> Because Neo1973 is smallscreen (2.8") but VGA (so bigscreen). I do not
-> feel good with using full AbiWord on it but probably AbiWord embedded 
-> will be OK.
+> 4) find a way how to correctly clean up packages after a build.
 
-  So, this is more or less subjective already (as full AbiWord could
-be run on VGA, and some people would vote for "fullness"). But if
-we'll try to express this subjectiveness in terms of the absolute
-parameters, we'll at first will get mess and inconsistency, and long
-time will be required to establish sane guidelines.
+s/packages/images/
 
+>    Something like: If I rebuild a kernel uImage, then only the most current
+>    one is supposed to be in 'images', older ones get moved to 'attic'.
 
+That one is a bit nasty, since people might want to have it all in one dir, and might
+freak out when OE moves it away to another dir. I'm not one of those people :)
 
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+> 5) find a way how to completely clean up a package, including all
 
+s/package/recipe/
+
+>    related download cache, bitbake rule cache, .ipk's and/or 'images'
+>    that it created
+
+Holger and I discussed something like that for the packaged-staging project, but we didn't
+come up with a clean way to present it to the user. That was last year, and I'm sure
+others can come up with something.
+
+
+> 6) find how how we can automatically create a full 'snapshot' from a
+>    current build-directory, by just using the latest version of every
+>    kerne/uboot image and .ipk
+
+What kind of snapshot are you talking about? A flashable image, a tarball or the OE
+recipes, ... , ... ?
+
+
+> 7) related: reimplement ipkg backend to use some indexed database. It's
+>    just too slow
+
+You can make it about twice as fast by doing:
+
+for i in `find . -name Packages` ; do grep -v ^Source: $i|gzip -c9>$i.gz ;gunzip -c
+$i.gz>$i ; done
+
+Marcin looked at it briefly, and it seems that using an sqlite3 database will use up the
+same size for the list of available packages.
+
+> 8) think about signing binary packages and feeds plus signature
+>    verification on the device
+
+That'd be nice and can probably implementing within the current control file format.
+
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFF6/d2MkyGM64RGpERAuuoAKCPPoGoWwlrDMPLOxPQsWn1XZslsgCff9Im
+EXlcf1BGqRgLBrxsBxvRpU8=
+=rBfW
+-----END PGP SIGNATURE-----
 
 
