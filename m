@@ -1,22 +1,30 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HO8J4-0001iT-Ms
-	for openembedded-devel@openembedded.org; Mon, 05 Mar 2007 09:12:30 +0100
-Received: (qmail 9808 invoked by uid 813007); 5 Mar 2007 08:12:30 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 5 Mar 2007 08:12:30 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 5 Mar 2007 09:12:43 +0100
-User-Agent: KMail/1.9.6
+	(envelope-from <pmiscml@gmail.com>) id 1HO9ZB-0005i4-9e
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Mar 2007 10:33:13 +0100
+Received: by py-out-1112.google.com with SMTP id n39so781997pyh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 Mar 2007 01:33:10 -0800 (PST)
+Received: by 10.35.17.12 with SMTP id u12mr13913757pyi.1173087190432;
+	Mon, 05 Mar 2007 01:33:10 -0800 (PST)
+Received: from cube ( [82.193.98.6])
+	by mx.google.com with ESMTP id 36sm8528779nza.2007.03.05.01.33.08;
+	Mon, 05 Mar 2007 01:33:09 -0800 (PST)
+Date: Mon, 5 Mar 2007 11:33:08 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <374228801.20070305113308@gmail.com>
+To: Koen Kooi <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <45EBBF38.4020704@dominion.kabel.utwente.nl>
 References: <407130732.20070227223500@gmail.com>
+	<1172609341.28406.169.camel@localhost.localdomain>
+	<1828813817.20070227233137@gmail.com>
+	<1172613830.28406.192.camel@localhost.localdomain>
+	<794972911.20070305013040@gmail.com>
 	<1173051658.5832.26.camel@localhost.localdomain>
 	<45EBBF38.4020704@dominion.kabel.utwente.nl>
-In-Reply-To: <45EBBF38.4020704@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-Message-Id: <200703050912.44261.openembedded@hrw.one.pl>
 Subject: Re: [RFC] base_less_or_equal() for numerical value testing in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,52 +39,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2007 08:12:31 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 05 Mar 2007 09:33:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=B3ek, 5 marca 2007, Koen Kooi napisa=B3:
-> Richard Purdie schreef:
-> > On Mon, 2007-03-05 at 01:30 +0200, Paul Sokolovsky wrote:
+Hello Koen,
 
-> > You only ask for screen size but I can guarantee that wouldn't be the
-> > last request. I'm dead set against this.
+Monday, March 5, 2007, 8:56:56 AM, you wrote:
+
+[]
+
+>> You only ask for screen size but I can guarantee that wouldn't be the
+>> last request. I'm dead set against this.
 
 > Me too, since you will get something like this:
-
-=2D1 from me too
 
 > application_1.4.5-r5_bigscreen.ipk
 > application_1.4.5-r5_ppc603e.ipk
 > application_1.4.5-r5_armv5te.ipk
 > application_1.4.5-r5_smallscreen.ipk
 
-> Now Marcin wants to install 'application' on his webpad and it doesn't
-> run. Why? Because 'application_1.4.5-r5_bigscreen.ipk' secretly is ARM
-> instead of x86.
+> Now Marcin wants to install 'application' on his webpad and it doesn't run. Why? Because
+> 'application_1.4.5-r5_bigscreen.ipk' secretly is ARM instead of x86.
 
-And what is bigscreen? VGA? SVGA? XGA? or maybe 1680x1050 which I use=20
-under OE/x86 chroot system?
+  This was covered in my original rundown of how that could be
+implemented. I proposed to have convention that smallscreen/datascreen
+virtual archs may be applied only to data packages (whose arch would
+be 'all' otherwise). Obviously, this can be enforced by insane.class.
 
-Instead of using crypto names like smallscreen/bigscreen we should use=20
-MACHINE_ namespace instead:
+  So, it would be:
 
-MACHINE_SCREEN_RESOLUTION =3D "vga/svga/qvga/xga/wxga/hvga" etc
-MACHINE_SCREEN_DPI =3D "100/280/75"
+application_1.4.5-r5_ppc603e.ipk
+application_1.4.5-r5_armv5te.ipk
++
+application-data_1.4.5-r5_bigscreen.ipk
+application-data_1.4.5-r5_smallscreen.ipk
 
-Because Neo1973 is smallscreen (2.8") but VGA (so bigscreen). I do not=20
-feel good with using full AbiWord on it but probably AbiWord embedded=20
-will be OK.
+> regards,
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+> Koen
 
-         Real programmers don't document.
-         If it was hard to write, it should be hard to understand.
+[]
 
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
