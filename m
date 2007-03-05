@@ -1,27 +1,28 @@
-Received: from [213.95.27.120] (helo=ganesha.gnumonks.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <laforge@openmoko.org>) id 1HOKcI-0001NT-6a
-	for openembedded-devel@openembedded.org; Mon, 05 Mar 2007 22:21:10 +0100
-Received: from uucp by ganesha.gnumonks.org with local-bsmtp (Exim 4.50)
-	id 1HOKcH-0005oB-NB
-	for openembedded-devel@openembedded.org; Mon, 05 Mar 2007 22:21:09 +0100
-Received: from laforge by prithivi.gnumonks.org with local (Exim 3.36 #1)
-	id 1HOIMm-000854-00; Mon, 05 Mar 2007 19:57:00 +0100
-Date: Mon, 5 Mar 2007 19:57:00 +0100
-From: Harald Welte <laforge@openmoko.org>
-To: Holger Freyther <zecke@selfish.org>
-Message-ID: <20070305185700.GB30954@prithivi.gnumonks.org>
-References: <45E6EA03.8040804@dominion.kabel.utwente.nl>
-	<20070304221355.GM25845@prithivi.gnumonks.org>
-	<45EBF776.3090505@dominion.kabel.utwente.nl>
-	<70690824-987F-4633-9412-97C3D083F9DB@selfish.org>
-MIME-Version: 1.0
-In-Reply-To: <70690824-987F-4633-9412-97C3D083F9DB@selfish.org>
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Cc: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@openembedded.org>,
-	openembedded-devel@lists.openembedded.org, distro-devel@lists.openmoko.org
-Subject: Re: Merging openmoko into OE
+	(envelope-from <rpurdie@rpsys.net>) id 1HOL9m-0002YL-FF
+	for openembedded-devel@openembedded.org; Mon, 05 Mar 2007 22:55:46 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l25LtZfP004488;
+	Mon, 5 Mar 2007 21:55:36 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04061-05; Mon,  5 Mar 2007 21:55:33 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l25LtUAS004478
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Mon, 5 Mar 2007 21:55:30 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel <openembedded-devel@openembedded.org>
+Date: Mon, 05 Mar 2007 21:55:31 +0000
+Message-Id: <1173131731.5842.140.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Bitbake Request for Testing of bitbake 1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,39 +36,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2007 21:21:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 05 Mar 2007 21:55:47 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 05, 2007 at 03:44:13PM +0100, Holger Freyther wrote:
+I've been putting this off for a while but bitbake trunk has branched
+for a new stable release series, 1.8.x which will ultimately replace the
+1.6.x stable series.
 
-> Specially as BitBake and Quality (identifying issues  
-> (programatically), identifying them and providing solutions) are two  
-> topics I have high interest in.
+Could people give the 1.8 branch in bitbake a try? If you have problems,
+I will do my best to resolve them before 1.8.0 is released. I estimate
+1.8.0 is say a week away, I want to release soon.
 
-again, I rather prefer having some real code as basis for discussion,
-rather than talking vaporwaere :)
+For what its worth, some of the core devs have been using trunk for a
+while with success and its been used in poky without incident for a
+while now too.
 
-> I hope you have enough budget for your python expert to spend the  
-> time on merging and integrating his work upstream once he is done.  
 
-absolutely :)
+What's will be new in 1.8?
 
-> This is the only way to differentiate from the people than run away  
-> with our work normally.
+* We basically rewrote half the core. Bitbake used to calculate the
+build path "on the fly" which was no use for multithreading, its now
+been replaced with a calculation in advance (taskdata and runqueue).
+This allows it to do simplistic multithreading. Set BB_NUMBER_THREADS =
+"100" in local.conf to lock your machine up or something lower to try
+multithreading ;-).
 
-You don't need to tell me that :)
+* The -g dependency graph output has changed and now includes a task
+dependency file. Has anyone got a good way to view these graphically
+yet?
 
-> On a pure technical note we invite your expert to talk with us and I  
-> sincerly hope he is using this offer.
+* The fetchers were refactored removing duplicate code and standardising
+behaviour.
 
-Henryk will be in touch with you soon.  btw: I stated skilled or
-experienced python developer.  To indicate that nobody else involved
-with OpenMoko [but mickey] qualifies as such.
+* Numerous code changes were made internally to refactor/modularise the
+code. This will be useful in future developments (the last code I
+checked in prepares for the UI).
 
--- 
-- Harald Welte <laforge@openmoko.org>          	        http://openmoko.org/
-============================================================================
-Software for the world's first truly open Free Software mobile phone
+
+What will happen in trunk?
+
+I've branched as I have some fairly invasive changes planned for trunk.
+The aim of these is to split bitbake into a client/server and look at
+UIs. Whilst 1.7.x was very stable more recently, 1.9.x is going to
+break ;-). 
+
+The current UI code I have is about as secure as publishing your IP
+address and root password on the web and leaving the telnet port open so
+when I check it in, use at your own risk. I will accept patches to
+address these issues ;-). My main concern is the structure at the moment
+rather than security or functionality which can come later.
+
+
+So please do test the bitbake 1.8 branch and lets make it as successful
+as 1.6!
+
+Cheers,
+
+Richard
+
 
 
