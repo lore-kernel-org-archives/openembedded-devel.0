@@ -1,32 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HO0Mi-0000D0-RN
-	for openembedded-devel@openembedded.org; Mon, 05 Mar 2007 00:43:45 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l24NhiR3011842
-	for <openembedded-devel@openembedded.org>; Sun, 4 Mar 2007 23:43:44 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11645-02 for <openembedded-devel@openembedded.org>;
-	Sun,  4 Mar 2007 23:43:42 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l24NheLI011834
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 4 Mar 2007 23:43:40 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HO780-0007fF-2t
+	for openembedded-devel@openembedded.org; Mon, 05 Mar 2007 07:57:00 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l256uvLr006931 for <openembedded-devel@openembedded.org>;
+	Mon, 5 Mar 2007 07:56:57 +0100
+Message-ID: <45EBBF38.4020704@dominion.kabel.utwente.nl>
+Date: Mon, 05 Mar 2007 07:56:56 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.9 (Macintosh/20061207)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-In-Reply-To: <1BCC2700-6848-45BC-8A5E-4CA7295A66B6@selfish.org>
-References: <3812EAEB-7EFE-40F3-8311-1047D0540BD6@selfish.org>
-	<20070304175316.GA4152@hovland.org>
-	<1BCC2700-6848-45BC-8A5E-4CA7295A66B6@selfish.org>
-Date: Sun, 04 Mar 2007 23:43:41 +0000
-Message-Id: <1173051821.5832.28.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Recent wordpress attacks and md5sum
+References: <407130732.20070227223500@gmail.com>	<1172609341.28406.169.camel@localhost.localdomain>	<1828813817.20070227233137@gmail.com>	<1172613830.28406.192.camel@localhost.localdomain>	<794972911.20070305013040@gmail.com>
+	<1173051658.5832.26.camel@localhost.localdomain>
+In-Reply-To: <1173051658.5832.26.camel@localhost.localdomain>
+X-Enigmail-Version: 0.94.1.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [RFC] base_less_or_equal() for numerical value testing in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,30 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2007 23:43:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 05 Mar 2007 06:57:01 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2007-03-04 at 21:53 +0100, Holger Freyther wrote:
-> Am 04.03.2007 um 18:53 schrieb Erik Hovland:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Richard Purdie schreef:
+> On Mon, 2007-03-05 at 01:30 +0200, Paul Sokolovsky wrote:
+
+>>>> hx4700: PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5te iwmmxt bigscreen"
+>>>> h4000: PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5te iwmmxt smallscreen"
+>>>>
+>>>>   Voila, matching of actual bigsreen/smallscreen package will be done by
+>>>> ipkg.
+>>> No. Adding architectures for every machine feature is just insane.
+>>   Well, I understand that I raise few features at the same time, and
+>> it may be a bit confusing to follow thru them, but actual topic of all
+>> this - how to improve machine metadata handling in OE.
+>>
+>>   So, I don't speak about adding virtual arch for every machine
+>> feature, but *only* for the screen size. That's the machine feature
+>> which seems as possibly calling for that - as it's not uncommon to
+>> supply image resources for different resolutions (i.e. these
+>> smallscreen/bigscreen arch packages won't be just for app), plus image
+>> resources are usually big enough to warrant placement into own
+>> package.
 > 
-> > On Sun, Mar 04, 2007 at 05:54:08PM +0100, Holger Freyther wrote:
-> >> PPS: Yeah md5 is cracked, so is the sha family, any other options?
-> >
-> > Use sha256sum? NIST strongly encourages users to switch to sha-256 now
-> > until they finish their hash competition.
-> >
-> > sha256sum does come with modern versions of coreutils. SHA-256 should
-> > not be compromised yet...
+> You only ask for screen size but I can guarantee that wouldn't be the
+> last request. I'm dead set against this.
 
-> not being a crypto expert I heard complains of inbreed of the whole  
-> sha family. But I think sha256 is totally fine for our purpose (only  
-> the sums are so long...)
+Me too, since you will get something like this:
 
-Would it be better to have a file with a list of urls and a list of
-checksums?
+application_1.4.5-r5_bigscreen.ipk
+application_1.4.5-r5_ppc603e.ipk
+application_1.4.5-r5_armv5te.ipk
+application_1.4.5-r5_smallscreen.ipk
 
-Richard
+Now Marcin wants to install 'application' on his webpad and it doesn't run. Why? Because
+'application_1.4.5-r5_bigscreen.ipk' secretly is ARM instead of x86.
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFF6783MkyGM64RGpERAupWAJ9vHpWTx5ctFNIY0oyU/vm8TUFylgCaAzgE
+17abF4sgH/AJjuCwhhEuCqs=
+=D9V6
+-----END PGP SIGNATURE-----
 
 
