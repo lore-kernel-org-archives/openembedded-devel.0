@@ -1,38 +1,30 @@
-Received: from [160.45.40.10] (helo=math.fu-berlin.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1HOwlY-0008FL-Nx
-	for openembedded-devel@openembedded.org; Wed, 07 Mar 2007 15:05:16 +0100
-Received: (qmail 10294 invoked from network); 7 Mar 2007 15:05:16 +0100
-Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
-	by leibniz.math.fu-berlin.de with SMTP; 7 Mar 2007 15:05:16 +0100
-Received: (qmail 6576 invoked by uid 9804); 7 Mar 2007 15:05:16 +0100
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 7 Mar 2007 15:05:15 +0100
-Received: (qmail 6551 invoked by uid 9804); 7 Mar 2007 15:05:15 +0100
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by lusin.mi.fu-berlin.de with SMTP; 7 Mar 2007 15:05:15 +0100
-Received: (qmail 10287 invoked from network); 7 Mar 2007 15:05:15 +0100
-Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
-	by leibniz.math.fu-berlin.de with SMTP; 7 Mar 2007 14:05:15 -0000
-Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 3.36 #1
-	(Debian)) id 1HOwlW-00062Q-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2007 15:05:14 +0100
-Date: Wed, 7 Mar 2007 15:05:14 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070307140514.GA23198@mi.fu-berlin.de>
+	(envelope-from <rpurdie@rpsys.net>) id 1HOx6U-0001V2-2N
+	for openembedded-devel@openembedded.org; Wed, 07 Mar 2007 15:26:54 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l27EQqsd017250
+	for <openembedded-devel@openembedded.org>; Wed, 7 Mar 2007 14:26:52 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 16740-08 for <openembedded-devel@openembedded.org>;
+	Wed,  7 Mar 2007 14:26:49 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l27EQmGm017242
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Wed, 7 Mar 2007 14:26:48 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200703071217.31968.christopher.lang@plus.cablesurf.de>
 References: <1173131731.5842.140.camel@localhost.localdomain>
-	<20070306041502.GA542@thegnar.org>
-	<1173259243.5826.0.camel@localhost.localdomain>
-X-Envelope-Sender: heinold@inf.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L39+ClamAV[6554](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.206
+	<200703071217.31968.christopher.lang@plus.cablesurf.de>
+Date: Wed, 07 Mar 2007 14:26:48 +0000
+Message-Id: <1173277608.5826.15.camel@localhost.localdomain>
 Mime-Version: 1.0
-In-Reply-To: <1173259243.5826.0.camel@localhost.localdomain>
-User-Agent: Mutt/1.5.9i
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: Bitbake Request for Testing of bitbake 1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -47,16 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2007 14:05:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Mar 2007 14:26:54 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On Wed, 2007-03-07 at 12:17 +0100, Christopher Lang wrote:
+> Richard,
+> 
+> I did some tests with bb 1.8 and with same setup with 1.66.
+> 
+> 1.66 works, 1.8 fails.
+> 
+> results in: http://bugs.openembedded.org/show_bug.cgi?id=1944
 
-I tested 1.8 with a simpad-setup. Only Problem was with
-multiple threads and quilt. Quilt must build first without interrupted,
-but I consider this problem on openembedded.
+Sorry for the delay in getting to this, I had seen it and have now
+committed a fix for the traceback. See the bug report but if you are
+having dependency issues afterwards, please follow up this thread with
+them, at least initially.
 
-Bye Henning
+Thanks,
+
+Richard
+
 
 
