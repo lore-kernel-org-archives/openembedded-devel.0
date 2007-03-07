@@ -1,22 +1,26 @@
-Received: from [195.234.128.72] (helo=scotty.chl-informatik.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <christopher.lang@plus.cablesurf.de>)
-	id 1HOu9H-00019h-7C
-	for openembedded-devel@openembedded.org; Wed, 07 Mar 2007 12:17:35 +0100
-Received: from linux64.chl-informatik.de (linux64.chl-informatik.de
-	[192.168.10.17])
-	by scotty.chl-informatik.de (8.12.3/8.12.3/SuSE Linux 0.6) with ESMTP
-	id l27ATAfl008915 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 7 Mar 2007 11:29:11 +0100
-From: Christopher Lang <christopher.lang@plus.cablesurf.de>
-To: openembedded-devel@openembedded.org
-Date: Wed, 7 Mar 2007 12:17:31 +0100
-User-Agent: KMail/1.9.1
-References: <1173131731.5842.140.camel@localhost.localdomain>
-In-Reply-To: <1173131731.5842.140.camel@localhost.localdomain>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HOvIL-0004WQ-5Y
+	for openembedded-devel@openembedded.org; Wed, 07 Mar 2007 13:31:03 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l27CUvox000718 for <openembedded-devel@openembedded.org>;
+	Wed, 7 Mar 2007 13:30:58 +0100
+Message-ID: <45EEB07E.5@dominion.kabel.utwente.nl>
+Date: Wed, 07 Mar 2007 13:30:54 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-Message-Id: <200703071217.31968.christopher.lang@plus.cablesurf.de>
-Subject: Re: Bitbake Request for Testing of bitbake 1.8
+To: openembedded-devel@openembedded.org
+References: <E1HOvGE-0004Zn-Tg@linuxtogo.org>
+In-Reply-To: <E1HOvGE-0004Zn-Tg@linuxtogo.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev turbostation: Add a kernel-feed for the turbostation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,85 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2007 11:17:35 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Mar 2007 12:31:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+nail commit schreef:
+> turbostation: Add a kernel-feed for the turbostation
 
 
-Richard,
+> --- conf/machine/turbostation.conf	6f726b010d35f1dca1dfb881904353cbda8d1e85
+> +++ conf/machine/turbostation.conf	d117d9cf3f641f7635130a1cff259c3c26fe96e7
 
-I did some tests with bb 1.8 and with same setup with 1.66.
+> +FEED_URIS += "turbostation##http://ipkg.kynisk.com/opents/cross/1.0-dev/"
 
-1.66 works, 1.8 fails.
+Don't do that, feeds are a distro thing, not a machine thing. So that should go into
+conf/distro/$yourdistro.conf
 
-results in: http://bugs.openembedded.org/show_bug.cgi?id=3D1944
+regards,
 
-cheers
-Chris
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
-Am Montag, 5. M=E4rz 2007 22:55 schrieb Richard Purdie:
-> I've been putting this off for a while but bitbake trunk has branched
-> for a new stable release series, 1.8.x which will ultimately replace the
-> 1.6.x stable series.
->
-> Could people give the 1.8 branch in bitbake a try? If you have problems,
-> I will do my best to resolve them before 1.8.0 is released. I estimate
-> 1.8.0 is say a week away, I want to release soon.
->
-> For what its worth, some of the core devs have been using trunk for a
-> while with success and its been used in poky without incident for a
-> while now too.
->
->
-> What's will be new in 1.8?
->
-> * We basically rewrote half the core. Bitbake used to calculate the
-> build path "on the fly" which was no use for multithreading, its now
-> been replaced with a calculation in advance (taskdata and runqueue).
-> This allows it to do simplistic multithreading. Set BB_NUMBER_THREADS =3D
-> "100" in local.conf to lock your machine up or something lower to try
-> multithreading ;-).
->
-> * The -g dependency graph output has changed and now includes a task
-> dependency file. Has anyone got a good way to view these graphically
-> yet?
->
-> * The fetchers were refactored removing duplicate code and standardising
-> behaviour.
->
-> * Numerous code changes were made internally to refactor/modularise the
-> code. This will be useful in future developments (the last code I
-> checked in prepares for the UI).
->
->
-> What will happen in trunk?
->
-> I've branched as I have some fairly invasive changes planned for trunk.
-> The aim of these is to split bitbake into a client/server and look at
-> UIs. Whilst 1.7.x was very stable more recently, 1.9.x is going to
-> break ;-).
->
-> The current UI code I have is about as secure as publishing your IP
-> address and root password on the web and leaving the telnet port open so
-> when I check it in, use at your own risk. I will accept patches to
-> address these issues ;-). My main concern is the structure at the moment
-> rather than security or functionality which can come later.
->
->
-> So please do test the bitbake 1.8 branch and lets make it as successful
-> as 1.6!
->
-> Cheers,
->
-> Richard
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+iD8DBQFF7rB+MkyGM64RGpERAtmRAKC8YB+Tb6PAjG/k2IwEK/Dcl67iJQCbBl0b
+sxb5ynCeKbYu9I1VqYSyFn4=
+=EGni
+-----END PGP SIGNATURE-----
 
 
