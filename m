@@ -1,32 +1,29 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HPd1f-0000r8-9T
-	for openembedded-devel@openembedded.org; Fri, 09 Mar 2007 12:12:43 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l29BChXp015570
-	for <openembedded-devel@openembedded.org>; Fri, 9 Mar 2007 11:12:43 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 14437-10 for <openembedded-devel@openembedded.org>;
-	Fri,  9 Mar 2007 11:12:40 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l29BCc7D015560
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 9 Mar 2007 11:12:38 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <45F13D02.9090402@whitby.id.au>
-References: <45E77A73.5020800@protium.com>
-	<45E7F2C4.9030300@dominion.kabel.utwente.nl>
-	<1172949738.5942.57.camel@localhost.localdomain>
-	<45F13D02.9090402@whitby.id.au>
-Date: Fri, 09 Mar 2007 11:12:37 +0000
-Message-Id: <1173438757.5864.61.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	(envelope-from <rod@whitby.id.au>) id 1HPeuh-00063R-Mt
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Mar 2007 14:13:39 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 174AD1F6E00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Mar 2007 08:13:39 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by out1.internal (MEProxy); Fri, 09 Mar 2007 08:13:39 -0500
+X-Sasl-enc: KShrJ5YRWfkof51K9g4Qeh2TkxWIG3U2mNlSbaULCjm5 1173446019
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id D241419C12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Mar 2007 08:13:38 -0500 (EST)
+Message-ID: <45F15D61.3030105@whitby.id.au>
+Date: Fri, 09 Mar 2007 23:43:05 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <45E77A73.5020800@protium.com>	<45E7F2C4.9030300@dominion.kabel.utwente.nl>	<1172949738.5942.57.camel@localhost.localdomain>	<45F13D02.9090402@whitby.id.au>
+	<1173438757.5864.61.camel@localhost.localdomain>
+In-Reply-To: <1173438757.5864.61.camel@localhost.localdomain>
 Subject: Re: [RFC] bogofeed creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,33 +38,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2007 11:12:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 09 Mar 2007 13:13:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2007-03-09 at 21:24 +1030, Rod Whitby wrote:
-> You all know what this is about, so I won't bother repeating the
-> arguments for or against.
-> 
-> Here is a proposed method of bogofeed creation.
-> 
-> > ============================================================
-> > --- packages/meta/package-index.bb      4f33564e2d11f46b7975676e5901b225190d4920
-> > +++ packages/meta/package-index.bb      bd6e82e439382919a03c936ef326e8de3149c27d
+Richard Purdie wrote:
+> On Fri, 2007-03-09 at 21:24 +1030, Rod Whitby wrote:
+>> Here is a proposed method of bogofeed creation.
+> Personally, I still think there should be a flag to get the old feed
+> behaviour back.
 
-package-index updates the index in deploy/ipk. I propose this bogofeed
-should be a new .bb file, make-bogofeed.bb or something as they do two
-different things.
+I would be much happier with that solution too.
 
-I don't like "rm -rf ${DEPLOY_DIR_IPK}/$d/morgue" as that's not
-something this script should be doing.
+'Nuff said.
 
-Personally, I still think there should be a flag to get the old feed
-behaviour back.
-
-Cheers,
-
-Richard
-
+-- Rod
 
 
