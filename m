@@ -1,30 +1,33 @@
-Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HPcl9-0000SC-7h
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2007 11:55:39 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id 709711F5FBB
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2007 05:55:38 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by out1.internal (MEProxy); Fri, 09 Mar 2007 05:55:38 -0500
-X-Sasl-enc: JJLhrtXiJiKlKD1AMcRT285nFBsOSHSDsVMJCwfqCTIJ 1173437738
-Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id 0BACC1109F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2007 05:55:37 -0500 (EST)
-Message-ID: <45F13D02.9090402@whitby.id.au>
-Date: Fri, 09 Mar 2007 21:24:58 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <45E77A73.5020800@protium.com>	<45E7F2C4.9030300@dominion.kabel.utwente.nl>
-	<1172949738.5942.57.camel@localhost.localdomain>
-In-Reply-To: <1172949738.5942.57.camel@localhost.localdomain>
-Subject: [RFC] bogofeed creation
+	(envelope-from <rpurdie@rpsys.net>) id 1HPcyJ-0000kE-2e
+	for openembedded-devel@openembedded.org; Fri, 09 Mar 2007 12:09:15 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l29B9EDi015204
+	for <openembedded-devel@openembedded.org>; Fri, 9 Mar 2007 11:09:14 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 14383-08 for <openembedded-devel@openembedded.org>;
+	Fri,  9 Mar 2007 11:09:11 +0000 (GMT)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l29B9A3Z015192
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 9 Mar 2007 11:09:10 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200703091033.41288.christopher.lang@plus.cablesurf.de>
+References: <1173131731.5842.140.camel@localhost.localdomain>
+	<200703082126.20092.christopher.lang@plus.cablesurf.de>
+	<1173393085.5805.51.camel@localhost.localdomain>
+	<200703091033.41288.christopher.lang@plus.cablesurf.de>
+Date: Fri, 09 Mar 2007 11:09:09 +0000
+Message-Id: <1173438550.5864.57.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Bitbake Request for Testing of bitbake 1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,50 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2007 10:55:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 Mar 2007 11:09:15 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-You all know what this is about, so I won't bother repeating the
-arguments for or against.
+On Fri, 2007-03-09 at 10:33 +0100, Christopher Lang wrote:
+> This is the output without -v without the 'GLIBC_ADDONS = "nptl"'. The "triple 
+> glibc" note does not show.
+> 
+> http://pastebin.ca/387372
+> 
+> 
+> This one is the original output (without the 'GLIBC_ADDONS = "nptl"') but with 
+> -v. Only there you can see the line:
+> NOTE: multiple preferred providers are available for runtime libsegfault 
+> (glibc, glibc, glibc);
+> 
+> http://pastebin.ca/387374
+> 
+> I thought that multiple identical PREFERRED_PROVIDERS might indicate an issue. 
 
-Here is a proposed method of bogofeed creation.
+That just looks like the new logic in bitbake working as expected (it
+examined all possible libc providers of which there were probably 3,
+each one gave a messge). Yes, the output could be more friendly/readable
+but that is an on going problem to be revisited during the UI overhaul. 
 
-> ============================================================
-> --- packages/meta/package-index.bb      4f33564e2d11f46b7975676e5901b225190d4920
-> +++ packages/meta/package-index.bb      bd6e82e439382919a03c936ef326e8de3149c27d
-> @@ -27,6 +27,28 @@ do_build() {
->  do_build[dirs] = "${DEPLOY_DIR_IPK}"
->  do_build() {
->         set -ex
-> +
->         rootfs_ipk_do_indexes
-> +
-> +       if [ "${DEPLOY_BUILD_BOGOFEED}" = "1" ]; then
-> +
-> +               rm -rf ${DEPLOY_DIR_IPK}/bogofeed
-> +               mkdir ${DEPLOY_DIR_IPK}/bogofeed
-> +
-> +               for d in ${PACKAGE_ARCHS} ; do
-> +                       if [ -e ${DEPLOY_DIR_IPK}/$d ] ; then
-> +                               rm -rf ${DEPLOY_DIR_IPK}/$d/morgue
-> +                               find ${DEPLOY_DIR_IPK}/$d -type f -name '*.ipk' \
-> +                                       -exec cp '{}' ${DEPLOY_DIR_IPK}/bogofeed/ \;
-> +                       fi
-> +               done
-> +
-> +               touch ${DEPLOY_DIR_IPK}/bogofeed/Packages
-> +               ipkg-make-index -r ${DEPLOY_DIR_IPK}/bogofeed/Packages \
-> +                       -p ${DEPLOY_DIR_IPK}/bogofeed/Packages \
-> +                       -l ${DEPLOY_DIR_IPK}/bogofeed/Packages.filelist \
-> +                       -m ${DEPLOY_DIR_IPK}/bogofeed
-> +       fi
-> +
->         set +ex
->  }
+Bitbake 1.6 would do something similar if it had tried to build all 3
+glibc providers.
 
-Constructive comments welcome.  Other remarks to /dev/null please.
+Cheers,
 
--- Rod
+Richard
+
 
 
