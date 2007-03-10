@@ -1,30 +1,22 @@
-Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
+Received: from [209.242.20.70] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HPeuh-00063R-Mt
+	(envelope-from <mwester@dls.net>) id 1HPuMV-0005eY-Kj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2007 14:13:39 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id 174AD1F6E00
+	Sat, 10 Mar 2007 06:43:23 +0100
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id 1C6624125D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2007 08:13:39 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by out1.internal (MEProxy); Fri, 09 Mar 2007 08:13:39 -0500
-X-Sasl-enc: KShrJ5YRWfkof51K9g4Qeh2TkxWIG3U2mNlSbaULCjm5 1173446019
-Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id D241419C12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2007 08:13:38 -0500 (EST)
-Message-ID: <45F15D61.3030105@whitby.id.au>
-Date: Fri, 09 Mar 2007 23:43:05 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
+	Fri,  9 Mar 2007 23:43:28 -0600 (CST)
+Message-ID: <10e101c762d6$e7825430$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Mar 2007 23:42:34 -0600
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <45E77A73.5020800@protium.com>	<45E7F2C4.9030300@dominion.kabel.utwente.nl>	<1172949738.5942.57.camel@localhost.localdomain>	<45F13D02.9090402@whitby.id.au>
-	<1173438757.5864.61.camel@localhost.localdomain>
-In-Reply-To: <1173438757.5864.61.camel@localhost.localdomain>
-Subject: Re: [RFC] bogofeed creation
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1807
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
+Subject: dnsmasq
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,20 +30,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2007 13:13:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 10 Mar 2007 05:43:24 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Fri, 2007-03-09 at 21:24 +1030, Rod Whitby wrote:
->> Here is a proposed method of bogofeed creation.
-> Personally, I still think there should be a flag to get the old feed
-> behaviour back.
+The dnsmasq recipe is, um, "a bit" out of date.  Any interested parties?
 
-I would be much happier with that solution too.
+Unless there are objections, I'll update it to the current upstream stable
+release after the weekend.
 
-'Nuff said.
+Mike (mwester)
 
--- Rod
+
 
 
