@@ -1,32 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HQ3EO-0001GO-Gs
-	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 16:11:36 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1HQ3ED-0003U2-6Q
-	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 16:11:25 +0100
-Received: from f73a6.f.ppp-pool.de ([195.4.115.166])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 10 Mar 2007 16:11:25 +0100
-Received: from no2spam by f73a6.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 10 Mar 2007 16:11:25 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 10 Mar 2007 16:11:04 +0100
-Message-ID: <esuhqb$4dg$1@sea.gmane.org>
-References: <E1HMatS-0005Qf-5q@linuxtogo.org>	<45E6903F.6040708@dominion.kabel.utwente.nl>
-	<esudt6$p1p$1@sea.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: f73a6.f.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-In-Reply-To: <esudt6$p1p$1@sea.gmane.org>
-Sender: news <news@sea.gmane.org>
-Subject: Re: [oe-commits] org.oe.dev rootfs_ipk.bbclass: Implements a sensational new feature called 'oe-feed' which, for the first time ever, actually lets you use your ipk deploy dir as a feed in ipkg.conf./mtcommit ../classes/rootfs_ipk.bbclass Oh wait......we already could do that in the past, now couldn't we?? Set DEPLOY_ENABLE_OEFEED=1 in your shell env or local.conf to activate fast oe-feed/Packages creation, set DEPLOY_ENABLE_OEFEED=2 to enable traditional (and slooooow) oe-feed/Packages creation.
+	(envelope-from <philipp.zabel@gmail.com>) id 1HQ4JB-0003jh-Rh
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 10 Mar 2007 17:20:40 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so1768837ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 10 Mar 2007 08:20:37 -0800 (PST)
+Received: by 10.115.23.12 with SMTP id a12mr374388waj.1173543635927;
+	Sat, 10 Mar 2007 08:20:35 -0800 (PST)
+Received: by 10.114.60.9 with HTTP; Sat, 10 Mar 2007 08:20:35 -0800 (PST)
+Message-ID: <74d0deb30703100820p5f840c5bief6d31baa9672c0b@mail.gmail.com>
+Date: Sat, 10 Mar 2007 17:20:35 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: Can cross binutils and gcc be made independent of ARM version?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,19 +28,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Mar 2007 15:11:36 -0000
+X-List-Received-Date: Sat, 10 Mar 2007 16:20:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Rolf Leggewie wrote:
+Hi,
 
->> OEs feed management tools were removed a few years ago since it was decided that feed
->> management was out of scope. That still holds.
-> 
-> Where is a good place this useful software should be shared instead?
+currently binutils-cross, glibc-intermediate and gcc-cross have the
+PACKAGE_ARCH set by the MACHINE, in my case armv4t or armv5te,
+depending on the device. This causes them to be built twice,
+overwriting each other in CROSS_DIR when building a single
+distribution for all machines. Is it possible to change PACKAGE_ARCH
+to just "arm" for arm cross packages and glibc-intermediate so that
+binutils/gcc only have to be built once?
 
-Please disregard.  I am catching up with the discussions I missed over 
-the last few days.
+I'm currently testing the patch below (it sets cross packages' and
+glibc-intermediate's  PACKAGE_ARCH to TARGET_ARCH for arm). Is there a
+good reason not to do this, and if yes, could anything be done to work
+around it?
 
+regards
+Philipp
+
+#
+# old_revision [b7093a0b54878418e08732a71380ec1eff1b1456]
+#
+# patch "classes/cross.bbclass"
+#  from [c0fd2d21a749ceca1bef334641e20b66e044c5b4]
+#    to [c6677dd5c700994a52b3f075078894c9a4a4b843]
+#
+# patch "packages/glibc/glibc-intermediate_2.5.bb"
+#  from [d23bfd05eea7dd65fd5c7db7cdcb75dc34fa2953]
+#    to [a872fc4fd91d6b0063f30dcac20714d23be8c09d]
+#
+============================================================
+--- classes/cross.bbclass       c0fd2d21a749ceca1bef334641e20b66e044c5b4
++++ classes/cross.bbclass       c6677dd5c700994a52b3f075078894c9a4a4b843
+@@ -1,10 +1,10 @@ OLD_PACKAGE_ARCH := ${PACKAGE_ARCH}
+ # Cross packages are built indirectly via dependency,
+ # no need for them to be a direct target of 'world'
+ EXCLUDE_FROM_WORLD = "1"
+
+ # Save PACKAGE_ARCH before changing HOST_ARCH
+ OLD_PACKAGE_ARCH := ${PACKAGE_ARCH}
+-PACKAGE_ARCH = ${OLD_PACKAGE_ARCH}
++PACKAGE_ARCH =
+"${@["arm",bb.data.getVar('OLD_PACKAGE_ARCH',d,1)][bb.data.getVar('TARGET_ARCH',d,1)
+!= 'arm']}"
+
+ PACKAGES = ""
+
+============================================================
+--- packages/glibc/glibc-intermediate_2.5.bb
+d23bfd05eea7dd65fd5c7db7cdcb75dc34fa2953
++++ packages/glibc/glibc-intermediate_2.5.bb
+a872fc4fd91d6b0063f30dcac20714d23be8c09d
+@@ -9,8 +9,10 @@ do_configure_prepend() {
+        sed -i s:-Werror:: ${S}/configure
+ }
+
++# don't build a new glibc-intermediate/gcc-cross for each arm*
++OLD_PACKAGE_ARCH := ${PACKAGE_ARCH}
++PACKAGE_ARCH =
+"${@["arm",bb.data.getVar('OLD_PACKAGE_ARCH',d,1)][bb.data.getVar('TARGET_ARCH',d,1)
+!= 'arm']}"
+
+-
+ PACKAGES = ""
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-for-gcc"
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial linux-libc-headers"
 
 
