@@ -1,31 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HQ5Hl-0007kg-Ui
-	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 18:23:13 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1HQ5HU-00042P-UP
-	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 18:22:58 +0100
-Received: from f73a6.f.ppp-pool.de ([195.4.115.166])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 10 Mar 2007 18:22:56 +0100
-Received: from no2spam by f73a6.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 10 Mar 2007 18:22:56 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HQ7tn-0004Pd-Vu
+	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 21:10:45 +0100
+Received: from [130.89.6.62] (vpn006062.vpn.utwente.nl [130.89.6.62])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l2AKASLr002425 for <openembedded-devel@openembedded.org>;
+	Sat, 10 Mar 2007 21:10:32 +0100
+Message-ID: <45F310AE.50307@dominion.kabel.utwente.nl>
+Date: Sat, 10 Mar 2007 21:10:22 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 10 Mar 2007 18:22:27 +0100
-Message-ID: <esupgn$suu$1@sea.gmane.org>
-References: <459A4C53.3090401@dominion.kabel.utwente.nl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: f73a6.f.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-In-Reply-To: <459A4C53.3090401@dominion.kabel.utwente.nl>
-Sender: news <news@sea.gmane.org>
-Subject: Re: [RFC] code sprints or focus-weeks
+References: <74d0deb30703100820p5f840c5bief6d31baa9672c0b@mail.gmail.com>
+In-Reply-To: <74d0deb30703100820p5f840c5bief6d31baa9672c0b@mail.gmail.com>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: Can cross binutils and gcc be made independent of ARM version?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,17 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Mar 2007 17:23:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 10 Mar 2007 20:10:53 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Last night I had an idea on how to get 'big' things done:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+pHilipp Zabel schreef:
+> Hi,
 > 
-> Code sprints!
+> currently binutils-cross, glibc-intermediate and gcc-cross have the
+> PACKAGE_ARCH set by the MACHINE, in my case armv4t or armv5te,
+> depending on the device. This causes them to be built twice,
+> overwriting each other in CROSS_DIR when building a single
+> distribution for all machines. Is it possible to change PACKAGE_ARCH
+> to just "arm" for arm cross packages and glibc-intermediate so that
+> binutils/gcc only have to be built once?
 
-What happened to this idea?  When is the next (and I assume first) code 
-sprint?
+libgcc and libc6.so arm architecture specific, so they indeed need to get built multiple
+times. You don't want every app to SIGILL because you built your machines in the wrong
+order :(
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFF8xCLMkyGM64RGpERAuPkAKCqd0TzQb3BoHbj5tAj9pHh62871gCgqgRN
+ZSMVbK5zi7gmM+Jq8o4JccU=
+=4BVU
+-----END PGP SIGNATURE-----
 
 
