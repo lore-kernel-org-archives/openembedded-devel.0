@@ -1,22 +1,32 @@
-Received: from [209.242.20.70] (helo=green.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1HPuMV-0005eY-Kj
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Mar 2007 06:43:23 +0100
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 1C6624125D2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2007 23:43:28 -0600 (CST)
-Message-ID: <10e101c762d6$e7825430$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 9 Mar 2007 23:42:34 -0600
-MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1807
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
-Subject: dnsmasq
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1HQ2Bd-000771-8h
+	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 15:04:41 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1HQ2BV-00017T-Ns
+	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 15:04:33 +0100
+Received: from f73a6.f.ppp-pool.de ([195.4.115.166])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 10 Mar 2007 15:04:33 +0100
+Received: from no2spam by f73a6.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 10 Mar 2007 15:04:33 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sat, 10 Mar 2007 15:04:18 +0100
+Message-ID: <esudt6$p1p$1@sea.gmane.org>
+References: <E1HMatS-0005Qf-5q@linuxtogo.org>
+	<45E6903F.6040708@dominion.kabel.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: f73a6.f.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+In-Reply-To: <45E6903F.6040708@dominion.kabel.utwente.nl>
+Sender: news <news@sea.gmane.org>
+Subject: Re: [oe-commits] org.oe.dev rootfs_ipk.bbclass: Implements a sensational new feature called 'oe-feed' which, for the first time ever, actually lets you use your ipk deploy dir as a feed in ipkg.conf./mtcommit ../classes/rootfs_ipk.bbclass Oh wait......we already could do that in the past, now couldn't we?? Set DEPLOY_ENABLE_OEFEED=1 in your shell env or local.conf to activate fast oe-feed/Packages creation, set DEPLOY_ENABLE_OEFEED=2 to enable traditional (and slooooow) oe-feed/Packages creation.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,18 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Mar 2007 05:43:24 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Sat, 10 Mar 2007 14:04:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-The dnsmasq recipe is, um, "a bit" out of date.  Any interested parties?
+Koen Kooi wrote:
+> coredump2 commit schreef:
+>> rootfs_ipk.bbclass: Implements a  sensational new feature called 'oe-feed' which
+> 
+> OEs feed management tools were removed a few years ago since it was decided that feed
+> management was out of scope. That still holds.
 
-Unless there are objections, I'll update it to the current upstream stable
-release after the weekend.
-
-Mike (mwester)
-
+Where is a good place this useful software should be shared instead?
 
 
 
