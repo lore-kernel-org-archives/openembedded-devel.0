@@ -1,36 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1HQA3a-0002LG-5X
-	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 23:28:54 +0100
-Received: from dominion.dominion.void (dominion.kabel.utwente.nl
-	[130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l2AMSlLr019799 for <openembedded-devel@openembedded.org>;
-	Sat, 10 Mar 2007 23:28:47 +0100
-Received: from www-data by dominion.dominion.void with local (Exim 4.60)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1HQA3V-0003aS-Jr
-	for openembedded-devel@openembedded.org; Sat, 10 Mar 2007 23:28:49 +0100
-Received: from 201.38.11.131 ([201.38.11.131]) 
-	by dominion.kabel.utwente.nl (IMP) with HTTP 
-	for <koen@localhost>; Sat, 10 Mar 2007 23:28:49 +0100
-Message-ID: <1173565729.45f3312175874@dominion.kabel.utwente.nl>
-Date: Sat, 10 Mar 2007 23:28:49 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-To: openembedded-devel@openembedded.org
-References: <74d0deb30703100820p5f840c5bief6d31baa9672c0b@mail.gmail.com>
-	<45F310AE.50307@dominion.kabel.utwente.nl>
-	<74d0deb30703101419n58e32cf4vc1a2b917125e9d6a@mail.gmail.com>
-In-Reply-To: <74d0deb30703101419n58e32cf4vc1a2b917125e9d6a@mail.gmail.com>
+	(envelope-from <pmiscml@gmail.com>) id 1HQDSg-0000nR-AG
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Mar 2007 03:07:02 +0100
+Received: by nz-out-0506.google.com with SMTP id m22so764504nzf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 10 Mar 2007 18:07:01 -0800 (PST)
+Received: by 10.35.97.17 with SMTP id z17mr2244565pyl.1173578821374;
+	Sat, 10 Mar 2007 18:07:01 -0800 (PST)
+Received: from cube ( [82.193.98.7])
+	by mx.google.com with ESMTP id 36sm6136830nzk.2007.03.10.18.07.00;
+	Sat, 10 Mar 2007 18:07:00 -0800 (PST)
+Date: Sun, 11 Mar 2007 04:06:57 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <274295013.20070311040657@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) 3.2.6
-X-Originating-IP: 201.38.11.131
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-X-Mailman-Approved-At: Sat, 10 Mar 2007 23:36:11 +0100
-Subject: Re: Can cross binutils and gcc be made independent of ARM	version?
+Subject: [RFC] Allow to limit generated binary locales to predefined list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,53 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Mar 2007 22:28:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 11 Mar 2007 02:07:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Quoting pHilipp Zabel <philipp.zabel@gmail.com>:
+Hello openembedded-devel,
 
-> On 3/10/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > pHilipp Zabel schreef:
-> > > Hi,
-> > >
-> > > currently binutils-cross, glibc-intermediate and gcc-cross have the
-> > > PACKAGE_ARCH set by the MACHINE, in my case armv4t or armv5te,
-> > > depending on the device. This causes them to be built twice,
-> > > overwriting each other in CROSS_DIR when building a single
-> > > distribution for all machines. Is it possible to change PACKAGE_ARCH
-> > > to just "arm" for arm cross packages and glibc-intermediate so that
-> > > binutils/gcc only have to be built once?
-> >
-> > libgcc and libc6.so arm architecture specific, so they indeed need to get
-> built multiple
-> > times. You don't want every app to SIGILL because you built your machines
-> in the wrong
-> > order :(
->
-> Ah, thanks for clearing that up :(
-> So I understand we need multiple builds to get libgcc for every arch.
-> But what about the contents of CROSS_DIR?
-> ${CROSS_DIR}/arm-angstrom-linux-gnueabi/lib/libgcc_s.so will be built
-> for either arch, depending on the order the machine toolchains are
-> built.
-> Is this just not important, or does it mean I can't build for multiple
-> arm architectures in the same build dir at all?
+  Binary locale generation for the entire locate set provided by GLIBC
+takes noticeable amount of time (several hours). While OE allows to skip
+binary locale generation at all, that puts development environment
+too far away from "release" one.
 
-Cross/ (and staging/) aren't the problem, OE packaging libgcc1 from gcc-cross
-is.
+  The solution would be to allow to optionally constrain set of
+generated locales to a predefined list. I had adhoc patch to do that
+for few months now, and several people expressed interest in it. So, I
+finally took time to clean it up and make list configurable via OE
+variable, and submit it: http://bugs.openembedded.org/show_bug.cgi?id=1966
 
-regards,
+  List is specified using GLIBC_GENERATE_LOCALES variable, which can
+be set e.g. in local.conf:
 
-Koen
+GLIBC_GENERATE_LOCALES = "en_GB,UTF-8 de_DE,UTF-8"
+
+  Format is <locale>,<encoding> pairs separated by space. Format is
+actually based on "SUPPORTED" file generated/provided with GLIBC. For
+development purposes, encoding can be just "UTF-8", and for Angstrom,
+only en_GB locales is required now. Previous default from OZ/Familiar
+was "en_GB,UTF-8 de_DE,UTF-8 fr_FR,UTF-8".
 
 
+  I'd appreciate comments and testing of the patch above.
+  
 
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
-----------------------------------------------------------------
-This message was sent using IMP, the Internet Messaging Program.
 
 
