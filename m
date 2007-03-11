@@ -1,25 +1,27 @@
-Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
+Received: from [81.255.54.11] (helo=mx.laposte.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <philipp.zabel@gmail.com>) id 1HQKkI-0001KA-Ab
+	(envelope-from <c.romain@laposte.net>) id 1HQPVj-0006oS-3r
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Mar 2007 10:53:42 +0100
-Received: by ug-out-1314.google.com with SMTP id e2so1947406ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2007 01:53:41 -0800 (PST)
-Received: by 10.114.179.1 with SMTP id b1mr771464waf.1173606820658;
-	Sun, 11 Mar 2007 01:53:40 -0800 (PST)
-Received: by 10.114.60.9 with HTTP; Sun, 11 Mar 2007 01:53:40 -0800 (PST)
-Message-ID: <74d0deb30703110153y6849e25bo42b80aafc9562bfa@mail.gmail.com>
-Date: Sun, 11 Mar 2007 10:53:40 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1173565729.45f3312175874@dominion.kabel.utwente.nl>
+	Sun, 11 Mar 2007 15:58:59 +0100
+Received: from smtp.laposte.net (10.150.9.42) by mx.laposte.net (7.2.060.1)
+	id 45C9AC06015D60A8; Sun, 11 Mar 2007 15:58:40 +0100
+Received: from smtpin.laposte.net (10.150.9.74) by smtp.laposte.net (7.3.118.3)
+	id 45E7E57000FCB2FE; Sun, 11 Mar 2007 15:58:40 +0100
+Received: from [192.168.2.2] (83.193.135.47) by smtpin.laposte.net (7.2.060.1)
+	(authenticated as c.romain)
+	id 45E5A8AE0011580F; Sun, 11 Mar 2007 15:58:40 +0100
+Message-ID: <45F41940.7070407@laposte.net>
+Date: Sun, 11 Mar 2007 15:59:12 +0100
+From: cyril Romain <c.romain@laposte.net>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070303)
 MIME-Version: 1.0
-References: <74d0deb30703100820p5f840c5bief6d31baa9672c0b@mail.gmail.com>
-	<45F310AE.50307@dominion.kabel.utwente.nl>
-	<74d0deb30703101419n58e32cf4vc1a2b917125e9d6a@mail.gmail.com>
-	<1173565729.45f3312175874@dominion.kabel.utwente.nl>
-Subject: Re: Can cross binutils and gcc be made independent of ARM version?
+To: papercrane@reversefold.com
+References: <432beae0605272223y4eeb385eib0ea22eb136aeff8@mail.gmail.com>
+	<432beae0606101112s21729552odecce94034ad9d6@mail.gmail.com>
+In-Reply-To: <432beae0606101112s21729552odecce94034ad9d6@mail.gmail.com>
+Cc: oe <oe@handhelds.org>, monotone <monotone-devel@nongnu.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: mtnpatch (updated)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,54 +35,158 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Mar 2007 09:53:42 -0000
+X-List-Received-Date: Sun, 11 Mar 2007 14:58:59 -0000
+Content-Type: multipart/mixed; boundary="------------040807030501080609010805"
+
+--------------040807030501080609010805
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 3/10/07, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> Quoting pHilipp Zabel <philipp.zabel@gmail.com>:
+Justin Patrin wrote:
+> Just thought I'd let everyone know that I just cherrypicked my first
+> revision with mtnpatch.py. I made some efl/e17 updates to .dev and
+> edited one file, made a diff, and applied the diff to .oz354x with
+> mtnpatch.py. It worked like a charm.
 >
-> > On 3/10/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> > > -----BEGIN PGP SIGNED MESSAGE-----
-> > > Hash: SHA1
-> > >
-> > > pHilipp Zabel schreef:
-> > > > Hi,
-> > > >
-> > > > currently binutils-cross, glibc-intermediate and gcc-cross have the
-> > > > PACKAGE_ARCH set by the MACHINE, in my case armv4t or armv5te,
-> > > > depending on the device. This causes them to be built twice,
-> > > > overwriting each other in CROSS_DIR when building a single
-> > > > distribution for all machines. Is it possible to change PACKAGE_ARCH
-> > > > to just "arm" for arm cross packages and glibc-intermediate so that
-> > > > binutils/gcc only have to be built once?
-> > >
-> > > libgcc and libc6.so arm architecture specific, so they indeed need to get
-> > built multiple
-> > > times. You don't want every app to SIGILL because you built your machines
-> > in the wrong
-> > > order :(
-> >
-> > Ah, thanks for clearing that up :(
-> > So I understand we need multiple builds to get libgcc for every arch.
-> > But what about the contents of CROSS_DIR?
-> > ${CROSS_DIR}/arm-angstrom-linux-gnueabi/lib/libgcc_s.so will be built
-> > for either arch, depending on the order the machine toolchains are
-> > built.
-> > Is this just not important, or does it mean I can't build for multiple
-> > arm architectures in the same build dir at all?
+> For those that missed it, I have checked in mtnpatch.py into
+> org.openembedded.dev in contrib/. I have also switch to using a regex
+> instead of split() so that whitespace in filenames should be correctly
+> taken care of.
 >
-> Cross/ (and staging/) aren't the problem, OE packaging libgcc1 from gcc-cross
-> is.
+> The script is used like this:
+>  mtn diff -r ParentRev -r RevToCherryPick > file.patch
+>  cd /branch/to/cherrypick/to
+>  contrib/mtnpatch.py file.patch
+> Look at the output to make sure it's sane
+>  contrib/mtnpatch.py file.patch | sh
+>  mtn ci
+Maybe I've just missed the right mtn command reading the documentation, 
+but as I'm submitting some patches/recipes for OE metadata, I'd like to:
+ 1. test that my 'mtn diff' patches successfully apply on a up-to-date 
+metadata tree without any local modifications.
+ 2. apply some patches to another development tree.
 
-Yes, I understood the latter. I'm just confused by things like the
-libgcc_s.so copy in cross. If it doesn't matter whether it's the
-armv4t or armv5te version, does it have to be there at all?
-Hm. I guess this might just be out of scope for the current
-cross/staging implementation.
+And this script is "almost" what I'm looking for :)
+"Almost" because it does not takes file/directory drop order into 
+account, i.e. "mtnpatch.py the.patch | sh" can fail.
+For example if mtnpatch dumps:
+---
+mtn drop -e packages/quilt/files/install.patch
+mtn drop -e packages/quilt/files
+---
+And if you run these commands in that order, you get "mtn: misuse: 
+cannot remove packages/quilt/files/, it is not empty"
 
-regards
-Philipp
+In attachment, an updated version of mtnpatch.py with the following 
+improvements:
+ 1. output command are sorted, so that 'mtnpatch.py my_patch.patch | sh' 
+should now succeed in all cases, hopefully :)
+ 2. help (-h, --help) option added, and usage message is printed on misuse
+ 3. reverse mode (-R option) can be also set with --reverse
+ 4. the reverse option is used to unapply the patch. The dropped files 
+are reverted (not added), but maybe it is not what you, Justin, wanted 
+to do with -R ?
 
 
+Best regards,
+
+  cyril
+
+
+--------------040807030501080609010805
+Content-Type: text/x-python;
+ name="mtnpatch.py"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="mtnpatch.py"
+
+#!/usr/bin/env python
+
+"""
+mtnpatch is a patch tool intended to apply 'mtn diff' patch, including the 
+additional cset operations (e.g. add, drop and rename) listed in mtn diff comments.
+
+mtnpatch does not actually apply the patch. It only dumps the list of commands to enter
+to actually apply the patch.
+To apply the patch, use 'mtnpatch.py file.patch | sh'
+"""
+
+import sys, os, string, getopt, re
+
+mtncmd = "mtn"
+
+
+def usage():
+    print "Usage: mtnpatch.py [options] file.patch"
+    print "Options:"
+    print "  -h  --help         display help message"
+    print "  -R  --reverse      apply patch in reverse"
+    print "\nTo actually apply the patch, use 'mtnpatch.py file.patch | sh'"
+
+def main(argv = None):
+    if argv is None:
+        argv = sys.argv
+    try:
+        opts, list = getopt.getopt(sys.argv[1:], 'h:R', ["--help", "--reverse"])
+    except:
+        usage()
+        sys.exit(2)
+    reverse = False
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit(1)
+        if o in ("-R", "--reverse"):
+            reverse = True
+    if len(list) != 1:
+        usage()
+        sys.exit(1)
+    if os.path.exists(list[0]):
+        input = open(list[0], 'r')
+        renameFrom = ""
+        cmd = ""
+        addedFiles = []
+        addedDirs = []
+        droppedFiles = []
+        droppedDirs = []
+        renamedFiles = []
+        for line in input:
+            if len(line) > 0:
+                if line[0] == '#':
+                    matches = re.search("#\s+(\w+)\s+\"(.*)\"", line)
+                    if matches is not None:
+                        cmd = matches.group(1)
+                        fileName = matches.group(2)
+                        isDir = os.path.isdir(fileName)
+                        if cmd == "delete":
+                            if isDir: droppedDirs.append(fileName)
+                            else: droppedFiles.append(fileName)
+                        elif cmd == "add" or cmd == "add_file" or cmd == "add_dir":
+                            if isDir: addedDirs.append(fileName)
+                            else: addedFiles.append(fileName)
+                        elif cmd == "rename":
+                            renameFrom = fileName
+                        elif cmd == "to" and renameFrom != "":
+                            renamedFiles.append((renameFrom, fileName))
+                            renameFrom = ""
+                        else:
+                            cmd = ""
+        if reverse:
+            print "patch -R -p0 < %s" % list[0]
+            for f in addedFiles: print "%s drop -e %s" % (mtncmd, f)
+            for f in addedDirs: print "%s drop -e %s" % (mtncmd, f)
+            for fold,fnew in renamedFiles: print "%s rename -e %s %s" % (mtncmd, fnew, fold)
+            for f in droppedDirs: print "%s revert %s" % (mtncmd, f)
+            for f in droppedFiles: print "%s revert %s" % (mtncmd, f)
+        else:
+            print "patch -p0 < %s" % list[0]
+            for f in droppedFiles: print "%s drop -e %s" % (mtncmd, f)
+            for f in droppedDirs: print "%s drop -e %s" % (mtncmd, f)
+            for fold,fnew in renamedFiles: print "%s rename -e %s %s" % (mtncmd, fold, fnew)
+            for f in addedDirs: print "%s add %s" % (mtncmd, f)
+            for f in addedFiles: print "%s add %s" % (mtncmd, f)
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------040807030501080609010805--
