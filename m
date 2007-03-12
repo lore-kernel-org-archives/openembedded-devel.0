@@ -1,27 +1,31 @@
-Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HQkNc-0001dS-V3
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Mar 2007 14:16:01 +0100
-Received: by nz-out-0506.google.com with SMTP id m22so905209nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Mar 2007 06:15:59 -0700 (PDT)
-Received: by 10.35.27.1 with SMTP id e1mr11740357pyj.1173705356242;
-	Mon, 12 Mar 2007 06:15:56 -0700 (PDT)
-Received: from cube ( [82.193.98.7])
-	by mx.google.com with ESMTP id m2sm8262194nzf.2007.03.12.06.15.54;
-	Mon, 12 Mar 2007 06:15:55 -0700 (PDT)
-Date: Mon, 12 Mar 2007 15:15:54 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <150987567.20070312151554@gmail.com>
-To: Nicola Ranaldo <ranaldo@unina.it>
-In-Reply-To: <200703121409.49063.ranaldo@unina.it>
-References: <1173049360.27812@gatekeeper.stellarwerx.com>
-	<200703121409.49063.ranaldo@unina.it>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Fixing QA Errors?
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1HQlT7-0005xc-B7
+	for openembedded-devel@openembedded.org; Mon, 12 Mar 2007 15:25:45 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1HQlOk-0003GG-UL
+	for openembedded-devel@openembedded.org; Mon, 12 Mar 2007 15:21:15 +0100
+Received: from f73eb.f.ppp-pool.de ([195.4.115.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 12 Mar 2007 15:21:14 +0100
+Received: from no2spam by f73eb.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 12 Mar 2007 15:21:14 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 12 Mar 2007 15:13:35 +0100
+Message-ID: <et3n6g$7cv$1@sea.gmane.org>
+References: <274295013.20070311040657@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: f73eb.f.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+In-Reply-To: <274295013.20070311040657@gmail.com>
+Sender: news <news@sea.gmane.org>
+Subject: Re: [RFC] Allow to limit generated binary locales to predefined list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,40 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Mar 2007 13:16:01 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 12 Mar 2007 14:25:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello Nicola,
+Paul Sokolovsky wrote:
+>   Binary locale generation for the entire locate set provided by GLIBC
+> takes noticeable amount of time (several hours).
+[...]
+>   The solution would be to allow to optionally constrain set of
+> generated locales to a predefined list.
 
-Monday, March 12, 2007, 3:09:48 PM, you wrote:
+Good idea.  And I can say that the patch to glibc-package.bbclass I 
+prepared with Paul's help (big thank you!) has been working fine for me 
+for a few weeks now.
 
-> On Monday 05 March 2007 00:02:41 Mark Gollahon wrote:
->> Koen:
->>
->> I've tried several different combinations for the FILES_ stuff, but I am
->> still getting both errors.  Since the errors show up when QA checking the
->> libqtaux2 package (as opposed to checking the *-dev, *-doc, etc.,
->> packages), could this be more of a problem of the files not getting
->> installed to the right place, or is that what the FILES_* spec is supposed
->> to do?
-
-> Try putting thos lines *before* the others.
-> This worked for me on librsvg.
-
-> Howewer is it planned to fix all the qa issues on the repository or have we to
-> open a bug for every qa related question?
-
-  Open bug, attach patch. Feel free to open one bug for fix to a bunch
-of recipes ;-)
-
->         Niko
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
++1 from me.
 
 
 
