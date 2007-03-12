@@ -1,21 +1,20 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [195.234.128.72] (helo=scotty.chl-informatik.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HQfaM-0006FD-Az
-	for openembedded-devel@openembedded.org; Mon, 12 Mar 2007 09:08:50 +0100
-Received: (qmail 20032 invoked by uid 813007); 12 Mar 2007 08:08:49 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 12 Mar 2007 08:08:49 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Mar 2007 09:08:43 +0100
-User-Agent: KMail/1.9.6
-References: <45F4C45B.8020601@whitby.id.au>
-In-Reply-To: <45F4C45B.8020601@whitby.id.au>
+	(envelope-from <christopher.lang@plus.cablesurf.de>)
+	id 1HQjWU-0007S7-Ob
+	for openembedded-devel@openembedded.org; Mon, 12 Mar 2007 13:21:06 +0100
+Received: from linux64.chl-informatik.de (linux64.chl-informatik.de
+	[192.168.10.17])
+	by scotty.chl-informatik.de (8.12.3/8.12.3/SuSE Linux 0.6) with ESMTP
+	id l2CBWifl019353 for <openembedded-devel@openembedded.org>;
+	Mon, 12 Mar 2007 12:32:44 +0100
+From: Christopher Lang <christopher.lang@plus.cablesurf.de>
+To: openembedded-devel@openembedded.org
+Date: Mon, 12 Mar 2007 13:21:32 +0100
+User-Agent: KMail/1.9.1
 MIME-Version: 1.0
-Message-Id: <200703120908.45917.openembedded@hrw.one.pl>
-Subject: Re: [RFC] madwifi staging and hostap-deamon support for madwifi
+Message-Id: <200703121321.32299.christopher.lang@plus.cablesurf.de>
+Subject: ...gcc/specs: Invalid argument when building meta-sdk or meta-toolchain for i586 on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,65 +28,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Mar 2007 08:08:50 -0000
+X-List-Received-Date: Mon, 12 Mar 2007 12:21:07 -0000
 Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia poniedzia=B3ek, 12 marca 2007, Rod Whitby napisa=B3:
-> I want to get hostap-deamon working for madwifi (on the IOMega NAS100d,
-> and D-Link DSMG-600 RevA).
 
-And also on any other PCI equipped machines (madwifi req pci iirc).
+While testing bb 1.8 I ran into the following issue. I do not think it is bb 
+1.8 related, it might rather be an issue with building on x86_64:
+ 
+When building meta-sdk or meta-toolchain to following error occurs:
 
-> Currently, it does not support madwifi, and the current madwifi-ng
-> recipe is putting the include files in a place other than the place
-> that hostapd looks for them during the compile. =20
+xgcc: /home/chris/tmp/oe-test-linux-bb18/build/tmp/work/x86_64-oe-linux/gcc-cross-sdk-4.1.1-r10/gcc-4.1.1/build.x86_64-linux.i586-oe-linux/./gcc/specs: 
+Invalid argument
+| make[2]: *** [crtbegin.o] Error 1
 
-> Also, hostapd has an RDEPENDS on hostapd-modules, which does not make
-> sense for madwifi.=20
+I think that sdk and toolchain are quite important for OE. So any help is 
+appreciated!
 
-Hostap-modules dependency should be dropped - we use hostap from kernel.=20
+(entered as bug  http://bugs.openembedded.org/show_bug.cgi?id=1977)
 
-I would like to get latest stable hostapd in OE.
+many thanks
+Chris
 
-> I'd like to change madwifi-ng to put the files in the right place, and
-> then change hostap-daemon to enable madwifi support and use those
-> include files.  Are there any other known packages that use madwifi
-> include files that may be affected?
 
-wpa-supplicant use madwifi and also has all needed code for madwifi=20
-support on PCI equipped machines.
 
-> I can either enable this globally, or enable it for the slugos distro
-> only, or enable it for ixp4xx machines only.  Which should I do?
+Configuration:
 
-Enable it for PCI equipped machines like it is in wpa-supplicant 0.5.x
+chris@linux64:~/tmp/oe-test-linux-bb18/build> bitbake meta-toolchain
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it to 
+increase performance.
+NOTE: Handling BitBake files: - (4266/4266) [100 %]
+NOTE: Parsing finished. 4083 cached, 0 parsed, 183 skipped, 0 masked.
+NOTE: build 200703121121: started
 
-> Here is the hostap-daemon.inc patch (example using a _ixp4xx override):
-> > -RDEPENDS =3D "hostap-modules hostap-utils (${PV})"
-> > +RDEPENDS =3D "hostap-utils (${PV})"
-> > +DEPENDS_append_ixp4xx =3D " madwifi-ng"
-> >
-> > +do_configure_ixp4xx() {
-> > +        sed -e
-> > 's/\#CONFIG_DRIVER_MADWIFI=3Dy/CONFIG_DRIVER_MADWIFI=3Dy/' \ +         =
- =20
-> >    '${WORKDIR}/defconfig' >>'${S}/.config'
-> > +}
+OE Build Configuration:
+BB_VERSION     = "1.7.999"
+OE_REVISION    = "2e1d1df32e14f9dd87ba08d9fa77c9b537683276"
+TARGET_ARCH    = "i586"
+TARGET_OS      = "linux"
+MACHINE        = "i586-OE-MACHINE"
+DISTRO         = "generic"
+DISTRO_VERSION = ".dev-snapshot-20070312"
+TARGET_FPU     = ""
 
-Do this like it is done in wpa-supplicant 0.5.x
 
-Thx
+Machine file:
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+TARGET_ARCH = "i586"
+TARGET_VENDOR = "-oe"
 
- Truly a man of few words. I'll bet you don't know what either one of them
- means.
+# stuff that I use for embedded development
+BOOTSTRAP_EXTRA_DEPENDS = "udev mc lrzsz gdb ncurses pciutils"
+BOOTSTRAP_EXTRA_RDEPENDS = "udev mc lrzsz gdbserver ncurses libstdc++ pciutils 
+pciutils-ids"
 
+udevdir = "/dev"
+
+# we need to clear HOTPLUG because task-bootstrap puts in linux-hotplug 
+otherwise
+HOTPLUG = ""
+
+IPKG_ARCHS = "all ${TARGET_ARCH} ${MACHINE}"
+
+# substitute your own kernel here
+PREFERRED_PROVIDER_virtual/kernel = "linux-x86"
+
+#nptl, I prefer nptl over linuxthreads
+GLIBC_ADDONS = "nptl"
+GLIBC_EXTRA_OECONF = "--with-tls"
 
 
 
