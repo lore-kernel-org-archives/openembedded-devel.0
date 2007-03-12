@@ -1,42 +1,28 @@
-Received: from [65.254.254.66] (helo=mailout04.yourhostingaccount.com)
-	by linuxtogo.org with esmtp (Exim 4.63) (envelope-from
-	<SRS0=6SqvVi=IP=thegnar.org=markgross@yourhostingaccount.com>)
-	id 1HQU1I-0001do-Qm for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Mar 2007 20:47:52 +0100
-Received: from mailscan44.yourhostingaccount.com ([10.1.15.44]
-	helo=mailscan44.yourhostingaccount.com)
-	by mailout04.yourhostingaccount.com with esmtp (Exim)
-	id 1HQU1I-0003Lm-2a for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Mar 2007 15:47:52 -0400
-Received: from authsmtp10.yourhostingaccount.com ([10.1.18.10] ident=exim)
-	by mailscan44.yourhostingaccount.com with spamscanlookuphost (Exim)
-	id 1HQU1I-0008QE-1R for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Mar 2007 15:47:52 -0400
-Received: from authsmtp10.yourhostingaccount.com ([10.1.18.10]
-	helo=authsmtp10.yourhostingaccount.com)
-	by mailscan44.yourhostingaccount.com with esmtp (Exim)
-	id 1HQU1H-0008Q6-OT; Sun, 11 Mar 2007 15:47:51 -0400
-Received: from pool-71-117-247-154.ptldor.fios.verizon.net ([71.117.247.154]
-	helo=mgross-desktop)
-	by authsmtp10.yourhostingaccount.com with esmtpa (Exim)
-	id 1HQU1H-00011J-Ci; Sun, 11 Mar 2007 14:47:51 -0500
-Received: by mgross-desktop (Postfix, from userid 1000)
-	id 642A8C2E59; Sun, 11 Mar 2007 12:47:55 -0700 (PDT)
-Date: Sun, 11 Mar 2007 12:47:55 -0700
-From: Mark Gross <markgross@thegnar.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070311194755.GB28912@thegnar.org>
-References: <45F444E7.6050200@kernelconcepts.de>
+Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <rod@whitby.id.au>) id 1HQav4-0002uM-DG
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Mar 2007 04:09:54 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id 0D63A1F73FF
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Mar 2007 23:09:54 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by out1.internal (MEProxy); Sun, 11 Mar 2007 23:09:54 -0400
+X-Sasl-enc: XeNyGeBGD85J2AqpfsybEz2igMzeqyTscy/fL43bjBQq 1173668993
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id 248CF8F03
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Mar 2007 23:09:52 -0400 (EDT)
+Message-ID: <45F4C45B.8020601@whitby.id.au>
+Date: Mon, 12 Mar 2007 13:39:15 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
-In-Reply-To: <45F444E7.6050200@kernelconcepts.de>
-User-Agent: Mutt/1.5.11
-X-EN-UserInfo: 797c2c580f2f40de3d8825fee4eaf462:2545611f8b0606d1227160eb92fd62ea
-X-EN-AuthUser: markgross
-Sender: Mark Gross <markgross@thegnar.org>
-X-EN-OrigIP: 71.117.247.154
-X-EN-OrigHost: pool-71-117-247-154.ptldor.fios.verizon.net
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Donations
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.94.0.0
+Subject: [RFC] madwifi staging and hostap-deamon support for madwifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,44 +36,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Mar 2007 19:47:53 -0000
-X-Groupsio-MsgNum: 1617
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+g7M9IMkV8truYOl"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 12 Mar 2007 03:09:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---+g7M9IMkV8truYOl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I want to get hostap-deamon working for madwifi (on the IOMega NAS100d,
+and D-Link DSMG-600 RevA).
 
-On Sun, Mar 11, 2007 at 07:05:27PM +0100, Florian Boor wrote:
-> Hello developers,
->=20
-> at FOSDEM we received a donation of 60 EUR by Christophe and Cyril Romain=
-=2E Thank
-> you very much guys!
->=20
-> Are there any good ideas what we should do with it?
+Currently, it does not support madwifi, and the current madwifi-ng
+recipe is putting the include files in a place other than the place that
+hostapd looks for them during the compile.  Also, hostapd has an
+RDEPENDS on hostapd-modules, which does not make sense for madwifi.
 
-bottle of scotch?
+I'd like to change madwifi-ng to put the files in the right place, and
+then change hostap-daemon to enable madwifi support and use those
+include files.  Are there any other known packages that use madwifi
+include files that may be affected?
 
-or a HD.
+I can either enable this globally, or enable it for the slugos distro
+only, or enable it for ixp4xx machines only.  Which should I do?
 
---mgross
+Here is the madwifi-ng.inc patch:
+
+>  do_stage() {
+> -       install -d ${STAGING_INCDIR}/${PN}/include
+> -       install -d ${STAGING_INCDIR}/${PN}/net80211
+> -       cp --dereference include/compat.h ${STAGING_INCDIR}/${PN}/include/
+> -       cp --dereference net80211/*.h ${STAGING_INCDIR}/${PN}/net80211/
+> +       install -d ${STAGING_INCDIR}/net80211
+> +       cp --dereference include/compat.h ${STAGING_INCDIR}/net80211/
+> +       cp --dereference net80211/*.h ${STAGING_INCDIR}/net80211/
+>  }
+
+Here is the hostap-daemon.inc patch (example using a _ixp4xx override):
+
+> -RDEPENDS = "hostap-modules hostap-utils (${PV})"
+> +RDEPENDS = "hostap-utils (${PV})"
+> +DEPENDS_append_ixp4xx = " madwifi-ng"
+> 
+> +do_configure_ixp4xx() {
+> +        sed -e 's/\#CONFIG_DRIVER_MADWIFI=y/CONFIG_DRIVER_MADWIFI=y/' \
+> +               '${WORKDIR}/defconfig' >>'${S}/.config'
+> +}
+
+If there are no responses, I will continue with the madwifi-ng change as
+above, and do the override for all _ixp4xx machines.
+
+-- Rod
 
 
---+g7M9IMkV8truYOl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.2.2 (GNU/Linux)
-
-iD8DBQFF9FzrhK5OsmQOmSARAoUCAKCJ0UPu4dphNLT265md3qCWeT+mTgCfTKDp
-sJ3ymy9Iq3H5dGhpcXJP51A=
-=dVq0
------END PGP SIGNATURE-----
-
---+g7M9IMkV8truYOl--
