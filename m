@@ -1,30 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HQlT7-0005xc-B7
-	for openembedded-devel@openembedded.org; Mon, 12 Mar 2007 15:25:45 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1HQlOk-0003GG-UL
-	for openembedded-devel@openembedded.org; Mon, 12 Mar 2007 15:21:15 +0100
-Received: from f73eb.f.ppp-pool.de ([195.4.115.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 12 Mar 2007 15:21:14 +0100
-Received: from no2spam by f73eb.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 12 Mar 2007 15:21:14 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 12 Mar 2007 15:13:35 +0100
-Message-ID: <et3n6g$7cv$1@sea.gmane.org>
+	(envelope-from <janjans321@gmail.com>) id 1HR4dS-0003np-Ep
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Mar 2007 11:53:42 +0100
+Received: by ug-out-1314.google.com with SMTP id e2so241588ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Mar 2007 03:53:41 -0700 (PDT)
+Received: by 10.115.78.1 with SMTP id f1mr2301574wal.1173783217027;
+	Tue, 13 Mar 2007 03:53:37 -0700 (PDT)
+Received: by 10.115.74.19 with HTTP; Tue, 13 Mar 2007 03:53:36 -0700 (PDT)
+Message-ID: <7c8eac300703130353t4982c66bua4f24205e4e651d6@mail.gmail.com>
+Date: Tue, 13 Mar 2007 11:53:36 +0100
+From: "Jan Janssens" <janjans321@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <665468377.20070311213332@gmail.com>
+MIME-Version: 1.0
 References: <274295013.20070311040657@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: f73eb.f.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-In-Reply-To: <274295013.20070311040657@gmail.com>
-Sender: news <news@sea.gmane.org>
+	<7c8eac300703110856v1e825559x8f89abd79d17fed8@mail.gmail.com>
+	<665468377.20070311213332@gmail.com>
 Subject: Re: [RFC] Allow to limit generated binary locales to predefined list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,22 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Mar 2007 14:25:45 -0000
+X-List-Received-Date: Tue, 13 Mar 2007 10:53:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Paul Sokolovsky wrote:
->   Binary locale generation for the entire locate set provided by GLIBC
-> takes noticeable amount of time (several hours).
-[...]
->   The solution would be to allow to optionally constrain set of
-> generated locales to a predefined list.
+>   My intention was to do as little (pre/post)processing/interpretation
+> for GLIBC's SUPPORTED file as possible. Looking at what it has:
+>
+> aa_DJ.UTF-8 UTF-8
+> aa_DJ ISO-8859-1
+>
+>   It's clear why dot couldn't be used - it already appears in
+> SUPPORT's syntax. So, again, I don't try to interpret it in any way,
+> just provide means to specify expressions of that syntax using OE variable,
+> using simple substitution of newlines with spaces, and spaces with
+> commas.
+Ok, that makes sense.
 
-Good idea.  And I can say that the patch to glibc-package.bbclass I 
-prepared with Paul's help (big thank you!) has been working fine for me 
-for a few weeks now.
+I don't really get why the SUPPORTED file postfixes all UTF-8 locales
+with ".UTF-8" as well as adds " UTF-8". That seems redundant
+information; it seems all UTF-8 locales are in the form of
+<locale>.UTF-8 UTF-8, while all other encodings simply use <locale>
+<encoding>... Anyway, since we don't control that syntax, let's indeed
+keep it simple and compatible.
 
-+1 from me.
+I would like usage of the colon better than the comma though...
 
+Jan.
 
 
