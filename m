@@ -1,32 +1,30 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1HRoVK-0000X3-4I
-	for openembedded-devel@openembedded.org; Thu, 15 Mar 2007 12:52:22 +0100
-Received: from dominion.dominion.void (dominion.kabel.utwente.nl
-	[130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l2FBqCLr015146 for <openembedded-devel@openembedded.org>;
-	Thu, 15 Mar 2007 12:52:13 +0100
-Received: from www-data by dominion.dominion.void with local (Exim 4.60)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1HRoVB-0001fW-Gw
-	for openembedded-devel@openembedded.org; Thu, 15 Mar 2007 12:52:13 +0100
-Received: from 189.16.225.25 ([189.16.225.25]) 
-	by dominion.kabel.utwente.nl (IMP) with HTTP 
-	for <koen@localhost>; Thu, 15 Mar 2007 12:52:13 +0100
-Message-ID: <1173959533.45f9336d50790@dominion.kabel.utwente.nl>
-Date: Thu, 15 Mar 2007 12:52:13 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-To: openembedded-devel@openembedded.org
-References: <45F92746.2020608@whitby.id.au>
-In-Reply-To: <45F92746.2020608@whitby.id.au>
+	(envelope-from <rod@whitby.id.au>) id 1HRtH4-0004Ch-P1
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Mar 2007 17:58:00 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id F3ECF1F8D52
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Mar 2007 12:57:57 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by out1.internal (MEProxy); Thu, 15 Mar 2007 12:57:58 -0400
+X-Sasl-enc: vD9iN3lRg4V7Ak/zRRYhFEtaEo7jgR4mtCRGC5IbU97W 1173977878
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id CBB4121EE7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Mar 2007 12:57:57 -0400 (EDT)
+Message-ID: <45F97AE9.8060705@whitby.id.au>
+Date: Fri, 16 Mar 2007 03:27:13 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) 3.2.6
-X-Originating-IP: 189.16.225.25
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+To: openembedded-devel@lists.openembedded.org
+References: <45F92746.2020608@whitby.id.au>
+	<1173959533.45f9336d50790@dominion.kabel.utwente.nl>
+In-Reply-To: <1173959533.45f9336d50790@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.0.0
 Subject: Re: Bad gcc packaging (libgcc-s1 instead of libgcc1)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,54 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2007 11:52:28 -0000
+X-List-Received-Date: Thu, 15 Mar 2007 16:58:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Quoting Rod Whitby <rod@whitby.id.au>:
+Koen Kooi wrote:
+> I think putting a construction like
+> gcc-package-cross.inc has:
+> 
+> python do_package() {
+>         if bb.data.getVar('DEBIAN_NAMES', d, 1):
+>                 bb.data.setVar('PKG_libgcc', 'libgcc1', d)
+>         bb.build.exec_func('package_do_package', d)
+> }
+> 
+> in gcc-package.inc should work. Could you test that?
 
-> I'm getting a libgcc-s1 package emitted by gcc_4.1.1.bb instead of the
-> normal libgcc1.
+That works here.
 
-The situation is a bit more nuanced: gcc (non-cross) never emitted libgcc1,
-gcc-cross did. So gcc_4.bb was not packaging its libgcc as it should have.
+> Sorry for breaking everyones packages.
 
+Apology accepted.
 
->  This is poisoning all builds that depend on libgcc1,
-> and is polluting the slugos feeds with bad dependencies.
-
-That is correct and indeed very annoying.
-
-> I believe it is caused by the patch in
->
-http://lists.linuxtogo.org/pipermail/openembedded-commits/2007-March/004007.html
->
-> I have tested reverting that patch locally, and the libgcc-s1 package
-> was not emitted.
->
-> So I wish to revert that patch.
-
-Please properly fix it by having gcc emit libgcc1 instead, otherwise your native
-gcc package won't work properly if gcc-cross was a different version (which is
-not a common case, but still). I think putting a construction like
-gcc-package-cross.inc has:
-
-python do_package() {
-        if bb.data.getVar('DEBIAN_NAMES', d, 1):
-                bb.data.setVar('PKG_libgcc', 'libgcc1', d)
-        bb.build.exec_func('package_do_package', d)
-}
-
-in gcc-package.inc should work. Could you test that?
-
-Sorry for breaking everyones packages.
-
-regards,
-
-Koen
-
-
-----------------------------------------------------------------
-This message was sent using IMP, the Internet Messaging Program.
+-- Rod
 
 
