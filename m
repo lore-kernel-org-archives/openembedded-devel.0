@@ -1,31 +1,19 @@
-Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
+Received: from [66.249.92.173] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HRtH4-0004Ch-P1
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Mar 2007 17:58:00 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id F3ECF1F8D52
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Mar 2007 12:57:57 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by out1.internal (MEProxy); Thu, 15 Mar 2007 12:57:58 -0400
-X-Sasl-enc: vD9iN3lRg4V7Ak/zRRYhFEtaEo7jgR4mtCRGC5IbU97W 1173977878
-Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id CBB4121EE7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Mar 2007 12:57:57 -0400 (EDT)
-Message-ID: <45F97AE9.8060705@whitby.id.au>
-Date: Fri, 16 Mar 2007 03:27:13 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
+	(envelope-from <andres.calderon@emqbit.com>) id 1HRwWf-0005Mz-PT
+	for openembedded-devel@openembedded.org; Thu, 15 Mar 2007 21:26:17 +0100
+Received: by ug-out-1314.google.com with SMTP id s2so461876uge
+	for <openembedded-devel@openembedded.org>;
+	Thu, 15 Mar 2007 13:26:13 -0700 (PDT)
+Received: by 10.78.180.18 with SMTP id c18mr595016huf.1173990373417;
+	Thu, 15 Mar 2007 13:26:13 -0700 (PDT)
+Received: by 10.78.166.3 with HTTP; Thu, 15 Mar 2007 13:26:13 -0700 (PDT)
+Message-ID: <cf1872900703151326p5f7b0eccje25cfa7f49c6ffd5@mail.gmail.com>
+Date: Thu, 15 Mar 2007 15:26:13 -0500
+From: "=?ISO-8859-1?Q?Andr=E9s_Calder=F3n?=" <andres.calderon@emqbit.com>
+To: openembedded-devel@openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <45F92746.2020608@whitby.id.au>
-	<1173959533.45f9336d50790@dominion.kabel.utwente.nl>
-In-Reply-To: <1173959533.45f9336d50790@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.0.0
-Subject: Re: Bad gcc packaging (libgcc-s1 instead of libgcc1)
+Subject: Why EABI matters
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,28 +27,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2007 16:58:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Mar 2007 20:26:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> I think putting a construction like
-> gcc-package-cross.inc has:
-> 
-> python do_package() {
->         if bb.data.getVar('DEBIAN_NAMES', d, 1):
->                 bb.data.setVar('PKG_libgcc', 'libgcc1', d)
->         bb.build.exec_func('package_do_package', d)
-> }
-> 
-> in gcc-package.inc should work. Could you test that?
+This article describes the floating point performance benefits of the
+ARM EABI. The authors use an open source floating point benchmark to
+compare how compiling with EABI support can improve floating point
+performance.  The  benchmark platform is based in OE.
 
-That works here.
+http://www.linuxdevices.com/articles/AT5920399313.html
 
-> Sorry for breaking everyones packages.
-
-Apology accepted.
-
--- Rod
+-- Andr=E9s
 
 
