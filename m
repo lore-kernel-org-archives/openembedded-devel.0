@@ -1,30 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HRdae-0006uA-1d
+	(envelope-from <rod@whitby.id.au>) id 1HRnhi-0006jV-Jl
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Mar 2007 01:13:08 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id B682A28C012; Thu, 15 Mar 2007 01:06:44 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
-Received: from [192.168.2.128] (e180129100.adsl.alicedsl.de [85.180.129.100])
-	by srv043.dedi23.de (Postfix) with ESMTP id 09AA128C011
+	Thu, 15 Mar 2007 12:01:06 +0100
+Received: from out1.internal (unknown [10.202.2.149])
+	by out1.messagingengine.com (Postfix) with ESMTP id F05E41F7BF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Mar 2007 01:06:41 +0100 (CET)
-Date: Thu, 15 Mar 2007 01:13:05 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.95.6) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1292346040.20070315011305@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200703140032.28661.ranaldo@unina.it>
-References: <200703140032.28661.ranaldo@unina.it>
+	Thu, 15 Mar 2007 07:01:05 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by out1.internal (MEProxy); Thu, 15 Mar 2007 07:01:05 -0400
+X-Sasl-enc: eaenWKU/aBuDTO4DKr50yGT3WIJV4/ts2Zw50k85cXrC 1173956466
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id E36B922288
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Mar 2007 07:01:05 -0400 (EDT)
+Message-ID: <45F92746.2020608@whitby.id.au>
+Date: Thu, 15 Mar 2007 21:30:22 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
-Subject: Re: OE and pakage builds
+To: openembedded-devel@lists.openembedded.org
+Subject: Bad gcc packaging (libgcc-s1 instead of libgcc1)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,30 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2007 00:13:08 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 15 Mar 2007 11:01:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Nicola Ranaldo wrote:
-> Hi,
-> i'm trying to fix and update qt library bb, while building and rebuilding
-> packages i noted they dependes on the previuos compiled packages.
-> For example, if we build qt4 before glib, it is compiled without glib support.
-> So it my be that with the same tree we may produce different packages.
-> Is it a normal behaviour? should it be fixed?
+I'm getting a libgcc-s1 package emitted by gcc_4.1.1.bb instead of the
+normal libgcc1.  This is poisoning all builds that depend on libgcc1,
+and is polluting the slugos feeds with bad dependencies.
 
-Should be fixed. Feel free to post a patch. Please adjust packaging if
-necessary (additional library or plugin).
+I believe it is caused by the patch in
+http://lists.linuxtogo.org/pipermail/openembedded-commits/2007-March/004007.html
 
-> in some message on the list i read oe builds should be deterministic.
+I have tested reverting that patch locally, and the libgcc-s1 package
+was not emitted.
 
-That's correct.
+So I wish to revert that patch.
 
-Regards,
+I'm looking for confirmation that this problem is happening to others.
+I will revert the patch locally on our autobuilder, and wait for
+confirmation before committing that reversion.
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+-- Rod
 
 
