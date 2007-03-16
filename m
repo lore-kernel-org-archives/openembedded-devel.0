@@ -1,22 +1,29 @@
-Received: from [62.169.194.61] (helo=cp3a.criticalpath.priv)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1HS7AF-0007Ab-Hc
-	for openembedded-devel@openembedded.org; Fri, 16 Mar 2007 08:47:52 +0100
-Received: from dias (62.169.211.226) by cp3a.criticalpath.priv (7.3.118.3)
-	id 45DC50A200128B12 for openembedded-devel@openembedded.org;
-	Fri, 16 Mar 2007 09:46:59 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Fri, 16 Mar 2007 09:47:50 +0200
-Message-ID: <HOECLKEKOHLAMMGDLLBHGENDKGAA.skoroneos@digital-opsis.com>
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
-In-Reply-To: <cf1872900703151326p5f7b0eccje25cfa7f49c6ffd5@mail.gmail.com>
-Importance: Normal
-Subject: Checking which packages build
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1HSEB1-00077n-L9
+	for openembedded-devel@openembedded.org; Fri, 16 Mar 2007 16:17:07 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1HSEAn-0003Ur-62
+	for openembedded-devel@openembedded.org; Fri, 16 Mar 2007 16:16:53 +0100
+Received: from f73d8.f.ppp-pool.de ([195.4.115.216])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 16 Mar 2007 16:16:53 +0100
+Received: from no2spam by f73d8.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 16 Mar 2007 16:16:53 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 16 Mar 2007 17:16:34 +0100
+Message-ID: <etecci$200$1@sea.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: f73d8.f.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+Sender: news <news@sea.gmane.org>
+Subject: RFC after the fact - bug 1987
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,36 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2007 07:47:53 -0000
-Content-Type: text/plain;
-	charset="ISO-8859-1"
+X-List-Received-Date: Fri, 16 Mar 2007 15:17:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Greetings to all !
+Hi,
 
-I have started from yesterday an effort to build all packages in OE one by
-one in order to verify if they build or not and post the relative bug
-report.
-I will continue this during the weekend (as time permits)
-Results from the build are also posted in Tinderbox
-http://ewi546.ewi.utwente.nl/tinderbox/showbuilds.pl?tree=oplinux
+it seems I have still a few things to learn as far as updating OE 
+metadata goes.  Furthermore it seems I might have created the first 
+major fuck-up.  I apologize for the inconvenience this has caused to the 
+OE community.
 
-I am building on an i686 (P4 Celeron @ 2.5 GHz) for x86 using gcc 4.1.1 and
-libc 2.5
+Now, to sort things out; I committed 
+a96c9acac99b5599d2b0fb0a518603646414d166 yesterday to fix bug 1987.  It 
+seemed like an obvious case (move debug files into -dbg package) which 
+is why I dared to commit.  psokolovsky made me aware that an RFC had 
+been necessary to make this commit to a core part of OE and that it 
+might have broken compilation for some OE users.
 
-Please check the bugtracker, verify if the package build/fails for you and
-submit any info and/or patches you might have.
-Include info about your build machine, target and distro
-Those with write access to the OE rep, plese do not push any changes
-directly and please do not close any of the bugs until the process halts.
+Now here I am trying to do The Right Thing[TM].  I want to discuss "mtn 
+diff -r e9d53f524190d295cb769c7594711fd76eb197b7 -r 
+a96c9acac99b5599d2b0fb0a518603646414d166".  Please let me know if there 
+is anything wrong with this change.  If it should be reverted, feel free 
+to do so or let me know via mail or IRC and I will fix it pronto.
 
-Thanks in advance to everyone for their time
+Regards
 
-Stelios S. Koroneos
-
-
-
-
+Rolf
 
 
 
