@@ -1,23 +1,28 @@
-Received: from [69.72.139.204] (helo=zeus.rm-fr.net)
+Received: from [216.243.110.194] (helo=redwood.mza.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <skyhusker@rm-fr.net>) id 1HTEgw-0000Nr-SR
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2007 11:02:14 +0100
-Received: from raichu (cm-83-97-128-47.telecable.es [83.97.128.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by zeus.rm-fr.net (Postfix) with ESMTP id 6FBA15D13C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2007 10:02:14 +0000 (GMT)
-From: Alberto =?utf-8?q?Garc=C3=ADa_Hierro?= <skyhusker@rm-fr.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Mar 2007 11:02:25 +0100
-User-Agent: KMail/1.9.6
-References: <356565EA-C15E-4E79-809C-F4AFD98E3AB7@selfish.org>
-In-Reply-To: <356565EA-C15E-4E79-809C-F4AFD98E3AB7@selfish.org>
-MIME-Version: 1.0
-Message-Id: <200703191102.25701.skyhusker@rm-fr.net>
-Subject: Re: RFC Virtual Chroot
+	(envelope-from <anthony.seward@ieee.org>) id 1HTJdn-0001mN-FY
+	for openembedded-devel@openembedded.org; Mon, 19 Mar 2007 16:19:19 +0100
+Received: from [10.5.5.59] (monkeytree.mza.com [216.243.106.138])
+	(authenticated bits=0)
+	by redwood.mza.com (8.13.1/8.13.1) with ESMTP id l2JFJI1p001148
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 19 Mar 2007 08:19:18 -0700
+From: Anthony Joseph Seward <anthony.seward@ieee.org>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1169661734.4293.6.camel@fleuret>
+References: <enba1v$ldr$1@sea.gmane.org>
+	<1167668309.5601.31.camel@localhost.localdomain>
+	<enbglm$6je$1@sea.gmane.org>	<459B7067.3070202@gmx.net>
+	<1167841321.13059.2.camel@fleuret> <enjbgu$c1o$1@sea.gmane.org>
+	<459F5FB0.70003@gmx.net>  <1169661734.4293.6.camel@fleuret>
+Date: Mon, 19 Mar 2007 10:19:13 -0600
+Message-Id: <1174321153.4321.7.camel@fleuret>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.8.3 (2.8.3-1.fc6) 
+X-Virus-Scanned: ClamAV 0.83/2872/Mon Mar 19 03:31:47 2007 on redwood.mza.com
+X-Virus-Status: Clean
+Subject: Re: Reverse-engineering SD specs for collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,21 +36,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2007 10:02:15 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 19 Mar 2007 15:19:19 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-El Sunday 18 March 2007 14:10:32 Holger Freyther escribi=C3=B3:
-> Ideas, Comments, Feedback, Code?
+The bounty at 
 
-	You can check Gentoo's sandbox, which does pretty much the same:
+http://wiki.openzaurus.org/FAQ#Which_SD_Cards_work_with_OpenZaurus
 
-	http://dev.gentoo.org/~azarah/sandbox/
+is up to $100 + 95 Euro.  Is there some way to get the word out to those
+who might have the skills to make good on it?
 
+Tony
 
-Regards,
-	Alberto
 
 
