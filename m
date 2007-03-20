@@ -1,41 +1,23 @@
-Received: from [65.254.253.40] (helo=mailout05.yourhostingaccount.com)
-	by linuxtogo.org with esmtp (Exim 4.63) (envelope-from
-	<SRS0=L1Ds5l=IY=thegnar.org=markgross@yourhostingaccount.com>)
-	id 1HTV4M-0002mc-1N for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Mar 2007 04:31:31 +0100
-Received: from mailscan49.yourhostingaccount.com ([10.1.15.49]
-	helo=mailscan49.yourhostingaccount.com)
-	by mailout05.yourhostingaccount.com with esmtp (Exim)
-	id 1HTV4K-0003AU-Uk for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2007 23:31:28 -0400
-Received: from authsmtp08.yourhostingaccount.com ([10.1.18.8] ident=exim)
-	by mailscan49.yourhostingaccount.com with spamscanlookuphost (Exim)
-	id 1HTV4L-00034I-31 for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2007 23:31:29 -0400
-Received: from authsmtp08.yourhostingaccount.com ([10.1.18.8]
-	helo=authsmtp08.yourhostingaccount.com)
-	by mailscan49.yourhostingaccount.com with esmtp (Exim)
-	id 1HTV4K-00034F-Q7 for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2007 23:31:28 -0400
-Received: from pool-71-117-247-154.ptldor.fios.verizon.net ([71.117.247.154]
-	helo=mgross-desktop)
-	by authsmtp08.yourhostingaccount.com with esmtpa (Exim)
-	id 1HTV4K-0004Fk-CH for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2007 22:31:28 -0500
-Received: by mgross-desktop (Postfix, from userid 1000)
-	id 85869C2E59; Mon, 19 Mar 2007 20:31:20 -0700 (PDT)
-Date: Mon, 19 Mar 2007 20:31:20 -0700
-From: Mark Gross <markgross@thegnar.org>
+Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <sdgvulpes@gmail.com>) id 1HTe5u-0007Up-OJ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Mar 2007 14:09:42 +0100
+Received: by nf-out-0910.google.com with SMTP id l24so324999nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Mar 2007 06:09:42 -0700 (PDT)
+Received: by 10.78.157.8 with SMTP id f8mr3055560hue.1174396181756;
+	Tue, 20 Mar 2007 06:09:41 -0700 (PDT)
+Received: by 10.78.129.6 with HTTP; Tue, 20 Mar 2007 06:09:41 -0700 (PDT)
+Message-ID: <f34f85580703200609y46baa76di790b997c7ab8dcc6@mail.gmail.com>
+Date: Tue, 20 Mar 2007 09:09:41 -0400
+From: "Todd Blumer" <sdgvulpes@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070320033120.GA8678@thegnar.org>
+In-Reply-To: <08fa01c75d4e$71e4a2b0$6e01a8c0@twilight>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.11
-X-EN-UserInfo: 797c2c580f2f40de3d8825fee4eaf462:2545611f8b0606d1227160eb92fd62ea
-X-EN-AuthUser: markgross
-Sender: Mark Gross <markgross@thegnar.org>
-X-EN-OrigIP: 71.117.247.154
-X-EN-OrigHost: pool-71-117-247-154.ptldor.fios.verizon.net
-Subject: bitbake and OE opperation
+References: <f34f85580702070514u42b2b887qf416466c5b7bf83d@mail.gmail.com>
+	<08fa01c75d4e$71e4a2b0$6e01a8c0@twilight>
+Subject: Re: tzdata.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,53 +31,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2007 03:31:36 -0000
-X-Groupsio-MsgNum: 1649
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PEIAKu/WMn1b1Hv9"
+X-List-Received-Date: Tue, 20 Mar 2007 13:09:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
---PEIAKu/WMn1b1Hv9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Mike,
+Thanks for committing the code and cleaning it up. I've been swamped.
+--
+Todd
 
-I'm trying to wrap my head around bit bake and the open embedded recipe
-files design and structure.
+On 3/3/07, Mike (mwester) <mwester@dls.net> wrote:
+> tzdata (and tzcode-native) are committed.
+>
+> The tzdata recipe is Todd's original, I incorporated the feedback from the
+> list (and added any bugs).  The tzcode-native recipe provides the native
+> timezone utilities, including zic.
+>
+> Regards,
+> Mike (mwester)
+>
+> ----- Original Message -----
+> From: "Todd Blumer" <sdgvulpes@gmail.com>
+> To: <openembedded-devel@lists.openembedded.org>
+> Cc: "Rene Wagner" <rw@handhelds.org>
+> Sent: Wednesday, February 07, 2007 7:14 AM
+> Subject: [oe] tzdata.bb
+>
+>
+> > Because of the impending changes to daylight savings time (DST) here
+> > in the US, I was motivated to work on creating a new timezone package.
+> > In the base package I tried to put a city in every timezone around the
+> > world. This package replaces the 'timezone' package used by Opie, so
+> > some other packages will need to be changed to depend on tzdata
+> > instead of timezone. (I used 'tzdata' since that is the Debian name
+> > and in case some developers were not ready to switch over to tzdata.)
+> >
+> > Someone with write access to oe (something I should probably get
+> > eventually :-) can commit this to dev if you feel it is appropriate to
+> > do so. I have tested the US Eastern time.
+> >
+> > I'm sure more work could be done here. Feedback is welcome.
+> > --
+> > Todd Blumer
+> > SDG Systems
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Also, I'm a relative newbie WRT Python.
 
-I'm trying to understand the way bit bake builds the dependency trees
-and works at a low level.   Trying to reverse engineer it from the
-python code is difficult.  Does anyone recommend any browser tools for
-navigating a large python code base like bit bake?
-
-I've read the documentation pages I could find but I haven't found any
-"theory of operation" types of documents.  Are there any such things?
-
-The questions I have are:
-How does a simple command line "bitbake slogos-image" translate into
-building all the components? =20
-
-How does bitbake push in the ./configure command line options?
-
-Are there tools for doing analysis on the open embedded bb library? =20
-
-Thanks,
-
---mgross
-
---PEIAKu/WMn1b1Hv9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.2.2 (GNU/Linux)
-
-iD8DBQFF/1WIhK5OsmQOmSARAnrtAJ9DpeVjh1SQ0QGZEfnzhGzlCJyxrQCfSyfh
-DH1DyvTymVnbQR+8/n50QJk=
-=ZHbX
------END PGP SIGNATURE-----
-
---PEIAKu/WMn1b1Hv9--
