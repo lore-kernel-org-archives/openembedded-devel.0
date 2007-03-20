@@ -1,33 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HThLC-0003Uu-4r
-	for openembedded-devel@openembedded.org; Tue, 20 Mar 2007 17:37:44 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2KGbfmx028075
-	for <openembedded-devel@openembedded.org>; Tue, 20 Mar 2007 16:37:41 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 27779-03 for <openembedded-devel@openembedded.org>;
-	Tue, 20 Mar 2007 16:37:38 +0000 (GMT)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2KGbbk0028067
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 20 Mar 2007 16:37:37 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <45FF3942.5040900@whitby.id.au>
+	(envelope-from <freyther@gmx.net>) id 1HTjA6-0002v9-UE
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Mar 2007 19:34:22 +0100
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <freyther@gmx.net>) id 1HTjA6-00049U-Dy
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Mar 2007 19:34:22 +0100
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <1174408657.5852.22.camel@localhost.localdomain>
 References: <74d0deb30701310740p73af77a7j25a8b4597345903a@mail.gmail.com>
 	<1174346093.5824.89.camel@localhost.localdomain>
 	<45FF29BF.1040008@whitby.id.au>
 	<74BCF2CF-3650-4464-9E51-CA853E3DCDFA@gmx.net>
 	<45FF3942.5040900@whitby.id.au>
-Date: Tue, 20 Mar 2007 16:37:36 +0000
-Message-Id: <1174408657.5852.22.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<1174408657.5852.22.camel@localhost.localdomain>
+Message-Id: <477DE51E-16DC-44A6-A354-B837064585DC@gmx.net>
+From: Holger Freyther <freyther@gmx.net>
+Date: Tue, 20 Mar 2007 19:34:13 +0100
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.752.3)
 Subject: Re: [PATCH] Epoch support for bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,45 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2007 16:37:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 20 Mar 2007 18:34:23 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-03-20 at 12:00 +1030, Rod Whitby wrote:
-> Holger Freyther wrote:
-> > Am 20.03.2007 um 01:24 schrieb Rod Whitby:
-> >> Richard Purdie wrote:
-> >>> Thanks for this, I just checked it in unchanged to bitbake trunk
-> >>> (1.9.x). If people test it and are happy, I'm happy for it to be
-> >>> backported for 1.8.2 too, at which point OE.dev can maybe start to  
-> >>> rely
-> >>> upon it.
-> >> Dunno whether this is important or not, but OpenMoko (which is now  
-> >> using svn overlaying OE .dev, not a frozen OE version) uses bitbake 1.6.x  
-> >> with custom svnnow patches.
-> > I assume that henryk will port his work to bitbake trunk/1.8 and it  
-> > is highly likely (actually pretty obvious) that we will accept the  
-> > patch. And at this point it is a potential backporting candidate for  
-> > 1.8.2.
-> 
-> So does that mean that changing OE.dev to _rely_ on epoch support should
-> be held off until that happens?
 
-We won't rely on epoch support until our users have a stable version of
-bitbake available to them. "users" includes the openmoko developers. The
-indicator will be the bitbake minimum version requirement set in the
-sanity checker - once the version that points to has epoch support, we
-can rely on it.
+Am 20.03.2007 um 17:37 schrieb Richard Purdie:
 
-I'm hoping omoko will update to use bitbake 1.8.x. If they don't, we
-might consider backporting the epoch code to 1.6.x. Lets see how things
-work out...
+> I'm hoping omoko will update to use bitbake 1.8.x. If they don't, we
+> might consider backporting the epoch code to 1.6.x. Lets see how  
+> things
+> work out...
 
-I do want to ultimately solve the X11R7 mess though.
+Upgrade path:
+	Make the metadata compile with bitbake-1.8 or verify that it compiles
+	Compile everything with the old bitbake and save the image+ipk's
+	Recompile everything (exact same source) with the new bitbake-1.8
 
-Cheers,
+	Run ipkg-diff from contrib/qa and see what changed. Evaluate changes  
+and inform us and go with bitbake-1.8
 
-Richard
-
+z.
 
 
