@@ -1,29 +1,41 @@
-Received: from [66.111.4.29] (helo=out5.smtp.messagingengine.com)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HTTCJ-0006Qn-Gt
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Mar 2007 02:31:35 +0100
-Received: from out1.internal (unknown [10.202.2.149])
-	by out1.messagingengine.com (Postfix) with ESMTP id 137E1207DB6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2007 21:31:33 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by out1.internal (MEProxy); Mon, 19 Mar 2007 21:31:33 -0400
-X-Sasl-enc: Calb98Q8AYoANRd8f0v90F8e1BEaC/t10BgBMLiuYQeJ 1174354294
-Received: from [127.0.0.1] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id 640CE23150
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2007 21:31:34 -0400 (EDT)
-Message-ID: <45FF3942.5040900@whitby.id.au>
-Date: Tue, 20 Mar 2007 12:00:42 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
-MIME-Version: 1.0
+Received: from [65.254.253.40] (helo=mailout05.yourhostingaccount.com)
+	by linuxtogo.org with esmtp (Exim 4.63) (envelope-from
+	<SRS0=L1Ds5l=IY=thegnar.org=markgross@yourhostingaccount.com>)
+	id 1HTV4M-0002mc-1N for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Mar 2007 04:31:31 +0100
+Received: from mailscan49.yourhostingaccount.com ([10.1.15.49]
+	helo=mailscan49.yourhostingaccount.com)
+	by mailout05.yourhostingaccount.com with esmtp (Exim)
+	id 1HTV4K-0003AU-Uk for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Mar 2007 23:31:28 -0400
+Received: from authsmtp08.yourhostingaccount.com ([10.1.18.8] ident=exim)
+	by mailscan49.yourhostingaccount.com with spamscanlookuphost (Exim)
+	id 1HTV4L-00034I-31 for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Mar 2007 23:31:29 -0400
+Received: from authsmtp08.yourhostingaccount.com ([10.1.18.8]
+	helo=authsmtp08.yourhostingaccount.com)
+	by mailscan49.yourhostingaccount.com with esmtp (Exim)
+	id 1HTV4K-00034F-Q7 for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Mar 2007 23:31:28 -0400
+Received: from pool-71-117-247-154.ptldor.fios.verizon.net ([71.117.247.154]
+	helo=mgross-desktop)
+	by authsmtp08.yourhostingaccount.com with esmtpa (Exim)
+	id 1HTV4K-0004Fk-CH for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Mar 2007 22:31:28 -0500
+Received: by mgross-desktop (Postfix, from userid 1000)
+	id 85869C2E59; Mon, 19 Mar 2007 20:31:20 -0700 (PDT)
+Date: Mon, 19 Mar 2007 20:31:20 -0700
+From: Mark Gross <markgross@thegnar.org>
 To: openembedded-devel@lists.openembedded.org
-References: <74d0deb30701310740p73af77a7j25a8b4597345903a@mail.gmail.com>	<1174346093.5824.89.camel@localhost.localdomain>	<45FF29BF.1040008@whitby.id.au>
-	<74BCF2CF-3650-4464-9E51-CA853E3DCDFA@gmx.net>
-In-Reply-To: <74BCF2CF-3650-4464-9E51-CA853E3DCDFA@gmx.net>
-Subject: Re: [PATCH] Epoch support for bitbake
+Message-ID: <20070320033120.GA8678@thegnar.org>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.11
+X-EN-UserInfo: 797c2c580f2f40de3d8825fee4eaf462:2545611f8b0606d1227160eb92fd62ea
+X-EN-AuthUser: markgross
+Sender: Mark Gross <markgross@thegnar.org>
+X-EN-OrigIP: 71.117.247.154
+X-EN-OrigHost: pool-71-117-247-154.ptldor.fios.verizon.net
+Subject: bitbake and OE opperation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,29 +49,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2007 01:31:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Mar 2007 03:31:36 -0000
+X-Groupsio-MsgNum: 1649
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="PEIAKu/WMn1b1Hv9"
+Content-Disposition: inline
 
-Holger Freyther wrote:
-> Am 20.03.2007 um 01:24 schrieb Rod Whitby:
->> Richard Purdie wrote:
->>> Thanks for this, I just checked it in unchanged to bitbake trunk
->>> (1.9.x). If people test it and are happy, I'm happy for it to be
->>> backported for 1.8.2 too, at which point OE.dev can maybe start to  
->>> rely
->>> upon it.
->> Dunno whether this is important or not, but OpenMoko (which is now  
->> using svn overlaying OE .dev, not a frozen OE version) uses bitbake 1.6.x  
->> with custom svnnow patches.
-> I assume that henryk will port his work to bitbake trunk/1.8 and it  
-> is highly likely (actually pretty obvious) that we will accept the  
-> patch. And at this point it is a potential backporting candidate for  
-> 1.8.2.
+--PEIAKu/WMn1b1Hv9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-So does that mean that changing OE.dev to _rely_ on epoch support should
-be held off until that happens?
+I'm trying to wrap my head around bit bake and the open embedded recipe
+files design and structure.
 
--- Rod
+Also, I'm a relative newbie WRT Python.
 
+I'm trying to understand the way bit bake builds the dependency trees
+and works at a low level.   Trying to reverse engineer it from the
+python code is difficult.  Does anyone recommend any browser tools for
+navigating a large python code base like bit bake?
 
+I've read the documentation pages I could find but I haven't found any
+"theory of operation" types of documents.  Are there any such things?
+
+The questions I have are:
+How does a simple command line "bitbake slogos-image" translate into
+building all the components? =20
+
+How does bitbake push in the ./configure command line options?
+
+Are there tools for doing analysis on the open embedded bb library? =20
+
+Thanks,
+
+--mgross
+
+--PEIAKu/WMn1b1Hv9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.2 (GNU/Linux)
+
+iD8DBQFF/1WIhK5OsmQOmSARAnrtAJ9DpeVjh1SQ0QGZEfnzhGzlCJyxrQCfSyfh
+DH1DyvTymVnbQR+8/n50QJk=
+=ZHbX
+-----END PGP SIGNATURE-----
+
+--PEIAKu/WMn1b1Hv9--
