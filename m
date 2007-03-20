@@ -1,28 +1,26 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <freyther@gmx.net>) id 1HTjA6-0002v9-UE
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Mar 2007 19:34:22 +0100
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <freyther@gmx.net>) id 1HTjA6-00049U-Dy
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Mar 2007 19:34:22 +0100
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <1174408657.5852.22.camel@localhost.localdomain>
-References: <74d0deb30701310740p73af77a7j25a8b4597345903a@mail.gmail.com>
-	<1174346093.5824.89.camel@localhost.localdomain>
-	<45FF29BF.1040008@whitby.id.au>
-	<74BCF2CF-3650-4464-9E51-CA853E3DCDFA@gmx.net>
-	<45FF3942.5040900@whitby.id.au>
-	<1174408657.5852.22.camel@localhost.localdomain>
-Message-Id: <477DE51E-16DC-44A6-A354-B837064585DC@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Tue, 20 Mar 2007 19:34:13 +0100
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-Subject: Re: [PATCH] Epoch support for bitbake
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HTm0M-000286-OH
+	for openembedded-devel@openembedded.org; Tue, 20 Mar 2007 22:36:30 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l2KLaQox023450 for <openembedded-devel@openembedded.org>;
+	Tue, 20 Mar 2007 22:36:27 +0100
+Message-ID: <460053D9.8020008@dominion.kabel.utwente.nl>
+Date: Tue, 20 Mar 2007 22:36:25 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <E1HTlXW-0008Tg-CR@linuxtogo.org>
+In-Reply-To: <E1HTlXW-0008Tg-CR@linuxtogo.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev angstrom-e: add e-image and tasks for angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,26 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2007 18:34:23 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Tue, 20 Mar 2007 21:36:31 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am 20.03.2007 um 17:37 schrieb Richard Purdie:
+justinp commit schreef:
+> angstrom-e: add e-image and tasks for angstrom
 
-> I'm hoping omoko will update to use bitbake 1.8.x. If they don't, we
-> might consider backporting the epoch code to 1.6.x. Lets see how  
-> things
-> work out...
+And we were trying to stop using deprecated stuff (e.g. gpe-bootsplash) and move them out
+of packages/angstrom/ ....
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Upgrade path:
-	Make the metadata compile with bitbake-1.8 or verify that it compiles
-	Compile everything with the old bitbake and save the image+ipk's
-	Recompile everything (exact same source) with the new bitbake-1.8
-
-	Run ipkg-diff from contrib/qa and see what changed. Evaluate changes  
-and inform us and go with bitbake-1.8
-
-z.
+iD8DBQFGAFPYMkyGM64RGpERAsD+AJ42HHhECgvtAivnf/VISikMsFGS8wCfUPDb
+vZyNECnkyW2nBDQ19qEbSy4=
+=Iuyy
+-----END PGP SIGNATURE-----
 
 
