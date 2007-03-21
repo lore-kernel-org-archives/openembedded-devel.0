@@ -1,23 +1,26 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1HTwKZ-0003No-Vp
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2007 09:38:04 +0100
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1HTwa0-0004yj-8s
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2007 09:54:00 +0100
-Message-ID: <4600EED5.6020400@kernelconcepts.de>
-Date: Wed, 21 Mar 2007 09:37:41 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HTwwv-00046Q-LF
+	for openembedded-devel@openembedded.org; Wed, 21 Mar 2007 10:17:41 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l2L9HSLr019643 for <openembedded-devel@openembedded.org>;
+	Wed, 21 Mar 2007 10:17:28 +0100
+Message-ID: <4600F825.6070505@dominion.kabel.utwente.nl>
+Date: Wed, 21 Mar 2007 10:17:25 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <E1HTlXW-0008Tg-CR@linuxtogo.org>
-	<460053D9.8020008@dominion.kabel.utwente.nl>
-In-Reply-To: <460053D9.8020008@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.0.0
+To: openembedded-devel@openembedded.org
+References: <E1HTlXW-0008Tg-CR@linuxtogo.org>	<460053D9.8020008@dominion.kabel.utwente.nl>
+	<4600EED5.6020400@kernelconcepts.de>
+In-Reply-To: <4600EED5.6020400@kernelconcepts.de>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [oe-commits] org.oe.dev angstrom-e: add e-image and tasks for angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,34 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2007 08:38:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 21 Mar 2007 09:17:41 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Koen Kooi schrieb:
-> justinp commit schreef:
->>> angstrom-e: add e-image and tasks for angstrom
+Florian Boor schreef:
+> Hi,
 > 
-> And we were trying to stop using deprecated stuff (e.g. gpe-bootsplash) and move them out
-> of packages/angstrom/ ....
+> Koen Kooi schrieb:
+>> justinp commit schreef:
+>>>> angstrom-e: add e-image and tasks for angstrom
+>> And we were trying to stop using deprecated stuff (e.g. gpe-bootsplash)
 
-Wouldn't this be a reason to fix these packages instead of deleting them? We
-even have a pile of packages that do not even work and that are not removed.
+>> and move them out of packages/angstrom/ ....
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-But anyway why is gpe-bootsplash deprecated?
+> Wouldn't this be a reason to fix these packages instead of deleting them? We
+> even have a pile of packages that do not even work and that are not removed.
 
-Greetings
+Having 1:1 copies of tasks is insane. One of the aims of angstrom images is to reuse as
+much existing tasks as possible, put since Justin never bothered to ask we now have more
+crap in packages/angstrom instead of less. Ah well, easily solved with a local diff.
 
-Florian
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+> But anyway why is gpe-bootsplash deprecated?
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+It's slow, doesn't support animation, and angstrom uses psplash.
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGAPglMkyGM64RGpERAhR5AKCbJzn5xqbyLV5JreHFN/Clexc+kgCgon4T
+9MXEjJzVFye8c4KowMJVhCE=
+=uGOB
+-----END PGP SIGNATURE-----
 
 
