@@ -1,29 +1,20 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1HUvde-0001DH-3L; Sat, 24 Mar 2007 03:05:50 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 6867A28C014; Sat, 24 Mar 2007 02:59:06 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180174150.adsl.alicedsl.de [85.180.174.150])
-	by srv043.dedi23.de (Postfix) with ESMTP id F07D928C013;
-	Sat, 24 Mar 2007 02:59:05 +0100 (CET)
-Date: Sat, 24 Mar 2007 03:05:52 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.98.4) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <561924290.20070324030552@vanille-media.de>
-To: "justinp commit" <openembedded-commits@lists.openembedded.org>
-In-Reply-To: <E1HUlcy-0005nJ-Bu@linuxtogo.org>
-References: <E1HUlcy-0005nJ-Bu@linuxtogo.org>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1HV7vc-0001vs-Fd
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 24 Mar 2007 16:13:12 +0100
+Received: by nf-out-0910.google.com with SMTP id q29so1623793nfc
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Mar 2007 08:13:11 -0700 (PDT)
+Received: by 10.82.154.2 with SMTP id b2mr9315333bue.1174749191633;
+	Sat, 24 Mar 2007 08:13:11 -0700 (PDT)
+Received: by 10.82.120.13 with HTTP; Sat, 24 Mar 2007 08:13:11 -0700 (PDT)
+Message-ID: <c384c5ea0703240813w6e575805n2471bd1d6aa2614a@mail.gmail.com>
+Date: Sat, 24 Mar 2007 16:13:11 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev linux-rp-2.6.20: add CONFIG_SHARPSL_RC=n for non-spitz machines
+Subject: False handling of image types (pls check assumptions of your distro)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,21 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Mar 2007 02:05:51 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 24 Mar 2007 15:13:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-justinp commit wrote:
-> linux-rp-2.6.20: add CONFIG_SHARPSL_RC=n for non-spitz machines
+Hello,
 
-Just for the records... the canonical way to say that is
-# CONFIG_FOO_BAR is not set
+I noticed some regressions in building (multiple) image types:
+
+I am building a "tar" and a "squashfs-lzma" image. There was a rm
+wildcard so that my first-built image (link) got erased. I fixed that
+in the repo.
+
+classes/image.bbclass:96:               rm -f
+${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.*
+classes/image.bbclass:97:               ln -s
+${IMAGE_NAME}.rootfs.$type
+${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.$type
+
+The second regression seems that the IMAGE_CMD_tar now compresses into
+.tar.bz2.
+
+conf/bitbake.conf:201:IMAGE_CMD_tar
+
+However, we have the seperate "tar.bz2" type for that.
+
+I am not fixing this yet, as Koen warned me some
+"people/images/distros rely on the (wrong) behaviour".
+
+So if you are such a entity, please fix now. I'll hold off the simple
+fix to IMAGE_CMD_tar for some time,
 
 Regards,
-
-:M:
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Leon
 
 
