@@ -1,20 +1,26 @@
-Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1HV7vc-0001vs-Fd
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Mar 2007 16:13:12 +0100
-Received: by nf-out-0910.google.com with SMTP id q29so1623793nfc
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Mar 2007 08:13:11 -0700 (PDT)
-Received: by 10.82.154.2 with SMTP id b2mr9315333bue.1174749191633;
-	Sat, 24 Mar 2007 08:13:11 -0700 (PDT)
-Received: by 10.82.120.13 with HTTP; Sat, 24 Mar 2007 08:13:11 -0700 (PDT)
-Message-ID: <c384c5ea0703240813w6e575805n2471bd1d6aa2614a@mail.gmail.com>
-Date: Sat, 24 Mar 2007 16:13:11 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HVDVT-0003Y3-UD
+	for openembedded-devel@openembedded.org; Sat, 24 Mar 2007 22:10:36 +0100
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l2OLASLr013018 for <openembedded-devel@openembedded.org>;
+	Sat, 24 Mar 2007 22:10:31 +0100
+Message-ID: <460593C2.1080501@dominion.kabel.utwente.nl>
+Date: Sat, 24 Mar 2007 22:10:26 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-Subject: False handling of image types (pls check assumptions of your distro)
+To: openembedded-devel@openembedded.org
+References: <c384c5ea0703240813w6e575805n2471bd1d6aa2614a@mail.gmail.com>
+In-Reply-To: <c384c5ea0703240813w6e575805n2471bd1d6aa2614a@mail.gmail.com>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: False handling of image types (pls check assumptions of your	distro)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,40 +34,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Mar 2007 15:13:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 24 Mar 2007 21:10:37 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I noticed some regressions in building (multiple) image types:
+Leon Woestenberg schreef:
 
-I am building a "tar" and a "squashfs-lzma" image. There was a rm
-wildcard so that my first-built image (link) got erased. I fixed that
-in the repo.
+> The second regression seems that the IMAGE_CMD_tar now compresses into
+> .tar.bz2.
+> 
+> conf/bitbake.conf:201:IMAGE_CMD_tar
+> 
+> However, we have the seperate "tar.bz2" type for that.
+> 
+> I am not fixing this yet, as Koen warned me some
+> "people/images/distros rely on the (wrong) behaviour".
+> 
+> So if you are such a entity, please fix now. I'll hold off the simple
+> fix to IMAGE_CMD_tar for some time,
 
-classes/image.bbclass:96:               rm -f
-${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.*
-classes/image.bbclass:97:               ln -s
-${IMAGE_NAME}.rootfs.$type
-${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.$type
+I fixed mine just now :)
 
-The second regression seems that the IMAGE_CMD_tar now compresses into
-.tar.bz2.
+regards,
 
-conf/bitbake.conf:201:IMAGE_CMD_tar
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-However, we have the seperate "tar.bz2" type for that.
-
-I am not fixing this yet, as Koen warned me some
-"people/images/distros rely on the (wrong) behaviour".
-
-So if you are such a entity, please fix now. I'll hold off the simple
-fix to IMAGE_CMD_tar for some time,
-
-Regards,
--- 
-Leon
+iD8DBQFGBZPCMkyGM64RGpERAhp6AKCNN//hsdUXKfm3e6plZ+tgJm6NNgCfUboz
+TJxJ0aq/4RThsLHL9XXxxW8=
+=mwy9
+-----END PGP SIGNATURE-----
 
 
