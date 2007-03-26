@@ -1,29 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [206.18.177.55] (helo=alnrmhc15.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HVlVp-0003r8-Ie
-	for openembedded-devel@openembedded.org; Mon, 26 Mar 2007 11:29:13 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2Q9TCN1028587;
-	Mon, 26 Mar 2007 10:29:12 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 28002-07; Mon, 26 Mar 2007 10:29:09 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2Q9T7Wr028573
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 26 Mar 2007 10:29:07 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <c384c5ea0703240813w6e575805n2471bd1d6aa2614a@mail.gmail.com>
-References: <c384c5ea0703240813w6e575805n2471bd1d6aa2614a@mail.gmail.com>
-Date: Mon, 26 Mar 2007 10:29:06 +0100
-Message-Id: <1174901346.5805.6.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: False handling of image types (pls check assumptions of	your distro)
+	(envelope-from <golly@stellarwerx.com>) id 1HVwNn-0003vK-K5
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Mar 2007 23:05:39 +0200
+Received: from gatekeeper.stellarwerx.com
+	(c-68-57-212-205.hsd1.in.comcast.net[68.57.212.205])
+	by comcast.net (alnrmhc15) with ESMTP
+	id <20070326210538b1500cgmd9e>; Mon, 26 Mar 2007 21:05:38 +0000
+Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
+	id 34E54D023; Mon, 26 Mar 2007 17:12:02 -0400 (EDT)
+From: "Mark Gollahon" <golly@stellarwerx.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: 
+X-Originating-IP: 68.79.172.62
+X-Mailer: Usermin 1.230
+Message-Id: <1174943520.1151@gatekeeper.stellarwerx.com>
+In-Reply-To: <1848684762.20070325211238@gmail.com>
+Date: Mon, 26 Mar 2007 17:12:00 -0400 (EDT)
+MIME-Version: 1.0
+Subject: Re: [RFC] Allow to limit generated binary locales topredefined list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,35 +32,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Mar 2007 09:29:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Mar 2007 21:05:41 -0000
+Content-Type: multipart/mixed; boundary="bound1174943521"
+
+--bound1174943521
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2007-03-24 at 16:13 +0100, Leon Woestenberg wrote:
-> classes/image.bbclass:96:               rm -f
-> ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.*
-> classes/image.bbclass:97:               ln -s
-> ${IMAGE_NAME}.rootfs.$type
-> ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.$type
+Paul:
+
+This doesn't seem to be working for me.  I've tried:
+
+GLIBC_GENERATE_LOCALES = "en_US en_US.UTF-8"
+
+GLIBC_GENERATE_LOCALES = "en_US,ISO-8859-1 en_US.UTF-8,UTF-8"
+
+GLIBC_GENERATE_LOCALES = "en_US ISO-8859-1,en_US.UTF-8 UTF-8"
+
+in my local.conf file and it gives me this error:
+
+ERROR: Error in executing: /OE/org.openembedded.dev/packages/glibc/glibc_2.5.bb
+ERROR: Exception:exceptions.ValueError Message:need more than 1 value to unpack
+ERROR: Printing the environment of the function
+ERROR:  0057:   # Collate the locales by base and encoding
+ERROR:  0058:   encodings = {}
+ERROR:  0059:   for l in supported:
+ERROR:  0060:           l = l[:-1]
+ERROR:  0061:           (locale, charset) = l.split(" ")
+ERROR:  0062:           m = dot_re.match(locale)
+ERROR:  0063:           if m:
+ERROR:  0064:                   locale = m.group(1)
+ERROR:  0065:           if not encodings.has_key(locale):
+ERROR: Error in executing: /OE/org.openembedded.dev/packages/glibc/glibc_2.5.bb
+ERROR: Exception:exceptions.ValueError Message:need more than 1 value to unpack
+ERROR: Printing the environment of the function
+ERROR:  0057:   if (bb.data.getVar('INHIBIT_PACKAGE_STRIP', d, 1) != '1'):
+ERROR:  0058:           stripfunc = ""
+ERROR:  0059:           for root, dirs, files in os.walk(dvar):
+ERROR:  0060:                   for f in files:
+ERROR:  0061:                           file = os.path.join(root, f)
+ERROR:  0062:                           if not os.path.islink(file) and not os.path.isdir(file) and isexec(file):
+ERROR:  0063:                                   stripfunc += "\trunstrip %s || st=1\n" % (file)
+ERROR:  0064:           if not stripfunc == "":
+ERROR:  0065:                   from bb import build
+
+Do I need to use bitbake 1.8.x to get this to work??
+
+Regards,
+-Mark Gollahon
+
+
+Paul Sokolovsky wrote ..
+> Hello,
 > 
-> The second regression seems that the IMAGE_CMD_tar now compresses into
-> .tar.bz2.
+> >  Binary locale generation for the entire locate set provided by GLIBC
+> > takes noticeable amount of time (several hours).
+> [...]
+> >   The solution would be to allow to optionally constrain set of
+> > generated locales to a predefined list.
 > 
-> conf/bitbake.conf:201:IMAGE_CMD_tar
+> > GLIBC_GENERATE_LOCALES = "en_GB.UTF-8 de_DE.UTF-8"
 > 
-> However, we have the seperate "tar.bz2" type for that.
+>   Committed.
+> 
+> 
+> []
+> 
+> -- 
+> Best regards,
+>  Paul                            mailto:pmiscml@gmail.com
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-I agree it should generate an uncompressed tarball though and poky
-already has that change. I'd support changing it in OE.dev, maybe after
-vetting the machine.conf files to correct any users of tar to one of the
-compressed types.
-
-Just for future reference, regression implies that it once worked which
-it didn't so its just a plain bug.
-
-Cheers,
-
-Richard
-
-
-
+--bound1174943521--
