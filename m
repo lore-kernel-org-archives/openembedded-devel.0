@@ -1,28 +1,29 @@
-Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HVXCs-0000K7-Rz
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Mar 2007 20:12:44 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so1107541nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Mar 2007 11:12:41 -0700 (PDT)
-Received: by 10.64.10.2 with SMTP id 2mr11336782qbj.1174846361440;
-	Sun, 25 Mar 2007 11:12:41 -0700 (PDT)
-Received: from cube ( [82.193.98.7])
-	by mx.google.com with ESMTP id r15sm9873081nza.2007.03.25.11.12.39;
-	Sun, 25 Mar 2007 11:12:40 -0700 (PDT)
-Date: Sun, 25 Mar 2007 21:12:38 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1848684762.20070325211238@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <7c8eac300703130353t4982c66bua4f24205e4e651d6@mail.gmail.com>
-References: <274295013.20070311040657@gmail.com>
-	<7c8eac300703110856v1e825559x8f89abd79d17fed8@mail.gmail.com>
-	<665468377.20070311213332@gmail.com>
-	<7c8eac300703130353t4982c66bua4f24205e4e651d6@mail.gmail.com>
-MIME-Version: 1.0
-Subject: Re: [RFC] Allow to limit generated binary locales to predefined list
+	(envelope-from <rpurdie@rpsys.net>) id 1HVlVp-0003r8-Ie
+	for openembedded-devel@openembedded.org; Mon, 26 Mar 2007 11:29:13 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2Q9TCN1028587;
+	Mon, 26 Mar 2007 10:29:12 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 28002-07; Mon, 26 Mar 2007 10:29:09 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2Q9T7Wr028573
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Mon, 26 Mar 2007 10:29:07 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <c384c5ea0703240813w6e575805n2471bd1d6aa2614a@mail.gmail.com>
+References: <c384c5ea0703240813w6e575805n2471bd1d6aa2614a@mail.gmail.com>
+Date: Mon, 26 Mar 2007 10:29:06 +0100
+Message-Id: <1174901346.5805.6.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: False handling of image types (pls check assumptions of	your distro)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,28 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Mar 2007 18:12:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 26 Mar 2007 09:29:13 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello,
+On Sat, 2007-03-24 at 16:13 +0100, Leon Woestenberg wrote:
+> classes/image.bbclass:96:               rm -f
+> ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.*
+> classes/image.bbclass:97:               ln -s
+> ${IMAGE_NAME}.rootfs.$type
+> ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.$type
+> 
+> The second regression seems that the IMAGE_CMD_tar now compresses into
+> .tar.bz2.
+> 
+> conf/bitbake.conf:201:IMAGE_CMD_tar
+> 
+> However, we have the seperate "tar.bz2" type for that.
 
->  Binary locale generation for the entire locate set provided by GLIBC
-> takes noticeable amount of time (several hours).
-[...]
->   The solution would be to allow to optionally constrain set of
-> generated locales to a predefined list.
+I agree it should generate an uncompressed tarball though and poky
+already has that change. I'd support changing it in OE.dev, maybe after
+vetting the machine.conf files to correct any users of tar to one of the
+compressed types.
 
-> GLIBC_GENERATE_LOCALES = "en_GB.UTF-8 de_DE.UTF-8"
+Just for future reference, regression implies that it once worked which
+it didn't so its just a plain bug.
 
-  Committed.
+Cheers,
 
-
-[]
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Richard
 
 
 
