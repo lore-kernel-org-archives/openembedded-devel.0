@@ -1,20 +1,23 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [89.149.220.217] (helo=mail.kynisk.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HW9QI-0007ur-Ri
-	for openembedded-devel@openembedded.org; Tue, 27 Mar 2007 13:01:07 +0200
-Received: (qmail 3755 invoked by uid 813007); 27 Mar 2007 11:01:05 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 27 Mar 2007 11:01:05 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+	(envelope-from <repvik@kynisk.com>) id 1HW9co-00089r-HC
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Mar 2007 13:14:02 +0200
+Received: from [192.168.1.23] (54.84-48-194.nextgentel.com [84.48.194.54])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.kynisk.com (Postfix) with ESMTP id 4ADBA1BF29C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Mar 2007 13:14:04 +0200 (CEST)
+From: =?utf-8?q?=C3=98yvind_Repvik?= <repvik@kynisk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Mar 2007 13:00:58 +0200
-User-Agent: KMail/1.9.6
+Date: Tue, 27 Mar 2007 13:13:57 +0200
+User-Agent: KMail/1.9.5
 References: <4608D065.3060205@whitby.id.au>
-In-Reply-To: <4608D065.3060205@whitby.id.au>
+	<200703271300.59292.openembedded@hrw.one.pl>
+In-Reply-To: <200703271300.59292.openembedded@hrw.one.pl>
 MIME-Version: 1.0
-Message-Id: <200703271300.59292.openembedded@hrw.one.pl>
+Message-Id: <200703271313.57267.repvik@kynisk.com>
 Subject: Re: Alternatives handling for cpio (cpio vs busybox)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,26 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2007 11:01:11 -0000
+X-List-Received-Date: Tue, 27 Mar 2007 11:14:03 -0000
 Content-Type: text/plain;
-  charset="iso-8859-2"
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Dnia wtorek, 27 marca 2007, Rod Whitby napisa=B3:
+On Tuesday 27 March 2007 13:00, Marcin Juszkiewicz wrote:
+> Dnia wtorek, 27 marca 2007, Rod Whitby napisa=C5=82:
+> > I propose to change the cpio package such that it installs cpio in /bin
+> > instead of /usr/bin, and then uses update-alternatives to select it
+> > ahead of busybox.
+>
+> +1 from me - Debian store cpio in /bin/
 
-> I propose to change the cpio package such that it installs cpio in /bin
-> instead of /usr/bin, and then uses update-alternatives to select it
-> ahead of busybox.
+Go from me too.
 
-+1 from me - Debian store cpio in /bin/
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-      I don't know. I don't care. And it doesn't make any difference.
-
-
+=C3=98yvind
 
 
