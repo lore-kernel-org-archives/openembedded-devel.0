@@ -1,24 +1,21 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+Received: from [66.249.82.236] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1HW9oE-0003ab-06
+	(envelope-from <zhangwenbin@gmail.com>) id 1HWCR9-0004qa-79
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Mar 2007 13:25:50 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1HWA4n-00074O-U9
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Mar 2007 13:42:57 +0200
-Message-ID: <4608FF2B.5020003@kernelconcepts.de>
-Date: Tue, 27 Mar 2007 13:25:31 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-MIME-Version: 1.0
+	Tue, 27 Mar 2007 16:14:11 +0200
+Received: by wx-out-0506.google.com with SMTP id t14so2411304wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Mar 2007 07:14:10 -0700 (PDT)
+Received: by 10.90.87.5 with SMTP id k5mr8081182agb.1175004849945;
+	Tue, 27 Mar 2007 07:14:09 -0700 (PDT)
+Received: by 10.90.31.20 with HTTP; Tue, 27 Mar 2007 07:14:09 -0700 (PDT)
+Message-ID: <78671ac40703270714l208722b5pf370e3c630899cf9@mail.gmail.com>
+Date: Tue, 27 Mar 2007 10:14:09 -0400
+From: "Wenbin Zhang" <zhangwenbin@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1848684762.20070325211238@gmail.com>	<1174943520.1151@gatekeeper.stellarwerx.com>
-	<1109720343.20070327115021@gmail.com>
-In-Reply-To: <1109720343.20070327115021@gmail.com>
-X-Enigmail-Version: 0.94.0.0
-Subject: Re: [RFC] Allow to limit generated binary locales topredefined list
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Openembedded compile problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,30 +29,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2007 11:25:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Mar 2007 14:14:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+Hello,
 
-Paul Sokolovsky schrieb:
->   No, just to read docs/description for things you want to use
-> carefully. In this respect, I made sure that it can be read in
-> several places:
+I am using openembedded to compile OPIE for Arm phone(Moto E680i)
+http://www.openembedded.org/wiki/GettingStarted
+but get below error while I was using bitbake:
 
-wouldn't it be nicer for our users to provide a tiny little hint about what to
-search for instead of listing multiple places where to search for it? :-)
+#bitbake opie-image
 
-Greetings
+The output is:
 
-Florian
+NOTE: build 200703270602: started
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+OE Build Configuration:
+BB_VERSION     = "1.6.7"
+OE_REVISION    = "3948893d2ed26ea5eca6f888be77701718112c87"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "a780"
+DISTRO         = "angstrom"
+DISTRO_VERSION = ""
+TARGET_FPU     = ""
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+NOTE: package binutils-cross-2.17.50.0.12 : started
+NOTE: package binutils-cross-2.17.50.0.12-r0: task do_populate_staging:
+started
+ERROR: function do_stage failed
+ERROR: log data follows (/stuff/tmp/work/binutils- cross-2.17.50.0.12-r0
+/temp/log.do_stage.3118)
+| NOTE: make configure-build-libiberty all install
+| make: *** No rule to make target `configure-build-libiberty'.  Stop.
+| FATAL: oe_runmake failed
+NOTE: Task failed: /stuff/tmp/work/binutils-cross-2.17.50.0.12-r0
+/temp/log.do_stage.3118
+NOTE: package binutils-cross-2.17.50.0.12-r0: task do_populate_staging:
+failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package binutils-cross-2.17.50.0.12 : failed
+ERROR: Build of opie-image failed
 
+Anybody know this problem?
+
+Thanks,
+Wenbin
 
