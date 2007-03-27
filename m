@@ -1,27 +1,20 @@
-Received: from [64.233.162.227] (helo=nz-out-0506.google.com)
+Received: from [209.85.132.244] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HW7Np-0006w8-PR
+	(envelope-from <arkaitzj@gmail.com>) id 1HW87g-0002rA-V3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Mar 2007 10:50:26 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so1478317nzf
+	Tue, 27 Mar 2007 11:37:49 +0200
+Received: by an-out-0708.google.com with SMTP id c5so2094890anc
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2007 01:50:24 -0700 (PDT)
-Received: by 10.65.103.17 with SMTP id f17mr15057797qbm.1174985423949;
-	Tue, 27 Mar 2007 01:50:23 -0700 (PDT)
-Received: from cube ( [82.193.98.7])
-	by mx.google.com with ESMTP id 36sm12561297nzk.2007.03.27.01.50.21;
-	Tue, 27 Mar 2007 01:50:22 -0700 (PDT)
-Date: Tue, 27 Mar 2007 11:50:21 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1109720343.20070327115021@gmail.com>
-To: "Mark Gollahon" <golly@stellarwerx.com>
-In-Reply-To: <1174943520.1151@gatekeeper.stellarwerx.com>
-References: <1848684762.20070325211238@gmail.com>
-	<1174943520.1151@gatekeeper.stellarwerx.com>
+	Tue, 27 Mar 2007 02:37:48 -0700 (PDT)
+Received: by 10.100.112.19 with SMTP id k19mr5705646anc.1174988267388;
+	Tue, 27 Mar 2007 02:37:47 -0700 (PDT)
+Received: by 10.100.153.4 with HTTP; Tue, 27 Mar 2007 02:37:47 -0700 (PDT)
+Message-ID: <7ceeaed30703270237u2affdaf5vdf579e5a769525cb@mail.gmail.com>
+Date: Tue, 27 Mar 2007 11:37:47 +0200
+From: Arkaitz <arkaitzj@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] Allow to limit generated binary locales topredefined list
+Subject: A patch is needed for uclibc distros based on slugos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,73 +28,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2007 08:50:32 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 27 Mar 2007 09:37:50 -0000
+X-Groupsio-MsgNum: 1671
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_2730_32938054.1174988267353"
+
+------=_Part_2730_32938054.1174988267353
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Mark,
+Hi,
+The rng-tools package, added to task-slugos.bb file some time ago,
+broke the uclibc distros image compilation because uclibc lacks argp
+support[1], and it is not supposed to have it.
+It is marked also as not compilable with uclibc in
+packages/meta/slugos-packages.bb.
+This patch avoids rng-tools compilation for distros with TARGET_OS=linux-uclibc.
+Am I wrong?
+Thanks
 
-Tuesday, March 27, 2007, 12:12:00 AM, you wrote:
-
-> Paul:
-
-> This doesn't seem to be working for me.  I've tried:
-
-> GLIBC_GENERATE_LOCALES = "en_US en_US.UTF-8"
-
-> GLIBC_GENERATE_LOCALES = "en_US,ISO-8859-1 en_US.UTF-8,UTF-8"
-
-> GLIBC_GENERATE_LOCALES = "en_US ISO-8859-1,en_US.UTF-8 UTF-8"
-
-[]
-
-> Do I need to use bitbake 1.8.x to get this to work??
-
-  No, just to read docs/description for things you want to use
-carefully. In this respect, I made sure that it can be read in
-several places:
-
-1. In this thread, and even in message you quoted below.
-2. In the original ticket, #1966.
-3. In the commit message.
-4. And of course in conf/local.conf.sample in OE tree.
-
-
-> Regards,
-> -Mark Gollahon
-
-
-> Paul Sokolovsky wrote ..
->> Hello,
->> 
->> >  Binary locale generation for the entire locate set provided by GLIBC
->> > takes noticeable amount of time (several hours).
->> [...]
->> >   The solution would be to allow to optionally constrain set of
->> > generated locales to a predefined list.
->> 
->> > GLIBC_GENERATE_LOCALES = "en_GB.UTF-8 de_DE.UTF-8"
->> 
->>   Committed.
->> 
->> 
->> []
->> 
->> -- 
->> Best regards,
->>  Paul                            mailto:pmiscml@gmail.com
->> 
->> 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
-
+[1]http://purl.rikers.org/%23uclibc/20050304.html.gz
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Arkaitz
 
+------=_Part_2730_32938054.1174988267353
+Content-Type: application/octet-stream; name=rngtools.patch
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_ezs58tyj
+Content-Disposition: attachment; filename="rngtools.patch"
 
+LS0tIHBhY2thZ2VzL3Rhc2tzL3Rhc2stc2x1Z29zLmJiLm9yaWcJMjAwNy0wMy0yNyAxMToyNDoy
+MS4wMDAwMDAwMDAgKzAyMDAKKysrIHBhY2thZ2VzL3Rhc2tzL3Rhc2stc2x1Z29zLmJiCTIwMDct
+MDMtMjcgMTE6Mjk6MzguMDAwMDAwMDAwICswMjAwCkBAIC02OSw5ICs2OSwxMiBAQAogIgogCiAj
+IEFkZCBkYWVtb24gcmVxdWlyZWQgZm9yIEhXIFJORyBzdXBwb3J0Ci1TTFVHT1NfU1RBTkRBUkRf
+UlJFQ09NTUVORFMgKz0gIlwKK1NMVUdPU19STkdfVE9PTFNfUEFDS0FHRSA9ICJcCiBybmctdG9v
+bHMgXAogIgorU0xVR09TX1JOR19UT09MU19QQUNLQUdFX2xpbnV4LXVjbGliYyA9ICIiCisKK1NM
+VUdPU19TVEFOREFSRF9SUkVDT01NRU5EUyArPSAiJHtTTFVHT1NfUk5HX1RPT0xTX1BBQ0tBR0V9
+IgogCiAjIEFkZCBtb2R1bGVzIHJlcXVpcmVkIGZvciB1c2Igc3VwcG9ydAogU0xVR09TX1NUQU5E
+QVJEX1JSRUNPTU1FTkRTICs9ICJcCg==
 
+------=_Part_2730_32938054.1174988267353--
