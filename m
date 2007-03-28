@@ -1,34 +1,30 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HWdcI-0002hO-Fo
-	for openembedded-devel@openembedded.org; Wed, 28 Mar 2007 21:15:30 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1HWePz-0007Fs-Ut
+	for openembedded-devel@openembedded.org; Wed, 28 Mar 2007 22:06:52 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2SJFN3s003981;
-	Wed, 28 Mar 2007 20:15:23 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2SK6pUn008590
+	for <openembedded-devel@openembedded.org>;
+	Wed, 28 Mar 2007 21:06:51 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 03912-01; Wed, 28 Mar 2007 20:15:20 +0100 (BST)
+	id 08165-04 for <openembedded-devel@openembedded.org>;
+	Wed, 28 Mar 2007 21:06:48 +0100 (BST)
 Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2SJFIgo003971
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Wed, 28 Mar 2007 20:15:18 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2SK6lQB008581
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 28 Mar 2007 21:06:47 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
-To: Tim Bird <tim.bird@am.sony.com>
-In-Reply-To: <460AABD1.4080409@am.sony.com>
-References: <20070320033120.GA8678@thegnar.org>
-	<1174574086.5949.32.camel@localhost.localdomain>
-	<20070323043126.GA893@thegnar.org>
-	<1174641616.5813.9.camel@localhost.localdomain>
-	<460AABD1.4080409@am.sony.com>
-Date: Wed, 28 Mar 2007 20:15:18 +0100
-Message-Id: <1175109319.5829.30.camel@localhost.localdomain>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Wed, 28 Mar 2007 21:06:48 +0100
+Message-Id: <1175112408.5829.54.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.6.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@openembedded.org
-Subject: Re: bitbake and OE opperation
+Subject: Interactive Task handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,95 +38,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2007 19:15:31 -0000
+X-List-Received-Date: Wed, 28 Mar 2007 20:06:55 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2007-03-28 at 10:54 -0700, Tim Bird wrote:
-> Richard Purdie wrote:
-> >> What triggers do_configure to be executed and when?
-> > 
-> > Read base.bbclass. It sets up a number of tasks and a default task,
-> > "build". You'd add configure after patch, before compile. compile would
-> > be before build. "bitbake somefile" would cause the default task (and
-> > its dependent tasks) to be executed. You could also do "bitbake somefile
-> > -c configure" to specifically execute the configure task.
-> 
-> I'm sorry, but I don't understand most of that paragraph.
-> 
-> I've read the manuals - maybe I missed it, but I have the same question.
-> 
-> In <oe>/classes/base.bbclass I see:
-> 
-> BB_DEFAULT_TASK = "build"
-> 
-> at the top of the file.
-> 
-> There's no "def build()" or "def do_build()"
-> There are the following lines - I don't know if they're related or not:
-> 
-> addtask build after do_populate_staging
-> do_build = ""
-> do_build[func] = "1"
+A while back I made a proposal for interactive task handling in future
+incarnations of bitbake. The problem was basically that with
+multithreading, having one task owning and having access to the terminal
+becomes problematic. My proposal was to lever the power of X and/or
+utils like screen.
 
-These are very much related, it defines that there is a build task (with
-an associated function which defaults to empty). It says this build task
-depends on a "populate_staging" task.
+There are currently two areas where interactive tasks are used in OE:
 
-> In <bitbake>/classes/base.bbclass I see:
-> 
-> addtask build
-> do_build[dirs] = "${TOPDIR}"
-> do_build[nostamp] = "1"
-> python base_do_build () {
->         bb.note("The included, default BB base.bbclass does not define a useful default task.")
->         bb.note("Try running the 'listtasks' task against a .bb to see what tasks are defined.")
-> }
+1. The "user" patch resolver
+2. The devshell task
 
-Please ignore <bitbake>/classes/base.bbclass, they're examples in
-bitbake and the files in OE take precedence.
+As mentioned previously, interactive tasks are always going to be
+"extras" to bitbake to aid development and unattended builds of OE will
+continue to be possible.
 
-> Maybe I'm thinking procedurally, and this is all declarative, but where
-> the heck are the actual statements executed during a "build"?
+I've made a patch which shows roughly what I'm proposing and converts
+the above two users:
 
-Nothing is executed by "build" itself, the key is in the dependency on
-"populate_staging".
+http://www.rpsys.net/openzaurus/temp/oe-terminal-r3.patch
+(the patch is against poky but the same principles apply for OE.dev)
 
-> Back to Mark's point, how are the stages "fetch", "compile", "install"
-> known to the system, and sequenced.  Are these hardcoded in bitbake?
-> I'm guessing not, from the answer above and the structure of the
-> "addtask <foo> before|after <bar>" statements.  But I can't find
-> anywhere in the bbclass files where this is expressed.
-> 
-> Please help me understand this.
+The user sets TERMCMD and TERMCMDRUN to their custom command or one of
+the provided standard ones in their local.conf. There are examples there
+which work with screen, gnome-terminal, kconsole and xterm.
 
-They're not hardcoded, the sequence is made through the definition of
-tasks, each of which depend on each other. Very roughly:
+devshell simply fires up whatever is in the TERMCMD variable.  The patch
+resolver is more complex since we need to show the output of the failed
+patch so TERMCMDRUN is similar but allows you to specify an rcfile
+containing commands to run in the terminal first.
 
-build depends on populate_staging
-populate_staging depends on package_write
-package_write depends on package
-package depends on install
-install depends on compile
-compile depends on configure
-configure depends on patch
-patch depends on unpack
-unpack depends on fetch
+The big advantage of this is that it scales to the case where client
+(UI) and server are separate machines, all that is needed is a valid
+setting for the DISPLAY variable. No invention of protocols is needed
+for the tricky piping I/O over some transport and any X application will
+work (kdiff3 for patch resolution springs to mind).
 
-This is all in base.bbclass, albeit rather difficult to isolate on its
-own. Tasks like fetch, configure, compile etc. all have functions
-associated with them and build is effectively a combination of all of
-these.
+The disadvantage is that it will cause "random" windows to appear which
+may cause issues with UI integration. I suspect longer term, we can
+write a simple external program to handle this and connect to the UI at
+least for the terminals case so I'm not unduly concerned.
 
-Incidentally, don't be put off by the "do_" prefix, this is just to
-highlight things as tasks when their usage might otherwise be
-ambiguous. 
+I'm also aware the screen command triggers a new screen session rather
+than joining an existing one. I couldn't find a way to make the screen
+command block on command completion without doing that. Any pointers
+from screen gurus welcome :)
 
-Does that make it clearer?
+The above patch makes interactive tasks with bitbake 1.8.x and trunk
+usable again so I plan to check something like this patch in unless
+anyone objects or can see a better way to handle things.
 
-Regards,
+Cheers,
 
 Richard
+
 
 
 
