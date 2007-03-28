@@ -1,23 +1,31 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <zecke@selfish.org>) id 1HWRQm-0002je-P7
+	(envelope-from <mickey@vanille-media.de>) id 1HWUl7-0000MZ-Dh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2007 08:14:48 +0200
-Received: from [91.64.161.147] (helo=[192.168.1.100])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1HWRQm-0006rq-5c
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2007 08:14:48 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <46097B18.3050901@trolltech.com>
+	Wed, 28 Mar 2007 11:48:01 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id E9D8128C013; Wed, 28 Mar 2007 11:41:07 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180136146.adsl.alicedsl.de [85.180.136.146])
+	by srv043.dedi23.de (Postfix) with ESMTP id 95D7628C011;
+	Wed, 28 Mar 2007 11:41:07 +0200 (CEST)
+Date: Wed, 28 Mar 2007 11:48:02 +0200
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.98.4) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <13210466406.20070328114802@vanille-media.de>
+To: Lorn Potter <lpotter@trolltech.com>
+In-Reply-To: <4609B171.9040000@trolltech.com>
 References: <46097B18.3050901@trolltech.com>
-Message-Id: <20B302A0-2FFD-4213-BE67-25FDFD6D6215@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Wed, 28 Mar 2007 08:14:42 +0200
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 91.64.161.147
+	<200703272231.55842.openembedded@hrw.one.pl>
+	<4609B171.9040000@trolltech.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: org.openembedded.dev fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,20 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2007 06:14:49 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed
+X-List-Received-Date: Wed, 28 Mar 2007 09:48:01 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
+Lorn Potter wrote:
+>> For future: please update first to check does work was done and send 
+>> updates as 'diff -up' patches (or "mtn diff").
 
-Am 27.03.2007 um 22:14 schrieb Lorn Potter:
+> ummm,.. I did update. Don't always assume something you do not know.
 
-> * file needs a version update to 4.19 (4.17 doesn't exist)
-> * tslib needs url update and svn.bb as well
+> Not sure why it isn't updating locally.
 
-Hi Lorn,
+Well, Marcin has a point here, newcomers to Monotone often forget that
+Monotone needs two steps to update, which are:
 
-welcome :)
+mtn pull && mtn update
 
-z.
+as opposed to just one command for svn and cvs.
+
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
