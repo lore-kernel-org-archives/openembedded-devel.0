@@ -1,29 +1,23 @@
-Received: from [62.70.27.18] (helo=esparsett.troll.no)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <lpotter@trolltech.com>) id 1HWLgA-0001g5-9S
+	(envelope-from <zecke@selfish.org>) id 1HWRQm-0002je-P7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2007 02:06:18 +0200
-Received: from esparsett.troll.no (localhost [127.0.0.1])
-	by localhost (Postfix) with SMTP id C764F60061
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2007 02:06:14 +0200 (CEST)
-Received: from mail.trolltech.com.au (unknown [10.1.1.12])
-	by esparsett.troll.no (Postfix) with ESMTP id DC14060032
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2007 02:06:12 +0200 (CEST)
-Received: from [10.1.1.160] (frosty.trolltech.com.au [10.1.1.160])
-	by mail.trolltech.com.au (Postfix) with ESMTP id 745C72FC42B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2007 10:06:11 +1000 (EST)
-Message-ID: <4609B171.9040000@trolltech.com>
-Date: Wed, 28 Mar 2007 10:06:09 +1000
-From: Lorn Potter <lpotter@trolltech.com>
-User-Agent: Thunderbird 1.5.0.9 (Windows/20061207)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Wed, 28 Mar 2007 08:14:48 +0200
+Received: from [91.64.161.147] (helo=[192.168.1.100])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1HWRQm-0006rq-5c
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Mar 2007 08:14:48 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <46097B18.3050901@trolltech.com>
 References: <46097B18.3050901@trolltech.com>
-	<200703272231.55842.openembedded@hrw.one.pl>
-In-Reply-To: <200703272231.55842.openembedded@hrw.one.pl>
+Message-Id: <20B302A0-2FFD-4213-BE67-25FDFD6D6215@selfish.org>
+From: Holger Freyther <zecke@selfish.org>
+Date: Wed, 28 Mar 2007 08:14:42 +0200
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.752.3)
+X-Broken-Reverse-DNS: no host name found for IP address 91.64.161.147
 Subject: Re: org.openembedded.dev fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,16 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2007 00:06:18 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
+X-List-Received-Date: Wed, 28 Mar 2007 06:14:49 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed
 Content-Transfer-Encoding: 7bit
 
-> For future: please update first to check does work was done and send 
-> updates as 'diff -up' patches (or "mtn diff").
 
-ummm,.. I did update. Don't always assume something you do not know.
+Am 27.03.2007 um 22:14 schrieb Lorn Potter:
 
-Not sure why it isn't updating locally.
+> * file needs a version update to 4.19 (4.17 doesn't exist)
+> * tslib needs url update and svn.bb as well
 
+Hi Lorn,
+
+welcome :)
+
+z.
 
 
