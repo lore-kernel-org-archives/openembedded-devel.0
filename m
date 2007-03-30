@@ -1,25 +1,25 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HXD0F-0000JS-Do
-	for openembedded-devel@openembedded.org; Fri, 30 Mar 2007 11:02:35 +0200
-Received: from [130.89.137.166] (wlan137166.mobiel.utwente.nl [130.89.137.166])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l2U92ULr012417 for <openembedded-devel@openembedded.org>;
-	Fri, 30 Mar 2007 11:02:30 +0200
-Message-ID: <460CD224.7050005@dominion.kabel.utwente.nl>
-Date: Fri, 30 Mar 2007 11:02:28 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <pmiscml@gmail.com>) id 1HXD9h-0000aT-Rr
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Mar 2007 11:12:22 +0200
+Received: by nz-out-0506.google.com with SMTP id m22so330226nzf
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Mar 2007 02:12:20 -0700 (PDT)
+Received: by 10.64.156.3 with SMTP id d3mr3496744qbe.1175245939937;
+	Fri, 30 Mar 2007 02:12:19 -0700 (PDT)
+Received: from cube ( [77.123.185.1])
+	by mx.google.com with ESMTP id 36sm2590214nzk.2007.03.30.02.12.19;
+	Fri, 30 Mar 2007 02:12:19 -0700 (PDT)
+Date: Fri, 30 Mar 2007 12:12:21 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <7207965.20070330121221@gmail.com>
+To: Koen Kooi <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <460CD224.7050005@dominion.kabel.utwente.nl>
 References: <18310385162.20070330115222@gmail.com>
-In-Reply-To: <18310385162.20070330115222@gmail.com>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<460CD224.7050005@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
 Subject: Re: [RFC] Solving ipkg-utils issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,45 +34,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2007 09:02:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 30 Mar 2007 09:12:25 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Paul Sokolovsky schreef:
-> Hello openembedded-devel,
-> 
->   For quite some time bugs in ipkg-utils package (mostly in
-> ipkg-make-index tool) plagued image creation process in OE. Many of
-> them are known to old-time developers, and being (manually) worked
-> around. I was working on resolving them for some time, and guess now
-> finally have both clear picture of the issues and their interaction
-> with each other, and fixes for them. So, I would like to push these
-> fixes to mainline, and am opening this thread for review of
-> them, as well as to collect any other concerns about ipkg-utils.
-> 
->   In my list, there're 3 major issues:
-> 
-> 1. Broken version comparison logic in ipkg-utils (note that this is
-> exactly ipkg-utils issues, nether bitbake nor ipkg is affected).
-> 
-> 2. Inability of ipkg-make-index to detect packages which were updated,
-> while version stays the same.
+Friday, March 30, 2007, 12:02:28 PM, you wrote:
 
-It's hard to distinguish between 'update' and 'data corruption' without knowing if someone
-rebuilt the package.
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
-regards,
+> Paul Sokolovsky schreef:
+>> Hello openembedded-devel,
+>> 
+>>   For quite some time bugs in ipkg-utils package (mostly in
+>> ipkg-make-index tool) plagued image creation process in OE. Many of
+>> them are known to old-time developers, and being (manually) worked
+>> around. I was working on resolving them for some time, and guess now
+>> finally have both clear picture of the issues and their interaction
+>> with each other, and fixes for them. So, I would like to push these
+>> fixes to mainline, and am opening this thread for review of
+>> them, as well as to collect any other concerns about ipkg-utils.
+>> 
+>>   In my list, there're 3 major issues:
+>> 
+>> 1. Broken version comparison logic in ipkg-utils (note that this is
+>> exactly ipkg-utils issues, nether bitbake nor ipkg is affected).
+>> 
+>> 2. Inability of ipkg-make-index to detect packages which were updated,
+>> while version stays the same.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> It's hard to distinguish between 'update' and 'data corruption' without knowing if someone
+> rebuilt the package.
 
-iD8DBQFGDNIkMkyGM64RGpERAhhLAKCN5l2e+MELHVIBsMfLNujKTVM3hwCeJLzu
-M5vId3I51zd6AaX98qwWAmI=
-=/GV6
------END PGP SIGNATURE-----
+  Yeah, so I followed suggestion to track ipk timestamps. But we
+indeed have overloaded Packages files, and this timestamp is clearly
+ipkg-make-index internal thing, so I did it a-la Packages.files,
+introduced Packages.timestamps for that.
+
+  But this will be second patch, and I'd like to have it step by step,
+with interim testing, because interaction of issues can be indeed pretty bad.
+
+> regards,
+
+> Koen
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
