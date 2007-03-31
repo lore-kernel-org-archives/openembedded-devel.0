@@ -1,26 +1,23 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HXb2S-0002Kx-6o
-	for openembedded-devel@openembedded.org; Sat, 31 Mar 2007 12:42:28 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l2VAgOox000693 for <openembedded-devel@openembedded.org>;
-	Sat, 31 Mar 2007 12:42:25 +0200
-Message-ID: <460E3B0E.7040307@dominion.kabel.utwente.nl>
-Date: Sat, 31 Mar 2007 12:42:22 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <74d0deb30703300644n6462aa90kaaa06f199c3c0483@mail.gmail.com>
-In-Reply-To: <74d0deb30703300644n6462aa90kaaa06f199c3c0483@mail.gmail.com>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: X11R7.2 / epoch support
+	(envelope-from <zecke@selfish.org>) id 1HXlB8-0005Rx-L6
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Mar 2007 23:32:06 +0200
+Received: from [91.64.161.147] (helo=[192.168.10.100])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1HXlB8-0001lm-62
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Mar 2007 23:32:06 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <DF84F2F0-B3CE-454C-A7DE-7AFED21F57D2@selfish.org>
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@lists.openembedded.org>
+From: Holger Freyther <zecke@selfish.org>
+Date: Sat, 31 Mar 2007 23:32:01 +0200
+X-Mailer: Apple Mail (2.752.3)
+X-Broken-Reverse-DNS: no host name found for IP address 91.64.161.147
+Subject: Verifying the SHA256 and MD5Sum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,33 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Mar 2007 10:42:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 31 Mar 2007 21:32:07 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-pHilipp Zabel schreef:
-> Hi openembedded-devel,
-> 
-> Yesterday we added the Xorg X11R7.2 release to OpenEmbedded. It is
-> noteworthy that the packages make use of bitbake/OE's new epoch
-> support. They drop the temporary X11R7.x_-prefix from their PV version
-> and instead set the epoch to PE = "1".
+as of prior discussion I have committed a patch to base.bbclass to  
+verify the SHA256 and MD5 of files. In contrast to the md5sum  
+attribute I/we have decided to use an external file to keep track of  
+the values. This allows more easy updating and more readable SRC_URI  
+lines.
 
-With bitbake trunk, angstrom-2007.1 and various devices I haven't noticed any bugs with
-epoch handling (buildtime and runtime) yet.
+So the filename is conf/checksums.ini and follows the BBPATH like  
+configuration files and it is using the INI file format known from  
+KDE (or hopefully not from Windows)
 
-regards,
+[PN-PV-URI] or [PN-URI] are know sections/groups. and these contain  
+two keys "md5" and "sha256" to store the sums.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+A small example showing the file-native and ftp://... as the SRC_URI.
 
-iD8DBQFGDjsOMkyGM64RGpERAsBXAJ9amxuQM5VEitlG+z3UxBcdOlqeGQCgs/QU
-u6gO4kRsdsEqfHnicFT6CfE=
-=mEek
------END PGP SIGNATURE-----
+[file-native-4.20-ftp://ftp.astron.com/pub/file/file-4.20.tar.gz]
+md5=402bdb26356791bd5d277099adacc006
+sha256=c0810fb3ddb6cb73c9ff045965e542af6e3eaa7f2995b3037181766d26d5e6e7
+
+
+The only downside is with -native packages as one need to list the  
+files twice. So do you have comments? Do we want to go this route? Do  
+we want to make it mandantory that all http,ftp file downloads have  
+the md5 sum attached?
+
+
+kind regards
+	h.
 
 
