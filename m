@@ -1,23 +1,28 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <zecke@selfish.org>) id 1HXlB8-0005Rx-L6
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Mar 2007 23:32:06 +0200
-Received: from [91.64.161.147] (helo=[192.168.10.100])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1HXlB8-0001lm-62
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Mar 2007 23:32:06 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-Message-Id: <DF84F2F0-B3CE-454C-A7DE-7AFED21F57D2@selfish.org>
-To: Using the OpenEmbedded metadata to build Linux Distributions
-	<openembedded-devel@lists.openembedded.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Sat, 31 Mar 2007 23:32:01 +0200
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 91.64.161.147
-Subject: Verifying the SHA256 and MD5Sum
+	(envelope-from <rpurdie@rpsys.net>) id 1HXmwt-0006J5-BX
+	for openembedded-devel@openembedded.org; Sun, 01 Apr 2007 01:25:31 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2VNPUbo013536;
+	Sun, 1 Apr 2007 00:25:30 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 12850-09; Sun,  1 Apr 2007 00:25:27 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l2VNPK8V013517
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Sun, 1 Apr 2007 00:25:21 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Sun, 01 Apr 2007 00:25:22 +0100
+Message-Id: <1175383522.5852.21.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Fixing OE.dev dependency issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,39 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Mar 2007 21:32:07 -0000
+X-List-Received-Date: Sat, 31 Mar 2007 23:25:31 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
-Hi,
+There is a bitbake 1.8.x bug I've kind of been avoiding for a while. The
+classic case is where a multithreaded bitbake tries to run a do_patch
+task before do_populate_staging for quilt-native has run. This
+highlights a gaping hole in our dependency information and worse still,
+we have no mechanism to make bitbake aware of this dependency. There are
+also more subtle bugs too.
 
-as of prior discussion I have committed a patch to base.bbclass to  
-verify the SHA256 and MD5 of files. In contrast to the md5sum  
-attribute I/we have decided to use an external file to keep track of  
-the values. This allows more easy updating and more readable SRC_URI  
-lines.
+I'm proposing we add the syntax:
 
-So the filename is conf/checksums.ini and follows the BBPATH like  
-configuration files and it is using the INI file format known from  
-KDE (or hopefully not from Windows)
+do_patch[depends] = "quilt-native:populate_staging" 
 
-[PN-PV-URI] or [PN-URI] are know sections/groups. and these contain  
-two keys "md5" and "sha256" to store the sums.
+to handle needs like this. Experiments on my local tree suggest we need
+the following patch to generate the correct dependencies:
 
-A small example showing the file-native and ftp://... as the SRC_URI.
+http://www.rpsys.net/openzaurus/temp/oe-depends-fixes.patch
 
-[file-native-4.20-ftp://ftp.astron.com/pub/file/file-4.20.tar.gz]
-md5=402bdb26356791bd5d277099adacc006
-sha256=c0810fb3ddb6cb73c9ff045965e542af6e3eaa7f2995b3037181766d26d5e6e7
+but of course once we do this, bitbake 1.6 is no longer going to work
+with the metadata since this change is not backwards compatible.
 
+I'm proposing to release bitbake 1.8.2 with code to handle the above,
+and epoch handling code in the very near future. We will then have to
+aim to make bitbake 1.8.2 the minimum bitbake version for .dev before
+the above fix can be checked in and epoch packages can be more
+widely/easily used. Does anyone have any objections to a move to bitbake
+1.8 in due course? What timescale would people class as acceptable?
 
-The only downside is with -native packages as one need to list the  
-files twice. So do you have comments? Do we want to go this route? Do  
-we want to make it mandantory that all http,ftp file downloads have  
-the md5 sum attached?
+Cheers,
 
+Richard
 
-kind regards
-	h.
 
 
