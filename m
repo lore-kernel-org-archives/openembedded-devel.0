@@ -1,24 +1,23 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [89.149.220.217] (helo=mail.kynisk.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HXuW8-0000os-71
-	for openembedded-devel@openembedded.org; Sun, 01 Apr 2007 09:30:25 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l317UHox011802; Sun, 1 Apr 2007 09:30:18 +0200
-Message-ID: <460F5F87.3060403@dominion.kabel.utwente.nl>
-Date: Sun, 01 Apr 2007 09:30:15 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <repvik@kynisk.com>) id 1HXwqs-00056Z-PK
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 01 Apr 2007 11:59:58 +0200
+Received: from [192.168.1.23] (44.84-48-58.nextgentel.com [84.48.58.44])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.kynisk.com (Postfix) with ESMTP id D793B1BF267
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  1 Apr 2007 12:00:00 +0200 (CEST)
+From: =?iso-8859-1?q?=D8yvind_Repvik?= <repvik@kynisk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 1 Apr 2007 11:59:51 +0200
+User-Agent: KMail/1.9.5
 References: <E1HXnn8-0007Dx-JK@linuxtogo.org>
-In-Reply-To: <E1HXnn8-0007Dx-JK@linuxtogo.org>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<460F5F87.3060403@dominion.kabel.utwente.nl>
+In-Reply-To: <460F5F87.3060403@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200704011159.52186.repvik@kynisk.com>
 Subject: Re: [oe-commits] org.oe.dev prismstumbler: add 0.7.4pre1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,34 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Apr 2007 07:30:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 01 Apr 2007 09:59:58 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sunday 01 April 2007 09:30, Koen Kooi wrote:
+> florian commit schreef:
+> > prismstumbler: add 0.7.4pre1
+> >
+> >
+> > packages/prismstumbler/prismstumbler_0.7.4pre1.bb
+>
+> That is against our versioning policy, this way you can't upgrade to 0.7.4
+> when it gets released[1]. Use _0.7.3+0.7.4pre1 instead.
 
-florian commit schreef:
-> prismstumbler: add 0.7.4pre1
+A semi-related question. Where is this policy? There is apparently a bunch =
+of=20
+policies that I am unaware of, and I'd like a pointer to them.
 
-
-> packages/prismstumbler/prismstumbler_0.7.4pre1.bb
-
-That is against our versioning policy, this way you can't upgrade to 0.7.4 when it gets
-released[1]. Use _0.7.3+0.7.4pre1 instead.
-
-Regards,
-
-Koen
-
-
-[1] not without epoch support, but that's not meant to paper over bugs like this
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGD1+HMkyGM64RGpERAjFBAJ9Q8dl78nY+f/vm3YkqTnBntC9SJQCeN7Ho
-VucIW14/SeQ597S2obc5t48=
-=L5TC
------END PGP SIGNATURE-----
+=D8yvind
 
 
