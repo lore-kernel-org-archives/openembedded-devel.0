@@ -1,31 +1,23 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HYH3y-0004Gq-Kf
-	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 09:34:50 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 85B4C28C012; Mon,  2 Apr 2007 09:27:46 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180143221.adsl.alicedsl.de [85.180.143.221])
-	by srv043.dedi23.de (Postfix) with ESMTP id DDC0B28C011;
-	Mon,  2 Apr 2007 09:27:45 +0200 (CEST)
-Date: Mon, 2 Apr 2007 09:34:49 +0200
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.98.4) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <912610941.20070402093449@vanille-media.de>
-To: Richard Purdie <rpurdie@rpsys.net>
-In-Reply-To: <1175383522.5852.21.camel@localhost.localdomain>
-References: <1175383522.5852.21.camel@localhost.localdomain>
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1HYISE-0002jC-4S
+	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 11:03:59 +0200
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50)
+	id 1HYIjv-0000Z8-BB; Mon, 02 Apr 2007 11:22:15 +0200
+Message-ID: <4610C6E6.30102@kernelconcepts.de>
+Date: Mon, 02 Apr 2007 11:03:34 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
 MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@openembedded.org>,
-	bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: Fixing OE.dev dependency issues
+To: koen@dominion.kabel.utwente.nl
+References: <E1HXnn8-0007Dx-JK@linuxtogo.org>
+	<460F5F87.3060403@dominion.kabel.utwente.nl>
+In-Reply-To: <460F5F87.3060403@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.0.0
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [oe-commits] org.oe.dev prismstumbler: add 0.7.4pre1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,33 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 07:34:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 02 Apr 2007 09:04:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> http://www.rpsys.net/openzaurus/temp/oe-depends-fixes.patch
+Hi,
 
-> but of course once we do this, bitbake 1.6 is no longer going to work
-> with the metadata since this change is not backwards compatible.
+Koen Kooi schrieb:
+> That is against our versioning policy, this way you can't upgrade to 0.7.4 when it gets
+> released[1]. Use _0.7.3+0.7.4pre1 instead.
 
-This shouldn't be a problem for most people. I guess only a handful of
-insane projects like OpenMoko were brave enough to patch BitBake ;)
+I remember we had these kind of trouble with ipkg before. Wouldn't it be better
+to make it possible to handle this properly? I guess we will run into this again
+and again in future.
 
-> I'm proposing to release bitbake 1.8.2 with code to handle the above,
-> and epoch handling code in the very near future. We will then have to
-> aim to make bitbake 1.8.2 the minimum bitbake version for .dev before
-> the above fix can be checked in and epoch packages can be more
-> widely/easily used. Does anyone have any objections to a move to bitbake
-> 1.8 in due course? What timescale would people class as acceptable?
+Greetings
 
-2 months after announcing?
+Florian
 
-Regards,
-
-:M:
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
