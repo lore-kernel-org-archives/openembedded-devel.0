@@ -1,23 +1,17 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1HYISE-0002jC-4S
-	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 11:03:59 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50)
-	id 1HYIjv-0000Z8-BB; Mon, 02 Apr 2007 11:22:15 +0200
-Message-ID: <4610C6E6.30102@kernelconcepts.de>
-Date: Mon, 02 Apr 2007 11:03:34 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+Received: from [216.182.48.170] (helo=beastbox.kfctristate.com)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <tom@openhardware.net>) id 1HYIai-0005zX-9o
+	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 11:12:44 +0200
+Received: (qmail 22088 invoked from network); 2 Apr 2007 09:12:42 -0000
+Received: from unknown (HELO ?172.30.107.2?) (172.30.107.2)
+	by beastbox.kfctristate.com with SMTP; 2 Apr 2007 09:12:42 -0000
+Message-ID: <4610C901.2010306@openhardware.net>
+Date: Mon, 02 Apr 2007 05:12:33 -0400
+From: Tom Walsh <tom@openhardware.net>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070305)
 MIME-Version: 1.0
-To: koen@dominion.kabel.utwente.nl
-References: <E1HXnn8-0007Dx-JK@linuxtogo.org>
-	<460F5F87.3060403@dominion.kabel.utwente.nl>
-In-Reply-To: <460F5F87.3060403@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.0.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev prismstumbler: add 0.7.4pre1
+To: openembedded-devel@lists.openembedded.org
+Subject: patch: shasum vs. sha256sum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,30 +25,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 09:04:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 02 Apr 2007 09:12:46 -0000
+Content-Type: multipart/mixed; boundary="------------090406070500070102000500"
+
+--------------090406070500070102000500
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Just noticed that the sha256sum has been added to the 
+classes/sanity.bbclass and bitbake balked at running.   This morning I 
+had installed perl-Digest::SHA to satisfy the need for 'shasum'.
 
-Koen Kooi schrieb:
-> That is against our versioning policy, this way you can't upgrade to 0.7.4 when it gets
-> released[1]. Use _0.7.3+0.7.4pre1 instead.
+I haven't found any package on Mandriva that provides 'sha256sum',  
+however, adding '-a 256' sets the sha256 algorithm for shasum?  With 
+these two changes, bitbake seems to build the project ok, or, am I 
+missing something here?
 
-I remember we had these kind of trouble with ipkg before. Wouldn't it be better
-to make it possible to handle this properly? I guess we will run into this again
-and again in future.
+Regards,
 
-Greetings
-
-Florian
+TomW
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Tom Walsh - WN3L - Embedded Systems Consultant
+http://openhardware.net http://cyberiansoftware.com http://openzipit.org
+"Windows? No thanks, I have work to do..."
+----------------------------------------------------
 
 
+
+--------------090406070500070102000500
+Content-Type: text/x-patch;
+ name="base.bbclass.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="base.bbclass.patch"
+
+--- classes/base.bbclass~	2007-04-02 01:30:14.000000000 -0400
++++ classes/base.bbclass	2007-04-02 01:32:34.000000000 -0400
+@@ -54,7 +54,7 @@
+         raise Exception("Executing md5sum failed")
+ 
+     try:
+-        shapipe = os.popen('shasum -a 2 -b ' + localpath)
++        shapipe = os.popen('shasum -a 256 -b ' + localpath)
+         shadata = (shapipe.readline().split() or [ "" ])[0]
+         shapipe.close()
+     except OSError:
+
+--------------090406070500070102000500
+Content-Type: text/x-patch;
+ name="sanity.bbclass.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="sanity.bbclass.patch"
+
+--- classes/sanity.bbclass~	2007-04-02 01:38:59.000000000 -0400
++++ classes/sanity.bbclass	2007-04-02 01:39:27.000000000 -0400
+@@ -86,7 +86,7 @@
+ 	if not check_app_exists('${BUILD_PREFIX}g++', e.data):
+ 		missing = missing + "C++ Compiler (${BUILD_PREFIX}g++),"
+ 
+-	required_utilities = "patch diffstat texi2html makeinfo cvs svn git bzip2 tar gzip gawk sha256sum md5sum"
++	required_utilities = "patch diffstat texi2html makeinfo cvs svn git bzip2 tar gzip gawk shasum md5sum"
+ 
+ 	for util in required_utilities.split():
+ 		if not check_app_exists( util, e.data ):
+
+--------------090406070500070102000500--
