@@ -1,25 +1,31 @@
-Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1HY6ss-0004Bb-7q
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Apr 2007 22:42:42 +0200
-Received: by ug-out-1314.google.com with SMTP id e2so1303787ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Apr 2007 13:42:41 -0700 (PDT)
-Received: by 10.82.153.5 with SMTP id a5mr6977238bue.1175460160611;
-	Sun, 01 Apr 2007 13:42:40 -0700 (PDT)
-Received: by 10.82.120.13 with HTTP; Sun, 1 Apr 2007 13:42:40 -0700 (PDT)
-Message-ID: <c384c5ea0704011342n3b9b1426v311bc2cc9bdf257@mail.gmail.com>
-Date: Sun, 1 Apr 2007 22:42:40 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1175422103.5829.0.camel@localhost.localdomain>
+	(envelope-from <mickey@vanille-media.de>) id 1HYH3y-0004Gq-Kf
+	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 09:34:50 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 85B4C28C012; Mon,  2 Apr 2007 09:27:46 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180143221.adsl.alicedsl.de [85.180.143.221])
+	by srv043.dedi23.de (Postfix) with ESMTP id DDC0B28C011;
+	Mon,  2 Apr 2007 09:27:45 +0200 (CEST)
+Date: Mon, 2 Apr 2007 09:34:49 +0200
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.98.4) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <912610941.20070402093449@vanille-media.de>
+To: Richard Purdie <rpurdie@rpsys.net>
+In-Reply-To: <1175383522.5852.21.camel@localhost.localdomain>
+References: <1175383522.5852.21.camel@localhost.localdomain>
 MIME-Version: 1.0
-References: <E1HXnn8-0007Dx-JK@linuxtogo.org>
-	<460F5F87.3060403@dominion.kabel.utwente.nl>
-	<200704011159.52186.repvik@kynisk.com>
-	<1175422103.5829.0.camel@localhost.localdomain>
-Subject: Re: [oe-commits] org.oe.dev prismstumbler: add 0.7.4pre1
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: Fixing OE.dev dependency issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,30 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Apr 2007 20:42:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Apr 2007 07:34:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Richard et al,
+Richard Purdie wrote:
+> http://www.rpsys.net/openzaurus/temp/oe-depends-fixes.patch
 
-On 4/1/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Sun, 2007-04-01 at 11:59 +0200, =D8yvind Repvik wrote:
-> > A semi-related question. Where is this policy? There is apparently a bu=
-nch of
-> > policies that I am unaware of, and I'd like a pointer to them.
->
-> http://www.openembedded.org/wiki/Policies
->
-> The version policy is there at least. The aim was simply to try and
-> standardise things so package upgrades always work.
->
+> but of course once we do this, bitbake 1.6 is no longer going to work
+> with the metadata since this change is not backwards compatible.
 
-Also, I am as-of-yet clueless on the new epoch support, let alone
-policy. Can someone pls add some info on this?
+This shouldn't be a problem for most people. I guess only a handful of
+insane projects like OpenMoko were brave enough to patch BitBake ;)
 
-Thanks, regards,
---=20
-Leon
+> I'm proposing to release bitbake 1.8.2 with code to handle the above,
+> and epoch handling code in the very near future. We will then have to
+> aim to make bitbake 1.8.2 the minimum bitbake version for .dev before
+> the above fix can be checked in and epoch packages can be more
+> widely/easily used. Does anyone have any objections to a move to bitbake
+> 1.8 in due course? What timescale would people class as acceptable?
+
+2 months after announcing?
+
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
