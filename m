@@ -1,30 +1,22 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.184.228] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HYIkb-0000cG-OJ
+	(envelope-from <philipp.zabel@gmail.com>) id 1HYJ58-0002ea-AZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2007 11:22:57 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 96C9B28C012; Mon,  2 Apr 2007 11:15:53 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180143221.adsl.alicedsl.de [85.180.143.221])
-	by srv043.dedi23.de (Postfix) with ESMTP id 33D1628C011
+	Mon, 02 Apr 2007 11:44:10 +0200
+Received: by wr-out-0506.google.com with SMTP id 55so1344365wri
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Apr 2007 11:15:53 +0200 (CEST)
-Date: Mon, 2 Apr 2007 11:22:57 +0200
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.98.4) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1308675383.20070402112257@vanille-media.de>
+	Mon, 02 Apr 2007 02:44:09 -0700 (PDT)
+Received: by 10.114.185.8 with SMTP id i8mr1774191waf.1175507048108;
+	Mon, 02 Apr 2007 02:44:08 -0700 (PDT)
+Received: by 10.114.60.9 with HTTP; Mon, 2 Apr 2007 02:44:08 -0700 (PDT)
+Message-ID: <74d0deb30704020244g2a269eacx49ef799a06ef6656@mail.gmail.com>
+Date: Mon, 2 Apr 2007 11:44:08 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1HVVtt-0007Xk-Tg@linuxtogo.org>
-References: <E1HVVtt-0007Xk-Tg@linuxtogo.org>
+In-Reply-To: <4610C901.2010306@openhardware.net>
 MIME-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev zaurus-clamshell: Fix jffs2 commandline, enable lzo compression
+References: <4610C901.2010306@openhardware.net>
+Subject: Re: patch: shasum vs. sha256sum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,21 +30,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 09:22:59 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 02 Apr 2007 09:44:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> zaurus-clamshell: Fix jffs2 commandline, enable lzo compression
+On 4/2/07, Tom Walsh <tom@openhardware.net> wrote:
+> Just noticed that the sha256sum has been added to the
+> classes/sanity.bbclass and bitbake balked at running.   This morning I
+> had installed perl-Digest::SHA to satisfy the need for 'shasum'.
+>
+> I haven't found any package on Mandriva that provides 'sha256sum',
+> however, adding '-a 256' sets the sha256 algorithm for shasum?  With
+> these two changes, bitbake seems to build the project ok, or, am I
+> missing something here?
 
-Richard, if you have a minute, could you summarize the benefits of
-using LZO and what I need to tweak to enable it for a device (i.e.
-fic-gta01)
+sha256sum is a part of coreutils (in debian).
+I assumed it to be more common than the perl shasum utility that is
+hidden in perl-Digest::SHA.
 
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+regards
+Philipp
 
 
