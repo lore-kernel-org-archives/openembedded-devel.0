@@ -1,23 +1,21 @@
-Received: from [69.17.117.6] (helo=mail4.sea5.speakeasy.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <erik@hovland.org>) id 1HYODq-00040t-SM
-	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 17:13:31 +0200
-Received: (qmail 29323 invoked from network); 2 Apr 2007 15:13:29 -0000
-Received: from dsl092-045-201.lax1.dsl.speakeasy.net (HELO speakeasy.net)
-	([66.92.45.201]) (envelope-sender <erik@hovland.org>)
-	by mail4.sea5.speakeasy.net (qmail-ldap-1.03) with SMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	2 Apr 2007 15:13:29 -0000
-Received: by speakeasy.net (nbSMTP-1.00) for uid 1000
-	erik@hovland.org; Mon,  2 Apr 2007 08:13:29 -0700 (PDT)
-Date: Mon, 2 Apr 2007 08:13:28 -0700
-From: Erik Hovland <erik@hovland.org>
+	(envelope-from <openembedded@hrw.one.pl>) id 1HYOLz-0007rG-Sl
+	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 17:21:56 +0200
+Received: (qmail 19544 invoked by uid 813007); 2 Apr 2007 15:21:54 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 2 Apr 2007 15:21:54 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070402151328.GN24962@hovland.org>
+Date: Mon, 2 Apr 2007 17:21:48 +0200
+User-Agent: KMail/1.9.6
 References: <4610C901.2010306@openhardware.net>
+	<20070402151328.GN24962@hovland.org>
+In-Reply-To: <20070402151328.GN24962@hovland.org>
 MIME-Version: 1.0
-In-Reply-To: <4610C901.2010306@openhardware.net>
-User-Agent: Mutt/1.5.13 (2006-08-11)
+Message-Id: <200704021721.49473.openembedded@hrw.one.pl>
 Subject: Re: patch: shasum vs. sha256sum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,33 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 15:13:31 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 02 Apr 2007 15:21:57 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Mon, Apr 02, 2007 at 05:12:33AM -0400, Tom Walsh wrote:
-> Just noticed that the sha256sum has been added to the 
-> classes/sanity.bbclass and bitbake balked at running.   This morning I 
-> had installed perl-Digest::SHA to satisfy the need for 'shasum'.
-> 
-> I haven't found any package on Mandriva that provides 'sha256sum',  
-> however, adding '-a 256' sets the sha256 algorithm for shasum?  With 
-> these two changes, bitbake seems to build the project ok, or, am I 
-> missing something here?
+Dnia poniedzia=B3ek, 2 kwietnia 2007, Erik Hovland napisa=B3:
 
-It should be part of the coreutils package. But I don't think it was in
-the coreutils 5.x series which is the verions that mandriva 2007.0 and
-older have in their release. If you are feeling brave, try Spring. If
-not, just get the latest coreutils from your local GNU mirror and build
-it yourself.
+> It should be part of the coreutils package. But I don't think it was in
+> the coreutils 5.x series which is the verions that mandriva 2007.0 and
+> older have in their release.
 
-E
+Debian has sha256sum since coreutils 5.97.
 
--- 
-Erik Hovland
-mail: erik@hovland.org
-web: http://hovland.org/
-PGP/GPG public key available on request
+> If not, just get the latest coreutils from your local GNU mirror and
+> build it yourself.
+
+Or "bitbake coreutils-native-6.0" to get it.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+           You have dialed a purely imaginary number.=20
+           Please rotate your phone ninety degrees and try again
+
 
 
 
