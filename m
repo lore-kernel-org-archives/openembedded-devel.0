@@ -1,17 +1,30 @@
-Received: from [216.182.48.170] (helo=beastbox.kfctristate.com)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <tom@openhardware.net>) id 1HYIai-0005zX-9o
-	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 11:12:44 +0200
-Received: (qmail 22088 invoked from network); 2 Apr 2007 09:12:42 -0000
-Received: from unknown (HELO ?172.30.107.2?) (172.30.107.2)
-	by beastbox.kfctristate.com with SMTP; 2 Apr 2007 09:12:42 -0000
-Message-ID: <4610C901.2010306@openhardware.net>
-Date: Mon, 02 Apr 2007 05:12:33 -0400
-From: Tom Walsh <tom@openhardware.net>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070305)
-MIME-Version: 1.0
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <mickey@vanille-media.de>) id 1HYIkb-0000cG-OJ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Apr 2007 11:22:57 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 96C9B28C012; Mon,  2 Apr 2007 11:15:53 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180143221.adsl.alicedsl.de [85.180.143.221])
+	by srv043.dedi23.de (Postfix) with ESMTP id 33D1628C011
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Apr 2007 11:15:53 +0200 (CEST)
+Date: Mon, 2 Apr 2007 11:22:57 +0200
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.98.4) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1308675383.20070402112257@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: patch: shasum vs. sha256sum
+In-Reply-To: <E1HVVtt-0007Xk-Tg@linuxtogo.org>
+References: <E1HVVtt-0007Xk-Tg@linuxtogo.org>
+MIME-Version: 1.0
+Subject: Re: [oe-commits] org.oe.dev zaurus-clamshell: Fix jffs2 commandline, enable lzo compression
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -25,70 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 09:12:46 -0000
-Content-Type: multipart/mixed; boundary="------------090406070500070102000500"
-
---------------090406070500070102000500
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 02 Apr 2007 09:22:59 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Just noticed that the sha256sum has been added to the 
-classes/sanity.bbclass and bitbake balked at running.   This morning I 
-had installed perl-Digest::SHA to satisfy the need for 'shasum'.
+> zaurus-clamshell: Fix jffs2 commandline, enable lzo compression
 
-I haven't found any package on Mandriva that provides 'sha256sum',  
-however, adding '-a 256' sets the sha256 algorithm for shasum?  With 
-these two changes, bitbake seems to build the project ok, or, am I 
-missing something here?
+Richard, if you have a minute, could you summarize the benefits of
+using LZO and what I need to tweak to enable it for a device (i.e.
+fic-gta01)
 
 Regards,
 
-TomW
-
+:M:
 -- 
-Tom Walsh - WN3L - Embedded Systems Consultant
-http://openhardware.net http://cyberiansoftware.com http://openzipit.org
-"Windows? No thanks, I have work to do..."
-----------------------------------------------------
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
---------------090406070500070102000500
-Content-Type: text/x-patch;
- name="base.bbclass.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="base.bbclass.patch"
-
---- classes/base.bbclass~	2007-04-02 01:30:14.000000000 -0400
-+++ classes/base.bbclass	2007-04-02 01:32:34.000000000 -0400
-@@ -54,7 +54,7 @@
-         raise Exception("Executing md5sum failed")
- 
-     try:
--        shapipe = os.popen('shasum -a 2 -b ' + localpath)
-+        shapipe = os.popen('shasum -a 256 -b ' + localpath)
-         shadata = (shapipe.readline().split() or [ "" ])[0]
-         shapipe.close()
-     except OSError:
-
---------------090406070500070102000500
-Content-Type: text/x-patch;
- name="sanity.bbclass.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="sanity.bbclass.patch"
-
---- classes/sanity.bbclass~	2007-04-02 01:38:59.000000000 -0400
-+++ classes/sanity.bbclass	2007-04-02 01:39:27.000000000 -0400
-@@ -86,7 +86,7 @@
- 	if not check_app_exists('${BUILD_PREFIX}g++', e.data):
- 		missing = missing + "C++ Compiler (${BUILD_PREFIX}g++),"
- 
--	required_utilities = "patch diffstat texi2html makeinfo cvs svn git bzip2 tar gzip gawk sha256sum md5sum"
-+	required_utilities = "patch diffstat texi2html makeinfo cvs svn git bzip2 tar gzip gawk shasum md5sum"
- 
- 	for util in required_utilities.split():
- 		if not check_app_exists( util, e.data ):
-
---------------090406070500070102000500--
