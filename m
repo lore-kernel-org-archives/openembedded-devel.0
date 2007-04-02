@@ -1,22 +1,23 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <zecke@selfish.org>) id 1HYJDK-0002Wn-PJ
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1HYKeB-0006Pa-Ag
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2007 11:52:38 +0200
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1HYJDK-0005HU-8K
+	Mon, 02 Apr 2007 13:24:27 +0200
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1HYKvu-0000ok-0y
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2007 11:52:38 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <4610C901.2010306@openhardware.net>
-References: <4610C901.2010306@openhardware.net>
-Message-Id: <D5F22F8D-AEDD-40E9-9F15-4BFA190D19BB@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Mon, 2 Apr 2007 11:52:31 +0200
+	Mon, 02 Apr 2007 13:42:46 +0200
+Message-ID: <4610E7D7.8060005@kernelconcepts.de>
+Date: Mon, 02 Apr 2007 13:24:07 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
+References: <4610C901.2010306@openhardware.net>
+	<D5F22F8D-AEDD-40E9-9F15-4BFA190D19BB@selfish.org>
+In-Reply-To: <D5F22F8D-AEDD-40E9-9F15-4BFA190D19BB@selfish.org>
+X-Enigmail-Version: 0.94.0.0
 Subject: Re: patch: shasum vs. sha256sum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,42 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 09:52:40 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Mon, 02 Apr 2007 11:24:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+Hi,
 
-Am 02.04.2007 um 11:12 schrieb Tom Walsh:
+Holger Freyther schrieb:
 
-> Just noticed that the sha256sum has been added to the classes/ 
-> sanity.bbclass and bitbake balked at running.   This morning I had  
-> installed perl-Digest::SHA to satisfy the need for 'shasum'.
->
-> I haven't found any package on Mandriva that provides 'sha256sum',   
-> however, adding '-a 256' sets the sha256 algorithm for shasum?   
-> With these two changes, bitbake seems to build the project ok, or,  
-> am I missing something here?
+> Philipp changed this line from shasum to sha256sum as he/we thought  
+> sha256sum is more commonly available. If that is not the case I would  
+> propose to disapprove the change as it is more easy to get the  
+> required binary from cpan than to recompile coreutils-native.
+> As a last resort we could add sha256sum code to base.bbclass...
 
-Philipp changed this line from shasum to sha256sum as he/we thought  
-sha256sum is more commonly available. If that is not the case I would  
-propose to disapprove the change as it is more easy to get the  
-required binary from cpan than to recompile coreutils-native.
-As a last resort we could add sha256sum code to base.bbclass...
+sounds like a good idea, I just ran into the same problem with Ubuntu.
 
+Greetings
 
-z.
+Florian
 
->
-> Regards,
->
->
-> -        shapipe = os.popen('shasum -a 2 -b ' + localpath)
-> +        shapipe = os.popen('shasum -a 256 -b ' + localpath)
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
-Where is shasum -a2 coming from? This must be a local change at your  
-side.
-
-
-
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
