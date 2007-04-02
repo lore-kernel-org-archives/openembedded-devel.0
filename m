@@ -1,33 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HYJ7V-0002mb-8Y
-	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 11:46:37 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l329kbBG018333
-	for <openembedded-devel@openembedded.org>;
-	Mon, 2 Apr 2007 10:46:37 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18215-02 for <openembedded-devel@openembedded.org>;
-	Mon,  2 Apr 2007 10:46:34 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l329kQhj018323
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 2 Apr 2007 10:46:26 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1308675383.20070402112257@vanille-media.de>
-References: <E1HVVtt-0007Xk-Tg@linuxtogo.org>
-	<1308675383.20070402112257@vanille-media.de>
-Date: Mon, 02 Apr 2007 10:46:25 +0100
-Message-Id: <1175507186.5819.16.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [oe-commits] org.oe.dev zaurus-clamshell: Fix jffs2	commandline, enable lzo compression
+	(envelope-from <zecke@selfish.org>) id 1HYJDK-0002Wn-PJ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Apr 2007 11:52:38 +0200
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1HYJDK-0005HU-8K
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Apr 2007 11:52:38 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <4610C901.2010306@openhardware.net>
+References: <4610C901.2010306@openhardware.net>
+Message-Id: <D5F22F8D-AEDD-40E9-9F15-4BFA190D19BB@selfish.org>
+From: Holger Freyther <zecke@selfish.org>
+Date: Mon, 2 Apr 2007 11:52:31 +0200
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.752.3)
+Subject: Re: patch: shasum vs. sha256sum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,61 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 09:46:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 02 Apr 2007 09:52:40 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2007-04-02 at 11:22 +0200, Michael 'Mickey' Lauer wrote:
-> > zaurus-clamshell: Fix jffs2 commandline, enable lzo compression
-> 
-> Richard, if you have a minute, could you summarize the benefits of
-> using LZO and what I need to tweak to enable it for a device (i.e.
-> fic-gta01)
 
-LZO allows much faster decompression than zlib at similar (but never
-quite as good) compression ratios. When used with jffs2 it means file
-reads are less processor intensive and hence faster. It gives a 40%
-speedup to file reads in my tests and the "favourlzo" mode image size
-might increase by say 5%. If you have an optimised boot procedure, you
-can end up processor bound so it can also help device boot time a lot.
-OE's boot procedure is not optimised though so this doesn't show up as
-well under OE.
+Am 02.04.2007 um 11:12 schrieb Tom Walsh:
 
-As for configuring it, the tricky question is given some block of data,
-how should jffs2 compress it? There are a variety of modes you can put
-mkfs.jffs2 into and the kernel has a similar set of modes too. There are
-a few options:
+> Just noticed that the sha256sum has been added to the classes/ 
+> sanity.bbclass and bitbake balked at running.   This morning I had  
+> installed perl-Digest::SHA to satisfy the need for 'shasum'.
+>
+> I haven't found any package on Mandriva that provides 'sha256sum',   
+> however, adding '-a 256' sets the sha256 algorithm for shasum?   
+> With these two changes, bitbake seems to build the project ok, or,  
+> am I missing something here?
 
-"size" - Compress the data with each compressor and pick the one with
-best compression
+Philipp changed this line from shasum to sha256sum as he/we thought  
+sha256sum is more commonly available. If that is not the case I would  
+propose to disapprove the change as it is more easy to get the  
+required binary from cpan than to recompile coreutils-native.
+As a last resort we could add sha256sum code to base.bbclass...
 
-"priority" - Compress the data with the first compressor in a list of
-compressors which gives any compression.
 
-"favourlzo" - Like size, compress the data with each compressor and pick
-the one with best compression *but* choose LZO is the sizes are close
-since we know its fast.
+z.
 
-mtd-utils in OE has patches to enable lzo compression. The standard
-jffs2 image creation command has "-x lzo" in it to disable the LZO
-compressor so anyone without a patched kernel still gets working images.
-Since the zaurus kernels mostly have lzo support,
-zaurus-clamshell-2.6.conf has "-m favourlzo" in the commandline it
-overrides the default with making the zaurus clamshell images use a
-hybrid of zlib and lzo compression.
+>
+> Regards,
+>
+>
+> -        shapipe = os.popen('shasum -a 2 -b ' + localpath)
+> +        shapipe = os.popen('shasum -a 256 -b ' + localpath)
 
-"favourlzo" might be good at image creation time but on device itself,
-you might want "priority" to save repeatedly calling multiple
-compressors upon file writes.
+Where is shasum -a2 coming from? This must be a local change at your  
+side.
 
-So simply put:
-* Add kernel patches
-* Make sure you're using the patched mtd-utils
-* Add "-m favourlzo" to the image creation commandline
 
-Cheers,
-
-Richard
 
 
 
