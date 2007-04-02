@@ -1,24 +1,27 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1HYKeB-0006Pa-Ag
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2007 13:24:27 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1HYKvu-0000ok-0y
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2007 13:42:46 +0200
-Message-ID: <4610E7D7.8060005@kernelconcepts.de>
-Date: Mon, 02 Apr 2007 13:24:07 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HYKo2-0006Z7-VV
+	for openembedded-devel@openembedded.org; Mon, 02 Apr 2007 13:34:39 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l32BY6ox016157; Mon, 2 Apr 2007 13:34:06 +0200
+Message-ID: <4610EA2B.3000703@dominion.kabel.utwente.nl>
+Date: Mon, 02 Apr 2007 13:34:03 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4610C901.2010306@openhardware.net>
-	<D5F22F8D-AEDD-40E9-9F15-4BFA190D19BB@selfish.org>
-In-Reply-To: <D5F22F8D-AEDD-40E9-9F15-4BFA190D19BB@selfish.org>
-X-Enigmail-Version: 0.94.0.0
-Subject: Re: patch: shasum vs. sha256sum
+To: openembedded-devel@openembedded.org
+References: <1175383522.5852.21.camel@localhost.localdomain>
+	<912610941.20070402093449@vanille-media.de>
+In-Reply-To: <912610941.20070402093449@vanille-media.de>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: Fixing OE.dev dependency issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,32 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 11:24:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 02 Apr 2007 11:34:40 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Holger Freyther schrieb:
+Michael 'Mickey' Lauer schreef:
+> Richard Purdie wrote:
+>> http://www.rpsys.net/openzaurus/temp/oe-depends-fixes.patch
+> 
+>> but of course once we do this, bitbake 1.6 is no longer going to work
+>> with the metadata since this change is not backwards compatible.
+> 
+> This shouldn't be a problem for most people. I guess only a handful of
+> insane projects like OpenMoko were brave enough to patch BitBake ;)
+> 
+>> I'm proposing to release bitbake 1.8.2 with code to handle the above,
+>> and epoch handling code in the very near future. We will then have to
+>> aim to make bitbake 1.8.2 the minimum bitbake version for .dev before
+>> the above fix can be checked in and epoch packages can be more
+>> widely/easily used. Does anyone have any objections to a move to bitbake
+>> 1.8 in due course? What timescale would people class as acceptable?
+> 
+> 2 months after announcing?
 
-> Philipp changed this line from shasum to sha256sum as he/we thought  
-> sha256sum is more commonly available. If that is not the case I would  
-> propose to disapprove the change as it is more easy to get the  
-> required binary from cpan than to recompile coreutils-native.
-> As a last resort we could add sha256sum code to base.bbclass...
+2 months is awfully long from an OE perspective, but I see your point. Maybe we should
+have a page that shows when various intrusive patches are going to be committed?
 
-sounds like a good idea, I just ran into the same problem with Ubuntu.
+regards,
 
-Greetings
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+iD8DBQFGEOorMkyGM64RGpERArtxAKCcMdlXhf72TqMYOkMv5rtyb/9U3QCgtTix
+SqCJ7U164epjVNATF1xtFuU=
+=rUvg
+-----END PGP SIGNATURE-----
 
 
