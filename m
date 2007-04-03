@@ -1,18 +1,22 @@
-Received: from [203.96.159.182] (helo=hayes.bluewaternz.com)
+Received: from [209.242.20.70] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <andre@bluewatersys.com>) id 1HYVbB-0002kv-9a
-	for openembedded-devel@openembedded.org; Tue, 03 Apr 2007 01:06:06 +0200
-Received: (qmail 10538 invoked by uid 89); 2 Apr 2007 23:05:39 -0000
-Received: from unknown (HELO ?192.168.2.19?) (andre@192.168.2.19)
-	by 0 with ESMTPA; 2 Apr 2007 23:05:39 -0000
-Message-ID: <46118C5C.2040408@bluewatersys.com>
-Date: Tue, 03 Apr 2007 11:06:04 +1200
-From: Andre Renaud <andre@bluewatersys.com>
-User-Agent: Thunderbird 1.5.0.7 (X11/20060918)
+	(envelope-from <mwester@dls.net>) id 1HYcAz-0000BH-Lr
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Apr 2007 08:07:29 +0200
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id BF65E411DC6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Apr 2007 01:07:29 -0500 (CDT)
+Message-ID: <151901c775b6$2c86fc10$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 3 Apr 2007 01:06:09 -0500
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.94.0.0
-Subject: DosFStools mirror missing
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1807
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
+Subject: Busybox 1.5.0 available for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -26,50 +30,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2007 23:06:06 -0000
-Content-Type: multipart/mixed; boundary="------------000804070706080000050705"
-
---------------000804070706080000050705
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 03 Apr 2007 06:07:29 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-The mirror for DosFSTools,
-ftp://ftp.uni-erlangen.de/pub/Linux/LOCAL/dosfstools/dosfstools-${PV}.src.tar.gz
+Busybox 1.5.0 is committed.  It is marked with preference = -1, so it should
+NOT be automatically included in anyone's builds.
 
-appears to be down at the moment. Using the Debian mirror however works
-fine. Attached is an alternative bitbake package which uses the debian
-mirror system to do the download, which should be much more robust.
+It's considered less-than-stable upstream, so be prepared for anything to
+happen with it.  I re-did the patches that are applied, a couple of them no
+longer seem pertinent at all, but since they are referenced in the
+busybox.inc file, I don't know how to "un" specify them for 1.5.0 and higher
+versions.
 
-Andre
+I'm sure the .bb file could use a cleanup, but that will probably take a
+better bb person than I.
 
--- 
-Bluewater Systems Ltd - ARM Technology Solutions Centre
+Regards,
+Mike (mwester)
 
-       Andre Renaud                             Bluewater Systems Ltd
-Phone: +64 3 3779127 (Aus 1 800 148 751)        Level 17, 119 Armagh St
-Fax:   +64 3 3779135                            PO Box 13889
-Email: arenaud@bluewatersys.com                 Christchurch
-Web:   http://www.bluewatersys.com              New Zealand
-# dosfstools OE build file
-# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
-# Released under the MIT license (see packages/COPYING)
 
-DESCRIPTION = "DOS FAT Filesystem Utilities"
 
-SECTION = "base"
-PRIORITY = "optional"
-LICENSE = "GPL"
 
-PR = "r0"
-
-SRC_URI = "${DEBIAN_MIRROR}/main/d/dosfstools/dosfstools_${PV}.orig.tar.gz \
-	   file://alignment_hack.patch;patch=1 \
-           file://msdos_fat12_undefined.patch;patch=1 \
-	   file://include-linux-types.patch;patch=1"
-
-do_install () {
-	oe_runmake "PREFIX=${D}" "SBINDIR=${D}${sbindir}" \
-		   "MANDIR=${D}${mandir}/man8" install
-}
-
---------------000804070706080000050705--
