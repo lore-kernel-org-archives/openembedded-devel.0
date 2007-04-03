@@ -1,21 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HYfpJ-0002Kq-Ci
-	for openembedded-devel@openembedded.org; Tue, 03 Apr 2007 12:01:23 +0200
-Received: (qmail 8109 invoked by uid 813007); 3 Apr 2007 10:00:59 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 3 Apr 2007 10:00:59 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 3 Apr 2007 12:01:04 +0200
-User-Agent: KMail/1.9.6
-References: <4611582F.8010203@openhardware.net>
-In-Reply-To: <4611582F.8010203@openhardware.net>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HYg2B-0002b5-Cz
+	for openembedded-devel@openembedded.org; Tue, 03 Apr 2007 12:14:39 +0200
+Received: from [130.89.138.60] (wlan138060.mobiel.utwente.nl [130.89.138.60])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l33AEWox003437 for <openembedded-devel@openembedded.org>;
+	Tue, 3 Apr 2007 12:14:32 +0200
+Message-ID: <46122905.2010703@dominion.kabel.utwente.nl>
+Date: Tue, 03 Apr 2007 12:14:29 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-Message-Id: <200704031201.05082.openembedded@hrw.one.pl>
-Subject: Re: versioning madness
+To: openembedded-devel@openembedded.org
+References: <E1HXnn8-0007Dx-JK@linuxtogo.org>	<460F5F87.3060403@dominion.kabel.utwente.nl>	<4610C6E6.30102@kernelconcepts.de>
+	<583221585.20070403130033@gmail.com>
+In-Reply-To: <583221585.20070403130033@gmail.com>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev prismstumbler: add 0.7.4pre1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,36 +35,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2007 10:01:26 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Tue, 03 Apr 2007 10:14:39 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think that you should ignore fact that your machine is not wide used and 
-submit your changes into OE. For example I do not know does anyone other 
-then me use ProGear support in OE but this does not stopped me from 
-adding it.
+Paul Sokolovsky schreef:
 
-You can also create own branch in monotone database where you will 
-cherrypick needed changes from .dev tree (or even use .dev tree locally 
-with your changes commited into database).
+>>> That is against our versioning policy, this way you can't upgrade to 0.7.4 when it gets
+>>> released[1]. Use _0.7.3+0.7.4pre1 instead.
+> 
+>> I remember we had these kind of trouble with ipkg before.
+> 
+>   Why we and why ipkg? Any packaging system which tries to do its work
+> well hits into such issues. In this regard, OE follows Debian's way to
+> handle this. (Even though I was unable to find exact best
+> practices to resolve such cases, they only mumble that it should be
+> done: http://www.debian.org/doc/debian-policy/ch-binary.html#s-versions ;
+> anyway, + notation is what actually being used).
+> 
+>   I'm not sure how other packaging systems solve this, for example,
+> look at FC6 RPM pile shows that they have *pre* stuff without clearly
+> distinguishable pattern of handling it syntactically. But it's known
+> where that leads to - to inability to upgrade to a new distro release.
+> 
+>> Wouldn't it be better
+>> to make it possible to handle this properly? I guess we will run into this again
+>> and again in future.
 
-Other way is bb collections where you set which tree is more important 
-then others. But here I can't tell how it handle misc PR in both trees.
+It would be best if upstream (prismstumbler in this case) would use proper versioning to
+start with, but if that is not possible we can paper over it in OE.
 
-You can also use PR ="s88" in your tree as "s" > "r" and use same numbers 
-as OE ones to get info how synced you are.
+regards,
 
-There are many methods - I would choose first one.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-               Don't personalize computers. They hate that.
-
-
+iD8DBQFGEikFMkyGM64RGpERAvcfAJsFp0Cez/LN84vKGUBAXnbEEAkcAACbB6Jr
+MKjIaA7nMU6DhAUQ05UxilY=
+=21uY
+-----END PGP SIGNATURE-----
 
 
