@@ -1,26 +1,27 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [212.227.126.171] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HYcPy-0000VS-GW
-	for openembedded-devel@openembedded.org; Tue, 03 Apr 2007 08:22:58 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l336MqLr020188 for <openembedded-devel@openembedded.org>;
-	Tue, 3 Apr 2007 08:22:52 +0200
-Message-ID: <4611F2B9.7040108@dominion.kabel.utwente.nl>
-Date: Tue, 03 Apr 2007 08:22:49 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+	(envelope-from <fischer@4g-systems.com>) id 1HYefA-0005vy-2C
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Apr 2007 10:46:48 +0200
+Received: from [213.238.49.68] (helo=dehamox1a.intra.4g-systems.com)
+	by mrelayeu.kundenserver.de (node=mrelayeu6) with ESMTP (Nemesis),
+	id 0ML29c-1HYef82QWp-0003PJ; Tue, 03 Apr 2007 10:46:47 +0200
+Received: from [172.31.20.70] (deham-pc1070.intra.4g-systems.com
+	[172.31.20.70])
+	by dehamox1a.intra.4g-systems.com (Postfix) with ESMTP id 139CA61247A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Apr 2007 10:46:46 +0200 (CEST)
+Message-ID: <46121476.1030609@4g-systems.com>
+Date: Tue, 03 Apr 2007 10:46:46 +0200
+From: Patrick Fischer <fischer@4g-systems.com>
+User-Agent: Icedove 1.5.0.9 (X11/20061220)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <151901c775b6$2c86fc10$6e01a8c0@twilight>
-In-Reply-To: <151901c775b6$2c86fc10$6e01a8c0@twilight>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Busybox 1.5.0 available for testing
+To: openembedded-devel@lists.openembedded.org
+X-Provags-ID: V01U2FsdGVkX1+xakxOUgRXWAK2mndu/P+hya1mKaVPCfOyp9/
+	uzaw67BFRpbgNuFS1635ev9excOR/wFgVkS31oHX7KDBeAkka6
+	We37RloQYTS2qZ9RmrMzA==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: DosFStools mirror missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,43 +35,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2007 06:23:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Apr 2007 08:46:48 -0000
+Content-Type: multipart/mixed; boundary="------------040709050102080001070304"
+
+--------------040709050102080001070304
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Andre Renaud wrote:
+> The mirror for DosFSTools,
+> ftp://ftp.uni-erlangen.de/pub/Linux/LOCAL/dosfstools/dosfstools-${PV}.src.tar.gz
+>
+> appears to be down at the moment. Using the Debian mirror however works
+> fine. Attached is an alternative bitbake package which uses the debian
+> mirror system to do the download, which should be much more robust.
+>
+> Andre
+The Debian Mirror provide only a newer version of the dosfstools, isn't it?
+I got the same problem while inherit the bootimg.bbclass.
 
-Mike (mwester) schreef:
-> Busybox 1.5.0 is committed.  It is marked with preference = -1, so it should
-> NOT be automatically included in anyone's builds.
-> 
-> It's considered less-than-stable upstream, so be prepared for anything to
-> happen with it.  I re-did the patches that are applied, a couple of them no
-> longer seem pertinent at all, but since they are referenced in the
-> busybox.inc file, I don't know how to "un" specify them for 1.5.0 and higher
-> versions.
+here comes my dosfstools-nativ_2.11.bb
 
-I've given up on busybox > 1.2.1 since the developers feel the need to change all the
-cmdline option every minor release[1] and add regression faster than I can run tests....
-As a bonus: all >1.2.x version have superfluous rewrites of core parts with the sole
-intent to annoy Bruce Perens...
+The Problem is that the bootimg.bbclass contains mkdosfs -F 12 ..... 
+*-d* ${BDIR} .....
+The parameter -d was not found in mkdosfs 2.11. This is provided by the 
+patch (mkdosfs-dif.patch).
+Maybe somebody can fix that.
 
-I wouldn't be surprised if most of the scripts in OE suddenly break.
+Best Regards
+Patrick
+# dosfstools-native OE build file
+# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
+# Released under the MIT license (see packages/COPYING)
 
-regards,
+require dosfstools_${PV}.bb
+FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/dosfstools-${PV}"
 
-Koen
-
-
-[1] I gave in an and ship util-linux-mount, util-linux-umount and procps-ps with angstrom
-since the busybox utils cmdline options break the proper versions....
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGEfK5MkyGM64RGpERAuk4AJ0VlEobHeOIzVHiCyOygww/nTCilACfRc+f
-owC3DEd/gC0569wGgs0+hgI=
-=aZ9p
------END PGP SIGNATURE-----
+S="${WORKDIR}/dosfstools-${PV}"
 
 
+SRC_URI = "http://ftp.debian.org/debian/pool/main/d/dosfstools/dosfstools_2.11.orig.tar.gz \
+	file://mkdosfs-bootcode.patch;patch=1 \
+	file://mkdosfs-dir.patch;patch=1 \
+	file://alignment_hack.patch;patch=1 \
+	file://dosfstools-2.10-kernel-2.6.patch;patch=1 \
+	file://msdos_fat12_undefined.patch;patch=1 \
+	file://dosfstools-msdos_fs-types.patch;patch=1 \
+	file://include-linux-types.patch;patch=1"
+
+inherit native
+
+do_stage() {
+	install -m 755 ${S}/mkdosfs/mkdosfs ${STAGING_BINDIR}/mkdosfs
+	install -m 755 ${S}/dosfsck/dosfsck ${STAGING_BINDIR}/dosfsck
+}
+
+--------------040709050102080001070304--
