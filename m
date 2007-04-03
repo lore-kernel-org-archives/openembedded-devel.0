@@ -1,29 +1,26 @@
-Received: from [212.227.126.177] (helo=moutng.kundenserver.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <fischer@4g-systems.com>) id 1HYfHB-0001tX-GE
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Apr 2007 11:26:05 +0200
-Received: from [213.238.49.68] (helo=dehamox1a.intra.4g-systems.com)
-	by mrelayeu.kundenserver.de (node=mrelayeu0) with ESMTP (Nemesis),
-	id 0MKwh2-1HYfH93SHA-00042q; Tue, 03 Apr 2007 11:26:04 +0200
-Received: from [172.31.20.70] (deham-pc1070.intra.4g-systems.com
-	[172.31.20.70])
-	by dehamox1a.intra.4g-systems.com (Postfix) with ESMTP id 6AEE06128D6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Apr 2007 11:26:03 +0200 (CEST)
-Message-ID: <46121DAB.5050309@4g-systems.com>
-Date: Tue, 03 Apr 2007 11:26:03 +0200
-From: Patrick Fischer <fischer@4g-systems.com>
-User-Agent: Icedove 1.5.0.9 (X11/20061220)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HYfPb-00020L-N8
+	for openembedded-devel@openembedded.org; Tue, 03 Apr 2007 11:34:47 +0200
+Received: from [130.89.138.60] (wlan138060.mobiel.utwente.nl [130.89.138.60])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l339Yfox028662 for <openembedded-devel@openembedded.org>;
+	Tue, 3 Apr 2007 11:34:42 +0200
+Message-ID: <46121FAE.6010408@dominion.kabel.utwente.nl>
+Date: Tue, 03 Apr 2007 11:34:38 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <46121476.1030609@4g-systems.com>
-	<461216D1.1010705@dominion.kabel.utwente.nl>
-In-Reply-To: <461216D1.1010705@dominion.kabel.utwente.nl>
-X-Provags-ID: V01U2FsdGVkX1/0U4pHgWBxvm9P4Jz/mbwjpk/THkVHc7j2/7r
-	XpgiTr0Nw2sYHSXdaGIWs+omXySCp98aHSqQAoF6IxCKkWOZhK
-	20WxvBpAB4bGAxWjJa8LA==
-Subject: Re: DosFStools mirror missing
+To: openembedded-devel@openembedded.org
+References: <E1HYf5T-0006Ok-EM@linuxtogo.org>
+In-Reply-To: <E1HYf5T-0006Ok-EM@linuxtogo.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev hal: add 0.5.9 and hal-info_git from poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,54 +34,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2007 09:26:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 03 Apr 2007 09:34:48 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Patrick Fischer schreef:
->   
->> Andre Renaud wrote:
->>     
->>> The mirror for DosFSTools,
->>> ftp://ftp.uni-erlangen.de/pub/Linux/LOCAL/dosfstools/dosfstools-${PV}.src.tar.gz
->>>
->>>
->>> appears to be down at the moment. Using the Debian mirror however works
->>> fine. Attached is an alternative bitbake package which uses the debian
->>> mirror system to do the download, which should be much more robust.
->>>       
-> INHERIT += "angstrom-mirrors" will give you access to
-> http://www.angstrom-distribution.org/unstable/sources/dosfstools-2.10.src.tar.gz
->   
-Ok with this source (could never test with the original source) I get 
-this compile error
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-make -C mkdosfs all
-make[1]: Entering directory 
-`/var/src/openembedded/tmp/work/i686-linux/dosfstools-native-2.10-r3/dosfstools-2.10/mkdosfs'
-ccache gcc -isystem/var/src/openembedded/tmp/staging/i686-linux/include 
--O2 -c mkdosfs.c -o mkdosfs.o
-mkdosfs.c:129: error: expected declaration specifiers or '...' before 
-'_llseek'
-mkdosfs.c:129: error: expected declaration specifiers or '...' before 'fd'
-mkdosfs.c:129: error: expected declaration specifiers or '...' before 'hi'
-mkdosfs.c:129: error: expected declaration specifiers or '...' before 'lo'
-mkdosfs.c:130: error: expected declaration specifiers or '...' before 'res'
-mkdosfs.c:130: error: expected declaration specifiers or '...' before 'wh'
-make[1]: *** [mkdosfs.o] Error 1
-make[1]: Leaving directory 
-`/var/src/openembedded/tmp/work/i686-linux/dosfstools-native-2.10-r3/dosfstools-2.10/mkdosfs'
-make: *** [all] Error 2
-+ die 'oe_runmake failed'
-+ oefatal 'oe_runmake failed'
-+ echo FATAL: 'oe_runmake failed'
-FATAL: oe_runmake failed
-+ exit 1
-ERROR: Function do_compile failed
+koen commit schreef:
+> hal: add 0.5.9 and hal-info_git from poky
+> * has a hack to work around autofoo >2.59 dep
 
+> +# work around autoconf >2.59 deps...
+> +do_configure() {
+> +	gnu-configize
+> +	libtoolize --force
+> +	oe_runconf
+> +}
 
-regards
-Patrick
+As Graeme noted on IRC, we really need to get autoconf-native 2.6x working. It didn't
+compile for me, so I resorted to the above hack.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGEh+uMkyGM64RGpERAsKzAKCXbXhdCHshuSHyIQn8w/Ko99F2mgCgjH28
+K8ybX+nxyOxJ+ocEVExQHWg=
+=Mx9j
+-----END PGP SIGNATURE-----
 
 
