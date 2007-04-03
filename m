@@ -1,26 +1,25 @@
-Received: from [212.227.126.171] (helo=moutng.kundenserver.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <fischer@4g-systems.com>) id 1HYefA-0005vy-2C
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Apr 2007 10:46:48 +0200
-Received: from [213.238.49.68] (helo=dehamox1a.intra.4g-systems.com)
-	by mrelayeu.kundenserver.de (node=mrelayeu6) with ESMTP (Nemesis),
-	id 0ML29c-1HYef82QWp-0003PJ; Tue, 03 Apr 2007 10:46:47 +0200
-Received: from [172.31.20.70] (deham-pc1070.intra.4g-systems.com
-	[172.31.20.70])
-	by dehamox1a.intra.4g-systems.com (Postfix) with ESMTP id 139CA61247A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Apr 2007 10:46:46 +0200 (CEST)
-Message-ID: <46121476.1030609@4g-systems.com>
-Date: Tue, 03 Apr 2007 10:46:46 +0200
-From: Patrick Fischer <fischer@4g-systems.com>
-User-Agent: Icedove 1.5.0.9 (X11/20061220)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HYeoy-00066i-Dd
+	for openembedded-devel@openembedded.org; Tue, 03 Apr 2007 10:56:56 +0200
+Received: from [130.89.138.60] (wlan138060.mobiel.utwente.nl [130.89.138.60])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l338uqox022562 for <openembedded-devel@openembedded.org>;
+	Tue, 3 Apr 2007 10:56:52 +0200
+Message-ID: <461216D1.1010705@dominion.kabel.utwente.nl>
+Date: Tue, 03 Apr 2007 10:56:49 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Provags-ID: V01U2FsdGVkX1+xakxOUgRXWAK2mndu/P+hya1mKaVPCfOyp9/
-	uzaw67BFRpbgNuFS1635ev9excOR/wFgVkS31oHX7KDBeAkka6
-	We37RloQYTS2qZ9RmrMzA==
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+To: openembedded-devel@openembedded.org
+References: <46121476.1030609@4g-systems.com>
+In-Reply-To: <46121476.1030609@4g-systems.com>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: DosFStools mirror missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,59 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2007 08:46:48 -0000
-Content-Type: multipart/mixed; boundary="------------040709050102080001070304"
-
---------------040709050102080001070304
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 03 Apr 2007 08:56:57 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Andre Renaud wrote:
-> The mirror for DosFSTools,
-> ftp://ftp.uni-erlangen.de/pub/Linux/LOCAL/dosfstools/dosfstools-${PV}.src.tar.gz
->
-> appears to be down at the moment. Using the Debian mirror however works
-> fine. Attached is an alternative bitbake package which uses the debian
-> mirror system to do the download, which should be much more robust.
->
-> Andre
-The Debian Mirror provide only a newer version of the dosfstools, isn't it?
-I got the same problem while inherit the bootimg.bbclass.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-here comes my dosfstools-nativ_2.11.bb
+Patrick Fischer schreef:
+> Andre Renaud wrote:
+>> The mirror for DosFSTools,
+>> ftp://ftp.uni-erlangen.de/pub/Linux/LOCAL/dosfstools/dosfstools-${PV}.src.tar.gz
+>>
+>>
+>> appears to be down at the moment. Using the Debian mirror however works
+>> fine. Attached is an alternative bitbake package which uses the debian
+>> mirror system to do the download, which should be much more robust.
 
-The Problem is that the bootimg.bbclass contains mkdosfs -F 12 ..... 
-*-d* ${BDIR} .....
-The parameter -d was not found in mkdosfs 2.11. This is provided by the 
-patch (mkdosfs-dif.patch).
-Maybe somebody can fix that.
+INHERIT += "angstrom-mirrors" will give you access to
+http://www.angstrom-distribution.org/unstable/sources/dosfstools-2.10.src.tar.gz
 
-Best Regards
-Patrick
-# dosfstools-native OE build file
-# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
-# Released under the MIT license (see packages/COPYING)
+regards,
 
-require dosfstools_${PV}.bb
-FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/dosfstools-${PV}"
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-S="${WORKDIR}/dosfstools-${PV}"
+iD8DBQFGEhbRMkyGM64RGpERAq/hAJ4iwCuplFH+7N9PEcpz+FVaUgBxggCfUBCW
+qfKzKPmH9Mr+4XeJZZO3jDo=
+=pt74
+-----END PGP SIGNATURE-----
 
 
-SRC_URI = "http://ftp.debian.org/debian/pool/main/d/dosfstools/dosfstools_2.11.orig.tar.gz \
-	file://mkdosfs-bootcode.patch;patch=1 \
-	file://mkdosfs-dir.patch;patch=1 \
-	file://alignment_hack.patch;patch=1 \
-	file://dosfstools-2.10-kernel-2.6.patch;patch=1 \
-	file://msdos_fat12_undefined.patch;patch=1 \
-	file://dosfstools-msdos_fs-types.patch;patch=1 \
-	file://include-linux-types.patch;patch=1"
-
-inherit native
-
-do_stage() {
-	install -m 755 ${S}/mkdosfs/mkdosfs ${STAGING_BINDIR}/mkdosfs
-	install -m 755 ${S}/dosfsck/dosfsck ${STAGING_BINDIR}/dosfsck
-}
-
---------------040709050102080001070304--
