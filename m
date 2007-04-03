@@ -1,27 +1,26 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [212.227.126.171] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HYilL-00079H-QI
-	for openembedded-devel@openembedded.org; Tue, 03 Apr 2007 15:09:30 +0200
-Received: from [130.89.138.60] (wlan138060.mobiel.utwente.nl [130.89.138.60])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l33D9OLr010597 for <openembedded-devel@openembedded.org>;
-	Tue, 3 Apr 2007 15:09:24 +0200
-Message-ID: <46125202.1050608@dominion.kabel.utwente.nl>
-Date: Tue, 03 Apr 2007 15:09:22 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+	(envelope-from <fischer@4g-systems.com>) id 1HYlUK-000457-U4
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Apr 2007 18:04:05 +0200
+Received: from [213.238.49.68] (helo=dehamox1a.intra.4g-systems.com)
+	by mrelayeu.kundenserver.de (node=mrelayeu4) with ESMTP (Nemesis),
+	id 0ML21M-1HYlUI2o4o-0000eT; Tue, 03 Apr 2007 18:04:03 +0200
+Received: from [172.31.20.70] (deham-pc1070.intra.4g-systems.com
+	[172.31.20.70])
+	by dehamox1a.intra.4g-systems.com (Postfix) with ESMTP id 297E3610AE8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Apr 2007 18:04:02 +0200 (CEST)
+Message-ID: <46127AF2.9060302@4g-systems.com>
+Date: Tue, 03 Apr 2007 18:04:02 +0200
+From: Patrick Fischer <fischer@4g-systems.com>
+User-Agent: Icedove 1.5.0.9 (X11/20061220)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <E1HXnn8-0007Dx-JK@linuxtogo.org>	<460F5F87.3060403@dominion.kabel.utwente.nl>	<4610C6E6.30102@kernelconcepts.de>	<583221585.20070403130033@gmail.com>	<46122905.2010703@dominion.kabel.utwente.nl>
-	<46125058.3030302@kernelconcepts.de>
-In-Reply-To: <46125058.3030302@kernelconcepts.de>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev prismstumbler: add 0.7.4pre1
+To: openembedded-devel@lists.openembedded.org
+X-Provags-ID: V01U2FsdGVkX1/h+PoB6+diodcEpT5ML2fUhfa5FB7Zd0Bi9vT
+	Muzs6vuYY5kSitPAUEmcJCcfHW5cBuwL95xUEnyc7Lwzv0QcQ9
+	GabYg8QoDQk3MeoPTiBuw==
+Subject: bootimg.bbclass not works
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,29 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2007 13:09:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Apr 2007 16:04:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On dependence on the dosfstools problem I will ask if anybody use the 
+bootimg.bbclass
 
-Florian Boor schreef:
-> Hi,
-> 
-> Koen Kooi schrieb:
->> It would be best if upstream (prismstumbler in this case) would use proper versioning to
->> start with, but if that is not possible we can paper over it in OE.
-> 
-> I do not agree...
+First there was/is a problem with the dosfstool, but that will be 
+discussed in an other post.
 
-You don't agree with OE's versiong policy!?!?!
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+my problem is now that i want to create a boot iso from my oe system.
+So i will inherit from the bootimg.bbclass
 
-iD8DBQFGElICMkyGM64RGpERAtIRAJoDYVBIO1SltepuUrlVZiBJJamc0wCfdOdz
-LK5+/huSj+7a/HuExg5irqU=
-=jVxd
------END PGP SIGNATURE-----
+In my opinion there is the following line missing in the bootimg.bbclass
+
+IMAGE_POSTPROCESS_COMMAND += "build_boot_bin"
+But this can be done in my image.bb
+
+The build_boot_bin need so extern variables like:
+${INITRD} - indicates a filesystem image to use as an initrd (optional)
+${AUTO_SYSLINUXCFG} - set this to 1 to enable creating an automatic config
+${LABELS} - a list of targets for the automatic config
+${APPEND} - an override list of append strings for each label
+${SYSLINUX_OPTS} - additional options to add to the syslinux file ';' 
+delimited
+
+
+The initrd is not realy optional if you look into the source.
+But how to create an initrd with oe? Is there an class for?
+
+
+Best regard
+Patrick
 
 
