@@ -1,22 +1,23 @@
-Received: from [209.85.132.241] (helo=an-out-0708.google.com)
+Received: from [66.249.82.233] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cliff.brake@gmail.com>) id 1HZS1J-00059D-2n
+	(envelope-from <pmiscml@gmail.com>) id 1HZT7L-0004Rx-Kf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Apr 2007 15:28:57 +0200
-Received: by an-out-0708.google.com with SMTP id c5so618306anc
+	Thu, 05 Apr 2007 16:39:15 +0200
+Received: by wx-out-0506.google.com with SMTP id t14so545439wxc
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Apr 2007 06:28:55 -0700 (PDT)
-Received: by 10.115.77.1 with SMTP id e1mr721999wal.1175779735004;
-	Thu, 05 Apr 2007 06:28:55 -0700 (PDT)
-Received: by 10.114.191.6 with HTTP; Thu, 5 Apr 2007 06:28:54 -0700 (PDT)
-Message-ID: <f96d234e0704050628p3f72ec6exe9ef8ea5c732d80b@mail.gmail.com>
-Date: Thu, 5 Apr 2007 09:28:54 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Thu, 05 Apr 2007 07:39:14 -0700 (PDT)
+Received: by 10.90.113.18 with SMTP id l18mr1606572agc.1175783954659;
+	Thu, 05 Apr 2007 07:39:14 -0700 (PDT)
+Received: from cube ( [82.193.98.4])
+	by mx.google.com with ESMTP id 38sm2995157nzf.2007.04.05.07.39.13;
+	Thu, 05 Apr 2007 07:39:14 -0700 (PDT)
+Date: Thu, 5 Apr 2007 17:39:20 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1168683040.20070405173920@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4611582F.8010203@openhardware.net>
 MIME-Version: 1.0
-References: <4611582F.8010203@openhardware.net>
-Subject: Re: versioning madness
+Subject: [RFC] Cleaning up service handling in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,61 +31,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Apr 2007 13:28:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 05 Apr 2007 14:39:15 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 4/2/07, Tom Walsh <tom@openhardware.net> wrote:
-> I would like to know how others are handling this problem.   As you
-> already know, versioning can be "interesting" with OE.  It is probably
-> how I have approached the issue of keeping my list of files seperate
-> from the OE bb filetree.
->
-> In my project, I have a number of packages which needed specific changes
-> to files so that they reflected the needs of the target.  A simple
-> example is that of a list of /dev/devices.  initscripts controls the
-> device creation through the device_table list.  So, I have a
-> device_table file unique to my target.   No problem.
->
-> What is a problem is controlling the changes that I make to the OE
-> packages tree.  If I simply create a ${MACHINE_NAME} directory under
-> packages/initscripts/initscripts-1.0/, then I have to remember that it
-> is there.  As this target may never be in the mainstream OE database, I
-> keep the uniqueness of my changes in a seperate bb filetree.  The
-> local.conf names the BBFILES location of both the mainstream OE tree and
-> my bb tree.
->
-> This works, if I copy, in total, the packages/initscripts directory into
-> my bb tree, then do the changes inside the copy.  I now know where my
-> changes are and can distribute them without having people invasively
-> patch the OE tree.  Where this breaks down is the in the "PR" variable
-> (PR = "r88").  Bitbake will ignore my initscripts-1.0.bb totally, if the
-> OE initscripts has a higher "PR" number than my local copy!
+Hello openembedded-devel,
 
-The solution is bbcollections.  If you set up bbcollections properly,
-the package from the high priority tree will be used, even if the PR
-is greater in the upstream tree.  I just tested this as I have a local
-copy of tslib in my custom tree and it works.  I have been using
-bbcollections for a number of projects and it works very well.  I can
-check all my OE changes into SVN or whatever is used for the rest of
-the project, and still track the upstream OE tree as needed.
+  By service, I mean /etc/init.d/* scripts, which all follow
+start/stop command convention, etc. They also can autostart on boot or
+not. This is actually the topic of this RFC - to call for discussion
+of guidelines the packages should follow in their wish to install
+their services for autostart on boot.
 
-BBFILES := "${TOPDIR}/openembedded/packages/*/*.bb
-${TOPDIR}/openembedded.custom/packages/*/*.bb"
-BBFILE_COLLECTIONS = "upstream custom"
-BBFILE_PATTERN_upstream = "^${TOPDIR}/openembedded/packages/"
-BBFILE_PATTERN_custom = "^${TOPDIR}/openembedded.custom/packages"
-BBFILE_PRIORITY_upstream = "5"
-BBFILE_PRIORITY_custom = "10"
+  A specific case which makes me raise this question is irda-utils
+packages which includes irattach service, which it bothers to install
+for autostart. The result of this is that IrDA is being activated
+unconditionally on boot, eating power, and disallowing other processes
+to control IrDA port on their own. The only reason it doesn't hit many
+users is that service script itself broken and fails to detect IrDA
+port on most of machines.
 
-Does this work for you?
+  I checked that 2 major GUI frameworks, GPE and OPIE, use own means
+to control IrDA nd do not depend on irattach service. So, I'd like to
+proceed with following:
 
-Cliff
+1. Fix port detection for irattach service so it would apply to most
+PXA devices to start with.
+2. But leave it out of autostart, leaving this matter to user.
+
+
+  I hope that for this case, proposed steps are unambiguous, but
+again, I'd like to extend scope of this RFC to discuss generic
+guidelines for all services. Another possible usecase: user install
+mysql server. This is reasonably heavy package for embedded system.
+So, should package make it autostart or no?
+
+  I'd guess, this largely depends on the answer to question "How hard
+for end user to control service's autostart setting?". OE uses update-rc.d
+script for this, and arguably, it's not very userfriendly - while
+removal from autostart takes just remove command and service name, for
+adding to autostart, user needs to specify priorities explicitly, and
+that's easy to get that wrong.
+
+  I'm not sure how Debian solves this issue, but RedHat systems has
+chkconfig utils, which, while having confusing name, has nice feature
+of using defaults provided in service script itself, for example:
+
+-- avahi-daemon --
+#! /bin/sh
+#
+# avahi-daemon:       Starts the Avahi Daemon
+#
+# chkconfig: 345 98 02
+[]
+------------------
+
+  Would it be reasonable to add such feature to update-rc.d script?
+
 
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
+
 
 
