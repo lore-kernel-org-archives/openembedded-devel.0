@@ -1,25 +1,28 @@
-Received: from [66.249.82.228] (helo=wx-out-0506.google.com)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HZUD5-0000tz-S7
+	(envelope-from <rod@whitby.id.au>) id 1HZZe3-0003W1-9I
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Apr 2007 17:49:15 +0200
-Received: by wx-out-0506.google.com with SMTP id t14so567783wxc
+	Thu, 05 Apr 2007 23:37:27 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 4A5DB212504
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Apr 2007 08:49:14 -0700 (PDT)
-Received: by 10.90.72.10 with SMTP id u10mr1745434aga.1175788154665;
-	Thu, 05 Apr 2007 08:49:14 -0700 (PDT)
-Received: from cube ( [82.193.98.4])
-	by mx.google.com with ESMTP id 40sm3091455nzf.2007.04.05.08.49.13;
-	Thu, 05 Apr 2007 08:49:14 -0700 (PDT)
-Date: Thu, 5 Apr 2007 18:49:19 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1653144547.20070405184919@gmail.com>
-To: Sergey Lapin <slapinid@gmail.com>
-In-Reply-To: <461516E2.1000505@gmail.com>
-References: <1597775703.20070405182752@gmail.com> <461516E2.1000505@gmail.com>
+	Thu,  5 Apr 2007 17:37:33 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Thu, 05 Apr 2007 17:37:27 -0400
+X-Sasl-enc: bHngoQ4G4PmsaKuQn9mt95Q5HU3zRmXTl8FtVjGBw6ib 1175809046
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id 91FEC1CA39
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Apr 2007 17:37:26 -0400 (EDT)
+Message-ID: <46156BCD.6060407@whitby.id.au>
+Date: Fri, 06 Apr 2007 07:06:13 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+References: <1597775703.20070405182752@gmail.com>
+In-Reply-To: <1597775703.20070405182752@gmail.com>
 Subject: Re: [RFC] Adding sanity to OE startup process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,46 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Apr 2007 15:49:17 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 05 Apr 2007 21:37:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello Sergey,
+Paul Sokolovsky wrote:
+>   So, to start with, I'd like to propose to make it possible for boot
+> process to log to syslog. I have following in mind:
+> 
+> 4. Make /etc/init.d/syslogd.sh start earlier so it could capture as
+> mush output as possible.
 
-Thursday, April 5, 2007, 6:33:54 PM, you wrote:
+This is something that the syslog.file, syslog.buffer and syslog.network
+scripts in packages/slugos-init/files/initscripts try to do.  Syslog to
+buffer is started *as* *early* as possible.  Syslog to file is started
+as soon as filesystems are mounted, and Syslog to network is started as
+soon as the network is up.
 
-> Paul Sokolovsky wrote:
->>   So, to start with, I'd like to propose to make it possible for boot
->> process to log to syslog. I have following in mind:
->> 
->> 1. Make a convention that boot/service scripts should use "$echo"
->> instead of "echo" to do output.
->> 2. Have default define of "echo=echo" for this.
-> I think some function should suffice.
-> aliasing is possible too.
-> Function could be more flexible solution.
+[I'm not suggesting you copy those files directly, or use the
+slugos-init package - this all needs to be generalised and subsumed into
+the standard init package as part of the slugos reincorporation into
+general OE.]
 
-  Well, yes, function would actually even better. I just wasn't sure
-if rules for overriding builtins are portable enough. Well, I checked
-that it works for both bash and busybox.
+The packages/initscripts/initscripts-slugos_1.0.bb file will show the
+init ordering changes that we did to make sure syslog started as early
+as possible to help with debugging on a machine (NSLU2) which does not
+have a user-visible console at all.
 
+[Again, that recipe still needs to be subsumed into OE proper, so I will
+be very interested in working with you to effectively replace the
+initscripts-slugos recipe with a new improved initscripts recipe that
+suits everyone.]
 
->> 3. Turn /etc/init.d/syslogd into /etc/init.d/syslogd.sh so it was
->> sourced by /etc/init.d/rc and could export new value for the rest of
->> scripts.
-> I don't see why.
-
->> 5. Using syslogd for boot messages capture is of course optional.
-> I don't see why.
-> We can log to multiple places.
-
-> All the best,
-> S.
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+-- Rod
 
 
