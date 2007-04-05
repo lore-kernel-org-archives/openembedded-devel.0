@@ -1,23 +1,25 @@
-Received: from [66.249.82.225] (helo=wx-out-0506.google.com)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HZTsK-0000Ue-5b
+	(envelope-from <slapinid@gmail.com>) id 1HZTyh-0000dC-IH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Apr 2007 17:27:48 +0200
-Received: by wx-out-0506.google.com with SMTP id t14so560899wxc
+	Thu, 05 Apr 2007 17:34:23 +0200
+Received: by ug-out-1314.google.com with SMTP id e2so964492ugf
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Apr 2007 08:27:47 -0700 (PDT)
-Received: by 10.90.104.14 with SMTP id b14mr1715845agc.1175786867253;
-	Thu, 05 Apr 2007 08:27:47 -0700 (PDT)
-Received: from cube ( [82.193.98.4])
-	by mx.google.com with ESMTP id 38sm3068788nzf.2007.04.05.08.27.46;
-	Thu, 05 Apr 2007 08:27:47 -0700 (PDT)
-Date: Thu, 5 Apr 2007 18:27:52 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1597775703.20070405182752@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Thu, 05 Apr 2007 08:34:23 -0700 (PDT)
+Received: by 10.67.30.6 with SMTP id h6mr2284855ugj.1175787262934;
+	Thu, 05 Apr 2007 08:34:22 -0700 (PDT)
+Received: from ?192.168.6.144? ( [62.152.84.97])
+	by mx.google.com with ESMTP id z34sm3905466ikz.2007.04.05.08.34.21;
+	Thu, 05 Apr 2007 08:34:22 -0700 (PDT)
+Message-ID: <461516E2.1000505@gmail.com>
+Date: Thu, 05 Apr 2007 19:33:54 +0400
+From: Sergey Lapin <slapinid@gmail.com>
+User-Agent: Icedove 1.5.0.10 (X11/20070307)
 MIME-Version: 1.0
-Subject: [RFC] Adding sanity to OE startup process
+To: openembedded-devel@lists.openembedded.org
+References: <1597775703.20070405182752@gmail.com>
+In-Reply-To: <1597775703.20070405182752@gmail.com>
+Subject: Re: [RFC] Adding sanity to OE startup process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,44 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Apr 2007 15:27:48 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 05 Apr 2007 15:34:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello openembedded-devel,
-
-  I hope many people will agree that boot process is one of the pain
-points of OE. Boot/service scripts are collected from Debian and other
-various sources, which are mostly intended for "desktop" systems, and
-doesn't really scale for embedded usage. For example, on typical
-desktop system you have:
-
-1. Big screen and good chance to see a message before it scrolls
-away.
-2. Ability to pause boot process from console with common Ctrl+S/Q.
-3. Scrollback buffer.
-
-  All these are usually not available for embedded system (not
-speaking that some embedded systems don't have screen at all).
-
-  So, to start with, I'd like to propose to make it possible for boot
-process to log to syslog. I have following in mind:
-
-1. Make a convention that boot/service scripts should use "$echo"
-instead of "echo" to do output.
-2. Have default define of "echo=echo" for this.
-3. Turn /etc/init.d/syslogd into /etc/init.d/syslogd.sh so it was
-sourced by /etc/init.d/rc and could export new value for the rest of
-scripts.
-4. Make /etc/init.d/syslogd.sh start earlier so it could capture as
-mush output as possible.
-5. Using syslogd for boot messages capture is of course optional.
+Paul Sokolovsky wrote:
+>   So, to start with, I'd like to propose to make it possible for boot
+> process to log to syslog. I have following in mind:
+> 
+> 1. Make a convention that boot/service scripts should use "$echo"
+> instead of "echo" to do output.
+> 2. Have default define of "echo=echo" for this.
+I think some function should suffice.
+aliasing is possible too.
+Function could be more flexible solution.
 
 
-Thanks,
+> 3. Turn /etc/init.d/syslogd into /etc/init.d/syslogd.sh so it was
+> sourced by /etc/init.d/rc and could export new value for the rest of
+> scripts.
+I don't see why.
 
--- 
- Paul                          mailto:pmiscml@gmail.com
+> 5. Using syslogd for boot messages capture is of course optional.
+I don't see why.
+We can log to multiple places.
+
+
+All the best,
+S.
 
 
 
