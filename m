@@ -1,30 +1,25 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [64.233.166.180] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HZa8I-000429-Gb
+	(envelope-from <pmiscml@gmail.com>) id 1HZlwT-0002ZN-SY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Apr 2007 00:08:42 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id AA5F9212288
+	Fri, 06 Apr 2007 12:45:20 +0200
+Received: by py-out-1112.google.com with SMTP id n39so413597pyh
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Apr 2007 18:08:48 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Thu, 05 Apr 2007 18:08:42 -0400
-X-Sasl-enc: d66fvlATI3vs/6wfPGYBFzx9KpyoGg89WLdxxfzL01q5 1175810922
-Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id C870C22334
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Apr 2007 18:08:41 -0400 (EDT)
-Message-ID: <46157321.1050607@whitby.id.au>
-Date: Fri, 06 Apr 2007 07:37:29 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
-MIME-Version: 1.0
+	Fri, 06 Apr 2007 03:45:16 -0700 (PDT)
+Received: by 10.65.215.14 with SMTP id s14mr5699284qbq.1175856316190;
+	Fri, 06 Apr 2007 03:45:16 -0700 (PDT)
+Received: from cube ( [82.193.98.4])
+	by mx.google.com with ESMTP id m1sm4572564nzf.2007.04.06.03.45.15;
+	Fri, 06 Apr 2007 03:45:15 -0700 (PDT)
+Date: Fri, 6 Apr 2007 13:45:22 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <408285868.20070406134522@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1597775703.20070405182752@gmail.com>	<46156BCD.6060407@whitby.id.au>
-	<46156E12.9090002@dominion.kabel.utwente.nl>
-In-Reply-To: <46156E12.9090002@dominion.kabel.utwente.nl>
-Subject: Re: [RFC] Adding sanity to OE startup process
+In-Reply-To: <1168683040.20070405173920@gmail.com>
+References: <1168683040.20070405173920@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [RFC] Cleaning up service handling in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,31 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Apr 2007 22:08:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 06 Apr 2007 10:45:25 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Rod Whitby schreef:
->>> Paul Sokolovsky wrote:
->>>>   So, to start with, I'd like to propose to make it possible for boot
->>>> process to log to syslog. I have following in mind:
->>>>
->>>> 4. Make /etc/init.d/syslogd.sh start earlier so it could capture as
->>>> mush output as possible.
->>> This is something that the syslog.file, syslog.buffer and syslog.network
->>> scripts in packages/slugos-init/files/initscripts try to do.  Syslog to
->>> buffer is started *as* *early* as possible.  Syslog to file is started
->>> as soon as filesystems are mounted, and Syslog to network is started as
->>> soon as the network is up.
-> 
-> Sounds pretty neat, does the buffer get flushed to file as well?
+Hello,
 
-At the moment, no.  You get to choose the destination in
-/etc/syslog.conf, and it only logs to that destination.
+Thursday, April 5, 2007, 5:39:20 PM, you wrote:
 
-(e.g. if you need early debugging, you have to set it to buffer)
+> Hello openembedded-devel,
 
--- Rod
+>   By service, I mean /etc/init.d/* scripts, which all follow
+> start/stop command convention, etc. They also can autostart on boot or
+> not. This is actually the topic of this RFC - to call for discussion
+> of guidelines the packages should follow in their wish to install
+> their services for autostart on boot.
+
+>   A specific case which makes me raise this question is irda-utils
+> packages which includes irattach service, which it bothers to install
+> for autostart. The result of this is that IrDA is being activated
+> unconditionally on boot, eating power, and disallowing other processes
+> to control IrDA port on their own. The only reason it doesn't hit many
+> users is that service script itself broken and fails to detect IrDA
+> port on most of machines.
+
+  Ok, this was fixed.
+
+  Comments for general improvements to service handling are still
+welcome!
+
+[]
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
