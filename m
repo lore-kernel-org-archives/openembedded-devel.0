@@ -1,25 +1,20 @@
-Received: from [64.233.166.180] (helo=py-out-1112.google.com)
+Received: from [64.233.184.232] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HZlwT-0002ZN-SY
+	(envelope-from <cliff.brake@gmail.com>) id 1HZsQG-00016q-LA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Apr 2007 12:45:20 +0200
-Received: by py-out-1112.google.com with SMTP id n39so413597pyh
+	Fri, 06 Apr 2007 19:40:28 +0200
+Received: by wr-out-0506.google.com with SMTP id 50so617240wri
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Apr 2007 03:45:16 -0700 (PDT)
-Received: by 10.65.215.14 with SMTP id s14mr5699284qbq.1175856316190;
-	Fri, 06 Apr 2007 03:45:16 -0700 (PDT)
-Received: from cube ( [82.193.98.4])
-	by mx.google.com with ESMTP id m1sm4572564nzf.2007.04.06.03.45.15;
-	Fri, 06 Apr 2007 03:45:15 -0700 (PDT)
-Date: Fri, 6 Apr 2007 13:45:22 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <408285868.20070406134522@gmail.com>
+	Fri, 06 Apr 2007 10:40:27 -0700 (PDT)
+Received: by 10.114.192.1 with SMTP id p1mr1316812waf.1175881227217;
+	Fri, 06 Apr 2007 10:40:27 -0700 (PDT)
+Received: by 10.114.191.6 with HTTP; Fri, 6 Apr 2007 10:40:27 -0700 (PDT)
+Message-ID: <f96d234e0704061040w29f723e7gf20ad5fa8112b6b5@mail.gmail.com>
+Date: Fri, 6 Apr 2007 13:40:27 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1168683040.20070405173920@gmail.com>
-References: <1168683040.20070405173920@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [RFC] Cleaning up service handling in OE
+Subject: module options, modprobe.conf vs modules.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,42 +28,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2007 10:45:25 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 06 Apr 2007 17:40:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello,
+Two possible issues I've observed:
 
-Thursday, April 5, 2007, 5:39:20 PM, you wrote:
+1) modprobe 3.2.2 seems to require that module options be located in
+modprobe.conf instead of modules.conf.  /etc/modules.d/options might
+be another option.  update-modules is still generating modules.conf.
 
-> Hello openembedded-devel,
+2) the module options don't seem to work on the first boot.  Perhaps
+the modules are being installed before the "conf" file is generated.
+I need to look into this some more.
 
->   By service, I mean /etc/init.d/* scripts, which all follow
-> start/stop command convention, etc. They also can autostart on boot or
-> not. This is actually the topic of this RFC - to call for discussion
-> of guidelines the packages should follow in their wish to install
-> their services for autostart on boot.
+Do we want to update the "update-modules" package, or is there some
+new better way to do all this?
 
->   A specific case which makes me raise this question is irda-utils
-> packages which includes irattach service, which it bothers to install
-> for autostart. The result of this is that IrDA is being activated
-> unconditionally on boot, eating power, and disallowing other processes
-> to control IrDA port on their own. The only reason it doesn't hit many
-> users is that service script itself broken and fails to detect IrDA
-> port on most of machines.
-
-  Ok, this was fixed.
-
-  Comments for general improvements to service handling are still
-welcome!
-
-[]
-
-
+Thanks,
+Cliff
 
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
