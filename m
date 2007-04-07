@@ -1,26 +1,29 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Ha8M1-0000lX-SJ
-	for openembedded-devel@openembedded.org; Sat, 07 Apr 2007 12:41:09 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l37Af6ox018627 for <openembedded-devel@openembedded.org>;
-	Sat, 7 Apr 2007 12:41:07 +0200
-Message-ID: <4617753E.409@dominion.kabel.utwente.nl>
-Date: Sat, 07 Apr 2007 12:41:02 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+	(envelope-from <rod@whitby.id.au>) id 1HaA0V-0006Vu-AO
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Apr 2007 14:27:04 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 3217E216869
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  7 Apr 2007 08:26:58 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Sat, 07 Apr 2007 08:27:03 -0400
+X-Sasl-enc: mG5dJBKEtTnf5gKCBTo3U47W2ro86BqUNs6EjaMZgtmd 1175948822
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id 5FDAA18EBC
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  7 Apr 2007 08:27:02 -0400 (EDT)
+Message-ID: <46178DC9.1000207@whitby.id.au>
+Date: Sat, 07 Apr 2007 21:55:45 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <46176E51.2030608@dominion.kabel.utwente.nl>
-	<CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
-In-Reply-To: <CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+To: openembedded-devel@lists.openembedded.org
+References: <46176E51.2030608@dominion.kabel.utwente.nl>	<CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
+	<4617753E.409@dominion.kabel.utwente.nl>
+In-Reply-To: <4617753E.409@dominion.kabel.utwente.nl>
 Subject: Re: [RFC] rm_work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,46 +38,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Apr 2007 10:41:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 07 Apr 2007 12:27:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Holger Freyther schreef:
-> Am 07.04.2007 um 12:11 schrieb Koen Kooi:
+Koen Kooi wrote:
+> Holger Freyther schreef:
+>>> how many recipes still break with rm_work
 > 
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->>
->> In the last few weeks that I've used rm_work, I haven't found any  
->> big problems with it,
->> but as Graeme points out, there is no easy way to disable yet.
->>
->> What do you think?
-> 
-> Hi,
-> 
-> how many recipes still break with rm_work
+> angstrom-x11-image, angstrom-console-image and openmoko-devel-image work for various machines.
 
-angstrom-x11-image, angstrom-console-image and openmoko-devel-image work for various machines.
+All recipes used by nslu2-linux are compatible with rm_work - we use it
+on our autobuilders.
 
->, is there a documentation  
-> which tasks to add and link to unbreak rm_work (if it breaks).
-
-No idea, Marcin?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGF3U+MkyGM64RGpERArPDAKCCtK9w8msutoFKGCJh1oQwf2n9qACfcilU
-s7fZgbhu7A2KKs55G/qobeY=
-=X890
------END PGP SIGNATURE-----
+-- Rod
 
 
