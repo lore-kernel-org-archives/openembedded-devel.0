@@ -1,20 +1,25 @@
-Received: from [64.233.184.232] (helo=wr-out-0506.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cliff.brake@gmail.com>) id 1HZsQG-00016q-LA
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Apr 2007 19:40:28 +0200
-Received: by wr-out-0506.google.com with SMTP id 50so617240wri
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Apr 2007 10:40:27 -0700 (PDT)
-Received: by 10.114.192.1 with SMTP id p1mr1316812waf.1175881227217;
-	Fri, 06 Apr 2007 10:40:27 -0700 (PDT)
-Received: by 10.114.191.6 with HTTP; Fri, 6 Apr 2007 10:40:27 -0700 (PDT)
-Message-ID: <f96d234e0704061040w29f723e7gf20ad5fa8112b6b5@mail.gmail.com>
-Date: Fri, 6 Apr 2007 13:40:27 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Ha7tS-00058q-EF
+	for openembedded-devel@openembedded.org; Sat, 07 Apr 2007 12:11:38 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l37ABXox014383 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 7 Apr 2007 12:11:34 +0200
+Message-ID: <46176E51.2030608@dominion.kabel.utwente.nl>
+Date: Sat, 07 Apr 2007 12:11:29 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-Subject: module options, modprobe.conf vs modules.conf
+To: Using the OpenEmbedded metadata to build Linux Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: [RFC] rm_work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,30 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2007 17:40:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 07 Apr 2007 10:11:38 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Two possible issues I've observed:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-1) modprobe 3.2.2 seems to require that module options be located in
-modprobe.conf instead of modules.conf.  /etc/modules.d/options might
-be another option.  update-modules is still generating modules.conf.
+Hi,
 
-2) the module options don't seem to work on the first boot.  Perhaps
-the modules are being installed before the "conf" file is generated.
-I need to look into this some more.
+I want to propose making rm_work inherited by default with the following changes:
 
-Do we want to update the "update-modules" package, or is there some
-new better way to do all this?
+* a KEEP_WORK = "1" var in bitbake.conf so it is opt-in
+* a KEEP_WORK_pn-${PN} option to mark packages in local.conf
+* a KEEP_WORK option in recipes to mark them, e.g. for llvm
 
-Thanks,
-Cliff
+Summary: it will default to 'off' (keep the workdir), but can be switched globally and per
+package.
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+In the last few weeks that I've used rm_work, I haven't found any big problems with it,
+but as Graeme points out, there is no easy way to disable yet.
+
+What do you think?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGF25RMkyGM64RGpERAtDZAJsH34WyVDZaQCnrcpgEF8ezNySLfgCgu30W
+299vq8pM/5y1KQMaplmmlhY=
+=U4ym
+-----END PGP SIGNATURE-----
 
 
