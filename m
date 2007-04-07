@@ -1,24 +1,26 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <zecke@selfish.org>) id 1Ha8GD-0000f8-HI
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Apr 2007 12:35:09 +0200
-Received: from [91.64.161.147] (helo=[192.168.10.100])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1Ha8GC-0000ga-SI
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Apr 2007 12:35:08 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <46176E51.2030608@dominion.kabel.utwente.nl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Ha8M1-0000lX-SJ
+	for openembedded-devel@openembedded.org; Sat, 07 Apr 2007 12:41:09 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l37Af6ox018627 for <openembedded-devel@openembedded.org>;
+	Sat, 7 Apr 2007 12:41:07 +0200
+Message-ID: <4617753E.409@dominion.kabel.utwente.nl>
+Date: Sat, 07 Apr 2007 12:41:02 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <46176E51.2030608@dominion.kabel.utwente.nl>
-X-Gpgmail-State: !signed
-Message-Id: <CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Sat, 7 Apr 2007 12:34:53 +0200
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 91.64.161.147
+	<CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
+In-Reply-To: <CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [RFC] rm_work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,31 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Apr 2007 10:35:09 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Sat, 07 Apr 2007 10:41:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am 07.04.2007 um 12:11 schrieb Koen Kooi:
+Holger Freyther schreef:
+> Am 07.04.2007 um 12:11 schrieb Koen Kooi:
+> 
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>>
+>> In the last few weeks that I've used rm_work, I haven't found any  
+>> big problems with it,
+>> but as Graeme points out, there is no easy way to disable yet.
+>>
+>> What do you think?
+> 
+> Hi,
+> 
+> how many recipes still break with rm_work
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
->
-> In the last few weeks that I've used rm_work, I haven't found any  
-> big problems with it,
-> but as Graeme points out, there is no easy way to disable yet.
->
-> What do you think?
+angstrom-x11-image, angstrom-console-image and openmoko-devel-image work for various machines.
 
-Hi,
+>, is there a documentation  
+> which tasks to add and link to unbreak rm_work (if it breaks).
 
-how many recipes still break with rm_work, is there a documentation  
-which tasks to add and link to unbreak rm_work (if it breaks). I'm  
-still uncertain if the cleaning should be done by bitbake itself.
+No idea, Marcin?
 
+regards,
 
-z.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFGF3U+MkyGM64RGpERArPDAKCCtK9w8msutoFKGCJh1oQwf2n9qACfcilU
+s7fZgbhu7A2KKs55G/qobeY=
+=X890
+-----END PGP SIGNATURE-----
 
 
