@@ -1,19 +1,20 @@
 Received: from [216.182.48.170] (helo=beastbox.kfctristate.com)
 	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <tom@openhardware.net>) id 1HagAc-0004QT-TT
-	for openembedded-devel@openembedded.org; Mon, 09 Apr 2007 00:47:39 +0200
-Received: (qmail 14150 invoked from network); 8 Apr 2007 22:47:37 -0000
+	(envelope-from <tom@openhardware.net>) id 1HagIJ-0004XO-Ae
+	for openembedded-devel@openembedded.org; Mon, 09 Apr 2007 00:55:35 +0200
+Received: (qmail 14367 invoked from network); 8 Apr 2007 22:55:34 -0000
 Received: from unknown (HELO ?172.30.107.2?) (172.30.107.2)
-	by beastbox.kfctristate.com with SMTP; 8 Apr 2007 22:47:37 -0000
-Message-ID: <461970FA.1090703@openhardware.net>
-Date: Sun, 08 Apr 2007 18:47:22 -0400
+	by beastbox.kfctristate.com with SMTP; 8 Apr 2007 22:55:34 -0000
+Message-ID: <461972D6.1060901@openhardware.net>
+Date: Sun, 08 Apr 2007 18:55:18 -0400
 From: Tom Walsh <tom@openhardware.net>
 User-Agent: Thunderbird 1.5.0.10 (X11/20070305)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1168683040.20070405173920@gmail.com>
-In-Reply-To: <1168683040.20070405173920@gmail.com>
-Subject: Re: [RFC] Cleaning up service handling in OE
+References: <4611582F.8010203@openhardware.net>	<f96d234e0704050628p3f72ec6exe9ef8ea5c732d80b@mail.gmail.com>
+	<c384c5ea0704081010y623cdbafq4f9dce1148a593e5@mail.gmail.com>
+In-Reply-To: <c384c5ea0704081010y623cdbafq4f9dce1148a593e5@mail.gmail.com>
+Subject: Re: versioning madness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -27,79 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2007 22:47:39 -0000
+X-List-Received-Date: Sun, 08 Apr 2007 22:55:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Paul Sokolovsky wrote:
-> Hello openembedded-devel,
+Leon Woestenberg wrote:
+> Hello Tom, Cliff,
 >
->   By service, I mean /etc/init.d/* scripts, which all follow
-> start/stop command convention, etc. They also can autostart on boot or
-> not. This is actually the topic of this RFC - to call for discussion
-> of guidelines the packages should follow in their wish to install
-> their services for autostart on boot.
->
->   A specific case which makes me raise this question is irda-utils
-> packages which includes irattach service, which it bothers to install
-> for autostart. The result of this is that IrDA is being activated
-> unconditionally on boot, eating power, and disallowing other processes
-> to control IrDA port on their own. The only reason it doesn't hit many
-> users is that service script itself broken and fails to detect IrDA
-> port on most of machines.
->
->   I checked that 2 major GUI frameworks, GPE and OPIE, use own means
-> to control IrDA nd do not depend on irattach service. So, I'd like to
-> proceed with following:
->
-> 1. Fix port detection for irattach service so it would apply to most
-> PXA devices to start with.
-> 2. But leave it out of autostart, leaving this matter to user.
->
->
->   I hope that for this case, proposed steps are unambiguous, but
-> again, I'd like to extend scope of this RFC to discuss generic
-> guidelines for all services. Another possible usecase: user install
-> mysql server. This is reasonably heavy package for embedded system.
-> So, should package make it autostart or no?
->
->   I'd guess, this largely depends on the answer to question "How hard
-> for end user to control service's autostart setting?". OE uses update-rc.d
-> script for this, and arguably, it's not very userfriendly - while
-> removal from autostart takes just remove command and service name, for
-> adding to autostart, user needs to specify priorities explicitly, and
-> that's easy to get that wrong.
->
->   I'm not sure how Debian solves this issue, but RedHat systems has
-> chkconfig utils, which, while having confusing name, has nice feature
-> of using defaults provided in service script itself, for example:
->
-> -- avahi-daemon --
-> #! /bin/sh
-> #
-> # avahi-daemon:       Starts the Avahi Daemon
-> #
-> # chkconfig: 345 98 02
-> []
-> ------------------
->
->   Would it be reasonable to add such feature to update-rc.d script?
+> On 4/5/07, Cliff Brake <cliff.brake@gmail.com> wrote:
+>   
+>> On 4/2/07, Tom Walsh <tom@openhardware.net> wrote:
+>>     
+>>> I would like to know how others are handling this problem.   As you
+>>> ...
+>>>       
+>> The solution is bbcollections.  If you set up bbcollections properly,
+>> ...
+>>
+>>     
+> I am using the same method as Cliff and this works very well for me. I
+> put my private tree in a CVS repository. (But I try to commit as much
+> generic stuff into mainline).
 >
 >   
-As a heavy Mandriva user, I prefer the chkconfig way of doing things.  
-For three reasons:
 
-1. It is a "standard" method of managing init scripts already in use.
+AH!  You know, I use svn regularly and I didn't even think about using 
+it against the OE tree!  Thanks, that would be the best solution for me.
 
-2. You can change the order of services quickly without deleting / 
-adding symlinks manually.
-
-3. My eyes glazed over when I read the update-rc.d script.
+I have two projects using OE, one is something that can be public, the 
+other is for a client.  The svn solution should work for me well in both 
+cases.
 
 Regards,
 
 TomW
-
 
 
 
