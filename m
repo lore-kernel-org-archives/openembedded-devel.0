@@ -1,37 +1,24 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [217.72.192.227] (helo=fmmailgate02.web.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1HaWOp-0002BG-Mx
-	for openembedded-devel@openembedded.org; Sun, 08 Apr 2007 14:21:39 +0200
-Received: from dominion.dominion.void (dominion.kabel.utwente.nl
-	[130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l38CLYLr003834 for <openembedded-devel@openembedded.org>;
-	Sun, 8 Apr 2007 14:21:34 +0200
-Received: from www-data by dominion.dominion.void with local (Exim 4.60)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1HaWOk-0001sY-Tj
-	for openembedded-devel@openembedded.org; Sun, 08 Apr 2007 14:21:34 +0200
-Received: from ip5451781a.direct-adsl.nl (ip5451781a.direct-adsl.nl
-	[84.81.120.26]) by dominion.kabel.utwente.nl (IMP) with HTTP 
-	for <koen@localhost>; Sun, 08 Apr 2007 14:21:34 +0200
-Message-ID: <1176034894.4618de4eb4d4b@dominion.kabel.utwente.nl>
-Date: Sun, 08 Apr 2007 14:21:34 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
+	(envelope-from <martin.runge@web.de>) id 1HaXYA-0006Zm-FF
+	for openembedded-devel@openembedded.org; Sun, 08 Apr 2007 15:35:22 +0200
+Received: from smtp06.web.de (fmsmtp06.dlan.cinetic.de [172.20.5.172])
+	by fmmailgate02.web.de (Postfix) with ESMTP id 046F6713DB2C
+	for <openembedded-devel@openembedded.org>;
+	Sun,  8 Apr 2007 15:35:22 +0200 (CEST)
+Received: from [77.176.16.141] (helo=navarra.weinkeller.de)
+	by smtp06.web.de with asmtp (TLSv1:AES256-SHA:256)
+	(WEB.DE 4.107 #114) id 1HaXY9-0002pS-00
+	for openembedded-devel@openembedded.org; Sun, 08 Apr 2007 15:35:21 +0200
+From: Martin Runge <martin.runge@web.de>
 To: openembedded-devel@openembedded.org
-References: <46176E51.2030608@dominion.kabel.utwente.nl>
-	<CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
-	<4617753E.409@dominion.kabel.utwente.nl>
-	<D93C49B4-4326-49E1-981A-C3EA65F49070@selfish.org>
-	<4618DAFF.3080701@dominion.kabel.utwente.nl>
-In-Reply-To: <4618DAFF.3080701@dominion.kabel.utwente.nl>
+Date: Sun, 8 Apr 2007 15:34:54 +0200
+User-Agent: KMail/1.9.6
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) 3.2.6
-X-Originating-IP: 84.81.120.26
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] rm_work
+Message-Id: <200704081535.03156.martin.runge@web.de>
+Sender: martin.runge@web.de
+X-Sender: martin.runge@web.de
+Subject: alsa-utils fail to compile - patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -45,25 +32,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2007 12:21:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 08 Apr 2007 13:35:23 -0000
+X-Groupsio-MsgNum: 1764
+Content-Type: multipart/signed; boundary="nextPart1360440.OQ5aqJdrJb";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-Quoting Koen Kooi <k.kooi@student.utwente.nl>:
+--nextPart1360440.OQ5aqJdrJb
+Content-Type: multipart/mixed;
+  boundary="Boundary-01=_/9OGGknTZQ1SG6b"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> AFAIK, the sjf2410 recipe in OE, not in svn works
+--Boundary-01=_/9OGGknTZQ1SG6b
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-I just checked:
-http://www.openembedded.org/bonsai/query/description/do_deploy/?scm_id=3
+Hi .*
 
-While I understand your point about documenting things like this for ISVs, your
-example just shows an ISV too lazy/busy/whatever to merge back fixes.
+I have had problems compiling alsa-utils_1.0.13.bb package for my target=20
+(EP93xx based). The aseqnet utility did not link, I got unresolved symbols=
+=20
+because libintl was not linked to aseqnet.=20
 
-regards,
+I created a patch that solves this issue for me (attached). Does this probl=
+em=20
+occour on other targets, too?
 
-Koen
-
-----------------------------------------------------------------
-This message was sent using IMP, the Internet Messaging Program.
+best rgards,
+Martin
 
 
+p.s.
+
+I use revision 56da424b67313c359d08cc04b5320ed7c34d6a61 from=20
+org.openembedded.dev. The link error was reproducable with earlier versions=
+,=20
+too.
+
+
+
+--Boundary-01=_/9OGGknTZQ1SG6b
+Content-Type: text/x-diff;
+  charset="utf-8";
+  name="alsa-utils-bb.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="alsa-utils-bb.patch"
+
+--- alsa-utils_1.0.13.bb~	2007-04-08 15:04:25.000000000 +0200
++++ alsa-utils_1.0.13.bb	2007-04-08 15:25:24.750688167 +0200
+@@ -3,7 +3,7 @@
+ SECTION =3D "console/utils"
+ LICENSE =3D "GPL"
+ DEPENDS =3D "alsa-lib ncurses"
+-PR =3D "r0"
++PR =3D "r1"
+=20
+ SRC_URI =3D "ftp://ftp.alsa-project.org/pub/utils/alsa-utils-${PV}.tar.bz2=
+\
+            file://link_lintl_to_aseqnet.patch;patch=3D1"
+
+--Boundary-01=_/9OGGknTZQ1SG6b
+Content-Type: text/x-diff;
+  charset="utf-8";
+  name="link_lintl_to_aseqnet.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="link_lintl_to_aseqnet.patch"
+
+--- alsa-utils-1.0.13/seq/aseqnet/Makefile.am.orig	2007-04-08 14:54:30.7911=
+50057 +0200
++++ alsa-utils-1.0.13/seq/aseqnet/Makefile.am	2007-04-08 14:54:59.087712622=
+ +0200
+@@ -1,4 +1,5 @@
+ INCLUDES =3D -I$(top_srcdir)/include
++LDADD =3D $(LIBINTL)
+ EXTRA_DIST =3D README.aseqnet aseqnet.1
+=20
+ bin_PROGRAMS =3D aseqnet
+
+--Boundary-01=_/9OGGknTZQ1SG6b--
+
+--nextPart1360440.OQ5aqJdrJb
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.3 (GNU/Linux)
+
+iQIVAwUARhjvhmA0kvpfv12hAQLd2Q//QvqtIhp8tLBR5j0xIDp9GIal2mmndFLu
+TO8oX/AvcY4auTZw83L6S/4uJPGD+j0u6egUsj11S8jEoQh8+6sSJ2y5giIqbzDy
+RMfBIFmwqjxViD+H4U2DjrTbk7metcL2PfDm48gi7l0utbVWMb6Zf/FoIqs8411c
+PwmLMX4oycLs9CsuEGitKf6qOdNrqY8fOlwsxFZibU018KpP+VBd/Noh8rmTmURC
+SCQHzl9y704MckV5WLNlurNzmmeIg8ToFqtn0i8oKOXodnbJkxNORhd1DGrltB+P
+sfmOTCr9k4bx6bC+mpQQY1ZgAXcb90/LFm4Fv9ru98pajgGODkPuQofyO84PHY4d
+Za/4RVUi9lF5+gmjWCcAkAMZmbnHjHIuZoEmnzlsik9v+BS52sJcAwRPtD4UyadO
+VD+II0NWahwdBwsFH/5XbwVBc+plgdt6UX5UiH1d1xC04c0cHndA5dkJujQ+2dOF
+AkpC7Iy/mhu1UEaguoxs2k4yLOWDj0L+ggcHucYEbSm7PF8H3xPHAXXSCUYo9iWE
+jckC3Dn4pZFnWZOSLfgNBINsCRM4AMWMcY54iVdAOhlZiPwoKVeLqNt/0IG5ZqsN
+vVwKAzFeXLN4rD1NRhdTjs5o1gSXMF8lie/MTmMbEKPH87afuLYhsQb7NSf8EDS1
+G1kUPBqjfSY=
+=VRqJ
+-----END PGP SIGNATURE-----
+
+--nextPart1360440.OQ5aqJdrJb--
