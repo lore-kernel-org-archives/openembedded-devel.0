@@ -1,30 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HaaM7-0002yn-Rc
-	for openembedded-devel@openembedded.org; Sun, 08 Apr 2007 18:35:07 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1HaaM2-0006cV-0z
-	for openembedded-devel@openembedded.org; Sun, 08 Apr 2007 18:35:02 +0200
-Received: from zaphod.rfc1149.net ([88.191.14.223])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 08 Apr 2007 18:35:02 +0200
-Received: from sam by zaphod.rfc1149.net with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 08 Apr 2007 18:35:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Samuel Tardieu <sam@rfc1149.net>
-Date: 08 Apr 2007 18:25:29 +0200
-Message-ID: <87abxide9y.fsf@willow.rfc1149.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: zaphod.rfc1149.net
-User-Agent: Gnus/5.09 (Gnus v5.9.0) Emacs/21.4
-X-Leafnode-NNTP-Posting-Host: 2001:6f8:37a:2::2
-Sender: news <news@sea.gmane.org>
-Subject: Using the svn version of a package
+	(envelope-from <leon.woestenberg@gmail.com>) id 1HaauE-0003TV-HX
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 Apr 2007 19:10:22 +0200
+Received: by ug-out-1314.google.com with SMTP id e2so1357254ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 Apr 2007 10:10:21 -0700 (PDT)
+Received: by 10.67.10.18 with SMTP id n18mr4631129ugi.1176052221824;
+	Sun, 08 Apr 2007 10:10:21 -0700 (PDT)
+Received: by 10.66.251.2 with HTTP; Sun, 8 Apr 2007 10:10:21 -0700 (PDT)
+Message-ID: <c384c5ea0704081010y623cdbafq4f9dce1148a593e5@mail.gmail.com>
+Date: Sun, 8 Apr 2007 19:10:21 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org, cliff.brake@gmail.com
+In-Reply-To: <f96d234e0704050628p3f72ec6exe9ef8ea5c732d80b@mail.gmail.com>
+MIME-Version: 1.0
+References: <4611582F.8010203@openhardware.net>
+	<f96d234e0704050628p3f72ec6exe9ef8ea5c732d80b@mail.gmail.com>
+Subject: Re: versioning madness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,16 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2007 16:35:08 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 08 Apr 2007 17:10:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi.
+Hello Tom, Cliff,
 
-How can I force bitbake to use the svn version of mplayer?
+On 4/5/07, Cliff Brake <cliff.brake@gmail.com> wrote:
+> On 4/2/07, Tom Walsh <tom@openhardware.net> wrote:
+> > I would like to know how others are handling this problem.   As you
+> > ...
+> The solution is bbcollections.  If you set up bbcollections properly,
+> ...
+>
+I am using the same method as Cliff and this works very well for me. I
+put my private tree in a CVS repository. (But I try to commit as much
+generic stuff into mainline).
 
-  Sam
--- 
-Samuel Tardieu -- sam@rfc1149.net -- http://www.rfc1149.net/
+One remaining issue for me is that I now have two seperate version
+controlled repositories and I need a way to keep them interoperable.
+This is not hard to do for the HEADs, but I have people working with
+older branches or snapshots so there is a pretty amount of overhead
+involved in keeping track of breaking changes.
 
+Regards,
+
+Leon.
 
 
