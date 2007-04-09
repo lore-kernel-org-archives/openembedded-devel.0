@@ -1,22 +1,20 @@
-Received: from [209.85.132.246] (helo=an-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <papercrane@gmail.com>) id 1HavL7-0007CI-2A
-	for openembedded-devel@openembedded.org; Mon, 09 Apr 2007 16:59:29 +0200
-Received: by an-out-0708.google.com with SMTP id b2so1698462ana
-	for <openembedded-devel@openembedded.org>;
-	Mon, 09 Apr 2007 07:59:28 -0700 (PDT)
-Received: by 10.114.170.1 with SMTP id s1mr2355952wae.1176130767430;
-	Mon, 09 Apr 2007 07:59:27 -0700 (PDT)
-Received: by 10.115.91.8 with HTTP; Mon, 9 Apr 2007 07:59:27 -0700 (PDT)
-Message-ID: <432beae0704090759h4ec56bb8j7b93246ccdc106b@mail.gmail.com>
-Date: Mon, 9 Apr 2007 07:59:27 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <87abxide9y.fsf@willow.rfc1149.net>
+Received: from [216.182.48.170] (helo=beastbox.kfctristate.com)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <tom@openhardware.net>) id 1Hax5d-0007Xb-HK
+	for openembedded-devel@openembedded.org; Mon, 09 Apr 2007 18:51:37 +0200
+Received: (qmail 16370 invoked from network); 9 Apr 2007 16:51:36 -0000
+Received: from unknown (HELO ?172.30.107.2?) (172.30.107.2)
+	by beastbox.kfctristate.com with SMTP; 9 Apr 2007 16:51:36 -0000
+Message-ID: <461A6F08.3020904@openhardware.net>
+Date: Mon, 09 Apr 2007 12:51:20 -0400
+From: Tom Walsh <tom@openhardware.net>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070305)
 MIME-Version: 1.0
-References: <87abxide9y.fsf@willow.rfc1149.net>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Using the svn version of a package
+To: openembedded-devel@lists.openembedded.org
+References: <4611582F.8010203@openhardware.net>	<f96d234e0704050628p3f72ec6exe9ef8ea5c732d80b@mail.gmail.com>	<c384c5ea0704081010y623cdbafq4f9dce1148a593e5@mail.gmail.com>
+	<461972D6.1060901@openhardware.net>
+In-Reply-To: <461972D6.1060901@openhardware.net>
+Subject: Re: versioning madness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,20 +28,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2007 14:59:29 -0000
+X-List-Received-Date: Mon, 09 Apr 2007 16:51:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 08 Apr 2007 18:25:29 +0200, Samuel Tardieu <sam@rfc1149.net> wrote:
-> Hi.
+Tom Walsh wrote:
+> Leon Woestenberg wrote:
+>   
+>> Hello Tom, Cliff,
+>>
+>> On 4/5/07, Cliff Brake <cliff.brake@gmail.com> wrote:
+>>   
+>>     
+>>> On 4/2/07, Tom Walsh <tom@openhardware.net> wrote:
+>>>     
+>>>       
+>>>> I would like to know how others are handling this problem.   As you
+>>>> ...
+>>>>       
+>>>>         
+>>> The solution is bbcollections.  If you set up bbcollections properly,
+>>> ...
+>>>
+>>>     
+>>>       
+>> I am using the same method as Cliff and this works very well for me. I
+>> put my private tree in a CVS repository. (But I try to commit as much
+>> generic stuff into mainline).
+>>
+>>   
+>>     
 >
-> How can I force bitbake to use the svn version of mplayer?
+> AH!  You know, I use svn regularly and I didn't even think about using 
+> it against the OE tree!  Thanks, that would be the best solution for me.
 >
+>   
+Nope, didn't work as well as I had hoped.  Both monotone and subversion 
+bit^H^H^H complain about having an existing directory, so, I cannot 
+"overlay" into the OE tree with either.
 
-Use PREFERRED_VERSION_mplayer.
+I'll just have to do it the old-fashioned way and edit the stuff with vi.
+
+TomW
+
+
 
 -- 
-Justin Patrin
+Tom Walsh - WN3L - Embedded Systems Consultant
+http://openhardware.net http://cyberiansoftware.com http://openzipit.org
+"Windows? No thanks, I have work to do..."
+----------------------------------------------------
+
+
 
 
