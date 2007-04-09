@@ -1,20 +1,30 @@
-Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1Hb3Ld-0002Fs-Kp
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2007 01:32:33 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so1085529nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Apr 2007 16:32:32 -0700 (PDT)
-Received: by 10.114.125.2 with SMTP id x2mr2534530wac.1176161552311;
-	Mon, 09 Apr 2007 16:32:32 -0700 (PDT)
-Received: by 10.114.152.15 with HTTP; Mon, 9 Apr 2007 16:32:32 -0700 (PDT)
-Message-ID: <bdb0025f0704091632m9aeb727m91cd10ae29197572@mail.gmail.com>
-Date: Mon, 9 Apr 2007 20:32:32 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: update-alternatives-dpkg problems
+	(envelope-from <rpurdie@rpsys.net>) id 1Hb3U8-0002Ny-KY
+	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 01:41:21 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l39NfJU1024269;
+	Tue, 10 Apr 2007 00:41:19 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 23841-07; Tue, 10 Apr 2007 00:41:13 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l39NfCAc024262
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Tue, 10 Apr 2007 00:41:12 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1175383522.5852.21.camel@localhost.localdomain>
+References: <1175383522.5852.21.camel@localhost.localdomain>
+Date: Tue, 10 Apr 2007 00:41:13 +0100
+Message-Id: <1176162073.5842.46.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: Fixing OE.dev dependency issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,45 +38,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2007 23:32:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 09 Apr 2007 23:41:23 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi all,
+On Sun, 2007-04-01 at 00:25 +0100, Richard Purdie wrote:
+> I'm proposing we add the syntax:
+> 
+> do_patch[depends] = "quilt-native:populate_staging" 
+> 
+> to handle needs like this. Experiments on my local tree suggest we need
+> the following patch to generate the correct dependencies:
+> 
+> http://www.rpsys.net/openzaurus/temp/oe-depends-fixes.patch
+> 
+> but of course once we do this, bitbake 1.6 is no longer going to work
+> with the metadata since this change is not backwards compatible.
 
-/*Error 1*/
+Since two months with bitbake 1.8 not working properly with trunk is
+obviously unacceptable, I've given it some thought and found a way to
+hopefully maintain backwards compatibility with bitbake 1.6:
 
-All the postinst scripts are using update-alternatives like this:
+http://www.rpsys.net/openzaurus/temp/oe-depends-fixes-r3.patch
 
-update-alternatives --install ${base_bindir}/gzip gzip gzip.${PN} 100
+This won't help performance of 1.6 but does let it continue to work. It
+gathers together most of the code that can be removed when we switch to
+1.8 too as an added bonus.
 
-Then the update-alternatives-dpkg gets gzip.${PN} (actually gzip.gzip)
-as it $apath
-and creates the symbolic link:
+Can 1.6 users give this patch a test and report any problems please? If
+there are no objections, I will check this in soon.
 
-/etc/alternatives/gzip -> gzip.gzip
+For reference I've already checked this into poky (without the
+compatibility code) where its working fine with bitbake 1.8.
 
-But this symbolic link does not work... it shoud be
+Cheers,
 
-/etc/alternatives/gzip -> /bin/gzip.gzip
+Richard
 
-is it an error of update-alternatives script or an error of all
-postinst scripts?
-any idea how to fix it?
-
-/*Error 2*/
-
-Another error that I've found at update-alternatives-dpkg is the
-$dpkglibdir variable that is hardcoded to ../utils when it should be
-/usr/lib/dpkg
-
-For a while, I've added to do_patch() function of
-update-alternatives-dpkg a sed to change it in place... But I'm sure
-that this is not a good fix...
-any idea how to do it better?
-
-Thanks,
-vivijim at #oe
 
 
