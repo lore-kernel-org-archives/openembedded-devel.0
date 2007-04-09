@@ -1,31 +1,22 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.184.239] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1Hb1oJ-0002DX-28
-	for openembedded-devel@openembedded.org; Mon, 09 Apr 2007 23:54:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l39Ls30D018897
-	for <openembedded-devel@openembedded.org>;
-	Mon, 9 Apr 2007 22:54:03 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18551-10 for <openembedded-devel@openembedded.org>;
-	Mon,  9 Apr 2007 22:54:00 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l39Lrt7G018865
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 9 Apr 2007 22:53:56 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <evcm2e$15q$1@sea.gmane.org>
+	(envelope-from <papercrane@gmail.com>) id 1Hb28s-0002Tb-GZ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Apr 2007 00:15:18 +0200
+Received: by wr-out-0506.google.com with SMTP id 50so955881wri
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 09 Apr 2007 15:15:17 -0700 (PDT)
+Received: by 10.114.14.1 with SMTP id 1mr2521063wan.1176156914049;
+	Mon, 09 Apr 2007 15:15:14 -0700 (PDT)
+Received: by 10.115.91.8 with HTTP; Mon, 9 Apr 2007 15:15:13 -0700 (PDT)
+Message-ID: <432beae0704091515n6a55a294jfdf64c9e855b9537@mail.gmail.com>
+Date: Mon, 9 Apr 2007 15:15:14 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1176155636.5842.25.camel@localhost.localdomain>
+MIME-Version: 1.0
 References: <evcm2e$15q$1@sea.gmane.org>
-Date: Mon, 09 Apr 2007 22:53:56 +0100
-Message-Id: <1176155636.5842.25.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<1176155636.5842.25.camel@localhost.localdomain>
 Subject: Re: OE a deterministic build system?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,39 +31,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2007 21:54:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 Apr 2007 22:15:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On 4/9/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> Hi,
+>
+> On Mon, 2007-04-09 at 15:22 +0900, Rolf Leggewie wrote:
+> > I am pulling my hair out and losing faith in OE being a deterministic
+> > build system.  As documented in bug 1568, I have not been able to build
+> > nunome for about half a year now.  When I asked hrw for help in fixing
+> > it , I was quite surprised for him to come back and say "Built fine for
+> > me". This success was later repeated by psokolovsky.  Alas, I can't.
+> [...]
+> >    9. "bitbake qte-mt && bitbake nunome" then fails with the same old
+> >       error of "undefined reference to `main'" as always ->
+> >       http://bugs.openembedded.org/attachment.cgi?id=1335
+>
+> FWIW, I tried bitbake qte-mt and then bitbake nunome and it succeeded
+> for me.
 
-On Mon, 2007-04-09 at 15:22 +0900, Rolf Leggewie wrote:
-> I am pulling my hair out and losing faith in OE being a deterministic 
-> build system.  As documented in bug 1568, I have not been able to build 
-> nunome for about half a year now.  When I asked hrw for help in fixing 
-> it , I was quite surprised for him to come back and say "Built fine for 
-> me". This success was later repeated by psokolovsky.  Alas, I can't.
-[...]
->    9. "bitbake qte-mt && bitbake nunome" then fails with the same old
->       error of "undefined reference to `main'" as always ->
->       http://bugs.openembedded.org/attachment.cgi?id=1335
+As I said in a comment on the bug earlier, "me too". I even used your
+local.conf (with paths fixed) and it built fine for me. Whether or not
+it's useful I don't know.
 
-FWIW, I tried bitbake qte-mt and then bitbake nunome and it succeeded
-for me.
+>
+> > Now, I really wonder what causes this virgin build to fail for me when
+> > it seems everybody else can happily build it?  Is OE not deterministic?
+> > Hints and discussion welcome.
+>
+> OE is deterministic but it does to some degree depend the environment
+> your building within too. Whilst we go to lengths to remove that from
+> the equation, it does sometimes creep in. You need to debug that build
+> failure, looking particularly to something creeping in from your build
+> system...
+>
 
-> Now, I really wonder what causes this virgin build to fail for me when 
-> it seems everybody else can happily build it?  Is OE not deterministic?  
-> Hints and discussion welcome.
+I'll second that. You need to figure out where your host is creeping
+into OE and fix that. If it's an option you could try switching host
+distros or releases, trying chroot, using another computer, or just
+dig in and figure out what's going on. The .log files in the temp/
+directory for nunome may be of help.
 
-OE is deterministic but it does to some degree depend the environment
-your building within too. Whilst we go to lengths to remove that from
-the equation, it does sometimes creep in. You need to debug that build
-failure, looking particularly to something creeping in from your build
-system...
-
-Regards,
-
-Richard
-
+-- 
+Justin Patrin
 
 
