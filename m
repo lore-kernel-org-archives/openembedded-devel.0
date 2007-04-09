@@ -1,33 +1,26 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [64.233.184.235] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <oe@hentges.net>) id 1HayU2-0001fm-0O
+	(envelope-from <cliff.brake@gmail.com>) id 1HaylH-0005f8-CE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Apr 2007 20:20:54 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id 35D74308207
+	Mon, 09 Apr 2007 20:38:43 +0200
+Received: by wr-out-0506.google.com with SMTP id 50so903351wri
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Apr 2007 20:20:53 +0200 (CEST)
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 22646-07 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Apr 2007 20:20:50 +0200 (CEST)
-Received: from mhcln04.hentges.priv (xdsl-213-196-243-76.netcologne.de
-	[213.196.243.76]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id D016C3081E7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Apr 2007 20:20:29 +0200 (CEST)
-From: Matthias Hentges <oe@hentges.net>
+	Mon, 09 Apr 2007 11:38:42 -0700 (PDT)
+Received: by 10.115.54.1 with SMTP id g1mr2420246wak.1176143921888;
+	Mon, 09 Apr 2007 11:38:41 -0700 (PDT)
+Received: by 10.114.191.6 with HTTP; Mon, 9 Apr 2007 11:38:41 -0700 (PDT)
+Message-ID: <f96d234e0704091138j7118f436j4f4a3cc3edee4446@mail.gmail.com>
+Date: Mon, 9 Apr 2007 14:38:41 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <461A7AC6.1070809@dominion.kabel.utwente.nl>
-References: <432beae0704091037s67b6eeb5kf145751af05d1969@mail.gmail.com>
-	<461A7AC6.1070809@dominion.kabel.utwente.nl>
-Date: Mon, 09 Apr 2007 20:20:28 +0200
-Message-Id: <1176142828.4945.11.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
-Subject: Re: Multiple mailing list addresses
+In-Reply-To: <461A6F08.3020904@openhardware.net>
+MIME-Version: 1.0
+References: <4611582F.8010203@openhardware.net>
+	<f96d234e0704050628p3f72ec6exe9ef8ea5c732d80b@mail.gmail.com>
+	<c384c5ea0704081010y623cdbafq4f9dce1148a593e5@mail.gmail.com>
+	<461972D6.1060901@openhardware.net>
+	<461A6F08.3020904@openhardware.net>
+Subject: Re: versioning madness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,47 +34,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2007 18:20:54 -0000
-X-Groupsio-MsgNum: 1780
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="=-uRS2rtM9Jls9AaKmP6wJ"
+X-List-Received-Date: Mon, 09 Apr 2007 18:38:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---=-uRS2rtM9Jls9AaKmP6wJ
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+On 4/9/07, Tom Walsh <tom@openhardware.net> wrote:
+> Tom Walsh wrote:
+> > AH!  You know, I use svn regularly and I didn't even think about using
+> > it against the OE tree!  Thanks, that would be the best solution for me.
+> >
+> >
+> Nope, didn't work as well as I had hoped.  Both monotone and subversion
+> bit^H^H^H complain about having an existing directory, so, I cannot
+> "overlay" into the OE tree with either.
+>
+> I'll just have to do it the old-fashioned way and edit the stuff with vi.
 
-Am Montag, den 09.04.2007, 19:41 +0200 schrieb Koen Kooi:
-> where "used to the technology being smart enough to handle things correct=
-ly" read "too
-> lazy to check to: and cc: before clicking 'send'"
+I don't understand?  I have two trees that are completely separate
+from each other:
 
-One could argue that the list administrator is too lazy to finally fix
-the *broken* reply-to field, which breaks the Reply-To-All function of
-all decent mailers out there.
+openembedded (HEAD of OE managed with monotone)
+openembedded.custom (custom stuff managed with SVN)
 
+The beauty of this setup is the trees do not interfere with each other.
 
---=20
-Matthias 'CoreDump' Hentges=20
-Cologne / Germany
+Cliff
 
-Webmaster of Hentges.net & Embedded Linux Developer
-GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
-
-My OS: Debian SID: Geek by Nature, Linux by Choice
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
-
---=-uRS2rtM9Jls9AaKmP6wJ
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-
-iD8DBQBGGoPsPXyoPq8wMNkRAor/AJoCTWjIKoOtBTFtgHTyDPMfYo3O9ACfVCIT
-VsmjTxqTFYYxViXZwf9rx4Y=
-=pdak
------END PGP SIGNATURE-----
-
---=-uRS2rtM9Jls9AaKmP6wJ--
