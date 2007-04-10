@@ -1,35 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.166.177] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HbEZE-0001eI-RX
+	(envelope-from <pmiscml@gmail.com>) id 1HbFRY-00066r-8i
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2007 13:31:20 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 9E22128C012; Tue, 10 Apr 2007 13:23:58 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180191083.adsl.alicedsl.de [85.180.191.83])
-	by srv043.dedi23.de (Postfix) with ESMTP id 4337628C011
+	Tue, 10 Apr 2007 14:27:28 +0200
+Received: by py-out-1112.google.com with SMTP id n39so1290934pyh
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2007 13:23:58 +0200 (CEST)
-Date: Tue, 10 Apr 2007 13:31:21 +0200
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.98.4) Professional
-Organization: Vanille-Media
+	Tue, 10 Apr 2007 05:27:27 -0700 (PDT)
+Received: by 10.64.10.2 with SMTP id 2mr14120599qbj.1176208047190;
+	Tue, 10 Apr 2007 05:27:27 -0700 (PDT)
+Received: from cube ( [82.193.98.4])
+	by mx.google.com with ESMTP id 36sm11473886nzk.2007.04.10.05.27.25;
+	Tue, 10 Apr 2007 05:27:26 -0700 (PDT)
+Date: Tue, 10 Apr 2007 15:27:36 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
 X-Priority: 3 (Normal)
-Message-ID: <726885105.20070410133121@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1176034894.4618de4eb4d4b@dominion.kabel.utwente.nl>
-References: <46176E51.2030608@dominion.kabel.utwente.nl>
-	<CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
-	<4617753E.409@dominion.kabel.utwente.nl>
-	<D93C49B4-4326-49E1-981A-C3EA65F49070@selfish.org>
-	<4618DAFF.3080701@dominion.kabel.utwente.nl>
-	<1176034894.4618de4eb4d4b@dominion.kabel.utwente.nl>
+Message-ID: <02429232.20070410152736@gmail.com>
+To: Rod Whitby <rod@whitby.id.au>
+In-Reply-To: <46156BCD.6060407@whitby.id.au>
+References: <1597775703.20070405182752@gmail.com>
+	<46156BCD.6060407@whitby.id.au>
 MIME-Version: 1.0
-Subject: Re: [RFC] rm_work
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] Adding sanity to OE startup process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,28 +35,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 11:31:21 -0000
+X-List-Received-Date: Tue, 10 Apr 2007 12:27:30 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Quoting Koen Kooi <k.kooi@student.utwente.nl>:
+Hello Rod,
 
->> AFAIK, the sjf2410 recipe in OE, not in svn works
+Friday, April 6, 2007, 12:36:13 AM, you wrote:
 
-> I just checked:
-> http://www.openembedded.org/bonsai/query/description/do_deploy/?scm_id=3
+> Paul Sokolovsky wrote:
+>>   So, to start with, I'd like to propose to make it possible for boot
+>> process to log to syslog. I have following in mind:
+>> 
+>> 4. Make /etc/init.d/syslogd.sh start earlier so it could capture as
+>> mush output as possible.
 
-> While I understand your point about documenting things like this for ISVs, your
-> example just shows an ISV too lazy/busy/whatever to merge back fixes.
+> This is something that the syslog.file, syslog.buffer and syslog.network
+> scripts in packages/slugos-init/files/initscripts try to do.  Syslog to
+> buffer is started *as* *early* as possible.  Syslog to file is started
+> as soon as filesystems are mounted, and Syslog to network is started as
+> soon as the network is up.
 
-Ouch ;)
+> [I'm not suggesting you copy those files directly, or use the
+> slugos-init package - this all needs to be generalised and subsumed into
+> the standard init package as part of the slugos reincorporation into
+> general OE.]
 
-Regards,
+  I expected SlugOS project to be important stakeholder for such
+changes, so I appreciate your response, Rob! I had a look at
+slugos-init's syslog handling, and for sure it looks well done and
+should be generalized to the whole OE.
 
-:M:
+  I guess, at this point, I should just play with it to understand
+how it works better (for example, a question I have in mind: each of
+syslog.{buffer, file, network} appears to just run syslogd with new
+commandline params, not restart it or send signal; is this reliable
+(e.g. documented)? Well, as I tell, I should try it myself first I
+guess.)
+
+[]
+
+> -- Rod
+
+
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
