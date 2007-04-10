@@ -1,27 +1,25 @@
 Received: from [64.233.166.177] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HbFRY-00066r-8i
+	(envelope-from <bernardo@bandos.net>) id 1HbFzg-0006Yc-T9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2007 14:27:28 +0200
-Received: by py-out-1112.google.com with SMTP id n39so1290934pyh
+	Tue, 10 Apr 2007 15:02:46 +0200
+Received: by py-out-1112.google.com with SMTP id n39so1299841pyh
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2007 05:27:27 -0700 (PDT)
-Received: by 10.64.10.2 with SMTP id 2mr14120599qbj.1176208047190;
-	Tue, 10 Apr 2007 05:27:27 -0700 (PDT)
-Received: from cube ( [82.193.98.4])
-	by mx.google.com with ESMTP id 36sm11473886nzk.2007.04.10.05.27.25;
-	Tue, 10 Apr 2007 05:27:26 -0700 (PDT)
-Date: Tue, 10 Apr 2007 15:27:36 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <02429232.20070410152736@gmail.com>
-To: Rod Whitby <rod@whitby.id.au>
-In-Reply-To: <46156BCD.6060407@whitby.id.au>
-References: <1597775703.20070405182752@gmail.com>
-	<46156BCD.6060407@whitby.id.au>
+	Tue, 10 Apr 2007 06:02:43 -0700 (PDT)
+Received: by 10.65.114.4 with SMTP id r4mr14184493qbm.1176210163317;
+	Tue, 10 Apr 2007 06:02:43 -0700 (PDT)
+Received: by 10.64.3.17 with HTTP; Tue, 10 Apr 2007 06:02:43 -0700 (PDT)
+Message-ID: <3ef3a7ad0704100602v610f6c10k447a1551f79ca750@mail.gmail.com>
+Date: Tue, 10 Apr 2007 14:02:43 +0100
+From: "=?ISO-8859-1?Q?Jos=E9_Bernardo_Bandos_Rodrigues?=" <bernardo@bandos.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <432beae0704091515n6a55a294jfdf64c9e855b9537@mail.gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] Adding sanity to OE startup process
+References: <evcm2e$15q$1@sea.gmane.org>
+	<1176155636.5842.25.camel@localhost.localdomain>
+	<432beae0704091515n6a55a294jfdf64c9e855b9537@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: OE a deterministic build system?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,52 +33,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 12:27:30 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 10 Apr 2007 13:02:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Rod,
+Are you by any chance using ubuntu? If so, do a "sudo dpkg-reconfigure dash"
+and stop it replacing /bin/sh.
+That was the reason for most of the problems I had with oe, including a
+couple of "undefined reference to main".
 
-Friday, April 6, 2007, 12:36:13 AM, you wrote:
-
-> Paul Sokolovsky wrote:
->>   So, to start with, I'd like to propose to make it possible for boot
->> process to log to syslog. I have following in mind:
->> 
->> 4. Make /etc/init.d/syslogd.sh start earlier so it could capture as
->> mush output as possible.
-
-> This is something that the syslog.file, syslog.buffer and syslog.network
-> scripts in packages/slugos-init/files/initscripts try to do.  Syslog to
-> buffer is started *as* *early* as possible.  Syslog to file is started
-> as soon as filesystems are mounted, and Syslog to network is started as
-> soon as the network is up.
-
-> [I'm not suggesting you copy those files directly, or use the
-> slugos-init package - this all needs to be generalised and subsumed into
-> the standard init package as part of the slugos reincorporation into
-> general OE.]
-
-  I expected SlugOS project to be important stakeholder for such
-changes, so I appreciate your response, Rob! I had a look at
-slugos-init's syslog handling, and for sure it looks well done and
-should be generalized to the whole OE.
-
-  I guess, at this point, I should just play with it to understand
-how it works better (for example, a question I have in mind: each of
-syslog.{buffer, file, network} appears to just run syslogd with new
-commandline params, not restart it or send signal; is this reliable
-(e.g. documented)? Well, as I tell, I should try it myself first I
-guess.)
-
-[]
-
-> -- Rod
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
-
+2007/4/9, Justin Patrin <papercrane@gmail.com>:
+>
+> On 4/9/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> > Hi,
+> >
+> > On Mon, 2007-04-09 at 15:22 +0900, Rolf Leggewie wrote:
+> > > I am pulling my hair out and losing faith in OE being a deterministic
+> > > build system.  As documented in bug 1568, I have not been able to
+> build
+> > > nunome for about half a year now.  When I asked hrw for help in fixing
+> > > it , I was quite surprised for him to come back and say "Built fine
+> for
+> > > me". This success was later repeated by psokolovsky.  Alas, I can't.
+> > [...]
+> > >    9. "bitbake qte-mt && bitbake nunome" then fails with the same old
+> > >       error of "undefined reference to `main'" as always ->
+> > >       http://bugs.openembedded.org/attachment.cgi?id=1335
+> >
+> > FWIW, I tried bitbake qte-mt and then bitbake nunome and it succeeded
+> > for me.
+>
+> As I said in a comment on the bug earlier, "me too". I even used your
+> local.conf (with paths fixed) and it built fine for me. Whether or not
+> it's useful I don't know.
+>
+> >
+> > > Now, I really wonder what causes this virgin build to fail for me when
+> > > it seems everybody else can happily build it?  Is OE not
+> deterministic?
+> > > Hints and discussion welcome.
+> >
+> > OE is deterministic but it does to some degree depend the environment
+> > your building within too. Whilst we go to lengths to remove that from
+> > the equation, it does sometimes creep in. You need to debug that build
+> > failure, looking particularly to something creeping in from your build
+> > system...
+> >
+>
+> I'll second that. You need to figure out where your host is creeping
+> into OE and fix that. If it's an option you could try switching host
+> distros or releases, trying chroot, using another computer, or just
+> dig in and figure out what's going on. The .log files in the temp/
+> directory for nunome may be of help.
+>
+> --
+> Justin Patrin
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
