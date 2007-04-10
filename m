@@ -1,24 +1,30 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1HbDQc-0001hJ-Bb
+	(envelope-from <mickey@vanille-media.de>) id 1HbETj-0001Ue-Kf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2007 12:18:22 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1HbDjq-00024j-QP
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2007 12:38:14 +0200
-Message-ID: <461B645C.5040307@kernelconcepts.de>
-Date: Tue, 10 Apr 2007 12:18:04 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-MIME-Version: 1.0
+	Tue, 10 Apr 2007 13:25:39 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 1675828C012; Tue, 10 Apr 2007 13:18:17 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180191083.adsl.alicedsl.de [85.180.191.83])
+	by srv043.dedi23.de (Postfix) with ESMTP id A5F5428C011
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2007 13:18:16 +0200 (CEST)
+Date: Tue, 10 Apr 2007 13:25:39 +0200
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.98.4) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1771542973.20070410132539@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-References: <46176E51.2030608@dominion.kabel.utwente.nl>
-	<CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
-In-Reply-To: <CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
-X-Enigmail-Version: 0.94.0.0
-Subject: Re: [RFC] rm_work
+In-Reply-To: <1168683040.20070405173920@gmail.com>
+References: <1168683040.20070405173920@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [RFC] Cleaning up service handling in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,31 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 10:18:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 10 Apr 2007 11:25:40 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Thanks for raising this issue, Paul.
 
-Holger Freyther schrieb:
-> how many recipes still break with rm_work, is there a documentation  
-> which tasks to add and link to unbreak rm_work (if it breaks). I'm  
-> still uncertain if the cleaning should be done by bitbake itself.
+The state of the service handling in OE has buggered me since long,
+not just because of the (very valid) points you mentioned, but also
+because of their relationship to sysvinit -- the initscripts are just
+too specialized in my opinion.
 
-I'm using it for some time now - the only trouble I ran into were some breaking
-kernel packages. But if there are still some broken remaining these would be
-easy to fix.
+One example: I can see OpenMoko moving to another sysinit scheme,
+most likely upstart. Now how are we (OE) supposed to support that
+while keeping sysinit support updated at the same time.
 
-Greetings
+We should do it like we support different packaging systems and image
+types -- let me propose going to a more high level description for service
+handling and having a bbclass (INHERIT += sysvinit or INHERIT +=
+upstart) parsing this description and emitting
+the actual init scripts.
 
-Florian
+What do you think?
 
+Regards,
+
+:M:
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
