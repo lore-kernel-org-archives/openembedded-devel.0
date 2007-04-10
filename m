@@ -1,42 +1,24 @@
-Received: from [216.82.253.51] (helo=mail153.messagelabs.com)
-	by linuxtogo.org with smtp (Exim 4.63)
-	(envelope-from <jeremy.dufour@motorola.com>) id 1HbCnv-000195-6u
-	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 11:38:23 +0200
-X-VirusChecked: Checked
-X-Env-Sender: jeremy.dufour@motorola.com
-X-Msg-Ref: server-13.tower-153.messagelabs.com!1176197901!7229621!1
-X-StarScan-Version: 5.5.10.7.1; banners=-,-,-
-X-Originating-IP: [129.188.136.8]
-Received: (qmail 11163 invoked from network); 10 Apr 2007 09:38:21 -0000
-Received: from motgate8.mot.com (HELO motgate8.mot.com) (129.188.136.8)
-	by server-13.tower-153.messagelabs.com with SMTP;
-	10 Apr 2007 09:38:21 -0000
-Received: from il06exr01.mot.com (il06exr01.mot.com [129.188.137.131])
-	by motgate8.mot.com (8.12.11/Motorola) with ESMTP id l3A9cLvN027878
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 02:38:21 -0700 (MST)
-Received: from il06vts03.mot.com (il06vts03.mot.com [129.188.137.143])
-	by il06exr01.mot.com (8.13.5/Vontu) with SMTP id l3A9cKI3021667
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 04:38:20 -0500 (CDT)
-Received: from zfr01-2138.crm.mot.com (zfr01-2138.crm.mot.com [10.161.201.138])
-	by il06exr01.mot.com (8.13.5/8.13.0) with SMTP id l3A9cIkZ021627
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 04:38:19 -0500 (CDT)
-Received: by zfr01-2138.crm.mot.com (sSMTP sendmail emulation);
-	Tue, 10 Apr 2007 11:38:18 +0200
-Date: Tue, 10 Apr 2007 11:38:18 +0200
-From: Jeremy Dufour <jeremy.dufour@motorola.com>
-To: openembedded-devel@openembedded.org
-Message-ID: <20070410093818.GC4456@zfr01-2138.crm.mot.com>
-Mail-Followup-To: openembedded-devel@openembedded.org
-References: <20070330133719.GF4796@zfr01-2138.crm.mot.com>
-	<1175383645.5852.24.camel@localhost.localdomain>
-Mime-Version: 1.0
-In-Reply-To: <1175383645.5852.24.camel@localhost.localdomain>
-User-Agent: Mutt/1.5.11
-X-Vontu: Pass
-Subject: Re: Problem for building glibc (ipkg-build: command not found)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+	by linuxtogo.org with esmtp (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1HbDQc-0001hJ-Bb
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Apr 2007 12:18:22 +0200
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50) id 1HbDjq-00024j-QP
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Apr 2007 12:38:14 +0200
+Message-ID: <461B645C.5040307@kernelconcepts.de>
+Date: Tue, 10 Apr 2007 12:18:04 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <46176E51.2030608@dominion.kabel.utwente.nl>
+	<CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
+In-Reply-To: <CD2A5546-06FC-414A-9C74-FB640EBFC4A5@selfish.org>
+X-Enigmail-Version: 0.94.0.0
+Subject: Re: [RFC] rm_work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,28 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 09:38:23 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Apr 2007 10:18:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On 04/01/07 at 00:27:25 (+0100), Richard Purdie wrote:
-> [...]
-> It looks like a dependency issue, there is no way to tell bitbake that
-> ipkg-utils-native must have run do_populate_staging before it can run
-> do_package_write tasks.
+Hi,
 
-If I understand well, the problem here is that glibc is trying to do a
-"do_package_write" before ipkg-utils-native is built?
+Holger Freyther schrieb:
+> how many recipes still break with rm_work, is there a documentation  
+> which tasks to add and link to unbreak rm_work (if it breaks). I'm  
+> still uncertain if the cleaning should be done by bitbake itself.
 
-But I did not understand exactly why we can not "just" said that glibc
-depend on ipk-utils-native?
+I'm using it for some time now - the only trouble I ran into were some breaking
+kernel packages. But if there are still some broken remaining these would be
+easy to fix.
 
-> [...]
-> A short term work around is to "bitbake ipkg-utils-native" before
-> running your other bitbake command.
+Greetings
 
-This works fine for me, thanks!
+Florian
 
-djerem
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
