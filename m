@@ -1,30 +1,20 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1Hb3U8-0002Ny-KY
-	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 01:41:21 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l39NfJU1024269;
-	Tue, 10 Apr 2007 00:41:19 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 23841-07; Tue, 10 Apr 2007 00:41:13 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l39NfCAc024262
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Tue, 10 Apr 2007 00:41:12 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1175383522.5852.21.camel@localhost.localdomain>
-References: <1175383522.5852.21.camel@localhost.localdomain>
-Date: Tue, 10 Apr 2007 00:41:13 +0100
-Message-Id: <1176162073.5842.46.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: Fixing OE.dev dependency issues
+Received: from [216.182.48.170] (helo=beastbox.kfctristate.com)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <tom@openhardware.net>) id 1Hb4yI-0007Ec-Sz
+	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 03:16:35 +0200
+Received: (qmail 31250 invoked from network); 10 Apr 2007 01:16:33 -0000
+Received: from unknown (HELO ?172.30.107.2?) (172.30.107.2)
+	by beastbox.kfctristate.com with SMTP; 10 Apr 2007 01:16:33 -0000
+Message-ID: <461AE55E.6020301@openhardware.net>
+Date: Mon, 09 Apr 2007 21:16:14 -0400
+From: Tom Walsh <tom@openhardware.net>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070305)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4611582F.8010203@openhardware.net>	<f96d234e0704050628p3f72ec6exe9ef8ea5c732d80b@mail.gmail.com>	<c384c5ea0704081010y623cdbafq4f9dce1148a593e5@mail.gmail.com>	<461972D6.1060901@openhardware.net>	<461A6F08.3020904@openhardware.net>
+	<f96d234e0704091138j7118f436j4f4a3cc3edee4446@mail.gmail.com>
+In-Reply-To: <f96d234e0704091138j7118f436j4f4a3cc3edee4446@mail.gmail.com>
+Subject: Re: versioning madness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,42 +28,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2007 23:41:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Apr 2007 01:16:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2007-04-01 at 00:25 +0100, Richard Purdie wrote:
-> I'm proposing we add the syntax:
-> 
-> do_patch[depends] = "quilt-native:populate_staging" 
-> 
-> to handle needs like this. Experiments on my local tree suggest we need
-> the following patch to generate the correct dependencies:
-> 
-> http://www.rpsys.net/openzaurus/temp/oe-depends-fixes.patch
-> 
-> but of course once we do this, bitbake 1.6 is no longer going to work
-> with the metadata since this change is not backwards compatible.
+Cliff Brake wrote:
+> On 4/9/07, Tom Walsh <tom@openhardware.net> wrote:
+>   
+>> Tom Walsh wrote:
+>>     
+>>> AH!  You know, I use svn regularly and I didn't even think about using
+>>> it against the OE tree!  Thanks, that would be the best solution for me.
+>>>
+>>>
+>>>       
+>> Nope, didn't work as well as I had hoped.  Both monotone and subversion
+>> bit^H^H^H complain about having an existing directory, so, I cannot
+>> "overlay" into the OE tree with either.
+>>
+>> I'll just have to do it the old-fashioned way and edit the stuff with vi.
+>>     
+>
+> I don't understand?  I have two trees that are completely separate
+> from each other:
+>
+> openembedded (HEAD of OE managed with monotone)
+> openembedded.custom (custom stuff managed with SVN)
+>
+> The beauty of this setup is the trees do not interfere with each other.
+>
+>   
+True, I was doing it that way, having two source trees.  That works fine 
+if your recipes are for something that is not already in the OE tree.  
+However, it becomes problematic where you have the same recipe in both 
+trees.
 
-Since two months with bitbake 1.8 not working properly with trunk is
-obviously unacceptable, I've given it some thought and found a way to
-hopefully maintain backwards compatibility with bitbake 1.6:
+For example, sysvinit.  I have changes to sysvinit that I want to make.  
+So, you can do that only one of two ways:
 
-http://www.rpsys.net/openzaurus/temp/oe-depends-fixes-r3.patch
+1. create a subdir under the OE tree as 
+'$projroot/org.openembedded.dev/packages/sysvinit/sysvinit/zipit', where 
+'zipit' is the name of my MACHINE.  Copy initab into the 'zipit' dir, 
+then edit your changes.  Done.
 
-This won't help performance of 1.6 but does let it continue to work. It
-gathers together most of the code that can be removed when we switch to
-1.8 too as an added bonus.
+2. duplicate the recipe for sysvinit into the private tree 
+($projroot/zipitbbfiles/sysvinit).  Do the same here with creating the 
+new MACHINE dir ($projroot/zipitbbfiles/sysvinit/sysvinit/zipit/), copy 
+& edit inittab as before.
 
-Can 1.6 users give this patch a test and report any problems please? If
-there are no objections, I will check this in soon.
+When the two recipe trees are specified within 
+$projdir/build/conf/local.conf as BBFILES := 
+"$projdir/zipitbbfiles/*/*.bb 
+$projdir/org.openembedded.dev/packages/*/*.bb", still no problem.
 
-For reference I've already checked this into poky (without the
-compatibility code) where its working fine with bitbake 1.8.
+The problem comes up later when someone edits the recipe for 
+$projroot/org.openembedded.dev/packages/sysvinit/sysvinit_2.86.bb and 
+changes the PR = "rX" to a value larger than the one contained inside 
+$projdir/zipitbbfiles/sysvinit_2.86.bb.  Guess what happens now?  The 
+undesired recipe now takes precedence over the private recipe copy as PR 
+gets asserted in the numerical version vote!
 
-Cheers,
+Do you see the problems? 
 
-Richard
+A) The problem is that my recipe would be outvoted in the second case 
+structure of a private tree having a duplicate recipe.
+
+B) There appears no convenient way to manage the addition of an 
+extension to a recipe that is kept inside the OE tree (without commiting 
+that into the main OE repository).  That is the problem with the first 
+case example.
+
+
+I guess that the issue(s) are not so much "versioning" but "source 
+control" as the PV version voting borks private copies.  And, a code 
+versioning system like subversion (or another copy of monotone, perhaps) 
+is unable to do source control within the org.openembedded.dev OE main 
+tree copy.
+
+That's what I would like to resolve.  I could commit my board changes 
+into the OE repository, but, as it is a proprietary hardware design, I 
+doubt that anyone would encounter one as surplus.
+
+There are some more issues, but, I'll stop here.  heh.
+
+Regards,
+
+TomW
+
+
+> Cliff
+>
+>   
+
+
+-- 
+Tom Walsh - WN3L - Embedded Systems Consultant
+http://openhardware.net http://cyberiansoftware.com http://openzipit.org
+"Windows? No thanks, I have work to do..."
+----------------------------------------------------
+
 
 
 
