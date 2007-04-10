@@ -1,31 +1,42 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HbBb8-0001Gn-EL
-	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 10:21:06 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1HbBao-0005W5-6q
-	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 10:20:46 +0200
-Received: from zaphod.rfc1149.net ([88.191.14.223])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 10:20:46 +0200
-Received: from sam by zaphod.rfc1149.net with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 10:20:46 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from [216.82.253.51] (helo=mail153.messagelabs.com)
+	by linuxtogo.org with smtp (Exim 4.63)
+	(envelope-from <jeremy.dufour@motorola.com>) id 1HbCiA-00013J-Rt
+	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 11:32:28 +0200
+X-VirusChecked: Checked
+X-Env-Sender: jeremy.dufour@motorola.com
+X-Msg-Ref: server-12.tower-153.messagelabs.com!1176197544!6903273!1
+X-StarScan-Version: 5.5.10.7.1; banners=-,-,-
+X-Originating-IP: [129.188.136.8]
+Received: (qmail 14799 invoked from network); 10 Apr 2007 09:32:24 -0000
+Received: from motgate8.mot.com (HELO motgate8.mot.com) (129.188.136.8)
+	by server-12.tower-153.messagelabs.com with SMTP;
+	10 Apr 2007 09:32:24 -0000
+Received: from il06exr02.mot.com (il06exr02.mot.com [129.188.137.132])
+	by motgate8.mot.com (8.12.11/Motorola) with ESMTP id l3A9WN8k026071
+	for <openembedded-devel@openembedded.org>;
+	Tue, 10 Apr 2007 02:32:23 -0700 (MST)
+Received: from il06vts02.mot.com (il06vts02.mot.com [129.188.137.142])
+	by il06exr02.mot.com (8.13.1/Vontu) with SMTP id l3A9WNx5015439
+	for <openembedded-devel@openembedded.org>;
+	Tue, 10 Apr 2007 04:32:23 -0500 (CDT)
+Received: from zfr01-2138.crm.mot.com (zfr01-2138.crm.mot.com [10.161.201.138])
+	by il06exr02.mot.com (8.13.1/8.13.0) with SMTP id l3A9WKlk015371
+	for <openembedded-devel@openembedded.org>;
+	Tue, 10 Apr 2007 04:32:21 -0500 (CDT)
+Received: by zfr01-2138.crm.mot.com (sSMTP sendmail emulation);
+	Tue, 10 Apr 2007 11:32:19 +0200
+Date: Tue, 10 Apr 2007 11:32:19 +0200
+From: Jeremy Dufour <jeremy.dufour@motorola.com>
 To: openembedded-devel@openembedded.org
-From: Samuel Tardieu <sam@rfc1149.net>
-Date: 10 Apr 2007 10:19:41 +0200
-Message-ID: <87veg463qa.fsf@willow.rfc1149.net>
+Message-ID: <20070410093219.GB4456@zfr01-2138.crm.mot.com>
+Mail-Followup-To: openembedded-devel@openembedded.org
 References: <87abxide9y.fsf@willow.rfc1149.net>
 	<432beae0704090759h4ec56bb8j7b93246ccdc106b@mail.gmail.com>
+	<87veg463qa.fsf@willow.rfc1149.net>
 Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: zaphod.rfc1149.net
-User-Agent: Gnus/5.09 (Gnus v5.9.0) Emacs/21.4
-X-Leafnode-NNTP-Posting-Host: 2001:6f8:37a:2::2
-Sender: news <news@sea.gmane.org>
+In-Reply-To: <87veg463qa.fsf@willow.rfc1149.net>
+User-Agent: Mutt/1.5.11
+X-Vontu: Pass
 Subject: Re: Using the svn version of a package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,20 +51,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 08:21:07 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 10 Apr 2007 09:32:32 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 
->>>>> "Justin" == Justin Patrin <papercrane@gmail.com> writes:
+On 04/10/07 at 10:19:41 (+0200), Samuel Tardieu wrote:
+> >> How can I force bitbake to use the svn version of mplayer?
+> Justin> Use PREFERRED_VERSION_mplayer.
+> Sure, but with what? :) "svn" doesn't do the trick, "*svn*" neither.
 
->> How can I force bitbake to use the svn version of mplayer?
+With the value of the PV (PREFERRED_VERSION) variable of the mplayer_svn.bb
+file?
 
-Justin> Use PREFERRED_VERSION_mplayer.
+Something like PREFERRED_VERSION_mplayer = "0.0+1.0rc1+svn${SRCDATE}". This
+works for me, but I am not sure it is the best solution...
 
-Sure, but with what? :) "svn" doesn't do the trick, "*svn*" neither.
-
-  Sam
--- 
-Samuel Tardieu -- sam@rfc1149.net -- http://www.rfc1149.net/
-
+djerem
 
 
