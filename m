@@ -1,34 +1,37 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HbHRh-0006sv-4H
-	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 16:35:45 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1HbHV5-0006wd-Mx
+	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 16:39:18 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3AEZi4P027321
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3AEdFVQ027623
 	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 15:35:44 +0100
+	Tue, 10 Apr 2007 15:39:15 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 26916-10 for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 15:35:42 +0100 (BST)
+	id 27324-07 for <openembedded-devel@openembedded.org>;
+	Tue, 10 Apr 2007 15:39:10 +0100 (BST)
 Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3AEZbh1027312
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3AEd674027609
 	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
 	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 15:35:37 +0100
+	Tue, 10 Apr 2007 15:39:06 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <20070410093818.GC4456@zfr01-2138.crm.mot.com>
-References: <20070330133719.GF4796@zfr01-2138.crm.mot.com>
-	<1175383645.5852.24.camel@localhost.localdomain>
-	<20070410093818.GC4456@zfr01-2138.crm.mot.com>
-Date: Tue, 10 Apr 2007 15:35:37 +0100
-Message-Id: <1176215737.5809.87.camel@localhost.localdomain>
+In-Reply-To: <3ef3a7ad0704100602v610f6c10k447a1551f79ca750@mail.gmail.com>
+References: <evcm2e$15q$1@sea.gmane.org>
+	<1176155636.5842.25.camel@localhost.localdomain>
+	<432beae0704091515n6a55a294jfdf64c9e855b9537@mail.gmail.com>
+	<3ef3a7ad0704100602v610f6c10k447a1551f79ca750@mail.gmail.com>
+Date: Tue, 10 Apr 2007 15:39:05 +0100
+Message-Id: <1176215946.5809.90.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.6.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Problem for building glibc (ipkg-build: command not found)
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	l3AEdFVQ027623
+Subject: Re: OE a deterministic build system?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,34 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 14:35:46 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Apr 2007 14:39:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2007-04-10 at 11:38 +0200, Jeremy Dufour wrote:
-> On 04/01/07 at 00:27:25 (+0100), Richard Purdie wrote:
-> > [...]
-> > It looks like a dependency issue, there is no way to tell bitbake that
-> > ipkg-utils-native must have run do_populate_staging before it can run
-> > do_package_write tasks.
-> 
-> If I understand well, the problem here is that glibc is trying to do a
-> "do_package_write" before ipkg-utils-native is built?
+On Tue, 2007-04-10 at 14:02 +0100, Jos=E9 Bernardo Bandos Rodrigues wrote=
+:
+> Are you by any chance using ubuntu? If so, do a "sudo dpkg-reconfigure =
+dash"
+> and stop it replacing /bin/sh.
+> That was the reason for most of the problems I had with oe, including a
+> couple of "undefined reference to main".
 
-Correct.
+Can someone make sanity.bbclass detect dash and exit with a
+warning/error? :)
 
-> But I did not understand exactly why we can not "just" said that glibc
-> depend on ipk-utils-native?
-
-In bitbake 1.8 we've enabled multithreading and we've chosen to do this
-on a per task basis rather than a per .bb file basis. We therefore need
-task level dependencies rather than the higher per file .bb
-dependencies.
-
-Regards,
+Cheers,
 
 Richard
-
 
 
 
