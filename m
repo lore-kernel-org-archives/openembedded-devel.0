@@ -1,28 +1,34 @@
-Received: from [64.233.162.234] (helo=nz-out-0506.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cliff.brake@gmail.com>) id 1HbGnq-0002Xa-Se
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2007 15:54:35 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so1229756nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2007 06:54:33 -0700 (PDT)
-Received: by 10.115.17.1 with SMTP id u1mr2809172wai.1176213273546;
-	Tue, 10 Apr 2007 06:54:33 -0700 (PDT)
-Received: by 10.114.191.6 with HTTP; Tue, 10 Apr 2007 06:54:33 -0700 (PDT)
-Message-ID: <f96d234e0704100654p5389c8c5s72c89aa339b37b13@mail.gmail.com>
-Date: Tue, 10 Apr 2007 09:54:33 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <461AE55E.6020301@openhardware.net>
-MIME-Version: 1.0
-References: <4611582F.8010203@openhardware.net>
-	<f96d234e0704050628p3f72ec6exe9ef8ea5c732d80b@mail.gmail.com>
-	<c384c5ea0704081010y623cdbafq4f9dce1148a593e5@mail.gmail.com>
-	<461972D6.1060901@openhardware.net>
-	<461A6F08.3020904@openhardware.net>
-	<f96d234e0704091138j7118f436j4f4a3cc3edee4446@mail.gmail.com>
-	<461AE55E.6020301@openhardware.net>
-Subject: Re: versioning madness
+	(envelope-from <rpurdie@rpsys.net>) id 1HbHRh-0006sv-4H
+	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 16:35:45 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3AEZi4P027321
+	for <openembedded-devel@openembedded.org>;
+	Tue, 10 Apr 2007 15:35:44 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 26916-10 for <openembedded-devel@openembedded.org>;
+	Tue, 10 Apr 2007 15:35:42 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3AEZbh1027312
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Tue, 10 Apr 2007 15:35:37 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20070410093818.GC4456@zfr01-2138.crm.mot.com>
+References: <20070330133719.GF4796@zfr01-2138.crm.mot.com>
+	<1175383645.5852.24.camel@localhost.localdomain>
+	<20070410093818.GC4456@zfr01-2138.crm.mot.com>
+Date: Tue, 10 Apr 2007 15:35:37 +0100
+Message-Id: <1176215737.5809.87.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Problem for building glibc (ipkg-build: command not found)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,43 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 13:54:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 10 Apr 2007 14:35:46 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 4/9/07, Tom Walsh <tom@openhardware.net> wrote:
+On Tue, 2007-04-10 at 11:38 +0200, Jeremy Dufour wrote:
+> On 04/01/07 at 00:27:25 (+0100), Richard Purdie wrote:
+> > [...]
+> > It looks like a dependency issue, there is no way to tell bitbake that
+> > ipkg-utils-native must have run do_populate_staging before it can run
+> > do_package_write tasks.
+> 
+> If I understand well, the problem here is that glibc is trying to do a
+> "do_package_write" before ipkg-utils-native is built?
 
-> When the two recipe trees are specified within
-> $projdir/build/conf/local.conf as BBFILES :=
-> "$projdir/zipitbbfiles/*/*.bb
-> $projdir/org.openembedded.dev/packages/*/*.bb", still no problem.
->
-> The problem comes up later when someone edits the recipe for
-> $projroot/org.openembedded.dev/packages/sysvinit/sysvinit_2.86.bb and
-> changes the PR = "rX" to a value larger than the one contained inside
-> $projdir/zipitbbfiles/sysvinit_2.86.bb.  Guess what happens now?  The
-> undesired recipe now takes precedence over the private recipe copy as PR
-> gets asserted in the numerical version vote!
+Correct.
 
-Actually if you use bbcollections, and set the priority higher in the
-zipitbbfiles, it will take precedence no matter what the PR is.  Try
-something like the following in your local.conf -- replace
-openembedded.custom w/ zipitbbfiles ....
+> But I did not understand exactly why we can not "just" said that glibc
+> depend on ipk-utils-native?
 
-BBFILES := "${TOPDIR}/openembedded/packages/*/*.bb
-${TOPDIR}/openembedded.custom/packages/*/*.bb"
-BBFILE_COLLECTIONS = "upstream custom"
-BBFILE_PATTERN_upstream = "^${TOPDIR}/openembedded/packages/"
-BBFILE_PATTERN_custom = "^${TOPDIR}/openembedded.custom/packages"
-BBFILE_PRIORITY_upstream = "5"
-BBFILE_PRIORITY_custom = "10"
+In bitbake 1.8 we've enabled multithreading and we've chosen to do this
+on a per task basis rather than a per .bb file basis. We therefore need
+task level dependencies rather than the higher per file .bb
+dependencies.
 
-Cliff
+Regards,
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Richard
+
+
 
 
