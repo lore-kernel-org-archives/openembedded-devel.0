@@ -1,23 +1,22 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1HbKVY-0004ke-7d
+	(envelope-from <leon.woestenberg@gmail.com>) id 1HbL6y-0000bv-B7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2007 19:51:56 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50)
-	id 1HbKoq-0002xv-LT; Tue, 10 Apr 2007 20:11:52 +0200
-Message-ID: <461BCEA9.2050206@kernelconcepts.de>
-Date: Tue, 10 Apr 2007 19:51:37 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-MIME-Version: 1.0
+	Tue, 10 Apr 2007 20:30:37 +0200
+Received: by ug-out-1314.google.com with SMTP id e2so120499ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2007 11:30:35 -0700 (PDT)
+Received: by 10.66.216.6 with SMTP id o6mr451432ugg.1176229835775;
+	Tue, 10 Apr 2007 11:30:35 -0700 (PDT)
+Received: by 10.66.251.2 with HTTP; Tue, 10 Apr 2007 11:30:35 -0700 (PDT)
+Message-ID: <c384c5ea0704101130y49a1eeb0gb99c34f1f2ad067@mail.gmail.com>
+Date: Tue, 10 Apr 2007 20:30:35 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <E1HZn60-0007Lc-L6@linuxtogo.org>	<461BA7BA.6020403@kernelconcepts.de>	<1176220267.461bb26b4be0d@dominion.kabel.utwente.nl>
-	<461BB953.7020302@kernelconcepts.de>
-In-Reply-To: <461BB953.7020302@kernelconcepts.de>
-X-Enigmail-Version: 0.94.0.0
-Subject: Re: [oe-commits] org.oe.dev task-sdk-sbox, task-sdk: clean out base sdk packages, they should only contain a toolchain
+In-Reply-To: <evcm2e$15q$1@sea.gmane.org>
+MIME-Version: 1.0
+References: <evcm2e$15q$1@sea.gmane.org>
+Subject: Re: OE a deterministic build system?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,41 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 17:51:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 10 Apr 2007 18:30:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi again,
+Rolf,
 
-Florian Boor schrieb:
+On 4/9/07, Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
+> Hi,
+>
+> I am pulling my hair out and losing faith in OE being a deterministic
+> build system.
 
-> I'll try to sort things in a way that we get separate SDK packages for each
-> purpose and without removing things from existing SDK packages blindly. Maybe we
-> can move all the magic to the SDK class anyway.
+I have to second this concern, although I agree that it's probably all
+host related (or timing related, such as the quilt-native issue when
+multithreading bb tasks).
 
-I just pushed these changes. Please take a look and test if it does what it is
-expected to do. So far it is just a draft that definitely wants some further
-improvement. My major focus so far was to get a better base for flexible SDK
-targets without loosing the existing functional targets.
-This involved some changes:
-task-sdk-base was split out from task-sdk.bb into a separate task-sdk-base
-package. The former meta-sdk is mostly provided by meta-sdk-gpe now, the Opie
-SDK might want a similar one in future. The same happened for the sbox SDK
-packages likewise.
-meta-sdk is now a quite raw toolchain like Koen intended to get.
+What I would like to see more, is that we help find these
+creeping-in-dependencies from the host by building eachothers builds,
+or other ways to help find the remaining details.
 
-I just hope i didn't mix up too much :-)
+I am currently chasing a bug that prevents me from building a bb
+target on a Gentoo system, which perfectly works on Ubuntu hosts.
 
-Greetings
+Both starting with the prerequisite tools and a clean source dir etc.
 
-Florian
+Regards,
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Leon
 
 
