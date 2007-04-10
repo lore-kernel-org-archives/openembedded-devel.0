@@ -1,22 +1,39 @@
-Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1HbL6y-0000bv-B7
+	(envelope-from <k.kooi@student.utwente.nl>) id 1HbOVM-00068w-8i
+	for openembedded-devel@openembedded.org; Wed, 11 Apr 2007 00:08:00 +0200
+Received: from dominion.dominion.void (dominion.kabel.utwente.nl
+	[130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3AM7tLr027781 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Apr 2007 00:07:56 +0200
+Received: from www-data by dominion.dominion.void with local (Exim 4.60)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1HbOVK-0005xK-5V
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2007 20:30:37 +0200
-Received: by ug-out-1314.google.com with SMTP id e2so120499ugf
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2007 11:30:35 -0700 (PDT)
-Received: by 10.66.216.6 with SMTP id o6mr451432ugg.1176229835775;
-	Tue, 10 Apr 2007 11:30:35 -0700 (PDT)
-Received: by 10.66.251.2 with HTTP; Tue, 10 Apr 2007 11:30:35 -0700 (PDT)
-Message-ID: <c384c5ea0704101130y49a1eeb0gb99c34f1f2ad067@mail.gmail.com>
-Date: Tue, 10 Apr 2007 20:30:35 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <evcm2e$15q$1@sea.gmane.org>
+	Wed, 11 Apr 2007 00:07:58 +0200
+Received: from 212.41.157.237 ([212.41.157.237]) 
+	by dominion.kabel.utwente.nl (IMP) with HTTP 
+	for <koen@localhost>; Wed, 11 Apr 2007 00:07:57 +0200
+Message-ID: <1176242877.461c0abdeb0cd@dominion.kabel.utwente.nl>
+Date: Wed, 11 Apr 2007 00:07:57 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: openembedded-devel@openembedded.org
+References: <461BB515.7030108@balister.org>
+	<200704101902.04699.repvik@kynisk.com>
+	<461BC751.4090606@balister.org>
+	<200704101932.19318.repvik@kynisk.com>
+In-Reply-To: <200704101932.19318.repvik@kynisk.com>
 MIME-Version: 1.0
-References: <evcm2e$15q$1@sea.gmane.org>
-Subject: Re: OE a deterministic build system?
+User-Agent: Internet Messaging Program (IMP) 3.2.6
+X-Originating-IP: 212.41.157.237
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l3AM7tLr027781
+Subject: Re: RFC: U-Boot package clean up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,34 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 18:30:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Apr 2007 22:08:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Rolf,
+Quoting =C3=98yvind Repvik <repvik@kynisk.com>:
 
-On 4/9/07, Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
-> Hi,
->
-> I am pulling my hair out and losing faith in OE being a deterministic
-> build system.
+> Add u-boot-utils as a sub-package of u-boot.
 
-I have to second this concern, although I agree that it's probably all
-host related (or timing related, such as the quilt-native issue when
-multithreading bb tasks).
+That will break for the openmoko uboot, since that doesn't build as arm/E=
+ABI,
+but I do need mkimage to build the kernel.
 
-What I would like to see more, is that we help find these
-creeping-in-dependencies from the host by building eachothers builds,
-or other ways to help find the remaining details.
+regards,
 
-I am currently chasing a bug that prevents me from building a bb
-target on a Gentoo system, which perfectly works on Ubuntu hosts.
+Koen
 
-Both starting with the prerequisite tools and a clean source dir etc.
-
-Regards,
-
-Leon
+----------------------------------------------------------------
+This message was sent using IMP, the Internet Messaging Program.
 
 
