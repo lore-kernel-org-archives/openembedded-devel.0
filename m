@@ -1,21 +1,24 @@
-Received: from [64.233.184.226] (helo=wr-out-0506.google.com)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <zhangwenbin@gmail.com>) id 1HbIvU-00044T-NH
-	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 18:10:37 +0200
-Received: by wr-out-0506.google.com with SMTP id 69so1167488wri
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Apr 2007 09:10:34 -0700 (PDT)
-Received: by 10.78.171.13 with SMTP id t13mr1120044hue.1176221432744;
-	Tue, 10 Apr 2007 09:10:32 -0700 (PDT)
-Received: by 10.78.186.5 with HTTP; Tue, 10 Apr 2007 09:10:32 -0700 (PDT)
-Message-ID: <78671ac40704100910n4da6d006icd80bf2449ed547b@mail.gmail.com>
-Date: Tue, 10 Apr 2007 12:10:32 -0400
-From: "Wenbin Zhang" <zhangwenbin@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1HbJ5S-0004Km-61
+	for openembedded-devel@openembedded.org; Tue, 10 Apr 2007 18:20:54 +0200
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50)
+	id 1HbJOj-0002qe-PE; Tue, 10 Apr 2007 18:40:49 +0200
+Message-ID: <461BB953.7020302@kernelconcepts.de>
+Date: Tue, 10 Apr 2007 18:20:35 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+To: Koen Kooi <k.kooi@student.utwente.nl>
+References: <E1HZn60-0007Lc-L6@linuxtogo.org>
+	<461BA7BA.6020403@kernelconcepts.de>
+	<1176220267.461bb26b4be0d@dominion.kabel.utwente.nl>
+In-Reply-To: <1176220267.461bb26b4be0d@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.0.0
 Cc: openembedded-devel@openembedded.org
-Subject: errors while "bitbake opie-image" build
+Subject: Re: [oe-commits] org.oe.dev task-sdk-sbox, task-sdk: clean out base sdk packages, they should only contain a toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,74 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2007 16:10:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 10 Apr 2007 16:20:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello, Guys,
+Hi,
 
-I am using "bitbake opie-image" do OE compiling. But got lots of errors like
-below. Someone suggested me add package "libqt4-dev", I added it, and in the
-local.conf, my ASSUME_PROVIDED is set as ASSUME_PROVIDED += "libqt4-dev
-qt4-native moc-native". But I still have these errors. Anyone has ideas?
-Thanks!
+Koen Kooi schrieb:
+> Quoting Florian Boor <florian.boor@kernelconcepts.de>:
 
-The errors are:
+> Right, and my changes allow that, you just add tasks *outside* of
+> task-{sdk,sbox}.bb and you get what you want. With your changes peope have to
+> *needlessly* *duplicate* task-{sdk,sbox} if they just want a simple toolchain
+> (without building 3/4 of OE).
+> So please keep task-{sbox,sdk} clean and generic, otherwise we have multiple
+> copies of sdk and sed magic no-one understands enough to maintain.
+> Does my plan sound ok to you?
 
-| qbuttongroup.cpp:(.text+0x2b3): undefined reference to `vtable for
-QButtonGroup'
-| qbuttongroup.cpp:(.text+0x2ba): undefined reference to `vtable for
-QButtonGroup'
-| qbuttongroup.cpp: (.text+0x30b): undefined reference to `vtable for
-QGroupBox'
-| qbuttongroup.cpp:(.text+0x312): undefined reference to `vtable for
-QGroupBox'
-| qbuttongroup.cpp:(.text+0x346): undefined reference to `vtable for QFrame'
+basically yes - but I would have discussed this before applying these changes.
+Our SDK packages always contained more than a basic toolchain and if this should
+change we should discuss it before acting and causing needless extra effort.
 
-| qbuttongroup.cpp:(.text+0x34d): undefined reference to `vtable for QFrame'
-| /stuff/tmp/work/i686-linux/uicmoc-native-2.3.10-r2/qt-2.3.10/lib/libqte.a(
-qbuttongroup.o): In function `QButtonGroup::QButtonGroup(int,
-Qt::Orientation, QString const&, QWidget*, char const*)':
-| qbuttongroup.cpp:(.text+0x427): undefined reference to `vtable for
-QButtonGroup'
-| qbuttongroup.cpp:(.text+0x42e): undefined reference to `vtable for
-QButtonGroup'
-| /stuff/tmp/work/i686-linux/uicmoc-native-2.3.10-r2 /qt-2.3.10
-/lib/libqte.a(qbuttongroup.o): In function `QButtonGroup::QButtonGroup(int,
-Qt::Orientation, QString const&, QWidget*, char const*)':
-| qbuttongroup.cpp:(.text+0x477): undefined reference to `vtable for
-QButtonGroup'
-| qbuttongroup.cpp:(.text+0x47e): undefined reference to `vtable for
-QButtonGroup'
-| /stuff/tmp/work/i686-linux/uicmoc-native-2.3.10-r2/qt-2.3.10/lib/libqte.a(
-qbuttongroup.o): In function `QButtonGroup::QButtonGroup(int,
-Qt::Orientation, QWidget*, char const*)':
-| qbuttongroup.cpp:(.text+0x4c0): undefined reference to `vtable for
-QButtonGroup'
-| /stuff/tmp/work/i686-linux/uicmoc-native-2.3.10-r2/qt-2.3.10/lib/libqte.a(
-qbuttongroup.o):qbuttongroup.cpp:(.text+0x4c7): more undefined references to
-`vtable for QButtonGroup' follow
-| /stuff/tmp/work/i686-linux/uicmoc-native-2.3.10-r2/qt-2.3.10/lib/libqte.a(
-qbuttongroup.o): In function `QButtonGroup::buttonClicked()':
-| qbuttongroup.cpp:(.text+0x6ac): undefined reference to
-`QButtonGroup::clicked(int)'
-| /stuff/tmp/work/i686-linux/uicmoc-native-2.3.10-r2/qt-2.3.10/lib/libqte.a(
-qbuttongroup.o): In function `QButtonGroup::buttonReleased()':
-| qbuttongroup.cpp:(.text+0x72a): undefined reference to
-`QButtonGroup::released(int)'
-| /stuff/tmp/work/i686-linux/uicmoc-native-2.3.10-r2/qt-2.3.10/lib/libqte.a(
-qbuttongroup.o): In function `QButtonGroup::~QButtonGroup()':
-| qbuttongroup.cpp:(.text+0xf43): undefined reference to `vtable for
-QButtonGroup'
-| qbuttongroup.cpp:(.text+0xf4a): undefined reference to `vtable for
-QButtonGroup'
-| qbuttongroup.cpp:(.text+0xf9b): undefined reference to `vtable for
-QGroupBox'
-| qbuttongroup.cpp:(.text+0xfa2): undefined reference to `vtable for
-QGroupBox'
+I'll try to sort things in a way that we get separate SDK packages for each
+purpose and without removing things from existing SDK packages blindly. Maybe we
+can move all the magic to the SDK class anyway.
 
+Greetings
 
-Thanks,
-Wenbin
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+
 
