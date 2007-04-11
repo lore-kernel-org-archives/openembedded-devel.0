@@ -1,23 +1,26 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [66.249.82.239] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <zecke@selfish.org>) id 1HbeCV-0007M9-CL
+	(envelope-from <pmiscml@gmail.com>) id 1Hbfu2-0007yZ-2D
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2007 16:53:35 +0200
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1HbeCU-0003Sw-S2
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2007 16:53:34 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <461CBA64.4070508@gmail.com>
-References: <461CBA64.4070508@gmail.com>
-Message-Id: <48B70F1F-8E95-42C4-A9DA-C7097A2FB2ED@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Wed, 11 Apr 2007 16:53:30 +0200
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-Subject: Re: scratchbox toolchain + QA errors
+	Wed, 11 Apr 2007 18:42:38 +0200
+Received: by wx-out-0506.google.com with SMTP id t14so249414wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Apr 2007 09:42:37 -0700 (PDT)
+Received: by 10.90.90.16 with SMTP id n16mr745935agb.1176309757264;
+	Wed, 11 Apr 2007 09:42:37 -0700 (PDT)
+Received: from cube ( [82.193.98.4])
+	by mx.google.com with ESMTP id r15sm13901869nza.2007.04.11.09.42.35;
+	Wed, 11 Apr 2007 09:42:36 -0700 (PDT)
+Date: Wed, 11 Apr 2007 19:42:46 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <31907941.20070411194246@gmail.com>
+To: "Wenbin Zhang" <zhangwenbin@gmail.com>
+In-Reply-To: <78671ac40704100910n4da6d006icd80bf2449ed547b@mail.gmail.com>
+References: <78671ac40704100910n4da6d006icd80bf2449ed547b@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: errors while "bitbake opie-image" build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,26 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2007 14:53:36 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Wed, 11 Apr 2007 16:42:38 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
+Hello Wenbin,
 
-Am 11.04.2007 um 12:37 schrieb Sergey Lapin:
+Tuesday, April 10, 2007, 7:10:32 PM, you wrote:
 
->
-> And also - is there some standard tecniques to fix errors with .la  
-> files
-> except for deleting them? I understand sed way, but probably something
-> more sane exists? (SDK is needed to be postprocessed to fix .la files)
+> Hello, Guys,
 
-You mean besides the entry on the openembedded.org site, the mails to  
-the lists and the blogs? Sorry we sadly don't have more information  
-than that.
+> I am using "bitbake opie-image" do OE compiling. But got lots of errors like
+> below.
 
-Feel free to ask questions though and to maintain a site in the wiki :)
+Make sure you follow http://www.linuxtogo.org/gowiki/OpieWithAngstrom
+.
 
+> Someone suggested me add package "libqt4-dev", I added it, and in the
+> local.conf, my ASSUME_PROVIDED is set as ASSUME_PROVIDED += "libqt4-dev
+> qt4-native moc-native".
 
-z.
+  You probably should have asked them for reasons of such suggestion.
+
+> But I still have these errors. Anyone has ideas?
+> Thanks!
+
+> The errors are:
+
+> | qbuttongroup.cpp:(.text+0x2b3): undefined reference to `vtable for
+> QButtonGroup'
+
+  Recently, gcc was upgraded to 4.1.2. There's always chance that it
+broke C++ stuff again. I by now still didn't upgrade (just because I'm in
+the middle of application-level hacking, and don't want land burn
+under my feet). I'll try to check 4.1.2 during this week.
+
+  For the future bug reports, using bug tracker, http://bugs.openembedded.org/
+
+[]
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
