@@ -1,26 +1,20 @@
-Received: from [66.249.82.239] (helo=wx-out-0506.google.com)
+Received: from [64.233.184.229] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1Hbfu2-0007yZ-2D
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1HbkVC-0005aT-0A
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2007 18:42:38 +0200
-Received: by wx-out-0506.google.com with SMTP id t14so249414wxc
+	Wed, 11 Apr 2007 23:37:18 +0200
+Received: by wr-out-0506.google.com with SMTP id 50so244797wri
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Apr 2007 09:42:37 -0700 (PDT)
-Received: by 10.90.90.16 with SMTP id n16mr745935agb.1176309757264;
-	Wed, 11 Apr 2007 09:42:37 -0700 (PDT)
-Received: from cube ( [82.193.98.4])
-	by mx.google.com with ESMTP id r15sm13901869nza.2007.04.11.09.42.35;
-	Wed, 11 Apr 2007 09:42:36 -0700 (PDT)
-Date: Wed, 11 Apr 2007 19:42:46 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <31907941.20070411194246@gmail.com>
-To: "Wenbin Zhang" <zhangwenbin@gmail.com>
-In-Reply-To: <78671ac40704100910n4da6d006icd80bf2449ed547b@mail.gmail.com>
-References: <78671ac40704100910n4da6d006icd80bf2449ed547b@mail.gmail.com>
+	Wed, 11 Apr 2007 14:37:17 -0700 (PDT)
+Received: by 10.114.152.17 with SMTP id z17mr460790wad.1176327436043;
+	Wed, 11 Apr 2007 14:37:16 -0700 (PDT)
+Received: by 10.114.152.15 with HTTP; Wed, 11 Apr 2007 14:37:15 -0700 (PDT)
+Message-ID: <bdb0025f0704111437q2b0097ear6c10ef64cc2d2399@mail.gmail.com>
+Date: Wed, 11 Apr 2007 18:37:15 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: errors while "bitbake opie-image" build
+Subject: Mamona distribution
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,48 +28,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2007 16:42:38 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 11 Apr 2007 21:37:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Wenbin,
+Hi all,
 
-Tuesday, April 10, 2007, 7:10:32 PM, you wrote:
+We are proud to announce that Mamona project is officially using OE as
+it build system, and it is working fine. We are using the OE to build
+.deb packages and then we are setting up a deb repository to make
+easier the installation process to end user.
 
-> Hello, Guys,
+We already have a public (but non-official yet) deb repository where a
+user can easily do a debootstrap to install Mamona and chroot to it
+running all over qemu emulation.
 
-> I am using "bitbake opie-image" do OE compiling. But got lots of errors like
-> below.
+Feel free to take a look at our non-official wiki and repository:
+http://mamona.vivi.eng.br
 
-Make sure you follow http://www.linuxtogo.org/gowiki/OpieWithAngstrom
-.
+Our Mamona OE conf files is under our internal subversion repository
+yet, but we want to publish then at official OE repository to increase
+the community support and make our life easier, because is very
+painfull to sync monotone and svn repositories.
 
-> Someone suggested me add package "libqt4-dev", I added it, and in the
-> local.conf, my ASSUME_PROVIDED is set as ASSUME_PROVIDED += "libqt4-dev
-> qt4-native moc-native".
+What is the best way to publish our mamona conf files?
 
-  You probably should have asked them for reasons of such suggestion.
+Thanks,
 
-> But I still have these errors. Anyone has ideas?
-> Thanks!
-
-> The errors are:
-
-> | qbuttongroup.cpp:(.text+0x2b3): undefined reference to `vtable for
-> QButtonGroup'
-
-  Recently, gcc was upgraded to 4.1.2. There's always chance that it
-broke C++ stuff again. I by now still didn't upgrade (just because I'm in
-the middle of application-level hacking, and don't want land burn
-under my feet). I'll try to check 4.1.2 during this week.
-
-  For the future bug reports, using bug tracker, http://bugs.openembedded.org/
-
-[]
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+Rodrigo Vivi
+vivijim at #oe
 
 
