@@ -1,23 +1,20 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HbWjs-0004TA-RR
-	for openembedded-devel@openembedded.org; Wed, 11 Apr 2007 08:55:32 +0200
-Received: (qmail 28102 invoked by uid 813007); 11 Apr 2007 06:55:32 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.local)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 11 Apr 2007 06:55:32 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1HbYGC-0004j9-5Z
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Apr 2007 10:33:00 +0200
+Received: by ug-out-1314.google.com with SMTP id e2so62335ugf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Apr 2007 01:32:59 -0700 (PDT)
+Received: by 10.67.91.6 with SMTP id t6mr285962ugl.1176280379494;
+	Wed, 11 Apr 2007 01:32:59 -0700 (PDT)
+Received: by 10.66.251.2 with HTTP; Wed, 11 Apr 2007 01:32:59 -0700 (PDT)
+Message-ID: <c384c5ea0704110132s27b28fcifba5fc2db437e167@mail.gmail.com>
+Date: Wed, 11 Apr 2007 10:32:59 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Apr 2007 08:55:33 +0200
-User-Agent: KMail/1.9.6
-References: <46176E51.2030608@dominion.kabel.utwente.nl>
-	<1176049069.5844.6.camel@localhost.localdomain>
-	<200704110850.48209.openembedded@hrw.one.pl>
-In-Reply-To: <200704110850.48209.openembedded@hrw.one.pl>
 MIME-Version: 1.0
-Message-Id: <200704110855.34007.openembedded@hrw.one.pl>
-Subject: Re: [RFC] rm_work
+Subject: deterministic OE builds - multiple providers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,61 +28,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2007 06:55:33 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Apr 2007 08:33:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia =B6roda, 11 kwietnia 2007, Marcin Juszkiewicz napisa=B3:
+Hello,
 
-> Maybe rm_work.bbclass should do:
->
-> BB_DEFAULT_TASK =3D "rm_work"
-> addtask rm_work after do_build
->
-> But I did not tested it yet (got that idea during Easter).
+in trying to build my OE snapshot with a small extra bitbake
+collection to keep mildly customized .bb files across different Linux
+hosts.
 
-Looks like it is a way - atleast it works in Poky:
+In tracking down a host dependency I found that in cases where
+multiple providers are present, the behaviour is undeterministic, i.e.
+a provider is picked more or less randomly.
 
-08:52 hrw@home:build$ bitbake base-files
-NOTE: package base-files-3.0.14: started
-NOTE: package base-files-3.0.14-r55: task do_fetch: started
-NOTE: package base-files-3.0.14-r55: task do_fetch: completed
-NOTE: package base-files-3.0.14-r55: task do_unpack: started
-NOTE: package base-files-3.0.14-r55: task do_unpack: completed
-NOTE: package base-files-3.0.14-r55: task do_patch: started
-NOTE: package base-files-3.0.14-r55: task do_patch: completed
-NOTE: package base-files-3.0.14-r55: task do_configure: started
-NOTE: package base-files-3.0.14-r55: task do_configure: completed
-NOTE: package base-files-3.0.14-r55: task do_compile: started
-NOTE: package base-files-3.0.14-r55: task do_compile: completed
-NOTE: package base-files-3.0.14-r55: task do_install: started
-NOTE: package base-files-3.0.14-r55: task do_install: completed
-NOTE: package base-files-3.0.14-r55: task do_package: started
-NOTE: package base-files-3.0.14-r55: task do_package: completed
-NOTE: package base-files-3.0.14-r55: task do_package_write: started
-NOTE: package base-files-3.0.14-r55: task do_package_write: completed
-NOTE: package base-files-3.0.14-r55: task do_populate_staging: started
-NOTE: package base-files-3.0.14-r55: task do_populate_staging: completed
-NOTE: package base-files-3.0.14-r55: task do_build: started
-NOTE: package base-files-3.0.14-r55: task do_build: completed
-NOTE: package base-files-3.0.14-r55: task do_rm_work: started
-NOTE: package base-files-3.0.14-r55: task do_rm_work: completed
-NOTE: package base-files-3.0.14: completed
-NOTE: Tasks Summary: Attempted 204 tasks of which 193 didn't need to be rer=
-un and 0 failed.
-NOTE: build 200704110852: completed
-08:53 hrw@home:build$                                                      =
-=20
+Can someone confirm this?
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+If this is the case, can we make it obiligatory to demand that in this
+case one single provider must be explicitly and unambiguously defined,
+and otherwise fail the build?
 
-                        If it works, don't fix it.
-                        		-- Sam Rayburn
-
-
+Regards,
+-- 
+Leon
 
 
