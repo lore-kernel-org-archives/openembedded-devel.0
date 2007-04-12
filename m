@@ -1,32 +1,28 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1Hc7ks-0000E9-R1
-	for openembedded-devel@openembedded.org; Fri, 13 Apr 2007 00:27:03 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3CMR0Wo016105;
-	Thu, 12 Apr 2007 23:27:00 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 15575-09; Thu, 12 Apr 2007 23:26:57 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3CMQsQe016085
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Thu, 12 Apr 2007 23:26:54 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <rod@whitby.id.au>) id 1Hc7qT-0000Lf-3v
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Apr 2007 00:32:49 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 0EE5C214158;
+	Thu, 12 Apr 2007 18:32:54 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Thu, 12 Apr 2007 18:32:49 -0400
+X-Sasl-enc: AcX5kvWQ1I4klH4To1VFR9idCzBs5ig4GumAGVZ/iG0G 1176417168
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id 15D351CB07;
+	Thu, 12 Apr 2007 18:32:47 -0400 (EDT)
+Message-ID: <461EB337.7020302@whitby.id.au>
+Date: Fri, 13 Apr 2007 08:01:19 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
+MIME-Version: 1.0
 To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-In-Reply-To: <200704122035.03980.openembedded@hrw.one.pl>
 References: <200703042228.03665.openembedded@hrw.one.pl>
 	<200704122035.03980.openembedded@hrw.one.pl>
-Date: Thu, 12 Apr 2007 23:26:54 +0100
-Message-Id: <1176416815.5838.157.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@openembedded.org,
-	Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>,
-	Koen Kooi <koen@linuxtogo.org>
+In-Reply-To: <200704122035.03980.openembedded@hrw.one.pl>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: RFC: Task-base rewrite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,15 +37,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2007 22:27:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Apr 2007 22:32:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2007-04-12 at 20:35 +0200, Marcin Juszkiewicz wrote:
-> New version attached is based on task-base r23. 
-> 
-> Packages.small is result of build for progear/angstrom combination (with 
-> some changes to both configs - added some features).
+Marcin Juszkiewicz wrote:
+>> My version create several task-base-*, task-distro-* packages which
+>> cover several features one by one. Some features contain extra stuff
+>> only if other features are available (for example Bluetooth on USB bus
+>> only if distro supports BT and device support USB Host).
 > 
 > What this version gives:
 > 
@@ -68,11 +64,10 @@ On Thu, 2007-04-12 at 20:35 +0200, Marcin Juszkiewicz wrote:
 > Do some tests, post opinions - I think that this will be nice improvement 
 > of task-base.
 
-I agree with it and it gets my approval FWIW :)
+No tests yet, but it has the support of nslu2-linux distros.
 
-Cheers,
+I especially like the dropbear/openssh selection capability.
 
-Richard
-
+-- Rod
 
 
