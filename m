@@ -1,33 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Hc4lZ-0007qe-8F
-	for openembedded-devel@openembedded.org; Thu, 12 Apr 2007 21:15:33 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1Hc4l4-00055E-Jh
-	for openembedded-devel@openembedded.org; Thu, 12 Apr 2007 21:15:02 +0200
-Received: from p5483b2eb.dip0.t-ipconnect.de ([84.131.178.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Apr 2007 21:15:02 +0200
-Received: from vjensen by p5483b2eb.dip0.t-ipconnect.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Apr 2007 21:15:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hc4pn-0007wN-QC
+	for openembedded-devel@openembedded.org; Thu, 12 Apr 2007 21:19:55 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3CJJoLr021355 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Apr 2007 21:19:50 +0200
+Message-ID: <461E8652.4060203@dominion.kabel.utwente.nl>
+Date: Thu, 12 Apr 2007 21:19:46 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Vitus Jensen <vjensen@gmx.de>
-Date: Thu, 12 Apr 2007 19:21:59 +0200
-Message-ID: <evlprr$2t9$1@sea.gmane.org>
-References: <461BB515.7030108@balister.org>
-	<200704101902.04699.repvik@kynisk.com>
-	<461BC751.4090606@balister.org>
-	<200704101932.19318.repvik@kynisk.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: p5483b2eb.dip0.t-ipconnect.de
-Sender: news <news@sea.gmane.org>
-Subject: Re: RFC: U-Boot package clean up
+References: <200703042228.03665.openembedded@hrw.one.pl>
+	<200704122035.03980.openembedded@hrw.one.pl>
+In-Reply-To: <200704122035.03980.openembedded@hrw.one.pl>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: RFC: Task-base rewrite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,31 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2007 19:15:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8Bit
+X-List-Received-Date: Thu, 12 Apr 2007 19:19:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Øyvind!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Øyvind Repvik wrote:
-> On Tuesday 10 April 2007 19:20, Philip Balister wrote:
->> Øyvind Repvik wrote:
->> > I think I moved uboot-utils away from the uboot-utils directory and
->> > into u-boot. Either way, it's not quite done yet. I'll take a look at
->> > them and remove whichever one is "wrong".
-... 
-> My strategy would be something like this:
+Marcin Juszkiewicz schreef:
+
+> What this version gives:
 > 
-> Remove 1.1.2 and 1.1.4 (unless someone uses them, of course)
-...
+> - each feature gets own package,
+> - task-boot contain ONLY stuff needed to boot
+> - task-distro-base contain distro addons
+> - task-machine-base contain machine specific addons
+> - task-base depend on all needed task-* packages
+> - ability to choose SSH daemon (dropbear, openssh, none) by distro
+> - ability to choose /dev/ manager (udev, devfsd, mdev) by distro
+> - ability to choose getty provider (tinylogin by default) by distro
+> 
+> With this version it is easier to create smaller rootfs - for example 
+> image with ONLY bluetooth support is "task-boot + task-base-bluetooth".
+> 
+> Do some tests, post opinions - I think that this will be nice improvement 
+> of task-base.
 
-We are using u-boot 1.1.4 on our devices.  So if it's not too much hassle I
-vote for keeping that version.  Not that it's difficult to build it
-seperately but building an image with a different version than is used to
-boot it could lead to problems, couldn't it?
+I think this would make things like moko-slug possible at image-level instead of distro level.
 
-Bye,
-    Vitus
+regards,
 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGHoZSMkyGM64RGpERAqARAJ0Xo0xWJG3F3J70kYOKPBBOky8QIwCfeCO9
+4kqtpGWYED9Ict0YQd3wcoA=
+=0WnC
+-----END PGP SIGNATURE-----
 
 
