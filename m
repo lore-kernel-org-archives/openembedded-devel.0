@@ -1,30 +1,33 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1Hbke0-0005mK-6A
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2007 23:46:24 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 7B38C28C013; Wed, 11 Apr 2007 23:38:58 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180168194.adsl.alicedsl.de [85.180.168.194])
-	by srv043.dedi23.de (Postfix) with ESMTP id C218828C011;
-	Wed, 11 Apr 2007 23:38:57 +0200 (CEST)
-Date: Wed, 11 Apr 2007 23:46:23 +0200
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.98.4) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <665244816.20070411234623@vanille-media.de>
-To: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
-In-Reply-To: <bdb0025f0704111437q2b0097ear6c10ef64cc2d2399@mail.gmail.com>
-References: <bdb0025f0704111437q2b0097ear6c10ef64cc2d2399@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Mamona distribution
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Hbri3-0003VV-CG
+	for openembedded-devel@openembedded.org; Thu, 12 Apr 2007 07:19:03 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Hbri0-00011x-8F
+	for openembedded-devel@openembedded.org; Thu, 12 Apr 2007 07:19:00 +0200
+Received: from 219-106-231-98.cust.bit-drive.ne.jp ([219.106.231.98])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 12 Apr 2007 07:19:00 +0200
+Received: from no2spam by 219-106-231-98.cust.bit-drive.ne.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Apr 2007 07:19:00 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 12 Apr 2007 14:18:45 +0900
+Message-ID: <evkffn$kgq$1@sea.gmane.org>
+References: <evcm2e$15q$1@sea.gmane.org>	<1176155636.5842.25.camel@localhost.localdomain>	<432beae0704091515n6a55a294jfdf64c9e855b9537@mail.gmail.com>
+	<3ef3a7ad0704100602v610f6c10k447a1551f79ca750@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: 219-106-231-98.cust.bit-drive.ne.jp
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+In-Reply-To: <3ef3a7ad0704100602v610f6c10k447a1551f79ca750@mail.gmail.com>
+Sender: news <news@sea.gmane.org>
+Subject: Re: OE a deterministic build system?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,35 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2007 21:46:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Apr 2007 05:19:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi Rodrigo,
+José Bernardo Bandos Rodrigues wrote:
+> Are you by any chance using ubuntu?
 
-> We are proud to announce that Mamona project is officially using OE as
-> it build system, and it is working fine. We are using the OE to build
-> .deb packages and then we are setting up a deb repository to make
-> easier the installation process to end user.
+José and everybody else that participated in this discussion;thank you! 
+  I am on a business trip with limited access to the Internet.  Please 
+forgive my lack of timely responses.
 
-Excellent. Welcome on board!
+Yes, I am using Ubuntu.  My version is edgy.  I have run the command 
+suggested and opted for dash not to provide sh.  /bin/sh is a symbolic 
+link on my system now (I forgot to check the state before 
+reconfiguration).  I will retry compilation.
 
-> Our Mamona OE conf files is under our internal subversion repository
-> yet, but we want to publish then at official OE repository to increase
-> the community support and make our life easier, because is very
-> painfull to sync monotone and svn repositories.
+Once I get back home next week, I will have more time to dig into this 
+if the hint from José does not yet fix things.
 
-Wise move.
+Regards
 
-> What is the best way to publish our mamona conf files?
-
-Please attach them to our bugtracker.
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Rolf
 
 
 
