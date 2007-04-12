@@ -1,33 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.249.82.234] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Hbs0K-0007f2-PP
-	for openembedded-devel@openembedded.org; Thu, 12 Apr 2007 07:37:57 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Hbs0B-0003un-RR
-	for openembedded-devel@openembedded.org; Thu, 12 Apr 2007 07:37:47 +0200
-Received: from 219-106-231-98.cust.bit-drive.ne.jp ([219.106.231.98])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Apr 2007 07:37:47 +0200
-Received: from no2spam by 219-106-231-98.cust.bit-drive.ne.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Apr 2007 07:37:47 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 12 Apr 2007 14:37:38 +0900
-Message-ID: <461DC5A2.5070603@nospam.arcornews.de>
-References: <evcm2e$15q$1@sea.gmane.org>	<1176155636.5842.25.camel@localhost.localdomain>	<432beae0704091515n6a55a294jfdf64c9e855b9537@mail.gmail.com>
-	<3ef3a7ad0704100602v610f6c10k447a1551f79ca750@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: 219-106-231-98.cust.bit-drive.ne.jp
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-In-Reply-To: <3ef3a7ad0704100602v610f6c10k447a1551f79ca750@mail.gmail.com>
-Sender: news <news@sea.gmane.org>
-Subject: Re: OE a deterministic build system?
+	(envelope-from <pmiscml@gmail.com>) id 1Hc0qq-0004YP-L2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Apr 2007 17:04:44 +0200
+Received: by wx-out-0506.google.com with SMTP id t14so567503wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Apr 2007 08:04:43 -0700 (PDT)
+Received: by 10.90.120.13 with SMTP id s13mr1810939agc.1176390283717;
+	Thu, 12 Apr 2007 08:04:43 -0700 (PDT)
+Received: from cube ( [82.193.98.4])
+	by mx.google.com with ESMTP id 38sm1278396nzf.2007.04.12.08.04.41;
+	Thu, 12 Apr 2007 08:04:43 -0700 (PDT)
+Date: Thu, 12 Apr 2007 18:04:52 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1139321028.20070412180452@gmail.com>
+To: "Wenbin Zhang" <zhangwenbin@gmail.com>, 
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <31907941.20070411194246@gmail.com>
+References: <78671ac40704100910n4da6d006icd80bf2449ed547b@mail.gmail.com>
+	<31907941.20070411194246@gmail.com>
+MIME-Version: 1.0
+Subject: Re: errors while "bitbake opie-image" build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,31 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2007 05:37:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 Apr 2007 15:04:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-José Bernardo Bandos Rodrigues wrote:
-> Are you by any chance using ubuntu?
+Hello Paul,
 
-Bernardo,
+Wednesday, April 11, 2007, 7:42:46 PM, you wrote:
 
-the hint about dash proved to be priceless.
+> Hello Wenbin,
 
-NOTE: package nunome-1.0.2: completed
-NOTE: Tasks Summary: Attempted 414 tasks of which 395 didn't need to be 
-rerun and 0 failed.
-NOTE: build 200704121425: completed
+> Tuesday, April 10, 2007, 7:10:32 PM, you wrote:
 
-After reconfiguring dash, everything is fine now.  Big thank you!
+>> Hello, Guys,
 
-As a takeaway from this episode, I guess it might make sense for OE to 
-check that /bin/sh is not /bin/dash as it can unstabilize the 
-functioning of OE.
+>> I am using "bitbake opie-image" do OE compiling. But got lots of errors like
+>> below.
 
-Regards
+> Make sure you follow http://www.linuxtogo.org/gowiki/OpieWithAngstrom
+> .
 
-Rolf
+[]
+
+>   Recently, gcc was upgraded to 4.1.2. There's always chance that it
+> broke C++ stuff again. I by now still didn't upgrade (just because I'm in
+> the middle of application-level hacking, and don't want land burn
+> under my feet). I'll try to check 4.1.2 during this week.
+
+  Ok, so I rebuilt qte-mt, libopie2, and couple of apps using gcc
+4.1.2, all works like a charm. So, just following instructions in URL
+above should do the trick.
+
+
+> []
+
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
