@@ -1,29 +1,23 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1Hc7qT-0000Lf-3v
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Apr 2007 00:32:49 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 0EE5C214158;
-	Thu, 12 Apr 2007 18:32:54 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute2.internal (MEProxy); Thu, 12 Apr 2007 18:32:49 -0400
-X-Sasl-enc: AcX5kvWQ1I4klH4To1VFR9idCzBs5ig4GumAGVZ/iG0G 1176417168
-Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id 15D351CB07;
-	Thu, 12 Apr 2007 18:32:47 -0400 (EDT)
-Message-ID: <461EB337.7020302@whitby.id.au>
-Date: Fri, 13 Apr 2007 08:01:19 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1Hc933-00056U-O0; Fri, 13 Apr 2007 01:49:55 +0200
+Received: from [84.245.185.29] (helo=[192.168.7.111])
+	by mail.kernelconcepts.de with esmtpsa (SSL
+	3.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50)
+	id 1Hc9Mm-00033g-03; Fri, 13 Apr 2007 02:10:16 +0200
+Message-ID: <461EC59E.8050001@kernelconcepts.de>
+Date: Fri, 13 Apr 2007 01:49:50 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
 MIME-Version: 1.0
-To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-References: <200703042228.03665.openembedded@hrw.one.pl>
-	<200704122035.03980.openembedded@hrw.one.pl>
-In-Reply-To: <200704122035.03980.openembedded@hrw.one.pl>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: Task-base rewrite
+To: openembedded-devel@lists.openembedded.org
+References: <461BB515.7030108@balister.org>	<200704101902.04699.repvik@kynisk.com>	<461BC751.4090606@balister.org>	<200704101932.19318.repvik@kynisk.com>
+	<evlprr$2t9$1@sea.gmane.org>
+In-Reply-To: <evlprr$2t9$1@sea.gmane.org>
+X-Enigmail-Version: 0.94.0.0
+Cc: openembedded-devel@openembedded.org
+Subject: Re: RFC: U-Boot package clean up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,37 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2007 22:32:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 Apr 2007 23:49:56 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz wrote:
->> My version create several task-base-*, task-distro-* packages which
->> cover several features one by one. Some features contain extra stuff
->> only if other features are available (for example Bluetooth on USB bus
->> only if distro supports BT and device support USB Host).
-> 
-> What this version gives:
-> 
-> - each feature gets own package,
-> - task-boot contain ONLY stuff needed to boot
-> - task-distro-base contain distro addons
-> - task-machine-base contain machine specific addons
-> - task-base depend on all needed task-* packages
-> - ability to choose SSH daemon (dropbear, openssh, none) by distro
-> - ability to choose /dev/ manager (udev, devfsd, mdev) by distro
-> - ability to choose getty provider (tinylogin by default) by distro
-> 
-> With this version it is easier to create smaller rootfs - for example 
-> image with ONLY bluetooth support is "task-boot + task-base-bluetooth".
-> 
-> Do some tests, post opinions - I think that this will be nice improvement 
-> of task-base.
+Hi,
 
-No tests yet, but it has the support of nslu2-linux distros.
+Vitus Jensen wrote:
+> We are using u-boot 1.1.4 on our devices.  So if it's not too much hassle I
 
-I especially like the dropbear/openssh selection capability.
+I would vote for keeping 1.1.4 as well, it seems to be still quite popular.
 
--- Rod
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-14
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
