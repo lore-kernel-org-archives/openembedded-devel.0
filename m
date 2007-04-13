@@ -1,23 +1,23 @@
-Received: from [212.60.202.195] (helo=mail.kernelconcepts.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1Hc933-00056U-O0; Fri, 13 Apr 2007 01:49:55 +0200
-Received: from [84.245.185.29] (helo=[192.168.7.111])
-	by mail.kernelconcepts.de with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA:32) (Exim 4.50)
-	id 1Hc9Mm-00033g-03; Fri, 13 Apr 2007 02:10:16 +0200
-Message-ID: <461EC59E.8050001@kernelconcepts.de>
-Date: Fri, 13 Apr 2007 01:49:50 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-MIME-Version: 1.0
+	(envelope-from <openembedded@hrw.one.pl>) id 1HcF8U-00076d-Bx
+	for openembedded-devel@openembedded.org; Fri, 13 Apr 2007 08:19:54 +0200
+Received: (qmail 30969 invoked by uid 813007); 13 Apr 2007 06:19:53 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.local)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 13 Apr 2007 06:19:52 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <461BB515.7030108@balister.org>	<200704101902.04699.repvik@kynisk.com>	<461BC751.4090606@balister.org>	<200704101932.19318.repvik@kynisk.com>
-	<evlprr$2t9$1@sea.gmane.org>
-In-Reply-To: <evlprr$2t9$1@sea.gmane.org>
-X-Enigmail-Version: 0.94.0.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: RFC: U-Boot package clean up
+Date: Fri, 13 Apr 2007 08:19:54 +0200
+User-Agent: KMail/1.9.6
+References: <200703042228.03665.openembedded@hrw.one.pl>
+	<200704122035.03980.openembedded@hrw.one.pl>
+	<461EB337.7020302@whitby.id.au>
+In-Reply-To: <461EB337.7020302@whitby.id.au>
+MIME-Version: 1.0
+Message-Id: <200704130819.55884.openembedded@hrw.one.pl>
+Subject: Re: RFC: Task-base rewrite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,27 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2007 23:49:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Apr 2007 06:19:54 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi,
+Dnia pi=B1tek, 13 kwietnia 2007, Rod Whitby napisa=B3:
 
-Vitus Jensen wrote:
-> We are using u-boot 1.1.4 on our devices.  So if it's not too much hassle I
+> No tests yet, but it has the support of nslu2-linux distros.
 
-I would vote for keeping 1.1.4 as well, it seems to be still quite popular.
+;)=20
 
-Greetings
+Idea of splitting into separate packages comes from my discussions with=20
+Richard about differencies between Poky task-base and OE task-base.=20
+During last Easter I had more time to think about correct implementation=20
+and wanted to make small rootfs creation easier then it was before.=20
 
-Florian
+And nslu2 rootfs is big - Cliff Brake created 1.7M rootfs for his Compulab=
+=20
+board.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-14
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+Cliff: can you look at task-boot contents and tell does it need something=20
+removed/added to create minimal image?
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+> I especially like the dropbear/openssh selection capability.
+
+Too many people complain about having dropbear in their rootfs ;)
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+      I don't know. I don't care. And it doesn't make any difference.
+
+
 
 
