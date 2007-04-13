@@ -1,23 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HcHRO-0004OX-N3
-	for openembedded-devel@openembedded.org; Fri, 13 Apr 2007 10:47:34 +0200
-Received: (qmail 24687 invoked by uid 813007); 13 Apr 2007 08:47:33 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.local)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 13 Apr 2007 08:47:33 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Apr 2007 10:47:33 +0200
-User-Agent: KMail/1.9.6
-References: <200703042228.03665.openembedded@hrw.one.pl>
-	<461EB337.7020302@whitby.id.au>
-	<200704130819.55884.openembedded@hrw.one.pl>
-In-Reply-To: <200704130819.55884.openembedded@hrw.one.pl>
+	(envelope-from <rod@whitby.id.au>) id 1HcI2V-0000EJ-09
+	for openembedded-devel@openembedded.org; Fri, 13 Apr 2007 11:25:55 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 5FEE7215FAA
+	for <openembedded-devel@openembedded.org>;
+	Fri, 13 Apr 2007 05:26:02 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Fri, 13 Apr 2007 05:25:55 -0400
+X-Sasl-enc: slnTqnE56P2DVN2ICAYvZUnCRvXppcSlGT8rAIkUtG1G 1176456354
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id 27E2516681
+	for <openembedded-devel@openembedded.org>;
+	Fri, 13 Apr 2007 05:25:53 -0400 (EDT)
+Message-ID: <461F4C4A.7010401@whitby.id.au>
+Date: Fri, 13 Apr 2007 18:54:26 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
-Message-Id: <200704131047.35073.openembedded@hrw.one.pl>
-Subject: Re: RFC: Task-base rewrite
+To: openembedded-devel <openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.0.0
+Subject: Where should MACHINE_TASK_PROVIDER be defined?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,22 +35,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Apr 2007 08:47:34 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Fri, 13 Apr 2007 09:25:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+There seems to be significant inconsistency in the way that
+MACHINE_TASK_PROVIDER is defined in OE (see the output of a recursive
+grep command in .../conf at the end of this message).
 
-After discussion on #oe and making extra changes I pushed new task-base 
-into repository.
+It's defaulted to "task-base" in bitbake.conf, and then every man and
+his dog forcibly defines it to the same thing in a variety of
+machine.conf files and distro.conf files.
 
--- 
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Should all of these instances simply be deleted, cause none of them
+actually change the default, and all of them stop the user from changing
+ it in local.conf ...
 
-             chaos, panic, packet loss - my work here is done!
+If it is to be overridden, should it be a distro override or a machine
+override?  What would be normal reasons for overriding it?
 
+> find . -type f -print0 | xargs -0 grep MACHINE_TASK_PROVIDER
+> ./distro/include/angstrom.inc:MACHINE_TASK_PROVIDER = "task-base"
+> ./distro/include/openmoko.inc:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/collie.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/h3600.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/jornada6xx.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/jornada7xx.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/mainstone.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/netvista.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/nokia770.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/omap5912osk.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/include/zaurus-2.6.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/include/lsppc.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/simpad.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/x86.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/devkitidp-pxa255.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/qemuarm.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/efika.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/logicpd-pxa270.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/htcuniversal.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/dht-walnut.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/titan.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/wrap.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/smdk2440.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/compulab-pxa270.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/storcenter.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/qemux86.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/fic-gta01.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/shark.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/turbostation.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/n2100.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/smdk2443.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./machine/lsarm.conf:MACHINE_TASK_PROVIDER = "task-base"
+> ./bitbake.conf:MACHINE_TASK_PROVIDER ?= "task-base"
+
+-- Rod
 
 
 
