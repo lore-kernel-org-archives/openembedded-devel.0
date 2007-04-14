@@ -1,36 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HcTwp-0004Iy-40
-	for openembedded-devel@openembedded.org; Sat, 14 Apr 2007 00:08:51 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3DM8o2B009242
-	for <openembedded-devel@openembedded.org>;
-	Fri, 13 Apr 2007 23:08:50 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09031-04 for <openembedded-devel@openembedded.org>;
-	Fri, 13 Apr 2007 23:08:47 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3DM8jJH009235
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Fri, 13 Apr 2007 23:08:45 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <461FD9AF.6050403@dominion.kabel.utwente.nl>
-References: <46176E51.2030608@dominion.kabel.utwente.nl>
-	<D93C49B4-4326-49E1-981A-C3EA65F49070@selfish.org>
-	<1176049069.5844.6.camel@localhost.localdomain>
-	<200704110850.48209.openembedded@hrw.one.pl>
-	<461FD9AF.6050403@dominion.kabel.utwente.nl>
-Date: Fri, 13 Apr 2007 23:08:46 +0100
-Message-Id: <1176502126.5836.24.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [RFC] rm_work
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HceJy-0001ki-BL
+	for openembedded-devel@openembedded.org; Sat, 14 Apr 2007 11:13:26 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3E9DMox022438 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Apr 2007 11:13:22 +0200
+Message-ID: <46209B2D.4060902@dominion.kabel.utwente.nl>
+Date: Sat, 14 Apr 2007 11:13:17 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Cairo 1.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,29 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Apr 2007 22:08:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 14 Apr 2007 09:13:27 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2007-04-13 at 21:27 +0200, Koen Kooi wrote:
-> Marcin Juszkiewicz schreef:
-> 
-> > Maybe rm_work.bbclass should do:
-> > 
-> > BB_DEFAULT_TASK = "rm_work"
-> > addtask rm_work after do_build
-> 
-> This patch works for me:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This makes me very nervous since thats not how that variable was
-intended to be used and I don't think its a good idea in the long term.
-Can we try and fix bitbake to allow the correct syntax needed and then
-write the metadata in a less invasive way?
+Hi,
 
-That trick works precisely once if you want an illustration of why its
-bad.
+Cairo 1.4.4 was just released containing a ton of bugfixes, but I urge you not to add it
+to OE. We applied Jorn's surface-cache patch throughout the 1.3.x and 1.4.x series to get
+a big performance boost on most of our platforms, but with cairo 1.4.4 the patch breaks
+compilation.
 
-Richard
+But there's hope! Behdad sent this email to cairo-dev last night:
+http://lists.freedesktop.org/archives/cairo/2007-April/010348.html
 
+So it looks like 1.4.6 will have a surface-cache that will give us about the same
+performance as 1.4.2 + patch.
+
+So in order to avoid surprised for unsuspecting users, I propose to skip 1.4.4 and wait
+for 1.4.6.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGIJsiMkyGM64RGpERAh9oAKCFUWQAztm/DGj5WFCpVDsLDPV4CACcCee5
+KfYwB7v3y3deAkzjVFJPrpE=
+=QuGK
+-----END PGP SIGNATURE-----
 
 
