@@ -1,34 +1,31 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HcvNK-0006Ct-Em
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Apr 2007 05:26:04 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id EA4C5215055
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Apr 2007 23:26:04 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Sat, 14 Apr 2007 23:26:02 -0400
-X-Sasl-enc: aaPNBeakPMQAYzyXUJRA8Ftez5eof+N9JbqrP86mnxR1 1176607561
-Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id 8B70333A4E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Apr 2007 23:26:01 -0400 (EDT)
-Message-ID: <46219AF1.3020006@whitby.id.au>
-Date: Sun, 15 Apr 2007 12:54:33 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hcz92-0006il-I9
+	for openembedded-devel@openembedded.org; Sun, 15 Apr 2007 09:27:32 +0200
+Received: from [130.89.6.63] (vpn006063.vpn.utwente.nl [130.89.6.63])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3F7RMox015312 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Apr 2007 09:27:25 +0200
+Message-ID: <4621D3CE.9030200@dominion.kabel.utwente.nl>
+Date: Sun, 15 Apr 2007 09:27:10 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <461F4C4A.7010401@whitby.id.au>	<200704131148.32947.openembedded@hrw.one.pl>
-	<1176458438.5836.12.camel@localhost.localdomain>
-In-Reply-To: <1176458438.5836.12.camel@localhost.localdomain>
-Subject: Re: Where should MACHINE_TASK_PROVIDER be defined?
+To: openembedded-devel@openembedded.org
+References: <E1HcvOy-0006EN-Bi@linuxtogo.org>
+In-Reply-To: <E1HcvOy-0006EN-Bi@linuxtogo.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev conf/*: remove all MACHINE_TASK_PROVIDER definitions that were simply forcibly defining it to the	default value set in bitbake.conf. Approved by hrw and RP.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
-Reply-To: openembedded-devel@lists.openembedded.org
+Reply-To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
 List-Id: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel.lists.openembedded.org>
 List-Unsubscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
@@ -38,33 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Apr 2007 03:26:05 -0000
+X-List-Received-Date: Sun, 15 Apr 2007 07:27:32 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Fri, 2007-04-13 at 11:48 +0200, Marcin Juszkiewicz wrote:
->> Dnia pi=C4=85tek, 13 kwietnia 2007, Rod Whitby napisa=C5=82:
->>> There seems to be significant inconsistency in the way that
->>> MACHINE_TASK_PROVIDER is defined in OE (see the output of a recursive
->>> grep command in .../conf at the end of this message).
->>>
->>> It's defaulted to "task-base" in bitbake.conf, and then every man and
->>> his dog forcibly defines it to the same thing in a variety of
->>> machine.conf files and distro.conf files.
->>>
->>> Should all of these instances simply be deleted
->> Yes - most of them are from time when we had task-bootstrap as default=
-.
->=20
-> Agreed.
->=20
-> They're from the transition period when task-bootstrap was default and
-> each machine had to be tagged as it was converted. All the duplicates
-> can now be removed since the default has changed.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This has now been done and committed.
+rwhitby commit schreef:
+> conf/*: remove all MACHINE_TASK_PROVIDER definitions that were simply forcibly defining it to the default value set in bitbake.conf.  Approved by hrw and RP.
+> 
+> Author: rwhitby@nslu2-linux.org
 
--- Rod
+> conf/distro/include/angstrom.inc
+
+Could you please consult with the distro maintainers before making such changes next time?
+The line was left in there to fix angstrom for people with a bogus MACHINE_TASK_PROVIDER
+entry in their local.conf.
+OTOH, people now get what they deserve now when putting bogus entries in local.conf :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGIdPOMkyGM64RGpERAgKrAKCupbjJDnWTtoaTTBjuMueZH5kznwCggqkl
+MdRJ7LalRiiqwU6I9rlCK4M=
+=Yvo4
+-----END PGP SIGNATURE-----
 
 
