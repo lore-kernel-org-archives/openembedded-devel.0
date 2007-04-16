@@ -1,24 +1,25 @@
-Received: from [69.17.117.7] (helo=mail5.sea5.speakeasy.net)
+Received: from [81.255.54.16] (helo=mx.laposte.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <erik@hovland.org>) id 1HdZsK-0001ad-8S
-	for openembedded-devel@openembedded.org; Tue, 17 Apr 2007 00:40:44 +0200
-Received: (qmail 3606 invoked from network); 16 Apr 2007 22:40:42 -0000
-Received: from dsl092-045-201.lax1.dsl.speakeasy.net (HELO speakeasy.net)
-	([66.92.45.201]) (envelope-sender <erik@hovland.org>)
-	by mail5.sea5.speakeasy.net (qmail-ldap-1.03) with SMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	16 Apr 2007 22:40:42 -0000
-Received: by speakeasy.net (nbSMTP-1.00) for uid 1000
-	erik@hovland.org; Mon, 16 Apr 2007 15:40:42 -0700 (PDT)
-Date: Mon, 16 Apr 2007 15:40:41 -0700
-From: Erik Hovland <erik@hovland.org>
+	(envelope-from <c.romain@laposte.net>) id 1Hdapu-00065A-6f
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Apr 2007 01:42:18 +0200
+Received: from smtp.laposte.net (10.150.9.43) by mx.laposte.net (7.2.060.1)
+	id 45FFE41400CACE34; Tue, 17 Apr 2007 01:42:17 +0200
+Received: from smtpin.laposte.net (10.150.9.73) by smtp.laposte.net (7.3.118.6)
+	id 46067A870260729A; Tue, 17 Apr 2007 01:42:17 +0200
+Received: from [192.168.2.2] (86.201.55.132) by smtpin.laposte.net (7.2.060.1)
+	(authenticated as c.romain)
+	id 45FA4DAE0032E2E8; Tue, 17 Apr 2007 01:40:19 +0200
+Message-ID: <4623FC06.9060009@laposte.net>
+Date: Tue, 17 Apr 2007 00:43:18 +0200
+From: cyril Romain <c.romain@laposte.net>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070323)
+MIME-Version: 1.0
 To: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20070416224041.GF30118@hovland.org>
 References: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
 In-Reply-To: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-User-Agent: Mutt/1.5.13 (2006-08-11)
+Cc: openembedded-devel@openembedded.org
 Subject: Re: Making /var/lib persistent
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,31 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2007 22:40:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 Apr 2007 23:42:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 17, 2007 at 12:02:03AM +0200, Koen Kooi wrote:
-> Hi,
-> 
-> Marcel Holtmann just pointed me to the fact that OE mount /var as
-> tmpfs for almost all machines, which wipes /var/lib at boot, which
-> will break bluez and dpkg.
+Hi,
 
-Heh, Todd Blummer brought up this very issue on the familiar dev list.
-Note we have done nothing about it either.
+Koen Kooi wrote:
+> Marcel Holtmann just pointed me to the fact that OE mount /var as tmpfs for
+> almost all machines, which wipes /var/lib at boot, which will break bluez and
+> dpkg.
+>
+> What would be the best way to preserve /var/lib (and maybe others) across boots?
+>   
+I suggest the use of symlinks in /var/lib that point to a let's say
+/srv/ directory.
+thoses links will be created at boot time, e.g.:
+ln -s /srv/bitlbee/lib /var/lib/bitlbee
 
-The FHS is clear that this directory is the place to save app state
-info, so keeping that dir across boots and suspend/resume cycles is
-handy.
+Best regards,
 
-E
-
--- 
-Erik Hovland
-mail: erik@hovland.org
-web: http://hovland.org/
-PGP/GPG public key available on request
-
+  cyril
 
 
