@@ -1,26 +1,32 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rod@whitby.id.au>) id 1HdYyz-0005T4-OI
+	(envelope-from <k.kooi@student.utwente.nl>) id 1HdZH3-0005iG-TF
+	for openembedded-devel@openembedded.org; Tue, 17 Apr 2007 00:02:16 +0200
+Received: from dominion.dominion.void (dominion.kabel.utwente.nl
+	[130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3GM25Lr024698 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Apr 2007 00:02:08 +0200
+Received: from www-data by dominion.dominion.void with local (Exim 4.60)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1HdZGt-0003JG-Oo
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Apr 2007 23:43:33 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 2E416216D87
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2007 17:43:34 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Mon, 16 Apr 2007 17:43:33 -0400
-X-Sasl-enc: oBUC6TzJSpcIuGinnDVA6/38EvtJ7ecMlLv+CAweqhfR 1176759812
-Received: from [192.168.18.22] (CPE-58-160-130-105.sa.bigpond.net.au
-	[58.160.130.105])
-	by mail.messagingengine.com (Postfix) with ESMTP id 1ED8E1C2AF
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2007 17:43:31 -0400 (EDT)
-From: "Rod Whitby" <rod@whitby.id.au>
-Date: 17 Apr 2007 07:14:00 +0930
-To: <openembedded-devel@lists.openembedded.org>
-X-Mailer: ChatterEmail+ for Treo 600/650 (2.0.1rc4)
-Message-ID: <3259638856.300263@mail.messagingengine.com>
-Subject: Re: [oe-commits] org.oe.dev conf/*: remove all MACHINE_TASK_PROVIDER definitions that were simply forcibly defining it to the	default value set in bitbake.conf. Approved by hrw and RP.
+	Tue, 17 Apr 2007 00:02:03 +0200
+Received: from 12.44.170.10 ([12.44.170.10]) 
+	by dominion.kabel.utwente.nl (IMP) with HTTP 
+	for <koen@localhost>; Tue, 17 Apr 2007 00:02:03 +0200
+Message-ID: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
+Date: Tue, 17 Apr 2007 00:02:03 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: openembedded-devel@openembedded.org
+MIME-Version: 1.0
+User-Agent: Internet Messaging Program (IMP) 3.2.6
+X-Originating-IP: 12.44.170.10
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Making /var/lib persistent
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,49 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2007 21:43:34 -0000
+X-List-Received-Date: Mon, 16 Apr 2007 22:02:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-Apologies Koen, I thought that the positive response from hrw and RP on the -devel mailing list for making the change globally (and the lack of objections from anyone to their comments saying to go and do it) was enough.
-Should I have negotiated one on one with every machine maintainer too?  If that is the case, then I simply wouldn't have bothered doing the change at all - what do I care if other distro and machine maintainers would rather do all their own cleanup?  What do I care if historical cruft builds up in OE?
-This type of response to a helpful change to OE is *exactly* why I (and I expect others too) prefer to create a new distro for stuff instead of using Angstrom distro directly - it's just no fun being part of someone else's draconian fiefdom (Angstrom distro with Koen as the overlord) as opposed to being part of a group-maintained distro where positive changes are appreciated when approval of changes that bring improvements and cleanup are sought globally (as was done in this case).
--- Rod
-(Apologies for formatting, sent on the road from Treo650)
+Hi,
 
------Original Message-----
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Sunday, Apr 15, 2007 4:57 pm
-Subject: Re: [oe] [oe-commits] org.oe.dev conf/*: remove all   MACHINE_TASK_PROVIDER definitions that were simply forcibly defining it to   the	default value set in bitbake.conf. Approved by hrw and RP.
+Marcel Holtmann just pointed me to the fact that OE mount /var as tmpfs for
+almost all machines, which wipes /var/lib at boot, which will break bluez and
+dpkg.
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-rwhitby commit schreef:
- conf/*: remove all MACHINE_TASK_PROVIDER definitions that were simply forcibly defining it to the default value set in bitbake.conf.  Approved by hrw and RP.
- 
- Author: rwhitby@nslu2-linux.org
-
-> conf/distro/include/angstrom.inc
-
-Could you please consult with the distro maintainers before making such changes next time? The line was left in there to fix angstrom for people with a bogus MACHINE_TASK_PROVIDER entry in their local.conf.
-OTOH, people now get what they deserve now when putting bogus entries in local.conf :)
+What would be the best way to preserve /var/lib (and maybe others) across boots?
 
 regards,
 
 Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFGIdPOMkyGM64RGpERAgKrAKCupbjJDnWTtoaTTBjuMueZH5kznwCggqkl
-MdRJ7LalRiiqwU6I9rlCK4M=
-=Yvo4
------END PGP SIGNATURE-----
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
-
+----------------------------------------------------------------
+This message was sent using IMP, the Internet Messaging Program.
 
 
