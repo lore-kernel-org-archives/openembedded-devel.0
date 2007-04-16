@@ -1,26 +1,24 @@
-Received: from [213.173.72.1] (helo=tor.twin.at)
+Received: from [69.17.117.7] (helo=mail5.sea5.speakeasy.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <patrick.steiner@a1.net>) id 1HdZS9-0005v5-Hz
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Apr 2007 00:13:41 +0200
-Received: from [213.173.86.202] (helo=isengard.skynet)
-	by tor.twin.at with esmtp (Exim 4.63)
-	(envelope-from <patrick.steiner@a1.net>) id 1HdZRk-00078O-Tq
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Apr 2007 00:13:17 +0200
-Received: from tux4u.skynet (tux4u.skynet [192.168.0.31])
-	by isengard.skynet (Postfix) with ESMTP id C3B6314C152
+	(envelope-from <erik@hovland.org>) id 1HdZsK-0001ad-8S
+	for openembedded-devel@openembedded.org; Tue, 17 Apr 2007 00:40:44 +0200
+Received: (qmail 3606 invoked from network); 16 Apr 2007 22:40:42 -0000
+Received: from dsl092-045-201.lax1.dsl.speakeasy.net (HELO speakeasy.net)
+	([66.92.45.201]) (envelope-sender <erik@hovland.org>)
+	by mail5.sea5.speakeasy.net (qmail-ldap-1.03) with SMTP
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Apr 2007 00:13:31 +0200 (CEST)
-From: Patrick Steiner <patrick.steiner@a1.net>
+	16 Apr 2007 22:40:42 -0000
+Received: by speakeasy.net (nbSMTP-1.00) for uid 1000
+	erik@hovland.org; Mon, 16 Apr 2007 15:40:42 -0700 (PDT)
+Date: Mon, 16 Apr 2007 15:40:41 -0700
+From: Erik Hovland <erik@hovland.org>
 To: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Apr 2007 00:13:30 +0200
-User-Agent: KMail/1.9.6
+Message-ID: <20070416224041.GF30118@hovland.org>
 References: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-In-Reply-To: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-Message-Id: <200704170013.30329.patrick.steiner@a1.net>
+In-Reply-To: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.13 (2006-08-11)
 Subject: Re: Making /var/lib persistent
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,49 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2007 22:13:41 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Apr 2007 22:40:46 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tuesday, 17. April 2007 00:02:03 Koen Kooi wrote:
+On Tue, Apr 17, 2007 at 12:02:03AM +0200, Koen Kooi wrote:
 > Hi,
->
-> Marcel Holtmann just pointed me to the fact that OE mount /var as tmpfs for
-> almost all machines, which wipes /var/lib at boot, which will break bluez
-> and dpkg.
->
-> What would be the best way to preserve /var/lib (and maybe others) across
-> boots?
-i always use this:
+> 
+> Marcel Holtmann just pointed me to the fact that OE mount /var as
+> tmpfs for almost all machines, which wipes /var/lib at boot, which
+> will break bluez and dpkg.
 
-mount -o bind /etc/bluetooth/pairing/ /var/lib/bluetooth/
+Heh, Todd Blummer brought up this very issue on the familiar dev list.
+Note we have done nothing about it either.
 
- patrick (law)
+The FHS is clear that this directory is the place to save app state
+info, so keeping that dir across boots and suspend/resume cycles is
+handy.
 
->
-> regards,
->
-> Koen
->
-> ----------------------------------------------------------------
-> This message was sent using IMP, the Internet Messaging Program.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+E
 
 -- 
-Patrick Steiner | patrick.steiner@a1.net
-ICQ: 128261350
-WWW: http://helmsdeep.homelinux.net/~pat
- 
-working on (tux4u.skynet):
-Fedora Core release 6 (Zod)
-GNU/Linux 2.6.20-1.2944.fc6
+Erik Hovland
+mail: erik@hovland.org
+web: http://hovland.org/
+PGP/GPG public key available on request
+
 
 
