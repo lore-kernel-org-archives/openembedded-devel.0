@@ -1,22 +1,26 @@
-Received: from [62.169.194.3] (helo=fesscrpp2.tellas.gr)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1HdKOK-0000ok-GB
-	for openembedded-devel@openembedded.org; Mon, 16 Apr 2007 08:08:44 +0200
-Received: from dias (62.169.211.226) by fesscrpp2.tellas.gr (7.3.117)
-	id 45DB1A0100388C66 for openembedded-devel@openembedded.org;
-	Mon, 16 Apr 2007 09:07:49 +0300
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Mon, 16 Apr 2007 09:09:08 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHOENHKLAA.skoroneos@digital-opsis.com>
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
-In-Reply-To: <461EC59E.8050001@kernelconcepts.de>
-Importance: Normal
-Subject: Re: RFC: U-Boot package clean up
+	(envelope-from <rod@whitby.id.au>) id 1HdYyz-0005T4-OI
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Apr 2007 23:43:33 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 2E416216D87
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Apr 2007 17:43:34 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Mon, 16 Apr 2007 17:43:33 -0400
+X-Sasl-enc: oBUC6TzJSpcIuGinnDVA6/38EvtJ7ecMlLv+CAweqhfR 1176759812
+Received: from [192.168.18.22] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id 1ED8E1C2AF
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Apr 2007 17:43:31 -0400 (EDT)
+From: "Rod Whitby" <rod@whitby.id.au>
+Date: 17 Apr 2007 07:14:00 +0930
+To: <openembedded-devel@lists.openembedded.org>
+X-Mailer: ChatterEmail+ for Treo 600/650 (2.0.1rc4)
+Message-ID: <3259638856.300263@mail.messagingengine.com>
+Subject: Re: [oe-commits] org.oe.dev conf/*: remove all MACHINE_TASK_PROVIDER definitions that were simply forcibly defining it to the	default value set in bitbake.conf. Approved by hrw and RP.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,55 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2007 06:08:44 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Apr 2007 21:43:34 -0000
 
-dht-walnut is also using 1.1.4 so here is another vote to stay 
+Apologies Koen, I thought that the positive response from hrw and RP on the -devel mailing list for making the change globally (and the lack of objections from anyone to their comments saying to go and do it) was enough.
+Should I have negotiated one on one with every machine maintainer too?  If that is the case, then I simply wouldn't have bothered doing the change at all - what do I care if other distro and machine maintainers would rather do all their own cleanup?  What do I care if historical cruft builds up in OE?
+This type of response to a helpful change to OE is *exactly* why I (and I expect others too) prefer to create a new distro for stuff instead of using Angstrom distro directly - it's just no fun being part of someone else's draconian fiefdom (Angstrom distro with Koen as the overlord) as opposed to being part of a group-maintained distro where positive changes are appreciated when approval of changes that bring improvements and cleanup are sought globally (as was done in this case).
+-- Rod
+(Apologies for formatting, sent on the road from Treo650)
 
-Stelios S. Koroneos
+-----Original Message-----
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Sunday, Apr 15, 2007 4:57 pm
+Subject: Re: [oe] [oe-commits] org.oe.dev conf/*: remove all   MACHINE_TASK_PROVIDER definitions that were simply forcibly defining it to   the	default value set in bitbake.conf. Approved by hrw and RP.
 
-Digital OPSiS - Embedded Inteligence
-http://www.digital-opsis.com
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+rwhitby commit schreef:
+ conf/*: remove all MACHINE_TASK_PROVIDER definitions that were simply forcibly defining it to the default value set in bitbake.conf.  Approved by hrw and RP.
+ 
+ Author: rwhitby@nslu2-linux.org
+
+> conf/distro/include/angstrom.inc
+
+Could you please consult with the distro maintainers before making such changes next time? The line was left in there to fix angstrom for people with a bogus MACHINE_TASK_PROVIDER entry in their local.conf.
+OTOH, people now get what they deserve now when putting bogus entries in local.conf :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGIdPOMkyGM64RGpERAgKrAKCupbjJDnWTtoaTTBjuMueZH5kznwCggqkl
+MdRJ7LalRiiqwU6I9rlCK4M=
+=Yvo4
+-----END PGP SIGNATURE-----
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org 
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of 
-> Florian Boor
-> Sent: Friday, April 13, 2007 2:50 AM
-> To: openembedded-devel@openembedded.org
-> Cc: openembedded-devel@openembedded.org
-> Subject: Re: [oe] RFC: U-Boot package clean up
-> 
-> 
-> Hi,
-> 
-> Vitus Jensen wrote:
-> > We are using u-boot 1.1.4 on our devices.  So if it's not too 
-> much hassle I
-> 
-> I would vote for keeping 1.1.4 as well, it seems to be still 
-> quite popular.
-> 
-> Greetings
-> 
-> Florian
-> 
-> -- 
-> The dream of yesterday                  Florian Boor
-> is the hope of today                    Tel: +49 271-771091-14
-> and the reality of tomorrow.            Fax: +49 271-771091-19
-> [Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-> 
-> 1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
 
 
 
