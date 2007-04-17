@@ -1,26 +1,26 @@
-Received: from [81.255.54.16] (helo=mx.laposte.net)
+Received: from [64.233.162.224] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <c.romain@laposte.net>) id 1Hdapu-00065A-6f
+	(envelope-from <cliff.brake@gmail.com>) id 1HdeGw-0006gU-9F
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Apr 2007 01:42:18 +0200
-Received: from smtp.laposte.net (10.150.9.43) by mx.laposte.net (7.2.060.1)
-	id 45FFE41400CACE34; Tue, 17 Apr 2007 01:42:17 +0200
-Received: from smtpin.laposte.net (10.150.9.73) by smtp.laposte.net (7.3.118.6)
-	id 46067A870260729A; Tue, 17 Apr 2007 01:42:17 +0200
-Received: from [192.168.2.2] (86.201.55.132) by smtpin.laposte.net (7.2.060.1)
-	(authenticated as c.romain)
-	id 45FA4DAE0032E2E8; Tue, 17 Apr 2007 01:40:19 +0200
-Message-ID: <4623FC06.9060009@laposte.net>
-Date: Tue, 17 Apr 2007 00:43:18 +0200
-From: cyril Romain <c.romain@laposte.net>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070323)
+	Tue, 17 Apr 2007 05:22:26 +0200
+Received: by nz-out-0506.google.com with SMTP id m22so1306657nzf
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Apr 2007 20:22:25 -0700 (PDT)
+Received: by 10.114.127.1 with SMTP id z1mr2209988wac.1176780144152;
+	Mon, 16 Apr 2007 20:22:24 -0700 (PDT)
+Received: by 10.114.191.6 with HTTP; Mon, 16 Apr 2007 20:22:24 -0700 (PDT)
+Message-ID: <f96d234e0704162022x25184389g5706a7323e7e6cf1@mail.gmail.com>
+Date: Mon, 16 Apr 2007 23:22:24 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: "Marcin Juszkiewicz" <openembedded@hrw.one.pl>, 
+	openembedded-devel@lists.openembedded.org
+In-Reply-To: <200704130819.55884.openembedded@hrw.one.pl>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@lists.openembedded.org>
-References: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-In-Reply-To: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Making /var/lib persistent
+References: <200703042228.03665.openembedded@hrw.one.pl>
+	<200704122035.03980.openembedded@hrw.one.pl>
+	<461EB337.7020302@whitby.id.au>
+	<200704130819.55884.openembedded@hrw.one.pl>
+Subject: Re: RFC: Task-base rewrite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,26 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2007 23:42:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 17 Apr 2007 03:22:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
-
-Koen Kooi wrote:
-> Marcel Holtmann just pointed me to the fact that OE mount /var as tmpfs for
-> almost all machines, which wipes /var/lib at boot, which will break bluez and
-> dpkg.
+On 4/13/07, Marcin Juszkiewicz <openembedded@hrw.one.pl> wrote:
+> Idea of splitting into separate packages comes from my discussions with
+> Richard about differencies between Poky task-base and OE task-base.
+> During last Easter I had more time to think about correct implementation
+> and wanted to make small rootfs creation easier then it was before.
 >
-> What would be the best way to preserve /var/lib (and maybe others) across boots?
->   
-I suggest the use of symlinks in /var/lib that point to a let's say
-/srv/ directory.
-thoses links will be created at boot time, e.g.:
-ln -s /srv/bitlbee/lib /var/lib/bitlbee
+> And nslu2 rootfs is big - Cliff Brake created 1.7M rootfs for his Compulab
+> board.
+>
+> Cliff: can you look at task-boot contents and tell does it need something
+> removed/added to create minimal image?
 
-Best regards,
+Hi Marcin,
 
-  cyril
+Looks great.  I'm hoping to merge my updater project into OE in the
+next couple weeks so that we have a complete solution for JFFS2 on the
+compulab module.  The new task base should be ideal for that.  I'll
+let you know how it works out.
+
+Thanks,
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
