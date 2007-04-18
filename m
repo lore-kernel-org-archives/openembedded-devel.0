@@ -1,28 +1,26 @@
 Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HeB51-0006Rj-G0
-	for openembedded-devel@openembedded.org; Wed, 18 Apr 2007 16:24:19 +0200
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HeBHi-0006za-QN
+	for openembedded-devel@openembedded.org; Wed, 18 Apr 2007 16:37:26 +0200
 Received: from [130.89.6.69] (vpn006069.vpn.utwente.nl [130.89.6.69])
 	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l3IEOFox012218 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2007 16:24:16 +0200
-Message-ID: <46262A0F.1050805@dominion.kabel.utwente.nl>
-Date: Wed, 18 Apr 2007 07:24:15 -0700
+	l3IEbIox014702 for <openembedded-devel@openembedded.org>;
+	Wed, 18 Apr 2007 16:37:19 +0200
+Message-ID: <46262D1F.3080301@dominion.kabel.utwente.nl>
+Date: Wed, 18 Apr 2007 07:37:19 -0700
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
 User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-	<20070418090235.GA21841@twibble.org>
-In-Reply-To: <20070418090235.GA21841@twibble.org>
+To: openembedded-devel@openembedded.org
+References: <46209B2D.4060902@dominion.kabel.utwente.nl>
+In-Reply-To: <46209B2D.4060902@dominion.kabel.utwente.nl>
 X-Enigmail-Version: 0.94.2.0
 X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
 	helpdesk@ITBE.utwente.nl for more information.
 X-UTwente-MailScanner: Found to be clean
 X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
 X-Spam-Status: No
-Subject: Re: Making /var/lib persistent
+Subject: Re: Cairo 1.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,77 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2007 14:24:20 -0000
+X-List-Received-Date: Wed, 18 Apr 2007 14:37:27 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Jamie Lenehan schreef:
-> On Tue, Apr 17, 2007 at 12:02:03AM +0200, Koen Kooi wrote:
->> Hi,
->>
->> Marcel Holtmann just pointed me to the fact that OE mount /var as tmpfs for
->> almost all machines, which wipes /var/lib at boot, which will break bluez and
->> dpkg.
->>
->> What would be the best way to preserve /var/lib (and maybe others) across boots?
+Koen Kooi schreef:
+> Hi,
 > 
-> This has been brought up a few times and no one has really had a good
-> answer for it. I think /var/lib at a minimum needs to be made
-> persistent.
+> Cairo 1.4.4 was just released containing a ton of bugfixes, but I urge you not to add it
+> to OE. We applied Jorn's surface-cache patch throughout the 1.3.x and 1.4.x series to get
+> a big performance boost on most of our platforms, but with cairo 1.4.4 the patch breaks
+> compilation.
 > 
-> After thinking about it a bit I've got the following proposal:
-> 
->  - make /var a standard directory (no tmpfs)
-> 
->  - make /var/volatile a tmpfs filesystems (or /var/tmpfs)
-> 
->  - symlink things that are to be made volatile from /var into
->    /var/volatile
-> 
-> So the default /var would end up looking like this:
-> 
->  /var/volatile       tmpfs mount
->  /var/volatile/lock  *
->  /var/volatile/run   *
->  /var/volatile/tmp   *
->  /var/volatile/cache *
->  /var/volatile/log   *
->  /var/backups
->  /var/lib
->  /var/lock           symlink to /var/volatile/lock
->  /var/run            symlink to /var/volatile/run
->  /var/tmp            symlink to /var/volatile/tmp
->  /var/cache          symlink to /var/volatile/cache
->  /var/local
->  /var/log            symlink to /var/volatile/log
->  /var/spool
->  /var/www
-> 
-> * == created by the existing volatiles system
-> 
-> (According to the FHS /var/tmp should also persist over reboots.)
-> 
-> This also has an advantage in the situation where I want to make
-> something persistent I just have to break the symlink. So for the
-> logs for example I could just have "rm /var/log && mv
-> /var/volatile/log /var/log" and from then on the logs would remain.
+> But there's hope! Behdad sent this email to cairo-dev last night:
+> http://lists.freedesktop.org/archives/cairo/2007-April/010348.html
 
-Sound like a good idea, do you have a patch for this?
+There's a git tree by Chris Wilson with a WIP patch:
+http://gitweb.freedesktop.org/?p=users/ickle/cairo;a=shortlog;h=xlib-dpy-workqueue
 
 regards,
 
 Koen
-
-
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFGJioPMkyGM64RGpERAtdLAKCTf6YqOUnM4+5bKPQPN6eMIorcTwCffjnL
-IP97PHEx2lA0PkrRN9um1RM=
-=GNuM
+iD8DBQFGJi0eMkyGM64RGpERAjGHAJ4qyt9aq1QlcIGJQZ/52++3pay0kACfagWU
+AVvPMJtcKDdp5wRgvFtp41A=
+=dAoy
 -----END PGP SIGNATURE-----
 
 
