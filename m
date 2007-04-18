@@ -1,26 +1,32 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HeBHi-0006za-QN
-	for openembedded-devel@openembedded.org; Wed, 18 Apr 2007 16:37:26 +0200
-Received: from [130.89.6.69] (vpn006069.vpn.utwente.nl [130.89.6.69])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l3IEbIox014702 for <openembedded-devel@openembedded.org>;
-	Wed, 18 Apr 2007 16:37:19 +0200
-Message-ID: <46262D1F.3080301@dominion.kabel.utwente.nl>
-Date: Wed, 18 Apr 2007 07:37:19 -0700
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1HeHhB-00074e-6n
+	for openembedded-devel@openembedded.org; Wed, 18 Apr 2007 23:28:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3ILS8Vc022108
+	for <openembedded-devel@openembedded.org>;
+	Wed, 18 Apr 2007 22:28:08 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 21975-03 for <openembedded-devel@openembedded.org>;
+	Wed, 18 Apr 2007 22:28:06 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3ILS4Sm022101
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 18 Apr 2007 22:28:04 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-References: <46209B2D.4060902@dominion.kabel.utwente.nl>
-In-Reply-To: <46209B2D.4060902@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Cairo 1.4.4
+In-Reply-To: <E1HeHMY-0002hi-3M@linuxtogo.org>
+References: <E1HeHMY-0002hi-3M@linuxtogo.org>
+Date: Wed, 18 Apr 2007 22:28:05 +0100
+Message-Id: <1176931685.5845.31.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: [oe-commits] org.oe.dev nylon images: added support for	experimental mtx-3a machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,36 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2007 14:37:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 18 Apr 2007 21:28:09 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Koen Kooi schreef:
-> Hi,
+On Wed, 2007-04-18 at 23:06 +0200, MartinDietze commit wrote:
+> nylon images: added support for experimental mtx-3a machine
 > 
-> Cairo 1.4.4 was just released containing a ton of bugfixes, but I urge you not to add it
-> to OE. We applied Jorn's surface-cache patch throughout the 1.3.x and 1.4.x series to get
-> a big performance boost on most of our platforms, but with cairo 1.4.4 the patch breaks
-> compilation.
-> 
-> But there's hope! Behdad sent this email to cairo-dev last night:
-> http://lists.freedesktop.org/archives/cairo/2007-April/010348.html
+> Author: MartinDietze@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 3036f05f449df8719f3d3581c29195dc5c2e09d1
+> ViewMTN: http://monotone.openembedded.org/revision.psp?id=3036f05f449df8719f3d3581c29195dc5c2e09d1
+> Files:
+> 1
+> packages/images/nylon-image-base.bb
+> packages/images/nylon-image-standard.bb
+> Diffs:
 
-There's a git tree by Chris Wilson with a WIP patch:
-http://gitweb.freedesktop.org/?p=users/ickle/cairo;a=shortlog;h=xlib-dpy-workqueue
+> --- packages/images/nylon-image-base.bb	1255705fdb6fd798f6d00869aa56dc09c6dc98c5
+> +++ packages/images/nylon-image-base.bb	901d2b38da9398bc61d942764277e48032ff0d29
+> @@ -1,15 +1,15 @@
+> -inherit image
+> -inherit nylon-image
+> -LICENSE = "MIT"
+> +inherit image_ipk 
+> +inherit nylon_image
+> +LICENSE = MIT
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+This breaks things since it is image.bbclass and nylon-image.bbclass
+in .dev and you've removed quoting on LICENSE breaking the new bitbake
+parser :-(
 
-iD8DBQFGJi0eMkyGM64RGpERAjGHAJ4qyt9aq1QlcIGJQZ/52++3pay0kACfagWU
-AVvPMJtcKDdp5wRgvFtp41A=
-=dAoy
------END PGP SIGNATURE-----
+Richard
+
+
+
 
 
