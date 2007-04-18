@@ -1,29 +1,35 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <rpurdie@rpsys.net>) id 1HeHxY-0007V0-6E
-	for openembedded-devel@openembedded.org; Wed, 18 Apr 2007 23:45:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3ILj1PM023037;
-	Wed, 18 Apr 2007 22:45:01 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 22918-02; Wed, 18 Apr 2007 22:44:58 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3ILitXX023020
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Wed, 18 Apr 2007 22:44:55 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <E1HeHMy-0002iw-VJ@linuxtogo.org>
-References: <E1HeHMy-0002iw-VJ@linuxtogo.org>
-Date: Wed, 18 Apr 2007 22:44:56 +0100
-Message-Id: <1176932696.5845.47.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [oe-commits] org.oe.dev quilt: added DEPEND on autoconf-native	(>= 2.61)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1HeJ0M-0003j0-Qa
+	for openembedded-devel@openembedded.org; Thu, 19 Apr 2007 00:52:05 +0200
+Received: from dominion.dominion.void (dominion.kabel.utwente.nl
+	[130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3IMptox027333; Thu, 19 Apr 2007 00:51:56 +0200
+Received: from www-data by dominion.dominion.void with local (Exim 4.60)
+	(envelope-from <k.kooi@student.utwente.nl>)
+	id 1HeJ0C-0005WW-5R; Thu, 19 Apr 2007 00:51:52 +0200
+Received: from 64-172-16-227.ded.pacbell.net (64-172-16-227.ded.pacbell.net
+	[64.172.16.227]) by dominion.kabel.utwente.nl (IMP) with HTTP 
+	for <koen@localhost>; Thu, 19 Apr 2007 00:51:51 +0200
+Message-ID: <1176936711.4626a107df54b@dominion.kabel.utwente.nl>
+Date: Thu, 19 Apr 2007 00:51:51 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>, 
+	Leon Woestenberg <leon.woestenberg@gmail.com>
+References: <46209B2D.4060902@dominion.kabel.utwente.nl>
+	<c384c5ea0704150831o1a39752cu2813beb58cc9e659@mail.gmail.com>
+In-Reply-To: <c384c5ea0704150831o1a39752cu2813beb58cc9e659@mail.gmail.com>
+MIME-Version: 1.0
+User-Agent: Internet Messaging Program (IMP) 3.2.6
+X-Originating-IP: 64.172.16.227
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: Cairo 1.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,51 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2007 21:45:04 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Apr 2007 22:52:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-On Wed, 2007-04-18 at 23:07 +0200, MartinDietze commit wrote:
-> quilt: added DEPEND on autoconf-native (>= 2.61)
-> 
-> Author: MartinDietze@openembedded.org
-> Branch: org.openembedded.dev
-> Revision: 2620a9b57f6ef565cef134f6a34c2a51381ac2e3
-> ViewMTN: http://monotone.openembedded.org/revision.psp?id=2620a9b57f6ef565cef134f6a34c2a51381ac2e3
-> Files:
-> 1
-> packages/quilt/quilt_0.45.bb
-> Diffs:
-> 
-> #
-> # mt diff -rb62da04643bc273f9af7ef850c8ade01937d5309 -r2620a9b57f6ef565cef134f6a34c2a51381ac2e3
-> #
-> # 
-> # 
-> # patch "packages/quilt/quilt_0.45.bb"
-> #  from [8f756223ce9e287788362df20a70a06d5c21b2c0]
-> #    to [1dffd21abb3d337a34cfe9fbc06d025ae8886e99]
-> # 
-> ============================================================
-> --- packages/quilt/quilt_0.45.bb	8f756223ce9e287788362df20a70a06d5c21b2c0
-> +++ packages/quilt/quilt_0.45.bb	1dffd21abb3d337a34cfe9fbc06d025ae8886e99
-> @@ -1,3 +1,4 @@
-> +DEPENDS = "autoconf-native (>= 2.61)"
->  RDEPENDS_${PN} += "patch diffstat bzip2 util-linux"
+Quoting Leon Woestenberg <leon.woestenberg@gmail.com>:
 
-Could you explain this a little more? I made some changes a while back
-so both bitbake 1.6 and bitbake 1.8 should be able to parse that
-versioned DEPENDS syntax but it doesn't actually do anything yet.
-"autoconf-native" should already be in the DEPENDS?
+> Koen,
+>
+> On 4/14/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Cairo 1.4.4 was just released containing a ton of bugfixes, but I urge you
+> not to add it
+>
+> Thanks for the heads-up.
 
-What problem were you seeing that required this?
+I added 1.4.4 with the workqueue patch[1], which seems to even faster as the
+surface cache patch. A brief test didn't reveal problems for me, but please
+give a shout if you experience problems with it.
 
-Cheers,
+regards,
 
-Richard
+Koen
 
+[1] http://lists.freedesktop.org/archives/cairo/2007-April/010381.html
 
-
-
+----------------------------------------------------------------
+This message was sent using IMP, the Internet Messaging Program.
 
 
