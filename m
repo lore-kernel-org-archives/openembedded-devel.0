@@ -1,26 +1,30 @@
-Received: from [64.233.162.224] (helo=nz-out-0506.google.com)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <cliff.brake@gmail.com>) id 1HdeGw-0006gU-9F
+	(envelope-from <lenehan@twibble.org>) id 1He63q-0001sw-7w
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Apr 2007 05:22:26 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so1306657nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2007 20:22:25 -0700 (PDT)
-Received: by 10.114.127.1 with SMTP id z1mr2209988wac.1176780144152;
-	Mon, 16 Apr 2007 20:22:24 -0700 (PDT)
-Received: by 10.114.191.6 with HTTP; Mon, 16 Apr 2007 20:22:24 -0700 (PDT)
-Message-ID: <f96d234e0704162022x25184389g5706a7323e7e6cf1@mail.gmail.com>
-Date: Mon, 16 Apr 2007 23:22:24 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: "Marcin Juszkiewicz" <openembedded@hrw.one.pl>, 
-	openembedded-devel@lists.openembedded.org
-In-Reply-To: <200704130819.55884.openembedded@hrw.one.pl>
+	Wed, 18 Apr 2007 11:02:50 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id B1C2ABB7BC;
+	Wed, 18 Apr 2007 19:02:37 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 17560-07; Wed, 18 Apr 2007 19:02:36 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 332F79CF34;
+	Wed, 18 Apr 2007 19:02:36 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 27664B70248; Wed, 18 Apr 2007 19:02:36 +1000 (EST)
+Date: Wed, 18 Apr 2007 19:02:36 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070418090235.GA21841@twibble.org>
+References: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-References: <200703042228.03665.openembedded@hrw.one.pl>
-	<200704122035.03980.openembedded@hrw.one.pl>
-	<461EB337.7020302@whitby.id.au>
-	<200704130819.55884.openembedded@hrw.one.pl>
-Subject: Re: RFC: Task-base rewrite
+In-Reply-To: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.12-2006-07-14
+X-Virus-Scanned: by amavisd at twibble.org
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: Making /var/lib persistent
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,36 +39,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Apr 2007 03:22:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Apr 2007 09:02:59 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On 4/13/07, Marcin Juszkiewicz <openembedded@hrw.one.pl> wrote:
-> Idea of splitting into separate packages comes from my discussions with
-> Richard about differencies between Poky task-base and OE task-base.
-> During last Easter I had more time to think about correct implementation
-> and wanted to make small rootfs creation easier then it was before.
->
-> And nslu2 rootfs is big - Cliff Brake created 1.7M rootfs for his Compulab
-> board.
->
-> Cliff: can you look at task-boot contents and tell does it need something
-> removed/added to create minimal image?
+On Tue, Apr 17, 2007 at 12:02:03AM +0200, Koen Kooi wrote:
+> Hi,
+> 
+> Marcel Holtmann just pointed me to the fact that OE mount /var as tmpfs for
+> almost all machines, which wipes /var/lib at boot, which will break bluez and
+> dpkg.
+> 
+> What would be the best way to preserve /var/lib (and maybe others) across boots?
 
-Hi Marcin,
+This has been brought up a few times and no one has really had a good
+answer for it. I think /var/lib at a minimum needs to be made
+persistent.
 
-Looks great.  I'm hoping to merge my updater project into OE in the
-next couple weeks so that we have a complete solution for JFFS2 on the
-compulab module.  The new task base should be ideal for that.  I'll
-let you know how it works out.
+After thinking about it a bit I've got the following proposal:
 
-Thanks,
-Cliff
+ - make /var a standard directory (no tmpfs)
+
+ - make /var/volatile a tmpfs filesystems (or /var/tmpfs)
+
+ - symlink things that are to be made volatile from /var into
+   /var/volatile
+
+So the default /var would end up looking like this:
+
+ /var/volatile       tmpfs mount
+ /var/volatile/lock  *
+ /var/volatile/run   *
+ /var/volatile/tmp   *
+ /var/volatile/cache *
+ /var/volatile/log   *
+ /var/backups
+ /var/lib
+ /var/lock           symlink to /var/volatile/lock
+ /var/run            symlink to /var/volatile/run
+ /var/tmp            symlink to /var/volatile/tmp
+ /var/cache          symlink to /var/volatile/cache
+ /var/local
+ /var/log            symlink to /var/volatile/log
+ /var/spool
+ /var/www
+
+* == created by the existing volatiles system
+
+(According to the FHS /var/tmp should also persist over reboots.)
+
+This also has an advantage in the situation where I want to make
+something persistent I just have to break the symlink. So for the
+logs for example I could just have "rm /var/log && mv
+/var/volatile/log /var/log" and from then on the logs would remain.
 
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+ Jamie Lenehan <lenehan@twibble.org>
 
 
