@@ -1,34 +1,23 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [64.233.162.227] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <oe@hentges.net>) id 1Heg7e-0007dX-Nv
+	(envelope-from <papercrane@gmail.com>) id 1HegGb-0007lK-4B
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2007 01:33:06 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id CCF193081F8
+	Fri, 20 Apr 2007 01:42:21 +0200
+Received: by nz-out-0506.google.com with SMTP id m22so567958nzf
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2007 01:33:05 +0200 (CEST)
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 09360-08 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2007 01:33:02 +0200 (CEST)
-Received: from mhcln04.hentges.priv (xdsl-213-196-247-37.netcologne.de
-	[213.196.247.37]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id 94F483081ED
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2007 01:32:41 +0200 (CEST)
-From: Matthias Hentges <oe@hentges.net>
-To: Using the OpenEmbedded metadata to build Distributions
+	Thu, 19 Apr 2007 16:42:20 -0700 (PDT)
+Received: by 10.114.185.8 with SMTP id i8mr995429waf.1177026139855;
+	Thu, 19 Apr 2007 16:42:19 -0700 (PDT)
+Received: by 10.115.92.3 with HTTP; Thu, 19 Apr 2007 16:42:19 -0700 (PDT)
+Message-ID: <432beae0704191642m79afc9aaia85466716ee744af@mail.gmail.com>
+Date: Thu, 19 Apr 2007 16:42:19 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
+To: "Using the OpenEmbedded metadata to build Distributions"
 	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <20070418090235.GA21841@twibble.org>
-References: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-	<20070418090235.GA21841@twibble.org>
-Date: Fri, 20 Apr 2007 01:32:33 +0200
-Message-Id: <1177025553.5022.13.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
-Subject: Re: Making /var/lib persistent
+In-Reply-To: <200704192334.00169.patrick.steiner@a1.net>
+MIME-Version: 1.0
+References: <200704192334.00169.patrick.steiner@a1.net>
+Subject: Re: strange build errors after (Checking Package:...)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,66 +32,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Apr 2007 23:33:07 -0000
-X-Groupsio-MsgNum: 1890
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="=-OuzSrkbuICqS/A5byzzk"
+X-List-Received-Date: Thu, 19 Apr 2007 23:42:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---=-OuzSrkbuICqS/A5byzzk
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+On 4/19/07, Patrick Steiner <patrick.steiner@a1.net> wrote:
+> hi,
+>
+> i have some problems with latest OE (bitbake)
+>
+> i currently try to build a gpephone image but i get some errors on every
+> package.
+>
+> NOTE: Running task 321 of 3196 (ID:
+> 1373, /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
+> do_qa_configure)
+> NOTE: package libxdmcp-1.0.2: started
+> NOTE: package libxdmcp-1_1.0.2-r0: task do_qa_configure: started
+> NOTE: Checking sanity of the config.log file
+> NOTE: package libxdmcp-1_1.0.2-r0: task do_qa_configure: completed
+> NOTE: package libxdmcp-1.0.2: completed
+> NOTE: Running task 322 of 3196 (ID:
+> 1366, /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
+> do_compile)
+> NOTE: package libxdmcp-1.0.2: started
+> NOTE: package libxdmcp-1_1.0.2-r0: task do_compile: started
+> NOTE: package libxdmcp-1_1.0.2-r0: task do_compile: completed
+> NOTE: package libxdmcp-1.0.2: completed
+> NOTE: Running task 323 of 3196 (ID:
+> 1367, /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
+> do_install)
+> NOTE: package libxdmcp-1.0.2: started
+> NOTE: package libxdmcp-1_1.0.2-r0: task do_install: started
+> NOTE: package libxdmcp-1_1.0.2-r0: task do_install: completed
+> NOTE: package libxdmcp-1.0.2: completed
+> NOTE: Running task 324 of 3196 (ID:
+> 1371, /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
+> do_package)
+> NOTE: package libxdmcp-1.0.2: started
+> NOTE: package libxdmcp-1_1.0.2-r0: task do_package: started
+> NOTE: Couldn't find shared library provider for libc.so.6
+> NOTE: Couldn't find shared library provider for libc.so.6
+> NOTE: couldn't find pkgconfig module 'xproto' in any package
+> NOTE: DO PACKAGE QA
+> NOTE: Checking Package: libxdmcp-dbg
+> ERROR: Can not check RPATH scanelf not found
+> ERROR: Error in executing:
+> ERROR: Exception:exceptions.SystemExit Message:1
+> ERROR: Printing the environment of the function
+> ERROR: Error in executing:
+> ERROR: Exception:exceptions.SystemExit Message:1
+> ERROR: Printing the environment of the function
+> ERROR: Error in executing:
+> ERROR: Exception:exceptions.SystemExit Message:1
+> ERROR: Printing the environment of the function
+> ERROR: Error in executing:
+> ERROR: Exception:exceptions.SystemExit Message:1
+> ERROR: Printing the environment of the function
+> ERROR: Build
+> of /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb
+> do_package failed
+> ERROR: Task 1371
+> (/home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
+> do_package) failed
+> ERROR: '/home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb'
+> failed
+>
+>
+> if i restart bitbake gpephone-image the package works an another one exits
+> with this error. has anyone a ideas what happens?
+>
+> here is my oe build config:
+> OE Build Configuration:
+> BB_VERSION     = "1.8.0"
+> OE_REVISION    = "<unknown>"
+> TARGET_ARCH    = "arm"
+> TARGET_OS      = "linux-gnueabi"
+> MACHINE        = "htctornado"
+> DISTRO         = "angstrom"
+> DISTRO_VERSION = "test-20070419"
+> TARGET_FPU     = "soft"
+>
+> regards,
+>
+>  patrick (law)
+>
 
-Am Mittwoch, den 18.04.2007, 19:02 +1000 schrieb Jamie Lenehan:
-> On Tue, Apr 17, 2007 at 12:02:03AM +0200, Koen Kooi wrote:
-> > Hi,
-> >=20
-> > Marcel Holtmann just pointed me to the fact that OE mount /var as tmpfs=
- for
-> > almost all machines, which wipes /var/lib at boot, which will break blu=
-ez and
-> > dpkg.
-> >=20
-> > What would be the best way to preserve /var/lib (and maybe others) acro=
-ss boots?
->=20
-> This has been brought up a few times and no one has really had a good
-> answer for it. I think /var/lib at a minimum needs to be made
-> persistent.
->=20
-> After thinking about it a bit I've got the following proposal:
->=20
->  - make /var a standard directory (no tmpfs)
->=20
->  - make /var/volatile a tmpfs filesystems (or /var/tmpfs)
->=20
->  - symlink things that are to be made volatile from /var into
->    /var/volatile
->=20
-
-Sounds fine to me.
-
---=20
-Matthias 'CoreDump' Hentges=20
-Cologne / Germany
-
-Webmaster of Hentges.net & Embedded Linux Developer
-GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
-
-My OS: Debian SID: Geek by Nature, Linux by Choice
+Sounds to me like a missing native dep on whatever package scanelf comes from.
 
 
+-- 
+Justin Patrin
 
---=-OuzSrkbuICqS/A5byzzk
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-
-iD8DBQBGJ/wRPXyoPq8wMNkRAoORAKCBvj3pyjO2mXpvbPNbK9e8FsYacACg2/au
-R/mg/MYfJ0IB1+akW5vUY98=
-=5gpi
------END PGP SIGNATURE-----
-
---=-OuzSrkbuICqS/A5byzzk--
