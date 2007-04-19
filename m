@@ -1,30 +1,32 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <mickey@vanille-media.de>) id 1HeWCI-0007nj-Ia
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Apr 2007 14:57:14 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id D370828C012; Thu, 19 Apr 2007 14:49:31 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=RCVD_IN_NJABL_DUL, RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,UPPERCASE_25_50 autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180154148.adsl.alicedsl.de [85.180.154.148])
-	by srv043.dedi23.de (Postfix) with ESMTP id 67E9428C011
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2007 14:49:31 +0200 (CEST)
-Date: Thu, 19 Apr 2007 14:57:13 +0200
-From: "Dr. Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.98.4) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <157361400.20070419145713@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1HeU56-0006o4-VP@linuxtogo.org>
+	(envelope-from <rpurdie@rpsys.net>) id 1HeZ3e-0004w4-1Y
+	for openembedded-devel@openembedded.org; Thu, 19 Apr 2007 18:00:32 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3JG0S9E002888;
+	Thu, 19 Apr 2007 17:00:28 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 02774-01; Thu, 19 Apr 2007 17:00:24 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3JG0MnG002881
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Thu, 19 Apr 2007 17:00:22 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+In-Reply-To: <157361400.20070419145713@vanille-media.de>
 References: <E1HeU56-0006o4-VP@linuxtogo.org>
-MIME-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev mtx-3a.conf, nylon-image-base.bb: removed remaints from old OE code (PACKAGE_INSTALL instead of IPKG_INSTALL)
+	<157361400.20070419145713@vanille-media.de>
+Date: Thu, 19 Apr 2007 17:00:22 +0100
+Message-Id: <1176998423.5833.99.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: Michael Lauer <mickey@vanille-media.de>
+Subject: Re: [oe-commits] org.oe.dev mtx-3a.conf, nylon-image-base.bb:	removed remaints from old OE code (PACKAGE_INSTALL instead of IPKG_INSTALL)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,34 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Apr 2007 12:57:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 19 Apr 2007 16:00:34 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-MartinDietze commit wrote:
-> mtx-3a.conf, nylon-image-base.bb: removed remaints from old OE code
-> (PACKAGE_INSTALL instead of IPKG_INSTALL)
+On Thu, 2007-04-19 at 14:57 +0200, Dr. Michael 'Mickey' Lauer wrote:
+> MartinDietze commit wrote:
+> > mtx-3a.conf, nylon-image-base.bb: removed remaints from old OE code
+> > (PACKAGE_INSTALL instead of IPKG_INSTALL)
+> 
+> >  TARGET_ARCH = "arm"
+> > -IPKG_ARCHS = "all arm ${MACHINE}"
+> > +#PACKAGE_ARCHS = "all arm ${MACHINE}"
+> 
+> Why is that commented?
 
->  TARGET_ARCH = "arm"
-> -IPKG_ARCHS = "all arm ${MACHINE}"
-> +#PACKAGE_ARCHS = "all arm ${MACHINE}"
+Since I mentioned that it wasn't needed after recent changes (which it
+isn't).
 
-Why is that commented?
+> > -inherit image_ipk
+> > -inherit nylon_image
+> > -LICENSE = MIT
+> > +inherit image
+> > +inherit nylon-image
+> > +LICENSE = "MIT"
+> 
+> Are you sure about that? image_ipk looks about right for me.
 
-> -inherit image_ipk
-> -inherit nylon_image
-> -LICENSE = MIT
-> +inherit image
-> +inherit nylon-image
-> +LICENSE = "MIT"
+image_ipk is incorrect and I'd mentioned this being a problem on the
+mailing list - it was causing parsing errors. We have multiple image
+generation types now and selecting them like that in .bb files doesn't
+make sense so images just inherit image.
 
-Are you sure about that? image_ipk looks about right for me.
+Cheers,
 
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Richard
 
 
 
