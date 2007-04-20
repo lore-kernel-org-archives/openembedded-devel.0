@@ -1,15 +1,15 @@
 Received: from [213.39.232.198] (helo=moskovskaya.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <di@mail.fh-wedel.de>) id 1Hes0t-00068a-IF
+	(envelope-from <di@mail.fh-wedel.de>) id 1Hes8d-0001Zf-Fy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2007 14:14:55 +0200
+	Fri, 20 Apr 2007 14:22:55 +0200
 Received: from di by moskovskaya.fh-wedel.de with local (Exim 4.50)
-	id 1Hes0t-0000SJ-AA for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2007 14:14:55 +0200
-Date: Fri, 20 Apr 2007 14:14:55 +0200
+	id 1Hes8d-0000Yc-6n for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Apr 2007 14:22:55 +0200
+Date: Fri, 20 Apr 2007 14:22:55 +0200
 From: Martin Dietze <di@fh-wedel.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070420121455.GA1636@fh-wedel.de>
+Message-ID: <20070420122255.GA1923@fh-wedel.de>
 References: <E1HeU56-0006o4-VP@linuxtogo.org>
 	<157361400.20070419145713@vanille-media.de>
 	<1176998423.5833.99.camel@localhost.localdomain>
@@ -40,54 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2007 12:14:56 -0000
+X-List-Received-Date: Fri, 20 Apr 2007 12:22:57 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Fri, April 20, 2007, Martin Dietze wrote:
+[I just wrote]
 
-<lengthy context>
-> > Users (or distros) have to inherit one or more of these to enable
-> > packaging. The first one inherited is used for rootfs generation. Having
-> > to select a package type isn't a problem in practise since rootfs
-> > generation currently depends on packages.
+> Having played around with this for another while it seems like
+> classes/rootfs_ipk should be patched as follows:
 > 
-> If I understand all this correctly this is supposed to be done
-> by this:
+> --- rootfs_ipk.bbclass-orig     2007-04-20 14:13:53.534848585 +0200
+> +++ rootfs_ipk.bbclass  2007-04-20 14:10:43.406456119 +0200
+> @@ -9,6 +9,7 @@
 > 
-> INHERIT += "package_ipk ..."
+>  IPKG_ARGS = "-f ${T}/ipkg.conf -o ${IMAGE_ROOTFS}"
 > 
-> ... in conf/distro/my-distro.conf, which I expect to be used
-> here:
+> +DEPENDS += "ipkg-native"
+>  RDEPENDS += "ipkg ipkg-collateral"
+>  PACKAGE_INSTALL += "ipkg ipkg-collateral"
 > 
-> classes/package_ipk.bbclass:IMAGE_PKGTYPE ?= "ipk"
 > 
-> ... and which is then expanded here:
-> 
-> classes/image.bbclass:inherit rootfs_${IMAGE_PKGTYPE}
-> 
-> Unfortunately this does not work! The only way I get this to
-> work is by adding a "inherit rootfs_ipk" in the different
-> images' bitbake files, but this is surely not the way it is
-> meant to be?
-</lengthy context>
+> How about this? I would tend to believe that rootfs_deb
+> may need something similar...
 
-Having played around with this for another while it seems like
-classes/rootfs_ipk should be patched as follows:
+At second glance this does not look much better either. From
+classes/base.bbclass:
 
---- rootfs_ipk.bbclass-orig     2007-04-20 14:13:53.534848585 +0200
-+++ rootfs_ipk.bbclass  2007-04-20 14:10:43.406456119 +0200
-@@ -9,6 +9,7 @@
+#
+# Various backwards compatibility stuff to be removed
+# when we switch to bitbake 1.8.2+ as a minimum version
+#
 
- IPKG_ARGS = "-f ${T}/ipkg.conf -o ${IMAGE_ROOTFS}"
+[...]
 
-+DEPENDS += "ipkg-native"
- RDEPENDS += "ipkg ipkg-collateral"
- PACKAGE_INSTALL += "ipkg ipkg-collateral"
+    if bb.data.inherits_class('rootfs_ipk', d):
+        depends = "ipkg-native ipkg-utils-native fakeroot-native " + depends
 
-
-How about this? I would tend to believe that rootfs_deb
-may need something similar...
+I read from this that these dependencies should have been set
+somewhere else already. So where do they come from?
 
 Cheers,
 
@@ -98,7 +88,6 @@ Martin
 -- martin@the-little-red-haired-girl.org -- / ---- dietze@4g-systems.com ----
 ------------- / http://herbert.the-little-red-haired-girl.org / -------------
 =+= 
-Hlade's Law: If you have a difficult task, give it to a lazy person;
-           they will find an easier way to do it. 
+Hier ich bin, steine Dich wie ein Wirbelwind.
 
 
