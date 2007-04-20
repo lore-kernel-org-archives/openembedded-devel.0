@@ -1,23 +1,24 @@
 Received: from [213.39.232.198] (helo=moskovskaya.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <di@mail.fh-wedel.de>) id 1Hepoc-0004en-5b
+	(envelope-from <di@mail.fh-wedel.de>) id 1Hes0t-00068a-IF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2007 11:54:06 +0200
+	Fri, 20 Apr 2007 14:14:55 +0200
 Received: from di by moskovskaya.fh-wedel.de with local (Exim 4.50)
-	id 1Hepob-0006C7-8d for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2007 11:54:05 +0200
-Date: Fri, 20 Apr 2007 11:54:05 +0200
+	id 1Hes0t-0000SJ-AA for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Apr 2007 14:14:55 +0200
+Date: Fri, 20 Apr 2007 14:14:55 +0200
 From: Martin Dietze <di@fh-wedel.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070420095405.GA23328@fh-wedel.de>
+Message-ID: <20070420121455.GA1636@fh-wedel.de>
 References: <E1HeU56-0006o4-VP@linuxtogo.org>
 	<157361400.20070419145713@vanille-media.de>
 	<1176998423.5833.99.camel@localhost.localdomain>
 	<20070419162539.GA29294@fh-wedel.de>
 	<432beae0704190938o5ae0bf04k81fe388e8faa2c09@mail.gmail.com>
 	<1177001559.5833.106.camel@localhost.localdomain>
+	<20070420095405.GA23328@fh-wedel.de>
 Mime-Version: 1.0
-In-Reply-To: <1177001559.5833.106.camel@localhost.localdomain>
+In-Reply-To: <20070420095405.GA23328@fh-wedel.de>
 X-PGP-Fingerprint: C98D 598A DA73 DF9F 610D  632E 4468 B911 BF9B 8D95
 X-PGP-Key-ID: 0xBF9B8D95
 User-Agent: Mutt/1.5.9i
@@ -39,62 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2007 09:54:07 -0000
+X-List-Received-Date: Fri, 20 Apr 2007 12:14:56 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thu, April 19, 2007, Richard Purdie wrote:
+On Fri, April 20, 2007, Martin Dietze wrote:
 
-> > > I just noticed that not inheriting image_ipk actually gives me
-> > > problems because ipkg-native is no longer automatically
-> > > DEPENDed. Is this a bug or a featuer? In the latter case -
-> > > where are maintainers supposed to put the necessary
-> > > configuration?
+<lengthy context>
+> > Users (or distros) have to inherit one or more of these to enable
+> > packaging. The first one inherited is used for rootfs generation. Having
+> > to select a package type isn't a problem in practise since rootfs
+> > generation currently depends on packages.
 > 
-> Is this in OE.dev or in a different branch and which bitbake version?
-> There have been some recent changes that had potential to stop certain
-> DEPENDS from appearing.
-
-I am using bitbake 1.6.3 and OE.dev. I also tried bitbake 1.8.0
-but this does not seem to make any difference.
-
-> > I believe that is meant to be inherited on a distro level. The images
-> > are generic and the distro chooses what package format it wants to
-> > use.
+> If I understand all this correctly this is supposed to be done
+> by this:
 > 
-> Kind of. image_ipk.bbclass no longer exists in OE.dev which is why I've
-> said it won't work. The top of image.bbclass does:
+> INHERIT += "package_ipk ..."
 > 
-> inherit rootfs_${IMAGE_PKGTYPE}
+> ... in conf/distro/my-distro.conf, which I expect to be used
+> here:
 > 
-> IMAGE_PKGTYPE is set by both package_ipk.bbclass and package_deb.bbclass
+> classes/package_ipk.bbclass:IMAGE_PKGTYPE ?= "ipk"
+> 
+> ... and which is then expanded here:
+> 
+> classes/image.bbclass:inherit rootfs_${IMAGE_PKGTYPE}
+> 
+> Unfortunately this does not work! The only way I get this to
+> work is by adding a "inherit rootfs_ipk" in the different
+> images' bitbake files, but this is surely not the way it is
+> meant to be?
+</lengthy context>
 
-Yes, I've seen this, but it does not seem to have the effect I
-want. I had another look at it again today.
+Having played around with this for another while it seems like
+classes/rootfs_ipk should be patched as follows:
 
-> Users (or distros) have to inherit one or more of these to enable
-> packaging. The first one inherited is used for rootfs generation. Having
-> to select a package type isn't a problem in practise since rootfs
-> generation currently depends on packages.
+--- rootfs_ipk.bbclass-orig     2007-04-20 14:13:53.534848585 +0200
++++ rootfs_ipk.bbclass  2007-04-20 14:10:43.406456119 +0200
+@@ -9,6 +9,7 @@
 
-If I understand all this correctly this is supposed to be done
-by this:
+ IPKG_ARGS = "-f ${T}/ipkg.conf -o ${IMAGE_ROOTFS}"
 
-INHERIT += "package_ipk ..."
++DEPENDS += "ipkg-native"
+ RDEPENDS += "ipkg ipkg-collateral"
+ PACKAGE_INSTALL += "ipkg ipkg-collateral"
 
-... in conf/distro/my-distro.conf, which I expect to be used
-here:
 
-classes/package_ipk.bbclass:IMAGE_PKGTYPE ?= "ipk"
-
-... and which is then expanded here:
-
-classes/image.bbclass:inherit rootfs_${IMAGE_PKGTYPE}
-
-Unfortunately this does not work! The only way I get this to
-work is by adding a "inherit rootfs_ipk" in the different
-images' bitbake files, but this is surely not the way it is
-meant to be?
+How about this? I would tend to believe that rootfs_deb
+may need something similar...
 
 Cheers,
 
@@ -105,7 +98,7 @@ Martin
 -- martin@the-little-red-haired-girl.org -- / ---- dietze@4g-systems.com ----
 ------------- / http://herbert.the-little-red-haired-girl.org / -------------
 =+= 
-Perl ist der gegl?ckte Versuch, einen braindump direkt ausf?hrbar zu
-machen.  -- Lutz Donnerhacke in dasr
+Hlade's Law: If you have a difficult task, give it to a lazy person;
+           they will find an easier way to do it. 
 
 
