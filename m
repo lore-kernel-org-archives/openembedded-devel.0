@@ -1,33 +1,34 @@
-Received: from [80.122.23.18] (helo=admproxy.stiftadmont.local)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <patrick.steiner@a1.net>) id 1Helwp-0003fp-75
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2007 07:46:19 +0200
-Received: from admproxy.stiftadmont.local (localhost [127.0.0.1])
-	by postfix.imss70 (Postfix) with ESMTP id 9D5741DC5CB
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2007 07:45:55 +0200 (CEST)
-Received: from admex.ora.local (admex [10.2.0.60])
-	by admproxy.stiftadmont.local (Postfix) with ESMTP id 920001DC5B6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2007 07:45:55 +0200 (CEST)
-Received: from [10.2.1.9] ([10.2.1.9]) by admex.ora.local with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 20 Apr 2007 07:46:45 +0200
-Message-ID: <462853A9.6020309@a1.net>
-Date: Fri, 20 Apr 2007 07:46:17 +0200
-From: Patrick Steiner <patrick.steiner@a1.net>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070302)
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1HepSH-0004Pm-8R
+	for openembedded-devel@openembedded.org; Fri, 20 Apr 2007 11:31:01 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3K9V1o8007691
+	for <openembedded-devel@openembedded.org>;
+	Fri, 20 Apr 2007 10:31:01 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07303-08 for <openembedded-devel@openembedded.org>;
+	Fri, 20 Apr 2007 10:30:58 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3K9UsGq007683
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Fri, 20 Apr 2007 10:30:54 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@lists.openembedded.org>
+	<openembedded-devel@openembedded.org>
+In-Reply-To: <462853A9.6020309@a1.net>
 References: <200704192334.00169.patrick.steiner@a1.net>
 	<432beae0704191642m79afc9aaia85466716ee744af@mail.gmail.com>
-In-Reply-To: <432beae0704191642m79afc9aaia85466716ee744af@mail.gmail.com>
-X-OriginalArrivalTime: 20 Apr 2007 05:46:45.0434 (UTC)
-	FILETIME=[47B809A0:01C7830F]
-X-TM-AS-Product-Ver: IMSS-7.0.0.1640-3.8.0.1026-15126.002
-X-TM-AS-Result: No--19.356-5.0-4-1
-X-imss-scan-details: No--19.356-5.0-4-1;No--19.356-5.0-4-1
+	<462853A9.6020309@a1.net>
+Date: Fri, 20 Apr 2007 10:30:54 +0100
+Message-Id: <1177061454.5842.7.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: strange build errors after (Checking Package:...)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -43,101 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2007 05:46:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 20 Apr 2007 09:31:01 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Justin Patrin wrote:
-> On 4/19/07, Patrick Steiner <patrick.steiner@a1.net> wrote:
->> hi,
->>
->> i have some problems with latest OE (bitbake)
->>
->> i currently try to build a gpephone image but i get some errors on every
->> package.
->>
->> NOTE: Running task 321 of 3196 (ID:
->> 1373, /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
->> do_qa_configure)
->> NOTE: package libxdmcp-1.0.2: started
->> NOTE: package libxdmcp-1_1.0.2-r0: task do_qa_configure: started
->> NOTE: Checking sanity of the config.log file
->> NOTE: package libxdmcp-1_1.0.2-r0: task do_qa_configure: completed
->> NOTE: package libxdmcp-1.0.2: completed
->> NOTE: Running task 322 of 3196 (ID:
->> 1366, /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
->> do_compile)
->> NOTE: package libxdmcp-1.0.2: started
->> NOTE: package libxdmcp-1_1.0.2-r0: task do_compile: started
->> NOTE: package libxdmcp-1_1.0.2-r0: task do_compile: completed
->> NOTE: package libxdmcp-1.0.2: completed
->> NOTE: Running task 323 of 3196 (ID:
->> 1367, /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
->> do_install)
->> NOTE: package libxdmcp-1.0.2: started
->> NOTE: package libxdmcp-1_1.0.2-r0: task do_install: started
->> NOTE: package libxdmcp-1_1.0.2-r0: task do_install: completed
->> NOTE: package libxdmcp-1.0.2: completed
->> NOTE: Running task 324 of 3196 (ID:
->> 1371, /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
->> do_package)
->> NOTE: package libxdmcp-1.0.2: started
->> NOTE: package libxdmcp-1_1.0.2-r0: task do_package: started
->> NOTE: Couldn't find shared library provider for libc.so.6
->> NOTE: Couldn't find shared library provider for libc.so.6
->> NOTE: couldn't find pkgconfig module 'xproto' in any package
->> NOTE: DO PACKAGE QA
->> NOTE: Checking Package: libxdmcp-dbg
->> ERROR: Can not check RPATH scanelf not found
->> ERROR: Error in executing:
->> ERROR: Exception:exceptions.SystemExit Message:1
->> ERROR: Printing the environment of the function
->> ERROR: Error in executing:
->> ERROR: Exception:exceptions.SystemExit Message:1
->> ERROR: Printing the environment of the function
->> ERROR: Error in executing:
->> ERROR: Exception:exceptions.SystemExit Message:1
->> ERROR: Printing the environment of the function
->> ERROR: Error in executing:
->> ERROR: Exception:exceptions.SystemExit Message:1
->> ERROR: Printing the environment of the function
->> ERROR: Build
->> of /home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb
->> do_package failed
->> ERROR: Task 1371
->> (/home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb,
->> do_package) failed
->> ERROR: '/home/pat/devel/oe/oe/org.openembedded.dev_typhoon/packages/xorg-lib/libxdmcp_1.0.2.bb'
->> failed
->>
->>
->> if i restart bitbake gpephone-image the package works an another one exits
->> with this error. has anyone a ideas what happens?
->>
->> here is my oe build config:
->> OE Build Configuration:
->> BB_VERSION     = "1.8.0"
->> OE_REVISION    = "<unknown>"
->> TARGET_ARCH    = "arm"
->> TARGET_OS      = "linux-gnueabi"
->> MACHINE        = "htctornado"
->> DISTRO         = "angstrom"
->> DISTRO_VERSION = "test-20070419"
->> TARGET_FPU     = "soft"
->>
->> regards,
->>
->>  patrick (law)
->>
->
-> Sounds to me like a missing native dep on whatever package scanelf comes from
-hi i think this was the problem i did bitbake pax-utils-native now it works
+On Fri, 2007-04-20 at 07:46 +0200, Patrick Steiner wrote:
+> Justin Patrin wrote:
+> > On 4/19/07, Patrick Steiner <patrick.steiner@a1.net> wrote:
+> > Sounds to me like a missing native dep on whatever package scanelf comes from
+> hi i think this was the problem i did bitbake pax-utils-native now it works
+> 
+> i think this should be added as default dependency, also the sha256sum 
+> stuff...
 
-i think this should be added as default dependency, also the sha256sum 
-stuff...
+It should be a dependency by default. Was this with bitbake 1.8.0? Does
+1.8.1 from svn work any better? 
 
-thanks
+To check, look at the task-depends.dot file saved by "bitbake something
+-g" and see if pax-utils-native is mentioned as a dependency for
+do_package tasks...
 
-patrick
+I just checked here and it seems to be working for me with 1.8.1.
+
+Cheers,
+
+Richard
+
 
 
