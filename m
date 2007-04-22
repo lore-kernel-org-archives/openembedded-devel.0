@@ -1,25 +1,26 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [64.233.166.176] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hfj0l-0007f0-5e
-	for openembedded-devel@openembedded.org; Sun, 22 Apr 2007 22:50:20 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l3MKVgox015754 for <openembedded-devel@openembedded.org>;
-	Sun, 22 Apr 2007 22:31:42 +0200
-Message-ID: <462BC62F.6030907@dominion.kabel.utwente.nl>
-Date: Sun, 22 Apr 2007 22:31:43 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <pmiscml@gmail.com>) id 1Hfkce-00080s-0I
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Apr 2007 00:33:32 +0200
+Received: by py-out-1112.google.com with SMTP id n39so1097891pyh
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Apr 2007 15:33:31 -0700 (PDT)
+Received: by 10.65.232.19 with SMTP id j19mr1944174qbr.1177277769343;
+	Sun, 22 Apr 2007 14:36:09 -0700 (PDT)
+Received: from cube ( [82.193.98.7])
+	by mx.google.com with ESMTP id 36sm8280848nza.2007.04.22.14.36.08;
+	Sun, 22 Apr 2007 14:36:09 -0700 (PDT)
+Date: Mon, 23 Apr 2007 00:36:06 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1044484458.20070423003606@gmail.com>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <462BC62F.6030907@dominion.kabel.utwente.nl>
 References: <20070422202157.BEBB9401B37@tinman.treke.net>
-In-Reply-To: <20070422202157.BEBB9401B37@tinman.treke.net>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<462BC62F.6030907@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
 Subject: Re: [oe-issues] [Bug 2123] Fixed QA issues for opie-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,32 +36,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Apr 2007 20:50:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 22 Apr 2007 22:33:33 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-bugzilla-daemon@tinman.treke.net schreef:
+Sunday, April 22, 2007, 11:31:43 PM, you wrote:
 
-> ------- Comment #4 from pmiscml@gmail.com  2007-04-22 13:21 -------
-> Nice try ;-). The real issue though is that no .bb should ever override
-> PACKAGES variable, only append (prepend). Default PACKAGES and FILES settings
-> are set in *.bbclass. 
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
-That's not quite true for e.g metapackages since ALLOW_EMPTY will start to generate bogus
-packages.
+> bugzilla-daemon@tinman.treke.net schreef:
 
-regards,
+>> ------- Comment #4 from pmiscml@gmail.com  2007-04-22 13:21 -------
+>> Nice try ;-). The real issue though is that no .bb should ever override
+>> PACKAGES variable, only append (prepend). Default PACKAGES and FILES settings
+>> are set in *.bbclass. 
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> That's not quite true for e.g metapackages since ALLOW_EMPTY will start to generate bogus
+> packages.
 
-iD8DBQFGK8YvMkyGM64RGpERAggKAJ4luMJflKRBy4I2e8SEHOq63kFhEwCfZQhK
-otkxNbbV0DHNlPuGh2IpoHA=
-=AzZu
------END PGP SIGNATURE-----
+        Well, of course I meant mundane OPIE packages there ;-)
+
+> regards,
+
+> Koen
+
+[]
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
