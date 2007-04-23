@@ -1,29 +1,27 @@
-Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HftEF-0005ZE-5C
+	(envelope-from <zecke@selfish.org>) id 1HftOL-0005iN-6m
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Apr 2007 09:44:55 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so1156455nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Apr 2007 00:44:54 -0700 (PDT)
-Received: by 10.65.232.19 with SMTP id j19mr2700333qbr.1177312555043;
-	Mon, 23 Apr 2007 00:15:55 -0700 (PDT)
-Received: from cube ( [82.193.98.7])
-	by mx.google.com with ESMTP id c1sm8929559nzd.2007.04.23.00.15.52;
-	Mon, 23 Apr 2007 00:15:53 -0700 (PDT)
-Date: Mon, 23 Apr 2007 10:15:51 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1363913311.20070423101551@gmail.com>
-To: Rod Whitby <rod@whitby.id.au>
-In-Reply-To: <461C85D6.1010105@whitby.id.au>
-References: <1597775703.20070405182752@gmail.com>
-	<46156BCD.6060407@whitby.id.au> <02429232.20070410152736@gmail.com>
-	<461C85D6.1010105@whitby.id.au>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org
-Subject: Re: [RFC] Adding sanity to OE startup process
+	Mon, 23 Apr 2007 09:55:21 +0200
+Received: from rosine144.inf.fu-berlin.de ([160.45.116.144])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1HfskW-000538-7D
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Apr 2007 09:14:13 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>
+References: <462B14AF.50903@gmail.com> <462B3637.7080604@laposte.net>
+	<462B4FB2.5090107@laposte.net>
+	<1177248616.5830.13.camel@localhost.localdomain>
+	<c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>
+Message-Id: <8E0169A7-A704-4489-8F0A-2A7E58A6C9A0@selfish.org>
+From: Holger Freyther <zecke@selfish.org>
+Date: Mon, 23 Apr 2007 09:14:07 +0200
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.752.3)
+Subject: Re: linux-libc-headers build problem for tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,59 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2007 07:44:56 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 23 Apr 2007 07:55:21 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello Rod,
 
-Wednesday, April 11, 2007, 9:53:10 AM, you wrote:
+Am 22.04.2007 um 21:39 schrieb Leon Woestenberg:
 
-> Paul Sokolovsky wrote:
->>   I expected SlugOS project to be important stakeholder for such
->> changes, so I appreciate your response, Rob! I had a look at
->> slugos-init's syslog handling, and for sure it looks well done and
->> should be generalized to the whole OE.
+> Same types of issues here with linux-libc-headers.
+>
+> URL: svn://svn.berlios.de/bitbake/branches/bitbake-1.8
+> Revision: 816
+>
+> When I install pax-utils natively (Ubuntu 7.04 x86_64) the insane  
+> class works.
 
-> Thanks.  It was mostly done by John Bowler.  Any bugs introduced since
-> then are my responsibility :-)
+Hi,
+purge it, it should get build automatically and we have to find out  
+why it wasn't built. So my two questions in this issue are:
 
->>   I guess, at this point, I should just play with it to understand
->> how it works better (for example, a question I have in mind: each of
->> syslog.{buffer, file, network} appears to just run syslogd with new
->> commandline params, not restart it or send signal; is this reliable
->> (e.g. documented)? Well, as I tell, I should try it myself first I
->> guess.)
-
-> Good question.  I thought that only *one* of them would get started,
-> based on the contents of the destination field in /etc/sysconf.conf at
-> boot.  Is that not what you're seeing?
-
-        Sorry, for delay, due to approaching of 2.6.22 merge window, I
-work mostly on HH.org kernel now, but yesterday finally found time to
-play with this issue.
-
-        So yes, I see that the idea after all is log to only one
-destination, just start logging as soon as possible for that
-destination. I just had in mind something what Koen mentioned: start
-logging to buffer ASAP, then later switchover to file if needed, then
-to network if needed. Well, that's of course more of advanced feature.
-
-        Also, confirmed that file log rotation works at least with
-busybox 1.2.1. Cleaned up syslogd.conf fixed to not contain confusing
-statements this is not supported, committed. Koen, what do you think
-about switching Angstrom's default setting to /var/log/messages after
-this, to make it easier for non-busybox people? After all, main
-trouble with file logging is now fixed - it cannot grow unlimited in
-size.
+	-Which BitBake version do you really use? (python -vvv `which  
+bitbake` -p
+	-Is your setup in anyway not standard or is it the default angstrom  
+build?
 
 
-> -- Rod
+please feel free to mail the output to this list, or if too large to  
+me privately.
 
+z.
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
 
 
 
