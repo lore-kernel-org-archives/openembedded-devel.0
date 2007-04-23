@@ -1,29 +1,19 @@
-Received: from [66.249.82.226] (helo=wx-out-0506.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <pmiscml@gmail.com>) id 1HfzrK-0002N5-2g
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Apr 2007 16:49:42 +0200
-Received: by wx-out-0506.google.com with SMTP id t14so1741631wxc
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Apr 2007 07:49:41 -0700 (PDT)
-Received: by 10.70.111.2 with SMTP id j2mr10055364wxc.1177329190931;
-	Mon, 23 Apr 2007 04:53:10 -0700 (PDT)
-Received: from cube ( [82.193.98.7])
-	by mx.google.com with ESMTP id j7sm9251930nzd.2007.04.23.04.53.09;
-	Mon, 23 Apr 2007 04:53:10 -0700 (PDT)
-Date: Mon, 23 Apr 2007 14:53:08 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1810046333.20070423145308@gmail.com>
-To: Jamie Lenehan <lenehan@twibble.org>
-In-Reply-To: <20070419014949.GA6540@twibble.org>
-References: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-	<20070418090235.GA21841@twibble.org>
-	<46262A0F.1050805@dominion.kabel.utwente.nl>
-	<20070419014949.GA6540@twibble.org>
+	(envelope-from <openembedded@hrw.one.pl>) id 1Hg0Ga-0002oi-FT
+	for openembedded-devel@openembedded.org; Mon, 23 Apr 2007 17:15:48 +0200
+Received: (qmail 15695 invoked by uid 813007); 23 Apr 2007 14:49:07 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 23 Apr 2007 14:49:07 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 23 Apr 2007 16:49:00 +0200
+User-Agent: KMail/1.9.6
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Making /var/lib persistent
+Message-Id: <200704231649.01632.openembedded@hrw.one.pl>
+Subject: Wifi and Bluetooth support in task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,41 +28,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2007 14:49:42 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 23 Apr 2007 15:15:48 -0000
+X-Groupsio-MsgNum: 1914
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_ddMLGb8jlRLyWnZ"
+
+--Boundary-00=_ddMLGb8jlRLyWnZ
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Jamie,
 
-Thursday, April 19, 2007, 4:49:50 AM, you wrote:
+Our task-base is restructured now into separate task-base-* ones. Each 
+feature got own metapackage and task-base contain all needed ones for 
+machine.
 
-> On Wed, Apr 18, 2007 at 07:24:15AM -0700, Koen Kooi wrote:
-> [...]
->> Sound like a good idea, do you have a patch for this?
+But there comes problem. Many of our devices have PCI or Pcmcia/CF or USB 
+Host functionality but do not have integrated Wifi or BT so users adds 
+external 'cards/dongles' to get it. With current task-base they do not 
+get them working without installing extra task-base-* packages.
 
-> Try this out:
+I wrote small patch which change this. If Distro feature wifi then machine 
+with pcmcia/pci/usbhost feature will get task-base-wifi added into 
+task-base. Same goes for Bluetooth.
 
->   http://twibble.org/dist/oe/var-volatiles-1.patch
+Someone can say that why not add usbhost support for pcmcia/pci machines - 
+All our pci machines already feature usbhost. USB controllers for cf 
+devices are expensive so only small amount of users have them.
 
-> I've tested it locally both with and without tmpfs mounted on
-> /var/volatile and all seems to work as expected.
-
-        I tried this with Angstrom builds, seems to work OK either.
-
-> I modified the base-files recipe to create the /var/volatile
-
-        The only concern is all this override files patchery. I wish
-we had for fstab the same machinery as for autoconf site files -
-ability to merge standard template with per-machine overrides. But
-well, lack of such shouldn't be cause of delay with this patch, hope
-to see it soon in mainline!
-
-[]
-
+Read patch, comment, complain.
 
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
+               Beware of Programmers who carry screwdrivers.
+               		-- Leonard Brandwein
 
+--Boundary-00=_ddMLGb8jlRLyWnZ
+Content-Type: text/x-diff;
+  charset="utf-8";
+  name="task-base.diff"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="task-base.diff"
 
+# 
+# old_revision [a5563210e57ff1a3cb7ddee80670313b6e95fdaa]
+# 
+# patch "packages/tasks/task-base.bb"
+#  from [f42fce68f538f09a771fa2674b72feff0e5c88b4]
+#    to [01ca51df062e419dcf92aca42814c26197770110]
+# 
+============================================================
+--- packages/tasks/task-base.bb	f42fce68f538f09a771fa2674b72feff0e5c88b4
++++ packages/tasks/task-base.bb	01ca51df062e419dcf92aca42814c26197770110
+@@ -1,5 +1,5 @@ DESCRIPTION = "Merge machine and distro 
+ DESCRIPTION = "Merge machine and distro options to create a basic machine task/package"
+-PR = "r28"
++PR = "r29"
+ 
+ PACKAGES = 'task-boot \
+             task-base \
+@@ -105,7 +105,6 @@ RDEPENDS_task-base = "\
+     ${@base_contains('COMBINED_FEATURES', 'usbgadget', 'task-base-usbgadget', '',d)} \
+     ${@base_contains('COMBINED_FEATURES', 'usbhost', 'task-base-usbhost', '',d)} \
+     ${@base_contains('COMBINED_FEATURES', 'bluetooth', 'task-base-bluetooth', '',d)} \
+-    ${@base_contains('COMBINED_FEATURES', 'wifi', 'task-base-wifi', '',d)} \
+     ${@base_contains('COMBINED_FEATURES', 'uboot', 'task-base-uboot', '',d)} \
+     ${@base_contains('COMBINED_FEATURES', 'redboot', 'task-base-redboot', '',d)} \
+     \
+@@ -114,8 +113,31 @@ RDEPENDS_task-base = "\
+     ${@base_contains('DISTRO_FEATURES', 'ipsec', 'task-base-ipsec', '',d)} \
+     ${@base_contains('DISTRO_FEATURES', 'ppp', 'task-base-ppp', '',d)} \
+     ${@base_contains('DISTRO_FEATURES', 'raid', 'task-base-raid', '',d)} \
++    \
++    ${ADD_WIFI} \
++    ${ADD_BT} \
+     "
+ 
++ADD_WIFI = ""
++ADD_BT = ""
++
++python __anonymous () {
++    import bb
++    # If Distro want wifi and machine feature wifi/pci/pcmcia/usbhost (one of them)
++    # then include task-base-wifi in task-base
++
++    distro_features = bb.data.getVar("DISTRO_FEATURES", d, 1)
++    machine_features= bb.data.getVar("MACHINE_FEATURES", d, 1)
++
++    if distro_features.find("bluetooth") and not machine_features.find("bluetooth") and (machine_features.find("pcmcia") or machine_features.find("pci")  or  machine_features.find("usbhost")):
++	bb.data.setVar("ADD_BT", "task-base-bluetooth", d)
++
++    if distro_features.find("wifi") and not machine_features.find("wifi") and (machine_features.find("pcmcia") or machine_features.find("pci")  or  machine_features.find("usbhost")):
++	bb.data.setVar("ADD_WIFI", "task-base-wifi", d)
++}
++
++
++
+ #
+ # packages added by distribution
+ #
+
+--Boundary-00=_ddMLGb8jlRLyWnZ--
