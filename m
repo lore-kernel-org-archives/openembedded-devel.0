@@ -1,28 +1,29 @@
-Received: from [64.233.162.224] (helo=nz-out-0506.google.com)
+Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <xjqian@gmail.com>) id 1Hfstg-0004Ro-Uy
+	(envelope-from <pmiscml@gmail.com>) id 1HftEF-0005ZE-5C
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Apr 2007 09:23:43 +0200
-Received: by nz-out-0506.google.com with SMTP id f1so1127477nzc
+	Mon, 23 Apr 2007 09:44:55 +0200
+Received: by nz-out-0506.google.com with SMTP id m22so1156455nzf
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Apr 2007 00:23:40 -0700 (PDT)
-Received: by 10.65.152.17 with SMTP id e17mr2918145qbo.1177309225502;
-	Sun, 22 Apr 2007 23:20:25 -0700 (PDT)
-Received: from ?192.168.10.106? ( [24.107.178.232])
-	by mx.google.com with ESMTP id 39sm29292684nzk.2007.04.22.23.20.20;
-	Sun, 22 Apr 2007 23:20:21 -0700 (PDT)
-Message-ID: <462C4FF3.7020305@gmail.com>
-Date: Mon, 23 Apr 2007 01:19:31 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Icedove 1.5.0.10 (X11/20070329)
+	Mon, 23 Apr 2007 00:44:54 -0700 (PDT)
+Received: by 10.65.232.19 with SMTP id j19mr2700333qbr.1177312555043;
+	Mon, 23 Apr 2007 00:15:55 -0700 (PDT)
+Received: from cube ( [82.193.98.7])
+	by mx.google.com with ESMTP id c1sm8929559nzd.2007.04.23.00.15.52;
+	Mon, 23 Apr 2007 00:15:53 -0700 (PDT)
+Date: Mon, 23 Apr 2007 10:15:51 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1363913311.20070423101551@gmail.com>
+To: Rod Whitby <rod@whitby.id.au>
+In-Reply-To: <461C85D6.1010105@whitby.id.au>
+References: <1597775703.20070405182752@gmail.com>
+	<46156BCD.6060407@whitby.id.au> <02429232.20070410152736@gmail.com>
+	<461C85D6.1010105@whitby.id.au>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@lists.openembedded.org>
-References: <462B14AF.50903@gmail.com>
-	<462B3637.7080604@laposte.net>	<462B4FB2.5090107@laposte.net>	<1177248616.5830.13.camel@localhost.localdomain>
-	<c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>
-In-Reply-To: <c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>
-Subject: Re: linux-libc-headers build problem for tosa
+Cc: openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org
+Subject: Re: [RFC] Adding sanity to OE startup process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,34 +38,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2007 07:23:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 23 Apr 2007 07:44:56 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Leon Woestenberg wrote:
-> Same types of issues here with linux-libc-headers.
->
-> URL: svn://svn.berlios.de/bitbake/branches/bitbake-1.8
-> Revision: 816
->
-> When I install pax-utils natively (Ubuntu 7.04 x86_64) the insane class works.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Hello Rod,
 
-I installed pax_utils natively (Debian testing).  But it's still not 
-working.
+Wednesday, April 11, 2007, 9:53:10 AM, you wrote:
 
-My bitbake-1.8 may be a bit old at revision: 802. I can not update to 
-the latest version due to the berlios.de server problem.
+> Paul Sokolovsky wrote:
+>>   I expected SlugOS project to be important stakeholder for such
+>> changes, so I appreciate your response, Rob! I had a look at
+>> slugos-init's syslog handling, and for sure it looks well done and
+>> should be generalized to the whole OE.
 
-I will give it another try when svn update works.
+> Thanks.  It was mostly done by John Bowler.  Any bugs introduced since
+> then are my responsibility :-)
 
-Thanks
-Gordon
+>>   I guess, at this point, I should just play with it to understand
+>> how it works better (for example, a question I have in mind: each of
+>> syslog.{buffer, file, network} appears to just run syslogd with new
+>> commandline params, not restart it or send signal; is this reliable
+>> (e.g. documented)? Well, as I tell, I should try it myself first I
+>> guess.)
 
+> Good question.  I thought that only *one* of them would get started,
+> based on the contents of the destination field in /etc/sysconf.conf at
+> boot.  Is that not what you're seeing?
+
+        Sorry, for delay, due to approaching of 2.6.22 merge window, I
+work mostly on HH.org kernel now, but yesterday finally found time to
+play with this issue.
+
+        So yes, I see that the idea after all is log to only one
+destination, just start logging as soon as possible for that
+destination. I just had in mind something what Koen mentioned: start
+logging to buffer ASAP, then later switchover to file if needed, then
+to network if needed. Well, that's of course more of advanced feature.
+
+        Also, confirmed that file log rotation works at least with
+busybox 1.2.1. Cleaned up syslogd.conf fixed to not contain confusing
+statements this is not supported, committed. Koen, what do you think
+about switching Angstrom's default setting to /var/log/messages after
+this, to make it easier for non-busybox people? After all, main
+trouble with file logging is now fixed - it cannot grow unlimited in
+size.
+
+
+> -- Rod
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
