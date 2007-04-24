@@ -1,27 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.166.181] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hg0MO-000799-Di
-	for openembedded-devel@openembedded.org; Mon, 23 Apr 2007 17:21:48 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l3NFLkLr004252 for <openembedded-devel@openembedded.org>;
-	Mon, 23 Apr 2007 17:21:46 +0200
-Message-ID: <462CCF0A.4070305@dominion.kabel.utwente.nl>
-Date: Mon, 23 Apr 2007 17:21:46 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+	(envelope-from <xjqian@gmail.com>) id 1HgE3K-00045L-4F
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Apr 2007 07:59:02 +0200
+Received: by py-out-1112.google.com with SMTP id n39so1405438pyh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Apr 2007 22:59:01 -0700 (PDT)
+Received: by 10.65.240.17 with SMTP id s17mr13272798qbr.1177383831021;
+	Mon, 23 Apr 2007 20:03:51 -0700 (PDT)
+Received: from ?192.168.10.106? ( [24.107.178.232])
+	by mx.google.com with ESMTP id 5sm888498nzk.2007.04.23.20.03.48;
+	Mon, 23 Apr 2007 20:03:49 -0700 (PDT)
+Message-ID: <462D7361.9030205@gmail.com>
+Date: Mon, 23 Apr 2007 22:02:57 -0500
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Icedove 1.5.0.10 (X11/20070329)
 MIME-Version: 1.0
 To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <200704231649.01632.openembedded@hrw.one.pl>
-In-Reply-To: <200704231649.01632.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Wifi and Bluetooth support in task-base
+	<openembedded-devel@lists.openembedded.org>
+References: <462B14AF.50903@gmail.com>
+	<462B3637.7080604@laposte.net>	<462B4FB2.5090107@laposte.net>	<1177248616.5830.13.camel@localhost.localdomain>
+	<c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>
+In-Reply-To: <c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>
+Subject: Re: linux-libc-headers build problem for tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,31 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2007 15:21:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Apr 2007 05:59:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Leon Woestenberg wrote:
+> Same types of issues here with linux-libc-headers.
+>
+> URL: svn://svn.berlios.de/bitbake/branches/bitbake-1.8
+> Revision: 816
+>
+> When I install pax-utils natively (Ubuntu 7.04 x86_64) the insane class works.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>   
+Works for me after updating the bitbake to revision 816 and installing 
+pax-utils.
 
-Marcin Juszkiewicz schreef:
-
-> Read patch, comment, complain.
-
-> +    ${ADD_WIFI} \
-> +    ${ADD_BT} \
-
-Maybe DISTRO_ADD_WIFI or DISTRO_HAS_WIFI?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGLM8KMkyGM64RGpERAk9fAKCjDX/3KUpmwK68fjHgyABu5eDJ3wCglPE/
-egiTSzzX4pjaGPHPOUCOVf4=
-=IxUh
------END PGP SIGNATURE-----
+Should I close the bug or does anyone has anything to add?
 
 
