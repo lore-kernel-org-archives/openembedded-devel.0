@@ -1,36 +1,30 @@
-Received: from [80.122.23.18] (helo=admproxy.stiftadmont.local)
+Received: from [66.249.82.239] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.63)
-	(envelope-from <patrick.steiner@a1.net>) id 1HgHQz-0004RU-8H
+	(envelope-from <pmiscml@gmail.com>) id 1HgRDc-0006za-6O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Apr 2007 11:35:41 +0200
-Received: from admproxy.stiftadmont.local (localhost [127.0.0.1])
-	by postfix.imss70 (Postfix) with ESMTP id 3B30E1DC20D
+	Tue, 24 Apr 2007 22:02:37 +0200
+Received: by wx-out-0506.google.com with SMTP id t14so2272808wxc
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Apr 2007 11:07:16 +0200 (CEST)
-Received: from admex.ora.local (admex [10.2.0.60])
-	by admproxy.stiftadmont.local (Postfix) with ESMTP id 2D0511DC209
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Apr 2007 11:07:16 +0200 (CEST)
-Received: from [10.2.1.9] ([10.2.1.9]) by admex.ora.local with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 24 Apr 2007 11:09:12 +0200
-Message-ID: <462DC919.4050300@a1.net>
-Date: Tue, 24 Apr 2007 11:08:41 +0200
-From: Patrick Steiner <patrick.steiner@a1.net>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070302)
-MIME-Version: 1.0
+	Tue, 24 Apr 2007 13:02:29 -0700 (PDT)
+Received: by 10.90.63.16 with SMTP id l16mr2130918aga.1177417608508;
+	Tue, 24 Apr 2007 05:26:48 -0700 (PDT)
+Received: from cube ( [82.193.98.7])
+	by mx.google.com with ESMTP id j7sm10990492nzd.2007.04.24.05.26.46;
+	Tue, 24 Apr 2007 05:26:47 -0700 (PDT)
+Date: Tue, 24 Apr 2007 15:26:46 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <2510684605.20070424152646@gmail.com>
 To: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel@lists.openembedded.org>
-References: <200704192334.00169.patrick.steiner@a1.net>
-	<432beae0704191642m79afc9aaia85466716ee744af@mail.gmail.com>
-	<462853A9.6020309@a1.net>
-	<1177061454.5842.7.camel@localhost.localdomain>
-In-Reply-To: <1177061454.5842.7.camel@localhost.localdomain>
-X-OriginalArrivalTime: 24 Apr 2007 09:09:12.0642 (UTC)
-	FILETIME=[39ABE220:01C78650]
-X-TM-AS-Product-Ver: IMSS-7.0.0.1640-3.8.0.1026-15134.002
-X-TM-AS-Result: No--7.232-5.0-31-1
-X-imss-scan-details: No--7.232-5.0-31-1;No--7.232-5.0-31-1
-Subject: Re: strange build errors after (Checking Package:...)
+In-Reply-To: <462C676C.3070305@dominion.kabel.utwente.nl>
+References: <1597775703.20070405182752@gmail.com>
+	<46156BCD.6060407@whitby.id.au> <02429232.20070410152736@gmail.com>
+	<461C85D6.1010105@whitby.id.au>
+	<1363913311.20070423101551@gmail.com>
+	<462C676C.3070305@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Subject: Re: [RFC] Adding sanity to OE startup process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -45,38 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Apr 2007 09:35:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 24 Apr 2007 20:02:58 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Fri, 2007-04-20 at 07:46 +0200, Patrick Steiner wrote:
->> Justin Patrin wrote:
->>> On 4/19/07, Patrick Steiner <patrick.steiner@a1.net> wrote:
->>> Sounds to me like a missing native dep on whatever package scanelf comes from
->> hi i think this was the problem i did bitbake pax-utils-native now it works
->>
->> i think this should be added as default dependency, also the sha256sum 
->> stuff...
->
-> It should be a dependency by default. Was this with bitbake 1.8.0? Does
-> 1.8.1 from svn work any better? 
->
-> To check, look at the task-depends.dot file saved by "bitbake something
-> -g" and see if pax-utils-native is mentioned as a dependency for
-> do_package tasks...
->
-> I just checked here and it seems to be working for me with 1.8.1.
->
-> Cheers,
->
-> Richard
-i have tested it now with the bitbake svn version (1.8.0 branch) now it 
-also works.
+Hello Koen,
 
-so this could be an bug in 1.8.0 stable...
+Monday, April 23, 2007, 10:59:40 AM, you wrote:
 
-regards,
- patrick
+> Paul Sokolovsky schreef:
+
+>>         Also, confirmed that file log rotation works at least with
+>> busybox 1.2.1. Cleaned up syslogd.conf fixed to not contain confusing
+>> statements this is not supported, committed. Koen, what do you think
+>> about switching Angstrom's default setting to /var/log/messages after
+>> this, to make it easier for non-busybox people? After all, main
+>> trouble with file logging is now fixed - it cannot grow unlimited in
+>> size.
+
+> Sounds ok to me.
+
+        Patch posted at http://bugs.openembedded.org/show_bug.cgi?id=2135
+
+> regards,
+
+> Koen
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
