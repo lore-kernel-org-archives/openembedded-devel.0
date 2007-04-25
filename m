@@ -1,28 +1,26 @@
-Received: from [64.233.162.224] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1Hgnh7-0003gX-Gi
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Apr 2007 22:02:30 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so392655nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2007 12:53:43 -0700 (PDT)
-Received: by 10.114.184.16 with SMTP id h16mr308719waf.1177530822483;
-	Wed, 25 Apr 2007 12:53:42 -0700 (PDT)
-Received: by 10.115.92.7 with HTTP; Wed, 25 Apr 2007 12:53:42 -0700 (PDT)
-Message-ID: <432beae0704251253v1e747dbeu6f480dc300dff36f@mail.gmail.com>
-Date: Wed, 25 Apr 2007 12:53:42 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: "Using the OpenEmbedded metadata to build Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <c384c5ea0704250719l791f36cep3f80660d6a74f42@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HgoW0-0008Dq-Kg
+	for openembedded-devel@openembedded.org; Wed, 25 Apr 2007 22:55:04 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3PKkFLr019223 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Apr 2007 22:46:15 +0200
+Message-ID: <462FBE16.9070805@dominion.kabel.utwente.nl>
+Date: Wed, 25 Apr 2007 22:46:14 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-References: <462B14AF.50903@gmail.com> <462B3637.7080604@laposte.net>
-	<462B4FB2.5090107@laposte.net>
-	<1177248616.5830.13.camel@localhost.localdomain>
-	<c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>
-	<462D7361.9030205@gmail.com>
-	<c384c5ea0704250719l791f36cep3f80660d6a74f42@mail.gmail.com>
-Subject: Re: linux-libc-headers build problem for tosa
+To: openembedded-devel@openembedded.org
+References: <E1HgoSJ-0008AG-St@linuxtogo.org>
+In-Reply-To: <E1HgoSJ-0008AG-St@linuxtogo.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev xtscal: attempt to fix miscalibrations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,34 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Apr 2007 20:02:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 25 Apr 2007 20:55:06 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 4/25/07, Leon Woestenberg <leon.woestenberg@gmail.com> wrote:
-> Hello,
->
-> On 4/24/07, Junqian Gordon Xu <xjqian@gmail.com> wrote:
-> > Leon Woestenberg wrote:
-> > > Same types of issues here with linux-libc-headers.
-> > >
-> > > URL: svn://svn.berlios.de/bitbake/branches/bitbake-1.8
-> > > Revision: 816
-> > >
-> > > When I install pax-utils natively (Ubuntu 7.04 x86_64) the insane class works.
-> > >
-> Like Holger said, it should work without pax-utils installed on your
-> host, as OE should pick up and build a native version for you.
->
-> I'm going to try that.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The thing is, scanelf is definately installed on my host. OE *should*
-have found and used my host's version as it's in my path. Sounds like
-there's both a path and a dep issue in bitbake.
+koen commit schreef:
+> xtscal: attempt to fix miscalibrations
 
--- 
-Justin Patrin
+Could people with one of:
+"HP IPAQ H3600" | "HP IPAQ H3700" | "HP IPAQ H3900" | "HTC Universal" | *COLLIE | *POODLE
+| *SPITZ | *AKITA | *BORZOI
+
+check if calibration isn't 90 degrees of anymore?
+
+If not, we most likely need to revert revision d18552e5056a026d8ed8959e135b2fa05c3e1b6b
+
+thanks,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGL74WMkyGM64RGpERArL6AJ9650uuYRwFPYEiX6uhAxCkzjKGDwCgtrp1
+xYkYIvAbAd0zasrxpkCcbvs=
+=u97/
+-----END PGP SIGNATURE-----
 
 
