@@ -1,27 +1,27 @@
-Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
+Received: from [66.249.82.225] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1Hgn2b-0007na-LS
+	(envelope-from <leon.woestenberg@gmail.com>) id 1HgnW0-0003SR-S4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Apr 2007 21:20:39 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so379136nzf
+	Wed, 25 Apr 2007 21:51:03 +0200
+Received: by wx-out-0506.google.com with SMTP id t14so336935wxc
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2007 12:11:52 -0700 (PDT)
-Received: by 10.114.25.3 with SMTP id 3mr293811way.1177528312055;
-	Wed, 25 Apr 2007 12:11:52 -0700 (PDT)
-Received: by 10.115.92.7 with HTTP; Wed, 25 Apr 2007 12:11:52 -0700 (PDT)
-Message-ID: <432beae0704251211g4aa73e46u914b9593219b940c@mail.gmail.com>
-Date: Wed, 25 Apr 2007 12:11:52 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
+	Wed, 25 Apr 2007 12:42:14 -0700 (PDT)
+Received: by 10.90.29.18 with SMTP id c18mr748312agc.1177510789254;
+	Wed, 25 Apr 2007 07:19:49 -0700 (PDT)
+Received: by 10.90.65.4 with HTTP; Wed, 25 Apr 2007 07:19:49 -0700 (PDT)
+Message-ID: <c384c5ea0704250719l791f36cep3f80660d6a74f42@mail.gmail.com>
+Date: Wed, 25 Apr 2007 16:19:49 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: "Using the OpenEmbedded metadata to build Distributions"
 	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <462DC919.4050300@a1.net>
+In-Reply-To: <462D7361.9030205@gmail.com>
 MIME-Version: 1.0
-References: <200704192334.00169.patrick.steiner@a1.net>
-	<432beae0704191642m79afc9aaia85466716ee744af@mail.gmail.com>
-	<462853A9.6020309@a1.net>
-	<1177061454.5842.7.camel@localhost.localdomain>
-	<462DC919.4050300@a1.net>
-Subject: Re: strange build errors after (Checking Package:...)
+References: <462B14AF.50903@gmail.com> <462B3637.7080604@laposte.net>
+	<462B4FB2.5090107@laposte.net>
+	<1177248616.5830.13.camel@localhost.localdomain>
+	<c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>
+	<462D7361.9030205@gmail.com>
+Subject: Re: linux-libc-headers build problem for tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,45 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Apr 2007 19:20:43 -0000
+X-List-Received-Date: Wed, 25 Apr 2007 19:51:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On 4/24/07, Patrick Steiner <patrick.steiner@a1.net> wrote:
-> Richard Purdie wrote:
-> > On Fri, 2007-04-20 at 07:46 +0200, Patrick Steiner wrote:
-> >> Justin Patrin wrote:
-> >>> On 4/19/07, Patrick Steiner <patrick.steiner@a1.net> wrote:
-> >>> Sounds to me like a missing native dep on whatever package scanelf comes from
-> >> hi i think this was the problem i did bitbake pax-utils-native now it works
-> >>
-> >> i think this should be added as default dependency, also the sha256sum
-> >> stuff...
-> >
-> > It should be a dependency by default. Was this with bitbake 1.8.0? Does
-> > 1.8.1 from svn work any better?
-> >
-> > To check, look at the task-depends.dot file saved by "bitbake something
-> > -g" and see if pax-utils-native is mentioned as a dependency for
-> > do_package tasks...
-> >
-> > I just checked here and it seems to be working for me with 1.8.1.
-> >
-> > Cheers,
-> >
-> > Richard
-> i have tested it now with the bitbake svn version (1.8.0 branch) now it
-> also works.
->
-> so this could be an bug in 1.8.0 stable...
->
+Hello,
 
-1.6 branch does the same thing. Looks like this dependency only works
-in 1.8 svn. Of course 1.8 svn has problems with SRCDATE and so it not
-usable either.
+On 4/24/07, Junqian Gordon Xu <xjqian@gmail.com> wrote:
+> Leon Woestenberg wrote:
+> > Same types of issues here with linux-libc-headers.
+> >
+> > URL: svn://svn.berlios.de/bitbake/branches/bitbake-1.8
+> > Revision: 816
+> >
+> > When I install pax-utils natively (Ubuntu 7.04 x86_64) the insane class works.
+> >
+Like Holger said, it should work without pax-utils installed on your
+host, as OE should pick up and build a native version for you.
 
--- 
-Justin Patrin
+I'm going to try that.
+
+Regards,
+
+Leon.
 
 
