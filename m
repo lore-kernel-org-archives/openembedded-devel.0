@@ -1,19 +1,21 @@
 Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hh9gI-0000HY-R6
-	for openembedded-devel@openembedded.org; Thu, 26 Apr 2007 21:31:13 +0200
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HhAAy-0000dm-0T
+	for openembedded-devel@openembedded.org; Thu, 26 Apr 2007 22:02:51 +0200
 Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
 	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l3QJM6Lr028342 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2007 21:22:06 +0200
-Message-ID: <4630FBDF.2060004@dominion.kabel.utwente.nl>
-Date: Thu, 26 Apr 2007 21:22:07 +0200
+	l3QJrsLr032355 for <openembedded-devel@openembedded.org>;
+	Thu, 26 Apr 2007 21:53:55 +0200
+Message-ID: <46310354.9070205@dominion.kabel.utwente.nl>
+Date: Thu, 26 Apr 2007 21:53:56 +0200
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
 User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
 References: <c384c5ea0704261001x7756fd58yc637a6b1aec12440@mail.gmail.com>
-In-Reply-To: <c384c5ea0704261001x7756fd58yc637a6b1aec12440@mail.gmail.com>
+	<4630FBDF.2060004@dominion.kabel.utwente.nl>
+In-Reply-To: <4630FBDF.2060004@dominion.kabel.utwente.nl>
 X-Enigmail-Version: 0.94.2.0
 X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
 	helpdesk@ITBE.utwente.nl for more information.
@@ -35,45 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2007 19:31:26 -0000
-X-List-Received-Date: Thu, 26 Apr 2007 19:31:26 -0000
-Content-Type: multipart/mixed; boundary="------------000801090107070301090701"
+X-List-Received-Date: Thu, 26 Apr 2007 20:02:55 -0000
+Content-Type: multipart/mixed; boundary="------------060505010605080802020006"
 
---------------000801090107070301090701
+--------------060505010605080802020006
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Leon Woestenberg schreef:
-> Hello all,
+Koen Kooi schreef:
+> Leon Woestenberg schreef:
+>> Hello all,
 > 
-> for those of you using insane.bbclass, it will now correctly detect
-> wrong RPATH's in shared libraries and fail on them.
+>> for those of you using insane.bbclass, it will now correctly detect
+>> wrong RPATH's in shared libraries and fail on them.
 > 
-> Unfortunately, as we have not fixed wrong RPATH's yet in our shared
-> library handling, this will cause builds using insane.bbclass to fail.
+>> Unfortunately, as we have not fixed wrong RPATH's yet in our shared
+>> library handling, this will cause builds using insane.bbclass to fail.
 > 
-> See bug #2140.
+>> See bug #2140.
 > 
-> I hope to be able to fix the .so RPATH stuff as well, but any help is welcomed.
+>> I hope to be able to fix the .so RPATH stuff as well, but any help is welcomed.
+> 
+> Attached patch replaces bogus rpaths with '/lib' inside insane.bbclass. There are several
+> things wrong with this approach, but it's a start.
 
-Attached patch replaces bogus rpaths with '/lib' inside insane.bbclass. There are several
-things wrong with this approach, but it's a start.
+For one, bb.message doesn't exist.
 
-regards,
-
-Koen
+updated patch attached.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFGMPvfMkyGM64RGpERAjz8AJ9fl8l2SMw586tr6HhKtE7PCoS7wwCdEgi7
-5IQYUSdNXXFgeYHW3mGtvro=
-=RrbB
+iD8DBQFGMQNUMkyGM64RGpERAkymAKCjXS5XaosSdHvTEefmhc0PJgIrXwCdGRL/
+PaUz8C7MxY/84UNWcBHcT48=
+=/STS
 -----END PGP SIGNATURE-----
 
---------------000801090107070301090701
+--------------060505010605080802020006
 Content-Type: text/x-patch; x-mac-type="0"; x-mac-creator="0";
  name="chrpath.patch"
 Content-Transfer-Encoding: 7bit
@@ -85,11 +87,11 @@ Content-Disposition: inline;
 # 
 # patch "classes/insane.bbclass"
 #  from [3a03bd01885af7a8749b8d7c891e968eadae8bea]
-#    to [908828866e30c41cff63a3fa4a7aac7d30924e83]
+#    to [52bd5e7c8bced0a26f41f5a38b5f46601b40d988]
 # 
 ============================================================
 --- classes/insane.bbclass	3a03bd01885af7a8749b8d7c891e968eadae8bea
-+++ classes/insane.bbclass	908828866e30c41cff63a3fa4a7aac7d30924e83
++++ classes/insane.bbclass	52bd5e7c8bced0a26f41f5a38b5f46601b40d988
 @@ -202,10 +202,13 @@ def package_qa_check_rpath(file,name,d):
      """
      import bb, os
@@ -110,11 +112,11 @@ Content-Disposition: inline;
              package_qa_write_error( 1, name, file, d)
              bb.error("QA Issue package %s contains bad RPATH %s in file %s" % (name, line, file))
 -            return False
-+	    bb.message("Fixing RPATH for you in %s" % file)
-+	    os.popen("%s -r /lib %s" % (chrpath,file))
++            bb.note("Fixing RPATH for you in %s" % file)
++            os.popen("%s -r /lib %s" % (chrpath,file))
 +            return True
      return True
  
  def package_qa_check_devdbg(path, name,d):
 
---------------000801090107070301090701--
+--------------060505010605080802020006--
