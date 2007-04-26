@@ -1,28 +1,19 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.82.229] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1Hh2sR-0007VE-Sj
-	for openembedded-devel@openembedded.org; Thu, 26 Apr 2007 14:15:12 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3QC6MaI007370;
-	Thu, 26 Apr 2007 13:06:22 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 07303-01; Thu, 26 Apr 2007 13:06:19 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3QC6FE0007361
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Thu, 26 Apr 2007 13:06:15 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: bitbake-dev <bitbake-dev@lists.berlios.de>
-Date: Thu, 26 Apr 2007 13:06:15 +0100
-Message-Id: <1177589176.5843.3.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Bitbake 1.8.2 released!
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Hh2z7-0002uX-1D
+	for openembedded-devel@openembedded.org; Thu, 26 Apr 2007 14:22:05 +0200
+Received: by wx-out-0506.google.com with SMTP id t13so529712wxc
+	for <openembedded-devel@openembedded.org>;
+	Thu, 26 Apr 2007 05:13:15 -0700 (PDT)
+Received: by 10.90.113.18 with SMTP id l18mr1879806agc.1177589595456;
+	Thu, 26 Apr 2007 05:13:15 -0700 (PDT)
+Received: by 10.90.65.4 with HTTP; Thu, 26 Apr 2007 05:13:15 -0700 (PDT)
+Message-ID: <c384c5ea0704260513h1e7e2283hfd439a2ff1421ff4@mail.gmail.com>
+Date: Thu, 26 Apr 2007 14:13:15 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@openembedded.org
+MIME-Version: 1.0
+Subject: shared libraries RPATH causes overhead
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,27 +28,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2007 12:15:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Apr 2007 12:22:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Bitbake 1.8.2 has been released.
+[resent, seems to be queued or lost earlier]
 
-http://prdownload.berlios.de/bitbake/bitbake-1.8.2.tar.gz
+Hello,
 
-This release is primarily a bugfix release. It contains several bugfixes
-and minor improvements over the 1.8.0 release and should be used instead
-of 1.8.0 in all cases. Specifically, it addresses several dependency
-problems that were identified in the 1.8.0 release. See the Changelog in
-the release for a more comprehensive list of changes.
+During an strace run on my target, I noticed a considerable amount of
+attempts to load shared libraries from their RPATH location (which is
+the preferred location over what the linker thinks).
 
-Thanks to Holger for the release guide once again.
+objdump -x libfontconfig.so.1  | grep RPATH
+/home/leon/sandbox/e520/openembedded/build/tmp/staging/i686-angstrom-linux/lib
 
-Cheers,
+This results in considerable overhead during loading of shared libraries.
 
-Richard
+Koen secretly told me that there had been a masterplan amongst those
+who may call themselves core developer to fix these paths.
 
+I'm curious about what the fix would incur.
 
+Also, might these RPATH's actually help when I am remotely debugging
+using GDB, helping GDB find debugging info, or not?
 
+Thanks for any hints on this,
+
+Regards,
+--
+Leon
 
 
