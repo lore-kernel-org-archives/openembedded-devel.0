@@ -1,20 +1,28 @@
-Received: from [66.249.82.235] (helo=wx-out-0506.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <matthijs.van.de.water@gmail.com>) id 1Hh0qS-0006t4-CQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Apr 2007 12:05:01 +0200
-Received: by wx-out-0506.google.com with SMTP id t14so505197wxc
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2007 02:56:11 -0700 (PDT)
-Received: by 10.90.79.6 with SMTP id c6mr1765807agb.1177581371615;
-	Thu, 26 Apr 2007 02:56:11 -0700 (PDT)
-Received: by 10.90.119.17 with HTTP; Thu, 26 Apr 2007 02:56:11 -0700 (PDT)
-Message-ID: <35a670560704260256k2029136fh760dd206e49770c6@mail.gmail.com>
-Date: Thu, 26 Apr 2007 11:56:11 +0200
-From: "Matthijs van de Water" <matthijs.van.de.water@gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-Subject: Automatically including mypackage-locale-* in root_fs
+	(envelope-from <rpurdie@rpsys.net>) id 1Hh2sR-0007VE-Sj
+	for openembedded-devel@openembedded.org; Thu, 26 Apr 2007 14:15:12 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3QC6MaI007370;
+	Thu, 26 Apr 2007 13:06:22 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07303-01; Thu, 26 Apr 2007 13:06:19 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3QC6FE0007361
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Thu, 26 Apr 2007 13:06:15 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>
+Date: Thu, 26 Apr 2007 13:06:15 +0100
+Message-Id: <1177589176.5843.3.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Bitbake 1.8.2 released!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,35 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2007 10:05:01 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 26 Apr 2007 12:15:12 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+Bitbake 1.8.2 has been released.
 
-I'd like to know if there is a way to automatically include the
-available translations for a selection of my packages.
+http://prdownload.berlios.de/bitbake/bitbake-1.8.2.tar.gz
 
-I would see this as making my image.bb file RDEPEND on
-mypackage-locale or similar and this automatically be expanded to a
-number of mypackage-locale-${LANGUAGE} where ${LANGUAGE} generated
-from IMAGE_LINGUAS.
+This release is primarily a bugfix release. It contains several bugfixes
+and minor improvements over the 1.8.0 release and should be used instead
+of 1.8.0 in all cases. Specifically, it addresses several dependency
+problems that were identified in the 1.8.0 release. See the Changelog in
+the release for a more comprehensive list of changes.
 
-If something like this does not exist, where and how would be the best
-place for me to add this? Inside rootfs_ipk.bbclass?
+Thanks to Holger for the release guide once again.
 
-I am working on kind of an old checkout of OE, so that might
-complicate things a little, but I'd like to contribute this back to
-mainstream when I get this working.
+Cheers,
 
-Thanks,
-(Now finally able to post under my real name: it's time for my company
-to move out of the shadows. More to follow, like an iLiad config for
-OE.)
+Richard
 
--- 
-Matthijs van de Water      | iRex Technologies B.V.
-Embedded Software Engineer | www.irextechnologies.com
+
+
 
 
