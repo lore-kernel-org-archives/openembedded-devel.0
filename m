@@ -1,23 +1,28 @@
-Received: from [64.233.162.225] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1Hh5M5-0003du-3n
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Apr 2007 16:53:57 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so694022nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2007 07:45:07 -0700 (PDT)
-Received: by 10.114.26.1 with SMTP id 1mr617198waz.1177598706852;
-	Thu, 26 Apr 2007 07:45:06 -0700 (PDT)
-Received: by 10.115.92.7 with HTTP; Thu, 26 Apr 2007 07:45:06 -0700 (PDT)
-Message-ID: <432beae0704260745q691cc36dl8496e81d87b4c7cb@mail.gmail.com>
-Date: Thu, 26 Apr 2007 07:45:06 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: "Using the OpenEmbedded metadata to build Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <c384c5ea0704260513h1e7e2283hfd439a2ff1421ff4@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hh5Sl-0003jo-HZ
+	for openembedded-devel@openembedded.org; Thu, 26 Apr 2007 17:00:54 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3QEpvLr023834; Thu, 26 Apr 2007 16:51:57 +0200
+Message-ID: <4630BC8E.4070408@dominion.kabel.utwente.nl>
+Date: Thu, 26 Apr 2007 16:51:58 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-References: <c384c5ea0704260513h1e7e2283hfd439a2ff1421ff4@mail.gmail.com>
-Subject: Re: shared libraries RPATH causes overhead
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <1177589176.5843.3.camel@localhost.localdomain>
+	<432beae0704260732j448ddbdfl4155364f62d69c5e@mail.gmail.com>
+In-Reply-To: <432beae0704260732j448ddbdfl4155364f62d69c5e@mail.gmail.com>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: Bitbake 1.8.2 released!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,18 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2007 14:53:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 26 Apr 2007 15:00:59 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 4/26/07, Leon Woestenberg <leon.woestenberg@gmail.com> wrote:
-> [resent, seems to be queued or lost earlier]
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-It wasn't lost.
+Justin Patrin schreef:
+> On 4/26/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+>> Bitbake 1.8.2 has been released.
+>>
+>> http://prdownload.berlios.de/bitbake/bitbake-1.8.2.tar.gz
+>>
+>> This release is primarily a bugfix release. It contains several bugfixes
+>> and minor improvements over the 1.8.0 release and should be used instead
+>> of 1.8.0 in all cases. Specifically, it addresses several dependency
+>> problems that were identified in the 1.8.0 release. See the Changelog in
+>> the release for a more comprehensive list of changes.
+>>
+>> Thanks to Holger for the release guide once again.
+>>
+> 
+> Hmmm...I see no checkins regarding fixing the SRCDATE handling so I'd
+> have to assume that this release still has this major bug. (which of
+> course makes bitbake 1.8 unusable)
+> 
+> http://bugs.openembedded.org/show_bug.cgi?id=2133
 
--- 
-Justin Patrin
+Try actually reading that bugreport
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGMLyOMkyGM64RGpERAkZGAJ9pNMdZbU+T9Ni9TOt32ecAVGzLjQCglXyg
+9ceY6vRA+42zmzYWymTA6PQ=
+=X8V/
+-----END PGP SIGNATURE-----
 
 
