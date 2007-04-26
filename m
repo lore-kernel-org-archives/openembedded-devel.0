@@ -1,26 +1,26 @@
-Received: from [64.233.162.224] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1Hh8Yc-0000X3-O4
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Apr 2007 20:19:06 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so774743nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2007 11:10:16 -0700 (PDT)
-Received: by 10.114.155.1 with SMTP id c1mr701094wae.1177611015131;
-	Thu, 26 Apr 2007 11:10:15 -0700 (PDT)
-Received: by 10.115.92.7 with HTTP; Thu, 26 Apr 2007 11:10:15 -0700 (PDT)
-Message-ID: <432beae0704261110i5aa9f201te5144ccd97609222@mail.gmail.com>
-Date: Thu, 26 Apr 2007 11:10:15 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: "Using the OpenEmbedded metadata to build Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <4630E310.5000008@dominion.kabel.utwente.nl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hh9gI-0000HY-R6
+	for openembedded-devel@openembedded.org; Thu, 26 Apr 2007 21:31:13 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l3QJM6Lr028342 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Apr 2007 21:22:06 +0200
+Message-ID: <4630FBDF.2060004@dominion.kabel.utwente.nl>
+Date: Thu, 26 Apr 2007 21:22:07 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <c384c5ea0704261001x7756fd58yc637a6b1aec12440@mail.gmail.com>
-	<432beae0704261022u16ba644dqb4781ac046a0a215@mail.gmail.com>
-	<4630E310.5000008@dominion.kabel.utwente.nl>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: HEADS UP: insane.bbclass will now detect and stop the build on wrong RPATHs.
+In-Reply-To: <c384c5ea0704261001x7756fd58yc637a6b1aec12440@mail.gmail.com>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: HEADS UP: insane.bbclass will now detect and stop the build on	wrong RPATHs.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,63 +35,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2007 18:19:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 26 Apr 2007 19:31:26 -0000
+X-List-Received-Date: Thu, 26 Apr 2007 19:31:26 -0000
+Content-Type: multipart/mixed; boundary="------------000801090107070301090701"
+
+--------------000801090107070301090701
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 4/26/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Justin Patrin schreef:
-> > On 4/26/07, Leon Woestenberg <leon.woestenberg@gmail.com> wrote:
-> >> Hello all,
-> >>
-> >> for those of you using insane.bbclass, it will now correctly detect
-> >> wrong RPATH's in shared libraries and fail on them.
-> >>
-> >> Unfortunately, as we have not fixed wrong RPATH's yet in our shared
-> >> library handling, this will cause builds using insane.bbclass to fail.
-> >>
-> >> See bug #2140.
-> >>
-> >> I hope to be able to fix the .so RPATH stuff as well, but any help is welcomed.
-> >>
-> >
-> > So what you're saying is that angstrom won't build until the RPATH
-> > problems are fixed? Kind of sucks for those users who don't know how
-> > to fix the problem. I'd suggest that this be made a warning instead of
-> > a failure (or have a conf entry that makes it one or the other).
->
-> It is a huge gaping security hole, so it is indeed an error.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-A "huge gaping security hole" that requires you to download a
-malicious ipk with malicious libraries which figures out what your
-build path was, then installs those libraries there.
+Leon Woestenberg schreef:
+> Hello all,
+> 
+> for those of you using insane.bbclass, it will now correctly detect
+> wrong RPATH's in shared libraries and fail on them.
+> 
+> Unfortunately, as we have not fixed wrong RPATH's yet in our shared
+> library handling, this will cause builds using insane.bbclass to fail.
+> 
+> See bug #2140.
+> 
+> I hope to be able to fix the .so RPATH stuff as well, but any help is welcomed.
 
-Or you could just download a malicious ipk which overwrites the actual
-libraries.
+Attached patch replaces bogus rpaths with '/lib' inside insane.bbclass. There are several
+things wrong with this approach, but it's a start.
 
-I don't see what's hude or gaping about this.
+regards,
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFGMOMQMkyGM64RGpERAqoYAKCHCwKJaUuL+1REjY/CRBYMxa7afACfTbs3
-> 4ErvVInAL06DjxXwHDTtLb0=
-> =sa1b
-> -----END PGP SIGNATURE-----
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFGMPvfMkyGM64RGpERAjz8AJ9fl8l2SMw586tr6HhKtE7PCoS7wwCdEgi7
+5IQYUSdNXXFgeYHW3mGtvro=
+=RrbB
+-----END PGP SIGNATURE-----
 
--- 
-Justin Patrin
+--------------000801090107070301090701
+Content-Type: text/x-patch; x-mac-type="0"; x-mac-creator="0";
+ name="chrpath.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="chrpath.patch"
 
+# 
+# old_revision [4363d4f2067c14e0433c8a93cf6595a62ffd8ea1]
+# 
+# patch "classes/insane.bbclass"
+#  from [3a03bd01885af7a8749b8d7c891e968eadae8bea]
+#    to [908828866e30c41cff63a3fa4a7aac7d30924e83]
+# 
+============================================================
+--- classes/insane.bbclass	3a03bd01885af7a8749b8d7c891e968eadae8bea
++++ classes/insane.bbclass	908828866e30c41cff63a3fa4a7aac7d30924e83
+@@ -202,10 +202,13 @@ def package_qa_check_rpath(file,name,d):
+     """
+     import bb, os
+     scanelf = os.path.join(bb.data.getVar('STAGING_BINDIR_NATIVE',d,True),'scanelf')
++    chrpath = os.path.join(bb.data.getVar('STAGING_BINDIR_NATIVE',d,True),'chrpath')
+     bad_dir = bb.data.getVar('TMPDIR', d, True) + "/work"
+     bad_dir_test = bb.data.getVar('TMPDIR', d, True)
+     if not os.path.exists(scanelf):
+-        bb.fatal("Can not check RPATH scanelf not found")
++        bb.fatal("Can not check RPATH, scanelf (part of pax-utils-native) not found")
++    if not os.path.exists(chrpath):
++        bb.fatal("Can not fix RPATH, chrpath (part of chrpath-native) not found")
+     if not bad_dir in bb.data.getVar('WORKDIR', d, True):
+         bb.fatal("This class assumed that WORKDIR is ${TMPDIR}/work... Not doing any check")
+ 
+@@ -215,7 +218,9 @@ def package_qa_check_rpath(file,name,d):
+         if bad_dir_test in line:
+             package_qa_write_error( 1, name, file, d)
+             bb.error("QA Issue package %s contains bad RPATH %s in file %s" % (name, line, file))
+-            return False
++	    bb.message("Fixing RPATH for you in %s" % file)
++	    os.popen("%s -r /lib %s" % (chrpath,file))
++            return True
+     return True
+ 
+ def package_qa_check_devdbg(path, name,d):
 
+--------------000801090107070301090701--
