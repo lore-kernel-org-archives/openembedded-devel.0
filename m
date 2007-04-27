@@ -1,32 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HhOGv-00012G-E7
-	for openembedded-devel@openembedded.org; Fri, 27 Apr 2007 13:05:53 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1HhO8C-0006DN-3c
-	for openembedded-devel@openembedded.org; Fri, 27 Apr 2007 12:56:52 +0200
-Received: from f73bb.f.ppp-pool.de ([195.4.115.187])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 27 Apr 2007 12:56:52 +0200
-Received: from no2spam by f73bb.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 27 Apr 2007 12:56:52 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Followup-To: gmane.comp.handhelds.openembedded
-Date: Fri, 27 Apr 2007 12:56:29 +0200
-Message-ID: <4631D6DD.2060000@nospam.arcornews.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: f73bb.f.ppp-pool.de
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-Sender: news <news@sea.gmane.org>
-Cc: openzaurus-users@lists.sourceforge.net,
-	openzaurus-devel@lists.sourceforge.net
-Subject: FYI: OZ bugs after angstrom transition
+	(envelope-from <lenehan@twibble.org>) id 1HhOHL-00013F-Fs
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Apr 2007 13:06:19 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id 21B8D10C050
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Apr 2007 20:57:24 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 06076-02
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Apr 2007 20:57:22 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 9B21B10C04F
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Apr 2007 20:57:22 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 81FD1B70148; Fri, 27 Apr 2007 20:57:22 +1000 (EST)
+Date: Fri, 27 Apr 2007 20:57:22 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070427105722.GA4340@twibble.org>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.12-2006-07-14
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: perl 5.8.8 is ready
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,45 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2007 11:05:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Apr 2007 11:06:20 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
 Hi,
 
-today I sent the following comment to all bugs in the OE bug tracker 
-with version OpenZaurus*
+I think I've got perl 5.8.8 to the stage where it is ready for use.
+As this is a pretty big and complex system and I've made some rather
+large changes to the way the build happens I'd like to get some
+reports from other people that it works for them before removing the
+DEFAULT_PREFERENCE = "-1".
 
-== start comment ==
-OpenZaurus is being phased out and replaced by angstrom which supports 
-all Z models, except SL-A300 as usual.  Furthermore, angstrom extends 
-support to quite a few non-Zaurus devices.  See 
-http://www.angstrom-distribution.org for more information.
+You need to build perl-native 5.8.8 and then perl 5.8.8. (You always
+have to build the matching -native version of perl first.)
 
-Therefore we ask all reporters of openzaurus bugs to verify if their bug 
-is fixed in angstrom and if not replace the version field in the bug 
-tracker with angstrom.  Images are available at 
-http://www.angstrom-distribution.org/unstable/images/  Be sure to read 
-the installation instructions 
-http://www.angstrom-distribution.org/taxonomy/term/2 If there is 
-anything unclear, be sure to either ask here or in #angstrom in IRC
+So far I've tested sh4/glibc (build & run), i486/glibc (build only)
+and sh4/uclibc (build only) using gcc 3.4.4 for sh4 and gcc 4.1.2 for
+i486.
 
-You should be aware that of course by flashing your device all 
-information not backed up to external media will be irrevocably lost.
-== end comment ==
+The main visible changes are:
 
-This is to give the reporters an opportunity to test whether angstrom 
-fixed the bug (likely in the case of those nasty, old, impossible to fix 
-2.4 kernel issues) or migrate the bug.  All bugs without reaction are 
-going to be marked as WONTFIX in about two weeks.
+ - Per-arch configurations and now gone, it should build for any
+   target now without change.
 
-Regards
+ - Installation paths have all been change to be match the debian
+   style (which also happens to be FHS compliant).
 
-Rolf
+ - All configurations match (including native) and all configurations
+   include threading and shared library support.
 
+The build should also be a lot more reliable and it should resolve
+nearly all of the perl related bugzilla entries (yes, even the
+/bin/sh is dash one ;)
 
-PS: This mail is sent to four groups.  F'up and Reply-To are set to 
-oe-devel.
+(Note that if you have any cpan modules they all need to rebuilt as
+well when changing to 5.8.8 in order to get installed into the new
+locations.)
 
+-- 
+ Jamie Lenehan <lenehan@twibble.org>
 
 
