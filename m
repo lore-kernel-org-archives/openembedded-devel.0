@@ -1,25 +1,30 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1HhRJz-0001ax-Bx
+	(envelope-from <hvontres@gmail.com>) id 1HhRMX-0002Zh-Vt
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2007 16:21:15 +0200
-Received: from [91.64.161.147] (helo=[192.168.10.100])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1HhRBL-0005r5-LU
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2007 16:12:19 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <f0suu0$ij2$1@sea.gmane.org>
-References: <f0suu0$ij2$1@sea.gmane.org>
-Message-Id: <677BDBD3-C730-4CA9-B937-F5AD6CB2D0FA@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Fri, 27 Apr 2007 16:12:17 +0200
-To: Using the OpenEmbedded metadata to build Distributions
+	Fri, 27 Apr 2007 16:23:54 +0200
+Received: by ug-out-1314.google.com with SMTP id 36so682311uga
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Apr 2007 07:14:58 -0700 (PDT)
+Received: by 10.67.90.1 with SMTP id s1mr3050484ugl.1177683298660;
+	Fri, 27 Apr 2007 07:14:58 -0700 (PDT)
+Received: by 10.67.61.12 with HTTP; Fri, 27 Apr 2007 07:14:58 -0700 (PDT)
+Message-ID: <a7f8874a0704270714nff984d0g21655aa57b518e48@mail.gmail.com>
+Date: Fri, 27 Apr 2007 07:14:58 -0700
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+To: "Using the OpenEmbedded metadata to build Distributions"
 	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 91.64.161.147
-Subject: Re: md5sum check fails for ffmpeg - how do we deal with situations like this?
+In-Reply-To: <f0sl18$a3u$2@sea.gmane.org>
+MIME-Version: 1.0
+References: <c384c5ea0704261001x7756fd58yc637a6b1aec12440@mail.gmail.com>
+	<4630FBDF.2060004@dominion.kabel.utwente.nl>
+	<c384c5ea0704261258j74fae9c0m5a764ab356b6e139@mail.gmail.com>
+	<c384c5ea0704261350h1e63e73cx7475aa512a4e21e6@mail.gmail.com>
+	<46311ED5.7020909@dominion.kabel.utwente.nl>
+	<1177625505.4992.4.camel@cimmeria.hyboria>
+	<f0sl18$a3u$2@sea.gmane.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: HEADS UP: insane.bbclass will now detect and stop the build on wrong RPATHs.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,43 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2007 14:21:15 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Fri, 27 Apr 2007 14:23:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-
-Am 27.04.2007 um 15:47 schrieb Rolf Leggewie:
-
-> Hi,
+On 4/27/07, Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
 >
-> I tried to build ffmpeg and got the following:
+> Graeme Gregory wrote:
 >
-> NOTE: The MD5Sums did not match. Wanted:
-> '700b66230a8322493c032c04372b8d74' and Got:
-> 'ea5587e3c66d50b1503b82ac4179c303'
-> NOTE: Task failed: Checksum of
-> 'http://downloads.sourceforge.net/ffmpeg/ffmpeg-0.4.9-pre1.tar.gz'  
-> failed
+> > Laziness is rampant in the
+> > linux world.
+>
+> Smart people are lazy.  It is just a fact of life ;-)
 
-Hey,
 
-find the guy who comitted the md5sum. In this case it is marcin who  
-comitted the result of a little script. Ask him to dig out the  
-ffmpeg-0.4.9-pre1.tar.gz, ask him to md5sum it and then. Note it is  
-important to use the tar.gz the original checksum was generated against.
+We're not lazy, just energy efficient :)
 
-	compare his *sum against the one in the config file.
-
-0.) marcin doesn't have the original sourcecode in that case we are  
-almost lost :)
-1.) the "regenerated" sum of the original file(see 0.) and yours  
-match in that case we can safely update
-2.) the numbers don't match. Then we need to consult upstream and ask  
-if they changed the tarball. Sadly this is something that commonly  
-happens and then update the checksums.ini.
-
-my two cents
-
-z.
-
+_______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
