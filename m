@@ -1,23 +1,32 @@
-Received: from [64.233.184.236] (helo=wr-out-0506.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mattjreimer@gmail.com>) id 1HhFAy-0001jy-39
-	for openembedded-devel@openembedded.org; Fri, 27 Apr 2007 03:23:08 +0200
-Received: by wr-out-0506.google.com with SMTP id i31so842366wra
-	for <openembedded-devel@openembedded.org>;
-	Thu, 26 Apr 2007 18:14:15 -0700 (PDT)
-Received: by 10.78.192.20 with SMTP id p20mr653914huf.1177636454951;
-	Thu, 26 Apr 2007 18:14:14 -0700 (PDT)
-Received: by 10.78.184.1 with HTTP; Thu, 26 Apr 2007 18:14:14 -0700 (PDT)
-Message-ID: <f383264b0704261814x6e1f951em30e8957f42635a36@mail.gmail.com>
-Date: Thu, 26 Apr 2007 18:14:14 -0700
-From: "Matt Reimer" <mattjreimer@gmail.com>
-To: "Using the OpenEmbedded metadata to build Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <c384c5ea0704261001x7756fd58yc637a6b1aec12440@mail.gmail.com>
-MIME-Version: 1.0
-References: <c384c5ea0704261001x7756fd58yc637a6b1aec12440@mail.gmail.com>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: HEADS UP: insane.bbclass will now detect and stop the build on wrong RPATHs.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1HhOGv-00012G-E7
+	for openembedded-devel@openembedded.org; Fri, 27 Apr 2007 13:05:53 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1HhO8C-0006DN-3c
+	for openembedded-devel@openembedded.org; Fri, 27 Apr 2007 12:56:52 +0200
+Received: from f73bb.f.ppp-pool.de ([195.4.115.187])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 27 Apr 2007 12:56:52 +0200
+Received: from no2spam by f73bb.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 27 Apr 2007 12:56:52 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Followup-To: gmane.comp.handhelds.openembedded
+Date: Fri, 27 Apr 2007 12:56:29 +0200
+Message-ID: <4631D6DD.2060000@nospam.arcornews.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: f73bb.f.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+Sender: news <news@sea.gmane.org>
+Cc: openzaurus-users@lists.sourceforge.net,
+	openzaurus-devel@lists.sourceforge.net
+Subject: FYI: OZ bugs after angstrom transition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,29 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2007 01:23:08 -0000
+X-List-Received-Date: Fri, 27 Apr 2007 11:05:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 4/26/07, Leon Woestenberg <leon.woestenberg@gmail.com> wrote:
-> Hello all,
->
-> for those of you using insane.bbclass, it will now correctly detect
-> wrong RPATH's in shared libraries and fail on them.
->
-> Unfortunately, as we have not fixed wrong RPATH's yet in our shared
-> library handling, this will cause builds using insane.bbclass to fail.
->
-> See bug #2140.
->
-> I hope to be able to fix the .so RPATH stuff as well, but any help is welcomed.
+Hi,
 
-IIRC, pb looked into this at one time and found that the problem was
-with certain packages .pc files. So a good place to start is the check
-the .pc files for those libraries that are referenced by these bogus
-RPATHs.
+today I sent the following comment to all bugs in the OE bug tracker 
+with version OpenZaurus*
 
-Matt
+== start comment ==
+OpenZaurus is being phased out and replaced by angstrom which supports 
+all Z models, except SL-A300 as usual.  Furthermore, angstrom extends 
+support to quite a few non-Zaurus devices.  See 
+http://www.angstrom-distribution.org for more information.
+
+Therefore we ask all reporters of openzaurus bugs to verify if their bug 
+is fixed in angstrom and if not replace the version field in the bug 
+tracker with angstrom.  Images are available at 
+http://www.angstrom-distribution.org/unstable/images/  Be sure to read 
+the installation instructions 
+http://www.angstrom-distribution.org/taxonomy/term/2 If there is 
+anything unclear, be sure to either ask here or in #angstrom in IRC
+
+You should be aware that of course by flashing your device all 
+information not backed up to external media will be irrevocably lost.
+== end comment ==
+
+This is to give the reporters an opportunity to test whether angstrom 
+fixed the bug (likely in the case of those nasty, old, impossible to fix 
+2.4 kernel issues) or migrate the bug.  All bugs without reaction are 
+going to be marked as WONTFIX in about two weeks.
+
+Regards
+
+Rolf
+
+
+PS: This mail is sent to four groups.  F'up and Reply-To are set to 
+oe-devel.
+
 
 
