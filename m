@@ -1,30 +1,28 @@
-Received: from [64.233.162.234] (helo=nz-out-0506.google.com)
+Received: from [64.233.166.177] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1HhSAs-0003RK-Hx
+	(envelope-from <xjqian@gmail.com>) id 1Hhf2w-0006Zg-7T
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2007 17:15:54 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so1066227nzf
+	Sat, 28 Apr 2007 07:00:34 +0200
+Received: by py-out-1112.google.com with SMTP id n39so913113pyh
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2007 08:06:58 -0700 (PDT)
-Received: by 10.114.190.6 with SMTP id n6mr1038081waf.1177686417486;
-	Fri, 27 Apr 2007 08:06:57 -0700 (PDT)
-Received: by 10.115.92.7 with HTTP; Fri, 27 Apr 2007 08:06:56 -0700 (PDT)
-Message-ID: <432beae0704270806p5094169ds3aac5fc3ed4cda66@mail.gmail.com>
-Date: Fri, 27 Apr 2007 08:06:56 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: "Using the OpenEmbedded metadata to build Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <a7f8874a0704270714nff984d0g21655aa57b518e48@mail.gmail.com>
+	Fri, 27 Apr 2007 21:51:32 -0700 (PDT)
+Received: by 10.65.183.7 with SMTP id k7mr7833644qbp.1177735892642;
+	Fri, 27 Apr 2007 21:51:32 -0700 (PDT)
+Received: from ?192.168.10.106? ( [71.85.151.212])
+	by mx.google.com with ESMTP id 12sm6907157nzn.2007.04.27.21.51.31;
+	Fri, 27 Apr 2007 21:51:31 -0700 (PDT)
+Message-ID: <4632D294.7030305@gmail.com>
+Date: Fri, 27 Apr 2007 23:50:28 -0500
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Icedove 1.5.0.10 (X11/20070329)
 MIME-Version: 1.0
-References: <c384c5ea0704261001x7756fd58yc637a6b1aec12440@mail.gmail.com>
-	<4630FBDF.2060004@dominion.kabel.utwente.nl>
-	<c384c5ea0704261258j74fae9c0m5a764ab356b6e139@mail.gmail.com>
-	<c384c5ea0704261350h1e63e73cx7475aa512a4e21e6@mail.gmail.com>
-	<46311ED5.7020909@dominion.kabel.utwente.nl>
-	<1177625505.4992.4.camel@cimmeria.hyboria>
-	<f0sl18$a3u$2@sea.gmane.org>
-	<a7f8874a0704270714nff984d0g21655aa57b518e48@mail.gmail.com>
-Subject: Re: HEADS UP: insane.bbclass will now detect and stop the build on wrong RPATHs.
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+References: <462B14AF.50903@gmail.com>
+	<462B3637.7080604@laposte.net>	<462B4FB2.5090107@laposte.net>	<1177248616.5830.13.camel@localhost.localdomain>	<c384c5ea0704221239h604dbbaai51833eb1af195a5@mail.gmail.com>	<462D7361.9030205@gmail.com>
+	<c384c5ea0704250719l791f36cep3f80660d6a74f42@mail.gmail.com>
+In-Reply-To: <c384c5ea0704250719l791f36cep3f80660d6a74f42@mail.gmail.com>
+Subject: Re: linux-libc-headers build problem for tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,28 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2007 15:15:54 -0000
+X-List-Received-Date: Sat, 28 Apr 2007 05:00:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 4/27/07, Hans Henry von Tresckow <hvontres@gmail.com> wrote:
-> On 4/27/07, Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
-> >
-> > Graeme Gregory wrote:
-> >
-> > > Laziness is rampant in the
-> > > linux world.
-> >
-> > Smart people are lazy.  It is just a fact of life ;-)
+Leon Woestenberg wrote:
+> Like Holger said, it should work without pax-utils installed on your
+> host, as OE should pick up and build a native version for you.
 >
+> I'm going to try that.
 >
-> We're not lazy, just energy efficient :)
+> Regards,
 >
+> Leon.
 
-Hear hear!
+Ok, it works fine for me without pax-utils on host.
 
--- 
-Justin Patrin
+Seems the dev team is starting a bug squashing party. I don't have time 
+to read up all the emails now. But once I got through that, I will 
+probably close the bug or mark it dependent on the insane.bb bug.
+
+Gordon
 
 
