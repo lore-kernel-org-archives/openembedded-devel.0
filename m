@@ -1,29 +1,31 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1Hi9ED-0004DF-9C
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Apr 2007 15:14:13 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 954FF10C7A8;
-	Sun, 29 Apr 2007 23:05:05 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 30790-10; Sun, 29 Apr 2007 23:05:04 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 1B2B4F3B28;
-	Sun, 29 Apr 2007 23:05:04 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 0746DB70148; Sun, 29 Apr 2007 23:05:03 +1000 (EST)
-Date: Sun, 29 Apr 2007 23:05:03 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: Junqian Gordon Xu <xjqian@gmail.com>
-Message-ID: <20070429130503.GA8755@twibble.org>
-References: <20070427105722.GA4340@twibble.org> <463478B9.3010602@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <463478B9.3010602@gmail.com>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Cc: openembedded-devel@lists.openembedded.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1HiBbA-0007Il-4Z
+	for openembedded-devel@openembedded.org; Sun, 29 Apr 2007 17:46:04 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1HiBSE-0000vl-Fr
+	for openembedded-devel@openembedded.org; Sun, 29 Apr 2007 17:36:50 +0200
+Received: from f7398.f.ppp-pool.de ([195.4.115.152])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 29 Apr 2007 17:36:50 +0200
+Received: from no2spam by f7398.f.ppp-pool.de with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 29 Apr 2007 17:36:50 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sun, 29 Apr 2007 17:36:32 +0200
+Message-ID: <f12e22$36e$1@sea.gmane.org>
+References: <20070427105722.GA4340@twibble.org> <f0vs5r$6pm$1@sea.gmane.org>
+	<20070429125909.GB8230@twibble.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: f7398.f.ppp-pool.de
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+In-Reply-To: <20070429125909.GB8230@twibble.org>
+Sender: news <news@sea.gmane.org>
 Subject: Re: perl 5.8.8 is ready
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,27 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Apr 2007 13:14:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 29 Apr 2007 15:46:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Apr 29, 2007 at 05:51:37AM -0500, Junqian Gordon Xu wrote:
-[...]
-> Machine=Tosa
-> Distro=Angstrom
+Jamie Lenehan wrote:
+>> unfortunately, perl itself still has issues.  Bug 1700 is not yet resolved.
 > 
-> perl-native-5.8.8 builds fine. But when I run bitbake perl-5.8.8,
-> it alway try to build perl-native-5.8.7 and perl-5.8.7 first. Am I 
-> missing something?
+> That uses an old out-of-tree toolchain doesn't it?
 
-As has already been mentioned this is due to DEFAULT_PREFERENCE setting. You
-can remove or change the DEFAULT_PREFERENCE or explicitly request bitbake to
-build the newer versions. See the section in the user manual that talks
-about this:
+yes, 
+http://handhelds.org/download/projects/toolchain/archive/cross-2.95.3.tar.bz2
 
-  http://www.openembedded.org/user-manual&dpage=recipes_defaultpreference
+More info at http://www.openembedded.org/usefulconfigurations
 
--- 
- Jamie Lenehan <lenehan@twibble.org>
+> I suspect that the gcc_s linking issue would be fixed. The other
+> issue looks to be related to the compiler version being used. Can you
+> attach the configure and compile logs for perl 5.8.8 builds using the
+> sharprom toolchain to the bug? I'll then take a look at it and see if
+> it can be fixed.
+
+Thank you.  I have attached the requested files.  The gcc_s issue seems 
+to be fixed indeed.
+
 
 
