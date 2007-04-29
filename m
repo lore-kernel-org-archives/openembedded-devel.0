@@ -1,31 +1,30 @@
 Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1Hi94t-000407-7s
+	(envelope-from <lenehan@twibble.org>) id 1Hi98U-00044t-KB
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Apr 2007 15:04:35 +0200
+	Sun, 29 Apr 2007 15:08:19 +0200
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 5DAC710C797;
-	Sun, 29 Apr 2007 22:55:27 +1000 (EST)
+	by birgitte.twibble.org (Postfix) with ESMTP id 096A710C79C;
+	Sun, 29 Apr 2007 22:59:11 +1000 (EST)
 Received: from birgitte.twibble.org ([127.0.0.1])
 	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 30706-06; Sun, 29 Apr 2007 22:55:25 +1000 (EST)
+	with ESMTP id 30790-06; Sun, 29 Apr 2007 22:59:09 +1000 (EST)
 Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id CEC4F10C74B;
-	Sun, 29 Apr 2007 22:55:25 +1000 (EST)
+	by birgitte.twibble.org (Postfix) with ESMTP id 851BB10C757;
+	Sun, 29 Apr 2007 22:59:09 +1000 (EST)
 Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 9985EB70148; Sun, 29 Apr 2007 22:55:25 +1000 (EST)
-Date: Sun, 29 Apr 2007 22:55:25 +1000
+	id 7505BB70148; Sun, 29 Apr 2007 22:59:09 +1000 (EST)
+Date: Sun, 29 Apr 2007 22:59:09 +1000
 From: Jamie Lenehan <lenehan@twibble.org>
-To: Stelios Koroneos <skoroneos@digital-opsis.com>
-Message-ID: <20070429125525.GA8230@twibble.org>
-References: <463478B9.3010602@gmail.com>
-	<HOECLKEKOHLAMMGDLLBHGEACKOAA.skoroneos@digital-opsis.com>
+To: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Message-ID: <20070429125909.GB8230@twibble.org>
+References: <20070427105722.GA4340@twibble.org> <f0vs5r$6pm$1@sea.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <HOECLKEKOHLAMMGDLLBHGEACKOAA.skoroneos@digital-opsis.com>
+In-Reply-To: <f0vs5r$6pm$1@sea.gmane.org>
 User-Agent: Mutt/1.5.12-2006-07-14
 X-Virus-Scanned: by amavisd at twibble.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: CPAN module naming
+Subject: Re: perl 5.8.8 is ready
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,33 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Apr 2007 13:04:35 -0000
+X-List-Received-Date: Sun, 29 Apr 2007 13:08:19 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Sun, Apr 29, 2007 at 02:45:23PM +0300, "Stelios Koroneos" wrote:
-> Is there an RFC or suggestion on how the CPAN modules .bb files should be
-> named ?
+On Sat, Apr 28, 2007 at 06:19:04PM +0200, Rolf Leggewie wrote:
+> Jamie Lenehan wrote:
+> 
+> > You need to build perl-native 5.8.8 and then perl 5.8.8.
+> 
+> I tried DISTRO=sharprom-compatible.  perl-native-5.8-8 builds fine, but
+> unfortunately, perl itself still has issues.  Bug 1700 is not yet resolved.
 
-lib<name>-perl_<version>.bb
+That uses an old out-of-tree toolchain doesn't it?
 
-where "name" is the name of the package as downloaded. So for:
+I suspect that the gcc_s linking issue would be fixed. The other
+issue looks to be related to the compiler version being used. Can you
+attach the configure and compile logs for perl 5.8.8 builds using the
+sharprom toolchain to the bug? I'll then take a look at it and see if
+it can be fixed.
 
-  Algorithm-Diff-1.1902.tar.gz
-
-we end up with:
-
- libalgorithm-diff-perl_1.1902.bb
-
-This naming matches that used by debian based distros (you can always
-check the naming used on a debian distro to verify what it should be
-called.)
-
-Note also that the current cpan.bbclass won't handle anything
-particularly complex (in particular things that contain additional
-multiple Makefile.PL's in subdirectories). Once I have perl 5.8.8 as
-default I'll be re-doing the way cpan.bbclass and perl-native work to
-make this a lot more reliable.
+Thanks.
 
 -- 
  Jamie Lenehan <lenehan@twibble.org>
