@@ -1,32 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.82.237] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1HiWhJ-0005ZZ-95
-	for openembedded-devel@openembedded.org; Mon, 30 Apr 2007 16:17:49 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3UE8MVR014589;
-	Mon, 30 Apr 2007 15:08:22 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13857-06; Mon, 30 Apr 2007 15:08:19 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l3UE8IxV014582
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 30 Apr 2007 15:08:18 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-In-Reply-To: <4630B6BC.4090903@dominion.kabel.utwente.nl>
-References: <1177589176.5843.3.camel@localhost.localdomain>
-	<4630B6BC.4090903@dominion.kabel.utwente.nl>
-Date: Mon, 30 Apr 2007 15:08:18 +0100
-Message-Id: <1177942098.5872.37.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: Bitbake 1.8.2 released!
+	(envelope-from <pmiscml@gmail.com>) id 1HiWjj-0005dT-AQ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Apr 2007 16:20:20 +0200
+Received: by wx-out-0506.google.com with SMTP id t14so1516754wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Apr 2007 07:11:06 -0700 (PDT)
+Received: by 10.90.27.13 with SMTP id a13mr5173733aga.1177942265946;
+	Mon, 30 Apr 2007 07:11:05 -0700 (PDT)
+Received: from cube ( [82.193.98.1])
+	by mx.google.com with ESMTP id r1sm7494281nzd.2007.04.30.07.11.04;
+	Mon, 30 Apr 2007 07:11:05 -0700 (PDT)
+Date: Mon, 30 Apr 2007 17:11:03 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <563812522.20070430171103@gmail.com>
+To: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+In-Reply-To: <c384c5ea0704300524w40a360adne073f9576ee71e19@mail.gmail.com>
+References: <c384c5ea0704300524w40a360adne073f9576ee71e19@mail.gmail.com>
+MIME-Version: 1.0
+Cc: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: RFC: kernel configure steps hang if make oldconfig goes interactive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,27 +36,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2007 14:17:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 30 Apr 2007 14:20:21 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2007-04-26 at 16:27 +0200, Koen Kooi wrote:
-> Richard Purdie schreef:
-> > Bitbake 1.8.2 has been released.
-> > 
-> > http://prdownload.berlios.de/bitbake/bitbake-1.8.2.tar.gz
-> 
-> Do we have a concrete date for the 1.8 changeover already?
+Hello Leon,
 
-Not that I'm aware of. The release was the first step. I'll wait a few
-more days and see what other bugs appear (if any) and then I guess we
-run with the two month changeover.
+Monday, April 30, 2007, 3:24:45 PM, you wrote:
 
-In fact looking at the date, 1st July could be good...
+> Hello,
 
-Cheers,
+> I have noticed some kernel builds use an outdated defconfig (because
+> they use that of another kernel), the one I'm now encountering is
+> linux-efika-2.6.18+2.6.19-rc6-r2.
+[]
+>                 yes | make ARCH=${ARCH} oldconfig
+[]
 
-Richard
+> Is this something we would bring in?
+
+        linux-handhelds-2.6 and some other kernel recipes have been
+using that all the time.
+
+> Regards,
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
