@@ -1,30 +1,21 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [66.249.82.237] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1HiQxK-0002L6-Iv
+	(envelope-from <leon.woestenberg@gmail.com>) id 1HiV4o-0000TJ-G1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2007 10:09:59 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 2B2B310CB2B;
-	Mon, 30 Apr 2007 18:00:46 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 30164-03; Mon, 30 Apr 2007 18:00:44 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 8FE6510C99E;
-	Mon, 30 Apr 2007 18:00:44 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 78F3BB70149; Mon, 30 Apr 2007 18:00:44 +1000 (EST)
-Date: Mon, 30 Apr 2007 18:00:44 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: Junqian Gordon Xu <xjqian@gmail.com>
-Message-ID: <20070430080044.GA15877@twibble.org>
-References: <20070427105722.GA4340@twibble.org> <46359408.9060800@gmail.com>
+	Mon, 30 Apr 2007 14:34:00 +0200
+Received: by wx-out-0506.google.com with SMTP id t14so1486969wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Apr 2007 05:24:45 -0700 (PDT)
+Received: by 10.90.30.20 with SMTP id d20mr5076399agd.1177935885124;
+	Mon, 30 Apr 2007 05:24:45 -0700 (PDT)
+Received: by 10.90.50.5 with HTTP; Mon, 30 Apr 2007 05:24:45 -0700 (PDT)
+Message-ID: <c384c5ea0704300524w40a360adne073f9576ee71e19@mail.gmail.com>
+Date: Mon, 30 Apr 2007 14:24:45 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: "Using the OpenEmbedded metadata to build Distributions"
+	<openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-In-Reply-To: <46359408.9060800@gmail.com>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: perl 5.8.8 is ready
+Subject: RFC: kernel configure steps hang if make oldconfig goes interactive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,41 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2007 08:09:59 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 30 Apr 2007 12:34:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Apr 30, 2007 at 02:00:24AM -0500, Junqian Gordon Xu wrote:
-> Jamie Lenehan wrote:
-[...]
-> perl-native-5.8.8 builds fine but with the following error
-> 
-> ERROR: QA issue: libgettextsrc.la failed sanity test (reference to 
-> workdir or installed)
-[...]
+Hello,
 
-These ones aren't related to perl-native at all, so no problems there.
+I have noticed some kernel builds use an outdated defconfig (because
+they use that of another kernel), the one I'm now encountering is
+linux-efika-2.6.18+2.6.19-rc6-r2.
 
-[...]
-> perl-5.8.8 build failed. Detail in the attached log file.
-[...]
-> | hostperl -I/home/OE/build/tosa_angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/perl-5.8.8-r7/perl-5.8.8/Cross/../fake_config_library -MConfig ../../lib/ExtUtils/xsubpp -noprototypes -typemap ../../lib/ExtUtils/typemap  attrs.xs > attrs.xsc && mv attrs.xsc attrs.c
-> | Perl lib version (v5.8.8) doesn't match executable version (v5.8.7) at /home/OE/build/tosa_angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/perl-5.8.8-r7/perl-5.8.8/Cross/../fake_config_library/Config.pm line 46.
+During the bitbake configure task, such a package will hang the build
+(with a part of the interactive oldconfig output, but no interactive
+ways to influence it).
 
-This error is saying that "hostperl" is perl 5.8.7 but that it needs
-to be perl 5.8.8. Can you check what your hostperl, which would be:
+do_configure() {
+                install -m 644 ${WORKDIR}/defconfig ${S}/.config
+                make ARCH=${ARCH} oldconfig
+}
 
-  /home/OE/build/tosa_angstrom/tmp/staging/i686-linux/bin/hostperl
+This can be made more robust by doing:
 
-is pointing at? It should be 5.8.8 but this error makes it sound like
-it's pointing at 5.8.7:
+do_configure() {
+                install -m 644 ${WORKDIR}/defconfig ${S}/.config
+                yes | make ARCH=${ARCH} oldconfig
+}
 
-  %~> ls -l tmp/staging/x86_64-linux/bin/hostperl 
-  lrwxrwxrwx 1 lenehan lenehan 82 2007-04-30 13:28 tmp/staging/x86_64-linux/bin/hostperl -> /home/lenehan/devel/oe/build/titan-glibc-25/tmp/staging/x86_64-linux/bin/perl5.8.8*
+Is this something we would bring in?
 
-Thanks.
-
+Regards,
 -- 
- Jamie Lenehan <lenehan@twibble.org>
+Leon
 
 
