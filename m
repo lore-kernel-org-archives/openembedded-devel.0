@@ -1,26 +1,27 @@
-Received: from [64.233.166.178] (helo=py-out-1112.google.com)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <xjqian@gmail.com>) id 1HikrU-0006nk-Sn
+	(envelope-from <rod@whitby.id.au>) id 1HiniI-0003vu-E0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 May 2007 07:25:17 +0200
-Received: by py-out-1112.google.com with SMTP id n39so1442493pyh
+	Tue, 01 May 2007 10:27:58 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 820B021AE93
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Apr 2007 22:16:00 -0700 (PDT)
-Received: by 10.64.131.17 with SMTP id e17mr6405499qbd.1177996559876;
-	Mon, 30 Apr 2007 22:15:59 -0700 (PDT)
-Received: from ?192.168.10.106? ( [71.85.151.212])
-	by mx.google.com with ESMTP id 6sm24277996nzn.2007.04.30.22.15.57;
-	Mon, 30 Apr 2007 22:15:58 -0700 (PDT)
-Message-ID: <4636CCC0.1010109@gmail.com>
-Date: Tue, 01 May 2007 00:14:40 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Icedove 1.5.0.10 (X11/20070329)
+	Tue,  1 May 2007 04:18:41 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Tue, 01 May 2007 04:18:41 -0400
+X-Sasl-enc: ENtuKgDCLcL2GMD3bPF63tHcEKGdO3Rt9ph62BB0imAq 1178007521
+Received: from [127.0.0.1] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id CCBDD17862
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 May 2007 04:18:40 -0400 (EDT)
+Message-ID: <4636F787.8030902@whitby.id.au>
+Date: Tue, 01 May 2007 17:47:11 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20070427105722.GA4340@twibble.org> <46359408.9060800@gmail.com>
-	<20070430080044.GA15877@twibble.org>
-In-Reply-To: <20070430080044.GA15877@twibble.org>
-Subject: Re: perl 5.8.8 is ready
+X-Enigmail-Version: 0.94.0.0
+Subject: RFC: Rename MACHINE_TASK_PROVIDER to DEFAULT_TASK_PROVIDER
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,71 +36,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2007 05:25:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 01 May 2007 08:27:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Thanks. I fixed the hostperl problem.
+> <rwhitby> so in my mokoslug distro, I set MACHINE_TASK_PROVIDER to task-boot or task-base, depending on flash size.
+> <rwhitby> what is MACHINE_TASK_PROVIDER really meant to be used for?
+> <koen> to distinguish between task-bootstrap and task-base
+> <rwhitby> does task-bootstrap still exist?
+> <koen> rwhitby: I hope not
+> <rwhitby> koen: so MACHINE_TASK_PROVIDER has no current reason for existence then?
+> <rwhitby> (and no definition of what it should be used for if it did have a current reason for existence)
+> <koen> rwhitby: not that I know off, but your task-boot suggestion would make sense
+> <rwhitby> koen: So it really should now be called something like BOOTSTRAP_IMAGE_FOUNDATION_TASK or something?
+> <rwhitby> (since it doesn't have anything to do with MACHINEs)
+> <koen> nor with BOOTSTRAP
+> <koen> something like DEFAULT_TASK_PROVIDER?
+> <rwhitby> yep, DEFAULT_TASK_PROVIDER floats my boat.
+> <koen> do you want to write an RFC for that?
 
-Don't know why. Even I commented out the DEFAULT_PREFERENCE = "-1", 
-bitbake still try to get perl-5.8.7 compiled first
+The proposal is to replace MACHINE_TASK_PROVIDER with
+DEFAULT_TASK_PROVIDER throughout OE, and encourage all image-foo.bb
+maintainers to base their image on DEFAULT_TASK_PROVIDER (which can be
+set to task-boot, or task-base, or perhaps some other distro-specific
+single task-foo value), plus other image-specific stuff.
 
-NOTE: package perl-5.8.8-r8: task do_unpack: completed
-NOTE: package perl-5.8.8: completed
-NOTE: Running task 285 of 302 (ID: 130, 
-/home/OE/org.openembedded.dev/packages/perl/perl_5.8.7.bb, do_fetch)
-NOTE: package perl-5.8.7: started
-NOTE: package perl-5.8.7-r22: task do_fetch: started
+Comments?  Objections?
 
-Besides, I noticed another issue:
-I had linux-libc-headers-2.6.15.99 compiled (I think it's determined 
-Machine and Distro) . But perl-5.8.8 wants linux-libc-headers-2.6.20. 
-Will that cause problem?
+BTW, task-bootstrap existence is as follows:
 
-Thanks
-Gordon
+> ./conf/distro/generic.conf:PREFERRED_PROVIDER_task-bootstrap = "task-bootstrap"
+> ./conf/distro/include/oplinux.inc:PREFERRED_PROVIDER_task-bootstrap = "task-base"
+> ./conf/distro/angstrom-2007.1.conf:PREFERRED_PROVIDER_task-bootstrap = "task-bootstrap"
+> ./conf/distro/jlime-donkey.conf:PREFERRED_PROVIDER_task-bootstrap = "task-bootstrap"
+> ./conf/distro/openprotium.conf:#PREFERRED_PROVIDER_task-bootstrap = "task-bootstrap"
+> ./conf/machine/gumstix.conf:PREFERRED_VERSION_task-bootstrap = "1.0unionroot"
+> ./packages/obsolete/tasks/task-bootstrap-unionroot.bb:PROVIDES = "task-bootstrap"
+> ./packages/obsolete/tasks/task-bootstrap-unionroot.bb:RPROVIDES = "task-bootstrap"
+> ./packages/obsolete/tasks/task-bootstrap-unionroot.bb:require task-bootstrap.inc
+> ./packages/obsolete/tasks/task-bootstrap.bb:require task-bootstrap.inc
+> ./packages/images/jlime-opie.bb:DEPENDS = "task-bootstrap task-opie"
+> ./packages/images/jlime-opie.bb:INSTALL_PACKAGES = "task-bootstrap task-opie-base task-opie-base-applets \
+> ./removal.txt:Package Name:   task-bootstrap*
 
-
-Jamie Lenehan wrote:
-> On Mon, Apr 30, 2007 at 02:00:24AM -0500, Junqian Gordon Xu wrote:
->   
->> Jamie Lenehan wrote:
->>     
-> [...]
->   
->> perl-native-5.8.8 builds fine but with the following error
->>
->> ERROR: QA issue: libgettextsrc.la failed sanity test (reference to 
->> workdir or installed)
->>     
-> [...]
->
-> These ones aren't related to perl-native at all, so no problems there.
->
-> [...]
->   
->> perl-5.8.8 build failed. Detail in the attached log file.
->>     
-> [...]
->   
->> | hostperl -I/home/OE/build/tosa_angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/perl-5.8.8-r7/perl-5.8.8/Cross/../fake_config_library -MConfig ../../lib/ExtUtils/xsubpp -noprototypes -typemap ../../lib/ExtUtils/typemap  attrs.xs > attrs.xsc && mv attrs.xsc attrs.c
->> | Perl lib version (v5.8.8) doesn't match executable version (v5.8.7) at /home/OE/build/tosa_angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/perl-5.8.8-r7/perl-5.8.8/Cross/../fake_config_library/Config.pm line 46.
->>     
->
-> This error is saying that "hostperl" is perl 5.8.7 but that it needs
-> to be perl 5.8.8. Can you check what your hostperl, which would be:
->
->   /home/OE/build/tosa_angstrom/tmp/staging/i686-linux/bin/hostperl
->
-> is pointing at? It should be 5.8.8 but this error makes it sound like
-> it's pointing at 5.8.7:
->
->   %~> ls -l tmp/staging/x86_64-linux/bin/hostperl 
->   lrwxrwxrwx 1 lenehan lenehan 82 2007-04-30 13:28 tmp/staging/x86_64-linux/bin/hostperl -> /home/lenehan/devel/oe/build/titan-glibc-25/tmp/staging/x86_64-linux/bin/perl5.8.8*
->
-> Thanks.
->
->   
-
+-- Rod
 
 
