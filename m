@@ -1,33 +1,23 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [62.169.194.2] (helo=fesscrpp1.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <oe@hentges.net>) id 1Hix7S-00016n-UZ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 May 2007 20:30:37 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id 16E8C308206
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 May 2007 20:20:59 +0200 (CEST)
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 26835-07 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 May 2007 20:20:56 +0200 (CEST)
-Received: from mhcln04.hentges.priv (xdsl-81-173-224-191.netcologne.de
-	[81.173.224.191]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id DF4DC3081ED
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 May 2007 20:20:35 +0200 (CEST)
-From: Matthias Hentges <oe@hentges.net>
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <f17ves$luc$1@sea.gmane.org>
-References: <f17ves$luc$1@sea.gmane.org>
-Date: Tue, 01 May 2007 20:20:26 +0200
-Message-Id: <1178043626.23506.8.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
-Subject: Re: RFC: RW access for polyonymous
+	(envelope-from <skoroneos@digital-opsis.com>) id 1HixHv-0001Nj-TA
+	for openembedded-devel@openembedded.org; Tue, 01 May 2007 20:41:24 +0200
+Received: from dias (62.169.211.226) by fesscrpp1.tellas.gr (7.3.117)
+	id 462338C4002431EF for openembedded-devel@openembedded.org;
+	Tue, 1 May 2007 21:31:07 +0300
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: "Using the OpenEmbedded metadata to build Distributions"
+	<openembedded-devel@openembedded.org>
+Date: Tue, 1 May 2007 21:32:01 +0300
+Message-ID: <HOECLKEKOHLAMMGDLLBHKEFLKOAA.skoroneos@digital-opsis.com>
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
+In-Reply-To: <4636F787.8030902@whitby.id.au>
+Importance: Normal
+Subject: squasfs jffs2 default image settings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,45 +32,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2007 18:30:39 -0000
-X-Groupsio-MsgNum: 1992
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="=-vMU+Wr5w8dgXkUgThLpw"
+X-List-Received-Date: Tue, 01 May 2007 18:41:25 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
---=-vMU+Wr5w8dgXkUgThLpw
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+After a day of "head scratching" i realized the the reason an image i was
+building, failed to load on a powerpc target was that the default settings
+for squashfs squashfs-lzma and jffs2 were set to little endian architecture
 
-Am Dienstag, den 01.05.2007, 20:04 +0200 schrieb Rolf Leggewie:
-> Hi,
->=20
-> with the amount (and speed!) of patches being provided by Michael=20
-> 'polyonymous' Krelin I think it makes sense to give him RW access to OE.=20
->   His bugs are at http://tinyurl.com/2llfhw
+//snip from  bitbake.conf
 
-I agree, it's about time ;)
---=20
-Matthias 'CoreDump' Hentges=20
-Cologne / Germany
+EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x40000"
+EXTRA_IMAGECMD_squashfs = "-le -b 16384"
+EXTRA_IMAGECMD_squashfs-lzma = "-le -b 16384"
 
-Webmaster of Hentges.net & Embedded Linux Developer
-GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
+These look like they were set for a specific machine (maybe i am wrong), but
+shouldn't the default settings be at least architecture neutral ?
+(Even the block sizes shouldn't be defined there as a machine might be
+better suited by another size)
 
-My OS: Debian SID: Geek by Nature, Linux by Choice
+Any objections to have EXTRA_IMAGECMD for these types of images default to
+no specific settings  ?
+
+Stelios S. Koroneos
+
+Digital OPSiS - Embedded Inteligence
+http://www.digital-opsis.com
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@openembedded.org
+> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
+> Rod Whitby
+> Sent: Tuesday, May 01, 2007 11:17 AM
+> To: openembedded-devel@openembedded.org
+> Subject: [oe] RFC: Rename MACHINE_TASK_PROVIDER to DEFAULT_TASK_PROVIDER
+>
+>
+> > <rwhitby> so in my mokoslug distro, I set MACHINE_TASK_PROVIDER
+> to task-boot or task-base, depending on flash size.
+> > <rwhitby> what is MACHINE_TASK_PROVIDER really meant to be used for?
+> > <koen> to distinguish between task-bootstrap and task-base
+> > <rwhitby> does task-bootstrap still exist?
+> > <koen> rwhitby: I hope not
+> > <rwhitby> koen: so MACHINE_TASK_PROVIDER has no current reason
+> for existence then?
+> > <rwhitby> (and no definition of what it should be used for if
+> it did have a current reason for existence)
+> > <koen> rwhitby: not that I know off, but your task-boot
+> suggestion would make sense
+> > <rwhitby> koen: So it really should now be called something
+> like BOOTSTRAP_IMAGE_FOUNDATION_TASK or something?
+> > <rwhitby> (since it doesn't have anything to do with MACHINEs)
+> > <koen> nor with BOOTSTRAP
+> > <koen> something like DEFAULT_TASK_PROVIDER?
+> > <rwhitby> yep, DEFAULT_TASK_PROVIDER floats my boat.
+> > <koen> do you want to write an RFC for that?
+>
+> The proposal is to replace MACHINE_TASK_PROVIDER with
+> DEFAULT_TASK_PROVIDER throughout OE, and encourage all image-foo.bb
+> maintainers to base their image on DEFAULT_TASK_PROVIDER (which can be
+> set to task-boot, or task-base, or perhaps some other distro-specific
+> single task-foo value), plus other image-specific stuff.
+>
+> Comments?  Objections?
+>
+> BTW, task-bootstrap existence is as follows:
+>
+> > ./conf/distro/generic.conf:PREFERRED_PROVIDER_task-bootstrap =
+> "task-bootstrap"
+> >
+> ./conf/distro/include/oplinux.inc:PREFERRED_PROVIDER_task-bootstra
+> p = "task-base"
+> >
+> ./conf/distro/angstrom-2007.1.conf:PREFERRED_PROVIDER_task-bootstr
+> ap = "task-bootstrap"
+> >
+> ./conf/distro/jlime-donkey.conf:PREFERRED_PROVIDER_task-bootstrap
+> = "task-bootstrap"
+> >
+> ./conf/distro/openprotium.conf:#PREFERRED_PROVIDER_task-bootstrap
+> = "task-bootstrap"
+> > ./conf/machine/gumstix.conf:PREFERRED_VERSION_task-bootstrap =
+> "1.0unionroot"
+> > ./packages/obsolete/tasks/task-bootstrap-unionroot.bb:PROVIDES
+> = "task-bootstrap"
+> > ./packages/obsolete/tasks/task-bootstrap-unionroot.bb:RPROVIDES
+> = "task-bootstrap"
+> > ./packages/obsolete/tasks/task-bootstrap-unionroot.bb:require
+> task-bootstrap.inc
+> > ./packages/obsolete/tasks/task-bootstrap.bb:require task-bootstrap.inc
+> > ./packages/images/jlime-opie.bb:DEPENDS = "task-bootstrap task-opie"
+> > ./packages/images/jlime-opie.bb:INSTALL_PACKAGES =
+> "task-bootstrap task-opie-base task-opie-base-applets \
+> > ./removal.txt:Package Name:   task-bootstrap*
+>
+> -- Rod
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
 
---=-vMU+Wr5w8dgXkUgThLpw
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-
-iD8DBQBGN4TqPXyoPq8wMNkRAoCxAJ48n8pWvKUgNoTHjRPeLvwgcNACxQCgteCE
-tQPKuAtQUauwl0j4AtXPa1Q=
-=gCpH
------END PGP SIGNATURE-----
-
---=-vMU+Wr5w8dgXkUgThLpw--
