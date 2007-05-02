@@ -1,33 +1,29 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Hj0m7-00024M-72
-	for openembedded-devel@openembedded.org; Wed, 02 May 2007 00:24:47 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Hj0d1-0001ef-PL
-	for openembedded-devel@openembedded.org; Wed, 02 May 2007 00:15:23 +0200
-Received: from c-134-177-35.d.dsl.de.ignite.net ([62.134.177.35])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 02 May 2007 00:15:23 +0200
-Received: from no2spam by c-134-177-35.d.dsl.de.ignite.net with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 02 May 2007 00:15:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 02 May 2007 00:15:11 +0200
-Message-ID: <f18e5h$53j$1@sea.gmane.org>
-References: <E1HgoSJ-0008AG-St@linuxtogo.org>	<462FBE16.9070805@dominion.kabel.utwente.nl>	<46362F71.7080604@dominion.kabel.utwente.nl>	<432beae0705011113v61831859x7978062963a48b8@mail.gmail.com>	<f1843v$doc$1@sea.gmane.org>
-	<46379649.7040404@dominion.kabel.utwente.nl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: c-134-177-35.d.dsl.de.ignite.net
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-In-Reply-To: <46379649.7040404@dominion.kabel.utwente.nl>
-Sender: news <news@sea.gmane.org>
-Subject: Re: [oe-commits] org.oe.dev xtscal: attempt to fix miscalibrations
+	(envelope-from <rod@whitby.id.au>) id 1Hj2Vk-0006tt-5X
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 May 2007 02:16:00 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id BCABD218649
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 May 2007 20:06:38 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Tue, 01 May 2007 20:06:39 -0400
+X-Sasl-enc: XmKTIU7me2rJyn+S3XbR8wsRETP8oFd1WDqr6Rrz3jD2 1178064399
+Received: from [127.0.0.1] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id D85E9AFD0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 May 2007 20:06:38 -0400 (EDT)
+Message-ID: <4637D5B6.4060305@whitby.id.au>
+Date: Wed, 02 May 2007 09:35:10 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+References: <HOECLKEKOHLAMMGDLLBHKEFLKOAA.skoroneos@digital-opsis.com>
+In-Reply-To: <HOECLKEKOHLAMMGDLLBHKEFLKOAA.skoroneos@digital-opsis.com>
+Subject: Re: squasfs jffs2 default image settings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,18 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2007 22:24:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 02 May 2007 00:16:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
->> Serious now, from what I read in bug 2093 I doubt the miscalibration 
->> issue is fixed yet.
+Stelios Koroneos wrote:
+> After a day of "head scratching" i realized the the reason an image i was
+> building, failed to load on a powerpc target was that the default settings
+> for squashfs squashfs-lzma and jffs2 were set to little endian architecture
 > 
-> The tr was reinstated and the names uppercased, so what else is missing?
+> //snip from  bitbake.conf
+> 
+> EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x40000"
+> EXTRA_IMAGECMD_squashfs = "-le -b 16384"
+> EXTRA_IMAGECMD_squashfs-lzma = "-le -b 16384"
+> 
+> These look like they were set for a specific machine (maybe i am wrong), but
+> shouldn't the default settings be at least architecture neutral ?
+> (Even the block sizes shouldn't be defined there as a machine might be
+> better suited by another size)
+> 
+> Any objections to have EXTRA_IMAGECMD for these types of images default to
+> no specific settings  ?
 
-polynonymous wrote that he needed mixed case.  But I have no first hand 
-knowledge of how to fix this, yet.
+Fine with me.  I think the nslu2 and ixp4xx are the few dual-endian
+machines in OE, and both of them are already set up to set the
+endianness, padding and block size on those commands explicitly.
 
+-- Rod
 
 
