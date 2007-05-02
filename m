@@ -1,20 +1,21 @@
-Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1HjJL3-000100-Or
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 May 2007 20:14:06 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so209218nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 May 2007 11:04:39 -0700 (PDT)
-Received: by 10.114.173.15 with SMTP id v15mr317888wae.1178129079357;
-	Wed, 02 May 2007 11:04:39 -0700 (PDT)
-Received: by 10.114.152.15 with HTTP; Wed, 2 May 2007 11:04:39 -0700 (PDT)
-Message-ID: <bdb0025f0705021104x23d2c407rb4da0e48e24eb911@mail.gmail.com>
-Date: Wed, 2 May 2007 15:04:39 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+	(envelope-from <openembedded@hrw.one.pl>) id 1HjK41-0005M2-UK
+	for openembedded-devel@openembedded.org; Wed, 02 May 2007 21:00:38 +0200
+Received: (qmail 31402 invoked by uid 813007); 2 May 2007 18:51:07 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 2 May 2007 18:51:07 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
+Date: Wed, 2 May 2007 20:51:02 +0200
+User-Agent: KMail/1.9.6
+References: <bdb0025f0705021104x23d2c407rb4da0e48e24eb911@mail.gmail.com>
+In-Reply-To: <bdb0025f0705021104x23d2c407rb4da0e48e24eb911@mail.gmail.com>
 MIME-Version: 1.0
-Subject: generating debian source packages (dsc)
+Message-Id: <200705022051.03720.openembedded@hrw.one.pl>
+Subject: Re: generating debian source packages (dsc)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,175 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2007 18:14:06 -0000
-X-Groupsio-MsgNum: 2002
-Content-Type: multipart/mixed; 
-	boundary="----=_Part_13353_28992293.1178129079248"
-
-------=_Part_13353_28992293.1178129079248
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 02 May 2007 19:00:39 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Hi all,
+Dnia =B6roda, 2 maja 2007, Rodrigo Vivi napisa=B3:
+> Hi all,
+>
+> I'm trying to code a bbclass to build debian source packages, because
+> I need these files under mamona repository:
+>
+>  * .dsc - debian source package control file
+>  * .orig.tar.gz - Original source package
+>  * .diff.gz - patches that we apply
+>
+> Since this is my first bbclass I need some help to figure some doubts
+> out.
 
-I'm trying to code a bbclass to build debian source packages, because
-I need these files under mamona repository:
+classes/sourcepkg.bbclass is something which you want to extend
 
- * .dsc - debian source package control file
- * .orig.tar.gz - Original source package
- * .diff.gz - patches that we apply
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Since this is my first bbclass I need some help to figure some doubts out.
+      I'm trying to decide if I should kill you or simply feign death
+      until you feel awkward and leave.
 
-first of all I've created a package_dsc task and added it before do_configure.
 
-This task creates the debian/control and debian/changelog file that
-dpkg-source ask for dsc generation. I know that I need to generate the
-debian/rules file too because without it the dsc will not be usefull.
-But this is not my real problem yet.
 
-The current problem that I'm trying to solve and need help is the following:
 
-before the do_configure all packages have a .pc dir that is not under
-orig.tar.gz file neither inside some patch breaking the dpkg-source
-but that is pretty easy to ignore doing
-$dpkg-source -i"\.pc" ...
-But glibc has a ports directory that is not under orig.tar.gz neither
-under patches so I need to ignore this file too. And I know that is
-NOT a good idea to ignore it doing
-dpkg-source  -i"\.pc|ports"
-And I've noticed that there are another files that breaks dpkg-source...
-like util-linux_2.12r-12.diff.gz under patches dir of util-linux
-
-I'm thinking to create a exclude-list or a dictionary to have an
-exclude-list for each package. What do you thing about it? Do you know
-a better and simplest way to do this?
-
-I'm anexing my bbclass file in case you want to have a look and help me! ;)
-
-Thanks,
-Best Regards,
-Vivi.
-
-------=_Part_13353_28992293.1178129079248
-Content-Type: application/octet-stream; name=gen_dsc.bbclass
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_f183ec6g
-Content-Disposition: attachment; filename="gen_dsc.bbclass"
-
-IyMgZ2VuX2RzYy5iYmNsYXNzOiBHZW5lcmF0ZXMgdGhlIGRlYmlhbiBzb3VyY2UgcGFja2FnZS4K
-CiMjIERlcGxveToKIyMgICAgICAgICAqIC5kc2MgLSBkZWJpYW4gc291cmNlIHBhY2thZ2UgY29u
-dHJvbCBmaWxlCiMjICAgICAgICAgKiAub3JpZy50YXIuZ3ogLSBPcmlnaW5hbCBzb3VyY2UgcGFj
-a2FnZQojIyAgICAgICAgICogLmRpZmYuZ3ogLSBwYXRjaGVzIHRoYXQgd2UgYXBwbHkKCmRlZiBw
-dWxsRGF0YShsLCBkKToKICAgIGltcG9ydCBiYgogICAgbDIgPSBbXQogICAgZm9yIGkgaW4gbDoK
-ICAgICAgICBkYXRhID0gYmIuZGF0YS5nZXRWYXIoaSwgZCwgMSkKICAgICAgICBpZiBkYXRhIGlz
-IE5vbmU6CiAgICAgICAgICAgIHJhaXNlIEtleUVycm9yKGZpZWxkcykKICAgICAgICBpZiBpID09
-ICdUQVJHRVRfQVJDSCcgYW5kIGJiLmRhdGEuZ2V0VmFyKCdQQUNLQUdFX0FSQ0gnLCBkLCAxKSA9
-PSAnYWxsJzoKICAgICAgICAgICAgZGF0YSA9ICdhbGwnCiAgICAgICAgbDIuYXBwZW5kKGRhdGEp
-CiAgICByZXR1cm4gbDIKCmRlZiBnZW5fcnVsZXNfZmlsZShkLCBwa2duYW1lLCBjb250cm9sZGly
-KToKICAgIGltcG9ydCBvcywgYmIKICAgIHRyeToKICAgICAgICBydWxlc2ZpbGUgPSBmaWxlKG9z
-LnBhdGguam9pbihjb250cm9sZGlyLCAncnVsZXMnKSwgJ3diJykKICAgICAgICAjIGltcG9ydCBj
-b2RlY3MKICAgICAgICAjIGN0cmxmaWxlID0gY29kZWNzLm9wZW4oInNvbWVGaWxlIiwgInciLCAi
-dXRmLTgiKQogICAgZXhjZXB0IE9TRXJyb3I6CiAgICAgICAgcmFpc2UgYmIuYnVpbGQuRnVuY0Zh
-aWxlZCgidW5hYmxlIHRvIG9wZW4gY29udHJvbCBmaWxlIGZvciB3cml0aW5nLiIpCiAgICBydWxl
-c2ZpbGUuY2xvc2UoKQogICAgb3Muc3lzdGVtKCJjaG1vZCIpCgpkZWYgZ2VuX2NvbnRyb2xfZmls
-ZShkLCBwa2duYW1lLCBjb250cm9sZGlyKToKICAgIGltcG9ydCBvcywgc3lzLCBiYgogICAgdHJ5
-OgogICAgICAgIGN0cmxmaWxlID0gZmlsZShvcy5wYXRoLmpvaW4oY29udHJvbGRpciwgJ2NvbnRy
-b2wnKSwgJ3diJykKICAgICAgICAjIGltcG9ydCBjb2RlY3MKICAgICAgICAjIGN0cmxmaWxlID0g
-Y29kZWNzLm9wZW4oInNvbWVGaWxlIiwgInciLCAidXRmLTgiKQogICAgZXhjZXB0IE9TRXJyb3I6
-CiAgICAgICAgcmFpc2UgYmIuYnVpbGQuRnVuY0ZhaWxlZCgidW5hYmxlIHRvIG9wZW4gY29udHJv
-bCBmaWxlIGZvciB3cml0aW5nLiIpCgogICAgZmllbGRzID0gW10KICAgIGZpZWxkcy5hcHBlbmQo
-WyJEZXNjcmlwdGlvbjogJXNcbiIsIFsnREVTQ1JJUFRJT04nXV0pCiAgICBmaWVsZHMuYXBwZW5k
-KFsiU2VjdGlvbjogJXNcbiIsIFsnU0VDVElPTiddXSkKICAgIGZpZWxkcy5hcHBlbmQoWyJQcmlv
-cml0eTogJXNcbiIsIFsnUFJJT1JJVFknXV0pCiAgICBmaWVsZHMuYXBwZW5kKFsiTWFpbnRhaW5l
-cjogJXNcbiIsIFsnTUFJTlRBSU5FUiddXSkKICAgIGZpZWxkcy5hcHBlbmQoWyJBcmNoaXRlY3R1
-cmU6ICVzXG4iLCBbJ1RBUkdFVF9BUkNIJ11dKQoKICAgIGN0cmxmaWxlLndyaXRlKCJTb3VyY2U6
-ICVzXG5cbiIgJSBwa2duYW1lKQogICAgY3RybGZpbGUud3JpdGUoIlBhY2thZ2U6ICVzXG4iICUg
-cGtnbmFtZSkKICAgICMgY2hlY2sgZm9yIHJlcXVpcmVkIGZpZWxkcwogICAgdHJ5OgogICAgICAg
-IGZvciAoYywgZnMpIGluIGZpZWxkczoKICAgICAgICAgICAgY3RybGZpbGUud3JpdGUodW5pY29k
-ZShjICUgdHVwbGUocHVsbERhdGEoZnMsIGQpKSkpCiAgICBleGNlcHQgS2V5RXJyb3I6CiAgICAg
-ICAgKHR5cGUsIHZhbHVlLCB0cmFjZWJhY2spID0gc3lzLmV4Y19pbmZvKCkKICAgICAgICBjdHJs
-ZmlsZS5jbG9zZSgpCiAgICAgICAgcmFpc2UgYmIuYnVpbGQuRnVuY0ZhaWxlZCgiTWlzc2luZyBm
-aWVsZCBmb3IgZHNjIGdlbmVyYXRpb246ICVzIiAlIHZhbHVlKQogICAgIyBtb3JlIGZpZWxkcwoK
-ICAgIHJkZXBlbmRzID0gZXhwbG9kZV9kZXBzKHVuaWNvZGUoYmIuZGF0YS5nZXRWYXIoIlJERVBF
-TkRTIiwgZCwgMSkgb3IgIiIpKQogICAgcmRlcGVuZHMgPSBbZGVwIGZvciBkZXAgaW4gcmRlcGVu
-ZHMgaWYgbm90ICcqJyBpbiBkZXBdCiAgICBycmVjb21tZW5kcyA9IGV4cGxvZGVfZGVwcyh1bmlj
-b2RlKGJiLmRhdGEuZ2V0VmFyKCJSUkVDT01NRU5EUyIsIGQsIDEpIG9yICIiKSkKICAgIHJyZWNv
-bW1lbmRzID0gW3JlYyBmb3IgcmVjIGluIHJyZWNvbW1lbmRzIGlmIG5vdCAnKicgaW4gcmVjXQog
-ICAgcnN1Z2dlc3RzID0gKHVuaWNvZGUoYmIuZGF0YS5nZXRWYXIoIlJTVUdHRVNUUyIsIGQsIDEp
-IG9yICIiKSkuc3BsaXQoKQogICAgcnByb3ZpZGVzID0gKHVuaWNvZGUoYmIuZGF0YS5nZXRWYXIo
-IlJQUk9WSURFUyIsIGQsIDEpIG9yICIiKSkuc3BsaXQoKQogICAgcnJlcGxhY2VzID0gKHVuaWNv
-ZGUoYmIuZGF0YS5nZXRWYXIoIlJSRVBMQUNFUyIsIGQsIDEpIG9yICIiKSkuc3BsaXQoKQogICAg
-cmNvbmZsaWN0cyA9ICh1bmljb2RlKGJiLmRhdGEuZ2V0VmFyKCJSQ09ORkxJQ1RTIiwgZCwgMSkg
-b3IgIiIpKS5zcGxpdCgpCiAgICBpZiByZGVwZW5kczoKICAgICAgICBjdHJsZmlsZS53cml0ZSh1
-IkRlcGVuZHM6ICVzXG4iICUgIiwgIi5qb2luKHJkZXBlbmRzKSkKICAgIGlmIHJzdWdnZXN0czoK
-ICAgICAgICBjdHJsZmlsZS53cml0ZSh1IlN1Z2dlc3RzOiAlc1xuIiAlICIsICIuam9pbihyc3Vn
-Z2VzdHMpKQogICAgaWYgcnJlY29tbWVuZHM6CiAgICAgICAgY3RybGZpbGUud3JpdGUodSJSZWNv
-bW1lbmRzOiAlc1xuIiAlICIsICIuam9pbihycmVjb21tZW5kcykpCiAgICBpZiBycHJvdmlkZXM6
-CiAgICAgICAgY3RybGZpbGUud3JpdGUodSJQcm92aWRlczogJXNcbiIgJSAiLCAiLmpvaW4ocnBy
-b3ZpZGVzKSkKICAgIGlmIHJyZXBsYWNlczoKICAgICAgICBjdHJsZmlsZS53cml0ZSh1IlJlcGxh
-Y2VzOiAlc1xuIiAlICIsICIuam9pbihycmVwbGFjZXMpKQogICAgaWYgcmNvbmZsaWN0czoKICAg
-ICAgICBjdHJsZmlsZS53cml0ZSh1IkNvbmZsaWN0czogJXNcbiIgJSAiLCAiLmpvaW4ocmNvbmZs
-aWN0cykpCiAgICBjdHJsZmlsZS5jbG9zZSgpCgpkZWYgZ2VuX2NoYW5nZWxvZ19maWxlKGQsIHBr
-Z25hbWUsIGNvbnRyb2xkaXIpOgogICAgaW1wb3J0IG9zLCBiYgogICAgdHJ5OgogICAgICAgIGNo
-Z2xvZ2ZpbGUgPSBmaWxlKG9zLnBhdGguam9pbihjb250cm9sZGlyLCAnY2hhbmdlbG9nJyksICd3
-YicpCiAgICAgICAgIyBpbXBvcnQgY29kZWNzCiAgICAgICAgIyBjdHJsZmlsZSA9IGNvZGVjcy5v
-cGVuKCJzb21lRmlsZSIsICJ3IiwgInV0Zi04IikKICAgIGV4Y2VwdCBPU0Vycm9yOgogICAgICAg
-IHJhaXNlIGJiLmJ1aWxkLkZ1bmNGYWlsZWQoInVuYWJsZSB0byBvcGVuIGNoYW5nZWxvZyBmaWxl
-IGZvciB3cml0aW5nLiIpCgogICAgY2hnbG9nZmlsZS53cml0ZSgiJXMgKCVzKSAlczsgdXJnZW5j
-eT1tZWRpdW1cblxuIiAlICgKICAgICAgICBwa2duYW1lLAogICAgICAgIGJiLmRhdGEuZ2V0VmFy
-KCdQVicsIGQsIDEpLAogICAgICAgIGJiLmRhdGEuZ2V0VmFyKCdESVNUUk9fVFlQRScsIGQsIDEp
-KSkKCiAgICBjaGdsb2dmaWxlLndyaXRlKCIgICogQXV0b21hdGljYWxseSBHZW5lcmF0ZWQuXG5c
-biIpCgogICAgZnJvbSBkYXRldGltZSBpbXBvcnQgZGF0ZXRpbWUKICAgIGNoZ2xvZ2ZpbGUud3Jp
-dGUoIiAtLSAlcyAgJXMgKzAyMDBcbiIgJSAoCiAgICAgICAgYmIuZGF0YS5nZXRWYXIoJ01BSU5U
-QUlORVInLCBkLCAxKSwKICAgICAgICBkYXRldGltZS50b2RheSgpLnN0cmZ0aW1lKCIlYSwgJWQg
-JWIgJVkgJUg6JU06JVMiKSkpCgogICAgY2hnbG9nZmlsZS5jbG9zZSgpCgphZGR0YXNrIHBhY2th
-Z2VfZHNjIGJlZm9yZSBkb19jb25maWd1cmUKcHl0aG9uIGRvX3BhY2thZ2VfZHNjICgpIHsKICAg
-IGltcG9ydCBvcwoKICAgIHAgPSBiYi5kYXRhLmdldFZhcignUCcsIGQsIDEpCgogICAgaWYgcC5j
-b3VudCgibmF0aXZlIikgb3IgcC5jb3VudCgiY3Jvc3MiKToKICAgICAgICBiYi5ub3RlKCJkc2Mg
-aXMgbm90IGdlbmVyYXRlZCBmb3IgbmF0aXZlIG9yIGNyb3NzIHBhY2thZ2VzIikKICAgICAgICBy
-ZXR1cm4KCiAgICB3b3JrZGlyID0gYmIuZGF0YS5nZXRWYXIoJ1dPUktESVInLCBkLCAxKQogICAg
-aWYgbm90IHdvcmtkaXI6CiAgICAgICAgYmIuZXJyb3IoIldPUktESVIgbm90IGRlZmluZWQsIHVu
-YWJsZSB0byBwYWNrYWdlIikKICAgICAgICByZXR1cm4KCiAgICBvdXRkaXIgPSBiYi5kYXRhLmdl
-dFZhcignREVQTE9ZX0RJUl9EU0MnLCBkLCAxKQogICAgaWYgbm90IG91dGRpcjoKICAgICAgICBi
-Yi5lcnJvcigiREVQTE9ZX0RJUl9EU0Mgbm90IGRlZmluZWQsIHVuYWJsZSB0byBwYWNrYWdlIikK
-ICAgICAgICByZXR1cm4KICAgIAogICAgc3JjZGlyID0gYmIuZGF0YS5nZXRWYXIoJ0RMX0RJUics
-IGQsIDEpCiAgICBpZiBub3Qgc3JjZGlyOgogICAgICAgIGJiLmVycm9yKCJETF9ESVIgbm90IGRl
-ZmluZWQsIHVuYWJsZSB0byBwYWNrYWdlIikKICAgICAgICByZXR1cm4KCiAgICBkdmFyID0gYmIu
-ZGF0YS5nZXRWYXIoJ0QnLCBkLCAxKQogICAgaWYgbm90IGR2YXI6CiAgICAgICAgYmIuZXJyb3Io
-IkQgbm90IGRlZmluZWQsIHVuYWJsZSB0byBwYWNrYWdlIikKICAgICAgICByZXR1cm4KICAgIGJi
-Lm1rZGlyaGllcihkdmFyKQogICAgCiAgICBwa2duYW1lID0gcFswOnAucmluZGV4KCctJyldCiAg
-ICBwa2d2ZXIgPSBwW3AucmluZGV4KCctJykrMTpdCiAgICBvcy5jaGRpcihzcmNkaXIpCiAgICBm
-cm9tIGdsb2IgaW1wb3J0IGdsb2IKICAgIHNyY25hbWUgPSBnbG9iKCIlcy50YXIuZ3oiICUgcCkg
-b3IgZ2xvYigiJXMudGFyLmJ6MiIgJSBwKQogICAgaWYgbm90IHNyY25hbWU6CiAgICAgICAgYmIu
-bm90ZSgiZHNjIHBhY2thZ2Ugbm90IGdlbmVyYXRlZCBmb3IgJXM6IFNvdXJjZSBub3QgZm91bmQi
-ICUgcGtnbmFtZSkKICAgICAgICByZXR1cm4KICAgIGVsc2U6CiAgICAgICAgc3JjbmFtZSA9IHNy
-Y25hbWVbMF0KICAgICAgICBpZiBzcmNuYW1lWy0xXT09JzInOgogICAgICAgICAgICBvcy5zeXN0
-ZW0oImJ1bnppcDIgLWMgJXMgfCBnemlwIC1jID4gJXNfJXMub3JpZy50YXIuZ3oiICUKICAgICAg
-ICAgICAgICAgICAgICAgIChzcmNuYW1lLCBvcy5wYXRoLmpvaW4od29ya2RpciwgcGtnbmFtZSks
-IHBrZ3ZlcikpCiAgICAgICAgZWxzZToKICAgICAgICAgICAgb3Muc3lzdGVtKCJjcCAlcyAlc18l
-cy5vcmlnLnRhci5neiIgJQogICAgICAgICAgICAgICAgICAgICAgKHNyY25hbWUsIG9zLnBhdGgu
-am9pbih3b3JrZGlyLCBwa2duYW1lKSwgcGtndmVyKSkKCiAgICBiYXNlZGlyID0gb3MucGF0aC5q
-b2luKHdvcmtkaXIsIHApCiAgICBjb250cm9sZGlyID0gb3MucGF0aC5qb2luKGJhc2VkaXIsICdk
-ZWJpYW4nKSAgICAKICAgIGJiLm1rZGlyaGllcihjb250cm9sZGlyKQogICAgZ2VuX2NvbnRyb2xf
-ZmlsZShkLCBwa2duYW1lLCBjb250cm9sZGlyKQogICAgZ2VuX2NoYW5nZWxvZ19maWxlKGQsIHBr
-Z25hbWUsIGNvbnRyb2xkaXIpCgogICAgb3MuY2hkaXIod29ya2RpcikKICAgIG9fcGF0Y2hlc2Rp
-ciA9IG9zLnBhdGguam9pbihiYXNlZGlyLCAncGF0Y2hlcycpCiAgICBwYXRjaGVzZGlyID0gb3Mu
-cGF0aC5qb2luKGNvbnRyb2xkaXIsICdwYXRjaGVzJykKICAgIGJiLm1rZGlyaGllcihwYXRjaGVz
-ZGlyKQogICAgaWYgb3MucGF0aC5pc2RpcihvX3BhdGNoZXNkaXIpOgogICAgICAgIG9zLnN5c3Rl
-bSgiY3AgLWEgJXMvKi57cGF0Y2gsZGlmZn0gJXMiICUgKG9fcGF0Y2hlc2RpciwgcGF0Y2hlc2Rp
-cikpIAogICAKICAgIHJldCA9IG9zLnN5c3RlbSgiZmFrZXJvb3QgZHBrZy1zb3VyY2UgLWlcIlwu
-cGNcIiAtYiAlcyIgJSBwKQogICAgaWYgcmV0ICE9IDA6CiAgICAgICAgcmFpc2UgYmIuYnVpbGQu
-RnVuY0ZhaWxlZCgiZHBrZy1zb3VyY2UgZXhlY3V0aW9uIGZhaWxlZCIpCiAgICBlbHNlOgogICAg
-ICAgIHBrZ291dGRpciA9IG9zLnBhdGguam9pbihvdXRkaXIsIHBrZ25hbWUpCiAgICAgICAgYmIu
-bWtkaXJoaWVyKHBrZ291dGRpcikKICAgICAgICBvcy5zeXN0ZW0oIm12ICoue2RzYyxkaWZmLmd6
-LG9yaWcudGFyLmd6fSAlcyIgJSBwa2dvdXRkaXIpCiAgICBmb3Igc2NyaXB0IGluIFsicHJlaW5z
-dCIsICJwb3N0aW5zdCIsICJwcmVybSIsICJwb3N0cm0iLCAiY29udHJvbCIsCiAgICAgICAgICAg
-ICAgICAgICAiY2hhbmdlbG9nIiBdOgogICAgICAgIHNjcmlwdGZpbGUgPSBvcy5wYXRoLmpvaW4o
-Y29udHJvbGRpciwgc2NyaXB0KQogICAgICAgIHRyeToKICAgICAgICAgICAgb3MucmVtb3ZlKHNj
-cmlwdGZpbGUpCiAgICAgICAgZXhjZXB0IE9TRXJyb3I6CiAgICAgICAgICAgIHBhc3MKICAgIHRy
-eToKICAgICAgICBvcy5ybWRpcihjb250cm9sZGlyKQogICAgZXhjZXB0IE9TRXJyb3I6CiAgICAg
-ICAgcGFzcwp9Cg==
-
-------=_Part_13353_28992293.1178129079248--
