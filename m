@@ -1,25 +1,23 @@
-Received: from [64.233.162.233] (helo=nz-out-0506.google.com)
+Received: from [64.233.166.179] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1HjLkL-0005VR-Kn
+	(envelope-from <pmiscml@gmail.com>) id 1Hjas6-0000X4-46
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 May 2007 22:48:21 +0200
-Received: by nz-out-0506.google.com with SMTP id m22so257099nzf
+	Thu, 03 May 2007 14:57:22 +0200
+Received: by py-out-1112.google.com with SMTP id n39so372566pyh
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 May 2007 13:38:55 -0700 (PDT)
-Received: by 10.114.180.1 with SMTP id c1mr353593waf.1178138334498;
-	Wed, 02 May 2007 13:38:54 -0700 (PDT)
-Received: by 10.115.92.3 with HTTP; Wed, 2 May 2007 13:38:54 -0700 (PDT)
-Message-ID: <432beae0705021338x7ca36c0oc937a6b1b03f6db5@mail.gmail.com>
-Date: Wed, 2 May 2007 13:38:54 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: "Using the OpenEmbedded metadata to build Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <bdb0025f0705021252w7e32b305ybf9c914c1cb1edc0@mail.gmail.com>
+	Thu, 03 May 2007 05:47:51 -0700 (PDT)
+Received: by 10.65.43.17 with SMTP id v17mr3419625qbj.1178196453376;
+	Thu, 03 May 2007 05:47:33 -0700 (PDT)
+Received: from cube ( [82.193.98.2])
+	by mx.google.com with ESMTP id 36sm1745981nza.2007.05.03.05.47.32;
+	Thu, 03 May 2007 05:47:33 -0700 (PDT)
+Date: Thu, 3 May 2007 15:47:32 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <35653307.20070503154732@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-References: <bdb0025f0705021104x23d2c407rb4da0e48e24eb911@mail.gmail.com>
-	<200705022051.03720.openembedded@hrw.one.pl>
-	<bdb0025f0705021252w7e32b305ybf9c914c1cb1edc0@mail.gmail.com>
-Subject: Re: generating debian source packages (dsc)
+Subject: [ALERT] Security vulnerability with recent OE bitbake.conf changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,56 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2007 20:48:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 03 May 2007 12:57:22 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 5/2/07, Rodrigo Vivi <rodrigo.vivi@gmail.com> wrote:
-> > classes/sourcepkg.bbclass is something which you want to extend
->
-> I've thought about it but I'm not sure that it is a good idea because
-> just few projects (or just mine) needs the dsc file .......... unless
-> that I code another sourcedsc.bbclass that inherit the
-> sourcedpkg.bbclass... o you think that it will work???  I'll think
-> about it...
->
+Hello openembedded-devel,
 
-Yes, this is what Marcin meant. Create your own sourcedsc.bbclass
-which inherits sourcepkg.bbclass. This is how, for example,
-efl.bbclass and e.bbclass work.
+A commit made some time ago,
 
-> Another doubt that I forgot to mention on last email is about changelog:
-> I'm generating a almost empty changelog file. Is there any official
-> and/or more appropriated way to do that?
->
-> Thanks,
-> Vivi.
->
-> >
-> > --
-> > JID: hrw-jabber.org
-> > OpenEmbedded developer/consultant
-> >
-> >       I'm trying to decide if I should kill you or simply feign death
-> >       until you feel awkward and leave.
-> >
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+http://lists.linuxtogo.org/pipermail/openembedded-commits/2007-April/004912.html
 
+introduced a hole which may lead to unnoticed security vulnerabilities
+slipping into the packages/images produced. Specifically, it defines a
+random application of a random suite to be used for resolving patching
+conflicts/failures. If you don't happen to have that random tool,
+patching failure will be silently swallowed, leading to any adverse
+effects imaginable - from compile failure to the mentioned security
+vulnerabilities.
+
+Proposed solutions:
+
+1. Bring back some reality and switch back to previous default of
+dropping to standard shell for resolution:
+
+-TERMCMD ?= "${GNOME_TERMCMD}"
+-TERMCMDRUN ?= "${GNOME_TERMCMDRUN}"
++TERMCMD ?= "${SHELLRCCMD}"
++TERMCMDRUN ?= "${SHELLRCCMD}"
+
+
+2. Add DEPENDS on that random tool, namely gnome-terminal.
+
+If going with choice 2, I proposed also to do the following: 1) add
+depends on xine, mplayer, totem, few other video players; 2) add depends
+on mesa and show nice 3d rotating menu to select player of user choice;
+3) use selected player to show video during the build - after all,
+if user deserves comfort of using superfluous GUI tools for conflict
+resolution, why one should be bored during normal build process?
+
+
+Thanks,
 
 -- 
-Justin Patrin
+ Paul                          mailto:pmiscml@gmail.com
+
 
 
