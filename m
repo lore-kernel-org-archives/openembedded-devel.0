@@ -1,23 +1,30 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1Hjas6-0000X4-46
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 May 2007 14:57:22 +0200
-Received: by py-out-1112.google.com with SMTP id n39so372566pyh
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 May 2007 05:47:51 -0700 (PDT)
-Received: by 10.65.43.17 with SMTP id v17mr3419625qbj.1178196453376;
-	Thu, 03 May 2007 05:47:33 -0700 (PDT)
-Received: from cube ( [82.193.98.2])
-	by mx.google.com with ESMTP id 36sm1745981nza.2007.05.03.05.47.32;
-	Thu, 03 May 2007 05:47:33 -0700 (PDT)
-Date: Thu, 3 May 2007 15:47:32 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <35653307.20070503154732@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: [ALERT] Security vulnerability with recent OE bitbake.conf changes
+	(envelope-from <rpurdie@rpsys.net>) id 1HjbAq-00010Y-OH
+	for openembedded-devel@openembedded.org; Thu, 03 May 2007 15:16:44 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l43D7CPW015383;
+	Thu, 3 May 2007 14:07:12 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 14936-10; Thu,  3 May 2007 14:07:09 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l43D781a015376
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Thu, 3 May 2007 14:07:08 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Paul Sokolovsky <pmiscml@gmail.com>
+In-Reply-To: <35653307.20070503154732@gmail.com>
+References: <35653307.20070503154732@gmail.com>
+Date: Thu, 03 May 2007 14:07:08 +0100
+Message-Id: <1178197628.6312.22.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [ALERT] Security vulnerability with recent OE bitbake.conf	changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,49 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2007 12:57:22 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 03 May 2007 13:16:45 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello openembedded-devel,
+On Thu, 2007-05-03 at 15:47 +0300, Paul Sokolovsky wrote:
+> If going with choice 2, I proposed also to do the following: 1) add
+> depends on xine, mplayer, totem, few other video players; 2) add depends
+> on mesa and show nice 3d rotating menu to select player of user choice;
+> 3) use selected player to show video during the build - after all,
+> if user deserves comfort of using superfluous GUI tools for conflict
+> resolution, why one should be bored during normal build process?
 
-A commit made some time ago,
+Paul,
 
-http://lists.linuxtogo.org/pipermail/openembedded-commits/2007-April/004912.html
+Is there really any need for this?
 
-introduced a hole which may lead to unnoticed security vulnerabilities
-slipping into the packages/images produced. Specifically, it defines a
-random application of a random suite to be used for resolving patching
-conflicts/failures. If you don't happen to have that random tool,
-patching failure will be silently swallowed, leading to any adverse
-effects imaginable - from compile failure to the mentioned security
-vulnerabilities.
+It doesn't encourage me to give a sensible reply, does it...
 
-Proposed solutions:
-
-1. Bring back some reality and switch back to previous default of
-dropping to standard shell for resolution:
-
--TERMCMD ?= "${GNOME_TERMCMD}"
--TERMCMDRUN ?= "${GNOME_TERMCMDRUN}"
-+TERMCMD ?= "${SHELLRCCMD}"
-+TERMCMDRUN ?= "${SHELLRCCMD}"
-
-
-2. Add DEPENDS on that random tool, namely gnome-terminal.
-
-If going with choice 2, I proposed also to do the following: 1) add
-depends on xine, mplayer, totem, few other video players; 2) add depends
-on mesa and show nice 3d rotating menu to select player of user choice;
-3) use selected player to show video during the build - after all,
-if user deserves comfort of using superfluous GUI tools for conflict
-resolution, why one should be bored during normal build process?
-
-
-Thanks,
-
--- 
- Paul                          mailto:pmiscml@gmail.com
+Richard
 
 
 
