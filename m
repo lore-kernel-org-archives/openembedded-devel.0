@@ -1,26 +1,21 @@
-Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
+Received: from [66.249.82.235] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1Hjbif-0005WL-4F
-	for openembedded-devel@openembedded.org; Thu, 03 May 2007 15:51:41 +0200
-Received: by wx-out-0506.google.com with SMTP id t13so423463wxc
-	for <openembedded-devel@openembedded.org>;
-	Thu, 03 May 2007 06:42:08 -0700 (PDT)
-Received: by 10.90.113.20 with SMTP id l20mr1716679agc.1178199728014;
-	Thu, 03 May 2007 06:42:08 -0700 (PDT)
-Received: from cube ( [82.193.98.2])
-	by mx.google.com with ESMTP id 37sm1805884nzf.2007.05.03.06.42.06;
-	Thu, 03 May 2007 06:42:07 -0700 (PDT)
-Date: Thu, 3 May 2007 16:42:06 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <183568912.20070503164206@gmail.com>
-To: Richard Purdie <rpurdie@rpsys.net>
-In-Reply-To: <1178198199.6312.30.camel@localhost.localdomain>
-References: <35653307.20070503154732@gmail.com>
-	<1178198199.6312.30.camel@localhost.localdomain>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Hk0Vn-00089Z-PM
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 May 2007 18:20:06 +0200
+Received: by wx-out-0506.google.com with SMTP id s14so185794wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 May 2007 09:19:58 -0700 (PDT)
+Received: by 10.90.28.12 with SMTP id b12mr3469314agb.1178295598385;
+	Fri, 04 May 2007 09:19:58 -0700 (PDT)
+Received: by 10.90.50.5 with HTTP; Fri, 4 May 2007 09:19:58 -0700 (PDT)
+Message-ID: <c384c5ea0705040919u8bdafe9sa6abe0942ffe3fd8@mail.gmail.com>
+Date: Fri, 4 May 2007 18:19:58 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: "Using the OpenEmbedded metadata to build Distributions"
+	<openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [ALERT] Security vulnerability with recent OE bitbake.conf changes
+Subject: task-base dependencies and missing logging of failed providers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,83 +30,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2007 13:51:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 04 May 2007 16:20:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello Richard,
+Hello,
 
-Thursday, May 3, 2007, 4:16:39 PM, you wrote:
+just wanted to get this down for those not having followed the
+discussion on IRC (and just for the record, not that the ideas are
+still fresh).
 
-> On Thu, 2007-05-03 at 15:47 +0300, Paul Sokolovsky wrote:
->> Hello openembedded-devel,
->> 
->> A commit made some time ago,
->> 
->> http://lists.linuxtogo.org/pipermail/openembedded-commits/2007-April/004912.html
->> 
->> introduced a hole which may lead to unnoticed security vulnerabilities
->> slipping into the packages/images produced. Specifically, it defines a
->> random application of a random suite to be used for resolving patching
->> conflicts/failures. If you don't happen to have that random tool,
->> patching failure will be silently swallowed, leading to any adverse
->> effects imaginable - from compile failure to the mentioned security
->> vulnerabilities.
+My idea about a minimal image that OE should support (Goal: OE must be
+scalable) is a linux kernel with a single init application
+(helloworld).
 
+Today on IRC we discussed two issues with BB/OE, indirectly blocking
+the ability to build a minimal image using task-base, especially for
+new users.
 
-[]
+(1) task-base always wants *all* targets in task-* to be buildable,
+regardless whether they are installed or not.
 
-> Is there really any need for this?
-> It doesn't encourage me to give a sensible reply, does it...
+Example:
 
-        Apparently no. But for me, it's pretty clear that even
-gnome-terminal shouldn't be used by default, and in expectation of
-hardnesses regarding arguing this, I tried to draw picturesquely
-absurd "extension", overspiced with few buzzwords. It's of course a
-mere small bug otherwise, but I truly looking for solution which won't
-by default trouble KDE, other WMs, and classy console guys in favor of
-GNOME crowd.
+Take angstrom, strip {MACHINE,DISTRO}_FEATURES such that
+COMBINED_FEATURES=3D"ext2" or something really basic.
+Set USE_NLS=3D"no"
 
+When now building angstrom-minimal-image, task-base wants bluetooth to
+be buildable, thus bluez-utils, thus dbus, cups, glib-2.0, etc. etc.
+Because glib-2.0 requires USE_NLS=3D"yes", the image build fails with "a
+no providers for" message.
 
-> Patch failure should not be silently swallowed, the builds should abort.
-> If they don't, we need to fix that underlying problem.
+[10:34]=09<v8jlene>=09likewise: Yeah, that task-base one's a bit annoying.
+I only had about 400 recipes symlinked in, now I have them all just to
+make task-base happy. And as you say it's building lots of stuff that
+you don't use.
 
-        Yes, I didn't even bother to ruin my pamphlet with such
-down-to-earth triviality ;-). I'd be looking into it as time permits
-of course.
+Workarounds:
+- USE_NLS_glib-2.0=3D"yes" (yes, at least makes image buildable, IFF the
+other deps are met, everything is still built)
 
-> FWIW, your first solution using SHELLRCCMD won't actually work due to
-> the way IO redirection is done in recent bitbake. 
+Suggested fixes:
+- split task-base into seperate *.bb would work (koen, hrw), but this
+is not the proper solution (RP, koen)
+- do not use debian.bbclass (tried, but does not work for me)
+- ...
 
-> Your second solution of adding the DEPENDS is impractical due to the
-> amount of -native packages it would require.
+(2) It's very hard to track down and I'm not alone:
 
-> So we need to find the real problem and fix that, probably somewhere in
-> patch.bbclass an error code isn't being propagated at a guess.
+[10:29]=09<v8jlene>=09likewise: Heh, I had that issue yesterday when
+trying my uclibc builds with 1.8.2 ;) The error bitbake showed was
+about bootstrap-image was unavailable (due to task-base pulling in
+cups which pulled in dbus which pulled in glib-2.0). Took ages to
+figure it all out...
 
-> I will also hint at the use of PATCH_RESOLVER = "noop" which means the
-> user gets the old behaviour of patch failure aborts the build with no
-> help from any resolver. It should have always been the default but
-> wasn't. I'm not sure what the current default is but we can change it to
-> that if its not.
+New users won't find this, as bitbake -D -D -D -v does not provide this inf=
+o.
 
-        Ack, and vote for. Let's have defaults not overloaded with
-interactivity, and working along the lines of standard unix/posix
-build tools. Frontends, likes one(s) you work on, can have own
-config/overrides then. (And few people won't used them anyway, no
-matter which potential benefits they give - and not out of
-bare-commandline orthodoxy, but because they may have other frontends
-relying on classical unix behavior of tools).
+2) bitbake will NOT report the above dependency
+logging of failed providers
 
-> Cheers,
+However, this one is hard to fix:
 
-> Richard
+[10:31]=09<RP>=09likewise: There is a bitbake bug already open about the
+logging of failed providers
+[10:31]=09<RP>=09Its not as simple as it sounds though
 
 
+Reproduce
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+taking the =C5ngstr=F6m distro as a base, I would like to strip it down a
+bit. I stripped {MACHINE,DISTRO}_FEATURES such that:
 
+COMBINED_FEATURES=3D"ext2"
+DISTRO_EXTRA_RDEPENDS=3D"update-modules module-init-tools
+modutils-initscripts sysvinit initscripts sysvinit-pidof netbase
+dropbear ipkg ipkg-collateral util-linux-mount util-linux-umount"
+
+As none of the selected package need NLS, I have disabled it.
+
+USE_NLS =3D "no"
+
+bitbake angstrom-minimal image
+or
+bitbake bootstrap-image
+
+
+Regards,
+--=20
+Leon
+
+The persons and animals named in this email are based on true
+characters in real life.
 
 
