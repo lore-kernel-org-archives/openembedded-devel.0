@@ -1,26 +1,27 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.166.182] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hl0d2-00043Z-E5
-	for openembedded-devel@openembedded.org; Mon, 07 May 2007 12:39:40 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l47AdFLr005972 for <openembedded-devel@openembedded.org>;
-	Mon, 7 May 2007 12:39:15 +0200
-Message-ID: <463F01CF.5010601@dominion.kabel.utwente.nl>
-Date: Mon, 07 May 2007 12:39:11 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <pmiscml@gmail.com>) id 1Hl0h5-0004CA-N4
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 May 2007 12:43:51 +0200
+Received: by py-out-1112.google.com with SMTP id n39so1116972pyh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 May 2007 03:43:30 -0700 (PDT)
+Received: by 10.35.76.9 with SMTP id d9mr10987683pyl.1178534610150;
+	Mon, 07 May 2007 03:43:30 -0700 (PDT)
+Received: from cube ( [77.122.190.213])
+	by mx.google.com with ESMTP id 40sm6024828nzf.2007.05.07.03.43.29;
+	Mon, 07 May 2007 03:43:29 -0700 (PDT)
+Date: Mon, 7 May 2007 13:43:31 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1019023621.20070507134331@gmail.com>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <463F01CF.5010601@dominion.kabel.utwente.nl>
 References: <a7f8874a0702280825j22bdf3bbw94e58cfd4a0fab93@mail.gmail.com>
 	<45F0200B.9080002@dominion.kabel.utwente.nl>
-In-Reply-To: <45F0200B.9080002@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<463F01CF.5010601@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
 Subject: Re: Potential Problems in glibc-package.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,44 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2007 10:39:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 07 May 2007 10:43:53 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Koen Kooi schreef:
-> Hans Henry von Tresckow schreef:
->> I think I may have stumbled across some potential bugs in glibc-package.bbclass:
-> 
->> it seems like the standard value for datadir is /usr/share which will
->> cause the following problems in output_locale_binary:
-> 
->> 1) i18npath will be set to /usr/share/i18n instead of
->> treedir/usr/share/i18n becouse path.join is too braindead to remove
->> leading / on path entries.
->> 2) the --inputfile option in localdef opts uses datadir instead of
->> treedir, so it looks like it would use the locale files installed on
->> the host instead of the ones we are buildig for.
-> 
-> 
-> There now is a base_path_join function in OE, that doesn't have that bug. No idea why
-> glibc.bbclass hasn't been updated to use that.
+Monday, May 7, 2007, 1:39:11 PM, you wrote:
 
-See http://bugs.openembedded.org/show_bug.cgi?id=1821#c9 for the proposed solution for at
-least 1).
+[]
 
-regards,
+>>> I think I may have stumbled across some potential bugs in glibc-package.bbclass:
+>> 
+>>> it seems like the standard value for datadir is /usr/share which will
+>>> cause the following problems in output_locale_binary:
+>> 
+>>> 1) i18npath will be set to /usr/share/i18n instead of
+>>> treedir/usr/share/i18n becouse path.join is too braindead to remove
+>>> leading / on path entries.
+>>> 2) the --inputfile option in localdef opts uses datadir instead of
+>>> treedir, so it looks like it would use the locale files installed on
+>>> the host instead of the ones we are buildig for.
+>> 
+>> 
+>> There now is a base_path_join function in OE, that doesn't have that bug. No idea why
+>> glibc.bbclass hasn't been updated to use that.
 
-Koen
+> See http://bugs.openembedded.org/show_bug.cgi?id=1821#c9 for the proposed solution for at
+> least 1).
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+        This is indeed few months old. Let's apply it?
 
-iD8DBQFGPwHPMkyGM64RGpERAjMsAJ9hwzbjdM/QDmpE/gPkB9taIK7wgACePfxv
-E306nGzJX80t3kuMxbtqe+Y=
-=W3Un
------END PGP SIGNATURE-----
+
+> regards,
+
+> Koen
+
+[]
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
