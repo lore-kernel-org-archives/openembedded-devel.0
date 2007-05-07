@@ -1,24 +1,27 @@
-Received: from [64.233.162.232] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1Hkur5-0005rD-Bp
-	for openembedded-devel@openembedded.org; Mon, 07 May 2007 06:29:47 +0200
-Received: by nz-out-0506.google.com with SMTP id j2so1480340nzf
-	for <openembedded-devel@openembedded.org>;
-	Sun, 06 May 2007 21:29:27 -0700 (PDT)
-Received: by 10.114.153.18 with SMTP id a18mr1975761wae.1178512166901;
-	Sun, 06 May 2007 21:29:26 -0700 (PDT)
-Received: by 10.115.92.3 with HTTP; Sun, 6 May 2007 21:29:26 -0700 (PDT)
-Message-ID: <432beae0705062129i11f69731n1d12777f46a83316@mail.gmail.com>
-Date: Sun, 6 May 2007 21:29:26 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: "Using the OpenEmbedded metadata to build Distributions"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <1178198199.6312.30.camel@localhost.localdomain>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hl0d2-00043Z-E5
+	for openembedded-devel@openembedded.org; Mon, 07 May 2007 12:39:40 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l47AdFLr005972 for <openembedded-devel@openembedded.org>;
+	Mon, 7 May 2007 12:39:15 +0200
+Message-ID: <463F01CF.5010601@dominion.kabel.utwente.nl>
+Date: Mon, 07 May 2007 12:39:11 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-References: <35653307.20070503154732@gmail.com>
-	<1178198199.6312.30.camel@localhost.localdomain>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [ALERT] Security vulnerability with recent OE bitbake.conf changes
+To: openembedded-devel@openembedded.org
+References: <a7f8874a0702280825j22bdf3bbw94e58cfd4a0fab93@mail.gmail.com>
+	<45F0200B.9080002@dominion.kabel.utwente.nl>
+In-Reply-To: <45F0200B.9080002@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: Potential Problems in glibc-package.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,54 +36,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2007 04:29:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 07 May 2007 10:39:40 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 5/3/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Thu, 2007-05-03 at 15:47 +0300, Paul Sokolovsky wrote:
-> > Hello openembedded-devel,
-> >
-> > A commit made some time ago,
-> >
-> > http://lists.linuxtogo.org/pipermail/openembedded-commits/2007-April/004912.html
-> >
-> > introduced a hole which may lead to unnoticed security vulnerabilities
-> > slipping into the packages/images produced. Specifically, it defines a
-> > random application of a random suite to be used for resolving patching
-> > conflicts/failures. If you don't happen to have that random tool,
-> > patching failure will be silently swallowed, leading to any adverse
-> > effects imaginable - from compile failure to the mentioned security
-> > vulnerabilities.
->
-> Patch failure should not be silently swallowed, the builds should abort.
-> If they don't, we need to fix that underlying problem.
->
-> FWIW, your first solution using SHELLRCCMD won't actually work due to
-> the way IO redirection is done in recent bitbake.
->
-> Your second solution of adding the DEPENDS is impractical due to the
-> amount of -native packages it would require.
->
-> So we need to find the real problem and fix that, probably somewhere in
-> patch.bbclass an error code isn't being propagated at a guess.
->
-> I will also hint at the use of PATCH_RESOLVER = "noop" which means the
-> user gets the old behaviour of patch failure aborts the build with no
-> help from any resolver. It should have always been the default but
-> wasn't. I'm not sure what the current default is but we can change it to
-> that if its not.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Ummm...where? I tried that in my local.conf and it did nothing. I've
-also grepped for PATCH_RESOLVER in both bitbake and oe and found
-nothing.
+Koen Kooi schreef:
+> Hans Henry von Tresckow schreef:
+>> I think I may have stumbled across some potential bugs in glibc-package.bbclass:
+> 
+>> it seems like the standard value for datadir is /usr/share which will
+>> cause the following problems in output_locale_binary:
+> 
+>> 1) i18npath will be set to /usr/share/i18n instead of
+>> treedir/usr/share/i18n becouse path.join is too braindead to remove
+>> leading / on path entries.
+>> 2) the --inputfile option in localdef opts uses datadir instead of
+>> treedir, so it looks like it would use the locale files installed on
+>> the host instead of the ones we are buildig for.
+> 
+> 
+> There now is a base_path_join function in OE, that doesn't have that bug. No idea why
+> glibc.bbclass hasn't been updated to use that.
 
-Please, let's remove the gnome-terminal default, it makes no sense to
-assume that the lowest common denominator is running bitbake from X...
+See http://bugs.openembedded.org/show_bug.cgi?id=1821#c9 for the proposed solution for at
+least 1).
 
--- 
-Justin Patrin
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGPwHPMkyGM64RGpERAjMsAJ9hwzbjdM/QDmpE/gPkB9taIK7wgACePfxv
+E306nGzJX80t3kuMxbtqe+Y=
+=W3Un
+-----END PGP SIGNATURE-----
 
 
