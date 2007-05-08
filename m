@@ -1,30 +1,35 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1HlEPq-0003JD-2D
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 May 2007 03:23:01 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 6A07310CA89;
-	Tue,  8 May 2007 11:22:30 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 21647-08; Tue, 8 May 2007 11:22:28 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id E2CD1B90D3;
-	Tue,  8 May 2007 11:22:28 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id D9A22B70149; Tue,  8 May 2007 11:22:28 +1000 (EST)
-Date: Tue, 8 May 2007 11:22:28 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Message-ID: <20070508012228.GA13161@twibble.org>
-References: <20070427105722.GA4340@twibble.org> <f1nrnr$pal$1@sea.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <f1nrnr$pal$1@sea.gmane.org>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: perl 5.8.8 is ready
+	(envelope-from <rpurdie@rpsys.net>) id 1HlOpw-00042x-To
+	for openembedded-devel@openembedded.org; Tue, 08 May 2007 14:30:38 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l48CU9PS005822
+	for <openembedded-devel@openembedded.org>;
+	Tue, 8 May 2007 13:30:09 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 05680-03 for <openembedded-devel@openembedded.org>;
+	Tue,  8 May 2007 13:30:06 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l48CU5NK005803
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Tue, 8 May 2007 13:30:05 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+In-Reply-To: <432beae0705062129i11f69731n1d12777f46a83316@mail.gmail.com>
+References: <35653307.20070503154732@gmail.com>
+	<1178198199.6312.30.camel@localhost.localdomain>
+	<432beae0705062129i11f69731n1d12777f46a83316@mail.gmail.com>
+Date: Tue, 08 May 2007 13:30:05 +0100
+Message-Id: <1178627405.6061.17.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: [ALERT] Security vulnerability with recent OE	bitbake.conf changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,33 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2007 01:23:12 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 May 2007 12:30:46 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, May 07, 2007 at 08:38:49PM +0200, Rolf Leggewie wrote:
-> Perl has been recently broken for
-> 
-> a) MACHINE="qemuarm" on angstrom
-> b) MACHINE="collie" on sharprom-compatible (worked two days prior)
+On Sun, 2007-05-06 at 21:29 -0700, Justin Patrin wrote:
+> Ummm...where? I tried that in my local.conf and it did nothing. I've
+> also grepped for PATCH_RESOLVER in both bitbake and oe and found
+> nothing.
 
-A log or something about what was going wrong might have helped ;)
+Sorry, it should be PATCHRESOLVE = "noop", my memory is playing tricks.
 
-Looking at irc logs it looks like you having problems with the patching
-failing which it doesn't seem to do for anyone else.
+> Please, let's remove the gnome-terminal default, it makes no sense to
+> assume that the lowest common denominator is running bitbake from X...
 
-My first suspect would be that you added the patch in question
-(letgcc-find-errno.patch) locally to test it (when I added it to
-bugzilla) and left it in there. Then a recent mt update has resulted
-in the change I pushed being included resulting in the patch being
-applied twice in the perl recipe.
+"noop" should be the default. There is no good argument for which
+terminal UI should/shouldn't be the default. Ideally I guess it would
+autoselect unless the user specifies, I'll give that some thought. A
+warning from sanity.bbclass about a missing command might be good too...
 
-So can you do an mtn diff on perl_5.8.8.bb and make sure this isn't
-the problem? If it isn't the problem I might need some more
-information (although I can't really thing of what else this could be
-and/or what would help figuring it out at the moment.)
+Cheers,
 
--- 
- Jamie Lenehan <lenehan@twibble.org>
+Richard
+
 
 
