@@ -1,25 +1,25 @@
-Received: from [64.233.166.176] (helo=py-out-1112.google.com)
+Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1HlPTV-0005U6-75
-	for openembedded-devel@openembedded.org; Tue, 08 May 2007 15:11:29 +0200
-Received: by py-out-1112.google.com with SMTP id a78so1417230pyh
+	(envelope-from <papercrane@gmail.com>) id 1HlTbE-0008Pc-30
+	for openembedded-devel@openembedded.org; Tue, 08 May 2007 19:35:44 +0200
+Received: by nz-out-0506.google.com with SMTP id j2so2114287nzf
 	for <openembedded-devel@openembedded.org>;
-	Tue, 08 May 2007 06:11:01 -0700 (PDT)
-Received: by 10.35.41.14 with SMTP id t14mr13218333pyj.1178629860684;
-	Tue, 08 May 2007 06:11:00 -0700 (PDT)
-Received: from cube ( [77.122.190.213])
-	by mx.google.com with ESMTP id c1sm7025684nzd.2007.05.08.06.10.59;
-	Tue, 08 May 2007 06:11:00 -0700 (PDT)
-Date: Tue, 8 May 2007 16:11:03 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <127969848.20070508161103@gmail.com>
-To: Richard Purdie <rpurdie@rpsys.net>
-In-Reply-To: <1178198199.6312.30.camel@localhost.localdomain>
+	Tue, 08 May 2007 10:35:14 -0700 (PDT)
+Received: by 10.114.94.1 with SMTP id r1mr2686554wab.1178645714320;
+	Tue, 08 May 2007 10:35:14 -0700 (PDT)
+Received: by 10.115.92.3 with HTTP; Tue, 8 May 2007 10:35:14 -0700 (PDT)
+Message-ID: <432beae0705081035i1b017e3eg652644541f257bbf@mail.gmail.com>
+Date: Tue, 8 May 2007 10:35:14 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1178627405.6061.17.camel@localhost.localdomain>
+MIME-Version: 1.0
 References: <35653307.20070503154732@gmail.com>
 	<1178198199.6312.30.camel@localhost.localdomain>
-MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
+	<432beae0705062129i11f69731n1d12777f46a83316@mail.gmail.com>
+	<1178627405.6061.17.camel@localhost.localdomain>
+Cc: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
 Subject: Re: [ALERT] Security vulnerability with recent OE bitbake.conf changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,49 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2007 13:11:39 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 08 May 2007 17:35:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Richard,
+On 5/8/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Sun, 2007-05-06 at 21:29 -0700, Justin Patrin wrote:
+> > Ummm...where? I tried that in my local.conf and it did nothing. I've
+> > also grepped for PATCH_RESOLVER in both bitbake and oe and found
+> > nothing.
+>
+> Sorry, it should be PATCHRESOLVE = "noop", my memory is playing tricks.
 
-Thursday, May 3, 2007, 4:16:39 PM, you wrote:
+Ah there we go, thanks a lot. I tried grepping for gnome-terminal and
+it hadn't lead me there.
 
-[]
+>
+> > Please, let's remove the gnome-terminal default, it makes no sense to
+> > assume that the lowest common denominator is running bitbake from X...
+>
+> "noop" should be the default. There is no good argument for which
+> terminal UI should/shouldn't be the default. Ideally I guess it would
+> autoselect unless the user specifies, I'll give that some thought. A
+> warning from sanity.bbclass about a missing command might be good too...
+>
 
-> So we need to find the real problem and fix that, probably somewhere in
-> patch.bbclass an error code isn't being propagated at a guess.
-
-        Ok, so here we go: http://bugs.openembedded.org/show_bug.cgi?id=2274
-
-> NOTE: Applying patch 'include-linux-types.patch'
-> sh: line 1: gnome-terminal: command not found
-> ERROR: Cannot proceed with manual patch resolution - 'gnome-terminal --disable-factory -t "$TERMWINDOWTITLE" -x bash --rcfile $TERMRCFILE' not found. Check TERMCMDRUN variable.
-> ERROR: Error in executing: /home/pfalcon/linux-ppc/org.openembedded.dev/packages/dosfstools/dosfstools_2.11.bb
-> ERROR: Exception:exceptions.SystemExit Message:1
-> ERROR: Printing the environment of the function
-
-Should be clear enough and helpful to whoever may enable manual mode,
-but don't have a required terminal app.
-
-> I will also hint at the use of PATCH_RESOLVER = "noop" which means the
-> user gets the old behaviour of patch failure aborts the build with no
-> help from any resolver. It should have always been the default but
-> wasn't. I'm not sure what the current default is but we can change it to
-> that if its not.
-
-        Ok, so please review patches above, and let's make these all
-changes ;-).
-
-> Cheers,
-
-> Richard
-
-
+It appears not to be, however...:-|
 
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+Justin Patrin
 
 
