@@ -1,35 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.166.176] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1HlOpw-00042x-To
-	for openembedded-devel@openembedded.org; Tue, 08 May 2007 14:30:38 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l48CU9PS005822
+	(envelope-from <pmiscml@gmail.com>) id 1HlPTV-0005U6-75
+	for openembedded-devel@openembedded.org; Tue, 08 May 2007 15:11:29 +0200
+Received: by py-out-1112.google.com with SMTP id a78so1417230pyh
 	for <openembedded-devel@openembedded.org>;
-	Tue, 8 May 2007 13:30:09 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 05680-03 for <openembedded-devel@openembedded.org>;
-	Tue,  8 May 2007 13:30:06 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l48CU5NK005803
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 8 May 2007 13:30:05 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-In-Reply-To: <432beae0705062129i11f69731n1d12777f46a83316@mail.gmail.com>
+	Tue, 08 May 2007 06:11:01 -0700 (PDT)
+Received: by 10.35.41.14 with SMTP id t14mr13218333pyj.1178629860684;
+	Tue, 08 May 2007 06:11:00 -0700 (PDT)
+Received: from cube ( [77.122.190.213])
+	by mx.google.com with ESMTP id c1sm7025684nzd.2007.05.08.06.10.59;
+	Tue, 08 May 2007 06:11:00 -0700 (PDT)
+Date: Tue, 8 May 2007 16:11:03 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <127969848.20070508161103@gmail.com>
+To: Richard Purdie <rpurdie@rpsys.net>
+In-Reply-To: <1178198199.6312.30.camel@localhost.localdomain>
 References: <35653307.20070503154732@gmail.com>
 	<1178198199.6312.30.camel@localhost.localdomain>
-	<432beae0705062129i11f69731n1d12777f46a83316@mail.gmail.com>
-Date: Tue, 08 May 2007 13:30:05 +0100
-Message-Id: <1178627405.6061.17.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [ALERT] Security vulnerability with recent OE	bitbake.conf changes
+MIME-Version: 1.0
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [ALERT] Security vulnerability with recent OE bitbake.conf changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,28 +34,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2007 12:30:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 08 May 2007 13:11:39 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2007-05-06 at 21:29 -0700, Justin Patrin wrote:
-> Ummm...where? I tried that in my local.conf and it did nothing. I've
-> also grepped for PATCH_RESOLVER in both bitbake and oe and found
-> nothing.
+Hello Richard,
 
-Sorry, it should be PATCHRESOLVE = "noop", my memory is playing tricks.
+Thursday, May 3, 2007, 4:16:39 PM, you wrote:
 
-> Please, let's remove the gnome-terminal default, it makes no sense to
-> assume that the lowest common denominator is running bitbake from X...
+[]
 
-"noop" should be the default. There is no good argument for which
-terminal UI should/shouldn't be the default. Ideally I guess it would
-autoselect unless the user specifies, I'll give that some thought. A
-warning from sanity.bbclass about a missing command might be good too...
+> So we need to find the real problem and fix that, probably somewhere in
+> patch.bbclass an error code isn't being propagated at a guess.
 
-Cheers,
+        Ok, so here we go: http://bugs.openembedded.org/show_bug.cgi?id=2274
 
-Richard
+> NOTE: Applying patch 'include-linux-types.patch'
+> sh: line 1: gnome-terminal: command not found
+> ERROR: Cannot proceed with manual patch resolution - 'gnome-terminal --disable-factory -t "$TERMWINDOWTITLE" -x bash --rcfile $TERMRCFILE' not found. Check TERMCMDRUN variable.
+> ERROR: Error in executing: /home/pfalcon/linux-ppc/org.openembedded.dev/packages/dosfstools/dosfstools_2.11.bb
+> ERROR: Exception:exceptions.SystemExit Message:1
+> ERROR: Printing the environment of the function
+
+Should be clear enough and helpful to whoever may enable manual mode,
+but don't have a required terminal app.
+
+> I will also hint at the use of PATCH_RESOLVER = "noop" which means the
+> user gets the old behaviour of patch failure aborts the build with no
+> help from any resolver. It should have always been the default but
+> wasn't. I'm not sure what the current default is but we can change it to
+> that if its not.
+
+        Ok, so please review patches above, and let's make these all
+changes ;-).
+
+> Cheers,
+
+> Richard
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
