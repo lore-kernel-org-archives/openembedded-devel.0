@@ -1,30 +1,26 @@
-Received: from [157.27.6.133] (helo=mailgw2.univr.it)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <cailotto@sci.univr.it>) id 1HloaK-0006u6-Oy
-	for openembedded-devel@openembedded.org; Wed, 09 May 2007 18:00:14 +0200
-Received: (qmail 52586 invoked by uid 1010); 9 May 2007 15:59:38 -0000
-Received: from cailotto@sci.univr.it by mailgw2.univr.it by uid 1003 with
-	qmail-scanner-1.22-st-qms 
-	(spamassassin: 2.63.  Clear:RC:1(157.27.252.10):. 
-	Processed in 0.062066 secs); 09 May 2007 15:59:38 -0000
-X-Antivirus-UNIVR-Mail-From: cailotto@sci.univr.it via mailgw2.univr.it
-X-Antivirus-UNIVR: 1.22-st-qms (Clear:RC:1(157.27.252.10):. Processed in
-	0.062066 secs Process 52580)
-Received: from profs.sci.univr.it (157.27.252.10)
-	by mailgw2.univr.it with SMTP; 9 May 2007 15:59:38 -0000
-Received: from kai (kai.sci.univr.it [157.27.242.56])
-	by profs.sci.univr.it (Postfix) with ESMTP id 9CBD58001A
+Received: from [64.233.184.239] (helo=wr-out-0506.google.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1Hls5e-0005z7-D6
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 May 2007 21:44:46 +0200
+Received: by wr-out-0506.google.com with SMTP id 55so341349wri
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2007 17:59:37 +0200 (CEST)
-From: "Stefano Cailotto" <cailotto@sci.univr.it>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 9 May 2007 17:59:38 +0200
-Message-ID: <001f01c79253$0bf2c970$38f21b9d@kai>
+	Wed, 09 May 2007 12:44:10 -0700 (PDT)
+Received: by 10.114.175.16 with SMTP id x16mr295381wae.1178739849198;
+	Wed, 09 May 2007 12:44:09 -0700 (PDT)
+Received: by 10.114.147.18 with HTTP; Wed, 9 May 2007 12:44:09 -0700 (PDT)
+Message-ID: <bdb0025f0705091244u19ce0129h957f9c34154454f0@mail.gmail.com>
+Date: Wed, 9 May 2007 16:44:09 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: "Using the OpenEmbedded metadata to build Distributions"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <432beae0705021338x7ca36c0oc937a6b1b03f6db5@mail.gmail.com>
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 11
-Thread-Index: AceSUwvWMfzNWlXjSCmXOPmALoxaKg==
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
-Subject: OE on Kontron eb425
+References: <bdb0025f0705021104x23d2c407rb4da0e48e24eb911@mail.gmail.com>
+	<200705022051.03720.openembedded@hrw.one.pl>
+	<bdb0025f0705021252w7e32b305ybf9c914c1cb1edc0@mail.gmail.com>
+	<432beae0705021338x7ca36c0oc937a6b1b03f6db5@mail.gmail.com>
+Subject: Re: generating debian source packages (dsc)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,58 +34,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2007 16:00:20 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Wed, 09 May 2007 19:44:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Leon, 
-I've extracted kontron modifications with a diff between their shipped
-kernel and a fresh one.
-I don't know if it is possible to flash even the bootloader...
-Looking a bit into source code, there are several kontron patches both for
-drivers and kernel boot.
-I'm trying to KOntron kernel into OE using Kontron toolchain, but without
-success..
+I'm trying to use inherit sourcepkg without success.
+Does anybody has any suggestion about the following error?
 
-Hello Stefano,
+NOTE: package shasum-native-1.0: started
+NOTE: package shasum-native-1.0-r1: task do_create_orig_tgz: started
+NOTE: <type 'exceptions.IndexError'>:list index out of range while evaluating:
 
-On 5/4/07, Stefano Cailotto <cailotto at sci.univr.it> wrote:
-> Hi all,
-> I'm trying to build something usable for a kontron eb425 board, based on
-an
-> intel ixp425.
-> I tried to compile using a generic ixp4xxbe, but when loading, the kernel
-> stops after uncompressing reporting a CRC error.
-> It seems that Kontron EmbeddedLinux development kit performs something on
-> the kernel before making zImage in order to load it in a specifed memory
-> location.
+        mkdir -p /indt/mamona/openembedded/tmp/deploy/source
+        cd /indt/mamona/openembedded/tmp/work/shasum-native-1.0-r1
+        for i in .pc autom4te.cache; do
+                echo $i >> temp/exclude-from-file
+        done
+
+        src_tree=${@get_src_tree(d)}
+
+        echo $src_tree
+        oenote "Creating .orig.tar.gz in
+/indt/mamona/openembedded/tmp/deploy/source/shasum-native-1.0.orig.tar.gz"
+        tar cvzf
+/indt/mamona/openembedded/tmp/deploy/source/shasum-native-1.0.orig.tar.gz
+--exclude-from temp/exclude-from-file $src_tree
+        cp -pPR $src_tree $src_tree.orig
+
+NOTE: <type 'exceptions.IndexError'>:list index out of range while evaluating:
+
+        cd /indt/mamona/openembedded/tmp/work/shasum-native-1.0-r1
+        for i in .pc autom4te.cache; do
+                echo $i >> temp/exclude-from-file
+        done
+
+
+        src_tree=${@get_src_tree(d)}
+
+        for i in `find . -maxdepth 1 -type f`; do
+                mkdir -p $src_tree/mamona/files
+                cp $i $src_tree/mamona/files
+        done
+
+        oenote "Creating .diff.gz in
+/indt/mamona/openembedded/tmp/deploy/source/shasum-native-1.0-r1.diff.gz"
+        LC_ALL=C TZ=UTC0 diff --exclude-from=temp/exclude-from-file
+-Naur $src_tree.orig $src_tree | gzip -c >
+/indt/mamona/openembedded/tmp/deploy/source/shasum-native-1.0-r1.diff.gz
+        rm -rf $src_tree.orig
+
+NOTE: <type 'exceptions.IndexError'>:list index out of range while evaluating:
+
+        src_tree=${@get_src_tree(d)}
+        dest=/indt/mamona/openembedded/tmp/work/shasum-native-1.0-r1/$src_tree/mamona
+        mkdir -p $dest
+
+        cp /indt/mamona/openembedded/org.openembedded.dev/packages/shasum/shasum-native.bb
+$dest
+
+ERROR: function do_create_orig_tgz failed
+ERROR: log data follows
+(/indt/mamona/openembedded/tmp/work/shasum-native-1.0-r1/temp/log.do_create_orig_tgz.6911)
+| /indt/mamona/openembedded/tmp/work/shasum-native-1.0-r1/temp/run.do_create_orig_tgz.6911:
+line 510: sourcepkg_do_create_orig_tgz: command not found
+NOTE: Task failed:
+/indt/mamona/openembedded/tmp/work/shasum-native-1.0-r1/temp/log.do_create_orig_tgz.6911
+NOTE: package shasum-native-1.0-r1: task do_create_orig_tgz: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package shasum-native-1.0: failed
+
+
+On 5/2/07, Justin Patrin <papercrane@gmail.com> wrote:
+> On 5/2/07, Rodrigo Vivi <rodrigo.vivi@gmail.com> wrote:
+> > > classes/sourcepkg.bbclass is something which you want to extend
+> >
+> > I've thought about it but I'm not sure that it is a good idea because
+> > just few projects (or just mine) needs the dsc file .......... unless
+> > that I code another sourcedsc.bbclass that inherit the
+> > sourcedpkg.bbclass... o you think that it will work???  I'll think
+> > about it...
+> >
 >
-There are some IXP42x users on OE, mostly for the NSLU device from
-Linksys/Cisco, the Intel dev board (IXDP425) and some custom boards,
-but I have not see the Kontron board yet.
-
-With the reported problem, it would help if you understand or at least
-could tell where to find the details on the boot loader.
-
-Ideally, you would want to boot loader to be buildable from source
-instead of relying on some binary on flash.
-
-Regards,
-
-Leon.
-
----------------------------------------------------------------------------
-  Stefano Cailotto - Research Consultant
----------------------------------------------------------------------------
-  EDALab - Networked Embedded Systems
-  c/o  Dipartimento di Informatica - Universita` di Verona
-  Strada le Grazie, 15 - 37134 Verona (Italy)
----------------------------------------------------------------------------
-  email: cailotto@sci.univr.it stefano.cailotto@edalab.it      
-  web:  http://www.edalab.it
-  tel: +39-045-802-7062 fax: +39-045-802-7068
----------------------------------------------------------------------------
-
+> Yes, this is what Marcin meant. Create your own sourcedsc.bbclass
+> which inherits sourcepkg.bbclass. This is how, for example,
+> efl.bbclass and e.bbclass work.
+>
+> > Another doubt that I forgot to mention on last email is about changelog:
+> > I'm generating a almost empty changelog file. Is there any official
+> > and/or more appropriated way to do that?
+> >
+> > Thanks,
+> > Vivi.
+> >
+> > >
+> > > --
+> > > JID: hrw-jabber.org
+> > > OpenEmbedded developer/consultant
+> > >
+> > >       I'm trying to decide if I should kill you or simply feign death
+> > >       until you feel awkward and leave.
+> > >
+> > >
+> > >
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> > >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+>
+>
+> --
+> Justin Patrin
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
