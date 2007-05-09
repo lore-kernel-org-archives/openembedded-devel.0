@@ -1,26 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.166.176] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HlkJi-0001he-P1
-	for openembedded-devel@openembedded.org; Wed, 09 May 2007 13:26:49 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l49BQ8Lr017632 for <openembedded-devel@openembedded.org>;
-	Wed, 9 May 2007 13:26:08 +0200
-Message-ID: <4641AFCB.6080203@dominion.kabel.utwente.nl>
-Date: Wed, 09 May 2007 13:26:03 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <464130FC.7030008@gmail.com>	<02827798.20070509123821@gmail.com>	<4641A311.4030907@klever.net>	<4641A5A2.8050108@dominion.kabel.utwente.nl>
+	(envelope-from <pmiscml@gmail.com>) id 1HlkUG-00026s-QX
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 May 2007 13:37:40 +0200
+Received: by py-out-1112.google.com with SMTP id n39so117497pyh
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 May 2007 04:37:07 -0700 (PDT)
+Received: by 10.65.141.18 with SMTP id t18mr874199qbn.1178710626945;
+	Wed, 09 May 2007 04:37:06 -0700 (PDT)
+Received: from cube ( [77.122.190.213])
+	by mx.google.com with ESMTP id 38sm7899411nzf.2007.05.09.04.37.05;
+	Wed, 09 May 2007 04:37:05 -0700 (PDT)
+Date: Wed, 9 May 2007 14:37:09 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <818235002.20070509143709@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4641AFCB.6080203@dominion.kabel.utwente.nl>
+References: <464130FC.7030008@gmail.com> <02827798.20070509123821@gmail.com>
+	<4641A311.4030907@klever.net>
+	<4641A5A2.8050108@dominion.kabel.utwente.nl>
 	<4641A902.6020506@gmail.com>
-In-Reply-To: <4641A902.6020506@gmail.com>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<4641AFCB.6080203@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
 Subject: Re: QA for intentionally unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,37 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2007 11:27:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 09 May 2007 11:37:41 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Junqian Gordon Xu schreef:
-> Koen Kooi wrote:
->> Or we could patch package.bbclass[1] to do:
->>
->> PACKAGES += "${PN}-leftovers"
->> FILES_${PN}-leftovers = "/"
->>
->> I'm not sure if that works, but if it does, we would be able to spot leftovers more easily
->> by looking at deploy.
-> 
-> Again, how do you know which one is "intentionally" left-over vs. which 
-> one is not?
+Wednesday, May 9, 2007, 2:26:03 PM, you wrote:
 
-I can't think of a valid reason for not packaging files.
 
-regards,
+> Junqian Gordon Xu schreef:
+>> Koen Kooi wrote:
+>>> Or we could patch package.bbclass[1] to do:
+>>>
+>>> PACKAGES += "${PN}-leftovers"
+>>> FILES_${PN}-leftovers = "/"
+>>>
+>>> I'm not sure if that works, but if it does, we would be able to spot leftovers more easily
+>>> by looking at deploy.
+>> 
+>> Again, how do you know which one is "intentionally" left-over vs. which 
+>> one is not?
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> I can't think of a valid reason for not packaging files.
 
-iD8DBQFGQa/LMkyGM64RGpERAjF7AJkBFh9SE86gjvybHZ7PRwc0+Cl2qwCcDV1h
-tStk9ih9NSv558uCHvxA4G8=
-=caUf
------END PGP SIGNATURE-----
+        busybox doesn't package symlinks, as update-alternative
+recreates them on install.
+
+
+        But I agree that catch-all package is better idea than another
+adhoc var. Except that we probably should add ${PN}-unshipped and
+${PN}-leftovers to distinguish those intentional vs missed cases.
+
+> regards,
+
+> Koen
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
