@@ -1,26 +1,23 @@
-Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
+Received: from [64.233.166.176] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1HlTbE-0008Pc-30
-	for openembedded-devel@openembedded.org; Tue, 08 May 2007 19:35:44 +0200
-Received: by nz-out-0506.google.com with SMTP id j2so2114287nzf
-	for <openembedded-devel@openembedded.org>;
-	Tue, 08 May 2007 10:35:14 -0700 (PDT)
-Received: by 10.114.94.1 with SMTP id r1mr2686554wab.1178645714320;
-	Tue, 08 May 2007 10:35:14 -0700 (PDT)
-Received: by 10.115.92.3 with HTTP; Tue, 8 May 2007 10:35:14 -0700 (PDT)
-Message-ID: <432beae0705081035i1b017e3eg652644541f257bbf@mail.gmail.com>
-Date: Tue, 8 May 2007 10:35:14 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1178627405.6061.17.camel@localhost.localdomain>
+	(envelope-from <xjqian@gmail.com>) id 1Hlbu4-0006Z7-MV
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 May 2007 04:27:44 +0200
+Received: by py-out-1112.google.com with SMTP id n39so33193pyh
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 May 2007 19:27:13 -0700 (PDT)
+Received: by 10.65.84.5 with SMTP id m5mr61357qbl.1178677633307;
+	Tue, 08 May 2007 19:27:13 -0700 (PDT)
+Received: from ?192.168.10.106? ( [71.85.151.212])
+	by mx.google.com with ESMTP id c12sm36900859nzc.2007.05.08.19.27.11;
+	Tue, 08 May 2007 19:27:12 -0700 (PDT)
+Message-ID: <464130FC.7030008@gmail.com>
+Date: Tue, 08 May 2007 21:25:00 -0500
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Icedove 1.5.0.10 (X11/20070329)
 MIME-Version: 1.0
-References: <35653307.20070503154732@gmail.com>
-	<1178198199.6312.30.camel@localhost.localdomain>
-	<432beae0705062129i11f69731n1d12777f46a83316@mail.gmail.com>
-	<1178627405.6061.17.camel@localhost.localdomain>
-Cc: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-Subject: Re: [ALERT] Security vulnerability with recent OE bitbake.conf changes
+To: openembedded-devel@lists.openembedded.org
+Subject: QA for intentionally unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,35 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2007 17:35:44 -0000
+X-List-Received-Date: Wed, 09 May 2007 02:27:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 5/8/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Sun, 2007-05-06 at 21:29 -0700, Justin Patrin wrote:
-> > Ummm...where? I tried that in my local.conf and it did nothing. I've
-> > also grepped for PATCH_RESOLVER in both bitbake and oe and found
-> > nothing.
->
-> Sorry, it should be PATCHRESOLVE = "noop", my memory is playing tricks.
+Now there is no way to distinguish if the following is intensional by 
+the package maintainer or an oversight without taking a closer look at 
+the contents
 
-Ah there we go, thanks a lot. I tried grepping for gnome-terminal and
-it hadn't lead me there.
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/lib/libpython2.4.so
+NOTE:   /usr/lib/.debug/libpython2.4.so.1.0
+NOTE:   /usr/share/man/man1/python.1
+NOTE:   /usr/bin/python2.4
+NOTE:   /usr/bin/smtpd.py
+NOTE:   /usr/bin/.debug/python
 
->
-> > Please, let's remove the gnome-terminal default, it makes no sense to
-> > assume that the lowest common denominator is running bitbake from X...
->
-> "noop" should be the default. There is no good argument for which
-> terminal UI should/shouldn't be the default. Ideally I guess it would
-> autoselect unless the user specifies, I'll give that some thought. A
-> warning from sanity.bbclass about a missing command might be good too...
->
+Maybe we should have something in insane.bb to take care of the 
+intentionally unpackaged crusts. So we can do something like the 
+following in a bb file to intensionally leave out some garbage unpackaged:
 
-It appears not to be, however...:-|
+UNSHIPPED = "${libdir}/libpython2.4.so ${bindir}/smtpd.py"  #reason why 
+not package/ship it
 
--- 
-Justin Patrin
+so during do_package or package_QA, it would show as
+
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/lib/libpython2.4.so   UNSHIPPED #reason why not 
+packaged/ship it
+NOTE:   /usr/lib/.debug/libpython2.4.so.1.0
+NOTE:   /usr/share/man/man1/python.1
+NOTE:   /usr/bin/python2.4
+NOTE:   /usr/bin/smtpd.py  UNSHIPPED #reason why not packaged/ship it
+NOTE:   /usr/bin/.debug/python
+
+Is SUNK a better word than UNSHIPPED?
+
+Gordon
 
 
