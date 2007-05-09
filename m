@@ -1,23 +1,26 @@
-Received: from [64.233.166.176] (helo=py-out-1112.google.com)
+Received: from [64.233.162.232] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <xjqian@gmail.com>) id 1Hlbu4-0006Z7-MV
+	(envelope-from <pmiscml@gmail.com>) id 1HlidH-0004bH-V4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 May 2007 04:27:44 +0200
-Received: by py-out-1112.google.com with SMTP id n39so33193pyh
+	Wed, 09 May 2007 11:38:52 +0200
+Received: by nz-out-0506.google.com with SMTP id m22so118698nzf
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 May 2007 19:27:13 -0700 (PDT)
-Received: by 10.65.84.5 with SMTP id m5mr61357qbl.1178677633307;
-	Tue, 08 May 2007 19:27:13 -0700 (PDT)
-Received: from ?192.168.10.106? ( [71.85.151.212])
-	by mx.google.com with ESMTP id c12sm36900859nzc.2007.05.08.19.27.11;
-	Tue, 08 May 2007 19:27:12 -0700 (PDT)
-Message-ID: <464130FC.7030008@gmail.com>
-Date: Tue, 08 May 2007 21:25:00 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Icedove 1.5.0.10 (X11/20070329)
+	Wed, 09 May 2007 02:38:18 -0700 (PDT)
+Received: by 10.64.181.12 with SMTP id d12mr611733qbf.1178703498630;
+	Wed, 09 May 2007 02:38:18 -0700 (PDT)
+Received: from cube ( [77.122.190.213])
+	by mx.google.com with ESMTP id m2sm7787549nzf.2007.05.09.02.38.17;
+	Wed, 09 May 2007 02:38:18 -0700 (PDT)
+Date: Wed, 9 May 2007 12:38:21 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <02827798.20070509123821@gmail.com>
+To: Junqian Gordon Xu <xjqian@gmail.com>
+In-Reply-To: <464130FC.7030008@gmail.com>
+References: <464130FC.7030008@gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: QA for intentionally unpackaged files
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: QA for intentionally unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,42 +34,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2007 02:27:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 09 May 2007 09:38:55 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Now there is no way to distinguish if the following is intensional by 
-the package maintainer or an oversight without taking a closer look at 
-the contents
+Hello Junqian,
 
-NOTE: the following files were installed but not shipped in any package:
-NOTE:   /usr/lib/libpython2.4.so
-NOTE:   /usr/lib/.debug/libpython2.4.so.1.0
-NOTE:   /usr/share/man/man1/python.1
-NOTE:   /usr/bin/python2.4
-NOTE:   /usr/bin/smtpd.py
-NOTE:   /usr/bin/.debug/python
+Wednesday, May 9, 2007, 5:25:00 AM, you wrote:
 
-Maybe we should have something in insane.bb to take care of the 
-intentionally unpackaged crusts. So we can do something like the 
-following in a bb file to intensionally leave out some garbage unpackaged:
+> Now there is no way to distinguish if the following is intensional by 
+> the package maintainer or an oversight without taking a closer look at
+> the contents
 
-UNSHIPPED = "${libdir}/libpython2.4.so ${bindir}/smtpd.py"  #reason why 
-not package/ship it
+        So, maybe "closer look" is indeed a solution here?
 
-so during do_package or package_QA, it would show as
+> NOTE: the following files were installed but not shipped in any package:
+> NOTE:   /usr/lib/libpython2.4.so
+> NOTE:   /usr/lib/.debug/libpython2.4.so.1.0
+> NOTE:   /usr/share/man/man1/python.1
+> NOTE:   /usr/bin/python2.4
+> NOTE:   /usr/bin/smtpd.py
+> NOTE:   /usr/bin/.debug/python
 
-NOTE: the following files were installed but not shipped in any package:
-NOTE:   /usr/lib/libpython2.4.so   UNSHIPPED #reason why not 
-packaged/ship it
-NOTE:   /usr/lib/.debug/libpython2.4.so.1.0
-NOTE:   /usr/share/man/man1/python.1
-NOTE:   /usr/bin/python2.4
-NOTE:   /usr/bin/smtpd.py  UNSHIPPED #reason why not packaged/ship it
-NOTE:   /usr/bin/.debug/python
+> Maybe we should have something in insane.bb to take care of the 
+> intentionally unpackaged crusts. So we can do something like the 
+> following in a bb file to intensionally leave out some garbage unpackaged:
 
-Is SUNK a better word than UNSHIPPED?
+> UNSHIPPED = "${libdir}/libpython2.4.so ${bindir}/smtpd.py"  #reason why
+> not package/ship it
 
-Gordon
+        Who exactly will go over all recipes and add such lines?
+
+> so during do_package or package_QA, it would show as
+
+> NOTE: the following files were installed but not shipped in any package:
+> NOTE:   /usr/lib/libpython2.4.so   UNSHIPPED #reason why not 
+> packaged/ship it
+
+        No, thanks, it likely shouldn't dump them at all then.
+
+> NOTE:   /usr/lib/.debug/libpython2.4.so.1.0
+> NOTE:   /usr/share/man/man1/python.1
+> NOTE:   /usr/bin/python2.4
+> NOTE:   /usr/bin/smtpd.py  UNSHIPPED #reason why not packaged/ship it
+> NOTE:   /usr/bin/.debug/python
+
+> Is SUNK a better word than UNSHIPPED?
+
+        No.
+
+> Gordon
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
