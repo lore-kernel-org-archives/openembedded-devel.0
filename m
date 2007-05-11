@@ -1,17 +1,26 @@
-Received: from [216.182.48.170] (helo=beastbox.kfctristate.com)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <tom@openhardware.net>) id 1HmZCQ-0003DX-I7
-	for openembedded-devel@openembedded.org; Fri, 11 May 2007 19:46:40 +0200
-Received: (qmail 8326 invoked from network); 11 May 2007 17:45:47 -0000
-Received: from unknown (HELO ?172.30.107.2?) (172.30.107.2)
-	by beastbox.kfctristate.com with SMTP; 11 May 2007 17:45:47 -0000
-Message-ID: <4644ABCB.6080202@openhardware.net>
-Date: Fri, 11 May 2007 13:45:47 -0400
-From: Tom Walsh <tom@openhardware.net>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070305)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HmZX9-0003cd-00
+	for openembedded-devel@openembedded.org; Fri, 11 May 2007 20:08:03 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l4BI7ELr024737 for <openembedded-devel@openembedded.org>;
+	Fri, 11 May 2007 20:07:14 +0200
+Message-ID: <4644B0D2.8020409@dominion.kabel.utwente.nl>
+Date: Fri, 11 May 2007 20:07:14 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: do_rootfs fails
+To: openembedded-devel@openembedded.org
+References: <4644ABCB.6080202@openhardware.net>
+In-Reply-To: <4644ABCB.6080202@openhardware.net>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: do_rootfs fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -25,89 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2007 17:46:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 11 May 2007 18:08:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Ok, I admit it, I am totally confused by this whole "debian", 
-"multimachine", "package_ipk" stuff.  I've been able to avoid 
-understanding this and think that this might be why bootstrap.image 
-won't build a filesystem image.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Prior to a month ago, I was using my own task + image bb files to build 
-my image.  Since a lot of work has been done to make the task-base more 
-generic, I have moved my project over to using the stock 
-bootstrap-image.bb and task-base.bb files.  However, it fails to build 
-properly.
+Tom Walsh schreef:
 
-When running a "bitbake bootstrap-image", everything builds but then 
-fails with:
+<snip problem description>
 
-========= begin ============
-[tom@jtag oezipit]$ bitbake bootstrap-image
-NOTE: Using cache in '/home/tom/oezipit/tmp/cache/zipit'
-NOTE: Handling BitBake files: \ (4534/4534) [100 %]
-NOTE: Parsing finished. 4329 cached, 0 parsed, 205 skipped, 0 masked.
+> OE Build Configuration:
+> BB_VERSION     = "1.6.7"
 
-NOTE: build 200705111324: started
+Tom: Upgrade to 1.8.2 or use the bitbake-1.8 branch (1.8.3 atm).
+All: Are we still going to wait 1.5 months with requiring 1.8.x? I've seen enough proof
+that 1.6.x is broken with current .dev, with no effort to fix it. "Giving people time to
+prepare the upgrade" has now turned into "Stabbing user in the eye" :(
 
-OE Build Configuration:
-BB_VERSION     = "1.6.7"
-OE_REVISION    = "<unknown>"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux"
-MACHINE        = "zipit"
-DISTRO         = "zipit"
-DISTRO_VERSION = "1.0"
-TARGET_FPU     = "soft"
+regards,
 
-NOTE: multiple providers are available (db3, db);
-NOTE: consider defining PREFERRED_PROVIDER_virtual/db
-NOTE: multiple providers are available (db3-native, db-native);
-NOTE: consider defining PREFERRED_PROVIDER_virtual/db-native
-NOTE: package bootstrap-image-1.0: started
-NOTE: package bootstrap-image-1.0-r0: task do_rootfs: started
-ERROR: function do_rootfs failed
-ERROR: see log in 
-/home/tom/oezipit/tmp/work/zipit-linux/bootstrap-image-1.0-r0/temp/log.do_rootfs.17150
-NOTE: Task failed: 
-/home/tom/oezipit/tmp/work/zipit-linux/bootstrap-image-1.0-r0/temp/log.do_rootfs.17150
-NOTE: package bootstrap-image-1.0-r0: task do_rootfs: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package bootstrap-image-1.0: failed
-ERROR: Build of bootstrap-image failed
-========= snip =============
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-When I check the logfile, it says that "sh: fakeroot: command not 
-found".  This is correct, fakeroot-native has NOT been built.  So, I do 
-a "bitbake -c rebuild fakeroot-native", then run "bitbake 
-bootstrap-image" again.
-
-It then fails with a logfile message of 
-"/home/tom/oezipit/tmp/work/zipit-linux/bootstrap-image-1.0-r0/temp/run.do_rootfs.24175: 
-line 312: ipkg-cl: command not found".  Again, this is true, ipkg-native 
-is not present.  So, I do a "bitbake -c rebuild ipkg-native", then run 
-"bitbake bootstrap-image" again.
-
-Now it builds the filesystem target tarball image.
-
-How can I automate those needs for fakeroot-native and ipkg-native?  I'm 
-not sure where to look, this was working a few weeks ago.
-
-Regards,
-
-TomW
-
-
-
-
-
--- 
-Tom Walsh - WN3L - Embedded Systems Consultant
-http://openhardware.net http://cyberiansoftware.com http://openzipit.org
-"Windows? No thanks, I have work to do..."
-----------------------------------------------------
-
-
+iD8DBQFGRLDRMkyGM64RGpERAm1ZAKCBtqmqLrk3MXEPldP9AvEjxxJSsACggk//
+FJLY3HdrD/EF2xvBzEOJvts=
+=qgbE
+-----END PGP SIGNATURE-----
 
 
