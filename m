@@ -1,32 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1HmHiq-00034M-B6
-	for openembedded-devel@openembedded.org; Fri, 11 May 2007 01:06:57 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4AN6CCE011487;
-	Fri, 11 May 2007 00:06:12 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11296-03; Fri, 11 May 2007 00:06:09 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4AN65qa011479
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Fri, 11 May 2007 00:06:05 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <31583224.20070510180054@gmail.com>
-References: <1176760923.4623f25b913f9@dominion.kabel.utwente.nl>
-	<20070418090235.GA21841@twibble.org>
-	<46262A0F.1050805@dominion.kabel.utwente.nl>
-	<20070419014949.GA6540@twibble.org> <31583224.20070510180054@gmail.com>
-Date: Fri, 11 May 2007 00:06:11 +0100
-Message-Id: <1178838371.20362.2.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Making /var/lib persistent
+	(envelope-from <pmiscml@gmail.com>) id 1HmYU4-00076q-H4
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 May 2007 19:00:50 +0200
+Received: by py-out-1112.google.com with SMTP id n39so810549pyh
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 May 2007 10:00:01 -0700 (PDT)
+Received: by 10.35.63.2 with SMTP id q2mr5284203pyk.1178902801637;
+	Fri, 11 May 2007 10:00:01 -0700 (PDT)
+Received: from cube ( [77.122.190.213])
+	by mx.google.com with ESMTP id 38sm10083072nzf.2007.05.11.10.00.00;
+	Fri, 11 May 2007 10:00:01 -0700 (PDT)
+Date: Fri, 11 May 2007 20:00:05 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1353801661.20070511200005@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <127969848.20070508161103@gmail.com>
+References: <35653307.20070503154732@gmail.com>
+	<1178198199.6312.30.camel@localhost.localdomain>
+	<127969848.20070508161103@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [ALERT] Security vulnerability with recent OE bitbake.conf changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,39 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2007 23:07:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 May 2007 17:01:10 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2007-05-10 at 18:00 +0300, Paul Sokolovsky wrote:
-> Hello Jamie,
-> 
-> Thursday, April 19, 2007, 4:49:50 AM, you wrote:
-> 
-> > On Wed, Apr 18, 2007 at 07:24:15AM -0700, Koen Kooi wrote:
-> > [...]
-> >> Sound like a good idea, do you have a patch for this?
-> 
-> > Try this out:
-> 
-> >   http://twibble.org/dist/oe/var-volatiles-1.patch
-> 
-> > I've tested it locally both with and without tmpfs mounted on
-> > /var/volatile and all seems to work as expected.
-> 
->         Any news on this? I've been running with this patch soon since
-> its original post and don't see any issues. One small nuisance is that
-> ls -l /var/log doesn't show what you want, but hardly something can be
-> done about that, plus shell completion uses /var/log/ immediately.
-> 
->         I suggest committing this patch.
+Hello,
 
-The idea sounded sane to me when I read about it so if its working, I
-say go for it...
+Tuesday, May 8, 2007, 4:11:03 PM:
 
-Cheers,
+> Hello Richard,
 
-Richard
+> Thursday, May 3, 2007, 4:16:39 PM, you wrote:
+
+> []
+
+>> So we need to find the real problem and fix that, probably somewhere in
+>> patch.bbclass an error code isn't being propagated at a guess.
+
+>         Ok, so here we go:
+> http://bugs.openembedded.org/show_bug.cgi?id=2274
+
+        This was committed, as well as PATCHRESOLVE set to "noop" by
+default.
+
+[]
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
