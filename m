@@ -1,22 +1,32 @@
-Received: from [62.27.45.185] (helo=argo.arachnion.zzZZzz.net)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1HmZyU-0007rQ-AN
+	(envelope-from <oe@hentges.net>) id 1HmfAh-0006hI-Db
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 May 2007 20:36:19 +0200
-Received: from pd9539b78.dip0.t-ipconnect.de ([217.83.155.120])
-	by argo.arachnion.zzZZzz.net with esmtpa (Exim 4.42)
-	id 1HmZpD-0007KU-4n for openembedded-devel@lists.openembedded.org;
-	Fri, 11 May 2007 20:26:43 +0200
-Message-ID: <4644B4D1.5010803@klever.net>
-Date: Fri, 11 May 2007 20:24:17 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070321)
-MIME-Version: 1.0
+	Sat, 12 May 2007 02:09:15 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id EB54C3081EB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 May 2007 02:08:26 +0200 (CEST)
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 12035-05 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 May 2007 02:08:24 +0200 (CEST)
+Received: from mhcln04.hentges.priv (xdsl-87-78-53-91.netcologne.de
+	[87.78.53.91]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id 1A1EE3081E8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 May 2007 02:08:04 +0200 (CEST)
+From: Matthias Hentges <oe@hentges.net>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4644B0D2.8020409@dominion.kabel.utwente.nl>
 References: <4644ABCB.6080202@openhardware.net>
 	<4644B0D2.8020409@dominion.kabel.utwente.nl>
-In-Reply-To: <4644B0D2.8020409@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.3.0
+Date: Sat, 12 May 2007 02:07:53 +0200
+Message-Id: <1178928474.4954.18.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
 Subject: Re: do_rootfs fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,32 +41,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2007 18:36:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 12 May 2007 00:09:15 -0000
+X-Groupsio-MsgNum: 2046
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-IklzB+HIlaGQRDMgebwc"
 
-> All: Are we still going to wait 1.5 months with requiring 1.8.x? I've seen enough proof
-> that 1.6.x is broken with current .dev, with no effort to fix it. "Giving people time to
+--=-IklzB+HIlaGQRDMgebwc
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
+
+Am Freitag, den 11.05.2007, 20:07 +0200 schrieb Koen Kooi:
+
+> All: Are we still going to wait 1.5 months with requiring 1.8.x? I've see=
+n enough proof
+> that 1.6.x is broken with current .dev, with no effort to fix it. "Giving=
+ people time to
 > prepare the upgrade" has now turned into "Stabbing user in the eye" :(
+>=20
+> regards,
+>=20
+> Koen
 
-There's also an option of asking Tom to bitbake -DDD and send it to
-zecke, because I couldn't find time to try BB 1.6 for him again. And let
-him apply the patch that fixes this problem:
+1.8.x has a show-stopper freeze-bug for some users ( including myself )
+which has not been fixed or even looked into yet.
 
-Index: lib/bb/parse/parse_py/BBHandler.py
-===================================================================
---- lib/bb/parse/parse_py/BBHandler.py  (revision 817)
-+++ lib/bb/parse/parse_py/BBHandler.py  (working copy)
-@@ -66,7 +66,9 @@
-         if not file in __inherit_cache.split():
-             debug(2, "BB %s:%d: inheriting %s" % (fn, lineno, file))
-             __inherit_cache += " %s" % file
-+            data.setVar('__inherit_cache', __inherit_cache, d)
-             include(fn, file, d)
-+            __inherit_cache = data.getVar('__inherit_cache', d) or ""
-     data.setVar('__inherit_cache', __inherit_cache, d)
+--=20
+Matthias 'CoreDump' Hentges=20
+Cologne / Germany
 
-Love,
-H
+Webmaster of Hentges.net & Embedded Linux Developer
+GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
+
+My OS: Debian SID: Geek by Nature, Linux by Choice
 
 
+
+--=-IklzB+HIlaGQRDMgebwc
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQBGRQVZPXyoPq8wMNkRAhTWAKCB3g8c3aoUfjnsLCYjGzBbxkdraACfU7E6
+x4TgEEJgFbzLsivSLaTZoA0=
+=ieLN
+-----END PGP SIGNATURE-----
+
+--=-IklzB+HIlaGQRDMgebwc--
