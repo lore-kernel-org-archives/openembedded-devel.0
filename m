@@ -1,27 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HmymM-0008Fa-2y
-	for openembedded-devel@openembedded.org; Sat, 12 May 2007 23:05:26 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l4CL4TLr030667 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 May 2007 23:04:29 +0200
-Message-ID: <46462BDD.6000302@dominion.kabel.utwente.nl>
-Date: Sat, 12 May 2007 23:04:29 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+	(envelope-from <skoroneos@digital-opsis.com>) id 1Hmz0P-0008Rs-Vm
+	for openembedded-devel@openembedded.org; Sat, 12 May 2007 23:19:58 +0200
+Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B002BFF41 for openembedded-devel@openembedded.org;
+	Sat, 12 May 2007 23:18:07 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Sun, 13 May 2007 00:19:03 +0300
+Message-ID: <HOECLKEKOHLAMMGDLLBHOECKLAAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <464613B3.8090003@dominion.kabel.utwente.nl>	<46461B73.8070900@trolltech.com>
-	<46461D72.4020206@dominion.kabel.utwente.nl>
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
 In-Reply-To: <46461D72.4020206@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: uclibc 0.9.29 recipe
+Importance: Normal
+Subject: minimal-image.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,53 +30,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 May 2007 21:05:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 12 May 2007 21:19:59 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Greetings to all !
 
-Koen Kooi schreef:
-> Lorn Potter schreef:
->> Koen Kooi wrote:
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
->>>
->>> Hi,
->>>
->>>
->>> I just started working on a uclibc 0.9.29 recipe, are people interested in it already, or
->>> should I finish it before committing it (with DEFAULT_PREF = -1)?
->>>
->>> regards,
->> I would be, especially if it worked in an angstrom build.
-> 
-> I'll add it once I solved the linux-libc-headers problems. 
+Recently it was made apparent that bootstrap-image was generating images
+that could not fit in flash restricted devices (<=4MB)
+Koen has pushed angstrom-minimal-image which uses task-boot and as a result
+generates images significally smaller.(800K in a jffs2 fs)
 
-Which is non-existant on 0.9.29 :)
+The only drawback into this (IMHO) is in the naming of the package.
+Adding a distro name infront of an image package gives the impression that
+this is distro specific and not a "generic" one.
+I tried to push to the rep a more "generic" minimal-image.bb which was
+almost identical to angstrom-minima-image but Koen had  dis-approved the
+commit as duplicate.
+
+In my opinion if angstrom-minimal-image is not distro specific should be
+renamed to minimal-image or if it is distro specific a minimal-image.bb
+should be created.
+
+I discussed the matter with Koen on irc but we could not come to a
+conlusion, so i am asking for the opinions of others on this, as i believe
+is a issue which has to be solved to avoid any future problems.
 
 
-> Machine and distro maintainers
-> need to provide their parts of the uclibc configs to make it usefull, though.
 
-Angstrom has a uClibc.distro and ixp4xxbe has a uClibc.machine.
+Stelios S. Koroneos
 
-To add support for your favourite machine: use uClibc.distro as .config, configure uclibc
-for the target you want, save the top 2 blocks of .config (cpu and arch) to uClibc.distro
-in uclibc-0.9.29/<machine/uClibc.machine
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
 
-The recipe is by no means perfect, so any help is welcome.
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFGRivdMkyGM64RGpERAoVVAKCCVsINF5WmH0XnnbpCF0oMo15sfACePayI
-7vnmpum3r/QkizvA4HinAzc=
-=R235
------END PGP SIGNATURE-----
 
 
