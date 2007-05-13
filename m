@@ -1,22 +1,18 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1HmzEO-0003wL-7m
-	for openembedded-devel@openembedded.org; Sat, 12 May 2007 23:34:24 +0200
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B002C15A4 for openembedded-devel@openembedded.org;
-	Sat, 12 May 2007 23:32:33 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Sun, 13 May 2007 00:33:31 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHOECLLAAA.skoroneos@digital-opsis.com>
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
-In-Reply-To: <4644B4D1.5010803@klever.net>
-Importance: Normal
-Subject: Re: do_rootfs fails
+	(envelope-from <dp@xora.org.uk>) id 1HnD9x-0006bP-EY
+	for openembedded-devel@openembedded.org; Sun, 13 May 2007 14:26:47 +0200
+Received: from cimmeria.hyboria ([::ffff:81.179.117.79])
+	(AUTH: PLAIN dp, TLS: TLSv1/SSLv3,128bits,RC4-MD5)
+	by xora.org.uk with esmtp; Sun, 13 May 2007 13:25:25 +0100
+	id 0001807D.464703B5.000039FF
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@openembedded.org
+Date: Sun, 13 May 2007 13:25:49 +0100
+Message-Id: <1179059149.5404.3.camel@cimmeria.hyboria>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+Subject: RFC: Bugzilla CC Field
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,60 +26,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 May 2007 21:34:24 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Sun, 13 May 2007 12:26:49 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
-Had the same problem as i am still using 1.6 .
-The mentioned patch solved it
+RFC
 
-Stelios S. Koroneos
+Dont add people to CC field of bugs without talking to them.
 
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
+Recently I am finding myself added as CC to bugs I have no interest in
+as I either don't have the hardware or don't use the software in
+question.
 
+Everyone on oe-issues list gets all bug reports anyway and I can use web
+search quite effectively myself.
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org 
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of 
-> Michael Krelin
-> Sent: Friday, May 11, 2007 9:24 PM
-> To: openembedded-devel@openembedded.org
-> Subject: Re: [oe] do_rootfs fails
-> 
-> 
-> > All: Are we still going to wait 1.5 months with requiring 
-> 1.8.x? I've seen enough proof
-> > that 1.6.x is broken with current .dev, with no effort to fix 
-> it. "Giving people time to
-> > prepare the upgrade" has now turned into "Stabbing user in the eye" :(
-> 
-> There's also an option of asking Tom to bitbake -DDD and send it to
-> zecke, because I couldn't find time to try BB 1.6 for him again. And let
-> him apply the patch that fixes this problem:
-> 
-> Index: lib/bb/parse/parse_py/BBHandler.py
-> ===================================================================
-> --- lib/bb/parse/parse_py/BBHandler.py  (revision 817)
-> +++ lib/bb/parse/parse_py/BBHandler.py  (working copy)
-> @@ -66,7 +66,9 @@
->          if not file in __inherit_cache.split():
->              debug(2, "BB %s:%d: inheriting %s" % (fn, lineno, file))
->              __inherit_cache += " %s" % file
-> +            data.setVar('__inherit_cache', __inherit_cache, d)
->              include(fn, file, d)
-> +            __inherit_cache = data.getVar('__inherit_cache', d) or ""
->      data.setVar('__inherit_cache', __inherit_cache, d)
-> 
-> Love,
-> H
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Graeme (XorA)
+
 
 
 
