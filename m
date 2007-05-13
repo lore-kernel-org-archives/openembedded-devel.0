@@ -1,33 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HnFFz-0003zX-BZ
-	for openembedded-devel@openembedded.org; Sun, 13 May 2007 16:41:09 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1HnFEw-0001K8-8T
-	for openembedded-devel@openembedded.org; Sun, 13 May 2007 16:40:02 +0200
-Received: from p54b95c14.dip.t-dialin.net ([84.185.92.20])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 13 May 2007 16:40:02 +0200
-Received: from no2spam by p54b95c14.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 13 May 2007 16:40:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HnFbS-0001cg-IK
+	for openembedded-devel@openembedded.org; Sun, 13 May 2007 17:03:20 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l4DF2FLr010016 for <openembedded-devel@openembedded.org>;
+	Sun, 13 May 2007 17:02:15 +0200
+Message-ID: <46472879.7070804@dominion.kabel.utwente.nl>
+Date: Sun, 13 May 2007 17:02:17 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 13 May 2007 16:35:12 +0200
-Message-ID: <f277n0$i00$2@sea.gmane.org>
-References: <46461D72.4020206@dominion.kabel.utwente.nl>
-	<HOECLKEKOHLAMMGDLLBHOECKLAAA.skoroneos@digital-opsis.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: p54b95c14.dip.t-dialin.net
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-In-Reply-To: <HOECLKEKOHLAMMGDLLBHOECKLAAA.skoroneos@digital-opsis.com>
-Sender: news <news@sea.gmane.org>
-Subject: Re: minimal-image.bb
+References: <1179059149.5404.3.camel@cimmeria.hyboria>
+	<f277j3$i00$1@sea.gmane.org>
+In-Reply-To: <f277j3$i00$1@sea.gmane.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: RFD: Bugzilla in general & bug triaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,17 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 May 2007 14:41:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 13 May 2007 15:03:31 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Stelios Koroneos wrote:
-> In my opinion if angstrom-minimal-image is not distro specific should be
-> renamed to minimal-image
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I agree with Stelios that the belief that angstrom-minimal-image is a 
-distro-specific image is a reasonable assumption.  If that is not the 
-case, I am in favor renaming.
+Rolf Leggewie schreef:
 
+> First is that I would think that it might be a waste of valuable dev 
+> time if all core devs read all bug reports on oe-issues. 
+
+Personally, I treat oe-issues the same as oe-commits, by just skimming through the
+subjects and reading ones that trigger some sort of red flag.
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGRyh5MkyGM64RGpERAih1AKCSCjkbNYMQKvz5uGBlSC4kJUFCuwCdH/ZS
+dxXPFRHDlbpXplCWROFMuN8=
+=rrgr
+-----END PGP SIGNATURE-----
 
 
