@@ -1,29 +1,26 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <xjqian@gmail.com>) id 1HnWjj-0003Xg-Si
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2007 11:21:00 +0200
-Received: by py-out-1112.google.com with SMTP id n39so1344661pyh
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2007 02:20:54 -0700 (PDT)
-Received: by 10.65.251.17 with SMTP id d17mr7276928qbs.1179134453942;
-	Mon, 14 May 2007 02:20:53 -0700 (PDT)
-Received: from ?192.168.10.106? ( [71.85.151.212])
-	by mx.google.com with ESMTP id m1sm12597734nzf.2007.05.14.02.20.49;
-	Mon, 14 May 2007 02:20:49 -0700 (PDT)
-Message-ID: <46482951.8060803@gmail.com>
-Date: Mon, 14 May 2007 04:18:09 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Icedove 1.5.0.10 (X11/20070329)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HnX5A-0007g5-7B
+	for openembedded-devel@openembedded.org; Mon, 14 May 2007 11:43:08 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l4E9h1ox029909 for <openembedded-devel@openembedded.org>;
+	Mon, 14 May 2007 11:43:01 +0200
+Message-ID: <46482F23.9050504@dominion.kabel.utwente.nl>
+Date: Mon, 14 May 2007 11:42:59 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-To: Paul Sokolovsky <pmiscml@gmail.com>
-References: <1179059149.5404.3.camel@cimmeria.hyboria>
-	<f277j3$i00$1@sea.gmane.org> <464818E3.7090203@gmail.com>
-	<24757045.20070514112558@gmail.com> <46482288.2040904@gmail.com>
-	<1851689443.20070514120630@gmail.com>
-In-Reply-To: <1851689443.20070514120630@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: RFD: Bugzilla in general & bug triaging
+To: openembedded-devel@openembedded.org
+References: <E1HnWn2-0007PS-SW@linuxtogo.org>
+In-Reply-To: <E1HnWn2-0007PS-SW@linuxtogo.org>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev ixp4xx-kernel: Dropped support for 2.6.21, we're sticking to 2.6.20 stable and 2.6.22 development
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,30 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2007 09:21:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 14 May 2007 09:43:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Paul Sokolovsky wrote:
->> I'm undoing the damages right now. But please let me know if there's an
->> alternative to easily keep track of interested bugs.  Well, maybe I'm 
->> too lazy.
->>     
->
->         You still better rely on search. And Bugzilla is a powerful
-> ("enterprise-grade" ;-) ) tool, which allows you to do many things.
-> For example, that's how I have it set up: I add myself to cc: of the
-> interesting bugs (in full accordance to Rolf's RFD), then once made
-> an advanced search setup, which searches for my address in any email
-> field (reporter, cc, etc.), and saved it as saved search. Now, it's
-> the same one click as predefined "My Bugs" search. And you can have
-> number of saved searches, for machines of your interest, for software,
-> etc. - all one click away
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Thanks for the great tip. When I said I was too lazy, that's also 
-including that I'm too lazy to study/play with all the features of 
-Bugzilla, esp. considering the enterprise-grade motto :)
+rwhitby commit schreef:
+> ixp4xx-kernel: Dropped support for 2.6.21, we're sticking to 2.6.20 stable and 2.6.22 development
 
-Gordon
+> # delete "packages/linux/ixp4xx-kernel_2.6.21.bb"
+
+You broke feeds and upgrade paths for users of that recipe, could you next time just add
+DEFAULT_PREFERENCE = "-1" or something? Slugos isn't the only user of OE!
+ I just got .21 running on my ixp4xx board, and now I have to remove all kernel packages,
+packages built against .21 and find a way for angstrom to deal with that in the feeds for
+people doing 'ipkg upgrade'.
+
+I will deal with it, but next time a bit of warning on the OE list would be appreciated.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGSC8jMkyGM64RGpERAl+UAJ42rD9nGX4EcbKJRzD0yXAgAjwWDwCfaFjg
+NoUOnnEP5xC3YJodBtkjQCI=
+=a0fc
+-----END PGP SIGNATURE-----
 
 
