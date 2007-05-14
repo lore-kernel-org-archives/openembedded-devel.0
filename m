@@ -1,40 +1,28 @@
-Received: from [195.6.168.30] (helo=mailserv.atmel-nantes.fr)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <ulf@atmel.com>) id 1HnacF-00022M-51
-	for openembedded-devel@openembedded.org; Mon, 14 May 2007 15:29:31 +0200
-Received: from babylon.nto.atmel.com (babylon [10.172.102.73])
-	by mailserv.atmel-nantes.fr (8.13.6/8.12.11) with ESMTP id
-	l4EDTHQD000407 for <openembedded-devel@openembedded.org>;
-	Mon, 14 May 2007 15:29:17 +0200
-Received: from gondor.sweden.atmel.com ([10.175.196.34])
-	by babylon.nto.atmel.com (8.12.8/8.12.8) with ESMTP id l4EDSbJp013176
-	for <openembedded-devel@openembedded.org>;
-	Mon, 14 May 2007 15:28:37 +0200
-Received: from gondor.sweden.atmel.com (localhost.localdomain [127.0.0.1])
-	by gondor.sweden.atmel.com (8.12.10/8.12.10) with SMTP id
-	l4EDSbjT014121 for <openembedded-devel@openembedded.org>;
-	Mon, 14 May 2007 15:28:37 +0200
-Received: from aeglos (dhcp248.sweden.atmel.com [])
-	by gondor.sweden.atmel.com ([10.175.196.46]);
-	Mon, 14 May 2007 13:28:37 +0000
-Message-ID: <07a101c7962b$e0db5860$0200a8c0@atmel.com>
-From: "Ulf Samuelsson" <ulf@atmel.com>
-To: <openembedded-devel@openembedded.org>
-Date: Mon, 14 May 2007 15:14:03 +0200
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HnanI-0002Dw-0c
+	for openembedded-devel@openembedded.org; Mon, 14 May 2007 15:40:58 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l4EDejox013424 for <openembedded-devel@openembedded.org>;
+	Mon, 14 May 2007 15:40:45 +0200
+Message-ID: <464866DC.6060502@dominion.kabel.utwente.nl>
+Date: Mon, 14 May 2007 15:40:44 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.3028
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
-X-ATMEL-NTO-MailScanner-Information: Please contact the ISP for more
-	information
-X-ATMEL-NTO-MailScanner: Found to be clean
-X-ATMEL-NANTES-MailScanner-Information: Please contact the ISP for more
-	information
-X-ATMEL-NANTES-MailScanner: Not scanned: please contact your Internet E-Mail
-	Service Provider for details
-X-ATMEL-NANTES-MailScanner-From: ulf@atmel.com
-Subject: qemu-native failure on Angstrom
+To: openembedded-devel@openembedded.org
+References: <07a101c7962b$e0db5860$0200a8c0@atmel.com>
+In-Reply-To: <07a101c7962b$e0db5860$0200a8c0@atmel.com>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l4EDejox013424
+Subject: Re: qemu-native failure on Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -48,27 +36,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2007 13:29:32 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Mon, 14 May 2007 13:41:14 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Tried building OpenEmbedded for the first time, DISTRO=3D=C5ngstr=F6m,=20
-with an at91sam9263 target (made my own file) but it seems that
-qemu.native is not compilable on my OpenSuSE 10.1 system using =
-gcc-4.1.2.
-The error message says that qemu has only been tested on gcc-4.x.x for =
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Ulf Samuelsson schreef:
+> Tried building OpenEmbedded for the first time, DISTRO=3D=C3=85ngstr=C3=
+=B6m,=20
+> with an at91sam9263 target (made my own file) but it seems that
+> qemu.native is not compilable on my OpenSuSE 10.1 system using gcc-4.1.=
+2.
+> The error message says that qemu has only been tested on gcc-4.x.x for =
 arm
-and that other architectures need gcc-3.x
+> and that other architectures need gcc-3.x
+>=20
+> Tried to update the bb files to allow gcc-4.1.2 but that resulted in
+> qemu-arm not beeing built, causing the build to terminate later.
+>=20
+> Is there any way to have open embedded build a gcc-3.4.4 cross compiler
+> as part of the normal build.
 
-Tried to update the bb files to allow gcc-4.1.2 but that resulted in
-qemu-arm not beeing built, causing the build to terminate later.
+You want a native gcc3 on your host, since qemu-native will be compiled w=
+ith that, on
+debian that can be done with 'apt-get install gcc-3.4'.
 
-Is there any way to have open embedded build a gcc-3.4.4 cross compiler
-as part of the normal build.
+Alternatively you can set ENABLE_BINARY_LOCALE_GENERATION =3D "0" in your=
+ local.conf.
 
-Best Regards
-Ulf Samuelsson
+regards,
 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGSGbcMkyGM64RGpERAlXOAJ9HlfnJ5CbfVrHd3lOIBsDfyqbDqgCgmzv5
+4tDq+oZskVRAfnxs7rWNlVA=3D
+=3DOQ93
+-----END PGP SIGNATURE-----
 
 
