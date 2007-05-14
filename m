@@ -1,26 +1,34 @@
-Received: from [195.121.247.12] (helo=psmtp03.wxs.nl)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gerwin@vanderkruis.net>) id 1HnfT7-0000nP-4S
-	for openembedded-devel@openembedded.org; Mon, 14 May 2007 20:40:25 +0200
-Received: from holographicklopdoctor.lan
-	(ip5457b30e.direct-adsl.nl [84.87.179.14])
-	by psmtp03.wxs.nl (iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov
-	14 2006)) with ESMTP id <0JI1008L5NV69G@psmtp03.wxs.nl> for
-	openembedded-devel@openembedded.org;
-	Mon, 14 May 2007 20:40:18 +0200 (MEST)
-Date: Mon, 14 May 2007 20:38:31 +0200
-From: Gerwin <gerwin@vanderkruis.net>
-In-reply-to: <463C9ABC.7090503@dominion.kabel.utwente.nl>
-To: koen@dominion.kabel.utwente.nl
-Message-id: <200705142038.32087.gerwin@vanderkruis.net>
-MIME-version: 1.0
-User-Agent: KMail/1.9.1
-References: <200705041909.29494.kyrvin@trolltech.com>
-	<463C9ABC.7090503@dominion.kabel.utwente.nl>
-Cc: "openem >> Using the OpenEmbedded metadata to build Linux Distributions"
-	<openembedded-devel@openembedded.org>, Knut Yrvin <kyrvin@trolltech.com>,
-	Knut Yrvin <knuty@skolelinux.no>
-Subject: Re: Questions: Founding of Open Embedded, dev gatherings etc.
+	(envelope-from <oe@hentges.net>) id 1Hnix4-0000bD-Qe
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 May 2007 00:23:37 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id 1B6D4308206
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2007 00:23:25 +0200 (CEST)
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 12411-03 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2007 00:23:22 +0200 (CEST)
+Received: from mhcln04.hentges.priv (xdsl-87-78-55-241.netcologne.de
+	[87.78.55.241]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id D0E4C3081FE
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2007 00:23:01 +0200 (CEST)
+From: Matthias Hentges <oe@hentges.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1178928474.4954.18.camel@localhost.localdomain>
+References: <4644ABCB.6080202@openhardware.net>
+	<4644B0D2.8020409@dominion.kabel.utwente.nl>
+	<1178928474.4954.18.camel@localhost.localdomain>
+Date: Tue, 15 May 2007 00:23:00 +0200
+Message-Id: <1179181380.4954.45.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
+Subject: Re: do_rootfs fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,72 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2007 18:40:27 -0000
-Content-type: text/plain; charset=utf-8
-Content-transfer-encoding: 7BIT
-Content-disposition: inline
+X-List-Received-Date: Mon, 14 May 2007 22:23:46 -0000
+X-Groupsio-MsgNum: 2085
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-S9eOgf6KeazhJotE1cWR"
 
-Hi Knut, 
+--=-S9eOgf6KeazhJotE1cWR
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-I have been quite busy myself as well , lot of embedded work and lot of 
-php/java work. 
+Hello all,
 
-I am busy with a wimax kind of smartphone for the asian market which will run 
-of course linux(currently hardware design fase). And some smaller projects so 
-it is quite busy at this moment.  
+Am Samstag, den 12.05.2007, 02:07 +0200 schrieb Matthias Hentges:
 
-> >
-> > I got some experiences with developer gatherings after initiationg the
-> > Skolelinux project in 2001. Actually we have organised +30 gatherings.
-> > Skolelinux is now a part of DebianEdu. The board of "Free Software in
-> > School" organises about 6-7 developer gatherings a year. Pictures from
-> > opening of one of the gatherings in Forbach - France, gives an idea of
-> > the scale:
-> >
-> > http://www.bawetic.be/PHOTOS/Forbach2006/
-> >
-> > I would like to see similar activeties in OpenEmbedded space. Maybe
-> > Mobile Developer Days 2007 at Alborg University in Denmark could be the
-> > place to start?:
-> >
+> 1.8.x has a show-stopper freeze-bug for some users ( including myself )
+> which has not been fixed or even looked into yet.
 
-Yes I think so , the main problem is that our main developers are in the 
-Netherlands , Germany , England and Poland. So yes we can send a delegation 
-but I don't think that all developers will be there . I think we have a 
-bigger chance if we organize something like this in the Netherlands or 
-Germany. 
+RP was kind enough to look into the issue. The following command
+unbreaks bitbake 1.8 on my build environment:=20
 
-> > To sum it up. Gerwin van der Kruis idea is to make a foundation, and
-> > getting dev.gatherings started. Is this interesting for you? If you are
-> > interesed, how should we proceed?
->
+stty -tostop
 
-We discussed about this also during fosdem and later on as well on irc, the 
-main problem is time and knowledge . For example where should such a 
-foundation be based , who is going to govern it etc. etc. 
+The IRC discussion leading to the fix is archived here:
 
-OEDEM Frosconn and t-dose are the first opurtunities that we will be present .
+http://hentges.net/tmp/logs/irc/%
+23oe/2007/May/20070515_oe.log#[20070515%2000:08:46]
+--=20
+Matthias 'CoreDump' Hentges=20
+Cologne / Germany
 
-I invited you for t-dose as well for a keynote. 
+Webmaster of Hentges.net & Embedded Linux Developer
+GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
+
+My OS: Debian SID: Geek by Nature, Linux by Choice
 
 
-Kind Regards, 
 
-Gerwin
+--=-S9eOgf6KeazhJotE1cWR
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
 
--- 
-The Holographic Klop Doctor
+iD8DBQBGSOFEPXyoPq8wMNkRArcIAJ981ym1ZGVCw7QIU9rvsCM6Di219ACfYdRM
+ajEyHsOAfWteok11yR8U2kc=
+=jzUn
+-----END PGP SIGNATURE-----
 
-               -
-               0
-             - |
-              \|\
-               |/
-               |
-              /|
-            _|_|
-
-Underneath the mango tree  :) 
-
-
+--=-S9eOgf6KeazhJotE1cWR--
