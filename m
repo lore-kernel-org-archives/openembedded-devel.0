@@ -1,22 +1,40 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [195.6.168.30] (helo=mailserv.atmel-nantes.fr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1Hnab6-00020w-59
-	for openembedded-devel@openembedded.org; Mon, 14 May 2007 15:28:20 +0200
-Received: (qmail 29477 invoked by uid 813007); 14 May 2007 13:28:14 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO maluch.local)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 14 May 2007 13:28:13 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 May 2007 15:28:12 +0200
-User-Agent: KMail/1.9.6
-References: <1179059149.5404.3.camel@cimmeria.hyboria>
-	<f277j3$i00$1@sea.gmane.org> <f29dkh$o3v$1@sea.gmane.org>
-In-Reply-To: <f29dkh$o3v$1@sea.gmane.org>
+	(envelope-from <ulf@atmel.com>) id 1HnacF-00022M-51
+	for openembedded-devel@openembedded.org; Mon, 14 May 2007 15:29:31 +0200
+Received: from babylon.nto.atmel.com (babylon [10.172.102.73])
+	by mailserv.atmel-nantes.fr (8.13.6/8.12.11) with ESMTP id
+	l4EDTHQD000407 for <openembedded-devel@openembedded.org>;
+	Mon, 14 May 2007 15:29:17 +0200
+Received: from gondor.sweden.atmel.com ([10.175.196.34])
+	by babylon.nto.atmel.com (8.12.8/8.12.8) with ESMTP id l4EDSbJp013176
+	for <openembedded-devel@openembedded.org>;
+	Mon, 14 May 2007 15:28:37 +0200
+Received: from gondor.sweden.atmel.com (localhost.localdomain [127.0.0.1])
+	by gondor.sweden.atmel.com (8.12.10/8.12.10) with SMTP id
+	l4EDSbjT014121 for <openembedded-devel@openembedded.org>;
+	Mon, 14 May 2007 15:28:37 +0200
+Received: from aeglos (dhcp248.sweden.atmel.com [])
+	by gondor.sweden.atmel.com ([10.175.196.46]);
+	Mon, 14 May 2007 13:28:37 +0000
+Message-ID: <07a101c7962b$e0db5860$0200a8c0@atmel.com>
+From: "Ulf Samuelsson" <ulf@atmel.com>
+To: <openembedded-devel@openembedded.org>
+Date: Mon, 14 May 2007 15:14:03 +0200
 MIME-Version: 1.0
-Message-Id: <200705141528.12352.openembedded@hrw.one.pl>
-Subject: Re: RFD: Bugzilla in general & bug triaging
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.3028
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
+X-ATMEL-NTO-MailScanner-Information: Please contact the ISP for more
+	information
+X-ATMEL-NTO-MailScanner: Found to be clean
+X-ATMEL-NANTES-MailScanner-Information: Please contact the ISP for more
+	information
+X-ATMEL-NANTES-MailScanner: Not scanned: please contact your Internet E-Mail
+	Service Provider for details
+X-ATMEL-NANTES-MailScanner-From: ulf@atmel.com
+Subject: qemu-native failure on Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,26 +48,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2007 13:28:20 -0000
+X-List-Received-Date: Mon, 14 May 2007 13:29:32 -0000
 Content-Type: text/plain;
-  charset="iso-8859-2"
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia poniedzia=B3ek, 14 maja 2007, Rolf Leggewie napisa=B3:
+Tried building OpenEmbedded for the first time, DISTRO=3D=C5ngstr=F6m,=20
+with an at91sam9263 target (made my own file) but it seems that
+qemu.native is not compilable on my OpenSuSE 10.1 system using =
+gcc-4.1.2.
+The error message says that qemu has only been tested on gcc-4.x.x for =
+arm
+and that other architectures need gcc-3.x
 
-> Bugzilla will be upgraded soon and no structural changes will be made
-> until that is completed.  But that leaves us some good time to think
-> about how this should be enhanced.
+Tried to update the bb files to allow gcc-4.1.2 but that resulted in
+qemu-arm not beeing built, causing the build to terminate later.
 
-> Please add to the list.  The most important point is the second.  That
-> is what we should discuss.
+Is there any way to have open embedded build a gcc-3.4.4 cross compiler
+as part of the normal build.
 
-MACHINE field would be useful - there are bugs specific to machine (kernel=
-=20
-bug etc) which now have it in title or comment.=20
-
-
+Best Regards
+Ulf Samuelsson
 
 
 
