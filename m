@@ -1,31 +1,22 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1HnZtO-0005C7-H6
-	for openembedded-devel@openembedded.org; Mon, 14 May 2007 14:43:10 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4ECgfB9031603;
-	Mon, 14 May 2007 13:42:41 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 31033-06; Mon, 14 May 2007 13:42:34 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4ECgWkW031585
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 14 May 2007 13:42:33 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1178928474.4954.18.camel@localhost.localdomain>
-References: <4644ABCB.6080202@openhardware.net>
-	<4644B0D2.8020409@dominion.kabel.utwente.nl>
-	<1178928474.4954.18.camel@localhost.localdomain>
-Date: Mon, 14 May 2007 13:42:32 +0100
-Message-Id: <1179146552.5877.1.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: do_rootfs fails
+	(envelope-from <openembedded@hrw.one.pl>) id 1Hnab6-00020w-59
+	for openembedded-devel@openembedded.org; Mon, 14 May 2007 15:28:20 +0200
+Received: (qmail 29477 invoked by uid 813007); 14 May 2007 13:28:14 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO maluch.local)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 14 May 2007 13:28:13 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 14 May 2007 15:28:12 +0200
+User-Agent: KMail/1.9.6
+References: <1179059149.5404.3.camel@cimmeria.hyboria>
+	<f277j3$i00$1@sea.gmane.org> <f29dkh$o3v$1@sea.gmane.org>
+In-Reply-To: <f29dkh$o3v$1@sea.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200705141528.12352.openembedded@hrw.one.pl>
+Subject: Re: RFD: Bugzilla in general & bug triaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,32 +30,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2007 12:43:10 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 May 2007 13:28:20 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Sat, 2007-05-12 at 02:07 +0200, Matthias Hentges wrote:
-> Am Freitag, den 11.05.2007, 20:07 +0200 schrieb Koen Kooi:
-> 
-> > All: Are we still going to wait 1.5 months with requiring 1.8.x? I've seen enough proof
-> > that 1.6.x is broken with current .dev, with no effort to fix it. "Giving people time to
-> > prepare the upgrade" has now turned into "Stabbing user in the eye" :(
-> > 
-> > regards,
-> > 
-> > Koen
-> 
-> 1.8.x has a show-stopper freeze-bug for some users ( including myself )
-> which has not been fixed or even looked into yet.
+Dnia poniedzia=B3ek, 14 maja 2007, Rolf Leggewie napisa=B3:
 
-Nobody has reported this properly although I keep hearing mention of it.
+> Bugzilla will be upgraded soon and no structural changes will be made
+> until that is completed.  But that leaves us some good time to think
+> about how this should be enhanced.
 
-Could you send me the output from stty in your usual development
-environment please?
+> Please add to the list.  The most important point is the second.  That
+> is what we should discuss.
 
-Thanks,
-
-Richard
+MACHINE field would be useful - there are bugs specific to machine (kernel=
+=20
+bug etc) which now have it in title or comment.=20
 
 
 
