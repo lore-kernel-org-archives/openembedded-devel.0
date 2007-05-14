@@ -1,27 +1,22 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [69.72.139.204] (helo=zeus.rm-fr.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HnanI-0002Dw-0c
-	for openembedded-devel@openembedded.org; Mon, 14 May 2007 15:40:58 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l4EDejox013424 for <openembedded-devel@openembedded.org>;
-	Mon, 14 May 2007 15:40:45 +0200
-Message-ID: <464866DC.6060502@dominion.kabel.utwente.nl>
-Date: Mon, 14 May 2007 15:40:44 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <skyhusker@rm-fr.net>) id 1HnatO-0002LM-Be
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 May 2007 15:47:14 +0200
+Received: from raichu.casa (cm-83-97-128-47.telecable.es [83.97.128.47])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by zeus.rm-fr.net (Postfix) with ESMTP id 682875C937
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 May 2007 14:47:08 +0100 (BST)
+From: Alberto =?iso-8859-1?q?Garc=EDa_Hierro?= <skyhusker@rm-fr.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 14 May 2007 15:46:02 +0200
+User-Agent: KMail/1.9.6
 References: <07a101c7962b$e0db5860$0200a8c0@atmel.com>
 In-Reply-To: <07a101c7962b$e0db5860$0200a8c0@atmel.com>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	l4EDejox013424
+MIME-Version: 1.0
+Message-Id: <200705141546.02470.skyhusker@rm-fr.net>
 Subject: Re: qemu-native failure on Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,45 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2007 13:41:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 14 May 2007 13:47:14 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Ulf Samuelsson schreef:
-> Tried building OpenEmbedded for the first time, DISTRO=3D=C3=85ngstr=C3=
-=B6m,=20
+El Monday 14 May 2007 15:14:03 Ulf Samuelsson escribi=F3:
+> Tried building OpenEmbedded for the first time, DISTRO=3D=C5ngstr=F6m,
 > with an at91sam9263 target (made my own file) but it seems that
-> qemu.native is not compilable on my OpenSuSE 10.1 system using gcc-4.1.=
-2.
-> The error message says that qemu has only been tested on gcc-4.x.x for =
-arm
+> qemu.native is not compilable on my OpenSuSE 10.1 system using gcc-4.1.2.
+> The error message says that qemu has only been tested on gcc-4.x.x for arm
 > and that other architectures need gcc-3.x
->=20
+>
 > Tried to update the bb files to allow gcc-4.1.2 but that resulted in
 > qemu-arm not beeing built, causing the build to terminate later.
->=20
+>
 > Is there any way to have open embedded build a gcc-3.4.4 cross compiler
 > as part of the normal build.
 
-You want a native gcc3 on your host, since qemu-native will be compiled w=
-ith that, on
-debian that can be done with 'apt-get install gcc-3.4'.
+	Check the patch at http://bugs.openembedded.org/show_bug.cgi?id=3D1144. It=
+'s=20
+for amd64, but with little editing you can adapt it to your system.
 
-Alternatively you can set ENABLE_BINARY_LOCALE_GENERATION =3D "0" in your=
- local.conf.
+Regards,
+	Alberto
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGSGbcMkyGM64RGpERAlXOAJ9HlfnJ5CbfVrHd3lOIBsDfyqbDqgCgmzv5
-4tDq+oZskVRAfnxs7rWNlVA=3D
-=3DOQ93
------END PGP SIGNATURE-----
+=2D-=20
+Alberto Garc=EDa Hierro
+http://zeus.rm-fr.net/~skyhusker/
 
 
