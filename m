@@ -1,22 +1,26 @@
-Received: from [69.72.139.204] (helo=zeus.rm-fr.net)
+Received: from [66.249.82.237] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skyhusker@rm-fr.net>) id 1HnatO-0002LM-Be
+	(envelope-from <pmiscml@gmail.com>) id 1HnbIQ-0002jb-Td
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2007 15:47:14 +0200
-Received: from raichu.casa (cm-83-97-128-47.telecable.es [83.97.128.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by zeus.rm-fr.net (Postfix) with ESMTP id 682875C937
+	Mon, 14 May 2007 16:13:07 +0200
+Received: by wx-out-0506.google.com with SMTP id s14so1559944wxc
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2007 14:47:08 +0100 (BST)
-From: Alberto =?iso-8859-1?q?Garc=EDa_Hierro?= <skyhusker@rm-fr.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 May 2007 15:46:02 +0200
-User-Agent: KMail/1.9.6
+	Mon, 14 May 2007 07:13:00 -0700 (PDT)
+Received: by 10.90.105.20 with SMTP id d20mr4777946agc.1179151980527;
+	Mon, 14 May 2007 07:13:00 -0700 (PDT)
+Received: from cube ( [77.122.190.213])
+	by mx.google.com with ESMTP id 23sm12798953nzn.2007.05.14.07.12.59;
+	Mon, 14 May 2007 07:13:00 -0700 (PDT)
+Date: Mon, 14 May 2007 17:13:06 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <783750430.20070514171306@gmail.com>
+To: =?utf-8?Q?Alberto_Garc=D0=BDa_Hierro?= <skyhusker@rm-fr.net>
+In-Reply-To: <200705141546.02470.skyhusker@rm-fr.net>
 References: <07a101c7962b$e0db5860$0200a8c0@atmel.com>
-In-Reply-To: <07a101c7962b$e0db5860$0200a8c0@atmel.com>
+	<200705141546.02470.skyhusker@rm-fr.net>
 MIME-Version: 1.0
-Message-Id: <200705141546.02470.skyhusker@rm-fr.net>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: qemu-native failure on Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,35 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2007 13:47:14 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 14 May 2007 14:13:08 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
 
-El Monday 14 May 2007 15:14:03 Ulf Samuelsson escribi=F3:
-> Tried building OpenEmbedded for the first time, DISTRO=3D=C5ngstr=F6m,
-> with an at91sam9263 target (made my own file) but it seems that
-> qemu.native is not compilable on my OpenSuSE 10.1 system using gcc-4.1.2.
-> The error message says that qemu has only been tested on gcc-4.x.x for arm
-> and that other architectures need gcc-3.x
->
-> Tried to update the bb files to allow gcc-4.1.2 but that resulted in
-> qemu-arm not beeing built, causing the build to terminate later.
->
-> Is there any way to have open embedded build a gcc-3.4.4 cross compiler
-> as part of the normal build.
+Hello Alberto,
 
-	Check the patch at http://bugs.openembedded.org/show_bug.cgi?id=3D1144. It=
-'s=20
-for amd64, but with little editing you can adapt it to your system.
+Monday, May 14, 2007, 4:46:02 PM, you wrote:
 
-Regards,
-	Alberto
+> El Monday 14 May 2007 15:14:03 Ulf Samuelsson escribió:
+>> Tried building OpenEmbedded for the first time, DISTRO=Ångström,
+>> with an at91sam9263 target (made my own file) but it seems that
+>> qemu.native is not compilable on my OpenSuSE 10.1 system using gcc-4.1.2.
+>> The error message says that qemu has only been tested on gcc-4.x.x for arm
+>> and that other architectures need gcc-3.x
+>>
+>> Tried to update the bb files to allow gcc-4.1.2 but that resulted in
+>> qemu-arm not beeing built, causing the build to terminate later.
+>>
+>> Is there any way to have open embedded build a gcc-3.4.4 cross compiler
+>> as part of the normal build.
+
+>         Check the patch at
+> http://bugs.openembedded.org/show_bug.cgi?id=1144. It's 
+> for amd64, but with little editing you can adapt it to your system.
+
+        Not sure this is anyhow good patch to suggest.
+http://bugs.openembedded.org/show_bug.cgi?id=2157 is what promises to
+solve gcc4 issues, but that still waits for the confirmation that
+it actually cooks locales well.
+
+> Regards,
+>         Alberto
 
 
-=2D-=20
-Alberto Garc=EDa Hierro
-http://zeus.rm-fr.net/~skyhusker/
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
