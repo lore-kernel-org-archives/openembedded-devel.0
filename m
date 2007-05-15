@@ -1,28 +1,20 @@
-Received: from [194.158.229.27] (helo=mail-ps.sunrise.ch)
+Received: from [66.207.66.26] (helo=www.balister.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <robin.farine@terminus.org>) id 1Hnv7E-0001Lr-Kz
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2007 13:22:58 +0200
-Received: from acn.212.98.42.40.adslpremium.ch (212.98.42.40) by
-	mail-ps.sunrise.ch (7.2.073)
-	id 46493BD8000074B6 for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2007 13:22:36 +0200
-Received: from halftrack.hq.acn-group.ch ([172.16.145.83])
-	by van.hq.acn-group.ch with esmtp (Exim 3.36 #1 (Debian))
-	id 1Hnv6y-0002rE-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2007 13:22:36 +0200
-Received: from ip6-localhost ([::1])
-	by halftrack.hq.acn-group.ch with esmtp (Exim 4.63)
-	(envelope-from <robin.farine@terminus.org>) id 1Hnv71-0005Rx-Bi
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2007 13:22:39 +0200
-From: Robin Farine <robin.farine@terminus.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 May 2007 13:22:39 +0200
-User-Agent: KMail/1.9.5
+	(envelope-from <philip@balister.org>) id 1HnvUu-0005P4-97
+	for openembedded-devel@openembedded.org; Tue, 15 May 2007 13:47:21 +0200
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by www.balister.org (8.13.8/8.13.8) with ESMTP id l4FBl7qe011924
+	for <openembedded-devel@openembedded.org>;
+	Tue, 15 May 2007 07:47:08 -0400
+Message-ID: <46499DBB.9080001@balister.org>
+Date: Tue, 15 May 2007 07:47:07 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 1.5.0.10 (X11/20070302)
 MIME-Version: 1.0
-Message-Id: <200705151322.39110.robin.farine@terminus.org>
-Subject: RFC: machine customized ixp4xx NPE firmware
+To: openembedded-devel@openembedded.org
+References: <4648EB51.4040303@dominion.kabel.utwente.nl>
+In-Reply-To: <4648EB51.4040303@dominion.kabel.utwente.nl>
+Subject: Re: Fixing up libtool-native and libtool-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,129 +28,223 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2007 11:23:14 -0000
-Content-Disposition: inline
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Tue, 15 May 2007 11:47:21 -0000
+X-Groupsio-MsgNum: 2091
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms050500060702030107070109"
+
+--------------ms050500060702030107070109
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello everyone,
+Can we apply these to the 1.5.22 libtool bb files also? I ahve added 
+these with DEFAULT_PREFERENCE = "-1" since they have trouble building 
+some packages, apparently due to looking in build system directories for 
+libraries
 
-The platform I am working on is using NPE-B and NPE-C as Ethernet
-interfaces. The ixp4xx-npe package from the OE snapshot I am 
-currently
-using builds firmware for NPE-B only and the firmware type is 
-hard-coded
-in "IxNpeMicrocode.h".
+Philip
 
-The patch below proposes a means of letting the machine 
-configuration file
-decide which NPE firmware to build.
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Hi,
+> 
+> Richard has fixed up libtool in Poky a bit and I want to merge his work into OE. Since
+> it's 1 AM now, and libtool is a pretty 'core' part, I'm posting the patch for review
+> before committing it tomorrow night.
+> 
+> regards,
+> 
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> 
+> iD8DBQFGSOtRMkyGM64RGpERAuiCAJ0Yqz+t4X/zNCjTbZIBU7yjaDt8twCgkgVq
+> iM3uwQTciklpQKjurM34Nys=
+> =W6UX
+> -----END PGP SIGNATURE-----
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> #
+> # old_revision [990392a71744fa8ec062ee769a883473775269ee]
+> #
+> # patch "classes/autotools.bbclass"
+> #  from [dced52fcafd4e224bafcb35c4fb04253857c7c3b]
+> #    to [113ae9d1554b6e93d9c7a7fda84d71da4712caf9]
+> # 
+> # patch "packages/libtool/libtool-cross_1.5.10.bb"
+> #  from [58b238af5bb9acdeca5b86c34b50c419fb49b55e]
+> #    to [5134256c71b2d679838e87a55b084a99b1ac17d4]
+> # 
+> # patch "packages/libtool/libtool-native_1.5.10.bb"
+> #  from [e1d2b08387782afbf7c5c6787a92d9af864dfb2d]
+> #    to [bc799a0464069f3531cbb0a017c4d8d2a1afd63e]
+> #
+> ============================================================
+> --- classes/autotools.bbclass	dced52fcafd4e224bafcb35c4fb04253857c7c3b
+> +++ classes/autotools.bbclass	113ae9d1554b6e93d9c7a7fda84d71da4712caf9
+> @@ -15,6 +15,10 @@ def autotools_dep_prepend(d):
+>  
+>  	if not pn in ['libtool', 'libtool-native', 'libtool-cross']:
+>  		deps += 'libtool-native '
+> +		if not bb.data.inherits_class('native', d) \
+> +                        and not bb.data.inherits_class('cross', d) \
+> +                        and not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d, 1):
+> +                    deps += 'libtool-cross '
+>  
+>  	return deps + 'gnu-config-native '
+>  
+> ============================================================
+> --- packages/libtool/libtool-cross_1.5.10.bb	58b238af5bb9acdeca5b86c34b50c419fb49b55e
+> +++ packages/libtool/libtool-cross_1.5.10.bb	5134256c71b2d679838e87a55b084a99b1ac17d4
+> @@ -1,7 +1,7 @@ require libtool_${PV}.bb
+>  SECTION = "devel"
+>  require libtool_${PV}.bb
+>  
+> -PR = "r4"
+> +PR = "r5"
+>  PACKAGES = ""
+>  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/libtool-${PV}"
+>  SRC_URI_append = " file://libdir-la.patch;patch=1 \
+> @@ -21,6 +21,13 @@ do_stage () {
+>  
+>  do_stage () {
+>          install -m 0755 ${HOST_SYS}-libtool ${bindir}/${HOST_SYS}-libtool
+> +        install -m 0644 libltdl/ltdl.h ${STAGING_INCDIR}/
+> +        install -d ${STAGING_DATADIR}/libtool ${STAGING_DATADIR}/aclocal
+> +        install -c config.guess ${STAGING_DATADIR}/libtool/
+> +        install -c config.sub ${STAGING_DATADIR}/libtool/
+> +        install -c -m 0644 ltmain.sh ${STAGING_DATADIR}/libtool/
+> +        install -c -m 0644 libtool.m4 ${STAGING_DATADIR}/aclocal/
+> +        install -c -m 0644 ltdl.m4 ${STAGING_DATADIR}/aclocal/
+>  }
+>  
+>  do_install () {
+> ============================================================
+> --- packages/libtool/libtool-native_1.5.10.bb	e1d2b08387782afbf7c5c6787a92d9af864dfb2d
+> +++ packages/libtool/libtool-native_1.5.10.bb	bc799a0464069f3531cbb0a017c4d8d2a1afd63e
+> @@ -1,7 +1,7 @@ require libtool_${PV}.bb
+>  SECTION = "devel"
+>  require libtool_${PV}.bb
+>  
+> -PR = "r4"
+> +PR = "r5"
+>  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/libtool-${PV}"
+>  SRC_URI_append = " file://libdir-la.patch;patch=1 \
+>                     file://prefix.patch;patch=1 \
+> @@ -10,8 +10,6 @@ S = "${WORKDIR}/libtool-${PV}"
+>                     file://install-path-check.patch;patch=1"
+>  S = "${WORKDIR}/libtool-${PV}"
+>  
+> -STAGING_DATADIR_safe := "${STAGING_DATADIR}"
+> -
+>  inherit native
+>  
+>  do_stage () {
+> @@ -19,22 +17,12 @@ do_stage () {
+>  	install -m 0755 libtoolize ${STAGING_BINDIR}/libtoolize
+>  	oe_libinstall -a -so -C libltdl libltdl ${STAGING_LIBDIR}
+>  	install -m 0644 libltdl/ltdl.h ${STAGING_INCDIR}/
+> -	for dir in ${STAGING_DATADIR} ${STAGING_DATADIR_safe}; do
+> -		ltdldir="${dir}/libtool/libltdl"
+> -		install -d $dir/libtool \
+> -			   $ltdldir \
+> -			   $dir/aclocal
+> -		install -c config.guess $dir/libtool/config.guess
+> -		install -c config.sub $dir/libtool/config.sub
+> -		install -c -m 0644 ltmain.sh $dir/libtool/
+> -		install -c -m 0644 libtool.m4 $dir/aclocal/
+> -		install -c -m 0644 ltdl.m4 $dir/aclocal/
+> -
+> -		for src in README COPYING.LIB Makefile.am configure.ac \
+> -				config-h.in ltdl.c ltdl.h; do
+> -			install -m 0644 libltdl/${src} ${ltdldir}
+> -		done
+> -	done
+> +	install -d ${STAGING_DATADIR}/libtool ${STAGING_DATADIR}/aclocal
+> +	install -c config.guess ${STAGING_DATADIR}/libtool/
+> +	install -c config.sub ${STAGING_DATADIR}/libtool/
+> +	install -c -m 0644 ltmain.sh ${STAGING_DATADIR}/libtool/
+> +	install -c -m 0644 libtool.m4 ${STAGING_DATADIR}/aclocal/
+> +	install -c -m 0644 ltdl.m4 ${STAGING_DATADIR}/aclocal/
+>  }
+>  
+>  do_install () {
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Another but somewhat related point is the COMPATIBLE_MACHINE 
-variable. If
-my machine's name does not start with nslug or ixp4xx, I am forced 
-to
-change many package recipes (I suspect it is a FAQ but I do not seem 
-to
-able to access the mailing-list archive at the moment), perhaps a
-COMPATIBLE_ARCH variable would be help here ?
+--------------ms050500060702030107070109
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-Thanks,
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
+OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
+65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
+X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
+tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
+szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
+nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
+U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
+ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
+HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
+dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
+RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
+rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
+6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
+Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MDUxNTEx
+NDcwN1owIwYJKoZIhvcNAQkEMRYEFHGkOzMEc6c3mrv0V/vYkAuNU2a7MFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
+qTANBgkqhkiG9w0BAQEFAASCAQAbT/QSWrepFpY/vbLnIZLgyf+uhnlYZ4FehixqS9/xSywF1Oec
+//hlilJke1wA50N4AERjRJdtd2EYzVIaBxdYUhPqGokGcZR/LyiiTWEW0ARSf3JgCXE9NrZXeoDn
+/vaaA4JP7pxq8x03YRefXxa6J/gH5A4Hl0p1XNAMK5uw5oHkHS2uJPSDOvs9nc8651UOCusPJbiz
+hXwnP4y+MD6v5IZ7ns2PDA93O/aiibVlT47zBvXiGHwOulJ9+B1eke6k0k1BNbbdlJf38XiEK7kE
+SnotRHBKnSjtT2Jx1S2XtxU9tAPSVSrbMbGcbHvjCV8QX53nPdZuAhXZFJqBZ1/ZAAAAAAAA
 
-Robin
-
-diff --git 
-a/packages/ixp4xx/ixp4xx-npe-native-2.3.2/IxNpeMicrocode.h 
-b/packages/ixp4xx/ixp4xx-npe-native-2.3.2/IxNpeMicrocode.h
---- a/packages/ixp4xx/ixp4xx-npe-native-2.3.2/IxNpeMicrocode.h
-+++ b/packages/ixp4xx/ixp4xx-npe-native-2.3.2/IxNpeMicrocode.h
-@@ -42,7 +42,7 @@
- // #define IX_NPEDL_NPEIMAGE_NPEB_DMA
- // #define 
-IX_NPEDL_NPEIMAGE_NPEB_ETH_SPAN_FIREWALL_VLAN_QOS_HDR_CONV
- // #define 
-IX_NPEDL_NPEIMAGE_NPEB_ETH_LEARN_FILTER_SPAN_FIREWALL_VLAN_QOS
--#define IX_NPEDL_NPEIMAGE_NPEB_ETH_LEARN_FILTER_SPAN_FIREWALL
-+// #define IX_NPEDL_NPEIMAGE_NPEB_ETH_LEARN_FILTER_SPAN_FIREWALL
- 
- 
- // #define 
-IX_NPEDL_NPEIMAGE_NPEC_ETH_SPAN_MASK_FIREWALL_VLAN_QOS_HDR_CONV_EXTMIB
-@@ -51,7 +51,7 @@
- // #define IX_NPEDL_NPEIMAGE_NPEC_DMA
- // #define IX_NPEDL_NPEIMAGE_NPEC_CRYPTO_AES_ETH_LEARN_FILTER_SPAN
- // #define 
-IX_NPEDL_NPEIMAGE_NPEC_CRYPTO_AES_ETH_LEARN_FILTER_FIREWALL
--#define IX_NPEDL_NPEIMAGE_NPEC_CRYPTO_AES_CCM_ETH
-+// #define IX_NPEDL_NPEIMAGE_NPEC_CRYPTO_AES_CCM_ETH
- // #define 
-IX_NPEDL_NPEIMAGE_NPEC_CRYPTO_ETH_LEARN_FILTER_SPAN_FIREWALL
- // #define 
-IX_NPEDL_NPEIMAGE_NPEC_ETH_SPAN_FIREWALL_VLAN_QOS_HDR_CONV
- // #define 
-IX_NPEDL_NPEIMAGE_NPEC_ETH_LEARN_FILTER_SPAN_FIREWALL_VLAN_QOS
-diff --git a/packages/ixp4xx/ixp4xx-npe-native_2.3.2.bb 
-b/packages/ixp4xx/ixp4xx-npe-native_2.3.2.bb
---- a/packages/ixp4xx/ixp4xx-npe-native_2.3.2.bb
-+++ b/packages/ixp4xx/ixp4xx-npe-native_2.3.2.bb
-@@ -7,9 +7,14 @@ inherit native
- inherit native
- S = "${WORKDIR}/ixp400_xscale_sw/src/npeDl"
- 
-+# A space-separated list of CPP defines that select the firmware 
-images
-+# to build for the target machine.
-+IXP4XX_NPE_FIRWMARE_DEFINES ?= "\
-+-DIX_NPEDL_NPEIMAGE_NPEB_ETH_LEARN_FILTER_SPAN_FIREWALL"
-+
- do_compile() {
- 	mv ${WORKDIR}/IxNpeMicrocode.h ${S}/
--	gcc -Wall IxNpeMicrocode.c -o IxNpeMicrocode
-+	gcc -Wall ${IXP4XX_NPE_FIRWMARE_DEFINES} IxNpeMicrocode.c -o 
-IxNpeMicrocode
- }
- 
- do_stage() {
-diff --git a/packages/ixp4xx/ixp4xx-npe_2.3.2.bb 
-b/packages/ixp4xx/ixp4xx-npe_2.3.2.bb
---- a/packages/ixp4xx/ixp4xx-npe_2.3.2.bb
-+++ b/packages/ixp4xx/ixp4xx-npe_2.3.2.bb
-@@ -13,7 +13,7 @@ S = "${WORKDIR}/ixp400_xscale_sw/src/npe
- 
- COMPATIBLE_MACHINE = "(nslu2|ixp4xx)"
- 
--FILES_${PN} = "${base_libdir}/firmware/NPE-B"
-+FILES_${PN} = "${base_libdir}/firmware/NPE-*"
- 
- do_compile() {
- 	${STAGING_BINDIR_NATIVE}/IxNpeMicrocode-${PV} -be
-@@ -21,13 +21,20 @@ do_compile() {
- 
- do_install() {
- 	install -d ${D}/${base_libdir}/firmware/
--	rm ${S}/NPE-B
--	mv ${S}/NPE-B.* ${S}/NPE-B
--	install ${S}/NPE-B ${D}/${base_libdir}/firmware/
-+	for npe in A B C; do
-+		rm ${S}/NPE-${npe} 2>/dev/null || true
-+		mv ${S}/NPE-${npe}.* ${S}/NPE-${npe} 2>/dev/null || true
-+		if test -f ${S}/NPE-${npe}; then
-+			install -m 644 ${S}/NPE-${npe} ${D}/${base_libdir}/firmware/
-+		fi
-+	done
- }
- 
- do_populate_staging() {
- 	install -d ${STAGING_FIRMWARE_DIR}
--	install ${S}/NPE-B ${STAGING_FIRMWARE_DIR}/
-+	for npe in A B C; do
-+		if test -f ${S}/NPE-${npe}; then
-+			install -m 644 ${S}/NPE-${npe} ${STAGING_FIRMWARE_DIR}/
-+		fi
-+	done
- }
--
-
-
-
+--------------ms050500060702030107070109--
