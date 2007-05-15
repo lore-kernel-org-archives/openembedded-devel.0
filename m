@@ -1,27 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HnwWz-0001Wy-SI
-	for openembedded-devel@openembedded.org; Tue, 15 May 2007 14:53:35 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l4FCrILr026996 for <openembedded-devel@openembedded.org>;
-	Tue, 15 May 2007 14:53:18 +0200
-Message-ID: <4649AD3D.7070905@dominion.kabel.utwente.nl>
-Date: Tue, 15 May 2007 14:53:17 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Ho1v9-00012A-6B
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 May 2007 20:38:51 +0200
+Received: by wx-out-0506.google.com with SMTP id s14so2007686wxc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2007 11:38:37 -0700 (PDT)
+Received: by 10.90.98.3 with SMTP id v3mr6639223agb.1179254317529;
+	Tue, 15 May 2007 11:38:37 -0700 (PDT)
+Received: by 10.90.50.5 with HTTP; Tue, 15 May 2007 11:38:37 -0700 (PDT)
+Message-ID: <c384c5ea0705151138n4087e20cx1f2971a69573091d@mail.gmail.com>
+Date: Tue, 15 May 2007 20:38:37 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200705151322.39110.robin.farine@terminus.org>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <4648EB51.4040303@dominion.kabel.utwente.nl>
-	<46499DBB.9080001@balister.org>
-In-Reply-To: <46499DBB.9080001@balister.org>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Fixing up libtool-native and libtool-cross
+References: <200705151322.39110.robin.farine@terminus.org>
+Subject: Re: RFC: machine customized ixp4xx NPE firmware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,30 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2007 12:53:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 May 2007 18:38:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Robin,
 
-Philip Balister schreef:
-> Can we apply these to the 1.5.22 libtool bb files also? I ahve added
-> these with DEFAULT_PREFERENCE = "-1" since they have trouble building
-> some packages, apparently due to looking in build system directories for
-> libraries
+On 5/15/07, Robin Farine <robin.farine@terminus.org> wrote:
+> +IXP4XX_NPE_FIRWMARE_DEFINES ?= "\
+> +-DIX_NPEDL_NPEIMAGE_NPEB_ETH_LEARN_FILTER_SPAN_FIREWALL"
+> +
+>  do_compile() {
+>         mv ${WORKDIR}/IxNpeMicrocode.h ${S}/
+> -       gcc -Wall IxNpeMicrocode.c -o IxNpeMicrocode
+> +       gcc -Wall ${IXP4XX_NPE_FIRWMARE_DEFINES} IxNpeMicrocode.c -o
+>
+Please change IXP4XX_NPE_FIRWMARE_DEFINES into IXP4X
+IX_NPE_FIRMWARE_DEFINES.
 
-I pushed the updates to 1.5.10, could you fix 1.5.22?
+The idea looks ok.
 
-TIA,
+Regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGSa09MkyGM64RGpERAiN+AJ0ZJTsW7GRLJi24EQy7QOpG1j0nGQCcDGq5
-MGVDY5euyKwRk0sNTyg1Lag=
-=3i/D
------END PGP SIGNATURE-----
+Leon.
 
 
