@@ -1,28 +1,28 @@
-Received: from [212.90.198.182] (helo=balrog.cybernet.ch)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <robin.farine@terminus.org>) id 1Ho3Sg-0005tc-24
-	for openembedded-devel@openembedded.org; Tue, 15 May 2007 22:17:35 +0200
-Received: from tilia.local (cust.dyn.83-173-255-87.cybernet.ch [83.173.255.87])
-	by balrog.cybernet.ch (8.13.8/8.13.8) with ESMTP id l4FKHH4E051008
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2007 22:17:19 +0200 (CEST)
-	(envelope-from robin.farine@terminus.org)
-Received: from localhost ([127.0.0.1] ident=rfarine)
-	by tilia.local with esmtp (Exim 4.63)
-	(envelope-from <robin.farine@terminus.org>) id 1Ho3Sa-000110-DU
+	(envelope-from <rod@whitby.id.au>) id 1Ho8HB-0006EO-1R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2007 22:17:28 +0200
-From: Robin Farine <robin.farine@terminus.org>
-To: openembedded-devel@openembedded.org
-Date: Tue, 15 May 2007 22:17:27 +0200
-User-Agent: KMail/1.9.5
-References: <200705151322.39110.robin.farine@terminus.org>
-	<c384c5ea0705151138n4087e20cx1f2971a69573091d@mail.gmail.com>
-In-Reply-To: <c384c5ea0705151138n4087e20cx1f2971a69573091d@mail.gmail.com>
+	Wed, 16 May 2007 03:26:01 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 6F5A221F77B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2007 21:26:48 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Tue, 15 May 2007 21:25:46 -0400
+X-Sasl-enc: 6xff8VJuZN/BZt6P3ZgAQDN5f4ePLGIJY2rNksiy9kOG 1179278747
+Received: from [127.0.0.1] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id C74E523F81
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2007 21:25:46 -0400 (EDT)
+Message-ID: <464A5D37.4030401@whitby.id.au>
+Date: Wed, 16 May 2007 10:54:07 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
-Message-Id: <200705152217.27815.rfarine@tilia.local>
-X-Scanned-By: MIMEDefang 2.61 on 212.90.198.182
+To: openembedded-devel@lists.openembedded.org
+References: <200705151322.39110.robin.farine@terminus.org>
+In-Reply-To: <200705151322.39110.robin.farine@terminus.org>
+X-Enigmail-Version: 0.94.0.0
 Subject: Re: RFC: machine customized ixp4xx NPE firmware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -37,35 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2007 20:17:37 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 16 May 2007 01:26:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tuesday May 15 2007 20:38, Leon Woestenberg wrote:
-> On 5/15/07, Robin Farine <robin.farine@terminus.org> wrote:
-> > +IXP4XX_NPE_FIRWMARE_DEFINES ?= "\
-> > +-DIX_NPEDL_NPEIMAGE_NPEB_ETH_LEARN_FILTER_SPAN_FIREWALL"
-> > +
-> >  do_compile() {
-> >         mv ${WORKDIR}/IxNpeMicrocode.h ${S}/
-> > -       gcc -Wall IxNpeMicrocode.c -o IxNpeMicrocode
-> > +       gcc -Wall ${IXP4XX_NPE_FIRWMARE_DEFINES}
-> > IxNpeMicrocode.c -o
->
-> Please change IXP4XX_NPE_FIRWMARE_DEFINES into IXP4X
-> IX_NPE_FIRMWARE_DEFINES.
+Robin Farine wrote:
+> The platform I am working on is using NPE-B and NPE-C as Ethernet
+> interfaces. The ixp4xx-npe package from the OE snapshot I am 
+> currently
+> using builds firmware for NPE-B only and the firmware type is 
+> hard-coded
+> in "IxNpeMicrocode.h".
+> 
+> The patch below proposes a means of letting the machine 
+> configuration file
+> decide which NPE firmware to build.
 
-Ah, you mean s/FIRWMARE/FIRMWARE/, yes, makes sense :-). I'll fix 
-this and submit the patch to the bug tracker.
+Thanks.  We'll be very happy to apply that patch.  I'll take a close
+look at it tonight.
 
-> The idea looks ok.
+> Another but somewhat related point is the COMPATIBLE_MACHINE 
+> variable. If
+> my machine's name does not start with nslug or ixp4xx, I am forced 
+> to
+> change many package recipes (I suspect it is a FAQ but I do not seem 
+> to
+> able to access the mailing-list archive at the moment), perhaps a
+> COMPATIBLE_ARCH variable would be help here ?
 
-Thanks for reviewing it.
+Which machine/arch are you using?  We can easily extend that
+compatibility to include any other machines/archs that will use it.
 
-Regards,
-
-Robin
+-- Rod
 
 
