@@ -1,27 +1,31 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.158.229.26] (helo=mail-ps.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HoE8s-0007aL-Kp
-	for openembedded-devel@openembedded.org; Wed, 16 May 2007 09:41:51 +0200
-Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l4G7fVLr011434 for <openembedded-devel@openembedded.org>;
-	Wed, 16 May 2007 09:41:31 +0200
-Message-ID: <464AB5A8.8070500@dominion.kabel.utwente.nl>
-Date: Wed, 16 May 2007 09:41:28 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+	(envelope-from <robin.farine@terminus.org>) id 1HoFJd-0003qd-IB
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 May 2007 10:57:01 +0200
+Received: from acn.212.98.42.40.adslpremium.ch (212.98.42.40) by
+	mail-ps.sunrise.ch (7.2.073)
+	id 4649D0690001F7E8 for openembedded-devel@lists.openembedded.org;
+	Wed, 16 May 2007 10:56:45 +0200
+Received: from halftrack.hq.acn-group.ch ([172.16.145.83])
+	by van.hq.acn-group.ch with esmtp (Exim 3.36 #1 (Debian))
+	id 1HoFJM-00044R-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 May 2007 10:56:44 +0200
+Received: from ip6-localhost ([::1])
+	by halftrack.hq.acn-group.ch with esmtp (Exim 4.63)
+	(envelope-from <robin.farine@terminus.org>) id 1HoFJO-0007WZ-V7
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 May 2007 10:56:46 +0200
+From: Robin Farine <robin.farine@terminus.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 May 2007 10:56:46 +0200
+User-Agent: KMail/1.9.5
+References: <200705151322.39110.robin.farine@terminus.org>
+	<464A5D37.4030401@whitby.id.au>
+In-Reply-To: <464A5D37.4030401@whitby.id.au>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <464613B3.8090003@dominion.kabel.utwente.nl>	<46461B73.8070900@trolltech.com>	<46461D72.4020206@dominion.kabel.utwente.nl>
-	<20070516031329.GA5205@twibble.org>
-In-Reply-To: <20070516031329.GA5205@twibble.org>
-X-Enigmail-Version: 0.94.2.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: uclibc 0.9.29 recipe
+Message-Id: <200705161056.46551.robin.farine@terminus.org>
+Subject: Re: RFC: machine customized ixp4xx NPE firmware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,51 +39,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2007 07:41:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 May 2007 08:57:03 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed May 16 2007 03:24, Rod Whitby wrote:
+> Robin Farine wrote:
 
-Jamie Lenehan schreef:
-> On Sat, May 12, 2007 at 10:02:58PM +0200, Koen Kooi wrote:
-> [...]
->> I'll add it once I solved the linux-libc-headers problems. Machine and distro maintainers
->> need to provide their parts of the uclibc configs to make it usefull, though.
-> 
-> Do we really need different distro based settings? 
+> > The patch below proposes a means of letting the machine
+> > configuration file
+> > decide which NPE firmware to build.
+>
+> Thanks.  We'll be very happy to apply that patch.  I'll take a
+> close look at it tonight.
 
-I tried to adhere to the existing uclibc infrastructure when adding 0.9.29, but maybe it's
-time to rethink and overhaul it.
+I forgot to disable line wrapping when I reposted it to the correct 
+mailing-list... You may prefer to have a look at the cleaner 
+version in bugzilla.
 
-> It's always been a
-> bit annoying that some things will build with uclibc for one build
-> but not another due to differing uclibc settings - things are a lot
-> easier if there's only a single configuration.
-> 
-> For now I'd like to see a
-> 
->   mtn -e mv uclibc-0.9.29/angstrom/uClibc.distro uclibc-0.9.29/uClibc.distro
+> Which machine/arch are you using?  We can easily extend that
+> compatibility to include any other machines/archs that will use
+> it.
 
-Fine by me, could you do that?
+Its a custom ixp425 big-endian board of which 2 functional exemplars 
+currently exist :-). Not a problem, I just wondered whether 
+something like COMPATIBLE_ARCH exists.
 
-> and then only add distro based configuration if it turns out to be
-> really needed by some distro. This'll also gives us a default
-> configuration for people using other distros.
-
-And gives us a better way to keep our site-files in sync.
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGSrWoMkyGM64RGpERAnrXAJwJFcLlBdZpiwEsf1Uw8DBL9agFtgCaA0ny
-EleWYKtPe+qa1D9PIgGiJps=
-=ByLX
------END PGP SIGNATURE-----
+Robin
 
 
