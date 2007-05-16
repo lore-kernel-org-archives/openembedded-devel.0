@@ -1,30 +1,32 @@
-Received: from [194.158.229.26] (helo=mail-ps.sunrise.ch)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <robin.farine@terminus.org>) id 1HoFJd-0003qd-IB
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2007 10:57:01 +0200
-Received: from acn.212.98.42.40.adslpremium.ch (212.98.42.40) by
-	mail-ps.sunrise.ch (7.2.073)
-	id 4649D0690001F7E8 for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2007 10:56:45 +0200
-Received: from halftrack.hq.acn-group.ch ([172.16.145.83])
-	by van.hq.acn-group.ch with esmtp (Exim 3.36 #1 (Debian))
-	id 1HoFJM-00044R-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2007 10:56:44 +0200
-Received: from ip6-localhost ([::1])
-	by halftrack.hq.acn-group.ch with esmtp (Exim 4.63)
-	(envelope-from <robin.farine@terminus.org>) id 1HoFJO-0007WZ-V7
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2007 10:56:46 +0200
-From: Robin Farine <robin.farine@terminus.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 May 2007 10:56:46 +0200
-User-Agent: KMail/1.9.5
+	(envelope-from <rpurdie@rpsys.net>) id 1HoH0G-0000QM-Rg
+	for openembedded-devel@openembedded.org; Wed, 16 May 2007 12:45:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4GAiqZU011951
+	for <openembedded-devel@openembedded.org>;
+	Wed, 16 May 2007 11:44:52 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11762-04 for <openembedded-devel@openembedded.org>;
+	Wed, 16 May 2007 11:44:49 +0100 (BST)
+Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4GAik3h011931
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 16 May 2007 11:44:46 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <464A5D37.4030401@whitby.id.au>
 References: <200705151322.39110.robin.farine@terminus.org>
 	<464A5D37.4030401@whitby.id.au>
-In-Reply-To: <464A5D37.4030401@whitby.id.au>
-MIME-Version: 1.0
-Message-Id: <200705161056.46551.robin.farine@terminus.org>
+Date: Wed, 16 May 2007 11:44:45 +0100
+Message-Id: <1179312285.5854.2.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: RFC: machine customized ixp4xx NPE firmware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,34 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2007 08:57:03 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 16 May 2007 10:45:13 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wed May 16 2007 03:24, Rod Whitby wrote:
+On Wed, 2007-05-16 at 10:54 +0930, Rod Whitby wrote:
 > Robin Farine wrote:
-
-> > The patch below proposes a means of letting the machine
-> > configuration file
-> > decide which NPE firmware to build.
->
-> Thanks.  We'll be very happy to apply that patch.  I'll take a
-> close look at it tonight.
-
-I forgot to disable line wrapping when I reposted it to the correct 
-mailing-list... You may prefer to have a look at the cleaner 
-version in bugzilla.
-
+> > Another but somewhat related point is the COMPATIBLE_MACHINE 
+> > variable. If
+> > my machine's name does not start with nslug or ixp4xx, I am forced 
+> > to
+> > change many package recipes (I suspect it is a FAQ but I do not seem 
+> > to
+> > able to access the mailing-list archive at the moment), perhaps a
+> > COMPATIBLE_ARCH variable would be help here ?
+> 
 > Which machine/arch are you using?  We can easily extend that
-> compatibility to include any other machines/archs that will use
-> it.
+> compatibility to include any other machines/archs that will use it.
 
-Its a custom ixp425 big-endian board of which 2 functional exemplars 
-currently exist :-). Not a problem, I just wondered whether 
-something like COMPATIBLE_ARCH exists.
+A neat way to handle this might be to define:
 
-Robin
+IXPMACHINES = "nslu2|ixp4xx|whatever"
+
+and then the ixp specific .bb's check IXPMACHINES rather than a specific
+list. The list would then be maintained in one place and is easily
+updated if anyone adds a new ixp like machine.
+
+I've not looked at the specifics, its just a random idea I had...
+
+Cheers,
+
+Richard
+
+
+
+
 
 
