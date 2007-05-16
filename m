@@ -1,32 +1,20 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [216.148.227.152] (helo=rwcrmhc12.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1HoH0G-0000QM-Rg
-	for openembedded-devel@openembedded.org; Wed, 16 May 2007 12:45:09 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4GAiqZU011951
-	for <openembedded-devel@openembedded.org>;
-	Wed, 16 May 2007 11:44:52 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11762-04 for <openembedded-devel@openembedded.org>;
-	Wed, 16 May 2007 11:44:49 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4GAik3h011931
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 16 May 2007 11:44:46 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <golly@stellarwerx.com>) id 1HoKNy-0003fD-H8
+	for openembedded-devel@openembedded.org; Wed, 16 May 2007 16:21:52 +0200
+Received: from gatekeeper.stellarwerx.com
+	(c-68-57-212-205.hsd1.in.comcast.net[68.57.212.205])
+	by comcast.net (rwcrmhc12) with ESMTP
+	id <20070516142130m120088e2ie>; Wed, 16 May 2007 14:21:31 +0000
+Received: by gatekeeper.stellarwerx.com (Postfix, from userid 500)
+	id 513F81108; Wed, 16 May 2007 10:32:21 -0400 (EDT)
+From: "Mark Gollahon" <golly@stellarwerx.com>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <464A5D37.4030401@whitby.id.au>
-References: <200705151322.39110.robin.farine@terminus.org>
-	<464A5D37.4030401@whitby.id.au>
-Date: Wed, 16 May 2007 11:44:45 +0100
-Message-Id: <1179312285.5854.2.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+X-Originating-IP: 66.162.54.82
+X-Mailer: Usermin 1.270
+Message-Id: <1179325940.4167@gatekeeper.stellarwerx.com>
+Date: Wed, 16 May 2007 10:32:20 -0400 (EDT)
+MIME-Version: 1.0
 Subject: Re: RFC: machine customized ixp4xx NPE firmware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,40 +29,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2007 10:45:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 16 May 2007 14:21:56 -0000
+Content-Type: multipart/mixed; boundary="bound1179325940"
+
+--bound1179325940
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2007-05-16 at 10:54 +0930, Rod Whitby wrote:
-> Robin Farine wrote:
-> > Another but somewhat related point is the COMPATIBLE_MACHINE 
-> > variable. If
-> > my machine's name does not start with nslug or ixp4xx, I am forced 
-> > to
-> > change many package recipes (I suspect it is a FAQ but I do not seem 
-> > to
-> > able to access the mailing-list archive at the moment), perhaps a
-> > COMPATIBLE_ARCH variable would be help here ?
+Richard Purdie wrote ..
 > 
-> Which machine/arch are you using?  We can easily extend that
-> compatibility to include any other machines/archs that will use it.
+> A neat way to handle this might be to define:
+> 
+> IXPMACHINES = "nslu2|ixp4xx|whatever"
+> 
+> and then the ixp specific .bb's check IXPMACHINES rather than a specific
+> list. The list would then be maintained in one place and is easily
+> updated if anyone adds a new ixp like machine.
+> 
+> I've not looked at the specifics, its just a random idea I had...
+> 
+> Cheers,
+> 
+> Richard
 
-A neat way to handle this might be to define:
+I want to second this approach as I tried awhile back to build OE for an IXP4XX-based machine that came into my possession and, during that time, ended up patching several IXP-specific .bb's to add my new machine.  My work would have been much easier had IXPMACHINES existed.
 
-IXPMACHINES = "nslu2|ixp4xx|whatever"
+(NOTE: I did get it almost completely working, the only problem ended up being the networking ports didn't work, which, for a firewall machine, meant the device was useless.  There is an IC175 switch chip sitting between the IXP's two network ports and the physical ports and I couldn't figure out how to hack the IXP net driver to get the IC175 to pass eth frames.)
 
-and then the ixp specific .bb's check IXPMACHINES rather than a specific
-list. The list would then be maintained in one place and is easily
-updated if anyone adds a new ixp like machine.
+Regards,
+-Mark Gollahon
 
-I've not looked at the specifics, its just a random idea I had...
-
-Cheers,
-
-Richard
-
-
-
-
-
-
+--bound1179325940--
