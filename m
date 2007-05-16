@@ -1,35 +1,26 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [64.233.166.176] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1Ho9xT-0002ee-Qv
+	(envelope-from <xjqian@gmail.com>) id 1HoAEK-0006cL-74
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2007 05:13:48 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id EE5E0103EB3
+	Wed, 16 May 2007 05:31:13 +0200
+Received: by py-out-1112.google.com with SMTP id n39so354178pyh
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2007 13:13:31 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 32145-02
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2007 13:13:30 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 3C261D8DA8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2007 13:13:30 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 0462CB70149; Wed, 16 May 2007 13:13:29 +1000 (EST)
-Date: Wed, 16 May 2007 13:13:29 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070516031329.GA5205@twibble.org>
-References: <464613B3.8090003@dominion.kabel.utwente.nl>
-	<46461B73.8070900@trolltech.com>
-	<46461D72.4020206@dominion.kabel.utwente.nl>
+	Tue, 15 May 2007 20:30:56 -0700 (PDT)
+Received: by 10.35.106.15 with SMTP id i15mr14218008pym.1179286256271;
+	Tue, 15 May 2007 20:30:56 -0700 (PDT)
+Received: from ?192.168.10.106? ( [71.85.151.212])
+	by mx.google.com with ESMTP id m2sm975315nzf.2007.05.15.20.30.54;
+	Tue, 15 May 2007 20:30:54 -0700 (PDT)
+Message-ID: <464A7A3E.9050905@gmail.com>
+Date: Tue, 15 May 2007 22:27:58 -0500
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Icedove 1.5.0.10 (X11/20070329)
 MIME-Version: 1.0
-In-Reply-To: <46461D72.4020206@dominion.kabel.utwente.nl>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Subject: Re: uclibc 0.9.29 recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1179059149.5404.3.camel@cimmeria.hyboria>	<f277j3$i00$1@sea.gmane.org>
+	<f29dkh$o3v$1@sea.gmane.org>
+In-Reply-To: <f29dkh$o3v$1@sea.gmane.org>
+Subject: Re: RFD: Bugzilla in general & bug triaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,29 +34,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2007 03:13:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 May 2007 03:31:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, May 12, 2007 at 10:02:58PM +0200, Koen Kooi wrote:
-[...]
-> I'll add it once I solved the linux-libc-headers problems. Machine and distro maintainers
-> need to provide their parts of the uclibc configs to make it usefull, though.
+Rolf Leggewie wrote:
+> I have asked and been granted greater powers on bugzilla.  There are 
+> features which we don't use yet but which could aid in establishing a 
+> sane workflow while rendering unnecessary the current clutches and 
+> ad-hoc fixes.
+>
+> Bugzilla will be upgraded soon and no structural changes will be made 
+> until that is completed.  But that leaves us some good time to think 
+> about how this should be enhanced.
+>   
+two quibbles about the recent change in bugtracker
+1) aligning left wastes lot of space on the right of the screen. I think 
+the old "centered" scheme looks better.
+2) "the Words field cannot be empty. You have to enter at lease on word 
+in your search criteria". This is inconvenient for me to just browser 
+the bugs.
 
-Do we really need different distro based settings? It's always been a
-bit annoying that some things will build with uclibc for one build
-but not another due to differing uclibc settings - things are a lot
-easier if there's only a single configuration.
+> Things I'd like to see
+> * confirmation flags
+> * better documentation of workflow status (need to define it first)
+> * assigning bugs (or if you prefer "Hey, please take a look")
+> * link to some bug searches like the ones I send about 5 minutes ago
+>    on the entry page
+> * entry page clean-up (why two search fields?)
+>   
 
-For now I'd like to see a
+> * removal of dead stuff (ZaurusKernel, Familiar)
+>   
+better hide them (sort of a archive in case some people want to dig into 
+those) than remove
+> Please add to the list.  The most important point is the second.  That 
+> is what we should discuss.
+>   
+I agree on the necessity of the second point. Please have a list of 
+best-practice/workflow rules (whatever they are) and hide the additional 
+irrelevant features. A clean and uncluttered interface is also desirable.
 
-  mtn -e mv uclibc-0.9.29/angstrom/uClibc.distro uclibc-0.9.29/uClibc.distro
-
-and then only add distro based configuration if it turns out to be
-really needed by some distro. This'll also gives us a default
-configuration for people using other distros.
-
--- 
- Jamie Lenehan <lenehan@twibble.org>
+Gordon
 
 
