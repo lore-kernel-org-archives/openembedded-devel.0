@@ -1,26 +1,33 @@
-Received: from [64.233.166.176] (helo=py-out-1112.google.com)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <xjqian@gmail.com>) id 1HoAEK-0006cL-74
+	(envelope-from <lenehan@twibble.org>) id 1HoBs3-0002xt-9D
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2007 05:31:13 +0200
-Received: by py-out-1112.google.com with SMTP id n39so354178pyh
+	Wed, 16 May 2007 07:16:19 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id DF3B4103E89
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2007 20:30:56 -0700 (PDT)
-Received: by 10.35.106.15 with SMTP id i15mr14218008pym.1179286256271;
-	Tue, 15 May 2007 20:30:56 -0700 (PDT)
-Received: from ?192.168.10.106? ( [71.85.151.212])
-	by mx.google.com with ESMTP id m2sm975315nzf.2007.05.15.20.30.54;
-	Tue, 15 May 2007 20:30:54 -0700 (PDT)
-Message-ID: <464A7A3E.9050905@gmail.com>
-Date: Tue, 15 May 2007 22:27:58 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Icedove 1.5.0.10 (X11/20070329)
-MIME-Version: 1.0
+	Wed, 16 May 2007 15:16:02 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 02972-05
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 May 2007 15:16:01 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 6F69F103D8D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 May 2007 15:16:01 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 47F62B70149; Wed, 16 May 2007 15:16:01 +1000 (EST)
+Date: Wed, 16 May 2007 15:16:01 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1179059149.5404.3.camel@cimmeria.hyboria>	<f277j3$i00$1@sea.gmane.org>
-	<f29dkh$o3v$1@sea.gmane.org>
-In-Reply-To: <f29dkh$o3v$1@sea.gmane.org>
-Subject: Re: RFD: Bugzilla in general & bug triaging
+Message-ID: <20070516051600.GA5179@twibble.org>
+References: <464613B3.8090003@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+In-Reply-To: <464613B3.8090003@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.12-2006-07-14
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: uclibc 0.9.29 & SYS_SIGLIST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,47 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2007 03:31:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 May 2007 05:16:20 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Rolf Leggewie wrote:
-> I have asked and been granted greater powers on bugzilla.  There are 
-> features which we don't use yet but which could aid in establishing a 
-> sane workflow while rendering unnecessary the current clutches and 
-> ad-hoc fixes.
->
-> Bugzilla will be upgraded soon and no structural changes will be made 
-> until that is completed.  But that leaves us some good time to think 
-> about how this should be enhanced.
->   
-two quibbles about the recent change in bugtracker
-1) aligning left wastes lot of space on the right of the screen. I think 
-the old "centered" scheme looks better.
-2) "the Words field cannot be empty. You have to enter at lease on word 
-in your search criteria". This is inconvenient for me to just browser 
-the bugs.
+Currently SYS_SIGLIST is disabled in uclibc but the site files all
+say it's present. For the old uclibc version some of the
+configurations enabled SYS_SIGLIST support and some didn't. We don't
+really need it and the uclibc help says it's going to go away one day
+so if no one objects I'll add the following site entries:
 
-> Things I'd like to see
-> * confirmation flags
-> * better documentation of workflow status (need to define it first)
-> * assigning bugs (or if you prefer "Hey, please take a look")
-> * link to some bug searches like the ones I send about 5 minutes ago
->    on the entry page
-> * entry page clean-up (why two search fields?)
->   
+common-glibc
 
-> * removal of dead stuff (ZaurusKernel, Familiar)
->   
-better hide them (sort of a archive in case some people want to dig into 
-those) than remove
-> Please add to the list.  The most important point is the second.  That 
-> is what we should discuss.
->   
-I agree on the necessity of the second point. Please have a list of 
-best-practice/workflow rules (whatever they are) and hide the additional 
-irrelevant features. A clean and uncluttered interface is also desirable.
+ bash_cv_under_sys_siglist=${bash_cv_under_sys_siglist=yes}
+ bash_cv_sys_siglist=${bash_cv_sys_siglist=yes}
+ ac_cv_have_decl_sys_siglist=${ac_cv_have_decl_sys_siglist=yes}
 
-Gordon
+common-uclibc
+
+ bash_cv_under_sys_siglist=${bash_cv_under_sys_siglist=no}
+ bash_cv_sys_siglist=${bash_cv_sys_siglist=no}
+ ac_cv_have_decl_sys_siglist=${ac_cv_have_decl_sys_siglist=no}
+
+And remove the above entries from all the other site files.
+
+This siglist things needs to be sorted out to build apr at least
+(which is needed to build subversion).
+
+-- 
+ Jamie Lenehan <lenehan@twibble.org>
 
 
