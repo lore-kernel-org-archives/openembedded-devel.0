@@ -1,29 +1,35 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rod@whitby.id.au>) id 1Ho8HB-0006EO-1R
+	(envelope-from <lenehan@twibble.org>) id 1Ho9xT-0002ee-Qv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2007 03:26:01 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 6F5A221F77B
+	Wed, 16 May 2007 05:13:48 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id EE5E0103EB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2007 21:26:48 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Tue, 15 May 2007 21:25:46 -0400
-X-Sasl-enc: 6xff8VJuZN/BZt6P3ZgAQDN5f4ePLGIJY2rNksiy9kOG 1179278747
-Received: from [127.0.0.1] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id C74E523F81
+	Wed, 16 May 2007 13:13:31 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 32145-02
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2007 21:25:46 -0400 (EDT)
-Message-ID: <464A5D37.4030401@whitby.id.au>
-Date: Wed, 16 May 2007 10:54:07 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
-MIME-Version: 1.0
+	Wed, 16 May 2007 13:13:30 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 3C261D8DA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 May 2007 13:13:30 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 0462CB70149; Wed, 16 May 2007 13:13:29 +1000 (EST)
+Date: Wed, 16 May 2007 13:13:29 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
 To: openembedded-devel@lists.openembedded.org
-References: <200705151322.39110.robin.farine@terminus.org>
-In-Reply-To: <200705151322.39110.robin.farine@terminus.org>
-X-Enigmail-Version: 0.94.0.0
-Subject: Re: RFC: machine customized ixp4xx NPE firmware
+Message-ID: <20070516031329.GA5205@twibble.org>
+References: <464613B3.8090003@dominion.kabel.utwente.nl>
+	<46461B73.8070900@trolltech.com>
+	<46461D72.4020206@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+In-Reply-To: <46461D72.4020206@dominion.kabel.utwente.nl>
+User-Agent: Mutt/1.5.12-2006-07-14
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: Re: uclibc 0.9.29 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,37 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2007 01:26:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 May 2007 03:13:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Robin Farine wrote:
-> The platform I am working on is using NPE-B and NPE-C as Ethernet
-> interfaces. The ixp4xx-npe package from the OE snapshot I am 
-> currently
-> using builds firmware for NPE-B only and the firmware type is 
-> hard-coded
-> in "IxNpeMicrocode.h".
-> 
-> The patch below proposes a means of letting the machine 
-> configuration file
-> decide which NPE firmware to build.
+On Sat, May 12, 2007 at 10:02:58PM +0200, Koen Kooi wrote:
+[...]
+> I'll add it once I solved the linux-libc-headers problems. Machine and distro maintainers
+> need to provide their parts of the uclibc configs to make it usefull, though.
 
-Thanks.  We'll be very happy to apply that patch.  I'll take a close
-look at it tonight.
+Do we really need different distro based settings? It's always been a
+bit annoying that some things will build with uclibc for one build
+but not another due to differing uclibc settings - things are a lot
+easier if there's only a single configuration.
 
-> Another but somewhat related point is the COMPATIBLE_MACHINE 
-> variable. If
-> my machine's name does not start with nslug or ixp4xx, I am forced 
-> to
-> change many package recipes (I suspect it is a FAQ but I do not seem 
-> to
-> able to access the mailing-list archive at the moment), perhaps a
-> COMPATIBLE_ARCH variable would be help here ?
+For now I'd like to see a
 
-Which machine/arch are you using?  We can easily extend that
-compatibility to include any other machines/archs that will use it.
+  mtn -e mv uclibc-0.9.29/angstrom/uClibc.distro uclibc-0.9.29/uClibc.distro
 
--- Rod
+and then only add distro based configuration if it turns out to be
+really needed by some distro. This'll also gives us a default
+configuration for people using other distros.
+
+-- 
+ Jamie Lenehan <lenehan@twibble.org>
 
 
