@@ -1,33 +1,25 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [66.249.82.235] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1HoBs3-0002xt-9D
+	(envelope-from <leon.woestenberg@gmail.com>) id 1HoDuB-0007MM-0P
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2007 07:16:19 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id DF3B4103E89
+	Wed, 16 May 2007 09:26:39 +0200
+Received: by wx-out-0506.google.com with SMTP id s14so80980wxc
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2007 15:16:02 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 02972-05
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2007 15:16:01 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 6F69F103D8D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2007 15:16:01 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 47F62B70149; Wed, 16 May 2007 15:16:01 +1000 (EST)
-Date: Wed, 16 May 2007 15:16:01 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
+	Wed, 16 May 2007 00:26:22 -0700 (PDT)
+Received: by 10.90.90.16 with SMTP id n16mr7435566agb.1179300382645;
+	Wed, 16 May 2007 00:26:22 -0700 (PDT)
+Received: by 10.90.50.5 with HTTP; Wed, 16 May 2007 00:26:22 -0700 (PDT)
+Message-ID: <c384c5ea0705160026x5965bad9w9d2d0587ae574853@mail.gmail.com>
+Date: Wed, 16 May 2007 09:26:22 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070516051600.GA5179@twibble.org>
-References: <464613B3.8090003@dominion.kabel.utwente.nl>
+In-Reply-To: <20070516031329.GA5205@twibble.org>
 MIME-Version: 1.0
-In-Reply-To: <464613B3.8090003@dominion.kabel.utwente.nl>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Subject: uclibc 0.9.29 & SYS_SIGLIST
+References: <464613B3.8090003@dominion.kabel.utwente.nl>
+	<46461B73.8070900@trolltech.com>
+	<46461D72.4020206@dominion.kabel.utwente.nl>
+	<20070516031329.GA5205@twibble.org>
+Subject: Re: uclibc 0.9.29 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,34 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2007 05:16:20 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 16 May 2007 07:26:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Currently SYS_SIGLIST is disabled in uclibc but the site files all
-say it's present. For the old uclibc version some of the
-configurations enabled SYS_SIGLIST support and some didn't. We don't
-really need it and the uclibc help says it's going to go away one day
-so if no one objects I'll add the following site entries:
+Hello Jamie,
 
-common-glibc
+On 5/16/07, Jamie Lenehan <lenehan@twibble.org> wrote:
+> On Sat, May 12, 2007 at 10:02:58PM +0200, Koen Kooi wrote:
 
- bash_cv_under_sys_siglist=${bash_cv_under_sys_siglist=yes}
- bash_cv_sys_siglist=${bash_cv_sys_siglist=yes}
- ac_cv_have_decl_sys_siglist=${ac_cv_have_decl_sys_siglist=yes}
+> For now I'd like to see a
+>
+>   mtn -e mv uclibc-0.9.29/angstrom/uClibc.distro uclibc-0.9.29/uClibc.distro
+>
+> and then only add distro based configuration if it turns out to be
+> really needed by some distro. This'll also gives us a default
+>
+And that generic distro configuration would probably be a full
+configuration (i.e. most options enabled) so that it would work for
+most packages depending on C library functionality (or glibc
+compatibility).
 
-common-uclibc
+Distro's can optionally tune down the .distro by either:
+- providing their own .distro
+- mangling the resulting .config
 
- bash_cv_under_sys_siglist=${bash_cv_under_sys_siglist=no}
- bash_cv_sys_siglist=${bash_cv_sys_siglist=no}
- ac_cv_have_decl_sys_siglist=${ac_cv_have_decl_sys_siglist=no}
-
-And remove the above entries from all the other site files.
-
-This siglist things needs to be sorted out to build apr at least
-(which is needed to build subversion).
-
+Regards,
 -- 
- Jamie Lenehan <lenehan@twibble.org>
+Leon
 
 
