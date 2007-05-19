@@ -1,34 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1HpT4z-0004hM-A3
-	for openembedded-devel@openembedded.org; Sat, 19 May 2007 19:51:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4JHoKQ6000682
-	for <openembedded-devel@openembedded.org>;
-	Sat, 19 May 2007 18:50:20 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 32673-07 for <openembedded-devel@openembedded.org>;
-	Sat, 19 May 2007 18:50:16 +0100 (BST)
-Received: from max.rpnet.com (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l4JHoFEY000670
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Sat, 19 May 2007 18:50:15 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HpTD0-0004mM-Eb
+	for openembedded-devel@openembedded.org; Sat, 19 May 2007 19:59:14 +0200
+Received: from [172.20.1.5] (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l4JHwWox002122 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 May 2007 19:58:33 +0200
+Message-ID: <464F3AC8.5000804@dominion.kabel.utwente.nl>
+Date: Sat, 19 May 2007 19:58:32 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 1.5.0.10 (Macintosh/20070221)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-In-Reply-To: <4644B4D1.5010803@klever.net>
-References: <4644ABCB.6080202@openhardware.net>
-	<4644B0D2.8020409@dominion.kabel.utwente.nl>
-	<4644B4D1.5010803@klever.net>
-Date: Sat, 19 May 2007 18:50:15 +0100
-Message-Id: <1179597015.5852.5.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: do_rootfs fails
+References: <463C9EA9.2060302@dominion.kabel.utwente.nl>
+In-Reply-To: <463C9EA9.2060302@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.2.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: RFC: make do_install and do_deploy a PACKAGE_FUNC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,35 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 May 2007 17:51:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 19 May 2007 17:59:14 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2007-05-11 at 20:24 +0200, Michael Krelin wrote:
-> There's also an option of asking Tom to bitbake -DDD and send it to
-> zecke, because I couldn't find time to try BB 1.6 for him again. And let
-> him apply the patch that fixes this problem:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Koen Kooi schreef:
+> Hi,
 > 
-> Index: lib/bb/parse/parse_py/BBHandler.py
-> ===================================================================
-> --- lib/bb/parse/parse_py/BBHandler.py  (revision 817)
-> +++ lib/bb/parse/parse_py/BBHandler.py  (working copy)
-> @@ -66,7 +66,9 @@
->          if not file in __inherit_cache.split():
->              debug(2, "BB %s:%d: inheriting %s" % (fn, lineno, file))
->              __inherit_cache += " %s" % file
-> +            data.setVar('__inherit_cache', __inherit_cache, d)
->              include(fn, file, d)
-> +            __inherit_cache = data.getVar('__inherit_cache', d) or ""
->      data.setVar('__inherit_cache', __inherit_cache, d)
+> Lately there have been several problems with files not getting packaged, because users
+> resumed builds after a failure. Richard has come up with a fix:
+> 
+> http://www.rpsys.net/openzaurus/temp/oe-install-change.patch
+> 
+> The only bug with that patch is that do_deploy fails, which can be solved by making that a
+>  PACKAGE_FUNC as well.
+> 
+> What do you think about that?
 
-Thanks for this, I've merged into bitbake 1.9, 1.8 and 1.6 branches as
-they all had this issue!
+So this is bugfree and can go in immediately?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Cheers,
-
-Richard
-
-
+iD8DBQFGTzrIMkyGM64RGpERAnN8AJ9NQh73txV4w4h4FyCp8+Zj95R7UQCcChwH
+ti0bnbez4K1Iqgbt+futJ4A=
+=1Jkw
+-----END PGP SIGNATURE-----
 
 
