@@ -1,23 +1,32 @@
-Received: from [212.247.154.65] (helo=swip.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <ulf@atmel.com>) id 1HqLxZ-00036K-CI
-	for openembedded-devel@openembedded.org; Tue, 22 May 2007 06:26:57 +0200
-X-Cloudmark-Score: 0.000000 []
-Received: from [87.54.0.50] (account mz80686@tele2.se HELO aeglos)
-	by mailfe03.swip.net (CommuniGate Pro SMTP 5.1.7)
-	with ESMTPA id 503262735 for openembedded-devel@openembedded.org;
-	Tue, 22 May 2007 06:26:02 +0200
-Message-ID: <003a01c79c29$1985a690$26031a0a@atmel.com>
-From: "Ulf Samuelsson" <ulf@atmel.com>
-To: <openembedded-devel@openembedded.org>
-References: <4651EFEE.50907@atmel.com>
-	<189F751D-9A54-4A17-84FD-82CD2BF62403@gmx.net>
-Date: Tue, 22 May 2007 06:24:27 +0200
-MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.3028
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1HqPCn-0008DW-KI
+	for openembedded-devel@openembedded.org; Tue, 22 May 2007 09:54:53 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1HqPBu-0000ID-DW
+	for openembedded-devel@openembedded.org; Tue, 22 May 2007 09:53:58 +0200
+Received: from p54b967a2.dip.t-dialin.net ([84.185.103.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 22 May 2007 09:53:58 +0200
+Received: from no2spam by p54b967a2.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 22 May 2007 09:53:58 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 22 May 2007 09:53:51 +0200
+Message-ID: <f2u7if$5g3$1@sea.gmane.org>
+References: <4651EFEE.50907@atmel.com>	<189F751D-9A54-4A17-84FD-82CD2BF62403@gmx.net>
+	<003a01c79c29$1985a690$26031a0a@atmel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: p54b967a2.dip.t-dialin.net
+User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
+In-Reply-To: <003a01c79c29$1985a690$26031a0a@atmel.com>
+Sender: news <news@sea.gmane.org>
 Subject: Re: ERROR: Task 2246 ( ...org.openembedded.dev/packages/gnome/gnome-desktop_2.16.1.bb, do_compile) failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,34 +41,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2007 04:26:57 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 May 2007 07:54:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
->=20
-> Am 21.05.2007 um 21:15 schrieb Ulf Samuelsson:
->=20
->> Looks like there is an issue with the fdl.xml in this package?
->> Any workarounds?
->=20
-> Did you lack internet connectivity during the build?
->=20
+Ulf Samuelsson wrote:
+> Been trying to fetch all packages in advance by 
+> 
+> $ bitbake -c fetch gpe-image
+> 
+> but that does not work.
 
-
-I have been trying to build this for a couple of days,
-and sometimes the connections has been bad.
-
-
-Been trying to fetch all packages in advance by=20
-
-$ bitbake -c fetch gpe-image
-
-but that does not work.
-
-
-Best Regards
-Ulf Samuelsson
+You want bitbake -c fetchall gpe-image
 
 
 
