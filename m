@@ -1,31 +1,37 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [192.208.34.52] (helo=smtp3.smiths.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1Hr3CE-0000rT-7m
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 May 2007 04:36:59 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id EE342ED52B;
-	Thu, 24 May 2007 12:35:54 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 10420-09; Thu, 24 May 2007 12:35:52 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 3E653ED523;
-	Thu, 24 May 2007 12:35:52 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 13736B70149; Thu, 24 May 2007 12:35:51 +1000 (EST)
-Date: Thu, 24 May 2007 12:35:51 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070524023551.GA31623@twibble.org>
-References: <465225B7.50900@kernelconcepts.de>
-	<1179789619.5849.59.camel@localhost.localdomain>
-	<46522CA3.1010000@kernelconcepts.de>
+	(envelope-from <Scott.Davis@smiths-aerospace.com>)
+	id 1HqZsY-0001O6-GU for openembedded-devel@lists.openembedded.org;
+	Tue, 22 May 2007 21:18:43 +0200
+Received: from COSSMGIMS04.EMAIL.CORP.TLD (cossmgims04.email.corp.tld
+	[10.225.225.147])
+	by smtp3.smiths.com (Postfix) with ESMTP id B32F0327D3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 May 2007 13:17:47 -0600 (MDT)
+Received: from COSSMGFEX03.EMAIL.CORP.TLD ([10.225.225.62]) by
+	COSSMGFEB04.EMAIL.CORP.TLD with Microsoft SMTPSVC(6.0.3790.1830); 
+	Tue, 22 May 2007 13:17:46 -0600
+Received: from COSSMGIMS04.EMAIL.CORP.TLD ([10.225.225.147]) by
+	COSSMGFEX03.EMAIL.CORP.TLD with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 22 May 2007 13:17:46 -0600
 MIME-Version: 1.0
-In-Reply-To: <46522CA3.1010000@kernelconcepts.de>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Subject: Re: Problem wt. perl-native building for PXA
+Received: from cossmgmbx07.EMAIL.CORP.TLD ([10.225.225.44]) by
+	COSSMGFEB03.EMAIL.CORP.TLD with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 22 May 2007 13:17:44 -0600
+X-OriginalArrivalTime: 22 May 2007 19:17:44.0894 (UTC)
+	FILETIME=[E03C65E0:01C79CA5]
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Date: Tue, 22 May 2007 13:17:43 -0600
+Message-ID: <BDD06CD3363F254993AED78CA36350E20324E06D@cossmgmbx07.EMAIL.CORP.TLD>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Building Python extensions
+Thread-Index: Acecpd9/uswWbcX2T5+xcKgN94668g==
+From: "Davis, Scott (AGRE)" <Scott.Davis@smiths-aerospace.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-Mailman-Approved-At: Thu, 24 May 2007 11:27:02 +0200
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Building Python extensions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,88 +45,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2007 02:37:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Tue, May 22, 2007 at 01:34:59AM +0200, Nils Faerber wrote:
-> Richard Purdie schrieb:
-> > Hi,
-> Hi!
-> 
-> > On Tue, 2007-05-22 at 01:05 +0200, Nils Faerber wrote:
-[...]
-> >> My machine has Ubuntu feisty installed. I am using Bitbake 1.8 from SVN
-[...]
-> >> What happens is that the build works quite well until it comes to
-> >> perl-native-5.8.8-r7. There it fails with the following error:
-[...]
-> Is tihs Ubuntu?
-> I did never recognise this, but you are perfectly right with your
-> assumption, sh -> dash.
-> 
-> Gee, hey look, now it works!!!
-
-> This dash thing should be tarred and feathered ;)
-
-I actually tested perl-native with dash, and it builds just fine here
-when using dash:
-
-  ~%> ./bb -b packages/perl/perl-native_5.8.8.bb 
-  ...
-  NOTE: package perl-native-5.8.8: completed
-  ~%> ls -l /bin/sh
-  lrwxrwxrwx 1 root root 4 2007-05-24 12:05 /bin/sh -> dash*
-  ~%> cat /etc/issue.net 
-  Ubuntu 6.10
-
-In theory the following patch should fix the dash issues you were
-seeing. Is their someone seeing this dash/perl-native issues that
-could test this?
-
-# 
-# old_revision [d28c26f2757f88207089404b9e74286950165915]
-# 
-# add_file "packages/perl/perl-5.8.8/native-makedepend-dash.patch"
-#  content [a32ff3bf1b75c57f6ff7ac58b232cc44f2648a27]
-# 
-# patch "packages/perl/perl-native_5.8.8.bb"
-#  from [3013e9425fe473cf0988c3ccf6cad2b894e62e58]
-#    to [e95283c93197ba0c2c16f42feef3c0b6691a7a53]
-# 
-============================================================
---- packages/perl/perl-5.8.8/native-makedepend-dash.patch	a32ff3bf1b75c57f6ff7ac58b232cc44f2648a27
-+++ packages/perl/perl-5.8.8/native-makedepend-dash.patch	a32ff3bf1b75c57f6ff7ac58b232cc44f2648a27
-@@ -0,0 +1,13 @@
-+Index: perl-5.8.8/makedepend.SH
-+===================================================================
-+--- perl-5.8.8.orig/makedepend.SH	2007-05-24 12:06:52.000000000 +1000
-++++ perl-5.8.8/makedepend.SH	2007-05-24 12:27:33.000000000 +1000
-+@@ -128,7 +128,7 @@
-+     *.y) filebase=`basename $file .y` ;;
-+     esac
-+     case "$file" in
-+-    */*) finc="-I`echo $file | sed 's#/[^/]*$##`" ;;
-++    */*) finc="-I`echo $file | sed 's#/[^/]*$##'`" ;;
-+     *)   finc= ;;
-+     esac
-+     $echo "Finding dependencies for $filebase$_o."
-============================================================
---- packages/perl/perl-native_5.8.8.bb	3013e9425fe473cf0988c3ccf6cad2b894e62e58
-+++ packages/perl/perl-native_5.8.8.bb	e95283c93197ba0c2c16f42feef3c0b6691a7a53
-@@ -12,7 +12,8 @@ SRC_URI = "http://ftp.funet.fi/pub/CPAN/
-            file://Configure-multilib.patch;patch=1 \
-            file://perl-configpm-switch.patch;patch=1 \
-            file://native-nopacklist.patch;patch=1 \
--           file://native-no-gdbminc.patch;patch=1"
-+           file://native-no-gdbminc.patch;patch=1 \
-+           file://native-makedepend-dash.patch;patch=1"
- 
- S = "${WORKDIR}/perl-${PV}"
- 
+X-List-Received-Date: Tue, 22 May 2007 19:18:43 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
 
--- 
- Jamie Lenehan <lenehan@twibble.org>
+I am trying to build a 32-bit shared library for a C library I have on
+an x86_64 AMD SuSE linux system.  I am observing the same problem that
+apparently someone on your list has had.  I have a commercial C 32-bit
+linux library that I want to use SWIG to build a python extension for.
+My linux system is 64-bit and when I compile against Python.h for Python
+2.4 I get #error LONG BIT below emitted.=20
+
+The original post is at the URL below:
+http://projects.linuxtogo.org/pipermail/openembedded-devel/2007-March/00
+1722.html
+
+What is the fix to build 32-bit shared library python extension on a
+64-bit linux system?
+
+#if LONG_BIT !=3D 8 * SIZEOF_LONG=20
+/* 04-Oct-2000 LONG_BIT is apparently (mis)defined as 64 on some recent=20
+* 32-bit platforms using gcc. We try to catch that here at compile-time=20
+* rather than waiting for integer multiplication to trigger bogus *
+overflows. */
+ #error "LONG_BIT definition appears wrong for platform (bad gcc/glibc
+config?)."=20
+#endif=20
+
+Scott Davis
+GE
+Aviation
+Digital Systems
+Principal Software Engineer
+
+T 616 224 6659
+F 616 241 8707
+E scott.davis@smiths-aerospace.com
+www.ge.com/aviation=20
+
+3290 Patterson Ave, SE=20
+Grand Rapids, MI 49512, U.S.A.
 
 
+
+</table> </Pre>
+<HTML>
+<br>
+<br>
+************************************************<br>
+The information contained in, or attached to, this e-mail, may contain con=
+fidential information and is intended solely for the use of the individual =
+or entity to whom they are addressed and may be subject to legal privilege.=
+  If you have received this e-mail in error you should notify the sender im=
+mediately by reply e-mail, delete the message from your system and notify y=
+our system manager.  Please do not copy it for any purpose, or disclose its=
+ contents to any other person.  The views or opinions presented in this e-m=
+ail are solely those of the author and do not necessarily represent those o=
+f the company.  The recipient should check this e-mail and any attachments =
+for the presence of viruses.  The company accepts no liability for any dama=
+ge caused, directly or indirectly, by any virus transmitted in this email.<=
+br>
+************************************************<br>
+</HTML>
+From openembedded@hrw.one.pl Thu May 24 14:05:18 2007
+Received: from [195.149.226.213] (helo
