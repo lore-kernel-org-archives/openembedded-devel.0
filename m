@@ -1,37 +1,22 @@
-Received: from [192.208.34.52] (helo=smtp3.smiths.com)
+Received: from [209.242.20.70] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <Scott.Davis@smiths-aerospace.com>)
-	id 1HqZsY-0001O6-GU for openembedded-devel@lists.openembedded.org;
-	Tue, 22 May 2007 21:18:43 +0200
-Received: from COSSMGIMS04.EMAIL.CORP.TLD (cossmgims04.email.corp.tld
-	[10.225.225.147])
-	by smtp3.smiths.com (Postfix) with ESMTP id B32F0327D3
+	(envelope-from <mwester@dls.net>) id 1Hrr8F-0000fH-MN
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 May 2007 09:56:13 +0200
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id EB79C411F79
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2007 13:17:47 -0600 (MDT)
-Received: from COSSMGFEX03.EMAIL.CORP.TLD ([10.225.225.62]) by
-	COSSMGFEB04.EMAIL.CORP.TLD with Microsoft SMTPSVC(6.0.3790.1830); 
-	Tue, 22 May 2007 13:17:46 -0600
-Received: from COSSMGIMS04.EMAIL.CORP.TLD ([10.225.225.147]) by
-	COSSMGFEX03.EMAIL.CORP.TLD with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 22 May 2007 13:17:46 -0600
-MIME-Version: 1.0
-Received: from cossmgmbx07.EMAIL.CORP.TLD ([10.225.225.44]) by
-	COSSMGFEB03.EMAIL.CORP.TLD with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 22 May 2007 13:17:44 -0600
-X-OriginalArrivalTime: 22 May 2007 19:17:44.0894 (UTC)
-	FILETIME=[E03C65E0:01C79CA5]
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Tue, 22 May 2007 13:17:43 -0600
-Message-ID: <BDD06CD3363F254993AED78CA36350E20324E06D@cossmgmbx07.EMAIL.CORP.TLD>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Building Python extensions
-Thread-Index: Acecpd9/uswWbcX2T5+xcKgN94668g==
-From: "Davis, Scott (AGRE)" <Scott.Davis@smiths-aerospace.com>
+	Sat, 26 May 2007 02:54:58 -0500 (CDT)
+Message-ID: <038201c79f6a$f9859720$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
 To: <openembedded-devel@lists.openembedded.org>
-X-Mailman-Approved-At: Thu, 24 May 2007 11:27:02 +0200
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Building Python extensions
+Date: Sat, 26 May 2007 02:53:40 -0500
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1807
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
+Subject: PREFERRED_PROVIDER syntax is eluding me...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -45,70 +30,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2007 19:18:43 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Sat, 26 May 2007 07:56:17 -0000
 Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+I'm missing something simple, I expect.  But try as I might, I cannot figure
+this out.
+
+Bitbake 1.8.3, building unslung-image (worked fine on 1.6): Bitbake says:
+[snip]
+NOTE: multiple providers are available for runtime libc6-unslung (glibc,
+glibc-initial);
+NOTE: consider defining a PREFERRED_PROVIDER entry to match runtime
+libc6-unslung
+[snip]
+
+This is a problem, because with bitbake 1.8, without a preferred provider
+specified, it seems to try to build both.  But only glibc builds;
+glibc-initial fails (and the build loops forever).   This is easily fixed by
+adding the following line to the local.conf file:
+
+PREFERRED_PROVIDER_libc6-unslung = "glibc"
+
+Except that it doesn't do a blasted thing.  Neither does this line:
+
+PREFERRED_PROVIDERS += " libc6-unslung:glibc"
+
+Thinking that perhaps the "-unslung" was implied since the machine is
+"unslung", I tried:
+
+PREFERRED_PROVIDERS += " libc6:glibc"
+
+Still no change.  Being persistent, I tried every variant of the above that
+I could think of, to no avail.  It seems that bitbake is not understanding
+or processing the info provided.  The -D flag offers no further hints,
+either.
+
+For background, back in the glibc bitbake recipes, glibc-initial.bb does a
+"require" of glibc.bb (hence the multiple providers).  Near the tail-end of
+glibc.bb we find:
+
+PACKAGES_unslung = "libc6-unslung"
+RDEPENDS_libc6-unslung = "nslu2-linksys-libs"
+RPROVIDES_libc6-unslung = "libc6"
+FILES_libc6-unslung = "/lib/librt*"
+
+Figuring that perhaps the problem is that nothing actually "PROVIDES" libc6,
+and that maybe bitbake needs to see the build-time dependency in order to
+handle the run-time dependency PREFERRED_PROVIDER stuff, I even added
+PROVIDES_libc6-unslung = "libc6"
+to the glibc.bb recipe, and went back through the list of
+PREFERRED_PROVIDERS in the local.conf file.  No luck.  No difference.
+
+I finally hacked the glibc bitbake recipes so that glibc-initial doesn't
+"RPROVIDE" libc6 anymore.  Success - bitbake is happy.  But I'm not.  That
+doesn't seem like the correct way to resolve the multiple providers issue,
+and I expect that commiting such a change would (rightfully) anger many
+folks.
+
+If some kind soul could point me to the document or another recipe that
+provides the correct syntax for handling this, or provide a pointer to
+whatever it is that I'm missing, I'd be most grateful.
+
+Thanks!
+
+Mike (mwester)
 
 
-I am trying to build a 32-bit shared library for a C library I have on
-an x86_64 AMD SuSE linux system.  I am observing the same problem that
-apparently someone on your list has had.  I have a commercial C 32-bit
-linux library that I want to use SWIG to build a python extension for.
-My linux system is 64-bit and when I compile against Python.h for Python
-2.4 I get #error LONG BIT below emitted.=20
-
-The original post is at the URL below:
-http://projects.linuxtogo.org/pipermail/openembedded-devel/2007-March/00
-1722.html
-
-What is the fix to build 32-bit shared library python extension on a
-64-bit linux system?
-
-#if LONG_BIT !=3D 8 * SIZEOF_LONG=20
-/* 04-Oct-2000 LONG_BIT is apparently (mis)defined as 64 on some recent=20
-* 32-bit platforms using gcc. We try to catch that here at compile-time=20
-* rather than waiting for integer multiplication to trigger bogus *
-overflows. */
- #error "LONG_BIT definition appears wrong for platform (bad gcc/glibc
-config?)."=20
-#endif=20
-
-Scott Davis
-GE
-Aviation
-Digital Systems
-Principal Software Engineer
-
-T 616 224 6659
-F 616 241 8707
-E scott.davis@smiths-aerospace.com
-www.ge.com/aviation=20
-
-3290 Patterson Ave, SE=20
-Grand Rapids, MI 49512, U.S.A.
 
 
 
-</table> </Pre>
-<HTML>
-<br>
-<br>
-************************************************<br>
-The information contained in, or attached to, this e-mail, may contain con=
-fidential information and is intended solely for the use of the individual =
-or entity to whom they are addressed and may be subject to legal privilege.=
-  If you have received this e-mail in error you should notify the sender im=
-mediately by reply e-mail, delete the message from your system and notify y=
-our system manager.  Please do not copy it for any purpose, or disclose its=
- contents to any other person.  The views or opinions presented in this e-m=
-ail are solely those of the author and do not necessarily represent those o=
-f the company.  The recipient should check this e-mail and any attachments =
-for the presence of viruses.  The company accepts no liability for any dama=
-ge caused, directly or indirectly, by any virus transmitted in this email.<=
-br>
-************************************************<br>
-</HTML>
-From openembedded@hrw.one.pl Thu May 24 14:05:18 2007
-Received: from [195.149.226.213] (helo
+
