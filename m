@@ -1,23 +1,21 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <eric.nelson@boundarydevices.com>) id 1HsJKS-0006iC-Et
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 May 2007 16:02:43 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.05.02.00 201-2174-114-20060621) with ESMTP id
-	<20070527140113.IIWM15717.fed1rmmtao104.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 May 2007 10:01:13 -0400
-Received: from [192.168.0.142] ([68.2.22.95])
-	by fed1rmimpo02.cox.net with bizsmtp
-	id 4E1E1X001235Yks0000000; Sun, 27 May 2007 10:01:14 -0400
-Message-ID: <46598F2C.5010707@boundarydevices.com>
-Date: Sun, 27 May 2007 07:01:16 -0700
-From: Eric Nelson <eric.nelson@boundarydevices.com>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
-MIME-Version: 1.0
+	(envelope-from <openembedded@hrw.one.pl>) id 1HsJmb-0002Ol-0j
+	for openembedded-devel@openembedded.org; Sun, 27 May 2007 16:31:46 +0200
+Received: (qmail 18300 invoked by uid 813007); 27 May 2007 14:30:21 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 27 May 2007 14:30:21 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: preferred-xorg-versions-X11R7.1.inc broken?
+Date: Sun, 27 May 2007 16:30:16 +0200
+User-Agent: KMail/1.9.7
+References: <4636F787.8030902@whitby.id.au>
+In-Reply-To: <4636F787.8030902@whitby.id.au>
+MIME-Version: 1.0
+Message-Id: <200705271630.18199.openembedded@hrw.one.pl>
+Subject: Re: RFC: Rename MACHINE_TASK_PROVIDER to DEFAULT_TASK_PROVIDER
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,23 +29,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 May 2007 14:03:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 27 May 2007 14:31:46 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Trying to build gpe-image using distro/generic.conf, I'm
-getting an error configuring xinerama.
+Dnia wtorek, 1 maja 2007, Rod Whitby napisa=B3:
 
- From the log file
-    tmp/work/armv5te-linux/libxinerama-1_1.0.2-r0/temp/log.do_configure.9791
+> The proposal is to replace MACHINE_TASK_PROVIDER with
+> DEFAULT_TASK_PROVIDER throughout OE, and encourage all image-foo.bb
+> maintainers to base their image on DEFAULT_TASK_PROVIDER (which can be
+> set to task-boot, or task-base, or perhaps some other distro-specific
+> single task-foo value), plus other image-specific stuff.
 
-I'm seeing an error of:
-    configure.ac:32: error: must install xorg-macros 1.1 or later
-    configure.ac:32: the top level
+DEFAULT_TASK_PROVIDER is good idea for me. I would like to merge it with=20
+my proposal change to task-base (adding wifi/bt for pcmcia/usbhost/pci=20
+devices) in a way that we will have:
 
-It appears that preferred-xorg-versions-X11R7.1.inc doesn't
-specify a xinerama version so it uses the newer one but does
-specify a version of util-macros (1.0.2).
+=2D task-boot
+=2D task-base
+=2D task-base-extended (wifi/bt added for pcmcia/usbhost/pci machines)
+
+This way we will be able to create images with wifi/bt support for PDA=20
+with pcmcia but no internal wifi/bt by using task-base-extended as=20
+DEFAULT_TASK_PROVIDER (set in distro config) and devices with smaller=20
+amount of space for rootfs will get task-base so users will be free to=20
+install extra stuff.
+
+What do you think?
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+               Life's not fair. But the root password helps.
+
 
 
 
