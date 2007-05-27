@@ -1,26 +1,30 @@
-Received: from [64.233.166.178] (helo=py-out-1112.google.com)
+Received: from [66.111.4.26] (helo=out2.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1HsOR4-0007O8-TO
+	(envelope-from <rod@whitby.id.au>) id 1HsRYl-0003ku-8f
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 May 2007 21:29:51 +0200
-Received: by py-out-1112.google.com with SMTP id f47so2514944pye
+	Mon, 28 May 2007 00:49:59 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id D96DD223C3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 May 2007 12:28:27 -0700 (PDT)
-Received: by 10.64.251.9 with SMTP id y9mr9233777qbh.1180294106731;
-	Sun, 27 May 2007 12:28:26 -0700 (PDT)
-Received: from cube ( [82.193.98.15])
-	by mx.google.com with ESMTP id r15sm3388177nza.2007.05.27.12.28.25;
-	Sun, 27 May 2007 12:28:26 -0700 (PDT)
-Date: Sun, 27 May 2007 22:28:20 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <277782266.20070527222820@gmail.com>
-To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-In-Reply-To: <200705271638.03886.openembedded@hrw.one.pl>
-References: <200705271638.03886.openembedded@hrw.one.pl>
+	Sun, 27 May 2007 18:48:34 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Sun, 27 May 2007 18:48:34 -0400
+X-Sasl-enc: QGO7G/SrDrrG4esQ8qWh4UNMuegFoqLGCqCsnnXMc1PM 1180306114
+Received: from [127.0.0.1] (CPE-58-160-130-105.sa.bigpond.net.au
+	[58.160.130.105])
+	by mail.messagingengine.com (Postfix) with ESMTP id F1DC912ED4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 May 2007 18:48:33 -0400 (EDT)
+Message-ID: <465A0A4E.7060807@whitby.id.au>
+Date: Mon, 28 May 2007 08:16:38 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.10 (Windows/20070221)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: MACHINE_ namespace
+To: openembedded-devel@lists.openembedded.org
+References: <4636F787.8030902@whitby.id.au>
+	<200705271630.18199.openembedded@hrw.one.pl>
+In-Reply-To: <200705271630.18199.openembedded@hrw.one.pl>
+Subject: Re: RFC: Rename MACHINE_TASK_PROVIDER to DEFAULT_TASK_PROVIDER
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,42 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 May 2007 19:29:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 27 May 2007 22:49:59 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-Hello Marcin,
+Marcin Juszkiewicz wrote:
+> Dnia wtorek, 1 maja 2007, Rod Whitby napisa=B3:
+>=20
+>> The proposal is to replace MACHINE_TASK_PROVIDER with
+>> DEFAULT_TASK_PROVIDER throughout OE, and encourage all image-foo.bb
+>> maintainers to base their image on DEFAULT_TASK_PROVIDER (which can be
+>> set to task-boot, or task-base, or perhaps some other distro-specific
+>> single task-foo value), plus other image-specific stuff.
+>=20
+> DEFAULT_TASK_PROVIDER is good idea for me. I would like to merge it wit=
+h=20
+> my proposal change to task-base (adding wifi/bt for pcmcia/usbhost/pci=20
+> devices) in a way that we will have:
+>=20
+> - task-boot
+> - task-base
+> - task-base-extended (wifi/bt added for pcmcia/usbhost/pci machines)
+>=20
+> This way we will be able to create images with wifi/bt support for PDA=20
+> with pcmcia but no internal wifi/bt by using task-base-extended as=20
+> DEFAULT_TASK_PROVIDER (set in distro config) and devices with smaller=20
+> amount of space for rootfs will get task-base so users will be free to=20
+> install extra stuff.
+>=20
+> What do you think?
 
-Sunday, May 27, 2007, 5:38:03 PM, you wrote:
++1 from me.
 
-> During usage of progear device (now packed due to lack of space) I found
-> a problems related to how we use machine configs and X11.
+Can you add:
 
-> 1. We have "alsa" as one of machine features but no way to control kernel
-> modules for it - all are added into machine config as 
-> MACHINE_EXTRA_RRECOMMENDS. Same goes to other features.
+PROVIDES =3D "${PACKAGES}"
 
-> 2. Progear device use X.org instead of KDrive so I had to create own 
-> images for it because by default we do not have a way to tell which X 
-> drivers need to be present in images.
+to task-base.bb while you are there?  I know it should not be required
+(it should happen automatically), but for some reason the automatic
+stuff is not working for this file at the moment.  I cannot build an
+image based on task-boot instead of task-base without doing the above.
 
-
-> Proposed solution is adding MACHINE_ namespaces:
-
-> MACHINE_KERNEL_ALSA   = "kernel-module-snd-ali5451"
-> MACHINE_KERNEL_PCMCIA = "kernel-module-yenta-socket"
-
-        This sounds good, especially if we anticipate from the start
-that there may be several modules there. And generally, we need to add
-more modules into task-base subtasks, targetting at aim when machine
-configs will truly contain only machine-specific bits (like hardware
-drivers), while other modules will be in task-base.
-
-[]
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+-- Rod
 
 
