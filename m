@@ -1,24 +1,20 @@
-Received: from [209.242.20.70] (helo=green.dls.net)
+Received: from [209.85.146.180] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1HtEtV-0006A2-9S
-	for openembedded-devel@openembedded.org; Wed, 30 May 2007 05:30:43 +0200
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 19C7E4125E6
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 May 2007 22:29:08 -0500 (CDT)
-Message-ID: <054801c7a26a$7aec5450$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@openembedded.org>
-References: <038201c79f6a$f9859720$6e01a8c0@twilight>
-	<432beae0705281317t3464bacfr833d7ed6b28f374@mail.gmail.com>
-	<1180471592.5822.81.camel@localhost.localdomain>
-Date: Tue, 29 May 2007 22:27:41 -0500
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1HtWuD-00031w-3l
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 31 May 2007 00:44:38 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so996176waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 May 2007 15:42:53 -0700 (PDT)
+Received: by 10.114.137.2 with SMTP id k2mr4350054wad.1180564973385;
+	Wed, 30 May 2007 15:42:53 -0700 (PDT)
+Received: by 10.115.75.15 with HTTP; Wed, 30 May 2007 15:42:53 -0700 (PDT)
+Message-ID: <bdb0025f0705301542s7e64e43cjb5b737e7f1958806@mail.gmail.com>
+Date: Wed, 30 May 2007 19:42:53 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1807
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
-Subject: Re: PREFERRED_PROVIDER syntax is eluding me...
+Subject: strange error: missing depends...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,72 +28,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2007 03:30:44 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Wed, 30 May 2007 22:44:38 -0000
+X-Groupsio-MsgNum: 2144
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_10846_26325642.1180564973337"
+
+------=_Part_10846_26325642.1180564973337
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-First, sorry for the late reply.
+Hi there,
 
-Richard Purdie writes:
-> What you didn't say is that you did:
->
-> PROVIDES_unslung = "virtual/libc virtual/${TARGET_PREFIX}libc-for-gcc
-libc6-unslung"
+Some days ago I was using the bitbake1.6 to build my packages and it
+was working fine, but someday without any apparently reason it stopped
+to work.
 
-Yes, I committed that change/fix over the weekend (see below).  Previously
-it read just:
-PROVIDES_unslung = "virtual/libc virtual/${TARGET_PREFIX}libc-for-gcc"
-(without the final "libc6-unslung" on it).
+Then, after a big looser fight I've decided to change to bitbake1.8
+and the problem was apparently solved... I was seeing the packages
+being build...
+But in the end, for my surprise, I've noticed that a lot of depends
+wasn't build!
 
-> so this file no longer provides glibc and therefore anything involving
-> glibc won't help. At a guess I'd try something like:
->
-> PREFERRED_PROVIDER_libc6-unslung = "libc6-unslung"
+Since my task file is not under official repository yet I'm sending in
+this email.
 
-I actually used:
-PREFERRED_PROVIDER_libc6-unslung = "glibc"
-My logic was that there were multiple providers for libc6-unslung (glibc's
-bb file and glibc-initial's bb file), and that the value the variable was
-set to referred to the bitbake recipe that should be preferred for building
-of the object named "libc6-unslung".
+Does any body have any idea?
 
-I tested with so many combinations that my eyes crossed.  I don't recall if
-that combination (the change to PROVIDES_unslung above was ever tested with
-PREFERRED_PROVIDER_libc6-unslung="libc6-unslung", or not.  I can test that
-if that's a more correct solution.
+Thanks,
+vivijim
 
-> Of course I have to ask why you're doing this at all? It looks a bit
-> hatstand and I wonder why PREFERRED_VERSION_glibc = "2.2.5" wasn't
-> enough? ;-) (not that it shouldn't work)
+------=_Part_10846_26325642.1180564973337
+Content-Type: application/octet-stream; name=task-mamona.bb
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_f2cdtv00
+Content-Disposition: attachment; filename="task-mamona.bb"
 
-Hatstand, huh?  :-)  I haven't heard that expression, but I think I get it
-:-).  I committed the fix I discovered, not because it was necesarily The
-Right Fix(tm), but because it worked and the changes were guaranteed to be
-localized to Unslung (i.e. I wouldn't risk messing up anyone else's distro's
-with the fix I selected).
+REVTQ1JJUFRJT04gPSAiTWFtb25hIFRhc2tzIgpTRUNUSU9OID0gIm1hbW9uYS9iYXNlIgpBTExP
+V19FTVBUWSA9ICIxIgpQQUNLQUdFX0FSQ0ggPSAiYWxsIgpMSUNFTlNFID0gIkdQTCIKUFJPVklE
+RVMgPSAidGFzay1tYW1vbmEtYWxsIgoKUFIgPSAicjEiCgpQQUNLQUdFUyA9ICJcCiAgdGFzay1t
+YW1vbmEtYmFzZSBcCiAgbWFtb25hLWRldiBcCiIKClJERVBFTkRTX3Rhc2stbWFtb25hLWFsbCA6
+PSAiJHtQQUNLQUdFU30iCgojIE1hbW9uYSBCYXNlOgpERVNDUklQVElPTl90YXNrLW1hbW9uYS1i
+YXNlID0gIk1hbW9uYSBCYXNlIEZpbGVzIgpSREVQRU5EU190YXNrLW1hbW9uYS1iYXNlID0gIiBc
+CiAgYXB0IFwKICBiYXNlLWZpbGVzIFwKICBiYXNlLXBhc3N3ZCBcCiAgYmFzaCBcCiAgYmludXRp
+bHMgXAogIGJ1c3lib3ggXAogIGJ6aXAyIFwKICBjb3JldXRpbHMgXAogIGRwa2cgXAogIGUyZnNw
+cm9ncyBcCiAgZTJmc3Byb2dzLWJhZGJsb2NrcyBcCiAgZTJmc3Byb2dzLWJsa2lkIFwKICBlMmZz
+cHJvZ3MtdXVpZGdlbiBcCiAgZmlsZSBcCiAgZ2F3ayBcCiAgZ2F3ay1jb21tb24gXAogIGxpYmdj
+YzEgXAogIGxpYnN0ZGMrKzYgXAogIHpsaWIgXCAKICBuY3Vyc2VzIFwKICBwZXJsIFwKICBwZXJs
+LW1vZHVsZS1iYXNlIFwKICBwZXJsLW1vZHVsZS1jYXJwIFwKICBwZXJsLW1vZHVsZS1leHBvcnRl
+ciBcCiAgcGVybC1tb2R1bGUtc3RyaWN0IFwKICBwZXJsLW1vZHVsZS12YXJzIFwKICBwZXJsLW1v
+ZHVsZS13YXJuaW5ncyBcCiAgcGVybC1tb2R1bGUtd2FybmluZ3MtcmVnaXN0ZXIgXAogIHByb2Nw
+cyBcCiAgc2VkIFwKICBzeXN2aW5pdCBcCiAgc3lzdmluaXQtaW5pdHRhYiBcCiAgdGFyIFwKICB1
+ZGV2IFwKICB1cGRhdGUtYWx0ZXJuYXRpdmVzLWRwa2cgXAogIHVwZGF0ZS1yYy5kIFwKICB1dGls
+LWxpbnV4IFwKICB1dGlsLWxpbnV4LWxvc2V0dXAgXAogIHV0aWwtbGludXgtc3dhcG9ub2ZmIFwK
+ICB1dGlsLWxpbnV4LXVtb3VudCBcCiIKCiMgTWFtb25hIERldjoKREVTQ1JJUFRJT05fbWFtb25h
+LWRldiA9ICJNYW1vbmEtZGV2OiBOZWNlc3NhcnkgcGFja2FnZXMgZm9yIGRldmVsb3BtZW50IgpS
+REVQRU5EU19tYW1vbmEtZGV2ID0gIiBcCiAgYXV0b21ha2UgXAogIGJpc29uIFwKICBmYWtlcm9v
+dCBcCiAgZmxleCBcCiAgZ2NjLXN5bWxpbmtzIFwKICBnZXR0ZXh0IFwKICBncm9mZiBcCiAgbGli
+YzYtZGV2IFwKICBtYWtlIFwKIgo=
 
-As for why it's this way, I can't say.  Unslung is itself a strange
-creation - and its been in OE for a long time.  Together that seems to
-result in some strange constructs.  I'm striving to keep it building in OE,
-in the hopes that there might be a compelling feature or event that would
-make a new Unslung release interesting at some point in the future.
-However, the likelihood of such an event currently appears to be slim enough
-that I'm not sure it's a good idea to do significant rework and retesting on
-it, frankly.  So I'm in favor of a small simple fix, even a kludgy one, if
-it'll work.
-
-> Cheers,
->
-> Richard
-
-Thanks!  If you or anyone else has strong feelings about this, and how it's
-been addressed, let me know (preferably with some guidance on what would be
-acceptable).
-
-Regards,
-Mike (mwester)
-
-
-
-
+------=_Part_10846_26325642.1180564973337--
