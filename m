@@ -1,24 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.184.229] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hts7r-0005RO-RB
-	for openembedded-devel@openembedded.org; Thu, 31 May 2007 23:24:07 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l4VLMILr029507 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2007 23:22:18 +0200
-Message-ID: <465F3C8B.80200@dominion.kabel.utwente.nl>
-Date: Thu, 31 May 2007 23:22:19 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
+	(envelope-from <lvcargnini@gmail.com>) id 1HtwpK-0002cc-Pg
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Jun 2007 04:25:19 +0200
+Received: by wr-out-0506.google.com with SMTP id i20so341426wra
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 May 2007 19:23:29 -0700 (PDT)
+Received: by 10.100.123.9 with SMTP id v9mr761763anc.1180664609338;
+	Thu, 31 May 2007 19:23:29 -0700 (PDT)
+Received: by 10.100.11.6 with HTTP; Thu, 31 May 2007 19:23:29 -0700 (PDT)
+Message-ID: <ae36f8040705311923r4a9e871ewf4c5a6bf76adc9ab@mail.gmail.com>
+Date: Thu, 31 May 2007 23:23:29 -0300
+From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <465F3C8B.80200@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-X-Enigmail-Version: 0.95.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Glibc 2.6 added, please test
+References: <465F3C8B.80200@dominion.kabel.utwente.nl>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: Glibc 2.6 added, please test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,26 +31,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2007 21:24:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 01 Jun 2007 02:25:19 -0000
+Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I did an mtn update but glibc 2.6 is not appearing on my packages/glibc
+directory
 
-Hi,
+On 5/31/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+>
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Hi,
+>
+> Glibc 2.6 has just been added to OE, please test it and report bugs.
+>
+> TIA,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFGXzyLMkyGM64RGpERAk8EAJ9vszt8ghLdUoVvRLarLWNM40TpUgCfToVG
+> QCCW9dQifUQvV8H8H+5VVR0=3D
+> =3D9U8f
+> -----END PGP SIGNATURE-----
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Glibc 2.6 has just been added to OE, please test it and report bugs.
 
-TIA,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGXzyLMkyGM64RGpERAk8EAJ9vszt8ghLdUoVvRLarLWNM40TpUgCfToVG
-QCCW9dQifUQvV8H8H+5VVR0=
-=9U8f
------END PGP SIGNATURE-----
-
+--=20
+---------------------------------------------------------------------------=
+---
+Thanks && Regards
+Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
+IEEE Member
+Electrical Engineer Faculty @ PUCRS
+Ipiranga Avenue, 6681 =96 Building 30
+P.O. Box: 90619-900 =96 Porto Alegre/RS
+Phone: +55 51 3320 3500  extension: 7696
+---------------------------------------------------------------------------=
+------
 
