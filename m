@@ -1,16 +1,17 @@
-Received: from [64.233.162.235] (helo=nz-out-0506.google.com)
+Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1HuBNP-0004x8-QA
-	for openembedded-devel@openembedded.org; Fri, 01 Jun 2007 19:57:27 +0200
-Received: by nz-out-0506.google.com with SMTP id 9so522712nzo
-	for <openembedded-devel@openembedded.org>;
-	Fri, 01 Jun 2007 10:55:34 -0700 (PDT)
-Received: by 10.114.175.16 with SMTP id x16mr2083777wae.1180720533862;
-	Fri, 01 Jun 2007 10:55:33 -0700 (PDT)
-Received: by 10.115.75.15 with HTTP; Fri, 1 Jun 2007 10:55:33 -0700 (PDT)
-Message-ID: <bdb0025f0706011055g6e50927j97439ee462db7921@mail.gmail.com>
-Date: Fri, 1 Jun 2007 14:55:33 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+	(envelope-from <papercrane@gmail.com>) id 1HuC06-0000tD-MH
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Jun 2007 20:37:26 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so726031waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Jun 2007 11:35:32 -0700 (PDT)
+Received: by 10.114.166.1 with SMTP id o1mr2070844wae.1180722932368;
+	Fri, 01 Jun 2007 11:35:32 -0700 (PDT)
+Received: by 10.114.144.2 with HTTP; Fri, 1 Jun 2007 11:35:32 -0700 (PDT)
+Message-ID: <432beae0706011135u58bb4e76t3e3b326d56a19e2a@mail.gmail.com>
+Date: Fri, 1 Jun 2007 11:35:32 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1180717608.6390.200.camel@localhost.localdomain>
 MIME-Version: 1.0
@@ -18,7 +19,6 @@ References: <bdb0025f0705301542s7e64e43cjb5b737e7f1958806@mail.gmail.com>
 	<1180705209.6390.39.camel@localhost.localdomain>
 	<432beae0706010755m47a91208obc66cc688a6f6f90@mail.gmail.com>
 	<1180717608.6390.200.camel@localhost.localdomain>
-Cc: openembedded-devel@openembedded.org
 Subject: Re: strange error: missing depends...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,32 +33,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2007 17:57:28 -0000
+X-List-Received-Date: Fri, 01 Jun 2007 18:37:27 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
-
-I believe that sometimes you just need the packageA without their
-rdepends, but it will be pretty useful it bitbake provided an easy
-option to build every depends... something like:
-bitbake packageA --build-rdepends
-
-Another idea that I have for the case that you want to build
-everything is an option --dontstop that makes bitbake don't stop when
-a rdepends build fail.
-Doing this is possible to leave the build go to drink coffe, to sleep,
-etc and when coming back you can check the log to see if everything
-was build.
-
-But for this I believe that is necessary a good log in html too...
-Yes, I've already noticed that there is something like this in
-bitbake1.8 but I didn't verify if this is working yet...
-
-All these things are just ideas that would make our lives better (at leas mine).
-
-Thanks,
-Regards,
-vivijim
 
 On 6/1/07, Richard Purdie <rpurdie@rpsys.net> wrote:
 > On Fri, 2007-06-01 at 07:55 -0700, Justin Patrin wrote:
@@ -77,25 +55,39 @@ On 6/1/07, Richard Purdie <rpurdie@rpsys.net> wrote:
 > If A DEPENDS on B and you want A (you bitbake A), do you need the
 > package from B? The answer is you don't, you only need B to stage.
 >
+
+This is true, DEPENDS is just build. What I really meant was RDEPENDS.
+
 > The dependency chains tell bitbake when it needs to build the package
 > and it only does thinsg which it needs.
 >
 > This is totally configurable. You could add something to local.conf
 > which always caused dependent packages to build if you so wished...
 >
+
+I understand this all and I also understand how and why bitbake is
+doing what it's doing. My observation was that the common user
+expectation, IMHO, is that doing: "bitbake nano" will build the nano
+ipk(s) and all ipks of all RDEPENDS so that it is immediately
+installable.
+
+I would also expect that *any* package built, including DEPENDS would
+be packaged as well but this is of lesser consequence.
+
+Perhaps this expectation is only due to my use of previous bitbake/OE
+iterations which always did this. If bitbake is not going to package
+for all built recipes I'd suggest that this information be added to
+the manual next to informaiton on how to make it build the packages
+(hopefully via another command instead of adding a dependency to
+local.conf...).
+
 > Add some details about the options to the bitbake manual is on my todo
 > list and is one reason I've not made the imminent bitbake release.
 >
-> Cheers,
->
-> Richard
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+:-)
+
+-- 
+Justin Patrin
 
 
