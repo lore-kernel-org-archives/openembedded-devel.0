@@ -1,24 +1,22 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <freyther@gmx.net>) id 1HuvmQ-0007fr-1s
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Jun 2007 21:30:28 +0200
-Received: (qmail invoked by alias); 03 Jun 2007 19:28:16 -0000
-Received: from unknown (EHLO [192.168.10.100]) [91.64.161.147]
-	by mail.gmx.net (mp017) with SMTP; 03 Jun 2007 21:28:16 +0200
-X-Authenticated: #1949623
-X-Provags-ID: V01U2FsdGVkX1+FMNItb66FFOyxY3CZfhDKfFuNKgjJDR3sKdFvi9
-	0ffxr9m5ctxKf0
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <ae36f8040706021959p2c020f17k454aa346d7123f95@mail.gmail.com>
-References: <ae36f8040706021959p2c020f17k454aa346d7123f95@mail.gmail.com>
-Message-Id: <73D8EBA5-2F97-43F0-B474-6BD6B7023BA3@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Sun, 3 Jun 2007 21:27:56 +0200
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
-Subject: Re: problems doing bitbake task-base
+Received: from [81.228.8.164] (helo=pne-smtpout2-sn2.hy.skanova.net)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <ulf@atmel.com>) id 1Huykd-0004cx-N9
+	for openembedded-devel@openembedded.org; Mon, 04 Jun 2007 00:40:45 +0200
+Received: from [192.168.2.3] (81.233.24.250) by
+	pne-smtpout2-sn2.hy.skanova.net (7.2.075) (authenticated as
+	0706224457) id 46245DE100C1DC63; Mon, 4 Jun 2007 00:38:36 +0200
+Message-ID: <46634298.6050406@atmel.com>
+Date: Mon, 04 Jun 2007 00:37:12 +0200
+From: Ulf Samuelsson <ulf@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 1.5.0.10 (X11/20060911)
+MIME-Version: 1.0
+To: Ulf Samuelsson <ulf@atmel.com>
+References: <4662FAD5.9070803@atmel.com>
+In-Reply-To: <4662FAD5.9070803@atmel.com>
+X-Enigmail-Version: 0.94.2.0
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Failure building angstrom-X11-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,22 +30,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Jun 2007 19:30:39 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed
+X-List-Received-Date: Sun, 03 Jun 2007 22:40:50 -0000
+X-Groupsio-MsgNum: 2170
+Content-Type: multipart/mixed; boundary="------------050706070904090306070202"
+
+--------------050706070904090306070202
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
->
-> OE Build Configuration:
-> BB_VERSION     = "1.6.6"
-> OE_REVISION    = "c6559ceba5987d7142c9759ae7f895632ac3b712"
-> TARGET_ARCH    = "arm"
-> TARGET_OS      = "linux"
-> MACHINE        = "omap5912osk"
-> DISTRO         = "generic"
+Ulf Samuelsson skrev:
+> When building libsoup, the configure routine hangs whcn checking for "xmlrpc-epi-php"
+> I am running OpenSuse 10.2
+> Installed php5-devel and php5-xmlrpc and no locj
+> Downloaded xmlrpc-epi from sourceforge, and installed this.
+> Dowbkiaded xmlrpc-epi-php from sourcefourge and configured this.
+> There was a failure during build.
+> 
+> static unsigned char second_args_force_ref[] = { 3, BYREF_NONE, BYREF_FORCE,
+> BYREF_NONE }
+> 
+> was incompatible with the declatation of second_args_force_ref in
+> /usr/include/php5/Zend/zend_modules.h
+> 
+> extern unsigned char second_args_force_ref[3];   (IIRC)
+> 
+> I guess removing static could help, but BYREF_FORCE and BYREF_NONE seems to be unkonwn.
+> Cant find those in include files.
+> 
+> Any clues?
+> 
+I now realize, I have to recompile php after configuring --with-xmlrpc
 
-Hi,
-does this happen with angstrom linux as distribution as well?
+-- 
+Best Regards,
+Ulf Samuelsson
 
-h.
+--------------050706070904090306070202
+Content-Type: text/x-vcard; charset=utf-8;
+ name="ulf.vcf"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="ulf.vcf"
+
+begin:vcard
+fn:Ulf Samuelsson
+n:Samuelsson;Ulf
+org:Atmel Nordic AB
+adr;quoted-printable:;;Kavalleriv=C3=A4gen 24;Sundbyberg;S;117 58;Sweden
+email;internet:ulf@atmel.com
+title:Field Application Engineer
+tel;work:+46 8 441 54 22
+tel;cell:+46 706 22 44 57
+url:http://www.atmel.com
+version:2.1
+end:vcard
 
 
+--------------050706070904090306070202--
