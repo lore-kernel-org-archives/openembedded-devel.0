@@ -1,21 +1,21 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1HvCPZ-0002h1-6l
+	(envelope-from <lvcargnini@gmail.com>) id 1HvCSV-0002kZ-Q5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jun 2007 15:15:57 +0200
-Received: by an-out-0708.google.com with SMTP id b33so304942ana
+	Mon, 04 Jun 2007 15:18:55 +0200
+Received: by an-out-0708.google.com with SMTP id b33so305168ana
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jun 2007 06:13:43 -0700 (PDT)
-Received: by 10.100.33.14 with SMTP id g14mr2562098ang.1180962823451;
-	Mon, 04 Jun 2007 06:13:43 -0700 (PDT)
-Received: by 10.100.38.6 with HTTP; Mon, 4 Jun 2007 06:13:43 -0700 (PDT)
-Message-ID: <ae36f8040706040613r65fbe4f4r1059f53a82d22abb@mail.gmail.com>
-Date: Mon, 4 Jun 2007 10:13:43 -0300
+	Mon, 04 Jun 2007 06:16:46 -0700 (PDT)
+Received: by 10.100.132.16 with SMTP id f16mr2535584and.1180963006484;
+	Mon, 04 Jun 2007 06:16:46 -0700 (PDT)
+Received: by 10.100.38.6 with HTTP; Mon, 4 Jun 2007 06:16:46 -0700 (PDT)
+Message-ID: <ae36f8040706040616y6de8ab01hb8699de1fbd239b2@mail.gmail.com>
+Date: Mon, 4 Jun 2007 10:16:46 -0300
 From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
 X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Messages Delay
+Subject: target os of angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,14 +29,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2007 13:15:58 -0000
+X-List-Received-Date: Mon, 04 Jun 2007 13:18:56 -0000
 Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Why my e-mails tak so longo to be delivered to the mail list ?
-excuse to sent it to mail list but idon know who is the manager or his
-e-mail.
+please how to set the angstrom distro not to
+TARGET_OS      =3D "linux-gnueabi"
+
+but to
+TARGET_OS      =3D "linux-gnu"
+
+according to distro this is set to eabi (big-endian) and i need
+little-endian
+
 
 --=20
 ---------------------------------------------------------------------------=
