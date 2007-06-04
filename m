@@ -1,23 +1,29 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1Hv6fD-0008FA-6z
-	for openembedded-devel@openembedded.org; Mon, 04 Jun 2007 09:07:39 +0200
-Received: (qmail 30058 invoked by uid 813007); 4 Jun 2007 07:05:30 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 4 Jun 2007 07:05:30 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 4 Jun 2007 09:05:30 +0200
-User-Agent: KMail/1.9.7
-References: <bdb0025f0705301542s7e64e43cjb5b737e7f1958806@mail.gmail.com>
-	<1180717608.6390.200.camel@localhost.localdomain>
-	<bdb0025f0706011055g6e50927j97439ee462db7921@mail.gmail.com>
-In-Reply-To: <bdb0025f0706011055g6e50927j97439ee462db7921@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hv77s-00041z-8T
+	for openembedded-devel@openembedded.org; Mon, 04 Jun 2007 09:37:16 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l547Z6Lr014545 for <openembedded-devel@openembedded.org>;
+	Mon, 4 Jun 2007 09:35:06 +0200
+Message-ID: <4663C0AC.7020804@dominion.kabel.utwente.nl>
+Date: Mon, 04 Jun 2007 09:35:08 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
 MIME-Version: 1.0
-Message-Id: <200706040905.31450.openembedded@hrw.one.pl>
-Subject: Re: strange error: missing depends...
+To: openembedded-devel@openembedded.org
+References: <ae36f8040706021959p2c020f17k454aa346d7123f95@mail.gmail.com>	<73D8EBA5-2F97-43F0-B474-6BD6B7023BA3@gmx.net>
+	<ae36f8040706032019q12a628fcte0325229297a9076@mail.gmail.com>
+In-Reply-To: <ae36f8040706032019q12a628fcte0325229297a9076@mail.gmail.com>
+X-Enigmail-Version: 0.95.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l547Z6Lr014545
+Subject: Re: problems doing bitbake task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,40 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2007 07:07:39 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Mon, 04 Jun 2007 07:37:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia pi=B1tek, 1 czerwca 2007, Rodrigo Vivi napisa=B3:
-> I believe that sometimes you just need the packageA without their
-> rdepends, but it will be pretty useful it bitbake provided an easy
-> option to build every depends... something like:
-> bitbake packageA --build-rdepends
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-All DEPENDS and RDEPENDS are built during build of packageA - so no need=20
-for "--build-rdepends" flag.
+Lu=C3=ADs Cargnini schreef:
+> I modified my distro to angstrom, and the following happens:
+> elf/dl-lookup.o.dt -MT
+> /home/lvcargnini/puc/instramed/openembedded/tmp/work/glibc-2.6-r0
 
-> Another idea that I have for the case that you want to build
-> everything is an option --dontstop that makes bitbake don't stop when
-> a rdepends build fail.
+I think you mistyped something, since angstrom doesn't use glibc 2.6. See
+http://www.angstrom-distribution.org/building-angstrom
 
-bitbake --help:
-  -k, --continue        continue as much as possible after an error. While =
-=20
-                        the target that failed, and those that depend on
-                        it, cannot be remade, the other dependencies of
-                        these targets can be processed all the same.
+regards,
 
-Thats what you want?
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-               Avoid strange women and temporary variables.
-
-
+iD8DBQFGY8CrMkyGM64RGpERAkYlAJ97kczQnhSFWRlMZL+ODLONl44NHACfUtdc
+sYh+XI//+EujwtVBs54EULE=3D
+=3DnBWA
+-----END PGP SIGNATURE-----
 
 
