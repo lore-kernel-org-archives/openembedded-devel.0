@@ -1,29 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.184.227] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1Hv77s-00041z-8T
-	for openembedded-devel@openembedded.org; Mon, 04 Jun 2007 09:37:16 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l547Z6Lr014545 for <openembedded-devel@openembedded.org>;
-	Mon, 4 Jun 2007 09:35:06 +0200
-Message-ID: <4663C0AC.7020804@dominion.kabel.utwente.nl>
-Date: Mon, 04 Jun 2007 09:35:08 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
+	(envelope-from <tomcooksey@googlemail.com>) id 1Hv86r-0000M3-PD
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Jun 2007 10:40:18 +0200
+Received: by wr-out-0506.google.com with SMTP id i20so688392wra
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Jun 2007 01:38:09 -0700 (PDT)
+Received: by 10.142.254.8 with SMTP id b8mr207037wfi.1180946288746;
+	Mon, 04 Jun 2007 01:38:08 -0700 (PDT)
+Received: by 10.143.36.19 with HTTP; Mon, 4 Jun 2007 01:38:08 -0700 (PDT)
+Message-ID: <eed7f0160706040138y6a777b6ay86b8237c3462373c@mail.gmail.com>
+Date: Mon, 4 Jun 2007 09:38:08 +0100
+From: "Tom Cooksey" <tomcooksey@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <ae36f8040706021959p2c020f17k454aa346d7123f95@mail.gmail.com>	<73D8EBA5-2F97-43F0-B474-6BD6B7023BA3@gmx.net>
-	<ae36f8040706032019q12a628fcte0325229297a9076@mail.gmail.com>
-In-Reply-To: <ae36f8040706032019q12a628fcte0325229297a9076@mail.gmail.com>
-X-Enigmail-Version: 0.95.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	l547Z6Lr014545
-Subject: Re: problems doing bitbake task-base
+X-Mailman-Approved-At: Mon, 04 Jun 2007 11:18:08 +0200
+Subject: Gumstix machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,30 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2007 07:37:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 04 Jun 2007 08:40:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Over the last few months I've been looking for an alternative to
+buildroot for the gumstix devices (www.gumstix.com). After giving up
+on Gentoo, I thought I'd have a go with OpenEmbedded. After reading
+through the documentation I realized what I needed to do was create a
+gumstix.conf in conf/machine, only to find one already there!
 
-Lu=C3=ADs Cargnini schreef:
-> I modified my distro to angstrom, and the following happens:
-> elf/dl-lookup.o.dt -MT
-> /home/lvcargnini/puc/instramed/openembedded/tmp/work/glibc-2.6-r0
+So my question is, how far along is gumstix support in OE and is it
+being supported/maintained? I've had a good look through the
+gumstix.conf which is there and it all looks right (although I'm an
+uber OE newbie at the moment!)
 
-I think you mistyped something, since angstrom doesn't use glibc 2.6. See
-http://www.angstrom-distribution.org/building-angstrom
+Finally, the bitbake manual seems to neglect to mention the "?="
+operator in chapter 2. A kind chap on irc confirmed that ?= assigns a
+value to a variable if one has not already been set. I assume this is
+a := assignment, otherwise it would get confused if there were more
+than two ?= for a single variable?
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Cheers,
 
-iD8DBQFGY8CrMkyGM64RGpERAkYlAJ97kczQnhSFWRlMZL+ODLONl44NHACfUtdc
-sYh+XI//+EujwtVBs54EULE=3D
-=3DnBWA
------END PGP SIGNATURE-----
+Tom
 
 
