@@ -1,20 +1,16 @@
-Received: from [209.85.132.240] (helo=an-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1Hvdvo-0001a4-Mw
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <freyther@gmx.net>) id 1HveSK-00023I-B8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jun 2007 20:39:01 +0200
-Received: by an-out-0708.google.com with SMTP id b33so395462ana
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jun 2007 11:36:44 -0700 (PDT)
-Received: by 10.100.142.12 with SMTP id p12mr3486704and.1181068603633;
-	Tue, 05 Jun 2007 11:36:43 -0700 (PDT)
-Received: by 10.100.38.6 with HTTP; Tue, 5 Jun 2007 11:36:43 -0700 (PDT)
-Message-ID: <ae36f8040706051136h36f72d93wd6c4df2845018c8a@mail.gmail.com>
-Date: Tue, 5 Jun 2007 15:36:43 -0300
-From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ae36f8040706051004j24debcd0g397143693f2f1285@mail.gmail.com>
-MIME-Version: 1.0
+	Tue, 05 Jun 2007 21:12:38 +0200
+Received: (qmail invoked by alias); 05 Jun 2007 19:10:19 -0000
+Received: from unknown (EHLO [192.168.10.100]) [91.64.161.147]
+	by mail.gmx.net (mp046) with SMTP; 05 Jun 2007 21:10:19 +0200
+X-Authenticated: #1949623
+X-Provags-ID: V01U2FsdGVkX18cbO5F9gccDFEmPmpGd5v8nDIP/2KgO/V0ldIfVT
+	Tiz0/EjBvpiomM
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <ae36f8040706051136h36f72d93wd6c4df2845018c8a@mail.gmail.com>
 References: <ae36f8040706021959p2c020f17k454aa346d7123f95@mail.gmail.com>
 	<73D8EBA5-2F97-43F0-B474-6BD6B7023BA3@gmx.net>
 	<ae36f8040706032019q12a628fcte0325229297a9076@mail.gmail.com>
@@ -22,7 +18,13 @@ References: <ae36f8040706021959p2c020f17k454aa346d7123f95@mail.gmail.com>
 	<ae36f8040706040555s79d65114r57f7f514c6c746d5@mail.gmail.com>
 	<46641153.2050207@dominion.kabel.utwente.nl>
 	<ae36f8040706051004j24debcd0g397143693f2f1285@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+	<ae36f8040706051136h36f72d93wd6c4df2845018c8a@mail.gmail.com>
+Message-Id: <7C28F02B-B392-4557-9E7A-2991BE0E1BF3@gmx.net>
+From: Holger Freyther <freyther@gmx.net>
+Date: Tue, 5 Jun 2007 21:09:58 +0200
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.752.3)
+X-Y-GMX-Trusted: 0
 Subject: Re: problems doing bitbake task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -37,105 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jun 2007 18:39:02 -0000
-Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
+X-List-Received-Date: Tue, 05 Jun 2007 19:12:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; delsp=yes; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-I have achieved the following error messages, after task-base:
-
-ERROR: Can not check RPATH, scanelf (part of pax-utils-native) not found
-ERROR: Error in executing:
-/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/l=
-inux-libc-headers/linux-libc-headers_2.6.20.bb
-ERROR: Exception:exceptions.SystemExit Message:1
-ERROR: Printing the environment of the function
-ERROR: Error in executing:
-/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/l=
-inux-libc-headers/linux-libc-headers_2.6.20.bb
-ERROR: Exception:exceptions.SystemExit Message:1
-ERROR: Printing the environment of the function
-ERROR: Error in executing:
-/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/l=
-inux-libc-headers/linux-libc-headers_2.6.20.bb
-ERROR: Exception:exceptions.SystemExit Message:1
-ERROR: Printing the environment of the function
-ERROR: Error in executing:
-/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/l=
-inux-libc-headers/linux-libc-headers_2.6.20.bb
-ERROR: Exception:exceptions.SystemExit Message:1
-ERROR: Printing the environment of the function
 
 
-On 6/5/07, Lu=EDs Cargnini <lvcargnini@gmail.com> wrote:
->
-> ok commented, cleaned the tmp using rm -rf and doing bitbake task-base
-> righ now
->
-> On 6/4/07, Koen Kooi < koen@dominion.kabel.utwente.nl> wrote:
-> >
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > Lu=EDs Cargnini schreef:
-> > > maybe because of this configuration lines:
-> > > #ASSUME_PROVIDED +=3D "/opt/eldk/usr/bin"
-> > > ASSUME_PROVIDED +=3D " virtual/${TARGET_PREFIX}gcc "
-> > > ASSUME_PROVIDED +=3D " virtual/glibc "
-> > > # Select between multiple alternative providers, if more than one is
-> > > eligible.
-> > > PREFERRED_PROVIDERS =3D "virtual/qte:qte virtual/libqpe:libqpe-opie"
-> > > PREFERRED_PROVIDERS +=3D " virtual/libsdl:libsdl-x11"
-> > > PREFERRED_PROVIDERS +=3D "
-> > > virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
-> > > PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}gcc:gcc-cross"
-> > > PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}g++:gcc-cross"
-> >
-> > Yes, remove all of those.
-> > -----BEGIN PGP SIGNATURE-----
-> > Version: GnuPG v1.4.5 (Darwin)
-> >
-> > iD8DBQFGZBFSMkyGM64RGpERAuTGAJ43KPrYYSHjLdFpvwooa66bGoFSFACcCGKk
-> > lJdmmKosSpqTvdl+Q4MPvGI=3D
-> > =3D6jKp
-> > -----END PGP SIGNATURE-----
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
->
->
-> --
->
-> -------------------------------------------------------------------------=
------
-> Thanks && Regards
-> Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-> IEEE Member
-> Electrical Engineer Faculty @ PUCRS
-> Ipiranga Avenue, 6681 =96 Building 30
-> P.O. Box: 90619-900 =96 Porto Alegre/RS
-> Phone: +55 51 3320 3500  extension: 7696
-> -------------------------------------------------------------------------=
---------
->
->
+Am 05.06.2007 um 20:36 schrieb Lu=EDs Cargnini:
+
+Ah ha,
+
+you have the latest bitbake-1.6 and the latest head of the =20
+org.openembedded.dev branch? If you do have it, it would be =20
+appreciated if we could replicate your setup. We will need the output =20=
+
+of env, svn info of your bitbake directory, the revision of OE, your =20
+config files. It would be nice if you could tar this stuff together =20
+and upload it somewhere and then say where you have put it.
+
+Alternatively is your partition holding the staging directory mounted =20=
+
+noexec?
+
+z.
 
 
 
---=20
----------------------------------------------------------------------------=
----
-Thanks && Regards
-Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-IEEE Member
-Electrical Engineer Faculty @ PUCRS
-Ipiranga Avenue, 6681 =96 Building 30
-P.O. Box: 90619-900 =96 Porto Alegre/RS
-Phone: +55 51 3320 3500  extension: 7696
----------------------------------------------------------------------------=
-------
 
