@@ -1,26 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HvtZ2-0008FO-Qr
-	for openembedded-devel@openembedded.org; Wed, 06 Jun 2007 13:20:35 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l56BI8Lr030936 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Jun 2007 13:18:09 +0200
-Message-ID: <466697F2.6020303@dominion.kabel.utwente.nl>
-Date: Wed, 06 Jun 2007 13:18:10 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <openembedded@hrw.one.pl>) id 1HvtlB-0003oe-33
+	for openembedded-devel@openembedded.org; Wed, 06 Jun 2007 13:33:05 +0200
+Received: (qmail 22112 invoked by uid 813007); 6 Jun 2007 11:30:42 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 6 Jun 2007 11:30:42 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 6 Jun 2007 13:30:36 +0200
+User-Agent: KMail/1.9.7
 References: <E1HvlNq-0004pN-I1@linuxtogo.org>
 	<1709000488.20070606140338@gmail.com>
-In-Reply-To: <1709000488.20070606140338@gmail.com>
-X-Enigmail-Version: 0.95.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<466697F2.6020303@dominion.kabel.utwente.nl>
+In-Reply-To: <466697F2.6020303@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200706061330.37489.openembedded@hrw.one.pl>
 Subject: Re: [oe-commits] org.oe.dev usb-gadget-mode: Add usb-gadget mode: An initscript to load the configured USB gadget module on boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,46 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2007 11:20:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 Jun 2007 11:33:06 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia =B6roda, 6 czerwca 2007, Koen Kooi napisa=B3:
+> > Hello coredump2,
 
-Paul Sokolovsky schreef:
-> Hello coredump2,
-> 
-> Wednesday, June 6, 2007, 5:36:26 AM, you wrote:
-> 
->> usb-gadget-mode: Add usb-gadget mode: An initscript to load the
->> configured USB gadget module on boot
-> 
-> []
-> 
->> +
->> +CONF_FILE="/etc/usb-gadget.conf"
->> +
-> 
-> []
-> 
->         This is nice, but can config go to /etc/default/ to not horde
-> /etc top-level? Thanks.
+> >> usb-gadget-mode: Add usb-gadget mode: An initscript to load the
+> >> configured USB gadget module on boot
 
-What about using o-hands usbinit[1]?
+> What about using o-hands usbinit[1]?
 
-regards,
+I had same idea when saw that commit. OpenedHand usbinit is in use on few=20
+machines and do that work done properly. But it supports only 2.6=20
+machines which use g-ether kernel module.
 
-Koen
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+           Q:      What's a light-year?
+           A:      One-third less calories than a regular year.
 
 
-[1] http://svn.o-hand.com/view/poky/trunk/meta/packages/oh/
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGZpfyMkyGM64RGpERAszlAKCL1F2i5ikB+iDD1VOaldsPMlB03gCfQnx4
-Ir5Vn+O6fIJnDNDo/F1KbmE=
-=7+Gb
------END PGP SIGNATURE-----
 
 
