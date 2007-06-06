@@ -1,27 +1,29 @@
-Received: from [209.85.132.244] (helo=an-out-0708.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1Hvm5q-0005U8-Ue
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2007 05:21:56 +0200
-Received: by an-out-0708.google.com with SMTP id b33so1493ana
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jun 2007 20:19:34 -0700 (PDT)
-Received: by 10.100.153.17 with SMTP id a17mr23465ane.1181099974363;
-	Tue, 05 Jun 2007 20:19:34 -0700 (PDT)
-Received: by 10.100.38.6 with HTTP; Tue, 5 Jun 2007 20:19:34 -0700 (PDT)
-Message-ID: <ae36f8040706052019r7e8c14e5m4a9fa440fdf5d2f9@mail.gmail.com>
-Date: Wed, 6 Jun 2007 00:19:34 -0300
-From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <432beae0706052002q6ea96a46p46743ec6ec1b1341@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HvouQ-000516-IX
+	for openembedded-devel@openembedded.org; Wed, 06 Jun 2007 08:22:23 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l566Jtox005713 for <openembedded-devel@openembedded.org>;
+	Wed, 6 Jun 2007 08:19:55 +0200
+Message-ID: <4666520C.8060000@dominion.kabel.utwente.nl>
+Date: Wed, 06 Jun 2007 08:19:56 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
 MIME-Version: 1.0
-References: <465F3C8B.80200@dominion.kabel.utwente.nl>
-	<ae36f8040705311923r4a9e871ewf4c5a6bf76adc9ab@mail.gmail.com>
-	<432beae0705311951p68201aa4u542ad050cbe5b609@mail.gmail.com>
-	<ae36f8040706011335u7cf556afo7d9a36890b7df2a@mail.gmail.com>
-	<432beae0706052002q6ea96a46p46743ec6ec1b1341@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: Glibc 2.6 added, please test
+To: openembedded-devel@openembedded.org
+References: <ae36f8040706021959p2c020f17k454aa346d7123f95@mail.gmail.com>	<ae36f8040706032019q12a628fcte0325229297a9076@mail.gmail.com>	<4663C0AC.7020804@dominion.kabel.utwente.nl>	<ae36f8040706040555s79d65114r57f7f514c6c746d5@mail.gmail.com>	<46641153.2050207@dominion.kabel.utwente.nl>	<ae36f8040706051004j24debcd0g397143693f2f1285@mail.gmail.com>	<ae36f8040706051136h36f72d93wd6c4df2845018c8a@mail.gmail.com>	<7C28F02B-B392-4557-9E7A-2991BE0E1BF3@gmx.net>	<ae36f8040706051251g22ae2a09ha560b3c8b6d0de57@mail.gmail.com>	<4665CF19.2030501@dominion.kabel.utwente.nl>
+	<ae36f8040706051806q120be1bdyae9da9c8f754ab59@mail.gmail.com>
+In-Reply-To: <ae36f8040706051806q120be1bdyae9da9c8f754ab59@mail.gmail.com>
+X-Enigmail-Version: 0.95.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l566Jtox005713
+Subject: Re: problems doing bitbake task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,139 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2007 03:22:02 -0000
-Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
+X-List-Received-Date: Wed, 06 Jun 2007 06:23:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-did it now
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 6/6/07, Justin Patrin <papercrane@gmail.com> wrote:
->
-> On 6/1/07, Lu=EDs Cargnini <lvcargnini@gmail.com> wrote:
-> > I should always perform, pull before update ?
-> >
->
-> Without a pull you have nothing to update to.
->
-> > On 5/31/07, Justin Patrin <papercrane@gmail.com> wrote:
-> > >
-> > > On 5/31/07, Lu=EDs Cargnini <lvcargnini@gmail.com> wrote:
-> > > > I did an mtn update but glibc 2.6 is not appearing on my
-> packages/glibc
-> > > > directory
-> > >
-> > > Did you mtn pull first?
-> > >
-> > > >
-> > > > On 5/31/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> > > > >
-> > > > > -----BEGIN PGP SIGNED MESSAGE-----
-> > > > > Hash: SHA1
-> > > > >
-> > > > > Hi,
-> > > > >
-> > > > > Glibc 2.6 has just been added to OE, please test it and report
-> bugs.
-> > > > >
-> > > > > TIA,
-> > > > >
-> > > > > Koen
-> > > > > -----BEGIN PGP SIGNATURE-----
-> > > > > Version: GnuPG v1.4.5 (Darwin)
-> > > > >
-> > > > > iD8DBQFGXzyLMkyGM64RGpERAk8EAJ9vszt8ghLdUoVvRLarLWNM40TpUgCfToVG
-> > > > > QCCW9dQifUQvV8H8H+5VVR0=3D
-> > > > > =3D9U8f
-> > > > > -----END PGP SIGNATURE-----
-> > > > >
-> > > > > _______________________________________________
-> > > > > Openembedded-devel mailing list
-> > > > > Openembedded-devel@lists.openembedded.org
-> > > > >
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > > > >
-> > > >
-> > > >
-> > > >
-> > > > --
-> > > >
-> > >
-> -------------------------------------------------------------------------=
------
-> > > > Thanks && Regards
-> > > > Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-> > > > IEEE Member
-> > > > Electrical Engineer Faculty @ PUCRS
-> > > > Ipiranga Avenue, 6681 =96 Building 30
-> > > > P.O. Box: 90619-900 =96 Porto Alegre/RS
-> > > > Phone: +55 51 3320 3500  extension: 7696
-> > > >
-> > >
-> -------------------------------------------------------------------------=
---------
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > >
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > > >
-> > >
-> > >
-> > > --
-> > > Justin Patrin
-> > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-deve=
-l
-> > >
-> >
-> >
-> >
-> > --
-> >
-> -------------------------------------------------------------------------=
------
-> > Thanks && Regards
-> > Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-> > IEEE Member
-> > Electrical Engineer Faculty @ PUCRS
-> > Ipiranga Avenue, 6681 =96 Building 30
-> > P.O. Box: 90619-900 =96 Porto Alegre/RS
-> > Phone: +55 51 3320 3500  extension: 7696
-> >
-> -------------------------------------------------------------------------=
---------
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
->
-> --
-> Justin Patrin
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Lu=C3=ADs Cargnini schreef:
+> so just to make it fast before I could upload everything to some server=
+ here
+> follow my local.conf:
+>=20
 
+> TARGET_ARCH =3D "arm"
+> TARGET_OS =3D "linux"
 
+Remove those
 
---=20
----------------------------------------------------------------------------=
----
-Thanks && Regards
-Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-IEEE Member
-Electrical Engineer Faculty @ PUCRS
-Ipiranga Avenue, 6681 =96 Building 30
-P.O. Box: 90619-900 =96 Porto Alegre/RS
-Phone: +55 51 3320 3500  extension: 7696
----------------------------------------------------------------------------=
-------
+> DISTRO =3D "angstrom-2007.1"
+
+> GLIBC_GENERATE_LOCALES =3D "en en_GB.UTF-8 fr pt_BR.UTF-8"
+> INHERIT =3D "package_tar"
+
+remove those
+
+> IMAGE_FSTYPES =3D "jffs2 tar cramfs"
+
+that one is ok
+
+> BBDEBUG =3D "yes
+> BBINCLUDELOGS =3D "yes"
+
+and remove those as well
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGZlIMMkyGM64RGpERAj3XAKCXUlabtICNP3NudzEuGoIuK6P8fgCfQSbz
+DyT6RvRFMkfVRP4M/ZtozMQ=3D
+=3DnX3v
+-----END PGP SIGNATURE-----
+
 
