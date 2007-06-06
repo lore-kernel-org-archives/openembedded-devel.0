@@ -1,35 +1,27 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <oe@hentges.net>) id 1HvuGM-0004Ht-NW
+	(envelope-from <pmiscml@gmail.com>) id 1HvucF-000395-GG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2007 14:05:28 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id B2EE53081F4
+	Wed, 06 Jun 2007 14:27:55 +0200
+Received: by py-out-1112.google.com with SMTP id f47so216575pye
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2007 14:02:55 +0200 (CEST)
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563 [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
-	id 27258-02 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Jun 2007 14:02:52 +0200 (CEST)
-Received: from mhcln04.hentges.priv (xdsl-213-196-242-127.netcologne.de
-	[213.196.242.127]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id 685BA3081EF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2007 14:02:52 +0200 (CEST)
-From: Matthias Hentges <oe@hentges.net>
+	Wed, 06 Jun 2007 05:25:34 -0700 (PDT)
+Received: by 10.65.211.16 with SMTP id n16mr824018qbq.1181132734349;
+	Wed, 06 Jun 2007 05:25:34 -0700 (PDT)
+Received: from cube ( [77.122.190.213])
+	by mx.google.com with ESMTP id 36sm2749155nzk.2007.06.06.05.25.33;
+	Wed, 06 Jun 2007 05:25:34 -0700 (PDT)
+Date: Wed, 6 Jun 2007 15:25:32 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <899288206.20070606152532@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200706061330.37489.openembedded@hrw.one.pl>
+In-Reply-To: <466697F2.6020303@dominion.kabel.utwente.nl>
 References: <E1HvlNq-0004pN-I1@linuxtogo.org>
 	<1709000488.20070606140338@gmail.com>
 	<466697F2.6020303@dominion.kabel.utwente.nl>
-	<200706061330.37489.openembedded@hrw.one.pl>
-Date: Wed, 06 Jun 2007 14:02:51 +0200
-Message-Id: <1181131371.4914.13.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at hentges.net
-Subject: Re: [oe-commits] org.oe.dev usb-gadget-mode: Add usb-gadget	mode: An initscript to load the configured USB gadget module on boot
+MIME-Version: 1.0
+Subject: Re: [oe-commits] org.oe.dev usb-gadget-mode: Add usb-gadget mode: An initscript to load the configured USB gadget module on boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,44 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2007 12:05:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 06 Jun 2007 12:27:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Am Mittwoch, den 06.06.2007, 13:30 +0200 schrieb Marcin Juszkiewicz:
-> Dnia =C5=9Broda, 6 czerwca 2007, Koen Kooi napisa=C5=82:
-> > > Hello coredump2,
->=20
-> > >> usb-gadget-mode: Add usb-gadget mode: An initscript to load the
-> > >> configured USB gadget module on boot
->=20
-> > What about using o-hands usbinit[1]?
->=20
-> I had same idea when saw that commit. OpenedHand usbinit is in use on f=
-ew=20
-> machines and do that work done properly. But it supports only 2.6=20
-> machines which use g-ether kernel module.
+Hello Koen,
 
-This package was previously unknown to me :\
+Wednesday, June 6, 2007, 2:18:10 PM, you wrote:
 
-The idea behind usb-gadget-mode was that - eventually -  the user can
-select the "mode" via a shiny GUI app and does not need to mess
-w/ /etc/modutils manually.
+[]
 
-If usbinit matches that description I'll happily remove gadget-mode.
+> What about using o-hands usbinit[1]?
 
-With >4600 .bb files one can lose the overview easily, thanks for the
-headsup ;)
---=20
-Matthias 'CoreDump' Hentges=20
-Cologne / Germany
+> regards,
 
-Webmaster of Hentges.net & Embedded Linux Developer
-GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
-
-My OS: Debian SID: Geek by Nature, Linux by Choice
+> Koen
 
 
+> [1] http://svn.o-hand.com/view/poky/trunk/meta/packages/oh/
+
+        Well, it appears to be simple script dealing only with g_ether
+(it also fiddles with network interface, even though that rather be
+left for proper service).
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
