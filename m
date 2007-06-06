@@ -1,23 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.233.166.181] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1Hvqom-0006ZA-93
-	for openembedded-devel@openembedded.org; Wed, 06 Jun 2007 10:24:36 +0200
-Received: (qmail 12188 invoked by uid 813007); 6 Jun 2007 08:22:16 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 6 Jun 2007 08:22:15 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 6 Jun 2007 10:22:10 +0200
-User-Agent: KMail/1.9.7
-References: <46665B15.8090401@dominion.kabel.utwente.nl>
-	<74d0deb30706060046q7a91542bl6591542175161eb5@mail.gmail.com>
-	<466669AD.6050809@dominion.kabel.utwente.nl>
-In-Reply-To: <466669AD.6050809@dominion.kabel.utwente.nl>
+	(envelope-from <pmiscml@gmail.com>) id 1HvtL0-0007z4-MY
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Jun 2007 13:06:09 +0200
+Received: by py-out-1112.google.com with SMTP id f47so180054pye
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Jun 2007 04:03:41 -0700 (PDT)
+Received: by 10.64.153.4 with SMTP id a4mr723429qbe.1181127821261;
+	Wed, 06 Jun 2007 04:03:41 -0700 (PDT)
+Received: from cube ( [77.122.190.213])
+	by mx.google.com with ESMTP id 22sm2640281nzn.2007.06.06.04.03.39;
+	Wed, 06 Jun 2007 04:03:40 -0700 (PDT)
+Date: Wed, 6 Jun 2007 14:03:38 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Priority: 3 (Normal)
+Message-ID: <1709000488.20070606140338@gmail.com>
+To: Matthias Hentges <oe@hentges.net>
+In-Reply-To: <E1HvlNq-0004pN-I1@linuxtogo.org>
+References: <E1HvlNq-0004pN-I1@linuxtogo.org>
 MIME-Version: 1.0
-Message-Id: <200706061022.11908.openembedded@hrw.one.pl>
-Subject: Re: RFC: splitting task-boot out of task-base
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev usb-gadget-mode: Add usb-gadget mode: An initscript to load the configured USB gadget module on boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,27 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2007 08:24:37 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Jun 2007 11:06:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dnia =B6roda, 6 czerwca 2007, Koen Kooi napisa=B3:
-> +# packages which content depend on MACHINE_FEATURES need to be
-> MACHINE_ARCH +#
-> +PACKAGE_ARCH_task-boot =3D "${MACHINE_ARCH}"
+Hello coredump2,
 
-PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+Wednesday, June 6, 2007, 5:36:26 AM, you wrote:
 
-And then commit.
+> usb-gadget-mode: Add usb-gadget mode: An initscript to load the
+> configured USB gadget module on boot
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+[]
 
-          Monday is a hard way to spend one-seventh of your life.
+> +
+> +CONF_FILE="/etc/usb-gadget.conf"
+> +
 
+[]
+
+        This is nice, but can config go to /etc/default/ to not horde
+/etc top-level? Thanks.
+
+
+[]
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
