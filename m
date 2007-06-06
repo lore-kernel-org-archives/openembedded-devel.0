@@ -1,25 +1,26 @@
-Received: from [64.233.166.181] (helo=py-out-1112.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1HvtL0-0007z4-MY
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2007 13:06:09 +0200
-Received: by py-out-1112.google.com with SMTP id f47so180054pye
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jun 2007 04:03:41 -0700 (PDT)
-Received: by 10.64.153.4 with SMTP id a4mr723429qbe.1181127821261;
-	Wed, 06 Jun 2007 04:03:41 -0700 (PDT)
-Received: from cube ( [77.122.190.213])
-	by mx.google.com with ESMTP id 22sm2640281nzn.2007.06.06.04.03.39;
-	Wed, 06 Jun 2007 04:03:40 -0700 (PDT)
-Date: Wed, 6 Jun 2007 14:03:38 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1709000488.20070606140338@gmail.com>
-To: Matthias Hentges <oe@hentges.net>
-In-Reply-To: <E1HvlNq-0004pN-I1@linuxtogo.org>
-References: <E1HvlNq-0004pN-I1@linuxtogo.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HvtZ2-0008FO-Qr
+	for openembedded-devel@openembedded.org; Wed, 06 Jun 2007 13:20:35 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l56BI8Lr030936 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Jun 2007 13:18:09 +0200
+Message-ID: <466697F2.6020303@dominion.kabel.utwente.nl>
+Date: Wed, 06 Jun 2007 13:18:10 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@openembedded.org
+References: <E1HvlNq-0004pN-I1@linuxtogo.org>
+	<1709000488.20070606140338@gmail.com>
+In-Reply-To: <1709000488.20070606140338@gmail.com>
+X-Enigmail-Version: 0.95.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [oe-commits] org.oe.dev usb-gadget-mode: Add usb-gadget mode: An initscript to load the configured USB gadget module on boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,34 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2007 11:06:22 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 06 Jun 2007 11:20:40 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hello coredump2,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Wednesday, June 6, 2007, 5:36:26 AM, you wrote:
+Paul Sokolovsky schreef:
+> Hello coredump2,
+> 
+> Wednesday, June 6, 2007, 5:36:26 AM, you wrote:
+> 
+>> usb-gadget-mode: Add usb-gadget mode: An initscript to load the
+>> configured USB gadget module on boot
+> 
+> []
+> 
+>> +
+>> +CONF_FILE="/etc/usb-gadget.conf"
+>> +
+> 
+> []
+> 
+>         This is nice, but can config go to /etc/default/ to not horde
+> /etc top-level? Thanks.
 
-> usb-gadget-mode: Add usb-gadget mode: An initscript to load the
-> configured USB gadget module on boot
+What about using o-hands usbinit[1]?
 
-[]
+regards,
 
-> +
-> +CONF_FILE="/etc/usb-gadget.conf"
-> +
-
-[]
-
-        This is nice, but can config go to /etc/default/ to not horde
-/etc top-level? Thanks.
+Koen
 
 
-[]
+[1] http://svn.o-hand.com/view/poky/trunk/meta/packages/oh/
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+iD8DBQFGZpfyMkyGM64RGpERAszlAKCL1F2i5ikB+iDD1VOaldsPMlB03gCfQnx4
+Ir5Vn+O6fIJnDNDo/F1KbmE=
+=7+Gb
+-----END PGP SIGNATURE-----
 
 
