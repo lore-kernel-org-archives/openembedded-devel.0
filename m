@@ -1,18 +1,18 @@
 Received: from [209.242.20.70] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1HwGCK-0003bd-MK
+	(envelope-from <mwester@dls.net>) id 1HwGfH-0003vq-GA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jun 2007 13:30:37 +0200
+	Thu, 07 Jun 2007 14:00:32 +0200
 Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 90800411972
+	by green.dls.net (Postfix) with ESMTP id 8F8F241266B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2007 06:28:10 -0500 (CDT)
-Message-ID: <044101c7a8f6$bcf43290$6e01a8c0@twilight>
+	Thu,  7 Jun 2007 06:58:05 -0500 (CDT)
+Message-ID: <045401c7a8fa$ea96f300$6e01a8c0@twilight>
 From: "Mike \(mwester\)" <mwester@dls.net>
 To: <openembedded-devel@lists.openembedded.org>
 References: <03ec01c7a8bc$95a2f030$6e01a8c0@twilight>
 	<200706070839.52842.openembedded@hrw.one.pl>
-Date: Thu, 7 Jun 2007 06:26:48 -0500
+Date: Thu, 7 Jun 2007 06:56:43 -0500
 MIME-Version: 1.0
 X-Priority: 3
 X-MSMail-Priority: Normal
@@ -32,11 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2007 11:30:41 -0000
+X-List-Received-Date: Thu, 07 Jun 2007 12:00:36 -0000
 Content-Type: text/plain;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
+Build completed, with this suggestion.  :(  No joy:
+
+Package: kernel-module-binfmt-misc
+Version: 2.4.22.l2.3r63-r18.5
+Depends: update-modules, kernel-2.4.22-xfs
+Section: kernel
+
+The kernel modules built remain firm in their conviction that they depend
+upon the kernel, not kernel-image.
+
+Mike (mwester)
 
 ----- Original Message ----- 
 From: "Marcin Juszkiewicz" <openembedded@hrw.one.pl>
@@ -48,35 +59,23 @@ Subject: Re: [oe] Need advice on changing kernel.bbclass
 >
 > RPROVIDES_kernel-2.4.22-xfs = "kernel-image-2.4.22-xfs" should solve your
 > problem.
-
-I've made the change, and the build is starting...
-
-but I'm not sure about this.  This will instruct ipkg that the package
-"kernel-2.4.22-xfs" will satisify the dependency for
-"kernel-image-2.4.22-xfs", right?  That's not the problem I've faced with
-right now; I don't need to generate extra information for the
-kernel-*.ipk --- that won't help the hundreds and hundreds of devices
-already installed.  I need instead to alter the information in the generated
-kernel-module-*.ipk files so that they do not have a dependency on
-kernel-2.4.22-xfs (as the installed devices do not, according to the old
-packaging, have that dependency satisfied -- instead they feature only
-kernel-image-2.4.22-xfs).
-Or do I misunderstand the RPROVIDES/RDEPENDS mechanism?
-
+>
 > Change was in kernel*.bbclass and it was discussed on this list -
 > thread "[oe] RFC: Kernel image packaging" from 14 March this year.
-
-I'll dig up that thread for review.  Clearly this is not a high-priority
-problem, if it's taken almost 3 months for this issue to surface since this
-change to kernel.bbclass was made -- clearly adding kernel modules to the
-feeds for the older releases is not a common things any more.  But there is
-a (reasonable) request in the queue, so I'd like to find a way to get those
-modules built (that doesn't require the user to "upgrade" their installation
-entirely, especially since I have no intention at this time of building a
-new release for them to upgrade to!)
-
-Thanks!
-Mike (mwester)
+>
+> -- 
+> JID: hrw-jabber.org
+> OpenEmbedded developer/consultant
+>
+>                  change your mind. it's starting to smell.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
 
