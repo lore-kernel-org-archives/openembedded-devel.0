@@ -1,23 +1,22 @@
-Received: from [209.242.20.70] (helo=green.dls.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1HwGfH-0003vq-GA
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jun 2007 14:00:32 +0200
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 8F8F241266B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2007 06:58:05 -0500 (CDT)
-Message-ID: <045401c7a8fa$ea96f300$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
+	(envelope-from <openembedded@hrw.one.pl>) id 1HwHL3-0008Io-Jz
+	for openembedded-devel@openembedded.org; Thu, 07 Jun 2007 14:43:41 +0200
+Received: (qmail 30163 invoked by uid 813007); 7 Jun 2007 12:41:13 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 7 Jun 2007 12:41:13 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 7 Jun 2007 14:41:04 +0200
+User-Agent: KMail/1.9.7
 References: <03ec01c7a8bc$95a2f030$6e01a8c0@twilight>
 	<200706070839.52842.openembedded@hrw.one.pl>
-Date: Thu, 7 Jun 2007 06:56:43 -0500
+	<045401c7a8fa$ea96f300$6e01a8c0@twilight>
+In-Reply-To: <045401c7a8fa$ea96f300$6e01a8c0@twilight>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1807
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
+Message-Id: <200706071441.05394.openembedded@hrw.one.pl>
 Subject: Re: Need advice on changing kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,50 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2007 12:00:36 -0000
+X-List-Received-Date: Thu, 07 Jun 2007 12:43:42 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Build completed, with this suggestion.  :(  No joy:
+Dnia czwartek, 7 czerwca 2007, Mike (mwester) napisa=B3:
 
-Package: kernel-module-binfmt-misc
-Version: 2.4.22.l2.3r63-r18.5
-Depends: update-modules, kernel-2.4.22-xfs
-Section: kernel
+> > RPROVIDES_kernel-2.4.22-xfs =3D "kernel-image-2.4.22-xfs" should solve
+> > your problem.
 
-The kernel modules built remain firm in their conviction that they depend
-upon the kernel, not kernel-image.
+> Build completed, with this suggestion. =A0:( =A0No joy:
 
-Mike (mwester)
+> Package: kernel-module-binfmt-misc
+> Version: 2.4.22.l2.3r63-r18.5
+> Depends: update-modules, kernel-2.4.22-xfs
+> Section: kernel
 
------ Original Message ----- 
-From: "Marcin Juszkiewicz" <openembedded@hrw.one.pl>
-To: <openembedded-devel@lists.openembedded.org>
-Sent: Thursday, June 07, 2007 1:39 AM
-Subject: Re: [oe] Need advice on changing kernel.bbclass
+> The kernel modules built remain firm in their conviction that they
+> depend upon the kernel, not kernel-image.
 
+OK, they depend on kernel-2.4.22-xfs but it provide=20
+kernel-image-2.4.22-xfs so your users should be able to upgrade rather.
 
->
-> RPROVIDES_kernel-2.4.22-xfs = "kernel-image-2.4.22-xfs" should solve your
-> problem.
->
-> Change was in kernel*.bbclass and it was discussed on this list -
-> thread "[oe] RFC: Kernel image packaging" from 14 March this year.
->
-> -- 
-> JID: hrw-jabber.org
-> OpenEmbedded developer/consultant
->
->                  change your mind. it's starting to smell.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Or I have bug in thinking (which is possible).
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+     Linux in the cellular phone is not a question of 'if', but 'when'
 
 
 
