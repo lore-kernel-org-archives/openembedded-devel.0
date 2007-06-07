@@ -1,27 +1,20 @@
-Received: from [128.178.50.26] (helo=smtp3.epfl.ch)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1HwIT7-0004jg-HB
-	for openembedded-devel@openembedded.org; Thu, 07 Jun 2007 15:56:05 +0200
-Received: (qmail 18680 invoked by uid 107); 7 Jun 2007 13:53:38 -0000
-Received: from mailav3.epfl.ch (128.178.50.11)
-	by smtp3.epfl.ch with SMTP; 7 Jun 2007 13:53:38 -0000
-Received: from (unknown [128.178.50.22]) by MAILAV3.epfl.ch with smtp
-	id 0977_7e384f40_14fe_11dc_ab3e_0014221528b0;
-	Thu, 07 Jun 2007 15:53:37 +0200
-Received: from lsa1pc7.epfl.ch (128.178.145.53)
-	by smtp1.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Thu, 07 Jun 2007 15:53:38 +0200
-X-Sendermtaip: 128.178.145.53
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
-Organization: EPFL STI-IPR-LSRO1
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <openembedded@hrw.one.pl>) id 1HwIjb-00052P-Fz
+	for openembedded-devel@openembedded.org; Thu, 07 Jun 2007 16:13:12 +0200
+Received: (qmail 12498 invoked by uid 813007); 7 Jun 2007 14:10:40 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 7 Jun 2007 14:10:40 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 7 Jun 2007 15:53:37 +0200
-User-Agent: KMail/1.9.6
+Date: Thu, 7 Jun 2007 16:10:29 +0200
+User-Agent: KMail/1.9.7
 References: <200706071519.54448.valentin.longchamp@epfl.ch>
-	<9A71D45A-41AE-400D-8CC1-BDF905FD4F7C@gmx.net>
-In-Reply-To: <9A71D45A-41AE-400D-8CC1-BDF905FD4F7C@gmx.net>
+In-Reply-To: <200706071519.54448.valentin.longchamp@epfl.ch>
 MIME-Version: 1.0
-Message-Id: <200706071553.38056.valentin.longchamp@epfl.ch>
+Message-Id: <200706071610.31324.openembedded@hrw.one.pl>
 Subject: Re: JFFS2 trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,47 +29,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2007 13:56:09 -0000
+X-List-Received-Date: Thu, 07 Jun 2007 14:13:21 -0000
 Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Holger Freyther wrote:
->
-> > However, according to the jffs2 documentation, I should use /dev/
-> > mtd2 and
-> > not /dev/mtdblock2:
-> > http://www.linux-mtd.infradead.org/faq/jffs2.html#L_mtdblock
->
-> Fromt the FAQ you pointed us to: "There are two cases where this does
-> not work. The first is when JFFS2 is used as a root filesystem. For
-> now, this requires the mtdblock device to be specified for root= on
-> the kernel commandline. The second case is when the mount binary that
-> is being used does not play nicely with the above format. The busybox
-> version of mount is known to not work without the mtdblock device."
->
-> I know you don't have a rootfs on jffs2 but do you use busybox mount?
->
+Dnia czwartek, 7 czerwca 2007, Valentin Longchamp napisa=B3:
 
-That was one of the first things I had tried to test but I have forgotten to 
-tell about it in the mail. Anyway, OE does not include mount in busybox and 
-builds the "usual" one:
+> I can boot on the jffs2 images loading them into flash, which is nice.
+> However I have noticed that these jffs2 images have several problems:
+>
+> 1) Running the nfsroot on the dev board, when I want to mount the jffs2
+> filesystem from the corresponding mtd device, I have to use the
+> corresponding mtdblock and not directly the mtd device. But I have no
+> error in dmesg.
+>
+> > root@mx31ads:/$ mount -t jffs2 /dev/mtd2 /media/flash
+> > mount: wrong fs type, bad option, bad superblock on /dev/mtd2,
 
-> root@mx31ads:~$ which mount
-> /bin/mount
-> root@mx31ads:~$ ls -al /bin/mount
-> lrwxrwxrwx    1 root     root           16 Jan  1 00:00 /bin/mount ->
-> mount.util-linux root@mx31ads:~$ ls -al /bin/mount.util-linux
-> -rwsr-xr-x    1 root     root        60604 Jan  1 00:00
-> /bin/mount.util-linux root@mx31ads:~$ mount --version
-> mount: mount-2.12
+Use "mtdX" instead of "/dev/mtdX". This method was mentioned on this=20
+mailing list before:
 
-But thank you for the quick and pertinent answer.
+Subject: RFC: stop mounting /dev/mtdblockX but mount mtdX (without /dev)
+=46rom: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: 21/02/2007 21:20
 
--- 
-Valentin Longchamp
-PhD Student
-http://people.epfl.ch/valentin.longchamp
+Working example:
+
+root@c7x0:~# mount mtd3 /home/ -t jffs2
+root@c7x0:~# uname -a
+Linux c7x0 2.6.21 #2 PREEMPT Wed Jun 6 16:33:32 CEST 2007 armv5tel unknown
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+          Warning: Dates in calendar are closer than they appear.
+
+
 
 
