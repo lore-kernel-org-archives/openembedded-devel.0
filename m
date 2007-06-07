@@ -1,24 +1,22 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [209.242.20.70] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Hw7V3-0007mv-LJ
+	(envelope-from <mwester@dls.net>) id 1Hw9hR-0004uD-Iw
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jun 2007 04:13:32 +0200
-Received: from [211.160.27.7] (helo=[172.16.3.144])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Hw7U5-0000Id-Tu
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jun 2007 04:12:22 +0200
-Message-ID: <4667691F.9060706@kernelconcepts.de>
-Date: Thu, 07 Jun 2007 04:10:39 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20070403)
+	Thu, 07 Jun 2007 06:34:17 +0200
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id 117ED4125E1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  6 Jun 2007 23:31:58 -0500 (CDT)
+Message-ID: <03ec01c7a8bc$95a2f030$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 6 Jun 2007 23:30:31 -0500
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <46673D2F.9000404@nospam.arcornews.de>
-In-Reply-To: <46673D2F.9000404@nospam.arcornews.de>
-X-Enigmail-Version: 0.94.2.0
-Subject: Re: issues with oe.org website
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1807
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
+Subject: Need advice on changing kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,37 +30,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2007 02:14:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 07 Jun 2007 04:34:21 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Deep inside kernel.bbclass, do_split_packages() is invoked, and one of the
+arguments passed in is:
+   "extra_depends='update-modules kernel-%s'...".
 
-Rolf Leggewie wrote:
-> something seems to be wrong with the server that openembedded.org runs on.
-> hvontres reminded me that I do have a shell account on linuxtogo.org who 
-> kindly host the site and other things.  Thus I think I was able to 
-> dispell the first belief that the machine is just plain and simple 
-> overloaded.  Looking at top, I frequently see the machine going up to a 
-> load of 20 over extended periods of time.  At the same time, the CPU is 
-> around 90% idle.  Is there something I/O-bound? kernel bug (as suggested 
-> by wirelessdreamer on IRC)?  Imminent hardware-failure?
+I need to make that conditional, so that when DISTRO=="unslung", it becomes:
+   "extra_depends='update-modules kernel-image-%s'...".
 
-right, we noticed the same some days ago. For some reason that effect was gone
-when I checked later. I suspect a problem with the combination of I/O throughput
-(maybe a bad driver) and swapping. I am going to look into this as soon as I am
-back home next week.
+Why, you ask?  Well, for good or bad, there are numerous NSLU2's out there
+that are expecting kernel modules to depend upon "kernel-image-2.4.22-xfs",
+not on "kernel-2.4.22-xfs".  Since we can't reinstall those systems to make
+them accomodate the change (something changed, perhaps along with bitbake
+1.8?), the reasonable solution is to adjust the build process so that we
+generate kernel module ipks with the same dependencies that they used to be
+built with.  Kernel modules are build "on the fly" inside kernel.bbclass
+with some python code; that python code is what is establishing the
+dependencies, and that's the code that needs to be adjusted to handle this
+situation.
 
-Greetings
+Before I commit hideous hackery on kernel.bbclass, I thought perhaps I
+should appeal to the community for some advice and feedback on how best to
+do this.  I was thinking a conditional in the python code would be easiest,
+and cleanest.  I don't know how to write such a conditional, but lack of
+knowlege has never stopped me before ;-)  Python can't be that hard to
+learn.
 
-Florian
+If there's a better, suggestion, I'm open for it.  The Unslung kernel is
+frozen at 2.4.22-xfs (since that's what Linksys ships, and we need to remain
+compatible with their kernel modules and software).  That sort of means that
+spending a lot of work on an elegant solution for Unslung is pretty much a
+waste of time -- quick and simple, so that we can go about building some new
+kernel modules and getting them into the feeds (with correct dependencies),
+is the goal.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-14
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+For completeness, below is the entire original source line out of
+kernel.bbclass:
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+   do_split_packages(d, root='/lib/modules', file_regex=module_regex,
+output_pattern=module_pattern, description='%s kernel module',
+postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata,
+extra_depends='update-modules kernel-%s' % bb.data.getVar("KERNEL_VERSION",
+d, 1))
+
+Thanks!
+Mike (mwester)
+
+
 
 
