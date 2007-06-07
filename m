@@ -1,33 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [209.242.20.70] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1HwN26-00028j-SB
-	for openembedded-devel@openembedded.org; Thu, 07 Jun 2007 20:48:34 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l57Ik3kZ005807
-	for <openembedded-devel@openembedded.org>;
-	Thu, 7 Jun 2007 19:46:03 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 05504-07 for <openembedded-devel@openembedded.org>;
-	Thu,  7 Jun 2007 19:45:59 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l57Ijx2F005800
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 7 Jun 2007 19:45:59 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <045401c7a8fa$ea96f300$6e01a8c0@twilight>
-References: <03ec01c7a8bc$95a2f030$6e01a8c0@twilight>
-	<200706070839.52842.openembedded@hrw.one.pl>
-	<045401c7a8fa$ea96f300$6e01a8c0@twilight>
-Date: Thu, 07 Jun 2007 19:45:58 +0100
-Message-Id: <1181241958.6086.204.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	(envelope-from <mwester@dls.net>) id 1HwP0n-0002nq-HW
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jun 2007 22:55:17 +0200
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id 6F30C41268C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Jun 2007 15:52:52 -0500 (CDT)
+Message-ID: <049901c7a945$9db5e690$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+References: <03ec01c7a8bc$95a2f030$6e01a8c0@twilight><200706070839.52842.openembedded@hrw.one.pl><045401c7a8fa$ea96f300$6e01a8c0@twilight>
+	<1181241958.6086.204.camel@localhost.localdomain>
+Date: Thu, 7 Jun 2007 15:51:26 -0500
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1807
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
 Subject: Re: Need advice on changing kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,37 +32,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2007 18:48:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Jun 2007 20:55:18 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2007-06-07 at 06:56 -0500, Mike (mwester) wrote:
-> Build completed, with this suggestion.  :(  No joy:
-> 
-> Package: kernel-module-binfmt-misc
-> Version: 2.4.22.l2.3r63-r18.5
-> Depends: update-modules, kernel-2.4.22-xfs
-> Section: kernel
-> 
-> The kernel modules built remain firm in their conviction that they depend
-> upon the kernel, not kernel-image.
+Yes indeed - I agree with the reasoning for the change; I think the current
+scheme is far closer to "correct" in terms of dependencies than the old one.
 
-I stand by the reasoning for the reasoning for the change as detailed by
-the thread mentioned - it did address some underlying problems. It was
-assumed anyone rebuilding the modules could release a new kernel package
-too hence avoiding this dependency problem.
+I poked at the existing kernel-2.4.22-xfs and kernel-image-2.4.22-xfs ipkgs
+and dependencies on both the original (in the field) Unslung images, and on
+the images as built by OE today.  As it turns out, on the original image,
+kernel-image-2.4.22-xfs is not empty (it claims to contain the compressed
+kernel image), however kernel-2.4.22-xfs does not exist at all.  So if I
+understand ipkg and dependencies correctly, I believe that your suggestion
+(adding an empty package to the feeds) should work fine.
 
-On the NSLU2, kernel-image-2.4.22-xfs is probably an empty package? as
-will be kernel-2.4.22-xfs? Would it be possible to have both 'empty'
-packages in the feed? You could always have one have a Depends: on the
-other?
+Thanks for you suggestion -- I'll go work on that direction instead!
 
-Cheers,
+Regards,
+Mike (mwester)
 
-Richard
+----- Original Message ----- 
+From: "Richard Purdie" <rpurdie@rpsys.net>
+To: <openembedded-devel@openembedded.org>
+Sent: Thursday, June 07, 2007 1:45 PM
+Subject: Re: [oe] Need advice on changing kernel.bbclass
 
 
-
+> On Thu, 2007-06-07 at 06:56 -0500, Mike (mwester) wrote:
+> > Build completed, with this suggestion.  :(  No joy:
+> >
+> > Package: kernel-module-binfmt-misc
+> > Version: 2.4.22.l2.3r63-r18.5
+> > Depends: update-modules, kernel-2.4.22-xfs
+> > Section: kernel
+> >
+> > The kernel modules built remain firm in their conviction that they
+depend
+> > upon the kernel, not kernel-image.
+>
+> I stand by the reasoning for the reasoning for the change as detailed by
+> the thread mentioned - it did address some underlying problems. It was
+> assumed anyone rebuilding the modules could release a new kernel package
+> too hence avoiding this dependency problem.
+>
+> On the NSLU2, kernel-image-2.4.22-xfs is probably an empty package? as
+> will be kernel-2.4.22-xfs? Would it be possible to have both 'empty'
+> packages in the feed? You could always have one have a Depends: on the
+> other?
+>
+> Cheers,
+>
+> Richard
 
 
 
