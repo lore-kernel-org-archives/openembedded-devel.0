@@ -1,21 +1,34 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1HwIjb-00052P-Fz
-	for openembedded-devel@openembedded.org; Thu, 07 Jun 2007 16:13:12 +0200
-Received: (qmail 12498 invoked by uid 813007); 7 Jun 2007 14:10:40 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 7 Jun 2007 14:10:40 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 7 Jun 2007 16:10:29 +0200
-User-Agent: KMail/1.9.7
-References: <200706071519.54448.valentin.longchamp@epfl.ch>
-In-Reply-To: <200706071519.54448.valentin.longchamp@epfl.ch>
-MIME-Version: 1.0
-Message-Id: <200706071610.31324.openembedded@hrw.one.pl>
-Subject: Re: JFFS2 trouble
+	(envelope-from <rpurdie@rpsys.net>) id 1HwN26-00028j-SB
+	for openembedded-devel@openembedded.org; Thu, 07 Jun 2007 20:48:34 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l57Ik3kZ005807
+	for <openembedded-devel@openembedded.org>;
+	Thu, 7 Jun 2007 19:46:03 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 05504-07 for <openembedded-devel@openembedded.org>;
+	Thu,  7 Jun 2007 19:45:59 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l57Ijx2F005800
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 7 Jun 2007 19:45:59 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <045401c7a8fa$ea96f300$6e01a8c0@twilight>
+References: <03ec01c7a8bc$95a2f030$6e01a8c0@twilight>
+	<200706070839.52842.openembedded@hrw.one.pl>
+	<045401c7a8fa$ea96f300$6e01a8c0@twilight>
+Date: Thu, 07 Jun 2007 19:45:58 +0100
+Message-Id: <1181241958.6086.204.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Need advice on changing kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,43 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2007 14:13:21 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Jun 2007 18:48:37 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia czwartek, 7 czerwca 2007, Valentin Longchamp napisa=B3:
+On Thu, 2007-06-07 at 06:56 -0500, Mike (mwester) wrote:
+> Build completed, with this suggestion.  :(  No joy:
+> 
+> Package: kernel-module-binfmt-misc
+> Version: 2.4.22.l2.3r63-r18.5
+> Depends: update-modules, kernel-2.4.22-xfs
+> Section: kernel
+> 
+> The kernel modules built remain firm in their conviction that they depend
+> upon the kernel, not kernel-image.
 
-> I can boot on the jffs2 images loading them into flash, which is nice.
-> However I have noticed that these jffs2 images have several problems:
->
-> 1) Running the nfsroot on the dev board, when I want to mount the jffs2
-> filesystem from the corresponding mtd device, I have to use the
-> corresponding mtdblock and not directly the mtd device. But I have no
-> error in dmesg.
->
-> > root@mx31ads:/$ mount -t jffs2 /dev/mtd2 /media/flash
-> > mount: wrong fs type, bad option, bad superblock on /dev/mtd2,
+I stand by the reasoning for the reasoning for the change as detailed by
+the thread mentioned - it did address some underlying problems. It was
+assumed anyone rebuilding the modules could release a new kernel package
+too hence avoiding this dependency problem.
 
-Use "mtdX" instead of "/dev/mtdX". This method was mentioned on this=20
-mailing list before:
+On the NSLU2, kernel-image-2.4.22-xfs is probably an empty package? as
+will be kernel-2.4.22-xfs? Would it be possible to have both 'empty'
+packages in the feed? You could always have one have a Depends: on the
+other?
 
-Subject: RFC: stop mounting /dev/mtdblockX but mount mtdX (without /dev)
-=46rom: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: 21/02/2007 21:20
+Cheers,
 
-Working example:
+Richard
 
-root@c7x0:~# mount mtd3 /home/ -t jffs2
-root@c7x0:~# uname -a
-Linux c7x0 2.6.21 #2 PREEMPT Wed Jun 6 16:33:32 CEST 2007 armv5tel unknown
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
 
-          Warning: Dates in calendar are closer than they appear.
 
 
 
