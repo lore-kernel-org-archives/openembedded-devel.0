@@ -1,23 +1,22 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1HwRa0-0007sA-M5
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <thommycheck@gmx.de>) id 1HwRy4-0008A9-AQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jun 2007 01:39:51 +0200
-Received: from [91.64.161.147] (helo=[192.168.10.100])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1HwRXZ-0008Jm-Or
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jun 2007 01:37:17 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-Message-Id: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
-To: openembedded-devel@lists.openembedded.org (Using the OpenEmbedded metadata
-	to build Distributions <openembedded-devel@lists.openembedded.org>)
-From: Holger Freyther <zecke@selfish.org>
-Date: Fri, 8 Jun 2007 01:36:52 +0200
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 91.64.161.147
-Subject: [RFC] Creating an OpenEmbedded founation
+	Fri, 08 Jun 2007 02:04:45 +0200
+Received: (qmail invoked by alias); 08 Jun 2007 00:02:09 -0000
+Received: from BAA062c.baa.pppool.de (EHLO [192.168.178.22]) [77.128.6.44]
+	by mail.gmx.net (mp056) with SMTP; 08 Jun 2007 02:02:09 +0200
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX1/mLApwFIvmLOq3d8VdFxnRqpr44pZclmYn7ybl1c
+	C2Ie611nRYIPDS
+Message-ID: <46689C95.6010209@gmx.de>
+Date: Fri, 08 Jun 2007 02:02:29 +0200
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Icedove 1.5.0.10 (X11/20070328)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Y-GMX-Trusted: 0
+Subject: arm kexec commandline support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,94 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2007 23:39:59 -0000
+X-List-Received-Date: Fri, 08 Jun 2007 00:04:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
-Hello,
+Hi all,
 
-for those of you visiting Berlin for OEDEM, or hanging out on IRC  
-this shouldn't be new for the others this is your invitation to  
-participate in the discussion.
+I have written a quick hack to support custom commandlines for arm with 
+kexec. You need:
 
-So the natural question is do we need a foundation at all? Everything  
-seems to work just fine!
+http://www2.informatik.hu-berlin.de/~tkunze/zaurus/patches/kexec_commandline-3.patch
 
-Let me answer indirectly. As our beloved project grows our needs grow  
-as well. We seem to handle project devices just fine. We have a wiki  
-site containing the ones we have received as a project. You can track  
-the number of devices, their origin, which developers had them in  
-their hands and where they will go. And we have never had any issue  
-sharing them and I'm really happy about it!
+and:
 
-As we grow we have more needs, like I already said. This includes  
-bigger assets like servers to host our infrastructure, sending koen  
-to conferences, buying development boards one doesn't get donated.
+http://www2.informatik.hu-berlin.de/~tkunze/zaurus/patches/atag_support.patch
 
-If we would lose a device because I turn sane this would be easily  
-recoverable, but what would happen if I withdraw one or two servers,  
-keep the money that was meant to cover koen's travel to the moon.  
-This would be disrupting the OpenEmbedded project internally and  
-externally. We have offers for servers, offers for donations so this  
-issue is nothing hypothetical but a real one. I would go so far as  
-declaring it as a pressing need.
-
-So what shouldn't a foundation do?
-	-Make things more complicated
-	-Doing business as this is where companies are good at. We mean it!
-	-Hold the Copyright of our metadata (it is MIT licensed for a reason).
-
-So what should a foundation do?
-	-Help OpenEmbedded to grow
-	-Own the projects assets. This would include server equipment,  
-devices, hopefully domain-names, etc.
-	-Receive donations so we can buy a one-way ticket for koen to the  
-moon, or other places were OE exposure is quite low.
-	-Maintain relationship with Companies
+(from lak)
 
 
-Manifestation/Relisation of a Foundation: To tell you the truth for  
-me it is not a if we need a foundation but a when. Our current  
-options for creating a foundation following the DOs and DON'Ts from  
-above are the following three.
+How to use:
+Use kexec as usual. To change the commandline do:
+echo "your commandline" > /sys/kernel/kexec_cmdline
 
-Software-in-the-Public-Interest (SPI):
-	Pros:
-		-It is easy to become an associated project
-		-We keep in control of our asstes and how our money is spent
-		-It helps us not to do busines activities
-		-Tax deductable
-	Cons:
-		-It is a U.S. based organisation and if we decide to leave SPI we  
-need to create/find another U.S. organisation where our assets are  
-transfered to
-		-Read the SPI mailinglist and you might consider SPI a mess.
+This sets up a ataglist in memory which is copied to 0xc0000100 when 
+machine is rebooted.
+This address is given the new kernel as ataglist in r2.
 
-SPI+FFIS
-	Pros:
-		-The one from SPI
-		-A german daughter organisation that can hold assets and receive  
-donations?
-	Cons:
-		-FFIS seems to be dormant. Someone more close to joey should ask  
-him about the status of this orgnisation.
+This works on collie, but should work on any arm machine. I didn't find 
+out why I can't give an arbitrary address to the new kernel in r2 but it 
+doesn't work (machine hangs.)
 
-OpenEmbedded e.V. (e.V. is the german expression for registered  
-associatio):
+Comments are welcome.
 
-	Pros:
-		-Tightly regulated by german authorities. This helps us to stick  
-with the DO's and avoid the DON'Ts
-		-KDE e.V. and probably the GNOME Deutschland e.V.
-	Cons:
-		-Quite an overhead. We need to hold  general assemblies, manage our  
-assets ourselves, try to get tax detuctable.
-		-Managing of members...
-
-so what are your opinions?
-
-	z.
-
-PS: I'm so tired...
+Thomas
 
 
