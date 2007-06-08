@@ -1,29 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HwagS-0006cV-30
-	for openembedded-devel@openembedded.org; Fri, 08 Jun 2007 11:23:07 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l589KKLr030471 for <openembedded-devel@openembedded.org>;
-	Fri, 8 Jun 2007 11:20:20 +0200
-Message-ID: <46691F5B.9080504@dominion.kabel.utwente.nl>
-Date: Fri, 08 Jun 2007 11:20:27 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
+Received: from [128.178.50.19] (helo=smtp0.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1HwfM6-0003wy-27
+	for openembedded-devel@openembedded.org; Fri, 08 Jun 2007 16:22:22 +0200
+Received: (qmail 15419 invoked by uid 107); 8 Jun 2007 14:19:48 -0000
+Received: from mailav3.epfl.ch (128.178.50.11)
+	by smtp0.epfl.ch with SMTP; 8 Jun 2007 14:19:48 -0000
+Received: from (unknown [128.178.50.22]) by MAILAV3.epfl.ch with smtp
+	id 1931_50650b3a_15cb_11dc_8fcc_0014221528b0;
+	Fri, 08 Jun 2007 16:19:48 +0200
+Received: from lsa1pc7.epfl.ch (128.178.145.53)
+	by smtp1.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Fri, 08 Jun 2007 16:19:48 +0200
+X-Sendermtaip: 128.178.145.53
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Organization: EPFL STI-IPR-LSRO1
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 8 Jun 2007 16:19:47 +0200
+User-Agent: KMail/1.9.6
+References: <200706071519.54448.valentin.longchamp@epfl.ch>
+	<200706071610.31324.openembedded@hrw.one.pl>
+In-Reply-To: <200706071610.31324.openembedded@hrw.one.pl>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <46665B15.8090401@dominion.kabel.utwente.nl>	<74d0deb30706060046q7a91542bl6591542175161eb5@mail.gmail.com>	<466669AD.6050809@dominion.kabel.utwente.nl>
-	<200706061022.11908.openembedded@hrw.one.pl>
-In-Reply-To: <200706061022.11908.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.95.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	l589KKLr030471
-Subject: Re: RFC: splitting task-boot out of task-base
+Message-Id: <200706081619.48045.valentin.longchamp@epfl.ch>
+Subject: Re: JFFS2 trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,31 +36,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2007 09:23:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 08 Jun 2007 14:22:32 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Marcin Juszkiewicz wrote:
+> Use "mtdX" instead of "/dev/mtdX". This method was mentioned on this
+> mailing list before:
+>
 
-Marcin Juszkiewicz schreef:
-> Dnia =C5=9Broda, 6 czerwca 2007, Koen Kooi napisa=C5=82:
->> +# packages which content depend on MACHINE_FEATURES need to be
->> MACHINE_ARCH +#
->> +PACKAGE_ARCH_task-boot =3D "${MACHINE_ARCH}"
->=20
-> PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->=20
-> And then commit.
+Thank you Marcin, it works like a charm !
 
-Done
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGaR9bMkyGM64RGpERAg3aAJ9Hi66DKLWbaOQhne7c2g1hTt4AJwCfc0wr
-/n9qnV/WkYeyupssmMveVMg=3D
-=3DX3UP
------END PGP SIGNATURE-----
+-- 
+Valentin Longchamp
+PhD Student
+http://people.epfl.ch/valentin.longchamp
 
 
