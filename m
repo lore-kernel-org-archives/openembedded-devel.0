@@ -1,28 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [139.142.208.99] (helo=mail.franticfilms.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HwiUD-0007rw-K9
-	for openembedded-devel@openembedded.org; Fri, 08 Jun 2007 19:42:57 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l58He8Lr010864; Fri, 8 Jun 2007 19:40:09 +0200
-Message-ID: <46699480.2080106@dominion.kabel.utwente.nl>
-Date: Fri, 08 Jun 2007 19:40:16 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <1177589176.5843.3.camel@localhost.localdomain>	<4630B6BC.4090903@dominion.kabel.utwente.nl>
-	<1177942098.5872.37.camel@localhost.localdomain>
-In-Reply-To: <1177942098.5872.37.camel@localhost.localdomain>
-X-Enigmail-Version: 0.95.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: 3 weeks left till requiring bitbake 1.8.x (was Re: Bitbake 1.8.2 released!)
+	(envelope-from <gneuf@ca.rr.com>) id 1Hwk2i-0000QU-Mz
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Jun 2007 21:22:43 +0200
+Received: from neuf.ca.rr.com (unknown [75.5.31.74])
+	by mail.franticfilms.com (Postfix) with ESMTP id 62799B7CCB
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Jun 2007 14:20:05 -0500 (CDT)
+Message-Id: <6.2.3.4.2.20070608115117.0ba979e8@pop-server.ca.rr.com>
+X-Mailer: QUALCOMM Windows Eudora Version 6.2.3.4
+Date: Fri, 08 Jun 2007 12:06:43 -0700
+To: openembedded-devel@lists.openembedded.org
+From: Glenn Neufeld <gneuf@ca.rr.com>
+In-Reply-To: <eed7f0160706040138y6a777b6ay86b8237c3462373c@mail.gmail.co
+ m>
+References: <eed7f0160706040138y6a777b6ay86b8237c3462373c@mail.gmail.com>
+Mime-Version: 1.0
+Subject: Re: Gumstix machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,38 +30,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2007 17:42:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Jun 2007 19:22:45 -0000
+Content-Type: text/plain; charset="us-ascii"; format=flowed
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Tom-
+At 01:38 AM 6/4/2007, you wrote:
+>Over the last few months I've been looking for an alternative to
+>buildroot for the gumstix devices (www.gumstix.com). After giving up
+>on Gentoo, I thought I'd have a go with OpenEmbedded. After reading
+>through the documentation I realized what I needed to do was create a
+>gumstix.conf in conf/machine, only to find one already there!
 
-Richard Purdie schreef:
-> On Thu, 2007-04-26 at 16:27 +0200, Koen Kooi wrote:
->> Richard Purdie schreef:
->>> Bitbake 1.8.2 has been released.
->>>
->>> http://prdownload.berlios.de/bitbake/bitbake-1.8.2.tar.gz
->> Do we have a concrete date for the 1.8 changeover already?
-> 
-> Not that I'm aware of. The release was the first step. I'll wait a few
-> more days and see what other bugs appear (if any) and then I guess we
-> run with the two month changeover.
-> 
-> In fact looking at the date, 1st July could be good...
+         I've been working with the gumstix and OE for a few months, 
+and I've gotten everything to work except for my inability to get 
+newer versions of u-boot to compile.  For that I still use buildroot.
 
-Reminder: 3 weeks left, please continue reporting any bugs with 1.8.x.
+         There's also a problem when building images in that the 
+"mkimage" command doesn't get installed, so I've been putting it 
+elsewhere and adding it to my PATH.
 
-regards,
+         I haven't contributed anything back because of my own 
+uber-newbieness and the fact that I haven't been solving anything by 
+*really* understanding the ins and outs of OE, although I'm getting there.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+         I'm still using bitbake 1.6, and there are still problems 
+related to my own understanding of the kernel - for example, I'm 
+using the existing (working) 2.6.15, but I'm still trying to get my 
+task-base version of my erzatz gumstix distro (temporarily called 
+"gumstix-tb") to successfully compile 2.6.18.  I need a more in-depth 
+understanding of the kernel features that are changing, and which 
+patches I need (or now *don't* need) to make it all work.
 
-iD8DBQFGaZSAMkyGM64RGpERAq0FAJ93KfEIYg7w3KXnbSbz+EtzE8yPjwCgvauh
-1nSzGDt4isWci/+YcDg4Mhg=
-=ZAse
------END PGP SIGNATURE-----
+         I've altered a lot of existing kernel patches to apply, but 
+there's a lot more to it than just that.
+
+         My current state of things is that the network, modules, 
+wifi are working, matchbox and friends compiles and runs in the 
+Xserver, and my cheap LCD with touchscreen works intermittently with 
+respect to the touchscreen - I'm still struggling with the version of 
+kdrive I'm using - kernel input event support is eluding me 
+patch-wise.  Or maybe it's an X-org version problem?
+
+         I can get data from the touchscreen with "ts_print", but 
+when I try to get the X server to use it, the TS data stream dies 
+until I reset.  I'm still working on that one.
+
+         I'd like to think I could be "supporting" the gumstix in OE 
+sometime soon, but I've got a lot more to learn before that happens.  :)
+
+         Hope this helps.
+
+-G!
+
+>So my question is, how far along is gumstix support in OE and is it
+>being supported/maintained? I've had a good look through the
+>gumstix.conf which is there and it all looks right (although I'm an
+>uber OE newbie at the moment!)
+>
+>Finally, the bitbake manual seems to neglect to mention the "?="
+>operator in chapter 2. A kind chap on irc confirmed that ?= assigns a
+>value to a variable if one has not already been set. I assume this is
+>a := assignment, otherwise it would get confused if there were more
+>than two ?= for a single variable?
+>
+>
+>Cheers,
+>
+>Tom
+>
+>_______________________________________________
+>Openembedded-devel mailing list
+>Openembedded-devel@lists.openembedded.org
+>http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
