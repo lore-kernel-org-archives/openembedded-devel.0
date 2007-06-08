@@ -1,21 +1,29 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1HwaCm-0008SH-M3
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jun 2007 10:52:27 +0200
-Received: from xora.org.uk ([::ffff:87.246.78.27])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
-	by xora.org.uk with esmtp; Fri, 08 Jun 2007 09:49:28 +0100
-	id 0002C71A.46691818.00003246
-Date: Fri, 8 Jun 2007 09:50:41 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070608085041.GA31235@p3n3tr4t0r.internal>
-References: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
-Mime-Version: 1.0
-In-Reply-To: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
-User-Agent: Mutt/1.5.15 (2007-04-06)
-Subject: Re: [RFC] Creating an OpenEmbedded founation
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HwagS-0006cV-30
+	for openembedded-devel@openembedded.org; Fri, 08 Jun 2007 11:23:07 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l589KKLr030471 for <openembedded-devel@openembedded.org>;
+	Fri, 8 Jun 2007 11:20:20 +0200
+Message-ID: <46691F5B.9080504@dominion.kabel.utwente.nl>
+Date: Fri, 08 Jun 2007 11:20:27 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <46665B15.8090401@dominion.kabel.utwente.nl>	<74d0deb30706060046q7a91542bl6591542175161eb5@mail.gmail.com>	<466669AD.6050809@dominion.kabel.utwente.nl>
+	<200706061022.11908.openembedded@hrw.one.pl>
+In-Reply-To: <200706061022.11908.openembedded@hrw.one.pl>
+X-Enigmail-Version: 0.95.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l589KKLr030471
+Subject: Re: RFC: splitting task-boot out of task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,33 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2007 08:52:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 08 Jun 2007 09:23:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi, my thoughts on a foundation are.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-we a) need to have some semi professional looking front so that companies and
-especially suits can have some sort of warm glowing feeling when dealing with
-us.
+Marcin Juszkiewicz schreef:
+> Dnia =C5=9Broda, 6 czerwca 2007, Koen Kooi napisa=C5=82:
+>> +# packages which content depend on MACHINE_FEATURES need to be
+>> MACHINE_ARCH +#
+>> +PACKAGE_ARCH_task-boot =3D "${MACHINE_ARCH}"
+>=20
+> PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+>=20
+> And then commit.
 
-b) need to cope with developers who leave the project, new developers who
-start. Who have to return and be given equipment/funds.
+Done
 
-c) need to deal with our public face at conferences, trade shows including
-sending people if we feel it is worth it.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-d) need to deal with the situation that may eventually happen where a
-company want to contract OE to actually do a project.
-
-As I see it you dont neccessarrily need a company for this, but I think
-it would help.
-
-Id also like to form any form of foundation/company under an EU duristiction
-as its easier for use currently to deal with then law in the USA.
-
-Graeme
-
+iD8DBQFGaR9bMkyGM64RGpERAg3aAJ9Hi66DKLWbaOQhne7c2g1hTt4AJwCfc0wr
+/n9qnV/WkYeyupssmMveVMg=3D
+=3DX3UP
+-----END PGP SIGNATURE-----
 
 
