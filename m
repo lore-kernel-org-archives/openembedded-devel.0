@@ -1,31 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1HwZvB-0007nl-2P
-	for openembedded-devel@openembedded.org; Fri, 08 Jun 2007 10:34:13 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1HwZsa-00029o-NM
-	for openembedded-devel@openembedded.org; Fri, 08 Jun 2007 10:31:32 +0200
-Received: from p54b9701f.dip.t-dialin.net ([84.185.112.31])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 08 Jun 2007 10:31:32 +0200
-Received: from no2spam by p54b9701f.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 08 Jun 2007 10:31:32 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 08 Jun 2007 10:31:12 +0200
-Message-ID: <f4b44h$hvv$1@sea.gmane.org>
+	(envelope-from <dp@xora.org.uk>) id 1HwaCm-0008SH-M3
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Jun 2007 10:52:27 +0200
+Received: from xora.org.uk ([::ffff:87.246.78.27])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Fri, 08 Jun 2007 09:49:28 +0100
+	id 0002C71A.46691818.00003246
+Date: Fri, 8 Jun 2007 09:50:41 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070608085041.GA31235@p3n3tr4t0r.internal>
 References: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
 Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: p54b9701f.dip.t-dialin.net
-User-Agent: Thunderbird 1.5.0.10 (X11/20070306)
 In-Reply-To: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
-Sender: news <news@sea.gmane.org>
+User-Agent: Mutt/1.5.15 (2007-04-06)
 Subject: Re: [RFC] Creating an OpenEmbedded founation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,26 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2007 08:34:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 08 Jun 2007 08:52:31 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Holger Freyther wrote:
-> So the natural question is do we need a foundation at all?
+Hi, my thoughts on a foundation are.
 
-Holger, thanks for bringing this issue forward.
+we a) need to have some semi professional looking front so that companies and
+especially suits can have some sort of warm glowing feeling when dealing with
+us.
 
-As I said on IRC, I am skeptical about the need for a formal 
-organization.  I not sure about what kind of problems it would solve 
-that aren't solvable by other means.
+b) need to cope with developers who leave the project, new developers who
+start. Who have to return and be given equipment/funds.
 
-But I do think we should contemplate what to do when key people leave 
-the project and others join.  IOW, we should think about establishing 
-processes and document them.  It is my personal believe that this will 
-be much more important to the continued prospering of OE than a formal 
-organization.
+c) need to deal with our public face at conferences, trade shows including
+sending people if we feel it is worth it.
 
-Just my 2 cents.
+d) need to deal with the situation that may eventually happen where a
+company want to contract OE to actually do a project.
+
+As I see it you dont neccessarrily need a company for this, but I think
+it would help.
+
+Id also like to form any form of foundation/company under an EU duristiction
+as its easier for use currently to deal with then law in the USA.
+
+Graeme
 
 
 
