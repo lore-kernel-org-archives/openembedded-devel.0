@@ -1,28 +1,24 @@
-Received: from [128.178.50.19] (helo=smtp0.epfl.ch)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1HwfM6-0003wy-27
-	for openembedded-devel@openembedded.org; Fri, 08 Jun 2007 16:22:22 +0200
-Received: (qmail 15419 invoked by uid 107); 8 Jun 2007 14:19:48 -0000
-Received: from mailav3.epfl.ch (128.178.50.11)
-	by smtp0.epfl.ch with SMTP; 8 Jun 2007 14:19:48 -0000
-Received: from (unknown [128.178.50.22]) by MAILAV3.epfl.ch with smtp
-	id 1931_50650b3a_15cb_11dc_8fcc_0014221528b0;
-	Fri, 08 Jun 2007 16:19:48 +0200
-Received: from lsa1pc7.epfl.ch (128.178.145.53)
-	by smtp1.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Fri, 08 Jun 2007 16:19:48 +0200
-X-Sendermtaip: 128.178.145.53
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
-Organization: EPFL STI-IPR-LSRO1
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 8 Jun 2007 16:19:47 +0200
-User-Agent: KMail/1.9.6
-References: <200706071519.54448.valentin.longchamp@epfl.ch>
-	<200706071610.31324.openembedded@hrw.one.pl>
-In-Reply-To: <200706071610.31324.openembedded@hrw.one.pl>
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1HwgIe-0007n0-02
+	for openembedded-devel@openembedded.org; Fri, 08 Jun 2007 17:22:52 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l58FKDLr024094 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 8 Jun 2007 17:20:14 +0200
+Message-ID: <466973B4.9010103@dominion.kabel.utwente.nl>
+Date: Fri, 08 Jun 2007 17:20:20 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
 MIME-Version: 1.0
-Message-Id: <200706081619.48045.valentin.longchamp@epfl.ch>
-Subject: Re: JFFS2 trouble
+To: openembedded-devel@openembedded.org
+X-Enigmail-Version: 0.95.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Reminder: don't put MAINTAINER field in recipes, but use the MAINTAINERS file instead
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,22 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2007 14:22:32 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Fri, 08 Jun 2007 15:23:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Marcin Juszkiewicz wrote:
-> Use "mtdX" instead of "/dev/mtdX". This method was mentioned on this
-> mailing list before:
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Thank you Marcin, it works like a charm !
+Hi,
 
--- 
-Valentin Longchamp
-PhD Student
-http://people.epfl.ch/valentin.longchamp
+The MAINTAINER field inside recipes has been deprecated for a while, so please keep the
+following in mind:
+
+ don't put MAINTAINER field in recipes, but use the MAINTAINERS file instead
+
+thanks
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGaXO0MkyGM64RGpERAoy9AKCoWBasYIJm94pazt49afWcmES7ogCgi+Jq
+iIq1wmeeA3wOarMq95xDoiI=
+=uwQs
+-----END PGP SIGNATURE-----
 
 
