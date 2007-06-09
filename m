@@ -1,24 +1,20 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <freyther@gmx.net>) id 1Hx4HX-0001TC-Q5
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Jun 2007 18:59:19 +0200
-Received: (qmail invoked by alias); 09 Jun 2007 16:56:40 -0000
-Received: from unknown (EHLO [192.168.10.100]) [91.64.161.147]
-	by mail.gmx.net (mp013) with SMTP; 09 Jun 2007 18:56:40 +0200
-X-Authenticated: #1949623
-X-Provags-ID: V01U2FsdGVkX1+g2mlyR2ygOvhnOtWk6qgqPxBacvntzwErleeV+g
-	2rLsiaSVPoCQdi
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <4668A4F1.8010800@whitby.id.au>
-References: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
-	<4668A4F1.8010800@whitby.id.au>
-Message-Id: <E2B8F383-4FB0-4352-B9EC-A5E22393CB13@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Sat, 9 Jun 2007 18:56:12 +0200
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <openembedded@hrw.one.pl>) id 1Hx5IU-00062t-OU
+	for openembedded-devel@openembedded.org; Sat, 09 Jun 2007 20:04:22 +0200
+Received: (qmail 4281 invoked by uid 813007); 9 Jun 2007 18:01:43 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 9 Jun 2007 18:01:42 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
+Date: Sat, 9 Jun 2007 20:01:36 +0200
+User-Agent: KMail/1.9.7
+References: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
+In-Reply-To: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
+MIME-Version: 1.0
+Message-Id: <200706092001.39356.openembedded@hrw.one.pl>
 Subject: Re: [RFC] Creating an OpenEmbedded founation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,45 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jun 2007 16:59:19 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Sat, 09 Jun 2007 18:04:23 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 
-Am 08.06.2007 um 02:38 schrieb Rod Whitby:
+OpenEmbedded foundation is needed and we know it. We need it to be seen as 
+something existing not only as random group of developers. This will 
+allow us to get donations for project, maintain our domains, servers and 
+maybe even make our contacts with vendors easier.
 
-> I'm going to give information about how the NSLU2-Linux project  
-> handles
-> some (but not all) of these issues ... I'm not trying to tell OE  
-> what to
-> do, just giving input that might be relevant to OE's decision.
->
-> Holger Freyther wrote:
->> As we grow we have more needs, like I already said. This includes
->> bigger assets like servers to host our infrastructure, sending koen
->> to conferences, buying development boards one doesn't get donated.
->
-> NSLU2-Linux receives donations on a couple of paypal accounts (one for
-> donations from paypal balance, one for donations from paypal credit
-> card).  We have no other convenient way of receiving donations, but I
-> presume we could set up other means of receipt if necessary.  We've
-> raised over USD$10K in the last 2.5 years.
+Which form to choose is other thing. SPI sounds good but limits us to U.S. 
+organizations only if we want to leave them. I did not read e.V. rules 
+yet (other then KDE e.V. status but it is only subset of it) but I am 
+open to any good solution.
 
-Hi,
+We can meet at GUADEC (July) or Mobile Developer Days (August/September) 
+or at OEDEM (October) to sign all needed papers (if there will be any).
 
-thanks for you answer. The only/main question I have is regarding  
-money. Do you pay special care regarding the financial authorities?  
-E.g. in free countries like Germany and Netherlands the financial  
-authorities will scan your account regulary. And I don't want some  
-one to get personal issues with their financial authorities due  
-holding the money.
-Also you can't handle tax exemption but this seems to be not needed  
-in the NSLu2 case.
+-- 
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-kind regards
-	z.
+          Warning: Dates in calendar are closer than they appear.
 
-PS: As to signing NDAs. The e.V. would be a legal body and able to  
-sign any contract not violating the mission statement.
+
 
 
