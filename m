@@ -1,22 +1,32 @@
-Received: from [212.227.126.177] (helo=moutng.kundenserver.de)
+Received: from [209.85.132.249] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <robert@linuxdevelopment.de>) id 1HyAee-0005PN-4e
+	(envelope-from <lvcargnini@gmail.com>) id 1HyAnb-0005YA-W2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jun 2007 19:59:44 +0200
-Received: from [89.59.7.76] (helo=[10.0.0.7])
-	by mrelayeu.kundenserver.de (node=mrelayeu1) with ESMTP (Nemesis),
-	id 0MKwpI-1HyAbm06XK-00041h; Tue, 12 Jun 2007 19:56:46 +0200
-Message-ID: <466EDE5D.7060304@linuxdevelopment.de>
-Date: Tue, 12 Jun 2007 19:56:45 +0200
-From: =?ISO-8859-15?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
-User-Agent: Thunderbird 1.5.0.10 (X11/20060911)
-MIME-Version: 1.0
+	Tue, 12 Jun 2007 20:09:01 +0200
+Received: by an-out-0708.google.com with SMTP id b33so442989ana
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jun 2007 11:06:02 -0700 (PDT)
+Received: by 10.100.254.10 with SMTP id b10mr4246480ani.1181671561382;
+	Tue, 12 Jun 2007 11:06:01 -0700 (PDT)
+Received: by 10.100.38.6 with HTTP; Tue, 12 Jun 2007 11:06:01 -0700 (PDT)
+Message-ID: <ae36f8040706121106ve4d81fv5064afee90650da4@mail.gmail.com>
+Date: Tue, 12 Jun 2007 15:06:01 -0300
+From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.94.2.0
-X-Provags-ID: V01U2FsdGVkX1/wcjEsKoCZIVPr9eR3R1sq2bzF6PtyNRx8DgP
-	dZ9/rny5V6ep9N+00+fEOQCW5iBiJJ1D0912zXXpygr+/Dc3m6
-	DLrQXUK5cU9fYIjtog43BSN3noHmC0F
-Subject: ixp425 vs madwifi with armv5te big endian AND EABI error
+In-Reply-To: <466ECDC8.4090909@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+References: <ae36f8040706021959p2c020f17k454aa346d7123f95@mail.gmail.com>
+	<4666576A.9030608@dominion.kabel.utwente.nl>
+	<ae36f8040706060937la8400adr2f98d7db547a2664@mail.gmail.com>
+	<ae36f8040706061036i3662ee38x104bb1896550b64@mail.gmail.com>
+	<ae36f8040706061143o47650436we993cf24bd807174@mail.gmail.com>
+	<ae36f8040706071545i772205b2m85d251b45c7f26d7@mail.gmail.com>
+	<ae36f8040706120817w7f643176k722d3477bdaaa2e4@mail.gmail.com>
+	<466EBA7A.9030606@dominion.kabel.utwente.nl>
+	<ae36f8040706120934g447146b8l633358481c62dfb1@mail.gmail.com>
+	<466ECDC8.4090909@dominion.kabel.utwente.nl>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: problems doing bitbake task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,41 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2007 17:59:44 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Jun 2007 18:09:02 -0000
+Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Dear Openembedded Devel List
+ how to make a clean using bitbake ?
 
-Iam developing a least cost router based on the Intel ixp425 CPUI and
-some minipci slots. ( Board ADI Pronghorn-Metro).
+On 6/12/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+>
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Lu=EDs Cargnini schreef:
+> > ok first I use gentoo, so the command is emerge "=3Dgcc-3.4.6" =3D)
+> >
+> > I already did it so I have gcc-3 installed on my system and now ?
+>
+> ln /usr/bin/gcc-3.4.6 /usr/bin/gcc-3.4 -s
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFGbs3HMkyGM64RGpERAlUrAKCeN5N2E75ZE3yHM22uCYbJYjNXtgCgjsJS
+> b9puiA4q35quPrE+qCcuKhw=3D
+> =3D2Y4n
+> -----END PGP SIGNATURE-----
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Iam now infront of a problem where i would like ask for assistance.
-
-The madwifi driver which powers the atheros wifi cards ( quite some wide
-range also on multiband cards) uses firmware code tobe linked into their
-drivers.
-Now as i need to crosscompile my build fails like this
- LD [M]
-/tmp/work/ixp4xxbe-angstrom-linux-gnueabi/madwifi-modules-1.0.0+cvs20060814-r0/madwifi/ath_hal/ath_hal.o
-| armeb-angstrom-linux-gnueabi-ld: ERROR: Source object
-/tmp/work/ixp4xxbe-angstrom-linux-gnueabi/madwifi-modules-1.0.0+cvs20060814-r0/madwifi/ath_hal/hal.o
-has EABI version 0, but target
-/mp/work/ixp4xxbe-angstrom-linux-gnueabi/madwifi-modules-1.0.0+cvs20060814-r0/madwifi/ath_hal/ath_hal.o
-has EABI version 4
 
 
-My suspicion is that the this binary code was compiled oabi hence eabi v
-0. But the rest off all is of course eabi compiled.
-
-will i need to get a armv5te firmware supporting this ?
-is it an option to go oabi on my whole toolchain ? ( if yes point me to
-side effects and ways to go, please)
-
-I am kinda lost now .. what can i do ?
-
-Kind Regards
-rob_w
-
-
+--=20
+---------------------------------------------------------------------------=
+---
+Thanks && Regards
+Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
+IEEE Member
+Electrical Engineer Faculty @ PUCRS
+Ipiranga Avenue, 6681 =96 Building 30
+P.O. Box: 90619-900 =96 Porto Alegre/RS
+Phone: +55 51 3320 3500  extension: 7696
+---------------------------------------------------------------------------=
+------
 
