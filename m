@@ -1,22 +1,23 @@
-Received: from [195.121.247.23] (helo=psmtp09.wxs.nl)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gerwin@vanderkruis.net>) id 1Hy65h-0007p6-KM
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Hy7Eg-00046V-OM
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jun 2007 15:07:21 +0200
-Received: from holographicklopdoctor.lan
-	(ip5457b30e.direct-adsl.nl [84.87.179.14])
-	by psmtp09.wxs.nl (iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov
-	14 2006)) with ESMTP id <0JJI002F6XNB8R@psmtp09.wxs.nl> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	12 Jun 2007 15:04:23 +0200 (MEST)
-Date: Tue, 12 Jun 2007 15:02:23 +0200
-From: Gerwin van der Kruis <gerwin@vanderkruis.net>
-In-reply-to: <HOECLKEKOHLAMMGDLLBHGEEHLFAA.skoroneos@digital-opsis.com>
+	Tue, 12 Jun 2007 16:20:43 +0200
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Hy7Do-0003YF-1c
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jun 2007 16:19:48 +0200
+Message-ID: <466EAB05.40203@kernelconcepts.de>
+Date: Tue, 12 Jun 2007 16:17:41 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <200706121502.23966.gerwin@vanderkruis.net>
-MIME-version: 1.0
-User-Agent: KMail/1.9.1
-References: <HOECLKEKOHLAMMGDLLBHGEEHLFAA.skoroneos@digital-opsis.com>
+References: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
+In-Reply-To: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
+X-Enigmail-Version: 0.94.2.0
 Subject: Re: [RFC] Creating an OpenEmbedded founation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,57 +32,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2007 13:07:21 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: 7BIT
-Content-disposition: inline
+X-List-Received-Date: Tue, 12 Jun 2007 14:20:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tuesday 12 June 2007 11:46, Stelios Koroneos wrote:
-> I generaly agree with the idea but having gone through similar "situations"
-> several times in the past i know that in order to something like that to
-> succed, one or two persons will have to take full repsonsibility of it, as
-> the legal requirments are usually a lot.
->
-> One of the things i strongly agree with Holger is that the foundantion
-> should not be doing bussiness, as from experience this will create *a lot*
-> of problems with members in the future.
-> It's main job should be to promote OE (conference, shows etc) and manage
-> the assets donated to the OE project from 3rd parties
-> (money,equipment,services)
->
-> As for the legal form, i am for a European juristiction entity (at least at
-> this stage).
-> e.V looks the best way to go IMHO, but as corerctly pointed by Holger it
-> involves an overhead to manage it and a lot of  work to set it up.
-> Taking into account past experience, the yearly OEDEM meeting could be also
-> the date of the  general assembly solving this issue.
-> For other issues that voting is required, electronic voting could be
-> accepted (this largely depends on the country the e.V is setup but there is
-> an EU directive to member states to "legalize" electronic voting but i am
-> not sure if this allready in effect in Germany)
->
-I agree with the points made . 
+Hi,
 
-And also the not doing business is really important I think . 
+Holger Freyther schrieb:
 
-Is there any progress on setting a date for the meeting ?
+> So the natural question is do we need a foundation at all? Everything  
+> seems to work just fine!
 
-Regards, 
+judging from the bad experience we had with handhelds.org lately we would have
+been able to avoid a major part of the trouble by creating some kind of official
+institution to cover GPE (and other projects as well). So even it is currently
+looks like a foundation is not necessary you usually would not recognize the
+fact that you need one before it is too late.
 
-Gerwin
+> So what shouldn't a foundation do?
+> 	-Make things more complicated
+
+Well... a foundation will always cause some additional overhead, I guess its
+hard to avoid this.
+
+> 	-Doing business as this is where companies are good at. We mean it!
+
+That's quite important, but if our foundation starts to make business that would
+cause quite a lot of interest conflicts.
+
+> 	-Own the projects assets. This would include server equipment,  
+> devices, hopefully domain-names, etc.
+
+We should consider to make a foundation that is open to cover additional
+projects as well. That might be interesting for smaller projects and maybe even
+for LinuxToGo.
+
+> 	-Maintain relationship with Companies
+
+This would be really useful if we want to get more contributions from companies
+that maybe use OE already but did not get involved into the project itself.
+
+> OpenEmbedded e.V. (e.V. is the german expression for registered  
+> associatio):
+> 
+> 	Pros:
+> 		-Tightly regulated by german authorities. This helps us to stick  
+> with the DO's and avoid the DON'Ts
+> 		-KDE e.V. and probably the GNOME Deutschland e.V.
+> 	Cons:
+> 		-Quite an overhead. We need to hold  general assemblies, manage our  
+> assets ourselves, try to get tax detuctable.
+> 		-Managing of members...
+
+I would prefer an e.V. - it is really some overhead, but it has some very
+important advantages:
+- It is a legal entity based on European law.
+- Its basic intention is to cover groups with a common interest like we are.
+- It is forced to be transparent.
+
+The last point is the most important in my opinion.
+
+Even if it is some overhead there should be quite a lot examples around that
+might provide a good template we could start with.
+
+Greetings
+
+Florian
 
 -- 
-The Holographic Klop Doctor
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
-               -
-               0
-             - |
-              \|\
-               |/
-               |
-              /|
-            _|_|
-
-Underneath the mango tree  :) 
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
