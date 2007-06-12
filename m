@@ -1,22 +1,21 @@
-Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <cliff.brake@gmail.com>) id 1HxqCU-0005PR-Fc
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jun 2007 22:09:18 +0200
-Received: by nz-out-0506.google.com with SMTP id n29so1210199nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jun 2007 13:06:26 -0700 (PDT)
-Received: by 10.114.157.1 with SMTP id f1mr5903110wae.1181592385598;
-	Mon, 11 Jun 2007 13:06:25 -0700 (PDT)
-Received: by 10.114.185.15 with HTTP; Mon, 11 Jun 2007 13:06:25 -0700 (PDT)
-Message-ID: <f96d234e0706111306o57e72d0bs4bda73c2e20018b5@mail.gmail.com>
-Date: Mon, 11 Jun 2007 16:06:25 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <6.2.3.4.2.20070608115117.0ba979e8@pop-server.ca.rr.com>
+	(envelope-from <skoroneos@digital-opsis.com>) id 1Hy303-0002DY-CN
+	for openembedded-devel@openembedded.org; Tue, 12 Jun 2007 11:49:19 +0200
+Received: from dias (62.169.217.209) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B00D811A3 for openembedded-devel@openembedded.org;
+	Tue, 12 Jun 2007 11:45:23 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Tue, 12 Jun 2007 12:46:23 +0300
+Message-ID: <HOECLKEKOHLAMMGDLLBHEEEHLFAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-References: <eed7f0160706040138y6a777b6ay86b8237c3462373c@mail.gmail.com>
-	<6.2.3.4.2.20070608115117.0ba979e8@pop-server.ca.rr.com>
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
+In-Reply-To: <f96d234e0706111306o57e72d0bs4bda73c2e20018b5@mail.gmail.com>
+Importance: Normal
 Subject: Re: Gumstix machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,23 +30,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jun 2007 20:09:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 12 Jun 2007 09:49:19 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 6/8/07, Glenn Neufeld <gneuf@ca.rr.com> wrote:
+> >          There's also a problem when building images in that the
+> > "mkimage" command doesn't get installed, so I've been putting it
+> > elsewhere and adding it to my PATH.
+>
+> I think U-boot build installs mkimage into the staging directory, so
+> this issue should go away when you get your U-boot builds working.
+>
 
->          There's also a problem when building images in that the
-> "mkimage" command doesn't get installed, so I've been putting it
-> elsewhere and adding it to my PATH.
+Yes it does install mkimage
+Magicbox and dht-walnut kernels process the kernel image with mkimage in
+order to output a u-boot "readable" image
 
-I think U-boot build installs mkimage into the staging directory, so
-this issue should go away when you get your U-boot builds working.
+I've be thinking of turning this into a class as there are more and more
+machines in OE that use u-boot and could benefit of something like that and
+people would not have to re-invent the wheel every time
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+
+Stelios S. Koroneos
+
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+
+
+
+
 
 
