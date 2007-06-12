@@ -1,24 +1,23 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [72.14.204.232] (helo=qb-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Hy7Eg-00046V-OM
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1Hy7FP-0002N2-Fv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jun 2007 16:20:43 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Hy7Do-0003YF-1c
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jun 2007 16:19:48 +0200
-Message-ID: <466EAB05.40203@kernelconcepts.de>
-Date: Tue, 12 Jun 2007 16:17:41 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
-MIME-Version: 1.0
+	Tue, 12 Jun 2007 16:21:27 +0200
+Received: by qb-out-0506.google.com with SMTP id z1so2278572qbc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jun 2007 07:18:31 -0700 (PDT)
+Received: by 10.115.107.1 with SMTP id j1mr6705773wam.1181657909706;
+	Tue, 12 Jun 2007 07:18:29 -0700 (PDT)
+Received: by 10.115.75.15 with HTTP; Tue, 12 Jun 2007 07:18:29 -0700 (PDT)
+Message-ID: <bdb0025f0706120718r1f90eadfoc5fccadb3d7263ed@mail.gmail.com>
+Date: Tue, 12 Jun 2007 11:18:29 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
-In-Reply-To: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
-X-Enigmail-Version: 0.94.2.0
-Subject: Re: [RFC] Creating an OpenEmbedded founation
+In-Reply-To: <1181645855.5628.4.camel@localhost.localdomain>
+MIME-Version: 1.0
+References: <bdb0025f0706111249n4b28df89p9cbaffa43de7ee06@mail.gmail.com>
+	<1181645855.5628.4.camel@localhost.localdomain>
+Subject: Re: strange error when coding a bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,79 +31,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2007 14:20:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 12 Jun 2007 14:21:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On 6/12/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Mon, 2007-06-11 at 16:49 -0300, Rodrigo Vivi wrote:
+> > I have this dummy function in dummyclass.bbclass
+> >
+> > python do_blah () {
+> >     print "teste"
+> > }
+> >
+> > just it...
+> >
+> > The strangest thing is that the error depends where I add this task:
+> > * addtask blah before do_patch  # it breaks do_patch of quilt-native
+> > * addtask blah before do_configure # it breaks do_stage of quilt-native
+> > * addtask blah before do_install # it breaks do_configure of linux-libc-headers
+> > # All logs are in the end of this e-mail.
+> >
+> > This is a very stupid and almost empty function that does nothing
+> > important but the build breaks...
+>
+> Its not stupid, its by design.
 
-Holger Freyther schrieb:
+Sorry, I mean my function is stupid. it does anything but a print.
 
-> So the natural question is do we need a foundation at all? Everything  
-> seems to work just fine!
+>
+> addtask inserts a dependency so if you add
+>
+> addtask blah before do_configure
+>
+> You are saying that say "patch" must run, followed by "blah" followed by
+> "configure". Bitbake will check the task dependencies and build them if
+> they're missing. If a subsequent task has a timestamp older than its
+> dependencies it will rerun them too (just on a per recipe basis at
+> present). There have been requests to extend that so if you rebuild gtk
+> +, all the gtk apps will rebuild and we will probably optionally allow
+> that in due course (it should be easy with the new bitbake core).
 
-judging from the bad experience we had with handhelds.org lately we would have
-been able to avoid a major part of the trouble by creating some kind of official
-institution to cover GPE (and other projects as well). So even it is currently
-looks like a foundation is not necessary you usually would not recognize the
-fact that you need one before it is too late.
+I've noticed that and it makes sense. What I really cannot understand
+is how a very simple function that does anything but a print can break
+that packages?
 
-> So what shouldn't a foundation do?
-> 	-Make things more complicated
+>
+> Cheers,
+>
+> Richard
 
-Well... a foundation will always cause some additional overhead, I guess its
-hard to avoid this.
+Thanks,
+vivijim
 
-> 	-Doing business as this is where companies are good at. We mean it!
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-That's quite important, but if our foundation starts to make business that would
-cause quite a lot of interest conflicts.
-
-> 	-Own the projects assets. This would include server equipment,  
-> devices, hopefully domain-names, etc.
-
-We should consider to make a foundation that is open to cover additional
-projects as well. That might be interesting for smaller projects and maybe even
-for LinuxToGo.
-
-> 	-Maintain relationship with Companies
-
-This would be really useful if we want to get more contributions from companies
-that maybe use OE already but did not get involved into the project itself.
-
-> OpenEmbedded e.V. (e.V. is the german expression for registered  
-> associatio):
-> 
-> 	Pros:
-> 		-Tightly regulated by german authorities. This helps us to stick  
-> with the DO's and avoid the DON'Ts
-> 		-KDE e.V. and probably the GNOME Deutschland e.V.
-> 	Cons:
-> 		-Quite an overhead. We need to hold  general assemblies, manage our  
-> assets ourselves, try to get tax detuctable.
-> 		-Managing of members...
-
-I would prefer an e.V. - it is really some overhead, but it has some very
-important advantages:
-- It is a legal entity based on European law.
-- Its basic intention is to cover groups with a common interest like we are.
-- It is forced to be transparent.
-
-The last point is the most important in my opinion.
-
-Even if it is some overhead there should be quite a lot examples around that
-might provide a good template we could start with.
-
-Greetings
-
-Florian
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
