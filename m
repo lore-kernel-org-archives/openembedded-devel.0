@@ -1,21 +1,36 @@
-Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hvontres@gmail.com>) id 1HyHMN-0003tN-NZ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jun 2007 03:09:19 +0200
-Received: by wx-out-0506.google.com with SMTP id h29so35184wxd
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2007 18:06:20 -0700 (PDT)
-Received: by 10.90.50.1 with SMTP id x1mr25504agx.1181696780508;
-	Tue, 12 Jun 2007 18:06:20 -0700 (PDT)
-Received: by 10.90.68.14 with HTTP; Tue, 12 Jun 2007 18:06:20 -0700 (PDT)
-Message-ID: <a7f8874a0706121806r5e5bc00bte17b6e593ec2d52d@mail.gmail.com>
-Date: Tue, 12 Jun 2007 18:06:20 -0700
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: sourceforge SVN change
+	(envelope-from <rpurdie@rpsys.net>) id 1HyOUz-0007Fk-Sz
+	for openembedded-devel@openembedded.org; Wed, 13 Jun 2007 10:46:42 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l5D8heCN012292
+	for <openembedded-devel@openembedded.org>;
+	Wed, 13 Jun 2007 09:43:40 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11983-05 for <openembedded-devel@openembedded.org>;
+	Wed, 13 Jun 2007 09:43:37 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l5D8haMo012285
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 13 Jun 2007 09:43:36 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <466EB2BD.5040506@dominion.kabel.utwente.nl>
+References: <bdb0025f0706111249n4b28df89p9cbaffa43de7ee06@mail.gmail.com>
+	<1181645855.5628.4.camel@localhost.localdomain>
+	<bdb0025f0706120718r1f90eadfoc5fccadb3d7263ed@mail.gmail.com>
+	<1181659316.5628.29.camel@localhost.localdomain>
+	<466EB2BD.5040506@dominion.kabel.utwente.nl>
+Date: Wed, 13 Jun 2007 09:43:35 +0100
+Message-Id: <1181724216.6126.0.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: strange error when coding a bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,42 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jun 2007 01:09:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 13 Jun 2007 08:46:42 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-It looks like sourceforge is changing the svn urls. Are we using the new
-scheme or do we need to check the metadata and update accordingly?
+On Tue, 2007-06-12 at 16:50 +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Richard Purdie schreef:
+> > On Tue, 2007-06-12 at 11:18 -0300, Rodrigo Vivi wrote:
+> >> On 6/12/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> >>> On Mon, 2007-06-11 at 16:49 -0300, Rodrigo Vivi wrote:
+> >>>
+> >>> addtask inserts a dependency so if you add
+> >>>
+> >>> addtask blah before do_configure
+> >>>
+> >>> You are saying that say "patch" must run, followed by "blah" followed by
+> >>> "configure". Bitbake will check the task dependencies and build them if
+> >>> they're missing. If a subsequent task has a timestamp older than its
+> >>> dependencies it will rerun them too (just on a per recipe basis at
+> >>> present). There have been requests to extend that so if you rebuild gtk
+> >>> +, all the gtk apps will rebuild and we will probably optionally allow
+> >>> that in due course (it should be easy with the new bitbake core).
+> >> I've noticed that and it makes sense. What I really cannot understand
+> >> is how a very simple function that does anything but a print can break
+> >> that packages?
+> > 
+> > Try "bitbake busybox", then "bitbake busybox -c package -f". You will
+> > find that either it will fail outright or the busybox packages will
+> > become corrupt (empty). This is because install must always be (re)run
+> > before package. I suspect you're seeing side-affects from that area of
+> > breakage (and you're not the only one)...
+> 
+> Didn't we have a proposed fix for that?
+
+My original suggestion broke do_deploy tasks if I recall correctly. I
+therefore proposed copying files rather than moving them but I've not
+written that patch yet :/.
+
+Cheers,
+
+Richard
 
 
--------------------------------quote
-start---------------------------------------------
-
-Legacy Subversion Access Method Going Away
-------------------------------------------
-
-Back in November of 2006, we added a new preferred access method for our
-Subversion offering that solved most of the spurious error messages and
-other problems with our initial SVN rollout.  The change introduced a
-new URL scheme:
-
-https://PROJECTNAME.svn.sourceforge.net/svnroot/PROJECTNAME<https://projectname.svn.sourceforge.net/svnroot/PROJECTNAME>
-
-Users have been receiving the notice to upgrade via a Site Status
-announcement and as needed via Support Request when problems were reported.
-
-As a part of our ongoing infrastructure improvements to our Subversion
-offering and other services, we will be decommissioning the legacy
-access method (the one without the PROJECTNAME prefix for the hostname)
-as of June 28.  Past that time, Subversion operations that use the old
-URL scheme will no longer work.  You may change over any existing
-Subversion checkouts you have by following the instructions detailed here:
-
-https://sourceforge.net/docs/E09#notice
-
-
-
--------------------------------quote
-end---------------------------------------------
 
