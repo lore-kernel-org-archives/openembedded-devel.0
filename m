@@ -1,36 +1,38 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [202.173.155.195] (helo=birgitte.twibble.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1HyOUz-0007Fk-Sz
-	for openembedded-devel@openembedded.org; Wed, 13 Jun 2007 10:46:42 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l5D8heCN012292
-	for <openembedded-devel@openembedded.org>;
-	Wed, 13 Jun 2007 09:43:40 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11983-05 for <openembedded-devel@openembedded.org>;
-	Wed, 13 Jun 2007 09:43:37 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l5D8haMo012285
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 13 Jun 2007 09:43:36 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <466EB2BD.5040506@dominion.kabel.utwente.nl>
-References: <bdb0025f0706111249n4b28df89p9cbaffa43de7ee06@mail.gmail.com>
-	<1181645855.5628.4.camel@localhost.localdomain>
-	<bdb0025f0706120718r1f90eadfoc5fccadb3d7263ed@mail.gmail.com>
-	<1181659316.5628.29.camel@localhost.localdomain>
-	<466EB2BD.5040506@dominion.kabel.utwente.nl>
-Date: Wed, 13 Jun 2007 09:43:35 +0100
-Message-Id: <1181724216.6126.0.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: strange error when coding a bbclass
+	(envelope-from <lenehan@twibble.org>) id 1HySAv-0001mK-E3
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jun 2007 14:42:14 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by birgitte.twibble.org (Postfix) with ESMTP id 1B3D2F27E5;
+	Wed, 13 Jun 2007 22:39:10 +1000 (EST)
+Received: from birgitte.twibble.org ([127.0.0.1])
+	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 07165-08; Wed, 13 Jun 2007 22:39:09 +1000 (EST)
+Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
+	by birgitte.twibble.org (Postfix) with ESMTP id 821F5D9CE6;
+	Wed, 13 Jun 2007 22:39:09 +1000 (EST)
+Received: by nynaeve.twibble.org (Postfix, from userid 500)
+	id 541C4B70149; Wed, 13 Jun 2007 22:39:09 +1000 (EST)
+Date: Wed, 13 Jun 2007 22:39:08 +1000
+From: Jamie Lenehan <lenehan@twibble.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070613123908.GA19284@twibble.org>
+References: <7C28F02B-B392-4557-9E7A-2991BE0E1BF3@gmx.net>
+	<ae36f8040706051251g22ae2a09ha560b3c8b6d0de57@mail.gmail.com>
+	<4665CF19.2030501@dominion.kabel.utwente.nl>
+	<ae36f8040706051806q120be1bdyae9da9c8f754ab59@mail.gmail.com>
+	<4666520C.8060000@dominion.kabel.utwente.nl>
+	<4666576A.9030608@dominion.kabel.utwente.nl>
+	<ae36f8040706060937la8400adr2f98d7db547a2664@mail.gmail.com>
+	<ae36f8040706061036i3662ee38x104bb1896550b64@mail.gmail.com>
+	<ae36f8040706061143o47650436we993cf24bd807174@mail.gmail.com>
+	<ae36f8040706071545i772205b2m85d251b45c7f26d7@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <ae36f8040706071545i772205b2m85d251b45c7f26d7@mail.gmail.com>
+User-Agent: Mutt/1.5.12-2006-07-14
+X-Virus-Scanned: by amavisd at twibble.org
+Subject: Re: problems doing bitbake task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,49 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jun 2007 08:46:42 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Jun 2007 12:42:17 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2007-06-12 at 16:50 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Richard Purdie schreef:
-> > On Tue, 2007-06-12 at 11:18 -0300, Rodrigo Vivi wrote:
-> >> On 6/12/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> >>> On Mon, 2007-06-11 at 16:49 -0300, Rodrigo Vivi wrote:
-> >>>
-> >>> addtask inserts a dependency so if you add
-> >>>
-> >>> addtask blah before do_configure
-> >>>
-> >>> You are saying that say "patch" must run, followed by "blah" followed by
-> >>> "configure". Bitbake will check the task dependencies and build them if
-> >>> they're missing. If a subsequent task has a timestamp older than its
-> >>> dependencies it will rerun them too (just on a per recipe basis at
-> >>> present). There have been requests to extend that so if you rebuild gtk
-> >>> +, all the gtk apps will rebuild and we will probably optionally allow
-> >>> that in due course (it should be easy with the new bitbake core).
-> >> I've noticed that and it makes sense. What I really cannot understand
-> >> is how a very simple function that does anything but a print can break
-> >> that packages?
-> > 
-> > Try "bitbake busybox", then "bitbake busybox -c package -f". You will
-> > find that either it will fail outright or the busybox packages will
-> > become corrupt (empty). This is because install must always be (re)run
-> > before package. I suspect you're seeing side-affects from that area of
-> > breakage (and you're not the only one)...
-> 
-> Didn't we have a proposed fix for that?
+On Fri, Jun 08, 2007 at 08:53:49AM +1000, "Lu=EDs Cargnini" wrote:
+> new problems:
+> (BD06DC30:~/puc/instramed/openembedded) lvcargnini% bitbake task-base
+> NOTE: Handling BitBake files: - (4588/4588) [100 %]
+> NOTE: Parsing finished. 4373 cached, 0 parsed, 215 skipped, 0 masked.
+> NOTE: build 200706071941: started
+[...]
+> SysV.xs:7:25: error: asm/page.h: No such file or directory
+> make[1]: *** [SysV.o] Error 1
+> make[1]: Leaving directory
+> `/home/lvcargnini/puc/instramed/openembedded/tmp/work/i686-linux/perl-n=
+ative-5.8.8-r11/perl-5.8.8/ext/IPC/SysV'
+[...]
 
-My original suggestion broke do_deploy tasks if I recall correctly. I
-therefore proposed copying files rather than moving them but I've not
-written that patch yet :/.
+This is an issue with the version linux-headers not including
+asm/page.h.
 
-Cheers,
+Creating an empty asm/page.h (in /usr/include) would get past this,
+but could cause other issues.
 
-Richard
+Does the latest version of linux-headers for gentoo put this back or
+is it gone for good? Checking the latest kernel here (not gentoo, I
+don't use that) and it seems be getting installed as part of make
+headers_install - so it looks like it's back. So you might want to
+try the latest gentoo version of linux-headers before doing anything
+else.
 
+If you update your host to the latest version and it still has
+problems then put a bug in the OE bug tracker and I can look at
+fixing this. Perl is only including it in order to get the definition
+of getpagesize which has been defined in unistd.h for a long time
+now, so just removing that include for perl should (in theory) work
+without any issues (unless you had a really old system?)
+
+--=20
+ Jamie Lenehan <lenehan@twibble.org>
 
 
