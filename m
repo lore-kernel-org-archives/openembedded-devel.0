@@ -1,39 +1,24 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [64.233.162.234] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1HyfWB-0007ej-H1
+	(envelope-from <damwid@gmail.com>) id 1HygDb-0003fJ-07
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jun 2007 04:57:04 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 7A27310D709;
-	Thu, 14 Jun 2007 12:53:57 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 29702-06; Thu, 14 Jun 2007 12:53:57 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 0799D10D681;
-	Thu, 14 Jun 2007 12:53:57 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id E649EB70149; Thu, 14 Jun 2007 12:53:56 +1000 (EST)
-Date: Thu, 14 Jun 2007 12:53:56 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: =?iso-8859-1?Q?Lu=EDs?= Cargnini <lvcargnini@gmail.com>
-Message-ID: <20070614025356.GA6177@twibble.org>
-References: <4666520C.8060000@dominion.kabel.utwente.nl>
-	<4666576A.9030608@dominion.kabel.utwente.nl>
-	<ae36f8040706060937la8400adr2f98d7db547a2664@mail.gmail.com>
-	<ae36f8040706061036i3662ee38x104bb1896550b64@mail.gmail.com>
-	<ae36f8040706061143o47650436we993cf24bd807174@mail.gmail.com>
-	<ae36f8040706071545i772205b2m85d251b45c7f26d7@mail.gmail.com>
-	<20070613123908.GA19284@twibble.org>
-	<ae36f8040706130931r4e81a08bi8ca10417336df3b5@mail.gmail.com>
-	<20070614013553.GA4558@twibble.org>
-	<ae36f8040706131940x128ce3b5ic2422b3fc5f6c99d@mail.gmail.com>
+	Thu, 14 Jun 2007 05:41:56 +0200
+Received: by nz-out-0506.google.com with SMTP id n29so375240nzf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jun 2007 20:38:48 -0700 (PDT)
+Received: by 10.115.33.1 with SMTP id l1mr1399890waj.1181792328067;
+	Wed, 13 Jun 2007 20:38:48 -0700 (PDT)
+Received: from ?192.168.1.3? ( [123.112.47.165])
+	by mx.google.com with ESMTP id j31sm1789033waf.2007.06.13.20.38.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 13 Jun 2007 20:38:47 -0700 (PDT)
+Message-ID: <4670B841.4040605@gmail.com>
+Date: Thu, 14 Jun 2007 11:38:41 +0800
+From: DAMWID <damwid@gmail.com>
+User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
 MIME-Version: 1.0
-In-Reply-To: <ae36f8040706131940x128ce3b5ic2422b3fc5f6c99d@mail.gmail.com>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: problems doing bitbake task-base
+To: openembedded-devel@lists.openembedded.org
+Subject: mountall.sh bugs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -47,45 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jun 2007 02:57:05 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Jun 2007 03:42:10 -0000
+Content-Type: text/plain; charset=GB18030; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jun 13, 2007 at 11:40:51PM -0300, Lu=EDs Cargnini wrote:
-> thanks for your answers
-> So why OE perl-native isn't compiling for me ???
+Hi all,
 
-Because perl-native is compiled with your hosts's compiler, and you have =
-a
-version of linux-headers (I think that's what gentoo calls them) that has
-removed /usr/include/asm/page.h
+The mountall.sh in initscripts-1.0 package use the following line to 
+mount all filesystem except nfs, smbfs, and ncpfs:
 
-I *think* this was removed and then re-added back later on (since so much
-stuff includes this header). In which case updating linux-headers on your
-system to a later version should fix it.
+	mount -at nonfs,nosmbfs,noncpfs 2>/dev/null
 
-If I'm wrong on this I can remove the need for it from perl, but I need t=
-o
-make sure I don't break perl-native on other systems if I do that.
+there are two problems here:
 
-> and perl-native use my host kernel ? probably not, because in this case=
- we
-> won't have problem with page.h ? I'm right ?
+1) the arguments for -t option should be "nonfs,smbfs,ncpfs", the "no" 
+should be prefixed to the whole fstype list, not to each fstype.
 
-It doesn't use your kernel headers, but the linux-headers, which are
-generated from the kernel headers. So the version of linux-headers is not
-usually related to the version of the kernel that you are using.
+2) currently, busybox does not support the "-t type1,type2" and "-t 
+notype1,type2" option, so this line actually does nothing at all.
 
-> And how to fix this ???
+The best way to resolve this problem is add above options support to 
+busybox. As a workaround, I replace this line with a simple "mount -a" 
+command, and it works for me.
 
-Try the latest gentoo linux-headers package (or an older version). If tha=
-t
-doesn't work then wait for me to test and remove it from the perl-native =
-in
-OE.
-
---=20
- Jamie Lenehan <lenehan@twibble.org>
+B.R.
+Damwid
 
 
