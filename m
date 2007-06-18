@@ -1,21 +1,27 @@
-Received: from [64.233.162.238] (helo=nz-out-0506.google.com)
+Received: from [65.54.246.229] (helo=bay0-omc3-s29.bay0.hotmail.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <cliff.brake@gmail.com>) id 1I0HiN-00080n-Kh
+	(envelope-from <pelle2004@hotmail.com>) id 1I0I9w-0003tB-Ev
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jun 2007 15:56:19 +0200
-Received: by nz-out-0506.google.com with SMTP id n29so1219584nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2007 06:52:47 -0700 (PDT)
-Received: by 10.114.108.15 with SMTP id g15mr6197278wac.1182174766645;
-	Mon, 18 Jun 2007 06:52:46 -0700 (PDT)
-Received: by 10.114.191.17 with HTTP; Mon, 18 Jun 2007 06:52:46 -0700 (PDT)
-Message-ID: <f96d234e0706180652q2faea21ai29bc16199b55d0b9@mail.gmail.com>
-Date: Mon, 18 Jun 2007 09:52:46 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Mon, 18 Jun 2007 16:24:48 +0200
+Received: from hotmail.com ([65.55.154.107]) by bay0-omc3-s29.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.2668); 
+	Mon, 18 Jun 2007 07:21:15 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	Mon, 18 Jun 2007 07:21:15 -0700
+Message-ID: <BAY143-F2784D42E0C067E2C9D316AB9130@phx.gbl>
+Received: from 65.55.154.123 by by143fd.bay143.hotmail.msn.com with HTTP;
+	Mon, 18 Jun 2007 14:21:15 GMT
+X-Originating-IP: [194.236.6.194]
+X-Originating-Email: [pelle2004@hotmail.com]
+X-Sender: pelle2004@hotmail.com
+In-Reply-To: <f96d234e0706180652q2faea21ai29bc16199b55d0b9@mail.gmail.com>
+From: "Pelle Svensson" <pelle2004@hotmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BAY143-F24A7882AECEEB415CE95A8B9130@phx.gbl>
-MIME-Version: 1.0
-References: <BAY143-F24A7882AECEEB415CE95A8B9130@phx.gbl>
+Bcc: 
+Date: Mon, 18 Jun 2007 16:21:15 +0200
+Mime-Version: 1.0
+X-OriginalArrivalTime: 18 Jun 2007 14:21:15.0588 (UTC)
+	FILETIME=[EE22F840:01C7B1B3]
 Subject: Re: Some help on building a new dist.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,66 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2007 13:56:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Jun 2007 14:24:48 -0000
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
 
-On 6/18/07, Pelle Svensson <pelle2004@hotmail.com> wrote:
-
-> I have playing around with OE and builded some packages ect.
-> I have a project that I would like to build with OE.
-> Where and how should I start.
 >
-> I have a fully working system with rootfs, bootloader, kernel and
-> applications
-> builded with outside OE with crosstools and some scripts.
+>bitbake angstrom-console-image
 >
-> Have I understand OE correctly if it has fully dependency from a the point
-> where I issue 'bitbake mysystem'.
-
-Correct.
-
-> My questions are:
+>Once you get the console image up and running, then worry about more
+>complex images, switching to opie, etc.
 >
-> 1. What 'packages/*/*.bb' file do I need to create.
-> Do I need one for putting the rootfs/jffs2 toghether, one for tasks, and one
-> for the kernel.
-> Where should they be located.
 
-Generally, all you need to do is define:
- - a machine file (conf/machine/<machine.conf>)
- - a local.conf
- - and a kernel
+OK,
 
-If there are platforms that are close, you may want to start with one of them.
+I start from angstrom-console-image..
 
-> 2. What is the relation beetween packages files.
-> Looking at opie it seems that
-> .../images/opie-image.bb <- .../tasks/task-opie.bb <- a huge set of
-> 'opie-..' pkg
->
-> I have read this section and the manual for creating new targets
-> http://www.openembedded.info/wiki/New_targets#Fileystem_image
->
-> Should I start doing a copy of opie or?
-> Have I forgotten anything beside 'local.conf'
+/Thanks
+Pelle
 
-local.conf may be enough if you can find a machine that works for you,
-or you can put all the machine info in the local.conf file.  I would
-not start with opie.  Angstrom is currently maintained and is probably
-a better starting point.  I would start with:
+_________________________________________________________________
+Vårens klädmode på MSN http://salongk.msn.se/
 
-bitbake angstrom-console-image
-
-Once you get the console image up and running, then worry about more
-complex images, switching to opie, etc.
-
-Cliff
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
 
 
