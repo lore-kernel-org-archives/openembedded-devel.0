@@ -1,29 +1,31 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1I0MOW-00065l-B1
-	for openembedded-devel@openembedded.org; Mon, 18 Jun 2007 20:56:08 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1I0MDm-0008DH-Qj
-	for openembedded-devel@openembedded.org; Mon, 18 Jun 2007 20:45:03 +0200
+	id 1I0MRi-0006A9-9i
+	for openembedded-devel@openembedded.org; Mon, 18 Jun 2007 20:59:26 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1I0MJq-0001rE-I0
+	for openembedded-devel@openembedded.org; Mon, 18 Jun 2007 20:51:19 +0200
 Received: from 212.17.245.44 ([212.17.245.44])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 18 Jun 2007 20:45:02 +0200
+	Mon, 18 Jun 2007 20:51:18 +0200
 Received: from no2spam by 212.17.245.44 with local (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 18 Jun 2007 20:45:02 +0200
+	Mon, 18 Jun 2007 20:51:18 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 18 Jun 2007 20:26:32 +0200
-Message-ID: <f56iop$t3j$1@sea.gmane.org>
+Date: Mon, 18 Jun 2007 20:36:52 +0200
+Message-ID: <f56jc5$ueq$2@sea.gmane.org>
+References: <46741AD6.7050406@dominion.kabel.utwente.nl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@sea.gmane.org
 X-Gmane-NNTP-Posting-Host: 212.17.245.44
 User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
+In-Reply-To: <46741AD6.7050406@dominion.kabel.utwente.nl>
 Sender: news <news@sea.gmane.org>
-Subject: list of targets for ASSUME_PROVIDED
+Subject: Re: OE weekly changelog for 20070609 - 20070616
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,22 +39,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2007 18:56:08 -0000
+X-List-Received-Date: Mon, 18 Jun 2007 18:59:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-FYI.  I hope I did not write complete nonsens in that wiki page.
+Koen Kooi wrote:
+> mickeyl@openembedded.org:
+>     oe/libxosd: add patch making libxosd using 'fixed' as default font --
+[...]
 
-(19:55:12) Laibsch: Where is the best place to document a potential
-target for ASSUME_PROVIDED?
-(19:55:45) Laibsch: IOW, I just added a virtual/java-native providee
-that is only necessary when there is no java package installed
-(19:56:04) Laibsch: Is there a list anywhere that one could go through
-to which I should add this?
-(20:11:35) Laibsch: OK, I could not find anything
-(20:11:57) Laibsch: And therefore I started a little list of my own (so
-far 1 entry!!)
-(20:11:59) Laibsch: http://www.openembedded.org/advancedconfiguration
+Nice to see that FIC made good on their promise.  Yay for FIC.
+
+But even better to see mickeyl among the list of committers to OE,
+again.  Welcome back, Mickey.
 
 
 
