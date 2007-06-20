@@ -1,20 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1I0xWo-0001ol-H0
-	for openembedded-devel@openembedded.org; Wed, 20 Jun 2007 12:35:10 +0200
-Received: (qmail 6881 invoked by uid 813007); 20 Jun 2007 10:31:27 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.local)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 20 Jun 2007 10:31:27 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jun 2007 12:31:26 +0200
-User-Agent: KMail/1.9.7
-References: <BAY143-F26F6CAE5A52DDDF6A67FC9B9110@phx.gbl>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <freyther@gmx.net>) id 1I0xXP-0001pN-Hf
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jun 2007 12:35:47 +0200
+Received: (qmail invoked by alias); 20 Jun 2007 10:32:05 -0000
+Received: from dsl-62-220-14-162.berlikomm.net (EHLO [192.168.1.23])
+	[62.220.14.162]
+	by mail.gmx.net (mp043) with SMTP; 20 Jun 2007 12:32:05 +0200
+X-Authenticated: #1949623
+X-Provags-ID: V01U2FsdGVkX182yLBcCNg25A2KLMFHa3Sv5eRlXpRws0ogrM7y3F
+	InwQjT85QAZPpH
+Mime-Version: 1.0 (Apple Message framework v752.3)
 In-Reply-To: <BAY143-F26F6CAE5A52DDDF6A67FC9B9110@phx.gbl>
-MIME-Version: 1.0
-Message-Id: <200706201231.27942.openembedded@hrw.one.pl>
+References: <BAY143-F26F6CAE5A52DDDF6A67FC9B9110@phx.gbl>
+Message-Id: <7D14BDC7-243B-41E5-A193-02DC289F6398@gmx.net>
+From: Holger Freyther <freyther@gmx.net>
+Date: Wed, 20 Jun 2007 12:31:20 +0200
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.752.3)
+X-Y-GMX-Trusted: 0
 Subject: Re: Question - How dose bitbake select a kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,45 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2007 10:35:11 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Jun 2007 10:35:47 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia =B6roda, 20 czerwca 2007, Pelle Svensson napisa=B3:
-> Hi,
->
-> I'm starting to put together a image.bb file.
-> I can't figure out how I control the selection of kernel.
-> In the tasks file it says 'RDEPENDS=3D... kernel ...'.
-> When building in verbose I get
->
-> NOTE: multiple providers are available for runtime kernel
-> (poodle-kernel-2.4-embedix, LAB-kernel, linux-h1940, linux-omap-2.6,
-> a780-kernel, linux-bast, corgi-kernel-2.4-embedix,
-> shepherd-kernel-2.4-embedix, linux, poodle255-kernel-2.4-embedix,
-> husky-kernel-2.4-embedix);
-> NOTE: consider defining a PREFERRED_PROVIDER entry to match runtime
-> kernel
 
-> 1. How did bitbake come up with this list? Is done by bb-file's name or
-> a tag inside?
+Am 20.06.2007 um 11:40 schrieb Pelle Svensson:
 
-It checks all providers of "virtual/kernel" target.
+> 1. How did bitbake come up with this list? Is done by bb-file's  
+> name or a
+> tag inside?
 
-> 2. Should I add 'PREFERRED_PROVIDER_kernel=3Dmy-target-kernel.bb'  if so
+This should be in the BitBake manual
+
+
+> 2. Should I add 'PREFERRED_PROVIDER_kernel=my-target-kernel.bb'  if so
 > where?
 
-In machine config:
+grep -rn PREFERRED_PROVIDER * | grep kernel in your  
+org.openembedded.dev/conf directory to get an idea :)
 
-PREFERRED_PROVIDER_virtual/kernel =3D "my-target-kernel"
+z.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
 
-                   Nie rzucim ziemi, sk=B1d nasz root...
 
 
 
