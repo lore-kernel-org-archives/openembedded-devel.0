@@ -1,24 +1,21 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <freyther@gmx.net>) id 1I0xg1-00020S-6q
+Received: from [62.27.45.185] (helo=argo.arachnion.zzZZzz.net)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <hacker@klever.net>) id 1I0xxQ-0002Kb-BU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jun 2007 12:44:41 +0200
-Received: (qmail invoked by alias); 20 Jun 2007 10:40:58 -0000
-Received: from dsl-62-220-14-162.berlikomm.net (EHLO [192.168.1.23])
-	[62.220.14.162]
-	by mail.gmx.net (mp052) with SMTP; 20 Jun 2007 12:40:58 +0200
-X-Authenticated: #1949623
-X-Provags-ID: V01U2FsdGVkX18A9sJ64bwAakItzaaNFq0UtZ+eiX23kP1dhzoTTD
-	zqrcOBizMlV3DU
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <48239d390706200314y300766en9956ec5e56789ce5@mail.gmail.com>
-References: <48239d390706200314y300766en9956ec5e56789ce5@mail.gmail.com>
-Message-Id: <A7921DE0-7584-425F-B761-CD455252D3EC@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Wed, 20 Jun 2007 12:40:14 +0200
+	Wed, 20 Jun 2007 13:02:42 +0200
+Received: from pd9538177.dip0.t-ipconnect.de ([217.83.129.119]
+	helo=olympus.klever.net)
+	by argo.arachnion.zzZZzz.net with esmtpa (Exim 4.42)
+	id 1I0xhh-0004iR-J7 for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jun 2007 12:46:25 +0200
+Message-ID: <4679053B.4060606@klever.net>
+Date: Wed, 20 Jun 2007 12:45:15 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.4 (X11/20070619)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
+References: <48239d390706200314y300766en9956ec5e56789ce5@mail.gmail.com>
+In-Reply-To: <48239d390706200314y300766en9956ec5e56789ce5@mail.gmail.com>
 Subject: Re: [RFC] locales
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,55 +30,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2007 10:44:41 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Wed, 20 Jun 2007 11:02:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
+I do not see why do we want to get rid of non-utf locales. Wouldn't an 
+attempt to make utf-locales work more productive? And I believe making 
+things work should be of higher priority than making packaging friendlier.
 
-Am 20.06.2007 um 12:14 schrieb Sergey Lapin:
+At the moment, we have troubles entering non-latin utf8 in x11. That 
+should be fixed before going any further. And before you can fix it you 
+need to find out what exactly the problem is. This is where I'd suggest 
+that we start at.
 
->
-> As for infrastructure, I see several questionable methods of  
-> solving this:
->
+Love,
+H
+
+Sergey Lapin wrote:
+> Hi, all!
+> 
+> Note: I could be fundamentally wrong here, so, please feel free to
+> point me to right direction in this case.
+> 
+> As it was discussed on #oe, locale infrastructure lacks implementation
+> on oe.dev, and, in particular, in Angstrom.
+> 
+> With a bit of research I done on this subject made me to come up with
+> a few ideas, which I'd like to know your opinion about.
+> 
+> Present status:
+> *-locale* packages are generated, but not put on image. These packages
+> contain message translations.
+> * Only glibc locale which is put on image (if any) is en_GB.
+> 
+> Infrastructure problem:
+> * We need a way to set up automatic locale package installation during
+> image build
+> according to some subset of languages/locales.
+> * We need a way to install "language" in simple user-friendly way. I
+> mean here not only locale packages, but also various
+> language-dependent files (docs, keymap settings, various configuration
+> files, etc.).
+> 
+> Various random problems encountered:
+> * GPE locale.alias for gpe-dm needs cleanup (get rid of non-UTF8 locales?)
+> * libx11 locale.alias needs cleanup (setup for UTF8-only system).
+> 
+> So, if we go utf8-only, we need to do a great cleanup/testing job here
+> to settle things up.
+> 
+> As for infrastructure, I see several questionable methods of solving this:
+> 
 > 1. each package RRECOMMENDS its locale packages for locales mentioned
 > in local.conf variable, and additional ones, which are related.
-
-
-This would open the PACKAGE_ARCH hell. _armebdeenengbjpkoru to get a  
-package
-built for ARM EB with DE, EN, EN_GB, JP, KO and RU locales
-
->
+> 
 > 2. image RRECOMMENDS locale packages blindly for all normal packages
 > for languages which are in a var mentioned in 1.
-
-This will require too much space in most of the cases. I'm thinking  
-here of non Glib based
-systems.
-
-
->
+> 
 > 3. all -locale packages generated during builds are written to some
 > special lists, for each language. Then meta-packages are generated
 > from these lists.
-
-This could work but......
-
-the fundamental question is what is OpenSUSE, Fedora, Ubuntu doing to  
-select a language? E.g. in the case of Opie you want to have a  
-language for Opie, in the case for GPE you want to have gettext files  
-for the whole system and GPE. You don't want to install translations  
-where you don't have the package installed but when you install the  
-package you want to have the translations automatically installed.
-
-I don't think this is in the scope of OE but in the scope of  
-distributions working together with the environment (GPE, Opie) to  
-find a proper solution. Everything to implement it is already there....
-
-
-z.
-
-
+> 
+> ...
+> 
+> So, any ideas?
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 
