@@ -1,27 +1,19 @@
-Received: from [65.54.246.94] (helo=bay0-omc1-s22.bay0.hotmail.com)
+Received: from [209.85.146.182] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pelle2004@hotmail.com>) id 1I0wjw-0005Zq-F1
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jun 2007 11:44:40 +0200
-Received: from hotmail.com ([65.55.154.106]) by bay0-omc1-s22.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.2668); 
-	Wed, 20 Jun 2007 02:40:57 -0700
-Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
-	Wed, 20 Jun 2007 02:40:57 -0700
-Message-ID: <BAY143-F26F6CAE5A52DDDF6A67FC9B9110@phx.gbl>
-Received: from 65.55.154.123 by by143fd.bay143.hotmail.msn.com with HTTP;
-	Wed, 20 Jun 2007 09:40:54 GMT
-X-Originating-IP: [194.236.6.194]
-X-Originating-Email: [pelle2004@hotmail.com]
-X-Sender: pelle2004@hotmail.com
-From: "Pelle Svensson" <pelle2004@hotmail.com>
-To: openembedded-devel@lists.openembedded.org
-Bcc: 
-Date: Wed, 20 Jun 2007 11:40:54 +0200
-Mime-Version: 1.0
-X-OriginalArrivalTime: 20 Jun 2007 09:40:57.0669 (UTC)
-	FILETIME=[1AB3AF50:01C7B31F]
-Subject: Question - How dose bitbake select a kernel
+	(envelope-from <slapinid@gmail.com>) id 1I0xGa-00068K-5r
+	for openembedded-devel@openembedded.org; Wed, 20 Jun 2007 12:18:24 +0200
+Received: by wa-out-1112.google.com with SMTP id v27so51523wah
+	for <openembedded-devel@openembedded.org>;
+	Wed, 20 Jun 2007 03:14:41 -0700 (PDT)
+Received: by 10.114.197.1 with SMTP id u1mr146614waf.1182334481144;
+	Wed, 20 Jun 2007 03:14:41 -0700 (PDT)
+Received: by 10.114.210.2 with HTTP; Wed, 20 Jun 2007 03:14:41 -0700 (PDT)
+Message-ID: <48239d390706200314y300766en9956ec5e56789ce5@mail.gmail.com>
+Date: Wed, 20 Jun 2007 14:14:41 +0400
+From: "Sergey Lapin" <slapinid@gmail.com>
+To: openembedded-devel@openembedded.org
+MIME-Version: 1.0
+Subject: [RFC] locales
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,71 +27,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2007 09:44:40 -0000
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
+X-List-Received-Date: Wed, 20 Jun 2007 10:18:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+Hi, all!
 
-Hi,
+Note: I could be fundamentally wrong here, so, please feel free to
+point me to right direction in this case.
 
-I'm starting to put together a image.bb file.
-I can't figure out how I control the selection of kernel.
-In the tasks file it says 'RDEPENDS=... kernel ...'.
-When building in verbose I get
+As it was discussed on #oe, locale infrastructure lacks implementation
+on oe.dev, and, in particular, in Angstrom.
 
-NOTE: multiple providers are available for runtime kernel 
-(poodle-kernel-2.4-embedix, LAB-kernel, linux-h1940, linux-omap-2.6, 
-a780-kernel, linux-bast, corgi-kernel-2.4-embedix, 
-shepherd-kernel-2.4-embedix, linux, poodle255-kernel-2.4-embedix, 
-husky-kernel-2.4-embedix);
-NOTE: consider defining a PREFERRED_PROVIDER entry to match runtime kernel
+With a bit of research I done on this subject made me to come up with
+a few ideas, which I'd like to know your opinion about.
 
-1. How did bitbake come up with this list? Is done by bb-file's name or a 
-tag inside?
-2. Should I add 'PREFERRED_PROVIDER_kernel=my-target-kernel.bb'  if so 
-where?
+Present status:
+*-locale* packages are generated, but not put on image. These packages
+contain message translations.
+* Only glibc locale which is put on image (if any) is en_GB.
 
-/Pelle
+Infrastructure problem:
+* We need a way to set up automatic locale package installation during
+image build
+according to some subset of languages/locales.
+* We need a way to install "language" in simple user-friendly way. I
+mean here not only locale packages, but also various
+language-dependent files (docs, keymap settings, various configuration
+files, etc.).
 
-imabe.bb
-=======
+Various random problems encountered:
+* GPE locale.alias for gpe-dm needs cleanup (get rid of non-UTF8 locales?)
+* libx11 locale.alias needs cleanup (setup for UTF8-only system).
 
-LICENSE = "MIT"
-PR = "r1"
+So, if we go utf8-only, we need to do a great cleanup/testing job here
+to settle things up.
 
-BP3155_EXTRA_INSTALL ?= ""
-DISTRO_SSH_DAEMON ?= "dropbear"
+As for infrastructure, I see several questionable methods of solving this:
 
-RDEPENDS = "task-boot \
-            ${DISTRO_SSH_DAEMON} \
-	   "
+1. each package RRECOMMENDS its locale packages for locales mentioned
+in local.conf variable, and additional ones, which are related.
 
-export IMAGE_BASENAME = "minimalist-image"
-export IMAGE_LINGUAS = ""
-export PACKAGE_INSTALL = "${RDEPENDS}"
+2. image RRECOMMENDS locale packages blindly for all normal packages
+for languages which are in a var mentioned in 1.
 
-inherit image
+3. all -locale packages generated during builds are written to some
+special lists, for each language. Then meta-packages are generated
+from these lists.
 
-part of task-boot.bb
-==========
-#
-# minimal set of packages - needed to boot
-#
-RDEPENDS_task-boot = "\
-    kernel \
-    base-files \
-    base-passwd \
-    busybox \
-    initscripts \
-    modutils-initscripts \
-    netbase \
-    update-alternatives \
-    ${DISTRO_DEV_MANAGER} \
-    ${DISTRO_INIT_MANAGER} \
-    ${DISTRO_LOGIN_MANAGER} \
-    ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS}"
+...
 
-_________________________________________________________________
-Se artisterna uppträda för en grön planet http://liveearth.se.msn.com/
-
+So, any ideas?
 
 
