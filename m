@@ -1,26 +1,22 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1I0yXp-0006kD-VT
-	for openembedded-devel@openembedded.org; Wed, 20 Jun 2007 13:40:18 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l5KBaWUg030311 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2007 13:36:33 +0200
-Message-ID: <4679113B.9030100@dominion.kabel.utwente.nl>
-Date: Wed, 20 Jun 2007 13:36:27 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.0 (Macintosh/20070326)
+	(envelope-from <slapinid@gmail.com>) id 1I11BO-0006ZV-Ha
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jun 2007 16:29:18 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so141494waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Jun 2007 07:25:34 -0700 (PDT)
+Received: by 10.114.120.1 with SMTP id s1mr359067wac.1182349534597;
+	Wed, 20 Jun 2007 07:25:34 -0700 (PDT)
+Received: by 10.114.210.2 with HTTP; Wed, 20 Jun 2007 07:25:34 -0700 (PDT)
+Message-ID: <48239d390706200725xfceb517o8faf1e8bb88aaa9f@mail.gmail.com>
+Date: Wed, 20 Jun 2007 18:25:34 +0400
+From: "Sergey Lapin" <slapinid@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <A7921DE0-7584-425F-B761-CD455252D3EC@gmx.net>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
 References: <48239d390706200314y300766en9956ec5e56789ce5@mail.gmail.com>
-	<4679053B.4060606@klever.net>
-In-Reply-To: <4679053B.4060606@klever.net>
-X-Enigmail-Version: 0.95.0
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<A7921DE0-7584-425F-B761-CD455252D3EC@gmx.net>
 Subject: Re: [RFC] locales
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,31 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2007 11:40:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Jun 2007 14:29:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+> > 3. all -locale packages generated during builds are written to some
+> > special lists, for each language. Then meta-packages are generated
+> > from these lists.
+>
+> This could work but......
+>
+> the fundamental question is what is OpenSUSE, Fedora, Ubuntu doing to
+IIRC they do not package translations separately.
 
-Michael Krelin schreef:
-> I do not see why do we want to get rid of non-utf locales. Wouldn't an 
-> attempt to make utf-locales work more productive? And I believe making 
-> things work should be of higher priority than making packaging friendlier.
+> select a language? E.g. in the case of Opie you want to have a
+> language for Opie, in the case for GPE you want to have gettext files
+> for the whole system and GPE. You don't want to install translations
+> where you don't have the package installed but when you install the
+> package you want to have the translations automatically installed.
+>
+> I don't think this is in the scope of OE but in the scope of
+> distributions working together with the environment (GPE, Opie) to
+> find a proper solution. Everything to implement it is already there....
+big distros don't require so much space economy, so they package
+translations inside packages, so the problem is solved. I personally
+like RRECOMMENDS solution, like
+reciepe foo generates foo, foo-locale, foo-doc, foo-dev.
+we have var IMAGE_LOCALES="en_GB en_US"
+then RRECOMMENDS_foo will be = "${PN}-locale-en-gb ${PN}-locale-en-us"
 
-These two can be done in parallel, but I agree that making utf work flawlessly would be
-easier and more 'visible' to the end user.
+so, like this. I think of it as simplest solution. Actually, if
+package have some additional locale-dependant files, they could be
+added to their corresponding -locale-x-y-z packages.
+as for z component I think like en_US.ISO8859-1 will be -locale-en-us-iso8859-1.
 
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGeRE7MkyGM64RGpERAh0+AJwLw5adGDfqpaHrwx1829wDo1pR+gCcDMOI
-lUSZuk/fHLd5j/k56yOb1ko=
-=ATr7
------END PGP SIGNATURE-----
+All the best,
+S.
 
 
