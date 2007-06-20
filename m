@@ -1,28 +1,24 @@
-Received: from [66.249.82.239] (helo=wx-out-0506.google.com)
+Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1I11eW-0001GU-RT
+	(envelope-from <slapinid@gmail.com>) id 1I11jh-0001No-8j
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jun 2007 16:59:25 +0200
-Received: by wx-out-0506.google.com with SMTP id h29so200381wxd
+	Wed, 20 Jun 2007 17:04:45 +0200
+Received: by nz-out-0506.google.com with SMTP id n29so199682nzf
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2007 07:55:41 -0700 (PDT)
-Received: by 10.90.63.16 with SMTP id l16mr457114aga.1182351341184;
-	Wed, 20 Jun 2007 07:55:41 -0700 (PDT)
-Received: from cube ( [82.193.98.14])
-	by mx.google.com with ESMTP id 24sm238828nzn.2007.06.20.07.55.39
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Jun 2007 07:55:40 -0700 (PDT)
-Date: Wed, 20 Jun 2007 17:55:41 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Priority: 3 (Normal)
-Message-ID: <1988388622.20070620175541@gmail.com>
-To: "Sergey Lapin" <slapinid@gmail.com>
-In-Reply-To: <48239d390706200725xfceb517o8faf1e8bb88aaa9f@mail.gmail.com>
+	Wed, 20 Jun 2007 08:01:01 -0700 (PDT)
+Received: by 10.114.196.1 with SMTP id t1mr394475waf.1182351660185;
+	Wed, 20 Jun 2007 08:01:00 -0700 (PDT)
+Received: by 10.114.210.2 with HTTP; Wed, 20 Jun 2007 08:01:00 -0700 (PDT)
+Message-ID: <48239d390706200801j599381afqff529f771bed6fa9@mail.gmail.com>
+Date: Wed, 20 Jun 2007 19:01:00 +0400
+From: "Sergey Lapin" <slapinid@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <DB846718-643A-4CB7-B66F-8682C44E617D@gmx.net>
+MIME-Version: 1.0
 References: <48239d390706200314y300766en9956ec5e56789ce5@mail.gmail.com>
 	<A7921DE0-7584-425F-B761-CD455252D3EC@gmx.net>
 	<48239d390706200725xfceb517o8faf1e8bb88aaa9f@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+	<DB846718-643A-4CB7-B66F-8682C44E617D@gmx.net>
 Subject: Re: [RFC] locales
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -37,42 +33,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2007 14:59:26 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 20 Jun 2007 15:05:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Sergey,
+> No,
+> see point one (the one you have removed from this mail).
 
-Wednesday, June 20, 2007, 5:25:34 PM, you wrote:
+So as I see, the best variant is near var.3 in my first mail.
 
-[]
+so we setup:
+IMAGE_LOCALES="... ", which is if unset, means none.
+during image build process, all translations packages are built as
+usual, but names for them are written in list in tmp dir (for each
+language is separate list).
+then we put it into variable e.g. IMAGE_LOCALE_PACKAGES according to
+setting of IMAGE_LOCALES and hope that image itself will add them
 
->> select a language? E.g. in the case of Opie you want to have a
->> language for Opie, in the case for GPE you want to have gettext files
->> for the whole system and GPE. You don't want to install translations
->> where you don't have the package installed but when you install the
->> package you want to have the translations automatically installed.
->>
->> I don't think this is in the scope of OE but in the scope of
->> distributions working together with the environment (GPE, Opie) to
->> find a proper solution. Everything to implement it is already there....
-> big distros don't require so much space economy, so they package
-> translations inside packages, so the problem is solved. I personally
-> like RRECOMMENDS solution, like
-> reciepe foo generates foo, foo-locale, foo-doc, foo-dev.
-> we have var IMAGE_LOCALES="en_GB en_US"
-> then RRECOMMENDS_foo will be = "${PN}-locale-en-gb ${PN}-locale-en-us"
+Is this variant o.k.?
 
-        This will lead to contamination of package metadata and
-consequently to errors, hard to track for many people (for example, if
-you change IMAGE_LOCALES later, previously built packages will still
-pull old locale set). L19n really needs special handling.
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+S.
 
 
