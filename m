@@ -1,33 +1,28 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1I13PF-0006Mq-87
+	(envelope-from <slapinid@gmail.com>) id 1I18Tj-0005cL-5Z
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jun 2007 18:51:47 +0200
-Received: by an-out-0708.google.com with SMTP id b33so43158ana
+	Thu, 21 Jun 2007 00:16:43 +0200
+Received: by ug-out-1314.google.com with SMTP id i24so453271ugd
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2007 09:48:01 -0700 (PDT)
-Received: by 10.100.41.8 with SMTP id o8mr559505ano.1182358080805;
-	Wed, 20 Jun 2007 09:48:00 -0700 (PDT)
-Received: by 10.100.38.3 with HTTP; Wed, 20 Jun 2007 09:48:00 -0700 (PDT)
-Message-ID: <ae36f8040706200948o54d0ec92qb94eb5c379bad1fd@mail.gmail.com>
-Date: Wed, 20 Jun 2007 13:48:00 -0300
-From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
-To: "Jamie Lenehan" <lenehan@twibble.org>
-In-Reply-To: <20070614025356.GA6177@twibble.org>
+	Wed, 20 Jun 2007 15:12:57 -0700 (PDT)
+Received: by 10.82.134.12 with SMTP id h12mr2430636bud.1182377141327;
+	Wed, 20 Jun 2007 15:05:41 -0700 (PDT)
+Received: from ?10.0.0.102? ( [85.249.166.143])
+	by mx.google.com with ESMTP id g17sm380445nfd.2007.06.20.15.05.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 20 Jun 2007 15:05:40 -0700 (PDT)
+Message-ID: <4679A49F.3090201@gmail.com>
+Date: Thu, 21 Jun 2007 02:05:19 +0400
+From: Sergey Lapin <slapinid@gmail.com>
+User-Agent: Icedove 1.5.0.10 (X11/20070329)
 MIME-Version: 1.0
-References: <4666520C.8060000@dominion.kabel.utwente.nl>
-	<ae36f8040706060937la8400adr2f98d7db547a2664@mail.gmail.com>
-	<ae36f8040706061036i3662ee38x104bb1896550b64@mail.gmail.com>
-	<ae36f8040706061143o47650436we993cf24bd807174@mail.gmail.com>
-	<ae36f8040706071545i772205b2m85d251b45c7f26d7@mail.gmail.com>
-	<20070613123908.GA19284@twibble.org>
-	<ae36f8040706130931r4e81a08bi8ca10417336df3b5@mail.gmail.com>
-	<20070614013553.GA4558@twibble.org>
-	<ae36f8040706131940x128ce3b5ic2422b3fc5f6c99d@mail.gmail.com>
-	<20070614025356.GA6177@twibble.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+To: Paul Sokolovsky <pmiscml@gmail.com>
+References: <48239d390706200314y300766en9956ec5e56789ce5@mail.gmail.com>
+	<17610553906.20070620183452@gmail.com>
+In-Reply-To: <17610553906.20070620183452@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: problems doing bitbake task-base
+Subject: Re: [RFC] locales
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,66 +36,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2007 16:51:48 -0000
-Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Jun 2007 22:16:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Please can add the Gentoo patch as suggested ?
-I emailed the list some days ago, this will make perl compile in any system
-without errors I suppose
-
-On 6/13/07, Jamie Lenehan <lenehan@twibble.org> wrote:
->
-> On Wed, Jun 13, 2007 at 11:40:51PM -0300, Lu=EDs Cargnini wrote:
-> > thanks for your answers
-> > So why OE perl-native isn't compiling for me ???
->
-> Because perl-native is compiled with your hosts's compiler, and you have =
-a
-> version of linux-headers (I think that's what gentoo calls them) that has
-> removed /usr/include/asm/page.h
->
-> I *think* this was removed and then re-added back later on (since so much
-> stuff includes this header). In which case updating linux-headers on your
-> system to a later version should fix it.
->
-> If I'm wrong on this I can remove the need for it from perl, but I need t=
-o
-> make sure I don't break perl-native on other systems if I do that.
->
-> > and perl-native use my host kernel ? probably not, because in this case
-> we
-> > won't have problem with page.h ? I'm right ?
->
-> It doesn't use your kernel headers, but the linux-headers, which are
-> generated from the kernel headers. So the version of linux-headers is not
-> usually related to the version of the kernel that you are using.
->
-> > And how to fix this ???
->
-> Try the latest gentoo linux-headers package (or an older version). If tha=
-t
-> doesn't work then wait for me to test and remove it from the perl-native
-> in
-> OE.
->
-> --
-> Jamie Lenehan <lenehan@twibble.org>
->
+Paul Sokolovsky wrote:
+> 
+>         That's true in the sense that there's no special infra to deal
+> with l19n issues efficiently. Otherwise, basic support on package
+> management level is there and works well (on that very package management
+> level).
+> 
+>         Going for elaboration of this support is opening Pandora's box.
+> There going to be just too many issues, and they will swamp whoever go
+> for them. At that's at the time, when we have more pressing issues on
+> all levels (OE - many packages not up-to-date/broken; Angstrom - lots
+> of clean up to do, and finally to make release; Specific devices -
+> lotsa kernel and related stuff to support/improve).
+I have a feeling that that will go on forever - there are always
+broken packages, not to mention improvements, especially on kernel side.
+There's no stopping point, and that's not bad.
 
 
+> 
+>         So, I feel like currently it's bad time to go for l19n
+> problems.
+It seems that good time will never come, since there are always
+other things to be done.
 
---=20
----------------------------------------------------------------------------=
----
-Thanks && Regards
-Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-IEEE Member
-Electrical Engineer Faculty @ PUCRS
-Ipiranga Avenue, 6681 =96 Building 30
-P.O. Box: 90619-900 =96 Porto Alegre/RS
-Phone: +55 51 3320 3500  extension: 7696
----------------------------------------------------------------------------=
-------
+>         Yes, as of now, Angstrom is shipped with the default locale
+> only. Users who need other locale, can easily install it using package
+> manager (and yes, this easiness can be improved even more).
+
+Any interesting details here, please?
+
+> 
+>> Infrastructure problem:
+>> * We need a way to set up automatic locale package installation during
+>> image build according to some subset of languages/locales.
+> 
+>         On OE level, it's possible. On Angstrom level, we'd need to
+> decide which will be that "subset". And one decision was already made
+> - as locales (as in glibc locale package) are big in size, and there's
+> no definitive subset of size=N, N>1 which will allow to cover needs of
+> greater audience than subset of size=N-1, let there be one default
+> locale, and let users use standard means of customizing the install -
+> a package manager.
+It is not possible for some devices, and too hard on others
+(due to lack of device support, for example, and need to provide
+powerful showcase).
+
+>         Ok, let me just dump my thoughts on how I'd do that:
+> 
+> 1. Use ROOTFS_POSTPROCESS_COMMAND to do this stuff, don't patch the
+> rest of bitbake/OE.
+> 2. ROOTFS_POSTPROCESS_COMMAND is run after rootfs is fully created, in
+> particular, when all packages are recursively installed. The list of
+> them is in /usr/lib/ipkg/status.
+> 3. Read the list, and for each package PKG in it, try to install
+> package PKG-locale-LL. Skip non-existent packages.
+> 4. Voila
+
+And here you provide solution to build image, not solving
+issues for user (he installs application and expects
+for package manager to install his locales for him
+automatically. So, a bit of patching of ipkg is needed.
+Any cons?
+
+
 
