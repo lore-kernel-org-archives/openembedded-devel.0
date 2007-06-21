@@ -1,27 +1,23 @@
-Received: from [65.54.246.222] (helo=bay0-omc3-s22.bay0.hotmail.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pelle2004@hotmail.com>) id 1I1Swn-0004s2-Ob
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jun 2007 22:08:06 +0200
-Received: from hotmail.com ([65.55.154.108]) by bay0-omc3-s22.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.2668); 
-	Thu, 21 Jun 2007 13:04:15 -0700
-Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
-	Thu, 21 Jun 2007 13:04:14 -0700
-Message-ID: <BAY143-F280B45CA74415F07F9FC8BB9100@phx.gbl>
-Received: from 65.55.154.123 by by143fd.bay143.hotmail.msn.com with HTTP;
-	Thu, 21 Jun 2007 20:04:11 GMT
-X-Originating-IP: [83.227.74.206]
-X-Originating-Email: [pelle2004@hotmail.com]
-X-Sender: pelle2004@hotmail.com
-From: "Pelle Svensson" <pelle2004@hotmail.com>
+	(envelope-from <openembedded@hrw.one.pl>) id 1I1TA8-0003FD-N4
+	for openembedded-devel@openembedded.org; Thu, 21 Jun 2007 22:21:56 +0200
+Received: (qmail 16890 invoked by uid 813007); 21 Jun 2007 20:18:01 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.local)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 21 Jun 2007 20:18:01 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-Bcc: 
-Date: Thu, 21 Jun 2007 22:04:11 +0200
-Mime-Version: 1.0
-X-OriginalArrivalTime: 21 Jun 2007 20:04:14.0074 (UTC)
-	FILETIME=[571BFDA0:01C7B43F]
-Subject: I can't can't control selection of kernel.
+Date: Thu, 21 Jun 2007 22:17:42 +0200
+User-Agent: KMail/1.9.7
+References: <B5ACE11E-74AF-468C-AF96-832AD1FBDBD5@selfish.org>
+	<200706151610.21549.gerwin@vanderkruis.net>
+	<9B93E5B2-ED04-4876-8F3D-3D52EED4BDB8@selfish.org>
+In-Reply-To: <9B93E5B2-ED04-4876-8F3D-3D52EED4BDB8@selfish.org>
+MIME-Version: 1.0
+Message-Id: <200706212217.44420.openembedded@hrw.one.pl>
+Subject: Re: [RFC] Creating an OpenEmbedded founation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,41 +31,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jun 2007 20:08:06 -0000
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
+X-List-Received-Date: Thu, 21 Jun 2007 20:22:04 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi,
+Dnia czwartek, 21 czerwca 2007, Holger Freyther napisa=B3:
 
-I can't control the kernel selection. I have tried addding following into 
-conf/machine and local.conf .
-I also have a bb file as 'packages/linux/test-linux.bb'
+> Florian talked with Martin 'Joey' Schulze one of board members of the
+> FFIS[1] and it might be possible to get an associated project with
+> this organisation.
 
-PREFERRED_PROVIDER_virtual/kernel = "test-linux"
-PREFERRED_PROVIDER_kernel = "test-linux"
+Can someone point to English version of their papers? Or atleast infos how=
+=20
+they differ from SPI?
 
-And still I get this running bitbake -v
+> Pros:
+> 	-It is a european based non-protfit organization.
+> 	-It is similiar to Software in the public interest
+> 	-It has the tax-exemption status
 
-NOTE: multiple providers are available for runtime kernel 
-(poodle-kernel-2.4-embedix, linux-omap-2.6, linux-bast, 
-husky-kernel-2.4-embedix, shepherd-kernel-2.4-embedix, linux, 
-poodle255-kernel-2.4-embedix, corgi-kernel-2.4-embedix);
-NOTE: consider defining a PREFERRED_PROVIDER entry to match runtime kernel
+> Cons/Unknown:
+> 	There are a couple of things we need to ask before asking to get an
+> associated project:
+> 	-If people want to give money to OE and use FFIS, how much will be
+> given to OE?
 
-What is it inside these files are bitbake trigging on and why isn't it give 
-med all?
+SPI takes 5%
 
-/Pelle
+=2D how look using money which we get donated?
 
-test-linux.bb
-==========
-PROVIDES = "kernel"
-PR = "r1"
-SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
-           file://defconfig \
-	   "
+> 	-What can we do with assets?
+> 	-What will happen if we want/need to leave. Can we take donations
+> with us?
 
-_________________________________________________________________
-Trött på att pendla? - Sök jobb där du bor! http://jobb.msn.monster.se/
+donations & assets
+
+> I think if we get a positive answer we should go the ffis route.
+
+If they are alive and works like SPI then I can vote for them. But=20
+currently I cannot tell that I know something more then this letter.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+          It's better to keep your mouth shut and appear stupid,
+          than to open it and remove all doubt.
+
 
 
 
