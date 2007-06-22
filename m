@@ -1,33 +1,32 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [209.85.132.247] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@Vanille.de>) id 1I1dep-0001On-MY
+	(envelope-from <lvcargnini@gmail.com>) id 1I1jtL-0001Uz-CC
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2007 09:34:15 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 2633228C013; Fri, 22 Jun 2007 09:29:47 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00,
-	SPF_HELO_PASS autolearn=ham version=3.1.7-deb
-Received: from mail.vanille.de (localhost [127.0.0.1])
-	by srv043.dedi23.de (Postfix) with ESMTP id 114D128C012;
-	Fri, 22 Jun 2007 09:29:44 +0200 (CEST)
-Received: from 59.124.92.123 (SquirrelMail authenticated user mickey)
-	by mail.vanille.de with HTTP; Fri, 22 Jun 2007 09:29:44 +0200 (CEST)
-Message-ID: <51901.59.124.92.123.1182497384.squirrel@mail.vanille.de>
-In-Reply-To: <467B6CFB.6050600@dominion.kabel.utwente.nl>
-References: <E1I1arL-0003eT-FM@linuxtogo.org>
-	<467B6CFB.6050600@dominion.kabel.utwente.nl>
-Date: Fri, 22 Jun 2007 09:29:44 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@Vanille.de>
+	Fri, 22 Jun 2007 16:13:42 +0200
+Received: by an-out-0708.google.com with SMTP id b33so162689ana
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jun 2007 07:09:43 -0700 (PDT)
+Received: by 10.100.13.12 with SMTP id 12mr1706493anm.1182521383454;
+	Fri, 22 Jun 2007 07:09:43 -0700 (PDT)
+Received: by 10.100.38.3 with HTTP; Fri, 22 Jun 2007 07:09:43 -0700 (PDT)
+Message-ID: <ae36f8040706220709p455a92e3q7eed288a5a69efee@mail.gmail.com>
+Date: Fri, 22 Jun 2007 11:09:43 -0300
+From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.9a
+In-Reply-To: <ae36f8040706212233kcaf86b0k9498869fce6cddff@mail.gmail.com>
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-X-Mailman-Approved-At: Fri, 22 Jun 2007 09:40:26 +0200
-Subject: U-Boot (was: org.oe.dev uboot-gta01:)
+References: <ae36f8040706060937la8400adr2f98d7db547a2664@mail.gmail.com>
+	<ae36f8040706071545i772205b2m85d251b45c7f26d7@mail.gmail.com>
+	<20070613123908.GA19284@twibble.org>
+	<ae36f8040706130931r4e81a08bi8ca10417336df3b5@mail.gmail.com>
+	<20070614013553.GA4558@twibble.org>
+	<ae36f8040706131940x128ce3b5ic2422b3fc5f6c99d@mail.gmail.com>
+	<20070614025356.GA6177@twibble.org>
+	<ae36f8040706200948o54d0ec92qb94eb5c379bad1fd@mail.gmail.com>
+	<20070622045718.GA8358@twibble.org>
+	<ae36f8040706212233kcaf86b0k9498869fce6cddff@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: problems doing bitbake task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,36 +40,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2007 07:34:16 -0000
-Content-Type: text/plain;charset=iso-8859-1
+X-List-Received-Date: Fri, 22 Jun 2007 14:13:49 -0000
+Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-> Could you please add this one back? It's a static version that has all
-> needed patches in
-> OE *and* is needed by various non-openmoko recipes. The linux_*.bb reci=
-pes
-> now don't build
-> anymore because they are depending in u-boot-mkimage-gta01-native_oe.bb=
-.
-> u-boot-mkimage-gta01-native_oe.bb is the only recipe that can reliably
-> create a
-> uboot-mkimage since uboot-utils is broken beyond repair....
+howto fix this issue:
+NOTE: package cups-1.2.10-r0: task do_package: started
+!!! Failed to move ./var/run/cups/certs to
+/home/lvcargnini/puc/instramed/openembedded/tmp/work/armv5te-angstrom-linux=
+-gnueabi/cups-
+1.2.10-r0/install/cups/./var/run/cups/certs
+!!! [Errno 13] Permission denied
+NOTE: Task failed: File population failed
+NOTE: package cups-1.2.10-r0: task do_package: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package cups-1.2.10: failed
+ERROR: Build of
+/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/c=
+ups/cups_1.2.10.bb
+do_package failed
+ERROR: Task 769
+(/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/=
+cups/cups_1.2.10.bb,
+do_package) failed
+NOTE: Tasks Summary: Attempted 905 tasks of which 897 didn't need to be
+rerun and 1 failed.
+ERROR:
+'/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/=
+cups/cups_1.2.10.bb'
+failed
 
-Wow. Ok, sorry, overloooked that in my furious attempt to start cleaning
-up the U-Boot situation.
 
-Guys, this is getting very messy. Would anyone who knows more about u-boo=
-t
-please start cleaning up our u-boot directory?
+On 6/22/07, Lu=EDs Cargnini <lvcargnini@gmail.com> wrote:
+>
+> Yes I have teh latest version of linux-header of my gentoo, i applied the
+> gentoo patch for page.h on my perl-native and it compiled.
+> my gentoo linux -header installed is the following:
+> sys-kernel/linux-headers
+>       Latest version available: 2.6.21
+>       Latest version installed: 2.6.21
+>       Size of files: 4,286 kB
+>       Homepage:      http://www.kernel.org/ http://www.gentoo.org/
+>       Description:   Linux system headers
+>       License:       GPL-2
+>
+> how my system is the latest not the stable I suppose that page.h still
+> been cuted off.
+> now what do you think ?
+>
+> On 6/22/07, Jamie Lenehan <lenehan@twibble.org> wrote:
+> >
+> > On Wed, Jun 20, 2007 at 01:48:00PM -0300, Lu=EDs Cargnini wrote:
+> > > Please can add the Gentoo patch as suggested ?
+> >
+> > Not yet.
+> >
+> > The patch will break builds using older glibc's... the question is
+> > how old? I think it'll be that old that it doesn't matter, but until
+> > I've verified that I don't want to push this change.
+> >
+> > Did you try upgrading to the latest linux-headers? I thought this had
+> > been re-added in the lastest version of the linux-headers (of
+> > whatever gentoo calls it) and that gentoo had update the later
+> > version?
+> >
+> > > I emailed the list some days ago, this will make perl compile in any
+> > system
+> > > without errors I suppose
+> >
+> > Any recent system.
+> >
+> > --
+> > Jamie Lenehan < lenehan@twibble.org>
+> >
+>
+>
+>
+> --
+>
+> -------------------------------------------------------------------------=
+-----
+> Thanks && Regards
+> Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
+> IEEE Member
+> Electrical Engineer Faculty @ PUCRS
+> Ipiranga Avenue, 6681 =96 Building 30
+> P.O. Box: 90619-900 =96 Porto Alegre/RS
+> Phone: +55 51 3320 3500  extension: 7696
+> -------------------------------------------------------------------------=
+--------
+>
+>
 
-Me as being an u-boot-analphabet took me 6 hours to fix uboot-gta01
-building w/ an eabi toolchain... and the besides that the result seems to
-work it's not something I'm proud of (see uboot-eabi-fix-HACK.patch).
+
 
 --=20
-Best Regards,
-
-Michael 'Mickey' Lauer | FreeLancer | http://www.vanille-media.de
-
-
+---------------------------------------------------------------------------=
+---
+Thanks && Regards
+Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
+IEEE Member
+Electrical Engineer Faculty @ PUCRS
+Ipiranga Avenue, 6681 =96 Building 30
+P.O. Box: 90619-900 =96 Porto Alegre/RS
+Phone: +55 51 3320 3500  extension: 7696
+---------------------------------------------------------------------------=
+------
 
