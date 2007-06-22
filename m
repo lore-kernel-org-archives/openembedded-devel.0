@@ -1,21 +1,27 @@
-Received: from [209.85.132.246] (helo=an-out-0708.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1I1bsJ-0000Bf-Pp
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2007 07:40:10 +0200
-Received: by an-out-0708.google.com with SMTP id b33so142492ana
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jun 2007 22:36:10 -0700 (PDT)
-Received: by 10.100.191.5 with SMTP id o5mr1552798anf.1182490570347;
-	Thu, 21 Jun 2007 22:36:10 -0700 (PDT)
-Received: by 10.100.38.3 with HTTP; Thu, 21 Jun 2007 22:36:10 -0700 (PDT)
-Message-ID: <ae36f8040706212236p3f512313s400e3d84d50a10df@mail.gmail.com>
-Date: Fri, 22 Jun 2007 02:36:10 -0300
-From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1I1cko-00050i-8b
+	for openembedded-devel@openembedded.org; Fri, 22 Jun 2007 08:36:22 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l5M6WQUg020062; Fri, 22 Jun 2007 08:32:27 +0200
+Message-ID: <467B6CFB.6050600@dominion.kabel.utwente.nl>
+Date: Fri, 22 Jun 2007 08:32:27 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Modify angstrom kernel version
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <E1I1arL-0003eT-FM@linuxtogo.org>
+In-Reply-To: <E1I1arL-0003eT-FM@linuxtogo.org>
+X-Enigmail-Version: 0.95.0
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Cc: Michael Lauer <mickey@vanille-media.de>
+Subject: Re: [oe-commits] org.oe.dev uboot-gta01:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,27 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2007 05:40:10 -0000
-Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Jun 2007 06:36:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Please how to modify my angstrom image to make use of my kernel, that exist
-in one of my directories ?
-I have a kernel modified with features and different schedulers that i want
-to use as my default kernel, not the normal one.
-thanks
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
---=20
----------------------------------------------------------------------------=
----
-Thanks && Regards
-Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-IEEE Member
-Electrical Engineer Faculty @ PUCRS
-Ipiranga Avenue, 6681 =96 Building 30
-P.O. Box: 90619-900 =96 Porto Alegre/RS
-Phone: +55 51 3320 3500  extension: 7696
----------------------------------------------------------------------------=
-------
+mickeyl commit schreef:
+> uboot-gta01:
+> * remove tools build
+
+
+> packages/uboot/u-boot-mkimage-gta01-native_oe.bb
+
+Could you please add this one back? It's a static version that has all needed patches in
+OE *and* is needed by various non-openmoko recipes. The linux_*.bb recipes now don't build
+anymore because they are depending in u-boot-mkimage-gta01-native_oe.bb.
+u-boot-mkimage-gta01-native_oe.bb is the only recipe that can reliably create a
+uboot-mkimage since uboot-utils is broken beyond repair....
+
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGe2z7MkyGM64RGpERAmN5AKCEG9pfCd6YocX9Jai0TeKm7Fw9MwCeJR0v
+049EvO5qYi8l1FAyiOrw8hs=
+=xwMw
+-----END PGP SIGNATURE-----
+
 
