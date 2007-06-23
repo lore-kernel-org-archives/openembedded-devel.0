@@ -1,24 +1,32 @@
-Received: from [64.233.184.229] (helo=wr-out-0506.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1I1mdg-0000Fv-Ec
+	(envelope-from <mickey@Vanille.de>) id 1I1uxi-0002ZR-6l
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2007 19:09:41 +0200
-Received: by wr-out-0506.google.com with SMTP id i30so818685wra
+	Sat, 23 Jun 2007 04:02:54 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 5ED4028C013; Sat, 23 Jun 2007 03:58:19 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	SPF_HELO_PASS autolearn=ham version=3.1.7-deb
+Received: from mail.vanille.de (localhost [127.0.0.1])
+	by srv043.dedi23.de (Postfix) with ESMTP id 2270028C012
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jun 2007 10:05:44 -0700 (PDT)
-Received: by 10.100.37.4 with SMTP id k4mr1833472ank.1182531944403;
-	Fri, 22 Jun 2007 10:05:44 -0700 (PDT)
-Received: by 10.100.38.3 with HTTP; Fri, 22 Jun 2007 10:05:44 -0700 (PDT)
-Message-ID: <ae36f8040706221005j4a6b098ay3f35d79472c3a722@mail.gmail.com>
-Date: Fri, 22 Jun 2007 14:05:44 -0300
-From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
+	Sat, 23 Jun 2007 03:58:18 +0200 (CEST)
+Received: from 59.115.133.248 (SquirrelMail authenticated user mickey)
+	by mail.vanille.de with HTTP; Sat, 23 Jun 2007 03:58:18 +0200 (CEST)
+Message-ID: <1156.59.115.133.248.1182563898.squirrel@mail.vanille.de>
+In-Reply-To: <E1I1pMp-00007n-B2@linuxtogo.org>
+References: <E1I1pMp-00007n-B2@linuxtogo.org>
+Date: Sat, 23 Jun 2007 03:58:18 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@Vanille.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <432beae0706220951x46ccd203td101d9f274048da9@mail.gmail.com>
+User-Agent: SquirrelMail/1.4.9a
 MIME-Version: 1.0
-References: <ae36f8040706212236p3f512313s400e3d84d50a10df@mail.gmail.com>
-	<432beae0706220951x46ccd203td101d9f274048da9@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: Modify angstrom kernel version
+X-Priority: 3 (Normal)
+Importance: Normal
+Subject: Re: [oe-commits] org.oe.dev merge of 'b3a0ae7ae12db4c4db9d0e3b6c0b7dc12d016de8'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,47 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2007 17:09:41 -0000
-Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
+X-List-Received-Date: Sat, 23 Jun 2007 02:02:54 -0000
+Content-Type: text/plain;charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-OK, without this, but putting an bb class file ?
-thanks.
-
-On 6/22/07, Justin Patrin <papercrane@gmail.com> wrote:
->
-> On 6/21/07, Lu=EDs Cargnini <lvcargnini@gmail.com> wrote:
-> > Please how to modify my angstrom image to make use of my kernel, that
-> exist
-> > in one of my directories ?
-> > I have a kernel modified with features and different schedulers that i
-> want
-> > to use as my default kernel, not the normal one.
->
-> Reflash with your new kernel.
->
-> --
-> Justin Patrin
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
+Did anyone make changes to the ciabot script? It is supposed to supress
+those merges!
 
 --=20
----------------------------------------------------------------------------=
----
-Thanks && Regards
-Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-IEEE Member
-Electrical Engineer Faculty @ PUCRS
-Ipiranga Avenue, 6681 =96 Building 30
-P.O. Box: 90619-900 =96 Porto Alegre/RS
-Phone: +55 51 3320 3500  extension: 7696
----------------------------------------------------------------------------=
-------
+Best Regards,
+
+Michael 'Mickey' Lauer | FreeLancer | http://www.vanille-media.de
+
+
 
