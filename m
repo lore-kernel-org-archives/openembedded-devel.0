@@ -1,27 +1,24 @@
-Received: from [65.54.246.169] (helo=bay0-omc2-s33.bay0.hotmail.com)
+Received: from [209.85.132.249] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pelle2004@hotmail.com>) id 1I2RvG-0007C5-5A
+	(envelope-from <lvcargnini@gmail.com>) id 1I2TT0-0007re-QO
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jun 2007 15:14:34 +0200
-Received: from hotmail.com ([65.55.154.106]) by bay0-omc2-s33.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.2668); 
-	Sun, 24 Jun 2007 06:10:26 -0700
-Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
-	Sun, 24 Jun 2007 06:10:26 -0700
-Message-ID: <BAY143-F26A49AD42DFE7DB1DE4350B9150@phx.gbl>
-Received: from 65.55.154.123 by by143fd.bay143.hotmail.msn.com with HTTP;
-	Sun, 24 Jun 2007 13:10:25 GMT
-X-Originating-IP: [83.227.74.206]
-X-Originating-Email: [pelle2004@hotmail.com]
-X-Sender: pelle2004@hotmail.com
-From: "Pelle Svensson" <pelle2004@hotmail.com>
+	Sun, 24 Jun 2007 16:53:31 +0200
+Received: by an-out-0708.google.com with SMTP id b33so239548ana
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jun 2007 07:49:23 -0700 (PDT)
+Received: by 10.100.142.12 with SMTP id p12mr2649962and.1182696563623;
+	Sun, 24 Jun 2007 07:49:23 -0700 (PDT)
+Received: by 10.100.38.3 with HTTP; Sun, 24 Jun 2007 07:49:23 -0700 (PDT)
+Message-ID: <ae36f8040706240749y775af2eaj86e96adfe5835773@mail.gmail.com>
+Date: Sun, 24 Jun 2007 11:49:23 -0300
+From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Bcc: 
-Date: Sun, 24 Jun 2007 15:10:25 +0200
-Mime-Version: 1.0
-X-OriginalArrivalTime: 24 Jun 2007 13:10:26.0822 (UTC)
-	FILETIME=[08273A60:01C7B661]
-Subject: Need some help with conditional assignment
+In-Reply-To: <6E4DF76B-4724-4201-8B60-500EA2A0B38C@gmx.net>
+MIME-Version: 1.0
+References: <ae36f8040706232151g2a3b2bdbw9954f99ae1b752f@mail.gmail.com>
+	<6E4DF76B-4724-4201-8B60-500EA2A0B38C@gmx.net>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: problems building cups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,27 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jun 2007 13:14:35 -0000
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
+X-List-Received-Date: Sun, 24 Jun 2007 14:53:31 -0000
+Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+thanks Holger, but I felt an perturbation on the force, when the topic is
+openembedded yet.
+
+On 6/24/07, Holger Freyther <freyther@gmx.net> wrote:
+>
+>
+> Am 24.06.2007 um 06:51 schrieb Lu=EDs Cargnini:
+>
+> Hi,
+> this is the same mail you have sent on the 22th. It would be
+> appreciated if you try to take a look at the output and try to
+> understand the error. There is one thing that jumps directly into
+> your eyes.
+> Just follow the white rabbit and you will find the solution yourself.
+> In doubt mail us or join irc and talk to us but believe in your
+> strength and analyse yourself first.
+>
+> kind regards
+>         z.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
-I need to assign a variable by condition and I can't get it right
-Have tried these without any luck. I'm inside a bbclass...
 
-# KERNEL_MAKE_OPTIONS += "${@base_conditional( 'KERNEL_BUILD_DIR', '', '', 
-'-O '+bb.data.getVar('',d,1), d )}"
-# KERNEL_MAKE_OPTIONS += "${@base_conditional( 'KERNEL_BUILD_DIR', '', '', 
-'-O ${KERNEL_BUILD_DIR}', d )}"
-KERNEL_MAKE_OPTIONS += "${@['-O ${KERNEL_BUILD_DIR}', 
-''][bb.data.getVar('KERNEL_BUILD_DIR', d, 1) != '']}"
-
-do_compile() {
-	oe_runmake ${KERNEL_MAKE_OPTIONS} zImage
-}
-
-_________________________________________________________________
-Kolla in coola trailern till Die Hard 4 
-http://specials.se.msn.com/diehard4/default.aspx
-
-
+--=20
+---------------------------------------------------------------------------=
+---
+Thanks && Regards
+Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
+IEEE Member
+Electrical Engineer Faculty @ PUCRS
+Ipiranga Avenue, 6681 =96 Building 30
+P.O. Box: 90619-900 =96 Porto Alegre/RS
+Phone: +55 51 3320 3500  extension: 7696
+---------------------------------------------------------------------------=
+------
 
