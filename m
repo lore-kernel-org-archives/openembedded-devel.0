@@ -1,25 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <freyther@gmx.net>) id 1I2NuB-0005CT-He
+Received: from [65.54.246.169] (helo=bay0-omc2-s33.bay0.hotmail.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <pelle2004@hotmail.com>) id 1I2RvG-0007C5-5A
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jun 2007 10:57:11 +0200
-Received: (qmail invoked by alias); 24 Jun 2007 08:53:05 -0000
-Received: from dsl-62-220-14-162.berlikomm.net (EHLO [192.168.2.150])
-	[62.220.14.162]
-	by mail.gmx.net (mp021) with SMTP; 24 Jun 2007 10:53:05 +0200
-X-Authenticated: #1949623
-X-Provags-ID: V01U2FsdGVkX1/aR6YgRL7aj4bKJi9uAz5FF/h7MPm5AAmGf3iIUw
-	tg1b+5cMghTQ7e
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <ae36f8040706232151g2a3b2bdbw9954f99ae1b752f@mail.gmail.com>
-References: <ae36f8040706232151g2a3b2bdbw9954f99ae1b752f@mail.gmail.com>
-Message-Id: <6E4DF76B-4724-4201-8B60-500EA2A0B38C@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Sun, 24 Jun 2007 10:52:58 +0200
+	Sun, 24 Jun 2007 15:14:34 +0200
+Received: from hotmail.com ([65.55.154.106]) by bay0-omc2-s33.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.2668); 
+	Sun, 24 Jun 2007 06:10:26 -0700
+Received: from mail pickup service by hotmail.com with Microsoft SMTPSVC;
+	Sun, 24 Jun 2007 06:10:26 -0700
+Message-ID: <BAY143-F26A49AD42DFE7DB1DE4350B9150@phx.gbl>
+Received: from 65.55.154.123 by by143fd.bay143.hotmail.msn.com with HTTP;
+	Sun, 24 Jun 2007 13:10:25 GMT
+X-Originating-IP: [83.227.74.206]
+X-Originating-Email: [pelle2004@hotmail.com]
+X-Sender: pelle2004@hotmail.com
+From: "Pelle Svensson" <pelle2004@hotmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
-Subject: Re: problems building cups
+Bcc: 
+Date: Sun, 24 Jun 2007 15:10:25 +0200
+Mime-Version: 1.0
+X-OriginalArrivalTime: 24 Jun 2007 13:10:26.0822 (UTC)
+	FILETIME=[08273A60:01C7B661]
+Subject: Need some help with conditional assignment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,26 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jun 2007 08:57:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; delsp=yes; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 24 Jun 2007 13:14:35 -0000
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
 
 
-Am 24.06.2007 um 06:51 schrieb Lu=EDs Cargnini:
+I need to assign a variable by condition and I can't get it right
+Have tried these without any luck. I'm inside a bbclass...
 
-Hi,
-this is the same mail you have sent on the 22th. It would be =20
-appreciated if you try to take a look at the output and try to =20
-understand the error. There is one thing that jumps directly into =20
-your eyes.
-Just follow the white rabbit and you will find the solution yourself. =20=
+# KERNEL_MAKE_OPTIONS += "${@base_conditional( 'KERNEL_BUILD_DIR', '', '', 
+'-O '+bb.data.getVar('',d,1), d )}"
+# KERNEL_MAKE_OPTIONS += "${@base_conditional( 'KERNEL_BUILD_DIR', '', '', 
+'-O ${KERNEL_BUILD_DIR}', d )}"
+KERNEL_MAKE_OPTIONS += "${@['-O ${KERNEL_BUILD_DIR}', 
+''][bb.data.getVar('KERNEL_BUILD_DIR', d, 1) != '']}"
 
-In doubt mail us or join irc and talk to us but believe in your =20
-strength and analyse yourself first.
+do_compile() {
+	oe_runmake ${KERNEL_MAKE_OPTIONS} zImage
+}
 
-kind regards
-	z.
-
+_________________________________________________________________
+Kolla in coola trailern till Die Hard 4 
+http://specials.se.msn.com/diehard4/default.aspx
 
 
 
