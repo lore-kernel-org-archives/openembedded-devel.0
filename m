@@ -1,21 +1,25 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1I2K8Z-0003DB-5M
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <freyther@gmx.net>) id 1I2NuB-0005CT-He
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jun 2007 06:55:47 +0200
-Received: by an-out-0708.google.com with SMTP id b33so228597ana
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jun 2007 21:51:42 -0700 (PDT)
-Received: by 10.100.128.8 with SMTP id a8mr2473954and.1182660702401;
-	Sat, 23 Jun 2007 21:51:42 -0700 (PDT)
-Received: by 10.100.38.3 with HTTP; Sat, 23 Jun 2007 21:51:42 -0700 (PDT)
-Message-ID: <ae36f8040706232151g2a3b2bdbw9954f99ae1b752f@mail.gmail.com>
-Date: Sun, 24 Jun 2007 01:51:42 -0300
-From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
+	Sun, 24 Jun 2007 10:57:11 +0200
+Received: (qmail invoked by alias); 24 Jun 2007 08:53:05 -0000
+Received: from dsl-62-220-14-162.berlikomm.net (EHLO [192.168.2.150])
+	[62.220.14.162]
+	by mail.gmx.net (mp021) with SMTP; 24 Jun 2007 10:53:05 +0200
+X-Authenticated: #1949623
+X-Provags-ID: V01U2FsdGVkX1/aR6YgRL7aj4bKJi9uAz5FF/h7MPm5AAmGf3iIUw
+	tg1b+5cMghTQ7e
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <ae36f8040706232151g2a3b2bdbw9954f99ae1b752f@mail.gmail.com>
+References: <ae36f8040706232151g2a3b2bdbw9954f99ae1b752f@mail.gmail.com>
+Message-Id: <6E4DF76B-4724-4201-8B60-500EA2A0B38C@gmx.net>
+From: Holger Freyther <freyther@gmx.net>
+Date: Sun, 24 Jun 2007 10:52:58 +0200
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: problems building cups
+X-Mailer: Apple Mail (2.752.3)
+X-Y-GMX-Trusted: 0
+Subject: Re: problems building cups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,73 +33,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jun 2007 04:55:47 -0000
-Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
+X-List-Received-Date: Sun, 24 Jun 2007 08:57:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; delsp=yes; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-someone know how to fix this :
- bitbake cups
-NOTE: Handling BitBake files: / (4619/4619) [100 %]
-NOTE: Parsing finished. 4397 cached, 0 parsed, 222 skipped, 0 masked.
-NOTE: build 200706240150: started
-
-OE Build Configuration:
-BB_VERSION     =3D "1.8.4"
-OE_REVISION    =3D "ef8c722889bd5cf7ded674cfc20d139a00318a1c"
-TARGET_ARCH    =3D "arm"
-TARGET_OS      =3D "linux-gnueabi"
-MACHINE        =3D "omap5912osk"
-DISTRO         =3D "angstrom"
-DISTRO_VERSION =3D "test-20070624"
-TARGET_FPU     =3D "soft"
-
-NOTE: Resolving missing task queue dependencies
-NOTE: preferred version 2.5 of glibc not available (for item
-virtual/arm-angstrom-linux-gnueabi-libc-for-gcc)
-NOTE: Preparing Runqueue
-NOTE: Executing runqueue
-NOTE: Running task 490 of 494 (ID: 5,
-/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/c=
-ups/cups_1.2.10.bb,
-do_package)
-NOTE: package cups-1.2.10: started
-NOTE: package cups-1.2.10-r0: task do_package: started
-!!! Failed to move ./var/run/cups/certs to
-/home/lvcargnini/puc/instramed/openembedded/tmp/work/armv5te-angstrom-linux=
--gnueabi/cups-
-1.2.10-r0/install/cups/./var/run/cups/certs
-!!! [Errno 13] Permission denied
-NOTE: Task failed: File population failed
-NOTE: package cups-1.2.10-r0: task do_package: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package cups-1.2.10: failed
-ERROR: Build of
-/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/c=
-ups/cups_1.2.10.bb
-do_package failed
-ERROR: Task 5
-(/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/=
-cups/cups_1.2.10.bb,
-do_package) failed
-NOTE: Tasks Summary: Attempted 489 tasks of which 489 didn't need to be
-rerun and 1 failed.
-ERROR:
-'/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/=
-cups/cups_1.2.10.bb'
-failed
 
 
---=20
----------------------------------------------------------------------------=
----
-Thanks && Regards
-Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
-IEEE Member
-Electrical Engineer Faculty @ PUCRS
-Ipiranga Avenue, 6681 =96 Building 30
-P.O. Box: 90619-900 =96 Porto Alegre/RS
-Phone: +55 51 3320 3500  extension: 7696
----------------------------------------------------------------------------=
-------
+Am 24.06.2007 um 06:51 schrieb Lu=EDs Cargnini:
+
+Hi,
+this is the same mail you have sent on the 22th. It would be =20
+appreciated if you try to take a look at the output and try to =20
+understand the error. There is one thing that jumps directly into =20
+your eyes.
+Just follow the white rabbit and you will find the solution yourself. =20=
+
+In doubt mail us or join irc and talk to us but believe in your =20
+strength and analyse yourself first.
+
+kind regards
+	z.
+
+
+
 
