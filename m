@@ -1,26 +1,21 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [209.85.132.250] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <xjqian@gmail.com>) id 1I20WC-0004vK-2z
+	(envelope-from <lvcargnini@gmail.com>) id 1I2K8Z-0003DB-5M
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jun 2007 09:58:52 +0200
-Received: by py-out-1112.google.com with SMTP id a25so655790pyi
+	Sun, 24 Jun 2007 06:55:47 +0200
+Received: by an-out-0708.google.com with SMTP id b33so228597ana
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jun 2007 00:54:52 -0700 (PDT)
-Received: by 10.35.90.1 with SMTP id s1mr4027231pyl.1182585292455;
-	Sat, 23 Jun 2007 00:54:52 -0700 (PDT)
-Received: from ?192.168.1.204? ( [24.107.186.86])
-	by mx.google.com with ESMTP id 7sm13915218nzn.2007.06.23.00.54.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 23 Jun 2007 00:54:51 -0700 (PDT)
-Message-ID: <467CD0DA.7020104@gmail.com>
-Date: Sat, 23 Jun 2007 02:50:50 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Icedove 1.5.0.10 (X11/20070329)
-MIME-Version: 1.0
+	Sat, 23 Jun 2007 21:51:42 -0700 (PDT)
+Received: by 10.100.128.8 with SMTP id a8mr2473954and.1182660702401;
+	Sat, 23 Jun 2007 21:51:42 -0700 (PDT)
+Received: by 10.100.38.3 with HTTP; Sat, 23 Jun 2007 21:51:42 -0700 (PDT)
+Message-ID: <ae36f8040706232151g2a3b2bdbw9954f99ae1b752f@mail.gmail.com>
+Date: Sun, 24 Jun 2007 01:51:42 -0300
+From: "=?ISO-8859-1?Q?Lu=EDs_Cargnini?=" <lvcargnini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20070621070815.E3274402068@tinman.treke.net>
-In-Reply-To: <20070621070815.E3274402068@tinman.treke.net>
-Subject: Re: [oe-issues] [Bug 2282] python_2.4.4 packaging QA issue
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: problems building cups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,31 +29,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jun 2007 07:58:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 24 Jun 2007 04:55:47 -0000
+Content-Type: text/plain; charset=WINDOWS-1252; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Glad to see there is a solution forming on this QA issue.
+someone know how to fix this :
+ bitbake cups
+NOTE: Handling BitBake files: / (4619/4619) [100 %]
+NOTE: Parsing finished. 4397 cached, 0 parsed, 222 skipped, 0 masked.
+NOTE: build 200706240150: started
 
-Btw, I'm taking unexpectedly trips during the last two months. Sorry for 
-not getting anything done in my small plate.
+OE Build Configuration:
+BB_VERSION     =3D "1.8.4"
+OE_REVISION    =3D "ef8c722889bd5cf7ded674cfc20d139a00318a1c"
+TARGET_ARCH    =3D "arm"
+TARGET_OS      =3D "linux-gnueabi"
+MACHINE        =3D "omap5912osk"
+DISTRO         =3D "angstrom"
+DISTRO_VERSION =3D "test-20070624"
+TARGET_FPU     =3D "soft"
 
-Gordon
- 
-> --- Comment #5 from Koen Kooi <koen@dominion.kabel.utwente.nl>  2007-06-21 00:08:15 ---
-> (In reply to comment #4)
->   
->> unpackaged files are now shipped -- thanks for the input.
->>
->> I agree though that it would be very handy to have a "collect everything
->> .debug" task -- since this is not related to Python, please open up another bug
->> entry where we can discuss this feature request.
->>     
->
-> If I may hijack this bug for a moment :)
->
-> Richard and I had a talk about it, and Richard proposed to copy files when
-> packaging instead of moving them, which would make it easier to remove all
-> debug files from non-debug packages.
+NOTE: Resolving missing task queue dependencies
+NOTE: preferred version 2.5 of glibc not available (for item
+virtual/arm-angstrom-linux-gnueabi-libc-for-gcc)
+NOTE: Preparing Runqueue
+NOTE: Executing runqueue
+NOTE: Running task 490 of 494 (ID: 5,
+/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/c=
+ups/cups_1.2.10.bb,
+do_package)
+NOTE: package cups-1.2.10: started
+NOTE: package cups-1.2.10-r0: task do_package: started
+!!! Failed to move ./var/run/cups/certs to
+/home/lvcargnini/puc/instramed/openembedded/tmp/work/armv5te-angstrom-linux=
+-gnueabi/cups-
+1.2.10-r0/install/cups/./var/run/cups/certs
+!!! [Errno 13] Permission denied
+NOTE: Task failed: File population failed
+NOTE: package cups-1.2.10-r0: task do_package: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package cups-1.2.10: failed
+ERROR: Build of
+/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/c=
+ups/cups_1.2.10.bb
+do_package failed
+ERROR: Task 5
+(/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/=
+cups/cups_1.2.10.bb,
+do_package) failed
+NOTE: Tasks Summary: Attempted 489 tasks of which 489 didn't need to be
+rerun and 1 failed.
+ERROR:
+'/home/lvcargnini/puc/instramed/openembedded/org.openembedded.dev/packages/=
+cups/cups_1.2.10.bb'
+failed
 
+
+--=20
+---------------------------------------------------------------------------=
+---
+Thanks && Regards
+Msc. Bsc. Lu=EDs Vit=F3rio Cargnini
+IEEE Member
+Electrical Engineer Faculty @ PUCRS
+Ipiranga Avenue, 6681 =96 Building 30
+P.O. Box: 90619-900 =96 Porto Alegre/RS
+Phone: +55 51 3320 3500  extension: 7696
+---------------------------------------------------------------------------=
+------
 
