@@ -1,22 +1,26 @@
-Received: from [209.242.20.70] (helo=green.dls.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1I3YVv-0003oU-Md
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jun 2007 16:28:59 +0200
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 3856D411AFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2007 09:24:38 -0500 (CDT)
-Message-ID: <018001c7b8c6$b06605a0$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 27 Jun 2007 09:23:10 -0500
+	(envelope-from <koen@dominion.kabel.utwente.nl>)
+	id 1I3vit-0001P6-KN; Thu, 28 Jun 2007 17:15:55 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l5SFBLUg028518; Thu, 28 Jun 2007 17:11:21 +0200
+Message-ID: <4683CF96.40005@dominion.kabel.utwente.nl>
+Date: Thu, 28 Jun 2007 17:11:18 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1807
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
-Subject: Notice: New version of the madwifi drivers
+To: openembedded-devel@openembedded.org
+References: <E1I3v58-0000nG-7W@linuxtogo.org>
+In-Reply-To: <E1I3v58-0000nG-7W@linuxtogo.org>
+X-Enigmail-Version: 0.95.1
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] org.oe.dev linux-rp-2.6.20: update sharpsl-rc patch to	fix IRQ issues (bug 2555)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,24 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2007 14:29:00 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Thu, 28 Jun 2007 15:15:55 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Unless anyone has objections, I intend to update the madwifi-ng drivers to
-the 20070626 version.  I'll commit the .bb file no sooner than tomorrow (24
-hours or more).  IIRC, those sensitive to these changes (such as SlugOS)
-agreed to define a preferred version in the appropriate conf file, so this
-change should have no effect for those who don't wish to see it.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This update is required by SlugOS in order to build with the 2.6.21 kernel.
-I've tested it (basic testing only) with SlugOS/BE using WPA; it seems to
-work better than most of the other recent version did.
+Stanislav commit schreef:
+> linux-rp-2.6.20: update sharpsl-rc patch to fix IRQ issues (bug 2555)
 
-Thanks,
-Mike (mwester)
+> +CONFIG_BT_HCIUSB_SCO=m
 
+It's a bluetooth remote instead of a wired one?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFGg8+WMkyGM64RGpERAs/hAJ0TIVkby9z4YVMT+M4UtqjemgJ94QCfX7tn
+F9R/ThEbdkY4BG16izmCzNg=
+=iS6M
+-----END PGP SIGNATURE-----
 
 
