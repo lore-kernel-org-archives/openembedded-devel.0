@@ -1,17 +1,20 @@
-Received: from [201.42.125.60] (helo=billy)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1I48Qp-0007tl-C7
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jun 2007 06:50:11 +0200
-Received: from billy (201.42.125.60)
-  by billy with SMTP;
-Received: (qmail 39596 by uid 114); Fri, 29 Jun 2007 01:45:34 -0300
-Message-Id: <20070629-24534.39598.qmail@billy>
-To: <openembedded-devel@lists.openembedded.org>
-From: admin@baisidirect.com
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: Online Market
+Received: from [195.121.247.7] (helo=smtp16.wxs.nl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <gerwin@vanderkruis.net>) id 1I4E2s-0002wl-1A
+	for openembedded-devel@openembedded.org; Fri, 29 Jun 2007 12:49:46 +0200
+Received: from holographicklopdoctor.lan
+	(ip5457b30e.direct-adsl.nl [84.87.179.14])
+	by smtp16.wxs.nl (iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov
+	14 2006)) with ESMTP id <0JKE00GSY8JAWA@smtp16.wxs.nl> for
+	openembedded-devel@openembedded.org;
+	Fri, 29 Jun 2007 12:45:11 +0200 (CEST)
+Date: Fri, 29 Jun 2007 12:43:04 +0200
+From: Gerwin van der Kruis <gerwin@vanderkruis.net>
+To: openembedded-devel@openembedded.org
+Message-id: <200706291243.04988.gerwin@vanderkruis.net>
+MIME-version: 1.0
+User-Agent: KMail/1.9.1
+Subject: Linuxworld San Fransisco
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -25,10 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-Date: Fri, 29 Jun 2007 04:50:15 -0000
-X-List-Received-Date: Fri, 29 Jun 2007 04:50:15 -0000
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Fri, 29 Jun 2007 10:49:46 -0000
+Content-type: text/plain; charset=us-ascii
+Content-transfer-encoding: 7BIT
+Content-disposition: inline
 
-    [a8de95609cffa73e891981c166d5969e.jpg]
+Dear All, 
+
+I am trying to arrange our presence for LinuxWorld San Fransisco. 
+
+It will be hard to be present there with a booth because we are too late with 
+the subscription. 
+
+I saw on the list that handhelds.org will be present , do we have contacts 
+there ?
+
+Is it maybe possible to join with hh.org ?
+
+Is somebody going to attend the show ?
+
+Regards, 
+
+Gerwin 
+-- 
+The Holographic Klop Doctor
+
+               -
+               0
+             - |
+              \|\
+               |/
+               |
+              /|
+            _|_|
+
+Underneath the mango tree  :) 
 
 
