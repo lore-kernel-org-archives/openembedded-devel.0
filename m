@@ -1,23 +1,23 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [195.121.247.6] (helo=smtp15.wxs.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1I4F5j-0007hM-Fj
+	(envelope-from <gerwin@vanderkruis.net>) id 1I4H0D-0000Ps-EP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jun 2007 13:56:47 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1I4F58-0006uG-8q
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jun 2007 13:56:10 +0200
-Message-ID: <4684F258.6000401@kernelconcepts.de>
-Date: Fri, 29 Jun 2007 13:51:52 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
-MIME-Version: 1.0
+	Fri, 29 Jun 2007 15:59:13 +0200
+Received: from holographicklopdoctor.lan
+	(ip5457b30e.direct-adsl.nl [84.87.179.14])
+	by smtp15.wxs.nl (iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov
+	14 2006)) with ESMTP id <0JKE005RHHB1UL@smtp15.wxs.nl> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	29 Jun 2007 15:54:37 +0200 (CEST)
+Date: Fri, 29 Jun 2007 15:52:31 +0200
+From: Gerwin van der Kruis <gerwin@vanderkruis.net>
+In-reply-to: <4684F258.6000401@kernelconcepts.de>
 To: openembedded-devel@lists.openembedded.org
+Message-id: <200706291552.31799.gerwin@vanderkruis.net>
+MIME-version: 1.0
+User-Agent: KMail/1.9.1
 References: <200706291243.04988.gerwin@vanderkruis.net>
-In-Reply-To: <200706291243.04988.gerwin@vanderkruis.net>
-X-Enigmail-Version: 0.94.2.0
+	<4684F258.6000401@kernelconcepts.de>
 Subject: Re: Linuxworld San Fransisco
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,40 +32,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2007 11:56:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Jun 2007 13:59:13 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: 7BIT
+Content-disposition: inline
 
-Hi,
+On Friday 29 June 2007 13:51, Florian Boor wrote:
+> Hi,
+>
+> Gerwin van der Kruis schrieb:
+> > Is it maybe possible to join with hh.org ?
+>
+> I would not recommend this for several reasons:
+> - OE is not hosted at hh.org any more for good reasons.
+> - We do not know what hh.org is really about, but what we know is that they
+> try to force projects becoming some kind of "hh.org product".
+> - George from hh.org has been quite hostile and unfriendly in the public
+> lately. I would not want to see OE in any relationship with this guy.
+>
+> Another reason would be the GPE trademark fight going on currently.
+> There is a quite good summary here:
+> http://www.linux.com/articles/114310?tid=41
+>
+> Opie is affected as well... its easy to find more reasons to stay away from
+> hh.org. its a pity, but unluckily current reality :-(
 
-Gerwin van der Kruis schrieb:
+This what's making me angry why should somebody own opie or gpe other than 
+the respective developers who worked on it . 
 
-> Is it maybe possible to join with hh.org ?
+As said the trademark is only valid for the united states , so handhelds.org 
+has no right to claim anything in Europe. 
 
-I would not recommend this for several reasons:
-- OE is not hosted at hh.org any more for good reasons.
-- We do not know what hh.org is really about, but what we know is that they try
-  to force projects becoming some kind of "hh.org product".
-- George from hh.org has been quite hostile and unfriendly in the public lately.
-  I would not want to see OE in any relationship with this guy.
+I understood completly what you are saying florian and maybe it is an idea to 
+make an official statement about it . 
 
-Another reason would be the GPE trademark fight going on currently.
-There is a quite good summary here:
-http://www.linux.com/articles/114310?tid=41
+I also read on handhelds.org that he is quoting you. 
 
-Opie is affected as well... its easy to find more reasons to stay away from
-hh.org. its a pity, but unluckily current reality :-(
+So I will not get in touch with handhelds.org. Ruben is owning opie.nl
+and probarly gpe.nl as well. 
 
-Greetings
+Regards, 
 
-Florian
+Gerwin 
+
+
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+The Holographic Klop Doctor
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+               -
+               0
+             - |
+              \|\
+               |/
+               |
+              /|
+            _|_|
+
+Underneath the mango tree  :) 
 
 
