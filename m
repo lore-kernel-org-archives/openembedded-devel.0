@@ -1,22 +1,24 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [217.116.0.29] (helo=correo11.acens.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1I56VZ-0002Za-H2
-	for openembedded-devel@openembedded.org; Sun, 01 Jul 2007 22:59:01 +0200
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>)
-	id 1I56Qu-00067P-89; Sun, 01 Jul 2007 22:54:12 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-Message-Id: <5298A6F6-FBE8-44F9-A80C-38CBF08C2FB1@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Sun, 1 Jul 2007 22:53:56 +0200
-To: bitbake-dev <bitbake-dev@lists.berlios.de>
-X-Pgp-Agent: GPGMail 1.1.2 (Tiger)
-X-Gpgmail-State: signed
-X-Mailer: Apple Mail (2.752.3)
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: [Bitbake-dev] Bitbake 1.8.6 released!
+	(envelope-from <joaquinduran@adtelecom.es>) id 1I5HG0-0008Fq-6j
+	for openembedded-devel@openembedded.org; Mon, 02 Jul 2007 10:27:40 +0200
+Received: (qmail 10784 invoked from network); 2 Jul 2007 08:22:47 -0000
+Received: from unknown (HELO [194.179.62.51])
+	(joaquinduran.adtelecom.es@[80.37.108.33])
+	(envelope-sender <joaquinduran@adtelecom.es>)
+	by correo11.acens.net (qmail-ldap-1.03) with SMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	2 Jul 2007 08:22:47 -0000
+Message-ID: <4688C402.5060208@adtelecom.es>
+Date: Mon, 02 Jul 2007 11:23:14 +0200
+From: Joaquim Duran <joaquinduran@adtelecom.es>
+Organization: AD Telecom
+User-Agent: Thunderbird 2.0.0.4 (X11/20070618)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <E1I4QwQ-0002do-J9@linuxtogo.org>
+In-Reply-To: <E1I4QwQ-0002do-J9@linuxtogo.org>
+Subject: Re: [oe-commits] org.oe.dev gtkmm: update to 2.10.10. Closes 2544.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,39 +32,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jul 2007 20:59:02 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Mon, 02 Jul 2007 08:27:40 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+En/na Laibsch commit ha escrit:
+> gtkmm: update to 2.10.10.  Closes 2544.
+> 
+> Author: Laibsch@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 57fa0ccbbdbca8c188108e3c4fbde4702976f3c6
+> ViewMTN: http://monotone.openembedded.org/revision.psp?id=57fa0ccbbdbca8c188108e3c4fbde4702976f3c6
+> Files:
+> 1
+> packages/gtkmm/gtkmm_2.8.3.bb
+> packages/gtkmm/gtkmm_2.10.10.bb
+> packages/gtkmm/gtkmm.inc
+> Diffs:
+> 
+> #
+> # mt diff -raaafb999d11846eacd606047f3cddf7a583a9e0c -r57fa0ccbbdbca8c188108e3c4fbde4702976f3c6
+> #
+> # 
+> # 
+> # rename "packages/gtkmm/gtkmm_2.8.3.bb"
+> #     to "packages/gtkmm/gtkmm_2.10.10.bb"
+> # 
+> # patch "packages/gtkmm/gtkmm.inc"
+> #  from [e31db8a96e6aa60a1f27bc20642644a3204a2e57]
+> #    to [7ec54b72cd502a1cb8e82dbb3ff44ccfbc0575b4]
+> # 
+> # patch "packages/gtkmm/gtkmm_2.10.10.bb"
+> #  from [c45df8de54265c0f006a7958dae49e88c83d7783]
+> #    to [42dacfdf2a031c9cdccd5a2559171f16c6dc4440]
+> # 
+> ============================================================
+> --- packages/gtkmm/gtkmm.inc	e31db8a96e6aa60a1f27bc20642644a3204a2e57
+> +++ packages/gtkmm/gtkmm.inc	7ec54b72cd502a1cb8e82dbb3ff44ccfbc0575b4
+> @@ -1,9 +1,10 @@ LICENSE = "LGPL"
+>  DESCRIPTION = "C++ bindings for the GTK+ toolkit."
+>  HOMEPAGE = "http://www.gtkmm.org/"
+>  SECTION = "libs"
+>  PRIORITY = "optional"
+>  LICENSE = "LGPL"
+> -DEPENDS = "glibmm gtk+"
+> +DEPENDS = "atk glibmm gtk+"
+> +PR = "r0"
+>  
+>  inherit autotools pkgconfig flow-lossage
+>  
 
-Bitbake 1.8.6 has been released.
 
-http://prdownload.berlios.de/bitbake/bitbake-1.8.6.tar.gz
+[...]
 
-This release is primarily a bugfix release. It contains several bugfixes
-and minor improvements over the 1.8.4 release and should be used instead
-of 1.8.4 in all cases. See the Changelog in the release for a more
-comprehensive list of changes.
+I don't agree with the change that you've introduced in the dependencies.
 
-I would like to thank Richard and Marcin for doing the work.
+That is, gtk+ is also depending on atk, so include atk in gtkmm has no 
+sense.
 
+The dependences from file gtk-2.10.inc are:
 
+DEPENDS = "glib-2.0 pango atk jpeg libpng libxext libxcursor gtk-doc 
+libgcrypt cairo cups"
 
-Cheers,
+Could you test it once again? Which version of gtk are you using?
 
-z.
-
-PS: md5sum 0e0dacaae704aed08a940389250e61e9
-        sha256sum  
-fd8a9e9e916314f9385f497d1f9b81d0885487f7741ad7be790972f44fc68b25
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.7 (Darwin)
-
-iD8DBQFGiBRkGckbdURWU2oRAucbAJ9zZrP06Z7ev2EvisdzVnaQobGMbgCeNjMH
-bfQvHPRiyNGR02RV6/yKbYw=
-=8k7j
------END PGP SIGNATURE-----
+Thanks and Best Regards,
+Joaquim Duran
 
 
