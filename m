@@ -1,27 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>)
-	id 1I5JMp-00016k-M1; Mon, 02 Jul 2007 12:42:56 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l62AbtLr021830; Mon, 2 Jul 2007 12:37:55 +0200
-Message-ID: <4688D582.4080806@dominion.kabel.utwente.nl>
-Date: Mon, 02 Jul 2007 12:37:54 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
+	(envelope-from <papercrane@gmail.com>) id 1I5lKA-00078a-Sh
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Jul 2007 18:33:59 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so2812703waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Jul 2007 09:28:57 -0700 (PDT)
+Received: by 10.114.135.1 with SMTP id i1mr6306499wad.1183480137617;
+	Tue, 03 Jul 2007 09:28:57 -0700 (PDT)
+Received: by 10.114.144.2 with HTTP; Tue, 3 Jul 2007 09:28:57 -0700 (PDT)
+Message-ID: <432beae0707030928n3f6c468ds8131f61f1db4076@mail.gmail.com>
+Date: Tue, 3 Jul 2007 09:28:57 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1183219412.6678.1.camel@localhost.localdomain>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1I5JHj-00010X-5D@linuxtogo.org>
-In-Reply-To: <E1I5JHj-00010X-5D@linuxtogo.org>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev linux-x86: bump PR
+References: <E1I3xL2-0002Jv-8j@linuxtogo.org>
+	<1183219412.6678.1.camel@localhost.localdomain>
+Subject: Re: [oe-commits] org.oe.dev linux-rp-2.6.21: add sharpsl-rc patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,27 +31,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jul 2007 10:43:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Jul 2007 16:34:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 6/30/07, Matthias Hentges <oe@hentges.net> wrote:
+> Am Donnerstag, den 28.06.2007, 18:59 +0200 schrieb justinp commit:
+> > linux-rp-2.6.21: add sharpsl-rc patch
+> >
+> > Author: justinp@openembedded.org
+> > Branch: org.openembedded.dev
+> > Revision: c80492670adbda2d61a72a0c64c1a2a873d10b51
+> > ViewMTN: http://monotone.openembedded.org/revision.psp?id=c80492670adbda2d61a72a0c64c1a2a873d10b51
+> > Files:
+> > 1
+> > packages/linux/linux-rp_2.6.21.bb
+> > Diffs:
+> >
+> > #
+> > # mt diff -rd85165b6d72282ba94622c1c0d0c9c3e4a6be821 -rc80492670adbda2d61a72a0c64c1a2a873d10b51
+> > #
+> > #
+> > #
+> > # patch "packages/linux/linux-rp_2.6.21.bb"
+> > #  from [791613c9350e496eb591d9d3114c81a1e6b2c20c]
+> > #    to [0611fe14d6ba36f9557f2f7c5814c1be6fbd7f84]
+> > #
+> > ============================================================
+> > --- packages/linux/linux-rp_2.6.21.bb 791613c9350e496eb591d9d3114c81a1e6b2c20c
+> > +++ packages/linux/linux-rp_2.6.21.bb 0611fe14d6ba36f9557f2f7c5814c1be6fbd7f84
+> > @@ -1,6 +1,6 @@ require linux-rp.inc
+> >  require linux-rp.inc
+> >
+> > -PR = "r4"
+> > +PR = "r5"
+> >
+> >  # Handy URLs
+> >  # git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git;protocol=git;tag=ef7d1b244fa6c94fb76d5f787b8629df64ea4046
+> > @@ -51,6 +51,7 @@ SRC_URI = "http://www.kernel.org/pub/lin
+> >             file://connectplus-remove-ide-HACK.patch;patch=1;status=hack \
+> >             file://squashfs3.0-2.6.15.patch;patch=1;status=external \
+> >             file://vesafb-tng-1.0-rc2-2.6.20-rc2.patch;patch=1;status=external \
+> > +           file://sharpsl-rc-r1.patch;patch=1 \
+> >             file://defconfig-c7x0 \
+> >             file://defconfig-hx2000 \
+> >             file://defconfig-collie \
+> >
+> >
+> >
+> > _______________________________________________
+> > Openembedded-commits mailing list
+> > Openembedded-commits@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+>
+> You forgot to attach the actual patch ;)
 
-florian commit schreef:
-> linux-x86: bump PR
+Oops, sorry about that.
 
-Can't the linux-x86 kernels be absorbed in linux_<version>.bb?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGiNWCMkyGM64RGpERAsbXAJ49qfFW7RmeuxTgehFJChbYwvX/kwCcCGg9
-Sy1GJ6fEdYXGhF/rL98pWWg=
-=ap5h
------END PGP SIGNATURE-----
+-- 
+Justin Patrin
 
 
