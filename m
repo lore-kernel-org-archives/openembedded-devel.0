@@ -1,23 +1,24 @@
-Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1I5lKA-00078a-Sh
+	(envelope-from <pmiscml@gmail.com>) id 1I6Fir-0003Xe-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Jul 2007 18:33:59 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so2812703waf
+	Thu, 05 Jul 2007 03:01:31 +0200
+Received: by ug-out-1314.google.com with SMTP id i24so398348ugd
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jul 2007 09:28:57 -0700 (PDT)
-Received: by 10.114.135.1 with SMTP id i1mr6306499wad.1183480137617;
-	Tue, 03 Jul 2007 09:28:57 -0700 (PDT)
-Received: by 10.114.144.2 with HTTP; Tue, 3 Jul 2007 09:28:57 -0700 (PDT)
-Message-ID: <432beae0707030928n3f6c468ds8131f61f1db4076@mail.gmail.com>
-Date: Tue, 3 Jul 2007 09:28:57 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
+	Wed, 04 Jul 2007 17:56:21 -0700 (PDT)
+Received: by 10.82.158.12 with SMTP id g12mr19110049bue.1183596980803;
+	Wed, 04 Jul 2007 17:56:20 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.98.17])
+	by mx.google.com with ESMTP id j2sm43538998mue.2007.07.04.17.56.19
+	(version=SSLv3 cipher=OTHER); Wed, 04 Jul 2007 17:56:19 -0700 (PDT)
+Date: Thu, 5 Jul 2007 01:15:39 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
+X-Priority: 3 (Normal)
+Message-ID: <1798199350.20070705011539@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1183219412.6678.1.camel@localhost.localdomain>
 MIME-Version: 1.0
-References: <E1I3xL2-0002Jv-8j@linuxtogo.org>
-	<1183219412.6678.1.camel@localhost.localdomain>
-Subject: Re: [oe-commits] org.oe.dev linux-rp-2.6.21: add sharpsl-rc patch
+Subject: Too liberal defaults for FILES_${PN}?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,65 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jul 2007 16:34:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 05 Jul 2007 01:01:43 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 6/30/07, Matthias Hentges <oe@hentges.net> wrote:
-> Am Donnerstag, den 28.06.2007, 18:59 +0200 schrieb justinp commit:
-> > linux-rp-2.6.21: add sharpsl-rc patch
-> >
-> > Author: justinp@openembedded.org
-> > Branch: org.openembedded.dev
-> > Revision: c80492670adbda2d61a72a0c64c1a2a873d10b51
-> > ViewMTN: http://monotone.openembedded.org/revision.psp?id=c80492670adbda2d61a72a0c64c1a2a873d10b51
-> > Files:
-> > 1
-> > packages/linux/linux-rp_2.6.21.bb
-> > Diffs:
-> >
-> > #
-> > # mt diff -rd85165b6d72282ba94622c1c0d0c9c3e4a6be821 -rc80492670adbda2d61a72a0c64c1a2a873d10b51
-> > #
-> > #
-> > #
-> > # patch "packages/linux/linux-rp_2.6.21.bb"
-> > #  from [791613c9350e496eb591d9d3114c81a1e6b2c20c]
-> > #    to [0611fe14d6ba36f9557f2f7c5814c1be6fbd7f84]
-> > #
-> > ============================================================
-> > --- packages/linux/linux-rp_2.6.21.bb 791613c9350e496eb591d9d3114c81a1e6b2c20c
-> > +++ packages/linux/linux-rp_2.6.21.bb 0611fe14d6ba36f9557f2f7c5814c1be6fbd7f84
-> > @@ -1,6 +1,6 @@ require linux-rp.inc
-> >  require linux-rp.inc
-> >
-> > -PR = "r4"
-> > +PR = "r5"
-> >
-> >  # Handy URLs
-> >  # git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git;protocol=git;tag=ef7d1b244fa6c94fb76d5f787b8629df64ea4046
-> > @@ -51,6 +51,7 @@ SRC_URI = "http://www.kernel.org/pub/lin
-> >             file://connectplus-remove-ide-HACK.patch;patch=1;status=hack \
-> >             file://squashfs3.0-2.6.15.patch;patch=1;status=external \
-> >             file://vesafb-tng-1.0-rc2-2.6.20-rc2.patch;patch=1;status=external \
-> > +           file://sharpsl-rc-r1.patch;patch=1 \
-> >             file://defconfig-c7x0 \
-> >             file://defconfig-hx2000 \
-> >             file://defconfig-collie \
-> >
-> >
-> >
-> > _______________________________________________
-> > Openembedded-commits mailing list
-> > Openembedded-commits@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->
-> You forgot to attach the actual patch ;)
+Hello openembedded-devel,
 
-Oops, sorry about that.
+    This one concerns me: ${libdir}/${PN}/*
+
+Due to it we get following -dev garbage in libglib-2.0:
+
+/usr/lib/glib-2.0/include/glibconfig.h
+/usr/share/glib-2.0/gettext/po/Makefile.in.in
+/usr/share/glib-2.0/gettext/mkinstalldirs
+
+  I'm going to commit an adhoc workaround, but wonder how grounded
+that default above.
 
 -- 
-Justin Patrin
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
+
 
 
