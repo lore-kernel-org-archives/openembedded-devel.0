@@ -1,21 +1,26 @@
-Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
+Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1I6Rpj-00077s-3L
+	(envelope-from <pmiscml@gmail.com>) id 1I6Tt6-00009i-HC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jul 2007 15:57:23 +0200
-Received: by nz-out-0506.google.com with SMTP id v1so1367883nzb
+	Thu, 05 Jul 2007 18:09:00 +0200
+Received: by ug-out-1314.google.com with SMTP id i24so527851ugd
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jul 2007 06:52:11 -0700 (PDT)
-Received: by 10.114.93.17 with SMTP id q17mr8177799wab.1183643527379;
-	Thu, 05 Jul 2007 06:52:07 -0700 (PDT)
-Received: by 10.114.144.2 with HTTP; Thu, 5 Jul 2007 06:52:07 -0700 (PDT)
-Message-ID: <432beae0707050652p1ea54a50me3e03ccca40015de@mail.gmail.com>
-Date: Thu, 5 Jul 2007 06:52:07 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Thu, 05 Jul 2007 09:03:48 -0700 (PDT)
+Received: by 10.82.152.16 with SMTP id z16mr20505260bud.1183651427683;
+	Thu, 05 Jul 2007 09:03:47 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.98.17])
+	by mx.google.com with ESMTP id y2sm46193315mug.2007.07.05.09.03.46
+	(version=SSLv3 cipher=OTHER); Thu, 05 Jul 2007 09:03:47 -0700 (PDT)
+Date: Thu, 5 Jul 2007 19:03:37 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
+X-Priority: 3 (Normal)
+Message-ID: <1223999433.20070705190337@gmail.com>
+To: Tom Walsh <tom@openhardware.net>
 In-Reply-To: <468C7B11.8050809@openhardware.net>
-MIME-Version: 1.0
 References: <468C7B11.8050809@openhardware.net>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: howto? Build something but not deploy in root image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,55 +35,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jul 2007 13:57:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 05 Jul 2007 16:09:00 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 7/4/07, Tom Walsh <tom@openhardware.net> wrote:
-> I know, this has come up before.  Reading through some of the old
+Hello Tom,
+
+Thursday, July 5, 2007, 8:01:05 AM, you wrote:
+
+> I know, this has come up before.  Reading through some of the old 
 > messages I see this discussed, but, I do not see any solution(s) mentioned?
->
-> I have several parts to this project that must be built during the
-> bitbake process (bootstrap-image), but are not part of the target
+
+  Well, until recently, OE had issues with building truly minimal and
+well-polished images. This yet needs to be described in howto-like
+manner, that's on my todo.
+
+> I have several parts to this project that must be built during the 
+> bitbake process (bootstrap-image), but are not part of the target 
 > filesystem image.  The total system parts are:
->
+
 > * bootloader - ARM - resides in Flash.
 > * kernel - ARM - resides in Flash.
 > * target rootfs image - ARM - resides on MMC card.
 > * Flash Utility - native (x86) - runs on host computer.
->
-> The concept for the system is that the bootloader starts the RAM and
-> other hardware up.  It then copies the kernel image into RAM and
+
+> The concept for the system is that the bootloader starts the RAM and 
+> other hardware up.  It then copies the kernel image into RAM and 
 > launches it.  The kernel is configured to look for its root filesystem
-> on the MMC card.  Essentially, I boot the kernel from Flash, but the
+> on the MMC card.  Essentially, I boot the kernel from Flash, but the 
 > kernel boots from the MMC card.
->
+
 > The only thing that I need in the root filesystem (tmp/rootfs/) is the
-> packages I named from the local conf files.  The kernel does need to be
+> packages I named from the local conf files.
+
+  This is one feature which is possible now. You name exact and
+complete list of packages you want to install into image, and nothing
+else gets installed, not even dependencies. This is of course highly
+special-purpose feature, and you don't want to use it on realistic
+rootfs with dozens of packages, it is indtended for initrds/initramfs,
+which consist of few packages and where each KB counts.
+
+>  The kernel does need to be
 > there, it soaks up space uselessly.
->
-> As to the bootloader, it comes in two sections (files), these are
+
+  Kernel is indeed special case, and there was some kind of adhoc
+support for doing what you want all the time in OE. Couple of months
+ago Richard Purdie implemented more scalable support for this though,
+so search archives for his RFC.
+
+> As to the bootloader, it comes in two sections (files), these are 
 > programmed by the Flash Utility into the target system.  The bootloader
 > is not needed in the root filesystem.
->
+
+  Besides two special cases above, when you really need to subvert
+OE's dependency handling, for all other cases you just need to get it
+right. The only reason why bootloader is installed into image is that
+something RDEPENDS on it (or it listed as top-level package to install
+;-) ). So, fix your dependencies, and it will be ok.
+
 > The problem is not getting these things built, but preventing them from
 > being installed in the tmp/rootfs/ filesystem or tarball.  They should
-> only go into tmp/deploy/image/, which  I currently have them going
-> into...  However, the bitbake system assumes that anything that is
+> only go into tmp/deploy/image/, which  I currently have them going 
+> into...  However, the bitbake system assumes that anything that is 
 > packaged, must be deployed into the root filesystem!?
 
-This isn't quite true. Bitbake installs whatever packages are in the
-RDEPENDS of the image. I think what you would do it make sure that
-your bootloader, etc are in the DEPENDS but not the RDEPENDS.
-
->
-> How do you build a bootloader that resides in Flash and doesn't get
-> stuck into the filesystem image?  The same would hold true for the
+> How do you build a bootloader that resides in Flash and doesn't get 
+> stuck into the filesystem image?  The same would hold true for the 
 > native (linux PC) app which flashes the target memory.
->
+
+> Regards,
+
+> TomW
+
+
+
 
 -- 
-Justin Patrin
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
