@@ -1,33 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1I7BiI-0000dH-Kc
-	for openembedded-devel@openembedded.org; Sat, 07 Jul 2007 16:56:46 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1I7Bd1-0004jN-TB
-	for openembedded-devel@openembedded.org; Sat, 07 Jul 2007 16:51:19 +0200
-Received: from host86-131-242-139.range86-131.btcentralplus.com
-	([86.131.242.139]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 07 Jul 2007 16:51:19 +0200
-Received: from koen by host86-131-242-139.range86-131.btcentralplus.com with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 07 Jul 2007 16:51:19 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1I7BjC-0000e2-Iu
+	for openembedded-devel@openembedded.org; Sat, 07 Jul 2007 16:57:42 +0200
+Received: from vpn006144.vpn.utwente.nl (vpn006144.vpn.utwente.nl
+	[130.89.6.144])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l67EqEj1015944 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 7 Jul 2007 16:52:14 +0200
+Message-ID: <468FA89D.8060701@dominion.kabel.utwente.nl>
+Date: Sat, 07 Jul 2007 15:52:13 +0100
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Sat, 07 Jul 2007 15:51:12 +0100
-Message-ID: <468FA860.5050300@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <E1I75mQ-0005Wr-Px@linuxtogo.org>
 	<142948947.20070707122533@vanille-media.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: host86-131-242-139.range86-131.btcentralplus.com
-User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
 In-Reply-To: <142948947.20070707122533@vanille-media.de>
 X-Enigmail-Version: 0.95.2
-Sender: news <news@sea.gmane.org>
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [oe-commits] org.oe.dev disapproval of revision '66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,7 +36,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jul 2007 14:56:46 -0000
+X-List-Received-Date: Sat, 07 Jul 2007 14:57:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -78,6 +72,5 @@ iD8DBQFGj6hgMkyGM64RGpERAhQSAJ9BRu5yEB5IB3aS6s2p/u5IsErOSQCeOL3e
 QazmT2c2fB9En+b0UZkhF4o=
 =qFg1
 -----END PGP SIGNATURE-----
-
 
 
