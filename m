@@ -1,31 +1,23 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [62.27.45.185] (helo=argo.arachnion.zzZZzz.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1I77Z6-0006UY-7m
+	(envelope-from <hacker@klever.net>) id 1I77tw-0006oY-KI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Jul 2007 12:31:04 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 6F76F28C013; Sat,  7 Jul 2007 12:24:27 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ****
-X-Spam-Status: No, score=4.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180157254.adsl.alicedsl.de [85.180.157.254])
-	by srv043.dedi23.de (Postfix) with ESMTP id EBFFD28C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jul 2007 12:24:24 +0200 (CEST)
-Date: Sat, 7 Jul 2007 12:25:33 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <142948947.20070707122533@vanille-media.de>
-CC: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1I75mQ-0005Wr-Px@linuxtogo.org>
-References: <E1I75mQ-0005Wr-Px@linuxtogo.org>
+	Sat, 07 Jul 2007 12:52:33 +0200
+Received: from pd953aef3.dip0.t-ipconnect.de ([217.83.174.243]
+	helo=olympus.klever.net)
+	by argo.arachnion.zzZZzz.net with esmtpa (Exim 4.42)
+	id 1I77iZ-0008Au-9F for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Jul 2007 12:40:47 +0200
+Message-ID: <468F6D72.5030907@klever.net>
+Date: Sat, 07 Jul 2007 12:39:46 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.4 (X11/20070619)
 MIME-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev disapproval of revision '66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
+To: openembedded-devel@lists.openembedded.org
+References: <E1I75mQ-0005Wr-Px@linuxtogo.org>
+	<142948947.20070707122533@vanille-media.de>
+In-Reply-To: <142948947.20070707122533@vanille-media.de>
+Subject: Re: [oe-commits] org.oe.dev disapproval of revision	'66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,21 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jul 2007 10:31:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 07 Jul 2007 10:52:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-koen commit wrote:
-> disapproval of revision '66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
+While koen is on the train I think it would be appropriate to quote his 
+doppelgänger in Edinburgh:
 
-May I request that from now on _every_ disapproval goes hand in hand with a
-lengthy explanation on oe-devel?
+<koen|edinburgh> ~botmail for woglinde: *NEVER* DEPEND on libiconv 
+directly, but on virtual/libiconv, otherwise you break all glibc based 
+builds out there
 
-Regards,
+Love,
+H
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Dr. Michael Lauer wrote:
+> koen commit wrote:
+>> disapproval of revision '66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
+> 
+> May I request that from now on _every_ disapproval goes hand in hand with a
+> lengthy explanation on oe-devel?
+> 
+> Regards,
+> 
+> :M:
 
 
