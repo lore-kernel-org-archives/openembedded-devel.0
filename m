@@ -1,31 +1,34 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1I7A7Q-0008D2-Jr
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Jul 2007 15:14:36 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id A529028C013; Sat,  7 Jul 2007 15:08:04 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ****
-X-Spam-Status: No, score=4.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180157254.adsl.alicedsl.de [85.180.157.254])
-	by srv043.dedi23.de (Postfix) with ESMTP id 0018B28C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jul 2007 15:08:03 +0200 (CEST)
-Date: Sat, 7 Jul 2007 15:09:12 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1101104547.20070707150912@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1I79sC-0007we-W4@linuxtogo.org>
-References: <E1I79sC-0007we-W4@linuxtogo.org>
-MIME-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev merge of '0d37beef48144a1e6e6f1e015c51e634852fb3a5'
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1I7BiI-0000dH-Kc
+	for openembedded-devel@openembedded.org; Sat, 07 Jul 2007 16:56:46 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1I7Bd1-0004jN-TB
+	for openembedded-devel@openembedded.org; Sat, 07 Jul 2007 16:51:19 +0200
+Received: from host86-131-242-139.range86-131.btcentralplus.com
+	([86.131.242.139]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 07 Jul 2007 16:51:19 +0200
+Received: from koen by host86-131-242-139.range86-131.btcentralplus.com with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 07 Jul 2007 16:51:19 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Sat, 07 Jul 2007 15:51:12 +0100
+Message-ID: <468FA860.5050300@dominion.kabel.utwente.nl>
+References: <E1I75mQ-0005Wr-Px@linuxtogo.org>
+	<142948947.20070707122533@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: host86-131-242-139.range86-131.btcentralplus.com
+User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
+In-Reply-To: <142948947.20070707122533@vanille-media.de>
+X-Enigmail-Version: 0.95.2
+Sender: news <news@sea.gmane.org>
+Subject: Re: [oe-commits] org.oe.dev disapproval of revision '66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,22 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jul 2007 13:14:36 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 07 Jul 2007 14:56:46 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-xora commit wrote:
-> merge of '0d37beef48144a1e6e6f1e015c51e634852fb3a5'
->      and '7ffbdb39a4bb7d635e50844ce0112b7cf860caf9'
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Is anybody really interested in seeing the automatic merges? If not, I
-propose making CIAbot suppressing them (again).
+Dr. Michael Lauer schreef:
+> koen commit wrote:
+>> disapproval of revision '66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
+> 
+> May I request that from now on _every_ disapproval goes hand in hand with a
+> lengthy explanation on oe-devel?
 
-Regards,
+Yes, sorry about that, I wanted to act quickly before people with glibc builds get the
+change, build libiconv and require a build from scratch.
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+The bottom line:
+
+*NEVER* DEPEND on libiconv directly, but on virtual/libiconv, otherwise you break all
+glibc based builds out there
+
+The situation is tricky since uclibc (and maybe newlib) need libiconv, but our glibc build
+can use the internal iconv from libc6.so. That's why we have virtual/libiconv which does
+the right thing automagically.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGj6hgMkyGM64RGpERAhQSAJ9BRu5yEB5IB3aS6s2p/u5IsErOSQCeOL3e
+QazmT2c2fB9En+b0UZkhF4o=
+=qFg1
+-----END PGP SIGNATURE-----
 
 
 
