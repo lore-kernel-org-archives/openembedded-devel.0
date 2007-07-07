@@ -1,32 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1I6vYB-00044M-Vs
-	for openembedded-devel@openembedded.org; Fri, 06 Jul 2007 23:41:16 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1I6vSz-0000mb-A2
-	for openembedded-devel@openembedded.org; Fri, 06 Jul 2007 23:35:53 +0200
-Received: from p54b97bb2.dip.t-dialin.net ([84.185.123.178])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 06 Jul 2007 23:35:53 +0200
-Received: from no2spam by p54b97bb2.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 06 Jul 2007 23:35:53 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 06 Jul 2007 23:35:42 +0200
-Message-ID: <f6mcje$cji$1@sea.gmane.org>
-References: <E1I4QwQ-0002do-J9@linuxtogo.org> <4688C402.5060208@adtelecom.es>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: p54b97bb2.dip.t-dialin.net
-User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
-In-Reply-To: <4688C402.5060208@adtelecom.es>
-Sender: news <news@sea.gmane.org>
-Subject: Re: [oe-commits] org.oe.dev gtkmm: update to 2.10.10. Closes 2544.
+	(envelope-from <mickey@vanille-media.de>) id 1I77Z6-0006UY-7m
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Jul 2007 12:31:04 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 6F76F28C013; Sat,  7 Jul 2007 12:24:27 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ****
+X-Spam-Status: No, score=4.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180157254.adsl.alicedsl.de [85.180.157.254])
+	by srv043.dedi23.de (Postfix) with ESMTP id EBFFD28C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  7 Jul 2007 12:24:24 +0200 (CEST)
+Date: Sat, 7 Jul 2007 12:25:33 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <142948947.20070707122533@vanille-media.de>
+CC: openembedded-devel@lists.openembedded.org
+In-Reply-To: <E1I75mQ-0005Wr-Px@linuxtogo.org>
+References: <E1I75mQ-0005Wr-Px@linuxtogo.org>
+MIME-Version: 1.0
+Subject: Re: [oe-commits] org.oe.dev disapproval of revision '66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,17 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jul 2007 21:41:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 07 Jul 2007 10:31:10 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Joaquim Duran wrote:
-> I don't agree with the change that you've introduced in the dependencies.
+koen commit wrote:
+> disapproval of revision '66573a06c1ee62e38d70a6c82f8d99a41243cd5c'
 
-Let's discuss this at the proper place.
+May I request that from now on _every_ disapproval goes hand in hand with a
+lengthy explanation on oe-devel?
 
-http://bugs.openembedded.org/show_bug.cgi?id=2544#c11
+Regards,
 
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
