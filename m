@@ -1,32 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1I7R6E-0006fh-LW
-	for openembedded-devel@openembedded.org; Sun, 08 Jul 2007 09:22:30 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1I7R0w-0008Mr-Rj
-	for openembedded-devel@openembedded.org; Sun, 08 Jul 2007 09:17:02 +0200
-Received: from host86-131-239-9.range86-131.btcentralplus.com ([86.131.239.9])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 08 Jul 2007 09:17:02 +0200
-Received: from koen by host86-131-239-9.range86-131.btcentralplus.com with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 08 Jul 2007 09:17:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Sun, 08 Jul 2007 08:16:46 +0100
-Message-ID: <f6q30v$s2$1@sea.gmane.org>
-References: <513012886.20070708041151@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: host86-131-239-9.range86-131.btcentralplus.com
-User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
-In-Reply-To: <513012886.20070708041151@gmail.com>
-X-Enigmail-Version: 0.95.2
-Sender: news <news@sea.gmane.org>
+	(envelope-from <mickey@vanille-media.de>) id 1I7SOK-0003T5-Dc
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 Jul 2007 10:45:16 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id C828E28C013; Sun,  8 Jul 2007 10:38:37 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ****
+X-Spam-Status: No, score=4.3 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180146103.adsl.alicedsl.de [85.180.146.103])
+	by srv043.dedi23.de (Postfix) with ESMTP id 2BD0828C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  8 Jul 2007 10:38:35 +0200 (CEST)
+Date: Sun, 8 Jul 2007 10:39:45 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1415629734.20070708103945@vanille-media.de>
+To: Koen Kooi <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <f6q30v$s2$1@sea.gmane.org>
+References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
+MIME-Version: 1.0
 Subject: Re: [RFC] Adding screen dimensions to machine configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,70 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jul 2007 07:22:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 08 Jul 2007 08:45:17 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+>>    Now with formfactor around, I guess it would be nice to use
+>> consistent variable names for the same info. Marcin still suggested to
+>> use MACHINE_ prefix for build-time (i.e. machine config) variables.
+>> So, the exact topic of this RFC is adding
+>> 
+>> MACHINE_DISPLAY_WIDTH_PIXELS=
+>> MACHINE_DISPLAY_HEIGHT_PIXELS=
+>> 
+>> to machine configs.
 
-Paul Sokolovsky schreef:
-> Hello openembedded-devel,
-> 
->   We already discussed issue of providing more exact device screen
-> properties info than currently available screen classes "smallscreen"
-> and "bigscreen". I for one was proponent of staying with those classes
-> instead of hasting with introducing too many screen parameters without
-> proper way of handling them in OE. However, it's just the matter of
-> fact that at least the most basic of them, like screen dimensions are
-> already in use by more than one package (I can point to opie and
-> fbreader out of top of mind), and so far in adhoc manner, so
-> standardizing them would be beneficial.
-> 
->   When discussing this on IRC, Marcin Juszkiewicz pointed me to Poky's
-> formfactor package, designed to query various device properties at
-> runtime (including current screen resolution).
-> http://svn.o-hand.com/view/poky/trunk/meta/packages/formfactor/
++1 from me for that.
 
-Formfactor is a hack that does nothing what our Xserver scripts and HAL+OHM can't do. And
-we were explicitly asked *not* to merge it into OE by someone from o-hand.
+> We can add those without adding formfactor. But what will those setting be for e.g. an
+> nslu2 or efika board?
 
->   I think that it is great tool, and we should merge and leverage it
-> in OE by all means. But it handles only runtime configuration,
+0 -- what else? :D
 
-And we already have sufficient tools inplace to handle that, formfactor just muddies the
-waters. And if you take a closer look at formfactor, you'll notice it's internally
-inconsistent (e.g. dpi = resolution/size, but you need to specify all 3 in formfactor)
+Regards,
 
-
->    Now with formfactor around, I guess it would be nice to use
-> consistent variable names for the same info. Marcin still suggested to
-> use MACHINE_ prefix for build-time (i.e. machine config) variables.
-> So, the exact topic of this RFC is adding
-> 
-> MACHINE_DISPLAY_WIDTH_PIXELS=
-> MACHINE_DISPLAY_HEIGHT_PIXELS=
-> 
-> to machine configs.
-
-We can add those without adding formfactor. But what will those setting be for e.g. an
-nslu2 or efika board?
-
-regards,
-
-Koen
-
-
-
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGkI9eMkyGM64RGpERAlDQAJ0WTX9BbRKn7/3/X054Vl2iYUeVZgCbBLkn
-ado8odEDSAko1n1+LyCj9+E=
-=00Rv
------END PGP SIGNATURE-----
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
