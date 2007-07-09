@@ -1,32 +1,28 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [209.85.134.188] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1I7tTt-0000xv-2I
+	(envelope-from <pmiscml@gmail.com>) id 1I7taB-00019G-Oz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2007 15:40:51 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 7446628C013; Mon,  9 Jul 2007 15:34:00 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.2 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180163073.adsl.alicedsl.de [85.180.163.73])
-	by srv043.dedi23.de (Postfix) with ESMTP id 9C7F828C012
+	Mon, 09 Jul 2007 15:47:19 +0200
+Received: by mu-out-0910.google.com with SMTP id w9so657796mue
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2007 15:33:59 +0200 (CEST)
-Date: Mon, 9 Jul 2007 15:35:13 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
+	Mon, 09 Jul 2007 06:41:44 -0700 (PDT)
+Received: by 10.82.146.14 with SMTP id t14mr8242095bud.1183988504379;
+	Mon, 09 Jul 2007 06:41:44 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.98.21])
+	by mx.google.com with ESMTP id w7sm55043330mue.2007.07.09.06.41.42
+	(version=SSLv3 cipher=OTHER); Mon, 09 Jul 2007 06:41:42 -0700 (PDT)
+Date: Mon, 9 Jul 2007 16:41:28 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
 X-Priority: 3 (Normal)
-Message-ID: <1005211919.20070709153513@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
+Message-ID: <1211634359.20070709164128@gmail.com>
+To: Graeme Gregory <dp@xora.org.uk>
 In-Reply-To: <20070709131744.GC2336@p3n3tr4t0r.internal>
 References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
 	<128309124.20070709154303@gmail.com>
 	<20070709131744.GC2336@p3n3tr4t0r.internal>
 MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [RFC] Adding screen dimensions to machine configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,11 +37,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 13:40:58 -0000
+X-List-Received-Date: Mon, 09 Jul 2007 13:47:20 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Graeme Gregory wrote:
+Hello Graeme,
+
+Monday, July 9, 2007, 4:17:44 PM, you wrote:
+
 > On Mon, Jul 09, 2007 at 03:43:03PM +0300, Paul Sokolovsky wrote:
 >>   As was pointed out, interpretation of those vars should depend on
 >> presence of "screen" in machine features. And yes, then we need to set
@@ -65,22 +64,37 @@ Graeme Gregory wrote:
 >> MACHINE_DISPLAY_WIDTH_PIXELS=480
 >> MACHINE_DISPLAY_HEIGHT_PIXELS=640
 >> 
+
 > The problem with this interpretation is that although spitz boots and looks
 > like it is 640x480 it is in fact 480x640 with rotation. So it may just
 > be a mistake in your example that spitz happens to show up. Or it may be
 > something that has not been considered.
 
-I agree with Paul's "they provide *some default* screen resolution and
-orientation.". Almost all our screen devices can be rotated on-the-fly
-anyway. The MACHINE_DISPLAY_ namespace is mainly UI frameworks and
-applications, as much as native framebuffer rotations and stuff are
-important to know, they're less relevant here.
+That's just low-level details, which would be handled on another
+level. I have specific usecase for this on which I model this initial
+usage: background images for OPIE. So, what would you prefer for
+spitz: having a landscape or portrait background by default? That's
+what should go into those vars. Of course, for other uses we may need
+another interpretation, for example, add function which will
+"normalize" resolution (w >= h for example), or just return largest of
+them, etc.
 
-Regards,
+And rotation may need special support, and then DPI too. Just let's
+start with specific itches first and elaborate on that. Actual pixel
+dimension is the objective parameter, so we're not on the wrong track.
 
-:M:
+> Graeme
+
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
