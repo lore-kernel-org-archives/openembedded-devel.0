@@ -1,25 +1,32 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1I7vUf-0003Ta-8y
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2007 17:49:45 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1I7vUC-0002Ox-9D
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2007 17:49:16 +0200
-Message-ID: <469257C7.2040104@kernelconcepts.de>
-Date: Mon, 09 Jul 2007 17:44:07 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <513012886.20070708041151@gmail.com>
-	<f6q30v$s2$1@sea.gmane.org>	<128309124.20070709154303@gmail.com>	<20070709131744.GC2336@p3n3tr4t0r.internal>	<1005211919.20070709153513@vanille-media.de>	<20070709134256.GD2336@p3n3tr4t0r.internal>	<13810026301.20070709155245@vanille-media.de>	<20070709140338.GE2336@p3n3tr4t0r.internal>
-	<4310707680.20070709161925@vanille-media.de>
-In-Reply-To: <4310707680.20070709161925@vanille-media.de>
-X-Enigmail-Version: 0.94.2.0
+	(envelope-from <rpurdie@rpsys.net>) id 1I7vfx-0003f9-3m
+	for openembedded-devel@openembedded.org; Mon, 09 Jul 2007 18:01:31 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l69FtkPv029764
+	for <openembedded-devel@openembedded.org>;
+	Mon, 9 Jul 2007 16:55:46 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29577-03 for <openembedded-devel@openembedded.org>;
+	Mon,  9 Jul 2007 16:55:40 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l69FtdRu029742
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 9 Jul 2007 16:55:39 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <128309124.20070709154303@gmail.com>
+References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
+	<128309124.20070709154303@gmail.com>
+Date: Mon, 09 Jul 2007 16:55:38 +0100
+Message-Id: <1183996538.5757.55.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: [RFC] Adding screen dimensions to machine configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,54 +41,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 15:49:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 09 Jul 2007 16:01:33 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
-
-Dr. Michael Lauer schrieb:
->> I just worry what happens to machines without screens but that can have
->> gfx cards added.
+On Mon, 2007-07-09 at 15:43 +0300, Paul Sokolovsky wrote:
+>   Oh, I guess it's the other way around - it's a simple config and
+> shell script which can do things for which whole big daemons with
+> gross dependencies are required ;-).
 > 
-> Which is almost all equipment with USB host.
+>   More seriously, it makes no sense to ignore the fact that X with
+> freedesktop.org's novelties is not the only and won't become the only
+> choice for embedded GUI. Many adhoc toolkits pop up, and some of them
+> will be leveraged by vendors and it makes no sense to say that OE is
+> not place for them (though community distros are of course much less
+> interested in them). It would be nice to anticipate the need for a
+> lightweight, flexible, and consistent way to query device params for
+> them.
 
-I think it is fine to assume that these devices that do not have a built-in
-screen but support one by adding a graphics device can have a more or less
-arbitrary resolution. That means that you assume a common resolution like
-1024x768 and if you really have a special need you would override these values
-anyway. For most devices which usually have no screen or a built-in one you
-would be quite safe with one setting. For the others just choose a big default
-which should bee correct in most cases and for things like background images it
-is usually better to ship a big one and scale it down instead of shipping a too
-small one.
+Agreed.
 
->>  By the current level of thought behind these variables
->> a divide by zero is inevitable.
+> > And
+> > we were explicitly asked *not* to merge it into OE by someone from o-hand.
 > 
-> Ok, how about VGA being the default?
+>    Pity.
 
-That's fine as long you do not have this set if you do not have the screen
-feature enabled, otherwise you might pull in big backgrounds and similar stuff
-for no reason.
+I'm not going to stop anyone, it just at least needed discussion which
+is now happening.
 
-> I don't think so. What applications care about is if portrait or
-> landscape is the common default and this is already encoded in HEIGHT
-> and WIDTH.
+> >>   I think that it is great tool, and we should merge and leverage it
+> >> in OE by all means. But it handles only runtime configuration,
+> 
+> > And we already have sufficient tools inplace to handle that, formfactor just muddies the
+> > waters.
+> 
+>   Hopefully cleans up, though yes, it opens question that GPE scripts
+> would be needed converted to it, etc.
 
-Exactly... and on rotatable displays you need some support from the applications
-anyway.
+I guess GPE would need to decide this and the OE needs to decide whether
+to follow its own approach or patch GPE to use some internal OE method.
 
-Greetings
+>   Also a note of exact semantics of those vars - they provide *some
+> default* screen resolution and orientation. Actually not some, but the
+> most appropriate after-install default. So, in particular,
+> notebook-style keyboarded devices would have:
+> 
+> MACHINE_DISPLAY_WIDTH_PIXELS=640
+> MACHINE_DISPLAY_HEIGHT_PIXELS=480
+> 
+> A device with vertical PDA layout would have
+> 
+> MACHINE_DISPLAY_WIDTH_PIXELS=480
+> MACHINE_DISPLAY_HEIGHT_PIXELS=640
 
-Florian
+The intent was to provide the hardware resolution the device should
+default to along with any rotation parameter.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+For spitz, this is 480x640 with 270 degree rotation.
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Since the c7x0 can rotate in hardware, that defaults to 640x480 with no
+rotation.
+
+My point is that the above is the default hardware resolution which has
+to be combined with a rotation parameter to be fully meaningful.
+
+Cheers,
+
+Richard
+
+
 
 
