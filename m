@@ -1,22 +1,28 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [132.166.172.103] (helo=sainfoin.extra.cea.fr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1I7lwB-0002md-LT
-	for openembedded-devel@openembedded.org; Mon, 09 Jul 2007 07:37:32 +0200
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B016A5012 for openembedded-devel@openembedded.org;
-	Mon, 9 Jul 2007 07:30:55 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Mon, 9 Jul 2007 08:31:53 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHOEKELJAA.skoroneos@digital-opsis.com>
+	(envelope-from <gonzague.reydet@cea.fr>) id 1I7nja-00042h-RN
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Jul 2007 09:32:42 +0200
+Received: from nephilia.intra.cea.fr (nephilia.intra.cea.fr [132.166.88.33])
+	by sainfoin.extra.cea.fr (8.13.7/8.13.4/CEAnet-Internet.7.0) with ESMTP
+	id l697R42q029188 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Jul 2007 09:27:05 +0200 (MEST)
+Received: from muguet2.intra.cea.fr (muguet2.intra.cea.fr [132.166.192.7])
+	by nephilia.intra.cea.fr (8.13.8/8.13.8) with ESMTP id l697R4Rc012652
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Jul 2007 09:27:04 +0200 (envelope-from gonzague.reydet@cea.fr)
+Received: from [132.166.133.116] (is003072.saclay.cea.fr [132.166.133.116])
+	by muguet2.intra.cea.fr (8.13.8/8.13.8/CEAnet-Intranet-out-1.0) with
+	ESMTP id l697R3QI005479
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Jul 2007 09:27:03 +0200
+Message-ID: <4691E281.7060506@cea.fr>
+Date: Mon, 09 Jul 2007 09:23:45 +0200
+From: Gonzague Reydet <gonzague.reydet@cea.fr>
+User-Agent: Icedove 1.5.0.12 (X11/20070607)
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-Importance: Normal
-In-Reply-To: <46918727.60103@whitby.id.au>
-Subject: Re: [RFC] Adding screen dimensions to machine configs
+To: openembedded-devel@lists.openembedded.org
+Subject: perl-native-5.8.3-r0: task do_compile failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,60 +36,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 05:37:33 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Mon, 09 Jul 2007 07:32:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-> > We can add those without adding formfactor. But what will those
-> setting be for e.g. an
-> > nslu2 or efika board?
->
-> Since those MACHINES will not have the 'screen' machine_feature enabled,
-> it doesn't really matter, does it?
->
+Hi,
 
-As i see it there are 3 types of "machines"
-1) Those without a screen (i.e nslu)
-2) Those that can be with or without a screen (efika, a pc) depending on
-configuration
-3) Those with screen (all the rest) :)
+I have an error when compiling the perl-native package:
 
-The "problem" might be with those on category 2 as you can't know in advance
-if they have screen or what the size of that will be.
-But one could always specify these parameters later (local.conf or distro
-settings)
+make[1]: Entering directory 
+`/home/gonzague/Wifibot/nylon-build-stable-1.0/tmp/work/perl-native-5.8.3-r0/perl-5.8.3/ext/IO' 
 
-Other than that i am also in favour of the proposued naming
-
-Stelios S. Koroneos
-
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
-
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
-> Rod Whitby
-> Sent: Monday, July 09, 2007 3:54 AM
-> To: openembedded-devel@openembedded.org
-> Subject: Re: [oe] [RFC] Adding screen dimensions to machine configs
->
->
-> >>> MACHINE_DISPLAY_WIDTH_PIXELS=
-> >>> MACHINE_DISPLAY_HEIGHT_PIXELS=
-> >>>
-> >>> to machine configs.
-> >
-> -- Rod
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+../../miniperl "-I../../lib" "-I../../lib" ../../lib/ExtUtils/xsubpp  
+-typemap ../../lib/ExtUtils/typemap  IO.xs > IO.xsc && mv IO.xsc IO.c
+ccache gcc  -c   -D_REENTRANT -D_GNU_SOURCE -DTHREADS_HAVE_PIDS 
+-fno-strict-aliasing -I/usr/local/include -D_LARGEFILE_SOURCE 
+-D_FILE_OFFSET_BITS=64 -O2   -DVERSION=\"1.21\" -DXS_VERSION=\"1.21\" 
+-fpic "-I../.."   IO.c
+IO.xs: In function 'XS_IO__Poll__poll':
+IO.xs:239: error: invalid application of 'sizeof' to incomplete type 
+'struct pollfd'
+IO.xs:243: error: invalid use of undefined type 'struct pollfd'
+IO.xs:243: error: dereferencing pointer to incomplete type
+IO.xs:245: error: invalid use of undefined type 'struct pollfd'
+IO.xs:245: error: dereferencing pointer to incomplete type
+IO.xs:247: error: invalid use of undefined type 'struct pollfd'
+IO.xs:247: error: dereferencing pointer to incomplete type
+IO.xs:251: error: invalid use of undefined type 'struct pollfd'
+IO.xs:251: error: dereferencing pointer to incomplete type
+IO.xs:252: error: invalid use of undefined type 'struct pollfd'
+IO.xs:252: error: dereferencing pointer to incomplete type
+make[1]: *** [IO.o] Error 1
+make[1]: Leaving directory 
+`/home/gonzague/Wifibot/nylon-build-stable-1.0/tmp/work/perl-native-5.8.3-r0/perl-5.8.3/ext/IO' 
 
 
+Does any body have any idea?
+
+Regards,
+Gonzague Reydet.
 
 
