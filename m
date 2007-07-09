@@ -1,36 +1,33 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1I81Pd-0008U4-T8
-	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 00:08:58 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l69M3LI2029368
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1I81SI-00009f-2S
+	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 00:11:45 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1I81Mr-0001Wv-2k
+	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 00:06:05 +0200
+Received: from p54b972b0.dip.t-dialin.net ([84.185.114.176])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 10 Jul 2007 00:06:05 +0200
+Received: from no2spam by p54b972b0.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 9 Jul 2007 23:03:21 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 29028-02 for <openembedded-devel@openembedded.org>;
-	Mon,  9 Jul 2007 23:03:18 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l69M3Gqd029359
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 9 Jul 2007 23:03:17 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Tue, 10 Jul 2007 00:06:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <f6u5sj$jt6$1@sea.gmane.org>
-References: <513012886.20070708041151@gmail.com>
-	<4310707680.20070709161925@vanille-media.de>
-	<20070709142544.GF2336@p3n3tr4t0r.internal>
-	<200707091715.11794.openembedded@hrw.one.pl>
-	<f6u5sj$jt6$1@sea.gmane.org>
-Date: Mon, 09 Jul 2007 23:03:16 +0100
-Message-Id: <1184018596.5757.83.camel@localhost.localdomain>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 10 Jul 2007 00:05:52 +0200
+Message-ID: <f6ubg3$97c$1@sea.gmane.org>
+References: <E1I7yE2-0000V0-1x@linuxtogo.org>	<126613333.20070709215755@vanille-media.de>
+	<f6u4pj$fk0$1@sea.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [RFC] Adding screen dimensions to machine configs
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: p54b972b0.dip.t-dialin.net
+User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
+In-Reply-To: <f6u4pj$fk0$1@sea.gmane.org>
+Sender: news <news@sea.gmane.org>
+Subject: Re: dbg packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,37 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 22:08:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 Jul 2007 22:11:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2007-07-09 at 21:30 +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Marcin Juszkiewicz schreef:
-> > ===========================================================================
-> > ARGS="$ARGS -screen ${DISPLAY_WIDTH_PIXELS}x${DISPLAY_HEIGHT_PIXELS}@${DISPLAY_ORIENTATION}x${DISPLAY_BPP}"
-> > 
-> > if [ ! -z "$DISPLAY_DPI" ]; then
-> >         ARGS="$ARGS -dpi $DISPLAY_DPI"
-> > fi
-> > ===========================================================================
-> > 
-> > This is Poky version of that part XServer script - no machine related code 
-> > at all. Of course it support only machines with formfactor defines.
-> 
-> So you have the exact same problem, but in a different place. And as a side-effect, the
-> image can't be shared between machines anymore, since only one config is present in
-> formfactor.
+Koen Kooi wrote:
+> Packaging is tedious, but let's not automate doing the wrong thing ;)
 
-With formfactor as is, no. Pull the code from zaurusd for machine
-detection and you can (it sets up a symlink to the correct machine
-config upon first boot).
+I certainly agree with the general statement.  But I wonder if in this
+case it would not be OK to have just one big -dbg package per bb file
+even if there are more subpackages.  Going granular is certainly nice
+but I wonder if just having a dbg package suffices even if contains more
+than necessary.  I guess the -dbg packages should not be necessary most
+of the time.
 
-Cheers,
-
-Richard
+My vote would go for "bigger size" if it means "easier packaging right
+now instead of later" unless that entails "something breaks".
 
 
 
