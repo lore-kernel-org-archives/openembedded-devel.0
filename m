@@ -1,33 +1,34 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1I7zVq-0006Z0-U1
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2007 22:07:14 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 5982628C013; Mon,  9 Jul 2007 22:00:24 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=3.0 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180163073.adsl.alicedsl.de [85.180.163.73])
-	by srv043.dedi23.de (Postfix) with ESMTP id CFC0028C012;
-	Mon,  9 Jul 2007 22:00:21 +0200 (CEST)
-Date: Mon, 9 Jul 2007 22:01:36 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <849361116.20070709220136@vanille-media.de>
-To: Richard Purdie <rpurdie@rpsys.net>
-In-Reply-To: <1183996538.5757.55.camel@localhost.localdomain>
-References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
-	<128309124.20070709154303@gmail.com>
-	<1183996538.5757.55.camel@localhost.localdomain>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] Adding screen dimensions to machine configs
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1I7zfa-0006tL-7t
+	for openembedded-devel@openembedded.org; Mon, 09 Jul 2007 22:17:18 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1I7za7-0007s0-2l
+	for openembedded-devel@openembedded.org; Mon, 09 Jul 2007 22:11:39 +0200
+Received: from host86-131-236-115.range86-131.btcentralplus.com
+	([86.131.236.115]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 09 Jul 2007 22:11:39 +0200
+Received: from koen by host86-131-236-115.range86-131.btcentralplus.com with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 09 Jul 2007 22:11:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Mon, 09 Jul 2007 21:11:31 +0100
+Message-ID: <f6u4pj$fk0$1@sea.gmane.org>
+References: <E1I7yE2-0000V0-1x@linuxtogo.org>
+	<126613333.20070709215755@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: host86-131-236-115.range86-131.btcentralplus.com
+User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
+In-Reply-To: <126613333.20070709215755@vanille-media.de>
+X-Enigmail-Version: 0.95.2
+Sender: news <news@sea.gmane.org>
+Subject: Re: dbg packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,28 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 20:07:15 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 09 Jul 2007 20:17:18 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-To summarize:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-It looks like we can agree to adding information to the
-MACHINE_DISPLAY_ namespace.
+Dr. Michael Lauer schreef:
+> koen commit wrote:
+>> wireshark: fix -dbg
+> [...]
+>> +
+>> +FILES_${PN}-dbg += "${libdir}/wireshark/plugins/${PV}/.debug"
+>> +
+>> +
+> 
+> We keep adding this stuff more and more -- since more and more
+> packages go from a monolithic state to an extensible -- and
+> I don't like having to specify this all over. Can't we get the dbg
+> package to pick up all .debug directories automatically?
 
-However, we're undecided regarding the semantics. Some of think the
-physical hardware information need to be there, some of us want the
-logical (including kernel-level gfx hardware rotation), some of us
-want a high-level meaning.
+In this case I'd say "make wireshark even more granular by subpackaging its 2 shlibs and
+plugins", which would not want every .debug directory in ${PN}-dbg.
 
-How do we proceed now? Collect more arguments in favour or against or
-shall we vote? Who is having a voice?
+In the general case I'm not sure if we want something automagically added to ${PN}-dbg or
+not, since it is likely to be wrong in a lot of cases. So I'm not sure if something
+automagically would cause more or less work for packages I want to add/maintain/fix.
 
-Regards,
+What I would like to see implemented is some heuristic that puts .debug/<foo> in the -dbg
+(sub)package that is named after the (sub)package that has <foo> (e.g. create
+wireshark-plugin-<foo>-dbg automagically after finding <foo> in wireshark-plugin-<foo>).
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Same goes for lib<foo>-dev automagically getting lib<foo>.{so,a,la,pc}, headers will have
+to get sorted by hand.
+
+Packaging is tedious, but let's not automate doing the wrong thing ;)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGkpZzMkyGM64RGpERAnhTAJsGakQCTjzec/sLVBoA9Zb/S6D7VwCdE8Qz
+pnvest3WtETPsF4K93kWHWI=
+=FrV+
+-----END PGP SIGNATURE-----
 
 
 
