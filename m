@@ -1,23 +1,34 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1I7zlq-0002X7-2a
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2007 22:23:46 +0200
-Received: from cimmeria.hyboria ([::ffff:85.210.46.98])
-	(AUTH: PLAIN dp, TLS: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Mon, 09 Jul 2007 21:18:09 +0100
-	id 0003090A.46929801.00005987
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 9 Jul 2007 21:19:03 +0100
-User-Agent: KMail/1.9.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1I7zox-0002br-7N
+	for openembedded-devel@openembedded.org; Mon, 09 Jul 2007 22:26:59 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1I7zjW-0000HU-Kf
+	for openembedded-devel@openembedded.org; Mon, 09 Jul 2007 22:21:22 +0200
+Received: from host86-131-236-115.range86-131.btcentralplus.com
+	([86.131.236.115]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 09 Jul 2007 22:21:22 +0200
+Received: from koen by host86-131-236-115.range86-131.btcentralplus.com with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 09 Jul 2007 22:21:22 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Mon, 09 Jul 2007 21:21:14 +0100
+Message-ID: <f6u5bq$ht5$1@sea.gmane.org>
 References: <513012886.20070708041151@gmail.com>
-	<1183996538.5757.55.camel@localhost.localdomain>
+	<f6q30v$s2$1@sea.gmane.org>	<128309124.20070709154303@gmail.com>	<1183996538.5757.55.camel@localhost.localdomain>
 	<849361116.20070709220136@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: host86-131-236-115.range86-131.btcentralplus.com
+User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
 In-Reply-To: <849361116.20070709220136@vanille-media.de>
-MIME-Version: 1.0
-Message-Id: <200707092119.03823.dp@xora.org.uk>
-Cc: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Enigmail-Version: 0.95.2
+Sender: news <news@sea.gmane.org>
 Subject: Re: [RFC] Adding screen dimensions to machine configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,45 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 20:23:46 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 09 Jul 2007 20:26:59 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Monday 09 July 2007 21:01:36 Dr. Michael Lauer wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Dr. Michael Lauer schreef:
 > To summarize:
->
+> 
 > It looks like we can agree to adding information to the
 > MACHINE_DISPLAY_ namespace.
->
+> 
 > However, we're undecided regarding the semantics. Some of think the
 > physical hardware information need to be there, some of us want the
 > logical (including kernel-level gfx hardware rotation), some of us
 > want a high-level meaning.
->
-> How do we proceed now? Collect more arguments in favour or against or
-> shall we vote? Who is having a voice?
->
-I would vote for using the version that gives the most information and 
-therefore the other information can be derived.
 
-WIDTH=480
-HEIGHT=640
-ROTATION=270
+and how about linux kernel 2.4 and 2.6 (or even 2.6.ancient and 2.6.recent) having
+different opinions on rotation, or maybe worse, having rotation specified via CMDLINE?
 
-You can infer that inside your opie/x11/other system you have a 640x480 
-landscape.
+I think OE should specify the hardware (since it's in the MACHINE namespace anyway) and
+have userspace deal with rotation and stuff.
 
-But from
+The main question remains: what are people going to (ab)use this for? If it's just for
+opie backgrounds I don't see why adding 3 or more lines to each and every machine is less
+work than adding one machine override to the background package.
 
-WIDTH=640
-HEIGHT=480
+regards,
 
-You cannot infer the rotation.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-So I think having the physical parameters including rotation is essential.
+iD4DBQFGkpi6MkyGM64RGpERAq/AAJi6NzXwnUoFlVytANkXA8voyPaTAJ4mWblB
+DuMuNnxqg1h/cn7GBORPkw==
+=Pq/i
+-----END PGP SIGNATURE-----
 
-Graeme
 
 
