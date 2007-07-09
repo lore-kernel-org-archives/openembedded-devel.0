@@ -1,36 +1,21 @@
-Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1I7uUx-0006im-TC
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2007 16:45:59 +0200
-Received: by ug-out-1314.google.com with SMTP id i24so1160489ugd
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2007 07:40:24 -0700 (PDT)
-Received: by 10.82.178.11 with SMTP id a11mr8335709buf.1183992018274;
-	Mon, 09 Jul 2007 07:40:18 -0700 (PDT)
-Received: from ?192.168.20.110? ( [82.193.98.21])
-	by mx.google.com with ESMTP id y2sm55405310mug.2007.07.09.07.40.16
-	(version=SSLv3 cipher=OTHER); Mon, 09 Jul 2007 07:40:17 -0700 (PDT)
-Date: Mon, 9 Jul 2007 17:40:03 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
-X-Priority: 3 (Normal)
-Message-ID: <716172870.20070709174003@gmail.com>
-To: Graeme Gregory <dp@xora.org.uk>
-In-Reply-To: <20070709142544.GF2336@p3n3tr4t0r.internal>
-References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
-	<128309124.20070709154303@gmail.com>
-	<20070709131744.GC2336@p3n3tr4t0r.internal>
-	<1005211919.20070709153513@vanille-media.de>
-	<20070709134256.GD2336@p3n3tr4t0r.internal>
-	<13810026301.20070709155245@vanille-media.de>
-	<20070709140338.GE2336@p3n3tr4t0r.internal>
-	<4310707680.20070709161925@vanille-media.de>
-	<20070709142544.GF2336@p3n3tr4t0r.internal>
+	(envelope-from <openembedded@hrw.one.pl>) id 1I7uXV-0006nZ-S6
+	for openembedded-devel@openembedded.org; Mon, 09 Jul 2007 16:48:37 +0200
+Received: (qmail 5634 invoked by uid 813007); 9 Jul 2007 14:43:02 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 9 Jul 2007 14:43:02 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 9 Jul 2007 16:42:59 +0200
+User-Agent: KMail/1.9.7
+References: <468C7B11.8050809@openhardware.net>
+In-Reply-To: <468C7B11.8050809@openhardware.net>
 MIME-Version: 1.0
-Cc: "Dr. Michael Lauer" <mickey@vanille-media.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] Adding screen dimensions to machine configs
+Message-Id: <200707091643.00611.openembedded@hrw.one.pl>
+Subject: Re: howto? Build something but not deploy in root image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,61 +29,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 14:46:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Jul 2007 14:48:38 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello Graeme,
+Dnia czwartek, 5 lipca 2007, Tom Walsh napisa=B3:
 
-Monday, July 9, 2007, 5:25:44 PM, you wrote:
+> I have several parts to this project that must be built during the
+> bitbake process (bootstrap-image), but are not part of the target
+> filesystem image.  The total system parts are:
+>
+> * bootloader - ARM - resides in Flash.
+> * kernel - ARM - resides in Flash.
+> * target rootfs image - ARM - resides on MMC card.
+> * Flash Utility - native (x86) - runs on host computer.
 
-> On Mon, Jul 09, 2007 at 04:19:25PM +0200, Dr. Michael Lauer wrote:
->> > Maybe a MACHINE_DEFAULT_ROTATION is also needed.
->> 
->> I don't think so. What applications care about is if portrait or
->> landscape is the common default and this is already encoded in HEIGHT
->> and WIDTH.
->> 
-> Applications do care, a short snippet of /etc/X11/Xserver
+In machine config add:
 
->         "SHARP Shepherd" | "SHARP Husky" | "SHARP Corgi")
->                 ARGS="$ARGS -dpi 200 -rgba rgb" ;;
->         "SHARP Spitz" | "SHARP Akita" | "SHARP Borzoi")
->                 ARGS="$ARGS -dpi 200 -rgba rgb -screen 480x640@270" ;;
+IMAGEDEPENDS =3D "bootloader flash-utility-native"
 
-> Why restrict yourself to the simple usecase of opie backgrounds when
-> the information could be used in far better ways.
+Basically it should be MACHINE_EXTRA_DEPENDS but we do not support it yet=20
+properly.
 
-  So you see, why I was so enthusiastic about that formfactor thingy,
-right? ;-)
+> The only thing that I need in the root filesystem (tmp/rootfs/) is the
+> packages I named from the local conf files.=20
 
+Create own image recipe and add those packages to RDEPENDS and=20
+PACKAGE_INSTALL.
 
-> If this information was taken from MACHINE_ variables then a large chunk
-> of this case statement could be removed. But the way you want to do it
-> the information is in machine.conf, xserver-common somwhere, and a variety
-> of other places. And all because you refuse to use real information but
-> some pre-parsed info that is narrowly defined for one application.
+> As to the bootloader, it comes in two sections (files), these are
+> programmed by the Flash Utility into the target system.  The bootloader
+> is not needed in the root filesystem.
 
-  That's common problem of community discussions - they become
-ontological arguments. And we discussed matter of screen size in
-particular and other machine feature in general many times already.
-Time to start with something, that's idea here ;-). I strongly believe
-that we won't stop there, but go on.
+> The problem is not getting these things built, but preventing them from
+> being installed in the tmp/rootfs/ filesystem or tarball.  They should
+> only go into tmp/deploy/image/, which  I currently have them going
+> into... =20
 
-  As for xserver-common, it's pretty simple, not we (OE) maintain it,
-but GPE project, and they should be consulted if there're ready to
-give away hardware param detection to standalone hardware
-detection script. So again, not all can happen immediately, but I
-really glad people care about this (because it was pain in the neck
-for me all the time).
+Look at uboot/u-boot* recipes and their do_deploy() tasks which copy=20
+bootloader into tmp/deploy/images/ dir.
+
+> However, the bitbake system assumes that anything that is=20
+> packaged, must be deployed into the root filesystem!?
+
+No. Image is built from packages, but from selected ones only.
+
+> How do you build a bootloader that resides in Flash and doesn't get
+> stuck into the filesystem image?  The same would hold true for the
+> native (linux PC) app which flashes the target memory.
+
+In their recipes add do_deploy() task which copies them to=20
+tmp/deploy/images/ dir.
 
 
-> Graeme
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
+     Free speech includes the right not to listen, if not interested=20
+                                                [Robert A. Heinlein]
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
 
 
 
