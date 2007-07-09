@@ -1,33 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.111.4.26] (helo=out2.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1I7Xou-00073i-BD
-	for openembedded-devel@openembedded.org; Sun, 08 Jul 2007 16:33:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l68ERZpa006200
-	for <openembedded-devel@openembedded.org>;
-	Sun, 8 Jul 2007 15:27:35 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 06034-03 for <openembedded-devel@openembedded.org>;
-	Sun,  8 Jul 2007 15:27:32 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l68ERTmd006184
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Sun, 8 Jul 2007 15:27:29 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1183896051.5647.24.camel@utx.lan>
+	(envelope-from <rod@whitby.id.au>) id 1I7hdw-0003ew-38
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Jul 2007 03:02:27 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 71A066D0B
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  8 Jul 2007 20:56:52 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Sun, 08 Jul 2007 20:56:52 -0400
+X-Sasl-enc: ERyUYaOK9z5gHvpks/iukRTGQ28Kvfq1KmS6ZpQxLaCL 1183942610
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id 241381B1EC
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  8 Jul 2007 20:56:49 -0400 (EDT)
+Message-ID: <46918727.60103@whitby.id.au>
+Date: Mon, 09 Jul 2007 10:23:59 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.12 (Windows/20070509)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
 References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
-	<1183886795.6407.15.camel@localhost.localdomain>
-	<1183896051.5647.24.camel@utx.lan>
-Date: Sun, 08 Jul 2007 15:27:28 +0100
-Message-Id: <1183904848.6407.33.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+In-Reply-To: <f6q30v$s2$1@sea.gmane.org>
 Subject: Re: [RFC] Adding screen dimensions to machine configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,50 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jul 2007 14:33:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 Jul 2007 01:02:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2007-07-08 at 14:00 +0200, Stanislav Brabec wrote:
-> Richard Purdie wrote:
-> > The ideas in formfactor are directly lifted from zaurusd. I still wish
-> > zaurusd could become a more generic kind of glue program like the fabled
-> > devmand should have been but I can't be the person to do that.
+>>> MACHINE_DISPLAY_WIDTH_PIXELS=
+>>> MACHINE_DISPLAY_HEIGHT_PIXELS=
+>>>
+>>> to machine configs.
 > 
-> On my opinion shell script handled events are very ineffective solution.
-> It's easy to program it, but it is ugly and slow. For example, look what
-> happens at headphones removal event: Loading shell interpreter, parsing
-> script, calling alsactl, writing state to /etc, modifying this text
-> config by sed, writing it back, calling alsactl again. Think about
-> millions of obsolete machine instructions and also obsolete /etc write
-> (one flash cycle or one obsolete start of HDD).
+> We can add those without adding formfactor. But what will those setting be for e.g. an
+> nslu2 or efika board?
 
-This is a tangent to the original point but yes, shell isn't the most
-efficient way to do this. FWIW, none of the events handled in zaurusd
-needs massive amounts of efficiency and it did need something easy to
-program/hack as when it was written, it was meant as a prototype and
-hence was subject to change.
+Since those MACHINES will not have the 'screen' machine_feature enabled,
+it doesn't really matter, does it?
 
-> Desktop systems (and devmand proposal) use HAL -> D-BUS -> D-BUS enabled
-> app. I guess it's the right way, which prevents calling a bunch of
-> scripts for each single event, and instead of it introduces "listen what
-> you need, get event, do what you should". Single purpose monitoring
-> daemons can turn into D-BUS event providers, applications or action
-> daemons can listen and react on whatever they need.
-> 
-> In upper mentioned example one daemon can listen to keyboard+jack events
-> and send it to D-BUS, another daemon linked with alsa will list these
-> events and modify mixer directly.
-
-It you look through the archives I've always hinted it would evolve to
-use dbus. With the current playing field, it would make sense to work
-with OHM for that. Where I disagree with OHM is about the need for a
-source for device specific data like dpi. keyboard location etc :-(.
-
-Regards,
-
-Richard
-
-
+-- Rod
 
 
