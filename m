@@ -1,28 +1,23 @@
-Received: from [132.166.172.103] (helo=sainfoin.extra.cea.fr)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gonzague.reydet@cea.fr>) id 1I7nja-00042h-RN
+	(envelope-from <zecke@selfish.org>) id 1I7o5O-0004Ol-Po
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2007 09:32:42 +0200
-Received: from nephilia.intra.cea.fr (nephilia.intra.cea.fr [132.166.88.33])
-	by sainfoin.extra.cea.fr (8.13.7/8.13.4/CEAnet-Internet.7.0) with ESMTP
-	id l697R42q029188 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Jul 2007 09:27:05 +0200 (MEST)
-Received: from muguet2.intra.cea.fr (muguet2.intra.cea.fr [132.166.192.7])
-	by nephilia.intra.cea.fr (8.13.8/8.13.8) with ESMTP id l697R4Rc012652
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Jul 2007 09:27:04 +0200 (envelope-from gonzague.reydet@cea.fr)
-Received: from [132.166.133.116] (is003072.saclay.cea.fr [132.166.133.116])
-	by muguet2.intra.cea.fr (8.13.8/8.13.8/CEAnet-Intranet-out-1.0) with
-	ESMTP id l697R3QI005479
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Jul 2007 09:27:03 +0200
-Message-ID: <4691E281.7060506@cea.fr>
-Date: Mon, 09 Jul 2007 09:23:45 +0200
-From: Gonzague Reydet <gonzague.reydet@cea.fr>
-User-Agent: Icedove 1.5.0.12 (X11/20070607)
-MIME-Version: 1.0
+	Mon, 09 Jul 2007 09:55:10 +0200
+Received: from rosine155.inf.fu-berlin.de ([160.45.116.155])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1I7o01-00037Y-RV
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Jul 2007 09:49:37 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <4691E281.7060506@cea.fr>
+References: <4691E281.7060506@cea.fr>
+Message-Id: <A4736B37-854E-4977-9A37-156726E33487@selfish.org>
+From: Holger Freyther <zecke@selfish.org>
+Date: Mon, 9 Jul 2007 09:49:31 +0200
 To: openembedded-devel@lists.openembedded.org
-Subject: perl-native-5.8.3-r0: task do_compile failed
+X-Mailer: Apple Mail (2.752.3)
+Subject: Re: perl-native-5.8.3-r0: task do_compile failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,44 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 07:32:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 09 Jul 2007 07:55:10 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
+
+
+Am 09.07.2007 um 09:23 schrieb Gonzague Reydet:
+
+> Hi,
+>
+> I have an error when compiling the perl-native package:
 
 Hi,
 
-I have an error when compiling the perl-native package:
+do it like the rest and please file a bug report. As this is a - 
+native package it would be interesting to get the name of your host  
+distribution, the version of your libc, gcc, etc.
 
-make[1]: Entering directory 
-`/home/gonzague/Wifibot/nylon-build-stable-1.0/tmp/work/perl-native-5.8.3-r0/perl-5.8.3/ext/IO' 
+Bugs can be filed at http://bugs.openembedded.org, and if you think  
+your bug is unanswered poke us at #oe in the freenode net.
 
-../../miniperl "-I../../lib" "-I../../lib" ../../lib/ExtUtils/xsubpp  
--typemap ../../lib/ExtUtils/typemap  IO.xs > IO.xsc && mv IO.xsc IO.c
-ccache gcc  -c   -D_REENTRANT -D_GNU_SOURCE -DTHREADS_HAVE_PIDS 
--fno-strict-aliasing -I/usr/local/include -D_LARGEFILE_SOURCE 
--D_FILE_OFFSET_BITS=64 -O2   -DVERSION=\"1.21\" -DXS_VERSION=\"1.21\" 
--fpic "-I../.."   IO.c
-IO.xs: In function 'XS_IO__Poll__poll':
-IO.xs:239: error: invalid application of 'sizeof' to incomplete type 
-'struct pollfd'
-IO.xs:243: error: invalid use of undefined type 'struct pollfd'
-IO.xs:243: error: dereferencing pointer to incomplete type
-IO.xs:245: error: invalid use of undefined type 'struct pollfd'
-IO.xs:245: error: dereferencing pointer to incomplete type
-IO.xs:247: error: invalid use of undefined type 'struct pollfd'
-IO.xs:247: error: dereferencing pointer to incomplete type
-IO.xs:251: error: invalid use of undefined type 'struct pollfd'
-IO.xs:251: error: dereferencing pointer to incomplete type
-IO.xs:252: error: invalid use of undefined type 'struct pollfd'
-IO.xs:252: error: dereferencing pointer to incomplete type
-make[1]: *** [IO.o] Error 1
-make[1]: Leaving directory 
-`/home/gonzague/Wifibot/nylon-build-stable-1.0/tmp/work/perl-native-5.8.3-r0/perl-5.8.3/ext/IO' 
-
-
-Does any body have any idea?
-
-Regards,
-Gonzague Reydet.
+kind regards
+	z.
 
 
