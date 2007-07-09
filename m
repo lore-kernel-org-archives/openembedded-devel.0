@@ -1,33 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.233.184.227] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1I81SI-00009f-2S
-	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 00:11:45 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1I81Mr-0001Wv-2k
-	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 00:06:05 +0200
-Received: from p54b972b0.dip.t-dialin.net ([84.185.114.176])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 10 Jul 2007 00:06:05 +0200
-Received: from no2spam by p54b972b0.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Jul 2007 00:06:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 10 Jul 2007 00:05:52 +0200
-Message-ID: <f6ubg3$97c$1@sea.gmane.org>
-References: <E1I7yE2-0000V0-1x@linuxtogo.org>	<126613333.20070709215755@vanille-media.de>
-	<f6u4pj$fk0$1@sea.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: p54b972b0.dip.t-dialin.net
-User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
-In-Reply-To: <f6u4pj$fk0$1@sea.gmane.org>
-Sender: news <news@sea.gmane.org>
-Subject: Re: dbg packages
+	(envelope-from <pmiscml@gmail.com>) id 1I82Bh-0004vj-8y
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Jul 2007 00:58:37 +0200
+Received: by wr-out-0506.google.com with SMTP id 36so537583wra
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 09 Jul 2007 15:53:00 -0700 (PDT)
+Received: by 10.86.80.5 with SMTP id d5mr33450fgb.1184021579298;
+	Mon, 09 Jul 2007 15:52:59 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.98.21])
+	by mx.google.com with ESMTP id w5sm50557711mue.2007.07.09.15.52.58
+	(version=SSLv3 cipher=OTHER); Mon, 09 Jul 2007 15:52:58 -0700 (PDT)
+Date: Tue, 10 Jul 2007 01:52:47 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
+X-Priority: 3 (Normal)
+Message-ID: <96699408.20070710015247@gmail.com>
+To: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <126613333.20070709215755@vanille-media.de>
+References: <E1I7yE2-0000V0-1x@linuxtogo.org>
+	<126613333.20070709215755@vanille-media.de>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: dbg packages (was: org.oe.dev wireshark: fix -dbg)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,22 +36,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 22:11:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 09 Jul 2007 22:58:37 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Packaging is tedious, but let's not automate doing the wrong thing ;)
+Hello Dr.,
 
-I certainly agree with the general statement.  But I wonder if in this
-case it would not be OK to have just one big -dbg package per bb file
-even if there are more subpackages.  Going granular is certainly nice
-but I wonder if just having a dbg package suffices even if contains more
-than necessary.  I guess the -dbg packages should not be necessary most
-of the time.
+Monday, July 9, 2007, 10:57:55 PM, you wrote:
 
-My vote would go for "bigger size" if it means "easier packaging right
-now instead of later" unless that entails "something breaks".
+> koen commit wrote:
+>> wireshark: fix -dbg
+> [...]
+>> +
+>> +FILES_${PN}-dbg += "${libdir}/wireshark/plugins/${PV}/.debug"
+>> +
+>> +
+
+> We keep adding this stuff more and more -- since more and more
+> packages go from a monolithic state to an extensible -- and
+> I don't like having to specify this all over. Can't we get the dbg
+> package to pick up all .debug directories automatically?
+
+  That's what I was thinking for some time now too. It's good that
+bitbake is expressive enought that we *can* so that with its generic means
+like FILES, but doing that again and again instead once and for all is
+really boring.
+
+  And there's another issue here - empty .debug directories throught
+the rootfs. This one is actually more complex, as empty directories
+are there because of package-write task's workings, and sometimes we
+want them, sometimes not, so it's unclear how to handle that issue. At
+least we for sure don't want empty .debug/'s.
+
+> Regards,
+
+> :M:
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
