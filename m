@@ -1,28 +1,26 @@
-Received: from [64.233.184.235] (helo=wr-out-0506.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1I7tpn-0001eR-FE
+	(envelope-from <dp@xora.org.uk>) id 1I7twR-0001tm-1Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2007 16:03:29 +0200
-Received: by wr-out-0506.google.com with SMTP id 36so403549wra
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2007 06:57:52 -0700 (PDT)
-Received: by 10.78.193.19 with SMTP id q19mr1570787huf.1183989471193;
-	Mon, 09 Jul 2007 06:57:51 -0700 (PDT)
-Received: from ?192.168.20.110? ( [82.193.98.21])
-	by mx.google.com with ESMTP id g8sm29000264muf.2007.07.09.06.57.49
-	(version=SSLv3 cipher=OTHER); Mon, 09 Jul 2007 06:57:50 -0700 (PDT)
-Date: Mon, 9 Jul 2007 16:57:35 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
-X-Priority: 3 (Normal)
-Message-ID: <161888669.20070709165735@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1005211919.20070709153513@vanille-media.de>
+	Mon, 09 Jul 2007 16:10:24 +0200
+Received: from xora.org.uk ([::ffff:87.246.78.27])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Mon, 09 Jul 2007 15:04:41 +0100
+	id 00030909.46924079.00005351
+Date: Mon, 9 Jul 2007 15:03:38 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: "Dr. Michael Lauer" <mickey@vanille-media.de>
+Message-ID: <20070709140338.GE2336@p3n3tr4t0r.internal>
 References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
 	<128309124.20070709154303@gmail.com>
 	<20070709131744.GC2336@p3n3tr4t0r.internal>
 	<1005211919.20070709153513@vanille-media.de>
-MIME-Version: 1.0
+	<20070709134256.GD2336@p3n3tr4t0r.internal>
+	<13810026301.20070709155245@vanille-media.de>
+Mime-Version: 1.0
+In-Reply-To: <13810026301.20070709155245@vanille-media.de>
+User-Agent: Mutt/1.5.15 (2007-04-06)
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [RFC] Adding screen dimensions to machine configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -37,48 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 14:03:36 -0000
+X-List-Received-Date: Mon, 09 Jul 2007 14:10:32 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Dr.,
+On Mon, Jul 09, 2007 at 03:52:45PM +0200, Dr. Michael Lauer wrote:
+> Heh, it's not just Opie. Eventually we may want to ship prerendered png's for
+> UI elements. We better know about the size and dpi of the displays to
+> get sane defaults. There's a whole lot of packages which could use the
+> MACHINE namespace to improve targetting the platforms specifics at
+> build time.
+> 
+I just worry what happens to machines without screens but that can have
+gfx cards added. By the current level of thought behind these variables
+a divide by zero is inevitable.
 
-Monday, July 9, 2007, 4:35:13 PM, you wrote:
+It also triggers my gut feeling of "this is the wrong way to crack the nut"
 
-[]
+> What makes you worry so much about adding more (imho necessary)
+> information to the MACHINE_ capability namespace?
+> 
+Nothing, but these variables seem little thought out and seem to be being
+rushed into use for one use case (opie backgrounds).
 
-> I agree with Paul's "they provide *some default* screen resolution and
-> orientation.". Almost all our screen devices can be rotated on-the-fly
-> anyway. The MACHINE_DISPLAY_ namespace is mainly UI frameworks and
-> applications, as much as native framebuffer rotations and stuff are
-> important to know, they're less relevant here.
+And if it is neccessary then it should be the "correct" information, like
+for spitz the screen is 480x640 by default. Deal with it in packages that
+wish to use rotation correctly. Not just this value makes it easy for my
+magic background generator.
 
-  Yes, that's why I responded to Koen's discussion of formfactor
-package. We won't get around runtime support for multiple resolutions,
-rotations, etc. What it will be, is another question for further
-consideration.
+Maybe a MACHINE_DEFAULT_ROTATION is also needed.
 
-
-  As for the machine settings in question, they serve very specific
-purpose, and not hardcode that device is bound to be in that
-resolution and rotation all the time. To sum up, their purpose is:
-
-1. Provide consistent way to configure packages which require screen
-resolution parameter (usecase: fbreader)
-2. To not install large-size graphic resources which won't be
-needed/used on a specific device "by default", and at the same time,
-to install the resource which will fit a device best (again just in
-its default config). (usecase: opie-taskbar's background images).
-
-> Regards,
-
-> :M:
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Graeme
 
 
 
