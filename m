@@ -1,31 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.92.173] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1I8MvX-0004qC-Fm
-	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 23:07:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6AL1ag1025880
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Jul 2007 22:01:36 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 25415-10 for <openembedded-devel@openembedded.org>;
-	Tue, 10 Jul 2007 22:01:33 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6AL1TVn025869
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Jul 2007 22:01:29 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <48239d390707100845o17a49392vcbf74fd5991b77f3@mail.gmail.com>
+	(envelope-from <pmiscml@gmail.com>) id 1I8N2h-0006gs-Id
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Jul 2007 23:14:54 +0200
+Received: by ug-out-1314.google.com with SMTP id i24so1444690ugd
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Jul 2007 14:08:55 -0700 (PDT)
+Received: by 10.86.77.5 with SMTP id z5mr738221fga.1184101735631;
+	Tue, 10 Jul 2007 14:08:55 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.98.21])
+	by mx.google.com with ESMTP id w7sm59715657mue.2007.07.10.14.08.54
+	(version=SSLv3 cipher=OTHER); Tue, 10 Jul 2007 14:08:55 -0700 (PDT)
+Date: Wed, 11 Jul 2007 00:08:36 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
+X-Priority: 3 (Normal)
+Message-ID: <1782937254.20070711000836@gmail.com>
+To: Sergey Lapin <slapinid@gmail.com>
+In-Reply-To: <4693D9F4.5030000@gmail.com>
 References: <48239d390707100845o17a49392vcbf74fd5991b77f3@mail.gmail.com>
-Date: Tue, 10 Jul 2007 22:01:28 +0100
-Message-Id: <1184101289.3683.7.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<40479847.20070710211608@gmail.com> <4693D9F4.5030000@gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [RFC] Palms commits.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,45 +36,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2007 21:11:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Jul 2007 21:15:51 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Hello Sergey,
 
-On Tue, 2007-07-10 at 19:45 +0400, Sergey Lapin wrote: 
-> I just had raging argument with Paul Sokolovsky about my commits,
-> so I'd like to RFC them, and also I'd like to ask if all these changes
-> should be passed through RFC.
-> 
-> Please, see attachments. Sorry for post-factum.
+Tuesday, July 10, 2007, 10:11:48 PM, you wrote:
 
-I looked at the attachment and it does give me cause for concern.
+[]
 
-What's missing from your email is a clear piece of text saying why
-you're making the changes you are. Your commits are also a bit confused.
-Updating a kernel defconfig in "Palm Zire 72 machine update" isn't very
-obvious.
+>>   Summing up, by investing 50% more effort into that, there can be 5
+>> times more outcome. And as a "fresh blood" in OE, you're in good
+>> position to lead this, as other developers are of course stuck with
+>> other issues.
 
-As for comments on specific things in the patch, in principle I agree
-with common machine files and kernel updates. The
-MACHINE_EXTRA_RRECOMMENDS in the patch looks horrendous however and it
-does go against the principles of task-base and friends. 
+> Do you count yourself in this 50%, btw?
 
-Problems with the MACHINE_EXTRA_RRECOMMENDS include:
+  Absolutely. I contemplated such a change for a long time, actually
+current work on adding missing hh.org machine to OE and switching to
+defconfiman kernel configuration management are initial steps on that
+way. I didn't proceed with OE machine configs cleanup, because well,
+it takes some real world dataset to make it general enough, and
+because HH.org kernel project was literally the only stakeholder for
+such changes, with couple of dozens of machines and counting (whereas
+even Zaurus project has around half-dozen architecturally different
+machines). So, I eagerly awaited other projects, like Hackhdev to join
+more actively with OE, to tackle these issues together.
 
-* the modules should have dependency information which removes the need
-for all sound modules to be listed for example, you only need the ones
-at the tips of the chains.
-* duplication with entries already in task-base
+  I understand your worktime constraints, and the need to get practice
+with OE and mtn, but there're other creative ways to get it - like,
+for example, adding support for other 8 or so Palm devices in addition
+to 4 already in OE. This would be pretty worthy a job for Palm devices
+maintainer, and at the same time would happen to give us mentioned raw
+dataset to base firm decisions on. And there's also good chance for us
+to get in sync, so all Palm and PocketPC devices are in OE, that can't
+be checked off for both projects, and we can proceed further with
+better support and maintenance facilitation. Of course, this all is
+from my side of view, YMMV.
 
-The module_autoload statements also look scary. Is the device totally
-incapable of loading some of them for itself? I know for a fact you
-don't need all the sound ones.
+> Best regards,
 
-Regards,
+> S.
 
-Richard
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
