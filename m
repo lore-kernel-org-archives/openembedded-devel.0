@@ -1,23 +1,35 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1I8D53-0004Lk-31
+	(envelope-from <mickey@vanille-media.de>) id 1I8D7P-0004Oj-5Y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jul 2007 12:36:30 +0200
-Received: from xora.org.uk ([::ffff:87.246.78.27])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
-	by xora.org.uk with esmtp; Tue, 10 Jul 2007 11:30:44 +0100
-	id 0003090C.46935FD4.000066B7
-Date: Tue, 10 Jul 2007 11:29:34 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-To: Paul Sokolovsky <pmiscml@gmail.com>
-Message-ID: <20070710102933.GA4280@p3n3tr4t0r.internal>
-References: <E1I8BNL-0002lu-BC@linuxtogo.org>
-	<986250811.20070710125440@gmail.com>
-Mime-Version: 1.0
-In-Reply-To: <986250811.20070710125440@gmail.com>
-User-Agent: Mutt/1.5.15 (2007-04-06)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev packages/glib-2.0/glib.inc : remove	bogus ${PN}-dev from packages.
+	Tue, 10 Jul 2007 12:38:55 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 268C328C013; Tue, 10 Jul 2007 12:31:59 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: **
+X-Spam-Status: No, score=2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,REPTO_OVERQUOTE_THEBAT autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180181024.adsl.alicedsl.de [85.180.181.24])
+	by srv043.dedi23.de (Postfix) with ESMTP id 9F31D28C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Jul 2007 12:31:56 +0200 (CEST)
+Date: Tue, 10 Jul 2007 12:33:12 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1312225382.20070710123312@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1729618158.20070710002128@gmail.com>
+References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
+	<128309124.20070709154303@gmail.com>
+	<1183996538.5757.55.camel@localhost.localdomain>
+	<849361116.20070709220136@vanille-media.de>
+	<1729618158.20070710002128@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [RFC] Adding screen dimensions to machine configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,44 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2007 10:36:31 -0000
+X-List-Received-Date: Tue, 10 Jul 2007 10:38:55 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tue, Jul 10, 2007 at 12:54:40PM +0300, Paul Sokolovsky wrote:
-> > --- packages/glib-2.0/glib.inc 
-> > 09c2d1615f7c249f8ab1c68778bafbc98293ff6b
-> > +++ packages/glib-2.0/glib.inc 
-> > 3b5260371e84b9c12db9a8cdc8c5809bab8d2ec5
-> > @@ -8,7 +8,7 @@ DEPENDS += "virtual/libiconv virtual/lib
-> >  PRIORITY = "optional"
-> >  DEPENDS += "glib-2.0-native gtk-doc"
-> >  DEPENDS += "virtual/libiconv virtual/libintl"
-> > -PACKAGES =+ "${PN}-dev glib-2.0-utils "
-> > +PACKAGES =+ " glib-2.0-utils "
-> 
->   This is not bogus. For this package, -dev must be packaged before
-> the main package, or the latter will get *.h and *.m4 files. Putting
-> something in packages twice works after all, and we should either
-> accept its usage fro such cases, or find other solution to do proper
-> flexible packaging (and that would be a bit hard on syntax. Maybe add
-> UNFILES?)
-> 
-It works, you just get a 5 line error from bitbake.
+Hi Paul.
 
-ERROR: -------------------
-ERROR: glib-2.0-dev is listed in PACKAGES mutliple times, this leads to packaging errors.
-ERROR: Please fix the metadata/report this as bug to OE bugtracker.
-ERROR: -------------------
+> Monday, July 9, 2007, 11:01:36 PM, you wrote:
+>   I proposed to model variables in those namespace on the formfactor
+> package, and with Richard's and Marcin's explaining that there intention
+> was to have "physical" parameters, and with Graeme's vote, that's
+> apparently the way to go.
 
-This means the change is wrong (tm) or bitbake is wrong (tm) but the initial
-submitter should have fixed one or other or at least left a not in the commit
-telling people what was going on. None of this was done.
+So be it then, but while we're going the physical route, lets include
+the DEPTH as well.
 
-As it was I accepted the instruction given by bitbake and fixed the metadata.
+Regards,
 
-Graeme
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
