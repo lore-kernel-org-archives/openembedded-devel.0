@@ -1,38 +1,31 @@
-Received: from [160.45.40.10] (helo=math.fu-berlin.de)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1I8EIP-0001UF-VG
-	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 13:54:21 +0200
-Received: (qmail 28765 invoked from network); 10 Jul 2007 13:48:41 +0200
-Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
-	by leibniz.math.fu-berlin.de with SMTP; 10 Jul 2007 13:48:41 +0200
-Received: (qmail 29131 invoked by uid 9804); 10 Jul 2007 13:48:41 +0200
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 10 Jul 2007 13:48:41 +0200
-Received: (qmail 29122 invoked by uid 9804); 10 Jul 2007 13:48:40 +0200
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by lusin.mi.fu-berlin.de with SMTP; 10 Jul 2007 13:48:40 +0200
-Received: (qmail 28759 invoked from network); 10 Jul 2007 13:48:40 +0200
-Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
-	by leibniz.math.fu-berlin.de with SMTP; 10 Jul 2007 11:48:40 -0000
-Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 3.36 #1
-	(Debian)) id 1I8ECu-0004Ln-00
+	(envelope-from <pmiscml@gmail.com>) id 1I8FKX-0006Xe-QE
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Jul 2007 15:00:51 +0200
+Received: by ug-out-1314.google.com with SMTP id i24so1336432ugd
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jul 2007 13:48:40 +0200
-Date: Tue, 10 Jul 2007 13:48:40 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070710114840.GA16604@mi.fu-berlin.de>
-References: <200707091724.32860.torsten.sadowski@tu-berlin.de>
-	<20070710091946.GA14041@mi.fu-berlin.de>
-X-Envelope-Sender: heinold@inf.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L40+ClamAV[29125](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.206
-Mime-Version: 1.0
-In-Reply-To: <20070710091946.GA14041@mi.fu-berlin.de>
-User-Agent: Mutt/1.5.9i
-Subject: Re: Conflicting qte patches for Simpad
+	Tue, 10 Jul 2007 05:54:57 -0700 (PDT)
+Received: by 10.86.59.3 with SMTP id h3mr102025fga.1184072097496;
+	Tue, 10 Jul 2007 05:54:57 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.98.21])
+	by mx.google.com with ESMTP id y2sm58527273mug.2007.07.10.05.54.55
+	(version=SSLv3 cipher=OTHER); Tue, 10 Jul 2007 05:54:55 -0700 (PDT)
+Date: Tue, 10 Jul 2007 15:54:38 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
+X-Priority: 3 (Normal)
+Message-ID: <602819948.20070710155438@gmail.com>
+To: Richard Purdie <rpurdie@rpsys.net>
+In-Reply-To: <1184064667.6435.45.camel@localhost.localdomain>
+References: <E1I7yE2-0000V0-1x@linuxtogo.org>
+	<126613333.20070709215755@vanille-media.de>
+	<f6u4pj$fk0$1@sea.gmane.org> <f6ubg3$97c$1@sea.gmane.org>
+	<309753579.20070710112118@vanille-media.de>
+	<1184064667.6435.45.camel@localhost.localdomain>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: dbg packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -46,43 +39,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2007 11:54:22 -0000
+X-List-Received-Date: Tue, 10 Jul 2007 13:01:08 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 10, 2007 at 11:19:46AM +0200, Henning Heinold wrote:
-> On Mon, Jul 09, 2007 at 05:24:32PM +0200, Torsten Sadowski wrote:
-> > Hi,
-> > 
-> > after some time I tried to build a Simpad opie-image again (from the devel 
-> > branch) but I encountered conflicting patches for libqte (normal, static and 
-> > mt).
-> > 
-> > It seems, that 
-> > QWSTtyKeyboardHandler::QWSTtyKeyboardHandler
-> > moved to:
-> > kernelkeyboard.cpp
-> > 
-> > which is not accounted for in the devfs.patch.
-> > 
-> > Cheers, Torsten
-> > 
-> 
-> Because linux 2.4 is unmaintained and linux 2.6 is the future devfs.patch is gone.
-> 
-> Please do mtn pull and mtn up.
-> 
-> Bye Henning
+Hello Richard,
 
-Sorry,
+Tuesday, July 10, 2007, 1:51:07 PM, you wrote:
 
-I am wrong, I thougt Mr. psokolovsky delete it with his last commit for
-qte-common_2.3.10.inc. So please delete the line
-SRC_URI_append_simpad       = "file://devfs.patch;patch=1 " alone
-and try again.
+> On Tue, 2007-07-10 at 11:21 +0200, Dr. Michael Lauer wrote:
+>> Rolf Leggewie wrote:
+>> > Koen Kooi wrote:
+>> >> Packaging is tedious, but let's not automate doing the wrong thing  
+>> 
+>> > I certainly agree with the general statement.  But I wonder if in this
+>> > case it would not be OK to have just one big -dbg package per bb file
+>> > even if there are more subpackages.  Going granular is certainly nice
+>> > but I wonder if just having a dbg package suffices even if contains more
+>> > than necessary.  I guess the -dbg packages should not be necessary most
+>> > of the time.
+>> 
+>> > My vote would go for "bigger size" if it means "easier packaging right
+>> > now instead of later" unless that entails "something breaks".
+>> 
+>> I totally agree. If I have to decide between slightly less granular
+>> packaging of debug packages vs. tedious error-prone repetetive stating
+>> of packaging for debug packages I gladly chose the first one.
+>> 
+>> For debugging, one or very few packages per recipe makes perfect sense to me.
 
-Bye Henning
+> I also agree for what its worth, having one -dbg package per recipe
+> isn't really a hardship since when you're debugging you usually have
+> enough space not to worry about the slight extra space usage. In the
+> past I've gone for the one -dbg package approach when packaging apps.
+
+> Automating the debug package generation would be good. The best way to
+> do it would probably be to allow full regexps in FILES rather than the
+> existing rather limited python globs. Can we convert and maintain
+> backwards compatibility?
+
+  Let's add REFILES then? But mind empty dirs issue. Maybe for -dbg
+it's worth to just add a specialized task? (REFILES are useful on their
+own of course).
+
+> Cheers,
+
+> Richard
+
+
+
+
 -- 
-IBM Certified Specialist - eserver i5 iSeries Technical Solutions Designer V5R3
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
