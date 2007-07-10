@@ -1,28 +1,37 @@
-Received: from [64.233.184.227] (helo=wr-out-0506.google.com)
+Received: from [160.45.40.10] (helo=math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1I82Bh-0004vj-8y
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jul 2007 00:58:37 +0200
-Received: by wr-out-0506.google.com with SMTP id 36so537583wra
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1I8ByJ-0007PF-U9
+	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 11:25:27 +0200
+Received: (qmail 3470 invoked from network); 10 Jul 2007 11:19:47 +0200
+Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
+	by leibniz.math.fu-berlin.de with SMTP; 10 Jul 2007 11:19:47 +0200
+Received: (qmail 17187 invoked by uid 9804); 10 Jul 2007 11:19:48 +0200
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 10 Jul 2007 11:19:47 +0200
+Received: (qmail 17178 invoked by uid 9804); 10 Jul 2007 11:19:47 +0200
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by lusin.mi.fu-berlin.de with SMTP; 10 Jul 2007 11:19:47 +0200
+Received: (qmail 3463 invoked from network); 10 Jul 2007 11:19:46 +0200
+Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
+	by leibniz.math.fu-berlin.de with SMTP; 10 Jul 2007 09:19:46 -0000
+Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 3.36 #1
+	(Debian)) id 1I8Bso-0003gD-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2007 15:53:00 -0700 (PDT)
-Received: by 10.86.80.5 with SMTP id d5mr33450fgb.1184021579298;
-	Mon, 09 Jul 2007 15:52:59 -0700 (PDT)
-Received: from ?192.168.20.110? ( [82.193.98.21])
-	by mx.google.com with ESMTP id w5sm50557711mue.2007.07.09.15.52.58
-	(version=SSLv3 cipher=OTHER); Mon, 09 Jul 2007 15:52:58 -0700 (PDT)
-Date: Tue, 10 Jul 2007 01:52:47 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
-X-Priority: 3 (Normal)
-Message-ID: <96699408.20070710015247@gmail.com>
-To: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <126613333.20070709215755@vanille-media.de>
-References: <E1I7yE2-0000V0-1x@linuxtogo.org>
-	<126613333.20070709215755@vanille-media.de>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: dbg packages (was: org.oe.dev wireshark: fix -dbg)
+	Tue, 10 Jul 2007 11:19:46 +0200
+Date: Tue, 10 Jul 2007 11:19:46 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070710091946.GA14041@mi.fu-berlin.de>
+References: <200707091724.32860.torsten.sadowski@tu-berlin.de>
+X-Envelope-Sender: heinold@inf.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L40+ClamAV[17181](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.206
+Mime-Version: 1.0
+In-Reply-To: <200707091724.32860.torsten.sadowski@tu-berlin.de>
+User-Agent: Mutt/1.5.9i
+Subject: Re: Conflicting qte patches for Simpad
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,47 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2007 22:58:37 -0000
+X-List-Received-Date: Tue, 10 Jul 2007 09:25:28 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Dr.,
+On Mon, Jul 09, 2007 at 05:24:32PM +0200, Torsten Sadowski wrote:
+> Hi,
+> 
+> after some time I tried to build a Simpad opie-image again (from the devel 
+> branch) but I encountered conflicting patches for libqte (normal, static and 
+> mt).
+> 
+> It seems, that 
+> QWSTtyKeyboardHandler::QWSTtyKeyboardHandler
+> moved to:
+> kernelkeyboard.cpp
+> 
+> which is not accounted for in the devfs.patch.
+> 
+> Cheers, Torsten
+> 
 
-Monday, July 9, 2007, 10:57:55 PM, you wrote:
+Because linux 2.4 is unmaintained and linux 2.6 is the future devfs.patch is gone.
 
-> koen commit wrote:
->> wireshark: fix -dbg
-> [...]
->> +
->> +FILES_${PN}-dbg += "${libdir}/wireshark/plugins/${PV}/.debug"
->> +
->> +
+Please do mtn pull and mtn up.
 
-> We keep adding this stuff more and more -- since more and more
-> packages go from a monolithic state to an extensible -- and
-> I don't like having to specify this all over. Can't we get the dbg
-> package to pick up all .debug directories automatically?
-
-  That's what I was thinking for some time now too. It's good that
-bitbake is expressive enought that we *can* so that with its generic means
-like FILES, but doing that again and again instead once and for all is
-really boring.
-
-  And there's another issue here - empty .debug directories throught
-the rootfs. This one is actually more complex, as empty directories
-are there because of package-write task's workings, and sometimes we
-want them, sometimes not, so it's unclear how to handle that issue. At
-least we for sure don't want empty .debug/'s.
-
-> Regards,
-
-> :M:
-
-
+Bye Henning
 
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+IBM Certified Specialist - eserver i5 iSeries Technical Solutions Designer V5R3
 
 
