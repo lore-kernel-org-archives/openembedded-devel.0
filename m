@@ -1,35 +1,22 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1I8D7P-0004Oj-5Y
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jul 2007 12:38:55 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 268C328C013; Tue, 10 Jul 2007 12:31:59 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180181024.adsl.alicedsl.de [85.180.181.24])
-	by srv043.dedi23.de (Postfix) with ESMTP id 9F31D28C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jul 2007 12:31:56 +0200 (CEST)
-Date: Tue, 10 Jul 2007 12:33:12 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1312225382.20070710123312@vanille-media.de>
+	(envelope-from <openembedded@hrw.one.pl>) id 1I8DAH-0004Th-4v
+	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 12:41:54 +0200
+Received: (qmail 29692 invoked by uid 813007); 10 Jul 2007 10:36:12 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 10 Jul 2007 10:36:12 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1729618158.20070710002128@gmail.com>
-References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
-	<128309124.20070709154303@gmail.com>
-	<1183996538.5757.55.camel@localhost.localdomain>
-	<849361116.20070709220136@vanille-media.de>
-	<1729618158.20070710002128@gmail.com>
+Date: Tue, 10 Jul 2007 12:36:03 +0200
+User-Agent: KMail/1.9.7
+References: <E1I8BNL-0002lu-BC@linuxtogo.org>
+	<986250811.20070710125440@gmail.com>
+In-Reply-To: <986250811.20070710125440@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [RFC] Adding screen dimensions to machine configs
+Message-Id: <200707101236.04011.openembedded@hrw.one.pl>
+Subject: Re: [oe-commits] org.oe.dev packages/glib-2.0/glib.inc : remove bogus ${PN}-dev from packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,26 +30,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2007 10:38:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Jul 2007 10:41:56 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi Paul.
+Dnia wtorek, 10 lipca 2007, Paul Sokolovsky napisa=B3:
+> Hello xora,
+> > packages/glib-2.0/glib.inc : remove bogus ${PN}-dev from packages.
 
-> Monday, July 9, 2007, 11:01:36 PM, you wrote:
->   I proposed to model variables in those namespace on the formfactor
-> package, and with Richard's and Marcin's explaining that there intention
-> was to have "physical" parameters, and with Graeme's vote, that's
-> apparently the way to go.
+> > -PACKAGES =3D+ "${PN}-dev glib-2.0-utils "
+> > +PACKAGES =3D+ " glib-2.0-utils "
 
-So be it then, but while we're going the physical route, lets include
-the DEPTH as well.
+>   This is not bogus. For this package, -dev must be packaged before
+> the main package, or the latter will get *.h and *.m4 files.=20
 
-Regards,
+fix FILES_${PN} then
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+> Putting something in packages twice works after all, and we should
+> either accept its usage fro such cases,
+
+=2D1 from me - we should not allow such things as they can hide bugs
+
+> or find other solution to do proper flexible packaging (and that would
+> be a bit hard on syntax. =20
+
+=46ILES adapting was fast job - I am testing fix in Poky now.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+   Gdyby cz=B3owiek musia=B3 zezwala=E6 innym na to, co toleruje u siebie,
+   =BFycie by=B3oby nie do wytrzymania.             [Georges Courteline]
+
 
 
 
