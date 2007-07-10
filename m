@@ -1,25 +1,27 @@
-Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1I8JQu-0001qY-Qj
-	for openembedded-devel@openembedded.org; Tue, 10 Jul 2007 19:23:34 +0200
-Received: by wa-out-1112.google.com with SMTP id v27so1895804wah
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Jul 2007 10:17:45 -0700 (PDT)
-Received: by 10.114.37.1 with SMTP id k1mr4401817wak.1184087865201;
-	Tue, 10 Jul 2007 10:17:45 -0700 (PDT)
-Received: by 10.114.144.2 with HTTP; Tue, 10 Jul 2007 10:17:45 -0700 (PDT)
-Message-ID: <432beae0707101017i289b0113i50618df3b1bb447f@mail.gmail.com>
-Date: Tue, 10 Jul 2007 10:17:45 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1184064459.6435.40.camel@localhost.localdomain>
+	(envelope-from <pmiscml@gmail.com>) id 1I8KLj-0006ky-CU
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Jul 2007 20:22:30 +0200
+Received: by ug-out-1314.google.com with SMTP id i24so1411055ugd
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Jul 2007 11:16:25 -0700 (PDT)
+Received: by 10.86.71.1 with SMTP id t1mr633059fga.1184091385533;
+	Tue, 10 Jul 2007 11:16:25 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.98.21])
+	by mx.google.com with ESMTP id e9sm49675082muf.2007.07.10.11.16.23
+	(version=SSLv3 cipher=OTHER); Tue, 10 Jul 2007 11:16:24 -0700 (PDT)
+Date: Tue, 10 Jul 2007 21:16:08 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
+X-Priority: 3 (Normal)
+Message-ID: <40479847.20070710211608@gmail.com>
+To: "Sergey Lapin" <slapinid@gmail.com>
+In-Reply-To: <48239d390707100845o17a49392vcbf74fd5991b77f3@mail.gmail.com>
+References: <48239d390707100845o17a49392vcbf74fd5991b77f3@mail.gmail.com>
 MIME-Version: 1.0
-References: <E1I8BNL-0002lu-BC@linuxtogo.org>
-	<986250811.20070710125440@gmail.com>
-	<200707101236.04011.openembedded@hrw.one.pl>
-	<1184064459.6435.40.camel@localhost.localdomain>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev packages/glib-2.0/glib.inc : remove bogus ${PN}-dev from packages.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] Palms commits.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,37 +35,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2007 17:23:51 -0000
-X-List-Received-Date: Tue, 10 Jul 2007 17:23:51 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Jul 2007 18:22:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-T24gNy8xMC8wNywgUmljaGFyZCBQdXJkaWUgPHJwdXJkaWVAcnBzeXMubmV0PiB3cm90ZToKPiBP
-biBUdWUsIDIwMDctMDctMTAgYXQgMTI6MzYgKzAyMDAsIE1hcmNpbiBKdXN6a2lld2ljeiB3cm90
-ZToKPiA+IERuaWEgd3RvcmVrLCAxMCBsaXBjYSAyMDA3LCBQYXVsIFNva29sb3Zza3kgbmFwaXNh
-szoKPiA+ID4gSGVsbG8geG9yYSwKPiA+ID4gPiBwYWNrYWdlcy9nbGliLTIuMC9nbGliLmluYyA6
-IHJlbW92ZSBib2d1cyAke1BOfS1kZXYgZnJvbSBwYWNrYWdlcy4KPiA+Cj4gPiA+ID4gLVBBQ0tB
-R0VTID0rICIke1BOfS1kZXYgZ2xpYi0yLjAtdXRpbHMgIgo+ID4gPiA+ICtQQUNLQUdFUyA9KyAi
-IGdsaWItMi4wLXV0aWxzICIKPiA+Cj4gPiA+ICAgVGhpcyBpcyBub3QgYm9ndXMuIEZvciB0aGlz
-IHBhY2thZ2UsIC1kZXYgbXVzdCBiZSBwYWNrYWdlZCBiZWZvcmUKPiA+ID4gdGhlIG1haW4gcGFj
-a2FnZSwgb3IgdGhlIGxhdHRlciB3aWxsIGdldCAqLmggYW5kICoubTQgZmlsZXMuCj4gPgo+ID4g
-Zml4IEZJTEVTXyR7UE59IHRoZW4KPiA+Cj4gPiA+IFB1dHRpbmcgc29tZXRoaW5nIGluIHBhY2th
-Z2VzIHR3aWNlIHdvcmtzIGFmdGVyIGFsbCwgYW5kIHdlIHNob3VsZAo+ID4gPiBlaXRoZXIgYWNj
-ZXB0IGl0cyB1c2FnZSBmcm8gc3VjaCBjYXNlcywKPiA+Cj4gPiAtMSBmcm9tIG1lIC0gd2Ugc2hv
-dWxkIG5vdCBhbGxvdyBzdWNoIHRoaW5ncyBhcyB0aGV5IGNhbiBoaWRlIGJ1Z3MKPiA+Cj4gPiA+
-IG9yIGZpbmQgb3RoZXIgc29sdXRpb24gdG8gZG8gcHJvcGVyIGZsZXhpYmxlIHBhY2thZ2luZyAo
-YW5kIHRoYXQgd291bGQKPiA+ID4gYmUgYSBiaXQgaGFyZCBvbiBzeW50YXguCj4gPgo+ID4gRklM
-RVMgYWRhcHRpbmcgd2FzIGZhc3Qgam9iIC0gSSBhbSB0ZXN0aW5nIGZpeCBpbiBQb2t5IG5vdy4K
-Pgo+IER1cGxpY2F0ZSBlbnRyaWVzIGluIFBBQ0tBR0VTIGNhdXNlIGFsbCBraW5kcyBvZiBzdWJ0
-bGUgcHJvYmxlbXMgYXMgcGVyCj4gdGhlIGVycm9yIG1lc3NhZ2UuIFBsZWFzZSBkb24ndCBkbyBp
-dCBhbmQgc2V0IEZJTEVTIGNvcnJlY3RseS4KPgoKVGhlcmUncyBubyByZWFzb24gaXQgc2hvdWxk
-LiBJZiB0aGUgZmlyc3QgaXMgdXNlZCBhbmQgYW55IGZ1cnRoZXIgb25lcwphcmUgaWdub3JlZCBp
-dCB3b3JrcyBmaW5lLiBJIHN1Ym1pdHRlZCBhIHBhdGNoIGZvciB0aGlzIGEgbG9uZywgbG9uZwp0
-aW1lIGFnby4KCklmIHlvdSBkb24ndCB3YW50IHRvIGFsbG93IGR1cGxpY2F0ZSBwYWNrYWdlcyB0
-aGVuIHRoZSBvbmx5IHdheSB0byBnZXQKYXJvdW5kIHRoaXMgaXMgdG8gZG8gUEFDS0FHRVMgPSBp
-bnN0ZWFkIG9mICs9IHRvIHB1dCB0aGluZ3MgaW4gdGhlCnJpZ2h0IG9yZGVyLiAoT3IgImZpeCIg
-RklMRVMgYnV0IHdoaWNoIGlzIHRoZSBncm9zc2VzdCBoYWNrPyBJdCBjb3VsZApiZSBlaXRoZXIu
-Li4uKQoKCi0tIApKdXN0aW4gUGF0cmluCg==
+Hello Sergey,
+
+Tuesday, July 10, 2007, 6:45:11 PM, you wrote:
+
+> Hi, all!
+
+> I just had raging argument with Paul Sokolovsky about my commits,
+> so I'd like to RFC them, and also I'd like to ask if all these changes
+> should be passed through RFC.
+
+> Please, see attachments. Sorry for post-factum.
+
+> Briefly, these commits generalize palms support and make maintenance
+> easier, also, update Zire 72 configuration.
+
+  Well, I regret that even after discussion on IRC you still miss the
+point. The talk was not about "palm commits" per se, but about
+refactors to make machines more maintainable. OE obviously has
+noticeable problems with that, and trying to solve them in local
+machine corners won't benefit OE, but in the end just will become the
+same mess but in the other plane.
+
+  So, if you have bright ideas how to optimize maintenance, please
+think how it fits with already existing machine support framework
+(task-base), share them with wider audience, and call for feedback.
+I'm sure there're parties interested in the same changes, and getting
+together may lead to much better result for OE as a whole.
+
+  Of course, you're free to treat those changes as Palm local, but
+what I wrote still holds - machine configs in OE need refactoring and
+elaboration. If you don't want to put a bit more effort into that and
+make your changes useful universally, then someone else will need to
+duplicate large part of your work, and possibly achieve incompatible
+results with your current scheme. As that someone hopefully will
+target it on global level, then palm config would need to be changed
+too, so in the end it will appear turn out that you lost time too.
+
+  Summing up, by investing 50% more effort into that, there can be 5
+times more outcome. And as a "fresh blood" in OE, you're in good
+position to lead this, as other developers are of course stuck with
+other issues.
+
+
+> Thanks a lot,
+> S.
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
