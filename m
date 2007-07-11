@@ -1,19 +1,24 @@
-Received: from [83.237.235.74] (helo=ppp83-237-235-74.pppoe.mtu-net.ru)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1I8aui-0001K5-SX
+Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <slapinid@gmail.com>) id 1I8bsp-0006M1-Ec
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jul 2007 14:03:29 +0200
-X-Originating-IP: [233.43.2.770] 
-X-Originating-Email: [openembedded-devel@lists.openembedded.org] 
-X-Sender: openembedded-devel@lists.openembedded.org 
-Received: (qmail 55334 by uid 637); Wed, 11 Jul 2007 03:57:43 +0300
-Message-Id: <20070711065743.55336.qmail@ppp83-237-235-74.pppoe.mtu-net.ru>
-To: <openembedded-devel@lists.openembedded.org>
-From: <openembedded-devel@lists.openembedded.org>
-Importance: High
+	Wed, 11 Jul 2007 15:05:31 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so2268650waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Jul 2007 05:59:44 -0700 (PDT)
+Received: by 10.114.127.1 with SMTP id z1mr5126828wac.1184158784163;
+	Wed, 11 Jul 2007 05:59:44 -0700 (PDT)
+Received: by 10.114.210.2 with HTTP; Wed, 11 Jul 2007 05:59:44 -0700 (PDT)
+Message-ID: <48239d390707110559n1fabf2c9jcc598bc60715d5db@mail.gmail.com>
+Date: Wed, 11 Jul 2007 16:59:44 +0400
+From: "Sergey Lapin" <slapinid@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1184101289.3683.7.camel@localhost.localdomain>
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Doctor Alana : 45% off your order
+References: <48239d390707100845o17a49392vcbf74fd5991b77f3@mail.gmail.com>
+	<1184101289.3683.7.camel@localhost.localdomain>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [RFC] Palms commits.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -27,39 +32,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-Date: Wed, 11 Jul 2007 12:03:34 -0000
-X-List-Received-Date: Wed, 11 Jul 2007 12:03:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 11 Jul 2007 13:05:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-              Having trouble viewing this e-mail? [1]Click here
-                              - Advertisement -
+On 7/11/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> Hi,
+Hi,
+Richard, thanks for your comments!
 
-   [2][1.jpg]
+>
+> I looked at the attachment and it does give me cause for concern.
+>
+> What's missing from your email is a clear piece of text saying why
+> you're making the changes you are. Your commits are also a bit confused.
+> Updating a kernel defconfig in "Palm Zire 72 machine update" isn't very
+> obvious.
+Well, this particular one is mostly due to kernel version update et
+al., no functional changes with device point of view, just
+un-breaking.
 
-   > [3]Meet our free Online Elite Clubs
-   > [4]Save with Our Great Stores®     > [5]Remember the Date with free Gift
-                                        Reminders
-                                        > [6]Watch Exclusive Saves and Offers
-   How to Unsubscribe:
-   This message was sent to openembedded-devel@lists.openembedded.org on
-   July 11, 2007. If you no longer wish to receive promotional email ,
-   please visit bn.com, log in to your account, and follow the
-   instructions under Change Your Communications Preferences.
-   Please note that product prices and availability are subject to change.
-   © 2007 Barnes&Noble.com llc. All Rights Reserved.
-   BN.com Customer Preferences, 76 Ninth Avenue, 9th Floor, New York, NY
-   10011
 
-References
+>
+> As for comments on specific things in the patch, in principle I agree
+> with common machine files and kernel updates. The
+> MACHINE_EXTRA_RRECOMMENDS in the patch looks horrendous however and it
+> does go against the principles of task-base and friends.
+>
+> Problems with the MACHINE_EXTRA_RRECOMMENDS include:
+>
+> * the modules should have dependency information which removes the need
+> for all sound modules to be listed for example, you only need the ones
+> at the tips of the chains.
+> * duplication with entries already in task-base
 
-   Visible links
-   1. http://www.sleepletter.hk/
-   2. http://www.poemgot.hk/
-   3. http://www.whitecry.com/
-   4. http://www.createletter.hk/
-   5. http://www.poemgot.hk/
-   6. http://www.poemgot.hk/
+Well, that's probably my misunderstanding/ignorance here.
+Could you please give me references on where to study this particular
+subject (module packages dependencies).
 
-   Hidden links:
-   7. javascript:ol('http://email.bn.com/cgi-bin6/DM/y/hbcy0HmgN50IxE0BLII0Es');
+>
+> The module_autoload statements also look scary. Is the device totally
+> incapable of loading some of them for itself? I know for a fact you
+> don't need all the sound ones.
+
+Yes, but there I have to resolve dependencies by hand, am I right?
+
+Thanks a lot,
+S.
+
 
