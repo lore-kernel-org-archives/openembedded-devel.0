@@ -1,24 +1,29 @@
-Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <slapinid@gmail.com>) id 1I8bsp-0006M1-Ec
+	(envelope-from <mickey@vanille-media.de>) id 1I8d86-0002zC-0p
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jul 2007 15:05:31 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so2268650waf
+	Wed, 11 Jul 2007 16:25:28 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 2CDDA28C013; Wed, 11 Jul 2007 16:18:13 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: **
+X-Spam-Status: No, score=2.7 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,REPTO_OVERQUOTE_THEBAT autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180190141.adsl.alicedsl.de [85.180.190.141])
+	by srv043.dedi23.de (Postfix) with ESMTP id A79C328C012
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jul 2007 05:59:44 -0700 (PDT)
-Received: by 10.114.127.1 with SMTP id z1mr5126828wac.1184158784163;
-	Wed, 11 Jul 2007 05:59:44 -0700 (PDT)
-Received: by 10.114.210.2 with HTTP; Wed, 11 Jul 2007 05:59:44 -0700 (PDT)
-Message-ID: <48239d390707110559n1fabf2c9jcc598bc60715d5db@mail.gmail.com>
-Date: Wed, 11 Jul 2007 16:59:44 +0400
-From: "Sergey Lapin" <slapinid@gmail.com>
+	Wed, 11 Jul 2007 16:18:10 +0200 (CEST)
+Date: Wed, 11 Jul 2007 16:19:28 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1058075391.20070711161928@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1184101289.3683.7.camel@localhost.localdomain>
 MIME-Version: 1.0
-References: <48239d390707100845o17a49392vcbf74fd5991b77f3@mail.gmail.com>
-	<1184101289.3683.7.camel@localhost.localdomain>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [RFC] Palms commits.
+Subject: OE team meating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,53 +37,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jul 2007 13:05:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 11 Jul 2007 14:26:13 -0000
+X-List-Received-Date: Wed, 11 Jul 2007 14:26:13 -0000
+X-List-Received-Date: Wed, 11 Jul 2007 14:26:13 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 7/11/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> Hi,
-Hi,
-Richard, thanks for your comments!
+Hi devels,
 
->
-> I looked at the attachment and it does give me cause for concern.
->
-> What's missing from your email is a clear piece of text saying why
-> you're making the changes you are. Your commits are also a bit confused.
-> Updating a kernel defconfig in "Palm Zire 72 machine update" isn't very
-> obvious.
-Well, this particular one is mostly due to kernel version update et
-al., no functional changes with device point of view, just
-un-breaking.
+since OEDEM'07 is still a while away, some of us will meet @ GUADEC
+to discuss the most pressuring issues. We plan this meeting via
+http://www.openembedded.org/guadec07.
 
+If you have any additional points to the agenda, feel free to add
+them. Likewise, if you want to join us, add yourself to the page. I'm
+not sure yet where a good meeting point would be -- a quiet place with
+something to eat and drink. Anyone familiar enough with the venue to
+comment on that?
 
->
-> As for comments on specific things in the patch, in principle I agree
-> with common machine files and kernel updates. The
-> MACHINE_EXTRA_RRECOMMENDS in the patch looks horrendous however and it
-> does go against the principles of task-base and friends.
->
-> Problems with the MACHINE_EXTRA_RRECOMMENDS include:
->
-> * the modules should have dependency information which removes the need
-> for all sound modules to be listed for example, you only need the ones
-> at the tips of the chains.
-> * duplication with entries already in task-base
+Regards,
 
-Well, that's probably my misunderstanding/ignorance here.
-Could you please give me references on where to study this particular
-subject (module packages dependencies).
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
->
-> The module_autoload statements also look scary. Is the device totally
-> incapable of loading some of them for itself? I know for a fact you
-> don't need all the sound ones.
-
-Yes, but there I have to resolve dependencies by hand, am I right?
-
-Thanks a lot,
-S.
 
 
