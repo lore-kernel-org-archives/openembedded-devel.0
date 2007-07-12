@@ -1,23 +1,21 @@
-Received: from [195.121.247.4] (helo=smtp13.wxs.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gerwin@vanderkruis.net>) id 1I8mdz-0003aq-KP
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jul 2007 02:34:55 +0200
-Received: from holographic.lan (ip5457b30e.direct-adsl.nl [84.87.179.14])
-	by smtp13.wxs.nl
-	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006)) with
-	ESMTP id <0JL1001KDIOII5@smtp13.wxs.nl> for
-	openembedded-devel@lists.openembedded.org; 
-	Thu, 12 Jul 2007 02:29:06 +0200 (CEST)
-Date: Thu, 12 Jul 2007 02:26:59 +0200
-From: Gerwin van der Kruis <gerwin@vanderkruis.net>
-In-reply-to: <1058075391.20070711161928@vanille-media.de>
+	(envelope-from <openembedded@hrw.one.pl>) id 1I8rIo-0002kx-9t
+	for openembedded-devel@openembedded.org; Thu, 12 Jul 2007 07:33:22 +0200
+Received: (qmail 14675 invoked by uid 813007); 12 Jul 2007 05:27:30 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 12 Jul 2007 05:27:30 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <200707120226.59337.gerwin@vanderkruis.net>
-Organization: GO-2K
-MIME-version: 1.0
-User-Agent: KMail/1.9.5
+Date: Thu, 12 Jul 2007 07:27:28 +0200
+User-Agent: KMail/1.9.7
 References: <1058075391.20070711161928@vanille-media.de>
+	<200707120226.59337.gerwin@vanderkruis.net>
+In-Reply-To: <200707120226.59337.gerwin@vanderkruis.net>
+MIME-Version: 1.0
+Message-Id: <200707120727.30305.openembedded@hrw.one.pl>
 Subject: Re: OE team meating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,45 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2007 00:34:55 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: 7BIT
-Content-disposition: inline
+X-List-Received-Date: Thu, 12 Jul 2007 05:33:22 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Wednesday 11 July 2007 16:19, Dr. Michael Lauer wrote:
-> Hi devels,
+Dnia czwartek, 12 lipca 2007, Gerwin van der Kruis napisa=B3:
+
+> Can you give me access to :
+> http://www.openzaurus.org/wordpress/newsletters/
 >
-> since OEDEM'07 is still a while away, some of us will meet @ GUADEC
-> to discuss the most pressuring issues. We plan this meeting via
-> http://www.openembedded.org/guadec07.
->
-> If you have any additional points to the agenda, feel free to add
-> them. Likewise, if you want to join us, add yourself to the page. I'm
-> not sure yet where a good meeting point would be -- a quiet place with
-> something to eat and drink. Anyone familiar enough with the venue to
-> comment on that?
->
-> Regards,
->
-> :M:
+> so I can issue a newsletter ?
 
-Can you give me access to : http://www.openzaurus.org/wordpress/newsletters/
+Please post newsletters on OE website. Older ones were mostly OZ centric=20
+plus other projects added so they were on OZ website. Now OZ is ended.
 
-so I can issue a newsletter ?
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Is it an idea to rebuilt the website at openembedded so we can have and a wiki
-and a website ?
+        What a strange game. The only winning move is not to play.
+        		-- WOPR, "War Games"
 
-Also would like to start out a bit with a regular openembedded booth that we 
-can take to most of the places we go. I was thinking of a presentation wall 
-and a banner , last time at fosdem I was scammed :( but still thinking of 
-asking another company to make one. 
-
-What would be a good text ?
-
-Regards, 
-
-Gerwin
 
 
 
