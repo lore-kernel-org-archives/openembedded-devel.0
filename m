@@ -1,22 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1I8rIo-0002kx-9t
-	for openembedded-devel@openembedded.org; Thu, 12 Jul 2007 07:33:22 +0200
-Received: (qmail 14675 invoked by uid 813007); 12 Jul 2007 05:27:30 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 12 Jul 2007 05:27:30 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jul 2007 07:27:28 +0200
-User-Agent: KMail/1.9.7
-References: <1058075391.20070711161928@vanille-media.de>
-	<200707120226.59337.gerwin@vanderkruis.net>
-In-Reply-To: <200707120226.59337.gerwin@vanderkruis.net>
+	(envelope-from <pmiscml@gmail.com>) id 1I8y0X-0003j5-NS
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Jul 2007 14:43:01 +0200
+Received: by ug-out-1314.google.com with SMTP id i24so336456ugd
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Jul 2007 05:37:05 -0700 (PDT)
+Received: by 10.86.49.13 with SMTP id w13mr432144fgw.1184243825233;
+	Thu, 12 Jul 2007 05:37:05 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.98.21])
+	by mx.google.com with ESMTP id w5sm59337111mue.2007.07.12.05.37.02
+	(version=SSLv3 cipher=OTHER); Thu, 12 Jul 2007 05:37:04 -0700 (PDT)
+Date: Thu, 12 Jul 2007 15:36:42 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
+X-Priority: 3 (Normal)
+Message-ID: <131940156.20070712153642@gmail.com>
+To: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <1312225382.20070710123312@vanille-media.de>
+References: <513012886.20070708041151@gmail.com> <f6q30v$s2$1@sea.gmane.org>
+	<128309124.20070709154303@gmail.com>
+	<1183996538.5757.55.camel@localhost.localdomain>
+	<849361116.20070709220136@vanille-media.de>
+	<1729618158.20070710002128@gmail.com>
+	<1312225382.20070710123312@vanille-media.de>
 MIME-Version: 1.0
-Message-Id: <200707120727.30305.openembedded@hrw.one.pl>
-Subject: Re: OE team meating
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] Adding screen dimensions to machine configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,29 +40,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2007 05:33:22 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Jul 2007 12:43:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dnia czwartek, 12 lipca 2007, Gerwin van der Kruis napisa=B3:
+Hello Michael,
 
-> Can you give me access to :
-> http://www.openzaurus.org/wordpress/newsletters/
->
-> so I can issue a newsletter ?
+Tuesday, July 10, 2007, 1:33:12 PM, you wrote:
 
-Please post newsletters on OE website. Older ones were mostly OZ centric=20
-plus other projects added so they were on OZ website. Now OZ is ended.
+> Hi Paul.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+>> Monday, July 9, 2007, 11:01:36 PM, you wrote:
+>>   I proposed to model variables in those namespace on the formfactor
+>> package, and with Richard's and Marcin's explaining that there intention
+>> was to have "physical" parameters, and with Graeme's vote, that's
+>> apparently the way to go.
 
-        What a strange game. The only winning move is not to play.
-        		-- WOPR, "War Games"
+> So be it then, but while we're going the physical route, lets include
+> the DEPTH as well.
 
+  Ok, as we have issues with commit mails, here's what I'm committing for
+bitbake.conf. As discussed, we want "non-zero" defaults just in case,
+and I used QVGA defaults, which is consistent with our "smallscreen"
+default for GUI_MACHINE_CLASS. This variable in turn is named
+inconsistently with the rest of machine vars, so I proposed to rename
+it to GUI_MACHINE_CLASS. Finally, I tried to be consistent with
+formfactor's var names, so here's BPP, not DEPTH. Feel free to tweak
+if needed. I'll proceed with adding these options to machine configs
+within couple of days. (And of course I would need help with that.)
+
+#
+# old_revision [8654baa6db1769cd516400afebdc63c9b19ee633]
+#
+# patch "conf/bitbake.conf"
+#  from [28be7aa3c03959211fa8fff38d1903e1ec2dd8de]
+#    to [1a40a8a4b4660be43379de36b41dceabe1bebd19]
+#
+============================================================
+--- conf/bitbake.conf   28be7aa3c03959211fa8fff38d1903e1ec2dd8de
++++ conf/bitbake.conf   1a40a8a4b4660be43379de36b41dceabe1bebd19
+@@ -468,7 +468,7 @@ OES_BITBAKE_CONF = "1"
+ OES_BITBAKE_CONF = "1"
+ 
+ ##################################################################
+-# Task-base stuff
++# Machine properties and task-base stuff
+ ##################################################################
+ 
+ MACHINE_FEATURES ?= "kernel26"
+@@ -477,7 +477,13 @@ ROOT_FLASH_SIZE ?= "256"
+ # This is used to limit what packages goes into images built, so set big by default
+ ROOT_FLASH_SIZE ?= "256"
+ 
+-GUI_MACHINE_CLASS ?= "smallscreen"
++MACHINE_GUI_CLASS ?= "smallscreen"
++# GUI_MACHINE_CLASS is deprecated, please use MACHINE_GUI_CLASS instead
++GUI_MACHINE_CLASS ?= "${MACHINE_GUI_CLASS}"
++MACHINE_DISPLAY_WIDTH_PIXELS ?= "240"
++MACHINE_DISPLAY_HEIGHT_PIXELS ?= "320"
++MACHINE_DISPLAY_ORIENTATION ?= "0"
++MACHINE_DISPLAY_BPP ?= "16"
+ 
+ DISTRO_EXTRA_RDEPENDS ?= ""
+ DISTRO_EXTRA_RRECOMMENDS ?= ""
+
+> Regards,
+
+> :M:
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
