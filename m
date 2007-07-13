@@ -1,24 +1,22 @@
-Received: from [69.17.117.3] (helo=mail1.sea5.speakeasy.net)
+Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <erik@hovland.org>) id 1I95nn-00017L-1k
-	for openembedded-devel@openembedded.org; Thu, 12 Jul 2007 23:02:20 +0200
-Received: (qmail 8761 invoked from network); 12 Jul 2007 20:56:23 -0000
-Received: from dsl092-045-201.lax1.dsl.speakeasy.net (HELO speakeasy.net)
-	([66.92.45.201]) (envelope-sender <erik@hovland.org>)
-	by mail1.sea5.speakeasy.net (qmail-ldap-1.03) with SMTP
+	(envelope-from <cayco@poczta.cayco.pl>) id 1I9FKO-0007a2-KU
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Jul 2007 09:12:36 +0200
+Received: by ug-out-1314.google.com with SMTP id i24so530270ugd
 	for <openembedded-devel@lists.openembedded.org>;
-	12 Jul 2007 20:56:22 -0000
-Received: by speakeasy.net (nbSMTP-1.00) for uid 1000
-	erik@hovland.org; Thu, 12 Jul 2007 13:56:22 -0700 (PDT)
-Date: Thu, 12 Jul 2007 13:56:22 -0700
-From: Erik Hovland <erik@hovland.org>
+	Fri, 13 Jul 2007 00:12:34 -0700 (PDT)
+Received: by 10.82.170.2 with SMTP id s2mr1536419bue.1184310753435;
+	Fri, 13 Jul 2007 00:12:33 -0700 (PDT)
+Received: by 10.82.148.14 with HTTP; Fri, 13 Jul 2007 00:12:33 -0700 (PDT)
+Message-ID: <193a0cf50707130012l763ecdb2i7a56ff23ea9a575b@mail.gmail.com>
+Date: Fri, 13 Jul 2007 09:12:33 +0200
+From: "Krzysztof Kajkowski" <cayco@poczta.cayco.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070712205622.GB12515@hovland.org>
+In-Reply-To: <860C48AB-BFEE-414D-9275-B20556FA10B7@selfish.org>
+MIME-Version: 1.0
 References: <193a0cf50707121105y703147cbr935d6a603d01e6d6@mail.gmail.com>
 	<860C48AB-BFEE-414D-9275-B20556FA10B7@selfish.org>
-MIME-Version: 1.0
-In-Reply-To: <860C48AB-BFEE-414D-9275-B20556FA10B7@selfish.org>
-User-Agent: Mutt/1.5.13 (2006-08-11)
 Subject: Re: ipkg on MacOS X (missing feature.h)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,37 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2007 21:02:24 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 13 Jul 2007 07:12:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thu, Jul 12, 2007 at 08:57:04PM +0200, Holger Freyther wrote:
-> 
+2007/7/12, Holger Freyther <zecke@selfish.org>:
+>
 > Am 12.07.2007 um 20:05 schrieb Krzysztof Kajkowski:
-> 
+>
 > > Hello everyone!
 > >
 > > I am trying to set up OpenMoko environment on my Macbook - you can see
-> > my efforts on  http://wiki.openmoko.org/wiki/ 
+> > my efforts on  http://wiki.openmoko.org/wiki/
 > > OpenMoko_under_QEMU_on_MacOSX
 > >
 > > Now I'm struggling with compiling ipkg. Here's my log:
 > >
-> 
-> Check the OE wiki for building on non Linux. Go to the viewcvs of  
-> handhelds.org for ipkg and check my old patch which was backed out.  
-> Basicly features.h is a glibc (or was it gcc on linux?) thing and is  
+>
+> Check the OE wiki for building on non Linux. Go to the viewcvs of
+> handhelds.org for ipkg and check my old patch which was backed out.
+> Basicly features.h is a glibc (or was it gcc on linux?) thing and is
 > in (lib)busybox only to detect libc5.
 
-If you still have the patch I might be convinced to give it another go.
+OMG, I give up - I cannot find anything you said! I looked into wiki
+pages but I could find any non-Linux instructions... I searched google
+(site:handhelds.org) with different keywords such as freyther, zecke,
+ipkg, viewvcvs but I found none.
 
-E
+Do you have any other clue how can I find your patch?
 
--- 
-Erik Hovland
-mail: erik@hovland.org
-web: http://hovland.org/
-PGP/GPG public key available on request
+cheers
 
+cayco
 
 
