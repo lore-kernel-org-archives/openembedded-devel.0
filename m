@@ -1,19 +1,21 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [62.27.45.185] (helo=argo.arachnion.zzZZzz.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1IAOzX-0002WT-NX
+	(envelope-from <hacker@klever.net>) id 1IAPD7-0002qK-98
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jul 2007 13:43:51 +0200
-Received: from [10.35.0.53] ([::ffff:149.254.192.195])
-	(AUTH: LOGIN dp, TLS: TLSv1/SSLv3,128bits,RC4-MD5)
-	by xora.org.uk with esmtp; Mon, 16 Jul 2007 12:43:26 +0100
-	id 0003090A.469B59E0.00000AF3
-Sender: dp@xora.org.uk
-From: "Graeme Gregory" <dp@xora.org.uk>
+	Mon, 16 Jul 2007 13:57:53 +0200
+Received: from pd9538514.dip0.t-ipconnect.de ([217.83.133.20]
+	helo=olympus.klever.net)
+	by argo.arachnion.zzZZzz.net with esmtpa (Exim 4.42)
+	id 1IAPCi-0007JY-Ez for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Jul 2007 13:57:28 +0200
+Message-ID: <469B5C97.5020805@klever.net>
+Date: Mon, 16 Jul 2007 13:55:03 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.4 (X11/20070619)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0
-Message-ID: <200707161244020000@086416296>
-Date: Mon, 16 Jul 2007 12:44:01 +0100
-X-Mime-Autoconverted: from 8bit to 7bit by courier 0.53
+References: <200707161244020000@086416296>
+In-Reply-To: <200707161244020000@086416296>
 Subject: Re: [oe-commits] org.oe.dev python-pyqt: fix dbg packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -28,21 +30,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2007 11:43:51 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 16 Jul 2007 11:57:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
+>> Because it seems to be the standard?  Because ml5 would seem to suggest
+>> this is the fifth release from Mickey which in this case is not true?
+>> Because going from ml to r should not cause problems?
+> 
+>> Because of the reasons above I did not really see any need for
+>> discussion.  I somehow still don't.
+> 
+> because you are stepping on toes of one of the oldest oe devs while we are all out of contact on way to guadec.
 
-> Because it seems to be the standard?  Because ml5 would seem to suggest
-> this is the fifth release from Mickey which in this case is not true?
-> Because going from ml to r should not cause problems?
+Do you really think Mickey would object it? Let him speak, maybe, before 
+making so much noise?
 
-> Because of the reasons above I did not really see any need for
-> discussion.  I somehow still don't.
+I, personally, think that contacting Mickey would be the right thing to 
+do before proceeding with that, but I still don't think it can be 
+considered offensive.
 
-because you are stepping on toes of one of the oldest oe devs while we are all out of contact on way to guadec.
 
-Graeme
-
+Love,
+H
 
 
