@@ -1,27 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <freyther@gmx.net>) id 1IA5UB-0003CZ-CK
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Jul 2007 16:54:11 +0200
-Received: (qmail invoked by alias); 15 Jul 2007 14:53:55 -0000
-Received: from 88-134-98-145-dynip.superkabel.de (EHLO [192.168.10.100])
-	[88.134.98.145]
-	by mail.gmx.net (mp043) with SMTP; 15 Jul 2007 16:53:55 +0200
-X-Authenticated: #1949623
-X-Provags-ID: V01U2FsdGVkX19wlxty/tZwM8dJoGnERCrHWfI1tyctGwkPSWfXMp
-	zhw76DnE90K43o
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <f7d7mi$v0p$1@sea.gmane.org>
-References: <468C7B11.8050809@openhardware.net>	<200707091643.00611.openembedded@hrw.one.pl>
-	<469A20F8.2040707@openhardware.net> <f7d7mi$v0p$1@sea.gmane.org>
-X-Gpgmail-State: !signed
-Message-Id: <8B59473E-58D3-4D0D-A9AB-29DEE14945BB@gmx.net>
-From: Holger Freyther <freyther@gmx.net>
-Date: Sun, 15 Jul 2007 16:53:50 +0200
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Y-GMX-Trusted: 0
-Subject: Re: howto? Build something but not deploy in root image
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IAK3M-0003QF-Pm
+	for openembedded-devel@openembedded.org; Mon, 16 Jul 2007 08:27:28 +0200
+Received: from vpn006054.vpn.utwente.nl (vpn006054.vpn.utwente.nl
+	[130.89.6.54])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l6G6R4j1008047 for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jul 2007 08:27:07 +0200
+Message-ID: <469B0FB8.6000606@dominion.kabel.utwente.nl>
+Date: Mon, 16 Jul 2007 07:27:04 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <E1IAEG0-00049a-H7@linuxtogo.org>
+In-Reply-To: <E1IAEG0-00049a-H7@linuxtogo.org>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev python-pyqt: fix dbg packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,34 +35,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jul 2007 14:54:11 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Mon, 16 Jul 2007 06:27:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am 15.07.2007 um 15:33 schrieb Koen Kooi:
+Laibsch commit schreef:
+> python-pyqt: fix dbg packaging
+> * seize the opportunity to move versioning from ml (Mickey Lauer) to standard r
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Tom Walsh schreef:
->
->> Yes, that is what I was trying to avoid: building a custom image
->> recipe.  It just seemed that it should be possible to thwart the  
->> copy of
->> the kernel image into /boot from setting a variable or something.   
->> The
->> OE system changes quite frequently and I found myself in trouble  
->> with my
->> own image recipe where I was "away" for several months and  
->> "returned".
->
-> You are highlighting the exact reason why not submitting your work  
-> for inclusion into OE
-> is bad.
+Ehm, why? And this has been discussed where?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-And that a meaningful ChangeLog could help as well.
-
-z.
+iD8DBQFGmw+4MkyGM64RGpERAhBqAJ0QWxGuRILqNfsv2uoPO3sU1qlYAgCdEitO
+7xXAt1D1J4+d5RuBPBr6ZE8=
+=mwVI
+-----END PGP SIGNATURE-----
 
 
