@@ -1,26 +1,32 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IAK3M-0003QF-Pm
-	for openembedded-devel@openembedded.org; Mon, 16 Jul 2007 08:27:28 +0200
-Received: from vpn006054.vpn.utwente.nl (vpn006054.vpn.utwente.nl
-	[130.89.6.54])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l6G6R4j1008047 for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jul 2007 08:27:07 +0200
-Message-ID: <469B0FB8.6000606@dominion.kabel.utwente.nl>
-Date: Mon, 16 Jul 2007 07:27:04 +0100
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.4 (Macintosh/20070604)
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1IAOYH-0006aR-AF
+	for openembedded-devel@openembedded.org; Mon, 16 Jul 2007 13:15:41 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1IAOXv-0003ps-NR
+	for openembedded-devel@openembedded.org; Mon, 16 Jul 2007 13:15:19 +0200
+Received: from p54b95f3e.dip.t-dialin.net ([84.185.95.62])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jul 2007 13:15:19 +0200
+Received: from no2spam by p54b95f3e.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jul 2007 13:15:19 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 16 Jul 2007 13:15:10 +0200
+Message-ID: <f7fjvv$85o$1@sea.gmane.org>
 References: <E1IAEG0-00049a-H7@linuxtogo.org>
-In-Reply-To: <E1IAEG0-00049a-H7@linuxtogo.org>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<469B0FB8.6000606@dominion.kabel.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: p54b95f3e.dip.t-dialin.net
+User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
+In-Reply-To: <469B0FB8.6000606@dominion.kabel.utwente.nl>
+Sender: news <news@sea.gmane.org>
 Subject: Re: [oe-commits] org.oe.dev python-pyqt: fix dbg packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,24 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2007 06:27:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Jul 2007 11:15:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi wrote:
+> Laibsch commit schreef:
+>>> python-pyqt: fix dbg packaging
+>>> * seize the opportunity to move versioning from ml (Mickey Lauer) to standard r
+> 
+> Ehm, why? And this has been discussed where?
 
-Laibsch commit schreef:
-> python-pyqt: fix dbg packaging
-> * seize the opportunity to move versioning from ml (Mickey Lauer) to standard r
+Because it seems to be the standard?  Because ml5 would seem to suggest
+this is the fifth release from Mickey which in this case is not true?
+Because going from ml to r should not cause problems?
 
-Ehm, why? And this has been discussed where?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Because of the reasons above I did not really see any need for
+discussion.  I somehow still don't.
 
-iD8DBQFGmw+4MkyGM64RGpERAhBqAJ0QWxGuRILqNfsv2uoPO3sU1qlYAgCdEitO
-7xXAt1D1J4+d5RuBPBr6ZE8=
-=mwVI
------END PGP SIGNATURE-----
 
 
