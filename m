@@ -1,27 +1,28 @@
-Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1IBZix-0005Wg-6E
+	(envelope-from <mickeyl@linuxtogo.org>) id 1IBfBg-0005Ue-5A
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jul 2007 19:23:35 +0200
-Received: by ug-out-1314.google.com with SMTP id i24so473358ugd
+	Fri, 20 Jul 2007 01:13:36 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 1A80B28C013; Fri, 20 Jul 2007 01:11:17 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.7 required=5.0 tests=BAYES_00,RCVD_IN_NJABL_DUL,
+	RCVD_IN_PBL autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180165060.adsl.alicedsl.de [85.180.165.60])
+	by srv043.dedi23.de (Postfix) with ESMTP id 395FC28C012
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2007 10:22:53 -0700 (PDT)
-Received: by 10.82.126.5 with SMTP id y5mr3575024buc.1184865773493;
-	Thu, 19 Jul 2007 10:22:53 -0700 (PDT)
-Received: from ?192.168.20.110? ( [77.122.179.115])
-	by mx.google.com with ESMTPS id h1sm2210707nfh.2007.07.19.10.22.51
-	(version=SSLv3 cipher=OTHER); Thu, 19 Jul 2007 10:22:52 -0700 (PDT)
-Date: Thu, 19 Jul 2007 20:22:50 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
+	Fri, 20 Jul 2007 01:11:16 +0200 (CEST)
+Date: Fri, 20 Jul 2007 01:12:53 +0200
+From: Michael 'Mickey' Lauer <mickeyl@linuxtogo.org>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: LinuxToGo
 X-Priority: 3 (Normal)
-Message-ID: <606544311.20070719202250@gmail.com>
-To: Rob Kramer <robk@starhub.net.sg>
-In-Reply-To: <f7nvum$kaj$1@sea.gmane.org>
-References: <f7kde4$rum$1@sea.gmane.org> <f7nvum$kaj$1@sea.gmane.org>
+Message-ID: <1489609350.20070720011253@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Packaging problem.
+Subject: OE meeting @ Guadec07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,41 +36,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2007 17:23:35 -0000
+X-List-Received-Date: Thu, 19 Jul 2007 23:13:36 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hello Rob,
+Hi guys,
 
-Thursday, July 19, 2007, 6:28:15 PM, you wrote:
+the meeting minutes are now available at http://www.openembedded.org/wiki/Guadec07
 
-> Or more succinctly put:
+Sorry, they're pretty brief, but I have a ton of things to do atm.
+Please expand as needed. We will have to talk about the individual
+things via e-mail anyways.
 
-> --------
-BB>>> peek base-passwd FILES_base-passwd
-> None
-BB>>> peek base-passwd FILES_base-passwd-doc
->  /usr/share/doc
-> --------
+Regards,
 
-> It seems all my packages are incompletely packaged or missing due to this.
-> What could cause the FILES_${PN} from bitbake.conf to be unset?
-
-  Whatever it is, you at least know good "workaround" (depends, I'd
-assume that interactive mode is actually internal debugging/workaround
-mode) - use bitbake from command line.
-
-  As for issue, suggested is to submit bugreport with all the details
-you had in the last mail.
-
-> Cheers,
-
->     Rob
-
-
+:M:
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
