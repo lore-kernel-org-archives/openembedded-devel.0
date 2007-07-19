@@ -1,25 +1,31 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1IB7tS-0002Mq-TY
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jul 2007 13:40:35 +0200
-Received: from [88.134.98.145] (helo=[192.168.10.100])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1IB7sv-0000R7-K2
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jul 2007 13:40:01 +0200
-In-Reply-To: <HOECLKEKOHLAMMGDLLBHOEPLLKAA.skoroneos@digital-opsis.com>
-References: <HOECLKEKOHLAMMGDLLBHOEPLLKAA.skoroneos@digital-opsis.com>
-Mime-Version: 1.0 (Apple Message framework v752.3)
-X-Priority: 3 (Normal)
-Message-Id: <3193BEEC-843B-4260-9AD6-F60658101EC3@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Wed, 18 Jul 2007 13:39:51 +0200
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 88.134.98.145
-Subject: Re: PCEngines ALIX 1.c boards donation
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1IBXwD-0003W8-M0
+	for openembedded-devel@openembedded.org; Thu, 19 Jul 2007 17:29:09 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1IBXvY-0000XX-QZ
+	for openembedded-devel@openembedded.org; Thu, 19 Jul 2007 17:28:28 +0200
+Received: from cm203.kappa85.maxonline.com.sg ([58.182.85.203])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 19 Jul 2007 17:28:28 +0200
+Received: from robk by cm203.kappa85.maxonline.com.sg with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 19 Jul 2007 17:28:28 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rob Kramer <robk@starhub.net.sg>
+Date: Thu, 19 Jul 2007 23:28:15 +0800
+Message-ID: <f7nvum$kaj$1@sea.gmane.org>
+References: <f7kde4$rum$1@sea.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@sea.gmane.org
+X-Gmane-NNTP-Posting-Host: cm203.kappa85.maxonline.com.sg
+User-Agent: KNode/0.10.5
+Sender: news <news@sea.gmane.org>
+Subject: Re: Packaging problem.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,25 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jul 2007 11:40:37 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Jul 2007 15:29:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7Bit
 
+Or more succinctly put:
 
-Am 18.07.2007 um 12:42 schrieb Stelios Koroneos:
+--------
+BB>> peek base-passwd FILES_base-passwd
+None
+BB>> peek base-passwd FILES_base-passwd-doc
+ /usr/share/doc
+--------
 
-> Greetings to all !
->
-> PCengines has donated 2 ALIX 1.C boards to OpenEmbedded developers.
-> I would like to say a  special thank Pascal Dornier of PCEngines  
-> for his
-> offer and help on the matter.
+It seems all my packages are incompletely packaged or missing due to this.
+What could cause the FILES_${PN} from bitbake.conf to be unset?
 
-Hi,
+Cheers,
 
-awesome! Please update http://www.openembedded.org/wiki/ProjectDevices.
-
-z.
+    Rob
 
 
 
