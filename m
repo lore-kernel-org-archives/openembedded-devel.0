@@ -1,25 +1,21 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1IBrZL-0005JJ-EF
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jul 2007 14:26:51 +0200
-Received: from [88.134.98.145] (helo=[192.168.10.100])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1IBrYc-0005qj-OW
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jul 2007 14:26:06 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <200707200404.00630.gerwin@vanderkruis.net>
-References: <1489609350.20070720011253@vanille-media.de>
-	<200707200404.00630.gerwin@vanderkruis.net>
-Message-Id: <07420D9B-00D3-4A43-A09A-C5524DCEF627@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Fri, 20 Jul 2007 14:25:51 +0200
+	(envelope-from <openembedded@hrw.one.pl>) id 1IBvWQ-0007uO-Os
+	for openembedded-devel@openembedded.org; Fri, 20 Jul 2007 18:40:12 +0200
+Received: (qmail 2721 invoked by uid 813007); 20 Jul 2007 16:39:19 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 20 Jul 2007 16:39:19 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-X-Broken-Reverse-DNS: no host name found for IP address 88.134.98.145
-Subject: Re: OE meeting @ Guadec07
+Date: Fri, 20 Jul 2007 18:39:13 +0200
+User-Agent: KMail/1.9.7
+References: <HOECLKEKOHLAMMGDLLBHOEPLLKAA.skoroneos@digital-opsis.com>
+In-Reply-To: <HOECLKEKOHLAMMGDLLBHOEPLLKAA.skoroneos@digital-opsis.com>
+MIME-Version: 1.0
+Message-Id: <200707201839.14201.openembedded@hrw.one.pl>
+Subject: Re: PCEngines ALIX 1.c boards donation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,27 +29,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jul 2007 12:26:51 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Jul 2007 16:40:12 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
+Dnia =B6roda, 18 lipca 2007, Stelios Koroneos napisa=B3:
 
-Am 20.07.2007 um 04:04 schrieb Gerwin van der Kruis:
+> PCengines has donated 2 ALIX 1.C boards to OpenEmbedded developers.
+> I would like to say a  special thank Pascal Dornier of PCEngines for
+> his offer and help on the matter.
 
-> Congratulations Marcin, will you marry in an oe shirt ?
+Great news - this board is really nice.
+
+> The boards were shipped today so they would arrive within the next few
+> days.
 >
-> Practical question : Should I perpare the press release of the  
-> foundation of
-> the foundation ?
->
-> I will update the wiki for oedem , is everybody invited for oedem ?
+> I would like to keep on for a while,so anyone interested for the second
+> send an email to the list so core dev's can decide who gets his hands
+> first on it ;)
 
-Hi,
+I would like to hack on such device - it has more power then NSLU2 which=20
+works as server under my desk so it should be possible to get some more=20
+services running on it without problems.
 
-in theory everyone is welcome. In practice we have some space  
-constraints so we should keep an eye on the number of attendees.
+But if someone else also request I will stay with my NSLU2.
 
-z.
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+            We're here to give you a computer, not a religion.
+            		-- Bob Pariseau, at the introduction of the Amiga
 
 
 
