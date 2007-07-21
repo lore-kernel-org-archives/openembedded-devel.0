@@ -1,21 +1,22 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1IBvWQ-0007uO-Os
-	for openembedded-devel@openembedded.org; Fri, 20 Jul 2007 18:40:12 +0200
-Received: (qmail 2721 invoked by uid 813007); 20 Jul 2007 16:39:19 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 20 Jul 2007 16:39:19 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Jul 2007 18:39:13 +0200
-User-Agent: KMail/1.9.7
-References: <HOECLKEKOHLAMMGDLLBHOEPLLKAA.skoroneos@digital-opsis.com>
-In-Reply-To: <HOECLKEKOHLAMMGDLLBHOEPLLKAA.skoroneos@digital-opsis.com>
+	(envelope-from <skoroneos@digital-opsis.com>) id 1ICCaS-0001LP-Nw
+	for openembedded-devel@openembedded.org; Sat, 21 Jul 2007 12:53:24 +0200
+Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B01AC39FB for openembedded-devel@openembedded.org;
+	Sat, 21 Jul 2007 12:51:29 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Sat, 21 Jul 2007 13:52:19 +0300
+Message-ID: <HOECLKEKOHLAMMGDLLBHIEIILLAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-Message-Id: <200707201839.14201.openembedded@hrw.one.pl>
-Subject: Re: PCEngines ALIX 1.c boards donation
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
+Importance: Normal
+In-Reply-To: <200707200404.00630.gerwin@vanderkruis.net>
+Subject: Re: OE meeting @ Guadec07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,39 +30,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jul 2007 16:40:12 -0000
+X-List-Received-Date: Sat, 21 Jul 2007 10:53:25 -0000
 Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Dnia =B6roda, 18 lipca 2007, Stelios Koroneos napisa=B3:
-
-> PCengines has donated 2 ALIX 1.C boards to OpenEmbedded developers.
-> I would like to say a  special thank Pascal Dornier of PCEngines for
-> his offer and help on the matter.
-
-Great news - this board is really nice.
-
-> The boards were shipped today so they would arrive within the next few
-> days.
+> Question to Stellios : Should we write something about the
+> donated hardware (a
+> news message that the company can release ?)
 >
-> I would like to keep on for a while,so anyone interested for the second
-> send an email to the list so core dev's can decide who gets his hands
-> first on it ;)
 
-I would like to hack on such device - it has more power then NSLU2 which=20
-works as server under my desk so it should be possible to get some more=20
-services running on it without problems.
+I think that would be a very good move from our side.
 
-But if someone else also request I will stay with my NSLU2.
+I am talking to some other companies and we will probably get some more
+boards donated, so some expesure on the matter is a very good idea.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Stelios S. Koroneos
 
-            We're here to give you a computer, not a religion.
-            		-- Bob Pariseau, at the introduction of the Amiga
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+
+
 
 
 
