@@ -1,22 +1,23 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [64.233.162.235] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1ICCaS-0001LP-Nw
-	for openembedded-devel@openembedded.org; Sat, 21 Jul 2007 12:53:24 +0200
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B01AC39FB for openembedded-devel@openembedded.org;
-	Sat, 21 Jul 2007 12:51:29 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Sat, 21 Jul 2007 13:52:19 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHIEIILLAA.skoroneos@digital-opsis.com>
+	(envelope-from <sdgvulpes@gmail.com>) id 1ICEBb-0004rG-CZ
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 21 Jul 2007 14:35:51 +0200
+Received: by nz-out-0506.google.com with SMTP id j2so893784nzf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Jul 2007 05:35:00 -0700 (PDT)
+Received: by 10.142.76.4 with SMTP id y4mr97272wfa.1185021299718;
+	Sat, 21 Jul 2007 05:34:59 -0700 (PDT)
+Received: by 10.143.40.5 with HTTP; Sat, 21 Jul 2007 05:34:59 -0700 (PDT)
+Message-ID: <f34f85580707210534m7c736ad5p4f81e24a21413078@mail.gmail.com>
+Date: Sat, 21 Jul 2007 08:34:59 -0400
+From: "Todd Blumer" <sdgvulpes@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <E1ICDci-0000NH-2q@linuxtogo.org>
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-Importance: Normal
-In-Reply-To: <200707200404.00630.gerwin@vanderkruis.net>
-Subject: Re: OE meeting @ Guadec07
+References: <E1ICDci-0000NH-2q@linuxtogo.org>
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev hx4700.conf: prefer version 1.2.0 of xserver-kdrive since it supports w100
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,28 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jul 2007 10:53:25 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Sat, 21 Jul 2007 12:35:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> Question to Stellios : Should we write something about the
-> donated hardware (a
-> news message that the company can release ?)
+OK, it took me a bit to get the commit keys working. Sorry about all
+of the "junk" added to the tree. Got it resolved now.
+--
+Todd
+
+
+On 7/21/07, todd commit <openembedded-commits@lists.openembedded.org> wrote:
+> hx4700.conf: prefer version 1.2.0 of xserver-kdrive since it supports w100
 >
-
-I think that would be a very good move from our side.
-
-I am talking to some other companies and we will probably get some more
-boards donated, so some expesure on the matter is a very good idea.
-
-Stelios S. Koroneos
-
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
-
-
-
-
+> Author: todd@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 32975812e0004f33de2c1c4806e1b4f94c1f9b83
+> ViewMTN: http://monotone.openembedded.org/revision.psp?id=32975812e0004f33de2c1c4806e1b4f94c1f9b83
+> Files:
+> 1
+> conf/machine/hx4700.conf
+> Diffs:
+>
+> #
+> # mt diff -r0c6870e8d6fb45fd8c2560a65ff6d82d6a044a78 -r32975812e0004f33de2c1c4806e1b4f94c1f9b83
+> #
+> #
+> #
+> # patch "conf/machine/hx4700.conf"
+> #  from [a98297fd1c958ca100de38bd071c622423c22d11]
+> #    to [7fc3dbf7c795d1c23929a02c6fb2d560d8674018]
+> #
+> ============================================================
+> --- conf/machine/hx4700.conf    a98297fd1c958ca100de38bd071c622423c22d11
+> +++ conf/machine/hx4700.conf    7fc3dbf7c795d1c23929a02c6fb2d560d8674018
+> @@ -27,7 +27,9 @@ MODUTILS = "26"
+>  PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+>  PCMCIA_MANAGER = "pcmciautils"
+>  MODUTILS = "26"
+> +
+>  XSERVER = "xserver-kdrive-w100"
+> +PREFERRED_VERSION_xserver-kdrive = "1.2.0"
+>
+>  PREFERRED_VERSION_orinoco-modules = "0.15rc1"
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+>
 
 
