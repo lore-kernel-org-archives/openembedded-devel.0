@@ -1,28 +1,19 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.162.237] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1ID5d0-0006E1-8G
-	for openembedded-devel@openembedded.org; Mon, 23 Jul 2007 23:39:42 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6NLcb7S016425;
-	Mon, 23 Jul 2007 22:38:37 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 16396-01; Mon, 23 Jul 2007 22:38:33 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6NLcVrQ016419
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 23 Jul 2007 22:38:31 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
-Date: Mon, 23 Jul 2007 22:38:30 +0100
-Message-Id: <1185226710.6148.133.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Angstrom Core Team
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1ID5le-0006Mr-Jd
+	for openembedded-devel@openembedded.org; Mon, 23 Jul 2007 23:48:39 +0200
+Received: by nz-out-0506.google.com with SMTP id q3so1065410nzb
+	for <openembedded-devel@openembedded.org>;
+	Mon, 23 Jul 2007 14:47:33 -0700 (PDT)
+Received: by 10.115.61.1 with SMTP id o1mr3405234wak.1185227252665;
+	Mon, 23 Jul 2007 14:47:32 -0700 (PDT)
+Received: by 10.115.75.15 with HTTP; Mon, 23 Jul 2007 14:47:32 -0700 (PDT)
+Message-ID: <bdb0025f0707231447v488d6005n8a2d64479abbd8b9@mail.gmail.com>
+Date: Mon, 23 Jul 2007 18:47:32 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: openembedded-devel@openembedded.org
+MIME-Version: 1.0
+Subject: sourcedsc.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,57 +27,191 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2007 21:39:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 23 Jul 2007 21:48:39 -0000
+X-Groupsio-MsgNum: 2484
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_148775_32338551.1185227252574"
+
+------=_Part_148775_32338551.1185227252574
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi Guys,
+Hi all,
 
-As people will note, Laibsch (Rolf) has been frustrated by politics and
-personalities getting in the way of development and this is *bad*. I
-don't think anyone wants this.
+I'm sending the sourcedsc.bbclass that I've coded. What I want is that
+you take a look and give me your feed back.
 
-With this in mind I'd like to propose creating a formal core of Angstrom
-developers similar to that which exists in OE (and has seemed to work
-well as far as I know).
+First of all sorry for the delay, but I was doing other things in my
+work that spent my time and I did write all this code again from
+scratch...
 
-The core team is basically a group of developers who can collectively
-guide the project. At the moment the leadership for Angstrom is unclear
-and this would clarify that and mean that a solid structure is
-established.
+The first code that I've sent to this list was based on
+package_deb.bbclass where I was getting the source after do_patch and
+before do_configure, recreating the debian control directory, trying
+to recreate the .orig.tar.gz and using dpkg-source to generate dsc.
 
-Whilst I can't really call myself an Angstrom developer exactly, I do
-have a vested interest in seeing it become a success. Why is Angstrom
-important? Most of the other handheld distributions in OpenEmbedded were
-lining themselves up to work under the Angstrom banner. Familiar and
-OpenZaurus are dead projects and all hopes for handhelds support from OE
-now rest on Angstrom's shoulders. OE therefore has a vested interest in
-Angstrom and this is one reason I want to see it succeed. I also think
-it has massive potential if done correctly.
+Using this approach:
+- I was getting some errors when recreating the .orig.tar.gz
+- I was having problems with the rules generation
+- it was not creating the .changes file
+- and others that I'm not remembering right now...
 
-What I don't want is anyone feeling the need for yet-another-distro
-which would be the next step is Angstrom's leadership cannot be made
-clear. This leads to fragmentation which is bad.
+Someone have suggested me to try the inherit of sourcepkg, but when I
+was looking to this approach I've notice that some of my problems
+won't be solved and I decided to erase my bbclass file and restart
+coding from scratch using the dh_make to generate the debian control
+directory and dpkg-buildpackage -S to generate all necessary files:
+- .dsc
+- .orig.tar.gz
+- .changes
 
-So who should be on the core team? My thoughts are that Koen is an
-obvious candidate. I'd propose Marcin/hrw (experience from OZ),
-Graeme/XorA (developer/user) and Rod Whitby/rwhitby (to represent the
-other non handhelds that Angstrom supports). I'd also propose inviting
-Rolf/laibsch if he does consider coming back to the project.
+I know that for .deb generation the dpkg-deb approach is much better,
+but to generate the dsc I believe that the dpkg-buildpackage is easier
+and more complete. A possible idea for the future is to use the
+pbuilder of emdebian to build the .deb from the .dsc... but it is just
+an idea...
 
-Membership of the core team probably doesn't involve too much work, you
-just need to care about the project, be involved with it in some way and
-be prepared to make decisions now and again and make sure the project
-agrees on a direction.
+Other reason for the delay is that I did some tests here to be sure
+that this dsc generation is working fine. The result? Well, now I have
+all .dsc that I need under mamona repository. ;)
 
-Thoughts, comments, suggestions and alternatives welcome.
+Thanks in advance,
+Best Regards,
+vivijim
 
-I do think Angstrom needs some kind of formalised leadership though.
+-- 
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
-Cheers,
+------=_Part_148775_32338551.1185227252574
+Content-Type: application/octet-stream; name=sourcedsc.bbclass
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_f4hgpkkt
+Content-Disposition: attachment; filename="sourcedsc.bbclass"
 
-Richard
+CiMjIHNvdXJjZWRzYy5iYmNsYXNzOiBHZW5lcmF0ZXMgdGhlIGRlYmlhbiBzb3VyY2UgcGFja2Fn
+ZS4KCiMjIERlcGxveToKIyMgICAgICAgICAqIC5kc2MgLSBkZWJpYW4gc291cmNlIHBhY2thZ2Ug
+Y29udHJvbCBmaWxlCiMjICAgICAgICAgKiAub3JpZy50YXIuZ3ogLSBPcmlnaW5hbCBzb3VyY2Ug
+cGFja2FnZQojIyAgICAgICAgICogLmRpZmYuZ3ogLSBwYXRjaGVzIHRoYXQgd2UgYXBwbHkKIyMg
+ICAgICAgICAqIC5jaGFuZ2VzIC0gY2hhbmdlcyBmaWxlCgpERVBMT1lfRElSX0RTQyA/PSAiJHtE
+RVBMT1lfRElSfS9kc2MiCgpkZWYgZ2VuX2NvbnRyb2xkaXIoZCwgd29ya2RpciwgYmFzZWRpciwg
+Y29udHJvbGRpciwgcGtnbmFtZSwgc3JjZmlsZSk6CiAgICBpbXBvcnQgcGV4cGVjdAogICAgaW1w
+b3J0IGJiCiAgICBpbXBvcnQgb3MKCiAgICBpZiBub3Qgb3MucGF0aC5leGlzdHMoc3JjZmlsZSk6
+CiAgICAgICAgYmIubm90ZSgiU291cmNlIG5vdCBmb3VuZC4gVW5hYmxlIHRvIGdlbmVyYXRlIGRl
+YmlhbiBjb250cm9sIGRpciIpCiAgICAgICAgcmV0dXJuCgogICAgIyBJZiB0aGUgcGFja2FnZSBh
+bHJlYWR5IGhhcyBhIGRlYmlhbiBjb250cm9sIGRpciB3ZSBuZWVkIHRvIHJlbW92ZSBpdAogICAg
+aWYgb3MucGF0aC5leGlzdHMoY29udHJvbGRpcik6CiAgICAgICAgb3Muc3lzdGVtKCJybSAtcmYg
+JXMiICUgY29udHJvbGRpcikKCiAgICBNID0gYmIuZGF0YS5nZXRWYXIoIk1BSU5UQUlORVIiLCBk
+LCAxKSBvciBcCiAgICAgICAgIjxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZz4iCiAgICBtYWludGFpbmVyX2VtYWlsID0gTVtNLnJpbmRleCgiPCIpKzE6TS5yaW5kZXgo
+Ij4iKV0KCiAgICAjIEdlbmVyYXRpbmcgYSB0ZW1wbGF0ZSBvZiBkZWJpYW4gY29udHJvbCBkaXIK
+ICAgIGNoaWxkID0gcGV4cGVjdC5zcGF3bigiZGhfbWFrZSAtbSAtZSAlcyAtZiAlcyAtcCAlcyIg
+JQogICAgICAgICAgICAgICAgICAgICAgICAgIChtYWludGFpbmVyX2VtYWlsLCBzcmNmaWxlLAog
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwa2duYW1lWzA6cGtnbmFtZS5yaW5kZXgoJy0nKV0u
+bG93ZXIoKSkpCiAgICBjaGlsZC5leHBlY3QoIkhpdCA8ZW50ZXI+IHRvIGNvbmZpcm06IikKICAg
+IGNoaWxkLnNlbmRsaW5lKCcnKQogICAgY2hpbGQuZXhwZWN0KHBleHBlY3QuRU9GLCB0aW1lb3V0
+PU5vbmUpCgogICAgaWYgbm90IG9zLnBhdGguZXhpc3RzKGNvbnRyb2xkaXIpOgogICAgICAgIGJi
+LmVycm9yKCJkaF9tYWtlIGhhcyBmYWlsZWQ6IENvbnRyb2wgZGlyIG5vdCBmb3VuZCIpCiAgICAg
+ICAgcmV0dXJuCgogICAgIyBDbGVhbmluZyBjb250cm9sZGlyCiAgICBvcy5zeXN0ZW0oInJtIC1y
+ZiAlcyAlcyIgJSAob3MucGF0aC5qb2luKGNvbnRyb2xkaXIsICIqLntleCxFWH0iKSwKICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBvcy5wYXRoLmpvaW4oY29udHJvbGRpciwgIlJFQURN
+RS5EZWJpYW4iKSkpCgogICAgIyBNb2RpZnlpbmcgY2hhbmdlbG9nIGZpbGUKICAgIG9zLnN5c3Rl
+bSgic2VkIC1pIC1lIFwicywoQ2xvc2VzOiAjbm5ubikgIDxubm5uIGlzIHRoZSBidWcgbnVtYmVy
+IG9mIHlvdXIgSVRQPiwsZ1wiICVzIiAlIG9zLnBhdGguam9pbihjb250cm9sZGlyLCAiY2hhbmdl
+bG9nIikpCgogICAgIyBNb2RpZnlpbmcgY29weXJpZ2h0IGZpbGUKICAgIG9zLnN5c3RlbSgic2Vk
+IC1pIC1lIFwicyw8ZmlsbCBpbiBodHRwL2Z0cCBzaXRlPiwlcyxnXCIgJXMiICUKICAgICAgICAg
+ICAgICAoYmIuZGF0YS5nZXRWYXIoIlNSQ19VUkkiLCBkLCAxKSwKICAgICAgICAgICAgICAgb3Mu
+cGF0aC5qb2luKGNvbnRyb2xkaXIsICJjb3B5cmlnaHQiKSkpCiAgICBvcy5zeXN0ZW0oInNlZCAt
+aSAtZSBcInMsZmlsZTovLywrIE9FIFBhdGNoOiAsZ1wiICVzIiAlCiAgICAgICAgICAgICAgb3Mu
+cGF0aC5qb2luKGNvbnRyb2xkaXIsICJjb3B5cmlnaHQiKSkKICAgIG9zLnN5c3RlbSgic2VkIC1p
+IC1lIFwicyw7cGF0Y2g9MSwsZ1wiICVzIiAlCiAgICAgICAgICAgICAgb3MucGF0aC5qb2luKGNv
+bnRyb2xkaXIsICJjb3B5cmlnaHQiKSkKICAgIG9zLnN5c3RlbSgic2VkIC1pIC1lIFwicyxVcHN0
+cmVhbSBBdXRob3I6IDxwdXQgYXV0aG9yKHMpIG5hbWUgYW5kIGVtYWlsIGhlcmU+LCxnXCIgJXMi
+ICUgb3MucGF0aC5qb2luKGNvbnRyb2xkaXIsICJjb3B5cmlnaHQiKSkKICAgIG9zLnN5c3RlbSgi
+c2VkIC1pIC1lIFwicyxDb3B5cmlnaHQ6IDxwdXQgdGhlIHllYXIocykgb2YgdGhlIGNvcHlyaWdo
+dFwsIGFuZCB0aGUgbmFtZXMgb2YgdGhlLCxnXCIgJXMiICUgb3MucGF0aC5qb2luKGNvbnRyb2xk
+aXIsICJjb3B5cmlnaHQiKSkKICAgIG9zLnN5c3RlbSgic2VkIC1pIC1lIFwicyxjb3B5cmlnaHQg
+aG9sZGVyKHMpIGhlcmU+LCxnXCIgJXMiICUKICAgICAgICAgICAgICBvcy5wYXRoLmpvaW4oY29u
+dHJvbGRpciwgImNvcHlyaWdodCIpKQogICAgb3Muc3lzdGVtKCJzZWQgLWkgLWUgXCJzLDxQdXQg
+dGhlIGxpY2Vuc2Ugb2YgdGhlIHBhY2thZ2UgaGVyZT4sJXMsZ1wiICVzIiAlCiAgICAgICAgICAg
+ICAgKGJiLmRhdGEuZ2V0VmFyKCJMSUNFTlNFIiwgZCwgMSksCiAgICAgICAgICAgICAgIG9zLnBh
+dGguam9pbihjb250cm9sZGlyLCAiY29weXJpZ2h0IikpKQoKICAgICMgTW9kaWZ5aW5nIGNvbnRy
+b2wgZmlsZQogICAgb3Muc3lzdGVtKCJzZWQgLWkgLWUgXCJzLFNlY3Rpb246IHVua25vd24sU2Vj
+dGlvbjogJXMsZ1wiIGRlYmlhbi9jb250cm9sIiAlCiAgICAgICAgICAgICAgYmIuZGF0YS5nZXRW
+YXIoIlNFQ1RJT04iLCBkLCAxKSkKICAgIG9zLnN5c3RlbSgic2VkIC1pIC1lIFwicyw8aW5zZXJ0
+IHVwIHRvIDYwIGNoYXJzIGRlc2NyaXB0aW9uPiwlcyxnXCIgJXMiICUKICAgICAgICAgICAgICAo
+YmIuZGF0YS5nZXRWYXIoIkRFU0NSSVBUSU9OIiwgZCwgMSksCiAgICAgICAgICAgICAgIG9zLnBh
+dGguam9pbihjb250cm9sZGlyLCAiY29udHJvbCIpKSkKICAgIG9zLnN5c3RlbSgic2VkIC1pIC1l
+IFwicyw8aW5zZXJ0IGxvbmcgZGVzY3JpcHRpb25cLCBpbmRlbnRlZCB3aXRoIHNwYWNlcz4sLGdc
+IiAlcyIgJSBvcy5wYXRoLmpvaW4oY29udHJvbGRpciwgImNvbnRyb2wiKSkKCiAgICBvX3BhdGNo
+ZXNkaXIgPSBvcy5wYXRoLmpvaW4od29ya2RpciwgcGtnbmFtZSwgInBhdGNoZXMiKQogICAgcGF0
+Y2hlc2RpciA9IG9zLnBhdGguam9pbihjb250cm9sZGlyLCAicGF0Y2hlcyIpCiAgICBiYi5ta2Rp
+cmhpZXIocGF0Y2hlc2RpcikKICAgIGlmIG9zLnBhdGguaXNkaXIob19wYXRjaGVzZGlyKToKICAg
+ICAgICBvcy5zeXN0ZW0oImNwIC1hICVzLyoue3BhdGNoLGRpZmZ9ICVzIDI+L2Rldi9udWxsIiAl
+CiAgICAgICAgICAgICAgICAgIChvX3BhdGNoZXNkaXIsIHBhdGNoZXNkaXIpKQoKYWRkdGFzayBj
+cmVhdGVfZHNjIGFmdGVyIGRvX3BhdGNoIGJlZm9yZSBkb19jb25maWd1cmUKcHl0aG9uIGRvX2Ny
+ZWF0ZV9kc2MgKCkgewogICAgaW1wb3J0IHJlCiAgICBpbXBvcnQgb3MKCiAgICAjIFNldHRpbmcg
+dXAgcGFja2FnZSBuYW1lczoKICAgIHBrZ25hbWUgPSBiYi5kYXRhLmdldFZhcignUCcsIGQsIDEp
+CiAgICBpZiBwa2duYW1lLmNvdW50KCJpbnRlcm1lZGlhdGUiKSBvciBcCiAgICAgICBwa2duYW1l
+LmNvdW50KCJuYXRpdmUiKSBvciBwa2duYW1lLmNvdW50KCJjcm9zcyIpOgogICAgICAgIGJiLm5v
+dGUoImRzYyBpcyBub3QgZ2VuZXJhdGVkIGZvciBuYXRpdmUgb3IgY3Jvc3MgcGFja2FnZXMiKQog
+ICAgICAgIHJldHVybgoKICAgICMgU2V0dGluZyB1cCBkaXJlY3RvcmllcyBuYW1lcwogICAgd29y
+a2RpciA9IGJiLmRhdGEuZ2V0VmFyKCJXT1JLRElSIiwgZCwgMSkKICAgIGlmIG5vdCB3b3JrZGly
+OgogICAgICAgIGJiLmVycm9yKCJXT1JLRElSIG5vdCBkZWZpbmVkLCB1bmFibGUgdG8gcGFja2Fn
+ZSIpCiAgICAgICAgcmV0dXJuCiAgICBidWlsZGRpciA9IG9zLnBhdGguam9pbih3b3JrZGlyLCBw
+a2duYW1lLCAiZHNjZ2VuIikKICAgIG91dGRpciA9IGJiLmRhdGEuZ2V0VmFyKCJERVBMT1lfRElS
+X0RTQyIsIGQsIDEpCiAgICBpZiBub3Qgb3V0ZGlyOgogICAgICAgIGJiLmVycm9yKCJERVBMT1lf
+RElSX0RTQyBub3QgZGVmaW5lZCwgdW5hYmxlIHRvIHBhY2thZ2UiKQogICAgICAgIHJldHVybgog
+ICAgcGtnb3V0ZGlyID0gb3MucGF0aC5qb2luKG91dGRpciwgcGtnbmFtZVswOnBrZ25hbWUucmlu
+ZGV4KCctJyldKQoKICAgIHNyY2RpciA9IGJiLmRhdGEuZ2V0VmFyKCJETF9ESVIiLCBkLCAxKQog
+ICAgaWYgbm90IHNyY2RpcjoKICAgICAgICBiYi5lcnJvcigiRExfRElSIG5vdCBkZWZpbmVkLCB1
+bmFibGUgdG8gcGFja2FnZSIpCiAgICAgICAgcmV0dXJuCgogICAgIyBDcmVhdGluZyBhbmQgY2hh
+bmdpbmcgdG8gdGhlIGRpcmVjdG9yeSB3aGVyZSB0aGlzIGJ1aWxkIHdpbGwgb2NjdXJzLgogICAg
+b3Muc3lzdGVtKCJybSAtcmYgJXMiICUgYnVpbGRkaXIpCiAgICBiYi5ta2RpcmhpZXIoYnVpbGRk
+aXIpCiAgICBvcy5jaGRpcihidWlsZGRpcikKCiAgICAjIFVucGFja2luZyB0aGUgc291cmNlIGZp
+bGUKICAgIGZyb20gZ2xvYiBpbXBvcnQgZ2xvYgoKICAgIHNyY2ZpbGUgPSBnbG9iKG9zLnBhdGgu
+am9pbihzcmNkaXIsICIlcy50YXIuZ3oiICUgcGtnbmFtZSkpIFwKICAgICAgICAgICAgICBvciBn
+bG9iKG9zLnBhdGguam9pbihzcmNkaXIsICIlcy50YXIuYnoyIiAlIHBrZ25hbWUpKSBcCiAgICAg
+ICAgICAgICAgb3IgZ2xvYihvcy5wYXRoLmpvaW4oc3JjZGlyLCAiJXMuWiIgJSBwa2duYW1lKSkg
+XAogICAgICAgICAgICAgIG9yIGdsb2Iob3MucGF0aC5qb2luKHNyY2RpciwgIiVzLnRhciIgJSBw
+a2duYW1lKSkgXAogICAgICAgICAgICAgIG9yIGdsb2Iob3MucGF0aC5qb2luKHNyY2RpciwgIiVz
+Lmd6IiAlIHBrZ25hbWUpKSBcCiAgICAgICAgICAgICAgb3IgZ2xvYihvcy5wYXRoLmpvaW4oc3Jj
+ZGlyLCAiJXMuYnoyIiAlIHBrZ25hbWUpKSBcCiAgICAgICAgICAgICAgb3IgZ2xvYihvcy5wYXRo
+LmpvaW4oc3JjZGlyLCAiJXMuemlwIiAlIHBrZ25hbWUpKQoKICAgIGlmIG5vdCBzcmNmaWxlOgog
+ICAgICAgIGJiLmVycm9yKCJTb3VyY2Ugbm90IGZvdW5kOiAlcyIgJSBzcmNmaWxlKQogICAgICAg
+IHJldHVybgogICAgc3JjZmlsZSA9IHNyY2ZpbGVbMF0KCiAgICBjbWQgPSBOb25lCiAgICBpZiBz
+cmNmaWxlLmVuZHN3aXRoKCIudGFyIik6CiAgICAgICAgY21kID0gInRhciB4IC0tbm8tc2FtZS1v
+d25lciAtZiAlcyIgJSBzcmNmaWxlCiAgICBlbGlmIHNyY2ZpbGUuZW5kc3dpdGgoIi50Z3oiKSBv
+ciBzcmNmaWxlLmVuZHN3aXRoKCIudGFyLmd6IikgXAogICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgb3Igc3JjZmlsZS5lbmRzd2l0aCgiLnRhci5aIik6CiAgICAgICAgY21kID0gInRh
+ciB4eiAtLW5vLXNhbWUtb3duZXIgLWYgJXMiICUgc3JjZmlsZQogICAgZWxpZiBzcmNmaWxlLmVu
+ZHN3aXRoKCIudGJ6Iikgb3Igc3JjZmlsZS5lbmRzd2l0aCgiLnRhci5iejIiKToKICAgICAgICBj
+bWQgPSAiYnppcDIgLWRjICVzIHwgdGFyIHggLS1uby1zYW1lLW93bmVyIC1mIC0iICUgc3JjZmls
+ZQogICAgZWxpZiBzcmNmaWxlLmVuZHN3aXRoKCIuZ3oiKSBvciBzcmNmaWxlLmVuZHN3aXRoKCIu
+WiIpIFwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgb3Igc3JjZmlsZS5lbmRzd2l0
+aCgiLnoiKToKICAgICAgICBjbWQgPSAiZ3ppcCAtZGMgJXMiICUgc3JjZmlsZQogICAgZWxpZiBz
+cmNmaWxlLmVuZHN3aXRoKCIuYnoyIik6CiAgICAgICAgY21kID0gImJ6aXAyIC1kYyAlcyIgJSBz
+cmNmaWxlCiAgICBlbGlmIHNyY2ZpbGUuZW5kc3dpdGgoIi56aXAiKToKICAgICAgICBjbWQgPSAi
+dW56aXAgLXEiCiAgICAgICAgaWYgImRvcyIgaW4gcGFybToKICAgICAgICAgICAgY21kID0gIiVz
+IC1hIiAlIGNtZAogICAgICAgIGNtZCA9ICIlcyAlcyIgJSAoY21kLCBzcmNmaWxlKQoKICAgIGlm
+IG5vdCBjbWQ6CiAgICAgICAgcmV0dXJuIFRydWUKCiAgICBjbWQgPSAiUEFUSD1cIiVzXCIgJXMi
+ICUgKGJiLmRhdGEuZ2V0VmFyKCJQQVRIIiwgZCwgMSksIGNtZCkKICAgIGJiLm5vdGUoIlVucGFj
+a2luZyAlcyB0byAlcy8iICUgKHNyY2ZpbGUsIG9zLmdldGN3ZCgpKSkKICAgIG9zLnN5c3RlbShj
+bWQpCgogICAgIyBTZXR0aW5nIHVwIHRoZXNlIHZhcmlhYmxlcyB0aGF0IGRlcGVuZHMgb24gZXh0
+cmFjdGVkIGRpcmVjdG9yeQogICAgYmFzZWRpciA9IG9zLnBhdGguam9pbihidWlsZGRpciwgb3Mu
+bGlzdGRpcihvcy5nZXRjd2QoKSlbMF0pCiAgICBjb250cm9sZGlyID0gb3MucGF0aC5qb2luKGJh
+c2VkaXIsICJkZWJpYW4iKQoKICAgICMgTGV0J3MgYnVpbGQ6CiAgICBvcy5jaGRpcihiYXNlZGly
+KQogICAgZ2VuX2NvbnRyb2xkaXIoZCwgd29ya2RpciwgYmFzZWRpciwgY29udHJvbGRpciwgcGtn
+bmFtZSwgc3JjZmlsZSkKICAgIGJiLm5vdGUoIkJ1aWxkaW5nIGRzYyBwYWNrYWdlOiAlcyIgJSBv
+cy5nZXRjd2QoKSkKICAgIHJldCA9IG9zLnN5c3RlbSgiZHBrZy1idWlsZHBhY2thZ2UgLXVjIC11
+cyAtUyAtcmZha2Vyb290IikKICAgIGlmIHJldCAhPSAwOgogICAgICAgIHJhaXNlIGJiLmJ1aWxk
+LkZ1bmNGYWlsZWQoImRwa2ctYnVpbGRwYWNrYWdlIC1TIGV4ZWN1dGlvbiBmYWlsZWQiKQogICAg
+ZWxzZToKICAgICAgICBiYi5ta2RpcmhpZXIocGtnb3V0ZGlyKQogICAgICAgIG9zLnN5c3RlbSgi
+bXYgLi4vKi57ZHNjLGRpZmYuZ3osY2hhbmdlcyxvcmlnLnRhci5nen0gJXMiICUgcGtnb3V0ZGly
+KQoKICAgICMgTGV0J3MgY2xlYW4KICAgIG9zLmNoZGlyKHdvcmtkaXIpCiAgICBvcy5zeXN0ZW0o
+InJtIC1yZiAlcyIgJSBidWlsZGRpcikKfQoK
 
-
-
-
+------=_Part_148775_32338551.1185227252574--
