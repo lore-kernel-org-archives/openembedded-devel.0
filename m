@@ -1,34 +1,32 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1ICvLS-00012m-0B
-	for openembedded-devel@openembedded.org; Mon, 23 Jul 2007 12:40:54 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1ICyur-0004nH-Af
+	for openembedded-devel@openembedded.org; Mon, 23 Jul 2007 16:29:42 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6NAdinD015037;
-	Mon, 23 Jul 2007 11:39:44 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6NESbCe026817;
+	Mon, 23 Jul 2007 15:28:37 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 14892-03; Mon, 23 Jul 2007 11:39:40 +0100 (BST)
+	id 26344-09; Mon, 23 Jul 2007 15:28:33 +0100 (BST)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6NAdaNp015021
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6NESSld026799
 	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 23 Jul 2007 11:39:36 +0100
+	Mon, 23 Jul 2007 15:28:29 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
-To: "Dr. Mickey Lauer" <mickey@vanille-media.de>,
-	angstrom-distro-devel@linuxtogo.org
-In-Reply-To: <782493793.20070723025335@vanille-media.de>
-References: <f80guk$g8b$1@sea.gmane.org> <1736781229.20070723004348@gmail.com>
-	<46A3D22A.20502@dominion.kabel.utwente.nl> <f80kob$pv6$1@sea.gmane.org>
-	<f80mad$tg4$1@sea.gmane.org> <f80mn0$tg4$3@sea.gmane.org>
-	<782493793.20070723025335@vanille-media.de>
-Date: Mon, 23 Jul 2007 11:39:36 +0100
-Message-Id: <1185187176.6148.42.camel@localhost.localdomain>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <469D3D80.7040104@klever.net>
+References: <d543f5920707171347k2845264cgbce3c02d76818810@mail.gmail.com>
+	<469D3681.3030004@klever.net>
+	<d543f5920707171458q3c13f402x16c8c8fb37f280ea@mail.gmail.com>
+	<469D3D80.7040104@klever.net>
+Date: Mon, 23 Jul 2007 15:28:28 +0100
+Message-Id: <1185200908.6148.56.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [Angstrom-devel] Legends, legends all around
+Subject: Re: Building auxiliary tools in qmake2-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,37 +40,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2007 10:40:55 -0000
+X-List-Received-Date: Mon, 23 Jul 2007 14:29:42 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2007-07-23 at 02:53 +0200, Dr. Michael Lauer wrote:
-> *sigh*
+On Wed, 2007-07-18 at 00:06 +0200, Michael Krelin wrote:
+> >> I do not know what 'lrelease' is (ignorant, remember?), so I'd also ask
+> >> if you really sure that, for instance, uicmoc is not a better place for
+> >> the tool than qmake?
+> >>
+> > 
+> > This is the tool which generates the final binary version of the
+> > message catalogs. The equivalent for a libintl-based project would be
+> > "msgfmt."
 > 
-> WTF is happening here? I don't know who did what and actually to be
-> honest, I don't care, because I don't think we have enough resources
-> to let such valuable contributors go away -- no matter how this
-> incident started and who is responsible.
+> Thanks, that explains the purpose of the tool, but I would be still in 
+> doubt where should it go if not in lrelease-native (after all we do have 
+> opie-lrelease-native package).
+
+Will the opie-lrelease-native work? If not, a lrelease-native package
+sounds like the way to go.
+
+> >> The other thing is that when building uicmoc with qt3support module OE
+> >> has to build almost the whole qt, anyway. Would it not be better if we
+> >> just have qt-native package with all the tools installed? That would
+> >> reduce the amount of merciless and senseless patching and I believe
+> >> would reduce the slice of disk-space/cpu-time continuum eaten up by most
+> >> of the builds.
+> > 
+> > I'm pretty much agnostic about the breakdown of the particular
+> > packages that end up providing the native tools used during target
+> > builds.
 > 
-> That makes me sad.
+> I understand, this pretty general question was a call for opinions.
 
-You're not the only one. Rolf is (or was? :-( ) a valuable contributor
-and I not happy he's felt he had to leave. It looks like acts from both
-sides contributed towards this although I'm not going any further into
-it as I don't think it will help. Given certain past experiences at
-least one side should have known better, stepped back and asked someone
-else to mediate or at least acted differently.
+The general idea is OE should build its own tools where its feasible to
+do so. Since most of the QT tools already exist, it sounds like we just
+need to add a missing one.
 
-As a note to everyone else, if you are having problems with anyone else
-on any project, do please talk to one of the other devs and see if the
-situation can be solved *before* people feel their only option is to
-walk out.
+Note that anyone wanting to shortcut the builds can do so by setting the
+ASSUME_PROVIDED variable to contain the native packages they don't wish
+to build.
 
-I know my time is limited and I can't watch as many mailing lists as
-closely as I'd like but am prepared to try help when pointed at
-something and I suspect this applies to other devs too.
+Cheers,
 
-Richard - equally sad :-(
+Richard
+
 
 
 
