@@ -1,34 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.162.231] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1ICmC6-0001ua-Al
+	(envelope-from <mwhoosier@gmail.com>) id 1ICq21-0004JP-R9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jul 2007 02:54:41 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 3A92228C013; Mon, 23 Jul 2007 02:51:54 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180142218.adsl.alicedsl.de [85.180.142.218])
-	by srv043.dedi23.de (Postfix) with ESMTP id CF43228C012;
-	Mon, 23 Jul 2007 02:51:51 +0200 (CEST)
-Date: Mon, 23 Jul 2007 02:53:35 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <782493793.20070723025335@vanille-media.de>
-To: angstrom-distro-devel@linuxtogo.org
-In-Reply-To: <f80mn0$tg4$3@sea.gmane.org>
-References: <f80guk$g8b$1@sea.gmane.org> <1736781229.20070723004348@gmail.com>
-	<46A3D22A.20502@dominion.kabel.utwente.nl>
-	<f80kob$pv6$1@sea.gmane.org> <f80mad$tg4$1@sea.gmane.org>
-	<f80mn0$tg4$3@sea.gmane.org>
+	Mon, 23 Jul 2007 07:00:30 +0200
+Received: by nz-out-0506.google.com with SMTP id j2so967905nzf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Jul 2007 21:59:28 -0700 (PDT)
+Received: by 10.64.184.16 with SMTP id h16mr3717799qbf.1185166768363;
+	Sun, 22 Jul 2007 21:59:28 -0700 (PDT)
+Received: by 10.65.154.18 with HTTP; Sun, 22 Jul 2007 21:59:28 -0700 (PDT)
+Message-ID: <d543f5920707222159x4a2abb72m669ad6d386bb3d38@mail.gmail.com>
+Date: Mon, 23 Jul 2007 12:59:28 +0800
+From: "Matt Hoosier" <matt.hoosier@gmail.com>
+Sender: mwhoosier@gmail.com
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <469D3D80.7040104@klever.net>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Angstrom-devel] Legends, legends all around
+References: <d543f5920707171347k2845264cgbce3c02d76818810@mail.gmail.com>
+	<469D3681.3030004@klever.net>
+	<d543f5920707171458q3c13f402x16c8c8fb37f280ea@mail.gmail.com>
+	<469D3D80.7040104@klever.net>
+X-Google-Sender-Auth: 61b4ec91c13d23a4
+Subject: Re: Building auxiliary tools in qmake2-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,24 +35,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2007 00:54:42 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 23 Jul 2007 05:00:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-*sigh*
+On 7/18/07, Michael Krelin <hacker@klever.net> wrote:
+> I understand, this pretty general question was a call for opinions.
+>
 
-WTF is happening here? I don't know who did what and actually to be
-honest, I don't care, because I don't think we have enough resources
-to let such valuable contributors go away -- no matter how this
-incident started and who is responsible.
-
-That makes me sad.
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Is there any opinion formed about this yet?
 
 
