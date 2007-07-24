@@ -1,23 +1,23 @@
-Received: from [64.233.184.236] (helo=wr-out-0506.google.com)
+Received: from [62.27.45.185] (helo=argo.arachnion.zzZZzz.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <sdgvulpes@gmail.com>) id 1IDJRQ-0005TV-Ip
-	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 14:24:41 +0200
-Received: by wr-out-0506.google.com with SMTP id 50so1167493wra
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Jul 2007 05:23:31 -0700 (PDT)
-Received: by 10.143.2.19 with SMTP id e19mr308364wfi.1185279810899;
-	Tue, 24 Jul 2007 05:23:30 -0700 (PDT)
-Received: by 10.143.40.5 with HTTP; Tue, 24 Jul 2007 05:23:30 -0700 (PDT)
-Message-ID: <f34f85580707240523hfea361eia2f16c687345c333@mail.gmail.com>
-Date: Tue, 24 Jul 2007 08:23:30 -0400
-From: "Todd Blumer" <sdgvulpes@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1185226710.6148.133.camel@localhost.localdomain>
+	(envelope-from <hacker@klever.net>) id 1IDK23-0006A9-45
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Jul 2007 15:02:31 +0200
+Received: from pd953840f.dip0.t-ipconnect.de ([217.83.132.15]
+	helo=olympus.klever.net)
+	by argo.arachnion.zzZZzz.net with esmtpa (Exim 4.42)
+	id 1IDK0s-0000UJ-UO for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Jul 2007 15:01:19 +0200
+Message-ID: <46A5F7CF.5000105@klever.net>
+Date: Tue, 24 Jul 2007 14:59:59 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.4 (X11/20070619)
 MIME-Version: 1.0
-References: <1185226710.6148.133.camel@localhost.localdomain>
-Cc: openembedded-devel <openembedded-devel@openembedded.org>,
-	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
-Subject: Re: Angstrom Core Team
+To: openembedded-devel@lists.openembedded.org
+References: <d543f5920707171347k2845264cgbce3c02d76818810@mail.gmail.com>	<469D3681.3030004@klever.net>	<d543f5920707171458q3c13f402x16c8c8fb37f280ea@mail.gmail.com>	<469D3D80.7040104@klever.net>
+	<1185200908.6148.56.camel@localhost.localdomain>
+In-Reply-To: <1185200908.6148.56.camel@localhost.localdomain>
+Subject: Re: Building auxiliary tools in qmake2-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,80 +31,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2007 12:24:43 -0000
+X-List-Received-Date: Tue, 24 Jul 2007 13:02:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-All,
-My company, SDG Systems, has previously used Familiar for our released
-products and we recognize that Familiar is now a shadow of its former
-self. We plan to be involved in Angstrom releases. We also see that
-Angstrom is the leading candidate moving forward and we plan to
-contribute.
+> 
+> Will the opie-lrelease-native work? If not, a lrelease-native package
+> sounds like the way to go.
 
-We have some special needs for our released distro (e.g. backwards
-compatibility for our Qt users by supplying Qt4-X11 out of the box),
-but our goal will be to use Angstrom as the base with just a meta
-package on top.
---
-Todd
-irc: tnb
+I'd guess opie-lrelease-native is a bit outdated for qt4, but I've never 
+used it, so I'm not sure.
 
-On 7/23/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> Hi Guys,
->
-> As people will note, Laibsch (Rolf) has been frustrated by politics and
-> personalities getting in the way of development and this is *bad*. I
-> don't think anyone wants this.
->
-> With this in mind I'd like to propose creating a formal core of Angstrom
-> developers similar to that which exists in OE (and has seemed to work
-> well as far as I know).
->
-> The core team is basically a group of developers who can collectively
-> guide the project. At the moment the leadership for Angstrom is unclear
-> and this would clarify that and mean that a solid structure is
-> established.
->
-> Whilst I can't really call myself an Angstrom developer exactly, I do
-> have a vested interest in seeing it become a success. Why is Angstrom
-> important? Most of the other handheld distributions in OpenEmbedded were
-> lining themselves up to work under the Angstrom banner. Familiar and
-> OpenZaurus are dead projects and all hopes for handhelds support from OE
-> now rest on Angstrom's shoulders. OE therefore has a vested interest in
-> Angstrom and this is one reason I want to see it succeed. I also think
-> it has massive potential if done correctly.
->
-> What I don't want is anyone feeling the need for yet-another-distro
-> which would be the next step is Angstrom's leadership cannot be made
-> clear. This leads to fragmentation which is bad.
->
-> So who should be on the core team? My thoughts are that Koen is an
-> obvious candidate. I'd propose Marcin/hrw (experience from OZ),
-> Graeme/XorA (developer/user) and Rod Whitby/rwhitby (to represent the
-> other non handhelds that Angstrom supports). I'd also propose inviting
-> Rolf/laibsch if he does consider coming back to the project.
->
-> Membership of the core team probably doesn't involve too much work, you
-> just need to care about the project, be involved with it in some way and
-> be prepared to make decisions now and again and make sure the project
-> agrees on a direction.
->
-> Thoughts, comments, suggestions and alternatives welcome.
->
-> I do think Angstrom needs some kind of formalised leadership though.
->
-> Cheers,
->
-> Richard
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+>>>> The other thing is that when building uicmoc with qt3support module OE
+>>>> has to build almost the whole qt, anyway. Would it not be better if we
+>>>> just have qt-native package with all the tools installed? That would
+>>>> reduce the amount of merciless and senseless patching and I believe
+>>>> would reduce the slice of disk-space/cpu-time continuum eaten up by most
+>>>> of the builds.
+>>> I'm pretty much agnostic about the breakdown of the particular
+>>> packages that end up providing the native tools used during target
+>>> builds.
+>> I understand, this pretty general question was a call for opinions.
+> 
+> The general idea is OE should build its own tools where its feasible to
+> do so. Since most of the QT tools already exist, it sounds like we just
+> need to add a missing one.
+> 
+> Note that anyone wanting to shortcut the builds can do so by setting the
+> ASSUME_PROVIDED variable to contain the native packages they don't wish
+> to build.
+
+That wasn't a question of whether we should use build system's qt tools, 
+it was about not splitting qt into many native packages, but rather 
+using a single qt-native, since, for instance, qmake2-native has to 
+build half a qt, anyway, to support qt3 compatibility layer. I don't 
+think dropping qt3support is a feasible option. If not, then, of course 
+adding a missing lrelease-native is the way to go.
+
+Love,
+H
 
 
