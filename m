@@ -1,31 +1,23 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.184.236] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IDJ0d-0000z6-GY
-	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 13:56:59 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id AA0DF28C013; Tue, 24 Jul 2007 13:54:03 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180191193.adsl.alicedsl.de [85.180.191.193])
-	by srv043.dedi23.de (Postfix) with ESMTP id DE77928C012;
-	Tue, 24 Jul 2007 13:54:02 +0200 (CEST)
-Date: Tue, 24 Jul 2007 13:55:48 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1779009149.20070724135548@vanille-media.de>
-To: angstrom-distro-devel@linuxtogo.org, 
-	openembedded-devel <openembedded-devel@openembedded.org>
-In-Reply-To: <20070724082035.GB7067@cimmeria>
-References: <1185226710.6148.133.camel@localhost.localdomain>
-	<20070724082035.GB7067@cimmeria>
+	(envelope-from <sdgvulpes@gmail.com>) id 1IDJRQ-0005TV-Ip
+	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 14:24:41 +0200
+Received: by wr-out-0506.google.com with SMTP id 50so1167493wra
+	for <openembedded-devel@openembedded.org>;
+	Tue, 24 Jul 2007 05:23:31 -0700 (PDT)
+Received: by 10.143.2.19 with SMTP id e19mr308364wfi.1185279810899;
+	Tue, 24 Jul 2007 05:23:30 -0700 (PDT)
+Received: by 10.143.40.5 with HTTP; Tue, 24 Jul 2007 05:23:30 -0700 (PDT)
+Message-ID: <f34f85580707240523hfea361eia2f16c687345c333@mail.gmail.com>
+Date: Tue, 24 Jul 2007 08:23:30 -0400
+From: "Todd Blumer" <sdgvulpes@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1185226710.6148.133.camel@localhost.localdomain>
 MIME-Version: 1.0
-Subject: Re: [Angstrom-devel] Angstrom Core Team
+References: <1185226710.6148.133.camel@localhost.localdomain>
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
+Subject: Re: Angstrom Core Team
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,47 +31,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2007 11:56:59 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 24 Jul 2007 12:24:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Graeme Gregory wrote:
-> I would happilly take a steering role, I also think Mickey as a founder
-> and commercial user of Angstrom (last I heard he wanted to merge
-> openmoko in).
+All,
+My company, SDG Systems, has previously used Familiar for our released
+products and we recognize that Familiar is now a shadow of its former
+self. We plan to be involved in Angstrom releases. We also see that
+Angstrom is the leading candidate moving forward and we plan to
+contribute.
 
-Agreed. Koen and me went through flame-hell for creating Angstrom, but
-we kept going. Unfortunately, I have not been able to actually do anything
-Angstrom-related (but advocacy) in the past 12 months, however I'd
-like to stay associated with this project since I still hope that at
-some point of time I can continue working on some user-friendly UI
-components for Angstrom (like installer, first-usage wizard, and
-bootmanager).
+We have some special needs for our released distro (e.g. backwards
+compatibility for our Qt users by supplying Qt4-X11 out of the box),
+but our goal will be to use Angstrom as the base with just a meta
+package on top.
+--
+Todd
+irc: tnb
 
-> I defineately think Rolf would be a good addition, a team always needs
-> a devils advocate, and Rolf can do this with style.
-
-Agreed. We just need to find a way to get the quarrels down to a
-minimum. I like Richard's proposal about some mediating
-infrastructure.
-
->> Thoughts, comments, suggestions and alternatives welcome.
->> 
-> The alternative I fear is people start adding DISTRO that do
-> include angstrom.conf
-> REDEFINE_STUFF_WE_DONT_LIKE
-
-> But they are all basically the same DISTRO with a fiddle.
-
-> And maybe at OEDEM we hire some sumo suits to settle problems?
-
-:D
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+On 7/23/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> Hi Guys,
+>
+> As people will note, Laibsch (Rolf) has been frustrated by politics and
+> personalities getting in the way of development and this is *bad*. I
+> don't think anyone wants this.
+>
+> With this in mind I'd like to propose creating a formal core of Angstrom
+> developers similar to that which exists in OE (and has seemed to work
+> well as far as I know).
+>
+> The core team is basically a group of developers who can collectively
+> guide the project. At the moment the leadership for Angstrom is unclear
+> and this would clarify that and mean that a solid structure is
+> established.
+>
+> Whilst I can't really call myself an Angstrom developer exactly, I do
+> have a vested interest in seeing it become a success. Why is Angstrom
+> important? Most of the other handheld distributions in OpenEmbedded were
+> lining themselves up to work under the Angstrom banner. Familiar and
+> OpenZaurus are dead projects and all hopes for handhelds support from OE
+> now rest on Angstrom's shoulders. OE therefore has a vested interest in
+> Angstrom and this is one reason I want to see it succeed. I also think
+> it has massive potential if done correctly.
+>
+> What I don't want is anyone feeling the need for yet-another-distro
+> which would be the next step is Angstrom's leadership cannot be made
+> clear. This leads to fragmentation which is bad.
+>
+> So who should be on the core team? My thoughts are that Koen is an
+> obvious candidate. I'd propose Marcin/hrw (experience from OZ),
+> Graeme/XorA (developer/user) and Rod Whitby/rwhitby (to represent the
+> other non handhelds that Angstrom supports). I'd also propose inviting
+> Rolf/laibsch if he does consider coming back to the project.
+>
+> Membership of the core team probably doesn't involve too much work, you
+> just need to care about the project, be involved with it in some way and
+> be prepared to make decisions now and again and make sure the project
+> agrees on a direction.
+>
+> Thoughts, comments, suggestions and alternatives welcome.
+>
+> I do think Angstrom needs some kind of formalised leadership though.
+>
+> Cheers,
+>
+> Richard
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
