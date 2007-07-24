@@ -1,20 +1,30 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1IDFeL-0000WN-Gu
-	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 10:21:49 +0200
-Received: from xora.org.uk ([::ffff:85.210.46.98])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
-	by xora.org.uk with esmtp; Tue, 24 Jul 2007 09:20:37 +0100
-	id 00030909.46A5B655.00006849
-Date: Tue, 24 Jul 2007 09:20:35 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-To: angstrom-distro-devel@linuxtogo.org
-Message-ID: <20070724082035.GB7067@cimmeria>
+	(envelope-from <mickey@vanille-media.de>) id 1IDJ0d-0000z6-GY
+	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 13:56:59 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id AA0DF28C013; Tue, 24 Jul 2007 13:54:03 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180191193.adsl.alicedsl.de [85.180.191.193])
+	by srv043.dedi23.de (Postfix) with ESMTP id DE77928C012;
+	Tue, 24 Jul 2007 13:54:02 +0200 (CEST)
+Date: Tue, 24 Jul 2007 13:55:48 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1779009149.20070724135548@vanille-media.de>
+To: angstrom-distro-devel@linuxtogo.org, 
+	openembedded-devel <openembedded-devel@openembedded.org>
+In-Reply-To: <20070724082035.GB7067@cimmeria>
 References: <1185226710.6148.133.camel@localhost.localdomain>
-Mime-Version: 1.0
-In-Reply-To: <1185226710.6148.133.camel@localhost.localdomain>
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
+	<20070724082035.GB7067@cimmeria>
+MIME-Version: 1.0
 Subject: Re: [Angstrom-devel] Angstrom Core Team
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,42 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2007 08:21:53 -0000
+X-List-Received-Date: Tue, 24 Jul 2007 11:56:59 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Mon, Jul 23, 2007 at 10:38:30PM +0100, Richard Purdie wrote:
-> With this in mind I'd like to propose creating a formal core of Angstrom
-> developers similar to that which exists in OE (and has seemed to work
-> well as far as I know).
-> 
-Sounds sensible to me, as long as the founders of Angstrom are agreeable.
+Graeme Gregory wrote:
+> I would happilly take a steering role, I also think Mickey as a founder
+> and commercial user of Angstrom (last I heard he wanted to merge
+> openmoko in).
 
-> So who should be on the core team? My thoughts are that Koen is an
-> obvious candidate. I'd propose Marcin/hrw (experience from OZ),
-> Graeme/XorA (developer/user) and Rod Whitby/rwhitby (to represent the
-> other non handhelds that Angstrom supports). I'd also propose inviting
-> Rolf/laibsch if he does consider coming back to the project.
-> 
-I would happilly take a steering role, I also think Mickey as a founder
-and commercial user of Angstrom (last I heard he wanted to merge
-openmoko in).
+Agreed. Koen and me went through flame-hell for creating Angstrom, but
+we kept going. Unfortunately, I have not been able to actually do anything
+Angstrom-related (but advocacy) in the past 12 months, however I'd
+like to stay associated with this project since I still hope that at
+some point of time I can continue working on some user-friendly UI
+components for Angstrom (like installer, first-usage wizard, and
+bootmanager).
 
-I defineately think Rolf would be a good addition, a team always needs
-a devils advocate, and Rolf can do this with style.
+> I defineately think Rolf would be a good addition, a team always needs
+> a devils advocate, and Rolf can do this with style.
 
-> Thoughts, comments, suggestions and alternatives welcome.
-> 
-The alternative I fear is people start adding DISTRO that do
-include angstrom.conf
-REDEFINE_STUFF_WE_DONT_LIKE
+Agreed. We just need to find a way to get the quarrels down to a
+minimum. I like Richard's proposal about some mediating
+infrastructure.
 
-But they are all basically the same DISTRO with a fiddle.
+>> Thoughts, comments, suggestions and alternatives welcome.
+>> 
+> The alternative I fear is people start adding DISTRO that do
+> include angstrom.conf
+> REDEFINE_STUFF_WE_DONT_LIKE
 
-And maybe at OEDEM we hire some sumo suits to settle problems?
+> But they are all basically the same DISTRO with a fiddle.
 
-Graeme
+> And maybe at OEDEM we hire some sumo suits to settle problems?
+
+:D
+
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
