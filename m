@@ -1,26 +1,30 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IDO9c-00057f-2s
-	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 19:26:36 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l6OHPMj1009659 for <openembedded-devel@openembedded.org>;
-	Tue, 24 Jul 2007 19:25:23 +0200
-Message-ID: <46A63601.7070201@dominion.kabel.utwente.nl>
-Date: Tue, 24 Jul 2007 19:25:21 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
-In-Reply-To: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: OEDEM dates
+	(envelope-from <oe@hentges.net>) id 1IDOLA-0005In-QV
+	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 19:38:32 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id 1C0233081E6;
+	Tue, 24 Jul 2007 19:37:23 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at hentges.net
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563.serverkompetenz.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id mAiawYMw7Ohn; Tue, 24 Jul 2007 19:37:21 +0200 (CEST)
+Received: from [192.168.5.2] (xdsl-213-196-226-135.netcologne.de
+	[213.196.226.135]) (using TLSv1 with cipher RC4-MD5 (128/128 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id C7F563081E3;
+	Tue, 24 Jul 2007 19:37:20 +0200 (CEST)
+From: Matthias Hentges <oe@hentges.net>
+To: angstrom-distro-devel@linuxtogo.org
+In-Reply-To: <1185226710.6148.133.camel@localhost.localdomain>
+References: <1185226710.6148.133.camel@localhost.localdomain>
+Date: Tue, 24 Jul 2007 19:37:19 +0200
+Message-Id: <1185298639.8376.21.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.2 
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Re: [Angstrom-devel] Angstrom Core Team
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,26 +38,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2007 17:26:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Jul 2007 17:38:32 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Holger Freyther schreef:
-> Hey,
+Am Montag, den 23.07.2007, 22:38 +0100 schrieb Richard Purdie:
+> Hi Guys,
 > 
-> to secure the presence of a M$ power point equiped IBM laptop we will  
-> hold OEDEM from the 6th to the 10th of October 2007 in Berlin.
+> As people will note, Laibsch (Rolf) has been frustrated by politics and
+> personalities getting in the way of development and this is *bad*. I
+> don't think anyone wants this.
 
-Dates look good to me too, no deadlines or exams nearby.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+[...]
+      * 
+> Whilst I can't really call myself an Angstrom developer exactly, I do
+> have a vested interest in seeing it become a success. Why is Angstrom
+> important? Most of the other handheld distributions in OpenEmbedded were
+> lining themselves up to work under the Angstrom banner. Familiar and
+> OpenZaurus are dead projects and all hopes for handhelds support from OE
+> now rest on Angstrom's shoulders. OE therefore has a vested interest in
+> Angstrom and this is one reason I want to see it succeed. I also think
+> it has massive potential if done correctly.
 
-iD8DBQFGpjYAMkyGM64RGpERAoJ+AJ9jNnjmBI5LL83dOja8lM20K7dyDwCfQedL
-NJ9AXSqHuYxByhwW7MyKVFU=
-=BNCD
------END PGP SIGNATURE-----
+ACK
+
+> What I don't want is anyone feeling the need for yet-another-distro
+> which would be the next step is Angstrom's leadership cannot be made
+> clear. This leads to fragmentation which is bad.
+
+Agreed, the developer resources are already spread thin. Forking (or
+semi-forks as in "include angstrom.conf ; OVERRIDE_THE_HELL_OUT_OF_IT)
+would possibly (but not necessarily!) spread them even thinner. 
+
+> So who should be on the core team? My thoughts are that Koen is an
+> obvious candidate. 
+> I'd propose Marcin/hrw (experience from OZ),
+> Graeme/XorA (developer/user) and Rod Whitby/rwhitby (to represent the
+> other non handhelds that Angstrom supports). I'd also propose inviting
+> Rolf/laibsch if he does consider coming back to the project.
+
+Excellent choice, but you of course forgot Dr. Mickey ;)
+
+> Membership of the core team probably doesn't involve too much work, you
+> just need to care about the project, be involved with it in some way and
+> be prepared to make decisions now and again and make sure the project
+> agrees on a direction.
+> 
+> Thoughts, comments, suggestions and alternatives welcome.
+
+The committee should meet on a regular schedule via IRC or alternatively
+via a mailing list and discuss concerns at hand. If members can not
+agree on a certain outcome, the majority vote decides and all members
+accept the decision derived from that vote.
+
+This should defuse the current situation quite a bit as there will be no
+more flame-wars on the ML about "secret" talks, etc.
+
+If you are on the core-team, you _will_ get to vote and express your
+opinion on important matters and nobody will feel "left out".
+
+> I do think Angstrom needs some kind of formalised leadership though.
+
+I guess on this we can all agree.
+
+-- 
+Matthias 'CoreDump' Hentges 
+Cologne / Germany
+
+Webmaster of Hentges.net & Embedded Linux Developer
+GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
+
+My OS: Debian SID: Geek by Nature, Linux by Choice
+
+
+
 
 
