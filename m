@@ -1,26 +1,27 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [66.111.4.26] (helo=out2.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IDQwS-0005CP-Df
-	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 22:25:12 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l6OKNwj1011236 for <openembedded-devel@openembedded.org>;
-	Tue, 24 Jul 2007 22:23:58 +0200
-Message-ID: <46A65FDD.60907@dominion.kabel.utwente.nl>
-Date: Tue, 24 Jul 2007 22:23:57 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
+	(envelope-from <rod@whitby.id.au>) id 1IDRYI-0005oC-6f
+	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 23:04:18 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 962CAA732;
+	Tue, 24 Jul 2007 17:03:07 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Tue, 24 Jul 2007 17:03:07 -0400
+X-Sasl-enc: CTGHit/o/z7lzweBQbdH+s47BnL1I7u5zF1KwmJZ3/tL 1185310987
+Received: from [192.168.18.11] (CPE-121-209-21-24.sa.bigpond.net.au
+	[121.209.21.24])
+	by mail.messagingengine.com (Postfix) with ESMTP id 974DE3974;
+	Tue, 24 Jul 2007 17:03:06 -0400 (EDT)
+Message-ID: <46A66850.6000100@whitby.id.au>
+Date: Wed, 25 Jul 2007 06:30:00 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.12 (Windows/20070509)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <bdb0025f0707231447v488d6005n8a2d64479abbd8b9@mail.gmail.com>
-In-Reply-To: <bdb0025f0707231447v488d6005n8a2d64479abbd8b9@mail.gmail.com>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: sourcedsc.bbclass
+To: angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>, 
+	openembedded-devel <openembedded-devel@openembedded.org>
+References: <1185226710.6148.133.camel@localhost.localdomain>
+In-Reply-To: <1185226710.6148.133.camel@localhost.localdomain>
+Subject: Re: Angstrom Core Team
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,31 +35,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2007 20:25:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Jul 2007 21:04:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Richard Purdie wrote:
+> With this in mind I'd like to propose creating a formal core of Angstrom
+> developers similar to that which exists in OE (and has seemed to work
+> well as far as I know).
 
-Rodrigo Vivi schreef:
-> Hi all,
-> 
-> I'm sending the sourcedsc.bbclass that I've coded. What I want is that
-> you take a look and give me your feed back.
+I fully support this proposal.
 
-It looks pretty ok after a brief look, could you attach it to bugzilla so we don't forget
-about it?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGpl/dMkyGM64RGpERAsUCAJ9ZyEqhM56ZlCdfaCboErK+pjo3PQCeNTMv
-mr4bSynEIp4gI09jzUOTtzc=
-=XP1U
------END PGP SIGNATURE-----
+-- Rod
 
 
