@@ -1,23 +1,26 @@
-Received: from [62.27.45.185] (helo=argo.arachnion.zzZZzz.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1IDK23-0006A9-45
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jul 2007 15:02:31 +0200
-Received: from pd953840f.dip0.t-ipconnect.de ([217.83.132.15]
-	helo=olympus.klever.net)
-	by argo.arachnion.zzZZzz.net with esmtpa (Exim 4.42)
-	id 1IDK0s-0000UJ-UO for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jul 2007 15:01:19 +0200
-Message-ID: <46A5F7CF.5000105@klever.net>
-Date: Tue, 24 Jul 2007 14:59:59 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.4 (X11/20070619)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IDL6T-0002zW-45
+	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 16:11:09 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l6OE9uj1004458 for <openembedded-devel@openembedded.org>;
+	Tue, 24 Jul 2007 16:09:57 +0200
+Message-ID: <46A60832.30203@dominion.kabel.utwente.nl>
+Date: Tue, 24 Jul 2007 16:09:54 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <d543f5920707171347k2845264cgbce3c02d76818810@mail.gmail.com>	<469D3681.3030004@klever.net>	<d543f5920707171458q3c13f402x16c8c8fb37f280ea@mail.gmail.com>	<469D3D80.7040104@klever.net>
-	<1185200908.6148.56.camel@localhost.localdomain>
-In-Reply-To: <1185200908.6148.56.camel@localhost.localdomain>
-Subject: Re: Building auxiliary tools in qmake2-native
+To: openembedded-devel@openembedded.org
+References: <E1IDL1e-0002ro-9i@linuxtogo.org>
+In-Reply-To: <E1IDL1e-0002ro-9i@linuxtogo.org>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: mtn disapprove d7758e2637918ff4035244d64fb7227f6cf833ad, was Re: [oe-commits] org.oe.dev phoneserver: Add patch for FIC GTA01	support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,44 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2007 13:02:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 24 Jul 2007 14:11:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-> 
-> Will the opie-lrelease-native work? If not, a lrelease-native package
-> sounds like the way to go.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'd guess opie-lrelease-native is a bit outdated for qt4, but I've never 
-used it, so I'm not sure.
+florian commit schreef:
 
->>>> The other thing is that when building uicmoc with qt3support module OE
->>>> has to build almost the whole qt, anyway. Would it not be better if we
->>>> just have qt-native package with all the tools installed? That would
->>>> reduce the amount of merciless and senseless patching and I believe
->>>> would reduce the slice of disk-space/cpu-time continuum eaten up by most
->>>> of the builds.
->>> I'm pretty much agnostic about the breakdown of the particular
->>> packages that end up providing the native tools used during target
->>> builds.
->> I understand, this pretty general question was a call for opinions.
-> 
-> The general idea is OE should build its own tools where its feasible to
-> do so. Since most of the QT tools already exist, it sounds like we just
-> need to add a missing one.
-> 
-> Note that anyone wanting to shortcut the builds can do so by setting the
-> ASSUME_PROVIDED variable to contain the native packages they don't wish
-> to build.
+> +PACKAGE_ARCH = "${MACHINE}"
 
-That wasn't a question of whether we should use build system's qt tools, 
-it was about not splitting qt into many native packages, but rather 
-using a single qt-native, since, for instance, qmake2-native has to 
-build half a qt, anyway, to support qt3 compatibility layer. I don't 
-think dropping qt3support is a feasible option. If not, then, of course 
-adding a missing lrelease-native is the way to go.
+This has to stop, OE is usable without setting MACHINE. The correct form is either
 
-Love,
-H
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+or by setting SRC_URI_OVERRIDES_PACKAGE_ARCH (see base.bbclass) appropriately
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGpggyMkyGM64RGpERAvw+AKCY9ytYPx1zFTw7aljuDG3cc50RLgCeLaEU
+tWzfaAUTRB99Ls3CNcDAcbY=
+=Vx2C
+-----END PGP SIGNATURE-----
 
 
