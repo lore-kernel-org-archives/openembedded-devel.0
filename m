@@ -1,26 +1,21 @@
-Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1ID5sX-0006XZ-F5
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jul 2007 23:55:45 +0200
-Received: by ug-out-1314.google.com with SMTP id i24so40027ugd
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2007 14:54:40 -0700 (PDT)
-Received: by 10.66.225.1 with SMTP id x1mr140193ugg.1185227680481;
-	Mon, 23 Jul 2007 14:54:40 -0700 (PDT)
-Received: from ?192.168.20.110? ( [77.122.179.115])
-	by mx.google.com with ESMTPS id z40sm13176755ikz.2007.07.23.14.54.39
-	(version=SSLv3 cipher=OTHER); Mon, 23 Jul 2007 14:54:39 -0700 (PDT)
-Date: Tue, 24 Jul 2007 00:54:33 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) UNREG / CD5BF9353B3B7091
-X-Priority: 3 (Normal)
-Message-ID: <86855446.20070724005433@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <77326513.20070720105101@gmail.com>
-References: <77326513.20070720105101@gmail.com>
-MIME-Version: 1.0
-Subject: Re: [RFC] Revamp module handling in OE
+	(envelope-from <dp@xora.org.uk>) id 1IDFeL-0000WN-Gu
+	for openembedded-devel@openembedded.org; Tue, 24 Jul 2007 10:21:49 +0200
+Received: from xora.org.uk ([::ffff:85.210.46.98])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Tue, 24 Jul 2007 09:20:37 +0100
+	id 00030909.46A5B655.00006849
+Date: Tue, 24 Jul 2007 09:20:35 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: angstrom-distro-devel@linuxtogo.org
+Message-ID: <20070724082035.GB7067@cimmeria>
+References: <1185226710.6148.133.camel@localhost.localdomain>
+Mime-Version: 1.0
+In-Reply-To: <1185226710.6148.133.camel@localhost.localdomain>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Re: [Angstrom-devel] Angstrom Core Team
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,68 +29,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2007 21:55:48 -0000
+X-List-Received-Date: Tue, 24 Jul 2007 08:21:53 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello OpenEmbedded,
+On Mon, Jul 23, 2007 at 10:38:30PM +0100, Richard Purdie wrote:
+> With this in mind I'd like to propose creating a formal core of Angstrom
+> developers similar to that which exists in OE (and has seemed to work
+> well as far as I know).
+> 
+Sounds sensible to me, as long as the founders of Angstrom are agreeable.
 
-Friday, July 20, 2007, 10:51:01 AM, you wrote:
+> So who should be on the core team? My thoughts are that Koen is an
+> obvious candidate. I'd propose Marcin/hrw (experience from OZ),
+> Graeme/XorA (developer/user) and Rod Whitby/rwhitby (to represent the
+> other non handhelds that Angstrom supports). I'd also propose inviting
+> Rolf/laibsch if he does consider coming back to the project.
+> 
+I would happilly take a steering role, I also think Mickey as a founder
+and commercial user of Angstrom (last I heard he wanted to merge
+openmoko in).
 
-> Hello openembedded-devel,
+I defineately think Rolf would be a good addition, a team always needs
+a devils advocate, and Rolf can do this with style.
 
->   We have few issues with kernel module handling in OE which I'd like
-> to bring to attention and discuss ways to resolve.
+> Thoughts, comments, suggestions and alternatives welcome.
+> 
+The alternative I fear is people start adding DISTRO that do
+include angstrom.conf
+REDEFINE_STUFF_WE_DONT_LIKE
 
-> 1. Module config option handling was not upgraded since 2.4.
+But they are all basically the same DISTRO with a fiddle.
 
-> This is known issue, it surfaced several times already, and we
-> discussed ways to solve it with Graeme Gregory on IRC recently. The
-> issue is that OE currently writes module config options where 2.4
-> modutils expect them (/etc/modutils/*.conf), not where 2.6
-> module-init-tools do (/etc/modprobe.d/*.conf). The patch is at
-> http://bugs.openembedded.org/show_bug.cgi?id=2669
+And maybe at OEDEM we hire some sumo suits to settle problems?
 
-  I got confirmation from Graeme that it works ok, so I'd like to
-commit this tomorrow night.
-
-
-> 2. Location of module autoload config.
-
-> Module autoload is rather different feature. It actually never was
-> part of modutils/module-init-tools, but is done via adhoc scripts per
-> some distro's convention. Relatively randomly OE uses the same
-> /etc/modutils dir to store that info (just in files w/o extension).
-> Per-module data is then collated into /etc/modules file, and *that*
-> file is Debian convention. But AFAICT, that file is supposed to
-> contain local user's selection of autoload modules, whereas OE
-> automatically overwrites it. Of course, this information rather be
-> checked by people with more Debian background. Either way, at least
-> following issues can be identified:
-
-> 1. Location of per-module autoload data: /etc/modutils/ is rather
-> confusing place for this, especially if we switch to 2.6 way.
-> 2. /etc/modules is supposedly a user file.
-
-> One of the possible solutions: if a file is named /etc/modules, then
-> it's natural to name dir /etc/modules.d/ . If data from it would need
-> to be collated, that would go to some /etc/modules.foo, leaving
-> /etc/modules intact. FInally, both contents of files and dri would be
-> taken into account.
-
-
-  I hope that people are fully back from GUADEC now and can give this
-some thought ;-).
-
-
-> Thoughts?
-
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Graeme
 
 
 
