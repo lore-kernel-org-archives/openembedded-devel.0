@@ -1,44 +1,23 @@
-Received: from [72.29.79.205] (helo=rhodos.klever.net)
+Received: from [209.85.146.182] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <palmira@rhodos.klever.net>) id 1IDk9N-0005mP-Tv
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jul 2007 18:55:50 +0200
-Received: from pd953b930.dip0.t-ipconnect.de ([217.83.185.48]
-	helo=olympus.klever.net) by rhodos.klever.net with esmtpa (Exim 4.67)
-	(envelope-from <palmira@rhodos.klever.net>) id 1IDk83-0007yn-KJ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jul 2007 18:54:28 +0200
-Message-ID: <46A77FEF.3070405@klever.net>
-Date: Wed, 25 Jul 2007 18:53:03 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.4 (X11/20070619)
-MIME-Version: 1.0
+	(envelope-from <cliff.brake@gmail.com>) id 1IDkkg-0001vN-9P
+	for openembedded-devel@openembedded.org; Wed, 25 Jul 2007 19:34:22 +0200
+Received: by wa-out-1112.google.com with SMTP id v27so302337wah
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Jul 2007 10:33:05 -0700 (PDT)
+Received: by 10.114.158.1 with SMTP id g1mr860877wae.1185384784832;
+	Wed, 25 Jul 2007 10:33:04 -0700 (PDT)
+Received: by 10.114.191.17 with HTTP; Wed, 25 Jul 2007 10:33:04 -0700 (PDT)
+Message-ID: <f96d234e0707251033ledbb19bg8a93154765ec3fbe@mail.gmail.com>
+Date: Wed, 25 Jul 2007 13:33:04 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <E1IDL1e-0002ro-9i@linuxtogo.org>	<46A60832.30203@dominion.kabel.utwente.nl>	<46A7230E.6000707@kernelconcepts.de>	<46A7262F.1080406@dominion.kabel.utwente.nl>	<46A72E54.5030800@kernelconcepts.de>	<1185369153.18324.10.camel@localhost.localdomain>	<1185374743.6190.8.camel@localhost.localdomain>	<46A77053.7060206@klever.net>
-	<46A771E4.7020706@dominion.kabel.utwente.nl>
-In-Reply-To: <46A771E4.7020706@dominion.kabel.utwente.nl>
-Sender: palmira@rhodos.klever.net
-X-Spam_score: -1.4
-X-Spam_score_int: -13
-X-Spam_bar: -
-X-Spam_report: Spam detection software,
-	running on the system "rhodos.klever.net", has
-	identified this incoming email as possible spam. The original message
-	has been attached to this so you can view it (if it isn't spam) or
-	label similar future email.  If you have any questions, see
-	the administrator of that system for details.
-	Content preview: >> What about emailing the list with the [oe] mtn
-	disapprove
-	subject and >> raising a problem without actually disapproving? > >
-	Good idea,
-	with one flaw: You assume every developer is subscribed to this
-	mailinglist, > which sadly isn't the case. [...] 
-	Content analysis details:   (-1.4 points, 5.0 required)
-	pts rule name              description
-	---- ----------------------
-	--------------------------------------------------
-	-1.4 ALL_TRUSTED Passed through trusted hosts only via SMTP
-Subject: Re: mtn disapprove d7758e2637918ff4035244d64fb7227f6cf833ad, was Re: [oe-commits] org.oe.dev phoneserver: Add patch	for	FIC	GTA01	support.
+In-Reply-To: <46A65F33.9020808@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+References: <HOECLKEKOHLAMMGDLLBHEEPLLLAA.skoroneos@digital-opsis.com>
+	<46A65F33.9020808@dominion.kabel.utwente.nl>
+Cc: openembedded-devel@openembedded.org, angstrom-distro-devel@linuxtogo.org
+Subject: Re: [Angstrom-devel] Angstrom Core Team
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -52,19 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2007 16:55:50 -0000
+X-List-Received-Date: Wed, 25 Jul 2007 17:34:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
->> What about emailing the list with the [oe] mtn disapprove subject and 
->> raising a problem without actually disapproving? 
-> 
-> Good idea, with one flaw: You assume every developer is subscribed to this mailinglist,
-> which sadly isn't the case.
+On 7/24/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Stelios Koroneos schreef:
 
-That is a problem in itself, I'd say...
+> That is indeed a big problem, which we want to tackle from the OE side with regular
+> tarball releases and autobuilds[2]. See the guadec meeting notes on that.
+> Suggestions from commercial users are *very* welcome on this subject.
 
-Love,
-H
+I have implemented OE (and Angstrom in more recent projects) in at
+least 7 embedded projects.  Overall, it has a been a great success
+compared to any other method for getting Linux on embedded devices.
+Sure there is occasional breakage, but in my experience, it has been
+pretty rare -- especially for mainstream stuff.  For what I do, the
+availability of _lots_ of current package in my mind far outweighs the
+occasional breakage.  As a project, OE still has limited resources, so
+I think our time is best spent moving things forward, and doing
+autobuilds to keep the quality up.  I recently added a bunch of disk
+space to my build machine and hope to contribute more to the autobuild
+effort.
+
+> One last thing: autobuilds, autobuilds, autobuilds
+
+Agreed!
+
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
