@@ -1,27 +1,24 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IDdPD-0000iN-IU
-	for openembedded-devel@openembedded.org; Wed, 25 Jul 2007 11:43:43 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l6P9gRj1008225 for <openembedded-devel@openembedded.org>;
-	Wed, 25 Jul 2007 11:42:27 +0200
-Message-ID: <46A71B03.8090304@dominion.kabel.utwente.nl>
-Date: Wed, 25 Jul 2007 11:42:27 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1IDdxG-0001PE-Mx; Wed, 25 Jul 2007 12:18:54 +0200
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1IDe2j-0002FR-OJ; Wed, 25 Jul 2007 12:24:33 +0200
+Message-ID: <46A7230E.6000707@kernelconcepts.de>
+Date: Wed, 25 Jul 2007 12:16:46 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <46A711DB.6000205@dominion.kabel.utwente.nl>
-	<AD0B1F77-712E-4268-83C6-03CDAC55EB44@gmx.net>
-In-Reply-To: <AD0B1F77-712E-4268-83C6-03CDAC55EB44@gmx.net>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: Activating autotools updates
+To: openembedded-devel@lists.openembedded.org
+References: <E1IDL1e-0002ro-9i@linuxtogo.org>
+	<46A60832.30203@dominion.kabel.utwente.nl>
+In-Reply-To: <46A60832.30203@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.94.2.0
+Cc: openembedded-devel@openembedded.org
+Subject: Re: mtn disapprove d7758e2637918ff4035244d64fb7227f6cf833ad, was Re: [oe-commits] org.oe.dev phoneserver: Add patch for FIC GTA01	support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,44 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2007 09:43:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 25 Jul 2007 10:18:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Holger Freyther schreef:
-> Am 25.07.2007 um 11:03 schrieb Koen Kooi:
+
+Koen Kooi schrieb:
+> florian commit schreef:
 > 
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> Hi,
->>
->> At guadec we discussed activating autoconf-native 2.61, pkgconfig- 
->> native 0.22 and
->> m4-native 1.4.8. The test builds we did didn't show any errors but  
->> we'd like more people
->> to try to build their favourite target and report back.
+>> +PACKAGE_ARCH = "${MACHINE}"
 > 
-> Hi Koen,
+> This has to stop, OE is usable without setting MACHINE. The correct form is either
 > 
-> I would propose to use ipkg-diff. Do a old build, do a new build and  
-> compare the resulting packages using ipkg-diff which is in oe contrib.
+> PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-That would be inconclusive, since a difference might be a good thing. I'm interesting in
-people running the generated packages.
+thanks for the hint.
 
-regards,
+For these trivial changes that do not break much I would really like to see if
+people do not disapprove    the whole patch but just go ahead and fix the
+problem - that is way more productive.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Greetings
 
-iD8DBQFGpxsDMkyGM64RGpERAqXWAJ4vtKMyEPjUkMyu8v05TYTywuAV5ACfZecw
-w22KlXyXrvzpfhYFZn3HJxg=
-=EhQl
------END PGP SIGNATURE-----
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
