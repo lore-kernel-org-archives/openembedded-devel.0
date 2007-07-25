@@ -1,23 +1,25 @@
-Received: from [209.85.146.182] (helo=wa-out-1112.google.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <cliff.brake@gmail.com>) id 1IDkkg-0001vN-9P
-	for openembedded-devel@openembedded.org; Wed, 25 Jul 2007 19:34:22 +0200
-Received: by wa-out-1112.google.com with SMTP id v27so302337wah
-	for <openembedded-devel@openembedded.org>;
-	Wed, 25 Jul 2007 10:33:05 -0700 (PDT)
-Received: by 10.114.158.1 with SMTP id g1mr860877wae.1185384784832;
-	Wed, 25 Jul 2007 10:33:04 -0700 (PDT)
-Received: by 10.114.191.17 with HTTP; Wed, 25 Jul 2007 10:33:04 -0700 (PDT)
-Message-ID: <f96d234e0707251033ledbb19bg8a93154765ec3fbe@mail.gmail.com>
-Date: Wed, 25 Jul 2007 13:33:04 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46A65F33.9020808@dominion.kabel.utwente.nl>
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1IDlgv-0006nj-7E; Wed, 25 Jul 2007 20:34:33 +0200
+Received: from [85.179.99.222] (helo=[192.168.1.6])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1IDlmO-0003h8-9D; Wed, 25 Jul 2007 20:40:12 +0200
+Message-ID: <46A797B0.7080509@kernelconcepts.de>
+Date: Wed, 25 Jul 2007 20:34:24 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
 MIME-Version: 1.0
-References: <HOECLKEKOHLAMMGDLLBHEEPLLLAA.skoroneos@digital-opsis.com>
-	<46A65F33.9020808@dominion.kabel.utwente.nl>
-Cc: openembedded-devel@openembedded.org, angstrom-distro-devel@linuxtogo.org
-Subject: Re: [Angstrom-devel] Angstrom Core Team
+To: openembedded-devel@lists.openembedded.org
+References: <E1IDL1e-0002ro-9i@linuxtogo.org>	<46A60832.30203@dominion.kabel.utwente.nl>	<46A7230E.6000707@kernelconcepts.de>	<46A7262F.1080406@dominion.kabel.utwente.nl>
+	<20070725160208.GY3604@ice.mudshark.org>
+In-Reply-To: <20070725160208.GY3604@ice.mudshark.org>
+X-Enigmail-Version: 0.94.2.0
+Cc: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+Subject: Re: Why many small commits are better than one big one.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,42 +33,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2007 17:34:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 25 Jul 2007 18:34:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 7/24/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Stelios Koroneos schreef:
+Hi,
 
-> That is indeed a big problem, which we want to tackle from the OE side with regular
-> tarball releases and autobuilds[2]. See the guadec meeting notes on that.
-> Suggestions from commercial users are *very* welcome on this subject.
+jack-oe@mudshark.org schrieb:
 
-I have implemented OE (and Angstrom in more recent projects) in at
-least 7 embedded projects.  Overall, it has a been a great success
-compared to any other method for getting Linux on embedded devices.
-Sure there is occasional breakage, but in my experience, it has been
-pretty rare -- especially for mainstream stuff.  For what I do, the
-availability of _lots_ of current package in my mind far outweighs the
-occasional breakage.  As a project, OE still has limited resources, so
-I think our time is best spent moving things forward, and doing
-autobuilds to keep the quality up.  I recently added a bunch of disk
-space to my build machine and hope to contribute more to the autobuild
-effort.
+> If you commit your changes in multiple orthogonal commits, it is possible to
+> disapprove only the controversial parts. Prevents throwing the baby out with
+> the bathwater.
 
-> One last thing: autobuilds, autobuilds, autobuilds
+I guess you should take a look at the change you are talking about. Otherwise
+this could become a shame for you ;)
 
-Agreed!
+Greetings
 
-Cliff
+Florian
 
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-14
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
