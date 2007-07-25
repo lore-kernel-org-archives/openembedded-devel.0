@@ -1,31 +1,44 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [72.29.79.205] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IDiDy-0003Z1-Qv
-	for openembedded-devel@openembedded.org; Wed, 25 Jul 2007 16:52:27 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6PEpB4V018633;
-	Wed, 25 Jul 2007 15:51:11 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18585-02; Wed, 25 Jul 2007 15:51:07 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6PEp1cf018614
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Wed, 25 Jul 2007 15:51:01 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <46A65F33.9020808@dominion.kabel.utwente.nl>
-References: <HOECLKEKOHLAMMGDLLBHEEPLLLAA.skoroneos@digital-opsis.com>
-	<46A65F33.9020808@dominion.kabel.utwente.nl>
-Date: Wed, 25 Jul 2007 15:51:00 +0100
-Message-Id: <1185375060.6190.14.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Re: [Angstrom-devel] Angstrom Core Team
+	(envelope-from <palmira@rhodos.klever.net>) id 1IDj6p-0000by-7g
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Jul 2007 17:49:08 +0200
+Received: from pd953b930.dip0.t-ipconnect.de ([217.83.185.48]
+	helo=olympus.klever.net) by rhodos.klever.net with esmtpa (Exim 4.67)
+	(envelope-from <palmira@rhodos.klever.net>) id 1IDj5a-0007xl-6Y
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Jul 2007 17:47:50 +0200
+Message-ID: <46A77053.7060206@klever.net>
+Date: Wed, 25 Jul 2007 17:46:27 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.4 (X11/20070619)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <E1IDL1e-0002ro-9i@linuxtogo.org>	<46A60832.30203@dominion.kabel.utwente.nl>	<46A7230E.6000707@kernelconcepts.de>	<46A7262F.1080406@dominion.kabel.utwente.nl>	<46A72E54.5030800@kernelconcepts.de>	<1185369153.18324.10.camel@localhost.localdomain>
+	<1185374743.6190.8.camel@localhost.localdomain>
+In-Reply-To: <1185374743.6190.8.camel@localhost.localdomain>
+Sender: palmira@rhodos.klever.net
+X-Spam_score: -1.4
+X-Spam_score_int: -13
+X-Spam_bar: -
+X-Spam_report: Spam detection software,
+	running on the system "rhodos.klever.net", has
+	identified this incoming email as possible spam. The original message
+	has been attached to this so you can view it (if it isn't spam) or
+	label similar future email.  If you have any questions, see
+	the administrator of that system for details.
+	Content preview: > A disapprove could therefore arguably be justified
+	to raise
+	the profile > of the problem a bit since if its been going on for 18
+	months, the > message has not sunk in. Thats been done,
+	the profile has been raised, 
+	> lets get back to normal now :). [...] 
+	Content analysis details:   (-1.4 points, 5.0 required)
+	pts rule name              description
+	---- ----------------------
+	--------------------------------------------------
+	-1.4 ALL_TRUSTED Passed through trusted hosts only via SMTP
+Subject: Re: mtn disapprove d7758e2637918ff4035244d64fb7227f6cf833ad, was Re: [oe-commits] org.oe.dev phoneserver: Add patch	for	FIC	GTA01	support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,34 +52,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2007 14:52:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 25 Jul 2007 15:49:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-07-24 at 22:21 +0200, Koen Kooi wrote:
-> Stelios Koroneos schreef:
-> > I believe there is a need to formalise things, if we want to move to the
-> > next step, which IMHO is a "universal" acceptance of OE/Angstrom for
-> > embedded devices
-> > The last part is also something that has been puzzling me for sometime now.
-> > 
-> > What are the "core" targets of Angstrom as a distribution ?
-> > At the beggining it looked to me as a PDA targeted distro, the console image
-> > was bloated
-> 
-> You hit the nail on the head, the console *image* was bloated, not the DISTRO.
+> A disapprove could therefore arguably be justified to raise the profile
+> of the problem a bit since if its been going on for 18 months, the
+> message has not sunk in. Thats been done, the profile has been raised,
+> lets get back to normal now :).
 
-I just want to add my support for what Koen has said in this reply. Its
-probably one of the most to the point mails I've see in a while. 
+What about emailing the list with the [oe] mtn disapprove subject and 
+raising a problem without actually disapproving? :) It would both look 
+like a disciplinary decision (if someone wants to look that way) and 
+save a lot of hassle to Florian ;-)
 
-I hope everyone has read and understood it as a lot of current problems
-are due to misunderstandings and that mail highlights them and shows
-good solutions.
-
-Cheers,
-
-Richard
-
-
+Love,
+H
 
 
