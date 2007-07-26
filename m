@@ -1,25 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IE1rG-0003fx-Nl
-	for openembedded-devel@openembedded.org; Thu, 26 Jul 2007 13:50:19 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l6QBmr1R019144 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2007 13:48:54 +0200
-Message-ID: <46A88A22.5010608@dominion.kabel.utwente.nl>
-Date: Thu, 26 Jul 2007 13:48:50 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
+	(envelope-from <openembedded@hrw.one.pl>) id 1IE204-0003qB-V6
+	for openembedded-devel@openembedded.org; Thu, 26 Jul 2007 13:59:25 +0200
+Received: (qmail 1332 invoked by uid 813007); 26 Jul 2007 11:58:04 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 26 Jul 2007 11:58:04 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 26 Jul 2007 13:57:59 +0200
+User-Agent: KMail/1.9.7
+References: <46A88A22.5010608@dominion.kabel.utwente.nl>
+In-Reply-To: <46A88A22.5010608@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: [RFC] make building working zaurus images easier
+Message-Id: <200707261358.00658.openembedded@hrw.one.pl>
+Subject: Re: [RFC] make building working zaurus images easier
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,73 +29,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2007 11:50:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 26 Jul 2007 11:59:25 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia czwartek, 26 lipca 2007, Koen Kooi napisa=B3:
 
-Hi,
+> Building a working zaurus image is tedious since you have *manually*
+> rename a bunch of files before the on-board flashing software will
+> accept it.
 
-Building a working zaurus image is tedious since you have *manually* rename a bunch of
-files before the on-board flashing software will accept it.
++2 from me
 
-I therefore want to propose 2 small scripts that can be run as EXTRA_IMAGECMD to make life
-a lot easier for both developers and users:
+> I therefore want to propose 2 small scripts that can be run as
+> EXTRA_IMAGECMD to make life a lot easier for both developers and users:
+>
+> [beware of line wrapping]
+>
+> For c7x0:
 
-[beware of line wrapping]
+=46or c7x0/poodle/tosa you mean ;)
 
-For c7x0:
+=46or collie:
 
-#!/bin/sh
 cd ${DEPLOY_DIR_IMAGE}
 mkdir ${IMAGE_NAME}-installkit/
-cp `ls zImage-2* | sort -b | uniq |tail -n1` ${IMAGE_NAME}-installkit/zImage.bin
-cp `ls ${IMAGE_NAME}.rootfs*jffs2 | sort -b | uniq |tail -n1`
-${IMAGE_NAME}-installkit/initrd.bin
-cp updater.sh.${MACHINE} ${IMAGE_NAME}-installkit/updater.sh
-tar cjf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit.tar.bz2
-${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit/
+cp `ls zImage-2* | sort -b | uniq |tail -n1` ${IMAGE_NAME}-installkit/zImag=
+e.bin=20
+cp `ls ${IMAGE_NAME}.rootfs*jffs2 | sort -b | uniq |tail -n1` ${IMAGE_NAME}=
+=2Dinstallkit/initrd.bin
+tar czf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit.tar.bz2 ${DEPLOY_DIR_I=
+MAGE}/${IMAGE_NAME}-installkit/
 rm -rf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit/
 
+Also we should use gzip compression for installkit tarballs as this will
+allow users to unpack them on devices (gzip is in busybox).
 
-For Spitz:
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-#!/bin/sh
-cd ${DEPLOY_DIR_IMAGE}
-mkdir ${IMAGE_NAME}-installkit/
-cp `ls zImage-2* | sort -b | uniq |tail -n1` ${IMAGE_NAME}-installkit/zImage.bin
-cp `ls ${IMAGE_NAME}.rootfs*gz | sort -b | uniq |tail -n1`
-${IMAGE_NAME}-installkit/hdimage1.tgz
-cp updater.sh.${MACHINE} ${IMAGE_NAME}-installkit/updater.sh
-cp gnu-tar ${IMAGE_NAME}-installkit/
-tar cjf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit.tar.bz2
-${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit/
-rm -rf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit/
+ BSD is what you get when a bunch of Unix hackers sit down to try to port
+ a Unix system to the PC. Linux is what you get when a bunch of PC hackers
+ sit down and try to write a Unix system for the PC.
 
 
-These are just proof of concept scripts, but would something like this be acceptable to
-the zaurus maintainers in OE? Having something like this would make live for distro people
-a lot easier and should confuse OE newbies a bit less.
-
-I have added something similar for bootldr based ipaqs in OE that writes out a reflash.ctl
-automagically, which has been a great success.
-
-Comments/improvements/flames?
-
-regards,
-
-Koen
-
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGqIoiMkyGM64RGpERApzOAJ9LGbvsDEOdsILrWbausHIFB8gCxACeIrR+
-53PH8E27hgzdmkaYtC4EciE=
-=6q4E
------END PGP SIGNATURE-----
 
 
