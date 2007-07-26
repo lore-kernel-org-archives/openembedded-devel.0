@@ -1,32 +1,25 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IE3pY-0005Ri-A2
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jul 2007 15:56:40 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 856E728C013; Thu, 26 Jul 2007 15:53:27 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180156235.adsl.alicedsl.de [85.180.156.235])
-	by srv043.dedi23.de (Postfix) with ESMTP id C6E8528C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2007 15:53:26 +0200 (CEST)
-Date: Thu, 26 Jul 2007 15:55:18 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1125663146.20070726155518@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46A895A1.7040400@dominion.kabel.utwente.nl>
-References: <46A711DB.6000205@dominion.kabel.utwente.nl>
-	<46A895A1.7040400@dominion.kabel.utwente.nl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IE4bL-0001pw-Or
+	for openembedded-devel@openembedded.org; Thu, 26 Jul 2007 16:46:03 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l6QEid1R015219 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jul 2007 16:44:39 +0200
+Message-ID: <46A8B354.1010204@dominion.kabel.utwente.nl>
+Date: Thu, 26 Jul 2007 16:44:36 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
 MIME-Version: 1.0
-Subject: Re: Activating autotools updates
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: [RFC] use packages/linux/linux-ezx-2.6.21/update_patches.sh for openmoko kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,37 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2007 13:56:40 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 26 Jul 2007 14:46:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Koen Kooi schreef:
->> Hi,
->> 
->> At guadec we discussed activating autoconf-native 2.61, pkgconfig-native 0.22 and
->> m4-native 1.4.8. The test builds we did didn't show any errors but we'd like more people
->> to try to build their favourite target and report back.
+Hi,
 
-> After multiple success reports I'd like to propose the following timeline:
+Currently openmoko kernel pull patches from svn and manually apply them with quilt. We've
+seen numerous breakages in the past with this method, so I would like to suggest using
+something like update_patches.sh to pull a patchset from svn, add them to OE and
+automagically write out a SRC_URI.
 
-> 20070802: make m4-native 1.4.8 the default
-> 20070809: make autoconf-native 2.61 the default
-> 20070816: make pkgconfig-native 0.22 the default
-> 20070816+: remove autotools hacks in recipes (e.g overriding do_configure)
+This would have the following benefits:
 
-> what do you think?
+1) patches don't suddenly change
+2) less breakage due to typos in commits upstream
+3) less work than continuously checking if recipe and svn patchset match
+4) less surprises when using a global SRCDATE
 
-Sounds good, +1 from me.
+And since it's a script, it's not more work than the status quo.
 
-Regards,
+what do you think?
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+regards,
 
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGqLNUMkyGM64RGpERAlC6AJ0btokth/4QsBlCEjMr1NEhN/p7KACfTUrj
+o81SXUP+yWRuBVDO0HmADhI=
+=+Yu8
+-----END PGP SIGNATURE-----
 
 
