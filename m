@@ -1,33 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IE2Vy-0008O1-Ot
-	for openembedded-devel@openembedded.org; Thu, 26 Jul 2007 14:32:22 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6QCV3JJ007355
-	for <openembedded-devel@openembedded.org>;
-	Thu, 26 Jul 2007 13:31:03 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 06955-10 for <openembedded-devel@openembedded.org>;
-	Thu, 26 Jul 2007 13:30:59 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6QCUwCa007348
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 26 Jul 2007 13:30:58 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <46A88F8D.50003@dominion.kabel.utwente.nl>
-References: <46A88A22.5010608@dominion.kabel.utwente.nl>
-	<46A88F8D.50003@dominion.kabel.utwente.nl>
-Date: Thu, 26 Jul 2007 13:30:58 +0100
-Message-Id: <1185453058.6132.19.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [RFC] make building working zaurus images easier
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IE2ck-00005i-Is
+	for openembedded-devel@openembedded.org; Thu, 26 Jul 2007 14:39:22 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l6QCbu1R027599 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jul 2007 14:37:56 +0200
+Message-ID: <46A895A1.7040400@dominion.kabel.utwente.nl>
+Date: Thu, 26 Jul 2007 14:37:53 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <46A711DB.6000205@dominion.kabel.utwente.nl>
+In-Reply-To: <46A711DB.6000205@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: Activating autotools updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,42 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2007 12:32:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Jul 2007 12:39:22 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2007-07-26 at 14:11 +0200, Koen Kooi wrote:
->  For Spitz:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Koen Kooi schreef:
+> Hi,
 > 
->  #!/bin/sh
->  cd ${DEPLOY_DIR_IMAGE}
->  mkdir ${IMAGE_NAME}-installkit/
->  cp `ls zImage-2* | sort -b | uniq |tail -n1` ${IMAGE_NAME}-installkit/zImage.bin
->  cp `ls ${IMAGE_NAME}.rootfs*gz | sort -b | uniq |tail -n1`
->  ${IMAGE_NAME}-installkit/hdimage1.tgz
->  cp updater.sh.${MACHINE} ${IMAGE_NAME}-installkit/updater.sh
->  cp gnu-tar ${IMAGE_NAME}-installkit/
->  tar czf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit.tar.gz
-> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit/
-> 
-> > Comments/improvements/flames?
+> At guadec we discussed activating autoconf-native 2.61, pkgconfig-native 0.22 and
+> m4-native 1.4.8. The test builds we did didn't show any errors but we'd like more people
+> to try to build their favourite target and report back.
 
-Why not just write one decent script instead of 3+ forks?
+After multiple success reports I'd like to propose the following timeline:
 
-if [ "${MACHINE}" = "spitz" ]; then
-    cp gnu-tar ${IMAGE_NAME}-installkit/
-fi
+20070802: make m4-native 1.4.8 the default
+20070809: make autoconf-native 2.61 the default
+20070816: make pkgconfig-native 0.22 the default
+20070816+: remove autotools hacks in recipes (e.g overriding do_configure)
 
-etc.
+what do you think?
 
-This is probably suitable material for a do_deploy image.bbclass task.
-The guts of the task can live in the machine specific files (such as the
-zaurus common file) as a function added into the task by some new
-variable. Does that seem reasonable?
+regards,
 
-Richard
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
-
+iD8DBQFGqJWhMkyGM64RGpERAvBcAJ0YKMzrl8ASaDjhA6xzAN+JxS9X/gCeL8GI
+7n/RcjqzkspmMk/RWkel9q0=
+=B3QE
+-----END PGP SIGNATURE-----
 
 
