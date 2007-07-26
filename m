@@ -1,34 +1,19 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.162.237] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IE8H3-0004aU-0H
-	for openembedded-devel@openembedded.org; Thu, 26 Jul 2007 20:41:21 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6QIdxaO027979
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1IEBnC-0006OM-7a
+	for openembedded-devel@openembedded.org; Fri, 27 Jul 2007 00:26:46 +0200
+Received: by nz-out-0506.google.com with SMTP id q3so519677nzb
 	for <openembedded-devel@openembedded.org>;
-	Thu, 26 Jul 2007 19:39:59 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 27805-05 for <openembedded-devel@openembedded.org>;
-	Thu, 26 Jul 2007 19:39:54 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6QIdoxP027968
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 26 Jul 2007 19:39:50 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 26 Jul 2007 15:25:23 -0700 (PDT)
+Received: by 10.114.151.13 with SMTP id y13mr2271462wad.1185488722554;
+	Thu, 26 Jul 2007 15:25:22 -0700 (PDT)
+Received: by 10.115.75.15 with HTTP; Thu, 26 Jul 2007 15:25:22 -0700 (PDT)
+Message-ID: <bdb0025f0707261525h67245c9dmb1f7dd0271570149@mail.gmail.com>
+Date: Thu, 26 Jul 2007 19:25:22 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <46A8DB81.5070900@dominion.kabel.utwente.nl>
-References: <46A88A22.5010608@dominion.kabel.utwente.nl>
-	<46A89F67.5080907@klever.net>
-	<46A8DB81.5070900@dominion.kabel.utwente.nl>
-Date: Thu, 26 Jul 2007 19:39:50 +0100
-Message-Id: <1185475190.6132.53.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [RFC] make building working zaurus images easier
+MIME-Version: 1.0
+Subject: update-alternatives problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,27 +27,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2007 18:41:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Jul 2007 22:26:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Thu, 2007-07-26 at 19:36 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Michael Krelin schreef:
-> > I have never looked into all this machinery, but since we have, e.g.
-> > x11-image-spitz.tar.gz and zImage-spitz.bin symlinks, I'd guess that we 
-> > can do without these somewhat ugly when unnecessary `ls|sort|uniq|tail` 
-> > things, can't we?
-> 
-> Won't tar package up the symlinks instead of the real files in that case?
+Hi all,
 
-Yes, but we can use readlink to work out the real file...
+I have some doubts about the update-alternatives scheme.
 
-Cheers,
+Why to have 2 ways to create an update-alternatives entry in the
+postinst script? One is setting ALTERNATIVES_* variables inheriting
+the update-alternatives.bbclass and the other is to write the function
+ pkg_postinst_${PN} () containing the update-alternatives commands.
+What is the big difference?
 
-Richard
+For example in sysvinit_2.86.bb there are both methods.
+ALTERNATIVES_* for init
+and the function for {halt,reboot,shutdown,last,mesg,wall}
 
+I believe that there is a good reason for that, but what I believe
+that is wrong is:
+
+when using the ALTERNATIVES_* the path is ritght like in the init case
+ALTERNATIVE_PATH = ${base_sbindir}/init.sysvinit
+so this is the right update-alternatives command in postinst script:
+update-alternatives --install /sbin/init init /sbin/init.sysvinit 50
+
+But when in function the path are wrong (it aren't complete):
+update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 200
+So the line in postinst script is that:
+update-alternatives --install /sbin/halt halt halt.sysvinit 200
+instead of a complete one
+update-alternatives --install /sbin/halt halt /sbin/halt.sysvinit 200
+
+Someday in past I've noticed that all of my links of
+update-alternatives was broke  because this incomplete path so I did a
+patch to update-alternatives-dpkg package to take the begin of path
+(/sbin) for the link one (/sbin/halt) generating a path link
+/sbin/halt.sysvinit fixing all cases that I knew. It was working fine
+until today when I saw that my init link was pointing to
+/sbin//sbin/init.sysvinit and breaking my initialization.
+
+I believe that you don't have this error because update-alternatives
+of ipkg works different, right?
+
+What do you believe that is better? change all bb to have a standard?
+or code a patch of my patch to make update-alternatives-dpkg check if
+the path is right before try to get the begin of the link?
+
+Regards
+
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
