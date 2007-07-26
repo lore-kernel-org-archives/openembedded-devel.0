@@ -1,22 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1IE2jB-0000Fw-F2
-	for openembedded-devel@openembedded.org; Thu, 26 Jul 2007 14:46:01 +0200
-Received: (qmail 14091 invoked by uid 813007); 26 Jul 2007 12:44:41 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 26 Jul 2007 12:44:40 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Jul 2007 14:44:35 +0200
-User-Agent: KMail/1.9.7
-References: <46A711DB.6000205@dominion.kabel.utwente.nl>
-	<46A895A1.7040400@dominion.kabel.utwente.nl>
-In-Reply-To: <46A895A1.7040400@dominion.kabel.utwente.nl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IE2ja-0000Gf-9h
+	for openembedded-devel@openembedded.org; Thu, 26 Jul 2007 14:46:26 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l6QCj01R028995 for <openembedded-devel@openembedded.org>;
+	Thu, 26 Jul 2007 14:45:00 +0200
+Message-ID: <46A89749.3050005@dominion.kabel.utwente.nl>
+Date: Thu, 26 Jul 2007 14:44:57 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
 MIME-Version: 1.0
-Message-Id: <200707261444.36655.openembedded@hrw.one.pl>
-Subject: Re: Activating autotools updates
+To: openembedded-devel@openembedded.org
+References: <46A88A22.5010608@dominion.kabel.utwente.nl>	<46A88F8D.50003@dominion.kabel.utwente.nl>
+	<1185453058.6132.19.camel@localhost.localdomain>
+In-Reply-To: <1185453058.6132.19.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [RFC] make building working zaurus images easier
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,35 +35,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2007 12:46:01 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 26 Jul 2007 12:46:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia czwartek, 26 lipca 2007, Koen Kooi napisa=B3:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> After multiple success reports I'd like to propose the following
-> timeline:
+Richard Purdie schreef:
+> On Thu, 2007-07-26 at 14:11 +0200, Koen Kooi wrote:
+>>  For Spitz:
+>>
+>>  #!/bin/sh
+>>  cd ${DEPLOY_DIR_IMAGE}
+>>  mkdir ${IMAGE_NAME}-installkit/
+>>  cp `ls zImage-2* | sort -b | uniq |tail -n1` ${IMAGE_NAME}-installkit/zImage.bin
+>>  cp `ls ${IMAGE_NAME}.rootfs*gz | sort -b | uniq |tail -n1`
+>>  ${IMAGE_NAME}-installkit/hdimage1.tgz
+>>  cp updater.sh.${MACHINE} ${IMAGE_NAME}-installkit/updater.sh
+>>  cp gnu-tar ${IMAGE_NAME}-installkit/
+>>  tar czf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit.tar.gz
+>> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit/
+>>
+>>> Comments/improvements/flames?
+> 
+> Why not just write one decent script instead of 3+ forks?
+> 
+> if [ "${MACHINE}" = "spitz" ]; then
+>     cp gnu-tar ${IMAGE_NAME}-installkit/
+> fi
 
-> 20070802: make m4-native 1.4.8 the default
-> 20070809: make autoconf-native 2.61 the default
+I was thinking of that just now :)
 
-make automake 1.9.6 or 1.10 the default
+> etc.
+> 
+> This is probably suitable material for a do_deploy image.bbclass task.
+> The guts of the task can live in the machine specific files (such as the
+> zaurus common file) as a function added into the task by some new
+> variable. Does that seem reasonable?
 
-> 20070816: make pkgconfig-native 0.22 the default
-> 20070816+: remove autotools hacks in recipes (e.g overriding
-> do_configure)
+Very reasonable! Would this also be the time to discuss a kernel deploy task?
 
-Who will do each test?
+regards,
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-        "To be or not to be that is the question.":
-         every programmer knows the answer $2b or (not $2b) is $ff.
+Koen
 
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGqJdJMkyGM64RGpERAgEOAKCWaIaePMGH4QVbjnDGy8s45Xdh0wCffQ3T
+s3yx50FzrnKb/r98XL+JfiA=
+=nZsH
+-----END PGP SIGNATURE-----
 
 
