@@ -1,19 +1,28 @@
-Received: from [64.233.162.237] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1IEBnC-0006OM-7a
-	for openembedded-devel@openembedded.org; Fri, 27 Jul 2007 00:26:46 +0200
-Received: by nz-out-0506.google.com with SMTP id q3so519677nzb
-	for <openembedded-devel@openembedded.org>;
-	Thu, 26 Jul 2007 15:25:23 -0700 (PDT)
-Received: by 10.114.151.13 with SMTP id y13mr2271462wad.1185488722554;
-	Thu, 26 Jul 2007 15:25:22 -0700 (PDT)
-Received: by 10.115.75.15 with HTTP; Thu, 26 Jul 2007 15:25:22 -0700 (PDT)
-Message-ID: <bdb0025f0707261525h67245c9dmb1f7dd0271570149@mail.gmail.com>
-Date: Thu, 26 Jul 2007 19:25:22 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
-To: openembedded-devel@openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IELAo-0002t2-6D
+	for openembedded-devel@openembedded.org; Fri, 27 Jul 2007 10:27:46 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l6R8Q71R009236 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jul 2007 10:26:08 +0200
+Message-ID: <46A9AC1C.1070508@dominion.kabel.utwente.nl>
+Date: Fri, 27 Jul 2007 10:26:04 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
 MIME-Version: 1.0
-Subject: update-alternatives problems
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <46A88A22.5010608@dominion.kabel.utwente.nl>	<46A89F67.5080907@klever.net>	<46A8DB81.5070900@dominion.kabel.utwente.nl>
+	<1185475190.6132.53.camel@localhost.localdomain>
+In-Reply-To: <1185475190.6132.53.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [RFC] make building working zaurus images easier
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -27,60 +36,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2007 22:26:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 27 Jul 2007 08:27:46 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi all,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I have some doubts about the update-alternatives scheme.
+Richard Purdie schreef:
+> On Thu, 2007-07-26 at 19:36 +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Michael Krelin schreef:
+>>> I have never looked into all this machinery, but since we have, e.g.
+>>> x11-image-spitz.tar.gz 
 
-Why to have 2 ways to create an update-alternatives entry in the
-postinst script? One is setting ALTERNATIVES_* variables inheriting
-the update-alternatives.bbclass and the other is to write the function
- pkg_postinst_${PN} () containing the update-alternatives commands.
-What is the big difference?
+IMAGE_NAME = "${IMAGE_BASENAME}-${MACHINE}-${DATETIME}" :)
 
-For example in sysvinit_2.86.bb there are both methods.
-ALTERNATIVES_* for init
-and the function for {halt,reboot,shutdown,last,mesg,wall}
+>>> and zImage-spitz.bin symlinks, I'd guess that we 
+>>> can do without these somewhat ugly when unnecessary `ls|sort|uniq|tail` 
+>>> things, can't we?
+>> Won't tar package up the symlinks instead of the real files in that case?
+> 
+> Yes, but we can use readlink to work out the real file...
 
-I believe that there is a good reason for that, but what I believe
-that is wrong is:
+How about this:
 
-when using the ALTERNATIVES_* the path is ritght like in the init case
-ALTERNATIVE_PATH = ${base_sbindir}/init.sysvinit
-so this is the right update-alternatives command in postinst script:
-update-alternatives --install /sbin/init init /sbin/init.sysvinit 50
+cd ${DEPLOY_DIR_IMAGE}
+mkdir ${IMAGE_NAME}-installkit/
 
-But when in function the path are wrong (it aren't complete):
-update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 200
-So the line in postinst script is that:
-update-alternatives --install /sbin/halt halt halt.sysvinit 200
-instead of a complete one
-update-alternatives --install /sbin/halt halt /sbin/halt.sysvinit 200
+# Get the latest kernel using the zImage-<machine>.bin symlink
+cp `readlink zImage-${MACHINE}.bin` ${IMAGE_NAME}-installkit/zImage.bin
 
-Someday in past I've noticed that all of my links of
-update-alternatives was broke  because this incomplete path so I did a
-patch to update-alternatives-dpkg package to take the begin of path
-(/sbin) for the link one (/sbin/halt) generating a path link
-/sbin/halt.sysvinit fixing all cases that I knew. It was working fine
-until today when I saw that my init link was pointing to
-/sbin//sbin/init.sysvinit and breaking my initialization.
+if [ "${MACHINE}" = "spitz" ]; then
+    cp gnu-tar ${IMAGE_NAME}-installkit/
+    cp ${IMAGE_NAME}.rootfs.tar.gz ${IMAGE_NAME}-installkit/hdimage1.tgz
+else
+    cp ${IMAGE_NAME}.rootfs.jffs2 ${IMAGE_NAME}-installkit/initrd.bin
+fi
 
-I believe that you don't have this error because update-alternatives
-of ipkg works different, right?
+# All zaurus machines except collie need updater.sh
+if [ "${MACHINE}" != "collie" ]; then
+    cp updater.sh.${MACHINE} ${IMAGE_NAME}-installkit/updater.sh
+fi
 
-What do you believe that is better? change all bb to have a standard?
-or code a patch of my patch to make update-alternatives-dpkg check if
-the path is right before try to get the begin of the link?
+tar czf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit.tgz {IMAGE_NAME}-installkit/
+rm -rf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-installkit/
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Regards
-
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+iD8DBQFGqawcMkyGM64RGpERAvEQAKC3czWwnPBjw6gvh06AcVj3aoU7pQCgvJpc
+hhLFEF/cZBgUB9TGMZMPkFk=
+=/QP0
+-----END PGP SIGNATURE-----
 
 
