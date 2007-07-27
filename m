@@ -1,27 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IEMXo-0008B5-UQ
-	for openembedded-devel@openembedded.org; Fri, 27 Jul 2007 11:55:39 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l6R9s81R024729 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2007 11:54:08 +0200
-Message-ID: <46A9C0BD.3060106@dominion.kabel.utwente.nl>
-Date: Fri, 27 Jul 2007 11:54:05 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <46A88A22.5010608@dominion.kabel.utwente.nl>	<46A89F67.5080907@klever.net>	<46A8DB81.5070900@dominion.kabel.utwente.nl>	<1185475190.6132.53.camel@localhost.localdomain>	<46A9AC1C.1070508@dominion.kabel.utwente.nl>
-	<46A9B10A.4020308@klever.net>
-In-Reply-To: <46A9B10A.4020308@klever.net>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] make building working zaurus images easier
+	(envelope-from <daniel@totalueberwachung.de>) id 1IEOsU-0005Nc-Dc
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Jul 2007 14:25:06 +0200
+Received: from elara.orbit.homelinux.net (unknown [192.168.0.103])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by thebe.totalueberwachung.de (Postfix) with ESMTP id 44108D8085
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jul 2007 14:24:08 +0200 (CEST)
+Date: Fri, 27 Jul 2007 14:23:15 +0200
+From: Daniel Willmann <daniel@totalueberwachung.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070727142315.6b97b321@elara.orbit.homelinux.net>
+In-Reply-To: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
+References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
+X-Mailer: Claws Mail 2.9.2 (GTK+ 2.10.11; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: OEDEM dates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,50 +31,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2007 09:55:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Jul 2007 12:25:06 -0000
+X-Groupsio-MsgNum: 2542
+Content-Type: multipart/signed; boundary=Sig_T+5EnGuWo9NmCdD37KfKzjZ;
+	protocol="application/pgp-signature"; micalg=PGP-SHA1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--Sig_T+5EnGuWo9NmCdD37KfKzjZ
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Michael Krelin schreef:
->>>> Michael Krelin schreef:
->>>>> I have never looked into all this machinery, but since we have, e.g.
->>>>> x11-image-spitz.tar.gz 
->> IMAGE_NAME = "${IMAGE_BASENAME}-${MACHINE}-${DATETIME}" :)
->>
->>>>> and zImage-spitz.bin symlinks, I'd guess that we 
->>>>> can do without these somewhat ugly when unnecessary `ls|sort|uniq|tail` 
->>>>> things, can't we?
->>>> Won't tar package up the symlinks instead of the real files in that case?
->>> Yes, but we can use readlink to work out the real file...
->> How about this:
->>
->> cd ${DEPLOY_DIR_IMAGE}
->> mkdir ${IMAGE_NAME}-installkit/
->>
->> # Get the latest kernel using the zImage-<machine>.bin symlink
->> cp `readlink zImage-${MACHINE}.bin` ${IMAGE_NAME}-installkit/zImage.bin
-> 
-> hmm.. isn't that equivalent to
-> 
-> cp zImage-${MACHINE}.bin ${IMAGE_NAME}-installkit/zImage.bin
-> 
-> ? cp surely will dereference symlink unless asked not to.
+Hi,
 
-Good point. The script is now at http://bugs.openembedded.org/show_bug.cgi?id=2690 for
-review and improvements.
+On Tue, 24 Jul 2007 18:37:58 +0200
+Holger Freyther <zecke@selfish.org> wrote:
 
-regards,
+> Hey,
+>=20
+> to secure the presence of a M$ power point equiped IBM laptop we
+> will hold OEDEM from the 6th to the 10th of October 2007 in Berlin.
 
-Koen
+sounds good. I'll be there.
+
+> if we have more time we might end up hacking. The location is
+> secured, we have a coffee machine (same model as last year and mickey
+> already checked it) but you are free to switch over to tea as well.
+
+Berlin has Club Mate, that's all I need. :-)
+
+Regards,
+Daniel Willmann
+
+--Sig_T+5EnGuWo9NmCdD37KfKzjZ
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.7 (GNU/Linux)
 
-iD8DBQFGqcC9MkyGM64RGpERAgdoAJ9ZX9oVInVtBvldsTOCacfeHBZbfwCgsWqM
-2l4C+orHeT5qlfLSmGClq9M=
-=XTtS
+iD8DBQFGqeOzZ2fhlIqbZ1gRApZTAJwMs7NFBuee3lgQFr9ivvJNgA2qVwCeOJPX
+Q+gx+mNxRJBy/65YcMTxmRQ=
+=P1d6
 -----END PGP SIGNATURE-----
 
-
+--Sig_T+5EnGuWo9NmCdD37KfKzjZ--
