@@ -1,29 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IFqBS-0005Qb-TC
-	for openembedded-devel@openembedded.org; Tue, 31 Jul 2007 13:46:39 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6VBiFHK002169;
-	Tue, 31 Jul 2007 12:44:15 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 01891-05; Tue, 31 Jul 2007 12:44:12 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6VBi9Vj002161
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Tue, 31 Jul 2007 12:44:09 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IFqtp-0003vM-PH
+	for openembedded-devel@openembedded.org; Tue, 31 Jul 2007 14:32:30 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l6VCUa1R012742; Tue, 31 Jul 2007 14:30:37 +0200
+Message-ID: <46AF2B6C.3040600@dominion.kabel.utwente.nl>
+Date: Tue, 31 Jul 2007 14:30:36 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-In-Reply-To: <46AF0E33.4000107@dominion.kabel.utwente.nl>
-References: <1185839805.7719.103.camel@localhost.localdomain>
-	<46AF0E33.4000107@dominion.kabel.utwente.nl>
-Date: Tue, 31 Jul 2007 12:44:08 +0100
-Message-Id: <1185882248.6173.20.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+References: <1185839805.7719.103.camel@localhost.localdomain>	<46AF0E33.4000107@dominion.kabel.utwente.nl>
+	<1185882248.6173.20.camel@localhost.localdomain>
+In-Reply-To: <1185882248.6173.20.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
 Subject: Re: The future of "svnnow"
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -39,38 +35,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2007 11:46:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 31 Jul 2007 12:32:31 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-07-31 at 12:25 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Richard Purdie schreef:
+> On Tue, 2007-07-31 at 12:25 +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Richard Purdie schreef:
+>>> Hi,
+>>>
+>>> As people know the ability to build the latest head revisions of svn
+>>> (for example) repositories in OE with bitbake has been limited and less
+>>> than ideal.
+>> What happens if I have no internet connection during parsing and do have a huge
+>> sourcemirror inside my firewall?
 > 
-> Richard Purdie schreef:
-> > Hi,
-> > 
-> > As people know the ability to build the latest head revisions of svn
-> > (for example) repositories in OE with bitbake has been limited and less
-> > than ideal.
+> Two possible solutions:
 > 
-> What happens if I have no internet connection during parsing and do have a huge
-> sourcemirror inside my firewall?
+> 1. You have locked down SRCREVs
 
-Two possible solutions:
+bitbake -s | grep svnr  | awk '{print "SRCREV_pn-" $1 "=" $2}' | \
+sed -e s:\+:\=:g -e s:svnr::g| awk -F "=" '{print $1 "=\"" $3}' | \
+awk -F "-r" '{print $1"\""}'
 
-1. You have locked down SRCREVs
+will spit out a list you can use as a .inc file for your favourite distro.
 
-2. You have a valid head revisions cache from the last time you had
-network access and you set the bitbake cache policy not to wipe that
-cache.
 
-I can't see any other ways around that and its probably better than the
-current situation.
+> 2. You have a valid head revisions cache from the last time you had
+> network access and you set the bitbake cache policy not to wipe that
+> cache.
 
-Cheers,
+Is there a nice way to distribute such a cache, for e.g. evil firewalls?
 
-Richard
+> I can't see any other ways around that and its probably better than the
+> current situation.
 
+It is indeed better, we just need to recreate all the tweaks we have for the current
+situation :)
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGrytsMkyGM64RGpERAoZ7AKCC+2Pue42dUXd6bQ+uhP2oHu6iRQCgjRgo
+oJFzPUBbj9v4y/3y5YJ2cC0=
+=064g
+-----END PGP SIGNATURE-----
 
 
