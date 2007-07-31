@@ -1,30 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IFfXY-0004g0-51
-	for openembedded-devel@openembedded.org; Tue, 31 Jul 2007 02:24:44 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6V0Mpqx008090;
-	Tue, 31 Jul 2007 01:22:51 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 08020-02; Tue, 31 Jul 2007 01:22:47 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6V0Mhf8008080
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Tue, 31 Jul 2007 01:22:43 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: bitbake-dev <bitbake-dev@lists.berlios.de>
-In-Reply-To: <1185839805.7719.103.camel@localhost.localdomain>
-References: <1185839805.7719.103.camel@localhost.localdomain>
-Date: Tue, 31 Jul 2007 01:22:42 +0100
-Message-Id: <1185841362.7719.116.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Re: [Bitbake-dev] The future of "svnnow"
+	(envelope-from <koen@dominion.kabel.utwente.nl>)
+	id 1IFlvg-0000g2-8M; Tue, 31 Jul 2007 09:14:04 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l6V7CD1R012748; Tue, 31 Jul 2007 09:12:13 +0200
+Message-ID: <46AEE0CC.8000605@dominion.kabel.utwente.nl>
+Date: Tue, 31 Jul 2007 09:12:12 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <E1IFdTE-0007J2-8h@linuxtogo.org>
+In-Reply-To: <E1IFdTE-0007J2-8h@linuxtogo.org>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Cc: Michael Lauer <mickey@vanille-media.de>,
+	openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] org.oe.dev sane-srcdates.inc: openmoko*: add SRCDATE =	now until the integration work for new OpenMoko stuff has been done.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,25 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2007 00:24:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 31 Jul 2007 07:14:05 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-I should also add, the changes so far are in bitbake trunk and in the
-bitbake 1.8 svn branch. I've added the definition of SRCREV to
-bitbake.conf in OE.dev so anyone wishing to experiment with this can do
-so just by changing the PV as discussed in a .bb file...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Please don't check in such changes yet though.
+mickeyl commit schreef:
+> sane-srcdates.inc: openmoko*: add SRCDATE = now until the integration work for new OpenMoko stuff has been done.
 
-I guess we could have a "I-use-bitbake-1.8-trunk.conf" that does
+> +# OpenMoko
+> +SRCDATE_libgsmd ?= "now"
+> +SRCDATE_libmokogsmd2 ?= "now"
+> +SRCDATE_libmokoui2 ?= "now"
+> +SRCDATE_libmokojournal2 ?= "now"
+> +SRCDATE_libmokopanelui2 ?= "now"
+> +SRCDATE_openmoko-today2 ?= "now"
+> +SRCDATE_openmoko-dialer2 ?= "now"
+> +SRCDATE_openmoko-contacts2 ?= "now"
+> +
+> +SRCDATE_openmoko-panel-battery ?= "now"
+> +SRCDATE_openmoko-panel-clock ?= "now"
+> +SRCDATE_openmoko-panel-gsm ?= "now"
+> +SRCDATE_openmoko-panel-usb ?= "now"
+> +SRCDATE_openmoko-panel-bt ?= "now"
+> +SRCDATE_openmoko-panel-gps ?= "now"
 
-PV_pn-somepackage1 = "x.y.z+svnr${SRCREV}"
-PV_pn-somepackage2 = "x.y.z+svnr${SRCREV}"
+SRC_DATE="now" is *never* *ever* sane, so please move this to a different file and include
+it in conf/distro/openmoko.conf instead of forcing *everyone* to build broken packages
+(openmoko-foo_0.1.0+svnnow.ipk) that can't be upgraded.
 
-but thats probably insane and a sign I should sleep :)
+regards,
 
-Richard
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFGruDMMkyGM64RGpERAi/hAJ0WZSCgwqaLRIY/B1btMmd3SMZ4VgCgjDQx
+gp1IydvPQ7rlRVnPQvSFIMk=
+=03iq
+-----END PGP SIGNATURE-----
 
 
