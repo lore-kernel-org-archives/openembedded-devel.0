@@ -1,25 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IFpP5-0008Kw-Uy
-	for openembedded-devel@openembedded.org; Tue, 31 Jul 2007 12:56:40 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l6VAsl1R030946; Tue, 31 Jul 2007 12:54:47 +0200
-Message-ID: <46AF14F7.2030607@dominion.kabel.utwente.nl>
-Date: Tue, 31 Jul 2007 12:54:47 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1IFqBS-0005Qb-TC
+	for openembedded-devel@openembedded.org; Tue, 31 Jul 2007 13:46:39 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6VBiFHK002169;
+	Tue, 31 Jul 2007 12:44:15 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 01891-05; Tue, 31 Jul 2007 12:44:12 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6VBi9Vj002161
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Tue, 31 Jul 2007 12:44:09 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
+In-Reply-To: <46AF0E33.4000107@dominion.kabel.utwente.nl>
 References: <1185839805.7719.103.camel@localhost.localdomain>
 	<46AF0E33.4000107@dominion.kabel.utwente.nl>
-In-Reply-To: <46AF0E33.4000107@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+Date: Tue, 31 Jul 2007 12:44:08 +0100
+Message-Id: <1185882248.6173.20.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
 Subject: Re: The future of "svnnow"
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -35,63 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2007 10:56:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 31 Jul 2007 11:46:39 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Koen Kooi schreef:
-> Richard Purdie schreef:
->> Hi,
+On Tue, 2007-07-31 at 12:25 +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
->> As people know the ability to build the latest head revisions of svn
->> (for example) repositories in OE with bitbake has been limited and less
->> than ideal.
+> Richard Purdie schreef:
+> > Hi,
+> > 
+> > As people know the ability to build the latest head revisions of svn
+> > (for example) repositories in OE with bitbake has been limited and less
+> > than ideal.
 > 
 > What happens if I have no internet connection during parsing and do have a huge
 > sourcemirror inside my firewall?
 
-I did:
+Two possible solutions:
 
-packages$ for i in */*.bb ; do sed -i -e s:'svn${SRCDATE}':'svnr${SRCREV}':g $i ; done
+1. You have locked down SRCREVs
 
-One of the results:
+2. You have a valid head revisions cache from the last time you had
+network access and you set the bitbake cache policy not to wipe that
+cache.
 
-NOTE: <class 'bb.MalformedUrl'>: while evaluating:
-${@bb.fetch.get_srcrev(d)}
-NOTE: <class 'bb.MalformedUrl'>: while evaluating:
-0.0+svnr${SRCREV}
-NOTE: <class 'bb.MalformedUrl'>: while evaluating:
-${PN}-${EXTENDPE}${PV}-${PR}
-NOTE: <class 'bb.MalformedUrl'>: while evaluating:
-${TMPDIR}/work/${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}/${PF}
-NOTE: <class 'bb.MalformedUrl'>: while evaluating:
-${WORKDIR}/trunk
-NOTE: <class 'bb.MalformedUrl'>: while evaluating:
-${S}
-ERROR:  while parsing
-/home/koen/OE/monotone/org.openembedded.dev/packages/openocd/openocd_svn.bb
+I can't see any other ways around that and its probably better than the
+current situation.
 
+Cheers,
 
-The parser seems to dislike:
+Richard
 
-* recipes with SRCREV that weren't fetched yet (openocd in my case)
-* recipes with SRCREV that do ;proto=http (libmatchbox)
-
-Is there anything we can do to fix these cases?
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGrxT2MkyGM64RGpERAqi0AKCkpdfJuvagyisqUKm3eZm1gS5N2ACfbZN9
-iB83sV9Yf0wPoHO9kgX6Lkc=
-=QKcE
------END PGP SIGNATURE-----
 
 
