@@ -1,33 +1,33 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IFfJ4-0000EC-68
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Jul 2007 02:09:46 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id AD43B28C014; Tue, 31 Jul 2007 02:05:57 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180169072.adsl.alicedsl.de [85.180.169.72])
-	by srv043.dedi23.de (Postfix) with ESMTP id E1C0C28C012;
-	Tue, 31 Jul 2007 02:05:56 +0200 (CEST)
-Date: Tue, 31 Jul 2007 02:07:58 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1688461606.20070731020758@vanille-media.de>
-In-Reply-To: <52752373.20070731020230@vanille-media.de>
+	(envelope-from <rpurdie@rpsys.net>) id 1IFfQ9-0000QO-QA
+	for openembedded-devel@openembedded.org; Tue, 31 Jul 2007 02:17:06 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6V0FIxk007661;
+	Tue, 31 Jul 2007 01:15:18 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07409-04; Tue, 31 Jul 2007 01:15:14 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6V0F62o007623
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Tue, 31 Jul 2007 01:15:06 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: "Dr. Mickey Lauer" <mickey@vanille-media.de>
+In-Reply-To: <1688461606.20070731020758@vanille-media.de>
 References: <1185839805.7719.103.camel@localhost.localdomain>
 	<52752373.20070731020230@vanille-media.de>
-MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@openembedded.org>,
-	bitbake-dev <bitbake-dev@lists.berlios.de>,
-	=?iso-8859-15?Q?Henryk_Pl=F6tz?= <henryk@openmoko.org>,
-	openembedded-devel@lists.openembedded.org
+	<1688461606.20070731020758@vanille-media.de>
+Date: Tue, 31 Jul 2007 01:15:06 +0100
+Message-Id: <1185840906.7719.107.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@openembedded.org,
+	Henryk =?ISO-8859-1?Q?Pl=F6tz?= <henryk@openmoko.org>,
+	bitbake-dev <bitbake-dev@lists.berlios.de>
 Subject: Re: The future of "svnnow"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,24 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2007 00:09:46 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 31 Jul 2007 00:17:06 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Dr. Michael Lauer wrote:
->> c) how to migrate to these changes in OE.dev
+On Tue, 2007-07-31 at 02:07 +0200, Dr. Michael Lauer wrote:
+> Dr. Michael Lauer wrote:
+> >> c) how to migrate to these changes in OE.dev
+> 
+> > Who has actually used SRCDATE = now? I know I did.
+> 
+> Ok, upon rereading the challenge seems to change the pinpointed SRCDATEs
+> in sane-srcdates.inc while making sure that the upgrade path still
+> works (i.e. lexical comparison), right?
 
-> Who has actually used SRCDATE = now? I know I did.
+If we use
 
-Ok, upon rereading the challenge seems to change the pinpointed SRCDATEs
-in sane-srcdates.inc while making sure that the upgrade path still
-works (i.e. lexical comparison), right?
+PV = "x.y.z+svnrXYZ"
 
-Regards,
+that should sort above
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+PV = "x.y.z+svnYYYMMDD"
+
+which is as good as we can probably hope for?
+
+Richard
 
 
 
