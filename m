@@ -1,33 +1,30 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IFfTj-0000WS-Gc
-	for openembedded-devel@openembedded.org; Tue, 31 Jul 2007 02:20:47 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1IFfXY-0004g0-51
+	for openembedded-devel@openembedded.org; Tue, 31 Jul 2007 02:24:44 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6V0Itw5007857;
-	Tue, 31 Jul 2007 01:18:55 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6V0Mpqx008090;
+	Tue, 31 Jul 2007 01:22:51 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 07699-05; Tue, 31 Jul 2007 01:18:52 +0100 (BST)
+	id 08020-02; Tue, 31 Jul 2007 01:22:47 +0100 (BST)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6V0IpmR007850
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l6V0Mhf8008080
 	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Tue, 31 Jul 2007 01:18:51 +0100
+	Tue, 31 Jul 2007 01:22:43 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
-To: "Dr. Mickey Lauer" <mickey@vanille-media.de>
-In-Reply-To: <52752373.20070731020230@vanille-media.de>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>
+In-Reply-To: <1185839805.7719.103.camel@localhost.localdomain>
 References: <1185839805.7719.103.camel@localhost.localdomain>
-	<52752373.20070731020230@vanille-media.de>
-Date: Tue, 31 Jul 2007 01:18:50 +0100
-Message-Id: <1185841130.7719.111.camel@localhost.localdomain>
+Date: Tue, 31 Jul 2007 01:22:42 +0100
+Message-Id: <1185841362.7719.116.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel <openembedded-devel@openembedded.org>,
-	Henryk =?ISO-8859-1?Q?Pl=F6tz?= <henryk@openmoko.org>,
-	bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: The future of "svnnow"
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Re: [Bitbake-dev] The future of "svnnow"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,33 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2007 00:20:47 -0000
+X-List-Received-Date: Tue, 31 Jul 2007 00:24:44 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-07-31 at 02:02 +0200, Dr. Michael Lauer wrote:
-> Awesome work -- I'm impressed!
+I should also add, the changes so far are in bitbake trunk and in the
+bitbake 1.8 svn branch. I've added the definition of SRCREV to
+bitbake.conf in OE.dev so anyone wishing to experiment with this can do
+so just by changing the PV as discussed in a .bb file...
 
-Thanks :)
+Please don't check in such changes yet though.
 
-> This is yet another example of how good the BitBake core architecture
-> is.
+I guess we could have a "I-use-bitbake-1.8-trunk.conf" that does
 
-Yes!
+PV_pn-somepackage1 = "x.y.z+svnr${SRCREV}"
+PV_pn-somepackage2 = "x.y.z+svnr${SRCREV}"
 
-> > b) how much of the outstanding task list we need to complete before 1.8.8
-> 
-> 1,2,4
-
-Ok, thats roughly what I was thinking too. 4 needs 3 too so thats 1-4.
-
-> > c) how to migrate to these changes in OE.dev
-> 
-> Who has actually used SRCDATE = now? I know I did.
-
-I also mean issues like who's going to do it, when and how? All at once,
-distro by distro, adhoc? and is the aim to wipe out SRCDATE entirely for
-svn?
+but thats probably insane and a sign I should sleep :)
 
 Richard
 
