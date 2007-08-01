@@ -1,27 +1,33 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>)
-	id 1IG7sy-0002u9-QY; Wed, 01 Aug 2007 08:40:44 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l716cm1R002268; Wed, 1 Aug 2007 08:38:48 +0200
-Message-ID: <46B02A79.3020308@dominion.kabel.utwente.nl>
-Date: Wed, 01 Aug 2007 08:38:49 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1IGGUB-0001AH-L3
+	for openembedded-devel@openembedded.org; Wed, 01 Aug 2007 17:51:43 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l71FnkKr019103;
+	Wed, 1 Aug 2007 16:49:46 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 18895-06; Wed,  1 Aug 2007 16:49:39 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l71Fnb4V019088
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Wed, 1 Aug 2007 16:49:37 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-References: <E1IG1ZN-0003VH-Ds@linuxtogo.org>
-In-Reply-To: <E1IG1ZN-0003VH-Ds@linuxtogo.org>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Cc: Michael Lauer <mickey@vanille-media.de>,
-	openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev openmoko-panel-plugins: prepare for SVNREV
+In-Reply-To: <46AF2B6C.3040600@dominion.kabel.utwente.nl>
+References: <1185839805.7719.103.camel@localhost.localdomain>
+	<46AF0E33.4000107@dominion.kabel.utwente.nl>
+	<1185882248.6173.20.camel@localhost.localdomain>
+	<46AF2B6C.3040600@dominion.kabel.utwente.nl>
+Date: Wed, 01 Aug 2007 16:49:36 +0100
+Message-Id: <1185983376.6101.18.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: The future of "svnnow"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,57 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2007 06:40:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Aug 2007 15:51:44 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, 2007-07-31 at 14:30 +0200, Koen Kooi wrote:
+> > 2. You have a valid head revisions cache from the last time you had
+> > network access and you set the bitbake cache policy not to wipe that
+> > cache.
+> 
+> Is there a nice way to distribute such a cache, for e.g. evil firewalls?
 
-- From oe-devel, a few days ago:
+Its currently in a very simple SQL database table...
 
-Richard Purdie schreef:
-> Hi,
->
-> As people know the ability to build the latest head revisions of svn
-> (for example) repositories in OE with bitbake has been limited and less
-> than ideal.
->
+sqlite3 tmp/cache/MACHINE/bb_persist_cache.sqlite3
+.dump BB_URI_HEADREVS
 
-[...]
+to see the info...
 
-> Migration Path
-> ==============
->
-> SRCREV *CANNOT* be used by packages in OE.dev until we bump the version
-> requirement to bitbake 1.8.8 assuming that contains these changes. We
-> need to decide how much of the above we want to implement before 1.8.8
-> and test svn heavily before that release (with people testing SRCREV
-> *LOCALLY* if possible). Once the minimum version is 1.8.8 we can look at
-> converting the svn packages in OE.dev.
+Cheers,
 
-from oe-commits, yesterday:
-
-mickeyl commit schreef:
-> openmoko-panel-plugins: prepare for SVNREV
-
-> -PV = "0.0.1+svn${SRCDATE}"
-> +PV = "0.1.0+svnr${SRCREV}"
-
-So, which one is right? Are we converting everything to SRCREV now, or should we revert
-the openmoko stuff?
-
-regards,
-
-Koen
+Richard
 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGsCp5MkyGM64RGpERAoLTAKCZECVt9zDjSrlLXPyWudcy3YOcmwCfew8H
-0Sf4yfknLoebkfVtaY/kuPU=
-=8f3d
------END PGP SIGNATURE-----
 
 
