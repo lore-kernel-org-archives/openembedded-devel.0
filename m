@@ -1,33 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IGGUB-0001AH-L3
-	for openembedded-devel@openembedded.org; Wed, 01 Aug 2007 17:51:43 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l71FnkKr019103;
-	Wed, 1 Aug 2007 16:49:46 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18895-06; Wed,  1 Aug 2007 16:49:39 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l71Fnb4V019088
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Wed, 1 Aug 2007 16:49:37 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <46AF2B6C.3040600@dominion.kabel.utwente.nl>
-References: <1185839805.7719.103.camel@localhost.localdomain>
-	<46AF0E33.4000107@dominion.kabel.utwente.nl>
-	<1185882248.6173.20.camel@localhost.localdomain>
-	<46AF2B6C.3040600@dominion.kabel.utwente.nl>
-Date: Wed, 01 Aug 2007 16:49:36 +0100
-Message-Id: <1185983376.6101.18.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: The future of "svnnow"
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IGK7M-0005um-Ab
+	for openembedded-devel@openembedded.org; Wed, 01 Aug 2007 21:44:24 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l71Jg5j1026166 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 1 Aug 2007 21:42:08 +0200
+Message-ID: <46B0E20F.4010306@dominion.kabel.utwente.nl>
+Date: Wed, 01 Aug 2007 21:42:07 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: m4-native 1.4.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,28 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2007 15:51:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 01 Aug 2007 19:44:24 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-07-31 at 14:30 +0200, Koen Kooi wrote:
-> > 2. You have a valid head revisions cache from the last time you had
-> > network access and you set the bitbake cache policy not to wipe that
-> > cache.
-> 
-> Is there a nice way to distribute such a cache, for e.g. evil firewalls?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Its currently in a very simple SQL database table...
+Hi,
 
-sqlite3 tmp/cache/MACHINE/bb_persist_cache.sqlite3
-.dump BB_URI_HEADREVS
+As http://www.openembedded.org/ical/oe-events.ics indicates, m4-native 1.4.8 will be
+activated as default m4 tomorrow.
 
-to see the info...
+regards,
 
-Cheers,
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Richard
-
-
+iD8DBQFGsOIPMkyGM64RGpERAvdgAJ0eDMPPX6MICnvyebuhkbGgvrLB3gCghAsn
+3nDxnR3l022pLYNrgCNQLpM=
+=2dUy
+-----END PGP SIGNATURE-----
 
 
