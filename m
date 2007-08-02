@@ -1,23 +1,20 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <utx@penguin.cz>) id 1IGZyG-0002cb-4D
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Aug 2007 14:40:04 +0200
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id AB8DD628495
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2007 14:38:02 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46B1C71F.2090608@klever.net>
-References: <46B1753D.1090507@dominion.kabel.utwente.nl>
-	<46B1B6DB.6020603@klever.net>
-	<1186053831.5972.222.camel@hammer.suse.cz>
-	<46B1C71F.2090608@klever.net>
-Date: Thu, 02 Aug 2007 14:38:02 +0200
-Message-Id: <1186058282.5972.232.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
+	(envelope-from <philip@balister.org>) id 1IGa1C-0002gm-Uq
+	for openembedded-devel@openembedded.org; Thu, 02 Aug 2007 14:43:07 +0200
+Received: (qmail 6347 invoked by uid 1003); 2 Aug 2007 12:41:05 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 2 Aug 2007 12:41:04 -0000
+Message-ID: <46B1D0DA.5030905@balister.org>
+Date: Thu, 02 Aug 2007 08:40:58 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.5 (X11/20070719)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <46B1753D.1090507@dominion.kabel.utwente.nl>	<46B1B6DB.6020603@klever.net>	<1186053831.5972.222.camel@hammer.suse.cz>	<46B1C71F.2090608@klever.net>
+	<1186058282.5972.232.camel@hammer.suse.cz>
+In-Reply-To: <1186058282.5972.232.camel@hammer.suse.cz>
 Subject: Re: Gstreamer and rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,50 +29,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2007 12:40:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Aug 2007 12:43:07 -0000
+X-Groupsio-MsgNum: 2570
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms020701020601090804090301"
+
+--------------ms020701020601090804090301
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Michael Krelin wrote:
-> > Michael Krelin wrote:
-> >> I don't know much about gstreamer, but being inventor of
-> >> OE_LT_RPATH_ALLOW I felt obliged to look into gst-plugins.inc and I'm
-> >> guessing it should be:
-> > 
-> > Maybe it would be better to not break build environment and then work
-> > around consequent errors by hacks like OE_LT_RPATH_ALLOW,
-> > never-ever-do-rpath.patch etc.
-> > 
-> > gcc has --sysroot which can do required linking without any hacks.
-> > 
-> 
-> Generally, I tend to agree, but in practice I'm afraid that would amount
-> to rewriting the whole OE...
+Stanislav Brabec wrote:
+> Michael Krelin wrote:
+>>> Michael Krelin wrote:
+>>>> I don't know much about gstreamer, but being inventor of
+>>>> OE_LT_RPATH_ALLOW I felt obliged to look into gst-plugins.inc and I'm
+>>>> guessing it should be:
+>>> Maybe it would be better to not break build environment and then work
+>>> around consequent errors by hacks like OE_LT_RPATH_ALLOW,
+>>> never-ever-do-rpath.patch etc.
+>>>
+>>> gcc has --sysroot which can do required linking without any hacks.
+>>>
+>> Generally, I tend to agree, but in practice I'm afraid that would amount
+>> to rewriting the whole OE...
 
-No.
+Is --sysroot present in all versions of gcc? If not, which version does 
+it first appear?
 
-1. and 2. and 4. should be change of about 20 lines (change xxxx_CC from
-e. g. "arm-angstrom-linux-gnueabi-gcc" to e. g.
-"arm-angstrom-linux-gnueabi-gcc --sysroot=/OE/build/tmp/staging/arm-angstrom-linux-gnueabi").
-I only could not find correct lines.
+Philip
 
-If anybody tell me the correct location, I can do test bootstrap with
-the new options.
+--------------ms020701020601090804090301
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-5. is low priority, after 4. it will become NOP
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
+OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
+65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
+X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
+tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
+szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
+nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
+U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
+ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
+HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
+dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
+RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
+rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
+6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
+Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MDgwMjEy
+NDA1OFowIwYJKoZIhvcNAQkEMRYEFOypLf9Ss4kbZtYpbEcuj5UBMvCbMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
+qTANBgkqhkiG9w0BAQEFAASCAQCKar6XJ8qz+x/dZmOQ/cN9PpkSDAS+Hz4MfG1KqSjYDA1lcuhU
+vhoU2iAChrjR66Rf+2L0FwCj3VbfLqEH/AlCvpCHfQPakqewlYzT67/0/MlU+BXvClGj6ci4dywj
+Ar7iMHhdqHOysKrwur6XHYj3jMnhAO7sYIYjc1n8heq5T7PKbOPxXG9OLwxooHmOWdwiuxa0mvMd
+1ZNdSgRlsgGLdWcq/57hJTmz3cMhX80uBfjvLP18EKHYKSR3I9J0FdnJ5a3ChckcOqqsuxyM0wc/
+el7LbkN8t57Xv7TQ3rXT+LvZNM+K9MqkzNhZU+3RqNIwCGi4GlXDTeuoEl8rJsefAAAAAAAA
 
-6. Is already done, it should be enough to change check pattern in the
-QA stuff.
-
-3. and 7. break packages (e. g. findutils) not depending on CC
-definition and has to be fixed manually anyway.
-
-And if 8. will be done (in far future), most individual fixes in 7.
-could be removed.
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
-
-
+--------------ms020701020601090804090301--
