@@ -1,25 +1,21 @@
-Received: from [72.29.79.205] (helo=rhodos.klever.net)
+Received: from [209.85.146.176] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1IGjSm-0001AX-WD
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Aug 2007 00:48:13 +0200
-Received: from pd9538c5f.dip0.t-ipconnect.de ([217.83.140.95]
-	helo=olympus.klever.net)
-	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1IGjQm-0006kl-BW
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Aug 2007 00:46:08 +0200
-Message-ID: <46B25E0A.7050103@klever.net>
-Date: Fri, 03 Aug 2007 00:43:22 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.5 (X11/20070731)
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1IGkUt-0007gE-M1
+	for openembedded-devel@openembedded.org; Fri, 03 Aug 2007 01:54:28 +0200
+Received: by wa-out-1112.google.com with SMTP id v27so708380wah
+	for <openembedded-devel@openembedded.org>;
+	Thu, 02 Aug 2007 16:52:22 -0700 (PDT)
+Received: by 10.115.54.1 with SMTP id g1mr2338522wak.1186098742436;
+	Thu, 02 Aug 2007 16:52:22 -0700 (PDT)
+Received: by 10.114.151.18 with HTTP; Thu, 2 Aug 2007 16:52:22 -0700 (PDT)
+Message-ID: <bdb0025f0708021652w33074970kd4c8259f11e683a2@mail.gmail.com>
+Date: Thu, 2 Aug 2007 20:52:22 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <bdb0025f0707261525h67245c9dmb1f7dd0271570149@mail.gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <46B1753D.1090507@dominion.kabel.utwente.nl>	<46B1B6DB.6020603@klever.net>	<1186053831.5972.222.camel@hammer.suse.cz>	<46B1C71F.2090608@klever.net>	<1186058282.5972.232.camel@hammer.suse.cz>	<46B1D0DA.5030905@balister.org>	<1186061255.5972.243.camel@hammer.suse.cz>	<46B1E063.7010407@dominion.kabel.utwente.nl>	<1186064138.5972.259.camel@hammer.suse.cz>	<46B1E812.8020706@dominion.kabel.utwente.nl>	<1186066059.5972.269.camel@hammer.suse.cz>	<46B1F78F.4040700@klever.net>	<46B1FC60.6030908@dominion.kabel.utwente.nl>	<46B1FDD8.8000404@klever.net>	<46B20D9F.70704@dominion.kabel.utwente.nl>
-	<1186093013.6626.57.camel@localhost.localdomain>
-In-Reply-To: <1186093013.6626.57.camel@localhost.localdomain>
-X-Enigmail-Version: 0.95.1
-Subject: Re: Gstreamer and rpath
+References: <bdb0025f0707261525h67245c9dmb1f7dd0271570149@mail.gmail.com>
+Subject: Re: update-alternatives problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,38 +29,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2007 22:48:13 -0000
+X-List-Received-Date: Thu, 02 Aug 2007 23:54:28 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> 
-> I'm actually semi against forcing staging to look like an image. The
-> fact gcc requires this for its sysroot option is a sign that they
-> haven't got this right yet.
-> 
+http://bugs.openembedded.org/show_bug.cgi?id=2102
 
-Why?
+Now u-a accept both ways: relative and full path, but I still believe
+that the more coherent way is to change all OE to support just the
+full path alternative.
 
-> With packaged staging we need to decide which way we go, separate
-> staging packages or use the same ones as we use for images.
-> 
-> My personal gut feeling is that separate ones will work better. They
+Thanks,
+vivijim
 
-So is mine, but...
 
-> also mean we can handle the extra staging files like pkgmaps and perhaps
-> handle multi machine easier.
-> 
-> I think if we try to make image packages fit, we'll end up having to
-> make hack after hack and end up with something less maintainable.
+On 7/26/07, Rodrigo Vivi <rodrigo.vivi@gmail.com> wrote:
+> Hi all,
+>
+> I have some doubts about the update-alternatives scheme.
+>
+> Why to have 2 ways to create an update-alternatives entry in the
+> postinst script? One is setting ALTERNATIVES_* variables inheriting
+> the update-alternatives.bbclass and the other is to write the function
+>  pkg_postinst_${PN} () containing the update-alternatives commands.
+> What is the big difference?
+>
+> For example in sysvinit_2.86.bb there are both methods.
+> ALTERNATIVES_* for init
+> and the function for {halt,reboot,shutdown,last,mesg,wall}
+>
+> I believe that there is a good reason for that, but what I believe
+> that is wrong is:
+>
+> when using the ALTERNATIVES_* the path is ritght like in the init case
+> ALTERNATIVE_PATH = ${base_sbindir}/init.sysvinit
+> so this is the right update-alternatives command in postinst script:
+> update-alternatives --install /sbin/init init /sbin/init.sysvinit 50
+>
+> But when in function the path are wrong (it aren't complete):
+> update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 200
+> So the line in postinst script is that:
+> update-alternatives --install /sbin/halt halt halt.sysvinit 200
+> instead of a complete one
+> update-alternatives --install /sbin/halt halt /sbin/halt.sysvinit 200
+>
+> Someday in past I've noticed that all of my links of
+> update-alternatives was broke  because this incomplete path so I did a
+> patch to update-alternatives-dpkg package to take the begin of path
+> (/sbin) for the link one (/sbin/halt) generating a path link
+> /sbin/halt.sysvinit fixing all cases that I knew. It was working fine
+> until today when I saw that my init link was pointing to
+> /sbin//sbin/init.sysvinit and breaking my initialization.
+>
+> I believe that you don't have this error because update-alternatives
+> of ipkg works different, right?
+>
+> What do you believe that is better? change all bb to have a standard?
+> or code a patch of my patch to make update-alternatives-dpkg check if
+> the path is right before try to get the begin of the link?
+>
+> Regards
+>
+> Rodrigo Vivi
+> INdT - Instituto Nokia de Tecnologia
+> Blog: http://blog.vivi.eng.br
+> GPG: 0x905BE242 @ wwwkeys.pgp.net
+>
 
-why?
 
-Sorry for these vague questions, but it's absolutely unclear to me. I
-don't want you to waste your time on elaborating too much on these, but
-can you give a hint or two?
-
-Love,
-H
+-- 
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
