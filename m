@@ -1,26 +1,25 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [82.119.242.94] (helo=mail.suse.cz)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IGb3E-0004MR-6o
-	for openembedded-devel@openembedded.org; Thu, 02 Aug 2007 15:49:16 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l72DlAj1014360 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 2 Aug 2007 15:47:10 +0200
-Message-ID: <46B1E063.7010407@dominion.kabel.utwente.nl>
-Date: Thu, 02 Aug 2007 15:47:15 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <46B1753D.1090507@dominion.kabel.utwente.nl>	<46B1B6DB.6020603@klever.net>	<1186053831.5972.222.camel@hammer.suse.cz>	<46B1C71F.2090608@klever.net>	<1186058282.5972.232.camel@hammer.suse.cz>	<46B1D0DA.5030905@balister.org>
+	(envelope-from <utx@penguin.cz>) id 1IGbUi-0005VR-H3
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Aug 2007 16:17:40 +0200
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id E1448146C364
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Aug 2007 16:15:38 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <46B1E063.7010407@dominion.kabel.utwente.nl>
+References: <46B1753D.1090507@dominion.kabel.utwente.nl>
+	<46B1B6DB.6020603@klever.net>	<1186053831.5972.222.camel@hammer.suse.cz>
+	<46B1C71F.2090608@klever.net>	<1186058282.5972.232.camel@hammer.suse.cz>
+	<46B1D0DA.5030905@balister.org>
 	<1186061255.5972.243.camel@hammer.suse.cz>
-In-Reply-To: <1186061255.5972.243.camel@hammer.suse.cz>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+	<46B1E063.7010407@dominion.kabel.utwente.nl>
+Date: Thu, 02 Aug 2007 16:15:38 +0200
+Message-Id: <1186064138.5972.259.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
 Subject: Re: Gstreamer and rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,42 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2007 13:49:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Aug 2007 14:17:40 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi wrote:
 
-Stanislav Brabec schreef:
-> Philip Balister wrote:
+> > I see no problem here: For cross compilation OE compiles its own
+> > compiler, which already supports --sysroot,
 > 
->> Is --sysroot present in all versions of gcc? If not, which version does 
->> it first appear?
-> 
-> 3.3.3 has not it yet.
-> 
-> gcc/ChangeLog.2005:
-> 2005-07-25  Mark Mitchell  <mark@codesourcery.com>
-> 
-> 	* gcc.c (option_map): Add --sysroot.
-> 
-> Michael Krelin wrote:
-> 
->> I think starting with 3.4, another reason why this idea maybe not yet
->> viable...
-> 
-> I see no problem here: For cross compilation OE compiles its own
-> compiler, which already supports --sysroot,
+> No. We have a gcc-cross_3.3.3.bb and 3.3.4
 
-No. We have a gcc-cross_3.3.3.bb and 3.3.4
+But Angstrom uses 4.1.2 as default, isn't it? And it compiles everything
+correctly (except qemu).
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+oe:~> /OE/build/tmp/cross/arm-angstrom-linux-gnueabi/bin/gcc --version
+gcc (GCC) 4.1.2
 
-iD8DBQFGseBjMkyGM64RGpERApeSAKCN9M3ZOXHkQ4eZ4G5BFZdZ9FJItACcC0OS
-K3d/zOAwdbQmNuLmTMOD0Q0=
-=1Zuo
------END PGP SIGNATURE-----
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
