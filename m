@@ -1,21 +1,33 @@
-Received: from [209.85.146.176] (helo=wa-out-1112.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1IGkUt-0007gE-M1
-	for openembedded-devel@openembedded.org; Fri, 03 Aug 2007 01:54:28 +0200
-Received: by wa-out-1112.google.com with SMTP id v27so708380wah
+	(envelope-from <rpurdie@rpsys.net>) id 1IGl2V-0004eG-IY
+	for openembedded-devel@openembedded.org; Fri, 03 Aug 2007 02:29:11 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l730R76W023501
 	for <openembedded-devel@openembedded.org>;
-	Thu, 02 Aug 2007 16:52:22 -0700 (PDT)
-Received: by 10.115.54.1 with SMTP id g1mr2338522wak.1186098742436;
-	Thu, 02 Aug 2007 16:52:22 -0700 (PDT)
-Received: by 10.114.151.18 with HTTP; Thu, 2 Aug 2007 16:52:22 -0700 (PDT)
-Message-ID: <bdb0025f0708021652w33074970kd4c8259f11e683a2@mail.gmail.com>
-Date: Thu, 2 Aug 2007 20:52:22 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+	Fri, 3 Aug 2007 01:27:07 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 22959-10 for <openembedded-devel@openembedded.org>;
+	Fri,  3 Aug 2007 01:27:03 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l730R04B023494
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Fri, 3 Aug 2007 01:27:00 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <bdb0025f0707261525h67245c9dmb1f7dd0271570149@mail.gmail.com>
-MIME-Version: 1.0
-References: <bdb0025f0707261525h67245c9dmb1f7dd0271570149@mail.gmail.com>
-Subject: Re: update-alternatives problems
+In-Reply-To: <46AEE9A0.2050504@dominion.kabel.utwente.nl>
+References: <1185839805.7719.103.camel@localhost.localdomain>
+	<46AEE9A0.2050504@dominion.kabel.utwente.nl>
+Date: Fri, 03 Aug 2007 01:26:59 +0100
+Message-Id: <1186100819.6626.65.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: The future of "svnnow"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,79 +41,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2007 23:54:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 03 Aug 2007 00:29:11 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-http://bugs.openembedded.org/show_bug.cgi?id=2102
+Just an update on the current status:
 
-Now u-a accept both ways: relative and full path, but I still believe
-that the more coherent way is to change all OE to support just the
-full path alternative.
+On Tue, 2007-07-31 at 09:49 +0200, Koen Kooi wrote:
+> Richard Purdie schreef:
+> > What still needs to be done (patches welcome)
+> > =============================================
+> > 
+> > 1. Fix revision lockdown SRCREV_pn-somepackage = "90" etc. Thats a
+> > problem in localpath() in svn.py.
 
-Thanks,
-vivijim
+Done.
 
+> > 2. Handling of multiple SCMs in the SRC_URI. The plan here is simple,
+> > any package doing this has to set SRCREV_FORMAT specifying the format of
+> > the SRCREV string. get_srcrev() can collect the SCM revisions, fill out
+> > the string and return it. The format and inner workings of this are open
+> > for discussion and to be determined. 
 
-On 7/26/07, Rodrigo Vivi <rodrigo.vivi@gmail.com> wrote:
-> Hi all,
->
-> I have some doubts about the update-alternatives scheme.
->
-> Why to have 2 ways to create an update-alternatives entry in the
-> postinst script? One is setting ALTERNATIVES_* variables inheriting
-> the update-alternatives.bbclass and the other is to write the function
->  pkg_postinst_${PN} () containing the update-alternatives commands.
-> What is the big difference?
->
-> For example in sysvinit_2.86.bb there are both methods.
-> ALTERNATIVES_* for init
-> and the function for {halt,reboot,shutdown,last,mesg,wall}
->
-> I believe that there is a good reason for that, but what I believe
-> that is wrong is:
->
-> when using the ALTERNATIVES_* the path is ritght like in the init case
-> ALTERNATIVE_PATH = ${base_sbindir}/init.sysvinit
-> so this is the right update-alternatives command in postinst script:
-> update-alternatives --install /sbin/init init /sbin/init.sysvinit 50
->
-> But when in function the path are wrong (it aren't complete):
-> update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 200
-> So the line in postinst script is that:
-> update-alternatives --install /sbin/halt halt halt.sysvinit 200
-> instead of a complete one
-> update-alternatives --install /sbin/halt halt /sbin/halt.sysvinit 200
->
-> Someday in past I've noticed that all of my links of
-> update-alternatives was broke  because this incomplete path so I did a
-> patch to update-alternatives-dpkg package to take the begin of path
-> (/sbin) for the link one (/sbin/halt) generating a path link
-> /sbin/halt.sysvinit fixing all cases that I knew. It was working fine
-> until today when I saw that my init link was pointing to
-> /sbin//sbin/init.sysvinit and breaking my initialization.
->
-> I believe that you don't have this error because update-alternatives
-> of ipkg works different, right?
->
-> What do you believe that is better? change all bb to have a standard?
-> or code a patch of my patch to make update-alternatives-dpkg check if
-> the path is right before try to get the begin of the link?
->
-> Regards
->
-> Rodrigo Vivi
-> INdT - Instituto Nokia de Tecnologia
-> Blog: http://blog.vivi.eng.br
-> GPG: 0x905BE242 @ wwwkeys.pgp.net
->
+Not Done. Does anyone have any thoughts on this?
 
+> > 3. Finish sortable_revision(). If self._sortable_revision() isn't
+> > present, it should read a counter, revision pair from BB_URI_LOCALCOUNT.
+> > If the revision is different to _latest_revision, increase the counter
+> > and store + return it. 
 
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+Done.
+
+> > 4. Fix the git fetcher to make git "now" work. These "local revision
+> > counter" packages will not be shareable between different builds but we
+> > always knew that would be the case with git and this is as close as we
+> > can get.
+
+Done.
+
+> > 5. Examine the other fetchers and see if we can add some kind of "now"
+> > support to them too.
+
+I'm ignoring perforce and svk. It doesn't make sense for ssh/wget/local
+urls. I doubt we can get any kind of coherent state out of cvs and to be
+honest I don't care about it. So I guess thats Done.
+
+> > 6. Add policy control variables to control the wiping of BB_URI_HEADREVS
+
+Not Done.
+
+>   7. make a minrev and max rev for patches 
+
+Done.
+
+> and try to convert dates to revisions for
+> existing users of ;mindate=20070707;maxdate=20080808 in SRC_URI
+
+Not Done. SEP field invoked here ;-).
+
+Cheers,
+
+Richard
+
 
 
