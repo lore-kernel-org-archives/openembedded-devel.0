@@ -1,31 +1,24 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [72.29.79.205] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <utx@penguin.cz>) id 1IGtNs-0005yx-Rz
+	(envelope-from <hacker@klever.net>) id 1IGtdJ-0006TW-R8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Aug 2007 11:23:48 +0200
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id 09D056280C1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2007 11:21:42 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Fri, 03 Aug 2007 11:39:45 +0200
+Received: from pd9538aa7.dip0.t-ipconnect.de ([217.83.138.167]
+	helo=olympus.klever.net)
+	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1IGtbF-0004lf-TF
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Aug 2007 11:37:38 +0200
+Message-ID: <46B2F6B9.7050605@klever.net>
+Date: Fri, 03 Aug 2007 11:34:49 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.5 (X11/20070731)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1186093013.6626.57.camel@localhost.localdomain>
-References: <46B1753D.1090507@dominion.kabel.utwente.nl>
-	<46B1B6DB.6020603@klever.net>	<1186053831.5972.222.camel@hammer.suse.cz>
-	<46B1C71F.2090608@klever.net>	<1186058282.5972.232.camel@hammer.suse.cz>
-	<46B1D0DA.5030905@balister.org>	<1186061255.5972.243.camel@hammer.suse.cz>
-	<46B1E063.7010407@dominion.kabel.utwente.nl>
-	<1186064138.5972.259.camel@hammer.suse.cz>
-	<46B1E812.8020706@dominion.kabel.utwente.nl>
-	<1186066059.5972.269.camel@hammer.suse.cz>	<46B1F78F.4040700@klever.net>
-	<46B1FC60.6030908@dominion.kabel.utwente.nl>
-	<46B1FDD8.8000404@klever.net>
-	<46B20D9F.70704@dominion.kabel.utwente.nl>
-	<1186093013.6626.57.camel@localhost.localdomain>
-Date: Fri, 03 Aug 2007 11:21:41 +0200
-Message-Id: <1186132901.5972.314.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
+References: <46B1753D.1090507@dominion.kabel.utwente.nl>	<46B1B6DB.6020603@klever.net>	<1186053831.5972.222.camel@hammer.suse.cz>	<46B1C71F.2090608@klever.net>	<1186058282.5972.232.camel@hammer.suse.cz>	<46B1D0DA.5030905@balister.org>	<1186061255.5972.243.camel@hammer.suse.cz>	<46B1E063.7010407@dominion.kabel.utwente.nl>	<1186064138.5972.259.camel@hammer.suse.cz>	<46B1E812.8020706@dominion.kabel.utwente.nl>	<1186066059.5972.269.camel@hammer.suse.cz>	<46B1F78F.4040700@klever.net>	<46B1FC60.6030908@dominion.kabel.utwente.nl>	<46B1FDD8.8000404@klever.net>	<46B20D9F.70704@dominion.kabel.utwente.nl>	<1186093013.6626.57.camel@localhost.localdomain>	<46B25E0A.7050103@klever.net>
+	<1186128296.6116.5.camel@localhost.localdomain>
+In-Reply-To: <1186128296.6116.5.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.1
 Subject: Re: Gstreamer and rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,69 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2007 09:23:49 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 03 Aug 2007 09:39:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
+>>> I'm actually semi against forcing staging to look like an image. The
+>>> fact gcc requires this for its sysroot option is a sign that they
+>>> haven't got this right yet.
+>>>
+>> Why?
+> 
+> Well, why should I put libs in a /usr/lib directory rather that /lib? I
+> know there are guidelines but guidelines are one thing, forcing layouts
+> is a different thing.
 
-> I'm actually semi against forcing staging to look like an image. The
-> fact gcc requires this for its sysroot option is a sign that they
-> haven't got this right yet.
->=20
-> With packaged staging we need to decide which way we go, separate
-> staging packages or use the same ones as we use for images.
->=20
-> My personal gut feeling is that separate ones will work better. They
-> also mean we can handle the extra staging files like pkgmaps and perhap=
-s
-> handle multi machine easier.
+Good question, thought doesn't have much to do with sysroot facility.
+You have exactly the same freedom like you would have with no sysroot,
+you're free to install in /usr, in / or in /do-not-enforce-layout/
+prefix. The only difference is that you don't have to adjust your paths
+to take staging prefix into account and you are not likey to pick up
+your host system stuff while compiling.
 
-Well, the point of gcc --sysroot is a simplification of cross
-compilation for those using complete sysroot environment.
+About getting 'sysroot' right... Doesn't the name imply using in sysroot
+the same layout like you would otherwise?
 
-Maybe we have a good reason to not use sysroot, but then we have to
-invent a different solution.
+> It was once hoped that by changing variables like libdir, bindir, prefix
+> in bitbake.conf you could change your system layout. People could then
+> customise their images that way. I realise there are difficulties with
+> that in practise as some things are hardcoded and it won't work straight
+> away at present but if we start using the sysroot option I doubt it will
+> ever work.
 
-Manual enabling/disabling rpath is a bad solution. Better solutions is a
-compiler wrapper knowing our rewrite rules.
+And of course you still have your libdir/bindir/prefix, etc.
 
-For example:
-arm-angstrom-gueabi-gcc -I/usr/include/ssl -L/usr/lib/purple-2 -loscar -l=
-m
-may be rewritten for example to:
-arm-angstrom-gueabi-gcc -nostdinc -nostdlib -L/path/to/staging/platform/l=
-ib -L/path/to/staging/model/lib -I/path/to/staging/noarch/include -I/path=
-/to/staging/platform/include -L/path/to/staging/model/include -I/path/to/=
-staging/platform/include/ssl -I/path/to/staging/model/include/ssl -L/path=
-/to/staging/platform/lib/purple-2 -L/path/to/staging/model/lib/purple-2 -=
-loscar -lm
-
-Such wrapper must not modify rpath, -D and other arguments with paths.
-
-But for example AC_CHECK_FILE modification to work with such structure
-would be complicated.
-
-But maybe there is possible to invent better method than the sysroot
-design is.
-
-
-A random idea:
-
-Define TARGET_ROOT_MAP, which may use similar syntax like overlay
-filesystems have. It will allow to construct sysroot by these
-filesystems on fly as well, e. g. for use with emulators.
-
---=20
-Best Regards / S pozdravem,
-
-Stanislav Brabec
-software developer
----------------------------------------------------------------------
-SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse.cz
-Lihovarsk=E1 1060/12                            tel: +420 284 028 966
-190 00 Praha 9                                fax: +420 284 028 951
-Czech Republic                                http://www.suse.cz/
-
+Love,
+H
 
 
