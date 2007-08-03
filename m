@@ -1,25 +1,15 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [82.119.242.94] (helo=mail.suse.cz)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IGsBn-0004Er-O1
-	for openembedded-devel@openembedded.org; Fri, 03 Aug 2007 10:07:18 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l73859lB005341
-	for <openembedded-devel@openembedded.org>;
-	Fri, 3 Aug 2007 09:05:09 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 04903-08 for <openembedded-devel@openembedded.org>;
-	Fri,  3 Aug 2007 09:05:02 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7384v3T005321
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Fri, 3 Aug 2007 09:04:57 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <46B25E0A.7050103@klever.net>
+	(envelope-from <utx@penguin.cz>) id 1IGtNs-0005yx-Rz
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Aug 2007 11:23:48 +0200
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id 09D056280C1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  3 Aug 2007 11:21:42 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1186093013.6626.57.camel@localhost.localdomain>
 References: <46B1753D.1090507@dominion.kabel.utwente.nl>
 	<46B1B6DB.6020603@klever.net>	<1186053831.5972.222.camel@hammer.suse.cz>
 	<46B1C71F.2090608@klever.net>	<1186058282.5972.232.camel@hammer.suse.cz>
@@ -28,15 +18,14 @@ References: <46B1753D.1090507@dominion.kabel.utwente.nl>
 	<1186064138.5972.259.camel@hammer.suse.cz>
 	<46B1E812.8020706@dominion.kabel.utwente.nl>
 	<1186066059.5972.269.camel@hammer.suse.cz>	<46B1F78F.4040700@klever.net>
-	<46B1FC60.6030908@dominion.kabel.utwente.nl>	<46B1FDD8.8000404@klever.net>
+	<46B1FC60.6030908@dominion.kabel.utwente.nl>
+	<46B1FDD8.8000404@klever.net>
 	<46B20D9F.70704@dominion.kabel.utwente.nl>
 	<1186093013.6626.57.camel@localhost.localdomain>
-	<46B25E0A.7050103@klever.net>
-Date: Fri, 03 Aug 2007 09:04:56 +0100
-Message-Id: <1186128296.6116.5.camel@localhost.localdomain>
+Date: Fri, 03 Aug 2007 11:21:41 +0200
+Message-Id: <1186132901.5972.314.camel@hammer.suse.cz>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: Gstreamer and rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -51,52 +40,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2007 08:07:25 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Aug 2007 09:23:49 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2007-08-03 at 00:43 +0200, Michael Krelin wrote:
-> > 
-> > I'm actually semi against forcing staging to look like an image. The
-> > fact gcc requires this for its sysroot option is a sign that they
-> > haven't got this right yet.
-> > 
-> 
-> Why?
+Richard Purdie wrote:
 
-Well, why should I put libs in a /usr/lib directory rather that /lib? I
-know there are guidelines but guidelines are one thing, forcing layouts
-is a different thing.
+> I'm actually semi against forcing staging to look like an image. The
+> fact gcc requires this for its sysroot option is a sign that they
+> haven't got this right yet.
+>=20
+> With packaged staging we need to decide which way we go, separate
+> staging packages or use the same ones as we use for images.
+>=20
+> My personal gut feeling is that separate ones will work better. They
+> also mean we can handle the extra staging files like pkgmaps and perhap=
+s
+> handle multi machine easier.
 
-It was once hoped that by changing variables like libdir, bindir, prefix
-in bitbake.conf you could change your system layout. People could then
-customise their images that way. I realise there are difficulties with
-that in practise as some things are hardcoded and it won't work straight
-away at present but if we start using the sysroot option I doubt it will
-ever work.
+Well, the point of gcc --sysroot is a simplification of cross
+compilation for those using complete sysroot environment.
 
-> > With packaged staging we need to decide which way we go, separate
-> > staging packages or use the same ones as we use for images.
-> > 
-> > My personal gut feeling is that separate ones will work better. They
-> 
-> So is mine, but...
-> 
-> > also mean we can handle the extra staging files like pkgmaps and perhaps
-> > handle multi machine easier.
-> > 
-> > I think if we try to make image packages fit, we'll end up having to
-> > make hack after hack and end up with something less maintainable.
-> 
-> why?
+Maybe we have a good reason to not use sysroot, but then we have to
+invent a different solution.
 
-If staging packages can be different to image ones then we won't mind
-customising them. If they have to be the same the only way to adjust for
-staging will be to do post install tweaking. That feels like a hack.
+Manual enabling/disabling rpath is a bad solution. Better solutions is a
+compiler wrapper knowing our rewrite rules.
 
-Cheers,
+For example:
+arm-angstrom-gueabi-gcc -I/usr/include/ssl -L/usr/lib/purple-2 -loscar -l=
+m
+may be rewritten for example to:
+arm-angstrom-gueabi-gcc -nostdinc -nostdlib -L/path/to/staging/platform/l=
+ib -L/path/to/staging/model/lib -I/path/to/staging/noarch/include -I/path=
+/to/staging/platform/include -L/path/to/staging/model/include -I/path/to/=
+staging/platform/include/ssl -I/path/to/staging/model/include/ssl -L/path=
+/to/staging/platform/lib/purple-2 -L/path/to/staging/model/lib/purple-2 -=
+loscar -lm
 
-Richard
+Such wrapper must not modify rpath, -D and other arguments with paths.
+
+But for example AC_CHECK_FILE modification to work with such structure
+would be complicated.
+
+But maybe there is possible to invent better method than the sysroot
+design is.
+
+
+A random idea:
+
+Define TARGET_ROOT_MAP, which may use similar syntax like overlay
+filesystems have. It will allow to construct sysroot by these
+filesystems on fly as well, e. g. for use with emulators.
+
+--=20
+Best Regards / S pozdravem,
+
+Stanislav Brabec
+software developer
+---------------------------------------------------------------------
+SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse.cz
+Lihovarsk=E1 1060/12                            tel: +420 284 028 966
+190 00 Praha 9                                fax: +420 284 028 951
+Czech Republic                                http://www.suse.cz/
 
 
 
