@@ -1,27 +1,29 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [66.111.4.26] (helo=out2.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IHKN2-0000LJ-Pi
-	for openembedded-devel@openembedded.org; Sat, 04 Aug 2007 16:12:51 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l74EAMj1028303; Sat, 4 Aug 2007 16:10:22 +0200
-Message-ID: <46B488C3.4080306@dominion.kabel.utwente.nl>
-Date: Sat, 04 Aug 2007 16:10:11 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <rod@whitby.id.au>) id 1IHKxn-0004vx-Vq
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Aug 2007 16:50:50 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 494E4BF44
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  4 Aug 2007 10:48:29 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Sat, 04 Aug 2007 10:48:29 -0400
+X-Sasl-enc: LU9+y8R6pyi5TUIsfqVNjLWypYi6o6LT1694iW7XFZz0 1186238908
+Received: from [192.168.18.239] (CPE-121-209-17-239.sa.bigpond.net.au
+	[121.209.17.239])
+	by mail.messagingengine.com (Postfix) with ESMTP id 4A2EA20653
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  4 Aug 2007 10:48:28 -0400 (EDT)
+Message-ID: <46B490F7.8030409@whitby.id.au>
+Date: Sun, 05 Aug 2007 00:15:11 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 1.5.0.12 (Windows/20070509)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>, 
-	"Dr. Mickey Lauer" <mickey@vanille-media.de>
-References: <E1IH6Wi-0002Ri-S3@linuxtogo.org>
-	<623121068.20070804154926@vanille-media.de>
-In-Reply-To: <623121068.20070804154926@vanille-media.de>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
+To: openembedded-devel@lists.openembedded.org
+References: <E1IH6Wi-0002Ri-S3@linuxtogo.org>	<623121068.20070804154926@vanille-media.de>
+	<46B488C3.4080306@dominion.kabel.utwente.nl>
+In-Reply-To: <46B488C3.4080306@dominion.kabel.utwente.nl>
 Subject: Re: [oe-commits] org.oe.dev psplash: make openmoko psplash openmoko specific, not machine specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,34 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Aug 2007 14:13:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 04 Aug 2007 14:51:09 -0000
+X-List-Received-Date: Sat, 04 Aug 2007 14:51:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Dr. Michael Lauer schreef:
-> koen commit wrote:
->> psplash: make openmoko psplash openmoko specific, not machine specific
+Koen Kooi wrote:
+> Dr. Michael Lauer schreef:
+>>> koen commit wrote:
+>>>> psplash: make openmoko psplash openmoko specific, not machine specific
+>>> mmh :/ I did it on purpose that way. Didn't you read my comment in the
+>>> changelog?
 > 
-> mmh :/ I did it on purpose that way. Didn't you read my comment in the
-> changelog?
+> Yes: "psplash: add OpenMoko branding".
+> 
+> Could you explain why you want *every* distro and *every* target image using psplash on
+> that device having a 'openmoko' splash?
 
-Yes: "psplash: add OpenMoko branding".
+Isn't that obvious?  Didn't you listen during the World Domination 101
+lecture ... ;-)
 
-Could you explain why you want *every* distro and *every* target image using psplash on
-that device having a 'openmoko' splash?
+[I believe that OpenMoko is a hardware company now, which produces the
+GTA01 device, as well as the name of a software distro.]
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGtIjDMkyGM64RGpERAgDOAJ9WKxg1AN93w3wU+oVzUGCtlPh/LgCfbsPo
-Lmktxh1K+asxK16h3b8AX/c=
-=Ovdd
------END PGP SIGNATURE-----
+-- Rod
 
 
