@@ -1,29 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1IHK2f-0008Qt-UO; Sat, 04 Aug 2007 15:51:43 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 597E628C014; Sat,  4 Aug 2007 15:47:15 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180134222.adsl.alicedsl.de [85.180.134.222])
-	by srv043.dedi23.de (Postfix) with ESMTP id B683428C013;
-	Sat,  4 Aug 2007 15:47:14 +0200 (CEST)
-Date: Sat, 4 Aug 2007 15:49:26 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <623121068.20070804154926@vanille-media.de>
-To: "koen commit" <openembedded-commits@lists.openembedded.org>
-In-Reply-To: <E1IH6Wi-0002Ri-S3@linuxtogo.org>
-References: <E1IH6Wi-0002Ri-S3@linuxtogo.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IHKN2-0000LJ-Pi
+	for openembedded-devel@openembedded.org; Sat, 04 Aug 2007 16:12:51 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l74EAMj1028303; Sat, 4 Aug 2007 16:10:22 +0200
+Message-ID: <46B488C3.4080306@dominion.kabel.utwente.nl>
+Date: Sat, 04 Aug 2007 16:10:11 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>, 
+	"Dr. Mickey Lauer" <mickey@vanille-media.de>
+References: <E1IH6Wi-0002Ri-S3@linuxtogo.org>
+	<623121068.20070804154926@vanille-media.de>
+In-Reply-To: <623121068.20070804154926@vanille-media.de>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: [oe-commits] org.oe.dev psplash: make openmoko psplash openmoko specific, not machine specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,21 +36,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Aug 2007 13:52:03 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 04 Aug 2007 14:13:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-koen commit wrote:
-> psplash: make openmoko psplash openmoko specific, not machine specific
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-mmh :/ I did it on purpose that way. Didn't you read my comment in the
-changelog?
+Dr. Michael Lauer schreef:
+> koen commit wrote:
+>> psplash: make openmoko psplash openmoko specific, not machine specific
+> 
+> mmh :/ I did it on purpose that way. Didn't you read my comment in the
+> changelog?
 
-Regards,
+Yes: "psplash: add OpenMoko branding".
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Could you explain why you want *every* distro and *every* target image using psplash on
+that device having a 'openmoko' splash?
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGtIjDMkyGM64RGpERAgDOAJ9WKxg1AN93w3wU+oVzUGCtlPh/LgCfbsPo
+Lmktxh1K+asxK16h3b8AX/c=
+=Ovdd
+-----END PGP SIGNATURE-----
 
 
