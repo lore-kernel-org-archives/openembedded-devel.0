@@ -1,28 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IHQ2a-000864-Gq
-	for openembedded-devel@openembedded.org; Sat, 04 Aug 2007 22:16:00 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l74KDg1R027857; Sat, 4 Aug 2007 22:13:42 +0200
-Message-ID: <46B4DDEC.6070304@dominion.kabel.utwente.nl>
-Date: Sat, 04 Aug 2007 22:13:32 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <lvcargnini@gmail.com>) id 1IHReG-0002HU-HQ
+	for openembedded-devel@openembedded.org; Sat, 04 Aug 2007 23:59:00 +0200
+Received: by an-out-0708.google.com with SMTP id b38so210466ana
+	for <openembedded-devel@openembedded.org>;
+	Sat, 04 Aug 2007 14:56:44 -0700 (PDT)
+Received: by 10.100.37.4 with SMTP id k4mr2416963ank.1186264604590;
+	Sat, 04 Aug 2007 14:56:44 -0700 (PDT)
+Received: from ?201.21.219.113? ( [201.21.219.113])
+	by mx.google.com with ESMTPS id c16sm4638206anc.2007.08.04.14.56.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 04 Aug 2007 14:56:42 -0700 (PDT)
+Message-ID: <46B4F617.8040500@gmail.com>
+Date: Sat, 04 Aug 2007 18:56:39 -0300
+From: =?ISO-8859-1?Q?Lu=EDs_Vit=F3rio_Cargnini?= <lvcargnini@gmail.com>
+User-Agent: Thunderbird 2.0.0.5 (X11/20070723)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <9e4733910708041243oa0cf091x60a8f9f279ad2ba7@mail.gmail.com>
-	<46B4DC9D.6030700@dominion.kabel.utwente.nl>
-In-Reply-To: <46B4DC9D.6030700@dominion.kabel.utwente.nl>
+To: openembedded-devel@lists.openembedded.org
+References: <19c1b8a90708031735x59bf4341u736aeb19977c34a0@mail.gmail.com>
+	<46B469C1.5060706@balister.org>
+In-Reply-To: <46B469C1.5060706@balister.org>
 X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Cc: gpe-list@linuxtogo.org
-Subject: Re: [Gpe-list] check sum	failure	http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2'
+Cc: openembedded-devel@openembedded.org
+Subject: Re: PATCH: Use uImage make target for linux-omap1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,91 +36,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Aug 2007 20:16:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 04 Aug 2007 21:59:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Koen Kooi schreef:
-> Jon Smirl schreef:
->> NOTE: package minimix-0.8: started
->> NOTE: package minimix-0.8-r0: task do_fetch: started
->> NOTE: fetch http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2
->> --15:41:15--  http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2
->>            => `/extra/oe/sources/minimix-0.8.tar.bz2'
->> Resolving gpe.linuxtogo.org... 85.214.40.226
->> Connecting to gpe.linuxtogo.org|85.214.40.226|:80... connected.
->> HTTP request sent, awaiting response... 200 OK
->> Length: 68,451 (67K) [application/x-bzip2]
+openembedded is working for my OSK 5912 without this patch I dont felt
+it is necessary.
+
+Philip Balister wrote:
+> I'm running an OSK build atm (with current code). Tomorrow, I want to
+> compare how the kernel creates the uImage with the commands in the bbfile.
 > 
->> 100%[===================================================================================>]
->> 68,451       128.62K/s
+> I tend to agree we should use the kernel build system wherever possible.
 > 
->> 15:41:16 (128.51 KB/s) - `/extra/oe/sources/minimix-0.8.tar.bz2' saved
->> [68451/68451]
+> I'm concerned that we are having trouble booting various combinations of
+> uboot/kernel/file system and would like to have some understanding of
+> what is causing the problems. I do not want to fix one persons build at
+> the expense of other's.
 > 
->> NOTE: The MD5Sums did not match. Wanted:
->> '0cfb89bf2596710543935e31ad1d5a17' and Got:
->> '24ec8a3fb25fd0e497a0c64270b47d00'
->> NOTE: Task failed: Checksum of
->> 'http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2' failed
->> NOTE: package minimix-0.8-r0: task do_fetch: failed
->> ERROR: TaskFailed event exception, aborting
->> NOTE: package minimix-0.8: failed
->> ERROR: Build of
->> /extra/oe/org.openembedded.dev/packages/minimix/minimix_0.8.bb
->> do_fetch failed
->> ERROR: Task 272
->> (/extra/oe/org.openembedded.dev/packages/minimix/minimix_0.8.bb,
->> do_fetch) failed
->> NOTE: Tasks Summary: Attempted 2473 tasks of which 2473 didn't need to
->> be rerun and 1 failed.
->> ERROR: '/extra/oe/org.openembedded.dev/packages/minimix/minimix_0.8.bb' failed
+> Of course, the "thesis" is priority number atm, so I will be doind this
+> during procrastination time.
+> http://www.phdcomics.com/comics/archive.php?comicid=315
 > 
-> It seems the source got replaced/corrupted/compromised, could a gpe person look into it? I
-> have a tarball available with:
+> Philip
 > 
-> 0cfb89bf2596710543935e31ad1d5a17  OE/downloads/minimix-0.8.tar.bz2
+> Khem Raj wrote:
 > 
-> As the checksummer expects.
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-The diff:
-
-http://ewi546.ewi.utwente.nl/tmp/mm.diff
-
-koen@bitbake:/data/build/koen/OE/build/tmp/angstrom/work$ diff -Nurd minimix-0.8.original/
-minimix-0.8.compromised/ | diffstat
- ChangeLog    |   10
- Makefile.am  |    4
- Makefile.in  |   20
- aclocal.m4   |  196 ++-
- configure    | 3762 ++++++++++++++++++++++++++++++++++-------------------------
- configure.ac |   14
- depcomp      |   60
- gpe-dist.am  |    2
- install-sh   |   17
- minimix.c    |   32
- missing      |   23
- 11 files changed, 2458 insertions(+), 1682 deletions(-)
-
-Something is very wrong indeed....
-
-
-regards,
-
-Koen
-
-
-
-
+- --
+-
+------------------------------------------------------------------------------
+Thanks && Regards
+Msc. Bsc. Luís Vitório Cargnini
+IEEE Member
+Electrical Engineer Faculty @ PUCRS
+Ipiranga Avenue, 6681 - Building 30
+P.O. Box: 90619-900 - Porto Alegre/RS
+Phone: +55 51 3320 3500  extension: 7696
+-
+---------------------------------------------------------------------------------
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v2.0.5 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFGtN3sMkyGM64RGpERAsDpAJ4sTC6vECJPAz9LseK5mAHCJZBmagCgg6tA
-COEnm0ENROxyiqNyZyak1AQ=
-=OOlU
+iD8DBQFGtPYXKNrSZaSIZoURAkIzAJ0UST47AGlSi2SEdupjXN9sCumYEACdFwos
+1RWhnxUs0b+VMC+Z6ML2zTE=
+=RszW
 -----END PGP SIGNATURE-----
 
 
