@@ -1,26 +1,25 @@
-Received: from [209.85.132.249] (helo=an-out-0708.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1IH9Ly-0008FC-Pi
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Aug 2007 04:26:55 +0200
-Received: by an-out-0708.google.com with SMTP id b33so156589ana
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Aug 2007 19:24:43 -0700 (PDT)
-Received: by 10.100.144.11 with SMTP id r11mr2059900and.1186194283374;
-	Fri, 03 Aug 2007 19:24:43 -0700 (PDT)
-Received: from ?201.21.219.113? ( [201.21.219.113])
-	by mx.google.com with ESMTPS id c40sm3882009anc.2007.08.03.19.24.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 03 Aug 2007 19:24:42 -0700 (PDT)
-Message-ID: <46B3E364.7060407@gmail.com>
-Date: Fri, 03 Aug 2007 23:24:36 -0300
-From: =?ISO-8859-1?Q?Lu=EDs_Vit=F3rio_Cargnini?= <lvcargnini@gmail.com>
-User-Agent: Thunderbird 2.0.0.5 (X11/20070723)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IHD15-0003Al-Jc
+	for openembedded-devel@openembedded.org; Sat, 04 Aug 2007 08:21:37 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l746JJ1R008271 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 4 Aug 2007 08:19:20 +0200
+Message-ID: <46B41A70.8030304@dominion.kabel.utwente.nl>
+Date: Sat, 04 Aug 2007 08:19:28 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.5 (Macintosh/20070716)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@openembedded.org
 References: <19c1b8a90708031735x59bf4341u736aeb19977c34a0@mail.gmail.com>
 In-Reply-To: <19c1b8a90708031735x59bf4341u736aeb19977c34a0@mail.gmail.com>
 X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: PATCH: Use uImage make target for linux-omap1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,17 +34,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Aug 2007 02:26:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 04 Aug 2007 06:21:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-excuse me but I'm using openembedded for my OMAP 5912 and I  dont need
-this patch for my device.
-
-Khem Raj wrote:
+Khem Raj schreef:
 > Hello,
 > 
 > Current uImage generated for omap1 target did not boot on my target.
@@ -54,38 +50,22 @@ Khem Raj wrote:
 > tested this on omap5912osk and the resulting uImage booted just fine.
 > 
 > If it is OK please consider this patch for applying.
-> 
-> Thanks
-> 
-> -Khem
-> 
-> 
-> ------------------------------------------------------------------------
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-- --
--
-------------------------------------------------------------------------------
-Thanks && Regards
-Msc. Bsc. Luís Vitório Cargnini
-IEEE Member
-Electrical Engineer Faculty @ PUCRS
-Ipiranga Avenue, 6681 - Building 30
-P.O. Box: 90619-900 - Porto Alegre/RS
-Phone: +55 51 3320 3500  extension: 7696
--
----------------------------------------------------------------------------------
+I had some troubles with generating uImages earlier in with avr2, efika and at91 kernels.
+I added some foo to packages/linux/linux.inc that works for me(TM).
+
+After I figure out why my ubuntu machine doesn't let me login anymore I have some further
+updates for it.
+
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.5 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFGs+NkKNrSZaSIZoURAjopAJ95tKzY55rDneVEMMAzwhusDoJ0kgCgg8P6
-x7PE0HgYVeQ1c91g4CSWKjM=
-=gRta
+iD8DBQFGtBpwMkyGM64RGpERAqPqAJ9ZEI13wWti+upRzgEGNkX5xU16SQCgncm7
+gS+hEKU8R2AZEQrintj/Iyk=
+=mayM
 -----END PGP SIGNATURE-----
 
 
