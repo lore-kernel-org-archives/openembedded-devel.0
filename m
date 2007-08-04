@@ -1,28 +1,33 @@
-Received: from [209.85.132.240] (helo=an-out-0708.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lvcargnini@gmail.com>) id 1IHReG-0002HU-HQ
-	for openembedded-devel@openembedded.org; Sat, 04 Aug 2007 23:59:00 +0200
-Received: by an-out-0708.google.com with SMTP id b38so210466ana
+	(envelope-from <rpurdie@rpsys.net>) id 1IHTGB-0004OM-BJ
+	for openembedded-devel@openembedded.org; Sun, 05 Aug 2007 01:42:15 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l74NdxO8029808
 	for <openembedded-devel@openembedded.org>;
-	Sat, 04 Aug 2007 14:56:44 -0700 (PDT)
-Received: by 10.100.37.4 with SMTP id k4mr2416963ank.1186264604590;
-	Sat, 04 Aug 2007 14:56:44 -0700 (PDT)
-Received: from ?201.21.219.113? ( [201.21.219.113])
-	by mx.google.com with ESMTPS id c16sm4638206anc.2007.08.04.14.56.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 04 Aug 2007 14:56:42 -0700 (PDT)
-Message-ID: <46B4F617.8040500@gmail.com>
-Date: Sat, 04 Aug 2007 18:56:39 -0300
-From: =?ISO-8859-1?Q?Lu=EDs_Vit=F3rio_Cargnini?= <lvcargnini@gmail.com>
-User-Agent: Thunderbird 2.0.0.5 (X11/20070723)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <19c1b8a90708031735x59bf4341u736aeb19977c34a0@mail.gmail.com>
-	<46B469C1.5060706@balister.org>
-In-Reply-To: <46B469C1.5060706@balister.org>
-X-Enigmail-Version: 0.95.2
-Cc: openembedded-devel@openembedded.org
-Subject: Re: PATCH: Use uImage make target for linux-omap1
+	Sun, 5 Aug 2007 00:39:59 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29510-05 for <openembedded-devel@openembedded.org>;
+	Sun,  5 Aug 2007 00:39:54 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l74NdpTQ029772
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Sun, 5 Aug 2007 00:39:51 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <c384c5ea0708040434td836170o858a45aded74c329@mail.gmail.com>
+References: <1185839805.7719.103.camel@localhost.localdomain>
+	<c384c5ea0708040434td836170o858a45aded74c329@mail.gmail.com>
+Date: Sun, 05 Aug 2007 00:39:51 +0100
+Message-Id: <1186270791.5700.29.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: The future of "svnnow"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,61 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Aug 2007 21:59:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 04 Aug 2007 23:42:15 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sat, 2007-08-04 at 13:34 +0200, Leon Woestenberg wrote:
+> On 7/31/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> > As people know the ability to build the latest head revisions of svn
+> > (for example) repositories in OE with bitbake has been limited and less
+> > than ideal.
+> >
+> Yes, exactly the stuff we run into.
+> 
+> > To solve the problems I have made the following changes:
+> >
+> ...A very detailed list of changes...
+> 
+> Could you explain what this means to a not-really-core-developer like
+> me, i.e. what is the proposed exposure of your changes?
 
-openembedded is working for my OSK 5912 without this patch I dont felt
-it is necessary.
+Just considering svn packages to keep this simple, package versions
+change to become:
 
-Philip Balister wrote:
-> I'm running an OSK build atm (with current code). Tomorrow, I want to
-> compare how the kernel creates the uImage with the commands in the bbfile.
-> 
-> I tend to agree we should use the kernel build system wherever possible.
-> 
-> I'm concerned that we are having trouble booting various combinations of
-> uboot/kernel/file system and would like to have some understanding of
-> what is causing the problems. I do not want to fix one persons build at
-> the expense of other's.
-> 
-> Of course, the "thesis" is priority number atm, so I will be doind this
-> during procrastination time.
-> http://www.phdcomics.com/comics/archive.php?comicid=315
-> 
-> Philip
-> 
-> Khem Raj wrote:
-> 
-> ------------------------------------------------------------------------
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+PV = "x.y.z+svnr${SRCREV}"
 
-- --
--
-------------------------------------------------------------------------------
-Thanks && Regards
-Msc. Bsc. Luís Vitório Cargnini
-IEEE Member
-Electrical Engineer Faculty @ PUCRS
-Ipiranga Avenue, 6681 - Building 30
-P.O. Box: 90619-900 - Porto Alegre/RS
-Phone: +55 51 3320 3500  extension: 7696
--
----------------------------------------------------------------------------------
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.5 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+eg. "3.6+svnr90" for svn revision 90
 
-iD8DBQFGtPYXKNrSZaSIZoURAkIzAJ0UST47AGlSi2SEdupjXN9sCumYEACdFwos
-1RWhnxUs0b+VMC+Z6ML2zTE=
-=RszW
------END PGP SIGNATURE-----
+You can set
+
+SRCREV_pn-somepackage = "90"
+
+in a .conf file to force a particular revision or it will automatically
+increment the revision when svn head changes if its not locked down.
+
+Whilst SRCDATE will still work, use of it will be removed for svn
+packages in OE and replaced with SRCREV.
+
+Cheers,
+
+Richard
+
+
 
 
