@@ -1,9 +1,10 @@
 Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IHZ3m-0001tM-1A
-	for openembedded-devel@openembedded.org; Sun, 05 Aug 2007 07:53:50 +0200
+	(envelope-from <mickey@vanille-media.de>) id 1IHZ7G-0005PF-Rk
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 05 Aug 2007 07:57:26 +0200
 Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id BD95028C013; Sun,  5 Aug 2007 07:49:18 +0200 (CEST)
+	id 7939B28C014; Sun,  5 Aug 2007 07:52:55 +0200 (CEST)
 X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
 	srv043.dedi23.de
 X-Spam-Level: ***
@@ -11,23 +12,27 @@ X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
 	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
 Received: from PROMETHEUS (e180134222.adsl.alicedsl.de [85.180.134.222])
-	by srv043.dedi23.de (Postfix) with ESMTP id 0DA4D28C012
-	for <openembedded-devel@openembedded.org>;
-	Sun,  5 Aug 2007 07:49:18 +0200 (CEST)
-Date: Sun, 5 Aug 2007 07:51:31 +0200
+	by srv043.dedi23.de (Postfix) with ESMTP id AE7CF28C013
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  5 Aug 2007 07:52:54 +0200 (CEST)
+Date: Sun, 5 Aug 2007 07:55:08 +0200
 From: "Dr. Michael Lauer" <mickey@vanille-media.de>
 X-Mailer: The Bat! (v3.99.3) Professional
 Organization: Vanille-Media
 X-Priority: 3 (Normal)
-Message-ID: <1111189595.20070805075131@vanille-media.de>
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-In-Reply-To: <46B488C3.4080306@dominion.kabel.utwente.nl>
-References: <E1IH6Wi-0002Ri-S3@linuxtogo.org>
-	<623121068.20070804154926@vanille-media.de>
-	<46B488C3.4080306@dominion.kabel.utwente.nl>
+Message-ID: <1974151763.20070805075508@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <46B1E063.7010407@dominion.kabel.utwente.nl>
+References: <46B1753D.1090507@dominion.kabel.utwente.nl>
+	<46B1B6DB.6020603@klever.net>
+	<1186053831.5972.222.camel@hammer.suse.cz>
+	<46B1C71F.2090608@klever.net>
+	<1186058282.5972.232.camel@hammer.suse.cz>
+	<46B1D0DA.5030905@balister.org>
+	<1186061255.5972.243.camel@hammer.suse.cz>
+	<46B1E063.7010407@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev psplash: make openmoko psplash openmoko specific, not machine specific
+Subject: Re: Gstreamer and rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2007 05:53:50 -0000
+X-List-Received-Date: Sun, 05 Aug 2007 05:57:26 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
@@ -49,26 +54,30 @@ Koen Kooi wrote:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
 
-> Dr. Michael Lauer schreef:
->> koen commit wrote:
->>> psplash: make openmoko psplash openmoko specific, not machine specific
+> Stanislav Brabec schreef:
+>> Philip Balister wrote:
 >> 
->> mmh   I did it on purpose that way. Didn't you read my comment in the
->> changelog?
+>>> Is --sysroot present in all versions of gcc? If not, which version does 
+>>> it first appear?
+>> 
+>> 3.3.3 has not it yet.
+>> 
+>> gcc/ChangeLog.2005:
+>> 2005-07-25  Mark Mitchell  <mark@codesourcery.com>
+>> 
+>>       * gcc.c (option_map): Add --sysroot.
+>> 
+>> Michael Krelin wrote:
+>> 
+>>> I think starting with 3.4, another reason why this idea maybe not yet
+>>> viable...
+>> 
+>> I see no problem here: For cross compilation OE compiles its own
+>> compiler, which already supports --sysroot,
 
-> Yes: "psplash: add OpenMoko branding".
+> No. We have a gcc-cross_3.3.3.bb and 3.3.4
 
-Sorry, I meant the comment in the actual bbfile, which was:
-
-# fic-gta01 for now, until we have an openmoko override
-
-> Could you explain why you want *every* distro and *every* target image using psplash on
-> that device having a 'openmoko' splash?
-
-Like written in the bbfile, it was a temporary solution. If we don't
-accept org.openembedded.dev as a place where we can experiment with
-things, then we might as well start an unstable branch
-(org.openembedded.realdev?)
+I wouldn't mind deprecating these two.
 
 Regards,
 
