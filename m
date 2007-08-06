@@ -1,30 +1,33 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IHzif-0005OD-WA
-	for openembedded-devel@openembedded.org; Mon, 06 Aug 2007 12:21:50 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l76AJM1R031448 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Aug 2007 12:19:22 +0200
-Message-ID: <46B6F5A4.7040700@dominion.kabel.utwente.nl>
-Date: Mon, 06 Aug 2007 12:19:16 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <mickey@vanille-media.de>) id 1II4Pm-00073i-7M
+	for openembedded-devel@openembedded.org; Mon, 06 Aug 2007 17:22:38 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 98F9428C013; Mon,  6 Aug 2007 17:17:55 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180131139.adsl.alicedsl.de [85.180.131.139])
+	by srv043.dedi23.de (Postfix) with ESMTP id 08C8228C012;
+	Mon,  6 Aug 2007 17:17:53 +0200 (CEST)
+Date: Mon, 6 Aug 2007 17:20:09 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1632090386.20070806172009@vanille-media.de>
+To: Koen Kooi <koen@dominion.kabel.utwente.nl>
+In-Reply-To: <46B6CD51.7030405@dominion.kabel.utwente.nl>
+References: <46A8B354.1010204@dominion.kabel.utwente.nl>
+	<46B6CD51.7030405@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <46A711DB.6000205@dominion.kabel.utwente.nl>	<46A895A1.7040400@dominion.kabel.utwente.nl>
-	<200708061156.47211.openembedded@hrw.one.pl>
-In-Reply-To: <200708061156.47211.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.95.2
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	l76AJM1R031448
-Subject: Re: Activating autotools updates
+Cc: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] use packages/linux/linux-ezx-2.6.21/update_patches.sh for openmoko kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,65 +41,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2007 10:21:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 06 Aug 2007 15:22:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi wrote:
+> Koen Kooi schreef:
+>> Hi,
+>> 
+>> Currently openmoko kernel pull patches from svn and manually apply them with quilt. We've
+>> seen numerous breakages in the past with this method, so I would like to suggest using
+>> something like update_patches.sh to pull a patchset from svn, add them to OE and
+>> automagically write out a SRC_URI.
+>> 
+>> This would have the following benefits:
+>> 
+>> 1) patches don't suddenly change
+>> 2) less breakage due to typos in commits upstream
+>> 3) less work than continuously checking if recipe and svn patchset match
+>> 4) less surprises when using a global SRCDATE
+>> 
+>> And since it's a script, it's not more work than the status quo.
+>> 
+>> what do you think?
 
-Marcin Juszkiewicz schreef:
-> Dnia czwartek, 26 lipca 2007, Koen Kooi napisa=C5=82:
->> After multiple success reports I'd like to propose the following
->> timeline:
->=20
->> 20070816: make pkgconfig-native 0.22 the default
->=20
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Revision: c575740a3b6935cc9e85bcc4e6f3cec52b4c4028
-> Ancestor: 12b138279c360841bb21419b7866a60b4a10932c
-> Author: koen@openembedded.org
-> Date: 2007-08-05T12:28:40
-> Branch: org.openembedded.dev
->=20
-> Added files:
->          packages/pkgconfig/pkgconfig.inc
-> Modified files:
->          packages/pkgconfig/pkgconfig-native_0.22.bb
->          packages/pkgconfig/pkgconfig_0.15.0.bb
->          packages/pkgconfig/pkgconfig_0.22.bb
->=20
-> ChangeLog:
->=20
-> pkgconfig: sync with poky
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
-> This changeset enabled pkg-config 0.22 in OE as this removed=20
-> DEFAULT_PREFERENCE =3D "-1" from recipe.
+> I have seen no objections, so I will convert the kernels tomorrow to include the patches
+> in OE instead of pulling from svn.
 
-Oops, that has been fixed now.
+I'm very much against this. It adds unnecessary stuff into the SCM. Patches in
+our SVM should only be added if there's no way to get them into
+upstream.
 
-> Anyway it should work - in Poky we=20
-> (OpenedHand) use it since Poky Linux 3.0 'blinky' was released.
+Please don't do it but use the SRCDATE (or rather SVNREV) instead.
 
-I know it works, otherwise I wouldn't have proposed it, but I'd like to s=
-tick to my own
-timeline :)
+Regards,
 
-regards,
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGtvWkMkyGM64RGpERAhzxAJ0dE5rvVkmKgo36LRpHhAwpZpa20wCgrS9e
-/EyKRz9GjBvIxEVgb7nnbHE=3D
-=3DagGv
------END PGP SIGNATURE-----
 
 
