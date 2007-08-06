@@ -1,24 +1,23 @@
-Received: from [209.85.198.184] (helo=rv-out-0910.google.com)
+Received: from [192.132.34.13] (helo=amail.unina.it)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1II7ct-0005q7-I7
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Aug 2007 20:48:23 +0200
-Received: by rv-out-0910.google.com with SMTP id c24so1094402rvf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Aug 2007 11:45:56 -0700 (PDT)
-Received: by 10.115.18.1 with SMTP id v1mr5937773wai.1186425956276;
-	Mon, 06 Aug 2007 11:45:56 -0700 (PDT)
-Received: by 10.114.208.14 with HTTP; Mon, 6 Aug 2007 11:45:56 -0700 (PDT)
-Message-ID: <19c1b8a90708061145k3d0edfbdm8eff09ed3452baf0@mail.gmail.com>
-Date: Mon, 6 Aug 2007 11:45:56 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1632090386.20070806172009@vanille-media.de>
+	(envelope-from <ranaldo@unina.it>) id 1IIBCv-000301-2I
+	for openembedded-devel@openembedded.org; Tue, 07 Aug 2007 00:37:49 +0200
+Received: from ops ([217.201.1.70]) (authenticated bits=0)
+	by amail.unina.it (8.13.4/8.13.4) with ESMTP id l76MZHuS027424
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 7 Aug 2007 00:35:20 +0200
+From: Nicola Ranaldo <ranaldo@unina.it>
+To: openembedded-devel@openembedded.org, openembedded-devel@openembedded.org
+Date: Tue, 7 Aug 2007 00:35:18 +0200
+User-Agent: KMail/1.9.7
+References: <9e4733910708041243oa0cf091x60a8f9f279ad2ba7@mail.gmail.com>
+	<46B4DC9D.6030700@dominion.kabel.utwente.nl>
+	<46B4DDEC.6070304@dominion.kabel.utwente.nl>
+In-Reply-To: <46B4DDEC.6070304@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-References: <46A8B354.1010204@dominion.kabel.utwente.nl>
-	<46B6CD51.7030405@dominion.kabel.utwente.nl>
-	<1632090386.20070806172009@vanille-media.de>
-Subject: Re: [RFC] use packages/linux/linux-ezx-2.6.21/update_patches.sh for openmoko kernels
+Message-Id: <200708070035.19054.ranaldo@unina.it>
+Cc: gpe-list@linuxtogo.org
+Subject: Re: [Gpe-list] check sum	failure	http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,41 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2007 18:48:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 Aug 2007 22:37:49 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On 8/6/07, Dr. Michael Lauer <mickey@vanille-media.de> wrote:
-> Koen Kooi wrote:
-> > Koen Kooi schreef:
-> >> Hi,
-> >>
-> >> Currently openmoko kernel pull patches from svn and manually apply them with quilt. We've
-> >> seen numerous breakages in the past with this method, so I would like to suggest using
-> >> something like update_patches.sh to pull a patchset from svn, add them to OE and
-> >> automagically write out a SRC_URI.
-> >>
-> >> This would have the following benefits:
-> >>
-> >> 1) patches don't suddenly change
-> >> 2) less breakage due to typos in commits upstream
-> >> 3) less work than continuously checking if recipe and svn patchset match
-> >> 4) less surprises when using a global SRCDATE
-> >>
-> >> And since it's a script, it's not more work than the status quo.
-> >>
-> >> what do you think?
+On Saturday 04 August 2007 22:13:32 Koen Kooi wrote:
+> > It seems the source got replaced/corrupted/compromised, could a gpe
+> > person look into it? I have a tarball available with:
+> >
+> > 0cfb89bf2596710543935e31ad1d5a17  OE/downloads/minimix-0.8.tar.bz2
+> >
+> > As the checksummer expects.
 
-I think the idea is ok for stability reasons however  in my past
-experience such approach added this extra step of syncing the patches
-and it easily got stale and did not work very well.
+May someone to give an url to download a right minimix tarball while waiting 
+for gpe feedback?
 
-So I would still suggest to have the existing approach if its not too
-much a blocker in development.
+thanks
 
-My 2 cents
-
--Khem
+	Niko
 
 
