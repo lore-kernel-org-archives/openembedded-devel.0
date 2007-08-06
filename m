@@ -1,25 +1,27 @@
-Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IHtNh-0005H7-Cd
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Aug 2007 05:35:45 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so1940652waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Aug 2007 20:33:21 -0700 (PDT)
-Received: by 10.114.52.1 with SMTP id z1mr5196942waz.1186371201567;
-	Sun, 05 Aug 2007 20:33:21 -0700 (PDT)
-Received: by 10.114.208.14 with HTTP; Sun, 5 Aug 2007 20:33:21 -0700 (PDT)
-Message-ID: <19c1b8a90708052033g719589f1jb50a8a8499d858e4@mail.gmail.com>
-Date: Sun, 5 Aug 2007 20:33:21 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46B65255.1020101@balister.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IHx2E-0007m5-KA
+	for openembedded-devel@openembedded.org; Mon, 06 Aug 2007 09:29:50 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l767RJ1R002979 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 6 Aug 2007 09:27:20 +0200
+Message-ID: <46B6CD51.7030405@dominion.kabel.utwente.nl>
+Date: Mon, 06 Aug 2007 09:27:13 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-References: <19c1b8a90708031735x59bf4341u736aeb19977c34a0@mail.gmail.com>
-	<46B469C1.5060706@balister.org> <46B4F617.8040500@gmail.com>
-	<19c1b8a90708041839r9254f4bn53123d1d098bba0f@mail.gmail.com>
-	<46B65255.1020101@balister.org>
-Subject: Re: PATCH: Use uImage make target for linux-omap1
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <46A8B354.1010204@dominion.kabel.utwente.nl>
+In-Reply-To: <46A8B354.1010204@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.95.2
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [RFC] use packages/linux/linux-ezx-2.6.21/update_patches.sh for openmoko kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,52 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2007 03:35:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 06 Aug 2007 07:29:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Thanks Philip for trying it out.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 8/5/07, Philip Balister <philip@balister.org> wrote:
-> I applied the patch locally, rebuilt my kernel, flashed into the OSK and
->   it ran fine. Basically, the patch fixes the kernel name to match the
-> image type (previously I called the uImage vmlinux) this causes
-> confusion with people who really understand all the kernel names.
->
-> Basically, this is one of the earliest contributions to OE and I am glad
-> it lasted this long :)
->
-> End result, the images should be compatible, and the filename in
-> deploy/images changes from vmlinux.... to uImage... The new name
-> accurately describes the image.
->
-> Philip
->
-> Khem Raj wrote:
-> > On 8/4/07, Lu=EDs Vit=F3rio Cargnini <lvcargnini@gmail.com> wrote:
-> >> -----BEGIN PGP SIGNED MESSAGE-----
-> >> Hash: SHA1
-> >>
-> >> openembedded is working for my OSK 5912 without this patch I dont felt
-> >> it is necessary.
-> >
-> > I would be happy if you could try this patch and see if it does not
-> > break anything for you.
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
->
+Koen Kooi schreef:
+> Hi,
+> 
+> Currently openmoko kernel pull patches from svn and manually apply them with quilt. We've
+> seen numerous breakages in the past with this method, so I would like to suggest using
+> something like update_patches.sh to pull a patchset from svn, add them to OE and
+> automagically write out a SRC_URI.
+> 
+> This would have the following benefits:
+> 
+> 1) patches don't suddenly change
+> 2) less breakage due to typos in commits upstream
+> 3) less work than continuously checking if recipe and svn patchset match
+> 4) less surprises when using a global SRCDATE
+> 
+> And since it's a script, it's not more work than the status quo.
+> 
+> what do you think?
+
+I have seen no objections, so I will convert the kernels tomorrow to include the patches
+in OE instead of pulling from svn.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGts1RMkyGM64RGpERArErAJ0ViQPHmj+1Nt9zSRLwU8WSkpOIuQCgi6TY
+7MzCMo+k+XJ4DjZEIsmv4W8=
+=FwIE
+-----END PGP SIGNATURE-----
 
 
