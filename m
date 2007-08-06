@@ -1,35 +1,22 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [209.242.20.84] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <utx@penguin.cz>) id 1II60q-0004im-64
+	(envelope-from <mwester@dls.net>) id 1II6uD-0001AZ-LK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Aug 2007 19:05:00 +0200
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id 319C7628192
+	Mon, 06 Aug 2007 20:02:15 +0200
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id 190A3411AA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Aug 2007 19:02:34 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46B74C34.4050300@klever.net>
-References: <46B1753D.1090507@dominion.kabel.utwente.nl>
-	<46B1B6DB.6020603@klever.net>	<1186053831.5972.222.camel@hammer.suse.cz>
-	<46B1C71F.2090608@klever.net>	<1186058282.5972.232.camel@hammer.suse.cz>
-	<46B1D0DA.5030905@balister.org>	<1186061255.5972.243.camel@hammer.suse.cz>
-	<46B1E063.7010407@dominion.kabel.utwente.nl>
-	<1186064138.5972.259.camel@hammer.suse.cz>
-	<46B1E812.8020706@dominion.kabel.utwente.nl>
-	<1186066059.5972.269.camel@hammer.suse.cz>	<46B1F78F.4040700@klever.net>
-	<46B1FC60.6030908@dominion.kabel.utwente.nl>	<46B1FDD8.8000404@klever.net>
-	<46B20D9F.70704@dominion.kabel.utwente.nl>
-	<1186093013.6626.57.camel@localhost.localdomain>
-	<1186132901.5972.314.camel@hammer.suse.cz>
-	<1186313563.5962.36.camel@localhost.localdomain>
-	<46B63294.30107@klever.net> <1186395310.5972.360.camel@hammer.suse.cz>
-	<46B74C34.4050300@klever.net>
-Date: Mon, 06 Aug 2007 19:02:33 +0200
-Message-Id: <1186419753.27368.43.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-Subject: Re: Gstreamer and rpath
+	Mon,  6 Aug 2007 12:59:48 -0500 (CDT)
+Message-ID: <03d301c7d853$58ec39f0$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 6 Aug 2007 12:58:08 -0500
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1807
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
+Subject: STAGING_LIBDIR_NATIVE needed in bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,45 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2007 17:05:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 06 Aug 2007 18:02:16 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Michael Krelin wrote:
-> > I am still not sure, how correct will be binaries created by upper
-> > mentioned wrappers, but it will be for sure better than the
-> > libtool-level hack. And it's easy to catch remaining references by QA
-> > scripts.
-> 
-> You mostly make a lot of sense, but sometimes I'm puzzled by your
-> statements. You're not sure whether binaries will be correct, but for
-> sure better than correct ones made the way you personally (and for
-> reason) dislike?
+In order to fix an ncurses build bug
+(http://bugs.openembedded.org/show_bug.cgi?id=2554), we need to set
+LD_LIBRARY_PATH in the ncurses bb file.
 
-To be exact:
+I've tested, and the following resolves the problem with ncurses not
+installing:
 
-I tried to create a binary + library loaded with use of rpath using
-"libtool ...-gcc --sysroot ..." option instead of current approach.
+    export LD_LIBRARY_PATH = "${STAGING_BINDIR_NATIVE}/../lib"
 
-Library was properly find and loaded after copying to my Zaurus.
+That's not too elegant, so I'd like to create "STAGING_LIBDIR_NATIVE" in the
+bitbake.conf file instead, which will clean up the recipe and make more
+obvious what it is that we're doing.
 
-I got some references into sysroot path in debug section, no reference
-in stripped code, no reference in .la files.
 
-After stripping binaries and library, there was no reference to sysroot
-any more.
+Anyone have any heartburn with this approach to resolving this problem?
 
-I did not do further research on references in debug section. It's
-required to check, whether debug info is correct.
-
-Overall, it looks like better result than the current solution.
-
-I did not yet wrote the wrapper, so I don't know, whether the result
-will be as good as gcc --sysroot.
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Thanks,
+Mike (mwester)
 
 
 
