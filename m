@@ -1,21 +1,22 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [192.132.34.13] (helo=amail.unina.it)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1IIIUc-0007DB-L6
-	for openembedded-devel@openembedded.org; Tue, 07 Aug 2007 08:24:34 +0200
-Received: (qmail 30061 invoked by uid 813007); 7 Aug 2007 06:22:05 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 7 Aug 2007 06:22:05 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 7 Aug 2007 08:22:01 +0200
+	(envelope-from <ranaldo@unina.it>) id 1IIK2H-00045z-8h
+	for openembedded-devel@openembedded.org; Tue, 07 Aug 2007 10:03:27 +0200
+Received: from blaster.unina.it ([192.132.34.15]) (authenticated bits=0)
+	by amail.unina.it (8.13.4/8.13.4) with ESMTP id l7780s3q015485
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 7 Aug 2007 10:00:55 +0200
+From: Nicola Ranaldo <ranaldo@unina.it>
+To: openembedded-devel@openembedded.org, openembedded-devel@openembedded.org
+Date: Tue, 7 Aug 2007 10:00:52 +0200
 User-Agent: KMail/1.9.7
-References: <03d301c7d853$58ec39f0$6e01a8c0@twilight>
-In-Reply-To: <03d301c7d853$58ec39f0$6e01a8c0@twilight>
+References: <9e4733910708041243oa0cf091x60a8f9f279ad2ba7@mail.gmail.com>
+	<46B4DDEC.6070304@dominion.kabel.utwente.nl>
+	<200708070035.19054.ranaldo@unina.it>
+In-Reply-To: <200708070035.19054.ranaldo@unina.it>
 MIME-Version: 1.0
-Message-Id: <200708070822.03530.openembedded@hrw.one.pl>
-Subject: Re: STAGING_LIBDIR_NATIVE needed in bitbake.conf
+Message-Id: <200708071000.52927.ranaldo@unina.it>
+Subject: Re: [Gpe-list] check sum	failure	http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,43 +30,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2007 06:24:34 -0000
+X-List-Received-Date: Tue, 07 Aug 2007 08:03:29 -0000
 Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia poniedzia=B3ek, 6 sierpnia 2007, Mike (mwester) napisa=B3:
-> In order to fix an ncurses build bug
-> (http://bugs.openembedded.org/show_bug.cgi?id=3D2554), we need to set
-> LD_LIBRARY_PATH in the ncurses bb file.
->
-> I've tested, and the following resolves the problem with ncurses not
-> installing:
->
->     export LD_LIBRARY_PATH =3D "${STAGING_BINDIR_NATIVE}/../lib"
->
-> That's not too elegant, so I'd like to create "STAGING_LIBDIR_NATIVE"
-> in the bitbake.conf file instead, which will clean up the recipe and
-> make more obvious what it is that we're doing.
+On Tuesday 07 August 2007 00:35:18 Nicola Ranaldo wrote:
 
-STAGING_LIBDIR_NATIVE sounds ok for me
+> May someone to give an url to download a right minimix tarball while
+> waiting for gpe feedback?
 
-> Anyone have any heartburn with this approach to resolving this problem?
+if some one interested: 
+http://www.openzaurus.org/download/3.5.4/sources/minimix-0.8.tar.bz2
 
-It should be done in classes/native.bbclass not in ncurses-native. The=20
-problem is wider as there are few distributions which have host versions=20
-of stuff other then OE use as native. As a result building of native=20
-stuff which depend on native libraries can fail - when you will set=20
-LD_LIBRARY_PATH in native.bbclass then it should work.
+bye
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-              whats mean ubuntu?
-              it's african word for "can't configure debian"
-
-
+	Niko
 
 
