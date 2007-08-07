@@ -1,35 +1,22 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IIXAM-00054y-PH
+	(envelope-from <mwhoosier@gmail.com>) id 1IIYQu-00068I-FJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Aug 2007 00:04:39 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 0C13A28C013; Tue,  7 Aug 2007 23:59:45 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180177247.adsl.alicedsl.de [85.180.177.247])
-	by srv043.dedi23.de (Postfix) with ESMTP id 61F8F28C012
+	Wed, 08 Aug 2007 01:25:48 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so2644279waf
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Aug 2007 23:59:45 +0200 (CEST)
-Date: Wed, 8 Aug 2007 00:02:06 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1848954397.20070808000206@vanille-media.de>
+	Tue, 07 Aug 2007 16:23:13 -0700 (PDT)
+Received: by 10.115.22.1 with SMTP id z1mr7251774wai.1186528992976;
+	Tue, 07 Aug 2007 16:23:12 -0700 (PDT)
+Received: by 10.114.73.7 with HTTP; Tue, 7 Aug 2007 16:23:12 -0700 (PDT)
+Message-ID: <d543f5920708071623g37c9844fs47db2c11d73d1ec9@mail.gmail.com>
+Date: Tue, 7 Aug 2007 18:23:12 -0500
+From: "Matt Hoosier" <matt.hoosier@gmail.com>
+Sender: mwhoosier@gmail.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1186489672.5653.28.camel@localhost.localdomain>
-References: <03d301c7d853$58ec39f0$6e01a8c0@twilight>
-	<200708070822.03530.openembedded@hrw.one.pl>
-	<1186476730.5653.6.camel@localhost.localdomain>
-	<0cf301c7d8d3$4d422cb0$6e01a8c0@twilight>
-	<1186489672.5653.28.camel@localhost.localdomain>
 MIME-Version: 1.0
-Subject: Re: STAGING_LIBDIR_NATIVE needed in bitbake.conf
+X-Google-Sender-Auth: 77c5bdc610fc9b0d
+Subject: Inheriting conditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,20 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2007 22:04:41 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 07 Aug 2007 23:25:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> In fact this raises the question of whether that should be set globally?
+Hi all,
 
-+1 for setting it globally. We may encounter more packages like that
-and then it makes sense to have the "guideline" right from the start.
+I'm search for a syntax that will allow me to inherit from certain
+classes only when using a particular distribution. Is there some good
+way to do this, like maybe:
 
-Regards,
+  python {
+    if bb.getVar("DISTRO") == "mydistro"
+      # some API call to add inherited class
+  }
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+The particular thing I want to accomplish is to use the update-rc.d
+functionality to start a daemon systemwide only when targeting my own
+distro; it's nonstandard and wouldn't be appropriate for most
+distributions.
 
+Thanks,
+
+Matt
 
 
