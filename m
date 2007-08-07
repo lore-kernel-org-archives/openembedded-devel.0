@@ -1,22 +1,21 @@
-Received: from [192.132.34.13] (helo=amail.unina.it)
+Received: from [209.85.198.184] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <ranaldo@unina.it>) id 1IIK2H-00045z-8h
-	for openembedded-devel@openembedded.org; Tue, 07 Aug 2007 10:03:27 +0200
-Received: from blaster.unina.it ([192.132.34.15]) (authenticated bits=0)
-	by amail.unina.it (8.13.4/8.13.4) with ESMTP id l7780s3q015485
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 7 Aug 2007 10:00:55 +0200
-From: Nicola Ranaldo <ranaldo@unina.it>
-To: openembedded-devel@openembedded.org, openembedded-devel@openembedded.org
-Date: Tue, 7 Aug 2007 10:00:52 +0200
-User-Agent: KMail/1.9.7
-References: <9e4733910708041243oa0cf091x60a8f9f279ad2ba7@mail.gmail.com>
-	<46B4DDEC.6070304@dominion.kabel.utwente.nl>
-	<200708070035.19054.ranaldo@unina.it>
-In-Reply-To: <200708070035.19054.ranaldo@unina.it>
+	(envelope-from <raj.khem@gmail.com>) id 1IIKhO-0000My-Mh
+	for Openembedded-devel@lists.openembedded.org;
+	Tue, 07 Aug 2007 10:45:55 +0200
+Received: by rv-out-0910.google.com with SMTP id c24so1230320rvf
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Aug 2007 01:43:23 -0700 (PDT)
+Received: by 10.114.92.2 with SMTP id p2mr6481468wab.1186476203398;
+	Tue, 07 Aug 2007 01:43:23 -0700 (PDT)
+Received: by 10.114.208.14 with HTTP; Tue, 7 Aug 2007 01:43:20 -0700 (PDT)
+Message-ID: <19c1b8a90708070143m4d96e7a4l83f5bf02feafc395@mail.gmail.com>
+Date: Tue, 7 Aug 2007 01:43:23 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
+To: koen@dominion.kabel.utwente.nl
 MIME-Version: 1.0
-Message-Id: <200708071000.52927.ranaldo@unina.it>
-Subject: Re: [Gpe-list] check sum	failure	http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2'
+Cc: Openembedded-devel@lists.openembedded.org
+Subject: Patch to enable eglibc-intermediate
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,22 +29,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2007 08:03:29 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 07 Aug 2007 08:45:55 -0000
+X-Groupsio-MsgNum: 2642
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_115184_32372901.1186476203364"
+
+------=_Part_115184_32372901.1186476203364
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Tuesday 07 August 2007 00:35:18 Nicola Ranaldo wrote:
+Hi Koen
 
-> May someone to give an url to download a right minimix tarball while
-> waiting for gpe feedback?
+This patch is needed to select eglibc-intermediate when eglibc is
+selected right now the defines from angstrom-eglibc.inc gets
+overridden.
 
-if some one interested: 
-http://www.openzaurus.org/download/3.5.4/sources/minimix-0.8.tar.bz2
+OK?
 
-bye
+Thanks
 
-	Niko
+-Khem
 
+------=_Part_115184_32372901.1186476203364
+Content-Type: application/octet-stream; name=diff
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_f52582qv
+Content-Disposition: attachment; filename="diff"
 
+IwojIG9sZF9yZXZpc2lvbiBbMjAyOWU4NWI3ZjhmZGIxNmUxMDMxYTVlYWEzMzA0NzE3MzZjNjYw
+NV0KIwojIHBhdGNoICJjb25mL2Rpc3Ryby9hbmdzdHJvbS0yMDA3LjEuY29uZiIKIyAgZnJvbSBb
+MTMwZTkzMDZlZjlmZmFiZjMzNGIyYzg1NDk0MTliZTUyNjc3ZGI4Ml0KIyAgICB0byBbYTQzNWEw
+ZTNhMmYyN2MyMmMwZWRkYWU5M2YzMGQ2NWRiYjVlNmRkMV0KIwo9PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KLS0tIGNvbmYvZGlzdHJv
+L2FuZ3N0cm9tLTIwMDcuMS5jb25mCTEzMGU5MzA2ZWY5ZmZhYmYzMzRiMmM4NTQ5NDE5YmU1MjY3
+N2RiODIKKysrIGNvbmYvZGlzdHJvL2FuZ3N0cm9tLTIwMDcuMS5jb25mCWE0MzVhMGUzYTJmMjdj
+MjJjMGVkZGFlOTNmMzBkNjVkYmI1ZTZkZDEKQEAgLTI0MiwxMyArMjQyLDEzIEBAIFBSRUZFUlJF
+RF9QUk9WSURFUl92aXJ0dWFsLyR7VEFSR0VUX1BSRUYKIFBSRUZFUlJFRF9QUk9WSURFUl92aXJ0
+dWFsLyR7VEFSR0VUX1BSRUZJWH1nKysgPSAiZ2NjLWNyb3NzIgogCiAjU2V0IHByZWZlcnJlZCBw
+cm92aWRlciBmb3IgdGhlIEMgbGlicmFyeSB0aGF0IGlzIHVzZWQgdG8gYnVpbGQgdGhlIGNyb3Nz
+Y29tcGlsZXIgKE5QVEwgdm9vZG9vKQotUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvJHtUQVJH
+RVRfUFJFRklYfWxpYmMtZm9yLWdjYyAgICAgICAgICAgICAgID0gImdsaWJjLWludGVybWVkaWF0
+ZSIKLVBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2FybS1hbmdzdHJvbS1saW51eC1nbnVlYWJp
+LWxpYmMtZm9yLWdjYyAgICA9ICJnbGliYy1pbnRlcm1lZGlhdGUiCi1QUkVGRVJSRURfUFJPVklE
+RVJfdmlydHVhbC9hcm1lYi1hbmdzdHJvbS1saW51eC1nbnVlYWJpLWxpYmMtZm9yLWdjYyAgPSAi
+Z2xpYmMtaW50ZXJtZWRpYXRlIgotUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvYXJtLWFuZ3N0
+cm9tLWxpbnV4LWxpYmMtZm9yLWdjYyAgICAgICAgICAgID0gImdsaWJjLWludGVybWVkaWF0ZSIK
+LVBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL3Bvd2VycGMtYW5nc3Ryb20tbGludXgtbGliYy1m
+b3ItZ2NjICAgICAgICA9ICJnbGliYy1pbnRlcm1lZGlhdGUiCi1QUkVGRVJSRURfUFJPVklERVJf
+dmlydHVhbC9taXBzZWwtYW5nc3Ryb20tbGludXgtbGliYy1mb3ItZ2NjICAgICAgICAgPSAiZ2xp
+YmMtaW50ZXJtZWRpYXRlIgotUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvc3BhcmMtYW5nc3Ry
+b20tbGludXgtbGliYy1mb3ItZ2NjICAgICAgICAgID0gImdsaWJjLWludGVybWVkaWF0ZSIKK1BS
+RUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsLyR7VEFSR0VUX1BSRUZJWH1saWJjLWZvci1nY2MgICAg
+ICAgICAgICAgICA/PSAiZ2xpYmMtaW50ZXJtZWRpYXRlIgorUFJFRkVSUkVEX1BST1ZJREVSX3Zp
+cnR1YWwvYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmktbGliYy1mb3ItZ2NjICAgID89ICJnbGli
+Yy1pbnRlcm1lZGlhdGUiCitQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9hcm1lYi1hbmdzdHJv
+bS1saW51eC1nbnVlYWJpLWxpYmMtZm9yLWdjYyAgPz0gImdsaWJjLWludGVybWVkaWF0ZSIKK1BS
+RUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2FybS1hbmdzdHJvbS1saW51eC1saWJjLWZvci1nY2Mg
+ICAgICAgICAgICA/PSAiZ2xpYmMtaW50ZXJtZWRpYXRlIgorUFJFRkVSUkVEX1BST1ZJREVSX3Zp
+cnR1YWwvcG93ZXJwYy1hbmdzdHJvbS1saW51eC1saWJjLWZvci1nY2MgICAgICAgID89ICJnbGli
+Yy1pbnRlcm1lZGlhdGUiCitQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9taXBzZWwtYW5nc3Ry
+b20tbGludXgtbGliYy1mb3ItZ2NjICAgICAgICAgPz0gImdsaWJjLWludGVybWVkaWF0ZSIKK1BS
+RUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL3NwYXJjLWFuZ3N0cm9tLWxpbnV4LWxpYmMtZm9yLWdj
+YyAgICAgICAgICA/PSAiZ2xpYmMtaW50ZXJtZWRpYXRlIgogCiBQUkVGRVJSRURfUFJPVklERVJf
+dmlydHVhbC9hcm0tYW5nc3Ryb20tbGludXgtdWNsaWJjZ251ZWFiaS1saWJjLWZvci1nY2MgICAg
+PSAidWNsaWJjLWluaXRpYWwiCiBQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9hcm1lYi1hbmdz
+dHJvbS1saW51eC11Y2xpYmNnbnVlYWJpLWxpYmMtZm9yLWdjYyAgPSAidWNsaWJjLWluaXRpYWwi
+Cg==
+
+------=_Part_115184_32372901.1186476203364--
