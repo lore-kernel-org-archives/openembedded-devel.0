@@ -1,21 +1,33 @@
-Received: from [209.85.198.184] (helo=rv-out-0910.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IIKhO-0000My-Mh
-	for Openembedded-devel@lists.openembedded.org;
-	Tue, 07 Aug 2007 10:45:55 +0200
-Received: by rv-out-0910.google.com with SMTP id c24so1230320rvf
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Aug 2007 01:43:23 -0700 (PDT)
-Received: by 10.114.92.2 with SMTP id p2mr6481468wab.1186476203398;
-	Tue, 07 Aug 2007 01:43:23 -0700 (PDT)
-Received: by 10.114.208.14 with HTTP; Tue, 7 Aug 2007 01:43:20 -0700 (PDT)
-Message-ID: <19c1b8a90708070143m4d96e7a4l83f5bf02feafc395@mail.gmail.com>
-Date: Tue, 7 Aug 2007 01:43:23 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: koen@dominion.kabel.utwente.nl
-MIME-Version: 1.0
-Cc: Openembedded-devel@lists.openembedded.org
-Subject: Patch to enable eglibc-intermediate
+	(envelope-from <rpurdie@rpsys.net>) id 1IIKq1-0000W5-Sf
+	for openembedded-devel@openembedded.org; Tue, 07 Aug 2007 10:54:50 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l778qKqf030348
+	for <openembedded-devel@openembedded.org>;
+	Tue, 7 Aug 2007 09:52:20 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 30156-05 for <openembedded-devel@openembedded.org>;
+	Tue,  7 Aug 2007 09:52:16 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l778qBB6030341
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Tue, 7 Aug 2007 09:52:11 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200708070822.03530.openembedded@hrw.one.pl>
+References: <03d301c7d853$58ec39f0$6e01a8c0@twilight>
+	<200708070822.03530.openembedded@hrw.one.pl>
+Date: Tue, 07 Aug 2007 09:52:10 +0100
+Message-Id: <1186476730.5653.6.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: STAGING_LIBDIR_NATIVE needed in bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,72 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2007 08:45:55 -0000
-X-Groupsio-MsgNum: 2642
-Content-Type: multipart/mixed; 
-	boundary="----=_Part_115184_32372901.1186476203364"
-
-------=_Part_115184_32372901.1186476203364
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Aug 2007 08:54:50 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi Koen
+On Tue, 2007-08-07 at 08:22 +0200, Marcin Juszkiewicz wrote:
+> STAGING_LIBDIR_NATIVE sounds ok for me
 
-This patch is needed to select eglibc-intermediate when eglibc is
-selected right now the defines from angstrom-eglibc.inc gets
-overridden.
+I'd certainly prefer STAGING_LIBDIR_NATIVE rather than paths with the
+"/../" in them :). I'm wondering if we need it though?
 
-OK?
+> > Anyone have any heartburn with this approach to resolving this problem?
+> 
+> It should be done in classes/native.bbclass not in ncurses-native. The 
+> problem is wider as there are few distributions which have host versions 
+> of stuff other then OE use as native. As a result building of native 
+> stuff which depend on native libraries can fail - when you will set 
+> LD_LIBRARY_PATH in native.bbclass then it should work.
 
-Thanks
+Just to be clear, this is a problem with ncurses-native? If so,
+STAGING_LIBDIR_NATIVE == STAGING_LIBDIR due to native.bbclass anyway so
+we don't need the _NATIVE version?
 
--Khem
+We'd only need a _NATIVE version if our cross compiled packages needed
+to reference something there explicitly (like they do some of the
+binaries). DoO we need to do that (and if so, which package and why)?
 
-------=_Part_115184_32372901.1186476203364
-Content-Type: application/octet-stream; name=diff
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_f52582qv
-Content-Disposition: attachment; filename="diff"
+Setting LD_LIBRARY_PATH for native.bbclass sounds like a worthwhile
+experiment...
 
-IwojIG9sZF9yZXZpc2lvbiBbMjAyOWU4NWI3ZjhmZGIxNmUxMDMxYTVlYWEzMzA0NzE3MzZjNjYw
-NV0KIwojIHBhdGNoICJjb25mL2Rpc3Ryby9hbmdzdHJvbS0yMDA3LjEuY29uZiIKIyAgZnJvbSBb
-MTMwZTkzMDZlZjlmZmFiZjMzNGIyYzg1NDk0MTliZTUyNjc3ZGI4Ml0KIyAgICB0byBbYTQzNWEw
-ZTNhMmYyN2MyMmMwZWRkYWU5M2YzMGQ2NWRiYjVlNmRkMV0KIwo9PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KLS0tIGNvbmYvZGlzdHJv
-L2FuZ3N0cm9tLTIwMDcuMS5jb25mCTEzMGU5MzA2ZWY5ZmZhYmYzMzRiMmM4NTQ5NDE5YmU1MjY3
-N2RiODIKKysrIGNvbmYvZGlzdHJvL2FuZ3N0cm9tLTIwMDcuMS5jb25mCWE0MzVhMGUzYTJmMjdj
-MjJjMGVkZGFlOTNmMzBkNjVkYmI1ZTZkZDEKQEAgLTI0MiwxMyArMjQyLDEzIEBAIFBSRUZFUlJF
-RF9QUk9WSURFUl92aXJ0dWFsLyR7VEFSR0VUX1BSRUYKIFBSRUZFUlJFRF9QUk9WSURFUl92aXJ0
-dWFsLyR7VEFSR0VUX1BSRUZJWH1nKysgPSAiZ2NjLWNyb3NzIgogCiAjU2V0IHByZWZlcnJlZCBw
-cm92aWRlciBmb3IgdGhlIEMgbGlicmFyeSB0aGF0IGlzIHVzZWQgdG8gYnVpbGQgdGhlIGNyb3Nz
-Y29tcGlsZXIgKE5QVEwgdm9vZG9vKQotUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvJHtUQVJH
-RVRfUFJFRklYfWxpYmMtZm9yLWdjYyAgICAgICAgICAgICAgID0gImdsaWJjLWludGVybWVkaWF0
-ZSIKLVBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2FybS1hbmdzdHJvbS1saW51eC1nbnVlYWJp
-LWxpYmMtZm9yLWdjYyAgICA9ICJnbGliYy1pbnRlcm1lZGlhdGUiCi1QUkVGRVJSRURfUFJPVklE
-RVJfdmlydHVhbC9hcm1lYi1hbmdzdHJvbS1saW51eC1nbnVlYWJpLWxpYmMtZm9yLWdjYyAgPSAi
-Z2xpYmMtaW50ZXJtZWRpYXRlIgotUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvYXJtLWFuZ3N0
-cm9tLWxpbnV4LWxpYmMtZm9yLWdjYyAgICAgICAgICAgID0gImdsaWJjLWludGVybWVkaWF0ZSIK
-LVBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL3Bvd2VycGMtYW5nc3Ryb20tbGludXgtbGliYy1m
-b3ItZ2NjICAgICAgICA9ICJnbGliYy1pbnRlcm1lZGlhdGUiCi1QUkVGRVJSRURfUFJPVklERVJf
-dmlydHVhbC9taXBzZWwtYW5nc3Ryb20tbGludXgtbGliYy1mb3ItZ2NjICAgICAgICAgPSAiZ2xp
-YmMtaW50ZXJtZWRpYXRlIgotUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvc3BhcmMtYW5nc3Ry
-b20tbGludXgtbGliYy1mb3ItZ2NjICAgICAgICAgID0gImdsaWJjLWludGVybWVkaWF0ZSIKK1BS
-RUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsLyR7VEFSR0VUX1BSRUZJWH1saWJjLWZvci1nY2MgICAg
-ICAgICAgICAgICA/PSAiZ2xpYmMtaW50ZXJtZWRpYXRlIgorUFJFRkVSUkVEX1BST1ZJREVSX3Zp
-cnR1YWwvYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmktbGliYy1mb3ItZ2NjICAgID89ICJnbGli
-Yy1pbnRlcm1lZGlhdGUiCitQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9hcm1lYi1hbmdzdHJv
-bS1saW51eC1nbnVlYWJpLWxpYmMtZm9yLWdjYyAgPz0gImdsaWJjLWludGVybWVkaWF0ZSIKK1BS
-RUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2FybS1hbmdzdHJvbS1saW51eC1saWJjLWZvci1nY2Mg
-ICAgICAgICAgICA/PSAiZ2xpYmMtaW50ZXJtZWRpYXRlIgorUFJFRkVSUkVEX1BST1ZJREVSX3Zp
-cnR1YWwvcG93ZXJwYy1hbmdzdHJvbS1saW51eC1saWJjLWZvci1nY2MgICAgICAgID89ICJnbGli
-Yy1pbnRlcm1lZGlhdGUiCitQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9taXBzZWwtYW5nc3Ry
-b20tbGludXgtbGliYy1mb3ItZ2NjICAgICAgICAgPz0gImdsaWJjLWludGVybWVkaWF0ZSIKK1BS
-RUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL3NwYXJjLWFuZ3N0cm9tLWxpbnV4LWxpYmMtZm9yLWdj
-YyAgICAgICAgICA/PSAiZ2xpYmMtaW50ZXJtZWRpYXRlIgogCiBQUkVGRVJSRURfUFJPVklERVJf
-dmlydHVhbC9hcm0tYW5nc3Ryb20tbGludXgtdWNsaWJjZ251ZWFiaS1saWJjLWZvci1nY2MgICAg
-PSAidWNsaWJjLWluaXRpYWwiCiBQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9hcm1lYi1hbmdz
-dHJvbS1saW51eC11Y2xpYmNnbnVlYWJpLWxpYmMtZm9yLWdjYyAgPSAidWNsaWJjLWluaXRpYWwi
-Cg==
+Cheers,
 
-------=_Part_115184_32372901.1186476203364--
+Richard
+
+
+
+
