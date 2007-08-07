@@ -1,23 +1,35 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1IILP9-0005K0-Ul; Tue, 07 Aug 2007 11:31:12 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1IILUl-000748-BQ; Tue, 07 Aug 2007 11:36:55 +0200
-Message-ID: <46B83B2C.6000305@kernelconcepts.de>
-Date: Tue, 07 Aug 2007 11:28:12 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <9e4733910708041243oa0cf091x60a8f9f279ad2ba7@mail.gmail.com>	<46B4DC9D.6030700@dominion.kabel.utwente.nl>	<46B4DDEC.6070304@dominion.kabel.utwente.nl>
-	<200708070035.19054.ranaldo@unina.it>
-In-Reply-To: <200708070035.19054.ranaldo@unina.it>
-X-Enigmail-Version: 0.94.2.0
-Cc: openembedded-devel@openembedded.org, gpe-list@linuxtogo.org
-Subject: Re: [Gpe-list] check sum failure http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2'
+	(envelope-from <rpurdie@rpsys.net>) id 1IIOCw-0005VG-Gh
+	for openembedded-devel@openembedded.org; Tue, 07 Aug 2007 14:30:59 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l77CRxTk007820
+	for <openembedded-devel@openembedded.org>;
+	Tue, 7 Aug 2007 13:27:59 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07605-04 for <openembedded-devel@openembedded.org>;
+	Tue,  7 Aug 2007 13:27:56 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l77CRrFL007810
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Tue, 7 Aug 2007 13:27:53 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <0cf301c7d8d3$4d422cb0$6e01a8c0@twilight>
+References: <03d301c7d853$58ec39f0$6e01a8c0@twilight>
+	<200708070822.03530.openembedded@hrw.one.pl>
+	<1186476730.5653.6.camel@localhost.localdomain>
+	<0cf301c7d8d3$4d422cb0$6e01a8c0@twilight>
+Date: Tue, 07 Aug 2007 13:27:52 +0100
+Message-Id: <1186489672.5653.28.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: STAGING_LIBDIR_NATIVE needed in bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,29 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2007 09:31:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Aug 2007 12:31:00 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On Tue, 2007-08-07 at 04:14 -0500, Mike (mwester) wrote:
+> > On Tue, 2007-08-07 at 08:22 +0200, Marcin Juszkiewicz wrote:
+> > Just to be clear, this is a problem with ncurses-native? If so,
+> > STAGING_LIBDIR_NATIVE == STAGING_LIBDIR due to native.bbclass anyway so
+> > we don't need the _NATIVE version?
+> 
+> No, this is a problem with ncurses, not ncurses-native. 
 
-Nicola Ranaldo schrieb:
-> May someone to give an url to download a right minimix tarball while waiting 
-> for gpe feedback?
+Ok, fair enough, I wondered but wasn't sure. its clear now :)
 
-I fixed the released file as well, so that issue should be history.
-Sorry for the inconvenience.
+> > We'd only need a _NATIVE version if our cross compiled packages needed
+> > to reference something there explicitly (like they do some of the
+> > binaries). DoO we need to do that (and if so, which package and why)?
+> 
+> I think they do -- how else do the dynamically-linked executables in staging
+> find their shared libraries?
 
-Greetings
+I'm convinced, it make sense. Feel free to add STAGING_LIBDIR_NATIVE and
+then use it in the ncurses bb file (maybe mention in a comment there is
+a util used in do_install which needs to find libraries from
+ncurses-native).
 
-Florian
+In fact this raises the question of whether that should be set globally?
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+Cheers,
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Richard
+
 
 
