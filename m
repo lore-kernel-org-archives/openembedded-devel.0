@@ -1,22 +1,21 @@
-Received: from [209.242.20.84] (helo=green.dls.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1IIGxP-00068b-Of
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Aug 2007 06:46:11 +0200
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 20E9A4121DE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Aug 2007 23:43:48 -0500 (CDT)
-Message-ID: <0cc301c7d8ad$4d1a2790$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 6 Aug 2007 23:42:03 -0500
+	(envelope-from <openembedded@hrw.one.pl>) id 1IIIUc-0007DB-L6
+	for openembedded-devel@openembedded.org; Tue, 07 Aug 2007 08:24:34 +0200
+Received: (qmail 30061 invoked by uid 813007); 7 Aug 2007 06:22:05 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 7 Aug 2007 06:22:05 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 7 Aug 2007 08:22:01 +0200
+User-Agent: KMail/1.9.7
+References: <03d301c7d853$58ec39f0$6e01a8c0@twilight>
+In-Reply-To: <03d301c7d853$58ec39f0$6e01a8c0@twilight>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1807
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
-Subject: fakeroot 1.7.1 & LT_INIT?
+Message-Id: <200708070822.03530.openembedded@hrw.one.pl>
+Subject: Re: STAGING_LIBDIR_NATIVE needed in bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,35 +29,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2007 04:46:11 -0000
+X-List-Received-Date: Tue, 07 Aug 2007 06:24:34 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Background: fakeroot is misbehaving on my system (it gets confused with its
-inode cache, and attempts to pass off a file as a directory, which causes
-mkfs.jffs2 to fail (among other things)).  Upgrading fakeroot to 1.7.1 seems
-to resolve this problem.
+Dnia poniedzia=B3ek, 6 sierpnia 2007, Mike (mwester) napisa=B3:
+> In order to fix an ncurses build bug
+> (http://bugs.openembedded.org/show_bug.cgi?id=3D2554), we need to set
+> LD_LIBRARY_PATH in the ncurses bb file.
+>
+> I've tested, and the following resolves the problem with ncurses not
+> installing:
+>
+>     export LD_LIBRARY_PATH =3D "${STAGING_BINDIR_NATIVE}/../lib"
+>
+> That's not too elegant, so I'd like to create "STAGING_LIBDIR_NATIVE"
+> in the bitbake.conf file instead, which will clean up the recipe and
+> make more obvious what it is that we're doing.
 
-Do_configure fails with 1.7.1; it attempts to create a configure script from
-the configure.ac file, but cannot expand the following two lines in
-configure.ac:
+STAGING_LIBDIR_NATIVE sounds ok for me
 
-LT_INIT
-LT_LANG(C)
+> Anyone have any heartburn with this approach to resolving this problem?
 
-Because it's just the way I am (yes, as a kid I stuck a knife into an
-electrical socket just to see what would happen), I deleted those two lines
-from configure.ac and tried again.  Somewhat to my surprise, nothing
-broke -- it works just fine that way (unlike placing a butter knife in an
-outlet - that did not work so very well).
+It should be done in classes/native.bbclass not in ncurses-native. The=20
+problem is wider as there are few distributions which have host versions=20
+of stuff other then OE use as native. As a result building of native=20
+stuff which depend on native libraries can fail - when you will set=20
+LD_LIBRARY_PATH in native.bbclass then it should work.
 
-So the question: do those lines do anything that matters to us, and can I
-commit the updated recipe for fakeroot 1.7.1?  Or is there something else I
-should do to make the autotools happy with the LT_* stuff?
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Thanks,
-Mike (mwester)
+              whats mean ubuntu?
+              it's african word for "can't configure debian"
+
 
 
 
