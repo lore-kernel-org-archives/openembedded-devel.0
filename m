@@ -1,24 +1,23 @@
-Received: from [209.242.20.84] (helo=green.dls.net)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1IILCh-0000zP-EQ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Aug 2007 11:18:16 +0200
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 38858411D75
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Aug 2007 04:15:48 -0500 (CDT)
-Message-ID: <0cf301c7d8d3$4d422cb0$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-References: <03d301c7d853$58ec39f0$6e01a8c0@twilight><200708070822.03530.openembedded@hrw.one.pl>
-	<1186476730.5653.6.camel@localhost.localdomain>
-Date: Tue, 7 Aug 2007 04:14:04 -0500
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1IILP9-0005K0-Ul; Tue, 07 Aug 2007 11:31:12 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1IILUl-000748-BQ; Tue, 07 Aug 2007 11:36:55 +0200
+Message-ID: <46B83B2C.6000305@kernelconcepts.de>
+Date: Tue, 07 Aug 2007 11:28:12 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 1.5.0.12 (X11/20070604)
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1807
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
-Subject: Re: STAGING_LIBDIR_NATIVE needed in bitbake.conf
+To: openembedded-devel@lists.openembedded.org
+References: <9e4733910708041243oa0cf091x60a8f9f279ad2ba7@mail.gmail.com>	<46B4DC9D.6030700@dominion.kabel.utwente.nl>	<46B4DDEC.6070304@dominion.kabel.utwente.nl>
+	<200708070035.19054.ranaldo@unina.it>
+In-Reply-To: <200708070035.19054.ranaldo@unina.it>
+X-Enigmail-Version: 0.94.2.0
+Cc: openembedded-devel@openembedded.org, gpe-list@linuxtogo.org
+Subject: Re: [Gpe-list] check sum failure http://gpe.linuxtogo.org/download/source/minimix-0.8.tar.bz2'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,63 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2007 09:18:19 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Tue, 07 Aug 2007 09:31:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------ Original Message ----- 
-From: "Richard Purdie" <rpurdie@rpsys.net>
-To: <openembedded-devel@openembedded.org>
-Sent: Tuesday, August 07, 2007 3:52 AM
-Subject: Re: [oe] STAGING_LIBDIR_NATIVE needed in bitbake.conf
+Hi,
 
+Nicola Ranaldo schrieb:
+> May someone to give an url to download a right minimix tarball while waiting 
+> for gpe feedback?
 
-> On Tue, 2007-08-07 at 08:22 +0200, Marcin Juszkiewicz wrote:
+I fixed the released file as well, so that issue should be history.
+Sorry for the inconvenience.
 
-> > It should be done in classes/native.bbclass not in ncurses-native. The
-> > problem is wider as there are few distributions which have host versions
-> > of stuff other then OE use as native. As a result building of native
-> > stuff which depend on native libraries can fail - when you will set
-> > LD_LIBRARY_PATH in native.bbclass then it should work.
->
-> Just to be clear, this is a problem with ncurses-native? If so,
-> STAGING_LIBDIR_NATIVE == STAGING_LIBDIR due to native.bbclass anyway so
-> we don't need the _NATIVE version?
+Greetings
 
-No, this is a problem with ncurses, not ncurses-native.  The issue arises
-because ncurses-native builds a utility (dynamically linked), and stages
-same along with it's library.  This staged utility is executed during the
-do_install task of ncurses itself, and that's the point at which it fails if
-LD_LIBRARY_PATH is not set.  It's gone unnoticed, I suspect, because up to
-recently the utility has successfully dynamically linked to the host's copy
-of that library instead of the one in staging.
+Florian
 
-So LD_LIBRARY_PATH needs only to be set for ncurses, not for ncurses-native
-(but since ncurses-native includes ncurses, it ends up set (harmlessly) for
-ncurses-native as well).
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
-> We'd only need a _NATIVE version if our cross compiled packages needed
-> to reference something there explicitly (like they do some of the
-> binaries). DoO we need to do that (and if so, which package and why)?
-
-I think they do -- how else do the dynamically-linked executables in staging
-find their shared libraries?
-
-Of course, using staticly-linked executables in staging will solve *this*
-problem -- but it creates major headaches for utilities such as fakeroot,
-which require that everything be dynamically-linked.
-
-> Setting LD_LIBRARY_PATH for native.bbclass sounds like a worthwhile
-> experiment...
->
-> Cheers,
->
-> Richard
-
-
-Thanks,
-Mike (mwester)
-
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
