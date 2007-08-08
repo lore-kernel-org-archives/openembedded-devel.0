@@ -1,21 +1,19 @@
-Received: from [209.85.146.180] (helo=wa-out-1112.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IIbGd-0004Ak-TO
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 08 Aug 2007 04:27:24 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so33100waf
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Aug 2007 19:24:44 -0700 (PDT)
-Received: by 10.114.198.1 with SMTP id v1mr412540waf.1186539884623;
-	Tue, 07 Aug 2007 19:24:44 -0700 (PDT)
-Received: by 10.114.208.14 with HTTP; Tue, 7 Aug 2007 19:24:44 -0700 (PDT)
-Message-ID: <19c1b8a90708071924h6c1aa0d1uabe51d0c62a1c0e1@mail.gmail.com>
-Date: Tue, 7 Aug 2007 19:24:44 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: koen@dominion.kabel.utwente.nl
+	(envelope-from <openembedded@hrw.one.pl>) id 1IIhLY-0001P3-HF
+	for openembedded-devel@openembedded.org; Wed, 08 Aug 2007 10:56:52 +0200
+Received: (qmail 1428 invoked by uid 813007); 8 Aug 2007 08:54:16 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 8 Aug 2007 08:54:16 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 8 Aug 2007 10:54:12 +0200
+User-Agent: KMail/1.9.7
 MIME-Version: 1.0
-Cc: Openembedded-devel@lists.openembedded.org
-Subject: Patch to eglibc
+Message-Id: <200708081054.14481.openembedded@hrw.one.pl>
+Subject: disapproval of revision '88c64741ce48efad01b051c81bcb07df08267748'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,112 +27,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Aug 2007 02:27:24 -0000
-X-Groupsio-MsgNum: 2652
-Content-Type: multipart/mixed; 
-	boundary="----=_Part_125965_5564116.1186539884296"
-
-------=_Part_125965_5564116.1186539884296
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Aug 2007 08:56:52 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi Koen
 
-Here is another patch to enable eglibc on OE. With this patch applied
-I was able to compile a angstrom-console-image for my osk5912 board
-haven't had chance to boot.
+My fault - libqpe* does not inherit opie.bbclass which set OPIE_CVS_PV.
 
-The patch adds one patch thats a backport from glibc and few other fixes.
+-- 
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-OK?
+          Warning: Dates in calendar are closer than they appear.
 
-Thanks
 
--Khem
 
-------=_Part_125965_5564116.1186539884296
-Content-Type: application/octet-stream; name=diff
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_f5376acy
-Content-Disposition: attachment; filename="diff"
 
-IwojIG9sZF9yZXZpc2lvbiBbZTYwOWI2YTlmZjQxMjhhMTQ4MTAyYzk3ZDk5MTgxNmVjNzc4MjUw
-NF0KIwojIGFkZF9kaXIgInBhY2thZ2VzL2dsaWJjL2VnbGliYy1zdm4iCiMgCiMgYWRkX2ZpbGUg
-InBhY2thZ2VzL2dsaWJjL2VnbGliYy1zdm4vZXhwb3J0LWZjbnRsMi5wYXRjaCIKIyAgY29udGVu
-dCBbMjMyYTkzM2Y0ODhmYjM0ZDg0NWVjMmVkYTk4MjY3ODIwYjEzZDgyOF0KIyAKIyBwYXRjaCAi
-cGFja2FnZXMvZ2xpYmMvZWdsaWJjX3N2bi5iYiIKIyAgZnJvbSBbN2U3YWY5OTY3NTQ0ZDE2OWRm
-MDlmZWJhOTk1YTY0MmZjODg5N2QxZV0KIyAgICB0byBbNThiODA3ZjEyNTUzMTAwMjM5OTQwYmZm
-NTlhMGQ0ZDVlMzc4ZmQyMV0KIwo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT0KLS0tIHBhY2thZ2VzL2dsaWJjL2VnbGliYy1zdm4vZXhw
-b3J0LWZjbnRsMi5wYXRjaAkyMzJhOTMzZjQ4OGZiMzRkODQ1ZWMyZWRhOTgyNjc4MjBiMTNkODI4
-CisrKyBwYWNrYWdlcy9nbGliYy9lZ2xpYmMtc3ZuL2V4cG9ydC1mY250bDIucGF0Y2gJMjMyYTkz
-M2Y0ODhmYjM0ZDg0NWVjMmVkYTk4MjY3ODIwYjEzZDgyOApAQCAtMCwwICsxLDExIEBACistLS0g
-bGliYy9pby9NYWtlZmlsZS5vcmlnCTIwMDctMDgtMDcgMTc6NDE6MzMuMDAwMDAwMDAwIC0wNzAw
-CisrKysgbGliYy9pby9NYWtlZmlsZQkyMDA3LTA4LTA3IDE3OjQyOjI1LjAwMDAwMDAwMCAtMDcw
-MAorQEAgLTIzLDcgKzIzLDcgQEAgc3ViZGlyCTo9IGlvCisgCisgaGVhZGVycyA6PSBzeXMvc3Rh
-dC5oIGJpdHMvc3RhdC5oIHN5cy9zdGF0ZnMuaCBiaXRzL3N0YXRmcy5oIHN5cy92ZnMuaCBcCisg
-CSAgIHN5cy9zdGF0dmZzLmggYml0cy9zdGF0dmZzLmggZmNudGwuaCBzeXMvZmNudGwuaCBiaXRz
-L2ZjbnRsLmggXAorLQkgICBwb2xsLmggc3lzL3BvbGwuaCBiaXRzL3BvbGwuaCBcCisrCSAgIHBv
-bGwuaCBzeXMvcG9sbC5oIGJpdHMvcG9sbC5oIGJpdHMvZmNudGwyLmggXAorIAkgICB1dGltZS5o
-IGZ0dy5oIGZ0cy5oIHN5cy9zZW5kZmlsZS5oCisgCisgcm91dGluZXMgOj0JCQkJCQkJCVwKPT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-Ci0tLSBwYWNrYWdlcy9nbGliYy9lZ2xpYmNfc3ZuLmJiCTdlN2FmOTk2NzU0NGQxNjlkZjA5ZmVi
-YTk5NWE2NDJmYzg4OTdkMWUKKysrIHBhY2thZ2VzL2dsaWJjL2VnbGliY19zdm4uYmIJNThiODA3
-ZjEyNTUzMTAwMjM5OTQwYmZmNTlhMGQ0ZDVlMzc4ZmQyMQpAQCAtMSwxMCArMSwxMiBAQCBERUZB
-VUxUX1BSRUZFUkVOQ0UgPSAiLTEiCiByZXF1aXJlIGdsaWJjLmluYwogCiBERUZBVUxUX1BSRUZF
-UkVOQ0UgPSAiLTEiCi0KK0ZJTEVTRElSID0gIiR7QG9zLnBhdGguZGlybmFtZShiYi5kYXRhLmdl
-dFZhcignRklMRScsZCwxKSl9L2VnbGliYy1zdm4iCiBQViA9ICIyLjYrc3ZuJHtTUkNEQVRFfSIK
-IFNSQ19VUkkgPSAic3ZuOi8vc3ZuLmVnbGliYy5vcmc7bW9kdWxlPXRydW5rIFwKLSAgICAgICAg
-ICAiCisgICAgICAgICAgIGZpbGU6Ly9leHBvcnQtZmNudGwyLnBhdGNoO3BhdGNoPTEgXAorICAg
-ICAgICAgICBmaWxlOi8vZXRjL2xkLnNvLmNvbmYgXAorICAgICAgICAgICBmaWxlOi8vZ2VuZXJh
-dGUtc3VwcG9ydGVkLm1rIgogUyA9ICIke1dPUktESVJ9L3RydW5rL2xpYmMiCiBCID0gIiR7V09S
-S0RJUn0vYnVpbGQtJHtUQVJHRVRfU1lTfSIKIApAQCAtODMsNSArODUsNTEgQEAgZG9fY29tcGls
-ZSAoKSB7IAogICAgICAgICApIAogfSAgICAgICAKIAorZG9fc3RhZ2UoKSB7CisgICAgICAgIHJt
-IC1mICR7U1RBR0lOR19MSUJESVJ9L2xpYmMuc28uNgorICAgICAgICBvZV9ydW5tYWtlICdpbnN0
-YWxsX3Jvb3Q9JHtTVEFHSU5HX0RJUn0vJHtIT1NUX1NZU30nIFwKKyAgICAgICAgICAgICAgICAg
-ICAnaW5jbHVkZWRpcj0vaW5jbHVkZScgJ2xpYmRpcj0vbGliJyAnc2xpYmRpcj0vbGliJyBcCisg
-ICAgICAgICAgICAgICAgICAgJyR7U1RBR0lOR19MSUJESVJ9L2xpYmMuc28uNicgXAorICAgICAg
-ICAgICAgICAgICAgIGluc3RhbGwtaGVhZGVycyBpbnN0YWxsLWxpYgogCisgICAgICAgIGluc3Rh
-bGwgLWQgJHtTVEFHSU5HX0lOQ0RJUn0vZ251IFwKKyAgICAgICAgICAgICAgICAgICAke1NUQUdJ
-TkdfSU5DRElSfS9iaXRzIFwKKyAgICAgICAgICAgICAgICAgICAke1NUQUdJTkdfSU5DRElSfS9y
-cGNzdmMKKyAgICAgICAgaW5zdGFsbCAtbSAwNjQ0ICR7U30vaW5jbHVkZS9nbnUvc3R1YnMuaCAk
-e1NUQUdJTkdfSU5DRElSfS9nbnUvCisgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke0J9L2JpdHMv
-c3RkaW9fbGltLmggJHtTVEFHSU5HX0lOQ0RJUn0vYml0cy8KKyAgICAgICAgaW5zdGFsbCAtbSAw
-NjQ0IG1pc2Mvc3lzY2FsbC1saXN0LmggJHtTVEFHSU5HX0lOQ0RJUn0vYml0cy9zeXNjYWxsLmgK
-KyAgICAgICAgZm9yIHIgaW4gJHtycGNzdmN9OyBkbworICAgICAgICAgICAgICAgIGg9YGVjaG8g
-JHJ8c2VkIC1lJ3MsXC54JCwuaCwnYAorICAgICAgICAgICAgICAgIGluc3RhbGwgLW0gMDY0NCAk
-e1N9L3N1bnJwYy9ycGNzdmMvJGggJHtTVEFHSU5HX0lOQ0RJUn0vcnBjc3ZjLworICAgICAgICBk
-b25lCisgICAgICAgIGZvciBpIGluIGxpYmMuYSBsaWJjX3BpYy5hIGxpYmNfbm9uc2hhcmVkLmE7
-IGRvCisgICAgICAgICAgICAgICAgaW5zdGFsbCAtbSAwNjQ0ICR7Qn0vJGkgJHtTVEFHSU5HX0xJ
-QkRJUn0vIHx8IGRpZSAiZmFpbGVkIHRvIGluc3RhbGwgJGkiCisgICAgICAgIGRvbmUKKyAgICAg
-ICAgZWNobyAnR1JPVVAgKCBsaWJwdGhyZWFkLnNvLjAgbGlicHRocmVhZF9ub25zaGFyZWQuYSAp
-JyA+ICR7U1RBR0lOR19MSUJESVJ9L2xpYnB0aHJlYWQuc28KKyAgICAgICAgZWNobyAnR1JPVVAg
-KCBsaWJjLnNvLjYgbGliY19ub25zaGFyZWQuYSApJyA+ICR7U1RBR0lOR19MSUJESVJ9L2xpYmMu
-c28KKworICAgICAgICBybSAtZiAke0NST1NTX0RJUn0vJHtUQVJHRVRfU1lTfS9saWIvbGliYy5z
-by42CisgICAgICAgIG9lX3J1bm1ha2UgJ2luc3RhbGxfcm9vdD0ke0NST1NTX0RJUn0vJHtUQVJH
-RVRfU1lTfScgXAorICAgICAgICAgICAgICAgICAgICdpbmNsdWRlZGlyPS9pbmNsdWRlJyAnbGli
-ZGlyPS9saWInICdzbGliZGlyPS9saWInIFwKKyAgICAgICAgICAgICAgICAgICAnJHtDUk9TU19E
-SVJ9LyR7VEFSR0VUX1NZU30vbGliL2xpYmMuc28uNicgXAorICAgICAgICAgICAgICAgICAgIGlu
-c3RhbGwtaGVhZGVycyBpbnN0YWxsLWxpYgorCisgICAgICAgIGluc3RhbGwgLWQgJHtDUk9TU19E
-SVJ9LyR7VEFSR0VUX1NZU30vaW5jbHVkZS9nbnUgXAorICAgICAgICAgICAgICAgICAgICR7Q1JP
-U1NfRElSfS8ke1RBUkdFVF9TWVN9L2luY2x1ZGUvYml0cyBcCisgICAgICAgICAgICAgICAgICAg
-JHtDUk9TU19ESVJ9LyR7VEFSR0VUX1NZU30vaW5jbHVkZS9ycGNzdmMKKyAgICAgICAgaW5zdGFs
-bCAtbSAwNjQ0ICR7U30vaW5jbHVkZS9nbnUvc3R1YnMuaCAke0NST1NTX0RJUn0vJHtUQVJHRVRf
-U1lTfS9pbmNsdWRlL2dudS8KKyAgICAgICAgaW5zdGFsbCAtbSAwNjQ0ICR7Qn0vYml0cy9zdGRp
-b19saW0uaCAke0NST1NTX0RJUn0vJHtUQVJHRVRfU1lTfS9pbmNsdWRlL2JpdHMvCisgICAgICAg
-IGluc3RhbGwgLW0gMDY0NCBtaXNjL3N5c2NhbGwtbGlzdC5oICR7Q1JPU1NfRElSfS8ke1RBUkdF
-VF9TWVN9L2luY2x1ZGUvYml0cy9zeXNjYWxsLmgKKyAgICAgICAgZm9yIHIgaW4gJHtycGNzdmN9
-OyBkbworICAgICAgICAgICAgICAgIGg9YGVjaG8gJHJ8c2VkIC1lJ3MsXC54JCwuaCwnYAorICAg
-ICAgICAgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1N9L3N1bnJwYy9ycGNzdmMvJGggJHtDUk9T
-U19ESVJ9LyR7VEFSR0VUX1NZU30vaW5jbHVkZS9ycGNzdmMvCisgICAgICAgIGRvbmUKKworICAg
-ICAgICBmb3IgaSBpbiBsaWJjLmEgbGliY19waWMuYSBsaWJjX25vbnNoYXJlZC5hOyBkbworICAg
-ICAgICAgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke0J9LyRpICR7Q1JPU1NfRElSfS8ke1RBUkdF
-VF9TWVN9L2xpYi8gfHwgZGllICJmYWlsZWQgdG8gaW5zdGFsbCAkaSIKKyAgICAgICAgZG9uZQor
-ICAgICAgICBlY2hvICdHUk9VUCAoIGxpYnB0aHJlYWQuc28uMCBsaWJwdGhyZWFkX25vbnNoYXJl
-ZC5hICknID4gJHtDUk9TU19ESVJ9LyR7VEFSR0VUX1NZU30vbGliL2xpYnB0aHJlYWQuc28KKyAg
-ICAgICAgZWNobyAnR1JPVVAgKCBsaWJjLnNvLjYgbGliY19ub25zaGFyZWQuYSApJyA+ICR7Q1JP
-U1NfRElSfS8ke1RBUkdFVF9TWVN9L2xpYi9saWJjLnNvCit9CisKIHJlcXVpcmUgZ2xpYmMtcGFj
-a2FnZS5iYmNsYXNzCg==
-
-------=_Part_125965_5564116.1186539884296--
