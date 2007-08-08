@@ -1,26 +1,26 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [209.85.146.176] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IIlHm-0001Su-Pd
-	for openembedded-devel@openembedded.org; Wed, 08 Aug 2007 15:09:22 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l78D6U1R021006 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Aug 2007 15:06:31 +0200
-Message-ID: <46B9BFC9.60402@dominion.kabel.utwente.nl>
-Date: Wed, 08 Aug 2007 15:06:17 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <mwhoosier@gmail.com>) id 1IIlV8-0001y8-Vk
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Aug 2007 15:23:03 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so202465waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Aug 2007 06:20:25 -0700 (PDT)
+Received: by 10.115.61.1 with SMTP id o1mr157403wak.1186579224404;
+	Wed, 08 Aug 2007 06:20:24 -0700 (PDT)
+Received: by 10.114.73.7 with HTTP; Wed, 8 Aug 2007 06:20:24 -0700 (PDT)
+Message-ID: <d543f5920708080620h171bb132o91d4aba695d9209@mail.gmail.com>
+Date: Wed, 8 Aug 2007 08:20:24 -0500
+From: "Matt Hoosier" <matt.hoosier@gmail.com>
+Sender: mwhoosier@gmail.com
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1186575579.6091.43.camel@localhost.localdomain>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <E1IIkwT-00010u-Ld@linuxtogo.org>
-In-Reply-To: <E1IIkwT-00010u-Ld@linuxtogo.org>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev matchbox-panel2 ship plugin *.la in debug package (QA fix)
+References: <d543f5920708071623g37c9844fs47db2c11d73d1ec9@mail.gmail.com>
+	<1186575579.6091.43.camel@localhost.localdomain>
+X-Google-Sender-Auth: e44987d4cbaa0c8c
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Inheriting conditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,35 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Aug 2007 13:09:27 -0000
+X-List-Received-Date: Wed, 08 Aug 2007 13:23:06 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 8/8/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> I can't think of a way to do this 100% neatly, the following is my best
+> idea:
+>
+> SYSTEMWIDEDAEMON = "dummy"
+> SYSTEMWIDEDAEMON_mydistro = "myspecialclass"
+>
+> inherit ${SYSTEMWIDEDAEMON}
+>
+> The ugly bit is it needs an empty dummy.bbclass.
+>
+> A quick test here suggests it might be harmless to use "base" there
+> since base will always have already been included...
+>
 
-mickeyl commit schreef:
-> matchbox-panel2 ship plugin *.la in debug package (QA fix)
+Thanks. I also got the "bright" idea to install a dummy init script
+for any distribution other than mine:
 
-> +FILES_${PN}-dbg += "${libdir}/matchbox-panel/lib*.a ${libdir}/matchbox-panel/lib*.la"
+do_install () {
 
-No, those go into -dev packages.
+  ...
 
-- From bitbake.conf:
-
-FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
-                ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
-                /lib/*.a /lib/*.o ${datadir}/aclocal"
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFGub/JMkyGM64RGpERApHtAKCjez4xhvL0SvJgYtzXCc8/KbuaeACffbgc
-PcXRJoPGJHIDzOcos2ZqD74=
-=yXrr
------END PGP SIGNATURE-----
+  install -d -m 0755 ${D}${sysconfdir}/init.d
+  if [ "${DISTRO}" = "foinse" ] ; then
+      install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/pulseaudio
+  else
+      echo "#! /bin/sh" > ${D}${sysconfdir}/init.d/pulseaudio
+      chmod 0755 ${D}${sysconfdir}/init.d/pulseaudio
+  fi
+}
 
 
