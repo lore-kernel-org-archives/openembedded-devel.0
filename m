@@ -1,35 +1,25 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IInjv-0008Ns-TQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Aug 2007 17:46:33 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 2639328C013; Wed,  8 Aug 2007 17:41:29 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180177247.adsl.alicedsl.de [85.180.177.247])
-	by srv043.dedi23.de (Postfix) with ESMTP id 243A028C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Aug 2007 17:41:26 +0200 (CEST)
-Date: Wed, 8 Aug 2007 17:43:47 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1089553613.20070808174347@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d543f5920708080835g76bf1633jcb46c4337c7629c4@mail.gmail.com>
-References: <d543f5920708071623g37c9844fs47db2c11d73d1ec9@mail.gmail.com>
-	<1186575579.6091.43.camel@localhost.localdomain>
-	<d543f5920708080620h171bb132o91d4aba695d9209@mail.gmail.com>
-	<14210558366.20070808155849@vanille-media.de>
-	<d543f5920708080835g76bf1633jcb46c4337c7629c4@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IIpdA-0002IC-32
+	for openembedded-devel@openembedded.org; Wed, 08 Aug 2007 19:47:36 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l78Hit1R002360 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 8 Aug 2007 19:44:55 +0200
+Message-ID: <46BA010A.1020106@dominion.kabel.utwente.nl>
+Date: Wed, 08 Aug 2007 19:44:42 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Subject: Re: Inheriting conditionally
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Reminder: autotools 2.61 will be made default tomorrow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,48 +33,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Aug 2007 15:46:36 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 08 Aug 2007 17:47:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Matt Hoosier wrote:
-> On 8/8/07, Dr. Michael Lauer <mickey@vanille-media.de> wrote:
->> Matt Hoosier wrote:
->> > Thanks. I also got the "bright" idea to install a dummy init script
->> > for any distribution other than mine:
->>
->> > do_install () {
->>
->> >   ...
->>
->> >   install -d -m 0755 ${D}${sysconfdir}/init.d
->> >   if [ "${DISTRO}" = "foinse" ] ; then
->> >       install -m 0755 ${WORKDIR}/init
->> > ${D}${sysconfdir}/init.d/pulseaudio
->> >   else
->> >       echo "#! /bin/sh" > ${D}${sysconfdir}/init.d/pulseaudio
->> >       chmod 0755 ${D}${sysconfdir}/init.d/pulseaudio
->> >   fi
->> > }
->>
->> This looks like something that could be much better done using the
->> distro OVERRIDE.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Hmm, http://www.openembedded.org/user-manual&dpage=special_overrides
-> doesn't have anything at the moment.
+see $SUBJECT
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-> I also had trouble finding a good example in the existing packages
-> (well, it was Poky, which contains fewer packages than full OE). Do
-> you happen to know a good example?
-
-Check initscripts. We're using DISTRO overrides here to provide some
-branding in issue and issue.net.
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+iD8DBQFGugEKMkyGM64RGpERAvEkAJ9XL6775+UYmOC5c3gbhyFK0bh3ogCfc49t
+Q17Rk8w37FtI5OxtU7xJ3fc=
+=q46M
+-----END PGP SIGNATURE-----
 
 
