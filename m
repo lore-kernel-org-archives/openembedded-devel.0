@@ -1,32 +1,26 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.162.227] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IIm6J-0006kP-4R
+	(envelope-from <mwhoosier@gmail.com>) id 1IInbt-0008Bu-CS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Aug 2007 16:01:27 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id EE6D628C013; Wed,  8 Aug 2007 15:56:28 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180177247.adsl.alicedsl.de [85.180.177.247])
-	by srv043.dedi23.de (Postfix) with ESMTP id 446D728C012
+	Wed, 08 Aug 2007 17:38:09 +0200
+Received: by nz-out-0506.google.com with SMTP id j2so72036nzf
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Aug 2007 15:56:28 +0200 (CEST)
-Date: Wed, 8 Aug 2007 15:58:49 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <14210558366.20070808155849@vanille-media.de>
+	Wed, 08 Aug 2007 08:35:31 -0700 (PDT)
+Received: by 10.114.199.1 with SMTP id w1mr288137waf.1186587330531;
+	Wed, 08 Aug 2007 08:35:30 -0700 (PDT)
+Received: by 10.114.73.7 with HTTP; Wed, 8 Aug 2007 08:35:30 -0700 (PDT)
+Message-ID: <d543f5920708080835g76bf1633jcb46c4337c7629c4@mail.gmail.com>
+Date: Wed, 8 Aug 2007 10:35:30 -0500
+From: "Matt Hoosier" <matt.hoosier@gmail.com>
+Sender: mwhoosier@gmail.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d543f5920708080620h171bb132o91d4aba695d9209@mail.gmail.com>
+In-Reply-To: <14210558366.20070808155849@vanille-media.de>
+MIME-Version: 1.0
 References: <d543f5920708071623g37c9844fs47db2c11d73d1ec9@mail.gmail.com>
 	<1186575579.6091.43.camel@localhost.localdomain>
 	<d543f5920708080620h171bb132o91d4aba695d9209@mail.gmail.com>
-MIME-Version: 1.0
+	<14210558366.20070808155849@vanille-media.de>
+X-Google-Sender-Auth: 88568c7371a067e9
 Subject: Re: Inheriting conditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,36 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Aug 2007 14:01:29 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 08 Aug 2007 15:38:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Matt Hoosier wrote:
-> Thanks. I also got the "bright" idea to install a dummy init script
-> for any distribution other than mine:
+On 8/8/07, Dr. Michael Lauer <mickey@vanille-media.de> wrote:
+> Matt Hoosier wrote:
+> > Thanks. I also got the "bright" idea to install a dummy init script
+> > for any distribution other than mine:
+>
+> > do_install () {
+>
+> >   ...
+>
+> >   install -d -m 0755 ${D}${sysconfdir}/init.d
+> >   if [ "${DISTRO}" = "foinse" ] ; then
+> >       install -m 0755 ${WORKDIR}/init
+> > ${D}${sysconfdir}/init.d/pulseaudio
+> >   else
+> >       echo "#! /bin/sh" > ${D}${sysconfdir}/init.d/pulseaudio
+> >       chmod 0755 ${D}${sysconfdir}/init.d/pulseaudio
+> >   fi
+> > }
+>
+> This looks like something that could be much better done using the
+> distro OVERRIDE.
 
-> do_install () {
+Hmm, http://www.openembedded.org/user-manual&dpage=special_overrides
+doesn't have anything at the moment.
 
->   ...
-
->   install -d -m 0755 ${D}${sysconfdir}/init.d
->   if [ "${DISTRO}" = "foinse" ] ; then
->       install -m 0755 ${WORKDIR}/init
-> ${D}${sysconfdir}/init.d/pulseaudio
->   else
->       echo "#! /bin/sh" > ${D}${sysconfdir}/init.d/pulseaudio
->       chmod 0755 ${D}${sysconfdir}/init.d/pulseaudio
->   fi
-> }
-
-This looks like something that could be much better done using the
-distro OVERRIDE.
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+I also had trouble finding a good example in the existing packages
+(well, it was Poky, which contains fewer packages than full OE). Do
+you happen to know a good example?
 
 
