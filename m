@@ -1,21 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1IJZYu-00046s-NJ
-	for openembedded-devel@openembedded.org; Fri, 10 Aug 2007 20:50:18 +0200
-Received: (qmail 3347 invoked by uid 813007); 10 Aug 2007 18:47:26 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 10 Aug 2007 18:47:26 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Aug 2007 20:41:35 +0200
-User-Agent: KMail/1.9.7
-References: <74d0deb30708100731y124e3931g2e5dde6749d0cce3@mail.gmail.com>
-In-Reply-To: <74d0deb30708100731y124e3931g2e5dde6749d0cce3@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IJaXc-0000fw-5O
+	for openembedded-devel@openembedded.org; Fri, 10 Aug 2007 21:53:00 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l7AJo31R016579 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Aug 2007 21:50:03 +0200
+Message-ID: <46BCC163.8000906@dominion.kabel.utwente.nl>
+Date: Fri, 10 Aug 2007 21:49:55 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Message-Id: <200708102041.43625.openembedded@hrw.one.pl>
-Subject: Re: -dbg packages in image confusion
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: [RFC] improving binutils-cross staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,35 +33,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2007 18:50:20 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 10 Aug 2007 19:53:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=B1tek, 10 sierpnia 2007, pHilipp Zabel napisa=B3:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Ah, why would gpe-session-scripts depends on gpe-login-dbg?
-> Let's see ...
->
-> 	$ ipkg-cl info gpe-session-scripts
-> 	Package: gpe-session-scripts
-> 	Version: 0.67-r10
-> 	Depends: matchbox-panel, matchbox-desktop, matchbox-common,
-> gpe-session-starter
+Hi,
 
-gpe-login_0.90.bb:
+For blackfin I need to build elf2flt and that needs some extra files from binutils:
 
-RPROVIDES =3D "gpe-session-starter"
+- --- packages/binutils/binutils-cross_2.17.50.0.5.bb
+d60bed4e513253708d05f83d02aecf9ca9441369
++++ packages/binutils/binutils-cross_2.17.50.0.5.bb
+208e1b60a5e66b05df64de9964cfdce963a37190
+@@ -21,6 +21,15 @@ do_stage () {
+        rmdir ${CROSS_DIR}/${libdir} || :
+        rmdir ${CROSS_DIR}/${prefix} || :
 
-which is WRONG - change to RPROVIDES_${PN} and it will works
++        oe_libinstall -a -C opcodes libopcodes ${CROSS_DIR}/${TARGET_SYS}/lib
++        oe_libinstall -a -C bfd libbfd ${CROSS_DIR}/${TARGET_SYS}/lib
++
++        install -d ${CROSS_DIR}/${TARGET_SYS}/include
++        install -d ${CROSS_DIR}/${TARGET_SYS}/include/elf
++
++        install -m 0644 bfd/bfd.h ${CROSS_DIR}/${TARGET_SYS}/include
++        install -m 0644 ${WORKDIR}/binutils-${PV}/include/elf/*.h
+${CROSS_DIR}/${TARGET_SYS}/include/elf/
++
+        # We want to move this into the target specific location
+        mkdir -p ${CROSS_DIR}/${TARGET_SYS}/lib
+        mv -f ${CROSS_DIR}/lib/libiberty.a ${CROSS_DIR}/${TARGET_SYS}/lib
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+It looks a bit ugly to me, does anyone have a better suggestion?
 
-                   Smile a lot; it makes others nervous.
+regards,
 
+Koen
 
+PS:
+
+elf2flt_svn.bb:
+PV = "0.0+svnr${SRCREV}"
+inherit autotools cross
+SRC_URI = "svn://sources.blackfin.uclinux.org/toolchain/trunk;module=${PN}"
+S = "${WORKDIR}/${PN}"
+EXTRA_OECONF = " --with-libbfd=${CROSS_DIR}/${TARGET_SYS}/lib/libbfd.a \
+                 --with-libiberty=${CROSS_DIR}/${TARGET_SYS}/lib/libiberty.a \
+                 --with-bfd-include-dir=${CROSS_DIR}/${TARGET_SYS}/include \
+               "
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFGvMFjMkyGM64RGpERAm7sAJ9/aEYcxAhXKd7Z79IivGFQ9lxZpACghyBy
+qF+s0qRfgCTelH3Q/LXZSlo=
+=4q6O
+-----END PGP SIGNATURE-----
 
 
