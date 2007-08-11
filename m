@@ -1,22 +1,24 @@
-Received: from [209.85.146.178] (helo=wa-out-1112.google.com)
+Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IJlCc-0003Jo-TZ
+	(envelope-from <philipp.zabel@gmail.com>) id 1IJo82-00062P-GH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Aug 2007 09:16:03 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so1279598waf
+	Sat, 11 Aug 2007 12:23:34 +0200
+Received: by fk-out-0910.google.com with SMTP id 18so957473fks
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Aug 2007 00:13:07 -0700 (PDT)
-Received: by 10.115.14.1 with SMTP id r1mr3306803wai.1186816387554;
-	Sat, 11 Aug 2007 00:13:07 -0700 (PDT)
-Received: by 10.115.73.16 with HTTP; Sat, 11 Aug 2007 00:13:07 -0700 (PDT)
-Message-ID: <19c1b8a90708110013v87af3f9h7d4f0b4354153eb3@mail.gmail.com>
-Date: Sat, 11 Aug 2007 00:13:07 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
+	Sat, 11 Aug 2007 03:20:34 -0700 (PDT)
+Received: by 10.82.174.20 with SMTP id w20mr4880233bue.1186827634678;
+	Sat, 11 Aug 2007 03:20:34 -0700 (PDT)
+Received: by 10.82.117.9 with HTTP; Sat, 11 Aug 2007 03:20:34 -0700 (PDT)
+Message-ID: <74d0deb30708110320n3cebe757seccd90801ee49e5a@mail.gmail.com>
+Date: Sat, 11 Aug 2007 12:20:34 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46BCC163.8000906@dominion.kabel.utwente.nl>
+In-Reply-To: <1186761021.6405.45.camel@localhost.localdomain>
 MIME-Version: 1.0
-References: <46BCC163.8000906@dominion.kabel.utwente.nl>
-Subject: Re: [RFC] improving binutils-cross staging
+References: <74d0deb30708100622mb2c048et188fca0c03e8117e@mail.gmail.com>
+	<1186761021.6405.45.camel@localhost.localdomain>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [RFC] a small bbclass for task recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,109 +32,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Aug 2007 07:16:03 -0000
-X-Groupsio-MsgNum: 2675
-Content-Type: multipart/mixed; 
-	boundary="----=_Part_118984_4095113.1186816387505"
-
-------=_Part_118984_4095113.1186816387505
+X-List-Received-Date: Sat, 11 Aug 2007 10:23:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi Koen
-
-It seems you need development support installed. this configure option
---enable-install-libbfd should do it.
-Attached patch ( untested) should fix it.
-
-Thanks
-
--Khem
-
-On 8/10/07, Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
+On 8/10/07, Richard Purdie <rpurdie@rpsys.net> wrote:
 > Hi,
 >
-> For blackfin I need to build elf2flt and that needs some extra files from binutils:
+> On Fri, 2007-08-10 at 15:22 +0200, pHilipp Zabel wrote:
+> > while looking for the cause of several -dbg packages being included in
+> > my latest angstrom-x11-image builds, I noticed that some task packages
+> > have -dev, -doc and
+> > -dbg versions in the deploy directories because they don't set PACKAGES.
+> >
+> > To improve consistency, I propose to add a small task.bbclass that does set
+> > ALLOW_EMPTY="1", PACKAGES="${PN}" and PACKAGE_ARCH="all".
+> > That way simple task recipes can just "inherit task".
+> > (If needed, this could be enhanced later with a python script to automatically
+> > add -dbg packages that RRECOMMEND the -dbg versions of packages that
+> > the main package RDEPENDs upon.)
 >
-> - --- packages/binutils/binutils-cross_2.17.50.0.5.bb
-> d60bed4e513253708d05f83d02aecf9ca9441369
-> +++ packages/binutils/binutils-cross_2.17.50.0.5.bb
-> 208e1b60a5e66b05df64de9964cfdce963a37190
-> @@ -21,6 +21,15 @@ do_stage () {
->         rmdir ${CROSS_DIR}/${libdir} || :
->         rmdir ${CROSS_DIR}/${prefix} || :
->
-> +        oe_libinstall -a -C opcodes libopcodes ${CROSS_DIR}/${TARGET_SYS}/lib
-> +        oe_libinstall -a -C bfd libbfd ${CROSS_DIR}/${TARGET_SYS}/lib
-> +
-> +        install -d ${CROSS_DIR}/${TARGET_SYS}/include
-> +        install -d ${CROSS_DIR}/${TARGET_SYS}/include/elf
-> +
-> +        install -m 0644 bfd/bfd.h ${CROSS_DIR}/${TARGET_SYS}/include
-> +        install -m 0644 ${WORKDIR}/binutils-${PV}/include/elf/*.h
-> ${CROSS_DIR}/${TARGET_SYS}/include/elf/
-> +
->         # We want to move this into the target specific location
->         mkdir -p ${CROSS_DIR}/${TARGET_SYS}/lib
->         mv -f ${CROSS_DIR}/lib/libiberty.a ${CROSS_DIR}/${TARGET_SYS}/lib
->
-> It looks a bit ugly to me, does anyone have a better suggestion?
->
-> regards,
->
-> Koen
->
-> PS:
->
-> elf2flt_svn.bb:
-> PV = "0.0+svnr${SRCREV}"
-> inherit autotools cross
-> SRC_URI = "svn://sources.blackfin.uclinux.org/toolchain/trunk;module=${PN}"
-> S = "${WORKDIR}/${PN}"
-> EXTRA_OECONF = " --with-libbfd=${CROSS_DIR}/${TARGET_SYS}/lib/libbfd.a \
->                  --with-libiberty=${CROSS_DIR}/${TARGET_SYS}/lib/libiberty.a \
->                  --with-bfd-include-dir=${CROSS_DIR}/${TARGET_SYS}/include \
->                "
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFGvMFjMkyGM64RGpERAm7sAJ9/aEYcxAhXKd7Z79IivGFQ9lxZpACghyBy
-> qF+s0qRfgCTelH3Q/LXZSlo=
-> =4q6O
-> -----END PGP SIGNATURE-----
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Creating the -dev and -dbg packages for task packages is intentional.
+> The python code to create the RRECOMMENDS you mention already exists in
+> the form of depchains in package.bbclass.
 
-------=_Part_118984_4095113.1186816387505
-Content-Type: application/octet-stream; name="diff"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="diff"
-X-Attachment-Id: f_f57rtpye
+Ah, great. I guessed something similar would have to exist, as the process would
+be pretty much the same as for usual -dbg packages, right?
 
-IwojIG9sZF9yZXZpc2lvbiBbMmVjNTM1NGViMTU3NWVkZGUwZDA2ZTljYzRiYzZiODBhMzJhMmVh
-M10KIwojIHBhdGNoICJwYWNrYWdlcy9iaW51dGlscy9iaW51dGlscy1jcm9zc18yLjE3LjUwLjAu
-NS5iYiIKIyAgZnJvbSBbZDYwYmVkNGU1MTMyNTM3MDhkMDVmODNkMDJhZWNmOWNhOTQ0MTM2OV0K
-IyAgICB0byBbYjA3ZDA0ZWMwZGY2NTQwMTBhNGU1MGUwMDczYWMxYzM1ZGU2MGZhYV0KIyAKIyBw
-YXRjaCAicGFja2FnZXMvZ2xpYmMvZWdsaWJjX3N2bi5iYiIKIyAgZnJvbSBbODc5NjQ1ZDI5NGNm
-YjNhMDYwYjg4ZjVjZDMyZTdkM2MzNjA3ZTM5ZV0KIyAgICB0byBbYTg1YjhlYjk4MzdiYWM2OTAz
-ZTJkZGU4NTU2Mzg0MTcwZWZhNzgyMl0KIwo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KLS0tIHBhY2thZ2VzL2JpbnV0aWxzL2JpbnV0
-aWxzLWNyb3NzXzIuMTcuNTAuMC41LmJiCWQ2MGJlZDRlNTEzMjUzNzA4ZDA1ZjgzZDAyYWVjZjlj
-YTk0NDEzNjkKKysrIHBhY2thZ2VzL2JpbnV0aWxzL2JpbnV0aWxzLWNyb3NzXzIuMTcuNTAuMC41
-LmJiCWIwN2QwNGVjMGRmNjU0MDEwYTRlNTBlMDA3M2FjMWMzNWRlNjBmYWEKQEAgLTYsNyArNiw4
-IEBAIEVYVFJBX09FQ09ORiA9ICItLXdpdGgtc3lzcm9vdD0ke0NST1NTX0QKIEZJTEVTRElSID0g
-IiR7QG9zLnBhdGguZGlybmFtZShiYi5kYXRhLmdldFZhcignRklMRScsZCwxKSl9L2JpbnV0aWxz
-LSR7UFZ9IgogUEFDS0FHRVMgPSAiIgogRVhUUkFfT0VDT05GID0gIi0td2l0aC1zeXNyb290PSR7
-Q1JPU1NfRElSfS8ke1RBUkdFVF9TWVN9IFwKLQkJLS1wcm9ncmFtLXByZWZpeD0ke1RBUkdFVF9Q
-UkVGSVh9IgorCQktLXByb2dyYW0tcHJlZml4PSR7VEFSR0VUX1BSRUZJWH0gXAorCQktLWVuYWJs
-ZS1pbnN0YWxsLWxpYmJmZCIKIAogZG9fc3RhZ2UgKCkgewogCW9lX3J1bm1ha2UgaW5zdGFsbAo=
+> I know this works in poky as its how we create development and debugging
+> images, I can't remember whether it was enabled in OE.dev or not but the
+> code is there...
 
-------=_Part_118984_4095113.1186816387505--
+I was just wondering because most of the packages that explicitly set
+the PACKAGES variable in OE overwrite it completely, thus disabling
+-dev and -dbg.
+The code you speak of is not enabled for OE.dev as far as I can see,
+for example all angstrom -dbg task packages have the same dependencies
+as the main ones.
+How can I enable this?
+
+> Also, not all task packages are PACKAGE_ARCH = "all" although I guess
+> they'll be explicitly marked anyway.
+
+Yes, and in a few places PACKAGE_ARCH is set to "${MACHINE_ARCH}" although
+it should be kept at "all" and only some subpackages should be marked
+as machine specific. I think "all" is a sane default.
+
+Now my question is, do you, too, like the idea of introducing another
+bbclass for those defaults? :)
+I guess it should to something like
+PACKAGES = "${PN} ${PN}-dbg ${PN}-dev" or not touch packages at all,
+if the code also works for -doc and -locale and enable that code,
+however it is done.
+
+regards
+Philipp
+
+
