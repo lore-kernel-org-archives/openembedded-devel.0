@@ -1,30 +1,26 @@
-Received: from [212.47.7.226] (helo=ns.penguin.cz)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <utx@penguin.cz>) id 1IKCDk-0004gA-Dl
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Aug 2007 14:07:00 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id CFB6C3098768
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Aug 2007 14:06:54 +0200 (CEST)
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (penguin [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 25191-02
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Aug 2007 14:06:54 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 54A17309751C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Aug 2007 14:06:53 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46BA010A.1020106@dominion.kabel.utwente.nl>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IKD9m-0001C0-FD
+	for openembedded-devel@openembedded.org; Sun, 12 Aug 2007 15:06:58 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l7CD6mj1026099 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 12 Aug 2007 15:06:49 +0200
+Message-ID: <46BF05E4.9040609@dominion.kabel.utwente.nl>
+Date: Sun, 12 Aug 2007 15:06:44 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <46BA010A.1020106@dominion.kabel.utwente.nl>
-Date: Sun, 12 Aug 2007 14:06:52 +0200
-Message-Id: <1186920412.5193.15.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.8.2 
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at penguin.cz
+	<1186920412.5193.15.camel@utx.utx.cz>
+In-Reply-To: <1186920412.5193.15.camel@utx.utx.cz>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: Reminder: autotools 2.61 will be made default tomorrow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,44 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Aug 2007 12:07:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 12 Aug 2007 13:06:58 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-ERROR: '/OE/org.openembedded.dev/packages/autoconf/autoconf-native_2.61.bb' failed
+Stanislav Brabec schreef:
+> Koen Kooi wrote:
+> 
+> ERROR: '/OE/org.openembedded.dev/packages/autoconf/autoconf-native_2.61.bb' failed
+> 
+> It seems that we have a new requirement for the build environment:
+> /OE/build/tmp/work/x86_64-linux/autoconf-native-2.61-r0/autoconf-2.61/build-aux/missing: line 54: help2man: command not found
 
-It seems that we have a new requirement for the build environment:
-/OE/build/tmp/work/x86_64-linux/autoconf-native-2.61-r0/autoconf-2.61/build-aux/missing: line 54: help2man: command not found
+That's now new, sanity.bbclass has been checking for that for over a month now.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-After installation of help2man from distro repository, it works.
-
-I based my build environment on SuSE minimal compilation chroot. Here is
-(maybe outdated) list of required additional packages in the build
-environment.
-
-If you are interested, I can retry bootstrap of an actual OE to update
-this list.
-
-bison: Probably no more needed, added to native.
-python-devel: I don't remember why.
-subversion: For fetching.
-diffstat: I don't remember why.
-git: For fetching.
-help2man: For autoconf-2.61.
-monotone: For fetching org.openembedded.dev.
-zlib-devel: Probably ne more true, bug 2561.
-unzip: Probably no more needed, added to native. For spectrum_fw.
-wget: For fetching.
-gcc gcc-c++ libstdc++: Initial compilation.
-gcc33: Even if qemu now accepts gcc4, at least in SuSE it does not work.
-bc: For linux-rp on collie.
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+iD8DBQFGvwXkMkyGM64RGpERAml6AJ0aTWGZGo5u9RJ0v/PFxUYId7TSJQCdE1Hw
+AaDt8i6l1Yb7MmQ4x+BONOs=
+=u+tI
+-----END PGP SIGNATURE-----
 
 
