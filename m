@@ -1,31 +1,29 @@
 Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1ILHMf-0002Zo-IX
+	(envelope-from <mickey@vanille-media.de>) id 1ILN2B-0007Xs-JS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Aug 2007 13:48:41 +0200
+	Wed, 15 Aug 2007 19:52:02 +0200
 Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 4FBB028C013; Wed, 15 Aug 2007 13:45:41 +0200 (CEST)
+	id 808A728C013; Wed, 15 Aug 2007 19:48:52 +0200 (CEST)
 X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
 	srv043.dedi23.de
 X-Spam-Level: ***
-X-Spam-Status: No, score=3.7 required=5.0 tests=AWL,BAYES_00,
+X-Spam-Status: No, score=3.8 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
 	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
 Received: from PROMETHEUS (e180191029.adsl.alicedsl.de [85.180.191.29])
-	by srv043.dedi23.de (Postfix) with ESMTP id 913EC28C012;
-	Wed, 15 Aug 2007 13:45:40 +0200 (CEST)
-Date: Wed, 15 Aug 2007 13:48:17 +0200
+	by srv043.dedi23.de (Postfix) with ESMTP id 4E80728C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Aug 2007 19:48:49 +0200 (CEST)
+Date: Wed, 15 Aug 2007 19:51:26 +0200
 From: "Dr. Michael Lauer" <mickey@vanille-media.de>
 X-Mailer: The Bat! (v3.99.3) Professional
 Organization: Vanille-Media
 X-Priority: 3 (Normal)
-Message-ID: <1468519352.20070815134817@vanille-media.de>
-To: Vamsi <pvamsikris@gmail.com>
-In-Reply-To: <8852460a0708150423j3c6a949bue5b17b379b43e78c@mail.gmail.com>
-References: <8852460a0708150423j3c6a949bue5b17b379b43e78c@mail.gmail.com>
+Message-ID: <977083614.20070815195126@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: BitBake Compilation errors
+Subject: Python 2.5.1 coming / End-of-life for PyQt-Embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,18 +37,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Aug 2007 11:48:41 -0000
+X-List-Received-Date: Wed, 15 Aug 2007 17:52:16 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Vamsi wrote:
->  I could resolve the issue with a different version of bitbake. I was
-> getting this issue with the bitbake 1.8.2 when i moved on to the
-> latest one it disappeared.
+Hi guys,
 
-I'm sorry, but downgrading to 1.8.2 is not an advisable mid-term
-solution, since you will miss important features -- I'd rather suggest
-following Richard's advice and upgrading your python-sqlite2 package.
+I'm going to push a major Python upgrade in the next couple of days.
+The migration to 2.5.1 should be fairly painless with the exception of
+a couple of end-of-life-packages for which no 2.5.x support exists.
+
+The main problem is PyQt for Qt/Embedded 2.x. I would like to
+completely drop support for all this or hand it over to someone else.
+Is anyone actually running pyqt applications on Opie these days
+anyways?
 
 Regards,
 
