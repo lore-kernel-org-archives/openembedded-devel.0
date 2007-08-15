@@ -1,19 +1,31 @@
-Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pvamsikris@gmail.com>) id 1ILADh-0005ud-M8
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Aug 2007 06:10:57 +0200
-Received: by ug-out-1314.google.com with SMTP id i24so161077ugd
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2007 21:10:36 -0700 (PDT)
-Received: by 10.67.98.4 with SMTP id a4mr1124157ugm.1187151003924;
-	Tue, 14 Aug 2007 21:10:03 -0700 (PDT)
-Received: by 10.66.238.19 with HTTP; Tue, 14 Aug 2007 21:10:03 -0700 (PDT)
-Message-ID: <8852460a0708142110v47dbde97r3478b5c0fbe6b680@mail.gmail.com>
-Date: Wed, 15 Aug 2007 04:10:03 +0000
-From: Vamsi <pvamsikris@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1ILFZa-0001C8-K3
+	for openembedded-devel@openembedded.org; Wed, 15 Aug 2007 11:53:54 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7F9rWDo023142
+	for <openembedded-devel@openembedded.org>;
+	Wed, 15 Aug 2007 10:53:32 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 22751-09 for <openembedded-devel@openembedded.org>;
+	Wed, 15 Aug 2007 10:53:28 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7F9rRUx023135
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 15 Aug 2007 10:53:27 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <8852460a0708140740r4eca93ddhb9d04b7e506ae010@mail.gmail.com>
+References: <8852460a0708140740r4eca93ddhb9d04b7e506ae010@mail.gmail.com>
+Date: Wed, 15 Aug 2007 10:53:27 +0100
+Message-Id: <1187171607.6609.20.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: BitBake Compilation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -28,16 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Aug 2007 04:10:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Aug 2007 09:53:55 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi Jim
- As mentioned in the Getting Started. But one part that missed out is
-the things specific for my distro. I am going to try on that and see.
+Hi,
 
-Thanks
-Vamsi
+On Tue, 2007-08-14 at 14:40 +0000, Vamsi wrote:
+>     pd.delDomain("BB_URI_HEADREVS")
+>   File "bitbake-1.8/lib/bb/persist_data.py", line 66, in delDomain
+> AttributeError: 'pysqlite2.dbapi2.Connection' object has no attribute 'execute'
+
+This looks like an old version of python which has a pysqlite2 module
+missing features we use. Which version of python and pysqlite2 is this
+and can you upgrade it?
+
+Regards,
+
+Richard
+
 
 
