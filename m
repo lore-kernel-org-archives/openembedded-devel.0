@@ -1,33 +1,23 @@
-Received: from [202.173.155.195] (helo=birgitte.twibble.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lenehan@twibble.org>) id 1IMK76-0005ab-Iw
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Aug 2007 10:56:56 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by birgitte.twibble.org (Postfix) with ESMTP id 032BDE349C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2007 18:56:15 +1000 (EST)
-Received: from birgitte.twibble.org ([127.0.0.1])
-	by localhost (birgitte [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 18354-02
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2007 18:56:14 +1000 (EST)
-Received: from nynaeve.twibble.org (nynaeve.twibble.org [202.173.155.194])
-	by birgitte.twibble.org (Postfix) with ESMTP id 89D56E3499
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2007 18:56:14 +1000 (EST)
-Received: by nynaeve.twibble.org (Postfix, from userid 500)
-	id 20E70B70149; Sat, 18 Aug 2007 18:56:13 +1000 (EST)
-Date: Sat, 18 Aug 2007 18:56:13 +1000
-From: Jamie Lenehan <lenehan@twibble.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070818085613.GA28491@twibble.org>
-References: <E1IK9nA-00024I-AJ@linuxtogo.org>
-MIME-Version: 1.0
-In-Reply-To: <E1IK9nA-00024I-AJ@linuxtogo.org>
-User-Agent: Mutt/1.5.12-2006-07-14
-X-Virus-Scanned: by amavisd at twibble.org
-Subject: Re: [oe-commits] org.oe.dev linux-linux-headers: add 2.6.22
+	(envelope-from <zecke@selfish.org>)
+	id 1IMTjw-0004CN-S3; Sat, 18 Aug 2007 21:13:40 +0200
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>)
+	id 1IMTjF-0008UR-Tj; Sat, 18 Aug 2007 21:12:58 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <44C22A1C-2EC8-41C9-AC47-17C35A1389A2@selfish.org>
+From: Holger Freyther <zecke@selfish.org>
+Date: Sat, 18 Aug 2007 21:12:45 +0200
+To: openembedded-users@lists.openembedded.org
+X-Pgp-Agent: GPGMail 1.1.2 (Tiger)
+X-Gpgmail-State: signed
+X-Mailer: Apple Mail (2.752.3)
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: [ANN] BitBake 1.8.8 available for download
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,39 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Aug 2007 08:56:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 18 Aug 2007 19:13:41 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Aug 12, 2007 at 07:35:32PM +1000, "koen commit" wrote:
-> linux-linux-headers: add 2.6.22
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This prompted me try something newer then 2.6.15.99 for my sh4 builds
-again. Turn out a "make allnoconfig" gets stuck in an infitinite loop
-for sh (looks like it's something to do with no boards being
-defined).
+For Your Information,
 
-Anyway, the following works fine. Is there any particular problem
-with doing this?
+Version 1.8.8 of BitBake from the stable branch is available for  
+download [1]. Thanks to the hard labor of Richard this release  
+contains support for SRCREV, bug fixes and speed improvements. For  
+more changes please consult the ChangeLog.
+
+This release adds a requirement on pysqlite2 for sqlite3. On most  
+distributions this package is called python-pysqlite2. It is required  
+to support concurrent access to persistent data. This is a  
+requirement of the SRCREV implementation.
+
+We have tested the branch on old and new OE metadata and it should  
+work for you as well. Please send comments and issues to the bitbake- 
+dev mailinglist and file bug reports.
 
 
---- packages/linux-libc-headers/linux-libc-headers_2.6.22.bb    315a90b6e90272ad612070887ceec548917a74d4
-+++ packages/linux-libc-headers/linux-libc-headers_2.6.22.bb    a6e80aafcd97a39d08120df35a02a98f43221432
-@@ -32,7 +32,11 @@ do_configure() {
- 
- do_configure() {
-        set_arch
--       oe_runmake allnoconfig ARCH=$ARCH
-+        if [ ${ARCH} = "sh" ]; then
-+           oe_runmake allyesconfig ARCH=$ARCH
-+        else
-+           oe_runmake allnoconfig ARCH=$ARCH
-+        fi
- }
- 
- do_compile () {
+kind regards
+	z.
 
--- 
- Jamie Lenehan <lenehan@twibble.org>
+
+
+
+
+
+
+[1]  http://download.berlios.de/bitbake/bitbake-1.8.8.tar.gz and  
+http://download2.berlios.de/bitbake/bitbake-1.8.8.tar.gz
+PS: 78f6c7507d33e7dcd7e001e7c7c113898114f001d3489e30a2ad556c56139171   
+bitbake-1.8.8.tar.gz
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.7 (Darwin)
+
+iD8DBQFGx0SvGckbdURWU2oRAiI0AJ9sa8ExX+f8paQYxnohN51WZM3CjQCcCsiW
+6ZImbCpEX30yCOKJVfnT1vc=
+=/Hjh
+-----END PGP SIGNATURE-----
 
 
