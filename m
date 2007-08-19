@@ -1,23 +1,31 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>)
-	id 1IMTjw-0004CN-S3; Sat, 18 Aug 2007 21:13:40 +0200
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>)
-	id 1IMTjF-0008UR-Tj; Sat, 18 Aug 2007 21:12:58 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-Message-Id: <44C22A1C-2EC8-41C9-AC47-17C35A1389A2@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Sat, 18 Aug 2007 21:12:45 +0200
-To: openembedded-users@lists.openembedded.org
-X-Pgp-Agent: GPGMail 1.1.2 (Tiger)
-X-Gpgmail-State: signed
-X-Mailer: Apple Mail (2.752.3)
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: [ANN] BitBake 1.8.8 available for download
+	(envelope-from <mickey@vanille-media.de>)
+	id 1IMYd4-0007GY-Cl; Sun, 19 Aug 2007 02:26:55 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 1523128C013; Sun, 19 Aug 2007 02:23:25 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180165084.adsl.alicedsl.de [85.180.165.84])
+	by srv043.dedi23.de (Postfix) with ESMTP id 5BA9B28C012;
+	Sun, 19 Aug 2007 02:23:24 +0200 (CEST)
+Date: Sun, 19 Aug 2007 02:26:08 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <9366194.20070819022608@vanille-media.de>
+To: openembedded-users@lists.openembedded.org, 
+	<openembedded-devel@lists.openembedded.org>, 
+	bitbake-dev <bitbake-dev@lists.berlios.de>
+In-Reply-To: <44C22A1C-2EC8-41C9-AC47-17C35A1389A2@selfish.org>
+References: <44C22A1C-2EC8-41C9-AC47-17C35A1389A2@selfish.org>
+MIME-Version: 1.0
+Subject: Re: [ANN] BitBake 1.8.8 available for download
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,49 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Aug 2007 19:13:41 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Sun, 19 Aug 2007 00:26:56 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Congrats on the release and thanks for all your hard work!
 
-For Your Information,
+> This release adds a requirement on pysqlite2 for sqlite3. On most
+> distributions this package is called python-pysqlite2.
 
-Version 1.8.8 of BitBake from the stable branch is available for  
-download [1]. Thanks to the hard labor of Richard this release  
-contains support for SRCREV, bug fixes and speed improvements. For  
-more changes please consult the ChangeLog.
+I might add that since Python 2.5, sqlite is included in the Python
+distribution.
 
-This release adds a requirement on pysqlite2 for sqlite3. On most  
-distributions this package is called python-pysqlite2. It is required  
-to support concurrent access to persistent data. This is a  
-requirement of the SRCREV implementation.
+Regards,
 
-We have tested the branch on old and new OE metadata and it should  
-work for you as well. Please send comments and issues to the bitbake- 
-dev mailinglist and file bug reports.
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
-
-kind regards
-	z.
-
-
-
-
-
-
-
-[1]  http://download.berlios.de/bitbake/bitbake-1.8.8.tar.gz and  
-http://download2.berlios.de/bitbake/bitbake-1.8.8.tar.gz
-PS: 78f6c7507d33e7dcd7e001e7c7c113898114f001d3489e30a2ad556c56139171   
-bitbake-1.8.8.tar.gz
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.7 (Darwin)
-
-iD8DBQFGx0SvGckbdURWU2oRAiI0AJ9sa8ExX+f8paQYxnohN51WZM3CjQCcCsiW
-6ZImbCpEX30yCOKJVfnT1vc=
-=/Hjh
------END PGP SIGNATURE-----
 
 
