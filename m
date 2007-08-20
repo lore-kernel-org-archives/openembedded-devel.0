@@ -1,29 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IN5ia-0000Je-77
-	for openembedded-devel@openembedded.org; Mon, 20 Aug 2007 13:46:48 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l7KBjo1R027611 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2007 13:45:51 +0200
-Message-ID: <46C97EFE.2080007@dominion.kabel.utwente.nl>
-Date: Mon, 20 Aug 2007 13:46:06 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1IIPXa-0005bT-C3@linuxtogo.org>	<1186499800.5653.62.camel@localhost.localdomain>
+	(envelope-from <openembedded@hrw.one.pl>) id 1IN68I-0000oS-6X
+	for openembedded-devel@openembedded.org; Mon, 20 Aug 2007 14:13:22 +0200
+Received: (qmail 26946 invoked by uid 813007); 20 Aug 2007 12:12:29 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 20 Aug 2007 12:12:29 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 20 Aug 2007 14:12:17 +0200
+User-Agent: KMail/1.9.7
+References: <E1IIPXa-0005bT-C3@linuxtogo.org>
 	<200708201332.29985.openembedded@hrw.one.pl>
-In-Reply-To: <200708201332.29985.openembedded@hrw.one.pl>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	l7KBjo1R027611
+	<46C97EFE.2080007@dominion.kabel.utwente.nl>
+In-Reply-To: <46C97EFE.2080007@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200708201412.18032.openembedded@hrw.one.pl>
 Subject: Re: [oe-commits] org.oe.dev linux 2.6.22: Alix boards use bzImage kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,50 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2007 11:46:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 20 Aug 2007 12:13:22 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia poniedzia=C5=82ek, 20 sierpnia 2007, Koen Kooi napisa=C5=82:
+> Marcin Juszkiewicz schreef:
+> > Dnia wtorek, 7 sierpnia 2007, Richard Purdie napisa=C5=82:
+> >> On Tue, 2007-08-07 at 15:56 +0200, hrw commit wrote:
 
-Marcin Juszkiewicz schreef:
-> Dnia wtorek, 7 sierpnia 2007, Richard Purdie napisa=C5=82:
->> On Tue, 2007-08-07 at 15:56 +0200, hrw commit wrote:
->>> packages/linux/linux.inc	86d436757b3b9cb61a1a381d76950ef21596b40c
->>> +++ packages/linux/linux.inc	a948d889b8d420c7a04eb140caaa353601fa7722
->>> @@ -11,6 +11,7 @@ inherit kernel
->>>
->>>  inherit kernel
->>>
->>> +KERNEL_IMAGETYPE_alix =3D "bzImage"
->>>  KERNEL_IMAGETYPE_progear =3D "bzImage"
->>>  KERNEL_IMAGETYPE_simpad =3D "zImage"
->>>  KERNEL_IMAGETYPE_kb9202 =3D "uImage"
->> Should these not really go into the machine.conf files?
->=20
-> Right - I looked at it and prepared patch. It removes=20
-> KERNEL_IMAGETYPE =3D "zImage" entries from kernel recipes and also sets
-> this variable into bzImage for x86 machines which already use that type
-> of kernels. Rest of machines are untouched (yet) - I can convert them i=
-f
-> we reach consensus about it.
->=20
-> Please review and comment.
+> > Right - I looked at it and prepared patch. It removes
+> > KERNEL_IMAGETYPE =3D "zImage" entries from kernel recipes and also sets
+> > this variable into bzImage for x86 machines which already use that
+> > type of kernels. Rest of machines are untouched (yet) - I can convert
+> > them if we reach consensus about it.
 
-What about poking machine maintainer to start using linux.inc direcly as =
-well instead of
-duplicating it?
+> What about poking machine maintainer to start using linux.inc direcly
+> as well instead of duplicating it?
 
-regards,
+Some parts of linux.inc stuff should probably go into kernel.bbclass so we=
+=20
+will get it included in all kernel recipes. Things like EABI/OABI=20
+automagic for ARM, creating of archive with kernel modules are nice=20
+addons.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+But linux.inc is another thing then KERNEL_IMAGETYPE cleanup. But I have=20
+to admit that I missed it during first part of cleaning.
 
-iD8DBQFGyX7+MkyGM64RGpERAsD0AKCSAYvY2XbMLFZAXpr5IHpi1TZLiQCfQzP5
-seC/1I7mSPzgum86h+ldOZI=3D
-=3DBCK8
------END PGP SIGNATURE-----
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+  I don't know what your problem is, but I'll bet it's hard to pronounce.
+
+
 
 
