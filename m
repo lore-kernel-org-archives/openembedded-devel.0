@@ -1,23 +1,25 @@
-Received: from [72.29.79.205] (helo=rhodos.klever.net)
+Received: from [209.85.198.185] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1IN7nr-0005jD-Es
+	(envelope-from <raj.khem@gmail.com>) id 1INBqU-0001iw-E2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2007 16:00:26 +0200
-Received: from pd953ba6e.dip0.t-ipconnect.de ([217.83.186.110]
-	helo=olympus.klever.net)
-	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1IN7my-0006oF-33
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2007 15:59:28 +0200
-Message-ID: <46C99CF1.2040502@klever.net>
-Date: Mon, 20 Aug 2007 15:53:53 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070815)
+	Mon, 20 Aug 2007 20:19:22 +0200
+Received: by rv-out-0910.google.com with SMTP id c24so981149rvf
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Aug 2007 11:18:26 -0700 (PDT)
+Received: by 10.140.132.8 with SMTP id f8mr882505rvd.1187633906085;
+	Mon, 20 Aug 2007 11:18:26 -0700 (PDT)
+Received: from dhcp20.mvista.com ( [63.81.120.158])
+	by mx.google.com with ESMTPS id k14sm889472rvb.2007.08.20.11.18.25
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 20 Aug 2007 11:18:25 -0700 (PDT)
+Message-ID: <46C9DAE5.30309@gmail.com>
+Date: Mon, 20 Aug 2007 11:18:13 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <200708201541.54798.openembedded@hrw.one.pl>
-In-Reply-To: <200708201541.54798.openembedded@hrw.one.pl>
-Subject: Re: QEmu update from Poky
+X-Enigmail-Version: 0.95.3
+Subject: Drop omap-2430-lcd patch.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,30 +33,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2007 14:00:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 20 Aug 2007 18:19:25 -0000
+Content-Type: multipart/mixed; boundary="------------090304010105040706000301"
+
+--------------090304010105040706000301
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-> In Poky we use qemu 0.9+20070613 for some time. It works on i386 and amd64 
-> build machines and generate binary locales for ARM without problems.
-> 
-> OE use old 0.8.2 version which fails on amd64. There is also 0.9+20070701 
-> version set as non-default and this one should work on amd64 machines 
-> (but probably will fail on i386 due to lack of MAP_32BIT on this arch).
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-yes, the failure is even confirmed.
+Hello
 
-> I plan to replace old 0.8.2 and 0.9+20070701 versions by 0.9+20070613 from 
-> Poky to give people version which works on 32/64 machines without 
-> problems. This version has also some other extras added by OH - like 
-> touchscreen emulation based on USB Wacom tablet emulation.
-> 
-> Any objections?
-
-Would be great, I was planning to take care of it for quite a while, but 
-  haven't got my hands on it yet.
-
-Love,
-H
+This patch is no longer required as it has been committed upstream.
+OK?
 
 
+Thanks
+
+- -Khem
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.7 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFGydpRHnJKy6V6em4RAnPZAJ0SyBqDUDswrkHoAUN5pz5MVKnZ9gCeKLZZ
+XkbYyJWTiQcs4K5PVpzaggM=
+=7RiI
+-----END PGP SIGNATURE-----
+
+#
+# old_revision [6951a4bf0c57a677b8f2cdf1144402fe1358e3e1]
+#
+# delete "packages/linux/linux-omap2-git/omap-2430-lcd.patch"
+# 
+# patch "conf/machine/include/tune-arm1136jf-s.conf"
+#  from [5a3e5932acd2c4060744b80a29575afe2d4371c9]
+#    to [3a32f71999f930e828ad32e4ce1e7af1b4dc9662]
+# 
+# patch "packages/linux/linux-omap2_git.bb"
+#  from [ab62a543cf001bbe863e1adb93758519b57f7036]
+#    to [51f14792a8bc6ce3690fa88f529d8b7a51ef40d9]
+#
+============================================================
+--- conf/machine/include/tune-arm1136jf-s.conf	5a3e5932acd2c4060744b80a29575afe2d4371c9
++++ conf/machine/include/tune-arm1136jf-s.conf	3a32f71999f930e828ad32e4ce1e7af1b4dc9662
+============================================================
+--- packages/linux/linux-omap2_git.bb	ab62a543cf001bbe863e1adb93758519b57f7036
++++ packages/linux/linux-omap2_git.bb	51f14792a8bc6ce3690fa88f529d8b7a51ef40d9
+@@ -7,7 +7,6 @@ SRC_URI = "git://source.mvista.com/git/l
+ COMPATIBLE_MACHINE = "omap2430sdp"
+ 
+ SRC_URI = "git://source.mvista.com/git/linux-omap-2.6.git;protocol=git \
+-           file://omap-2430-lcd.patch;patch=1;pnum=1 \
+            file://defconfig.eabi \
+            file://defconfig"
+ 
+
+--------------090304010105040706000301--
