@@ -1,26 +1,22 @@
-Received: from [209.85.198.187] (helo=rv-out-0910.google.com)
+Received: from [64.233.184.231] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1INEWo-0001fO-Tl
+	(envelope-from <leon.woestenberg@gmail.com>) id 1INFBc-0006LW-0r
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2007 23:11:15 +0200
-Received: by rv-out-0910.google.com with SMTP id c24so1008867rvf
+	Mon, 20 Aug 2007 23:53:24 +0200
+Received: by wr-out-0506.google.com with SMTP id c46so1020820wra
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2007 14:10:17 -0700 (PDT)
-Received: by 10.141.209.7 with SMTP id l7mr2982272rvq.1187644217760;
-	Mon, 20 Aug 2007 14:10:17 -0700 (PDT)
-Received: from sweta-singhs-computer.local ( [71.146.5.204])
-	by mx.google.com with ESMTPS id l31sm1818053rvb.2007.08.20.14.10.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 20 Aug 2007 14:10:17 -0700 (PDT)
-Message-ID: <46CA0337.9050709@gmail.com>
-Date: Mon, 20 Aug 2007 14:10:15 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
+	Mon, 20 Aug 2007 14:52:24 -0700 (PDT)
+Received: by 10.90.50.1 with SMTP id x1mr38155agx.1187646744057;
+	Mon, 20 Aug 2007 14:52:24 -0700 (PDT)
+Received: by 10.90.31.16 with HTTP; Mon, 20 Aug 2007 14:52:24 -0700 (PDT)
+Message-ID: <c384c5ea0708201452q3b596e76j8d7623cd6907c799@mail.gmail.com>
+Date: Mon, 20 Aug 2007 23:52:24 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <46CA0337.9050709@gmail.com>
+MIME-Version: 1.0
 References: <c384c5ea0708201339j44462d85o286bbb548b256aec@mail.gmail.com>
-In-Reply-To: <c384c5ea0708201339j44462d85o286bbb548b256aec@mail.gmail.com>
-X-Enigmail-Version: 0.95.3
+	<46CA0337.9050709@gmail.com>
 Subject: Re: Add Intel Core 2 machine support (prescott and nocona)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,52 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2007 21:11:15 -0000
+X-List-Received-Date: Mon, 20 Aug 2007 21:53:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Khem,
 
-Leon Woestenberg wrote:
-> Hello,
-> 
-> I would like to add support for Intel's Core 2 processors, in both 32
-> and 64 bit mode.
-> 
-> I am wondering what namespace to use for the PACKAGE ARCHs?
-> 
-> Given all the options[*], I think "x86-prescott" and "x86_64-nocona"
-> are suitable:
-> 
-> x86_64-prescott= x86_32-core = x86_32-core2
-> x86_64-nocona = x86_64-core2
-> 
-> The naming is a bit to long to suite my taste, maybe prescott and
-> nocona are enough?
-> 
-> I would like some input on this before I commit anything and pollute
-> the namespace.
-> 
-> Regards,
+thanks for the feedback.
 
-I would suggest just add conf/machine/core2.conf and another
-conf/machine/tune-core2.inc file to have the special gcc flags.  I would
-not add it as a separate arch but stick with x86. To me it sounds more
-confusing to have x86 and core separated out into two different basic
-arches.
+On 8/20/07, Khem Raj <raj.khem@gmail.com> wrote:
+> I would suggest just add conf/machine/core2.conf and another
+> conf/machine/tune-core2.inc file to have the special gcc flags.  I would
+> not add it as a separate arch but stick with x86. To me it sounds more
+> confusing to have x86 and core separated out into two different basic
+> arches.
+>
+My current proposal is:
 
-Just my 2 cents.
+conf/machine/x86_32-prescott.conf
+conf/machine/include/x86_32-prescott.conf
+-arch=prescott
+TARGET_ARCH=i686
 
-- -Khem
+conf/machine/x86_64-nocona.conf
+conf/machine/include/x86_64-nocona.conf
+-arch=nocona
+TARGET_ARCH=x86_64
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.7 (Darwin)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+starting with GCC 4.3:
+conf/machine/x86_64-core2.conf
+conf/machine/include/x86_64-core2.conf
+-arch=core2
+TARGET_ARCH=x86_64
 
-iD8DBQFGygM3HnJKy6V6em4RAnk4AJ0Xw4JlBqos/8xA60x59GkAbOYvhwCffGm+
-AMhMc3UVpCmd1qTCmlVT570=
-=ES0x
------END PGP SIGNATURE-----
+The remaining issue is that the TARGET_ARCH suggests that the
+resulting packages run on any i686 or x86_64 which is not necessarely
+true due to the instruction set being used.
+
+Although we could create more generic machines, my direct interest is
+in (live) media encoding and some packages will use SSE3 and SSSE3.
+
+Regards,
+
+Leon.
 
 
