@@ -1,36 +1,31 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IN7Yq-0004qs-Eg
-	for openembedded-devel@openembedded.org; Mon, 20 Aug 2007 15:44:59 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7KDhkEO028001
-	for <openembedded-devel@openembedded.org>;
-	Mon, 20 Aug 2007 14:43:46 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 27704-06 for <openembedded-devel@openembedded.org>;
-	Mon, 20 Aug 2007 14:43:42 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7KDheXx027995
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 20 Aug 2007 14:43:40 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200708201332.29985.openembedded@hrw.one.pl>
-References: <E1IIPXa-0005bT-C3@linuxtogo.org>
-	<1186499800.5653.62.camel@localhost.localdomain>
-	<200708201332.29985.openembedded@hrw.one.pl>
-Date: Mon, 20 Aug 2007 14:43:39 +0100
-Message-Id: <1187617419.5744.13.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
-	l7KDhkEO028001
-Subject: Re: [oe-commits] org.oe.dev linux 2.6.22: Alix boards use	bzImage	kernels
+	(envelope-from <mickey@vanille-media.de>) id 1IN7ZH-0004tY-9s
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Aug 2007 15:45:19 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 522DF28C013; Mon, 20 Aug 2007 15:41:37 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180175206.adsl.alicedsl.de [85.180.175.206])
+	by srv043.dedi23.de (Postfix) with ESMTP id 535AC28C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Aug 2007 15:41:34 +0200 (CEST)
+Date: Mon, 20 Aug 2007 15:44:22 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <425909324.20070820154422@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200708201541.54798.openembedded@hrw.one.pl>
+References: <200708201541.54798.openembedded@hrw.one.pl>
+MIME-Version: 1.0
+Subject: Re: QEmu update from Poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,39 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2007 13:44:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 20 Aug 2007 13:45:20 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-On Mon, 2007-08-20 at 13:32 +0200, Marcin Juszkiewicz wrote:
-> Dnia wtorek, 7 sierpnia 2007, Richard Purdie napisa=C5=82:
-> > On Tue, 2007-08-07 at 15:56 +0200, hrw commit wrote:
-> > > packages/linux/linux.inc	86d436757b3b9cb61a1a381d76950ef21596b40c
-> > > +++ packages/linux/linux.inc	a948d889b8d420c7a04eb140caaa353601fa77=
-22
-> > > @@ -11,6 +11,7 @@ inherit kernel
-> > >
-> > >  inherit kernel
-> > >
-> > > +KERNEL_IMAGETYPE_alix =3D "bzImage"
-> > >  KERNEL_IMAGETYPE_progear =3D "bzImage"
-> > >  KERNEL_IMAGETYPE_simpad =3D "zImage"
-> > >  KERNEL_IMAGETYPE_kb9202 =3D "uImage"
-> >
-> > Should these not really go into the machine.conf files?
->=20
-> Right - I looked at it and prepared patch. It removes=20
-> KERNEL_IMAGETYPE =3D "zImage" entries from kernel recipes and also sets
-> this variable into bzImage for x86 machines which already use that type
-> of kernels. Rest of machines are untouched (yet) - I can convert them i=
-f
-> we reach consensus about it.
+Marcin Juszkiewicz wrote:
+> In Poky we use qemu 0.9+20070613 for some time. It works on i386 and amd64
+> build machines and generate binary locales for ARM without problems.
 
-Looks like a good start to me :)
+> OE use old 0.8.2 version which fails on amd64. There is also 0.9+20070701
+> version set as non-default and this one should work on amd64 machines 
+> (but probably will fail on i386 due to lack of MAP_32BIT on this arch).
 
-Cheers,
+> I plan to replace old 0.8.2 and 0.9+20070701 versions by 0.9+20070613 from
+> Poky to give people version which works on 32/64 machines without 
+> problems. This version has also some other extras added by OH - like 
+> touchscreen emulation based on USB Wacom tablet emulation.
 
-Richard
+> Any objections?
+
+None here.
+
+
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
