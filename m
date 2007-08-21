@@ -1,23 +1,21 @@
-Received: from [72.29.79.205] (helo=rhodos.klever.net)
+Received: from [209.85.162.179] (helo=el-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1INVrb-0002WJ-Jz
+	(envelope-from <hvontres@gmail.com>) id 1INaXT-0001UY-NR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Aug 2007 17:41:51 +0200
-Received: from pd95385de.dip0.t-ipconnect.de ([217.83.133.222]
-	helo=olympus.klever.net)
-	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1INVqP-0007Nx-Lb
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Aug 2007 17:40:40 +0200
-Message-ID: <46CB075C.5060609@klever.net>
-Date: Tue, 21 Aug 2007 17:40:12 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070815)
-MIME-Version: 1.0
+	Tue, 21 Aug 2007 22:41:26 +0200
+Received: by el-out-1112.google.com with SMTP id z25so245359ele
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Aug 2007 13:40:22 -0700 (PDT)
+Received: by 10.142.232.20 with SMTP id e20mr1111132wfh.1187728821609;
+	Tue, 21 Aug 2007 13:40:21 -0700 (PDT)
+Received: by 10.143.11.12 with HTTP; Tue, 21 Aug 2007 13:40:21 -0700 (PDT)
+Message-ID: <a7f8874a0708211340n17130132u1b400e91dcc7bcfd@mail.gmail.com>
+Date: Tue, 21 Aug 2007 13:40:21 -0700
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1187692103.6234.7.camel@localhost.localdomain>
-In-Reply-To: <1187692103.6234.7.camel@localhost.localdomain>
-Subject: Re: RFC: Upgrade OE.dev to bitbake 1.8.8
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Is http://www.openembedded.org/aggregator/sources still being used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,33 +29,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2007 15:41:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 21 Aug 2007 20:41:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Works for me too, as far as I can tell. The package in question turned 
-out to be pysqlite on gentoo (just for the record).
+I have noticed that http://www.openembedded.org/aggregator/sources hasn't
+been updated in ~10 weeks. Is this page no longer being used? If so, what is
+the recommended replacement?
 
-Love,
-H
-
-Richard Purdie wrote:
-> Hi,
-> 
-> There are lots of good changes in bitbake 1.8.8. Providing no major
-> issues are found with that bitbake release should we make it the minimum
-> version requirement for OE.dev in say two weeks? Any objections?
-> 
-> Regards,
-> 
-> Richard
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+Thanks,
+Henry
 
