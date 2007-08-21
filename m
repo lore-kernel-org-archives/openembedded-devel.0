@@ -1,30 +1,22 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1INR9X-0005YA-Fk
-	for openembedded-devel@openembedded.org; Tue, 21 Aug 2007 12:40:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7LAd5Cd016070
-	for <openembedded-devel@openembedded.org>;
-	Tue, 21 Aug 2007 11:39:05 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 15901-04 for <openembedded-devel@openembedded.org>;
-	Tue, 21 Aug 2007 11:39:01 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7LAcwbR016064
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 21 Aug 2007 11:38:58 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Tue, 21 Aug 2007 11:38:57 +0100
-Message-Id: <1187692737.6234.14.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: RFC: Merging multimachine.bbclass as the default
+	(envelope-from <raj.khem@gmail.com>) id 1INVCC-0006Eq-MH
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Aug 2007 16:59:04 +0200
+Received: by nz-out-0506.google.com with SMTP id j2so587453nzf
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Aug 2007 07:58:04 -0700 (PDT)
+Received: by 10.114.77.1 with SMTP id z1mr1459732waa.1187708283442;
+	Tue, 21 Aug 2007 07:58:03 -0700 (PDT)
+Received: by 10.115.73.16 with HTTP; Tue, 21 Aug 2007 07:58:03 -0700 (PDT)
+Message-ID: <19c1b8a90708210758s53197360g74245a9feedcd748@mail.gmail.com>
+Date: Tue, 21 Aug 2007 07:58:03 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1187692103.6234.7.camel@localhost.localdomain>
+MIME-Version: 1.0
+References: <1187692103.6234.7.camel@localhost.localdomain>
+Subject: Re: RFC: Upgrade OE.dev to bitbake 1.8.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,34 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2007 10:40:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 21 Aug 2007 14:59:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I've just discovered some problems with the way we store data in
-${STAGING_DIR}/pkgdata. The problem is it can be machine specific e.g.
-machine A might build kernel module X, machine B might not. This means
-the data there can be invalid and if you try to re build packages it can
-crash and burn badly.
+On 8/21/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> Hi,
+>
+> There are lots of good changes in bitbake 1.8.8. Providing no major
+> issues are found with that bitbake release should we make it the minimum
+> version requirement for OE.dev in say two weeks? Any objections?
 
-In principle this is simple to fix, we just define the PKGDATA path in
-bitbake.conf and then override it in multimachine.bbclass.
+It builds angstrom-console-image for my arm targets. So the little I
+use it for I have no objections. :)
 
-It does make me wonder if its time to merge multimachine into the
-standard class/conf files though? It doesn't seem to harm anything, it
-seems to work well and lots of people are using it. Anyone for or
-against making it default?
-
-We could even create a "nomultimachine.bbclass" if people wanted a
-compatibility route but I think it might be a bit pointless...
-
-Cheers,
-
-Richard
-
-
-
-
-
+>
+> Regards,
+>
+> Richard
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
