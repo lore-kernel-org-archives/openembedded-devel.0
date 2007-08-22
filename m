@@ -1,22 +1,46 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1INtvI-0006YX-Br
-	for openembedded-devel@openembedded.org; Wed, 22 Aug 2007 19:23:16 +0200
-Received: (qmail 6323 invoked by uid 813007); 22 Aug 2007 17:22:10 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 22 Aug 2007 17:22:10 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Aug 2007 19:22:05 +0200
-User-Agent: KMail/1.9.7
-References: <19c1b8a90708220852p5ed75070wa0a78dd002fe112c@mail.gmail.com>
-	<46CC697F.8040306@balister.org>
-In-Reply-To: <46CC697F.8040306@balister.org>
+	(envelope-from <mickey@vanille-media.de>) id 1INuSo-00078l-Tg
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Aug 2007 19:57:54 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 71EB728C014; Wed, 22 Aug 2007 19:53:55 +0200 (CEST)
+X-Spam-Flag: YES
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: *****
+X-Spam-Status: Yes, score=5.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+X-Spam-Report: * -2.6 BAYES_00 BODY: Bayesian spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
+	address *      [85.180.170.96 listed in dnsbl.sorbs.net]
+	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
+	*      [85.180.170.96 listed in zen.spamhaus.org]
+	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
+	*      [85.180.170.96 listed in combined.njabl.org]
+	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
+	*      [85.180.170.96 listed in zen.spamhaus.org]
+	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
+	* -2.1 AWL AWL: From: address is in the auto white-list
+Received: from PROMETHEUS (e180170096.adsl.alicedsl.de [85.180.170.96])
+	by srv043.dedi23.de (Postfix) with ESMTP id BABDF28C012;
+	Wed, 22 Aug 2007 19:53:54 +0200 (CEST)
+Date: Wed, 22 Aug 2007 19:56:47 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1921366578.20070822195647@vanille-media.de>
+To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+In-Reply-To: <200708221602.26912.openembedded@hrw.one.pl>
+References: <200703231200.31520.openembedded@hrw.one.pl>
+	<9010469286.20070822152313@vanille-media.de>
+	<200708221602.26912.openembedded@hrw.one.pl>
 MIME-Version: 1.0
-Message-Id: <200708221922.06978.openembedded@hrw.one.pl>
-Subject: Re: RFC: Fix for bug 1744 and some restructuring of omap kernel bb	files.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Building Python extensions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,32 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2007 17:23:18 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Aug 2007 17:57:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dnia =B6roda, 22 sierpnia 2007, Philip Balister napisa=B3:
-> I have given it a quick look, and it looks reasonable. It appears to
-> drop OABI support, which I think is OK, except for the celinux distro
-> (not sure).
->
-> The only real concern I have is that we would like to move to the
-> linux.inc/linux_2.6.x.bb style of kernel bb files. Should we push this,
-> or wait until we can convert the omap/davinci kernels to linux.inc? I
-> shouldn't even look at this until September ...
+Marcin Juszkiewicz wrote:
+>> > I will sync some of Python extensions with this fix from Poky into
+>> > OpenEmbedded in next days (python-pygtk2 already pushed).
+>>
+>> Since we don't have that many extensions using autotools, we can fix
+>> this easily.
 
-Merging linux-omap kernel recipes into linux_2.6.xx ones would be nice. It=
-=20
-also gives OABI/EABI switch for any ARM distros.
+> you or me?
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+If you have time, please take a shot. I'm on Froscon07 and on MDD07 and won't
+have time before returning from Denmark (early September).
 
-               Don't personalize computers. They hate that.
+Regards,
 
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
