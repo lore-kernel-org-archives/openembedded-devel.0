@@ -1,21 +1,23 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1INtit-0002AU-Mp
-	for openembedded-devel@openembedded.org; Wed, 22 Aug 2007 19:10:30 +0200
-Received: (qmail 18340 invoked by uid 813007); 22 Aug 2007 17:09:21 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 22 Aug 2007 17:09:21 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
+	(envelope-from <raj.khem@gmail.com>) id 1INtll-0002DX-6Q
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Aug 2007 19:13:25 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so253272waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Aug 2007 10:12:15 -0700 (PDT)
+Received: by 10.115.17.1 with SMTP id u1mr988319wai.1187802734903;
+	Wed, 22 Aug 2007 10:12:14 -0700 (PDT)
+Received: by 10.115.73.16 with HTTP; Wed, 22 Aug 2007 10:12:14 -0700 (PDT)
+Message-ID: <19c1b8a90708221012m446c3157ya692e916c5270da2@mail.gmail.com>
+Date: Wed, 22 Aug 2007 10:12:14 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Aug 2007 19:09:15 +0200
-User-Agent: KMail/1.9.7
-References: <200708201541.54798.openembedded@hrw.one.pl>
-In-Reply-To: <200708201541.54798.openembedded@hrw.one.pl>
+In-Reply-To: <46CC697F.8040306@balister.org>
 MIME-Version: 1.0
-Message-Id: <200708221909.18226.openembedded@hrw.one.pl>
-Subject: Re: QEmu update from Poky
+References: <19c1b8a90708220852p5ed75070wa0a78dd002fe112c@mail.gmail.com>
+	<46CC697F.8040306@balister.org>
+Subject: Re: RFC: Fix for bug 1744 and some restructuring of omap kernel bb files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,28 +31,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2007 17:10:30 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Aug 2007 17:13:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia poniedzia=B3ek, 20 sierpnia 2007, Marcin Juszkiewicz napisa=B3:
+Hi Philip
 
-> I plan to replace old 0.8.2 and 0.9+20070701 versions by 0.9+20070613
-> from Poky to give people version which works on 32/64 machines without
-> problems. This version has also some other extras added by OH - like
-> touchscreen emulation based on USB Wacom tablet emulation.
+Thanks for looking at it.
 
-pushed
+On 8/22/07, Philip Balister <philip@balister.org> wrote:
+> I have given it a quick look, and it looks reasonable. It appears to
+> drop OABI support, which I think is OK, except for the celinux distro
+> (not sure).
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Infact it does not. Default config file has EABI disabled in
+defconfig. The logic in linux-omap.inc enables it if it detects an
+EABI capable toolchain.
 
-         Great minds discuss ideas; average minds discuss events;
-         small minds discuss people.
+>
+> The only real concern I have is that we would like to move to the
+> linux.inc/linux_2.6.x.bb style of kernel bb files. Should we push this,
+> or wait until we can convert the omap/davinci kernels to linux.inc? I
+> shouldn't even look at this until September ...
 
+I would say one step at a time. This patch is big enough so we should
+go towards it incrementally
 
+>
+> Philip
+>
+> Khem Raj wrote:
+> > Hi Koen et al.
+> >
+> > I have been looking into omap structure of late and found that it was
+> > hard to add a new machine to same kernel build without some
+> > duplication. So I went ahead and tried to fix it. Attached patch also
+> > fixes bug 1744.
+> >
+> > I have moved the defconf files to kernel-<version>/$MACHINE folder and
+> > I expect that we add machine specific patches if needed here too.
+> >
+> > I have built omap5912osk and omap2430sdp machine kernels with this
+> > change and they built and worked ok.
+> >
+> > However I have also made changes to other omap related files which I
+> > believe I correct but it would be helpful if someone could test them.
+> >
+> > I havent changed the old kernel bb files. If this looks ok and
+> > applicable I can do that too.
+> >
+> > Is it ok?
+> >
+> > Thanks
+> >
+> > -Khem
+> >
+> >
+> > ------------------------------------------------------------------------
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+>
 
 
