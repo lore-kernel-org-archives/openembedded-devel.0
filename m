@@ -1,46 +1,25 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [66.249.82.234] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1INuSo-00078l-Tg
+	(envelope-from <leon.woestenberg@gmail.com>) id 1INuVI-0007BT-VH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Aug 2007 19:57:54 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 71EB728C014; Wed, 22 Aug 2007 19:53:55 +0200 (CEST)
-X-Spam-Flag: YES
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: *****
-X-Spam-Status: Yes, score=5.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-X-Spam-Report: * -2.6 BAYES_00 BODY: Bayesian spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
-	address *      [85.180.170.96 listed in dnsbl.sorbs.net]
-	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
-	*      [85.180.170.96 listed in zen.spamhaus.org]
-	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
-	*      [85.180.170.96 listed in combined.njabl.org]
-	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
-	*      [85.180.170.96 listed in zen.spamhaus.org]
-	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
-	* -2.1 AWL AWL: From: address is in the auto white-list
-Received: from PROMETHEUS (e180170096.adsl.alicedsl.de [85.180.170.96])
-	by srv043.dedi23.de (Postfix) with ESMTP id BABDF28C012;
-	Wed, 22 Aug 2007 19:53:54 +0200 (CEST)
-Date: Wed, 22 Aug 2007 19:56:47 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1921366578.20070822195647@vanille-media.de>
-To: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-In-Reply-To: <200708221602.26912.openembedded@hrw.one.pl>
-References: <200703231200.31520.openembedded@hrw.one.pl>
-	<9010469286.20070822152313@vanille-media.de>
-	<200708221602.26912.openembedded@hrw.one.pl>
+	Wed, 22 Aug 2007 20:00:31 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so230265wxd
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Aug 2007 10:59:19 -0700 (PDT)
+Received: by 10.90.99.20 with SMTP id w20mr4949651agb.1187805558446;
+	Wed, 22 Aug 2007 10:59:18 -0700 (PDT)
+Received: by 10.90.31.16 with HTTP; Wed, 22 Aug 2007 10:59:18 -0700 (PDT)
+Message-ID: <c384c5ea0708221059t640c0b23lad82421cd2686784@mail.gmail.com>
+Date: Wed, 22 Aug 2007 19:59:18 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1187683447.6234.4.camel@localhost.localdomain>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Building Python extensions
+References: <c384c5ea0708201339j44462d85o286bbb548b256aec@mail.gmail.com>
+	<46CA0337.9050709@gmail.com>
+	<c384c5ea0708201452q3b596e76j8d7623cd6907c799@mail.gmail.com>
+	<1187683447.6234.4.camel@localhost.localdomain>
+Subject: Re: Add Intel Core 2 machine support (prescott and nocona)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -54,27 +33,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2007 17:57:55 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 22 Aug 2007 18:00:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Marcin Juszkiewicz wrote:
->> > I will sync some of Python extensions with this fix from Poky into
->> > OpenEmbedded in next days (python-pygtk2 already pushed).
->>
->> Since we don't have that many extensions using autotools, we can fix
->> this easily.
+Hello Richard,
 
-> you or me?
+thanks for your feedback!
 
-If you have time, please take a shot. I'm on Froscon07 and on MDD07 and won't
-have time before returning from Denmark (early September).
+On 8/21/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Mon, 2007-08-20 at 23:52 +0200, Leon Woestenberg wrote:
+> > My current proposal is:
+> >
+> > ...
+> > conf/machine/x86_64-nocona.conf
+> > conf/machine/include/x86_64-nocona.conf
+> > -arch=nocona
+> > TARGET_ARCH=x86_64
+> >
+> > starting with GCC 4.3:
+> > conf/machine/x86_64-core2.conf
+> > conf/machine/include/x86_64-core2.conf
+> > -arch=core2
+> > TARGET_ARCH=x86_64
+>
+> Please don't use '_' in the names. It may work but it has the potential
+> to mess up bitbake's override handling and would be better avoided. I
+> know people have had issues with "x86_64" already due to this.
+>
+
+What are the constraints TARGET_ARCH should meet?
+
+Does it have anything to do with the GNU machine tuple?
+
+Doesn't TARGET_ARCH propogated into several package's configure/Makefile's etc?
+
+For example:
+
+linux-libc-headers:
+
+do_configure () {
+    case ${TARGET_ARCH} in
+        alpha*)   ARCH=alpha ;;
+        arm*)     ARCH=arm ;;
+        cris*)    ARCH=cris ;;
+        hppa*)    ARCH=parisc ;;
+        i*86*)    ARCH=i386 ;;
+        ia64*)    ARCH=ia64 ;;
+        mips*)    ARCH=mips ;;
+        m68k*)    ARCH=m68k ;;
+        powerpc*) ARCH=ppc ;;
+        s390*)    ARCH=s390 ;;
+        sh*)      ARCH=sh ;;
+        sparc64*) ARCH=sparc64 ;;
+        sparc*)   ARCH=sparc ;;
+        x86_64*)  ARCH=x86_64 ;;
+    esac
+    if test !  -e include/asm-$ARCH; then
+        oefatal unable to create asm symlink in kernel headers
+    fi
+
+
+
+> When using optimised output like that you really do need to use a
+> different TARGET_ARCH since as you say, the packages will not run on
+> standard i686/x86_64...
+>
+That's why I suggested "x86_64-nocona".
+
+I could only think of using "amd64" instead of "x86_64" but most
+distributions are favouring the last one over the first one recently.
+
 
 Regards,
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Leon.
 
 
