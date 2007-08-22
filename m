@@ -1,45 +1,22 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1INqCf-0001kI-Po
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Aug 2007 15:24:59 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 28A6D28C014; Wed, 22 Aug 2007 15:21:00 +0200 (CEST)
-X-Spam-Flag: YES
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: *****
-X-Spam-Status: Yes, score=5.8 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-X-Spam-Report: * -2.6 BAYES_00 BODY: Bayesian spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
-	address *      [85.180.170.96 listed in dnsbl.sorbs.net]
-	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
-	*      [85.180.170.96 listed in zen.spamhaus.org]
-	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
-	*      [85.180.170.96 listed in combined.njabl.org]
-	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
-	*      [85.180.170.96 listed in zen.spamhaus.org]
-	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
-	* -2.1 AWL AWL: From: address is in the auto white-list
-Received: from PROMETHEUS (e180170096.adsl.alicedsl.de [85.180.170.96])
-	by srv043.dedi23.de (Postfix) with ESMTP id 3CF8528C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2007 15:20:57 +0200 (CEST)
-Date: Wed, 22 Aug 2007 15:23:50 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <109919.20070822152350@vanille-media.de>
+	(envelope-from <openembedded@hrw.one.pl>) id 1INqo2-0003Ff-Br
+	for openembedded-devel@openembedded.org; Wed, 22 Aug 2007 16:03:34 +0200
+Received: (qmail 9349 invoked by uid 813007); 22 Aug 2007 14:02:28 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 22 Aug 2007 14:02:28 -0000
+From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46CC3773.8010707@dominion.kabel.utwente.nl>
-References: <1187692103.6234.7.camel@localhost.localdomain>
-	<46CC3773.8010707@dominion.kabel.utwente.nl>
+Date: Wed, 22 Aug 2007 16:02:25 +0200
+User-Agent: KMail/1.9.7
+References: <200703231200.31520.openembedded@hrw.one.pl>
+	<9010469286.20070822152313@vanille-media.de>
+In-Reply-To: <9010469286.20070822152313@vanille-media.de>
 MIME-Version: 1.0
-Subject: Re: RFC: Upgrade OE.dev to bitbake 1.8.8
+Message-Id: <200708221602.26912.openembedded@hrw.one.pl>
+Subject: Re: Building Python extensions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -53,27 +30,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2007 13:25:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Aug 2007 14:03:34 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> Richard Purdie schreef:
->> Hi,
->> 
->> There are lots of good changes in bitbake 1.8.8. Providing no major
->> issues are found with that bitbake release should we make it the minimum
->> version requirement for OE.dev in say two weeks? Any objections?
+Dnia =B6roda, 22 sierpnia 2007, Dr. Michael Lauer napisa=B3:
+> Marcin Juszkiewicz wrote on 23th of March:
+> > When we build Python extension (for example python-pygtk2) configure
+> > script builds one test program to check does it has Python headers.
 
-> Let's activate it on 20070904
+> So this is a problem with python packages using autotools only, right?
+> (I remember I patched distutils to take care about that).
 
-+1.
+looks like it
 
-Regards,
+> > I got fix for it of course. M4 scripts of each used Python extensions
+> > use macro AM_CHECK_PYTHON_HEADERS which I edited to add one option to
+> > configure: --with-python-includes which should be pointed to
+> > ${STAGING_INCDIR}/../ to get it working.
+>
+> So just adding to EXTRA_OECONF will do?
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Need to patch acinclude.m4 too.
+
+> > I will sync some of Python extensions with this fix from Poky into
+> > OpenEmbedded in next days (python-pygtk2 already pushed).
+>
+> Since we don't have that many extensions using autotools, we can fix
+> this easily.
+
+you or me?
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+        Linux! -- Because a big world can not fit in small windows.
+
 
 
 
