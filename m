@@ -1,25 +1,26 @@
-Received: from [64.233.162.229] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <cliff.brake@gmail.com>) id 1INpEI-0003Yq-WF
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Aug 2007 14:22:35 +0200
-Received: by nz-out-0506.google.com with SMTP id j2so81734nzf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2007 05:21:29 -0700 (PDT)
-Received: by 10.114.202.15 with SMTP id z15mr587373waf.1187785288956;
-	Wed, 22 Aug 2007 05:21:28 -0700 (PDT)
-Received: by 10.114.191.17 with HTTP; Wed, 22 Aug 2007 05:21:28 -0700 (PDT)
-Message-ID: <f96d234e0708220521g4823ee9bs967959d821da691b@mail.gmail.com>
-Date: Wed, 22 Aug 2007 08:21:28 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20070822075323.GA6044@rhein.zuhause.netz>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1INq6V-0006iw-6X
+	for openembedded-devel@openembedded.org; Wed, 22 Aug 2007 15:18:35 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l7MDHJ1R023629 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Aug 2007 15:17:19 +0200
+Message-ID: <46CC3773.8010707@dominion.kabel.utwente.nl>
+Date: Wed, 22 Aug 2007 15:17:39 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-References: <E1INbyh-0006rm-0y@linuxtogo.org>
-	<46CB6D5B.40501@dominion.kabel.utwente.nl>
-	<f96d234e0708211932n4370bd94j2a91f597edc89adb@mail.gmail.com>
-	<20070822075323.GA6044@rhein.zuhause.netz>
-Subject: Re: [oe-commits] org.oe.dev compulab-pxa270.conf: fix serial console setup for 2.6.22 kernel,
+To: openembedded-devel@openembedded.org
+References: <1187692103.6234.7.camel@localhost.localdomain>
+In-Reply-To: <1187692103.6234.7.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: RFC: Upgrade OE.dev to bitbake 1.8.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,27 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2007 12:22:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 22 Aug 2007 13:18:39 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 8/22/07, Henning Heinold <heinold@inf.fu-berlin.de> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> initramfs is not an option for you?
+Richard Purdie schreef:
+> Hi,
+> 
+> There are lots of good changes in bitbake 1.8.8. Providing no major
+> issues are found with that bitbake release should we make it the minimum
+> version requirement for OE.dev in say two weeks? Any objections?
 
-Hello Henning,
+Let's activate it on 20070904
 
-Yes, I am building an initramfs (cpio.gz image) to place in NOR flash.
- Specifically, what OE image target are you suggesting?  Offhand, I
-don't see any that include mtd-utils.
+regards,
 
-Thanks,
-Cliff
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+iD8DBQFGzDdzMkyGM64RGpERAiTnAJ4oLpzp1ooBpt5EpxsYRoM1Jcc2wQCfZczH
+N1lf6gH7oJEVFlvdpBfWsio=
+=z44F
+-----END PGP SIGNATURE-----
 
 
