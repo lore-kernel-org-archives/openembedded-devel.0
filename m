@@ -1,29 +1,28 @@
-Received: from [66.111.4.26] (helo=out2.smtp.messagingengine.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rod@whitby.id.au>) id 1IOAVa-00063w-9D
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Aug 2007 13:05:51 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id DDA3F244C7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2007 07:04:39 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Thu, 23 Aug 2007 07:04:39 -0400
-X-Sasl-enc: t3d1Ob7T8tvjRCtPf5Da9Zh5GJ5Wy2Tlf/Xd+rhdxvs8 1187867079
-Received: from [192.168.18.11] (CPE-121-209-19-11.sa.bigpond.net.au
-	[121.209.19.11])
-	by mail.messagingengine.com (Postfix) with ESMTP id 299FF57
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2007 07:04:38 -0400 (EDT)
-Message-ID: <46CD69E3.707@whitby.id.au>
-Date: Thu, 23 Aug 2007 20:35:07 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.6 (Windows/20070728)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IOAjh-0006Ix-9N
+	for openembedded-devel@openembedded.org; Thu, 23 Aug 2007 13:20:26 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l7NBJAj1019807 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Aug 2007 13:19:10 +0200
+Message-ID: <46CD6D45.9050602@dominion.kabel.utwente.nl>
+Date: Thu, 23 Aug 2007 13:19:33 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1ef816af0708221151m5c3c2b4ds9b90fdbddc56d8d1@mail.gmail.com>	<19c1b8a90708221646p6cfd0e6do6574668bbe15d775@mail.gmail.com>
-	<1ef816af0708230241s62454f78oa0147b10cae53ce6@mail.gmail.com>
-In-Reply-To: <1ef816af0708230241s62454f78oa0147b10cae53ce6@mail.gmail.com>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <1ef816af0708221151m5c3c2b4ds9b90fdbddc56d8d1@mail.gmail.com>	<19c1b8a90708221646p6cfd0e6do6574668bbe15d775@mail.gmail.com>	<1ef816af0708230241s62454f78oa0147b10cae53ce6@mail.gmail.com>
+	<46CD69E3.707@whitby.id.au>
+In-Reply-To: <46CD69E3.707@whitby.id.au>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-SpamScore: s
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: binutils-cross_2.17.50.0.5.bb failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,23 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2007 11:05:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 23 Aug 2007 11:20:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-yakov.zaytsev@gmail.com wrote:
-> ..binutils-cross-2.17.50.0.5-r1/temp/log.do_configure.8057 contains
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Rod Whitby schreef:
+> yakov.zaytsev@gmail.com wrote:
+>> ..binutils-cross-2.17.50.0.5-r1/temp/log.do_configure.8057 contains
+>>
+>> --
+>> /Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
+>> cross-2.17.50.0.5-r1/temp/run.do_configure.8057: line 782: do_configure:
+>> command not found
 > 
-> --
-> /Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
-> cross-2.17.50.0.5-r1/temp/run.do_configure.8057: line 782: do_configure:
-> command not found
+> You've been bitten by the "build crosses midnight GMT" bitbake bug.
+> 
+> Rebuild the affected package using "make rebuild-package-binutils-cross"
+> if this occurs.  See Mickey's other email on the subject.
 
-You've been bitten by the "build crosses midnight GMT" bitbake bug.
+you mean 'bitbake -c rebuild binutils-cross'? Please stop with those unhelpfull comments.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Rebuild the affected package using "make rebuild-package-binutils-cross"
-if this occurs.  See Mickey's other email on the subject.
-
--- Rod
+iD8DBQFGzW1FMkyGM64RGpERArIgAJ9DUEs1fP8yR4OyXW0MZ5rCdg3mPgCfX5MK
+lmpW4rkUJSNiYAiZpgIKdnI=
+=+zA4
+-----END PGP SIGNATURE-----
 
 
