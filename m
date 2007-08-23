@@ -1,24 +1,48 @@
-Received: from [64.233.166.177] (helo=py-out-1112.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <yakov.zaytsev@gmail.com>) id 1IO9Cs-0007Xr-0o
+	(envelope-from <mickey@vanille-media.de>) id 1IO9Es-0007aS-Oh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Aug 2007 11:42:26 +0200
-Received: by py-out-1112.google.com with SMTP id a25so919130pyi
+	Thu, 23 Aug 2007 11:44:30 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 438C528C013; Thu, 23 Aug 2007 11:40:26 +0200 (CEST)
+X-Spam-Flag: YES
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: *****
+X-Spam-Status: Yes, score=5.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+X-Spam-Report: * -2.6 BAYES_00 BODY: Bayesian spam probability is 0 to 1%
+	*      [score: 0.0000]
+	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
+	address *      [85.180.189.163 listed in dnsbl.sorbs.net]
+	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
+	*      [85.180.189.163 listed in zen.spamhaus.org]
+	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
+	*      [85.180.189.163 listed in combined.njabl.org]
+	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
+	*      [85.180.189.163 listed in zen.spamhaus.org]
+	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
+	* -2.1 AWL AWL: From: address is in the auto white-list
+Received: from PROMETHEUS (e180189163.adsl.alicedsl.de [85.180.189.163])
+	by srv043.dedi23.de (Postfix) with ESMTP id 54DB928C012
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2007 02:41:15 -0700 (PDT)
-Received: by 10.35.14.18 with SMTP id r18mr1899026pyi.1187862074912;
-	Thu, 23 Aug 2007 02:41:14 -0700 (PDT)
-Received: by 10.35.93.7 with HTTP; Thu, 23 Aug 2007 02:41:14 -0700 (PDT)
-Message-ID: <1ef816af0708230241s62454f78oa0147b10cae53ce6@mail.gmail.com>
-Date: Thu, 23 Aug 2007 13:41:14 +0400
-From: yakov.zaytsev@gmail.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90708221646p6cfd0e6do6574668bbe15d775@mail.gmail.com>
+	Thu, 23 Aug 2007 11:40:24 +0200 (CEST)
+Date: Thu, 23 Aug 2007 11:43:19 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <476545512.20070823114319@vanille-media.de>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <46CD5539.9060701@dominion.kabel.utwente.nl>
+References: <717ce6e40708230037r2bdd44f3v83180c286fbdd63c@mail.gmail.com>
+	<46CD5062.5050308@whitby.id.au>
+	<948196528.20070823112701@vanille-media.de>
+	<46CD5539.9060701@dominion.kabel.utwente.nl>
 MIME-Version: 1.0
-References: <1ef816af0708221151m5c3c2b4ds9b90fdbddc56d8d1@mail.gmail.com>
-	<19c1b8a90708221646p6cfd0e6do6574668bbe15d775@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: binutils-cross_2.17.50.0.5.bb failed
+Subject: Re: 2007.2 compilation failed with package uicmoc4-native-4.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,151 +56,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2007 09:42:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 23 Aug 2007 09:44:31 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-..binutils-cross-2.17.50.0.5-r1/temp/log.do_configure.8057 contains
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
---
-/Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
-cross-2.17.50.0.5-r1/temp/run.do_configure.8057: line 782: do_configure:
-command not found
---
+> mickeyl@linuxtogo.org schreef:
+>> From OpenMoko-community:
+>> 
+>> Rod Whitby wrote:
+>>> Phani Kumar Kancharala wrote:
+>>>>  Hi all,  
+>>>>     I followed the steps in wiki-openmoko to get openmoko on my pc
+>>>> running Ubuntu 7.04 Feisty Fwan. Finally I also ended up with the same
+>>>> error reported by *Frank Gau, *following are the error and logs given by
+>>>> the mokomakefile:
+>>>>
+>>>> | kernel/qapplication_x11.cpp:89:31: error: X11/extensions/XI.h: No such
+>>>> file or directory
+>> 
+>>> Install the host software package which provides the XI.h file.
+>> 
+>>> It'll be some X11 extensions development package.
+>> 
+>>> Then update the OEAndYourDistro page on the openembedded wiki to
+>>> highlight that package as a requirement for your host distro.
+>> 
+>> Hmm, since when is uicmoc-native requiring X? If I recall correctly, I
+>> had always chosen to build the respective -embedded variant of Qt to
+>> not impose the need of having X on the build machine. It looks like we
+>> are now building qt-x11 as provider for uicmoc4. Why did we change that?
 
-On 8/23/07, Khem Raj <raj.khem@gmail.com> wrote:
->
-> Can you post
->
-> /Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
-> cross-2.17.50.0.5-r1/temp/log.do_configure.8057
->
-> my guess is you might be missing the prerequisites needed.
->
-> check here
->
-> http://www.openembedded.org/wiki/RequiredSoftware
->
-> and
->
-> http://www.openembedded.org/wiki/BuildOnOSX
->
-> HTH
->
-> -Khem
-> On 8/22/07, yakov.zaytsev@gmail.com <yakov.zaytsev@gmail.com> wrote:
-> > Hi,
-> >
-> > I'm using Mac OSX 10.4.10 on MacBook Core 2 Duo 2.16.. I've done usual
-> setup
-> > as it described in the Wiki..
-> >
-> > Here's the problem
-> >
-> > Any OE/Mac OSX users? How is it possible to fix this issue. I'm quite
-> new to
-> > OpenEmbedded world, so I will be really thankful if you give some more
-> > details..
-> >
-> > Thanks in advance!
-> >
-> > $ bitbake nano
-> > NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it
-> to
-> > increase performance.
-> > NOTE: Handling BitBake files: \ (4573/4573) [100 %]
-> > NOTE: Parsing finished. 4355 cached, 0 parsed, 218 skipped, 0 masked.
-> > NOTE: build 200708222235: started
-> >
-> > OE Build Configuration:
-> > BB_VERSION     = "1.8.9"
-> > OE_REVISION    = "4ceb0ef60a086087bfe7a232b07d6fb71c3ccd04"
-> > TARGET_ARCH    = "arm"
-> > TARGET_OS      = "linux-gnueabi"
-> > MACHINE        = "c7x0"
-> > DISTRO         = "angstrom"
-> > DISTRO_VERSION = "test-20070822"
-> > TARGET_FPU     = "soft"
-> >
-> > NOTE: Resolving missing task queue dependencies
-> > NOTE: preferred version 2.5 of glibc not available (for item
-> > virtual/arm-angstrom-linux-gnueabi-libc-for-gcc)
-> > NOTE: Preparing runqueue
-> > NOTE: Executing runqueue
-> > NOTE: Running task 128 of 314 (ID: 237,
-> >
-> /Volumes/OE/stuff/org.openembedded.dev/packages/binutils/binutils-cross_2.17.50.0.5.bb,
-> > do_configure)
-> > NOTE: package binutils-cross-2.17.50.0.5: started
-> > NOTE: package binutils-cross-2.17.50.0.5-r1: task do_configure: started
-> > ERROR: Information not available for target 'i386-darwin'
-> > NOTE: <type 'exceptions.AttributeError'>:'NoneType' object has no
-> attribute
-> > 'append' while evaluating:
-> > ${@siteinfo_get_files(d)}
-> > ERROR: Information not available for target 'i386-darwin'
-> > NOTE: <type 'exceptions.AttributeError'>:'NoneType' object has no
-> attribute
-> > 'append' while evaluating:
-> > ${@siteinfo_get_files(d)}
-> > NOTE: <type 'exceptions.AttributeError'>:'NoneType' object has no
-> attribute
-> > 'append' while evaluating:
-> >         (cd ${S}; gnu-configize) || die "Failed to run gnu-configize"
-> >         oe_runconf
-> > #
-> > # must prime config.cache to ensure the build of libiberty
-> > #
-> >         mkdir -p ${B}/build-${BUILD_SYS}
-> >         for i in ${CONFIG_SITE}; do
-> >             cat $i >> ${B}/build-${BUILD_SYS}/config.cache
-> >         done
-> >
-> > ERROR: function do_configure failed
-> > ERROR: log data follows
-> >
-> (/Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
-> > cross-2.17.50.0.5-r1/temp/log.do_configure.8057)
-> > |
-> /Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
-> > cross-2.17.50.0.5-r1/temp/run.do_configure.8057: line 782: do_configure:
-> > command not found
-> > NOTE: Task failed:
-> >
-> /Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
-> > cross-2.17.50.0.5-r1/temp/log.do_configure.8057
-> > NOTE: package binutils-cross-2.17.50.0.5-r1: task do_configure: failed
-> > ERROR: TaskFailed event exception, aborting
-> > NOTE: package binutils-cross-2.17.50.0.5: failed
-> > ERROR: Build of
-> >
-> /Volumes/OE/stuff/org.openembedded.dev/packages/binutils/binutils-cross_2.17.50.0.5.bb
-> > do_configure failed
-> > ERROR: Task 237
-> >
-> (/Volumes/OE/stuff/org.openembedded.dev/packages/binutils/binutils-cross_2.17.50.0.5.bb,
-> > do_configure) failed
-> > NOTE: Tasks Summary: Attempted 127 tasks of which 127 didn't need to be
-> > rerun and 1 failed.
-> > ERROR:
-> >
-> '/Volumes/OE/stuff/org.openembedded.dev/packages/binutils/binutils-cross_2.17.50.0.5.bb'
-> > failed
-> >
-> >
-> >
-> > Best wishes,
-> > Yakov
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Because we needed the one from 4.3 which only has an x11 variant.
+
+Nah, Qt/Embedded is still there -- they just uploaded it under a wrong
+name to their ftp server:
+
+ftp.trolltech.com/pub/qt/source/qtopia-core-opensource-src-4.3.0.tar.gz
+
+I'd really like to see this X requirement on the build machine being removed.
+
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
+
 
