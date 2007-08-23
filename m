@@ -1,44 +1,28 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IO90W-0007G3-HV
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Aug 2007 11:29:40 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 257E328C013; Thu, 23 Aug 2007 11:25:36 +0200 (CEST)
-X-Spam-Flag: YES
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: *****
-X-Spam-Status: Yes, score=5.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-X-Spam-Report: * -2.6 BAYES_00 BODY: Bayesian spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
-	address *      [85.180.189.163 listed in dnsbl.sorbs.net]
-	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
-	*      [85.180.189.163 listed in zen.spamhaus.org]
-	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
-	*      [85.180.189.163 listed in combined.njabl.org]
-	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
-	*      [85.180.189.163 listed in zen.spamhaus.org]
-	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
-	* -2.1 AWL AWL: From: address is in the auto white-list
-Received: from PROMETHEUS (e180189163.adsl.alicedsl.de [85.180.189.163])
-	by srv043.dedi23.de (Postfix) with ESMTP id 3C2D628C012;
-	Thu, 23 Aug 2007 11:25:35 +0200 (CEST)
-Date: Thu, 23 Aug 2007 11:28:30 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1292598113.20070823112830@vanille-media.de>
-To: "pHilipp Zabel" <philipp.zabel@gmail.com>
-In-Reply-To: <74d0deb30708230148y75af9399m1fbff6d46948bfdf@mail.gmail.com>
-References: <74d0deb30708230148y75af9399m1fbff6d46948bfdf@mail.gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IO98N-0007RA-Ev
+	for openembedded-devel@openembedded.org; Thu, 23 Aug 2007 11:37:47 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l7N9aYj1002888 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Aug 2007 11:36:34 +0200
+Message-ID: <46CD5539.9060701@dominion.kabel.utwente.nl>
+Date: Thu, 23 Aug 2007 11:36:57 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: dbus-glib-native: install dbus-binding-tool to ${STAGING_BINDIR}?
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <717ce6e40708230037r2bdd44f3v83180c286fbdd63c@mail.gmail.com>	<46CD5062.5050308@whitby.id.au>
+	<948196528.20070823112701@vanille-media.de>
+In-Reply-To: <948196528.20070823112701@vanille-media.de>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: 2007.2 compilation failed with package uicmoc4-native-4.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -52,40 +36,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2007 09:29:40 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 23 Aug 2007 09:37:47 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-pHilipp Zabel wrote:
-> Hi, I've got this change in my local workdir, unfortunately I don't
-> remember what exactly needed the binding tool. Is this ok to commit?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> --- packages/dbus/dbus-glib-native_0.72.bb     
-> 278c6e1074af019c5bf108638bebfba814ddc160
-> +++ packages/dbus/dbus-glib-native_0.72.bb     
-> 5c8a08a3c0bc93f2de4060d523738b5500cd88c0
-> @@ -1,5 +1,5 @@ SECTION = "base"
->  SECTION = "base"
-> -PR = "r0"
-> +PR = "r1"
->  HOMEPAGE = "http://www.freedesktop.org/Software/dbus"
->  DESCRIPTION = "message bus system for applications to talk to one another"
->  LICENSE = "GPL"
-> @@ -19,4 +19,5 @@ do_stage() {
->          install -d ${STAGING_DATADIR}/dbus
->          install -m 0644 tools/dbus-bus-introspect.xml ${STAGING_DATADIR}/dbus
->          install -m 0644 tools/dbus-glib-bindings.h ${STAGING_DATADIR}/dbus
-> +       install -m 0755 dbus/.libs/dbus-binding-tool ${STAGING_BINDIR}/
->  }
+mickeyl@linuxtogo.org schreef:
+> From OpenMoko-community:
+> 
+> Rod Whitby wrote:
+>> Phani Kumar Kancharala wrote:
+>>>  Hi all,  
+>>>     I followed the steps in wiki-openmoko to get openmoko on my pc
+>>> running Ubuntu 7.04 Feisty Fwan. Finally I also ended up with the same
+>>> error reported by *Frank Gau, *following are the error and logs given by
+>>> the mokomakefile:
+>>>
+>>> | kernel/qapplication_x11.cpp:89:31: error: X11/extensions/XI.h: No such
+>>> file or directory
+> 
+>> Install the host software package which provides the XI.h file.
+> 
+>> It'll be some X11 extensions development package.
+> 
+>> Then update the OEAndYourDistro page on the openembedded wiki to
+>> highlight that package as a requirement for your host distro.
+> 
+> Hmm, since when is uicmoc-native requiring X? If I recall correctly, I
+> had always chosen to build the respective -embedded variant of Qt to
+> not impose the need of having X on the build machine. It looks like we
+> are now building qt-x11 as provider for uicmoc4. Why did we change that?
 
-Does anything speak against using autotools_stage_all here?
-I'd rather go away from handcoded do_stage() as much as possible.
+Because we needed the one from 4.3 which only has an x11 variant.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+iD8DBQFGzVU5MkyGM64RGpERAtpWAJwJ+KljRSHoJhclWjnxH5ZpBVlrFACfUYZx
+dj/bkEUrcpD9725XdQfPioU=
+=k3+2
+-----END PGP SIGNATURE-----
 
 
