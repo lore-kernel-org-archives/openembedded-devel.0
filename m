@@ -1,25 +1,26 @@
-Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+Received: from [64.233.166.176] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IOHNS-0004Gf-3f
+	(envelope-from <yakov.zaytsev@gmail.com>) id 1IOHfR-0004Yn-5i
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Aug 2007 20:25:54 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so672223waf
+	Thu, 23 Aug 2007 20:44:29 +0200
+Received: by py-out-1112.google.com with SMTP id a25so1199918pyi
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2007 11:24:41 -0700 (PDT)
-Received: by 10.115.61.1 with SMTP id o1mr103371wak.1187893480478;
-	Thu, 23 Aug 2007 11:24:40 -0700 (PDT)
-Received: by 10.115.73.16 with HTTP; Thu, 23 Aug 2007 11:24:40 -0700 (PDT)
-Message-ID: <19c1b8a90708231124g4235f95fjdead991e8b2739fc@mail.gmail.com>
-Date: Thu, 23 Aug 2007 11:24:40 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
+	Thu, 23 Aug 2007 11:43:16 -0700 (PDT)
+Received: by 10.35.44.16 with SMTP id w16mr2444458pyj.1187894596255;
+	Thu, 23 Aug 2007 11:43:16 -0700 (PDT)
+Received: by 10.35.93.7 with HTTP; Thu, 23 Aug 2007 11:43:16 -0700 (PDT)
+Message-ID: <1ef816af0708231143v70b227daga19b961d23cc5bdc@mail.gmail.com>
+Date: Thu, 23 Aug 2007 22:43:16 +0400
+From: yakov.zaytsev@gmail.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46CD583D.7020402@balister.org>
+In-Reply-To: <46CD69E3.707@whitby.id.au>
 MIME-Version: 1.0
-References: <19c1b8a90708220852p5ed75070wa0a78dd002fe112c@mail.gmail.com>
-	<46CC697F.8040306@balister.org>
-	<19c1b8a90708221012m446c3157ya692e916c5270da2@mail.gmail.com>
-	<46CD583D.7020402@balister.org>
-Subject: Re: RFC: Fix for bug 1744 and some restructuring of omap kernel bb files.
+References: <1ef816af0708221151m5c3c2b4ds9b90fdbddc56d8d1@mail.gmail.com>
+	<19c1b8a90708221646p6cfd0e6do6574668bbe15d775@mail.gmail.com>
+	<1ef816af0708230241s62454f78oa0147b10cae53ce6@mail.gmail.com>
+	<46CD69E3.707@whitby.id.au>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: binutils-cross_2.17.50.0.5.bb failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,102 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2007 18:25:54 -0000
+X-List-Received-Date: Thu, 23 Aug 2007 18:44:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On 8/23/07, Philip Balister <philip@balister.org> wrote:
-> Is there any reason why you marked the linux-omap1_2.6.22 with
-> DEFAULT_PREFERENCE = "-1" and removed the git kernels
+I've tried to rebuild inside
+/Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
+cross-2.17.50.0.5-r1/binutils-2.17.50.0.5
 
-must be removed an oversight on my part.
+with this error
 
-> DEFAULT_PREFERENCE="-1"? I am guessing these are testing artifacts and
-> am setting the git kernel to -1 and removing the DEFAULT_PREFERENCE from
-> 2.6.22.
+make: *** No rule to make target `rebuild-package-binutils-cross'.  Stop.
+
+On 8/23/07, Rod Whitby <rod@whitby.id.au> wrote:
 >
-> Other than that, the patch looks good.
+> yakov.zaytsev@gmail.com wrote:
+> > ..binutils-cross-2.17.50.0.5-r1/temp/log.do_configure.8057 contains
+> >
+> > --
+> >
+> /Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
+> > cross-2.17.50.0.5-r1/temp/run.do_configure.8057: line 782: do_configure:
+> > command not found
 >
-> Philip
+> You've been bitten by the "build crosses midnight GMT" bitbake bug.
 >
-> Khem Raj wrote:
-> > Hi Philip
-> >
-> > Thanks for looking at it.
-> >
-> > On 8/22/07, Philip Balister <philip@balister.org> wrote:
-> >> I have given it a quick look, and it looks reasonable. It appears to
-> >> drop OABI support, which I think is OK, except for the celinux distro
-> >> (not sure).
-> >
-> > Infact it does not. Default config file has EABI disabled in
-> > defconfig. The logic in linux-omap.inc enables it if it detects an
-> > EABI capable toolchain.
-> >
-> >> The only real concern I have is that we would like to move to the
-> >> linux.inc/linux_2.6.x.bb style of kernel bb files. Should we push this,
-> >> or wait until we can convert the omap/davinci kernels to linux.inc? I
-> >> shouldn't even look at this until September ...
-> >
-> > I would say one step at a time. This patch is big enough so we should
-> > go towards it incrementally
-> >
-> >> Philip
-> >>
-> >> Khem Raj wrote:
-> >>> Hi Koen et al.
-> >>>
-> >>> I have been looking into omap structure of late and found that it was
-> >>> hard to add a new machine to same kernel build without some
-> >>> duplication. So I went ahead and tried to fix it. Attached patch also
-> >>> fixes bug 1744.
-> >>>
-> >>> I have moved the defconf files to kernel-<version>/$MACHINE folder and
-> >>> I expect that we add machine specific patches if needed here too.
-> >>>
-> >>> I have built omap5912osk and omap2430sdp machine kernels with this
-> >>> change and they built and worked ok.
-> >>>
-> >>> However I have also made changes to other omap related files which I
-> >>> believe I correct but it would be helpful if someone could test them.
-> >>>
-> >>> I havent changed the old kernel bb files. If this looks ok and
-> >>> applicable I can do that too.
-> >>>
-> >>> Is it ok?
-> >>>
-> >>> Thanks
-> >>>
-> >>> -Khem
-> >>>
-> >>>
-> >>> ------------------------------------------------------------------------
-> >>>
-> >>> _______________________________________________
-> >>> Openembedded-devel mailing list
-> >>> Openembedded-devel@lists.openembedded.org
-> >>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >>
-> >>
-> >>
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
+> Rebuild the affected package using "make rebuild-package-binutils-cross"
+> if this occurs.  See Mickey's other email on the subject.
+
+
+What does "build crosses midnight GMT" mean?!
+
+
+-- Rod
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
->
->
-
 
