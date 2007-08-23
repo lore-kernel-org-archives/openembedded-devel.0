@@ -1,23 +1,30 @@
-Received: from [72.29.79.205] (helo=rhodos.klever.net)
+Received: from [66.111.4.26] (helo=out2.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1IOADj-0005gl-2L
+	(envelope-from <rod@whitby.id.au>) id 1IOAVa-00063w-9D
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Aug 2007 12:47:23 +0200
-Received: from pd953a869.dip0.t-ipconnect.de ([217.83.168.105]
-	helo=olympus.klever.net)
-	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.67) (envelope-from <hacker@klever.net>)
-	id 1IOACZ-0003VX-3M; Thu, 23 Aug 2007 12:46:11 +0200
-Message-ID: <46CD6554.6020405@klever.net>
-Date: Thu, 23 Aug 2007 12:45:40 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070815)
+	Thu, 23 Aug 2007 13:05:51 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id DDA3F244C7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Aug 2007 07:04:39 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Thu, 23 Aug 2007 07:04:39 -0400
+X-Sasl-enc: t3d1Ob7T8tvjRCtPf5Da9Zh5GJ5Wy2Tlf/Xd+rhdxvs8 1187867079
+Received: from [192.168.18.11] (CPE-121-209-19-11.sa.bigpond.net.au
+	[121.209.19.11])
+	by mail.messagingengine.com (Postfix) with ESMTP id 299FF57
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Aug 2007 07:04:38 -0400 (EDT)
+Message-ID: <46CD69E3.707@whitby.id.au>
+Date: Thu, 23 Aug 2007 20:35:07 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.6 (Windows/20070728)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, koen@dominion.kabel.utwente.nl
-References: <E1IO9Sp-0000Q0-N9@linuxtogo.org>
-	<46CD5C96.7010608@dominion.kabel.utwente.nl>
-In-Reply-To: <46CD5C96.7010608@dominion.kabel.utwente.nl>
-Subject: Re: [oe-commits] org.oe.dev fbreader: Add libiconv depencency
+To: openembedded-devel@lists.openembedded.org
+References: <1ef816af0708221151m5c3c2b4ds9b90fdbddc56d8d1@mail.gmail.com>	<19c1b8a90708221646p6cfd0e6do6574668bbe15d775@mail.gmail.com>
+	<1ef816af0708230241s62454f78oa0147b10cae53ce6@mail.gmail.com>
+In-Reply-To: <1ef816af0708230241s62454f78oa0147b10cae53ce6@mail.gmail.com>
+Subject: Re: binutils-cross_2.17.50.0.5.bb failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,43 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2007 10:47:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 23 Aug 2007 11:05:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Moreover,
-
-http://bugs.openembedded.org/show_bug.cgi?id=2772
-
-  ;-)
-
-while we're at it. What would be the clean way to detect whether to pass 
-  -liconv or not? Check staging dir for its presence?
-
-Love,
-H
-
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+yakov.zaytsev@gmail.com wrote:
+> ..binutils-cross-2.17.50.0.5-r1/temp/log.do_configure.8057 contains
 > 
-> florian commit schreef:
->> fbreader: Add libiconv depencency
-> 
-> AAAAAAAAAAAAAAAAAAAAAAARGH!!!!!
-> 
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2007-July/002448.html
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFGzVyWMkyGM64RGpERAkd+AJkB3HtpH6NKUYPixG3ZX874cO/aZgCgqCcE
-> 2Nh6gTLHTS5QFDbQF1dI+qM=
-> =snzR
-> -----END PGP SIGNATURE-----
-> 
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+> --
+> /Volumes/OE/stuff/build/tmp/work/armv5te-angstrom-linux-gnueabi/binutils-
+> cross-2.17.50.0.5-r1/temp/run.do_configure.8057: line 782: do_configure:
+> command not found
+
+You've been bitten by the "build crosses midnight GMT" bitbake bug.
+
+Rebuild the affected package using "make rebuild-package-binutils-cross"
+if this occurs.  See Mickey's other email on the subject.
+
+-- Rod
 
 
