@@ -1,43 +1,23 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [72.29.79.205] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1IOA2n-0005R7-38; Thu, 23 Aug 2007 12:36:05 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 4352E28C013; Thu, 23 Aug 2007 12:32:00 +0200 (CEST)
-X-Spam-Flag: YES
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: *****
-X-Spam-Status: Yes, score=5.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-X-Spam-Report: * -2.6 BAYES_00 BODY: Bayesian spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
-	address *      [85.180.189.163 listed in dnsbl.sorbs.net]
-	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
-	*      [85.180.189.163 listed in zen.spamhaus.org]
-	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
-	*      [85.180.189.163 listed in combined.njabl.org]
-	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
-	*      [85.180.189.163 listed in zen.spamhaus.org]
-	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
-	* -2.1 AWL AWL: From: address is in the auto white-list
-Received: from PROMETHEUS (e180189163.adsl.alicedsl.de [85.180.189.163])
-	by srv043.dedi23.de (Postfix) with ESMTP id 794A728C012;
-	Thu, 23 Aug 2007 12:31:57 +0200 (CEST)
-Date: Thu, 23 Aug 2007 12:34:52 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1276313988.20070823123452@vanille-media.de>
-To: "hrw commit" <openembedded-commits@lists.openembedded.org>
-In-Reply-To: <E1IO8Hq-000267-GV@linuxtogo.org>
-References: <E1IO8Hq-000267-GV@linuxtogo.org>
+	(envelope-from <hacker@klever.net>) id 1IOADj-0005gl-2L
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Aug 2007 12:47:23 +0200
+Received: from pd953a869.dip0.t-ipconnect.de ([217.83.168.105]
+	helo=olympus.klever.net)
+	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.67) (envelope-from <hacker@klever.net>)
+	id 1IOACZ-0003VX-3M; Thu, 23 Aug 2007 12:46:11 +0200
+Message-ID: <46CD6554.6020405@klever.net>
+Date: Thu, 23 Aug 2007 12:45:40 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070815)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev python-dbus: make it build on amd64
+To: openembedded-devel@lists.openembedded.org, koen@dominion.kabel.utwente.nl
+References: <E1IO9Sp-0000Q0-N9@linuxtogo.org>
+	<46CD5C96.7010608@dominion.kabel.utwente.nl>
+In-Reply-To: <46CD5C96.7010608@dominion.kabel.utwente.nl>
+Subject: Re: [oe-commits] org.oe.dev fbreader: Add libiconv depencency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -51,32 +31,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2007 10:36:05 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 23 Aug 2007 10:47:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-hrw commit wrote:
-> python-dbus: make it build on amd64
+Moreover,
 
-Thanks, but how is this related to removing python-gobject[-native]?
+http://bugs.openembedded.org/show_bug.cgi?id=2772
 
-> #
-> # mt diff -rbec79f6189558adada5ebd875b63a2c71daf9d45
-> -r38e2cd40a04ac88008e433a43002415c562145e4
-> #
-> # 
-> # 
-> # delete "packages/python/python-pygobject-native_2.12.2.bb"
-> # 
-> # delete "packages/python/python-pygobject_2.12.2.bb"
+  ;-)
 
-?
+while we're at it. What would be the clean way to detect whether to pass 
+  -liconv or not? Check staging dir for its presence?
 
-Regards,
+Love,
+H
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> florian commit schreef:
+>> fbreader: Add libiconv depencency
+> 
+> AAAAAAAAAAAAAAAAAAAAAAARGH!!!!!
+> 
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2007-July/002448.html
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> 
+> iD8DBQFGzVyWMkyGM64RGpERAkd+AJkB3HtpH6NKUYPixG3ZX874cO/aZgCgqCcE
+> 2Nh6gTLHTS5QFDbQF1dI+qM=
+> =snzR
+> -----END PGP SIGNATURE-----
+> 
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
 
