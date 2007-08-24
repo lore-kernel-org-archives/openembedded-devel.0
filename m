@@ -1,20 +1,24 @@
-Received: from [209.85.198.186] (helo=rv-out-0910.google.com)
+Received: from [209.85.146.178] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rsenykoff@gmail.com>) id 1IOQgo-0002SU-9o
+	(envelope-from <raj.khem@gmail.com>) id 1IOT5B-0004ZN-48
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2007 06:22:30 +0200
-Received: by rv-out-0910.google.com with SMTP id c24so578922rvf
+	Fri, 24 Aug 2007 08:55:49 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so850720waf
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2007 21:21:14 -0700 (PDT)
-Received: by 10.115.90.1 with SMTP id s1mr3021661wal.1187929273579;
-	Thu, 23 Aug 2007 21:21:13 -0700 (PDT)
-Received: by 10.114.66.17 with HTTP; Thu, 23 Aug 2007 21:21:13 -0700 (PDT)
-Message-ID: <b7022e40708232121w53c4ec04g7df06dd2bf1e0dd5@mail.gmail.com>
-Date: Fri, 24 Aug 2007 00:21:13 -0400
-From: "Ron Senykoff" <rsenykoff@gmail.com>
+	Thu, 23 Aug 2007 23:54:32 -0700 (PDT)
+Received: by 10.114.56.1 with SMTP id e1mr307213waa.1187938472153;
+	Thu, 23 Aug 2007 23:54:32 -0700 (PDT)
+Received: by 10.115.73.16 with HTTP; Thu, 23 Aug 2007 23:54:32 -0700 (PDT)
+Message-ID: <19c1b8a90708232354t16781acan31b1cac9acdcb400@mail.gmail.com>
+Date: Thu, 23 Aug 2007 23:54:32 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <c384c5ea0708231330i33cd810bw945240f8a2f24e10@mail.gmail.com>
 MIME-Version: 1.0
-Subject: noob trying to build for i686 (PIII)
+References: <74d0deb30708230151h6601b1c3r9011b2a8d8eea2e8@mail.gmail.com>
+	<c384c5ea0708231322l708a9a5cv36b4958a233f6eea@mail.gmail.com>
+	<c384c5ea0708231330i33cd810bw945240f8a2f24e10@mail.gmail.com>
+Subject: Re: glibc-package.bbclass: [ -f ] doesn't take multiple arguments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,24 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2007 04:22:30 -0000
+X-List-Received-Date: Fri, 24 Aug 2007 06:55:49 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi I'm new to openembedded, not linux so much though.
+cp -a is not portable. e.g. on OSX  -a option is not available.  only
+one file is being copied here so I think -a is not needed.
 
-OK so I try to build nano, with 'bitbake nano'
-Here's the output: http://paste.uni.cc/16996
-And here's my local.conf: http://paste.uni.cc/16995
+-Khem
 
-I hosted these to save space.
-
-Any ideas? I'm going for a simple build for a PIII box that I need
-alsa support as I'll be using it in the trunk of my car to process
-audio in/out (a.k.a. www.duffroomcorrection.com)
-
-TIA
--Ron
+On 8/23/07, Leon Woestenberg <leon.woestenberg@gmail.com> wrote:
+> > I understand the condition fix, but are you sure the cp action should
+> > not have a wildcard??
+> >
+> My bad, didn't read the second patch chunk. Looks good.
+>
+> Regards,
+> --
+> Leon
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
