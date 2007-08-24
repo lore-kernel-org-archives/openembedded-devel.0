@@ -1,24 +1,32 @@
-Received: from [209.85.146.178] (helo=wa-out-1112.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IOT5B-0004ZN-48
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2007 08:55:49 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so850720waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2007 23:54:32 -0700 (PDT)
-Received: by 10.114.56.1 with SMTP id e1mr307213waa.1187938472153;
-	Thu, 23 Aug 2007 23:54:32 -0700 (PDT)
-Received: by 10.115.73.16 with HTTP; Thu, 23 Aug 2007 23:54:32 -0700 (PDT)
-Message-ID: <19c1b8a90708232354t16781acan31b1cac9acdcb400@mail.gmail.com>
-Date: Thu, 23 Aug 2007 23:54:32 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0708231330i33cd810bw945240f8a2f24e10@mail.gmail.com>
-MIME-Version: 1.0
-References: <74d0deb30708230151h6601b1c3r9011b2a8d8eea2e8@mail.gmail.com>
-	<c384c5ea0708231322l708a9a5cv36b4958a233f6eea@mail.gmail.com>
-	<c384c5ea0708231330i33cd810bw945240f8a2f24e10@mail.gmail.com>
-Subject: Re: glibc-package.bbclass: [ -f ] doesn't take multiple arguments
+	(envelope-from <rpurdie@rpsys.net>) id 1IOWfT-00057Y-0T
+	for openembedded-devel@openembedded.org; Fri, 24 Aug 2007 12:45:31 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7OAiFkS000650
+	for <openembedded-devel@openembedded.org>;
+	Fri, 24 Aug 2007 11:44:15 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 32719-08 for <openembedded-devel@openembedded.org>;
+	Fri, 24 Aug 2007 11:44:11 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7OAi7LO000643
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Fri, 24 Aug 2007 11:44:08 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <b7022e40708232121w53c4ec04g7df06dd2bf1e0dd5@mail.gmail.com>
+References: <b7022e40708232121w53c4ec04g7df06dd2bf1e0dd5@mail.gmail.com>
+Date: Fri, 24 Aug 2007 11:44:06 +0100
+Message-Id: <1187952247.6241.25.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: noob trying to build for i686 (PIII)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,30 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2007 06:55:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 24 Aug 2007 10:45:31 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-cp -a is not portable. e.g. on OSX  -a option is not available.  only
-one file is being copied here so I think -a is not needed.
+On Fri, 2007-08-24 at 00:21 -0400, Ron Senykoff wrote:
+> Hi I'm new to openembedded, not linux so much though.
+> 
+> OK so I try to build nano, with 'bitbake nano'
+> Here's the output: http://paste.uni.cc/16996
+> And here's my local.conf: http://paste.uni.cc/16995
+> 
+> I hosted these to save space.
+> 
+> Any ideas? I'm going for a simple build for a PIII box that I need
+> alsa support as I'll be using it in the trunk of my car to process
+> audio in/out (a.k.a. www.duffroomcorrection.com)
 
--Khem
+Delete these lines from local.conf, they're invalid:
 
-On 8/23/07, Leon Woestenberg <leon.woestenberg@gmail.com> wrote:
-> > I understand the condition fix, but are you sure the cp action should
-> > not have a wildcard??
-> >
-> My bad, didn't read the second patch chunk. Looks good.
->
-> Regards,
-> --
-> Leon
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+PREFERRED_PROVIDERS += " virtual/db-native"
+PREFERRED_PROVIDERS += " virtual/db"
+
+Regards,
+
+Richard
+
 
 
