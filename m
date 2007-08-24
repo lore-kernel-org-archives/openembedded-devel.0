@@ -1,20 +1,25 @@
-Received: from [64.233.162.230] (helo=nz-out-0506.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IOe0s-0003Ne-24
-	for Openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2007 20:36:06 +0200
-Received: by nz-out-0506.google.com with SMTP id j2so570379nzf
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2007 11:34:47 -0700 (PDT)
-Received: by 10.114.178.1 with SMTP id a1mr655638waf.1187980486787;
-	Fri, 24 Aug 2007 11:34:46 -0700 (PDT)
-Received: by 10.115.73.16 with HTTP; Fri, 24 Aug 2007 11:34:46 -0700 (PDT)
-Message-ID: <19c1b8a90708241134m5974cdd5ue518525705a1cf0d@mail.gmail.com>
-Date: Fri, 24 Aug 2007 11:34:46 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IOiYJ-0002e8-R6
+	for openembedded-devel@openembedded.org; Sat, 25 Aug 2007 01:26:55 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l7ONPT1R000535 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Aug 2007 01:25:29 +0200
+Message-ID: <46CF6903.7060703@dominion.kabel.utwente.nl>
+Date: Sat, 25 Aug 2007 01:25:55 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Subject: Prefer eglibc-initial for eglibc based angstrom distro.
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: OE website upgraded to drupal 5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,43 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2007 18:36:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 24 Aug 2007 23:26:56 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This is similar patch to commit 6951a4bf0c57a677b8f2cdf1144402fe1358e3e1
+Hi,
 
-OK?
+The oe website has been upgraded to drupal 5.2 (after a few failed attemps and restoring a
+week old backup) and all things seems to be running again.
 
-Thanks
+The only thing I couldn't fix is the sorting of posts on the frontpage, it needs to be
+sticky posts, new posts, old posts. Any drupal gurus with hints?
 
--Khem
+regards,
 
-#
-# old_revision [652ba8904b6a89303952bc2a381a883001ceda70]
-#
-# patch "conf/distro/include/angstrom-eglibc.inc"
-#  from [4e302c110a6fbfde708303672e19e149984c7108]
-#    to [58bb03f9d2c14cb37e201fb02fbd7f20e95a164e]
-#
-============================================================
---- conf/distro/include/angstrom-eglibc.inc
-4e302c110a6fbfde708303672e19e149984c7108
-+++ conf/distro/include/angstrom-eglibc.inc
-58bb03f9d2c14cb37e201fb02fbd7f20e95a164e
-@@ -1,7 +1,8 @@ PREFERRED_PROVIDER_virtual/libc ?= "egli
- # eglibc:
- PREFERRED_PROVIDER_virtual/libiconv ?= "eglibc"
- PREFERRED_PROVIDER_virtual/libintl ?= "eglibc"
- PREFERRED_PROVIDER_virtual/libc ?= "eglibc"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-initial ?= "eglibc-initial"
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc
-= "eglibc-intermediate"
- PREFERRED_PROVIDER_virtual/arm-angstrom-linux-gnueabi-libc-for-gcc
-= "eglibc-intermediate"
+iD8DBQFGz2kDMkyGM64RGpERAiAgAKCcOeGwBko2PH8bNxIuOjWPI8gVzgCgjeeU
+kI9/R0AEbs7uPB5KoTf4jKk=
+=Zymm
+-----END PGP SIGNATURE-----
 
 
