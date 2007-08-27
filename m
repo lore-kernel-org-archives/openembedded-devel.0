@@ -1,20 +1,28 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@hrw.one.pl>) id 1IPai5-0000TQ-Cb
-	for openembedded-devel@openembedded.org; Mon, 27 Aug 2007 11:16:37 +0200
-Received: (qmail 14493 invoked by uid 813007); 27 Aug 2007 09:15:03 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 27 Aug 2007 09:15:03 -0000
-From: Marcin Juszkiewicz <openembedded@hrw.one.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Aug 2007 11:15:01 +0200
-User-Agent: KMail/1.9.7
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IPaoN-0004ge-JB
+	for openembedded-devel@openembedded.org; Mon, 27 Aug 2007 11:23:07 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l7R9LQ1R011862 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Aug 2007 11:21:26 +0200
+Message-ID: <46D297B6.3010305@dominion.kabel.utwente.nl>
+Date: Mon, 27 Aug 2007 11:21:58 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
 References: <1188204435.2137.46.camel@localhost.localdomain>
 In-Reply-To: <1188204435.2137.46.camel@localhost.localdomain>
-MIME-Version: 1.0
-Message-Id: <200708271115.03336.openembedded@hrw.one.pl>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l7R9LQ1R011862
 Subject: Re: Why Not Remove Src after Install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,30 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2007 09:16:37 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Mon, 27 Aug 2007 09:23:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia poniedzia=C5=82ek, 27 sierpnia 2007, =E6=9D=A8=E5=90=8C=E5=B3=B0 napis=
-a=C5=82:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Please configure your mailer to create readable mails.
+=E6=9D=A8=E5=90=8C=E5=B3=B0 schreef:
+> Hello EveryOne :=20
+>            when I use OE to build OpenMoko , I found my disk has not
+> enough space .and the project has cost 13 G .=20
+>    we know that when finish of do_fetch ,the source will unpack to tmp
+> dir .  My question is why not remove the dir=20
+>    which uppack create to save usr's disk space ?=20
+>=20
+>           Another question is that where the file install to  ,and how
+> can i set it ?=20
+>            If i want to remove source files after install ,how can i do
+> it ?
+>=20
+>            Thank you !=20
 
-> when I use OE to build OpenMoko , I found my disk has not enough
-> space .and the project has cost 13 G. we know that when finish of
-> do_fetch ,the source will unpack to tmp dir .  My question is why not
-> remove the dir which uppack create to save usr's disk space ?
+INHERIT +=3D "rm_work"
 
-INHERIT +=3D "rm_work" in local.conf handle this for few years
+That should remove ${S} after completing the build.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+regards,
 
-  Alcohol may not solve any problems, but then again, neither does milk.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
+iD8DBQFG0pe2MkyGM64RGpERAtftAJ4nlRd3oqK0zQKaJZBj71Cn+3PQZACeJHTF
+sxhHpIpdxO0yMYihYU/kMBU=3D
+=3DWHjh
+-----END PGP SIGNATURE-----
 
 
