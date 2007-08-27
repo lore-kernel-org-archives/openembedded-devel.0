@@ -1,16 +1,17 @@
 Received: from [61.129.64.66] (helo=mail.og-int.com)
 	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <yangtf@envision.com.cn>) id 1IPW8S-0005Ao-Ra
+	(envelope-from <yangtf@envision.com.cn>) id 1IPWOz-0005Oz-0a
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Aug 2007 06:23:33 +0200
-Received: from [211.144.100.19]; Mon, 27 Aug 2007 12:21:50 +0800
+	Mon, 27 Aug 2007 06:40:39 +0200
+Received: from [211.144.100.19]; Mon, 27 Aug 2007 12:38:54 +0800
 From: =?UTF-8?Q?=E6=9D=A8=E5=90=8C=E5=B3=B0?= <yangtf@envision.com.cn>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <432beae0708262104o6ff849cr957ad60b1584e2ca@mail.gmail.com>
+In-Reply-To: <1188188630.2137.23.camel@localhost.localdomain>
 References: <1188186507.2137.17.camel@localhost.localdomain>
 	<432beae0708262104o6ff849cr957ad60b1584e2ca@mail.gmail.com>
-Date: Mon, 27 Aug 2007 12:23:50 +0800
-Message-Id: <1188188630.2137.23.camel@localhost.localdomain>
+	<1188188630.2137.23.camel@localhost.localdomain>
+Date: Mon, 27 Aug 2007 12:40:55 +0800
+Message-Id: <1188189655.2137.31.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.8.3 (2.8.3-2.fc6) 
 X-Content-Filtered-By: Mailman/MimeDel 2.1.9
@@ -28,53 +29,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2007 04:23:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Aug 2007 04:40:51 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-really?? Bitbake same to be single thread . My Main Idear is like this =20
-when some task is compiling ,Some task is fetching ,and other maybe
-do_installing .
-but  bitbake don't look like this .
+KEEP DOWNLOADING UNTIL ALL WAS DOWNLOAD,DON'T LET NET REST !
+-------------------------------
 
-Tongfeng.Yang
+We See that , all the  times when  in compiling . No Task is
+downloading .
+This is a big waste of time . 
 
-=E5=9C=A8 2007-08-26=E6=97=A5=E7=9A=84 21:04 -0700=EF=BC=8CJustin Patrin=E5=
-=86=99=E9=81=93=EF=BC=9A
+My Idear is KEEP DOWNLOADING UNTIL ALL WAS DOWNLOAD,DON'T LET NET REST !
 
-> On 8/26/07, =E6=9D=A8=E5=90=8C=E5=B3=B0 <yangtf@envision.com.cn> wrote:
-> > EveryOne:
-> >       By two week  of using OE , I hava notice that task was topology
-> > sort to a queue .and  Run Task One By One.
-> > draw on the experience of Design of CPU . we can make a multiply thread
-> > run of it !
-> >
-> >       I notice that the biggest bottleneck of OE is do_fetch . then we
-> > can use a mutiply thread downloader instead of wget
-> >       And about task schedule ,use method like this:
-> >
-> >      bb_No1 do_fetch   do_patch do_configure do_build do_install
-> >      bb_No2                  do_fetch  do_patch       do_configure
-> > do_build do_install
-> >      bb_No3                                 do_fetch      do_patch
-> > do_configure do_build do_install
-> >      bb_No4
-> > do_fetch  .......
-> >
-> >      Idea 1 :    focus on download one file one time ,and make it more
-> > fast use mutiply thread downloader
-> >      Idea 2 :    make 0ther task of bb files  to run  asynchronously
-> >      Idea 3 :   deal with task  topology more carefully to make sure
-> > that  the bb file that was dependend was finish before
-> >                     this one start to do_patch (Notice : not before
-> > do_fetch )
-> >      Idea 4 :   If topology can't make sure Idea 3 ,we must tell OE how
-> > and when  to wait
-> >
-> >      If the Idea can come true ,The speed can go 3 times faster then
-> > now
-> >
->=20
-> bitbake already does this.
->=20
+If the whole compile is not finish ,Keep Downling !!!!!
+
+The one who has a big width of net ,can't understand my feeling who 
+has only 5k/s width of net .
+
+R
 
