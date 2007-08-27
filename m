@@ -1,33 +1,17 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1IOuFf-0005Rx-SM
-	for openembedded-devel@openembedded.org; Sat, 25 Aug 2007 13:56:31 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1IOuEI-0001fE-2E
-	for openembedded-devel@openembedded.org; Sat, 25 Aug 2007 13:55:02 +0200
-Received: from fon38-2-82-237-108-87.fbx.proxad.net ([82.237.108.87])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 25 Aug 2007 13:55:02 +0200
-Received: from clement.hermann by fon38-2-82-237-108-87.fbx.proxad.net with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 25 Aug 2007 13:55:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: =?utf-8?b?Q2zDqW1lbnQ=?= Hermann =?utf-8?b?KG5vZGVucyk=?=
-	<clement.hermann@free.fr>
-Date: Sat, 25 Aug 2007 11:40:03 +0000 (UTC)
-Message-ID: <loom.20070825T132824-492@post.gmane.org>
+Received: from [61.129.64.66] (helo=mail.og-int.com)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <yangtf@envision.com.cn>) id 1IPVaC-0000aP-Bc
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Aug 2007 05:48:08 +0200
+Received: from [211.144.100.19]; Mon, 27 Aug 2007 11:46:25 +0800
+From: =?UTF-8?Q?=E6=9D=A8=E5=90=8C=E5=B3=B0?= <yangtf@envision.com.cn>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Aug 2007 11:48:27 +0800
+Message-Id: <1188186507.2137.17.camel@localhost.localdomain>
 Mime-Version: 1.0
-X-Complaints-To: usenet@sea.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 82.237.108.87 (Mozilla/5.0 (X11; U; Linux i686 (x86_64); fr;
-	rv:1.8.1.6) Gecko/20070723 Iceweasel/2.0.0.6 (Debian-2.0.0.6-1))
-Sender: news <news@sea.gmane.org>
-Subject: Re: OE website upgraded to drupal 5.2
+X-Mailer: Evolution 2.8.3 (2.8.3-2.fc6) 
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: I hava an idea to Make OpenEmbedded Run Faster
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,54 +25,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Aug 2007 11:56:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 27 Aug 2007 03:48:08 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-> Hi,
->
-> The oe website has been upgraded to drupal 5.2 (after a few failed attemps
-> and restoring a
-> week old backup) and all things seems to be running again.
->
-> The only thing I couldn't fix is the sorting of posts on the frontpage, it
-> needs to be
-> sticky posts, new posts, old posts. Any drupal gurus with hints?
->
- 
-The wiki seems to have problems as well.
- 
-Displaying a page shows the following warnings :
- 
- 
-    * warning: pg_query() [function.pg-query]: Query failed: ERROR: relation
-"wiki_access" does not exist in /var/www/oe/includes/database.pgsql.inc on
-line 125.
-    * user warning: query: SELECT COUNT(*) FROM wiki_access WHERE (nid = 0 OR
-nid = 77) AND ((gid = 0 AND realm = 'all')) AND grant_wiki_manage >= 1 in
-/var/www/oe/includes/database.pgsql.inc on line 144.
-    * warning: pg_query() [function.pg-query]: Query failed: ERROR: relation
-"wiki_access" does not exist in /var/www/oe/includes/database.pgsql.inc on
-line 125.
-    * user warning: query: SELECT COUNT(*) FROM wiki_access WHERE (nid = 0 OR
-nid = 77) AND ((gid = 0 AND realm = 'all')) AND grant_wiki_move >= 1 in
-/var/www/oe/includes/database.pgsql.inc on line 144.
- 
- 
-Also, editing is broken, and there is no "search" box in the top right : only
-"array" is shown there.
- 
-Regarding the "wiki_access table" problem, if liquid if used as the wiki module,
-the problem seems to lies in postgresql handling by liquid. I don't use
-postgresql much so I don't know for sure, but according to comments on
-http://drupal.org/node/117309 there is no postgresql install scripts. That could
-explain the "no relation" error.
- 
-Cheers,
- 
---
-Clément Hermann (nodens)
-                                                         
+EveryOne: 
+      By two week  of using OE , I hava notice that task was topology
+sort to a queue .and  Run Task One By One. 
+draw on the experience of Design of CPU . we can make a multiply thread
+run of it ! 
 
+      I notice that the biggest bottleneck of OE is do_fetch . then we
+can use a mutiply thread downloader instead of wget 
+      And about task schedule ,use method like this:
 
+     bb_No1 do_fetch   do_patch do_configure do_build do_install
+     bb_No2                  do_fetch  do_patch       do_configure
+do_build do_install
+     bb_No3                                 do_fetch      do_patch
+do_configure do_build do_install
+     bb_No4
+do_fetch  .......
+
+     Idea 1 :    focus on download one file one time ,and make it more
+fast use mutiply thread downloader 
+     Idea 2 :    make 0ther task of bb files  to run  asynchronously 
+     Idea 3 :   deal with task  topology more carefully to make sure
+that  the bb file that was dependend was finish before
+                    this one start to do_patch (Notice : not before
+do_fetch ) 
+     Idea 4 :   If topology can't make sure Idea 3 ,we must tell OE how
+and when  to wait 
+
+     If the Idea can come true ,The speed can go 3 times faster then
+now 
+
+Tongfeng Yang
+2007-8-27
 
