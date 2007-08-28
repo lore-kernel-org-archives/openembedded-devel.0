@@ -1,35 +1,35 @@
-Received: from [62.75.240.18] (helo=sirius.lasnet.de)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <stefan@datenfreihafen.org>) id 1IPxjf-0004QQ-Fa
+	(envelope-from <mickey@vanille-media.de>) id 1IPzJG-0005nS-65
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Aug 2007 11:51:48 +0200
-Received: from p3ee2f822.dip.t-dialin.net ([62.226.248.34]
-	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1IPxi0-00057z-L6 by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2007 11:50:07 +0200
-Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.67)
-	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
-	id 1IPxhz-0006GV-M4 for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Aug 2007 11:50:03 +0200
-Date: Tue, 28 Aug 2007 11:50:03 +0200
-From: Stefan Schmidt <stefan@openmoko.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20070828095003.GA7730@dodger.lab.datenfreihafen.org>
-References: <1188293940.3521.12.camel@localhost.localdomain>
-MIME-Version: 1.0
-In-Reply-To: <1188293940.3521.12.camel@localhost.localdomain>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.16 (2007-06-11)
+	Tue, 28 Aug 2007 13:32:39 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 4FB8F28C013; Tue, 28 Aug 2007 13:27:52 +0200 (CEST)
 X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-Subject: Re: I got a err : AttributeError: 'FetchData' object has no	attribute 'method'
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180188141.adsl.alicedsl.de [85.180.188.141])
+	by srv043.dedi23.de (Postfix) with ESMTP id 3D79028C012;
+	Tue, 28 Aug 2007 13:27:49 +0200 (CEST)
+Date: Tue, 28 Aug 2007 13:30:58 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <25555951.20070828133058@vanille-media.de>
+To: Koen Kooi <koen@dominion.kabel.utwente.nl>
+In-Reply-To: <46D390C3.5060002@dominion.kabel.utwente.nl>
+References: <E1IPpOO-0001sJ-O8@linuxtogo.org>
+	<46D390C3.5060002@dominion.kabel.utwente.nl>
+MIME-Version: 1.0
+Cc: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>,
+	openembedded-devel@lists.openembedded.org,
+	openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] org.oe.dev add midori, a lightweight web browser based on webkit-gtk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,26 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2007 09:51:51 -0000
+X-List-Received-Date: Tue, 28 Aug 2007 11:32:50 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-Hello.
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
-On Tue, 2007-08-28 at 17:39, Tongfeng.Yang wrote:
-> 11 SRC_URI =
-> "svn://svn.openmoko.org/trunk/src/target;module=gsm;proto=http \
-> 12            file://gsmd \
-> 13            file://default"\
-> 14            file://fix-mlbuf.patch;patch=1
+> mickeyl commit schreef:
+>> add midori, a lightweight web browser based on webkit-gtk
 
-Wrong quotes. Try:
-11 SRC_URI = "svn://svn.openmoko.org/trunk/src/target;module=gsm;proto=http \
-12            file://gsmd \
-13            file://default\
-14            file://fix-mlbuf.patch;patch=1"
+> One recipe for midori isn't enough?!?!
 
-regards
-Stefan Schmidt
+Err, right. Sorry. I was kind of expecting it to sit in the midori
+directory ;)
+
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
