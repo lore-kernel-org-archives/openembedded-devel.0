@@ -1,35 +1,24 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IPzJG-0005nS-65
+	(envelope-from <sdgvulpes@gmail.com>) id 1IQ1Hw-0004ME-1D
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Aug 2007 13:32:39 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 4FB8F28C013; Tue, 28 Aug 2007 13:27:52 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180188141.adsl.alicedsl.de [85.180.188.141])
-	by srv043.dedi23.de (Postfix) with ESMTP id 3D79028C012;
-	Tue, 28 Aug 2007 13:27:49 +0200 (CEST)
-Date: Tue, 28 Aug 2007 13:30:58 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <25555951.20070828133058@vanille-media.de>
-To: Koen Kooi <koen@dominion.kabel.utwente.nl>
-In-Reply-To: <46D390C3.5060002@dominion.kabel.utwente.nl>
-References: <E1IPpOO-0001sJ-O8@linuxtogo.org>
-	<46D390C3.5060002@dominion.kabel.utwente.nl>
+	Tue, 28 Aug 2007 15:39:35 +0200
+Received: by ug-out-1314.google.com with SMTP id m3so169204ugc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Aug 2007 06:37:43 -0700 (PDT)
+Received: by 10.142.240.9 with SMTP id n9mr572681wfh.1188308261883;
+	Tue, 28 Aug 2007 06:37:41 -0700 (PDT)
+Received: by 10.143.40.5 with HTTP; Tue, 28 Aug 2007 06:37:41 -0700 (PDT)
+Message-ID: <f34f85580708280637s4528b5f5o9abea5afe1b36c30@mail.gmail.com>
+Date: Tue, 28 Aug 2007 09:37:41 -0400
+From: "Todd Blumer" <sdgvulpes@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1185226710.6148.133.camel@localhost.localdomain>
 MIME-Version: 1.0
-Cc: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev add midori, a lightweight web browser based on webkit-gtk
+References: <1185226710.6148.133.camel@localhost.localdomain>
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
+Subject: Re: Angstrom Core Team
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,27 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2007 11:32:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 28 Aug 2007 13:39:44 -0000
+X-List-Received-Date: Tue, 28 Aug 2007 13:39:44 -0000
+X-List-Received-Date: Tue, 28 Aug 2007 13:39:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On 7/23/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> Hi Guys,
+>
+> As people will note, Laibsch (Rolf) has been frustrated by politics and
+> personalities getting in the way of development and this is *bad*. I
+> don't think anyone wants this.
+>
+> With this in mind I'd like to propose creating a formal core of Angstrom
+> developers similar to that which exists in OE (and has seemed to work
+> well as far as I know).
+>
 
-> mickeyl commit schreef:
->> add midori, a lightweight web browser based on webkit-gtk
-
-> One recipe for midori isn't enough?!?!
-
-Err, right. Sorry. I was kind of expecting it to sit in the midori
-directory ;)
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Where do things stand on the Angstrom core team? Does Angstrom have a
+planned release date? Will it create a branch from oe.dev for
+maintenance?
+--
+Todd
 
 
