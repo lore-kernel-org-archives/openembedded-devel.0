@@ -1,35 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IQVgo-0006I7-3U
-	for openembedded-devel@openembedded.org; Thu, 30 Aug 2007 00:07:08 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7TM5FFT005614
-	for <openembedded-devel@openembedded.org>;
-	Wed, 29 Aug 2007 23:05:15 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 05235-07 for <openembedded-devel@openembedded.org>;
-	Wed, 29 Aug 2007 23:05:07 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l7TM55d4005597
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 29 Aug 2007 23:05:05 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <c384c5ea0708291421p418dc698vdda76fa4deabcbbf@mail.gmail.com>
-References: <1187692103.6234.7.camel@localhost.localdomain>
-	<46CC3773.8010707@dominion.kabel.utwente.nl>
-	<109919.20070822152350@vanille-media.de>
-	<c384c5ea0708291421p418dc698vdda76fa4deabcbbf@mail.gmail.com>
-Date: Wed, 29 Aug 2007 23:05:04 +0100
-Message-Id: <1188425104.6238.51.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: RFC: Upgrade OE.dev to bitbake 1.8.8
+	(envelope-from <raj.khem@gmail.com>) id 1IQZWv-0000Vb-6f
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Aug 2007 04:13:09 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so437744waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Aug 2007 19:11:19 -0700 (PDT)
+Received: by 10.114.126.1 with SMTP id y1mr11918wac.1188439877940;
+	Wed, 29 Aug 2007 19:11:17 -0700 (PDT)
+Received: by 10.114.208.14 with HTTP; Wed, 29 Aug 2007 19:11:17 -0700 (PDT)
+Message-ID: <19c1b8a90708291911v7a51bc8br6d7420f1ed42681d@mail.gmail.com>
+Date: Wed, 29 Aug 2007 19:11:17 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <c384c5ea0708291400v5cddc2e4wf6c7798e46c6f568@mail.gmail.com>
+MIME-Version: 1.0
+References: <19c1b8a90708291146j62853e81x665efee7a6087d11@mail.gmail.com>
+	<c384c5ea0708291400v5cddc2e4wf6c7798e46c6f568@mail.gmail.com>
+Subject: Re: Eglibc package to provide glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,22 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2007 22:07:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 30 Aug 2007 02:13:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2007-08-29 at 23:21 +0200, Leon Woestenberg wrote:
-> Are the OE->bitbake version-dependencies documented or tagged anywhere?
-> 
-> If not yet, I would propose to tag the OE repository with a tag like
-> "PRE-BITBAKE-1_8_8" or whatever is supported/desired for mtn/oe.
+Hi Leon
 
-$ cat conf/sanity.conf | grep VER
-BB_MIN_VERSION = "1.8.5"
+Yes I did.
+http://bugs.openembedded.org/show_bug.cgi?id=2894
 
-Cheers,
+Thanks
 
-Richard
+-khem
 
+On 8/29/07, Leon Woestenberg <leon.woestenberg@gmail.com> wrote:
+> Khem,
+>
+> On 8/29/07, Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > This patch adds support to eglibc to provide glibc packages so that
+> > all dependencies can me satisfied from eglibc.
+> >
+> > Tested on angstrom-console-image
+> >
+> Did you submit a patch to the bugtracker, commit it to the repo or try
+> to attach one?
+>
+> Thanks,
+> --
+> Leon
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
