@@ -1,16 +1,26 @@
-Received: from [61.129.64.66] (helo=mail.og-int.com)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <yangtf@envision.com.cn>) id 1IQZbR-0000Z9-4o
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Aug 2007 04:17:49 +0200
-Received: from [218.80.208.102]; Thu, 30 Aug 2007 10:15:44 +0800
-From: "Tongfeng.Yang" <yangtf@envision.com.cn>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Aug 2007 10:17:40 +0800
-Message-Id: <1188440260.32489.12.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.8.3 (2.8.3-2.fc6) 
-Subject: Problem: how to use kernel and cross-compiler that already exist
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IQdsx-00084o-NW
+	for openembedded-devel@openembedded.org; Thu, 30 Aug 2007 08:52:11 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l7U6oF1R007734 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Aug 2007 08:50:15 +0200
+Message-ID: <46D668CE.6020301@dominion.kabel.utwente.nl>
+Date: Thu, 30 Aug 2007 08:50:54 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <e9c3a7c20708291836v6cee3f34kba062518468c360f@mail.gmail.com>
+In-Reply-To: <e9c3a7c20708291836v6cee3f34kba062518468c360f@mail.gmail.com>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: [rfc] [patch] samba 3.0.25c support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -24,25 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2007 02:17:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 30 Aug 2007 06:52:12 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hello EveryOne:
-       I have a kernel and cross-compiler for a special device . and I
-want to run openmoko on that device .
-so the best way is use the exist tool to compile it ! I notice that OE
-auto fetch and compile cross tool .but think this :
-       My target device use glibc2.3.3 gcc 3.3.4 .so i change .conf file
-to this . But It can't pass . Lots of error occur when do_configure and
-do_build . so use exist tool is the only way i can go !
-        
-        how ?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Best wishes
+Dan Williams schreef:
+> Please find attached two patches to get samba-3.0.25c building and
+> running. 
 
-Tongfeng.Yang 
+Thanks for your effort, could you attach it to bugzilla so it doesn't get lost or forgotten?
 
+regards,
 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFG1mjNMkyGM64RGpERAuyxAJ97VKL3LulbNTxNP/S7LzJG3qg0rwCgjy7S
+BkxVZUeXRfMgVhqpzeuA6jE=
+=L92/
+-----END PGP SIGNATURE-----
 
 
