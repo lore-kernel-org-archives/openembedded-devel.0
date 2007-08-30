@@ -1,24 +1,22 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IQeLp-0004LH-Gd
-	for openembedded-devel@openembedded.org; Thu, 30 Aug 2007 09:22:01 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l7U7K41R012680; Thu, 30 Aug 2007 09:20:05 +0200
-Message-ID: <46D66FCB.2090308@dominion.kabel.utwente.nl>
-Date: Thu, 30 Aug 2007 09:20:43 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <skoroneos@digital-opsis.com>) id 1IQeYZ-0004dN-Oa
+	for openembedded-devel@openembedded.org; Thu, 30 Aug 2007 09:35:11 +0200
+Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B02A6C8D5 for openembedded-devel@openembedded.org;
+	Thu, 30 Aug 2007 09:32:11 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Thu, 30 Aug 2007 10:33:20 +0300
+Message-ID: <HOECLKEKOHLAMMGDLLBHKEOGMBAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-Subject: Commits from company keys
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+Importance: Normal
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
+In-Reply-To: <e9c3a7c20708291836v6cee3f34kba062518468c360f@mail.gmail.com>
+Subject: Re: [rfc] [patch] samba 3.0.25c support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,41 +30,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2007 07:22:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 30 Aug 2007 07:35:12 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dan,
 
-Hi,
+Could you post it to the bug tracker also, so devs can pick it up from there
 
-Since yesterday we have a key in our db for a company, so that their development team can
-use to push patches without having to all have their personal key.
+Stelios S. Koroneos
 
-Since that clashes with our "one key maps to one person" policy from the past, people
-using those keys _*MUST*_ use 'mtn commit <foo> --author "theirrealemail@address.com"'.
-That way it is clear which _person_ made that commit.
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
 
-If you forget it, you can always sign that revision with your personal key (-k
-your@keyid.org) and push with the company key, since permission checks are based on _who_
-pushes, not on the author of the commits.
 
-If a company keeps refusing to use --author the OE core team should re-evaluate the
-presence of the key.
+> -----Original Message-----
+> From: openembedded-devel-bounces@openembedded.org
+> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
+> Dan Williams
+> Sent: Thursday, August 30, 2007 4:37 AM
+> To: openembedded-devel@openembedded.org
+> Subject: [oe] [rfc] [patch] samba 3.0.25c support
+>
+>
+> Please find attached two patches to get samba-3.0.25c building and
+> running.  The big build hurdle was autotools.bbclass not including all
+> of samba's *.m4 files.
+>
+> Please check that I was not overzealous in the cross-compilation
+> options that I forced to 'enabled' in configure.in.  At least one,
+> HAVE_GETGROUPLIST, prevents runtime errors.
+>
+> These patches are based on revision
+> f2109f0b5423893b09743e0a086dd3e86b7e57cb.  Tested with:
+> MACHINE = i686-generic
+> DISTRO = angstrom-2007.1
+>
+> Regards,
+> Dan
+>
 
-regards,
 
-Koen
-
-PS: the diffs from said company itself look awesome at the moment, but aren't retracable
-to a person.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFG1m/LMkyGM64RGpERAgzPAJ9/tYjOBcyA5gQ+kFebjZGb3HzxmwCgnDyM
-d++z29jLmb0rLILdrQwy/S0=
-=MjPO
------END PGP SIGNATURE-----
 
 
