@@ -1,13 +1,13 @@
 Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IR4iS-0003P9-41
-	for openembedded-devel@openembedded.org; Fri, 31 Aug 2007 13:31:08 +0200
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IR4ke-0003SX-JJ
+	for openembedded-devel@openembedded.org; Fri, 31 Aug 2007 13:33:24 +0200
 Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
 	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l7VBT31R020586 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2007 13:29:03 +0200
-Message-ID: <46D7FBA9.7060104@dominion.kabel.utwente.nl>
-Date: Fri, 31 Aug 2007 13:29:45 +0200
+	l7VBVG1R020937 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Aug 2007 13:31:16 +0200
+Message-ID: <46D7FC2E.9060702@dominion.kabel.utwente.nl>
+Date: Fri, 31 Aug 2007 13:31:58 +0200
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
 User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
@@ -19,7 +19,9 @@ X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
 X-UTwente-MailScanner: Found to be clean
 X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
 X-Spam-Status: No
-Subject: [RFC][PATCH] Merging classes with poky
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l7VBVG1R020937
+Subject: OE 'weekly' changelog
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,733 +35,453 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2007 11:31:08 -0000
-Content-Type: multipart/mixed; boundary="------------080602070604030703000103"
-
---------------080602070604030703000103
+X-List-Received-Date: Fri, 31 Aug 2007 11:33:25 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Hi,
+A day late and a dollar short:
 
-After spending some time playing with meld I have some patches to RFC.
+cbrake@openembedded.org:
+    MAINTAINERS: update my entry
+    mono-1.2.5pre5: add mono 1.2.5pre5
 
-The most important ones are teh package* and rootfs* that have fixes for multithreaded
-bitbake.
+clement.hermann@free.fr:
+    udev: add sbin into PATH for network.sh, should close #2869
 
-regards,
+craig@gumstix.com:
+    initscripts: lower alignment value for gumstix boards - close #2890
 
-Koen
+crofton@openembedded.org:
+    gumstix.inc : Make sure RECOMMENDED modules get into minimal image.
+    base-files : Add machine specific fstabs for gumstix-{connex, verdex}=
+. In the
+    gumstick-*.conf : Move machine specific parts from gumstix.inc to the
+gumstix-{connex,verdex}
+    omap5912osk.conf : Clean up machine file.
+    base-files : Update fstab for omap5912osk to clear up a boot time err=
+or.
+    angstrom-minimal-image : Use mount from util-linux. Needed to moutn t=
+mpfs.
+    MAINTAINERS : Another update to Philip Balister.
+    MAINTAINERS : Update entry for Philip Balister
+    libnetfilter-queue : Add versioned dependency on libtool-cross
+    libnetfilter_queue : Add libnetfilter_queue to OE. Needs libtool 1.5.=
+24 to build.
+    linux-omap : Add support for more machines. Clean up ABI handling. Mo=
+ve toward
+linux.inc compatible structure.
+    linux : Do not set LOCALVERSION in kernel defconfig.
+    linux : Update defconfig for gumstix connex/basix from gumstix svn.
+    linux : Update defconfig for gumstix verdex from gumstix svn.
+    linux : Update pxafb-definition.patch from gumstix svn.
+    ltp : Commit patch intended for earlier commit. from bug #2078.
+
+daniel@openembedded.org:
+    linux-gta01_2.6.22.5.bb: Modify fix-EVIOCGRAB-semantics patch for 2.6=
+.22 and
+
+florian@openembedded.org:
+    intltool: increment PR
+    intltool: It needs some perl modules to work at all - latest ones at =
+least.
+    linux-hackndev-2.6: PR++
+    linux-hackndev-2.6: Update Palm TX defconfig from upstream defconfig:=
+ Build bluetooth,
+border and pcmcia modules, some configuration changes, reduce number of P=
+TYs.
+    palm.conf: Autoload the TX battery module.
+    palmtx.conf: Include more modules, makes sound, battery and pcmcia wo=
+rk.
+    xserver-common: Add 1.18, drop some older versions.
+    fbreader: Get rid of iconv crap
+    task-gpephone: Add vochistory
+    ptim-engine: Package additional files
+    libabenabler2: Add version 1.0
+    gpe-session-scripts-phone: Drop some environment crap.
+    vochistory: Add 0.1
+    xserver-common: Add 1.17
+    fbreader: fix dependency
+    libsettings: Update download location
+    gpe-bootsplash: Update GPE version number for Angstr=C3=B6m
+    fbreader: Add libiconv depencency
+    librsvg: Add 2.11.1 again
+
+freyther@openembedded.org:
+    python-openmoko: Apply Marcin's patch until today as this is going to=
+ be applied upstream
+
+hrw@openembedded.org:
+    gcc/gcc-cross 4.1.2: bump PR to build working compiler after broken A=
+RM Crunch
+    disapproval of revision '4fb1a7447c5d8ace96a5ac6358c7fe10f0d951c4'
+    linux-gta01: use KERNELORG_MIRROR instead of german mirror
+    update-modules: depend on depmod (Take from Poky - r2589)
+    nfs-utils: start/stop also statd so clients will be able to do lockin=
+g (Taken from
+Poky -r2578) - close #2799
+    nfs-utils: Add patch to work with uclibc (Taken from Poky -r1796)
+    nfs-utils: do not check for nfsd kernel module as it can be built-in =
+into kernel.
+(Taken from Poky - r1395)
+    disapproval of revision 'a8eed6047c4764f6f475a519b127e6c00f07442e'
+    nfs-utils: do not check for nfsd kernel module as it can be built-in =
+into kernel.
+(Taken from Poky - r1395)
+    linux: added forgotten alix patches - close #2878
+    linux: switched ALIX to 2.6.23-r3, added MFGPT patches, changed confi=
+g
+    alsa: added 1.0.14 from Poky
+    portmap: added 6.0 from Poky
+    lmsensors-apps: totally changed packaging + build of sensors applicat=
+ion
+    disapproval of revision '11e7fd7a1d2b01efd7be20943672ee11977561e2'
+    lmsensors-apps: upgrade to 2.10.4, build also sensors app
+    less: update to 406 (from Poky), drop older ones
+    powertop: update to 1.8
+    linux: select proper PATA driver for Alix board
+    gtk+ 2.10.14: fix combo-arrow-size.patch (from Poky) - closes #2845
+    grub: rdepend on diffutils to get 'cmp' command needed by grub-instal=
+l
+    openmoko: use proper version of qemu
+    MAINTAINERS: updated my entry
+    python-dbus: make it build on amd64
+    python-openmoko: make it build on amd64
+    disapproval of revision '38e2cd40a04ac88008e433a43002415c562145e4'
+    python-dbus: make it build on amd64
+
+ifaistos@openembedded.org:
+    packages/asterisk/asterisk_1.4.11.bb : Add asterisk 1.4.11
+    dropped  packages/asterisk/asterisk_1.2.23.bb : remove old asterisk v=
+ersion
+    packages/asterisk/asterisk_1.2.18.bb : Remove old asterisk version
+
+jin@mediatomb.org:
+    image-magick: fix staging and packaging, closes #2892
+
+koen@openembedded.org:
+    bluez: update to 3.17
+    apt: sync with poky
+    dpkg-native: do not DEPENDS on u-a-native, since u-a-native already d=
+epends on this ->
+loop
+    angstrom-package*: select proper u-a
+    dpkg: merge fixes from poky, update to 1.3.25
+    gcc 4.1.2: add patches for maverick crunch (that's an FPU)
+    gcc 4.2.1: add patches for maverick crunch on ep93xx (That's an FPU)
+    zaurus-2.6.inc: consistently suffix jffs2 images with jffs2
+    mtd-utils: lock down git rev
+    angstrom-x11-<foo>-image: fix basename
+    bluez-gnome: update to 0.14
+    bluez: update to 3.16
+    c7x0: use imageon xserver
+    angstrom x11 office: add gphoto2
+    squid: add 2.6-stable14
+    blktool: add 4 (from poky)
+    dht-walnot: set UBOOT_ENTRYPOINT in preparation of kernel recipe clea=
+nup
+    angstrom-x11-images: follow angstrom-x11-<task>-image naming (thanks =
+hrw)
+    angstrom: add more images:
+    fic-gta01, fic-gta02, smdk2443: set UBOOT_ENTRYPOINT in preparation o=
+f kernel recipe
+cleanup
+    uclibc 0.9.29: add templates for different ARM generations and use iw=
+mmxt for
+gumstix-verdex
+    openmoko-session2: fix tap-n-hold
+    h2200: fix defconfig
+    openmoko-dialer2: apply patch from
+http://bugzilla.openmoko.org/cgi-bin/bugzilla/show_bug.cgi?id=3D757
+    openmoko-panel-bt: add patch from
+http://bugzilla.openmoko.org/cgi-bin/bugzilla/show_bug.cgi?id=3D639
+    uclibc.inc: add support for uclinux-uclibc binaries
+    uclibc 0.9.29: add config files for gumstix
+    rootfs*.bbclass: uclibc doesn't provides glibc-locale* and locale-bas=
+e*, so don't try
+to install it
+    angstrom.inc: let sepukku delete the workdir on failure, not tindercl=
+ient
+    linux-handhelds: include wifi support in h2200 kernel and enable usb =
+drivers
+    openssl: add arm/uclibc support
+    machine tune files: add FEED_ARCH to the usual suspects to make out-o=
+f-tree machines work
+    avahi: attempt #1 to stop it building python by default
+    angstrom: add preferred provider for avahi
+    angstrom: add sane defaults for tinderclient and seppuku
+    angstrom: start adding support for building .debs and .rpms instead o=
+f .ipk packages
+    gcc: drop lock files
+    gcc 4.2.1: add extra patches for uclibc build
+    disapproval of revision '6b34ae43bf4f59a33f79e42d0cc2ad1b0d5e0c6e'
+    bluez-utils: depend on gstreamer for headset stuff
+    olsrd: update to 0.5.3
+    sane-frontends: add 1.0.13
+    sane-backends: fix packaging and staging
+    gimp: add 2.3.19, unify old recipes
+    linux.inc: add PV into uboot comment
+    libhildonmime: depends on gnome-vfs
+    xserver-xorg: fix -dbg packaging
+    libtool-native 1.5.24: DEFAULT_PREFERENCE =3D "-1"
+    automake-native 1.10: add DEFAULT_PREFERENCE =3D "-1"
+    mono: move patchdir, should fix #2851
+    mono: fix PV for 1.2.5pre so we don't need an epoch for the 1.2.5 rel=
+ease (see our
+versioning policy at http://www.openembedded.org/versioningpolicy )
+    linux: add 2.6.22+2.6.23-rc3 for at91 machines
+    linux 2.6.21: bump PR after all those changes
+    linux.inc: catch up with depends after gumstix changes
+    bluez-utils: update to 3.15, get out your a2dp headsets :)
+    bluez-libs: update to 3.15
+    linux 2.6.21: fix gumstix patches and verdex defconfig (works with iw=
+mmxt now)
+    gumstix: fix name
+    angstrom: add feed archs for new gumstix machines
+    linux 2.6.21: split gumstix into connex and verdex
+    gumstix: split into connex and verdex
+    gnuplot: update to 4.2.0
+    pidgin: update to 2.1.1, enable avahi
+    seppuku.bbclass: add more debugging and keep attaching buildlogs for =
+known bugs
+    disapproval of revision '0c3cbec705ed9bb1d768da4c43b21a210b3a4609'
+
+likewise@openembedded.org:
+    Fixed x86-prescott and added x86-32-nocona machines.
+    helloworld-image: trimmed the .bb, had second copy of itself
+    linux-x86: Build bzImage, some kernels grew too large for zImage.
+    x86-prescott: Added new machine.
+
+mickeyl:
+    rename linux-gta01 to linux-openmoko, this kernel will be useful on a=
+ family of devices,
+    linux-gta01: use gta01 defconfig for gta02
+    linux-gta01: use linux-gta02 as kernel
+    linux-gta01: make it compatible w/ gta02, adjust DEPENDS
+    add openmoko-firststart2
+    openmoko-mediaplayer2: ship images, remove patches that have been app=
+lied upstream
+
+mickeyl@openembedded.org:
+    openmoko-theme-standard2: use SVNREV
+    imlib2: set OE_LT_RPATH_ALLOW to make imlib find its modules
+    efl_base.bbclass: presource task is no longer necessary
+    openmoko-terminal2: use more appropriate icon, bump PR
+    libsdl-ttf-native: catch up STAGING_BINDIR changes
+    sshfs-fuse: update to 1.8
+    linux-gta01: remove 2.6.21.5
+    lyx: update to 1.5.1
+    qt4-x11 4.3.0 remove bogus OE_QMAKE_LIBS_X11 from pkgconfig file
+    add midori, a lightweight web browser based on webkit-gtk
+    add x11vnc -- exports your X11 session on-the-fly via VNC
+    libsoup: update to 2.2.100
+    add openmoko-mediaplayer2
+    libspiff: add do-stage()
+    add libspiff
+    add liburiparser
+    add task-openmoko-feed, things we want to have in the feed
+    qemu: factor out gcc3 check function and include it
+    qmake2: update to 2.10a from Qt/Embedded 4.3.1, thus removing X as de=
+pendency
+    exhibit|expedite: use E_CVS variable
+    remove old versions of libxslt and twisted
+    gtk+ 2.10.14: add updated versions of cell-renderer and treeview-chec=
+kbox patches
+    gst-plugins-bad: add directfb dependency
+    python 2.5.1: catch up with some build system changes from 2.4 - 2.5 =
+causing only half
+of the packages being installed into the prop places
+    add openmoko-tasks2 and ship it in the default image
+    uicmoc4: add 4.3.1 building against Qt/Embedded. This no longer depen=
+ds on X on the
+buildhost.
+
+openmoko@openembedded.org:
+    gsmd: rewrite start script, use start-stop-daemon. fixes OM bugs #704=
+, #751
+    task-sdl: add more packages
+
+pH5@openembedded.org:
+    libgsmd: fix /etc/default/gsmd script
+    dbus-glib-native: stage dbus-binding-tool for eds manually
+    MAINTAINERS: add myself
+    xtrans: add 1.0.4
+    libxtst: add 1.0.3
+    xvinfo: add 1.0.2
+    xsetroot: add 1.0.2
+    xprop: add 1.0.3
+    xmodmap: add 1.0.3
+    xdm: add 1.1.6
+    libxrender: add 0.9.3
+    libxpm: add 3.5.7
+    sessreg: add 1.0.3
+    xrdb: add 1.0.4
+    libxaw: add 1.0.4
+    setxkbmap: add 1.0.4
+    xf86-video-savage: add 2.1.3
+    xf86-video-nv: add 2.1.3
+    xf86-video-ati: add 6.6.193
+    xf86-input-mouse: add 1.2.2
+    xorg-sgml-doctools: add 1.2
+    libx11, diet-x11: add 1.1.3
+    libice: add 1.0.4
+    avahi-python: provides avahi, includes python bindings
+    avahi: prepare for building gtk and python code, let only -daemon
+    avahi: drop old versions
+    task-sdl: use task.bbclass
+    task-proper-tools: use task.bbclass
+    task-gmae: use task.bbclass
+    task-e-x11: use task.bbclass
+    task-dvb: use task.bbclass
+    task-xfce-base: use task.bbclass
+    task-xterminal: use task.bbclass
+    task-mythfront: use task.bbclass, only the epia version is machine sp=
+ecific
+    task-mokogateway: use task.bbclass
+    task-{opie,qpe}*: use task.bbclass
+    task-gpe*: use task.bbclass
+    task-{base,boot}: use task.bbclass
+    angstrom task packages: use task.bbclass, automatically builds -dev a=
+nd
+    libgsmd: combine machine specific configuration files, package plugin
+
+raj.khem@gmail.com:
+    eglibc: (r)provide glibc stuff, since it is compatible, closes #2894
+    angstrom-*libc: make *libc initial overridable
+
+rpurdie@openembedded.org:
+    classes: Remove bitbake 1.6 compatibility code
+    zaurus-2.6.inc: Zaurus images shouldn't include kernel-image
+    kernel.bbclass: Allow machines to override the kernel-base runtime de=
+pendencies
+    Add blktool 4 (from Poky)
+    glibc-package.bbclass: Correct PACKAGES_DYNAMIC
+    bitbake.conf: Add MULTI_PROVIDER_WHITELIST
+
+rwhitby@nslu2-linux.org:
+    openmoko-feed: Added meta package to actually build all the packages =
+in task-openmoko-*
+    task-openmoko-feed: added openssh packages
+    update-modules: Insert special case work-around for a legacy corner c=
+ase of a machine
+which supports a 2.6 kernel but is used in a distro which must use a 2.4 =
+kernel.  It's
+ugly, just look away now.  It has the blessing of RP and hrw, however.
+    openocd: Enabled ft2232_libftdi so it can be used on a slug to devirg=
+inate a neo
+    ixp4xx-kernel: Enable support for IXDPG425 boards in the defconfig
+    slugos-packages: added net-tools
+
+stefan@openembedded.org:
+    openmoko-panel-bt_svn.bb: Drop panel-bluetooth.patch, as it was appli=
+ed upstream
+    uboot-openmoko_svn.bb: Update to actual u-boot HEAD, adjust path to n=
+ewest OM
+    linux-gta01: Add 2.6.22.5
+    rm_work.bbclass: Make sure all hidden directories get also removed. (=
+.pc for example)
+    openmoko-dialer2: Switch dependency. The dialer uses pulseaudio inste=
+ad of gstreamer now.
+
+woglinde2@openembedded.org:
+    MAINTAINERS: fix spelling of cacao-cldc
+    midpath: major rework of midpath
+    classpath-minimal: next time I should not forget to bump PR
+    MAINTAINERS: added my irc-nick
+    MAINTAINERS: add myself to MAINTAINERS
+
+xjqian@gmail.com:
+    gnuplot: remove stale patch, fixes #2300
+
+xora@openembedded.org:
+    machine/include/zaurus-2.6.inc : dont put .bin on end os jffs2 images
+    openmoko-dialer2_svn.bb : patch is now applied upstream
+    gst-plugins-bad_0.10.5.bb : apply bug from #2854 to fix properly the =
+directfb
+    gst-plugins-bad_0.10.5.bb : disable directfb as its broken
+
+
+
+Bugs fixed:
+bug_id resolution	 short_desc
+2034 FIXED	 PACKAGES_DYNAMIC vs. DEFAULT_PREFERENCE
+2036 WONTFIX	 setup.py should offer an uninstall command
+2501 INVALID	 svn fetcher does not support https/authentication
+1744 FIXED	 omap2420h4 does not include kernel configuration
+1903 FIXED	 [PATCH] Packaging for pkg-config 0.21
+2001 FIXED	 vsftpd 2.0.5 fails to build
+2300 FIXED	 gnuplot 4.2.0 recipe
+2795 INVALID	 busybox-1.2.1 failed to build
+2799 FIXED	 NFS Utils are broken - statd is not started so no locking
+2800 FIXED	 angstrom-x11-image-1.0-r11-do_rootfs
+2833 FIXED	 gst-plugins-bad-0.10.5-r1-do_compile
+2845 FIXED	 gtk+-2.10.14-r5 fail to compile
+2854 FIXED	 gst-plugins-bad-0.10.5-r1 build uses wrong include paths for =
+directfb
+2855 FIXED	 qemu-native-0.9.0+cvs20070613-r1-do_patch
+2856 FIXED	 libtool-native-1.5.24-r0-do_compile
+2869 FIXED	 udev does not bring up network interfaces on insertion
+2878 FIXED	 linux-2.6.22+2.6.23-rc3-r0-do_patch
+2883 DUPLICATE=09
+uboot-openmoko-1.2.0+git3e66c078003607a7d1d214c15a5f262bc1b4032f+svn20070=
+829-r2-do_fetch
+2887 INVALID	 xserver-kdrive-imageon-1.3.0-r0-do_fetch
+2890 FIXED	 Prevent flood of alignment fault messages on gumstix
+2892 FIXED	 ImageMagickis not correctly staged
+2894 FIXED	 eglibc should provide glibc packages when chosen as default l=
+ibc
+1359 FIXED	 bitbake r581 builds multiple providers for one package
+
+
+Bugs opened:
+bug_id resolution	 short_desc
+2867 	 Clean smallfonts (4x6 and 5x8) for the kernel
+2897 	 bitbake should raise skippackage instead of parse error when an sv=
+n repo is down
+2857 	 mono issues
+2858 	 mono: ARM_FPU_NONE is hardcoded in configure.in
+2859 	 mono: is --without-tls the correct TLS option
+2860 	 mono: complete packaging
+2861 	 mono: mcs directory (C#) code is not being built
+2862 	 mono: finish native package
+2863 	 mono: test on other architectures
+2864 	 mono: add .NET 2.0 profile
+2865 	 Qemu fails to build - error in cpu-exec.c
+2866 	 PHP fails to build
+2868 	 Openldap fails to build
+2870 	 enchant-1.3.0-r0-do_compile
+2871 	 Add 18BPP support in X for A1200/E2
+2872 	 libart-lgpl-2.3.16-r2-do_unpack
+2873 	 the sound driver in kernel 2.6.21 does not work on c7x0
+2874 	 angstrom 20070803 x11 image cannot boot into x11
+2875 	 Opie first-run wizard broken due to path changes
+2876 	 please add axnet_cs module to zaurus kernels (linux-rp-2.6.21)
+2877 	 Build and package microperl during perl build
+2879 	 kernel misses USB host/client switch signalling
+2880 	 linux-handhelds-2.6-2.6.21-hh12-r2-do_compile
+2881 	 please change default PATH for bash
+2884 	 openmoko-panel-mainmenu-0.1.0+svnr2567-r1-do_compile
+2885 	 qt4-x11-free-4.3.0-r6-do_populate_staging
+2886 	 squid-2.6.STABLE14-r0-do_configure
+2888 	 xserver-kdrive-imageon-1.3.0.0-r0-do_patch
+2889 	 Remove kernel image from rootfs for gumstix
+2891 	 Provide .bb for udev-115
+2893 	 Fixups for gumstix machines
+2895 	 angstrom-x11-gpe-image-1.0-r0-do_rootfs
+2896 	 angstrom-x11-pimlico-image-1.0-r0-do_rootfs
+2898 	 broken keymap in spitz image 20070828
+2899 	 Fixup autotools.bbclass for samba-3.0.25c
+2900 	 samba-3.0.25c support
+
+In total 36 bugs have been created and 23 bugs were closed.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFG1/uoMkyGM64RGpERAjc9AKC37nbQ5swmKoWJDKu24zNOUAB/nACfV+yq
-i64UCIIQqztuU7NshZ5y+VM=
-=U2CP
+iD8DBQFG1/wuMkyGM64RGpERAqkqAJwJbp7M4qiFToe8+frJeRtGpVOgtACeIip4
+tVz70xtRLiz3n2h5NNkuyjA=3D
+=3DboV/
 -----END PGP SIGNATURE-----
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/base.bbclass"
-#  from [0b7bd90cd81cad21be3a5562472533d725e69760]
-#    to [e9e18b1810f9cae7274bc8d18014c2ef9f972911]
-#
-============================================================
---- classes/base.bbclass	0b7bd90cd81cad21be3a5562472533d725e69760
-+++ classes/base.bbclass	e9e18b1810f9cae7274bc8d18014c2ef9f972911
-@@ -374,6 +374,18 @@ oe_machinstall() {
- 	fi
- }
- 
-+addtask showdata
-+do_showdata[nostamp] = "1"
-+python do_showdata() {
-+	import sys
-+	# emit variables and shell functions
-+	bb.data.emit_env(sys.__stdout__, d, True)
-+	# emit the metadata which isnt valid shell
-+	for e in d.keys():
-+	    if bb.data.getVarFlag(e, 'python', d):
-+	        sys.__stdout__.write("\npython %s () {\n%s}\n" % (e, bb.data.getVar(e, d, 1)))
-+}
-+
- addtask listtasks
- do_listtasks[nostamp] = "1"
- python do_listtasks() {
-@@ -681,7 +693,8 @@ do_populate_staging[dirs] = "${STAGING_D
- 			     ${STAGING_DATADIR} \
- 			     ${S} ${B}"
- 
--addtask populate_staging after do_package_write
-+# Could be compile but populate_staging and do_install shouldn't run at the same time
-+addtask populate_staging after do_install
- 
- python do_populate_staging () {
- 	bb.build.exec_func('do_stage', d)
-@@ -750,23 +763,23 @@ def has_subpkgdata(pkg, d):
- 
- def has_subpkgdata(pkg, d):
- 	import bb, os
--	fn = bb.data.expand('${STAGING_DIR}/pkgdata/runtime/%s' % pkg, d)
-+	fn = bb.data.expand('${PKGDATA_DIR}/runtime/%s' % pkg, d)
- 	return os.access(fn, os.R_OK)
- 
- def read_subpkgdata(pkg, d):
- 	import bb, os
--	fn = bb.data.expand('${STAGING_DIR}/pkgdata/runtime/%s' % pkg, d)
-+	fn = bb.data.expand('${PKGDATA_DIR}/runtime/%s' % pkg, d)
- 	return read_pkgdatafile(fn)
- 
- 
- def has_pkgdata(pn, d):
- 	import bb, os
--	fn = bb.data.expand('${STAGING_DIR}/pkgdata/%s' % pn, d)
-+	fn = bb.data.expand('${PKGDATA_DIR}/%s' % pn, d)
- 	return os.access(fn, os.R_OK)
- 
- def read_pkgdata(pn, d):
- 	import bb, os
--	fn = bb.data.expand('${STAGING_DIR}/pkgdata/%s' % pn, d)
-+	fn = bb.data.expand('${PKGDATA_DIR}/%s' % pn, d)
- 	return read_pkgdatafile(fn)
- 
- python read_subpackage_metadata () {
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/gconf.bbclass"
-#  from [d98469aa5a9446e5a981ad1f9b78e89da73f169a]
-#    to [00c717a1c6fddfd809635163d24114284f015ddd]
-#
-============================================================
---- classes/gconf.bbclass	d98469aa5a9446e5a981ad1f9b78e89da73f169a
-+++ classes/gconf.bbclass	00c717a1c6fddfd809635163d24114284f015ddd
-@@ -1,4 +1,4 @@
--DEPENDS += "gconf gconf-native"
-+DEPENDS += "gconf"
- 
- gconf_postinst() {
- if [ "$1" = configure ]; then
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/image.bbclass"
-#  from [9ce7e97fa49142c8e94930461f94af3ec3c18110]
-#    to [fb8d641b8c9c01abd103203ba2582f6e628f2f0e]
-#
-============================================================
---- classes/image.bbclass	9ce7e97fa49142c8e94930461f94af3ec3c18110
-+++ classes/image.bbclass	fb8d641b8c9c01abd103203ba2582f6e628f2f0e
-@@ -1,7 +1,12 @@ inherit rootfs_${IMAGE_PKGTYPE}
- inherit rootfs_${IMAGE_PKGTYPE}
- 
-+LICENSE = "MIT"
- PACKAGES = ""
-+RDEPENDS = "${IMAGE_INSTALL}"
- 
-+export IMAGE_BASENAME = "${PN}"
-+export PACKAGE_INSTALL = "${IMAGE_INSTALL}"
-+
- # We need to recursively follow RDEPENDS and RRECOMMENDS for images
- do_rootfs[recrdeptask] = "do_package_write do_deploy do_populate_staging"
- 
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/module.bbclass"
-#  from [b4a2435539a6183bfff6b02bc73785bbceeadef6]
-#    to [04ebb27c817750a39f3c15612ebc60e9fad68bc8]
-#
-============================================================
---- classes/module.bbclass	b4a2435539a6183bfff6b02bc73785bbceeadef6
-+++ classes/module.bbclass	04ebb27c817750a39f3c15612ebc60e9fad68bc8
-@@ -1,4 +1,4 @@
--RDEPENDS += "kernel (${KERNEL_VERSION})"
-+RDEPENDS += "kernel (${KERNEL_VERSION}) update-modules"
- DEPENDS += "virtual/kernel"
- 
- inherit module-base
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/native.bbclass"
-#  from [9790e613a5cd8ec531d788c5dd2d9642523821ca]
-#    to [578b1034229c88ceae52895d2f27b43cf710e0a1]
-#
-============================================================
---- classes/native.bbclass	9790e613a5cd8ec531d788c5dd2d9642523821ca
-+++ classes/native.bbclass	578b1034229c88ceae52895d2f27b43cf710e0a1
-@@ -95,3 +95,4 @@ do_install () {
- do_install () {
- 	true
- }
-+PKG_CONFIG_PATH .= "${EXTRA_NATIVE_PKGCONFIG_PATH}"
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/openmoko2.bbclass"
-#  from [aeee18267ff406fd5434a5b0cfc049c370d20948]
-#    to [29f242d782fea5f73f4bdfee2121a66a5c13c4b9]
-#
-============================================================
---- classes/openmoko2.bbclass	aeee18267ff406fd5434a5b0cfc049c370d20948
-+++ classes/openmoko2.bbclass	29f242d782fea5f73f4bdfee2121a66a5c13c4b9
-@@ -29,5 +29,5 @@ FILES_${PN} += "${datadir}/icons"
- 
- FILES_${PN} += "${datadir}/icons"
- 
-+SVNREV = "r${SRCREV}"
-+#SVNREV = "${SRCDATE}"
--# SVNREV = "r${SRCREV}"
--SVNREV = "${SRCDATE}"
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/package_deb.bbclass"
-#  from [e921fa8625c039aae270b843336c64fbd0a5dbf2]
-#    to [5b8e9230ef7a807084e2a9411f0ffe1055eb1e11]
-#
-============================================================
---- classes/package_deb.bbclass	e921fa8625c039aae270b843336c64fbd0a5dbf2
-+++ classes/package_deb.bbclass	5b8e9230ef7a807084e2a9411f0ffe1055eb1e11
-@@ -1,14 +1,11 @@ inherit package
- #
- # Copyright 2006-2007 OpenedHand Ltd.
- #
- 
- inherit package
- 
--PACKAGE_EXTRA_DEPENDS += "dpkg-native fakeroot-native"
--
- BOOTSTRAP_EXTRA_RDEPENDS += "dpkg"
- DISTRO_EXTRA_RDEPENDS += "dpkg"
--PACKAGE_WRITE_FUNCS += "do_package_deb"
- IMAGE_PKGTYPE ?= "deb"
- 
- python package_deb_fn () {
-@@ -64,9 +61,7 @@ python do_package_deb () {
- }
- 
- python do_package_deb () {
--    import copy # to back up env data
--    import sys
--    import re
-+    import sys, re, fcntl, copy
- 
-     workdir = bb.data.getVar('WORKDIR', d, 1)
-     if not workdir:
-@@ -99,9 +94,19 @@ python do_package_deb () {
-         bb.debug(1, "No packages; nothing to do")
-         return
- 
-+    def lockfile(name):
-+        lf = open(name, "a+")
-+        fcntl.flock(lf.fileno(), fcntl.LOCK_EX)
-+        return lf
-+
-+    def unlockfile(lf):
-+        fcntl.flock(lf.fileno(), fcntl.LOCK_UN)
-+        lf.close
-+
-     for pkg in packages.split():
-         localdata = bb.data.createCopy(d)
-         root = "%s/install/%s" % (workdir, pkg)
-+        lf = lockfile(root + ".lock")
- 
-         bb.data.setVar('ROOT', '', localdata)
-         bb.data.setVar('ROOT_%s' % pkg, root, localdata)
-@@ -247,4 +252,18 @@ python do_package_deb () {
-         except OSError:
-             pass
-         del localdata
-+        unlockfile(lf)
- }
-+python () {
-+    import bb
-+    if bb.data.getVar('PACKAGES', d, True) != '':
-+        bb.data.setVarFlag('do_package_write_deb', 'depends', 'dpkg-native:do_populate_staging fakeroot-native:do_populate_staging', d)
-+}
-+
-+python do_package_write_deb () {
-+	bb.build.exec_func("read_subpackage_metadata", d)
-+	bb.build.exec_func("do_package_deb", d)
-+}
-+do_package_write_deb[dirs] = "${D}"
-+addtask package_write_deb before do_package_write after do_package
-+
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/package_ipk.bbclass"
-#  from [115710babe1d2cc095e515f58f4593c548e5b72b]
-#    to [599dfbe50df05dd3f0d367c3a39250fb353c2e25]
-#
-============================================================
---- classes/package_ipk.bbclass	115710babe1d2cc095e515f58f4593c548e5b72b
-+++ classes/package_ipk.bbclass	599dfbe50df05dd3f0d367c3a39250fb353c2e25
-@@ -1,9 +1,7 @@ inherit package
- inherit package
- 
--PACKAGE_EXTRA_DEPENDS += "ipkg-utils-native fakeroot-native"
--
--BOOTSTRAP_EXTRA_RDEPENDS += "ipkg-collateral ipkg"
--PACKAGE_WRITE_FUNCS += "do_package_ipk"
-+BOOTSTRAP_EXTRA_RDEPENDS += "ipkg-collateral ipkg ipkg-link"
-+DISTRO_EXTRA_RDEPENDS += "ipkg-collateral ipkg ipkg-link"
- IMAGE_PKGTYPE ?= "ipk"
- 
- python package_ipk_fn () {
-@@ -53,7 +51,7 @@ python package_ipk_install () {
- 		ret = os.system('ipkg-make-index -p %s %s ' % (os.path.join(ipkdir, "Packages"), ipkdir))
- 		if (ret != 0 ):
- 			raise bb.build.FuncFailed
--		f=open(os.path.join(tmpdir, "stamps" ,"do_packages"),"w")
-+		f=open(os.path.join(tmpdir, "stamps", "do_packages"),"w")
- 		f.close()
- 
- 	ret = os.system('ipkg-cl  -o %s -f %s update' % (rootfs, conffile))
-@@ -63,9 +61,7 @@ python do_package_ipk () {
- }
- 
- python do_package_ipk () {
--	import copy # to back up env data
--	import sys
--	import re
-+	import sys, re, fcntl, copy
- 
- 	workdir = bb.data.getVar('WORKDIR', d, 1)
- 	if not workdir:
-@@ -96,15 +92,24 @@ python do_package_ipk () {
- 	tmpdir = bb.data.getVar('TMPDIR', d, 1)
- 	# Invalidate the packages file
- 	if os.access(os.path.join(tmpdir, "stamps", "do_packages"),os.R_OK):
--		os.unlink(os.path.join(tmpdir, "stamps" ,"do_packages"))
-+		os.unlink(os.path.join(tmpdir, "stamps", "do_packages"))
- 
- 	if packages == []:
- 		bb.debug(1, "No packages; nothing to do")
- 		return
-+	def lockfile(name):
-+		lf = open(name, "a+")
-+		fcntl.flock(lf.fileno(), fcntl.LOCK_EX)
-+		return lf
- 
-+	def unlockfile(lf):
-+		fcntl.flock(lf.fileno(), fcntl.LOCK_UN)
-+		lf.close
-+
- 	for pkg in packages.split():
- 		localdata = bb.data.createCopy(d)
- 		root = "%s/install/%s" % (workdir, pkg)
-+	        lf = lockfile(root + ".lock")
- 
- 		bb.data.setVar('ROOT', '', localdata)
- 		bb.data.setVar('ROOT_%s' % pkg, root, localdata)
-@@ -131,9 +136,10 @@ python do_package_ipk () {
- 			del g[g.index('./CONTROL')]
- 		except ValueError:
- 			pass
--		if not g and bb.data.getVar('ALLOW_EMPTY', localdata) != "1":
-+		if not g and not bb.data.getVar('ALLOW_EMPTY', localdata):
- 			from bb import note
- 			note("Not creating empty archive for %s-%s-%s" % (pkg, bb.data.getVar('PV', localdata, 1), bb.data.getVar('PR', localdata, 1)))
-+			unlockfile(lf)
- 			continue
- 
- 		controldir = os.path.join(root, 'CONTROL')
-@@ -154,7 +160,7 @@ python do_package_ipk () {
- 		fields.append(["Priority: %s\n", ['PRIORITY']])
- 		fields.append(["Maintainer: %s\n", ['MAINTAINER']])
- 		fields.append(["Architecture: %s\n", ['PACKAGE_ARCH']])
--		fields.append(["OE: %s\n", ['P']])
-+		fields.append(["OE: %s\n", ['PN']])
- 		fields.append(["Homepage: %s\n", ['HOMEPAGE']])
- 
- 		def pullData(l, d):
-@@ -231,8 +237,6 @@ python do_package_ipk () {
- 		if ret != 0:
- 			raise bb.build.FuncFailed("ipkg-build execution failed")
- 
--		file(bb.data.expand('${STAGING_DIR}/pkgdata/runtime/%s.packaged' % pkg, d), 'w').close()
--
- 		for script in ["preinst", "postinst", "prerm", "postrm", "control" ]:
- 			scriptfile = os.path.join(controldir, script)
- 			try:
-@@ -244,4 +248,17 @@ python do_package_ipk () {
- 		except OSError:
- 			pass
- 		del localdata
-+		unlockfile(lf)
- }
-+python () {
-+    import bb
-+    if bb.data.getVar('PACKAGES', d, True) != '':
-+        bb.data.setVarFlag('do_package_write_ipk', 'depends', 'ipkg-utils-native:do_populate_staging fakeroot-native:do_populate_staging', d)
-+}
-+
-+python do_package_write_ipk () {
-+	bb.build.exec_func("read_subpackage_metadata", d)
-+	bb.build.exec_func("do_package_ipk", d)
-+}
-+do_package_write_ipk[dirs] = "${D}"
-+addtask package_write_ipk before do_package_write after do_package
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/package_rpm.bbclass"
-#  from [555193edec7219ac867536609f6970425ff4522b]
-#    to [369f9514d832d69ab6cf22182add29eecda7e30e]
-#
-============================================================
---- classes/package_rpm.bbclass	555193edec7219ac867536609f6970425ff4522b
-+++ classes/package_rpm.bbclass	369f9514d832d69ab6cf22182add29eecda7e30e
-@@ -132,3 +132,16 @@ python do_package_rpm () {
- 		bb.build.exec_func('write_specfile', localdata)
- 		del localdata
- }
-+python () {
-+    import bb
-+    if bb.data.getVar('PACKAGES', d, True) != '':
-+        bb.data.setVarFlag('do_package_write_rpm', 'depends', 'rpm-native:do_populate_staging', d)
-+}
-+
-+
-+python do_package_write_rpm () {
-+	bb.build.exec_func("read_subpackage_metadata", d)
-+	bb.build.exec_func("do_package_rpm", d)
-+}
-+do_package_write_rpm[dirs] = "${D}"
-+addtask package_write_rpm before do_build after do_package
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/package_tar.bbclass"
-#  from [fcd7bc894001e323cb9cf5f5d1f547447e7b636e]
-#    to [eb867b40ce219ed11aeea48e6df36613f2509560]
-#
-============================================================
---- classes/package_tar.bbclass	fcd7bc894001e323cb9cf5f5d1f547447e7b636e
-+++ classes/package_tar.bbclass	eb867b40ce219ed11aeea48e6df36613f2509560
-@@ -1,8 +1,5 @@ inherit package
- inherit package
- 
--PACKAGE_EXTRA_DEPENDS += "tar-native"
--
--PACKAGE_WRITE_FUNCS += "do_package_tar"
- IMAGE_PKGTYPE ?= "tar"
- 
- python package_tar_fn () {
-@@ -103,3 +100,16 @@ python do_package_tar () {
- # end stuff
- 		del localdata
- }
-+python () {
-+    import bb
-+    if bb.data.getVar('PACKAGES', d, True) != '':
-+        bb.data.setVarFlag('do_package_write_tar', 'depends', 'tar-native:do_populate_staging', d)
-+}
-+
-+
-+python do_package_write_tar () {
-+	bb.build.exec_func("read_subpackage_metadata", d)
-+	bb.build.exec_func("do_package_tar", d)
-+}
-+do_package_write_tar[dirs] = "${D}"
-+addtask package_write_tar before do_build after do_package
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/package.bbclass"
-#  from [a4793b3e861b8e79ae72fd8fb897b01aff983b38]
-#    to [6d38d123e9ab2e3f1235b253086a38e70abf8518]
-#
-============================================================
---- classes/package.bbclass	a4793b3e861b8e79ae72fd8fb897b01aff983b38
-+++ classes/package.bbclass	6d38d123e9ab2e3f1235b253086a38e70abf8518
-@@ -120,76 +120,68 @@ python () {
- 
- python () {
-     import bb
--
-     if bb.data.getVar('PACKAGES', d, True) != '':
-         deps = bb.data.getVarFlag('do_package', 'depends', d) or ""
-         for dep in (bb.data.getVar('PACKAGE_DEPENDS', d, True) or "").split():
-             deps += " %s:do_populate_staging" % dep
-         bb.data.setVarFlag('do_package', 'depends', deps, d)
- 
--        deps = bb.data.getVarFlag('do_package_write', 'depends', d) or ""
--        for dep in (bb.data.getVar('PACKAGE_EXTRA_DEPENDS', d, True) or "").split():
--            deps += " %s:do_populate_staging" % dep
--        bb.data.setVarFlag('do_package_write', 'depends', deps, d)
--	
-         # shlibs requires any DEPENDS to have already packaged for the *.list files
-         bb.data.setVarFlag('do_package', 'deptask', 'do_package', d)
- }
- 
--# file(1) output to match to consider a file an unstripped executable
--FILE_UNSTRIPPED_MATCH ?= "not stripped"
--#FIXME: this should be "" when any errors are gone!
--IGNORE_STRIP_ERRORS ?= "1"
- 
--runstrip() {
--	# Function to strip a single file, called from RUNSTRIP in populate_packages below
--	# A working 'file' (one which works on the target architecture)
--	# is necessary for this stuff to work, hence the addition to do_package[depends]
-+def runstrip(file, d):
-+    # Function to strip a single file, called from populate_packages below
-+    # A working 'file' (one which works on the target architecture)
-+    # is necessary for this stuff to work, hence the addition to do_package[depends]
- 
--	local ro st
-+    import bb, os, commands, stat
- 
--	st=0
--	if {	file "$1" || {
--			oewarn "file $1: failed (forced strip)" >&2
--			echo '${FILE_UNSTRIPPED_MATCH}'
--		}
--	   } | grep -q '${FILE_UNSTRIPPED_MATCH}'
--	then
--		oenote "${STRIP} $1"
--		ro=
--		test -w "$1" || {
--			ro=1
--			chmod +w "$1"
--		}
--		mkdir -p $(dirname "$1")/.debug
--		debugfile="$(dirname "$1")/.debug/$(basename "$1")"
--		'${OBJCOPY}' --only-keep-debug "$1" "$debugfile"
--		'${STRIP}' "$1"
--		st=$?
--		'${OBJCOPY}' --add-gnu-debuglink="$debugfile" "$1"
--		test -n "$ro" && chmod -w "$1"
--		if test $st -ne 0
--		then
--			oewarn "runstrip: ${STRIP} $1: strip failed" >&2
--			if [ x${IGNORE_STRIP_ERRORS} = x1 ]
--			then
--				#FIXME: remove this, it's for error detection
--				if file "$1" 2>/dev/null >&2
--				then
--					(oefatal "${STRIP} $1: command failed" >/dev/tty)
--				else
--					(oefatal "file $1: command failed" >/dev/tty)
--				fi
--				st=0
--			fi
--		fi
--	else
--		oenote "runstrip: skip $1"
--	fi
--	return $st
--}
-+    pathprefix = "export PATH=%s; " % bb.data.getVar('PATH', d, 1)
- 
-+    ret, result = commands.getstatusoutput("%sfile '%s'" % (pathprefix, file))
- 
-+    if ret:
-+        bb.error("runstrip: 'file %s' failed (forced strip)" % file)
-+
-+    if "not stripped" not in result:
-+        bb.debug(1, "runstrip: skip %s" % file)
-+        return 0
-+
-+    strip = bb.data.getVar("STRIP", d, 1)
-+    objcopy = bb.data.getVar("OBJCOPY", d, 1)
-+
-+    newmode = None
-+    if not os.access(file, os.W_OK):
-+        origmode = os.stat(file)[stat.ST_MODE]
-+        newmode = origmode | stat.S_IWRITE
-+        os.chmod(file, newmode)
-+
-+    extraflags = ""
-+    if ".so" in file and "shared" in result:
-+        extraflags = "--remove-section=.comment --remove-section=.note --strip-unneeded"
-+    elif "shared" in result or "executable" in result:
-+        extraflags = "--remove-section=.comment --remove-section=.note"
-+
-+    bb.mkdirhier(os.path.join(os.path.dirname(file), ".debug"))
-+    debugfile=os.path.join(os.path.dirname(file), ".debug", os.path.basename(file))
-+
-+    stripcmd = "'%s' %s '%s'" % (strip, extraflags, file)
-+    bb.debug(1, "runstrip: %s" % stripcmd)
-+
-+    os.system("%s'%s' --only-keep-debug '%s' '%s'" % (pathprefix, objcopy, file, debugfile))
-+    ret = os.system("%s%s" % (pathprefix, stripcmd))
-+    os.system("%s'%s' --add-gnu-debuglink='%s' '%s'" % (pathprefix, objcopy, debugfile, file))
-+
-+    if newmode:
-+        os.chmod(file, origmode)
-+
-+    if ret:
-+        bb.error("runstrip: '%s' strip command failed" % stripcmd)
-+
-+    return 1
-+
- #
- # Package data handling routines
- #
-@@ -376,19 +368,11 @@ python populate_packages () {
- 			package_list.append(pkg)
- 
- 	if (bb.data.getVar('INHIBIT_PACKAGE_STRIP', d, 1) != '1'):
--		stripfunc = ""
- 		for root, dirs, files in os.walk(dvar):
- 			for f in files:
- 				file = os.path.join(root, f)
- 				if not os.path.islink(file) and not os.path.isdir(file) and isexec(file):
--					stripfunc += "\trunstrip %s || st=1\n" % (file)
--		if not stripfunc == "":
--			from bb import build
--			localdata = bb.data.createCopy(d)
--			# strip
--			bb.data.setVar('RUNSTRIP', '\tlocal st\n\tst=0\n%s\treturn $st' % stripfunc, localdata)
--			bb.data.setVarFlag('RUNSTRIP', 'func', 1, localdata)
--			bb.build.exec_func('RUNSTRIP', localdata)
-+					runstrip(file, d)
- 
- 	for pkg in package_list:
- 		localdata = bb.data.createCopy(d)
-@@ -513,13 +497,13 @@ python emit_pkgdata() {
- 	if not packages:
- 		return
- 
--	data_file = bb.data.expand("${STAGING_DIR}/pkgdata/${PN}", d)
-+	data_file = bb.data.expand("${PKGDATA_DIR}/${PN}", d)
- 	f = open(data_file, 'w')
- 	f.write("PACKAGES: %s\n" % packages)
- 	f.close()
- 
- 	for pkg in packages.split():
--		subdata_file = bb.data.expand("${STAGING_DIR}/pkgdata/runtime/%s" % pkg, d)
-+		subdata_file = bb.data.expand("${PKGDATA_DIR}/runtime/%s" % pkg, d)
- 		sf = open(subdata_file, 'w')
- 		write_if_exists(sf, pkg, 'DESCRIPTION')
- 		write_if_exists(sf, pkg, 'RDEPENDS')
-@@ -538,7 +522,7 @@ python emit_pkgdata() {
- 		write_if_exists(sf, pkg, 'pkg_prerm')
- 		sf.close()
- }
--emit_pkgdata[dirs] = "${STAGING_DIR}/pkgdata/runtime"
-+emit_pkgdata[dirs] = "${PKGDATA_DIR}/runtime"
- 
- ldconfig_postinst_fragment() {
- if [ x"$D" = "x" ]; then
-@@ -840,7 +824,7 @@ python package_depchains() {
- 
- 	def pkg_addrrecs(pkg, base, suffix, getname, rdepends, d):
- 		def packaged(pkg, d):
--			return os.access(bb.data.expand('${STAGING_DIR}/pkgdata/runtime/%s.packaged' % pkg, d), os.R_OK)
-+			return os.access(bb.data.expand('${PKGDATA_DIR}/runtime/%s.packaged' % pkg, d), os.R_OK)
- 
-                 #bb.note('rdepends for %s is %s' % (base, rdepends))
- 
-@@ -916,21 +900,14 @@ addtask package before do_build after do
- do_package[dirs] = "${D}"
- addtask package before do_build after do_install
- 
--
--
--PACKAGE_WRITE_FUNCS ?= "read_subpackage_metadata"
--
--python package_do_package_write () {
--	for f in (bb.data.getVar('PACKAGE_WRITE_FUNCS', d, 1) or '').split():
--		bb.build.exec_func(f, d)
-+# Dummy task to mark when all packaging is complete
-+do_package_write () {
-+	:
- }
--do_package_write[dirs] = "${D}"
- addtask package_write before do_build after do_package
- 
--
- EXPORT_FUNCTIONS do_package do_package_write
- 
--
- #
- # Helper functions for the package writing classes
- #
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/rootfs_deb.bbclass"
-#  from [707eb78db91916253acef44e2f1a8ff049193cff]
-#    to [35e50a54b60fe0c1137ebc2a4bc1f6aa4fab25de]
-#
-============================================================
---- classes/rootfs_deb.bbclass	707eb78db91916253acef44e2f1a8ff049193cff
-+++ classes/rootfs_deb.bbclass	35e50a54b60fe0c1137ebc2a4bc1f6aa4fab25de
-@@ -1,12 +1,14 @@ do_rootfs[depends] += "dpkg-native:do_po
- #
- # Copyright 2006-2007 Openedhand Ltd.
- #
- 
- do_rootfs[depends] += "dpkg-native:do_populate_staging apt-native:do_populate_staging"
-+do_rootfs[recrdeptask] += "do_package_write_deb"
- 
- fakeroot rootfs_deb_do_rootfs () {
- 	set +e
--	mkdir -p ${IMAGE_ROOTFS}/var/dpkg/{info,updates}
-+	mkdir -p ${IMAGE_ROOTFS}/var/dpkg/info
-+	mkdir -p ${IMAGE_ROOTFS}/var/dpkg/updates
- 
- 	rm -f ${STAGING_DIR}/etc/apt/sources.list.rev
- 	rm -f ${STAGING_DIR}/etc/apt/preferences
-@@ -72,7 +74,7 @@ fakeroot rootfs_deb_do_rootfs () {
- 	if [ ! -z "${PACKAGE_INSTALL}" ]; then
- 		for i in ${PACKAGE_INSTALL}; do
- 			apt-get install $i --force-yes --allow-unauthenticated
--			if [ $? -eq 1 ]; then
-+			if [ $? -ne 0 ]; then
- 				exit 1
- 			fi
- 			find ${IMAGE_ROOTFS} -name \*.dpkg-new | for i in `cat`; do
-@@ -132,7 +134,7 @@ rootfs_deb_log_check() {
- 			echo -e "log_check: Matched keyword: [$keyword_die]\n"
- 			echo "$lf_txt" | grep -v log_check | grep -C 5 -i "$keyword_die"
- 			echo ""
--			do_exit=1				
-+			do_exit=1
- 		fi
- 	done
- 	test "$do_exit" = 1 && exit 1						
-#
-# old_revision [a713e30a7c1eae8ab3bf00e2e3eb7f9a6ffb1e3b]
-#
-# patch "classes/rootfs_ipk.bbclass"
-#  from [237808776045be08b7c6b05f62ed82bb94daada8]
-#    to [cab8c8c2c016a3542ca004b0f2756f8db983d36b]
-#
-============================================================
---- classes/rootfs_ipk.bbclass	237808776045be08b7c6b05f62ed82bb94daada8
-+++ classes/rootfs_ipk.bbclass	cab8c8c2c016a3542ca004b0f2756f8db983d36b
-@@ -6,6 +6,7 @@ do_rootfs[depends] += "ipkg-native:do_po
- #
- 
- do_rootfs[depends] += "ipkg-native:do_populate_staging ipkg-utils-native:do_populate_staging"
-+do_rootfs[recrdeptask] += "do_package_write_ipk"
- 
- IPKG_ARGS = "-f ${T}/ipkg.conf -o ${IMAGE_ROOTFS} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", "-nodeps", "", d)}"
- 
-@@ -104,7 +105,7 @@ rootfs_ipk_log_check() {
- 		then
- 			echo "log_check: There were error messages in the logfile"
- 			echo -e "log_check: Matched keyword: [$keyword_die]\n"
--			echo "$lf_txt" | grep -v log_check | grep -i "$keyword_die" -C1
-+			echo "$lf_txt" | grep -v log_check | grep -C 5 -i "$keyword_die"
- 			echo ""
- 			do_exit=1				
- 		fi
-@@ -112,3 +113,6 @@ rootfs_ipk_log_check() {
- 	test "$do_exit" = 1 && exit 1
- 	true
- }
-+remove_packaging_data_files() {
-+	rm -rf ${IMAGE_ROOTFS}/usr/lib/ipkg/
-+}
 
---------------080602070604030703000103--
+
