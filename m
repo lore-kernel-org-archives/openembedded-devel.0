@@ -1,27 +1,34 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IT0v8-0006x8-Cw
-	for openembedded-devel@openembedded.org; Wed, 05 Sep 2007 21:52:14 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l85Jndgq004942 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 5 Sep 2007 21:49:39 +0200
-Message-ID: <46DF0843.3090409@student.utwente.nl>
-Date: Wed, 05 Sep 2007 21:49:23 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <20070904202957.GD1429@dodger.lab.datenfreihafen.org>	<1189011486.7849.35.camel@localhost.localdomain>	<46DEE9E3.4080206@student.utwente.nl>
-	<1434447296.20070905205215@vanille-media.de>
+	(envelope-from <rpurdie@rpsys.net>) id 1IT0xr-0006ym-6G
+	for openembedded-devel@openembedded.org; Wed, 05 Sep 2007 21:55:03 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l85JqYLf020187
+	for <openembedded-devel@openembedded.org>;
+	Wed, 5 Sep 2007 20:52:34 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20005-03 for <openembedded-devel@openembedded.org>;
+	Wed,  5 Sep 2007 20:52:27 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l85JqMlL020159
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 5 Sep 2007 20:52:22 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
 In-Reply-To: <1434447296.20070905205215@vanille-media.de>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+References: <20070904202957.GD1429@dodger.lab.datenfreihafen.org>
+	<1189011486.7849.35.camel@localhost.localdomain>
+	<46DEE9E3.4080206@student.utwente.nl>
+	<1434447296.20070905205215@vanille-media.de>
+Date: Wed, 05 Sep 2007 20:52:21 +0100
+Message-Id: <1189021941.7849.46.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: [RFC] How to handle external kernel patches in oe the	right way?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,57 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2007 19:52:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 05 Sep 2007 19:55:03 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Dr. Michael Lauer schreef:
+On Wed, 2007-09-05 at 20:52 +0200, Dr. Michael Lauer wrote:
 > Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
-> 
->> Richard Purdie schreef:
->>> On Tue, 2007-09-04 at 22:29 +0200, Stefan Schmidt wrote:
->>>> Due to my work on OpenEZX (http://www.openezx.org) I'm in touch with
->>>> external kernel patches used in OE to build working kernels for
->>>> different Motorola mobile phones.
->>>>
->>>> Talking with Koen about the best way to handle this we have some
->>>> slightly different opinions on this. So we like to get some more
->>>> opinions on this before pinning to a strategy.
->>>>
->>>> Koen like to pull the patches from a known-good rev into oe to have
->>>> them all at one place for less fragile building and tweaking.
->>>>
->>>> I prefer OE to use our svn server with a fixed SRCREV which gets
->>>> updated once a newer version is known good. I'm not a fan of
->>>> duplicating the patches in OE if some small tweaking patches can also
->>>> handle it.
->>> Personally I agree with this in principle, I've never liked maintaining
->>> kernel patches in OE directly either.
-> 
->> I'm having issues with crap like do_prepatch. Patches are only applied by patch.bbclass,
->> not some hand written voodoo <period>.
+> > Richard Purdie schreef:
+> > I'm having issues with crap like do_prepatch. Patches are only
+> applied by patch.bbclass,
+> > not some hand written voodoo <period>.
 > 
 > Very well. If it annoys you so much, feel free to enhance patch.bbclass to
 > deal with upstream series files while retaining OE-added patches to it.
-
-Like I said *many* times before, the ezx patch script does that.
-
+> 
 > Until then, I think we shouldn't make life more complicated for the
 > actual upstream developers just because of going a bit too far wrt. to
 > our principles.
 
-How many times to I have to offer to do the work for you!?!?!
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I'm afraid I'm with Mickey here. I don't like the way this "prepatching"
+works and I think its pretty ugly but I can understand why people are
+doing it. I'd like to see a better solution but until then what they're
+doing allows them to develop effectively which is what we're supposed to
+be about.
 
-iD8DBQFG3whDMkyGM64RGpERAliMAJ9JEf0KSB1/nZdLbB/9eKV1zKzpUgCdHvj2
-iXImgX7irQZKoeFb5hrfecM=
-=/SB3
------END PGP SIGNATURE-----
+Cheers,
+
+Richard
+
+
+
 
 
