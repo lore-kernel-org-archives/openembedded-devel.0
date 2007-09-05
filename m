@@ -1,28 +1,25 @@
-Received: from [213.160.40.50] (helo=popeye1.ggamaur.net)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <roger@bufferoverflow.ch>) id 1IT1wZ-0003aB-3J
-	for openembedded-devel@openembedded.org; Wed, 05 Sep 2007 22:57:47 +0200
-Received: from automat.bufferoverflow.ch (c-82-192-224-61.customer.ggaweb.ch
-	[82.192.224.61])
-	by popeye1.ggamaur.net (8.13.7/8.13.7/Submit) with ESMTP id
-	l85KtG89069242 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 5 Sep 2007 22:55:17 +0200 (CEST)
-	(envelope-from roger@bufferoverflow.ch)
-Received: by automat.bufferoverflow.ch (Postfix, from userid 33)
-	id 2064322347; Wed,  5 Sep 2007 22:59:08 +0200 (CEST)
-Received: from 10.0.0.69 ([10.0.0.69]) by www.bufferoverflow.ch (Horde MIME
-	library) with HTTP; Wed, 05 Sep 2007 22:59:08 +0200
-Message-ID: <20070905225908.dcyz0rbxa8wo4ows@www.bufferoverflow.ch>
-X-Priority: 3 (Normal)
-Date: Wed, 05 Sep 2007 22:59:08 +0200
-From: Roger Meier <roger@bufferoverflow.ch>
-To: openembedded-devel@openembedded.org
-References: <46CF6903.7060703@dominion.kabel.utwente.nl>
-In-Reply-To: <46CF6903.7060703@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) H3 (4.1.3)
-X-Scanned-By: MIMEDefang 2.62 on 213.160.40.60
-Subject: Re: OE website upgraded to drupal 5.2
+	(envelope-from <dp@xora.org.uk>) id 1IT2FO-0003st-80
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Sep 2007 23:17:14 +0200
+Received: from xora.org.uk ([::ffff:85.210.12.205])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Wed, 05 Sep 2007 22:14:43 +0100
+	id 0006400A.46DF1C44.0000043D
+Date: Wed, 5 Sep 2007 22:14:37 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20070905211437.GA10460@cimmeria>
+References: <20070904202957.GD1429@dodger.lab.datenfreihafen.org>
+	<1189011486.7849.35.camel@localhost.localdomain>
+	<46DEE9E3.4080206@student.utwente.nl>
+	<1434447296.20070905205215@vanille-media.de>
+	<1189021941.7849.46.camel@localhost.localdomain>
+Mime-Version: 1.0
+In-Reply-To: <1189021941.7849.46.camel@localhost.localdomain>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Subject: Re: [RFC] How to handle external kernel patches in oe the	right way?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,66 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2007 20:57:47 -0000
-Content-Type: text/plain;
-	charset=ISO-8859-1;
-	DelSp="Yes";
-	format="flowed"
+X-List-Received-Date: Wed, 05 Sep 2007 21:17:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Hi Koen
+On Wed, Sep 05, 2007 at 08:52:21PM +0100, Richard Purdie wrote:
+> I'm afraid I'm with Mickey here. I don't like the way this "prepatching"
+> works and I think its pretty ugly but I can understand why people are
+> doing it. I'd like to see a better solution but until then what they're
+> doing allows them to develop effectively which is what we're supposed to
+> be about.
+> 
+Maybe if I get some free time around october I might suggest enhancing
+the fetcher/patcher so that any URL can have a
 
-Which drupal and module versions did you use before upgrade?
+http://blah.com/patches.gz;patchseries=1
+svn://wibble.com/branchs/smoo/;patchseries=1
 
-There are still some issues with the wiki headings.
-e.g. on page http://www.openembedded.org/wiki/GettingStarted
+And it does the right thing.
 
-Do you use the Liquid Wiki Engine?
-Or the older 4.6 module http://drupal.org/project/wiki ?
+Or am I going backwards?
 
-Greetings
-
-roger
-
-
-Quoting Koen Kooi <koen@dominion.kabel.utwente.nl>:
-
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi,
->
-> The oe website has been upgraded to drupal 5.2 (after a few failed  =20
-> attemps and restoring a
-> week old backup) and all things seems to be running again.
->
-> The only thing I couldn't fix is the sorting of posts on the  =20
-> frontpage, it needs to be
-> sticky posts, new posts, old posts. Any drupal gurus with hints?
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFGz2kDMkyGM64RGpERAiAgAKCcOeGwBko2PH8bNxIuOjWPI8gVzgCgjeeU
-> kI9/R0AEbs7uPB5KoTf4jKk=3D
-> =3DZymm
-> -----END PGP SIGNATURE-----
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-
-
-
-----------------------------------------------------------------
-This message was sent using IMP, the Internet Messaging Program.
+Graeme
 
 
 
