@@ -1,27 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [62.179.121.47] (helo=viefep27-int.chello.at)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1ITBJX-0001vb-HG
-	for openembedded-devel@openembedded.org; Thu, 06 Sep 2007 08:58:08 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l866tRgq010729 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 6 Sep 2007 08:55:29 +0200
-Message-ID: <46DFA451.6020006@student.utwente.nl>
-Date: Thu, 06 Sep 2007 08:55:13 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <mailinglist@miromico.ch>) id 1ITE3Q-0008V5-2f
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2007 11:53:40 +0200
+Received: from [192.168.1.191] (really [77.57.15.173])
+	by viefep27-int.chello.at
+	(InterMail vM.7.08.02.02 201-2186-121-104-20070414) with ESMTP
+	id <20070906095107.HVRP27551.viefep27-int.chello.at@[192.168.1.191]>
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 6 Sep 2007 11:51:07 +0200
+Message-ID: <46DFCD1A.5070009@miromico.ch>
+Date: Thu, 06 Sep 2007 11:49:14 +0200
+From: Alex <mailinglist@miromico.ch>
+User-Agent: Thunderbird 2.0.0.6 (Windows/20070728)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <46CF6903.7060703@dominion.kabel.utwente.nl>
-	<20070905225908.dcyz0rbxa8wo4ows@www.bufferoverflow.ch>
-In-Reply-To: <20070905225908.dcyz0rbxa8wo4ows@www.bufferoverflow.ch>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: OE website upgraded to drupal 5.2
+To: openembedded-devel@lists.openembedded.org
+Subject: OE and AVR32 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,37 +29,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2007 06:58:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 06 Sep 2007 09:53:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi
 
-Roger Meier schreef:
-> Hi Koen
-> 
-> Which drupal and module versions did you use before upgrade?
-> 
-> There are still some issues with the wiki headings.
-> e.g. on page http://www.openembedded.org/wiki/GettingStarted
+About a month ago I tried to compile OE for AVR32 target.Compile failed 
+while building ulibc. Koen told me that currently support for AVR32 is 
+not working.
 
-That is manually inserted html, so probably the content-type for wiki needs to get
-cascaded or we have to patch the markup filter.
+Today, I updated my OE environment and tried again. AVR32 still seems 
+not to work.
 
-> Do you use the Liquid Wiki Engine?
+What are the problems with AVR32? When can I expect support for AVR32? 
+What can I do to help you getting support for AVR32?
 
-Yes, the 5.2 version.
+Thanks
 
-regards,
+Alex
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFG36RQMkyGM64RGpERAhAsAKCDqSQNUr7mPUNgH++RoYNUD9vt/wCdGmx2
-u7SB37hL1+0QdiYhK9pOkNw=
-=j+Pn
------END PGP SIGNATURE-----
 
 
