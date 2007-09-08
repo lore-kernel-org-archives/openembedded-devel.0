@@ -1,28 +1,22 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [194.158.229.41] (helo=mail-ps.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1ITujb-0005Tb-LM
-	for openembedded-devel@openembedded.org; Sat, 08 Sep 2007 09:28:03 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l887PFxP018845 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 8 Sep 2007 09:25:15 +0200
-Message-ID: <46E24E51.3080700@student.utwente.nl>
-Date: Sat, 08 Sep 2007 09:25:05 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <dv@vollmann.ch>) id 1IU945-0007yU-E2
+	for openembedded-devel@openembedded.org; Sun, 09 Sep 2007 00:46:09 +0200
+Received: from octo.vollmann.ch (212.98.43.140) by mail-ps.sunrise.ch (8.0.010)
+	id 46CB871F00311803 for openembedded-devel@openembedded.org;
+	Sun, 9 Sep 2007 00:43:22 +0200
+Received: from octo (localhost [127.0.0.1])
+	by octo.vollmann.ch (8.11.2/8.11.2) with SMTP id l88MkaR05381;
+	Sun, 9 Sep 2007 00:46:36 +0200
+Sender: dv@vollmann.ch
+Message-ID: <46E3264C.39BD31A5@vollmann.ch>
+Date: Sun, 09 Sep 2007 00:46:36 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+Organization: vollmann engineering gmbh
+X-Mailer: Mozilla 3.04 (X11; U; Linux 2.4.21 i686)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <46CF6903.7060703@dominion.kabel.utwente.nl>	<20070905225908.dcyz0rbxa8wo4ows@www.bufferoverflow.ch>
-	<46DFA451.6020006@student.utwente.nl>
-In-Reply-To: <46DFA451.6020006@student.utwente.nl>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: OE website upgraded to drupal 5.2
+To: openembedded-devel@openembedded.org
+Subject: What is glibc-intermediate for?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,37 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Sep 2007 07:28:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 08 Sep 2007 22:46:10 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-Koen Kooi schreef:
-> Roger Meier schreef:
->> Hi Koen
-> 
->> Which drupal and module versions did you use before upgrade?
-> 
->> There are still some issues with the wiki headings.
->> e.g. on page http://www.openembedded.org/wiki/GettingStarted
-> 
-> That is manually inserted html, so probably the content-type for wiki needs to get
-> cascaded or we have to patch the markup filter.
+building a (cross-)toolchain isn't easy and I'm currently trying
+to get my mind around it.
 
-The correct answer was: "we have to patch the markup sanitizer", which I did :) The wiki
-works as expected now, the only issue left is the reversed news.
+My understanding was always that we have the following order:
+ linux-libc-headers
+ glibc-initial
+ gcc-cross-initial
+ glibc-intermediate
+ gcc-cross
+ glibc
 
-regards,
+But looking at my current build, it turns out that the actual order
+is different:
+ linux-libc-headers
+ glibc-initial
+ gcc-cross-initial
+ glibc-intermediate
+ glibc
+ gcc-cross
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+So, what is glibc-intermediate for (except wasting quite a lot of time)?
 
-iD8DBQFG4k5RMkyGM64RGpERAtDcAJ0TXh0NS0RZOFejHjM0EsjmQErt+wCeILg6
-xIXSySrcvajScJ/nsDMaHfw=
-=gbbm
------END PGP SIGNATURE-----
+  Detlef
+
+-- 
+Detlef Vollmann   vollmann engineering gmbh
+Linux and C++ for Embedded Systems    http://www.vollmann.ch/
 
 
