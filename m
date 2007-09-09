@@ -1,24 +1,33 @@
-Received: from [194.158.229.25] (helo=mail-ps.sunrise.ch)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dv@vollmann.ch>) id 1IULRc-0006ho-Of
-	for openembedded-devel@openembedded.org; Sun, 09 Sep 2007 13:59:18 +0200
-Received: from octo.vollmann.ch (212.98.43.140) by mail-ps.sunrise.ch (8.0.010)
-	id 46CB85480031E325 for openembedded-devel@openembedded.org;
-	Sun, 9 Sep 2007 13:56:26 +0200
-Received: from octo (localhost [127.0.0.1])
-	by octo.vollmann.ch (8.11.2/8.11.2) with SMTP id l89BxdR01652;
-	Sun, 9 Sep 2007 13:59:39 +0200
-Sender: dv@vollmann.ch
-Message-ID: <46E3E02B.22CEE170@vollmann.ch>
-Date: Sun, 09 Sep 2007 13:59:39 +0200
-From: Detlef Vollmann <dv@vollmann.ch>
-Organization: vollmann engineering gmbh
-X-Mailer: Mozilla 3.04 (X11; U; Linux 2.4.21 i686)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <mickey@vanille-media.de>) id 1IUM0i-0002HP-Ue
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Sep 2007 14:35:32 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 2976A28C013; Sun,  9 Sep 2007 14:29:09 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180171236.adsl.alicedsl.de [85.180.171.236])
+	by srv043.dedi23.de (Postfix) with ESMTP id 26CBD28C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  9 Sep 2007 14:29:05 +0200 (CEST)
+Date: Sun, 9 Sep 2007 14:32:37 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <65784821.20070909143237@vanille-media.de>
+To: Detlef Vollmann <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <46E3E02B.22CEE170@vollmann.ch>
 References: <46E3264C.39BD31A5@vollmann.ch>
 	<74d0deb30709090150g161e6059q99f23e2ce1336e1c@mail.gmail.com>
-Subject: Re: What is glibc-intermediate for?
+	<46E3E02B.22CEE170@vollmann.ch>
+MIME-Version: 1.0
+Subject: Conditional Expressions in Python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,45 +41,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2007 11:59:18 -0000
+X-List-Received-Date: Sun, 09 Sep 2007 12:35:33 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-pHilipp Zabel wrote:
-> glibc-initial is needed to build gcc-cross-initial, which is needed to
-> build glibc-intermediate, which is needed to build gcc-cross, which is
-> needed to build glibc.
-Yes, this is what I expected as well, but what I don't see...
+Guys,
 
-> Look at the package recipes, including
-> glibc.inc to see what's going on.
-Yes, I looked at all (well, most) of them.
-The relevant lines are in glibc.inc:
-> DEPENDS = "${@['virtual/${TARGET_PREFIX}gcc-initial', 'virtual/${TARGET_PREFIX}gcc']['nptl' in '${GLIBC_ADDONS}']} linux-libc-headers"
-I have to admit that this is some magic for me (Python?), but
-I interpret this that the dependency on virtual/gcc is somehow dependent
-on NPTL.
+I vote for rewriting our conditional expressions hack in .bb files:
 
-> PROVIDES = "virtual/libc ${@['virtual/${TARGET_PREFIX}libc-for-gcc', '']['nptl' in '${GLIBC_ADDONS}']}"
-And this looks like glibc provides libc-for-gcc (again somehow dependent
-on NPTL), which means it's built first.
+DEPENDS = "${@['virtual/${TARGET_PREFIX}gcc-initial','virtual/${TARGET_PREFIX}gcc']['nptl' in '${GLIBC_ADDONS}']}"
 
-> The seemingly different build order you noticed is probably due to
-> bitbake's fine-grained task dependencies. Maybe glibc was unpacked
-> before gcc-cross, but it most certainly wasn't compiled before
-> gcc-cross was staged.
-In my case I don't have NPTL but linuxthreads, and interestingly
-glibc is compiled before gcc-cross is compiled, but only staged after
-gcc-cross is compiled, which is a strange order anyway...
+Since Python 2.5, this can be written as:
 
-Right now I still have problems with my glibc package, and I'll try
-to fix those and then do a clean complete bootstrap again.
-Let's see what comes out of that...
+DEPENDS = "${@'virtual/${TARGET_PREFIX}gcc' if 'nptl' in '${GLIBC_ADDONS}' else 'virtual/${TARGET_PREFIX}gcc-initial'}
 
-  Detlef
+which parses faster and is much more clear and concise. IIRC the
+resulting bytecode is also faster since there is no need to construct,
+access, and destroy temporary lists.
 
+Regards,
+
+:M:
 -- 
-Detlef Vollmann   vollmann engineering gmbh
-Linux and C++ for Embedded Systems    http://www.vollmann.ch/
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
