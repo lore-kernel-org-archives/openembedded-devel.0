@@ -1,25 +1,28 @@
-Received: from [209.85.146.180] (helo=wa-out-1112.google.com)
+Received: from [194.158.229.24] (helo=mail-ps.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IUTRF-0004fd-2m
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Sep 2007 22:31:25 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so1456761waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Sep 2007 13:28:31 -0700 (PDT)
-Received: by 10.114.202.15 with SMTP id z15mr3079369waf.1189369711425;
-	Sun, 09 Sep 2007 13:28:31 -0700 (PDT)
-Received: by 10.114.208.4 with HTTP; Sun, 9 Sep 2007 13:28:31 -0700 (PDT)
-Message-ID: <19c1b8a90709091328g3370f5dbyf12e05f7dd725ca7@mail.gmail.com>
-Date: Sun, 9 Sep 2007 13:28:31 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <65784821.20070909143237@vanille-media.de>
+	(envelope-from <dv@vollmann.ch>) id 1IUV3R-0001ji-2L
+	for openembedded-devel@openembedded.org; Mon, 10 Sep 2007 00:14:57 +0200
+Received: from octo.vollmann.ch (212.98.43.140) by mail-ps.sunrise.ch (8.0.010)
+	id 46CB80E300332B57 for openembedded-devel@openembedded.org;
+	Mon, 10 Sep 2007 00:12:04 +0200
+Received: from octo (localhost [127.0.0.1])
+	by octo.vollmann.ch (8.11.2/8.11.2) with SMTP id l89MFGR32256;
+	Mon, 10 Sep 2007 00:15:16 +0200
+Sender: dv@vollmann.ch
+Message-ID: <46E47074.391F1AA7@vollmann.ch>
+Date: Mon, 10 Sep 2007 00:15:16 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+Organization: vollmann engineering gmbh
+X-Mailer: Mozilla 3.04 (X11; U; Linux 2.4.21 i686)
 MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <46E3264C.39BD31A5@vollmann.ch>
 	<74d0deb30709090150g161e6059q99f23e2ce1336e1c@mail.gmail.com>
 	<46E3E02B.22CEE170@vollmann.ch>
 	<65784821.20070909143237@vanille-media.de>
-Subject: Re: Conditional Expressions in Python
+	<46E43AB1.4808813@vollmann.ch>
+	<19c1b8a90709091325ue7f5cf5rd3956add41e45c5@mail.gmail.com>
+Subject: Re: PREFERRED_PROVIDER (was: Conditional Expressions in Python)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,39 +36,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2007 20:31:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 09 Sep 2007 22:14:57 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-yes it looks more readable too.
+Khem Raj wrote:
+> 
+> which distro are you using. angstrom-2007.1.conf could be your problem
+> 
+> ./conf/distro/angstrom-2007.1.conf:335:PREFERRED_PROVIDER_virtual/powerpc-angstrom-linux-libc-for-gcc
+>        = "glibc-intermediate"
+Oops, sorry.
+You're completely correct, it's my fault:
+I searched for 'PREFERRED_PROVIDERS.*libc-for-gcc' and didn't think
+of the PREFERRED_PROVIDER_.*.
+Sorry again.
 
-On 9/9/07, Dr. Michael Lauer <mickey@vanille-media.de> wrote:
-> Guys,
->
-> I vote for rewriting our conditional expressions hack in .bb files:
->
-> DEPENDS = "${@['virtual/${TARGET_PREFIX}gcc-initial','virtual/${TARGET_PREFIX}gcc']['nptl' in '${GLIBC_ADDONS}']}"
->
-> Since Python 2.5, this can be written as:
->
-> DEPENDS = "${@'virtual/${TARGET_PREFIX}gcc' if 'nptl' in '${GLIBC_ADDONS}' else 'virtual/${TARGET_PREFIX}gcc-initial'}
->
-> which parses faster and is much more clear and concise. IIRC the
-> resulting bytecode is also faster since there is no need to construct,
-> access, and destroy temporary lists.
->
-> Regards,
->
-> :M:
-> --
-> Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+But now the next question:
+What's the priority of the PREFERRED_PROVIDER* settings?
+PREFERRED_PROVIDERS is one long list with potentially lots of
+entries, possibly conflicting.
+What gets priority?  The first entry for a specific target or the
+last entry?
+
+And it seems that a specific PREFERRED_PROVIDER_.* setting gets
+priority over the PREFERRED_PROVIDERS list.  Is that always correct?
+
+And as the distro.conf is read after the local.conf, there's no
+way to override a setting from distro.conf in local.conf, correct?
+
+For me that's not really a problem, as I have my own distro.conf
+that includes (requires) angstrom.conf, but I think local.conf
+is always more specific for the user (hance its name) than distro.conf,
+so it would be nice if distro settings could be overridden in
+local.conf.
+
+  Detlef
+
+-- 
+Detlef Vollmann   vollmann engineering gmbh
+Linux and C++ for Embedded Systems    http://www.vollmann.ch/
 
 
