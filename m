@@ -1,33 +1,25 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IUM0i-0002HP-Ue
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Sep 2007 14:35:32 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 2976A28C013; Sun,  9 Sep 2007 14:29:09 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180171236.adsl.alicedsl.de [85.180.171.236])
-	by srv043.dedi23.de (Postfix) with ESMTP id 26CBD28C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Sep 2007 14:29:05 +0200 (CEST)
-Date: Sun, 9 Sep 2007 14:32:37 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <65784821.20070909143237@vanille-media.de>
-To: Detlef Vollmann <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <46E3E02B.22CEE170@vollmann.ch>
-References: <46E3264C.39BD31A5@vollmann.ch>
-	<74d0deb30709090150g161e6059q99f23e2ce1336e1c@mail.gmail.com>
-	<46E3E02B.22CEE170@vollmann.ch>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IUN7n-0002hK-KX
+	for openembedded-devel@openembedded.org; Sun, 09 Sep 2007 15:47:03 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l89DhxxP004938 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 9 Sep 2007 15:44:00 +0200
+Message-ID: <46E3F898.6090607@student.utwente.nl>
+Date: Sun, 09 Sep 2007 15:43:52 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Subject: Conditional Expressions in Python
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: sane-srcrevs.inc content and update policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,29 +33,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2007 12:35:33 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 09 Sep 2007 13:47:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Guys,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I vote for rewriting our conditional expressions hack in .bb files:
+Hi,
 
-DEPENDS = "${@['virtual/${TARGET_PREFIX}gcc-initial','virtual/${TARGET_PREFIX}gcc']['nptl' in '${GLIBC_ADDONS}']}"
+I want to start using sane-srcrevs.inc in angstrom soon, but I heard some sounds from
+angstrom-derivatives about needing some bleeding-edge bits.
 
-Since Python 2.5, this can be written as:
+So I have a few questions:
 
-DEPENDS = "${@'virtual/${TARGET_PREFIX}gcc' if 'nptl' in '${GLIBC_ADDONS}' else 'virtual/${TARGET_PREFIX}gcc-initial'}
+* how can a SRC_REV-pn-${PN} be overriden in a clean way (e.g. SRC_REV-pn-foo = "now")?
+* what goes into sane-srcrevs.inc (everything with positive def_pref?)?
+* what policy will be set for updating it?
 
-which parses faster and is much more clear and concise. IIRC the
-resulting bytecode is also faster since there is no need to construct,
-access, and destroy temporary lists.
+Having a complete sane-srcrevs.inc should fix the "can't build because berlios is down"
+type of problems.
 
-Regards,
+regards,
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFG4/iYMkyGM64RGpERAu9kAJ0a8x2CJtUltOfdvZsdV/frtVmhNQCgqcGL
+yR77EbuouqFeIXqtkn3k98Y=
+=o85w
+-----END PGP SIGNATURE-----
 
 
