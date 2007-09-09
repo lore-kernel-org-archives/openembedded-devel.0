@@ -1,27 +1,31 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [213.160.40.50] (helo=popeye1.ggamaur.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IUNmf-0008Hp-E1
-	for openembedded-devel@openembedded.org; Sun, 09 Sep 2007 16:29:09 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l89EQDxP010466 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 9 Sep 2007 16:26:14 +0200
-Message-ID: <46E4027F.107@student.utwente.nl>
-Date: Sun, 09 Sep 2007 16:26:07 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <46CF6903.7060703@dominion.kabel.utwente.nl>	<20070905225908.dcyz0rbxa8wo4ows@www.bufferoverflow.ch>	<46DFA451.6020006@student.utwente.nl>
+	(envelope-from <roger@bufferoverflow.ch>) id 1IUP8a-0005D2-D8
+	for openembedded-devel@openembedded.org; Sun, 09 Sep 2007 17:55:52 +0200
+Received: from automat.bufferoverflow.ch (c-82-192-224-61.customer.ggaweb.ch
+	[82.192.224.61])
+	by popeye1.ggamaur.net (8.13.7/8.13.7/Submit) with ESMTP id
+	l89Fqw57061840 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 9 Sep 2007 17:53:00 +0200 (CEST)
+	(envelope-from roger@bufferoverflow.ch)
+Received: by automat.bufferoverflow.ch (Postfix, from userid 33)
+	id 3025F4020; Sun,  9 Sep 2007 17:57:14 +0200 (CEST)
+Received: from 10.0.0.69 ([10.0.0.69]) by www.bufferoverflow.ch (Horde MIME
+	library) with HTTP; Sun, 09 Sep 2007 17:57:14 +0200
+Message-ID: <20070909175714.cvxg6cq9icoocggo@www.bufferoverflow.ch>
+X-Priority: 3 (Normal)
+Date: Sun, 09 Sep 2007 17:57:14 +0200
+From: Roger Meier <roger@bufferoverflow.ch>
+To: openembedded-devel@openembedded.org
+References: <46CF6903.7060703@dominion.kabel.utwente.nl>
+	<20070905225908.dcyz0rbxa8wo4ows@www.bufferoverflow.ch>
+	<46DFA451.6020006@student.utwente.nl>
 	<46E24E51.3080700@student.utwente.nl>
-In-Reply-To: <46E24E51.3080700@student.utwente.nl>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+	<46E4027F.107@student.utwente.nl>
+In-Reply-To: <46E4027F.107@student.utwente.nl>
+MIME-Version: 1.0
+User-Agent: Internet Messaging Program (IMP) H3 (4.1.3)
+X-Scanned-By: MIMEDefang 2.62 on 213.160.40.60
 Subject: Re: OE website upgraded to drupal 5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,44 +40,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2007 14:29:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 09 Sep 2007 15:55:52 -0000
+Content-Type: text/plain;
+	charset=ISO-8859-1;
+	DelSp="Yes";
+	format="flowed"
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Quoting Koen Kooi <k.kooi@student.utwente.nl>:
 
-Koen Kooi schreef:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
 > Koen Kooi schreef:
->> Roger Meier schreef:
->>> Hi Koen
->>> Which drupal and module versions did you use before upgrade?
->>> There are still some issues with the wiki headings.
->>> e.g. on page http://www.openembedded.org/wiki/GettingStarted
->> That is manually inserted html, so probably the content-type for wiki needs to get
->> cascaded or we have to patch the markup filter.
-> 
-> The correct answer was: "we have to patch the markup sanitizer", which I did :) The wiki
-> works as expected now, the only issue left is the reversed news.
+>> Koen Kooi schreef:
+>>> Roger Meier schreef:
+>>>> Hi Koen
+>>>> Which drupal and module versions did you use before upgrade?
+>>>> There are still some issues with the wiki headings.
+>>>> e.g. on page http://www.openembedded.org/wiki/GettingStarted
+>>> That is manually inserted html, so probably the content-type for  =20
+>>> wiki needs to get
+>>> cascaded or we have to patch the markup filter.
+>>
+>> The correct answer was: "we have to patch the markup sanitizer",  =20
+>> which I did :) The wiki
+>> works as expected now, the only issue left is the reversed news.
+>
+> The reversed news issue turned out to be a case of one  =20
+> 'db_rewrite_sql()' too many, this
+> is fixed now.
+Great!
 
-The reversed news issue turned out to be a case of one 'db_rewrite_sql()' too many, this
-is fixed now.
+>
+> The current TODO:
+just drop a line if you need a hand on one of these topics!
 
-The current TODO:
+>
+> * unify tinderbox, viewmtn, org.oe.documentation and main website css
+It would be great to have viewmtn integrated into apache webserver.
 
-* unify tinderbox, viewmtn, org.oe.documentation and main website css
-* make everything conform to standards (xhtml?)
-* get more servers and hosting to spread services
+The URL http://www.openembedded.org:1081/ would not be accessible on =20
+every network(e.g. corporate networks)
+
+The following manual describes the way to do this: =20
+http://viewmtn.angrygoats.net/revision/file/6971b1ddbf5c30977d1c306f3baa120d=
+709d474e/INSTALL
+
+> * make everything conform to standards (xhtml?)
+Most drupal sites conform to xhtml.
+There are just a few Error's left: =20
+http://validator.w3.org/check?verbose=3D1&uri=3Dhttp%3A%2F%2Fwww.openembedde=
+d.org%2F
+
+> * get more servers and hosting to spread services
+
 
 regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+roger
 
-iD8DBQFG5AJ+MkyGM64RGpERApmmAJ0fUkzSK4e4pYvAiLkhV58Aa4O3vACdGrL5
-b+gwB+2P+UuZtp9ywHUCDxI=
-=BxJz
------END PGP SIGNATURE-----
+
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFG5AJ+MkyGM64RGpERApmmAJ0fUkzSK4e4pYvAiLkhV58Aa4O3vACdGrL5
+> b+gwB+2P+UuZtp9ywHUCDxI=3D
+> =3DBxJz
+> -----END PGP SIGNATURE-----
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+
+
+
+----------------------------------------------------------------
+This message was sent using IMP, the Internet Messaging Program.
+
 
 
