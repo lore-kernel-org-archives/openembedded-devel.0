@@ -1,32 +1,42 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IUmHl-0007vr-Pt
-	for openembedded-devel@openembedded.org; Mon, 10 Sep 2007 18:38:54 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8AGZuQX017440
-	for <openembedded-devel@openembedded.org>;
-	Mon, 10 Sep 2007 17:35:56 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 16988-10 for <openembedded-devel@openembedded.org>;
-	Mon, 10 Sep 2007 17:35:49 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8AGZlwN017428
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 10 Sep 2007 17:35:47 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <46E3F898.6090607@student.utwente.nl>
-References: <46E3F898.6090607@student.utwente.nl>
-Date: Mon, 10 Sep 2007 17:35:46 +0100
-Message-Id: <1189442146.6153.42.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: sane-srcrevs.inc content and update policy
+	(envelope-from <mickey@vanille-media.de>) id 1IUqXA-0002MK-PO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Sep 2007 23:11:05 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id B163F28C013; Mon, 10 Sep 2007 23:04:29 +0200 (CEST)
+X-Spam-Flag: YES
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ******
+X-Spam-Status: Yes, score=6.6 required=5.0 tests=AWL,BAYES_05,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+X-Spam-Report: * -1.1 BAYES_05 BODY: Bayesian spam probability is 1 to 5%
+	*      [score: 0.0201]
+	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
+	address *      [85.180.172.89 listed in dnsbl.sorbs.net]
+	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
+	*      [85.180.172.89 listed in zen.spamhaus.org]
+	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
+	*      [85.180.172.89 listed in combined.njabl.org]
+	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
+	*      [85.180.172.89 listed in zen.spamhaus.org]
+	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
+	* -2.9 AWL AWL: From: address is in the auto white-list
+Received: from PROMETHEUS (e180172089.adsl.alicedsl.de [85.180.172.89])
+	by srv043.dedi23.de (Postfix) with ESMTP id 5910828C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Sep 2007 23:04:26 +0200 (CEST)
+Date: Mon, 10 Sep 2007 23:08:01 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1325905859.20070910230801@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: yaffs2 image generation support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,40 +50,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2007 16:38:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 10 Sep 2007 21:11:06 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2007-09-09 at 15:43 +0200, Koen Kooi wrote:
-> I want to start using sane-srcrevs.inc in angstrom soon, but I heard some sounds from
-> angstrom-derivatives about needing some bleeding-edge bits.
-> 
-> So I have a few questions:
-> 
-> * how can a SRC_REV-pn-${PN} be overriden in a clean way (e.g. SRC_REV-pn-foo = "now")?
+Team OpenMoko needs yaffs2 image generation support in OpenEmbedded.
+Are there any patches out there, any experiences yet? If so, please
+speak up so we don't have to duplicated work :)
 
-SRCREV_pn-foo = "${AUTOREV}"
+Regards,
 
-(AUTOREV is a variable specifically created for this purpose and was
-already checked into bitbake.conf)
-
-> * what goes into sane-srcrevs.inc (everything with positive def_pref?)?
-
-That would seem appropriate (anything srcrev based would be appropriate
-regardless of def_pref really).
-
-> * what policy will be set for updating it?
-
-Latest bleeding edge? We could even automate this...
-
-> Having a complete sane-srcrevs.inc should fix the "can't build because berlios is down"
-> type of problems.
-
-Agreed as commented/discussed in the bugzilla.
-
-Cheers,
-
-Richard
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
