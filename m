@@ -1,45 +1,22 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [66.249.82.237] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IV5xl-0001i1-FN
+	(envelope-from <leon.woestenberg@gmail.com>) id 1IV9iy-00059I-GH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2007 15:39:33 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 06DB728C013; Tue, 11 Sep 2007 15:32:52 +0200 (CEST)
-X-Spam-Flag: YES
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: *****
-X-Spam-Status: Yes, score=5.8 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-X-Spam-Report: * -2.6 BAYES_00 BODY: Bayesian spam probability is 0 to 1%
-	*      [score: 0.0000]
-	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
-	address *      [85.180.172.89 listed in dnsbl.sorbs.net]
-	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
-	*      [85.180.172.89 listed in zen.spamhaus.org]
-	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
-	*      [85.180.172.89 listed in combined.njabl.org]
-	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
-	*      [85.180.172.89 listed in zen.spamhaus.org]
-	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
-	* -2.1 AWL AWL: From: address is in the auto white-list
-Received: from PROMETHEUS (e180172089.adsl.alicedsl.de [85.180.172.89])
-	by srv043.dedi23.de (Postfix) with ESMTP id E270528C012
+	Tue, 11 Sep 2007 19:40:32 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so1483399wxd
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2007 15:32:48 +0200 (CEST)
-Date: Tue, 11 Sep 2007 15:36:25 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <877302070.20070911153625@vanille-media.de>
+	Tue, 11 Sep 2007 10:37:28 -0700 (PDT)
+Received: by 10.90.49.1 with SMTP id w1mr13288569agw.1189532247890;
+	Tue, 11 Sep 2007 10:37:27 -0700 (PDT)
+Received: by 10.90.50.8 with HTTP; Tue, 11 Sep 2007 10:37:27 -0700 (PDT)
+Message-ID: <c384c5ea0709111037o723dda57x171c148a0f93a91a@mail.gmail.com>
+Date: Tue, 11 Sep 2007 19:37:27 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1189505203.6163.13.camel@localhost.localdomain>
-References: <1325905859.20070910230801@vanille-media.de>
-	<1189505203.6163.13.camel@localhost.localdomain>
+In-Reply-To: <200709111318.52432.openembedded@haerwu.biz>
 MIME-Version: 1.0
-Subject: Re: yaffs2 image generation support
+References: <200709111318.52432.openembedded@haerwu.biz>
+Subject: Re: Task-base is big :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -53,32 +30,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2007 13:39:33 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 11 Sep 2007 17:40:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Richard Purdie wrote:
-> On Mon, 2007-09-10 at 23:08 +0200, Dr. Michael Lauer wrote:
->> Team OpenMoko needs yaffs2 image generation support in OpenEmbedded.
->> Are there any patches out there, any experiences yet? If so, please
->> speak up so we don't have to duplicated work  
+Hello all,
 
-> In case you're wondering about me, I don't have any yaffs2 patches ;-).
+On 9/11/07, Marcin Juszkiewicz <openembedded@haerwu.biz> wrote:
+>
+> After long time of doing mostly Poky builds I did few Angstrom builds from
+> OE.dev and found that amount of dependencies during build time has grown
+> into very long list. It is 2388 tasks now just for "bitbake task-base"
 
-Ah, bummer ;) I'm going to do them then.
+Most of  your suggestion would end-up having a "USE" flags approach.
 
-> I'd have thought jffs2 would be the preferred option due to the
-> compression support which yaffs2 lacks?
+I also think the dependencies (whether run-time or build-time) grow
+out of hand, and are very hard to get rid of building for true
+embedded systems where the software is embedded as firmware and
+nothing extra can be installed subsequently.
 
-Only up to a certain flash size. Starting with, say, 256, yaffs2 shows
-its advantages. People inside some hardware unit are working on device
-that comes w/ 1G of flash and they report yaffs2 outperforming jffs2.
+The TASK-* and *FEATURES approach looked good at first instance, but I
+have reverted from using it, as it still results in a major cloud of
+package (build) dependencies.
+
+My current approach is maintaining an overlay with copied and adapted
+options and dependencies but I would rather see this supported within
+OpenEmbedded.
+
+Maybe a minimal set of USE flags instead of creating -lite or -minimal
+.bb is an option?
+Or, using an include file that defines configuration variables
+(HAVE_GTK, HAVE_X)?
 
 Regards,
-
-:M:
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Leon
 
 
