@@ -1,36 +1,22 @@
-Received: from [129.46.51.59] (helo=ithilien.qualcomm.com)
+Received: from [62.70.27.18] (helo=esparsett.troll.no)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mdevico@qualcomm.com>) id 1IVBaa-0006tS-4k
-	for openembedded-devel@openembedded.org; Tue, 11 Sep 2007 21:40:00 +0200
-Received: from neophyte.qualcomm.com (neophyte.qualcomm.com [129.46.61.149])
-	by ithilien.qualcomm.com (8.13.6/8.12.5/1.0) with ESMTP id
-	l8BJaQuj004141
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Sep 2007 12:36:26 -0700
-Received: from sanexcas01.na.qualcomm.com (sanexcas01.qualcomm.com
-	[172.30.36.175])
-	by neophyte.qualcomm.com (8.13.6/8.13.6/1.0) with ESMTP id
-	l8BJaP9q003811 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Sep 2007 12:36:26 -0700
-Received: from NAEX16.na.qualcomm.com ([10.47.6.158]) by
-	sanexcas01.na.qualcomm.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 11 Sep 2007 12:36:25 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <kyrvin@trolltech.com>) id 1IVCyK-0003ts-Fl
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Sep 2007 23:08:36 +0200
+Received: from esparsett.troll.no (localhost [127.0.0.1])
+	by localhost (Postfix) with SMTP
+	id CF666741DF; Tue, 11 Sep 2007 23:05:31 +0200 (CEST)
+Received: from skolelinux.local (unknown [172.20.1.9])
+	by esparsett.troll.no (Postfix) with ESMTP
+	id A8158741DC; Tue, 11 Sep 2007 23:05:31 +0200 (CEST)
+From: Knut Yrvin <kyrvin@trolltech.com>
+Organization: Trolltech
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Sep 2007 23:05:30 +0200
+User-Agent: KMail/1.9.5
 MIME-Version: 1.0
-Date: Tue, 11 Sep 2007 12:36:24 -0700
-Message-ID: <9870FB9891C7AD4B910E20B14776DF850104187B@NAEX16.na.qualcomm.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: bootstrap-image boot error: Inconsistency detected by ld.so:
-	dynamic_link.h...
-Thread-Index: Acf0qwnZQwxHOyNHRtiHqpfKkmvVVA==
-From: "DeVico, Michael" <mdevico@qualcomm.com>
-To: <openembedded-devel@openembedded.org>
-X-OriginalArrivalTime: 11 Sep 2007 19:36:25.0501 (UTC)
-	FILETIME=[0A6F74D0:01C7F4AB]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: bootstrap-image boot error: Inconsistency detected by ld.so: dynamic_link.h...
+Message-Id: <200709112305.30239.kyrvin@trolltech.com>
+Subject: Join the 2007 Trolltech Developer Days in California and Munich
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,63 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2007 19:40:00 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Tue, 11 Sep 2007 21:08:36 -0000
 Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello,
+Trolltech is presenting the fourth annual Developer Days events[1] in the US 
+and Germany.  We invite free software developers to join without admittance 
+fee. 
 
-=20
+1. http://trolltech.com/devdays2007
 
-This is more than likely a configuration/environment setup issue rather
-that a bug, so I'm posting it here
+The events are taking place in Redwood City, California (October 3 & 4), and 
+Munich, Germany (October 16th & 17).  If you are currently contributing to an 
+open source project, and would like to apply for free registration to the 
+event, please send us a short mail at devdays2007@trolltech.com, listing the 
+following:
 
-rather than filing a bug for now...
+Your Name:
+Name of the open source project you actively contributing to:
+URL for more project information:
 
-=20
+We will review your entry and respond with registration information if 
+you qualify.  We hope to see you at Developer Days!
 
-I built the bootstrap-image using the angstrom-2007.1 distro and the
-i686-generic machine definition.
+Best regards
 
-My build host is running Fedora FC7 and the processor is an Intel Core 2
-Duo.
-
-=20
-
-However, when I try to boot, the kernel progresses through the device
-hw/driver initialization and=20
-
-successfully mounts  the rootfs, but then fails with the following error
-message:
-
-=20
-
-Inconsistency detected by ld.so: dynamic_link.h: 179
-elf_get_dynamic_info: Assertion 'Info[15] =3D=3D ((void*)0)' failed!
-
-=20
-
-If I point it to a partition containing the helloworld root fs, it
-prints "Hello World" as expected, so it would
-
-appear to be a problem with the bootstrap image rootfs rather than the
-kernel itself, but this is my first=20
-
-experience building a linux system from the ground up so I could
-definitely use some help here.
-
-=20
-
-Any ideas?
-
-=20
-
-Thanks in advance!
-
---Mike
-
-=20
+Knut Yrvin
+-- 
+Community Manager / Developer Tools - Trolltech ASA
+cell: + 47 908 95 765, phone: +47 21 60 27 58
+http://www.trolltech.com/products/qt
 
 
