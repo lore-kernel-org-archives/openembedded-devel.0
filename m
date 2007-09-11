@@ -1,25 +1,34 @@
-Received: from [64.233.166.178] (helo=py-out-1112.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1IVEyl-0005pD-3R
+	(envelope-from <mickey@vanille-media.de>) id 1IVFQn-0001yf-PO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Sep 2007 01:17:11 +0200
-Received: by py-out-1112.google.com with SMTP id a25so44732pyi
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2007 16:14:04 -0700 (PDT)
-Received: by 10.35.71.1 with SMTP id y1mr7989108pyk.1189552444675;
-	Tue, 11 Sep 2007 16:14:04 -0700 (PDT)
-Received: by 10.90.50.8 with HTTP; Tue, 11 Sep 2007 16:14:04 -0700 (PDT)
-Message-ID: <c384c5ea0709111614m20b079f8l4939336884b844b6@mail.gmail.com>
-Date: Wed, 12 Sep 2007 01:14:04 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1189545023.6163.57.camel@localhost.localdomain>
-MIME-Version: 1.0
+	Wed, 12 Sep 2007 01:46:09 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id E4A4E28C013; Wed, 12 Sep 2007 01:39:25 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180135170.adsl.alicedsl.de [85.180.135.170])
+	by srv043.dedi23.de (Postfix) with ESMTP id 57BC328C012;
+	Wed, 12 Sep 2007 01:39:22 +0200 (CEST)
+Date: Wed, 12 Sep 2007 01:43:00 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1916151728.20070912014300@vanille-media.de>
+To: Detlef Vollmann <dv@vollmann.ch>
+In-Reply-To: <46E71524.4CAFCDBC@vollmann.ch>
 References: <200709111318.52432.openembedded@haerwu.biz>
 	<c384c5ea0709111037o723dda57x171c148a0f93a91a@mail.gmail.com>
-	<46E6EC08.209@student.utwente.nl>
-	<1189545023.6163.57.camel@localhost.localdomain>
-Subject: Re: USE flags - why they won't work for OE
+	<1189545452.6163.65.camel@localhost.localdomain>
+	<46E71524.4CAFCDBC@vollmann.ch>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Task-base is big :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,53 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2007 23:17:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Sep 2007 23:46:09 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Richard,
+Detlef Vollmann wrote:
+> The difference to the original python .bb is the removing of
+>  DEPEND: tk
+>   This would build a whole X11 system, and I definitely don't want that.
 
-On 9/11/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Tue, 2007-09-11 at 21:27 +0200, Koen Kooi wrote:
-> > Leon Woestenberg schreef:
-> > > Hello all,
-> > >
-> >
-> > > Maybe a minimal set of USE flags instead of creating -lite or -minimal
-> > > .bb is an option?
-> > > Or, using an include file that defines configuration variables
-> > > (HAVE_GTK, HAVE_X)?
-> >
-> > Any form of USE flags is *bad* and *unacceptable*. I'll leave it to the other core people
-> > to throw around terms like 'deterministic' and 'package space' :)
->
-> Agreed. I will try and keep this brief whilst putting something in the
-> archives once and for all.
->
-Clear. So we use the bitbake recipe namespace to create a diverse set
-of packages.
-
-Let's at least come up with a good way of using the namespace:
-
--lite has been suggested, which I do not prefer (ambiguous, and I
-would prefer -light)
--nodbus (if dbus dependency is dropped)
-
-I would prefer using:
-
--without-x
--without-gtk
--without-dbus
-...
-
-as the package suffix, as it re-uses the "configure" options
-namespace, well known to most developers.
-
-Also, -minimal comes to mind for a truely minimally configured package.
+Hmm, I'm sure it's just an example for you, but anyway I can't leave
+it unsaid: Python's dependency on Tk just drags in libx11 and libxext
+at build time -- I don't see this as being a problem, since they don't
+end up the image unless you want to.
 
 Regards,
+
+:M:
 -- 
-Leon
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
