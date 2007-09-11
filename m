@@ -1,42 +1,20 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [209.85.128.186] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IUqXA-0002MK-PO
+	(envelope-from <philipp.zabel@gmail.com>) id 1IV0IH-0005Qr-51
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Sep 2007 23:11:05 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id B163F28C013; Mon, 10 Sep 2007 23:04:29 +0200 (CEST)
-X-Spam-Flag: YES
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ******
-X-Spam-Status: Yes, score=6.6 required=5.0 tests=AWL,BAYES_05,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,RCVD_IN_XBL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-X-Spam-Report: * -1.1 BAYES_05 BODY: Bayesian spam probability is 1 to 5%
-	*      [score: 0.0201]
-	* 2.0 RCVD_IN_SORBS_DUL RBL: SORBS: sent directly from dynamic IP
-	address *      [85.180.172.89 listed in dnsbl.sorbs.net]
-	*  3.9 RCVD_IN_XBL RBL: Received via a relay in Spamhaus XBL
-	*      [85.180.172.89 listed in zen.spamhaus.org]
-	*  1.9 RCVD_IN_NJABL_DUL RBL: NJABL: dialup sender did non-local SMTP
-	*      [85.180.172.89 listed in combined.njabl.org]
-	*  0.0 RCVD_IN_PBL RBL: Received via a relay in Spamhaus PBL
-	*      [85.180.172.89 listed in zen.spamhaus.org]
-	*  2.6 REPTO_OVERQUOTE_THEBAT The Bat! doesn't do quoting like this
-	* -2.9 AWL AWL: From: address is in the auto white-list
-Received: from PROMETHEUS (e180172089.adsl.alicedsl.de [85.180.172.89])
-	by srv043.dedi23.de (Postfix) with ESMTP id 5910828C012
+	Tue, 11 Sep 2007 09:36:21 +0200
+Received: by fk-out-0910.google.com with SMTP id 18so1708427fks
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2007 23:04:26 +0200 (CEST)
-Date: Mon, 10 Sep 2007 23:08:01 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1325905859.20070910230801@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
+	Tue, 11 Sep 2007 00:33:19 -0700 (PDT)
+Received: by 10.82.134.12 with SMTP id h12mr5920672bud.1189495999650;
+	Tue, 11 Sep 2007 00:33:19 -0700 (PDT)
+Received: by 10.82.119.6 with HTTP; Tue, 11 Sep 2007 00:33:14 -0700 (PDT)
+Message-ID: <74d0deb30709110033t3256fb15v76dc5b7cf51b46f6@mail.gmail.com>
+Date: Tue, 11 Sep 2007 09:33:14 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Subject: yaffs2 image generation support
+Subject: [rfc] stamp removal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,19 +28,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2007 21:11:06 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 11 Sep 2007 07:36:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Team OpenMoko needs yaffs2 image generation support in OpenEmbedded.
-Are there any patches out there, any experiences yet? If so, please
-speak up so we don't have to duplicated work :)
+Hi,
 
-Regards,
+I was wondering whether it would be a nice touch to have tasks that
+remove other task's results remove the other tasks's stamps, too.
+Example: do_package removes the image dir, so it could remove the
+do_install stamp. do_rm_work removes the complete workdir, so it could
+remove the do_fetch ... do_package stamps, etc.
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+I'm often running into errors because bitbake makes certain
+assumptions about what is in the work dir just by looking at the
+stamps, and currently stamps and workdir state are not always in sync.
+Example actions are doing one of the configure/compile/package_write
+steps when I forgot that rm_work already had kicked in or doing
+package_write to repackage after code changes (currently I manually
+have to do_install, too).
 
+regards
+Philipp
 
 
