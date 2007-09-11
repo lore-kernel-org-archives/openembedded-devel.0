@@ -1,21 +1,26 @@
-Received: from [66.249.82.237] (helo=wx-out-0506.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1IV9iy-00059I-GH
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2007 19:40:32 +0200
-Received: by wx-out-0506.google.com with SMTP id h27so1483399wxd
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2007 10:37:28 -0700 (PDT)
-Received: by 10.90.49.1 with SMTP id w1mr13288569agw.1189532247890;
-	Tue, 11 Sep 2007 10:37:27 -0700 (PDT)
-Received: by 10.90.50.8 with HTTP; Tue, 11 Sep 2007 10:37:27 -0700 (PDT)
-Message-ID: <c384c5ea0709111037o723dda57x171c148a0f93a91a@mail.gmail.com>
-Date: Tue, 11 Sep 2007 19:37:27 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200709111318.52432.openembedded@haerwu.biz>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IVBR6-0006lf-9w
+	for openembedded-devel@openembedded.org; Tue, 11 Sep 2007 21:30:12 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l8BJR1YY004426 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Sep 2007 21:27:02 +0200
+Message-ID: <46E6EC08.209@student.utwente.nl>
+Date: Tue, 11 Sep 2007 21:27:04 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <200709111318.52432.openembedded@haerwu.biz>
+	<c384c5ea0709111037o723dda57x171c148a0f93a91a@mail.gmail.com>
+In-Reply-To: <c384c5ea0709111037o723dda57x171c148a0f93a91a@mail.gmail.com>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: Task-base is big :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,41 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2007 17:40:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Sep 2007 19:30:13 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello all,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 9/11/07, Marcin Juszkiewicz <openembedded@haerwu.biz> wrote:
->
-> After long time of doing mostly Poky builds I did few Angstrom builds from
-> OE.dev and found that amount of dependencies during build time has grown
-> into very long list. It is 2388 tasks now just for "bitbake task-base"
+Leon Woestenberg schreef:
+> Hello all,
+> 
 
-Most of  your suggestion would end-up having a "USE" flags approach.
+> Maybe a minimal set of USE flags instead of creating -lite or -minimal
+> .bb is an option?
+> Or, using an include file that defines configuration variables
+> (HAVE_GTK, HAVE_X)?
 
-I also think the dependencies (whether run-time or build-time) grow
-out of hand, and are very hard to get rid of building for true
-embedded systems where the software is embedded as firmware and
-nothing extra can be installed subsequently.
+Any form of USE flags is *bad* and *unacceptable*. I'll leave it to the other core people
+to throw around terms like 'deterministic' and 'package space' :)
 
-The TASK-* and *FEATURES approach looked good at first instance, but I
-have reverted from using it, as it still results in a major cloud of
-package (build) dependencies.
+regards,
 
-My current approach is maintaining an overlay with copied and adapted
-options and dependencies but I would rather see this supported within
-OpenEmbedded.
+Koen
 
-Maybe a minimal set of USE flags instead of creating -lite or -minimal
-.bb is an option?
-Or, using an include file that defines configuration variables
-(HAVE_GTK, HAVE_X)?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Regards,
--- 
-Leon
+iD8DBQFG5uwIMkyGM64RGpERAi0IAJ9PQlx4QvSPiTwJnu7uz6ZEk/y8/wCghoJF
+fpxV38r3QzACxaFvG+Xwbrc=
+=pK1Q
+-----END PGP SIGNATURE-----
 
 
