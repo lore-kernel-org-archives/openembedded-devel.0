@@ -1,34 +1,33 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IVD39-0003yr-DK
-	for openembedded-devel@openembedded.org; Tue, 11 Sep 2007 23:13:35 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1IVDA3-000487-Em
+	for openembedded-devel@openembedded.org; Tue, 11 Sep 2007 23:20:43 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8BLAUGx028064
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8BLHdpR028375
 	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Sep 2007 22:10:30 +0100
+	Tue, 11 Sep 2007 22:17:39 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 27924-04 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Sep 2007 22:10:27 +0100 (BST)
+	id 28148-06 for <openembedded-devel@openembedded.org>;
+	Tue, 11 Sep 2007 22:17:35 +0100 (BST)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8BLANx2028058
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8BLHWrL028357
 	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
 	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Sep 2007 22:10:23 +0100
+	Tue, 11 Sep 2007 22:17:32 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <46E6EC08.209@student.utwente.nl>
+In-Reply-To: <c384c5ea0709111037o723dda57x171c148a0f93a91a@mail.gmail.com>
 References: <200709111318.52432.openembedded@haerwu.biz>
 	<c384c5ea0709111037o723dda57x171c148a0f93a91a@mail.gmail.com>
-	<46E6EC08.209@student.utwente.nl>
-Date: Tue, 11 Sep 2007 22:10:23 +0100
-Message-Id: <1189545023.6163.57.camel@localhost.localdomain>
+Date: Tue, 11 Sep 2007 22:17:32 +0100
+Message-Id: <1189545452.6163.65.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: USE flags - why they won't work for OE
+Subject: Re: Task-base is big :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,60 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2007 21:13:35 -0000
+X-List-Received-Date: Tue, 11 Sep 2007 21:20:43 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-09-11 at 21:27 +0200, Koen Kooi wrote:
-> Leon Woestenberg schreef:
-> > Hello all,
-> > 
-> 
-> > Maybe a minimal set of USE flags instead of creating -lite or -minimal
-> > .bb is an option?
-> > Or, using an include file that defines configuration variables
-> > (HAVE_GTK, HAVE_X)?
-> 
-> Any form of USE flags is *bad* and *unacceptable*. I'll leave it to the other core people
-> to throw around terms like 'deterministic' and 'package space' :)
+I've covered USE flags in a different mail so I'm ignoring that in this
+reply.
 
-Agreed. I will try and keep this brief whilst putting something in the
-archives once and for all.
+On Tue, 2007-09-11 at 19:37 +0200, Leon Woestenberg wrote:
+> The TASK-* and *FEATURES approach looked good at first instance, but I
+> have reverted from using it, as it still results in a major cloud of
+> package (build) dependencies.
 
-If we implement USE flags people can no longer know what options
-"matchbox-wm" (or whatever other package) was compiled with. Reproducing
-builds then becomes a nightmare and differences would not be obvious. It
-also has potential to break dependencies since something depending on
-matchbox-wm might need certain configure options and it has no way to
-specify this in the package dependencies. 
+This is the same issue Marcin wants to address.
 
-We'd also get people complaining that they enabled gtk, built a
-gpe-image in an existing build directory and why did it screw up badly
-with half the components compiled without gtk? USE flags would be
-something totally outside the existing dependency and timestamp/rebuild
-tracking which is already complex enough.
+> My current approach is maintaining an overlay with copied and adapted
+> options and dependencies but I would rather see this supported within
+> OpenEmbedded.
 
-Given this, the agreed approach in the past has been to create things
-like "bluez-utils-nodbus". Its obvious whats missing from that package
-and it works in feeds and dependencies.
+Is this overlay public? Even if we can't use it directly a summary of
+what you find unacceptable of the current approach in OE would be useful
+to see. Personally, I don't think there are that many dependency issues
+but I'd be interested to see how much of OE you needed to patch. Perhaps
+you could write a quick summary?
 
-Marcin's proposal of "bluez-utils-lite" is therefore in keeping with
-this idea and he's demonstrated a clear cut need for it (massively
-reduced build time for small images).
+We're never going to manage something that works for everyone perfectly
+out the box but I think things can certainly be improved from where they
+are now.
 
-I'd also point out that OE has managed extremely well up to this point
-without USE flags. I agree there are some corner cases where they're
-help in theory but we can solve these problems in other ways.
-
-Suggestions for better ways to handle this are extremely welcome but
-"USE flags" as I understand the idea would turn into a nightmare and any
-proposal needs to work for OE, not shoehorn in something from elsewhere
-which doesn't fit.
+Also keep in mind the task-base I checked in was very much a first
+draft, it has evolved since and I'm fully expecting it to evolve again
+in the future! :)
 
 Cheers,
 
 Richard
-
 
 
 
