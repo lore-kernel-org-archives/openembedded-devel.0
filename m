@@ -1,22 +1,26 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1IVLT8-0006rr-6h
-	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 08:12:58 +0200
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B02FDA1B1 for openembedded-devel@openembedded.org;
-	Wed, 12 Sep 2007 08:08:40 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Wed, 12 Sep 2007 09:09:47 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHMEOAMDAA.skoroneos@digital-opsis.com>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IVM65-0003NG-Ew
+	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 08:53:13 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l8C6o1xW025176 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Sep 2007 08:50:01 +0200
+Message-ID: <46E78C1C.5000007@student.utwente.nl>
+Date: Wed, 12 Sep 2007 08:50:04 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-In-Reply-To: <9870FB9891C7AD4B910E20B14776DF850104187B@NAEX16.na.qualcomm.com>
-Importance: Normal
-Subject: Re: bootstrap-image boot error: Inconsistency detected by ld.so:dynamic_link.h...
+To: openembedded-devel@openembedded.org
+References: <46E3F898.6090607@student.utwente.nl>
+In-Reply-To: <46E3F898.6090607@student.utwente.nl>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: sane-srcrevs.inc content and update policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,89 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 06:12:58 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Wed, 12 Sep 2007 06:53:13 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Mike,
-Looks like a busybox problem
-What distro and busybox version are you using ?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Stelios S. Koroneos
+Koen Kooi schreef:
+> Hi,
+> 
+> I want to start using sane-srcrevs.inc in angstrom soon, but I heard some sounds from
+> angstrom-derivatives about needing some bleeding-edge bits.
+> 
+> So I have a few questions:
+> 
+> * how can a SRC_REV-pn-${PN} be overriden in a clean way (e.g. SRC_REV-pn-foo = "now")?
+> * what goes into sane-srcrevs.inc (everything with positive def_pref?)?
+> * what policy will be set for updating it?
+> 
+> Having a complete sane-srcrevs.inc should fix the "can't build because berlios is down"
+> type of problems.
 
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
+And I just found out that the GFW of china blocks some svn hosts, so current .dev is
+virtually impossible to use in china :(
 
+regards,
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org 
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of 
-> DeVico, Michael
-> Sent: Tuesday, September 11, 2007 10:36 PM
-> To: openembedded-devel@openembedded.org
-> Subject: [oe] bootstrap-image boot error: Inconsistency detected 
-> by ld.so:dynamic_link.h...
-> 
-> 
-> Hello,
-> 
->  
-> 
-> This is more than likely a configuration/environment setup issue rather
-> that a bug, so I'm posting it here
-> 
-> rather than filing a bug for now...
-> 
->  
-> 
-> I built the bootstrap-image using the angstrom-2007.1 distro and the
-> i686-generic machine definition.
-> 
-> My build host is running Fedora FC7 and the processor is an Intel Core 2
-> Duo.
-> 
->  
-> 
-> However, when I try to boot, the kernel progresses through the device
-> hw/driver initialization and 
-> 
-> successfully mounts  the rootfs, but then fails with the following error
-> message:
-> 
->  
-> 
-> Inconsistency detected by ld.so: dynamic_link.h: 179
-> elf_get_dynamic_info: Assertion 'Info[15] == ((void*)0)' failed!
-> 
->  
-> 
-> If I point it to a partition containing the helloworld root fs, it
-> prints "Hello World" as expected, so it would
-> 
-> appear to be a problem with the bootstrap image rootfs rather than the
-> kernel itself, but this is my first 
-> 
-> experience building a linux system from the ground up so I could
-> definitely use some help here.
-> 
->  
-> 
-> Any ideas?
-> 
->  
-> 
-> Thanks in advance!
-> 
-> --Mike
-> 
->  
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+KOen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFG54wcMkyGM64RGpERAiIyAJ4m649D3Z5k/okZWUwVtA/rZYEDAwCgnrva
+61AR3kjp14nmGXgfFyWPXxo=
+=QSSA
+-----END PGP SIGNATURE-----
 
 
