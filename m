@@ -1,27 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IVMTG-0007XK-42
-	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 09:17:10 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l8C7DwxW029705 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2007 09:13:58 +0200
-Message-ID: <46E791B9.5080707@student.utwente.nl>
-Date: Wed, 12 Sep 2007 09:14:01 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <dp@xora.org.uk>) id 1IVN5i-0005Mi-HC
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Sep 2007 09:56:54 +0200
+Received: from [192.168.1.2] ([::ffff:85.210.31.177])
+	(AUTH: PLAIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Wed, 12 Sep 2007 08:53:46 +0100
+	id 0006453B.46E79B0A.000033B3
+Message-ID: <46E79AFE.9040304@xora.org.uk>
+Date: Wed, 12 Sep 2007 08:53:34 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070824)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <E1IDL1e-0002ro-9i@linuxtogo.org>
-	<46A60832.30203@dominion.kabel.utwente.nl>
-In-Reply-To: <46A60832.30203@dominion.kabel.utwente.nl>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: mtn disapprove d7758e2637918ff4035244d64fb7227f6cf833ad, was Re: [oe-commits] org.oe.dev phoneserver: Add patch for FIC GTA01	support.
+To: openembedded-devel@lists.openembedded.org
+References: <HOECLKEKOHLAMMGDLLBHGENPMDAA.skoroneos@digital-opsis.com>
+In-Reply-To: <HOECLKEKOHLAMMGDLLBHGENPMDAA.skoroneos@digital-opsis.com>
+Subject: Re: Task-base is big :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,35 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 07:17:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 12 Sep 2007 07:56:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Stelios Koroneos wrote:
+> True.
+> As more people start to use OE and as these people would be mostly
+> interested in "vertical" solutions (develop an app or add apps to an
+> existing distro without having to rebuild everything) i think we need to
+> have a closer look at the OE SDK vs build everything from scratch.
+> Having a "standard" toolchain availiable (and the way to use it) for people
+> that are not interested in developing distro's would IMHO provide additional
+> "user friendliness" and make OE an even more attractive solution.
+>   
+I personally think this discussion is a clear example of why Koen's
+work on packaged staging needs to be finished.
 
-Koen Kooi schreef:
-> florian commit schreef:
-> 
->> +PACKAGE_ARCH = "${MACHINE}"
-> 
-> This has to stop, OE is usable without setting MACHINE. The correct form is either
-> 
-> PACKAGE_ARCH = "${MACHINE_ARCH}"
+Just think how much faster you could build if all the system did was
+download and install these dependencies rather than build them
+from scratch.
 
-+++ packages/openmoko2/neod_svn.bb	5425e0836b76f5378b1da4b9f6540f1595380b8d
+Graeme
 
-+PACKAGE_ARCH = "${MACHINE}"
-
-*sigh*
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFG55G5MkyGM64RGpERAiSmAJsHvKA7bJAkqv6Uq13WlJKflGScZgCeOjuh
-dvChFj0tgwy0g4hQ8v8LpHc=
-=SxQJ
------END PGP SIGNATURE-----
 
 
