@@ -1,24 +1,23 @@
-Received: from [194.158.229.24] (helo=mail-ps.sunrise.ch)
+Received: from [194.158.229.25] (helo=mail-ps.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dv@vollmann.ch>) id 1IVQvS-0003BU-Jq
-	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 14:02:34 +0200
+	(envelope-from <dv@vollmann.ch>) id 1IVRat-00080M-Nt
+	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 14:45:23 +0200
 Received: from octo.vollmann.ch (212.98.43.140) by mail-ps.sunrise.ch (8.0.010)
-	id 46CB80E3003CCFAD for openembedded-devel@openembedded.org;
-	Wed, 12 Sep 2007 13:59:26 +0200
+	id 46CB8548003D1222 for openembedded-devel@openembedded.org;
+	Wed, 12 Sep 2007 14:42:15 +0200
 Received: from octo (localhost [127.0.0.1])
-	by octo.vollmann.ch (8.11.2/8.11.2) with SMTP id l8CC2Vn10469;
-	Wed, 12 Sep 2007 14:02:31 +0200
+	by octo.vollmann.ch (8.11.2/8.11.2) with SMTP id l8CCjLn09376;
+	Wed, 12 Sep 2007 14:45:21 +0200
 Sender: dv@vollmann.ch
-Message-ID: <46E7D557.FDC1B77@vollmann.ch>
-Date: Wed, 12 Sep 2007 14:02:31 +0200
+Message-ID: <46E7DF61.2AEEA36E@vollmann.ch>
+Date: Wed, 12 Sep 2007 14:45:21 +0200
 From: Detlef Vollmann <dv@vollmann.ch>
 Organization: vollmann engineering gmbh
 X-Mailer: Mozilla 3.04 (X11; U; Linux 2.4.21 i686)
 MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
 References: <HOECLKEKOHLAMMGDLLBHGENPMDAA.skoroneos@digital-opsis.com>
-	<46E79AFE.9040304@xora.org.uk>
-Subject: Binary packages (was: Task-base is big :( )
+Subject: Re: Task-base is big :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,61 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 12:02:35 -0000
+X-List-Received-Date: Wed, 12 Sep 2007 12:45:24 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-This thread touches two very interesting, but not directly
-related issues, so I decided to split here.
+Stelios Koroneos wrote:
+> > Same here, but I guess we are using OE for similar purposes. Using
+> > OpenEmbedded for embedded applications you build a kernel, need a
+> > *few* packages (say 10) and some custom stuff (say 20 packages).
+This is one usage we have, for specific projects.
 
-Graeme Gregory wrote:
-> I personally think this discussion is a clear example of why Koen's
-> work on packaged staging needs to be finished.
-> 
-> Just think how much faster you could build if all the system did was
-> download and install these dependencies rather than build them
-> from scratch.
-Exactly.
+> As more people start to use OE and as these people would be mostly
+> interested in "vertical" solutions (develop an app or add apps to an
+> existing distro without having to rebuild everything) i think we need to
+> have a closer look at the OE SDK vs build everything from scratch.
+Actually, for projects that are in a stage where they start to
+build (internal) releases (that go to some test procedures),
+building from scratch is important to be able to reproduce
+these releases and apply some minor bugfixes to them.
+But that doesn't mean that everything should be built from
+scratch for each release (see me other mail on binary packages).
+For packages used in these project I have no problems to put
+in some effort to provide the packages in my overlay and tweak
+some until they contain exactly what I need.
 
-For our current project, we have a build system based on
-Gentoo's portage, and we're currently planning to switch to
-OpenEmbedded.
-We want to be able to build everything ourselves from scratch,
-and we do that.  But we don't want to do that each time we
-build an (internal) release (we do sometimes several releases
-a week and a full build including toolchain takes about
-two hours).
-So in our current build system, we just use portage's --usepkg,
-and if the package we want to build is already built and in
-our repository, we just unpack that (unfortunately this doesn't
-always work as expected, but that's a different story).
-For OpenEmbedded, I looked at options how I could do something
-similar, and I came up with some ideas.
+But we have always a number of project that just start to develop
+or are still exploring their development options.
+For those projects I try to provide "mini-distros" based
+on existing distros (angstrom).  For these mini-distros
+I prepare a feed that contains everything that builds and makes
+sense for their hardware (so I mask everything related to
+graphics and multimedia).
 
-First, we need to care for everything a recipe does.
-For the staging part I hoped that packaged staging solves the
-problem (and from the discussion in
-http://bugs.openembedded.org/show_bug.cgi?id=354
-I thought it might already work, but I didn't test it yet).
-But there are other things (like ipkg-make-index) and I don't
-know what to do about those.  Possibly just not allowing
-binary packages for such recipes.
+My current approach is to start with a big list of packages
+setup a BBMASK and see what builds.  Those that don't build
+I simply remove from my list or (if I think the package is
+interesing enough) I try to modify that package in my
+overlay so that it builds.
 
-Then we have the problem that most recipes build more than one ipk,
-so we have to put all of them into one combined file, probably
-an ipk package that just contains other ipk packages.
+For such packages (for which I don't know whether they are ever
+really used in any project) I'm a bit reluctant to put in much
+effort, so I'd appreciate everything that makes my job here
+easier.
 
-So I thought about two possible solutions to get binary packages:
- one - to add an option like '--usepkg' to bitbake and let bitbake
-       take care of everything.
- two - putting the required actions into the recipes themselves
-       (possibly by using some bbclasses).
-       http://bugs.openembedded.org/show_bug.cgi?id=2948
-       seems to implement this approach at least partly, but
-       I don't understand that fully yet and I still have to
-       test it to get a better feeling for it.
+> Having a "standard" toolchain availiable (and the way to use it) for people
+> that are not interested in developing distro's would IMHO provide additional
+> "user friendliness" and make OE an even more attractive solution.
+Definitely.  But even for people like me (who provide some
+infrastructure to a number of projcets inside a company or for
+a given hardware) it would be nice to make "distro building"
+easier.
 
- Detlef
+  Detlef
 
 -- 
 Detlef Vollmann   vollmann engineering gmbh
