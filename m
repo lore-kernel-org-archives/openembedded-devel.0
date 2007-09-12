@@ -1,28 +1,32 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IVbGT-0005u5-Ky
-	for openembedded-devel@openembedded.org; Thu, 13 Sep 2007 01:04:57 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1IVbZo-0001vl-8B
+	for openembedded-devel@openembedded.org; Thu, 13 Sep 2007 01:24:56 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8CN1kiR028726;
-	Thu, 13 Sep 2007 00:01:46 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8CNLjes029495
+	for <openembedded-devel@openembedded.org>;
+	Thu, 13 Sep 2007 00:21:45 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 28693-01; Thu, 13 Sep 2007 00:01:42 +0100 (BST)
+	id 29172-08 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Sep 2007 00:21:41 +0100 (BST)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8CN1ccf028719
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Thu, 13 Sep 2007 00:01:38 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8CNLcLE029487
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 13 Sep 2007 00:21:38 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Thu, 13 Sep 2007 00:01:37 +0100
-Message-Id: <1189638097.6480.132.camel@localhost.localdomain>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <HOECLKEKOHLAMMGDLLBHGENPMDAA.skoroneos@digital-opsis.com>
+References: <HOECLKEKOHLAMMGDLLBHGENPMDAA.skoroneos@digital-opsis.com>
+Date: Thu, 13 Sep 2007 00:21:37 +0100
+Message-Id: <1189639297.6480.142.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: Michael 'Mickey' Lauer <mickey@openmoko.org>
-Subject: The ongoing SRCREV saga
+Subject: Re: Task-base is big :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,60 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 23:04:58 -0000
+X-List-Received-Date: Wed, 12 Sep 2007 23:24:56 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-[This was meant for the OE list and autocomplete didn't quite do what
-I'd intended with the recipients originally, sorry :/]
+On Wed, 2007-09-12 at 08:56 +0300, Stelios Koroneos wrote:
+> As more people start to use OE and as these people would be mostly
+> interested in "vertical" solutions (develop an app or add apps to an
+> existing distro without having to rebuild everything) i think we need to
+> have a closer look at the OE SDK vs build everything from scratch.
+> Having a "standard" toolchain availiable (and the way to use it) for people
+> that are not interested in developing distro's would IMHO provide additional
+> "user friendliness" and make OE an even more attractive solution.
 
-There is a certain amount of friction in the community regarding the
-recent SRCREV additions of which I've received my share.
+Poky has some partially developed ideas here. Have a look at:
 
-The concerns are really about how we're using SRCREV in OE rather than
-about the bitbake implementation itself which is an important
-distinction.
+http://pokylinux.org/autobuild/toolchain/2732/poky-0.0-snapshot-20070912-arm-toolchain.tar.bz2
+and
+http://pokylinux.org/autobuild/toolchain/2732/poky-0.0-snapshot-20070912-i586-toolchain.tar.bz2
 
-The basic problem is that people view the change as making parsing
-dependent on network access which was never the intent. If people added
-a revision to sane-srcrevs.inc every time they added a SRCREV based .bb
-file we wouldn't have a problem and parsing never would depend on
-network access. I'm living on another planet if I expect that to happen
-in reality though so this approach simply isn't going to work though.
+These are two toolchains that can be used in two ways:
 
-I'm therefore proposing we change bitbake.conf to read:
+1. As an external SDK style standalone toolchain
+2. When combined with a poky build it becomes a poor mans "packaged
+staging" which removes the toolchain build time from the equation by
+using this prebuilt toolchain + glibc package.
 
-SRCREV = "1"
+OE has half the needed functionality since meta-toolchain works the same
+in OE as it does in Poky now and will generate tarballs like the above.
 
-This puts an end to network access when a SRCREV hasn't been set in
-sane-srcrevs.inc. Anyone wishing to default to svn head in these cases
-can add this to local.conf (or their distro):
+The missing link is a distro configuration to actually use such a
+generated tarball in OE.
 
-SRCREV = "${AUTOREV}"
+Whilst Poky doesn't package much in the way of libraries, they would be
+straight forward to add just by adding the package names to the
+appropriate tasks.
 
-I propose keeping sane-srcrevs.inc for distros to include to have
-meaningful revisions for srcrev based packages.
+Cheers,
 
-If a distro like openmoko wants to make cutting edge development
-possible I suggest creating a .inc file which sets
-
-SRCREV-pn-whatever = "${AUTOREV}"
-
-for the packages they want to make floating.
-
-I firmly believe that floating SRCREVs should be opt in and these
-changes allow that whilst still letting distros or users make use of
-floating versions. I'd also advise openmoko against making SRCREV =
-"${AUTOREV}" the default and to only make the packages they need
-floating but thats not my call to make :).
-
-Are there any objections to the above? I'll probably commit this fairly
-quickly if the openmoko devs are agreeable.
-
-Cheers
-
-Richard
-
+Richard 
 
 
 
