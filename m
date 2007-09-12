@@ -1,34 +1,22 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IVFQn-0001yf-PO
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Sep 2007 01:46:09 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id E4A4E28C013; Wed, 12 Sep 2007 01:39:25 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180135170.adsl.alicedsl.de [85.180.135.170])
-	by srv043.dedi23.de (Postfix) with ESMTP id 57BC328C012;
-	Wed, 12 Sep 2007 01:39:22 +0200 (CEST)
-Date: Wed, 12 Sep 2007 01:43:00 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1916151728.20070912014300@vanille-media.de>
-To: Detlef Vollmann <dv@vollmann.ch>
-In-Reply-To: <46E71524.4CAFCDBC@vollmann.ch>
-References: <200709111318.52432.openembedded@haerwu.biz>
-	<c384c5ea0709111037o723dda57x171c148a0f93a91a@mail.gmail.com>
-	<1189545452.6163.65.camel@localhost.localdomain>
-	<46E71524.4CAFCDBC@vollmann.ch>
+	(envelope-from <skoroneos@digital-opsis.com>) id 1IVLEw-0006aO-RA
+	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 07:58:19 +0200
+Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B02FD90ED for openembedded-devel@openembedded.org;
+	Wed, 12 Sep 2007 07:54:01 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Wed, 12 Sep 2007 08:55:08 +0300
+Message-ID: <HOECLKEKOHLAMMGDLLBHOENOMDAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Task-base is big :(
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
+In-Reply-To: <46E7171B.7A0533BA@vollmann.ch>
+Importance: Normal
+Subject: Re: Cached MD5 sums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,25 +30,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2007 23:46:09 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 12 Sep 2007 05:58:19 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Detlef Vollmann wrote:
-> The difference to the original python .bb is the removing of
->  DEPEND: tk
->   This would build a whole X11 system, and I definitely don't want that.
+We had a similar problem when the sources resided in an nfs mount.
+Is this the case with your sourse/md5 files ?
 
-Hmm, I'm sure it's just an example for you, but anyway I can't leave
-it unsaid: Python's dependency on Tk just drags in libx11 and libxext
-at build time -- I don't see this as being a problem, since they don't
-end up the image unless you want to.
+If yes you need to have statd running on *both* client and server machines
+In debian/ubuntu just install the nfs-common package and it solves the issue
 
-Regards,
+Stelios S. Koroneos
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@openembedded.org
+> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
+> Detlef Vollmann
+> Sent: Wednesday, September 12, 2007 1:31 AM
+> To: openembedded-devel@openembedded.org
+> Subject: [oe] Cached MD5 sums
+>
+>
+> Hello,
+>
+> while trying to build a number of packages, I now got twice
+> errors about MD5 sums.  Even after a new download bitbake
+> still complained and insisted that some MD5 sum is required
+> of which I have no idea where it comes from (definitely
+> not from the accompanying .md5 file in DL_DIR, which
+> contained the correct MD5 sum).
+>
+> So I assume that bitbake has in its cache some old MD5 sums
+> from broken downloads, but I have no idea how to delete those.
+>
+> Any ideas?
+>
+>   Detlef
+>
+> --
+> Detlef Vollmann   vollmann engineering gmbh
+> Linux and C++ for Embedded Systems    http://www.vollmann.ch/
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
 
 
 
