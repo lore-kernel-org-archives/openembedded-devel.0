@@ -1,23 +1,24 @@
-Received: from [64.233.166.180] (helo=py-out-1112.google.com)
+Received: from [194.158.229.24] (helo=mail-ps.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1IVQik-0002zr-93
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Sep 2007 13:49:26 +0200
-Received: by py-out-1112.google.com with SMTP id a25so392891pyi
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2007 04:46:17 -0700 (PDT)
-Received: by 10.35.75.15 with SMTP id c15mr8696836pyl.1189597577058;
-	Wed, 12 Sep 2007 04:46:17 -0700 (PDT)
-Received: by 10.90.50.8 with HTTP; Wed, 12 Sep 2007 04:46:16 -0700 (PDT)
-Message-ID: <c384c5ea0709120446p69d21876x5c2c63995222819@mail.gmail.com>
-Date: Wed, 12 Sep 2007 13:46:16 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <HOECLKEKOHLAMMGDLLBHAENPMDAA.skoroneos@digital-opsis.com>
+	(envelope-from <dv@vollmann.ch>) id 1IVQvS-0003BU-Jq
+	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 14:02:34 +0200
+Received: from octo.vollmann.ch (212.98.43.140) by mail-ps.sunrise.ch (8.0.010)
+	id 46CB80E3003CCFAD for openembedded-devel@openembedded.org;
+	Wed, 12 Sep 2007 13:59:26 +0200
+Received: from octo (localhost [127.0.0.1])
+	by octo.vollmann.ch (8.11.2/8.11.2) with SMTP id l8CC2Vn10469;
+	Wed, 12 Sep 2007 14:02:31 +0200
+Sender: dv@vollmann.ch
+Message-ID: <46E7D557.FDC1B77@vollmann.ch>
+Date: Wed, 12 Sep 2007 14:02:31 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+Organization: vollmann engineering gmbh
+X-Mailer: Mozilla 3.04 (X11; U; Linux 2.4.21 i686)
 MIME-Version: 1.0
-References: <c384c5ea0709111614m20b079f8l4939336884b844b6@mail.gmail.com>
-	<HOECLKEKOHLAMMGDLLBHAENPMDAA.skoroneos@digital-opsis.com>
-Subject: Re: USE flags - why they won't work for OE
+To: openembedded-devel@openembedded.org
+References: <HOECLKEKOHLAMMGDLLBHGENPMDAA.skoroneos@digital-opsis.com>
+	<46E79AFE.9040304@xora.org.uk>
+Subject: Binary packages (was: Task-base is big :( )
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,48 +32,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 11:49:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 12 Sep 2007 12:02:35 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello all,
+This thread touches two very interesting, but not directly
+related issues, so I decided to split here.
 
-On 9/12/07, Stelios Koroneos <skoroneos@digital-opsis.com> wrote:
-> > Let's at least come up with a good way of using the namespace:
-> >
-> > -lite has been suggested, which I do not prefer (ambiguous, and I
-> > would prefer -light)
-> > -nodbus (if dbus dependency is dropped)
-> >
-> > I would prefer using:
-> >
-> > -without-x
-> > -without-gtk
-> > -without-dbus
-> > ...
-> >
-> > as the package suffix, as it re-uses the "configure" options
-> > namespace, well known to most developers.
->
-> Both comments are correct, but what happens in the case we have a package
-> with multiple -without-xyz ?
->
-That's exactly why I think the configuration namespace should not be
-performed in the package naming.
+Graeme Gregory wrote:
+> I personally think this discussion is a clear example of why Koen's
+> work on packaged staging needs to be finished.
+> 
+> Just think how much faster you could build if all the system did was
+> download and install these dependencies rather than build them
+> from scratch.
+Exactly.
 
-Although it might work for only a limited number of configuration
-items (no X, not GTK, no sound, ...) it quickly becomes hairy.
+For our current project, we have a build system based on
+Gentoo's portage, and we're currently planning to switch to
+OpenEmbedded.
+We want to be able to build everything ourselves from scratch,
+and we do that.  But we don't want to do that each time we
+build an (internal) release (we do sometimes several releases
+a week and a full build including toolchain takes about
+two hours).
+So in our current build system, we just use portage's --usepkg,
+and if the package we want to build is already built and in
+our repository, we just unpack that (unfortunately this doesn't
+always work as expected, but that's a different story).
+For OpenEmbedded, I looked at options how I could do something
+similar, and I came up with some ideas.
 
-However, we could start this way, and tidy later.
+First, we need to care for everything a recipe does.
+For the staging part I hoped that packaged staging solves the
+problem (and from the discussion in
+http://bugs.openembedded.org/show_bug.cgi?id=354
+I thought it might already work, but I didn't test it yet).
+But there are other things (like ipkg-make-index) and I don't
+know what to do about those.  Possibly just not allowing
+binary packages for such recipes.
 
-It seems to be the way of least resistance at this point.
+Then we have the problem that most recipes build more than one ipk,
+so we have to put all of them into one combined file, probably
+an ipk package that just contains other ipk packages.
 
-I will commit whatever I think is useful to others. I am sure at some
-point someone will stand up and disagree with me then :-)
+So I thought about two possible solutions to get binary packages:
+ one - to add an option like '--usepkg' to bitbake and let bitbake
+       take care of everything.
+ two - putting the required actions into the recipes themselves
+       (possibly by using some bbclasses).
+       http://bugs.openembedded.org/show_bug.cgi?id=2948
+       seems to implement this approach at least partly, but
+       I don't understand that fully yet and I still have to
+       test it to get a better feeling for it.
 
-Regards,
+ Detlef
 
-Leon.
+-- 
+Detlef Vollmann   vollmann engineering gmbh
+Linux and C++ for Embedded Systems    http://www.vollmann.ch/
 
 
