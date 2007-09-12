@@ -1,23 +1,22 @@
-Received: from [209.85.198.191] (helo=rv-out-0910.google.com)
+Received: from [64.233.166.180] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <bernardo@bandos.net>) id 1IVQ60-0006bO-J8
-	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 13:09:25 +0200
-Received: by rv-out-0910.google.com with SMTP id k20so160649rvb
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Sep 2007 04:06:13 -0700 (PDT)
-Received: by 10.141.18.14 with SMTP id v14mr189053rvi.1189595172602;
-	Wed, 12 Sep 2007 04:06:12 -0700 (PDT)
-Received: by 10.141.33.13 with HTTP; Wed, 12 Sep 2007 04:06:12 -0700 (PDT)
-Message-ID: <3ef3a7ad0709120406r6aa761e7s610cd291880599db@mail.gmail.com>
-Date: Wed, 12 Sep 2007 12:06:12 +0100
-From: "=?ISO-8859-1?Q?Jos=E9_Bernardo_Bandos_Rodrigues?=" <bernardo@bandos.net>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1IVQik-0002zr-93
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Sep 2007 13:49:26 +0200
+Received: by py-out-1112.google.com with SMTP id a25so392891pyi
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Sep 2007 04:46:17 -0700 (PDT)
+Received: by 10.35.75.15 with SMTP id c15mr8696836pyl.1189597577058;
+	Wed, 12 Sep 2007 04:46:17 -0700 (PDT)
+Received: by 10.90.50.8 with HTTP; Wed, 12 Sep 2007 04:46:16 -0700 (PDT)
+Message-ID: <c384c5ea0709120446p69d21876x5c2c63995222819@mail.gmail.com>
+Date: Wed, 12 Sep 2007 13:46:16 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <HOECLKEKOHLAMMGDLLBHAENPMDAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
 References: <c384c5ea0709111614m20b079f8l4939336884b844b6@mail.gmail.com>
 	<HOECLKEKOHLAMMGDLLBHAENPMDAA.skoroneos@digital-opsis.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Cc: openembedded-devel@openembedded.org
 Subject: Re: USE flags - why they won't work for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,27 +31,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 11:09:25 -0000
+X-List-Received-Date: Wed, 12 Sep 2007 11:49:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-May I add some noise into this argument? A few years ago I contributed to a
-source based linux distro. The way we had around this weren't USE flags - we
-had as part of the package description files (what you have in .bb files) a
-file that had prompts to be given to the user at package configure time, and
-what dependencies changed and what arguments were passed to ./configure as a
-result of those prompts. Since this was at package configure time, and that
-step would run before everything else, the user would get a bunch of prompts
-at the beginning, and the results would be stored for future use. The user
-could also specify a option to the package build tool to discard these
-stored results and re-ask the prompts. A file with the stored dependencies
-would also be updated as a result of this, by the dependency checking code
-of the package builder. That file would allow one to examine/reproduce a
-particular user configuration, if needed.
+Hello all,
 
-2007/9/12, Stelios Koroneos <skoroneos@digital-opsis.com>:
->
+On 9/12/07, Stelios Koroneos <skoroneos@digital-opsis.com> wrote:
 > > Let's at least come up with a good way of using the namespace:
 > >
 > > -lite has been suggested, which I do not prefer (ambiguous, and I
@@ -72,19 +58,21 @@ particular user configuration, if needed.
 > Both comments are correct, but what happens in the case we have a package
 > with multiple -without-xyz ?
 >
->
-> Stelios S. Koroneos
->
-> Digital OPSiS - Embedded Intelligence
-> http://www.digital-opsis.com
->
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+That's exactly why I think the configuration namespace should not be
+performed in the package naming.
+
+Although it might work for only a limited number of configuration
+items (no X, not GTK, no sound, ...) it quickly becomes hairy.
+
+However, we could start this way, and tidy later.
+
+It seems to be the way of least resistance at this point.
+
+I will commit whatever I think is useful to others. I am sure at some
+point someone will stand up and disagree with me then :-)
+
+Regards,
+
+Leon.
+
 
