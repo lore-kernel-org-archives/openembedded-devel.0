@@ -1,38 +1,23 @@
-Received: from [129.46.51.58] (helo=numenor.qualcomm.com)
+Received: from [64.251.82.10] (helo=mail.tranzeo.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mdevico@qualcomm.com>) id 1IVU9v-0005tn-MF
-	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 17:29:45 +0200
-Received: from totoro.qualcomm.com (totoro.qualcomm.com [129.46.61.158])
-	by numenor.qualcomm.com (8.13.6/8.12.5/1.0) with ESMTP id
-	l8CFQVlE006449
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Sep 2007 08:26:32 -0700
-Received: from SANEXCAS02.na.qualcomm.com (sanexcas02.qualcomm.com
-	[172.30.36.176])
-	by totoro.qualcomm.com (8.13.6/8.13.6/1.0) with ESMTP id l8CFQUG4003014
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Sep 2007 08:26:31 -0700 (PDT)
-Received: from NAEX16.na.qualcomm.com ([10.47.6.158]) by
-	SANEXCAS02.na.qualcomm.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 12 Sep 2007 08:26:30 -0700
+	(envelope-from <DWatkins@tranzeo.com>) id 1IVVFC-0007Cb-Ui
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Sep 2007 18:39:15 +0200
 X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Date: Wed, 12 Sep 2007 08:26:29 -0700
-Message-ID: <9870FB9891C7AD4B910E20B14776DF8501041935@NAEX16.na.qualcomm.com>
-In-Reply-To: <HOECLKEKOHLAMMGDLLBHMEOAMDAA.skoroneos@digital-opsis.com>
+Date: Wed, 12 Sep 2007 09:38:01 -0700
+Message-ID: <D61182AC8012EA4EBC531B3AF23BE1093F1369@tranzeo-mail2.12stewart.tranzeo.com>
+In-Reply-To: <3ef3a7ad0709120406r6aa761e7s610cd291880599db@mail.gmail.com>
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] bootstrap-image boot error: Inconsistency detected
-	byld.so:dynamic_link.h...
-Thread-Index: Acf1BrOvk5hjryhBQPKHIxwTqj9lqgASTY4w
-References: <9870FB9891C7AD4B910E20B14776DF850104187B@NAEX16.na.qualcomm.com>
-	<HOECLKEKOHLAMMGDLLBHMEOAMDAA.skoroneos@digital-opsis.com>
-From: "DeVico, Michael" <mdevico@qualcomm.com>
-To: <openembedded-devel@openembedded.org>
-X-OriginalArrivalTime: 12 Sep 2007 15:26:30.0632 (UTC)
-	FILETIME=[4B35C680:01C7F551]
-Subject: Re: bootstrap-image boot error: Inconsistency detected byld.so:dynamic_link.h...
+Thread-Topic: [oe] USE flags - why they won't work for OE
+Thread-Index: Acf1Ls3NbH5XMp5YRi2cm8qow8L1iwAJi1Yg
+References: <c384c5ea0709111614m20b079f8l4939336884b844b6@mail.gmail.com><HOECLKEKOHLAMMGDLLBHAENPMDAA.skoroneos@digital-opsis.com>
+	<3ef3a7ad0709120406r6aa761e7s610cd291880599db@mail.gmail.com>
+From: "Darcy Watkins" <DWatkins@tranzeo.com>
+To: <openembedded-devel@lists.openembedded.org>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: USE flags - why they won't work for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -46,115 +31,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 15:29:45 -0000
+X-List-Received-Date: Wed, 12 Sep 2007 16:39:15 -0000
 Content-class: urn:content-classes:message
 Content-Type: text/plain;
 	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-I'm using the angstrom-2007.1 distro, and it looks like busybox=20
-1.2.1-r13 is the version being used.
+Hello,
 
-Thanks!
---Mike
+My two bits worth (Canadian - now almost at par with US currency.  ;-)
 
+In the buildroot project, they use:
 
+  $ make menuconfig
 
------Original Message-----
-From: openembedded-devel-bounces@openembedded.org
-[mailto:openembedded-devel-bounces@openembedded.org] On Behalf Of
-Stelios Koroneos
-Sent: Tuesday, September 11, 2007 11:10 PM
-To: openembedded-devel@openembedded.org
-Subject: Re: [oe] bootstrap-image boot error: Inconsistency detected
-byld.so:dynamic_link.h...
+... to configure the system to be built and to select packages.  Then it
+is all built up using auto configure type tools.  In fact, they even
+have targets at the buildroot Makefile level that allow running the
+menuconfig target for uclibc and busybox.
 
-Mike,
-Looks like a busybox problem
-What distro and busybox version are you using ?
+Perhaps an OE distro could provide the default answers to a similar
+scheme, but the user should be able to run the menu config to change the
+choices.  It would also be cool if the "lite" and other options could be
+default rule filters to apply to a distro to change the default choices
+before invoking the menu config.
 
-Stelios S. Koroneos
+After this, the build process should still check for dependencies and
+include those needed but which were not chosen.  This has the added
+benefit that if you remake down the road after removing packages, any
+dependencies no longer needed would no longer be included.
 
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
+It would be nice to run something like:
 
+  <utilname>  DISTRO=3Dangstrom.2007.1 MACHINE=3Dmyppcbox \
+    DEFAULTS=3Duclibc-lite,busybox-lite,packages-lite,secure-web-lite
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org=20
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of=20
-> DeVico, Michael
-> Sent: Tuesday, September 11, 2007 10:36 PM
-> To: openembedded-devel@openembedded.org
-> Subject: [oe] bootstrap-image boot error: Inconsistency detected=20
-> by ld.so:dynamic_link.h...
->=20
->=20
-> Hello,
->=20
-> =20
->=20
-> This is more than likely a configuration/environment setup issue
-rather
-> that a bug, so I'm posting it here
->=20
-> rather than filing a bug for now...
->=20
-> =20
->=20
-> I built the bootstrap-image using the angstrom-2007.1 distro and the
-> i686-generic machine definition.
->=20
-> My build host is running Fedora FC7 and the processor is an Intel Core
-2
-> Duo.
->=20
-> =20
->=20
-> However, when I try to boot, the kernel progresses through the device
-> hw/driver initialization and=20
->=20
-> successfully mounts  the rootfs, but then fails with the following
-error
-> message:
->=20
-> =20
->=20
-> Inconsistency detected by ld.so: dynamic_link.h: 179
-> elf_get_dynamic_info: Assertion 'Info[15] =3D=3D ((void*)0)' failed!
->=20
-> =20
->=20
-> If I point it to a partition containing the helloworld root fs, it
-> prints "Hello World" as expected, so it would
->=20
-> appear to be a problem with the bootstrap image rootfs rather than the
-> kernel itself, but this is my first=20
->=20
-> experience building a linux system from the ground up so I could
-> definitely use some help here.
->=20
-> =20
->=20
-> Any ideas?
->=20
-> =20
->=20
-> Thanks in advance!
->=20
-> --Mike
->=20
-> =20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
+...etc.  The filters could be run in some agreed order (e.g. left to
+right) so it will be well understood how conflicts between filter files
+will be resolved.
+
+It would generate some .bb files to be included.  Then away to the
+races...
+
+An alternative would be to list the filters in the local config file and
+just have bitbake invoke the menuconfig program when it detects a change
+made to the list of filters.  For those who hate having the build
+process launch an interactive application, have an
+abort-on-config-change provision with output instructing the user to
+manually run a menuconfig program.
+
+I understand that there is value to consumer handheld devices to have a
+package manager to run on the target to install and upgrade
+applications, but that isn't of much use to smaller embedded appliances
+where it is more important that the vendor strictly control the software
+configurations that their support team will handle.  In such cases,
+software upgradeability is typically managed more at the level of
+filesystem images than as individual files and it is rare that the end
+user is able to change anything other than user settings and preferences
+stored in some form of a database.
 
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Regards,
+
+Darcy
+
 
 
