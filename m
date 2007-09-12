@@ -1,23 +1,23 @@
-Received: from [194.158.229.25] (helo=mail-ps.sunrise.ch)
+Received: from [194.158.229.24] (helo=mail-ps.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dv@vollmann.ch>) id 1IVRat-00080M-Nt
-	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 14:45:23 +0200
+	(envelope-from <dv@vollmann.ch>) id 1IVRj2-00088R-9f
+	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 14:53:48 +0200
 Received: from octo.vollmann.ch (212.98.43.140) by mail-ps.sunrise.ch (8.0.010)
-	id 46CB8548003D1222 for openembedded-devel@openembedded.org;
-	Wed, 12 Sep 2007 14:42:15 +0200
+	id 46CB80E3003CF043 for openembedded-devel@openembedded.org;
+	Wed, 12 Sep 2007 14:50:40 +0200
 Received: from octo (localhost [127.0.0.1])
-	by octo.vollmann.ch (8.11.2/8.11.2) with SMTP id l8CCjLn09376;
-	Wed, 12 Sep 2007 14:45:21 +0200
+	by octo.vollmann.ch (8.11.2/8.11.2) with SMTP id l8CCrnn09380;
+	Wed, 12 Sep 2007 14:53:49 +0200
 Sender: dv@vollmann.ch
-Message-ID: <46E7DF61.2AEEA36E@vollmann.ch>
-Date: Wed, 12 Sep 2007 14:45:21 +0200
+Message-ID: <46E7E15C.3FA5AC70@vollmann.ch>
+Date: Wed, 12 Sep 2007 14:53:48 +0200
 From: Detlef Vollmann <dv@vollmann.ch>
 Organization: vollmann engineering gmbh
 X-Mailer: Mozilla 3.04 (X11; U; Linux 2.4.21 i686)
 MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-References: <HOECLKEKOHLAMMGDLLBHGENPMDAA.skoroneos@digital-opsis.com>
-Subject: Re: Task-base is big :(
+References: <HOECLKEKOHLAMMGDLLBHOENOMDAA.skoroneos@digital-opsis.com>
+Subject: Re: Cached MD5 sums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,57 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 12:45:24 -0000
+X-List-Received-Date: Wed, 12 Sep 2007 12:53:48 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
 Stelios Koroneos wrote:
-> > Same here, but I guess we are using OE for similar purposes. Using
-> > OpenEmbedded for embedded applications you build a kernel, need a
-> > *few* packages (say 10) and some custom stuff (say 20 packages).
-This is one usage we have, for specific projects.
+> 
+> We had a similar problem when the sources resided in an nfs mount.
+> Is this the case with your sourse/md5 files ?
+Interesing hint.
+I don't have an NFS mount now.  But I'm inside of a chroot environment
+and previously had an NFS mount from outside the chroot into
+inside (on the same machine and even the same physical filesystem).
+But I got locking problems and decided to move the DL_DIR into
+the chroot.  But probably there's still some wrong info in
+the cache, but it still complains about not being able to lock,
+though a can lock on exactly the same file inside the same chroot
+using my own test program.  I had to hack bitbake (remove the
+locking) to get around this).
 
-> As more people start to use OE and as these people would be mostly
-> interested in "vertical" solutions (develop an app or add apps to an
-> existing distro without having to rebuild everything) i think we need to
-> have a closer look at the OE SDK vs build everything from scratch.
-Actually, for projects that are in a stage where they start to
-build (internal) releases (that go to some test procedures),
-building from scratch is important to be able to reproduce
-these releases and apply some minor bugfixes to them.
-But that doesn't mean that everything should be built from
-scratch for each release (see me other mail on binary packages).
-For packages used in these project I have no problems to put
-in some effort to provide the packages in my overlay and tweak
-some until they contain exactly what I need.
+> If yes you need to have statd running on *both* client and server machines
+> In debian/ubuntu just install the nfs-common package and it solves the issue
+For real NFS mount from one machine to the other I never had
+problems, and probably I should do just that and start completely
+fresh...
 
-But we have always a number of project that just start to develop
-or are still exploring their development options.
-For those projects I try to provide "mini-distros" based
-on existing distros (angstrom).  For these mini-distros
-I prepare a feed that contains everything that builds and makes
-sense for their hardware (so I mask everything related to
-graphics and multimedia).
-
-My current approach is to start with a big list of packages
-setup a BBMASK and see what builds.  Those that don't build
-I simply remove from my list or (if I think the package is
-interesing enough) I try to modify that package in my
-overlay so that it builds.
-
-For such packages (for which I don't know whether they are ever
-really used in any project) I'm a bit reluctant to put in much
-effort, so I'd appreciate everything that makes my job here
-easier.
-
-> Having a "standard" toolchain availiable (and the way to use it) for people
-> that are not interested in developing distro's would IMHO provide additional
-> "user friendliness" and make OE an even more attractive solution.
-Definitely.  But even for people like me (who provide some
-infrastructure to a number of projcets inside a company or for
-a given hardware) it would be nice to make "distro building"
-easier.
-
+Thanks again,
   Detlef
 
 -- 
