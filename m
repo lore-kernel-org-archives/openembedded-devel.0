@@ -1,27 +1,24 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [209.85.198.191] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IVNrW-0002b1-Qa
-	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 10:46:18 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l8C8h2xW011922 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Sep 2007 10:43:02 +0200
-Message-ID: <46E7A69A.4060407@student.utwente.nl>
-Date: Wed, 12 Sep 2007 10:43:06 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <bernardo@bandos.net>) id 1IVQ60-0006bO-J8
+	for openembedded-devel@openembedded.org; Wed, 12 Sep 2007 13:09:25 +0200
+Received: by rv-out-0910.google.com with SMTP id k20so160649rvb
+	for <openembedded-devel@openembedded.org>;
+	Wed, 12 Sep 2007 04:06:13 -0700 (PDT)
+Received: by 10.141.18.14 with SMTP id v14mr189053rvi.1189595172602;
+	Wed, 12 Sep 2007 04:06:12 -0700 (PDT)
+Received: by 10.141.33.13 with HTTP; Wed, 12 Sep 2007 04:06:12 -0700 (PDT)
+Message-ID: <3ef3a7ad0709120406r6aa761e7s610cd291880599db@mail.gmail.com>
+Date: Wed, 12 Sep 2007 12:06:12 +0100
+From: "=?ISO-8859-1?Q?Jos=E9_Bernardo_Bandos_Rodrigues?=" <bernardo@bandos.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <HOECLKEKOHLAMMGDLLBHAENPMDAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <HOECLKEKOHLAMMGDLLBHGENPMDAA.skoroneos@digital-opsis.com>
-	<46E79AFE.9040304@xora.org.uk>
-In-Reply-To: <46E79AFE.9040304@xora.org.uk>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: Task-base is big :(
+References: <c384c5ea0709111614m20b079f8l4939336884b844b6@mail.gmail.com>
+	<HOECLKEKOHLAMMGDLLBHAENPMDAA.skoroneos@digital-opsis.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Cc: openembedded-devel@openembedded.org
+Subject: Re: USE flags - why they won't work for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,39 +32,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2007 08:46:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 12 Sep 2007 11:09:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+May I add some noise into this argument? A few years ago I contributed to a
+source based linux distro. The way we had around this weren't USE flags - we
+had as part of the package description files (what you have in .bb files) a
+file that had prompts to be given to the user at package configure time, and
+what dependencies changed and what arguments were passed to ./configure as a
+result of those prompts. Since this was at package configure time, and that
+step would run before everything else, the user would get a bunch of prompts
+at the beginning, and the results would be stored for future use. The user
+could also specify a option to the package build tool to discard these
+stored results and re-ask the prompts. A file with the stored dependencies
+would also be updated as a result of this, by the dependency checking code
+of the package builder. That file would allow one to examine/reproduce a
+particular user configuration, if needed.
 
-Graeme Gregory schreef:
-> Stelios Koroneos wrote:
->> True.
->> As more people start to use OE and as these people would be mostly
->> interested in "vertical" solutions (develop an app or add apps to an
->> existing distro without having to rebuild everything) i think we need to
->> have a closer look at the OE SDK vs build everything from scratch.
->> Having a "standard" toolchain availiable (and the way to use it) for people
->> that are not interested in developing distro's would IMHO provide additional
->> "user friendliness" and make OE an even more attractive solution.
->>   
-> I personally think this discussion is a clear example of why Koen's
-> work on packaged staging needs to be finished.
-
-There's a proof of concept patch at http://bugs.openembedded.org/show_bug.cgi?id=2948,
-which needs at least a cleanup to make it possible to use .debs.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFG56aaMkyGM64RGpERAnWnAJwO1+ZDriFctPSwHCJC+Oh6GMBCcQCfd1DZ
-BSDeSMHVTjCr5h+8OSl9Z7g=
-=JRez
------END PGP SIGNATURE-----
-
+2007/9/12, Stelios Koroneos <skoroneos@digital-opsis.com>:
+>
+> > Let's at least come up with a good way of using the namespace:
+> >
+> > -lite has been suggested, which I do not prefer (ambiguous, and I
+> > would prefer -light)
+> > -nodbus (if dbus dependency is dropped)
+> >
+> > I would prefer using:
+> >
+> > -without-x
+> > -without-gtk
+> > -without-dbus
+> > ...
+> >
+> > as the package suffix, as it re-uses the "configure" options
+> > namespace, well known to most developers.
+>
+> Both comments are correct, but what happens in the case we have a package
+> with multiple -without-xyz ?
+>
+>
+> Stelios S. Koroneos
+>
+> Digital OPSiS - Embedded Intelligence
+> http://www.digital-opsis.com
+>
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
