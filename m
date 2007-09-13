@@ -1,19 +1,22 @@
-Received: from [61.57.29.122] (helo=mail.aaeon.com.tw)
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <VictorLai@aaeon.com.tw>) id 1IVhj5-0006Av-9W
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Sep 2007 07:58:56 +0200
-Sensitivity: 
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Lotus Notes Release 6.5.4 March 27, 2005
-Message-ID: <OFB8999CA2.0BBAD7B1-ON48257355.001FC285-48257355.0020C9CC@aaeon.com.tw>
-From: VictorLai@aaeon.com.tw
-Date: Thu, 13 Sep 2007 13:58:09 +0800
-X-MIMETrack: Serialize by Router on mail/AAEON(Release 6.5.4|March 27,
-	2005) at 2007/09/13 =?Big5?B?pFWkyCAwMTo1ODoxMg==?=
+	(envelope-from <skoroneos@digital-opsis.com>) id 1IVjRk-0008It-SS
+	for openembedded-devel@openembedded.org; Thu, 13 Sep 2007 09:49:09 +0200
+Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B0305B1CC for openembedded-devel@openembedded.org;
+	Thu, 13 Sep 2007 09:44:44 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Thu, 13 Sep 2007 10:45:54 +0300
+Message-ID: <HOECLKEKOHLAMMGDLLBHOEBKMEAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: hal-info-20070913
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
+In-Reply-To: <OFB8999CA2.0BBAD7B1-ON48257355.001FC285-48257355.0020C9CC@aaeon.com.tw>
+Importance: Normal
+Subject: Re: hal-info-20070913
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -27,131 +30,216 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Sep 2007 05:58:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 13 Sep 2007 07:49:09 -0000
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Victor,
+
+I think you are either having network issues=20
+> fatal: unable to connect a socket (Connection timed out)
+
+or the git repo was down or had problems
 
 
-DQpIaSwNCkFmdGVyIDIgZGF5cyBvZiBkb3dubG9hZGluZyBhbmQgY29tcGlsaW5nLCBJIGhhdmUg
-c3VjY2Vzc2Z1bGx5IGNvbXBpbGVkIGENCmltYWdlIHVzaW5nICJiaXRiYWtlIGFuZ3N0cm9tLXgx
-MS1ncGUtaW1hZ2UiLiBIb3dldmVyLCB3aGVuIEkgc2V0IHVwIHRoZQ0Kc2FtZSBlbnZpcm9ubWVu
-dCBzdGFydCBkb3dubG9hZCBhbmQgY29tcGlsaW5nIG9uIG15IG90aGVyIFBDLCBpdCBmYWlscyBh
-dA0KdGhlIGZvbGxvd2luZzoNCg0KSXQgc2VlbXMgaXQgaXMgdXNpbmcgYSBoYWwtaW5mbyBwYWNr
-YWdlIHVwZGF0ZWQgdG9kYXkuIEhvdyBjYW4gSSBzb2x2ZSB0aGlzDQppc3N1ZT8NCg0KVGhhbmtz
-Lg0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0Kcm9vdEB2aWN0b3JsYWktZGVza3RvcDovT0UjIC4vY29tcGlsZWFsbA0K
-U2V0dGluZyB1cCBkZXYgZW52IGZvciDDhW5nc3Ryw7ZtDQpBbHRlcmVkIGVudmlyb25tZW50IGZv
-ciBPRSBEZXZlbG9wbWVudA0KbXRuOiBkb2luZyBhbm9ueW1vdXMgcHVsbDsgdXNlIC1rS0VZTkFN
-RSBpZiB5b3UgbmVlZCBhdXRoZW50aWNhdGlvbg0KbXRuOiBjb25uZWN0aW5nIHRvIG1vbm90b25l
-Lm9wZW5lbWJlZGRlZC5vcmcNCm10bjogbmV0d29yayBlcnJvcjogbmFtZSByZXNvbHV0aW9uIGZh
-aWx1cmUgZm9yIG1vbm90b25lLm9wZW5lbWJlZGRlZC5vcmc6DQpOYW1lIG9yIHNlcnZpY2Ugbm90
-IGtub3duDQptdG46IHVwZGF0aW5nIGFsb25nIGJyYW5jaCAnb3JnLm9wZW5lbWJlZGRlZC5kZXYn
-DQptdG46IGFscmVhZHkgdXAgdG8gZGF0ZSBhdCBlNjcyZTY3MWM4MDNjNjQxOGU3ZGFmZmZlNGMx
-NDlmYTg0ODA2MjBhDQpOT1RFOiBQc3ljbyBKSVQgQ29tcGlsZXIgKGh0dHA6Ly9wc3ljby5zZi5u
-ZXQpIG5vdCBhdmFpbGFibGUuIEluc3RhbGwgaXQgdG8NCmluY3JlYXNlIHBlcmZvcm1hbmNlLg0K
-Tk9URTogSGFuZGxpbmcgQml0QmFrZSBmaWxlczogLyAoNDY0MC80NjQwKSBbMTAwICVdDQpOT1RF
-OiBQYXJzaW5nIGZpbmlzaGVkLiA0NDE5IGNhY2hlZCwgMyBwYXJzZWQsIDIxOCBza2lwcGVkLCAw
-IG1hc2tlZC4NCk5PVEU6IGJ1aWxkIDIwMDcwOTEzMTMxNzogc3RhcnRlZA0KDQpPRSBCdWlsZCBD
-b25maWd1cmF0aW9uOg0KQkJfVkVSU0lPTiAgICAgPSAiMS44LjgiDQpPRV9SRVZJU0lPTiAgICA9
-ICJlNjcyZTY3MWM4MDNjNjQxOGU3ZGFmZmZlNGMxNDlmYTg0ODA2MjBhIg0KVEFSR0VUX0FSQ0gg
-ICAgPSAiYXJtIg0KVEFSR0VUX09TICAgICAgPSAibGludXgtZ251ZWFiaSINCk1BQ0hJTkUgICAg
-ICAgID0gImFraXRhIg0KRElTVFJPICAgICAgICAgPSAiYW5nc3Ryb20iDQpESVNUUk9fVkVSU0lP
-TiA9ICIyMDA3LjktdGVzdC0yMDA3MDkxMyINClRBUkdFVF9GUFUgICAgID0gInNvZnQiDQoNCk5P
-VEU6IFJlc29sdmluZyBtaXNzaW5nIHRhc2sgcXVldWUgZGVwZW5kZW5jaWVzDQpOT1RFOiBwcmVm
-ZXJyZWQgdmVyc2lvbiAyLjUgb2YgZ2xpYmMgbm90IGF2YWlsYWJsZSAoZm9yIGl0ZW0NCnZpcnR1
-YWwvYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmktbGliYy1mb3ItZ2NjKQ0KTk9URTogUHJlcGFy
-aW5nIHJ1bnF1ZXVlDQpOT1RFOiBFeGVjdXRpbmcgcnVucXVldWUNCk5PVEU6IFJ1bm5pbmcgdGFz
-ayAxNzU3IG9mIDMwNzUgKElEOiAxMzI3LA0KL09FL29yZy5vcGVuZW1iZWRkZWQuZGV2L3BhY2th
-Z2VzL2hhbC9oYWwtaW5mb19naXQuYmIsIGRvX2ZldGNoKQ0KTk9URTogcGFja2FnZSBoYWwtaW5m
-by0yMDA3MDkxMytnaXQ6IHN0YXJ0ZWQNCk5PVEU6IHBhY2thZ2UgaGFsLWluZm8tMjAwNzA5MTMr
-Z2l0LXIxOiB0YXNrIGRvX2ZldGNoOiBzdGFydGVkDQpmYXRhbDogdW5hYmxlIHRvIGNvbm5lY3Qg
-YSBzb2NrZXQgKENvbm5lY3Rpb24gdGltZWQgb3V0KQ0KRVJST1I6IEVycm9yIGluIGV4ZWN1dGlu
-ZzoNCkVSUk9SOiBFeGNlcHRpb246PGNsYXNzICdiYi5mZXRjaC5GZXRjaEVycm9yJz4gTWVzc2Fn
-ZTpGZXRjaCBjb21tYW5kIGV4cG9ydA0KUEFUSD0vT0Uvb3JnLm9wZW5lbWJlZGRlZC5kZXYvdG1w
-L3N0YWdpbmcvaTY4Ni1saW51eC9iaW4vYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmk6L09FL29y
-Zy5vcGVuZW1iZWRkZWQuZGV2L3RtcC9zdGFnaW5nL2k2ODYtbGludXgvYmluOi9PRS9vcmcub3Bl
-bmVtYmVkZGVkLmRldi90bXAvY3Jvc3MvYmluOi9PRS9iaXRiYWtlLTEuOC44DQovYmluOi91c3Iv
-bG9jYWwvc2JpbjovdXNyL2xvY2FsL2JpbjovdXNyL3NiaW46L3Vzci9iaW46L3NiaW46L2Jpbjov
-dXNyL2dhbWVzOw0KIGdpdCBscy1yZW1vdGUgZ2l0Oi8vYW5vbmdpdC5mcmVlZGVza3RvcC5vcmcv
-aGFsLWluZm8vIGZhaWxlZCB3aXRoIHNpZ25hbA0KMSwgb3V0cHV0Og0KDQpFUlJPUjogUHJpbnRp
-bmcgdGhlIGVudmlyb25tZW50IG9mIHRoZSBmdW5jdGlvbg0KRVJST1I6IEVycm9yIGluIGV4ZWN1
-dGluZzoNCkVSUk9SOiBFeGNlcHRpb246PGNsYXNzICdiYi5mZXRjaC5GZXRjaEVycm9yJz4gTWVz
-c2FnZTpGZXRjaCBjb21tYW5kIGV4cG9ydA0KUEFUSD0vT0Uvb3JnLm9wZW5lbWJlZGRlZC5kZXYv
-dG1wL3N0YWdpbmcvaTY4Ni1saW51eC9iaW4vYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmk6L09F
-L29yZy5vcGVuZW1iZWRkZWQuZGV2L3RtcC9zdGFnaW5nL2k2ODYtbGludXgvYmluOi9PRS9vcmcu
-b3BlbmVtYmVkZGVkLmRldi90bXAvY3Jvc3MvYmluOi9PRS9iaXRiYWtlLTEuOC44DQovYmluOi91
-c3IvbG9jYWwvc2JpbjovdXNyL2xvY2FsL2JpbjovdXNyL3NiaW46L3Vzci9iaW46L3NiaW46L2Jp
-bjovdXNyL2dhbWVzOw0KIGdpdCBscy1yZW1vdGUgZ2l0Oi8vYW5vbmdpdC5mcmVlZGVza3RvcC5v
-cmcvaGFsLWluZm8vIGZhaWxlZCB3aXRoIHNpZ25hbA0KMSwgb3V0cHV0Og0KDQpFUlJPUjogUHJp
-bnRpbmcgdGhlIGVudmlyb25tZW50IG9mIHRoZSBmdW5jdGlvbg0KRVJST1I6IEJ1aWxkIG9mIC9P
-RS9vcmcub3BlbmVtYmVkZGVkLmRldi9wYWNrYWdlcy9oYWwvaGFsLWluZm9fZ2l0LmJiDQpkb19m
-ZXRjaCBmYWlsZWQNClRyYWNlYmFjayAobW9zdCByZWNlbnQgY2FsbCBsYXN0KToNCiAgRmlsZSAi
-L09FL2JpdGJha2UtMS44LjgvYmluL2JpdGJha2UiLCBsaW5lIDEzNCwgaW4gPG1vZHVsZT4NCiAg
-ICBtYWluKCkNCiAgRmlsZSAiL09FL2JpdGJha2UtMS44LjgvYmluL2JpdGJha2UiLCBsaW5lIDEz
-MSwgaW4gbWFpbg0KICAgIGNvb2tlci5jb29rKCkNCiAgRmlsZSAiL09FL2JpdGJha2UtMS44Ljgv
-bGliL2JiL2Nvb2tlci5weSIsIGxpbmUgNTUyLCBpbiBjb29rDQogICAgcmV0dXJuIHNlbGYuYnVp
-bGRUYXJnZXRzKHBrZ3NfdG9fYnVpbGQpDQogIEZpbGUgIi9PRS9iaXRiYWtlLTEuOC44L2xpYi9i
-Yi9jb29rZXIucHkiLCBsaW5lIDQ2NiwgaW4gYnVpbGRUYXJnZXRzDQogICAgZmFpbHVyZXMgPSBy
-cS5leGVjdXRlX3J1bnF1ZXVlKCkNCiAgRmlsZSAiL09FL2JpdGJha2UtMS44LjgvbGliL2JiL3J1
-bnF1ZXVlLnB5IiwgbGluZSA0MDMsIGluDQpleGVjdXRlX3J1bnF1ZXVlDQogICAgc2VsZi5leGVj
-dXRlX3J1bnF1ZXVlX2ludGVybmFsKCkNCiAgRmlsZSAiL09FL2JpdGJha2UtMS44LjgvbGliL2Ji
-L3J1bnF1ZXVlLnB5IiwgbGluZSA1MzEsIGluDQpleGVjdXRlX3J1bnF1ZXVlX2ludGVybmFsDQog
-ICAgc2VsZi5jb29rZXIudHJ5QnVpbGQoZm4sIEZhbHNlKQ0KICBGaWxlICIvT0UvYml0YmFrZS0x
-LjguOC9saWIvYmIvY29va2VyLnB5IiwgbGluZSAxMjUsIGluIHRyeUJ1aWxkDQogICAgcmV0dXJu
-IHNlbGYudHJ5QnVpbGRQYWNrYWdlKGZuLCBpdGVtLCBzZWxmLmNvbmZpZ3VyYXRpb24uY21kLCB0
-aGVfZGF0YSwNCmJ1aWxkX2RlcGVuZHMpDQogIEZpbGUgIi9PRS9iaXRiYWtlLTEuOC44L2xpYi9i
-Yi9jb29rZXIucHkiLCBsaW5lIDk4LCBpbiB0cnlCdWlsZFBhY2thZ2UNCiAgICBiYi5idWlsZC5l
-eGVjX3Rhc2soJ2RvXyVzJyAlIHRhc2ssIHRoZV9kYXRhKQ0KICBGaWxlICIvT0UvYml0YmFrZS0x
-LjguOC9saWIvYmIvYnVpbGQucHkiLCBsaW5lIDI5MiwgaW4gZXhlY190YXNrDQogICAgZXhlY3V0
-ZShOb25lLCB0YXNrKQ0KICBGaWxlICIvT0UvYml0YmFrZS0xLjguOC9saWIvYmIvYnVpbGQucHki
-LCBsaW5lIDI4MSwgaW4gZXhlY3V0ZQ0KICAgIGV4ZWNfZnVuYyhpdGVtLCBsb2NhbGRhdGEpDQog
-IEZpbGUgIi9PRS9iaXRiYWtlLTEuOC44L2xpYi9iYi9idWlsZC5weSIsIGxpbmUgOTgsIGluIGV4
-ZWNfZnVuYw0KICAgIGV4ZWNfZnVuY19weXRob24oZnVuYywgZCkNCiAgRmlsZSAiL09FL2JpdGJh
-a2UtMS44LjgvbGliL2JiL2J1aWxkLnB5IiwgbGluZSAxMTcsIGluIGV4ZWNfZnVuY19weXRob24N
-CiAgICB1dGlscy5iZXR0ZXJfZXhlYyhjb21wLGcsdG1wLCBiYi5kYXRhLmdldFZhcignRklMRScs
-ZCwxKSkNCiAgRmlsZSAiL09FL2JpdGJha2UtMS44LjgvbGliL2JiL3V0aWxzLnB5IiwgbGluZSAx
-NDQsIGluIGJldHRlcl9leGVjDQogICAgZXhlYyBjb2RlIGluIGNvbnRleHQNCiAgRmlsZSAiZG9f
-ZmV0Y2giLCBsaW5lIDQsIGluIDxtb2R1bGU+DQogIEZpbGUgImRvX2ZldGNoIiwgbGluZSAyLCBp
-biBkb19mZXRjaA0KICBGaWxlICIvT0UvYml0YmFrZS0xLjguOC9saWIvYmIvYnVpbGQucHkiLCBs
-aW5lIDk4LCBpbiBleGVjX2Z1bmMNCiAgICBleGVjX2Z1bmNfcHl0aG9uKGZ1bmMsIGQpDQogIEZp
-bGUgIi9PRS9iaXRiYWtlLTEuOC44L2xpYi9iYi9idWlsZC5weSIsIGxpbmUgMTE3LCBpbiBleGVj
-X2Z1bmNfcHl0aG9uDQogICAgdXRpbHMuYmV0dGVyX2V4ZWMoY29tcCxnLHRtcCwgYmIuZGF0YS5n
-ZXRWYXIoJ0ZJTEUnLGQsMSkpDQogIEZpbGUgIi9PRS9iaXRiYWtlLTEuOC44L2xpYi9iYi91dGls
-cy5weSIsIGxpbmUgMTQ0LCBpbiBiZXR0ZXJfZXhlYw0KICAgIGV4ZWMgY29kZSBpbiBjb250ZXh0
-DQogIEZpbGUgImJhc2VfZG9fZmV0Y2giLCBsaW5lIDYzLCBpbiA8bW9kdWxlPg0KICBGaWxlICJi
-YXNlX2RvX2ZldGNoIiwgbGluZSAxMiwgaW4gYmFzZV9kb19mZXRjaA0KICBGaWxlICIvT0UvYml0
-YmFrZS0xLjguOC9saWIvYmIvZmV0Y2gvX19pbml0X18ucHkiLCBsaW5lIDEyMywgaW4gaW5pdA0K
-ICAgIHVybGRhdGFbdXJsXS5zZXR1cF9sb2NhbHBhdGgoZCkNCiAgRmlsZSAiL09FL2JpdGJha2Ut
-MS44LjgvbGliL2JiL2ZldGNoL19faW5pdF9fLnB5IiwgbGluZSAyNzgsIGluDQpzZXR1cF9sb2Nh
-bHBhdGgNCiAgICBzZWxmLmxvY2FscGF0aCA9IHNlbGYubWV0aG9kLmxvY2FscGF0aChzZWxmLnVy
-bCwgc2VsZiwgZCkNCiAgRmlsZSAiL09FL2JpdGJha2UtMS44LjgvbGliL2JiL2ZldGNoL2dpdC5w
-eSIsIGxpbmUgNTksIGluIGxvY2FscGF0aA0KICAgIHVkLnRhZyA9IHNlbGYubGF0ZXN0X3Jldmlz
-aW9uKHVybCwgdWQsIGQpDQogIEZpbGUgIi9PRS9iaXRiYWtlLTEuOC44L2xpYi9iYi9mZXRjaC9f
-X2luaXRfXy5weSIsIGxpbmUgNDI0LCBpbg0KbGF0ZXN0X3JldmlzaW9uDQogICAgcmV2ID0gc2Vs
-Zi5fbGF0ZXN0X3JldmlzaW9uKHVybCwgdWQsIGQpDQogIEZpbGUgIi9PRS9iaXRiYWtlLTEuOC44
-L2xpYi9iYi9mZXRjaC9naXQucHkiLCBsaW5lIDEyOSwgaW4NCl9sYXRlc3RfcmV2aXNpb24NCiAg
-ICBvdXRwdXQgPSBydW5mZXRjaGNtZCgiZ2l0IGxzLXJlbW90ZSAlczovLyVzJXMiICUgKHVkLnBy
-b3RvLCB1ZC5ob3N0LA0KdWQucGF0aCksIGQsIFRydWUpDQogIEZpbGUgIi9PRS9iaXRiYWtlLTEu
-OC44L2xpYi9iYi9mZXRjaC9fX2luaXRfXy5weSIsIGxpbmUgMjUyLCBpbg0KcnVuZmV0Y2hjbWQN
-CiAgICByYWlzZSBGZXRjaEVycm9yKCJGZXRjaCBjb21tYW5kICVzIGZhaWxlZCB3aXRoIHNpZ25h
-bCAlcywgb3V0cHV0OlxuJXMiDQolIChwYXRoY21kLCBzaWduYWwsIG91dHB1dCkpDQpiYi5mZXRj
-aC5GZXRjaEVycm9yOiBGZXRjaCBjb21tYW5kIGV4cG9ydA0KUEFUSD0vT0Uvb3JnLm9wZW5lbWJl
-ZGRlZC5kZXYvdG1wL3N0YWdpbmcvaTY4Ni1saW51eC9iaW4vYXJtLWFuZ3N0cm9tLWxpbnV4LWdu
-dWVhYmk6L09FL29yZy5vcGVuZW1iZWRkZWQuZGV2L3RtcC9zdGFnaW5nL2k2ODYtbGludXgvYmlu
-Oi9PRS9vcmcub3BlbmVtYmVkZGVkLmRldi90bXAvY3Jvc3MvYmluOi9PRS9iaXRiYWtlLTEuOC44
-DQovYmluOi91c3IvbG9jYWwvc2JpbjovdXNyL2xvY2FsL2JpbjovdXNyL3NiaW46L3Vzci9iaW46
-L3NiaW46L2JpbjovdXNyL2dhbWVzOw0KIGdpdCBscy1yZW1vdGUgZ2l0Oi8vYW5vbmdpdC5mcmVl
-ZGVza3RvcC5vcmcvaGFsLWluZm8vIGZhaWxlZCB3aXRoIHNpZ25hbA0KMSwgb3V0cHV0Og0KDQpF
-UlJPUjogVGFzayAxMzI3ICgvT0Uvb3JnLm9wZW5lbWJlZGRlZC5kZXYvcGFja2FnZXMvaGFsL2hh
-bC1pbmZvX2dpdC5iYiwNCmRvX2ZldGNoKSBmYWlsZWQNCk5PVEU6IFRhc2tzIFN1bW1hcnk6IEF0
-dGVtcHRlZCAxNzU2IHRhc2tzIG9mIHdoaWNoIDE3NTYgZGlkbid0IG5lZWQgdG8gYmUNCnJlcnVu
-IGFuZCAxIGZhaWxlZC4NCkVSUk9SOiAnL09FL29yZy5vcGVuZW1iZWRkZWQuZGV2L3BhY2thZ2Vz
-L2hhbC9oYWwtaW5mb19naXQuYmInIGZhaWxlZA0Kcm9vdEB2aWN0b3JsYWktZGVza3RvcDovT0Uj
-DQoNCkJlc3QgUmVnYXJkcywNCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0K6LO056uL5YexIC8gVmljdG9yIExhaQ0K56CU55m86JmVIOi7n+mrlOmD
-qCAvIFJEIFNvZnR3YXJlDQrnoJTmj5rnp5HmioAgLyBBQUVPTiBUZWNobm9sb2d5IEluYy4NClRl
-bDo4ODYtMi04OTE5MTIzNCAgZXh0OjczOA0KRmF4OiA4ODYtMi04OTE5MTA1NA0KRS1tYWlsOiBW
-aWN0b3JMYWlAYWFlb24uY29tLnR3DQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0t
+Stelios S. Koroneos
+
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@openembedded.org
+> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
+> VictorLai@aaeon.com.tw
+> Sent: Thursday, September 13, 2007 8:58 AM
+> To: openembedded-devel@openembedded.org
+> Subject: [oe] hal-info-20070913
+>=20
+>=20
+>=20
+> Hi,
+> After 2 days of downloading and compiling, I have successfully =
+compiled a
+> image using "bitbake angstrom-x11-gpe-image". However, when I set up =
+the
+> same environment start download and compiling on my other PC, it fails =
+at
+> the following:
+>=20
+> It seems it is using a hal-info package updated today. How can I=20
+> solve this
+> issue?
+>=20
+> Thanks.
+>=20
+> ------------------------------------------------------------------
+> --------------------------------------------------------
+> root@victorlai-desktop:/OE# ./compileall
+> Setting up dev env for =C3=85ngstr=C3=B6m
+> Altered environment for OE Development
+> mtn: doing anonymous pull; use -kKEYNAME if you need authentication
+> mtn: connecting to monotone.openembedded.org
+> mtn: network error: name resolution failure for =
+monotone.openembedded.org:
+> Name or service not known
+> mtn: updating along branch 'org.openembedded.dev'
+> mtn: already up to date at e672e671c803c6418e7dafffe4c149fa8480620a
+> NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.=20
+> Install it to
+> increase performance.
+> NOTE: Handling BitBake files: / (4640/4640) [100 %]
+> NOTE: Parsing finished. 4419 cached, 3 parsed, 218 skipped, 0 masked.
+> NOTE: build 200709131317: started
+>=20
+> OE Build Configuration:
+> BB_VERSION     =3D "1.8.8"
+> OE_REVISION    =3D "e672e671c803c6418e7dafffe4c149fa8480620a"
+> TARGET_ARCH    =3D "arm"
+> TARGET_OS      =3D "linux-gnueabi"
+> MACHINE        =3D "akita"
+> DISTRO         =3D "angstrom"
+> DISTRO_VERSION =3D "2007.9-test-20070913"
+> TARGET_FPU     =3D "soft"
+>=20
+> NOTE: Resolving missing task queue dependencies
+> NOTE: preferred version 2.5 of glibc not available (for item
+> virtual/arm-angstrom-linux-gnueabi-libc-for-gcc)
+> NOTE: Preparing runqueue
+> NOTE: Executing runqueue
+> NOTE: Running task 1757 of 3075 (ID: 1327,
+> /OE/org.openembedded.dev/packages/hal/hal-info_git.bb, do_fetch)
+> NOTE: package hal-info-20070913+git: started
+> NOTE: package hal-info-20070913+git-r1: task do_fetch: started
+> fatal: unable to connect a socket (Connection timed out)
+> ERROR: Error in executing:
+> ERROR: Exception:<class 'bb.fetch.FetchError'> Message:Fetch=20
+> command export
+> PATH=3D/OE/org.openembedded.dev/tmp/staging/i686-linux/bin/arm-angst
+> rom-linux-gnueabi:/OE/org.openembedded.dev/tmp/staging/i686-linux/
+> bin:/OE/org.openembedded.dev/tmp/cross/bin:/OE/bitbake-1.8.8
+> /bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
+> /usr/games;
+>  git ls-remote git://anongit.freedesktop.org/hal-info/ failed with =
+signal
+> 1, output:
+>=20
+> ERROR: Printing the environment of the function
+> ERROR: Error in executing:
+> ERROR: Exception:<class 'bb.fetch.FetchError'> Message:Fetch=20
+> command export
+> PATH=3D/OE/org.openembedded.dev/tmp/staging/i686-linux/bin/arm-angst
+> rom-linux-gnueabi:/OE/org.openembedded.dev/tmp/staging/i686-linux/
+> bin:/OE/org.openembedded.dev/tmp/cross/bin:/OE/bitbake-1.8.8
+> /bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
+> /usr/games;
+>  git ls-remote git://anongit.freedesktop.org/hal-info/ failed with =
+signal
+> 1, output:
+>=20
+> ERROR: Printing the environment of the function
+> ERROR: Build of /OE/org.openembedded.dev/packages/hal/hal-info_git.bb
+> do_fetch failed
+> Traceback (most recent call last):
+>   File "/OE/bitbake-1.8.8/bin/bitbake", line 134, in <module>
+>     main()
+>   File "/OE/bitbake-1.8.8/bin/bitbake", line 131, in main
+>     cooker.cook()
+>   File "/OE/bitbake-1.8.8/lib/bb/cooker.py", line 552, in cook
+>     return self.buildTargets(pkgs_to_build)
+>   File "/OE/bitbake-1.8.8/lib/bb/cooker.py", line 466, in buildTargets
+>     failures =3D rq.execute_runqueue()
+>   File "/OE/bitbake-1.8.8/lib/bb/runqueue.py", line 403, in
+> execute_runqueue
+>     self.execute_runqueue_internal()
+>   File "/OE/bitbake-1.8.8/lib/bb/runqueue.py", line 531, in
+> execute_runqueue_internal
+>     self.cooker.tryBuild(fn, False)
+>   File "/OE/bitbake-1.8.8/lib/bb/cooker.py", line 125, in tryBuild
+>     return self.tryBuildPackage(fn, item, self.configuration.cmd,=20
+> the_data,
+> build_depends)
+>   File "/OE/bitbake-1.8.8/lib/bb/cooker.py", line 98, in =
+tryBuildPackage
+>     bb.build.exec_task('do_%s' % task, the_data)
+>   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 292, in exec_task
+>     execute(None, task)
+>   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 281, in execute
+>     exec_func(item, localdata)
+>   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 98, in exec_func
+>     exec_func_python(func, d)
+>   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 117, in =
+exec_func_python
+>     utils.better_exec(comp,g,tmp, bb.data.getVar('FILE',d,1))
+>   File "/OE/bitbake-1.8.8/lib/bb/utils.py", line 144, in better_exec
+>     exec code in context
+>   File "do_fetch", line 4, in <module>
+>   File "do_fetch", line 2, in do_fetch
+>   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 98, in exec_func
+>     exec_func_python(func, d)
+>   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 117, in =
+exec_func_python
+>     utils.better_exec(comp,g,tmp, bb.data.getVar('FILE',d,1))
+>   File "/OE/bitbake-1.8.8/lib/bb/utils.py", line 144, in better_exec
+>     exec code in context
+>   File "base_do_fetch", line 63, in <module>
+>   File "base_do_fetch", line 12, in base_do_fetch
+>   File "/OE/bitbake-1.8.8/lib/bb/fetch/__init__.py", line 123, in init
+>     urldata[url].setup_localpath(d)
+>   File "/OE/bitbake-1.8.8/lib/bb/fetch/__init__.py", line 278, in
+> setup_localpath
+>     self.localpath =3D self.method.localpath(self.url, self, d)
+>   File "/OE/bitbake-1.8.8/lib/bb/fetch/git.py", line 59, in localpath
+>     ud.tag =3D self.latest_revision(url, ud, d)
+>   File "/OE/bitbake-1.8.8/lib/bb/fetch/__init__.py", line 424, in
+> latest_revision
+>     rev =3D self._latest_revision(url, ud, d)
+>   File "/OE/bitbake-1.8.8/lib/bb/fetch/git.py", line 129, in
+> _latest_revision
+>     output =3D runfetchcmd("git ls-remote %s://%s%s" % (ud.proto, =
+ud.host,
+> ud.path), d, True)
+>   File "/OE/bitbake-1.8.8/lib/bb/fetch/__init__.py", line 252, in
+> runfetchcmd
+>     raise FetchError("Fetch command %s failed with signal %s, =
+output:\n%s"
+> % (pathcmd, signal, output))
+> bb.fetch.FetchError: Fetch command export
+> PATH=3D/OE/org.openembedded.dev/tmp/staging/i686-linux/bin/arm-angst
+> rom-linux-gnueabi:/OE/org.openembedded.dev/tmp/staging/i686-linux/
+> bin:/OE/org.openembedded.dev/tmp/cross/bin:/OE/bitbake-1.8.8
+> /bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
+> /usr/games;
+>  git ls-remote git://anongit.freedesktop.org/hal-info/ failed with =
+signal
+> 1, output:
+>=20
+> ERROR: Task 1327 =
+(/OE/org.openembedded.dev/packages/hal/hal-info_git.bb,
+> do_fetch) failed
+> NOTE: Tasks Summary: Attempted 1756 tasks of which 1756 didn't need to =
+be
+> rerun and 1 failed.
+> ERROR: '/OE/org.openembedded.dev/packages/hal/hal-info_git.bb' failed
+> root@victorlai-desktop:/OE#
+>=20
+> Best Regards,
+>=20
+> -------------------------------------------------
+> =E8=B3=B4=E7=AB=8B=E5=87=B1 / Victor Lai
+> =E7=A0=94=E7=99=BC=E8=99=95 =E8=BB=9F=E9=AB=94=E9=83=A8 / RD Software
+> =E7=A0=94=E6=8F=9A=E7=A7=91=E6=8A=80 / AAEON Technology Inc.
+> Tel:886-2-89191234  ext:738
+> Fax: 886-2-89191054
+> E-mail: VictorLai@aaeon.com.tw
+> -------------------------------------------------
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+
+
+
 
