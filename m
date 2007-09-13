@@ -1,22 +1,26 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1IVjRk-0008It-SS
-	for openembedded-devel@openembedded.org; Thu, 13 Sep 2007 09:49:09 +0200
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B0305B1CC for openembedded-devel@openembedded.org;
-	Thu, 13 Sep 2007 09:44:44 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Thu, 13 Sep 2007 10:45:54 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHOEBKMEAA.skoroneos@digital-opsis.com>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IVjbU-0002hR-Kp
+	for openembedded-devel@openembedded.org; Thu, 13 Sep 2007 09:59:12 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l8D7trxW001613; Thu, 13 Sep 2007 09:55:53 +0200
+Message-ID: <46E8ED0F.5000003@student.utwente.nl>
+Date: Thu, 13 Sep 2007 09:55:59 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-In-Reply-To: <OFB8999CA2.0BBAD7B1-ON48257355.001FC285-48257355.0020C9CC@aaeon.com.tw>
-Importance: Normal
-Subject: Re: hal-info-20070913
+To: openembedded-devel@openembedded.org
+References: <1189638097.6480.132.camel@localhost.localdomain>
+In-Reply-To: <1189638097.6480.132.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Cc: Michael 'Mickey' Lauer <mickey@openmoko.org>
+Subject: Re: The ongoing SRCREV saga
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,216 +34,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Sep 2007 07:49:09 -0000
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Sep 2007 07:59:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Victor,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think you are either having network issues=20
-> fatal: unable to connect a socket (Connection timed out)
+Richard Purdie schreef:
+> [This was meant for the OE list and autocomplete didn't quite do what
+> I'd intended with the recipients originally, sorry :/]
+> 
+> There is a certain amount of friction in the community regarding the
+> recent SRCREV additions of which I've received my share.
+> 
+> The concerns are really about how we're using SRCREV in OE rather than
+> about the bitbake implementation itself which is an important
+> distinction.
+> 
+> The basic problem is that people view the change as making parsing
+> dependent on network access which was never the intent. If people added
+> a revision to sane-srcrevs.inc every time they added a SRCREV based .bb
+> file we wouldn't have a problem and parsing never would depend on
+> network access. I'm living on another planet if I expect that to happen
+> in reality though so this approach simply isn't going to work though.
+> 
+> I'm therefore proposing we change bitbake.conf to read:
+> 
+> SRCREV = "1"
+> 
+> This puts an end to network access when a SRCREV hasn't been set in
+> sane-srcrevs.inc. Anyone wishing to default to svn head in these cases
+> can add this to local.conf (or their distro):
+> 
+> SRCREV = "${AUTOREV}"
 
-or the git repo was down or had problems
+or 'require conf/distro/insane-srcrevs.inc'
 
+> I propose keeping sane-srcrevs.inc for distros to include to have
+> meaningful revisions for srcrev based packages.
 
-Stelios S. Koroneos
+Angstrom includes it now by default.
 
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
+> If a distro like openmoko wants to make cutting edge development
+> possible I suggest creating a .inc file which sets
+> 
+> SRCREV-pn-whatever = "${AUTOREV}"
 
+'require conf/distro/include/moko-autorev.inc'
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
-> VictorLai@aaeon.com.tw
-> Sent: Thursday, September 13, 2007 8:58 AM
-> To: openembedded-devel@openembedded.org
-> Subject: [oe] hal-info-20070913
->=20
->=20
->=20
-> Hi,
-> After 2 days of downloading and compiling, I have successfully =
-compiled a
-> image using "bitbake angstrom-x11-gpe-image". However, when I set up =
-the
-> same environment start download and compiling on my other PC, it fails =
-at
-> the following:
->=20
-> It seems it is using a hal-info package updated today. How can I=20
-> solve this
-> issue?
->=20
-> Thanks.
->=20
-> ------------------------------------------------------------------
-> --------------------------------------------------------
-> root@victorlai-desktop:/OE# ./compileall
-> Setting up dev env for =C3=85ngstr=C3=B6m
-> Altered environment for OE Development
-> mtn: doing anonymous pull; use -kKEYNAME if you need authentication
-> mtn: connecting to monotone.openembedded.org
-> mtn: network error: name resolution failure for =
-monotone.openembedded.org:
-> Name or service not known
-> mtn: updating along branch 'org.openembedded.dev'
-> mtn: already up to date at e672e671c803c6418e7dafffe4c149fa8480620a
-> NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available.=20
-> Install it to
-> increase performance.
-> NOTE: Handling BitBake files: / (4640/4640) [100 %]
-> NOTE: Parsing finished. 4419 cached, 3 parsed, 218 skipped, 0 masked.
-> NOTE: build 200709131317: started
->=20
-> OE Build Configuration:
-> BB_VERSION     =3D "1.8.8"
-> OE_REVISION    =3D "e672e671c803c6418e7dafffe4c149fa8480620a"
-> TARGET_ARCH    =3D "arm"
-> TARGET_OS      =3D "linux-gnueabi"
-> MACHINE        =3D "akita"
-> DISTRO         =3D "angstrom"
-> DISTRO_VERSION =3D "2007.9-test-20070913"
-> TARGET_FPU     =3D "soft"
->=20
-> NOTE: Resolving missing task queue dependencies
-> NOTE: preferred version 2.5 of glibc not available (for item
-> virtual/arm-angstrom-linux-gnueabi-libc-for-gcc)
-> NOTE: Preparing runqueue
-> NOTE: Executing runqueue
-> NOTE: Running task 1757 of 3075 (ID: 1327,
-> /OE/org.openembedded.dev/packages/hal/hal-info_git.bb, do_fetch)
-> NOTE: package hal-info-20070913+git: started
-> NOTE: package hal-info-20070913+git-r1: task do_fetch: started
-> fatal: unable to connect a socket (Connection timed out)
-> ERROR: Error in executing:
-> ERROR: Exception:<class 'bb.fetch.FetchError'> Message:Fetch=20
-> command export
-> PATH=3D/OE/org.openembedded.dev/tmp/staging/i686-linux/bin/arm-angst
-> rom-linux-gnueabi:/OE/org.openembedded.dev/tmp/staging/i686-linux/
-> bin:/OE/org.openembedded.dev/tmp/cross/bin:/OE/bitbake-1.8.8
-> /bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
-> /usr/games;
->  git ls-remote git://anongit.freedesktop.org/hal-info/ failed with =
-signal
-> 1, output:
->=20
-> ERROR: Printing the environment of the function
-> ERROR: Error in executing:
-> ERROR: Exception:<class 'bb.fetch.FetchError'> Message:Fetch=20
-> command export
-> PATH=3D/OE/org.openembedded.dev/tmp/staging/i686-linux/bin/arm-angst
-> rom-linux-gnueabi:/OE/org.openembedded.dev/tmp/staging/i686-linux/
-> bin:/OE/org.openembedded.dev/tmp/cross/bin:/OE/bitbake-1.8.8
-> /bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
-> /usr/games;
->  git ls-remote git://anongit.freedesktop.org/hal-info/ failed with =
-signal
-> 1, output:
->=20
-> ERROR: Printing the environment of the function
-> ERROR: Build of /OE/org.openembedded.dev/packages/hal/hal-info_git.bb
-> do_fetch failed
-> Traceback (most recent call last):
->   File "/OE/bitbake-1.8.8/bin/bitbake", line 134, in <module>
->     main()
->   File "/OE/bitbake-1.8.8/bin/bitbake", line 131, in main
->     cooker.cook()
->   File "/OE/bitbake-1.8.8/lib/bb/cooker.py", line 552, in cook
->     return self.buildTargets(pkgs_to_build)
->   File "/OE/bitbake-1.8.8/lib/bb/cooker.py", line 466, in buildTargets
->     failures =3D rq.execute_runqueue()
->   File "/OE/bitbake-1.8.8/lib/bb/runqueue.py", line 403, in
-> execute_runqueue
->     self.execute_runqueue_internal()
->   File "/OE/bitbake-1.8.8/lib/bb/runqueue.py", line 531, in
-> execute_runqueue_internal
->     self.cooker.tryBuild(fn, False)
->   File "/OE/bitbake-1.8.8/lib/bb/cooker.py", line 125, in tryBuild
->     return self.tryBuildPackage(fn, item, self.configuration.cmd,=20
-> the_data,
-> build_depends)
->   File "/OE/bitbake-1.8.8/lib/bb/cooker.py", line 98, in =
-tryBuildPackage
->     bb.build.exec_task('do_%s' % task, the_data)
->   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 292, in exec_task
->     execute(None, task)
->   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 281, in execute
->     exec_func(item, localdata)
->   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 98, in exec_func
->     exec_func_python(func, d)
->   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 117, in =
-exec_func_python
->     utils.better_exec(comp,g,tmp, bb.data.getVar('FILE',d,1))
->   File "/OE/bitbake-1.8.8/lib/bb/utils.py", line 144, in better_exec
->     exec code in context
->   File "do_fetch", line 4, in <module>
->   File "do_fetch", line 2, in do_fetch
->   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 98, in exec_func
->     exec_func_python(func, d)
->   File "/OE/bitbake-1.8.8/lib/bb/build.py", line 117, in =
-exec_func_python
->     utils.better_exec(comp,g,tmp, bb.data.getVar('FILE',d,1))
->   File "/OE/bitbake-1.8.8/lib/bb/utils.py", line 144, in better_exec
->     exec code in context
->   File "base_do_fetch", line 63, in <module>
->   File "base_do_fetch", line 12, in base_do_fetch
->   File "/OE/bitbake-1.8.8/lib/bb/fetch/__init__.py", line 123, in init
->     urldata[url].setup_localpath(d)
->   File "/OE/bitbake-1.8.8/lib/bb/fetch/__init__.py", line 278, in
-> setup_localpath
->     self.localpath =3D self.method.localpath(self.url, self, d)
->   File "/OE/bitbake-1.8.8/lib/bb/fetch/git.py", line 59, in localpath
->     ud.tag =3D self.latest_revision(url, ud, d)
->   File "/OE/bitbake-1.8.8/lib/bb/fetch/__init__.py", line 424, in
-> latest_revision
->     rev =3D self._latest_revision(url, ud, d)
->   File "/OE/bitbake-1.8.8/lib/bb/fetch/git.py", line 129, in
-> _latest_revision
->     output =3D runfetchcmd("git ls-remote %s://%s%s" % (ud.proto, =
-ud.host,
-> ud.path), d, True)
->   File "/OE/bitbake-1.8.8/lib/bb/fetch/__init__.py", line 252, in
-> runfetchcmd
->     raise FetchError("Fetch command %s failed with signal %s, =
-output:\n%s"
-> % (pathcmd, signal, output))
-> bb.fetch.FetchError: Fetch command export
-> PATH=3D/OE/org.openembedded.dev/tmp/staging/i686-linux/bin/arm-angst
-> rom-linux-gnueabi:/OE/org.openembedded.dev/tmp/staging/i686-linux/
-> bin:/OE/org.openembedded.dev/tmp/cross/bin:/OE/bitbake-1.8.8
-> /bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
-> /usr/games;
->  git ls-remote git://anongit.freedesktop.org/hal-info/ failed with =
-signal
-> 1, output:
->=20
-> ERROR: Task 1327 =
-(/OE/org.openembedded.dev/packages/hal/hal-info_git.bb,
-> do_fetch) failed
-> NOTE: Tasks Summary: Attempted 1756 tasks of which 1756 didn't need to =
-be
-> rerun and 1 failed.
-> ERROR: '/OE/org.openembedded.dev/packages/hal/hal-info_git.bb' failed
-> root@victorlai-desktop:/OE#
->=20
-> Best Regards,
->=20
-> -------------------------------------------------
-> =E8=B3=B4=E7=AB=8B=E5=87=B1 / Victor Lai
-> =E7=A0=94=E7=99=BC=E8=99=95 =E8=BB=9F=E9=AB=94=E9=83=A8 / RD Software
-> =E7=A0=94=E6=8F=9A=E7=A7=91=E6=8A=80 / AAEON Technology Inc.
-> Tel:886-2-89191234  ext:738
-> Fax: 886-2-89191054
-> E-mail: VictorLai@aaeon.com.tw
-> -------------------------------------------------
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
+> for the packages they want to make floating.
+> 
+> I firmly believe that floating SRCREVs should be opt in and these
+> changes allow that whilst still letting distros or users make use of
+> floating versions. I'd also advise openmoko against making SRCREV =
+> "${AUTOREV}" the default and to only make the packages they need
+> floating but thats not my call to make :).
+> 
+> Are there any objections to the above? I'll probably commit this fairly
+> quickly if the openmoko devs are agreeable.
 
+Mickey OK'ed it on another list, so I added sane-srcrevs.inc to angstrom. (in)sane-srcrevs
+and moko-autorev needs some tweaking, but 90% is there.
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFG6O0PMkyGM64RGpERAuaOAKCnIGW1yzZu0yh+Qd8vzvDP3LUhWwCdE48L
+wR/Y3/kaYE9SPiuKNz0aqas=
+=oeJo
+-----END PGP SIGNATURE-----
 
 
