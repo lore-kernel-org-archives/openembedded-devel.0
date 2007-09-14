@@ -1,30 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [209.242.20.84] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IWAWl-00018E-9J
-	for openembedded-devel@openembedded.org; Fri, 14 Sep 2007 14:44:07 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8ECeljx029856
-	for <openembedded-devel@openembedded.org>;
-	Fri, 14 Sep 2007 13:40:47 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 29661-05 for <openembedded-devel@openembedded.org>;
-	Fri, 14 Sep 2007 13:40:43 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8ECecne029849
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Fri, 14 Sep 2007 13:40:38 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Fri, 14 Sep 2007 13:40:37 +0100
-Message-Id: <1189773637.6181.20.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: SRCREV change bitbake bug
+	(envelope-from <mwester@dls.net>) id 1IWBgh-0006uM-T2
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Sep 2007 15:58:28 +0200
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id 1B1DD4121DE
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Sep 2007 08:55:10 -0500 (CDT)
+Message-ID: <015e01c7f6d6$d6f05f60$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+References: <E1IVzbz-0007pX-Aa@linuxtogo.org><46EA2668.6080307@student.utwente.nl>
+	<1902785051.20070914121859@vanille-media.de>
+Date: Fri, 14 Sep 2007 08:54:58 -0500
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1807
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
+Subject: Re: [oe-commits] org.oe.dev libgsmd: add modified start scriptfor fic-gta01 due to problems w/ UART multiplexing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,42 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2007 12:44:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 14 Sep 2007 13:58:28 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-This is a quick report of a problem I've been made aware of. Basically
-the AUTOREV variable doesn't work as expected with current bitbake which
-breaks insane-srcrevs.inc and moko-auto.inc :-(.
+> Koen Kooi wrote:
+> > mickeyl commit schreef:
+> >> libgsmd: add modified start script for fic-gta01 due to problems w/
+UART multiplexing
+> >> See http://bugzilla.openmoko.org/cgi-bin/bugzilla/show_bug.cgi?id=788
+for more information
+> >> This is hopefully just a temporary solution...
+> >>
+> >> Author: mickeyl@openembedded.org
+> >> Branch: org.openembedded.dev
+> >> Revision: 235d3c4d9fbc3aee4e352851f04eb4fa2da4a68f
+> >> ViewMTN:
+http://monotone.openembedded.org/revision/info/235d3c4d9fbc3aee4e352851f04eb4fa2da4a68f
+> >> Files:
+> >> 1
+> >> packages/gsm/files/fic-gta01
+> >> packages/gsm/files/fic-gta01/gsmd
+>
+> > Coudn't this be done in the existing startup script with and if [
+machine = gta01 ] guard?
+>
+> We could, but...
+>
+> >  We did a lot of work in the past to make gsmd not machine specific,
+this undoes that
+>
+> No, I'd like it to be a BIG FAT sign that there is something wrong
+> here.
 
-The patch below hacks around this. I'd like to have some time to think
-about the problem and find a better solution before committing anything
-to bitbake. The section of code was already marked "gross hack" and sure
-enough, its bitten us already :(.
+This is a temporary work-around.  A better solution is to reset the flow
+control from within the kernel, in the same bit of code that powers-down the
+GSM modem and re-enables the console -- and that code is already
+GTA01-specific.
 
-Anyone needing AUTOREV can probably manage to apply the patch in the
-meantime ;-).
+I'll work on a suitable kernel patch to replace this specific workaround -- 
+wack me over the head if it doesn't get done in the next week.
 
-Cheers,
-
-Richard
-
-
-Index: lib/bb/fetch/svn.py
-===================================================================
---- lib/bb/fetch/svn.py (revision 970)
-+++ lib/bb/fetch/svn.py (working copy)
-@@ -77,6 +77,9 @@
-                 if rev and "get_srcrev" in rev:
-                     ud.revision = self.latest_revision(url, ud, d)
-                     ud.date = ""
-+                elif rev and "AUTOREV" in rev:
-+                    ud.revision = self.latest_revision(url, ud, d)
-+                    ud.date = ""
-                 elif rev:
-                     ud.revision = rev
-                     ud.date = "" 
-
+Mike (mwester)
 
 
 
