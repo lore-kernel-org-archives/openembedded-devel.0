@@ -1,30 +1,32 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IW7ln-0002F5-Uw
-	for openembedded-devel@openembedded.org; Fri, 14 Sep 2007 11:47:28 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l8E9i0xW015739 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2007 11:44:01 +0200
-Message-ID: <46EA57E9.4020202@dominion.kabel.utwente.nl>
-Date: Fri, 14 Sep 2007 11:44:09 +0200
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <mickey@vanille-media.de>) id 1IW8Ja-00074y-Ms
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Sep 2007 12:22:22 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 4E22C28C013; Fri, 14 Sep 2007 12:15:19 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180145041.adsl.alicedsl.de [85.180.145.41])
+	by srv043.dedi23.de (Postfix) with ESMTP id BB39328C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Sep 2007 12:15:15 +0200 (CEST)
+Date: Fri, 14 Sep 2007 12:18:59 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.3) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1902785051.20070914121859@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <46EA2668.6080307@student.utwente.nl>
+References: <E1IVzbz-0007pX-Aa@linuxtogo.org>
+	<46EA2668.6080307@student.utwente.nl>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <200709111318.52432.openembedded@haerwu.biz>	<46E78180.1050907@student.utwente.nl>	<46EA3685.2040809@student.utwente.nl>
-	<200709141122.31734.openembedded@haerwu.biz>
-In-Reply-To: <200709141122.31734.openembedded@haerwu.biz>
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	l8E9i0xW015739
-X-Mailman-Approved-At: Fri, 14 Sep 2007 11:54:12 +0200
-Subject: Re: Splitting up bluez in a sane way, was Re: Task-base is big :(
+Subject: Re: [oe-commits] org.oe.dev libgsmd: add modified start script for fic-gta01 due to problems w/ UART multiplexing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,32 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2007 09:47:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 Sep 2007 10:22:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz schreef:
-> Dnia pi=C4=85tek, 14 wrze=C5=9Bnia 2007, Koen Kooi napisa=C5=82:
->=20
->> What can be done is to make the default bluez-utils build only build
->> bluez-utils* and have seperate recipes for all the 3rdparty stuff it
->> builds:
->=20
->> That would solve both buildtime and runtime issues.
->>
->> What do you think?
->=20
-> bluez-utils-cups, bluez-utils-gstreamer, bluez-utils-alsa? Sounds good =
-for=20
-> me - especially first both.
+Koen Kooi wrote:
+> mickeyl commit schreef:
+>> libgsmd: add modified start script for fic-gta01 due to problems w/ UART multiplexing
+>> See http://bugzilla.openmoko.org/cgi-bin/bugzilla/show_bug.cgi?id=788 for more information
+>> This is hopefully just a temporary solution...
+>> 
+>> Author: mickeyl@openembedded.org
+>> Branch: org.openembedded.dev
+>> Revision: 235d3c4d9fbc3aee4e352851f04eb4fa2da4a68f
+>> ViewMTN: http://monotone.openembedded.org/revision/info/235d3c4d9fbc3aee4e352851f04eb4fa2da4a68f
+>> Files:
+>> 1
+>> packages/gsm/files/fic-gta01
+>> packages/gsm/files/fic-gta01/gsmd
 
+> Coudn't this be done in the existing startup script with and if [ machine = gta01 ] guard?
 
-bluez-utils-cups and bluez-utils-alsa can be done for sure, but I haven't=
- looked at where
-gstreamer comes in and if it can be a seperate package.
+We could, but...
 
-regards,
+>  We did a lot of work in the past to make gsmd not machine specific, this undoes that
 
-Koen
+No, I'd like it to be a BIG FAT sign that there is something wrong
+here.
+
+Regards,
+
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+
 
 
