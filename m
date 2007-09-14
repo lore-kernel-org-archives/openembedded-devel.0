@@ -1,34 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1IW0Z0-0004Hp-Uv; Fri, 14 Sep 2007 04:05:46 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 4D4AF28C014; Fri, 14 Sep 2007 03:58:46 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180145041.adsl.alicedsl.de [85.180.145.41])
-	by srv043.dedi23.de (Postfix) with ESMTP id 20F0028C012;
-	Fri, 14 Sep 2007 03:58:43 +0200 (CEST)
-Date: Fri, 14 Sep 2007 04:02:25 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.3) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <522721688.20070914040225@vanille-media.de>
-To: Philip Balister <philip@balister.org>
-In-Reply-To: <46E9D4BA.3080708@balister.org>
-References: <8e53a5920709112139s1b54c4cdsdb27b0df1995399e@mail.gmail.com>
-	<7215-66668@sneakemail.com> <8742-19702@sneakemail.com>
-	<164986939.20070914021814@vanille-media.de>
-	<46E9D4BA.3080708@balister.org>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IW4TL-0007WA-Or
+	for openembedded-devel@openembedded.org; Fri, 14 Sep 2007 08:16:11 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l8E6CmxW016391 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Sep 2007 08:12:48 +0200
+Message-ID: <46EA2668.6080307@student.utwente.nl>
+Date: Fri, 14 Sep 2007 08:12:56 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Cc: Using OE <openembedded-users@lists.openembedded.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-users] ERROR: function do_stage failed
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <E1IVzbz-0007pX-Aa@linuxtogo.org>
+In-Reply-To: <E1IVzbz-0007pX-Aa@linuxtogo.org>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev libgsmd: add modified start script for fic-gta01 due to problems w/ UART multiplexing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,40 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2007 02:05:47 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 14 Sep 2007 06:16:12 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-cc'ing openembedded-devel, since we raise a significant issue here.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Philip Balister wrote:
-> Can we remove the generic distro? I do not think anyone uses its it, and
-> it just creates distractions for people.
+mickeyl commit schreef:
+> libgsmd: add modified start script for fic-gta01 due to problems w/ UART multiplexing
+> See http://bugzilla.openmoko.org/cgi-bin/bugzilla/show_bug.cgi?id=788 for more information
+> This is hopefully just a temporary solution...
+> 
+> Author: mickeyl@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 235d3c4d9fbc3aee4e352851f04eb4fa2da4a68f
+> ViewMTN: http://monotone.openembedded.org/revision/info/235d3c4d9fbc3aee4e352851f04eb4fa2da4a68f
+> Files:
+> 1
+> packages/gsm/files/fic-gta01
+> packages/gsm/files/fic-gta01/gsmd
 
-I wouldn't like that and I'll tell you why. I added this distribution
-configuration to have a conservative minimal distribution
-configuration as a starting point for people to roll their own
-distribution.
+Coudn't this be done in the existing startup script with and if [ machine = gta01 ] guard?
+ We did a lot of work in the past to make gsmd not machine specific, this undoes that :(
 
-Now you probably would answer "they should just include Angstrom". As
-much as I love the Angstrom initiative [heck, i co-founded it!], I
-don't want it become the only viable option in OpenEmbedded. I want to
-see us retaining a clear border where the packaging and machine configuration
-metadata in OE ends and where the distribution starts.
+regards,
 
-The more Angstrom-specific hacks I see in OpenEmbedded, the more it
-scares me, because this means once someone wants a lean-and-mean way
-to compile a distro, he will run into lots of obstacles which --
-in my opinion -- should rather be solved in a distribution-independent way.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-I agree that the generic distro suffered from bitrot, but for the said
-reasons I'd rather like it to be revived than to be removed.
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+iD8DBQFG6iZoMkyGM64RGpERAhqkAJ9yKRj0LkpFmzJgqV4xsdQTvcpITwCghlk8
+7ftj2nW+CfEu9RnUUw8bXCQ=
+=TMvz
+-----END PGP SIGNATURE-----
 
 
