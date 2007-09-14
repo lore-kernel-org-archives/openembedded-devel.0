@@ -1,34 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>)
-	id 1IW72x-0005ag-Ig; Fri, 14 Sep 2007 11:01:07 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8E8vYQ5020498;
-	Fri, 14 Sep 2007 09:57:34 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 19998-06; Fri, 14 Sep 2007 09:57:30 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8E8vQ2p020490
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Fri, 14 Sep 2007 09:57:26 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <522721688.20070914040225@vanille-media.de>
-References: <8e53a5920709112139s1b54c4cdsdb27b0df1995399e@mail.gmail.com>
-	<7215-66668@sneakemail.com> <8742-19702@sneakemail.com>
-	<164986939.20070914021814@vanille-media.de>
-	<46E9D4BA.3080708@balister.org>
-	<522721688.20070914040225@vanille-media.de>
-Date: Fri, 14 Sep 2007 09:57:25 +0100
-Message-Id: <1189760245.6181.7.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: Using OE <openembedded-users@openembedded.org>
-Subject: Re: [oe-users] ERROR: function do_stage failed
+	(envelope-from <openembedded@haerwu.biz>) id 1IW7RD-0001po-D4
+	for openembedded-devel@openembedded.org; Fri, 14 Sep 2007 11:26:11 +0200
+Received: (qmail 10768 invoked by uid 813007); 14 Sep 2007 09:22:50 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 14 Sep 2007 09:22:50 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 14 Sep 2007 11:22:30 +0200
+User-Agent: KMail/1.9.7
+References: <200709111318.52432.openembedded@haerwu.biz>
+	<46E78180.1050907@student.utwente.nl>
+	<46EA3685.2040809@student.utwente.nl>
+In-Reply-To: <46EA3685.2040809@student.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200709141122.31734.openembedded@haerwu.biz>
+Subject: Re: Splitting up bluez in a sane way, was Re: Task-base is big :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,21 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2007 09:01:09 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 Sep 2007 09:26:11 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Fri, 2007-09-14 at 04:02 +0200, Dr. Michael Lauer wrote:
-> The more Angstrom-specific hacks I see in OpenEmbedded, the more it
-> scares me, because this means once someone wants a lean-and-mean way
-> to compile a distro, he will run into lots of obstacles which --
-> in my opinion -- should rather be solved in a distribution-independent way.
+Dnia pi=B1tek, 14 wrze=B6nia 2007, Koen Kooi napisa=B3:
 
-Can you give some examples of these as I wasn't aware of this :/
+> What can be done is to make the default bluez-utils build only build
+> bluez-utils* and have seperate recipes for all the 3rdparty stuff it
+> builds:
 
-Cheers,
+> That would solve both buildtime and runtime issues.
+>
+> What do you think?
 
-Richard
+bluez-utils-cups, bluez-utils-gstreamer, bluez-utils-alsa? Sounds good for=
+=20
+me - especially first both.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+          bloody internet
+          there was once peace and then the internet came in :-)
+
 
 
 
