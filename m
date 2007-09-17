@@ -1,26 +1,29 @@
-Received: from [212.27.42.30] (helo=smtp4-g19.free.fr)
+Received: from [212.47.7.226] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <schane@osmozis.com>)
-	id 1IXCmj-00038J-CC; Mon, 17 Sep 2007 11:20:53 +0200
-Received: from smtp4-g19.free.fr (localhost.localdomain [127.0.0.1])
-	by smtp4-g19.free.fr (Postfix) with ESMTP id 9A5C66F3FE;
-	Mon, 17 Sep 2007 11:17:16 +0200 (CEST)
-Received: from Sara (cla34-1-88-160-215-156.fbx.proxad.net [88.160.215.156])
-	by smtp4-g19.free.fr (Postfix) with SMTP id 2D5956F2D6;
-	Mon, 17 Sep 2007 11:17:16 +0200 (CEST)
-Message-ID: <005b01c7f90b$8ac3e940$076fa8c0@Sara>
-From: "chanemouganandam saravanan" <schane@osmozis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 17 Sep 2007 11:17:16 +0200
-MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.3138
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Cc: openembedded-users@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org
-Subject: task base build Error on OE
+	(envelope-from <utx@penguin.cz>) id 1IXNIi-0006iK-Js
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Sep 2007 22:34:36 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 2A2D23000ECE;
+	Mon, 17 Sep 2007 22:30:57 +0200 (CEST)
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (penguin [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 04957-01; Mon, 17 Sep 2007 22:30:56 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7])
+	by ns.penguin.cz (Postfix) with ESMTP id 68DC930008E2;
+	Mon, 17 Sep 2007 22:30:53 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1189985156.9658.38.camel@localhost.localdomain>
+References: <1189985156.9658.38.camel@localhost.localdomain>
+Date: Mon, 17 Sep 2007 22:30:51 +0200
+Message-Id: <1190061051.8742.20.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.8.2 
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at penguin.cz
+Cc: Ross Burton <ross@openedhand.com>
+Subject: Re: RFC: Staging layout and pkgconfig sysroot support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,111 +37,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2007 09:20:53 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 Sep 2007 20:34:36 -0000
+X-Groupsio-MsgNum: 2934
+Content-Type: multipart/mixed; boundary="=-rudUdODiOWCFxmvleahn"
 
-Hi all,
+--=-rudUdODiOWCFxmvleahn
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-I am a newbie to OE and started trying to setup and build "angstrom-minima=
-l-image_with_mtdutils" using Openembedded on my=20
-Linux x86 host development machine running linux 2.6.8-3-k7.
+Richard Purdie wrote:
 
-Using Openembedded getting started, I have installed all the required pack=
-ages and when I start building the task base , I get the
-following error message ( multiple definition  of `__i686.get_pc_thunk.bx'=
- )
+> I'm interested in people's views on whether this would be a worthwhile
+> change or not? Should we change all staging layouts or leave say native
+> packages as they are?
+> 
+> As a first step I will investigate removing some of the hardcoded layout
+> assumptions I've found so far as I think they're good to remove
+> regardless of whether we change staging layout or not. In theory people
+> or distros could maybe then choose their own layout even!
 
-schane:/stuff# bitbake taks base
-Foo None
-NOTE: Handling BitBake files: \ (4684/4684) [100 %]
-NOTE: Parsing finished. 0 cached, 4440 parsed, 244 skipped, 0 masked.
-NOTE: build 200709171006: started
+Well, I proposed the systoot some time ago and you opposed with its
+disadvantages.
 
-OE Build Configuration:
-BB_VERSION     =3D "1.8.9"
-OE_REVISION    =3D "8071f5c572ec78c0b57e4e56c6e31dfd9a26c414"
-TARGET_ARCH    =3D "arm"
-TARGET_OS      =3D "linux-uclibcgnueabi"
-MACHINE        =3D "compulab-pxa270"
-DISTRO         =3D "angstrom"
-DISTRO_VERSION =3D "2007.9-test-20070917"
-TARGET_FPU     =3D "soft"
+I tried the second way: Write a compiler wrapper.
 
-NOTE: Resolving missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 74 of 1079 (ID: 615, /stuff/org.openembedded.dev/packag=
-es/gettext/gettext-native_0.14.1.bb, do_compile)
-NOTE: package gettext-native-0.14.1: started
-NOTE: package gettext-native-0.14.1-r5: task do_compile: started
-ERROR: function do_compile failed
-ERROR: see log in /stuff/tmp/work/i686-linux/gettext-native-0.14.1-r5/temp=
-/log.do_compile.32052
-NOTE: Task failed: /stuff/tmp/work/i686-linux/gettext-native-0.14.1-r5/tem=
-p/log.do_compile.32052
-NOTE: package gettext-native-0.14.1-r5: task do_compile: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package gettext-native-0.14.1: failed
-ERROR: Build of /stuff/org.openembedded.dev/packages/gettext/gettext-nativ=
-e_0.14.1.bb do_compile failed
-ERROR: Task 615 (/stuff/org.openembedded.dev/packages/gettext/gettext-nati=
-ve_0.14.1.bb, do_compile) failed
-NOTE: Tasks Summary: Attempted 73 tasks of which 73 didn't need to be reru=
-n and 1 failed.
-ERROR: '/stuff/org.openembedded.dev/packages/gettext/gettext-native_0.14.1=
-.bb' failed
-schane:/stuff#                                                            =
-            =20
+Here is my first proof of concept wrapper. Now it hardcodes paths and
+some parts should be a subject of discussion (e. g. -nostdinc). It
+already compiled a small binary+library, but I did not try bootstrap
+with it yet (I don't know how to do a system-wide change of cross-CC
+etc.).
+
+Advantages of gcwrap over -sysroot:
+- We can keep existing structure.
+- Save storage while building for more platforms at once.
+
+Advantages of -sysroot over gcwrap:
+- A bit better support (in gcc and libtool but not automake checks).
+- Simpler manipulation with one directory.
+
+There is a particular question, whether overlay parts
+noarch-platform-machine should follow target system structure.
+I think that yes, even if it could break some recipes.
+
+In all cases, I would propose a QA tool causing error of any package
+embedding any staging dir or DESTDIR into any file (except debug info).
+
+There is still a lot of stuff, which don't support any of mentioned
+concepts at all (e. g. AC_CHECK_FILE, AC_CHECK_PATH checks) and could
+cause bad assumption (see fileutils locate script). In these cases, one
+must provide a correct ac_ value to configure script or even patch the
+package.
 
 
-Looking into log file  /stuff/tmp/work/i686-linux/gettext-native-0.14.1-r5=
-/temp/log.do_compile.32052 shows ::::
-....
-gcc -shared  .libs/allocsa.o .libs/argmatch.o .libs/backupfile.o .libs/add=
-ext.o .libs/basename.o .libs/c-ctype.o .libs/classpath.o .libs/closeout.o .=
-libs/copy-file.o .libs/csharpcomp.o .libs/csharpexec.o .libs/error.o .libs/=
-error-progname.o .libs/execute.o .libs/fatal-signal.o .libs/findprog.o .lib=
-s/fstrcmp.o .libs/full-write.o .libs/fwriteerror.o .libs/gcd.o .libs/getopt=
-.o .libs/getopt1.o .libs/hash.o .libs/javacomp.o .libs/javaexec.o .libs/lin=
-ebreak.o .libs/mbswidth.o .libs/obstack.o .libs/concatpath.o .libs/pipe-bid=
-i.o .libs/pipe-in.o .libs/pipe-out.o .libs/progname.o .libs/progreloc.o .li=
-bs/safe-read.o .libs/safe-write.o .libs/sh-quote.o .libs/stpncpy.o .libs/st=
-rtoul.o .libs/tmpdir.o .libs/wait-process.o .libs/xmalloc.o .libs/xstrdup.o=
- .libs/xallocsa.o .libs/xerror.o .libs/xreadlink.o .libs/xsetenv.o .libs/lo=
-calcharset.o  -L/stuff/tmp/staging/i686-linux/lib -lc  -Wl,-rpath-link -Wl,=
-/stuff/tmp/staging/i686-linux/lib -Wl,-rpath -Wl,/stuff/tmp/staging/i686-li=
-nux/lib -Wl,-O1 -Wl,-soname -Wl,libgettextlib-0.14.1.so -o .libs/libgettext=
-lib-0.14.1.so
-/usr/lib/libc_nonshared.a(atexit.oS)(.text.__i686.get_pc_thunk.bx+0x0): In=
- function `__i686.get_pc_thunk.bx':
-: multiple definition of `__i686.get_pc_thunk.bx'
-/usr/lib/gcc-lib/i486-linux/3.3.5/crtbeginS.o(.gnu.linkonce.t.__i686.get_p=
-c_thunk.bx+0x0): first defined here
-collect2: ld returned 1 exit status
-make[3]: *** [libgettextlib.la] Error 1
-make[3]: Leaving directory `/stuff/tmp/work/i686-linux/gettext-native-0.14=
-.1-r5/gettext-0.14.1/gettext-tools/lib'
-make[2]: *** [all-recursive] Error 1
-make[2]: Leaving directory `/stuff/tmp/work/i686-linux/gettext-native-0.14=
-.1-r5/gettext-0.14.1/gettext-tools'
-make[1]: *** [all] Error 2
-make[1]: Leaving directory `/stuff/tmp/work/i686-linux/gettext-native-0.14=
-.1-r5/gettext-0.14.1/gettext-tools'
-make: *** [all-recursive] Error 1
-FATAL: oe_runmake failed
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
+--=-rudUdODiOWCFxmvleahn
+Content-Description: 
+Content-Type: application/x-shellscript
+Content-Disposition: inline; filename=gcwrap
+Content-Transfer-Encoding: 7bit
 
-The problem is with multiple definition of `__i686.get_pc_thunk.bx' found =
-in /usr/lib/gcc-lib/i486-linux/3.3.5/crtbeginS.o and /usr/lib/libc_nonshare=
-d.a(atexit.oS).
-Could any one tell me how to solve this dependency problem of looking into=
- the /usr/lib/gcc-lib/i486-linux on the host ?
+#!/bin/bash
 
-Regards,
-Sara
-R&D Eningeer - OSMOZIS
-Montpellier
-From schane@osmozis.com Mon Sep 17 11:35:49 2007
-Received: from [212.27.42.30] (helo
+# Warning: Your local compilation builddir musr not be inside /usr!
+
+GCW_DIR1=/OE/tmp/staging/spitz-angstrom-linux-gnueabi
+GCW_DIR2=/OE/tmp/staging/arm-angstrom-linux-gnueabi
+GCW_DIR3=/OE/tmp/staging
+
+function add_gcw_args {
+    GCW_ARGS[${#GCW_ARGS[@]}]="$1"
+}
+GCW_ARGS=( $1 -L$GCW_DIR1/lib -L$GCW_DIR2/lib -L$GCW_DIR3/lib -nostdinc -I/OE/tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.1.2/install-tools/include -I$GCW_DIR1/include -I$GCW_DIR2/include -I$GCW_DIR3/include )
+#GCW_ARGS=( $1 )
+shift
+GCW_REWRITE=false
+while test $# -gt 0 ; do
+    if $GCW_REWRITE ; then
+	case "$1" in
+	/usr* )
+	    add_gcw_args "$GCW_DIR1${1#/usr}"
+	    add_gcw_args $GCW_COMMAND
+	    add_gcw_args "$GCW_DIR1${1#/usr}"
+	    add_gcw_args $GCW_COMMAND
+	    add_gcw_args "$GCW_DIR3${1#/usr}"
+	    ;;
+	* )
+	    add_gcw_args "$1"
+	    ;;
+	esac
+	GCW_REWRITE=false
+    else
+	case "$1" in
+	-L | -I )
+	    GCW_REWRITE=true
+	    GCW_COMMAND="$1"
+	    add_gcw_args "$GCW_COMMAND"
+	    ;;
+	-L/usr* | -I/usr* )
+	    add_gcw_args "${1:0:2}$GCW_DIR1${1#-?/usr}"
+	    add_gcw_args "${1:0:2}$GCW_DIR2${1#-?/usr}"
+	    add_gcw_args "${1:0:2}$GCW_DIR3${1#-?/usr}"
+	    ;;
+	* )
+	    add_gcw_args "$1"
+	    ;;
+	esac
+    fi
+    shift
+done
+echo "=== DEBUG gcwrap: ${GCW_ARGS[*]}"
+exec ${GCW_ARGS[@]}
+
+--=-rudUdODiOWCFxmvleahn
+Content-Disposition: attachment; filename=gcwrap_test.tar.bz2
+Content-Type: application/x-bzip-compressed-tar; name=gcwrap_test.tar.bz2
+Content-Transfer-Encoding: base64
+
+QlpoOTFBWSZTWXo9OzMAAhJ/pMwQABB8c//fPmb8pP/v3+oAAIABAAhQAz3uQakqtDHNMjIZMENG
+EwRpo0YgaZMjAAEGSQKeBip4jUGhoYgAwCDCMCDHNMjIZMENGEwRpo0YgaZMjAAEEUlR6aJ6j0hp
+6jT0mgAAAaAAABoJIQiaaJtJ6jJGmGpoyGj1NGCGQaMmjyjmcXywFxw+rE0AMToiXZq5NbKHQrjQ
+iwM65Qskk606jJ192ribwuO8b8RqKniNFsh9HNHAcpijvc2VeQNhQrLBeDYdFFlTs49ZiXh9a0Tr
+DokUiLfEahUGmEdpWgRBaWkID0uxUDr2EBrA4OErZIjQkETz8b6MmbHhVZUzNgweUy85jM5pNxL/
+KcgOr9jl7G1WG+c/QTQt1CYOjxDWhMlJC0khTAumQLgM+abM46HONn7AKy9X7y6r8lo8kRZI5UcY
+exYWZjhHXy0pC9S7yjihMmXN8QpJdcyQzwumFOlFIjr6g8yilHhFXURQmoIiupSGeIfxLCsqo/YY
+HiqskqtozCoqvbwVHSZwcY8p7Z/s7vnHSGsFBpIbwHwB6+4soEKHAob7GeoXdEnQPiAn+u3jAn4A
+QrqGWhc4MGoZPzXZfFyHERsjghOqMCPGknu02yHahNswRG0S5nqXwR0igYC0UzCFvsC2eEREG4Ei
+04ztwk0TRkan9O0WORsH3vNzcM42rM+KQntQnqGJKuwxHozYcdRjxKTpBxStIKbbYW4rV5AmHJMM
+qqYmRxidGmgiKyTLdvHIjnIOikmimSnmUrhqOUahwGRbZJJbo6TbldRoL9d95AbrYeBJgzLWTVWg
+MMDeW4SkrdSctSrJZiMI1bdMr7aG4KIuWQWshxGNjFYOnQmFLAT90haGZjdQkJKm01BFLC0FeAMB
+lJ5qATSLoSdyInk6C4KZZA0gHWIGL6QjpIOQoqVldwG8i4KZWW2Y1kShCyOhYcpbaowFQrlBJjax
+mwnzrenlVmaYDmALGQVG2jFRSFqIO9iwvQm2FWDWD1wIoDJBs4Q2kmrWtlWbJd8HegTqSwAjZK0K
+OJWmtVgYWwrjW4lRdSpWcsGW3yCItzmqVqv+LuSKcKEg9Hp2Zg==
+
+--=-rudUdODiOWCFxmvleahn--
