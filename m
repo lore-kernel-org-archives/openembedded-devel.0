@@ -1,30 +1,26 @@
-Received: from [212.27.42.27] (helo=smtp1-g19.free.fr)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <alain2210@free.fr>) id 1IXhLS-0006d0-J8
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Sep 2007 19:58:46 +0200
-Received: from smtp1-g19.free.fr (localhost.localdomain [127.0.0.1])
-	by smtp1-g19.free.fr (Postfix) with ESMTP id CF5CE1AB2D5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2007 19:55:01 +0200 (CEST)
-Received: from imp8-g19.free.fr (imp8-g19.free.fr [212.27.42.39])
-	by smtp1-g19.free.fr (Postfix) with ESMTP id BF2951AB36F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2007 19:54:59 +0200 (CEST)
-Received: by imp8-g19.free.fr (Postfix, from userid 33)
-	id 612BA12D21; Tue, 18 Sep 2007 19:54:59 +0200 (CEST)
-Received: from AMontsouris-151-1-21-58.w82-123.abo.wanadoo.fr
-	(AMontsouris-151-1-21-58.w82-123.abo.wanadoo.fr [82.123.18.58])
-	by imp.free.fr (IMP) with HTTP 
-	for <alain2210@212.27.42.70>; Tue, 18 Sep 2007 19:54:59 +0200
-Message-ID: <1190138099.46f010f33252b@imp.free.fr>
-Date: Tue, 18 Sep 2007 19:54:59 +0200
-From: Alain2210 <alain2210@free.fr>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IXhZS-0006xu-Ez
+	for openembedded-devel@openembedded.org; Tue, 18 Sep 2007 20:13:14 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l8II9OxW019056 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Sep 2007 20:09:24 +0200
+Message-ID: <46F01466.4080000@dominion.kabel.utwente.nl>
+Date: Tue, 18 Sep 2007 20:09:42 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) 3.2.5
-X-Originating-IP: 82.123.18.58
-Subject: fortran and octave
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <1190138099.46f010f33252b@imp.free.fr>
+In-Reply-To: <1190138099.46f010f33252b@imp.free.fr>
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
+Subject: Re: fortran and octave
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,26 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2007 17:58:46 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Sep 2007 18:13:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Alain2210 schreef:
+> Hello,
+> 
+> I would like to bitbake octave for org.openembedded.dev.
+> But octave needs fortran ou f2c.
+> It seems that fortran has been remove from gcc-cross_4.1.2.bb (or perhaps
+> before).
+> So I have tried to
+> 1) add fortran in gcc-cross_4.1.2.bb but I get an error.
+> 2) compile octave with f2c without success. (even with the f2c of the host)
+> 
+> So what is the good way to compile octave and/or fortran and/or f2c ?
 
-I would like to bitbake octave for org.openembedded.dev.
-But octave needs fortran ou f2c.
-It seems that fortran has been remove from gcc-cross_4.1.2.bb (or perhaps
-before).
-So I have tried to
-1) add fortran in gcc-cross_4.1.2.bb but I get an error.
-2) compile octave with f2c without success. (even with the f2c of the hos=
-t)
+For gcc 3.4 through 4.1.x fortran is broken for arm (gcc ICEs on compiling gcc), Lennert
+Buytenhek had some patches for it, I don't know if they fix and and if yes, I don't know
+if they are in 4.2.1. I'm firing of a build of 4.2.1 with fortran enabled anyway :)
 
-So what is the good way to compile octave and/or fortran and/or f2c ?
+regards,
 
-Thanks,
-
-Alain
-
+Koen
 
 
