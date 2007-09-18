@@ -1,26 +1,26 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IXYKw-0006gk-Fj
-	for openembedded-devel@openembedded.org; Tue, 18 Sep 2007 10:21:42 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1IXYfn-000685-9s
+	for openembedded-devel@openembedded.org; Tue, 18 Sep 2007 10:43:12 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8I8HnhY027777;
-	Tue, 18 Sep 2007 09:17:49 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8I8dGux028741;
+	Tue, 18 Sep 2007 09:39:16 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 27688-02; Tue, 18 Sep 2007 09:17:41 +0100 (BST)
+	id 28503-06; Tue, 18 Sep 2007 09:39:12 +0100 (BST)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8I8HchQ027765
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8I8dCki028734
 	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Tue, 18 Sep 2007 09:17:38 +0100
+	Tue, 18 Sep 2007 09:39:12 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <20070918014128.GA760@thegnar.org>
+In-Reply-To: <1190061051.8742.20.camel@utx.utx.cz>
 References: <1189985156.9658.38.camel@localhost.localdomain>
-	<20070918014128.GA760@thegnar.org>
-Date: Tue, 18 Sep 2007 09:17:38 +0100
-Message-Id: <1190103458.6159.13.camel@localhost.localdomain>
+	<1190061051.8742.20.camel@utx.utx.cz>
+Date: Tue, 18 Sep 2007 09:39:11 +0100
+Message-Id: <1190104751.6159.23.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -39,51 +39,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2007 08:21:45 -0000
+X-List-Received-Date: Tue, 18 Sep 2007 08:43:13 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2007-09-17 at 18:41 -0700, mark gross wrote:
-> On Mon, Sep 17, 2007 at 12:25:56AM +0100, Richard Purdie wrote:
-> > The sed code in pkgconfig.bbclass has always struck me as ugly. In an
-> > ideal world we shouldn't have to rewrite the contents of the pkgconfig
-> > files to make them work with OE.
-> > 
-> > Packages like dbus and eds are starting to add paths to runtime module
-> > and state directories into the pkgconfig files and OE's current approach
-> > totally breaks these.
+On Mon, 2007-09-17 at 22:30 +0200, Stanislav Brabec wrote:
+> Richard Purdie wrote:
 > 
-> Then shouldn't we beet on the dbus guys to not break things?
+> > I'm interested in people's views on whether this would be a worthwhile
+> > change or not? Should we change all staging layouts or leave say native
+> > packages as they are?
+> > 
+> > As a first step I will investigate removing some of the hardcoded layout
+> > assumptions I've found so far as I think they're good to remove
+> > regardless of whether we change staging layout or not. In theory people
+> > or distros could maybe then choose their own layout even!
+> 
+> Well, I proposed the systoot some time ago and you opposed with its
+> disadvantages.
 
-I don't think the dbus guys are doing anything wrong and this is an
-entirely an artifact of our own design choices. The problem is that
-dbus-1.pc contains:
+I was thinking about that when I wrote this email. Someone does need to
+argue the opposite case as this is a fundamental change and it needs
+discussion. I haven't made my mind up which approach is better to be
+honest.
 
-session_bus_services_dir=/media/data1/builds/poky/eabi/tmp/staging/arm-poky-linux-gnueabi/share/dbus-1/services
+I didn't and don't like the added complexity of multiple lib and bin
+directories...
 
-and evolution-data-server.pc has things like:
+> I tried the second way: Write a compiler wrapper.
+> 
+> Here is my first proof of concept wrapper. Now it hardcodes paths and
+> some parts should be a subject of discussion (e. g. -nostdinc). It
+> already compiled a small binary+library, but I did not try bootstrap
+> with it yet (I don't know how to do a system-wide change of cross-CC
+> etc.).
 
-libdir=/media/data1/builds/poky/eabi/tmp/staging/arm-poky-linux-gnueabi/lib
-extensiondir=${libdir}/evolution-data-server-1.2/extensions
+I noticed the first line of the wrapper is:
 
-The above was created by our sed "magic" in pkgconfig.bbclass. EDS
-modules then use this to decide where to install its plugins which
-results in broken packages. The dbus entry is just asking for trouble
-too.
+# Warning: Your local compilation builddir musr not be inside /usr!
 
-You could argue our sed magic is wrong and just needs improving. What do
-you make it do in the eds case though? First replace all ${libdir} with
-an expanded version, then change libdir?
+which just broke some of my builds since I build in /usr on certain
+machines :/.
 
-The best alternative idea I've seen is to hack pkgconfig to make the sed
-expansions at runtime for the -L and -I options pkgconfig returns. You
-have to admit its a pretty ugly solution though. 
+> Advantages of gcwrap over -sysroot:
+> - We can keep existing structure.
+> - Save storage while building for more platforms at once.
+>
+> Advantages of -sysroot over gcwrap:
+> - A bit better support (in gcc and libtool but not automake checks).
+> - Simpler manipulation with one directory.
+> 
+> There is a particular question, whether overlay parts
+> noarch-platform-machine should follow target system structure.
+> I think that yes, even if it could break some recipes.
+> 
+> In all cases, I would propose a QA tool causing error of any package
+> embedding any staging dir or DESTDIR into any file (except debug info).
 
-The sysroot patch is simpler and has a good chance of being accepted
-upstream and solves the problem once and for all.
+Agreed, this is something I suspect the QA people are working towards?
 
-I have really mixed feelings and can see the arguments both ways
-really...
+> There is still a lot of stuff, which don't support any of mentioned
+> concepts at all (e. g. AC_CHECK_FILE, AC_CHECK_PATH checks) and could
+> cause bad assumption (see fileutils locate script). In these cases, one
+> must provide a correct ac_ value to configure script or even patch the
+> package.
+
+In an ideal world, we'd rewrite these macros and have our own safer
+versions even if they were to error out...
 
 Cheers,
 
