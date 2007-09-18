@@ -1,23 +1,25 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <utx@penguin.cz>) id 1IXaWN-00033W-BG
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Sep 2007 12:41:37 +0200
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id A7A326284B1;
-	Tue, 18 Sep 2007 12:37:53 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1190104751.6159.23.camel@localhost.localdomain>
-References: <1189985156.9658.38.camel@localhost.localdomain>
-	<1190061051.8742.20.camel@utx.utx.cz>
-	<1190104751.6159.23.camel@localhost.localdomain>
-Date: Tue, 18 Sep 2007 12:38:32 +0200
-Message-Id: <1190111912.3638.26.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.11.91 
-Cc: Ross Burton <ross@openedhand.com>
-Subject: Re: RFC: Staging layout and pkgconfig sysroot support
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IXgiC-0001i1-0a
+	for openembedded-devel@openembedded.org; Tue, 18 Sep 2007 19:18:12 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l8IHELxW010928 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Sep 2007 19:14:22 +0200
+Message-ID: <46F0077F.3050807@student.utwente.nl>
+Date: Tue, 18 Sep 2007 19:14:39 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Revisiting bitbake stamp handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,69 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2007 10:41:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 18 Sep 2007 17:18:12 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Mon, 2007-09-17 at 22:30 +0200, Stanislav Brabec wrote:
-> > Well, I proposed the systoot some time ago and you opposed with its
-> > disadvantages.
-> 
-> I was thinking about that when I wrote this email. Someone does need to
-> argue the opposite case as this is a fundamental change and it needs
-> discussion. I haven't made my mind up which approach is better to be
-> honest.
-> 
-> I didn't and don't like the added complexity of multiple lib and bin
-> directories...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-But there is still a chance to formalize such approach by defining a new
-feature request for gcc, libtool,... as an extension of -sysroot:
+Hi,
 
--target-root-map=/OE/foo1=/usr,/OE/foo2=/usr,/OE/foo3=/usr
+For a number of features in OE (e.g packaged-staging, rm_work) a change to bitbake stamp
+handling would make things a lot easier. As I understand it bitbake currently does for
+'bitbake foo -c compile':
 
-Or a bit simpler version, which expects all sub-roots containing full
-target paths (ie. /OE/foo1/usr/include instead of /OE/foo1/include).
+if(dependency stamps are missing OR depency stamps have newer mtime) then start from scratch
 
--target-root=/OE/foo1,/OE/foo2,/OE/foo3
+For rm_work we want to remove the do_unpack upto do_install stamps, but leave do_fetch and
+do_package_write* and for packaged-staging we want to only create a do_populate_staging
+stamps. So 'bitbake foo -c compile' would only do:
 
-Target root map is a bit more complicated for implementation - wherever
-sysroot has only one string, target root map has an array and needs to
-rewrite strings and enlarge arraysto see, that /usr/include/freetype
-should be expanded to triple lookup:
-/OE/foo1/include/freetype, /OE/foo2/include/freetype, /OE/foo3/include/freetype
+if(depency stamps have newer mtime) then start from scratch
 
-> I noticed the first line of the wrapper is:
-> 
-> # Warning: Your local compilation builddir musr not be inside /usr!
-> 
-> which just broke some of my builds since I build in /usr on certain
-> machines :/.
+this has implications for do_clean and do_rebuild, and possibly other things. Since this
+looks to good to be true, I want to know what else might break and how we could solve that
+when implementing this. This just a gedankenexperiment for now, so bitbake hackers can
+relax now :)
 
-My current wrapper is a hack, which rewrites all /usr/foo paths. If it
-will be accepted, it needs rewrite (maybe to C or so) and properly check
-for possible recursion.
+regards,
 
-> > There is still a lot of stuff, which don't support any of mentioned
-> > concepts at all (e. g. AC_CHECK_FILE, AC_CHECK_PATH checks) and could
-> > cause bad assumption (see fileutils locate script). In these cases, one
-> > must provide a correct ac_ value to configure script or even patch the
-> > package.
-> 
-> In an ideal world, we'd rewrite these macros and have our own safer
-> versions even if they were to error out...
+Koen
 
-In an ideal world, all changes should be upstreamed, not depending
-whether we will reuse sysroot or propose a new target root mapping.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Several years later, changes from automake could appear in the default
-configure scripts of projects and calling autoreconf would not be
-needed.
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+iD8DBQFG8Ad/MkyGM64RGpERArW7AKCY91yVx8se1jUej3FiZyVRTpuZVgCghoca
+n9KyhcAJ4a4VhBvxh360wto=
+=152E
+-----END PGP SIGNATURE-----
 
 
