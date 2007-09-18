@@ -1,21 +1,22 @@
 Received: from [212.27.42.27] (helo=smtp1-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <alain2210@free.fr>) id 1IXiQk-00041f-F2
-	for openembedded-devel@openembedded.org; Tue, 18 Sep 2007 21:08:18 +0200
+	(envelope-from <alain2210@free.fr>) id 1IXkli-0002sZ-5V
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Sep 2007 23:38:06 +0200
 Received: from smtp1-g19.free.fr (localhost.localdomain [127.0.0.1])
-	by smtp1-g19.free.fr (Postfix) with ESMTP id 86AE11AB2DE;
-	Tue, 18 Sep 2007 21:04:33 +0200 (CEST)
+	by smtp1-g19.free.fr (Postfix) with ESMTP id 83AFE1AB2DD;
+	Tue, 18 Sep 2007 23:34:20 +0200 (CEST)
 Received: from imp8-g19.free.fr (imp8-g19.free.fr [212.27.42.39])
-	by smtp1-g19.free.fr (Postfix) with ESMTP id 69F6C1AB364;
-	Tue, 18 Sep 2007 21:04:33 +0200 (CEST)
+	by smtp1-g19.free.fr (Postfix) with ESMTP id 69B301AB2D5;
+	Tue, 18 Sep 2007 23:34:20 +0200 (CEST)
 Received: by imp8-g19.free.fr (Postfix, from userid 33)
-	id 5990811601; Tue, 18 Sep 2007 21:04:33 +0200 (CEST)
+	id 26540141A2; Tue, 18 Sep 2007 23:34:20 +0200 (CEST)
 Received: from AMontsouris-151-1-21-58.w82-123.abo.wanadoo.fr
 	(AMontsouris-151-1-21-58.w82-123.abo.wanadoo.fr [82.123.18.58])
 	by imp.free.fr (IMP) with HTTP 
-	for <alain2210@212.27.42.70>; Tue, 18 Sep 2007 21:04:33 +0200
-Message-ID: <1190142273.46f021412957c@imp.free.fr>
-Date: Tue, 18 Sep 2007 21:04:33 +0200
+	for <alain2210@212.27.42.70>; Tue, 18 Sep 2007 23:34:19 +0200
+Message-ID: <1190151259.46f0445be87d7@imp.free.fr>
+Date: Tue, 18 Sep 2007 23:34:19 +0200
 From: Alain2210 <alain2210@free.fr>
 To: openembedded-devel@lists.openembedded.org,
 	Koen Kooi <k.kooi@student.utwente.nl>
@@ -41,13 +42,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2007 19:08:18 -0000
+X-List-Received-Date: Tue, 18 Sep 2007 21:38:06 -0000
 Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: quoted-printable
 
 Hello,
 
-
+> Same old, same old:
+>
 >
 /media/hda4/OE/build/tmp-new/angstrom/work/armv5te-angstrom-linux-uclibcg=
 nueabi/gcc-cross-4.2.1-r4/gcc-4.2.1/libgfortran/generated/_mod_i8.F90:
@@ -56,10 +58,21 @@ nueabi/gcc-cross-4.2.1-r4/gcc-4.2.1/libgfortran/generated/_mod_i8.F90:
 /media/hda4/OE/build/tmp-new/angstrom/work/armv5te-angstrom-linux-uclibcg=
 nueabi/gcc-cross-4.2.1-r4/gcc-4.2.1/libgfortran/generated/_mod_i8.F90:42:
 > internal compiler error: Segmentation fault
+> Please submit a full bug report,
+> with preprocessed source if appropriate.
+> See <URL:http://gcc.gnu.org/bugs.html> for instructions.
 
-Yes, I get exactly the same error. Now I compile the 4.2.1. So I have too=
- wait
-to see if it works.
+So gcc-cross_4.2.1 with this patch
+http://gcc.gnu.org/ml/gcc-patches/2007-05/msg01010.html
+is compiling.... (but I get a probleme in staging).
+
+So I wonder if I can patch also the 4.1.2 or if I have to rebuild all my =
+oe
+tree....
+
+By the way, the angstrom distribution and the openembedded tree are very =
+usefull
+and in a state that allow to make a quite stable image for my h2200.
 
 Thanks,
 
