@@ -1,34 +1,28 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IXuXe-00043i-RK
-	for openembedded-devel@openembedded.org; Wed, 19 Sep 2007 10:04:16 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1IXv7w-0000QS-SP
+	for openembedded-devel@openembedded.org; Wed, 19 Sep 2007 10:41:45 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8J80Q0b025056
-	for <openembedded-devel@openembedded.org>;
-	Wed, 19 Sep 2007 09:00:26 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8J8bneM026432;
+	Wed, 19 Sep 2007 09:37:49 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 24936-04 for <openembedded-devel@openembedded.org>;
-	Wed, 19 Sep 2007 09:00:18 +0100 (BST)
+	id 26085-09; Wed, 19 Sep 2007 09:37:44 +0100 (BST)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8J80Hwu025039
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 19 Sep 2007 09:00:17 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8J8bgD4026424
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Wed, 19 Sep 2007 09:37:42 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <46F097AD.3030103@student.utwente.nl>
-References: <46F0077F.3050807@student.utwente.nl>
-	<1190158491.6159.93.camel@localhost.localdomain>
-	<46F097AD.3030103@student.utwente.nl>
-Date: Wed, 19 Sep 2007 09:00:17 +0100
-Message-Id: <1190188817.5670.7.camel@localhost.localdomain>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Wed, 19 Sep 2007 09:37:41 +0100
+Message-Id: <1190191062.7630.17.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Revisiting bitbake stamp handling
+Cc: Ross Burton <ross@openedhand.com>
+Subject: cross and staging directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,38 +36,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Sep 2007 08:04:17 -0000
+X-List-Received-Date: Wed, 19 Sep 2007 08:41:45 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2007-09-19 at 05:29 +0200, Koen Kooi wrote:
-> > Say you're using rm_work and want to rebuild strace for the image. You
-> > run "bitbake strace -c compile -f". A subsequent "bitbake someimage"
-> > will not cause strace to install/package/stage or get included in the
-> > image. Broken and one of the things you wanted to fix!
-> 
-> Actually, that would work, since -c compile -f would update the do_compile stamp, so its
-> mtime is newer than the do_rootfs.
+I've been experimenting a bit in Poky to find out exactly why we need
+the cross directory.
 
-do_rootfs is stampless. 
+The motivation for this is the load of files we duplicate in both,
+particularly linux-libc-headers, headers from glibc-initial, glibc and
+glibc-intermediate and libs from glibc and glibc-intermediate.
 
-> > Say you want to trigger a reinstall of all packages like the recent
-> > pkgmaps change. How do you do it? In the case without rm_work you could
-> > touch all a dependent task like compile to trigger the install (ugly),
-> > or remove *every* install task stamp and *every* stamp which depends on
-> > install (near impossible). With rm_work, you're screwed basically.
-> 
-> Which highlights exactly why the current situation is broken. In this case the user has to
-> discover he needs to run install again (which a lot of them don't, looking at IRC and the
-> ml), so what's stopping us from adding an do_installall task that does exactly that? Or
-> even requiring a rebuild, since it needs the user to find out *and* the user to take action.
+If we only install glibc to staging, we could half the run time of
+populate_staging for glibc and glibc-intermediate which is a nice
+timesaver.
 
-I don't see how a communication issue is related to the need to add a
-do_installall task?
+Just not staging the files to cross gives some interesting errors.
+Whenever anything tries to link to glibc, you see errors about not being
+able to find crti.o and friends. The files are in STAGING_LIBDIR, gcc
+just refuses to see them. Poky also demonstrated you also occasionally
+see errors about missing header files despite the header files being in
+STAGING_INCDIR.
+
+Why does this happen? The compiler's default search directories are
+basically broken. Looking at the output from "arm-poky-linux-gnueabi-gcc
+-print-search-dirs":  
+
+install:
+
+/media/data1/builds/poky/eabi/tmp/cross/lib/gcc/arm-poky-linux-gnueabi/4.1.2/
+
+programs:
+
+/media/data1/builds/poky/eabi/tmp/cross/libexec/gcc/arm-poky-linux-gnueabi/4.1.2/
+/media/data1/builds/poky/eabi/tmp/cross/libexec/gcc/arm-poky-linux-gnueabi/4.1.2/
+/media/data1/builds/poky/eabi/tmp/cross/libexec/gcc/arm-poky-linux-gnueabi/
+/media/data1/builds/poky/eabi/tmp/cross/lib/gcc/arm-poky-linux-gnueabi/4.1.2/
+/media/data1/builds/poky/eabi/tmp/cross/lib/gcc/arm-poky-linux-gnueabi/
+/usr/libexec/gcc/arm-poky-linux-gnueabi/4.1.2/
+/usr/libexec/gcc/arm-poky-linux-gnueabi/
+/usr/lib/gcc/arm-poky-linux-gnueabi/4.1.2/
+/usr/lib/gcc/arm-poky-linux-gnueabi/
+/media/data1/builds/poky/eabi/tmp/cross/lib/gcc/arm-poky-linux-gnueabi/4.1.2/../../../../arm-poky-linux-gnueabi/bin/arm-poky-linux-gnueabi/4.1.2/
+/media/data1/builds/poky/eabi/tmp/cross/lib/gcc/arm-poky-linux-gnueabi/4.1.2/../../../../arm-poky-linux-gnueabi/bin/
+
+libraries:
+
+/media/data1/builds/poky/eabi/tmp/cross/lib/gcc/arm-poky-linux-gnueabi/4.1.2/
+/usr/lib/gcc/arm-poky-linux-gnueabi/4.1.2/
+/media/data1/builds/poky/eabi/tmp/cross/lib/gcc/arm-poky-linux-gnueabi/4.1.2/../../../../arm-poky-linux-gnueabi/lib/arm-poky-linux-gnueabi/4.1.2/
+/media/data1/builds/poky/eabi/tmp/cross/lib/gcc/arm-poky-linux-gnueabi/4.1.2/../../../../arm-poky-linux-gnueabi/lib/
+
+
+So by default it looks in cross for *everything* and has no knowledge of
+staging. I ended up reading the gcc source to see what options we have
+for injection staging paths into it.
+
+Since crti.o is an internal library, -L options don't cut it. The -B
+option does help but you can't use that whilst compiling gcc-cross.
+There are various environmental variables you can possibly use but we'd
+have to set several to make sure libs, includes and everything else gets
+fixed. It felt ugly and I doubt it will work for compiling gcc-cross.
+
+One gcc option which does show potential is the sysroot one. This
+happens to solve the libs problem straight off since it adds "/lib/" as
+well as "/usr/lib" prefixed by the sysroot and the former happens to
+match our staging layout by pure chance. The same trick won't work
+for /usr/include though. 
+
+The short term solution I've added to poky is to symlink staging from
+the cross directories. No need to install twice and the default compiler
+paths work. This solves my original objective of not installing things
+twice. Personally I don't think these symlinks should have to exist
+though.
+
+I am tempted to suggest we start passing the sysroot option to gcc to
+get libs working. A symlink from /usr/include to ../include would be a
+better cheat than the above symlinks and gets includes working too.
+
+Previous discussions on the subject of sysroot suggest it won't work for
+the 3.3 gcc series but we could use the symlink approach from cross to
+staging for that.
+
+Agreeing to the above doesn't mean we have to change staging layout but
+perhaps it is another indication we should consider it?
 
 Cheers,
 
 Richard
+
 
 
 
