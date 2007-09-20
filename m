@@ -1,24 +1,38 @@
-Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
+Received: from [212.27.42.27] (helo=smtp1-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philipp.zabel@gmail.com>) id 1IY2Cr-0003UH-S1
+	(envelope-from <alain2210@free.fr>) id 1IYID0-00011p-CZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Sep 2007 18:15:17 +0200
-Received: by fk-out-0910.google.com with SMTP id 18so245118fks
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Sep 2007 09:11:27 -0700 (PDT)
-Received: by 10.82.152.16 with SMTP id z16mr1175538bud.1190218287291;
-	Wed, 19 Sep 2007 09:11:27 -0700 (PDT)
-Received: by 10.82.119.6 with HTTP; Wed, 19 Sep 2007 09:11:27 -0700 (PDT)
-Message-ID: <74d0deb30709190911m1a74245fl47f594f615553d@mail.gmail.com>
-Date: Wed, 19 Sep 2007 18:11:27 +0200
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1190158491.6159.93.camel@localhost.localdomain>
+	Thu, 20 Sep 2007 11:20:30 +0200
+Received: from smtp1-g19.free.fr (localhost.localdomain [127.0.0.1])
+	by smtp1-g19.free.fr (Postfix) with ESMTP id E9A6B1AB2B1;
+	Thu, 20 Sep 2007 11:16:35 +0200 (CEST)
+Received: from imp8-g19.free.fr (imp8-g19.free.fr [212.27.42.39])
+	by smtp1-g19.free.fr (Postfix) with ESMTP id BA0061AB2EB;
+	Thu, 20 Sep 2007 11:16:35 +0200 (CEST)
+Received: by imp8-g19.free.fr (Postfix, from userid 33)
+	id 68307141DC; Thu, 20 Sep 2007 11:16:35 +0200 (CEST)
+Received: from AMontsouris-151-1-21-58.w82-123.abo.wanadoo.fr
+	(AMontsouris-151-1-21-58.w82-123.abo.wanadoo.fr [82.123.18.58])
+	by imp.free.fr (IMP) with HTTP 
+	for <alain2210@212.27.42.70>; Thu, 20 Sep 2007 11:16:35 +0200
+Message-ID: <1190279795.46f23a7336813@imp.free.fr>
+Date: Thu, 20 Sep 2007 11:16:35 +0200
+From: Alain2210 <alain2210@free.fr>
+To: openembedded-devel@lists.openembedded.org,
+	Koen Kooi <k.kooi@student.utwente.nl>
+References: <1190138099.46f010f33252b@imp.free.fr>
+	<46F01466.4080000@dominion.kabel.utwente.nl>
+	<46F01DC6.6000503@student.utwente.nl>
+	<1190151259.46f0445be87d7@imp.free.fr>
+	<1190192138.46f0e40ab7964@imp.free.fr>
+	<46F0F884.2040805@student.utwente.nl>
+	<46F103AA.2070205@student.utwente.nl>
+In-Reply-To: <46F103AA.2070205@student.utwente.nl>
 MIME-Version: 1.0
-References: <46F0077F.3050807@student.utwente.nl>
-	<1190158491.6159.93.camel@localhost.localdomain>
+User-Agent: Internet Messaging Program (IMP) 3.2.5
+X-Originating-IP: 82.123.18.58
 Cc: openembedded-devel@openembedded.org
-Subject: Re: Revisiting bitbake stamp handling
+Subject: Re: fortran and octave
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,110 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Sep 2007 16:15:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Sep 2007 09:20:31 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-On 9/19/07, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Tue, 2007-09-18 at 19:14 +0200, Koen Kooi wrote:
-> > For a number of features in OE (e.g packaged-staging, rm_work) a change to bitbake stamp
-> > handling would make things a lot easier. As I understand it bitbake currently does for
-> > 'bitbake foo -c compile':
+Hello,
+
+> > you need to have my second commit to get octave working on the device=
+,
+> because it wasn't
+> > getting packaged.
 > >
-> > if(dependency stamps are missing OR depency stamps have newer mtime) then start from scratch
-> >
-> > For rm_work we want to remove the do_unpack upto do_install stamps, but leave do_fetch and
-> > do_package_write* and for packaged-staging we want to only create a do_populate_staging
-> > stamps. So 'bitbake foo -c compile' would only do:
-> >
-> > if(depency stamps have newer mtime) then start from scratch
-> >
-> > this has implications for do_clean and do_rebuild, and possibly other things. Since this
-> > looks to good to be true, I want to know what else might break and how we could solve that
-> > when implementing this. This just a gedankenexperiment for now, so bitbake hackers can
-> > relax now :)
 >
-> When you type bitbake strace, bitbake splits this into queue of tasks.
-> This might be for example:
->
-> 1. strace.do_fetch
-> 2. strace.do_unpack
-> 3. strace.do_patch
-> 4. strace.do_configure
-> 5. strace.do_compile
-> 6. etc.
->
-> Say you "bitbake strace -c compile":
->
-> * Bitbake looks at step 1. Does it need to build it? If the stamp
->   doesn't exist, yes it does. If the stamp exists, it checks dependency
->   stamps (there are none).
->
-> * Bitbake looks at step 2. Does it need to build it? If the stamp
->   doesn't exist, yes it does. If the stamp exists, it checks dependency
->   stamps.
->
-> * etc.
->
-> The logic you propose above simply breaks this and its fundamental to
-> the way bitbake currently works.
->
-> I guess what you propose is bitbake does this backwards. Assuming you
-> "bitbake strace -c compile":
->
-> * Look at step 5. Does it need to build it? If the stamp exists, and
->   any present dependency stamps are valid and older [repeat for all
-> present stamps], no, else yes.
->
-> * No further processing
->
-> This needs two changes:
->
->   a) stamps are checked before we start processing the queue
->   b) stamps are checked on a global basis (cross PN)
->
-> both of which are fairly major changes.
+> 'it' being libgfortran of course, not octave.
 
-So is it worth it? Possible to do at all? It would enable us to have
-missing dependency stamps if that more accurately reflects the state
-of work/staging dirs.
-I certainly find the idea of walking down from the last step much more
-elegant than always starting at step 1. OTOH I have no idea how much
-work it would be to implement this and what other problems this might
-bring other than the examples you already gave.
+Thanks, now I can build and use octave. The 2.1.71 does not build.
 
-> The breakage:
->
-> Say you're using rm_work and want to rebuild strace for the image. You
-> run "bitbake strace -c compile -f". A subsequent "bitbake someimage"
-> will not cause strace to install/package/stage or get included in the
-> image. Broken and one of the things you wanted to fix!
+I have tried two versions : the latest stable one :
+2.1.73 (I have only duplicated the octave_2.1.71.bb to octave_2.1.73.bb)
+and the 2.9.14 (which is in the way of version 3). I have had some proble=
+me with
+install step
+of build 2.9.14.
 
-For stampless tasks like rootfs we should check the stamps of all its
-dependencies
-(task-something, depends on strace:do_package_write, which is not
-current if a newer do_compile stamp is found). I don't see the problem
-here.
+But on my h2200 the 2.9.14 is not usable. So the good version seems to be
+2.7.13.
 
-> Say you want to trigger a reinstall of all packages like the recent
-> pkgmaps change. How do you do it? In the case without rm_work you could
-> touch all a dependent task like compile to trigger the install (ugly),
-> or remove *every* install task stamp and *every* stamp which depends on
-> install (near impossible). With rm_work, you're screwed basically.
+Sincerely,
 
-That's right, with rm_work you're screwed either way, you have to rebuild.
-
-> So I really think this is the wrong tree to bark up...
-
-But I'm not sure using stamps not only as indicators of work/staging
-state, but also as a mechanism to manipulate bitbake behaviour is the
-right way either. Wouldn't it be better to have a bitbake option that
-just skips task whose dependencies are not met and do
-bitbake -cinstall -f world --no-task-dependencies to force a reinstall
-of all compiled packages?
-
-regards
-Philipp
+Alain
 
 
