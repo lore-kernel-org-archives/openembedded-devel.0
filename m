@@ -1,23 +1,30 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1IYhXS-00036n-Jo
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Sep 2007 14:23:19 +0200
-Received: from rosine65.inf.fu-berlin.de ([160.45.116.65])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1IYhTZ-0007Wc-9J
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Sep 2007 14:19:17 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <46EECDA8.167F241D@vollmann.ch>
-References: <46EECDA8.167F241D@vollmann.ch>
-Message-Id: <76671493-8747-4B67-A84E-E85E111215FD@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Fri, 21 Sep 2007 14:19:04 +0200
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-Subject: Re: calling python functions or mixing shell and python code
+	(envelope-from <mickey@vanille-media.de>)
+	id 1IYpp4-0001eG-FG; Fri, 21 Sep 2007 23:14:02 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 39C7628C015; Fri, 21 Sep 2007 23:05:58 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
+	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180176077.adsl.alicedsl.de [85.180.176.77])
+	by srv043.dedi23.de (Postfix) with ESMTP id 0B13028C014;
+	Fri, 21 Sep 2007 23:05:54 +0200 (CEST)
+Date: Fri, 21 Sep 2007 23:09:59 +0200
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.24) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1654594093.20070921230959@vanille-media.de>
+To: "koen commit" <openembedded-commits@lists.openembedded.org>
+In-Reply-To: <E1IYkyP-0001ls-Bs@linuxtogo.org>
+References: <E1IYkyP-0001ls-Bs@linuxtogo.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev linux-ezx: substitute 18bpp patch with RP's overlay patch and activate overlay for a780
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,50 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Sep 2007 12:23:20 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Fri, 21 Sep 2007 21:14:02 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
+koen commit wrote:
+> linux-ezx: substitute 18bpp patch with RP's overlay patch and activate overlay for a780
 
-Am 17.09.2007 um 20:55 schrieb Detlef Vollmann:
+Cool. While you're there, could you do a check-run whether we want to add
+more of Richard's patches for the ezx kernel?
 
-> Hello,
->
-> how can I mix shell and python code in the same task?
->
-> To be more concrete, here is what I tried:
-> python do_fetch_more () {
->     import bb
->
->     bb.data.setVar('SRC_URI', '${SRC_URI_BASEPACKS}', d)
->     base_do_fetch
-> }
-> addtask fetch_more before do_unpack after do_fetch
->
-> But this doesn't work.
->
-> Another approach was:
-> do_fetch_base () {
->     export SRC_URI=${SRC_URI_BASEPACKS}
->     base_do_fetch
-> }
->
-> But of course this also doesn't work...
->
-> Any help appreciated,
 
-Hi,
-as no one else answered I will try to do that. The common practice is  
-to add an intermediate python function that is calling the two other  
-functions.
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
-Using bb.build.exec_func and bb.build.exec_task you can call the  
-functions/tasks you want.
 
-I hope this helps.
 
-	z.
+Regards,
 
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
