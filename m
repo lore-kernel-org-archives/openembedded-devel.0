@@ -1,31 +1,23 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IYfAS-0002GX-4h
+	(envelope-from <zecke@selfish.org>) id 1IYhXS-00036n-Jo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Sep 2007 11:51:24 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 8A7F428C015; Fri, 21 Sep 2007 11:43:23 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180159024.adsl.alicedsl.de [85.180.159.24])
-	by srv043.dedi23.de (Postfix) with ESMTP id 8EACD28C014
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Sep 2007 11:43:20 +0200 (CEST)
-Date: Fri, 21 Sep 2007 11:47:19 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.24) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1922005569.20070921114719@vanille-media.de>
+	Fri, 21 Sep 2007 14:23:19 +0200
+Received: from rosine65.inf.fu-berlin.de ([160.45.116.65])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1IYhTZ-0007Wc-9J
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Sep 2007 14:19:17 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <46EECDA8.167F241D@vollmann.ch>
+References: <46EECDA8.167F241D@vollmann.ch>
+Message-Id: <76671493-8747-4B67-A84E-E85E111215FD@selfish.org>
+From: Holger Freyther <zecke@selfish.org>
+Date: Fri, 21 Sep 2007 14:19:04 +0200
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20070921094945.qnujhwduxwk0w4sc@www.bufferoverflow.ch>
-References: <20070921094945.qnujhwduxwk0w4sc@www.bufferoverflow.ch>
-MIME-Version: 1.0
-Subject: Re: u-boot 1.1.5 at91sam9260 with eabi patches
+X-Mailer: Apple Mail (2.752.3)
+Subject: Re: calling python functions or mixing shell and python code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,24 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Sep 2007 09:51:24 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 21 Sep 2007 12:23:20 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Roger,
 
-> I prepared the u-boot 1.1.5 at91sam9260 with eabi patches
-> for angstrom distribution.
+Am 17.09.2007 um 20:55 schrieb Detlef Vollmann:
 
-Excellent -- thanks for the notification.
+> Hello,
+>
+> how can I mix shell and python code in the same task?
+>
+> To be more concrete, here is what I tried:
+> python do_fetch_more () {
+>     import bb
+>
+>     bb.data.setVar('SRC_URI', '${SRC_URI_BASEPACKS}', d)
+>     base_do_fetch
+> }
+> addtask fetch_more before do_unpack after do_fetch
+>
+> But this doesn't work.
+>
+> Another approach was:
+> do_fetch_base () {
+>     export SRC_URI=${SRC_URI_BASEPACKS}
+>     base_do_fetch
+> }
+>
+> But of course this also doesn't work...
+>
+> Any help appreciated,
 
-Thanks also for the nice chat we had @ OpenExpo!
+Hi,
+as no one else answered I will try to do that. The common practice is  
+to add an intermediate python function that is calling the two other  
+functions.
 
-All the best,
+Using bb.build.exec_func and bb.build.exec_task you can call the  
+functions/tasks you want.
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+I hope this helps.
+
+	z.
+
 
 
 
