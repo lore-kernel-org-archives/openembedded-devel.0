@@ -1,29 +1,26 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1IYpp4-0001eG-FG; Fri, 21 Sep 2007 23:14:02 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 39C7628C015; Fri, 21 Sep 2007 23:05:58 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_DUL,RCVD_IN_PBL,RCVD_IN_SORBS_DUL,
-	REPTO_OVERQUOTE_THEBAT autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180176077.adsl.alicedsl.de [85.180.176.77])
-	by srv043.dedi23.de (Postfix) with ESMTP id 0B13028C014;
-	Fri, 21 Sep 2007 23:05:54 +0200 (CEST)
-Date: Fri, 21 Sep 2007 23:09:59 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.24) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1654594093.20070921230959@vanille-media.de>
-To: "koen commit" <openembedded-commits@lists.openembedded.org>
-In-Reply-To: <E1IYkyP-0001ls-Bs@linuxtogo.org>
-References: <E1IYkyP-0001ls-Bs@linuxtogo.org>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IYytJ-0007Ur-Uy
+	for openembedded-devel@openembedded.org; Sat, 22 Sep 2007 08:55:03 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l8M6ooYY003216; Sat, 22 Sep 2007 08:50:50 +0200
+Message-ID: <46F4BB50.4030105@student.utwente.nl>
+Date: Sat, 22 Sep 2007 08:50:56 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@openembedded.org,
+	"Dr. Mickey Lauer" <mickey@vanille-media.de>
+References: <E1IYkyP-0001ls-Bs@linuxtogo.org>
+	<1654594093.20070921230959@vanille-media.de>
+In-Reply-To: <1654594093.20070921230959@vanille-media.de>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: [oe-commits] org.oe.dev linux-ezx: substitute 18bpp patch with RP's overlay patch and activate overlay for a780
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,29 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Sep 2007 21:14:02 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 22 Sep 2007 06:55:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-koen commit wrote:
-> linux-ezx: substitute 18bpp patch with RP's overlay patch and activate overlay for a780
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Cool. While you're there, could you do a check-run whether we want to add
-more of Richard's patches for the ezx kernel?
+Dr. Michael Lauer schreef:
+> koen commit wrote:
+>> linux-ezx: substitute 18bpp patch with RP's overlay patch and activate overlay for a780
+> 
+> Cool. While you're there, could you do a check-run whether we want to add
+> more of Richard's patches for the ezx kernel?
 
+Sure, I'll look at it on sunday/monday.
 
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+regards,
 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+iD8DBQFG9LtQMkyGM64RGpERAm4uAKCXPdXghE0Rtv/sgA25B/rnTVnHqQCggF8a
+NSGbJdOW5nd1BT7kD5qnWbo=
+=PBtW
+-----END PGP SIGNATURE-----
 
 
