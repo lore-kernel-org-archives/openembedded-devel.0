@@ -1,21 +1,27 @@
-Received: from [66.249.82.225] (helo=wx-out-0506.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1IZPZB-0004HP-VL
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Sep 2007 13:24:02 +0200
-Received: by wx-out-0506.google.com with SMTP id h27so951923wxd
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Sep 2007 04:19:48 -0700 (PDT)
-Received: by 10.90.53.16 with SMTP id b16mr4528399aga.1190546388818;
-	Sun, 23 Sep 2007 04:19:48 -0700 (PDT)
-Received: by 10.90.66.15 with HTTP; Sun, 23 Sep 2007 04:19:48 -0700 (PDT)
-Message-ID: <c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>
-Date: Sun, 23 Sep 2007 13:19:48 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <46F587F7.4060501@balister.org>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1IZQih-0000r6-Nf
+	for openembedded-devel@openembedded.org; Sun, 23 Sep 2007 14:37:55 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l8NCXdYY021436 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Sep 2007 14:33:40 +0200
+Message-ID: <46F65D2D.5020507@dominion.kabel.utwente.nl>
+Date: Sun, 23 Sep 2007 14:33:49 +0200
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
 References: <46F587F7.4060501@balister.org>
+	<c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>
+In-Reply-To: <c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-SpamScore: s
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-Spam-Status: No
 Subject: Re: How should OE be used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,104 +36,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Sep 2007 11:24:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 23 Sep 2007 12:37:56 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Philip, all,
+Leon Woestenberg schreef:
 
-On 9/22/07, Philip Balister <philip@balister.org> wrote:
-> [...]
-> For now, I'd like to focus on working out how people use OE and what
-> issues they have. Once we understand what problems exist, if any, we can
-> discuss solutions.
->
+> - We do not use task-base approach, because it builds dependencies we
+> did not have before (a dependency regression).
 
-
-I became an OE user when I found that OE automated a lot more than
-buildroot when I started adding packages. After that experience I
-decided to use OE at work.
-
-At work we create firmware, which is read-only embedded software which
-the user cannot install to, or modify in any way (other than
-overwrite) for 24/7 99.999% availability applications. Also, no build
-dependency on target availability during build: No on-target
-post-install scripts, the final image must be fully host-created. That
-means, having full control of what happens, minimal cruft. Must build
-on a multiple of (modern) Linux hosts distro's.
-
-Bottom-line: paranoid control freak approach
-
-I am the OE evangelist, that is, had to persuade to have my co-workers
-see the benefits of using OE. That worked best when I showed them how
-I could solve a problem more quickly than they could with buildroot,
-or LFS. The problem often remains the steep learning curve, i.e.
-people do often have some Makefile/autoconf experience but not
-necessarely python/bitbake.
-
-Bottom line: Show when OE works when the 'problem solving' leverage is highest.
-
-How do we use OpenEmbedded:
-
-- We cannot afford to follow the org.oe.dev. head developments. The
-head is where fixes get fixed. Takes too much time away from the
-developers.
-- We cannot afford to follow head, but fix package versions. The OE
-framework (bitbake, variables, behaviour) changes too much.
-- We pick a fixed OE revision and stick with it during a project
-(could be 2 years).
-- I try to track OE head on several targets, to stay up-to-date when I
-need to start a new project.
-- Some of the packages have too much build and/or run-time
-dependencies. Yes, both.
-- We create a private overlay of minimal-configured packages and
-discard redundant dependencies, we keep it in CVS (yes, I know...)
-- We add our custom packages to our private overlay.
-- I bring some new packages or fixes upstream, only for head.
-- We do not use task-base approach, because it builds dependencies we
-did not have before (a dependency regression).
-- We have to keep good track of bitbake version, OE revision, private
-overlay revision and host distro version, and know-good-combos'. We
-need to be able fix a bug in the firmware in three years without any
-regression. Virtual machines help.
-
-Bottom line:
-
-- OpenEmbedded works perfectly for our use, if we take very much care
-in the way we use it. We might not do things the OE-way, simply we may
-lack in-depth knowledge, or exposure to it.
-
-Issues:
-- Dependencies. The standard OE config seems targetted towards small
-(handheld) computing devices, not necessarely with embedded software.
-Everything with an installer is non-embedded software, IMHO.
-
--> I would like to see a OE group focus on minimal dependency distro.
-I would join such a group, but cannot do that alone.
-
-- Angstrom seems the de-facto distro OE is tested against, at least
-upstream. Angstrom is excellent, but testing OE against Angstrom only
-drives OE away from the embedded domain IMHO.
-
--> Unbitrot (Refresh) a distro other than Angstrom, preferably a more
-minimal one.
-
-- Documentation.
--> It's there, but you have to know what you are looking for. Most
-people don't know, or don't look.
-
-- I have yet to see a developer walk in with OE experience. Buildroot
-knowledge is a big plus though.
+Task-base is a 'works great for 95% of the users' kind of thing. It wasn't intended to be
+the absolute minimum, which is why we have task-boot now and still need more tasks with
+that purpose. Task-base will give you a starting point that is known to work (if not, file
+bugs :)) from where you can slim it down or fatten it up. However, if you have 8mb or less
+flash, you need something (vastly) different.
 
 
-The best thing I would envision (and I would propose as a OE vision),
-is that OE would be funded by the semiconductor and board
-manufacturers to support their silicon and boards,
-so that in 3 years, everyone of them could mention "Enabled by OpenEmbedded".
+> -> I would like to see a OE group focus on minimal dependency distro.
+> I would join such a group, but cannot do that alone.
 
-My two cents,
+You mean a minimal dependency image, a distro only sets policy, and angstrom has been
+*extremely* carefull to not impose size decicions.
 
-Leon.
+ > - Angstrom seems the de-facto distro OE is tested against, at least
+> upstream. Angstrom is excellent, but testing OE against Angstrom only
+> drives OE away from the embedded domain IMHO.
+
+It does not drive it away from the embedded domain, but it does make OE seem like a
+monoculture. But that is not angstrom's or OE's fault. I think that's because it's pretty
+much the only distro (not counting angstrom derivates like openmoko) that has active
+developers *AND* is developed in .dev. If we need to checkout some svn/cvs/hg/git tree to
+get your OE-based distro, you have already lost.
+
+> -> Unbitrot (Refresh) a distro other than Angstrom, preferably a more
+> minimal one.
+
+Again, you mean images. I have an angstrom image in use that is below 900kB (jffs2) with
+no postinsts and the only write action it 'needs' is the dropbear key, which can be
+skipped if you really want that.
+I and others are currently waiting for the nslu2 people to make up their mind about using
+angstrom or not before we are going to work on proper embedded images and configurations
+(e.g. a slimmer task-base / fatter task-boot, using busybox init and login, superstrip,
+etc) for angstrom.
+
+
+> - Documentation.
+> -> It's there, but you have to know what you are looking for. Most
+> people don't know, or don't look.
+
+The canonical place is the OE usermanual, which is on the website and edited in mtn from
+the org.openembedded.documentation branch.
+
+regards,
+
+Koen
+
 
 
