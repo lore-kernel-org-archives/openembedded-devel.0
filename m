@@ -1,20 +1,28 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [62.70.27.18] (helo=esparsett.troll.no)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philip@balister.org>) id 1IZtf0-0005dZ-NJ
-	for openembedded-devel@openembedded.org; Mon, 24 Sep 2007 21:32:02 +0200
-Received: (qmail 4652 invoked by uid 1003); 24 Sep 2007 19:27:41 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 24 Sep 2007 19:27:41 -0000
-Message-ID: <46F80FAC.2030204@balister.org>
-Date: Mon, 24 Sep 2007 15:27:40 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.5 (X11/20070727)
+	(envelope-from <lpotter@trolltech.com>) id 1IZtqA-0005pK-Lu
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Sep 2007 21:43:36 +0200
+Received: from esparsett.troll.no (localhost [127.0.0.1])
+	by localhost (Postfix) with SMTP
+	id 3FF587422C; Mon, 24 Sep 2007 21:39:14 +0200 (CEST)
+Received: from mail.trolltech.com.au (unknown [10.1.1.12])
+	by esparsett.troll.no (Postfix) with ESMTP
+	id CDA557418A; Mon, 24 Sep 2007 21:39:13 +0200 (CEST)
+Received: from [172.18.1.4] (unknown [172.18.1.4])
+	by mail.trolltech.com.au (Postfix) with ESMTP id 980CB37BA38;
+	Tue, 25 Sep 2007 05:39:11 +1000 (EST)
+Message-ID: <46F8125E.5060200@trolltech.com>
+Date: Tue, 25 Sep 2007 05:39:10 +1000
+From: Lorn Potter <lpotter@trolltech.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.2) Gecko/20070221 SeaMonkey/1.1.1
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <46F587F7.4060501@balister.org>
-	<44EBF4F5-87CD-45B4-B24F-09BEDB948197@gumstix.com>
-In-Reply-To: <44EBF4F5-87CD-45B4-B24F-09BEDB948197@gumstix.com>
+To: openembedded-devel@lists.openembedded.org
+References: <46F587F7.4060501@balister.org> <46F80688.2020702@trolltech.com>
+	<70B54FE7-41C6-4C21-AB2D-073399350E5A@gumstix.com>
+In-Reply-To: <70B54FE7-41C6-4C21-AB2D-073399350E5A@gumstix.com>
+Cc: openembedded-devel@openembedded.org
 Subject: Re: How should OE be used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,96 +37,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2007 19:32:03 -0000
-X-Groupsio-MsgNum: 2989
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040104040500040905030308"
-
---------------ms040104040500040905030308
+X-List-Received-Date: Mon, 24 Sep 2007 19:43:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
+
+
 Craig Hughes wrote:
->>  * Create jobs for OE devs (that want them)
+> On Sep 24, 2007, at 11:48 AM, Lorn Potter wrote:
 > 
-> Yeah, good luck with that :)  We're a poor, low-margin hardware  
-> company ;P  I wish we paid *ourselves*....
+>> I have always thought that oe needed an easier way to choose packages,
+>> like buildroot.
+>>
+>> Some gui that can edit all the conf's and task's, and image.bb's
+>> painlessly and easily would make a tom of difference.
+>> The learning curve for oe is too high.
+>>
+>> Take buildroot, for example. A person can download it, run make
+>> menuconfig, set up the system, arch, and select packages, all in  
+>> one go.
+>> You do not need to know that you should have to either edit or create
+>> your own tasks, or image .bb's, much less the syntax for those files.
+> 
+> You're kind of comparing apples to tangerines though.  
 
-Hopefully, we can get paid by your customers to do things that cause 
-them to buy more gumstix ....
+not really,.
 
-I have the netwifimicroSD board right? We have a couple of days for 
-hacking around scheduled for OEDEM, I'm going to try and get support for 
-the entire system in OE that weekend. Unless we take of and drink beer :)
+> In buildroot,  
+> yes, for packages which already exist (and work properly -- there's  
+> much dead wood in buildroot) you can select them to be compiled using  
+> a menuconfig/xconfig thing.  But in OE, you could just download and  
+> install the .ipkg instead, which is a lot cleaner.  
 
-If I can this thesis off my back, I will try and get this hw in the 
-trial run of the Maniac challenge in late October.
+Not necessarily. Where's the ipkg for a custom device that hasn't been 
+built yet?
 
-Philip
 
---------------ms040104040500040905030308
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+> Buildroot is  
+> missing 90% of the packages which are in OE, and for those, in  
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
-OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
-65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
-X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
-tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
-szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
-nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
-U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
-ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
-HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
-dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
-RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
-rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
-6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
-Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MDkyNDE5
-Mjc0MFowIwYJKoZIhvcNAQkEMRYEFLpBCS03UvmOASRVVad+vY7hZEazMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
-qTANBgkqhkiG9w0BAQEFAASCAQBxHs7Fl+J3pZ2mE8CbMkPEc61b7B3LKSbW201d/6/bt1qxKjR3
-IBQVPnHCCx1UClRd1lmRM6FhdnjSaJ5FK9PqySYCxZK2zHNaAskMruNpk1FrhnSzC8rj4x/WdXF/
-p3AhQdYeStDoDY9TqNgTaZmBVNXicLVnzqS1n8aSLt3BJv1I8JHLQSLNGNMHcGDErU5ncKmAY36E
-2nfAjAeqqTF/ZdMYUBWebx8LYbnbG5YC2wrvFeEO0EQXYT+XqetjjQ+WMlBwJtB6tEJMQ5o4xFuN
-9FPjWVtn7xzFinzSwkLl/I6kqaRol/jRx+OpeKTMGjOpYimuI/vUTQn/L9giWlmBAAAAAAAA
+Most people are not going to want to build 90% of the packages in oe, 
+especially for embedded/small devices.
+We have a custom build script for the greenphone that builds the 
+toolchain, uses those libs/binutils for the system, then 
+downloads/builds 24 packages. at _most_.
 
---------------ms040104040500040905030308--
+
+> buildroot, you'd have to write your own package/*.mk, as well as  
+> figure out what patches you need to implement to get the package to  
+> cross-compile, etc.  And you definitely need to learn the ins and  
+> outs of how buildroot does things internally to implement one of  
+> those *.mk files correctly.
+
+Makefile format is more widely known than the format and syntax used in OE.
+
+> 
+> But your basic premise of select-packages-to-go-into-image using some  
+> kind of UI thing does make sense.  I just don't think it's as bad in  
+> OE as you think, nor as good in buildroot ;)
+
+
+-- 
+Lorn 'ljp' Potter
+Software Engineer, Systems Group, MES, Trolltech
+
+
