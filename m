@@ -1,27 +1,32 @@
-Received: from [62.70.27.18] (helo=esparsett.troll.no)
+Received: from [74.93.1.97] (helo=azazel.hughes-family.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lpotter@trolltech.com>) id 1IZtqA-0005pK-Lu
+	(envelope-from <craig@gumstix.com>) id 1IZuh4-0002YA-0Y
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Sep 2007 21:43:36 +0200
-Received: from esparsett.troll.no (localhost [127.0.0.1])
-	by localhost (Postfix) with SMTP
-	id 3FF587422C; Mon, 24 Sep 2007 21:39:14 +0200 (CEST)
-Received: from mail.trolltech.com.au (unknown [10.1.1.12])
-	by esparsett.troll.no (Postfix) with ESMTP
-	id CDA557418A; Mon, 24 Sep 2007 21:39:13 +0200 (CEST)
-Received: from [172.18.1.4] (unknown [172.18.1.4])
-	by mail.trolltech.com.au (Postfix) with ESMTP id 980CB37BA38;
-	Tue, 25 Sep 2007 05:39:11 +1000 (EST)
-Message-ID: <46F8125E.5060200@trolltech.com>
-Date: Tue, 25 Sep 2007 05:39:10 +1000
-From: Lorn Potter <lpotter@trolltech.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.2) Gecko/20070221 SeaMonkey/1.1.1
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Mon, 24 Sep 2007 22:38:14 +0200
+Received: from [10.8.22.2] (adsl-76-246-147-241.dsl.pltn13.sbcglobal.net
+	[76.246.147.241])
+	by azazel.hughes-family.org (Postfix) with ESMTP id 6BB3A9D4B4;
+	Mon, 24 Sep 2007 13:33:52 -0700 (PDT)
+X-Habeas-Swe-9: mark in spam to <http://www.habeas.com/report/>.
+X-Habeas-Swe-6: email in exchange for a license for this Habeas
+X-Habeas-Swe-3: like Habeas SWE (tm)
+Date: Mon, 24 Sep 2007 13:33:53 -0700
+X-Habeas-Swe-8: Message (HCM) and not spam. Please report use of this
+From: Craig Hughes <craig@gumstix.com>
+X-Habeas-Swe-5: Sender Warranted Email (SWE) (tm). The sender of this
+X-Habeas-Swe-2: brightly anticipated
+In-Reply-To: <46F8125E.5060200@trolltech.com>
 References: <46F587F7.4060501@balister.org> <46F80688.2020702@trolltech.com>
 	<70B54FE7-41C6-4C21-AB2D-073399350E5A@gumstix.com>
-In-Reply-To: <70B54FE7-41C6-4C21-AB2D-073399350E5A@gumstix.com>
+	<46F8125E.5060200@trolltech.com>
+To: openembedded-devel@lists.openembedded.org
+X-Image-Url: http://www.hughes-family.org/craig/craig64.jpg
+X-Habeas-Swe-7: warrant mark warrants that this is a Habeas Compliant
+Mime-Version: 1.0 (Apple Message framework v752.3)
+X-Habeas-Swe-4: Copyright 2002 Habeas (tm) 
+X-Habeas-Swe-1: winter into spring
+Message-Id: <90CFEDB6-2F25-43EF-9842-C47633F140FA@gumstix.com>
+X-Mailer: Apple Mail (2.752.3)
 Cc: openembedded-devel@openembedded.org
 Subject: Re: How should OE be used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -37,68 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2007 19:43:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 24 Sep 2007 20:38:14 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
+On Sep 24, 2007, at 12:39 PM, Lorn Potter wrote:
 
+> Not necessarily. Where's the ipkg for a custom device that hasn't been
+> built yet?
 
-Craig Hughes wrote:
-> On Sep 24, 2007, at 11:48 AM, Lorn Potter wrote:
-> 
->> I have always thought that oe needed an easier way to choose packages,
->> like buildroot.
->>
->> Some gui that can edit all the conf's and task's, and image.bb's
->> painlessly and easily would make a tom of difference.
->> The learning curve for oe is too high.
->>
->> Take buildroot, for example. A person can download it, run make
->> menuconfig, set up the system, arch, and select packages, all in  
->> one go.
->> You do not need to know that you should have to either edit or create
->> your own tasks, or image .bb's, much less the syntax for those files.
-> 
-> You're kind of comparing apples to tangerines though.  
+> Most people are not going to want to build 90% of the packages in oe,
+> especially for embedded/small devices.
 
-not really,.
+> Makefile format is more widely known than the format and syntax  
+> used in OE.
 
-> In buildroot,  
-> yes, for packages which already exist (and work properly -- there's  
-> much dead wood in buildroot) you can select them to be compiled using  
-> a menuconfig/xconfig thing.  But in OE, you could just download and  
-> install the .ipkg instead, which is a lot cleaner.  
+All good points.
 
-Not necessarily. Where's the ipkg for a custom device that hasn't been 
-built yet?
-
-
-> Buildroot is  
-> missing 90% of the packages which are in OE, and for those, in  
-
-Most people are not going to want to build 90% of the packages in oe, 
-especially for embedded/small devices.
-We have a custom build script for the greenphone that builds the 
-toolchain, uses those libs/binutils for the system, then 
-downloads/builds 24 packages. at _most_.
-
-
-> buildroot, you'd have to write your own package/*.mk, as well as  
-> figure out what patches you need to implement to get the package to  
-> cross-compile, etc.  And you definitely need to learn the ins and  
-> outs of how buildroot does things internally to implement one of  
-> those *.mk files correctly.
-
-Makefile format is more widely known than the format and syntax used in OE.
-
-> 
-> But your basic premise of select-packages-to-go-into-image using some  
-> kind of UI thing does make sense.  I just don't think it's as bad in  
-> OE as you think, nor as good in buildroot ;)
-
-
--- 
-Lorn 'ljp' Potter
-Software Engineer, Systems Group, MES, Trolltech
+C
 
 
