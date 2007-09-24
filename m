@@ -1,19 +1,52 @@
-Received: from [64.251.82.10] (helo=mail.tranzeo.com)
+Received: from [65.55.251.16] (helo=outbound9-blu-R.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <DWatkins@tranzeo.com>) id 1IZpJN-0005oT-Of
-	for openembedded-devel@openembedded.org; Mon, 24 Sep 2007 16:53:26 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <Tim.Bird@am.sony.com>) id 1IZqRu-0002Me-ML
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Sep 2007 18:06:18 +0200
+Received: from outbound9-blu.bigfish.com (localhost.localdomain [127.0.0.1])
+	by outbound9-blu-R.bigfish.com (Postfix) with ESMTP id 377B912F0EFD;
+	Mon, 24 Sep 2007 15:55:47 +0000 (UTC)
+Received: from mail50-blu-R.bigfish.com (unknown [10.1.252.3])
+	by outbound9-blu.bigfish.com (Postfix) with ESMTP id 129CB1B90060;
+	Mon, 24 Sep 2007 15:55:47 +0000 (UTC)
+Received: from mail50-blu (localhost.localdomain [127.0.0.1])
+	by mail50-blu-R.bigfish.com (Postfix) with ESMTP id B55067B8126;
+	Mon, 24 Sep 2007 15:55:46 +0000 (UTC)
+X-BigFish: VP
+X-MS-Exchange-Organization-Antispam-Report: OrigIP: 160.33.66.75;Service: EHS
+Received: by mail50-blu (MessageSwitch) id 1190649346589261_9092;
+	Mon, 24 Sep 2007 15:55:46 +0000 (UCT)
+Received: from mail8.fw-sd.sony.com (mail8.fw-sd.sony.com [160.33.66.75])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail50-blu.bigfish.com (Postfix) with ESMTP id 386271010068;
+	Mon, 24 Sep 2007 15:55:46 +0000 (UTC)
+Received: from mail1.sgo.in.sel.sony.com (mail1.sgo.in.sel.sony.com
+	[43.130.1.111])
+	by mail8.fw-sd.sony.com (8.12.11/8.12.11) with ESMTP id l8OFtiFx019314; 
+	Mon, 24 Sep 2007 15:55:44 GMT
+Received: from USSDIXIM01.am.sony.com (ussdixim01.am.sony.com [43.130.140.33])
+	by mail1.sgo.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
+	l8OFti8N007337; Mon, 24 Sep 2007 15:55:44 GMT
+Received: from ussdixms03.am.sony.com ([43.130.140.23]) by
+	USSDIXIM01.am.sony.com with Microsoft SMTPSVC(5.0.2195.6713); 
+	Mon, 24 Sep 2007 08:55:44 -0700
+Received: from [43.135.148.58] ([43.135.148.58]) by ussdixms03.am.sony.com
+	with Microsoft SMTPSVC(5.0.2195.6713); 
+	Mon, 24 Sep 2007 08:55:43 -0700
+Message-ID: <46F7DDF7.8060804@am.sony.com>
+Date: Mon, 24 Sep 2007 08:55:35 -0700
+From: Tim Bird <tim.bird@am.sony.com>
+User-Agent: Thunderbird 1.5.0.4 (X11/20060614)
 MIME-Version: 1.0
-Date: Mon, 24 Sep 2007 07:48:54 -0700
-Message-ID: <D61182AC8012EA4EBC531B3AF23BE1093F1639@tranzeo-mail2.12stewart.tranzeo.com>
-In-Reply-To: <46F587F7.4060501@balister.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] How should OE be used?
-Thread-Index: Acf9YVJsWHrZJvR1Qmi0D23oAd9PcQBTGxIg
+To: Leon Woestenberg <leonw@mailcan.com>
 References: <46F587F7.4060501@balister.org>
-From: "Darcy Watkins" <DWatkins@tranzeo.com>
-To: <openembedded-devel@openembedded.org>
+	<c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>
+In-Reply-To: <c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>
+X-Enigmail-Version: 0.94.0.0
+X-OriginalArrivalTime: 24 Sep 2007 15:55:43.0900 (UTC)
+	FILETIME=[5D323DC0:01C7FEC3]
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: How should OE be used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -28,151 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2007 14:53:26 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 24 Sep 2007 16:06:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
->How do people use OE?
->
->  * Basic install image and user adds packages
->  * Install image that user does not change, part of a "product"
+Leon Woestenberg wrote:
+> I became an OE user when I found that OE automated a lot more than
+> buildroot when I started adding packages. After that experience I
+> decided to use OE at work.
+...
 
-A colleague of mine at a different site took an April snapshot of OE and
-used this as the basis of a toolchain and linux distro for an embedded
-product.  They use the snapshot and have placed it into their own
-version control system.  This approach, although it gives them control
-and stability, obviously isolates them from the upstream.
+Leon,
 
-I tried using OE, but could not get it to complete a build for PowerPC
-405 (neither uclibc or glibc - both failed but in different ways.
-Uclibc gets cross compiler badness errors - I think it is part of this
-powerpc vs ppc stuff in Linux).  After days of frustration, I had to
-bail out and use buildroot for this particular project instead.
-Obviously OE has lots of ARM and x86 users, but the PPC support falls
-behind because it isn't as popular.  I'll check back for a later
-project.
+I found the description of your experiences with OpenEmbedded
+and your list of issues to be very valuable.
 
-Nevertheless, our approach is:
-  - Need the host system to build the entire romable image
-  - Target does NOT support any form of package install scheme
-  - Upgrade is whole image rather than individual packages
-  - Config NV database is stored separate from the firmware image
-    (so that it doesn't get lost during upgrades)
-  - We do allow some flash to have a jffs2 filesystem for data
-    files and log storage as needed (not part of upgrade scheme).
+I have added your message text to the elinux wiki at:
+http://elinux.org/Open_Embedded
 
->Why is it important work effectively with third party developers
->
->  * Enhance projects (both OE and third parties)
->  * Create jobs for OE devs (that want them)
->  * Reduce friction
->  * Eliminate FUD
+I hope this is OK with you. Please let me know if there is any
+problem with this.
 
-I agree with the suggestion that corporate sponsored development should
-primarily be driven by vendors (i.e. mainly the CPU vendors and board
-vendors).  This especially applies to chip families that don't enjoy as
-wide a manufacturing base as ARM (e.g. Coldfire, PPC, AVR32).
+ -- Tim
 
-I'd like to see a minimalist distro as an alternate to Angstrom, one
-that has an objective to cleanly build for all supported chip families.
-I think it is easier to get someone in my position to fix a port for an
-add on package for my favorite CPU if I have a working basic system to
-start with, but if I can't even build a basic system within a typical
-evaluation timeframe, then I have no choice but to move on (in my case,
-for the project at hand, I moved on to buildroot - but to be fair,
-buildroot couldn't build its own linux kernel for PPC405 out of the box
-either, even though I was able to get it to build the Linux / Xenomai
-combo from DENX source RPMs).
-
-I hope my frustrations and "giving up for now" is construed more as a
-suggestion and challenge for the OE project team rather than as FUD.
-:-)
-
-Ultimately, once I get past the first hurdles, I'd like to have a distro
-a bit more than minimalist, basically what it would take to implement
-secure appliances and network infrastructure.
-  - Real time enhanced kernel
-  - SSL, SSH, login authentication better than the basic in busybox
-  - HTTPS, PHP5 and Python capable web server (e.g. appWeb)
-  - Client and server support for certificates
-  - Drivers for WiFi and WiMax
-
-I have no need for graphics or any of that GUI jazz stuff (because I am
-interested in infrastructure boxes not handheld devices), but I do see
-need for some elements of web 2.0 technology, templates support and
-internationalization / localization support (which is why I consider
-PHP, python and SQLite support as important).
-
-
->Basic issues for third party users of OE to build systems:
->
->  * What is OE? A distribution, or a distribution creation tool?
->  * Need to build product with a stable base.
->  * A way to keep proprietary content separate from OE.
->  * How do software developers use OE to write/debug code?
->  * What is the right way to support hardware?
-
-I see two opportunities here.
-1.  OE could be a toolchain / distro maintenance tool for our products.
-2.  We could sell the HW for our products to OEMs in which case, OE
-could be the basis of what we would want to provide to our customers.
-(At this point, we would come under the category of a board vendor).
-
-Proprietary content appears to be a fact of life, especially when it
-comes to software defined radio.  If you choose to have OE support
-proprietary content, it becomes important to point out such dependencies
-to the user while picking and choosing packages rather than having the
-build fail because an attempt to retrieve a tarball gets an
-access-denied.  OE could provide a framework or even just a
-philosophical approach to handle proprietary add-ons - but leave the
-implementation to the vendors who will profit from them.
-
-I see proprietary add-ons mainly being in the area of support for
-specific types of hardware.  In an almost ideal world, we would see
-proprietary add on drivers being temporary from the point a vendor
-introduces a new device until the time they feel that it is safe to
-release the driver code as FOSS (i.e. once the market edge has been
-realized and they don't fear that it would give instant gratification to
-a competitor).  Wireless hardware support is an area where you could see
-lots of this happening.
-
-
->Issues for OE developers:
->
->  * Third parties need to feed bug fixes and new work into .dev.
->  * How to not overwhelm OE devs with support requests.
->  * How does OE scale to large numbers of users?
-
-Perhaps the project needs to be partitioned into sub-projects for:
-  - toolchain and framework
-  - minimalistic systems for all supported platforms
-  - distributions (each one a project in its own right)
-  - some major areas of related packages (e.g. graphics/GUI, wireless,
-    security, etc) likely to be included all-or-none in a distro.
-
-Also, from the point of view of someone who may want to market products
-based on an OE toolchain and distro, it is not acceptable to have OE be
-broken.  There needs to be a QA process that focuses the project into a
-development phase, then a fix and cleanup phase, then a release and
-maintenance phase.  There would need to be multiple branches (e.g.
-org.oe.dev, org.oe.beta.v3, org.oe.stable.v2, org.oe.stable.v1).
-
-Someone should be able to lock into a stable branch with some sort of
-expectation that it will work (at least as documented - i.e. cases of
-known issues to be fixed only in a next version is a fact of life).
-They also need to be able to trust that updates to the stable branches
-will be according to a conservative maintenance policy.  Otherwise they
-will just implement their own branch (which could be an approach in
-itself if the OE project chooses to be concerned only with development
-and leave QA / maintenance as a value-add service for downstream vendors
-to provide and even charge for).
-
-
-Regards,
-
-Darcy
+=============================
+Tim Bird
+Architecture Group Chair, CE Linux Forum
+Senior Staff Engineer, Sony Corporation of America
+=============================
 
 
 
