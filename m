@@ -1,52 +1,21 @@
-Received: from [65.55.251.16] (helo=outbound9-blu-R.bigfish.com)
+Received: from [64.233.162.237] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <Tim.Bird@am.sony.com>) id 1IZqRu-0002Me-ML
+	(envelope-from <cliff.brake@gmail.com>) id 1IZqeK-0002fd-MC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Sep 2007 18:06:18 +0200
-Received: from outbound9-blu.bigfish.com (localhost.localdomain [127.0.0.1])
-	by outbound9-blu-R.bigfish.com (Postfix) with ESMTP id 377B912F0EFD;
-	Mon, 24 Sep 2007 15:55:47 +0000 (UTC)
-Received: from mail50-blu-R.bigfish.com (unknown [10.1.252.3])
-	by outbound9-blu.bigfish.com (Postfix) with ESMTP id 129CB1B90060;
-	Mon, 24 Sep 2007 15:55:47 +0000 (UTC)
-Received: from mail50-blu (localhost.localdomain [127.0.0.1])
-	by mail50-blu-R.bigfish.com (Postfix) with ESMTP id B55067B8126;
-	Mon, 24 Sep 2007 15:55:46 +0000 (UTC)
-X-BigFish: VP
-X-MS-Exchange-Organization-Antispam-Report: OrigIP: 160.33.66.75;Service: EHS
-Received: by mail50-blu (MessageSwitch) id 1190649346589261_9092;
-	Mon, 24 Sep 2007 15:55:46 +0000 (UCT)
-Received: from mail8.fw-sd.sony.com (mail8.fw-sd.sony.com [160.33.66.75])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail50-blu.bigfish.com (Postfix) with ESMTP id 386271010068;
-	Mon, 24 Sep 2007 15:55:46 +0000 (UTC)
-Received: from mail1.sgo.in.sel.sony.com (mail1.sgo.in.sel.sony.com
-	[43.130.1.111])
-	by mail8.fw-sd.sony.com (8.12.11/8.12.11) with ESMTP id l8OFtiFx019314; 
-	Mon, 24 Sep 2007 15:55:44 GMT
-Received: from USSDIXIM01.am.sony.com (ussdixim01.am.sony.com [43.130.140.33])
-	by mail1.sgo.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
-	l8OFti8N007337; Mon, 24 Sep 2007 15:55:44 GMT
-Received: from ussdixms03.am.sony.com ([43.130.140.23]) by
-	USSDIXIM01.am.sony.com with Microsoft SMTPSVC(5.0.2195.6713); 
-	Mon, 24 Sep 2007 08:55:44 -0700
-Received: from [43.135.148.58] ([43.135.148.58]) by ussdixms03.am.sony.com
-	with Microsoft SMTPSVC(5.0.2195.6713); 
-	Mon, 24 Sep 2007 08:55:43 -0700
-Message-ID: <46F7DDF7.8060804@am.sony.com>
-Date: Mon, 24 Sep 2007 08:55:35 -0700
-From: Tim Bird <tim.bird@am.sony.com>
-User-Agent: Thunderbird 1.5.0.4 (X11/20060614)
+	Mon, 24 Sep 2007 18:19:08 +0200
+Received: by nz-out-0506.google.com with SMTP id i11so915788nzh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Sep 2007 09:14:48 -0700 (PDT)
+Received: by 10.115.17.1 with SMTP id u1mr762084wai.1190650487319;
+	Mon, 24 Sep 2007 09:14:47 -0700 (PDT)
+Received: by 10.114.191.17 with HTTP; Mon, 24 Sep 2007 09:14:47 -0700 (PDT)
+Message-ID: <f96d234e0709240914p29fd2fb5n87e7d32b206f082d@mail.gmail.com>
+Date: Mon, 24 Sep 2007 12:14:47 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <46F587F7.4060501@balister.org>
 MIME-Version: 1.0
-To: Leon Woestenberg <leonw@mailcan.com>
 References: <46F587F7.4060501@balister.org>
-	<c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>
-In-Reply-To: <c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>
-X-Enigmail-Version: 0.94.0.0
-X-OriginalArrivalTime: 24 Sep 2007 15:55:43.0900 (UTC)
-	FILETIME=[5D323DC0:01C7FEC3]
-Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: How should OE be used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -61,34 +30,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2007 16:06:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 24 Sep 2007 16:19:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Leon Woestenberg wrote:
-> I became an OE user when I found that OE automated a lot more than
-> buildroot when I started adding packages. After that experience I
-> decided to use OE at work.
-...
+On 9/22/07, Philip Balister <philip@balister.org> wrote:
+> For now, I'd like to focus on working out how people use OE and what
+> issues they have. Once we understand what problems exist, if any, we can
+> discuss solutions.
 
-Leon,
+I use OE in much the same way as Leon.  I find a OE/Bitbake snapshot
+that is stable and lock it down for project work.   I generally don't
+upgrade until I need a new feature, or I have some time to work
+through issues.  I have several dev boards that I use to track the
+HEAD that I use for contributing to OE, and keeping up with what is
+going on.
 
-I found the description of your experiences with OpenEmbedded
-and your list of issues to be very valuable.
+For me, this works fine, but then I keep up with what is going on, so
+I have a pretty good feel for when it is a good time to upgrade
+projects, etc.  The occasional OE user would probably have a much more
+difficult time.  I'm not sure a stable branch would help a lot, as it
+would consume a lot of developer time that is probably better spent
+moving things forward  Perhaps something more like kernel release
+process would work where we shoot for stable releases (perhaps
+quarterly) where the focus right before the release is to get things
+stable for a number of architectures.  But, then I'm not sure there is
+a big advantage of this over just doing more/better autobuilds and
+testing.
 
-I have added your message text to the elinux wiki at:
-http://elinux.org/Open_Embedded
+Cliff
 
-I hope this is OK with you. Please let me know if there is any
-problem with this.
-
- -- Tim
-
-=============================
-Tim Bird
-Architecture Group Chair, CE Linux Forum
-Senior Staff Engineer, Sony Corporation of America
-=============================
-
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
