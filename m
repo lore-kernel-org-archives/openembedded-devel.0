@@ -1,33 +1,31 @@
-Received: from [74.93.1.97] (helo=azazel.hughes-family.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <craig@gumstix.com>) id 1IZuh4-0002YA-0Y
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Sep 2007 22:38:14 +0200
-Received: from [10.8.22.2] (adsl-76-246-147-241.dsl.pltn13.sbcglobal.net
-	[76.246.147.241])
-	by azazel.hughes-family.org (Postfix) with ESMTP id 6BB3A9D4B4;
-	Mon, 24 Sep 2007 13:33:52 -0700 (PDT)
-X-Habeas-Swe-9: mark in spam to <http://www.habeas.com/report/>.
-X-Habeas-Swe-6: email in exchange for a license for this Habeas
-X-Habeas-Swe-3: like Habeas SWE (tm)
-Date: Mon, 24 Sep 2007 13:33:53 -0700
-X-Habeas-Swe-8: Message (HCM) and not spam. Please report use of this
-From: Craig Hughes <craig@gumstix.com>
-X-Habeas-Swe-5: Sender Warranted Email (SWE) (tm). The sender of this
-X-Habeas-Swe-2: brightly anticipated
-In-Reply-To: <46F8125E.5060200@trolltech.com>
+	(envelope-from <rpurdie@rpsys.net>) id 1IZuzL-0002y5-JP
+	for openembedded-devel@openembedded.org; Mon, 24 Sep 2007 22:57:07 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8OKqlRG017005
+	for <openembedded-devel@openembedded.org>;
+	Mon, 24 Sep 2007 21:52:47 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 16681-08-2 for <openembedded-devel@openembedded.org>;
+	Mon, 24 Sep 2007 21:52:43 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8OKqXa3016970
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 24 Sep 2007 21:52:33 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <46F80688.2020702@trolltech.com>
 References: <46F587F7.4060501@balister.org> <46F80688.2020702@trolltech.com>
-	<70B54FE7-41C6-4C21-AB2D-073399350E5A@gumstix.com>
-	<46F8125E.5060200@trolltech.com>
-To: openembedded-devel@lists.openembedded.org
-X-Image-Url: http://www.hughes-family.org/craig/craig64.jpg
-X-Habeas-Swe-7: warrant mark warrants that this is a Habeas Compliant
-Mime-Version: 1.0 (Apple Message framework v752.3)
-X-Habeas-Swe-4: Copyright 2002 Habeas (tm) 
-X-Habeas-Swe-1: winter into spring
-Message-Id: <90CFEDB6-2F25-43EF-9842-C47633F140FA@gumstix.com>
-X-Mailer: Apple Mail (2.752.3)
-Cc: openembedded-devel@openembedded.org
+Date: Mon, 24 Sep 2007 21:52:32 +0100
+Message-Id: <1190667152.19359.38.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: How should OE be used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,23 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2007 20:38:14 -0000
+X-List-Received-Date: Mon, 24 Sep 2007 20:57:07 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
-On Sep 24, 2007, at 12:39 PM, Lorn Potter wrote:
+On Tue, 2007-09-25 at 04:48 +1000, Lorn Potter wrote:
+> I have always thought that oe needed an easier way to choose packages, 
+> like buildroot.
+> 
+> Some gui that can edit all the conf's and task's, and image.bb's 
+> painlessly and easily would make a tom of difference.
+> The learning curve for oe is too high.
 
-> Not necessarily. Where's the ipkg for a custom device that hasn't been
-> built yet?
+This is something I plan to raise at OEDEM.
 
-> Most people are not going to want to build 90% of the packages in oe,
-> especially for embedded/small devices.
+It should be relatively well known by now that I want to improve bitbake
+to the extent where writing some kind of UI around it is straightforward
+and we can start improving the user experience from this angle.
 
-> Makefile format is more widely known than the format and syntax  
-> used in OE.
+Bitbake trunk now has some foundations for this in place although there
+are some gaps and a few regressions that need fixing. There is no new UI
+itself yet.
 
-All good points.
+The job isn't actually that difficult, the problem is that the learning
+curve anyone implementing it faces with no previous experience is
+steep. 
 
-C
+Personally, the big problem I have is the lack of time to do it and I
+suspect others with the experience also have time issues :-(.
+
+> Take buildroot, for example. A person can download it, run make 
+> menuconfig, set up the system, arch, and select packages, all in one
+> go. 
+> You do not need to know that you should have to either edit or create 
+> your own tasks, or image .bb's, much less the syntax for those files.
+
+Playing devil's advocate, take Poky, for example. A person can
+download/check it out, edit one simple configuration file
+(comment/uncomment lines), source a file and go :).
+
+So it is possible.
+
+Cheers,
+
+Richard
+
+
 
 
