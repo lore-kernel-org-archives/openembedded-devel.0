@@ -1,21 +1,53 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [213.199.154.16] (helo=outbound5-dub-R.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philip@balister.org>) id 1IZqyK-00075L-2D
-	for openembedded-devel@openembedded.org; Mon, 24 Sep 2007 18:39:48 +0200
-Received: (qmail 2753 invoked by uid 1003); 24 Sep 2007 16:35:27 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 24 Sep 2007 16:35:26 -0000
-Message-ID: <46F7E74E.7020402@balister.org>
-Date: Mon, 24 Sep 2007 12:35:26 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.5 (X11/20070727)
+	(envelope-from <Tim.Bird@am.sony.com>) id 1IZraW-0007aA-7H
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Sep 2007 19:19:16 +0200
+Received: from outbound5-dub.bigfish.com (localhost.localdomain [127.0.0.1])
+	by outbound5-dub-R.bigfish.com (Postfix) with ESMTP id 3736D41A859;
+	Mon, 24 Sep 2007 17:14:56 +0000 (UTC)
+Received: from mail78-dub-R.bigfish.com (unknown [10.5.252.3])
+	by outbound5-dub.bigfish.com (Postfix) with ESMTP id 2D031838049;
+	Mon, 24 Sep 2007 17:14:56 +0000 (UTC)
+Received: from mail78-dub (localhost.localdomain [127.0.0.1])
+	by mail78-dub-R.bigfish.com (Postfix) with ESMTP id E6B35194015E;
+	Mon, 24 Sep 2007 17:14:55 +0000 (UTC)
+X-BigFish: VP
+X-MS-Exchange-Organization-Antispam-Report: OrigIP: 160.33.66.75;Service: EHS
+Received: by mail78-dub (MessageSwitch) id 1190654092808524_11902;
+	Mon, 24 Sep 2007 17:14:52 +0000 (UCT)
+Received: from mail8.fw-sd.sony.com (mail8.fw-sd.sony.com [160.33.66.75])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail78-dub.bigfish.com (Postfix) with ESMTP id F03C810A007D;
+	Mon, 24 Sep 2007 17:14:51 +0000 (UTC)
+Received: from mail1.sgo.in.sel.sony.com (mail1.sgo.in.sel.sony.com
+	[43.130.1.111])
+	by mail8.fw-sd.sony.com (8.12.11/8.12.11) with ESMTP id l8OHEoKC019801; 
+	Mon, 24 Sep 2007 17:14:50 GMT
+Received: from USSDIXIM01.am.sony.com (ussdixim01.am.sony.com [43.130.140.33])
+	by mail1.sgo.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
+	l8OHEoAR022344; Mon, 24 Sep 2007 17:14:50 GMT
+Received: from ussdixms03.am.sony.com ([43.130.140.23]) by
+	USSDIXIM01.am.sony.com with Microsoft SMTPSVC(5.0.2195.6713); 
+	Mon, 24 Sep 2007 10:14:49 -0700
+Received: from [43.135.148.58] ([43.135.148.58]) by ussdixms03.am.sony.com
+	with Microsoft SMTPSVC(5.0.2195.6713); 
+	Mon, 24 Sep 2007 10:14:48 -0700
+Message-ID: <46F7F080.90102@am.sony.com>
+Date: Mon, 24 Sep 2007 10:14:40 -0700
+From: Tim Bird <tim.bird@am.sony.com>
+User-Agent: Thunderbird 1.5.0.4 (X11/20060614)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <46F587F7.4060501@balister.org>	<c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>
-	<46F7DDF7.8060804@am.sony.com>
-In-Reply-To: <46F7DDF7.8060804@am.sony.com>
-Cc: Leon Woestenberg <leonw@mailcan.com>
+To: openembedded-devel@lists.openembedded.org
+References: <46F587F7.4060501@balister.org>	<c384c5ea0709230419n7542c911v27a389539421e454@mail.gmail.com>	<46F7DDF7.8060804@am.sony.com>
+	<46F7E74E.7020402@balister.org>
+In-Reply-To: <46F7E74E.7020402@balister.org>
+X-Enigmail-Version: 0.94.0.0
+X-OriginalArrivalTime: 24 Sep 2007 17:14:48.0494 (UTC)
+	FILETIME=[6931D4E0:01C7FECE]
+Cc: openembedded-devel@openembedded.org, Leon Woestenberg <leonw@mailcan.com>,
+	Matthew Locke <matt@nomadgs.com>
 Subject: Re: How should OE be used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,118 +62,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2007 16:39:48 -0000
-X-Groupsio-MsgNum: 2978
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050602070700060403030004"
-
---------------ms050602070700060403030004
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 24 Sep 2007 17:19:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Tim,
+Philip Balister wrote:
+> Tim,
+> 
+> Hopefully, we can address some of Leon's and other's issues during OEDEM
+> in two weeks. So be prepared to update the elinux.org web page :)
 
-Hopefully, we can address some of Leon's and other's issues during OEDEM 
-in two weeks. So be prepared to update the elinux.org web page :)
+I'll be glad to. :-)
 
-Philip
+BTW - I still have some unspent money from CELF budgeted for OE
+improvements (not a lot, but some).  Also, I have a machine dedicated
+in the CELF test lab for OE work.  Last year, Marcin did some contract
+work for us.  I don't think we're leveraging what he did very well.
+In terms of what CELF is interested in going forward: we would very
+much like to see well-maintained minimal distribution that works
+on several architectures.  I can use some of the above
+resources for this work.
 
-Tim Bird wrote:
-> Leon Woestenberg wrote:
->> I became an OE user when I found that OE automated a lot more than
->> buildroot when I started adding packages. After that experience I
->> decided to use OE at work.
-> ...
-> 
-> Leon,
-> 
-> I found the description of your experiences with OpenEmbedded
-> and your list of issues to be very valuable.
-> 
-> I have added your message text to the elinux wiki at:
-> http://elinux.org/Open_Embedded
-> 
-> I hope this is OK with you. Please let me know if there is any
-> problem with this.
-> 
->  -- Tim
-> 
-> =============================
-> Tim Bird
-> Architecture Group Chair, CE Linux Forum
-> Senior Staff Engineer, Sony Corporation of America
-> =============================
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+I don't want to discuss numbers on an open list, but details
+are available upon request.
 
---------------ms050602070700060403030004
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Can you please factor this into the OEDEM discussions?
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
-OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
-65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
-X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
-tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
-szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
-nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
-U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
-ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
-HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
-dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
-RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
-rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
-6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
-Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MDkyNDE2
-MzUyNlowIwYJKoZIhvcNAQkEMRYEFM99n6UxR/tI/xY7NeUO2VbJN/h9MFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
-qTANBgkqhkiG9w0BAQEFAASCAQBH0Yo0A4ZrA9x1Qguh4FIMs+K009CJKcJUXtg0Apnkq3pkCU51
-IfGRpmlwpVU6u5UEl8EL6FboGJ2L4tqBWxQPWHFEZQ7C/0rOInx77UJzaEUywvRW+oYxJKauFZrg
-YUD1c1l/mOdOk+dymJmMS0yeoI9D9fEKpWFP4WS4NRyiQ5VSPAfOVBaqoFLuFsckV5zrZ+aAqJJm
-U2guWG3FwVIUlbxKrWESGUpiohAZcLpQdem+KLGSbXxb2ixRcWHTF0qu33o1A1JTyoi5vIOGK8YC
-y4rqE+EBN4pxa6Ng4NquBwNipMO5kWbNsswmsS57rLqCYaxFUVF2tM6FtuFGiSTlAAAAAAAA
+I won't be at OEDEM, but I'll be at ELCE in Austria, November 2-3.
+(see http://www.celinux.org/elc_europe07/elc_europe_index.html)
+Matt Locke will be giving a talk on Open Embedded there.  I'm not
+sure where the main OE developers are located in Europe, but if
+it's convenient, it would be nice to meet there and discuss what
+CELF can do to help out.
+ -- Tim
 
---------------ms050602070700060403030004--
+=============================
+Tim Bird
+Architecture Group Chair, CE Linux Forum
+Senior Staff Engineer, Sony Corporation of America
+=============================
+
+
+
