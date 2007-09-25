@@ -1,28 +1,33 @@
-Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
+Received: from [82.103.128.235] (helo=www.emile.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1Ia6mn-0007pz-9u
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Sep 2007 11:32:57 +0200
-Received: by nf-out-0910.google.com with SMTP id h3so1335925nfh
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2007 02:28:33 -0700 (PDT)
-Received: by 10.86.33.10 with SMTP id g10mr2954241fgg.1190712512939;
-	Tue, 25 Sep 2007 02:28:32 -0700 (PDT)
-Received: from ?192.168.20.110? ( [82.193.99.11])
-	by mx.google.com with ESMTPS id v23sm12682796fkd.2007.09.25.02.28.31
-	(version=SSLv3 cipher=OTHER); Tue, 25 Sep 2007 02:28:32 -0700 (PDT)
-Date: Tue, 25 Sep 2007 12:28:30 +0300
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1436610692.20070925122830@gmail.com>
-To: "pHilipp Zabel" <philipp.zabel@gmail.com>
-In-Reply-To: <74d0deb30709242335g61947682m50a94dc5ca71c913@mail.gmail.com>
-References: <E1IZwyx-0004wi-Cq@linuxtogo.org>
-	<74d0deb30709242335g61947682m50a94dc5ca71c913@mail.gmail.com>
+	(envelope-from <skoroneos@digital-opsis.com>) id 1Ia9Sh-0005cV-NU
+	for openembedded-devel@openembedded.org; Tue, 25 Sep 2007 14:24:23 +0200
+Received: from www.emile.com (localhost [127.0.0.1])
+	by www.emile.com (8.13.3/8.13.3) with ESMTP id l8PCJxin078014
+	for <openembedded-devel@openembedded.org>;
+	Tue, 25 Sep 2007 15:19:59 +0300 (EEST)
+	(envelope-from skoroneos@digital-opsis.com)
+Received: (from www@localhost)
+	by www.emile.com (8.13.3/8.13.3/Submit) id l8PCJv3X078012
+	for openembedded-devel@openembedded.org;
+	Tue, 25 Sep 2007 15:19:57 +0300 (EEST)
+	(envelope-from skoroneos@digital-opsis.com)
+X-Authentication-Warning: www.emile.com: www set sender to
+	skoroneos@digital-opsis.com using -f
+Received: from ipa209.1.tellas.gr (ipa209.1.tellas.gr [62.169.217.209]) 
+	by www.emile.com (IMP) with HTTP 
+	for <stelios@localhost>; Tue, 25 Sep 2007 15:19:57 +0300
+Message-ID: <1190722797.46f8fced3640a@www.emile.com>
+Date: Tue, 25 Sep 2007 15:19:57 +0300
+From: Stelios Koroneos <skoroneos@digital-opsis.com>
+To: openembedded-devel@openembedded.org
+References: <46F587F7.4060501@balister.org>
+	<D61182AC8012EA4EBC531B3AF23BE1093F1639@tranzeo-mail2.12stewart.tranzeo.com>
+In-Reply-To: <D61182AC8012EA4EBC531B3AF23BE1093F1639@tranzeo-mail2.12stewart.tranzeo.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev base-files: PocketPC machines: stop using random / mounts in fstab.
+User-Agent: Internet Messaging Program (IMP) 3.2.2 / FreeBSD-5.2.1
+X-Originating-IP: 62.169.217.209
+Subject: Re: How should OE be used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,44 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Sep 2007 09:32:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Sep 2007 12:24:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-Hello pHilipp,
+> 
+> I tried using OE, but could not get it to complete a build for PowerPC
+> 405 (neither uclibc or glibc - both failed but in different ways.
+> Uclibc gets cross compiler badness errors - I think it is part of this
+> powerpc vs ppc stuff in Linux).  After days of frustration, I had to
+> bail out and use buildroot for this particular project instead.
+> Obviously OE has lots of ARM and x86 users, but the PPC support falls
+> behind because it isn't as popular.  I'll check back for a later
+> project.
+> 
 
-Tuesday, September 25, 2007, 9:35:42 AM, you wrote:
+Well, not sure when you tried it, what distro etc but the ppc405 targets in OE
+work :)
 
-> On 9/25/07, pfalcon commit
-> <openembedded-commits@lists.openembedded.org> wrote:
->> base-files: PocketPC machines: stop using random / mounts in fstab.
->> * Instead, use rootfs mount, like most other devices do, which corresponds
->> to the fact that such machines can be booted from a lots of sources.
->>
-[]
+Infact i am giving a presentation today at the Power.org developer conference in
+Austin on powerpc/OE
 
->> ============================================================
->> --- packages/base-files/base-files/hx4700/fstab 8913bf7229f7c689c52fe0ba7ebd9fb3aabd7c73
->> +++ packages/base-files/base-files/hx4700/fstab c03b2054bfd3ebc1f2b69c7387c4be0c1c38205f
->> @@ -1,4 +1,4 @@
->> -/dev/mtdblock2         /               jffs2   defaults                1  1
->> +rootfs         /               auto    defaults                1  1
->>  /dev/mtdblock3         /home   jffs2   defaults        1  1
-
-> Any idea what to do about this one? Mounting /dev/mtdblock3 on /home
-> should only be done if there isn't wince on flash anymore.
-
-  IMHO, all machine-specific entries should be added to fstab by OS
-installer (until then by users manually). And IMHO, default config
-should be such that all flash is a single partition.
-
-> regards
-> Philipp
+As we needed a stable tree for our devices/projects we have our distro called
+OPLinux and OPlinux-uclibc with gcc 4.1.1 glibc 2.5 or uclibc 0.9.28
+We push the changes back to OE on a regular bases and recently provided Koen
+with a 405 board so he can do more test on Angstrom which uses newer versions
+of gcc/uclibc.
+If you (or any other) want a copy of what we use just let me know. 
 
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
 
+Stelios
+
+----------------------------------------------------------------
+This message was sent using IMP, the Internet Messaging Program.
 
 
