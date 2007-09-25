@@ -1,28 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IaCD7-0008Gk-Rw
-	for openembedded-devel@openembedded.org; Tue, 25 Sep 2007 17:20:29 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l8PFFqxW006202 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2007 17:15:53 +0200
-Message-ID: <46F9262B.3040008@student.utwente.nl>
-Date: Tue, 25 Sep 2007 17:15:55 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <pmiscml@gmail.com>) id 1IaCc4-0004MU-Hl
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 25 Sep 2007 17:46:16 +0200
+Received: by ug-out-1314.google.com with SMTP id m3so1153385ugc
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Sep 2007 08:41:50 -0700 (PDT)
+Received: by 10.67.103.20 with SMTP id f20mr954369ugm.1190734909917;
+	Tue, 25 Sep 2007 08:41:49 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.99.11])
+	by mx.google.com with ESMTPS id a1sm1806578ugf.2007.09.25.08.41.47
+	(version=SSLv3 cipher=OTHER); Tue, 25 Sep 2007 08:41:48 -0700 (PDT)
+Date: Tue, 25 Sep 2007 18:41:45 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <1577324081.20070925184145@gmail.com>
+To: Uli Luckas <u.luckas@road.de>
+In-Reply-To: <200709251620.52994.u.luckas@road.de>
+References: <a7f8874a0709212103h126eeea7y751fa5fd4256fb20@mail.gmail.com>
+	<a7f8874a0709241217o1fbd6060ka53b75837e07be78@mail.gmail.com>
+	<200709251620.52994.u.luckas@road.de>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <46F587F7.4060501@balister.org>	<D61182AC8012EA4EBC531B3AF23BE1093F1639@tranzeo-mail2.12stewart.tranzeo.com>
-	<1190722797.46f8fced3640a@www.emile.com>
-In-Reply-To: <1190722797.46f8fced3640a@www.emile.com>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: How should OE be used?
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: RFC: Kexec Cmdline Support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,49 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Sep 2007 15:20:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 25 Sep 2007 15:46:17 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Uli,
 
-Stelios Koroneos schreef:
->> I tried using OE, but could not get it to complete a build for PowerPC
->> 405 (neither uclibc or glibc - both failed but in different ways.
->> Uclibc gets cross compiler badness errors - I think it is part of this
->> powerpc vs ppc stuff in Linux).  After days of frustration, I had to
->> bail out and use buildroot for this particular project instead.
->> Obviously OE has lots of ARM and x86 users, but the PPC support falls
->> behind because it isn't as popular.  I'll check back for a later
->> project.
+Tuesday, September 25, 2007, 5:20:52 PM, you wrote:
+
+> On Monday, 24. September 2007, Hans Henry von Tresckow wrote:
+>> (sorry for crossposting this,but I think more of the interested parties
+>> read oe-devel then angstrom-devel)
 >>
-> 
-> Well, not sure when you tried it, what distro etc but the ppc405 targets in OE
-> work :)
-> 
-> Infact i am giving a presentation today at the Power.org developer conference in
-> Austin on powerpc/OE
-> 
-> As we needed a stable tree for our devices/projects we have our distro called
-> OPLinux and OPlinux-uclibc with gcc 4.1.1 glibc 2.5 or uclibc 0.9.28
-> We push the changes back to OE on a regular bases and recently provided Koen
-> with a 405 board so he can do more test on Angstrom which uses newer versions
-> of gcc/uclibc.
-> If you (or any other) want a copy of what we use just let me know. 
+>> A while back, mwester made some patches to add the ability to modify the
+>> cmdline when using kexec to load a kernel. I did some testing on poodle and
+>> posted the results on the bug tracker
+>> (http://bugs.openembedded.org/show_bug.cgi?id=2969)
+>> I was wondering what the rest of the developers think of these. 
+> Hi Henry,
+> A while back I posted a different approach [1] to this mailing list for
+> review. To bad, there have not been any comments.
 
-I'm fairly sure gcc 4.1.2 and 4.2.1 are busted, they can't compile glibc, eglibc and
-uclibc. I'll try to look into it next week.
+> The differences of my approach in contrast to mwester's approach have been
+> discussed on the arm kernel mailing list. If there is any interest in this
+> (userspace) approach at all, I will improve on the known problems (like hard
+> coded ATAG base address).
 
-regards,
+> I'd really appreciate feedback from the developers.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+  Full commandline, etc. support for kexec is much, much needed
+feature. Unfortunately, most developers are likely busy with more
+mundane stuff and give good review/testing to it. But those who're
+interested in this area for sure should apply such patches to the
+device kernel they can test, to facilitate wider testing, and the
+authors of the patches for sure should post the for review to general
+Linux list, and hopefully communicate to find the best solution.
 
-iD8DBQFG+SYrMkyGM64RGpERAtUpAJ9zu8zHb9An4DJsgC/fm6AMaGcN+wCeJj/L
-hXHntnJV2ZPNcYr51FmghsA=
-=sx7p
------END PGP SIGNATURE-----
+> Best regerds
+> Uli
+
+> 1) 
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2007-August/002840.html
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
