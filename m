@@ -1,34 +1,31 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [192.115.104.16] (helo=sa2.bezeqint.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IZwb5-0004bc-Eb
-	for openembedded-devel@openembedded.org; Tue, 25 Sep 2007 00:40:11 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8OMZpbE021533
+	(envelope-from <mike@compulab.co.il>) id 1Ia3m3-0005aV-92
+	for openembedded-devel@openembedded.org; Tue, 25 Sep 2007 08:19:59 +0200
+Received: from localhost (sa2 [127.0.0.1])
+	by sa2.bezeqint.net (Bezeq International SMTP out Mail Server) with
+	ESMTP id 86CDB16C028 for <openembedded-devel@openembedded.org>;
+	Tue, 25 Sep 2007 08:15:35 +0200 (IST)
+X-Virus-Scanned: amavisd-new at bezeqint.net
+Received: from sa2.bezeqint.net ([127.0.0.1])
+	by localhost (sa2.bezeqint.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id MJbmLC23ksH7 for <openembedded-devel@openembedded.org>;
+	Tue, 25 Sep 2007 08:15:35 +0200 (IST)
+Received: from mail.linux-boards.com (mail.linux-boards.com [192.114.83.142])
+	by sa2.bezeqint.net (Bezeq International SMTP out Mail Server) with
+	ESMTP for <openembedded-devel@openembedded.org>;
+	Tue, 25 Sep 2007 08:15:35 +0200 (IST)
+Received: from [10.1.1.95] ([10.1.1.95])
+	by mail.linux-boards.com (8.12.5/8.12.8) with ESMTP id l8P5ABat011698
 	for <openembedded-devel@openembedded.org>;
-	Mon, 24 Sep 2007 23:35:51 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 21377-05 for <openembedded-devel@openembedded.org>;
-	Mon, 24 Sep 2007 23:35:47 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l8OMZhsK021527
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 24 Sep 2007 23:35:43 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Tue, 25 Sep 2007 08:10:16 +0300
+Message-ID: <46F8A596.7080508@compulab.co.il>
+Date: Tue, 25 Sep 2007 08:07:18 +0200
+From: Mike Rapoport <mike@compulab.co.il>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070822)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-In-Reply-To: <46F8280E.9050908@trolltech.com>
-References: <46F587F7.4060501@balister.org> <46F80688.2020702@trolltech.com>
-	<1190667152.19359.38.camel@localhost.localdomain>
-	<46F8280E.9050908@trolltech.com>
-Date: Mon, 24 Sep 2007 23:35:42 +0100
-Message-Id: <1190673342.19359.107.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: How should OE be used?
+Subject: New machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,40 +39,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2007 22:40:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Sep 2007 06:19:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-09-25 at 07:11 +1000, Lorn Potter wrote:
-> > Playing devil's advocate, take Poky, for example. A person can
-> > download/check it out, edit one simple configuration file
-> > (comment/uncomment lines), source a file and go :).
->
-> This is ok for an individual with a known device, but for a company that 
-> needs to produce their own distribution, for a new device, Poky is not a 
-> choice.
+Hi all,
+I would like to add a machine configuration and kernel patches to OE tree. What
+do I need to do for it?
 
-I didn't make comment about Poky's suitability for anything. 
-
-All I said is that its possible to produce a one stop configuration
-process for OE which is as easy as your buildroot example. This proves
-that its not some fundamental problem with OE, someone just needs to
-implement it.
-
-As for "for a company that needs to produce their own distribution, for
-a new device, Poky is not a choice", thats just nonsense and our
-experiences suggests otherwise ;-).
-
-> _These_ are the people/companies that the OE/Foundation should also 
-> be targeting to grow.
-
-I think all agreed that OE wants to see more of these people/companies
-using OE.
-
-Cheers,
-
-Richard
-
+-- 
+Sincerely yours,
+Mike.
 
 
 
