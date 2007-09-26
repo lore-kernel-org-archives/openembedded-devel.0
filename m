@@ -1,25 +1,28 @@
-Received: from [64.233.182.187] (helo=nf-out-0910.google.com)
+Received: from [209.85.134.186] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <shanevolpe@gmail.com>) id 1IaKDa-0001Do-09
+	(envelope-from <pmiscml@gmail.com>) id 1IaKWi-0001WC-5N
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Sep 2007 01:53:30 +0200
-Received: by nf-out-0910.google.com with SMTP id h3so1512148nfh
+	Wed, 26 Sep 2007 02:13:16 +0200
+Received: by mu-out-0910.google.com with SMTP id w9so2568403mue
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2007 16:49:02 -0700 (PDT)
-Received: by 10.78.130.6 with SMTP id c6mr16973hud.1190764141371;
-	Tue, 25 Sep 2007 16:49:01 -0700 (PDT)
-Received: by 10.78.162.5 with HTTP; Tue, 25 Sep 2007 16:49:01 -0700 (PDT)
-Message-ID: <8c7950360709251649k29a4f661m7a08d6e39309550b@mail.gmail.com>
-Date: Tue, 25 Sep 2007 19:49:01 -0400
-From: shanevolpe@gmail.com
-To: openembedded-devel@lists.openembedded.org
+	Tue, 25 Sep 2007 17:08:46 -0700 (PDT)
+Received: by 10.86.93.17 with SMTP id q17mr49420fgb.1190765326329;
+	Tue, 25 Sep 2007 17:08:46 -0700 (PDT)
+Received: from ?192.168.20.110? ( [82.193.99.11])
+	by mx.google.com with ESMTPS id 28sm139514fkx.2007.09.25.17.08.45
+	(version=SSLv3 cipher=OTHER); Tue, 25 Sep 2007 17:08:45 -0700 (PDT)
+Date: Wed, 26 Sep 2007 03:08:44 +0300
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <1162450671.20070926030844@gmail.com>
+To: "Mike (mwester)" <mwester@dls.net>
 In-Reply-To: <0be701c7ffbf$cc912850$6e01a8c0@twilight>
-MIME-Version: 1.0
-References: <8c7950360709231220o100ae1d6i2582e20398b04521@mail.gmail.com>
-	<1190628401.6176.39.camel@localhost.localdomain>
-	<46F79A90.6090709@student.utwente.nl>
+References: <8c7950360709231220o100ae1d6i2582e20398b04521@mail.gmail.com><1190628401.6176.39.camel@localhost.localdomain><46F79A90.6090709@student.utwente.nl>
 	<8c7950360709240636r523b582dx89a7706682776117@mail.gmail.com>
 	<0be701c7ffbf$cc912850$6e01a8c0@twilight>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Adding support for DirectFB across the board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,33 +37,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Sep 2007 23:53:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 26 Sep 2007 00:13:16 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Mike,
-Thanks for the feedback, I will remove pang-directfb until I figure
-out the correct way to add it.  In truth we should NOT need
-pango-directfb but the issue is pango has cairo as a dependency (even
-though it is NOT needed for build) and cairo must be built with
-directfb support so I added cairo-directfb.  I did not want to disturb
-an existing package so I created pango-directfb instead of removing
-cairo from pango's dependencies.   If I recall correctly there were
-some X packages that were in pango's dependencies (also not needed to
-build pango) and I did NOT want to remove them either.
+Hello Mike,
 
-I would love more feedback on how I should handle this issue.
-Regards,
-Shane
+Wednesday, September 26, 2007, 1:02:43 AM, you wrote:
 
-On 9/25/07, Mike (mwester) <mwester@dls.net> wrote:
 > Another ugly issue has reared its head.  This occurred with the OpenMoko
 > build, but will affect most other distros as well.  The problem is that as
 > far as bitbake is concerned, there is absolutely no difference between
 > pango-directfb-1.18.1 and pango-1.18.1, at least in terms of their ability
 > to satisfy dependencies.
->
+
 > Thus, the simple act of creating pango-directfb-1.18.1.bb was enough for new
 > builds to select pango-directfb instead of the pango recipe -- so the same
 > build that worked yesterday morning fails in various ways now.  On a
@@ -71,31 +61,47 @@ On 9/25/07, Mike (mwester) <mwester@dls.net> wrote:
 > binary failed.  Note that existing build environments are fine; the
 > selection of pango vs pango-directfb has already been done, and bitbake will
 > be happy that the dependency on pango is met.
->
+
 > My first thought was to place my favorite magic incantation (PREFERENCE =
 > "-1") in the pango-directfb recipe, but that matters not.  Even such
 > powerful magic cannot overcome this problem.
->
+
+  I faced this issue too and chatted about it with Richard Purdie, but
+I believe it isn't even submitted as as bitbake bug. But in general,
+this should be the right and the most logic solution - unless
+PREFERRED_PROVIDER explicitly selects some variant, one with higher
+preference should be used, not random.
+
 > Consulting with the experts on #oe, it seems that the only solution is to
 > add "PREFERRED_PROVIDER" lines for every distro that explicitly select which
 > recipe they want.   I simply deleted the *-directfb recipes so I could get
 > the build running, as time was not on my side -- I had 6 hours of build time
 > to catch up on from this problem.
->
+
 > A few questions, then:
->
+
 > First, this fails the principle of "least surprise".  How is it that when I
 > specify a dependency on "pango" that the "pango.bb" recipe is ignored and
 > the "pango-something-different.bb" recipe is used instead?  That's just not
 > logical.  Shouldn't bitbake select the one who's name matches exactly, when
 > all else is equal?
->
+
+  Mildly good heuristic too, but using DEFAULT_PREFERENCE would be even
+better.
+
 > Is it really necessary that pango-directfb and pango provide the same thing,
-> from a "PROVIDES" point-of-view?  A simple change in name would avoid this
+> from a "PROVIDES" point-of-view?
+
+  Apparently yes, as they provide the same facility/functionality, but
+different implementation of it. It is the essence of PROVIDES. And we
+shouldn't give up this idea simply because current version of
+OE/bitbake doesn't do it right.
+
+>   A simple change in name would avoid this
 > problem completely.  I think we're just asking for confusion, and the
 > problems that stem from confusion, by having multiple somethings that claim
 > to provide the same thing.
->
+
 > If it is, in fact, necessary that these two recipes provide the same things,
 > then since one is clearly in early development and can destabilize so many
 > different distros, then why can we not use a branch to do the initial
@@ -110,93 +116,29 @@ On 9/25/07, Mike (mwester) <mwester@dls.net> wrote:
 > this hobby, and doing disruptive changes on a branch in isolation just seems
 > to me to be a respectful, and decent thing for each developer to do as part
 > of being a community member.  JMNSHO.
->
+
+  With a good chance, that won't improve integral productivity of OE
+developers, just will make breakages "more scheduled". At least not
+before we'll make tools and conventions right.
+
 > Finally, can we have bitbake be a bit more "in your face" about its
 > decisions when there are no external criteria provided?  A warning to say
 > "Hey! I've just selected "pango-directfb" to satisfy the dependency for
 > "pango" -- but you should know that "pango" would equally-well satisfy the
 > dependency, and I picked one only because you didn't provide any hints to
 > select one over the other!"?
->
+
+  That's exactly what it does - it says something like "Consider
+defining PREFERRED_PROVIDER". It's notice though, IIRC.
+
 > Thanks,
 > Mike (mwester)
->
-> On 9/24/07, shanevolpe@gmail.com wrote:
-> > Thanks for the feedback.  I have a couple more questions:
-> >
-> > First should I go into all the pango packages and also add
-> > RCONFLICTS="pango-directfb".  If I should do that can I just and it to
-> > the pango.inc and override it in pango-directfb with
-> > RCONFLICTS="pango-directfb"
-> >
-> > Second, I have a situation were if you build directfb-1.0 and then
-> > build directfb-1.1.0 there will be library files for both of them in
-> > staging.  This is an issue because it seems some packages may use the
-> > 1.0 libs and others will use the 1.1 libs causing issues on the target
-> > board which is running 1.1.0.  How should I handle this,  I want to
-> > completely remove directfb-1.0 from the staging area when directfb-1.1
-> > is installed.
-> > Regards,
-> > Shane
-> >
-> >
-> > On 9/24/07, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> > > -----BEGIN PGP SIGNED MESSAGE-----
-> > > Hash: SHA1
-> > >
-> > > Richard Purdie schreef:
-> > > > On Sun, 2007-09-23 at 15:20 -0400, shanevolpe@gmail.com wrote:
-> > > >> I have been adding in support for directFB to as many packages as
-> > > >> possible, however one issue I have ran into several times is what do
-> I
-> > > >> do when there are packages that can be compiled with X11 or directfb
-> > > >> support and then what do you do with packages that may depend on a
-> > > >> package compiled with directfb or X11.  Ok that was pretty confusing,
-> > > >> let me give an example.
-> > > >>
-> > > >> I have added cairo-directfb which compiles cairo with directfb
-> instead
-> > > >> of X11.  Next I wanted to add (update) gtk+-directfb to use
-> > > >> cairo-directfb instead of cairo.  That part was easy I just changed
-> > > >> the DEPENDS cairo in gtk+-directfb to cairo-directfb..  The issue
-> came
-> > > >> when I noticed that gtk+ also requires pango which requires cairo so
-> > > >> what do I do here, do I make a new pango called pango-directfb?  It
-> > > >> seems like the better thing would be set up a virtual/cairo and set
-> it
-> > > >> to either cairo or cairo-directfb.  If I go that route how do I set
-> it
-> > > >> up so it does not break everyone's build that does not have
-> > > >> virtual/cairo set, is there a way to default it to something like
-> > > >> cairo?
-> > > >
-> > > > The thing you need to consider is that pango compiled with a standard
-> > > > cairo is a different package to pango compiled with cairo-directfb.
-> > > >
-> > > > The virtual namespace is used to show things that are equivalent and
-> > > > pango is different to pango-directfb since I couldn't interchange
-> them.
-> > > >
-> > > > You therefore need to create a pango-directfb, ugly as that may be
-> (.inc
-> > > > files can minimise the ugliness though).
-> > >
-> > > Don't forget to add RCONFLICTS statements, since the resulting binary
-> has the same name (IIRC)
-> > >
-> > > regards,
-> > >
-> > > Koen
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
+[]
 
 -- 
-Registered Linux User: #293401
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
