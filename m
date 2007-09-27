@@ -1,31 +1,22 @@
-Received: from [85.10.209.111] (helo=mail.road.de)
+Received: from [217.116.0.112] (helo=correo12.acens.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <u.luckas@road.de>) id 1IaZOW-0007JA-43
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Sep 2007 18:05:48 +0200
-Received: from slimfast.dyndns.org (unknown [192.168.254.1])
-	by mail.road.de (Postfix) with ESMTP id 831C3390004;
-	Wed, 26 Sep 2007 18:01:16 +0200 (CEST)
-Received: from localhost.localdomain (ulitu.handy-pc.constin.de
-	[192.168.116.44])
-	by slimfast.dyndns.org (Postfix) with ESMTP id 3CA50AD4001;
-	Wed, 26 Sep 2007 18:01:16 +0200 (CEST)
-Received: from ip6-localhost (unknown [IPv6:::1])
-	by localhost.localdomain (Postfix) with ESMTP id 894F7D98DA0;
-	Wed, 26 Sep 2007 18:01:15 +0200 (CEST)
-From: Uli Luckas <u.luckas@road.de>
-Organization: Road GmbH
-To: "Hans Henry von Tresckow" <hvontres@gmail.com>
-Date: Wed, 26 Sep 2007 18:01:12 +0200
-User-Agent: KMail/1.9.7
-References: <a7f8874a0709212103h126eeea7y751fa5fd4256fb20@mail.gmail.com>
-	<200709260921.20447.u.luckas@road.de>
-	<a7f8874a0709260729n9e4a06cy67456d4937a6dbdf@mail.gmail.com>
-In-Reply-To: <a7f8874a0709260729n9e4a06cy67456d4937a6dbdf@mail.gmail.com>
+	(envelope-from <joaquinduran@adtelecom.es>) id 1Iauwe-0002zY-TT
+	for openembedded-devel@openembedded.org; Thu, 27 Sep 2007 17:06:29 +0200
+Received: (qmail 11986 invoked from network); 27 Sep 2007 15:01:51 -0000
+Received: from unknown (HELO [194.179.62.51])
+	(joaquinduran.adtelecom.es@[81.44.82.110])
+	(envelope-sender <joaquinduran@adtelecom.es>)
+	by correo12.acens.net (qmail-ldap-1.03) with SMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	27 Sep 2007 15:01:51 -0000
+Message-ID: <46FBD354.5080005@adtelecom.es>
+Date: Thu, 27 Sep 2007 17:59:16 +0200
+From: Joaquim Duran <joaquinduran@adtelecom.es>
+Organization: AD Telecom
+User-Agent: Thunderbird 2.0.0.6 (X11/20070806)
 MIME-Version: 1.0
-Message-Id: <200709261801.13349.u.luckas@road.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: Kexec Cmdline Support
+To: openembedded-devel@lists.openembedded.org
+Subject: Xcursor transparent theme with kdrive 1.2 and kdrive 1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,50 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Sep 2007 16:05:49 -0000
-Content-Type: text/plain;
-  charset="iso-8859-15"
+X-List-Received-Date: Thu, 27 Sep 2007 15:06:29 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday, 26. September 2007, you wrote:
-> On 9/26/07, Uli Luckas <u.luckas@road.de> wrote:
-> > By the way, who is the original author of the arm-kexec-utils patch? I'd
-> > like
-> > to see kexec support pushed upstream which requires a sign-off of the
-> > original author.
-> >
->
-> IIRC, Richard Purdie wrote the original kexec patch for arm. I would love
-> to try out your solution. Do you know which version of the vanilla kernel
-> now has the proper patches in place?
-I use kexec with 2.6.21.
+Hello all,
 
-> I would most likely need to do some tweaking, since the original sharp
-> bootloader passes a cmdline that is incompatible with 2.6 kernels. 
-For now you might have to modify the hard coded base address.
+We've two colibri based embedded computers (pxa-270 processor). One runs
+kdrive 1.2 and the second one, kdrive 1.3.0.0. To both machines I've
+installed the package xcursor-transparent-theme.
 
-> But I would love to see some support for kexec cmdline editing in the near
-> future. 
->
-> Henry von Tresckow (hvontres)
+After re-starting both kdrives, the X cursor were till visible in both
+computers. As far I remember, some months ago, I installed the
+xcursor-transparent-theme to another colibri and after reboot kdrive,
+the cursor were transparent.
 
-Thanks,
-Uli
+I've no clear if this is a bug of Kdrive (I'm assuming that people which
+uses GPE should have seen this), or I've missed some steps.
 
--- 
+Both versions of kdrive are the same of the repository with the
+exception of the inclusion of patches from bug 3069 (screen in mode
+800x480).
 
-------- ROAD ...the handyPC Company - - -  ) ) )
+Any help will be appreciated.
 
-Uli Luckas
-Software Development
 
-ROAD GmbH
-Bennigsenstr. 14 | 12159 Berlin | Germany
-fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
-url: www.road.de
-
-Amtsgericht Charlottenburg: HRB 96688 B
-Managing directors: Hans-Peter Constien, Hubertus von Streit
+Thanks and Best Regards,
+Joaquim Duran
 
 
