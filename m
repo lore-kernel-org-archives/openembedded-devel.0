@@ -1,25 +1,21 @@
-Received: from [195.121.247.23] (helo=psmtp09.wxs.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <gerwin@vanderkruis.net>) id 1Ibiqb-0002Og-MR
+	(envelope-from <dp@xora.org.uk>) id 1Ic6kQ-0000WQ-Ih
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Sep 2007 22:23:33 +0200
-Received: from holographic.lan (ip5457b30e.direct-adsl.nl [84.87.179.14])
-	by psmtp09.wxs.nl
-	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006))
-	with ESMTP id <0JP500DQTCF7VT@psmtp09.wxs.nl> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	29 Sep 2007 22:18:43 +0200 (MEST)
-Date: Sat, 29 Sep 2007 22:15:20 +0200
-From: Gerwin van der Kruis <gerwin@vanderkruis.net>
-In-reply-to: <F08B4B67-A940-4674-ACB7-CFE77A28F44C@selfish.org>
+	Sun, 30 Sep 2007 23:54:46 +0200
+Received: from [192.168.1.64] ([::ffff:78.86.130.156])
+	(AUTH: PLAIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Sun, 30 Sep 2007 22:49:49 +0100
+	id 00064011.470019FD.00000D85
+Message-ID: <470019F3.5050505@xora.org.uk>
+Date: Sun, 30 Sep 2007 22:49:39 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070824)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <200709292215.20776.gerwin@vanderkruis.net>
-Organization: GO-2K
-MIME-version: 1.0
-User-Agent: KMail/1.9.5
-References: <200709281725.56506.gerwin@vanderkruis.net>
-	<F08B4B67-A940-4674-ACB7-CFE77A28F44C@selfish.org>
-Subject: Re: Who is going to speak at t-dose
+References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
+In-Reply-To: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
+Subject: Re: OEDEM dates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,31 +29,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Sep 2007 20:23:33 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: 7BIT
-Content-disposition: inline
+X-List-Received-Date: Sun, 30 Sep 2007 21:54:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Saturday 29 September 2007 15:42, Holger Freyther wrote:
-> Am 28.09.2007 um 17:25 schrieb Gerwin van der Kruis:
-> > Hey All,
-> >
-> > We will be having a booth and a slot to speak at t-dose Netherlands.
-> >
-> > Are there people who are interested to speak there (Koen,MickeyL,
-> > Likewise ??)
-> >
-> > Are there also people who interested in manning the booth ?
->
-> Hi Gerwin,
->
-> I will attend t-dose and could deliver a variation of koen's last ELC
-> presentation.
->
-Thanks so much I will tell jean-paul that you will give the presentation
+I was thinking it would be a good idea for people to add their hotels 
+after their name in the wiki page for OEDEM.
 
-Regards, 
+We seem to have got spread out and it would ease organising meetups.
 
-Gerwin
+Graeme (XorA)
+
 
 
