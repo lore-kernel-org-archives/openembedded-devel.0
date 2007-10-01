@@ -1,21 +1,31 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [192.115.104.17] (helo=sa3.bezeqint.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1Ic6kQ-0000WQ-Ih
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Sep 2007 23:54:46 +0200
-Received: from [192.168.1.64] ([::ffff:78.86.130.156])
-	(AUTH: PLAIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Sun, 30 Sep 2007 22:49:49 +0100
-	id 00064011.470019FD.00000D85
-Message-ID: <470019F3.5050505@xora.org.uk>
-Date: Sun, 30 Sep 2007 22:49:39 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070824)
+	(envelope-from <mike@compulab.co.il>) id 1IcEd1-0006ps-QQ
+	for openembedded-devel@openembedded.org; Mon, 01 Oct 2007 08:19:39 +0200
+Received: from localhost (sa3 [127.0.0.1])
+	by sa3.bezeqint.net (Bezeq International SMTP out Mail Server) with
+	ESMTP id B988330127 for <openembedded-devel@openembedded.org>;
+	Mon,  1 Oct 2007 08:14:40 +0200 (IST)
+X-Virus-Scanned: amavisd-new at bezeqint.net
+Received: from sa3.bezeqint.net ([127.0.0.1])
+	by localhost (sa3.bezeqint.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4ZagTZUImPuS for <openembedded-devel@openembedded.org>;
+	Mon,  1 Oct 2007 08:14:40 +0200 (IST)
+Received: from mail.linux-boards.com (mail.linux-boards.com [192.114.83.142])
+	by sa3.bezeqint.net (Bezeq International SMTP out Mail Server) with
+	ESMTP for <openembedded-devel@openembedded.org>;
+	Mon,  1 Oct 2007 08:14:40 +0200 (IST)
+Received: from [10.1.1.95] ([10.1.1.95])
+	by mail.linux-boards.com (8.12.5/8.12.8) with ESMTP id l91590at015263
+	for <openembedded-devel@openembedded.org>;
+	Mon, 1 Oct 2007 07:09:05 +0200
+Message-ID: <47008E79.6020502@compulab.co.il>
+Date: Mon, 01 Oct 2007 08:06:49 +0200
+From: Mike Rapoport <mike@compulab.co.il>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070822)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
-In-Reply-To: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
-Subject: Re: OEDEM dates
+To: openembedded-devel@openembedded.org
+Subject: tune-iwmmx vs tune-xscale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,16 +39,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Sep 2007 21:54:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 01 Oct 2007 06:19:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-I was thinking it would be a good idea for people to add their hotels 
-after their name in the wiki page for OEDEM.
+Hi all,
+I'd like to ask if it is better to use "tune-xscale.conf" or "tune-iwmmx.conf"
+for PXA270 based machine.
 
-We seem to have got spread out and it would ease organising meetups.
-
-Graeme (XorA)
+-- 
+Sincerely yours,
+Mike.
 
 
 
