@@ -1,32 +1,23 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IcK6u-0004tb-NF
-	for openembedded-devel@openembedded.org; Mon, 01 Oct 2007 14:10:52 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l91C5qUM002633
-	for <openembedded-devel@openembedded.org>;
-	Mon, 1 Oct 2007 13:05:52 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 02503-02 for <openembedded-devel@openembedded.org>;
-	Mon,  1 Oct 2007 13:05:49 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l91C5jFl002626
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 1 Oct 2007 13:05:45 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <470019F3.5050505@xora.org.uk>
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1IcKxQ-0001Jw-GF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Oct 2007 15:05:08 +0200
+Received: by nz-out-0506.google.com with SMTP id i11so2394073nzh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Oct 2007 06:00:07 -0700 (PDT)
+Received: by 10.114.178.1 with SMTP id a1mr504294waf.1191243606719;
+	Mon, 01 Oct 2007 06:00:06 -0700 (PDT)
+Received: by 10.115.75.15 with HTTP; Mon, 1 Oct 2007 06:00:06 -0700 (PDT)
+Message-ID: <bdb0025f0710010600v4f824e67sc76366770f4f5f13@mail.gmail.com>
+Date: Mon, 1 Oct 2007 10:00:06 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AA9EED45-AC55-43AC-9F07-B5C95504CA49@selfish.org>
+MIME-Version: 1.0
 References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
 	<470019F3.5050505@xora.org.uk>
-Date: Mon, 01 Oct 2007 13:05:45 +0100
-Message-Id: <1191240345.5938.35.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<AA9EED45-AC55-43AC-9F07-B5C95504CA49@selfish.org>
 Subject: Re: OEDEM dates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,19 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2007 12:10:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 01 Oct 2007 13:05:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Sun, 2007-09-30 at 22:49 +0100, Graeme Gregory wrote:
-> I was thinking it would be a good idea for people to add their hotels 
-> after their name in the wiki page for OEDEM.
+Hi, I don't have login in the oe wiki,
+so I'm sending right here:
 
-I've added my hotel and arrival/departure times...
+[Oct 5 - Oct 10] - Honigmond RH - Flight arrives 12:45
 
-Cheers,
+See you there...
 
-Richard
+On 10/1/07, Holger Freyther <zecke@selfish.org> wrote:
+>
+> Am 30.09.2007 um 23:49 schrieb Graeme Gregory:
+>
+> > I was thinking it would be a good idea for people to add their hotels
+> > after their name in the wiki page for OEDEM.
+> >
+> > We seem to have got spread out and it would ease organising meetups.
+>
+> Hi,
+>
+> and arrival times would be appreciated as well, so I can search/think
+> of a place where we could meet for a drink, otherwise I would propose
+> coming to the office...
+>
+> z.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
+
+-- 
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
