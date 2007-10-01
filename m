@@ -1,21 +1,27 @@
-Received: from [209.85.146.178] (helo=wa-out-1112.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IcG6W-0008NK-Gb
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Oct 2007 09:54:12 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so5024295waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Oct 2007 00:49:10 -0700 (PDT)
-Received: by 10.114.168.1 with SMTP id q1mr3682634wae.1191224950421;
-	Mon, 01 Oct 2007 00:49:10 -0700 (PDT)
-Received: by 10.114.208.4 with HTTP; Mon, 1 Oct 2007 00:49:10 -0700 (PDT)
-Message-ID: <19c1b8a90710010049y49effab8j739ecd884686199@mail.gmail.com>
-Date: Mon, 1 Oct 2007 00:49:10 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47008E79.6020502@compulab.co.il>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IcH2V-00053z-7T
+	for openembedded-devel@openembedded.org; Mon, 01 Oct 2007 10:54:07 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l918n3Hh024210 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 1 Oct 2007 10:49:04 +0200
+Message-ID: <4700B47F.4090802@student.utwente.nl>
+Date: Mon, 01 Oct 2007 10:49:03 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
 References: <47008E79.6020502@compulab.co.il>
+	<19c1b8a90710010049y49effab8j739ecd884686199@mail.gmail.com>
+In-Reply-To: <19c1b8a90710010049y49effab8j739ecd884686199@mail.gmail.com>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: tune-iwmmx vs tune-xscale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,29 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2007 07:54:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Oct 2007 08:54:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-tune-iwmmx.conf would be more appropriate
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
--Khem
+Khem Raj schreef:
+> tune-iwmmx.conf would be more appropriate
 
-On 9/30/07, Mike Rapoport <mike@compulab.co.il> wrote:
-> Hi all,
-> I'd like to ask if it is better to use "tune-xscale.conf" or "tune-iwmmx.conf"
-> for PXA270 based machine.
->
-> --
-> Sincerely yours,
-> Mike.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Actually, no. There are still problems left with things randomly segfaulting when
+compiling everything with iwmmxt, so in OE we only activate iwmmxt for packages that
+benefit from and and prove to be stable (e.g. mplayer).
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHALR/MkyGM64RGpERAo9DAKCVeQPV0lIAgrxgSQj4Kg1vK1WWEgCgiMAV
+9qA86YU6hgtwmy99Qs/pw+I=
+=tGBi
+-----END PGP SIGNATURE-----
 
 
