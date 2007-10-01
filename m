@@ -1,24 +1,21 @@
-Received: from [64.233.162.226] (helo=nz-out-0506.google.com)
+Received: from [64.233.162.234] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1IcKxQ-0001Jw-GF
+	(envelope-from <hvontres@gmail.com>) id 1IcOOo-0004gY-Fn
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Oct 2007 15:05:08 +0200
-Received: by nz-out-0506.google.com with SMTP id i11so2394073nzh
+	Mon, 01 Oct 2007 18:45:38 +0200
+Received: by nz-out-0506.google.com with SMTP id i11so2458780nzh
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Oct 2007 06:00:07 -0700 (PDT)
-Received: by 10.114.178.1 with SMTP id a1mr504294waf.1191243606719;
-	Mon, 01 Oct 2007 06:00:06 -0700 (PDT)
-Received: by 10.115.75.15 with HTTP; Mon, 1 Oct 2007 06:00:06 -0700 (PDT)
-Message-ID: <bdb0025f0710010600v4f824e67sc76366770f4f5f13@mail.gmail.com>
-Date: Mon, 1 Oct 2007 10:00:06 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+	Mon, 01 Oct 2007 09:40:36 -0700 (PDT)
+Received: by 10.115.88.1 with SMTP id q1mr833436wal.1191256813817;
+	Mon, 01 Oct 2007 09:40:13 -0700 (PDT)
+Received: by 10.143.11.12 with HTTP; Mon, 1 Oct 2007 09:40:13 -0700 (PDT)
+Message-ID: <a7f8874a0710010940g5b143d4o6cd5e5d5fbd330f6@mail.gmail.com>
+Date: Mon, 1 Oct 2007 09:40:13 -0700
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AA9EED45-AC55-43AC-9F07-B5C95504CA49@selfish.org>
 MIME-Version: 1.0
-References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>
-	<470019F3.5050505@xora.org.uk>
-	<AA9EED45-AC55-43AC-9F07-B5C95504CA49@selfish.org>
-Subject: Re: OEDEM dates
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Is anybody using Ubuntu 7.10 (Gutsy) with OE yet?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,46 +29,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2007 13:05:08 -0000
+X-List-Received-Date: Mon, 01 Oct 2007 16:45:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi, I don't have login in the oe wiki,
-so I'm sending right here:
-
-[Oct 5 - Oct 10] - Honigmond RH - Flight arrives 12:45
-
-See you there...
-
-On 10/1/07, Holger Freyther <zecke@selfish.org> wrote:
->
-> Am 30.09.2007 um 23:49 schrieb Graeme Gregory:
->
-> > I was thinking it would be a good idea for people to add their hotels
-> > after their name in the wiki page for OEDEM.
-> >
-> > We seem to have got spread out and it would ease organising meetups.
->
-> Hi,
->
-> and arrival times would be appreciated as well, so I can search/think
-> of a place where we could meet for a drink, otherwise I would propose
-> coming to the office...
->
-> z.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Hello,
+I would like to upgrade my laptop to Gutsy in the near future and I was
+wondering if anybody had tried OE on a Gutsy machine yet.
 
 
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+Thank you very much for any help,
 
+
+Henry von Tresckow (hvontres)
 
