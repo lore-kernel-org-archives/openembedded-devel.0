@@ -1,27 +1,24 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.162.238] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IcR7b-0006nb-Bm
-	for openembedded-devel@openembedded.org; Mon, 01 Oct 2007 21:40:03 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l91JYsV9019875 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 1 Oct 2007 21:34:55 +0200
-Message-ID: <47014BDF.2020104@student.utwente.nl>
-Date: Mon, 01 Oct 2007 21:34:55 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <hvontres@gmail.com>) id 1IcRIj-0006yv-CV
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Oct 2007 21:51:33 +0200
+Received: by nz-out-0506.google.com with SMTP id i11so2514406nzh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Oct 2007 12:46:31 -0700 (PDT)
+Received: by 10.114.196.1 with SMTP id t1mr1048100waf.1191267990131;
+	Mon, 01 Oct 2007 12:46:30 -0700 (PDT)
+Received: by 10.141.53.18 with HTTP; Mon, 1 Oct 2007 12:46:30 -0700 (PDT)
+Message-ID: <a7f8874a0710011246g412d1a13n6275c1a3813c26d5@mail.gmail.com>
+Date: Mon, 1 Oct 2007 12:46:30 -0700
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1191264796.6064.1.camel@localhost>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>	<470019F3.5050505@xora.org.uk>	<AA9EED45-AC55-43AC-9F07-B5C95504CA49@selfish.org>
-	<bdb0025f0710010600v4f824e67sc76366770f4f5f13@mail.gmail.com>
-In-Reply-To: <bdb0025f0710010600v4f824e67sc76366770f4f5f13@mail.gmail.com>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: OEDEM dates
+References: <a7f8874a0710010940g5b143d4o6cd5e5d5fbd330f6@mail.gmail.com>
+	<1191264796.6064.1.camel@localhost>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: Is anybody using Ubuntu 7.10 (Gutsy) with OE yet?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,34 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2007 19:40:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Oct 2007 19:51:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 10/1/07, Manuel Teira <manuel.teira@telefonica.net> wrote:
+>
+> Hello. I've upgraded from Feisty and haven't found any problems on
+> Gutsy. I've just bitbaked some image (angstrom-x11-pimlico-image) and
+> nothing strange happened.
+>
+> Regards.
+>
+>
+> El lun, 01-10-2007 a las 09:40 -0700, Hans Henry von Tresckow escribi=F3:
+> > Hello,
+> > I would like to upgrade my laptop to Gutsy in the near future and I was
+> > wondering if anybody had tried OE on a Gutsy machine yet.
+> >
+> >
+> > Thank you very much for any help,
+> >
+> >
+> > Henry von Tresckow (hvontres)
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Rodrigo Vivi schreef:
-> Hi, I don't have login in the oe wiki,
-> so I'm sending right here:
-> 
-> [Oct 5 - Oct 10] - Honigmond RH - Flight arrives 12:45
+Thanks for the info :)
 
-There are a few people that arrive at roughly the same time (Graeme, Philip, me), so
-should we meet up at something like the Central Station (Hauptbahnhof, Hbf) and head over
-to the office (with maybe a bite to eat in between)?
-
-regards,
-
-Koen
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHAUvfMkyGM64RGpERAnfrAJ9bczw1E6T1Gna4pkClSN+WKgOE0QCgiLIA
-4CKC6hTzjkMxTTcNJVETXlY=
-=eyFz
------END PGP SIGNATURE-----
-
+--=20
+Henry von Tresckow (hvontres)
 
