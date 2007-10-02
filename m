@@ -1,24 +1,24 @@
-Received: from [64.233.162.238] (helo=nz-out-0506.google.com)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hvontres@gmail.com>) id 1IcRIj-0006yv-CV
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <theBohemian@gmx.net>) id 1Icbk7-0003y2-Pe
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Oct 2007 21:51:33 +0200
-Received: by nz-out-0506.google.com with SMTP id i11so2514406nzh
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Oct 2007 12:46:31 -0700 (PDT)
-Received: by 10.114.196.1 with SMTP id t1mr1048100waf.1191267990131;
-	Mon, 01 Oct 2007 12:46:30 -0700 (PDT)
-Received: by 10.141.53.18 with HTTP; Mon, 1 Oct 2007 12:46:30 -0700 (PDT)
-Message-ID: <a7f8874a0710011246g412d1a13n6275c1a3813c26d5@mail.gmail.com>
-Date: Mon, 1 Oct 2007 12:46:30 -0700
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1191264796.6064.1.camel@localhost>
+	Tue, 02 Oct 2007 09:00:33 +0200
+Received: (qmail invoked by alias); 02 Oct 2007 06:55:27 -0000
+Received: from e178074045.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.74.45]
+	by mail.gmx.net (mp027) with SMTP; 02 Oct 2007 08:55:27 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+caS1AClacsf6BtO9qvCGmWoptbUAB0MXTuWOKSp
+	jOZVN5h4v5JUjq
+Message-ID: <4701EB5B.80405@gmx.net>
+Date: Tue, 02 Oct 2007 08:55:23 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: IceDove 1.5.0.12 (X11/20070730)
 MIME-Version: 1.0
-References: <a7f8874a0710010940g5b143d4o6cd5e5d5fbd330f6@mail.gmail.com>
-	<1191264796.6064.1.camel@localhost>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: Is anybody using Ubuntu 7.10 (Gutsy) with OE yet?
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.94.2.0
+X-Y-GMX-Trusted: 0
+Subject: OEDEM 2007 dinner
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,44 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2007 19:51:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 02 Oct 2007 07:00:40 -0000
+X-Groupsio-MsgNum: 3034
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig0BC693458276B78279007FFF"
+
+--------------enig0BC693458276B78279007FFF
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-On 10/1/07, Manuel Teira <manuel.teira@telefonica.net> wrote:
->
-> Hello. I've upgraded from Feisty and haven't found any problems on
-> Gutsy. I've just bitbaked some image (angstrom-x11-pimlico-image) and
-> nothing strange happened.
->
-> Regards.
->
->
-> El lun, 01-10-2007 a las 09:40 -0700, Hans Henry von Tresckow escribi=F3:
-> > Hello,
-> > I would like to upgrade my laptop to Gutsy in the near future and I was
-> > wondering if anybody had tried OE on a Gutsy machine yet.
-> >
-> >
-> > Thank you very much for any help,
-> >
-> >
-> > Henry von Tresckow (hvontres)
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Hi,
+I was asked by Henning if tarent[0] would sponsor a dinner for OEDEM
+participants and got positive confirmation from my colleagues. :)
 
-Thanks for the info :)
+Since often people leave on the last day of a conference the day before
+that is suggested as the ideal date for dinner (=3D Oct 9th). I hope that=
 
---=20
-Henry von Tresckow (hvontres)
+is OK for everyone. If not lets find another date.
 
+The exact time (presumably in the evening) and location is not yet
+decided. I will give you that at OEDEM itself.
+
+There is however one thing that is really important. I need the names of
+those who take part (German tax law requires this). So please send me a
+short confirmation mail with your full name somewhere and everything is
+fine. I will ask for this again when we will meet on Oct. 6th.
+
+Regards
+Robert
+
+[0] - http://tarent.de
+
+
+--------------enig0BC693458276B78279007FFF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHAeteG9cfwmwwEtoRCFU8AJwJ4n7WWfhjTwA9r3RNthNWEBGZ+ACbB0bH
+4XdvgkWPuScY9xmnYDg1LtE=
+=FIKH
+-----END PGP SIGNATURE-----
+
+--------------enig0BC693458276B78279007FFF--
