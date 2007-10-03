@@ -1,26 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IcmJJ-00014u-Va
-	for openembedded-devel@openembedded.org; Tue, 02 Oct 2007 20:17:34 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l92ICK98024260 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Oct 2007 20:12:21 +0200
-Message-ID: <47028A07.1070804@student.utwente.nl>
-Date: Tue, 02 Oct 2007 20:12:23 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <openembedded@haerwu.biz>) id 1Id5ae-0004XC-I2
+	for openembedded-devel@openembedded.org; Wed, 03 Oct 2007 16:52:44 +0200
+Received: (qmail 24396 invoked by uid 813007); 3 Oct 2007 14:47:30 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 3 Oct 2007 14:47:30 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+User-Agent: KMail/1.9.7
+References: <46F62C60.2000702@student.utwente.nl>
+In-Reply-To: <46F62C60.2000702@student.utwente.nl>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <F38DEABE0E171746B133C1ABBD142D9707110F0F@radmail.Radstone.Local>
-In-Reply-To: <F38DEABE0E171746B133C1ABBD142D9707110F0F@radmail.Radstone.Local>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: MonotonePhraseBook needs reverting on wiki
+Date: Wed, 3 Oct 2007 16:47:26 +0200
+Message-Id: <200710031647.27138.openembedded@haerwu.biz>
+Subject: Re: HAL and pci +acpi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,33 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Oct 2007 18:17:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Oct 2007 14:52:44 -0000
+Content-Disposition: inline
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia niedziela, 23 wrze=B6nia 2007, Koen Kooi napisa=B3:
+> Hi,
+>
+> The current HAL recipe disables pci and acpi, which isn't nice for
+> machines that support either of them. I want to propose the following:
 
-Martyn Welch schreef:
-> Hi Guys,
-> 
-> Not sure how to do this, but someones trashed this page on the wiki and
-> I'm not sure how to roll it back:
-> 
-> http://www.openembedded.org/wiki/MonotonePhraseBook
+[..]
 
-The revert option should be under 'revisions', but it could be that people without a login
-can't access it. Anyway, it's back to normal now, thanks for noticing!
+> what do you think?
 
-regards,
++1 from me
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-iD8DBQFHAooHMkyGM64RGpERAjCMAJ9j2BnTos4dGrUmZ5+O3XCilya+VQCgqnMk
-F1g88+1PZkuE4hCqFVd5BRs=
-=6Tu2
------END PGP SIGNATURE-----
+          bloody internet
+          there was once peace and then the internet came in :-)
+
+
 
 
