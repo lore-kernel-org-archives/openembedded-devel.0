@@ -1,23 +1,26 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1IdQ5o-000869-5i
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <tobias.pflug@gmx.net>) id 1IdQJO-0003TY-75
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 14:46:16 +0200
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1IdQ0g-0007MH-EL
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 14:40:58 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <4704CC05.40206@klever.net>
-References: <1191494488.2516.34.camel@toontown> <4704CC05.40206@klever.net>
-Message-Id: <B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Thu, 4 Oct 2007 14:40:24 +0200
+	Thu, 04 Oct 2007 15:00:25 +0200
+Received: (qmail invoked by alias); 04 Oct 2007 12:55:00 -0000
+Received: from p549A819E.dip0.t-ipconnect.de (EHLO [192.168.1.101])
+	[84.154.129.158]
+	by mail.gmx.net (mp034) with SMTP; 04 Oct 2007 14:55:00 +0200
+X-Authenticated: #283898
+X-Provags-ID: V01U2FsdGVkX1/87aMP09X8Hf03jRe4rLct4aFNV7hvVZqIx2/cLS
+	ki80ggBu5XJzh0
+From: Tobias Pflug <tobias.pflug@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-Subject: Re: hello...
+In-Reply-To: <B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>
+References: <1191494488.2516.34.camel@toontown> <4704CC05.40206@klever.net>
+	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>
+Date: Thu, 04 Oct 2007 14:55:02 +0200
+Message-Id: <1191502502.2516.39.camel@toontown>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Y-GMX-Trusted: 0
+Subject: Re: monotone/git (was hello...)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,32 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2007 12:46:16 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Thu, 04 Oct 2007 13:00:25 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+On Thu, 2007-10-04 at 14:40 +0200, Holger Freyther wrote:
+> Am 04.10.2007 um 13:18 schrieb Michael Krelin:
+> 
 
-Am 04.10.2007 um 13:18 schrieb Michael Krelin:
+> Hi,
+> 
+> If someone can host my mtn2git script and a git tree we can have a  
+> git mirror almost immediately. But yes I think there are some good  
+> reasons to stay with monotone as primary system.
+> 
+> 
+> z.
 
->> The next point will perhaps not make me many friends on this list,  
->> but
->> I am not exactly too fond of monotone. I for one would prefer if
->> openembedded used git. Mostly because it is *so* much faster. My  
->> machine
->> is fairly decent I would say and still the usage experience isn't  
->> that
->> great. (`mtn status` = zZzz :)
->
-> So would I (and not only for performance reasons), but I doubt it's
-> going to happen anytime soon ;-)
+Well luckily I am not an ignorant git-fanboy :) Could you shortly point
+out to me the reasons why you think monotone is favorable over git for
+use with openembedded ? I will admit right away that my limitation with
+SCMs in large projects is more than limited. So i can only speak of
+my user experience with git vs my experience with monotone and i prefer
+the first.
 
-Hi,
+thanks.
 
-If someone can host my mtn2git script and a git tree we can have a  
-git mirror almost immediately. But yes I think there are some good  
-reasons to stay with monotone as primary system.
+-Tobi
 
-
-z.
 
 
