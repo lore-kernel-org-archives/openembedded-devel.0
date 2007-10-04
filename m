@@ -1,25 +1,30 @@
-Received: from [72.29.79.205] (helo=rhodos.klever.net)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1IdXmn-0007Sj-Hf
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1IdZP9-00006l-28
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 22:59:09 +0200
-Received: from pd953ad30.dip0.t-ipconnect.de ([217.83.173.48]
-	helo=olympus.klever.net)
-	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1IdXhc-0000NP-Mo
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 22:53:49 +0200
-Message-ID: <470552D8.30003@klever.net>
-Date: Thu, 04 Oct 2007 22:53:44 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070815)
-MIME-Version: 1.0
+	Fri, 05 Oct 2007 00:42:51 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id DE743840052
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Oct 2007 00:37:48 +0200 (CEST)
+Received: from rhein.familie-heinold.de (e178124185.adsl.alicedsl.de
+	[85.178.124.185])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B9ADC84004E
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Oct 2007 00:37:48 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 03FF82121; Fri,  5 Oct 2007 00:37:29 +0200 (CEST)
+Date: Fri, 5 Oct 2007 00:37:29 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1191494488.2516.34.camel@toontown>	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>	<1191502502.2516.39.camel@toontown>
-	<4704EAE3.8050702@klever.net>	<b6ebd0a50710041136o48edfecbm6afd05d9b921d41f@mail.gmail.com>	<470535D5.8070307@am.sony.com>	<b6ebd0a50710041157y3bdafafbha82ce0a3b1fbdac6@mail.gmail.com>	<47053AC4.5080506@klever.net>	<b6ebd0a50710041227q4845a880h377fdd206a796193@mail.gmail.com>	<4705418A.8030907@klever.net>
-	<b6ebd0a50710041318q74838eeesdb7dcf055548e52a@mail.gmail.com>
-In-Reply-To: <b6ebd0a50710041318q74838eeesdb7dcf055548e52a@mail.gmail.com>
-Subject: Re: monotone/git (was hello...)
+Message-ID: <20071004223729.GA6395@rhein.zuhause.netz>
+References: <1D59FE6F-66A4-4367-BD53-4BD50D473AB5@selfish.org>
+MIME-Version: 1.0
+In-Reply-To: <1D59FE6F-66A4-4367-BD53-4BD50D473AB5@selfish.org>
+User-Agent: Mutt/1.5.16 (2007-06-11)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: OEDEM is coming...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,32 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2007 20:59:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Oct 2007 22:42:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
->> \>> Wait, how do you execute a hook when pushing via webdav?
->>> post-update is executed in the remote repository when pushing to it.
->>> In fact, the default post-update script in a new git init'd repository
->>> is just a script that calls git-update-server-info, so all you have to
->>> do is chmod +x foo.git/hooks/post-update and call it a day.  It works
->>> just fine.
->> *Who* executes post-update script when you push to remote repository via
->> webdav?
-> 
-> Sorry, my mistake on the mechanisms.  The hook is only used,
-> obviously, when pushing over ssh, since you can't run a script
-> remotely over http.  It's just that git-http-push is smart enough to
-> update the remote info/* if the files already exist (run
-> git-update-server-info on the remote side once).
+Hi,
 
-Good for the record, after we sorted it out on IRC. So, yes, it's 
-theoretically possible, we'd all want to avoid it and I have no idea 
-about its performance, which would probably need more elaborate 
-research. I doubt, though, that onyone wants to conduct such a research 
-at the moment ;-)
+because of family issuses and some other issuses I can attend OEDEM 2007
+only Monday and Tuesday from 12 p.m. ;(
 
-Love,
-H
+Bye
+
+Henning
 
 
