@@ -1,23 +1,27 @@
-Received: from [72.29.79.205] (helo=rhodos.klever.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1IdOoH-0002de-El
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 13:24:05 +0200
-Received: from pd953ad30.dip0.t-ipconnect.de ([217.83.173.48]
-	helo=olympus.klever.net)
-	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1IdOjA-0002Wl-Uo
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 13:18:49 +0200
-Message-ID: <4704CC05.40206@klever.net>
-Date: Thu, 04 Oct 2007 13:18:29 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070815)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IdOwd-0002ks-Hh
+	for openembedded-devel@openembedded.org; Thu, 04 Oct 2007 13:32:43 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l94BRLHh014686 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 4 Oct 2007 13:27:22 +0200
+Message-ID: <4704CE20.1080502@student.utwente.nl>
+Date: Thu, 04 Oct 2007 13:27:28 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1191494488.2516.34.camel@toontown>
-In-Reply-To: <1191494488.2516.34.camel@toontown>
-Subject: Re: hello...
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <F38DEABE0E171746B133C1ABBD142D97071112B2@radmail.Radstone.Local>
+In-Reply-To: <F38DEABE0E171746B133C1ABBD142D97071112B2@radmail.Radstone.Local>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: SVN fetcher behaviour
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,20 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2007 11:24:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 04 Oct 2007 11:32:43 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-> The next point will perhaps not make me many friends on this list, but
-> I am not exactly too fond of monotone. I for one would prefer if
-> openembedded used git. Mostly because it is *so* much faster. My machine
-> is fairly decent I would say and still the usage experience isn't that
-> great. (`mtn status` = zZzz :)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-So would I (and not only for performance reasons), but I doubt it's 
-going to happen anytime soon ;-)
+Martyn Welch schreef:
+> Hello,
+> 
+> I have just tried to build "task-base" for machine=x86, distro=generic.
 
-Love,
-H
+use DISTRO="angstrom-2007.1", generic has been broken for a long time.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHBM4gMkyGM64RGpERAlmfAKCFLdUSkG2DQz16eUdxxbH1T42wKACcDd4k
+hsxqQCOcuZViQ+kvtq80be8=
+=PILz
+-----END PGP SIGNATURE-----
 
 
