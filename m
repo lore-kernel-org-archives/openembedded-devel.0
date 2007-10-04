@@ -1,25 +1,25 @@
 Received: from [72.29.79.205] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1IdWAD-0005tt-H9
+	(envelope-from <hacker@klever.net>) id 1IdWCe-0005w0-Rm
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 21:15:13 +0200
+	Thu, 04 Oct 2007 21:17:44 +0200
 Received: from pd953ad30.dip0.t-ipconnect.de ([217.83.173.48]
 	helo=[192.168.4.12])
 	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1IdW52-0004fI-2T
+	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1IdW7R-0007oO-KH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 21:09:53 +0200
-Message-ID: <47053A35.6040005@klever.net>
-Date: Thu, 04 Oct 2007 21:08:37 +0200
+	Thu, 04 Oct 2007 21:12:23 +0200
+Message-ID: <47053AC4.5080506@klever.net>
+Date: Thu, 04 Oct 2007 21:11:00 +0200
 From: Michael Krelin <hacker@klever.net>
 User-Agent: Thunderbird 2.0.0.6 (X11/20070911)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1191494488.2516.34.camel@toontown>
 	<4704CC05.40206@klever.net>	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>	<1191502502.2516.39.camel@toontown>
-	<4704EAE3.8050702@klever.net>
-	<b6ebd0a50710041136o48edfecbm6afd05d9b921d41f@mail.gmail.com>
-In-Reply-To: <b6ebd0a50710041136o48edfecbm6afd05d9b921d41f@mail.gmail.com>
+	<4704EAE3.8050702@klever.net>	<b6ebd0a50710041136o48edfecbm6afd05d9b921d41f@mail.gmail.com>	<470535D5.8070307@am.sony.com>
+	<b6ebd0a50710041157y3bdafafbha82ce0a3b1fbdac6@mail.gmail.com>
+In-Reply-To: <b6ebd0a50710041157y3bdafafbha82ce0a3b1fbdac6@mail.gmail.com>
 Subject: Re: monotone/git (was hello...)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,28 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2007 19:15:13 -0000
+X-List-Received-Date: Thu, 04 Oct 2007 19:17:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-> 
-> That's not correct.  You can push to a git repository over http/webdav
-> to an apache2 server.
->
+> The only difficulty I've seen with it, in hosting my own projects, is
+> interrupted pushes.  An interrupted push seems able to leave behind a
+> stale webdav lock, which has to be manually fixed.. but that's more of
+> a webdav with apache issue than anything else.  Beyond that, you just
+> need to ensure your permissions are correct, and set the config
+> parameter on the repositories to indicate that they're shared, and set
+> a hook script to executable so it can add metadata to the repo on
+> pushes.
 
-That's right, but I guess you also know of drawbacks of this method. To
-mention one, having webdav *only* for push is somewhat strange, but
-since at push time no hooks will be executed (which sucks by itself),
-including update-server-info, the repository won't be quite
-dumb-protocol-ready.
+Wait, how do you execute a hook when pushing via webdav?
 
-In short, your statement is theoretically correct, but the fact you
-mentioned doesn't change anything.
+> Course, that said, I'd much rather see a git-daemon with push capability :)
 
-I think I've heard about some patch providing push over git protocol,
-which was dropped due to the lack of ssl connection support and there
-were talks about reinstating it along with adding ssl support. But I
-don't remember any details.
+Agree on that ;-)
 
 Love,
 H
