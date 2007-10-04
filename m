@@ -1,28 +1,27 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <kergoth@gmail.com>) id 1IdWSW-0001x0-QO
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2007 21:34:08 +0200
-Received: by an-out-0708.google.com with SMTP id b33so43827ana
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Oct 2007 12:28:48 -0700 (PDT)
-Received: by 10.142.174.8 with SMTP id w8mr2060626wfe.1191526127809;
-	Thu, 04 Oct 2007 12:28:47 -0700 (PDT)
-Received: by 10.142.81.6 with HTTP; Thu, 4 Oct 2007 12:28:47 -0700 (PDT)
-Message-ID: <b6ebd0a50710041228l2a87b76crb8e5dc303ebc27a1@mail.gmail.com>
-Date: Thu, 4 Oct 2007 12:28:47 -0700
-From: "Chris Larson" <clarson@kergoth.com>
-Sender: kergoth@gmail.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47053A35.6040005@klever.net>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IdWWT-00020l-Ms
+	for openembedded-devel@openembedded.org; Thu, 04 Oct 2007 21:38:13 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l94JWl98031877 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 4 Oct 2007 21:32:47 +0200
+Message-ID: <47053FDA.4060602@student.utwente.nl>
+Date: Thu, 04 Oct 2007 21:32:42 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-References: <1191494488.2516.34.camel@toontown> <4704CC05.40206@klever.net>
-	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>
-	<1191502502.2516.39.camel@toontown> <4704EAE3.8050702@klever.net>
-	<b6ebd0a50710041136o48edfecbm6afd05d9b921d41f@mail.gmail.com>
-	<47053A35.6040005@klever.net>
-X-Google-Sender-Auth: 3cfedeea1827ca55
-Subject: Re: monotone/git (was hello...)
+To: openembedded-devel@openembedded.org
+References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>	<470019F3.5050505@xora.org.uk>	<AA9EED45-AC55-43AC-9F07-B5C95504CA49@selfish.org>	<bdb0025f0710010600v4f824e67sc76366770f4f5f13@mail.gmail.com>
+	<47014BDF.2020104@student.utwente.nl>
+In-Reply-To: <47014BDF.2020104@student.utwente.nl>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: OEDEM dates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,28 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2007 19:34:09 -0000
+X-List-Received-Date: Thu, 04 Oct 2007 19:38:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 10/4/07, Michael Krelin <hacker@klever.net> wrote:
-> >
-> > That's not correct.  You can push to a git repository over http/webdav
-> > to an apache2 server.
-> >
->
-> That's right, but I guess you also know of drawbacks of this method. To
-> mention one, having webdav *only* for push is somewhat strange, but
-> since at push time no hooks will be executed (which sucks by itself),
-> including update-server-info, the repository won't be quite
-> dumb-protocol-ready.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think you're a bit behind :)  post-update works just fine for this,
-and I'm not the only one using it on a daily basis.
--- 
-Chris Larson - clarson at kergoth dot com
-Dedicated Engineer - MontaVista - clarson at mvista dot com
-Core Developer/Architect - TSLib, BitBake, OpenEmbedded, OpenZaurus
+Koen Kooi schreef:
+> Rodrigo Vivi schreef:
+>> Hi, I don't have login in the oe wiki,
+>> so I'm sending right here:
+> 
+>> [Oct 5 - Oct 10] - Honigmond RH - Flight arrives 12:45
+> 
+> There are a few people that arrive at roughly the same time (Graeme, Philip, me), so
+> should we meet up at something like the Central Station (Hauptbahnhof, Hbf) and head over
+> to the office (with maybe a bite to eat in between)?
+
+I'll be arriving later due to the strikes in germany.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHBT/aMkyGM64RGpERAtjdAKCgJFhjr4vzH9AXIolJiUO+iNJ+ggCeLK0B
+wBkyIHPz9ZwMX1yZW2pklfQ=
+=oyJn
+-----END PGP SIGNATURE-----
 
 
