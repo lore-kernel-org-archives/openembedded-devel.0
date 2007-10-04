@@ -1,27 +1,26 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [72.29.79.205] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IdWWT-00020l-Ms
-	for openembedded-devel@openembedded.org; Thu, 04 Oct 2007 21:38:13 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l94JWl98031877 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Oct 2007 21:32:47 +0200
-Message-ID: <47053FDA.4060602@student.utwente.nl>
-Date: Thu, 04 Oct 2007 21:32:42 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <hacker@klever.net>) id 1IdWei-00029n-AY
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Oct 2007 21:46:44 +0200
+Received: from pd953ad30.dip0.t-ipconnect.de ([217.83.173.48]
+	helo=[192.168.4.12])
+	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1IdWZV-0007tO-MY
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Oct 2007 21:41:23 +0200
+Message-ID: <4705418A.8030907@klever.net>
+Date: Thu, 04 Oct 2007 21:39:54 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070911)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <EDFF1FDB-450B-4775-8041-D06309355C24@selfish.org>	<470019F3.5050505@xora.org.uk>	<AA9EED45-AC55-43AC-9F07-B5C95504CA49@selfish.org>	<bdb0025f0710010600v4f824e67sc76366770f4f5f13@mail.gmail.com>
-	<47014BDF.2020104@student.utwente.nl>
-In-Reply-To: <47014BDF.2020104@student.utwente.nl>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: OEDEM dates
+To: openembedded-devel@lists.openembedded.org
+References: <1191494488.2516.34.camel@toontown>
+	<4704CC05.40206@klever.net>	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>	<1191502502.2516.39.camel@toontown>
+	<4704EAE3.8050702@klever.net>	<b6ebd0a50710041136o48edfecbm6afd05d9b921d41f@mail.gmail.com>	<470535D5.8070307@am.sony.com>	<b6ebd0a50710041157y3bdafafbha82ce0a3b1fbdac6@mail.gmail.com>	<47053AC4.5080506@klever.net>
+	<b6ebd0a50710041227q4845a880h377fdd206a796193@mail.gmail.com>
+In-Reply-To: <b6ebd0a50710041227q4845a880h377fdd206a796193@mail.gmail.com>
+Subject: Re: monotone/git (was hello...)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,31 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2007 19:38:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 04 Oct 2007 19:46:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Koen Kooi schreef:
-> Rodrigo Vivi schreef:
->> Hi, I don't have login in the oe wiki,
->> so I'm sending right here:
+\>> Wait, how do you execute a hook when pushing via webdav?
 > 
->> [Oct 5 - Oct 10] - Honigmond RH - Flight arrives 12:45
-> 
-> There are a few people that arrive at roughly the same time (Graeme, Philip, me), so
-> should we meet up at something like the Central Station (Hauptbahnhof, Hbf) and head over
-> to the office (with maybe a bite to eat in between)?
+> post-update is executed in the remote repository when pushing to it.
+> In fact, the default post-update script in a new git init'd repository
+> is just a script that calls git-update-server-info, so all you have to
+> do is chmod +x foo.git/hooks/post-update and call it a day.  It works
+> just fine.
 
-I'll be arriving later due to the strikes in germany.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+*Who* executes post-update script when you push to remote repository via
+webdav?
 
-iD8DBQFHBT/aMkyGM64RGpERAtjdAKCgJFhjr4vzH9AXIolJiUO+iNJ+ggCeLK0B
-wBkyIHPz9ZwMX1yZW2pklfQ=
-=oyJn
------END PGP SIGNATURE-----
+Love,
+H
 
 
