@@ -1,35 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.184.224] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IdV6u-0000VH-2B
-	for openembedded-devel@openembedded.org; Thu, 04 Oct 2007 20:07:51 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l94I2OJJ026952
-	for <openembedded-devel@openembedded.org>;
-	Thu, 4 Oct 2007 19:02:24 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 26585-09 for <openembedded-devel@openembedded.org>;
-	Thu,  4 Oct 2007 19:02:21 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l94I2JCF026946
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 4 Oct 2007 19:02:19 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <D61182AC8012EA4EBC531B3AF23BE10947F630@tranzeo-mail2.12stewart.tranzeo.com>
+	(envelope-from <kergoth@gmail.com>) id 1IdVdY-0005ML-Cm
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Oct 2007 20:41:31 +0200
+Received: by wr-out-0506.google.com with SMTP id c46so220436wra
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Oct 2007 11:36:08 -0700 (PDT)
+Received: by 10.142.222.21 with SMTP id u21mr994993wfg.1191522967152;
+	Thu, 04 Oct 2007 11:36:07 -0700 (PDT)
+Received: by 10.142.81.6 with HTTP; Thu, 4 Oct 2007 11:36:07 -0700 (PDT)
+Message-ID: <b6ebd0a50710041136o48edfecbm6afd05d9b921d41f@mail.gmail.com>
+Date: Thu, 4 Oct 2007 11:36:07 -0700
+From: "Chris Larson" <clarson@kergoth.com>
+Sender: kergoth@gmail.com
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4704EAE3.8050702@klever.net>
+MIME-Version: 1.0
 References: <1191494488.2516.34.camel@toontown> <4704CC05.40206@klever.net>
 	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>
-	<1191502502.2516.39.camel@toontown>
-	<EB5E2840-5F10-45F9-8B97-9FCFDC7F5AAE@selfish.org>
-	<D61182AC8012EA4EBC531B3AF23BE10947F630@tranzeo-mail2.12stewart.tranzeo.com>
-Date: Thu, 04 Oct 2007 19:02:18 +0100
-Message-Id: <1191520938.22930.50.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<1191502502.2516.39.camel@toontown> <4704EAE3.8050702@klever.net>
+X-Google-Sender-Auth: 91a7f270977a7c8f
 Subject: Re: monotone/git (was hello...)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -44,24 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2007 18:07:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 04 Oct 2007 18:41:33 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Thu, 2007-10-04 at 06:50 -0700, Darcy Watkins wrote:
-> If there is actually any real serious consideration of changing the
-> source control system, you should also consider mercurial as well as git
-> versus monotone.  At least consider adding a recipe to fetch package
-> source from a mercurial based upstream source.
+On 10/4/07, Michael Krelin <hacker@klever.net> wrote:
+> > Well luckily I am not an ignorant git-fanboy :) Could you shortly point
+> > out to me the reasons why you think monotone is favorable over git for
+> > use with openembedded ? I will admit right away that my limitation with
+> > SCMs in large projects is more than limited. So i can only speak of
+> > my user experience with git vs my experience with monotone and i prefer
+> > the first.
+>
+> Well, 1st - OE folks are used to monotone now. That's primary reason.
+> The second primary reason is that I know of some developers who seem to
+> dislike git. And if we're talking about technical reason, one I can
+> think of is that there's no non-ssh transport allowing push, which
+> complicates administration of our "central" repository.
 
-FWIW, the basics of a mercurial fetcher were added to bitbake trunk
-recently.
-
-Regards,
-
-Richard
-
-
-
+That's not correct.  You can push to a git repository over http/webdav
+to an apache2 server.
+-- 
+Chris Larson - clarson at kergoth dot com
+Dedicated Engineer - MontaVista - clarson at mvista dot com
+Core Developer/Architect - TSLib, BitBake, OpenEmbedded, OpenZaurus
 
 
