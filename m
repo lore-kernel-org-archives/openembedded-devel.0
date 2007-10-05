@@ -1,26 +1,23 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hvontres@gmail.com>) id 1Idu3l-0001Lx-4L
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1Idw1H-0002mz-KY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Oct 2007 22:46:13 +0200
-Received: by an-out-0708.google.com with SMTP id b33so89095ana
+	Sat, 06 Oct 2007 00:51:43 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so835729waf
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Oct 2007 13:40:43 -0700 (PDT)
-Received: by 10.142.178.13 with SMTP id a13mr1798460wff.1191616842012;
-	Fri, 05 Oct 2007 13:40:42 -0700 (PDT)
-Received: by 10.143.11.12 with HTTP; Fri, 5 Oct 2007 13:40:41 -0700 (PDT)
-Message-ID: <a7f8874a0710051340s968058exfac7aa14b2b32b5d@mail.gmail.com>
-Date: Fri, 5 Oct 2007 13:40:41 -0700
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+	Fri, 05 Oct 2007 15:46:16 -0700 (PDT)
+Received: by 10.115.93.16 with SMTP id v16mr11570296wal.1191624375967;
+	Fri, 05 Oct 2007 15:46:15 -0700 (PDT)
+Received: by 10.115.75.15 with HTTP; Fri, 5 Oct 2007 15:46:10 -0700 (PDT)
+Message-ID: <bdb0025f0710051546m7b8b6721s21ee4569628ac64a@mail.gmail.com>
+Date: Sat, 6 Oct 2007 00:46:10 +0200
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0710051256k6d224986o6644f2e44918ed2e@mail.gmail.com>
+In-Reply-To: <4706971D.7060809@gmx.net>
 MIME-Version: 1.0
-References: <F38DEABE0E171746B133C1ABBD142D97071112B2@radmail.Radstone.Local>
-	<1191601344.17230.22.camel@localhost.localdomain>
-	<a7f8874a0710051002y3a6a4d83t9a9a008fff91532b@mail.gmail.com>
-	<c384c5ea0710051256k6d224986o6644f2e44918ed2e@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: SVN fetcher behaviour
+References: <1D59FE6F-66A4-4367-BD53-4BD50D473AB5@selfish.org>
+	<4706971D.7060809@gmx.net>
+Subject: Re: OEDEM is coming...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,44 +31,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2007 20:46:16 -0000
+X-List-Received-Date: Fri, 05 Oct 2007 22:51:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On 10/5/07, Leon Woestenberg <leon.woestenberg@gmail.com> wrote:
+At least tomorrow it starts on 10am...
+See you.
+
+
+On 10/5/07, Robert Schuster <theBohemian@gmx.net> wrote:
+> Hi,
+> when does the meeting starts tomorrow (and the other days)?
 >
-> Hello,
+> Regards
+> Robert
 >
-> On 10/5/07, Hans Henry von Tresckow <hvontres@gmail.com> wrote:
-> > The default of "1" is set in conf/bitbake.conf. The reason for this is
-> that
-> > any svn recipe without an explicit SRCREV set will cause parsing to fail
-> if
-> > the build machine or the svn server is off line. If you can live with
-> this
-> > limitation, then you could comment that line out to get the default
-> > behavior.
+> Holger Freyther schrieb:
+> > Hey,
 > >
-> But I think what was asked if a default can be set that (a) does not
-> break parsing when servers are unreachable; and (b) does fetch HEAD
-> instead of revision 1.
+> > there are some things to announce:
+> >
+> >       1.) The german train company ("Deutsche Bahn") will be striked
+> > tomorrow by some labor:
+> >               2/3 of all trains should travel
+> >               the strike schedule is up and will be followed
+> >       2.) Berlin has a nice public transportation system. This is the BVG
+> > and the S-Bahn. S-Bahn is                  part of the trains company and will
+> > be striked as well. 50% of all trains should travel. S-Bahn        has
+> > a big green S as logo. To go from the Central-Station to our office
+> > you can either wait for            the S-Bahn or use the bus
+> >       3.) My cellphone number is +49 177 6513101... (I think I won't
+> > regret this), the number of my office is +49 30 240 88 23 30.
+> >
+> >
+> >       I will be either in the office or at the central station awaiting
+> > koen's and others arrival!
+> >
+> > don't get lost
+> >
+> >       z.
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
 >
-> Regards,
-> --
-> Leon
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-
-I did see an Entry called "AUTOREV" in bitbake.conf but I am not sure if
-that does what you want either, since using that in a recepie might still
-break parsing when off-line..
+>
+>
 
 
 -- 
-Henry von Tresckow (hvontres)
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
+
 
