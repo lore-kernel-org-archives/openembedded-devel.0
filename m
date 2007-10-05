@@ -1,28 +1,29 @@
-Received: from [64.233.162.237] (helo=nz-out-0506.google.com)
+Received: from [62.142.5.109] (helo=emh03.mail.saunalahti.fi)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <raj.khem@gmail.com>) id 1IdpTm-0000Xs-Sf
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Oct 2007 17:52:43 +0200
-Received: by nz-out-0506.google.com with SMTP id i11so435592nzh
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Oct 2007 08:47:17 -0700 (PDT)
-Received: by 10.115.23.12 with SMTP id a12mr2779972waj.1191599235249;
-	Fri, 05 Oct 2007 08:47:15 -0700 (PDT)
-Received: by 10.114.208.4 with HTTP; Fri, 5 Oct 2007 08:47:15 -0700 (PDT)
-Message-ID: <19c1b8a90710050847o4a3dff07na8f0f18baaf56bcf@mail.gmail.com>
-Date: Fri, 5 Oct 2007 08:47:15 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <f96d234e0710050657lbbf7391tb2437588f9c93d31@mail.gmail.com>
-MIME-Version: 1.0
-References: <1191494488.2516.34.camel@toontown> <4704CC05.40206@klever.net>
-	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>
-	<1191502502.2516.39.camel@toontown>
-	<EB5E2840-5F10-45F9-8B97-9FCFDC7F5AAE@selfish.org>
-	<D61182AC8012EA4EBC531B3AF23BE10947F630@tranzeo-mail2.12stewart.tranzeo.com>
-	<4704F01B.70104@klever.net> <4705D99D.6070209@miromico.ch>
-	<f96d234e0710050657lbbf7391tb2437588f9c93d31@mail.gmail.com>
-Subject: Re: oe for two target boards at the same time
+	(envelope-from <philippedeswert@scarlet.be>) id 1Idq4u-0005K3-3T
+	for openembedded-devel@openembedded.org; Fri, 05 Oct 2007 18:31:04 +0200
+Received: from saunalahti-vams (vs3-11.mail.saunalahti.fi [62.142.5.95])
+	by emh03-2.mail.saunalahti.fi (Postfix) with SMTP id 868F3EBDC1
+	for <openembedded-devel@openembedded.org>;
+	Fri,  5 Oct 2007 19:25:39 +0300 (EEST)
+Received: from emh03.mail.saunalahti.fi ([62.142.5.109])
+	by vs3-11.mail.saunalahti.fi ([62.142.5.95])
+	with SMTP (gateway) id A07EFF853B2; Fri, 05 Oct 2007 19:25:39 +0300
+Received: from [192.168.0.100] (a91-153-17-113.elisa-laajakaista.fi
+	[91.153.17.113])
+	by emh03.mail.saunalahti.fi (Postfix) with ESMTP id 7591B158B1D
+	for <openembedded-devel@openembedded.org>;
+	Fri,  5 Oct 2007 19:25:38 +0300 (EEST)
+From: Philippe De Swert <philippedeswert@scarlet.be>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <F38DEABE0E171746B133C1ABBD142D97071112B2@radmail.Radstone.Local>
+References: <F38DEABE0E171746B133C1ABBD142D97071112B2@radmail.Radstone.Local>
+Date: Fri, 05 Oct 2007 19:22:24 +0300
+Message-Id: <1191601344.17230.22.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+X-Antivirus: VAMS
+Subject: Re: SVN fetcher behaviour
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,65 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2007 15:52:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 05 Oct 2007 16:31:04 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-I generally use a separate tmp directory for each machine and common
-sources. This has worked well for me so far.
+Hello all,
 
--Khem
+On Thu, 2007-10-04 at 11:57 +0100, Martyn Welch wrote:
+> It is failing to download gconf-dbus using "gconf-dbus_svn.bb". It seems
+> that the script does not specify a revision and it therefore trying to
+> download revision 1. This fails.
+> 
+> I have managed to get the script to continue buy hacking the script to
+> get it to download the current revision (608), by adding "rev=608" to
+> the SRC_URI.
 
-On 10/5/07, Cliff Brake <cliff.brake@gmail.com> wrote:
-> On 10/5/07, Alex <mailinglist@miromico.ch> wrote:
-> > Hi all
-> >
-> > How do I setup my directory structure to use oe for two target boards.
-> >
-> > I have an AVR32 board and an AT91 board and would like to use oe for
-> > both of them with at less dublicated software as possible.
->
-> As these are different architectures, I don't think you can use
-> multimachine.  What I typically do is just set up a system where I
-> share a common overlay (bbcollections), the openembedded directory,
-> and downloads directory.  The nslu2 master makefile what I started
-> with, but there are other ways.  Soft links are used to link the
-> common directories.  EG:
->
->   openembedded
->   openembedded.custom (bb collections overlay)
->   bitbake
->   downloads
->   projectA
->        openembedded.custom -> ../openembedded.custom
->        openembedded -> ../openembedded
->        bitbake -> ../bitbake
->        downloads -> ../downloads
->        tmp
->        conf
->   projectB
->        openembedded.custom -> ../openembedded.custom
->        openembedded -> ../openembedded
->        bitbake -> ../bitbake
->        downloads -> ../downloads
->        tmp
->        conf
->
-> I'd be interested in hearing how others set up their build directory.
->
-> Thanks,
-> Cliff
->
-> --
-> =======================
-> Cliff Brake
-> http://bec-systems.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I ran into a similar problem recently and it seems you need to edit
+../org.openembedded.dev/conf/distro/include/sane-srcdates.inc or make
+sure it is included in your distro.
+
+> I've looked at
+> http://www.openembedded.org/user-manual&dpage=src_uri_variable, which
+> (under "SVN") describes the behaviour of the svn fetcher. This doesn't
+> seem to specify what the default behaviour of the svn fetcher is when no
+> revision is specified, I'd assumed it would be the "head", though I am
+> now having some doubt.
+
+I think this should be the default behaviour, unfortunately it is not.
+The expected behaviour is fetch the latest revision and build it but it
+dies not.  I think ib general it is a great improvement for managing svn
+revisions, but it sucks at building the latest and newest.
+
+Cheers,
+
+Philippe
+
+
 
 
