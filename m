@@ -1,24 +1,23 @@
-Received: from [209.85.132.245] (helo=an-out-0708.google.com)
+Received: from [66.249.82.231] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hvontres@gmail.com>) id 1IdqeX-0005s7-Nb
+	(envelope-from <leon.woestenberg@gmail.com>) id 1IdtN5-0004oa-Rk
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Oct 2007 19:07:54 +0200
-Received: by an-out-0708.google.com with SMTP id b33so79916ana
+	Fri, 05 Oct 2007 22:02:04 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so577117wxd
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Oct 2007 10:02:28 -0700 (PDT)
-Received: by 10.142.253.21 with SMTP id a21mr1676127wfi.1191603747644;
-	Fri, 05 Oct 2007 10:02:27 -0700 (PDT)
-Received: by 10.143.11.12 with HTTP; Fri, 5 Oct 2007 10:02:27 -0700 (PDT)
-Message-ID: <a7f8874a0710051002y3a6a4d83t9a9a008fff91532b@mail.gmail.com>
-Date: Fri, 5 Oct 2007 10:02:27 -0700
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+	Fri, 05 Oct 2007 12:56:37 -0700 (PDT)
+Received: by 10.90.78.9 with SMTP id a9mr163286agb.1191614196913;
+	Fri, 05 Oct 2007 12:56:36 -0700 (PDT)
+Received: by 10.90.66.15 with HTTP; Fri, 5 Oct 2007 12:56:36 -0700 (PDT)
+Message-ID: <c384c5ea0710051256k6d224986o6644f2e44918ed2e@mail.gmail.com>
+Date: Fri, 5 Oct 2007 21:56:36 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1191601344.17230.22.camel@localhost.localdomain>
+In-Reply-To: <a7f8874a0710051002y3a6a4d83t9a9a008fff91532b@mail.gmail.com>
 MIME-Version: 1.0
 References: <F38DEABE0E171746B133C1ABBD142D97071112B2@radmail.Radstone.Local>
 	<1191601344.17230.22.camel@localhost.localdomain>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Cc: openembedded-devel@openembedded.org
+	<a7f8874a0710051002y3a6a4d83t9a9a008fff91532b@mail.gmail.com>
 Subject: Re: SVN fetcher behaviour
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,61 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2007 17:07:54 -0000
+X-List-Received-Date: Fri, 05 Oct 2007 20:02:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On 10/5/07, Philippe De Swert <philippedeswert@scarlet.be> wrote:
->
-> Hello all,
->
-> On Thu, 2007-10-04 at 11:57 +0100, Martyn Welch wrote:
-> > It is failing to download gconf-dbus using "gconf-dbus_svn.bb". It seems
-> > that the script does not specify a revision and it therefore trying to
-> > download revision 1. This fails.
-> >
-> > I have managed to get the script to continue buy hacking the script to
-> > get it to download the current revision (608), by adding "rev=608" to
-> > the SRC_URI.
->
-> I ran into a similar problem recently and it seems you need to edit
-> ../org.openembedded.dev/conf/distro/include/sane-srcdates.inc or make
-> sure it is included in your distro.
->
-> > I've looked at
-> > http://www.openembedded.org/user-manual&dpage=src_uri_variable, which
-> > (under "SVN") describes the behaviour of the svn fetcher. This doesn't
-> > seem to specify what the default behaviour of the svn fetcher is when no
-> > revision is specified, I'd assumed it would be the "head", though I am
-> > now having some doubt.
->
-> I think this should be the default behaviour, unfortunately it is not.
-> The expected behaviour is fetch the latest revision and build it but it
-> dies not.  I think ib general it is a great improvement for managing svn
-> revisions, but it sucks at building the latest and newest.
->
-> Cheers,
->
-> Philippe
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-<http://bugs.openembedded.org/show_bug.cgi?id=2897>
+Hello,
 
-The default of "1" is set in conf/bitbake.conf. The reason for this is that
-any svn recipe without an explicit SRCREV set will cause parsing to fail if
-the build machine or the svn server is off line. If you can live with this
-limitation, then you could comment that line out to get the default
-behavior.
+On 10/5/07, Hans Henry von Tresckow <hvontres@gmail.com> wrote:
+> The default of "1" is set in conf/bitbake.conf. The reason for this is that
+> any svn recipe without an explicit SRCREV set will cause parsing to fail if
+> the build machine or the svn server is off line. If you can live with this
+> limitation, then you could comment that line out to get the default
+> behavior.
+>
+But I think what was asked if a default can be set that (a) does not
+break parsing when servers are unreachable; and (b) does fetch HEAD
+instead of revision 1.
 
-
-
+Regards,
 -- 
-Henry von Tresckow (hvontres)
+Leon
+
 
