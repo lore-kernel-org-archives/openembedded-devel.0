@@ -1,23 +1,22 @@
-Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1Idw1H-0002mz-KY
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Oct 2007 00:51:43 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so835729waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Oct 2007 15:46:16 -0700 (PDT)
-Received: by 10.115.93.16 with SMTP id v16mr11570296wal.1191624375967;
-	Fri, 05 Oct 2007 15:46:15 -0700 (PDT)
-Received: by 10.115.75.15 with HTTP; Fri, 5 Oct 2007 15:46:10 -0700 (PDT)
-Message-ID: <bdb0025f0710051546m7b8b6721s21ee4569628ac64a@mail.gmail.com>
-Date: Sat, 6 Oct 2007 00:46:10 +0200
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1Ie85z-00063N-QS
+	for openembedded-devel@openembedded.org; Sat, 06 Oct 2007 13:45:23 +0200
+Received: (qmail 15504 invoked by uid 813007); 6 Oct 2007 11:39:53 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO maluch.local)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 6 Oct 2007 11:39:53 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4706971D.7060809@gmx.net>
+Date: Sat, 6 Oct 2007 13:39:49 +0200
+User-Agent: KMail/1.9.7
+References: <1191494488.2516.34.camel@toontown> <4705D99D.6070209@miromico.ch>
+	<f96d234e0710050657lbbf7391tb2437588f9c93d31@mail.gmail.com>
+In-Reply-To: <f96d234e0710050657lbbf7391tb2437588f9c93d31@mail.gmail.com>
 MIME-Version: 1.0
-References: <1D59FE6F-66A4-4367-BD53-4BD50D473AB5@selfish.org>
-	<4706971D.7060809@gmx.net>
-Subject: Re: OEDEM is coming...
+Message-Id: <200710061339.50324.openembedded@haerwu.biz>
+Subject: Re: oe for two target boards at the same time
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,68 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2007 22:51:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 06 Oct 2007 11:45:24 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-At least tomorrow it starts on 10am...
-See you.
+Dnia pi=B1tek, 5 pa=BCdziernika 2007, Cliff Brake napisa=B3:
+> On 10/5/07, Alex <mailinglist@miromico.ch> wrote:
+
+> > How do I setup my directory structure to use oe for two target
+> > boards.
+
+> > I have an AVR32 board and an AT91 board and would like to use oe for
+> > both of them with at less dublicated software as possible.
+
+> As these are different architectures, I don't think you can use
+> multimachine.
+
+You can use multimachine even when TARGET_ARCH differ - only *-native=20
+utils will be the same - all cross tools will be built for both targets.
+
+> What I typically do is just set up a system where I share a common
+> overlay (bbcollections), the openembedded directory,=20
+> and downloads directory.
+
+> I'd be interested in hearing how others set up their build directory.
+
+http://blog.haerwu.biz/2006/11/22/my-openembedded-environment-ii/ is how I=
+=20
+have it configured.
 
 
-On 10/5/07, Robert Schuster <theBohemian@gmx.net> wrote:
-> Hi,
-> when does the meeting starts tomorrow (and the other days)?
->
-> Regards
-> Robert
->
-> Holger Freyther schrieb:
-> > Hey,
-> >
-> > there are some things to announce:
-> >
-> >       1.) The german train company ("Deutsche Bahn") will be striked
-> > tomorrow by some labor:
-> >               2/3 of all trains should travel
-> >               the strike schedule is up and will be followed
-> >       2.) Berlin has a nice public transportation system. This is the BVG
-> > and the S-Bahn. S-Bahn is                  part of the trains company and will
-> > be striked as well. 50% of all trains should travel. S-Bahn        has
-> > a big green S as logo. To go from the Central-Station to our office
-> > you can either wait for            the S-Bahn or use the bus
-> >       3.) My cellphone number is +49 177 6513101... (I think I won't
-> > regret this), the number of my office is +49 30 240 88 23 30.
-> >
-> >
-> >       I will be either in the office or at the central station awaiting
-> > koen's and others arrival!
-> >
-> > don't get lost
-> >
-> >       z.
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
->
 
-
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
