@@ -1,31 +1,24 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Ie9tl-0008Dv-8K
-	for openembedded-devel@openembedded.org; Sat, 06 Oct 2007 15:41:07 +0200
-Received: from vpn006069.vpn.utwente.nl (vpn006069.vpn.utwente.nl
-	[130.89.6.69])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l968JhHh029058 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 6 Oct 2007 10:19:43 +0200
-Message-ID: <4707451B.4040107@student.utwente.nl>
-Date: Sat, 06 Oct 2007 10:19:39 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <1191494488.2516.34.camel@toontown>
-	<4704CC05.40206@klever.net>	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>	<1191502502.2516.39.camel@toontown>	<EB5E2840-5F10-45F9-8B97-9FCFDC7F5AAE@selfish.org>	<D61182AC8012EA4EBC531B3AF23BE10947F630@tranzeo-mail2.12stewart.tranzeo.com>	<4704F01B.70104@klever.net>
-	<4705D99D.6070209@miromico.ch>
-	<f96d234e0710050657lbbf7391tb2437588f9c93d31@mail.gmail.com>
-In-Reply-To: <f96d234e0710050657lbbf7391tb2437588f9c93d31@mail.gmail.com>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: oe for two target boards at the same time
+	(envelope-from <daniel@totalueberwachung.de>) id 1Ief6d-0000QC-R2
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Oct 2007 01:00:15 +0200
+Received: from elara.orbit.homelinux.net (gprs-pool-1-021.eplus-online.de
+	[212.23.126.21])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by thebe.totalueberwachung.de (Postfix) with ESMTP id 0F00A1586B6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Oct 2007 00:58:58 +0200 (CEST)
+Date: Mon, 8 Oct 2007 00:54:45 +0200
+From: Daniel Willmann <daniel@totalueberwachung.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071008005445.57d57b7c@elara.orbit.homelinux.net>
+In-Reply-To: <1D59FE6F-66A4-4367-BD53-4BD50D473AB5@selfish.org>
+References: <1D59FE6F-66A4-4367-BD53-4BD50D473AB5@selfish.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.10.14; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: OEDEM is coming...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,38 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Oct 2007 13:42:00 -0000
-X-List-Received-Date: Sat, 06 Oct 2007 13:42:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 07 Oct 2007 23:00:16 -0000
+X-Groupsio-MsgNum: 3077
+Content-Type: multipart/signed; boundary="Sig_/8n1Z0RQT2R8Iv0UC1lRTtA4";
+	protocol="application/pgp-signature"; micalg=PGP-SHA1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--Sig_/8n1Z0RQT2R8Iv0UC1lRTtA4
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Cliff Brake schreef:
-> On 10/5/07, Alex <mailinglist@miromico.ch> wrote:
->> Hi all
->>
->> How do I setup my directory structure to use oe for two target boards.
->>
->> I have an AVR32 board and an AT91 board and would like to use oe for
->> both of them with at less dublicated software as possible.
-> 
-> As these are different architectures, I don't think you can use
-> multimachine. 
+On Thu, 4 Oct 2007 21:48:36 +0200
+Holger Freyther <zecke@selfish.org> wrote:
 
-Multimachine works fine for things like that, except that we are *still* waiting for an OK
-to merge the avr32 stuff into .dev
+> the S-Bahn or use the bus 3.) My cellphone number is +49 177
+> 6513101... (I think I won't regret this), the number of my office is
+> +49 30 240 88 23 30.
 
-regards,
+After a friend of Holger got weird phone calls I am supposed to announce
+that his phone number actually is +49 30 240 88 23 03. :-)
 
-Koen
+
+Daniel
+
+--Sig_/8n1Z0RQT2R8Iv0UC1lRTtA4
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.7 (GNU/Linux)
 
-iD8DBQFHB0UbMkyGM64RGpERAgalAJ4j+ouRvC4msp8DZImB06lYyqvJtgCbBBEe
-gVcJQX+e3nHCHBA2dQ0xfOY=
-=qvpO
+iD8DBQFHCWO1Z2fhlIqbZ1gRAiDIAKCdNQg+WwgcnmHfUbNMrDsZi4F2mwCgowKl
+31nEkN8SBfY8RLE0QMn+Jzs=
+=x21a
 -----END PGP SIGNATURE-----
 
-
+--Sig_/8n1Z0RQT2R8Iv0UC1lRTtA4--
