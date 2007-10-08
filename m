@@ -1,29 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.162.239] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IeuOS-0004xj-PL
-	for openembedded-devel@openembedded.org; Mon, 08 Oct 2007 17:19:40 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l98FDwXI026125
-	for <openembedded-devel@openembedded.org>;
-	Mon, 8 Oct 2007 16:13:58 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 25896-06 for <openembedded-devel@openembedded.org>;
-	Mon,  8 Oct 2007 16:13:55 +0100 (BST)
-Received: from [192.168.3.6] ([192.168.3.6]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l98FDpU5026119
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 8 Oct 2007 16:13:51 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Mon, 08 Oct 2007 17:13:50 +0200
-Message-Id: <1191856431.25900.12.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.8.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Poky commit list available
+	(envelope-from <sdgvulpes@gmail.com>) id 1IewKV-0002by-06
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Oct 2007 19:23:43 +0200
+Received: by nz-out-0506.google.com with SMTP id i11so665179nzh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Oct 2007 10:18:00 -0700 (PDT)
+Received: by 10.142.47.6 with SMTP id u6mr2184594wfu.1191863879359;
+	Mon, 08 Oct 2007 10:17:59 -0700 (PDT)
+Received: by 10.142.186.19 with HTTP; Mon, 8 Oct 2007 10:17:59 -0700 (PDT)
+Message-ID: <f34f85580710081017n672ff0cx8f58967bb0758afd@mail.gmail.com>
+Date: Mon, 8 Oct 2007 13:17:59 -0400
+From: "Todd Blumer" <sdgvulpes@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <DAD05505-81A7-48FE-A078-069520BBF06E@gmx.net>
+MIME-Version: 1.0
+References: <1D59FE6F-66A4-4367-BD53-4BD50D473AB5@selfish.org>
+	<20071008005445.57d57b7c@elara.orbit.homelinux.net>
+	<DAD05505-81A7-48FE-A078-069520BBF06E@gmx.net>
+Subject: Re: OEDEM is coming...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,18 +32,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2007 15:19:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 08 Oct 2007 17:23:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-A mailing list for Poky commits is now available (as requested):
-
-List-Id: Poky Commits Mailing List
-List-Unsubscribe: <mailto:poky-commits+unsubscribe@o-hand.com>
-List-Post: <mailto:poky-commits@o-hand.com>
-List-Help:  <mailto:poky-commits+help@o-hand.com>
-List-Subscribe:  <mailto:poky-commits+subscribe@o-hand.com>
-
-
+Is it possible for someone to post notes / minutes from OEDEM to the
+mailing list for those of us who could not attend?
+Thanks.
+--
+Todd
 
 
