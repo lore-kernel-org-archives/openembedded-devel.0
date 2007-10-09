@@ -1,32 +1,22 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1IfDgI-0000kf-TV
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2007 13:55:22 +0200
-Received: from aquilonia ([::ffff:62.220.14.162])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Tue, 09 Oct 2007 12:49:35 +0100
-	id 00064059.470B6ACF.000054E2
-Date: Tue, 9 Oct 2007 13:49:29 +0200
-From: Graeme Gregory <dp@xora.org.uk>
+Received: from [89.96.204.112] (helo=www-zirak-new.zirak.it)
+	by linuxtogo.org with smtp (Exim 4.67) (envelope-from <phy@linux.it>)
+	id 1IfH3n-0004Xa-B9
+	for openembedded-devel@openembedded.org; Tue, 09 Oct 2007 17:31:51 +0200
+Received: (qmail 25272 invoked by uid 64017); 9 Oct 2007 15:20:52 -0000
+Received: from 62.123.41.74 (filippo@zirak.it@62.123.41.74) by www-zirak-new
+	(envelope-from <phy@linux.it>, uid 64011) with qmail-scanner-2.01 
+	(uvscan: v5.1.00/v5052. bogofilter: 0.92.0. spamassassin: 3.0.4.  
+	Clear:RC:1(62.123.41.74):. 
+	Processed in 0.789407 secs); 09 Oct 2007 15:20:52 -0000
+Received: from unknown (HELO ?192.168.1.200?) (filippo@zirak.it@62.123.41.74)
+	by www-zirak-new.zirak.it with SMTP; 9 Oct 2007 15:20:50 -0000
+Message-ID: <470B9D9D.5080501@linux.it>
+Date: Tue, 09 Oct 2007 17:26:21 +0200
+From: Filippo Basso <phy@linux.it>
+User-Agent: IceDove 1.5.0.12 (X11/20070730)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071009134929.0ebdf0ce@aquilonia>
-In-Reply-To: <20071009131812.0f55c4d2@aquilonia>
-References: <1191494488.2516.34.camel@toontown>
-	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>
-	<1191502502.2516.39.camel@toontown>
-	<EB5E2840-5F10-45F9-8B97-9FCFDC7F5AAE@selfish.org>
-	<D61182AC8012EA4EBC531B3AF23BE10947F630@tranzeo-mail2.12stewart.tranzeo.com>
-	<4704F01B.70104@klever.net> <4705D99D.6070209@miromico.ch>
-	<f96d234e0710050657lbbf7391tb2437588f9c93d31@mail.gmail.com>
-	<f96d234e0710081320s567bf1bfie56eebca83afb6b2@mail.gmail.com>
-	<1191918523.470b3bbb10a47@dominion.kabel.utwente.nl>
-	<74d0deb30710090202i61cdd25n22f3519ebfd9147a@mail.gmail.com>
-	<1191926182.20582.22.camel@localhost.localdomain>
-	<20071009131812.0f55c4d2@aquilonia>
-X-Mailer: Claws Mail 3.0.1 (GTK+ 2.10.11; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: oe for two target boards at the same time
+Subject: different hosts, different OE images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,56 +30,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2007 11:55:23 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 09 Oct 2007 15:31:51 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
-On Tue, 9 Oct 2007 13:18:12 +0200
-Graeme Gregory <dp@xora.org.uk> wrote:
+Hi,
 
-> On Tue, 09 Oct 2007 12:36:22 +0200
-> Richard Purdie <rpurdie@rpsys.net> wrote:
-> > The issue should be fixed. I regularly make builds with a MACHINE ?=
-> > entry but with MACHINE set in the environment too and it all seems
-> > to work.
-> > 
-> > People keep telling me there is a problem but I've not seen any
-> > reproducible test case...
-> > 
-> 
-> NOTE: package binutils-cross-2.18-r0: task do_populate_staging:
-> completed
-> 
-> looks fixed to me, I never used to be able to do this.
-> 
-Spoke too soon
+    here is another developer jumped into the world of OE... Wow! really
+amazing tool...!
 
-checking for libc-friendly stddef.h... yes
-checking whether we need to use -P to assemble .S files... no
-checking whether .text pseudo-op must be used... yes
-checking for assembler global-symbol directive... .globl
-checking for .set assembler directive... no
-checking for assembler .type directive prefix... %
-checking for .symver assembler directive... yes
-checking for ld --version-script... no
-*** WARNING: You should not compile GNU libc without versioning. Not
-using *** versioning will introduce incompatibilities so that old
-binaries *** will not run anymore.
-*** For versioning you need recent binutils (binutils-2.8.1.0.23 or
-newer). checking for .previous assembler directive... yes
-checking for .protected and .hidden assembler directive... yes
-checking whether __attribute__((visibility())) is supported... yes
-checking for broken __attribute__((visibility()))... no
-checking for broken __attribute__((alias()))... no
-checking whether to put _rtld_local into .sdata section... no
-checking for arm-angstrom-linux-gnueabi-readelf...
-arm-angstrom-linux-gnueabi-re adelf
-checking for .preinit_array/.init_array/.fini_array support... no
-configure: error: Need linker with .init_array/.fini_array support.
-FATAL: oe_runconf failed
 
-This is what happens if MACHINE=spitz bitbake angstrom-devel-image
+Anyway, today I got into a strange behaviours that depends on the
+machine on which I'm bitbakin' (a debian testing/lenny and a debian
+stable/etch on vmware).
+I understood that the results should be highly independent from host
+system, so I begun debugging a bit.
 
-Graeme
+So, I luckily (!) got also into a difference that lead me to a
+compile/non-compile, much easier to debug. On a angstrom-2007.1 and i586
+architecture, I added "minimo" web-browser and I got that with the same
+identical OE installation it compiles on my machine and fails compiling
+in my vmware.
+
+
+
+2 new points are now in my debug log:
+
+1st point - (one of these "I want to understand why...")
+in general, quite all the files "run.do_configure.xxx" or similar are
+not sorted in the same way; definitions of environment variables are in
+different order, depending on the system... is it normal?
+
+2nd point - (one that let me thing "is this a bug...?")
+in mozilla minimo webbrowser (minimo-1_0.02+cvs20070626-r0) the
+log.do_compile is strange:
+
+***debian etch***
+    ....
+    ccache gcc -o host_xpidl
+-isystem/home/nbt/OSSTBOX/trunk/oe/build-nbt-crownbeach/tmp/staging/i586-angstrom-linux/include
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os
+-DXP_UNIX -O3 
+-I/home/nbt/OSSTBOX/trunk/oe/build-nbt-crownbeach/tmp/staging/i586-angstrom-linux/include/libIDL-2.0
+-I/home/nbt/OSSTBOX/trunk/oe/build-nbt-crownbeach/tmp/staging/i586-angstrom-linux/include/glib-2.0
+-I/home/nbt/OSSTBOX/trunk/oe/build-nbt-crownbeach/tmp/staging/i586-angstrom-linux/lib/glib-2.0/include
+-DMDCPUCFG=\"md/_linux.cfg\"  host_xpidl.o host_xpidl_idl.o
+host_xpidl_util.o host_xpidl_header.o host_xpidl_typelib.o
+host_xpidl_doc.o host_xpidl_java.o ../../../dist/host/lib/libhostxpt.a
+-L/home/nbt/OSSTBOX/trunk/oe/build-nbt-crownbeach/tmp/staging/i586-angstrom-linux/lib
+-lIDL-2 -lglib-2.0
+   
+/home/nbt/OSSTBOX/trunk/oe/build-nbt-crownbeach/tmp/staging/i586-angstrom-linux/lib/libc.so.6:
+undefined reference to `_dl_tls_get_addr_soft@GLIBC_PRIVATE'
+collect2: ld returned 1 exit status
+    make[7]: *** [host_xpidl] Error 1
+    ...
+    FATAL: oe_runmake failed
+   
+***debian lenny***
+    the above "ccache gcc -o host_xpidl..." works well, even if there
+are some warnings in compiling "ccache gcc -o host_xpidl_java.o ..."
+that are not present in etch.
+
+is this a bug? shouldn't the recipe invoke "ccache
+i586-angstrom-linux-gcc" instead of "ccache gcc" (as is doing in other
+parts of the recipe)???
+Am I right saying that there it's using my gcc and not the cross-gcc? is
+there an elegant way to check which other packages are using somewhere
+my gcc and not the right one? (there was also another difference in
+behaviours, before minimo, between the 2 images created)
+
+
+thank you for all,
+    hope to contribute more actively soon, now just need some newbie
+confirmations!
+phy
+
+
+
+
 
 
