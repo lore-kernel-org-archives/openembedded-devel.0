@@ -1,22 +1,26 @@
-Received: from [209.85.198.189] (helo=rv-out-0910.google.com)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <papercrane@gmail.com>) id 1If1py-0003Wo-Ki
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2007 01:16:35 +0200
-Received: by rv-out-0910.google.com with SMTP id c24so852583rvf
+	(envelope-from <openembedded-devel@lists.futaris.org>)
+	id 1If3CK-0004dG-4n for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Oct 2007 02:43:44 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 9906630999
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Oct 2007 16:10:49 -0700 (PDT)
-Received: by 10.114.79.1 with SMTP id c1mr11559816wab.1191885049029;
-	Mon, 08 Oct 2007 16:10:49 -0700 (PDT)
-Received: by 10.114.144.2 with HTTP; Mon, 8 Oct 2007 16:10:48 -0700 (PDT)
-Message-ID: <432beae0710081610k11b018a9s164aff560466718d@mail.gmail.com>
-Date: Mon, 8 Oct 2007 16:10:48 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
+	Mon,  8 Oct 2007 20:37:59 -0400 (EDT)
+Received: from web7.messagingengine.com ([10.202.2.216])
+	by compute1.internal (MEProxy); Mon, 08 Oct 2007 20:37:59 -0400
+Received: by web7.messagingengine.com (Postfix, from userid 99)
+	id 6AA68220FC; Mon,  8 Oct 2007 20:37:59 -0400 (EDT)
+Message-Id: <1191890279.1583.1214831015@webmail.messagingengine.com>
+X-Sasl-Enc: RQnBI7dHeavx+hH0XaktmGiLcC71vPoPsMfZu+ibibjv 1191890279
+From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <DE31D336-513F-40FF-B766-DCED127697B0@gumstix.com>
 MIME-Version: 1.0
-References: <DE31D336-513F-40FF-B766-DCED127697B0@gumstix.com>
-Subject: Re: monotone question
+X-Mailer: MessagingEngine.com Webmail Interface
+References: <f7kde4$rum$1@sea.gmane.org>
+In-Reply-To: <f7kde4$rum$1@sea.gmane.org>
+Date: Tue, 09 Oct 2007 10:37:59 +1000
+Subject: Re: Packaging problem.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,64 +34,190 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2007 23:16:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Oct 2007 00:43:44 -0000
 Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="ISO-8859-1"
 
-On 10/8/07, Craig Hughes <craig@gumstix.com> wrote:
-> I'm trying to propagate changes from the org.openembedded.dev branch
-> onto my own branch, which I'd previous split off of org.oe.dev:
->
-> craig@azazel ~/code/gumstix/build/oe/org.gumstix.oe $ mtn propagate
-> org.openembedded.dev org.gumstix.oe
-> mtn: propagating org.openembedded.dev -> org.gumstix.oe
-> mtn: [source] 1a130f677a5150a067c580db5a25b619d936b441
-> mtn: [target] 4cd685ff40e8d2ee51c4e79e8fe6545549b865b6
-> mtn: warning: rename target conflict: nodes 24673, 24302, both want
-> parent 2139, name udev-115
-> mtn: warning: rename target conflict: nodes 24685, 24309, both want
-> parent 2139, name udev_115.bb
-> mtn: warning: rename target conflict: nodes 24693, 24630, both want
-> parent 25, name wifistix
-> mtn: warning: rename target conflict: nodes 24718, 24372, both want
-> parent 23861, name gumstix-pxa270-mmc.patch
-> mtn: warning: rename target conflict: nodes 24719, 24373, both want
-> parent 23861, name smc911x-fixup.patch
-> mtn: warning: resolve non-content conflicts and then try again.
-> mtn: error: merge failed due to unresolved conflicts
->
-> Now after some googling and head scratching, I've managed to decipher
-> those errors (which call themselves warnings) mean that the left and
-> right branches both added a new file with the same name.  But, how do
-> I resolve this conflict in a propagate?  In a merge, I could just mv
-> the file from my workdir then merge to get the file from the other
-> branch, then manually merge; kind of a PITA it should just diff3 them
-> for me with an empty ancestor or something and let me do the merge
-> that way -- no idea why there's a special case when the ancestor is
-> non-existent vs existent.  But with a propagate, there is no
-> "workdir" in which to perform this.  Is the only way to resolve this
-> to, say, checkout org.gumstix.oe, then delete the files from it,
-> commit, then propagate?
+Hi all,
 
-That's essentially the only way to fix it. You could also rename them
-or move them to another place. Monotone doesn't merge these since they
-aren't the same file ancestrally, they just happen to have the same
-name.
+I'm still having problems building an image using interactive mode.  Has
+anyone looked at the bug below since July???
 
-> That seems really bad cos there's a window
-> there where the org.gumstix.oe needs to be committed in a broken
-> state (missing those files)....
+As mentioned before, images build fine using bitbake from the command
+line, but not using "bitbake -i" ...  Does anyone else using interactive
+mode to build images ???
 
-True, but if you always expect every single revision to be bug-free.....
+Thanks
 
->
-> Anyone got any thoughts on how to resolve this?
->
+Hasjim
 
-
-
--- 
-Justin Patrin
+On Wed, 18 Jul 2007 14:54:07 +0800, "Rob Kramer" <robk@starhub.net.sg>
+said:
+> Hi all,
+> 
+> 
+> I have a problem with my homebrew image, in that it doesn't create
+> several
+> packages, which results in dependency failures in do_rootfs. I'm using
+> bitbake 1.8 svn head.
+> 
+> -------------
+> BB>> build vides-image
+> SHELL: Building vides-image
+> 
+> <big snip>
+> 
+> | log_check:
+> Using
+> /bulk/home/rob/oe/dev/build-epia/tmp/work/vides-image-1.0-r0/temp/log.do_rootfs.4203
+> as logfile
+> | log_check: There were error messages in the logfile
+> | log_check: Matched keyword: [ERR]
+> |
+> | Successfully terminated.
+> | Collected errors:
+> | ERROR: Cannot satisfy the following dependencies for task-base:
+> |        base-passwd update-rc.d initscripts modutils-initscripts netbase
+> update-alternatives update-rc.d update-rc.d tinylogin update-rc.d
+> sysfsutils module-init-tools acpid keymaps hdparm e2fsprogs
+> | ERROR: Cannot satisfy the following dependencies for task-vides-linux:
+> |        base-passwd initscripts netbase sysfsutils setserial tinylogin
+> modutils-initscripts rsync
+> | ERROR: Cannot satisfy the following dependencies for task-vides-base:
+> |        aumix bash update-rc.d ethtool rsync bzip2
+> -------------
+> 
+> On further investigation I found out that bitbake doesn't create ipk
+> packages for these missing deps. Let's take base-passwd; during
+> do_package,
+> there's a problem:
+> 
+> -------------
+> NOTE: the following files were installed but not shipped in any package:
+> NOTE:   /usr/share/man/pl/man8/update-passwd.8.gz
+> NOTE:   /usr/share/man/man8/update-passwd.8.gz
+> NOTE:   /usr/share/base-passwd/passwd.master
+> NOTE:   /usr/share/base-passwd/group.master
+> NOTE:   /usr/sbin/update-passwd
+> NOTE:   /usr/sbin/.debug/update-passwd
+> <snip>
+> NOTE: Not creating empty archive for base-passwd-3.5.9-r2
+> -------------
+> 
+> I added a debug statement to see what it is trying to package:
+> 
+> -------------
+> package.bbclass:404
+> 
+>                 filesvar = bb.data.getVar('FILES', localdata, 1) or ""
+>                 files = filesvar.split()
+> +               bb.note("ROB: pkg: '%s', files: '%s'" % (pkg, filesvar))
+>                 cleandirs = []
+> -------------
+> 
+> The interesting thing is that in bitbake file-mode everything works, but
+> in
+> interactive mode it fails (I cleaned before each command):
+> 
+> -------------
+> [wrobbie] ~/oe/dev/build-epia> bitbake -cpackage -b
+> ~/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb
+> NOTE: package base-passwd-3.5.9: started
+> <snip>
+> NOTE: package base-passwd-3.5.9-r2: task do_install: started
+> NOTE: package base-passwd-3.5.9-r2: task do_install: completed
+> NOTE: package base-passwd-3.5.9-r2: task do_package: started
+> NOTE: ROB: pkg: 'base-passwd-dbg',
+> files: '/usr/bin/.debug /usr/sbin/.debug /usr/libexec/.debug
+> /usr/lib/.debug /bin/.debug /sbin/.debug /lib/.debug
+> /usr/lib/base-passwd/.debug /usr/lib/matchbox-panel/.debug'
+> NOTE: ROB: pkg: 'base-passwd',
+> files: '/usr/bin/* /usr/sbin/* /usr/libexec/* /usr/lib/lib*.so.* /etc
+> /usr/com /var /bin/* /sbin/* /lib/*.so* /usr/share/base-passwd
+> /usr/lib/base-passwd/* /usr/share/pixmaps /usr/share/applications
+> /usr/share/idl /usr/share/omf /usr/share/sounds /usr/lib/bonobo/servers'
+> -------------
+> 
+> 
+> -------------
+> BB>> build base-passwd
+> SHELL: This command needs to parse bbfiles...
+> NOTE: Handling BitBake files: \ (3891/3891) [100 %]
+> NOTE: Parsing finished. 3680 cached, 0 parsed, 211 skipped, 783 masked.
+> 
+> SHELL: Building base-passwd
+> NOTE: Resolving missing task queue dependencies
+> NOTE: Preparing runqueue
+> NOTE: Executing runqueue
+> NOTE: Running task 218 of 229 (ID:
+> 9,
+> /home/rob/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb,
+> do_fetch)
+> 
+> <snip>
+> 
+> NOTE: Running task 225 of 229 (ID:
+> 1,
+> /home/rob/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb,
+> do_install)
+> NOTE: package base-passwd-3.5.9: started
+> NOTE: package base-passwd-3.5.9-r2: task do_install: started
+> NOTE: package base-passwd-3.5.9-r2: task do_install: completed
+> NOTE: package base-passwd-3.5.9: completed
+> NOTE: Running task 226 of 229 (ID:
+> 5,
+> /home/rob/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb,
+> do_package)
+> NOTE: package base-passwd-3.5.9: started
+> NOTE: package base-passwd-3.5.9-r2: task do_package: started
+> NOTE: ROB: pkg: 'base-passwd-dbg', files: ''
+> NOTE: ROB: pkg: 'base-passwd', files: ''
+> NOTE: ROB: pkg: 'base-passwd-doc', files: ' /usr/share/doc'
+> NOTE: ROB: pkg: 'base-passwd-dev', files: ''
+> NOTE: ROB: pkg: 'base-passwd-locale', files: ''
+> NOTE: the following files were installed but not shipped in any package:
+> NOTE:   /usr/share/man/pl/man8/update-passwd.8.gz
+> NOTE:   /usr/share/man/man8/update-passwd.8.gz
+> NOTE:   /usr/share/base-passwd/passwd.master
+> NOTE:   /usr/share/base-passwd/group.master
+> NOTE:   /usr/sbin/update-passwd
+> NOTE:   /usr/sbin/.debug/update-passwd
+> NOTE: package base-passwd-3.5.9-r2: task do_package: completed
+> NOTE: package base-passwd-3.5.9: completed
+> NOTE: Running task 227 of 229 (ID:
+> 7,
+> /home/rob/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb,
+> do_package_write)
+> NOTE: package base-passwd-3.5.9: started
+> NOTE: package base-passwd-3.5.9-r2: task do_package_write: started
+> NOTE: Not creating empty archive for base-passwd-dbg-3.5.9-r2
+> NOTE: Not creating empty archive for base-passwd-3.5.9-r2
+> Packaged contents of base-passwd-doc
+> into
+> /bulk/home/rob/oe/dev/build-epia/tmp/deploy/ipk/i586/base-passwd-doc_3.5.9-r2_i586.ipk
+> NOTE: Not creating empty archive for base-passwd-dev-3.5.9-r2
+> NOTE: Not creating empty archive for base-passwd-locale-3.5.9-r2
+> NOTE: package base-passwd-3.5.9-r2: task do_package_write: completed
+> NOTE: package base-passwd-3.5.9: completed
+> -------------
+> 
+> 
+> So, it seems the FILES variable in package.bbclass:404 is not set
+> properly
+> in the case of interactive mode. I can't find where FILES is set anyway;
+> the rest of the class uses FILES_${PN}.
+> 
+> Any hints at what I should be looking at?
+> 
+> Cheers!
+> 
+>     Rob
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
