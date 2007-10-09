@@ -1,33 +1,42 @@
-Received: from [74.93.1.97] (helo=azazel.hughes-family.org)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <craig@gumstix.com>) id 1If7Pl-0007nt-HK
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IfAY0-00025Q-5T
+	for openembedded-devel@openembedded.org; Tue, 09 Oct 2007 10:34:36 +0200
+Received: from dominion.dominion.void (dominion.kabel.utwente.nl
+	[130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l998Sh98027852 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 9 Oct 2007 10:28:43 +0200
+Received: from www-data by dominion.dominion.void with local (Exim 4.60)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IfASJ-0002cG-4Y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2007 07:13:53 +0200
-Received: from [????????p???I#?$IPv6:fe80::216:cbff:fe05:3ed7] (Pookah.local
-	[IPv6:fe80::216:cbff:fe05:3ed7%eth0])
-	by azazel.hughes-family.org (Postfix) with ESMTP id 371EE9D2AB
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2007 22:08:07 -0700 (PDT)
-Message-Id: <ABA57F92-B9FA-41C5-B0CD-76A4A6A146A5@gumstix.com>
-X-Habeas-Swe-6: email in exchange for a license for this Habeas
-X-Habeas-Swe-3: like Habeas SWE (tm)
-Date: Mon, 8 Oct 2007 22:08:07 -0700
-X-Habeas-Swe-8: Message (HCM) and not spam. Please report use of this
-From: Craig Hughes <craig@gumstix.com>
-X-Habeas-Swe-5: Sender Warranted Email (SWE) (tm). The sender of this
-X-Habeas-Swe-2: brightly anticipated
-In-Reply-To: <432beae0710081610k11b018a9s164aff560466718d@mail.gmail.com>
-References: <DE31D336-513F-40FF-B766-DCED127697B0@gumstix.com>
-	<432beae0710081610k11b018a9s164aff560466718d@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Image-Url: http://www.hughes-family.org/craig/craig64.jpg
-X-Habeas-Swe-7: warrant mark warrants that this is a Habeas Compliant
-Mime-Version: 1.0 (Apple Message framework v752.3)
-X-Habeas-Swe-4: Copyright 2002 Habeas (tm) 
-X-Habeas-Swe-1: winter into spring
-X-Habeas-Swe-9: mark in spam to <http://www.habeas.com/report/>.
-X-Mailer: Apple Mail (2.752.3)
-Subject: Re: monotone question
+	Tue, 09 Oct 2007 10:28:43 +0200
+Received: from dsl-62-220-14-162.berlikomm.net
+	(dsl-62-220-14-162.berlikomm.net [62.220.14.162]) 
+	by dominion.kabel.utwente.nl (IMP) with HTTP 
+	for <koen@localhost>; Tue, 09 Oct 2007 08:28:43 +0000
+Message-ID: <1191918523.470b3bbb10a47@dominion.kabel.utwente.nl>
+Date: Tue, 09 Oct 2007 08:28:43 +0000
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: openembedded-devel@openembedded.org
+References: <1191494488.2516.34.camel@toontown> <4704CC05.40206@klever.net>
+	<B9AD73C2-790F-43EE-9FC4-96F1B1FA9415@selfish.org>
+	<1191502502.2516.39.camel@toontown>
+	<EB5E2840-5F10-45F9-8B97-9FCFDC7F5AAE@selfish.org>
+	<D61182AC8012EA4EBC531B3AF23BE10947F630@tranzeo-mail2.12stewart.tranzeo.com>
+	<4704F01B.70104@klever.net> <4705D99D.6070209@miromico.ch>
+	<f96d234e0710050657lbbf7391tb2437588f9c93d31@mail.gmail.com>
+	<f96d234e0710081320s567bf1bfie56eebca83afb6b2@mail.gmail.com>
+In-Reply-To: <f96d234e0710081320s567bf1bfie56eebca83afb6b2@mail.gmail.com>
+MIME-Version: 1.0
+User-Agent: Internet Messaging Program (IMP) 3.2.6
+X-Originating-IP: 62.220.14.162
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: oe for two target boards at the same time
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,41 +50,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2007 05:13:54 -0000
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Tue, 09 Oct 2007 08:34:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-On Oct 8, 2007, at 4:10 PM, Justin Patrin wrote:
+Quoting Cliff Brake <cliff.brake@gmail.com>:
 
-> That's essentially the only way to fix it. You could also rename them
-> or move them to another place. Monotone doesn't merge these since they
-> aren't the same file ancestrally, they just happen to have the same
-> name.
-
-*sigh* OK.  It sucks that it doesn't at least give you the option of  
-merging them, since identically named files in the same directory are  
-more than likely related even if monotone doesn't know about it yet.   
-For example, two branches both modify a package's patches in the same  
-way because upstream changed...
-
->> That seems really bad cos there's a window
->> there where the org.gumstix.oe needs to be committed in a broken
->> state (missing those files)....
+> On 10/5/07, Cliff Brake <cliff.brake@gmail.com> wrote:
+> > On 10/5/07, Alex <mailinglist@miromico.ch> wrote:
+> > > Hi all
+> > >
+> > > How do I setup my directory structure to use oe for two target boards.
+> > >
+> > > I have an AVR32 board and an AT91 board and would like to use oe for
+> > > both of them with at less dublicated software as possible.
 >
-> True, but if you always expect every single revision to be bug- 
-> free.....
+> > I'd be interested in hearing how others set up their build directory.
+>
+> After studying Marcin's build setup, and Koen's autobuilder script,
+> I've come up with the following which is very similiar to Marcin's
+> setup.  My needs are:
+>
+> - track several machines and distros, and possibly in the future
+> different OE trees, etc
+> - easily to automatically produce time-stamped snapshot builds (not done yet)
+> - easy for me to replicate on other machines
+> - easy for customers to replicate on other machines
+>
+> With the multimachine, you typically need one build directory per
+> distro, so the following is what I ended up with:
 
-Bug free is not the same as broken.  You'll never be bug free, but  
-you should never be broken.  In situations where you have a build  
-tree with multiple people working on it, people throw things at you  
-hard if you ever break the build.  Big heavy things.  I guess the way  
-around this potentially in this situation would be to just create a  
-new branch off the current one, break that branch, propagate to it,  
-fix the merge issues, then propagate from that branch back to the  
-original one once everything's unbroken.  Huge pita, but it won't  
-break the build for others working on the original branch in the  
-meantime.
+If you only need to build one distro version you can do:
 
-C
+TMPDIR = "/build/tmp/${DISTRO}"
+
+in local.conf
+
+
+> The downside of multimachine is you need to reparse the OE directory
+> every time you change machine, but the benefit of sharing tmp
+> directories for a bunch of machines in a distro more than makes up for
+> that.
+
+If you already built binutils you can remove MACHINE=<foo> from conf files and
+set it in env, e.g. :
+
+MACHINE=c7x0 bitbake mono ; MACHINE=fic-gta01 bitbake mono
+
+that saves you a complete reparse.
+
+regards,
+
+Koen
+
+
+
+
+----------------------------------------------------------------
+This message was sent using IMP, the Internet Messaging Program.
 
 
