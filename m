@@ -1,26 +1,33 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [74.93.1.97] (helo=azazel.hughes-family.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded-devel@lists.futaris.org>)
-	id 1If3CK-0004dG-4n for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2007 02:43:44 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 9906630999
+	(envelope-from <craig@gumstix.com>) id 1If7Pl-0007nt-HK
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Oct 2007 07:13:53 +0200
+Received: from [????????p???I#?$IPv6:fe80::216:cbff:fe05:3ed7] (Pookah.local
+	[IPv6:fe80::216:cbff:fe05:3ed7%eth0])
+	by azazel.hughes-family.org (Postfix) with ESMTP id 371EE9D2AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2007 20:37:59 -0400 (EDT)
-Received: from web7.messagingengine.com ([10.202.2.216])
-	by compute1.internal (MEProxy); Mon, 08 Oct 2007 20:37:59 -0400
-Received: by web7.messagingengine.com (Postfix, from userid 99)
-	id 6AA68220FC; Mon,  8 Oct 2007 20:37:59 -0400 (EDT)
-Message-Id: <1191890279.1583.1214831015@webmail.messagingengine.com>
-X-Sasl-Enc: RQnBI7dHeavx+hH0XaktmGiLcC71vPoPsMfZu+ibibjv 1191890279
-From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
+	Mon,  8 Oct 2007 22:08:07 -0700 (PDT)
+Message-Id: <ABA57F92-B9FA-41C5-B0CD-76A4A6A146A5@gumstix.com>
+X-Habeas-Swe-6: email in exchange for a license for this Habeas
+X-Habeas-Swe-3: like Habeas SWE (tm)
+Date: Mon, 8 Oct 2007 22:08:07 -0700
+X-Habeas-Swe-8: Message (HCM) and not spam. Please report use of this
+From: Craig Hughes <craig@gumstix.com>
+X-Habeas-Swe-5: Sender Warranted Email (SWE) (tm). The sender of this
+X-Habeas-Swe-2: brightly anticipated
+In-Reply-To: <432beae0710081610k11b018a9s164aff560466718d@mail.gmail.com>
+References: <DE31D336-513F-40FF-B766-DCED127697B0@gumstix.com>
+	<432beae0710081610k11b018a9s164aff560466718d@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-References: <f7kde4$rum$1@sea.gmane.org>
-In-Reply-To: <f7kde4$rum$1@sea.gmane.org>
-Date: Tue, 09 Oct 2007 10:37:59 +1000
-Subject: Re: Packaging problem.
+X-Image-Url: http://www.hughes-family.org/craig/craig64.jpg
+X-Habeas-Swe-7: warrant mark warrants that this is a Habeas Compliant
+Mime-Version: 1.0 (Apple Message framework v752.3)
+X-Habeas-Swe-4: Copyright 2002 Habeas (tm) 
+X-Habeas-Swe-1: winter into spring
+X-Habeas-Swe-9: mark in spam to <http://www.habeas.com/report/>.
+X-Mailer: Apple Mail (2.752.3)
+Subject: Re: monotone question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,190 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2007 00:43:44 -0000
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Oct 2007 05:13:54 -0000
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="ISO-8859-1"
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
-Hi all,
+On Oct 8, 2007, at 4:10 PM, Justin Patrin wrote:
 
-I'm still having problems building an image using interactive mode.  Has
-anyone looked at the bug below since July???
+> That's essentially the only way to fix it. You could also rename them
+> or move them to another place. Monotone doesn't merge these since they
+> aren't the same file ancestrally, they just happen to have the same
+> name.
 
-As mentioned before, images build fine using bitbake from the command
-line, but not using "bitbake -i" ...  Does anyone else using interactive
-mode to build images ???
+*sigh* OK.  It sucks that it doesn't at least give you the option of  
+merging them, since identically named files in the same directory are  
+more than likely related even if monotone doesn't know about it yet.   
+For example, two branches both modify a package's patches in the same  
+way because upstream changed...
 
-Thanks
+>> That seems really bad cos there's a window
+>> there where the org.gumstix.oe needs to be committed in a broken
+>> state (missing those files)....
+>
+> True, but if you always expect every single revision to be bug- 
+> free.....
 
-Hasjim
+Bug free is not the same as broken.  You'll never be bug free, but  
+you should never be broken.  In situations where you have a build  
+tree with multiple people working on it, people throw things at you  
+hard if you ever break the build.  Big heavy things.  I guess the way  
+around this potentially in this situation would be to just create a  
+new branch off the current one, break that branch, propagate to it,  
+fix the merge issues, then propagate from that branch back to the  
+original one once everything's unbroken.  Huge pita, but it won't  
+break the build for others working on the original branch in the  
+meantime.
 
-On Wed, 18 Jul 2007 14:54:07 +0800, "Rob Kramer" <robk@starhub.net.sg>
-said:
-> Hi all,
-> 
-> 
-> I have a problem with my homebrew image, in that it doesn't create
-> several
-> packages, which results in dependency failures in do_rootfs. I'm using
-> bitbake 1.8 svn head.
-> 
-> -------------
-> BB>> build vides-image
-> SHELL: Building vides-image
-> 
-> <big snip>
-> 
-> | log_check:
-> Using
-> /bulk/home/rob/oe/dev/build-epia/tmp/work/vides-image-1.0-r0/temp/log.do_rootfs.4203
-> as logfile
-> | log_check: There were error messages in the logfile
-> | log_check: Matched keyword: [ERR]
-> |
-> | Successfully terminated.
-> | Collected errors:
-> | ERROR: Cannot satisfy the following dependencies for task-base:
-> |        base-passwd update-rc.d initscripts modutils-initscripts netbase
-> update-alternatives update-rc.d update-rc.d tinylogin update-rc.d
-> sysfsutils module-init-tools acpid keymaps hdparm e2fsprogs
-> | ERROR: Cannot satisfy the following dependencies for task-vides-linux:
-> |        base-passwd initscripts netbase sysfsutils setserial tinylogin
-> modutils-initscripts rsync
-> | ERROR: Cannot satisfy the following dependencies for task-vides-base:
-> |        aumix bash update-rc.d ethtool rsync bzip2
-> -------------
-> 
-> On further investigation I found out that bitbake doesn't create ipk
-> packages for these missing deps. Let's take base-passwd; during
-> do_package,
-> there's a problem:
-> 
-> -------------
-> NOTE: the following files were installed but not shipped in any package:
-> NOTE:   /usr/share/man/pl/man8/update-passwd.8.gz
-> NOTE:   /usr/share/man/man8/update-passwd.8.gz
-> NOTE:   /usr/share/base-passwd/passwd.master
-> NOTE:   /usr/share/base-passwd/group.master
-> NOTE:   /usr/sbin/update-passwd
-> NOTE:   /usr/sbin/.debug/update-passwd
-> <snip>
-> NOTE: Not creating empty archive for base-passwd-3.5.9-r2
-> -------------
-> 
-> I added a debug statement to see what it is trying to package:
-> 
-> -------------
-> package.bbclass:404
-> 
->                 filesvar = bb.data.getVar('FILES', localdata, 1) or ""
->                 files = filesvar.split()
-> +               bb.note("ROB: pkg: '%s', files: '%s'" % (pkg, filesvar))
->                 cleandirs = []
-> -------------
-> 
-> The interesting thing is that in bitbake file-mode everything works, but
-> in
-> interactive mode it fails (I cleaned before each command):
-> 
-> -------------
-> [wrobbie] ~/oe/dev/build-epia> bitbake -cpackage -b
-> ~/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb
-> NOTE: package base-passwd-3.5.9: started
-> <snip>
-> NOTE: package base-passwd-3.5.9-r2: task do_install: started
-> NOTE: package base-passwd-3.5.9-r2: task do_install: completed
-> NOTE: package base-passwd-3.5.9-r2: task do_package: started
-> NOTE: ROB: pkg: 'base-passwd-dbg',
-> files: '/usr/bin/.debug /usr/sbin/.debug /usr/libexec/.debug
-> /usr/lib/.debug /bin/.debug /sbin/.debug /lib/.debug
-> /usr/lib/base-passwd/.debug /usr/lib/matchbox-panel/.debug'
-> NOTE: ROB: pkg: 'base-passwd',
-> files: '/usr/bin/* /usr/sbin/* /usr/libexec/* /usr/lib/lib*.so.* /etc
-> /usr/com /var /bin/* /sbin/* /lib/*.so* /usr/share/base-passwd
-> /usr/lib/base-passwd/* /usr/share/pixmaps /usr/share/applications
-> /usr/share/idl /usr/share/omf /usr/share/sounds /usr/lib/bonobo/servers'
-> -------------
-> 
-> 
-> -------------
-> BB>> build base-passwd
-> SHELL: This command needs to parse bbfiles...
-> NOTE: Handling BitBake files: \ (3891/3891) [100 %]
-> NOTE: Parsing finished. 3680 cached, 0 parsed, 211 skipped, 783 masked.
-> 
-> SHELL: Building base-passwd
-> NOTE: Resolving missing task queue dependencies
-> NOTE: Preparing runqueue
-> NOTE: Executing runqueue
-> NOTE: Running task 218 of 229 (ID:
-> 9,
-> /home/rob/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb,
-> do_fetch)
-> 
-> <snip>
-> 
-> NOTE: Running task 225 of 229 (ID:
-> 1,
-> /home/rob/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb,
-> do_install)
-> NOTE: package base-passwd-3.5.9: started
-> NOTE: package base-passwd-3.5.9-r2: task do_install: started
-> NOTE: package base-passwd-3.5.9-r2: task do_install: completed
-> NOTE: package base-passwd-3.5.9: completed
-> NOTE: Running task 226 of 229 (ID:
-> 5,
-> /home/rob/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb,
-> do_package)
-> NOTE: package base-passwd-3.5.9: started
-> NOTE: package base-passwd-3.5.9-r2: task do_package: started
-> NOTE: ROB: pkg: 'base-passwd-dbg', files: ''
-> NOTE: ROB: pkg: 'base-passwd', files: ''
-> NOTE: ROB: pkg: 'base-passwd-doc', files: ' /usr/share/doc'
-> NOTE: ROB: pkg: 'base-passwd-dev', files: ''
-> NOTE: ROB: pkg: 'base-passwd-locale', files: ''
-> NOTE: the following files were installed but not shipped in any package:
-> NOTE:   /usr/share/man/pl/man8/update-passwd.8.gz
-> NOTE:   /usr/share/man/man8/update-passwd.8.gz
-> NOTE:   /usr/share/base-passwd/passwd.master
-> NOTE:   /usr/share/base-passwd/group.master
-> NOTE:   /usr/sbin/update-passwd
-> NOTE:   /usr/sbin/.debug/update-passwd
-> NOTE: package base-passwd-3.5.9-r2: task do_package: completed
-> NOTE: package base-passwd-3.5.9: completed
-> NOTE: Running task 227 of 229 (ID:
-> 7,
-> /home/rob/oe/dev/org.openembedded.dev/packages/base-passwd/base-passwd_3.5.9.bb,
-> do_package_write)
-> NOTE: package base-passwd-3.5.9: started
-> NOTE: package base-passwd-3.5.9-r2: task do_package_write: started
-> NOTE: Not creating empty archive for base-passwd-dbg-3.5.9-r2
-> NOTE: Not creating empty archive for base-passwd-3.5.9-r2
-> Packaged contents of base-passwd-doc
-> into
-> /bulk/home/rob/oe/dev/build-epia/tmp/deploy/ipk/i586/base-passwd-doc_3.5.9-r2_i586.ipk
-> NOTE: Not creating empty archive for base-passwd-dev-3.5.9-r2
-> NOTE: Not creating empty archive for base-passwd-locale-3.5.9-r2
-> NOTE: package base-passwd-3.5.9-r2: task do_package_write: completed
-> NOTE: package base-passwd-3.5.9: completed
-> -------------
-> 
-> 
-> So, it seems the FILES variable in package.bbclass:404 is not set
-> properly
-> in the case of interactive mode. I can't find where FILES is set anyway;
-> the rest of the class uses FILES_${PN}.
-> 
-> Any hints at what I should be looking at?
-> 
-> Cheers!
-> 
->     Rob
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+C
 
 
