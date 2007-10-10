@@ -1,24 +1,21 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <theBohemian@gmx.net>) id 1Ifbk2-0007ZN-9v
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <zecke@selfish.org>) id 1IfcA1-0007uI-Ls
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Oct 2007 15:36:50 +0200
-Received: (qmail invoked by alias); 10 Oct 2007 13:30:56 -0000
-Received: from e178118163.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.118.163]
-	by mail.gmx.net (mp041) with SMTP; 10 Oct 2007 15:30:56 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+hQjdXL9eh2kAikFsfgISoS4glOBiOLUbyir6i40
-	uykaJPhKvkBQUd
-Message-ID: <470CD40F.8030000@gmx.net>
-Date: Wed, 10 Oct 2007 15:30:55 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: IceDove 1.5.0.12 (X11/20070730)
-MIME-Version: 1.0
+	Wed, 10 Oct 2007 16:03:41 +0200
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=[192.168.2.131]) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1Ifc4K-0005rk-Ag
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Oct 2007 15:57:48 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <8200BBD0-C467-4FF2-9F31-5718061769FB@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.94.2.0
-X-Y-GMX-Trusted: 0
-Subject: OEDEM 2007 pictures
+From: Holger Freyther <zecke@selfish.org>
+Date: Wed, 10 Oct 2007 15:57:39 +0200
+X-Mailer: Apple Mail (2.752.3)
+Subject: OpenEmbedded read-only GIT mirror
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,36 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2007 13:36:50 -0000
-X-Groupsio-MsgNum: 3102
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigC5B43A9E933EF69511303BFC"
+X-List-Received-Date: Wed, 10 Oct 2007 14:03:42 -0000
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
---------------enigC5B43A9E933EF69511303BFC
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hey all,
 
-Hi,
-I am interested in the pictures taken by those that attended OEDEM.
-Would be nice if you put them on some webserver or send it privately.
+there is a mtn2git script inside the OpenEmbedded meta-data and the  
+result of that script and waiting hours for git-repack -a -d -f  
+resulted in a git tree that can be actually pulled.
 
-Regards
-Robert
+We have (re)-agreed to offer read-only anonymous access to the OE  
+meta-data when people stand up and provide such a mirror.
+
+This has happened for git and I'm proud to announce a git-mirror of  
+OpenEmbedded which is located at http://repo.or.cz/w/ 
+org.openembedded.dev.git. I try to keep this updated and automate it  
+as well. The other branches of OpenEmbedded will follow as well.
 
 
---------------enigC5B43A9E933EF69511303BFC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+z.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFHDNQPG9cfwmwwEtoRCCheAJ0Y4fFnXiHMDaRNLAXNtXYW+zDvEACffhE0
-2OS/ubPB1KC61kNDAIR2pdc=
-=mK3J
------END PGP SIGNATURE-----
+PS: A hopefully more complete protocol will come
 
---------------enigC5B43A9E933EF69511303BFC--
+
