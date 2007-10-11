@@ -1,24 +1,21 @@
-Received: from [89.96.204.112] (helo=www-zirak-new.zirak.it)
-	by linuxtogo.org with smtp (Exim 4.67) (envelope-from <phy@linux.it>)
-	id 1IfljZ-00015H-IT
-	for openembedded-devel@openembedded.org; Thu, 11 Oct 2007 02:17:01 +0200
-Received: (qmail 32197 invoked by uid 64017); 11 Oct 2007 00:05:47 -0000
-Received: from 82.56.154.194 (filippo@zirak.it@82.56.154.194) by www-zirak-new
-	(envelope-from <phy@linux.it>, uid 64011) with qmail-scanner-2.01 
-	(uvscan: v5.1.00/v5052. bogofilter: 0.92.0. spamassassin: 3.0.4.  
-	Clear:RC:1(82.56.154.194):. 
-	Processed in 0.011752 secs); 11 Oct 2007 00:05:47 -0000
-Received: from unknown (HELO ?192.168.1.3?) (filippo@zirak.it@82.56.154.194)
-	by www-zirak-new.zirak.it with SMTP; 11 Oct 2007 00:05:47 -0000
-Message-ID: <470D6A2C.1000909@linux.it>
-Date: Thu, 11 Oct 2007 02:11:24 +0200
-From: Filippo Basso <phy@linux.it>
-User-Agent: IceDove 1.5.0.12 (X11/20070730)
-MIME-Version: 1.0
-CC: openembedded-devel@lists.openembedded.org
-References: <470B9D9D.5080501@linux.it>
-In-Reply-To: <470B9D9D.5080501@linux.it>
-Subject: Re: different hosts, different OE images
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <zecke@selfish.org>) id 1Ig03H-0008Jz-MH
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Oct 2007 17:34:19 +0200
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1IfzxU-0006gQ-0j
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Oct 2007 17:28:20 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+Message-Id: <5793B169-5578-42D4-A2F4-6D7AA562AA4B@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+From: Holger Freyther <zecke@selfish.org>
+Date: Thu, 11 Oct 2007 17:28:09 +0200
+X-Mailer: Apple Mail (2.752.3)
+Subject: RFC Creating a protocol of OEDEM2007.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,52 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2007 00:17:01 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Thu, 11 Oct 2007 15:34:19 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+
+Hello,
+
+thanks to the work of Henry and Jan on the first day and Henry, Jan,  
+Daniel, Crofton and many more on the second we should have rather  
+complete minutes of the conference. It is quite hard to keep track of  
+everything that is being said so a big thank you should go to Henry  
+and Jan!
 
 
-> I understood that the results should be highly independent from host
-> system, so I begun debugging a bit.
->   
-Hi everybody,
-    my investigation is going ahead...
-The main point is: an image should be highly independent from the host
-system, but seems that I've some problem in this regards... maybe my
-mistake, but should be understood.
+Regardless of the minutes we should summarize the results in a  
+protocol and to split the work all of us should summarize some  
+discussed topics.
 
-Another machine (Ubuntu) gave even another different runtime result... :-(
+I will summarize the SCM, BitBake (besides the staging layout changes  
+discussed at the dinner) and Foundation talks. So please step up and  
+summarize the other parts.
 
-Now I've debugged differences in the log.do_compile files, and have
-these "strange" results:
-* the order of gcc arguments is not always fixed, depends on the machine
-(es: ipkg, perl)
-* in many packages the make[n] is make[n+1], sometimes there is a
-duplicated chdir, or there is a duplicated message like "OE: Not
-hardcoding..."
-* in many packages on lenny is present in the options for "ccache
-i586-angstrom-linux-gcc" a -L/usr/lib (isn't that potentially dangerous???)
+Thank you for finding the time to attend OEDEM2007!
 
 
-Not OE-related, more .bb recipy-related:
-* minimo is using gcc (and not i586-angstrom-linux-gcc), so is failing
-on etch and working on lenny (I've to investigate more if this can work,
-imagine if I want to use an ARM, hehehe!)
-* and a strange behaviour in coreutils-native (this I've to investigate
-more, about openat.c and getcwd.c, maybe not a OE issue)
-
-
-To be sure that the versions are the same, the OE tree is the same (mtn
-status: 1c938b19625a9b636c77145c8a420c71768f0595), bitbake is the same,
-I've double checked everything.
-
-Now it's  late night, I'll investigate ubuntu problems (X11 restarting
-continuously) with same image compiling on lenny, not compiling on etch...
-
-some suggestions?
-thank you 10000!
-    phy
-
+z.
 
 
 
