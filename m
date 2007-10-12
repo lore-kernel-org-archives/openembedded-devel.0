@@ -1,27 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IgKkN-0006rN-E6
-	for openembedded-devel@openembedded.org; Fri, 12 Oct 2007 15:40:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l9CDY5Kg013648;
-	Fri, 12 Oct 2007 14:34:05 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13397-06; Fri, 12 Oct 2007 14:34:02 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l9CDXvQi013641
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Fri, 12 Oct 2007 14:33:57 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Fri, 12 Oct 2007 14:33:56 +0100
-Message-Id: <1192196037.24680.21.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Kdrive 1.4 resume issues
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <theBohemian@gmx.net>) id 1IgMK9-0005w0-Ew
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Oct 2007 17:21:18 +0200
+Received: (qmail invoked by alias); 12 Oct 2007 15:15:07 -0000
+Received: from e178077248.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.77.248]
+	by mail.gmx.net (mp001) with SMTP; 12 Oct 2007 17:15:07 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19xjZ031u1x4SnnQTpxn4bSaCJABKcoMybCc0ga3P
+	8XMWeFgbB6n9Ol
+Message-ID: <470F8F75.3070207@gmx.net>
+Date: Fri, 12 Oct 2007 17:15:01 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: IceDove 1.5.0.12 (X11/20070730)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <HOECLKEKOHLAMMGDLLBHCEDKMIAA.skoroneos@digital-opsis.com>
+In-Reply-To: <HOECLKEKOHLAMMGDLLBHCEDKMIAA.skoroneos@digital-opsis.com>
+X-Enigmail-Version: 0.94.2.0
+X-Y-GMX-Trusted: 0
+Subject: Re: patch: fix patch num in glibc 2.3.3+cvs20050221
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,88 +34,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2007 13:40:16 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Oct 2007 15:21:32 -0000
+X-Groupsio-MsgNum: 3118
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigC103547793F901FB342D195E"
 
-I mentioned I knew something about the resume problem seen in Kdrive at
-OEDEM. I don't know if the details below apply to the problem people are
-seeing with 1.4 or not, just that this potential problem does exist
-(this was reported to happen in 1.1.something iirc). FWIW, I'm not the
-one who found this, I'm just passing on the info.
+--------------enigC103547793F901FB342D195E
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-There is a potential race condition with the virtual terminal refresh
-during resume:
+Hi,
+sorry! I know it should be put to the bug tracker but I thought this one
+was trivial.
 
-a) Device suspends
+Regards
+Robert
 
-b) The kernel VT subsystem delivers a signal to KDrive, requesting that
-the virtual console be released
-
-c) Kernel stalls suspend until KDrive makes an ioctl's on the terminal
-to switch it out of graphical mode
-
-d) Kernel immediately starts executing, and nothing from userspace ever
-gets scheduled again before suspending. This means that KDrive's main
-event loop (in os/WaitFor.c) is just done processing the VT release
-request, but hasn't yet made a select() call for the next iteration of
-its loop.
-
-e) System sleeps...
-
-f) Kernel resume code takes over, begins restoring things. Partway
-along, it attempts to restore the VT. So another signal is delivered to
-KDrive to restore the graphics.
-
-g) Async signal handler runs in KDrive (hw/kdrive/linux/linux.c,
-LinuxVTRequest), setting a flag ("kdSwitchPending") for inspection on
-the next time that select() returns in the main event loop.
-
-h) Unfortunately, since KDrive isn't yet scheduled after the resume,
-the main event loop hasn't even gotten around to doing select() yet. So
-this flag is never consulted before WaitForSomething() (os/WaitFor.c)
-goes to sleep blocking on input. The VT restoration is never processed.
-
-All this is not normally a problem, since there's some time between
-successive arrivals of VT signals.
-
-The patch below is not really a fix, but it checks whether a VT
-reset is needed immediately before making the select() call. 
-
-An alternative that was suggested would be to stick the receiving end of
-a pipe into the set of fd's checked by the select() call. Then the
-LinuxVTRequest() signal handler would write a dummy byte into the pipe
-instead of setting a flag. 
-
-I can't help feeling there must be a better solution entirely though.
-I'd be interested to hear if this patch below helps or not...
-
-Cheers,
-
-Richard
-
-diff -Nur xorg-server-X11R7.1-1.1.0.orig/os/WaitFor.c
---- xorg-server-X11R7.1-1.1.0.orig/os/WaitFor.c
-+++ xorg-server-X11R7.1-1.1.0/os/WaitFor.c
-@@ -152,6 +152,8 @@
-  *     pClientsReady is an array to store ready client->index values into.
-  *****************/
- 
-+extern Bool kdSwitchPending;
-+
- int
- WaitForSomething(int *pClientsReady)
- {
-@@ -232,7 +234,7 @@
-        }
- #endif /* XTESTEXT1 */
-        /* keep this check close to select() call to minimize race */
--       if (dispatchException)
-+       if (dispatchException || kdSwitchPending)
-            i = -1;
-        else if (AnyClientsWriteBlocked)
-        {
+Stelios Koroneos schrieb:
+> Robert,
+>=20
+> please post any patches to the bugtracker
+>=20
+> Stelios S. Koroneos
+>=20
+> Digital OPSiS - Embedded Intelligence
+> http://www.digital-opsis.com
+>=20
+>=20
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@openembedded.org
+>> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of Rober=
+t
+>> Schuster
+>> Sent: Friday, October 12, 2007 9:23 AM
+>> To: openembedded-devel@openembedded.org
+>> Subject: [oe] patch: fix patch num in glibc 2.3.3+cvs20050221
+>>
+>>
+>> Hi,
+>> while trying to build glibc_2.3.3+cvs20050221 I noticed that one of th=
+e
+>> patches does not apply. It is simply using a wrong strip value. The
+>> attached little patch fixes that.
+>>
+>> Would someone apply this? I dont have commit rights.
+>>
+>> Regards
+>> Robert
+>>
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
 
 
 
+--------------enigC103547793F901FB342D195E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHD495G9cfwmwwEtoRCFz5AJ9CS7hrHtSgrfkT/TywqCXty/7luACeNSZw
+P3Z6IHWL2XyUzo75+Up82PU=
+=eSa+
+-----END PGP SIGNATURE-----
+
+--------------enigC103547793F901FB342D195E--
