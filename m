@@ -1,21 +1,22 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [64.233.162.235] (helo=nz-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1IgIai-0005sX-EQ
-	for openembedded-devel@openembedded.org; Fri, 12 Oct 2007 13:22:05 +0200
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B040E8CA5 for openembedded-devel@openembedded.org;
-	Fri, 12 Oct 2007 13:14:44 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Fri, 12 Oct 2007 14:15:54 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHCEDKMIAA.skoroneos@digital-opsis.com>
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-Importance: Normal
+	(envelope-from <cliff.brake@gmail.com>) id 1IgK9A-0001DJ-Vd
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Oct 2007 15:01:48 +0200
+Received: by nz-out-0506.google.com with SMTP id i11so649843nzh
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Oct 2007 05:55:38 -0700 (PDT)
+Received: by 10.114.156.1 with SMTP id d1mr3472578wae.1192193737908;
+	Fri, 12 Oct 2007 05:55:37 -0700 (PDT)
+Received: by 10.114.191.17 with HTTP; Fri, 12 Oct 2007 05:55:37 -0700 (PDT)
+Message-ID: <f96d234e0710120555o141d516cn2bf8ae6c1450ce26@mail.gmail.com>
+Date: Fri, 12 Oct 2007 08:55:37 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <470F12A7.1050200@gmx.net>
+MIME-Version: 1.0
+References: <470F12A7.1050200@gmx.net>
+Cc: theBohemian@gmx.net
 Subject: Re: patch: fix patch num in glibc 2.3.3+cvs20050221
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,43 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2007 11:22:09 -0000
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 12 Oct 2007 13:01:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Robert,
-
-please post any patches to the bugtracker
-
-Stelios S. Koroneos
-
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
-
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of =
-Robert
-> Schuster
-> Sent: Friday, October 12, 2007 9:23 AM
-> To: openembedded-devel@openembedded.org
-> Subject: [oe] patch: fix patch num in glibc 2.3.3+cvs20050221
->=20
->=20
+On 10/12/07, Robert Schuster <theBohemian@gmx.net> wrote:
 > Hi,
-> while trying to build glibc_2.3.3+cvs20050221 I noticed that one of =
-the
+> while trying to build glibc_2.3.3+cvs20050221 I noticed that one of the
 > patches does not apply. It is simply using a wrong strip value. The
 > attached little patch fixes that.
->=20
+>
 > Would someone apply this? I dont have commit rights.
->=20
-> Regards
-> Robert
->=20
 
+Patch applied -- thanks.
 
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
