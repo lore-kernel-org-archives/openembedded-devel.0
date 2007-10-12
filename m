@@ -1,24 +1,30 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <theBohemian@gmx.net>) id 1IgE7E-0000yU-I3
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <mickey@openmoko.org>) id 1IgI0K-000579-JX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Oct 2007 08:35:20 +0200
-Received: (qmail invoked by alias); 12 Oct 2007 06:22:36 -0000
-Received: from e178077248.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.77.248]
-	by mail.gmx.net (mp017) with SMTP; 12 Oct 2007 08:22:36 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19eeDxie6teFNZbl6OhyECQMsncmCDn+UNMgZ0etX
-	mQXH/ShFyjWcjk
-Message-ID: <470F12A7.1050200@gmx.net>
-Date: Fri, 12 Oct 2007 08:22:31 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: IceDove 1.5.0.12 (X11/20070730)
-MIME-Version: 1.0
+	Fri, 12 Oct 2007 12:44:28 +0200
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 2648728C014; Fri, 12 Oct 2007 12:33:37 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: 
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
+Received: from PROMETHEUS (e180132063.adsl.alicedsl.de [85.180.132.63])
+	by srv043.dedi23.de (Postfix) with ESMTP id 9579028C013;
+	Fri, 12 Oct 2007 12:33:32 +0200 (CEST)
+Date: Fri, 12 Oct 2007 12:38:18 +0200
+From: Michael 'Mickey' Lauer <mickey@openmoko.org>
+X-Mailer: The Bat! (v3.99.24) Professional
+Organization: OpenMoko
+X-Priority: 3 (Normal)
+Message-ID: <1607991975.20071012123818@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.94.2.0
-X-Y-GMX-Trusted: 0
-Subject: patch: fix patch num in glibc 2.3.3+cvs20050221
+In-Reply-To: <C970407D71E48D4EADEEB57340F14D89033C2A@E03MVB2-UKBR.domain1.systemhost.net>
+References: <C970407D71E48D4EADEEB57340F14D89033C2A@E03MVB2-UKBR.domain1.systemhost.net>
+MIME-Version: 1.0
+Cc: thomas.cooksey@bt.com
+Subject: Re: bug #747, qmake & possible missing bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,75 +38,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2007 06:35:20 -0000
-X-Groupsio-MsgNum: 3113
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigA28AB4C09992B651860E1638"
+X-List-Received-Date: Fri, 12 Oct 2007 10:44:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
---------------enigA28AB4C09992B651860E1638
-Content-Type: multipart/mixed;
- boundary="------------030405090407010207030301"
+thomas.cooksey@bt.com wrote:
 
---------------030405090407010207030301
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+> Pretty sure this list isn't the right place for this but...
 
-Hi,
-while trying to build glibc_2.3.3+cvs20050221 I noticed that one of the
-patches does not apply. It is simply using a wrong strip value. The
-attached little patch fixes that.
+I've forwarded it to openembedded-devel@lists.openembedded.org
 
-Would someone apply this? I dont have commit rights.
+> There's a bug on bugzilla (#747) which I've also encountered and fixed.
 
-Regards
-Robert
+> First, I think this may be a bug in upstream qmake 4.3.1 as I've
+> been developing a lot with Qtopia outside OpenMoko. Every time I run
+> qmake -project I have to manually add network to the QT variable in
+> the project file, even for hello world.
 
---------------030405090407010207030301
-Content-Type: text/x-patch;
- name="oe-glibc2.3.3+cvs20050221-fix.diff"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline;
- filename="oe-glibc2.3.3+cvs20050221-fix.diff"
+> Second, I also needed to modify the Makefile qmake produced and
+> edit the "LINK= $(OE_QMAKE_LINK)" to LINK=$(CXX). This is because
+> OE_QMAKE_LINK isn't defined. Looking through the OpenEmbedded tree
+> there is a class called qmake.bbclass (& qmake2.bbclass) which
+> defines OE_QMAKE_LINK. I don't know OpenEmbedded too well but I do
+> know portage/gentoo and I assume a bbclass is like an eclass in
+> portage?? If that's the case, surely the uicmoc4-native_4.3.1 recipe
+> needs to inherit from the qmake or qmake2 class? I guess this may
+> have been fixed in upstream OpenEmbedded? Like I say, my
+> OpenEmbedded knowledge is a bit limited, so what I just wrote may make no sense whatsoever.
 
-#
-# old_revision [ff780297b2beb554f6e0e5aa5c6193b3593edb78]
-#
-# patch "packages/glibc/glibc_2.3.3+cvs20050221.bb"
-#  from [c81a4dcb60d85da204ee67a9cb24ee2248fed1a3]
-#    to [919a8c98d395b0551b87a5ed37d92dce15fe0db6]
-#
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
---- packages/glibc/glibc_2.3.3+cvs20050221.bb	c81a4dcb60d85da204ee67a9cb2=
-4ee2248fed1a3
-+++ packages/glibc/glibc_2.3.3+cvs20050221.bb	919a8c98d395b0551b87a5ed37d=
-92dce15fe0db6
-@@ -22,7 +22,7 @@ SRC_URI =3D "cvs://anoncvs@sources.redhat.
- 	   file://arm-longlong.patch;patch=3D1;pnum=3D0 \
- 	   file://arm-machine-gmon.patch;patch=3D1;pnum=3D0 \
- 	   file://trampoline.patch;patch=3D1;pnum=3D0 \
--	   file://dl-cache-libcmp.patch;patch=3D1;pnum=3D0 \
-+	   file://dl-cache-libcmp.patch;patch=3D1 \
- 	   \
-            file://etc/ld.so.conf \
- 	   file://generate-supported.mk"
+> PS: In future, where's the best place for this kind of stuff? Should I have created a new bug?
 
---------------030405090407010207030301--
+Please not for OpenMoko, but at bugs.openembedded.org
 
---------------enigA28AB4C09992B651860E1638
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+> _______________________________________________
+> OpenMoko community mailing list
+> community@lists.openmoko.org
+> http://lists.openmoko.org/mailman/listinfo/community
 
-iD8DBQFHDxKqG9cfwmwwEtoRCDWdAKCXYZ/Z0g88J7DbL/fKGVJK3a/8YgCbBihe
-6ODTZtxOSm/WWV6RDgWqFuQ=
-=rkd0
------END PGP SIGNATURE-----
 
---------------enigA28AB4C09992B651860E1638--
+
+-- 
+- Michael Lauer <mickey@openmoko.org>                   http://openmoko.org/
+============================================================================
+Software for the worlds' first truly open Free Software mobile phone
+
+
+
