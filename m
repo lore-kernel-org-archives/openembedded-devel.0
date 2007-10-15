@@ -1,32 +1,19 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IhNio-0001jN-Ob
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Oct 2007 13:02:56 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 4D4A228C015; Mon, 15 Oct 2007 12:51:38 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ****
-X-Spam-Status: No, score=4.3 required=5.0 tests=AWL,BAYES_00,RCVD_IN_DSBL,
-	RCVD_IN_PBL, RCVD_IN_SORBS_DUL, REPTO_OVERQUOTE_THEBAT,
-	SUBJ_HAS_UNIQ_ID autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180142195.adsl.alicedsl.de [85.180.142.195])
-	by srv043.dedi23.de (Postfix) with ESMTP id 8663728C014
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2007 12:51:34 +0200 (CEST)
-Date: Mon, 15 Oct 2007 12:56:27 +0200
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.24) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1146926050.20071015125627@vanille-media.de>
+	(envelope-from <openembedded@haerwu.biz>) id 1IhP0o-00037o-5W
+	for openembedded-devel@openembedded.org; Mon, 15 Oct 2007 14:25:34 +0200
+Received: (qmail 1474 invoked by uid 813007); 15 Oct 2007 12:19:10 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 15 Oct 2007 12:19:10 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <009f01c80f03$00d29b60$0277d220$@dk>
-References: <E1Ih50c-0005Xz-Bs@linuxtogo.org> <471263F8.30501@xora.org.uk>
-	<009f01c80f03$00d29b60$0277d220$@dk>
+Date: Mon, 15 Oct 2007 14:19:04 +0200
+User-Agent: KMail/1.9.7
 MIME-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev libid3tag: update to 0.15.1b, fix SRC_URI - close #3147
+Message-Id: <200710151419.07302.openembedded@haerwu.biz>
+Subject: [RFC] Handling of virtual/* namespace in packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,26 +27,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2007 11:03:00 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 15 Oct 2007 12:25:34 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
-
-Esben Haabendal wrote:
-> I guess that many (all?) of these should be fixed to use
-> ${SOURCEFORGE_MIRROR} as well.
-
-It's just the ones with <fixedMirror>.dl.sf.net and
-[pr]downloads.sf.net that needs fixing.
-
-Anything else foo.sf.net can point to a per-project custom directory
-structure and doesn't need to be changed.
+Content-Disposition: inline
 
 
-Regards,
+In OpenedHand we got hit by virtual/update-alternatives and packaging. 
+Poky contains two providers for virtual/u-a:
 
-:M:
+1. update-alternatives-cworth
+2. update-alternatives-dpkg
+
+First one comes from IPKG source and is written in pure shell. Second one 
+is in Perl so it fetch too much to be usable.
+
+The problem comes when you build both of them (it happens on our 
+autobuilder due to 'world' build) - package manager (ipkg) selects random 
+one - in our case it is always 'update-alternatives-dpkg' so generated 
+rootfs is too big to be usable.
+
+Solution which came to my mind is quite simple. Our distro (Poky) already 
+prefers 'u-a-cworth' as provider for 'virtual/update-alternatives'. So if 
+package depends on 'virtual/update-alternatives' then let package.bbclass 
+mangle its dependencies in such way that 'u-a-cworth' (preferred by 
+distro) would be writen in package.
+
+What do you think about it?
+
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+         Computers are not intelligent. They only think they are.
+
 
 
 
