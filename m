@@ -1,25 +1,31 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IhRQ5-0005Wv-D2
-	for openembedded-devel@openembedded.org; Mon, 15 Oct 2007 16:59:49 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9FErL98029743 for <openembedded-devel@openembedded.org>;
-	Mon, 15 Oct 2007 16:53:21 +0200
-Message-ID: <47137EDD.9070000@student.utwente.nl>
-Date: Mon, 15 Oct 2007 16:53:17 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1IhScn-0002ip-59
+	for openembedded-devel@openembedded.org; Mon, 15 Oct 2007 18:17:01 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l9FGAbas020553
+	for <openembedded-devel@openembedded.org>;
+	Mon, 15 Oct 2007 17:10:37 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20279-08 for <openembedded-devel@openembedded.org>;
+	Mon, 15 Oct 2007 17:10:33 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l9FGAWw3020547
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 15 Oct 2007 17:10:32 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-References: <200710151419.07302.openembedded@haerwu.biz>
 In-Reply-To: <200710151419.07302.openembedded@haerwu.biz>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+References: <200710151419.07302.openembedded@haerwu.biz>
+Date: Mon, 15 Oct 2007 17:10:32 +0100
+Message-Id: <1192464632.25543.58.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: [RFC] Handling of virtual/* namespace in packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,14 +40,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2007 14:59:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 15 Oct 2007 16:17:01 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Marcin Juszkiewicz schreef:
+On Mon, 2007-10-15 at 14:19 +0200, Marcin Juszkiewicz wrote:
 > In OpenedHand we got hit by virtual/update-alternatives and packaging. 
 > Poky contains two providers for virtual/u-a:
 > 
@@ -55,10 +58,7 @@ Marcin Juszkiewicz schreef:
 > autobuilder due to 'world' build) - package manager (ipkg) selects random 
 > one - in our case it is always 'update-alternatives-dpkg' so generated 
 > rootfs is too big to be usable.
-
-Heh, I asked about that a while back and was told "everything works in poky". So much for
-'working' ;)
-
+> 
 > Solution which came to my mind is quite simple. Our distro (Poky) already 
 > prefers 'u-a-cworth' as provider for 'virtual/update-alternatives'. So if 
 > package depends on 'virtual/update-alternatives' then let package.bbclass 
@@ -67,19 +67,63 @@ Heh, I asked about that a while back and was told "everything works in poky". So
 > 
 > What do you think about it?
 
-Sounds like a good idea.
+I really liked this idea and I did some experiments but they had mixed
+results. The problem is if we have:
 
-regards,
+RDEPENDS_${PN} = "virtual/xyz" 
 
-KOen
+then bitbake gets upset as it can't work out what to build to fulfil
+that. 
+
+We also need to avoid cross contaminating the DEPENDS and RDEPENDS
+namespaces, they're separate and people *need* to think of them
+separately.
+
+I've started thinking of lots of perverse edge cases with the above too,
+the problem is PREFERRED_PROVIDER is just a preference, not an absolute
+and bitbake can ignore it to make a build work, especially in -k
+(continue on failure) mode.
+
+I was thinking we could have bitbake eject a set of variables:
+
+VRPROVIDER_xyz = "abc"
+VRPROVIDER_wxy = "bcd"
+
+etc. which would tell us which provider bitbake was planning on using.
+We could also adjust bitbake internals to cope with "virtual-runtime/"
+variables in the RDEPENDS space but even that isn't going to be enough.
+Consider:
+
+PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+
+and bitbake setting:
+
+VRPROVIDER_xserver = "xserver-kdrive"
+
+None of this fixes the existing problem of how to get
+"xserver-kdrive-fbdev" back and bitbake is always going to need help to
+work that one out...
 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+So perhaps we should just standardise the existing xserver behaviour
+into a dedicated namespace:
 
-iD8DBQFHE37dMkyGM64RGpERAtjNAJ48UusMliCz+nxv2sEV+RWoM3YX2wCZAahB
-HnrSbCUKssdolCEWAN0W2Ng=
-=I+0s
------END PGP SIGNATURE-----
+DEPENDS = "virtual/xserver"
+RDEPENDS_xyz = "${VIRTUAL-RUNTIME_xserver}"
+
+and the machine.conf in this case would say
+
+PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+VIRTUAL-RUNTIME_xserver = "xserver-kdrive-fbdev"
+
+I'd love to find a nicer solution but I just can't come up with one that
+will work...
+
+Cheers,
+
+Richard
+
+
+
 
 
