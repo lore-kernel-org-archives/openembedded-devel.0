@@ -1,26 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Ihp5Z-00062k-9I
-	for openembedded-devel@openembedded.org; Tue, 16 Oct 2007 18:16:13 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9GG9a98008180 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2007 18:09:36 +0200
-Message-ID: <4714E23F.4060402@student.utwente.nl>
-Date: Tue, 16 Oct 2007 18:09:35 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <JQ09JU$226B655F90BD312D7F024131EBD56EA2@scarlet.be>
-In-Reply-To: <JQ09JU$226B655F90BD312D7F024131EBD56EA2@scarlet.be>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: Patches to svn based recipes
+	(envelope-from <dp@xora.org.uk>) id 1IhpOd-00021W-Ut
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Oct 2007 18:35:55 +0200
+Received: from cimmeria ([::ffff:78.86.130.156])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Tue, 16 Oct 2007 17:19:24 +0100
+	id 00064AC6.4714E48C.00000E63
+Date: Tue, 16 Oct 2007 17:19:22 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071016171922.2ef1992d@cimmeria>
+In-Reply-To: <4714C315.9000508@student.utwente.nl>
+References: <4714C315.9000508@student.utwente.nl>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.10.11; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: no-distro goal and SRCREV=1 in bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,45 +29,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2007 16:16:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 16 Oct 2007 16:35:56 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, 16 Oct 2007 15:56:37 +0200
+Koen Kooi <k.kooi@student.utwente.nl> wrote:
 
-Philippe De Swert schreef:
-> Hi all!
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
+> Hi,
 > 
->> Could people please stop doing stuff like:
->>
->> openmoko-panel-bt_svn.bb: Drop panel-bluetooth.patch, as it was applied upstream
->> # delete "packages/openmoko-panel-plugins/files/panel-bluetooth.patch"
->>
->> openmoko-dialer2_svn.bb : patch is now applied upstream
->> - -SRC_URI += "file://openmoko-dialer.patch;patch=1"
->>
->> matchbox-keyboard: Bump svn revision and remove some patches in the bb file
->> since these patches were applied upstream.
->> - -        file://matchbox-keyboard-applet.patch;patch=1;pnum=0 \
->> - -	file://matchbox-keyboard-hide-delay.patch;patch=1"
->>
->> And use ;minrev= and ;maxrev=. Removing patches makes regression testing and
-> building
->> older versions impossible.
+> SRCREV=1 in bitbake.conf forces people to use a distro, which is
+> bad(TM) according to the OEDEM minutes.
 > 
-> Ok. So all those things are forbidden. Good. So what are we expected to write
-> in the commit message then?
+> My short term solution:
+> 
+> * SRCREV = "${@bb.fetch.get_srcrev(d)}" in bitbake.conf
+> * SRCREV ?= <foo> in recipes
+> * SRCREV_pn-baz ?= <bar> in distro includes or local.conf
+> 
+> For the medium and long term we should consider adding snapshot
+> recipes for 'proven' revisions next to the 'floating' ones, even if
+> Richard thinks it's a waste of space. Having a host of 'unbreak me'
+> includes is also against our 'sane defaults' goal we decided on at
+> OEDEM.
+> 
+> Comments/ideas/flames?
+> 
 
-Write what you want in the commit message, as long as you update the SRC_URI to use
-;minrev= and ;maxrev=
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+My opinion is with the goal to build with no DISTRO= set then no
+software should be build with floating SVN versions by default.
 
-iD8DBQFHFOI/MkyGM64RGpERAvwmAKCDYxlc2fi/PWu2VI2KUu1/+GLI+QCeIWML
-c6rJKitTc4u90z2FiSbQt44=
-=vqS+
------END PGP SIGNATURE-----
+So I would opt for the "snapshot" releases style that we have been doing
+for a long time now anyway. For stuff that is needed for basic images
+but has never had a working release.
+
+Graeme
 
 
