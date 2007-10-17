@@ -1,20 +1,28 @@
-Received: from [217.116.0.68] (helo=misiva10.acens.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <joaquinduran@adtelecom.es>) id 1Ihw5i-0002fi-HS
-	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 01:44:50 +0200
-Received: (qmail 11395 invoked from network); 16 Oct 2007 23:11:38 -0000
-Received: from unknown (HELO main0197.acens.priv) ([127.0.0.1])
-	(envelope-sender <joaquinduran@adtelecom.es>)
-	by localhost (qmail-ldap-1.03) with SMTP
-	for <openembedded-devel@openembedded.org>; 16 Oct 2007 23:11:38 -0000
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Ii5GX-0000I3-KY
+	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 11:32:37 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9H96xUx001917 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Oct 2007 11:07:00 +0200
+Message-ID: <4715D0B4.7010401@student.utwente.nl>
+Date: Wed, 17 Oct 2007 11:07:00 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-From: <joaquinduran@adtelecom.es>
-To: openembedded-devel@openembedded.org
-X-Origin: 213.102.65.248
-Date: Wed, 17 Oct 2007 01:11:38 +0200
-X-Uidl: 1192576298108551856
-X-Mailer: AtMail 4.3
-Subject: Using XCB library with cairo
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <200710151419.07302.openembedded@haerwu.biz>	<1192464632.25543.58.camel@localhost.localdomain>	<4713AD5F.3040807@student.utwente.nl>
+	<1192478818.25543.108.camel@localhost.localdomain>
+In-Reply-To: <1192478818.25543.108.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [RFC] Handling of virtual/* namespace in packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,43 +36,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2007 23:44:50 -0000
-Message-ID: <MADEUP.15FE19C197103CEF.14572@groups.io>
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Wed, 17 Oct 2007 09:32:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dear all,=0D
-=0D
-Some time ago, Angstrom distribution had configured as virtual/xlib to XCB =
-for some time. Then =0D
-xlib was used again due to instability problems (as I remember) with XCB (I=
-'ve all emails in =0D
-computer of work but and I writting from home and I don't have access to th=
-em).=0D
-=0D
-I think that one focus of instability could be the integration of cairo wit=
-h XCB. Today I've =0D
-discovered that one of the backends for cairo is XCB, but no cairo package =
-builds it. I would =0D
-like to test it, but one of the troubles is how the configuration options c=
-ould be determined =0D
-based on virtual/xlib pacakge. Currently I'm thinking in a similar solution=
- to cairo-fpu:=0D
-=0D
-if virtual/xlib =3D "xcb" then=0D
-  EXTRA_OECONF +=3D "--disable-xlib --enable-xcb"=0D
-else=0D
-  EXTRA_OECONF +=3D "--enable-xlib --disable-xcb"=0D
-fi=0D
-=0D
-is this possible? any suggestions?=0D
-=0D
-Thanks and Best Regards,=0D
-Joaquim Duran=0D
-=0D
-=0D
-=0D
-=0D
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Richard Purdie schreef:
+> On Mon, 2007-10-15 at 20:11 +0200, Koen Kooi wrote:
+>> Richard Purdie schreef:
+>>> So perhaps we should just standardise the existing xserver behaviour
+>>> into a dedicated namespace:
+>>>
+>>> DEPENDS = "virtual/xserver"
+>>> RDEPENDS_xyz = "${VIRTUAL-RUNTIME_xserver}"
+>>>
+>>> and the machine.conf in this case would say
+>>>
+>>> PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+>>> VIRTUAL-RUNTIME_xserver = "xserver-kdrive-fbdev"
+>> We have the ${XSERVER} var for runtime selecting it:
+> 
+> Indeed. So what should we use for update-alternatives,
+> ${UPDATE-ALTERNATIVES} ? My point was that this is going to keep biting
+> us and a dedicated namespace might make sense?
+
+I'd say we copy the VIRTUAL-RUNTIME (note the OEDEM hyphen :) ) from poky for kdrive and
+u-a. Any objections?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHFdCzMkyGM64RGpERAjzzAJ9NO/OysPMsAvQwoTShIhPawLm1sgCginm5
+qL4BSJa9aw9FMgt7p3vzChk=
+=pzAm
+-----END PGP SIGNATURE-----
 
 
