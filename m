@@ -1,35 +1,29 @@
 Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1Ii6sF-0005hR-DX
+	(envelope-from <mickey@vanille-media.de>) id 1Ii8x1-00039v-Ac
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Oct 2007 13:15:39 +0200
+	Wed, 17 Oct 2007 15:28:43 +0200
 Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 1523E28C014; Wed, 17 Oct 2007 12:42:39 +0200 (CEST)
+	id F000F28C012; Wed, 17 Oct 2007 15:17:09 +0200 (CEST)
 X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
 	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.9 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
+X-Spam-Level: ****
+X-Spam-Status: No, score=4.1 required=5.0 tests=AWL,BAYES_40,RCVD_IN_PBL,
 	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
 	version=3.1.7-deb
-Received: from PROMETHEUS (e180169241.adsl.alicedsl.de [85.180.169.241])
-	by srv043.dedi23.de (Postfix) with ESMTP id 0C94328C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2007 12:42:35 +0200 (CEST)
-Date: Wed, 17 Oct 2007 12:47:32 +0200
+Received: from PROMETHEUS (e180150150.adsl.alicedsl.de [85.180.150.150])
+	by srv043.dedi23.de (Postfix) with ESMTP id A5F2928C014;
+	Wed, 17 Oct 2007 15:17:05 +0200 (CEST)
+Date: Wed, 17 Oct 2007 15:22:03 +0200
 From: "Dr. Michael Lauer" <mickey@vanille-media.de>
 X-Mailer: The Bat! (v3.99.24) Professional
 Organization: Vanille-Media
 X-Priority: 3 (Normal)
-Message-ID: <1566637534.20071017124732@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4715D0B4.7010401@student.utwente.nl>
-References: <200710151419.07302.openembedded@haerwu.biz>
-	<1192464632.25543.58.camel@localhost.localdomain>
-	<4713AD5F.3040807@student.utwente.nl>
-	<1192478818.25543.108.camel@localhost.localdomain>
-	<4715D0B4.7010401@student.utwente.nl>
+Message-ID: <1928315756.20071017152203@vanille-media.de>
+To: Pascal Bleser <loki@fosdem.org>
 MIME-Version: 1.0
-Subject: Re: [RFC] Handling of virtual/* namespace in packages
+Cc: openembedded-devel@lists.openembedded.org
+Subject: OE Booth @ FOSDEM 2008?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,39 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2007 11:15:39 -0000
+X-List-Received-Date: Wed, 17 Oct 2007 13:28:43 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Dear Pascal,
 
-> Richard Purdie schreef:
->> On Mon, 2007-10-15 at 20:11 +0200, Koen Kooi wrote:
->>> Richard Purdie schreef:
->>>> So perhaps we should just standardise the existing xserver behaviour
->>>> into a dedicated namespace:
->>>>
->>>> DEPENDS = "virtual/xserver"
->>>> RDEPENDS_xyz = "${VIRTUAL-RUNTIME_xserver}"
->>>>
->>>> and the machine.conf in this case would say
->>>>
->>>> PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
->>>> VIRTUAL-RUNTIME_xserver = "xserver-kdrive-fbdev"
->>> We have the ${XSERVER} var for runtime selecting it:
->> 
->> Indeed. So what should we use for update-alternatives,
->> ${UPDATE-ALTERNATIVES} ? My point was that this is going to keep biting
->> us and a dedicated namespace might make sense?
+on behalf of the OpenEmbedded team we would like to ask for a booth at
+FOSDEM 2008. Last year's appeareance was a big success and we had tons
+of interested people coming by to talk to us.
 
-> I'd say we copy the VIRTUAL-RUNTIME (note the OEDEM hyphen   ) from poky for kdrive and
-> u-a. Any objections?
+In fact we had so many visitors that they sometimes blocked the
+hallway and made it a bit uncomfortable for the booths next to us. So,
+if we are to get a booth next year, it would be just great if it could
+be a tad bit larger than this year.
 
-Go for it.
+It would also be quite nice to have us near the Embedded room, since
+we share the same audience and then people could just go forth and
+backwards without having to walk too far.
 
-Regards,
+Anyways, thanks for considering us.
+
+Cheers,
 
 :M:
 -- 
