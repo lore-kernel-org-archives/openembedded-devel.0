@@ -1,28 +1,25 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickeyl@linuxtogo.org>) id 1Ii9TY-0003Sj-C3
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Oct 2007 16:02:22 +0200
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id D80BA28C015; Wed, 17 Oct 2007 15:20:30 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180150150.adsl.alicedsl.de [85.180.150.150])
-	by srv043.dedi23.de (Postfix) with ESMTP id D4D2E28C014
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2007 15:20:26 +0200 (CEST)
-Date: Wed, 17 Oct 2007 15:25:24 +0200
-From: Michael 'Mickey' Lauer <mickeyl@linuxtogo.org>
-X-Mailer: The Bat! (v3.99.24) Professional
-Organization: LinuxToGo
-X-Priority: 3 (Normal)
-Message-ID: <4510693243.20071017152524@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IiCIL-0006QX-No
+	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 19:02:59 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9HGuDUx010325 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Oct 2007 18:56:14 +0200
+Message-ID: <47163EAF.7040000@student.utwente.nl>
+Date: Wed, 17 Oct 2007 18:56:15 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-Subject: Cleaning up SDK/Toolchain
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: COMPILE_FEATURES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,28 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2007 14:02:25 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 17 Oct 2007 17:03:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On OEDEM we talked about SDK and Toolchain issues. Richard Purdie
-recently merged Poky's meta-toolchain package plus the infrastructure
-that enables OE building external toolchains for usage with or without
-OpenEmbedded.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-In order to make this a bit more clean, we'd like to remove some of
-the older meta-sdk packages, if no one objects. If you are still using
-the meta-sdk packages, could you merge them towards using
-meta-toolchain?
+[18:50] koen: hrw: MACHINE_FEATURES = "thumb", yes or no?
+[18:50] koen: ehm
+[18:51] hrw: koen: arm-thumb you mean?
+[18:51] koen: COMBINED_FEATURES
+[18:51] koen: afaik there is only one thumb
+[18:51] koen: like iwmmxt
+[18:51] hrw: koen: and all arms newer then arm4 supports it...
+[18:51] koen: armv4
+[18:52] koen: my goal is to be able to flag certain package (e.g. samba) to build with
+thumb like we do with iwmmxt now
+[18:53] hrw: time for COMPILE_FEATURES maybe?
+[18:53] hrw: COMPILE_FEATURES = "thumb iwmmxt"
+[18:53] hrw: or ARCH_FEATURES
+[18:53] koen: that starts to look an awfull lot like use flags, though
 
-Adding custom packages to the meta-toolchain should just be a matter
-of overriding TOOLCHAIN_TARGET_TASK now.
+any ideas how we can draft a standard way to solve problems like this both compile time
+and package time?
 
-Regards,
+regards,
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFHFj6uMkyGM64RGpERAjF1AJ9Mcag6hqeZPTUS845IpFNNxXB1rgCeM1hI
+ceuQr0BTK+4CA8wHedroSl0=
+=CajS
+-----END PGP SIGNATURE-----
 
 
