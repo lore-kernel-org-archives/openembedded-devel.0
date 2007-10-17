@@ -1,27 +1,27 @@
 Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IiExq-0004VY-E8
-	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 21:53:58 +0200
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IiFfe-0000tu-P1
+	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 22:39:16 +0200
 Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
 	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9HJlGUx002176 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2007 21:47:16 +0200
-Message-ID: <471666C6.5050809@student.utwente.nl>
-Date: Wed, 17 Oct 2007 21:47:18 +0200
+	l9HKWXUx008469 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Oct 2007 22:32:34 +0200
+Message-ID: <47167163.1070901@student.utwente.nl>
+Date: Wed, 17 Oct 2007 22:32:35 +0200
 From: Koen Kooi <k.kooi@student.utwente.nl>
 User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-References: <47163EAF.7040000@student.utwente.nl>
-	<074296F4-56B3-4F1A-B0F1-8BE61670722A@gumstix.com>
-In-Reply-To: <074296F4-56B3-4F1A-B0F1-8BE61670722A@gumstix.com>
+References: <200710151419.07302.openembedded@haerwu.biz>	<1192464632.25543.58.camel@localhost.localdomain>	<4713AD5F.3040807@student.utwente.nl>	<1192478818.25543.108.camel@localhost.localdomain>	<4715D0B4.7010401@student.utwente.nl>
+	<1566637534.20071017124732@vanille-media.de>
+In-Reply-To: <1566637534.20071017124732@vanille-media.de>
 X-Enigmail-Version: 0.95.3
 X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
 	helpdesk@ITBE.utwente.nl for more information.
 X-UTwente-MailScanner: Found to be clean
 X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
 X-Spam-Status: No
-Subject: Re: COMPILE_FEATURES?
+Subject: Re: [RFC] Handling of virtual/* namespace in packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,32 +35,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2007 19:53:59 -0000
+X-List-Received-Date: Wed, 17 Oct 2007 20:39:19 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Craig Hughes schreef:
-> On Oct 17, 2007, at 9:56 AM, Koen Kooi wrote:
+Dr. Michael Lauer schreef:
+> Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
 > 
->> [18:53] koen: that starts to look an awfull lot like use flags, though
->>
->> any ideas how we can draft a standard way to solve problems like  
->> this both compile time
->> and package time?
+>> Richard Purdie schreef:
+>>> On Mon, 2007-10-15 at 20:11 +0200, Koen Kooi wrote:
+>>>> Richard Purdie schreef:
+>>>>> So perhaps we should just standardise the existing xserver behaviour
+>>>>> into a dedicated namespace:
+>>>>>
+>>>>> DEPENDS = "virtual/xserver"
+>>>>> RDEPENDS_xyz = "${VIRTUAL-RUNTIME_xserver}"
+>>>>>
+>>>>> and the machine.conf in this case would say
+>>>>>
+>>>>> PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+>>>>> VIRTUAL-RUNTIME_xserver = "xserver-kdrive-fbdev"
+>>>> We have the ${XSERVER} var for runtime selecting it:
+>>> Indeed. So what should we use for update-alternatives,
+>>> ${UPDATE-ALTERNATIVES} ? My point was that this is going to keep biting
+>>> us and a dedicated namespace might make sense?
 > 
-> I'm probably missing some background here, but are USE flags a bad  
-> thing?
+>> I'd say we copy the VIRTUAL-RUNTIME (note the OEDEM hyphen   ) from poky for kdrive and
+>> u-a. Any objections?
 
-they are.
+Question: glibc, eglibc and uclibc map to 'libc6' at package time, how do we get that into
+meta-toolchain? I added this:
+
+LIBC_linux = "glibc"
+LIBC_linux-uclibc = "uclibc"
+LIBC_linux-gnueabi = "glibc"
+LIBC_linux-uclibcgnueabi = "uclibc"
+
+which works fine for glibc and uclibc, but not for eglibc. To make it worse, we also need
+(e)(g)(uc)libc-dev in the toolchain....
+
+regards,
+
+Koen
+
+
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFHFmbGMkyGM64RGpERAqvMAJ9H5K5FwvLycRu/BB8T3uPn/ysLGwCeL0/w
-+Qz1hJ81VDvogi/i0huppYI=
-=wv6M
+iD8DBQFHFnFjMkyGM64RGpERAtYcAJ47IBLERVKRgBIVRsZXoPD7G34sOQCgprRK
+8swM0hbLxajzSANUPWNBTRs=
+=/NNm
 -----END PGP SIGNATURE-----
 
 
