@@ -1,25 +1,32 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [74.93.1.97] (helo=azazel.hughes-family.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IiCIL-0006QX-No
-	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 19:02:59 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9HGuDUx010325 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2007 18:56:14 +0200
-Message-ID: <47163EAF.7040000@student.utwente.nl>
-Date: Wed, 17 Oct 2007 18:56:15 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
+	(envelope-from <craig@gumstix.com>) id 1IiDXB-0007ZP-Id
+	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 20:22:22 +0200
+Received: from [JB?????IPv6:fe80::216:cbff:fe05:3ed7] (unknown
+	[IPv6:fe80::216:cbff:fe05:3ed7%eth0])
+	by azazel.hughes-family.org (Postfix) with ESMTP id EA4399D2BD;
+	Wed, 17 Oct 2007 10:56:58 -0700 (PDT)
+X-Habeas-Swe-9: mark in spam to <http://www.habeas.com/report/>.
+X-Habeas-Swe-6: email in exchange for a license for this Habeas
+X-Habeas-Swe-3: like Habeas SWE (tm)
+Date: Wed, 17 Oct 2007 10:56:59 -0700
+X-Habeas-Swe-8: Message (HCM) and not spam. Please report use of this
+From: Craig Hughes <craig@gumstix.com>
+X-Habeas-Swe-5: Sender Warranted Email (SWE) (tm). The sender of this
+X-Habeas-Swe-2: brightly anticipated
+In-Reply-To: <47163EAF.7040000@student.utwente.nl>
+References: <47163EAF.7040000@student.utwente.nl>
+To: openembedded-devel@lists.openembedded.org
+X-Image-Url: http://www.hughes-family.org/craig/craig64.jpg
+X-Habeas-Swe-7: warrant mark warrants that this is a Habeas Compliant
+Mime-Version: 1.0 (Apple Message framework v752.3)
+X-Habeas-Swe-4: Copyright 2002 Habeas (tm) 
+X-Habeas-Swe-1: winter into spring
+Message-Id: <074296F4-56B3-4F1A-B0F1-8BE61670722A@gumstix.com>
+X-Mailer: Apple Mail (2.752.3)
+Cc: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: COMPILE_FEATURES?
+Subject: Re: COMPILE_FEATURES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,40 +40,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2007 17:03:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Oct 2007 18:22:22 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Oct 17, 2007, at 9:56 AM, Koen Kooi wrote:
 
-[18:50] koen: hrw: MACHINE_FEATURES = "thumb", yes or no?
-[18:50] koen: ehm
-[18:51] hrw: koen: arm-thumb you mean?
-[18:51] koen: COMBINED_FEATURES
-[18:51] koen: afaik there is only one thumb
-[18:51] koen: like iwmmxt
-[18:51] hrw: koen: and all arms newer then arm4 supports it...
-[18:51] koen: armv4
-[18:52] koen: my goal is to be able to flag certain package (e.g. samba) to build with
-thumb like we do with iwmmxt now
-[18:53] hrw: time for COMPILE_FEATURES maybe?
-[18:53] hrw: COMPILE_FEATURES = "thumb iwmmxt"
-[18:53] hrw: or ARCH_FEATURES
-[18:53] koen: that starts to look an awfull lot like use flags, though
+> [18:53] koen: that starts to look an awfull lot like use flags, though
+>
+> any ideas how we can draft a standard way to solve problems like  
+> this both compile time
+> and package time?
 
-any ideas how we can draft a standard way to solve problems like this both compile time
-and package time?
+I'm probably missing some background here, but are USE flags a bad  
+thing?
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHFj6uMkyGM64RGpERAjF1AJ9Mcag6hqeZPTUS845IpFNNxXB1rgCeM1hI
-ceuQr0BTK+4CA8wHedroSl0=
-=CajS
------END PGP SIGNATURE-----
+C
 
 
