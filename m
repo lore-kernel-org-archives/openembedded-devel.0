@@ -1,27 +1,34 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [74.93.1.97] (helo=azazel.hughes-family.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IiFfe-0000tu-P1
-	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 22:39:16 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9HKWXUx008469 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2007 22:32:34 +0200
-Message-ID: <47167163.1070901@student.utwente.nl>
-Date: Wed, 17 Oct 2007 22:32:35 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200710151419.07302.openembedded@haerwu.biz>	<1192464632.25543.58.camel@localhost.localdomain>	<4713AD5F.3040807@student.utwente.nl>	<1192478818.25543.108.camel@localhost.localdomain>	<4715D0B4.7010401@student.utwente.nl>
-	<1566637534.20071017124732@vanille-media.de>
-In-Reply-To: <1566637534.20071017124732@vanille-media.de>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] Handling of virtual/* namespace in packages
+	(envelope-from <craig@gumstix.com>) id 1IiFwc-00013x-1s
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Oct 2007 22:56:46 +0200
+Received: from [10.8.22.2] (adsl-76-246-147-241.dsl.pltn13.sbcglobal.net
+	[76.246.147.241])
+	by azazel.hughes-family.org (Postfix) with ESMTP id 0AD269D2BD;
+	Wed, 17 Oct 2007 13:50:09 -0700 (PDT)
+X-Habeas-Swe-9: mark in spam to <http://www.habeas.com/report/>.
+X-Habeas-Swe-6: email in exchange for a license for this Habeas
+X-Habeas-Swe-3: like Habeas SWE (tm)
+Date: Wed, 17 Oct 2007 13:50:06 -0700
+X-Habeas-Swe-8: Message (HCM) and not spam. Please report use of this
+From: Craig Hughes <craig@gumstix.com>
+X-Habeas-Swe-5: Sender Warranted Email (SWE) (tm). The sender of this
+X-Habeas-Swe-2: brightly anticipated
+In-Reply-To: <471666C6.5050809@student.utwente.nl>
+References: <47163EAF.7040000@student.utwente.nl>
+	<074296F4-56B3-4F1A-B0F1-8BE61670722A@gumstix.com>
+	<471666C6.5050809@student.utwente.nl>
+To: openembedded-devel@lists.openembedded.org
+X-Image-Url: http://www.hughes-family.org/craig/craig64.jpg
+X-Habeas-Swe-7: warrant mark warrants that this is a Habeas Compliant
+Mime-Version: 1.0 (Apple Message framework v752.3)
+X-Habeas-Swe-4: Copyright 2002 Habeas (tm) 
+X-Habeas-Swe-1: winter into spring
+Message-Id: <0FBF6426-46EC-4E71-92E7-A1C29B31C6D5@gumstix.com>
+X-Mailer: Apple Mail (2.752.3)
+Cc: openembedded-devel@openembedded.org
+Subject: Re: COMPILE_FEATURES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,61 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2007 20:39:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Oct 2007 20:56:47 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; format=flowed
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Oct 17, 2007, at 12:47 PM, Koen Kooi wrote:
 
-Dr. Michael Lauer schreef:
-> Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
-> 
->> Richard Purdie schreef:
->>> On Mon, 2007-10-15 at 20:11 +0200, Koen Kooi wrote:
->>>> Richard Purdie schreef:
->>>>> So perhaps we should just standardise the existing xserver behaviour
->>>>> into a dedicated namespace:
->>>>>
->>>>> DEPENDS = "virtual/xserver"
->>>>> RDEPENDS_xyz = "${VIRTUAL-RUNTIME_xserver}"
->>>>>
->>>>> and the machine.conf in this case would say
->>>>>
->>>>> PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
->>>>> VIRTUAL-RUNTIME_xserver = "xserver-kdrive-fbdev"
->>>> We have the ${XSERVER} var for runtime selecting it:
->>> Indeed. So what should we use for update-alternatives,
->>> ${UPDATE-ALTERNATIVES} ? My point was that this is going to keep biting
->>> us and a dedicated namespace might make sense?
-> 
->> I'd say we copy the VIRTUAL-RUNTIME (note the OEDEM hyphen   ) from poky for kdrive and
->> u-a. Any objections?
+>> I'm probably missing some background here, but are USE flags a bad
+>> thing?
+>
+> they are.
 
-Question: glibc, eglibc and uclibc map to 'libc6' at package time, how do we get that into
-meta-toolchain? I added this:
+Ah, thanks.  Now I'm up to speed :)
 
-LIBC_linux = "glibc"
-LIBC_linux-uclibc = "uclibc"
-LIBC_linux-gnueabi = "glibc"
-LIBC_linux-uclibcgnueabi = "uclibc"
-
-which works fine for glibc and uclibc, but not for eglibc. To make it worse, we also need
-(e)(g)(uc)libc-dev in the toolchain....
-
-regards,
-
-Koen
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHFnFjMkyGM64RGpERAtYcAJ47IBLERVKRgBIVRsZXoPD7G34sOQCgprRK
-8swM0hbLxajzSANUPWNBTRs=
-=/NNm
------END PGP SIGNATURE-----
+C
 
 
