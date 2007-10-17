@@ -1,31 +1,26 @@
-Received: from [74.93.1.97] (helo=azazel.hughes-family.org)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <craig@gumstix.com>) id 1IiDXB-0007ZN-IH
-	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 20:22:21 +0200
-Received: from [JB?????IPv6:fe80::216:cbff:fe05:3ed7] (unknown
-	[IPv6:fe80::216:cbff:fe05:3ed7%eth0])
-	by azazel.hughes-family.org (Postfix) with ESMTP id B9C599D2C2;
-	Wed, 17 Oct 2007 11:00:40 -0700 (PDT)
-X-Habeas-Swe-9: mark in spam to <http://www.habeas.com/report/>.
-X-Habeas-Swe-6: email in exchange for a license for this Habeas
-X-Habeas-Swe-3: like Habeas SWE (tm)
-Date: Wed, 17 Oct 2007 11:00:41 -0700
-X-Habeas-Swe-8: Message (HCM) and not spam. Please report use of this
-From: Craig Hughes <craig@gumstix.com>
-X-Habeas-Swe-5: Sender Warranted Email (SWE) (tm). The sender of this
-X-Habeas-Swe-2: brightly anticipated
-In-Reply-To: <47163EAF.7040000@student.utwente.nl>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IiExq-0004VY-E8
+	for openembedded-devel@openembedded.org; Wed, 17 Oct 2007 21:53:58 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9HJlGUx002176 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Oct 2007 21:47:16 +0200
+Message-ID: <471666C6.5050809@student.utwente.nl>
+Date: Wed, 17 Oct 2007 21:47:18 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <47163EAF.7040000@student.utwente.nl>
-To: openembedded-devel@lists.openembedded.org
-X-Image-Url: http://www.hughes-family.org/craig/craig64.jpg
-X-Habeas-Swe-7: warrant mark warrants that this is a Habeas Compliant
-Mime-Version: 1.0 (Apple Message framework v752.3)
-X-Habeas-Swe-4: Copyright 2002 Habeas (tm) 
-X-Habeas-Swe-1: winter into spring
-Message-Id: <5AEA0308-32D1-44FD-BBE3-0E34B440FB8F@gumstix.com>
-X-Mailer: Apple Mail (2.752.3)
-Cc: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
+	<074296F4-56B3-4F1A-B0F1-8BE61670722A@gumstix.com>
+In-Reply-To: <074296F4-56B3-4F1A-B0F1-8BE61670722A@gumstix.com>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: COMPILE_FEATURES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,27 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2007 18:22:22 -0000
+X-List-Received-Date: Wed, 17 Oct 2007 19:53:59 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
-On Oct 17, 2007, at 9:56 AM, Koen Kooi wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> [18:53] hrw: COMPILE_FEATURES = "thumb iwmmxt"
-> [18:53] hrw: or ARCH_FEATURES
-> [18:53] koen: that starts to look an awfull lot like use flags, though
+Craig Hughes schreef:
+> On Oct 17, 2007, at 9:56 AM, Koen Kooi wrote:
+> 
+>> [18:53] koen: that starts to look an awfull lot like use flags, though
+>>
+>> any ideas how we can draft a standard way to solve problems like  
+>> this both compile time
+>> and package time?
+> 
+> I'm probably missing some background here, but are USE flags a bad  
+> thing?
 
-Also, I don't think is really is like USE flags.  Well, it's a very  
-small subset of USE.  The specification here is simply more fine- 
-grained detail on the architecture, and differs from specifying  
-CFLAGS I guess only in that some packages will have custom code (like  
-hand-written assembler or something) for different architectures.   
-This is not definition a change in functionality of the package, but  
-just a change in which implementation of the functionality to  
-select.  Most USE flags specify a feature set to include/exclude --  
-"iwmmxt" or "thumb" don't really change "features", but just the  
-implementation details of those features.
+they are.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-C
+iD8DBQFHFmbGMkyGM64RGpERAqvMAJ9H5K5FwvLycRu/BB8T3uPn/ysLGwCeL0/w
++Qz1hJ81VDvogi/i0huppYI=
+=wv6M
+-----END PGP SIGNATURE-----
 
 
