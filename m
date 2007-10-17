@@ -1,22 +1,29 @@
-Received: from [212.227.126.174] (helo=moutng.kundenserver.de)
+Received: from [195.238.6.174] (helo=mailrelay008.isp.belgacom.be)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <robert@linuxdevelopment.de>) id 1IiO27-0002wj-DU
+	(envelope-from <loki@fosdem.org>) id 1IiCSw-0006cq-Sg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2007 07:34:59 +0200
-Received: from [10.0.0.200] (M8286.m.pppool.de [89.49.130.134])
-	by mrelayeu.kundenserver.de (node=mrelayeu0) with ESMTP (Nemesis)
-	id 0MKwh2-1IiNYf1RVP-0000ri; Thu, 18 Oct 2007 07:04:34 +0200
-Message-ID: <4716E960.5070800@linuxdevelopment.de>
-Date: Thu, 18 Oct 2007 07:04:32 +0200
-From: =?ISO-8859-15?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
+	Wed, 17 Oct 2007 19:13:54 +0200
+X-Belgacom-Dynamic: yes
+Received: from 118.167-66-87.adsl-dyn.isp.belgacom.be (HELO hera.lan)
+	([87.66.167.118])
+	by relay.skynet.be with ESMTP; 17 Oct 2007 18:37:28 +0200
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by hera.lan (Postfix) with ESMTP id E5394677FFF;
+	Wed, 17 Oct 2007 18:37:29 +0200 (CEST)
+Message-ID: <47163A49.9080400@fosdem.org>
+Date: Wed, 17 Oct 2007 18:37:29 +0200
+From: Pascal Bleser <loki@fosdem.org>
+Organization: FOSDEM
 User-Agent: Thunderbird 2.0.0.6 (X11/20070801)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.3
-X-Provags-ID: V01U2FsdGVkX1/+STBD41suAVU529QrNuha/1am03Gv9oowsGo
-	dlVph8PBmQ1hDu2fap8gfClGBPj+ec3O27HkJU9X3zV97P5XfR
-	05pTYxle87e9ZfweMpw4QDYUGfI9uR4tkcRb7M0RYI=
-Subject: building qemu on x86_64 host for a ixp4xx target
+To: "Dr. Mickey Lauer" <mickey@vanille-media.de>
+References: <1928315756.20071017152203@vanille-media.de>
+In-Reply-To: <1928315756.20071017152203@vanille-media.de>
+X-Enigmail-Version: 0.95.2
+OpenPGP: id=58857177
+X-Mailman-Approved-At: Thu, 18 Oct 2007 09:01:23 +0200
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: OE Booth @ FOSDEM 2008?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,79 +37,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2007 05:34:59 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Wed, 17 Oct 2007 17:13:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Dear List
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I am failing to get qemu-native build on my x86_64 host for a arm ixp4xx
-target.
-Building qemu-native for a i686 target worked fine.
+Dr. Michael Lauer wrote:
+> Dear Pascal,
 
-it fails like this:
-make -C i386-linux-user all
-| make[1]: Entering directory
-`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/i386-linux-user'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory
-`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/i386-linux-user'
-| make -C arm-linux-user all
-| make[1]: Entering directory
-`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/arm-linux-user'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory
-`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/arm-linux-user'
-| make -C armeb-linux-user all
-| make[1]: Entering directory
-`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/armeb-linux-user'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory
-`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/armeb-linux-user'
-| make -C sparc-linux-user all
-| make[1]: Entering directory
-`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/sparc-linux-user'
-| gcc -isystem/home/bob/oe/ixp425/tmp/staging/x86_64-linux/include -Os
--Wall -O2 -g -fno-strict-aliasing -I. -I..
--I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/target-sparc
--I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu
--I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/linux-user
--I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/linux-user/sparc
--D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
--I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/fpu
--I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/slirp
-   -c -o translate-op.o
-/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c
-|
-/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c:
-In function 'dyngen_code':
-|
-/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c:37:
-error: expected declaration or statement at end of input
-|
-/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c:37:
-error: expected declaration or statement at end of input
-|
-/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c:37:
-error: expected declaration or statement at end of input
-| make[1]: *** [translate-op.o] Error 1
-| make[1]: Leaving directory
-`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/sparc-linux-user'
-| make: *** [subdir-sparc-linux-user] Error 2
-| + die 'oe_runmake failed'
-| + oefatal 'oe_runmake failed'
-| + echo FATAL: 'oe_runmake failed'
-| FATAL: oe_runmake failed
-| + exit 1
-NOTE: Task failed:
-/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/temp/log.do_compile.16092
-NOTE: package qemu-native-0.9.0+cvs20070613-r5: task do_compile: failed
-ERROR: TaskFailed event exception, aborting
+Hallo Michael
 
+> on behalf of the OpenEmbedded team we would like to ask for a booth at
+> FOSDEM 2008. Last year's appeareance was a big success and we had tons
+> of interested people coming by to talk to us.
 
-should i hack-fix the translate-op.c:37 ??? or is there a cleaner way to
-help here ?
+Great :)
 
-Regards rob_w
+> In fact we had so many visitors that they sometimes blocked the
+> hallway and made it a bit uncomfortable for the booths next to us. So,
+> if we are to get a booth next year, it would be just great if it could
+> be a tad bit larger than this year.
+
+We're not far enough in our process yet to be able to ACK or NACK stand
+requests. But I'll let you know ASAP. And I'll try to put up a larger stand.
+
+> It would also be quite nice to have us near the Embedded room, since
+> we share the same audience and then people could just go forth and
+> backwards without having to walk too far.
+
+Can't promise anything but if possible, it will be done.
+
+cheers
+- --
+  -o) Pascal Bleser <loki@fosdem.org>    http://www.fosdem.org
+  /\\     FOSDEM 2008 :: 23 + 24 February 2008 in Brussels
+ _\_v Free and Opensource Software Developers European Meeting
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (GNU/Linux)
+Comment: Using GnuPG with SUSE - http://enigmail.mozdev.org
+
+iD8DBQFHFjpJr3NMWliFcXcRAi/lAJ0R/8/Pyn3jugBJ4CVvMVYnre5jLwCfcfbS
+WE7ukLQtyVfEj2kxW78d3Bo=
+=s7gv
+-----END PGP SIGNATURE-----
 
 
