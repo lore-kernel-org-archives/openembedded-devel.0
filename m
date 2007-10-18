@@ -1,27 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IiVm9-0001ed-UK
-	for openembedded-devel@openembedded.org; Thu, 18 Oct 2007 15:51:07 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9IDiCUo018653 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2007 15:44:12 +0200
-Message-ID: <47176330.2000200@student.utwente.nl>
-Date: Thu, 18 Oct 2007 15:44:16 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <4510693243.20071017152524@vanille-media.de>	<471729ED.9080208@student.utwente.nl>
-	<1192708743.6158.25.camel@localhost.localdomain>
-In-Reply-To: <1192708743.6158.25.camel@localhost.localdomain>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: Cleaning up SDK/Toolchain
+	(envelope-from <dp@xora.org.uk>) id 1IiWBT-00021n-VP
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Oct 2007 16:17:18 +0200
+Received: from cimmeria ([::ffff:78.86.130.156])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Thu, 18 Oct 2007 15:10:30 +0100
+	id 00064C4F.47176956.000045B7
+Date: Thu, 18 Oct 2007 15:10:28 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071018151028.487b11cf@cimmeria>
+In-Reply-To: <200710181425.56368.gerwin@vanderkruis.net>
+References: <200710181425.56368.gerwin@vanderkruis.net>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.10.11; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: Organisation fosdem 2008
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,64 +29,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2007 13:51:21 -0000
-X-List-Received-Date: Thu, 18 Oct 2007 13:51:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Oct 2007 14:17:44 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, 18 Oct 2007 14:25:56 +0200
+Gerwin van der Kruis <gerwin@vanderkruis.net> wrote:
 
-Richard Purdie schreef:
-> On Thu, 2007-10-18 at 11:39 +0200, Koen Kooi wrote:
->> Apart from the libc flaw I pointed out in another mail, the naming of the toolchains is
->> broken as well:
->>
->> angstrom-2007.9-test-20071017-arm-linux-gnueabi-toolchain.tar.bz2
->> angstrom-2007.9-test-20071017-arm-linux-uclibcgnueabi-toolchain.tar.bz2
->> angstrom-2007.9-test-20071018-powerpc-linux-toolchain.tar.bz2
->> angstrom-2007.9-test-20071018-powerpc-linux-uclibc-toolchain.tar.bz2
->>
->> There's no way to see if the arm ones are armv4t, armv5te or armv6 and the powerpc ones
->> ppc405, ppc440 or ppc603e. For compiling 'hello world' that doesn't matter, but libc6.so
->> and libgcc_s.so will contain instruction not available on other cpus of that arch (e.g.
->> clz is not in armv4t), so your binary will probably not work on your device.
->>
->> My idea is to use PACKAGE_ARCH (e.g. armv5te or ppc603e) instead of TARGET_ARCH.
->>
->> Comments/hints/ideas?
+> Dear all, 
 > 
-> We actually have a bigger problem. Staging uses an arm directory, not an
-> armv5te one so the armv5te binaries mix up with the armv4 ones etc.
+> As seen on the mailinglist we are trying to get to fosdem this year. 
 > 
-> This isn't a problem with images built from packages where everything
-> dynamically links since the right packages are used. The moment someone
-> tries to statically link an armv4 binary with armv5te in staging, game
-> over though.
+> I would like to make a list of people who are going there. 
 > 
-> So both the meta-toolchain and staging need some thought (and are
-> related since meta-toolchain has knowledge to rebuild bits of staging
-> for use in its "shortcut an OE build by skipping the toolchain" mode.
+> Please let me know if you already know if you are going there. 
 > 
-> I agreed we probably need to add in some PACKAGE_ARCHs in places but its
-> yet another thing that needs some careful thought and we'll probably
-> break people's existing builds. I hope to look at/think about it soon if
-> nobody beats me too it...
+Im pretty sure I shall be at FOSDEM!
 
-Can't we put it in at the same time as the staging /usr changes? We'll
-be breaking stuff anyway...
-
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHF2MwMkyGM64RGpERAkTbAJoDh5qic4QmFPw7N857kQm0rDabjgCgtcJ0
-hqYD4JywIUYGwPtw8dgJnTM=
-=Hlfq
------END PGP SIGNATURE-----
+Graeme (XorA)
 
 
