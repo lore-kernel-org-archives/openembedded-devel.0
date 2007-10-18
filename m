@@ -1,26 +1,22 @@
-Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
+Received: from [212.227.126.174] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <cliff.brake@gmail.com>) id 1IiMZ7-0001wV-Nx
+	(envelope-from <robert@linuxdevelopment.de>) id 1IiO27-0002wj-DU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2007 06:00:57 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so56304waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2007 20:54:18 -0700 (PDT)
-Received: by 10.114.153.18 with SMTP id a18mr42687wae.1192676281737;
-	Wed, 17 Oct 2007 19:58:01 -0700 (PDT)
-Received: by 10.114.191.17 with HTTP; Wed, 17 Oct 2007 19:58:01 -0700 (PDT)
-Message-ID: <f96d234e0710171958s60ad2e4fqab00437374cd0d1@mail.gmail.com>
-Date: Wed, 17 Oct 2007 22:58:01 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47168FE0.5020701@balister.org>
+	Thu, 18 Oct 2007 07:34:59 +0200
+Received: from [10.0.0.200] (M8286.m.pppool.de [89.49.130.134])
+	by mrelayeu.kundenserver.de (node=mrelayeu0) with ESMTP (Nemesis)
+	id 0MKwh2-1IiNYf1RVP-0000ri; Thu, 18 Oct 2007 07:04:34 +0200
+Message-ID: <4716E960.5070800@linuxdevelopment.de>
+Date: Thu, 18 Oct 2007 07:04:32 +0200
+From: =?ISO-8859-15?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070801)
 MIME-Version: 1.0
-References: <47163EAF.7040000@student.utwente.nl>
-	<074296F4-56B3-4F1A-B0F1-8BE61670722A@gumstix.com>
-	<471666C6.5050809@student.utwente.nl>
-	<0FBF6426-46EC-4E71-92E7-A1C29B31C6D5@gumstix.com>
-	<47168FE0.5020701@balister.org>
-Subject: Re: COMPILE_FEATURES?
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.3
+X-Provags-ID: V01U2FsdGVkX1/+STBD41suAVU529QrNuha/1am03Gv9oowsGo
+	dlVph8PBmQ1hDu2fap8gfClGBPj+ec3O27HkJU9X3zV97P5XfR
+	05pTYxle87e9ZfweMpw4QDYUGfI9uR4tkcRb7M0RYI=
+Subject: building qemu on x86_64 host for a ixp4xx target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,44 +30,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2007 04:00:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 18 Oct 2007 05:34:59 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 10/17/07, Philip Balister <philip@balister.org> wrote:
-> In #oe I extracted the answer as follows, with a use flag type thingy,
-> two builds of the same package could have very different packages,
-> primarily in the area of dependencies.
->
-> Philip
->
-> PS: I have no clue what USE flags are, and I am not a packaging guru.
-> I'm sure my possible wrong answer will get a better explanation.
+Dear List
 
-USE flags are used in Gentoo.  Gentoo and OE somewhat similar in that
-they are composed of a bunch of recipes that describe primarily how to
-build software, but that's about it.
+I am failing to get qemu-native build on my x86_64 host for a arm ixp4xx
+target.
+Building qemu-native for a i686 target worked fine.
 
-http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=2&chap=2
+it fails like this:
+make -C i386-linux-user all
+| make[1]: Entering directory
+`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/i386-linux-user'
+| make[1]: Nothing to be done for `all'.
+| make[1]: Leaving directory
+`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/i386-linux-user'
+| make -C arm-linux-user all
+| make[1]: Entering directory
+`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/arm-linux-user'
+| make[1]: Nothing to be done for `all'.
+| make[1]: Leaving directory
+`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/arm-linux-user'
+| make -C armeb-linux-user all
+| make[1]: Entering directory
+`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/armeb-linux-user'
+| make[1]: Nothing to be done for `all'.
+| make[1]: Leaving directory
+`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/armeb-linux-user'
+| make -C sparc-linux-user all
+| make[1]: Entering directory
+`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/sparc-linux-user'
+| gcc -isystem/home/bob/oe/ixp425/tmp/staging/x86_64-linux/include -Os
+-Wall -O2 -g -fno-strict-aliasing -I. -I..
+-I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/target-sparc
+-I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu
+-I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/linux-user
+-I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/linux-user/sparc
+-D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
+-I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/fpu
+-I/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/slirp
+   -c -o translate-op.o
+/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c
+|
+/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c:
+In function 'dyngen_code':
+|
+/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c:37:
+error: expected declaration or statement at end of input
+|
+/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c:37:
+error: expected declaration or statement at end of input
+|
+/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/translate-op.c:37:
+error: expected declaration or statement at end of input
+| make[1]: *** [translate-op.o] Error 1
+| make[1]: Leaving directory
+`/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/qemu/sparc-linux-user'
+| make: *** [subdir-sparc-linux-user] Error 2
+| + die 'oe_runmake failed'
+| + oefatal 'oe_runmake failed'
+| + echo FATAL: 'oe_runmake failed'
+| FATAL: oe_runmake failed
+| + exit 1
+NOTE: Task failed:
+/home/bob/oe/ixp425/tmp/work/x86_64-linux/qemu-native-0.9.0+cvs20070613-r5/temp/log.do_compile.16092
+NOTE: package qemu-native-0.9.0+cvs20070613-r5: task do_compile: failed
+ERROR: TaskFailed event exception, aborting
 
-Bitbake was actually derived from portage:
 
-Chris Larson quote: "it (bitbake) gradually developed a tendency
-toward the most flexible
-of all implementations, so became a generic task execution and metadata
-handling tool that had some remnants from the Gentoo Portage codebase
-that it was derived from."
+should i hack-fix the translate-op.c:37 ??? or is there a cleaner way to
+help here ?
 
-A little more history:
-http://lists.berlios.de/pipermail/bitbake-dev/2005-May/000028.html
-http://lists.berlios.de/pipermail/bitbake-dev/2005-May/thread.html#29
-
-Cliff
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Regards rob_w
 
 
