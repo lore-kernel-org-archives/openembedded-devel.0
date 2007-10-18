@@ -1,27 +1,19 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IiRxf-0005yx-7q
-	for openembedded-devel@openembedded.org; Thu, 18 Oct 2007 11:46:40 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9I9dsUx001573 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2007 11:39:54 +0200
-Message-ID: <471729ED.9080208@student.utwente.nl>
-Date: Thu, 18 Oct 2007 11:39:57 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <openembedded@haerwu.biz>) id 1IiTYq-00079m-FS
+	for openembedded-devel@openembedded.org; Thu, 18 Oct 2007 13:29:08 +0200
+Received: (qmail 26587 invoked by uid 813007); 18 Oct 2007 11:22:27 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 18 Oct 2007 11:22:27 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Oct 2007 13:22:20 +0200
+User-Agent: KMail/1.9.7
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <4510693243.20071017152524@vanille-media.de>
-In-Reply-To: <4510693243.20071017152524@vanille-media.de>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: Cleaning up SDK/Toolchain
+Message-Id: <200710181322.22572.openembedded@haerwu.biz>
+Subject: Checksums update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,53 +27,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2007 09:46:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Oct 2007 11:29:08 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Michael 'Mickey' Lauer schreef:
-> On OEDEM we talked about SDK and Toolchain issues. Richard Purdie
-> recently merged Poky's meta-toolchain package plus the infrastructure
-> that enables OE building external toolchains for usage with or without
-> OpenEmbedded.
-> 
-> In order to make this a bit more clean, we'd like to remove some of
-> the older meta-sdk packages, if no one objects. If you are still using
-> the meta-sdk packages, could you merge them towards using
-> meta-toolchain?
-> 
-> Adding custom packages to the meta-toolchain should just be a matter
-> of overriding TOOLCHAIN_TARGET_TASK now.
+As some of you know during OpenEmbedded builds there is checksums checking 
+(in do_fetch task). We have list of checksums stored in metadata in 
+conf/checksums.ini file.
 
-Apart from the libc flaw I pointed out in another mail, the naming of the toolchains is
-broken as well:
+But not all sources are covered there. I added some code into base.bbclass 
+to automatically generate TMPDIR/checksums.ini with data for missing 
+sources. Please review its output after building and commit/submit new 
+entries. But please do not submit entries for files which are generated 
+daily (source snapshots for example) as they are useless.
 
-angstrom-2007.9-test-20071017-arm-linux-gnueabi-toolchain.tar.bz2
-angstrom-2007.9-test-20071017-arm-linux-uclibcgnueabi-toolchain.tar.bz2
-angstrom-2007.9-test-20071018-powerpc-linux-toolchain.tar.bz2
-angstrom-2007.9-test-20071018-powerpc-linux-uclibc-toolchain.tar.bz2
+Another thing is getting sure that already fetched sources are the proper 
+ones. I pushed script into contrib/source-checker/ which was written for 
+this task. Simply run it with OE conf/checksums.ini against your sources 
+(DL_DIR directory). If any archive is wrong then this script will tell 
+you that. To confirm does it really apply (OE conf/checksums.ini contain 
+some bugs) please fetch archive from it's location, generate md5 and 
+sha256 and compare against checksums.ini file. Please commit/submit any 
+fixed entries.
 
-There's no way to see if the arm ones are armv4t, armv5te or armv6 and the powerpc ones
-ppc405, ppc440 or ppc603e. For compiling 'hello world' that doesn't matter, but libc6.so
-and libgcc_s.so will contain instruction not available on other cpus of that arch (e.g.
-clz is not in armv4t), so your binary will probably not work on your device.
+-- 
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-My idea is to use PACKAGE_ARCH (e.g. armv5te or ppc603e) instead of TARGET_ARCH.
+     If you can't learn to do it well, learn to enjoy doing it badly.
+     		-- Ashleigh Brilliant
 
-Comments/hints/ideas?
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHFyntMkyGM64RGpERAm+UAJsHn+2oCOjJoHlTxJ0o9SmSTP5bjQCffUcx
-fNmkEs0chQ5uAtVAoxOsZ7c=
-=gywh
------END PGP SIGNATURE-----
 
 
