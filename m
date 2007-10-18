@@ -1,20 +1,20 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1IiWBT-00021n-VP
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2007 16:17:18 +0200
-Received: from cimmeria ([::ffff:78.86.130.156])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Thu, 18 Oct 2007 15:10:30 +0100
-	id 00064C4F.47176956.000045B7
-Date: Thu, 18 Oct 2007 15:10:28 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	(envelope-from <openembedded@haerwu.biz>) id 1IiYl1-0002Fg-RG
+	for openembedded-devel@openembedded.org; Thu, 18 Oct 2007 19:02:03 +0200
+Received: (qmail 24144 invoked by uid 813007); 18 Oct 2007 16:55:21 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 18 Oct 2007 16:55:21 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071018151028.487b11cf@cimmeria>
-In-Reply-To: <200710181425.56368.gerwin@vanderkruis.net>
+Date: Thu, 18 Oct 2007 18:55:16 +0200
+User-Agent: KMail/1.9.7
 References: <200710181425.56368.gerwin@vanderkruis.net>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.10.11; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
+In-Reply-To: <200710181425.56368.gerwin@vanderkruis.net>
+MIME-Version: 1.0
+Message-Id: <200710181855.17637.openembedded@haerwu.biz>
 Subject: Re: Organisation fosdem 2008
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,23 +29,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2007 14:17:44 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Oct 2007 17:02:04 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Thu, 18 Oct 2007 14:25:56 +0200
-Gerwin van der Kruis <gerwin@vanderkruis.net> wrote:
+Dnia czwartek, 18 pa=BCdziernika 2007, Gerwin van der Kruis napisa=B3:
 
-> Dear all, 
-> 
-> As seen on the mailinglist we are trying to get to fosdem this year. 
-> 
-> I would like to make a list of people who are going there. 
-> 
-> Please let me know if you already know if you are going there. 
-> 
-Im pretty sure I shall be at FOSDEM!
+> As seen on the mailinglist we are trying to get to fosdem this year.
+>
+> I would like to make a list of people who are going there.
+>
+> Please let me know if you already know if you are going there.
 
-Graeme (XorA)
+I know for sure that I will *not* be on FOSDEM 2008 - child birth in=20
+=46ebruary ;)
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+               Life's not fair. But the root password helps.
+
+
 
 
