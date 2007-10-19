@@ -1,22 +1,22 @@
-Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
+Received: from [209.85.134.190] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philipp.zabel@gmail.com>) id 1IipSA-0002QW-GQ
+	(envelope-from <philipp.zabel@gmail.com>) id 1IipqC-0004GS-Mx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Oct 2007 12:51:44 +0200
-Received: by fk-out-0910.google.com with SMTP id 18so471280fks
+	Fri, 19 Oct 2007 13:16:32 +0200
+Received: by mu-out-0910.google.com with SMTP id w9so523027mue
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Oct 2007 03:44:56 -0700 (PDT)
-Received: by 10.82.112.3 with SMTP id k3mr3134088buc.1192784360447;
-	Fri, 19 Oct 2007 01:59:20 -0700 (PDT)
-Received: by 10.82.118.8 with HTTP; Fri, 19 Oct 2007 01:59:20 -0700 (PDT)
-Message-ID: <74d0deb30710190159i6220af0dna5ba0efe949c8402@mail.gmail.com>
-Date: Fri, 19 Oct 2007 10:59:20 +0200
+	Fri, 19 Oct 2007 04:09:46 -0700 (PDT)
+Received: by 10.82.162.14 with SMTP id k14mr3255966bue.1192788557412;
+	Fri, 19 Oct 2007 03:09:17 -0700 (PDT)
+Received: by 10.82.118.8 with HTTP; Fri, 19 Oct 2007 03:09:17 -0700 (PDT)
+Message-ID: <74d0deb30710190309s4c794a0gbb960a983ce41c9e@mail.gmail.com>
+Date: Fri, 19 Oct 2007 12:09:17 +0200
 From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1IimaA-0007xc-Ba@linuxtogo.org>
+In-Reply-To: <E1Iinn8-0004il-BP@linuxtogo.org>
 MIME-Version: 1.0
-References: <E1IimaA-0007xc-Ba@linuxtogo.org>
-Subject: Re: [oe-commits] org.oe.dev telepathy: add telepathy-python 0.14.0
+References: <E1Iinn8-0004il-BP@linuxtogo.org>
+Subject: Re: [oe-commits] org.oe.dev conf/distro/include/angstrom-2007-preferred-versions.inc: add file for locking down almost every package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,54 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Oct 2007 10:51:46 -0000
+X-List-Received-Date: Fri, 19 Oct 2007 11:16:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On 10/19/07, pH5 commit <openembedded-commits@lists.openembedded.org> wrote:
-> telepathy: add telepathy-python 0.14.0
+On 10/19/07, koen commit <openembedded-commits@lists.openembedded.org> wrote:
+> conf/distro/include/angstrom-2007-preferred-versions.inc: add file for locking down almost every package
+>
+> ** THIS WILL BE INCLUDED SOON -- REVIEW IT!!! **
+[...]
+> +PREFERRED_VERSION_bochs ?="2.1"
+> +PREFERRED_VERSION_bogofilter ?="0.96.0"
+> +PREFERRED_VERSION_bonnie ?=""
 
-Hm, I wonder whether this should be renamed to python-telepathy for
-consistency with other python bindings (and the same for dbus-python
--> python-dbus) like Debian does.
+bonnie++ ?
 
-> Author: pH5@openembedded.org
-> Branch: org.openembedded.dev
-> Revision: 320cf2f1a4279be26084f178c252be667db6c6b4
-> ViewMTN: http://monotone.openembedded.org/revision/info/320cf2f1a4279be26084f178c252be667db6c6b4
-> Files:
-> 1
-> packages/telepathy/telepathy-python_0.14.0.bb
-> Diffs:
->
-> #
-> # mt diff -r466773a42b2f042df1c0582c6315dd2901312eed -r320cf2f1a4279be26084f178c252be667db6c6b4
-> #
-> #
-> #
-> # add_file "packages/telepathy/telepathy-python_0.14.0.bb"
-> #  content [b72e5e36875b783b40a06c426e30d901358c86a7]
-> #
-> ============================================================
-> --- packages/telepathy/telepathy-python_0.14.0.bb       b72e5e36875b783b40a06c426e30d901358c86a7
-> +++ packages/telepathy/telepathy-python_0.14.0.bb       b72e5e36875b783b40a06c426e30d901358c86a7
-> @@ -0,0 +1,8 @@
-> +DESCRIPTION = "Telepathy framework - Python package"
-> +HOMEPAGE = "http://telepathy.freedesktop.org/wiki/"
-> +LICENSE = "LGPL"
-> +RDEPENDS_${PN} += "dbus-python"
-> +
-> +SRC_URI = "http://telepathy.freedesktop.org/releases/${PN}/${P}.tar.gz "
-> +
-> +inherit distutils
->
->
->
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->
+[...]
+> +PREFERRED_VERSION_dbus ?="1.0.2"
+> +PREFERRED_VERSION_dbus-c ?=""
+> +PREFERRED_VERSION_dbus-c ?=""
+
+dbus-c++ ?
+
+regards
+Philipp
 
 
