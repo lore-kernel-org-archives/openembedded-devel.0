@@ -1,24 +1,21 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <tobias.pflug@gmx.net>) id 1IidMH-0001u6-NY
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2007 23:56:49 +0200
-Received: (qmail invoked by alias); 18 Oct 2007 21:23:25 -0000
-Received: from p549A91AC.dip0.t-ipconnect.de (EHLO [192.168.1.100])
-	[84.154.145.172]
-	by mail.gmx.net (mp001) with SMTP; 18 Oct 2007 23:23:25 +0200
-X-Authenticated: #283898
-X-Provags-ID: V01U2FsdGVkX1/QBDtb0OrQ4MOnccM27RQt+utWgAzwjytO5Po77c
-	ihbQLi+gHunMzW
-From: Tobias Pflug <tobias.pflug@gmx.net>
-To: openembedded-devel@lists.openembedded.org
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <skoroneos@digital-opsis.com>) id 1IiotC-0005e5-CW
+	for openembedded-devel@openembedded.org; Fri, 19 Oct 2007 12:15:34 +0200
+Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B0453DD0F for openembedded-devel@openembedded.org;
+	Fri, 19 Oct 2007 11:56:28 +0200
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Fri, 19 Oct 2007 12:57:40 +0300
+Message-ID: <HOECLKEKOHLAMMGDLLBHCEECMJAA.skoroneos@digital-opsis.com>
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MIMEOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
+Importance: Normal
 In-Reply-To: <200710181425.56368.gerwin@vanderkruis.net>
-References: <200710181425.56368.gerwin@vanderkruis.net>
-Date: Thu, 18 Oct 2007 23:23:35 +0200
-Message-Id: <1192742615.7608.27.camel@toontown>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Y-GMX-Trusted: 0
 Subject: Re: Organisation fosdem 2008
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,30 +30,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2007 21:56:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 19 Oct 2007 10:15:35 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2007-10-18 at 14:25 +0200, Gerwin van der Kruis wrote:
+I am planning also to be there and possibly one more from the company
+
+Stelios S. Koroneos
+
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@openembedded.org 
+> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of 
+> Gerwin van der Kruis
+> Sent: Thursday, October 18, 2007 3:26 PM
+> To: openembedded-devel@openembedded.org
+> Subject: [oe] Organisation fosdem 2008
+> 
+> 
 > Dear all, 
 > 
 > As seen on the mailinglist we are trying to get to fosdem this year. 
 > 
-> I would like to make a list of people who are going there.
-
-I would love to come. Have to see if my boss is willing to
-send me there :)
-
+> I would like to make a list of people who are going there. 
 > 
 > Please let me know if you already know if you are going there. 
 > 
-> Also a request for presence in China came in , do we have any native chinese 
+> Also a request for presence in China came in , do we have any 
+> native chinese 
 > speakers ?
-
-I just speak a little bit hehe
-
-regards,
-Tobi
+> 
+> Regards, 
+> 
+> Gerwin
+> -- 
+> Gerwin@battlestation1(laptop)
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 
 
