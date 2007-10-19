@@ -1,22 +1,22 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1IiotC-0005e5-CW
-	for openembedded-devel@openembedded.org; Fri, 19 Oct 2007 12:15:34 +0200
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B0453DD0F for openembedded-devel@openembedded.org;
-	Fri, 19 Oct 2007 11:56:28 +0200
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Fri, 19 Oct 2007 12:57:40 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHCEECMJAA.skoroneos@digital-opsis.com>
+	(envelope-from <philipp.zabel@gmail.com>) id 1IipSA-0002QW-GQ
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Oct 2007 12:51:44 +0200
+Received: by fk-out-0910.google.com with SMTP id 18so471280fks
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Oct 2007 03:44:56 -0700 (PDT)
+Received: by 10.82.112.3 with SMTP id k3mr3134088buc.1192784360447;
+	Fri, 19 Oct 2007 01:59:20 -0700 (PDT)
+Received: by 10.82.118.8 with HTTP; Fri, 19 Oct 2007 01:59:20 -0700 (PDT)
+Message-ID: <74d0deb30710190159i6220af0dna5ba0efe949c8402@mail.gmail.com>
+Date: Fri, 19 Oct 2007 10:59:20 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <E1IimaA-0007xc-Ba@linuxtogo.org>
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MIMEOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-Importance: Normal
-In-Reply-To: <200710181425.56368.gerwin@vanderkruis.net>
-Subject: Re: Organisation fosdem 2008
+References: <E1IimaA-0007xc-Ba@linuxtogo.org>
+Subject: Re: [oe-commits] org.oe.dev telepathy: add telepathy-python 0.14.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,51 +30,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Oct 2007 10:15:35 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Fri, 19 Oct 2007 10:51:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I am planning also to be there and possibly one more from the company
+On 10/19/07, pH5 commit <openembedded-commits@lists.openembedded.org> wrote:
+> telepathy: add telepathy-python 0.14.0
 
-Stelios S. Koroneos
+Hm, I wonder whether this should be renamed to python-telepathy for
+consistency with other python bindings (and the same for dbus-python
+-> python-dbus) like Debian does.
 
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
-
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org 
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of 
-> Gerwin van der Kruis
-> Sent: Thursday, October 18, 2007 3:26 PM
-> To: openembedded-devel@openembedded.org
-> Subject: [oe] Organisation fosdem 2008
-> 
-> 
-> Dear all, 
-> 
-> As seen on the mailinglist we are trying to get to fosdem this year. 
-> 
-> I would like to make a list of people who are going there. 
-> 
-> Please let me know if you already know if you are going there. 
-> 
-> Also a request for presence in China came in , do we have any 
-> native chinese 
-> speakers ?
-> 
-> Regards, 
-> 
-> Gerwin
-> -- 
-> Gerwin@battlestation1(laptop)
-> 
+> Author: pH5@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 320cf2f1a4279be26084f178c252be667db6c6b4
+> ViewMTN: http://monotone.openembedded.org/revision/info/320cf2f1a4279be26084f178c252be667db6c6b4
+> Files:
+> 1
+> packages/telepathy/telepathy-python_0.14.0.bb
+> Diffs:
+>
+> #
+> # mt diff -r466773a42b2f042df1c0582c6315dd2901312eed -r320cf2f1a4279be26084f178c252be667db6c6b4
+> #
+> #
+> #
+> # add_file "packages/telepathy/telepathy-python_0.14.0.bb"
+> #  content [b72e5e36875b783b40a06c426e30d901358c86a7]
+> #
+> ============================================================
+> --- packages/telepathy/telepathy-python_0.14.0.bb       b72e5e36875b783b40a06c426e30d901358c86a7
+> +++ packages/telepathy/telepathy-python_0.14.0.bb       b72e5e36875b783b40a06c426e30d901358c86a7
+> @@ -0,0 +1,8 @@
+> +DESCRIPTION = "Telepathy framework - Python package"
+> +HOMEPAGE = "http://telepathy.freedesktop.org/wiki/"
+> +LICENSE = "LGPL"
+> +RDEPENDS_${PN} += "dbus-python"
+> +
+> +SRC_URI = "http://telepathy.freedesktop.org/releases/${PN}/${P}.tar.gz "
+> +
+> +inherit distutils
+>
+>
+>
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+>
 
 
