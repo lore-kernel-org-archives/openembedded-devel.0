@@ -1,30 +1,34 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Ij98r-0005tN-CE
-	for openembedded-devel@openembedded.org; Sat, 20 Oct 2007 09:53:07 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9K7k4Ux003691; Sat, 20 Oct 2007 09:46:05 +0200
-Message-ID: <4719B244.6000701@student.utwente.nl>
-Date: Sat, 20 Oct 2007 09:46:12 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <a7f8874a0709212103h126eeea7y751fa5fd4256fb20@mail.gmail.com>	<200709261801.13349.u.luckas@road.de>	<a7f8874a0710091402w7af1b580pe1fa89f95f5626de@mail.gmail.com>	<200710192235.46408.luckas@musoft.de>
-	<a7f8874a0710191346y6690674cs9997d57ce3162056@mail.gmail.com>
-In-Reply-To: <a7f8874a0710191346y6690674cs9997d57ce3162056@mail.gmail.com>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	l9K7k4Ux003691
-Cc: Uli Luckas <luckas@musoft.de>
-Subject: Re: RFC: Kexec Cmdline Support
+	(envelope-from <rpurdie@rpsys.net>) id 1IjkEY-0004oK-TU
+	for openembedded-devel@openembedded.org; Mon, 22 Oct 2007 01:29:27 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l9LNMQhV026030
+	for <openembedded-devel@openembedded.org>;
+	Mon, 22 Oct 2007 00:22:26 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 25947-02 for <openembedded-devel@openembedded.org>;
+	Mon, 22 Oct 2007 00:22:22 +0100 (BST)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l9LNMJTE026024
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 22 Oct 2007 00:22:20 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <4718A147.4000306@student.utwente.nl>
+References: <E1Iinn8-0004il-BP@linuxtogo.org>
+	<74d0deb30710190309s4c794a0gbb960a983ce41c9e@mail.gmail.com>
+	<4718A147.4000306@student.utwente.nl>
+Date: Mon, 22 Oct 2007 00:22:19 +0100
+Message-Id: <1193008939.6145.1.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: [oe-commits] org.oe.dev	conf/distro/include/angstrom-2007-preferred-versions.inc: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,62 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2007 07:53:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 21 Oct 2007 23:29:27 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, 2007-10-19 at 14:21 +0200, Koen Kooi wrote:
+> > [...]
+> >> +PREFERRED_VERSION_dbus ?="1.0.2"
+> >> +PREFERRED_VERSION_dbus-c ?=""
+> >> +PREFERRED_VERSION_dbus-c ?=""
+> > 
+> > dbus-c++ ?
+> 
+> yeah, it breaks on any PV with a '+' in it :(
 
-Hans Henry von Tresckow schreef:
-> On 10/19/07, Uli Luckas <luckas@musoft.de> wrote:
->> Am Tuesday, 9. October 2007 schrieb Hans Henry von Tresckow:
->>> Ok, I have tested your patch and it works very well. I think the only
->> real
->>> stumbling block left is figuring out a way to get the base address fo=
-r
->> the
->>> ATAG list without hard-coding it. I think if we can somehow access th=
-e
->>> machine_desc structure in the kernel from user space, this would be
->> easy.
->>> Unfortunately I am not very good at kernel hacking yet, so if you or
->>> someone else on the list has an idea, please let me know.
->> Hi Henry,
->> sorry for letting you wait so long. I am out of office until 10/29. Af=
-ter
->> that
->> I can provide a kernel patch to export the ATAG list's base address an=
-d
->> also
->> the old ATAG list. For now the patch will be against 2.6.21 though, as=
- I
->> don't have a running, more recent kernel available.
->>
->> Regards
->> Uli
->>
->> --
->> Fr=C3=BCher oder sp=C3=A4ter emulieren wir euch
->> - Linux.de
->>
->=20
-> Thanks. That sounds excellent :) 2.6.21 should be OK, since it looks li=
-ke
-> that will be the version for Angstrom 2007 iirc.
+Can you give an example? I can't seem to break that here...
 
-Only for a few devices, e.g. the zaurus device are probably going to use
-.23, the powerpc devices .22, etc
+> Incidentally, it also uncovers a bitbake bug:
+> 
+> Traceback (most recent call last):
+>   File "/data/build/oe/bitbake/bin/bitbake", line 134, in <module>
+>     main()
+>   File "/data/build/oe/bitbake/bin/bitbake", line 131, in main
+>     cooker.cook()
+>   File "/data/build/oe/bitbake/lib/bb/cooker.py", line 565, in cook
+>     return self.buildTargets(pkgs_to_build)
+>   File "/data/build/oe/bitbake/lib/bb/cooker.py", line 470, in buildTargets
+>     taskdata.add_unresolved(localdata, self.status)
+>   File "/data/build/oe/bitbake/lib/bb/taskdata.py", line 509, in
+> add_unresolved
+>     self.add_provider_internal(cfgData, dataCache, target)
+>   File "/data/build/oe/bitbake/lib/bb/taskdata.py", line 360, in
+> add_provider_internal
+>     eligible, foundUnique = bb.providers.filterProviders(all_p, item,
+> cfgData, dataCache)
+>   File "/data/build/oe/bitbake/lib/bb/providers.py", line 254, in
+> filterProviders
+>     eligible = _filterProviders(providers, item, cfgData, dataCache)
+>   File "/data/build/oe/bitbake/lib/bb/providers.py", line 231, in
+> _filterProviders
+>     newver = "%s-%s" % (newvers[1], newvers[2])
+> IndexError: string index out of range
+> 
+> 
+> for thing like wirelesstool ('28') and jpeg '6b', it seems to access teh
+> nevers[] array out of bounds.
 
-regards,
+Hopefully this and a raft of other bugs (like the weird bitbake -s
+output) should be fixed now.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Cheers,
 
-iD8DBQFHGbJEMkyGM64RGpERAqwwAJ422t+AkOZC6HgFTbaF5QgVWC2ysACgsnlX
-YADqHrw6e3HtqYGI+bS1u34=3D
-=3DOjIL
------END PGP SIGNATURE-----
+Richard
+
+
 
 
