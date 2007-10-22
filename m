@@ -1,25 +1,26 @@
-Received: from [64.233.166.181] (helo=py-out-1112.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dfarning@gmail.com>) id 1Ijq0i-0007z1-4S
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Oct 2007 07:39:34 +0200
-Received: by py-out-1112.google.com with SMTP id a25so2563601pyi
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Oct 2007 22:32:29 -0700 (PDT)
-Received: by 10.64.179.12 with SMTP id b12mr8490177qbf.1193024294211;
-	Sun, 21 Oct 2007 20:38:14 -0700 (PDT)
-Received: from lenovo ( [75.121.169.191])
-	by mx.google.com with ESMTPS id 20sm9709011nzp.2007.10.21.20.38.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 21 Oct 2007 20:38:13 -0700 (PDT)
-Received: by lenovo (sSMTP sendmail emulation); Sun, 21 Oct 2007 22:38:11 -0500
-Date: Sun, 21 Oct 2007 22:38:11 -0500
-From: David Farning <dfarning@gmail.com>
-To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
-Message-ID: <20071022033811.GA8050@lenovo>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Ijrbb-0006VZ-5B
+	for openembedded-devel@openembedded.org; Mon, 22 Oct 2007 09:21:43 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9M7EYUo005970 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Oct 2007 09:14:35 +0200
+Message-ID: <471C4DD9.5090707@student.utwente.nl>
+Date: Mon, 22 Oct 2007 09:14:33 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
-Subject: getting started - docbook
+To: openembedded-devel@openembedded.org
+References: <20071022033811.GA8050@lenovo>
+In-Reply-To: <20071022033811.GA8050@lenovo>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: getting started - docbook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,19 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2007 05:39:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 22 Oct 2007 07:21:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-I have been going through the getting started wiki and noticed that a
-few points are out of date or wrong.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Would you it be useful if I cleaned up the wiki and converted it to
-docbook for inclusion in the manual?  The gettingstarted link on
-oe.org could then refer to the cannonical gettingstarted instructions
-in the manual.
+David Farning schreef:
+> I have been going through the getting started wiki and noticed that a
+> few points are out of date or wrong.
+> 
+> Would you it be useful if I cleaned up the wiki and converted it to
+> docbook for inclusion in the manual? 
 
-Thanks
-David Farning
+
+Yes! yes! YES!!!!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHHE3ZMkyGM64RGpERAqv/AJ0QiyLNVxnQpi4IBxC1nN8rHiHnlACghtjT
+A054lwe097v7b6P0+MIY15U=
+=xCIE
+-----END PGP SIGNATURE-----
 
 
