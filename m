@@ -1,27 +1,25 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IjzPo-00028q-Eo
-	for openembedded-devel@openembedded.org; Mon, 22 Oct 2007 17:42:04 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9MFYrUx019162 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2007 17:34:54 +0200
-Message-ID: <471CC31D.2010401@student.utwente.nl>
-Date: Mon, 22 Oct 2007 17:34:53 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <4510693243.20071017152524@vanille-media.de>	<471729ED.9080208@student.utwente.nl>	<1192708743.6158.25.camel@localhost.localdomain>	<471C8BF4.1050206@student.utwente.nl>
+	(envelope-from <dp@xora.org.uk>) id 1Ik0UX-0007Oq-G0
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Oct 2007 18:51:01 +0200
+Received: from cimmeria ([::ffff:78.86.130.156])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Mon, 22 Oct 2007 17:43:56 +0100
+	id 00064B4C.471CD34C.00001F35
+Date: Mon, 22 Oct 2007 17:43:56 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071022174356.7af78b73@cimmeria>
+In-Reply-To: <471CC31D.2010401@student.utwente.nl>
+References: <4510693243.20071017152524@vanille-media.de>
+	<471729ED.9080208@student.utwente.nl>
+	<1192708743.6158.25.camel@localhost.localdomain>
+	<471C8BF4.1050206@student.utwente.nl>
 	<1193063767.6088.54.camel@localhost.localdomain>
-In-Reply-To: <1193063767.6088.54.camel@localhost.localdomain>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-SpamScore: ss
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+	<471CC31D.2010401@student.utwente.nl>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
 Subject: Re: Cleaning up SDK/Toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,106 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2007 15:42:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 22 Oct 2007 16:51:01 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Richard Purdie schreef:
-> On Mon, 2007-10-22 at 13:39 +0200, Koen Kooi wrote:
->> Richard Purdie schreef:
->>> We actually have a bigger problem. Staging uses an arm directory, not an
->>> armv5te one so the armv5te binaries mix up with the armv4 ones etc.
->>>
->>> This isn't a problem with images built from packages where everything
->>> dynamically links since the right packages are used. The moment someone
->>> tries to statically link an armv4 binary with armv5te in staging, game
->>> over though.
->>>
->>> So both the meta-toolchain and staging need some thought (and are
->>> related since meta-toolchain has knowledge to rebuild bits of staging
->>> for use in its "shortcut an OE build by skipping the toolchain" mode.
->>>
->>> I agreed we probably need to add in some PACKAGE_ARCHs in places but its
->>> yet another thing that needs some careful thought and we'll probably
->>> break people's existing builds. I hope to look at/think about it soon if
->>> nobody beats me too it...
->> Hopefully[1] it's as simple as:
->>
->> ============================================================
->> - --- conf/bitbake.conf   f410a6b3af115612f2bd104814d1035583d3518a
->> +++ conf/bitbake.conf   3391cfd9df2450e4090fa01879fab5f5e7b100a8
->> @@ -45,6 +45,7 @@ HOST_SYS = "${HOST_ARCH}${HOST_VENDOR}-$
->>  HOST_OS = "${TARGET_OS}"
->>  HOST_VENDOR = "${TARGET_VENDOR}"
->>  HOST_SYS = "${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}"
->> +STAGING_SYS = "${PACKAGE_ARCH}${HOST_VENDOR}-${HOST_OS}"
->>  HOST_PREFIX = "${TARGET_PREFIX}"
->>  HOST_CC_ARCH = "${TARGET_CC_ARCH}"
->>
->> @@ -167,16 +168,16 @@ STAGING_DIR = "${TMPDIR}/staging"
->>  B = "${S}"
->>
->>  STAGING_DIR = "${TMPDIR}/staging"
->> - -STAGING_BINDIR = "${STAGING_DIR}/${HOST_SYS}/bin"
->> +STAGING_BINDIR = "${STAGING_DIR}/${STAGING_SYS}/bin"
->>  STAGING_BINDIR_CROSS = "${STAGING_DIR}/${BUILD_SYS}/bin/${HOST_SYS}"
->>  STAGING_BINDIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}/bin"
->> - -STAGING_LIBDIR = "${STAGING_DIR}/${HOST_SYS}/lib"
->> +STAGING_LIBDIR = "${STAGING_DIR}/${STAGING_SYS}/lib"
->>  STAGING_LIBDIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}/lib"
->>  STAGING_ETCDIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}/etc"
->> - -STAGING_INCDIR = "${STAGING_DIR}/${HOST_SYS}/include"
->> - -STAGING_DATADIR = "${STAGING_DIR}/${HOST_SYS}/share"
->> - -STAGING_LOADER_DIR = "${STAGING_DIR}/${HOST_SYS}/loader"
->> - -STAGING_FIRMWARE_DIR = "${STAGING_DIR}/${HOST_SYS}/firmware"
->> +STAGING_INCDIR = "${STAGING_DIR}/${STAGING_SYS}/include"
->> +STAGING_DATADIR = "${STAGING_DIR}/${STAGING_SYS}/share"
->> +STAGING_LOADER_DIR = "${STAGING_DIR}/${STAGING_SYS}/loader"
->> +STAGING_FIRMWARE_DIR = "${STAGING_DIR}/${STAGING_SYS}/firmware"
->>  STAGING_PYDIR = "${STAGING_DIR}/lib/python2.4"
+> > * We implement packaged staging and only stage the dependencies
+> > needed for each package.
 > 
->> [1] I suspect this 'breaks' machine specific packages, but we'll see
+> That would be a better approach. Graeme, do you still want to have a
+> shot at implementing a unionfs based approach?
 > 
-> I suspect you'll be right. This actually turns into a nightmare the more
-> you think about it.
-> 
-> Consider we have libfoo which is compiled with iwmmxt optimisations for
-> iwmmxt machines and without iwmmxt optimisations for other arm machines.
-> appfoo statically links against this. 
-> 
-> I can think of a few ways we could handle this and other issues
-> generically:
-> 
-> * We could have a staging lib directory per PACKAGE_ARCH and then join
-> them all together with CFLAGS/LDFLAGS as you suggested on irc. I think
-> it will get really really messy though.
-> 
-> * Each machine could have its own staging area. To do that you'd have to
-> make the populate staging stamp machine specific. That is possible
-> although bitbake might require some tweaks and it would have
-> implications for rm_work.
+I do think that would be a neat solution to avoid running gzip/unzip
+for every package. And should be doable with a LD_PRELOAD type system
+that just redirects open() and its familly. Im sure I saw one once
+on freshmeat.net Ill try and dig it out.
 
-In essence it would make multimachine unimachine :(
-
-> * We implement packaged staging and only stage the dependencies needed
-> for each package.
-
-That would be a better approach. Graeme, do you still want to have a
-shot at implementing a unionfs based approach?
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHHMMdMkyGM64RGpERAnMYAJ0dp0rCX5jJK0DXLT81afSFZdGB0ACeM5p3
-Mqjknw8D+MjtWMU+tGV7dck=
-=zDLu
------END PGP SIGNATURE-----
+Graeme (XorA)
 
 
