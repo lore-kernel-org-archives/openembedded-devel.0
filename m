@@ -1,17 +1,20 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [64.233.170.184] (helo=rn-out-0102.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1Ik4XC-0002Fs-Mh
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Ik9Yf-0005IV-Qv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Oct 2007 23:10:04 +0200
-Received: from cimmeria ([::ffff:78.86.130.156])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Mon, 22 Oct 2007 22:02:56 +0100
-	id 00064B53.471D1000.000023D7
-Date: Mon, 22 Oct 2007 22:02:55 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	Tue, 23 Oct 2007 04:31:53 +0200
+Received: by rn-out-0102.google.com with SMTP id e24so640902rng
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Oct 2007 19:24:46 -0700 (PDT)
+Received: by 10.150.225.14 with SMTP id x14mr879520ybg.1193085999926;
+	Mon, 22 Oct 2007 13:46:39 -0700 (PDT)
+Received: by 10.90.66.15 with HTTP; Mon, 22 Oct 2007 13:46:39 -0700 (PDT)
+Message-ID: <c384c5ea0710221346i4814d76dmd98f3dfc58987ec0@mail.gmail.com>
+Date: Mon, 22 Oct 2007 22:46:39 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071022220255.497852be@cimmeria>
 In-Reply-To: <1193077473.6088.68.camel@localhost.localdomain>
+MIME-Version: 1.0
 References: <4510693243.20071017152524@vanille-media.de>
 	<471729ED.9080208@student.utwente.nl>
 	<1192708743.6158.25.camel@localhost.localdomain>
@@ -19,8 +22,6 @@ References: <4510693243.20071017152524@vanille-media.de>
 	<1193063767.6088.54.camel@localhost.localdomain>
 	<471CC31D.2010401@student.utwente.nl>
 	<1193077473.6088.68.camel@localhost.localdomain>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
 Subject: Re: Cleaning up SDK/Toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,20 +36,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2007 21:10:04 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 23 Oct 2007 02:31:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+Hello,
+
+On 10/22/07, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Mon, 2007-10-22 at 17:34 +0200, Koen Kooi wrote:
+> > Richard Purdie schreef:
+> > > * We implement packaged staging and only stage the dependencies needed
+> > > for each package.
+> >
 > > That would be a better approach. Graeme, do you still want to have a
 > > shot at implementing a unionfs based approach?
-> 
+>
 > Hmm. Does that need root privs?
-> 
-Not what I was thinking, which was to do a union via LD_PRELOAD
-basically redirecting open and its friends. I once saw a program that
-did this trick tomorrow I shall try and dig it out, and try and give
-it a few simple tests.
+>
 
-Graeme
+Depending on a (virtual) filesystem is not really user-friendly, given
+that it needs both a specific kernel configuration and probably root
+access.
+
+By the way, unionfs is soon deprecated by an in-kernel union mount
+system, like the *BSD's already have, so the solution will be not
+future-proof.
+
+Please avoid both the unionfs solution, or the future union mount
+options for OpenEmbedded user space.
+
+Regards,
+
+Leon.
 
 
