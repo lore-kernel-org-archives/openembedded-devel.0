@@ -1,27 +1,26 @@
-Received: from [64.233.166.178] (helo=py-out-1112.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dfarning@gmail.com>) id 1IkC0d-0006fq-Cv
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Oct 2007 07:08:55 +0200
-Received: by py-out-1112.google.com with SMTP id a25so3374199pyi
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2007 22:01:46 -0700 (PDT)
-Received: by 10.65.103.14 with SMTP id f14mr11330244qbm.1193115705806;
-	Mon, 22 Oct 2007 22:01:45 -0700 (PDT)
-Received: from lenovo ( [75.121.171.134])
-	by mx.google.com with ESMTPS id 15sm1983237nzp.2007.10.22.22.01.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 22 Oct 2007 22:01:45 -0700 (PDT)
-Received: by lenovo (sSMTP sendmail emulation); Tue, 23 Oct 2007 00:01:42 -0500
-Date: Tue, 23 Oct 2007 00:01:42 -0500
-From: David Farning <dfarning@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071023050142.GA10583@lenovo>
-References: <20071022033811.GA8050@lenovo>
-	<471C4DD9.5090707@student.utwente.nl>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IkDsj-000856-WB
+	for openembedded-devel@openembedded.org; Tue, 23 Oct 2007 09:08:54 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9N71dUx014712 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Oct 2007 09:01:40 +0200
+Message-ID: <471D9C54.3080007@student.utwente.nl>
+Date: Tue, 23 Oct 2007 09:01:40 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-In-Reply-To: <471C4DD9.5090707@student.utwente.nl>
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+To: openembedded-devel@openembedded.org
+References: <20071022033811.GA8050@lenovo>	<471C4DD9.5090707@student.utwente.nl>
+	<20071023050142.GA10583@lenovo>
+In-Reply-To: <20071023050142.GA10583@lenovo>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: getting started - docbook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,34 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Oct 2007 05:08:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Oct 2007 07:08:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Oct 22, 2007 at 09:14:33AM +0200, Koen Kooi wrote:
-> > Would you it be useful if I cleaned up the wiki and converted it to
-> > docbook for inclusion in the manual? 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+David Farning schreef:
+> On Mon, Oct 22, 2007 at 09:14:33AM +0200, Koen Kooi wrote:
+>>> Would you it be useful if I cleaned up the wiki and converted it to
+>>> docbook for inclusion in the manual? 
+>> Yes! yes! YES!!!!
 > 
-> Yes! yes! YES!!!!
+> Ok, I'll start putting a drop in replacement for the existing getting
+> started chapter based on my _limited_ experience, the gettingstarted
+> wiki, and questions frequent questions in the users ML.
+> 
+> Time permitting, I will submit a draft on Monday.  Bob, thanks for the
+> offer to proof read and test.
+> 
+> I am thinking about going through 4 basic steps
+> 1. install
+> 2. configure
+> 3. build
+> 4. test
+> 
+> I would like to use a concrete example that a user can build and
+> test on qemu.  Do you have a recommendation for a good machine-distro
+> combination that builds well and can show a potential user the capabilities of OE?
 
-Ok, I'll start putting a drop in replacement for the existing getting
-started chapter based on my _limited_ experience, the gettingstarted
-wiki, and questions frequent questions in the users ML.
+the qemuarm, qemux86, spitz and fic-gta01 machines have complete
+hardware support in (patched) versions of qemu. DISTRO=angstrom-2007.1
+would be the best choice for a distro.
 
-Time permitting, I will submit a draft on Monday.  Bob, thanks for the
-offer to proof read and test.
+regards,
 
-I am thinking about going through 4 basic steps
-1. install
-2. configure
-3. build
-4. test
+Koen
 
-I would like to use a concrete example that a user can build and
-test on qemu.  Do you have a recommendation for a good machine-distro
-combination that builds well and can show a potential user the capabilities of OE?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Thanks
-David Farning
+iD8DBQFHHZxUMkyGM64RGpERAg+2AJ9bjviltAefV0KEWACE+lLMNH/lwwCePcTP
+jU+fXOkDHM7NtC5/BJyvY0k=
+=9tJL
+-----END PGP SIGNATURE-----
 
 
