@@ -1,28 +1,28 @@
-Received: from [216.145.234.92] (helo=demolition.dls.net)
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1IkA0O-0005TW-3d
+	(envelope-from <dfarning@gmail.com>) id 1IkC0d-0006fq-Cv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Oct 2007 05:00:32 +0200
-Received: by demolition.dls.net (Postfix, from userid 67)
-	id 3704F5D; Mon, 22 Oct 2007 21:33:33 -0500 (CDT)
-From: <mwester@dls.net>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Oct 2007 21:33:33 -0500
-X-SentFrom: 12.27.45.5
-X-SentAddr: 4675c051ba9e8885d6e5a82457605098ccf0a84b
-User-Agent: DLS.net Webmail
-References: <4510693243.20071017152524@vanille-media.de>
-	<471729ED.9080208@student.utwente.nl>
-	<1192708743.6158.25.camel@localhost.localdomain>
-	<471C8BF4.1050206@student.utwente.nl>
-	<1193063767.6088.54.camel@localhost.localdomain>
-	<471CC31D.2010401@student.utwente.nl>
-	<1193077473.6088.68.camel@localhost.localdomain>
-	<20071022220255.497852be@cimmeria>
-In-Reply-To: <20071022220255.497852be@cimmeria>
-Message-Id: <20071023023333.3704F5D@demolition.dls.net>
-Subject: Re: Cleaning up SDK/Toolchain
+	Tue, 23 Oct 2007 07:08:55 +0200
+Received: by py-out-1112.google.com with SMTP id a25so3374199pyi
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Oct 2007 22:01:46 -0700 (PDT)
+Received: by 10.65.103.14 with SMTP id f14mr11330244qbm.1193115705806;
+	Mon, 22 Oct 2007 22:01:45 -0700 (PDT)
+Received: from lenovo ( [75.121.171.134])
+	by mx.google.com with ESMTPS id 15sm1983237nzp.2007.10.22.22.01.43
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 22 Oct 2007 22:01:45 -0700 (PDT)
+Received: by lenovo (sSMTP sendmail emulation); Tue, 23 Oct 2007 00:01:42 -0500
+Date: Tue, 23 Oct 2007 00:01:42 -0500
+From: David Farning <dfarning@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071023050142.GA10583@lenovo>
+References: <20071022033811.GA8050@lenovo>
+	<471C4DD9.5090707@student.utwente.nl>
+MIME-Version: 1.0
+In-Reply-To: <471C4DD9.5090707@student.utwente.nl>
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: Re: getting started - docbook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,25 +36,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Oct 2007 03:00:33 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
+X-List-Received-Date: Tue, 23 Oct 2007 05:08:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> > > That would be a better approach. Graeme, do you still want to have a
-> > > shot at implementing a unionfs based approach?
-> > 
-> > Hmm. Does that need root privs?
-> > 
-> Not what I was thinking, which was to do a union via LD_PRELOAD
-> basically redirecting open and its friends. I once saw a program that
-> did this trick tomorrow I shall try and dig it out, and try and give
-> it a few simple tests.
+On Mon, Oct 22, 2007 at 09:14:33AM +0200, Koen Kooi wrote:
+> > Would you it be useful if I cleaned up the wiki and converted it to
+> > docbook for inclusion in the manual? 
 > 
-> Graeme
+> Yes! yes! YES!!!!
 
-Please, please don't tell me that you're thinking of doing something like fakeroot?!  (It still doesn't work reliably, and nobody has ever figured it out -- see the Debian bug reports for some interesting history on this thing's problems).
+Ok, I'll start putting a drop in replacement for the existing getting
+started chapter based on my _limited_ experience, the gettingstarted
+wiki, and questions frequent questions in the users ML.
 
-The huge, giant hole with LD_PRELOAD is that it only works if everyone plays nice and uses the same mechanism.  Since we can't predict how the staging directory might be used, it's pretty hard to ensure that we've caught all the corner cases.  And it's a devilishly difficult problem to solve.
+Time permitting, I will submit a draft on Monday.  Bob, thanks for the
+offer to proof read and test.
 
-Mike (mwester)
+I am thinking about going through 4 basic steps
+1. install
+2. configure
+3. build
+4. test
+
+I would like to use a concrete example that a user can build and
+test on qemu.  Do you have a recommendation for a good machine-distro
+combination that builds well and can show a potential user the capabilities of OE?
+
+Thanks
+David Farning
 
 
