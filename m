@@ -1,27 +1,27 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dfarning@gmail.com>) id 1Ikipt-0008GC-AN
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Oct 2007 18:12:01 +0200
-Received: by py-out-1112.google.com with SMTP id a25so231531pyi
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Oct 2007 09:04:43 -0700 (PDT)
-Received: by 10.65.220.8 with SMTP id x8mr1576693qbq.1193240183974;
-	Wed, 24 Oct 2007 08:36:23 -0700 (PDT)
-Received: from lenovo ( [71.13.116.9])
-	by mx.google.com with ESMTPS id q17sm563446qbq.2007.10.24.08.36.21
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 24 Oct 2007 08:36:23 -0700 (PDT)
-Received: by lenovo (sSMTP sendmail emulation); Wed, 24 Oct 2007 10:36:21 -0500
-Date: Wed, 24 Oct 2007 10:36:21 -0500
-From: David Farning <dfarning@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071024153620.GA6691@lenovo>
-References: <20071024095844.GA9952@lenovo>
-	<f96d234e0710240401o7fcdae32qc7d43ef162f38744@mail.gmail.com>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Ikjsd-0004rC-Lf
+	for openembedded-devel@openembedded.org; Wed, 24 Oct 2007 19:18:56 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9OHBWUo008492 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Oct 2007 19:11:33 +0200
+Message-ID: <471F7CC9.3060904@student.utwente.nl>
+Date: Wed, 24 Oct 2007 19:11:37 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-In-Reply-To: <f96d234e0710240401o7fcdae32qc7d43ef162f38744@mail.gmail.com>
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <20071024095844.GA9952@lenovo>	<f96d234e0710240401o7fcdae32qc7d43ef162f38744@mail.gmail.com>
+	<20071024153620.GA6691@lenovo>
+In-Reply-To: <20071024153620.GA6691@lenovo>
+X-Enigmail-Version: 0.95.3
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: [doc] defining OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,57 +36,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Oct 2007 16:12:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 24 Oct 2007 17:18:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 24, 2007 at 07:01:30AM -0400, Cliff Brake wrote:
-> On 10/24/07, David Farning <dfarning@gmail.com> wrote:
-> > Getting started is coming along nicely.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+David Farning schreef:
+> On Wed, Oct 24, 2007 at 07:01:30AM -0400, Cliff Brake wrote:
+>> On 10/24/07, David Farning <dfarning@gmail.com> wrote:
+>>> Getting started is coming along nicely.
+>> Great!
+>>
+>>> In the second case referring to OE as a collection of metadata is
+>>> confusing.  Metadata is data about the data.  OE is actually a
+>>> collection of patches, task lists, and configuration files.  I was
+>>> wondering if it would be more clear to refer to oe as either a ruleset
+>>> or task lists.
+>> The term metadistribution seems to be somewhat accepted:
+>> http://gentoo-wiki.com/Metadistribution
+>>
+>> In the most basic sense, a bitbake recipe is data about data (the
+>> source that needs built), so I think the term fits. Just my opinion.
 > 
-> Great!
-> 
-> > In the second case referring to OE as a collection of metadata is
-> > confusing.  Metadata is data about the data.  OE is actually a
-> > collection of patches, task lists, and configuration files.  I was
-> > wondering if it would be more clear to refer to oe as either a ruleset
-> > or task lists.
-> 
-> The term metadistribution seems to be somewhat accepted:
-> http://gentoo-wiki.com/Metadistribution
-> 
-> In the most basic sense, a bitbake recipe is data about data (the
-> source that needs built), so I think the term fits. Just my opinion.
+> I like metadistribution.  Metadistribution is a term referring to an
+> adaptable system that is capable of building itself to the user's
+> specification.
 
-I like metadistribution.  Metadistribution is a term referring to an
-adaptable system that is capable of building itself to the user's
-specification.
+The reason we tend to avoid the term 'distribution' is because OE is
+cabable of building multiple distributions (you could make OE build a
+1:1 copy of the fedora install DVD if you want), instead of building
+only a single distro for multiple archs.
+I agree metadistro covers what OE is, but it is also the most confusing
+name to people unfamiliar with OE.
 
-But, using the defination at
-http://en.wikipedia.org/wiki/Metadata
-does not seems to apply.
+regards,
 
-Metadata is data is data which describes the data. ie
-<zipcode>54494</zipcode>
-<telephonenumber>123-1234</telephonenumber>
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-A recipe on the other hand define what ingredients to use.  Source
-files, patches, configs.... Then states what tasks to perform on the
-ingredients to create the desired result.  Binaries compiled for an arch,
-added to a filesystem, bundled in an image.
-
-Patches contain the changes necessary to make a general package work on a
-particular device.
-
-Classes are a more abstract form of recipe.
-
-Machine.conf and Distro.conf provide a high level abstraction for the
-developer to define what classes and recipes to call to create a
-distribution with the desired characteristics.
-
-Am I missing anything in this very high level description?
-
-Thanks
-David Farning
+iD8DBQFHH3zJMkyGM64RGpERAtoaAJ4lXq5RC0FYVieAWP9O8nrQHnmtBgCgubME
+QNzwmMEMBP3we92c5HFoogA=
+=ni1H
+-----END PGP SIGNATURE-----
 
 
