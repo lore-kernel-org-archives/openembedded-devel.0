@@ -1,22 +1,21 @@
-Received: from [72.29.79.205] (helo=rhodos.klever.net)
+Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hacker@klever.net>) id 1IkeIv-0004d2-5R
+	(envelope-from <cliff.brake@gmail.com>) id 1IkeTw-0004h2-BH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Oct 2007 13:21:41 +0200
-Received: from pd9538432.dip0.t-ipconnect.de ([217.83.132.50]
-	helo=olympus.klever.net)
-	by rhodos.klever.net with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.67) (envelope-from <hacker@klever.net>) id 1Ikdm0-0002xo-Ey
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Oct 2007 12:47:41 +0200
-Message-ID: <471F22BC.1080504@klever.net>
-Date: Wed, 24 Oct 2007 12:47:24 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070815)
-MIME-Version: 1.0
+	Wed, 24 Oct 2007 13:33:04 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so205630waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Oct 2007 04:25:48 -0700 (PDT)
+Received: by 10.115.59.4 with SMTP id m4mr562265wak.1193223690278;
+	Wed, 24 Oct 2007 04:01:30 -0700 (PDT)
+Received: by 10.114.254.11 with HTTP; Wed, 24 Oct 2007 04:01:30 -0700 (PDT)
+Message-ID: <f96d234e0710240401o7fcdae32qc7d43ef162f38744@mail.gmail.com>
+Date: Wed, 24 Oct 2007 07:01:30 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20071024095844.GA9952@lenovo>
 In-Reply-To: <20071024095844.GA9952@lenovo>
+MIME-Version: 1.0
+References: <20071024095844.GA9952@lenovo>
 Subject: Re: [doc] defining OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,21 +30,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Oct 2007 11:21:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 24 Oct 2007 11:33:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> 
-> In the first case, the term local.conf implies a configuration file
-> that makes a program work correctly on a local machine.  OE uses the
-> file local.conf to define the top level build parameters for a bitbake
-> build.  That is pretty confusing.  It would be more clear if
-> local.conf was called build.conf.
-> 
+On 10/24/07, David Farning <dfarning@gmail.com> wrote:
+> Getting started is coming along nicely.
 
-The whole OE is about *building* stuff, so calling it 'build.conf' is 
-redundant, while 'local.conf' is quite explanatory because it contains 
-the data local to this particular build.
+Great!
 
 > In the second case referring to OE as a collection of metadata is
 > confusing.  Metadata is data about the data.  OE is actually a
@@ -53,12 +46,17 @@ the data local to this particular build.
 > wondering if it would be more clear to refer to oe as either a ruleset
 > or task lists.
 
-Well, the "data" are packages themselves, so
-OE actually contains metadata, that is the information on where to 
-retrieve the data from and how to handle it to produce code. I'm not 
-sure if it's the perfect term, though, but is there real need to change it?
+The term metadistribution seems to be somewhat accepted:
+http://gentoo-wiki.com/Metadistribution
 
-Love,
-H
+In the most basic sense, a bitbake recipe is data about data (the
+source that needs built), so I think the term fits. Just my opinion.
+
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
