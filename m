@@ -1,27 +1,25 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [64.233.166.181] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IkDsj-000856-WB
-	for openembedded-devel@openembedded.org; Tue, 23 Oct 2007 09:08:54 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9N71dUx014712 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Oct 2007 09:01:40 +0200
-Message-ID: <471D9C54.3080007@student.utwente.nl>
-Date: Tue, 23 Oct 2007 09:01:40 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <dfarning@gmail.com>) id 1Ikd7i-0003Uw-T4
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Oct 2007 12:06:03 +0200
+Received: by py-out-1112.google.com with SMTP id a25so666pyi
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Oct 2007 02:58:47 -0700 (PDT)
+Received: by 10.64.193.2 with SMTP id q2mr938703qbf.1193219926649;
+	Wed, 24 Oct 2007 02:58:46 -0700 (PDT)
+Received: from lenovo ( [75.121.171.134])
+	by mx.google.com with ESMTPS id m1sm679281nzf.2007.10.24.02.58.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 24 Oct 2007 02:58:46 -0700 (PDT)
+Received: by lenovo (sSMTP sendmail emulation); Wed, 24 Oct 2007 04:58:44 -0500
+Date: Wed, 24 Oct 2007 04:58:44 -0500
+From: David Farning <dfarning@gmail.com>
+To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
+Message-ID: <20071024095844.GA9952@lenovo>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <20071022033811.GA8050@lenovo>	<471C4DD9.5090707@student.utwente.nl>
-	<20071023050142.GA10583@lenovo>
-In-Reply-To: <20071023050142.GA10583@lenovo>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: getting started - docbook
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: [doc] defining OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,50 +33,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Oct 2007 07:08:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 24 Oct 2007 10:06:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Getting started is coming along nicely.
 
-David Farning schreef:
-> On Mon, Oct 22, 2007 at 09:14:33AM +0200, Koen Kooi wrote:
->>> Would you it be useful if I cleaned up the wiki and converted it to
->>> docbook for inclusion in the manual? 
->> Yes! yes! YES!!!!
-> 
-> Ok, I'll start putting a drop in replacement for the existing getting
-> started chapter based on my _limited_ experience, the gettingstarted
-> wiki, and questions frequent questions in the users ML.
-> 
-> Time permitting, I will submit a draft on Monday.  Bob, thanks for the
-> offer to proof read and test.
-> 
-> I am thinking about going through 4 basic steps
-> 1. install
-> 2. configure
-> 3. build
-> 4. test
-> 
-> I would like to use a concrete example that a user can build and
-> test on qemu.  Do you have a recommendation for a good machine-distro
-> combination that builds well and can show a potential user the capabilities of OE?
+I am strugging with the way open embedded uses to terms.
+local.conf
+metadata
 
-the qemuarm, qemux86, spitz and fic-gta01 machines have complete
-hardware support in (patched) versions of qemu. DISTRO=angstrom-2007.1
-would be the best choice for a distro.
+In the first case, the term local.conf implies a configuration file
+that makes a program work correctly on a local machine.  OE uses the
+file local.conf to define the top level build parameters for a bitbake
+build.  That is pretty confusing.  It would be more clear if
+local.conf was called build.conf.
 
-regards,
+In the second case referring to OE as a collection of metadata is
+confusing.  Metadata is data about the data.  OE is actually a
+collection of patches, task lists, and configuration files.  I was
+wondering if it would be more clear to refer to oe as either a ruleset
+or task lists.
 
-Koen
+It seems like the term local.cconf and metadata may have outgrown
+their original usage as OE became more advanced.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHHZxUMkyGM64RGpERAg+2AJ9bjviltAefV0KEWACE+lLMNH/lwwCePcTP
-jU+fXOkDHM7NtC5/BJyvY0k=
-=9tJL
------END PGP SIGNATURE-----
+Thanks
+David Farning
 
 
