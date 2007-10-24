@@ -1,28 +1,24 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Ikjsd-0004rC-Lf
-	for openembedded-devel@openembedded.org; Wed, 24 Oct 2007 19:18:56 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9OHBWUo008492 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Oct 2007 19:11:33 +0200
-Message-ID: <471F7CC9.3060904@student.utwente.nl>
-Date: Wed, 24 Oct 2007 19:11:37 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+Received: from [89.96.204.112] (helo=www-zirak-new.zirak.it)
+	by linuxtogo.org with smtp (Exim 4.67) (envelope-from <phy@linux.it>)
+	id 1Ikm71-0002nB-OZ
+	for openembedded-devel@openembedded.org; Wed, 24 Oct 2007 21:41:55 +0200
+Received: (qmail 15858 invoked by uid 64017); 24 Oct 2007 19:01:36 -0000
+Received: from 82.58.178.124 (filippo@zirak.it@82.58.178.124) by www-zirak-new
+	(envelope-from <phy@linux.it>, uid 64011) with qmail-scanner-2.01 
+	(uvscan: v5.1.00/v5052. bogofilter: 0.92.0. spamassassin: 3.0.4.  
+	Clear:RC:1(82.58.178.124):. 
+	Processed in 0.011691 secs); 24 Oct 2007 19:01:36 -0000
+Received: from unknown (HELO ?192.168.1.6?) (filippo@zirak.it@82.58.178.124)
+	by www-zirak-new.zirak.it with SMTP; 24 Oct 2007 19:01:36 -0000
+Message-ID: <471F981E.30909@linux.it>
+Date: Wed, 24 Oct 2007 21:08:14 +0200
+From: Filippo Basso <phy@linux.it>
+User-Agent: IceDove 1.5.0.12 (X11/20070730)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <20071024095844.GA9952@lenovo>	<f96d234e0710240401o7fcdae32qc7d43ef162f38744@mail.gmail.com>
-	<20071024153620.GA6691@lenovo>
-In-Reply-To: <20071024153620.GA6691@lenovo>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [doc] defining OpenEmbedded
+To: openembedded-devel@lists.openembedded.org
+References: <470B9D9D.5080501@linux.it> <470D6A2C.1000909@linux.it>
+In-Reply-To: <470D6A2C.1000909@linux.it>
+Subject: Re: different hosts, different OE images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,50 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Oct 2007 17:18:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 24 Oct 2007 19:41:56 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
+    can someone tell me if this is an important point, or if I'm just
+missing something ?!?
+I've seen that 3 host machines (with different linux distros) gave me 3
+different OE results (for i586), one is okay, one is not compiling, one
+the image has a big problem at login...
 
-David Farning schreef:
-> On Wed, Oct 24, 2007 at 07:01:30AM -0400, Cliff Brake wrote:
->> On 10/24/07, David Farning <dfarning@gmail.com> wrote:
->>> Getting started is coming along nicely.
->> Great!
->>
->>> In the second case referring to OE as a collection of metadata is
->>> confusing.  Metadata is data about the data.  OE is actually a
->>> collection of patches, task lists, and configuration files.  I was
->>> wondering if it would be more clear to refer to oe as either a ruleset
->>> or task lists.
->> The term metadistribution seems to be somewhat accepted:
->> http://gentoo-wiki.com/Metadistribution
->>
->> In the most basic sense, a bitbake recipe is data about data (the
->> source that needs built), so I think the term fits. Just my opinion.
-> 
-> I like metadistribution.  Metadistribution is a term referring to an
-> adaptable system that is capable of building itself to the user's
-> specification.
+I want to investigate a bit, some hints ? Just a starting point.....
+I think that one of the most important points of OE is that is largely
+independent of host machine, right?!?
+    thank you, phy
 
-The reason we tend to avoid the term 'distribution' is because OE is
-cabable of building multiple distributions (you could make OE build a
-1:1 copy of the fedora install DVD if you want), instead of building
-only a single distro for multiple archs.
-I agree metadistro covers what OE is, but it is also the most confusing
-name to people unfamiliar with OE.
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFHH3zJMkyGM64RGpERAtoaAJ4lXq5RC0FYVieAWP9O8nrQHnmtBgCgubME
-QNzwmMEMBP3we92c5HFoogA=
-=ni1H
------END PGP SIGNATURE-----
+
+>> I understood that the results should be highly independent from host
+>> system, so I begun debugging a bit.
+>>   
+>>     
+> Hi everybody,
+>     my investigation is going ahead...
+> The main point is: an image should be highly independent from the host
+> system, but seems that I've some problem in this regards... maybe my
+> mistake, but should be understood.
+>
+> Another machine (Ubuntu) gave even another different runtime result... :-(
 
 
