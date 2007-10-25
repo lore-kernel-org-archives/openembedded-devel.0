@@ -1,27 +1,19 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IkxOm-0001lN-45
-	for openembedded-devel@openembedded.org; Thu, 25 Oct 2007 09:45:00 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9P7bYUo025644 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2007 09:37:34 +0200
-Message-ID: <472047C3.20208@student.utwente.nl>
-Date: Thu, 25 Oct 2007 09:37:39 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <471FC1C0.4010103@linux.it> <20071025001926.GA14645@lenovo>
-In-Reply-To: <20071025001926.GA14645@lenovo>
-X-Enigmail-Version: 0.95.3
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: getting started - docbook
+	(envelope-from <dp@xora.org.uk>) id 1Il0Z7-0008RS-8N
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Oct 2007 13:07:53 +0200
+Received: from cimmeria ([::ffff:78.86.130.156])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Thu, 25 Oct 2007 12:00:31 +0100
+	id 0006856B.4720774F.000070A5
+Date: Thu, 25 Oct 2007 12:00:35 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071025120035.49703327@cimmeria>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Kernel Packages/Modules and Versioning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,37 +27,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2007 07:45:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 25 Oct 2007 11:07:53 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi, writing this with my OpenMoko hat on.
 
-David Farning schreef:
+Currently kernel modules create packages with names of the form
 
-> The biggest challange is deciding on the correct terminology.
-> I think that I will start creating a glossary so new users can look up
-> terms and experienced users can use 'approved term' consistently. (to
-> keep the new users from getting unnecessarily confused) A bitbake
-> file, a recipe, and a package all seem to be the same thing.  I didn't
-> realize that they were all the same thing until this afternoon.
+kernel-module-umaga_${PV}-${PR}.ipk
 
-Actually they aren't the same :)
+This I feel is not a good idea for mobile system that can have package
+upgrades in the field. It is my feeling that kernel modules/images
+should never upgrade without attendance from the user.
 
-A bitbake file and a recipe are the same thing, but they produces a
-package (.ipk, .deb, etc). That's why we have DEPENDS (for the recipe)
-and RDEPENDS (for the package).
+On reason for this is to make sure user is plugged into sufficient
+power and has facilities to fix device before doing such a drastic
+upgrade.
 
-regards,
+I would like to suggest all kernel packages are actually packaged as
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+kernel-module-umaga-${PV}_${RELEASE_NO}-${PV}.ipk
 
-iD8DBQFHIEfDMkyGM64RGpERAg+XAJ9HxHHjWGDPiW7WGriXKtc+Jkm2/QCfYcR1
-0KW9zWTfAWtZucToyHJSyrk=
-=TP1Q
------END PGP SIGNATURE-----
+and that a kernel-updater is developed to guide user through kernel
+upgrades with less danger of broken devices at the end.
+
+Obviously some policy would be needed so that ${RELEASE_NO}-${PV} is
+guaranteed to load on all kernel-image-${PV} kernels.
+
+Anyway I thought I would expose this to the wider audience for more
+comments than just openmoko lists. I know this is suitable for all
+devices so Id like opinions.
+
+Graeme
 
 
