@@ -1,22 +1,27 @@
-Received: from [89.96.204.112] (helo=www-zirak-new.zirak.it)
-	by linuxtogo.org with smtp (Exim 4.67) (envelope-from <phy@linux.it>)
-	id 1IkoT7-0004n1-OH
-	for openembedded-devel@openembedded.org; Thu, 25 Oct 2007 00:12:53 +0200
-Received: (qmail 3701 invoked by uid 64017); 24 Oct 2007 21:59:14 -0000
-Received: from 82.58.178.124 (filippo@zirak.it@82.58.178.124) by www-zirak-new
-	(envelope-from <phy@linux.it>, uid 64011) with qmail-scanner-2.01 
-	(uvscan: v5.1.00/v5052. bogofilter: 0.92.0. spamassassin: 3.0.4.  
-	Clear:RC:1(82.58.178.124):. 
-	Processed in 0.011623 secs); 24 Oct 2007 21:59:14 -0000
-Received: from unknown (HELO ?192.168.1.6?) (filippo@zirak.it@82.58.178.124)
-	by www-zirak-new.zirak.it with SMTP; 24 Oct 2007 21:59:14 -0000
-Message-ID: <471FC1C0.4010103@linux.it>
-Date: Thu, 25 Oct 2007 00:05:52 +0200
-From: Filippo Basso <phy@linux.it>
-User-Agent: IceDove 1.5.0.12 (X11/20070730)
-MIME-Version: 1.0
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <dfarning@gmail.com>) id 1IkqYj-0001ui-N9
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Oct 2007 02:26:49 +0200
+Received: by py-out-1112.google.com with SMTP id a25so518766pyi
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Oct 2007 17:19:30 -0700 (PDT)
+Received: by 10.64.210.3 with SMTP id i3mr2550552qbg.1193271570119;
+	Wed, 24 Oct 2007 17:19:30 -0700 (PDT)
+Received: from lenovo ( [75.121.171.134])
+	by mx.google.com with ESMTPS id 36sm1276130nza.2007.10.24.17.19.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 24 Oct 2007 17:19:29 -0700 (PDT)
+Received: by lenovo (sSMTP sendmail emulation); Wed, 24 Oct 2007 19:19:26 -0500
+Date: Wed, 24 Oct 2007 19:19:26 -0500
+From: David Farning <dfarning@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: getting started - docbook
+Message-ID: <20071025001926.GA14645@lenovo>
+References: <471FC1C0.4010103@linux.it>
+MIME-Version: 1.0
+In-Reply-To: <471FC1C0.4010103@linux.it>
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: Re: getting started - docbook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,38 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Oct 2007 22:12:54 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Oct 2007 00:26:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+> I'm writing few notes on a doc just for me, called "OE Journey",
+> explaining what are basic steps in OE, basic tasks, dependencies graphs,
+> few examples... now it's just 10 pages, can it be useful? Should I
+> continue in this ooffice doc or can be more useful to others if I change
+> format (eg. wiki)???
+> 
+> thank you,
+>     phy
+> 
+> P.S. also writing a simple .dot-graphviz files manipulator to produce
+> nice graph dependencies with base packages collapsed... (was trying
+> patching bitbake, but then it's much more confortable an interactive way
+> like I'm doing now, in php on my localhost)
 
+It would be very helpful to me to see your personal journey.  The
+dependancy graph stuff would be very helpful. This evening I was
+manually tracing some dependancy graphs.
 
-    I have been going through the getting started wiki and noticed that a
+The biggest challange is deciding on the correct terminology.
+I think that I will start creating a glossary so new users can look up
+terms and experienced users can use 'approved term' consistently. (to
+keep the new users from getting unnecessarily confused) A bitbake
+file, a recipe, and a package all seem to be the same thing.  I didn't
+realize that they were all the same thing until this afternoon.
 
-    few points are out of date or wrong.
-
-    Would you it be useful if I cleaned up the wiki and converted it to
-    docbook for inclusion in the manual?  The gettingstarted link on
-    oe.org could then refer to the cannonical gettingstarted instructions
-    in the manual.
-
-    Thanks
-    David Farning
-
-
-I'm writing few notes on a doc just for me, called "OE Journey",
-explaining what are basic steps in OE, basic tasks, dependencies graphs,
-few examples... now it's just 10 pages, can it be useful? Should I
-continue in this ooffice doc or can be more useful to others if I change
-format (eg. wiki)???
-
-thank you,
-    phy
-
-P.S. also writing a simple .dot-graphviz files manipulator to produce
-nice graph dependencies with base packages collapsed... (was trying
-patching bitbake, but then it's much more confortable an interactive way
-like I'm doing now, in php on my localhost)
-
+Thanks
+David Farning
 
 
