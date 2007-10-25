@@ -1,23 +1,23 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1Il8T7-0007xR-72
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2007 21:34:13 +0200
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1Il87N-0006m1-Uw
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2007 21:11:45 +0200
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <200710251911.29188.openembedded@haerwu.biz>
-References: <200710251911.29188.openembedded@haerwu.biz>
-Message-Id: <7E77B77D-E298-45B1-A637-96EA2EDCD749@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Thu, 25 Oct 2007 21:11:23 +0200
+	(envelope-from <openembedded@haerwu.biz>) id 1Il8kF-00089E-LW
+	for openembedded-devel@openembedded.org; Thu, 25 Oct 2007 21:51:55 +0200
+Received: (qmail 30660 invoked by uid 813007); 25 Oct 2007 19:44:31 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 25 Oct 2007 19:44:31 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-Subject: Re: [RFC] src_distribute class change
+Date: Thu, 25 Oct 2007 21:44:30 +0200
+User-Agent: KMail/1.9.7
+References: <E1Il7zj-0002lu-Uj@linuxtogo.org>
+In-Reply-To: <E1Il7zj-0002lu-Uj@linuxtogo.org>
+X-PRIORITY: 2 (High)
+Priority: urgent
+MIME-Version: 1.0
+Message-Id: <200710252144.30914.openembedded@haerwu.biz>
+Subject: Re: [oe-commits] org.oe.dev linux.inc: build mkimage unconditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,24 +31,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2007 19:34:13 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Oct 2007 19:51:57 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+Dnia czwartek, 25 pa=BCdziernika 2007, koen commit napisa=B3:
+> linux.inc: build mkimage unconditionally
+> * see comment inside the file
+
+> Author: koen@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: cc0f788a513b8c6fcf2e55f8c9e0fb35c6f5c016
+
+> packages/linux/linux.inc
+
+> @@ -47,7 +35,7 @@ do_configure_prepend() {
+>          #
+>          if [ "${TARGET_OS}" =3D "linux-gnueabi" -o  "${TARGET_OS}" =3D "=
+linux-uclibcgnueabi" ]; then=20
+>                  echo "CONFIG_AEABI=3Dy"  >> ${S}/.config=20
+> -                echo "CONFIG_OABI_COMPAT=3Dy"    >> ${S}/.config=20
+> +                echo "# CONFIG_OABI_COMPAT is not set"             >> ${=
+S}/.config else
+>                  echo "# CONFIG_AEABI is not set"        >> ${S}/.config=
+=20
+>                  echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.config=
+=20
+
+Please revert this part - we want OABI support in EABI kernels.
 
 
-Am 25.10.2007 um 19:11 schrieb Marcin Juszkiewicz:
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-> As I do not know how many people use this class I prefer to write  
-> about
-> changes and wait for comments. If there will be no comments until  
-> Monday
-> 29 October 2007 I will merge it like it is.
-
-After a small question on IRC I'm fine with it. This avoids us  
-maintaining the license.conf as the distributor needs to recheck the  
-result anyway. And this way he will be able to see every license.
+  Problemy z matematyk=B1? Zadzwo=F1! 0-800-[(10x)(13i)^2]-[sin(xy)/2.362x]
 
 
-z.
 
 
