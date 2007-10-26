@@ -1,21 +1,22 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1IlO1w-0005Qr-U4
+	(envelope-from <philipp.zabel@gmail.com>) id 1IlPYn-0006ad-42
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2007 14:11:15 +0200
-Received: from cimmeria ([::ffff:78.86.130.156])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Fri, 26 Oct 2007 13:03:45 +0100
-	id 000680B2.4721D7A1.00000771
-Date: Fri, 26 Oct 2007 13:03:55 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	Fri, 26 Oct 2007 15:49:13 +0200
+Received: by fk-out-0910.google.com with SMTP id 18so846606fks
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2007 06:41:45 -0700 (PDT)
+Received: by 10.82.172.10 with SMTP id u10mr5858677bue.1193402771470;
+	Fri, 26 Oct 2007 05:46:11 -0700 (PDT)
+Received: by 10.82.118.8 with HTTP; Fri, 26 Oct 2007 05:46:11 -0700 (PDT)
+Message-ID: <74d0deb30710260546h197f1dfemdf93bcc00d2643f6@mail.gmail.com>
+Date: Fri, 26 Oct 2007 14:46:11 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071026130355.6248ee59@cimmeria>
-In-Reply-To: <20071025120035.49703327@cimmeria>
-References: <20071025120035.49703327@cimmeria>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: Kernel Packages/Modules and Versioning
+In-Reply-To: <4721C41E.3070109@hni.uni-paderborn.de>
+MIME-Version: 1.0
+References: <4721C41E.3070109@hni.uni-paderborn.de>
+Subject: Re: How commit bugfix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,19 +30,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2007 12:11:17 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 26 Oct 2007 13:49:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Thu, 25 Oct 2007 12:00:35 +0100
-Graeme Gregory <dp@xora.org.uk> wrote:
+On 10/26/07, Stefan Herbrechtsmeier <hbmeier@hni.uni-paderborn.de> wrote:
+> Hi,
+>
+> What is the best way do commit a bugfix?
+>
+> Is it ok, to open a new bug and set it to fixed with the solution of the
+> problem?
 
-> Anyway I thought I would expose this to the wider audience for more
-> comments than just openmoko lists. I know this is suitable for all
-> devices so Id like opinions.
-> 
-s/is suitable/IS NOT suitable/
+You should open a new bug and apply the patch, but leave the bug as NEW.
+Then hopefully somebody with commit access will quickly test the patch and
+commit it to the repository, and set the bug to FIXED afterwards.
 
-Graeme
+regards
+Philipp
 
 
