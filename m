@@ -1,20 +1,20 @@
-Received: from [131.234.142.9] (helo=mail.uni-paderborn.de)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hbmeier@hni.uni-paderborn.de>) id 1IlN4D-0000Sz-6H
+	(envelope-from <dp@xora.org.uk>) id 1IlNBB-0000b7-PJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2007 13:09:29 +0200
-Received: from [131.234.87.93] by mail.uni-paderborn.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63 omicron-persei-viii)
-	id 1IlMcC-00026S-9W for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2007 12:40:33 +0200
-Message-ID: <4721C41E.3070109@hni.uni-paderborn.de>
-Date: Fri, 26 Oct 2007 12:40:30 +0200
-From: Stefan Herbrechtsmeier <hbmeier@hni.uni-paderborn.de>
-User-Agent: Thunderbird 2.0.0.6 (Windows/20070728)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-IMT-Authenticated-Sender: hbmeier@UNI-PADERBORN.DE
-Subject: How commit bugfix
+	Fri, 26 Oct 2007 13:16:41 +0200
+Received: from cimmeria ([::ffff:78.86.130.156])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Fri, 26 Oct 2007 12:09:14 +0100
+	id 0006856E.4721CADA.000006B0
+Date: Fri, 26 Oct 2007 12:09:25 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20071026120925.12c7a624@cimmeria>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: [RFC] Handling Patch Series in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,19 +28,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2007 11:09:29 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+X-List-Received-Date: Fri, 26 Oct 2007 11:16:41 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-Hi,
+OM developers are making use of patches stored with a series file
+(quilt style) and have a special pre patch function to apply these
+patches.
 
-What is the best way do commit a bugfix?
+This interferes with OE's current file://patch.patch;patch=1
+application. Namely all patches applied in this way are forgotten from
+patches/ directory when the first OE patch is applied.
 
-Is it ok, to open a new bug and set it to fixed with the solution of the 
-problem?
+I would like to add a new peice of handling to patch.bbclass that
+handles a patchseries=1 type argument when passed with a URI which
+points to a directory of patches+series file.
 
-best regards,
-Stefan
+This new handling should play nice with OE's current system to avoid
+information on patches being "lost"
 
+I am making the assumption that in the case of things like this.
+
+SRC_URI = "http://blah.tag.gz file://unfsck.patch;patch=1
+http://series.tar.gz;patchseries=1 file://unfsck2.patch;patch=2"
+
+Then the series should be applied after the first patch and before the
+second. To avoid people getting suprised.
+
+Any comments before I start to learn python?
 
 
