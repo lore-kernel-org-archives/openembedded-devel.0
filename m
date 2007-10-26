@@ -1,22 +1,25 @@
-Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philipp.zabel@gmail.com>) id 1IlPYn-0006ad-42
+	(envelope-from <zecke@selfish.org>) id 1IlPZo-0006bj-Mp
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2007 15:49:13 +0200
-Received: by fk-out-0910.google.com with SMTP id 18so846606fks
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2007 06:41:45 -0700 (PDT)
-Received: by 10.82.172.10 with SMTP id u10mr5858677bue.1193402771470;
-	Fri, 26 Oct 2007 05:46:11 -0700 (PDT)
-Received: by 10.82.118.8 with HTTP; Fri, 26 Oct 2007 05:46:11 -0700 (PDT)
-Message-ID: <74d0deb30710260546h197f1dfemdf93bcc00d2643f6@mail.gmail.com>
-Date: Fri, 26 Oct 2007 14:46:11 +0200
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	Fri, 26 Oct 2007 15:50:16 +0200
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=[192.168.1.23]) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1IlPSa-0006c5-RK
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2007 15:42:48 +0200
+Mime-Version: 1.0 (Apple Message framework v752.3)
+In-Reply-To: <47217083.4000103@student.utwente.nl>
+References: <E1IlBjn-00084R-Qk@linuxtogo.org>
+	<47217083.4000103@student.utwente.nl>
+X-Gpgmail-State: !signed
+Message-Id: <CA5EEB08-2B31-4DC9-A7C7-2CB56243E808@selfish.org>
+From: Holger Freyther <zecke@selfish.org>
+Date: Fri, 26 Oct 2007 15:42:24 +0200
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4721C41E.3070109@hni.uni-paderborn.de>
-MIME-Version: 1.0
-References: <4721C41E.3070109@hni.uni-paderborn.de>
-Subject: Re: How commit bugfix
+X-Mailer: Apple Mail (2.752.3)
+Subject: Re: [oe-commits] org.oe.dev packages/webkit: Build and package naming fixes (when using debian renaming)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,24 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2007 13:49:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 26 Oct 2007 13:50:17 -0000
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On 10/26/07, Stefan Herbrechtsmeier <hbmeier@hni.uni-paderborn.de> wrote:
-> Hi,
+
+Am 26.10.2007 um 06:43 schrieb Koen Kooi:
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> What is the best way do commit a bugfix?
+> freyther commit schreef:
+>> packages/webkit: Build and package naming fixes (when using debian  
+>> renaming)
+>>     We do not want the package to be named libwebkitgtk-launcher  
+>> but want to
+>>     keep the webkit-gtklauncher names.
 >
-> Is it ok, to open a new bug and set it to fixed with the solution of the
-> problem?
+> Do we? I created and maintain those recipes, and I made the  
+> decision to
+> name it libwebkitgtk-launcher when using debian naming. I would have
+> used DEBIAN_NOAUTONAME_webkit-gtklauncher otherwise. Which brings  
+> me to
+> my second point:
+>
 
-You should open a new bug and apply the patch, but leave the bug as NEW.
-Then hopefully somebody with commit access will quickly test the patch and
-commit it to the repository, and set the bug to FIXED afterwards.
+Hi Koen,
 
-regards
-Philipp
+please enlighten me. I want to put webkit-gtklauncher into my image.  
+Due the package renaming do_rootfs will fail. Do you want people to  
+put webkit-gtklauncher into their image? How can they do it?
+
+I will restore webkit-gtk_svn.bb but would like to keep the qt and  
+qtopia variant like it is (minus probably removing the python code).
+
+Regarding the python code. Do we have some kind of janitor tasks for  
+newbies? They could kill it from ~5-10 recipes as well.
+
+
+z.
+
+
+
+
 
 
