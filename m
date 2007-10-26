@@ -1,23 +1,30 @@
-Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <cliff.brake@gmail.com>) id 1IlBqU-0008AJ-Gi
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2007 01:10:36 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so897964waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2007 16:03:09 -0700 (PDT)
-Received: by 10.115.77.1 with SMTP id e1mr2343193wal.1193333691071;
-	Thu, 25 Oct 2007 10:34:51 -0700 (PDT)
-Received: by 10.114.254.11 with HTTP; Thu, 25 Oct 2007 10:34:50 -0700 (PDT)
-Message-ID: <f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>
-Date: Thu, 25 Oct 2007 13:34:51 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20071025121153.GA8231@lenovo>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IlGxg-0002uf-NI
+	for openembedded-devel@openembedded.org; Fri, 26 Oct 2007 06:38:23 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9Q4UhUx027922 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2007 06:30:46 +0200
+Message-ID: <47216D7B.2060406@student.utwente.nl>
+Date: Fri, 26 Oct 2007 06:30:51 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-References: <471FC1C0.4010103@linux.it> <20071025001926.GA14645@lenovo>
-	<472047C3.20208@student.utwente.nl> <20071025121153.GA8231@lenovo>
-Subject: Re: getting started - docbook
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <E1Il7zj-0002lu-Uj@linuxtogo.org>
+	<200710252144.30914.openembedded@haerwu.biz>
+In-Reply-To: <200710252144.30914.openembedded@haerwu.biz>
+X-Enigmail-Version: 0.95.4
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
+	l9Q4UhUx027922
+Subject: Re: [oe-commits] org.oe.dev linux.inc: build mkimage	unconditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,55 +38,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2007 23:10:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 26 Oct 2007 04:38:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 10/25/07, David Farning <dfarning@gmail.com> wrote:
-> On Thu, Oct 25, 2007 at 09:37:39AM +0200, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > David Farning schreef:
-> > Actually they aren't the same :)
-> >
-> > A bitbake file and a recipe are the same thing, but they produces a
-> > package (.ipk, .deb, etc). That's why we have DEPENDS (for the recipe)
-> > and RDEPENDS (for the package).
->
-> At least on place in either the bitbake or oe manual, the stuff under
-> the dev/packages/ is referred to as packages.
->
-> In the bitbake help, the usage is show as $bitbake [option] [package].
-> How can base-task of gpe-image be a package.
->
-> I know this this sounds really picky;)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-No, we need to be consistent -- this is a good exercise.  Perhaps
-<oe>/packages should really be <oe>/recipes.
+Marcin Juszkiewicz schreef:
+> Dnia czwartek, 25 pa=C5=BAdziernika 2007, koen commit napisa=C5=82:
+>> linux.inc: build mkimage unconditionally
+>> * see comment inside the file
+>=20
+>> Author: koen@openembedded.org
+>> Branch: org.openembedded.dev
+>> Revision: cc0f788a513b8c6fcf2e55f8c9e0fb35c6f5c016
+>=20
+>> packages/linux/linux.inc
+>=20
+>> @@ -47,7 +35,7 @@ do_configure_prepend() {
+>>          #
+>>          if [ "${TARGET_OS}" =3D "linux-gnueabi" -o  "${TARGET_OS}" =3D=
+ "linux-uclibcgnueabi" ]; then=20
+>>                  echo "CONFIG_AEABI=3Dy"  >> ${S}/.config=20
+>> -                echo "CONFIG_OABI_COMPAT=3Dy"    >> ${S}/.config=20
+>> +                echo "# CONFIG_OABI_COMPAT is not set"             >>=
+ ${S}/.config else
+>>                  echo "# CONFIG_AEABI is not set"        >> ${S}/.conf=
+ig=20
+>>                  echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.conf=
+ig=20
+>=20
+> Please revert this part - we want OABI support in EABI kernels.
 
-> But I am struggling over what to call the object of a bitebake.  (In
-> make they are call targets .ie make all, but in the embedded world
-> target is used to refer to the device for which you are building.)
->
-> $bitbake vim
-> $bitbake task-base
-> $bitbake gpe-image
-> $bitbake world
-> A package, a task, an image, and world?
+Right, I'll fix that when I get back from work this evening.
 
-I suppose it depends -- saying that I'm "building a packages" is
-technically correct as the ipk/deb is the output.  But, "bitbaking a
-recipe" is probably more correct.
+regards,
 
-perhaps recipe -- that way it is very obvious what we are talking about.
+Koen
 
-Cliff
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+iD8DBQFHIW17MkyGM64RGpERAl7IAKCqCDvhXfpJVrsD5J/T96SW4fpdnACdEpM1
+uW6MxWwJmyL9M1aKGM5B9Uw=3D
+=3DutWO
+-----END PGP SIGNATURE-----
 
 
