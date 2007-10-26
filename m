@@ -1,24 +1,25 @@
-Received: from [89.96.204.112] (helo=www-zirak-new.zirak.it)
-	by linuxtogo.org with smtp (Exim 4.67) (envelope-from <phy@linux.it>)
-	id 1IlV2J-0007Ak-Lo
-	for openembedded-devel@openembedded.org; Fri, 26 Oct 2007 21:40:04 +0200
-Received: (qmail 4518 invoked by uid 64017); 26 Oct 2007 19:26:03 -0000
-Received: from 82.58.178.124 (filippo@zirak.it@82.58.178.124) by www-zirak-new
-	(envelope-from <phy@linux.it>, uid 64011) with qmail-scanner-2.01 
-	(uvscan: v5.1.00/v5052. bogofilter: 0.92.0. spamassassin: 3.0.4.  
-	Clear:RC:1(82.58.178.124):. 
-	Processed in 0.011754 secs); 26 Oct 2007 19:26:03 -0000
-Received: from unknown (HELO ?192.168.1.6?) (filippo@zirak.it@82.58.178.124)
-	by www-zirak-new.zirak.it with SMTP; 26 Oct 2007 19:26:03 -0000
-Message-ID: <472240E2.3070107@linux.it>
-Date: Fri, 26 Oct 2007 21:32:50 +0200
-From: Filippo Basso <phy@linux.it>
-User-Agent: IceDove 1.5.0.12 (X11/20070730)
+Received: from [209.85.132.243] (helo=an-out-0708.google.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <dfarning@gmail.com>) id 1IlW70-0003tA-C0
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2007 22:48:58 +0200
+Received: by an-out-0708.google.com with SMTP id c31so162124ana
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2007 13:41:28 -0700 (PDT)
+Received: by 10.100.211.8 with SMTP id j8mr2020630ang.1193430850215;
+	Fri, 26 Oct 2007 13:34:10 -0700 (PDT)
+Received: from lenovo ( [75.121.171.134])
+	by mx.google.com with ESMTPS id 39sm5043039nzk.2007.10.26.13.34.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 26 Oct 2007 13:34:09 -0700 (PDT)
+Received: by lenovo (sSMTP sendmail emulation); Fri, 26 Oct 2007 15:34:03 -0500
+Date: Fri, 26 Oct 2007 15:34:03 -0500
+From: David Farning <dfarning@gmail.com>
+To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
+Message-ID: <20071026203403.GA6387@lenovo>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <HOECLKEKOHLAMMGDLLBHIEEKMKAA.skoroneos@digital-opsis.com>
-In-Reply-To: <HOECLKEKOHLAMMGDLLBHIEEKMKAA.skoroneos@digital-opsis.com>
-Subject: Re: different hosts, different OE images
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: [doc] High level overview.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,80 +33,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2007 19:40:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Oct 2007 20:48:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Stelios Koroneos ha scritto:
-> Well to answer your question in a quick way
-> it should not be happening
->
-> We have seen from time to time differences between 32bit hosts and 64bit
-> hosts but not anything like the thing you mention.
->
-> Could you prvide some additional info (what distro, machine, host tools
-> versions etc)
->   
-Thank you Stelios for the answer!!!
-    I was trying to better understand OE, writing a small doc called "OE
-Journey" and try to go a little deeper in my personal understanding of
-this very interesting tool...
+I am adding three high-level overview sections to getting started.
+Each of these list items will be expanded into a paragraph introducing
+the concept and how BB/OE solves the problem.
 
-So, after some time I was  playing successfully with it, I tried to
-analyze better a simple:
-    DISTRO = "angstrom-2007.1"
-    MACHINE = "qemux86"
+The first section describes what a development system must be able to do.
+The second section describes what a OE developer must be able to define.
+The third section describes the Outputs of bb/oe.
 
-with 3 hosts:
-    1) my debian-testing (lenny)
-    * gcc version 4.2.3
+The section listed concepts are intentionally redundant because they
+will look at the concepts from the three point of view:  What does the
+system do, how do we tell the system what to do, what the system
+outputs.
 
-    2) vmware debian-stable (etch)
-    * gcc version 4.1.1
+Please take a look and let me know if I am missing any big concepts.
 
-    3) vmware ubuntu
-    * gcc version 4.1.2
+thanks
+David Farning
 
-    Same for the 3 distros:
-    * GNU Make 3.81
-    * BitBake Build Tool Core version 1.8.9, bitbake version 1.8.9
-    * monotone 0.36  (with OE at the same fixed revision 1c938b19)
-    * GNU Awk 3.1.5
-    * patch 2.5.9
-    * ccache version 2.4
-    * perl, v5.8.8 built for i486-linux-gnu-thread-multi
-    * Python 2.4.4
+1
+*************************
+      <para>Before we get into the details of installing
+<application>BitBake</application> let's step back and look at
+      our goals.  As embedded developers we want to create a
+specialized Linux <glossterm>distribution</glossterm>
+      that will run on our <glossterm>device</glossterm>.
+      This requires a number of things from our build system.
 
-I've noticed differences in the 3 distro, that I tried to setup
-identically, so I begun to investigate. At the moment I've not yet found
-a nice way to see differences, I just make md5 on logfiles and from that
-I analyze manually 20-30 non-matching logfiles. (log.do_compile). Any
-better idea?
+      <itemizedlist>
+        <listitem>
+          <para>Download Source Files - Grab source files, on the fly,
+from upstream projects rather than
+          from a central repository</para>
+        </listitem>
+        <listitem>
+          <para>Apply Patches - Apply patches to source files which
+will enable the compiled binaries
+          to run on non-standard devices.</para>
+        </listitem>
+        <listitem>
+          <para>Configure Applications</para>
+        </listitem>
+        <listitem>
+           <para>Cross Compile - Compile executables that will run on
+the target device.</para>
+        </listitem>
+        <listitem>
+          <para>Create Packages</para>
+        </listitem>
+        <listitem>
+          <para>Create File System - Create a root filesystem that
+contains the installed packages.</para>
+        </listitem>
+        <listitem>
+          <para>Build Image - Build an image that contains the file
+system.</para>
+        </listitem>
+      </itemizedlist>
+      </para>
+****************
 
-Say that host1 create a nice image, while host3 has strange behaviour at
-login (after login immediately exits and show again the login form).
-host2 seems like host1, but if I try to add the "minimo" package, it
-compiles on host1 and not on host2..... :-(
+2
+***************************
+    <para>It is time to step back and look at our goals again.  In
+order to create a linux distribution for an embedd device, we
+    need to define.
 
-Seems something strange... 3 hosts, 3 behaviours...
-So I was reading the log.do_compile files manually (after choosing
-different md5) and at the moment I found:
-* the order of gcc arguments is not always fixed, depends on the machine
-(es: ipkg, perl)
-* in many packages the make[n] is make[n+1] (one more "Make"), sometimes
-there is a duplicated chdir, or there is a duplicated message like "OE:
-Not hardcoding..."
-* in many packages on lenny is present in the options for "ccache
-i586-angstrom-linux-gcc" a -L/usr/lib (isn't that potentially dangerous???)
+      <itemizedlist>
+        <listitem>
+           <para>Define Applications</para>
+        </listitem>
+        <listitem>
+          <para>Define Libaries.</para>
+        </listitem>
+        <listitem>
+          <para>Define Kernel</para>
+        </listitem>
+        <listitem>
+          <para>Define Archicture</para>
+        </listitem>
+        <listitem>
+          <para>Define Package System</para>
+        </listitem>
+        <listitem>
+          <para>Define File System</para>
+        </listitem>
+      </itemizedlist>
+      </para>
+************************
 
-..................................
+3
+************************
+    <para>It is time to step back and look at our goals again.  We
+want to create an image which we can deploy.
+    This impiles
 
-so, now I really want to understand it well, and help to fix the
-problem. If somebody has some nice idea on how I should proceed, I'll
-devote my laptop to this work next nights.
-
-thank you!
-    phy
-
+      <itemizedlist>
+        <listitem>
+          <para>Create Cross Compiler.</para>
+        </listitem>
+        <listitem>
+          <para>Create installable Packages.</para>
+        </listitem>
+        <listitem>
+           <para>Create a deployable image.</para>
+        </listitem>
+      </itemizedlist>
+      </para>
+*************************
 
 
