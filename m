@@ -1,25 +1,29 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IlSF7-0004bI-Ji
-	for openembedded-devel@openembedded.org; Fri, 26 Oct 2007 18:41:07 +0200
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	l9QGXWUx006478 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2007 18:33:33 +0200
-Message-ID: <472216E5.6060708@student.utwente.nl>
-Date: Fri, 26 Oct 2007 18:33:41 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <dfarning@gmail.com>) id 1IlUuz-00076N-QC
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2007 21:32:29 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so922220wxd
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2007 12:24:59 -0700 (PDT)
+Received: by 10.70.89.5 with SMTP id m5mr4928323wxb.1193406334973;
+	Fri, 26 Oct 2007 06:45:34 -0700 (PDT)
+Received: from lenovo ( [69.179.85.165])
+	by mx.google.com with ESMTPS id i39sm8609583wxd.2007.10.26.06.45.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 26 Oct 2007 06:45:34 -0700 (PDT)
+Received: by lenovo (sSMTP sendmail emulation); Fri, 26 Oct 2007 08:45:28 -0500
+Date: Fri, 26 Oct 2007 08:45:28 -0500
+From: David Farning <dfarning@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071026134528.GA6182@lenovo>
+References: <471FC1C0.4010103@linux.it> <20071025001926.GA14645@lenovo>
+	<472047C3.20208@student.utwente.nl> <20071025121153.GA8231@lenovo>
+	<f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.95.4
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: [RFC] adding CONFLICTS
+In-Reply-To: <f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: Re: getting started - docbook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,29 +37,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2007 16:41:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Oct 2007 19:32:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, Oct 25, 2007 at 01:34:51PM -0400, Cliff Brake wrote:
+> 
+> I suppose it depends -- saying that I'm "building a packages" is
+> technically correct as the ipk/deb is the output.  But, "bitbaking a
+> recipe" is probably more correct.
+> 
+> perhaps recipe -- that way it is very obvious what we are talking about.
 
-Hi,
 
-Since we don't have packaged staging yet, what do people thing about
-adding CONFLICTS to packages the interfere with eachother like e.g.
-medialibraries like sdl and their hacked-up qte versions, multiple
-kernels (linux-foo and linux-foo-devel) etc...
+Nice, Bitbaking a recipe or informally, baking a recipe, is very obvious.
+Once BitBake and recipe have been defined it will be clear what we are
+talking about.  Also it will eliminate the [make, build, create, run,
+deploy][package, package set, task, target,distro] ambiguity.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHIhblMkyGM64RGpERAvhLAKCJPRgKuIJxnXAqfp3SX2iAJcUH1gCdH4tG
-p023LyKjTM1Ac4hdoc3A8Dk=
-=TFxP
------END PGP SIGNATURE-----
+Thanks
+David Farning  
 
 
