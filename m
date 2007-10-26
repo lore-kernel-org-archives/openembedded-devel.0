@@ -1,32 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IlPsT-0006lY-GM
-	for openembedded-devel@openembedded.org; Fri, 26 Oct 2007 16:09:33 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l9QE25Bt018562
-	for <openembedded-devel@openembedded.org>;
-	Fri, 26 Oct 2007 15:02:05 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18447-03 for <openembedded-devel@openembedded.org>;
-	Fri, 26 Oct 2007 15:02:02 +0100 (BST)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id l9QE1vUS018554
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Fri, 26 Oct 2007 15:01:57 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <4721C41E.3070109@hni.uni-paderborn.de>
-References: <4721C41E.3070109@hni.uni-paderborn.de>
-Date: Fri, 26 Oct 2007 15:02:00 +0100
-Message-Id: <1193407320.6177.78.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: How commit bugfix
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IlSF7-0004bI-Ji
+	for openembedded-devel@openembedded.org; Fri, 26 Oct 2007 18:41:07 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9QGXWUx006478 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2007 18:33:33 +0200
+Message-ID: <472216E5.6060708@student.utwente.nl>
+Date: Fri, 26 Oct 2007 18:33:41 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.4
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: [RFC] adding CONFLICTS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,24 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2007 14:09:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 26 Oct 2007 16:41:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
 Hi,
 
-On Fri, 2007-10-26 at 12:40 +0200, Stefan Herbrechtsmeier wrote:
-> What is the best way do commit a bugfix?
-> 
-> Is it ok, to open a new bug and set it to fixed with the solution of the 
-> problem?
+Since we don't have packaged staging yet, what do people thing about
+adding CONFLICTS to packages the interfere with eachother like e.g.
+medialibraries like sdl and their hacked-up qte versions, multiple
+kernels (linux-foo and linux-foo-devel) etc...
 
-Please submit the bug with the fix attached. When its been applied to
-the repository it will be marked as fixed.
+regards,
 
-Thanks,
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Richard
-
+iD8DBQFHIhblMkyGM64RGpERAvhLAKCJPRgKuIJxnXAqfp3SX2iAJcUH1gCdH4tG
+p023LyKjTM1Ac4hdoc3A8Dk=
+=TFxP
+-----END PGP SIGNATURE-----
 
 
