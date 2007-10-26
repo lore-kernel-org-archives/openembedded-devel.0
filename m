@@ -1,22 +1,22 @@
 Received: from [62.169.194.61] (helo=memova2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1IlMeC-0000F6-D7
-	for openembedded-devel@openembedded.org; Fri, 26 Oct 2007 12:42:36 +0200
+	(envelope-from <skoroneos@digital-opsis.com>) id 1IlMeC-0000F6-Up
+	for openembedded-devel@openembedded.org; Fri, 26 Oct 2007 12:42:37 +0200
 Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B04984C56 for openembedded-devel@openembedded.org;
-	Fri, 26 Oct 2007 12:33:52 +0200
+	id 4638635B04984C5E for openembedded-devel@openembedded.org;
+	Fri, 26 Oct 2007 12:33:53 +0200
 From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
 To: <openembedded-devel@openembedded.org>
 Date: Fri, 26 Oct 2007 13:35:09 +0300
-Message-ID: <HOECLKEKOHLAMMGDLLBHGEEKMKAA.skoroneos@digital-opsis.com>
+Message-ID: <HOECLKEKOHLAMMGDLLBHIEEKMKAA.skoroneos@digital-opsis.com>
 MIME-Version: 1.0
 X-Priority: 3 (Normal)
 X-MSMail-Priority: Normal
 X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
 X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-In-Reply-To: <20071025120035.49703327@cimmeria>
+In-Reply-To: <471F981E.30909@linux.it>
 Importance: Normal
-Subject: Re: Kernel Packages/Modules and Versioning
+Subject: Re: different hosts, different OE images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,29 +30,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2007 10:42:36 -0000
+X-List-Received-Date: Fri, 26 Oct 2007 10:42:37 -0000
 Content-Type: text/plain;
 	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-> This I feel is not a good idea for mobile system that can have package
-> upgrades in the field. It is my feeling that kernel modules/images
-> should never upgrade without attendance from the user.
->
+Well to answer your question in a quick way
+it should not be happening
 
-Not all devices that use OE are mobile :)
+We have seen from time to time differences between 32bit hosts and 64bit
+hosts but not anything like the thing you mention.
 
-> On reason for this is to make sure user is plugged into sufficient
-> power and has facilities to fix device before doing such a drastic
-> upgrade.
-
-Well in that case it should be the device that should allow/disallow the
-user from updating in general.
-Its the only point where you can have this kind of information and be
-accurate
-
-My 2 cents are that it should be left generic and device specific issues
-could be handled by a modified ipkg tool probably
+Could you prvide some additional info (what distro, machine, host tools
+versions etc)
 
 Stelios S. Koroneos
 
@@ -63,34 +53,40 @@ http://www.digital-opsis.com
 > -----Original Message-----
 > From: openembedded-devel-bounces@openembedded.org
 > [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
-> Graeme Gregory
-> Sent: Thursday, October 25, 2007 2:01 PM
+> Filippo Basso
+> Sent: Wednesday, October 24, 2007 10:08 PM
 > To: openembedded-devel@openembedded.org
-> Subject: [oe] Kernel Packages/Modules and Versioning
+> Subject: Re: [oe] different hosts, different OE images
 >
 >
-> Hi, writing this with my OpenMoko hat on.
+> Hi,
+>     can someone tell me if this is an important point, or if I'm just
+> missing something ?!?
+> I've seen that 3 host machines (with different linux distros) gave me 3
+> different OE results (for i586), one is okay, one is not compiling, one
+> the image has a big problem at login...
 >
-> Currently kernel modules create packages with names of the form
+> I want to investigate a bit, some hints ? Just a starting point.....
+> I think that one of the most important points of OE is that is largely
+> independent of host machine, right?!?
+>     thank you, phy
 >
-> kernel-module-umaga_${PV}-${PR}.ipk
 >
 >
-> I would like to suggest all kernel packages are actually packaged as
 >
-> kernel-module-umaga-${PV}_${RELEASE_NO}-${PV}.ipk
 >
-> and that a kernel-updater is developed to guide user through kernel
-> upgrades with less danger of broken devices at the end.
->
-> Obviously some policy would be needed so that ${RELEASE_NO}-${PV} is
-> guaranteed to load on all kernel-image-${PV} kernels.
->
-> Anyway I thought I would expose this to the wider audience for more
-> comments than just openmoko lists. I know this is suitable for all
-> devices so Id like opinions.
->
-> Graeme
+> >> I understood that the results should be highly independent from host
+> >> system, so I begun debugging a bit.
+> >>
+> >>
+> > Hi everybody,
+> >     my investigation is going ahead...
+> > The main point is: an image should be highly independent from the host
+> > system, but seems that I've some problem in this regards... maybe my
+> > mistake, but should be understood.
+> >
+> > Another machine (Ubuntu) gave even another different runtime
+> result... :-(
 >
 > _______________________________________________
 > Openembedded-devel mailing list
