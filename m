@@ -1,23 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <tobias.pflug@gmx.net>) id 1Ilji4-00040n-4I
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Oct 2007 13:20:11 +0200
-Received: (qmail invoked by alias); 27 Oct 2007 11:12:34 -0000
-Received: from p549AA970.dip0.t-ipconnect.de (EHLO [192.168.1.100])
-	[84.154.169.112]
-	by mail.gmx.net (mp043) with SMTP; 27 Oct 2007 13:12:34 +0200
-X-Authenticated: #283898
-X-Provags-ID: V01U2FsdGVkX1/WNfFx6bjW9UZZ1i8Po991wrg2bicBK2cDmXYIDz
-	3154yOkyBd2yEU
-From: Tobias Pflug <tobias.pflug@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Oct 2007 13:12:50 +0200
-Message-Id: <1193483570.6376.106.camel@toontown>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-X-Y-GMX-Trusted: 0
-Subject: list of packages from .dot
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Iln5R-0005wV-TN
+	for openembedded-devel@openembedded.org; Sat, 27 Oct 2007 16:56:32 +0200
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9REmlUx016714 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Oct 2007 16:48:48 +0200
+Message-ID: <47234FCF.4010204@student.utwente.nl>
+Date: Sat, 27 Oct 2007 16:48:47 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <E1Ilkzv-0004qZ-Aq@linuxtogo.org>
+In-Reply-To: <E1Ilkzv-0004qZ-Aq@linuxtogo.org>
+X-Enigmail-Version: 0.95.4
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev conf/machine/include/tune-ppc405.inc : Move	TARGET_FPU = "soft" to the tune file so its
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,31 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Oct 2007 11:20:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 27 Oct 2007 14:56:41 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-hi, 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-maybe there is some other, more elegant way but in order to obtain
-all packages that will be installed for a given image I use the
-following little sequence of bash fiddling on a .dot file generated
-by `bitbake -g`. Maybe someone else finds it useful or wants to tell
-me what a fool I am because there is a much easier way to do this :)
+ifaistos commit schreef:
+> conf/machine/include/tune-ppc405.inc : Move TARGET_FPU    =  "soft" to the tune file so its 
+> get used by all machines that have a amcc405 cpu
 
-
-#!/bin/bash
-# argument $1 = <dot file>
-
-cat $1 | grep -v "label\|digraph\|\}\|virtual" | sed 's/^
-\"\([[:alnum:]\.+\-]\+\)\"\ ->\ \"\ \?\([[:alnum:]\.\+\ \?-]\+\)\"\(\
-\[style=.*]\)\?$/\1 \2/' | sed 's/\ /\n/g' | sort | uniq
-
-remove the "\|virtual" part if you want virtual packages listed.
-as well.
+If the ppc kernel has a floating point emulator, this setting should be
+moved to the distrobution, since it's policy.
 
 regards,
-Tobi
 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHI0/OMkyGM64RGpERAhaJAJ45iudeERW/KCWNIDG8trBIp0rFvgCfSb86
+XUXK0oRevc8E/wMXQPaRiRg=
+=O3km
+-----END PGP SIGNATURE-----
 
 
