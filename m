@@ -1,21 +1,30 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1Im3HY-00035n-Ji
-	for openembedded-devel@openembedded.org; Sun, 28 Oct 2007 09:14:04 +0100
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B04AAB2E1 for openembedded-devel@openembedded.org;
-	Sun, 28 Oct 2007 09:05:09 +0100
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Sun, 28 Oct 2007 10:06:24 +0200
-Message-ID: <HOECLKEKOHLAMMGDLLBHAEIDMKAA.skoroneos@digital-opsis.com>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Im3qH-0007jC-So
+	for openembedded-devel@openembedded.org; Sun, 28 Oct 2007 09:49:57 +0100
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	l9S8gBUo002085 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Oct 2007 09:42:12 +0100
+Message-ID: <47244B64.2030609@student.utwente.nl>
+Date: Sun, 28 Oct 2007 09:42:12 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-In-Reply-To: <1193522957.6376.125.camel@toontown>
-Importance: Normal
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <471FC1C0.4010103@linux.it>
+	<20071025001926.GA14645@lenovo>	<472047C3.20208@student.utwente.nl>
+	<20071025121153.GA8231@lenovo>	<f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>	<20071026134528.GA6182@lenovo>
+	<1193483219.6376.100.camel@toontown>	<20071027153928.GA6118@lenovo>	<47237509.8070405@student.utwente.nl>
+	<20071027212600.GA6219@lenovo>
+In-Reply-To: <20071027212600.GA6219@lenovo>
+X-Enigmail-Version: 0.95.4
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: getting started - docbook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,50 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Oct 2007 08:14:05 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Sun, 28 Oct 2007 08:49:58 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-> In my humble opinion that is way out of scope for a OE documentation.
-> The point is to present the workings and functionalities of OpenEmbedded
-> and not how to get some arbitrary hardware to run linux from 0 to
-> 100% .. ?
->
-> At least that is my conception of what the OE documentation should
-> provide?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+David Farning schreef:
+> On Sat, Oct 27, 2007 at 07:27:37PM +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> David Farning schreef:
+>>> On Sat, Oct 27, 2007 at 01:06:59PM +0200, Tobias Pflug wrote:
+>>>> on 1: 
+>>>> with big picture I mean there should be a description of the 
+>>>> "system" with its main components. Currently i think there is too
+>>>> little of that, and too many use-cases. ("In order to change xyz,
+>>>> apply abc to 123").
+>>> I finished a rough draft of getting started this morning.  I am going
+>>> to let it sit for a week before looking at it again.  Then I will
+>>> rework as needed and submitte for review.
+>>>
+>>> In the mean time I am starting on a introduction chapter.  This will
+>>> be a very high level overview.  Below is a first stab at the outline.
+>> Even if 99.9% if the people use OE to build linux stuff, it is able to
+>> build nonlinux targets like bare-metal stuff for the msp430
+>> microcontroller and things like arm-wince-pe or arm-apple-darwin.
+> 
+> That makes sense.  Nothing special about the Linux kernel.  For the
+> purposes of documentation would you mind if we:
+> 
+> 1 Studied the device - processer, memory, IO, devices....
+> 2 Studied a generic Linux distribution - kernel, libs, apps, packages,
+> files system....
+> 3 Discussed how to use bb/oe to create a customized distro to run on a
+> specific device.
 
-We discussed the documentation matter in OEDEM.
-What we "concluded" to is that there can not be a single document to cover
-all of OE
-The idea was to see how we can get a "Getting started guide" where the basic
-functionality of OE is covered and a "Programmers/Developers manual" kind of
-thing where all big and little dirty details of OE should go to.
+I don't mind at all, since I said that's what 99% of the people do :)
 
-These two documents target different kind of people with different needs.
-The people who would like to use OE with an existing device/distro by simply
-building an image and/or want to develop/port an application (without
-messing too much with the OE internals) and those who need to add a new
-device/distro/extend OE in whatever manner they need
+regards,
 
-IMHO there is a need to get documentation for the larger pool of
-"application developers" first and move into the detailed "board/distro
-developers" at a second stage, as we are going to see more and more of the
-first, as OE gets shipped with more and more devices.
-And with the SDK needing some "final touches" to be functional , we are
-bound to see more and more people asking questions that are "application
-developer" oriented, so we better be prepared for that.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
-
-Stelios S. Koroneos
-
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
-
-
-
-
+iD8DBQFHJEtkMkyGM64RGpERAj1lAJwKnbjzj21rEj9TLZUfqrF0DHDQHwCgulo7
+CaUokllIm5bTMLMv/dIg1Ko=
+=f5+C
+-----END PGP SIGNATURE-----
 
 
