@@ -1,30 +1,22 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <tobias.pflug@gmx.net>) id 1IltxL-00064J-9k
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Oct 2007 00:16:35 +0200
-Received: (qmail invoked by alias); 27 Oct 2007 22:08:59 -0000
-Received: from p549AA970.dip0.t-ipconnect.de (EHLO [192.168.1.100])
-	[84.154.169.112]
-	by mail.gmx.net (mp005) with SMTP; 28 Oct 2007 00:08:59 +0200
-X-Authenticated: #283898
-X-Provags-ID: V01U2FsdGVkX18zrnlRVtszBt6IPW7T9pLufV5m2D5RobT9uEJIkQ
-	Gcl0CFQS2QtEc2
-From: Tobias Pflug <tobias.pflug@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20071027212600.GA6219@lenovo>
-References: <471FC1C0.4010103@linux.it> <20071025001926.GA14645@lenovo>
-	<472047C3.20208@student.utwente.nl> <20071025121153.GA8231@lenovo>
-	<f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>
-	<20071026134528.GA6182@lenovo> <1193483219.6376.100.camel@toontown>
-	<20071027153928.GA6118@lenovo> <47237509.8070405@student.utwente.nl>
-	<20071027212600.GA6219@lenovo>
-Date: Sun, 28 Oct 2007 00:09:17 +0200
-Message-Id: <1193522957.6376.125.camel@toontown>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-X-Y-GMX-Trusted: 0
-Subject: Re: getting started - docbook
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <skoroneos@digital-opsis.com>) id 1Im1Fv-0001W1-IV
+	for openembedded-devel@openembedded.org; Sun, 28 Oct 2007 07:04:15 +0100
+Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B04AA320E for openembedded-devel@openembedded.org;
+	Sun, 28 Oct 2007 06:55:21 +0100
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Sun, 28 Oct 2007 07:56:36 +0200
+Message-ID: <HOECLKEKOHLAMMGDLLBHGEIAMKAA.skoroneos@digital-opsis.com>
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+In-Reply-To: <47234FCF.4010204@student.utwente.nl>
+Importance: Normal
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
+Subject: Re: [oe-commits] org.oe.dev conf/machine/include/tune-ppc405.inc : Move	TARGET_FPU = "soft" to the tune file so its
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,54 +30,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Oct 2007 22:16:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 28 Oct 2007 06:04:16 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
+ok, point taken.
+It should default to TARGET_FPU = "soft" only if the
+distro/machine/local.conf don't define it differently
+i.e TARGET_FPU ?= "soft"
 
-On Sat, 2007-10-27 at 16:26 -0500, David Farning wrote:
-> On Sat, Oct 27, 2007 at 07:27:37PM +0200, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> > 
-> > David Farning schreef:
-> > > On Sat, Oct 27, 2007 at 01:06:59PM +0200, Tobias Pflug wrote:
-> > >> on 1: 
-> > >> with big picture I mean there should be a description of the 
-> > >> "system" with its main components. Currently i think there is too
-> > >> little of that, and too many use-cases. ("In order to change xyz,
-> > >> apply abc to 123").
-> > > 
-> > > I finished a rough draft of getting started this morning.  I am going
-> > > to let it sit for a week before looking at it again.  Then I will
-> > > rework as needed and submitte for review.
-> > > 
-> > > In the mean time I am starting on a introduction chapter.  This will
-> > > be a very high level overview.  Below is a first stab at the outline.
-> > 
-> > Even if 99.9% if the people use OE to build linux stuff, it is able to
-> > build nonlinux targets like bare-metal stuff for the msp430
-> > microcontroller and things like arm-wince-pe or arm-apple-darwin.
-> 
-> That makes sense.  Nothing special about the Linux kernel.  For the
-> purposes of documentation would you mind if we:
-> 
-> 1 Studied the device - processer, memory, IO, devices....
-> 2 Studied a generic Linux distribution - kernel, libs, apps, packages,
-> files system....
-> 3 Discussed how to use bb/oe to create a customized distro to run on a
-> specific device.
+Stelios S. Koroneos
 
-In my humble opinion that is way out of scope for a OE documentation.
-The point is to present the workings and functionalities of OpenEmbedded
-and not how to get some arbitrary hardware to run linux from 0 to
-100% .. ?
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
 
-At least that is my conception of what the OE documentation should
-provide?
 
-regards,
-Tobi
+> -----Original Message-----
+> From: openembedded-devel-bounces@openembedded.org
+> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of Koen Kooi
+> Sent: Saturday, October 27, 2007 5:49 PM
+> To: Using the OpenEmbedded metadata to build Distributions
+> Subject: Re: [oe] [oe-commits] org.oe.dev
+> conf/machine/include/tune-ppc405.inc : Move TARGET_FPU = "soft"
+> to the tune file so its
+>
+>
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> ifaistos commit schreef:
+> > conf/machine/include/tune-ppc405.inc : Move TARGET_FPU    =
+> "soft" to the tune file so its
+> > get used by all machines that have a amcc405 cpu
+>
+> If the ppc kernel has a floating point emulator, this setting should be
+> moved to the distrobution, since it's policy.
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFHI0/OMkyGM64RGpERAhaJAJ45iudeERW/KCWNIDG8trBIp0rFvgCfSb86
+> XUXK0oRevc8E/wMXQPaRiRg=
+> =O3km
+> -----END PGP SIGNATURE-----
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
 
 
 
