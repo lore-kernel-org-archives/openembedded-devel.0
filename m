@@ -1,25 +1,24 @@
-Received: from [209.85.132.243] (helo=an-out-0708.google.com)
+Received: from [64.233.166.181] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dfarning@gmail.com>) id 1ImhLj-0001sa-94
+	(envelope-from <dbaryshkov@gmail.com>) id 1Impe7-0008DH-ED
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2007 04:01:03 +0100
-Received: by an-out-0708.google.com with SMTP id c31so245042ana
+	Tue, 30 Oct 2007 12:52:35 +0100
+Received: by py-out-1112.google.com with SMTP id a25so4099006pyi
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2007 20:01:00 -0700 (PDT)
-Received: by 10.101.69.10 with SMTP id w10mr2144293ank.1193712857888;
-	Mon, 29 Oct 2007 19:54:17 -0700 (PDT)
-Received: from lenovo ( [75.121.171.134])
-	by mx.google.com with ESMTPS id 23sm4978569nzn.2007.10.29.19.54.15
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 29 Oct 2007 19:54:17 -0700 (PDT)
-Received: by lenovo (sSMTP sendmail emulation); Mon, 29 Oct 2007 21:54:14 -0500
-Date: Mon, 29 Oct 2007 21:54:14 -0500
-From: David Farning <dfarning@gmail.com>
-To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
-Message-ID: <20071030025414.GA6660@lenovo>
+	Tue, 30 Oct 2007 04:52:30 -0700 (PDT)
+Received: by 10.65.213.4 with SMTP id p4mr15233439qbq.1193745150480;
+	Tue, 30 Oct 2007 04:52:30 -0700 (PDT)
+Received: by 10.64.233.15 with HTTP; Tue, 30 Oct 2007 04:52:30 -0700 (PDT)
+Message-ID: <bc64b4640710300452o2fee244dm45d14a5196ff34d7@mail.gmail.com>
+Date: Tue, 30 Oct 2007 14:52:30 +0300
+From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <0ML31I-1ImoSa1Taq-0003f0@mrelayeu.kundenserver.de>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
-Subject: [doc] OE the language?
+References: <bc64b4640710300320h63a90f80tc9ceca9d4340e994@mail.gmail.com>
+	<0ML31I-1ImoSa1Taq-0003f0@mrelayeu.kundenserver.de>
+Cc: dirk@do13.de
+Subject: Re: Update Tosa kernel patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,28 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2007 03:01:05 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 30 Oct 2007 11:52:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-I was wondering if you would be interested in creating a formal language
-to represent the data in bitbake files.
+Hi,
 
-By splitting off bitbake you have already made a automatic
-distribution development tool.  (think compiler)
+2007/10/30, Dirk Opfer <dirk@do13.de>:
+> thanks for the patch.
+> I recently started working on refreshing the patches for 2.6.23. I'll
+> integrate your patch.
 
-What is now OpenEmbedded can be split in to 1. OE the language which
-can be precisely defined in terms of syntax, and symantics, and
-standard libaries.(bbclasses) and 2. OE data. (recipes)  This
-separation would allow more abstraction between how recipies are
-written and what the recipies do.  This separation would also allow
-the language and standard libaries (api) to stablize into releases while the
-data remains flexible.
+Good news :)
 
-The new language, which I am calling the distribution description language, 
-would describe the datafiles (.bb) which are parsed by bitbake.
+>
+> The usb part isn't easy, because the usb maintainers removed some hooks
+> which are essential for the tc6393.
 
-Thanks
-David Farning
+Oh. and btw: are there any datasheet/docs for tc6393? Or the best
+sources for the information are usb_ohci_tc6393 from Cacko and
+tmio-ohci.patch?
+
+
+
+-- 
+With best wishes
+Dmitry Baryshkov
 
 
