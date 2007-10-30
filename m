@@ -1,25 +1,24 @@
-Received: from [150.202.8.1] (helo=dc1gateway.sjm.com)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <jtiller@sjm.com>) id 1In08f-000322-RG
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <theBohemian@gmx.net>) id 1In0eU-0007qY-0f
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2007 00:04:52 +0100
-Received: from USSYML02.ad.sjm.com ([150.202.22.59]) by dc1gateway.sjm.com
-	with Microsoft SMTPSVC(6.0.3790.1830); 
-	Tue, 30 Oct 2007 15:52:36 -0700
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Wed, 31 Oct 2007 00:37:42 +0100
+Received: (qmail invoked by alias); 30 Oct 2007 23:37:34 -0000
+Received: from e178080251.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.80.251]
+	by mail.gmx.net (mp051) with SMTP; 31 Oct 2007 00:37:34 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+SLTBntZuSBe+jeoq+Y6yreTrXCs9pnBx+xifO4w
+	H1mfwywzAr372u
+Message-ID: <4727C038.10002@gmx.net>
+Date: Wed, 31 Oct 2007 00:37:28 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-Date: Tue, 30 Oct 2007 15:52:35 -0700
-Message-ID: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: *Very* newbie question: OE and Cygwin?
-Thread-Index: AcgbR4/bbh81muynTmmZaS3WzoR0iA==
-From: "Tiller, Jason" <jtiller@sjm.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 30 Oct 2007 22:52:36.0160 (UTC)
-	FILETIME=[90893C00:01C81B47]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: *Very* newbie question: OE and Cygwin?
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: I want your autobuilder scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,82 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2007 23:04:53 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Tue, 30 Oct 2007 23:37:42 -0000
+X-Groupsio-MsgNum: 3255
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigDCC4A3C71F40D99AE1BFB6CD"
+
+--------------enigDCC4A3C71F40D99AE1BFB6CD
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi, All, :)
+Hi,
+at OEDEM it was my impression that several of you have working
+autobuilder setups for OpenEmbedded. Can I get the scripts that make
+that possible from somewhere?
 
-=20
-
-[Main question: Can I use OE on cygwin to target a PXA270-based board?]
-
-=20
-
-My name is Jason Tiller and I'm a software engineer at St. Jude
-
-Medical, a heart-related medical device company.  I'm the only
-
-software engineer in a division that builds high-intensity focused
-
-ultrasound cardiac ablation devices for the relief of atrial
-
-fibrillation.
-
-=20
-
-I'm evaluating a new microprocessor for a next-generation power
-
-generator.  We hope to use a linux kernel inside the instrument.  I'm
-
-using a Logic Devices PXA270-based Zoom eval board.  I saw on one of
-
-the LD boards that OE has support for this micro/board combination.
-
-I'd like to try OE to build a kernel and throw up some simple apps,
-
-but I have to do the host development in Windows, which means Cygwin.
-
-=20
-
-In fact, the LD SDK is built on cygwin - they provide pre-built win32
-
-gnu cross-tools that rely on cygwin apps.  I'm in the process of
-
-updating my Cygwin installation with all of the tools that the wiki
-
-(http://www.openembedded.org/wiki/RequiredSoftware) declares are
-
-required for OE.  Some of them aren't pre-built Cygwin packages
-
-(psyco, jade (but openjade is), sgmltools, docbook-utils, libsdl), but
-
-it looks like the really important ones are there.
-
-=20
-
-Should I expect a major headache in this effort?  My IT department is
-
-very cautious, and they won't certify my (desperately underpowered)
-
-Linux box for a net connection, so it's a lot easier to use my Windows
-
-box for development.
-
-=20
-
-Thanks for any heads up from a (hopefully) new OE user!
-
-=20
-
----Jason
-
-St. Jude Medical
-
-My product: http://tinyurl.com/e6gvq
-
-=20
+Regards
+Robert
 
 
+--------------enigDCC4A3C71F40D99AE1BFB6CD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHJ8A5G9cfwmwwEtoRCGWEAJ0dYsV0sBYoi0KJ/LwzTyDb040vtACffyXH
+pmGw0D0/NjZaAIIQyCRN2vk=
+=1nCY
+-----END PGP SIGNATURE-----
+
+--------------enigDCC4A3C71F40D99AE1BFB6CD--
