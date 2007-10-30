@@ -1,23 +1,25 @@
-Received: from [209.242.20.84] (helo=green.dls.net)
+Received: from [150.202.8.1] (helo=dc1gateway.sjm.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1ImzuI-0002u7-Rp
+	(envelope-from <jtiller@sjm.com>) id 1In08f-000322-RG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2007 23:49:59 +0100
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id D4BC24125C0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2007 17:30:17 -0500 (CDT)
-Message-ID: <10c701c81b44$549de860$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-References: <472799E6.5050007@gmx.net>
-Date: Tue, 30 Oct 2007 17:29:25 -0500
+	Wed, 31 Oct 2007 00:04:52 +0100
+Received: from USSYML02.ad.sjm.com ([150.202.22.59]) by dc1gateway.sjm.com
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Tue, 30 Oct 2007 15:52:36 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1807
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1896
-Subject: Re: fakeroot 1.7.1 not fetchable
+Date: Tue, 30 Oct 2007 15:52:35 -0700
+Message-ID: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: *Very* newbie question: OE and Cygwin?
+Thread-Index: AcgbR4/bbh81muynTmmZaS3WzoR0iA==
+From: "Tiller, Jason" <jtiller@sjm.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 30 Oct 2007 22:52:36.0160 (UTC)
+	FILETIME=[90893C00:01C81B47]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: *Very* newbie question: OE and Cygwin?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,78 +33,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2007 22:49:59 -0000
+X-List-Received-Date: Tue, 30 Oct 2007 23:04:53 -0000
+Content-class: urn:content-classes:message
 Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-fakeroot 1.7.1 was considered unstable when it was added to OE, but it
-worked better than the 1.5.x version for some newer distros.  I suspect the
-correct solution is to upgrade to the 1.8.x version.  Please open a bug so
-we can track this issue; I'll do a cursory test with the most recent 1.8.x
-version and commit a fix.
+Hi, All, :)
 
-Mike (mwester)
+=20
 
------ Original Message ----- 
-From: "Robert Schuster" <theBohemian@gmx.net>
-To: <openembedded-devel@lists.openembedded.org>
-Sent: Tuesday, October 30, 2007 3:53 PM
-Subject: [oe] fakeroot 1.7.1 not fetchable
+[Main question: Can I use OE on cygwin to target a PXA270-based board?]
 
+=20
 
-Hi,
-fakeroot 1.7.1's source cannot be fetched from debian mirrors. It is not
-available there. A short googling revealed that is available through
-gentoo's mirrors instead:
+My name is Jason Tiller and I'm a software engineer at St. Jude
 
-ftp://ftp.gentoo.org.ua/distfiles/fakeroot_1.7.1.tar.gz
+Medical, a heart-related medical device company.  I'm the only
 
-File a bug?
+software engineer in a division that builds high-intensity focused
 
-Regards
-Robert
+ultrasound cardiac ablation devices for the relief of atrial
 
+fibrillation.
 
+=20
 
-----------------------------------------------------------------------------
-----
+I'm evaluating a new microprocessor for a next-generation power
 
+generator.  We hope to use a linux kernel inside the instrument.  I'm
 
-#
-# old_revision [420247a040098c2b3bf47d7ef03fd8a8adbc70ee]
-#
-# patch "packages/fakeroot/fakeroot_1.7.1.bb"
-#  from [9671a1e7cbc80f1694a5f396598c05ac2f9f1269]
-#    to [3136d26e1e4100fa3f4bcca51f30a2b9c13cc37f]
-#
-============================================================
---- packages/fakeroot/fakeroot_1.7.1.bb
-9671a1e7cbc80f1694a5f396598c05ac2f9f1269
-+++ packages/fakeroot/fakeroot_1.7.1.bb
-3136d26e1e4100fa3f4bcca51f30a2b9c13cc37f
-@@ -5,7 +5,7 @@ PR = "r2"
- RDEPENDS = "util-linux"
- PR = "r2"
+using a Logic Devices PXA270-based Zoom eval board.  I saw on one of
 
--SRC_URI =
-"ftp://ftp.debian.org/debian/pool/main/f/fakeroot/fakeroot_${PV}.tar.gz \
-+SRC_URI = "ftp://ftp.gentoo.org.ua/distfiles/fakeroot_${PV}.tar.gz \
-            file://work-with-older-libtool.patch;patch=1"
+the LD boards that OE has support for this micro/board combination.
 
- inherit autotools
+I'd like to try OE to build a kernel and throw up some simple apps,
 
+but I have to do the host development in Windows, which means Cygwin.
 
+=20
 
-----------------------------------------------------------------------------
-----
+In fact, the LD SDK is built on cygwin - they provide pre-built win32
 
+gnu cross-tools that rely on cygwin apps.  I'm in the process of
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+updating my Cygwin installation with all of the tools that the wiki
 
+(http://www.openembedded.org/wiki/RequiredSoftware) declares are
+
+required for OE.  Some of them aren't pre-built Cygwin packages
+
+(psyco, jade (but openjade is), sgmltools, docbook-utils, libsdl), but
+
+it looks like the really important ones are there.
+
+=20
+
+Should I expect a major headache in this effort?  My IT department is
+
+very cautious, and they won't certify my (desperately underpowered)
+
+Linux box for a net connection, so it's a lot easier to use my Windows
+
+box for development.
+
+=20
+
+Thanks for any heads up from a (hopefully) new OE user!
+
+=20
+
+---Jason
+
+St. Jude Medical
+
+My product: http://tinyurl.com/e6gvq
+
+=20
 
 
