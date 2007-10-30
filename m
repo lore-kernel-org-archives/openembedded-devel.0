@@ -1,29 +1,23 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [68.230.240.47] (helo=eastrmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rod@whitby.id.au>) id 1InMtv-00029Z-NK
+	(envelope-from <ronanian@verizon.net>) id 1InQNr-0000LF-NP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Nov 2007 00:23:07 +0100
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 97D2B451C6
+	Thu, 01 Nov 2007 04:06:16 +0100
+Received: from eastrmimpo01.cox.net ([68.1.16.119]) by eastrmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20071030142750.IPEZ3771.eastrmmtao102.cox.net@eastrmimpo01.cox.net>
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2007 19:03:42 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute2.internal (MEProxy); Wed, 31 Oct 2007 19:03:42 -0400
-X-Sasl-enc: +IJz+uDqF9ZdJktdks+gYeyccbHSj55E2W+yk4TWZJbZ 1193871822
-Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id B43AE23A5A
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2007 19:03:41 -0400 (EDT)
-Message-ID: <472909CA.2090303@whitby.id.au>
-Date: Thu, 01 Nov 2007 09:33:38 +1030
-From: Rod Whitby <rod@whitby.id.au>
+	Tue, 30 Oct 2007 10:27:50 -0400
+Received: from [192.168.0.3] ([24.250.2.155])
+	by eastrmimpo01.cox.net with bizsmtp
+	id 6eTh1Y0063Lg6Yw0000000; Tue, 30 Oct 2007 10:27:41 -0400
+Message-ID: <47273F56.1080000@verizon.net>
+Date: Tue, 30 Oct 2007 10:27:34 -0400
+From: Rick Onanian <ronanian@verizon.net>
 User-Agent: Thunderbird 2.0.0.6 (Windows/20070728)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4727C038.10002@gmx.net>
-	<f96d234e0710311001p6d8c205fp6ecf8829bd8edf6c@mail.gmail.com>
-In-Reply-To: <f96d234e0710311001p6d8c205fp6ecf8829bd8edf6c@mail.gmail.com>
-Subject: Re: I want your autobuilder scripts
+Subject: [OT] Embedded Linux networking professionals?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,31 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2007 23:23:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 01 Nov 2007 03:06:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Cliff Brake wrote:
-> On 10/30/07, Robert Schuster <theBohemian@gmx.net> wrote:
->> Hi,
->> at OEDEM it was my impression that several of you have working
->> autobuilder setups for OpenEmbedded. Can I get the scripts that make
->> that possible from somewhere?
-> 
-> The build setup I use is:
-> https://dev.bec-systems.com/svn/oe/build
-> 
-> It is loosely based off the openmoko makefile (mostly just
-> documentation), and with a directory setup that allows me to build for
-> multiple machines, distros, OE trees, etc.
+Hi everyone,
 
-The MokoMakefile[1] and the nslu2-linux Master Makefile[2] are what I
-use.  Of course, using either of these will put you in the bad books of
-the OE elite  ;-)
+I used to be a significant part of The Linux Router Project / LEAF, and 
+enjoyed a little bit of grassroots embedded Linux work. Now in school, 
+I'm taking a course where I've been assigned to find someone doing my 
+"dream job" and ask them a few questions. I'm not sure what my "dream 
+job" would be, although I did just take a job as a network administrator 
+that I think I'm really going to like.
 
-[1]: http://svn.nslu2-linux.org/svnroot/mokomakefile/trunk/Makefile
-[2]: http://www.nslu2-linux.org/Makefile
+Since I can't interview myself, my next idea is to talk to someone who 
+works professionally with embedded Linux. Any volunteers? I can chat via 
+IM, IRC, email, phone, whatever.
 
--- Rod
+Thanks,
+ Rick Onanian
 
 
