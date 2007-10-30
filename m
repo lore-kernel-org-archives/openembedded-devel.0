@@ -1,23 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@haerwu.biz>) id 1ImswB-0006HQ-2O
-	for openembedded-devel@openembedded.org; Tue, 30 Oct 2007 16:23:27 +0100
-Received: (qmail 28980 invoked by uid 813007); 30 Oct 2007 15:23:21 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 30 Oct 2007 15:23:21 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Oct 2007 17:23:15 +0200
-User-Agent: KMail/1.9.7
-References: <bc64b4640710300320h63a90f80tc9ceca9d4340e994@mail.gmail.com>
-	<0ML31I-1ImoSa1Taq-0003f0@mrelayeu.kundenserver.de>
-	<bc64b4640710300452o2fee244dm45d14a5196ff34d7@mail.gmail.com>
-In-Reply-To: <bc64b4640710300452o2fee244dm45d14a5196ff34d7@mail.gmail.com>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <theBohemian@gmx.net>) id 1ImyW2-0001x2-GE
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Oct 2007 22:20:50 +0100
+Received: (qmail invoked by alias); 30 Oct 2007 20:54:02 -0000
+Received: from e178080251.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.80.251]
+	by mail.gmx.net (mp018) with SMTP; 30 Oct 2007 21:54:02 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19NEu8bUdJNMhy/JVAcekai7qVYrFwj3RThADwZ6j
+	R2s/HMxCUMMfJi
+Message-ID: <472799E6.5050007@gmx.net>
+Date: Tue, 30 Oct 2007 21:53:58 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-Message-Id: <200710301623.18648.openembedded@haerwu.biz>
-Subject: Re: Update Tosa kernel patches
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: fakeroot 1.7.1 not fetchable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,31 +32,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2007 15:23:27 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Tue, 30 Oct 2007 21:20:50 -0000
+X-Groupsio-MsgNum: 3251
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig0C37CCB6B616AA175FC931C4"
+
+--------------enig0C37CCB6B616AA175FC931C4
+Content-Type: multipart/mixed;
+ boundary="------------080806020402090907090602"
+
+--------------080806020402090907090602
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia wtorek, 30 pa=BCdziernika 2007, Dmitry Baryshkov napisa=B3:
-> Hi,
->
-> 2007/10/30, Dirk Opfer <dirk@do13.de>:
-> > thanks for the patch.
-> > I recently started working on refreshing the patches for 2.6.23. I'll
-> > integrate your patch.
->
-> Good news :)
+Hi,
+fakeroot 1.7.1's source cannot be fetched from debian mirrors. It is not
+available there. A short googling revealed that is available through
+gentoo's mirrors instead:
 
-I just merged that patchset into OE. Thx
+ftp://ftp.gentoo.org.ua/distfiles/fakeroot_1.7.1.tar.gz
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+File a bug?
 
-=46ixing apps to stop polling and thrashing the disk would be of more use=20
-than using 'gcc -OMG'
+Regards
+Robert
 
+--------------080806020402090907090602
+Content-Type: text/x-patch;
+ name="oe-fakeroot171-url-fix.diff"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline;
+ filename="oe-fakeroot171-url-fix.diff"
 
+#
+# old_revision [420247a040098c2b3bf47d7ef03fd8a8adbc70ee]
+#
+# patch "packages/fakeroot/fakeroot_1.7.1.bb"
+#  from [9671a1e7cbc80f1694a5f396598c05ac2f9f1269]
+#    to [3136d26e1e4100fa3f4bcca51f30a2b9c13cc37f]
+#
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+--- packages/fakeroot/fakeroot_1.7.1.bb	9671a1e7cbc80f1694a5f396598c05ac2=
+f9f1269
++++ packages/fakeroot/fakeroot_1.7.1.bb	3136d26e1e4100fa3f4bcca51f30a2b9c=
+13cc37f
+@@ -5,7 +5,7 @@ PR =3D "r2"
+ RDEPENDS =3D "util-linux"
+ PR =3D "r2"
+=20
+-SRC_URI =3D "ftp://ftp.debian.org/debian/pool/main/f/fakeroot/fakeroot_$=
+{PV}.tar.gz \
++SRC_URI =3D "ftp://ftp.gentoo.org.ua/distfiles/fakeroot_${PV}.tar.gz \
+            file://work-with-older-libtool.patch;patch=3D1"
+=20
+ inherit autotools
 
+--------------080806020402090907090602--
 
+--------------enig0C37CCB6B616AA175FC931C4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHJ5npG9cfwmwwEtoRCMAnAJ4o9TX2Xd/XK7FN57N1bflFrGJ03gCgjGDg
+Bg5vhIs/jl7GX9VrkLKlIoA=
+=Ax9W
+-----END PGP SIGNATURE-----
+
+--------------enig0C37CCB6B616AA175FC931C4--
