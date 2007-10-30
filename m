@@ -1,24 +1,27 @@
 Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <theBohemian@gmx.net>) id 1In0eU-0007qY-0f
+	(envelope-from <theBohemian@gmx.net>) id 1In0iX-0007sf-BY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2007 00:37:42 +0100
-Received: (qmail invoked by alias); 30 Oct 2007 23:37:34 -0000
+	Wed, 31 Oct 2007 00:41:53 +0100
+Received: (qmail invoked by alias); 30 Oct 2007 23:41:46 -0000
 Received: from e178080251.adsl.alicedsl.de (EHLO [192.168.4.101])
 	[85.178.80.251]
-	by mail.gmx.net (mp051) with SMTP; 31 Oct 2007 00:37:34 +0100
+	by mail.gmx.net (mp055) with SMTP; 31 Oct 2007 00:41:46 +0100
 X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+SLTBntZuSBe+jeoq+Y6yreTrXCs9pnBx+xifO4w
-	H1mfwywzAr372u
-Message-ID: <4727C038.10002@gmx.net>
-Date: Wed, 31 Oct 2007 00:37:28 +0100
+X-Provags-ID: V01U2FsdGVkX19YbZBa4V1YgeGq9y69hlD1QyZFZJ5gx6tsgFu+Qy
+	6a1tn+wS9Qt+IK
+Message-ID: <4727C139.1020606@gmx.net>
+Date: Wed, 31 Oct 2007 00:41:45 +0100
 From: Robert Schuster <theBohemian@gmx.net>
 User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
+References: <472799E6.5050007@gmx.net>
+	<10c701c81b44$549de860$6e01a8c0@twilight>
+In-Reply-To: <10c701c81b44$549de860$6e01a8c0@twilight>
 X-Enigmail-Version: 0.95.0
 X-Y-GMX-Trusted: 0
-Subject: I want your autobuilder scripts
+Subject: Re: fakeroot 1.7.1 not fetchable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,26 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2007 23:37:42 -0000
-X-Groupsio-MsgNum: 3255
+X-List-Received-Date: Tue, 30 Oct 2007 23:41:53 -0000
+X-Groupsio-MsgNum: 3256
 Content-Type: multipart/signed; micalg=pgp-sha256;
 	protocol="application/pgp-signature";
-	boundary="------------enigDCC4A3C71F40D99AE1BFB6CD"
+	boundary="------------enig1168CB1265EE3B9A7A7CAC94"
 
---------------enigDCC4A3C71F40D99AE1BFB6CD
-Content-Type: text/plain; charset=UTF-8
+--------------enig1168CB1265EE3B9A7A7CAC94
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-at OEDEM it was my impression that several of you have working
-autobuilder setups for OpenEmbedded. Can I get the scripts that make
-that possible from somewhere?
+Hi.
+
+> Please open a bug so
+> we can track this issue;
+Done[0].
+
+> I'll do a cursory test with the most recent 1.8.x
+> version and commit a fix.
+Thanks!
 
 Regards
 Robert
 
+[0] - http://bugs.openembedded.org/show_bug.cgi?id=3D3243
 
---------------enigDCC4A3C71F40D99AE1BFB6CD
+
+--------------enig1168CB1265EE3B9A7A7CAC94
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -60,9 +70,9 @@ Content-Disposition: attachment; filename="signature.asc"
 Version: GnuPG v1.4.6 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFHJ8A5G9cfwmwwEtoRCGWEAJ0dYsV0sBYoi0KJ/LwzTyDb040vtACffyXH
-pmGw0D0/NjZaAIIQyCRN2vk=
-=1nCY
+iD8DBQFHJ8E5G9cfwmwwEtoRCMo/AKCPkZapIWhTrchFQLGxmvEeSlb4gwCaA/uy
+b+QUXCe6dM7wpVi1KneqVZI=
+=maNZ
 -----END PGP SIGNATURE-----
 
---------------enigDCC4A3C71F40D99AE1BFB6CD--
+--------------enig1168CB1265EE3B9A7A7CAC94--
