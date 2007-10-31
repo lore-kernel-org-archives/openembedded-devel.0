@@ -1,31 +1,29 @@
-Received: from [89.96.204.112] (helo=www-zirak-new.zirak.it)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <filippo@zirak.it>) id 1InLYd-00012k-Rm
-	for openembedded-devel@openembedded.org; Wed, 31 Oct 2007 22:57:04 +0100
-Received: (qmail 15918 invoked by uid 64017); 31 Oct 2007 21:23:16 -0000
-Received: from 82.58.178.124 (filippo@zirak.it@82.58.178.124) by www-zirak-new
-	(envelope-from <filippo@zirak.it>,
-	uid 64011) with qmail-scanner-2.01 
-	(uvscan: v5.1.00/v5052. bogofilter: 0.92.0. spamassassin: 3.0.4.  
-	Clear:RC:1(82.58.178.124):. 
-	Processed in 0.011695 secs); 31 Oct 2007 21:23:16 -0000
-Received: from unknown (HELO ?192.168.1.6?) (filippo@zirak.it@82.58.178.124)
-	by www-zirak-new.zirak.it with SMTP; 31 Oct 2007 21:23:16 -0000
-Message-ID: <4728F3F0.3050108@zirak.it>
-Date: Wed, 31 Oct 2007 22:30:24 +0100
-From: Filippo Basso <filippo@zirak.it>
-User-Agent: IceDove 1.5.0.14pre (X11/20071020)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <rod@whitby.id.au>) id 1InMtv-00029Z-NK
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Nov 2007 00:23:07 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 97D2B451C6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Oct 2007 19:03:42 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Wed, 31 Oct 2007 19:03:42 -0400
+X-Sasl-enc: +IJz+uDqF9ZdJktdks+gYeyccbHSj55E2W+yk4TWZJbZ 1193871822
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id B43AE23A5A
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Oct 2007 19:03:41 -0400 (EDT)
+Message-ID: <472909CA.2090303@whitby.id.au>
+Date: Thu, 01 Nov 2007 09:33:38 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.6 (Windows/20070728)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <471FC1C0.4010103@linux.it>
-	<20071025001926.GA14645@lenovo>	<472047C3.20208@student.utwente.nl>
-	<20071025121153.GA8231@lenovo>	<f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>	<20071026134528.GA6182@lenovo>
-	<1193483219.6376.100.camel@toontown>	<20071027153928.GA6118@lenovo>
-	<4728747B.6020805@vollmann.ch>	<1193856210.6376.155.camel@toontown>
-	<20071031201202.GA32237@lenovo>
-In-Reply-To: <20071031201202.GA32237@lenovo>
-X-Enigmail-Version: 0.94.2.0
-Subject: Re: getting started - docbook
+References: <4727C038.10002@gmx.net>
+	<f96d234e0710311001p6d8c205fp6ecf8829bd8edf6c@mail.gmail.com>
+In-Reply-To: <f96d234e0710311001p6d8c205fp6ecf8829bd8edf6c@mail.gmail.com>
+Subject: Re: I want your autobuilder scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,41 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2007 21:57:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 31 Oct 2007 23:23:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
+Cliff Brake wrote:
+> On 10/30/07, Robert Schuster <theBohemian@gmx.net> wrote:
+>> Hi,
+>> at OEDEM it was my impression that several of you have working
+>> autobuilder setups for OpenEmbedded. Can I get the scripts that make
+>> that possible from somewhere?
+> 
+> The build setup I use is:
+> https://dev.bec-systems.com/svn/oe/build
+> 
+> It is loosely based off the openmoko makefile (mostly just
+> documentation), and with a directory setup that allows me to build for
+> multiple machines, distros, OE trees, etc.
 
-> chap 1 intro -15 pages
-> part 1 embedded device.  Review of the key components.  Will direct
-> the reader to other resources for more background.
->
-> part 2 distribution.  Review to the key components. Will direct the
-> reader to other resources for more background.
->
-> part 3 developing a distribution.  Very general overview of what is
-> involved in developing a distribution for a device.  Introduction into
-> how bb/oe can be used to develop a distro.
->
-> chap 2 getting started -25 pages
-> 1 install bb
-> 2 install oe
-> 3 configure
-> 4 build
-> 5 test
->
-> chap 3 bitbake tutorial - 20 pages
->
-> chap 4 Language specific details - ??
->
-> chap 5 standard libs/classes
-David, great work!!!
-your work looks really nice for the opensource community!
-I'll send you my .02€ on some points I'm investigating into... now I'm
-testing some basic point, independence on host system was a quite not
-simple problem for last weeks (about graph(viz)s manipulation still take
-some time to finish it...).
-phy
+The MokoMakefile[1] and the nslu2-linux Master Makefile[2] are what I
+use.  Of course, using either of these will put you in the bad books of
+the OE elite  ;-)
 
+[1]: http://svn.nslu2-linux.org/svnroot/mokomakefile/trunk/Makefile
+[2]: http://www.nslu2-linux.org/Makefile
+
+-- Rod
 
 
