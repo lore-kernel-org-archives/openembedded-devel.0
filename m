@@ -1,25 +1,25 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <tobias.pflug@gmx.net>) id 1InGWu-0001Mc-Bd
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2007 17:34:56 +0100
-Received: (qmail invoked by alias); 31 Oct 2007 16:34:45 -0000
-Received: from p549A8931.dip0.t-ipconnect.de (EHLO [192.168.1.100])
-	[84.154.137.49]
-	by mail.gmx.net (mp046) with SMTP; 31 Oct 2007 17:34:45 +0100
-X-Authenticated: #283898
-X-Provags-ID: V01U2FsdGVkX1+ZEWwiiM6ZnRdH3kjiVRniH7ircgMCrfWupOjylr
-	NXRSB7ozDM4PqX
-From: Tobias Pflug <tobias.pflug@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
-References: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
-Date: Wed, 31 Oct 2007 17:35:20 +0100
-Message-Id: <1193848520.6376.152.camel@toontown>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-X-Y-GMX-Trusted: 0
-Subject: Re: *Very* newbie question: OE and Cygwin?
+Received: from [194.158.229.90] (helo=smtp-auth-be-05.sunrise.ch)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <dv@vollmann.ch>) id 1InGb6-0001P0-6X
+	for openembedded-devel@openembedded.org; Wed, 31 Oct 2007 17:39:16 +0100
+Received: from [192.168.26.12] (212-98-43-140.static.adslpremium.ch
+	[212.98.43.140]) (authenticated bits=0)
+	by smtp-auth-be-05.sunrise.ch (8.13.1/8.13.5) with ESMTP id
+	l9VCP7pD000303; Wed, 31 Oct 2007 13:25:07 +0100
+Message-ID: <4728747B.6020805@vollmann.ch>
+Date: Wed, 31 Oct 2007 13:26:35 +0100
+From: Detlef Vollmann <dv@vollmann.ch>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.7.8) Gecko/20070113 Debian/1.7.8-1sarge10
+X-Accept-Language: en
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <471FC1C0.4010103@linux.it>
+	<20071025001926.GA14645@lenovo>	<472047C3.20208@student.utwente.nl>
+	<20071025121153.GA8231@lenovo>	<f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>	<20071026134528.GA6182@lenovo>
+	<1193483219.6376.100.camel@toontown> <20071027153928.GA6118@lenovo>
+In-Reply-To: <20071027153928.GA6118@lenovo>
+Subject: Re: getting started - docbook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,39 +33,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2007 16:34:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 Oct 2007 16:39:16 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
+David Farning wrote:
+> 1.1. Linux ................................................
+>       1.1.1. Linux Overview ...................
+>       1.1.2. Linux Arctoture ...................
+>       1.1.3. Linux Development Model..
+>       1.1.4. Linux Open Source..............
+> 1.2. Embedded Device ............................
+>       1.2.1. Device Architure..................
+>       1.2.2. Processor..............................
+>       1.2.3. Storage.................................
+>       1.2.4. Device..................................
+> 1.3. Linux Distribution............................
+>       1.3.1. Kernel ..................................
+>       1.3.2. Userspace.............................
+>       1.3.3. File System ..........................
+>       1.3.4. Updating ..............................
+> 1.4. System startup ..................................
+>       ...
+> 1.5. Host/Target .......................................
+>       ...
+> 1.6. Overview ..........................................
+> 1.7. History..............................................
 
-> 
-> Should I expect a major headache in this effort?  My IT department is
-> 
-> very cautious, and they won't certify my (desperately underpowered)
-> 
-> Linux box for a net connection, so it's a lot easier to use my Windows
-> 
-> box for development.
-> 
+This looks like a (more or less general) introduction to
+"Embedded Linux".
+No problems with that, but make sure not to confuse this with
+documentation on how to use OpenEmbedded.
 
-Without having ever tried it I'd say you might be in for some major
-troubles. Cygwin in general is in my opinion messy anyway, and running
-OE under a cygwin environment is not intended. You might end up running
-into problems that nobody else has.. and that would certainly be
-annoying. 
+I think there are two different targets for documentation:
+  1 - How to use OpenEmbedded
+  2 - What to build with OpenEmbedded
 
-I think If you want to run linux on some embedded device you really
-should have some proper linux based development machine as well. Also
-be aware that if your work environment is that picky you might have
-problems with the firewall when grabbing sources from various places.
-Also you might have to update OE from the monotone repistory sometimes 
-when there are important changes.. 
+There's always a need for both, but I think it's helpful
+to keep them separate (but probably reference each other).
 
-best of luck with your project anyway - the compulab board works fine
-I am using one myself at work.
+Your TOC for an introduction looks like documentation for 2.
 
-regards,
-Tobi
-
+   Detlef
 
 
