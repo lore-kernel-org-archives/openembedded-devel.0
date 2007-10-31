@@ -1,29 +1,22 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <tobias.pflug@gmx.net>) id 1InIWv-0002nr-Vm
+Received: from [209.85.198.191] (helo=rv-out-0910.google.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <cliff.brake@gmail.com>) id 1InIYA-0002on-QP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2007 19:43:06 +0100
-Received: (qmail invoked by alias); 31 Oct 2007 18:42:54 -0000
-Received: from p549A8931.dip0.t-ipconnect.de (EHLO [192.168.1.100])
-	[84.154.137.49]
-	by mail.gmx.net (mp036) with SMTP; 31 Oct 2007 19:42:54 +0100
-X-Authenticated: #283898
-X-Provags-ID: V01U2FsdGVkX18iUgN15aYi3uwb4UuEFNJNvEPe+FxdS7/gJgUf3T
-	i9O4eg+vamNYFA
-From: Tobias Pflug <tobias.pflug@gmx.net>
+	Wed, 31 Oct 2007 19:44:23 +0100
+Received: by rv-out-0910.google.com with SMTP id c24so201952rvf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Oct 2007 11:43:42 -0700 (PDT)
+Received: by 10.141.35.21 with SMTP id n21mr4048042rvj.1193849252617;
+	Wed, 31 Oct 2007 09:47:32 -0700 (PDT)
+Received: by 10.141.203.2 with HTTP; Wed, 31 Oct 2007 09:47:32 -0700 (PDT)
+Message-ID: <f96d234e0710310947jdf0c2bbh3fe6bf13a98b2644@mail.gmail.com>
+Date: Wed, 31 Oct 2007 12:47:32 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4728747B.6020805@vollmann.ch>
-References: <471FC1C0.4010103@linux.it> <20071025001926.GA14645@lenovo>
-	<472047C3.20208@student.utwente.nl> <20071025121153.GA8231@lenovo>
-	<f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>
-	<20071026134528.GA6182@lenovo> <1193483219.6376.100.camel@toontown>
-	<20071027153928.GA6118@lenovo>  <4728747B.6020805@vollmann.ch>
-Date: Wed, 31 Oct 2007 19:43:30 +0100
-Message-Id: <1193856210.6376.155.camel@toontown>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-X-Y-GMX-Trusted: 0
-Subject: Re: getting started - docbook
+In-Reply-To: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
+MIME-Version: 1.0
+References: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
+Subject: Re: *Very* newbie question: OE and Cygwin?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,59 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2007 18:43:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 Oct 2007 18:44:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+On 10/30/07, Tiller, Jason <jtiller@sjm.com> wrote:
 
-On Wed, 2007-10-31 at 13:26 +0100, Detlef Vollmann wrote:
-> David Farning wrote:
-> > 1.1. Linux ................................................
-> >       1.1.1. Linux Overview ...................
-> >       1.1.2. Linux Arctoture ...................
-> >       1.1.3. Linux Development Model..
-> >       1.1.4. Linux Open Source..............
-> > 1.2. Embedded Device ............................
-> >       1.2.1. Device Architure..................
-> >       1.2.2. Processor..............................
-> >       1.2.3. Storage.................................
-> >       1.2.4. Device..................................
-> > 1.3. Linux Distribution............................
-> >       1.3.1. Kernel ..................................
-> >       1.3.2. Userspace.............................
-> >       1.3.3. File System ..........................
-> >       1.3.4. Updating ..............................
-> > 1.4. System startup ..................................
-> >       ...
-> > 1.5. Host/Target .......................................
-> >       ...
-> > 1.6. Overview ..........................................
-> > 1.7. History..............................................
-> 
-> This looks like a (more or less general) introduction to
-> "Embedded Linux".
-> No problems with that, but make sure not to confuse this with
-> documentation on how to use OpenEmbedded.
-> 
-> I think there are two different targets for documentation:
->   1 - How to use OpenEmbedded
->   2 - What to build with OpenEmbedded
-> 
-> There's always a need for both, but I think it's helpful
-> to keep them separate (but probably reference each other).
-> 
-> Your TOC for an introduction looks like documentation for 2.
-> 
->    Detlef
-> 
+> [Main question: Can I use OE on cygwin to target a PXA270-based board?]
 
-Now that is /exactly/ what I was trying to say earlier, only you nailed
-it better on the spot. This TOC looks like information you can find in
-various books on embedded linux practices or linux kernel development in
-general.. What's actually lacking is *OE specific* information.
+I suspect you would be better off running Linux (ubuntu/debian, etc)
+on a vmware virtual machine.  I've not tried cygwin, but just based on
+the complexity of everything happening, it seems unlikely it will work
+without a lot of hassle.
 
-regards,
-Tobi
+> I'm evaluating a new microprocessor for a next-generation power
+> generator.  We hope to use a linux kernel inside the instrument.  I'm
+> using a Logic Devices PXA270-based Zoom eval board.  I saw on one of
+> the LD boards that OE has support for this micro/board combination.
+> I'd like to try OE to build a kernel and throw up some simple apps,
+> but I have to do the host development in Windows, which means Cygwin.
 
+Good luck with your project.
+
+Several of us have PXA270 Zoom boards.  The #oe irc channel on
+freenode is a good resource if you need help getting started.
+
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
