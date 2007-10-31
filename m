@@ -1,24 +1,25 @@
-Received: from [209.242.20.84] (helo=green.dls.net)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1In6lX-0004Cv-TY
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <tobias.pflug@gmx.net>) id 1InGWu-0001Mc-Bd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2007 07:09:24 +0100
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id 101CA412570
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2007 01:09:15 -0500 (CDT)
-Message-ID: <003301c81b84$86889470$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-References: <472799E6.5050007@gmx.net><10c701c81b44$549de860$6e01a8c0@twilight>
-	<4727C139.1020606@gmx.net>
-Date: Wed, 31 Oct 2007 01:08:58 -0500
-MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1914
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1914
-Subject: Re: fakeroot 1.7.1 not fetchable
+	Wed, 31 Oct 2007 17:34:56 +0100
+Received: (qmail invoked by alias); 31 Oct 2007 16:34:45 -0000
+Received: from p549A8931.dip0.t-ipconnect.de (EHLO [192.168.1.100])
+	[84.154.137.49]
+	by mail.gmx.net (mp046) with SMTP; 31 Oct 2007 17:34:45 +0100
+X-Authenticated: #283898
+X-Provags-ID: V01U2FsdGVkX1+ZEWwiiM6ZnRdH3kjiVRniH7ircgMCrfWupOjylr
+	NXRSB7ozDM4PqX
+From: Tobias Pflug <tobias.pflug@gmx.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
+References: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
+Date: Wed, 31 Oct 2007 17:35:20 +0100
+Message-Id: <1193848520.6376.152.camel@toontown>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.0 
+X-Y-GMX-Trusted: 0
+Subject: Re: *Very* newbie question: OE and Cygwin?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,20 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2007 06:09:24 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Wed, 31 Oct 2007 16:34:57 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Fakeroot has been upgraded to the latest version available from upstream
-(1.8.3).  It seems to work here (famous last words, no?), but this package
-has a history of being sensitive, so please take a moment to test.  Aside
-from the standard failures you might get when building fakeroot-native, the
-other typical failure mode has historically involved strange behavior such
-as directories and files being mixed up in the rootfs, and extremely odd
-failures when bitbake invokes mkjffs to make the image of the rootfs.
 
-Mike (mwester)
+> 
+> Should I expect a major headache in this effort?  My IT department is
+> 
+> very cautious, and they won't certify my (desperately underpowered)
+> 
+> Linux box for a net connection, so it's a lot easier to use my Windows
+> 
+> box for development.
+> 
+
+Without having ever tried it I'd say you might be in for some major
+troubles. Cygwin in general is in my opinion messy anyway, and running
+OE under a cygwin environment is not intended. You might end up running
+into problems that nobody else has.. and that would certainly be
+annoying. 
+
+I think If you want to run linux on some embedded device you really
+should have some proper linux based development machine as well. Also
+be aware that if your work environment is that picky you might have
+problems with the firewall when grabbing sources from various places.
+Also you might have to update OE from the monotone repistory sometimes 
+when there are important changes.. 
+
+best of luck with your project anyway - the compulab board works fine
+I am using one myself at work.
+
+regards,
+Tobi
 
 
 
