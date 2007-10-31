@@ -1,27 +1,22 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <theBohemian@gmx.net>) id 1In0iX-0007sf-BY
+Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1In3Pr-0006BF-Hg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2007 00:41:53 +0100
-Received: (qmail invoked by alias); 30 Oct 2007 23:41:46 -0000
-Received: from e178080251.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.80.251]
-	by mail.gmx.net (mp055) with SMTP; 31 Oct 2007 00:41:46 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19YbZBa4V1YgeGq9y69hlD1QyZFZJ5gx6tsgFu+Qy
-	6a1tn+wS9Qt+IK
-Message-ID: <4727C139.1020606@gmx.net>
-Date: Wed, 31 Oct 2007 00:41:45 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
-MIME-Version: 1.0
+	Wed, 31 Oct 2007 03:34:47 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so3087991waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Oct 2007 19:34:38 -0700 (PDT)
+Received: by 10.114.179.1 with SMTP id b1mr483704waf.1193794269495;
+	Tue, 30 Oct 2007 18:31:09 -0700 (PDT)
+Received: by 10.114.204.10 with HTTP; Tue, 30 Oct 2007 18:31:09 -0700 (PDT)
+Message-ID: <bdb0025f0710301831k63953094j71fa9b909dcc43a0@mail.gmail.com>
+Date: Tue, 30 Oct 2007 22:31:09 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <472799E6.5050007@gmx.net>
-	<10c701c81b44$549de860$6e01a8c0@twilight>
-In-Reply-To: <10c701c81b44$549de860$6e01a8c0@twilight>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: Re: fakeroot 1.7.1 not fetchable
+In-Reply-To: <4727B2EC.1000309@gmx.net>
+MIME-Version: 1.0
+References: <4727B2EC.1000309@gmx.net>
+Subject: Re: enforce armel for packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,44 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2007 23:41:53 -0000
-X-Groupsio-MsgNum: 3256
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig1168CB1265EE3B9A7A7CAC94"
-
---------------enig1168CB1265EE3B9A7A7CAC94
+X-List-Received-Date: Wed, 31 Oct 2007 02:34:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi.
+Hi,
 
-> Please open a bug so
-> we can track this issue;
-Done[0].
+I believe that you can try this:
 
-> I'll do a cursory test with the most recent 1.8.x
-> version and commit a fix.
-Thanks!
+DPKG_ARCH = "armel"
 
 Regards
-Robert
 
-[0] - http://bugs.openembedded.org/show_bug.cgi?id=3D3243
+On 10/30/07, Robert Schuster <theBohemian@gmx.net> wrote:
+> Hi,
+> on Debian-based distros ARM EABI is specified as architecture 'armel'.
+>
+> How can I instruct OE to produce packages that emit 'armel' as their
+> architecture?
+>
+> Regards
+> Robert
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+>
 
 
---------------enig1168CB1265EE3B9A7A7CAC94
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+-- 
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFHJ8E5G9cfwmwwEtoRCMo/AKCPkZapIWhTrchFQLGxmvEeSlb4gwCaA/uy
-b+QUXCe6dM7wpVi1KneqVZI=
-=maNZ
------END PGP SIGNATURE-----
-
---------------enig1168CB1265EE3B9A7A7CAC94--
