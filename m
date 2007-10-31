@@ -1,25 +1,26 @@
-Received: from [194.158.229.90] (helo=smtp-auth-be-05.sunrise.ch)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dv@vollmann.ch>) id 1InGb6-0001P0-6X
-	for openembedded-devel@openembedded.org; Wed, 31 Oct 2007 17:39:16 +0100
-Received: from [192.168.26.12] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140]) (authenticated bits=0)
-	by smtp-auth-be-05.sunrise.ch (8.13.1/8.13.5) with ESMTP id
-	l9VCP7pD000303; Wed, 31 Oct 2007 13:25:07 +0100
-Message-ID: <4728747B.6020805@vollmann.ch>
-Date: Wed, 31 Oct 2007 13:26:35 +0100
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.7.8) Gecko/20070113 Debian/1.7.8-1sarge10
-X-Accept-Language: en
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <theBohemian@gmx.net>) id 1InHC9-0001nO-07
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Oct 2007 18:17:33 +0100
+Received: (qmail invoked by alias); 31 Oct 2007 17:17:21 -0000
+Received: from e178072012.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.72.12]
+	by mail.gmx.net (mp037) with SMTP; 31 Oct 2007 18:17:21 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18BCdohtO0BhT6A1RKt/uM4+OFwKbW5qNW64MrscQ
+	q3p746932wEI3h
+Message-ID: <4728B89C.1040405@gmx.net>
+Date: Wed, 31 Oct 2007 18:17:16 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <471FC1C0.4010103@linux.it>
-	<20071025001926.GA14645@lenovo>	<472047C3.20208@student.utwente.nl>
-	<20071025121153.GA8231@lenovo>	<f96d234e0710251034s488b9c13me8c4d9731638a94e@mail.gmail.com>	<20071026134528.GA6182@lenovo>
-	<1193483219.6376.100.camel@toontown> <20071027153928.GA6118@lenovo>
-In-Reply-To: <20071027153928.GA6118@lenovo>
-Subject: Re: getting started - docbook
+To: openembedded-devel@lists.openembedded.org
+References: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
+In-Reply-To: <A0AACB011FF0474492071F3E72FB188F072045CD@USSYML02.ad.sjm.com>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: Re: *Very* newbie question: OE and Cygwin?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,47 +34,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2007 16:39:16 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 31 Oct 2007 17:17:33 -0000
+X-Groupsio-MsgNum: 3261
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig5DC31F57C9BC398999D4502A"
 
-David Farning wrote:
-> 1.1. Linux ................................................
->       1.1.1. Linux Overview ...................
->       1.1.2. Linux Arctoture ...................
->       1.1.3. Linux Development Model..
->       1.1.4. Linux Open Source..............
-> 1.2. Embedded Device ............................
->       1.2.1. Device Architure..................
->       1.2.2. Processor..............................
->       1.2.3. Storage.................................
->       1.2.4. Device..................................
-> 1.3. Linux Distribution............................
->       1.3.1. Kernel ..................................
->       1.3.2. Userspace.............................
->       1.3.3. File System ..........................
->       1.3.4. Updating ..............................
-> 1.4. System startup ..................................
->       ...
-> 1.5. Host/Target .......................................
->       ...
-> 1.6. Overview ..........................................
-> 1.7. History..............................................
+--------------enig5DC31F57C9BC398999D4502A
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-This looks like a (more or less general) introduction to
-"Embedded Linux".
-No problems with that, but make sure not to confuse this with
-documentation on how to use OpenEmbedded.
+Hi,
+if you gain some experience with OE on Cygwin it would be nice if you
+leave some of that in the Wiki regardless of whether it does not
+altogether or at least builts some simple packages.
 
-I think there are two different targets for documentation:
-  1 - How to use OpenEmbedded
-  2 - What to build with OpenEmbedded
+Regards
+Robert
 
-There's always a need for both, but I think it's helpful
-to keep them separate (but probably reference each other).
+Tiller, Jason schrieb:
+> Hi, All, :)
+>=20
+> =20
+>=20
+> [Main question: Can I use OE on cygwin to target a PXA270-based board?]=
 
-Your TOC for an introduction looks like documentation for 2.
+>=20
+> =20
+>=20
+> My name is Jason Tiller and I'm a software engineer at St. Jude
+>=20
+> Medical, a heart-related medical device company.  I'm the only
+>=20
+> software engineer in a division that builds high-intensity focused
+>=20
+> ultrasound cardiac ablation devices for the relief of atrial
+>=20
+> fibrillation.
+>=20
+> =20
+>=20
+> I'm evaluating a new microprocessor for a next-generation power
+>=20
+> generator.  We hope to use a linux kernel inside the instrument.  I'm
+>=20
+> using a Logic Devices PXA270-based Zoom eval board.  I saw on one of
+>=20
+> the LD boards that OE has support for this micro/board combination.
+>=20
+> I'd like to try OE to build a kernel and throw up some simple apps,
+>=20
+> but I have to do the host development in Windows, which means Cygwin.
+>=20
+> =20
+>=20
+> In fact, the LD SDK is built on cygwin - they provide pre-built win32
+>=20
+> gnu cross-tools that rely on cygwin apps.  I'm in the process of
+>=20
+> updating my Cygwin installation with all of the tools that the wiki
+>=20
+> (http://www.openembedded.org/wiki/RequiredSoftware) declares are
+>=20
+> required for OE.  Some of them aren't pre-built Cygwin packages
+>=20
+> (psyco, jade (but openjade is), sgmltools, docbook-utils, libsdl), but
+>=20
+> it looks like the really important ones are there.
+>=20
+> =20
+>=20
+> Should I expect a major headache in this effort?  My IT department is
+>=20
+> very cautious, and they won't certify my (desperately underpowered)
+>=20
+> Linux box for a net connection, so it's a lot easier to use my Windows
+>=20
+> box for development.
+>=20
+> =20
+>=20
+> Thanks for any heads up from a (hopefully) new OE user!
+>=20
+> =20
+>=20
+> ---Jason
+>=20
+> St. Jude Medical
+>=20
+> My product: http://tinyurl.com/e6gvq
+>=20
+> =20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
 
-   Detlef
 
 
+--------------enig5DC31F57C9BC398999D4502A
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHKLigG9cfwmwwEtoRCOzMAJ9JBXM4moKKhV4RKRVUCO6Am50i2wCeOwb8
+ohMH/IqojCjAEDI9X9HqrhQ=
+=N5oH
+-----END PGP SIGNATURE-----
+
+--------------enig5DC31F57C9BC398999D4502A--
