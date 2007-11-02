@@ -1,21 +1,20 @@
-Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <cliff.brake@gmail.com>) id 1InlEU-0005AN-Mm
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Nov 2007 02:21:59 +0100
-Received: by wa-out-1112.google.com with SMTP id l24so841702waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Nov 2007 18:21:38 -0700 (PDT)
-Received: by 10.115.15.1 with SMTP id s1mr1041466wai.1193947642726;
-	Thu, 01 Nov 2007 13:07:22 -0700 (PDT)
-Received: by 10.114.254.11 with HTTP; Thu, 1 Nov 2007 13:07:22 -0700 (PDT)
-Message-ID: <f96d234e0711011307y6d07604dg110d5c443ecb0e8f@mail.gmail.com>
-Date: Thu, 1 Nov 2007 16:07:22 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <8c7950360711010949u45bb12e7p388b4d5dc4563ef3@mail.gmail.com>
+	(envelope-from <philip@balister.org>) id 1InuOw-0002Nz-O3
+	for openembedded-devel@openembedded.org; Fri, 02 Nov 2007 12:09:22 +0100
+Received: (qmail 10034 invoked by uid 1003); 2 Nov 2007 11:09:00 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 2 Nov 2007 11:08:59 -0000
+Message-ID: <472B0543.5070203@balister.org>
+Date: Fri, 02 Nov 2007 07:08:51 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.5 (X11/20070727)
 MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <8c7950360711010949u45bb12e7p388b4d5dc4563ef3@mail.gmail.com>
+	<f96d234e0711011307y6d07604dg110d5c443ecb0e8f@mail.gmail.com>
+In-Reply-To: <f96d234e0711011307y6d07604dg110d5c443ecb0e8f@mail.gmail.com>
 Subject: Re: Overriding package config files in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,102 +29,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Nov 2007 01:21:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 02 Nov 2007 11:09:23 -0000
+X-Groupsio-MsgNum: 3274
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms050801080704030203030003"
+
+--------------ms050801080704030203030003
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-The issue described below is a very real problem for anyone doing
-one-off embedded work with OE where it does not make sense to push the
-changes into the main OE repository.  The basic requirement is to be
-able to localize config file changes for a build without duplicating
-entire packages in a bbcollections tree, or maintaining a separate OE
-mtn branch for each project.
+Cliff Brake wrote:
+> Another approach I've been thinking about is to figure out a way for
+> bitbake to use <files> from a tree outside the main OE tree.  One
+> possibility is for bitbake to pull <files> as well as bb files from a
+> high priority bbcollections tree, even though the bb remains in the
+> main OE tree.  This probably totally breaks the way bitbake works, but
 
-I'm not complaining as OE is clearly the _best_ way to build embedded
-Linux systems :-), but this is one area where OE could be improved to
-appeal to more embedded developers.
+I think that having an overlay set up as a high priority collection does 
+work. Steve S. uses one for his gumstix project. I like this method 
+because I can easily find all the local changes he makes and see if they 
+need to move back into .dev.
 
-Another approach I've been thinking about is to figure out a way for
-bitbake to use <files> from a tree outside the main OE tree.  One
-possibility is for bitbake to pull <files> as well as bb files from a
-high priority bbcollections tree, even though the bb remains in the
-main OE tree.  This probably totally breaks the way bitbake works, but
-...
+A local overlay lets you change the version of .dev underneath as 
+needed, without moving changes across branches. Combined with sane 
+source rev/dates, I believe this gives the people supporting product a 
+sane build/support environment.
 
-Cliff
+Philip
 
-On 11/1/07, shanevolpe@gmail.com <shanevolpe@gmail.com> wrote:
-> I  have quite a few config files I need to override with my own
-> customized files.  From what I have seen the most common way to do
-> this is to set up a local collection and use it in an overlay fashion
-> copying all the packages you wish to modify a config file for into the
-> local collection.
->  I do not like the above solution for several reasons, its a
-> documentation challenge to keep track of what packages you just
-> changed config files and what packages you may have added patches or
-> changed other things (compile/linker/EXTRA_OECONF).  It also presents
-> a challenge when you want to merge back into a later version of OE.
-> It also forces you to make duplicate machines with different names and
-> add in machine directories to the package directory containing the
-> unique configurations if you have the same hardware that may have
-> different options (configurations).  Also if you wish to field upgrade
-> a machine from one version to another (configuration) it would be, I
-> think, a challenge with the above method.
->
-> Since I'm not satisfied with the overlay option I have worked on a
-> different approach and is the real reason I'm posting this email as I
-> would like to get feedback, comments  and criticism to my approach,
-> please keep in mind that I do realize this approach is STILL a hack
-> but it is what I have been able to come up with in a short period of
-> time and currently I believe it to be more scalable than the overlay
-> and also easier to manage and document.
->
-> I made a separate package containing all my custom config files, I
-> will refer to it as configs.bb.  I did NOT flag them as config files
-> (CONFFILES).
->
-> I was then able to make an image.bb file as follows:
-> ##############################################################
-> EXTRA_IMAGEDEPENDS = "configs"
-> #RDEPENDS = ${PACKAGE_INSTALL}
-> RDEPENDS = "task-base"
->
-> PACKAGE_INSTALL = "${RDEPENDS} ${EXTRA_IMAGEDEPENDS}"
-> LICENSE = "LGPL"
-> PR = "r0"
-> IMAGE_BASENAME = "my-image"
-> IMAGE_ROOTFS = "${TMPDIR}/rootfs_myimage"
->
-> inherit image
-> ##############################################################
->
-> This seems to force my configs.bb to be installed into the rootfs
-> after all the other packages have been installed and since I did not
-> specify the files in configs.bb as configuration  files it overrides
-> all the config files of the already installed packages with out
-> causing ipkg to spit out questions on how to handle the config file
-> (update, keep current version, show diffs) and hanging up the image
-> building.
->
-> Also with this method if you do need to update config.bb you just need
-> to set -force-overwrite and if you update one of the packages you
-> overwrote a config file to, ipkg should prompt you with what you want
-> to do with the config file.
->
-> Regards,
-> Shane
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--------------ms050801080704030203030003
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
+OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
+65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
+X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
+tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
+szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
+nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
+U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
+ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
+HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
+dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
+RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
+rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
+6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
+Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MTEwMjEx
+MDg1MVowIwYJKoZIhvcNAQkEMRYEFOpYlvmdJ9X0IME7Jn0RwJAeItKKMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
+qTANBgkqhkiG9w0BAQEFAASCAQCXqgpF/9CGORJkteJMn391yz2pWIch2AUggGiIk4G3GTfyXASp
+IKF1k/hknF9hyqFcZfYUitDqxBpEnYDvQflVx4vhocSj6lEfnvPpMdYAs7fIIlIkgbw6ymXJMYuz
+RnqLNQ4uQdHmNJbrJbVuZlKEk0QwzkxeB/rxufxq02WzGpzzWK7zSAGBPNtPq9MCIrZUz7p2NnrZ
+xqAc8Tdc5poDS+MWlvlKE0rI3Bv7wlelmOivshFddaOWu0wItaZsnz++ZBVjPj4SmptwiFzzwmwn
+Xfyl1lsIFTO08kFSg0OdjSIsnYM+CyXE0RPGSEH3MXjPpNuIbYOTSKHNuzqtqiLOAAAAAAAA
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
-
-
+--------------ms050801080704030203030003--
