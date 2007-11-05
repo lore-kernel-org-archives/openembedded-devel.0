@@ -1,30 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Iookp-00067Q-Lp
-	for openembedded-devel@openembedded.org; Mon, 05 Nov 2007 00:19:44 +0100
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lA4NItUo022882 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Nov 2007 00:18:56 +0100
-Message-ID: <472E5362.8040909@student.utwente.nl>
-Date: Mon, 05 Nov 2007 00:18:58 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <mickey@vanille-media.de>) id 1IpAcZ-0007zT-HW
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Nov 2007 23:40:39 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 4380228C013; Mon,  5 Nov 2007 23:34:15 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: **
+X-Spam-Status: No, score=2.9 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180158197.adsl.alicedsl.de [85.180.158.197])
+	by srv043.dedi23.de (Postfix) with ESMTP id 2C92828C012;
+	Mon,  5 Nov 2007 23:34:12 +0100 (CET)
+Date: Mon, 5 Nov 2007 23:39:52 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <127929736.20071105233952@vanille-media.de>
+To: devrooms@fosdem.org
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1Ioitd-00024s-TQ@linuxtogo.org>
-	<200711042303.04292.openembedded@haerwu.biz>
-In-Reply-To: <200711042303.04292.openembedded@haerwu.biz>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	lA4NItUo022882
-Subject: Re: [oe-commits] org.oe.dev neod: add dependency to dbus-1
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: FOSDEM 2008: Call for Devrooms and Stands
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,68 +37,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Nov 2007 23:19:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Nov 2007 22:40:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On behalf of the OpenEmbedded team we would like to ask for a booth at
+FOSDEM 2008. Here is the relevant information as per your call for stands:
 
-Marcin Juszkiewicz schreef:
-> Dnia niedziela, 4 listopada 2007, mickeyl commit napisa=C5=82:
->=20
->> neod: add dependency to dbus-1
->>
->> Author: mickeyl@openembedded.org
->> Branch: org.openembedded.dev
->> Revision: dfbec4dce18c3885b36210c05ed69759ab6bf5b6
->=20
->> packages/openmoko2/neod_svn.bb	6cc80a4570dfd74c4eefe208b331a5b8c8d049a=
-f
->> packages/openmoko2/neod_svn.bb	92a5e00ba437275e36002f64963caa7aab304a1=
-7
->> @@ -1,7 +1,7 @@ DEPENDS =3D "gtk+ pulseaudio"
->>  DESCRIPTION =3D "Simple Neo1973 Daemon for Button Handling and Power=20
->>  Management" =20
->>  SECTION =3D "openmoko/daemons"=20
->>  DEPENDS =3D "gtk+ pulseaudio"
->> -RDEPENDS =3D "gpe-scap xrandr alsa-utils-amixer apm"
->> +RDEPENDS =3D "gpe-scap xrandr alsa-utils-amixer apm dbus-1"
->=20
-> Why such rdependency? If it does not use dbus libraries then it does no=
-t=20
-> need it. If it use them then it gets linked to it.
+> Project name
+OpenEmbedded
+ 
+> URL of the website of the project
+http://www.openembedded.org
 
-There are 2 cases[*] where you need to add RDEPENDS manually for such a
-thing:
+> Description of the project(s) (will be put on website when accepted)
+OpenEmbedded is a full-featured distribution build environment allowing users to
+target a wide variety of (embedded) devices. OpenEmbedded provides the
+infrastructure and technology to build embedded Linux distributions such as
+Angstrom, OpenMoko, OpenSlug, OpenZaurus, and many more.
+ 
+> Name of stand responsible and your role in the project:
+Michael 'Mickey' Lauer, co-founder and core team member.
 
-1) when using something like dlopen();
-2) when using something like system();
+> A short description of the activities you plan to do on your stand (demoing applications, handing out information or media, ...)
+We will show OpenEmbedded-built Linux on a variety of embedded devices,
+phones, PDAs, network routers, development boards, you name it. We
+will also hand out an information brochure.
+ 
+> Whether you would like 2 tables in stead of one, your motivation for the second one:
 
-neod uses option 2):
+Last year's appeareance was a big success and we had tons
+of interested people coming by to talk to us.
+In fact we had so many visitors that they sometimes blocked the
+hallway and made it a bit uncomfortable for the booths next to us. So,
+if we are to get a booth next year, it would be just great if it could
+be a tad bit larger than this year, i.e. two tables. That would also
+leave room for more of gadgets for visitors to play with ;)
 
-g_spawn_command_line_async( "dbus-send /org/freedesktop/PowerManagement
-org.freesmartphone.powermanagement.ChargerConnected", NULL );
+P.S. It would also be quite nice to have us near the Embedded room, since
+we share the same audience and then people could just go forth and
+backwards without having to walk too far.
 
-Apart from that adding 'dbus-1' breaks OE, you should use 'dbus'
-instead, OE will automagically convert that to 'dbus-1' when using
-debian.bbclass.
+Thanks for considering us.
 
-regards
+Regards,
 
-Koen
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
-[*] 2 cases I know off, but I'm not a coder
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD4DBQFHLlNTMkyGM64RGpERAmvMAKCWlwivubDR8TWvfOqzbpcaExPYogCWLjbY
-TPE9f5nPKNYLYILdMZiiTA=3D=3D
-=3DZdnm
------END PGP SIGNATURE-----
 
 
