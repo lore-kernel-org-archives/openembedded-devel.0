@@ -1,27 +1,27 @@
-Received: from [193.201.35.47] (helo=bq8.dotserv.com)
+Received: from [212.227.126.187] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <eha@doredevelopment.dk>) id 1IpMdJ-0003ve-Mt
-	for openembedded-devel@openembedded.org; Tue, 06 Nov 2007 12:30:16 +0100
-Received: from bq8.dotserv.com (localhost [127.0.0.1])
-	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id lA6BJ0Pe011069
-	for <openembedded-devel@openembedded.org>;
-	Tue, 6 Nov 2007 12:19:00 +0100
-Received: (from apache@localhost)
-	by bq8.dotserv.com (8.13.1/8.13.1/Submit) id lA6BJ0EA011066;
-	Tue, 6 Nov 2007 12:19:00 +0100
-X-Authentication-Warning: bq8.dotserv.com: apache set sender to
-	eha@doredevelopment.dk using -f
-To: openembedded-devel@openembedded.org
+	(envelope-from <Fischer@4g-systems.com>) id 1IpPYQ-000249-Pb
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Nov 2007 15:37:22 +0100
+Received: from dehamox1a.intra.4g-systems.com ([213.238.49.68])
+	by mrelayeu.kundenserver.de (node=mrelayeu6) with ESMTP (Nemesis)
+	id 0ML29c-1IpPAZ27l7-0006X8; Tue, 06 Nov 2007 15:12:43 +0100
+Received: from deham-pc1070.intra.4g-systems.com
+	(deham-pc1070.intra.4g-systems.com [172.31.20.70])
+	by dehamox1a.intra.4g-systems.com (Postfix) with ESMTP id 4532B610B32
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  6 Nov 2007 15:12:43 +0100 (CET)
+From: Patrick Fischer <Fischer@4g-systems.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 6 Nov 2007 15:12:40 +0100
+User-Agent: KMail/1.9.6
 MIME-Version: 1.0
-Date: Tue, 6 Nov 2007 12:19:00 +0100
-From: Esben Haabendal <eha@doredevelopment.dk>
-Organization: =?UTF-8?Q?Dor=C3=A9_Development_ApS?=
-Message-ID: <deb87fbca36a04509dc0b6893bca86ec@127.0.0.1>
-X-Sender: eha@doredevelopment.dk
-User-Agent: RoundCube Webmail/0.1b
-X-MIME-Autoconverted: from 8bit to quoted-printable by bq8.dotserv.com id
-	lA6BJ0Pe011069
-Subject: Why not use config.guess in conf/bitbake.conf ?
+Message-Id: <200711061512.40289.Fischer@4g-systems.com>
+X-Provags-ID: V01U2FsdGVkX1/tGkzKbe7oIswr+xet85ofT+A30Ur0O7CU73J
+	7uEXeiUY2aIoNEz6DyIydBD39DVUsH+3NPOSKKdkv3rWXpQT05
+	qAphxRuh4YWGIdUoHSfYTwGCYkrXR2O
+Subject: tiny samba
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,54 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Nov 2007 11:30:19 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 Nov 2007 14:37:23 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+Hello OE.
+I would like to create an tiny samba server just to share files for a windows 
+clients.
+A full samba is overkill. (don't need LDAP, Usermanagment,....)
 
-What is the reason that conf/bitbake.conf is relying directly on the 'una=
-me' output for generating the BUILD_SYS string?
+Is there a tiny samba bb or any idea how to create a mini smb server?
 
-I am trying to get OE building on Cygwin, and on my machine bitbake.conf =
-generates a BUILD_SYS that is not supported by config.sub, which breaks a=
- autotools packages.
+Best regards
 
-$ uname -a
-CYGWIN_NT-5.1 PC_K_EHA 1.5.24(0.156/4/2) 2007-01-31 10:57 i686 Cygwin
-
-As bitbake.conf takes the first field as BUILD_OS, and the 5th field as B=
-UILD_ARCH and then set BUILD_SYS to ${BUILD_ARCH}-${BUILD_OS} I end up wi=
-th
-i686-cygwin_nt-5.1
-which breaks config.sub due to the '-' in the os string.
-
-Using a current config.guess on this system, I get
-i686-pc-cygwin
-which is fine.
-On my laptop (running gutsy) it would give me a BUILD_SYS
-i686-pc-linux-gnu
-
-Another workaround is to use the last field (also output from 'uname -o')=
- as BUILD_OS which give
-i686-cygwin
-On my laptop (still running gutsy) it would also give me a BUILD_SYS
-i686-pc-linux-gnu
-
-To keep paths short and nice, I can see it would be prefereable to end up=
- with i686-cygwin and i686-linux.
-On the other hand, using the output from config.guess migt warrant some m=
-ore consistency.
-
-Anyway, the current solution just don't work for cygwin, so I would like =
-to hear what kind of solution would fit OE the best.
-
-P.S. No, I cannot just use coLinux.
-
-/Esben
---=20
-Esben Haabendal
-Embedded Software Consultant
-Dor=C3=A9 Development ApS
-
+Patrick Fischer
 
 
