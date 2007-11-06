@@ -1,29 +1,31 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [85.10.209.111] (helo=mail.road.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1IpAcZ-0007zT-HW
+	(envelope-from <u.luckas@road.de>) id 1IpLIw-0002l8-CC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Nov 2007 23:40:39 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 4380228C013; Mon,  5 Nov 2007 23:34:15 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.9 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180158197.adsl.alicedsl.de [85.180.158.197])
-	by srv043.dedi23.de (Postfix) with ESMTP id 2C92828C012;
-	Mon,  5 Nov 2007 23:34:12 +0100 (CET)
-Date: Mon, 5 Nov 2007 23:39:52 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <127929736.20071105233952@vanille-media.de>
-To: devrooms@fosdem.org
+	Tue, 06 Nov 2007 11:05:06 +0100
+Received: from slimfast.dyndns.org (unknown [192.168.254.1])
+	by mail.road.de (Postfix) with ESMTP id 973E68F004D;
+	Tue,  6 Nov 2007 10:48:16 +0100 (CET)
+Received: from localhost.localdomain (ulitu.handy-pc.constin.de
+	[192.168.116.44])
+	by slimfast.dyndns.org (Postfix) with ESMTP id 802ADB0C1D8;
+	Tue,  6 Nov 2007 10:48:16 +0100 (CET)
+Received: from ip6-localhost (unknown [IPv6:::1])
+	by localhost.localdomain (Postfix) with ESMTP id 3F249D985AD;
+	Tue,  6 Nov 2007 10:48:16 +0100 (CET)
+From: Uli Luckas <u.luckas@road.de>
+To: "Hans Henry von Tresckow" <hvontres@gmail.com>
+Date: Tue, 6 Nov 2007 10:48:13 +0100
+User-Agent: KMail/1.9.7
+References: <a7f8874a0709212103h126eeea7y751fa5fd4256fb20@mail.gmail.com>
+	<200710192235.46408.luckas@musoft.de>
+	<a7f8874a0711020748mc1b9a55sf3f97b6b55a1e455@mail.gmail.com>
+In-Reply-To: <a7f8874a0711020748mc1b9a55sf3f97b6b55a1e455@mail.gmail.com>
+Organization: Road GmbH
 MIME-Version: 1.0
+Message-Id: <200711061048.14567.u.luckas@road.de>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: FOSDEM 2008: Call for Devrooms and Stands
+Subject: Re: RFC: Kexec Cmdline Support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,54 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Nov 2007 22:40:39 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 06 Nov 2007 10:05:06 -0000
+Content-Type: text/plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On behalf of the OpenEmbedded team we would like to ask for a booth at
-FOSDEM 2008. Here is the relevant information as per your call for stands:
+On Friday, 2. November 2007, Hans Henry von Tresckow wrote:
+> Uli,
+> Any luck getting that patch put together? I would really love to start
+> testing this soon :)
+Henry,
+My schedule is a lot tighter than I thought it would be. I'll try to find a 
+time slot during this week. If that does not work out I'll take my spare time 
+this weekend.
 
-> Project name
-OpenEmbedded
- 
-> URL of the website of the project
-http://www.openembedded.org
+Uli
 
-> Description of the project(s) (will be put on website when accepted)
-OpenEmbedded is a full-featured distribution build environment allowing users to
-target a wide variety of (embedded) devices. OpenEmbedded provides the
-infrastructure and technology to build embedded Linux distributions such as
-Angstrom, OpenMoko, OpenSlug, OpenZaurus, and many more.
- 
-> Name of stand responsible and your role in the project:
-Michael 'Mickey' Lauer, co-founder and core team member.
-
-> A short description of the activities you plan to do on your stand (demoing applications, handing out information or media, ...)
-We will show OpenEmbedded-built Linux on a variety of embedded devices,
-phones, PDAs, network routers, development boards, you name it. We
-will also hand out an information brochure.
- 
-> Whether you would like 2 tables in stead of one, your motivation for the second one:
-
-Last year's appeareance was a big success and we had tons
-of interested people coming by to talk to us.
-In fact we had so many visitors that they sometimes blocked the
-hallway and made it a bit uncomfortable for the booths next to us. So,
-if we are to get a booth next year, it would be just great if it could
-be a tad bit larger than this year, i.e. two tables. That would also
-leave room for more of gadgets for visitors to play with ;)
-
-P.S. It would also be quite nice to have us near the Embedded room, since
-we share the same audience and then people could just go forth and
-backwards without having to walk too far.
-
-Thanks for considering us.
-
-Regards,
-
-:M:
 -- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
+------- ROAD ...the handyPC Company - - -  ) ) )
+
+Uli Luckas
+Software Development
+
+ROAD GmbH
+Bennigsenstr. 14 | 12159 Berlin | Germany
+fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
+url: www.road.de
+
+Amtsgericht Charlottenburg: HRB 96688 B
+Managing directors: Hans-Peter Constien, Hubertus von Streit
 
 
