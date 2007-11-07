@@ -1,24 +1,21 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1IplIm-0001U6-Cw
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Nov 2007 14:50:41 +0100
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=[192.168.2.131]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1IplHw-0008Bp-CZ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Nov 2007 14:49:48 +0100
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <9726e5bab4d4cea59c08c70dbf3d05cc@127.0.0.1>
-References: <1EF150F3-338E-469F-8AA4-7816799D3F55@selfish.org>
-	<9726e5bab4d4cea59c08c70dbf3d05cc@127.0.0.1>
-Message-Id: <DE6B0634-36EB-4700-922E-7786BCA99F64@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Wed, 7 Nov 2007 14:49:39 +0100
+	(envelope-from <openembedded@haerwu.biz>) id 1Iplaa-0001lO-0n
+	for openembedded-devel@openembedded.org; Wed, 07 Nov 2007 15:09:05 +0100
+Received: (qmail 29241 invoked by uid 813007); 7 Nov 2007 14:08:11 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 7 Nov 2007 14:08:10 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-Subject: Re: Why not use config.guess in conf/bitbake.conf ?
+Date: Wed, 7 Nov 2007 15:07:51 +0100
+User-Agent: KMail/1.9.7
+References: <20071107112319.GA20128@thegnar.org>
+In-Reply-To: <20071107112319.GA20128@thegnar.org>
+MIME-Version: 1.0
+Message-Id: <200711071507.52756.openembedded@haerwu.biz>
+Subject: Re: fectch checker task?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,24 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2007 13:50:44 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 07 Nov 2007 14:09:10 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-
-Am 07.11.2007 um 08:30 schrieb Esben Haabendal:
-
-> Ah, nice approach. Didn't notice that.
+Dnia =B6roda, 7 listopada 2007, mark gross napisa=B3:
+> would it be easy to create a task to do a quick sanity check on all the
+> packages that need to be downloaded for a build?  The linear search for
+> busted fetch calls is quite irritating.
 >
-> But.... this file will be included after
->  * build-${BUILD_OS} is added to OVERRIDES
->  * STAGING_DIR_NATIVE is set to ${STAGING_DIR}/${BUILD_SYS}
+> What would such a task look like?
+> Is there a way to pass a parameter to the target to just do the fetch
+> step?
 
-Consult your bitbake manual. The variables are not expanded at this  
-time, at least they shouldn't. Do they get expanded for you? And when?
+You mean "bitbake -cfetchall BUILD_TARGET"? This will fetch everything=20
+needed to build BUILD_TARGET.
 
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-z.
+as it is Free Software, it is done when enough people helped to make it=20
+done
+
 
 
 
