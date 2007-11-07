@@ -1,17 +1,28 @@
-Received: from [71.117.236.31] (helo=desktop)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <markgross@thegnar.org>) id 1IpjT7-00088w-13
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Nov 2007 12:53:13 +0100
-Received: by desktop (Postfix, from userid 1000)
-	id 4BA232292D9; Wed,  7 Nov 2007 03:23:18 -0800 (PST)
-Date: Wed, 7 Nov 2007 03:23:19 -0800
-From: mark gross <markgross@thegnar.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071107112319.GA20128@thegnar.org>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IpkUP-0004n4-2A
+	for openembedded-devel@openembedded.org; Wed, 07 Nov 2007 13:58:37 +0100
+Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lA7CvaUo018734 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 7 Nov 2007 13:57:36 +0100
+Message-ID: <4731B63E.6030806@student.utwente.nl>
+Date: Wed, 07 Nov 2007 13:57:34 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
-Subject: fectch checker task?
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <E1IpXlZ-0004u8-1Y@linuxtogo.org>
+	<74d0deb30711070226u29479070te5f20880b1616aac@mail.gmail.com>
+In-Reply-To: <74d0deb30711070226u29479070te5f20880b1616aac@mail.gmail.com>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev rm_work: only remove ${S}, leave temp and install alone
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -25,38 +36,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2007 11:53:13 -0000
-X-Groupsio-MsgNum: 3295
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lrZ03NoBR/3+SXJZ"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Nov 2007 12:58:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---lrZ03NoBR/3+SXJZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-would it be easy to create a task to do a quick sanity check on all the
-packages that need to be downloaded for a build?  The linear search for
-busted fetch calls is quite irritating.
+pHilipp Zabel schreef:
+> On 11/7/07, koen commit <openembedded-commits@lists.openembedded.org> wrote:
+>> rm_work: only remove ${S}, leave temp and install alone
+> 
+> Why? Leaving image/ and install/ alone seriously decreases rm_work's
+> space saving powers.
 
-What would such a task look like?
-Is there a way to pass a parameter to the target to just do the fetch
-step?
+It does, but it's needed for our new packaged-staging frameworks, and I
+did mention this change two weeks ago (20071027) on oe-devel ml and
+noone objected[*].
 
---mgross
+regards,
 
+Koen
 
---lrZ03NoBR/3+SXJZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
+[*] read: "no response at all", which I have started interpreting as
+"You rock! Go ahead!".
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFHMaAnhK5OsmQOmSARAq0FAJ4tegLNHZUYdS3WHkEt4kWhuPtwqwCfSbYB
-lqi1mTt8Fkok/R56AkSxMxc=
-=5u+Y
+iD8DBQFHMbY+MkyGM64RGpERApexAKCRIz4+80Nzpt/ZNW8rxcl60EY79ACgmnkn
+xKsYIEY/eMwOOV4YaPxmWxE=
+=+lnU
 -----END PGP SIGNATURE-----
 
---lrZ03NoBR/3+SXJZ--
+
