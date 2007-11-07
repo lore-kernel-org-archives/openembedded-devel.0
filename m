@@ -1,27 +1,29 @@
-Received: from [64.233.170.185] (helo=rn-out-0102.google.com)
+Received: from [193.201.35.47] (helo=bq8.dotserv.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <hvontres@gmail.com>) id 1IpTwa-0005rq-Hs
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Nov 2007 20:18:38 +0100
-Received: by rn-out-0102.google.com with SMTP id e24so857021rng
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Nov 2007 11:17:48 -0800 (PST)
-Received: by 10.142.157.15 with SMTP id f15mr1338871wfe.1194370874372;
-	Tue, 06 Nov 2007 09:41:14 -0800 (PST)
-Received: by 10.143.11.12 with HTTP; Tue, 6 Nov 2007 09:41:14 -0800 (PST)
-Message-ID: <a7f8874a0711060941o1bb95492p53ea562049cf104@mail.gmail.com>
-Date: Tue, 6 Nov 2007 09:41:14 -0800
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
-To: "Uli Luckas" <u.luckas@road.de>
-In-Reply-To: <200711061048.14567.u.luckas@road.de>
+	(envelope-from <eha@doredevelopment.dk>) id 1IpfNn-0001sV-N2
+	for openembedded-devel@openembedded.org; Wed, 07 Nov 2007 08:31:27 +0100
+Received: from bq8.dotserv.com (localhost [127.0.0.1])
+	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id lA77UbhK005809
+	for <openembedded-devel@openembedded.org>;
+	Wed, 7 Nov 2007 08:30:37 +0100
+Received: (from apache@localhost)
+	by bq8.dotserv.com (8.13.1/8.13.1/Submit) id lA77Ub97005805;
+	Wed, 7 Nov 2007 08:30:37 +0100
+X-Authentication-Warning: bq8.dotserv.com: apache set sender to
+	eha@doredevelopment.dk using -f
+To: openembedded-devel@openembedded.org
 MIME-Version: 1.0
-References: <a7f8874a0709212103h126eeea7y751fa5fd4256fb20@mail.gmail.com>
-	<200710192235.46408.luckas@musoft.de>
-	<a7f8874a0711020748mc1b9a55sf3f97b6b55a1e455@mail.gmail.com>
-	<200711061048.14567.u.luckas@road.de>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: Kexec Cmdline Support
+Date: Wed, 7 Nov 2007 08:30:37 +0100
+From: Esben Haabendal <eha@doredevelopment.dk>
+Organization: =?UTF-8?Q?Dor=C3=A9_Development_ApS?=
+In-Reply-To: <1EF150F3-338E-469F-8AA4-7816799D3F55@selfish.org>
+References: <1EF150F3-338E-469F-8AA4-7816799D3F55@selfish.org>
+Message-ID: <9726e5bab4d4cea59c08c70dbf3d05cc@127.0.0.1>
+X-Sender: eha@doredevelopment.dk
+User-Agent: RoundCube Webmail/0.1b
+X-MIME-Autoconverted: from 8bit to quoted-printable by bq8.dotserv.com id
+	lA77UbhK005809
+Subject: Re: Why not use config.guess in conf/bitbake.conf ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,32 +37,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Nov 2007 19:18:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-On 11/6/07, Uli Luckas <u.luckas@road.de> wrote:
->
-> On Friday, 2. November 2007, Hans Henry von Tresckow wrote:
-> > Uli,
-> > Any luck getting that patch put together? I would really love to start
-> > testing this soon :)
-> Henry,
-> My schedule is a lot tighter than I thought it would be. I'll try to find
-> a
-> time slot during this week. If that does not work out I'll take my spare
-> time
-> this weekend.
->
-> Uli
->
-> --
->
-> No problem. I have a couple of other things to get done as well. So take
-your time and enjoy your weekend...:)
+X-List-Received-Date: Wed, 07 Nov 2007 07:31:28 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
 
--- 
-Henry von Tresckow (hvontres)
+On Tue, 6 Nov 2007 17:06:48 +0100, Holger Freyther <zecke@selfish.org> wr=
+ote:
+>=20
+> Am 06.11.2007 um 12:19 schrieb Esben Haabendal:
+>>
+>> What is the reason that conf/bitbake.conf is relying directly on
+>> the 'uname' output for generating the BUILD_SYS string?
+>>
+>> I am trying to get OE building on Cygwin, and on my machine
+>> bitbake.conf generates a BUILD_SYS that is not supported by
+>> config.sub, which breaks a autotools packages.
+>>
+>> $ uname -a
+>> CYGWIN_NT-5.1 PC_K_EHA 1.5.24(0.156/4/2) 2007-01-31 10:57 i686 Cygwin
+>>
+>> As bitbake.conf takes the first field as BUILD_OS, and the 5th
+>> field as BUILD_ARCH and then set BUILD_SYS to ${BUILD_ARCH}-$
+>> {BUILD_OS} I end up with
+>> i686-cygwin_nt-5.1
+>> which breaks config.sub due to the '-' in the os string.
+>>
+>> Using a current config.guess on this system, I get
+>> i686-pc-cygwin
+>> which is fine.
+>> On my laptop (running gutsy) it would give me a BUILD_SYS
+>> i686-pc-linux-gnu
+>=20
+> A sane OS does return something sane on uname. But e.g. check  build/
+> Power\ Macintosh-darwin.conf on what can be done for none sane
+> operating systems... So create your file for cygwin and send a patch ;)
+
+Ah, nice approach. Didn't notice that.
+
+But.... this file will be included after
+ * build-${BUILD_OS} is added to OVERRIDES
+ * STAGING_DIR_NATIVE is set to ${STAGING_DIR}/${BUILD_SYS}
+
+So these will still be set to non-sane values, although the ${BUILD_OS} a=
+nd ${BUILD_SYS} values will be sane.
+
+Wouldn't it make more sense to include conf/build/${BUILD_SYS}.conf right=
+ after constructing ${BUILD_SYS} from uname?  At least for now, it is not=
+ used for anything else than altering these values.
+
+/Esben
+--=20
+Esben Haabendal
+Embedded Software Consultant
+Dor=C3=A9 Development ApS
+
+
 
