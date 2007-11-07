@@ -1,29 +1,24 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [66.249.82.237] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1Iptv5-00057b-1s
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Ipy2G-0003ir-SY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Nov 2007 00:02:47 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 4FBDC28C013; Wed,  7 Nov 2007 23:56:06 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.6 required=5.0 tests=AWL,BAYES_05,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180185080.adsl.alicedsl.de [85.180.185.80])
-	by srv043.dedi23.de (Postfix) with ESMTP id B542D28C012
+	Thu, 08 Nov 2007 04:26:29 +0100
+Received: by wx-out-0506.google.com with SMTP id h27so30994wxd
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Nov 2007 23:56:03 +0100 (CET)
-Date: Thu, 8 Nov 2007 00:01:47 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <92979550.20071108000147@vanille-media.de>
+	Wed, 07 Nov 2007 19:25:33 -0800 (PST)
+Received: by 10.90.104.14 with SMTP id b14mr5615782agc.1194472237044;
+	Wed, 07 Nov 2007 13:50:37 -0800 (PST)
+Received: by 10.90.66.15 with HTTP; Wed, 7 Nov 2007 13:50:36 -0800 (PST)
+Message-ID: <c384c5ea0711071350i5533901cuf22da42e78b25dfb@mail.gmail.com>
+Date: Wed, 7 Nov 2007 22:50:36 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4731B63E.6030806@student.utwente.nl>
 MIME-Version: 1.0
-Subject: Cultural Shock
+References: <E1IpXlZ-0004u8-1Y@linuxtogo.org>
+	<74d0deb30711070226u29479070te5f20880b1616aac@mail.gmail.com>
+	<4731B63E.6030806@student.utwente.nl>
+Subject: Re: [oe-commits] org.oe.dev rm_work: only remove ${S}, leave temp and install alone
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,23 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2007 23:02:48 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 08 Nov 2007 03:26:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi guys,
+Hello Koen,
 
-did my first build on a new machine+distribution -- previously Mandriva
-on a Dual Xeon, now Ubuntu Gutsy on an Intel Core Duo 2 [x86_64].
-bitbake openmoko-image went straight through. No x86_64 madness, no
-problems with /bin/sh -> dash.
+On 11/7/07, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> pHilipp Zabel schreef:
+> > On 11/7/07, koen commit <openembedded-commits@lists.openembedded.org> wrote:
+> >> rm_work: only remove ${S}, leave temp and install alone
+> > Why? Leaving image/ and install/ alone seriously decreases rm_work's
+> > space saving powers.
+> It does, but it's needed for our new packaged-staging frameworks, and I
+> did mention this change two weeks ago (20071027) on oe-devel ml and
+> noone objected[*].
+> Koen
+>
+> [*] read: "no response at all", which I have started interpreting as
+> "You rock! Go ahead!".
+>
+You rock! Go ahead!
 
-I'm excited -- it just works.
+Disk space: $1/GB
+Packaged staging: priceless :-)
 
-Thanks,
+Regards,
 
-Mickey.
-
-
+Leon.
 
 
