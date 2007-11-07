@@ -1,25 +1,29 @@
-Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dfarning@gmail.com>) id 1IpsZZ-0007q1-8y
+	(envelope-from <mickey@vanille-media.de>) id 1Iptv5-00057b-1s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Nov 2007 22:36:30 +0100
-Received: by wx-out-0506.google.com with SMTP id h27so2249994wxd
+	Thu, 08 Nov 2007 00:02:47 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 4FBDC28C013; Wed,  7 Nov 2007 23:56:06 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.6 required=5.0 tests=AWL,BAYES_05,RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180185080.adsl.alicedsl.de [85.180.185.80])
+	by srv043.dedi23.de (Postfix) with ESMTP id B542D28C012
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Nov 2007 13:35:34 -0800 (PST)
-Received: by 10.101.67.11 with SMTP id u11mr11469939ank.1194465529779;
-	Wed, 07 Nov 2007 11:58:49 -0800 (PST)
-Received: from lenovo ( [68.187.118.242])
-	by mx.google.com with ESMTPS id b45sm6646031hsa.2007.11.07.11.58.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Nov 2007 11:58:48 -0800 (PST)
-Received: by lenovo (sSMTP sendmail emulation); Wed, 07 Nov 2007 13:58:46 -0600
-Date: Wed, 7 Nov 2007 13:58:45 -0600
-From: David Farning <dfarning@gmail.com>
-To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
-Message-ID: <20071107195845.GA1583@lenovo>
+	Wed,  7 Nov 2007 23:56:03 +0100 (CET)
+Date: Thu, 8 Nov 2007 00:01:47 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <92979550.20071108000147@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
-Subject: naming tasks
+Subject: Cultural Shock
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,22 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2007 21:36:32 -0000
+X-List-Received-Date: Wed, 07 Nov 2007 23:02:48 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-Still working on the manual!
+Hi guys,
 
-I've come across a question on how tasks are named.  What is the
-purpose of the prefix patch in the def patch_do_patch found in
-the patch class?  Most task seems to be called do_taskname.
-I am thinking that it has something to do with
-scope but I am unsure.
+did my first build on a new machine+distribution -- previously Mandriva
+on a Dual Xeon, now Ubuntu Gutsy on an Intel Core Duo 2 [x86_64].
+bitbake openmoko-image went straight through. No x86_64 madness, no
+problems with /bin/sh -> dash.
 
-addtask refers to do_patch and
-EXPORT_FUNCTIONS refers to do_patch
+I'm excited -- it just works.
 
-Thanks
-David
+Thanks,
+
+Mickey.
+
+
 
 
