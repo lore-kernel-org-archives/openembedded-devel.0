@@ -1,23 +1,17 @@
-Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
+Received: from [71.117.236.31] (helo=desktop)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philipp.zabel@gmail.com>) id 1IpizR-0007qz-5q
+	(envelope-from <markgross@thegnar.org>) id 1IpjT7-00088w-13
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Nov 2007 12:22:33 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so2321510fks
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Nov 2007 03:21:42 -0800 (PST)
-Received: by 10.82.124.10 with SMTP id w10mr14332890buc.1194431168606;
-	Wed, 07 Nov 2007 02:26:08 -0800 (PST)
-Received: by 10.82.118.8 with HTTP; Wed, 7 Nov 2007 02:26:08 -0800 (PST)
-Message-ID: <74d0deb30711070226u29479070te5f20880b1616aac@mail.gmail.com>
-Date: Wed, 7 Nov 2007 11:26:08 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	Wed, 07 Nov 2007 12:53:13 +0100
+Received: by desktop (Postfix, from userid 1000)
+	id 4BA232292D9; Wed,  7 Nov 2007 03:23:18 -0800 (PST)
+Date: Wed, 7 Nov 2007 03:23:19 -0800
+From: mark gross <markgross@thegnar.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1IpXlZ-0004u8-1Y@linuxtogo.org>
+Message-ID: <20071107112319.GA20128@thegnar.org>
 MIME-Version: 1.0
-References: <E1IpXlZ-0004u8-1Y@linuxtogo.org>
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev rm_work: only remove ${S}, leave temp and install alone
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: fectch checker task?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,18 +25,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2007 11:22:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 07 Nov 2007 11:53:13 -0000
+X-Groupsio-MsgNum: 3295
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="lrZ03NoBR/3+SXJZ"
 Content-Disposition: inline
 
-On 11/7/07, koen commit <openembedded-commits@lists.openembedded.org> wrote:
-> rm_work: only remove ${S}, leave temp and install alone
+--lrZ03NoBR/3+SXJZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Why? Leaving image/ and install/ alone seriously decreases rm_work's
-space saving powers.
+would it be easy to create a task to do a quick sanity check on all the
+packages that need to be downloaded for a build?  The linear search for
+busted fetch calls is quite irritating.
 
-regards
-Philipp
+What would such a task look like?
+Is there a way to pass a parameter to the target to just do the fetch
+step?
+
+--mgross
 
 
+--lrZ03NoBR/3+SXJZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFHMaAnhK5OsmQOmSARAq0FAJ4tegLNHZUYdS3WHkEt4kWhuPtwqwCfSbYB
+lqi1mTt8Fkok/R56AkSxMxc=
+=5u+Y
+-----END PGP SIGNATURE-----
+
+--lrZ03NoBR/3+SXJZ--
