@@ -1,21 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@haerwu.biz>) id 1Iplaa-0001lO-0n
-	for openembedded-devel@openembedded.org; Wed, 07 Nov 2007 15:09:05 +0100
-Received: (qmail 29241 invoked by uid 813007); 7 Nov 2007 14:08:11 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 7 Nov 2007 14:08:10 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 7 Nov 2007 15:07:51 +0100
-User-Agent: KMail/1.9.7
-References: <20071107112319.GA20128@thegnar.org>
-In-Reply-To: <20071107112319.GA20128@thegnar.org>
+	(envelope-from <dfarning@gmail.com>) id 1IpsZZ-0007q1-8y
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Nov 2007 22:36:30 +0100
+Received: by wx-out-0506.google.com with SMTP id h27so2249994wxd
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Nov 2007 13:35:34 -0800 (PST)
+Received: by 10.101.67.11 with SMTP id u11mr11469939ank.1194465529779;
+	Wed, 07 Nov 2007 11:58:49 -0800 (PST)
+Received: from lenovo ( [68.187.118.242])
+	by mx.google.com with ESMTPS id b45sm6646031hsa.2007.11.07.11.58.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 07 Nov 2007 11:58:48 -0800 (PST)
+Received: by lenovo (sSMTP sendmail emulation); Wed, 07 Nov 2007 13:58:46 -0600
+Date: Wed, 7 Nov 2007 13:58:45 -0600
+From: David Farning <dfarning@gmail.com>
+To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
+Message-ID: <20071107195845.GA1583@lenovo>
 MIME-Version: 1.0
-Message-Id: <200711071507.52756.openembedded@haerwu.biz>
-Subject: Re: fectch checker task?
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: naming tasks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,31 +33,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2007 14:09:10 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Nov 2007 21:36:32 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Dnia =B6roda, 7 listopada 2007, mark gross napisa=B3:
-> would it be easy to create a task to do a quick sanity check on all the
-> packages that need to be downloaded for a build?  The linear search for
-> busted fetch calls is quite irritating.
->
-> What would such a task look like?
-> Is there a way to pass a parameter to the target to just do the fetch
-> step?
+Still working on the manual!
 
-You mean "bitbake -cfetchall BUILD_TARGET"? This will fetch everything=20
-needed to build BUILD_TARGET.
+I've come across a question on how tasks are named.  What is the
+purpose of the prefix patch in the def patch_do_patch found in
+the patch class?  Most task seems to be called do_taskname.
+I am thinking that it has something to do with
+scope but I am unsure.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+addtask refers to do_patch and
+EXPORT_FUNCTIONS refers to do_patch
 
-as it is Free Software, it is done when enough people helped to make it=20
-done
-
-
+Thanks
+David
 
 
