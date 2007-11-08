@@ -1,30 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.249.90.181] (helo=ik-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Iq7gz-0002i0-Of
-	for openembedded-devel@openembedded.org; Thu, 08 Nov 2007 14:45:09 +0100
-Received: from Powerbook-2.local (dominion.kabel.utwente.nl [130.89.193.158])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lA8Di5Yk030827 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 8 Nov 2007 14:44:05 +0100
-Message-ID: <473312A2.9010702@student.utwente.nl>
-Date: Thu, 08 Nov 2007 14:44:02 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.6 (Macintosh/20070728)
+	(envelope-from <dfarning@gmail.com>) id 1Iq96K-00085Z-Dx
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Nov 2007 16:15:24 +0100
+Received: by ik-out-1112.google.com with SMTP id c30so103516ika
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Nov 2007 07:14:25 -0800 (PST)
+Received: by 10.150.177.20 with SMTP id z20mr60432ybe.1194528374850;
+	Thu, 08 Nov 2007 05:26:14 -0800 (PST)
+Received: from lenovo ( [75.121.174.189])
+	by mx.google.com with ESMTPS id 15sm680704nzn.2007.11.08.05.26.10
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 08 Nov 2007 05:26:13 -0800 (PST)
+Received: by lenovo (sSMTP sendmail emulation); Thu, 08 Nov 2007 07:26:06 -0600
+Date: Thu, 8 Nov 2007 07:26:06 -0600
+From: David Farning <dfarning@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071108132605.GA6591@lenovo>
+References: <20071107195845.GA1583@lenovo>
+	<b6ebd0a50711071945ye0413b8rbae1f933b63903cf@mail.gmail.com>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1IpXlZ-0004u8-1Y@linuxtogo.org>	<74d0deb30711070226u29479070te5f20880b1616aac@mail.gmail.com>	<4731B63E.6030806@student.utwente.nl>
-	<c384c5ea0711071350i5533901cuf22da42e78b25dfb@mail.gmail.com>
-In-Reply-To: <c384c5ea0711071350i5533901cuf22da42e78b25dfb@mail.gmail.com>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-X-MIME-Autoconverted: from 8bit to quoted-printable by smtp.utwente.nl id
-	lA8Di5Yk030827
-Subject: Re: [oe-commits] org.oe.dev rm_work: only remove ${S}, leave temp and install alone
+In-Reply-To: <b6ebd0a50711071945ye0413b8rbae1f933b63903cf@mail.gmail.com>
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: Re: naming tasks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,52 +36,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2007 13:45:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 08 Nov 2007 15:15:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Nov 07, 2007 at 08:45:03PM -0700, Chris Larson wrote:
+> "EXPORT_FUNCTIONS do_patch" in patch.bbclass just makes do_patch ->
+> patch_do_patch.  That way you can override the do_patch function and
+> call back to the patch.bbclass do_patch (patch_do_patch) manually if
+> need be, but if you don't, do_patch is still defined.
+> EXPORT_FUNCTIONS was just a convenience.
 
-Leon Woestenberg schreef:
-> Hello Koen,
->=20
-> On 11/7/07, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> pHilipp Zabel schreef:
->>> On 11/7/07, koen commit <openembedded-commits@lists.openembedded.org>=
- wrote:
->>>> rm_work: only remove ${S}, leave temp and install alone
->>> Why? Leaving image/ and install/ alone seriously decreases rm_work's
->>> space saving powers.
->> It does, but it's needed for our new packaged-staging frameworks, and =
-I
->> did mention this change two weeks ago (20071027) on oe-devel ml and
->> noone objected[*].
->> Koen
->>
->> [*] read: "no response at all", which I have started interpreting as
->> "You rock! Go ahead!".
->>
-> You rock! Go ahead!
->=20
-> Disk space: $1/GB
+That make sense.  Introducing modularity through namespaces.
 
-The dollar is down down to =E2=82=AC0.18? Time to order some stuff from t=
-he
-states ;)
+Thanks
+David Farning
 
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHMxKOMkyGM64RGpERAqOkAJ9I02TSHAYFkZcMeH2iEaBgL2bgSgCgoiCJ
-Xyy+BEKri+pU86OCNLeTB0c=3D
-=3DPxp5
------END PGP SIGNATURE-----
+> 
+> On Nov 7, 2007 12:58 PM, David Farning <dfarning@gmail.com> wrote:
+> > Still working on the manual!
+> >
+> > I've come across a question on how tasks are named.  What is the
+> > purpose of the prefix patch in the def patch_do_patch found in
+> > the patch class?  Most task seems to be called do_taskname.
+> > I am thinking that it has something to do with
+> > scope but I am unsure.
+> >
+> > addtask refers to do_patch and
+> > EXPORT_FUNCTIONS refers to do_patch
+> >
+> > Thanks
+> > David
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> 
+> 
+> 
+> -- 
+> Chris Larson - clarson at kergoth dot com
+> Dedicated Engineer - MontaVista - clarson at mvista dot com
+> Core Developer/Architect - TSLib, BitBake, OpenEmbedded, OpenZaurus
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
