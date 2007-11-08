@@ -1,24 +1,24 @@
-Received: from [66.249.82.237] (helo=wx-out-0506.google.com)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Ipy2G-0003ir-SY
+	(envelope-from <kergoth@gmail.com>) id 1IpzKD-0000Hz-Pk
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Nov 2007 04:26:29 +0100
-Received: by wx-out-0506.google.com with SMTP id h27so30994wxd
+	Thu, 08 Nov 2007 05:49:05 +0100
+Received: by an-out-0708.google.com with SMTP id c38so3503ana
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Nov 2007 19:25:33 -0800 (PST)
-Received: by 10.90.104.14 with SMTP id b14mr5615782agc.1194472237044;
-	Wed, 07 Nov 2007 13:50:37 -0800 (PST)
-Received: by 10.90.66.15 with HTTP; Wed, 7 Nov 2007 13:50:36 -0800 (PST)
-Message-ID: <c384c5ea0711071350i5533901cuf22da42e78b25dfb@mail.gmail.com>
-Date: Wed, 7 Nov 2007 22:50:36 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	Wed, 07 Nov 2007 20:48:09 -0800 (PST)
+Received: by 10.142.229.4 with SMTP id b4mr8308wfh.1194493508654;
+	Wed, 07 Nov 2007 19:45:08 -0800 (PST)
+Received: by 10.142.104.18 with HTTP; Wed, 7 Nov 2007 19:45:03 -0800 (PST)
+Message-ID: <b6ebd0a50711071945ye0413b8rbae1f933b63903cf@mail.gmail.com>
+Date: Wed, 7 Nov 2007 20:45:03 -0700
+From: "Chris Larson" <clarson@kergoth.com>
+Sender: kergoth@gmail.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4731B63E.6030806@student.utwente.nl>
+In-Reply-To: <20071107195845.GA1583@lenovo>
 MIME-Version: 1.0
-References: <E1IpXlZ-0004u8-1Y@linuxtogo.org>
-	<74d0deb30711070226u29479070te5f20880b1616aac@mail.gmail.com>
-	<4731B63E.6030806@student.utwente.nl>
-Subject: Re: [oe-commits] org.oe.dev rm_work: only remove ${S}, leave temp and install alone
+References: <20071107195845.GA1583@lenovo>
+X-Google-Sender-Auth: 6f93a2ac7eb5e0fd
+Subject: Re: naming tasks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,35 +32,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2007 03:26:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 08 Nov 2007 04:49:06 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello Koen,
+"EXPORT_FUNCTIONS do_patch" in patch.bbclass just makes do_patch ->
+patch_do_patch.  That way you can override the do_patch function and
+call back to the patch.bbclass do_patch (patch_do_patch) manually if
+need be, but if you don't, do_patch is still defined.
+EXPORT_FUNCTIONS was just a convenience.
 
-On 11/7/07, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> pHilipp Zabel schreef:
-> > On 11/7/07, koen commit <openembedded-commits@lists.openembedded.org> wrote:
-> >> rm_work: only remove ${S}, leave temp and install alone
-> > Why? Leaving image/ and install/ alone seriously decreases rm_work's
-> > space saving powers.
-> It does, but it's needed for our new packaged-staging frameworks, and I
-> did mention this change two weeks ago (20071027) on oe-devel ml and
-> noone objected[*].
-> Koen
+On Nov 7, 2007 12:58 PM, David Farning <dfarning@gmail.com> wrote:
+> Still working on the manual!
 >
-> [*] read: "no response at all", which I have started interpreting as
-> "You rock! Go ahead!".
+> I've come across a question on how tasks are named.  What is the
+> purpose of the prefix patch in the def patch_do_patch found in
+> the patch class?  Most task seems to be called do_taskname.
+> I am thinking that it has something to do with
+> scope but I am unsure.
 >
-You rock! Go ahead!
+> addtask refers to do_patch and
+> EXPORT_FUNCTIONS refers to do_patch
+>
+> Thanks
+> David
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Disk space: $1/GB
-Packaged staging: priceless :-)
 
-Regards,
 
-Leon.
+-- 
+Chris Larson - clarson at kergoth dot com
+Dedicated Engineer - MontaVista - clarson at mvista dot com
+Core Developer/Architect - TSLib, BitBake, OpenEmbedded, OpenZaurus
 
 
