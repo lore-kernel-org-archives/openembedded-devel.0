@@ -1,30 +1,25 @@
-Received: from [208.65.21.12] (helo=cpanel10.myrtlenet.com)
+Received: from [64.233.166.177] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Iqu0x-0001OG-BC
+	(envelope-from <dfarning@gmail.com>) id 1IqxV7-0003c1-JE
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Nov 2007 18:21:02 +0100
-Received: from 82-171-189-134.dsl.ip.tiscali.nl ([82.171.189.134]:16744
-	helo=[192.168.1.24])
-	by cpanel10.myrtlenet.com with esmtpa (Exim 4.68)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Iqtlk-000100-BH
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Nov 2007 12:05:16 -0500
-Message-ID: <4735E458.1090108@gmail.com>
-Date: Sat, 10 Nov 2007 18:03:20 +0100
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+	Sat, 10 Nov 2007 22:04:21 +0100
+Received: by py-out-1112.google.com with SMTP id a25so424838pyi
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 10 Nov 2007 13:03:09 -0800 (PST)
+Received: by 10.65.203.3 with SMTP id f3mr10133056qbq.1194722387250;
+	Sat, 10 Nov 2007 11:19:47 -0800 (PST)
+Received: from lenovo ( [75.121.153.51])
+	by mx.google.com with ESMTPS id v76sm1271390nzh.2007.11.10.11.19.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 10 Nov 2007 11:19:45 -0800 (PST)
+Received: by lenovo (sSMTP sendmail emulation); Sat, 10 Nov 2007 13:19:42 -0600
+Date: Sat, 10 Nov 2007 13:19:42 -0600
+From: David Farning <dfarning@gmail.com>
+To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
+Message-ID: <20071110191942.GA6734@lenovo>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel10.myrtlenet.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - gmail.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: RFC: dropping either pixman or libpixman
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: Using widgets to add structure to OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,30 +33,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Nov 2007 17:21:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 10 Nov 2007 21:04:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello,
 
-I noticed both
+Using Widgets to add structure to BitBake/OpenEmbedded.
 
-[1] packages/libpixman/libpixman*.bb
-[2] packages/xorg-lib/pixman*.bb
+The purpose of BitBake and OpenEmbedded is to create an image of a
+distribution which will run on a target machine.
 
-while I thought I was introducing libpixman 0.9.6 in [1], Andy had 
-already done so in [2].
+One of the most challenging aspects of describing OpenEmbedded is
+defining where a specific type of information is
+defined.  By not clearly specifying where information is defined, the
+SPOT (single point of truth) principle is violated.
 
-Since 0.9.6, libpixman can be built stand-alone; I have adopted [2] to 
-do so.
+There is always a trade-off between flexibility and introducing
+structure into a system.  In the case of BiteBake and
+OpenEmbedded, which solve a very specific problem, more is gained than
+lost by introducing structure.  
 
-I would like to propose to drop either [1] or [2].
+Graphical toolkits do a very good job of exchanging flexibility for
+structure by using widgets.  Everything is gtk+ is
+a widget.  Widgets have generic properties and methods which can
+easily be overridden.  Widgets can contain other widgets.
 
-Any objections and/or any preferences on which one?
+Similarly, BitBake and OpenEmbedded can be broken down into a number
+of widgets.  Each widget type represents a layer which
+define domain specific parameters and methods. Below is a possible
+widget hierarchy     
 
-Regards,
+1. Host Machine.
+  a. Set up build structure.
+  b. Native compiler.
 
-Leon.
+2. Target Machine.
+  a. Target architecture.
+  b. Cross compiler.
+  c. Target specific device drivers.
+
+3. Image
+  a. Target file system type.
+  b. Target root file system.
+
+4. Distro
+  a. Features to include in distribution.
+
+5. Tasks
+  a. Container which includes predefined sets of packages.
+
+6. Packages
+  a. Individual software packages.
+
+For flexibility, a widget can contain any widget of a lower type. 
+
+Interesting, because the conf parser is the same as the .bb parser,
+setting up such a widget based hierarchy would not involve
+any significant changes to bb or oe.
+
+Bbclasses would define generic widgets.
+
+Widgets are created by inheriting from the correct bbclass.
+Widget override generic functionality by setting variables and
+defining methods
+Widgets can contain child widgets by including other bbfiles.
+
+Does anyone see any obvious problem with such a system before I start
+testing it?
+
+This type of structure would make the documentation much easier.  It
+would also significantly reduce the OpenEmbedded learning curve. 
+
+Thanks
+David Farning
+
 
 
 
