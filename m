@@ -1,22 +1,31 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [208.65.21.12] (helo=cpanel10.myrtlenet.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1IqESr-0003o0-Ne
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Nov 2007 21:59:02 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Thu, 08 Nov 2007 20:58:01 +0000
-	id 000680B2.47337859.00005BEA
-Date: Thu, 8 Nov 2007 20:58:02 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071108205802.0579003f@cimmeria>
-In-Reply-To: <c384c5ea0711080950o60ef5c2di4c91719f4501960@mail.gmail.com>
-References: <92979550.20071108000147@vanille-media.de>
-	<c384c5ea0711080950o60ef5c2di4c91719f4501960@mail.gmail.com>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: Cultural Shock
+	(envelope-from <leon.woestenberg@gmail.com>) id 1IqqGg-0007BT-UA
+	for openembedded-devel@openembedded.org; Sat, 10 Nov 2007 14:20:59 +0100
+Received: from 82-171-189-134.dsl.ip.tiscali.nl ([82.171.189.134]:15684
+	helo=[192.168.1.24])
+	by cpanel10.myrtlenet.com with esmtpa (Exim 4.68)
+	(envelope-from <leon.woestenberg@gmail.com>)
+	id 1Iqq2l-0002zU-3D; Sat, 10 Nov 2007 08:06:35 -0500
+Message-ID: <4735AC67.6070307@gmail.com>
+Date: Sat, 10 Nov 2007 14:04:39 +0100
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <8c7950360711010949u45bb12e7p388b4d5dc4563ef3@mail.gmail.com>	<f96d234e0711011307y6d07604dg110d5c443ecb0e8f@mail.gmail.com>	<472B0543.5070203@balister.org>	<f96d234e0711020722i2305f16et15f2b5b122c94aea@mail.gmail.com>
+	<472B5140.6060002@student.utwente.nl>
+In-Reply-To: <472B5140.6060002@student.utwente.nl>
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel10.myrtlenet.com
+X-AntiAbuse: Original Domain - openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - gmail.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: Re: Overriding package config files in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,21 +39,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2007 20:59:02 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Sat, 10 Nov 2007 13:20:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, 8 Nov 2007 18:50:39 +0100
-"Leon Woestenberg" <leon.woestenberg@gmail.com> wrote:
-> 7.04 x86_64 worked, 7.10 x86 worked, 7.10 x86_64 works, no biggie.
-> 
-> Now, let's get x86_64 target support to work in OpenEmbedded and get
-> REALLY excited! :-)
-> 
-I did that at OEDEM, its a couple of quick fixes. But I didn't want
-to do it that way so I am waiting until we can complete the staging
-changes discussed by the core team at OEDEM.
+Hello,
 
-Graeme
+
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Cliff Brake schreef:
+>   
+>> On 11/2/07, Philip Balister <philip@balister.org> wrote:
+>>     
+>>> Cliff Brake wrote:
+>>>       
+>>>> Another approach I've been thinking about is to figure out a way for
+>>>> bitbake to use <files> from a tree outside the main OE tree.  One
+>>>> possibility is for bitbake to pull <files> as well as bb files from a
+>>>> high priority bbcollections tree, even though the bb remains in the
+>>>> main OE tree.  This probably totally breaks the way bitbake works, but
+>>>>         
+>>> I think that having an overlay set up as a high priority collection does
+>>> work.
+>>>       
+>> I was referring to the case where I only put the files directory in
+>> the overlay -- not the entire recipe directory.  I have not tried this
+>> lately and will do so the next time I get a chance.
+>>
+>>     
+Only copying files, and not the recipes, to an overlay, does not work.
+
+It would be quite nice, but I understand the complexities if every FILE 
+has to be
+search for in all the collections.
+
+The current behaviour is, as I understand:
+
+If no PREFERED_VERSION, select highest version of a package, else 
+PREFERED_VERSION.
+Iterate through collections by priority, select the collection that 
+provides the "package-version".
+Use that collection as the base directory for accessing FILES.
+
+> You could also do it the openmoko way by defining extra overrides and
+> using those in FILESPATH.
+>   
+Thanks, will look into this as well,
+
+Regards,
+
+Leon Woestenberg.
 
 
