@@ -1,27 +1,22 @@
-Received: from [209.85.128.184] (helo=fk-out-0910.google.com)
+Received: from [64.233.170.189] (helo=rn-out-0102.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1Irhoo-0001Ln-BG
+	(envelope-from <leon.woestenberg@gmail.com>) id 1IriHG-0001cm-Qg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Nov 2007 23:31:46 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so1632805fks
+	Tue, 13 Nov 2007 00:01:11 +0100
+Received: by rn-out-0102.google.com with SMTP id e24so684925rng
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Nov 2007 14:30:22 -0800 (PST)
-Received: by 10.82.175.17 with SMTP id x17mr12540055bue.1194895951991;
-	Mon, 12 Nov 2007 11:32:31 -0800 (PST)
-Received: from ?192.168.2.2? ( [88.231.48.131])
-	by mx.google.com with ESMTPS id y34sm7380742iky.2007.11.12.11.32.29
-	(version=SSLv3 cipher=OTHER); Mon, 12 Nov 2007 11:32:30 -0800 (PST)
-Date: Mon, 12 Nov 2007 21:32:26 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1409161876.20071112213226@gmail.com>
+	Mon, 12 Nov 2007 14:59:46 -0800 (PST)
+Received: by 10.70.108.18 with SMTP id g18mr9251wxc.1194797779794;
+	Sun, 11 Nov 2007 08:16:19 -0800 (PST)
+Received: by 10.90.29.19 with HTTP; Sun, 11 Nov 2007 08:16:19 -0800 (PST)
+Message-ID: <c384c5ea0711110816i3a182752qe28b92079adac86e@mail.gmail.com>
+Date: Sun, 11 Nov 2007 17:16:19 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200711121523.46337.openembedded@haerwu.biz>
-References: <20071112111608.35f4c720@cimmeria>
-	<200711121523.46337.openembedded@haerwu.biz>
+In-Reply-To: <20071110191942.GA6734@lenovo>
 MIME-Version: 1.0
-Subject: Re: Project Equipment
+References: <20071110191942.GA6734@lenovo>
+Subject: Re: Using widgets to add structure to OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,37 +30,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2007 22:31:46 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 12 Nov 2007 23:01:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Marcin,
+Hello David,
 
-Monday, November 12, 2007, 4:23:45 PM, you wrote:
+On Nov 10, 2007 8:19 PM, David Farning <dfarning@gmail.com> wrote:
+>
+> One of the most challenging aspects of describing OpenEmbedded is
+> defining where a specific type of information is
+> defined.  By not clearly specifying where information is defined, the
+> SPOT (single point of truth) principle is violated.
+>
+Tthere are a lot of abstract objects in OpenEmbedded, some different
+only by subtleties.
 
-> Dnia poniedzia³ek, 12 listopada 2007, Graeme Gregory napisa³:
->> I have the following project equipment in my house that I can not
->> really do justice to. It would be good to re-allocate it to people who
->> can make better use of it.
->>
->> Poodle
->> Tosa
->> CE-RH2 remote
->>
->> I may have some equipment of my own to donate later this year as well.
+> There is always a trade-off between flexibility and introducing
+> structure into a system.  In the case of BiteBake and
+> OpenEmbedded, which solve a very specific problem, more is gained than
+> lost by introducing structure.
+>
+The structure is there. It takes a steep learning curve to see what
+the structure
+is about.
 
-> I have another Zaurus SL-6000L (tosa) unused here (also OE project 
-> device). If someone want to maintain it and need device then please 
-> reply.
+> Graphical toolkits do a very good job of exchanging flexibility for
+> structure by using widgets.  Everything is gtk+ is
+> a widget.  Widgets have generic properties and methods which can
+> easily be overridden.  Widgets can contain other widgets.
+>
+Objects.
 
-  I'd be glad to have a Zaurus to do testing and fight cross-device
-differences. But I'm in flux now and not sure when I'd be productive
-with that. Still, consider adding me to the tender.
+Do not introduce widgets into BB/OE, you are throwing in a whole new
+jargon that adds confusion, not structure!
 
+> Similarly, BitBake and OpenEmbedded can be broken down into a number
+> of widgets.  Each widget type represents a layer which
+> define domain specific parameters and methods. Below is a possible
+> widget hierarchy
+>
+> 1. Host Machine.
+>   a. Set up build structure.
+>   b. Native compiler.
+>
+> 2. Target Machine.
+>   a. Target architecture.
+>   b. Cross compiler.
+>   c. Target specific device drivers.
+>
+A cross-compiler belongs with a target machine? No, I don't buy that,
+too confusing.
 
+A cross-compiler compiles on a certain architecture, for a certain architecture.
+
+> Does anyone see any obvious problem with such a system before I start
+> testing it?
+>
+> This type of structure would make the documentation much easier.  It
+> would also significantly reduce the OpenEmbedded learning curve.
+>
+Sorry, I disagree. It would add MPOC (multiple points of confusion).
+
+What is needed is a unambiguous description of what we have now, with the sole
+purpose the smoothen the learning curve.
+
+Regards,
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+Leon
 
 
