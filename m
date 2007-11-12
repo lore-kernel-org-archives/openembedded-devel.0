@@ -1,23 +1,26 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [85.10.209.111] (helo=mail.road.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <zecke@selfish.org>) id 1Ir0Uv-0001FH-FC
+	(envelope-from <u.luckas@road.de>) id 1IrVre-0005a4-V4
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Nov 2007 01:16:21 +0100
-Received: from gprs-pool-1-012.eplus-online.de ([212.23.126.12]
-	helo=[10.161.152.157]) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1Ir0Tk-0003ZU-Nb
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Nov 2007 01:15:09 +0100
-Mime-Version: 1.0 (Apple Message framework v752.3)
-In-Reply-To: <20071110191942.GA6734@lenovo>
-References: <20071110191942.GA6734@lenovo>
-Message-Id: <54E41967-F9C8-4112-8C33-5E5526D5D216@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-Date: Sun, 11 Nov 2007 01:14:41 +0100
+	Mon, 12 Nov 2007 10:45:54 +0100
+Received: from slimfast.dyndns.org (unknown [192.168.254.1])
+	by mail.road.de (Postfix) with ESMTP id 585C18F0049;
+	Mon, 12 Nov 2007 10:44:34 +0100 (CET)
+Received: from localhost.localdomain (ulitu.handy-pc.constin.de
+	[192.168.116.44])
+	by slimfast.dyndns.org (Postfix) with ESMTP id 41A06AD402B;
+	Mon, 12 Nov 2007 10:44:34 +0100 (CET)
+Received: from ip6-localhost (unknown [IPv6:::1])
+	by localhost.localdomain (Postfix) with ESMTP id 10D56D98C04;
+	Mon, 12 Nov 2007 10:44:33 +0100 (CET)
+From: Uli Luckas <u.luckas@road.de>
+Organization: Road GmbH
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.752.3)
-Subject: Re: Using widgets to add structure to OpenEmbedded
+Date: Mon, 12 Nov 2007 10:44:30 +0100
+User-Agent: KMail/1.9.7
+MIME-Version: 1.0
+Message-Id: <200711121044.32094.u.luckas@road.de>
+Subject: [PATHC] ATAG export for the linux kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,23 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Nov 2007 00:16:21 -0000
-Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
+X-List-Received-Date: Mon, 12 Nov 2007 09:45:55 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+This is a path against the 2.6.21 kernel to export ATAG related information to 
+procfs. It was inspired by the work and discussions with Mike Westerhof on 
+the arm linux kernel mailing list.
+The patch will we needed by the kexec user space binary to propperly set up 
+ATAGs for the 'to be kexeced' kernel. 
+A port to 2.6.23/2.6.24 should be mostly mechanical after removal of git 
+commit 033b8ffe3f1ea8174d51d125838ac6deea60f63f (for someone who has a 
+running 2.6.23 device :-). 
 
-Am 10.11.2007 um 20:19 schrieb David Farning:
+The export interface is via two procfs files:
+/proc/atags/addr
+/proc/atags/tags
+"addr" holds the hex representation of the physical address where the running 
+kernel expects it's ATAG list.
+"tags" holds the binary ATAGs that where passed to the running kernel.
 
->
-> Using Widgets to add structure to BitBake/OpenEmbedded.
+regards,
+Uli Luckas
 
-Hmm, I fail a bit to see the point but instead of calling it widget  
-why not call it by the real name? It is a object, everything are  
-objects :)
+-- 
 
-But besides that I don't see any issue besides many people not  
-knowing object orientated programming.
+------- ROAD ...the handyPC Company - - -  ) ) )
 
-z.
+Uli Luckas
+Software Development
+
+ROAD GmbH
+Bennigsenstr. 14 | 12159 Berlin | Germany
+fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
+url: www.road.de
+
+Amtsgericht Charlottenburg: HRB 96688 B
+Managing directors: Hans-Peter Constien, Hubertus von Streit
 
 
