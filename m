@@ -1,22 +1,24 @@
-Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philipp.zabel@gmail.com>) id 1IraWa-0001aN-3D
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <Tobias.Pflug@gmx.net>) id 1Ircvz-0004vW-Gl
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Nov 2007 15:44:28 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so1498549fks
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Nov 2007 06:43:06 -0800 (PST)
-Received: by 10.82.107.15 with SMTP id f15mr11715025buc.1194878214485;
-	Mon, 12 Nov 2007 06:36:54 -0800 (PST)
-Received: by 10.82.118.8 with HTTP; Mon, 12 Nov 2007 06:36:54 -0800 (PST)
-Message-ID: <74d0deb30711120636m215b4b7bvf9e5c1cad98aa741@mail.gmail.com>
-Date: Mon, 12 Nov 2007 15:36:54 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20071112111608.35f4c720@cimmeria>
+	Mon, 12 Nov 2007 18:18:51 +0100
+Received: (qmail 27009 invoked by uid 0); 12 Nov 2007 17:17:29 -0000
+Received: from 80.154.6.155 by www089.gmx.net with HTTP;
+	Mon, 12 Nov 2007 18:17:29 +0100 (CET)
+Date: Mon, 12 Nov 2007 18:17:29 +0100
+From: "Tobias Pflug" <Tobias.Pflug@gmx.net>
+Message-ID: <20071112171729.267800@gmx.net>
 MIME-Version: 1.0
-References: <20071112111608.35f4c720@cimmeria>
-Subject: Re: Project Equipment
+To: openembedded-devel@lists.openembedded.org
+X-Authenticated: #283898
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX19XoIlQXE1XvCXHVcY/rYdrP+t6K9zHjrID6ee5OX
+	7kuaA3GyKe11UuydrAwxO4XF+T+rQhQbJBOA== 
+X-GMX-UID: nbgPcPURbGInSIMiaWRnZRNvcmZ1ZlzD
+Subject: calling cross toolchain binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,26 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2007 14:44:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 12 Nov 2007 17:18:52 -0000
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Nov 12, 2007 12:16 PM, Graeme Gregory <dp@xora.org.uk> wrote:
-> I have the following project equipment in my house that I can not
-> really do justice to. It would be good to re-allocate it to people who
-> can make better use of it.
->
-> Poodle
-> Tosa
-> CE-RH2 remote
->
-> I may have some equipment of my own to donate later this year as well.
+hi,
 
-I'd love to see that Tosa in person at least once, but I'm realistic enough
-to realize that I wouldn't find much time to do some good with it either.
+I am having some troubles calling ${TARGET_OS}-strip
+inside IMAGE_PREPROCESS_COMMAND. In case you might wonder
+why I would want to do something like that anyway..
+I had to do some patching at various places to keep
+packages from stripping when I don't want them to
+and now I just want to have full control over
+some binaries in my image config.. Anyway..
 
-regards
-Philipp
+Just calling ${TARGET_OS} does not do the trick so I
+thought I would just have to prepend STAGING_BINDIR_CROSS -
+which is set to:
+
+/home/pflug/oedev/pxa270_nor/tmp/staging/x86_64-linux/bin/arm-angstrom-linux-uclibcgnueabi
+
+But that directory does not exist. There is 
+a (....)/bin/arm-angstrom-linux-uclibcgnueabi-libtool, but
+not the above `arm-angstrom-linux` subdir.
+
+I suppose I am missing something quite obvious but well I just 
+don't see it right now.
+
+thanks for any help.
+
+regards,
+Tobi
 
 
