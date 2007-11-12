@@ -1,20 +1,21 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@haerwu.biz>) id 1IraDv-0008P6-QF
-	for openembedded-devel@openembedded.org; Mon, 12 Nov 2007 15:25:14 +0100
-Received: (qmail 27864 invoked by uid 813007); 12 Nov 2007 14:23:49 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 12 Nov 2007 14:23:49 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <philipp.zabel@gmail.com>) id 1IraWa-0001aN-3D
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Nov 2007 15:44:28 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so1498549fks
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Nov 2007 06:43:06 -0800 (PST)
+Received: by 10.82.107.15 with SMTP id f15mr11715025buc.1194878214485;
+	Mon, 12 Nov 2007 06:36:54 -0800 (PST)
+Received: by 10.82.118.8 with HTTP; Mon, 12 Nov 2007 06:36:54 -0800 (PST)
+Message-ID: <74d0deb30711120636m215b4b7bvf9e5c1cad98aa741@mail.gmail.com>
+Date: Mon, 12 Nov 2007 15:36:54 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Nov 2007 15:23:45 +0100
-User-Agent: KMail/1.9.7
-References: <20071112111608.35f4c720@cimmeria>
 In-Reply-To: <20071112111608.35f4c720@cimmeria>
 MIME-Version: 1.0
-Message-Id: <200711121523.46337.openembedded@haerwu.biz>
+References: <20071112111608.35f4c720@cimmeria>
 Subject: Re: Project Equipment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,13 +30,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2007 14:25:23 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 12 Nov 2007 14:44:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia poniedzia=B3ek, 12 listopada 2007, Graeme Gregory napisa=B3:
+On Nov 12, 2007 12:16 PM, Graeme Gregory <dp@xora.org.uk> wrote:
 > I have the following project equipment in my house that I can not
 > really do justice to. It would be good to re-allocate it to people who
 > can make better use of it.
@@ -46,16 +46,10 @@ Dnia poniedzia=B3ek, 12 listopada 2007, Graeme Gregory napisa=B3:
 >
 > I may have some equipment of my own to donate later this year as well.
 
-I have another Zaurus SL-6000L (tosa) unused here (also OE project=20
-device). If someone want to maintain it and need device then please=20
-reply.
+I'd love to see that Tosa in person at least once, but I'm realistic enough
+to realize that I wouldn't find much time to do some good with it either.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-  Alcohol may not solve any problems, but then again, neither does milk.
-
-
+regards
+Philipp
 
 
