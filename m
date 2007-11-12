@@ -1,19 +1,21 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1IrXIJ-0002Su-Hl
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Nov 2007 12:17:31 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Mon, 12 Nov 2007 11:16:09 +0000
-	id 0006856E.473835F9.00004705
-Date: Mon, 12 Nov 2007 11:16:08 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	(envelope-from <openembedded@haerwu.biz>) id 1IraDv-0008P6-QF
+	for openembedded-devel@openembedded.org; Mon, 12 Nov 2007 15:25:14 +0100
+Received: (qmail 27864 invoked by uid 813007); 12 Nov 2007 14:23:49 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 12 Nov 2007 14:23:49 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071112111608.35f4c720@cimmeria>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Project Equipment
+Date: Mon, 12 Nov 2007 15:23:45 +0100
+User-Agent: KMail/1.9.7
+References: <20071112111608.35f4c720@cimmeria>
+In-Reply-To: <20071112111608.35f4c720@cimmeria>
+MIME-Version: 1.0
+Message-Id: <200711121523.46337.openembedded@haerwu.biz>
+Subject: Re: Project Equipment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -27,20 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2007 11:17:31 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 Nov 2007 14:25:23 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-I have the following project equipment in my house that I can not
-really do justice to. It would be good to re-allocate it to people who
-can make better use of it.
+Dnia poniedzia=B3ek, 12 listopada 2007, Graeme Gregory napisa=B3:
+> I have the following project equipment in my house that I can not
+> really do justice to. It would be good to re-allocate it to people who
+> can make better use of it.
+>
+> Poodle
+> Tosa
+> CE-RH2 remote
+>
+> I may have some equipment of my own to donate later this year as well.
 
-Poodle
-Tosa
-CE-RH2 remote
+I have another Zaurus SL-6000L (tosa) unused here (also OE project=20
+device). If someone want to maintain it and need device then please=20
+reply.
 
-I may have some equipment of my own to donate later this year as well.
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Graeme
+  Alcohol may not solve any problems, but then again, neither does milk.
+
+
 
 
