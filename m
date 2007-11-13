@@ -1,22 +1,30 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1Irt9e-0004St-0G
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Nov 2007 11:38:02 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Tue, 13 Nov 2007 10:36:35 +0000
-	id 0006856E.47397E33.00005FE2
-Date: Tue, 13 Nov 2007 10:36:39 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071113103639.44c1045c@cimmeria>
-In-Reply-To: <a7f8874a0711120858w3b337d99n218b5b9ba0025a6a@mail.gmail.com>
-References: <20071112111608.35f4c720@cimmeria>
-	<a7f8874a0711120858w3b337d99n218b5b9ba0025a6a@mail.gmail.com>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Irvjg-0002df-Va
+	for openembedded-devel@openembedded.org; Tue, 13 Nov 2007 14:23:25 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Iruba-0004tu-Mg
+	for openembedded-devel@openembedded.org; Tue, 13 Nov 2007 12:10:58 +0000
+Received: from cm38.kappa85.maxonline.com.sg ([58.182.85.38])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 13 Nov 2007 12:10:58 +0000
+Received: from robk by cm38.kappa85.maxonline.com.sg with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 13 Nov 2007 12:10:58 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rob Kramer <robk@starhub.net.sg>
+Date: Tue, 13 Nov 2007 20:10:43 +0800
+Message-ID: <fhc484$6ln$1@ger.gmane.org>
 Mime-Version: 1.0
-Subject: Re: Project Equipment
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: cm38.kappa85.maxonline.com.sg
+User-Agent: KNode/0.10.4
+Sender: news <news@ger.gmane.org>
+Subject: Initramfs support?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,36 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Nov 2007 10:38:02 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 13 Nov 2007 13:23:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7Bit
 
-On Mon, 12 Nov 2007 08:58:25 -0800
-"Hans Henry von Tresckow" <hvontres@gmail.com> wrote:
-> Graeme,
-> 
-> I might have use for the poodle, especially if it is a PXA-255 model.
-> I am currently woriking on some poodle issues and having a second
-> machine that is not also my "Daily Driver" would help. :)
-> 
-> I am not sure what sort of problems there would be shipping it to the
-> US though.
-> 
-Its a pxa250 one from what I remeber.
+Hi,
 
-Probably just an expense thing to shipping to US, but I am in florida
-first two weeks of february so if we don't get something worked out by
-then.
+I've been trying to figure out how/if OE supports creation of initramfs
+files. There's initramfs-uniboot and friends in initrdscripts, but I'm not
+sure if that is current or useful, as it doesn't seem to be used by
+anything, anywhere.
 
-> P.S: I live ~10 minutes from LEGOLAND in Carlsbad, so If you need some
-> bricks, I might be able to help you out :)
-> 
-> 
-Well cool, Im 5 hours from the UK one :-(
+Then there's linux-hackndev, which builds a mini-busybox on the fly. But
+that seems a bit hackish..
 
-I'm happy to organise to get it to you, but Id like a consensus from OE
-core devs who to send machines to.
+Anyone know if there's a good way to have OE create an initramfs archive of
+a bunch of files that I provide?
 
-Graeme
+Cheers!
+
+    Rob
+
 
 
