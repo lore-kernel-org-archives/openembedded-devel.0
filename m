@@ -1,22 +1,31 @@
-Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <cliff.brake@gmail.com>) id 1Iry8h-0004nM-KJ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Nov 2007 16:57:23 +0100
-Received: by wa-out-1112.google.com with SMTP id l24so2345021waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Nov 2007 07:55:54 -0800 (PST)
-Received: by 10.115.54.1 with SMTP id g1mr110637wak.1194968952064;
-	Tue, 13 Nov 2007 07:49:12 -0800 (PST)
-Received: by 10.114.254.11 with HTTP; Tue, 13 Nov 2007 07:49:12 -0800 (PST)
-Message-ID: <f96d234e0711130749u270d6774h8114829b68dcfc6f@mail.gmail.com>
-Date: Tue, 13 Nov 2007 10:49:12 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fhc484$6ln$1@ger.gmane.org>
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Is8cW-0007Iz-4F
+	for openembedded-devel@openembedded.org; Wed, 14 Nov 2007 04:08:52 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Is8ay-0000jZ-1J
+	for openembedded-devel@openembedded.org; Wed, 14 Nov 2007 03:07:16 +0000
+Received: from cm38.kappa85.maxonline.com.sg ([58.182.85.38])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 14 Nov 2007 03:07:16 +0000
+Received: from robk by cm38.kappa85.maxonline.com.sg with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 14 Nov 2007 03:07:16 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rob Kramer <robk@starhub.net.sg>
+Date: Wed, 14 Nov 2007 11:07:05 +0800
+Message-ID: <fhdoor$m2d$1@ger.gmane.org>
 References: <fhc484$6ln$1@ger.gmane.org>
-Cc: openembedded-devel@openembedded.org
+	<f96d234e0711130749u270d6774h8114829b68dcfc6f@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: cm38.kappa85.maxonline.com.sg
+User-Agent: KNode/0.10.4
+Sender: news <news@ger.gmane.org>
 Subject: Re: Initramfs support?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,32 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Nov 2007 15:57:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 14 Nov 2007 03:08:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7Bit
 
-On Nov 13, 2007 7:10 AM, Rob Kramer <robk@starhub.net.sg> wrote:
+Hi Cliff,
 
-> Anyone know if there's a good way to have OE create an initramfs archive of
-> a bunch of files that I provide?
+Cliff Brake wrote:
+> - define a custom image or use something like minimal-image
+> - add cpio.gz to IMAGE_FSTYPES
+> - use the resulting cpio.gz as your initramfs
 
-What I do:
+Thanks, I guess that's the way to go. I was hoping I could modify my main
+image (already custom) to also create a cpio.gz, but a second image may be
+just as clean. The x270 images are a good reference..
 
-- define a custom image or use something like minimal-image
-- add cpio.gz to IMAGE_FSTYPES
-- use the resulting cpio.gz as your initramfs
+Cheers!
 
-The following ramblings may or may not be useful:
-http://bec-systems.com/web/content/view/79/9/
-http://bec-systems.com/web/content/view/82/9/
-http://bec-systems.com/web/content/view/66/9/
+    Rob
 
-Cliff
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
 
 
