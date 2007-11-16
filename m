@@ -1,27 +1,21 @@
-Received: from [209.85.162.179] (helo=el-out-1112.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dfarning@gmail.com>) id 1IsvGJ-0002JJ-Dh
+	(envelope-from <dp@xora.org.uk>) id 1IsweK-0003aE-9v
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2007 08:05:11 +0100
-Received: by el-out-1112.google.com with SMTP id z25so363341ele
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Nov 2007 23:03:27 -0800 (PST)
-Received: by 10.70.52.8 with SMTP id z8mr2112609wxz.1195175791870;
-	Thu, 15 Nov 2007 17:16:31 -0800 (PST)
-Received: from lenovo ( [69.179.85.165])
-	by mx.google.com with ESMTPS id h17sm6194539wxd.2007.11.15.17.16.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Nov 2007 17:16:31 -0800 (PST)
-Received: by lenovo (sSMTP sendmail emulation); Thu, 15 Nov 2007 19:16:27 -0600
-Date: Thu, 15 Nov 2007 19:16:27 -0600
-From: David Farning <dfarning@gmail.com>
+	Fri, 16 Nov 2007 09:34:04 +0100
+Received: from cimmeria ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Fri, 16 Nov 2007 08:32:20 +0000
+	id 00064627.473D5594.000030AF
+Date: Fri, 16 Nov 2007 08:32:22 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071116011627.GA7192@lenovo>
+Message-ID: <20071116083222.552a9c30@cimmeria>
+In-Reply-To: <20071116011627.GA7192@lenovo>
 References: <472216E5.6060708@student.utwente.nl>
-	<20071115080222.2c3a597f@cimmeria>
-MIME-Version: 1.0
-In-Reply-To: <20071115080222.2c3a597f@cimmeria>
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+	<20071115080222.2c3a597f@cimmeria> <20071116011627.GA7192@lenovo>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
 Subject: Re: [RFC] adding CONFLICTS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,43 +30,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2007 07:05:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Nov 2007 08:34:04 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 15, 2007 at 08:02:22AM +0000, Graeme Gregory wrote:
-> On Fri, 26 Oct 2007 18:33:41 +0200
-> Koen Kooi <k.kooi@student.utwente.nl> wrote:
+On Thu, 15 Nov 2007 19:16:27 -0600
+David Farning <dfarning@gmail.com> wrote:
+> A good way to look at this issue is to study how Seth Vidal sovled the
+> issue in YUM, Fedora's updater.  It is written in python, so easy for
+> BitBake developers to understand.
 > 
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> > 
-> > Hi,
-> > 
-> > Since we don't have packaged staging yet, what do people thing about
-> > adding CONFLICTS to packages the interfere with eachother like e.g.
-> > medialibraries like sdl and their hacked-up qte versions, multiple
-> > kernels (linux-foo and linux-foo-devel) etc...
-> > 
-> > regards,
-> > 
-> > Koen
+> It seems that it would add a good deal of complexity to the current
+> design of bitbake.
 > 
-> This sounds good in theory as long as bitbake actually chokes with
-> a sensible error message.
+> Although useful this might be an idea for bitbake 2.0
 > 
-> Hopefully then it makes uses more aware what went wrong.
->
-A good way to look at this issue is to study how Seth Vidal sovled the
-issue in YUM, Fedora's updater.  It is written in python, so easy for
-BitBake developers to understand.
+We already have fully working package Conflicts: working.
 
-It seems that it would add a good deal of complexity to the current
-design of bitbake.
+This is talking about staging conflicts. Or in otherwords
+a work around until package staging works fully including
+our already complete package conflicts handling.
 
-Although useful this might be an idea for bitbake 2.0
-
-Thanks
-David Farning
+Graeme
 
 
