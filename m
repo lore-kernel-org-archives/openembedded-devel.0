@@ -1,21 +1,28 @@
-Received: from [209.85.198.188] (helo=rv-out-0910.google.com)
+Received: from [209.85.162.179] (helo=el-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1Isv9z-0002Ff-D0
-	for openembedded-devel@openembedded.org; Fri, 16 Nov 2007 07:58:39 +0100
-Received: by rv-out-0910.google.com with SMTP id k20so638092rvb
-	for <openembedded-devel@openembedded.org>;
-	Thu, 15 Nov 2007 22:56:54 -0800 (PST)
-Received: by 10.114.175.16 with SMTP id x16mr19651wae.1195173122216;
-	Thu, 15 Nov 2007 16:32:02 -0800 (PST)
-Received: by 10.114.204.10 with HTTP; Thu, 15 Nov 2007 16:32:02 -0800 (PST)
-Message-ID: <bdb0025f0711151632m134e6e4bmcc332db712c5b404@mail.gmail.com>
-Date: Thu, 15 Nov 2007 21:32:02 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
-To: mamona-devel@garage.maemo.org,
-	maemo-developers <maemo-developers@maemo.org>, 
-	openembedded-devel@openembedded.org
+	(envelope-from <dfarning@gmail.com>) id 1IsvGJ-0002JJ-Dh
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Nov 2007 08:05:11 +0100
+Received: by el-out-1112.google.com with SMTP id z25so363341ele
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Nov 2007 23:03:27 -0800 (PST)
+Received: by 10.70.52.8 with SMTP id z8mr2112609wxz.1195175791870;
+	Thu, 15 Nov 2007 17:16:31 -0800 (PST)
+Received: from lenovo ( [69.179.85.165])
+	by mx.google.com with ESMTPS id h17sm6194539wxd.2007.11.15.17.16.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 15 Nov 2007 17:16:31 -0800 (PST)
+Received: by lenovo (sSMTP sendmail emulation); Thu, 15 Nov 2007 19:16:27 -0600
+Date: Thu, 15 Nov 2007 19:16:27 -0600
+From: David Farning <dfarning@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071116011627.GA7192@lenovo>
+References: <472216E5.6060708@student.utwente.nl>
+	<20071115080222.2c3a597f@cimmeria>
 MIME-Version: 1.0
-Subject: Mamona 0.1 Released
+In-Reply-To: <20071115080222.2c3a597f@cimmeria>
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: Re: [RFC] adding CONFLICTS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,74 +36,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2007 06:58:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 16 Nov 2007 07:05:11 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-This new release is available from:
-http://dev.openbossa.org/mamona
+On Thu, Nov 15, 2007 at 08:02:22AM +0000, Graeme Gregory wrote:
+> On Fri, 26 Oct 2007 18:33:41 +0200
+> Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> 
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> > 
+> > Hi,
+> > 
+> > Since we don't have packaged staging yet, what do people thing about
+> > adding CONFLICTS to packages the interfere with eachother like e.g.
+> > medialibraries like sdl and their hacked-up qte versions, multiple
+> > kernels (linux-foo and linux-foo-devel) etc...
+> > 
+> > regards,
+> > 
+> > Koen
+> 
+> This sounds good in theory as long as bitbake actually chokes with
+> a sensible error message.
+> 
+> Hopefully then it makes uses more aware what went wrong.
+>
+A good way to look at this issue is to study how Seth Vidal sovled the
+issue in YUM, Fedora's updater.  It is written in python, so easy for
+BitBake developers to understand.
 
-What's it?
-----------
-Mamona is an embedded Linux distribution for ARM EABI. The main goal
-of Mamona Project is to offer a completely open source
-alternative/experimental SDK package and flash image generation
-process for the Maemo Platform using only free and open source
-components.
+It seems that it would add a good deal of complexity to the current
+design of bitbake.
 
-You can run the Mamona linux distribution 0.1 on your Nokia Internet
-Tablet (N800 or N810) or use it as a SDK in your PC running emulated
-over qemu.
+Although useful this might be an idea for bitbake 2.0
 
-Current Features
----------------
-In this first release we have:
-
-    * Glibc - 2.5
-    * Gcc - 4.1.2
-    * Full Python 2.5 support
-    * Enlightenment Window Manager
-    * USB Networking - As mainly input method.
-    * Bluetooth support
-    * Wireless - Open and WEP support only
-    * Noemu Packages
-    * ARM EABI Version 5 and QEMU (user mode emulation) 0.9.0 for Mamona SDK
-
-You can check for other features under Mamona 0.1 - Package List:
-http://dev.openbossa.org/trac/mamona/wiki/MamonaPackList0.1
-
-You can run it on:
-
-    * Nokia N800
-    * Nokia N810
-
-What's planned?
----------------
-Next release is planned to have:
-
-    * Mamona SDK for Maemo (Chinook Compatible)
-    * Full ARM EABI Version 6 support
-    * Wireless with WPA Support
-    * Usefull virtual keyboard and more applications for E-wm
-
-Acknowledgements:
------------------
-Thanks to everybody who helped making this release possible.
-
-Bug reports, as always, should go to Mamona's Trac; check out
-http://dev.openbossa.org/trac/mamona/wiki/Contributing#Bugs for links
-to posting and querying bug
-reports for Mamona.
-
-Official announcement: http://dev.openbossa.org/trac/mamona/wiki/ReleaseNotes0.1
-
-Regards,
-
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+Thanks
+David Farning
 
 
