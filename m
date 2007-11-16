@@ -1,28 +1,25 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [209.85.132.243] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IsyFX-0004lR-1q
-	for openembedded-devel@openembedded.org; Fri, 16 Nov 2007 11:16:35 +0100
-Received: from Powerbook-2.local (vpn006187.vpn.utwente.nl [130.89.6.187])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lAGAEmZn026489 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2007 11:14:48 +0100
-Message-ID: <473D6D98.9050305@student.utwente.nl>
-Date: Fri, 16 Nov 2007 11:14:48 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <dfarning@gmail.com>) id 1It2k3-0005FF-Cs
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Nov 2007 16:04:23 +0100
+Received: by an-out-0708.google.com with SMTP id c31so226163ana
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Nov 2007 07:02:37 -0800 (PST)
+Received: by 10.100.232.13 with SMTP id e13mr2706484anh.1195221551770;
+	Fri, 16 Nov 2007 05:59:11 -0800 (PST)
+Received: from lenovo ( [75.121.174.189])
+	by mx.google.com with ESMTPS id 15sm89774nzn.2007.11.16.05.59.09
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 16 Nov 2007 05:59:10 -0800 (PST)
+Received: by lenovo (sSMTP sendmail emulation); Fri, 16 Nov 2007 07:59:09 -0600
+Date: Fri, 16 Nov 2007 07:59:09 -0600
+From: David Farning <dfarning@gmail.com>
+To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
+Message-ID: <20071116135909.GA19085@lenovo>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <472216E5.6060708@student.utwente.nl>	<20071115080222.2c3a597f@cimmeria>
-	<20071116011627.GA7192@lenovo> <20071116083222.552a9c30@cimmeria>
-In-Reply-To: <20071116083222.552a9c30@cimmeria>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] adding CONFLICTS
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: Cross compiler questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,51 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2007 10:16:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 16 Nov 2007 15:04:23 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I am trying to get my mind wrapped around how OE handles
+cross-compiling.  The first question is where is the cross compiler
+tool chain getting pulled into the build queue?
 
-Graeme Gregory schreef:
-> On Thu, 15 Nov 2007 19:16:27 -0600
-> David Farning <dfarning@gmail.com> wrote:
->> A good way to look at this issue is to study how Seth Vidal sovled the
->> issue in YUM, Fedora's updater.  It is written in python, so easy for
->> BitBake developers to understand.
->>
->> It seems that it would add a good deal of complexity to the current
->> design of bitbake.
->>
->> Although useful this might be an idea for bitbake 2.0
->>
-> We already have fully working package Conflicts: working.
-> 
-> This is talking about staging conflicts. Or in otherwords
-> a work around until package staging works fully including
-> our already complete package conflicts handling.
+I am greping for gcc-native and quilt to figure out how they are
+included or required?  I see a PREFERED_VERSION set in the distro.  Is
+PREFERED_VERSION a method of including dependancies?
 
-It goes even a bit deeper as staging, since you want certain packages to
-not get build at all. With packaged staging you can still build a feed
-that is internally inconsistant, which is what the CONFLICTS is trying
-to solve.
+Also, the tmp/cross directory has three distinct file groupings.
 
-regards,
+dfarning@lenovo:~/oe/oetmp$ find cross -maxdepth 3 -type d
+cross
+cross/i586-angstrom-linux
+cross/i586-angstrom-linux/bin
+cross/lib
+cross/lib/gcc
+cross/lib/gcc/i586-angstrom-linux
+cross/i686-linux
+cross/i686-linux/i586-angstrom-linux
+cross/i686-linux/i586-angstrom-linux/lib
+cross/i686-linux/i586-angstrom-linux/include
+cross/bin
+cross/libexec
+cross/libexec/gcc
+cross/libexec/gcc/i586-angstrom-linux
+cross/include
+cross/share
 
-Koen
+What is the difference between 
+cross
+cross/i586-angstrom-linux
+cross/i686-linux/i586-angstrom-linux
+
+Why are thing different things being placed in different dirs?
 
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+Thanks
+David Farning
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHPW2YMkyGM64RGpERAm7jAKCQ2M4fjfI/eHU9RPc95RJB04YhSgCfejgP
-v4/5OHK/0s0Pu8iwij54GIM=
-=fUV2
------END PGP SIGNATURE-----
 
 
