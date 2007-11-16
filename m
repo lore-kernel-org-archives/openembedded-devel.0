@@ -1,25 +1,24 @@
-Received: from [209.85.132.243] (helo=an-out-0708.google.com)
+Received: from [209.85.198.185] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dfarning@gmail.com>) id 1It2k3-0005FF-Cs
+	(envelope-from <kergoth@gmail.com>) id 1ItO8L-0002W4-Th
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2007 16:04:23 +0100
-Received: by an-out-0708.google.com with SMTP id c31so226163ana
+	Sat, 17 Nov 2007 14:55:01 +0100
+Received: by rv-out-0910.google.com with SMTP id c24so923881rvf
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2007 07:02:37 -0800 (PST)
-Received: by 10.100.232.13 with SMTP id e13mr2706484anh.1195221551770;
-	Fri, 16 Nov 2007 05:59:11 -0800 (PST)
-Received: from lenovo ( [75.121.174.189])
-	by mx.google.com with ESMTPS id 15sm89774nzn.2007.11.16.05.59.09
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 16 Nov 2007 05:59:10 -0800 (PST)
-Received: by lenovo (sSMTP sendmail emulation); Fri, 16 Nov 2007 07:59:09 -0600
-Date: Fri, 16 Nov 2007 07:59:09 -0600
-From: David Farning <dfarning@gmail.com>
-To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
-Message-ID: <20071116135909.GA19085@lenovo>
+	Sat, 17 Nov 2007 05:53:01 -0800 (PST)
+Received: by 10.143.6.1 with SMTP id j1mr770882wfi.1195251018127;
+	Fri, 16 Nov 2007 14:10:18 -0800 (PST)
+Received: by 10.142.104.18 with HTTP; Fri, 16 Nov 2007 14:10:18 -0800 (PST)
+Message-ID: <b6ebd0a50711161410m1e6ea2ddq60b7c3c942a3c736@mail.gmail.com>
+Date: Fri, 16 Nov 2007 15:10:18 -0700
+From: "Chris Larson" <clarson@kergoth.com>
+Sender: kergoth@gmail.com
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1195158580.6376.328.camel@toontown>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
-Subject: Cross compiler questions
+References: <1195158580.6376.328.camel@toontown>
+X-Google-Sender-Auth: aad8e5573c33e589
+Subject: Re: altering cflags for autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,48 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2007 15:04:23 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 17 Nov 2007 13:55:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-I am trying to get my mind wrapped around how OE handles
-cross-compiling.  The first question is where is the cross compiler
-tool chain getting pulled into the build queue?
+On Nov 15, 2007 1:29 PM, Tobias Pflug <tobias.pflug@gmx.net> wrote:
+> hi..
+>
+> today i've been trying to package mod_python but had some difficulties
+> because ${STAGING_INCDIR} was not included in the path thus
+> mod_include.h (staged from the apache2 package) could not be found ->
+> can't compile mod_python.
+>
+> Changing CFLAGS or EXTRA_CFLAGS has no effect. Looking at the autotools
+> class that is no surprise because it doesn't seem to be read anywhere.
+> How can I fix this? Do I have to patch the configure.in file ?
 
-I am greping for gcc-native and quilt to figure out how they are
-included or required?  I see a PREFERED_VERSION set in the distro.  Is
-PREFERED_VERSION a method of including dependancies?
-
-Also, the tmp/cross directory has three distinct file groupings.
-
-dfarning@lenovo:~/oe/oetmp$ find cross -maxdepth 3 -type d
-cross
-cross/i586-angstrom-linux
-cross/i586-angstrom-linux/bin
-cross/lib
-cross/lib/gcc
-cross/lib/gcc/i586-angstrom-linux
-cross/i686-linux
-cross/i686-linux/i586-angstrom-linux
-cross/i686-linux/i586-angstrom-linux/lib
-cross/i686-linux/i586-angstrom-linux/include
-cross/bin
-cross/libexec
-cross/libexec/gcc
-cross/libexec/gcc/i586-angstrom-linux
-cross/include
-cross/share
-
-What is the difference between 
-cross
-cross/i586-angstrom-linux
-cross/i686-linux/i586-angstrom-linux
-
-Why are thing different things being placed in different dirs?
-
-
-Thanks
-David Farning
-
+It doesn't need to be read anywhere.  It's exported, and autoconf uses
+the environment CFLAGS by default.
+-- 
+Chris Larson - clarson at kergoth dot com
+Dedicated Engineer - MontaVista - clarson at mvista dot com
+Core Developer/Architect - TSLib, BitBake, OpenEmbedded, OpenZaurus
 
 
