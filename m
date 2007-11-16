@@ -1,21 +1,27 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dp@xora.org.uk>) id 1IsweK-0003aE-9v
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2007 09:34:04 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Fri, 16 Nov 2007 08:32:20 +0000
-	id 00064627.473D5594.000030AF
-Date: Fri, 16 Nov 2007 08:32:22 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071116083222.552a9c30@cimmeria>
-In-Reply-To: <20071116011627.GA7192@lenovo>
-References: <472216E5.6060708@student.utwente.nl>
-	<20071115080222.2c3a597f@cimmeria> <20071116011627.GA7192@lenovo>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IsyFX-0004lR-1q
+	for openembedded-devel@openembedded.org; Fri, 16 Nov 2007 11:16:35 +0100
+Received: from Powerbook-2.local (vpn006187.vpn.utwente.nl [130.89.6.187])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lAGAEmZn026489 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Nov 2007 11:14:48 +0100
+Message-ID: <473D6D98.9050305@student.utwente.nl>
+Date: Fri, 16 Nov 2007 11:14:48 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <472216E5.6060708@student.utwente.nl>	<20071115080222.2c3a597f@cimmeria>
+	<20071116011627.GA7192@lenovo> <20071116083222.552a9c30@cimmeria>
+In-Reply-To: <20071116083222.552a9c30@cimmeria>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: [RFC] adding CONFLICTS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,27 +36,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2007 08:34:04 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 16 Nov 2007 10:16:35 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Thu, 15 Nov 2007 19:16:27 -0600
-David Farning <dfarning@gmail.com> wrote:
-> A good way to look at this issue is to study how Seth Vidal sovled the
-> issue in YUM, Fedora's updater.  It is written in python, so easy for
-> BitBake developers to understand.
-> 
-> It seems that it would add a good deal of complexity to the current
-> design of bitbake.
-> 
-> Although useful this might be an idea for bitbake 2.0
-> 
-We already have fully working package Conflicts: working.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This is talking about staging conflicts. Or in otherwords
-a work around until package staging works fully including
-our already complete package conflicts handling.
+Graeme Gregory schreef:
+> On Thu, 15 Nov 2007 19:16:27 -0600
+> David Farning <dfarning@gmail.com> wrote:
+>> A good way to look at this issue is to study how Seth Vidal sovled the
+>> issue in YUM, Fedora's updater.  It is written in python, so easy for
+>> BitBake developers to understand.
+>>
+>> It seems that it would add a good deal of complexity to the current
+>> design of bitbake.
+>>
+>> Although useful this might be an idea for bitbake 2.0
+>>
+> We already have fully working package Conflicts: working.
+> 
+> This is talking about staging conflicts. Or in otherwords
+> a work around until package staging works fully including
+> our already complete package conflicts handling.
 
-Graeme
+It goes even a bit deeper as staging, since you want certain packages to
+not get build at all. With packaged staging you can still build a feed
+that is internally inconsistant, which is what the CONFLICTS is trying
+to solve.
+
+regards,
+
+Koen
+
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHPW2YMkyGM64RGpERAm7jAKCQ2M4fjfI/eHU9RPc95RJB04YhSgCfejgP
+v4/5OHK/0s0Pu8iwij54GIM=
+=fUV2
+-----END PGP SIGNATURE-----
 
 
