@@ -1,29 +1,28 @@
-Received: from [62.70.27.18] (helo=esparsett.troll.no)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <lpotter@trolltech.com>) id 1IuECo-0002ZE-6f
+	(envelope-from <rod@whitby.id.au>) id 1IuGR2-0004Nw-SV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Nov 2007 22:30:58 +0100
-Received: from esparsett.troll.no (localhost [127.0.0.1])
-	by localhost (Postfix) with SMTP id 39634741CC
+	Tue, 20 Nov 2007 00:53:48 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 425F74CBBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2007 22:07:48 +0100 (CET)
-Received: from mail.trolltech.com.au (unknown [10.1.1.12])
-	by esparsett.troll.no (Postfix) with ESMTP id C4EE67421E
+	Mon, 19 Nov 2007 18:51:43 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Mon, 19 Nov 2007 18:51:43 -0500
+X-Sasl-enc: 4bRxOZRGBKEOHx1EinSzp0c9QAPApTIsqG1NxBMUNYGD 1195516302
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id 5EEC624F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2007 22:07:47 +0100 (CET)
-Received: from lorn-potters-mac-mini-2.local (unknown [172.18.1.3])
-	by mail.trolltech.com.au (Postfix) with ESMTP id 379F03A91B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 07:07:46 +1000 (EST)
-Message-ID: <4741FB41.7080602@trolltech.com>
-Date: Tue, 20 Nov 2007 07:08:17 +1000
-From: Lorn Potter <lpotter@trolltech.com>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	Mon, 19 Nov 2007 18:51:42 -0500 (EST)
+Message-ID: <4742217C.9060506@whitby.id.au>
+Date: Tue, 20 Nov 2007 10:21:24 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <20071119120819.GA17788@lenovo>
-	<C7148B94-6A92-42DE-BF35-75B409DAA8E7@selfish.org>
-In-Reply-To: <C7148B94-6A92-42DE-BF35-75B409DAA8E7@selfish.org>
+	<47419EA0.4030308@student.utwente.nl>
+In-Reply-To: <47419EA0.4030308@student.utwente.nl>
 Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,36 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2007 21:30:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 19 Nov 2007 23:53:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Holger Freyther wrote:
-> Am 19.11.2007 um 13:08 schrieb David Farning:
+Koen Kooi wrote:
+> David Farning schreef:
+>> $make setup
 > 
->> This eliminates many of problems the new users have setting up bb
->> and oe.  There is no need to know any thing about svn of monotone.
+> nice
 > 
-> Hey,
+>> $make build-package-vim
 > 
-> this is the issue you want to solve? IMO developers should know about  
-> how to build software and this includes getting the source. I think  
-> it is no use in hiding OpenEmbedded and BitBake behind a GNU Makefile.
+> $deity just killed a few hundred kittens.
+> 
+> At OEDEM we decided that we won't tolerate kindergarten-like,
+> hand-holding wrappers around bitbake. Typing 'bitbake vim' isn't rocket
+> science. To paraphrase Mickey: "If typing 'bitbake <foo>' is too hard,
+> you shouldn't be using OE".
 
-well, me and lot of other developers disagree. Hence the popularity of 
-the openmoko makefile.
+The challenge I put to yourself and a couple of other people from the OM
+core team in IRC a couple of weeks or months ago still stands:
 
-Are you trying to make it easier or harder to generate file systems? 
-Lots of developers do not have time to learn the symantics of 
-bitbake/monotone, etc.
+Show how you can use bitbake such that you can cd into a build area, and
+type a *single* bitbake command to do a build, then cd into a different
+build area (with a different distro and machine) and type a *single*
+bitbake command to do a build there.  No other commands are allowed.
 
-Anything that can make it easier to set up and build is needed. 
-Otherwise it is just easier to build it from scratch.
+At the moment, you need to set many environment variables before bitbake
+can do it's job, and you need to reset them when you move into a
+different area to do a different build.  That's the reason why there are
+makefile wrappers around simple bitbake commands.
 
+If we can fix the underlying problem (needing to type more than one
+command to build an image with bitbake), then I will fully support a
+move to get rid of all bitbake wrappers from all the Makefiles that I
+manage.
 
+Instead of just saying that you won't tolerate something, how about
+understanding *why* that something is done, and then work together to
+improve the existing tools so that something no longer needs to be done
+cause the tools already cover that use case.
 
--- 
-Lorn 'ljp' Potter
-Software Engineer, Systems Group, MES, Trolltech
+-- Rod
+
 
 
