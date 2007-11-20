@@ -1,27 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [209.242.20.84] (helo=green.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IuStl-0002yz-Vs
-	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 14:12:18 +0100
-Received: from Powerbook-2.local (vpn006015.vpn.utwente.nl [130.89.6.15])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lAKDA6Zn027843 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 14:10:06 +0100
-Message-ID: <4742DCAE.1020509@student.utwente.nl>
-Date: Tue, 20 Nov 2007 14:10:06 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <mwester@dls.net>) id 1IuV7m-0002Oy-2B
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Nov 2007 16:34:54 +0100
+Received: from twilight (gw.mwester.net [209.242.5.110])
+	by green.dls.net (Postfix) with ESMTP id C95B341285A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 09:32:46 -0600 (CST)
+Message-ID: <008f01c82b8a$89c8ab50$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+References: <20071119120819.GA17788@lenovo><C7148B94-6A92-42DE-BF35-75B409DAA8E7@selfish.org><4741FB41.7080602@trolltech.com>
+	<1195551213.6337.9.camel@localhost.localdomain>
+Date: Tue, 20 Nov 2007 09:32:18 -0600
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>
-	<4742C89E.4070909@whitby.id.au>
-In-Reply-To: <4742C89E.4070909@whitby.id.au>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1914
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1914
 Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,36 +32,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 13:12:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 Nov 2007 15:34:54 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Rod Whitby schreef:
+> From: "Richard Purdie" <rpurdie@rpsys.net>
+>
+> I think Holger's point and the general feeling of other OE devs, me
+> included is that the current wave of makefiles hide too much. I had to
+> solve this problem with Poky and I did it with a script you source which
+> sets up a magic environment. I don't expect users to know/care about
+> what the script does. I do want users to end up typing "bitbake xyz"
+> though. Why?
+>
+> Users end up realising that everything is either an SCM command ("svn
+> up" for Poky) or a bitbake one. Neither are complicated programs to
+> learn. Yes monotone is more complex than svn but all you really need to
+> know is "mtn pull;mtn up" and even then, understanding why there are two
+> commands actually teaches you something important about the SCM. Hiding
+> them from the user just creates a  phobia of using the real tools.
+>
+> Cheers,
+>
+> Richard
 
-> Are the powers of persuasion of the various Makefile authors so great
-> that they can convince people to type more characters, even when the
-> documentation, wiki and tutorials provided by OE explicitly tell people
-> to use a command which involves typing less characters?
+I know bitbake.  I use bitbake.  I debug bitbake (more often than I want to,
+actually).
 
-As I pointed out in an earlier email: The nslu2 and openmoko wiki pretty
-much mandate using the makefile.
-I get the impression you deliberately try to confuse us by mentioning
-openmoko on one hand and then pointing to the OE instead of the OM wiki.
+Yet I also type "make all" to build things.
 
+Why?
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+Not because I have a "phobia of using the real tools."  Not because I'm
+stupid.  Not because I'm philisophically opposed to bitbake.  It might
+perhaps be because I'm so old that I have moss growing on me, and that I've
+been typing "make <target>" since rocks were young and dirt was just
+invented.  It's true that my brain thinks "bitbake <thing>" and my fingers
+type "make <thing>".
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I ask the OE team why are they are philosophically opposed to driving
+bitbake with make?  Make has driven software development since near the dawn
+of time.  Make has been used to set up environment variables, adjust for
+unusual or tricky build environments, and generally to ease the life of a
+developer for eons.  It works very well for its purpose.  So why would
+anyone encourage a development approach that throws out such a useful tools
+and forces a user to manually set environment variables, and remember an
+obscure command to invoke a build?  Of course a serious developer should
+know generally what goes on underneath, but that doesn't mean that they
+should do all the steps manually!
 
-iD8DBQFHQtyuMkyGM64RGpERAt9FAJ9DIQKZ/jVhhJsmFfJO46wZKpVSKgCfXz7/
-RGCriw2n8sYMYQsscq9+vpE=
-=wrmN
------END PGP SIGNATURE-----
+Unless it is the intent to create a barrier to entry?
+
+Mike (mwester)
+
 
 
