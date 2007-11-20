@@ -1,31 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IuPjF-0004H5-HY
-	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 10:49:13 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAK9l6Nw009347
-	for <openembedded-devel@openembedded.org>; Tue, 20 Nov 2007 09:47:06 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09219-02 for <openembedded-devel@openembedded.org>;
-	Tue, 20 Nov 2007 09:46:59 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAK9ksRQ009299
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 20 Nov 2007 09:46:54 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IuPuT-0004Og-2J
+	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 11:00:49 +0100
+Received: from Powerbook-2.local (vpn006015.vpn.utwente.nl [130.89.6.15])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lAK9wanH004030 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 10:58:37 +0100
+Message-ID: <4742AFCC.1060000@student.utwente.nl>
+Date: Tue, 20 Nov 2007 10:58:36 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-In-Reply-To: <1195540585.11106.5.camel@localhost>
-References: <20071119224008.CD638401CA7@tinman.treke.net>
-	<1195540585.11106.5.camel@localhost>
-Date: Tue, 20 Nov 2007 09:46:53 +0000
-Message-Id: <1195552013.6337.18.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Host dependency vs. -native packages balance
+References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>
+	<4742217C.9060506@whitby.id.au>
+In-Reply-To: <4742217C.9060506@whitby.id.au>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,36 +35,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 09:49:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 20 Nov 2007 10:00:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-11-20 at 07:36 +0100, Esben Haabendal wrote:
-> Not having looked at the details of this bug, it seems like a good
-> example of how more host dependency creep into OE.
-> 
-> I think it raises two questions:
-> 
-> 1. Where do we want the balance between dependency on host installed
-> libraries and tools vs. OE provided -native packages?
-> 
-> 2. How can we better handle or track the actual host dependency of
-> current OE?
-> 
-> The current situation is that some (maybe even most) host dependencies
-> are discussed on the RequiredSoftware  and OEandYourDistro pages. They
-> are clearly not up-to-date and comments in bugzilla such as the one
-> below are a bit harder to find.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dependencies needed from the host system are those listed in
-ASSUME_PROVIDED. If its not listed in ASSUME_PROVIDED, OE shouldn't need
-it. If it needs something not listed, that is a bug.
+Rod Whitby schreef:
 
-Cheers,
+> Show how you can use bitbake such that you can cd into a build area, and
+> type a *single* bitbake command to do a build, then cd into a different
+> build area (with a different distro and machine)
 
-Richard
+Why are you using a different build area for that? That's unnecessary.
+Just do something like
+
+TMPDIR = "/OE/tmp/${DISTRO}"
+
+in site.conf. If your distro is a bit behind the times and doesn't use
+multimachine add:
+
+INHERIT += "multimachine"
+
+No need for seperate build areas. If you use angstrom you can even
+switch C library ([e]glibc vs uclibc), as outlined in
+http://www.angstrom-distribution.org/building-angstrom
+You can even have per distro tweaks using include statements, but I'll
+leave that as an exercise to the reader. No need for seperate build
+areas. At all.
 
 
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHQq/MMkyGM64RGpERApx4AJwLiQrVBbGDGlrdVfN8P6TzUl5u+wCfZIH8
+YaWoQ3YzbtknQqu5sJ44Ito=
+=PlQ1
+-----END PGP SIGNATURE-----
 
 
