@@ -1,59 +1,25 @@
-Received: from [65.55.251.16] (helo=outbound7-blu-R.bigfish.com)
+Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <Timothy.Bird@am.sony.com>) id 1IuXe2-0001CC-34
+	(envelope-from <dfarning@gmail.com>) id 1IuZ9h-0006C0-5r
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2007 19:16:22 +0100
-Received: from outbound7-blu.bigfish.com (localhost.localdomain [127.0.0.1])
-	by outbound7-blu-R.bigfish.com (Postfix) with ESMTP id EB52816FC3AD
+	Tue, 20 Nov 2007 20:53:09 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so2772029waf
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 17:56:27 +0000 (UTC)
-Received: from mail55-blu-R.bigfish.com (unknown [10.1.252.3])
-	by outbound7-blu.bigfish.com (Postfix) with ESMTP id D272216A0043
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 17:56:27 +0000 (UTC)
-Received: from mail55-blu (localhost.localdomain [127.0.0.1])
-	by mail55-blu-R.bigfish.com (Postfix) with ESMTP id 13CFB9881AC
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 17:56:27 +0000 (UTC)
-X-BigFish: VP
-X-MS-Exchange-Organization-Antispam-Report: OrigIP: 160.33.98.75;Service: EHS
-Received: by mail55-blu (MessageSwitch) id 11955813872447_13295;
-	Tue, 20 Nov 2007 17:56:27 +0000 (UCT)
-Received: from mail8.fw-bc.sony.com (mail8.fw-bc.sony.com [160.33.98.75])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail55-blu.bigfish.com (Postfix) with ESMTP id DE107156006E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 17:56:24 +0000 (UTC)
-Received: from mail3.sjc.in.sel.sony.com (mail3.sjc.in.sel.sony.com
-	[43.134.1.211])
-	by mail8.fw-bc.sony.com (8.12.11/8.12.11) with ESMTP id lAKHuNBQ013198
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 17:56:24 GMT
-Received: from USSDIXIM02.am.sony.com (ussdixim02.am.sony.com [43.130.140.34])
-	by mail3.sjc.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
-	lAKHuNxt007628 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 17:56:23 GMT
-Received: from ussdixms03.am.sony.com ([43.130.140.23]) by
-	USSDIXIM02.am.sony.com with Microsoft SMTPSVC(5.0.2195.6713); 
-	Tue, 20 Nov 2007 09:56:23 -0800
-Received: from [43.135.148.58] ([43.135.148.58]) by ussdixms03.am.sony.com
-	with Microsoft SMTPSVC(5.0.2195.6713); 
-	Tue, 20 Nov 2007 09:56:22 -0800
-Message-ID: <4743201F.8000202@am.sony.com>
-Date: Tue, 20 Nov 2007 09:57:51 -0800
-From: Tim Bird <tim.bird@am.sony.com>
-User-Agent: Thunderbird 1.5.0.4 (X11/20060614)
+	Tue, 20 Nov 2007 11:50:57 -0800 (PST)
+Received: by 10.114.66.2 with SMTP id o2mr313451waa.1195573022542;
+	Tue, 20 Nov 2007 07:37:02 -0800 (PST)
+Received: from lenovo ( [68.187.118.242])
+	by mx.google.com with ESMTPS id 38sm88304nza.2007.11.20.07.36.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 20 Nov 2007 07:36:56 -0800 (PST)
+Received: by lenovo (sSMTP sendmail emulation); Tue, 20 Nov 2007 09:36:38 -0600
+Date: Tue, 20 Nov 2007 09:36:38 -0600
+From: David Farning <dfarning@gmail.com>
+To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
+Message-ID: <20071120153638.GA6424@lenovo>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>
-	<4742217C.9060506@whitby.id.au>
-	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
-In-Reply-To: <74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
-X-Enigmail-Version: 0.94.0.0
-X-OriginalArrivalTime: 20 Nov 2007 17:56:22.0985 (UTC)
-	FILETIME=[A992B390:01C82B9E]
-Subject: Re: Getting Started -Makefile
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+Subject: Defining the user
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -67,31 +33,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 18:16:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Nov 2007 19:53:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-pHilipp Zabel wrote:
-> $ cat ~/bin/bitbake
-> #!/bin/sh
-> export OEDIR=${OEDIR:-$PWD}
-> export BBPATH=${BBPATH:-$OEDIR/build:$OEDIR/openembedded}
-> /usr/local/bin/bitbake $*
+How do we define BitBake and OpenEmbedded user and developers?
 
-This is nice.  Can someone tell me why this isn't
-the default behavior of bitbake now?  (I'm honestly
-not trolling :-)   There must be some good reason
-to allow bitbake to be used outside of a build
-directory.  Make (which bitbake resembles
-in some aspects), is sensitive to it's starting
-directory.  Why not bitbake?
- -- Tim
+When working on the documentation I have been struggling to define
+exactly what are: bitbake users, bitbake developers, openembedded
+users, and open embedded developers.
 
-=============================
-Tim Bird
-Architecture Group Chair, CE Linux Forum
-Senior Staff Engineer, Sony Corporation of America
-=============================
+The most consistant, and I belive correct, definitions depend on first
+defining Distribution, BiteBake and OpenEmbedded.
+
+Distribution - A distribution is a set of programs
+which make up a computer operating system, tools, and applications.  These
+programs are selected to provide specicic functionality and they are assembled
+such that they can run on a target device.
+
+bitbake - (with small letters) is a Domain Specific Language which is
+used to describe how to build a Distribution.
+
+BitBake - (Capital letters) is an interpeter for source files written
+in bitbake.  The BitBake output is an image and installable package
+which are ready to run. 
+
+OpenEmbedded - is a set of source files, written in bitebake, which
+describe how to build a generic embedded distribution.
+
+This implies a number of things.  Working backwards.
+
+1.  Openembedded users (consumers) are the developers who design and build
+distributions for specific devices.  I am calling this group
+'distribution developers.'  Currently, they are openmoko developers,
+poky developer....  Distribution developers write source files in the
+bitbake language which extend the generic functionality of
+openembedded to meet their specic needs.  Distribution developers build from
+their local trees.  They are responsible for the quality of their
+distribution.
+
+2.  OpenEmbedded developers are the developers who work on the set of files
+stored at org.openembedded.dev.  These files are the bitbake and class
+files which describe how to make a generic distribution.  OpenEmbedded
+developers build from the o.e.d tree.  The open Embedded tree is
+upstream from specific distribution trees.  Distribution developers
+push the patches which they feel are generally useful upstream to
+Openembedded developers.  Open Embedded developers act as gate keepers
+for accepting patches which are of a high quality and generally
+useful to the o.e.d tree.
+
+3.  BitBake users are OpenEmbedded developers and distribution
+developers.
+
+4.  BitBake developers work on defining the bitbake language and
+implementing the BitBake interpeter.
+
+Thanks
+David Farning
 
 
 
