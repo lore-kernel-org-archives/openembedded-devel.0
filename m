@@ -1,21 +1,21 @@
 Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IuSEl-0002TJ-RT
-	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 13:29:55 +0100
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IuSHd-0002VC-DX
+	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 13:32:53 +0100
 Received: from Powerbook-2.local (vpn006015.vpn.utwente.nl [130.89.6.15])
 	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lAKCRiZn020972 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 13:27:44 +0100
-Message-ID: <4742D2C0.7090805@student.utwente.nl>
-Date: Tue, 20 Nov 2007 13:27:44 +0100
+	lAKCUeZn021210 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 13:30:41 +0100
+Message-ID: <4742D370.7040700@student.utwente.nl>
+Date: Tue, 20 Nov 2007 13:30:40 +0100
 From: Koen Kooi <k.kooi@student.utwente.nl>
 User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
 To: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel@openembedded.org>
-References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>	<4742AFCC.1060000@student.utwente.nl>
-	<4742C0FB.1010101@whitby.id.au>
-In-Reply-To: <4742C0FB.1010101@whitby.id.au>
+References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>	<1195551550.6337.15.camel@localhost.localdomain>
+	<4742BFCA.9000205@whitby.id.au>
+In-Reply-To: <4742BFCA.9000205@whitby.id.au>
 X-Enigmail-Version: 0.95.5
 X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
 	helpdesk@ITBE.utwente.nl for more information.
@@ -36,7 +36,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 12:29:56 -0000
+X-List-Received-Date: Tue, 20 Nov 2007 12:32:53 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -44,32 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hash: SHA1
 
 Rod Whitby schreef:
-> Koen Kooi wrote:
->> Rod Whitby schreef:
->>> Show how you can use bitbake such that you can cd into a build area, and
->>> type a *single* bitbake command to do a build, then cd into a different
->>> build area (with a different distro and machine)
->> Why are you using a different build area for that? That's unnecessary.
-> 
-> Um, when the MokoMakefile was created, it *was* necessary to have a
-> different build area.  
+>  Note that *nowhere* in the OE wiki
+> or documentation are the makefiles mentioned. 
 
-No it wasn't. I've been using this setup since long before openmoko
-existed. I started using it when I was comparing familiar and openzaurus
-builds when Mickeyl was still OZ release master.
-
-> Isn't the creator of the OpenMoko build environment an OE core team
-> member?  Does the OpenMoko build environment setup documentation follow
-> your prescription for TMPDIR and multimachine?
-
-Mickey was and is an OE core developer, but all the other core members
-have been appalled by the implementation of the OM env described in
-their wiki (to mention a few: hardcoding BUILD_ARCH and replacing
-/usr/bin/svn with a script).
-As proven multiple times on the OE-devel list, the OM wiki has bad
-practices for using OE. At the last OEDEM we coined 'Mo(c)kumentation'
-to describe it.
-
+They are pretty much mandated in the nslu2 and openmoko wiki, which
+covers nearly 100% of Makefile users. See a correlation?
 
 
 - --
@@ -79,9 +58,9 @@ use k.kooi@student.utwente.nl instead.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFHQtLAMkyGM64RGpERAimVAKCRGKb3XX5X3hK1OczvzMs16OAiEgCfbFfi
-4QzzYg6Tzp+yXXoxkDfQRA0=
-=6UN1
+iD8DBQFHQtNwMkyGM64RGpERAuZ4AJwMgrcZo+5QEjBLEV8gmgpNpRt8MwCglmxG
+z47psRg5nvWo43ePVd7USI4=
+=Jkrd
 -----END PGP SIGNATURE-----
 
 
