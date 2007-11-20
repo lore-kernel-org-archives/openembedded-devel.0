@@ -1,28 +1,27 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1IuPWF-0004At-W9
-	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 10:35:48 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1IuPbe-0004E9-Uo
+	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 10:41:23 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAK9XemI008549
-	for <openembedded-devel@openembedded.org>; Tue, 20 Nov 2007 09:33:40 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAK9dGGx008830
+	for <openembedded-devel@openembedded.org>; Tue, 20 Nov 2007 09:39:16 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 08524-01 for <openembedded-devel@openembedded.org>;
-	Tue, 20 Nov 2007 09:33:37 +0000 (GMT)
+	id 08524-09 for <openembedded-devel@openembedded.org>;
+	Tue, 20 Nov 2007 09:39:12 +0000 (GMT)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAK9XZ9q008541
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAK9dCCD008823
 	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 20 Nov 2007 09:33:35 GMT
+	for <openembedded-devel@openembedded.org>; Tue, 20 Nov 2007 09:39:12 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <4741FB41.7080602@trolltech.com>
+In-Reply-To: <4742217C.9060506@whitby.id.au>
 References: <20071119120819.GA17788@lenovo>
-	<C7148B94-6A92-42DE-BF35-75B409DAA8E7@selfish.org>
-	<4741FB41.7080602@trolltech.com>
-Date: Tue, 20 Nov 2007 09:33:33 +0000
-Message-Id: <1195551213.6337.9.camel@localhost.localdomain>
+	<47419EA0.4030308@student.utwente.nl> <4742217C.9060506@whitby.id.au>
+Date: Tue, 20 Nov 2007 09:39:10 +0000
+Message-Id: <1195551550.6337.15.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -40,46 +39,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 09:35:48 -0000
+X-List-Received-Date: Tue, 20 Nov 2007 09:41:23 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-11-20 at 07:08 +1000, Lorn Potter wrote:
-> Holger Freyther wrote:
-> > Am 19.11.2007 um 13:08 schrieb David Farning:
-> > 
-> >> This eliminates many of problems the new users have setting up bb
-> >> and oe.  There is no need to know any thing about svn of monotone.
-> > 
-> > Hey,
-> > 
-> > this is the issue you want to solve? IMO developers should know about  
-> > how to build software and this includes getting the source. I think  
-> > it is no use in hiding OpenEmbedded and BitBake behind a GNU Makefile.
+On Tue, 2007-11-20 at 10:21 +1030, Rod Whitby wrote:
+> The challenge I put to yourself and a couple of other people from the OM
+> core team in IRC a couple of weeks or months ago still stands:
 > 
-> well, me and lot of other developers disagree. Hence the popularity of 
-> the openmoko makefile.
+> Show how you can use bitbake such that you can cd into a build area, and
+> type a *single* bitbake command to do a build, then cd into a different
+> build area (with a different distro and machine) and type a *single*
+> bitbake command to do a build there.  No other commands are allowed.
 > 
-> Are you trying to make it easier or harder to generate file systems? 
-> Lots of developers do not have time to learn the symantics of 
-> bitbake/monotone, etc.
+> At the moment, you need to set many environment variables before bitbake
+> can do it's job, and you need to reset them when you move into a
+> different area to do a different build.  That's the reason why there are
+> makefile wrappers around simple bitbake commands.
 > 
-> Anything that can make it easier to set up and build is needed. 
-> Otherwise it is just easier to build it from scratch.
+> If we can fix the underlying problem (needing to type more than one
+> command to build an image with bitbake), then I will fully support a
+> move to get rid of all bitbake wrappers from all the Makefiles that I
+> manage.
+> 
+> Instead of just saying that you won't tolerate something, how about
+> understanding *why* that something is done, and then work together to
+> improve the existing tools so that something no longer needs to be done
+> cause the tools already cover that use case.
 
-I think Holger's point and the general feeling of other OE devs, me
-included is that the current wave of makefiles hide too much. I had to
-solve this problem with Poky and I did it with a script you source which
-sets up a magic environment. I don't expect users to know/care about
-what the script does. I do want users to end up typing "bitbake xyz"
-though. Why?
+Would you agree that bitbake itself isn't painful to use? "bitbake xyz"
+is just as simple as "make image" (or whatever)?
 
-Users end up realising that everything is either an SCM command ("svn
-up" for Poky) or a bitbake one. Neither are complicated programs to
-learn. Yes monotone is more complex than svn but all you really need to
-know is "mtn pull;mtn up" and even then, understanding why there are two
-commands actually teaches you something important about the SCM. Hiding
-them from the user just creates a  phobia of using the real tools.
+See my previous mail about how Poky handles this: "source script;
+bitbake xyz". I realise this isn't the one stop shop you describe but I
+think the fact bitbake is exposed to the user is a really positive move
+and well worth the slight extra learning curve. The script being sourced
+can even hint at the commands to run...
+
+If the makefile worked like that, exposing the user to bitbake instead
+of hiding it, most of the opposition to the makefile would be removed.
 
 Cheers,
 
