@@ -1,29 +1,22 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [68.230.241.11] (helo=fed1rmpop107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rod@whitby.id.au>) id 1IuGR2-0004Nw-SV
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2007 00:53:48 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 425F74CBBB
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2007 18:51:43 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Mon, 19 Nov 2007 18:51:43 -0500
-X-Sasl-enc: 4bRxOZRGBKEOHx1EinSzp0c9QAPApTIsqG1NxBMUNYGD 1195516302
-Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id 5EEC624F
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2007 18:51:42 -0500 (EST)
-Message-ID: <4742217C.9060506@whitby.id.au>
-Date: Tue, 20 Nov 2007 10:21:24 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	(envelope-from <trini@kernel.crashing.org>) id 1IuJm8-0006ah-5y
+	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 04:27:48 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20071120003819.XNPN14792.fed1rmmtao104.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 19 Nov 2007 19:38:19 -0500
+Received: from opus ([24.255.11.70]) by fed1rmimpo03.cox.net with bizsmtp
+	id EoeJ1Y00V1Wgi200000000; Mon, 19 Nov 2007 19:38:19 -0500
+Date: Mon, 19 Nov 2007 17:38:19 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Development List <openembedded-devel@openembedded.org>
+Message-ID: <20071120003819.GV12002@smtp.west.cox.net>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20071119120819.GA17788@lenovo>
-	<47419EA0.4030308@student.utwente.nl>
-In-Reply-To: <47419EA0.4030308@student.utwente.nl>
-Subject: Re: Getting Started -Makefile
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Subject: Packaging up <build>/{stamps,cross,staging}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,49 +30,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2007 23:53:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Nov 2007 03:27:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> David Farning schreef:
->> $make setup
-> 
-> nice
-> 
->> $make build-package-vim
-> 
-> $deity just killed a few hundred kittens.
-> 
-> At OEDEM we decided that we won't tolerate kindergarten-like,
-> hand-holding wrappers around bitbake. Typing 'bitbake vim' isn't rocket
-> science. To paraphrase Mickey: "If typing 'bitbake <foo>' is too hard,
-> you shouldn't be using OE".
+Hi everyone.  I'm hoping someone can point me in the right direction
+here.  I'm working on a project where we need to have all outputs from a
+build target packaged up (so that later someone can extract the all of
+the packages and have a dev env).  I realize this is a bit beyond the
+scope of the current packaged staging stuff, but I was thinking, the
+(presumably out of date) wiki page PackagedStaging talks about swapping
+the staging dir out, populating  and packaging that up.  I looked around
+a little and couldn't find any patches for that however.  Can someone
+point me in that direction?  I think I could expand on that for this
+project.  Or any better suggestions welcome.  Thanks!
 
-The challenge I put to yourself and a couple of other people from the OM
-core team in IRC a couple of weeks or months ago still stands:
-
-Show how you can use bitbake such that you can cd into a build area, and
-type a *single* bitbake command to do a build, then cd into a different
-build area (with a different distro and machine) and type a *single*
-bitbake command to do a build there.  No other commands are allowed.
-
-At the moment, you need to set many environment variables before bitbake
-can do it's job, and you need to reset them when you move into a
-different area to do a different build.  That's the reason why there are
-makefile wrappers around simple bitbake commands.
-
-If we can fix the underlying problem (needing to type more than one
-command to build an image with bitbake), then I will fully support a
-move to get rid of all bitbake wrappers from all the Makefiles that I
-manage.
-
-Instead of just saying that you won't tolerate something, how about
-understanding *why* that something is done, and then work together to
-improve the existing tools so that something no longer needs to be done
-cause the tools already cover that use case.
-
--- Rod
-
+-- 
+Tom Rini
 
 
