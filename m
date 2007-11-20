@@ -1,25 +1,21 @@
-Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <dfarning@gmail.com>) id 1IuZ9h-0006C0-5r
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2007 20:53:09 +0100
-Received: by wa-out-1112.google.com with SMTP id l24so2772029waf
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 11:50:57 -0800 (PST)
-Received: by 10.114.66.2 with SMTP id o2mr313451waa.1195573022542;
-	Tue, 20 Nov 2007 07:37:02 -0800 (PST)
-Received: from lenovo ( [68.187.118.242])
-	by mx.google.com with ESMTPS id 38sm88304nza.2007.11.20.07.36.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 20 Nov 2007 07:36:56 -0800 (PST)
-Received: by lenovo (sSMTP sendmail emulation); Tue, 20 Nov 2007 09:36:38 -0600
-Date: Tue, 20 Nov 2007 09:36:38 -0600
-From: David Farning <dfarning@gmail.com>
-To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
-Message-ID: <20071120153638.GA6424@lenovo>
+	(envelope-from <philip@balister.org>) id 1IuZtp-000515-Lv
+	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 21:40:50 +0100
+Received: (qmail 2745 invoked by uid 1003); 20 Nov 2007 20:38:56 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 20 Nov 2007 20:38:56 -0000
+Message-ID: <474345C8.50207@balister.org>
+Date: Tue, 20 Nov 2007 15:38:32 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.9 (X11/20071115)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
-Subject: Defining the user
+To: openembedded-devel@openembedded.org
+References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
+	<4743201F.8000202@am.sony.com>
+In-Reply-To: <4743201F.8000202@am.sony.com>
+Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,63 +29,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 19:53:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 20 Nov 2007 20:40:50 -0000
+X-Groupsio-MsgNum: 3374
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms010605060404060504070806"
 
-How do we define BitBake and OpenEmbedded user and developers?
+--------------ms010605060404060504070806
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-When working on the documentation I have been struggling to define
-exactly what are: bitbake users, bitbake developers, openembedded
-users, and open embedded developers.
+Make reads it's behavior from a Makefile.
 
-The most consistant, and I belive correct, definitions depend on first
-defining Distribution, BiteBake and OpenEmbedded.
+Bitbake contains specific behaviors and reads some configuration from disk.
 
-Distribution - A distribution is a set of programs
-which make up a computer operating system, tools, and applications.  These
-programs are selected to provide specicic functionality and they are assembled
-such that they can run on a target device.
+I don't think they are very similar. I kind of like not caring where I 
+run bitbake from and being able to switch build trees by changing the 
+environment.
 
-bitbake - (with small letters) is a Domain Specific Language which is
-used to describe how to build a Distribution.
+Although I do see some merits to Tim's question, especially if it solves 
+real-world problems.  (I mean really solve, not just mask)
 
-BitBake - (Capital letters) is an interpeter for source files written
-in bitbake.  The BitBake output is an image and installable package
-which are ready to run. 
+Philip
 
-OpenEmbedded - is a set of source files, written in bitebake, which
-describe how to build a generic embedded distribution.
+Tim Bird wrote:
+> pHilipp Zabel wrote:
+>> $ cat ~/bin/bitbake
+>> #!/bin/sh
+>> export OEDIR=${OEDIR:-$PWD}
+>> export BBPATH=${BBPATH:-$OEDIR/build:$OEDIR/openembedded}
+>> /usr/local/bin/bitbake $*
+> 
+> This is nice.  Can someone tell me why this isn't
+> the default behavior of bitbake now?  (I'm honestly
+> not trolling :-)   There must be some good reason
+> to allow bitbake to be used outside of a build
+> directory.  Make (which bitbake resembles
+> in some aspects), is sensitive to it's starting
+> directory.  Why not bitbake?
+>  -- Tim
+> 
+> =============================
+> Tim Bird
+> Architecture Group Chair, CE Linux Forum
+> Senior Staff Engineer, Sony Corporation of America
+> =============================
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
-This implies a number of things.  Working backwards.
+--------------ms010605060404060504070806
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-1.  Openembedded users (consumers) are the developers who design and build
-distributions for specific devices.  I am calling this group
-'distribution developers.'  Currently, they are openmoko developers,
-poky developer....  Distribution developers write source files in the
-bitbake language which extend the generic functionality of
-openembedded to meet their specic needs.  Distribution developers build from
-their local trees.  They are responsible for the quality of their
-distribution.
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
+OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
+65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
+X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
+tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
+szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
+nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
+U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
+ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
+HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
+dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
+RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
+rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
+6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
+Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MTEyMDIw
+MzgzMlowIwYJKoZIhvcNAQkEMRYEFDHBDruvuRSLquOG5Eo1r+TFGaFeMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
+qTANBgkqhkiG9w0BAQEFAASCAQAEOiIOWRXwXjXkCSw42L9snMhqlccv5SwsKFvXn6RMzlcPPb0D
+/vEAclScDdAyQBbTcNt1Ajgo4TfZVgalEmu8ZCySm4C528/3/ec6yYU2jGCfnbyBbN720ndqSJN5
+dU3jvO5UqYYckQUEfd/moZP2BTn9Opep7UoQyDc32byM4zu8N4FHYzcTl8ne8iA73Cohl/oPOkgB
+APyej6F2dXQhuzMjV3OOpdqe2OxfVFOo0rhuesSRA6NAgATRY0FZYklS9khHBERfb6WKOaOl/cIf
+t7Ympherbchn1ZAmyBWELLcqZDWsjBLJ1dmK19BTZfa0Z62XkLgiumBluOuUvCYJAAAAAAAA
 
-2.  OpenEmbedded developers are the developers who work on the set of files
-stored at org.openembedded.dev.  These files are the bitbake and class
-files which describe how to make a generic distribution.  OpenEmbedded
-developers build from the o.e.d tree.  The open Embedded tree is
-upstream from specific distribution trees.  Distribution developers
-push the patches which they feel are generally useful upstream to
-Openembedded developers.  Open Embedded developers act as gate keepers
-for accepting patches which are of a high quality and generally
-useful to the o.e.d tree.
-
-3.  BitBake users are OpenEmbedded developers and distribution
-developers.
-
-4.  BitBake developers work on defining the bitbake language and
-implementing the BitBake interpeter.
-
-Thanks
-David Farning
-
-
-
+--------------ms010605060404060504070806--
