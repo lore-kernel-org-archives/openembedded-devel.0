@@ -1,27 +1,58 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [65.55.251.16] (helo=outbound7-blu-R.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IuWwr-0000CF-Ic
-	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 18:31:45 +0100
-Received: from Powerbook-2.local (vpn006015.vpn.utwente.nl [130.89.6.15])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lAKHTVZn004950 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 18:29:31 +0100
-Message-ID: <4743197B.80801@student.utwente.nl>
-Date: Tue, 20 Nov 2007 18:29:31 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <Timothy.Bird@am.sony.com>) id 1IuXe2-0001CC-34
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Nov 2007 19:16:22 +0100
+Received: from outbound7-blu.bigfish.com (localhost.localdomain [127.0.0.1])
+	by outbound7-blu-R.bigfish.com (Postfix) with ESMTP id EB52816FC3AD
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 17:56:27 +0000 (UTC)
+Received: from mail55-blu-R.bigfish.com (unknown [10.1.252.3])
+	by outbound7-blu.bigfish.com (Postfix) with ESMTP id D272216A0043
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 17:56:27 +0000 (UTC)
+Received: from mail55-blu (localhost.localdomain [127.0.0.1])
+	by mail55-blu-R.bigfish.com (Postfix) with ESMTP id 13CFB9881AC
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 17:56:27 +0000 (UTC)
+X-BigFish: VP
+X-MS-Exchange-Organization-Antispam-Report: OrigIP: 160.33.98.75;Service: EHS
+Received: by mail55-blu (MessageSwitch) id 11955813872447_13295;
+	Tue, 20 Nov 2007 17:56:27 +0000 (UCT)
+Received: from mail8.fw-bc.sony.com (mail8.fw-bc.sony.com [160.33.98.75])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail55-blu.bigfish.com (Postfix) with ESMTP id DE107156006E
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 17:56:24 +0000 (UTC)
+Received: from mail3.sjc.in.sel.sony.com (mail3.sjc.in.sel.sony.com
+	[43.134.1.211])
+	by mail8.fw-bc.sony.com (8.12.11/8.12.11) with ESMTP id lAKHuNBQ013198
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 17:56:24 GMT
+Received: from USSDIXIM02.am.sony.com (ussdixim02.am.sony.com [43.130.140.34])
+	by mail3.sjc.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
+	lAKHuNxt007628 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2007 17:56:23 GMT
+Received: from ussdixms03.am.sony.com ([43.130.140.23]) by
+	USSDIXIM02.am.sony.com with Microsoft SMTPSVC(5.0.2195.6713); 
+	Tue, 20 Nov 2007 09:56:23 -0800
+Received: from [43.135.148.58] ([43.135.148.58]) by ussdixms03.am.sony.com
+	with Microsoft SMTPSVC(5.0.2195.6713); 
+	Tue, 20 Nov 2007 09:56:22 -0800
+Message-ID: <4743201F.8000202@am.sony.com>
+Date: Tue, 20 Nov 2007 09:57:51 -0800
+From: Tim Bird <tim.bird@am.sony.com>
+User-Agent: Thunderbird 1.5.0.4 (X11/20060614)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <20071119120819.GA17788@lenovo><C7148B94-6A92-42DE-BF35-75B409DAA8E7@selfish.org><4741FB41.7080602@trolltech.com>	<1195551213.6337.9.camel@localhost.localdomain>
-	<008f01c82b8a$89c8ab50$6e01a8c0@twilight>
-In-Reply-To: <008f01c82b8a$89c8ab50$6e01a8c0@twilight>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+To: openembedded-devel@lists.openembedded.org
+References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>
+	<4742217C.9060506@whitby.id.au>
+	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
+In-Reply-To: <74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
+X-Enigmail-Version: 0.94.0.0
+X-OriginalArrivalTime: 20 Nov 2007 17:56:22.0985 (UTC)
+	FILETIME=[A992B390:01C82B9E]
 Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,36 +67,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 17:31:45 -0000
+X-List-Received-Date: Tue, 20 Nov 2007 18:16:22 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+pHilipp Zabel wrote:
+> $ cat ~/bin/bitbake
+> #!/bin/sh
+> export OEDIR=${OEDIR:-$PWD}
+> export BBPATH=${BBPATH:-$OEDIR/build:$OEDIR/openembedded}
+> /usr/local/bin/bitbake $*
 
-Mike (mwester) schreef:
+This is nice.  Can someone tell me why this isn't
+the default behavior of bitbake now?  (I'm honestly
+not trolling :-)   There must be some good reason
+to allow bitbake to be used outside of a build
+directory.  Make (which bitbake resembles
+in some aspects), is sensitive to it's starting
+directory.  Why not bitbake?
+ -- Tim
 
-> I ask the OE team why are they are philosophically opposed to driving
-> bitbake with make? 
+=============================
+Tim Bird
+Architecture Group Chair, CE Linux Forum
+Senior Staff Engineer, Sony Corporation of America
+=============================
 
-Or making a Sconstruct for people used to scons or a Makefile.PL  for
-people used to perl or a setup.py for people used to distutils, or a xml
-file for people used to ant or a .jam file for people used to jam or ..
-or .. or ..
-
-you get the idea?
-
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHQxl7MkyGM64RGpERAhXoAKCHtwWEzYIgodHpXeCrKi7tPupxEQCcD4EC
-F/P3WP5G6p3pydsh8Fe6Qzw=
-=ZkVd
------END PGP SIGNATURE-----
 
 
