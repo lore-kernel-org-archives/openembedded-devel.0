@@ -1,23 +1,31 @@
-Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philipp.zabel@gmail.com>) id 1IuWJA-0003pZ-9D
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2007 17:50:44 +0100
-Received: by nf-out-0910.google.com with SMTP id h3so1784287nfh
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 08:48:34 -0800 (PST)
-Received: by 10.82.112.3 with SMTP id k3mr16767408buc.1195549947210;
-	Tue, 20 Nov 2007 01:12:27 -0800 (PST)
-Received: by 10.82.120.17 with HTTP; Tue, 20 Nov 2007 01:12:27 -0800 (PST)
-Message-ID: <74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
-Date: Tue, 20 Nov 2007 10:12:27 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4742217C.9060506@whitby.id.au>
-MIME-Version: 1.0
-References: <20071119120819.GA17788@lenovo>
-	<47419EA0.4030308@student.utwente.nl> <4742217C.9060506@whitby.id.au>
-Subject: Re: Getting Started -Makefile
+	(envelope-from <rpurdie@rpsys.net>) id 1IuWMk-0003sf-Fb
+	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 17:54:26 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAKGqH4f029268
+	for <openembedded-devel@openembedded.org>; Tue, 20 Nov 2007 16:52:17 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29241-01 for <openembedded-devel@openembedded.org>;
+	Tue, 20 Nov 2007 16:52:14 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAKGq9Mf029245
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Tue, 20 Nov 2007 16:52:09 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <db5939b2996965487cda218229f0b0ee@127.0.0.1>
+References: <1195552013.6337.18.camel@localhost.localdomain>
+	<db5939b2996965487cda218229f0b0ee@127.0.0.1>
+Date: Tue, 20 Nov 2007 16:52:07 +0000
+Message-Id: <1195577527.6337.39.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Host dependency vs. -native packages balance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,61 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 16:50:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 20 Nov 2007 16:54:26 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Nov 20, 2007 12:51 AM, Rod Whitby <rod@whitby.id.au> wrote:
-> Koen Kooi wrote:
-> > David Farning schreef:
-> >> $make setup
-> >
-> > nice
-> >
-> >> $make build-package-vim
-> >
-> > $deity just killed a few hundred kittens.
-> >
-> > At OEDEM we decided that we won't tolerate kindergarten-like,
-> > hand-holding wrappers around bitbake. Typing 'bitbake vim' isn't rocket
-> > science. To paraphrase Mickey: "If typing 'bitbake <foo>' is too hard,
-> > you shouldn't be using OE".
->
-> The challenge I put to yourself and a couple of other people from the OM
-> core team in IRC a couple of weeks or months ago still stands:
->
-> Show how you can use bitbake such that you can cd into a build area, and
-> type a *single* bitbake command to do a build, then cd into a different
-> build area (with a different distro and machine) and type a *single*
-> bitbake command to do a build there.  No other commands are allowed.
->
-> At the moment, you need to set many environment variables before bitbake
-> can do it's job, and you need to reset them when you move into a
-> different area to do a different build.  That's the reason why there are
-> makefile wrappers around simple bitbake commands.
+On Tue, 2007-11-20 at 12:18 +0100, Esben Haabendal wrote:
+> On Tue, 20 Nov 2007 09:46:53 +0000, Richard Purdie <rpurdie@rpsys.net> wrote:
+> > On Tue, 2007-11-20 at 07:36 +0100, Esben Haabendal wrote:
+> >> Not having looked at the details of this bug, it seems like a good
+> >> example of how more host dependency creep into OE.
+> >>
+> >> I think it raises two questions:
+> >>
+> >> 1. Where do we want the balance between dependency on host installed
+> >> libraries and tools vs. OE provided -native packages?
+> >>
+> >> 2. How can we better handle or track the actual host dependency of
+> >> current OE?
+> >>
+> >> The current situation is that some (maybe even most) host dependencies
+> >> are discussed on the RequiredSoftware  and OEandYourDistro pages. They
+> >> are clearly not up-to-date and comments in bugzilla such as the one
+> >> below are a bit harder to find.
+> > 
+> > Dependencies needed from the host system are those listed in
+> > ASSUME_PROVIDED. If its not listed in ASSUME_PROVIDED, OE shouldn't need
+> > it. If it needs something not listed, that is a bug.
+> 
+> Why are we then closing bugs with arguments such as "just install XXX on your host"?
 
-So why not provide a simple shell wrapper instead of setup-env and the
-Makefile's build-package-% part? That way, at least people would learn
-the correct bitbake syntax from the beginning.
+They shouldn't be being closed with that IMO...
 
-$ cat ~/bin/bitbake
-#!/bin/sh
-export OEDIR=${OEDIR:-$PWD}
-export BBPATH=${BBPATH:-$OEDIR/build:$OEDIR/openembedded}
-/usr/local/bin/bitbake $*
+Cheers,
 
-> If we can fix the underlying problem (needing to type more than one
-> command to build an image with bitbake), then I will fully support a
-> move to get rid of all bitbake wrappers from all the Makefiles that I
-> manage.
+Richard
 
-The question is how to fix this problem correctly.
-One possibility would be that bitbake, if BBPATH is unset, issues a
-warning and scans the file system (starting from the $PWD) for a
-certain file (local.conf) in which BBPATH would be specified.
-
-regards
-Philipp
 
 
