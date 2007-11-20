@@ -1,30 +1,27 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [193.201.35.47] (helo=bq8.dotserv.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rod@whitby.id.au>) id 1IuR3f-0001DF-Az
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2007 12:14:23 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 05B354CEFD
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 06:12:15 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Tue, 20 Nov 2007 06:12:15 -0500
-X-Sasl-enc: 6ZevnNshev1LIeAXXxF84BfaMh2hLo6d8RC9UGcdy2jh 1195557134
-Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
-	[121.209.18.182])
-	by mail.messagingengine.com (Postfix) with ESMTP id 3E132FCDC
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 06:12:13 -0500 (EST)
-Message-ID: <4742C0FB.1010101@whitby.id.au>
-Date: Tue, 20 Nov 2007 21:41:55 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	(envelope-from <eha@doredevelopment.dk>) id 1IuR9k-0001HQ-2E
+	for openembedded-devel@openembedded.org; Tue, 20 Nov 2007 12:20:40 +0100
+Received: from bq8.dotserv.com (localhost [127.0.0.1])
+	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id lAKBIVdL006663
+	for <openembedded-devel@openembedded.org>;
+	Tue, 20 Nov 2007 12:18:32 +0100
+Received: (from apache@localhost)
+	by bq8.dotserv.com (8.13.1/8.13.1/Submit) id lAKBIVg3006660;
+	Tue, 20 Nov 2007 12:18:31 +0100
+X-Authentication-Warning: bq8.dotserv.com: apache set sender to
+	eha@doredevelopment.dk using -f
+To: openembedded-devel@openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>
-	<4742AFCC.1060000@student.utwente.nl>
-In-Reply-To: <4742AFCC.1060000@student.utwente.nl>
-Subject: Re: Getting Started -Makefile
+Date: Tue, 20 Nov 2007 12:18:31 +0100
+From: Esben Haabendal <eha@doredevelopment.dk>
+Organization: =?UTF-8?Q?Dor=C3=A9_Development_ApS?=
+In-Reply-To: <1195552013.6337.18.camel@localhost.localdomain>
+References: <1195552013.6337.18.camel@localhost.localdomain>
+Message-ID: <db5939b2996965487cda218229f0b0ee@127.0.0.1>
+X-Sender: eha@doredevelopment.dk
+User-Agent: RoundCube Webmail/0.1b
+Subject: Re: Host dependency vs. -native packages balance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,29 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 11:14:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Nov 2007 11:20:40 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Koen Kooi wrote:
-> Rod Whitby schreef:
->> Show how you can use bitbake such that you can cd into a build area, and
->> type a *single* bitbake command to do a build, then cd into a different
->> build area (with a different distro and machine)
+
+On Tue, 20 Nov 2007 09:46:53 +0000, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Tue, 2007-11-20 at 07:36 +0100, Esben Haabendal wrote:
+>> Not having looked at the details of this bug, it seems like a good
+>> example of how more host dependency creep into OE.
+>>
+>> I think it raises two questions:
+>>
+>> 1. Where do we want the balance between dependency on host installed
+>> libraries and tools vs. OE provided -native packages?
+>>
+>> 2. How can we better handle or track the actual host dependency of
+>> current OE?
+>>
+>> The current situation is that some (maybe even most) host dependencies
+>> are discussed on the RequiredSoftware  and OEandYourDistro pages. They
+>> are clearly not up-to-date and comments in bugzilla such as the one
+>> below are a bit harder to find.
 > 
-> Why are you using a different build area for that? That's unnecessary.
+> Dependencies needed from the host system are those listed in
+> ASSUME_PROVIDED. If its not listed in ASSUME_PROVIDED, OE shouldn't need
+> it. If it needs something not listed, that is a bug.
 
-Um, when the MokoMakefile was created, it *was* necessary to have a
-different build area.  Direct your statements to the maintainers of the
-distributions in question, not to those who are trying to help the
-end-users use those build systems.
+Why are we then closing bugs with arguments such as "just install XXX on your host"?
 
-Isn't the creator of the OpenMoko build environment an OE core team
-member?  Does the OpenMoko build environment setup documentation follow
-your prescription for TMPDIR and multimachine?
+/Esben
 
-Physician, heal thyself.
-
--- Rod
 
 
