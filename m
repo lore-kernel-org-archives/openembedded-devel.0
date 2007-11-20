@@ -1,23 +1,30 @@
-Received: from [209.242.20.84] (helo=green.dls.net)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mwester@dls.net>) id 1IuV7m-0002Oy-2B
+	(envelope-from <pmiscml@gmail.com>) id 1IuW5P-0003ga-Uj
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2007 16:34:54 +0100
-Received: from twilight (gw.mwester.net [209.242.5.110])
-	by green.dls.net (Postfix) with ESMTP id C95B341285A
+	Tue, 20 Nov 2007 17:36:31 +0100
+Received: by ug-out-1314.google.com with SMTP id m3so1333266ugc
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 09:32:46 -0600 (CST)
-Message-ID: <008f01c82b8a$89c8ab50$6e01a8c0@twilight>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-References: <20071119120819.GA17788@lenovo><C7148B94-6A92-42DE-BF35-75B409DAA8E7@selfish.org><4741FB41.7080602@trolltech.com>
-	<1195551213.6337.9.camel@localhost.localdomain>
-Date: Tue, 20 Nov 2007 09:32:18 -0600
+	Tue, 20 Nov 2007 08:34:21 -0800 (PST)
+Received: by 10.78.159.7 with SMTP id h7mr6763143hue.1195569566855;
+	Tue, 20 Nov 2007 06:39:26 -0800 (PST)
+Received: from ?192.168.2.2? ( [88.231.78.200])
+	by mx.google.com with ESMTPS id z34sm219910ikz.2007.11.20.06.39.24
+	(version=SSLv3 cipher=OTHER); Tue, 20 Nov 2007 06:39:25 -0800 (PST)
+Date: Tue, 20 Nov 2007 16:39:21 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <674744232.20071120163921@gmail.com>
+To: Rod Whitby <rod@whitby.id.au>
+In-Reply-To: <4742C0FB.1010101@whitby.id.au>
+References: <20071119120819.GA17788@lenovo>
+	<47419EA0.4030308@student.utwente.nl>
+	<4742217C.9060506@whitby.id.au>
+	<4742AFCC.1060000@student.utwente.nl>
+	<4742C0FB.1010101@whitby.id.au>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2800.1914
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1914
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,60 +39,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2007 15:34:54 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Tue, 20 Nov 2007 16:36:32 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
+Hello Rod,
 
-> From: "Richard Purdie" <rpurdie@rpsys.net>
->
-> I think Holger's point and the general feeling of other OE devs, me
-> included is that the current wave of makefiles hide too much. I had to
-> solve this problem with Poky and I did it with a script you source which
-> sets up a magic environment. I don't expect users to know/care about
-> what the script does. I do want users to end up typing "bitbake xyz"
-> though. Why?
->
-> Users end up realising that everything is either an SCM command ("svn
-> up" for Poky) or a bitbake one. Neither are complicated programs to
-> learn. Yes monotone is more complex than svn but all you really need to
-> know is "mtn pull;mtn up" and even then, understanding why there are two
-> commands actually teaches you something important about the SCM. Hiding
-> them from the user just creates a  phobia of using the real tools.
->
-> Cheers,
->
-> Richard
+Tuesday, November 20, 2007, 1:11:55 PM, you wrote:
 
-I know bitbake.  I use bitbake.  I debug bitbake (more often than I want to,
-actually).
+> Koen Kooi wrote:
+>> Rod Whitby schreef:
+>>> Show how you can use bitbake such that you can cd into a build area, and
+>>> type a *single* bitbake command to do a build, then cd into a different
+>>> build area (with a different distro and machine)
+>> 
+>> Why are you using a different build area for that? That's unnecessary.
 
-Yet I also type "make all" to build things.
+> Um, when the MokoMakefile was created, it *was* necessary to have a
+> different build area.  Direct your statements to the maintainers of the
+> distributions in question, not to those who are trying to help the
+> end-users use those build systems.
 
-Why?
+> Isn't the creator of the OpenMoko build environment an OE core team
+> member?  Does the OpenMoko build environment setup documentation follow
+> your prescription for TMPDIR and multimachine?
 
-Not because I have a "phobia of using the real tools."  Not because I'm
-stupid.  Not because I'm philisophically opposed to bitbake.  It might
-perhaps be because I'm so old that I have moss growing on me, and that I've
-been typing "make <target>" since rocks were young and dirt was just
-invented.  It's true that my brain thinks "bitbake <thing>" and my fingers
-type "make <thing>".
+  Well, I see the root of problem exactly here: a typical developer
+produces personal/one-off scripts in huge quantities. Few of those
+personal/one-off scripts even evolve into something used as multi-shot
+and community-local scripts, sometimes.
 
-I ask the OE team why are they are philosophically opposed to driving
-bitbake with make?  Make has driven software development since near the dawn
-of time.  Make has been used to set up environment variables, adjust for
-unusual or tricky build environments, and generally to ease the life of a
-developer for eons.  It works very well for its purpose.  So why would
-anyone encourage a development approach that throws out such a useful tools
-and forces a user to manually set environment variables, and remember an
-obscure command to invoke a build?  Of course a serious developer should
-know generally what goes on underneath, but that doesn't mean that they
-should do all the steps manually!
+  But if I'd post my local hack-scripts to the list as something opening
+a whole new world, I'd be laughed at. And if I'd use a slightly
+different language in the post, I'd be flamed for forcing my crap upon
+other people. And that's exactly what happens in this thread.
 
-Unless it is the intent to create a barrier to entry?
 
-Mike (mwester)
+> Physician, heal thyself.
+
+
+
+> -- Rod
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
