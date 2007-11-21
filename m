@@ -1,34 +1,56 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [65.55.251.16] (helo=outbound5-blu-R.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <oe@hentges.net>) id 1Iutoq-0000yO-QC
+	(envelope-from <Timothy.Bird@am.sony.com>) id 1Iutqz-00011F-LS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2007 18:57:00 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id 14CD03081E9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 18:54:44 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at hentges.net
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563.serverkompetenz.net [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id YLVmqfq4H2b7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 18:54:42 +0100 (CET)
-Received: from [192.168.5.2] (xdsl-87-78-210-162.netcologne.de [87.78.210.162])
+	Wed, 21 Nov 2007 18:59:13 +0100
+Received: from outbound5-blu.bigfish.com (localhost.localdomain [127.0.0.1])
+	by outbound5-blu-R.bigfish.com (Postfix) with ESMTP id 7D0B9A11C74;
+	Wed, 21 Nov 2007 17:56:57 +0000 (UTC)
+Received: from mail27-blu-R.bigfish.com (unknown [10.1.252.3])
+	by outbound5-blu.bigfish.com (Postfix) with ESMTP id 5EF2C428051;
+	Wed, 21 Nov 2007 17:56:57 +0000 (UTC)
+Received: from mail27-blu (localhost.localdomain [127.0.0.1])
+	by mail27-blu-R.bigfish.com (Postfix) with ESMTP id 120B2D80236;
+	Wed, 21 Nov 2007 17:56:56 +0000 (UTC)
+X-BigFish: VP
+X-MS-Exchange-Organization-Antispam-Report: OrigIP: 160.33.98.75;Service: EHS
+Received: by mail27-blu (MessageSwitch) id 1195667799524224_9557;
+	Wed, 21 Nov 2007 17:56:39 +0000 (UCT)
+Received: from mail8.fw-bc.sony.com (mail8.fw-bc.sony.com [160.33.98.75])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id D021E3081E3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 18:54:41 +0100 (CET)
-From: Matthias Hentges <oe@hentges.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47434BB3.2010705@student.utwente.nl>
-References: <E1IuZKt-0006pg-Ms@linuxtogo.org>
-	<47434BB3.2010705@student.utwente.nl>
-Date: Wed, 21 Nov 2007 18:54:41 +0100
-Message-Id: <1195667681.30926.11.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.3 
-Subject: Re: [oe-commits] org.oe.dev Add cryptsetup: Stop forcing your	opinions onto other people!
+	by mail27-blu.bigfish.com (Postfix) with ESMTP id 0B0932C805A;
+	Wed, 21 Nov 2007 17:56:39 +0000 (UTC)
+Received: from mail3.sjc.in.sel.sony.com (mail3.sjc.in.sel.sony.com
+	[43.134.1.211])
+	by mail8.fw-bc.sony.com (8.12.11/8.12.11) with ESMTP id lALHubkr003499; 
+	Wed, 21 Nov 2007 17:56:38 GMT
+Received: from USSDIXIM02.am.sony.com (ussdixim02.am.sony.com [43.130.140.34])
+	by mail3.sjc.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
+	lALHuba7019223; Wed, 21 Nov 2007 17:56:37 GMT
+Received: from ussdixms03.am.sony.com ([43.130.140.23]) by
+	USSDIXIM02.am.sony.com with Microsoft SMTPSVC(5.0.2195.6713); 
+	Wed, 21 Nov 2007 09:56:37 -0800
+Received: from [43.135.148.58] ([43.135.148.58]) by ussdixms03.am.sony.com
+	with Microsoft SMTPSVC(5.0.2195.6713); 
+	Wed, 21 Nov 2007 09:56:36 -0800
+Message-ID: <474471B1.6020101@am.sony.com>
+Date: Wed, 21 Nov 2007 09:58:09 -0800
+From: Tim Bird <tim.bird@am.sony.com>
+User-Agent: Thunderbird 1.5.0.4 (X11/20060614)
+MIME-Version: 1.0
+To: Paul Sokolovsky <pmiscml@gmail.com>
+References: <20071119120819.GA17788@lenovo>
+	<47419EA0.4030308@student.utwente.nl>
+	<4742217C.9060506@whitby.id.au>
+	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
+	<4743201F.8000202@am.sony.com> <617697824.20071121042405@gmail.com>
+In-Reply-To: <617697824.20071121042405@gmail.com>
+X-Enigmail-Version: 0.94.0.0
+X-OriginalArrivalTime: 21 Nov 2007 17:56:36.0980 (UTC)
+	FILETIME=[DC53EB40:01C82C67]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,69 +64,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2007 17:57:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Nov 2007 17:59:14 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-(due to the retarded ML server, this message may appear twice)
+Paul Sokolovsky wrote:
+>    This is attempt to put it backwards. It's not to allow bitbake
+> to be used outside of build directory, it's to allow *source* be
+> outside build directory. Real hardcore make users might have heard
+> about VPATH envvar and out-of-source building.
 
-For starters, this mailing list is still broken and violates RFCs in
-regards to FROM and REPLY-TO.
+I use makefiles to build source code, or affect operations
+in different locations in the file system, all the time.
+It is convenient and familiar to have PWD be part of the
+trigger for what operation I'm performing.  I realize
+this is an artifact of years of using make.  But since
+it's something I and most others have already learned,
+it seems like it would be nice to leverage that experience.
 
-Am Dienstag, den 20.11.2007, 22:03 +0100 schrieb Koen Kooi:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
 > 
-> coredump2 commit schreef:
-> 
-> 
-> > +######################################################################################
-> > +######################################################################################
-> > +######################################################################################
-> > +######################################################################################
-> 
-> Please read (and follow) the styleguide and run the recipe through
-> OE-stylize.py to get an idea how it should look like.
+>    Why not default? Well, because what make builds is usually ones to
+> tens of megabytes, while bitbake builds tens to hundreds gigabytes.
 
-Nice "style". With my layout, you at least had a sense about what does
-what, the entries were grouped for easy reading.
+I don't see how this is relevant.  Maybe we are considering different
+use cases.
 
-Your "style" does nothing more than remove any kind of possible grouping
-by deleting linefeeds left and right. Your "style" stinks.
+> Those who're brave to undertake such endeavour, are expected to get
+> some understanding of what they're going to be thru by learning and
+> doing some setup with their own hands.
+I have no idea why this should be so.
 
+A few people have mentioned this similar theme - "if OE
+hides the details, users won't be forced to learn what's
+going on."  In the most general terms, computers EXIST
+to allow people to not learn what's going on in complete detail.
+So does OE.  It's just the invocation sequence and minimum
+learning curve that people seem hung up on.
 
-> > +pkg_postinst() {
-> > +	if test "x$D" = "x"
-> > +	then 
-> > +		# Work around a problem in module ipk's, where depmod is not always
-> > +		# run after installing a kernel-module.
-> > +		test -x /sbin/depmod && /sbin/depmod -a
-> > +		/bin/true
-> > +	fi
-> 
-> And don't add such hacks, please remove it.
-> 
+I have sensed that OE seems squarely targeted
+at distro developers rather than end users.  Maybe this is
+the disconnect.  The use cases for OE for developers and
+users will be quite different.
 
-The "hack" had a very valid purpose. I even explained the purpose for
-you alone in the .bb. It worked around a very real bug in module
-handling which no one (not even you) bothered to fix for > 1 year.
-A bug which is *impossible* to track-down or fix for most end-users.
+> I'm sure that was original
+> motivation why bitbake and OE was setup that way. Of course, that was
+> quite some time ago, when disks were much smaller. Let's see if this
+> will change now.
 
-Would be PLEASE STOP MESSING WITH OTHER PEOPLES FILES??
-Only because YOU do not like something does NOT give you the bloody
-right to revert or even change other peoples commits!
+Indeed.  Thanks for the response.
+ -- Tim
 
-THIS IS NOT KOEN-EMBEDDED
--- 
-Matthias 'CoreDump' Hentges 
-Cologne / Germany
-
-Webmaster of Hentges.net & Embedded Linux Developer
-GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
-
-My OS: Debian SID: Geek by Nature, Linux by Choice
-
-
+=============================
+Tim Bird
+Architecture Group Chair, CE Linux Forum
+Senior Staff Engineer, Sony Corporation of America
+=============================
 
 
 
