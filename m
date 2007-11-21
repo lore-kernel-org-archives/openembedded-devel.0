@@ -1,30 +1,28 @@
-Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1Iugw3-0004nT-6P
+	(envelope-from <rod@whitby.id.au>) id 1IuiQL-0005ya-Bd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2007 05:11:35 +0100
-Received: by ug-out-1314.google.com with SMTP id m3so27044ugc
+	Wed, 21 Nov 2007 06:46:57 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 74A0E4C324
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2007 20:09:22 -0800 (PST)
-Received: by 10.67.20.3 with SMTP id x3mr1296783ugi.1195611845491;
-	Tue, 20 Nov 2007 18:24:05 -0800 (PST)
-Received: from ?192.168.2.2? ( [88.231.78.200])
-	by mx.google.com with ESMTPS id 32sm919483ugd.2007.11.20.18.24.03
-	(version=SSLv3 cipher=OTHER); Tue, 20 Nov 2007 18:24:04 -0800 (PST)
-Date: Wed, 21 Nov 2007 04:24:05 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <617697824.20071121042405@gmail.com>
-To: Tim Bird <tim.bird@am.sony.com>
-In-Reply-To: <4743201F.8000202@am.sony.com>
-References: <20071119120819.GA17788@lenovo>
-	<47419EA0.4030308@student.utwente.nl>
-	<4742217C.9060506@whitby.id.au>
-	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
-	<4743201F.8000202@am.sony.com>
+	Wed, 21 Nov 2007 00:44:44 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Wed, 21 Nov 2007 00:44:44 -0500
+X-Sasl-enc: jHlzYaOjkst5wS9aeFdxq/1/1J1Jf9z4nEWiveQHJ3vy 1195623883
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id 948A420B3E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Nov 2007 00:44:43 -0500 (EST)
+Message-ID: <4743C5B8.4030209@whitby.id.au>
+Date: Wed, 21 Nov 2007 16:14:24 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>	<4743201F.8000202@am.sony.com>
+	<617697824.20071121042405@gmail.com>
+In-Reply-To: <617697824.20071121042405@gmail.com>
 Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,50 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2007 04:11:35 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 21 Nov 2007 05:46:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello Tim,
+Paul Sokolovsky wrote:
+>    Why not default? Well, because what make builds is usually ones to
+> tens of megabytes, while bitbake builds tens to hundreds gigabytes.
+> Those who're brave to undertake such endeavour, are expected to get
+> some understanding of what they're going to be thru by learning and
+> doing some setup with their own hands.
 
-Tuesday, November 20, 2007, 7:57:51 PM, you wrote:
+And therein lies the rub.  The reason why the Makefiles came about is
+because there is a large number of distribution users who are forced to
+use OE (cause it is the only way to develop applications for or build
+custom images for a certain platform), but they have *no* interest in
+understanding how to build tens to hundreds of gigabytes of stuff with
+bitbake.  They are application developers and image customisers, not
+distribution developers.
 
-> pHilipp Zabel wrote:
->> $ cat ~/bin/bitbake
->> #!/bin/sh
->> export OEDIR=${OEDIR:-$PWD}
->> export BBPATH=${BBPATH:-$OEDIR/build:$OEDIR/openembedded}
->> /usr/local/bin/bitbake $*
+And yes, we all agree with BitBake/OE was not designed for the "casual
+user" who has been forced to use it cause there is no other way (for
+example) to build an OpenMoko image or create a new application for
+OpenMoko.  But the reality of today is that there is a large number of
+such users, and they seem to prefer the convenience of the Makefiles.
 
-> This is nice.  Can someone tell me why this isn't
-> the default behavior of bitbake now?  (I'm honestly
-> not trolling :-)   There must be some good reason
-> to allow bitbake to be used outside of a build
-> directory.  Make (which bitbake resembles
-> in some aspects), is sensitive to it's starting
-> directory.  Why not bitbake?
-
-   This is attempt to put it backwards. It's not to allow bitbake
-to be used outside of build directory, it's to allow *source* be
-outside build directory. Real hardcore make users might have heard
-about VPATH envvar and out-of-source building.
-
-   Why not default? Well, because what make builds is usually ones to
-tens of megabytes, while bitbake builds tens to hundreds gigabytes.
-Those who're brave to undertake such endeavour, are expected to get
-some understanding of what they're going to be thru by learning and
-doing some setup with their own hands. I'm sure that was original
-motivation why bitbake and OE was setup that way. Of course, that was
-quite some time ago, when disks were much smaller. Let's see if this
-will change now.
-
-
->  -- Tim
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+-- Rod
 
 
