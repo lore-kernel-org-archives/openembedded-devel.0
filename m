@@ -1,31 +1,28 @@
-Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <pmiscml@gmail.com>) id 1IuurG-0006HG-8L
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2007 20:03:38 +0100
-Received: by ug-out-1314.google.com with SMTP id m3so189124ugc
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 11:01:17 -0800 (PST)
-Received: by 10.66.221.5 with SMTP id t5mr452603ugg.1195667843061;
-	Wed, 21 Nov 2007 09:57:23 -0800 (PST)
-Received: from ?192.168.2.2? ( [88.231.78.200])
-	by mx.google.com with ESMTPS id w28sm1383919uge.2007.11.21.09.57.17
-	(version=SSLv3 cipher=OTHER); Wed, 21 Nov 2007 09:57:22 -0800 (PST)
-Date: Wed, 21 Nov 2007 19:57:13 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1496857094.20071121195713@gmail.com>
-To: Esben Haabendal <eha@doredevelopment.dk>
-In-Reply-To: <1195626057.11679.7.camel@localhost>
-References: <20071119120819.GA17788@lenovo>
-	<47419EA0.4030308@student.utwente.nl>
-	<4742217C.9060506@whitby.id.au>
-	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
-	<1195626057.11679.7.camel@localhost>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Iuuso-0006Ib-RT
+	for openembedded-devel@openembedded.org; Wed, 21 Nov 2007 20:05:13 +0100
+Received: from Powerbook-2.local (vpn006015.vpn.utwente.nl [130.89.6.15])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lALJ2nZn003815 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Nov 2007 20:02:49 +0100
+Message-ID: <474480D9.4090001@student.utwente.nl>
+Date: Wed, 21 Nov 2007 20:02:49 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Getting Started -Makefile
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <E1IuZKt-0006pg-Ms@linuxtogo.org>	<47434BB3.2010705@student.utwente.nl>
+	<1195667681.30926.11.camel@localhost.localdomain>
+In-Reply-To: <1195667681.30926.11.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev Add cryptsetup: Stop forcing	your opinions onto other people!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,53 +36,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2007 19:03:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 21 Nov 2007 19:05:15 -0000
+X-List-Received-Date: Wed, 21 Nov 2007 19:05:15 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hello Esben,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Wednesday, November 21, 2007, 8:20:57 AM, you wrote:
+Matthias Hentges schreef:
 
-[]
+>>> +######################################################################################
+>>> +######################################################################################
+>>> +######################################################################################
+>>> +######################################################################################
+>> Please read (and follow) the styleguide and run the recipe through
+>> OE-stylize.py to get an idea how it should look like.
+> 
+> Nice "style". With my layout, you at least had a sense about what does
+> what, the entries were grouped for easy reading.
+> 
+> Your "style" does nothing more than remove any kind of possible grouping
+> by deleting linefeeds left and right. Your "style" stinks.
 
->> The question is how to fix this problem correctly.
->> One possibility would be that bitbake, if BBPATH is unset, issues a
->> warning and scans the file system (starting from the $PWD) for a
->> certain file (local.conf) in which BBPATH would be specified.
+It's not my style, it's the official OE style, which you would have
+known if you had bothered to read the OE styleguide, as I said in my
+original mail.
+Oe-stylize.py showed a pile of other problems in your recipe on top of
+those mentioned. So both the official style guide and the dedicated tool
+back me up.
 
-> Something like that would be nice. When bitbake finds BBPATH unset, it
-> traverses from $PWD to / to find a .bbenv (or some other filename, but
-> local.conf is probably not a good one), which can setup BBPATH,
-> PYTHONPATH, OEDIR or whatever env virables is used in the
-> conf/local.conf file.
+>>> +pkg_postinst() {
+>>> +	if test "x$D" = "x"
+>>> +	then 
+>>> +		# Work around a problem in module ipk's, where depmod is not always
+>>> +		# run after installing a kernel-module.
+>>> +		test -x /sbin/depmod && /sbin/depmod -a
+>>> +		/bin/true
+>>> +	fi
+>> And don't add such hacks, please remove it.
+>>
+> 
+> The "hack" had a very valid purpose. 
 
-  LOL. So, editing .bashrc is hard, while creating and editing some
-obscure file is easy?
+Valid purpose or not, it doesn't belong in OE. By your reasoning we
+should add all postinsts from all dependencies to each recipe. And *if*
+postinst get mysteriously skipped, your hack isn't going to get
+executed, is it?
 
-> To guard against bad bitbake versions (as BBPATH
-> is unset, bitbake can be expected to be picked up from a generic PATH)
-> it might be smart to introduce a variable in local.conf stating specific
-> or minimum version requirements for bitbake.
+> It worked around a very real bug
 
-  ... Ah, and it comes at the expense yet?
+Yet a search in bugzilla for 'depmod' or 'postinst' yields no open bugs
+on that.
+The only 'bug' I know of is people using 'su' instead of 'su -' to
+become root and (/usr)/sbin isn't in $PATH. That's PEBKAC, not an OE bug
+or ipkg bug.
 
-> Would there by any problems in extending bitbake calling convention in
-> this way?
+> Would be PLEASE STOP MESSING WITH OTHER PEOPLES FILES??
 
-  Yes. Occam's blade. There's nothing to extend for. "man bash" will
-make everyone who does it an expert not only in bitbake, but in Unix
-way of doing stuff at all. After that, it will be much easier to
-decide if something worth fixing, if yes, then why, and finally, how.
+Not if those violate various *documented* OE policies and the author of
+thw recipes in question refuses to comply with them.
 
-> /Esben
+> THIS IS NOT KOEN-EMBEDDED
 
+No, this is OpenEmbedded, so follow the OE policies.
 
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+iD8DBQFHRIDZMkyGM64RGpERAurqAKC03wbfp+wiE1Vd6F49vM/h6N4ecwCfdVue
++P0il0YgJpgJFq03bl859IE=
+=IUQI
+-----END PGP SIGNATURE-----
 
 
