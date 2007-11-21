@@ -1,28 +1,21 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Iuuso-0006Ib-RT
-	for openembedded-devel@openembedded.org; Wed, 21 Nov 2007 20:05:13 +0100
-Received: from Powerbook-2.local (vpn006015.vpn.utwente.nl [130.89.6.15])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lALJ2nZn003815 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 20:02:49 +0100
-Message-ID: <474480D9.4090001@student.utwente.nl>
-Date: Wed, 21 Nov 2007 20:02:49 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <philip@balister.org>) id 1IuvLL-0002Sn-B8
+	for openembedded-devel@openembedded.org; Wed, 21 Nov 2007 20:34:39 +0100
+Received: (qmail 20024 invoked by uid 1003); 21 Nov 2007 19:32:29 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 21 Nov 2007 19:32:29 -0000
+Message-ID: <474487BE.3050704@balister.org>
+Date: Wed, 21 Nov 2007 14:32:14 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.9 (X11/20071115)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1IuZKt-0006pg-Ms@linuxtogo.org>	<47434BB3.2010705@student.utwente.nl>
-	<1195667681.30926.11.camel@localhost.localdomain>
-In-Reply-To: <1195667681.30926.11.camel@localhost.localdomain>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev Add cryptsetup: Stop forcing	your opinions onto other people!
+To: openembedded-devel@openembedded.org
+References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>	<4743201F.8000202@am.sony.com>
+	<617697824.20071121042405@gmail.com> <474471B1.6020101@am.sony.com>
+In-Reply-To: <474471B1.6020101@am.sony.com>
+Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,81 +29,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2007 19:05:15 -0000
-X-List-Received-Date: Wed, 21 Nov 2007 19:05:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 21 Nov 2007 19:34:40 -0000
+X-Groupsio-MsgNum: 3399
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms060308030707070508080807"
+
+--------------ms060308030707070508080807
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Tim Bird wrote:
+> I have sensed that OE seems squarely targeted
+> at distro developers rather than end users.  Maybe this is
+> the disconnect.  The use cases for OE for developers and
+> users will be quite different.
 
-Matthias Hentges schreef:
+This is a key observation. OE is targeted at people solving the problem 
+of creating distro's for machines, not people developing software for 
+these machines (we'll call these people "users").
 
->>> +######################################################################################
->>> +######################################################################################
->>> +######################################################################################
->>> +######################################################################################
->> Please read (and follow) the styleguide and run the recipe through
->> OE-stylize.py to get an idea how it should look like.
-> 
-> Nice "style". With my layout, you at least had a sense about what does
-> what, the entries were grouped for easy reading.
-> 
-> Your "style" does nothing more than remove any kind of possible grouping
-> by deleting linefeeds left and right. Your "style" stinks.
+I believe everyone agrees OE is not an ideal solution for users. What we 
+do not agree on is the best way to support users.
 
-It's not my style, it's the official OE style, which you would have
-known if you had bothered to read the OE styleguide, as I said in my
-original mail.
-Oe-stylize.py showed a pile of other problems in your recipe on top of
-those mentioned. So both the official style guide and the dedicated tool
-back me up.
+Philip
 
->>> +pkg_postinst() {
->>> +	if test "x$D" = "x"
->>> +	then 
->>> +		# Work around a problem in module ipk's, where depmod is not always
->>> +		# run after installing a kernel-module.
->>> +		test -x /sbin/depmod && /sbin/depmod -a
->>> +		/bin/true
->>> +	fi
->> And don't add such hacks, please remove it.
->>
-> 
-> The "hack" had a very valid purpose. 
+--------------ms060308030707070508080807
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-Valid purpose or not, it doesn't belong in OE. By your reasoning we
-should add all postinsts from all dependencies to each recipe. And *if*
-postinst get mysteriously skipped, your hack isn't going to get
-executed, is it?
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
+OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
+65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
+X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
+tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
+szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
+nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
+U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
+ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
+HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
+dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
+RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
+rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
+6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
+Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MTEyMTE5
+MzIxNFowIwYJKoZIhvcNAQkEMRYEFPhykcHS9mWfvuka5GA8rTBfxX4oMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
+qTANBgkqhkiG9w0BAQEFAASCAQBx0ROT0hLbRtfTk8Y4/IbDm1bi8zoDixliGdtbbFI8jGQEO/Hp
+W6YSPgey1nAlCZqGXq5BnMH/bv6IH1A2mRsGZCZU+tQStNevciubONcILOeEAT3oGk2m/dWUVHDw
+u8lqICPXIna2nbmQs2UZwW/cOq1Z9WxxRFCtpZSPSSoK1JMGCyWJG/UJl9pUiF/cfwe22F6XBBVy
+Qf9CrbBclVKBYpG1B1swv+T3TsIO+Tyfz/62GFQmw1EEPhxmGkeXcAbXSGorC4oJlu1+l72/8ohh
+fTi9HsYGGWIehz3N2D9DdxkGOGgxu/39GWL7XeyLURlV4/G09j+HEazlv3A4QqezAAAAAAAA
 
-> It worked around a very real bug
-
-Yet a search in bugzilla for 'depmod' or 'postinst' yields no open bugs
-on that.
-The only 'bug' I know of is people using 'su' instead of 'su -' to
-become root and (/usr)/sbin isn't in $PATH. That's PEBKAC, not an OE bug
-or ipkg bug.
-
-> Would be PLEASE STOP MESSING WITH OTHER PEOPLES FILES??
-
-Not if those violate various *documented* OE policies and the author of
-thw recipes in question refuses to comply with them.
-
-> THIS IS NOT KOEN-EMBEDDED
-
-No, this is OpenEmbedded, so follow the OE policies.
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHRIDZMkyGM64RGpERAurqAKC03wbfp+wiE1Vd6F49vM/h6N4ecwCfdVue
-+P0il0YgJpgJFq03bl859IE=
-=IUQI
------END PGP SIGNATURE-----
-
-
+--------------ms060308030707070508080807--
