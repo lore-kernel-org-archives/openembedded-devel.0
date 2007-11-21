@@ -1,34 +1,32 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <oe@hentges.net>) id 1Iutud-000161-6E
+	(envelope-from <pmiscml@gmail.com>) id 1IuuXD-0005zZ-A5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2007 19:02:59 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id AD3853081EB
+	Wed, 21 Nov 2007 19:42:51 +0100
+Received: by ug-out-1314.google.com with SMTP id m3so184534ugc
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 18:31:52 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at hentges.net
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563.serverkompetenz.net [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id oYX6tmFUYepF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 18:30:26 +0100 (CET)
-Received: from [192.168.5.2] (xdsl-87-78-210-162.netcologne.de [87.78.210.162])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id 101763081E9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 18:30:26 +0100 (CET)
-From: Matthias Hentges <oe@hentges.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47434BB3.2010705@student.utwente.nl>
-References: <E1IuZKt-0006pg-Ms@linuxtogo.org>
-	<47434BB3.2010705@student.utwente.nl>
-Date: Wed, 21 Nov 2007 18:30:23 +0100
-Message-Id: <1195666223.30926.10.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.3 
-Subject: Re: [oe-commits] org.oe.dev Add cryptsetup: Stop forcing your	opinions onto other people!
+	Wed, 21 Nov 2007 10:40:35 -0800 (PST)
+Received: by 10.66.243.4 with SMTP id q4mr778225ugh.1195667130185;
+	Wed, 21 Nov 2007 09:45:30 -0800 (PST)
+Received: from ?192.168.2.2? ( [88.231.78.200])
+	by mx.google.com with ESMTPS id j33sm1372063ugc.2007.11.21.09.45.19
+	(version=SSLv3 cipher=OTHER); Wed, 21 Nov 2007 09:45:29 -0800 (PST)
+Date: Wed, 21 Nov 2007 19:45:13 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <745865018.20071121194513@gmail.com>
+To: Rod Whitby <rod@whitby.id.au>
+In-Reply-To: <4743C5B8.4030209@whitby.id.au>
+References: <20071119120819.GA17788@lenovo>
+	<47419EA0.4030308@student.utwente.nl>
+	<4742217C.9060506@whitby.id.au>
+	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
+	<4743201F.8000202@am.sony.com> <617697824.20071121042405@gmail.com>
+	<4743C5B8.4030209@whitby.id.au>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,88 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2007 18:02:59 -0000
-X-Groupsio-MsgNum: 3395
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="=-SuIaXJ1KN6LzZrRSSmUe"
+X-List-Received-Date: Wed, 21 Nov 2007 18:42:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
---=-SuIaXJ1KN6LzZrRSSmUe
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+Hello Rod,
 
-For starters, this mailing list is still broken and violates RFCs in
-regards to FROM and REPLY-TO.
+Wednesday, November 21, 2007, 7:44:24 AM, you wrote:
 
-Am Dienstag, den 20.11.2007, 22:03 +0100 schrieb Koen Kooi:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> coredump2 commit schreef:
->=20
->=20
-> > +######################################################################=
-################
-> > +######################################################################=
-################
-> > +######################################################################=
-################
-> > +######################################################################=
-################
->=20
-> Please read (and follow) the styleguide and run the recipe through
-> OE-stylize.py to get an idea how it should look like.
+> Paul Sokolovsky wrote:
+>>    Why not default? Well, because what make builds is usually ones to
+>> tens of megabytes, while bitbake builds tens to hundreds gigabytes.
+>> Those who're brave to undertake such endeavour, are expected to get
+>> some understanding of what they're going to be thru by learning and
+>> doing some setup with their own hands.
 
-Nice "style". With my layout, you at least had a sense about what does
-what, the entries were grouped for easy reading.
+[]
 
-Your "style" does nothing more than remove any kind of possible grouping
-by deleting linefeeds left and right. Your "style" stinks.
+> And yes, we all agree with BitBake/OE was not designed for the "casual
+> user" who has been forced to use it cause there is no other way (for
+> example) to build an OpenMoko image or create a new application for
+> OpenMoko.  But the reality of today is that there is a large number of
+> such users, and they seem to prefer the convenience of the Makefiles.
 
+  Nice! OpenMoko uses its Makefile on to of bitbake, Slug uses own
+Makefile, Koen guy uses his autobuilder which he doesn't even bother
+to publish, I use busyb on top of OE (http://linux-h4000.sourceforge.net/busyb/oe/).
 
-> > +pkg_postinst() {
-> > +	if test "x$D" =3D "x"
-> > +	then=20
-> > +		# Work around a problem in module ipk's, where depmod is not always
-> > +		# run after installing a kernel-module.
-> > +		test -x /sbin/depmod && /sbin/depmod -a
-> > +		/bin/true
-> > +	fi
->=20
-> And don't add such hacks, please remove it.
->=20
+   But what's the OE's and bitbake's problem with this? Because that's
+how all Unix tools are used. What is the problem which needs to be
+solved? If the problem formulates as "OE and bitbake sucks, because
+I use Makefile on top of them", then it can as well stay that way -
+everyone does use.
 
-The "hack" had a very valid purpose. I even explained the purpose for
-you alone in the .bb. It worked around a very real bug in module
-handling which no one (not even you) bothered to fix for > 1 year.
-A bug which is *impossible* to track-down or fix for most end-users.
+    If instead its "its hard for casual user to setup
+a distro building environment", then we should be prepared to decide
+what part of power and flexibility we're going to hide, if not remove,
+from the users. I'd personally be glad to see extension of the user
+base of OE, but if it would come at the expense of reduction of
+*poweruser* base, that would be a bit said, so worth a bit of
+planning.
 
-Would be PLEASE STOP MESSING WITH OTHER PEOPLES FILES??
-Only because YOU do not like something does NOT give you the bloody
-right to revert or even change other peoples commits!
-
-THIS IS NOT KOEN-EMBEDDED
---=20
-Matthias 'CoreDump' Hentges=20
-Cologne / Germany
-
-Webmaster of Hentges.net & Embedded Linux Developer
-GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
-
-My OS: Debian SID: Geek by Nature, Linux by Choice
+> -- Rod
 
 
 
---=-SuIaXJ1KN6LzZrRSSmUe
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: This is a digitally signed message part
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQBHRGsvPXyoPq8wMNkRAvDAAJ98jBzuvWs7wRu1GJcJWIoia0PISwCgogO7
-LZmRy/2UAI9esO+0zI2yjII=
-=6UiI
------END PGP SIGNATURE-----
 
---=-SuIaXJ1KN6LzZrRSSmUe--
