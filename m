@@ -1,20 +1,31 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.146.176] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <philip@balister.org>) id 1IuvLM-0002Su-N9
-	for openembedded-devel@openembedded.org; Wed, 21 Nov 2007 20:34:41 +0100
-Received: (qmail 14484 invoked by uid 1003); 21 Nov 2007 19:32:36 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 21 Nov 2007 19:32:35 -0000
-Message-ID: <474487C5.9070701@balister.org>
-Date: Wed, 21 Nov 2007 14:32:21 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.9 (X11/20071115)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>	<4743201F.8000202@am.sony.com>
-	<617697824.20071121042405@gmail.com> <474471B1.6020101@am.sony.com>
+	(envelope-from <pmiscml@gmail.com>) id 1Iuw5Z-0007lo-Ap
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Nov 2007 21:22:27 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so3209122waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Nov 2007 12:20:08 -0800 (PST)
+Received: by 10.114.166.1 with SMTP id o1mr1559050wae.1195669783639;
+	Wed, 21 Nov 2007 10:29:43 -0800 (PST)
+Received: from ?192.168.2.2? ( [88.231.78.200])
+	by mx.google.com with ESMTPS id z37sm3735ikz.2007.11.21.10.29.41
+	(version=SSLv3 cipher=OTHER); Wed, 21 Nov 2007 10:29:42 -0800 (PST)
+Date: Wed, 21 Nov 2007 20:29:38 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <1938272464.20071121202938@gmail.com>
+To: Tim Bird <tim.bird@am.sony.com>
 In-Reply-To: <474471B1.6020101@am.sony.com>
+References: <20071119120819.GA17788@lenovo>
+	<47419EA0.4030308@student.utwente.nl>
+	<4742217C.9060506@whitby.id.au>
+	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
+	<4743201F.8000202@am.sony.com> <617697824.20071121042405@gmail.com>
+	<474471B1.6020101@am.sony.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,93 +40,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2007 19:34:41 -0000
-X-Groupsio-MsgNum: 3400
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms000606090307070204000207"
-
---------------ms000606090307070204000207
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 21 Nov 2007 20:22:28 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Tim Bird wrote:
+Hello Tim,
+
+Wednesday, November 21, 2007, 7:58:09 PM, you wrote:
+
+> Paul Sokolovsky wrote:
+>>    This is attempt to put it backwards. It's not to allow bitbake
+>> to be used outside of build directory, it's to allow *source* be
+>> outside build directory. Real hardcore make users might have heard
+>> about VPATH envvar and out-of-source building.
+
+> I use makefiles to build source code, or affect operations
+> in different locations in the file system, all the time.
+> It is convenient and familiar to have PWD be part of the
+> trigger for what operation I'm performing.  I realize
+> this is an artifact of years of using make.  But since
+> it's something I and most others have already learned,
+> it seems like it would be nice to leverage that experience.
+
+  Just don't tell me about Makefiles - I love them too. ;-)
+
+  And please don't take following personally, instead it's just
+simile: there's big difference between 1) a user who install a distro
+from CD, and then subverts its package management by installing
+software from source with "./configure; make; make install" and 2) a
+user who builds a distro which can be burned on a CD and then
+installed for user #1.
+
+>> 
+>>    Why not default? Well, because what make builds is usually ones to
+>> tens of megabytes, while bitbake builds tens to hundreds gigabytes.
+
+> I don't see how this is relevant.  Maybe we are considering different
+> use cases.
+
+  It must be simple: if you have 2 partitions of 10Gb, you usually can
+"make" anything in any place. But for OE, that means that you need a
+bit more careful planning what to put where - may be you'll need to
+split source vs build by different partitions for example. As OE
+doesn't know what partition sized you have and where you mount them,
+it just explicitly requires you to do path setup. That's it.
+
+>> Those who're brave to undertake such endeavour, are expected to get
+>> some understanding of what they're going to be thru by learning and
+>> doing some setup with their own hands.
+> I have no idea why this should be so.
+
+> A few people have mentioned this similar theme - "if OE
+> hides the details, users won't be forced to learn what's
+> going on."
+
+  If OE hides details, few users might be unpleasantly suprised,
+for example, by the filled-in home. Moreover, if we hide arguably
+important things, less people will learn it, and will be able to
+progress/improve.
+
+> In the most general terms, computers EXIST
+> to allow people to not learn what's going on in complete detail.
+> So does OE.  It's just the invocation sequence and minimum
+> learning curve that people seem hung up on.
+
+  We'd start a long philosophical discussion here, with one opinion of
+dichotomy being the one above, and the other - if those people should
+choose TV and popcorn instead ;-).
+
 > I have sensed that OE seems squarely targeted
-> at distro developers rather than end users.  Maybe this is
+> at distro developers rather than end users.
+
+  That's how I assumed it all the time.
+
+>  Maybe this is
 > the disconnect.  The use cases for OE for developers and
 > users will be quite different.
 
-This is a key observation. OE is targeted at people solving the problem 
-of creating distro's for machines, not people developing software for 
-these machines (we'll call these people "users").
+  Yes, and it's good question what job is whose. For example, if
+OE should adapt itself to end users, or if rather targetted
+communities using OE should provide Makefiles, scripts, SDKs for
+their end users.
 
-I believe everyone agrees OE is not an ideal solution for users. What we 
-do not agree on is the best way to support users.
+  I'd personally regret if OE turned into another portage feel-alike
+with warning signs like "You, mere mortal user, don't even dare to
+change that setting!". So far, OE's way was more of "See that setting?
+Learn what it does, and tweak it, if you're sure."
 
-Philip
 
---------------ms000606090307070204000207
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+>> I'm sure that was original
+>> motivation why bitbake and OE was setup that way. Of course, that was
+>> quite some time ago, when disks were much smaller. Let's see if this
+>> will change now.
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
-OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
-65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
-X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
-tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
-szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
-nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
-U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
-ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
-HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
-dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
-RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
-rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
-6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
-Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MTEyMTE5
-MzIyMVowIwYJKoZIhvcNAQkEMRYEFPhykcHS9mWfvuka5GA8rTBfxX4oMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
-qTANBgkqhkiG9w0BAQEFAASCAQBFL8Ed4Sa+AblGhtRIUy151810fhtVVJyNvGHsPmAf6gVEw6ZG
-ptIoV/lS6p0Yga5BsQ2Pafd9f5GlLrb7AbHZ+lMJOOQQrnmQXMW5SXJLHGs4Dz0OAj+jW4TMD0X2
-E1NDOXv9PwRtjBsaKllf81gJU+G6SwSQMH/lV/pbHHTOq/0O1G0M4hnnl+oUDgW3DJsTInthhJgu
-quJLDbFSkS7Z41C9MGW6bqA+mV1psW4Dh/nSoTnqcg/lDi3WSdV/lXocB9NzOluSH/Y/d+FYhZoR
-wLZVMedOFy1+iJDZRaBJpL53Ery53rKZHqSphNXS/o2DsCovYK0Odt2aezS6OYTJAAAAAAAA
+> Indeed.  Thanks for the response.
+>  -- Tim
 
---------------ms000606090307070204000207--
+> =============================
+> Tim Bird
+> Architecture Group Chair, CE Linux Forum
+> Senior Staff Engineer, Sony Corporation of America
+> =============================
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
+
+
