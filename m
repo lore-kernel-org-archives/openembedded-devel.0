@@ -1,27 +1,31 @@
-Received: from [64.233.166.183] (helo=py-out-1112.google.com)
+Received: from [62.70.27.18] (helo=esparsett.troll.no)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <xjqian@gmail.com>) id 1Iv3QC-0000DJ-85
+	(envelope-from <lpotter@trolltech.com>) id 1Iv3a4-0004eE-MZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2007 05:12:12 +0100
-Received: by py-out-1112.google.com with SMTP id a25so8700647pyi
+	Thu, 22 Nov 2007 05:22:24 +0100
+Received: from esparsett.troll.no (localhost [127.0.0.1])
+	by localhost (Postfix) with SMTP id 0A70274256
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 20:09:53 -0800 (PST)
-Received: by 10.35.78.9 with SMTP id f9mr9748807pyl.1195697578919;
-	Wed, 21 Nov 2007 18:12:58 -0800 (PST)
-Received: from ?192.168.1.204? ( [24.107.180.75])
-	by mx.google.com with ESMTPS id p77sm559196pyb.2007.11.21.18.12.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 21 Nov 2007 18:12:58 -0800 (PST)
-Message-ID: <4744E5AB.4040400@gmail.com>
-Date: Wed, 21 Nov 2007 20:12:59 -0600
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Icedove 1.5.0.14pre (X11/20071020)
+	Thu, 22 Nov 2007 05:20:06 +0100 (CET)
+Received: from mail.trolltech.com.au (unknown [10.1.1.12])
+	by esparsett.troll.no (Postfix) with ESMTP id 9F02574246
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Nov 2007 05:20:05 +0100 (CET)
+Received: from [10.1.1.181] (polarbear-replace.trolltech.com.au [10.1.1.181])
+	by mail.trolltech.com.au (Postfix) with ESMTP id 1F1A53AB22B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Nov 2007 14:20:04 +1000 (EST)
+Message-ID: <47450371.9050005@trolltech.com>
+Date: Thu, 22 Nov 2007 14:20:01 +1000
+From: Lorn Potter <lpotter@trolltech.com>
+User-Agent: Thunderbird 2.0.0.0 (X11/20070326)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4743FB40.1030307@gmail.com>
-	<200711211347.58538.openembedded@haerwu.biz>
-In-Reply-To: <200711211347.58538.openembedded@haerwu.biz>
-Subject: Re: gfortran needed on host to compile gcc >= 4.1.2
+References: <20071119120819.GA17788@lenovo>	<47419EA0.4030308@student.utwente.nl>	<4742217C.9060506@whitby.id.au>	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>	<4743201F.8000202@am.sony.com>
+	<617697824.20071121042405@gmail.com>	<4743C5B8.4030209@whitby.id.au>
+	<774364350.20071122023548@vanille-media.de>
+In-Reply-To: <774364350.20071122023548@vanille-media.de>
+Subject: Re: Getting Started -Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,25 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2007 04:12:13 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Nov 2007 04:22:24 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 11/21/2007 06:47 AM, Marcin Juszkiewicz wrote:
-> Dnia ¶roda, 21 listopada 2007, Junqian Gordon Xu napisa³:
->> I took the liberty to enable gfortran for gcc_4.1.2 (hence gcc >= 4.1.2
->> has fortran enabled). The side effect is that you need to install
->> gfortran or g77 on your host to compile it.
-> 
-> Can I still build gcc(-cross) without gfortran when gfortran is not 
-> installed on host? If not they I would call it ugly regression...
+Michael 'Mickey' Lauer wrote:
 
-I'm afraid you will get stuck in do_configure of gcc(-cross). I assume 
-the burden of installing gfortran on the host is low. But people may 
-disagree. Maybe we could introduce a fortran flag in a conf files, if 
-there is too much opposition to the change.
+> Guilty as charged. Lets try not to force these people to use OE -- we
+> can do this by releasing prebuilt toolchains. I'm going to start with
+> releasing an OpenMoko toolchain next week.
 
-Regards
-Gordon
+
+FYI, We have had a toolchain released when we first released Qtopia for 
+Neo tech preview, built with CROSS_DIR = "/opt/toolchains/arm920t-eabi". 
+I put it there because that is where the greenphone toolchain lived.
+
+It would be nice if we were to use the same location for toolchains. So 
+perhaps you could use our location? :)
+
 
 
