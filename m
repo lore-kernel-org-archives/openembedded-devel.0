@@ -1,27 +1,29 @@
-Received: from [64.233.162.230] (helo=nz-out-0506.google.com)
+Received: from [64.233.184.224] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <kergoth@gmail.com>) id 1Iv5Ex-0001Rt-PT
+	(envelope-from <kergoth@gmail.com>) id 1Iv6E6-000732-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2007 07:08:43 +0100
-Received: by nz-out-0506.google.com with SMTP id l1so2127592nzf
+	Thu, 22 Nov 2007 08:11:54 +0100
+Received: by wr-out-0506.google.com with SMTP id c30so2284355wra
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2007 22:06:24 -0800 (PST)
-Received: by 10.142.72.21 with SMTP id u21mr2293954wfa.1195701623779;
-	Wed, 21 Nov 2007 19:20:23 -0800 (PST)
-Received: by 10.142.104.18 with HTTP; Wed, 21 Nov 2007 19:20:23 -0800 (PST)
-Message-ID: <b6ebd0a50711211920m636711eele486eac5164109f8@mail.gmail.com>
-Date: Wed, 21 Nov 2007 20:20:23 -0700
+	Wed, 21 Nov 2007 23:09:34 -0800 (PST)
+Received: by 10.142.76.4 with SMTP id y4mr2288277wfa.1195701347871;
+	Wed, 21 Nov 2007 19:15:47 -0800 (PST)
+Received: by 10.142.104.18 with HTTP; Wed, 21 Nov 2007 19:15:47 -0800 (PST)
+Message-ID: <b6ebd0a50711211915x5936ab36haa009ef71774798e@mail.gmail.com>
+Date: Wed, 21 Nov 2007 20:15:47 -0700
 From: "Chris Larson" <clarson@kergoth.com>
 Sender: kergoth@gmail.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <474480D9.4090001@student.utwente.nl>
+In-Reply-To: <14810200560.20071122022819@vanille-media.de>
 MIME-Version: 1.0
-References: <E1IuZKt-0006pg-Ms@linuxtogo.org>
-	<47434BB3.2010705@student.utwente.nl>
-	<1195667681.30926.11.camel@localhost.localdomain>
-	<474480D9.4090001@student.utwente.nl>
-X-Google-Sender-Auth: 8f28990196be1754
-Subject: Re: [oe-commits] org.oe.dev Add cryptsetup: Stop forcing your opinions onto other people!
+References: <20071119120819.GA17788@lenovo>
+	<C7148B94-6A92-42DE-BF35-75B409DAA8E7@selfish.org>
+	<4741FB41.7080602@trolltech.com>
+	<1195551213.6337.9.camel@localhost.localdomain>
+	<008f01c82b8a$89c8ab50$6e01a8c0@twilight>
+	<14810200560.20071122022819@vanille-media.de>
+X-Google-Sender-Auth: 808ec72b8bffcd59
+Subject: Re: The truth about OE team being afraid of 'make' (was: Getting Started -Makefile)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,21 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2007 06:08:44 -0000
+X-List-Received-Date: Thu, 22 Nov 2007 07:11:54 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Nov 21, 2007 12:02 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> The only 'bug' I know of is people using 'su' instead of 'su -' to
-> become root and (/usr)/sbin isn't in $PATH. That's PEBKAC, not an OE bug
-> or ipkg bug.
+On Nov 21, 2007 6:28 PM, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
+> Mike (mwester) wrote:
+> > I ask the OE team why are they are philosophically opposed to driving
+> > bitbake with make?
+>
+> Ok, seems now's a good time to tell you. Because that's where we came
+> from back in 2002 -- from a Makefile-centric buildroot called
+> OpenZaurus that didn't scale at all (which is inherent to the
+> buildroot approach).
+>
+> We are so glad that by inventing OpenEmbedded and BitBake we have left
+> this stoneage of building distributions behind.
+>
+> Getting back to the 'make' command reminds us of the painful past before we had
+> OE.
+>
+> Then again, it could be just a paranoia of me, Chris Larson, and
+> Holger Schurig ;)
 
-Deviating from the discussion, but if the postinst relies on /sbin
-being in the path for it to execute correctly, it should be fixed to
-either modify the path or directly call the binary with the full path.
- No portable shell script should rely on anything but /bin and
-/usr/bin being in the PATH.
+GNU Make has some features now which it did not have then, that could
+have made it slightly less painful to use for our work, but naturally
+it wouldn't be worth going back to a more limited base now.  Back
+then, it didn't support things like dependency on a file's existance
+only, avoiding rebuilds when timestamps change, and there was no
+'eval' to facilitate on the fly rule generation.  To summarize, make
+just wasn't suitable back then, and it would be a great deal of work
+to go back to it now, and it'd still be less flexible than what we
+have today, and would suffer from portability headaches with make
+versions.
 -- 
 Chris Larson - clarson at kergoth dot com
 Dedicated Engineer - MontaVista - clarson at mvista dot com
