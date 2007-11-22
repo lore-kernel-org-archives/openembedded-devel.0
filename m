@@ -1,36 +1,27 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.166.183] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <mickey@vanille-media.de>) id 1Iv118-00072r-Kw
+	(envelope-from <xjqian@gmail.com>) id 1Iv3QC-0000DJ-85
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2007 02:38:10 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 438A328C013; Thu, 22 Nov 2007 02:29:35 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.8 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180128148.adsl.alicedsl.de [85.180.128.148])
-	by srv043.dedi23.de (Postfix) with ESMTP id 1C83A28C012;
-	Thu, 22 Nov 2007 02:29:32 +0100 (CET)
-Date: Thu, 22 Nov 2007 02:35:48 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <774364350.20071122023548@vanille-media.de>
-To: Rod Whitby <rod@whitby.id.au>
-In-Reply-To: <4743C5B8.4030209@whitby.id.au>
-References: <20071119120819.GA17788@lenovo>
-	<47419EA0.4030308@student.utwente.nl>
-	<4742217C.9060506@whitby.id.au>
-	<74d0deb30711200112x17ad31fej4b25840a74e05abb@mail.gmail.com>
-	<4743201F.8000202@am.sony.com> <617697824.20071121042405@gmail.com>
-	<4743C5B8.4030209@whitby.id.au>
+	Thu, 22 Nov 2007 05:12:12 +0100
+Received: by py-out-1112.google.com with SMTP id a25so8700647pyi
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Nov 2007 20:09:53 -0800 (PST)
+Received: by 10.35.78.9 with SMTP id f9mr9748807pyl.1195697578919;
+	Wed, 21 Nov 2007 18:12:58 -0800 (PST)
+Received: from ?192.168.1.204? ( [24.107.180.75])
+	by mx.google.com with ESMTPS id p77sm559196pyb.2007.11.21.18.12.57
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 21 Nov 2007 18:12:58 -0800 (PST)
+Message-ID: <4744E5AB.4040400@gmail.com>
+Date: Wed, 21 Nov 2007 20:12:59 -0600
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Icedove 1.5.0.14pre (X11/20071020)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Getting Started -Makefile
+To: openembedded-devel@lists.openembedded.org
+References: <4743FB40.1030307@gmail.com>
+	<200711211347.58538.openembedded@haerwu.biz>
+In-Reply-To: <200711211347.58538.openembedded@haerwu.biz>
+Subject: Re: gfortran needed on host to compile gcc >= 4.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,35 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2007 01:38:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Nov 2007 04:12:13 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Rod Whitby wrote:
-> Paul Sokolovsky wrote:
->>    Why not default? Well, because what make builds is usually ones to
->> tens of megabytes, while bitbake builds tens to hundreds gigabytes.
->> Those who're brave to undertake such endeavour, are expected to get
->> some understanding of what they're going to be thru by learning and
->> doing some setup with their own hands.
+On 11/21/2007 06:47 AM, Marcin Juszkiewicz wrote:
+> Dnia ¶roda, 21 listopada 2007, Junqian Gordon Xu napisa³:
+>> I took the liberty to enable gfortran for gcc_4.1.2 (hence gcc >= 4.1.2
+>> has fortran enabled). The side effect is that you need to install
+>> gfortran or g77 on your host to compile it.
+> 
+> Can I still build gcc(-cross) without gfortran when gfortran is not 
+> installed on host? If not they I would call it ugly regression...
 
-> And therein lies the rub.  The reason why the Makefiles came about is
-> because there is a large number of distribution users who are forced to
-> use OE (cause it is the only way to develop applications for or build
-> custom images for a certain platform), but they have *no* interest in
-> understanding how to build tens to hundreds of gigabytes of stuff with
-> bitbake.  They are application developers and image customisers, not
-> distribution developers.
+I'm afraid you will get stuck in do_configure of gcc(-cross). I assume 
+the burden of installing gfortran on the host is low. But people may 
+disagree. Maybe we could introduce a fortran flag in a conf files, if 
+there is too much opposition to the change.
 
-Guilty as charged. Lets try not to force these people to use OE -- we
-can do this by releasing prebuilt toolchains. I'm going to start with
-releasing an OpenMoko toolchain next week.
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Regards
+Gordon
 
 
