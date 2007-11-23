@@ -1,24 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <theBohemian@gmx.net>) id 1IvZMA-0004Nv-Jt
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Nov 2007 15:18:10 +0100
-Received: (qmail invoked by alias); 23 Nov 2007 14:15:43 -0000
-Received: from e178064220.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.64.220]
-	by mail.gmx.net (mp053) with SMTP; 23 Nov 2007 15:15:43 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/cCj5z+vDcPrtlXzwSlYhT4m5/tN8sx1NOoX4N8u
-	wGS9h44Z0uO9IC
-Message-ID: <4746E08F.3030306@gmx.net>
-Date: Fri, 23 Nov 2007 15:15:43 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Ivalx-0005bv-2Y
+	for openembedded-devel@openembedded.org; Fri, 23 Nov 2007 16:48:53 +0100
+Received: from Powerbook-2.local (vpn006010.vpn.utwente.nl [130.89.6.10])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lANFkMiq020174 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Nov 2007 16:46:22 +0100
+Message-ID: <4746F5CE.3010209@student.utwente.nl>
+Date: Fri, 23 Nov 2007 16:46:22 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: bbclass providing some level of scratchbox compatibility
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <4746E045.2070805@gmx.net>
+In-Reply-To: <4746E045.2070805@gmx.net>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: bbclass providing some level of scratchbox compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,71 +35,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2007 14:18:10 -0000
-X-Groupsio-MsgNum: 3426
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig2C157F840DEF2D79DC0894C0"
-
---------------enig2C157F840DEF2D79DC0894C0
-Content-Type: multipart/mixed;
- boundary="------------030207090608070109000309"
-
---------------030207090608070109000309
+X-List-Received-Date: Fri, 23 Nov 2007 15:48:53 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi,
-I am using OE to build binaries that can be run from within Maemo
-scratchbox.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The binaries I create are for the native architecture (the one of the
-host CPU) not the emulated one. Such binaries need a special rpath. What
-the bbclass does is simply putting that special rpath in LD_RUN_PATH
-before configuring and compiling. This has the effect that all built
-binaries have it in.
+Robert Schuster schreef:
+> Hi,
+> I am using OE to build binaries that can be run from within Maemo
+> scratchbox.
+> 
+> The binaries I create are for the native architecture (the one of the
+> host CPU) not the emulated one. Such binaries need a special rpath. What
+> the bbclass does is simply putting that special rpath in LD_RUN_PATH
+> before configuring and compiling. This has the effect that all built
+> binaries have it in.
 
-Together with a halfway compatible toolchain (CS gcc3.4.4, glibc2.3.x)
-that allows me to run those binaries in Maemo's scratchbox.
+Looks nice, but shouldn't we put the generated binaries (e.g. packages,
+tarballs) in a special dir in deploy so there's no risk of confusing the
+m with non-rpathed ones?
 
-I am using this for Jalimo[0] and would like to push it upstream. I am
-open for suggestions.
+> Together with a halfway compatible toolchain (CS gcc3.4.4, glibc2.3.x)
+> that allows me to run those binaries in Maemo's scratchbox.
+> 
+> I am using this for Jalimo[0] and would like to push it upstream. I am
+> open for suggestions.
+> 
+> File a bug?
 
-File a bug?
+Always :)
 
-Regards
-Robert
 
-[0] - http://jalimo.org/wiki/doku.php?id=3Ddoc:howto:cacaoandecjinscratchb=
-ox
-# By adding this class to your build all binaries get the special rpath
-# "/scratchbox/host_shared/lib/:/scratchbox/tools/lib/"
-# Doing so makes libraries and programs runnable inside the Scratchbox
-# environment as native binaries (not for the CPU that Scratchbox is
-# emulating).
+regards,
 
-do_configure_prepend () {
-  export LD_RUN_PATH=3D"/scratchbox/host_shared/lib:/scratchbox/tools/lib"
-}
+Koen
 
-do_compile_prepend () {
-  export LD_RUN_PATH=3D"/scratchbox/host_shared/lib:/scratchbox/tools/lib"
-}
+> Regards
+> Robert
+> 
+> [0] - http://jalimo.org/wiki/doku.php?id=doc:howto:cacaoandecjinscratchbox
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---------------030207090608070109000309--
 
---------------enig2C157F840DEF2D79DC0894C0
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFHRuCPG9cfwmwwEtoRCHwiAJ4tqjqO813PmuN0ZU79QJ7hLO4c1wCdHmHv
-pVn3r0APkDvsL7yCDXTt/2c=
-=ue8o
+iD8DBQFHRvXOMkyGM64RGpERArK+AJ4vMC4CiawyuEUvl4B4nS8JZ3vPIgCdFNYv
+dfREBlDgZTf/iek33/8MiOA=
+=XxR9
 -----END PGP SIGNATURE-----
 
---------------enig2C157F840DEF2D79DC0894C0--
+
