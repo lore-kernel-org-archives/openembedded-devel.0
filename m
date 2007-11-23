@@ -1,26 +1,26 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <theBohemian@gmx.net>) id 1IvSaO-0002E7-Gs
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Nov 2007 08:04:24 +0100
-Received: (qmail invoked by alias); 23 Nov 2007 07:01:59 -0000
-Received: from e178064220.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.64.220]
-	by mail.gmx.net (mp058) with SMTP; 23 Nov 2007 08:01:59 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/lhOcBMrHlUHZI8kXwj+B46WOQngeG0e0/cTSH0m
-	6eFESUX95dcvu5
-Message-ID: <47467AE0.4070305@gmx.net>
-Date: Fri, 23 Nov 2007 08:01:52 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IvTj8-0007MO-66
+	for openembedded-devel@openembedded.org; Fri, 23 Nov 2007 09:17:30 +0100
+Received: from Powerbook-2.local (vpn006015.vpn.utwente.nl [130.89.6.15])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lAN8F1Zn019202 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Nov 2007 09:15:01 +0100
+Message-ID: <47468C05.3090600@student.utwente.nl>
+Date: Fri, 23 Nov 2007 09:15:01 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <E1IvJbN-00085C-Mz@linuxtogo.org>
-In-Reply-To: <E1IvJbN-00085C-Mz@linuxtogo.org>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] org.oe.dev cacao-cldc: fix RDEPENDS for libltdl
+To: openembedded-devel@openembedded.org
+References: <E1IvR63-00056z-6R@linuxtogo.org>
+In-Reply-To: <E1IvR63-00056z-6R@linuxtogo.org>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev gcc-(cross)_4.1.2: enable gfortran and gfortran packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,42 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2007 07:04:24 -0000
-X-Groupsio-MsgNum: 3421
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig2E30F83BF7F63018B3927849"
+X-List-Received-Date: Fri, 23 Nov 2007 08:17:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---------------enig2E30F83BF7F63018B3927849
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hi Henning.
+xjqian commit schreef:
+> gcc-(cross)_4.1.2: enable gfortran and gfortran packaging
 
-woglinde2 commit schrieb:
-> cacao-cldc: fix RDEPENDS for libltdl
-> * cacao-cldc needs libltdl if executed
+>  	# Symlinks so we can use these trivially on the target
+>  	ln -sf ${TARGET_SYS}-g77 g77
+> +	ln -sf ${TARGET_SYS}-gfortran gfortran
+>  	ln -sf ${TARGET_SYS}-g++ g++
+>  	ln -sf ${TARGET_SYS}-gcc gcc
+>  	ln -sf g77 f77
+> +	ln -sf gfortran f95
+>  	ln -sf g++ c++
+>  	ln -sf gcc cc
+>  	ln -sf ${bindir}/${TARGET_SYS}-cpp ${D}${base_libdir}/cpp
 
-> -RDEPENDS =3D "virtual/cldc-api-1.1"
-> +RDEPENDS =3D "virtual/cldc-api-1.1 libltdl"
-Shouldn't shlibs find this out automatically?
+Could you add ' || true ' after those link statements so that people can
+disable fortran if they want?
 
-Regards
-Robert
+regards,
 
+Koen
 
---------------enig2E30F83BF7F63018B3927849
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFHRnrlG9cfwmwwEtoRCG34AJ4i3Vu4ET9Gwn2XARbHv/as8DusJACfdQvY
-3dOwgQFhY8len03DxJN9UY0=
-=yG11
+iD8DBQFHRowFMkyGM64RGpERAiptAJ9ufZC4BZ9cO0g/Zj0o02zJ58/MSQCfb9g9
+ELzF5TslmIcdDP/skppT0sQ=
+=soTy
 -----END PGP SIGNATURE-----
 
---------------enig2E30F83BF7F63018B3927849--
+
