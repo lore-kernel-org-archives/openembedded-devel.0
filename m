@@ -1,27 +1,24 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IvXUw-0002hE-0g
-	for openembedded-devel@openembedded.org; Fri, 23 Nov 2007 13:19:06 +0100
-Received: from Powerbook-2.local (vpn006010.vpn.utwente.nl [130.89.6.10])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lANCGank012815 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2007 13:16:37 +0100
-Message-ID: <4746C4A5.6040501@student.utwente.nl>
-Date: Fri, 23 Nov 2007 13:16:37 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <theBohemian@gmx.net>) id 1IvZL4-0004Nf-6o
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Nov 2007 15:17:02 +0100
+Received: (qmail invoked by alias); 23 Nov 2007 14:14:33 -0000
+Received: from e178064220.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.64.220]
+	by mail.gmx.net (mp008) with SMTP; 23 Nov 2007 15:14:33 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX197LJwvfFd7HBxD3amhYCm0EfFFeffzBbGpiOA5Cy
+	TkeXSA/8e5tCqb
+Message-ID: <4746E045.2070805@gmx.net>
+Date: Fri, 23 Nov 2007 15:14:29 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1Iv6U0-0003D9-3S@linuxtogo.org>
-In-Reply-To: <E1Iv6U0-0003D9-3S@linuxtogo.org>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev SlugOS: ixp4xx-kernel - added 2.6.23.8 recipe and supporting files. (Note that
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: bbclass providing some level of scratchbox compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,46 +32,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2007 12:19:06 -0000
+X-List-Received-Date: Fri, 23 Nov 2007 14:17:02 -0000
+X-Groupsio-MsgNum: 3425
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig57F86FA96CEDDB1BE45C4386"
+
+--------------enig57F86FA96CEDDB1BE45C4386
+Content-Type: multipart/mixed;
+ boundary="------------060200060501000008000906"
+
+--------------060200060501000008000906
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
+I am using OE to build binaries that can be run from within Maemo
+scratchbox.
 
-mwester commit schreef:
-> SlugOS: ixp4xx-kernel - added 2.6.23.8 recipe and supporting files.  (Note that
-> SlugOS still selects 2.6.21 as the preferred version for now.)
+The binaries I create are for the native architecture (the one of the
+host CPU) not the emulated one. Such binaries need a special rpath. What
+the bbclass does is simply putting that special rpath in LD_RUN_PATH
+before configuring and compiling. This has the effect that all built
+binaries have it in.
 
-Why am I forced to download a 40MB 2.6.23.8 tarball instead of the small
-2.6.23.8 patch? I already have 2.6.23 in DL_DIR.
+Together with a halfway compatible toolchain (CS gcc3.4.4, glibc2.3.x)
+that allows me to run those binaries in Maemo's scratchbox.
 
-It's as easy as doing:
+I am using this for Jalimo[0] and would like to push it upstream. I am
+open for suggestions.
 
-VANILLA_VERSION = "2.6.23"
-KERNEL_VERSION = "2.6.23.8"
+File a bug?
 
+Regards
+Robert
 
-SRC_URI = "
-${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${VANILLA_VERSION}.tar.bz2
-\
-${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${KERNEL_VERSION}.bz2;patch=1
-\
-"
+[0] - http://jalimo.org/wiki/doku.php?id=3Ddoc:howto:cacaoandecjinscratchb=
+ox
+# By adding this class to your build all binaries get the special rpath
+# "/scratchbox/host_shared/lib/:/scratchbox/tools/lib/"
+# Doing so makes libraries and programs runnable inside the Scratchbox
+# environment as native binaries (not for the CPU that Scratchbox is
+# emulating).
 
-in the recipe. I would have fixed it myself, but the huge block of
-python magic in ixp4xx-kernel.inc scared me away.
+do_configure_prepend () {
+  export LD_RUN_PATH=3D"/scratchbox/host_shared/lib:/scratchbox/tools/lib"
+}
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+do_compile_prepend () {
+  export LD_RUN_PATH=3D"/scratchbox/host_shared/lib:/scratchbox/tools/lib"
+}
+
+--------------060200060501000008000906--
+
+--------------enig57F86FA96CEDDB1BE45C4386
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFHRsSlMkyGM64RGpERAv/KAJ0aMNK4ltbFd0ABHJKEYiezTHGJRQCgvODH
-cZUTZIWcrGcSAFDURB7KtPU=
-=V2AA
+iD8DBQFHRuBIG9cfwmwwEtoRCEauAJ96EwxnmGKpnpJ/ViFTaIcm6UJAaQCdFSSw
+0So5hzd4KhNQsUtExXX5VJY=
+=Yebw
 -----END PGP SIGNATURE-----
 
-
+--------------enig57F86FA96CEDDB1BE45C4386--
