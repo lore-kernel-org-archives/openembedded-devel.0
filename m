@@ -1,17 +1,17 @@
 Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <theBohemian@gmx.net>) id 1IvZL4-0004Nf-6o
+	(envelope-from <theBohemian@gmx.net>) id 1IvZMA-0004Nv-Jt
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Nov 2007 15:17:02 +0100
-Received: (qmail invoked by alias); 23 Nov 2007 14:14:33 -0000
+	Fri, 23 Nov 2007 15:18:10 +0100
+Received: (qmail invoked by alias); 23 Nov 2007 14:15:43 -0000
 Received: from e178064220.adsl.alicedsl.de (EHLO [192.168.4.101])
 	[85.178.64.220]
-	by mail.gmx.net (mp008) with SMTP; 23 Nov 2007 15:14:33 +0100
+	by mail.gmx.net (mp053) with SMTP; 23 Nov 2007 15:15:43 +0100
 X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX197LJwvfFd7HBxD3amhYCm0EfFFeffzBbGpiOA5Cy
-	TkeXSA/8e5tCqb
-Message-ID: <4746E045.2070805@gmx.net>
-Date: Fri, 23 Nov 2007 15:14:29 +0100
+X-Provags-ID: V01U2FsdGVkX1/cCj5z+vDcPrtlXzwSlYhT4m5/tN8sx1NOoX4N8u
+	wGS9h44Z0uO9IC
+Message-ID: <4746E08F.3030306@gmx.net>
+Date: Fri, 23 Nov 2007 15:15:43 +0100
 From: Robert Schuster <theBohemian@gmx.net>
 User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
@@ -32,17 +32,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2007 14:17:02 -0000
-X-Groupsio-MsgNum: 3425
+X-List-Received-Date: Fri, 23 Nov 2007 14:18:10 -0000
+X-Groupsio-MsgNum: 3426
 Content-Type: multipart/signed; micalg=pgp-sha256;
 	protocol="application/pgp-signature";
-	boundary="------------enig57F86FA96CEDDB1BE45C4386"
+	boundary="------------enig2C157F840DEF2D79DC0894C0"
 
---------------enig57F86FA96CEDDB1BE45C4386
+--------------enig2C157F840DEF2D79DC0894C0
 Content-Type: multipart/mixed;
- boundary="------------060200060501000008000906"
+ boundary="------------030207090608070109000309"
 
---------------060200060501000008000906
+--------------030207090608070109000309
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -83,9 +83,9 @@ do_compile_prepend () {
   export LD_RUN_PATH=3D"/scratchbox/host_shared/lib:/scratchbox/tools/lib"
 }
 
---------------060200060501000008000906--
+--------------030207090608070109000309--
 
---------------enig57F86FA96CEDDB1BE45C4386
+--------------enig2C157F840DEF2D79DC0894C0
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -94,9 +94,9 @@ Content-Disposition: attachment; filename="signature.asc"
 Version: GnuPG v1.4.6 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFHRuBIG9cfwmwwEtoRCEauAJ96EwxnmGKpnpJ/ViFTaIcm6UJAaQCdFSSw
-0So5hzd4KhNQsUtExXX5VJY=
-=Yebw
+iD8DBQFHRuCPG9cfwmwwEtoRCHwiAJ4tqjqO813PmuN0ZU79QJ7hLO4c1wCdHmHv
+pVn3r0APkDvsL7yCDXTt/2c=
+=ue8o
 -----END PGP SIGNATURE-----
 
---------------enig57F86FA96CEDDB1BE45C4386--
+--------------enig2C157F840DEF2D79DC0894C0--
