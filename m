@@ -1,27 +1,30 @@
-Received: from [64.233.166.183] (helo=py-out-1112.google.com)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <xjqian@gmail.com>) id 1Ivoei-0003Av-FU
+	(envelope-from <rod@whitby.id.au>) id 1IvrkO-00010Y-Sx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Nov 2007 07:38:21 +0100
-Received: by py-out-1112.google.com with SMTP id a25so98340pyi
+	Sat, 24 Nov 2007 10:56:25 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 0870D53FB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2007 22:35:49 -0800 (PST)
-Received: by 10.35.12.10 with SMTP id p10mr195735pyi.1195884665625;
-	Fri, 23 Nov 2007 22:11:05 -0800 (PST)
-Received: from ?192.168.1.204? ( [24.107.180.75])
-	by mx.google.com with ESMTPS id p57sm3594184pyb.2007.11.23.22.11.01
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 23 Nov 2007 22:11:01 -0800 (PST)
-Message-ID: <4747C073.50509@gmail.com>
-Date: Sat, 24 Nov 2007 00:10:59 -0600
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Icedove 1.5.0.14pre (X11/20071020)
+	Sat, 24 Nov 2007 04:53:53 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Sat, 24 Nov 2007 04:53:53 -0500
+X-Sasl-enc: PHQEbpuOCia7JmC0UvG/RKATk0mzn95FUo3rpwM3kh4C 1195898032
+Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
+	[121.209.18.182])
+	by mail.messagingengine.com (Postfix) with ESMTP id 39A4D3D75
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Nov 2007 04:53:51 -0500 (EST)
+Message-ID: <4747F49C.50602@whitby.id.au>
+Date: Sat, 24 Nov 2007 20:23:32 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <E1IvR63-00056z-6R@linuxtogo.org>
-	<47468C05.3090600@student.utwente.nl>
-In-Reply-To: <47468C05.3090600@student.utwente.nl>
-Subject: Re: [oe-commits] org.oe.dev gcc-(cross)_4.1.2: enable gfortran and gfortran packaging
+References: <E1Iv6U0-0003D9-3S@linuxtogo.org>	<4746C4A5.6040501@student.utwente.nl>	<05db01c82dfe$1401e230$6e01a8c0@twilight>	<c384c5ea0711231351u1b91c5b6o437ecc5d512991e8@mail.gmail.com>	<4747921A.8000300@whitby.id.au>
+	<1195876746.5374.7.camel@localhost.localdomain>
+In-Reply-To: <1195876746.5374.7.camel@localhost.localdomain>
+Subject: Re: [oe-commits] org.oe.dev SlugOS: ixp4xx-kernel	-	added	2.6.23.8 recipe and supporting files. (Note that
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,28 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Nov 2007 06:38:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 24 Nov 2007 09:56:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 11/23/2007 02:15 AM, Koen Kooi wrote:
->>  	# Symlinks so we can use these trivially on the target
->>  	ln -sf ${TARGET_SYS}-g77 g77
->> +	ln -sf ${TARGET_SYS}-gfortran gfortran
->>  	ln -sf ${TARGET_SYS}-g++ g++
->>  	ln -sf ${TARGET_SYS}-gcc gcc
->>  	ln -sf g77 f77
->> +	ln -sf gfortran f95
->>  	ln -sf g++ c++
->>  	ln -sf gcc cc
->>  	ln -sf ${bindir}/${TARGET_SYS}-cpp ${D}${base_libdir}/cpp
+Matthias Hentges wrote:
+> VANILLA_VERSION = "2.6.23"
+> KERNEL_VERSION = "2.6.23.8"
 > 
-> Could you add ' || true ' after those link statements so that people can
-> disable fortran if they want?
+> SRC_URI = "
+> ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${VANILLA_VERSION}.tar.bz2
+> \
+> ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${KERNEL_VERSION}.bz2;patch=1
+> \
+> "
+> 
+> The above is IMO indeed a lot more elegant than 
+> 
+> SRC_URI = "
+> ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.23.8.tar.bz2
 
-committed in revision 1aa5367f28f9d932c635b4de64f9c152ffc30570
+Even more elegant is not having to specify the SRC_URI or
+vanilla_version and kernel_version in the .bb file at all.  The
+ixp4xx-kernel.inc file gets all the info it needs from the .bb filename.
 
-regards
-Gordon
+It is implemented to be able to handle a whole lot more scenarios than
+the simple one of 2.6.23.8 - if people want to fix it so that it still
+handles all those -ac, -mm, and -gitNN scenarios listed in the
+documentation in the comments at the start of the file, but is also
+optimally tuned as far as downloads go, then as Koen would always say:
+
+ "Patches are welcome".
+
+As usual, people should understand something before they criticise it.
+
+-- Rod
 
 
