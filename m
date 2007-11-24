@@ -1,30 +1,27 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rod@whitby.id.au>) id 1IvrkO-00010Y-Sx
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Nov 2007 10:56:25 +0100
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 0870D53FB9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Nov 2007 04:53:53 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Sat, 24 Nov 2007 04:53:53 -0500
-X-Sasl-enc: PHQEbpuOCia7JmC0UvG/RKATk0mzn95FUo3rpwM3kh4C 1195898032
-Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
-	[121.209.18.182])
-	by mail.messagingengine.com (Postfix) with ESMTP id 39A4D3D75
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Nov 2007 04:53:51 -0500 (EST)
-Message-ID: <4747F49C.50602@whitby.id.au>
-Date: Sat, 24 Nov 2007 20:23:32 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Ivycn-0002XU-Th
+	for openembedded-devel@openembedded.org; Sat, 24 Nov 2007 18:17:01 +0100
+Received: from Powerbook-2.local (vpn006010.vpn.utwente.nl [130.89.6.10])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lAOHEOiq017053 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Nov 2007 18:14:25 +0100
+Message-ID: <47485BF2.8080404@student.utwente.nl>
+Date: Sat, 24 Nov 2007 18:14:26 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <E1Iv6U0-0003D9-3S@linuxtogo.org>	<4746C4A5.6040501@student.utwente.nl>	<05db01c82dfe$1401e230$6e01a8c0@twilight>	<c384c5ea0711231351u1b91c5b6o437ecc5d512991e8@mail.gmail.com>	<4747921A.8000300@whitby.id.au>
-	<1195876746.5374.7.camel@localhost.localdomain>
-In-Reply-To: <1195876746.5374.7.camel@localhost.localdomain>
-Subject: Re: [oe-commits] org.oe.dev SlugOS: ixp4xx-kernel	-	added	2.6.23.8 recipe and supporting files. (Note that
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <200711232126220000@3074922013>
+In-Reply-To: <200711232126220000@3074922013>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev xserver-kdrive-common: use Xglamo for g ta02, remove some of the bogus Xserver checks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,40 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Nov 2007 09:56:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 24 Nov 2007 17:17:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Matthias Hentges wrote:
-> VANILLA_VERSION = "2.6.23"
-> KERNEL_VERSION = "2.6.23.8"
-> 
-> SRC_URI = "
-> ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${VANILLA_VERSION}.tar.bz2
-> \
-> ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${KERNEL_VERSION}.bz2;patch=1
-> \
-> "
-> 
-> The above is IMO indeed a lot more elegant than 
-> 
-> SRC_URI = "
-> ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.23.8.tar.bz2
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Even more elegant is not having to specify the SRC_URI or
-vanilla_version and kernel_version in the .bb file at all.  The
-ixp4xx-kernel.inc file gets all the info it needs from the .bb filename.
+Graeme Gregory schreef:
+> Aaargh please dont do this, Xglamo isnt fit to be default yet.
 
-It is implemented to be able to handle a whole lot more scenarios than
-the simple one of 2.6.23.8 - if people want to fix it so that it still
-handles all those -ac, -mm, and -gitNN scenarios listed in the
-documentation in the comments at the start of the file, but is also
-optimally tuned as far as downloads go, then as Koen would always say:
+Ok, I altered it slightly:
 
- "Patches are welcome".
+* Things runtime depending on ${XSERVER} (e.g. task-openmoko, x11-image)
+get both Xglamo and Xfbdev
+* Xfbdev is used by default, but one only needs to uncomment one line in
+/etc/X11/Xserver to switch to Xglamo
 
-As usual, people should understand something before they criticise it.
+This should give future users something stable and developers an easy
+way to experiment with Xglamo.
 
--- Rod
+regards,
+
+Koen
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHSFvyMkyGM64RGpERAsZ5AJ4k2xUYEZ2VRaCHnf/SqG2JoYZu2QCdHjaf
+zXnvpytL8XCCcd+JhVt5UTA=
+=+TF8
+-----END PGP SIGNATURE-----
 
 
