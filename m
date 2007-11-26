@@ -1,25 +1,24 @@
-Received: from [67.19.73.58] (helo=pug.o-hand.com)
-	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@haerwu.biz>) id 1IwQlD-0006x9-Te
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.67)
+	(envelope-from <theBohemian@gmx.net>) id 1IwhHM-0002yz-A1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2007 00:19:36 +0100
-Received: from home.lan (c62-222.icpnet.pl [62.21.62.222])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id C4CCDE2A5D7;
-	Sun, 25 Nov 2007 18:41:01 -0500 (EST)
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org,
-	Matthias 'CoreDump' Hentges <oe@hentges.net>
-Date: Mon, 26 Nov 2007 00:16:43 +0100
-User-Agent: KMail/1.9.7
-References: <20071125221011.B403A40012A@tinman.treke.net>
-In-Reply-To: <20071125221011.B403A40012A@tinman.treke.net>
-X-PRIORITY: 2 (High)
-Priority: urgent
+	Mon, 26 Nov 2007 17:57:52 +0100
+Received: (qmail invoked by alias); 26 Nov 2007 16:55:06 -0000
+Received: from e178067048.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.67.48]
+	by mail.gmx.net (mp035) with SMTP; 26 Nov 2007 17:55:06 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+vUF0z0QyvZNkvdtBh4fWkRX28ube4Ib7xPbUjaP
+	14xbAkaptMzYw9
+Message-ID: <474AFA66.30509@gmx.net>
+Date: Mon, 26 Nov 2007 17:55:02 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-Message-Id: <200711260016.45820.openembedded@haerwu.biz>
-Subject: Re: [oe-issues] [Bug 3131] zaurusd should rdepend on bl
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: python skills and bug 2412
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,39 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Nov 2007 23:19:36 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Mon, 26 Nov 2007 16:57:52 -0000
+X-Groupsio-MsgNum: 3440
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigFD1A867C57DB97A6A25955DB"
+
+--------------enigFD1A867C57DB97A6A25955DB
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia niedziela, 25 listopada 2007, bugzilla-daemon@tinman.treke.net=20
-napisa=B3:
-> http://bugs.openembedded.org/show_bug.cgi?id=3D3131
->
->
-> Matthias 'CoreDump' Hentges <oe@hentges.net> changed:
->
->            What    |Removed                     |Added
-> ----------------------------------------------------------------
->    CC    |                            |oe@hentges.net=20
->Status    |NEW                         |RESOLVED
->Resolution|                            |FIXED
->
-> --- Comment #1 from Matthias 'CoreDump' Hentges <oe@hentges.net>=20
-> 2007-11-25 14:10:11 --- Added gpe-conf to DEPENDS and RDEPENDS as
-> gpe-conf emulates "bl" these days.
+Hi
+Rodigo and me are suffering from bug 2412[0]. We talked a bit about the
+issue and I provided an idea on how to fix it. Unfortunately I lack the
+python experience to do it. I do not understand how the name conversion
+in debian.bbclass is actually done and where I could add code to replace
+slashes with hyphens.
 
-Zaurusd REQUIRE bl - not gpe-conf and we have 'bl' in repo -=20
-packages/bl/bl_cvs.bb recipe. Please do test and fix zaurusd recipe to=20
-depend on proper tool.
+Can anyone who has a better understanding of this help us out?
 
-And DO NOT add stuff into DEPENDS if this is NOT needed to build.
+Regards
+Robert
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-             I'm not being rude, you are being insignificant.
+[0] - http://bugs.openembedded.org/show_bug.cgi?id=3D2412
 
 
+
+--------------enigFD1A867C57DB97A6A25955DB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHSvpoG9cfwmwwEtoRCGydAJ44m70YYXR1w3KTh/1g+mJ77jrTmgCfUeuh
+X1GXc5PGzE/IOMfaj0z9Vs4=
+=d/JR
+-----END PGP SIGNATURE-----
+
+--------------enigFD1A867C57DB97A6A25955DB--
