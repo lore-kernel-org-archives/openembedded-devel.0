@@ -1,27 +1,35 @@
-Received: from [209.85.198.186] (helo=rv-out-0910.google.com)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mwhoosier@gmail.com>) id 1Ix6XJ-0004uF-7l
+	(envelope-from <oe@hentges.net>) id 1Ix7Dv-0001SE-7l
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2007 20:56:01 +0100
-Received: by rv-out-0910.google.com with SMTP id c24so984266rvf
+	Tue, 27 Nov 2007 21:40:05 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id DADD33081F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2007 11:53:04 -0800 (PST)
-Received: by 10.141.167.5 with SMTP id u5mr2132054rvo.1196193184849;
-	Tue, 27 Nov 2007 11:53:04 -0800 (PST)
-Received: by 10.35.15.5 with HTTP; Tue, 27 Nov 2007 11:53:04 -0800 (PST)
-Message-ID: <d543f5920711271153v5964f4e2te91f0d0347dd1e95@mail.gmail.com>
-Date: Tue, 27 Nov 2007 13:53:04 -0600
-From: "Matt Hoosier" <matt.hoosier@gmail.com>
-Sender: mwhoosier@gmail.com
+	Tue, 27 Nov 2007 21:37:10 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at hentges.net
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563.serverkompetenz.net [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 0IvQYyPGpDYT
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Nov 2007 21:37:08 +0100 (CET)
+Received: from [192.168.5.2] (xdsl-87-78-215-172.netcologne.de [87.78.215.172])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id E33253081E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Nov 2007 21:37:07 +0100 (CET)
+From: Matthias Hentges <oe@hentges.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1196172204.6780.37.camel@localhost.localdomain>
-MIME-Version: 1.0
-References: <474AFA66.30509@gmx.net>
-	<1196166155.6780.11.camel@localhost.localdomain>
-	<157949636.20071127154357@gmail.com>
-	<1196172204.6780.37.camel@localhost.localdomain>
-X-Google-Sender-Auth: 120bce8fb9314970
-Subject: Re: python skills and bug 2412
+In-Reply-To: <474C31B6.5060807@kernelconcepts.de>
+References: <20071125221011.B403A40012A@tinman.treke.net>
+	<200711260016.45820.openembedded@haerwu.biz>
+	<474C31B6.5060807@kernelconcepts.de>
+Date: Tue, 27 Nov 2007 21:37:06 +0100
+Message-Id: <1196195826.4469.3.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.3 
+Subject: Re: [oe-issues] [Bug 3131] zaurusd should rdepend on bl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,24 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2007 19:56:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 27 Nov 2007 20:40:06 -0000
+X-Groupsio-MsgNum: 3454
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-Y+baL8ql17Flf78uCrrr"
 
-On Nov 27, 2007 8:03 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> A proper use for RPROVIDES is for something like gtk+-directfb to
-> RPROVIDE gtk+. If an app linked against one, it should be able to run
-> against the other (I'm assuming thats the case, if its not there
-> shouldn't be an RPROVIDES).
+--=-Y+baL8ql17Flf78uCrrr
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-I've tried this, and you have problems with the apps already being
-linked not only against libgtk-2.0.so.x.y.z, but also the closure of
-the dependencies which it had at link-time. So if the X11 version of
-Gtk was staged at the time your app linked, the references to
-libx11.so will exist its its binary.
+Am Dienstag, den 27.11.2007, 16:03 +0100 schrieb Florian Boor:
+> Hi,
+>=20
+> Marcin Juszkiewicz schrieb:
+> >> --- Comment #1 from Matthias 'CoreDump' Hentges <oe@hentges.net>=20
+> >> 2007-11-25 14:10:11 --- Added gpe-conf to DEPENDS and RDEPENDS as
+> >> gpe-conf emulates "bl" these days.
+> >=20
+> > Zaurusd REQUIRE bl - not gpe-conf and we have 'bl' in repo -=20
+> > packages/bl/bl_cvs.bb recipe. Please do test and fix zaurusd recipe to=20
+> > depend on proper tool.
+>=20
+> In my opinion "bl" is old, unmaintained, dead and only works on a few dev=
+ices.
+> The bl emulation in gpe-conf should do the trick for zaurusd - even it mi=
+ght be
+> a better idea to have selectable providers for bl. gpe-conf is quite heav=
+y and
+> you might not want to pull that in everywhere.
+>=20
 
-Is there some way to suppress this eager resolution of transitive
-shared library dependencies?
+That is indeed the best option here IMO. Seeing as Opie *really* has no
+use for gpe-conf but does have a use for "bl" we should make that a
+virtual/bl or something.
+
+--=20
+Matthias 'CoreDump' Hentges=20
+Cologne / Germany
+
+Webmaster of Hentges.net & Embedded Linux Developer
+GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
+
+My OS: Debian SID: Geek by Nature, Linux by Choice
 
 
+
+--=-Y+baL8ql17Flf78uCrrr
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQBHTH/yPXyoPq8wMNkRAjtAAJoDgwjzhTP5+gS47G7MZdeDFeXXewCgw3jk
+4+/H4MZ+0MXzhXzqp6eSLeQ=
+=RRZe
+-----END PGP SIGNATURE-----
+
+--=-Y+baL8ql17Flf78uCrrr--
