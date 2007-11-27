@@ -1,23 +1,24 @@
-Received: from [67.19.73.58] (helo=pug.o-hand.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <openembedded@haerwu.biz>) id 1Ix1rm-0002kN-FK
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Ix20u-0002ps-3U
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2007 15:56:50 +0100
-Received: from home.lan (c62-222.icpnet.pl [62.21.62.222])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id 459A110CC020
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2007 10:18:16 -0500 (EST)
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2007 15:53:39 +0100
-User-Agent: KMail/1.9.7
-References: <474BFBF6.2000602@whitby.id.au>
-In-Reply-To: <474BFBF6.2000602@whitby.id.au>
+	Tue, 27 Nov 2007 16:06:16 +0100
+Received: from [192.168.2.163] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Ix2IO-0005X7-Ud
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Nov 2007 16:24:20 +0100
+Message-ID: <474C31B6.5060807@kernelconcepts.de>
+Date: Tue, 27 Nov 2007 16:03:18 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
 MIME-Version: 1.0
-Message-Id: <200711271553.41983.openembedded@haerwu.biz>
-Subject: Re: RFC: Adding endian support to linux.inc
+To: openembedded-devel@lists.openembedded.org
+References: <20071125221011.B403A40012A@tinman.treke.net>
+	<200711260016.45820.openembedded@haerwu.biz>
+In-Reply-To: <200711260016.45820.openembedded@haerwu.biz>
+X-Enigmail-Version: 0.95.0
+Subject: Re: [oe-issues] [Bug 3131] zaurusd should rdepend on bl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,23 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2007 14:56:51 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 27 Nov 2007 15:06:16 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: 7bit
 
-Dnia wtorek, 27 listopada 2007, Rod Whitby napisa=B3:
-> I wish to propose the following patch to linux.inc to enable automatic
-> support for setting the endian configuration value for those CPUs that
-> can run in both big and little endian modes.
+Hi,
 
-Acked
+Marcin Juszkiewicz schrieb:
+>> --- Comment #1 from Matthias 'CoreDump' Hentges <oe@hentges.net> 
+>> 2007-11-25 14:10:11 --- Added gpe-conf to DEPENDS and RDEPENDS as
+>> gpe-conf emulates "bl" these days.
+> 
+> Zaurusd REQUIRE bl - not gpe-conf and we have 'bl' in repo - 
+> packages/bl/bl_cvs.bb recipe. Please do test and fix zaurusd recipe to 
+> depend on proper tool.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+In my opinion "bl" is old, unmaintained, dead and only works on a few devices.
+The bl emulation in gpe-conf should do the trick for zaurusd - even it might be
+a better idea to have selectable providers for bl. gpe-conf is quite heavy and
+you might not want to pull that in everywhere.
 
-       If you're going down in flames, aim for something expensive.
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
