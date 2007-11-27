@@ -1,24 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.67)
-	(envelope-from <theBohemian@gmx.net>) id 1IwhHM-0002yz-A1
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+	by linuxtogo.org with esmtp (Exim 4.67)
+	(envelope-from <rod@whitby.id.au>) id 1IwyRF-0007Jm-QA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2007 17:57:52 +0100
-Received: (qmail invoked by alias); 26 Nov 2007 16:55:06 -0000
-Received: from e178067048.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.67.48]
-	by mail.gmx.net (mp035) with SMTP; 26 Nov 2007 17:55:06 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+vUF0z0QyvZNkvdtBh4fWkRX28ube4Ib7xPbUjaP
-	14xbAkaptMzYw9
-Message-ID: <474AFA66.30509@gmx.net>
-Date: Mon, 26 Nov 2007 17:55:02 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
+	Tue, 27 Nov 2007 12:17:13 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id F2B8857B0F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Nov 2007 06:14:23 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Tue, 27 Nov 2007 06:14:23 -0500
+X-Sasl-enc: oo+HVRgRZRa2pzq/Bo34njhs76lLfXUrtLw6LLoSzn6h 1196162063
+Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
+	[121.209.18.182])
+	by mail.messagingengine.com (Postfix) with ESMTP id 195C8310
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Nov 2007 06:14:22 -0500 (EST)
+Message-ID: <474BFBF6.2000602@whitby.id.au>
+Date: Tue, 27 Nov 2007 21:43:58 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: python skills and bug 2412
+To: Openembedded Developers <openembedded-devel@lists.openembedded.org>
+Subject: RFC: Adding endian support to linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,44 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2007 16:57:52 -0000
-X-Groupsio-MsgNum: 3440
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigFD1A867C57DB97A6A25955DB"
+X-List-Received-Date: Tue, 27 Nov 2007 11:17:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---------------enigFD1A867C57DB97A6A25955DB
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+I wish to propose the following patch to linux.inc to enable automatic
+support for setting the endian configuration value for those CPUs that
+can run in both big and little endian modes.
 
-Hi
-Rodigo and me are suffering from bug 2412[0]. We talked a bit about the
-issue and I provided an idea on how to fix it. Unfortunately I lack the
-python experience to do it. I do not understand how the name conversion
-in debian.bbclass is actually done and where I could add code to replace
-slashes with hyphens.
+This is the first step in rationalisation of ixp4xx-kernel.inc to more
+closely match the other kernel recipes in OE.
 
-Can anyone who has a better understanding of this help us out?
+Note that SITEINFO_ENDIANESS is set automatically by siteinfo.class for
+all OE MACHINE settings, not just when MACHINE is ixp4xx.
 
-Regards
-Robert
+Also note that there is no '=' sign near the end of the line added to
+the call to sed.  This is intentional, to remove both commented and
+uncommented settings of CPU_BIG_ENDIAN in the original defconfig.
 
-[0] - http://bugs.openembedded.org/show_bug.cgi?id=3D2412
+--- packages/linux/linux.inc    14e3b9590c6a3ef9334959ab19c1b24b1954b55b
++++ packages/linux/linux.inc    12ee7627f507a1eb127802f7268674f901a357fc
+@@ -41,11 +41,19 @@ do_configure_prepend() {
+                 echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.config
+         fi
+
++       #
++       # endian support
++       #
++        if [ "${SITEINFO_ENDIANESS}" = "be" ]; then
++                echo "CONFIG_CPU_BIG_ENDIAN=y"          >> ${S}/.config
++        fi
++
+         echo "CONFIG_CMDLINE=\"${CMDLINE}\"" >> ${S}/.config
+
+         sed -e '/CONFIG_AEABI/d' \
+             -e '/CONFIG_OABI_COMPAT=/d' \
+             -e '/CONFIG_CMDLINE=/d' \
++            -e '/CONFIG_CPU_BIG_ENDIAN/d' \
+             -e '/CONFIG_LOGO=/d' \
+             -e '/CONFIG_LOGO_LINUX_CLUT224=/d' \
+             < '${WORKDIR}/defconfig' >>'${S}/.config'
+
+Silence will be taken as acceptance, and if there are no objections this
+change will be committed sometime this coming weekend.
+
+-- Rod
 
 
-
---------------enigFD1A867C57DB97A6A25955DB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHSvpoG9cfwmwwEtoRCGydAJ44m70YYXR1w3KTh/1g+mJ77jrTmgCfUeuh
-X1GXc5PGzE/IOMfaj0z9Vs4=
-=d/JR
------END PGP SIGNATURE-----
-
---------------enigFD1A867C57DB97A6A25955DB--
