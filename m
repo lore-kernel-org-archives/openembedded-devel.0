@@ -1,31 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1Ix14y-00068s-HL
-	for openembedded-devel@openembedded.org; Tue, 27 Nov 2007 15:06:31 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lARE3SDT018716;
-	Tue, 27 Nov 2007 14:03:28 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18539-04; Tue, 27 Nov 2007 14:03:24 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lARE3OWE018706
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Tue, 27 Nov 2007 14:03:24 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Paul Sokolovsky <pmiscml@gmail.com>
-In-Reply-To: <157949636.20071127154357@gmail.com>
+	(envelope-from <pmiscml@gmail.com>) id 1Ix1Bn-0006Fm-36
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Nov 2007 15:13:27 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so299010ugd
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Nov 2007 06:10:36 -0800 (PST)
+Received: by 10.150.12.5 with SMTP id 5mr828199ybl.1196170915540;
+	Tue, 27 Nov 2007 05:41:55 -0800 (PST)
+Received: from ?10.0.0.6? ( [85.99.91.6])
+	by mx.google.com with ESMTPS id f4sm105083nfh.2007.11.27.05.41.52
+	(version=SSLv3 cipher=OTHER); Tue, 27 Nov 2007 05:41:53 -0800 (PST)
+Date: Tue, 27 Nov 2007 15:43:57 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <157949636.20071127154357@gmail.com>
+To: Richard Purdie <rpurdie@rpsys.net>
+In-Reply-To: <1196166155.6780.11.camel@localhost.localdomain>
 References: <474AFA66.30509@gmx.net>
 	<1196166155.6780.11.camel@localhost.localdomain>
-	<157949636.20071127154357@gmail.com>
-Date: Tue, 27 Nov 2007 14:03:23 +0000
-Message-Id: <1196172204.6780.37.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@openembedded.org
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: python skills and bug 2412
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,72 +36,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2007 14:06:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 27 Nov 2007 14:13:27 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-11-27 at 15:43 +0200, Paul Sokolovsky wrote:
-> Tuesday, November 27, 2007, 2:22:35 PM, you wrote:
-> > On Mon, 2007-11-26 at 17:55 +0100, Robert Schuster wrote:
-> > I commented on the bug but I will repeat here for wider exposure.
-> 
-> > "The real problem here is that virtual/libx11 should not be appearing in
-> > the package manager namespace. RPROVIDES = "virtual/libx11" is plain
-> > wrong and is the real bug."
-> 
->   What exactly is wrong? RPROVIDES or "virtual/" or maybe "/" after
-> all?
+Hello Richard,
 
-The whole idea. Using the virtual namespace in a runtime Provides is
-meaningless.
+Tuesday, November 27, 2007, 2:22:35 PM, you wrote:
 
-This is not to be confused with PROVIDES = "virtual/*" which are
-perfectly fine.
+> On Mon, 2007-11-26 at 17:55 +0100, Robert Schuster wrote:
+>> Hi
+>> Rodigo and me are suffering from bug 2412[0]. We talked a bit about the
+>> issue and I provided an idea on how to fix it. Unfortunately I lack the
+>> python experience to do it. I do not understand how the name conversion
+>> in debian.bbclass is actually done and where I could add code to replace
+>> slashes with hyphens.
+>> 
+>> Can anyone who has a better understanding of this help us out?
+>> 
+>> Regards
+>> Robert
+>> 
+>> [0] - http://bugs.openembedded.org/show_bug.cgi?id=2412
 
-> > I've discussed this on the mailing list in the past, virtual/* shouldn't
-> > ever be ending up in the runtime namespaces :/.
-> 
->   And why is this? Virtual packages aka services aka facilities are
-> core feature of flexible package management. IMHO, they are heavily
-> underused in the current OE, which disallows creation of flexible,
-> adaptable, and at the same time, consistent systems.
+> I commented on the bug but I will repeat here for wider exposure.
 
-It doesn't work in OE as things stand which is why its underused. There
-are at least two problems I can think of offhand:
+> "The real problem here is that virtual/libx11 should not be appearing in
+> the package manager namespace. RPROVIDES = "virtual/libx11" is plain
+> wrong and is the real bug."
 
-a) When you compile a package against libx11 does it end up with a
-Dependencies: libx11 or virtual/libx11? The answer is the former. This
-means you can't switch between different providers "on device". This
-means that a given distro must use one provider or the other and that
-virtual/* in the runtime package management namespace is just plain
-dangerous. If a distro doesn't do this, they will end up breaking their
-feeds.
+  What exactly is wrong? RPROVIDES or "virtual/" or maybe "/" after
+all?
 
-b) There is no way for bitbake's choices of providers to be passed to
-the package manager. When faced with two virtual/libx11 packages, which
-one should the package manager choose? The only possible solution at the
-moment is not to get into that position or you end up with randomness in
-builds (very bad). Packaged Staging could potentially help with this
-FWIW. The same problem also exists in feeds which devices are accessing
-so its not just isolated to the bitbake/package manager interface.
+> I've discussed this on the mailing list in the past, virtual/* shouldn't
+> ever be ending up in the runtime namespaces :/.
 
-Yes, there may be ways OE/bitbake could be enhanced to do clever things
-with virtual runtime namespaces but we have no current support for it
-and shouldn't pretend otherwise. If someone wants to implement that, I'm
-more than happy to look at, discuss and review a proposal but currently
-it won't work.
+  And why is this? Virtual packages aka services aka facilities are
+core feature of flexible package management. IMHO, they are heavily
+underused in the current OE, which disallows creation of flexible,
+adaptable, and at the same time, consistent systems.
 
-A proper use for RPROVIDES is for something like gtk+-directfb to
-RPROVIDE gtk+. If an app linked against one, it should be able to run
-against the other (I'm assuming thats the case, if its not there
-shouldn't be an RPROVIDES).
+> Cheers,
 
-Does that help explain things?
+> Richard
 
-Cheers,
 
-Richard
-
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
