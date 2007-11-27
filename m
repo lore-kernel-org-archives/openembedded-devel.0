@@ -1,30 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <rpurdie@rpsys.net>) id 1Ix08y-0000Kw-U7
-	for openembedded-devel@openembedded.org; Tue, 27 Nov 2007 14:06:29 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lARD3cJd015384
-	for <openembedded-devel@openembedded.org>; Tue, 27 Nov 2007 13:03:38 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 15060-08 for <openembedded-devel@openembedded.org>;
-	Tue, 27 Nov 2007 13:03:35 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lARD3Ys2015378
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 27 Nov 2007 13:03:34 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <474BFBF6.2000602@whitby.id.au>
-References: <474BFBF6.2000602@whitby.id.au>
-Date: Tue, 27 Nov 2007 13:03:33 +0000
-Message-Id: <1196168613.6780.21.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: RFC: Adding endian support to linux.inc
+	(envelope-from <rod@whitby.id.au>) id 1Ix0bc-0005Wu-KO
+	for openembedded-devel@openembedded.org; Tue, 27 Nov 2007 14:36:04 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 543EB55C1D
+	for <openembedded-devel@openembedded.org>;
+	Tue, 27 Nov 2007 08:16:47 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Tue, 27 Nov 2007 08:16:47 -0500
+X-Sasl-enc: 0vd9NHDb5Uzm5ImAaucrLb1miT4IERRW3ipzK3q918Ub 1196169406
+Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
+	[121.209.18.182])
+	by mail.messagingengine.com (Postfix) with ESMTP id 7A160A4C0
+	for <openembedded-devel@openembedded.org>;
+	Tue, 27 Nov 2007 08:16:46 -0500 (EST)
+Message-ID: <474C18A5.4030402@whitby.id.au>
+Date: Tue, 27 Nov 2007 23:46:21 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+MIME-Version: 1.0
+To: OpenEmbedded Developers <openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.5
+Subject: RFC: Replacing ixp4xx-kernel with style-compliant updated linux-ixp4xx
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,65 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2007 13:06:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 27 Nov 2007 13:36:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-11-27 at 21:43 +1030, Rod Whitby wrote:
-> I wish to propose the following patch to linux.inc to enable automatic
-> support for setting the endian configuration value for those CPUs that
-> can run in both big and little endian modes.
-> 
-> This is the first step in rationalisation of ixp4xx-kernel.inc to more
-> closely match the other kernel recipes in OE.
-> 
-> Note that SITEINFO_ENDIANESS is set automatically by siteinfo.class for
-> all OE MACHINE settings, not just when MACHINE is ixp4xx.
-> 
-> Also note that there is no '=' sign near the end of the line added to
-> the call to sed.  This is intentional, to remove both commented and
-> uncommented settings of CPU_BIG_ENDIAN in the original defconfig.
-> 
-> --- packages/linux/linux.inc    14e3b9590c6a3ef9334959ab19c1b24b1954b55b
-> +++ packages/linux/linux.inc    12ee7627f507a1eb127802f7268674f901a357fc
-> @@ -41,11 +41,19 @@ do_configure_prepend() {
->                  echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.config
->          fi
-> 
-> +       #
-> +       # endian support
-> +       #
-> +        if [ "${SITEINFO_ENDIANESS}" = "be" ]; then
-> +                echo "CONFIG_CPU_BIG_ENDIAN=y"          >> ${S}/.config
-> +        fi
-> +
->          echo "CONFIG_CMDLINE=\"${CMDLINE}\"" >> ${S}/.config
-> 
->          sed -e '/CONFIG_AEABI/d' \
->              -e '/CONFIG_OABI_COMPAT=/d' \
->              -e '/CONFIG_CMDLINE=/d' \
-> +            -e '/CONFIG_CPU_BIG_ENDIAN/d' \
->              -e '/CONFIG_LOGO=/d' \
->              -e '/CONFIG_LOGO_LINUX_CLUT224=/d' \
->              < '${WORKDIR}/defconfig' >>'${S}/.config'
-> 
-> Silence will be taken as acceptance, and if there are no objections this
-> change will be committed sometime this coming weekend.
+Now that SRCREV is assumed available in bitbake and OE, it is time to
+revisit the ixp4xx-kernel recipes and use modern-day ways of doing things.
 
-Ack from me.
+To accomplish this, I intend gradually replacing the ixp4xx-kernel
+recipes with linux-ixp4xx recipes which more closely follow OE best
+practices, and allow for sensible usage of linux-ixp4xx kernel recipes
+for all ixp4xx devices (not just those used by nslu2-linux firmware).
 
-It sounds like those other = signs are bugs?
+For example:
 
-Also, we should really add a function to kernel.bbclass which does this
-neatly without all the shell foo. But that is for another time/place
-(writing such a function is somewhere on my todo list) :).
+1) Use SRC_URI and SRCREV to pull down the ixp4xx kernel patchset from
+nslu2-linux.org, in the same way that linux-openmoko does it, instead of
+doing in an nslu2-linux-specific way.
 
-Cheers,
+   The main advantages here are that the patchset tarball will be
+permanently stored on the downloads mirror, and we can use sane-srcrevs
+to control the svn revision of the patches that is used.  This removes
+the complaint that OE is dependent upon a third-party svn repository.
 
-Richard
+2) Use the new linux.inc and remove the stuff that it already does
 
+   The main advantage here is to do things the same way as other linux
+recipes do, by including the same linux.inc file.  This also gives us
+the opportunity to start to migrate things from linux-ixp4xx.inc to
+linux.inc if they are applicable to a wider range of machines (e.g. the
+endian patch I submitted earlier today).
 
+3) Remove the python code which automatically determines the SRC_URI
 
+   It's clear that this type of automation is not welcome, and has not
+been used recently to it's full effect anyway, so we'll just remove it.
 
+4) Move the arm-kernel-shim stuff out to a separate file or class,
+instead of it being always part of ixp4xx kernel builds.  This stuff
+should only happen when MACHINE is a variant of nslu2 with a stupid
+bootloader, not when you're building for ixp4xx machines which have
+sensible bootloaders (either a sensible vendor bootloader, or a
+replacement Apex bootloader).  So it's probably a DISTRO thing, rather
+than a MACHINE thing.
+
+This will happen over the coming weeks, and I'll make sure the whole set
+of linux-ixp4xx recipes and supporting files are in place well before
+removing or changing any of the existing ixp4xx-kernel recipes.
+
+Comments welcome.
+
+-- Rod
 
 
