@@ -1,24 +1,34 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.67)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Ix20u-0002ps-3U
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2007 16:06:16 +0100
-Received: from [192.168.2.163] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Ix2IO-0005X7-Ud
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2007 16:24:20 +0100
-Message-ID: <474C31B6.5060807@kernelconcepts.de>
-Date: Tue, 27 Nov 2007 16:03:18 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20071125221011.B403A40012A@tinman.treke.net>
-	<200711260016.45820.openembedded@haerwu.biz>
-In-Reply-To: <200711260016.45820.openembedded@haerwu.biz>
-X-Enigmail-Version: 0.95.0
-Subject: Re: [oe-issues] [Bug 3131] zaurusd should rdepend on bl
+	(envelope-from <rpurdie@rpsys.net>) id 1Ix23H-0002qY-GP
+	for openembedded-devel@openembedded.org; Tue, 27 Nov 2007 16:08:43 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lARF5pDZ022143;
+	Tue, 27 Nov 2007 15:05:51 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 21713-09; Tue, 27 Nov 2007 15:05:48 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lARF5hUC022136
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Tue, 27 Nov 2007 15:05:44 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Paul Sokolovsky <pmiscml@gmail.com>
+In-Reply-To: <1712551091.20071127161727@gmail.com>
+References: <474AFA66.30509@gmx.net>
+	<1196166155.6780.11.camel@localhost.localdomain>
+	<157949636.20071127154357@gmail.com>
+	<1196172204.6780.37.camel@localhost.localdomain>
+	<1712551091.20071127161727@gmail.com>
+Date: Tue, 27 Nov 2007 15:05:42 +0000
+Message-Id: <1196175943.6780.46.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@openembedded.org
+Subject: Re: python skills and bug 2412
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,36 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2007 15:06:16 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Tue, 27 Nov 2007 15:08:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
-
-Marcin Juszkiewicz schrieb:
->> --- Comment #1 from Matthias 'CoreDump' Hentges <oe@hentges.net> 
->> 2007-11-25 14:10:11 --- Added gpe-conf to DEPENDS and RDEPENDS as
->> gpe-conf emulates "bl" these days.
+On Tue, 2007-11-27 at 16:17 +0200, Paul Sokolovsky wrote:
+> > On Tue, 2007-11-27 at 15:43 +0200, Paul Sokolovsky wrote:
+> > A proper use for RPROVIDES is for something like gtk+-directfb to
+> > RPROVIDE gtk+. If an app linked against one, it should be able to run
+> > against the other (I'm assuming thats the case, if its not there
+> > shouldn't be an RPROVIDES).
 > 
-> Zaurusd REQUIRE bl - not gpe-conf and we have 'bl' in repo - 
-> packages/bl/bl_cvs.bb recipe. Please do test and fix zaurusd recipe to 
-> depend on proper tool.
+> > Does that help explain things?
+> 
+>   Ok, in other words, you say that OE's, build-time, virtuals, are
+> completely different thing than package manager's Provides facilities,
+> also common called virtuals? 
 
-In my opinion "bl" is old, unmaintained, dead and only works on a few devices.
-The bl emulation in gpe-conf should do the trick for zaurusd - even it might be
-a better idea to have selectable providers for bl. gpe-conf is quite heavy and
-you might not want to pull that in everywhere.
+Yes.
 
-Greetings
+> And that then the easiest solution is to
+> make sure they are never mixed at all, instead of trying to do
+> mind-boggling and still very limited logic of converting OE's virtuals
+> to package-manager virtuals? 
 
-Florian
+Yes.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+> Instead, package-manager virtuals should
+> be managed manually, based on the actual properties of packages?
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Yes.
+
+>   Makes sense. But with this ambiguity of "virtuals" such questions
+> would come up again and again, I guess. So I also wished we cut off
+> OE-virtual bleeding to package manager realm soon ;-).
+
+Indeed. Thinking about this stuff makes my head hurt :).
+
+PROVIDES + virtual/* = good
+RPROVIDES + virtual/* = nightmare + bug
+
+My point was that any of the latter will never do what people want/need
+and should be removed. If we ever do that, we should use a namespace
+other than "virtual" too.
+
+Cheers,
+
+Richard
+
 
 
