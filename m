@@ -1,36 +1,20 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1IxLAR-00022M-58
-	for openembedded-devel@openembedded.org; Wed, 28 Nov 2007 12:33:23 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lASBUSMI009995
-	for <openembedded-devel@openembedded.org>; Wed, 28 Nov 2007 11:30:28 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09931-02 for <openembedded-devel@openembedded.org>;
-	Wed, 28 Nov 2007 11:30:24 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lASBULAk009977
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 28 Nov 2007 11:30:21 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1868947900.20071127171928@gmail.com>
-References: <474AFA66.30509@gmx.net>
-	<1196166155.6780.11.camel@localhost.localdomain>
-	<157949636.20071127154357@gmail.com>
-	<1196172204.6780.37.camel@localhost.localdomain>
-	<1712551091.20071127161727@gmail.com>
-	<1196175943.6780.46.camel@localhost.localdomain>
-	<1868947900.20071127171928@gmail.com>
-Date: Wed, 28 Nov 2007 11:30:20 +0000
-Message-Id: <1196249420.8098.21.camel@localhost.localdomain>
+	(envelope-from <dp@xora.org.uk>) id 1IxLQp-0004ea-6d
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Nov 2007 12:50:19 +0100
+Received: from [192.168.1.65] ([::ffff:78.86.128.56])
+	(AUTH: PLAIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Wed, 28 Nov 2007 11:47:23 +0000
+	id 0006822F.474D554B.000015FD
+Message-ID: <474D5541.2020107@xora.org.uk>
+Date: Wed, 28 Nov 2007 11:47:13 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Build-time vs run-time virtuals, was: Re: python skills	and bug 2412
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.5
+Subject: [RFC] Fix uImage generation in way compatible with kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,42 +28,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2007 11:33:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 28 Nov 2007 11:50:19 -0000
+Content-Type: multipart/mixed;
+	boundary="=_xora.vm.bytemark.co.uk-5629-1196250443-0001-2"
+
+--=_xora.vm.bytemark.co.uk-5629-1196250443-0001-2
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-11-27 at 17:19 +0200, Paul Sokolovsky wrote:
->   Yes, thought about namespace came to my mind too. I wonder, if
-> there're any ideas regarding that. Indeed, reusing "virtual-" prefix
-> while being familiar, would be confusing ;-(. Any ideas about another
-> standard prefix, or there would be adhoc naming conventions? From the
-> examples given, at least sometimes it makes sense to use prefix-less
-> Provides names:
-> 
-> gtk+ - real package, also implicitly provides gtk+
-> gtk+-directfb - real packages, Provides gtk+
-> 
-> Or infamous libxine. I envision it should be:
-> 
-> libxine-x11, Provides libxine
-> libxine-qpe, Provides libxine
+I would like to do the attached patch to linux.inc to change uImage
+generation so it is compatible with the way kernel.bbclass does things.
 
-Yes, various solutions like that are possible and probably the best way
-to proceed.
+This means the uImage ends up in kernel-image not some random file
+called uImage but not really a uImage.
 
-> (The problem here is that actually built package will be linked
-> against real package, and thus would apparently pull its name via
-> shlib dependencies).
+koen said the do_install_prepend stuff was to work around vendor bugs
+and is no longer needed in this file.
 
-This is the real problem. If what Matt mentioned is correct about the
-library names being embedded in the binaries at link time it could well
-be doing the right thing though...
+Thanks
 
-I guess someone interested in resolving this will have to experiment :)
+Graeme
+#
+# old_revision [1e4ef7149831080d7927cc7ef101deab67fae6d7]
+#
+# patch "packages/linux/linux.inc"
+#  from [14e3b9590c6a3ef9334959ab19c1b24b1954b55b]
+#    to [46987c309dbee09b17a0f857b8163a862cadd4d8]
+#
+============================================================
+--- packages/linux/linux.inc	14e3b9590c6a3ef9334959ab19c1b24b1954b55b
++++ packages/linux/linux.inc	46987c309dbee09b17a0f857b8163a862cadd4d8
+@@ -66,7 +66,7 @@ do_configure_prepend() {
+                     -e '/CONFIG_CMDLINE=/d' \
+                     -i ${S}/.config
+                 echo "CONFIG_INET=y"                     >> ${S}/.config
+-				echo "CONFIG_IP_PNP=y"                   >> ${S}/.config
++                echo "CONFIG_IP_PNP=y"                   >> ${S}/.config
+                 echo "CONFIG_USB_GADGET=y"               >> ${S}/.config
+                 echo "CONFIG_USB_GADGET_SELECTED=y"      >> ${S}/.config
+                 echo "CONFIG_USB_ETH=y"                  >> ${S}/.config
+@@ -89,22 +89,24 @@ do_sizecheck() {
+         fi
+ }
+ 
+-do_install_prepend() {
+-        if test -e arch/${ARCH}/boot/Image ; then
+-             ln -f arch/${ARCH}/boot/Image arch/${ARCH}/boot/uImage
+-        fi
++UBOOT_ENTRYPOINT ?= "20008000"
+ 
+-        if test -e arch/${ARCH}/boot/images/uImage ; then
+-             ln -f arch/${ARCH}/boot/images/uImage arch/${ARCH}/boot/uImage
++do_compile_append() {
++    if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
++        if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
++            ${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
++            uboot-mkimage -A ${ARCH} -O linux -T kernel -C none -a ${UBOOT_ENTRYPOINT} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
++            rm -f linux.bin
++        else
++            ${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
++            rm -f linux.bin.gz
++            gzip -9 linux.bin
++            uboot-mkimage -A ${ARCH} -O linux -T kernel -C gzip -a ${UBOOT_ENTRYPOINT} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
++            rm -f linux.bin.gz
+         fi
+-
+-        if test -e arch/${ARCH}/kernel/vmlinux.lds ; then
+-             ln -f arch/${ARCH}/kernel/vmlinux.lds arch/${ARCH}/boot/vmlinux
+-        fi
++    fi
+ }
+-
+-UBOOT_ENTRYPOINT ?= "20008000"
+-
++                    
+ KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}-${DATETIME}"
+ KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-${MACHINE}"
+ 
+@@ -112,24 +114,10 @@ do_deploy() {
+         install -d ${DEPLOY_DIR_IMAGE}
+         install -m 0644 arch/${ARCH}/boot/${KERNEL_IMAGETYPE} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+         tar -cvzf ${DEPLOY_DIR_IMAGE}/modules-${KERNEL_RELEASE}-${PR}-${MACHINE}.tgz -C ${D} lib
+-        
+-        if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
+-            if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
+-                ${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
+-                uboot-mkimage -A ${ARCH} -O linux -T kernel -C none -a ${UBOOT_ENTRYPOINT} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin ${DEPLOY_DIR_IMAGE}/uImage-${PV}-${PR}-${MACHINE}-${DATETIME}.bin
+-                rm -f linux.bin
+-            else
+-                ${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
+-                rm -f linux.bin.gz
+-                gzip -9 linux.bin
+-                uboot-mkimage -A ${ARCH} -O linux -T kernel -C gzip -a ${UBOOT_ENTRYPOINT} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz ${DEPLOY_DIR_IMAGE}/uImage-${PV}-${PR}-${MACHINE}-${DATETIME}.bin
+-                rm -f linux.bin.gz
+-            fi
+-        fi
+ 
+-		cd ${DEPLOY_DIR_IMAGE}
+-		rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+-		ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGE_SYMLINK_NAME}.bin
++        cd ${DEPLOY_DIR_IMAGE}
++        rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.bin
++        ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+ }
+ 
+ do_deploy[dirs] = "${S}"
 
-Cheers,
-
-Richard
-
-
-
+--=_xora.vm.bytemark.co.uk-5629-1196250443-0001-2--
