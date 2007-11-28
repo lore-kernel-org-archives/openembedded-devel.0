@@ -1,35 +1,27 @@
-Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
+Received: from [62.70.27.18] (helo=esparsett.troll.no)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <oe@hentges.net>) id 1Ix7Dv-0001SE-7l
+	(envelope-from <lpotter@trolltech.com>) id 1IxEvq-000884-Pv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2007 21:40:05 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id DADD33081F0
+	Wed, 28 Nov 2007 05:53:54 +0100
+Received: from esparsett.troll.no (localhost [127.0.0.1])
+	by localhost (Postfix) with SMTP id 8FE3C74271
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2007 21:37:10 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at hentges.net
-Received: from h6563.serverkompetenz.net ([127.0.0.1])
-	by localhost (h6563.serverkompetenz.net [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 0IvQYyPGpDYT
+	Wed, 28 Nov 2007 05:51:00 +0100 (CET)
+Received: from mail.trolltech.com.au (unknown [10.1.1.12])
+	by esparsett.troll.no (Postfix) with ESMTP id 30B6D7424A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2007 21:37:08 +0100 (CET)
-Received: from [192.168.5.2] (xdsl-87-78-215-172.netcologne.de [87.78.215.172])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by h6563.serverkompetenz.net (Postfix) with ESMTP id E33253081E3
+	Wed, 28 Nov 2007 05:51:00 +0100 (CET)
+Received: from [10.1.1.181] (polarbear-replace.trolltech.com.au [10.1.1.181])
+	by mail.trolltech.com.au (Postfix) with ESMTP id DF6A83B060F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2007 21:37:07 +0100 (CET)
-From: Matthias Hentges <oe@hentges.net>
+	Wed, 28 Nov 2007 14:50:58 +1000 (EST)
+Message-ID: <474CF3AF.5010407@trolltech.com>
+Date: Wed, 28 Nov 2007 14:50:55 +1000
+From: Lorn Potter <lpotter@trolltech.com>
+User-Agent: Thunderbird 2.0.0.0 (X11/20070326)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <474C31B6.5060807@kernelconcepts.de>
-References: <20071125221011.B403A40012A@tinman.treke.net>
-	<200711260016.45820.openembedded@haerwu.biz>
-	<474C31B6.5060807@kernelconcepts.de>
-Date: Tue, 27 Nov 2007 21:37:06 +0100
-Message-Id: <1196195826.4469.3.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.3 
-Subject: Re: [oe-issues] [Bug 3131] zaurusd should rdepend on bl
+Subject: CROSS_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,62 +35,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2007 20:40:06 -0000
-X-Groupsio-MsgNum: 3454
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="=-Y+baL8ql17Flf78uCrrr"
+X-List-Received-Date: Wed, 28 Nov 2007 04:53:55 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-Y+baL8ql17Flf78uCrrr
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+Was CROSS_DIR changed somewhat recently (last 2 months or so) to link 
+the includes and lib dirs to staging?
 
-Am Dienstag, den 27.11.2007, 16:03 +0100 schrieb Florian Boor:
-> Hi,
->=20
-> Marcin Juszkiewicz schrieb:
-> >> --- Comment #1 from Matthias 'CoreDump' Hentges <oe@hentges.net>=20
-> >> 2007-11-25 14:10:11 --- Added gpe-conf to DEPENDS and RDEPENDS as
-> >> gpe-conf emulates "bl" these days.
-> >=20
-> > Zaurusd REQUIRE bl - not gpe-conf and we have 'bl' in repo -=20
-> > packages/bl/bl_cvs.bb recipe. Please do test and fix zaurusd recipe to=20
-> > depend on proper tool.
->=20
-> In my opinion "bl" is old, unmaintained, dead and only works on a few dev=
-ices.
-> The bl emulation in gpe-conf should do the trick for zaurusd - even it mi=
-ght be
-> a better idea to have selectable providers for bl. gpe-conf is quite heav=
-y and
-> you might not want to pull that in everywhere.
->=20
+If so, why? This means I cannot distribute this toolchain to other 
+machines, and makes the entries in the pkgconfig files wrong.
 
-That is indeed the best option here IMO. Seeing as Opie *really* has no
-use for gpe-conf but does have a use for "bl" we should make that a
-virtual/bl or something.
-
---=20
-Matthias 'CoreDump' Hentges=20
-Cologne / Germany
-
-Webmaster of Hentges.net & Embedded Linux Developer
-GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
-
-My OS: Debian SID: Geek by Nature, Linux by Choice
+CROSS_DIR should mean just that - this is where I want the toolchain to 
+be - like it used to do.
 
 
 
---=-Y+baL8ql17Flf78uCrrr
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-
-iD8DBQBHTH/yPXyoPq8wMNkRAjtAAJoDgwjzhTP5+gS47G7MZdeDFeXXewCgw3jk
-4+/H4MZ+0MXzhXzqp6eSLeQ=
-=RRZe
------END PGP SIGNATURE-----
-
---=-Y+baL8ql17Flf78uCrrr--
