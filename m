@@ -1,27 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IxNFE-0002kV-2i
-	for openembedded-devel@openembedded.org; Wed, 28 Nov 2007 14:46:28 +0100
-Received: from Powerbook-2.local (vpn006010.vpn.utwente.nl [130.89.6.10])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lASDhRiq022897 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2007 14:43:27 +0100
-Message-ID: <474D707E.2000504@student.utwente.nl>
-Date: Wed, 28 Nov 2007 14:43:26 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <dp@xora.org.uk>) id 1IxO0J-0000A0-1m
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Nov 2007 15:35:07 +0100
+Received: from [192.168.1.65] ([::ffff:78.86.128.56])
+	(AUTH: PLAIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Wed, 28 Nov 2007 14:32:10 +0000
+	id 0006822F.474D7BEA.00001A5D
+Message-ID: <474D7BE6.6070907@xora.org.uk>
+Date: Wed, 28 Nov 2007 14:32:06 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
+To: openembedded-devel@lists.openembedded.org
 References: <474D5541.2020107@xora.org.uk>
-In-Reply-To: <474D5541.2020107@xora.org.uk>
+	<474D707E.2000504@student.utwente.nl>
+In-Reply-To: <474D707E.2000504@student.utwente.nl>
 X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] Fix uImage generation in way compatible with	kernel.bbclass
+Subject: Re: [RFC] Fix uImage generation in way compatible	with	kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,53 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2007 13:46:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 28 Nov 2007 14:35:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Graeme Gregory schreef:
-> I would like to do the attached patch to linux.inc to change uImage
-> generation so it is compatible with the way kernel.bbclass does things.
+Koen Kooi wrote:
+> Graeme Gregory schreef:
+>> I would like to do the attached patch to linux.inc to change uImage
+>> generation so it is compatible with the way kernel.bbclass does things.
 > 
-> This means the uImage ends up in kernel-image not some random file
-> called uImage but not really a uImage.
+>> This means the uImage ends up in kernel-image not some random file
+>> called uImage but not really a uImage.
 > 
-> koen said the do_install_prepend stuff was to work around vendor bugs
-> and is no longer needed in this file.
+>> koen said the do_install_prepend stuff was to work around vendor bugs
+>> and is no longer needed in this file.
+> 
+> Looks good, except for these bits of collateral damage:
+> 
+> -        if test -e arch/${ARCH}/boot/images/uImage ; then
+> -             ln -f arch/${ARCH}/boot/images/uImage
+> arch/${ARCH}/boot/uImage
+> 
+> The above is needed for various powerpc/ppc boards, and the below is
+> needed for at least blackfin:
+> 
+> -        if test -e arch/${ARCH}/kernel/vmlinux.lds ; then
+> -             ln -f arch/${ARCH}/kernel/vmlinux.lds
+> arch/${ARCH}/boot/vmlinux
+> 
+> The linux kernel doesn't seem to have a strict policy on image placement
+> and various vendor patches aren't exactly helping the situation :/
+> 
+Ok, I misunderstood you and thought they were all not needed lines, I
+shall restore these two then.
 
-Looks good, except for these bits of collateral damage:
+Graeme
 
-- -        if test -e arch/${ARCH}/boot/images/uImage ; then
-- -             ln -f arch/${ARCH}/boot/images/uImage
-arch/${ARCH}/boot/uImage
-
-The above is needed for various powerpc/ppc boards, and the below is
-needed for at least blackfin:
-
-- -        if test -e arch/${ARCH}/kernel/vmlinux.lds ; then
-- -             ln -f arch/${ARCH}/kernel/vmlinux.lds
-arch/${ARCH}/boot/vmlinux
-
-The linux kernel doesn't seem to have a strict policy on image placement
-and various vendor patches aren't exactly helping the situation :/
-
-regards,
-
-Koen
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHTXB+MkyGM64RGpERAnEUAJ9pzhdplIFn1idz+r9u4m7VbT93YgCgjDpk
-VX+OKjBT3o1A03PyurqBI+g=
-=nfJA
------END PGP SIGNATURE-----
 
 
