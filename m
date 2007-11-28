@@ -1,30 +1,34 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1IxKqu-0005mR-Ct
-	for openembedded-devel@openembedded.org; Wed, 28 Nov 2007 12:13:16 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1IxL8D-0001vm-59
+	for openembedded-devel@openembedded.org; Wed, 28 Nov 2007 12:31:05 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lASBA5nq008888
-	for <openembedded-devel@openembedded.org>; Wed, 28 Nov 2007 11:10:05 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lASBSAwh009856
+	for <openembedded-devel@openembedded.org>; Wed, 28 Nov 2007 11:28:10 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 08443-08 for <openembedded-devel@openembedded.org>;
-	Wed, 28 Nov 2007 11:10:01 +0000 (GMT)
+	id 09545-08 for <openembedded-devel@openembedded.org>;
+	Wed, 28 Nov 2007 11:28:06 +0000 (GMT)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lASB9x2E008880
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lASBS2Yv009827
 	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 28 Nov 2007 11:09:59 GMT
+	for <openembedded-devel@openembedded.org>; Wed, 28 Nov 2007 11:28:02 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <474CF3AF.5010407@trolltech.com>
-References: <474CF3AF.5010407@trolltech.com>
-Date: Wed, 28 Nov 2007 11:09:59 +0000
-Message-Id: <1196248199.8098.13.camel@localhost.localdomain>
+In-Reply-To: <d543f5920711271153v5964f4e2te91f0d0347dd1e95@mail.gmail.com>
+References: <474AFA66.30509@gmx.net>
+	<1196166155.6780.11.camel@localhost.localdomain>
+	<157949636.20071127154357@gmail.com>
+	<1196172204.6780.37.camel@localhost.localdomain>
+	<d543f5920711271153v5964f4e2te91f0d0347dd1e95@mail.gmail.com>
+Date: Wed, 28 Nov 2007 11:28:00 +0000
+Message-Id: <1196249281.8098.17.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: CROSS_DIR
+Subject: Re: python skills and bug 2412
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,47 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2007 11:13:16 -0000
+X-List-Received-Date: Wed, 28 Nov 2007 11:31:06 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2007-11-28 at 14:50 +1000, Lorn Potter wrote:
-> Was CROSS_DIR changed somewhat recently (last 2 months or so) to link 
-> the includes and lib dirs to staging?
+On Tue, 2007-11-27 at 13:53 -0600, Matt Hoosier wrote:
+> On Nov 27, 2007 8:03 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> > A proper use for RPROVIDES is for something like gtk+-directfb to
+> > RPROVIDE gtk+. If an app linked against one, it should be able to run
+> > against the other (I'm assuming thats the case, if its not there
+> > shouldn't be an RPROVIDES).
 > 
-> If so, why? This means I cannot distribute this toolchain to other 
-> machines, and makes the entries in the pkgconfig files wrong.
+> I've tried this, and you have problems with the apps already being
+> linked not only against libgtk-2.0.so.x.y.z, but also the closure of
+> the dependencies which it had at link-time. So if the X11 version of
+> Gtk was staged at the time your app linked, the references to
+> libx11.so will exist its its binary.
+> 
+> Is there some way to suppress this eager resolution of transitive
+> shared library dependencies?
 
-It was changed, yes. The reason was to remove duplication of files
-between staging and cross. There are various reasons for doing that
-including faster builds, less error prone builds (file duplication means
-both copies have to be kept the same) and that cleaning this up assists
-some future planned developments (e.g. sysroot and packaged staging).
+To be honest, I don't know, its not something I've looked at before.
 
-The symlink is intended as a transition fix and ultimately we can switch
-to the sysroot option of the toolchain for everything but gcc 3.3 and
-earlier. Poky already has done so and it is *much* cleaner.
-
-I have seen the pkgconfig problem and its unfortunate, I didn't realise
-until it was too late. Its not more wrong than pointing at staging
-really though. The good news is that it goes away entirely when we
-switch to using sysroot options for pkgconfig.
-
-> CROSS_DIR should mean just that - this is where I want the toolchain to 
-> be - like it used to do.
-
-Well, the cross toolchain components are still there. The target system
-header/libraries (glibc and libc-headers-linux) only get installed to
-the target system staging directory now though.
-
-CROSS_DIR is not meant to be a toolchain you can transfer between
-machines, its meant to be the cross components of the builds. If you
-want a toolchain to transfer between machines you can build one with
-meta-toolchain.
+As Paul mentions, the shlibs code will also cause the package's
+Dependencies field to become hardcoded. If the binaries have references
+like you mention, that sounds like its currently doing the right thing
+really...
 
 Cheers,
 
 Richard
+
 
 
 
