@@ -1,27 +1,28 @@
-Received: from [62.70.27.18] (helo=esparsett.troll.no)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <lpotter@trolltech.com>) id 1IxEvq-000884-Pv
+	(envelope-from <rod@whitby.id.au>) id 1IxG06-0004nf-Kp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Nov 2007 05:53:54 +0100
-Received: from esparsett.troll.no (localhost [127.0.0.1])
-	by localhost (Postfix) with SMTP id 8FE3C74271
+	Wed, 28 Nov 2007 07:02:22 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 395A4576F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2007 05:51:00 +0100 (CET)
-Received: from mail.trolltech.com.au (unknown [10.1.1.12])
-	by esparsett.troll.no (Postfix) with ESMTP id 30B6D7424A
+	Wed, 28 Nov 2007 00:59:28 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Wed, 28 Nov 2007 00:59:28 -0500
+X-Sasl-enc: vayHpWlUXr24/rhQzgbnT0MW0ledO5IyFyDG7c5Wmmcj 1196229567
+Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTP id 5D8C31C734
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2007 05:51:00 +0100 (CET)
-Received: from [10.1.1.181] (polarbear-replace.trolltech.com.au [10.1.1.181])
-	by mail.trolltech.com.au (Postfix) with ESMTP id DF6A83B060F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2007 14:50:58 +1000 (EST)
-Message-ID: <474CF3AF.5010407@trolltech.com>
-Date: Wed, 28 Nov 2007 14:50:55 +1000
-From: Lorn Potter <lpotter@trolltech.com>
-User-Agent: Thunderbird 2.0.0.0 (X11/20070326)
+	Wed, 28 Nov 2007 00:59:27 -0500 (EST)
+Message-ID: <474D03A3.9090805@whitby.id.au>
+Date: Wed, 28 Nov 2007 16:28:59 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: CROSS_DIR
+References: <474BFBF6.2000602@whitby.id.au>
+In-Reply-To: <474BFBF6.2000602@whitby.id.au>
+Subject: Re: RFC: Adding endian support to linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,18 +36,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2007 04:53:55 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 28 Nov 2007 06:02:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Was CROSS_DIR changed somewhat recently (last 2 months or so) to link 
-the includes and lib dirs to staging?
+Rod Whitby wrote:
+> I wish to propose the following patch to linux.inc to enable automatic
+> support for setting the endian configuration value for those CPUs that
+> can run in both big and little endian modes.
+> 
+> Silence will be taken as acceptance, and if there are no objections this
+> change will be committed sometime this coming weekend.
 
-If so, why? This means I cannot distribute this toolchain to other 
-machines, and makes the entries in the pkgconfig files wrong.
+Since it got three ACKs in a row, I've committed it.
 
-CROSS_DIR should mean just that - this is where I want the toolchain to 
-be - like it used to do.
-
+-- Rod
 
 
