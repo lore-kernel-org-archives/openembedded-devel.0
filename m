@@ -1,22 +1,26 @@
-Received: from [62.169.194.61] (helo=memova2.tellas.gr)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1IxhgF-0006wk-R9
-	for openembedded-devel@openembedded.org; Thu, 29 Nov 2007 12:35:43 +0100
-Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
-	id 4638635B068987A9 for openembedded-devel@openembedded.org;
-	Thu, 29 Nov 2007 12:31:22 +0100
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Thu, 29 Nov 2007 13:32:40 +0200
-Message-ID: <HOECLKEKOHLAMMGDLLBHIENMNBAA.skoroneos@digital-opsis.com>
+	(envelope-from <rod@whitby.id.au>) id 1Ixi1G-0007CZ-Cx
+	for openembedded-devel@openembedded.org; Thu, 29 Nov 2007 12:57:26 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 8C975529C4
+	for <openembedded-devel@openembedded.org>;
+	Thu, 29 Nov 2007 06:54:24 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Thu, 29 Nov 2007 06:54:24 -0500
+X-Sasl-enc: bGjMXVjXZ/c6CebvDAkBstw6a09l1Y/ffy4LrX7VbOuM 1196337264
+Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
+	[121.209.18.182])
+	by mail.messagingengine.com (Postfix) with ESMTP id DF30410FCC
+	for <openembedded-devel@openembedded.org>;
+	Thu, 29 Nov 2007 06:54:23 -0500 (EST)
+Message-ID: <474EA852.7090306@whitby.id.au>
+Date: Thu, 29 Nov 2007 22:23:54 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
-Importance: Normal
-In-Reply-To: <7461f8370711290237k7622407djdc94140c350f88e8@mail.gmail.com>
-Subject: Re: Defining and uploading a new machine
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: RFC: auto eth0 and auto eth1 in netbase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,47 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2007 11:35:44 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Thu, 29 Nov 2007 11:57:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Rafael,
+Some machines don't have consoles, so the only way to access them on the
+first boot after a reflash is via the network.
 
-Post the mtn diffs to the bugtracker and one of the devs will look at them
-and add them to the tree
+Of course, an 'auto' keyword is required for this, and netbase currently
+has none.
 
-Stelios S. Koroneos
+Is there any reason why at least eth0 should not have an 'auto' keyword?
 
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
+Should this be OE-wide, only for Angstrom (koen thinks eth0 and eth1
+should be auto), or only for specific machines (in which case, does
+anyone object to ixp4xx having auto eth0)?
 
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org
-> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
-> Rafael Gomez Alcala
-> Sent: Thursday, November 29, 2007 12:37 PM
-> To: openembedded-devel@openembedded.org
-> Cc: campom83@hotmail.com; movilinex@gmail.com; jlmoyanogar@gmail.com
-> Subject: [oe] Defining and uploading a new machine
->
->
-> Hello:
->
-> I am interested in upload a machine description, configuration files, etc.
-> What is the method/procedure to  do ?
-> The machine is the omap850 based HTC Prophet pda/phone, which is
-> similar to
-> HTC Wizard.
->
-> Rafael
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
+-- Rod
 
 
