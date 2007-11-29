@@ -1,23 +1,21 @@
-Received: from [64.233.182.188] (helo=nf-out-0910.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philipp.zabel@gmail.com>) id 1IxiO0-0007YA-Mn
+	(envelope-from <dp@xora.org.uk>) id 1Ixj15-0007US-6W
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Nov 2007 13:20:56 +0100
-Received: by nf-out-0910.google.com with SMTP id h3so1579419nfh
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Nov 2007 04:17:54 -0800 (PST)
-Received: by 10.82.150.20 with SMTP id x20mr292005bud.1196338674326;
-	Thu, 29 Nov 2007 04:17:54 -0800 (PST)
-Received: by 10.82.120.17 with HTTP; Thu, 29 Nov 2007 04:17:54 -0800 (PST)
-Message-ID: <74d0deb30711290417pa93ea19hd4a32843f0c885cc@mail.gmail.com>
-Date: Thu, 29 Nov 2007 13:17:54 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	Thu, 29 Nov 2007 14:01:20 +0100
+Received: from openmoko ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Thu, 29 Nov 2007 12:58:15 +0000
+	id 00068230.474EB768.00002F73
+Date: Thu, 29 Nov 2007 12:58:01 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <7461f8370711290237k7622407djdc94140c350f88e8@mail.gmail.com>
-MIME-Version: 1.0
-References: <7461f8370711290237k7622407djdc94140c350f88e8@mail.gmail.com>
-Cc: campom83@hotmail.com, jlmoyanogar@gmail.com, movilinex@gmail.com
-Subject: Re: Defining and uploading a new machine
+Message-ID: <20071129125801.31b1db05@openmoko>
+In-Reply-To: <474EA852.7090306@whitby.id.au>
+References: <474EA852.7090306@whitby.id.au>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: RFC: auto eth0 and auto eth1 in netbase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,26 +29,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2007 12:20:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 Nov 2007 13:01:23 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Nov 29, 2007 11:37 AM, Rafael G=F3mez Alcal=E1 <rgomezalcala@gmail.com> =
-wrote:
-> Hello:
->
-> I am interested in upload a machine description, configuration files, etc=
-.
-> What is the method/procedure to  do ?
-> The machine is the omap850 based HTC Prophet pda/phone, which is similar =
-to
-> HTC Wizard.
+On Thu, 29 Nov 2007 22:23:54 +1030
+Rod Whitby <rod@whitby.id.au> wrote:
 
-Open a bug and attach the files in question. Do you have a working
-kernel for that device?
+> Some machines don't have consoles, so the only way to access them on
+> the first boot after a reflash is via the network.
+> 
+> Of course, an 'auto' keyword is required for this, and netbase
+> currently has none.
+> 
+> Is there any reason why at least eth0 should not have an 'auto'
+> keyword?
+> 
+> Should this be OE-wide, only for Angstrom (koen thinks eth0 and eth1
+> should be auto), or only for specific machines (in which case, does
+> anyone object to ixp4xx having auto eth0)?
+> 
 
-regards
-Philipp
+It is quiet common to find commercial equipment doing this in the real
+world. You just tell your dhcp server the MAC and you can find it on
+first boot easilly.
+
+So I think we should probably allow this as well.
+
++1 for me on eth0
+
+G
 
 
