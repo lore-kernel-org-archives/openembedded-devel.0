@@ -1,22 +1,23 @@
-Received: from [67.19.73.58] (helo=pug.o-hand.com)
+Received: from [209.85.132.248] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <richard@openedhand.com>) id 1IxopZ-0001kJ-Rr
-	for openembedded-devel@openembedded.org; Thu, 29 Nov 2007 20:13:50 +0100
-Received: from [192.168.1.15] (tim.rpsys.net [194.106.48.114])
-	(using TLSv1 with cipher RC4-MD5 (128/128 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id 3820B10CE50E;
-	Thu, 29 Nov 2007 14:35:10 -0500 (EST)
-From: Richard Purdie <richard@openedhand.com>
-To: poky@o-hand.com
-In-Reply-To: <d543f5920711290953x75c79b84gbb5bfdce83bfc324@mail.gmail.com>
-References: <d543f5920711290953x75c79b84gbb5bfdce83bfc324@mail.gmail.com>
-Date: Thu, 29 Nov 2007 19:10:31 +0000
-Message-Id: <1196363431.6917.29.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [poky] Syntax for requiring a dependency task's deploy phase	to be finished
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Ixp1W-0006Xz-Kd
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Nov 2007 20:26:10 +0100
+Received: by an-out-0708.google.com with SMTP id b33so368263ana
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Nov 2007 11:23:06 -0800 (PST)
+Received: by 10.101.67.11 with SMTP id u11mr12321190ank.1196364186583;
+	Thu, 29 Nov 2007 11:23:06 -0800 (PST)
+Received: by 10.90.29.19 with HTTP; Thu, 29 Nov 2007 11:23:06 -0800 (PST)
+Message-ID: <c384c5ea0711291123m12213ef1yc06835ca0cf37ddd@mail.gmail.com>
+Date: Thu, 29 Nov 2007 20:23:06 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <358929393.20071129005704@vanille-media.de>
+MIME-Version: 1.0
+References: <200710181425.56368.gerwin@vanderkruis.net>
+	<358929393.20071129005704@vanille-media.de>
+Subject: Re: Organisation fosdem 2008
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,30 +31,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2007 19:13:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Nov 2007 19:26:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Thu, 2007-11-29 at 11:53 -0600, Matt Hoosier wrote:
-> I'm trying to build a kernel containing an initramfs linked directly
-> into the kernel binary. This is inspired by the recent discussion
-> here: building a minimal image with IMAGE_FSTYPE set to cpio.
-> 
-> I need to be sure that by the time the kernel's do_compile task
-> executes, the minimal image has been deploy to ${DEPLOY_DIR}/image.
-> What's the right way to write this dependency?
+Mickey,
 
-If I understand correctly you want something like
+On Nov 29, 2007 12:57 AM, Michael 'Mickey' Lauer
+<mickey@vanille-media.de> wrote:
+> Now the good news... we _have_ one table! :)
+>
+Embedded room? or "in the hallway where we make sure all traffic stalls".
 
-do_compile[depends] += "minimal-image:do_deploy"
-
-inside the kernel recipe where "minimal-image" is the name of the image
-recipe.
-
-Cheers,
-
-Richard
-
-
+Regards,
+-- 
+Leon
 
 
