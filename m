@@ -1,21 +1,22 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [62.169.194.61] (helo=memova2.tellas.gr)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <dp@xora.org.uk>) id 1IxhdS-0006v6-Sj
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Nov 2007 12:32:50 +0100
-Received: from openmoko ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Thu, 29 Nov 2007 11:29:48 +0000
-	id 0006822F.474EA2AC.00002E02
-Date: Thu, 29 Nov 2007 11:29:47 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071129112947.1fd36922@openmoko>
-In-Reply-To: <474D5541.2020107@xora.org.uk>
-References: <474D5541.2020107@xora.org.uk>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [RFC] Fix uImage generation in way compatible with kernel.bbclass
+	(envelope-from <skoroneos@digital-opsis.com>) id 1IxhgF-0006wk-R9
+	for openembedded-devel@openembedded.org; Thu, 29 Nov 2007 12:35:43 +0100
+Received: from dias (62.169.211.226) by memova2.tellas.gr (7.3.118.8)
+	id 4638635B068987A9 for openembedded-devel@openembedded.org;
+	Thu, 29 Nov 2007 12:31:22 +0100
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Thu, 29 Nov 2007 13:32:40 +0200
+Message-ID: <HOECLKEKOHLAMMGDLLBHIENMNBAA.skoroneos@digital-opsis.com>
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3138
+Importance: Normal
+In-Reply-To: <7461f8370711290237k7622407djdc94140c350f88e8@mail.gmail.com>
+Subject: Re: Defining and uploading a new machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,27 +30,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2007 11:32:51 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 29 Nov 2007 11:35:44 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 28 Nov 2007 11:47:13 +0000
-Graeme Gregory <dp@xora.org.uk> wrote:
+Rafael,
 
-> I would like to do the attached patch to linux.inc to change uImage
-> generation so it is compatible with the way kernel.bbclass does
-> things.
-> 
-> This means the uImage ends up in kernel-image not some random file
-> called uImage but not really a uImage.
-> 
-> koen said the do_install_prepend stuff was to work around vendor bugs
-> and is no longer needed in this file.
-> 
-I think we have knocked down all the objections by email now?
+Post the mtn diffs to the bugtracker and one of the devs will look at them
+and add them to the tree
 
-Shall I apply?
+Stelios S. Koroneos
 
-Graeme
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@openembedded.org
+> [mailto:openembedded-devel-bounces@openembedded.org]On Behalf Of
+> Rafael Gomez Alcala
+> Sent: Thursday, November 29, 2007 12:37 PM
+> To: openembedded-devel@openembedded.org
+> Cc: campom83@hotmail.com; movilinex@gmail.com; jlmoyanogar@gmail.com
+> Subject: [oe] Defining and uploading a new machine
+>
+>
+> Hello:
+>
+> I am interested in upload a machine description, configuration files, etc.
+> What is the method/procedure to  do ?
+> The machine is the omap850 based HTC Prophet pda/phone, which is
+> similar to
+> HTC Wizard.
+>
+> Rafael
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
 
 
