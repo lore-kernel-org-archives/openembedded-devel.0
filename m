@@ -1,26 +1,23 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [64.233.182.188] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1Ixi1G-0007CZ-Cx
-	for openembedded-devel@openembedded.org; Thu, 29 Nov 2007 12:57:26 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 8C975529C4
-	for <openembedded-devel@openembedded.org>;
-	Thu, 29 Nov 2007 06:54:24 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Thu, 29 Nov 2007 06:54:24 -0500
-X-Sasl-enc: bGjMXVjXZ/c6CebvDAkBstw6a09l1Y/ffy4LrX7VbOuM 1196337264
-Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
-	[121.209.18.182])
-	by mail.messagingengine.com (Postfix) with ESMTP id DF30410FCC
-	for <openembedded-devel@openembedded.org>;
-	Thu, 29 Nov 2007 06:54:23 -0500 (EST)
-Message-ID: <474EA852.7090306@whitby.id.au>
-Date: Thu, 29 Nov 2007 22:23:54 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	(envelope-from <philipp.zabel@gmail.com>) id 1IxiO0-0007YA-Mn
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Nov 2007 13:20:56 +0100
+Received: by nf-out-0910.google.com with SMTP id h3so1579419nfh
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Nov 2007 04:17:54 -0800 (PST)
+Received: by 10.82.150.20 with SMTP id x20mr292005bud.1196338674326;
+	Thu, 29 Nov 2007 04:17:54 -0800 (PST)
+Received: by 10.82.120.17 with HTTP; Thu, 29 Nov 2007 04:17:54 -0800 (PST)
+Message-ID: <74d0deb30711290417pa93ea19hd4a32843f0c885cc@mail.gmail.com>
+Date: Thu, 29 Nov 2007 13:17:54 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <7461f8370711290237k7622407djdc94140c350f88e8@mail.gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: RFC: auto eth0 and auto eth1 in netbase
+References: <7461f8370711290237k7622407djdc94140c350f88e8@mail.gmail.com>
+Cc: campom83@hotmail.com, jlmoyanogar@gmail.com, movilinex@gmail.com
+Subject: Re: Defining and uploading a new machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,22 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2007 11:57:26 -0000
+X-List-Received-Date: Thu, 29 Nov 2007 12:20:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Some machines don't have consoles, so the only way to access them on the
-first boot after a reflash is via the network.
+On Nov 29, 2007 11:37 AM, Rafael G=F3mez Alcal=E1 <rgomezalcala@gmail.com> =
+wrote:
+> Hello:
+>
+> I am interested in upload a machine description, configuration files, etc=
+.
+> What is the method/procedure to  do ?
+> The machine is the omap850 based HTC Prophet pda/phone, which is similar =
+to
+> HTC Wizard.
 
-Of course, an 'auto' keyword is required for this, and netbase currently
-has none.
+Open a bug and attach the files in question. Do you have a working
+kernel for that device?
 
-Is there any reason why at least eth0 should not have an 'auto' keyword?
-
-Should this be OE-wide, only for Angstrom (koen thinks eth0 and eth1
-should be auto), or only for specific machines (in which case, does
-anyone object to ixp4xx having auto eth0)?
-
--- Rod
+regards
+Philipp
 
 
