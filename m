@@ -1,22 +1,21 @@
-Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rgomezalcala@gmail.com>) id 1IxgoW-0007jI-Bm
+	(envelope-from <dp@xora.org.uk>) id 1IxhdS-0006v6-Sj
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Nov 2007 11:40:12 +0100
-Received: by nf-out-0910.google.com with SMTP id h3so1551430nfh
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Nov 2007 02:37:10 -0800 (PST)
-Received: by 10.86.100.7 with SMTP id x7mr5938735fgb.1196332630269;
-	Thu, 29 Nov 2007 02:37:10 -0800 (PST)
-Received: by 10.86.52.4 with HTTP; Thu, 29 Nov 2007 02:37:10 -0800 (PST)
-Message-ID: <7461f8370711290237k7622407djdc94140c350f88e8@mail.gmail.com>
-Date: Thu, 29 Nov 2007 11:37:10 +0100
-From: "=?ISO-8859-1?Q?Rafael_G=F3mez_Alcal=E1?=" <rgomezalcala@gmail.com>
+	Thu, 29 Nov 2007 12:32:50 +0100
+Received: from openmoko ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Thu, 29 Nov 2007 11:29:48 +0000
+	id 0006822F.474EA2AC.00002E02
+Date: Thu, 29 Nov 2007 11:29:47 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Cc: campom83@hotmail.com, movilinex@gmail.com, jlmoyanogar@gmail.com
-Subject: Defining and uploading a new machine
+Message-ID: <20071129112947.1fd36922@openmoko>
+In-Reply-To: <474D5541.2020107@xora.org.uk>
+References: <474D5541.2020107@xora.org.uk>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: [RFC] Fix uImage generation in way compatible with kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,17 +29,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2007 10:40:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 29 Nov 2007 11:32:51 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello:
+On Wed, 28 Nov 2007 11:47:13 +0000
+Graeme Gregory <dp@xora.org.uk> wrote:
 
-I am interested in upload a machine description, configuration files, etc.
-What is the method/procedure to  do ?
-The machine is the omap850 based HTC Prophet pda/phone, which is similar to
-HTC Wizard.
+> I would like to do the attached patch to linux.inc to change uImage
+> generation so it is compatible with the way kernel.bbclass does
+> things.
+> 
+> This means the uImage ends up in kernel-image not some random file
+> called uImage but not really a uImage.
+> 
+> koen said the do_install_prepend stuff was to work around vendor bugs
+> and is no longer needed in this file.
+> 
+I think we have knocked down all the objections by email now?
 
-Rafael
+Shall I apply?
+
+Graeme
+
 
