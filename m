@@ -1,31 +1,20 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [209.85.146.180] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1Iy4PZ-0006OY-3E
+	(envelope-from <cliff.brake@gmail.com>) id 1Iy6hc-0002FG-Il
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Nov 2007 12:52:01 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 6B7B157E60
+	Fri, 30 Nov 2007 15:18:48 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so2988951waf
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2007 06:48:53 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Fri, 30 Nov 2007 06:48:53 -0500
-X-Sasl-enc: +bOaUJnk4cetPmCO3QJXwTFIKK66tJuB+UWDF2YVwqre 1196423333
-Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
-	[121.209.18.182])
-	by mail.messagingengine.com (Postfix) with ESMTP id BB24E17917
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2007 06:48:52 -0500 (EST)
-Message-ID: <474FF886.7060308@whitby.id.au>
-Date: Fri, 30 Nov 2007 22:18:22 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
-MIME-Version: 1.0
+	Fri, 30 Nov 2007 06:15:39 -0800 (PST)
+Received: by 10.115.89.1 with SMTP id r1mr2406691wal.1196432139485;
+	Fri, 30 Nov 2007 06:15:39 -0800 (PST)
+Received: by 10.114.254.11 with HTTP; Fri, 30 Nov 2007 06:15:39 -0800 (PST)
+Message-ID: <f96d234e0711300615kb15b49bif5d815156f3b12c3@mail.gmail.com>
+Date: Fri, 30 Nov 2007 09:15:39 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <474EA852.7090306@whitby.id.au>	<474ECF9A.6050603@student.utwente.nl>
-	<b6ebd0a50711290902te78ad84hd8cf64829a66c95@mail.gmail.com>
-In-Reply-To: <b6ebd0a50711290902te78ad84hd8cf64829a66c95@mail.gmail.com>
-X-Enigmail-Version: 0.95.5
-Subject: Re: RFC: auto eth0 and auto eth1 in netbase
+MIME-Version: 1.0
+Subject: creating ipks for all package dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,23 +28,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2007 11:52:01 -0000
+X-List-Received-Date: Fri, 30 Nov 2007 14:18:49 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Chris Larson wrote:
-> Afaik, the execution of the hotplug/coldplug scripts on startup should
-> generate the hotplug events for the ethernet interfaces and bring them
-> up that way.  In debian, the hotplug scripts bring them up with ifup
-> --allow=hotplug [iface], such that you need an 'allow-hotplug eth0' in
-> interfaces to have them brought up that way.  I'm too rusty with OE to
-> say how we do it today, but it's not likely that auto is needed.
+I recently ran into an issue where I bitbake'd subversion.  I then
+tried to install subversion from an ipkg feed, and ipkg complained
+about dependencies not being available (neon, etc).  It turns out that
+bitbake does not run the do_package_write_ipk task due to recent
+corrections in the way dependencies are handled, so the ipks for
+subversion dependencies where not in the feeds.  Richard suggested
+merging a task from poky that forces all ipk files to be generated.
+It has not been merged in OE, and to use do the following:
 
-Unfortunately, the busybox ifup applet does not support the
-allow-hotplug keyword.
+bitbake <your recipe> -c buildall
 
-Based on the feedback, I'll add 'auto eth0'.
+This will force ipks for all dependencies of <your recipe> to be built
+as well as the package you are building.
 
--- Rod
+Thanks,
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
