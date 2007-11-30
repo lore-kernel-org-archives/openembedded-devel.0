@@ -1,33 +1,34 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1IxtPM-0003P1-BA
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Nov 2007 01:07:04 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id EBFC528C014; Fri, 30 Nov 2007 00:57:23 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ****
-X-Spam-Status: No, score=4.0 required=5.0 tests=AWL,BAYES_00,RCVD_IN_DSBL,
-	RCVD_IN_PBL,RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180161179.adsl.alicedsl.de [85.180.161.179])
-	by srv043.dedi23.de (Postfix) with ESMTP id EA4CE28C013;
-	Fri, 30 Nov 2007 00:57:19 +0100 (CET)
-Date: Fri, 30 Nov 2007 01:03:55 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <974090014.20071130010355@vanille-media.de>
-To: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-In-Reply-To: <c384c5ea0711291123m12213ef1yc06835ca0cf37ddd@mail.gmail.com>
-References: <200710181425.56368.gerwin@vanderkruis.net>
-	<358929393.20071129005704@vanille-media.de>
-	<c384c5ea0711291123m12213ef1yc06835ca0cf37ddd@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Organisation fosdem 2008
+	(envelope-from <rpurdie@rpsys.net>) id 1Ixtga-00086A-Im
+	for openembedded-devel@openembedded.org; Fri, 30 Nov 2007 01:24:52 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAU0LlhY002183
+	for <openembedded-devel@openembedded.org>; Fri, 30 Nov 2007 00:21:47 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 01994-05 for <openembedded-devel@openembedded.org>;
+	Fri, 30 Nov 2007 00:21:44 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAU0Lg3W002176
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 30 Nov 2007 00:21:42 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <bdb0025f0711291203o27cca7edsb2c823984c461c71@mail.gmail.com>
+References: <474CF3AF.5010407@trolltech.com>
+	<1196248199.8098.13.camel@localhost.localdomain>
+	<474DCBD4.6060605@trolltech.com>
+	<1196300745.8098.41.camel@localhost.localdomain>
+	<bdb0025f0711291203o27cca7edsb2c823984c461c71@mail.gmail.com>
+Date: Fri, 30 Nov 2007 00:21:41 +0000
+Message-Id: <1196382101.6917.34.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: CROSS_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,26 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2007 00:07:04 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 30 Nov 2007 00:24:52 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Leon Woestenberg wrote:
-> Mickey,
+Hi,
 
-> On Nov 29, 2007 12:57 AM, Michael 'Mickey' Lauer
-> <mickey@vanille-media.de> wrote:
->> Now the good news... we _have_ one table!  
->>
-> Embedded room? or "in the hallway where we make sure all traffic stalls".
+On Thu, 2007-11-29 at 17:03 -0300, Rodrigo Vivi wrote:
+> I've noticed that meta-toolchain is so dependent on ipgk.
+> Is there any other good (right) way to build a relocatable toolchain?
 
-No idea where, but somewhere in the hallway is pretty likely.
+You can enable both debs and ipks at the same time (the first class used
+is the default for the rootfs generation). That should get
+meta-toolchain working even though you're using debs as the primary
+package. In future I'd like to see if work with debs too, its just a
+question of abstracting the right functions to the package classes...
 
-Regards,
+Cheers,
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Richard
 
 
 
