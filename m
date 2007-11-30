@@ -1,27 +1,31 @@
-Received: from [64.233.166.178] (helo=py-out-1112.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <kergoth@gmail.com>) id 1Iy9GO-0001Qs-An
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Nov 2007 18:02:53 +0100
-Received: by py-out-1112.google.com with SMTP id a25so5222657pyi
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2007 08:59:43 -0800 (PST)
-Received: by 10.142.84.3 with SMTP id h3mr395451wfb.1196441981204;
-	Fri, 30 Nov 2007 08:59:41 -0800 (PST)
-Received: by 10.142.104.18 with HTTP; Fri, 30 Nov 2007 08:59:41 -0800 (PST)
-Message-ID: <b6ebd0a50711300859l392f9b43i8168d2377fb8c852@mail.gmail.com>
-Date: Fri, 30 Nov 2007 09:59:41 -0700
-From: "Chris Larson" <clarson@kergoth.com>
-Sender: kergoth@gmail.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <474FF886.7060308@whitby.id.au>
-MIME-Version: 1.0
-References: <474EA852.7090306@whitby.id.au>
-	<474ECF9A.6050603@student.utwente.nl>
-	<b6ebd0a50711290902te78ad84hd8cf64829a66c95@mail.gmail.com>
-	<474FF886.7060308@whitby.id.au>
-X-Google-Sender-Auth: 63135c6f922f07ef
-Subject: Re: RFC: auto eth0 and auto eth1 in netbase
+	(envelope-from <rpurdie@rpsys.net>) id 1Iy9ae-0006Id-UD
+	for openembedded-devel@openembedded.org; Fri, 30 Nov 2007 18:23:49 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAUHKeYM015692
+	for <openembedded-devel@openembedded.org>; Fri, 30 Nov 2007 17:20:40 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15525-04 for <openembedded-devel@openembedded.org>;
+	Fri, 30 Nov 2007 17:20:36 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAUHKXO6015686
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 30 Nov 2007 17:20:33 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <432beae0711300821n2783416n645bcefecfbef4d@mail.gmail.com>
+References: <f96d234e0711300615kb15b49bif5d815156f3b12c3@mail.gmail.com>
+	<432beae0711300821n2783416n645bcefecfbef4d@mail.gmail.com>
+Date: Fri, 30 Nov 2007 17:20:32 +0000
+Message-Id: <1196443233.6783.47.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: creating ipks for all package dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,31 +39,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2007 17:02:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 30 Nov 2007 17:23:49 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Nov 30, 2007 4:48 AM, Rod Whitby <rod@whitby.id.au> wrote:
-> Chris Larson wrote:
-> > Afaik, the execution of the hotplug/coldplug scripts on startup should
-> > generate the hotplug events for the ethernet interfaces and bring them
-> > up that way.  In debian, the hotplug scripts bring them up with ifup
-> > --allow=hotplug [iface], such that you need an 'allow-hotplug eth0' in
-> > interfaces to have them brought up that way.  I'm too rusty with OE to
-> > say how we do it today, but it's not likely that auto is needed.
->
-> Unfortunately, the busybox ifup applet does not support the
-> allow-hotplug keyword.
->
-> Based on the feedback, I'll add 'auto eth0'.
+On Fri, 2007-11-30 at 08:21 -0800, Justin Patrin wrote:
+> On Nov 30, 2007 6:15 AM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> > I recently ran into an issue where I bitbake'd subversion.  I then
+> > tried to install subversion from an ipkg feed, and ipkg complained
+> > about dependencies not being available (neon, etc).  It turns out that
+> > bitbake does not run the do_package_write_ipk task due to recent
+> > corrections in the way dependencies are handled, so the ipks for
+> > subversion dependencies where not in the feeds.  Richard suggested
+> > merging a task from poky that forces all ipk files to be generated.
+> > It has not been merged in OE, and to use do the following:
+> >
+> > bitbake <your recipe> -c buildall
+> >
+> > This will force ipks for all dependencies of <your recipe> to be built
+> > as well as the package you are building.
+> 
+> This really sounds like a bug to me....why would bitbake not build the
+> ipks for runtime dependencies of a package?
 
-Network interfaces should still be brought up when hotplugged.
-Lacking the keyword just means there's no way to prevent it from
-happening via interfaces(5).
--- 
-Chris Larson - clarson at kergoth dot com
-Dedicated Engineer - MontaVista - clarson at mvista dot com
-Core Developer/Architect - TSLib, BitBake, OpenEmbedded, OpenZaurus
+Its not a bug. It does depend what you define "bitbake x" to mean.
+
+One definition is run target x's do_build task and any dependent tasks.
+
+Another definition could be to run target x's do_build task and the
+do_build tasks of any dependencies.
+
+OE defines what "do_build" is and can therefore chose between the above
+choices, it isn't a bitbake problem. Both have use cases. The second
+definition breaks the first, adding a buildall task makes both use cases
+possible. If you always want buildall you can set BB_DEFAULT_TASK =
+"buildall" in local.conf in theory to.
+
+So hopefully we've got the flexible solution which lets everyone do what
+they want/need?
+
+Cheers,
+
+Richard
+
 
 
