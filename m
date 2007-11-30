@@ -1,34 +1,31 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1Iy48s-00066V-Tq
+	(envelope-from <rod@whitby.id.au>) id 1Iy4PZ-0006OY-3E
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Nov 2007 12:34:46 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id AE37628C013; Fri, 30 Nov 2007 12:25:02 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=4.0 required=5.0 tests=AWL,BAYES_00,RCVD_IN_DSBL,
-	RCVD_IN_PBL,RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180161179.adsl.alicedsl.de [85.180.161.179])
-	by srv043.dedi23.de (Postfix) with ESMTP id 6415728C014;
-	Fri, 30 Nov 2007 12:24:58 +0100 (CET)
-Date: Fri, 30 Nov 2007 12:31:33 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <19260812.20071130123133@vanille-media.de>
-To: Gerwin van der Kruis <gerwin@vanderkruis.net>
-In-Reply-To: <200711300157.30653.gerwin@vanderkruis.net>
-References: <200710181425.56368.gerwin@vanderkruis.net>
-	<358929393.20071129005704@vanille-media.de>
-	<c384c5ea0711291123m12213ef1yc06835ca0cf37ddd@mail.gmail.com>
-	<200711300157.30653.gerwin@vanderkruis.net>
+	Fri, 30 Nov 2007 12:52:01 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 6B7B157E60
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Nov 2007 06:48:53 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Fri, 30 Nov 2007 06:48:53 -0500
+X-Sasl-enc: +bOaUJnk4cetPmCO3QJXwTFIKK66tJuB+UWDF2YVwqre 1196423333
+Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
+	[121.209.18.182])
+	by mail.messagingengine.com (Postfix) with ESMTP id BB24E17917
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Nov 2007 06:48:52 -0500 (EST)
+Message-ID: <474FF886.7060308@whitby.id.au>
+Date: Fri, 30 Nov 2007 22:18:22 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Organisation fosdem 2008
+To: openembedded-devel@lists.openembedded.org
+References: <474EA852.7090306@whitby.id.au>	<474ECF9A.6050603@student.utwente.nl>
+	<b6ebd0a50711290902te78ad84hd8cf64829a66c95@mail.gmail.com>
+In-Reply-To: <b6ebd0a50711290902te78ad84hd8cf64829a66c95@mail.gmail.com>
+X-Enigmail-Version: 0.95.5
+Subject: Re: RFC: auto eth0 and auto eth1 in netbase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,25 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2007 11:34:47 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 30 Nov 2007 11:52:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Gerwin van der Kruis wrote:
-> Somethings learned from last year were:
-[...]
+Chris Larson wrote:
+> Afaik, the execution of the hotplug/coldplug scripts on startup should
+> generate the hotplug events for the ethernet interfaces and bring them
+> up that way.  In debian, the hotplug scripts bring them up with ifup
+> --allow=hotplug [iface], such that you need an 'allow-hotplug eth0' in
+> interfaces to have them brought up that way.  I'm too rusty with OE to
+> say how we do it today, but it's not likely that auto is needed.
 
-Very good points, we should try to honor all of them.
+Unfortunately, the busybox ifup applet does not support the
+allow-hotplug keyword.
 
-> If you guys like it I can organise this
+Based on the feedback, I'll add 'auto eth0'.
 
-That would be most appreciated!!!
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+-- Rod
 
 
