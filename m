@@ -1,31 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1Iy9ae-0006Id-UD
-	for openembedded-devel@openembedded.org; Fri, 30 Nov 2007 18:23:49 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAUHKeYM015692
-	for <openembedded-devel@openembedded.org>; Fri, 30 Nov 2007 17:20:40 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 15525-04 for <openembedded-devel@openembedded.org>;
-	Fri, 30 Nov 2007 17:20:36 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lAUHKXO6015686
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 30 Nov 2007 17:20:33 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <432beae0711300821n2783416n645bcefecfbef4d@mail.gmail.com>
-References: <f96d234e0711300615kb15b49bif5d815156f3b12c3@mail.gmail.com>
-	<432beae0711300821n2783416n645bcefecfbef4d@mail.gmail.com>
-Date: Fri, 30 Nov 2007 17:20:32 +0000
-Message-Id: <1196443233.6783.47.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: creating ipks for all package dependencies
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1IyA4u-0006iX-Sd
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Nov 2007 18:55:04 +0100
+Received: from [192.168.2.163] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1IyAMS-00050A-VI
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Nov 2007 19:13:12 +0100
+Message-ID: <47504DBB.8020604@kernelconcepts.de>
+Date: Fri, 30 Nov 2007 18:51:55 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <20071129172123.GA29463@buddha.tw.openmoko.com>	<474F1835.6060002@student.utwente.nl>
+	<A0AACB011FF0474492071F3E72FB188F958C5A@USSYML02.ad.sjm.com>
+In-Reply-To: <A0AACB011FF0474492071F3E72FB188F958C5A@USSYML02.ad.sjm.com>
+X-Enigmail-Version: 0.95.0
+Subject: Re: Firewall blocking access to monotone server?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,48 +32,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2007 17:23:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 30 Nov 2007 17:55:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2007-11-30 at 08:21 -0800, Justin Patrin wrote:
-> On Nov 30, 2007 6:15 AM, Cliff Brake <cliff.brake@gmail.com> wrote:
-> > I recently ran into an issue where I bitbake'd subversion.  I then
-> > tried to install subversion from an ipkg feed, and ipkg complained
-> > about dependencies not being available (neon, etc).  It turns out that
-> > bitbake does not run the do_package_write_ipk task due to recent
-> > corrections in the way dependencies are handled, so the ipks for
-> > subversion dependencies where not in the feeds.  Richard suggested
-> > merging a task from poky that forces all ipk files to be generated.
-> > It has not been merged in OE, and to use do the following:
-> >
-> > bitbake <your recipe> -c buildall
-> >
-> > This will force ipks for all dependencies of <your recipe> to be built
-> > as well as the package you are building.
-> 
-> This really sounds like a bug to me....why would bitbake not build the
-> ipks for runtime dependencies of a package?
+Hi,
 
-Its not a bug. It does depend what you define "bitbake x" to mean.
+Tiller, Jason schrieb:
+> I'm running on a 400MHz P-III with 256MB of memory running RHEL 4.  The OS is
+> mandated by my IT guys.  I got everything down, finally got everything built
+> (well, so far), including git, svn, mtn, boost, (1.33.1), bb, and a whole
+> host of other packages.  My poor little box has been compiling its little
+> brains out.  I think I have everything in place.
 
-One definition is run target x's do_build task and any dependent tasks.
+Oh dear... RHEL4 is quite common, but compiling on this hardware will be a major
+pain. I could donate an faster PC to your company if you like ;-)
 
-Another definition could be to run target x's do_build task and the
-do_build tasks of any dependencies.
+> If I were to go to my IT guys and ask them (nicely) to help me out, what do I
+> need to tell them in terms of the port/protocol issues?  I'll need to
+> convince them that this is a safe proposition, but I'm sure exactly what I'm
+> asking for.
 
-OE defines what "do_build" is and can therefore chose between the above
-choices, it isn't a bitbake problem. Both have use cases. The second
-definition breaks the first, adding a buildall task makes both use cases
-possible. If you always want buildall you can set BB_DEFAULT_TASK =
-"buildall" in local.conf in theory to.
+Well since that's an outgoing connection on a single, defined port there is
+really not much risk in opening it. If they are really crazy and do not want to
+allow external connections they could provide a SOCKS proxy you could use with
+tsocks.
 
-So hopefully we've got the flexible solution which lets everyone do what
-they want/need?
+Greetings
 
-Cheers,
+Florian
 
-Richard
 
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
