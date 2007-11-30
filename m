@@ -1,21 +1,26 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [150.202.8.1] (helo=dc1gateway.sjm.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philip@balister.org>) id 1Ixvle-0001lR-GH
-	for openembedded-devel@openembedded.org; Fri, 30 Nov 2007 03:38:14 +0100
-Received: (qmail 25495 invoked by uid 1003); 30 Nov 2007 02:35:28 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 30 Nov 2007 02:35:28 -0000
-Message-ID: <474F76D6.8030409@balister.org>
-Date: Thu, 29 Nov 2007 21:35:02 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.9 (X11/20071115)
+	(envelope-from <jtiller@sjm.com>) id 1Ixyfp-00007V-LI
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Nov 2007 06:44:26 +0100
+Received: from USSYML02.ad.sjm.com ([150.202.22.59]) by dc1gateway.sjm.com
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Thu, 29 Nov 2007 21:41:18 -0800
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200710181425.56368.gerwin@vanderkruis.net>	<358929393.20071129005704@vanille-media.de>	<c384c5ea0711291123m12213ef1yc06835ca0cf37ddd@mail.gmail.com>
-	<200711300157.30653.gerwin@vanderkruis.net>
-In-Reply-To: <200711300157.30653.gerwin@vanderkruis.net>
-Subject: Re: Organisation fosdem 2008
+Date: Thu, 29 Nov 2007 21:41:17 -0800
+Message-ID: <A0AACB011FF0474492071F3E72FB188F958C5A@USSYML02.ad.sjm.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: <A0AACB011FF0474492071F3E72FB188F958C5A@USSYML02.ad.sjm.com>
+Thread-Topic: Firewall blocking access to monotone server?
+Thread-Index: Acgyy2RDXDGIuGyVS66qMCHzXr1zfwAR0Hu9
+References: <20071129172123.GA29463@buddha.tw.openmoko.com>
+	<474F1835.6060002@student.utwente.nl>
+From: "Tiller, Jason" <jtiller@sjm.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 30 Nov 2007 05:41:18.0389 (UTC)
+	FILETIME=[A150EE50:01C83313]
+Subject: Firewall blocking access to monotone server?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,125 +34,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2007 02:38:15 -0000
-X-Groupsio-MsgNum: 3496
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040807040903060805010303"
+X-List-Received-Date: Fri, 30 Nov 2007 05:44:27 -0000
+X-Groupsio-MsgNum: 3497
+Content-class: urn:content-classes:message
+Content-Type: multipart/mixed; boundary="----_=_NextPart_001_01C83313.A0D20EFF"
 
---------------ms040807040903060805010303
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+------_=_NextPart_001_01C83313.A0D20EFF
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Should we see if any of the hardware vendors have literature we could 
-hand out?
+Hello, OE folx!
 
-Philip
+I approached the list a couple of weeks ago asking about running OE =
+under Cygwin.  The overwhelming consensus was that I shouldn't even =
+embark on that headache-laden path and instead scare up a Linux box for =
+my OE work.  Well, I took your considered advice and now I'm trying to =
+get OE running.
 
-Gerwin van der Kruis wrote:
-> On Thursday 29 November 2007 20:23:06 Leon Woestenberg wrote:
->> Mickey,
->>
->> On Nov 29, 2007 12:57 AM, Michael 'Mickey' Lauer
->>
->> <mickey@vanille-media.de> wrote:
->>> Now the good news... we _have_ one table! :)
->> Embedded room? or "in the hallway where we make sure all traffic stalls".
->>
->> Regards,
-> 
-> Somethings learned from last year were:
-> - that the first day is the most busy day.
-> -You have basically three groups of people : Gadget freaks, Users, Developers
-> -We have no room for developer discussions at the booth , maybe reserving a 
-> table in the restaurant is an idea. 
-> -Press release before fosdem is a good idea(if everybody is okay with I will 
-> issue it)
-> -We missed out on power outlets , jan(the very friendly men from belgium) 
-> bought a couple of them and donated them to the project , with belgian power  
-> plugs!!!(I was wondering who has them now)
-> -We had no banner or presentation wall 
-> -The openmoko was the big hit 
-> -Maximum three people behind the booth
-> -Someone needs to go to the supermarket to buy drinks (I did this last year 
-> and will do it again this year)
-> -Booth attendance needs to be arranged before the fair(I will edit the wiki)
-> -Selling shirts is a good idea (Do I need to arrange that ?)
-> -Donations at the booth are a good idea as well. 
-> -What will we bring this time ?
-> -Meeting on forehand in brussels ?
-> 
-> If you guys like it I can organise this 
-> 
-> Regards, 
-> 
-> Gerwin 
-> 
->  
-> 
+I'm running on a 400MHz P-III with 256MB of memory running RHEL 4.  The =
+OS is mandated by my IT guys.  I got everything down, finally got =
+everything built (well, so far), including git, svn, mtn, boost, =
+(1.33.1), bb, and a whole host of other packages.  My poor little box =
+has been compiling its little brains out.  I think I have everything in =
+place.
 
---------------ms040807040903060805010303
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+I read the tutorial and got stuck at the actual retrieval of the mtn =
+database.  I downloaded the mtn 0.36 OE snapshot, but when I try to do =
+the first "mtn pull" against monotone.openembedded.org, the connection =
+hangs.  It also hangs against the other servers that have been =
+mentioned.  I think this is due to our company's draconian firewall =
+policy.
+
+If I were to go to my IT guys and ask them (nicely) to help me out, what =
+do I need to tell them in terms of the port/protocol issues?  I'll need =
+to convince them that this is a safe proposition, but I'm sure exactly =
+what I'm asking for.
+
+Thanks in advance.  I *really* want to give this a try since WindRiver =
+quoted me $60k+ for a WRLinux distro/tools/support, just for the first =
+year.  Geez, I'm the *only* programmer at my site - there's no way my =
+boss will fork over that kind of money.  So, I may end up having to roll =
+my own.
+
+Wish me luck!
+
+---Jason
+
+------_=_NextPart_001_01C83313.A0D20EFF
+Content-Type: application/ms-tnef;
+	name="winmail.dat"
 Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
-OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
-65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
-X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
-tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
-szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
-nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
-U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
-ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
-HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
-dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
-RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
-rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
-6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
-Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MTEzMDAy
-MzUwMlowIwYJKoZIhvcNAQkEMRYEFIittZNVpxMA3CioraHGM6INhRhLMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
-qTANBgkqhkiG9w0BAQEFAASCAQAVOoGisYqjRIVVVrhjItp6fXmOLvZshDFWbVpsj8Lq03ah99PL
-GDkRnLLOrSb25CGYpqcjQQiGmKDsuGoZNBrV1R2PXULttW8OCtpeTStHRplC6s4ec4giRJOHVaeq
-ZlbdojnmJ+n7vrpQokxuwYjb4ImEjZ/tRULbsDmBmSXna1CQLnz4TInXpia6NXX4t4T+KAhV9b+3
-G9wCZ9oG3y4Tu1vOoq1ProFHS8Tx6Ze7wjcFkHXkOoYLQndzAfbDbxG5nhuJsNKYvpPV9yW/xUWk
-qehdkcORlMD5Al93d223+YWzgvuG6jY5TC3fJY2t4vHi4Enp8wBjrkQPkCQSgZ9sAAAAAAAA
+eJ8+IhMFAQaQCAAEAAAAAAABAAEAAQeQBgAIAAAA5AQAAAAAAADoAAEIgAcAGAAAAElQTS5NaWNy
+b3NvZnQgTWFpbC5Ob3RlADEIAQ2ABAACAAAAAgACAAEEgAEALQAAAEZpcmV3YWxsIGJsb2NraW5n
+IGFjY2VzcyB0byBtb25vdG9uZSBzZXJ2ZXI/ALkQAQWAAwAOAAAA1wcLAB0AFQApABEABABZAQEg
+gAMADgAAANcHCwAdABUAKQARAAQAWQEBCYABACEAAAA3RUE3QUIzOUJBN0U3NTRFQkU0ODA1QjEw
+M0RBNkQyMwBZBwEDkAYAdA0AADkAAAADACYAAAAAAAMANgAAAAAAQAA5AP8O0qATM8gBHgA9AAEA
+AAABAAAAAAAAAAIBRwABAAAANgAAAGM9VVM7YT0gO3A9UEFDRVNFVFRFUjtsPVVTU1lNTDAyLTA3
+MTEzMDA1NDExN1otMTA2MzQ4AAAAHgBJAAEAAAA7AAAAUmU6IFtvZV0gT0Uvc25hcHNob3RzIGlz
+IG5vdCByZWFsbHkgZm9yIGRpZmZlcmVudCBtdG4gdmVyLgAAQABOAICocTTBMsgBHgBaAAEAAAAy
+AAAAb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZwAAAAIB
+WwABAAAAgQAAAAAAAACBKx+kvqMQGZ1uAN0BD1QCAAAAAG9wZW5lbWJlZGRlZC1kZXZlbC1ib3Vu
+Y2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcAU01UUABvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNl
+c0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnAAAAAAIBXAABAAAANwAAAFNNVFA6T1BFTkVNQkVEREVE
+LURFVkVMLUJPVU5DRVNATElTVFMuT1BFTkVNQkVEREVELk9SRwAAHgBdAAEAAAAKAAAAS29lbiBL
+b29pAAAAAgFeAAEAAABBAAAAAAAAAIErH6S+oxAZnW4A3QEPVAIAAAAAS29lbiBLb29pAFNNVFAA
+ay5rb29pQHN0dWRlbnQudXR3ZW50ZS5ubAAAAAACAV8AAQAAAB8AAABTTVRQOksuS09PSUBTVFVE
+RU5ULlVUV0VOVEUuTkwAAB4AZgABAAAABQAAAFNNVFAAAAAAHgBnAAEAAAAyAAAAb3BlbmVtYmVk
+ZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZwAAAB4AaAABAAAABQAAAFNN
+VFAAAAAAHgBpAAEAAAAaAAAAay5rb29pQHN0dWRlbnQudXR3ZW50ZS5ubAAAAB4AcAABAAAALQAA
+AEZpcmV3YWxsIGJsb2NraW5nIGFjY2VzcyB0byBtb25vdG9uZSBzZXJ2ZXI/AAAAAAIBcQABAAAA
+GwAAAAHIMstkQ1wxiLhslUuuqjAh8169c38AEdB7vQAeAHQAAQAAABMAAABvcGVuZW1iZWRkZWQt
+ZGV2ZWwAAB4AGgwBAAAADgAAAFRpbGxlciwgSmFzb24AAAAeAB0OAQAAAC0AAABGaXJld2FsbCBi
+bG9ja2luZyBhY2Nlc3MgdG8gbW9ub3RvbmUgc2VydmVyPwAAAAACAQkQAQAAAGUFAABhBQAAcQcA
+AExaRnUSVrDrAwAKAHJjcGcxMjXiMgNDdGV4BUEBAwH3/wqAAqQD5AcTAoAP8wBQBFY/CFUHshEl
+DlEDAQIAY2jhCsBzZXQyBgAGwxEl9jMERhO3MBIsETMI7wn3tjsYHw4wNREiDGBjAFAzCwkBZDM2
+FlALpiBIBGVsF7AsIE9FIHECEGx4IQqiCoQKgEmwIGFwcANgANBoCYBkIHQfMCBsBAAFQGEaIAWg
+dQtQH5BvZiCKdwngawQgYWdvHrC0c2sLgGcesAbgdQVA+HJ1bgMAIaEdYSJABIEJEiB5ZwPwbi4g
+IFJUH4FvdgSQdx8wbJ5tIZIFoACACfBzdQQgNnchYB9hYQVAHqBzaKEIYGxkbicFQGUkIO0DoGUG
+0ArAayCAA6Alw+kfMGFkHxItC2ABAAOg7wqwH3AesCLwIAuAH9AoIb0mIGMKwB+QIEAf8UwLgHh1
+eCAG4CsAAhAFwG2qeR1SdwWwayOhVx0Box1AHqB0b28ncHkIYd0k02kEgR9BKDB2DeAfkIkpUm5v
+B+BJJ20fYMxyeSGSLPAgZxQgHVJ9IjUuHesvQSI2J5EgADQAMDBNSHogUC02STNgILBpKSEOMDZN
+PkIgggeABGAvgCInUkjsRUwywCOlTwXwBAArkDcpUSXgH0FiK7AroUlU8TAAdXlzI6EeoCEwJrNX
+L4AfcCGSZC8Abh1AZpsLgAdAbCuwOF1idQMQrQVAKCDALJJzIUBmCsBWKR1AC4BjCkBkIZJnezOw
+O8F2OXEOoDlxBuBvAx/QHUAoMS4zMy7yMTxBYmIdQClSIAAkUP8G8B+QJkAf0SCROGAfMAXAuQqw
+Y2shIAeQI6FNK7D+cC0ABcAfsAJAIGErIhPgzQQgYgnhIBFtcAMQIZL3M7AEIEImcgtxBCAh8TgD
+/zjiJ3AeoBPgJCA4iguAKPC/C2AugDD8IiAp0h9ydCIA/wWwBzEpQzhSH9Aa0CdwJeF/H3IA0Ekg
+SYEYIC9wCJB2/0mBIJEfcj2xOTAl4AGgIWB/R5A4EjlCF7AosR9UTIIw1T6QNh1ScznAcCYxPTH/
+OxAFQCRRA6As0TTBL+E5QK8fYzmgFAAFQCJMgnAmYPxsIiERRNIFQARgLvAs8PJuR5BvcAnwJyEJ
+gE4B+VOAcmcdQB9yJOFTYEsQvmknkRPgIaA38x/hbDvh31WjUncfckCUFBByJCElpf9GI0MTB4AC
+MFVhVDFFaDjh+wQgNnFkClAv0i1UQ4AAcPx5J1sxRMAk4QcwA6BRcc8H0DnRQcEfsGN5MPwgoP8z
+gS3xL9NRESFAN2g/RCFwux9iL1AoAwAugDnwKS/S/yRhKoAHgEUSHUAkUCXhUQH/HqBTYB9CUREd
+AWFURyEOsLxybUUBTCRB0AAgLx7hXyzwF5E2YSVAB5A/OBEn/12hY+Yk4S5gPIBJAWFyJcPjWtYg
+AHNhZmXhA2BB0P8AkFVST8QvMiVAKkEOwEsB/znxY0MvMiFlK2Ew+yPQAHC/IPFHIS5BAHBHgTgS
+KkiR3TnhKiVxAjAv02lGQVrTLyAAUJIAkGiSVwuAZFJzcQEFwHF1OGAfQWLBJJkcMGsrK1MgAFdS
+KsS3PMAf0ANgLyzxVmAvJUD3HtAXwR1AaiVQBUArYlE4rnkoIG2gI7BHCeB6LLF7L0IfgSoCIHAy
+HuEJwGE+bQeAdBFS4XHSDrAgLf8fYhggXHEu8CVxN0MG4AQR/wPwXaErYSdxcrIlwyGBH1DvNFJT
+UV4gI7BTHTEeoADA/yuwCfAfUCpxRiEvpQNgXaH/K6E5UTD7clAmMGKyCkBBEHUd2y2DEEohYAIg
+HeR9AYQAAAAAHgA1EAEAAAA9AAAAPEEwQUFDQjAxMUZGMDQ3NDQ5MjA3MUYzRTcyRkIxODhGOTU4
+QzVBQFVTU1lNTDAyLmFkLnNqbS5jb20+AAAAAB4AORABAAAAVgAAADwyMDA3MTEyOTE3MjEyMy5H
+QTI5NDYzQGJ1ZGRoYS50dy5vcGVubW9rby5jb20+IDw0NzRGMTgzNS42MDYwMDAyQHN0dWRlbnQu
+dXR3ZW50ZS5ubD4AAAAeAEcQAQAAAA8AAABtZXNzYWdlL3JmYzgyMgAACwDyEAEAAAAfAPMQAQAA
+AGYAAABGAGkAcgBlAHcAYQBsAGwAIABiAGwAbwBjAGsAaQBuAGcAIABhAGMAYwBlAHMAcwAgAHQA
+bwAgAG0AbwBuAG8AdABvAG4AZQAgAHMAZQByAHYAZQByACUAMwBGAC4ARQBNAEwAAAAAAAsA9hAA
+AAAAQAAHMAqFLqYSM8gBQAAIMKj63aATM8gBAwDeP69vAAADAPE/CQQAAB4A+D8BAAAADgAAAFRp
+bGxlciwgSmFzb24AAAACAfk/AQAAAFEAAAAAAAAA3KdAyMBCEBq0uQgAKy/hggEAAAAAAAAAL089
+UEFDRVNFVFRFUi9PVT1TVU5OWVZBTEUvQ049UkVDSVBJRU5UUy9DTj1USUxMRUowMQAAAAAeAPo/
+AQAAABUAAABTeXN0ZW0gQWRtaW5pc3RyYXRvcgAAAAACAfs/AQAAAB4AAAAAAAAA3KdAyMBCEBq0
+uQgAKy/hggEAAAAAAAAALgAAAAMA/T/kBAAAAwAZQAAAAAADABpAAAAAAAMAHUAAAAAAAwAeQAAA
+AAAeADBAAQAAAAkAAABUSUxMRUowMQAAAAAeADFAAQAAAAkAAABUSUxMRUowMQAAAAAeADJAAQAA
+ADIAAABvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnAAAA
+HgAzQAEAAAAaAAAAay5rb29pQHN0dWRlbnQudXR3ZW50ZS5ubAAAAB4AOEABAAAACQAAAFRJTExF
+SjAxAAAAAB4AOUABAAAAAgAAAC4AAAADAHZA/////wsAKQAAAAAACwAjAAAAAAADAAYQfUL+UQMA
+BxDQBAAAAwAQEAAAAAADABEQAAAAAB4ACBABAAAAZQAAAEhFTExPLE9FRk9MWElBUFBST0FDSEVE
+VEhFTElTVEFDT1VQTEVPRldFRUtTQUdPQVNLSU5HQUJPVVRSVU5OSU5HT0VVTkRFUkNZR1dJTlRI
+RU9WRVJXSEVMTUlOR0NPTlNFTlMAAAAAAgF/AAEAAAA9AAAAPEEwQUFDQjAxMUZGMDQ3NDQ5MjA3
+MUYzRTcyRkIxODhGOTU4QzVBQFVTU1lNTDAyLmFkLnNqbS5jb20+AAAAAAur
 
---------------ms040807040903060805010303--
+------_=_NextPart_001_01C83313.A0D20EFF--
