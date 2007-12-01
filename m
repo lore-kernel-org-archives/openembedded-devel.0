@@ -1,27 +1,24 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1IySwD-0002HI-BC
-	for openembedded-devel@openembedded.org; Sat, 01 Dec 2007 15:03:25 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 3072358026
-	for <openembedded-devel@openembedded.org>;
-	Sat,  1 Dec 2007 09:00:07 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Sat, 01 Dec 2007 09:00:07 -0500
-X-Sasl-enc: TtuEeYm7aAerYVklp2/eS5XzA/Bz7WHfbx/3UJrbSKqw 1196517606
-Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
-	[121.209.18.182])
-	by mail.messagingengine.com (Postfix) with ESMTP id D8FF3255D6
-	for <openembedded-devel@openembedded.org>;
-	Sat,  1 Dec 2007 09:00:05 -0500 (EST)
-Message-ID: <475168C5.4050208@whitby.id.au>
-Date: Sun, 02 Dec 2007 00:29:33 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	(envelope-from <cliff.brake@gmail.com>) id 1IyXIH-0003Lv-74
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 01 Dec 2007 19:42:25 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so4059254waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 01 Dec 2007 10:39:08 -0800 (PST)
+Received: by 10.115.95.1 with SMTP id x1mr1390199wal.1196534348783;
+	Sat, 01 Dec 2007 10:39:08 -0800 (PST)
+Received: by 10.114.254.11 with HTTP; Sat, 1 Dec 2007 10:39:08 -0800 (PST)
+Message-ID: <f96d234e0712011039k53078fa0h737f2cbc3bd65a6@mail.gmail.com>
+Date: Sat, 1 Dec 2007 13:39:08 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <A0AACB011FF0474492071F3E72FB188F958C5A@USSYML02.ad.sjm.com>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.95.5
-Subject: How to get certain kernel modules and packages included in the rootfs, but based on the kernel version
+References: <20071129172123.GA29463@buddha.tw.openmoko.com>
+	<474F1835.6060002@student.utwente.nl>
+	<A0AACB011FF0474492071F3E72FB188F958C5A@USSYML02.ad.sjm.com>
+Subject: Re: Firewall blocking access to monotone server?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,44 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2007 14:03:30 -0000
+X-List-Received-Date: Sat, 01 Dec 2007 18:42:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I need some advice on how to use MACHINE_ESSENTIAL-*
+On Nov 30, 2007 12:41 AM, Tiller, Jason <jtiller@sjm.com> wrote:
+> Hello, OE folx!
+>
+> I approached the list a couple of weeks ago asking about running OE under Cygwin.  The overwhelming consensus was that I shouldn't even embark on that headache-laden path and instead scare up a Linux box for my OE work.  Well, I took your considered advice and now I'm trying to get OE running.
+>
+> I'm running on a 400MHz P-III with 256MB of memory running RHEL 4.  The OS is mandated by my IT guys.  I got everything down, finally got everything built (well, so far), including git, svn, mtn, boost, (1.33.1), bb, and a whole host of other packages.  My poor little box has been compiling its little brains out.  I think I have everything in place.
+>
+> I read the tutorial and got stuck at the actual retrieval of the mtn database.  I downloaded the mtn 0.36 OE snapshot, but when I try to do the first "mtn pull" against monotone.openembedded.org, the connection hangs.  It also hangs against the other servers that have been mentioned.  I think this is due to our company's draconian firewall policy.
 
-I'm testing an Angstrom minimal image by switching between the
-known-good-in-slugos 2.6.21.6 linux-ixp4xx kernel (where we don't yet
-have all the modules and firmware included in the Angstrom minimal image
-needed to bring up the network successfully), and the to-be-tested
-2.6.23.8 linux-ixp4xx kernel (which has a problem with MAC addresses and
-DHCP on initial boot).
+Another option would be to set up a build system outside your
+organization and access it using SSH.  You can do all your builds
+externally, and use scp to copy the images back to wherever you are
+working.  For example, if you have high speed internet access at your
+home, it is trivial to put a Linux box on the internet and access it
+remotely.  This will allow how to set it up however you want.
 
-The set of kernel modules and additional packages required for the
-ixp4xx machine differs depending on the kernel version selected.
+I often do this when I'm working on-site with customers and am doing
+builds on my workstation back at the office.
 
-For the 2.6.21.6 kernel, I need to make sure a particular set of kernel
-modules are in the minimal image rootfs so that networking will come up
-on boot.  These modules cannot be compiled into the kernel.
+Cliff
 
-For the 2.6.23.8 kernel, due to a change in the open source ethernet
-drivers, I need to make sure a completely different set of kernel
-modules are in the minimal image rootfs.
-
-I had thought of doing this in ixp4xx.conf, using MACHINE_ESSENTIAL_*.
-The trouble is that I don't know how to make that conditional on which
-kernel is being used in the image.
-
-I then tried putting specific MACHINE_ESSENTIAL_* stuff in each of the
-two different kernel recipes, but later realised that that's not going
-to work at all (it needs to be in a .conf file for task-boot to see it).
-
-Does anyone have any other ideas on how I do achieve this?
-
-Basically, I need a way for the selection of the kernel version to
-affect the set of packages and kernel modules which are guaranteed to be
-included in a minimal image.
-
--- Rod
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
