@@ -1,27 +1,27 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1IyS0b-0005Em-8O
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Dec 2007 14:03:51 +0100
-Received: (qmail invoked by alias); 01 Dec 2007 13:00:35 -0000
-Received: from e178068085.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.68.85]
-	by mail.gmx.net (mp003) with SMTP; 01 Dec 2007 14:00:35 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/62rIkrun6urMTkn5akDwKcjxpgwh8ZOvdw21Rlf
-	i0Fm4ABKrDZIIb
-Message-ID: <47515AED.1000900@gmx.net>
-Date: Sat, 01 Dec 2007 14:00:29 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <rod@whitby.id.au>) id 1IySwD-0002HI-BC
+	for openembedded-devel@openembedded.org; Sat, 01 Dec 2007 15:03:25 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 3072358026
+	for <openembedded-devel@openembedded.org>;
+	Sat,  1 Dec 2007 09:00:07 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Sat, 01 Dec 2007 09:00:07 -0500
+X-Sasl-enc: TtuEeYm7aAerYVklp2/eS5XzA/Bz7WHfbx/3UJrbSKqw 1196517606
+Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
+	[121.209.18.182])
+	by mail.messagingengine.com (Postfix) with ESMTP id D8FF3255D6
+	for <openembedded-devel@openembedded.org>;
+	Sat,  1 Dec 2007 09:00:05 -0500 (EST)
+Message-ID: <475168C5.4050208@whitby.id.au>
+Date: Sun, 02 Dec 2007 00:29:33 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20071129172123.GA29463@buddha.tw.openmoko.com>	<474F1835.6060002@student.utwente.nl>
-	<A0AACB011FF0474492071F3E72FB188F958C5A@USSYML02.ad.sjm.com>
-In-Reply-To: <A0AACB011FF0474492071F3E72FB188F958C5A@USSYML02.ad.sjm.com>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: Re: Firewall blocking access to monotone server?
+To: openembedded-devel <openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.5
+Subject: How to get certain kernel modules and packages included in the rootfs, but based on the kernel version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,98 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2007 13:03:52 -0000
-X-Groupsio-MsgNum: 3508
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig34BAE33DD75A8AAD01216013"
-
---------------enig34BAE33DD75A8AAD01216013
+X-List-Received-Date: Sat, 01 Dec 2007 14:03:30 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi,
-regarding your firewall issue. Once upon a time port 4691 was blocked on
-my internet connection, too (I am connected through a community-operated
-public wireless meshnetwork called Freifunk).
+I need some advice on how to use MACHINE_ESSENTIAL-*
 
-Thanksfully I have SSH access to a box ('peking') at my university.
-First I created a SSH tunnel:
+I'm testing an Angstrom minimal image by switching between the
+known-good-in-slugos 2.6.21.6 linux-ixp4xx kernel (where we don't yet
+have all the modules and firmware included in the Angstrom minimal image
+needed to bring up the network successfully), and the to-be-tested
+2.6.23.8 linux-ixp4xx kernel (which has a problem with MAC addresses and
+DHCP on initial boot).
 
-   ssh -L4691:org.openembedded.dev:4691 peking -N
+The set of kernel modules and additional packages required for the
+ixp4xx machine differs depending on the kernel version selected.
 
-and then led all traffic go to through it:
+For the 2.6.21.6 kernel, I need to make sure a particular set of kernel
+modules are in the minimal image rootfs so that networking will come up
+on boot.  These modules cannot be compiled into the kernel.
 
-  mtn --db OE.mtn pull localhost org.openembedded.dev
+For the 2.6.23.8 kernel, due to a change in the open source ethernet
+drivers, I need to make sure a completely different set of kernel
+modules are in the minimal image rootfs.
 
-Worked like a charm. :)
+I had thought of doing this in ixp4xx.conf, using MACHINE_ESSENTIAL_*.
+The trouble is that I don't know how to make that conditional on which
+kernel is being used in the image.
 
-If outgoing ssh is blocked by the companies' firewall you should ask
-them to open it though.
+I then tried putting specific MACHINE_ESSENTIAL_* stuff in each of the
+two different kernel recipes, but later realised that that's not going
+to work at all (it needs to be in a .conf file for task-boot to see it).
 
-Regards
-Robert
+Does anyone have any other ideas on how I do achieve this?
 
+Basically, I need a way for the selection of the kernel version to
+affect the set of packages and kernel modules which are guaranteed to be
+included in a minimal image.
 
-Tiller, Jason schrieb:
-> Hello, OE folx!
->=20
-> I approached the list a couple of weeks ago asking about running OE und=
-er Cygwin.  The overwhelming consensus was that I shouldn't even embark o=
-n that headache-laden path and instead scare up a Linux box for my OE wor=
-k.  Well, I took your considered advice and now I'm trying to get OE runn=
-ing.
->=20
-> I'm running on a 400MHz P-III with 256MB of memory running RHEL 4.  The=
- OS is mandated by my IT guys.  I got everything down, finally got everyt=
-hing built (well, so far), including git, svn, mtn, boost, (1.33.1), bb, =
-and a whole host of other packages.  My poor little box has been compilin=
-g its little brains out.  I think I have everything in place.
->=20
-> I read the tutorial and got stuck at the actual retrieval of the mtn da=
-tabase.  I downloaded the mtn 0.36 OE snapshot, but when I try to do the =
-first "mtn pull" against monotone.openembedded.org, the connection hangs.=
-  It also hangs against the other servers that have been mentioned.  I th=
-ink this is due to our company's draconian firewall policy.
->=20
-> If I were to go to my IT guys and ask them (nicely) to help me out, wha=
-t do I need to tell them in terms of the port/protocol issues?  I'll need=
- to convince them that this is a safe proposition, but I'm sure exactly w=
-hat I'm asking for.
->=20
-> Thanks in advance.  I *really* want to give this a try since WindRiver =
-quoted me $60k+ for a WRLinux distro/tools/support, just for the first ye=
-ar.  Geez, I'm the *only* programmer at my site - there's no way my boss =
-will fork over that kind of money.  So, I may end up having to roll my ow=
-n.
->=20
-> Wish me luck!
->=20
-> ---Jason
->=20
->=20
-> -----------------------------------------------------------------------=
--
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- Rod
 
 
-
---------------enig34BAE33DD75A8AAD01216013
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHUVrxG9cfwmwwEtoRCAUTAJ90Tw3C2WvvJGlw+SOOMql39nUOzQCfScJ7
-8y3xE8YVfwYsh3RAmI92RKY=
-=ETOb
------END PGP SIGNATURE-----
-
---------------enig34BAE33DD75A8AAD01216013--
