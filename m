@@ -1,33 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [66.249.92.173] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1IysZd-0006P4-Nf
-	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 18:25:45 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB2HMNQE002767;
-	Sun, 2 Dec 2007 17:22:23 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 02742-01; Sun,  2 Dec 2007 17:22:16 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB2HMC0O002746
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Sun, 2 Dec 2007 17:22:12 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <4752D0C5.5080001@student.utwente.nl>
-References: <475207FB.8020405@whitby.id.au>	<47522D46.1050309@whitby.id.au>
-	<475269FD.60409@student.utwente.nl>
-	<1196595074.6648.11.camel@localhost.localdomain>
-	<4752B053.1040909@student.utwente.nl>
-	<4752D0C5.5080001@student.utwente.nl>
-Date: Sun, 02 Dec 2007 17:22:12 +0000
-Message-Id: <1196616132.6648.20.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: angstrom-distro-devel@linuxtogo.org
+	(envelope-from <pmiscml@gmail.com>) id 1IytP8-0007NH-Nt
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 02 Dec 2007 19:18:58 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so1298051ugd
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Dec 2007 10:15:37 -0800 (PST)
+Received: by 10.66.243.13 with SMTP id q13mr987680ugh.1196619336914;
+	Sun, 02 Dec 2007 10:15:36 -0800 (PST)
+Received: from ?10.0.0.6? ( [85.99.157.98])
+	by mx.google.com with ESMTPS id t35sm6606095uge.2007.12.02.10.15.35
+	(version=SSLv3 cipher=OTHER); Sun, 02 Dec 2007 10:15:36 -0800 (PST)
+Date: Sun, 2 Dec 2007 20:17:43 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <704452397.20071202201743@gmail.com>
+To: Rod Whitby <rod@whitby.id.au>
+In-Reply-To: <475207FB.8020405@whitby.id.au>
+References: <475207FB.8020405@whitby.id.au>
+MIME-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	angstrom-distro-devel@linuxtogo.org
 Subject: Re: [Angstrom-devel] RFC: Add ipkg to minimal image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,51 +36,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2007 17:25:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 02 Dec 2007 18:18:58 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2007-12-02 at 16:35 +0100, Koen Kooi wrote:
-> To make it a bit more clear:
-> 
-> There are 3 seperate items being discusses here:
-> 
->  1. how to stop a packagemanager getting into an image
->  2. selecting which packageformat the build should use
->  3. selecting which packagemanager handles which packageformat (ipkg can
-> handle .debs for example)
+Hello Rod,
 
-An image built with rootfs_deb needs to dpkg+apt, an image built with
-rootfs_ipk needs to use ipkg. The two will not currently work the other
-way around.
+Sunday, December 2, 2007, 3:18:51 AM, you wrote:
 
-Until that is addressed, points 2 and 3 are the same thing.
+> I just realised that minimal-image.bb doesn't include ipkg, whereas the
+> first image which does include ipkg (console-image) includes a whole lot
+> of other stuff which could be installed using ipkg after first boot and
+> network access, and which make the image too big for a machine with
+> limited flash space (like an NSLU2).
 
-> ANGSTROM_PKG_FORMAT handles 2. and 3., but not 1. (yet)
+> Is there a reason why minimal-image does not include ipkg?  What exactly
+> is the definition of what should be in minimal-image which excludes the
+> ability to install further packages?
 
-The setting of IMG_PKGTYPE used or the inherit order of the package
-classes determine this. Do we need the angstrom specific variable?
+  minimal-image is apparently something that 1) can boot, hence
+task-boot, and 2) show signs of life (in no-nonsence and secure
+manner), hence ${DISTRO_SSH_DAEMON}.
 
-> I think having a flag indicating *which* packagemanager gets is (like
-> Rods patch does) is a good thing, but a flag toggling the presence of
-> the packagemanager wouldn't be, since you can't distinguish the
-> resulting images from each other.
-> I think creating e.g. <foo>-nopm.bb recipes that do 'require <foo>.bb ;
-> PACKAGE_MANAGER = " "' would be the least confusing option.
+> Does anyone object to me adding ipkg support to minimal-image?
 
-I agree that specific images should have specific feature sets. This
-comes back to my point about the machine=nslu2 needing to make the
-console image usable.
+  While your work on getting useful small Angstrom images are of
+course great, I think definition of minimal image as above as perfect
+as it can get, so it would be better to create separate image. That
+would lead to proliferation, as we already have
+minimal-image-with-mtd-utils, but well, forking stuff for copies to
+undergo evolution is apparently better than hacking axiom for each
+occasion. Just my 2 cents.
 
-Has anyone looked at how Poky does its IMAGE_FEATURES magic (see
-poky-image.bbclass)? Adding package-manager as an IMAGE_FEATURE style
-option and not as a DISTRO_FEATURE as I previously suggested could
-perhaps be a way forward...
+> FYI, minimal-image.rootfs.jffs2 for ixp4xx is 3.8M whereas
+> console-image.rootfs.jffs2 for ixp4xx is 7.1M
 
-Cheers,
+> -- Rod
 
-Richard
 
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
