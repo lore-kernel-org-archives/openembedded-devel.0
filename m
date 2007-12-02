@@ -1,25 +1,29 @@
-Received: from [64.233.182.184] (helo=nf-out-0910.google.com)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1Iyua1-0000gl-14
+	(envelope-from <rod@whitby.id.au>) id 1Iyvrm-0006RY-1G
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Dec 2007 20:34:17 +0100
-Received: by nf-out-0910.google.com with SMTP id h3so2280856nfh
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Dec 2007 11:30:55 -0800 (PST)
-Received: by 10.78.123.4 with SMTP id v4mr2245762huc.1196623854664;
-	Sun, 02 Dec 2007 11:30:54 -0800 (PST)
-Received: from ?10.0.0.6? ( [85.99.157.98])
-	by mx.google.com with ESMTPS id 35sm3822630nfu.2007.12.02.11.30.53
-	(version=SSLv3 cipher=OTHER); Sun, 02 Dec 2007 11:30:54 -0800 (PST)
-Date: Sun, 2 Dec 2007 21:32:59 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <32693366.20071202213259@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	Sun, 02 Dec 2007 21:56:42 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 4E78C5AC6B;
+	Sun,  2 Dec 2007 15:53:20 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Sun, 02 Dec 2007 15:53:20 -0500
+X-Sasl-enc: /mIfVU8tfwfPLy25h9FX6XU9gmRc3eNpFU/hmyNubPwK 1196628799
+Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
+	[121.209.18.182])
+	by mail.messagingengine.com (Postfix) with ESMTP id 4CA80262ED;
+	Sun,  2 Dec 2007 15:53:19 -0500 (EST)
+Message-ID: <47531B1B.9000700@whitby.id.au>
+Date: Mon, 03 Dec 2007 07:22:43 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: [ANN, RFC] dropbear-early
+To: Paul Sokolovsky <pmiscml@gmail.com>
+References: <475207FB.8020405@whitby.id.au>
+	<704452397.20071202201743@gmail.com>
+In-Reply-To: <704452397.20071202201743@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [Angstrom-devel] RFC: Add ipkg to minimal image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,25 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2007 19:34:17 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 02 Dec 2007 20:56:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello openembedded-devel,
+Paul Sokolovsky wrote:
+>   While your work on getting useful small Angstrom images are of
+> course great, I think definition of minimal image as above as perfect
+> as it can get, so it would be better to create separate image. That
+> would lead to proliferation, as we already have
+> minimal-image-with-mtd-utils, but well, forking stuff for copies to
+> undergo evolution is apparently better than hacking axiom for each
+> occasion. Just my 2 cents.
 
-  I've recently finally crafted something I wanted for long time - a
-package with script which allows to start dropbear ASAP after boot, if
-user chooses so.
+That's why I'm asking.  The axiom is not documented anywhere
+(there should be a comment at the top of each image file saying
+what the definition and intent of the image is), so one has to
+first determine whether a fork is required, or whether the changes
+fit in the definition of the intent of the image.
 
-  So, I'd like to welcome everyone to use it for debugging their
-distro, and for Angstrom, I'd like to RFC adding it to DEBUG_APPS, as
-it offers great help debugging hangs and hiccups during boot. What it
-is installs is below 1k.
+By the conflicting replies here, it is clear that the intent of
+minimal-image.bb is not well defined.  Who is the maintainer of
+that image, and could that person please document the intent at
+the top of the minimal-image.bb file?
 
+I do agree with those who need a *really* minimal image, and I
+poked CoreDump to free up the essential-image.bb namespace as a
+candidate for the name of that type of image, in case the
+not-really-that-minimal definition of minimal-image prevails.
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
-
+-- Rod
 
 
