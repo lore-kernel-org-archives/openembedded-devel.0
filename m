@@ -1,22 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1Iytsc-0003lF-VQ
-	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 19:49:27 +0100
-Received: (qmail 20317 invoked by uid 813007); 2 Dec 2007 18:46:03 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 2 Dec 2007 18:46:03 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 2 Dec 2007 19:45:56 +0100
-User-Agent: KMail/1.9.7
-References: <475207FB.8020405@whitby.id.au> <475269FD.60409@student.utwente.nl>
-	<1196595074.6648.11.camel@localhost.localdomain>
-In-Reply-To: <1196595074.6648.11.camel@localhost.localdomain>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1IyuJ2-0004Xt-IN
+	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 20:16:44 +0100
+Received: from Powerbook-2.local (vpn006010.vpn.utwente.nl [130.89.6.10])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lB2JDIiq018741; Sun, 2 Dec 2007 20:13:18 +0100
+Message-ID: <475303CD.2080401@student.utwente.nl>
+Date: Sun, 02 Dec 2007 20:13:17 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Message-Id: <200712021945.57464.openembedded@haerwu.biz>
-Cc: angstrom-distro-devel@linuxtogo.org
+To: angstrom-distro-devel@linuxtogo.org
+References: <475207FB.8020405@whitby.id.au>	<47522D46.1050309@whitby.id.au>	<475269FD.60409@student.utwente.nl>	<1196595074.6648.11.camel@localhost.localdomain>	<4752B053.1040909@student.utwente.nl>	<4752D0C5.5080001@student.utwente.nl>
+	<1196616132.6648.20.camel@localhost.localdomain>
+In-Reply-To: <1196616132.6648.20.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Cc: openembedded-devel@openembedded.org
 Subject: Re: [Angstrom-devel] RFC: Add ipkg to minimal image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,74 +35,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2007 18:49:27 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sun, 02 Dec 2007 19:16:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia niedziela, 2 grudnia 2007, Richard Purdie napisa=C5=82:
-> On Sun, 2007-12-02 at 09:17 +0100, Koen Kooi wrote:
-> > Rod Whitby schreef:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> > > RFC #1:
-> > >> Is there a reason why minimal-image does not include ipkg?  What
-> > >> exactly is the definition of what should be in minimal-image which
-> > >> excludes the ability to install further packages?
-> >
-> > Marcin and I had a discussion about that, but I can't remember the
-> > outcome. So "I have no strong opinions on that".
->
-> I think minimal was really intended for people trying to boot systems
-> for the first time and really is 'the bare essentials to boot'. Having
-> said that I appreciate the problem of creating an image cut down enough
-> for the NSLU2.
+Richard Purdie schreef:
+> On Sun, 2007-12-02 at 16:35 +0100, Koen Kooi wrote:
+>> To make it a bit more clear:
+>>
+>> There are 3 seperate items being discusses here:
+>>
+>>  1. how to stop a packagemanager getting into an image
+>>  2. selecting which packageformat the build should use
+>>  3. selecting which packagemanager handles which packageformat (ipkg can
+>> handle .debs for example)
+> 
+> An image built with rootfs_deb needs to dpkg+apt, an image built with
+> rootfs_ipk needs to use ipkg. The two will not currently work the other
+> way around.
 
-minimal-image was meant as something really small which can be used to=20
-just boot device into something usable. For different machines 'usable'=20
-has different meaning and this should be covered by task-boot or=20
-MACHINE_ESSENTIAL_ variables.=20
+You can use rootfs_ipk to build a rootfs from .debs. ipkg only cares
+about the files being an ar-wrapped-tarball, not the suffix. It requires
+a small changes to the bbclass, but it is possible.
 
-Zaurus palmtops are usable with just busybox + keymaps, for devboards it=20
-usually mean busybox (getty on serial port is automatically started), for=20
-nslu2 it means Ethernet + ssh/telnet daemon.
+regards,
 
-I see no problem with creating 'minimal-with-ipkg' image under better=20
-name. Let 'minimal-image' be really minimal - example usage is devboard=20
-with problems with NAND accessing and MMC card - all what is available is=20
-u-boot with ethernet so booting over tftp with kernel and initrd (or=20
-kernel with initramfs) makes it working.
+Koen
 
-> Ideally, MACHINE=3Dnslu2 should make the console image become small
-> enough to be usable for the device even if that different compared to
-> the minimal image is just the package manager due to size
-> constraints...
-
-NSLU2 is example of device which can do really many things but rootfs=20
-space is limited. When it comes to =C3=85ngstr=C3=B6m defaults it means bt,=
- wifi,=20
-usb host so 'task-base' starts to depend on too many stuff to be usable=20
-with internal flash. This device really needs special image for internal=20
-rootfs space.
-
-> On a related but different note, the presence of a package manager or
-> not sounds like an DISTRO_FEATURE. Perhaps we should add
-> "package-manager" as a DISTRO_FEATURE and then use this to decide
-> whether a package manager should be installed into an image. The
-> package manager to install should determined by the class building the
-> image so you end up with a package manager appropriate to the image -
-> ipkg or dpkg+apt currently.
-
-This sounds good - no use for package manager on systems which are=20
-upgraded only by reflashing (due to many reasons).
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-           Q:      What's a light-year?
-           A:      One-third less calories than a regular year.
+> Until that is addressed, points 2 and 3 are the same thing.
+> 
+>> ANGSTROM_PKG_FORMAT handles 2. and 3., but not 1. (yet)
+> 
+> The setting of IMG_PKGTYPE used or the inherit order of the package
+> classes determine this. Do we need the angstrom specific variable?
+> 
+>> I think having a flag indicating *which* packagemanager gets is (like
+>> Rods patch does) is a good thing, but a flag toggling the presence of
+>> the packagemanager wouldn't be, since you can't distinguish the
+>> resulting images from each other.
+>> I think creating e.g. <foo>-nopm.bb recipes that do 'require <foo>.bb ;
+>> PACKAGE_MANAGER = " "' would be the least confusing option.
+> 
+> I agree that specific images should have specific feature sets. This
+> comes back to my point about the machine=nslu2 needing to make the
+> console image usable.
+> 
+> Has anyone looked at how Poky does its IMAGE_FEATURES magic (see
+> poky-image.bbclass)? Adding package-manager as an IMAGE_FEATURE style
+> option and not as a DISTRO_FEATURE as I previously suggested could
+> perhaps be a way forward...
+> 
+> Cheers,
+> 
+> Richard
+> 
+> 
+> 
+> _______________________________________________
+> Angstrom-distro-devel mailing list
+> Angstrom-distro-devel@linuxtogo.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/angstrom-distro-devel
+> 
 
 
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHUwPNMkyGM64RGpERArb0AJ49JilRuw6f/Tj2VZ0VAJ5K52XWMACfdqKe
+glVjhPyQNEeBOPy7MjHFDIM=
+=r8/t
+-----END PGP SIGNATURE-----
 
 
