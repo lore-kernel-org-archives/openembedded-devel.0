@@ -1,28 +1,20 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IyquQ-00046L-O6
-	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 16:39:06 +0100
-Received: from Powerbook-2.local (vpn006010.vpn.utwente.nl [130.89.6.10])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lB2FZXnk025761; Sun, 2 Dec 2007 16:35:43 +0100
-Message-ID: <4752D0C5.5080001@student.utwente.nl>
-Date: Sun, 02 Dec 2007 16:35:33 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <philip@balister.org>) id 1IysG8-0001WL-O4
+	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 18:05:36 +0100
+Received: (qmail 4509 invoked by uid 1003); 2 Dec 2007 17:02:38 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 2 Dec 2007 17:02:38 -0000
+Message-ID: <4752E4ED.1080101@balister.org>
+Date: Sun, 02 Dec 2007 12:01:33 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.9 (X11/20071115)
 MIME-Version: 1.0
-To: angstrom-distro-devel@linuxtogo.org
-References: <475207FB.8020405@whitby.id.au>	<47522D46.1050309@whitby.id.au>	<475269FD.60409@student.utwente.nl>	<1196595074.6648.11.camel@localhost.localdomain>
-	<4752B053.1040909@student.utwente.nl>
-In-Reply-To: <4752B053.1040909@student.utwente.nl>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Cc: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-Subject: Re: [Angstrom-devel] RFC: Add ipkg to minimal image
+To: openembedded-devel@openembedded.org
+References: <5e088bd90712020706x4dae63d5p6417a2ed82e23a72@mail.gmail.com>
+In-Reply-To: <5e088bd90712020706x4dae63d5p6417a2ed82e23a72@mail.gmail.com>
+Subject: Re: gtk+-directfb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,92 +28,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2007 15:39:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 02 Dec 2007 17:05:37 -0000
+X-Groupsio-MsgNum: 3524
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms090807090303070509090301"
+
+--------------ms090807090303070509090301
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Steve also had to patch directfb to get the directfb-examples to build. 
+I have opened http://bugs.openembedded.org/show_bug.cgi?id=3415 with the 
+proposed fix. I do not do much gui work with OE, so I would like some 
+feedback before committing this to .dev.
 
-Koen Kooi schreef:
-> Richard Purdie schreef:
->> On Sun, 2007-12-02 at 09:17 +0100, Koen Kooi wrote:
->>> Rod Whitby schreef:
->>>> Rod Whitby wrote:
->>>>> I just realised that minimal-image.bb doesn't include ipkg, whereas the
->>>>> first image which does include ipkg (console-image) includes a whole lot
->>>>> of other stuff which could be installed using ipkg after first boot and
->>>>> network access, and which make the image too big for a machine with
->>>>> limited flash space (like an NSLU2).
->>>> RFC #1:
->>>>> Is there a reason why minimal-image does not include ipkg?  What exactly
->>>>> is the definition of what should be in minimal-image which excludes the
->>>>> ability to install further packages?
->>> Marcin and I had a discussion about that, but I can't remember the
->>> outcome. So "I have no strong opinions on that".
->> I think minimal was really intended for people trying to boot systems
->> for the first time and really is 'the bare essentials to boot'. Having
->> said that I appreciate the problem of creating an image cut down enough
->> for the NSLU2. 
+Philip
+
+Steve Sakoman wrote:
+> I have an interest in building gtk+-directfb for the gumstix platform.
 > 
->> Ideally, MACHINE=nslu2 should make the console image become small enough
->> to be usable for the device even if that different compared to the
->> minimal image is just the package manager due to size constraints...
+> So, of course, I gave it a quick try and it failed because of a
+> dependency on pango-directfb -- which doesn't exist.
 > 
->> On a related but different note, the presence of a package manager or
->> not sounds like an DISTRO_FEATURE. Perhaps we should add
->> "package-manager" as a DISTRO_FEATURE and then use this to decide
->> whether a package manager should be installed into an image. The package
->> manager to install should determined by the class building the image so
->> you end up with a package manager appropriate to the image - ipkg or
->> dpkg+apt currently.
+> In checking some of the prior traffic on the list, I see that
+> pango-directfb has been removed due to its causing build breakage.
 > 
-> For angstrom it's an IMAGE_FEATURE, since some images need it (e.g.
-> console-image) and others don't (e.g. initramfs).
-> Right not you can set ANGSTROM_PKG_FORMAT to 'deb' or 'ipkg' to create
-> images using .ipk or .deb packages, with no rebuild needed, changing it
-> halfway during a build and restarting bitbake "Just Works(TM)". Any
-> changes to how a packagemanager is installed must keep that
-> 'automagical' feature. The only thing missing in Rods patch is to set
-> the packagemanager var in
-> conf/distro/include/angstrom-package-{deb,ipkg}.inc.
+> Has anyone come us with an acceptable approach to supporting a
+> gtk+-directfb build since then?
+> 
+> Steve
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
-To make it a bit more clear:
+--------------ms090807090303070509090301
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-There are 3 seperate items being discusses here:
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
+OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
+65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
+X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
+tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
+szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
+nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
+U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
+ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
+HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
+dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
+RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
+rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
+6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
+Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MTIwMjE3
+MDEzM1owIwYJKoZIhvcNAQkEMRYEFPF/a/yBgEuzllqj7QTTPul4/WslMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
+qTANBgkqhkiG9w0BAQEFAASCAQC6npY9QN8DLp7SYn5iAZ1h5z95b8T6DVfBuAH6VcbokA2JEMi8
+ujDCFCItH5/HaLxYV1BM66X+OYBhpGJlbpzKzD+6yFpqDuiEiqhrfYyivaYW4SsO02l0YPmuHyJr
+ueEGe7/RZo0xENjB+zvExiCSc1H0dOMCWVlpTyWVg/QrppZ3OF8cCkr/ujoy6gOupOJ/DDOjwMl2
+/h6yxp0jqW4E36ISChQiQUZyUbp4hMB6qUMHnc29ehh5lDCRHZiI7mTCUEu5MhYG4UEFOA2HLy6w
+aAuAWI7Z4DUqtAic9sncDgFkj2auzXyxM1izTGWrwHgpTjky/S5EQ9oXHGWor8INAAAAAAAA
 
- 1. how to stop a packagemanager getting into an image
- 2. selecting which packageformat the build should use
- 3. selecting which packagemanager handles which packageformat (ipkg can
-handle .debs for example)
-
-ANGSTROM_PKG_FORMAT handles 2. and 3., but not 1. (yet)
-
-I think having a flag indicating *which* packagemanager gets is (like
-Rods patch does) is a good thing, but a flag toggling the presence of
-the packagemanager wouldn't be, since you can't distinguish the
-resulting images from each other.
-I think creating e.g. <foo>-nopm.bb recipes that do 'require <foo>.bb ;
-PACKAGE_MANAGER = " "' would be the least confusing option.
-
-I hope this clears things up a bit.
-
-regards,
-
-Koen
-
-
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHUtDFMkyGM64RGpERAq9xAJ9XRjlHv8LPiLcdnARLUUBXCc2t2ACfXM03
-R/javXrBLWmVDem0N/t7DT8=
-=qnhS
------END PGP SIGNATURE-----
-
-
+--------------ms090807090303070509090301--
