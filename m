@@ -1,27 +1,28 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1IyuJ2-0004Xt-IN
-	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 20:16:44 +0100
-Received: from Powerbook-2.local (vpn006010.vpn.utwente.nl [130.89.6.10])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lB2JDIiq018741; Sun, 2 Dec 2007 20:13:18 +0100
-Message-ID: <475303CD.2080401@student.utwente.nl>
-Date: Sun, 02 Dec 2007 20:13:17 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <pmiscml@gmail.com>) id 1IyuUp-0000cG-6S
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 02 Dec 2007 20:28:55 +0100
+Received: by nf-out-0910.google.com with SMTP id h3so2279966nfh
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Dec 2007 11:25:33 -0800 (PST)
+Received: by 10.78.201.2 with SMTP id y2mr831003huf.1196623533184;
+	Sun, 02 Dec 2007 11:25:33 -0800 (PST)
+Received: from ?10.0.0.6? ( [85.99.157.98])
+	by mx.google.com with ESMTPS id h7sm10992646nfh.2007.12.02.11.25.28
+	(version=SSLv3 cipher=OTHER); Sun, 02 Dec 2007 11:25:29 -0800 (PST)
+Date: Sun, 2 Dec 2007 21:27:34 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <525897579.20071202212734@gmail.com>
+To: Rod Whitby <rod@whitby.id.au>
+In-Reply-To: <475283BC.2030903@whitby.id.au>
+References: <47520EA7.8030507@whitby.id.au> <47526A83.30109@student.utwente.nl>
+	<475283BC.2030903@whitby.id.au>
 MIME-Version: 1.0
-To: angstrom-distro-devel@linuxtogo.org
-References: <475207FB.8020405@whitby.id.au>	<47522D46.1050309@whitby.id.au>	<475269FD.60409@student.utwente.nl>	<1196595074.6648.11.camel@localhost.localdomain>	<4752B053.1040909@student.utwente.nl>	<4752D0C5.5080001@student.utwente.nl>
-	<1196616132.6648.20.camel@localhost.localdomain>
-In-Reply-To: <1196616132.6648.20.camel@localhost.localdomain>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [Angstrom-devel] RFC: Add ipkg to minimal image
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: RFC: Inclusion of bootloader utilities in task-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,82 +36,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2007 19:16:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 02 Dec 2007 19:28:55 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Rod,
 
-Richard Purdie schreef:
-> On Sun, 2007-12-02 at 16:35 +0100, Koen Kooi wrote:
->> To make it a bit more clear:
->>
->> There are 3 seperate items being discusses here:
->>
->>  1. how to stop a packagemanager getting into an image
->>  2. selecting which packageformat the build should use
->>  3. selecting which packagemanager handles which packageformat (ipkg can
->> handle .debs for example)
-> 
-> An image built with rootfs_deb needs to dpkg+apt, an image built with
-> rootfs_ipk needs to use ipkg. The two will not currently work the other
-> way around.
+Sunday, December 2, 2007, 12:06:52 PM, you wrote:
 
-You can use rootfs_ipk to build a rootfs from .debs. ipkg only cares
-about the files being an ar-wrapped-tarball, not the suffix. It requires
-a small changes to the bbclass, but it is possible.
+> Koen Kooi wrote:
+>> Rod Whitby schreef:
+>>> Some MACHINE configurations have FEATURES defined for 'uboot' and
+>>> 'redboot'.  It looks like these are intended to identify the bootloader
+>>> used on that machine.
+>> 
+>>> These turn on additions to RDEPENDS in task-base for some bootloader
+>>> utilities.
+>> 
+>>> RFC #2: Shouldn't these be RRECOMMENDS unless they are absolutely
+>>> critical, so that you can ipkg remove them if you don't want them.
+>> 
+>> I'm not familiar with the finer points of bootloaders, so I'm not really
+>> qualified to respond to this, but if the utils are _critical_, they
+>> should be RDEPENDS in task-boot, not task base.
 
-regards,
+> Agreed.  In the case of redboot and apex, they are not that critical.
 
-Koen
+> The redboot util 'fis' is used to reflash fis directory partitions.
 
-> Until that is addressed, points 2 and 3 are the same thing.
-> 
->> ANGSTROM_PKG_FORMAT handles 2. and 3., but not 1. (yet)
-> 
-> The setting of IMG_PKGTYPE used or the inherit order of the package
-> classes determine this. Do we need the angstrom specific variable?
-> 
->> I think having a flag indicating *which* packagemanager gets is (like
->> Rods patch does) is a good thing, but a flag toggling the presence of
->> the packagemanager wouldn't be, since you can't distinguish the
->> resulting images from each other.
->> I think creating e.g. <foo>-nopm.bb recipes that do 'require <foo>.bb ;
->> PACKAGE_MANAGER = " "' would be the least confusing option.
-> 
-> I agree that specific images should have specific feature sets. This
-> comes back to my point about the machine=nslu2 needing to make the
-> console image usable.
-> 
-> Has anyone looked at how Poky does its IMAGE_FEATURES magic (see
-> poky-image.bbclass)? Adding package-manager as an IMAGE_FEATURE style
-> option and not as a DISTRO_FEATURE as I previously suggested could
-> perhaps be a way forward...
-> 
-> Cheers,
-> 
-> Richard
-> 
-> 
-> 
-> _______________________________________________
-> Angstrom-distro-devel mailing list
-> Angstrom-distro-devel@linuxtogo.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/angstrom-distro-devel
-> 
+> The apex util 'apex-env' is used to change the kernel cmdline from userspace.
+
+  This raises the question if user should be allowed (far less
+required) to change bootloader's standard cmdline as *the normal
+course of using distro* (== task-base). So, maybe the 1st choice ("Is
+it good idea at all") is worth more attention.
+
+> Dunno about the uboot util package.
+
+> -- Rod
 
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHUwPNMkyGM64RGpERArb0AJ49JilRuw6f/Tj2VZ0VAJ5K52XWMACfdqKe
-glVjhPyQNEeBOPy7MjHFDIM=
-=r8/t
------END PGP SIGNATURE-----
 
 
