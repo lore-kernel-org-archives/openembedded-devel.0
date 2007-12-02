@@ -1,28 +1,25 @@
-Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
+Received: from [64.233.182.184] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1IyuUp-0000cG-6S
+	(envelope-from <pmiscml@gmail.com>) id 1Iyua1-0000gl-14
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Dec 2007 20:28:55 +0100
-Received: by nf-out-0910.google.com with SMTP id h3so2279966nfh
+	Sun, 02 Dec 2007 20:34:17 +0100
+Received: by nf-out-0910.google.com with SMTP id h3so2280856nfh
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Dec 2007 11:25:33 -0800 (PST)
-Received: by 10.78.201.2 with SMTP id y2mr831003huf.1196623533184;
-	Sun, 02 Dec 2007 11:25:33 -0800 (PST)
+	Sun, 02 Dec 2007 11:30:55 -0800 (PST)
+Received: by 10.78.123.4 with SMTP id v4mr2245762huc.1196623854664;
+	Sun, 02 Dec 2007 11:30:54 -0800 (PST)
 Received: from ?10.0.0.6? ( [85.99.157.98])
-	by mx.google.com with ESMTPS id h7sm10992646nfh.2007.12.02.11.25.28
-	(version=SSLv3 cipher=OTHER); Sun, 02 Dec 2007 11:25:29 -0800 (PST)
-Date: Sun, 2 Dec 2007 21:27:34 +0200
+	by mx.google.com with ESMTPS id 35sm3822630nfu.2007.12.02.11.30.53
+	(version=SSLv3 cipher=OTHER); Sun, 02 Dec 2007 11:30:54 -0800 (PST)
+Date: Sun, 2 Dec 2007 21:32:59 +0200
 From: Paul Sokolovsky <pmiscml@gmail.com>
 X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
 X-Priority: 3 (Normal)
-Message-ID: <525897579.20071202212734@gmail.com>
-To: Rod Whitby <rod@whitby.id.au>
-In-Reply-To: <475283BC.2030903@whitby.id.au>
-References: <47520EA7.8030507@whitby.id.au> <47526A83.30109@student.utwente.nl>
-	<475283BC.2030903@whitby.id.au>
+Message-ID: <32693366.20071202213259@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: Inclusion of bootloader utilities in task-base
+Cc: angstrom-distro-devel@linuxtogo.org
+Subject: [ANN, RFC] dropbear-early
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,49 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2007 19:28:55 -0000
+X-List-Received-Date: Sun, 02 Dec 2007 19:34:17 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hello Rod,
+Hello openembedded-devel,
 
-Sunday, December 2, 2007, 12:06:52 PM, you wrote:
+  I've recently finally crafted something I wanted for long time - a
+package with script which allows to start dropbear ASAP after boot, if
+user chooses so.
 
-> Koen Kooi wrote:
->> Rod Whitby schreef:
->>> Some MACHINE configurations have FEATURES defined for 'uboot' and
->>> 'redboot'.  It looks like these are intended to identify the bootloader
->>> used on that machine.
->> 
->>> These turn on additions to RDEPENDS in task-base for some bootloader
->>> utilities.
->> 
->>> RFC #2: Shouldn't these be RRECOMMENDS unless they are absolutely
->>> critical, so that you can ipkg remove them if you don't want them.
->> 
->> I'm not familiar with the finer points of bootloaders, so I'm not really
->> qualified to respond to this, but if the utils are _critical_, they
->> should be RDEPENDS in task-boot, not task base.
-
-> Agreed.  In the case of redboot and apex, they are not that critical.
-
-> The redboot util 'fis' is used to reflash fis directory partitions.
-
-> The apex util 'apex-env' is used to change the kernel cmdline from userspace.
-
-  This raises the question if user should be allowed (far less
-required) to change bootloader's standard cmdline as *the normal
-course of using distro* (== task-base). So, maybe the 1st choice ("Is
-it good idea at all") is worth more attention.
-
-> Dunno about the uboot util package.
-
-> -- Rod
+  So, I'd like to welcome everyone to use it for debugging their
+distro, and for Angstrom, I'd like to RFC adding it to DEBUG_APPS, as
+it offers great help debugging hangs and hiccups during boot. What it
+is installs is below 1k.
 
 
 -- 
 Best regards,
- Paul                            mailto:pmiscml@gmail.com
+ Paul                          mailto:pmiscml@gmail.com
 
 
 
