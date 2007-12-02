@@ -1,27 +1,22 @@
-Received: from [66.249.92.173] (helo=ug-out-1314.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1IytP8-0007NH-Nt
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Dec 2007 19:18:58 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so1298051ugd
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Dec 2007 10:15:37 -0800 (PST)
-Received: by 10.66.243.13 with SMTP id q13mr987680ugh.1196619336914;
-	Sun, 02 Dec 2007 10:15:36 -0800 (PST)
-Received: from ?10.0.0.6? ( [85.99.157.98])
-	by mx.google.com with ESMTPS id t35sm6606095uge.2007.12.02.10.15.35
-	(version=SSLv3 cipher=OTHER); Sun, 02 Dec 2007 10:15:36 -0800 (PST)
-Date: Sun, 2 Dec 2007 20:17:43 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <704452397.20071202201743@gmail.com>
-To: Rod Whitby <rod@whitby.id.au>
-In-Reply-To: <475207FB.8020405@whitby.id.au>
-References: <475207FB.8020405@whitby.id.au>
+	(envelope-from <openembedded@haerwu.biz>) id 1Iytsc-0003lF-VQ
+	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 19:49:27 +0100
+Received: (qmail 20317 invoked by uid 813007); 2 Dec 2007 18:46:03 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 2 Dec 2007 18:46:03 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 2 Dec 2007 19:45:56 +0100
+User-Agent: KMail/1.9.7
+References: <475207FB.8020405@whitby.id.au> <475269FD.60409@student.utwente.nl>
+	<1196595074.6648.11.camel@localhost.localdomain>
+In-Reply-To: <1196595074.6648.11.camel@localhost.localdomain>
 MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	angstrom-distro-devel@linuxtogo.org
+Message-Id: <200712021945.57464.openembedded@haerwu.biz>
+Cc: angstrom-distro-devel@linuxtogo.org
 Subject: Re: [Angstrom-devel] RFC: Add ipkg to minimal image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,47 +31,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2007 18:18:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 02 Dec 2007 18:49:27 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello Rod,
+Dnia niedziela, 2 grudnia 2007, Richard Purdie napisa=C5=82:
+> On Sun, 2007-12-02 at 09:17 +0100, Koen Kooi wrote:
+> > Rod Whitby schreef:
 
-Sunday, December 2, 2007, 3:18:51 AM, you wrote:
+> > > RFC #1:
+> > >> Is there a reason why minimal-image does not include ipkg?  What
+> > >> exactly is the definition of what should be in minimal-image which
+> > >> excludes the ability to install further packages?
+> >
+> > Marcin and I had a discussion about that, but I can't remember the
+> > outcome. So "I have no strong opinions on that".
+>
+> I think minimal was really intended for people trying to boot systems
+> for the first time and really is 'the bare essentials to boot'. Having
+> said that I appreciate the problem of creating an image cut down enough
+> for the NSLU2.
 
-> I just realised that minimal-image.bb doesn't include ipkg, whereas the
-> first image which does include ipkg (console-image) includes a whole lot
-> of other stuff which could be installed using ipkg after first boot and
-> network access, and which make the image too big for a machine with
-> limited flash space (like an NSLU2).
+minimal-image was meant as something really small which can be used to=20
+just boot device into something usable. For different machines 'usable'=20
+has different meaning and this should be covered by task-boot or=20
+MACHINE_ESSENTIAL_ variables.=20
 
-> Is there a reason why minimal-image does not include ipkg?  What exactly
-> is the definition of what should be in minimal-image which excludes the
-> ability to install further packages?
+Zaurus palmtops are usable with just busybox + keymaps, for devboards it=20
+usually mean busybox (getty on serial port is automatically started), for=20
+nslu2 it means Ethernet + ssh/telnet daemon.
 
-  minimal-image is apparently something that 1) can boot, hence
-task-boot, and 2) show signs of life (in no-nonsence and secure
-manner), hence ${DISTRO_SSH_DAEMON}.
+I see no problem with creating 'minimal-with-ipkg' image under better=20
+name. Let 'minimal-image' be really minimal - example usage is devboard=20
+with problems with NAND accessing and MMC card - all what is available is=20
+u-boot with ethernet so booting over tftp with kernel and initrd (or=20
+kernel with initramfs) makes it working.
 
-> Does anyone object to me adding ipkg support to minimal-image?
+> Ideally, MACHINE=3Dnslu2 should make the console image become small
+> enough to be usable for the device even if that different compared to
+> the minimal image is just the package manager due to size
+> constraints...
 
-  While your work on getting useful small Angstrom images are of
-course great, I think definition of minimal image as above as perfect
-as it can get, so it would be better to create separate image. That
-would lead to proliferation, as we already have
-minimal-image-with-mtd-utils, but well, forking stuff for copies to
-undergo evolution is apparently better than hacking axiom for each
-occasion. Just my 2 cents.
+NSLU2 is example of device which can do really many things but rootfs=20
+space is limited. When it comes to =C3=85ngstr=C3=B6m defaults it means bt,=
+ wifi,=20
+usb host so 'task-base' starts to depend on too many stuff to be usable=20
+with internal flash. This device really needs special image for internal=20
+rootfs space.
 
-> FYI, minimal-image.rootfs.jffs2 for ixp4xx is 3.8M whereas
-> console-image.rootfs.jffs2 for ixp4xx is 7.1M
+> On a related but different note, the presence of a package manager or
+> not sounds like an DISTRO_FEATURE. Perhaps we should add
+> "package-manager" as a DISTRO_FEATURE and then use this to decide
+> whether a package manager should be installed into an image. The
+> package manager to install should determined by the class building the
+> image so you end up with a package manager appropriate to the image -
+> ipkg or dpkg+apt currently.
 
-> -- Rod
+This sounds good - no use for package manager on systems which are=20
+upgraded only by reflashing (due to many reasons).
 
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+           Q:      What's a light-year?
+           A:      One-third less calories than a regular year.
+
 
 
 
