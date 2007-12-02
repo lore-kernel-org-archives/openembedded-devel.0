@@ -1,27 +1,30 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1IyloO-00064N-3w
-	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 11:12:32 +0100
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 12E0A58D37;
-	Sun,  2 Dec 2007 05:09:13 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Sun, 02 Dec 2007 05:09:13 -0500
-X-Sasl-enc: NGj9yD1c1Q9KM1k08F0G5c7wnTNmE6COCyaQlSc0rnAH 1196590152
-Received: from [192.168.18.13] (CPE-121-209-18-182.sa.bigpond.net.au
-	[121.209.18.182])
-	by mail.messagingengine.com (Postfix) with ESMTP id DE3F162CB;
-	Sun,  2 Dec 2007 05:09:11 -0500 (EST)
-Message-ID: <47528426.1040502@whitby.id.au>
-Date: Sun, 02 Dec 2007 20:38:38 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
-MIME-Version: 1.0
-To: angstrom-distro-devel@linuxtogo.org
+	(envelope-from <rpurdie@rpsys.net>) id 1Iyn5u-0007Ya-CD
+	for openembedded-devel@openembedded.org; Sun, 02 Dec 2007 12:34:42 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB2BVMWx015266;
+	Sun, 2 Dec 2007 11:31:22 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04713-10; Sun,  2 Dec 2007 11:31:18 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB2BVEqu015260
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Sun, 2 Dec 2007 11:31:15 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <475269FD.60409@student.utwente.nl>
 References: <475207FB.8020405@whitby.id.au> <47522D46.1050309@whitby.id.au>
 	<475269FD.60409@student.utwente.nl>
-In-Reply-To: <475269FD.60409@student.utwente.nl>
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Sun, 02 Dec 2007 11:31:14 +0000
+Message-Id: <1196595074.6648.11.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: angstrom-distro-devel@linuxtogo.org
 Subject: Re: [Angstrom-devel] RFC: Add ipkg to minimal image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,88 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2007 10:12:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 02 Dec 2007 11:34:42 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
+On Sun, 2007-12-02 at 09:17 +0100, Koen Kooi wrote:
 > Rod Whitby schreef:
->> OK, of course the choice of ipkg as the package manager is
->> distro-specific, and depends on the distro including feed configuration
->> (although just having a package manager on hand even without a feed
->> configuration would be a useful addition to a minimal image).
+> > Rod Whitby wrote:
+> >> I just realised that minimal-image.bb doesn't include ipkg, whereas the
+> >> first image which does include ipkg (console-image) includes a whole lot
+> >> of other stuff which could be installed using ipkg after first boot and
+> >> network access, and which make the image too big for a machine with
+> >> limited flash space (like an NSLU2).
+> > 
+> > RFC #1:
+> >> Is there a reason why minimal-image does not include ipkg?  What exactly
+> >> is the definition of what should be in minimal-image which excludes the
+> >> ability to install further packages?
 > 
->> So my revised RFC #2 is to add a DISTRO_PACKAGE_MANAGER variable, which
->> DISTROs define 
-> 
-> DISTRO_PACKAGE_MANAGER is in package-space, so it should only show up in
-> R*, right? Sounds like a pretty good idea. As a side note, distros will
-> need to do more than that to switch packageformat or packagemanager, but
-> that's outside the scope of this discussion.
+> Marcin and I had a discussion about that, but I can't remember the
+> outcome. So "I have no strong opinions on that".
 
-My proposed patch follows.  Any objections?
+I think minimal was really intended for people trying to boot systems
+for the first time and really is 'the bare essentials to boot'. Having
+said that I appreciate the problem of creating an image cut down enough
+for the NSLU2. 
 
-============================================================
---- conf/distro/angstrom-2007.1.conf    c6bbfa10816eda24513e92b21827c75003bb4daa
-+++ conf/distro/angstrom-2007.1.conf    508cc6d61d863e169c13b5ff0295b66f3608f6de
-@@ -224,7 +224,6 @@ EXTRA_STUFF ?= ""
+Ideally, MACHINE=nslu2 should make the console image become small enough
+to be usable for the device even if that different compared to the
+minimal image is just the package manager due to size constraints...
 
+On a related but different note, the presence of a package manager or
+not sounds like an DISTRO_FEATURE. Perhaps we should add
+"package-manager" as a DISTRO_FEATURE and then use this to decide
+whether a package manager should be installed into an image. The package
+manager to install should determined by the class building the image so
+you end up with a package manager appropriate to the image - ipkg or
+dpkg+apt currently.
 
- # Angstrom want to ship some extra stuff. This should be moved into task-base eventually
--# contains ipkg specific stuff as well :(
+Does that seem reasonable?
 
- #work around a bitbake bug where mtd-utils-native isn't created so do_rootfs fails
- DISTRO_EXTRA_DEPENDS += " \
-@@ -235,7 +234,6 @@ DISTRO_EXTRA_RDEPENDS += "\
-     update-modules \
-     ${@base_contains("MACHINE_FEATURES", "screen", "psplash", "",d)} \
-     angstrom-version \
--    ipkg ipkg-collateral \
-     util-linux-mount util-linux-umount \
-     ${EXTRA_STUFF} \
-     ${DEBUG_APPS} \
-============================================================
---- packages/images/minimal-image.bb    c74056146aaed6f3e2cd64879f504ea6920efb59
-+++ packages/images/minimal-image.bb    dc0caa8692fe8e856f0e752e6d88fe50851fe435
-@@ -1,12 +1,14 @@ DISTRO_SSH_DAEMON ?= "dropbear"
- #Angstrom minimalist image
- #gives you a small images with ssh access
+Cheers,
 
- ANGSTROM_EXTRA_INSTALL ?= ""
- DISTRO_SSH_DAEMON ?= "dropbear"
-+DISTRO_PACKAGE_MANAGER ?= "ipkg ipkg-collateral"
+Richard
 
- IMAGE_INSTALL = "task-boot \
-             util-linux-mount util-linux-umount \
-             ${DISTRO_SSH_DAEMON} \
-+            ${DISTRO_PACKAGE_MANAGER} \
-             angstrom-version \
-           "
-
-============================================================
---- packages/tasks/task-base.bb 6f33e4ea8083953d24993dca089ae71114f8a639
-+++ packages/tasks/task-base.bb 22635c1ee42f15cae81e8d4a5b07e8dea4b07f49
-@@ -64,6 +64,11 @@ DISTRO_SSH_DAEMON ?= "dropbear"
- DISTRO_SSH_DAEMON ?= "dropbear"
-
- #
-+# ipkg, or something else
-+#
-+DISTRO_PACKAGE_MANAGER ?= "ipkg ipkg-collateral"
-+
-+#
- # pcmciautils for >= 2.6.13-rc1, pcmcia-cs for others
- #
- PCMCIA_MANAGER ?= "${@base_contains('MACHINE_FEATURES', 'kernel26','pcmciautils','pcmcia-cs',d)} "
-@@ -82,6 +87,7 @@ RDEPENDS_task-base = "\
-     task-distro-base \
-     task-machine-base \
-     ${DISTRO_SSH_DAEMON} \
-+    ${DISTRO_PACKAGE_MANAGER} \
-     ${HOTPLUG} \
-     \
-     ${@base_contains('MACHINE_FEATURES', 'kernel26','task-base-kernel26','task-base-kernel24',d)} \
-
--- Rod
 
 
