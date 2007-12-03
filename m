@@ -1,27 +1,31 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>)
-	id 1Iz8hf-0006ha-EM; Mon, 03 Dec 2007 11:39:07 +0100
-Received: from Powerbook-2.local (vpn006010.vpn.utwente.nl [130.89.6.10])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lB3AZWiq012030; Mon, 3 Dec 2007 11:35:33 +0100
-Message-ID: <4753DBF4.9070205@student.utwente.nl>
-Date: Mon, 03 Dec 2007 11:35:32 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <mickey@vanille-media.de>) id 1Iz9X2-0003Uo-Sp
+	for openembedded-devel@openembedded.org; Mon, 03 Dec 2007 12:32:12 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 8091828C013; Mon,  3 Dec 2007 12:22:04 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: **
+X-Spam-Status: No, score=2.7 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180172164.adsl.alicedsl.de [85.180.172.164])
+	by srv043.dedi23.de (Postfix) with ESMTP id AC65328C012;
+	Mon,  3 Dec 2007 12:22:00 +0100 (CET)
+Date: Mon, 3 Dec 2007 12:28:49 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <17395220.20071203122849@vanille-media.de>
+To: Richard Purdie <rpurdie@rpsys.net>
+In-Reply-To: <1196641802.6648.31.camel@localhost.localdomain>
+References: <1196641802.6648.31.camel@localhost.localdomain>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1IymU0-0002V1-G4@linuxtogo.org>
-In-Reply-To: <E1IymU0-0002V1-G4@linuxtogo.org>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev task-base: Added task-base-apex, and corrected some missing items from PACKAGES
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
+Subject: Re: [Angstrom-devel] Angstrom builds with prebuilt meta-toolchain output
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,30 +39,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2007 10:39:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 03 Dec 2007 11:32:13 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Richard Purdie wrote:
+> This is something I experimented a bit with and wondered if anyone else
+> was interested in it. I just added external-toolchain.bb to OE which
+> allows a meta-toolchain generated toolchain to be used by OE instead of
+> building its own.
 
-rwhitby commit schreef:
-> task-base: Added task-base-apex, and corrected some missing items from PACKAGES
+Woot! This is very helful, thanks.
 
-And now we get http://bugs.openembedded.org/show_bug.cgi?id=3416 :(
+> The attached patch adds the notion of different toolchains to angstrom,
+> by default it uses the one specified by the DISTRO_VERSION_MAJOR
+> variable I added but with ANGSTROM_TOOLCHAIN = "external" use a
+> pre-supplied toolchain.
 
-Marcin, could you merge your task-base revamp ASAP?
+> I don't know if Angstrom want to support this or not but this should at
+> least show its possible and document how to do it. The patch shouldn't
+> be committed in its current form as it needs a 2008-1 version file
+> adding. Some of the PREFRERRED_VERSION statements related to the
+> toolchain might also move to the toolchain definition files too but I
+> have no strong opinions on that.
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+> I was able to generate an external toolchain and then use that to make a
+> minimal-image, I haven't tested further.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> It is also I admit slightly glibc specific. We have to start somewhere
+> though :).
 
-iD8DBQFHU9v0MkyGM64RGpERAoBaAJkBXKUIsBQl3kkFdKJdgx/X7sDqeACeKDYy
-qUsn7sQn/p/Iot6Ayzl/+1M=
-=7tnC
------END PGP SIGNATURE-----
+Absolutely.
+
+Mickey.
+
 
 
