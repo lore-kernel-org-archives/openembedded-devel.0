@@ -1,31 +1,24 @@
-Received: from [83.151.25.170] (helo=srv043.dedi23.de)
+Received: from [64.233.182.191] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1Iz9X2-0003Uo-Sp
-	for openembedded-devel@openembedded.org; Mon, 03 Dec 2007 12:32:12 +0100
-Received: by srv043.dedi23.de (Postfix, from userid 65534)
-	id 8091828C013; Mon,  3 Dec 2007 12:22:04 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.7 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180172164.adsl.alicedsl.de [85.180.172.164])
-	by srv043.dedi23.de (Postfix) with ESMTP id AC65328C012;
-	Mon,  3 Dec 2007 12:22:00 +0100 (CET)
-Date: Mon, 3 Dec 2007 12:28:49 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <17395220.20071203122849@vanille-media.de>
-To: Richard Purdie <rpurdie@rpsys.net>
-In-Reply-To: <1196641802.6648.31.camel@localhost.localdomain>
-References: <1196641802.6648.31.camel@localhost.localdomain>
+	(envelope-from <rgomezalcala@gmail.com>) id 1IzAFJ-0004Oa-31
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Dec 2007 13:17:57 +0100
+Received: by nf-out-0910.google.com with SMTP id h3so2396844nfh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 Dec 2007 04:14:31 -0800 (PST)
+Received: by 10.86.81.8 with SMTP id e8mr10541351fgb.1196684071348;
+	Mon, 03 Dec 2007 04:14:31 -0800 (PST)
+Received: by 10.86.52.4 with HTTP; Mon, 3 Dec 2007 04:14:31 -0800 (PST)
+Message-ID: <7461f8370712030414i48a003c9u817a3ebdaa055c3f@mail.gmail.com>
+Date: Mon, 3 Dec 2007 13:14:31 +0100
+From: "=?ISO-8859-1?Q?Rafael_G=F3mez_Alcal=E1?=" <rgomezalcala@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <74d0deb30711290417pa93ea19hd4a32843f0c885cc@mail.gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@openembedded.org>,
-	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
-Subject: Re: [Angstrom-devel] Angstrom builds with prebuilt meta-toolchain output
+References: <7461f8370711290237k7622407djdc94140c350f88e8@mail.gmail.com>
+	<74d0deb30711290417pa93ea19hd4a32843f0c885cc@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: Defining and uploading a new machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,39 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2007 11:32:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 03 Dec 2007 12:17:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Richard Purdie wrote:
-> This is something I experimented a bit with and wondered if anyone else
-> was interested in it. I just added external-toolchain.bb to OE which
-> allows a meta-toolchain generated toolchain to be used by OE instead of
-> building its own.
+Yes, the kernel is the same working for HTC Wizard.
 
-Woot! This is very helful, thanks.
+Regards,
+Rafael
 
-> The attached patch adds the notion of different toolchains to angstrom,
-> by default it uses the one specified by the DISTRO_VERSION_MAJOR
-> variable I added but with ANGSTROM_TOOLCHAIN = "external" use a
-> pre-supplied toolchain.
-
-> I don't know if Angstrom want to support this or not but this should at
-> least show its possible and document how to do it. The patch shouldn't
-> be committed in its current form as it needs a 2008-1 version file
-> adding. Some of the PREFRERRED_VERSION statements related to the
-> toolchain might also move to the toolchain definition files too but I
-> have no strong opinions on that.
-
-> I was able to generate an external toolchain and then use that to make a
-> minimal-image, I haven't tested further.
-
-> It is also I admit slightly glibc specific. We have to start somewhere
-> though :).
-
-Absolutely.
-
-Mickey.
-
-
+2007/11/29, pHilipp Zabel <philipp.zabel@gmail.com>:
+>
+> On Nov 29, 2007 11:37 AM, Rafael G=F3mez Alcal=E1 <rgomezalcala@gmail.com=
+>
+> wrote:
+> > Hello:
+> >
+> > I am interested in upload a machine description, configuration files,
+> etc.
+> > What is the method/procedure to  do ?
+> > The machine is the omap850 based HTC Prophet pda/phone, which is simila=
+r
+> to
+> > HTC Wizard.
+>
+> Open a bug and attach the files in question. Do you have a working
+> kernel for that device?
+>
+> regards
+> Philipp
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
