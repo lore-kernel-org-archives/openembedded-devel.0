@@ -1,28 +1,37 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1IyzFc-0002Um-M4
-	for openembedded-devel@openembedded.org; Mon, 03 Dec 2007 01:33:33 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB30U9af020099;
-	Mon, 3 Dec 2007 00:30:09 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 20074-01; Mon,  3 Dec 2007 00:30:06 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB30U2XU020084
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 3 Dec 2007 00:30:02 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
-Date: Mon, 03 Dec 2007 00:30:01 +0000
-Message-Id: <1196641802.6648.31.camel@localhost.localdomain>
+Received: from [202.108.5.85] (helo=m12-15.163.com)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <xydarcher@163.com>) id 1Iz3xS-0004XV-R3
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Dec 2007 06:35:07 +0100
+Received: from Readons (unknown [218.194.60.218])
+	by smtp5 (Coremail) with SMTP id wKjRD7ALfAK3lFNH7SVoAQ==.19178S2;
+	Mon, 03 Dec 2007 13:31:37 +0800 (CST)
+Date: Mon, 3 Dec 2007 13:31:12 +0800
+From: "Readon Shaw" <xydarcher@163.com>
+To: "openembedded-devel@lists.openemb"
+	<openembedded-devel@lists.openembedded.org>
+X-mailer: Foxmail 5.0 [cn]
 Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Angstrom builds with prebuilt meta-toolchain output
+X-Coremail-Antispam: 1U3Yxn0WfASr-VFAUDIcSsGvfJTRUUUbiAawVZqm390maexGV
+	Aqrcv_JFW8Gr4xM2kK64xIx7IEa2x05xACxx0F77xC6c8GOVWUur48JF1ln4vEF2I2jVCj
+	82vF77xC6c8GOVWUur48GrWln4vEF2I2jVCv07xq44I27xCjj4IE548m6r1fGr4UCwAFxV
+	CF77xC6IxKo4kEV4yln4vEF2I2jVACjxCF4IxYO2xFxVAqrcv_JFW8Gr1kM2kK64xIx7IE
+	4x80F28E1VAqrcv_JFW8Gry3M2kK64xIx7IEF7IF428E1c8GOVWUur48Gr4ln4vEn7IjY7
+	xE6c8GOVWUur48XrWln4vEF2I2jVACjxCF74kS6c8GOVWUur48XrylFcxC0VAYjxAxZF0E
+	w4CEw7xC0wCE64xvF2IEb7IF0Fy7MI8E67AF67kF1VAFwI0_Jr0_Jryl7I0Y64k_M2kK64
+	xIx7IE4cxKj280x2IE548m6r1fGr15AwAawVZqm390maeI6c8GOVWUur4UXw4ln4vEBTZE
+	BTnIJ3sSvfCE548m6r1fGr15KwACY4xI67k04243AVC20s07M2kK64xIx7IE4cxKj280x2
+	IE548m6r1fGr48KwAawVAC0I8064x04xA2z7CE548m6r1fGr45XwAv7VC0I7IYx2IY67AK
+	xVWUJVWUGwCF72vE52k0Y41lw4CEF2IF47xS0VAv8wAawVAC0I806sx054AE14vE548m6r
+	1fGr15AwAawVAC0I8064x04xCE548m6r1fGr4UCwAawVZYdTZSWfnEAVAqrcv_JFW8JrWU
+	McIj6I8E87Iv67AKxVWUJVW8JwAFxVCaYxvI4VCIwcAKzIAtMxkI7II2jI8vz4vEwIxGrw
+	AawVAC0I8062k0o2IEa7xqz4C_JFW8Jry5M7AC8VAFwI0_Jr0_Gr1ln4vEF2I2jVA2jI8I
+	4x80FVAqrcv_JFW8Jr4kM7kC6x804xWl1IIY67AEw4v_Jr0_Jr4l5I8CrVACY4xI64kE6c
+	02F40Ex7xfM7k0a2IF6ryUn29KB7ZKAUJUUUUUnxnvy29KBjDU0xZFpf9x07UKfOwUUUUU
+	129KBjvdXoWrurWrWr1xKF1fKryktw17GFg_yoWDuFbE9a4kXFZ5Ga4UZwsrtw13Jr1rXr
+	nrJr10qry7K3y7ZF42vwn7Jr1DCrnxAr98Zr1xtFy7Kr15Cr48Gr4xKw1UK
+Message-Id: <475394BC.020F7A.19694@m12-15.163.com>
+Subject: Re: gtk+-directfb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,141 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2007 00:33:33 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 03 Dec 2007 05:35:08 -0000
+Content-Type: text/plain;
+	charset="gb2312"
+Content-Transfer-Encoding: base64
 
-Hi,
-
-This is something I experimented a bit with and wondered if anyone else
-was interested in it. I just added external-toolchain.bb to OE which
-allows a meta-toolchain generated toolchain to be used by OE instead of
-building its own.
-
-The attached patch adds the notion of different toolchains to angstrom,
-by default it uses the one specified by the DISTRO_VERSION_MAJOR
-variable I added but with ANGSTROM_TOOLCHAIN = "external" use a
-pre-supplied toolchain.
-
-I don't know if Angstrom want to support this or not but this should at
-least show its possible and document how to do it. The patch shouldn't
-be committed in its current form as it needs a 2008-1 version file
-adding. Some of the PREFRERRED_VERSION statements related to the
-toolchain might also move to the toolchain definition files too but I
-have no strong opinions on that.
-
-I was able to generate an external toolchain and then use that to make a
-minimal-image, I haven't tested further.
-
-It is also I admit slightly glibc specific. We have to start somewhere
-though :).
-
-Cheers,
-
-Richard
-
-============================================================
---- conf/distro/include/angstrom-default-2007-9.inc	f9cdd509d3e8a85e5b4117e9b0d3ece1c04d66e4
-+++ conf/distro/include/angstrom-default-2007-9.inc	f9cdd509d3e8a85e5b4117e9b0d3ece1c04d66e4
-@@ -0,0 +1,16 @@
-+
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc_avr32 = "avr32-gcc-cross"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "gcc-cross-initial"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "gcc-cross"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "gcc-cross"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc               = "glibc-intermediate"
-+PREFERRED_PROVIDER_virtual/arm-angstrom-linux-gnueabi-libc-for-gcc    = "glibc-intermediate"
-+PREFERRED_PROVIDER_virtual/armeb-angstrom-linux-gnueabi-libc-for-gcc  = "glibc-intermediate"
-+PREFERRED_PROVIDER_virtual/arm-angstrom-linux-libc-for-gcc            = "glibc-intermediate"
-+PREFERRED_PROVIDER_virtual/powerpc-angstrom-linux-libc-for-gcc        = "glibc-intermediate"
-+PREFERRED_PROVIDER_virtual/mipsel-angstrom-linux-libc-for-gcc         = "glibc-intermediate"
-+PREFERRED_PROVIDER_virtual/sparc-angstrom-linux-libc-for-gcc          = "glibc-intermediate"
-+
-+PREFERRED_PROVIDER_virtual/arm-angstrom-linux-uclibcgnueabi-libc-for-gcc    = "uclibc-initial"
-+PREFERRED_PROVIDER_virtual/armeb-angstrom-linux-uclibcgnueabi-libc-for-gcc  = "uclibc-initial"
-+
-============================================================
---- conf/distro/include/angstrom-external.inc	687cb8b10a08398a7399e9233ad4047a9398fb06
-+++ conf/distro/include/angstrom-external.inc	687cb8b10a08398a7399e9233ad4047a9398fb06
-@@ -0,0 +1,21 @@
-+#
-+# Configuration to use a toolchain built by meta-toolchain.bb
-+#
-+
-+EXTERNAL_TOOLCHAIN = "${SDK_PREFIX}"
-+
-+PATH =. "${EXTERNAL_TOOLCHAIN}/bin:"
-+
-+PREFERRED_PROVIDER_linux-libc-headers = "external-toolchain"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-toolchain"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "external-toolchain"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils = "external-toolchain"
-+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc = "external-toolchain"
-+PREFERRED_PROVIDER_virtual/libc = "external-toolchain"
-+PREFERRED_PROVIDER_virtual/libintl = "external-toolchain"
-+PREFERRED_PROVIDER_virtual/libiconv = "external-toolchain"
-+PREFERRED_PROVIDER_glibc-thread-db = "external-toolchain"
-+PREFERRED_PROVIDER_virtual/linux-libc-headers = "external-toolchain"
-+
-+TARGET_CPPFLAGS_prepend = " -isystem${EXTERNAL_TOOLCHAIN}/${TARGET_SYS}/include "
-+TARGET_LDFLAGS_prepend = " -L${EXTERNAL_TOOLCHAIN}/${TARGET_SYS}/lib -Wl,-rpath-link,${EXTERNAL_TOOLCHAIN}/${TARGET_SYS}/lib "
-============================================================
---- conf/distro/angstrom-2007.1.conf	c6bbfa10816eda24513e92b21827c75003bb4daa
-+++ conf/distro/angstrom-2007.1.conf	f4b119ae734b56cba69d3263d186c7a2f82748d4
-@@ -8,6 +8,7 @@ DISTRO_VERSION = "2007.9-test-${DATE}"
- 
- #DISTRO_VERSION = "2007.9"
- DISTRO_VERSION = "2007.9-test-${DATE}"
-+DISTRO_VERSION_MAJOR = "2007-9"
- DISTRO_REVISION = "46"
- 
- require conf/distro/include/sane-srcdates.inc
-@@ -106,7 +107,6 @@ PREFERRED_VERSION_binutils-cross-sdk ?= 
- PREFERRED_VERSION_binutils-cross-sdk ?= "2.18"
- 
- #avr32 only has patches for binutils 2.17 and gcc 4.1.2 in OE
--PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc_avr32 = "avr32-gcc-cross"
- PREFERRED_VERSION_avr32-gcc               = "4.1.2"
- PREFERRED_VERSION_avr32-gcc-cross         = "4.1.2"
- PREFERRED_VERSION_gcc-cross-sdk_avr32     = "4.0.2"
-@@ -147,23 +147,6 @@ require conf/distro/include/preferred-e-
- require conf/distro/include/preferred-e-versions.inc
- 
- 
--# Virtuals:
--PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "gcc-cross-initial"
--PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "gcc-cross"
--PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "gcc-cross"
--
--#Set preferred provider for the C library that is used to build the crosscompiler (NPTL voodoo)
--PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc               = "glibc-intermediate"
--PREFERRED_PROVIDER_virtual/arm-angstrom-linux-gnueabi-libc-for-gcc    = "glibc-intermediate"
--PREFERRED_PROVIDER_virtual/armeb-angstrom-linux-gnueabi-libc-for-gcc  = "glibc-intermediate"
--PREFERRED_PROVIDER_virtual/arm-angstrom-linux-libc-for-gcc            = "glibc-intermediate"
--PREFERRED_PROVIDER_virtual/powerpc-angstrom-linux-libc-for-gcc        = "glibc-intermediate"
--PREFERRED_PROVIDER_virtual/mipsel-angstrom-linux-libc-for-gcc         = "glibc-intermediate"
--PREFERRED_PROVIDER_virtual/sparc-angstrom-linux-libc-for-gcc          = "glibc-intermediate"
--
--PREFERRED_PROVIDER_virtual/arm-angstrom-linux-uclibcgnueabi-libc-for-gcc    = "uclibc-initial"
--PREFERRED_PROVIDER_virtual/armeb-angstrom-linux-uclibcgnueabi-libc-for-gcc  = "uclibc-initial"
--
- # hostap stuff, we prefer the in-kernel modules, but those don't work for all machines
- PREFERRED_PROVIDER_hostap-conf                      ?= "hostap-conf"
- PREFERRED_PROVIDER_hostap-modules_h2200             ?= "hostap-modules"
-============================================================
---- conf/distro/include/angstrom.inc	fbec2661b476213454b69adc6d89a7b5be329d4d
-+++ conf/distro/include/angstrom.inc	5381a13691569036f8c1d2cf932cd1d536a6d909
-@@ -13,6 +13,10 @@ require conf/distro/include/angstrom-${A
- DEPLOY_DIR = "${TMPDIR}/deploy/${ANGSTROM_MODE}"
- require conf/distro/include/angstrom-${ANGSTROM_MODE}.inc
- 
-+# Include the toolchain definitions
-+ANGSTROM_TOOLCHAIN ?= "default-${DISTRO_VERSION_MAJOR}"
-+require conf/distro/include/angstrom-${ANGSTROM_TOOLCHAIN}.inc
-+
- #Use this variable in feeds and other parts that need a URI
- ANGSTROM_URI ?= "http://www.angstrom-distribution.org"
- 
+SSBhbHNvIGhhdmUgYSBxdWVzdGlvbi4gDQpnZGstcGl4YnVmIGRlcGVuZHMgZ3RrKyAmIGd0ayst
+ZGlyZWN0ZmIgaWYgaSBpbmNsdWRlIGd0ay0yLjEwLmluYyBpbiBndGsrLWRpcmVjdGZiLg0KYXQg
+dGhlIHNhbWUgdGltZSwgZ3RrKyByZWNtbWVuZGVkIGdkay1waXhidWYsIA0Kc28gaWYgaSBpbnN0
+YWxsIGd0aysgb25seSwgZ3RrLWRyaXJlY3RmYiB3b3VsZCBiZSBpbnN0YWxsZWQgYmVjYXVzZSBv
+ZiB0aGUgZGVwZW5kY3kuDQoNCmhvdyB0byBzb2x2ZSB0aGlzPw0KDQo9PT09PT09PT09PT09PQ0K
+DQo+SSBoYXZlIGFuIGludGVyZXN0IGluIGJ1aWxkaW5nIGd0aystZGlyZWN0ZmIgZm9yIHRoZSBn
+dW1zdGl4IHBsYXRmb3JtLg0KPg0KPlNvLCBvZiBjb3Vyc2UsIEkgZ2F2ZSBpdCBhIHF1aWNrIHRy
+eSBhbmQgaXQgZmFpbGVkIGJlY2F1c2Ugb2YgYQ0KPmRlcGVuZGVuY3kgb24gcGFuZ28tZGlyZWN0
+ZmIgLS0gd2hpY2ggZG9lc24ndCBleGlzdC4NCj4NCj5JbiBjaGVja2luZyBzb21lIG9mIHRoZSBw
+cmlvciB0cmFmZmljIG9uIHRoZSBsaXN0LCBJIHNlZSB0aGF0DQo+cGFuZ28tZGlyZWN0ZmIgaGFz
+IGJlZW4gcmVtb3ZlZCBkdWUgdG8gaXRzIGNhdXNpbmcgYnVpbGQgYnJlYWthZ2UuDQo+DQo+SGFz
+IGFueW9uZSBjb21lIHVzIHdpdGggYW4gYWNjZXB0YWJsZSBhcHByb2FjaCB0byBzdXBwb3J0aW5n
+IGENCj5ndGsrLWRpcmVjdGZiIGJ1aWxkIHNpbmNlIHRoZW4/DQo+DQo+U3RldmUNCj4NCj5fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPk9wZW5lbWJlZGRl
+ZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj5PcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVk
+ZGVkLm9yZw0KPmh0dHA6Ly9saXN0cy5saW51eHRvZ28ub3JnL2NnaS1iaW4vbWFpbG1hbi9saXN0
+aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg0KPSA9ID0gPSA9ID0gPSA9ID0gPSA9ID0gPSA9ID0g
+PSA9ID0gPSA9DQoJCQkNCg0KDQoJCQkJIA0KoaGhoaGhoaGhoaGhoaGhoVJlYWRvbiBTaGF3DQqh
+oaGhoaGhoaGhoaGhoaGheHlkYXJjaGVyQDE2My5jb20NCiAgICAgICAgICAgICAgIKGhoaEyMDA3
+LTEyLTAzDQoNCg==
 
 
 
