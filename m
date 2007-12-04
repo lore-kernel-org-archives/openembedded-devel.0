@@ -1,30 +1,32 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [83.151.25.170] (helo=srv043.dedi23.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1IzTpp-0001jh-27
-	for openembedded-devel@openembedded.org; Tue, 04 Dec 2007 10:12:57 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB499OTv029214;
-	Tue, 4 Dec 2007 09:09:24 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 28844-08; Tue,  4 Dec 2007 09:09:20 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB499Jcv029208
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Tue, 4 Dec 2007 09:09:19 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: "Dr. Mickey Lauer" <mickey@vanille-media.de>
-In-Reply-To: <443804680.20071204021110@vanille-media.de>
+	(envelope-from <mickey@vanille-media.de>) id 1IzX54-0006AH-Om
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 Dec 2007 13:40:54 +0100
+Received: by srv043.dedi23.de (Postfix, from userid 65534)
+	id 9105C28C013; Tue,  4 Dec 2007 13:30:37 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: **
+X-Spam-Status: No, score=2.7 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180153100.adsl.alicedsl.de [85.180.153.100])
+	by srv043.dedi23.de (Postfix) with ESMTP id 8E3F228C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Dec 2007 13:30:34 +0100 (CET)
+Date: Tue, 4 Dec 2007 13:37:18 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1869419485.20071204133718@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1196759359.4817.1.camel@localhost.localdomain>
 References: <1196552859.6697.28.camel@localhost.localdomain>
 	<443804680.20071204021110@vanille-media.de>
-Date: Tue, 04 Dec 2007 09:09:19 +0000
-Message-Id: <1196759359.4817.1.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@openembedded.org
+	<1196759359.4817.1.camel@localhost.localdomain>
+MIME-Version: 1.0
 Subject: Re: Packaged Staging, nearly a reality!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,33 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2007 09:12:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 04 Dec 2007 12:40:54 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2007-12-04 at 02:11 +0100, Michael 'Mickey' Lauer wrote:
-> Richard Purdie wrote:
-> > As anyone watching the commits will notice, OE just gained the next
-> > generation of packaged staging support!
-> 
-> Excellent!
-> 
-> > To use simply INHERIT = "packaged-staging2". Staging packages end up in
-> > tmp/deploy/pstage.
-> 
-> Even without inherit'ing this, everything python-distutils breaks. Is
-> this expected?
+Ok, sorry for the false alarm.
 
-No, it wasn't expected or intended.
+Actually it turns out to be a dependency problem. Yesterday I felt
+adventurous and bumped PARALLEL_MAKE and BB_MULTIPLE_THREADS both from 4 to
+8, but immediately forgot about it.
 
-I don't think this is related to this wave of patches though, its more
-likely to be from the time before.
+Then everything python started to freak out. So I guess there is some
+missing / wrong task dependencies. Can you recommend a good way to
+debug that?
 
-Whats a good example of a python-distutils package thats broken?
+Regards,
 
-Cheers,
-
-Richard
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
