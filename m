@@ -1,33 +1,22 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1IzZ2Q-0000Se-Ut
-	for openembedded-devel@openembedded.org; Tue, 04 Dec 2007 15:46:19 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB4EgmWq012703
-	for <openembedded-devel@openembedded.org>; Tue, 4 Dec 2007 14:42:48 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 12559-04 for <openembedded-devel@openembedded.org>;
-	Tue,  4 Dec 2007 14:42:45 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB4EgiOd012697
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 4 Dec 2007 14:42:44 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1869419485.20071204133718@vanille-media.de>
-References: <1196552859.6697.28.camel@localhost.localdomain>
-	<443804680.20071204021110@vanille-media.de>
-	<1196759359.4817.1.camel@localhost.localdomain>
-	<1869419485.20071204133718@vanille-media.de>
-Date: Tue, 04 Dec 2007 14:42:42 +0000
-Message-Id: <1196779362.4817.24.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Packaged Staging, nearly a reality!
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1IzddU-0002Zy-LT
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 Dec 2007 20:40:53 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so7098283waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Dec 2007 11:37:17 -0800 (PST)
+Received: by 10.114.57.1 with SMTP id f1mr1173567waa.1196797037791;
+	Tue, 04 Dec 2007 11:37:17 -0800 (PST)
+Received: by 10.115.15.3 with HTTP; Tue, 4 Dec 2007 11:37:17 -0800 (PST)
+Message-ID: <bdb0025f0712041137t3312e6b7l518ef813b9eab943@mail.gmail.com>
+Date: Tue, 4 Dec 2007 16:37:17 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <E1Iywhd-0003TY-4R@linuxtogo.org>
+MIME-Version: 1.0
+References: <E1Iywhd-0003TY-4R@linuxtogo.org>
+Subject: Re: [oe-commits] org.oe.dev directfb : Update include file paths so that directfb-examples builds.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,33 +30,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2007 14:46:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 04 Dec 2007 19:40:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, 2007-12-04 at 13:37 +0100, Michael 'Mickey' Lauer wrote:
-> Ok, sorry for the false alarm.
-> 
-> Actually it turns out to be a dependency problem. Yesterday I felt
-> adventurous and bumped PARALLEL_MAKE and BB_MULTIPLE_THREADS both from 4 to
-> 8, but immediately forgot about it.
-> 
-> Then everything python started to freak out. So I guess there is some
-> missing / wrong task dependencies. Can you recommend a good way to
-> debug that?
+I didn't understand why to change the includedir and
+internalincludedir of directfb...
 
-"bitbake python-pyxml -g" and then look through the task-depends.dot
-file. These do contain the dependency data but its not the most readable
-file format, better ways of viewing the output welcome...
+The standard of directfb is includedir/directfb/ and changing it all
+others packages that depends on directfb will break...
 
-I do have some prototype graphical code that views this output which
-also isn't ideal but is a nice excuse to play with bitbake trunk, I'll
-see if I can find time to make the commitable in the next few days
-too...
+On Dec 2, 2007 6:50 PM, sakoman commit
+<openembedded-commits@lists.openembedded.org> wrote:
+> directfb : Update include file paths so that directfb-examples builds.
+>
+> Author: sakoman@gmail.com
+> Branch: org.openembedded.dev
+> Revision: b1610df18b4d8070f056d9621c7826cf30b62bca
+> ViewMTN: http://monotone.openembedded.org/revision/info/b1610df18b4d8070f056d9621c7826cf30b62bca
+> Files:
+> 1
+> packages/directfb/files/fix-configure-include-path.patch
+> packages/directfb/directfb-examples_1.0.0.bb
+> packages/directfb/directfb_1.1.0.bb
+> Diffs:
+>
+> #
+> # mt diff -r5c78b2077c12b748ddbcb3eac965642d2d89c95c -rb1610df18b4d8070f056d9621c7826cf30b62bca
+> #
+> #
+> #
+> # add_file "packages/directfb/files/fix-configure-include-path.patch"
+> #  content [95a5712b69ed26362c0a8e8e8624e9b05fb506b2]
+> #
+> # patch "packages/directfb/directfb-examples_1.0.0.bb"
+> #  from [88c9cc59f32b02ec4cd0c0f876b204399b265bdf]
+> #    to [1905769a0ea0cc18c68ea7969adaa55fe65ad9aa]
+> #
+> # patch "packages/directfb/directfb_1.1.0.bb"
+> #  from [c9da95fb956d450af0c360a3364023c960f9d1af]
+> #    to [1af7bf22ffbfcbc869a08e6664c2dde2ff16c7d2]
+> #
+> ============================================================
+> --- packages/directfb/files/fix-configure-include-path.patch    95a5712b69ed26362c0a8e8e8624e9b05fb506b2
+> +++ packages/directfb/files/fix-configure-include-path.patch    95a5712b69ed26362c0a8e8e8624e9b05fb506b2
+> @@ -0,0 +1,13 @@
+> +--- DirectFB-1.1.0/configure.in-orig   2007-08-27 00:07:00.000000000 -0700
+> ++++ DirectFB-1.1.0/configure.in        2007-11-26 12:05:52.000000000 -0800
+> +@@ -1380,8 +1380,8 @@
+> +
+> + MODULEDIR=$libdir/$MODULEDIRNAME
+> + DATADIR=$datadir/directfb-$VERSION
+> +-INCLUDEDIR=$includedir/directfb
+> +-INTERNALINCLUDEDIR=$includedir/directfb-internal
+> ++INCLUDEDIR=$includedir/
+> ++INTERNALINCLUDEDIR=$includedir/
+> +
+> + SOPATH=$libdir/libdirectfb-$LT_RELEASE.so.$LT_CURRENT
+> + AC_SUBST(SOPATH)
+> ============================================================
+> --- packages/directfb/directfb-examples_1.0.0.bb        88c9cc59f32b02ec4cd0c0f876b204399b265bdf
+> +++ packages/directfb/directfb-examples_1.0.0.bb        1905769a0ea0cc18c68ea7969adaa55fe65ad9aa
+> @@ -1,10 +1,12 @@ LICENSE = "GPL"
+>  DESCRIPTION = "DirectFB extra providers"
+>  DEPENDS = "directfb"
+>  SECTION = "libs"
+>  LICENSE = "GPL"
+>
+> -SRC_URI = "http://www.directfb.org/downloads/Extras/DirectFB-extra-${PV}.tar.gz"
+> -S = "${WORKDIR}/DirectFB-extra-${PV}"
+> +SRC_URI = " \
+> +           http://www.directfb.org/downloads/Extras/DirectFB-examples-${PV}.tar.gz \
+> +          "
+> +S = "${WORKDIR}/DirectFB-examples-${PV}"
+>
+>  inherit autotools
+>
+> ============================================================
+> --- packages/directfb/directfb_1.1.0.bb c9da95fb956d450af0c360a3364023c960f9d1af
+> +++ packages/directfb/directfb_1.1.0.bb 1af7bf22ffbfcbc869a08e6664c2dde2ff16c7d2
+> @@ -10,12 +10,15 @@ RV = "1.1-0"
+>  PR = "r1"
+>  RV = "1.1-0"
+>
+> -SRC_URI = "http://www.directfb.org/download/DirectFB/DirectFB-${PV}.tar.gz \
+> -           file://fix-pkgconfig-cflags.patch;patch=1 \
+> -          file://fix-font-missing-char.patch;patch=1 \
+> -           file://getpagesize.patch;patch=1 \
+> -           file://fix-includes.patch;patch=1 \
+> -          file://mkdfiff.patch;patch=1"
+> +SRC_URI = " \
+> +    http://www.directfb.org/download/DirectFB/DirectFB-${PV}.tar.gz \
+> +    file://fix-configure-include-path.patch;patch=1 \
+> +    file://fix-pkgconfig-cflags.patch;patch=1 \
+> +    file://fix-font-missing-char.patch;patch=1 \
+> +    file://getpagesize.patch;patch=1 \
+> +    file://fix-includes.patch;patch=1 \
+> +    file://mkdfiff.patch;patch=1 \
+> +   "
+>
+>  S = "${WORKDIR}/DirectFB-${PV}"
+>
+> @@ -23,11 +26,12 @@ inherit autotools pkgconfig
+>
+>  inherit autotools pkgconfig
+>
+> -EXTRA_OECONF = "--with-gfxdrivers=none \
+> +EXTRA_OECONF = " \
+> +    --with-gfxdrivers=none \
+>                 --enable-libmpeg3=no \
+>                 --enable-freetype=yes \
+>                 --enable-sdl=no \
+> -               --enable-vnc=no \
+> +               --enable-vnc=no \
+>                 --disable-x11 \
+>                 "
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+>
 
-Cheers,
 
-Richard
 
+-- 
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
