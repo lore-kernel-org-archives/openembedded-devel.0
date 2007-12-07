@@ -1,21 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.146.182] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1J0iT1-0003LD-8a
-	for openembedded-devel@openembedded.org; Fri, 07 Dec 2007 20:02:31 +0100
-Received: (qmail 21631 invoked by uid 813007); 7 Dec 2007 18:58:39 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 7 Dec 2007 18:58:39 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <raj.khem@gmail.com>) id 1J0j6B-0008Qm-B8
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Dec 2007 20:42:59 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so1790054waf
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Dec 2007 11:39:07 -0800 (PST)
+Received: by 10.114.37.1 with SMTP id k1mr3653404wak.1197056347493;
+	Fri, 07 Dec 2007 11:39:07 -0800 (PST)
+Received: by 10.114.208.4 with HTTP; Fri, 7 Dec 2007 11:39:07 -0800 (PST)
+Message-ID: <19c1b8a90712071139w299bab68k8005b8cc8d1116da@mail.gmail.com>
+Date: Fri, 7 Dec 2007 11:39:07 -0800
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 7 Dec 2007 19:58:36 +0100
-User-Agent: KMail/1.9.7
-References: <D7810733513F4840B4EBAAFA64D9C6A4019F53BF@stgw002a.ww002.siemens.net>
-In-Reply-To: <D7810733513F4840B4EBAAFA64D9C6A4019F53BF@stgw002a.ww002.siemens.net>
+In-Reply-To: <b6ebd0a50711300859l392f9b43i8168d2377fb8c852@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <200712071958.38466.openembedded@haerwu.biz>
-Subject: Re: [PATCH ] xfce-mcs-manager
+References: <474EA852.7090306@whitby.id.au>
+	<474ECF9A.6050603@student.utwente.nl>
+	<b6ebd0a50711290902te78ad84hd8cf64829a66c95@mail.gmail.com>
+	<474FF886.7060308@whitby.id.au>
+	<b6ebd0a50711300859l392f9b43i8168d2377fb8c852@mail.gmail.com>
+Subject: Re: RFC: auto eth0 and auto eth1 in netbase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,28 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2007 19:02:32 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Dec 2007 19:42:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia pi=B1tek, 7 grudnia 2007, Aeschbacher, Fabrice napisa=B3:
-> This patch corrects a bug in packages/xfce/xfce-mcs-manager.inc
+On Nov 30, 2007 8:59 AM, Chris Larson <clarson@kergoth.com> wrote:
+> On Nov 30, 2007 4:48 AM, Rod Whitby <rod@whitby.id.au> wrote:
+> > Chris Larson wrote:
+> > > Afaik, the execution of the hotplug/coldplug scripts on startup should
+> > > generate the hotplug events for the ethernet interfaces and bring them
+> > > up that way.  In debian, the hotplug scripts bring them up with ifup
+> > > --allow=hotplug [iface], such that you need an 'allow-hotplug eth0' in
+> > > interfaces to have them brought up that way.  I'm too rusty with OE to
+> > > say how we do it today, but it's not likely that auto is needed.
+> >
+> > Unfortunately, the busybox ifup applet does not support the
+> > allow-hotplug keyword.
+> >
+> > Based on the feedback, I'll add 'auto eth0'.
 >
-> Could someone please check it in?
 
-pushed
-
-Next time please attach it into bugtracker...
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-  Any smoothly functioning technology will have the appearance of magic.
-  		-- Arthur C. Clarke
-
-
+fwiw with this change my nfsrooted rfs does not boot. I think its a
+nice to have nfsroot option for dev work.
 
 
