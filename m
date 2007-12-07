@@ -1,27 +1,31 @@
-Received: from [64.233.162.231] (helo=nz-out-0506.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <hvontres@gmail.com>) id 1J0fxl-0007LJ-PI
-	for openembedded-devel@openembedded.org; Fri, 07 Dec 2007 17:22:06 +0100
-Received: by nz-out-0506.google.com with SMTP id q3so308788nzb
-	for <openembedded-devel@openembedded.org>;
-	Fri, 07 Dec 2007 08:18:15 -0800 (PST)
-Received: by 10.142.242.8 with SMTP id p8mr210001wfh.1197044294630;
-	Fri, 07 Dec 2007 08:18:14 -0800 (PST)
-Received: by 10.143.11.12 with HTTP; Fri, 7 Dec 2007 08:18:14 -0800 (PST)
-Message-ID: <a7f8874a0712070818h1e0192d1h6c9e91cf48c0c85c@mail.gmail.com>
-Date: Fri, 7 Dec 2007 08:18:14 -0800
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
-To: "Richard Purdie" <rpurdie@rpsys.net>
-In-Reply-To: <1197027528.4661.12.camel@localhost.localdomain>
-MIME-Version: 1.0
-References: <200711121044.32094.u.luckas@road.de>
-	<200711121102.51877.u.luckas@road.de>
-	<a7f8874a0712051306i3cebae60sfd0a10987612afd0@mail.gmail.com>
-	<4759292B.3060300@road.de>
-	<1197027528.4661.12.camel@localhost.localdomain>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Cc: openembedded-devel@openembedded.org, Uli Luckas <u.luckas@road.de>
-Subject: Re: [PATHC] ATAG export for the linux kernel
+	(envelope-from <rpurdie@rpsys.net>) id 1J0gGE-0005em-UI
+	for openembedded-devel@openembedded.org; Fri, 07 Dec 2007 17:41:11 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB7GbLpu008908
+	for <openembedded-devel@openembedded.org>; Fri, 7 Dec 2007 16:37:21 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 08641-08 for <openembedded-devel@openembedded.org>;
+	Fri,  7 Dec 2007 16:37:17 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lB7GbBff008885
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 7 Dec 2007 16:37:11 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <475947C7.6040904@student.utwente.nl>
+References: <E1J0bLW-00033w-Bc@linuxtogo.org>
+	<475947C7.6040904@student.utwente.nl>
+Date: Fri, 07 Dec 2007 16:37:10 +0000
+Message-Id: <1197045430.4661.119.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: [oe-commits] org.oe.dev sanity.conf: bump bitbake to	1.8.9 for lockfile changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,66 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2007 16:22:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 Dec 2007 16:41:11 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Dec 7, 2007 3:38 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+On Fri, 2007-12-07 at 14:16 +0100, Koen Kooi wrote:
+> koen commit schreef:
+> > sanity.conf: bump bitbake to 1.8.9 for lockfile changes
+> 
+> > -BB_MIN_VERSION = "1.8.8"
+> > +BB_MIN_VERSION = "1.8.9"
+> 
+> It turns out bitbake-1.8.9 doesn't have a tag in svn, and requires
+> people to use the stable bitbake-1.8 branch or trunk.
 
-> On Fri, 2007-12-07 at 11:06 +0000, Uli Luckas wrote:
-> > Hans Henry, thanks for testing. Good to know it worked for you. Let's
-> > see how we can get this thing pushed upstream.
-> >
-> > 1) I put this on the OE list as the original code is maintained in OE.
-> And
-> > that's why I'd like the code to be pushed to the OE repository first.
-> > I am not really an OE developer though. Is someone willing to do the OE
-> > integration to give my patch a home?
->
-> I'm happy for the userspace side of things to be added in OE. I have
-> some reservations about the way the kernel patch is added to the zaurus
-> code, particularly about the way the kernel commandline is handled from
-> the broken bootloader and I need to find some time to look at that. I'm
-> fine with the patch in principle though, I just want it right when its
-> added (and preferably upstream too, the existing zaurus changes will not
-> be accepted upstream).
->
-> > 2) I need to push the kernel patch via Russell. Mike, I have not heard
-> your
-> > opinion. Will you support this patch?
-> >
-> > 3) I need to push my userspace work. My work is based on code by Richard
-> > though. Richard, please jump in and let us know how you'd like to
-> proceede?
->
-> I did try and find the kexec-tools maintainer but got distracted and
-> never got back to it. Does anyone know who we need to send this to? I
-> will try and get that done this weekend...
->
-> > I'd really like to see kexec working on arm without any patches soon.
->
-> Agreed. I'm sorry I haven't found time to look at this yet, I will try
-> hard to do so this weekend.
->
-> Regards,
->
-> Richard
->
->
->
-> Richard,
+Right, 1.8.odd are the unstable svn versions.
 
-I updated http://bugs.openembedded.org/show_bug.cgi?id=3397 with a new patch
-to filter out the Sharp command line (for poodle at least). Let me know if
-that approach makes more sense.
+> The bump was needed after merging fixes from poky, which I realised
+> require features not present in bitbake 1.8.8.
+> I'm not to keen on backing out the package_ipk fix, since it fixes a lot
+> of problems.
+> 
+> So, how do we proceed from here?
 
-http://bugs.openembedded.org/show_bug.cgi?id=3430 has the userspace kexec
-patch.
+The only difference between the lockfile function I added in trunk and
+the one used in the class is that lock files which are finished with
+aren't removed. 
 
-Thanks for taking a look at this.
+I'd therefore suggest removing the "bb.utils." prefixes and add the
+lockfile and unlockfile function definitions back along with the import
+fcntl. That should work just fine.
+
+Cheers,
+
+Richard
 
 
--- 
-Henry von Tresckow (hvontres)
 
