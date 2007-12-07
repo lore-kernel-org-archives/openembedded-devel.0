@@ -1,22 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1J0mQc-0007BO-Hv
-	for openembedded-devel@openembedded.org; Sat, 08 Dec 2007 00:16:18 +0100
-Received: (qmail 24504 invoked by uid 813007); 7 Dec 2007 23:12:25 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 7 Dec 2007 23:12:25 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <mickey@vanille-media.de>) id 1J0mlo-0003Om-1t
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 08 Dec 2007 00:38:12 +0100
+Received: by vanille-media.de (Postfix, from userid 65534)
+	id A04A128C013; Sat,  8 Dec 2007 00:27:26 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: **
+X-Spam-Status: No, score=2.7 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180182151.adsl.alicedsl.de [85.180.182.151])
+	by vanille-media.de (Postfix) with ESMTP id 98A2228C012
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  8 Dec 2007 00:27:23 +0100 (CET)
+Date: Sat, 8 Dec 2007 00:34:15 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1281900637.20071208003415@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 8 Dec 2007 00:12:23 +0100
-User-Agent: KMail/1.9.7
-References: <145452892.20071207195745@vanille-media.de>
-	<4759AE61.2070803@student.utwente.nl>
-In-Reply-To: <4759AE61.2070803@student.utwente.nl>
+In-Reply-To: <4759BDB8.2030403@student.utwente.nl>
+References: <557008986.20071207213243@vanille-media.de>
+	<4759BDB8.2030403@student.utwente.nl>
 MIME-Version: 1.0
-Message-Id: <200712080012.24035.openembedded@haerwu.biz>
-Subject: Re: monotone merge flood
+Subject: Re: RFC: Adding Components to Bugzilla
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,31 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2007 23:16:18 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 Dec 2007 23:38:12 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=B1tek, 7 grudnia 2007, Koen Kooi napisa=B3:
+Koen Kooi wrote:
 > Michael 'Mickey' Lauer schreef:
+>> Hi,
+>> 
+>> what would you think about adding (a handful of) components to areas
+>> that are voluntarily maintained in OpenEmbedded? I.e. I'd like to add components
+>> named EFL and Python and make myself the default owner of that
+>> component.
+>> 
+>> This could improve structure and responsiveness to bugs.
 
-> > I have seen a monotone merge flood these days. Let me please remind
-> > you to mtn pull && mtn update before mtn push'ing.
->
-> That doesn't help to avoid merges, since you already committed the
-> changes. The safest way to avoid a merge flood is to leave merging to
-> the OE automerger.
+> On the other hand it decreases it if you get swamped with work, like you
+> were the past year. So, can the oe-issues mailinstlist still get its
+> usual buglog on those bugs?
 
-Safest but not needed. Monotone is distributed so it is safe to commit=20
-offline. It is just important to do pull/merge/update before push.
+I think we can hack bugzilla to do that, yeah.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Regards,
 
-               How many calories are there in a light year?
-
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
