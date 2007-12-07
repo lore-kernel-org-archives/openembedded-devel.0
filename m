@@ -1,28 +1,27 @@
-Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickeyl@linuxtogo.org>) id 1J0jw8-0006yQ-7v
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Dec 2007 21:36:40 +0100
-Received: by vanille-media.de (Postfix, from userid 65534)
-	id 9687828C013; Fri,  7 Dec 2007 21:25:55 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.1.7-deb
-Received: from PROMETHEUS (e180182151.adsl.alicedsl.de [85.180.182.151])
-	by vanille-media.de (Postfix) with ESMTP id 9888C28C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Dec 2007 21:25:52 +0100 (CET)
-Date: Fri, 7 Dec 2007 21:32:43 +0100
-From: Michael 'Mickey' Lauer <mickeyl@linuxtogo.org>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: LinuxToGo
-X-Priority: 3 (Normal)
-Message-ID: <557008986.20071207213243@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <k.kooi@student.utwente.nl>) id 1J0jy0-00070O-Fe
+	for openembedded-devel@openembedded.org; Fri, 07 Dec 2007 21:38:36 +0100
+Received: from Powerbook-2.local (vpn006044.vpn.utwente.nl [130.89.6.44])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lB7KYeiq029959 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 7 Dec 2007 21:34:40 +0100
+Message-ID: <4759AE61.2070803@student.utwente.nl>
+Date: Fri, 07 Dec 2007 21:34:41 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Subject: RFC: Adding Components to Bugzilla
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <145452892.20071207195745@vanille-media.de>
+In-Reply-To: <145452892.20071207195745@vanille-media.de>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: monotone merge flood
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,24 +35,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2007 20:36:40 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 07 Dec 2007 20:38:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-what would you think about adding (a handful of) components to areas
-that are voluntarily maintained in OpenEmbedded? I.e. I'd like to add components
-named EFL and Python and make myself the default owner of that
-component.
+Michael 'Mickey' Lauer schreef:
+> All,
+> 
+> I have seen a monotone merge flood these days. Let me please remind
+> you to mtn pull && mtn update before mtn push'ing.
 
-This could improve structure and responsiveness to bugs.
+That doesn't help to avoid merges, since you already committed the
+changes. The safest way to avoid a merge flood is to leave merging to
+the OE automerger.
 
-Regards,
+regards,
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Koen
 
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHWa5hMkyGM64RGpERAkAgAKCVw01oVJoyj66ifnlL5OmWmOSqWgCfcElV
+Nm3CEc6KS3C/GSbC228Psdw=
+=znji
+-----END PGP SIGNATURE-----
 
 
