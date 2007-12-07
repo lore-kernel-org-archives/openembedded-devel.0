@@ -1,29 +1,21 @@
-Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1J0iSC-0003KN-80
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Dec 2007 20:01:40 +0100
-Received: by vanille-media.de (Postfix, from userid 65534)
-	id A52B628C014; Fri,  7 Dec 2007 19:50:56 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.7 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180182151.adsl.alicedsl.de [85.180.182.151])
-	by vanille-media.de (Postfix) with ESMTP id C009628C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Dec 2007 19:50:52 +0100 (CET)
-Date: Fri, 7 Dec 2007 19:57:45 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <145452892.20071207195745@vanille-media.de>
+	(envelope-from <openembedded@haerwu.biz>) id 1J0iT1-0003LD-8a
+	for openembedded-devel@openembedded.org; Fri, 07 Dec 2007 20:02:31 +0100
+Received: (qmail 21631 invoked by uid 813007); 7 Dec 2007 18:58:39 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 7 Dec 2007 18:58:39 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
+Date: Fri, 7 Dec 2007 19:58:36 +0100
+User-Agent: KMail/1.9.7
+References: <D7810733513F4840B4EBAAFA64D9C6A4019F53BF@stgw002a.ww002.siemens.net>
+In-Reply-To: <D7810733513F4840B4EBAAFA64D9C6A4019F53BF@stgw002a.ww002.siemens.net>
 MIME-Version: 1.0
-Subject: monotone merge flood
+Message-Id: <200712071958.38466.openembedded@haerwu.biz>
+Subject: Re: [PATCH ] xfce-mcs-manager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,20 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2007 19:01:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Dec 2007 19:02:32 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-All,
+Dnia pi=B1tek, 7 grudnia 2007, Aeschbacher, Fabrice napisa=B3:
+> This patch corrects a bug in packages/xfce/xfce-mcs-manager.inc
+>
+> Could someone please check it in?
 
-I have seen a monotone merge flood these days. Let me please remind
-you to mtn pull && mtn update before mtn push'ing.
+pushed
 
-Regards,
+Next time please attach it into bugtracker...
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+  Any smoothly functioning technology will have the appearance of magic.
+  		-- Arthur C. Clarke
+
 
 
 
