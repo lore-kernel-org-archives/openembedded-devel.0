@@ -1,32 +1,28 @@
-Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1J0mlo-0003Om-1t
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 Dec 2007 00:38:12 +0100
-Received: by vanille-media.de (Postfix, from userid 65534)
-	id A04A128C013; Sat,  8 Dec 2007 00:27:26 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.7 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180182151.adsl.alicedsl.de [85.180.182.151])
-	by vanille-media.de (Postfix) with ESMTP id 98A2228C012
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Dec 2007 00:27:23 +0100 (CET)
-Date: Sat, 8 Dec 2007 00:34:15 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1281900637.20071208003415@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4759BDB8.2030403@student.utwente.nl>
-References: <557008986.20071207213243@vanille-media.de>
-	<4759BDB8.2030403@student.utwente.nl>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1J0vDf-0000iD-8F
+	for openembedded-devel@openembedded.org; Sat, 08 Dec 2007 09:39:31 +0100
+Received: from Powerbook-2.local (vpn006012.vpn.utwente.nl [130.89.6.12])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lB88ZViq029744 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 8 Dec 2007 09:35:32 +0100
+Message-ID: <475A5753.3020601@student.utwente.nl>
+Date: Sat, 08 Dec 2007 09:35:31 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Subject: Re: RFC: Adding Components to Bugzilla
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <47594E40.2090201@student.utwente.nl>
+	<841689643.20071207232147@gmail.com>
+In-Reply-To: <841689643.20071207232147@gmail.com>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [Angstrom-devel] RFC: ipv6 support in angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,32 +36,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2007 23:38:12 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 08 Dec 2007 08:39:31 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Michael 'Mickey' Lauer schreef:
->> Hi,
->> 
->> what would you think about adding (a handful of) components to areas
->> that are voluntarily maintained in OpenEmbedded? I.e. I'd like to add components
->> named EFL and Python and make myself the default owner of that
->> component.
->> 
->> This could improve structure and responsiveness to bugs.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> On the other hand it decreases it if you get swamped with work, like you
-> were the past year. So, can the oe-issues mailinstlist still get its
-> usual buglog on those bugs?
+Paul Sokolovsky schreef:
+> Hello Koen,
+> 
+> Friday, December 7, 2007, 3:44:32 PM, you wrote:
+> 
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+> 
+>> The following RFC was accepted by all angstrom developers, so moving it
+>> to OE now:
+> 
+> 
+>> I want to propose the following:
+> 
+>> * enabling the ipv6 kernel module on all network capable devices
+>> angstrom wants to support.
+>> * enabling the mip6 kernel module on capable kernels (afaik vanilla
+>> 2.6.23 or patches 2.6.x)
+>> * have ipv6 support enabled in the c library and busybox
+> 
+>> Some machines already do all this, but afaik we don't have a policy for
+>> it yet.
+> 
+>   Just one note - ipv6 is set for autoload in kernel.bbclass, not sure
+> this is good idea for such circumstances.
 
-I think we can hack bugzilla to do that, yeah.
+That doesn't matter, since the kernel-module won't be shipped by
+default, only enabled in the defconfig.
 
-Regards,
+regards,
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Koen
 
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHWldSMkyGM64RGpERAi41AJ4tUq308n5ofk7agjZZ+pNu3Q/dwgCgikEI
+MpjPBM01kSWv4LkjWtGLZqU=
+=Gbwi
+-----END PGP SIGNATURE-----
 
 
