@@ -1,21 +1,30 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1J1Qve-0006e1-9Q
-	for openembedded-devel@openembedded.org; Sun, 09 Dec 2007 19:31:03 +0100
-Received: (qmail 27530 invoked by uid 813007); 9 Dec 2007 18:26:59 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 9 Dec 2007 18:26:59 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <oe@hentges.net>) id 1J1U6N-0006J4-7K
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Dec 2007 22:54:19 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id 9E899308011;
+	Sun,  9 Dec 2007 22:50:15 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at hentges.net
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563.serverkompetenz.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 7+OiSjXmE-8M; Sun,  9 Dec 2007 22:50:14 +0100 (CET)
+Received: from [192.168.5.2] (xdsl-87-79-225-105.netcologne.de [87.79.225.105])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id D1C3B308004;
+	Sun,  9 Dec 2007 22:50:13 +0100 (CET)
+From: Matthias Hentges <oe@hentges.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 9 Dec 2007 19:26:43 +0100
-User-Agent: KMail/1.9.7
-References: <E1J1Kkb-0003OB-1U@linuxtogo.org>
-In-Reply-To: <E1J1Kkb-0003OB-1U@linuxtogo.org>
-MIME-Version: 1.0
-Message-Id: <200712091926.44305.openembedded@haerwu.biz>
-Subject: Re: [oe-commits] org.oe.dev tosa_udc_use_gpio_vbus.patch pxa2xx_udc_support_inverse_vbus.patch: fix patch hunk, delete junk.
+In-Reply-To: <bug-3446-13@http.bugs.openembedded.org/>
+References: <bug-3446-13@http.bugs.openembedded.org/>
+Date: Sun, 09 Dec 2007 22:50:12 +0100
+Message-Id: <1197237012.10154.2.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.3 
+Subject: Re: [oe-issues] [Bug 3446] New: zaurus-updater changes have broken	flashing on zaurus c760
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,50 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Dec 2007 18:31:06 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sun, 09 Dec 2007 21:54:19 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia niedziela, 9 grudnia 2007, xjqian commit napisa=B3:
+Am Sonntag, den 09.12.2007, 11:34 -0800 schrieb 
 
-> tosa_udc_use_gpio_vbus.patch pxa2xx_udc_support_inverse_vbus.patch: fix
-> patch hunk, delete junk.
->
-> Author: xjqian@openembedded.org
-> Branch: org.openembedded.dev
-> Revision: e9723297c42dc2e4470bd4cdc748d71e88ef4148
+[...]
 
-> -From dbaryshkov@gmail.com Fri Dec  7 00:05:32 2007
-> -Return-Path:
-> <SRS0=3D7TBh+psr=3DQ5=3Dlists.arm.linux.org.uk=3Dlinux-arm-kernel-bounces=
-+opene
->mbedded=3Dhaerwu.biz@haerwu.biz> -X-Spam-Checker-Version: SpamAssassin
-> 3.1.7 (2006-10-05) on 3080.s.tld.pl -X-Spam-Level:
-> -X-Spam-Status: No, score=3D1.0 required=3D5.0 tests=3DBAYES_40,SPF_FAIL
-> -	autolearn=3Ddisabled version=3D3.1.7
-> -Delivered-To: haerwu.biz-marcin@haerwu.biz
-> -Received: (qmail 3062 invoked by uid 813007); 6 Dec 2007 23:44:39
-> -0000 -Delivered-To: haerwu.biz-openembedded@haerwu.biz
-> -Received: (qmail 3048 invoked by uid 813007); 6 Dec 2007 23:44:39
-> -0000 -X-clamdmail: clamdmail 0.18a
-> -Received: from zeniv.linux.org.uk (195.92.253.2)
-> -  by smtp.host4.kei.pl with SMTP; 6 Dec 2007 23:44:38 -0000
-> -Received: from [2002:4e20:1eda:1:201:3dff:fe00:156]
-> (helo=3Dlists.arm.linux.org.uk) -	by ZenIV.linux.org.uk with esmtpsa
-> (Exim 4.63 #1 (Red Hat Linux)) -	id 1J0Pts-0004dN-KF; Thu, 06 Dec 2007
-> 23:13:03 +0000
+> After building a recent .dev branch angstrom release, flashing it to my c760, I
+> only got the infamous jffs2_scan_eraseblock(): Magic bitmask 0x1985 not found,
+> repeated constantly.
+> 
+> The problem seems to have been introduced by some change in the updater.sh
+> script, from the zaurus-updater package. After replacing updater.sh with a
+> version from some openzaurus release, it flashed fine at once.
+> 
 
-Please do not remove mail parts of patches - I added those to give=20
-information where from those patches are.
+Interesting. So not only Akita is affected. Do we have _any_ reports of
+successful rootfs flashes with the new updater.sh?
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+-- 
+Matthias 'CoreDump' Hentges 
+Cologne / Germany
 
-             The computer is mightier than the pen, the sword,
-             and usually, the programmer.
+Webmaster of Hentges.net & Embedded Linux Developer
+GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
+
+My OS: Debian SID: Geek by Nature, Linux by Choice
+
 
 
 
