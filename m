@@ -1,23 +1,23 @@
 Received: from [85.10.209.111] (helo=mail.road.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <u.luckas@road.de>) id 1J1fRA-0000Kz-3N
+	(envelope-from <u.luckas@road.de>) id 1J1fpT-0005Ca-0A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Dec 2007 11:00:34 +0100
+	Mon, 10 Dec 2007 11:25:39 +0100
 Received: from slimfast.dyndns.org (unknown [192.168.254.1])
-	by mail.road.de (Postfix) with ESMTP id AF5C7390001;
-	Mon, 10 Dec 2007 10:56:23 +0100 (CET)
+	by mail.road.de (Postfix) with ESMTP id BCBED390001;
+	Mon, 10 Dec 2007 11:21:30 +0100 (CET)
 Received: from [192.168.116.44] (ulitu.handy-pc.constin.de [192.168.116.44])
-	by slimfast.dyndns.org (Postfix) with ESMTP id CF594AD400B;
-	Mon, 10 Dec 2007 10:56:22 +0100 (CET)
-Message-ID: <475D0D46.2030303@road.de>
-Date: Mon, 10 Dec 2007 09:56:22 +0000
+	by slimfast.dyndns.org (Postfix) with ESMTP id 9ABDFAD400B;
+	Mon, 10 Dec 2007 11:21:30 +0100 (CET)
+Message-ID: <475D132A.6040400@road.de>
+Date: Mon, 10 Dec 2007 10:21:30 +0000
 From: Uli Luckas <u.luckas@road.de>
 User-Agent: Mozilla-Thunderbird 2.0.0.4 (X11/20070828)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <200711121044.32094.u.luckas@road.de>	<200711121102.51877.u.luckas@road.de>	<a7f8874a0712051306i3cebae60sfd0a10987612afd0@mail.gmail.com>	<4759292B.3060300@road.de>	<1197027528.4661.12.camel@localhost.localdomain>	<a7f8874a0712070818h1e0192d1h6c9e91cf48c0c85c@mail.gmail.com>
-	<1197275254.4804.8.camel@localhost.localdomain>
-In-Reply-To: <1197275254.4804.8.camel@localhost.localdomain>
+References: <200711121044.32094.u.luckas@road.de>	<200711121102.51877.u.luckas@road.de>	<a7f8874a0712051306i3cebae60sfd0a10987612afd0@mail.gmail.com>	<4759292B.3060300@road.de>	<1197027528.4661.12.camel@localhost.localdomain>
+	<a7f8874a0712070818h1e0192d1h6c9e91cf48c0c85c@mail.gmail.com>
+In-Reply-To: <a7f8874a0712070818h1e0192d1h6c9e91cf48c0c85c@mail.gmail.com>
 Subject: Re: [PATHC] ATAG export for the linux kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,81 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2007 10:00:34 -0000
+X-List-Received-Date: Mon, 10 Dec 2007 10:25:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On Friday, 7. December 2007, Hans Henry von Tresckow wrote:
- > On Dec 7, 2007 3:38 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
- > > On Fri, 2007-12-07 at 11:06 +0000, Uli Luckas wrote:
- > > > Hans Henry, thanks for testing. Good to know it worked for you. Let's
- > > > see how we can get this thing pushed upstream.
- > > >
- > > > 1) I put this on the OE list as the original code is maintained 
-in OE.
- > >
- > > And
- > >
- > > > that's why I'd like the code to be pushed to the OE repository first.
- > > > I am not really an OE developer though. Is someone willing to do 
-the OE
- > > > integration to give my patch a home?
- > >
- > > I'm happy for the userspace side of things to be added in OE. I have
- > > some reservations about the way the kernel patch is added to the zaurus
- > > code, particularly about the way the kernel commandline is handled 
-from
- > > the broken bootloader and I need to find some time to look at that. I'm
- > > fine with the patch in principle though, I just want it right when its
- > > added (and preferably upstream too, the existing zaurus changes 
-will not
- > > be accepted upstream).
- > >
- > > > 2) I need to push the kernel patch via Russell. Mike, I have not 
-heard
- > > your opinion. Will you support this patch?
- > > >
- > > > 3) I need to push my userspace work. My work is based on code by
- > > > Richard though. Richard, please jump in and let us know how you'd 
-like
- > > > to
- > >
- > > proceede?
- > >
- > > I did try and find the kexec-tools maintainer but got distracted and
- > > never got back to it. Does anyone know who we need to send this to? I
- > > will try and get that done this weekend...
- > >
- > > > I'd really like to see kexec working on arm without any patches soon.
- > >
- > > Agreed. I'm sorry I haven't found time to look at this yet, I will try
- > > hard to do so this weekend.
- > >
- > > Regards,
- > >
- > > Richard
- > >
- > >
- > >
- > > Richard,
- >
  > I updated http://bugs.openembedded.org/show_bug.cgi?id=3397 with a new
  > patch to filter out the Sharp command line (for poodle at least). Let me
  > know if that approach makes more sense.
  >
-I think I am missing something here. Didn't you (Hans Henry) report my 
-kernel
-patch to work on poodle?
-As I don't have a Sharp, could someone clue me in what problem you guys are
-trying to sove here?
+Hans Henry,
+this patch still contains patch 80-kexec-atags.patch which should be 
+obsoleted
+by my patch.
+The basic idea is that the kexec mechanism already in place moves the 
+ATAGs to
+the expected location. That's why it does not need any modifications to
+arch/arm/kernel/relocate_kernel.S.
+Could you please test again with 80-kexec-atags.patch _not_ applied?
 
- > http://bugs.openembedded.org/show_bug.cgi?id=3430 has the userspace kexec
- > patch.
- >
-Thanks for forwarding the patch to the right channel.
-
-Regards,
+Thanks
 Uli
+
 
 -- 
 
