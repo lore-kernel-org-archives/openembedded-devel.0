@@ -1,35 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1J1e3T-0004Wk-BP
-	for openembedded-devel@openembedded.org; Mon, 10 Dec 2007 09:32:03 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lBA8ReYv006494;
-	Mon, 10 Dec 2007 08:27:40 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 06418-02; Mon, 10 Dec 2007 08:27:36 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lBA8RZ4v006486
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 10 Dec 2007 08:27:35 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Hans Henry von Tresckow <hvontres@gmail.com>
-In-Reply-To: <a7f8874a0712070818h1e0192d1h6c9e91cf48c0c85c@mail.gmail.com>
-References: <200711121044.32094.u.luckas@road.de>
-	<200711121102.51877.u.luckas@road.de>
-	<a7f8874a0712051306i3cebae60sfd0a10987612afd0@mail.gmail.com>
-	<4759292B.3060300@road.de>
-	<1197027528.4661.12.camel@localhost.localdomain>
-	<a7f8874a0712070818h1e0192d1h6c9e91cf48c0c85c@mail.gmail.com>
-Date: Mon, 10 Dec 2007 08:27:34 +0000
-Message-Id: <1197275254.4804.8.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@openembedded.org, Uli Luckas <u.luckas@road.de>
-Subject: Re: [PATHC] ATAG export for the linux kernel
+	(envelope-from <k.kooi@student.utwente.nl>) id 1J1eZB-00050c-H3
+	for openembedded-devel@openembedded.org; Mon, 10 Dec 2007 10:04:47 +0100
+Received: from Powerbook-2.local (vpn006034.vpn.utwente.nl [130.89.6.34])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lBA90Wfr019892 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Dec 2007 10:00:34 +0100
+Message-ID: <475D0030.2050704@student.utwente.nl>
+Date: Mon, 10 Dec 2007 10:00:32 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <E1J1deN-00080d-OX@linuxtogo.org>
+In-Reply-To: <E1J1deN-00080d-OX@linuxtogo.org>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [oe-commits] org.oe.dev Integrate helper scripts into	meta-toolchain-openmoko.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,50 +35,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2007 08:32:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 10 Dec 2007 09:04:50 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Fri, 2007-12-07 at 08:18 -0800, Hans Henry von Tresckow wrote:
-> I updated http://bugs.openembedded.org/show_bug.cgi?id=3397 with a new
-> patch to filter out the Sharp command line (for poodle at least). Let
-> me know if that approach makes more sense.
->
-> http://bugs.openembedded.org/show_bug.cgi?id=3430 has the userspace
-> kexec patch.
->
-> Thanks for taking a look at this.
+john_lee commit schreef:
+> Integrate helper scripts into meta-toolchain-openmoko.
 
-I've had a look at the patches, have given them a lot of thought and I'm
-not convinced the approach is quite right. I do have an alternative
-proposal however.
+Note that if you distribute the result you violate the GPL and MIT licenses.
 
-I agree we need access to the existing atags from the kernel. To get
-them I think we should memcpy them as per the existing code but do this
-after any old style boot params have been converted into atags.
+If you include files from OE, you need to include COPYING.MIT as well,
+if you include parts of a GPL'ed project, you need to include the license..
 
-When it comes to kexec'ing the new kernel, we setup the new kernel at
-the 32kiB offset as we currently to but we copy our new set of atags
-into the first 16kiB region. We then point r2 of the new kernel at this
-memory address and the new kernel should use this set of tags.
-
-This means we don't have to mess around trying to work out what address
-to put the atags, boot_params etc. at and also it means we know for
-certain that the options passed from kexec are the ones used, not some
-other random options. It also means no modifications are required to
-existing machines such as the zaurus.
-
-I'd also consider having kexec extract the commandline from the running
-kernel is none is specified.
-
-I will try and implement this if I get a chance and see how it works...
-
-Cheers,
-
-Richard
+Probably more problems, but this is what I found after eyeballing the
+scripts for a few seconds.
 
 
+> Author: john_lee@openmoko.com
+> Branch: org.openembedded.dev
+> Revision: 4dc379aab7427cdddc45871616c34a79875f1b3f
+> ViewMTN: http://monotone.openembedded.org/revision/info/4dc379aab7427cdddc45871616c34a79875f1b3f
+> Files:
+> 1
+> packages/openmoko-spaces
+> packages/openmoko-spaces/openmoko-toolchain-scripts_svn.bb
+> packages/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb
+> packages/tasks/task-toolchain-openmoko-sdk.bb
+> Diffs:
+> 
+> #
+> # mt diff -r76ea1207ddbc877a1858eddac5d821f6cd0bc4ee -r4dc379aab7427cdddc45871616c34a79875f1b3f
+> #
+> # 
+> # 
+> # add_dir "packages/openmoko-spaces"
+> # 
+> # add_file "packages/openmoko-spaces/openmoko-toolchain-scripts_svn.bb"
+> #  content [9ca964cafabb093788ba8d42e42e6cd2c4c01437]
+> # 
+> # patch "packages/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb"
+> #  from [78905ac03fe3db35fb352b69c6d94fa42889ce6a]
+> #    to [542bd7c20a1c55763795a9ed029a70b90c8810cf]
+> # 
+> # patch "packages/tasks/task-toolchain-openmoko-sdk.bb"
+> #  from [7af4fab2e6a807dcffa21e3e435c72702f5f2e0f]
+> #    to [c8861d63c40205aa7501e8801f328f1b0ec46a99]
+> # 
+> ============================================================
+> --- packages/openmoko-spaces/openmoko-toolchain-scripts_svn.bb	9ca964cafabb093788ba8d42e42e6cd2c4c01437
+> +++ packages/openmoko-spaces/openmoko-toolchain-scripts_svn.bb	9ca964cafabb093788ba8d42e42e6cd2c4c01437
+> @@ -0,0 +1,15 @@
+> +DESCRIPTION = "Convenient scripts to be used with openmoko toolchain."
+> +PACKAGE_ARCH = "all"
+> +
+> +SRC_URI = "svn://svn.openmoko.org/developers/john_lee;module=toolkit;proto=http"
+> +SRC_URI += "svn://svn.openmoko.org/trunk/src/target/OM-2007.2/applications;module=openmoko-sample2;proto=http"
+> +
+> +SRCREV="3563"
+> +FILES_${PN} = "/"
+> +
+> +do_install () {
+> +	(find ${WORKDIR} -type d -name ".svn" | xargs rm -rf) || true
+> +	install -m 755 -d ${D}/share
+> +	cp -dr ${WORKDIR}/toolkit/* ${D}
+> +	cp -dr ${WORKDIR}/openmoko-sample2 ${D}/share
+> +}
+> ============================================================
+> --- packages/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb	78905ac03fe3db35fb352b69c6d94fa42889ce6a
+> +++ packages/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb	542bd7c20a1c55763795a9ed029a70b90c8810cf
+> @@ -8,7 +8,7 @@ FILESDIR = "${@os.path.dirname(bb.data.g
+>  # Avoid circular dependencies from package_ipk.bbclass
+>  PACKAGES = ""
+>  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/ipkg-utils"
+> -INSTALL += "arfile.py"
+> +INSTALL += "ipkg-list-fields arfile.py"
+>  
+>  do_stage() {
+>          for i in ${INSTALL}; do
+> ============================================================
+> --- packages/tasks/task-toolchain-openmoko-sdk.bb	7af4fab2e6a807dcffa21e3e435c72702f5f2e0f
+> +++ packages/tasks/task-toolchain-openmoko-sdk.bb	c8861d63c40205aa7501e8801f328f1b0ec46a99
+> @@ -25,4 +25,5 @@ RDEPENDS_${PN} = "\
+>      libmokoui2-dev \
+>      libmokopanelui2-dev \
+>      libmokojournal2-dev \
+> +    openmoko-toolchain-scripts \
+>  "
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+> 
+
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHXQAwMkyGM64RGpERAgKVAJoCnzLrrD0o4+HM5qUhpYwWnr0ceQCgslmx
+vusYOIVlt8qmhx0Kzq59eRw=
+=tJ43
+-----END PGP SIGNATURE-----
 
 
