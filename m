@@ -1,27 +1,24 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [85.10.209.111] (helo=mail.road.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J1eZB-00050c-H3
-	for openembedded-devel@openembedded.org; Mon, 10 Dec 2007 10:04:47 +0100
-Received: from Powerbook-2.local (vpn006034.vpn.utwente.nl [130.89.6.34])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lBA90Wfr019892 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2007 10:00:34 +0100
-Message-ID: <475D0030.2050704@student.utwente.nl>
-Date: Mon, 10 Dec 2007 10:00:32 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <u.luckas@road.de>) id 1J1fRA-0000Kz-3N
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Dec 2007 11:00:34 +0100
+Received: from slimfast.dyndns.org (unknown [192.168.254.1])
+	by mail.road.de (Postfix) with ESMTP id AF5C7390001;
+	Mon, 10 Dec 2007 10:56:23 +0100 (CET)
+Received: from [192.168.116.44] (ulitu.handy-pc.constin.de [192.168.116.44])
+	by slimfast.dyndns.org (Postfix) with ESMTP id CF594AD400B;
+	Mon, 10 Dec 2007 10:56:22 +0100 (CET)
+Message-ID: <475D0D46.2030303@road.de>
+Date: Mon, 10 Dec 2007 09:56:22 +0000
+From: Uli Luckas <u.luckas@road.de>
+User-Agent: Mozilla-Thunderbird 2.0.0.4 (X11/20070828)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <E1J1deN-00080d-OX@linuxtogo.org>
-In-Reply-To: <E1J1deN-00080d-OX@linuxtogo.org>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev Integrate helper scripts into	meta-toolchain-openmoko.
+To: openembedded-devel@lists.openembedded.org
+References: <200711121044.32094.u.luckas@road.de>	<200711121102.51877.u.luckas@road.de>	<a7f8874a0712051306i3cebae60sfd0a10987612afd0@mail.gmail.com>	<4759292B.3060300@road.de>	<1197027528.4661.12.camel@localhost.localdomain>	<a7f8874a0712070818h1e0192d1h6c9e91cf48c0c85c@mail.gmail.com>
+	<1197275254.4804.8.camel@localhost.localdomain>
+In-Reply-To: <1197275254.4804.8.camel@localhost.localdomain>
+Subject: Re: [PATHC] ATAG export for the linux kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,115 +32,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2007 09:04:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 10 Dec 2007 10:00:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Friday, 7. December 2007, Hans Henry von Tresckow wrote:
+ > On Dec 7, 2007 3:38 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+ > > On Fri, 2007-12-07 at 11:06 +0000, Uli Luckas wrote:
+ > > > Hans Henry, thanks for testing. Good to know it worked for you. Let's
+ > > > see how we can get this thing pushed upstream.
+ > > >
+ > > > 1) I put this on the OE list as the original code is maintained 
+in OE.
+ > >
+ > > And
+ > >
+ > > > that's why I'd like the code to be pushed to the OE repository first.
+ > > > I am not really an OE developer though. Is someone willing to do 
+the OE
+ > > > integration to give my patch a home?
+ > >
+ > > I'm happy for the userspace side of things to be added in OE. I have
+ > > some reservations about the way the kernel patch is added to the zaurus
+ > > code, particularly about the way the kernel commandline is handled 
+from
+ > > the broken bootloader and I need to find some time to look at that. I'm
+ > > fine with the patch in principle though, I just want it right when its
+ > > added (and preferably upstream too, the existing zaurus changes 
+will not
+ > > be accepted upstream).
+ > >
+ > > > 2) I need to push the kernel patch via Russell. Mike, I have not 
+heard
+ > > your opinion. Will you support this patch?
+ > > >
+ > > > 3) I need to push my userspace work. My work is based on code by
+ > > > Richard though. Richard, please jump in and let us know how you'd 
+like
+ > > > to
+ > >
+ > > proceede?
+ > >
+ > > I did try and find the kexec-tools maintainer but got distracted and
+ > > never got back to it. Does anyone know who we need to send this to? I
+ > > will try and get that done this weekend...
+ > >
+ > > > I'd really like to see kexec working on arm without any patches soon.
+ > >
+ > > Agreed. I'm sorry I haven't found time to look at this yet, I will try
+ > > hard to do so this weekend.
+ > >
+ > > Regards,
+ > >
+ > > Richard
+ > >
+ > >
+ > >
+ > > Richard,
+ >
+ > I updated http://bugs.openembedded.org/show_bug.cgi?id=3397 with a new
+ > patch to filter out the Sharp command line (for poodle at least). Let me
+ > know if that approach makes more sense.
+ >
+I think I am missing something here. Didn't you (Hans Henry) report my 
+kernel
+patch to work on poodle?
+As I don't have a Sharp, could someone clue me in what problem you guys are
+trying to sove here?
 
-john_lee commit schreef:
-> Integrate helper scripts into meta-toolchain-openmoko.
+ > http://bugs.openembedded.org/show_bug.cgi?id=3430 has the userspace kexec
+ > patch.
+ >
+Thanks for forwarding the patch to the right channel.
 
-Note that if you distribute the result you violate the GPL and MIT licenses.
+Regards,
+Uli
 
-If you include files from OE, you need to include COPYING.MIT as well,
-if you include parts of a GPL'ed project, you need to include the license..
+-- 
 
-Probably more problems, but this is what I found after eyeballing the
-scripts for a few seconds.
+------- ROAD ...the handyPC Company - - -  ) ) )
 
+Uli Luckas
+Software Development
 
-> Author: john_lee@openmoko.com
-> Branch: org.openembedded.dev
-> Revision: 4dc379aab7427cdddc45871616c34a79875f1b3f
-> ViewMTN: http://monotone.openembedded.org/revision/info/4dc379aab7427cdddc45871616c34a79875f1b3f
-> Files:
-> 1
-> packages/openmoko-spaces
-> packages/openmoko-spaces/openmoko-toolchain-scripts_svn.bb
-> packages/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb
-> packages/tasks/task-toolchain-openmoko-sdk.bb
-> Diffs:
-> 
-> #
-> # mt diff -r76ea1207ddbc877a1858eddac5d821f6cd0bc4ee -r4dc379aab7427cdddc45871616c34a79875f1b3f
-> #
-> # 
-> # 
-> # add_dir "packages/openmoko-spaces"
-> # 
-> # add_file "packages/openmoko-spaces/openmoko-toolchain-scripts_svn.bb"
-> #  content [9ca964cafabb093788ba8d42e42e6cd2c4c01437]
-> # 
-> # patch "packages/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb"
-> #  from [78905ac03fe3db35fb352b69c6d94fa42889ce6a]
-> #    to [542bd7c20a1c55763795a9ed029a70b90c8810cf]
-> # 
-> # patch "packages/tasks/task-toolchain-openmoko-sdk.bb"
-> #  from [7af4fab2e6a807dcffa21e3e435c72702f5f2e0f]
-> #    to [c8861d63c40205aa7501e8801f328f1b0ec46a99]
-> # 
-> ============================================================
-> --- packages/openmoko-spaces/openmoko-toolchain-scripts_svn.bb	9ca964cafabb093788ba8d42e42e6cd2c4c01437
-> +++ packages/openmoko-spaces/openmoko-toolchain-scripts_svn.bb	9ca964cafabb093788ba8d42e42e6cd2c4c01437
-> @@ -0,0 +1,15 @@
-> +DESCRIPTION = "Convenient scripts to be used with openmoko toolchain."
-> +PACKAGE_ARCH = "all"
-> +
-> +SRC_URI = "svn://svn.openmoko.org/developers/john_lee;module=toolkit;proto=http"
-> +SRC_URI += "svn://svn.openmoko.org/trunk/src/target/OM-2007.2/applications;module=openmoko-sample2;proto=http"
-> +
-> +SRCREV="3563"
-> +FILES_${PN} = "/"
-> +
-> +do_install () {
-> +	(find ${WORKDIR} -type d -name ".svn" | xargs rm -rf) || true
-> +	install -m 755 -d ${D}/share
-> +	cp -dr ${WORKDIR}/toolkit/* ${D}
-> +	cp -dr ${WORKDIR}/openmoko-sample2 ${D}/share
-> +}
-> ============================================================
-> --- packages/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb	78905ac03fe3db35fb352b69c6d94fa42889ce6a
-> +++ packages/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb	542bd7c20a1c55763795a9ed029a70b90c8810cf
-> @@ -8,7 +8,7 @@ FILESDIR = "${@os.path.dirname(bb.data.g
->  # Avoid circular dependencies from package_ipk.bbclass
->  PACKAGES = ""
->  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/ipkg-utils"
-> -INSTALL += "arfile.py"
-> +INSTALL += "ipkg-list-fields arfile.py"
->  
->  do_stage() {
->          for i in ${INSTALL}; do
-> ============================================================
-> --- packages/tasks/task-toolchain-openmoko-sdk.bb	7af4fab2e6a807dcffa21e3e435c72702f5f2e0f
-> +++ packages/tasks/task-toolchain-openmoko-sdk.bb	c8861d63c40205aa7501e8801f328f1b0ec46a99
-> @@ -25,4 +25,5 @@ RDEPENDS_${PN} = "\
->      libmokoui2-dev \
->      libmokopanelui2-dev \
->      libmokojournal2-dev \
-> +    openmoko-toolchain-scripts \
->  "
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
-> 
+ROAD GmbH
+Bennigsenstr. 14 | 12159 Berlin | Germany
+fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
+url: www.road.de
 
+Amtsgericht Charlottenburg: HRB 96688 B
+Managing directors: Hans-Peter Constien, Hubertus von Streit
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHXQAwMkyGM64RGpERAgKVAJoCnzLrrD0o4+HM5qUhpYwWnr0ceQCgslmx
-vusYOIVlt8qmhx0Kzq59eRw=
-=tJ43
------END PGP SIGNATURE-----
 
 
