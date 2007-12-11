@@ -1,27 +1,24 @@
-Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J25cs-0000g8-HU
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1J26P4-00025O-2F
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2007 14:58:22 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so274274ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2007 05:54:09 -0800 (PST)
-Received: by 10.86.53.8 with SMTP id b8mr6721370fga.1197381249094;
-	Tue, 11 Dec 2007 05:54:09 -0800 (PST)
-Received: from ?192.168.61.156? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id k29sm6557215fkk.2007.12.11.05.54.06
-	(version=SSLv3 cipher=OTHER); Tue, 11 Dec 2007 05:54:06 -0800 (PST)
-Date: Tue, 11 Dec 2007 15:57:44 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <188168675.20071211155744@gmail.com>
-To: Junqian Gordon Xu <xjqian@gmail.com>
-In-Reply-To: <475E307E.6000408@gmail.com>
-References: <475E307E.6000408@gmail.com>
+	Tue, 11 Dec 2007 15:48:10 +0100
+Received: (qmail invoked by alias); 11 Dec 2007 14:43:54 -0000
+Received: from e178094202.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.94.202]
+	by mail.gmx.net (mp040) with SMTP; 11 Dec 2007 15:43:54 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+FNgdzkaeFyq48h6ETAxzuZ+axR6wRjbyFxOHXcd
+	OaB4TTXwHNz7r2
+Message-ID: <475EA224.7060706@gmx.net>
+Date: Tue, 11 Dec 2007 15:43:48 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: move zroadmap receipies to packages/roadmap
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: applying for r/w access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,31 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2007 13:58:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Dec 2007 14:48:10 -0000
+X-Groupsio-MsgNum: 3595
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig5B5F547205930B5433664A61"
 
-Hello Junqian,
+--------------enig5B5F547205930B5433664A61
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Tuesday, December 11, 2007, 8:38:54 AM, you wrote:
+Hi,
+I am using OE for 2 years now and since lately I am working for my
+employer tarent with OE to get the Java recipes for Jalimo done.
 
-> I plan to move the zroadmap receipts in packages/zroadmap to 
-> packages/roadmap for better maintenance.
+I would be happy if you grant me write access to OE's repository so I
+can contribute, fix and maintain all things Java.
 
-  Sure, you're welcome.
+One thing I'd like to know: If I want to get comments on a patch should
+I sent it to oe-devel or file a bug. What do you prefer?
 
-> zroadmap is the QT version of the roadmap (gtk version). Roadmap is one
-> of the essential applications for Zaurus users in the States. The recent
-> 1.1.0 release, brings it up-to-date with 2006 Tiger street maps from the
-> Census Bureau and fixes many bugs.
+Here is my freshly generated public key:
 
-> Gordon
+[pubkey thebohemian@openembedded.org]
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsMHwWhpTC5wAgG7BrRKAhkXdnFJjRuSCv
+pIPJ1S9+NwohBtGkcfrPHj/pIOPg7sYF4XPJSh2jth1suzpSFjXSeq4q9UE/sisSZEzTi5K5
+bap58oyDiVwWw9Rl1LIr0VjSjzCGhhv8i/3fwAXdUOUdNJ53aEq64cNca69ZlrCk/wIDAQAB
+[end]
 
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+Regards
+Robert
 
 
+--------------enig5B5F547205930B5433664A61
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHXqIoG9cfwmwwEtoRCD1uAJ4mMKkDYqRnGQvXIl8JDdU5bmW38QCghRQ2
+hUe2gHd+XJ1MQq/o1P1JNC4=
+=+Eye
+-----END PGP SIGNATURE-----
+
+--------------enig5B5F547205930B5433664A61--
