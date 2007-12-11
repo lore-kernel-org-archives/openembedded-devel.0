@@ -1,21 +1,24 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <dp@xora.org.uk>) id 1J28GM-00051w-Eo
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1J2A8P-0007Pq-6X
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2007 17:47:18 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Tue, 11 Dec 2007 16:43:03 +0000
-	id 0006824A.475EBE18.00006A06
-Date: Tue, 11 Dec 2007 16:43:39 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Tue, 11 Dec 2007 19:47:13 +0100
+Received: (qmail invoked by alias); 11 Dec 2007 18:42:56 -0000
+Received: from e178094202.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.94.202]
+	by mail.gmx.net (mp054) with SMTP; 11 Dec 2007 19:42:56 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+/kt0vz6u/Ti3So3WIyXr5Hvmp2cYVq8JRCwHvhJ
+	hOkDPQMJmi3OYE
+Message-ID: <475EDA2B.8080109@gmx.net>
+Date: Tue, 11 Dec 2007 19:42:51 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20071211164339.54cc1dea@cimmeria>
-In-Reply-To: <475EA224.7060706@gmx.net>
-References: <475EA224.7060706@gmx.net>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: applying for r/w access
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: RFC: merging recipes from Jalimo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,21 +32,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2007 16:47:18 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Dec 2007 18:47:13 -0000
+X-Groupsio-MsgNum: 3599
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig497AC83FC0CAC155201F8166"
 
-On Tue, 11 Dec 2007 15:43:48 +0100
-Robert Schuster <theBohemian@gmx.net> wrote:
+--------------enig497AC83FC0CAC155201F8166
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-> Hi,
-> I am using OE for 2 years now and since lately I am working for my
-> employer tarent with OE to get the Java recipes for Jalimo done.
-> 
-Im sure a meal must be worth access :-)
+Hi,
+since I've gotten r/w access to the repo (thanks again!) I have begun to
+slowly merge the Jalimo recipes. It all starts with this one:
 
-+1
+http://bugs.openembedded.org/show_bug.cgi?id=3D3457
 
-Graeme
+The recipe that builts the initial Java5-capable Java compiler.
+
+Please comment on the bug and tell me whether it should go in or what
+you would like to see changed.
+
+Regards
+Robert
 
 
+--------------enig497AC83FC0CAC155201F8166
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHXtouG9cfwmwwEtoRCFSfAJsGuF432DNcxJYSpCI3WaAmJf1FzgCfdtaE
+O/k3TPL40Vi9G1Y8lLwViAU=
+=LDCF
+-----END PGP SIGNATURE-----
+
+--------------enig497AC83FC0CAC155201F8166--
