@@ -1,30 +1,25 @@
-Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1J26ww-0007Kc-CP
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2007 16:23:10 +0100
-Received: by vanille-media.de (Postfix, from userid 65534)
-	id 2E9BE28C012; Tue, 11 Dec 2007 16:11:55 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.7 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180141060.adsl.alicedsl.de [85.180.141.60])
-	by vanille-media.de (Postfix) with ESMTP id 1E32A28C012;
-	Tue, 11 Dec 2007 16:11:52 +0100 (CET)
-Date: Tue, 11 Dec 2007 16:18:53 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <666806270.20071211161853@vanille-media.de>
-To: Robert Schuster <theBohemian@gmx.net>
-In-Reply-To: <475EA224.7060706@gmx.net>
-References: <475EA224.7060706@gmx.net>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1J27Kn-0007uG-N3
+	for openembedded-devel@openembedded.org; Tue, 11 Dec 2007 16:47:49 +0100
+Received: from Powerbook-2.local (vpn006150.vpn.utwente.nl [130.89.6.150])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lBBFhT0k012736 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Dec 2007 16:43:29 +0100
+Message-ID: <475EB021.7020107@student.utwente.nl>
+Date: Tue, 11 Dec 2007 16:43:29 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@openembedded.org
+References: <475EA224.7060706@gmx.net>
+In-Reply-To: <475EA224.7060706@gmx.net>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: applying for r/w access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,29 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2007 15:23:10 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 11 Dec 2007 15:47:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-+1. Koen, can you or should I?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> I would be happy if you grant me write access to OE's repository so I
-> can contribute, fix and maintain all things Java.
+Robert Schuster schreef:
+> Hi,
+> I am using OE for 2 years now and since lately I am working for my
+> employer tarent with OE to get the Java recipes for Jalimo done.
+> 
+> I would be happy if you grant me write access to OE's repository
 
-Excellent. Appreciating this work.
++1 from me
 
-> One thing I'd like to know: If I want to get comments on a patch should
-> I sent it to oe-devel or file a bug. What do you prefer?
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
-This depends on the nature of the patch. I'd say less invasive patches
-can go through bugzilla, more invasive patches should first be RFC'ed
-via the mailing list.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+iD8DBQFHXrAgMkyGM64RGpERAizyAJ9tU7bkX4rZXUYR1FbmhoO6Wk8ZhgCfWmYd
+/HpbkyZq9hpdLk5+LdTVe+M=
+=1D3b
+-----END PGP SIGNATURE-----
 
 
