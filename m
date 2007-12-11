@@ -1,25 +1,20 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J27Kn-0007uG-N3
-	for openembedded-devel@openembedded.org; Tue, 11 Dec 2007 16:47:49 +0100
-Received: from Powerbook-2.local (vpn006150.vpn.utwente.nl [130.89.6.150])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lBBFhT0k012736 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2007 16:43:29 +0100
-Message-ID: <475EB021.7020107@student.utwente.nl>
-Date: Tue, 11 Dec 2007 16:43:29 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <475EA224.7060706@gmx.net>
+	(envelope-from <dp@xora.org.uk>) id 1J28GM-00051w-Eo
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Dec 2007 17:47:18 +0100
+Received: from cimmeria ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Tue, 11 Dec 2007 16:43:03 +0000
+	id 0006824A.475EBE18.00006A06
+Date: Tue, 11 Dec 2007 16:43:39 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20071211164339.54cc1dea@cimmeria>
 In-Reply-To: <475EA224.7060706@gmx.net>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+References: <475EA224.7060706@gmx.net>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
 Subject: Re: applying for r/w access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,32 +29,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2007 15:47:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 11 Dec 2007 16:47:18 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, 11 Dec 2007 15:43:48 +0100
+Robert Schuster <theBohemian@gmx.net> wrote:
 
-Robert Schuster schreef:
 > Hi,
 > I am using OE for 2 years now and since lately I am working for my
 > employer tarent with OE to get the Java recipes for Jalimo done.
 > 
-> I would be happy if you grant me write access to OE's repository
+Im sure a meal must be worth access :-)
 
-+1 from me
++1
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHXrAgMkyGM64RGpERAizyAJ9tU7bkX4rZXUYR1FbmhoO6Wk8ZhgCfWmYd
-/HpbkyZq9hpdLk5+LdTVe+M=
-=1D3b
------END PGP SIGNATURE-----
+Graeme
 
 
