@@ -1,24 +1,30 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1J2A8P-0007Pq-6X
+Received: from [212.27.42.64] (helo=smtp7-g19.free.fr)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <alain2210@free.fr>) id 1J2Anv-0004bL-Gl
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2007 19:47:13 +0100
-Received: (qmail invoked by alias); 11 Dec 2007 18:42:56 -0000
-Received: from e178094202.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.94.202]
-	by mail.gmx.net (mp054) with SMTP; 11 Dec 2007 19:42:56 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+/kt0vz6u/Ti3So3WIyXr5Hvmp2cYVq8JRCwHvhJ
-	hOkDPQMJmi3OYE
-Message-ID: <475EDA2B.8080109@gmx.net>
-Date: Tue, 11 Dec 2007 19:42:51 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
+	Tue, 11 Dec 2007 20:30:10 +0100
+Received: from smtp7-g19.free.fr (localhost [127.0.0.1])
+	by smtp7-g19.free.fr (Postfix) with ESMTP id 25D7C322872
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Dec 2007 20:25:53 +0100 (CET)
+Received: from imp5-g19.free.fr (imp5-g19.free.fr [212.27.42.5])
+	by smtp7-g19.free.fr (Postfix) with ESMTP id 152D3322806
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Dec 2007 20:25:53 +0100 (CET)
+Received: by imp5-g19.free.fr (Postfix, from userid 33)
+	id EF9E3421E; Tue, 11 Dec 2007 21:25:52 +0100 (CET)
+Received: from AMontsouris-151-1-31-127.w82-123.abo.wanadoo.fr
+	(AMontsouris-151-1-31-127.w82-123.abo.wanadoo.fr [82.123.28.127]) 
+	by imp.free.fr (IMP) with HTTP 
+	for <alain2210@212.27.42.70>; Tue, 11 Dec 2007 21:25:52 +0100
+Message-ID: <1197404752.475ef250762ff@imp.free.fr>
+Date: Tue, 11 Dec 2007 21:25:52 +0100
+From: Alain2210 <alain2210@free.fr>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: RFC: merging recipes from Jalimo
+User-Agent: Internet Messaging Program (IMP) 3.2.5
+X-Originating-IP: 82.123.28.127
+Subject: version of octave
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,43 +38,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2007 18:47:13 -0000
-X-Groupsio-MsgNum: 3599
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig497AC83FC0CAC155201F8166"
-
---------------enig497AC83FC0CAC155201F8166
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 11 Dec 2007 19:30:12 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-since I've gotten r/w access to the repo (thanks again!) I have begun to
-slowly merge the Jalimo recipes. It all starts with this one:
+Hello,
 
-http://bugs.openembedded.org/show_bug.cgi?id=3D3457
+with openembedded/angstrom, the version of octave that is tried to build =
+(fetch
+failed)
+is 2.9.17. Two months ago, I have built 2.9.14 and 2.1.73. Only 2.1.73 wa=
+s
+working on my ipaq (the 2.9.14 was using all the cpu but doing nothing).
 
-The recipe that builts the initial Java5-capable Java compiler.
+Is is possible to put 2.1.73 as preferred version in openembedded/angstro=
+m ?
 
-Please comment on the bug and tell me whether it should go in or what
-you would like to see changed.
+Sincerely,
 
-Regards
-Robert
+Alain
 
 
---------------enig497AC83FC0CAC155201F8166
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHXtouG9cfwmwwEtoRCFSfAJsGuF432DNcxJYSpCI3WaAmJf1FzgCfdtaE
-O/k3TPL40Vi9G1Y8lLwViAU=
-=LDCF
------END PGP SIGNATURE-----
-
---------------enig497AC83FC0CAC155201F8166--
