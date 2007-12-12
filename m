@@ -1,32 +1,32 @@
-Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
+Received: from [212.27.42.64] (helo=smtp7-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1J2MtH-00031t-32
+	(envelope-from <alain2210@free.fr>) id 1J2NWX-0003cr-96
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Dec 2007 09:24:27 +0100
-Received: by vanille-media.de (Postfix, from userid 65534)
-	id 4EEA828C013; Wed, 12 Dec 2007 09:13:06 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.6 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180141060.adsl.alicedsl.de [85.180.141.60])
-	by vanille-media.de (Postfix) with ESMTP id 5272528C012;
-	Wed, 12 Dec 2007 09:13:03 +0100 (CET)
-Date: Wed, 12 Dec 2007 09:20:06 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <31294197.20071212092006@vanille-media.de>
-To: Paul Sokolovsky <pmiscml@gmail.com>
-In-Reply-To: <1617210780.20071212000416@gmail.com>
-References: <1617210780.20071212000416@gmail.com>
+	Wed, 12 Dec 2007 10:05:05 +0100
+Received: from smtp7-g19.free.fr (localhost [127.0.0.1])
+	by smtp7-g19.free.fr (Postfix) with ESMTP id 7167A322856;
+	Wed, 12 Dec 2007 10:00:43 +0100 (CET)
+Received: from imp5-g19.free.fr (imp5-g19.free.fr [212.27.42.5])
+	by smtp7-g19.free.fr (Postfix) with ESMTP id 55CA3322850;
+	Wed, 12 Dec 2007 10:00:43 +0100 (CET)
+Received: by imp5-g19.free.fr (Postfix, from userid 33)
+	id 4B5CF422F; Wed, 12 Dec 2007 11:00:43 +0100 (CET)
+Received: from AMontsouris-151-1-31-127.w82-123.abo.wanadoo.fr
+	(AMontsouris-151-1-31-127.w82-123.abo.wanadoo.fr [82.123.28.127]) 
+	by imp.free.fr (IMP) with HTTP 
+	for <alain2210@212.27.42.70>; Wed, 12 Dec 2007 11:00:42 +0100
+Message-ID: <1197453642.475fb14ab7dc9@imp.free.fr>
+Date: Wed, 12 Dec 2007 11:00:42 +0100
+From: Alain2210 <alain2210@free.fr>
+To: openembedded-devel@lists.openembedded.org,
+	Junqian Gordon Xu <xjqian@gmail.com>
+References: <1197404752.475ef250762ff@imp.free.fr> <475F8A75.9070902@gmail.com>
+In-Reply-To: <475F8A75.9070902@gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	angstrom-distro-devel@linuxtogo.org
-Subject: Re: [Angstrom-devel] [RFC] Using ${PR} instead of ${DATETIME} in deployed kernel image filename
+User-Agent: Internet Messaging Program (IMP) 3.2.5
+X-Originating-IP: 82.123.28.127
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: version of octave
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,43 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2007 08:24:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Dec 2007 09:05:07 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-Paul Sokolovsky wrote:
-> Hello openembedded-devel,
+Hello,
 
->   I already mentioned this in
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2007-December/003695.html , here's specific RFC:
-> I'd like to propose using the following filename pattern for deployed
-> kernel images: "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}", instead
-> of "${KERNEL_IMAGETYPE}-${PV}-${MACHINE}-${DATETIME}". This will
-> ensure that kernels built from the same recipe are named consistently,
-> and thus will allow users and developers track kernels easier. Also,
-> any change to build configuration should be accompanied by recipe PR
-> bump, so new kernel file will be produces.
+> > with openembedded/angstrom, the version of octave that is tried to bu=
+ild
+> (fetch
+> > failed)
+> > is 2.9.17. Two months ago, I have built 2.9.14 and 2.1.73. Only 2.1.7=
+3 was
+> > working on my ipaq (the 2.9.14 was using all the cpu but doing nothin=
+g).
+> >
+> > Is is possible to put 2.1.73 as preferred version in openembedded/ang=
+strom
+> ?
+>
+> Committed 2.1.73 as preferred version for Angstrom. I'm glad 2.1.73
+> worked for you. 2.9.14 never worked, so it's good to fix that anyway.
 
-+1. Good thing is it forces you to update PR, bad thing is it forces
-you to update PR, especially when you are trying out multiple
-defconfigs. But I guess in that case you probably use devshell or an
-out-of-OE-tree kernel.
+Tanks.
 
->   So:
+>
+> I've updated the 2.9.x recipie to 2.9.19, which should work fine now.
+> Note, the octave package is more modularized in 2.9.x, so please check
+> the library dependencies and let me know if anything is missing.
 
-> 1. Does anybody see something grossly wrong with this scheme?
-> 2. Otherwise, I'm going to change this for linux-handhelds-2.6, and
-> would like to encourage maintainers of the other kernel recipes to do
-> the same.
+Now that 2.1.73 is the preferred version, how can I bitbake octave_2.9.19=
+ ?
 
-Isn't it already deployed in linux.inc? I remember I had to catch up
-linux-openmoko.inc because of that change.
+Sincerely,
 
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Alain
 
 
