@@ -1,31 +1,26 @@
-Received: from [212.27.42.64] (helo=smtp7-g19.free.fr)
+Received: from [64.233.184.228] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <alain2210@free.fr>) id 1J2NWX-0003cr-96
+	(envelope-from <xjqian@gmail.com>) id 1J2NeZ-0003o6-Qk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Dec 2007 10:05:05 +0100
-Received: from smtp7-g19.free.fr (localhost [127.0.0.1])
-	by smtp7-g19.free.fr (Postfix) with ESMTP id 7167A322856;
-	Wed, 12 Dec 2007 10:00:43 +0100 (CET)
-Received: from imp5-g19.free.fr (imp5-g19.free.fr [212.27.42.5])
-	by smtp7-g19.free.fr (Postfix) with ESMTP id 55CA3322850;
-	Wed, 12 Dec 2007 10:00:43 +0100 (CET)
-Received: by imp5-g19.free.fr (Postfix, from userid 33)
-	id 4B5CF422F; Wed, 12 Dec 2007 11:00:43 +0100 (CET)
-Received: from AMontsouris-151-1-31-127.w82-123.abo.wanadoo.fr
-	(AMontsouris-151-1-31-127.w82-123.abo.wanadoo.fr [82.123.28.127]) 
-	by imp.free.fr (IMP) with HTTP 
-	for <alain2210@212.27.42.70>; Wed, 12 Dec 2007 11:00:42 +0100
-Message-ID: <1197453642.475fb14ab7dc9@imp.free.fr>
-Date: Wed, 12 Dec 2007 11:00:42 +0100
-From: Alain2210 <alain2210@free.fr>
-To: openembedded-devel@lists.openembedded.org,
-	Junqian Gordon Xu <xjqian@gmail.com>
-References: <1197404752.475ef250762ff@imp.free.fr> <475F8A75.9070902@gmail.com>
-In-Reply-To: <475F8A75.9070902@gmail.com>
+	Wed, 12 Dec 2007 10:13:19 +0100
+Received: by wr-out-0506.google.com with SMTP id c30so92514wra.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Dec 2007 01:09:01 -0800 (PST)
+Received: by 10.150.195.21 with SMTP id s21mr117050ybf.9.1197450541475;
+	Wed, 12 Dec 2007 01:09:01 -0800 (PST)
+Received: from ?192.168.1.204? ( [24.107.180.75])
+	by mx.google.com with ESMTPS id i5sm5024024nzi.2007.12.12.01.08.58
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 12 Dec 2007 01:08:58 -0800 (PST)
+Message-ID: <475FA50C.1090502@gmail.com>
+Date: Wed, 12 Dec 2007 03:08:28 -0600
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Icedove 1.5.0.14pre (X11/20071020)
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) 3.2.5
-X-Originating-IP: 82.123.28.127
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+References: <1197404752.475ef250762ff@imp.free.fr> <475F8A75.9070902@gmail.com>
+	<1197453642.475fb14ab7dc9@imp.free.fr>
+In-Reply-To: <1197453642.475fb14ab7dc9@imp.free.fr>
 Subject: Re: version of octave
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,40 +35,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2007 09:05:07 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Dec 2007 09:13:20 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On 12/12/2007 04:00 AM, Alain2210 wrote:
+> Now that 2.1.73 is the preferred version, how can I bitbake octave_2.9.19 ?
 
-> > with openembedded/angstrom, the version of octave that is tried to bu=
-ild
-> (fetch
-> > failed)
-> > is 2.9.17. Two months ago, I have built 2.9.14 and 2.1.73. Only 2.1.7=
-3 was
-> > working on my ipaq (the 2.9.14 was using all the cpu but doing nothin=
-g).
-> >
-> > Is is possible to put 2.1.73 as preferred version in openembedded/ang=
-strom
-> ?
->
-> Committed 2.1.73 as preferred version for Angstrom. I'm glad 2.1.73
-> worked for you. 2.9.14 never worked, so it's good to fix that anyway.
+bitbake octave-2.9.19 or bitbake -b octave_2.9.19.bb
 
-Tanks.
+Could you let me know how you feel about RDEPENDS = fftw3. Octave could 
+also provide it's own fft routine using lapack. It's a trade-off between 
+less dependency and performance. I just don't know how many people are 
+using fft with octave on embedded device. I will count the votes here.
 
->
-> I've updated the 2.9.x recipie to 2.9.19, which should work fine now.
-> Note, the octave package is more modularized in 2.9.x, so please check
-> the library dependencies and let me know if anything is missing.
+Regards
+Gordon
 
-Now that 2.1.73 is the preferred version, how can I bitbake octave_2.9.19=
- ?
-
-Sincerely,
-
-Alain
 
 
