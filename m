@@ -1,30 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1J2VOt-0006FA-NG
-	for openembedded-devel@openembedded.org; Wed, 12 Dec 2007 18:29:39 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1J2VG9-00070i-4i
-	for openembedded-devel@openembedded.org; Wed, 12 Dec 2007 17:20:37 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Dec 2007 17:20:36 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Dec 2007 17:20:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Sonkei release team <no2spam@nospam.arcornews.de>
-Date: Wed, 12 Dec 2007 18:08:20 +0100
-Message-ID: <fjp4i3$7pf$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-Sender: news <news@ger.gmane.org>
-Subject: ANN: Sonkei
+	(envelope-from <mickey@vanille-media.de>) id 1J2WmL-0004ER-7S
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Dec 2007 19:57:57 +0100
+Received: by vanille-media.de (Postfix, from userid 65534)
+	id 3274528C013; Wed, 12 Dec 2007 19:46:32 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: ***
+X-Spam-Status: No, score=3.6 required=5.0 tests=AWL,BAYES_20,RCVD_IN_PBL,
+	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180165030.adsl.alicedsl.de [85.180.165.30])
+	by vanille-media.de (Postfix) with ESMTP id 48C1828C012;
+	Wed, 12 Dec 2007 19:46:29 +0100 (CET)
+Date: Wed, 12 Dec 2007 19:53:33 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <13410234136.20071212195333@vanille-media.de>
+To: Sonkei release team <no2spam@nospam.arcornews.de>
+In-Reply-To: <fjp4i3$7pf$1@ger.gmane.org>
+References: <fjp4i3$7pf$1@ger.gmane.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: ANN: Sonkei
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,40 +39,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2007 17:29:40 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Wed, 12 Dec 2007 18:57:57 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Dear fellow developers,
+Great! Congrats to this initiative! Hope we share lots of patches up- and
+downstream.
 
-personal frustrations increasingly alienated us from the Angstrom
-"community".  At the end, it did not feel much like home anymore.
+Regards,
 
-Thus, we created the Sonkei distribution project.  Sonkei is a Japanese
-word for respect.
-
- * we want to be treated with respect - from fellow devs and users
- * we want to treat respectfully - other devs and fellow users
- * we have great respect for Angstrom and OpenEmbedded
-   They are the giants on whose shoulders we stand.
- * usability - we respect that everybody is short on time
-
-Technically, Sonkei will be an overlay to Angstrom and compiled with OE.
-But Sonkei will mainly not be a technical fork, but one focused on how
-we interact - respectfully.
-
-Rolf is glad that this opens a venue for him to return to the
-OpenEmbedded project which he felt he had to leave out of lack of an
-alternative, OE-based distro.  Matthias will bring to Sonkei his
-expertise in releasing polished, ready-to-use images gained from his
-successful Hentges ROM.
-
-We have already successfully compiled the first Sonkei images.  We think
-they are not ready for publication, yet.  We do welcome interaction with
-other interested developers - either by mail or in #hentges.net.
-
-The Sonkei release team
-Matthias Hentges & Rolf Leggewie
+:M:
+-- 
+Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
