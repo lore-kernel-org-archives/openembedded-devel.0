@@ -1,28 +1,27 @@
-Received: from [209.85.134.185] (helo=mu-out-0910.google.com)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J2SIO-0001bv-8y
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1J2U69-0004Kb-Ib
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Dec 2007 15:10:44 +0100
-Received: by mu-out-0910.google.com with SMTP id w8so411656mue.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Dec 2007 06:06:24 -0800 (PST)
-Received: by 10.82.146.14 with SMTP id t14mr1960649bud.9.1197468384630;
-	Wed, 12 Dec 2007 06:06:24 -0800 (PST)
-Received: from ?192.168.61.156? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id c28sm8453700fka.2007.12.12.06.06.22
-	(version=SSLv3 cipher=OTHER); Wed, 12 Dec 2007 06:06:23 -0800 (PST)
-Date: Wed, 12 Dec 2007 16:09:58 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <64103649.20071212160958@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <475FAB62.3090702@student.utwente.nl>
-References: <1617210780.20071212000416@gmail.com>
-	<31294197.20071212092006@vanille-media.de>
-	<475FAB62.3090702@student.utwente.nl>
+	Wed, 12 Dec 2007 17:06:13 +0100
+Received: (qmail invoked by alias); 12 Dec 2007 16:01:51 -0000
+Received: from e178125125.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.125.125]
+	by mail.gmx.net (mp040) with SMTP; 12 Dec 2007 17:01:51 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/2O7Q42t32B0SVm8av3p4mYgWgFHKdl7xRNfPVY3
+	0cgyOL7a2cZpiH
+Message-ID: <476005E5.5050605@gmx.net>
+Date: Wed, 12 Dec 2007 17:01:41 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-Subject: Re: [Angstrom-devel] [RFC] Using ${PR} instead of ${DATETIME} in deployed kernel image filename
+To: openembedded-devel@lists.openembedded.org
+References: <475EDA2B.8080109@gmx.net>
+	<c384c5ea0712120529m10874ac8g97faeac69e60024a@mail.gmail.com>
+In-Reply-To: <c384c5ea0712120529m10874ac8g97faeac69e60024a@mail.gmail.com>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: Re: RFC: merging recipes from Jalimo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,41 +35,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2007 14:10:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Dec 2007 16:06:13 -0000
+X-Groupsio-MsgNum: 3610
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig7D50731AA73AD508BB4300D4"
 
-Hello Koen,
+--------------enig7D50731AA73AD508BB4300D4
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Wednesday, December 12, 2007, 11:35:30 AM, you wrote:
+Hi Leon,
 
-[]
->>> I'd like to propose using the following filename pattern for deployed
->>> kernel images: "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}", instead
+Leon Woestenberg schrieb:
+> Hello Robert,
+> I see the compile task assumes the availability of "javac".
+>=20
+> javac -d build -source 1.4 -sourcepath source `cat $list`;
+>=20
+> How do you expect this to be available on the host? Will any javac
+> that's out there be good enough to use?
+A Java 1.4 compatible compiler is needed. That can be the proprietary
+javac, gcj -C, jikes and ecj. Most distribution have some way to let the
+latter three be available as 'javac'.
 
->>> 2. Otherwise, I'm going to change this for linux-handhelds-2.6, and
->>> would like to encourage maintainers of the other kernel recipes to do
->>> the same.
->> 
->> Isn't it already deployed in linux.inc? I remember I had to catch up
->> linux-openmoko.inc because of that change.
+You may say that we could use jikes-native from OE then but that
+compiler needs (as all Java compilers) a class library. Jikes is not
+Java5-capable but GNU Classpath expects one since version 0.95. One
+could build an older GNU Classpath release just for this purpose but
+then there would still be no runtime to use ecj-bootstrap (which is a
+Java app itself). Additionally I wanted to stick with latest and
+greatest GNU Classpath (especially everything after the Java5 switch)
+releases since the older ones contain surprising bugs and miss important
+tools (gjar, gjavah etc).
 
-> It is. Remaining 'offenders' are linux-hh and linux-rp, and maybe some
-> other kernel recipes I never look at.
+It is really a messy bootstrapping situation, I know. Since OE expects
+GCC being installed I think that gij and gcj can also be available on
+those systems.
 
-  Aha, perfect. So I guess, we can bring all kernel recipes to
-consistency, like in one-week frame...
+> Currently, OpenEmbedded tries to rely on a defined set of host tools
+> to be installed, and my concern is that we now must add one (out of a
+> set of acceptable) java compiler to that external dependency list. If
+> so, we must do so carefully.
+Yes, thats true. A java compiler and a runtime (both from the fairly old
+1.4 times) are needed in the beginning. After ecj-bootstrap is built its
+only purpose is to built OE's own java runtime and compiler.
 
-> regards,
+If independence from those two pieces of software is important I could
+look into this. However I expect this to become complicated.
 
-> Koen
-
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Regards
+Robert
 
 
+--------------enig7D50731AA73AD508BB4300D4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHYAXoG9cfwmwwEtoRCCBlAJ9fiyE0pSKzP6MQMc6x/XJsNiexKQCdEjoJ
+bj5wEffyFBTJCjFhP/8vFnk=
+=j113
+-----END PGP SIGNATURE-----
+
+--------------enig7D50731AA73AD508BB4300D4--
