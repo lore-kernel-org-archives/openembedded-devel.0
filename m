@@ -1,29 +1,24 @@
-Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J2Yue-0006sn-2D
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Dec 2007 22:14:40 +0100
-Received: by nf-out-0910.google.com with SMTP id h3so300849nfh.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Dec 2007 13:10:19 -0800 (PST)
-Received: by 10.86.72.15 with SMTP id u15mr1075510fga.11.1197493818874;
-	Wed, 12 Dec 2007 13:10:18 -0800 (PST)
-Received: from ?192.168.61.156? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id p9sm9108645fkb.2007.12.12.13.10.16
-	(version=SSLv3 cipher=OTHER); Wed, 12 Dec 2007 13:10:16 -0800 (PST)
-Date: Wed, 12 Dec 2007 23:13:54 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <208459064.20071212231354@gmail.com>
-To: Robert Schuster <theBohemian@gmx.net>
-In-Reply-To: <476005E5.5050605@gmx.net>
-References: <475EDA2B.8080109@gmx.net>
-	<c384c5ea0712120529m10874ac8g97faeac69e60024a@mail.gmail.com>
-	<476005E5.5050605@gmx.net>
+Received: from [89.96.204.112] (helo=www-zirak-new.zirak.it)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <filippo@zirak.it>) id 1J2ahY-0000ZK-7n
+	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 00:09:20 +0100
+Received: (qmail 3635 invoked by uid 64017); 12 Dec 2007 23:02:10 -0000
+Received: from 87.4.211.233 (filippo@zirak.it@87.4.211.233) by www-zirak-new
+	(envelope-from <filippo@zirak.it>,
+	uid 64011) with qmail-scanner-2.01 
+	(uvscan: v5.1.00/v5052. bogofilter: 0.92.0. spamassassin: 3.0.4.  
+	Clear:RC:1(87.4.211.233):. 
+	Processed in 0.893885 secs); 12 Dec 2007 23:02:10 -0000
+Received: from unknown (HELO ?192.168.1.4?) (filippo@zirak.it@87.4.211.233)
+	by www-zirak-new.zirak.it with SMTP; 12 Dec 2007 23:02:09 -0000
+Message-ID: <47606910.9000505@zirak.it>
+Date: Thu, 13 Dec 2007 00:04:48 +0100
+From: Filippo Basso <filippo@zirak.it>
+User-Agent: IceDove 1.5.0.14pre (X11/20071020)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: merging recipes from Jalimo
+To: openembedded-devel@openembedded.org
+X-Enigmail-Version: 0.94.2.0
+Subject: bash-completion for bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,72 +32,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2007 21:14:40 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 12 Dec 2007 23:09:22 -0000
+Content-Type: multipart/mixed; boundary="------------010003080301070400080200"
+
+--------------010003080301070400080200
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
-Hello Robert,
+For everybody interested,
+    I'm attaching here a small bash-completion script that I'm using.
+(other scripts will be sent soon)
+if somebody will make any improvements, plz send to me too...
 
-Wednesday, December 12, 2007, 6:01:41 PM, you wrote:
+(maybe somebody else already did... but I haven't found, can be useful
+to put it in the website? you OE guys see, if there is no way to put
+there, I'll upload in a personal page about my work on OE...?
+suggestions well accepted)
 
-> Hi Leon,
+thanx,
+    phy
 
-> Leon Woestenberg schrieb:
->> Hello Robert,
->> I see the compile task assumes the availability of "javac".
->> 
->> javac -d build -source 1.4 -sourcepath source `cat $list`;
->> 
->> How do you expect this to be available on the host? Will any javac
->> that's out there be good enough to use?
-> A Java 1.4 compatible compiler is needed. That can be the proprietary
-> javac, gcj -C, jikes and ecj. Most distribution have some way to let the
-> latter three be available as 'javac'.
-
-> You may say that we could use jikes-native from OE then but that
-> compiler needs (as all Java compilers) a class library. Jikes is not
-> Java5-capable but GNU Classpath expects one since version 0.95. One
-> could build an older GNU Classpath release just for this purpose but
-> then there would still be no runtime to use ecj-bootstrap (which is a
-> Java app itself). Additionally I wanted to stick with latest and
-> greatest GNU Classpath (especially everything after the Java5 switch)
-> releases since the older ones contain surprising bugs and miss important
-> tools (gjar, gjavah etc).
-
-> It is really a messy bootstrapping situation, I know. Since OE expects
-> GCC being installed I think that gij and gcj can also be available on
-> those systems.
-
->> Currently, OpenEmbedded tries to rely on a defined set of host tools
->> to be installed, and my concern is that we now must add one (out of a
->> set of acceptable) java compiler to that external dependency list. If
->> so, we must do so carefully.
-> Yes, thats true. A java compiler and a runtime (both from the fairly old
-> 1.4 times) are needed in the beginning. After ecj-bootstrap is built its
-> only purpose is to built OE's own java runtime and compiler.
-
-> If independence from those two pieces of software is important I could
-> look into this. However I expect this to become complicated.
-
-  As was discussed lately on this list, we should track the expected
-host dependencies. This is done using ASSUME_PROVIDED in
-conf/bitbake.conf. So, based on the above, I think you want to add
-javac-native and java-runtime-native there. Then, your recipe should
-DEPENDS on them, and in comment, please include the relevant
-additional info above. This should be good compromise, as indeed,
-complete self-bootstrapping would be a task in itself, sidetracking you
-from the current work.
+P.S. of course, if you want to see all the recipies, it will take long,
+but if you specify the first 1 or 2 characters, it's much faster!
 
 
-> Regards
-> Robert
+#
+# "bitbake autocompletion description"
+#
+# CREATED:	Filippo Basso <filippo@zirak.it> (12-DEC-2007)
+# MODIFIED:
+#
+# Use: 
+# - simply put it into your /etc/bash_completion.d/ directory...
+# For help enhancing this script, see also:
+# - http://www.debian-administration.org/articles/317
+# - http://www.gnu.org/software/bash/manual/bashref.html#SEC112
+#
 
 
+_bitbake() 
+{
+	local cur conns prev options options1 i j A recipefile
+	COMPREPLY=()
+
+	cur="${COMP_WORDS[COMP_CWORD]}"
+	prev="${COMP_WORDS[COMP_CWORD-1]}"
+	options="--help --version --buildfile= --continue --force --interactive --cmd= --read= --verbose --debug --dry-run --parse-only --disable-psyco --show-versions --environment --graphviz --ignore-deps= --log-domains= --profile"
+	options1="-h -b -k -f -i -c -r -v -D -n -p -d -s -e -g -I -l -P"
+
+	# ------- Sanity checks -------
+	if [[ ${BBPATH} == "" ]]
+	then
+		echo
+		echo "variable \$BBPATH not set, please set it before launching bitbake... thanx"
+		return 1
+	fi
+
+	# ------- Options completion -------
+	if [[ ${cur} == -* ]]
+	then
+    		if [[ ${cur} == --* ]]
+		then
+			COMPREPLY=( $(compgen -W "${options}" -- ${cur}) )
+			return 0
+		else
+       			COMPREPLY=( $(compgen -W "${options1}" -- ${cur}) )
+        		return 0
+		fi
+	fi
+
+	# ------- Recipe list autocompletion -------
+	for i in `echo $BBPATH | sed s/:/\ /g` ;
+	do
+	        if [[ $i != "." ]]
+	        then
+	                for j in `echo $i/packages/*/${cur}*.bb` ;
+	                do
+				if [[ -f $j ]]
+				then
+	                        	recipefile=`basename $j`
+	                        	conns="$conns \\n ${recipefile%%_*.bb}"
+				fi
+	                done
+	        fi
+	done
+    	COMPREPLY=( $(compgen -W "${conns}" -- ${cur}) )
+	return 0
+
+}
+complete -F _bitbake bitbake
 
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
-
-
+--------------010003080301070400080200--
