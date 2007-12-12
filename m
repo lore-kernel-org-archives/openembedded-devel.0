@@ -1,31 +1,26 @@
-Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1J2WmL-0004ER-7S
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Dec 2007 19:57:57 +0100
-Received: by vanille-media.de (Postfix, from userid 65534)
-	id 3274528C013; Wed, 12 Dec 2007 19:46:32 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: ***
-X-Spam-Status: No, score=3.6 required=5.0 tests=AWL,BAYES_20,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180165030.adsl.alicedsl.de [85.180.165.30])
-	by vanille-media.de (Postfix) with ESMTP id 48C1828C012;
-	Wed, 12 Dec 2007 19:46:29 +0100 (CET)
-Date: Wed, 12 Dec 2007 19:53:33 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <13410234136.20071212195333@vanille-media.de>
-To: Sonkei release team <no2spam@nospam.arcornews.de>
-In-Reply-To: <fjp4i3$7pf$1@ger.gmane.org>
-References: <fjp4i3$7pf$1@ger.gmane.org>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1J2XPE-0000rX-EY
+	for openembedded-devel@openembedded.org; Wed, 12 Dec 2007 20:38:08 +0100
+Received: from Powerbook-2.local (vpn006150.vpn.utwente.nl [130.89.6.150])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lBCJXf0k023985 for <openembedded-devel@openembedded.org>;
+	Wed, 12 Dec 2007 20:33:41 +0100
+Message-ID: <47603795.1000207@student.utwente.nl>
+Date: Wed, 12 Dec 2007 20:33:41 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: ANN: Sonkei
+To: openembedded-devel@openembedded.org
+References: <475A6B2A.9000103@dominion.kabel.utwente.nl>
+In-Reply-To: <475A6B2A.9000103@dominion.kabel.utwente.nl>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: Webkit update patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,18 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2007 18:57:57 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 12 Dec 2007 19:38:08 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Great! Congrats to this initiative! Hope we share lots of patches up- and
-downstream.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Regards,
+Koen Kooi schreef:
+> Hi,
+> 
+> If people want to try a more recent revision of webkit, they should use
+> this patch:
+> 
+> * update to sane-srcrevs.inc to move to the current head
+> * add midori 0.13 to test the library
+> * Merge dftables compile fix from poky
+> * update .pro and .pri files
+> * add comment in webkit.inc on how to enable HTML5 media support
+> 
+> This patch hasn't been applied yet since openmoko-browser2 and
+> openmoko-feedreader2 still use the old non-WebView API. I asked Holger
+> to update those apps. Once that happens this patch will go in.
 
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Code-master Holger has done so, and this patch is in now, along with a
+change that makes the webkit ipkg 500kiB smaller[1].
 
+regards,
+
+Koen
+
+[1] http://dominion.thruhere.net/koen/cms/slimming-down-packages
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHYDeVMkyGM64RGpERAhtgAJsGn1ZXouou4DZMKoMcab2c9+45sACePae0
+X/dFZ3emAaXdEWnPpJh/5w0=
+=U9Sd
+-----END PGP SIGNATURE-----
 
 
