@@ -1,24 +1,32 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <zecke@selfish.org>) id 1J2kKk-000688-MI
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2007 10:26:22 +0100
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=abughraib.localdomain) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1J2kGU-0001CJ-Sa
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2007 10:21:58 +0100
-Message-Id: <1E7281BD-99E7-42CA-993D-3B95BE7C4EA9@selfish.org>
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <74d0deb30712130004v11453c5x109386d74997d6b0@mail.gmail.com>
-Mime-Version: 1.0 (Apple Message framework v915)
-Date: Thu, 13 Dec 2007 10:21:58 +0100
-References: <47606910.9000505@zirak.it>
-	<74d0deb30712130004v11453c5x109386d74997d6b0@mail.gmail.com>
-X-Mailer: Apple Mail (2.915)
-Subject: Re: bash-completion for bitbake
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1J2m5u-0003xB-TL
+	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 12:19:11 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1J2m1c-0001N2-MF
+	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 11:14:44 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Dec 2007 11:14:44 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 13 Dec 2007 11:14:44 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 13 Dec 2007 12:14:33 +0100
+Message-ID: <fjr46r$3ir$1@ger.gmane.org>
+References: <fjp4i3$7pf$1@ger.gmane.org> <4760C1BA.7060206@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <4760C1BA.7060206@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: ANN: Sonkei
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,39 +40,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2007 09:26:22 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Thu, 13 Dec 2007 11:19:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+Junqian Gordon Xu schrieb:
+> However, I don't get it how Sonkei differs from Angstrom
 
-Am 13.12.2007 um 09:04 schrieb pHilipp Zabel:
+Hi Gordon,
 
-> On Dec 13, 2007 12:04 AM, Filippo Basso <filippo@zirak.it> wrote:
->> For everybody interested,
->>    I'm attaching here a small bash-completion script that I'm using.
->> (other scripts will be sent soon)
->> if somebody will make any improvements, plz send to me too...
->>
->> (maybe somebody else already did... but I haven't found, can be  
->> useful
->> to put it in the website? you OE guys see, if there is no way to put
->> there, I'll upload in a personal page about my work on OE...?
->> suggestions well accepted)
->>
->> thanx,
->>    phy
->
-> Very nice! Can't we put this somewhere in OE/contrib?
-> I think it would be nice if bitbake could provide this information  
-> itself,
-> maybe making use of the cache. This would also allow to add
-> versions and virtual providers to the autocompletion.
+thank you for your question.
 
-Hey Filippo,
-what license is the completion under? I would like to put it into
-http://svn.berlios.de/viewcvs/bitbake/trunk/bitbake/contrib/
+You are right, it might very well be that Sonkei does not differ
+technically very much from Angstrom.  Quoting myself:
 
+  > Technically, Sonkei will be an overlay to Angstrom and compiled
+  > with OE. But Sonkei will mainly not be a technical fork, but one
+  > focused on how we interact - respectfully.
 
-z.
+Indeed, it is our goal to stay rather close to Angstrom.  Who knows, if
+things indeed changed, Sonkei might remerge into Angstrom.  We plan to
+share patches and work with OE - just like Mickey has expressed his
+hopes.  We will not only take, we will also give back.  But we will do
+so from our own playground.
+
+>  Is Sonkei something like Angstrom-stable?
+
+No.
+
+We cannot promise stability or usability, but we promise to take it
+seriously.  Look at the efforts that Matthias made while creating
+Hentges ROM.  I believe that is the kind of stuff you should expect.
+
+But usability does not stop at "usability of the programs and images"
+for me.  There is also something like "usability of a community".  I
+find it hard to describe in a few words that don't sound like I
+disrespect the choices Angstrom made.  Trying to condense it down, I
+would say that Angstrom strictly enforces rules and consciously raises
+the (technical) bar for participation to reduce the drain from newbies
+on core people.  To me this has come to feel like disrespecting people's
+past experiences and their lack of time.  Sonkei will try a different
+approach.  There is only one rule: Respect.  If you prefer communication
+by hieroglyphs written on clay stones, we will respect that and might
+even participate.  But you will also have to respect if we don't.  We
+will also expect you to be willing to learn both technically and
+methodologically as we won't tolerate you being disrespectful to the one
+trying to help you.  We do promise to 1) try and support you as much as
+possible as our free time permits and 2) try and lower the (technical)
+bar so everybody can bring to the community what they have to offer.
+
+The main difference will be in how you can expect to be treated (and are
+expected to treat others) in the Sonkei community.
+
+Regards
+
+Rolf
+
 
 
