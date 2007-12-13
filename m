@@ -1,19 +1,29 @@
-Received: from [216.145.245.197] (helo=mx01)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mwester@dls.net>) id 1J2far-00071B-6p
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2007 05:22:45 +0100
-Received: from localhost ([127.0.0.1]) by mx01 with esmtp (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1J2fWb-0006kL-Gq
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Dec 2007 22:18:17 -0600
-MIME-Version: 1.0
-X-Mailer: AtMail PHP 5.2
-Message-ID: <2759.1197519497@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-X-Origin: 209.242.5.110
-Date: Wed, 12 Dec 2007 22:18:17 -0600
-From: Mike Westerhof <mwester@dls.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1J2fbB-00071V-Tg
+	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 05:23:02 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1J2fWp-00009t-Jw
+	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 04:18:31 +0000
+Received: from grante.dsl.visi.com ([208.42.141.248])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Dec 2007 04:18:31 +0000
+Received: from grante by grante.dsl.visi.com with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Dec 2007 04:18:31 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Grant Edwards <grante@visi.com>
+Date: Thu, 13 Dec 2007 04:18:24 +0000 (UTC)
+Message-ID: <fjqbqg$3td$1@ger.gmane.org>
+References: <fjq200$d43$1@ger.gmane.org> <4760A2AD.8050709@gmail.com>
+	<19c1b8a90712121930i73dcf071wff373d0d9e4fc6c6@mail.gmail.com>
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: grante.dsl.visi.com
+User-Agent: slrn/0.9.8.1 (Linux)
+Sender: news <news@ger.gmane.org>
 Subject: Re: Why is package external-toolchain-1.0 failing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -28,72 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2007 04:22:48 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Dec 2007 04:23:02 -0000
 
-On Thu 13/12/07  1:30 AM , Grant Edwards grante@visi.com sent:
-> I've followed the step-by-step instructions on the "getting
-> started with OE" web page for a Zaurus SL5500, but when I try
-> to do the example build command "bitbake nano" it fails.
-> Google didn't really find anything that seemed helpful.  I
-> searched the mailing list and found a posting a coule weeks ago
-> from somebody who had the exact same issue, but that posting
-> got no useful responses (possibly because it hijacked a
-> thread).
->=20
-> What is an "external toolchain", do I need one to build for an
-> SL5500 target?  If I do need one, why doesn't bitbake know how
-> to build one?
+On 2007-12-13, Khem Raj <raj.khem@gmail.com> wrote:
 
-Oh, you don't want an external toolchain. Bitbake just has two possible cho=
-ices,
-and it chose the wrong one.  And, yes, it should know how to build the exte=
-rnal
-toolchain, when that stuff actually works, there are a lot of computers (an=
-d
-power plants) that won't have to work so hard to build stuff with OE.
+> Can you attach your local conf file that you might have created.
 
-> Here's the output from the "bitbake nano" command:
->=20
-> ________________________________________________________________________
-> Parsing .bb files, please wait...done.
-> NOTE: Parsing finished. 4675 cached, 0 parsed, 218 skipped, 0 masked.
-> NOTE: build 200712121925: started
->=20
-> OE Build Configuration:
-> BB_VERSION     =3D "1.8.8"
-> OE_REVISION    =3D "47aec7f5811a7e41e48a85cc8ca83a9ef745e862"
-> TARGET_ARCH    =3D "arm"
-> TARGET_OS      =3D "linux"
-> MACHINE        =3D "collie"
-> DISTRO         =3D "angstrom"
-> DISTRO_VERSION =3D "2007.9-test-20071213"
-> TARGET_FPU     =3D "soft"
->=20
-> NOTE: Resolving missing task queue dependencies
-> NOTE: multiple providers are available for linux-libc-headers
-> (linux-libc-headers, external-toolchain);
-> NOTE: consider defining PREFERRED_PROVIDER_linux-libc-headers
-> NOTE: multiple providers are available for
-> virtual/arm-angstrom-linux-binutils (external-toolchain,
-> binutils-cross);
-> NOTE: consider defining
-> PREFERRED_PROVIDER_virtual/arm-angstrom-linux-binutils
+I believe that the key is this line:
 
-These preceding lines tell the tale.  OE has multiple possible things that =
-can
-provide the dependencies, and it's chosen (arbitrarily) "external-toolchain=
-".  As
-it suggests, add the following to your local.conf to dis-ambiguate (is that=
- a word?):
+>>> NOTE: multiple providers are available for virtual/arm-angstrom-linux-binutils (external-toolchain, binutils-cross);
+>>> NOTE: consider defining PREFERRED_PROVIDER_virtual/arm-angstrom-linux-binutils
 
-PREFERRED_PROVIDER_linux-libc-headers =3D "linux-libc-headers"
-PREFERRED_PROVIDER_virtual/arm-angstrom-linux-binutils =3D "binutils-cross"
+I added a line in local.conf to set the preferred provider for
+virtual/arm-angstrom-linux-binutils to binutils-cross, and now
+things appear to be building (it's been building for an hour or
+so now, which is way farther than it got before).
 
+For some reason the example local.conf.sample incudes the
+following
 
+  PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
+  PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc:gcc-cross"
+  PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
 
-Mike (mwester)
+but doesn't doesn't select binutils-cross. I would suggest
+adding this line to local.conf.sample:
+
+  PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}binutils:binutils-cross"
+
+Or at least mentioning it on the "Getting Started" page,
+because if you follow the steps on that page exactly, it won't
+work unless you add the above line to local.conf.
+
+-- 
+Grant
 
 
 
