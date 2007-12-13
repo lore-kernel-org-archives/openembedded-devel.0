@@ -1,30 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.132.241] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1J2fbB-00071V-Tg
-	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 05:23:02 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1J2fWp-00009t-Jw
-	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 04:18:31 +0000
-Received: from grante.dsl.visi.com ([208.42.141.248])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 13 Dec 2007 04:18:31 +0000
-Received: from grante by grante.dsl.visi.com with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 13 Dec 2007 04:18:31 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Grant Edwards <grante@visi.com>
-Date: Thu, 13 Dec 2007 04:18:24 +0000 (UTC)
-Message-ID: <fjqbqg$3td$1@ger.gmane.org>
-References: <fjq200$d43$1@ger.gmane.org> <4760A2AD.8050709@gmail.com>
-	<19c1b8a90712121930i73dcf071wff373d0d9e4fc6c6@mail.gmail.com>
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: grante.dsl.visi.com
-User-Agent: slrn/0.9.8.1 (Linux)
-Sender: news <news@ger.gmane.org>
-Subject: Re: Why is package external-toolchain-1.0 failing?
+	(envelope-from <xjqian@gmail.com>) id 1J2gcs-00043w-6w
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Dec 2007 06:28:50 +0100
+Received: by an-out-0708.google.com with SMTP id b33so131011ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Dec 2007 21:24:26 -0800 (PST)
+Received: by 10.100.208.11 with SMTP id f11mr3321116ang.2.1197523465589;
+	Wed, 12 Dec 2007 21:24:25 -0800 (PST)
+Received: from ?192.168.1.204? ( [24.107.180.75])
+	by mx.google.com with ESMTPS id i5sm6068010nzi.2007.12.12.21.24.24
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 12 Dec 2007 21:24:24 -0800 (PST)
+Message-ID: <4760C1BA.7060206@gmail.com>
+Date: Wed, 12 Dec 2007 23:23:06 -0600
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Icedove 1.5.0.14pre (X11/20071020)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <fjp4i3$7pf$1@ger.gmane.org>
+In-Reply-To: <fjp4i3$7pf$1@ger.gmane.org>
+Subject: Re: ANN: Sonkei
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,41 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2007 04:23:02 -0000
+X-List-Received-Date: Thu, 13 Dec 2007 05:28:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2007-12-13, Khem Raj <raj.khem@gmail.com> wrote:
+On 12/12/2007 11:08 AM, Sonkei release team wrote:
 
-> Can you attach your local conf file that you might have created.
+>  * usability - we respect that everybody is short on time
 
-I believe that the key is this line:
+I feel your pain. There indeed is a need for people working on 
+usability. I applaud the effort.
 
->>> NOTE: multiple providers are available for virtual/arm-angstrom-linux-binutils (external-toolchain, binutils-cross);
->>> NOTE: consider defining PREFERRED_PROVIDER_virtual/arm-angstrom-linux-binutils
+However, I don't get it how Sonkei differs from Angstrom, except for 
+differences in perhaps prefered-versions and individual bb files. Is 
+Sonkei something like Angstrom-stable?
 
-I added a line in local.conf to set the preferred provider for
-virtual/arm-angstrom-linux-binutils to binutils-cross, and now
-things appear to be building (it's been building for an hour or
-so now, which is way farther than it got before).
-
-For some reason the example local.conf.sample incudes the
-following
-
-  PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
-  PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc:gcc-cross"
-  PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
-
-but doesn't doesn't select binutils-cross. I would suggest
-adding this line to local.conf.sample:
-
-  PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}binutils:binutils-cross"
-
-Or at least mentioning it on the "Getting Started" page,
-because if you follow the steps on that page exactly, it won't
-work unless you add the above line to local.conf.
-
--- 
-Grant
-
-
+Regards
+Gordon
 
 
