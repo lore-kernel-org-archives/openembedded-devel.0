@@ -1,24 +1,29 @@
-Received: from [89.96.204.112] (helo=www-zirak-new.zirak.it)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <filippo@zirak.it>) id 1J2ahY-0000ZK-7n
-	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 00:09:20 +0100
-Received: (qmail 3635 invoked by uid 64017); 12 Dec 2007 23:02:10 -0000
-Received: from 87.4.211.233 (filippo@zirak.it@87.4.211.233) by www-zirak-new
-	(envelope-from <filippo@zirak.it>,
-	uid 64011) with qmail-scanner-2.01 
-	(uvscan: v5.1.00/v5052. bogofilter: 0.92.0. spamassassin: 3.0.4.  
-	Clear:RC:1(87.4.211.233):. 
-	Processed in 0.893885 secs); 12 Dec 2007 23:02:10 -0000
-Received: from unknown (HELO ?192.168.1.4?) (filippo@zirak.it@87.4.211.233)
-	by www-zirak-new.zirak.it with SMTP; 12 Dec 2007 23:02:09 -0000
-Message-ID: <47606910.9000505@zirak.it>
-Date: Thu, 13 Dec 2007 00:04:48 +0100
-From: Filippo Basso <filippo@zirak.it>
-User-Agent: IceDove 1.5.0.14pre (X11/20071020)
-MIME-Version: 1.0
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1J2dTh-00083s-Sx
+	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 03:07:09 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1J2dL6-0001Y9-Sq
+	for openembedded-devel@openembedded.org; Thu, 13 Dec 2007 01:58:17 +0000
+Received: from v-209-98-139-195.mn.visi.com ([209.98.139.195])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Dec 2007 01:58:16 +0000
+Received: from grante by v-209-98-139-195.mn.visi.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 13 Dec 2007 01:58:16 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-X-Enigmail-Version: 0.94.2.0
-Subject: bash-completion for bitbake
+From: Grant Edwards <grante@visi.com>
+Date: Thu, 13 Dec 2007 01:30:41 +0000 (UTC)
+Message-ID: <fjq200$d43$1@ger.gmane.org>
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: v-209-98-139-195.mn.visi.com
+User-Agent: slrn/0.9.8.1 (Linux)
+Sender: news <news@ger.gmane.org>
+Subject: Why is package external-toolchain-1.0 failing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,95 +37,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2007 23:09:22 -0000
-Content-Type: multipart/mixed; boundary="------------010003080301070400080200"
+X-List-Received-Date: Thu, 13 Dec 2007 02:07:10 -0000
 
---------------010003080301070400080200
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+I've followed the step-by-step instructions on the "getting
+started with OE" web page for a Zaurus SL5500, but when I try
+to do the example build command "bitbake nano" it fails.
+Google didn't really find anything that seemed helpful.  I
+searched the mailing list and found a posting a coule weeks ago
+from somebody who had the exact same issue, but that posting
+got no useful responses (possibly because it hijacked a
+thread).
 
-For everybody interested,
-    I'm attaching here a small bash-completion script that I'm using.
-(other scripts will be sent soon)
-if somebody will make any improvements, plz send to me too...
+What is an "external toolchain", do I need one to build for an
+SL5500 target?  If I do need one, why doesn't bitbake know how
+to build one?
 
-(maybe somebody else already did... but I haven't found, can be useful
-to put it in the website? you OE guys see, if there is no way to put
-there, I'll upload in a personal page about my work on OE...?
-suggestions well accepted)
+Here's the output from the "bitbake nano" command:
 
-thanx,
-    phy
+________________________________________________________________________
+Parsing .bb files, please wait...done.
+NOTE: Parsing finished. 4675 cached, 0 parsed, 218 skipped, 0 masked.
+NOTE: build 200712121925: started
 
-P.S. of course, if you want to see all the recipies, it will take long,
-but if you specify the first 1 or 2 characters, it's much faster!
+OE Build Configuration:
+BB_VERSION     = "1.8.8"
+OE_REVISION    = "47aec7f5811a7e41e48a85cc8ca83a9ef745e862"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "collie"
+DISTRO         = "angstrom"
+DISTRO_VERSION = "2007.9-test-20071213"
+TARGET_FPU     = "soft"
 
+NOTE: Resolving missing task queue dependencies
+NOTE: multiple providers are available for linux-libc-headers (linux-libc-headers, external-toolchain);
+NOTE: consider defining PREFERRED_PROVIDER_linux-libc-headers
+NOTE: multiple providers are available for virtual/arm-angstrom-linux-binutils (external-toolchain, binutils-cross);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/arm-angstrom-linux-binutils
+NOTE: preferred version 2.5 of glibc not available (for item virtual/arm-angstrom-linux-libc-for-gcc)
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 88 of 281 (ID: 126, /home/grante/quarq/oe/org.openembedded.dev/packages/meta/external-toolchain.bb, do_populate_staging)
+NOTE: package external-toolchain-1.0: started
+NOTE: package external-toolchain-1.0-r1: task do_populate_staging: started
+ERROR: function do_stage failed
+ERROR: log data follows (/home/grante/quarq/oe/tmp/work/i686-arm-oabi-sdk-angstrom-linux/external-toolchain-1.0-r1/temp/log.do_stage.8896)
+| The external toolchain could not be found in /usr/local/angstrom/arm!
+NOTE: Task failed: /home/grante/quarq/oe/tmp/work/i686-arm-oabi-sdk-angstrom-linux/external-toolchain-1.0-r1/temp/log.do_stage.8896
+NOTE: package external-toolchain-1.0-r1: task do_populate_staging: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package external-toolchain-1.0: failed
+ERROR: Build of /home/grante/quarq/oe/org.openembedded.dev/packages/meta/external-toolchain.bb do_populate_staging failed
 
-#
-# "bitbake autocompletion description"
-#
-# CREATED:	Filippo Basso <filippo@zirak.it> (12-DEC-2007)
-# MODIFIED:
-#
-# Use: 
-# - simply put it into your /etc/bash_completion.d/ directory...
-# For help enhancing this script, see also:
-# - http://www.debian-administration.org/articles/317
-# - http://www.gnu.org/software/bash/manual/bashref.html#SEC112
-#
+NOTE: Parsing finished. 4675 cached, 0 parsed, 218 skipped, 0 masked.
+NOTE: build 200712121925: started
 
+OE Build Configuration:
+BB_VERSION     = "1.8.8"
+OE_REVISION    = "47aec7f5811a7e41e48a85cc8ca83a9ef745e862"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux"
+MACHINE        = "collie"
+DISTRO         = "angstrom"
+DISTRO_VERSION = "2007.9-test-20071213"
+TARGET_FPU     = "soft"
 
-_bitbake() 
-{
-	local cur conns prev options options1 i j A recipefile
-	COMPREPLY=()
-
-	cur="${COMP_WORDS[COMP_CWORD]}"
-	prev="${COMP_WORDS[COMP_CWORD-1]}"
-	options="--help --version --buildfile= --continue --force --interactive --cmd= --read= --verbose --debug --dry-run --parse-only --disable-psyco --show-versions --environment --graphviz --ignore-deps= --log-domains= --profile"
-	options1="-h -b -k -f -i -c -r -v -D -n -p -d -s -e -g -I -l -P"
-
-	# ------- Sanity checks -------
-	if [[ ${BBPATH} == "" ]]
-	then
-		echo
-		echo "variable \$BBPATH not set, please set it before launching bitbake... thanx"
-		return 1
-	fi
-
-	# ------- Options completion -------
-	if [[ ${cur} == -* ]]
-	then
-    		if [[ ${cur} == --* ]]
-		then
-			COMPREPLY=( $(compgen -W "${options}" -- ${cur}) )
-			return 0
-		else
-       			COMPREPLY=( $(compgen -W "${options1}" -- ${cur}) )
-        		return 0
-		fi
-	fi
-
-	# ------- Recipe list autocompletion -------
-	for i in `echo $BBPATH | sed s/:/\ /g` ;
-	do
-	        if [[ $i != "." ]]
-	        then
-	                for j in `echo $i/packages/*/${cur}*.bb` ;
-	                do
-				if [[ -f $j ]]
-				then
-	                        	recipefile=`basename $j`
-	                        	conns="$conns \\n ${recipefile%%_*.bb}"
-				fi
-	                done
-	        fi
-	done
-    	COMPREPLY=( $(compgen -W "${conns}" -- ${cur}) )
-	return 0
-
-}
-complete -F _bitbake bitbake
+NOTE: Resolving missing task queue dependencies
+NOTE: multiple providers are available for linux-libc-headers (linux-libc-headers, external-toolchain);
+NOTE: consider defining PREFERRED_PROVIDER_linux-libc-headers
+NOTE: multiple providers are available for virtual/arm-angstrom-linux-binutils (external-toolchain, binutils-cross);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/arm-angstrom-linux-binutils
+NOTE: preferred version 2.5 of glibc not available (for item virtual/arm-angstrom-linux-libc-for-gcc)
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 88 of 281 (ID: 126, /home/grante/quarq/oe/org.openembedded.dev/packages/meta/external-toolchain.bb, do_populate_staging)
+ERROR: Task 126 (/home/grante/quarq/oe/org.openembedded.dev/packages/meta/external-toolchain.bb, do_populate_staging) failed
+NOTE: Tasks Summary: Attempted 87 tasks of which 87 didn't need to be rerun and 1 failed.
+ERROR: '/home/grante/quarq/oe/org.openembedded.dev/packages/meta/external-toolchain.bb' failed
 
 
---------------010003080301070400080200--
+
