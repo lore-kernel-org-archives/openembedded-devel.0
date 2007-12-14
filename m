@@ -1,26 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J3H1r-0005UV-1o
-	for openembedded-devel@openembedded.org; Fri, 14 Dec 2007 21:21:03 +0100
-Received: from Powerbook-2.local (vpn006016.vpn.utwente.nl [130.89.6.16])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lBEKGM0k016532 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2007 21:16:23 +0100
-Message-ID: <4762E496.1040806@student.utwente.nl>
-Date: Fri, 14 Dec 2007 21:16:22 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <vjensen@warpmail.net>) id 1J3HnP-0002J6-1A
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Dec 2007 22:10:11 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 1A38D7AD4F
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Dec 2007 16:05:38 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Fri, 14 Dec 2007 16:05:38 -0500
+X-Sasl-enc: 1oTI5ByrlD4Krt7/DAiVebjqLlCbdsIrifFtMJfipPFr 1197666337
+Received: from [192.168.1.5] (i577A5CE9.versanet.de [87.122.92.233])
+	by mail.messagingengine.com (Postfix) with ESMTP id BEEEA29F74
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Dec 2007 16:05:37 -0500 (EST)
+From: Vitus Jensen <vjensen@warpmail.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 14 Dec 2007 22:05:31 +0100
+User-Agent: KMail/1.9.1
+References: <7f3c88400712140727w27994b6dud37386874ebfade9@mail.gmail.com>
+In-Reply-To: <7f3c88400712140727w27994b6dud37386874ebfade9@mail.gmail.com>
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <4762095D.4060505@protium.com>
-In-Reply-To: <4762095D.4060505@protium.com>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: RFC: Renaming uboot-utils
+Message-Id: <200712142205.31994.vjensen@warpmail.net>
+Subject: Re: Help with bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,69 +37,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2007 20:21:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 14 Dec 2007 21:10:12 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hej!
 
-Andy Wilcox schreef:
-> Since uboot-utils builds a native binary (mkImage) it should really be 
-> called
-> uboot-utils-native.
+Am Freitag, 14. Dezember 2007 16:27 schrieb Eduardo Giacoman:
 
-That part makes sense. FWIW, we already have a uboot-mkimage-native
-recipe in OE.
+> I'm new to OpenEmbedded and I've got an error which cannot find the
+> solution. I followed the GettingStarted guide and set up everything, but
+> when i do "bitbake gpe-image" or just "bitbake" it gives me the
+> following:
+>
+> $ bitbake gpe-image
+> Traceback (most recent call last):
+>   File "/stuff/bitbake/bin/bitbake", line 134, in <module>
+>     main()
+>   File "/stuff/bitbake/bin/bitbake", line 114, in main
+>     cooker = bb.cooker.BBCooker(configuration)
+>   File "/stuff/bitbake/lib/bb/cooker.py", line 65, in __init__
+>     self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
+>   File "/stuff/bitbake/lib/bb/cooker.py", line 353, in
+> parseConfigurationFile
+>     bb.fetch.fetcher_init(self.configuration.data)
+>   File "/stuff/bitbake/lib/bb/fetch/__init__.py", line 97, in
+> fetcher_init pd.delDomain("BB_URI_HEADREVS")
+>   File "/stuff/bitbake/lib/bb/persist_data.py", line 66, in delDomain
+>     self.connection.execute("DROP TABLE IF EXISTS %s;" % domain)
+> sqlite3.OperationalError: attempt to write a readonly database
+...
 
-> My motivation is (a) I'd really like to build a few tools from uboot
-> which are cross-compiled
+There was a patch posted to this mailinglist some time ago.  I've added it 
+here for youre convenience:
 
-And now you're talking about uboot-utils-cross, not uboot-utils-native
+Index: lib/bb/persist_data.py
+===================================================================
+--- lib/bb/persist_data.py      (revision 973)
++++ lib/bb/persist_data.py      (working copy)
+@@ -57,13 +57,19 @@
+         Should be called before any domain is used
+         Creates it if it doesn't exist.
+         """
+-        self.connection.execute("CREATE TABLE IF NOT EXISTS %s(key TEXT, 
+value TEXT);" % domain)
++        try:
++            self.connection.execute("CREATE TABLE %s(key TEXT, value 
+TEXT);" % domain)
++        except:
++           bb.msg.debug(1, bb.msg.domain.PersistData, "Create table '%s' 
+failed" % domain)
 
-regards,
+     def delDomain(self, domain):
+         """
+         Removes a domain and all the data it contains
+         """
+-        self.connection.execute("DROP TABLE IF EXISTS %s;" % domain)
++       try:
++            self.connection.execute("DROP TABLE %s;" % domain)
++        except:
++           bb.msg.debug(1, bb.msg.domain.PersistData, "Delete table '%s' 
+failed" % domain)
 
-Koen
-
-> (notably, fw-setenv/printenv, which allow R/W
-> access to the u-boot configuration space), and (b) it's the "right"
-> thing to do (-;
-> 
-> The following files would be updated:
-> 
-> ./conf/distro/foonas.conf
-> ./conf/distro/include/angstrom-2007-preferred-versions.inc
-> ./packages/linux/em-x270_2.6.23.bb
-> ./packages/linux/linux-bd-neon-2.6_2.6.22.bb
-> ./packages/linux/linux-gumstix_2.6.15.bb
-> ./packages/linux/linux-omap.inc
-> ./packages/linux/linux-storcenter_2.6.12.6.bb
-> ./packages/linux/linux-turbostation_2.6.20.2.bb
-> ./packages/tasks/task-base.bb
-> 
-> Any objection or comment?
-> 
-> Thanks!
-> Andy
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+     def getValue(self, domain, key):
+         """
 
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHYuSWMkyGM64RGpERAs4YAJ40EIfK6AK1hfVn1jv/Lz85XSr0JgCfUXBS
-6e2moAwqoeJBN0kqjXnPhX4=
-=KWpO
------END PGP SIGNATURE-----
+-- 
+Vitus Jensen, +49-160-7543437, ICQ 122355880
+Stormstr, Hannover, Earth, Milky Way, Universe (current)
 
 
