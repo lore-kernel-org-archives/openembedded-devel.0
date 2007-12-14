@@ -1,21 +1,33 @@
-Received: from [209.85.162.179] (helo=el-out-1112.google.com)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <giacoman@gmail.com>) id 1J3CW7-0007U9-2r
+	(envelope-from <oe@hentges.net>) id 1J3CbH-0007YY-NP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Dec 2007 16:31:59 +0100
-Received: by el-out-1112.google.com with SMTP id v27so199001ele.22
+	Fri, 14 Dec 2007 16:37:19 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id 7B564308010
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2007 07:27:27 -0800 (PST)
-Received: by 10.150.134.7 with SMTP id h7mr1170059ybd.97.1197646047088;
-	Fri, 14 Dec 2007 07:27:27 -0800 (PST)
-Received: by 10.150.95.6 with HTTP; Fri, 14 Dec 2007 07:27:27 -0800 (PST)
-Message-ID: <7f3c88400712140727w27994b6dud37386874ebfade9@mail.gmail.com>
-Date: Fri, 14 Dec 2007 09:27:27 -0600
-From: "Eduardo Giacoman" <giacoman@gmail.com>
+	Fri, 14 Dec 2007 16:32:48 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at hentges.net
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563.serverkompetenz.net [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id Matk-ZZGxSJX
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Dec 2007 16:32:46 +0100 (CET)
+Received: from [192.168.5.2] (xdsl-87-79-225-199.netcologne.de [87.79.225.199])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id 953FB308004
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Dec 2007 16:32:46 +0100 (CET)
+From: Matthias Hentges <oe@hentges.net>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Help with bitbake
+In-Reply-To: <fju2o1$9l2$1@ger.gmane.org>
+References: <fju2o1$9l2$1@ger.gmane.org>
+Date: Fri, 14 Dec 2007 16:32:45 +0100
+Message-Id: <1197646365.9761.13.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.2 
+Subject: Re: RFC: drop timezones from OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,43 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2007 15:31:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 14 Dec 2007 15:37:19 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi,
 
-I'm new to OpenEmbedded and I've got an error which cannot find the
-solution. I followed the GettingStarted guide and set up everything, but
-when i do "bitbake gpe-image" or just "bitbake" it gives me the following:
+Am Freitag, den 14.12.2007, 15:08 +0100 schrieb Rolf Leggewie:
+> Hi,
+> 
+> it seems that there are two, conflicting packages in OE providing
+> timezone data: tzdata from glibc and timezones from opie/handhelds.
+> 
+> I think it would make sense to drop timezones and only have the timezone
+> data from glibc as this eliminates problems where one wants to install
+> package A that depends on tzdata but you also want package B where the
+> dependency is declared for timezones.  Currently, you can only install
+> either A or B.
+> 
+> If there is consensus on this, I would take care that OE metadata is
+> updated accordingly (drop timezones folder, replace occurences of
+> timezones in DEPENDS with tzdata, etc.)
+> 
+> Regards
+> 
+> Rolf
+> 
++1
 
-$ bitbake gpe-image
-Traceback (most recent call last):
-  File "/stuff/bitbake/bin/bitbake", line 134, in <module>
-    main()
-  File "/stuff/bitbake/bin/bitbake", line 114, in main
-    cooker = bb.cooker.BBCooker(configuration)
-  File "/stuff/bitbake/lib/bb/cooker.py", line 65, in __init__
-    self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
-  File "/stuff/bitbake/lib/bb/cooker.py", line 353, in
-parseConfigurationFile
-    bb.fetch.fetcher_init(self.configuration.data)
-  File "/stuff/bitbake/lib/bb/fetch/__init__.py", line 97, in fetcher_init
-    pd.delDomain("BB_URI_HEADREVS")
-  File "/stuff/bitbake/lib/bb/persist_data.py", line 66, in delDomain
-    self.connection.execute("DROP TABLE IF EXISTS %s;" % domain)
-sqlite3.OperationalError: attempt to write a readonly database
+It is an ancient Opie relict that should have died a long time ago.
 
-I googled it but only found 2 posts that said it needed to install sqlite >
-3.3.0, so I apt-get installed sqlite3 but still have the same problem.
+-- 
+Matthias 'CoreDump' Hentges 
+Cologne / Germany
 
-$ sqlite3 -version
-3.4.2
+Webmaster of Hentges.net & Embedded Linux Developer
+GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
 
-Also tried apt-get install sqlite but version was 2.8.17, and then removed
-them and install from source latest (3.5.3).
-Any help will be appreciated,
+My OS: Debian SID: Geek by Nature, Linux by Choice
 
-Eduardo Giacoman
+
+
+
 
