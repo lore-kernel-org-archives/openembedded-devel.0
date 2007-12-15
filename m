@@ -1,26 +1,32 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J3UeY-0006KY-LL
-	for openembedded-devel@openembedded.org; Sat, 15 Dec 2007 11:53:54 +0100
-Received: from Powerbook-2.local (vpn006059.vpn.utwente.nl [130.89.6.59])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lBFAnC0k032116 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Dec 2007 11:49:13 +0100
-Message-ID: <4763B128.6050806@student.utwente.nl>
-Date: Sat, 15 Dec 2007 11:49:12 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <mickey@openmoko.org>) id 1J3Vgb-0003UL-Db
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Dec 2007 13:00:06 +0100
+Received: by vanille-media.de (Postfix, from userid 65534)
+	id 0267E28C013; Sat, 15 Dec 2007 12:48:18 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	srv043.dedi23.de
+X-Spam-Level: 
+X-Spam-Status: No, score=0.4 required=5.0 tests=AWL,BAYES_00,
+	MANY_EXCLAMATIONS,RCVD_IN_PBL,RCVD_IN_SORBS_DUL autolearn=no 
+	version=3.1.7-deb
+Received: from PROMETHEUS (e180148242.adsl.alicedsl.de [85.180.148.242])
+	by vanille-media.de (Postfix) with ESMTP id E9DF528C012;
+	Sat, 15 Dec 2007 12:48:14 +0100 (CET)
+Date: Sat, 15 Dec 2007 12:55:24 +0100
+From: Michael 'Mickey' Lauer <mickey@openmoko.org>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Team OpenMoko
+X-Priority: 3 (Normal)
+Message-ID: <1910714040.20071215125524@vanille-media.de>
+To: Carsten Haitzler <raster@openmoko.org> (The Rasterman)
+In-Reply-To: <20071215151907.d0e45e41.raster@openmoko.org>
+References: <20071215151907.d0e45e41.raster@openmoko.org>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <164348748.20071215043923@gmail.com>
-In-Reply-To: <164348748.20071215043923@gmail.com>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] ANGSTROM_MODE -> SYSTYPE
+Cc: openembedded-devel@lists.openembedded.org,
+	software-team@lists.internal.openmoko.org
+Subject: Re: AAAARGH! openembedded..... pcmciautils. SOLVED!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,60 +40,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Dec 2007 10:53:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 15 Dec 2007 12:00:09 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+[Sorry, TOFU alarm. NOTE: Cross-posted: please watch your replies]
 
-Paul Sokolovsky schreef:
-> Hello Openembedded-devel,
-> 
->    ANGSTROM_MODE config variable has proven to be very useful and
-> successful feature during the Angstrom evolution. IMHO, it is worth
-> generalization of its meaning and naming to become a generic
-> additional OE distro configuration parameter. 
-> So, I'd like to propose
-> it to be renamed to SYSTYPE, with the description "Select particular
-> system variant of a distribution which supports such feature, e.g.,
-> underlying libc type."
+Well spotted! Congrats :)
 
-How will a user know if that flag is supported for the distro he/she
-wants to use?
-should we enhance insane.bbclass to crosscheck TARGET_OS with
-SYSTYPE_FOO for the uclibc vs glibc case? And if so, how would it check
-between glibc and eglibc?
-Having an *easier* OE-blessed way for switching C library would be nice,
-but let's make sure people don't shoot themselves in the foot by setting
-SYSTYPE_FOO with a distro that has no knowledge of it.
+Fwiw, I've forwarded your mail to
+openembedded-devel@lists.openembedded.org, since I think you got a
+valid point here.
 
-regards,
+> ok.
 
-Koen
+> i need to vent.
+
+> pmccia utils - have never built for me. it has ONLY succeeded in doing 1 thing.
+> filling up my disk with multi-GB log files.
+
+> i found out why now.
+
+> from the pcmciautils Makefile:
+
+> .c.o:
+>         $(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
+
+> from the build log:
+
+> make[1]: Entering directory
+> `/home/raster/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/pcmciautils-014'
+> Building ccdv yes ccache arm-angstrom-linux-gnueabi-gcc -march=armv4t
+> -mtune=arm920t
+> -I/home/raster/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/pcmciautils-014/src
+> -isystem/home/raster/moko/build/tmp/staging/arm-angstrom-linux-gnueabi/include
+> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -c -o
+> src/pccardctl.o src/pccardctl.c ccache arm-angstrom-linux-gnueabi-gcc
+> -march=armv4t -mtune=arm920t
+> -I/home/raster/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/pcmciautils-014/src
+> -isystem/home/raster/moko/build/tmp/staging/arm-angstrom-linux-gnueabi/include
+> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -c -o
+> src/pccardctl.o src/pccardctl.c ccache arm-angstrom-linux-gnueabi-gcc
+> -march=armv4t -mtune=arm920t
+> -I/home/raster/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/pcmciautils-014/src
+> -isystem/home/raster/moko/build/tmp/staging/arm-angstrom-linux-gnueabi/include
+> -fexpensive-opti
+
+> note - it's running yes - then the compile line - yes just spews out its cmd
+> line args ad-infinitum to OE's log files - filling my disk
+
+> why this?
+
+> well my environment had QUIET=yes set:
+
+> [  3:15PM
+> ~/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/temp
+> env | grep QUIET QUIET=yes
+
+> why? well /etc/init.d/rc's environment is inherited by users when they log in
+> as it spawns dameons/processes that handle logins:
+
+> # Should we also output to the console?
+> # /proc won't be mounted if we don't have an initramfs, but then we're
+> # dealing with custom systems so it's their own fault that they'll get
+> # output from rcS  
+> if grep -w -q quiet /proc/cmdline 2>/dev/null; then
+>     QUIET=yes
+> else
+>     QUIET=no
+> fi
+> export QUIET
+
+> (from /etc/init.d/rc).
+
+> a harmless environment variable of "QUIET=yes" broke the build. it's taken me a
+> while to track this down. any good reason OE doesn't entirely clear ALL
+> environment variables from the user EXCEPT ones known to be desirable on build
+> so you have a clean and fresh environment that is known and fixed?  
+
+> anyway. pcmciautils built now. i can finally build myself an os image. woot.
 
 
->   Obviously, it wouldn't be limited to libc type, but intended to be a
-> generic sub-parameter of a distro, it could be debug/release type,
-> size type (minimal/standard/extended), whatever. The usage idea is to
-> have standard name for such generic parameter, plus semantically it
-> should be expected that a distro allows to build different SYSTYPE's
-> side-by-side in the same build dir (like Angstrom does for libc
-> variants).
-> 
-> 
 
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+-- 
+Best regards,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Dr. Michael 'Mickey' Lauer.
 
-iD8DBQFHY7EoMkyGM64RGpERAh1uAJ9/QUGnhZ+4/zKUeOZSgIgMNyuwUACfYb3a
-gy3s4p4svQ8M8rbFxThH+9I=
-=3c7/
------END PGP SIGNATURE-----
 
 
