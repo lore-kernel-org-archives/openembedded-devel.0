@@ -1,28 +1,28 @@
-Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
+Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J3Z2K-0000fR-2K
+	(envelope-from <pmiscml@gmail.com>) id 1J3ZLX-00013p-JK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Dec 2007 16:34:44 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so69071fge.20
+	Sat, 15 Dec 2007 16:54:35 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so70302fge.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Dec 2007 07:30:06 -0800 (PST)
-Received: by 10.86.82.16 with SMTP id f16mr4281132fgb.60.1197732606803;
-	Sat, 15 Dec 2007 07:30:06 -0800 (PST)
+	Sat, 15 Dec 2007 07:49:58 -0800 (PST)
+Received: by 10.86.78.4 with SMTP id a4mr4333248fgb.0.1197733798276;
+	Sat, 15 Dec 2007 07:49:58 -0800 (PST)
 Received: from ?192.168.20.166? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id 28sm5778132fkx.2007.12.15.07.30.05
-	(version=SSLv3 cipher=OTHER); Sat, 15 Dec 2007 07:30:05 -0800 (PST)
-Date: Sat, 15 Dec 2007 17:35:13 +0200
+	by mx.google.com with ESMTPS id e32sm14343491fke.2007.12.15.07.49.57
+	(version=SSLv3 cipher=OTHER); Sat, 15 Dec 2007 07:49:57 -0800 (PST)
+Date: Sat, 15 Dec 2007 17:55:05 +0200
 From: Paul Sokolovsky <pmiscml@gmail.com>
 X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
 X-Priority: 3 (Normal)
-Message-ID: <1515905492.20071215173513@gmail.com>
-To: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-In-Reply-To: <c384c5ea0712150526i2a8147c5ud43b5e79c52a7feb@mail.gmail.com>
-References: <164348748.20071215043923@gmail.com>
-	<c384c5ea0712150526i2a8147c5ud43b5e79c52a7feb@mail.gmail.com>
+Message-ID: <316414004.20071215175505@gmail.com>
+To: Carsten Haitzler <raster@openmoko.org> (The Rasterman)
+In-Reply-To: <1910714040.20071215125524@vanille-media.de>
+References: <20071215151907.d0e45e41.raster@openmoko.org>
+	<1910714040.20071215125524@vanille-media.de>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] ANGSTROM_MODE -> SYSTYPE
+Subject: Re: AAAARGH! openembedded..... pcmciautils. SOLVED!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,101 +36,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Dec 2007 15:34:44 -0000
+X-List-Received-Date: Sat, 15 Dec 2007 15:54:35 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hello Leon,
+Hello Michael,
 
-Saturday, December 15, 2007, 3:26:40 PM, you wrote:
+Saturday, December 15, 2007, 1:55:24 PM, you wrote:
 
-> Hello all,
+> [Sorry, TOFU alarm. NOTE: Cross-posted: please watch your replies]
 
-> On Dec 15, 2007 3:39 AM, Paul Sokolovsky <pmiscml@gmail.com> wrote:
->>    ANGSTROM_MODE config variable has proven to be very useful and
->> successful feature during the Angstrom evolution. IMHO, it is worth
->> generalization of its meaning and naming to become a generic
->> additional OE distro configuration parameter. So, I'd like to propose
->> it to be renamed to SYSTYPE, with the description "Select particular
->> system variant of a distribution which supports such feature, e.g.,
->> underlying libc type."
->>
-> NAK on the name and the combination with other settings:
+> Well spotted! Congrats :)
 
->>   Obviously, it wouldn't be limited to libc type, but intended to be a
->> generic sub-parameter of a distro, it could be debug/release type,
->> size type (minimal/standard/extended), whatever. The usage idea is to
->>
-> C library selection is mostly orthogonal from the
-> debug/profile/test/release/whatever type.
-> Also, C library selection is mostly orthogonal from the size type (in
-> fact, that's a target, not
-> a property of it).
+> Fwiw, I've forwarded your mail to
+> openembedded-devel@lists.openembedded.org, since I think you got a
+> valid point here.
 
-  Well, SYSTYPE has another aim and idea in its introduction. I hinted
-about that in original mail, now let me make it explicit: the proposal
-is about introduction of the standard OE variable name for distro
-parameter tweaking. Its meaning however completely depends on the
-distro. Some distro needs switch libc's. Some needs to switch WMs.
-Others need to switch many other things, possibly, in combinations.
-Very good. OE recommends a standard general syntax for that - a
-SYSTYPE. Exact format of what goes into SYSTYPE and its semantics is
-up to distro (and users will know about all that by reading distro's
-docs). (Now that we talk about validation, it puts additional
-syntactic constraints on SYSTYPE value, that's why I'm personally not
-keen to start with [rigid] validation from the beginning).
+>> note - it's running yes - then the compile line - yes just spews out its cmd
+>> line args ad-infinitum to OE's log files - filling my disk
 
->> have standard name for such generic parameter, plus semantically it
->> should be expected that a distro allows to build different SYSTYPE's
->> side-by-side in the same build dir (like Angstrom does for libc
->> variants).
->>
-> *If* you want to go for this, I would propose DISTRO_LIBC instead and
-> NOT mix this with any other settings, which are orthogonal and mostly
-> unrelated.
+   Bwa-ha-ha! This is really worth recording in OE's hall of curiosities!
+Btw, recently I caught export issue for TARGET_ARCH too, and looking
+at the unexport list we have already:
 
-> (I.e. the fact that I want to profile my image, is independent on
-> whether I built with eglibc or glibc).
+    # Make sure MACHINE isn't exported
+    # (breaks binutils at least)
+    bb.data.delVarFlag('MACHINE', 'export', d)
+    bb.data.setVarFlag('MACHINE', 'unexport', 1, d)
+                                                               
+    # Make sure TARGET_ARCH isn't exported
+    # (breaks Makefiles using implicit rules, e.g. quilt, as GNU make has this
+    # in them, undocumented)
+    bb.data.delVarFlag('TARGET_ARCH', 'export', d)
+    bb.data.setVarFlag('TARGET_ARCH', 'unexport', 1, d)
 
-> Also, I agree with Koen that we then end up in the situation where
-> people may assume this flag is always respected, while it's dependent
-> on the distro.
+    # Make sure DISTRO isn't exported
+    # (breaks sysvinit at least)
+    bb.data.delVarFlag('DISTRO', 'export', d)
+    bb.data.setVarFlag('DISTRO', 'unexport', 1, d)
 
-> -1 for the proposal
+Thought about this too:
+   
+>> any good reason OE doesn't entirely clear ALL
+>> environment variables from the user EXCEPT ones known to be desirable on build
+>> so you have a clean and fresh environment that is known and fixed?
 
-  Please rethink.
 
-> +0 for the making DISTRO_LIBC a global C library selector.
 
-  Gotcha! That's exactly what I'm trying to avoid - proliferation of
-adhoc distro config parameters! We have ANGSTROM_MODE now, supposedly
-FooNas will want to call it FOONAS_LIBC, with lots others alike. Then
-lots of others will introduce lots of others config parameter, making
-OE maintainers and users screem. No, let's think it out now, acting on
-numerous complaints that OE is too complex to setup (which includes
-configuration) by mere humans. How it was before, there're two
-parameters had to be set to build a proper package/image: DISTRO and
-MACHINE. As we all hopefully agree that tweaking high-level distro
-settings without formally introducing a new distro is a nice thing,
-let's add one another parameter to this, and let users and developers
-know that it is the recommended way to do it. So, a user could build a
-package/image using:
+>> ok.
 
-DISTRO=<distro> SYSTYPE=<systype> MACHINE=<machine> bitbake <package>
+>> i need to vent.
 
-   In ideal world (and we'll get there, I trust), this will be possible
-after OE checkout, without adding any weird configs with weird
-settings users can't get. Then, we'll even address rights of
-environment-use-challenged users, by adding corresponding options to
-bitbake itself:
+>> pmccia utils - have never built for me. it has ONLY succeeded in doing 1 thing.
+>> filling up my disk with multi-GB log files.
 
-bitbake --distro=foo --systype=bar --machine=baz package
+>> i found out why now.
 
-  And nothing really precludes SYSTYPE to be not just "libc", but
-"libc,release", or "libc,release,wm=xfce", or
-"libc,release,wm=xfce,weird_user_config=some_file.conf".
+>> from the pcmciautils Makefile:
 
-> Regards,
+>> .c.o:
+>>         $(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
+
+>> from the build log:
+
+>> make[1]: Entering directory
+>> `/home/raster/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/pcmciautils-014'
+>> Building ccdv yes ccache arm-angstrom-linux-gnueabi-gcc -march=armv4t
+>> -mtune=arm920t
+>> -I/home/raster/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/pcmciautils-014/src
+>> -isystem/home/raster/moko/build/tmp/staging/arm-angstrom-linux-gnueabi/include
+>> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -c -o
+>> src/pccardctl.o src/pccardctl.c ccache arm-angstrom-linux-gnueabi-gcc
+>> -march=armv4t -mtune=arm920t
+>> -I/home/raster/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/pcmciautils-014/src
+>> -isystem/home/raster/moko/build/tmp/staging/arm-angstrom-linux-gnueabi/include
+>> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -c -o
+>> src/pccardctl.o src/pccardctl.c ccache arm-angstrom-linux-gnueabi-gcc
+>> -march=armv4t -mtune=arm920t
+>> -I/home/raster/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/pcmciautils-014/src
+>> -isystem/home/raster/moko/build/tmp/staging/arm-angstrom-linux-gnueabi/include
+>> -fexpensive-opti
+
+>> note - it's running yes - then the compile line - yes just spews out its cmd
+>> line args ad-infinitum to OE's log files - filling my disk
+
+>> why this?
+
+>> well my environment had QUIET=yes set:
+
+>> [  3:15PM
+>> ~/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/pcmciautils-014-r1/temp
+>> env | grep QUIET QUIET=yes
+
+>> why? well /etc/init.d/rc's environment is inherited by users when they log in
+>> as it spawns dameons/processes that handle logins:
+
+>> # Should we also output to the console?
+>> # /proc won't be mounted if we don't have an initramfs, but then we're
+>> # dealing with custom systems so it's their own fault that they'll get
+>> # output from rcS  
+>> if grep -w -q quiet /proc/cmdline 2>/dev/null; then
+>>     QUIET=yes
+>> else
+>>     QUIET=no
+>> fi
+>> export QUIET
+
+>> (from /etc/init.d/rc).
+
+>> a harmless environment variable of "QUIET=yes" broke the build. it's taken me a
+>> while to track this down. any good reason OE doesn't entirely clear ALL
+>> environment variables from the user EXCEPT ones known to be desirable on build
+>> so you have a clean and fresh environment that is known and fixed?  
+
+>> anyway. pcmciautils built now. i can finally build myself an os image. woot.
+
+
+
+
 
 
 
