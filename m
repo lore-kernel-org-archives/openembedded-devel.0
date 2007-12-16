@@ -1,26 +1,30 @@
-Received: from [209.85.128.187] (helo=fk-out-0910.google.com)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J3qMA-0000t7-Ms
+	(envelope-from <rod@whitby.id.au>) id 1J3qVw-0001AV-9M
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2007 11:04:22 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so1077108fks.12
+	Sun, 16 Dec 2007 11:14:28 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 4CA457C36A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2007 01:59:40 -0800 (PST)
-Received: by 10.86.50.8 with SMTP id x8mr5151464fgx.25.1197799180426;
-	Sun, 16 Dec 2007 01:59:40 -0800 (PST)
-Received: from ?192.168.20.166? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id v23sm15528736fkd.2007.12.16.01.59.38
-	(version=SSLv3 cipher=OTHER); Sun, 16 Dec 2007 01:59:39 -0800 (PST)
-Date: Sun, 16 Dec 2007 12:04:59 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1323505412.20071216120459@gmail.com>
-To: Rod Whitby <rod@whitby.id.au>
-In-Reply-To: <4764EDFB.9000801@whitby.id.au>
-References: <4764EDFB.9000801@whitby.id.au>
+	Sun, 16 Dec 2007 05:09:46 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Sun, 16 Dec 2007 05:09:46 -0500
+X-Sasl-enc: ng87mZ7Bs3nKg4A+9+LkkYA9frOQ/PsnSIYHQzjrcz/5 1197799785
+Received: from [192.168.18.11] (CPE-121-209-21-249.sa.bigpond.net.au
+	[121.209.21.249])
+	by mail.messagingengine.com (Postfix) with ESMTP id 63D88DDAE
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Dec 2007 05:09:45 -0500 (EST)
+Message-ID: <4764F92F.3090602@whitby.id.au>
+Date: Sun, 16 Dec 2007 20:38:47 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+References: <4764EDFB.9000801@whitby.id.au>
+	<1323505412.20071216120459@gmail.com>
+In-Reply-To: <1323505412.20071216120459@gmail.com>
+X-Enigmail-Version: 0.95.5
 Subject: Re: [ANN] New 'base-image' created (Was: [RFC] Add ipkg to minimal image)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,40 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2007 10:04:22 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 16 Dec 2007 10:14:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello Rod,
+Paul Sokolovsky wrote:
+> Sunday, December 16, 2007, 11:20:59 AM, you wrote:
+>> It is required to always be small enough to fit in the internal flash of
+>> an NSLU2 (as an example of the smaller end of flash sizes that OE
+>> supports).
+> 
+>   So, how little size did you achieve?
 
-Sunday, December 16, 2007, 11:20:59 AM, you wrote:
+Not as small as I would like.  I did it using standard task-boot and a
+couple of task-base packages, rather than do a custom package set up-front.
 
-> Based on the good discussion and constructive feedback related to my RFC
-> about adding ipkg to minimal image, I have decided to create a new
-> image, whose name truly reflects it's intention.
+I expect it will be a good test case for determining what is appropriate
+in task-base-foo packages ...
 
-> I hereby name 'base-image' as the smallest possible image which allows
-> you to ssh into a device via it's native network interface, and install
-> packages from feeds across the network into internal flash or onto an
-> attached storage device.
+Be prepared for some packages to be removed - there is still a lot of
+fat in there which is not strictly required by the defined image package
+inclusion criteria.
 
-  Great news!
-
-[]
-
-> It is required to always be small enough to fit in the internal flash of
-> an NSLU2 (as an example of the smaller end of flash sizes that OE
-> supports).
-
-  So, how little size did you achieve? I wonder, if we'd finally be able
-to put kiddy distros like this: http://midge.vlad.org.ua/wiki/ (didn't
-merge even with OpenWRT AFAIK) to rest ;-).
-
-[]
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+-- Rod
 
 
