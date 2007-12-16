@@ -1,31 +1,27 @@
 Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1J3lZC-0007GC-M7
+	(envelope-from <rod@whitby.id.au>) id 1J3plf-0008Jq-Uu
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2007 05:57:30 +0100
+	Sun, 16 Dec 2007 10:26:40 +0100
 Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 02FFC4895D
+	by out1.messagingengine.com (Postfix) with ESMTP id 13DDC7D983
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Dec 2007 23:52:50 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute2.internal (MEProxy); Sat, 15 Dec 2007 23:52:50 -0500
-X-Sasl-enc: fu6hKJu9N4y1AF+R1R76kjrRJzWs6rUNujeVTu7JudDV 1197780769
+	Sun, 16 Dec 2007 04:21:58 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Sun, 16 Dec 2007 04:21:58 -0500
+X-Sasl-enc: k97V3y40f4HUK9rlOXGuQ0F93NZENpG1iRiE9H5GmSxd 1197796917
 Received: from [192.168.18.11] (CPE-121-209-21-249.sa.bigpond.net.au
 	[121.209.21.249])
-	by mail.messagingengine.com (Postfix) with ESMTP id 3412425F23
+	by mail.messagingengine.com (Postfix) with ESMTP id 12C5D3CC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Dec 2007 23:52:48 -0500 (EST)
-Message-ID: <4764AEE7.5040908@whitby.id.au>
-Date: Sun, 16 Dec 2007 15:21:51 +1030
+	Sun, 16 Dec 2007 04:21:56 -0500 (EST)
+Message-ID: <4764EDFB.9000801@whitby.id.au>
+Date: Sun, 16 Dec 2007 19:50:59 +1030
 From: Rod Whitby <rod@whitby.id.au>
 User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <164348748.20071215043923@gmail.com>	<c384c5ea0712150526i2a8147c5ud43b5e79c52a7feb@mail.gmail.com>
-	<1515905492.20071215173513@gmail.com>
-In-Reply-To: <1515905492.20071215173513@gmail.com>
-X-Enigmail-Version: 0.95.5
-Subject: Re: [RFC] ANGSTROM_MODE -> SYSTYPE
+Subject: [ANN] New 'base-image' created (Was: [RFC] Add ipkg to minimal image)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,26 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2007 04:57:31 -0000
+X-List-Received-Date: Sun, 16 Dec 2007 09:26:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Paul Sokolovsky wrote:
->   Well, SYSTYPE has another aim and idea in its introduction. I hinted
-> about that in original mail, now let me make it explicit: the proposal
-> is about introduction of the standard OE variable name for distro
-> parameter tweaking. Its meaning however completely depends on the
-> distro. Some distro needs switch libc's. Some needs to switch WMs.
-> Others need to switch many other things, possibly, in combinations.
-> Very good. OE recommends a standard general syntax for that - a
-> SYSTYPE. Exact format of what goes into SYSTYPE and its semantics is
-> up to distro (and users will know about all that by reading distro's
-> docs). (Now that we talk about validation, it puts additional
-> syntactic constraints on SYSTYPE value, that's why I'm personally not
-> keen to start with [rigid] validation from the beginning).
+Based on the good discussion and constructive feedback related to my RFC
+about adding ipkg to minimal image, I have decided to create a new
+image, whose name truly reflects it's intention.
 
-How is this different to the USE flags proposals that have come and gone
-in the past?
+I hereby name 'base-image' as the smallest possible image which allows
+you to ssh into a device via it's native network interface, and install
+packages from feeds across the network into internal flash or onto an
+attached storage device.
+
+It is "larger" than minimal-image (cause a number of people quite
+rightly wanted minimal image to strictly remain only that which is
+required to boot and get ssh access to the device, and nothing else),
+but is "smaller" than console-image (which has a whole lot of stuff in
+it which could easily be installed over the network from package feeds
+after boot rather than being in the initial rootfs).
+
+It is required to always be small enough to fit in the internal flash of
+an NSLU2 (as an example of the smaller end of flash sizes that OE
+supports), and features will be removed from the image to ensure that
+this is always the case.  Any feature that can be installed using the
+package manager after the first boot is always fair game for removal at
+any time, and patches are welcome to make base-image as small as
+possible while still retaining the ability to subsequently install that
+feature.  Yes, this size restriction is part of the definition of this
+image.
+
+Since there was no clear consensus on how to indicate which package
+manager is used by a particular distro, I have defaulted it to ipkg.
+Patches are welcome to make it support other package management systems
+(i.e. deb), but these must be done in a distro-independent way (i.e. you
+must RFC and get agreement on how *all* of OE chooses a package manager,
+not just how one particular distro chooses a package manager), since
+this image is designed to work with any distro, not just (for example)
+Angstrom.
 
 -- Rod
 
