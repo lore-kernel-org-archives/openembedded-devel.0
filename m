@@ -1,20 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1J40Tt-0003Ne-Fz
-	for openembedded-devel@openembedded.org; Sun, 16 Dec 2007 21:53:01 +0100
-Received: (qmail 5234 invoked by uid 813007); 16 Dec 2007 20:48:16 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 16 Dec 2007 20:48:16 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2007 21:48:13 +0100
-User-Agent: KMail/1.9.7
+	(envelope-from <pmiscml@gmail.com>) id 1J420I-0005eH-LC
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 16 Dec 2007 23:30:34 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so193175fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Dec 2007 14:25:49 -0800 (PST)
+Received: by 10.86.62.3 with SMTP id k3mr5726772fga.15.1197843949736;
+	Sun, 16 Dec 2007 14:25:49 -0800 (PST)
+Received: from ?192.168.20.166? ( [194.79.8.34])
+	by mx.google.com with ESMTPS id y18sm5934232fkd.2007.12.16.14.25.46
+	(version=SSLv3 cipher=OTHER); Sun, 16 Dec 2007 14:25:47 -0800 (PST)
+Date: Mon, 17 Dec 2007 00:31:11 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <487953198.20071217003111@gmail.com>
+To: Marcin Juszkiewicz <openembedded@haerwu.biz>
+In-Reply-To: <200712162148.14183.openembedded@haerwu.biz>
 References: <164348748.20071215043923@gmail.com>
-In-Reply-To: <164348748.20071215043923@gmail.com>
+	<200712162148.14183.openembedded@haerwu.biz>
 MIME-Version: 1.0
-Message-Id: <200712162148.14183.openembedded@haerwu.biz>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [RFC] ANGSTROM_MODE -> SYSTYPE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,74 +36,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2007 20:53:01 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sun, 16 Dec 2007 22:30:34 -0000
+Content-Type: text/plain; charset=iso-8859-2
+Content-Transfer-Encoding: 8bit
 
-Dnia sobota, 15 grudnia 2007, Paul Sokolovsky napisa=B3:
+Hello Marcin,
 
->    ANGSTROM_MODE config variable has proven to be very useful and
-> successful feature during the Angstrom evolution. IMHO, it is worth
-> generalization of its meaning and naming to become a generic
-> additional OE distro configuration parameter. So, I'd like to propose
-> it to be renamed to SYSTYPE, with the description "Select particular
-> system variant of a distribution which supports such feature, e.g.,
-> underlying libc type."
+Sunday, December 16, 2007, 10:48:13 PM, you wrote:
 
-Basically I like idea of unifing this. In Poky we have POKYLIBC for it.=20
-But it should be in DISTRO_ namespace as this makes distro change.
+> Dnia sobota, 15 grudnia 2007, Paul Sokolovsky napisa³:
 
->   Obviously, it wouldn't be limited to libc type, but intended to be a
-> generic sub-parameter of a distro,=20
+>>    ANGSTROM_MODE config variable has proven to be very useful and
+>> successful feature during the Angstrom evolution. IMHO, it is worth
+>> generalization of its meaning and naming to become a generic
+>> additional OE distro configuration parameter. So, I'd like to propose
+>> it to be renamed to SYSTYPE, with the description "Select particular
+>> system variant of a distribution which supports such feature, e.g.,
+>> underlying libc type."
 
-DISTRO_LIBC
+> Basically I like idea of unifing this. In Poky we have POKYLIBC for it.
+> But it should be in DISTRO_ namespace as this makes distro change.
 
-> it could be debug/release type,=20
+>>   Obviously, it wouldn't be limited to libc type, but intended to be a
+>> generic sub-parameter of a distro, 
 
-DISTRO_TYPE
+> DISTRO_LIBC
 
-> size type (minimal/standard/extended),=20
+>> it could be debug/release type, 
 
-This is handled by distro overrides when it comes to configurations=20
-(busybox, uclibc, kernel configs) and images content.
+> DISTRO_TYPE
 
-> whatever.=20
+>> size type (minimal/standard/extended), 
 
-DISTRO_* can be added at any time as long as they have sense.
+> This is handled by distro overrides when it comes to configurations 
+> (busybox, uclibc, kernel configs) and images content.
 
-> The usage idea is to have standard name for such generic parameter, plus
-> semantically it should be expected that a distro allows to build
-> different SYSTYPE's side-by-side in the same build dir (like Angstrom
-> does for libc variants).
+>> whatever. 
 
-> And nothing really precludes SYSTYPE to be not just "libc", but
-> "libc,release", or "libc,release,wm=3Dxfce", or
-> "libc,release,wm=3Dxfce,weird_user_config=3Dsome_file.conf".
+> DISTRO_* can be added at any time as long as they have sense.
 
-This is *SICK* as this really should be set in local.conf. Imagine how to=20
-handle something like this:
+>> The usage idea is to have standard name for such generic parameter, plus
+>> semantically it should be expected that a distro allows to build
+>> different SYSTYPE's side-by-side in the same build dir (like Angstrom
+>> does for libc variants).
 
-DISTRO=3Dumbaumba-18.7 MACHINE=3Dspitz SYSTYPE=3D"uclibc=20
-uclibc_config=3Dtweaks/uclibc.config release,wm=3Dopenbox=20
-openbox_config=3Dtweaks/openbox.onfig kernel=3Dtweaks/linux-rp-umbaumba=20
-kernel_config=3Dtweaks/kernel/spitz.defconfig" bitbake=20
-umbaumba-default-image
+>> And nothing really precludes SYSTYPE to be not just "libc", but
+>> "libc,release", or "libc,release,wm=xfce", or
+>> "libc,release,wm=xfce,weird_user_config=some_file.conf".
 
-All what this command do is possible with auto/local.conf files.
+> This is *SICK* as this really should be set in local.conf. Imagine how to
+> handle something like this:
+
+  That was just a display that such syntax (i.e. single var) doesn't have
+any restrictions. The actual syntax of the value is fully offloaded to
+a specific distro. And I don't expect any distro in OE mainline having
+something more than scalar value soon.
+
+> DISTRO=umbaumba-18.7 MACHINE=spitz SYSTYPE="uclibc 
+> uclibc_config=tweaks/uclibc.config release,wm=openbox 
+> openbox_config=tweaks/openbox.onfig kernel=tweaks/linux-rp-umbaumba 
+> kernel_config=tweaks/kernel/spitz.defconfig" bitbake 
+> umbaumba-default-image
+
+> All what this command do is possible with auto/local.conf files.
+
+  So, let it me recount it again: the talk is not just about renaming
+ANGSTROM_MODE to something, but about defining a user-level, whitebox
+parameters to configure OE build. We had a long and hot discussion
+recently about making OE more friendly for novices and casual
+developers. I was opponent of any patch/wrap measures, but something
+should be done to make OE more easily configurable nonetheless.
+
+  The approach I argue here is: let's define finite, small, easily
+graspable set of parameters and then work towards making OE work out of
+the box requiring a user to set just those parameters, and preferrably
+set in easy and obvious way.
+
+  Editing auto/local.conf and bunch of DISTRO_* parameters do not qualify
+for this purpose, those are developers' stuff, requiring reading
+lots of docs and good understanding of OE.
+
+  Summing up, arguments for the original proposal:
+
+1. One variable vs many: psychologically, it's much easier to remember
+one setting than many. Knowledge that *all* additional configuration
+is passed via one variable gives additional psychological boost that
+you have powerful and flexible tool in your hand, and know that tool \
+well enough to use it. (I mean only *whitebox* distro parameters here,
+never a talk about replacing dozens of OE variables with the one;
+developers will keep fiddling with all of them).
+  Next, as I pointed, once we settle on the set of the OE whitebox
+variables (and I really hope it will be this three-some of DISTRO,
+<var_in_question>, MACHINE), it would be natural to allow to specify
+them on bitbake command line. This would require finite and small set
+of them.
+
+2. SYSTYPE vs LONG_BUT_FULLY_CORRECT_VARIABLE_NAME: I love namespaces
+and stuff myself, but again, with such paradigm, there would be 2
+top-level namespaces: whitebox vars and blackbox vars. Whitebox vars
+face large community of users, so there names should be short and
+catchy, and not necessarily fit with blackbox var names. As an
+example, distro code might parse SYSTYPE="release,glibc" and set
+DISTRO_LIBC="glibc", DISTRO_TYPE="release" based on that, for peruse
+by other parts of OE blackbox.
 
 
-+1 from me for DISTRO_LIBC and good thought other DISTRO_ vars
-=2D2 for me for SYSTYPE variable
-=2Doo for SYSTYPE usage like command above
+   So, renaming ANGSTROM_MODE to DISTRO_LIBC is obviously move in the
+right direction, but let's consider if we're ready to move on wider front
+at the same time. I personally already have in my tree changes which
+allow to just check out OE and bitbake, have bitbake on the path,
+create a build dir in well-known location, and then type
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+DISTRO=angsrom SYSTYPE=uclibc MACHINE=h4000 bitbake initramfs-bootmenu-image
 
-                 We are the Knights who say: MOVE.L USP,A1
+or
 
+DISTRO=angsrom MACHINE=hx4700 bitbake x11-image
+
+or
+
+DISTRO=generic-uclibc-opt MACHINE=wdmybook bitbake nano
+
+or
+
+DISTRO=openwrt-sdk MACHINE=brcm24 bitbake nano
+
+
+And voila. No config file copying and editing. No
+obscure environment variable setting. No wrapper scripts. No
+Makefiles. It just works.
+
+
+> +1 from me for DISTRO_LIBC and good thought other DISTRO_ vars
+> -2 for me for SYSTYPE variable
+> -oo for SYSTYPE usage like command above
+
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
