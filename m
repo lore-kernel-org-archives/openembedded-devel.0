@@ -1,32 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1J3qjZ-0005zD-2v
-	for openembedded-devel@openembedded.org; Sun, 16 Dec 2007 11:28:33 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lBGANm0h015796;
-	Sun, 16 Dec 2007 10:23:48 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 15504-07; Sun, 16 Dec 2007 10:23:45 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lBGANfWK015787
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Sun, 16 Dec 2007 10:23:41 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1J3rfB-00037I-NR
+	for openembedded-devel@openembedded.org; Sun, 16 Dec 2007 12:28:05 +0100
+Received: from Powerbook-2.local (vpn006053.vpn.utwente.nl [130.89.6.53])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lBGBNIfr005805 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Dec 2007 12:23:19 +0100
+Message-ID: <47650AA7.6080806@student.utwente.nl>
+Date: Sun, 16 Dec 2007 12:23:19 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-In-Reply-To: <316414004.20071215175505@gmail.com>
-References: <20071215151907.d0e45e41.raster@openmoko.org>
-	<1910714040.20071215125524@vanille-media.de>
-	<316414004.20071215175505@gmail.com>
-Date: Sun, 16 Dec 2007 10:23:40 +0000
-Message-Id: <1197800620.4653.19.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: Carsten Haitzler <raster@openmoko.org>
-Subject: Re: AAAARGH! openembedded..... pcmciautils. SOLVED!
+References: <4764EDFB.9000801@whitby.id.au>	<1323505412.20071216120459@gmail.com>
+	<4764F92F.3090602@whitby.id.au>
+In-Reply-To: <4764F92F.3090602@whitby.id.au>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: [ANN] New 'base-image' created (Was: [RFC] Add ipkg to minimal image)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,54 +35,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2007 10:28:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 16 Dec 2007 11:28:06 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2007-12-15 at 17:55 +0200, Paul Sokolovsky wrote:
-> Thought about this too:
->    
-> >> any good reason OE doesn't entirely clear ALL
-> >> environment variables from the user EXCEPT ones known to be desirable on build
-> >> so you have a clean and fresh environment that is known and fixed?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Bitbake reads all variables from the environment into its variable space
-when run. Any variable loaded from the original environment are marked
-as an export so it gets passed to executed tasks. More recently we added
-an "unexport" flag so you could actually stop it from doing this in
-cases known to cause problems (e.g. MACHINE). This is a long established
-behaviour of bitbake and changing it would probably break the way people
-use bitbake and break backwards compatibility.
+Rod Whitby schreef:
+> Paul Sokolovsky wrote:
+>> Sunday, December 16, 2007, 11:20:59 AM, you wrote:
+>>> It is required to always be small enough to fit in the internal flash of
+>>> an NSLU2 (as an example of the smaller end of flash sizes that OE
+>>> supports).
+>>   So, how little size did you achieve?
+> 
+> Not as small as I would like.  I did it using standard task-boot and a
+> couple of task-base packages, rather than do a custom package set up-front.
 
-Loading variables from the environment is a really useful feature which
-I personally, Poky and I suspect others make heavy use of. It implies
-you should have a relatively clean environment and perhaps that needs to
-be more predominately documented.
+I suspect the 'stretch' OE has to generate tiny rootfs images using
+standard recipes has been a bit exhausted. We should have a look at the
+packages themselves, e.g. slimming down busybox and uclibc, as well as
+using busybox as init and login to remove the need to sysvinit and
+tinylogin (security issues aside).
+Once the OE testlab comes online we can see what certain images contain,
+how big the individual packages are, and more importantly, how those
+change over time.
 
-Exporting those variables makes things more visible. Even if not
-exported, we would still have potentially weird build failures for users
-with dirty environments since it does affect the variable space quite
-significantly.
+regards,
 
-So yes, bitbake could stop exporting all variables but it would just
-hide more subtle problems rather than solving them.
+Koen
 
-In some cases we need to unexport. In the MACHINE case, setting from the
-environment is useful but we need to stop it getting passed to the task
-environment as it breaks things like binutils. In general I'd prefer the
-bitbake environment init scripts sanity check or clean the environment
-or something like sanity.bbclass could check for known bad exports and
-error asking the user to fix their environment rather than just blindly
-adding to the list of unexports...
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
-Cheers,
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Richard
-
-
-
-
-
-
+iD8DBQFHZQqnMkyGM64RGpERAuXIAJ0bsws9G4gIYKwSJuir2LP7SHWtCgCcDPaN
+JIExyRh2Y7FWid5M74GVxI8=
+=xY/D
+-----END PGP SIGNATURE-----
 
 
