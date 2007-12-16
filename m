@@ -1,30 +1,27 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+Received: from [209.85.128.187] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J3puv-0008W1-3u
+	(envelope-from <pmiscml@gmail.com>) id 1J3qMA-0000t7-Ms
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2007 10:36:13 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so142438fge.20
+	Sun, 16 Dec 2007 11:04:22 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so1077108fks.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2007 01:31:31 -0800 (PST)
-Received: by 10.86.81.8 with SMTP id e8mr5126034fgb.32.1197797491173;
-	Sun, 16 Dec 2007 01:31:31 -0800 (PST)
+	Sun, 16 Dec 2007 01:59:40 -0800 (PST)
+Received: by 10.86.50.8 with SMTP id x8mr5151464fgx.25.1197799180426;
+	Sun, 16 Dec 2007 01:59:40 -0800 (PST)
 Received: from ?192.168.20.166? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id 31sm15423561fkt.2007.12.16.01.31.29
-	(version=SSLv3 cipher=OTHER); Sun, 16 Dec 2007 01:31:30 -0800 (PST)
-Date: Sun, 16 Dec 2007 11:36:50 +0200
+	by mx.google.com with ESMTPS id v23sm15528736fkd.2007.12.16.01.59.38
+	(version=SSLv3 cipher=OTHER); Sun, 16 Dec 2007 01:59:39 -0800 (PST)
+Date: Sun, 16 Dec 2007 12:04:59 +0200
 From: Paul Sokolovsky <pmiscml@gmail.com>
 X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
 X-Priority: 3 (Normal)
-Message-ID: <1518712155.20071216113650@gmail.com>
+Message-ID: <1323505412.20071216120459@gmail.com>
 To: Rod Whitby <rod@whitby.id.au>
-In-Reply-To: <4764AEE7.5040908@whitby.id.au>
-References: <164348748.20071215043923@gmail.com>
-	<c384c5ea0712150526i2a8147c5ud43b5e79c52a7feb@mail.gmail.com>
-	<1515905492.20071215173513@gmail.com>
-	<4764AEE7.5040908@whitby.id.au>
+In-Reply-To: <4764EDFB.9000801@whitby.id.au>
+References: <4764EDFB.9000801@whitby.id.au>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] ANGSTROM_MODE -> SYSTYPE
+Subject: Re: [ANN] New 'base-image' created (Was: [RFC] Add ipkg to minimal image)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,52 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2007 09:36:13 -0000
+X-List-Received-Date: Sun, 16 Dec 2007 10:04:22 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
 Hello Rod,
 
-Sunday, December 16, 2007, 6:51:51 AM, you wrote:
+Sunday, December 16, 2007, 11:20:59 AM, you wrote:
 
-> Paul Sokolovsky wrote:
->>   Well, SYSTYPE has another aim and idea in its introduction. I hinted
->> about that in original mail, now let me make it explicit: the proposal
->> is about introduction of the standard OE variable name for distro
->> parameter tweaking. Its meaning however completely depends on the
->> distro. Some distro needs switch libc's. Some needs to switch WMs.
->> Others need to switch many other things, possibly, in combinations.
->> Very good. OE recommends a standard general syntax for that - a
->> SYSTYPE. Exact format of what goes into SYSTYPE and its semantics is
->> up to distro (and users will know about all that by reading distro's
->> docs). (Now that we talk about validation, it puts additional
->> syntactic constraints on SYSTYPE value, that's why I'm personally not
->> keen to start with [rigid] validation from the beginning).
+> Based on the good discussion and constructive feedback related to my RFC
+> about adding ipkg to minimal image, I have decided to create a new
+> image, whose name truly reflects it's intention.
 
-> How is this different to the USE flags proposals that have come and gone
-> in the past?
+> I hereby name 'base-image' as the smallest possible image which allows
+> you to ssh into a device via it's native network interface, and install
+> packages from feeds across the network into internal flash or onto an
+> attached storage device.
 
-  At least in naming. Because whenever word "USE" appears in
-discussion, someone comes to explain hardnesses of QAing a system,
-packages of which are being built using different compile-time
-settings.
+  Great news!
 
-  At the same time, OE already uses generalized USE conception a lot:
-DISTRO_FEATURES, MACHINE_FEATURES - are all those generalized USE
-flags, just working not on the package configuration level (like some
-other systems allow, and we don't want), but on distro configuration
-level. But DISTRO_FEATURES & MACHINE_FEATURES are "blackbox"
-parameters, intended for developers. You can't drop "wifi" from
-Angstrom's DISTRO_FEATURES and still call/think that it is Angstrom.
-On the other hand, SYSTYPE is intended as a whitebox parameter,
-together with the other 2 - DISTRO & MACHINE providing the well-known
-and complete set of knobs allowing *user* to build a legitimate distro
-image adjusted to user's need, and within the bounds allowed by a
-distro.
+[]
 
-> -- Rod
+> It is required to always be small enough to fit in the internal flash of
+> an NSLU2 (as an example of the smaller end of flash sizes that OE
+> supports).
 
+  So, how little size did you achieve? I wonder, if we'd finally be able
+to put kiddy distros like this: http://midge.vlad.org.ua/wiki/ (didn't
+merge even with OpenWRT AFAIK) to rest ;-).
 
+[]
 
 -- 
 Best regards,
