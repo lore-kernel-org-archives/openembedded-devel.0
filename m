@@ -1,26 +1,28 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J4Ndp-0003W5-IF
-	for openembedded-devel@openembedded.org; Mon, 17 Dec 2007 22:36:49 +0100
-Received: from Powerbook-2.local (vpn006097.vpn.utwente.nl [130.89.6.97])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lBHLVnfr026241 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2007 22:31:50 +0100
-Message-ID: <4766EAC5.10906@student.utwente.nl>
-Date: Mon, 17 Dec 2007 22:31:49 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <pmiscml@gmail.com>) id 1J4OIM-0004c0-I3
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Dec 2007 23:18:42 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so288165fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Dec 2007 14:13:51 -0800 (PST)
+Received: by 10.86.51.2 with SMTP id y2mr6934093fgy.17.1197929631746;
+	Mon, 17 Dec 2007 14:13:51 -0800 (PST)
+Received: from ?192.168.20.166? ( [194.79.8.34])
+	by mx.google.com with ESMTPS id j12sm18237722fkf.2007.12.17.14.13.50
+	(version=SSLv3 cipher=OTHER); Mon, 17 Dec 2007 14:13:51 -0800 (PST)
+Date: Tue, 18 Dec 2007 00:19:12 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <335513874.20071218001912@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4766EAC5.10906@student.utwente.nl>
+References: <4765E992.2040805@protium.com>
+	<4710722265.20071217130911@gmail.com>
+	<47668695.5010701@protium.com> <828321445.20071217170249@gmail.com>
+	<4766BEA8.1020709@protium.com> <4766EAC5.10906@student.utwente.nl>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <4765E992.2040805@protium.com>	<4710722265.20071217130911@gmail.com>	<47668695.5010701@protium.com>
-	<828321445.20071217170249@gmail.com> <4766BEA8.1020709@protium.com>
-In-Reply-To: <4766BEA8.1020709@protium.com>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
 Subject: Re: RFC: Renaming uboot-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,35 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2007 21:36:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 17 Dec 2007 22:18:42 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Andy Wilcox schreef:
+Monday, December 17, 2007, 11:31:49 PM, you wrote:
 
-> A few kernels will need to add the u-boot-utils-native dependency,
-> notably the linkstation.  I'll make these adjustments in the commit.
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
-And witness the joys of using linux.inc: automagic dependency on mkimage
-for machines that need it!
+> Andy Wilcox schreef:
 
-regards,
+>> A few kernels will need to add the u-boot-utils-native dependency,
+>> notably the linkstation.  I'll make these adjustments in the commit.
 
-Koen
+> And witness the joys of using linux.inc: automagic dependency on mkimage
+> for machines that need it!
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+  Actually, that magic is pretty dumb ;-) :
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+# Not every device needs mkimage to generate a kernel image, but lets make OE a bit more
+# friendly and increase the "Just Works(TM) factor. Building uboot takes only a minute. 
+DEPENDS += " u-boot-mkimage-openmoko-native "
 
-iD8DBQFHZurFMkyGM64RGpERAtRaAJ4j2Q7fVMLaY7JbEazogWro3iYIZgCggkdD
-aeY0fFxhJWIZN+J5cHXlRcE=
-=Fsd1
------END PGP SIGNATURE-----
+P.S. As of now, u-boot, u-boot-utils-native,
+u-boot-mkimage-openmoko-native all stage mkimage. Waste. Need to
+cleanup.
+  
+
+> regards,
+
+> Koen
+
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
