@@ -1,21 +1,30 @@
-Received: from [67.121.157.153] (helo=integratus.com)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <andy@protium.com>) id 1J4Khd-0003kL-86
-	for openembedded-devel@openembedded.org; Mon, 17 Dec 2007 19:28:33 +0100
-Received: (qmail 4084 invoked from network); 17 Dec 2007 18:22:30 -0000
-Received: from pool-71-116-93-90.snfcca.dsl-w.verizon.net (HELO
-	?192.168.1.200?) (andy@71.116.93.90)
-	by cuba.integratus.com with ESMTPA; 17 Dec 2007 18:22:30 -0000
-Message-ID: <4766BEA8.1020709@protium.com>
-Date: Mon, 17 Dec 2007 10:23:36 -0800
-From: Andy Wilcox <andy@protium.com>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070728)
+	(envelope-from <rod@whitby.id.au>) id 1J4NYS-0003Rq-M6
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Dec 2007 22:31:16 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id E90BC7F6F7;
+	Mon, 17 Dec 2007 16:26:25 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Mon, 17 Dec 2007 16:26:25 -0500
+X-Sasl-enc: utBtSYLEa4hHhyoFSncfAe60DSftYEQIWNT2V/R4e7pX 1197926785
+Received: from [192.168.18.11] (CPE-121-209-21-249.sa.bigpond.net.au
+	[121.209.21.249])
+	by mail.messagingengine.com (Postfix) with ESMTP id 8DDB52A878;
+	Mon, 17 Dec 2007 16:26:24 -0500 (EST)
+Message-ID: <4766E941.3090607@whitby.id.au>
+Date: Tue, 18 Dec 2007 07:55:21 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+To: Paul Sokolovsky <pmiscml@gmail.com>
 References: <4765E992.2040805@protium.com>
 	<4710722265.20071217130911@gmail.com>
 	<47668695.5010701@protium.com> <828321445.20071217170249@gmail.com>
 In-Reply-To: <828321445.20071217170249@gmail.com>
+X-Enigmail-Version: 0.95.5
+Cc: Andy Wilcox <andy@protium.com>, openembedded-devel@lists.openembedded.org
 Subject: Re: RFC: Renaming uboot-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,50 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2007 18:28:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 17 Dec 2007 21:31:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Paul Sokolovsky wrote:
->
->> OP is the only distro that currently needs u-boot-utils (for fw_setenv,
->> a target
->> utility).  I was trying to bend that out of the way: this package won't do
->> anything if you aren't building OP.  But perhaps that was wrong - I should
->> always built that utility, and you can use this package or not.  Is the
->> latter
->> way the right OE way?
->>     
->
->   Yes, I'd say the right way for mainline OE is to use machine/distro
-> overrides very sparingly, in selected places only. OE provides
-> flexible overrides mechanism to address special needs a vendor may have
-> to build its product per its requirements, but such overrides better live
-> in vendor trees/overlays. For mainline OE, I'd say it's better to err
-> on generality, than create complex and non-maintainable overrides maze
-> (an example is OPIE which risked removal from OE due to this, and by
-> now has been almost completely cleared off from any
-> machine-specific hacks).
->
->   
-Sounds reasonable.  I'll adjust that.
->
+> Monday, December 17, 2007, 4:24:21 PM, you wrote:
 >> Perhaps the MACHINE|DISTRO_FEATURES uboot should just
 >> go away?  It was only needed to make the native mkimage program,
 >> which really should be a kernel DEPENDS anyway.  Sound
 >> reasonable?
->>     
-Let me answer my own question here.  It appears that
-MACHINE|DISTRO_FEATURES was serving two purposes - one -
-to actually make a u-boot.bin file for the target, and two - to
-generate mkimage on the build host.   Given the former, it
-should definitely not go away!
+> 
+>   Let's hear Rod Whitby speak up, AFAIR, he added those features. But
+> as far as I understand, no, they should be there, and are the way to
+> add a particular bootloader support to *any* distro. Have a look at
+> apex and redboot support at the same place. So, if you say that your
+> machine has u-boot as bootloader, you'll get utils to manage it in the
+> image. Ditto for other bootloaders.
 
-A few kernels will need to add the u-boot-utils-native dependency,
-notably the linkstation.  I'll make these adjustments in the commit.
+Actually, I think NAiL added the uboot machine feature.  I only looked
+at the uboot and redboot ones that were already there and added apex.
 
-Regards,
-Andy
 
+-- Rod
 
 
