@@ -1,31 +1,30 @@
-Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J4i1N-00072C-K2
+	(envelope-from <rod@whitby.id.au>) id 1J4jkj-0004pN-KX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Dec 2007 20:22:29 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so373548fge.20
+	Tue, 18 Dec 2007 22:13:25 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 1D7D57FF70
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2007 11:17:33 -0800 (PST)
-Received: by 10.86.54.3 with SMTP id c3mr8005679fga.64.1198005453682;
-	Tue, 18 Dec 2007 11:17:33 -0800 (PST)
-Received: from ?192.168.20.166? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id g28sm19845317fkg.2007.12.18.11.17.32
-	(version=SSLv3 cipher=OTHER); Tue, 18 Dec 2007 11:17:32 -0800 (PST)
-Date: Tue, 18 Dec 2007 21:22:53 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <186064634.20071218212253@gmail.com>
-To: "pHilipp Zabel" <philipp.zabel@gmail.com>
-In-Reply-To: <74d0deb30712181013x79c2f42fr9d8f51d39377d6e3@mail.gmail.com>
-References: <E1J4SUo-0006ZZ-Ov@linuxtogo.org>
-	<74d0deb30712180217q5cb2c911l8a61567b5511b9d@mail.gmail.com>
-	<978793792.20071218133500@gmail.com>
-	<74d0deb30712180638y20795870o9e1d0b688298658f@mail.gmail.com>
-	<1211397506.20071218170516@gmail.com>
-	<74d0deb30712181013x79c2f42fr9d8f51d39377d6e3@mail.gmail.com>
+	Tue, 18 Dec 2007 16:08:29 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Tue, 18 Dec 2007 16:08:29 -0500
+X-Sasl-enc: QKxVF2u6YQTZmpg2ikYZLaCoHPtGtI13YIzVYzkwpWP/ 1198012108
+Received: from [192.168.18.11] (CPE-121-209-21-249.sa.bigpond.net.au
+	[121.209.21.249])
+	by mail.messagingengine.com (Postfix) with ESMTP id 5861821C4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Dec 2007 16:08:28 -0500 (EST)
+Message-ID: <4768368B.3010103@whitby.id.au>
+Date: Wed, 19 Dec 2007 07:37:23 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+References: <E1J4SUo-0006ZZ-Ov@linuxtogo.org>	<74d0deb30712180217q5cb2c911l8a61567b5511b9d@mail.gmail.com>	<978793792.20071218133500@gmail.com>	<74d0deb30712180638y20795870o9e1d0b688298658f@mail.gmail.com>
+	<1211397506.20071218170516@gmail.com>
+In-Reply-To: <1211397506.20071218170516@gmail.com>
+X-Enigmail-Version: 0.95.5
 Subject: Re: [oe-commits] org.oe.dev PDA-like machines with card slots: Enable "vfat" feature.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -40,42 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2007 19:22:30 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 18 Dec 2007 21:13:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello pHilipp,
+pHilipp Zabel wrote:
+>> So now that we have the easy method implemented, let's strive for a correct one.
+>> I'd say vfat as other file systems should be a distro-only feature,
+>> cardslot (or "removablestorage") a machine-only one:
+> 
+>> "vfat" in DISTRO_FEATURES and "cardslot" in MACHINE_FEATURES --> task-base-vfat
+>> "ext2" in DISTRO_FEATURES and ("cardslot" in MACHINE_FEATURES or "hdd"
+>> in MACHINE_FEATURES) --> task-base-ext2 (without the hdparm
+>> dependency)
+>> "hdd" in MACHINE_FEATURES --> hdparm
+>> etc.
 
-Tuesday, December 18, 2007, 8:13:17 PM, you wrote:
+I agree with the principle.  We also need to add 'usbhost' to the list
+of machine features which can enable the ext2 and vfat distro features
+(for usb flash sticks on devices with usb host ports).
 
-[]
+And of course we need to work out the best way (and appropriate timing)
+for implementation. :-)
 
-> My concern is not about image size, but about watering down the
-> meaning of those variables.
-> Already now fic-gta01.conf adds the vfat and ext2 kernel modules to
-> MACHINE_EXTRA_RRECOMMENDS
-> manually, maybe because it doesn't need hdparm. And I bet there is
-> more duplication like that.
+Marcin, Koen, Richard: Do you guys have an opinion on this
+machine/distro features independent naming and combinations of different
+names feeding into combined features?  We need agreement on the
+principle before getting too far into implementation discussion.
 
-  No, they're there because it's typical vendor-maintained machine.
-And vendors usually care to get there stuff done quickly, not
-correctly or beautifully, and possibly have their weird ideas/requirements
-how stuff should be done. (And we know how it ends - following this
-special-attention phase, one sweet day vendor moves to another toy,
-and dumps previous one completely, for user community to cleanup all
-that "speciality").
-
-  So well, given speciality of OpenMoko itself, I don't dare to commit
-changes to their machine configs, but intend to prepare patches with
-extra care and submit for Graeme's review.
-
-> cheers
-> Philipp
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+-- Rod
 
 
 
