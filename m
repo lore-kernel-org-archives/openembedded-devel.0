@@ -1,26 +1,25 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [209.85.128.190] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1J4QVy-0003xm-Au
+	(envelope-from <pmiscml@gmail.com>) id 1J4QfC-000422-2R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Dec 2007 01:40:54 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id C9F917E059;
-	Mon, 17 Dec 2007 19:36:02 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Mon, 17 Dec 2007 19:36:02 -0500
-X-Sasl-enc: Zf6v6yMgqta7/CSSvnDSH39RbAhg28tGlYbGY/dQZnk7 1197938162
-Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id C04184D97;
-	Mon, 17 Dec 2007 19:36:01 -0500 (EST)
-Message-ID: <476715B3.9050900@whitby.id.au>
-Date: Tue, 18 Dec 2007 11:04:59 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
-MIME-Version: 1.0
-To: Paul Sokolovsky <pmiscml@gmail.com>
-References: <47671326.3090300@whitby.id.au>
+	Tue, 18 Dec 2007 01:50:26 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so2167062fks.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Dec 2007 16:45:34 -0800 (PST)
+Received: by 10.86.81.8 with SMTP id e8mr7020901fgb.59.1197938734547;
+	Mon, 17 Dec 2007 16:45:34 -0800 (PST)
+Received: from ?192.168.20.166? ( [194.79.8.34])
+	by mx.google.com with ESMTPS id 31sm18373520fkt.2007.12.17.16.45.30
+	(version=SSLv3 cipher=OTHER); Mon, 17 Dec 2007 16:45:30 -0800 (PST)
+Date: Tue, 18 Dec 2007 02:50:52 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <1672988162.20071218025052@gmail.com>
+To: Rod Whitby <rod@whitby.id.au>
 In-Reply-To: <47671326.3090300@whitby.id.au>
-X-Enigmail-Version: 0.95.5
+References: <47671326.3090300@whitby.id.au>
+MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: pfalcon: revert r5dc6982e... vfat nls modules are not for task-base-kernel26
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -36,75 +35,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2007 00:40:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 18 Dec 2007 00:50:26 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Rod Whitby wrote:
+Hello Rod,
+
+Tuesday, December 18, 2007, 2:24:06 AM, you wrote:
+
+> <CIA-34> pfalcon org.oe.dev * r5dc6982e... / (1
+> packages/tasks/task-base.bb):
+> <CIA-34> task-base: Add NLS modules for VFAT support.
+> <CIA-34> * Add to task-base-kernel26, as vfat is pretty basic feature.
+> <CIA-34> Worth refactoring to vfat feature still, I guess.
+
+> You guessed right.
+
+> kernel26 is not a kitchen sink where you can just add vfat-related nls
+> modules that are not strictly required for booting a 2.6 kernel.
+
+  As you perfectly know, defining what is strictly required is yet
+long task to do for OE and specific machine in it. Whereas Angstrom
+RCs are something to do right now.
+
+> Your addition has just *bloated* the rootfs for *every* 2.6 machine,
+
+  No, it did not. It just added 10k of uncompressed modules.
+
+> including those that have no possible way of ever mounting an external
+> memory stick at all, let alone a vfat-formatted one.
+
+> vfat is *not* a basic feature that should be enabled for all 2.6 kernel
+> machines.  If you want vfat nls modules, then create a vfat feature
+> (just like there is an ext2 feature).  Do not pollute the basic kernel26
+> feature with this stuff.
+
+  Yeah, I have hundreds of other items on my list too ;-).
+
+> And the comment about "# If you don't need VFAT support - don't enable
+> them in defconfig." is not applicable, because there are machines that
+> want vfat-related nls modules available in the feed as a downloadable
+> package, but not in the initial rootfs.  Therefore they need to be in
+> the defconfig, but certainly should not be in task-base-kernel26.
+
+  Again, lots of things need to be, etc. But for now (as is), my doing it
+right won't help any machine except some small nslu2. Because vfat of
+course will be a distro feature, and so far 1) only nslu overrides
+angstrom's DISTRO_FEATURES. Also, there're following things to
+consider:
+
+2) It's unclear if vfat feature should ship only 40-50K of kernel
+modules, or truly bloat it with dosfsutils. Maybe fdisk?
+3) There's also need to clear off machine configs from this stuff,
+including proverbial fic-gta*.conf.
+
+
+  So, I'm actually glad that you care about such stuff. So, while I
+planned to do all stuff above via RFCs over following Angstrom RCs,
+I'd be glad to just do another quick fix now as you request and
+offload tasks 1-3 above to you. How that sounds?
+
+
 > I expect you to revert this change and do it properly, or not do it at all.
 
-Here's an untested example patch to get you started.  You'll probably
-want to change the comments before applying something similar.  Note
-again that it is untested - that's your job, not mine.
+> -- Rod
 
-> #
-> # old_revision [bc668ae9f53d5e7dbaeee92daced9790f1be61e0]
-> #
-> # patch "packages/tasks/task-base.bb"
-> #  from [f33c49fb3e3820bd151a0e0035b125643a46b85a]
-> #    to [643465073bdf81ce0f09fb63480d026b4c6f3e28]
-> #
-> ============================================================
-> --- packages/tasks/task-base.bb f33c49fb3e3820bd151a0e0035b125643a46b85a
-> +++ packages/tasks/task-base.bb 643465073bdf81ce0f09fb63480d026b4c6f3e28
-> @@ -15,6 +15,7 @@ PACKAGES = ' \
->              ${@base_contains("MACHINE_FEATURES", "alsa", "task-base-alsa", "", d)} \
->              ${@base_contains("MACHINE_FEATURES", "apm", "task-base-apm", "", d)} \
->              ${@base_contains("MACHINE_FEATURES", "ext2", "task-base-ext2", "", d)} \
-> +            ${@base_contains("MACHINE_FEATURES", "vfat", "task-base-vfat", "", d)} \
->              ${@base_contains("MACHINE_FEATURES", "irda", "task-base-irda", "",d)} \
->              ${@base_contains("MACHINE_FEATURES", "keyboard", "task-base-keyboard", "", d)} \
->              ${@base_contains("MACHINE_FEATURES", "pci", "task-base-pci", "",d)} \
-> @@ -87,6 +88,7 @@ RDEPENDS_task-base = "\
->      \
->      ${@base_contains('COMBINED_FEATURES', 'alsa', 'task-base-alsa', '',d)} \
->      ${@base_contains('COMBINED_FEATURES', 'ext2', 'task-base-ext2', '',d)} \
-> +    ${@base_contains('COMBINED_FEATURES', 'vfat', 'task-base-vfat', '',d)} \
->      ${@base_contains('COMBINED_FEATURES', 'irda', 'task-base-irda', '',d)} \
->      ${@base_contains('COMBINED_FEATURES', 'pci', 'task-base-pci', '',d)} \
->      ${@base_contains('COMBINED_FEATURES', 'pcmcia', 'task-base-pcmcia', '',d)} \
-> @@ -159,14 +161,7 @@ RRECOMMENDS_task-base-kernel24 = "\
->      kernel-module-input \
->      kernel-module-uinput"
-> 
-> -# utf8 - Standard FS encoding
-> -# iso8859-1, cp437 - These 2 are default encodings used by VFAT
-> -# If you don't need VFAT support - don't enable them in defconfig.
-> -# If you build them, you want VFAT support and they're included by default.
->  RRECOMMENDS_task-base-kernel26 = "\
-> -    kernel-module-nls-utf8 \
-> -    kernel-module-nls-iso8859-1 \
-> -    kernel-module-nls-cp437 \
->      kernel-module-input \
->      kernel-module-uinput \
->      kernel-module-rtc-dev \
-> @@ -194,6 +189,15 @@ RDEPENDS_task-base-ext2 = "\
->      e2fsprogs-e2fsck \
->      e2fsprogs-mke2fs"
-> 
-> +# utf8 - Standard FS encoding
-> +# iso8859-1, cp437 - These 2 are default encodings used by VFAT
-> +# If you don't need VFAT support - don't enable them in defconfig.
-> +# If you build them, you want VFAT support and they're included by default.
-> +RRECOMMENDS_task-base-vfat = "\
-> +    kernel-module-nls-utf8 \
-> +    kernel-module-nls-iso8859-1 \
-> +    kernel-module-nls-cp437"
-> +
->  RDEPENDS_task-base-alsa = "\
->      alsa-utils-alsactl \
->      alsa-utils-alsamixer"
 
--- Rod
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
