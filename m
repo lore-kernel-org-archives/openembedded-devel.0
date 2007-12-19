@@ -1,26 +1,30 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1J53ku-0003CD-GV
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2007 19:34:56 +0100
-Received: (qmail invoked by alias); 19 Dec 2007 18:29:52 -0000
-Received: from e178077011.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.77.11]
-	by mail.gmx.net (mp051) with SMTP; 19 Dec 2007 19:29:52 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/y2zdtf73y705mwHOCUUTKSapEoiAnOjtKAsDuEL
-	k0BfHSCjw8ItbA
-Message-ID: <4769631B.9060408@gmx.net>
-Date: Wed, 19 Dec 2007 19:29:47 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <E1J4yUM-0004ua-NG@linuxtogo.org>
-In-Reply-To: <E1J4yUM-0004ua-NG@linuxtogo.org>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] org.oe.dev qt4-x11: create dir before trying to put	files into it
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1J59D6-0002y8-1a
+	for openembedded-devel@openembedded.org; Thu, 20 Dec 2007 01:24:24 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1J58kF-00052I-R9
+	for openembedded-devel@openembedded.org; Wed, 19 Dec 2007 23:54:35 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 19 Dec 2007 23:54:35 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 19 Dec 2007 23:54:35 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 20 Dec 2007 00:27:42 +0100
+Message-ID: <fkc9de$365$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+Sender: news <news@ger.gmane.org>
+Subject: RFC: drop quilt version 0.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,70 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2007 18:34:56 -0000
-X-Groupsio-MsgNum: 3702
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig8EEC32EECE76A33749B62A6B"
+X-List-Received-Date: Thu, 20 Dec 2007 00:24:24 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
---------------enig8EEC32EECE76A33749B62A6B
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Hi.
-
-koen commit schrieb:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> --- packages/qt/qt4-x11-free_4.1.2.bb	87ff0a36e1696d7c7726c3e3ffd517ca7=
-f9233f3
-> +++ packages/qt/qt4-x11-free_4.1.2.bb	3f0c2bbb385a352c8af18085b894d4224=
-822db3c
-> @@ -70,6 +70,7 @@ do_stage() {
-> =20
->  do_stage() {
->  	oe_runmake install INSTALL_ROOT=3D/
-> +	install -d ${STAGING_QT_DIR}
->  	install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${STAGING_QT_DIR}/bin/r=
-cc
->  	install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${STAGING_QT_DIR}/bin/m=
-oc
->  	install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${STAGING_QT_DIR}/bin/u=
-ic
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> --- packages/qt/qt4-x11-free_4.3.2.bb	2a8bfa1b9cc3aa059dd561726a7bbdfc8=
-bcc4e79
-> +++ packages/qt/qt4-x11-free_4.3.2.bb	706fc53c8f4c041fca267bea9825aa990=
-10fa460
-> @@ -62,7 +62,7 @@ do_compile() {
-> =20
->  # FIXME: Might want to compile the cross tools for the -dev packages a=
-s well...
->  do_compile() {
-> -	unset CFLAGS CXXFLAGS
-> +	unset CFLAGS CXXFLAGSi
-                             ^
-I think at this point an unwanted keypress slipped in.
+driven by bug 1960, I have been doing some work on quilt in OE,
+refactoring, cleaning up and adding version 0.46.  In the process I also
+dropped version version 0.39.  Is there anybody that needs this
+particular version or can I commit to drop it?  I grepped through OE and
+found no reference to it.  If you want it kept, speak up now.
 
 Regards
-Robert
+
+Rolf
 
 
---------------enig8EEC32EECE76A33749B62A6B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+http://oz.leggewie.org/wip/quilt.old/
+http://oz.leggewie.org/wip/quilt.new/
+http://oz.leggewie.org/wip/quilt.mtndiff
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFHaWMeG9cfwmwwEtoRCLkNAJ0aYEylYLjGsmhrCzSXvBbeLNsXgACggUVF
-WhLp4kyeUq0tmbKAz/aiAkc=
-=WswI
------END PGP SIGNATURE-----
 
---------------enig8EEC32EECE76A33749B62A6B--
