@@ -1,26 +1,29 @@
-Received: from [72.14.220.157] (helo=fg-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J4oSd-0006iS-CZ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2007 03:15:03 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so399619fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2007 18:10:05 -0800 (PST)
-Received: by 10.86.91.12 with SMTP id o12mr8346491fgb.55.1198030205493;
-	Tue, 18 Dec 2007 18:10:05 -0800 (PST)
-Received: from ?192.168.20.166? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id y18sm9732750fkd.2007.12.18.18.10.03
-	(version=SSLv3 cipher=OTHER); Tue, 18 Dec 2007 18:10:03 -0800 (PST)
-Date: Wed, 19 Dec 2007 04:15:26 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <176245261.20071219041526@gmail.com>
-To: Grant Edwards <grante@visi.com>
-In-Reply-To: <fk9sme$nsr$1@ger.gmane.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1J4ohS-0002z6-AI
+	for openembedded-devel@openembedded.org; Wed, 19 Dec 2007 03:30:22 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1J4occ-0003H5-A3
+	for openembedded-devel@openembedded.org; Wed, 19 Dec 2007 02:25:22 +0000
+Received: from v-209-98-139-195.mn.visi.com ([209.98.139.195])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 19 Dec 2007 02:25:22 +0000
+Received: from grante by v-209-98-139-195.mn.visi.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 19 Dec 2007 02:25:22 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Grant Edwards <grante@visi.com>
+Date: Wed, 19 Dec 2007 02:25:02 +0000 (UTC)
+Message-ID: <fk9vdu$u1r$1@ger.gmane.org>
 References: <fk9sme$nsr$1@ger.gmane.org>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: v-209-98-139-195.mn.visi.com
+User-Agent: slrn/0.9.8.1 (Linux)
+Sender: news <news@ger.gmane.org>
 Subject: Re: Confusing wording on GettingStarted page
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,41 +38,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2007 02:15:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Dec 2007 02:30:22 -0000
 
-Hello Grant,
-
-Wednesday, December 19, 2007, 3:38:23 AM, you wrote:
+On 2007-12-19, Grant Edwards <grante@visi.com> wrote:
 
 > There is some confusing wording on the GettingStarted Wiki
 > page.  I tried to figure out how to get an account so I could
 > fix it, but was unable to.
 
-  Did you try "Edit" tab? ;-)
-
-> The issue is that there are places where a Monotone workspace
-> is referred to as a "database".  A Monotone database is
-> something completely separate from a workspace.  For example in
-> the "Updating OE" it says
-
->    Then update the branch(es) you are using. This will update the
->    contents of the files in the local database. For example:
-
->      $ cd /stuff/org.openembedded.dev && mtn update
->      $ cd /stuff/org.openembedded.dreambox && mtn update
-
-> The commands are correct, but they're not updating the local
-> database (which is a file typically name OE.mtn), they're
-> updating two local workspaces.
-
-
-
+Doh!  As somebody has kindly pointed out, all I had to do was
+click the edit tab -- no login required.  I guess all the other
+Wiki's I've editted required logins, so it didn't occur to me
+to try to edit the page without logging in. :/
 
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+grante@visi.com
+Grant Edwards
 
 
 
