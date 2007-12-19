@@ -1,44 +1,27 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <stefano.regno@spesonline.com>) id 1J4zTd-0002LP-72
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2007 15:00:49 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id BA3B395B92
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2007 14:55:48 +0100 (CET)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 16346-01-10 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2007 14:55:48 +0100 (CET)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 9811895B8D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2007 14:55:48 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 743D01D9462
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2007 14:55:48 +0100 (CET)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 07755-01-2 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2007 14:55:48 +0100 (CET)
-Received: from [192.168.1.171]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 2988B1D944F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2007 14:55:48 +0100 (CET)
-Message-ID: <476922E1.5060401@spesonline.com>
-Date: Wed, 19 Dec 2007 14:55:45 +0100
-From: Regno Stefano <stefano.regno@spesonline.com>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1J50Lq-0007r4-QQ
+	for openembedded-devel@openembedded.org; Wed, 19 Dec 2007 15:56:50 +0100
+Received: from Powerbook-2.local (vpn006097.vpn.utwente.nl [130.89.6.97])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	lBJEpjfr010793 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Dec 2007 15:51:46 +0100
+Message-ID: <47693000.9080809@student.utwente.nl>
+Date: Wed, 19 Dec 2007 15:51:44 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
 References: <1187652493.20071219133208@gmail.com>
-In-Reply-To: <1187652493.20071219133208@gmail.com>
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+	<476922E1.5060401@spesonline.com>
+In-Reply-To: <476922E1.5060401@spesonline.com>
+X-Enigmail-Version: 0.95.5
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
 Subject: Re: [RFC] BogoFeeds reloaded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -53,15 +36,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2007 14:00:51 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
+X-List-Received-Date: Wed, 19 Dec 2007 14:56:50 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-I found the package about VNC but i have this error bitbake x11vnc_0.9.3.bb
-ERROR: Unable to parse conf/bitbake.conf (Could not inherit file 
-classes/autotools.bbclass)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-What can i do to solve thet, i must unpack it and compile for arm MX31
+Regno Stefano schreef:
+> I found the package about VNC but i have this error bitbake x11vnc_0.9.3.bb
+> ERROR: Unable to parse conf/bitbake.conf (Could not inherit file 
+> classes/autotools.bbclass)
+> 
+> What can i do to solve thet, i must unpack it and compile for arm MX31
 
+Hello mister thread-hijacker. Bye.
+
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHaTAAMkyGM64RGpERAsKgAKClYw+IYaI+yOHethPm10Uj2VxTNgCgmuF4
+imLQw7RYM6nxsFU1IN293Rw=
+=tOja
+-----END PGP SIGNATURE-----
 
 
