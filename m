@@ -1,29 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [72.14.220.157] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1J4oLi-0006b2-Gl
-	for openembedded-devel@openembedded.org; Wed, 19 Dec 2007 03:07:56 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1J4oGr-0007Cm-DX
-	for openembedded-devel@openembedded.org; Wed, 19 Dec 2007 02:02:53 +0000
-Received: from v-209-98-139-195.mn.visi.com ([209.98.139.195])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 19 Dec 2007 02:02:53 +0000
-Received: from grante by v-209-98-139-195.mn.visi.com with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 19 Dec 2007 02:02:53 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Grant Edwards <grante@visi.com>
-Date: Wed, 19 Dec 2007 02:02:45 +0000 (UTC)
-Message-ID: <fk9u44$rgn$1@ger.gmane.org>
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: v-209-98-139-195.mn.visi.com
-User-Agent: slrn/0.9.8.1 (Linux)
-Sender: news <news@ger.gmane.org>
-Subject: How do you find a rev of OE that will build?
+	(envelope-from <pmiscml@gmail.com>) id 1J4oSd-0006iS-CZ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Dec 2007 03:15:03 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so399619fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Dec 2007 18:10:05 -0800 (PST)
+Received: by 10.86.91.12 with SMTP id o12mr8346491fgb.55.1198030205493;
+	Tue, 18 Dec 2007 18:10:05 -0800 (PST)
+Received: from ?192.168.20.166? ( [194.79.8.34])
+	by mx.google.com with ESMTPS id y18sm9732750fkd.2007.12.18.18.10.03
+	(version=SSLv3 cipher=OTHER); Tue, 18 Dec 2007 18:10:03 -0800 (PST)
+Date: Wed, 19 Dec 2007 04:15:26 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <176245261.20071219041526@gmail.com>
+To: Grant Edwards <grante@visi.com>
+In-Reply-To: <fk9sme$nsr$1@ger.gmane.org>
+References: <fk9sme$nsr$1@ger.gmane.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Confusing wording on GettingStarted page
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,107 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2007 02:07:56 -0000
+X-List-Received-Date: Wed, 19 Dec 2007 02:15:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-How does one find a rev of OE that builds?
+Hello Grant,
 
-I've been following the GettingStarted page trying to build
-task-bask for about a week now, and I always hit errors due to
-failed patches.  Here's the error du jour after doing a
-pull/update about a half hour ago:
+Wednesday, December 19, 2007, 3:38:23 AM, you wrote:
 
-[...]
-NOTE: Running task 284 of 976 (ID: 650, /home/grante/quarq/oe/org.openembedded.dev/packages/python/python-native_2.5.1.bb, do_patch)
-NOTE: package python-native-2.5.1: started
-NOTE: package python-native-2.5.1-ml1: task do_patch: started
-NOTE: Applying patch 'bindir-libdir.patch'
-ERROR: Error in executing: 
-ERROR: Exception:__builtin__.CmdError Message:Command Error: exit status: 1  Output:
-Applying patch bindir-libdir.patch
-patching file Makefile.pre.in
-Hunk #1 FAILED at 78.
-1 out of 1 hunk FAILED -- rejects in file Makefile.pre.in
-Patch bindir-libdir.patch can be reverse-applied
-ERROR: Printing the environment of the function
-ERROR: Error in executing: 
-ERROR: Exception:__builtin__.CmdError Message:Command Error: exit status: 1  Output:
-Applying patch bindir-libdir.patch
-patching file Makefile.pre.in
-Hunk #1 FAILED at 78.
-1 out of 1 hunk FAILED -- rejects in file Makefile.pre.in
-Patch bindir-libdir.patch can be reverse-applied
-ERROR: Printing the environment of the function
-ERROR: Error in executing: 
-ERROR: Exception:__builtin__.CmdError Message:Command Error: exit status: 1  Output:
-Applying patch bindir-libdir.patch
-patching file Makefile.pre.in
-Hunk #1 FAILED at 78.
-1 out of 1 hunk FAILED -- rejects in file Makefile.pre.in
-Patch bindir-libdir.patch can be reverse-applied
-ERROR: Printing the environment of the function
-ERROR: Build of /home/grante/quarq/oe/org.openembedded.dev/packages/python/python-native_2.5.1.bb do_patch failed
-Traceback (most recent call last):
-  File "/usr/bin/bitbake", line 134, in ?
-    main()
-  File "/usr/bin/bitbake", line 131, in main
-    cooker.cook()
-  File "usr/lib/python2.4/site-packages/bb/cooker.py", line 552, in cook
-  File "usr/lib/python2.4/site-packages/bb/cooker.py", line 466, in buildTargets
-  File "usr/lib/python2.4/site-packages/bb/runqueue.py", line 403, in execute_runqueue
-  File "usr/lib/python2.4/site-packages/bb/runqueue.py", line 531, in execute_runqueue_internal
-  File "usr/lib/python2.4/site-packages/bb/cooker.py", line 125, in tryBuild
-  File "usr/lib/python2.4/site-packages/bb/cooker.py", line 98, in tryBuildPackage
-  File "usr/lib/python2.4/site-packages/bb/build.py", line 292, in exec_task
-  File "usr/lib/python2.4/site-packages/bb/build.py", line 281, in execute
-  File "usr/lib/python2.4/site-packages/bb/build.py", line 98, in exec_func
-  File "usr/lib/python2.4/site-packages/bb/build.py", line 117, in exec_func_python
-  File "usr/lib/python2.4/site-packages/bb/utils.py", line 144, in better_exec
-  File "do_patch", line 4, in ?
-  File "do_patch", line 2, in do_patch
-  File "usr/lib/python2.4/site-packages/bb/build.py", line 98, in exec_func
-  File "usr/lib/python2.4/site-packages/bb/build.py", line 117, in exec_func_python
-  File "usr/lib/python2.4/site-packages/bb/utils.py", line 144, in better_exec
-  File "base_do_patch", line 4, in ?
-  File "base_do_patch", line 2, in base_do_patch
-  File "usr/lib/python2.4/site-packages/bb/build.py", line 98, in exec_func
-  File "usr/lib/python2.4/site-packages/bb/build.py", line 117, in exec_func_python
-  File "usr/lib/python2.4/site-packages/bb/utils.py", line 144, in better_exec
-  File "patch_do_patch", line 100, in ?
-  File "patch_do_patch", line 98, in patch_do_patch
-  File "<bb>", line 339, in Resolve
-__builtin__.CmdError: Command Error: exit status: 1  Output:
-Applying patch bindir-libdir.patch
-patching file Makefile.pre.in
-Hunk #1 FAILED at 78.
-1 out of 1 hunk FAILED -- rejects in file Makefile.pre.in
-Patch bindir-libdir.patch can be reverse-applied
+> There is some confusing wording on the GettingStarted Wiki
+> page.  I tried to figure out how to get an account so I could
+> fix it, but was unable to.
 
-NOTE: Parsing finished. 4718 cached, 0 parsed, 218 skipped, 0 masked.
-NOTE: build 200712181957: started
+  Did you try "Edit" tab? ;-)
 
-OE Build Configuration:
-BB_VERSION     = "1.8.8"
-OE_REVISION    = "6834c8854d34a28405ba69e170089d3a873e3d1a"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux"
-MACHINE        = "collie"
-DISTRO         = "angstrom"
-DISTRO_VERSION = "2007.11RC1.2"
-TARGET_FPU     = "soft"
+> The issue is that there are places where a Monotone workspace
+> is referred to as a "database".  A Monotone database is
+> something completely separate from a workspace.  For example in
+> the "Updating OE" it says
 
-NOTE: Resolving missing task queue dependencies
-NOTE: preferred version 2.5 of glibc not available (for item virtual/arm-angstrom-linux-libc-for-gcc)
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 284 of 976 (ID: 650, /home/grante/quarq/oe/org.openembedded.dev/packages/python/python-native_2.5.1.bb, do_patch)
-ERROR: Task 650 (/home/grante/quarq/oe/org.openembedded.dev/packages/python/python-native_2.5.1.bb, do_patch) failed
-NOTE: Tasks Summary: Attempted 283 tasks of which 283 didn't need to be rerun and 1 failed.
-ERROR: '/home/grante/quarq/oe/org.openembedded.dev/packages/python/python-native_2.5.1.bb' failed
+>    Then update the branch(es) you are using. This will update the
+>    contents of the files in the local database. For example:
+
+>      $ cd /stuff/org.openembedded.dev && mtn update
+>      $ cd /stuff/org.openembedded.dreambox && mtn update
+
+> The commands are correct, but they're not updating the local
+> database (which is a file typically name OE.mtn), they're
+> updating two local workspaces.
+
+
+
 
 -- 
-Grant Edwards
-grante@visi.com
-
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
