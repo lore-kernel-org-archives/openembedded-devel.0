@@ -1,28 +1,26 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J50Lq-0007r4-QQ
-	for openembedded-devel@openembedded.org; Wed, 19 Dec 2007 15:56:50 +0100
-Received: from Powerbook-2.local (vpn006097.vpn.utwente.nl [130.89.6.97])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lBJEpjfr010793 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2007 15:51:46 +0100
-Message-ID: <47693000.9080809@student.utwente.nl>
-Date: Wed, 19 Dec 2007 15:51:44 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1J53ku-0003CD-GV
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Dec 2007 19:34:56 +0100
+Received: (qmail invoked by alias); 19 Dec 2007 18:29:52 -0000
+Received: from e178077011.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.77.11]
+	by mail.gmx.net (mp051) with SMTP; 19 Dec 2007 19:29:52 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/y2zdtf73y705mwHOCUUTKSapEoiAnOjtKAsDuEL
+	k0BfHSCjw8ItbA
+Message-ID: <4769631B.9060408@gmx.net>
+Date: Wed, 19 Dec 2007 19:29:47 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <1187652493.20071219133208@gmail.com>
-	<476922E1.5060401@spesonline.com>
-In-Reply-To: <476922E1.5060401@spesonline.com>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [RFC] BogoFeeds reloaded
+To: openembedded-devel@lists.openembedded.org
+References: <E1J4yUM-0004ua-NG@linuxtogo.org>
+In-Reply-To: <E1J4yUM-0004ua-NG@linuxtogo.org>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: Re: [oe-commits] org.oe.dev qt4-x11: create dir before trying to put	files into it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,33 +34,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2007 14:56:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Dec 2007 18:34:56 -0000
+X-Groupsio-MsgNum: 3702
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig8EEC32EECE76A33749B62A6B"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--------------enig8EEC32EECE76A33749B62A6B
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Regno Stefano schreef:
-> I found the package about VNC but i have this error bitbake x11vnc_0.9.3.bb
-> ERROR: Unable to parse conf/bitbake.conf (Could not inherit file 
-> classes/autotools.bbclass)
-> 
-> What can i do to solve thet, i must unpack it and compile for arm MX31
+Hi.
 
-Hello mister thread-hijacker. Bye.
+koen commit schrieb:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> --- packages/qt/qt4-x11-free_4.1.2.bb	87ff0a36e1696d7c7726c3e3ffd517ca7=
+f9233f3
+> +++ packages/qt/qt4-x11-free_4.1.2.bb	3f0c2bbb385a352c8af18085b894d4224=
+822db3c
+> @@ -70,6 +70,7 @@ do_stage() {
+> =20
+>  do_stage() {
+>  	oe_runmake install INSTALL_ROOT=3D/
+> +	install -d ${STAGING_QT_DIR}
+>  	install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${STAGING_QT_DIR}/bin/r=
+cc
+>  	install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${STAGING_QT_DIR}/bin/m=
+oc
+>  	install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${STAGING_QT_DIR}/bin/u=
+ic
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> --- packages/qt/qt4-x11-free_4.3.2.bb	2a8bfa1b9cc3aa059dd561726a7bbdfc8=
+bcc4e79
+> +++ packages/qt/qt4-x11-free_4.3.2.bb	706fc53c8f4c041fca267bea9825aa990=
+10fa460
+> @@ -62,7 +62,7 @@ do_compile() {
+> =20
+>  # FIXME: Might want to compile the cross tools for the -dev packages a=
+s well...
+>  do_compile() {
+> -	unset CFLAGS CXXFLAGS
+> +	unset CFLAGS CXXFLAGSi
+                             ^
+I think at this point an unwanted keypress slipped in.
+
+Regards
+Robert
 
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+--------------enig8EEC32EECE76A33749B62A6B
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFHaTAAMkyGM64RGpERAsKgAKClYw+IYaI+yOHethPm10Uj2VxTNgCgmuF4
-imLQw7RYM6nxsFU1IN293Rw=
-=tOja
+iD8DBQFHaWMeG9cfwmwwEtoRCLkNAJ0aYEylYLjGsmhrCzSXvBbeLNsXgACggUVF
+WhLp4kyeUq0tmbKAz/aiAkc=
+=WswI
 -----END PGP SIGNATURE-----
 
-
+--------------enig8EEC32EECE76A33749B62A6B--
