@@ -1,31 +1,43 @@
-Received: from [83.151.25.170] (helo=vanille-media.de ident=postfix)
+Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1J4yg3-0005Fd-S0
+	(envelope-from <stefano.regno@spesonline.com>) id 1J4z33-0001qT-QW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2007 14:09:35 +0100
-Received: by vanille-media.de (Postfix, from userid 65534)
-	id 2D8FB28C013; Wed, 19 Dec 2007 13:57:16 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	srv043.dedi23.de
-X-Spam-Level: **
-X-Spam-Status: No, score=2.6 required=5.0 tests=AWL,BAYES_00,RCVD_IN_PBL,
-	RCVD_IN_SORBS_DUL,REPTO_OVERQUOTE_THEBAT autolearn=no 
-	version=3.1.7-deb
-Received: from PROMETHEUS (e180157080.adsl.alicedsl.de [85.180.157.80])
-	by vanille-media.de (Postfix) with ESMTP id 6D50228C012;
-	Wed, 19 Dec 2007 13:57:15 +0100 (CET)
-Date: Wed, 19 Dec 2007 14:04:33 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1163024816.20071219140433@vanille-media.de>
-To: Paul Sokolovsky <pmiscml@gmail.com>
-In-Reply-To: <1187652493.20071219133208@gmail.com>
-References: <1187652493.20071219133208@gmail.com>
+	Wed, 19 Dec 2007 14:33:22 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 52A2D95B15
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Dec 2007 14:28:21 +0100 (CET)
+Received: from sirio.fastnet.it ([127.0.0.1])
+	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 14567-01-7 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Dec 2007 14:28:21 +0100 (CET)
+Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 329F695A2E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Dec 2007 14:28:21 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 226B91D9457
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Dec 2007 14:28:21 +0100 (CET)
+Received: from sole.fastnet.it ([127.0.0.1])
+	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 11505-01-8 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Dec 2007 14:28:21 +0100 (CET)
+Received: from [192.168.1.171]
+	(host141-216-static.91-82-b.business.telecomitalia.it
+	[82.91.216.141])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id DF7AE1D944F
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Dec 2007 14:28:20 +0100 (CET)
+Message-ID: <47691C73.8070007@spesonline.com>
+Date: Wed, 19 Dec 2007 14:28:19 +0100
+From: Regno Stefano <stefano.regno@spesonline.com>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] BogoFeeds reloaded
+To: openembedded-devel@lists.openembedded.org
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+Subject: Arm MX21 and vnc Server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,24 +51,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2007 13:09:36 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 19 Dec 2007 13:33:22 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Paul Sokolovsky wrote:
-> So, you set FEED_LOCAL_BASE_URI to the root of deploy dir as exported
-> by Apache, and - voila - you get nice collection of per-arch local feeds in
-> the image.
+I all, i m new about this forum.
+I have put pocky in my ARM MX31 and i fount it very very good.
+But Now i have 2 problems.
+1)I Would cross compile it for an ARM MX21 and did't found paper or 
+something to know i can do.
+2)I would install a VNC server in it, how can i do to do it?
 
-Excellent. A nice, non-invasive, utterly practical solution.
-
-I like it.
-
-Regards,
-
-:M:
--- 
-Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Tnx a lot see you
 
 
