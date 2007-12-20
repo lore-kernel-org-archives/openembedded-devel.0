@@ -1,27 +1,21 @@
-Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J5L8k-0004xk-8W
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2007 14:08:42 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so540392fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2007 05:03:35 -0800 (PST)
-Received: by 10.86.95.20 with SMTP id s20mr10067488fgb.63.1198155815819;
-	Thu, 20 Dec 2007 05:03:35 -0800 (PST)
-Received: from widy.lan ( [194.79.8.36])
-	by mx.google.com with ESMTPS id o11sm22733754fkf.2007.12.20.05.03.23
-	(version=SSLv3 cipher=OTHER); Thu, 20 Dec 2007 05:03:35 -0800 (PST)
-Date: Thu, 20 Dec 2007 15:08:12 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1871890373.20071220150812@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1J5MeG-0000Zv-4s
+	for openembedded-devel@openembedded.org; Thu, 20 Dec 2007 15:45:20 +0100
+Received: (qmail 29580 invoked by uid 813007); 20 Dec 2007 14:40:12 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 20 Dec 2007 14:40:12 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <476A26BB.1010602@student.utwente.nl>
-References: <fkc9de$365$1@ger.gmane.org> <476A26BB.1010602@student.utwente.nl>
+Date: Thu, 20 Dec 2007 15:40:09 +0100
+User-Agent: KMail/1.9.7
+References: <E1J5L4z-0004um-WD@linuxtogo.org>
+In-Reply-To: <E1J5L4z-0004um-WD@linuxtogo.org>
 MIME-Version: 1.0
-Cc: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Subject: Re: RFC: drop quilt version 0.39
+Message-Id: <200712201540.11149.openembedded@haerwu.biz>
+Subject: Re: [oe-commits] org.oe.dev distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,50 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2007 13:08:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Dec 2007 14:45:20 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello Koen,
+Dnia czwartek, 20 grudnia 2007, pfalcon commit napisa=B3:
 
-Thursday, December 20, 2007, 10:24:27 AM, you wrote:
+> distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
+> * Only package building is supported (not images).
+> * Uses SDK tarballs from OpenWRT projects.
+> * The distro itself is fully target-agnostic, you should just install
+> correct SDK tarball and pass correct TARGET_ARCH (using environment vs
+> local.conf is highly recommended).
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+MACHINE=3Dwrt54 + DISTRO=3Dwrt54oe builds toolchain which builds packages=20
+usable under OpenWRT. At least it worked like that when I tested it over=20
+year ago.
 
-> Rolf Leggewie schreef:
->> Hi,
->> 
->> driven by bug 1960, I have been doing some work on quilt in OE,
->> refactoring, cleaning up and adding version 0.46.  In the process I also
->> dropped version version 0.39.  Is there anybody that needs this
->> particular version or can I commit to drop it?  I grepped through OE and
->> found no reference to it.  If you want it kept, speak up now.
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-> What are your good reasons to drop it? I see no point in removing stuff
-> just to boost someones commit stats under the moniker "clean up"
+    The fact that no one understands you doesn't mean you're an artist.
 
-  I would like to second this (following my always-conservative
-attitude to dropping stuff (without good reason) on which someone
-worked hard previously (and someone can in the future)).
-
-  To elaborate, I hope that we'll revamp OE support for using external
-toolchains for building single packages, because it seems that people
-have got a stereotype that OE is for building entire system from
-scratch (at that would be too limiting - why I'd use top-notch
-solution to build a whole distro while revert to using adhoc tools to
-build packages for 3rd-party systems?)
-
-  For example, I just pushed openwrt-sdk distro config, which allows
-to build packages against OpenWRT SDK. Due to OpenWRT dependencies, it
-may be required to build older than the latest versions of some
-packages.
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
 
 
 
