@@ -1,28 +1,25 @@
-Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
+Received: from [209.85.132.241] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J5O9A-0003WW-Cw
+	(envelope-from <leon.woestenberg@gmail.com>) id 1J5QMb-0007NE-4d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2007 17:21:20 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so4054452fks.12
+	Thu, 20 Dec 2007 19:43:21 +0100
+Received: by an-out-0708.google.com with SMTP id b33so801865ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2007 08:16:13 -0800 (PST)
-Received: by 10.82.174.20 with SMTP id w20mr268269bue.21.1198167373059;
-	Thu, 20 Dec 2007 08:16:13 -0800 (PST)
-Received: from widy.lan ( [194.79.8.36])
-	by mx.google.com with ESMTPS id 13sm23170303fks.2007.12.20.08.16.11
-	(version=SSLv3 cipher=OTHER); Thu, 20 Dec 2007 08:16:12 -0800 (PST)
-Date: Thu, 20 Dec 2007 18:21:16 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <571189143.20071220182116@gmail.com>
-To: Marcin Juszkiewicz <openembedded@haerwu.biz>
-In-Reply-To: <200712201540.11149.openembedded@haerwu.biz>
-References: <E1J5L4z-0004um-WD@linuxtogo.org>
-	<200712201540.11149.openembedded@haerwu.biz>
+	Thu, 20 Dec 2007 10:38:13 -0800 (PST)
+Received: by 10.101.67.11 with SMTP id u11mr604602ank.16.1198175892926;
+	Thu, 20 Dec 2007 10:38:12 -0800 (PST)
+Received: by 10.90.29.19 with HTTP; Thu, 20 Dec 2007 10:38:12 -0800 (PST)
+Message-ID: <c384c5ea0712201038v167f7a86jfc2189e04bae0ec1@mail.gmail.com>
+Date: Thu, 20 Dec 2007 19:38:12 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: "Paul Sokolovsky" <pmiscml@gmail.com>
+In-Reply-To: <1515905492.20071215173513@gmail.com>
 MIME-Version: 1.0
+References: <164348748.20071215043923@gmail.com>
+	<c384c5ea0712150526i2a8147c5ud43b5e79c52a7feb@mail.gmail.com>
+	<1515905492.20071215173513@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
+Subject: Re: [RFC] ANGSTROM_MODE -> SYSTYPE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,37 +33,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2007 16:21:20 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 20 Dec 2007 18:43:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Marcin,
+Hello Paul,
 
-Thursday, December 20, 2007, 4:40:09 PM, you wrote:
+> ...the proposal
+> is about introduction of the standard OE variable name for distro
+> parameter tweaking. Its meaning however completely depends on the
+> distro.
+>
+Do you see the contradiction? A *standard* OE variable name that
+*completely depends* on the
+distro. Please, no.
 
-> Dnia czwartek, 20 grudnia 2007, pfalcon commit napisa³:
+> Some distro needs switch libc's. Some needs to switch WMs.
+> Others need to switch many other things, possibly, in combinations.
+> Very good. OE recommends a standard general syntax for that - a
+> SYSTYPE. Exact format of what goes into SYSTYPE and its semantics is
+> up to distro (and users will know about all that by reading distro's
+> docs). (Now that we talk about validation, it puts additional
+> syntactic constraints on SYSTYPE value, that's why I'm personally not
+> keen to start with [rigid] validation from the beginning).
+>
+MACHINE and DISTRO are extremely well understood: they select one
+option out of a list, and the name implies what you select.
 
->> distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
->> * Only package building is supported (not images).
->> * Uses SDK tarballs from OpenWRT projects.
->> * The distro itself is fully target-agnostic, you should just install
->> correct SDK tarball and pass correct TARGET_ARCH (using environment vs
->> local.conf is highly recommended).
+Extremely user friendly.
 
-> MACHINE=wrt54 + DISTRO=wrt54oe builds toolchain which builds packages 
-> usable under OpenWRT. At least it worked like that when I tested it over
-> year ago.
+SYSTYPE does not fulfill these two properties in your proposal.
 
-  Year, a year ago, that's the key. I'll have an RFC to deprecate wrt54oe,
-asusoe and some other stuff possibly lurking there in favor of openwrt-sdk.conf,
-once I'll prepare argument list for it (and the first one will be that its
-name corresponds to what it does).
+> > +0 for the making DISTRO_LIBC a global C library selector.
+>
+>   Gotcha! That's exactly what I'm trying to avoid - proliferation of
+> adhoc distro config parameters! We have ANGSTROM_MODE now, supposedly
+> FooNas will want to call it FOONAS_LIBC, with lots others alike. Then
+>
+No, "DISTRO_LIBC". Literally. Like Marcin set out more explicitly than I did.
+> bitbake --distro=foo --systype=bar --machine=baz package
+>
+Argh. No!
 
+>   And nothing really precludes SYSTYPE to be not just "libc", but
+> "libc,release", or "libc,release,wm=xfce", or
+> "libc,release,wm=xfce,weird_user_config=some_file.conf".
+>
+Sorry, you didn't convince me, at all.
 
+I strongly agree with Richard to either not do this (therefore my -2),
+or either to define a sane namespace that some distro's might support,
+agreeing with Marcin.
 
+Regards,
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+Leon
 
 
