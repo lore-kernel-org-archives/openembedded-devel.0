@@ -1,26 +1,26 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J5Jko-00073e-5W
-	for openembedded-devel@openembedded.org; Thu, 20 Dec 2007 12:39:54 +0100
-Received: from Powerbook-2.local (vpn006011.vpn.utwente.nl [130.89.6.11])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lBKBYgfr014717 for <openembedded-devel@openembedded.org>;
-	Thu, 20 Dec 2007 12:34:42 +0100
-Message-ID: <476A5353.7040301@student.utwente.nl>
-Date: Thu, 20 Dec 2007 12:34:43 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+	(envelope-from <pmiscml@gmail.com>) id 1J5L8k-0004xk-8W
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Dec 2007 14:08:42 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so540392fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Dec 2007 05:03:35 -0800 (PST)
+Received: by 10.86.95.20 with SMTP id s20mr10067488fgb.63.1198155815819;
+	Thu, 20 Dec 2007 05:03:35 -0800 (PST)
+Received: from widy.lan ( [194.79.8.36])
+	by mx.google.com with ESMTPS id o11sm22733754fkf.2007.12.20.05.03.23
+	(version=SSLv3 cipher=OTHER); Thu, 20 Dec 2007 05:03:35 -0800 (PST)
+Date: Thu, 20 Dec 2007 15:08:12 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <1871890373.20071220150812@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <476A26BB.1010602@student.utwente.nl>
 References: <fkc9de$365$1@ger.gmane.org> <476A26BB.1010602@student.utwente.nl>
-	<fkdeel$p9o$1@ger.gmane.org>
-In-Reply-To: <fkdeel$p9o$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+MIME-Version: 1.0
+Cc: Rolf Leggewie <no2spam@nospam.arcornews.de>
 Subject: Re: RFC: drop quilt version 0.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,76 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2007 11:39:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 20 Dec 2007 13:08:42 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Rolf Leggewie schreef:
-> Koen Kooi schrieb:
->>> driven by bug 1960, I have been doing some work on quilt in OE,
-> 
->> What are your good reasons to drop it? I see no point in removing stuff
->> just to boost someones commit stats under the moniker "clean up"
-> 
+Thursday, December 20, 2007, 10:24:27 AM, you wrote:
 
-<snip usual rolf drivel>
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 
-> * had you bothered to look at the referenced bug you would have realized
->   that it was not really me proposing to drop it initially.
+> Rolf Leggewie schreef:
+>> Hi,
+>> 
+>> driven by bug 1960, I have been doing some work on quilt in OE,
+>> refactoring, cleaning up and adding version 0.46.  In the process I also
+>> dropped version version 0.39.  Is there anybody that needs this
+>> particular version or can I commit to drop it?  I grepped through OE and
+>> found no reference to it.  If you want it kept, speak up now.
 
-That is still no reason to drop it.
+> What are your good reasons to drop it? I see no point in removing stuff
+> just to boost someones commit stats under the moniker "clean up"
 
-> * why keep old stuff (AKA cruft) longer than necessary?  Just so koen
->   can bully fellow contributors?
+  I would like to second this (following my always-conservative
+attitude to dropping stuff (without good reason) on which someone
+worked hard previously (and someone can in the future)).
 
-So vendor can keep using it without having check IRC every 5 minutes to
-say "No, we still need it". To keep the work needed when merging
-branches down to a minumum. To do regression testing. To do statistical
-analysis on packages.
+  To elaborate, I hope that we'll revamp OE support for using external
+toolchains for building single packages, because it seems that people
+have got a stereotype that OE is for building entire system from
+scratch (at that would be too limiting - why I'd use top-notch
+solution to build a whole distro while revert to using adhoc tools to
+build packages for 3rd-party systems?)
 
-> * patches that apply fine to 0.45 and 0.46 don't apply cleanly to 0.39.
->   This somehow gets into the way of how I reworked it.
-
-FILES_PATH and FILES_DIR both have ${PN}-${PV} overrides, so this is
-still no reason to drop it.
-
-> IMHO that suffices to drop it unless there is good reason to keep it.
-> If there are, please state them. 
-
-You're under the impression we actively delete 'old' stuff in OE, which
-we don't, since we have vendors using the OE tree that aren't on IRC and
-don't check this mailinglist regulary.
-
-> And as you all know, OE is versioned
-> so if anybody were to want it back anytime in the future mtn would
-> gladly spew out the last known 0.39 version, I am sure.
-
-This attitude is exactly why vendors have difficulty with OE.
-
-Again, you must have good reasons for removing it, not have no reasons
-to keep it.
-And even if you have good reasons, you have to put it in removal.txt
-first, with at least a month notice.
-If the 1/4000th impact on parsing bothers you, we also have
-packages/obsolete/.
-
-This all applies to OE in general as well, so your recent deletion of
-atk will probably need reverting as well.
+  For example, I just pushed openwrt-sdk distro config, which allows
+to build packages against OpenWRT SDK. Due to OpenWRT dependencies, it
+may be required to build older than the latest versions of some
+packages.
 
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
-iD8DBQFHalNTMkyGM64RGpERAiOyAKChC3aPIZZgEHO6PFLZTFPfbQw51wCdGLxD
-Wzy5YcN0ttqe/UET4xrS/kc=
-=ZSLV
------END PGP SIGNATURE-----
 
 
