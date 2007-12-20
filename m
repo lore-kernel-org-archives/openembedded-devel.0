@@ -1,30 +1,30 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1J5TGm-0007Rf-Iq
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2007 22:49:32 +0100
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 0BBB580C3B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2007 16:44:24 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute2.internal (MEProxy); Thu, 20 Dec 2007 16:44:24 -0500
-X-Sasl-enc: TL9P9UHSgtq7egR5due2IcFzlC2FV4N62P7q9k2FI0l1 1198187063
-Received: from [192.168.18.11] (CPE-121-209-21-249.sa.bigpond.net.au
-	[121.209.21.249])
-	by mail.messagingengine.com (Postfix) with ESMTP id 4845DBF88
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2007 16:44:22 -0500 (EST)
-Message-ID: <476AE1F0.400@whitby.id.au>
-Date: Fri, 21 Dec 2007 08:13:12 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <E1J5L4z-0004um-WD@linuxtogo.org>	<200712201540.11149.openembedded@haerwu.biz>
-	<571189143.20071220182116@gmail.com>
-In-Reply-To: <571189143.20071220182116@gmail.com>
-Subject: Re: [oe-commits] org.oe.dev distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1J5Uwa-0001Qf-1o
+	for openembedded-devel@openembedded.org; Fri, 21 Dec 2007 00:36:48 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1J5UVN-0004JO-OX
+	for openembedded-devel@openembedded.org; Thu, 20 Dec 2007 23:08:41 +0000
+Received: from c-76-17-159-23.hsd1.mn.comcast.net ([76.17.159.23])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 20 Dec 2007 23:08:41 +0000
+Received: from grante by c-76-17-159-23.hsd1.mn.comcast.net with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 20 Dec 2007 23:08:41 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Grant Edwards <grante@visi.com>
+Date: Thu, 20 Dec 2007 22:51:46 +0000 (UTC)
+Message-ID: <fkerm2$nnf$1@ger.gmane.org>
+References: <fk9u44$rgn$1@ger.gmane.org>
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: c-76-17-159-23.hsd1.mn.comcast.net
+User-Agent: slrn/0.9.8.1 (Linux)
+Sender: news <news@ger.gmane.org>
+Subject: Re: How do you find a rev of OE that will build?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,28 +38,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2007 21:49:32 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Dec 2007 23:36:48 -0000
 
-Paul Sokolovsky wrote:
-> Hello Marcin,
-> Thursday, December 20, 2007, 4:40:09 PM, you wrote:
->> MACHINE=wrt54 + DISTRO=wrt54oe builds toolchain which builds packages 
->> usable under OpenWRT. At least it worked like that when I tested it over
->> year ago.
-> 
->   Year, a year ago, that's the key. I'll have an RFC to deprecate wrt54oe,
-> asusoe and some other stuff possibly lurking there in favor of openwrt-sdk.conf,
-> once I'll prepare argument list for it (and the first one will be that its
-> name corresponds to what it does).
+On 2007-12-19, Grant Edwards <grante@visi.com> wrote:
 
-I think I contributed at least one of those distro.conf's and it's a
+> I've been following the GettingStarted page trying to build
+> task-bask for about a week now, and I always hit errors due to
+> failed patches.  Here's the error du jour after doing a
+> pull/update about a half hour ago:
+>
+> [...]
+> NOTE: Running task 284 of 976 (ID: 650, /home/grante/quarq/oe/org.openembedded.dev/packages/python/python-native_2.5.1.bb, do_patch)
+> NOTE: package python-native-2.5.1: started
+> NOTE: package python-native-2.5.1-ml1: task do_patch: started
+> NOTE: Applying patch 'bindir-libdir.patch'
+> ERROR: Error in executing: 
+> ERROR: Exception:__builtin__.CmdError Message:Command Error: exit status: 1  Output:
+> Applying patch bindir-libdir.patch
+> patching file Makefile.pre.in
+> Hunk #1 FAILED at 78.
+> 1 out of 1 hunk FAILED -- rejects in file Makefile.pre.in
+[...]
 
-+1
+I updated today and tried again.  No joy.  python-native_2.5.1
+still fails when applying patches with the same error.
 
-from me on replacing them with a generic openwrt-sdk.conf
+Is there a way to tell bitbake to use an older version of the
+package -- presuming there are older versions that will build?
 
--- Rod
+Are packages in the .dev branch normally unbuildable for
+extended periods of time?  Should I not be trying to build
+using the .dev branch?
+
+-- 
+Grant Edwards                   grante             Yow! I smell a RANCID
+                                  at               CORN DOG!
+                               visi.com            
+
 
 
