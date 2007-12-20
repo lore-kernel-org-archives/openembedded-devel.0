@@ -1,21 +1,22 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1J5MeG-0000Zv-4s
-	for openembedded-devel@openembedded.org; Thu, 20 Dec 2007 15:45:20 +0100
-Received: (qmail 29580 invoked by uid 813007); 20 Dec 2007 14:40:12 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 20 Dec 2007 14:40:12 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1J5Mu6-0000sD-56
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Dec 2007 16:01:44 +0100
+Received: by an-out-0708.google.com with SMTP id b33so784867ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Dec 2007 06:56:35 -0800 (PST)
+Received: by 10.100.139.20 with SMTP id m20mr140287and.34.1198162594953;
+	Thu, 20 Dec 2007 06:56:34 -0800 (PST)
+Received: by 10.90.29.19 with HTTP; Thu, 20 Dec 2007 06:56:34 -0800 (PST)
+Message-ID: <c384c5ea0712200656s544918e5m3c3b30fb69c35a6c@mail.gmail.com>
+Date: Thu, 20 Dec 2007 15:56:34 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Dec 2007 15:40:09 +0100
-User-Agent: KMail/1.9.7
-References: <E1J5L4z-0004um-WD@linuxtogo.org>
-In-Reply-To: <E1J5L4z-0004um-WD@linuxtogo.org>
+In-Reply-To: <4769B536.4020600@gmx.net>
 MIME-Version: 1.0
-Message-Id: <200712201540.11149.openembedded@haerwu.biz>
-Subject: Re: [oe-commits] org.oe.dev distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
+References: <4769B536.4020600@gmx.net>
+Subject: Re: RFC: java toolchain recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,31 +30,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2007 14:45:20 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 20 Dec 2007 15:01:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia czwartek, 20 grudnia 2007, pfalcon commit napisa=B3:
+Hello Robert,
 
-> distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
-> * Only package building is supported (not images).
-> * Uses SDK tarballs from OpenWRT projects.
-> * The distro itself is fully target-agnostic, you should just install
-> correct SDK tarball and pass correct TARGET_ARCH (using environment vs
-> local.conf is highly recommended).
+On Dec 20, 2007 1:20 AM, Robert Schuster <theBohemian@gmx.net> wrote:
+> Hi all,
+> I reworked my initial java toolchain recipes and have provided a
+> complete patch that adds all of the necessary bits to built a
+> Java5-compatible toolchain completely from source.
+>
+Excellent work, this is well appreciated!
 
-MACHINE=3Dwrt54 + DISTRO=3Dwrt54oe builds toolchain which builds packages=20
-usable under OpenWRT. At least it worked like that when I tested it over=20
-year ago.
+I will take some time to look at your patches in the next days.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Regards,
 
-    The fact that no one understands you doesn't mean you're an artist.
-
-
+Leon.
 
 
