@@ -1,30 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1J5XuO-0001pG-Ia
-	for openembedded-devel@openembedded.org; Fri, 21 Dec 2007 03:46:44 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1J5Xp6-0008Aq-Oz
-	for openembedded-devel@openembedded.org; Fri, 21 Dec 2007 02:41:16 +0000
-Received: from grante.dsl.visi.com ([208.42.141.248])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 21 Dec 2007 02:41:16 +0000
-Received: from grante by grante.dsl.visi.com with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 21 Dec 2007 02:41:16 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Grant Edwards <grante@visi.com>
-Date: Fri, 21 Dec 2007 02:40:48 +0000 (UTC)
-Message-ID: <fkf93g$pe8$1@ger.gmane.org>
-References: <fk9u44$rgn$1@ger.gmane.org> <fkerm2$nnf$1@ger.gmane.org>
-	<1344229699.20071221024715@gmail.com>
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: grante.dsl.visi.com
-User-Agent: slrn/0.9.8.1 (Linux)
-Sender: news <news@ger.gmane.org>
-Subject: Re: How do you find a rev of OE that will build?
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1J5dPu-0005SY-Rw
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Dec 2007 09:39:39 +0100
+Received: (qmail invoked by alias); 21 Dec 2007 08:34:25 -0000
+Received: from e178102245.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.102.245]
+	by mail.gmx.net (mp034) with SMTP; 21 Dec 2007 09:34:25 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/RuBFUZEzRbN6kme6UAT+19KRt/19/80bG1VK/Ot
+	f9KWg7H6ideejt
+Message-ID: <476B7A8D.4070603@gmx.net>
+Date: Fri, 21 Dec 2007 09:34:21 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: RFC: feature request - wrap sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,40 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2007 02:46:44 -0000
+X-List-Received-Date: Fri, 21 Dec 2007 08:39:41 -0000
+X-Groupsio-MsgNum: 3722
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig7319AB3E4E082EB7B80B1F69"
 
-On 2007-12-21, Paul Sokolovsky <pmiscml@gmail.com> wrote:
+--------------enig7319AB3E4E082EB7B80B1F69
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
->   No, anything on critical path to build a common embedded system
-> image can't be broken and unnoticed for long. I rebuilt python-native
-> for you:
->
-> NOTE: package python-native-2.5.1-ml1: task do_patch: started
-> NOTE: Applying patch 'bindir-libdir.patch'
-> NOTE: Applying patch 'cross-distutils.patch'
-> NOTE: Applying patch 'dont-modify-shebang-line.patch'
-> NOTE: Applying patch 'default-is-optimized.patch'
-> NOTE: package python-native-2.5.1-ml1: task do_patch: completed
->
-> Anyway, as you see, it's not some dark magic failing, but
-> merely a patch application. So, why don't you look closer and
-> see what corrupts the data - your tar, a quilt built on your
-> system, or your kernel? ;-)
+Hi all,
+I have a feature request that should help dealing with those source
+tarballs which do not contain a proper top level directory. The idea is
+to allow to add a parameter 'wrap' to the SRC_URI entry denoting the
+source tarball. If it is present (and 1) the unpacker creates a
+directory named ${P} and unpacks the tarball therein.
 
-OK.  It just seems odd that 100+ other packages would build
-fine, but when one particular package fails it's not the
-package that's suspect but the tools that work fine for 100+
-other OE packages and and entire Gentoo system build.
+This would make it unneccessary to change S for such packages and
+furthermore the work directory is not cluttered with files and folders
+from inside the source tarball.
 
-> And the best place to continue this is the bugtracker.
+Like it? (Any pointer where such code should be put?)
 
-Thanks.
-
--- 
-Grant Edwards                   grante             Yow!  Why is it that when
-                                  at               you DIE, you can't take
-                               visi.com            your HOME ENTERTAINMENT
-                                                   CENTER with you??
+Regards
+Robert
 
 
+--------------enig7319AB3E4E082EB7B80B1F69
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHa3qQG9cfwmwwEtoRCB+OAJ450ud1BwLXpdln1grPyzgMsLwXXQCgj6Lr
+q4Vik5Pt5tSU7d3EH5IrxlM=
+=De8n
+-----END PGP SIGNATURE-----
+
+--------------enig7319AB3E4E082EB7B80B1F69--
