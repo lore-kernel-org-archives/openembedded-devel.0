@@ -1,27 +1,27 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J5W2f-0007E8-DT
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1J5W4D-0007Ez-1Z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2007 01:47:09 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so42247fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2007 16:42:00 -0800 (PST)
-Received: by 10.86.58.3 with SMTP id g3mr553359fga.1.1198197720196;
-	Thu, 20 Dec 2007 16:42:00 -0800 (PST)
-Received: from ?192.168.20.166? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id f31sm647910fkf.15.2007.12.20.16.41.58
-	(version=SSLv3 cipher=OTHER); Thu, 20 Dec 2007 16:41:58 -0800 (PST)
-Date: Fri, 21 Dec 2007 02:47:15 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1344229699.20071221024715@gmail.com>
-To: Grant Edwards <grante@visi.com>
-In-Reply-To: <fkerm2$nnf$1@ger.gmane.org>
-References: <fk9u44$rgn$1@ger.gmane.org> <fkerm2$nnf$1@ger.gmane.org>
+	Fri, 21 Dec 2007 01:48:45 +0100
+Received: (qmail invoked by alias); 21 Dec 2007 00:43:33 -0000
+Received: from e178116109.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.116.109]
+	by mail.gmx.net (mp038) with SMTP; 21 Dec 2007 01:43:33 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+LlK5EWLWLOK5Oo+zpH+CH+ECAI6heB5PQGB85Px
+	qvmcFqO2N55ALt
+Message-ID: <476B0C30.4030905@gmx.net>
+Date: Fri, 21 Dec 2007 01:43:28 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: How do you find a rev of OE that will build?
+To: openembedded-devel@lists.openembedded.org
+References: <E1J5L4z-0004um-WD@linuxtogo.org>
+	<200712201540.11149.openembedded@haerwu.biz>
+In-Reply-To: <200712201540.11149.openembedded@haerwu.biz>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: Re: [oe-commits] org.oe.dev distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,65 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2007 00:47:09 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 21 Dec 2007 00:48:45 -0000
+X-Groupsio-MsgNum: 3718
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig98ACB9A0CECF2D0226123583"
 
-Hello Grant,
+--------------enig98ACB9A0CECF2D0226123583
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-Friday, December 21, 2007, 12:51:46 AM, you wrote:
+Hi!
 
-> On 2007-12-19, Grant Edwards <grante@visi.com> wrote:
+Marcin Juszkiewicz schrieb:
+> Dnia czwartek, 20 grudnia 2007, pfalcon commit napisa=B3:
+>=20
+>> distro/openwrt-sdk.conf: Distro config to build packages for OpenWRT.
+>> * Only package building is supported (not images).
+>> * Uses SDK tarballs from OpenWRT projects.
+>> * The distro itself is fully target-agnostic, you should just install
+>> correct SDK tarball and pass correct TARGET_ARCH (using environment vs=
 
->> I've been following the GettingStarted page trying to build
->> task-bask for about a week now, and I always hit errors due to
->> failed patches.  Here's the error du jour after doing a
->> pull/update about a half hour ago:
->>
->> [...]
->> NOTE: Running task 284 of 976 (ID: 650, /home/grante/quarq/oe/org.openembedded.dev/packages/python/python-native_2.5.1.bb, do_patch)
->> NOTE: package python-native-2.5.1: started
->> NOTE: package python-native-2.5.1-ml1: task do_patch: started
->> NOTE: Applying patch 'bindir-libdir.patch'
->> ERROR: Error in executing: 
->> ERROR: Exception:__builtin__.CmdError Message:Command Error: exit status: 1  Output:
->> Applying patch bindir-libdir.patch
->> patching file Makefile.pre.in
->> Hunk #1 FAILED at 78.
->> 1 out of 1 hunk FAILED -- rejects in file Makefile.pre.in
-> [...]
+>> local.conf is highly recommended).
+>=20
+> MACHINE=3Dwrt54 + DISTRO=3Dwrt54oe builds toolchain which builds packag=
+es=20
+> usable under OpenWRT. At least it worked like that when I tested it ove=
+r=20
+> year ago.
+>=20
+Would be cool to have OE to build packages for OpenWrt!
 
-> I updated today and tried again.  No joy.  python-native_2.5.1
-> still fails when applying patches with the same error.
+Which kind of OpenWRT distribution does this support? WhiteRussian,
+Kamikaze or even both?
 
-> Is there a way to tell bitbake to use an older version of the
-> package -- presuming there are older versions that will build?
-
-> Are packages in the .dev branch normally unbuildable for
-> extended periods of time?  Should I not be trying to build
-> using the .dev branch?
-
-  No, anything on critical path to build a common embedded system
-image can't be broken and unnoticed for long. I rebuilt python-native
-for you:
-
-NOTE: package python-native-2.5.1-ml1: task do_patch: started
-NOTE: Applying patch 'bindir-libdir.patch'
-NOTE: Applying patch 'cross-distutils.patch'
-NOTE: Applying patch 'dont-modify-shebang-line.patch'
-NOTE: Applying patch 'default-is-optimized.patch'
-NOTE: package python-native-2.5.1-ml1: task do_patch: completed
-
-      Anyway, as you see, it's not some dark magic failing, but merely
-a patch application. So, why don't you look closer and see what
-corrupts the data - your tar, a quilt built on your system, or your
-kernel? ;-) And the best place to continue this is the bugtracker.
+Regards
+Robert
 
 
+--------------enig98ACB9A0CECF2D0226123583
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iD8DBQFHawwzG9cfwmwwEtoRCI/WAKCGJJAA5upCQqNB/yRTxa+uF6Vj3ACfQb8j
+EY+DonwQ49xJPAKyFdvT7lA=
+=rt+l
+-----END PGP SIGNATURE-----
 
-
+--------------enig98ACB9A0CECF2D0226123583--
