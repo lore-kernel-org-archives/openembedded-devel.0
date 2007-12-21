@@ -1,29 +1,22 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J6Bq0-0001ni-6M
+	(envelope-from <zecke@selfish.org>) id 1J6CJY-0002SI-FG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Dec 2007 22:24:52 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so420612fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Dec 2007 13:19:32 -0800 (PST)
-Received: by 10.86.50.8 with SMTP id x8mr2634433fgx.30.1198358372095;
-	Sat, 22 Dec 2007 13:19:32 -0800 (PST)
-Received: from ?192.168.20.166? ( [194.79.8.34])
-	by mx.google.com with ESMTPS id f19sm3622456fka.18.2007.12.22.13.19.30
-	(version=SSLv3 cipher=OTHER); Sat, 22 Dec 2007 13:19:31 -0800 (PST)
-Date: Sat, 22 Dec 2007 23:24:49 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1259186504.20071222232449@gmail.com>
-To: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-In-Reply-To: <1773902313.20071222210858@vanille-media.de>
-References: <20071222144058.094eb363@cimmeria>
-	<1773902313.20071222210858@vanille-media.de>
+	Sat, 22 Dec 2007 22:55:24 +0100
+Received: from [212.23.103.5] (helo=[10.129.22.39])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1J6CEN-00047j-T8
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Dec 2007 22:50:04 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 21 Dec 2007 17:15:38 +0100
+User-Agent: KMail/1.9.6 (enterprise 0.20071204.744707)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	"angstrom-distro-devel@linuxtogo.org" <angstrom-distro-devel@linuxtogo.org>
-Subject: Re: OE & Angstrom reputation (was: [Angstrom-devel] Bugzilla is not USENET)
+Message-Id: <200712211715.39113.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.5
+Subject: Working on uicmoc4, qmake2, qt4-x11-free and qtopia-core over the season
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,78 +30,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Dec 2007 21:24:52 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 22 Dec 2007 21:55:24 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Michael,
+Hey,
 
-Saturday, December 22, 2007, 10:08:58 PM, you wrote:
+to avoid duplicated work I just wanted to say that I'm going to work on the 
+above things, try to fix the open bugs, upgrade versions, unify things. As I 
+won't be in Berlin, I'm likely to be offline most of the time.
 
-> Graeme Gregory wrote:
->> Guys the bickering in bugzilla is getting to the point where it
->> is silly.
-
->> I personally don't feel that this lends a good impression of the OE
->> project and the Angstrom distribution.
-
->> Also a lot of the actual arguments belong on the mailing list or private
->> emails. People solving bugs don't need to know who annoys who.
-
->> Can I suggest people start applying the 24hr rule when acting on bugs.
->> For those that don't know. This rule states if something annoys you
->> wait 24hrs before you reply. Its an effective damper for flame wars.
-
-> I couldn't agree more. Thanks for starting this thread, Graeme.
-
-> Just recently the mood surrounding OpenEmbedded and Angstrom has been
-> dragged down by lots of small fights and arguments, often put in very
-> impolite and arrogant style. People are always leaving projects or starting
-> forks -- this is nothing new -- although usually they do this because
-> of technical differences, not because they're scared away or
-> threatened.
-
-  Have to say, I can't agree with this, based on my experience with
-open-source. IMHO, most forks are created because of social reasons,
-not technical. Of course, that only means that more attention should
-be paid to social atmosphere of a project.
-
-> I won't pick any individuals here, but rather want to alert you as a whole.
-> This is seriously compromising the reputation of our respective projects.
-
-> A technically superior project can lose big time in a comparison when
-> it has a battlesome community. Guys, we're losing opportunities here!
-
-> _Please_ try to act much more diplomatic, in word and deed. If you're angry,
-> swallow it down, think a day about it, and formulate a professional
-> statement. Don't haste. It's very important.
-
-
-  Well, I really wanted to skip this topic, especially taking into
-account that one of the persons involved is particularly sensitive to
-this stuff. But I find it amusing that 2 of 2 of our friendly value-added
-distro creators participated in the argument in question, even if
-other side was me. The meta-topic was release bug management for Angstrom,
-and while one of them used to be a bug manager for Angstrom, it took
-some time to reach understanding why bugs managed in one way and not
-another. I personally regret this, as I really rejoiced our
-value-added friends to come back to active OE work right in time for
-Angstrom release, as their (both active, experienced developers) help
-is very much needed! It's really sad that instead there was another
-argument, like few times before, hiccup in bug processing, and
-another declaration that someone won't work on Angstrom, like we
-already heard, despite most of circumstances were different then.
-
-
-> Friendly Regards,
-
-> :M:
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+thanks for listening
+	z.
 
 
