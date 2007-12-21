@@ -1,24 +1,30 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1J5dPu-0005SY-Rw
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2007 09:39:39 +0100
-Received: (qmail invoked by alias); 21 Dec 2007 08:34:25 -0000
-Received: from e178102245.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.102.245]
-	by mail.gmx.net (mp034) with SMTP; 21 Dec 2007 09:34:25 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/RuBFUZEzRbN6kme6UAT+19KRt/19/80bG1VK/Ot
-	f9KWg7H6ideejt
-Message-ID: <476B7A8D.4070603@gmx.net>
-Date: Fri, 21 Dec 2007 09:34:21 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: RFC: feature request - wrap sources
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <rpurdie@rpsys.net>) id 1J5eeD-0003pH-8s
+	for openembedded-devel@openembedded.org; Fri, 21 Dec 2007 10:58:29 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lBL9rIU9020337
+	for <openembedded-devel@openembedded.org>; Fri, 21 Dec 2007 09:53:18 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20252-02 for <openembedded-devel@openembedded.org>;
+	Fri, 21 Dec 2007 09:53:14 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lBL9r9XX020326
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 21 Dec 2007 09:53:10 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <476B7A8D.4070603@gmx.net>
+References: <476B7A8D.4070603@gmx.net>
+Date: Fri, 21 Dec 2007 09:53:09 +0000
+Message-Id: <1198230789.4636.25.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: RFC: feature request - wrap sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,45 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2007 08:39:41 -0000
-X-Groupsio-MsgNum: 3722
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig7319AB3E4E082EB7B80B1F69"
+X-List-Received-Date: Fri, 21 Dec 2007 09:58:29 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---------------enig7319AB3E4E082EB7B80B1F69
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On Fri, 2007-12-21 at 09:34 +0100, Robert Schuster wrote:
+> I have a feature request that should help dealing with those source
+> tarballs which do not contain a proper top level directory. The idea is
+> to allow to add a parameter 'wrap' to the SRC_URI entry denoting the
+> source tarball. If it is present (and 1) the unpacker creates a
+> directory named ${P} and unpacks the tarball therein.
+> 
+> This would make it unneccessary to change S for such packages and
+> furthermore the work directory is not cluttered with files and folders
+> from inside the source tarball.
+> 
+> Like it? (Any pointer where such code should be put?)
 
-Hi all,
-I have a feature request that should help dealing with those source
-tarballs which do not contain a proper top level directory. The idea is
-to allow to add a parameter 'wrap' to the SRC_URI entry denoting the
-source tarball. If it is present (and 1) the unpacker creates a
-directory named ${P} and unpacks the tarball therein.
+Would it not be simpler just to specify an attribute like unpacksubdir
+which you could set to ${PN}-${PV}?
 
-This would make it unneccessary to change S for such packages and
-furthermore the work directory is not cluttered with files and folders
-from inside the source tarball.
+That way you have a generic and simpler solution?
 
-Like it? (Any pointer where such code should be put?)
+Cheers,
 
-Regards
-Robert
+Richard
 
 
---------------enig7319AB3E4E082EB7B80B1F69
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHa3qQG9cfwmwwEtoRCB+OAJ450ud1BwLXpdln1grPyzgMsLwXXQCgj6Lr
-q4Vik5Pt5tSU7d3EH5IrxlM=
-=De8n
------END PGP SIGNATURE-----
-
---------------enig7319AB3E4E082EB7B80B1F69--
