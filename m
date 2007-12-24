@@ -1,27 +1,23 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [64.233.166.179] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J6iIE-0004ir-Sg
-	for openembedded-devel@openembedded.org; Mon, 24 Dec 2007 09:04:10 +0100
-Received: from Powerbook-2.local (vpn006136.vpn.utwente.nl [130.89.6.136])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	lBO7wb0k010449 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Dec 2007 08:58:38 +0100
-Message-ID: <476F66AE.40601@student.utwente.nl>
-Date: Mon, 24 Dec 2007 08:58:38 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <ilya.yanok@gmail.com>) id 1J6lpA-0001TZ-EF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Dec 2007 12:50:29 +0100
+Received: by py-out-1112.google.com with SMTP id a25so3524974pyi.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Dec 2007 03:44:54 -0800 (PST)
+Received: by 10.142.239.11 with SMTP id m11mr896260wfh.165.1198496693970;
+	Mon, 24 Dec 2007 03:44:53 -0800 (PST)
+Received: by 10.143.40.7 with HTTP; Mon, 24 Dec 2007 03:44:53 -0800 (PST)
+Message-ID: <9ba889b00712240344w76b8b5abha78ef8376930be9c@mail.gmail.com>
+Date: Mon, 24 Dec 2007 14:44:53 +0300
+From: "Ilya Yanok" <ilya.yanok@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <476F6461.3070105@linuxdevelopment.de>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <476F07C6.7010308@whitby.id.au>
-In-Reply-To: <476F07C6.7010308@whitby.id.au>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: RFC: DISTRO_FEED_CONFIGS
+References: <9ba889b00712231913y6e07f05ci23cb36444c325a40@mail.gmail.com>
+	<476F6461.3070105@linuxdevelopment.de>
+Subject: Re: [RFC] AVR32 stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,48 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Dec 2007 08:04:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 24 Dec 2007 11:50:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello!
 
-Rod Whitby schreef:
-> I would like to propose a new standard OE variable called
-> DISTRO_FEED_CONFIGS which is a list of packages to be installed in a
-> rootfs to enable the corresponding DISTRO_PACKAGE_MANAGER to actually
-> access the feeds associated with the distro.  A distro which did not
-> have feed config packages could leave it as the default empty string and
-> remain unchanged in the face of this RFC.
-> 
-> This variable would be set in the respective distro.conf, along with
-> DISTRO_PACKAGE_MANAGER.  It would initially be used in base-image.bb
-> (see that file for an example of use), and then elsewhere as desired.
-> 
-> For example, in Angstrom, it would replace the existing
-> ANGSTROM_FEED_CONFIGS variable.
+2007/12/24, Robert W=F6rle <robert@linuxdevelopment.de>:
+> I am also "supposed" to get this avr32 flying.
+> But am also stuck at getting correct gcc stuff up via oe.
+> Maybe we can lign up togethere and share. I currently had the most
+> success out of the atmel provided gcc toolchain.
+Ok. Actually I managed not only to build toolchain with oe but today
+I've created my first minimal-image with it. Unfortunately, init
+crashed with segfault... Don't know... needs further investigation.
+If you interested in my work, let's discuss how we can share it.
 
-+1 from me.
-
-As a side note: this won't touch how the FEED_URIs for static feeds are
-used, but will only affect distros that want to put them under
-package-management.
-
-regards,
-
-Koen
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHb2auMkyGM64RGpERAvyQAJ4tFxwOU5hvhO6RuvUNhTZywXDQBwCeLiDr
-IxBBYAK2LRWcG0Y1Ief8wGA=
-=CVj6
------END PGP SIGNATURE-----
+With best regards,
+                             Ilya.
 
 
