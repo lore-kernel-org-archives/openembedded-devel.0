@@ -1,23 +1,25 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <ilya.yanok@gmail.com>) id 1J6lpA-0001TZ-EF
+	(envelope-from <cliff.brake@gmail.com>) id 1J6o7K-0007kG-8i
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Dec 2007 12:50:29 +0100
-Received: by py-out-1112.google.com with SMTP id a25so3524974pyi.7
+	Mon, 24 Dec 2007 15:17:18 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so2796189waf.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Dec 2007 03:44:54 -0800 (PST)
-Received: by 10.142.239.11 with SMTP id m11mr896260wfh.165.1198496693970;
-	Mon, 24 Dec 2007 03:44:53 -0800 (PST)
-Received: by 10.143.40.7 with HTTP; Mon, 24 Dec 2007 03:44:53 -0800 (PST)
-Message-ID: <9ba889b00712240344w76b8b5abha78ef8376930be9c@mail.gmail.com>
-Date: Mon, 24 Dec 2007 14:44:53 +0300
-From: "Ilya Yanok" <ilya.yanok@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <476F6461.3070105@linuxdevelopment.de>
+	Mon, 24 Dec 2007 06:11:47 -0800 (PST)
+Received: by 10.115.90.1 with SMTP id s1mr283670wal.50.1198505507077;
+	Mon, 24 Dec 2007 06:11:47 -0800 (PST)
+Received: by 10.114.254.11 with HTTP; Mon, 24 Dec 2007 06:11:47 -0800 (PST)
+Message-ID: <f96d234e0712240611je2d79ebt70d57395446ed769@mail.gmail.com>
+Date: Mon, 24 Dec 2007 09:11:47 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: "Dr. Mickey Lauer" <mickey@vanille-media.de>, 
+	angstrom-distro-devel@linuxtogo.org
+In-Reply-To: <1773902313.20071222210858@vanille-media.de>
 MIME-Version: 1.0
-References: <9ba889b00712231913y6e07f05ci23cb36444c325a40@mail.gmail.com>
-	<476F6461.3070105@linuxdevelopment.de>
-Subject: Re: [RFC] AVR32 stuff
+References: <20071222144058.094eb363@cimmeria>
+	<1773902313.20071222210858@vanille-media.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [Angstrom-devel] OE & Angstrom reputation (was: Bugzilla is not USENET)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,24 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Dec 2007 11:50:32 -0000
+X-List-Received-Date: Mon, 24 Dec 2007 14:17:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello!
+On Dec 22, 2007 3:08 PM, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
 
-2007/12/24, Robert W=F6rle <robert@linuxdevelopment.de>:
-> I am also "supposed" to get this avr32 flying.
-> But am also stuck at getting correct gcc stuff up via oe.
-> Maybe we can lign up togethere and share. I currently had the most
-> success out of the atmel provided gcc toolchain.
-Ok. Actually I managed not only to build toolchain with oe but today
-I've created my first minimal-image with it. Unfortunately, init
-crashed with segfault... Don't know... needs further investigation.
-If you interested in my work, let's discuss how we can share it.
+> _Please_ try to act much more diplomatic, in word and deed. If you're angry,
+> swallow it down, think a day about it, and formulate a professional
+> statement. Don't haste. It's very important.
 
-With best regards,
-                             Ilya.
+One thing I have found to be very helpful when things get tense is a
+phone conversation.  I just relearned this again on one of my
+projects.  We ran into a tough issue, and assumptions where made by me
+and another party that were not correct, and we ended up wasting a lot
+of time, and trust was diminished.  At certain times there is just not
+enough bandwidth with email and irc to convey all the information
+needed for there to be good understanding.  I realize this may not be
+practical with a project like OE with timezone and language
+differences, but as voice communication is getting very cheap, it
+should be considered when possible.
+
+Merry Christmas and best wishes to everyone!
+
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
