@@ -1,28 +1,29 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1J6bzU-0007wo-4G
+	(envelope-from <pmiscml@gmail.com>) id 1J6cTb-0004aQ-5H
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Dec 2007 02:20:24 +0100
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id F03CA81C15
+	Mon, 24 Dec 2007 02:51:31 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so671303fge.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2007 20:14:56 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Sun, 23 Dec 2007 20:14:56 -0500
-X-Sasl-enc: RccQ5bwx663lxxjruVEn6HbZvTnN5AOp0qxCTIgXT5Tz 1198458896
-Received: from [192.168.18.11] (CPE-121-209-21-249.sa.bigpond.net.au
-	[121.209.21.249])
-	by mail.messagingengine.com (Postfix) with ESMTP id 2A6ACFBB1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2007 20:14:55 -0500 (EST)
-Message-ID: <476F07C6.7010308@whitby.id.au>
-Date: Mon, 24 Dec 2007 11:43:42 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	Sun, 23 Dec 2007 17:46:03 -0800 (PST)
+Received: by 10.86.30.9 with SMTP id d9mr3936433fgd.16.1198460763586;
+	Sun, 23 Dec 2007 17:46:03 -0800 (PST)
+Received: from widy.lan ( [194.79.8.36])
+	by mx.google.com with ESMTPS id k29sm5323625fkk.5.2007.12.23.17.46.01
+	(version=SSLv3 cipher=OTHER); Sun, 23 Dec 2007 17:46:02 -0800 (PST)
+Date: Mon, 24 Dec 2007 03:48:12 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <193287436.20071224034812@gmail.com>
+To: Rod Whitby <rod@whitby.id.au>
+In-Reply-To: <476F02B0.7090405@whitby.id.au>
+References: <476D5DCE.6080703@student.utwente.nl>
+	<476F02B0.7090405@whitby.id.au>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
+Cc: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel@lists.openembedded.org>
-Subject: RFC: DISTRO_FEED_CONFIGS
+Subject: Re: Base image dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,24 +37,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Dec 2007 01:20:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 24 Dec 2007 01:51:31 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-I would like to propose a new standard OE variable called
-DISTRO_FEED_CONFIGS which is a list of packages to be installed in a
-rootfs to enable the corresponding DISTRO_PACKAGE_MANAGER to actually
-access the feeds associated with the distro.  A distro which did not
-have feed config packages could leave it as the default empty string and
-remain unchanged in the face of this RFC.
+Hello Rod,
 
-This variable would be set in the respective distro.conf, along with
-DISTRO_PACKAGE_MANAGER.  It would initially be used in base-image.bb
-(see that file for an example of use), and then elsewhere as desired.
+Monday, December 24, 2007, 2:52:00 AM, you wrote:
 
-For example, in Angstrom, it would replace the existing
-ANGSTROM_FEED_CONFIGS variable.
+> Koen Kooi wrote:
+>> As part of the OE-testlab I wrote a .dot generator for image contents
+>> and made a png of
+>> Angstrom-base-image-glibc-ipk-2007.11RC2-ixp4xxbe.rootfs.tar.gz:
+>> 
+>> http://ewi546.ewi.utwente.nl/tmp/test-nolibc-noupdate-nq8.png
+>> 
+>> This shows the Depends: (solid lines) and Recommends: (dashed lines)
+>> fields of the installed packages, but with 'libgcc', 'libc6' and
+>> 'update_' filtered out for readability.
 
--- Rod
+> As a result of this excellent analysis by Koen (thanks!), I'm trimming
+> task-distro-base and task-machine-base out of base-image.  There are too
+> many things that distros and machines add using DISTRO_EXTRA_* and
+> MACHINE_EXTRA_* which are not strictly required to boot, get networking
+> up, and run ipkg install.
+
+> For example, the x86.conf file adds "kernel-modules" to
+> MACHINE_EXTRA_RDEPENDS which would mean that a base-image for x86 has
+> *all* kernel modules included in the rootfs.
+
+  And this is apparently wrong. Worse, we have even some images which
+pull entire kernel module set as if they really had a need for that.
+
+$ grep kernel-modules *
+x11-gpe-image.bb:    kernel-modules \
+x11-office-image.bb:    kernel-modules \
+x11-pimlico-image.bb:    kernel-modules \
+
+  I'm really stumped on how to treat it - as a convenience for user
+(please, please let's add mp3 to x11-image then - that will be real
+convenience!) or case of older images not migrated to task-base yet.
+Even if assume "convenience" case, x11-gpe-image shouldn't really
+included them all - that image is on "small" size of images, and kernel
+modules, most of which won't be ever used by common user.
+office/pimlico images probably can go by with that, as they already
+include way too much stuff.
+
+[]
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
