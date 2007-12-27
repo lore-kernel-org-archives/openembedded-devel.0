@@ -1,43 +1,20 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [209.85.132.251] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <stefano.regno@spesonline.com>) id 1J7sRI-0001wq-6p
+	(envelope-from <leon.woestenberg@gmail.com>) id 1J82ZK-0008QV-Um
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Dec 2007 14:06:20 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 3F10195AA7
+	Fri, 28 Dec 2007 00:55:19 +0100
+Received: by an-out-0708.google.com with SMTP id b33so550642ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2007 14:00:32 +0100 (CET)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 04851-01-2 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2007 14:00:32 +0100 (CET)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 1F6CC95A7B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2007 14:00:32 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 0EF581D71F3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2007 14:00:32 +0100 (CET)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 01922-01-5 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2007 14:00:32 +0100 (CET)
-Received: from [192.168.1.168]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id D03251D71E3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2007 14:00:31 +0100 (CET)
-Message-ID: <4773A1F3.3080206@spesonline.com>
-Date: Thu, 27 Dec 2007 14:00:35 +0100
-From: Regno Stefano <stefano.regno@spesonline.com>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-MIME-Version: 1.0
+	Thu, 27 Dec 2007 15:49:28 -0800 (PST)
+Received: by 10.100.7.1 with SMTP id 1mr17703552ang.73.1198799368253;
+	Thu, 27 Dec 2007 15:49:28 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Thu, 27 Dec 2007 15:49:28 -0800 (PST)
+Message-ID: <c384c5ea0712271549t5e7c07c5m48f04a2eaee25e5@mail.gmail.com>
+Date: Fri, 28 Dec 2007 00:49:28 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-Subject: ARM MX21
+MIME-Version: 1.0
+Subject: [RFC] linux 2.6.23 recipe now patches in .12, CFS and squashfs-lzma
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -51,13 +28,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Dec 2007 13:06:20 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+X-List-Received-Date: Thu, 27 Dec 2007 23:55:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-There is a possibility to compile poky under Arm MX21? if yes exist a 
-toolchain to do thet?
+Hello,
 
-Happy christmas to all
+I just added three patches to the linux_2.6.23.bb recipe. As this
+recipe has (AFAIK) multiple users and maintainers unknown to me, this
+email is a heads-up.
+
+The first is a 2.6.23.12 patch, the other two are the CFS-v24.1 fair
+task scheduler, now mainlined, and squashfs-lzma, a highly compressed
+read-only filesystem, well suited for embedded devices to reduce
+FlashROM footprint.
+
+Regards,
+-- 
+Leon
 
 
