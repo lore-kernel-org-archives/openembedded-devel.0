@@ -1,22 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1J8DAo-0001kE-1Q
-	for openembedded-devel@openembedded.org; Fri, 28 Dec 2007 12:14:42 +0100
-Received: (qmail 32229 invoked by uid 813007); 28 Dec 2007 11:08:47 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 28 Dec 2007 11:08:47 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Dec 2007 12:08:42 +0100
-User-Agent: KMail/1.9.7
-References: <4774C182.20501@gmail.com>
-In-Reply-To: <4774C182.20501@gmail.com>
+	(envelope-from <pmiscml@gmail.com>) id 1J8DFb-0001rr-0W
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 28 Dec 2007 12:19:39 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so1627222fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Dec 2007 03:13:45 -0800 (PST)
+Received: by 10.86.90.2 with SMTP id n2mr8821771fgb.66.1198840425901;
+	Fri, 28 Dec 2007 03:13:45 -0800 (PST)
+Received: from widy.lan ( [194.79.8.36])
+	by mx.google.com with ESMTPS id a37sm12555291fkc.3.2007.12.28.03.13.44
+	(version=SSLv3 cipher=OTHER); Fri, 28 Dec 2007 03:13:45 -0800 (PST)
+Date: Fri, 28 Dec 2007 13:16:03 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <1376655424.20071228131603@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	<angstrom-distro-devel@linuxtogo.org>
+In-Reply-To: <E1J80sQ-0005Qr-AC@linuxtogo.org>
+References: <E1J80sQ-0005Qr-AC@linuxtogo.org>
 MIME-Version: 1.0
-Message-Id: <200712281208.44069.openembedded@haerwu.biz>
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Re: Tosa kernel bloat
+Subject: [oe-commits] org.oe.dev linux-rp-2.6.23: Add atags export patch for kexec use. Fix spitz suspend key issue. Sync kernel mirror uri tweak from poky.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,42 +35,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Dec 2007 11:14:45 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 28 Dec 2007 11:19:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=B1tek, 28 grudnia 2007, Junqian Gordon Xu napisa=B3:
-> Tosa kernel is bloated with the recent patch and change to
-> defconfig-tosa
->
-> |`/home/gordon/oe/build/tmp/work/tosa-angstrom-linux-gnueabi/linux-rp-2
-> |.6.23-r14/linux-2.6.23' Size is 1296464
-> | FATAL: This kernel is too big for your PXA Zaurus and will destroy
->
-> data if you flash it. Please reduce the size of the kernel by making
-> more of it modular.
+This is a forwarded message
+From: rpurdie commit <openembedded-commits@lists.openembedded.org>
+To: openembedded-commits@lists.openembedded.org
+Date: Friday, December 28, 2007, 12:06:54 AM
+Subject: [oe-commits] org.oe.dev linux-rp-2.6.23: Add atags export patch for kexec use. Fix spitz suspend key issue. Sync kernel mirror uri tweak from poky.
 
-Same on Poodle:
+===8<==============Original message text===============
+linux-rp-2.6.23: Add atags export patch for kexec use. Fix spitz suspend key issue. Sync kernel mirror uri tweak from poky.
 
-| make[1]: Leaving directory=20
-`/home/hrw/devel/build/angstrom/tmp/work/poodle-angstrom-linux-gnueabi/linu=
-x-rp-2.6.23-r14/linux-2.6.23'
-| Size is 1306384
-| FATAL: This kernel is too big for your PXA Zaurus and will destroy data=20
-if you flash it. Please reduce the size of the kernel by making more of=20
-it modular.
+[]
+============================================================
+--- packages/linux/linux-rp-2.6.23/defconfig-c7x0       511d465640921b0e994dbc25c4212fabf12ca150
++++ packages/linux/linux-rp-2.6.23/defconfig-c7x0       1245c4d3084a0f248fe10f90a1ef8eb1c2866f91
+@@ -1395,7 +1396,7 @@ CONFIG_EXT2_FS=y
+ CONFIG_EXT2_FS=y
+ # CONFIG_EXT2_FS_XATTR is not set
+ # CONFIG_EXT2_FS_XIP is not set
+-CONFIG_EXT3_FS=m
++# CONFIG_EXT3_FS is not set
+ # CONFIG_EXT4DEV_FS is not set
+ # CONFIG_REISERFS_FS is not set
+ # CONFIG_JFS_FS is not set
+============================================================
+--- packages/linux/linux-rp-2.6.23/defconfig-collie     61e97e08b4342ff704be5b57783344f6d2834896
++++ packages/linux/linux-rp-2.6.23/defconfig-collie     9ffd9b1fadb6288179b7b23413e91d4eb9442460
+[]
+@@ -1459,7 +1460,7 @@ CONFIG_EXT2_FS=m
+ CONFIG_EXT2_FS=m
+ # CONFIG_EXT2_FS_XATTR is not set
+ # CONFIG_EXT2_FS_XIP is not set
+-CONFIG_EXT3_FS=m
++# CONFIG_EXT3_FS is not set
+ # CONFIG_EXT4DEV_FS is not set
+ # CONFIG_REISERFS_FS is not set
+ # CONFIG_JFS_FS is not set
+
+
+   This undos changes I did just a couple of days ago to address
+http://bugs.openembedded.org/show_bug.cgi?id=2515 . Can you please
+enable ext3 module for all devices in your master copies and re-push
+them? While we're at it, enabling NFS support and iptables is worth
+doing too. (Corresponding changes were applied to linux-handhelds-2.6
+for Angstrom release too.)
+ 
+===8<===========End of original message text===========
 
 
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-           Q:      What's a light-year?
-           A:      One-third less calories than a regular year.
-
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
