@@ -1,26 +1,22 @@
-Received: from [80.12.242.27] (helo=smtp20.orange.fr)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <c.romain@laposte.net>) id 1J8Et0-0006Ln-HP
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Dec 2007 14:04:26 +0100
-Received: from me-wanadoo.net (localhost [127.0.0.1])
-	by mwinf2009.orange.fr (SMTP Server) with ESMTP id A56EC1C000A3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Dec 2007 13:58:30 +0100 (CET)
-Received: from [192.168.2.2] (AToulouse-157-1-94-86.w86-213.abo.wanadoo.fr
-	[86.213.85.86])
-	by mwinf2009.orange.fr (SMTP Server) with ESMTP id 5EBC71C0008F;
-	Fri, 28 Dec 2007 13:58:30 +0100 (CET)
-X-ME-UUID: 20071228125830388.5EBC71C0008F@mwinf2009.orange.fr
-Message-ID: <4774F459.5010100@laposte.net>
-Date: Fri, 28 Dec 2007 14:04:25 +0100
-From: cyril Romain <c.romain@laposte.net>
-User-Agent: Thunderbird 2.0.0.9 (X11/20071208)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org
+	(envelope-from <openembedded@haerwu.biz>) id 1J8FQB-0003pZ-K7
+	for openembedded-devel@openembedded.org; Fri, 28 Dec 2007 14:38:43 +0100
+Received: (qmail 11813 invoked by uid 813007); 28 Dec 2007 13:32:49 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 28 Dec 2007 13:32:49 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: angstrom-distro-devel@linuxtogo.org
+Date: Fri, 28 Dec 2007 14:32:41 +0100
+User-Agent: KMail/1.9.7
 References: <4774C182.20501@gmail.com> <4774C9AA.8050705@student.utwente.nl>
-In-Reply-To: <4774C9AA.8050705@student.utwente.nl>
+	<4774F459.5010100@laposte.net>
+In-Reply-To: <4774F459.5010100@laposte.net>
+MIME-Version: 1.0
+Message-Id: <200712281432.44034.openembedded@haerwu.biz>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [Angstrom-devel] Tosa kernel bloat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,42 +31,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Dec 2007 13:04:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 28 Dec 2007 13:38:44 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> Junqian Gordon Xu schreef:
-> > Tosa kernel is bloated with the recent patch and change to
-> defconfig-tosa
->
-> Is that also the case in the angstrom stable branch?
-Yes.
-This is the case for linux-rp-2.6.23-r12 (angstrom stable branch) and
-linux-rp-2.6.23-r14: (angstrom dev branch)
-The tosa kernel compiled fine with linux-rp-2.6.23-r10 (metadata from
-december, 8th)
+Dnia pi=B1tek, 28 grudnia 2007, cyril Romain napisa=B3:
 
-To cut the kernel size down, some of the following built-in features may
-be set as modules instead:
+> To cut the kernel size down, some of the following built-in features
+> may be set as modules instead:
 
--------8<---------8<---------
-CONFIG_USB_ETH_RNDIS=y
-CONFIG_MSDOS_PARTITION=y
-CONFIG_USB_GADGET_SELECTED=y
-CONFIG_USB_GADGET_PXA2XX=y
-CONFIG_USB_EZUSB=y
-CONFIG_USB_HIDINPUT=y
-CONFIG_VIDEO_V4L1=y
-CONFIG_VIDEO_V4L1_COMPAT=y
-CONFIG_VIDEO_V4L2=y
-CONFIG_NET_RADIO=y
-CONFIG_SCSI_MULTI_LUN=y
--------8<---------8<---------
+> -------8<---------8<---------
+> CONFIG_USB_ETH_RNDIS=3Dy
 
-Regards,
+thats option not module
 
-  -- cyril
+> CONFIG_MSDOS_PARTITION=3Dy
+
+thats option not module
+
+> CONFIG_USB_GADGET_SELECTED=3Dy
+
+thats auto option
+
+> CONFIG_USB_GADGET_PXA2XX=3Dy
+
+thats option not module
+
+CONFIG_USB_GADGET would be good choice instead
+
+> CONFIG_USB_EZUSB=3Dy
+
+> CONFIG_USB_HIDINPUT=3Dy
+
+thats option not module
+
+> CONFIG_VIDEO_V4L1=3Dy
+
+thats option not module
+
+> CONFIG_VIDEO_V4L1_COMPAT=3Dy
+
+thats option not module
+
+> CONFIG_VIDEO_V4L2=3Dy
+
+thats option not module
+
+> CONFIG_NET_RADIO=3Dy
+
+thats option not module
+
+> CONFIG_SCSI_MULTI_LUN=3Dy
+
+thats option not module
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+   Gdyby cz=B3owiek musia=B3 zezwala=E6 innym na to, co toleruje u siebie,
+   =BFycie by=B3oby nie do wytrzymania.             [Georges Courteline]
 
 
 
