@@ -1,20 +1,24 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philip@balister.org>) id 1J8ReA-0004a2-Cg
-	for openembedded-devel@openembedded.org; Sat, 29 Dec 2007 03:41:58 +0100
-Received: (qmail 649 invoked by uid 1003); 29 Dec 2007 02:36:44 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 29 Dec 2007 02:36:43 -0000
-Message-ID: <4775B28B.5070005@balister.org>
-Date: Fri, 28 Dec 2007 21:35:55 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.9 (X11/20071115)
-MIME-Version: 1.0
+Received: from [128.178.50.22] (helo=smtp1.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1J8djp-00089Z-Ss
+	for openembedded-devel@openembedded.org; Sat, 29 Dec 2007 16:36:37 +0100
+Received: (qmail 20880 invoked by uid 107); 29 Dec 2007 15:30:35 -0000
+Received: from mailav3.epfl.ch (128.178.50.11)
+	by smtp1.epfl.ch with SMTP; 29 Dec 2007 15:30:35 -0000
+Received: from (unknown [128.178.50.22]) by MAILAV3.epfl.ch with smtp
+	id 155a_fda72f1a_b622_11dc_9fa4_0014221528b0;
+	Sat, 29 Dec 2007 16:30:35 +0100
+Received: from 217-162-224-198.dclient.hispeed.ch (217.162.224.198)
+	(authenticated) by smtp1.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Sat, 29 Dec 2007 16:30:35 +0100
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Organization: EPFL STI-IPR-LSRO1
 To: openembedded-devel@openembedded.org
-References: <3110400324.20071229021543@gmail.com>
-In-Reply-To: <3110400324.20071229021543@gmail.com>
-Subject: Re: Bugtracker down?
+Date: Sat, 29 Dec 2007 16:30:29 +0100
+User-Agent: KMail/1.9.6 (enterprise 0.20070907.709405)
+MIME-Version: 1.0
+Message-Id: <200712291630.29205.valentin.longchamp@epfl.ch>
+Subject: New arch in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,89 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Dec 2007 02:41:58 -0000
-X-Groupsio-MsgNum: 3764
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms030902040400070506060107"
-
---------------ms030902040400070506060107
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 29 Dec 2007 15:36:38 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-ggilbert had mentioned he would be doing some server upgrades over the 
-weekend.
+Hello,
 
-Philip
+I would like to add a new arch to OE since I have been building a distro for 
+our new system using this system.
 
-Paul Sokolovsky wrote:
-> Hello openembedded-devel,
-> 
->   ... Thruout Dec, 28th. Is it DNS issue again? (What is backup URL?)
-> 
+The system is a robotics aimed custom-designed board which is based on a 
+i.MX31 SoC. I have a custom kernel, so I will need a new kernel recipe 
+(already exists, based on mx31ads kernel recipe by Liam) and I have added a 
+few custom config files for our needs (for USB networking config and drivers 
+for instance).
 
---------------ms030902040400070506060107
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+I would like to include all these changes to the OE "mainline" and become the 
+maintainer for this arch. How could I do this easily ?
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
-OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
-65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
-X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
-tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
-szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
-nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
-U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
-ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
-HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
-dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
-RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
-rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
-6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
-Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA3MTIyOTAy
-MzU1NVowIwYJKoZIhvcNAQkEMRYEFGTCDMBBPcRxhn3qlXp+J9RBF5QsMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
-qTANBgkqhkiG9w0BAQEFAASCAQBQlVIhV2NUtEp0aI9V4ipbx4qtPM9GtMvU2KEDvqdwd2GjVRvB
-QKEIEQsh2EpI8r3eKe7j75cP45S2DAu9j6op3MzAuX8KtcJwJyH2ldz6QtL57wSLwkujt/pY/aJ4
-mmNR5fJzfMAzxrPtrcvKbyiM7Te8ZFZIDKmqGnqSd+fsDkTzzvElHzZzI1ZtlBGXjyii//Ut116w
-N3Cc4zGPDNy2vuQMdOvr2a+7/Kp3t3PCIdJSFsG2aMKm9D+Sm2MK1vwo32CTNZok0c8B/2ji2C/O
-xTy+cvFGvrsdJvUODCyZEhOXd4tWOa3PCNclmxhVotJDcAfKAlKdQ+4KNuQlIgCyAAAAAAAA
+My second question is more about the chosen distro. I have been using 
+Angstrom, because it is one the most well known disto based on OE and use the 
+minimal images of Angstrom to have a usable but light system. Is this good or 
+is there a distro that is better suited to my needs (for instance I don't 
+need for now avahi or these kind of things) ?
 
---------------ms030902040400070506060107--
+Thank you, best regards and I wish you all the best for 2008 (keep rocking on 
+with OE !)
+
+-- 
+Valentin Longchamp
+PhD Student
+http://people.epfl.ch/valentin.longchamp
+
+
