@@ -1,27 +1,34 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [81.169.178.128] (helo=h6563.serverkompetenz.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1J9kl9-00025F-8f
-	for openembedded-devel@openembedded.org; Tue, 01 Jan 2008 18:18:35 +0100
-Received: from Powerbook-2.local (vpn006027.vpn.utwente.nl [130.89.6.27])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	m01HC9fr027041 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 Jan 2008 18:12:11 +0100
-Message-ID: <477A7469.4060904@student.utwente.nl>
-Date: Tue, 01 Jan 2008 18:12:09 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
+	(envelope-from <oe@hentges.net>) id 1J9mFQ-0004Js-SR
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Jan 2008 19:53:56 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id 0E714308011
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 Jan 2008 19:47:38 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at hentges.net
+Received: from h6563.serverkompetenz.net ([127.0.0.1])
+	by localhost (h6563.serverkompetenz.net [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id izlHGI0jGEKV
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 Jan 2008 19:47:35 +0100 (CET)
+Received: from [192.168.5.10] (xdsl-87-79-213-37.netcologne.de [87.79.213.37])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by h6563.serverkompetenz.net (Postfix) with ESMTP id C2EC8308010
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 Jan 2008 19:47:35 +0100 (CET)
+From: Matthias Hentges <oe@hentges.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <477A7469.4060904@student.utwente.nl>
 References: <E1J9k05-00006v-OV@linuxtogo.org>
-In-Reply-To: <E1J9k05-00006v-OV@linuxtogo.org>
-X-Enigmail-Version: 0.95.5
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] org.oe.dev gpsd: Provide working default configuration and init-script for fic-gta01. This makes gpsd	device-specific for gta01, please check the feeds.
+	<477A7469.4060904@student.utwente.nl>
+Date: Tue, 01 Jan 2008 19:47:34 +0100
+Message-Id: <1199213254.8062.59.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.2 
+Subject: Re: [oe-commits] org.oe.dev gpsd: Provide working default	configuration and init-script for fic-gta01. This makes	gpsd	device-specific for gta01, please check the feeds.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,31 +42,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jan 2008 17:18:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 Jan 2008 18:53:57 -0000
+X-Groupsio-MsgNum: 3776
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-9fr5YQ2+fR3lGpl/m37a"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-9fr5YQ2+fR3lGpl/m37a
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-coredump2 commit schreef:
-> gpsd: Provide working default configuration and init-script for fic-gta01. This makes gpsd device-specific for gta01, please check the feeds.
 
-the (recently renamed) machine_id function exists for a reason. gta0* is
-runtime detectable, so no reason to hardcode it at buildtime. And if
-people insist on buildtime hardcodes, but the stuff in ${PN}-conf or
-something.
+Am Dienstag, den 01.01.2008, 18:12 +0100 schrieb Koen Kooi:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> coredump2 commit schreef:
+> > gpsd: Provide working default configuration and init-script for fic-gta=
+01. This makes gpsd device-specific for gta01, please check the feeds.
+>=20
+> the (recently renamed) machine_id function exists for a reason. gta0* is
+> runtime detectable, so no reason to hardcode it at buildtime.=20
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+Are you seriously suggesting hacking gpsd to runtime-detect the device
+it's running on and auto-configure itself _just_ so you can point to
+machine_id and make life for everyone a bit more difficult?
+
+You can't expect people to hack apps just so the apps fit your holy
+image of a "good" build environment, it is the other way around my
+friend.
+
+> And if
+> people insist on buildtime hardcodes, but the stuff in ${PN}-conf or
+> something.
+
+Please stop your trolling. Paul took the two minutes to think up some
+understandable reasons for the change-request. Your mail, OTOH didn't
+add any value at all to this thread, and is just wasted bandwidth, like
+usual.
+
+If I see any more of this trolling nonsense thrown my way, I will add
+you to my killfile. I don't care what you think, what you say, or what
+you write.
+Very few people these days do take you seriously, that is something to
+think about.
+
+--=20
+Matthias 'CoreDump' Hentges=20
+Cologne / Germany
+
+Webmaster of Hentges.net & Embedded Linux Developer
+GPG ->  gpg --keyserver gpg-keyserver.de --recv-keys 0xAF3030D9
+
+My OS: Debian SID: Geek by Nature, Linux by Choice
+
+
+
+--=-9fr5YQ2+fR3lGpl/m37a
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFHenRpMkyGM64RGpERAjztAJ4nPr9CmM7O3lBj8C/UOmrBDEdv3wCgsx6C
-ViBarcTWDPu136ztHVCr178=
-=m7d8
+iD8DBQBHeorGPXyoPq8wMNkRAuc3AKCd2qmp8Y7uU09XznVE3h9oHAAoDwCfWvaX
+tWnSDOZ9C3tJKmZA6bpzMOQ=
+=D+Rh
 -----END PGP SIGNATURE-----
 
-
+--=-9fr5YQ2+fR3lGpl/m37a--
