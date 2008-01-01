@@ -1,32 +1,28 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1J9UVC-0001ni-Od
-	for openembedded-devel@openembedded.org; Tue, 01 Jan 2008 00:57:02 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lBVNonl3004896
-	for <openembedded-devel@openembedded.org>; Mon, 31 Dec 2007 23:50:49 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 16476-02 for <openembedded-devel@openembedded.org>;
-	Mon, 31 Dec 2007 23:50:45 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id lBVNJ0KI020509
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Mon, 31 Dec 2007 23:19:40 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1653907704.20071231211045@vanille-media.de>
-References: <4774C182.20501@gmail.com>
-	<200712281208.44069.openembedded@haerwu.biz>
-	<1653907704.20071231211045@vanille-media.de>
-Date: Mon, 31 Dec 2007 23:18:59 +0000
-Message-Id: <1199143139.4664.23.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Tosa kernel bloat
+	(envelope-from <xjqian@gmail.com>) id 1J9hNM-0000JE-2G
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Jan 2008 14:41:48 +0100
+Received: by py-out-1112.google.com with SMTP id y77so1079149pyg.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Jan 2008 05:35:30 -0800 (PST)
+Received: by 10.65.224.11 with SMTP id b11mr27048841qbr.93.1199194529924;
+	Tue, 01 Jan 2008 05:35:29 -0800 (PST)
+Received: from ?192.168.1.204? ( [24.107.180.75])
+	by mx.google.com with ESMTPS id 40sm11804873nzf.1.2008.01.01.05.35.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 01 Jan 2008 05:35:28 -0800 (PST)
+Message-ID: <477A417C.2000105@gmail.com>
+Date: Tue, 01 Jan 2008 07:34:52 -0600
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Icedove 1.5.0.14pre (X11/20071020)
+MIME-Version: 1.0
+To: angstrom-distro-devel@linuxtogo.org
+References: <4774C182.20501@gmail.com> <4774C9AA.8050705@student.utwente.nl>
+	<4774F459.5010100@laposte.net>
+In-Reply-To: <4774F459.5010100@laposte.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [Angstrom-devel] Tosa kernel bloat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,54 +36,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Dec 2007 23:57:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 01 Jan 2008 13:41:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2007-12-31 at 21:10 +0100, Michael 'Mickey' Lauer wrote:
-> >> Tosa kernel is bloated with the recent patch and change to
-> >> defconfig-tosa
-> >>
-> >> |`/home/gordon/oe/build/tmp/work/tosa-angstrom-linux-gnueabi/linux-rp-2
-> >> |.6.23-r14/linux-2.6.23' Size is 1296464
-> >> | FATAL: This kernel is too big for your PXA Zaurus and will destroy
-> >>
-> >> data if you flash it. Please reduce the size of the kernel by making
-> >> more of it modular.
-> 
-> > Same on Poodle:
-> > | make[1]: Leaving directory
-> > `/home/hrw/devel/build/angstrom/tmp/work/poodle-angstrom-linux-gnueabi/linux-rp-2.6.23-r14/linux-2.6.23'
-> > | Size is 1306384
-> > | FATAL: This kernel is too big for your PXA Zaurus and will destroy data
-> > if you flash it. Please reduce the size of the kernel by making more of
-> > it modular.
-> 
-> I vaguely remember that the host toolset has an influence on that. Do
-> you remember where the same kernel compiled ok for Richard but other
-> guys got the too-big error? Did we ever found the actual cause of
-> that?
+On 12/28/2007 07:04 AM, cyril Romain wrote:
+> Koen Kooi wrote:
+>> Junqian Gordon Xu schreef:
+>>> Tosa kernel is bloated with the recent patch and change to
+>> defconfig-tosa
+>>
+>> Is that also the case in the angstrom stable branch?
+> Yes.
+> This is the case for linux-rp-2.6.23-r12 (angstrom stable branch) and
+> linux-rp-2.6.23-r14: (angstrom dev branch)
+> The tosa kernel compiled fine with linux-rp-2.6.23-r10 (metadata from
+> december, 8th)
 
-I don't think we did ever get to the bottom of that. It was a 64 bit
-machine compiling for 32 bit that showed the problem.
+Since there is little to trim down for tosa kernel (WM9712 and tosa_ts 
+are possible targets, but need to patch kernel to make those 
+modularizable). The only option for now is to disable KEXEC and ATAGS. 
+Please review the patch for both stable and dev.
 
-I have to admit I haven't tested the size of the kernels, I have that
-check disabled locally as I've been pushing kexec and relying on that. I
-pushed a load of defconfig fixes for poodle and its size should be under
-control now, I'm not sure about tosa.
+Regards
+Gordon
 
-We do have a problem with kernel sizes in recent kernels, one we can't
-really afford to ignore any longer. I made a post to LKML about some
-size tests I made. My conclusion is that the networking stack is the
-point of bloat in the zaurus kernels now and its the area we need to
-address. It seems its impossible to compile half the networking stack as
-a module and I'd like to see that changed. Any ideas or help here
-welcome!
-
-Cheers,
-
-Richard
-
-
+# old_revision [93692aaac63b82b355275bee987480a1232079a1]
+#
+# patch "packages/linux/linux-rp-2.6.23/defconfig-tosa"
+#  from [1980d93e930a1fd5959d13384211a7f445751136]
+#    to [f7677a83e981b7570f63b19ba6fde79500d32e64]
+#
+============================================================
+--- packages/linux/linux-rp-2.6.23/defconfig-tosa 
+1980d93e930a1fd5959d13384211a7f445751136
++++ packages/linux/linux-rp-2.6.23/defconfig-tosa 
+f7677a83e981b7570f63b19ba6fde79500d32e64
+@@ -142,8 +142,8 @@ CONFIG_XSCALE_PMU=y
+  #
+  CONFIG_ARM_THUMB=y
+  CONFIG_XSCALE_PMU=y
+-CONFIG_KEXEC=y
+-CONFIG_ATAGS_PROC=y
++# CONFIG_KEXEC is not set
++# CONFIG_ATAGS_PROC is not set
+  CONFIG_SHARP_PARAM=y
+  CONFIG_SHARPSL_PM=y
+  CONFIG_SHARP_SCOOP=y
 
 
