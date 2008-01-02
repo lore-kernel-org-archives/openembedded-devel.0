@@ -1,24 +1,23 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1JA3Mq-0004Zs-8v
+Received: from [216.145.245.199] (helo=mx03.dls.net)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <mwester@dls.net>) id 1JA5TJ-0004Wo-4U
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jan 2008 14:10:46 +0100
-Received: (qmail invoked by alias); 02 Jan 2008 13:04:16 -0000
-Received: from e178116039.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.116.39]
-	by mail.gmx.net (mp005) with SMTP; 02 Jan 2008 14:04:16 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+aDEVx78GaMKoltueqjpGQolvEnQr6PQWW83xzIj
-	ECk+JtGV3V5PTX
-Message-ID: <477B8BCC.5080300@gmx.net>
-Date: Wed, 02 Jan 2008 14:04:12 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
+	Wed, 02 Jan 2008 16:25:33 +0100
+Received: from gw.mwester.net ([209.242.5.110] helo=twilight)
+	by mx03.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1JA5N6-0007hT-MF
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jan 2008 09:19:08 -0600
+Message-ID: <0cdd01c84d52$b60de4c0$6e01a8c0@twilight>
+From: "Mike \(mwester\)" <mwester@dls.net>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 2 Jan 2008 09:18:21 -0600
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: custom debian package names and fully customized package names
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1914
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1914
+Subject: "as" has gone missing.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,51 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jan 2008 13:10:52 -0000
-X-Groupsio-MsgNum: 3782
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigF5D07BB9BBB1BFFAA179AA86"
+X-List-Received-Date: Wed, 02 Jan 2008 15:25:33 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
---------------enigF5D07BB9BBB1BFFAA179AA86
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Alas!  Sometime in the past - nobody here knows exactly when - "as" (the
+assembler) has gone missing from the packages.  The "gcc" bitbake recipe
+provides all manner of other packages, all of which can be installed, and
+seem to provide the necessary compilation tools to build stuff on the target
+device.  Except that the toolchain can't find "as" -- and as I peruse the
+recipes, neither can I!
 
-Hi,
-I have found a simple solution for allowing one to customize the Debian
-package names:
+The assembler is built and placed on the buildhost (in the cross directory,
+as one would expect), so clearly it's handled by something - just not the
+"gcc" bb recipe.  The "gcc" recipe does not seem to build "as", and
+certainly doesn't have any support for packaging it.
 
-http://bugs.openembedded.org/show_bug.cgi?id=3D3383
+I am need of a clue, if anyone can offer some direction.  Might this be as
+simple as a configuration option missing when gcc is built (and "as" should
+be part of the "gcc" package), or is this a case where I'll have to add
+support for a separate "as" package to the recipe?
 
-Please have a look at it and tell me whether you want it like this.
-
-This patch is primarily meant to make custom python code to fix wrong
-guessing of the Debian renamer unnecessary.
-
-I have another patch that allows fully customized package names. This
-efforts may be useless from a distro building POV but is IMHO vital for
-all those who want to use OE to build packages for a non-OE distro.
-
-http://bugs.openembedded.org/show_bug.cgi?id=3D3590
-
-Comments on both enhancements are welcomed!
-
-Regards
-Robert
+Thanks,
+Mike (~mwester)
 
 
---------------enigF5D07BB9BBB1BFFAA179AA86
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHe4vPG9cfwmwwEtoRCEaGAJ42PXL3/BcQOwZToZbx7/iT7YZNhgCbBeQo
-z/3hmwQ2GOrl3hTf+t7ka9M=
-=Gc8e
------END PGP SIGNATURE-----
-
---------------enigF5D07BB9BBB1BFFAA179AA86--
