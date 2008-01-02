@@ -1,31 +1,24 @@
-Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1J9o5k-00070u-Pm
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1JA3Mq-0004Zs-8v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jan 2008 21:52:04 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so2642395fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Jan 2008 12:45:45 -0800 (PST)
-Received: by 10.86.89.4 with SMTP id m4mr13714984fgb.45.1199220345769;
-	Tue, 01 Jan 2008 12:45:45 -0800 (PST)
-Received: from widy.lan ( [194.79.8.36])
-	by mx.google.com with ESMTPS id 31sm19173071fkt.14.2008.01.01.12.45.43
-	(version=SSLv3 cipher=OTHER); Tue, 01 Jan 2008 12:45:43 -0800 (PST)
-Date: Tue, 1 Jan 2008 22:48:03 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <911770997.20080101224803@gmail.com>
-To: Matthias Hentges <oe@hentges.net>
-In-Reply-To: <1199218165.8062.77.camel@localhost.localdomain>
-References: <E1J9k05-00006v-OV@linuxtogo.org>
-	<1067194706.20080101190354@gmail.com>
-	<1199213397.8062.62.camel@localhost.localdomain>
-	<202073967.20080101214225@gmail.com>
-	<1199218165.8062.77.camel@localhost.localdomain>
+	Wed, 02 Jan 2008 14:10:46 +0100
+Received: (qmail invoked by alias); 02 Jan 2008 13:04:16 -0000
+Received: from e178116039.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.116.39]
+	by mail.gmx.net (mp005) with SMTP; 02 Jan 2008 14:04:16 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+aDEVx78GaMKoltueqjpGQolvEnQr6PQWW83xzIj
+	ECk+JtGV3V5PTX
+Message-ID: <477B8BCC.5080300@gmx.net>
+Date: Wed, 02 Jan 2008 14:04:12 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.6 (X11/20071009)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev gpsd: Provide working default configuration and init-script for fic-gta01. This makes gpsd device-specific for gta01, please check the feeds.
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: custom debian package names and fully customized package names
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,88 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jan 2008 20:52:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 02 Jan 2008 13:10:52 -0000
+X-Groupsio-MsgNum: 3782
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigF5D07BB9BBB1BFFAA179AA86"
 
-Hello Matthias,
+--------------enigF5D07BB9BBB1BFFAA179AA86
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Tuesday, January 1, 2008, 10:09:25 PM, you wrote:
+Hi,
+I have found a simple solution for allowing one to customize the Debian
+package names:
 
-[]
+http://bugs.openembedded.org/show_bug.cgi?id=3D3383
 
->>   The issue here that /etc/init.d/gpsd tries to init both gpsd and
->> gps hardware. Why not separate them. Say, have /etc/init.d/gllin with
->> that snippet. 
+Please have a look at it and tell me whether you want it like this.
 
-> Difficult. /e/i/gllin should, if at all, be provided by the gllin
-> package. It is a hand-crafted ipkg containing a binary-only driver. It
-> will be an interesting task to find someone at OM willing to change it.
-> Maybe if I annoy mickey enough... ;)
+This patch is primarily meant to make custom python code to fix wrong
+guessing of the Debian renamer unnecessary.
 
-  Well, I don't call to create a real package for gllin, it would
-still contain just that notice - "go url, clickthru, download". Well,
-that clickthru license and download could be moved into such package,
-but that still rather be done by core OM people, keeping a connection
-with FIC's legal dept ;-).
+I have another patch that allows fully customized package names. This
+efforts may be useless from a distro building POV but is IMHO vital for
+all those who want to use OE to build packages for a non-OE distro.
 
->> But wait, there're different GPS hardware exists, why
->> don't we make it polymorphic? So, we'd have /etc/init.d/gps-hardware,
->> and that's for should would be device-specific. Then, /etc/init.d/gpsd
->> could do sth like:
->> 
->> [ -x /etc/init.d/gps-hardware ] && /etc/init.d/gps-hardware start
->> 
->> to make sure that it ups entire GPS system.
->> 
->>   How does that sound?
+http://bugs.openembedded.org/show_bug.cgi?id=3D3590
 
-> That sounds like a very good idea, I like the generic approach better
-> than a hard-coded init-script. I will try to get the gllin ipk changed,
-> but that may take a few days.
+Comments on both enhancements are welcomed!
 
-  Great! I think, we should do similar for BT. Note that there's
-currently no flexible way to deal with BT *hardware* in OE. blue-probe
-just records static external properties of BT hardware. But how that
-HW is inited? The current way us to have BT drivers kernel-builtin, or
-auto-loaded per machine config. That has its issues - memory is taken
-regardless if BT is actually used, plus for some devices that may
-course BT HW to be always active, draining power.
-
-> What do you think about installing /etc/default/gpsd via
-> update-alternatives so a driver could install proper defaults w/o
-> resorting to a -conf at all?
-
-> Not that many drivers are going to do this. Neo1973 is probably a very
-> special case in this regard.
-
-  Well, there're other devices with GPS builtin (few HTC phones),
-that's why I raised the question. Plus, we could have gpsd-conf-usb
-and gpsd-conf-bt. Taking the above, update-alternatives management
-would be quite helpful. But how they are structured package wise is up to
-different alternatives, e.g.:
-
-1. One big package with few conf's inside, managed by update-alt.
-2. pkg and pkf-conf, with the latter containing confs, managed by
-update-alt.
-3. Bunch of conf packages, managed by update-alt.
-
-   I'd err on fine-grained packaging, but I understand that it makes
-no sense to put every 20-byte file into own package. I'd still prefer
-2, as with it, updating configs does *not* require: 1) devels to
-rebuild whole source; 2) release managers to upload more bytes to
-feeds; 3) users download those bytes, times many.
-
-  Anyway, I don't have strong opinion here. All 3 choices are valid, as
-called by specific case. As long as we agree on the general plan to
-deal with this, it can be changed to another method if practical need
-arises.
+Regards
+Robert
 
 
+--------------enigF5D07BB9BBB1BFFAA179AA86
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iD8DBQFHe4vPG9cfwmwwEtoRCEaGAJ42PXL3/BcQOwZToZbx7/iT7YZNhgCbBeQo
+z/3hmwQ2GOrl3hTf+t7ka9M=
+=Gc8e
+-----END PGP SIGNATURE-----
 
-
+--------------enigF5D07BB9BBB1BFFAA179AA86--
