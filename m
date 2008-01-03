@@ -1,46 +1,27 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <stefano.regno@spesonline.com>) id 1JAMEN-0006Nb-MW
+	(envelope-from <pmiscml@gmail.com>) id 1JANi5-0002Zq-5a
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jan 2008 10:19:15 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 33AD195C2E
+	Thu, 03 Jan 2008 11:54:01 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so3038763fge.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jan 2008 10:12:47 +0100 (CET)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 03321-01-4 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 3 Jan 2008 10:12:47 +0100 (CET)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 1267A95C24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jan 2008 10:12:47 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 036F61D9451
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jan 2008 10:12:47 +0100 (CET)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 29727-01-9 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 3 Jan 2008 10:12:46 +0100 (CET)
-Received: from [192.168.1.163]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id B2BF21D944E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jan 2008 10:12:46 +0100 (CET)
-Message-ID: <477CA6D3.1080402@spesonline.com>
-Date: Thu, 03 Jan 2008 10:11:47 +0100
-From: ohviey1 <stefano.regno@spesonline.com>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+	Thu, 03 Jan 2008 02:47:32 -0800 (PST)
+Received: by 10.86.95.20 with SMTP id s20mr15476603fgb.63.1199357252606;
+	Thu, 03 Jan 2008 02:47:32 -0800 (PST)
+Received: from paul.bn.lan ( [194.79.8.34])
+	by mx.google.com with ESMTPS id v23sm21592206fkd.1.2008.01.03.02.47.31
+	(version=SSLv3 cipher=OTHER); Thu, 03 Jan 2008 02:47:31 -0800 (PST)
+Date: Thu, 3 Jan 2008 12:52:13 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <751916312.20080103125213@gmail.com>
+To: Robert Schuster <theBohemian@gmx.net>
+In-Reply-To: <477B8BCC.5080300@gmx.net>
+References: <477B8BCC.5080300@gmx.net>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <0cdd01c84d52$b60de4c0$6e01a8c0@twilight><74d0deb30801020752p51c90f7fuff6d080fcf397e2f@mail.gmail.com>
-	<0ced01c84d5a$37ce9520$6e01a8c0@twilight>
-In-Reply-To: <0ced01c84d5a$37ce9520$6e01a8c0@twilight>
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-Subject: problem with nfs-kernel-server
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: custom debian package names and fully customized package names
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -54,32 +35,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jan 2008 09:19:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 03 Jan 2008 10:54:01 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi all.
-I have a problem about server ethern on Arm MX21.
-I try to mount file system with nfs and i ghave same error:
-nfs: server 10.193.101.100 not responding, still 
-trying                        
-nfs: server 10.193.101.100 not responding, still 
-trying                        
-nfs: server 10.193.101.100 not responding, still 
-trying                        
-nfs: server 10.193.101.100 not responding, still 
-trying                        
-nfs: server 10.193.101.100 not responding, still 
-trying                        
-nfs: server 10.193.101.100 
-OK                                                  
-nfs: server 10.193.101.100 
-OK                                                  
-nfs: server 10.193.101.100 OK                             
+Hello Robert,
 
-I have a Gigabyte ethernet.
-Anyone know why.
+Wednesday, January 2, 2008, 3:04:12 PM, you wrote:
 
-Thanks a lot.
+> Hi,
+> I have found a simple solution for allowing one to customize the Debian
+> package names:
+
+> http://bugs.openembedded.org/show_bug.cgi?id=3383
+
+> Please have a look at it and tell me whether you want it like this.
+
+> This patch is primarily meant to make custom python code to fix wrong
+> guessing of the Debian renamer unnecessary.
+
+> I have another patch that allows fully customized package names. This
+> efforts may be useless from a distro building POV but is IMHO vital for
+> all those who want to use OE to build packages for a non-OE distro.
+
+> http://bugs.openembedded.org/show_bug.cgi?id=3590
+
+> Comments on both enhancements are welcomed!
+
+  Ideas look good for me. Wouldn't solution from #3590 supercede one
+from #3383? (If the tasks were given appropriate order.)
+
+> Regards
+> Robert
+
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
 
 
