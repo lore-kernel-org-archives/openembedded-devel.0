@@ -1,27 +1,23 @@
-Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
+Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JANi5-0002Zq-5a
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jan 2008 11:54:01 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so3038763fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Jan 2008 02:47:32 -0800 (PST)
-Received: by 10.86.95.20 with SMTP id s20mr15476603fgb.63.1199357252606;
-	Thu, 03 Jan 2008 02:47:32 -0800 (PST)
+	(envelope-from <pmiscml@gmail.com>) id 1JAcjO-0001NE-Lm
+	for openembedded-devel@openembedded.org; Fri, 04 Jan 2008 03:56:22 +0100
+Received: by fg-out-1718.google.com with SMTP id e12so3134828fga.0
+	for <openembedded-devel@openembedded.org>;
+	Thu, 03 Jan 2008 18:49:50 -0800 (PST)
+Received: by 10.86.74.15 with SMTP id w15mr15263232fga.43.1199409186324;
+	Thu, 03 Jan 2008 17:13:06 -0800 (PST)
 Received: from paul.bn.lan ( [194.79.8.34])
-	by mx.google.com with ESMTPS id v23sm21592206fkd.1.2008.01.03.02.47.31
-	(version=SSLv3 cipher=OTHER); Thu, 03 Jan 2008 02:47:31 -0800 (PST)
-Date: Thu, 3 Jan 2008 12:52:13 +0200
+	by mx.google.com with ESMTPS id d13sm22814727fka.16.2008.01.03.17.13.05
+	(version=SSLv3 cipher=OTHER); Thu, 03 Jan 2008 17:13:05 -0800 (PST)
+Date: Fri, 4 Jan 2008 03:17:51 +0200
 From: Paul Sokolovsky <pmiscml@gmail.com>
 X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
 X-Priority: 3 (Normal)
-Message-ID: <751916312.20080103125213@gmail.com>
-To: Robert Schuster <theBohemian@gmx.net>
-In-Reply-To: <477B8BCC.5080300@gmx.net>
-References: <477B8BCC.5080300@gmx.net>
+Message-ID: <1068494393.20080104031751@gmail.com>
+To: openembedded-devel@openembedded.org
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: custom debian package names and fully customized package names
+Subject: Another weird case of PACKAGES_DYNAMIC and task deps, it seems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,45 +31,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jan 2008 10:54:01 -0000
+X-List-Received-Date: Fri, 04 Jan 2008 02:56:23 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hello Robert,
+Hello openembedded-devel,
 
-Wednesday, January 2, 2008, 3:04:12 PM, you wrote:
+  Situation (as reported by Thomas Kunze on IRC):
+1. Build from scratch
+2. Kernel has been built.
+3. Bitbake of initramfs-image.
+4. Failure with:
 
-> Hi,
-> I have found a simple solution for allowing one to customize the Debian
-> package names:
+| ERROR: Cannot satisfy the following dependencies for initramfs-module-loop:
+|        update-modules update-modules update-modules
+| ERROR: Cannot satisfy the following dependencies for initramfs-module-nfs:
+|        update-modules
 
-> http://bugs.openembedded.org/show_bug.cgi?id=3383
+initramfs-module-* doesn't Depends: on update-modules directly, but
+they Suggest: some kernel-module-* which in turn Depends: on
+update-modules.
 
-> Please have a look at it and tell me whether you want it like this.
+5. Manual explicit build of update-modules clears those errors.
 
-> This patch is primarily meant to make custom python code to fix wrong
-> guessing of the Debian renamer unnecessary.
+   My analysis:
 
-> I have another patch that allows fully customized package names. This
-> efforts may be useless from a distro building POV but is IMHO vital for
-> all those who want to use OE to build packages for a non-OE distro.
+kernel.bbclass has:
 
-> http://bugs.openembedded.org/show_bug.cgi?id=3590
+DEPENDS += "virtual/${TARGET_PREFIX}depmod-${@get_kernelmajorversion('${PV}')} virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules"
 
-> Comments on both enhancements are welcomed!
+But as we now know, that doesn't mean there will be package written
+for update-modules, only that it will be "built".
 
-  Ideas look good for me. Wouldn't solution from #3590 supercede one
-from #3383? (If the tasks were given appropriate order.)
+Then, do_spli_package() kinda should set RDEPENDS for each module, but
+I remember we already discussed issue that this doesn't really work
+for PACKAGES_DYNAMIC ;-(.
 
-> Regards
-> Robert
+So, any ideas how to at least work this around? I recently hit similar
+issue when package_ipk.bbclass tried to execute ipkg-build before it
+was staged, and that was fixed in natural way:
+
+do_package_write_ipk[depends] = "ipkg-utils-native:do_populate_staging"
+
+Maybe we could use that as a workaround for kernel.bbclass, so we
+don't go packing modules, until update-modules' package is written.
+The issue, kernel.bbclass doesn't even define proper task for that,
+only a prepender, so I have no idea what to put dependency on.
 
 
+     Richard, any comments?
 
 
 -- 
 Best regards,
- Paul                            mailto:pmiscml@gmail.com
+ Paul                          mailto:pmiscml@gmail.com
 
 
 
