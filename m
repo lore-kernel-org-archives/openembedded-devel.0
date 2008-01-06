@@ -1,25 +1,30 @@
-Received: from [209.85.128.185] (helo=fk-out-0910.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JBY9C-00061i-L0
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jan 2008 17:14:50 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so9738851fks.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jan 2008 08:08:02 -0800 (PST)
-Received: by 10.82.150.20 with SMTP id x20mr33474853bud.5.1199632442120;
-	Sun, 06 Jan 2008 07:14:02 -0800 (PST)
-Received: from paul.bn.lan ( [194.79.8.34])
-	by mx.google.com with ESMTPS id p38sm26741187fke.13.2008.01.06.07.14.00
-	(version=SSLv3 cipher=OTHER); Sun, 06 Jan 2008 07:14:01 -0800 (PST)
-Date: Sun, 6 Jan 2008 17:18:41 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <702840400.20080106171841@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Enabling gtk-touchscreen-mode for gtk+
+	(envelope-from <rpurdie@rpsys.net>) id 1JBZ5X-0002x0-Ko
+	for openembedded-devel@openembedded.org; Sun, 06 Jan 2008 18:15:08 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m06H8GIn005279
+	for <openembedded-devel@openembedded.org>; Sun, 6 Jan 2008 17:08:16 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04967-09 for <openembedded-devel@openembedded.org>;
+	Sun,  6 Jan 2008 17:08:12 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m06H88cw005271
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Sun, 6 Jan 2008 17:08:09 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <477FB6E5.9030507@opensimpad.org>
+References: <477FB6E5.9030507@opensimpad.org>
+Date: Sun, 06 Jan 2008 17:08:08 +0000
+Message-Id: <1199639288.4658.18.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: What is a good way to get comments on patches for bug	tracker bugs?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,35 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2008 16:14:53 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 06 Jan 2008 17:15:10 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello openembedded-devel,
+On Sat, 2008-01-05 at 17:57 +0100, Bernhard Guillon wrote:
+> I'd like to know what could be a good way to get comments on patches 
+> which have been attached to bugtracker bugs.
+> Is there some special marking to set or should someone ask on the 
+> mailing list/IRC about a comment?
 
-  It seems that few of usability issues we experience with gtk+ are
-due to the fact that we don't have configured it well enough. For
-example, in 2.10, Maemo people contributed gtk-touchscreen-mode
-setting which makes pointing device handling behavior more adapted for
-touchscreens. I'd like enable it now, apparently by starting to ship
-/etc/gtk-2.0/gtkrc having that option, in gtk+ package.
+The best thing to do would be to mention the bug numbers here and/or on
+irc and hopefully someone will have a look. At the very least I'll try
+and tell you who might be the person(s) who needs to review them if I
+know which bugs they are...
 
-  If someone has immediate better idea where it should be set/shipped
-from the start, please speak. Otherwise, we'll need to elaborate
-stylus vs mouse handling anyway later.
+Cheers,
 
-  If you want specific example of broken behavior, it's
-menus/dropdowns with many choices, not fitting the box - when you
-tap arrow to scroll it, it starts to scroll continuously and fast in
-your face, disallowing to do needed selection realistically.
-gtk-touchscreen-mode = 1 fixes that (tap causes one-line scroll).
-One place this can be reproduced is openmoko-appmanager (sic), with
-SECTION dropdown. (I wonder if OM has gtk-touchscreen-mode set
-somewhere btw).
+Richard
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
 
