@@ -1,30 +1,30 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JBZ5X-0002x0-Ko
-	for openembedded-devel@openembedded.org; Sun, 06 Jan 2008 18:15:08 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1JBZBt-00035C-NR
+	for openembedded-devel@openembedded.org; Sun, 06 Jan 2008 18:21:44 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m06H8GIn005279
-	for <openembedded-devel@openembedded.org>; Sun, 6 Jan 2008 17:08:16 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m06HEpv8005714;
+	Sun, 6 Jan 2008 17:14:51 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 04967-09 for <openembedded-devel@openembedded.org>;
-	Sun,  6 Jan 2008 17:08:12 +0000 (GMT)
+	id 05650-01; Sun,  6 Jan 2008 17:14:47 +0000 (GMT)
 Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m06H88cw005271
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 6 Jan 2008 17:08:09 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m06HEia3005707
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Sun, 6 Jan 2008 17:14:44 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <477FB6E5.9030507@opensimpad.org>
-References: <477FB6E5.9030507@opensimpad.org>
-Date: Sun, 06 Jan 2008 17:08:08 +0000
-Message-Id: <1199639288.4658.18.camel@localhost.localdomain>
+In-Reply-To: <751916312.20080103125213@gmail.com>
+References: <477B8BCC.5080300@gmx.net>  <751916312.20080103125213@gmail.com>
+Date: Sun, 06 Jan 2008 17:14:44 +0000
+Message-Id: <1199639684.4658.22.camel@localhost.localdomain>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.10.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: What is a good way to get comments on patches for bug	tracker bugs?
+Cc: Robert Schuster <theBohemian@gmx.net>
+Subject: Re: custom debian package names and fully customized package	names
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,25 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2008 17:15:10 -0000
+X-List-Received-Date: Sun, 06 Jan 2008 17:21:51 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2008-01-05 at 17:57 +0100, Bernhard Guillon wrote:
-> I'd like to know what could be a good way to get comments on patches 
-> which have been attached to bugtracker bugs.
-> Is there some special marking to set or should someone ask on the 
-> mailing list/IRC about a comment?
+On Thu, 2008-01-03 at 12:52 +0200, Paul Sokolovsky wrote:
+> Wednesday, January 2, 2008, 3:04:12 PM, you wrote:
+> > I have found a simple solution for allowing one to customize the Debian
+> > package names:
+> 
+> > http://bugs.openembedded.org/show_bug.cgi?id=3383
+> 
+> > Please have a look at it and tell me whether you want it like this.
+> 
+> > This patch is primarily meant to make custom python code to fix wrong
+> > guessing of the Debian renamer unnecessary.
 
-The best thing to do would be to mention the bug numbers here and/or on
-irc and hopefully someone will have a look. At the very least I'll try
-and tell you who might be the person(s) who needs to review them if I
-know which bugs they are...
+Something like the above is ok with me.
+
+> > I have another patch that allows fully customized package names. This
+> > efforts may be useless from a distro building POV but is IMHO vital for
+> > all those who want to use OE to build packages for a non-OE distro.
+> 
+> > http://bugs.openembedded.org/show_bug.cgi?id=3590
+> 
+> > Comments on both enhancements are welcomed!
+> 
+>   Ideas look good for me. Wouldn't solution from #3590 supercede one
+> from #3383? (If the tasks were given appropriate order.)
+
+I don't think this is needed, you can do this with overrides already.
+I've commented on the bug accordingly.
 
 Cheers,
 
 Richard
-
 
 
 
