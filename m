@@ -1,33 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JBxwj-0003uF-UT
-	for openembedded-devel@openembedded.org; Mon, 07 Jan 2008 20:47:41 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JBxpx-0004kv-PB
-	for openembedded-devel@openembedded.org; Mon, 07 Jan 2008 19:40:41 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 07 Jan 2008 19:40:41 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 07 Jan 2008 19:40:41 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 07 Jan 2008 20:40:34 +0100
-Message-ID: <fltv7g$h15$1@ger.gmane.org>
-References: <477FB6E5.9030507@opensimpad.org>	<1199639288.4658.18.camel@localhost.localdomain>
-	<47814891.9070105@opensimpad.org>
+	(envelope-from <rpurdie@rpsys.net>) id 1JBywY-0000xV-B1
+	for openembedded-devel@openembedded.org; Mon, 07 Jan 2008 21:51:34 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m07KiX2N021501;
+	Mon, 7 Jan 2008 20:44:33 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 21194-08; Mon,  7 Jan 2008 20:44:29 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m07KiQRx021486
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Mon, 7 Jan 2008 20:44:26 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Paul Sokolovsky <pmiscml@gmail.com>
+In-Reply-To: <116173998.20080107221856@gmail.com>
+References: <1068494393.20080104031751@gmail.com>
+	<1199663243.4658.71.camel@localhost.localdomain>
+	<116173998.20080107221856@gmail.com>
+Date: Mon, 07 Jan 2008 20:44:24 +0000
+Message-Id: <1199738665.4680.66.camel@localhost.localdomain>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <47814891.9070105@opensimpad.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: What is a good way to get comments on patches for bug tracker bugs?
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Another weird case of PACKAGES_DYNAMIC and task deps, it seems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,15 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2008 19:47:42 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Mon, 07 Jan 2008 20:51:34 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Bernhard Guillon schrieb:
-> Ok, here are the numbers 3522 , 3594 and 3572 . 
+On Mon, 2008-01-07 at 22:18 +0200, Paul Sokolovsky wrote:
+> Monday, January 7, 2008, 1:47:23 AM, you wrote:
+> > So the question is why doesn't your test case have this (I'm assuming it
+> > doesn't). My best guess is that the kernel .bb file in question alters
+> > DEPENDS and that update-modules isn't really in DEPENDS. Which
+> > kernel .bb file serves the machine in question?
+> 
+>   Gotcha! I tried
+> 
+>  MACHINE=h4000 bitbake initramfs-image -g
+> 
+> and it gives the same matches as you quote below. But
+> 
+>  MACHINE=collie bitbake initramfs-image -g
+> 
+> Gives zero matches for update-modules. I don't try to investigate
+> further now, as you probably know better about it ;-).
 
-They are really dupes.  I marked them as such, leaving 3522 open as the
-master bug.
+My money is on:
+
+DEPENDS_collie += "bc-native"
+
+in linux-rp.inc. Try removing that...
+
+Cheers,
+
+Richard
+
 
 
 
