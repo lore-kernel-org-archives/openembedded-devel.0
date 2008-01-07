@@ -1,30 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JBfJu-0005ng-DH
-	for openembedded-devel@openembedded.org; Mon, 07 Jan 2008 00:54:22 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m06NlWbx026095;
-	Sun, 6 Jan 2008 23:47:32 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 25617-08; Sun,  6 Jan 2008 23:47:26 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m06NlOaA026083
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Sun, 6 Jan 2008 23:47:24 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Paul Sokolovsky <pmiscml@gmail.com>
-In-Reply-To: <1068494393.20080104031751@gmail.com>
-References: <1068494393.20080104031751@gmail.com>
-Date: Sun, 06 Jan 2008 23:47:23 +0000
-Message-Id: <1199663243.4658.71.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Another weird case of PACKAGES_DYNAMIC and task deps, it seems
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JBvIr-0005H1-MB
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Jan 2008 17:58:21 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.163])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JBvav-0006du-1C
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Jan 2008 18:17:01 +0100
+Message-ID: <47825896.7030301@kernelconcepts.de>
+Date: Mon, 07 Jan 2008 17:51:34 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1824361960.20080106235611@gmail.com>
+In-Reply-To: <1824361960.20080106235611@gmail.com>
+X-Enigmail-Version: 0.95.0
+Subject: Re: [RFC] Smallscreen mod for GtkFileChooser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,73 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2008 23:54:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 07 Jan 2008 16:58:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi Paul,
+Hi,
 
-On Fri, 2008-01-04 at 03:17 +0200, Paul Sokolovsky wrote:
-> Hello openembedded-devel,
+Paul Sokolovsky schrieb:
+>   I've prepared a patch to make GtkFileChooser, a
+> contemporary gtk's file open/save widget, to suite small, PDA-like
+> screens (including QVGA) better.
+
+>   The patch is available at
+> http://bugs.openembedded.org/show_bug.cgi?id=3634 , with extensive
+> description at
+> http://pfalcon-oe.blogspot.com/2008/01/smallscreen-mod-for-gtkfilechooser.html
+
+Looks pretty good. I like the patch because it is not that intrusive.
+If you could make all changes depend on the screen size it would be worth trying
+to get it upstream. This might save us a lot of work in future.
+
+> . I'm glad I've written it in high detail, because Koen quickly
+> pointed me to similar patches in Poky:
 > 
->   Situation (as reported by Thomas Kunze on IRC):
-> 1. Build from scratch
-> 2. Kernel has been built.
-> 3. Bitbake of initramfs-image.
-> 4. Failure with:
+> http://svn.o-hand.com/view/poky?rev=3408&view=rev
+> http://svn.o-hand.com/view/poky?rev=2596&view=rev
 > 
-> | ERROR: Cannot satisfy the following dependencies for initramfs-module-loop:
-> |        update-modules update-modules update-modules
-> | ERROR: Cannot satisfy the following dependencies for initramfs-module-nfs:
-> |        update-modules
-> 
-> initramfs-module-* doesn't Depends: on update-modules directly, but
-> they Suggest: some kernel-module-* which in turn Depends: on
-> update-modules.
+>   I didn't try them, but they appear to make more invasive changes to
+> gtk+, though apparently add more features (for good, bad, or for
+> vendor's requirements).
 
-Hmm. Which kernel is this with?
+Do we have a screenshot around to see how it looks? :)
 
+Greetings
 
-> kernel.bbclass has:
-> 
-> DEPENDS += "virtual/${TARGET_PREFIX}depmod-${@get_kernelmajorversion('${PV}')} virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules"
-> 
-> But as we now know, that doesn't mean there will be package written
-> for update-modules, only that it will be "built".
+Florian
 
-Nearly but not quite. rootfs_ipk.bbclass says:
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
-do_rootfs[recrdeptask] += "do_package_write_ipk"
-
-This means that every RDEPENDS, RRECOMMENDS and DEPENDS is followed and
-the package_write_ipk for every package found must have run.
-
-I just did a:
-
-"bitbake poky-image-minimal -g; cat task-depends.dot | grep update-modules"
-
-which gave me this list:
-
-"poky-image-minimal.do_rootfs" -> "update-modules.do_populate_staging"
-"poky-image-minimal.do_rootfs" -> "update-modules.do_package_write_ipk"
-"linux.do_package" -> "update-modules.do_package"
-"linux.do_configure" -> "update-modules.do_populate_staging"
-
-and a load of other dependencies which we aren't interested in. The key
-line is:
-
-"poky-image-minimal.do_rootfs" -> "update-modules.do_package_write_ipk"
-
-So the question is why doesn't your test case have this (I'm assuming it
-doesn't). My best guess is that the kernel .bb file in question alters
-DEPENDS and that update-modules isn't really in DEPENDS. Which
-kernel .bb file serves the machine in question?
-
-Cheers,
-
-Richard
-
-
-
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
