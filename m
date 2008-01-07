@@ -1,32 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JBzve-0006Ed-VO
-	for openembedded-devel@openembedded.org; Mon, 07 Jan 2008 22:54:43 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m07Lllhh025578;
-	Mon, 7 Jan 2008 21:47:47 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 25345-06; Mon,  7 Jan 2008 21:47:43 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m07Lle6B025570
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Mon, 7 Jan 2008 21:47:40 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1199738665.4680.66.camel@localhost.localdomain>
+	(envelope-from <mickey@vanille-media.de>) id 1JC1F4-0003U4-I3
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Jan 2008 00:18:50 +0100
+Received: from PROMETHEUS (e180179042.adsl.alicedsl.de [85.180.179.42])
+	by drlauer-research.com (Postfix) with ESMTP id 35D09584BB6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  7 Jan 2008 23:54:28 +0100 (CET)
+Date: Mon, 7 Jan 2008 23:52:36 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <582475286.20080107235236@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1199742459.4680.69.camel@localhost.localdomain>
 References: <1068494393.20080104031751@gmail.com>
 	<1199663243.4658.71.camel@localhost.localdomain>
 	<116173998.20080107221856@gmail.com>
 	<1199738665.4680.66.camel@localhost.localdomain>
-Date: Mon, 07 Jan 2008 21:47:39 +0000
-Message-Id: <1199742459.4680.69.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Another weird case of PACKAGES_DYNAMIC and task deps, it	seems
+	<1199742459.4680.69.camel@localhost.localdomain>
+MIME-Version: 1.0
+Subject: Metadata Q/A (was: Another weird case of PACKAGES_DYNAMIC and task deps, it seems)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,29 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2008 21:54:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 07 Jan 2008 23:18:50 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2008-01-07 at 20:44 +0000, Richard Purdie wrote:
-> My money is on:
-> 
-> DEPENDS_collie += "bc-native"
-> 
-> in linux-rp.inc. Try removing that...
+Richard Purdie wrote:
+> On Mon, 2008-01-07 at 20:44 +0000, Richard Purdie wrote:
+>> My money is on:
+>> 
+>> DEPENDS_collie += "bc-native"
+>> 
+>> in linux-rp.inc. Try removing that...
 
-Confirmed and fixed in 00610b176af0e4f4563f78fb71dc1219c777d13e.
+> Confirmed and fixed in 00610b176af0e4f4563f78fb71dc1219c777d13e.
 
-Let me stress once again, += and overrides do not do what you expect. It
-adds "bc_native" to the variable named "DEPENDS_collie", not "DEPENDS".
+> Let me stress once again, += and overrides do not do what you expect. It
+> adds "bc_native" to the variable named "DEPENDS_collie", not "DEPENDS".
 
-DEPENDS_append_collie = " bc-native" 
+> DEPENDS_append_collie = " bc-native" 
 
-is a very different thing and corrects this problem...
+> is a very different thing and corrects this problem...
 
-Cheers,
+Can we
 
-Richard
+a) forbid variable assignment to foo_bar in general (when bar is not
+in {append, prepend, <override>} ?
+
+b) have an extra Q/A class that scans the metadata for those kinds of
+problems?
+
+Regards,
+
+:M:
+
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
