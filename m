@@ -1,27 +1,20 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.132.249] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JC1F4-0003U4-I3
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JC1se-0008SH-S5
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jan 2008 00:18:50 +0100
-Received: from PROMETHEUS (e180179042.adsl.alicedsl.de [85.180.179.42])
-	by drlauer-research.com (Postfix) with ESMTP id 35D09584BB6
+	Tue, 08 Jan 2008 00:59:44 +0100
+Received: by an-out-0708.google.com with SMTP id b33so1390346ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Jan 2008 23:54:28 +0100 (CET)
-Date: Mon, 7 Jan 2008 23:52:36 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <582475286.20080107235236@vanille-media.de>
+	Mon, 07 Jan 2008 15:52:48 -0800 (PST)
+Received: by 10.100.31.3 with SMTP id e3mr43407419ane.112.1199736720730;
+	Mon, 07 Jan 2008 12:12:00 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Mon, 7 Jan 2008 12:12:00 -0800 (PST)
+Message-ID: <c384c5ea0801071212g75035250r67765ab61b0bdfa4@mail.gmail.com>
+Date: Mon, 7 Jan 2008 21:12:00 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1199742459.4680.69.camel@localhost.localdomain>
-References: <1068494393.20080104031751@gmail.com>
-	<1199663243.4658.71.camel@localhost.localdomain>
-	<116173998.20080107221856@gmail.com>
-	<1199738665.4680.66.camel@localhost.localdomain>
-	<1199742459.4680.69.camel@localhost.localdomain>
 MIME-Version: 1.0
-Subject: Metadata Q/A (was: Another weird case of PACKAGES_DYNAMIC and task deps, it seems)
+Subject: Hotel for FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,41 +28,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2008 23:18:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 07 Jan 2008 23:59:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Richard Purdie wrote:
-> On Mon, 2008-01-07 at 20:44 +0000, Richard Purdie wrote:
->> My money is on:
->> 
->> DEPENDS_collie += "bc-native"
->> 
->> in linux-rp.inc. Try removing that...
+Dear all,
 
-> Confirmed and fixed in 00610b176af0e4f4563f78fb71dc1219c777d13e.
+for those OE guys who are sure to attend FOSDEM (22-24 February 2008,
+Brussels, Belgium) and have not booked a room yet:
 
-> Let me stress once again, += and overrides do not do what you expect. It
-> adds "bc_native" to the variable named "DEPENDS_collie", not "DEPENDS".
+Let's try to reserve rooms in the same hotel, so that we
+- can share breakfast
+- have at least one person who knows the way back to the hotel in the
+evening, after too much beer.
 
-> DEPENDS_append_collie = " bc-native" 
+Joint efforts are always hard to arrange, so
 
-> is a very different thing and corrects this problem...
+- please understand the target deadline for this effort is Friday January 11th.
+- please quote your maximum price for the hotel per night, with
+breakfast included.
 
-Can we
+By Friday, we should have a list of commitments, and chosen a hotel,
+and book the rooms (either in one-go, or individually).
+(An alternative approach is to perform a parallel bidding of the same
+hotel room rate at priceline.com, which has a 24 hour bidding
+retention -- thanks Laibsch)
 
-a) forbid variable assignment to foo_bar in general (when bar is not
-in {append, prepend, <override>} ?
-
-b) have an extra Q/A class that scans the metadata for those kinds of
-problems?
+So far committed are:
+- Philip 'Crofton' Balister
+- Leon 'likewise' Woestenberg
 
 Regards,
-
-:M:
-
 -- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+Leon 'likewise'
 
 
