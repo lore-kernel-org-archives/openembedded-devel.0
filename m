@@ -1,16 +1,27 @@
-Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <jin@mediatomb.cc>) id 1JCGYW-0001Xx-Eb
-	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 16:39:56 +0100
-Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
-	id 04DCC832C8; Tue,  8 Jan 2008 16:15:25 +0100 (CET)
-Date: Tue, 8 Jan 2008 16:15:25 +0100
-From: Sergey 'Jin' Bostandzhyan <jin@mediatomb.cc>
-To: openembedded-devel@openembedded.org
-Message-ID: <20080108151525.GA30805@deadlock.dhs.org>
+Received: from [128.178.50.133] (helo=smtp2.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1JCGnP-0001lZ-EM
+	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 16:55:19 +0100
+Received: (qmail 19156 invoked by uid 107); 8 Jan 2008 15:21:38 -0000
+Received: from mailav2.epfl.ch (128.178.50.191)
+	by smtp2.epfl.ch with SMTP; 8 Jan 2008 15:21:38 -0000
+Received: from (unknown [128.178.50.133]) by MAILAV2.epfl.ch with smtp
+	id 6699_6631029a_bdfd_11dc_8e97_00114337c797;
+	Tue, 08 Jan 2008 16:21:37 +0100
+Received: from unknown (138.131.217.87) (authenticated)
+	by smtp2.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Tue, 08 Jan 2008 16:21:38 +0100
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Organization: EPFL STI-IPR-LSRO1
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 8 Jan 2008 16:21:33 +0100
+User-Agent: KMail/1.9.6 (enterprise 0.20070907.709405)
+References: <200712291630.29205.valentin.longchamp@epfl.ch>
+	<1199011529.4654.4.camel@localhost.localdomain>
+In-Reply-To: <1199011529.4654.4.camel@localhost.localdomain>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.15 (2007-04-06)
-Subject: initscripts ignores IMAGE_DEVICE_TABLES and installs it's own table
+Message-Id: <200801081621.33852.valentin.longchamp@epfl.ch>
+Subject: Re: New arch in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -24,55 +35,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 15:39:56 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 08 Jan 2008 15:55:19 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi,
+Richard Purdie wrote:
+> > The system is a robotics aimed custom-designed board which is based on a
+> > i.MX31 SoC. I have a custom kernel, so I will need a new kernel recipe
+> > (already exists, based on mx31ads kernel recipe by Liam) and I have added
+> > a few custom config files for our needs (for USB networking config and
+> > drivers for instance).
+> >
+> > I would like to include all these changes to the OE "mainline" and become
+> > the maintainer for this arch. How could I do this easily ?
+>
+> The first step is to post what you have to the bugzilla, we can then
+> review it.
 
-after being too annoying about this on IRC it was suggested that I write
-to the mailinglist :>
+OK, I have added it as the bug 3647 !
 
-I already submitted a bug report regarding this:
-http://bugs.openembedded.org/show_bug.cgi?id=3593
-
-Here is the problem:
-I am using a custom Angstrom-2007 based distro, I use a static dev table (no
-udev and no devfs). 
-
-I defined a custom device table file in my machine conf by setting the
-IMAGE_DEVICE_TABLES variable appropriately.
-
-From what I can see, image.bbclass makes use of this variable when creating the
-rootfs. However, the initscripts_1.0.bb package has it's own device_table.txt
-version (located in initscripts-1.0/device_table.txt).
-
-This file gets installed to /etc/device_table on the target. I guess it does
-not matter when udev takes over, but remember - I am using a static dev; so in
-my case the init.d/devices script checks what is used, it first looks for udev,
-then for devfs, does not find those and finally populates /dev with
-device_table from /etc/device_table which was installed by initscripts.
-
-It did cost me quite some time to figure out where all those dev entries
-were coming from, so it would be nice to have this fixed in a clean way.
-
-Unfortunately a clean solution did not come to my mind, so I hacked the 
-initscripts_1.0.bb locally by adding:
-file://../../../../../../site/files/my_device_table.txt 
-to the SRC_URI, further doing a:
-
-do_install_prepend () {
-    cp ../../../../../../site/files/my_device_table.txt  ${WORKDIR}/
-}
-
-and finally tuning the line in do_install:
-install -m 0755  ${WORKDIR}/my_device_table.txt ${D}${sysconfdir}/device_table
-
-As you can see this is quite an ugly approach, I hope someone can suggest
-how to solve this properly?
-
-Kind regards,
-Jin
-
+-- 
+Valentin Longchamp
+PhD Student
+http://people.epfl.ch/valentin.longchamp
 
 
