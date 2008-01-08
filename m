@@ -1,23 +1,23 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [72.14.220.153] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <zecke@selfish.org>) id 1JCJDi-0000So-G8
+	(envelope-from <philipp.zabel@gmail.com>) id 1JCJSd-0000Cf-GO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jan 2008 19:30:38 +0100
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=abughraib.localdomain) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1JCJ6w-00061b-L8
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jan 2008 19:23:38 +0100
-From: Holger Freyther <zecke@selfish.org>
+	Tue, 08 Jan 2008 19:46:03 +0100
+Received: by fg-out-1718.google.com with SMTP id l27so5001004fgb.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Jan 2008 10:39:03 -0800 (PST)
+Received: by 10.82.152.16 with SMTP id z16mr2352554bud.17.1199813917518;
+	Tue, 08 Jan 2008 09:38:37 -0800 (PST)
+Received: by 10.82.120.17 with HTTP; Tue, 8 Jan 2008 09:38:37 -0800 (PST)
+Message-ID: <74d0deb30801080938u7a6d8c68re2315c1b4825ab83@mail.gmail.com>
+Date: Tue, 8 Jan 2008 18:38:37 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 8 Jan 2008 19:23:38 +0100
-User-Agent: KMail/1.9.6 (enterprise 0.20071204.744707)
-References: <47836C9B.3000407@gmx.net> <200801081808.13174.zecke@selfish.org>
-	<1199815430.2812.5.camel@hammer.suse.cz>
-In-Reply-To: <1199815430.2812.5.camel@hammer.suse.cz>
+In-Reply-To: <200801081808.13174.zecke@selfish.org>
 MIME-Version: 1.0
-Message-Id: <200801081923.39086.zecke@selfish.org>
+References: <47836C9B.3000407@gmx.net> <200801081527.09859.zecke@selfish.org>
+	<1199804390.30486.28.camel@hammer.suse.cz>
+	<200801081808.13174.zecke@selfish.org>
 Subject: Re: RFC: add osso version of libtool and libatk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -32,24 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 18:30:39 -0000
-Content-Disposition: inline
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 08 Jan 2008 18:46:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tuesday 08 January 2008 19:03:50 Stanislav Brabec wrote:
-> If I understand it correctly, it was really intended to only
-> re-libtoolize the package with the libtool version supporting maemo.
+On Jan 8, 2008 6:08 PM, Holger Freyther <zecke@selfish.org> wrote:
+> On Tuesday 08 January 2008 15:59:50 Stanislav Brabec wrote:
+> > Can you tell me what is the purpose of this patch? I looked into 15000
+> > lines of the atk patch and cannot find any single change except adding
+> > debian directory (not needed for OE) and modifying or adding of
+> > auto-generated files (documentation, config.* and marshalls).
+> >
+> > I am not able to find any single change in the code.
 >
-> If it is true, calling libtoolize -f (or autoreconf -f -i) in the recipe
-> is a much cleaner solution.
+> I briefly talked with Robert on IRC. The requirement is not to use the osso
+> variant but the upstream version. For libtool this is 1.5.6 and for atk
+> probably the same applies.
+>
+> My conclusion is there is nothing wrong with (re)adding the versions with a
+> DEFAULT_PREFERENCE="-1" and I asked him to proceed.
 
-No it is not. Packages using autotools should inherit autotools which is
-supposed to call autoreconf --install --force. :)
+If the those are the unpatched upstream versions, and they are older than the
+latest versions in OE, is the DEFAULT_PREFERENCE even needed?
 
-z.
-
-PS: This is one of the places where OE really shines!
+regards
+Philipp
 
 
