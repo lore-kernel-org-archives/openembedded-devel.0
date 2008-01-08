@@ -1,21 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1JCBeG-0006yu-Qg
-	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 11:25:32 +0100
-Received: (qmail 10625 invoked by uid 813007); 8 Jan 2008 10:18:34 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 8 Jan 2008 10:18:34 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 8 Jan 2008 11:18:31 +0100
-User-Agent: KMail/1.9.7
-References: <c384c5ea0801071212g75035250r67765ab61b0bdfa4@mail.gmail.com>
-In-Reply-To: <c384c5ea0801071212g75035250r67765ab61b0bdfa4@mail.gmail.com>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1JCC9T-0007SB-CG
+	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 11:57:47 +0100
+Received: from Powerbook-2.local (vpn006061.vpn.utwente.nl [130.89.6.61])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	m08Aoe0k011728 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 8 Jan 2008 11:50:44 +0100
+Message-ID: <4783557F.5060603@student.utwente.nl>
+Date: Tue, 08 Jan 2008 11:50:39 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Message-Id: <200801081118.32402.openembedded@haerwu.biz>
-Subject: Re: Hotel for FOSDEM
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.6
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	helpdesk@ITBE.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: CIA disabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,31 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 10:25:33 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 Jan 2008 10:57:47 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=B3ek, 7 stycznia 2008, Leon Woestenberg napisa=B3:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> for those OE guys who are sure to attend FOSDEM (22-24 February 2008,
-> Brussels, Belgium) and have not booked a room yet:
+Hi,
 
-Remember that if you will take Astrid (like most of us did year ago) that=20
-rooms on street side are much louder due to discoteque on second side of=20
-street. If you will be unlucky (like few of us was) then expect waking up=20
-about 3:00am.
+I disabled the monotone cia client because CIA keeps returning:
 
-And to complete - I will not be at FOSDEM this year.
+xmlrpclib.Fault: <Fault <type 'exceptions.OSError'>: '[Errno 28] No
+space left on device'>
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+(no space on the cia.vc server, the mtn cia client server still has
+50GiB or so to spare)
 
-        What a strange game. The only winning move is not to play.
-        		-- WOPR, "War Games"
+Which makes the client retry to push the commit message till no more
+errors appear, which leads CIA spam. Once the CIA people fix their
+server it will be enabled again.
 
+This does NOT affect commit mails to oe-commits.
 
+regards,
+
+Koen
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHg1V/MkyGM64RGpERAlsZAJwInceOE3ET+2fp51Mj8SqdcFOuqwCgr0Hx
+YvtbOrLT9zT4l3EH78LHxdE=
+=DFXd
+-----END PGP SIGNATURE-----
 
 
