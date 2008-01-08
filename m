@@ -1,35 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JCCWH-00029I-Gr
-	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 12:21:21 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m08BEMW8023721
-	for <openembedded-devel@openembedded.org>; Tue, 8 Jan 2008 11:14:22 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 23370-08 for <openembedded-devel@openembedded.org>;
-	Tue,  8 Jan 2008 11:14:19 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m08BEH0C023715
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 8 Jan 2008 11:14:17 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <582475286.20080107235236@vanille-media.de>
-References: <1068494393.20080104031751@gmail.com>
-	<1199663243.4658.71.camel@localhost.localdomain>
-	<116173998.20080107221856@gmail.com>
-	<1199738665.4680.66.camel@localhost.localdomain>
-	<1199742459.4680.69.camel@localhost.localdomain>
-	<582475286.20080107235236@vanille-media.de>
-Date: Tue, 08 Jan 2008 11:14:16 +0000
-Message-Id: <1199790856.4659.9.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Metadata Q/A (was: Another weird case of PACKAGES_DYNAMIC	and task deps, it seems)
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1JCDgr-0000yD-I1
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Jan 2008 13:36:21 +0100
+Received: (qmail invoked by alias); 08 Jan 2008 12:29:20 -0000
+Received: from e178115083.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.115.83]
+	by mail.gmx.net (mp002) with SMTP; 08 Jan 2008 13:29:20 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/VbOUc/3TVxCgxU2dBXWyYG2Qf1D4l9GTFdfGrx2
+	YockpL2mrLBGnt
+Message-ID: <47836C9B.3000407@gmx.net>
+Date: Tue, 08 Jan 2008 13:29:15 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080103)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: RFC: add osso version of libtool and libatk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,63 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 11:21:22 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Jan 2008 12:36:22 -0000
+X-Groupsio-MsgNum: 3809
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigC642DF95804475180C617D13"
 
-On Mon, 2008-01-07 at 23:52 +0100, Michael 'Mickey' Lauer wrote:
-> Richard Purdie wrote:
-> > On Mon, 2008-01-07 at 20:44 +0000, Richard Purdie wrote:
-> >> My money is on:
-> >> 
-> >> DEPENDS_collie += "bc-native"
-> >> 
-> >> in linux-rp.inc. Try removing that...
-> 
-> > Confirmed and fixed in 00610b176af0e4f4563f78fb71dc1219c777d13e.
-> 
-> > Let me stress once again, += and overrides do not do what you expect. It
-> > adds "bc_native" to the variable named "DEPENDS_collie", not "DEPENDS".
-> 
-> > DEPENDS_append_collie = " bc-native" 
-> 
-> > is a very different thing and corrects this problem...
-> 
-> Can we
-> 
-> a) forbid variable assignment to foo_bar in general (when bar is not
-> in {append, prepend, <override>} ?
+--------------enigC642DF95804475180C617D13
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Like SRC_URI = "" ?
+Hi,
+on IRC it was suggested to put this on the mailing list.
 
-We have a lot of variables with _ in the names since it generally looks
-better than SRC-URI. I think we do need a policy on this though since it
-will:
+I want some osso versions (Maemo-specific) of some software packages in
+OE to be able to build compatible packages:
 
-a) Bite us at some point
-b) It slows bitbake down (although I've never confirmed that)
+http://bugs.openembedded.org/show_bug.cgi?id=3D3384
 
-I actually have a idea rolling around the back of my head here. All our
-overrides are lowercase (I think). A lot of our variable names are upper
-case. I'm wondering if we'd get a speedup from allowing only lowercase
-overrides since bitbake could tell from inspection that "URI" would
-never be an override.
+If no one objects I would like to apply the patches there.
 
-This lets us keep the large number of uppercase variables with _ in the
-name and we can conceivably rename the lowercase ones since there are a
-lot less of them.
-
-> b) have an extra Q/A class that scans the metadata for those kinds of
-> problems?
-
-If and only if we have some rules that tell us what the valid cases are.
-We'd probably need an exhaustive list of permitted overrides too.
-
-Cheers,
-
-Richard
+Regards
+Robert
 
 
+--------------enigC642DF95804475180C617D13
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iD8DBQFHg2yeG9cfwmwwEtoRCBh1AJ9xrswdUjeYa4JeiepXXPoCt4RxLgCeIPTP
+UWrLAaD/EM78YQ2skz+xogk=
+=7qha
+-----END PGP SIGNATURE-----
 
+--------------enigC642DF95804475180C617D13--
