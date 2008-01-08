@@ -1,24 +1,24 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1JCDgr-0000yD-I1
+Received: from [78.47.116.26] (helo=drlauer-research.com)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <mickey@vanille-media.de>) id 1JCDyn-0001GG-HH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jan 2008 13:36:21 +0100
-Received: (qmail invoked by alias); 08 Jan 2008 12:29:20 -0000
-Received: from e178115083.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.115.83]
-	by mail.gmx.net (mp002) with SMTP; 08 Jan 2008 13:29:20 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/VbOUc/3TVxCgxU2dBXWyYG2Qf1D4l9GTFdfGrx2
-	YockpL2mrLBGnt
-Message-ID: <47836C9B.3000407@gmx.net>
-Date: Tue, 08 Jan 2008 13:29:15 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080103)
-MIME-Version: 1.0
+	Tue, 08 Jan 2008 13:54:53 +0100
+Received: from PROMETHEUS (e180164054.adsl.alicedsl.de [85.180.164.54])
+	by drlauer-research.com (Postfix) with ESMTP id B1DF8584BEA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Jan 2008 13:49:48 +0100 (CET)
+Date: Tue, 8 Jan 2008 13:47:54 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1628510996.20080108134754@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: RFC: add osso version of libtool and libatk
+In-Reply-To: <200801081031.55149.zecke@selfish.org>
+References: <c384c5ea0801071212g75035250r67765ab61b0bdfa4@mail.gmail.com>
+	<200801081031.55149.zecke@selfish.org>
+MIME-Version: 1.0
+Subject: Re: Hotel for FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,42 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 12:36:22 -0000
-X-Groupsio-MsgNum: 3809
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigC642DF95804475180C617D13"
+X-List-Received-Date: Tue, 08 Jan 2008 12:54:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
---------------enigC642DF95804475180C617D13
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+> On Monday 07 January 2008 21:12:00 Leon Woestenberg wrote:
+>> Dear all,
+>>
+>> for those OE guys who are sure to attend FOSDEM (22-24 February 2008,
+>> Brussels, Belgium) and have not booked a room yet:
+>>
+>> Let's try to reserve rooms in the same hotel, so that we
+>> - can share breakfast
+>> - have at least one person who knows the way back to the hotel in the
+>> evening, after too much beer.
+>>
+>> Joint efforts are always hard to arrange, so
 
-Hi,
-on IRC it was suggested to put this on the mailing list.
+Excellent. Thanks for launching that, obviously my attempt to do that
+on http://openembedded.org/wiki/Fosdem2008 did not work. Let's try
+your way :)
 
-I want some osso versions (Maemo-specific) of some software packages in
-OE to be able to build compatible packages:
+Count me in!
 
-http://bugs.openembedded.org/show_bug.cgi?id=3D3384
+Holger wrote:
+> Hey,
 
-If no one objects I would like to apply the patches there.
+> I need a room and please add me to the list.
 
-Regards
-Robert
+You no longer want to share a double room with me? *sniff* *sniff*
+
+Regards,
+
+:M:
+
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
---------------enigC642DF95804475180C617D13
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHg2yeG9cfwmwwEtoRCBh1AJ9xrswdUjeYa4JeiepXXPoCt4RxLgCeIPTP
-UWrLAaD/EM78YQ2skz+xogk=
-=7qha
------END PGP SIGNATURE-----
-
---------------enigC642DF95804475180C617D13--
