@@ -1,25 +1,35 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1JCC9T-0007SB-CG
-	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 11:57:47 +0100
-Received: from Powerbook-2.local (vpn006061.vpn.utwente.nl [130.89.6.61])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	m08Aoe0k011728 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 8 Jan 2008 11:50:44 +0100
-Message-ID: <4783557F.5060603@student.utwente.nl>
-Date: Tue, 08 Jan 2008 11:50:39 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.95.6
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	helpdesk@ITBE.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: CIA disabled
+	(envelope-from <rpurdie@rpsys.net>) id 1JCCWH-00029I-Gr
+	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 12:21:21 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m08BEMW8023721
+	for <openembedded-devel@openembedded.org>; Tue, 8 Jan 2008 11:14:22 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 23370-08 for <openembedded-devel@openembedded.org>;
+	Tue,  8 Jan 2008 11:14:19 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m08BEH0C023715
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Tue, 8 Jan 2008 11:14:17 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <582475286.20080107235236@vanille-media.de>
+References: <1068494393.20080104031751@gmail.com>
+	<1199663243.4658.71.camel@localhost.localdomain>
+	<116173998.20080107221856@gmail.com>
+	<1199738665.4680.66.camel@localhost.localdomain>
+	<1199742459.4680.69.camel@localhost.localdomain>
+	<582475286.20080107235236@vanille-media.de>
+Date: Tue, 08 Jan 2008 11:14:16 +0000
+Message-Id: <1199790856.4659.9.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Metadata Q/A (was: Another weird case of PACKAGES_DYNAMIC	and task deps, it seems)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,43 +43,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 10:57:47 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 08 Jan 2008 11:21:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, 2008-01-07 at 23:52 +0100, Michael 'Mickey' Lauer wrote:
+> Richard Purdie wrote:
+> > On Mon, 2008-01-07 at 20:44 +0000, Richard Purdie wrote:
+> >> My money is on:
+> >> 
+> >> DEPENDS_collie += "bc-native"
+> >> 
+> >> in linux-rp.inc. Try removing that...
+> 
+> > Confirmed and fixed in 00610b176af0e4f4563f78fb71dc1219c777d13e.
+> 
+> > Let me stress once again, += and overrides do not do what you expect. It
+> > adds "bc_native" to the variable named "DEPENDS_collie", not "DEPENDS".
+> 
+> > DEPENDS_append_collie = " bc-native" 
+> 
+> > is a very different thing and corrects this problem...
+> 
+> Can we
+> 
+> a) forbid variable assignment to foo_bar in general (when bar is not
+> in {append, prepend, <override>} ?
 
-Hi,
+Like SRC_URI = "" ?
 
-I disabled the monotone cia client because CIA keeps returning:
+We have a lot of variables with _ in the names since it generally looks
+better than SRC-URI. I think we do need a policy on this though since it
+will:
 
-xmlrpclib.Fault: <Fault <type 'exceptions.OSError'>: '[Errno 28] No
-space left on device'>
+a) Bite us at some point
+b) It slows bitbake down (although I've never confirmed that)
 
-(no space on the cia.vc server, the mtn cia client server still has
-50GiB or so to spare)
+I actually have a idea rolling around the back of my head here. All our
+overrides are lowercase (I think). A lot of our variable names are upper
+case. I'm wondering if we'd get a speedup from allowing only lowercase
+overrides since bitbake could tell from inspection that "URI" would
+never be an override.
 
-Which makes the client retry to push the commit message till no more
-errors appear, which leads CIA spam. Once the CIA people fix their
-server it will be enabled again.
+This lets us keep the large number of uppercase variables with _ in the
+name and we can conceivably rename the lowercase ones since there are a
+lot less of them.
 
-This does NOT affect commit mails to oe-commits.
+> b) have an extra Q/A class that scans the metadata for those kinds of
+> problems?
 
-regards,
+If and only if we have some rules that tell us what the valid cases are.
+We'd probably need an exhaustive list of permitted overrides too.
 
-Koen
+Cheers,
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+Richard
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFHg1V/MkyGM64RGpERAlsZAJwInceOE3ET+2fp51Mj8SqdcFOuqwCgr0Hx
-YvtbOrLT9zT4l3EH78LHxdE=
-=DFXd
------END PGP SIGNATURE-----
+
 
 
