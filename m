@@ -1,28 +1,16 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JCGWL-0001V6-Fu
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jan 2008 16:37:41 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so4074594fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jan 2008 07:30:41 -0800 (PST)
-Received: by 10.86.79.19 with SMTP id c19mr21327739fgb.31.1199802519055;
-	Tue, 08 Jan 2008 06:28:39 -0800 (PST)
-Received: from paul.bn.lan ( [194.79.8.34])
-	by mx.google.com with ESMTPS id b17sm30145614fka.4.2008.01.08.06.28.36
-	(version=SSLv3 cipher=OTHER); Tue, 08 Jan 2008 06:28:37 -0800 (PST)
-Date: Tue, 8 Jan 2008 16:34:29 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1133928457.20080108163429@gmail.com>
-To: Florian Boor <florian.boor@kernelconcepts.de>
-In-Reply-To: <47825896.7030301@kernelconcepts.de>
-References: <1824361960.20080106235611@gmail.com>
-	<47825896.7030301@kernelconcepts.de>
+	(envelope-from <jin@mediatomb.cc>) id 1JCGYW-0001Xx-Eb
+	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 16:39:56 +0100
+Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
+	id 04DCC832C8; Tue,  8 Jan 2008 16:15:25 +0100 (CET)
+Date: Tue, 8 Jan 2008 16:15:25 +0100
+From: Sergey 'Jin' Bostandzhyan <jin@mediatomb.cc>
+To: openembedded-devel@openembedded.org
+Message-ID: <20080108151525.GA30805@deadlock.dhs.org>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] Smallscreen mod for GtkFileChooser
+User-Agent: Mutt/1.5.15 (2007-04-06)
+Subject: initscripts ignores IMAGE_DEVICE_TABLES and installs it's own table
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,73 +24,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 15:37:41 -0000
+X-List-Received-Date: Tue, 08 Jan 2008 15:39:56 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Florian,
+Hi,
 
-Monday, January 7, 2008, 6:51:34 PM, you wrote:
+after being too annoying about this on IRC it was suggested that I write
+to the mailinglist :>
 
-> Hi,
+I already submitted a bug report regarding this:
+http://bugs.openembedded.org/show_bug.cgi?id=3593
 
-> Paul Sokolovsky schrieb:
->>   I've prepared a patch to make GtkFileChooser, a
->> contemporary gtk's file open/save widget, to suite small, PDA-like
->> screens (including QVGA) better.
+Here is the problem:
+I am using a custom Angstrom-2007 based distro, I use a static dev table (no
+udev and no devfs). 
 
->>   The patch is available at
->> http://bugs.openembedded.org/show_bug.cgi?id=3634 , with extensive
->> description at
->> http://pfalcon-oe.blogspot.com/2008/01/smallscreen-mod-for-gtkfilechooser.html
+I defined a custom device table file in my machine conf by setting the
+IMAGE_DEVICE_TABLES variable appropriately.
 
-> Looks pretty good. I like the patch because it is not that intrusive.
-> If you could make all changes depend on the screen size it would be worth trying
-> to get it upstream. This might save us a lot of work in future.
+From what I can see, image.bbclass makes use of this variable when creating the
+rootfs. However, the initscripts_1.0.bb package has it's own device_table.txt
+version (located in initscripts-1.0/device_table.txt).
 
-  As Ross Burton of OpenedHand commented in my blog, they make steps
-to upstream their changes, but of course that doesn't go smooth, it
-takes time, refactors, waiting for new versions, etc. So, I'd prefer
-to leave that to big guys, knowing that they care to make the future
-bright. With my little-guy-who-scratches-his-and-fellow-users'-itches
-hat on, I care about present being bright too, and sustainability of
-the whole Linux-on-PDA effort. So, here's small patch optimized for a
-given criteria (size), and I can maintain it in OE for now, even if
-eventually it will be replaced by something else. In the meantime, I
-have lotsa other patches ready, or in work, and working on them and
-their upstreaming would be more beneficial imho.
+This file gets installed to /etc/device_table on the target. I guess it does
+not matter when udev takes over, but remember - I am using a static dev; so in
+my case the init.d/devices script checks what is used, it first looks for udev,
+then for devfs, does not find those and finally populates /dev with
+device_table from /etc/device_table which was installed by initscripts.
 
-  (Oh, and if someone has free big-guy-from-the-industry's hat, please
-let me know ;-) ).
+It did cost me quite some time to figure out where all those dev entries
+were coming from, so it would be nice to have this fixed in a clean way.
 
->> . I'm glad I've written it in high detail, because Koen quickly
->> pointed me to similar patches in Poky:
->> 
->> http://svn.o-hand.com/view/poky?rev=3408&view=rev
->> http://svn.o-hand.com/view/poky?rev=2596&view=rev
->> 
->>   I didn't try them, but they appear to make more invasive changes to
->> gtk+, though apparently add more features (for good, bad, or for
->> vendor's requirements).
+Unfortunately a clean solution did not come to my mind, so I hacked the 
+initscripts_1.0.bb locally by adding:
+file://../../../../../../site/files/my_device_table.txt 
+to the SRC_URI, further doing a:
 
-> Do we have a screenshot around to see how it looks? :)
+do_install_prepend () {
+    cp ../../../../../../site/files/my_device_table.txt  ${WORKDIR}/
+}
 
-  I still didn't try it due to the above. I'd like first a confirmation
-from Poky people that merging those patches to OE will be of benefit
-to them (for example, wider testing). Then we can review the
-functionality. I do worry a bit about QVGA support, as all latest OH
-workings seems to be not optimized for it (Sato, Pimlico).
+and finally tuning the line in do_install:
+install -m 0755  ${WORKDIR}/my_device_table.txt ${D}${sysconfdir}/device_table
 
-> Greetings
+As you can see this is quite an ugly approach, I hope someone can suggest
+how to solve this properly?
 
-> Florian
-
-
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+Kind regards,
+Jin
 
 
 
