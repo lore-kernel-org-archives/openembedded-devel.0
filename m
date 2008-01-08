@@ -1,24 +1,23 @@
-Received: from [209.85.128.187] (helo=fk-out-0910.google.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JCFVu-0000gd-G2
+	(envelope-from <zecke@selfish.org>) id 1JCFWq-0003eC-RS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jan 2008 15:33:11 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so11070733fks.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jan 2008 06:26:11 -0800 (PST)
-Received: by 10.82.112.3 with SMTP id k3mr1188389buc.15.1199799095335;
-	Tue, 08 Jan 2008 05:31:35 -0800 (PST)
-Received: from paul.bn.lan ( [194.79.8.34])
-	by mx.google.com with ESMTPS id 28sm30084208fkx.11.2008.01.08.05.31.34
-	(version=SSLv3 cipher=OTHER); Tue, 08 Jan 2008 05:31:34 -0800 (PST)
-Date: Tue, 8 Jan 2008 15:37:26 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1192483054.20080108153726@gmail.com>
+	Tue, 08 Jan 2008 15:34:08 +0100
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=abughraib.localdomain) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JCFQ5-000152-Vj
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Jan 2008 15:27:10 +0100
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
+Date: Tue, 8 Jan 2008 15:27:09 +0100
+User-Agent: KMail/1.9.6 (enterprise 0.20071204.744707)
+References: <47836C9B.3000407@gmx.net>
+In-Reply-To: <47836C9B.3000407@gmx.net>
 MIME-Version: 1.0
-Subject: openembedded-issues mailing list stalled
+Message-Id: <200801081527.09859.zecke@selfish.org>
+Subject: Re: RFC: add osso version of libtool and libatk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,21 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 14:33:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 08 Jan 2008 14:34:08 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello openembedded-devel,
+On Tuesday 08 January 2008 13:29:15 Robert Schuster wrote:
+> Hi,
+> on IRC it was suggested to put this on the mailing list.
 
-  There were no mails in bugtracker list since 27 Dec, circa from the
-start when bugtracker was down due to server upgrades. Archives are
-also empty.
+Hey,
+I don't like adding vendor hacked versions of standard software at all. I see 
+the requirement you are facing but adding a Nokia hacked version is not the 
+right way to do it.
 
-  Can someone please look into this?
+What are the differences you see? Can you extract the patch that is doing 
+that? Is that patch a good idea and can be applied to our version of libtool?
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
+kind regards
+	z.
+
+
+PS: I care more for libtool than atk+ (did they break API/ABI compability on 
+it?) 
 
 
