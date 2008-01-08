@@ -1,32 +1,30 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JCEHo-0001aZ-GB
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jan 2008 14:14:32 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so4053080fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jan 2008 05:07:33 -0800 (PST)
-Received: by 10.86.84.5 with SMTP id h5mr21230638fgb.49.1199796138536;
-	Tue, 08 Jan 2008 04:42:18 -0800 (PST)
-Received: from paul.bn.lan ( [194.79.8.34])
-	by mx.google.com with ESMTPS id 28sm30022619fkx.11.2008.01.08.04.42.16
-	(version=SSLv3 cipher=OTHER); Tue, 08 Jan 2008 04:42:17 -0800 (PST)
-Date: Tue, 8 Jan 2008 14:48:08 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <1327107593.20080108144808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1199790856.4659.9.camel@localhost.localdomain>
-References: <1068494393.20080104031751@gmail.com>
-	<1199663243.4658.71.camel@localhost.localdomain>
-	<116173998.20080107221856@gmail.com>
-	<1199738665.4680.66.camel@localhost.localdomain>
-	<1199742459.4680.69.camel@localhost.localdomain>
-	<582475286.20080107235236@vanille-media.de>
-	<1199790856.4659.9.camel@localhost.localdomain>
-MIME-Version: 1.0
-Subject: Re: Metadata Q/A (was: Another weird case of PACKAGES_DYNAMIC and task deps, it seems)
+	(envelope-from <rpurdie@rpsys.net>) id 1JCESw-0006K1-41
+	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 14:26:02 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m08DJ41n029785
+	for <openembedded-devel@openembedded.org>; Tue, 8 Jan 2008 13:19:04 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29467-08 for <openembedded-devel@openembedded.org>;
+	Tue,  8 Jan 2008 13:18:57 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m08DInma029757
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Tue, 8 Jan 2008 13:18:49 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <47836C9B.3000407@gmx.net>
+References: <47836C9B.3000407@gmx.net>
+Date: Tue, 08 Jan 2008 13:18:47 +0000
+Message-Id: <1199798327.6053.11.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: RFC: add osso version of libtool and libatk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,92 +38,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 13:14:32 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 08 Jan 2008 13:26:02 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello Richard,
+On Tue, 2008-01-08 at 13:29 +0100, Robert Schuster wrote:
+> on IRC it was suggested to put this on the mailing list.
+> 
+> I want some osso versions (Maemo-specific) of some software packages in
+> OE to be able to build compatible packages:
+> 
+> http://bugs.openembedded.org/show_bug.cgi?id=3384
+> 
+> If no one objects I would like to apply the patches there.
 
-Tuesday, January 8, 2008, 1:14:16 PM, you wrote:
+I have two concerns:
 
-> On Mon, 2008-01-07 at 23:52 +0100, Michael 'Mickey' Lauer wrote:
->> Richard Purdie wrote:
->> > On Mon, 2008-01-07 at 20:44 +0000, Richard Purdie wrote:
->> >> My money is on:
->> >> 
->> >> DEPENDS_collie += "bc-native"
->> >> 
->> >> in linux-rp.inc. Try removing that...
->> 
->> > Confirmed and fixed in 00610b176af0e4f4563f78fb71dc1219c777d13e.
->> 
->> > Let me stress once again, += and overrides do not do what you expect. It
->> > adds "bc_native" to the variable named "DEPENDS_collie", not "DEPENDS".
->> 
->> > DEPENDS_append_collie = " bc-native" 
->> 
->> > is a very different thing and corrects this problem...
->> 
->> Can we
->> 
->> a) forbid variable assignment to foo_bar in general (when bar is not
->> in {append, prepend, <override>} ?
+a) libtool at least duplicates a lot of recipe, we should be encouraging
+more .inc usage.
+b) packages is becoming large and unwieldy
 
-> Like SRC_URI = "" ?
+There could be a case for splitting packages into say:
 
-> We have a lot of variables with _ in the names since it generally looks
-> better than SRC-URI. I think we do need a policy on this though since it
-> will:
+packages/ 
+packages-gpe/
+packages-maemo/
+packages-openmoko/
+packages-opie/
 
-> a) Bite us at some point
-> b) It slows bitbake down (although I've never confirmed that)
+Sadly these two points don't work well together since .inc/patch sharing
+with collections enabled doesn't work. This is something I think we need
+to fix as a priority.
 
-> I actually have a idea rolling around the back of my head here. All our
-> overrides are lowercase (I think). A lot of our variable names are upper
-> case. I'm wondering if we'd get a speedup from allowing only lowercase
-> overrides since bitbake could tell from inspection that "URI" would
-> never be an override.
+The advantage to b) is I can then remove groups of files from the
+equation easily and speed up parsing and reduce the chances of bad
+things like  maemo packages breaking my normal ones...
 
-> This lets us keep the large number of uppercase variables with _ in the
-> name and we can conceivably rename the lowercase ones since there are a
-> lot less of them.
+This disadvantage is that you end up with libtool in two places and if
+one is updated, the other could be missed.
 
-  Like module_autoload. Has been on my list for a long time. The
-problem, it (ab)uses override-like syntax to do something completely
-different. It actually tries to emulate dictionary with sh-like
-syntax. So, when it says
+Reluctantly I'd therefore say it could be committed now if an .inc file
+is created for libtool and maybe improved for atk but we should consider
+the wider issue.
 
-module_autoload_evdev = "evdev"
+I'd also make a case for given vendor 'hacked' versions a
+DEFAULT_PREFERENCE = "-1" so you have to explicitly select them.
 
-, in developed language it would be module_autoload["evdev"] = "evdev".
+Cheers,
 
-  So, it's kinda special case, that's why I didn't get around to doing
-something about it, but we probably should, because it's inconsistent.
-
->> b) have an extra Q/A class that scans the metadata for those kinds of
->> problems?
-
-> If and only if we have some rules that tell us what the valid cases are.
-> We'd probably need an exhaustive list of permitted overrides too.
-
-  I also think that such tests are not really effective...
-
-> Cheers,
-
-> Richard
+Richard
 
 
 
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
 
 
 
