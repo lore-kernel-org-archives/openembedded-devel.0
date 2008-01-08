@@ -1,27 +1,27 @@
-Received: from [128.178.50.133] (helo=smtp2.epfl.ch)
+Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1JCGnP-0001lZ-EM
-	for openembedded-devel@openembedded.org; Tue, 08 Jan 2008 16:55:19 +0100
-Received: (qmail 19156 invoked by uid 107); 8 Jan 2008 15:21:38 -0000
-Received: from mailav2.epfl.ch (128.178.50.191)
-	by smtp2.epfl.ch with SMTP; 8 Jan 2008 15:21:38 -0000
-Received: from (unknown [128.178.50.133]) by MAILAV2.epfl.ch with smtp
-	id 6699_6631029a_bdfd_11dc_8e97_00114337c797;
-	Tue, 08 Jan 2008 16:21:37 +0100
-Received: from unknown (138.131.217.87) (authenticated)
-	by smtp2.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Tue, 08 Jan 2008 16:21:38 +0100
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
-Organization: EPFL STI-IPR-LSRO1
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 8 Jan 2008 16:21:33 +0100
-User-Agent: KMail/1.9.6 (enterprise 0.20070907.709405)
-References: <200712291630.29205.valentin.longchamp@epfl.ch>
-	<1199011529.4654.4.camel@localhost.localdomain>
-In-Reply-To: <1199011529.4654.4.camel@localhost.localdomain>
+	(envelope-from <theBohemian@gmx.net>) id 1JCHcE-00072t-Iv
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Jan 2008 17:47:50 +0100
+Received: (qmail invoked by alias); 08 Jan 2008 16:40:48 -0000
+Received: from e178115083.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.115.83]
+	by mail.gmx.net (mp008) with SMTP; 08 Jan 2008 17:40:48 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX193I8MXr2B3t6+11PyYjUBLZsd/0fUX9UgDJmF0I4
+	EClBY5jjXGnhGS
+Message-ID: <4783A78E.9030405@gmx.net>
+Date: Tue, 08 Jan 2008 17:40:46 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080103)
 MIME-Version: 1.0
-Message-Id: <200801081621.33852.valentin.longchamp@epfl.ch>
-Subject: Re: New arch in OE
+To: openembedded-devel@lists.openembedded.org
+References: <47836C9B.3000407@gmx.net>
+	<1199798327.6053.11.camel@localhost.localdomain>
+In-Reply-To: <1199798327.6053.11.camel@localhost.localdomain>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: Re: RFC: add osso version of libtool and libatk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,30 +35,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2008 15:55:19 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 Jan 2008 16:47:51 -0000
+X-Groupsio-MsgNum: 3821
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig6022689C2FA9BF4B1B62B5CD"
 
-Richard Purdie wrote:
-> > The system is a robotics aimed custom-designed board which is based on a
-> > i.MX31 SoC. I have a custom kernel, so I will need a new kernel recipe
-> > (already exists, based on mx31ads kernel recipe by Liam) and I have added
-> > a few custom config files for our needs (for USB networking config and
-> > drivers for instance).
-> >
-> > I would like to include all these changes to the OE "mainline" and become
-> > the maintainer for this arch. How could I do this easily ?
->
-> The first step is to post what you have to the bugzilla, we can then
-> review it.
+--------------enig6022689C2FA9BF4B1B62B5CD
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-OK, I have added it as the bug 3647 !
+Hi,
+with Holger's help I pulled out an old version of libtool 1.5.6. I added
+it to the tree again with DEFAULT_PREFERENCE =3D "-1" and a note for why
+it exists ...
 
--- 
-Valentin Longchamp
-PhD Student
-http://people.epfl.ch/valentin.longchamp
+I'll have a look at unifying the libtool recipes later. They all look
+very similar indeed ...
+
+Regards
+Robert
+
+Richard Purdie schrieb:
+> On Tue, 2008-01-08 at 13:29 +0100, Robert Schuster wrote:
+>> on IRC it was suggested to put this on the mailing list.
+>>
+>> I want some osso versions (Maemo-specific) of some software packages i=
+n
+>> OE to be able to build compatible packages:
+>>
+>> http://bugs.openembedded.org/show_bug.cgi?id=3D3384
+>>
+>> If no one objects I would like to apply the patches there.
+>=20
+> I have two concerns:
+>=20
+> a) libtool at least duplicates a lot of recipe, we should be encouragin=
+g
+> more .inc usage.
+> b) packages is becoming large and unwieldy
+>=20
+> There could be a case for splitting packages into say:
+>=20
+> packages/=20
+> packages-gpe/
+> packages-maemo/
+> packages-openmoko/
+> packages-opie/
+>=20
+> Sadly these two points don't work well together since .inc/patch sharin=
+g
+> with collections enabled doesn't work. This is something I think we nee=
+d
+> to fix as a priority.
+>=20
+> The advantage to b) is I can then remove groups of files from the
+> equation easily and speed up parsing and reduce the chances of bad
+> things like  maemo packages breaking my normal ones...
+>=20
+> This disadvantage is that you end up with libtool in two places and if
+> one is updated, the other could be missed.
+>=20
+> Reluctantly I'd therefore say it could be committed now if an .inc file=
+
+> is created for libtool and maybe improved for atk but we should conside=
+r
+> the wider issue.
+>=20
+> I'd also make a case for given vendor 'hacked' versions a
+> DEFAULT_PREFERENCE =3D "-1" so you have to explicitly select them.
+>=20
+> Cheers,
+>=20
+> Richard
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
 
 
+
+--------------enig6022689C2FA9BF4B1B62B5CD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD4DBQFHg6eOG9cfwmwwEtoRCKRfAJ4tGH4dao2C9PIQPWMJ+ncFpVRu7wCYoiKh
+wWPMEM+fah57DjS2zQ9zyw==
+=mTS5
+-----END PGP SIGNATURE-----
+
+--------------enig6022689C2FA9BF4B1B62B5CD--
