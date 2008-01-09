@@ -1,26 +1,24 @@
-Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <daniel@totalueberwachung.de>) id 1JCYr2-0004wI-U8
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1JCbUR-0006A7-7T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2008 12:12:16 +0100
-Received: from themisto.orbit.homelinux.net (themisto.dyn.totalueberwachung.de
-	[192.168.0.7])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by thebe.totalueberwachung.de (Postfix) with ESMTP id 96336D80A8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jan 2008 11:47:44 +0100 (CET)
-Date: Wed, 9 Jan 2008 11:44:18 +0100
-From: Daniel Willmann <daniel@totalueberwachung.de>
+	Wed, 09 Jan 2008 15:01:08 +0100
+Received: (qmail invoked by alias); 09 Jan 2008 13:53:59 -0000
+Received: from e178108047.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.108.47]
+	by mail.gmx.net (mp001) with SMTP; 09 Jan 2008 14:53:59 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+4yw95gv+4x+RHCe2qlbKVIup2VJq65svtlzut6X
+	LbgTXWtli23T4T
+Message-ID: <4784D1F2.6080102@gmx.net>
+Date: Wed, 09 Jan 2008 14:53:54 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080103)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080109114418.11bbf8a7@themisto.orbit.homelinux.net>
-In-Reply-To: <1628510996.20080108134754@vanille-media.de>
-References: <c384c5ea0801071212g75035250r67765ab61b0bdfa4@mail.gmail.com>
-	<200801081031.55149.zecke@selfish.org>
-	<1628510996.20080108134754@vanille-media.de>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.1; i686-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: Hotel for FOSDEM
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: java-native merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,54 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2008 11:12:17 -0000
-X-Groupsio-MsgNum: 3828
-Content-Type: multipart/signed; boundary="Sig_/qDPnLFH9.S6BTeFrG6_dddi";
-	protocol="application/pgp-signature"; micalg=PGP-SHA1
+X-List-Received-Date: Wed, 09 Jan 2008 14:01:12 -0000
+X-Groupsio-MsgNum: 3829
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig94A8791D481CD0DA3BD59788"
 
---Sig_/qDPnLFH9.S6BTeFrG6_dddi
-Content-Type: text/plain; charset=ISO-8859-1
+--------------enig94A8791D481CD0DA3BD59788
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
+I have finally pushed my patches for adding virtual/java-native and
+virtual/javac-native (properly done) into the tree. Since existing
+recipes used jikes-native and ecj-native and I would like to remove
+those (at least ecj-native) they need some reworking. To track the
+status of this work (or help me :) ) have a look at PR 3655[0].
 
-On Tue, 8 Jan 2008 13:47:54 +0100
-Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
+Regards
+Robert
 
-> > On Monday 07 January 2008 21:12:00 Leon Woestenberg wrote:
-> >> Dear all,
-> >>
-> >> for those OE guys who are sure to attend FOSDEM (22-24 February
-> >> 2008, Brussels, Belgium) and have not booked a room yet:
-> >>
-> >> Let's try to reserve rooms in the same hotel, so that we
-> >> - can share breakfast
-> >> - have at least one person who knows the way back to the hotel in
-> >> the evening, after too much beer.
-> >>
-> >> Joint efforts are always hard to arrange, so
->=20
-> Excellent. Thanks for launching that, obviously my attempt to do that
-> on http://openembedded.org/wiki/Fosdem2008 did not work. Let's try
-> your way :)
->=20
-> Count me in!
-I'm also in, as is Jan L=FCbbe. We've already made a reservation at the
-Astrid, but that can be cancelled if we end up in a different hotel.
+[0] - http://bugs.openembedded.org/show_bug.cgi?id=3D3655
 
-Regards,
-Daniel Willmann
 
---Sig_/qDPnLFH9.S6BTeFrG6_dddi
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Disposition: attachment; filename=signature.asc
+--------------enig94A8791D481CD0DA3BD59788
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.7 (GNU/Linux)
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFHhKWFZ2fhlIqbZ1gRAgu4AJwNPfpteHnmhL5iGli2ARTbcU7kXACfdtf3
-rABCd4z0KmGM6w3u+n9sslw=
-=mN+9
+iD4DBQFHhNH2G9cfwmwwEtoRCP9MAJ9tHpNKg/eBBDdlGy9j2ygX51jFkwCYws/J
+fKzY81cMfDi6qjA3nUNPzQ==
+=lL0A
 -----END PGP SIGNATURE-----
 
---Sig_/qDPnLFH9.S6BTeFrG6_dddi--
+--------------enig94A8791D481CD0DA3BD59788--
