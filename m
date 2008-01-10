@@ -1,23 +1,19 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JD0Wu-00076k-BQ
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JD0wC-00026B-6R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2008 17:45:20 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so670678fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2008 08:45:13 -0800 (PST)
-Received: by 10.86.99.9 with SMTP id w9mr1978831fgb.58.1199983513874;
-	Thu, 10 Jan 2008 08:45:13 -0800 (PST)
-Received: from paul.bn.lan ( [194.79.8.34])
-	by mx.google.com with ESMTPS id p9sm2968696fkb.7.2008.01.10.08.45.12
-	(version=SSLv3 cipher=OTHER); Thu, 10 Jan 2008 08:45:12 -0800 (PST)
-Date: Thu, 10 Jan 2008 18:51:02 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <6810017939.20080110185102@gmail.com>
-To: Florian Boor <florian.boor@kernelconcepts.de>
-In-Reply-To: <47860F56.7050205@kernelconcepts.de>
+	Thu, 10 Jan 2008 18:11:28 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.163])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1JD1L8-0001Ig-L7; Thu, 10 Jan 2008 18:37:14 +0100
+Message-ID: <478651B8.4010304@kernelconcepts.de>
+Date: Thu, 10 Jan 2008 18:11:20 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+MIME-Version: 1.0
+To: Paul Sokolovsky <pmiscml@gmail.com>
 References: <1824361960.20080106235611@gmail.com>
 	<47825896.7030301@kernelconcepts.de>
 	<1133928457.20080108163429@gmail.com>
@@ -26,7 +22,9 @@ References: <1824361960.20080106235611@gmail.com>
 	<4785F7D7.7030506@kernelconcepts.de>
 	<4786102C.7040703@adtelecom.es>
 	<47860F56.7050205@kernelconcepts.de>
-MIME-Version: 1.0
+	<6810017939.20080110185102@gmail.com>
+In-Reply-To: <6810017939.20080110185102@gmail.com>
+X-Enigmail-Version: 0.95.0
 Cc: openembedded-devel@lists.openembedded.org,
 	angstrom-distro-devel@linuxtogo.org
 Subject: Re: [Angstrom-devel] [RFC] Smallscreen mod for GtkFileChooser
@@ -43,65 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2008 16:45:20 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 10 Jan 2008 17:11:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello Florian,
+Hi,
 
-Thursday, January 10, 2008, 2:28:06 PM, you wrote:
+Paul Sokolovsky schrieb:
+>   And here where caveat comes - think about screen rotation. Think
+> about changing resolutions. Think about these actions happening while
+> dialog is on screen...
 
-> Hi,
-
-> Joaquim Duran schrieb:
->> Is it possible only apply the patch if GUI_MACHINE_CLASS = "smallscreen"
->> is set?
-
-   Note that the patch is helpful for "bigscreen" devices in OE too
-;-).
-
-> in theory yes, but that makes your GTK package specific for each device.
-
-  Yes, and that's bad. But we don't *have to* apply it selectively. As
-I tried to describe it in blog, and elaborated in the other mail, I
-deliberately made as little as possible appearance and behavior
-changes to the dialog. If you'll run it on large screen, the only
-change you will notice is that it has a smaller gaps and margins. It
-is fully usable otherwise.
-
-  Maybe even that could be elaborated, but note that we apply many
-"worse" patches to gtk+ in OE already. Consider disable-tooltips.patch.
-It cuts off tooltips unconditionally. Run with mouse? Sorry. Not that
-current Angstrom's xserver-kdrive setup allows to run with mouse at
-all... etc, etc. No worries, all those issues are on my todo list. And
-the sooner we finish with the current issue, the sooner I'll be able
-to get to them.
-
-> It
-> would be better if the screen size is checked at runtime.
-
-  So, that's what my patch does.
-
-> Ideally GTK would do
-> this once and adjust spacing definitions that can be used by GTK implementation
-> and applications.
-
-  And here where caveat comes - think about screen rotation. Think
-about changing resolutions. Think about these actions happening while
-dialog is on screen...
-
-> libgpewidget does it in this way too.
-
-> Greetings
-
-> Florian
+I would not say this - it would be a major improvement over the current -
+completely static - spacing. Of course these situations can occur, but that's
+not the average user faces every day. Proper handling of changing display
+parameters is completely different and much more intrusive topic.
 
 
+Greetings
+
+Florian
 
 
 -- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
