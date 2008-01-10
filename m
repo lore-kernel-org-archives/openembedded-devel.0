@@ -1,27 +1,23 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JCvHF-0008Kb-I8
+	(envelope-from <zecke@selfish.org>) id 1JCvTy-0008Ix-RY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2008 12:08:49 +0100
-Received: from PROMETHEUS (e180130254.adsl.alicedsl.de [85.180.130.254])
-	by drlauer-research.com (Postfix) with ESMTP id A78B4584C20;
-	Thu, 10 Jan 2008 12:10:47 +0100 (CET)
-Date: Thu, 10 Jan 2008 12:08:41 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <745838583.20080110120841@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org, 
-	<angstrom-distro-devel@linuxtogo.org>
-In-Reply-To: <456018236.20080110111917@gmail.com>
-References: <1824361960.20080106235611@gmail.com>
-	<47825896.7030301@kernelconcepts.de>
-	<1133928457.20080108163429@gmail.com>
-	<1199810941.6053.50.camel@localhost.localdomain>
-	<456018236.20080110111917@gmail.com>
+	Thu, 10 Jan 2008 12:22:00 +0100
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=abughraib.localdomain) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JCvTt-00081h-KG
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Jan 2008 12:21:53 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Jan 2008 12:21:52 +0100
+User-Agent: KMail/1.9.6 (enterprise 0.20071204.744707)
+References: <4785F736.5050707@student.utwente.nl>
+In-Reply-To: <4785F736.5050707@student.utwente.nl>
 MIME-Version: 1.0
-Subject: Re: [RFC] Smallscreen mod for GtkFileChooser
+Message-Id: <200801101221.53018.zecke@selfish.org>
+Subject: Re: a5c7b007eaa675cc904f5285291d2f8a597efc84
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,31 +31,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2008 11:08:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 10 Jan 2008 11:22:02 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Paul Sokolovsky wrote:
-> I would
-> like to raise the original proposal: to apply my patch, at least to
-> Angstrom stable branch.
->  Of course, I'd prefer .dev to keep in sync
-> too, but if there're concerns that applying such patch would lead to
-> false feeling that the issue is solved once and for all, and someone
-> plans to work on that soon, .dev can be skipped. Otherwise, it still
-> can be applied - we of course can shuffle and swap patches anytime the
-> changes are required.
+On Thursday 10 January 2008 11:45:10 Koen Kooi wrote:
+> ~ * gfortran is NOT needed to build a gfortran cross-compiler, something
+> else is wrong.
 
-I'm +1 for applying it to both branches. At the end of the day, it
-"fixes" the issue in the best way for now. We can always improve
-later.
+Hi,
 
-Regards,
+feel free to disapprove it, there are at least two open bug reports regarding 
+fortran that we will have to look into.
 
-:M:
-
--- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+z.
 
 
