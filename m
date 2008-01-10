@@ -1,19 +1,23 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JD0wC-00026B-6R
+	(envelope-from <pmiscml@gmail.com>) id 1JD1Ym-000724-FI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2008 18:11:28 +0100
-Received: from [212.60.202.194] (helo=[192.168.2.163])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1JD1L8-0001Ig-L7; Thu, 10 Jan 2008 18:37:14 +0100
-Message-ID: <478651B8.4010304@kernelconcepts.de>
-Date: Thu, 10 Jan 2008 18:11:20 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-MIME-Version: 1.0
-To: Paul Sokolovsky <pmiscml@gmail.com>
+	Thu, 10 Jan 2008 18:51:20 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so689536fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jan 2008 09:51:13 -0800 (PST)
+Received: by 10.86.60.15 with SMTP id i15mr2043581fga.9.1199985909011;
+	Thu, 10 Jan 2008 09:25:09 -0800 (PST)
+Received: from paul.bn.lan ( [194.79.8.34])
+	by mx.google.com with ESMTPS id y18sm2988668fkd.17.2008.01.10.09.25.07
+	(version=SSLv3 cipher=OTHER); Thu, 10 Jan 2008 09:25:07 -0800 (PST)
+Date: Thu, 10 Jan 2008 19:30:57 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <436691519.20080110193057@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <478651B8.4010304@kernelconcepts.de>
 References: <1824361960.20080106235611@gmail.com>
 	<47825896.7030301@kernelconcepts.de>
 	<1133928457.20080108163429@gmail.com>
@@ -23,10 +27,9 @@ References: <1824361960.20080106235611@gmail.com>
 	<4786102C.7040703@adtelecom.es>
 	<47860F56.7050205@kernelconcepts.de>
 	<6810017939.20080110185102@gmail.com>
-In-Reply-To: <6810017939.20080110185102@gmail.com>
-X-Enigmail-Version: 0.95.0
-Cc: openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org
+	<478651B8.4010304@kernelconcepts.de>
+MIME-Version: 1.0
+Cc: angstrom-distro-devel@linuxtogo.org
 Subject: Re: [Angstrom-devel] [RFC] Smallscreen mod for GtkFileChooser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,34 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2008 17:11:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Jan 2008 17:51:22 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Hello Florian,
 
-Paul Sokolovsky schrieb:
->   And here where caveat comes - think about screen rotation. Think
-> about changing resolutions. Think about these actions happening while
-> dialog is on screen...
+Thursday, January 10, 2008, 7:11:20 PM, you wrote:
 
-I would not say this - it would be a major improvement over the current -
-completely static - spacing. Of course these situations can occur, but that's
-not the average user faces every day. Proper handling of changing display
-parameters is completely different and much more intrusive topic.
+> Hi,
+
+> Paul Sokolovsky schrieb:
+>>   And here where caveat comes - think about screen rotation. Think
+>> about changing resolutions. Think about these actions happening while
+>> dialog is on screen...
+
+> I would not say this - it would be a major improvement over the current -
+> completely static - spacing. Of course these situations can occur, but that's
+> not the average user faces every day. Proper handling of changing display
+> parameters is completely different and much more intrusive topic.
+
+  Fully agree, and that was just to again show that there're many
+issues towards ideal PDA support in gtk, and small guys would have
+hard time trying to solve it. Upstream itself, having resource and
+knowledge, should lead that movement, with support of parties having
+enough resources to push the process.
+
+  But we don't have to wait for perfect solution either - we can
+start improving usability now, even if that work will be superceded in
+the end ;-I. Who will win are users, who will be able to use Linux-on-PDA
+right now, and community, which will be growing with these happy users,
+while the Linux industry keeps improving to offer even greater stuff.
+
+> Greetings
+
+> Florian
 
 
-Greetings
 
-Florian
 
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
