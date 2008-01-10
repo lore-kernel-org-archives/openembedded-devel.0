@@ -1,24 +1,30 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1JCbUR-0006A7-7T
+Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <pmiscml@gmail.com>) id 1JCuMa-0007p4-DU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2008 15:01:08 +0100
-Received: (qmail invoked by alias); 09 Jan 2008 13:53:59 -0000
-Received: from e178108047.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.108.47]
-	by mail.gmx.net (mp001) with SMTP; 09 Jan 2008 14:53:59 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+4yw95gv+4x+RHCe2qlbKVIup2VJq65svtlzut6X
-	LbgTXWtli23T4T
-Message-ID: <4784D1F2.6080102@gmx.net>
-Date: Wed, 09 Jan 2008 14:53:54 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080103)
-MIME-Version: 1.0
+	Thu, 10 Jan 2008 11:10:21 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so561876fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jan 2008 02:10:11 -0800 (PST)
+Received: by 10.86.66.1 with SMTP id o1mr1623327fga.23.1199956409008;
+	Thu, 10 Jan 2008 01:13:29 -0800 (PST)
+Received: from paul.bn.lan ( [194.79.8.34])
+	by mx.google.com with ESMTPS id y18sm2222317fkd.17.2008.01.10.01.13.27
+	(version=SSLv3 cipher=OTHER); Thu, 10 Jan 2008 01:13:27 -0800 (PST)
+Date: Thu, 10 Jan 2008 11:19:17 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <456018236.20080110111917@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: java-native merge
+In-Reply-To: <1199810941.6053.50.camel@localhost.localdomain>
+References: <1824361960.20080106235611@gmail.com>
+	<47825896.7030301@kernelconcepts.de>
+	<1133928457.20080108163429@gmail.com>
+	<1199810941.6053.50.camel@localhost.localdomain>
+MIME-Version: 1.0
+Cc: angstrom-distro-devel@linuxtogo.org
+Subject: Re: [RFC] Smallscreen mod for GtkFileChooser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,41 +38,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2008 14:01:12 -0000
-X-Groupsio-MsgNum: 3829
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig94A8791D481CD0DA3BD59788"
+X-List-Received-Date: Thu, 10 Jan 2008 10:10:24 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
---------------enig94A8791D481CD0DA3BD59788
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-Hi,
-I have finally pushed my patches for adding virtual/java-native and
-virtual/javac-native (properly done) into the tree. Since existing
-recipes used jikes-native and ecj-native and I would like to remove
-those (at least ecj-native) they need some reworking. To track the
-status of this work (or help me :) ) have a look at PR 3655[0].
+Tuesday, January 8, 2008, 6:49:01 PM, you wrote:
 
-Regards
-Robert
+[]
 
-[0] - http://bugs.openembedded.org/show_bug.cgi?id=3D3655
+>> > Do we have a screenshot around to see how it looks? :)
+>> 
+>>   I still didn't try it due to the above. I'd like first a confirmation
+>> from Poky people that merging those patches to OE will be of benefit
+>> to them (for example, wider testing). Then we can review the
+>> functionality. I do worry a bit about QVGA support, as all latest OH
+>> workings seems to be not optimized for it (Sato, Pimlico).
+
+> We're happy enough for wider testing. I can also confirm that patch
+> works well for QVGA. I'm not sure about screenshots but qemu poky images
+> are available from http://pokylinux.org/autobuild/poky/ and have a
+> screenshot utility! I would make one but I don't have a suitable image
+> handy :(.
 
 
---------------enig94A8791D481CD0DA3BD59788
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+  We talked with Richard on IRC on how to proceed with this, and
+decided that I'd try Poky's patches and see what they offer.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+  Well, not much joy here. Here's screenshot (as installed under
+Angstrom, I'm sorry beforehand if Poky is different):
+http://linuxtogo.org/gowiki/PaulSokolovsky?action=AttachFile&do=view&target=Poky-smallscreen.png
 
-iD4DBQFHhNH2G9cfwmwwEtoRCP9MAJ9tHpNKg/eBBDdlGy9j2ygX51jFkwCYws/J
-fKzY81cMfDi6qjA3nUNPzQ==
-=lL0A
------END PGP SIGNATURE-----
+  So, what we see is that the design of the dialog is changed,
+simplifying it to just a file list, parent dir button, and buttons for
+mounted filesystems (same icons appeared in Angstrom image). There're
+still "desktop" gaps and dialog sizing (3/4 of screen width, no resize
+with matchbox).
 
---------------enig94A8791D481CD0DA3BD59788--
+  Looking at the patches, there's filechooser-respect-style.patch,
+whose name and quick scan suggests that at least gaps might be
+configurable by theme, but we have what we have and OE's "standard"
+themes like Clearlooks and GPE Default. Also, I'm not gtk+ styling
+expert, but for me it looks like it just does different arithmetic
+with the numbers hardcoded as they were before ;-(.
+
+  Main patch is filechooser-default.patch, and its size (~200k for
+gtk+ 2.10, ~400k for 2.12) and content suggests that it was an
+implementation for older gtk+, or completely different code, so it
+removes large content of pristine gtk+'s file and replaces it with
+something else.
+
+
+  I welcome different reviews, and I really, really would prefer that
+smallscreen support in gtk+ was done, and maintained, past me, but
+based on the above, and the current scope of this work (*1), I would
+like to raise the original proposal: to apply my patch, at least to
+Angstrom stable branch. Of course, I'd prefer .dev to keep in sync
+too, but if there're concerns that applying such patch would lead to
+false feeling that the issue is solved once and for all, and someone
+plans to work on that soon, .dev can be skipped. Otherwise, it still
+can be applied - we of course can shuffle and swap patches anytime the
+changes are required.
+
+
+
+*1) To make Angstrom work well now, and in sustainable manner (that includes
+applying as little and as short patches as possible, which would do as
+little as possible changes to the upstream, if the upstream can be made
+well enough usable with such small changes.
+
+
+> Cheers,
+
+> Richard
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
+
+
