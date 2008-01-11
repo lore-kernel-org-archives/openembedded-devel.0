@@ -1,46 +1,30 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <stefano.regno@spesonline.com>) id 1JDMpl-0003B1-6Y
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2008 17:34:18 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id BB0F795BA1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 25652-01-4 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 9BC7C95B8A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 957F21D944E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 19818-01-3 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
-Received: from [192.168.1.163]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 5A9C01D9451
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
-Message-ID: <47879A7E.2020500@spesonline.com>
-Date: Fri, 11 Jan 2008 17:34:06 +0100
-From: ohviey1 <stefano.regno@spesonline.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JDMzX-0004tu-Rv
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 17:44:24 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JDMzG-0001FO-Lc
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 16:44:06 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jan 2008 16:44:06 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jan 2008 16:44:06 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 11 Jan 2008 17:44:01 +0100
+Message-ID: <fm86ci$o6r$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
 User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <E1JD6S8-0007NF-85@linuxtogo.org>	<183939929.20080111135328@gmail.com><47878BD4.8040501@spesonline.com>
-	<47878D5C.8060902@student.utwente.nl>
-In-Reply-To: <47878D5C.8060902@student.utwente.nl>
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-Subject: Re: Problem with xorg download server
+Sender: news <news@ger.gmane.org>
+Subject: RFC: workaround for bug 3664
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -54,21 +38,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 16:34:23 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
+X-List-Received-Date: Fri, 11 Jan 2008 16:44:24 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
-I know the problem now the server put me probably in blacklist beacaue 
-with a proxy a can download it ;((
-Porbably because today a download a lot of package from there.
+Hi,
 
-Stefano
+my wlan card requires firmware loaded to operate.  It seems the card
+forgets the firmware upon suspend.  I reported this as bug 3664 and
+would like to propose attachment 4662 from said bug report (plus
+corresponding PR bump) as a temporary work-around.  Any comments?
 
-Ps i home next week they will remove my ip adreess from shit list
->
->
->
->   
+Regards
+
+Rolf
 
 
 
