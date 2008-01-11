@@ -1,36 +1,25 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JD1Ym-000724-FI
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2008 18:51:20 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so689536fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2008 09:51:13 -0800 (PST)
-Received: by 10.86.60.15 with SMTP id i15mr2043581fga.9.1199985909011;
-	Thu, 10 Jan 2008 09:25:09 -0800 (PST)
-Received: from paul.bn.lan ( [194.79.8.34])
-	by mx.google.com with ESMTPS id y18sm2988668fkd.17.2008.01.10.09.25.07
-	(version=SSLv3 cipher=OTHER); Thu, 10 Jan 2008 09:25:07 -0800 (PST)
-Date: Thu, 10 Jan 2008 19:30:57 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <436691519.20080110193057@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <478651B8.4010304@kernelconcepts.de>
-References: <1824361960.20080106235611@gmail.com>
-	<47825896.7030301@kernelconcepts.de>
-	<1133928457.20080108163429@gmail.com>
-	<1199810941.6053.50.camel@localhost.localdomain>
-	<456018236.20080110111917@gmail.com>
-	<4785F7D7.7030506@kernelconcepts.de>
-	<4786102C.7040703@adtelecom.es>
-	<47860F56.7050205@kernelconcepts.de>
-	<6810017939.20080110185102@gmail.com>
-	<478651B8.4010304@kernelconcepts.de>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1JDERM-0005y6-PP
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 08:36:32 +0100
+Received: from Powerbook-2.local (vpn006012.vpn.utwente.nl [130.89.6.12])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	m0B7aHfr017180 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jan 2008 08:36:18 +0100
+Message-ID: <47871C71.5020800@student.utwente.nl>
+Date: Fri, 11 Jan 2008 08:36:17 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Re: [Angstrom-devel] [RFC] Smallscreen mod for GtkFileChooser
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+X-Enigmail-Version: 0.95.6
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: mtn disapprove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,49 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2008 17:51:22 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 11 Jan 2008 07:36:33 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello Florian,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Thursday, January 10, 2008, 7:11:20 PM, you wrote:
+~From the commit messages:
 
-> Hi,
+- --
+Zaurus machine config: fix code for creation of installkit for collie
+* remove the code from collie config.  It is present in collie-2.6.inc
+- --
 
-> Paul Sokolovsky schrieb:
->>   And here where caveat comes - think about screen rotation. Think
->> about changing resolutions. Think about these actions happening while
->> dialog is on screen...
+That is factually correct, however instead of collie-2.6.inc you mean
+zaurus-2.6.inc. Lets see:
 
-> I would not say this - it would be a major improvement over the current -
-> completely static - spacing. Of course these situations can occur, but that's
-> not the average user faces every day. Proper handling of changing display
-> parameters is completely different and much more intrusive topic.
+koen@bitbake:~/OE/.dev/conf/machine$ grep require collie.conf
+require conf/machine/include/collie-${MACHINE_KERNEL_VERSION}.inc
+require conf/machine/include/tune-strongarm.inc
+koen@bitbake:~/OE/.dev/conf/machine$ grep include collie.conf
+require conf/machine/include/collie-${MACHINE_KERNEL_VERSION}.inc
+require conf/machine/include/tune-strongarm.inc
+koen@bitbake:~/OE/.dev/conf/machine$ grep require include/collie-2.*
+koen@bitbake:~/OE/.dev/conf/machine$ grep include include/collie-2.*
+koen@bitbake:~/OE/.dev/conf/machine$
 
-  Fully agree, and that was just to again show that there're many
-issues towards ideal PDA support in gtk, and small guys would have
-hard time trying to solve it. Upstream itself, having resource and
-knowledge, should lead that movement, with support of parties having
-enough resources to push the process.
-
-  But we don't have to wait for perfect solution either - we can
-start improving usability now, even if that work will be superceded in
-the end ;-I. Who will win are users, who will be able to use Linux-on-PDA
-right now, and community, which will be growing with these happy users,
-while the Linux industry keeps improving to offer even greater stuff.
-
-> Greetings
-
-> Florian
+Collie doesn't include zaurus-2.6.inc, which is why I added the code to
+collie-2.6.inc a while ago so it would actually make an installkit,
+which you broke now. Since I want an installkit (I wrote the installkit
+code for that reason) I disapproved that commit.
 
 
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
-
+iD8DBQFHhxxxMkyGM64RGpERAjMwAJ9hLuwaCm7LczNWhE6ZxfGuOTeP2wCfUlDB
+QSKivkNms6TjC/7CFL2g43g=
+=TAlG
+-----END PGP SIGNATURE-----
 
 
