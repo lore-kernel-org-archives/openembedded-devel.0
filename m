@@ -1,27 +1,29 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [72.14.220.153] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1JDFPx-0007gD-LK
-	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 09:39:11 +0100
-Received: from Powerbook-2.local (vpn006012.vpn.utwente.nl [130.89.6.12])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	m0B8cp0k004126 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 09:38:52 +0100
-Message-ID: <47872B1A.9010400@student.utwente.nl>
-Date: Fri, 11 Jan 2008 09:38:50 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <philipp.zabel@gmail.com>) id 1JDFgp-0007vt-G3
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jan 2008 09:56:35 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so922849fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jan 2008 00:56:24 -0800 (PST)
+Received: by 10.82.155.10 with SMTP id c10mr4813735bue.39.1200041402020;
+	Fri, 11 Jan 2008 00:50:02 -0800 (PST)
+Received: by 10.82.120.17 with HTTP; Fri, 11 Jan 2008 00:50:02 -0800 (PST)
+Message-ID: <74d0deb30801110050u7cc38f3di25826b4e0f6287a4@mail.gmail.com>
+Date: Fri, 11 Jan 2008 09:50:02 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <478725C6.2030304@spesonline.com>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <47871C71.5020800@student.utwente.nl> <fm79ef$hak$1@ger.gmane.org>
-In-Reply-To: <fm79ef$hak$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.6
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: mtn disapprove
+References: <1824361960.20080106235611@gmail.com>
+	<47825896.7030301@kernelconcepts.de>
+	<1133928457.20080108163429@gmail.com>
+	<1199810941.6053.50.camel@localhost.localdomain>
+	<456018236.20080110111917@gmail.com>
+	<4785F7D7.7030506@kernelconcepts.de> <4786102C.7040703@adtelecom.es>
+	<47860F56.7050205@kernelconcepts.de> <47862D3B.5050207@adtelecom.es>
+	<478725C6.2030304@spesonline.com>
+Subject: Re: problem when i compile image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,56 +37,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 08:39:13 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 11 Jan 2008 08:56:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Jan 11, 2008 9:16 AM, ohviey1 <stefano.regno@spesonline.com> wrote:
+>
+>
+> There is a problem when i try to contact this server how can i solve?
+> > http://xorg.freedesktop.org/releases/individual/lib/xtrans-1.0.3.tar.bz2
 
-Rolf Leggewie schreef:
-| Koen Kooi schrieb:
-|> however instead of collie-2.6.inc you mean zaurus-2.6.inc.
-|
-| of course.  Sorry about the glitch.  I believe I have made the correct
-| change in 6794aa0dd1ca646be71cc57651a883ac99f55985, now.  Thanks for
-| spotting it.
-|
-| While we are at it, let's try and clean the situation up a bit.
-|
-| * Is there any reason not to let zaurus-2.6.inc do what it suggests to
-|   be doing and delegate all clamshell stuff to zaurus-clamshell.inc?
-|   poodle.conf already requires zaurus-2.6.inc despite not being a
-|   clamshell model.  Let's make the changes necessary so that collie
-|   can require it as well and then delete the double entry for the
-|   installkit code from collie-2.6.inc.
-| * I am pretty sure the poodle line in collie.conf is incorrect.
-| * poodle-2.6.inc seems to be unused, can it be dropped?
-|
-| Koen, are these basically sane proposals?
-
-It's the thing I had in mind, but never worked up the motivation of
-doing :) Copy/pasting it into collie-2.6.conf was never meant as a
-long-term solution.
-
-| If so, I would prepare an mtn diff for inspection before committing.
-
-Yeah, since Richard and Marcin need to see it first.
+Try again later or check whether you are behind weird proxies or look
+at the traceroute to xorg.freedesktop.org.
+The server is up and I can download that file without problems.
 
 regards
-
-Koen
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHhysaMkyGM64RGpERAk+CAJ0byZDw9/ChfIX8ix0rIgiOMYsO/wCgksb1
-se8EgVkLjsnEppGQbCa7rzI=
-=BeZ2
------END PGP SIGNATURE-----
+Philipp
 
 
