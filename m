@@ -1,24 +1,34 @@
-Received: from [209.85.132.247] (helo=an-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JDOYP-0003lF-SW
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2008 19:24:30 +0100
-Received: by an-out-0708.google.com with SMTP id b33so256860ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 10:24:16 -0800 (PST)
-Received: by 10.100.214.15 with SMTP id m15mr7446561ang.0.1200075856087;
-	Fri, 11 Jan 2008 10:24:16 -0800 (PST)
-Received: by 10.100.190.7 with HTTP; Fri, 11 Jan 2008 10:24:16 -0800 (PST)
-Message-ID: <c384c5ea0801111024x6ff82825g1273e20694d95794@mail.gmail.com>
-Date: Fri, 11 Jan 2008 19:24:16 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <478606DB.7060501@balister.org>
-MIME-Version: 1.0
-References: <4785F736.5050707@student.utwente.nl>
-	<200801101221.53018.zecke@selfish.org>
-	<478605A1.5030209@student.utwente.nl> <478606DB.7060501@balister.org>
-Subject: Re: a5c7b007eaa675cc904f5285291d2f8a597efc84
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JDOw6-0004Wk-Nu
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 19:49:00 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JDOvo-00087Y-Il
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 18:48:40 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jan 2008 18:48:40 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jan 2008 18:48:40 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 11 Jan 2008 19:48:32 +0100
+Message-ID: <fm8dm0$ikl$1@ger.gmane.org>
+References: <47871C71.5020800@student.utwente.nl>
+	<fm79ef$hak$1@ger.gmane.org>	<47872B1A.9010400@student.utwente.nl>
+	<fm86uh$qa8$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <fm86uh$qa8$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: mtn disapprove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,27 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 18:24:34 -0000
+X-List-Received-Date: Fri, 11 Jan 2008 18:49:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+It seems this solution is not yet perfect.  All of the sudden, bitbake
+cooks up an armv5te version of libogg for the collie.  My suspicion is
+that this has to do with PACKAGE_EXTRA_ARCHS.
 
-On Jan 10, 2008 12:51 PM, Philip Balister <philip@balister.org> wrote:
-> I have gfortran installed already (must be the engineer in me) and I
-> also had to add the ugly hack in bug 3363.
->
-> Koen is right, there is something funny going on.
->
-Yup.
+What does PACKAGE_EXTRA_ARCHS do?  If set to "armv4 armv4t armv5e
+armv5te", can that provide problems for a device like the collie which
+is arm-only, not armv5te?  How about the poodle?  Is that device and all
+other Zaurus safe with "armv4 armv4t armv5e armv5te"?
 
-Why don't we revert the changes then?
+If my suspicion is true, my suggestion for Zaurus-2.6.inc is
 
-Temporarely raising the host requirements is not a nice work around.
+-PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5e armv5te"
++PACKAGE_EXTRA_ARCHS ?= "armv4 armv4t armv5e armv5te"
++PACKAGE_EXTRA_ARCHS_collie = ""
 
-Regards,
--- 
-Leon
 
 
