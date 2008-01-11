@@ -1,34 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JDPjl-0004IC-Bd
-	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 20:40:18 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1JDPjX-0002Y7-1g
-	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 19:40:03 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 11 Jan 2008 19:40:03 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 11 Jan 2008 19:40:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 11 Jan 2008 20:36:04 +0100
-Message-ID: <fm8gf3$sli$1@ger.gmane.org>
-References: <47871C71.5020800@student.utwente.nl>
-	<fm79ef$hak$1@ger.gmane.org>	<47872B1A.9010400@student.utwente.nl>
-	<fm86uh$qa8$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <fm86uh$qa8$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: mtn disapprove
+	(envelope-from <mickey@vanille-media.de>) id 1JDPwM-0008NI-Cg
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jan 2008 20:53:18 +0100
+Received: from PROMETHEUS (e180135008.adsl.alicedsl.de [85.180.135.8])
+	by drlauer-research.com (Postfix) with ESMTP id 5F254584BD7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jan 2008 20:55:15 +0100 (CET)
+Date: Fri, 11 Jan 2008 20:53:02 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+X-Mailer: The Bat! (v3.99.29) Professional
+Organization: Vanille-Media
+X-Priority: 3 (Normal)
+Message-ID: <1012499733.20080111205302@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <c384c5ea0801111024x6ff82825g1273e20694d95794@mail.gmail.com>
+References: <4785F736.5050707@student.utwente.nl>
+	<200801101221.53018.zecke@selfish.org>
+	<478605A1.5030209@student.utwente.nl>
+	<478606DB.7060501@balister.org>
+	<c384c5ea0801111024x6ff82825g1273e20694d95794@mail.gmail.com>
+MIME-Version: 1.0
+Subject: Re: a5c7b007eaa675cc904f5285291d2f8a597efc84
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,14 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 19:40:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Jan 2008 19:53:18 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie schrieb:
-> OK, here it is: http://oz.leggewie.org/wip/machine-config.diff
+Leon Woestenberg wrote:
+> Hello,
 
-updated
+> On Jan 10, 2008 12:51 PM, Philip Balister <philip@balister.org> wrote:
+>> I have gfortran installed already (must be the engineer in me) and I
+>> also had to add the ugly hack in bug 3363.
+>>
+>> Koen is right, there is something funny going on.
+>>
+> Yup.
+
+> Why don't we revert the changes then?
+
+I have reverted the change to sanity.bbclass.
+
+> Temporarely raising the host requirements is not a nice work around.
+
+Agreed. Folks, please try to fix it differently.
+
+Regards,
+
+:M:
+
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
 
