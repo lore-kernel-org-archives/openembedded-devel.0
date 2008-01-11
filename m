@@ -1,27 +1,32 @@
-Received: from [130.89.2.9] (helo=smtp.utwente.nl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1JDPRI-0008GS-2N
-	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 20:21:12 +0100
-Received: from Powerbook-2.local (vpn006012.vpn.utwente.nl [130.89.6.12])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	m0BJKqfr001189 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 20:20:53 +0100
-Message-ID: <4787C194.4060907@student.utwente.nl>
-Date: Fri, 11 Jan 2008 20:20:52 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <47871C71.5020800@student.utwente.nl>	<fm79ef$hak$1@ger.gmane.org>	<47872B1A.9010400@student.utwente.nl>	<fm86uh$qa8$1@ger.gmane.org>
-	<fm8dm0$ikl$1@ger.gmane.org>
-In-Reply-To: <fm8dm0$ikl$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.6
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JDPcS-0001td-2c
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 20:32:44 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JDPc7-000243-Kt
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 19:32:23 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jan 2008 19:32:23 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jan 2008 19:32:23 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 11 Jan 2008 20:32:12 +0100
+Message-ID: <fm8g7r$r27$1@ger.gmane.org>
+References: <47871C71.5020800@student.utwente.nl>	<fm79ef$hak$1@ger.gmane.org>	<47872B1A.9010400@student.utwente.nl>	<fm86uh$qa8$1@ger.gmane.org>	<fm8dm0$ikl$1@ger.gmane.org>
+	<4787C194.4060907@student.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <4787C194.4060907@student.utwente.nl>
+Sender: news <news@ger.gmane.org>
 Subject: Re: mtn disapprove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,59 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 19:21:13 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 11 Jan 2008 19:32:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi schrieb:
+> | If my suspicion is true, my suggestion for Zaurus-2.6.inc is
+> 
+> It isn't, the culprit is:
+> 
+> zaurus-2.6.inc:include conf/machine/include/tune-xscale.inc
 
-[I can't type, so resending]
+Thanks for the quick turnaround on this insightful comments.
 
-Rolf Leggewie schreef:
-| It seems this solution is not yet perfect.  All of the sudden, bitbake
-| cooks up an armv5te version of libogg for the collie.  My suspicion is
-| that this has to do with PACKAGE_EXTRA_ARCHS.
-|
-| What does PACKAGE_EXTRA_ARCHS do?
+I will then move above line out of zaurus-2.6.inc and into poodle.conf,
+zaurus-clamshell.inc and tosa.conf and everything should be alright, or
+did I forget an Xscale non-clamshell modell?
 
-It telss ipkg(-collateral) which architectures the device can use (IOW:
-what to put in /etc/ipkg/arch.conf).
-
-| If set to "armv4 armv4t armv5e
-| armv5te", can that provide problems for a device like the collie which
-| is arm-only, not armv5te?
-
-Yes, since it will allow users (and do_rootfs) to install binaries that
-won't work.
-
-|  How about the poodle?
-
-poodle is armv5te (pxa25x xscale), collie is armv4 (sa1100 strongarm)
-
-| Is that device and all
-| other Zaurus safe with "armv4 armv4t armv5e armv5te"?
-|
-| If my suspicion is true, my suggestion for Zaurus-2.6.inc is
-
-It isn't, the culprit is:
-
-zaurus-2.6.inc:include conf/machine/include/tune-xscale.inc
-
-regards,
-
-Koen
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHh8GUMkyGM64RGpERAl3CAJsG3qi/IKbGdoqWGYpWmyD4uteKfQCeJ7b6
-S80GSWd6Ls+nKfDfODxzQiM=
-=kt3d
------END PGP SIGNATURE-----
 
 
