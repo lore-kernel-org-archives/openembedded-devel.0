@@ -1,22 +1,32 @@
-Received: from [217.116.0.27] (helo=correo9.acens.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <joaquinduran@adtelecom.es>) id 1JDEr0-0006J7-DL
-	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 09:03:09 +0100
-Received: (qmail 20207 invoked from network); 11 Jan 2008 07:36:10 -0000
-Received: from unknown (HELO [194.179.62.51])
-	(joaquinduran.adtelecom.es@[217.125.169.184])
-	(envelope-sender <joaquinduran@adtelecom.es>)
-	by correo9.acens.net (qmail-ldap-1.03) with SMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	11 Jan 2008 07:36:10 -0000
-Message-ID: <47872916.7020802@adtelecom.es>
-Date: Fri, 11 Jan 2008 09:30:14 +0100
-From: Joaquim Duran <joaquinduran@adtelecom.es>
-Organization: AD Telecom
-User-Agent: Thunderbird 2.0.0.9 (X11/20071116)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: RFC: unify functions to check if arch has FPU or not
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JDFHf-0007YT-0I
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 09:30:39 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JDFHM-000619-Er
+	for openembedded-devel@openembedded.org; Fri, 11 Jan 2008 08:30:16 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jan 2008 08:30:16 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jan 2008 08:30:16 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 11 Jan 2008 09:30:08 +0100
+Message-ID: <fm79ef$hak$1@ger.gmane.org>
+References: <47871C71.5020800@student.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <47871C71.5020800@student.utwente.nl>
+Sender: news <news@ger.gmane.org>
+Subject: Re: mtn disapprove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,31 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 08:03:29 -0000
+X-List-Received-Date: Fri, 11 Jan 2008 08:30:50 -0000
 Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Koen Kooi schrieb:
+> however instead of collie-2.6.inc you mean zaurus-2.6.inc.
 
-There are several packages that at .bb file is checked if the
-architecture includes or not a FPU to configure compilation parameters,
-like gtk+, cairo, alsa.
+of course.  Sorry about the glitch.  I believe I have made the correct
+change in 6794aa0dd1ca646be71cc57651a883ac99f55985, now.  Thanks for
+spotting it.
 
-The idea is create a function similar to the existing ones with to added
-parameters: one should be returned when there is FPU in the architecture
-and the other when there is no FPU.
+While we are at it, let's try and clean the situation up a bit.
 
-Example:
+* Is there any reason not to let zaurus-2.6.inc do what it suggests to
+  be doing and delegate all clamshell stuff to zaurus-clamshell.inc?
+  poodle.conf already requires zaurus-2.6.inc despite not being a
+  clamshell model.  Let's make the changes necessary so that collie
+  can require it as well and then delete the double entry for the
+  installkit code from collie-2.6.inc.
+* I am pretty sure the poodle line in collie.conf is incorrect.
+* poodle-2.6.inc seems to be unused, can it be dropped?
 
-def get_fpu_setting(bb, d, fpu, nofpu):
-        if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
-                return nofpu
-        return fpu
+Koen, are these basically sane proposals?  If so, I would prepare an mtn
+diff for inspection before committing.
 
-get_fpu_setting(bb, d, "--enable-fpu", "--disable-fpu")
+Regards
 
+Rolf
 
-Thanks
-Joaquim Duran
 
 
