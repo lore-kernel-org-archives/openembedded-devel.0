@@ -1,21 +1,26 @@
-Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
+Received: from [209.85.132.247] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <theqmann@gmail.com>) id 1JDROc-0001XL-ME
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JDRmS-0001u6-Uf
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2008 22:26:35 +0100
-Received: by wa-out-1112.google.com with SMTP id l24so2154809waf.22
+	Fri, 11 Jan 2008 22:51:13 +0100
+Received: by an-out-0708.google.com with SMTP id b33so271602ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 13:26:19 -0800 (PST)
-Received: by 10.115.107.1 with SMTP id j1mr4165302wam.55.1200085062542;
-	Fri, 11 Jan 2008 12:57:42 -0800 (PST)
-Received: by 10.114.47.16 with HTTP; Fri, 11 Jan 2008 12:57:42 -0800 (PST)
-Message-ID: <c67f1650801111257g286daeb5xfdec6550eca69dc6@mail.gmail.com>
-Date: Fri, 11 Jan 2008 12:57:42 -0800
-From: QMan <theqmann@gmail.com>
+	Fri, 11 Jan 2008 13:50:58 -0800 (PST)
+Received: by 10.100.228.17 with SMTP id a17mr7629331anh.7.1200081916144;
+	Fri, 11 Jan 2008 12:05:16 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Fri, 11 Jan 2008 12:05:16 -0800 (PST)
+Message-ID: <c384c5ea0801111205k78452cebl8a8c65fea89df706@mail.gmail.com>
+Date: Fri, 11 Jan 2008 21:05:16 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1012499733.20080111205302@vanille-media.de>
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: mtn disapprove
+References: <4785F736.5050707@student.utwente.nl>
+	<200801101221.53018.zecke@selfish.org>
+	<478605A1.5030209@student.utwente.nl> <478606DB.7060501@balister.org>
+	<c384c5ea0801111024x6ff82825g1273e20694d95794@mail.gmail.com>
+	<1012499733.20080111205302@vanille-media.de>
+Subject: Re: a5c7b007eaa675cc904f5285291d2f8a597efc84
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,49 +34,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 21:26:35 -0000
+X-List-Received-Date: Fri, 11 Jan 2008 21:51:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-While we're on the subject of the collie machine stuff, we need to make sure
-the tune-strongarm.inc that collie calls doesn't use the -mtune=xscale, as
-is the current case, and instead use -mtune=strongarm1100 (not collie) or
--mtune=strongarm1110 (collie).  Also, the collie installkit script should
-make "zImage" not "zImage.bin"
+Hello,
 
--John
+On Jan 11, 2008 8:53 PM, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
+> Leon Woestenberg wrote:
+> > Hello,
+>
+> > On Jan 10, 2008 12:51 PM, Philip Balister <philip@balister.org> wrote:
+> >> I have gfortran installed already (must be the engineer in me) and I
+> >> also had to add the ugly hack in bug 3363.
+> >>
+> >> Koen is right, there is something funny going on.
+> >>
+> > Yup.
+>
+> > Why don't we revert the changes then?
+>
+> I have reverted the change to sanity.bbclass.
+>
+> > Temporarely raising the host requirements is not a nice work around.
+>
+> Agreed. Folks, please try to fix it differently.
+>
+Mickey just reverted the hard requirement. Thanks.
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
-> Of Rolf Leggewie
-> Sent: Friday, January 11, 2008 8:54 AM
-> To: openembedded-devel@openembedded.org
-> Subject: Re: [oe] mtn disapprove
->
-> Koen Kooi schrieb:
-> > It's the thing I had in mind, but never worked up the motivation of
-> > doing :)
->
-> OK, here it is: http://oz.leggewie.org/wip/machine-config.diff
->
-> * drop unused poodle-2.6.inc
-> * work contents of collie-2.6.inc into collie.conf
-> * require zaurus-2.6.inc for collie.conf
-> * deleted entries from collie.conf that seem superfluous
-> * made some changes to zaurus-2.6.inc to make sure it applies
->   to all Zaurus models
-> * define SERIAL_CONSOLE in zaurus-2.6.inc as ?=
->
-> RP and hrw have given their OK.  I have locally committed it as
-> 49cb87ce3fb4d9857d853d9e54f38fa88e9ccc85.  If there are no objections,
-> I will eventually push it.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+It's not that I do not value the effort for Fortran stuff being added,
+but we know that if we don't do stuff properly from the beginning, it
+will bite us in the end.
+
+Especially so with the toolchains. They are hard enough to do properly already.
+
+Regards,
+-- 
+Leon
+
 
