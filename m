@@ -1,36 +1,36 @@
 Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <stefano.regno@spesonline.com>) id 1JDM8b-0006Zs-1T
+	(envelope-from <stefano.regno@spesonline.com>) id 1JDMpl-0003B1-6Y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2008 16:49:41 +0100
+	Fri, 11 Jan 2008 17:34:18 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id BBA1395B4E
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id BB0F795BA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 16:49:28 +0100 (CET)
+	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
 Received: from sirio.fastnet.it ([127.0.0.1])
 	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 22802-01-9 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 16:49:28 +0100 (CET)
+	id 25652-01-4 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
 Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 9FCB195A85
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 9BC7C95B8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 16:49:28 +0100 (CET)
+	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id A1FF11D9457
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 957F21D944E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 16:49:28 +0100 (CET)
+	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
 Received: from sole.fastnet.it ([127.0.0.1])
 	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 02645-01-7 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 16:49:28 +0100 (CET)
+	id 19818-01-3 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
 Received: from [192.168.1.163]
 	(host141-216-static.91-82-b.business.telecomitalia.it
 	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id E79101D944F
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 5A9C01D9451
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2008 16:49:27 +0100 (CET)
-Message-ID: <47879006.8020002@spesonline.com>
-Date: Fri, 11 Jan 2008 16:49:26 +0100
+	Fri, 11 Jan 2008 17:34:04 +0100 (CET)
+Message-ID: <47879A7E.2020500@spesonline.com>
+Date: Fri, 11 Jan 2008 17:34:06 +0100
 From: ohviey1 <stefano.regno@spesonline.com>
 User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
 MIME-Version: 1.0
@@ -54,12 +54,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 15:49:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 11 Jan 2008 16:34:23 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Tnx a lot a will try to downlad it to my home
+I know the problem now the server put me probably in blacklist beacaue 
+with a proxy a can download it ;((
+Porbably because today a download a lot of package from there.
 
-Regards Stefano
+Stefano
+
+Ps i home next week they will remove my ip adreess from shit list
+>
+>
+>
+>   
+
 
 
