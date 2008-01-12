@@ -1,27 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <thommycheck@gmx.de>) id 1JDTd4-0001Tp-0v
+Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <pmiscml@gmail.com>) id 1JDVFS-0003AZ-L3
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Jan 2008 00:49:38 +0100
-Received: (qmail invoked by alias); 11 Jan 2008 23:22:41 -0000
-Received: from BAA2af5.baa.pppool.de (EHLO [192.168.178.21]) [77.128.42.245]
-	by mail.gmx.net (mp019) with SMTP; 12 Jan 2008 00:22:41 +0100
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX1+sO7km1NOsxxfTZRHJJXsr6b7XqCxrkf2JgyX8oM
-	PPv/up1aIn6H0H
-From: Thomas Kunze <thommycheck@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fm8g7r$r27$1@ger.gmane.org>
-References: <47871C71.5020800@student.utwente.nl>
-	<fm79ef$hak$1@ger.gmane.org>	<47872B1A.9010400@student.utwente.nl>
-	<fm86uh$qa8$1@ger.gmane.org>	<fm8dm0$ikl$1@ger.gmane.org>
-	<4787C194.4060907@student.utwente.nl>  <fm8g7r$r27$1@ger.gmane.org>
-Date: Sat, 12 Jan 2008 00:22:40 +0100
-Message-Id: <1200093760.6074.2.camel@HD>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Y-GMX-Trusted: 0
-Subject: Re: mtn disapprove
+	Sat, 12 Jan 2008 02:33:22 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so1197302fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jan 2008 17:33:07 -0800 (PST)
+Received: by 10.86.30.9 with SMTP id d9mr3469243fgd.52.1200095821386;
+	Fri, 11 Jan 2008 15:57:01 -0800 (PST)
+Received: from paul.bn.lan ( [194.79.8.34])
+	by mx.google.com with ESMTPS id 13sm5484199fks.8.2008.01.11.15.56.59
+	(version=SSLv3 cipher=OTHER); Fri, 11 Jan 2008 15:57:00 -0800 (PST)
+Date: Sat, 12 Jan 2008 02:02:52 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <1404851190.20080112020252@gmail.com>
+To: Leon Woestenberg <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <c384c5ea0801111205k78452cebl8a8c65fea89df706@mail.gmail.com>
+References: <4785F736.5050707@student.utwente.nl>
+	<200801101221.53018.zecke@selfish.org>
+	<478605A1.5030209@student.utwente.nl>
+	<478606DB.7060501@balister.org>
+	<c384c5ea0801111024x6ff82825g1273e20694d95794@mail.gmail.com>
+	<1012499733.20080111205302@vanille-media.de>
+	<c384c5ea0801111205k78452cebl8a8c65fea89df706@mail.gmail.com>
+MIME-Version: 1.0
+Subject: Re: a5c7b007eaa675cc904f5285291d2f8a597efc84
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,18 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2008 23:49:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 12 Jan 2008 01:33:22 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-> I will then move above line out of zaurus-2.6.inc and into poodle.conf,
-> zaurus-clamshell.inc and tosa.conf and everything should be alright, or
-> did I forget an Xscale non-clamshell modell?
+Hello Leon,
 
-I would also move the PACKAGE_ARCH stuff.
+Friday, January 11, 2008, 10:05:16 PM, you wrote:
 
-Regards,
-Thomas
+[]
+
+> Mickey just reverted the hard requirement. Thanks.
+
+> It's not that I do not value the effort for Fortran stuff being added,
+> but we know that if we don't do stuff properly from the beginning, it
+> will bite us in the end.
+
+  No, it will be biting us all the way thru! ;-D
+
+> Especially so with the toolchains. They are hard enough to do properly already.
+
+> Regards,
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
