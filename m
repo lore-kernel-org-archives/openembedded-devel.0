@@ -1,19 +1,19 @@
-Received: from [195.121.247.22] (helo=psmtp08.wxs.nl)
+Received: from [195.121.247.7] (helo=smtp16.wxs.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gerwin@vanderkruis.net>) id 1JDVLs-0003Fg-EX
+	(envelope-from <gerwin@vanderkruis.net>) id 1JDVPg-0003JE-F3
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Jan 2008 02:40:00 +0100
+	Sat, 12 Jan 2008 02:43:56 +0100
 Received: from battlestation.lan (ip5457b30e.direct-adsl.nl [84.87.179.14])
-	by psmtp08.wxs.nl
-	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006))
-	with ESMTP id <0JUI00DMZC5IGF@psmtp08.wxs.nl> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	12 Jan 2008 02:29:42 +0100 (MET)
-Date: Sat, 12 Jan 2008 02:29:41 +0100
+	by smtp16.wxs.nl
+	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006)) with
+	ESMTP id <0JUI009U0CC1QV@smtp16.wxs.nl> for
+	openembedded-devel@lists.openembedded.org; 
+	Sat, 12 Jan 2008 02:33:37 +0100 (CET)
+Date: Sat, 12 Jan 2008 02:33:37 +0100
 From: Gerwin van der Kruis <gerwin@vanderkruis.net>
 In-reply-to: <c384c5ea0801111421w47dcf81s80e9dd5b7b4160d3@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <200801120229.41830.gerwin@vanderkruis.net>
+Message-id: <200801120233.37730.gerwin@vanderkruis.net>
 Organization: GO-2K
 MIME-version: 1.0
 User-Agent: KMail/1.9.6 (enterprise 0.20070907.709405)
@@ -34,41 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Jan 2008 01:40:00 -0000
+X-List-Received-Date: Sat, 12 Jan 2008 01:43:56 -0000
 Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: quoted-printable
+Content-transfer-encoding: 7BIT
 Content-disposition: inline
 
 On Friday 11 January 2008 23:21:15 Leon Woestenberg wrote:
-> Hello all,
->
-> On Jan 9, 2008 11:44 AM, Daniel Willmann <daniel@totalueberwachung.de>=20
-wrote:
-> > > >> Let's try to reserve rooms in the same hotel, so that we
-> >
-> > I'm also in, as is Jan L=FCbbe. We've already made a reservation at the
-> > Astrid, but that can be cancelled if we end up in a different hotel.
->
-> The resulting OE Hotel is Astrid (Centre).
->
-> Philip 'Crofton' booked for himself. I booked and pre-payed for
-> 'mickeyl' and 'zecke' and myself.
->
-> We booked using "expedia.com" for a somewhat cheaper price.
->
-> Regards,
-Last year the astrid was full and managed to get some cheap hotel quite=20
-easily.=20
 
+I would like to edit the wiki to put on the booth duties and stuff 
 
-(Except for the fact my card was not working )
+I also want to issue the press release for this year are we going to show 
+anything new ?
 
-Regards,=20
+I also would like to make a list of people who is attending ....
+
+Also a reminder that belgium has those strange power sleeves . 
+Last year we got donated a couple of them does anybody know where those are ?
+
+Regards, 
 
 Gerwin
 
 
-=2D-=20
+
+-- 
 Gerwin@battlestation1(laptop)
 
 
