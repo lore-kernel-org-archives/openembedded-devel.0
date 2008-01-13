@@ -1,30 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JDekG-0001X5-1g
-	for openembedded-devel@openembedded.org; Sat, 12 Jan 2008 12:41:48 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0CBfUMV017323
-	for <openembedded-devel@openembedded.org>; Sat, 12 Jan 2008 11:41:30 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 17083-06 for <openembedded-devel@openembedded.org>;
-	Sat, 12 Jan 2008 11:41:24 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0CBfKPF017317
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sat, 12 Jan 2008 11:41:20 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <fma5ih$5k5$2@ger.gmane.org>
-References: <c67f1650801111257g286daeb5xfdec6550eca69dc6@mail.gmail.com>
-	<fma5ih$5k5$2@ger.gmane.org>
-Date: Sat, 12 Jan 2008 11:41:19 +0000
-Message-Id: <1200138079.5288.2.camel@localhost.localdomain>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <thommycheck@gmx.de>) id 1JE2at-0006vf-KJ
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Jan 2008 14:09:43 +0100
+Received: (qmail invoked by alias); 13 Jan 2008 13:09:17 -0000
+Received: from BAEf986.bae.pppool.de (EHLO [192.168.178.21]) [77.132.249.134]
+	by mail.gmx.net (mp040) with SMTP; 13 Jan 2008 14:09:17 +0100
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX1+QyyoZQH2Qs3FbpvX5NSy0xVuF5ioLDROEO3DmN1
+	dk2B+JLXMdu8lH
+From: Thomas Kunze <thommycheck@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <fma5d5$5k5$1@ger.gmane.org>
+References: <47871C71.5020800@student.utwente.nl>
+	<fm79ef$hak$1@ger.gmane.org>	<47872B1A.9010400@student.utwente.nl>
+	<fm86uh$qa8$1@ger.gmane.org>	<fm8dm0$ikl$1@ger.gmane.org>
+	<4787C194.4060907@student.utwente.nl> <fm8g7r$r27$1@ger.gmane.org>
+	<1200093760.6074.2.camel@HD>  <fma5d5$5k5$1@ger.gmane.org>
+Date: Sun, 13 Jan 2008 14:09:16 +0100
+Message-Id: <1200229756.6056.4.camel@HD>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+X-Mailer: Evolution 2.12.1 
+X-Y-GMX-Trusted: 0
 Subject: Re: mtn disapprove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -39,75 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Jan 2008 11:41:48 -0000
+X-List-Received-Date: Sun, 13 Jan 2008 13:09:44 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2008-01-12 at 11:42 +0100, Rolf Leggewie wrote: 
-> John, thank you for being so observative.  I made the changes to
-> tune-strongarm.inc as you suggested.  zImage instead of zImage.bin has
-> already been committed a couple of days ago.  In fact it was the commit
-> that originally started this thread IIRC.  Thanks again.
+
+On Sat, 2008-01-12 at 11:39 +0100, Rolf Leggewie wrote:
+> Thomas,
 > 
-> I updated http://oz.leggewie.org/wip/machine-config.diff once more to
-> reflect the latest status.
+> thank you for your suggestion.  Please correct me if I misunderstand you.
+> 
+> Thomas Kunze schrieb:
+> > I would also move the PACKAGE_ARCH stuff.
+> 
+> You suggest to move the PACKAGE_ARCH stuff out of the inc file and into
+> the individual config files?  For what benefit?  They are common for all
+> machines except for the collie, so I believe .inc is the best place for
+> that.
+The same is true for "include tune-xscale.inc". So one could use
+include_collie (if this is possible). But the other way is IMO cleaner.
+Have only things in zaurus-2.6.inc that are common to all zaurus. OTOH
+it may make sense to separate collie from the other zaurus because
+collie doesn't have much in common with them.
 
-Looks good and is fine with me, some really minor comments inline below:
-
-> --- conf/machine/collie.conf	8ec2568fe9cb9c9b5580adf5e26eb873400e040c
-> +++ conf/machine/collie.conf	b40e4db0893370c9b1145d8ad93ca1069a1f1002
-> @@ -5,22 +5,18 @@ MACHINE_KERNEL_VERSION ?= "2.6"
-[...]
-> PREFERRED_PROVIDER_xserver = "xserver-kdrive"
->  
-> -# This is needed for the ramdisk script to work
-> -MACHINE_EXTRA_RDEPENDS += "e2fsprogs-mke2fs"
-> -
-
-What happened to this? It looks wrong, I just want to make sure the
-underlying problem was fixed...
-
-> --- conf/machine/include/tune-strongarm.inc	4bb1dc721e55061bb98b49bae4f57bd4ff088f02
-> +++ conf/machine/include/tune-strongarm.inc	ffef523af56befe09f34efee482f2cb5677e4caf
-> @@ -1,2 +1,3 @@
-> -TARGET_CC_ARCH = "-march=armv4 -mtune=xscale"
-> +TARGET_CC_ARCH ?= "-march=armv4 -mtune=strongarm1100"
-> +TARGET_CC_ARCH_collie = "-march=armv4 -mtune=strongarm1110"
-
-We should really have tune-strongarm1100.inc and
-tune-strongarm1110.inc...
- 
-> --- conf/machine/include/zaurus-2.6.inc	7d4d7255328d5d3f3d61e09ec7b527085533b4d6
-> +++ conf/machine/include/zaurus-2.6.inc	88f14d96b91bd44fabb62b5b7c9158ed161774be
-> @@ -1,8 +1,9 @@
-[...] 
->  TARGET_ARCH = "arm"
-> -PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5e armv5te"
-> +PACKAGE_EXTRA_ARCHS ?= "armv4 armv4t armv5e armv5te"
-> +PACKAGE_EXTRA_ARCHS_collie = ""
-
-No need for the ?= here...
-
-> @@ -10,20 +11,14 @@ EXTRA_IMAGECMD_jffs2 = "--little-endian 
->  ERASEBLOCKSIZE_akita = "0x20000"
->  
->  EXTRA_IMAGECMD_jffs2 = "--little-endian --eraseblock=${ERASEBLOCKSIZE} --pad --faketime -n" 
-> -
->  IMAGE_CMD_jffs2 = "mkfs.jffs2 -x lzo --root=${IMAGE_ROOTFS} --output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ${EXTRA_IMAGECMD}"
-> -
->  EXTRA_IMAGEDEPENDS += "zaurus-updater"
->  
-> -# Use tune-xscale per default. Machine independent feeds should be built with tune-strongarm.
-> -include conf/machine/include/tune-xscale.inc
-> +SERIAL_CONSOLE ?= "115200 ttyS0"
-
-or here...
-
-Cheers,
-
-Richard
-
-
+> 
+> Regards
+> 
+> Rolf
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
