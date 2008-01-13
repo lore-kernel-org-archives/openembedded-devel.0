@@ -1,30 +1,20 @@
-Received: from [194.100.190.193] (helo=brando.wapice.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <risto@wapice.com>) id 1JE4bT-0001Qk-Dn
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Jan 2008 16:18:54 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by brando.wapice.com (Postfix) with ESMTP id CB411F7C003
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2008 17:18:00 +0200 (EET)
-X-Virus-Scanned: amavisd-new at wapice.com
-Received: from brando.wapice.com ([127.0.0.1])
-	by localhost (brando.wapice.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9FClVtBw4cyC
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2008 17:17:56 +0200 (EET)
-Received: from [192.168.60.166] (unknown [192.168.60.166])
-	by brando.wapice.com (Postfix) with ESMTP id 0E125F7C002
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2008 17:17:56 +0200 (EET)
-From: Risto Pajula <risto@wapice.com>
-Organization: Wapice Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Jan 2008 17:18:55 +0200
-User-Agent: KMail/1.9.6 (enterprise 20070904.708012)
+	(envelope-from <philip@balister.org>) id 1JE4qF-0006Df-Fl
+	for openembedded-devel@openembedded.org; Sun, 13 Jan 2008 16:33:43 +0100
+Received: (qmail 24930 invoked by uid 1003); 13 Jan 2008 15:34:13 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 13 Jan 2008 15:34:13 -0000
+Message-ID: <478A2F3A.4090402@balister.org>
+Date: Sun, 13 Jan 2008 10:33:14 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.9 (X11/20071115)
 MIME-Version: 1.0
-Message-Id: <200801131718.55872.risto@wapice.com>
-Subject: large uImage size
+To: openembedded-devel@openembedded.org
+References: <200801131718.55872.risto@wapice.com>
+In-Reply-To: <200801131718.55872.risto@wapice.com>
+Subject: Re: large uImage size
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,43 +28,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jan 2008 15:19:35 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Sun, 13 Jan 2008 15:33:43 -0000
+X-Groupsio-MsgNum: 3882
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms060507040502010603090808"
+
+--------------ms060507040502010603090808
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello.
+Risto Pajula wrote:
+> Hello.
+> 
+> I am getting very large kernel image size (~4,5 MB) when using the 
+> cross-compiler built with a recent version of openembedded. Normal kernel 
+> image size is around 1,5 MB. The large kernel image size only happens when 
+> building the kernel outside the openembedded build environment, when building 
+> with the normal OE build (bitbake minimal-image) the resulting kernel image 
+> size is normal.
 
-I am getting very large kernel image size (~4,5 MB) when using the 
-cross-compiler built with a recent version of openembedded. Normal kernel 
-image size is around 1,5 MB. The large kernel image size only happens when 
-building the kernel outside the openembedded build environment, when building 
-with the normal OE build (bitbake minimal-image) the resulting kernel image 
-size is normal.
+The newer version of binutils does this. This patch should solve the 
+problem. I put this copy in linux/linux-davinci. I believe it has been 
+sent upstream ...
 
-This has however changed in some point of OE development. If I use an old OE 
-snapshot and build the crosscompiler with it the resulting kernel image even 
-when building outside OE environment is normal. (Both however use gcc 4.1.2).
+Philip
 
-I have tried to figure what is different in the environment when building the 
-kernel within OE and outside it but any of the environment variables and etc. 
-have not solved the problem.
+diff --git a/arch/arm/kernel/vmlinux.lds.S b/arch/arm/kernel/vmlinux.lds.S
+index 5ff5406..538fcb5 100644
+--- a/arch/arm/kernel/vmlinux.lds.S
++++ b/arch/arm/kernel/vmlinux.lds.S
+@@ -94,6 +94,7 @@ SECTIONS
+                         TEXT_TEXT
+                         SCHED_TEXT
+                         LOCK_TEXT
++                       *(.note.*)
+  #ifdef CONFIG_MMU
+                         *(.fixup)
+  #endif
 
-Does anybody know any changes in the OE which could cause this different 
-behaviour in the gcc cross-compiler built with it?
+--------------ms060507040502010603090808
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-Machine: at91sam9263-ek.
-The kernel compilation ouside OE: 
-make ARCH=arm 
-CROSS_COMPILE=/PATH_TO_OE_BUILD_DIR/tmp/cross/bin/arm-angstrom-linux-gnueabi- 
-uImage
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
+OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
+65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
+X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
+tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
+szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
+nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
+U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
+ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
+HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
+dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
+RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
+rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
+6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
+Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDExMzE1
+MzMxNFowIwYJKoZIhvcNAQkEMRYEFD+DyqCVyvAn+4M7LasE/60FnyTZMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
+qTANBgkqhkiG9w0BAQEFAASCAQAdJj1tOQqOIw2B48IUCQ6X98IfgglFUY+y19ed7AaWgtpN/fVF
+sNub20kYs2b2aGStH7OTmaDOXnXCrt83uThI6nNWZM6SSrS5xgHsagaajKyNfmAxxJ+T5v8qu11M
+iMBMZ3koeVOOeGXy64WI2G0WnC6pV6MrY72/TF6qN9MCd0v8SqBD23o0pJRg6g1SoHmCGxdgJ+Nt
+I8d9sk6YGTagixMghgSRvKYLVc1pC+E4sg13UlNVXJrIC4oon2JIXGyo9ENRrWEi1aUVyaycM5dT
+jWYDNWGGCDLYEyvHPcW/Dor0VU8jemdB/EyhMw7v6yoY2ecYEtsv9sm8HLJ9wAeTAAAAAAAA
 
-I want to build the development kernel outside of openembedded framewok for 
-various reasons but use OE crosscompiler. So any help or suggestions for 
-figuring out why this happens would be appreciated.
-
-BR.
-Risto
-
-
+--------------ms060507040502010603090808--
