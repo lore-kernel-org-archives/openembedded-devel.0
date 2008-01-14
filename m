@@ -1,21 +1,45 @@
-Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <theqmann@gmail.com>) id 1JEApm-00027a-Un
+	(envelope-from <stefano.regno@spesonline.com>) id 1JEM3k-00009I-Eb
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Jan 2008 22:57:39 +0100
-Received: by wa-out-1112.google.com with SMTP id l24so3532932waf.22
+	Mon, 14 Jan 2008 10:56:50 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id ED71F95B5C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2008 13:57:11 -0800 (PST)
-Received: by 10.114.171.1 with SMTP id t1mr1048597wae.83.1200261429779;
-	Sun, 13 Jan 2008 13:57:09 -0800 (PST)
-Received: by 10.114.47.16 with HTTP; Sun, 13 Jan 2008 13:57:09 -0800 (PST)
-Message-ID: <c67f1650801131357t54ba579qb060eb18c709cc64@mail.gmail.com>
-Date: Sun, 13 Jan 2008 13:57:09 -0800
-From: QMan <theqmann@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Mon, 14 Jan 2008 10:56:18 +0100 (CET)
+Received: from sirio.fastnet.it ([127.0.0.1])
+	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 09737-01-2 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jan 2008 10:56:18 +0100 (CET)
+Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id D08CE95B42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jan 2008 10:56:18 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id E5AC21D946C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jan 2008 10:56:18 +0100 (CET)
+Received: from sole.fastnet.it ([127.0.0.1])
+	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 10327-01-4 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jan 2008 10:56:18 +0100 (CET)
+Received: from [192.168.1.163]
+	(host141-216-static.91-82-b.business.telecomitalia.it
+	[82.91.216.141])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id D4B2B1D9488
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jan 2008 10:55:54 +0100 (CET)
+Message-ID: <478B31AB.2010000@spesonline.com>
+Date: Mon, 14 Jan 2008 10:55:55 +0100
+From: ohviey1 <stefano.regno@spesonline.com>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: kernel-module-* have disappeared?
+To: openembedded-devel@lists.openembedded.org
+References: <fm86ci$o6r$1@ger.gmane.org> <fm89sl$51l$1@ger.gmane.org>
+In-Reply-To: <fm89sl$51l$1@ger.gmane.org>
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+Subject: don't find this packed in the ftp server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,87 +53,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jan 2008 21:57:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 14 Jan 2008 09:56:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Nevermind, was just a common occurrance of brain fart.
+NOTE: Task failed: Fetch failed: 
+http://download.gnome.org/sources/glib/2.12/glib-2.14.5.tar.bz2
+NOTE: package glib-2.0-native-2.14.5-r2: task do_fetch: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package glib-2.0-native-2.14.5: failed
+ERROR: Build of 
+/home/stefano/poky/meta/packages/glib-2.0/glib-2.0-native_2.14.5.bb 
+do_fetch failed
+ERROR: Task 1169 
+(/home/stefano/poky/meta/packages/glib-2.0/glib-2.0-native_2.14.5.bb, 
+do_fetch) failed
+NOTE: Tasks Summary: Attempted 202 tasks of which 202 didn't need to be 
+rerun and 1 failed.
+ERROR: 
+'/home/stefano/poky/meta/packages/glib-2.0/glib-2.0-native_2.14.5.bb' failed
 
--John
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
-> Behalf Of QMan
-> Sent: Sunday, January 13, 2008 1:14 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] kernel-module-* have disappeared?
->
-> I was trying to build console-image today, and
-> task-base-extended complained about not being able to satisfy
-> any kernel-module-* recommendations:
->
-> | task-base-kernel26: unsatisfied recommendation for
-> kernel-module-input
-> | task-base-kernel26: unsatisfied recommendation for
-> | kernel-module-uinput
-> | task-base-kernel26: unsatisfied recommendation for
-> | kernel-module-rtc-dev
-> | task-base-kernel26: unsatisfied recommendation for
-> | kernel-module-rtc-proc
-> | task-base-kernel26: unsatisfied recommendation for
-> | kernel-module-rtc-sysfs
-> | task-base-irda: unsatisfied recommendation for
-> | kernel-module-pxaficp-ir
-> | task-base-irda: unsatisfied recommendation for kernel-module-irport
-> | task-base-irda: unsatisfied recommendation for kernel-module-irtty
-> | task-base-pcmcia: unsatisfied recommendation for
-> | kernel-module-hostap-cs
-> | task-base-pcmcia: unsatisfied recommendation for
-> | kernel-module-spectrum-cs
-> | task-base-pcmcia: unsatisfied recommendation for
-> kernel-module-airo-cs
-> | task-base-usbgadget: unsatisfied recommendation for
-> kernel-module-pxa27x_udc
-> | task-base-usbgadget: unsatisfied recommendation for
-> | kernel-module-gadgetfs
-> | task-base-usbgadget: unsatisfied recommendation for
-> kernel-module-g-file-storage
-> | task-base-usbgadget: unsatisfied recommendation for
-> | kernel-module-g-serial
-> | task-base-usbgadget: unsatisfied recommendation for
-> | kernel-module-g-ether
-> | task-base-wifi: unsatisfied recommendation for kernel-module-aes
-> | task-base-ppp: unsatisfied recommendation for kernel-module-ppp-mppe
-> | task-base-bluetooth: unsatisfied recommendation for
-> kernel-module-bluetooth3c-cs
-> | task-base-bluetooth: unsatisfied recommendation for
-> kernel-module-bluetoothuart-cs
->
->  and then failed on not being able to satisfy kernel-module-ext3:
->
-> | ERROR: Cannot satisfy the following dependencies for
-> task-base-extended:
-> |        kernel-module-ext3
->
->
-> Suspecting mischief, I quickly searched for kernel-module targets:
->
-> qbot@qphoenix:~/stuff/org.openembedded.dev$ find ./ | grep
-> kernel-module
-> ./packages/wlags-modules/kernel-module-wlags49-h1-cs_718.bb
-> ./packages/wlags-modules/kernel-module-wlags49-h2-cs_718.bb
-> qbot@qphoenix:~/stuff/org.openembedded.dev$
->
-> Something seems to have happened to all the kernel-module
-> targets on my system.  Can anyone else verify this happened?
->
->
-> -John
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
