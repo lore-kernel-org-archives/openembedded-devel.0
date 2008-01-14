@@ -1,24 +1,33 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1JENj6-0003pZ-0r
-	for openembedded-devel@openembedded.org; Mon, 14 Jan 2008 12:43:36 +0100
-Received: from Powerbook-2.local (vpn006012.vpn.utwente.nl [130.89.6.12])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	m0EBh00k005306; Mon, 14 Jan 2008 12:43:00 +0100
-Message-ID: <478B4AC4.2020405@student.utwente.nl>
-Date: Mon, 14 Jan 2008 12:43:00 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>, 
-	"angstrom-distro-devel@linuxtogo.org" <angstrom-distro-devel@linuxtogo.org>
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Maintenance break tonight (18.00 CET)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JENku-0003sg-Ap
+	for openembedded-devel@openembedded.org; Mon, 14 Jan 2008 12:45:28 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JENkL-0006xM-P1
+	for openembedded-devel@openembedded.org; Mon, 14 Jan 2008 11:44:53 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 14 Jan 2008 11:44:53 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 14 Jan 2008 11:44:53 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 14 Jan 2008 12:44:48 +0100
+Message-ID: <fmfhvg$bd0$1@ger.gmane.org>
+References: <47871C71.5020800@student.utwente.nl>	<fm79ef$hak$1@ger.gmane.org>	<47872B1A.9010400@student.utwente.nl>	<fm86uh$qa8$1@ger.gmane.org>	<fm8dm0$ikl$1@ger.gmane.org>	<4787C194.4060907@student.utwente.nl>	<fm8g7r$r27$1@ger.gmane.org>	<1200093760.6074.2.camel@HD>	<fma5d5$5k5$1@ger.gmane.org>	<1200229756.6056.4.camel@HD>
+	<fmd9ej$nt$1@ger.gmane.org> <478A3CA8.6000705@student.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <478A3CA8.6000705@student.utwente.nl>
+Sender: news <news@ger.gmane.org>
+Subject: Re: mtn disapprove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,24 +41,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2008 11:43:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 14 Jan 2008 11:45:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Koen Kooi schrieb:
+> Summary:
+> ~ * don't use undocumented gcc options
+> ~ * tune for the correct cpu family
 
-The linuxtogo admins going to do server maintenance tonight that will 
-require a reboot, so the website, wiki and mtn server will be offline 
-for a short while.
-
-If you have trouble contacting monotone.openembedded.org during that 
-time you can use one of the mirrors, e.g.
-
-mtn sync opensource.wolfsonmicro.com org.openembedded.dev
-
-regards,
-
-Koen
+Thank you for your continued helpful comments.  I shall continue to look
+into this further.
 
 
 
