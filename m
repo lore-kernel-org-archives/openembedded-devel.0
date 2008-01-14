@@ -1,24 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1JEYDI-0006Ss-Qr
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jan 2008 23:55:28 +0100
-Received: (qmail invoked by alias); 14 Jan 2008 17:28:46 -0000
-Received: from e178122192.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.122.192]
-	by mail.gmx.net (mp017) with SMTP; 14 Jan 2008 18:28:46 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+60uBzhZi61iyl8k97mj29xHEIz2Wj/q0J1siqw1
-	tfBLFKzD9ofGw5
-Message-ID: <478B9BC8.4010508@gmx.net>
-Date: Mon, 14 Jan 2008 18:28:40 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: two bbclasses for java recipes
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JEYaW-0007GR-9j
+	for openembedded-devel@openembedded.org; Tue, 15 Jan 2008 00:19:53 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JEYaV-0004PL-1K
+	for openembedded-devel@openembedded.org; Mon, 14 Jan 2008 23:19:27 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 14 Jan 2008 23:19:27 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 14 Jan 2008 23:19:27 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 15 Jan 2008 00:19:20 +0100
+Message-ID: <fmgqln$cb4$1@ger.gmane.org>
+References: <fkc9de$365$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <fkc9de$365$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: RFC: drop quilt version 0.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,41 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2008 22:55:29 -0000
-X-Groupsio-MsgNum: 3896
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig480F8E1AF9367A93EBA1100D"
+X-List-Received-Date: Mon, 14 Jan 2008 23:20:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---------------enig480F8E1AF9367A93EBA1100D
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Rolf Leggewie schrieb:
+> driven by bug 1960, I have been doing some work on quilt in OE,
 
-Hi,
-as discussed earlier Java recipes should have configurable locations for
-jars and JNI libraries. Furthermore I wanted to save boilerplatecode. It
-is all described in this bug report. If you are interested in such
-recipes have a look at them and say whether you want them that way or
-another:
+despite the critical remarks to this RFC, I am sure that
+09891fc0c32d5edbc72b7bc758c18272982e4a8c will find everyone's approval.
 
-http://bugs.openembedded.org/show_bug.cgi?id=3D3699
-
-Regards
-Robert
+regards
 
 
---------------enig480F8E1AF9367A93EBA1100D
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHi5vLG9cfwmwwEtoRCDkvAJ9gJbQGXs3R0mU2cviDTiYwNJknJgCePFBN
-egc7gtl2ESAKm6Z2K/+2hsE=
-=Ucu+
------END PGP SIGNATURE-----
-
---------------enig480F8E1AF9367A93EBA1100D--
