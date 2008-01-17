@@ -1,29 +1,29 @@
-Received: from [216.145.245.199] (helo=mx03.dls.net)
+Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mwester@dls.net>) id 1JFYuq-0005A0-1K
+	(envelope-from <pmiscml@gmail.com>) id 1JFYuv-0005AD-8K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jan 2008 18:52:36 +0100
-Received: from gw.mwester.net ([209.242.5.110] helo=midnight)
-	by mx03.dls.net with esmtpa (Exim 4.63)
-	(envelope-from <mwester@dls.net>)
-	id 1JFYun-00049F-Is; Thu, 17 Jan 2008 11:52:33 -0600
-Message-ID: <014401c85931$b92c0ac0$6f01a8c0@mwester.net>
-From: "Mike \(mwester\)" <mwester@dls.net>
-To: "Paul Sokolovsky" <pmiscml@gmail.com>
-References: <E1JF7vM-0000k1-Mc@linuxtogo.org>
-	<413710907.20080117131841@gmail.com>
-	<478F4876.9030405@student.utwente.nl><1012527691.20080117145250@gmail.com>
-	<fmnp24$rob$1@ger.gmane.org>
-	<00d201c8591b$02e350e0$6f01a8c0@mwester.net>
-	<11488336.20080117175930@gmail.com>
-Date: Thu, 17 Jan 2008 11:52:27 -0600
+	Thu, 17 Jan 2008 18:52:41 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so389508ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jan 2008 09:52:41 -0800 (PST)
+Received: by 10.66.254.19 with SMTP id b19mr3646598ugi.7.1200592360882;
+	Thu, 17 Jan 2008 09:52:40 -0800 (PST)
+Received: from ?89.252.38.142? ( [89.252.38.142])
+	by mx.google.com with ESMTPS id 27sm8334157ugp.19.2008.01.17.09.52.39
+	(version=SSLv3 cipher=OTHER); Thu, 17 Jan 2008 09:52:40 -0800 (PST)
+Date: Thu, 17 Jan 2008 20:00:25 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <1903197593.20080117200025@gmail.com>
+To: Dmitry Artamonow <mad_soft@inbox.ru>
+In-Reply-To: <20080117171654.GA23313@rainbow>
+References: <20080117171654.GA23313@rainbow>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.3138
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev apm: turn off wifi cards before suspend so they are fully reloaded upon resume. closes 3664.
+Cc: angstrom-distro-users@linuxtogo.org,
+	openembedded-devel@lists.openembedded.org,
+	Mobile-linux-discuss@linuxtogo.org
+Subject: Re: [Angstrom-distro-users] PXA/8250 serial clash strikes back
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,51 +37,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jan 2008 17:52:36 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=original
+X-List-Received-Date: Thu, 17 Jan 2008 17:52:41 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-"Paul Sokolovsky" <pmiscml@gmail.com> writes:
-[snip]
->  IMHO, the problem here is not how to make it more comfortable for
-> individual developers to contribute to OE - that's big question in
-> itself, but answers to it are mostly bound to general properties of
-> OpenSource projects (the bigger they become, the steeper participation
-> curve, unfortunately ;-( ).
+Hello Dmitry,
 
-No. Quite wrong, in fact.  The problem is not inherent in a project just 
-because the project has a large scope.  Civility and courtesy can be 
-maintained, regardless of size of project.  Nobody is questioning that large 
-projects have special issues and challenges; rather the issue is how you 
-chose to phrase your response to the commit in this case, compared to how it 
-might have been presented in a more positive and constructive way.
+      Great analysis. Let's see what we can do.
 
->  IMHO, the talk is about how to be on the same direction, and even
-> steering, where OE goes. There're many meta-level changes are being
-> done to OE, and it's hard for everyone to be current with all of them.
-> Yet even more important meta-changes cannot be done literally for
-> years (packages staging for example), because of lack participation
-> and inertness of developers.
 
-Irrelevant.  This is true, but this has nothing whatever to do with respect 
-and common courtesy.
+Thursday, January 17, 2008, 7:16:54 PM, you wrote:
 
->  With all that in mind, IMHO, it's not too productive to keep silent
-> instead of participating in communication, and actual meta-work. And
-> per well-known rules of nature, law of compensation comes into play -
-> if someone keeps silent, someone has to be more vocal; if someone
-> thinks and finds that it's easiser to do less that otherwise would
-> be possible, someone else thinks and finds that more has to be done.
+> After making gpsdrive-ipaq compile for Angstrom[1] , I tried to test in
+> a real life on my iPAQ h2200 and suddenly found, that I can't. 
+> Needed kernel module for my CompactFash GPS card, serial_cs wasn't in 
+> the feeds. Oops. 
 
-Which is all the more reason for the OE community to make the effort to (as 
-you put it) "make it more comfortable...to contribute to OE".  I applaud the 
-OE developers who are civil, respectful, and constructive -- I think those 
-contributors are doing more to ensuring the long-term success of the project 
-than are those who may (arguably) be correct but silence others by the 
-manner in which they choose to correct.
+> I filed a bug[2], then changed OE's defconfig to include
+> CONFIG_SERIAL_8250_CS=m , rebuild kernel and installed missing modules
+> on PDA. Still no luck. On modprobe serial_cs I got this:
+[]
 
-Mike (mwester) 
+> Well, what choices do we have:
+> 1) Downgrade kernel to -hh17 (may cause some regressions)
+
+Nak.
+
+> 2) Reapply old hack to hh.org kernel locally in OE and then upgrade to it.
+
+We can reapply it to the tree too.
+
+> 3) Switch hh.org kernel to scheme suggested by RMK (renaming PXA serial
+>    ports from ttyS* to ttySA*) [4] and then fix (a lot of?)  broken
+>    userspace programs.
+
+     Well, if RMK himself "suggests" such fix, then it would be
+apparently the way to go (because it the most clean and consistent
+solution too). The best course of action would be to feed this patch
+back into LAKML and make sure Eric Miao saw it - he did many changes
+to PXA code RMK couldn't make before.
+
+     If we talk local OE change, then we'd need to cooperate with
+Zaurus people at least, because doing it for one kernel recipe only
+would be pretty, ... well, adhoc. I don't think that would be lot to
+fix, but something to fix for sure. I cc: wider audience to get more
+feedback.
+
+> Oh, hell. Nothing of this seems to be perfect. The sad thing also is that
+> mainline kernel still doesn't solve this problem itself. 
+> Any ideas, comments, suggestions? 
+
+
+> Dmitry 'MAD' Artamonow
+
+> [1]
+> http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2008-January/001587.html
+> [2] http://bugs.openembedded.org/show_bug.cgi?id=3682
+
+  Thanks for submitting this. We should create a ticket to track
+requested/pending changes on the kernel level for next kernel
+subrelease, I already have bunch of such in my mind (and don't want to
+haste to not burden users with kernel upgrade). As soon as bugtracker
+is up, I'll post such.
+
+> [3] http://www.handhelds.org/hypermail/kernel-discuss/14/1419.html
+> [4]
+> http://lists.arm.linux.org.uk/lurker/message/20070702.162054.91fc79ce.html
+
+[]
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
 
 
 
