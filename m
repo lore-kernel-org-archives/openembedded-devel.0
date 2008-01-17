@@ -1,21 +1,26 @@
-Received: from [220.181.13.26] (helo=m13-26.163.com)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <2008zhjw@163.com>) id 1JF6hT-0002Uh-CS
+Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <pmiscml@gmail.com>) id 1JFT6i-0000kG-3l
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jan 2008 12:44:56 +0100
-Received: from 202.119.43.65 ( 202.119.43.65 [202.119.43.65] ) by
-	ajax-webmail-wmsvr26 (Coremail) ; Wed, 16 Jan 2008 19:44:41 +0800 (CST)
-Date: Wed, 16 Jan 2008 19:44:41 +0800 (CST)
-From: =?GBK?B?1dS+rc6z?= <2008zhjw@163.com>
+	Thu, 17 Jan 2008 12:40:32 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so343298ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jan 2008 03:40:27 -0800 (PST)
+Received: by 10.66.219.11 with SMTP id r11mr3248487ugg.31.1200568320362;
+	Thu, 17 Jan 2008 03:12:00 -0800 (PST)
+Received: from ?89.252.38.142? ( [89.252.38.142])
+	by mx.google.com with ESMTPS id u1sm7433019uge.14.2008.01.17.03.11.58
+	(version=SSLv3 cipher=OTHER); Thu, 17 Jan 2008 03:11:59 -0800 (PST)
+Date: Thu, 17 Jan 2008 13:18:41 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <413710907.20080117131841@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <5480059.1062251200483881474.JavaMail.coremail@bj163app26.163.com>
+In-Reply-To: <E1JF7vM-0000k1-Mc@linuxtogo.org>
+References: <E1JF7vM-0000k1-Mc@linuxtogo.org>
 MIME-Version: 1.0
-X-Originating-IP: [192.168.208.57 (202.119.43.65)]
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XTx build 071218(4376.1446.1439)
-	Copyright (c) 2002-2008 www.mailtech.cn 163com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: ERROR: '/stuff/org.openembedded.dev/packages/gnome/gconf-dbus_svn.bb' faile
+Subject: [oe-commits] org.oe.dev apm: turn off wifi cards before suspend so they are fully reloaded upon resume. closes 3664.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,57 +34,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jan 2008 11:44:57 -0000
-Content-Type: text/plain; charset=gbk
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Jan 2008 11:40:46 -0000
+Content-Type: text/plain; charset=windows-1251
+Content-Transfer-Encoding: 8bit
 
-Hi all,
+How workarounds for specific buggy wifi cards relate to a generic APM
+daemon? Or from other side, why everyone should endure more latency
+during suspend/resume, with that latency already being >1s, because 5%
+or less of those "everyone" use buggy cards?
 
-I am a newbie to OE and started trying to build "GPE" using Openembedded o=
-n my Linux x86 host development machine.
+Please move this workaround to a packages of the buggy driver, or to a
+separate package which is RDEPEND'ed by buggy driver. See
+bluez-dtl1-workaround_1.0.bb for similar conversion performed.
 
 
-zhjw@debian:/stuff$ bitbake gpe-image
-NOTE: Handling BitBake files: | (4998/4998) [100 %]
-NOTE: Parsing finished. 4766 cached, 0 parsed, 232 skipped, 0 masked.
-NOTE: build 200801161928: started
-OE Build Configuration:
-BB_VERSION     =3D "1.8.9"
-OE_REVISION    =3D "6d44b490ec30acc0370a045d7b1eb3eae2b73ab9"
-TARGET_ARCH    =3D "arm"
-TARGET_OS      =3D "linux-gnueabi"
-MACHINE        =3D "qemuarm"
-DISTRO         =3D "generic"
-TARGET_FPU     =3D "soft"
-=20
-=20
-=20
-NOTE: Running task 657 of 3227 (ID: 2711, /stuff/org.openembedded.dev/pack=
-ages/g nome/gconf-dbus_svn.bb, do_fetch)
-NOTE: package gconf-dbus-2.16.0+svnr1: started
-NOTE: package gconf-dbus-2.16.0+svnr1-r5: task do_fetch: started
-NOTE: Fetch svn://developer.imendio.com/svn/gconf-dbus;module=3Dtrunk;prot=
-o=3Dhttp
-svn: ????&#65533;&#65533;http://developer.imendio.com/svn/gconf-dbus/trunk=
-&#65533;&#65533;???????? ?? 1
-NOTE: Task failed: Fetch failed: Fetch command export PATH=3D/stuff/tmp/st=
-aging/i6 86-linux/bin/arm-linux:/stuff/tmp/staging/i686-linux/bin:/stuff/tm=
-p/staging/i686 -linux/bin:/stuff/tmp/cross/bin:/stuff/tmp/staging/i686-linu=
-x/bin:/stuff/bitbake /bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/ga=
-mes; /usr/bin/env svn co - r 1 http://developer.imendio.com/svn/gconf-dbus/=
-trunk trunk failed with signal 1 , output:
-NOTE: package gconf-dbus-2.16.0+svnr1-r5: task do_fetch: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package gconf-dbus-2.16.0+svnr1: failed
-ERROR: Build of /stuff/org.openembedded.dev/packages/gnome/gconf-dbus_svn.=
-bb do_ fetch failed
-ERROR: Task 2711 (/stuff/org.openembedded.dev/packages/gnome/gconf-dbus_sv=
-n.bb, do_fetch) failed
-NOTE: Tasks Summary: Attempted 656 tasks of which 619 didn't need to be re=
-run an d 1 failed.
-ERROR: '/stuff/org.openembedded.dev/packages/gnome/gconf-dbus_svn.bb' fail=
-e
-=20
-looking forward to your reply!
-From 2008zhjw@163.com Wed Jan 16 12:48:52 2008
-Received: from [220.181.13.26] (helo
+
+This is a forwarded message
+From: Laibsch commit <openembedded-commits@lists.openembedded.org>
+To: openembedded-commits@lists.openembedded.org
+Date: Wednesday, January 16, 2008, 3:03:20 PM
+Subject: [oe-commits] org.oe.dev apm: turn off wifi cards before suspend so they are fully reloaded upon resume. closes 3664.
+
+===8<==============Original message text===============
+apm: turn off wifi cards before suspend so they are fully reloaded upon resume. closes 3664.
+
+Author: Laibsch@openembedded.org
+Branch: org.openembedded.dev
+Revision: 1b0acc215822890043b4d815ac222a6c2e77a15b
+ViewMTN: http://monotone.openembedded.org/revision/info/1b0acc215822890043b4d815ac222a6c2e77a15b
+Files:
+1
+packages/apmd/apmd-3.2.2/90-wifi-off
+packages/apmd/apmd_3.2.2.bb
+Diffs:
+
+#
+# mt diff -rad00788d9e2f2f3b509d80f534463b293eecccb5 -r1b0acc215822890043b4d815ac222a6c2e77a15b
+#
+# 
+# 
+# add_file "packages/apmd/apmd-3.2.2/90-wifi-off"
+#  content [dd2b60322fc6d9136495d7c41f7c1f9e73ed8937]
+# 
+# patch "packages/apmd/apmd_3.2.2.bb"
+#  from [468e386d67d32dcf673ffd462940acdf206daeee]
+#    to [7e1be5e159f4f8ae062efeda347fda7056e83fc8]
+# 
+============================================================
+--- packages/apmd/apmd-3.2.2/90-wifi-off        dd2b60322fc6d9136495d7c41f7c1f9e73ed8937
++++ packages/apmd/apmd-3.2.2/90-wifi-off        dd2b60322fc6d9136495d7c41f7c1f9e73ed8937
+@@ -0,0 +1,12 @@
++#!/bin/sh
++#Author: Rolf Leggewie
++#
++# turn off wifi cards before suspend so they are fully reloaded upon resume
++
++wifislot = `pccardctl ls|egrep '(hostap|orinoco)'|cut -f 2 -d " "`
++if test $wifislot
++then
++  for slot in $wifislot; do
++    pccardctl eject $wifislot
++  done
++fi
+============================================================
+--- packages/apmd/apmd_3.2.2.bb	468e386d67d32dcf673ffd462940acdf206daeee
++++ packages/apmd/apmd_3.2.2.bb	7e1be5e159f4f8ae062efeda347fda7056e83fc8
+@@ -1,9 +1,9 @@ LICENSE = "GPL"
+ DESCRIPTION = "Set of tools for managing notebook power consumption."
+ SECTION = "base"
+ PRIORITY = "required"
+ DEPENDS = "libtool-cross"
+ LICENSE = "GPL"
+-PR = "r8"
++PR = "r9"
+ 
+ SRC_URI = "${DEBIAN_MIRROR}/main/a/apmd/apmd_${PV}.orig.tar.gz \
+            file://debian.patch;patch=1 \
+@@ -12,6 +12,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/a/apmd/
+           file://unlinux.patch;patch=1 \
+            file://init \
+            file://default \
++           file://90-wifi-off \
+            file://apmd_proxy \
+            file://apmd_proxy.conf"
+ 
+@@ -49,6 +50,7 @@ do_install() {
+ 
+        install -m 4755 ${S}/.libs/apm ${D}${bindir}/apm
+        install -m 0755 ${S}/.libs/apmd ${D}${sbindir}/apmd
++       install -m 0755 ${WORKDIR}/90-wifi-off ${D}${sysconfdir}/apm/suspend.d
+        install -m 0755 ${WORKDIR}/apmd_proxy ${D}${sysconfdir}/apm/
+        install -m 0644 ${WORKDIR}/apmd_proxy.conf ${D}${datadir}/apmd/
+        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/apmd
+
+
+
+_______________________________________________
+Openembedded-commits mailing list
+Openembedded-commits@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+
+===8<===========End of original message text===========
+
+
+
+-- 
+Best regards,
+ Paul                            mailto:pmiscml@gmail.com
+
+
+
