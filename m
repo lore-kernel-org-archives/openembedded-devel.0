@@ -1,28 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JGada-0007Yf-Pr
-	for openembedded-devel@openembedded.org; Sun, 20 Jan 2008 14:55:03 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0KDt24A015577;
-	Sun, 20 Jan 2008 13:55:02 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 15518-02; Sun, 20 Jan 2008 13:54:54 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0KDsrdw015562
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
-	Sun, 20 Jan 2008 13:54:53 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: bitbake-dev <bitbake-dev@lists.berlios.de>
-Date: Sun, 20 Jan 2008 13:54:52 +0000
-Message-Id: <1200837292.4656.17.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Bitbake 1.8.10 released!
+	(envelope-from <pmiscml@gmail.com>) id 1JGiqp-0007a7-VS
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 20 Jan 2008 23:41:16 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so835049ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Jan 2008 14:41:17 -0800 (PST)
+Received: by 10.67.116.18 with SMTP id t18mr3918986ugm.85.1200868877351;
+	Sun, 20 Jan 2008 14:41:17 -0800 (PST)
+Received: from ?89.252.38.142? ( [89.252.38.142])
+	by mx.google.com with ESMTPS id e5sm6292961ugf.8.2008.01.20.14.41.16
+	(version=SSLv3 cipher=OTHER); Sun, 20 Jan 2008 14:41:16 -0800 (PST)
+Date: Mon, 21 Jan 2008 00:50:51 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
+X-Priority: 3 (Normal)
+Message-ID: <15810137585.20080121005051@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Cc: gpe-list@linuxtogo.org
+Subject: [RFC] Making libmimedir-0.4.2 default in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,73 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jan 2008 13:55:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 20 Jan 2008 22:41:16 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Bitbake 1.8.10 has been released.
+Hello openembedded-devel,
 
-http://prdownload.berlios.de/bitbake/bitbake-1.8.10.tar.gz
+  Currently, libmimedir-0.3.1 is marked DEFAULT_PREFERENCE = "1". That
+version of the lib has at least 2 serious bugs:
 
-This release contains many important bugfixes and some feature
-enhancements.
+1. Arbitrary cutting off of NOTE field during parsing.
+2. Parsing only one value from CATEGORIES field.
 
-The bugfixes include:
+  This essentially makes it not suitable for VCARD (at least) parsing
+at all. Both issues were fixed in 0.4.2 (tested).
 
-  * SRCREV handling updates, improvements and fixes
-  * Psyco is x86 only
-  * bb.decodeurl bug (#1530)
-  * Warn about malformed PREFERRED_PROVIDERS (#1072)
-  * Sort initial providers list by default preference (#1145, #2024)
-  * prefered versions have preference over latest versions (#768)
-  * Handle paths in svn fetcher module parameter
-  * Fix bogus preferred_version return values
-  * Fix 'depends' flag splitting
-  * Fix unexport handling (#3135)
-  * Disable task number acceleration since it can allow the tasks to 
-    run out of sequence
-  * Use git-fetch instead of git-pull removing any need for merges when 
-    fetching (we don't care about the index). Fixes fetch errors.
-  * Fix shell showdata command (#3259)
-  * Fix shell data updating problems (#1880)
-  * Properly raise errors for invalid source URI protocols
+  So, I'd like to propose to remove mentioned DEFAULT_PREFERENCE and
+make other steps as needed to make 0.4.2 the default version.
 
-The new features include:
 
-  * bzr fetcher
-  * mercurial fetcher
-  * git branch support
-  * BB_NICE_LEVEL option (#1627)
-  * Detect builds of tasks with overlapping providers (#1359)
-  * Add a known safe overlap whitelist (MULTI_PROVIDER_WHITELIST)
-  * Support the syntax "export VARIABLE"
-  * Add support for cleaning directories before a task runs:
-     (do_taskname[cleandirs] = "dir")
-  * Add bb.copyfile function similar to bb.movefile 
-  * Allow multiple options for deptask flag
-  * Add BB_GENERATE_MIRROR_TARBALLS option, set to 0 to make git 
-    fetches  faster at the expense of not creating mirror tarballs.
-  * Add bb.utils.lockfile() and bb.utils.unlockfile()
-  * Add support for task selfstamp and lockfiles flags
-  * Add norecurse and fullpath options to cvs fetcher
-  * Add support for "-e target" (#3432)
-  * Task scheduler abstraction and some example schedulers
+  Other possible changes regarding this lib:
 
-There were also some improvements in user interaction, something I'm
-hoping will improve a lot more in future releases:
+1. Drop 0.3.1 as too buggy. (Caveat: 0.3.1 is the last version from
+original author, 0.4 serious are being maintained by GPE project).
 
-  * Don't give a stacktrace for invalid tasks, have a user friendly 
-    message (#3431)
-  * Make taskdata and runqueue errors more user friendly
-  * Improve runqueue code comments
-  * Improve circular dependency chain debugging code and user feedback
-  * Check sqlite verison and provide a useful error message
+2. There appears to be (at least) two libmimedir's, another one is
+http://sourceforge.net/projects/libmimedir/ (at 0.5, versions up to
+0.4 were part of synce project). Debian names package for the lib in
+question "libmimedir-gnome", we may want to disambiguate too.
+http://packages.qa.debian.org/libm/libmimedir-gnome.html
 
-Hopefully this is the best version of bitbake yet, enjoy!
-
-Cheers,
-
-Richard
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
 
