@@ -1,20 +1,28 @@
-Received: from [209.85.146.178] (helo=wa-out-1112.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <cliff.brake@gmail.com>) id 1JGJaT-0007pf-DQ
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Jan 2008 20:42:42 +0100
-Received: by wa-out-1112.google.com with SMTP id l24so2722630waf.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jan 2008 11:42:41 -0800 (PST)
-Received: by 10.114.58.1 with SMTP id g1mr3267044waa.91.1200771758739;
-	Sat, 19 Jan 2008 11:42:38 -0800 (PST)
-Received: by 10.114.157.2 with HTTP; Sat, 19 Jan 2008 11:42:38 -0800 (PST)
-Message-ID: <f96d234e0801191142r7860278ei534592e039162838@mail.gmail.com>
-Date: Sat, 19 Jan 2008 14:42:38 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: state of PXA270 xscale support in HEAD
+	(envelope-from <rpurdie@rpsys.net>) id 1JGada-0007Yf-Pr
+	for openembedded-devel@openembedded.org; Sun, 20 Jan 2008 14:55:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0KDt24A015577;
+	Sun, 20 Jan 2008 13:55:02 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15518-02; Sun, 20 Jan 2008 13:54:54 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0KDsrdw015562
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Sun, 20 Jan 2008 13:54:53 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>
+Date: Sun, 20 Jan 2008 13:54:52 +0000
+Message-Id: <1200837292.4656.17.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Bitbake 1.8.10 released!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,84 +36,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jan 2008 19:42:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 20 Jan 2008 13:55:03 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+Bitbake 1.8.10 has been released.
 
-I used openocd successfully in the past with SVN r180 talking to PXA270 cpus.
+http://prdownload.berlios.de/bitbake/bitbake-1.8.10.tar.gz
 
-With the current tip, this is what I get when I run "flash probe 0":
+This release contains many important bugfixes and some feature
+enhancements.
 
- grumpy ~ # openocd
-Info:    openocd.c:93 main(): Open On-Chip Debugger 1.0
-(2008-01-19-11:05) svn:259
-Info:    openocd.c:94 main(): $URL:
-svn://svn.berlios.de/openocd/trunk/src/openocd.c $
-Info:    jtag.c:1289 jtag_examine_chain(): JTAG device found:
-0x49265013 (Manufacturer: 0x009, Part: 0x9265, Version: 0x4)
-Warning: xscale.c:1195 xscale_halt(): target was already halted
-Info:    server.c:67 add_connection(): accepted 'telnet' connection from 0
-Warning: jtag.c:1117 jtag_check_value(): value captured during scan
-didn't pass the requested check: captured: 0x00 check_value: 0x04
-check_mask: 0x07
-Warning: jtag.c:1062 jtag_read_buffer(): in_handler reported a failed check
-Error:   xscale.c:567 xscale_write_rx(): JTAG error while writing RX
+The bugfixes include:
 
-I did try r180 again just to make sure and it runs "flash probe 0" just fine.
+  * SRCREV handling updates, improvements and fixes
+  * Psyco is x86 only
+  * bb.decodeurl bug (#1530)
+  * Warn about malformed PREFERRED_PROVIDERS (#1072)
+  * Sort initial providers list by default preference (#1145, #2024)
+  * prefered versions have preference over latest versions (#768)
+  * Handle paths in svn fetcher module parameter
+  * Fix bogus preferred_version return values
+  * Fix 'depends' flag splitting
+  * Fix unexport handling (#3135)
+  * Disable task number acceleration since it can allow the tasks to 
+    run out of sequence
+  * Use git-fetch instead of git-pull removing any need for merges when 
+    fetching (we don't care about the index). Fixes fetch errors.
+  * Fix shell showdata command (#3259)
+  * Fix shell data updating problems (#1880)
+  * Properly raise errors for invalid source URI protocols
 
-Thanks,
-Cliff
+The new features include:
 
-Config file:
-# config for Intel PXA270
-# not, as of 2007-06-22, openocd only works with the
-# libftd2xx library from ftdi.  libftdi does not work.
+  * bzr fetcher
+  * mercurial fetcher
+  * git branch support
+  * BB_NICE_LEVEL option (#1627)
+  * Detect builds of tasks with overlapping providers (#1359)
+  * Add a known safe overlap whitelist (MULTI_PROVIDER_WHITELIST)
+  * Support the syntax "export VARIABLE"
+  * Add support for cleaning directories before a task runs:
+     (do_taskname[cleandirs] = "dir")
+  * Add bb.copyfile function similar to bb.movefile 
+  * Allow multiple options for deptask flag
+  * Add BB_GENERATE_MIRROR_TARBALLS option, set to 0 to make git 
+    fetches  faster at the expense of not creating mirror tarballs.
+  * Add bb.utils.lockfile() and bb.utils.unlockfile()
+  * Add support for task selfstamp and lockfiles flags
+  * Add norecurse and fullpath options to cvs fetcher
+  * Add support for "-e target" (#3432)
+  * Task scheduler abstraction and some example schedulers
 
-telnet_port     3333
-gdb_port        4444
+There were also some improvements in user interaction, something I'm
+hoping will improve a lot more in future releases:
 
-interface ft2232
-ft2232_layout olimex-jtag
-ft2232_vid_pid 0x15BA 0x0003
-ft2232_device_desc "Olimex OpenOCD JTAG"
-jtag_speed 0
-# set jtag_nsrst_delay to the delay introduced by your reset circuit
-# the rest of the needed delays are built into the openocd program
-jtag_nsrst_delay 300
-# set the jtag_ntrst_delay to the delay introduced by a reset circuit
-# the rest of the needed delays are built into the openocd program
-jtag_ntrst_delay 0
+  * Don't give a stacktrace for invalid tasks, have a user friendly 
+    message (#3431)
+  * Make taskdata and runqueue errors more user friendly
+  * Improve runqueue code comments
+  * Improve circular dependency chain debugging code and user feedback
+  * Check sqlite verison and provide a useful error message
 
-#use combined on interfaces or targets that can't set TRST/SRST separately
-reset_config trst_and_srst separate
+Hopefully this is the best version of bitbake yet, enjoy!
 
-#jtag scan chain
-#format L IRC IRCM IDCODE (Length, IR Capture, IR Capture Mask, IDCODE)
-jtag_device 7 0x1 0x7f 0x7e
+Cheers,
 
-#target configuration
-daemon_startup reset
+Richard
 
-target xscale little reset_halt 0 pxa27x
-
-# maps to PXA internal RAM.  If you are using a PXA255
-# you must initialize SDRAM or leave this option off
-working_area 0 0x5c000000 0x10000 nobackup
-
-run_and_halt_time 0 30
-
-#flash bank <driver> <base> <size> <chip_width> <bus_width>
-# works for P30 flash
-flash bank cfi 0x00000000 0x1000000 2 4 0
-
-
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
 
 
