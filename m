@@ -1,34 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JGueC-0007xg-3g
-	for openembedded-devel@openembedded.org; Mon, 21 Jan 2008 12:17:00 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JGueA-0006hd-VU
-	for openembedded-devel@openembedded.org; Mon, 21 Jan 2008 11:16:59 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 21 Jan 2008 11:16:58 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 21 Jan 2008 11:16:58 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 21 Jan 2008 12:16:44 +0100
-Message-ID: <fn1uut$731$1@ger.gmane.org>
-References: <E1JF7vM-0000k1-Mc@linuxtogo.org>	<413710907.20080117131841@gmail.com>	<478F4876.9030405@student.utwente.nl>	<1012527691.20080117145250@gmail.com>
-	<fmnp24$rob$1@ger.gmane.org>	<1179311965.20080117172327@gmail.com>
-	<fmqnta$9lc$1@ger.gmane.org> <404027028.20080119202939@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JGvX4-00058y-2u
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Jan 2008 13:13:42 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.163])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1JGvxK-0007Qx-NG; Mon, 21 Jan 2008 13:40:50 +0100
+Message-ID: <47948C77.9070300@kernelconcepts.de>
+Date: Mon, 21 Jan 2008 13:13:43 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
 User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <404027028.20080119202939@gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [oe-commits] org.oe.dev apm: turn off wifi cards before suspend so they are fully reloaded upon resume. closes 3664.
+MIME-Version: 1.0
+To: Canadian Doctor Lou <openembedded-devel@lists.openembedded.org>
+References: <15810137585.20080121005051@gmail.com>
+In-Reply-To: <15810137585.20080121005051@gmail.com>
+X-Enigmail-Version: 0.95.0
+Cc: gpe-list@linuxtogo.org
+Subject: Re: [Gpe-list] [RFC] Making libmimedir-0.4.2 default in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,37 +32,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jan 2008 11:17:00 -0000
+X-List-Received-Date: Mon, 21 Jan 2008 12:13:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Paul,
+Hi,
 
-I really wonder what your complaint is.  I even wrote the RFC you now so
-lenthy ponder upon.  The commit was made 5 days later after input from
-*many* people on IRC, the ml and bugzilla.  Sorry you were late to the
-party, but so what?  Again, FOSS is incremental!  Please stop insulting
-and blaming me (or Sonkei, wtf was that about??).  I'd really like to
-see a little bit of introspection on your end after numerous people have
-now told you in this thread and elsewhere that they want respectful and
-civilized exchange.  It is very sad to see you brushing it aside all the
-time or even ridiculing it as "affimative action" and the "respect mafia".
+Paul Sokolovsky schrieb:
+>   Currently, libmimedir-0.3.1 is marked DEFAULT_PREFERENCE = "1". That
+> version of the lib has at least 2 serious bugs:
 
-JFTR, I have always and will continue to exchange opinion and knowledge
-with those kind enough to share in a civilized style and good manner.
+how did that happen? I can't imagine that this would be a good idea.
 
-But, yes, you should still expect
+>   So, I'd like to propose to remove mentioned DEFAULT_PREFERENCE and
+> make other steps as needed to make 0.4.2 the default version.
 
-a) .dev to be broken randomly
-b) me to make a good effort in good faith
-c) me ignoring any and all future communication from you or anybody else
-   when it shows a lack of even the most rudimentary level of respect
+I agree, that can't be wrong :-)
 
-Regards
+> 2. There appears to be (at least) two libmimedir's, another one is
+> http://sourceforge.net/projects/libmimedir/ (at 0.5, versions up to
+> 0.4 were part of synce project). Debian names package for the lib in
+> question "libmimedir-gnome", we may want to disambiguate too.
+> http://packages.qa.debian.org/libm/libmimedir-gnome.html
 
-Ro - EOD - lf
+Yes we should follow Debian here. I don't know if the synce one is relevant in
+any way but it might be better to change the name of the package to be safe.
+
+Greetings
+
+Florian
 
 
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
