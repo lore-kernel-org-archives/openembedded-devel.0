@@ -1,26 +1,21 @@
-Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JH06j-0000Cp-Lk
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jan 2008 18:06:49 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so956291ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jan 2008 09:06:49 -0800 (PST)
-Received: by 10.67.19.9 with SMTP id w9mr4146760ugi.86.1200935209622;
-	Mon, 21 Jan 2008 09:06:49 -0800 (PST)
-Received: from ?89.252.38.142? ( [89.252.38.142])
-	by mx.google.com with ESMTPS id e34sm20379385ugd.17.2008.01.21.09.06.48
-	(version=SSLv3 cipher=OTHER); Mon, 21 Jan 2008 09:06:48 -0800 (PST)
-Date: Mon, 21 Jan 2008 19:16:22 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
-X-Priority: 3 (Normal)
-Message-ID: <13810087643.20080121191622@gmail.com>
-To: Marcin Juszkiewicz <openembedded@haerwu.biz>
-In-Reply-To: <200801211408.31701.openembedded@haerwu.biz>
+	(envelope-from <openembedded@haerwu.biz>) id 1JH2hv-0000Gw-Mk
+	for openembedded-devel@openembedded.org; Mon, 21 Jan 2008 20:53:23 +0100
+Received: (qmail 22294 invoked by uid 813007); 21 Jan 2008 19:53:24 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 21 Jan 2008 19:53:23 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 Jan 2008 20:53:16 +0100
+User-Agent: KMail/1.9.7
 References: <200801211408.31701.openembedded@haerwu.biz>
+	<13810087643.20080121191622@gmail.com>
+In-Reply-To: <13810087643.20080121191622@gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+Message-Id: <200801212053.17632.openembedded@haerwu.biz>
 Subject: Re: Bug 2430 -- TrueType fonts handling and solution for it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,75 +30,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jan 2008 17:06:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Jan 2008 19:53:23 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello Marcin,
+Dnia Monday, 21 of January 2008, Paul Sokolovsky napisa=B3:
+> Monday, January 21, 2008, 3:08:31 PM, Marcin wrote:
 
-Monday, January 21, 2008, 3:08:31 PM, you wrote:
+>   Is such extra level of indirection and multiplexing really required?
 
-> http://bugs.openembedded.net/show_bug.cgi?id=2430
+Yes -- it is required. This way we will have it solved once and will not=20
+have to change it just because XDE or PSDE uses fonts in other way.
 
-> Rolf Leggewie tries to solve problem when TrueType/OpenType fonts are used
-> in OPIE or other environments.
+> Or rather, I wish we separated this matter to 2 separate ones:
+>
+> 1. Adopting reusable pattern for solving task of "need to 'register'
+> objects of arbitrary type".
+> 2. See what kind of registration support required for objects of type
+> fonts.
 
-> Currently installing new font does not add it into list of available ones
-> as there is no consensus how to handle it. I want to tell how I see it.
+=46eel free to suggest other solution. This one which I summarized was=20
+discussed on IRC for quite long time.
 
-> 1. There will be /etc/update-fonts.d/ directory where
->    packages/environments will add own scripts for handling fonts
-> 2. There will be "update-fonts" package which contain script which calls
->    all those scipts (via "run-parts /etc/update-fonts.d/" command)
-> 3. "opie-ttf-support" script will install "update-qtttffontdir" command in
->    ${bindir} and script which will call it in /etc/update-fonts.d/
-> 4. "fontconfig-utils" will also store own script in /etc/update-fonts.d/
-> 5. packages/ttf-fonts/ttf.inc will RDEPEND on "update-fonts" and will call
->    it in postinst/postrm
-> 6. qpf.bbclass (which should be renamed to qpf.inc and moved to
->    packages/qpf-fonts) will also RDEPEND on "update-fonts" and will call
->    it in postinst/postrm
-> 7. qpf fonts will also RDEPEND on qte-fonts-common which
->    provide "update-qtfontdir" script
+> For 1, I wish we adopted some easy scheme, like, for all packages
+> containing object of type foo, to have in postinstall:
+>
+> [ -x /usr/bin/update-foo ] && /usr/bin/update-foo
 
-> This way we have solution which can be extended to any format of fonts and
-> into any environment without changing anything. If someone will 
-> create "XDE" which do not use fontconfig but use TrueType fonts then it
-> will only need to install own script into /etc/update-fonts.d/ to have
-> them supported.
+What will be "update-foo" for fonts? Will it be "update-fonts" which Rolf=20
+and I suggest or will it be "update-fonts-for-opie"=20
++ "update-fonts-for-fontconfig" + "update-fonts-for-xde" etc? I have a=20
+feeling that you try to force us to go second way.
 
-> Any ideas/objections?
+> Then, for each specific object type, specific package will handle
+> registration
 
-  Is such extra level of indirection and multiplexing really required?
-Or rather, I wish we separated this matter to 2 separate ones:
-
-1. Adopting reusable pattern for solving task of "need to 'register'
-objects of arbitrary type".
-2. See what kind of registration support required for objects of type
-fonts.
+And thats what our suggestion do. If you install "specific object type"=20
+(which TrueType/OpenType fonts are) then "specific package"=20
+(update-fonts-common + scripts from each system which use TTF) will=20
+handle registration of "objects" (fonts) in system.
 
 
-For 1, I wish we adopted some easy scheme, like, for all packages
-containing object of type foo, to have in postinstall:
+> for example among following (but not limiting to) choices:
 
-[ -x /usr/bin/update-foo ] && /usr/bin/update-foo
+> 1. No registration needed at all - no /usr/bin/update-foo, nothing
+> will be done.
 
+And nothing will see TT/OT font.
 
-Then, for each specific object type, specific package will handle
-registration, for example among following (but not limiting to)
-choices:
+> 2. In simplest case, /usr/bin/update-foo will be a symlink to tool
+> handling registration for specific environment.
 
-1. No registration needed at all - no /usr/bin/update-foo, nothing
-will be done.
-2. In simplest case, /usr/bin/update-foo will be a symlink to tool
-handling registration for specific environment.
-3. If some objects really need registration with different facilities,
-multiplex scheme as described can be used.
+And when user will install other environment then which one will be=20
+called?
 
+> 3. If some objects really need registration with different facilities,
+> multiplex scheme as described can be used.
 
--- 
-Best regards,
- Paul                            mailto:pmiscml@gmail.com
+If there are scripts only for one environment installed then it is like=20
+your 2nd point.
+
+I really do not see a problem where you are trying to find one.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+    If you're not the part of solution then you're part of the problem.
+
 
 
 
