@@ -1,24 +1,28 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JIEBC-000162-UY
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jan 2008 03:20:31 +0100
-Received: from PROMETHEUS (e180134175.adsl.alicedsl.de [85.180.134.175])
-	by drlauer-research.com (Postfix) with ESMTP id 52B38584BBE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2008 03:23:53 +0100 (CET)
-Date: Fri, 25 Jan 2008 03:20:34 +0100
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-X-Mailer: The Bat! (v3.99.29) Professional
-Organization: Vanille-Media
-X-Priority: 3 (Normal)
-Message-ID: <1006359817.20080125032034@vanille-media.de>
-CC: openembedded-devel@lists.openembedded.org
-In-Reply-To: <005601c85ef5$ff21c1e0$e10b10ac@nagarwaldt>
-References: <1071844182.20080125025043@vanille-media.de>
-	<005601c85ef5$ff21c1e0$e10b10ac@nagarwaldt>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1JIIqA-0003SF-9d
+	for openembedded-devel@openembedded.org; Fri, 25 Jan 2008 08:19:06 +0100
+Received: from Powerbook-2.local (vpn006015.vpn.utwente.nl [130.89.6.15])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	m0P7J4nr016643 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Jan 2008 08:19:04 +0100
+Message-ID: <47998D68.2090607@student.utwente.nl>
+Date: Fri, 25 Jan 2008 08:19:04 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-Subject: Re: task-base image issue!
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <47977B09.2060107@dominion.kabel.utwente.nl>
+	<47992AD2.7040805@kernelconcepts.de>
+In-Reply-To: <47992AD2.7040805@kernelconcepts.de>
+X-Enigmail-Version: 0.95.6
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: AVR32 branch merged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,57 +36,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2008 02:20:34 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 25 Jan 2008 07:19:06 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-(Note: Please keep the discussion on-list)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> There are couple of "bb" files in that
-> /org.openembedded.dev/packages/images
-> so which how do I know which one I need?
+Florian Boor schreef:
+| Hi,
+|
+| Koen Kooi wrote:
+|> The avr32 branch Stelios and I have worked on for the past year or so
+|> has been merged to .dev.
+|
+| cool - that's great news. Many thanks to you guys!
+|
+|> Known problems:
+|>
+|> ~ * kernel fails to link (workaround: use ld from atmel binary toolchain)
+|
+| Uh nasty, we do not have the sources of that toolchain, right?
 
-First, the name may give an indication (console, x11, ...), then just
-check which tasks they actually depend on to get an idea which
-packgages a certain image may drag in.
+We have *a* source of that toolchain, but that removes the -nmo-pic
+option from gcc, which the kernel still uses[1]. I also have tried to
+the the latest atmel binutils code drop, but that refuses to build, and
+I haven't worked up the motivation to start applying OE patches one by
+one to see if those help.
 
-> Also how can these images created be used by the client so that it becomes
-> independent? how do we boot here?
+|> This merge includes an avr32 optimized mplayer and a patched
+|> xserver-kdrive for people with an lcd attached to their avr32 boards.
+|
+| Even better, I guess its time to get my LCD working :)
 
-I don't know, this is board specific. I never used a diskless client
+And for me to have the stk1000 unbricked :/
 
-> I was trying to change my distro to angstrom 2008.1 but I get the below
-> error:
+regards,
 
-angstrom 2008.1 contains a lot of bleeding edge stuff. I wouldn't use
-it. Perhaps someone could extract the most things from angstrom 2007
-configuration (which now is in a branch) and bring the generic distro
-back to live.
+Koen
 
-> | (.text+0xafe63): undefined reference to `__sync_val_compare_and_swap_4'
-> |
-> /home/nagarwal/OE/build/tmp/work/i686-angstrom-linux/glibc-intermediate-2.6.
-> 1-r1/build-i686-angstrom-linux/libc_pic.os: In function
-> `__GI___libc_freeres':
-> | (__libc_freeres_fn+0x5d7): undefined reference to
-> `__sync_bool_compare_and_swap_4'
-> | collect2: ld returned 1 exit status
-> | make[1]: ***
-> [/home/nagarwal/OE/build/tmp/work/i686-angstrom-linux/glibc-intermediate-2.6
-> .1-r1/build-i686-angstrom-linux/libc.so] Error 1
-> | make[1]: Leaving directory
-> `/home/nagarwal/OE/build/tmp/work/i686-angstrom-linux/glibc-intermediate-2.6
-> .1-r1/glibc-2.6.1'
+PS: uboot doesn't like jffs2+lzo, so be carefull where you load you
+uImage from.
 
-Try building an older glibc. You can do this by setting
-PREFERRED_VERSION.
+[1] http://dominion.thruhere.net/koen/cms/fun-with-vendor-patches-part-2
 
-Regards,
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
 
-:M:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
-
+iD8DBQFHmY1oMkyGM64RGpERArVYAJ0Tt8ENB/MnSmDyYE7suEr8BmgoJwCgp2KB
+DSbUtgih65PlT+z1Uzn99Jw=
+=54oF
+-----END PGP SIGNATURE-----
 
 
