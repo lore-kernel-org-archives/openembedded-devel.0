@@ -1,22 +1,23 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JIBIP-0000tm-82
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JICH0-0006fq-Oo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jan 2008 00:15:45 +0100
-Received: from andromeda.vanille.de (e180134175.adsl.alicedsl.de
-	[85.180.134.175])
-	by drlauer-research.com (Postfix) with ESMTP id C8D1E584C22
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2008 00:19:06 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Fri, 25 Jan 2008 01:18:22 +0100
+Received: from [78.48.68.35] (helo=[192.168.1.152])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JIChh-0003vF-Ic
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Jan 2008 01:45:57 +0100
+Message-ID: <47992AD2.7040805@kernelconcepts.de>
+Date: Fri, 25 Jan 2008 01:18:26 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Jan 2008 00:14:14 +0100
-User-Agent: KMail/1.9.6 (enterprise 0.20070907.709405)
 References: <47977B09.2060107@dominion.kabel.utwente.nl>
 In-Reply-To: <47977B09.2060107@dominion.kabel.utwente.nl>
-MIME-Version: 1.0
-Message-Id: <200801250014.14643.mickey@vanille-media.de>
+X-Enigmail-Version: 0.95.0
 Subject: Re: AVR32 branch merged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,23 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2008 23:15:45 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 25 Jan 2008 00:18:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday 23 January 2008 18:36:09 Koen Kooi wrote:
+Hi,
+
+Koen Kooi wrote:
 > The avr32 branch Stelios and I have worked on for the past year or so
 > has been merged to .dev.
 
-Awesome. Good news, lots of people will love to have that as a basis for 
-further work.
+cool - that's great news. Many thanks to you guys!
 
-Thanks guys,
+> Known problems:
+> 
+> ~ * kernel fails to link (workaround: use ld from atmel binary toolchain)
 
-:M:
+Uh nasty, we do not have the sources of that toolchain, right?
+
+> This merge includes an avr32 optimized mplayer and a patched
+> xserver-kdrive for people with an lcd attached to their avr32 boards.
+
+Even better, I guess its time to get my LCD working :)
+
+Greetings
+
+Florian
+
 -- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-14
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+
+
+
 
 
