@@ -1,30 +1,27 @@
 Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JJ61v-0007lM-Qp
+	(envelope-from <pmiscml@gmail.com>) id 1JJ7DN-0005Jx-B2
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Jan 2008 12:50:32 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so1487659fge.20
+	Sun, 27 Jan 2008 14:06:25 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so1508638fge.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Jan 2008 03:50:37 -0800 (PST)
-Received: by 10.82.186.5 with SMTP id j5mr7604302buf.12.1201434637247;
-	Sun, 27 Jan 2008 03:50:37 -0800 (PST)
+	Sun, 27 Jan 2008 05:06:31 -0800 (PST)
+Received: by 10.78.179.12 with SMTP id b12mr5664848huf.34.1201439190899;
+	Sun, 27 Jan 2008 05:06:30 -0800 (PST)
 Received: from widy.lan ( [88.231.90.74])
-	by mx.google.com with ESMTPS id i7sm11544269nfh.18.2008.01.27.03.50.34
-	(version=SSLv3 cipher=OTHER); Sun, 27 Jan 2008 03:50:35 -0800 (PST)
-Date: Sun, 27 Jan 2008 14:02:02 +0200
+	by mx.google.com with ESMTPS id f4sm3083268nfh.31.2008.01.27.05.06.29
+	(version=SSLv3 cipher=OTHER); Sun, 27 Jan 2008 05:06:30 -0800 (PST)
+Date: Sun, 27 Jan 2008 15:17:57 +0200
 From: Paul Sokolovsky <pmiscml@gmail.com>
 X-Mailer: The Bat! (v3.64.01 Christmas Edition) Professional
 X-Priority: 3 (Normal)
-Message-ID: <259787717.20080127140202@gmail.com>
-To: Richard Purdie <rpurdie@rpsys.net>
-In-Reply-To: <1201393407.4717.30.camel@localhost.localdomain>
-References: <fnchem$8v4$1@ger.gmane.org>
-	<200801260151.13034.mickey@vanille-media.de>
-	<1201355021.4717.16.camel@localhost.localdomain>
-	<1201393407.4717.30.camel@localhost.localdomain>
+Message-ID: <178568040.20080127151757@gmail.com>
+To: Thomas Kunze <thommycheck@gmx.de>
+In-Reply-To: <1201306409.6002.4.camel@HD>
+References: <1201306409.6002.4.camel@HD>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: strip "-native" from $S for native packages automatically (bug 1856)
+Cc: oe ml <openembedded-devel@lists.openembedded.org>
+Subject: Re: Hidden depenencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,74 +35,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jan 2008 11:50:36 -0000
+X-List-Received-Date: Sun, 27 Jan 2008 13:06:25 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hello Richard,
+Hello Thomas,
 
-Sunday, January 27, 2008, 2:23:27 AM, you wrote:
+Saturday, January 26, 2008, 2:13:29 AM, you wrote:
 
-> On Sat, 2008-01-26 at 13:43 +0000, Richard Purdie wrote:
->> On Sat, 2008-01-26 at 01:51 +0100, Michael 'Mickey' Lauer wrote:
->> > If we really want to have that (I'm -0 on that), I would rather propose
->> > 
->> > S = ${@"%s/%s" % ( bb.data.getVar("WORKDIR", d, 1), bb.data.getVar("P", d, 1).replace( "-native", "" ) ) }
->> 
->> Would it be worth adding syntax to bitbake for this kind of operation,
->> something like:
->> 
->> S *= "${S}-native"
->> 
->> ?
+> Hi everybody,
 
-> This syntax doesn't solve the original problem of course.
+> I just spend some hours to figure out why a kernel module I added to
+> MACHINE_EXTRA_RRECOMMENDS didn't show up in images. The solution is to
+> rebuild task-base.
 
-> People have requested -= and I've been wondering if we should add that
-> as a search and remove operator. To match the existing language that
-> would have to work on space delimited lists though so its of no use to
-> this use case. We could pair this with a *= or operator which worked the
-> same way without the space delimiter like .= does...
+  To be more exact/verbose, the solution is to bump task-base's PR.
 
-> S *= "-native"
+> I think there should a way to handle this in oe.
 
-> ?
+  Yes, the explicit bumping of PR. Why this is the way to handle it in
+OE becomes clear after trying to devise some other scheme. Of course,
+some warning from bitbake's side would be nice (just as many other
+things from bitbake's side).
 
-> maybe ~= would be a better pairing with -=?
+> But
+> for now we should document such hidden dependencies.
 
-  I personally don't like this operator obfuscation, which becomes
-just that once obscure symbol combinations are used or well-known
-operators from other languages are reused with different semantics.
-All that will lead to very that Perl's $@#%&* stuff.
+  It's more of indirect dependencies than hidden IMHO. It's not hidden
+per se - looking at task-base.bb will immediately shows the fact that
+it references MACHINE_EXTRA_*. And vice-versa, doing a
+grep -r MACHINE_EXTRA on OE tree will show all its referents.
 
-> Having syntax which allowed variable reuse like the original example
-> above could also be useful:
+> Where should this
+> be in the wiki? Do you know additional hidden dependencies?
 
-> S = "foo"
-> S *= "${S}-native"
-> print bb.data.getVar("S", d, 1)
->     foo-native
+> My list so far:
+> MACHINE_EXTRA_RRECOMMENDS -> task-base
+module_autoload_* ->> virtual/kernel
 
-> Does anyone have any other language enhancement requests for bitbake
-> while I'm thinking about it (or any thoughts on the above)?
+   There's pretty developed manual for OE. It already has a section on
+task-base, so that info should go there. The same for kernel.
 
-  Yes, I have. Those 'bb.data.getVar("S", d, 1)' looks quite
-unaesthetically and brings thought that Python expression support is a
-quick hack. Instead, it should be something like:
+> Regards,
+> Thomas
 
-d2.get("S")
-d2.get("S", expand = 0)
 
-  Note the default for expanded grounded in common use.
-
-  Stuff above could be then:
-
-d2.get("S").replace("-native", "")
-
-> Cheers,
-
-> Richard
-
+[]
 
 -- 
 Best regards,
