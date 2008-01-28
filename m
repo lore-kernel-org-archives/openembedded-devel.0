@@ -1,22 +1,21 @@
-Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philipp.zabel@gmail.com>) id 1JJVme-0006mx-Hj
+	(envelope-from <dp@xora.org.uk>) id 1JJW4E-0003JW-S1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jan 2008 16:20:32 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so1995782fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2008 07:20:35 -0800 (PST)
-Received: by 10.82.121.15 with SMTP id t15mr9959239buc.26.1201533634476;
-	Mon, 28 Jan 2008 07:20:34 -0800 (PST)
-Received: by 10.82.120.17 with HTTP; Mon, 28 Jan 2008 07:20:34 -0800 (PST)
-Message-ID: <74d0deb30801280720refc4d65mef492a4a82258b98@mail.gmail.com>
-Date: Mon, 28 Jan 2008 16:20:34 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	Mon, 28 Jan 2008 16:38:38 +0100
+Received: from cimmeria ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Mon, 28 Jan 2008 15:38:44 +0000
+	id 000383A2.479DF705.00004BC4
+Date: Mon, 28 Jan 2008 15:40:22 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080128154022.7d4584db@cimmeria>
 In-Reply-To: <20080128144821.1b6f2741@widy.localdomain>
-MIME-Version: 1.0
 References: <479D9AA9.8020704@student.utwente.nl>
 	<20080128144821.1b6f2741@widy.localdomain>
+X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
 Subject: Re: [oe-commits] org.oe.dev gnuplot: update 4.2.2, add 4.3.0+cvs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,104 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2008 15:20:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 28 Jan 2008 15:38:39 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Jan 28, 2008 1:48 PM, Paul Sokolovsky <pmiscml@gmail.com> wrote:
-> On Mon, 28 Jan 2008 10:04:41 +0100
-> Koen Kooi <k.kooi@student.utwente.nl> wrote:
->
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > Hi,
-> >
-> > - --
-> > gnuplot: update 4.2.2, add 4.3.0+cvs
-> > * restructure patch directories
-> > * update angstrom-preferred
-> >
-> > Author: xjqian at openembedded.org
-> >
-> > [snip]
-> >
-> > conf/distro/include/angstrom-2007-preferred-versions.inc
-> > - --
-> >
-> > I've seen a few updates to that file, but no mails about that. Let me
-> > paste the top few lines of
-> > conf/distro/include/angstrom-2007-preferred-versions.inc:
-> >
-> > # This is a lock-down file for stability purposes
-> > # If you change anything, send a mail to
-> > angstrom-distro-devel@linuxtogo.org # stating the change and the
-> > reason.
->
+On Mon, 28 Jan 2008 14:48:21 +0200
+Paul Sokolovsky <pmiscml@gmail.com> wrote:
 > Hm, but why that file is in .dev branch at all? What was idea of
-> removing 2007 .conf and leaving preferred-versions? Doing a grep, it is
-> referenced only by angstrom-2007-for-openmoko.inc, so shouldn't it be
-> merged there or renamed to make it clear that it relates more to
+> removing 2007 .conf and leaving preferred-versions? Doing a grep, it
+> is referenced only by angstrom-2007-for-openmoko.inc, so shouldn't it
+> be merged there or renamed to make it clear that it relates more to
 > openmoko?
->
-> Alternatively, maybe indeed rename it to 2008 and start using right
-> away, as there're funky downgrades happen in 2008 already (abiword).
+> 
+I shall rename it later when I get a chance to indicate only OpenMoko
+use it.
 
-Or maybe fix those funky downgrades? (Or do both.)
-I'm not convinced keeping DEFAULT_PREFERENCE="-1" in some recipes
-forever just because some legacy distro once used that mechanism to
-'select' an older version, when the newer version clearly works (or at
-least is selected by angstrom-2007-preferred-versions.inc).
+Angstrom can then go forward with new prefferred versions for 2008.1
 
-> Anyway, here's what I have in it (the first 2 are gpephone-related,
-> old versions are non-buildable).
->
-> --- conf/distro/include/angstrom-2007-preferred-versions.inc
-> cb176be489c8cc84cc322cac2f96f85758f594fe +++
-> conf/distro/include/angstrom-2007-preferred-versions.inc
-> 444321ceb910033c367422f9e305c6a7dc45b0e8 @@ -886,7 +886,7 @@
-> PREFERRED_VERSION_libgeda ?= "20050820" PREFERRED_VERSION_libgc ?=
-> "6.7" PREFERRED_VERSION_libgcrypt ?= "1.2.3"
-> PREFERRED_VERSION_libgeda ?= "20050820"
-> -PREFERRED_VERSION_libgemwidget ?= "0.1"
-> +PREFERRED_VERSION_libgemwidget ?= "1.0" PREFERRED_VERSION_libglade ?=
-> "2.6.2" PREFERRED_VERSION_libglademm ?= "2.4.1"
->  PREFERRED_VERSION_libgmime ?= "2.1.7"
-> @@ -918,7 +918,7 @@ PREFERRED_VERSION_libhtml-mason-perl ?=
->  PREFERRED_VERSION_libhildonhelp ?= "1.9.1"
->  PREFERRED_VERSION_libhildonmime ?= "1.9.5"
->  PREFERRED_VERSION_libhtml-mason-perl ?= "1.35"
-> -PREFERRED_VERSION_libiac ?= "0.1"
-> +PREFERRED_VERSION_libiac ?= "1.0"
->  PREFERRED_VERSION_libice ?= "1.0.4"
->  PREFERRED_VERSION_libiconv ?= "1.11"
->  PREFERRED_VERSION_libid3 ?= "1.1"
-> @@ -946,7 +946,7 @@ PREFERRED_VERSION_libmikmod ?= "3.2.0-be
->  PREFERRED_VERSION_libmatchbox ?= "1.9"
->  PREFERRED_VERSION_libmath-bigint-gmp-perl ?= "1.18"
->  PREFERRED_VERSION_libmikmod ?= "3.2.0-beta2"
-> -PREFERRED_VERSION_libmimedir ?= "0.3.1"
-> +PREFERRED_VERSION_libmimedir ?= "0.4.2"
->  PREFERRED_VERSION_libmng ?= "1.0.8"
->  PREFERRED_VERSION_libmodplug ?= "0.7"
->  PREFERRED_VERSION_libmodule-build-perl ?= "0.2805"
->
->
-> >
-> > So please send a mail, it's not hard....
-> >
->
-> []
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-regards
-Philipp
+Graeme
 
 
