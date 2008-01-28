@@ -1,24 +1,24 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.134.190] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JJZXj-00044l-At
+	(envelope-from <pmiscml@gmail.com>) id 1JJd2H-00010i-5n
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jan 2008 20:21:21 +0100
-Received: from [192.168.1.105] (e180149035.adsl.alicedsl.de [85.180.149.35])
-	by drlauer-research.com (Postfix) with ESMTP id CA500584BB6
+	Tue, 29 Jan 2008 00:05:05 +0100
+Received: by mu-out-0910.google.com with SMTP id w9so966175mue.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2008 20:25:02 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Mon, 28 Jan 2008 15:05:11 -0800 (PST)
+Received: by 10.78.193.19 with SMTP id q19mr8393160huf.69.1201561511227;
+	Mon, 28 Jan 2008 15:05:11 -0800 (PST)
+Received: from widy.localdomain ( [88.231.77.184])
+	by mx.google.com with ESMTPS id s38sm2373999hub.24.2008.01.28.15.05.09
+	(version=SSLv3 cipher=OTHER); Mon, 28 Jan 2008 15:05:10 -0800 (PST)
+Date: Tue, 29 Jan 2008 01:16:35 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Jan 2008 20:21:27 +0100
-User-Agent: KMail/1.9.7
-References: <479D9AA9.8020704@student.utwente.nl>
-	<479E2053.6090902@student.utwente.nl>
-	<479E261E.1010903@balister.org>
-In-Reply-To: <479E261E.1010903@balister.org>
-MIME-Version: 1.0
-Message-Id: <200801282021.27268.mickey@vanille-media.de>
-Subject: Re: Renamed: Generic distro
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20080129011635.42467fc9@widy.localdomain>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: [RFC] A case of distro config overriding DISTRO var
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,33 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2008 19:21:21 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Mon, 28 Jan 2008 23:05:06 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Monday 28 January 2008 19:59:42 Philip Balister wrote:
-> Koen Kooi wrote:
-> > Besides not being named 'generic', what are the arguments against making
-> > angstrom the 'generic' distro in OE? It's the closest thing of showing
-> > off all features of OE *and* doing it the OE-way.
->
-> At the risk of putting words in to Mickey's mouth, my view a generic
-> distro is a generic.conf that contains the absolute minimum number of
-> lines required to build an image successfully. Maybe we could call it
-> minimal distro and remove generic?
->
-> Angstrom has features, generic does not.
->
-> The key is not to define the generic distro clearly and not let it
-> feature creap towards Angstrom. (Kind of like minimal-image trying to
-> get less minimal based on peoples viewpoint of what a minimal-image is)
+Hello,
 
-Yes, this is the other major reason to keep generic. Yes, renaming it to 
-minimal sounds good to me.
+I'd like to know what's the idea behind overriding DISTRO var from the
+value being set by user? For example, angstrom.inc does:
+
+DISTRO = "angstrom" 
+
+The problem with is that real distro name is lost, as thus
+cannot be passed to some other tool (e.g., bbimage).
+
+If there're good reasons to do that, and we would be lazy enough to
+convert to something like: DISTRO_FOO = "${DISTRO}" in bitbake.conf,
+and let those good reasons apply to DISTRO_FOO, which must replace
+DISTRO in the appropriate places, then I at least propose to do:
+
+DISTRO_ORIGINAL := "${DISTRO}"
+
+in bitbake.conf, so we always have real distro config name handy.
+
 
 -- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
