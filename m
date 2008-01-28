@@ -1,30 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.85.134.190] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JJdJV-0005zp-0j
-	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 00:22:53 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0SNMxlv022612
-	for <openembedded-devel@openembedded.org>; Mon, 28 Jan 2008 23:22:59 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 21488-09 for <openembedded-devel@openembedded.org>;
-	Mon, 28 Jan 2008 23:22:51 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0SNMpQH022583
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Mon, 28 Jan 2008 23:22:51 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20080129011635.42467fc9@widy.localdomain>
-References: <20080129011635.42467fc9@widy.localdomain>
-Date: Mon, 28 Jan 2008 23:22:50 +0000
-Message-Id: <1201562570.4687.79.camel@localhost.localdomain>
+	(envelope-from <pmiscml@gmail.com>) id 1JJdQA-00064R-Ns
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Jan 2008 00:29:46 +0100
+Received: by mu-out-0910.google.com with SMTP id w9so972725mue.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jan 2008 15:29:53 -0800 (PST)
+Received: by 10.78.190.10 with SMTP id n10mr8424246huf.37.1201562992892;
+	Mon, 28 Jan 2008 15:29:52 -0800 (PST)
+Received: from widy.localdomain ( [88.231.77.184])
+	by mx.google.com with ESMTPS id c18sm2394873hub.50.2008.01.28.15.29.48
+	(version=SSLv3 cipher=OTHER); Mon, 28 Jan 2008 15:29:49 -0800 (PST)
+Date: Tue, 29 Jan 2008 01:41:17 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20080129014117.60ed9f77@widy.localdomain>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [RFC] A case of distro config overriding DISTRO var
+Subject: [RFC] Setting default IMAGE_FSTYPES to tar.gz in bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,46 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2008 23:22:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 28 Jan 2008 23:29:46 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2008-01-29 at 01:16 +0200, Paul Sokolovsky wrote:
-> I'd like to know what's the idea behind overriding DISTRO var from the
-> value being set by user? For example, angstrom.inc does:
-> 
-> DISTRO = "angstrom" 
+Hello,
 
-It means that the override in active use becomes "angstrom" and we don't
-have 1001 different overrides (angstrom2007, angstrom1008 etc.) all over
-the tree.
+Currently, we have in bitbake.conf:
 
-> The problem with is that real distro name is lost, as thus
-> cannot be passed to some other tool (e.g., bbimage).
-> 
-> If there're good reasons to do that, and we would be lazy enough to
-> convert to something like: DISTRO_FOO = "${DISTRO}" in bitbake.conf,
-> and let those good reasons apply to DISTRO_FOO, which must replace
-> DISTRO in the appropriate places, then I at least propose to do:
-> 
-> DISTRO_ORIGINAL := "${DISTRO}"
-> 
-> in bitbake.conf, so we always have real distro config name handy.
+IMAGE_FSTYPES ?= "jffs2"
 
-What you didn't say is where exactly in bitbake.conf you are going to
-define that?
-
-You need to put the := directly before the code that changes DISTRO.
-Yes, you could add this in bitbake.conf after local.conf and before
-including ${DISTRO}.conf but that seems ugly to me.
-
-I'd prefer USERDISTRO = "${DISTRO}" in bitbake.conf and then having
-angstrom overriding that using := if it really has to...
-
-Regards,
-
-Richard
+jffs2 is a special filesystem format, suitable for limited number of
+hardware on the global scale. So I would like to propose to replace
+that default with some neutral and well-know format, say tar.gz.
 
 
+Oh, and btw, I have a bunch of standalone filesystem conversion scripts
+which I can't find time to RFC for addition to contrib/. While OE has
+ability to generate images in different formats, sometimes there's a
+need/easier to convert one existing flexible format. Few usecases I
+personally had:
+
+1. I don't have jffs2 in IMAGE_FSTYPES, as I don't flash stuff, so
+having that would increase image generation runs and wasted disk space.
+But when I needed to play with LiveRamdisks, which use jffs2, I just
+converted tar.gz to jffs2.
+
+2. For Angstrom loopback installs, I run scripts which convert
+specific tar.gz to ext2 right on the download server, instead of
+downloading, converting and uploading back, of overloading autobuilder
+with generating ext2 for each image.
+
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
