@@ -1,21 +1,22 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <dp@xora.org.uk>) id 1JJW4E-0003JW-S1
+	(envelope-from <mickey@vanille-media.de>) id 1JJXmv-0005qd-S0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jan 2008 16:38:38 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Mon, 28 Jan 2008 15:38:44 +0000
-	id 000383A2.479DF705.00004BC4
-Date: Mon, 28 Jan 2008 15:40:22 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Mon, 28 Jan 2008 18:28:53 +0100
+Received: from [192.168.1.105] (e180149035.adsl.alicedsl.de [85.180.149.35])
+	by drlauer-research.com (Postfix) with ESMTP id AFA1558438F;
+	Mon, 28 Jan 2008 18:32:36 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080128154022.7d4584db@cimmeria>
-In-Reply-To: <20080128144821.1b6f2741@widy.localdomain>
+Date: Mon, 28 Jan 2008 18:28:58 +0100
+User-Agent: KMail/1.9.7
 References: <479D9AA9.8020704@student.utwente.nl>
 	<20080128144821.1b6f2741@widy.localdomain>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
+	<20080128154022.7d4584db@cimmeria>
+In-Reply-To: <20080128154022.7d4584db@cimmeria>
+MIME-Version: 1.0
+Message-Id: <200801281828.58780.mickey@vanille-media.de>
 Subject: Re: [oe-commits] org.oe.dev gnuplot: update 4.2.2, add 4.3.0+cvs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,23 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2008 15:38:39 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Mon, 28 Jan 2008 17:28:54 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, 28 Jan 2008 14:48:21 +0200
-Paul Sokolovsky <pmiscml@gmail.com> wrote:
-> Hm, but why that file is in .dev branch at all? What was idea of
-> removing 2007 .conf and leaving preferred-versions? Doing a grep, it
-> is referenced only by angstrom-2007-for-openmoko.inc, so shouldn't it
-> be merged there or renamed to make it clear that it relates more to
-> openmoko?
-> 
-I shall rename it later when I get a chance to indicate only OpenMoko
-use it.
+On Monday 28 January 2008 16:40:22 Graeme Gregory wrote:
+> On Mon, 28 Jan 2008 14:48:21 +0200
+>
+> Paul Sokolovsky <pmiscml@gmail.com> wrote:
+> > Hm, but why that file is in .dev branch at all? What was idea of
+> > removing 2007 .conf and leaving preferred-versions? Doing a grep, it
+> > is referenced only by angstrom-2007-for-openmoko.inc, so shouldn't it
+> > be merged there or renamed to make it clear that it relates more to
+> > openmoko?
+>
+> I shall rename it later when I get a chance to indicate only OpenMoko
+> use it.
 
-Angstrom can then go forward with new prefferred versions for 2008.1
+How about making it generic-preferred-versions.inc hence resurrecting 
+the "generic" distribution until we have the default versions configured 
+enough, so that you can build without setting a DISTRO?
 
-Graeme
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
