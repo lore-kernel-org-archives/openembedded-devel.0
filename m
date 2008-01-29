@@ -1,24 +1,30 @@
-Received: from [209.85.134.190] (helo=mu-out-0910.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JJdQA-00064R-Ns
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Jan 2008 00:29:46 +0100
-Received: by mu-out-0910.google.com with SMTP id w9so972725mue.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2008 15:29:53 -0800 (PST)
-Received: by 10.78.190.10 with SMTP id n10mr8424246huf.37.1201562992892;
-	Mon, 28 Jan 2008 15:29:52 -0800 (PST)
-Received: from widy.localdomain ( [88.231.77.184])
-	by mx.google.com with ESMTPS id c18sm2394873hub.50.2008.01.28.15.29.48
-	(version=SSLv3 cipher=OTHER); Mon, 28 Jan 2008 15:29:49 -0800 (PST)
-Date: Tue, 29 Jan 2008 01:41:17 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20080129014117.60ed9f77@widy.localdomain>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
+	(envelope-from <rpurdie@rpsys.net>) id 1JJe0G-0006fT-A1
+	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 01:07:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0T07AsW031448
+	for <openembedded-devel@openembedded.org>; Tue, 29 Jan 2008 00:07:10 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 31364-03 for <openembedded-devel@openembedded.org>;
+	Tue, 29 Jan 2008 00:07:06 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0T075gN031442
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Tue, 29 Jan 2008 00:07:06 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20080129014117.60ed9f77@widy.localdomain>
+References: <20080129014117.60ed9f77@widy.localdomain>
+Date: Tue, 29 Jan 2008 00:07:05 +0000
+Message-Id: <1201565225.4687.98.camel@localhost.localdomain>
 Mime-Version: 1.0
-Subject: [RFC] Setting default IMAGE_FSTYPES to tar.gz in bitbake.conf
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: [RFC] Setting default IMAGE_FSTYPES to tar.gz in	bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,40 +38,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2008 23:29:46 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 29 Jan 2008 00:07:04 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello,
+On Tue, 2008-01-29 at 01:41 +0200, Paul Sokolovsky wrote:
+> Currently, we have in bitbake.conf:
+> 
+> IMAGE_FSTYPES ?= "jffs2"
+> 
+> jffs2 is a special filesystem format, suitable for limited number of
+> hardware on the global scale. So I would like to propose to replace
+> that default with some neutral and well-know format, say tar.gz.
 
-Currently, we have in bitbake.conf:
+This has been discussed before and I'd like to see that changed. The
+complication is that "bitbake image" is meant to give a sane default
+image for a given machine without any tweaking by the user and a load of
+machines depend on the jffs2 default. 
 
-IMAGE_FSTYPES ?= "jffs2"
+I'm not an ipaq expert but I'd guess a number of them use jffs2, as
+probably do some of the htcs, the at91 board and the motorola phones.
+Someone needs to go through and check the machines. Since this is pretty
+daunting to fix, I've just gone through and I think the following files
+need that line adding as they appear to use jffs2 in some form:
 
-jffs2 is a special filesystem format, suitable for limited number of
-hardware on the global scale. So I would like to propose to replace
-that default with some neutral and well-know format, say tar.gz.
+at32stk1000.conf
+at91sam9260ek.conf
+at91sam9261ek.conf
+at91sam9263ek.conf
+bd-neon.conf
+fic-gta01.conf
+eseries.conf
+h1910.conf
+h2200.conf
+h3600.conf
+h5000.conf
+h6300.conf
+hx4700.conf
+gesbc-9302.conf
+./include/motorola-ezx-base.inc (hence e680.conf rokre2.conf rokre6.conf
+a1200.conf a780.conf)
+./include/gumstix.inc (hence gumstix-connex.conf gumstix-verdex.conf)
+omap1510inn.conf
+omap1610h2.conf
+omap1710h3.conf
+omap2420h4.conf
+omap2430sdp.conf
+omap5912osk.conf
+palmtt.conf
+palmz71.conf
+shark.conf
+simpad.conf
+triton.conf
+xxs1500.conf
 
+I'm unsure of the following machines:
 
-Oh, and btw, I have a bunch of standalone filesystem conversion scripts
-which I can't find time to RFC for addition to contrib/. While OE has
-ability to generate images in different formats, sometimes there's a
-need/easier to convert one existing flexible format. Few usecases I
-personally had:
+acern30.conf
+adsp-bf537-stamp.conf
+adzs-bf538f-ezlite.conf
+adzs-bf548-ezlite.conf
+asus620.conf
+asus730.conf
+atngw100.conf
+aximx50.conf
+aximx50v.conf
+colinux.conf
+davinci-dvevm.conf
+davinci-sffsdr.conf
+db1200.conf
+devkitidp-pxa255.conf
+dht-walnut.conf
+efika.conf
+em-x270.conf
+ep93xx.conf
+er0100.conf
+eteng500.conf
+geodegx.conf
+geodelx.conf
+ghi270.conf
+guinness.conf
+h1940.conf
+h3800.conf
+h3900.conf
+h4000.conf
+htcalpine.conf
+htcapache.conf
+htcblueangel.conf
+htchimalaya.conf
+htcsable.conf
+htctornado.conf
+htcuniversal.conf
+htcwallaby.conf
+jornada56x.conf
+jornada6xx.conf
+jornada7xx.conf
+kb9202.conf
+ks8695.conf
+logicpd-pxa270.conf
+looxc550.conf
+magicbox.conf
+magician.conf
+mainstone.conf
+mnci.conf
+mpc8313e-rdb.conf
+mpc8323e-rdb.conf
+mtx-1.conf
+mtx-2.conf
+mtx-3a.conf
+mtx-3.conf
+mx21ads.conf
+navman-icn330.conf
+netbook-pro.conf
+netvista.conf
+palmld.conf
+palmt650.conf
+palmt680.conf
+palmtc.conf
+palmtt2.conf
+palmtt3.conf
+palmtt5.conf
+palmtx.conf
+palmz31.conf
+palmz72.conf
+rb500.conf
+rt3000.conf
+rx1950.conf
+rx3000.conf
+titan.conf
+ts72xx.conf
+wl500g.conf
+wrap.conf
+xilinx-ml403.conf
+xilinx-ml410.conf
 
-1. I don't have jffs2 in IMAGE_FSTYPES, as I don't flash stuff, so
-having that would increase image generation runs and wasted disk space.
-But when I needed to play with LiveRamdisks, which use jffs2, I just
-converted tar.gz to jffs2.
+I've ruled the rest out. If someone who knows a load of the above
+machines could confirm or deny that they use jffs2 images that would be
+great...
 
-2. For Angstrom loopback installs, I run scripts which convert
-specific tar.gz to ext2 right on the download server, instead of
-downloading, converting and uploading back, of overloading autobuilder
-with generating ext2 for each image.
+> Oh, and btw, I have a bunch of standalone filesystem conversion scripts
+> which I can't find time to RFC for addition to contrib/. While OE has
+> ability to generate images in different formats, sometimes there's a
+> need/easier to convert one existing flexible format. 
 
+I'd say feel free to add them...
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+Regards,
+
+Richard
+
 
 
