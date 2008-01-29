@@ -1,32 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JJlw5-0004du-GB
-	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 09:35:17 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JJlw7-0004Xt-PL
-	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 08:35:20 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jan 2008 08:35:19 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jan 2008 08:35:19 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 29 Jan 2008 09:35:09 +0100
-Message-ID: <fnmofr$g5f$1@ger.gmane.org>
-References: <200801211408.31701.openembedded@haerwu.biz>
+	(envelope-from <pmiscml@gmail.com>) id 1JJmI9-00055G-Dj
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Jan 2008 09:58:05 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so1583972fks.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Jan 2008 00:58:10 -0800 (PST)
+Received: by 10.78.183.8 with SMTP id g8mr8889407huf.55.1201597090016;
+	Tue, 29 Jan 2008 00:58:10 -0800 (PST)
+Received: from widy.localdomain ( [88.231.77.184])
+	by mx.google.com with ESMTPS id 2sm2561346huc.46.2008.01.29.00.58.07
+	(version=SSLv3 cipher=OTHER); Tue, 29 Jan 2008 00:58:08 -0800 (PST)
+Date: Tue, 29 Jan 2008 11:09:34 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080129110934.3c3441da@widy.localdomain>
+In-Reply-To: <E1JJdLv-000623-Uv@linuxtogo.org>
+References: <E1JJdLv-000623-Uv@linuxtogo.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <200801211408.31701.openembedded@haerwu.biz>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Bug 2430 -- TrueType fonts handling and solution for it
+Subject: Re: [oe-commits] org.oe.dev gcc-native-3.4.4: Add PROVIDES gcc-native3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,17 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jan 2008 08:35:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 29 Jan 2008 08:58:05 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz schrieb:
-> http://bugs.openembedded.net/show_bug.cgi?id=2430
+On Tue, 29 Jan 2008 00:25:23 +0100
+"rpurdie commit" <openembedded-commits@lists.openembedded.org> wrote:
 
-> 6. qpf.bbclass (which should be renamed to qpf.inc and moved to
->    packages/qpf-fonts)
+> gcc-native-3.4.4: Add PROVIDES gcc-native3
 
-534f1f70c56da9b3765d9945548652a473177f00
+gcc-native3?? How's that? ;-) Did you mean gcc3-native?
 
+P.S.
+There're 0 occurrences of -native[0-9] pattern in the tree, but
+[0-9]-native gives bunch of hits like glib-2.0-native, libxml2-native,
+qmake2-native, uicmoc4-native, etc.
+
+> 
+> Author: rpurdie@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 2386d883918c833ff5a3693fa8645c6d28580c23
+> ViewMTN:
+
+[]
 
 
