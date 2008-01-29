@@ -1,26 +1,32 @@
-Received: from [209.85.128.184] (helo=fk-out-0910.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JJmNg-00058k-GV
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Jan 2008 10:03:49 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so1585723fks.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jan 2008 01:03:55 -0800 (PST)
-Received: by 10.78.161.4 with SMTP id j4mr8904573hue.49.1201597435174;
-	Tue, 29 Jan 2008 01:03:55 -0800 (PST)
-Received: from widy.localdomain ( [88.231.77.184])
-	by mx.google.com with ESMTPS id 16sm2567687hui.34.2008.01.29.01.03.53
-	(version=SSLv3 cipher=OTHER); Tue, 29 Jan 2008 01:03:54 -0800 (PST)
-Date: Tue, 29 Jan 2008 11:15:21 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080129111521.7f3c76de@widy.localdomain>
-In-Reply-To: <20080129110934.3c3441da@widy.localdomain>
-References: <E1JJdLv-000623-Uv@linuxtogo.org>
-	<20080129110934.3c3441da@widy.localdomain>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JJn9N-00027H-3d
+	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 10:53:05 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JJn9O-0007qr-12
+	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 09:53:06 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 29 Jan 2008 09:53:06 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 29 Jan 2008 09:53:06 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 29 Jan 2008 10:52:58 +0100
+Message-ID: <fnmt1q$u9o$1@ger.gmane.org>
+References: <200801211408.31701.openembedded@haerwu.biz>
 Mime-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev gcc-native-3.4.4: Add PROVIDES gcc-native3
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <200801211408.31701.openembedded@haerwu.biz>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Bug 2430 -- TrueType fonts handling and solution for it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,32 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jan 2008 09:03:50 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 29 Jan 2008 09:53:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 29 Jan 2008 11:09:34 +0200
-Paul Sokolovsky <pmiscml@gmail.com> wrote:
+Marcin Juszkiewicz schrieb:
+> http://bugs.openembedded.net/show_bug.cgi?id=2430
 
-> On Tue, 29 Jan 2008 00:25:23 +0100
-> "rpurdie commit" <openembedded-commits@lists.openembedded.org> wrote:
-> 
-> > gcc-native-3.4.4: Add PROVIDES gcc-native3
-> 
-> gcc-native3?? How's that? ;-) Did you mean gcc3-native?
-> 
-> P.S.
-> There're 0 occurrences of -native[0-9] pattern in the tree, but
-> [0-9]-native gives bunch of hits like glib-2.0-native, libxml2-native,
-> qmake2-native, uicmoc4-native, etc.
+> 3. "opie-ttf-support" script will install "update-qtttffontdir" command in    
+>    ${bindir} and script which will call it in /etc/update-fonts.d/
 
-Aha, we have gcc-native.inc with:
+f99b43a679d7e3cb88c832d1a45162da3cc79d7d
 
-PROVIDES = "gcc-native-${PV}" 
-
-The worse then. And that's a bit different, still.
-
-
-[]
 
 
