@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JJnEH-0002C8-Kp
-	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 10:58:09 +0100
+	id 1JJnRE-0002Xh-Mt
+	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 11:11:32 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JJnEK-00084Q-PX
-	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 09:58:12 +0000
+	id 1JJnRL-0000Ku-8v
+	for openembedded-devel@openembedded.org; Tue, 29 Jan 2008 10:11:39 +0000
 Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jan 2008 09:58:12 +0000
+	Tue, 29 Jan 2008 10:11:39 +0000
 Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
 	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jan 2008 09:58:12 +0000
+	Tue, 29 Jan 2008 10:11:39 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 29 Jan 2008 10:58:05 +0100
-Message-ID: <fnmtbd$vbn$1@ger.gmane.org>
+Date: Tue, 29 Jan 2008 11:11:28 +0100
+Message-ID: <fnmu4g$2gu$1@ger.gmane.org>
 References: <200801211408.31701.openembedded@haerwu.biz>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
@@ -40,17 +40,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jan 2008 09:58:09 -0000
+X-List-Received-Date: Tue, 29 Jan 2008 10:11:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Marcin Juszkiewicz schrieb:
 > http://bugs.openembedded.net/show_bug.cgi?id=2430
 
-> 5. packages/ttf-fonts/ttf.inc will RDEPEND on "update-fonts" and will call
->    it in postinst/postrm
+> 4. "fontconfig-utils" will also store own script in /etc/update-fonts.d/
 
-cfe5c40d75f5515e747262c2c4f608ed64769eab
+af80fae0d7e9c049dcc68c4fe19e411a4e60948d
 
 
 
