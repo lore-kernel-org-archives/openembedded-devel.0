@@ -1,21 +1,24 @@
-Received: from [62.179.121.46] (helo=viefep26-int.chello.at)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mailinglist@miromico.ch>) id 1JKDgW-000662-Nv
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <thommycheck@gmx.de>) id 1JKDyi-0003QP-8K
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2008 15:13:04 +0100
-Received: from [192.168.1.192] (really [77.57.15.173])
-	by viefep24-int.chello.at
-	(InterMail vM.7.08.02.00 201-2186-121-20061213) with ESMTP
-	id <20080130123421.FLLZ21279.viefep24-int.chello.at@[192.168.1.192]>
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2008 13:34:21 +0100
-Message-ID: <47A06E07.7070807@miromico.ch>
-Date: Wed, 30 Jan 2008 13:31:03 +0100
-From: Alex <mailinglist@miromico.ch>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	Wed, 30 Jan 2008 15:32:00 +0100
+Received: (qmail invoked by alias); 30 Jan 2008 12:45:17 -0000
+Received: from unknown (EHLO [10.117.55.125]) [212.201.107.125]
+	by mail.gmx.net (mp026) with SMTP; 30 Jan 2008 13:45:17 +0100
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX18d2Y5MoJod+XPHAL5NNRIy12PRDW7Tl+/OIvAWsA
+	j26jiObEhW9LSL
+Message-ID: <47A0715C.8010003@gmx.de>
+Date: Wed, 30 Jan 2008 13:45:16 +0100
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Thunderbird 1.5.0.14 (X11/20060911)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Kernel link problem in OE for AVR32
+References: <47A05B52.6000202@gmail.com>
+In-Reply-To: <47A05B52.6000202@gmail.com>
+X-Y-GMX-Trusted: 0
+Subject: Re: [RFC] add kernel-module-loop to roofs for collie and tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,25 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2008 14:13:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 30 Jan 2008 14:32:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi all
-
-I run into problems when trying to build target "bootstrap-image" for AVR32.
-
-Google helped me to found a release note about this. Kernel linking is
-failling with the OE built toolchain, which is
-a known issue.
-
-As a workaround it was mentioned to use the linker from atmel's toolchain.
-
-I tried a few things but could not get the kernel to link. How can I
-proceed? How to exchange the linker with the one from atmel?
-
-Thanks
-
-Alex
+Junqian Gordon Xu wrote:
+> altboot-console-image needs loopback file support either in the kernel 
+> or as kernel module. CONFIG_BLK_DEV_LOOP=m were set for both collie and 
+> tosa. Other Z deviced has loopback file support built into the kernel. 
+> I would propose the following change [both dev and stable] to pack 
+> kernel-module-loop into the default rootfs for collie and tosa; and bump 
+> PR for task-base.
+>
+> ============================================================
+> --- conf/machine/collie.conf	c23a85835bc13ac978f36742cfc8ccf5880e0ec8
+> +++ conf/machine/collie.conf	062e7d70c35cf3f4db0e10e8b9f254fd47e39952
+> @@ -14,5 +14,7 @@ IMAGE_FSTYPES ?= "jffs2 tar.gz"
+>   IMAGE_LINGUAS = ""
+>   IMAGE_FSTYPES ?= "jffs2 tar.gz"
+>
+> +MACHINE_EXTRA_RRECOMMENDS += "kernel-module-loop"
+> +
+>   ROOT_FLASH_SIZE = "14"
+>   # actually 14680064, see EXTRA_IMAGECMD above
+> ============================================================
+> --- conf/machine/tosa.conf	bdda7deb7ee9f2d950ee255097efcdfa1cf7a39a
+> +++ conf/machine/tosa.conf	94e6eda28ba66d57c2ef49c6c11c78bf0c311349
+> @@ -7,6 +7,6 @@ IMAGE_FSTYPES ?= "jffs2"
+>   IMAGE_FSTYPES ?= "jffs2"
+>
+>   # wlan-ng Modules
+> -MACHINE_EXTRA_RRECOMMENDS += "wlan-ng-modules-usb"
+> +MACHINE_EXTRA_RRECOMMENDS += "wlan-ng-modules-usb kernel-module-loop"
+>
+>   ROOT_FLASH_SIZE = "28"
+>
+>
+> Regards
+> Gordon
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
+Wouldn't it be better do make altboot depend on kernel-modules-loop?
 
 
