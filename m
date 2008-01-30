@@ -1,30 +1,27 @@
-Received: from [138.38.0.38] (helo=senna.bath.ac.uk)
+Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <S.G.Pickering@bath.ac.uk>) id 1JKL8W-0002sl-Tl
+	(envelope-from <pmiscml@gmail.com>) id 1JKMaT-0001Ej-9P
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2008 23:10:29 +0100
-Received: from leatherhead.bath.ac.uk ([138.38.0.98])
-	by senna.bath.ac.uk with esmtps (TLSv1:DHE-RSA-AES256-SHA:256)
-	(envelope-from <S.G.Pickering@bath.ac.uk>) id 1JKL8f-000306-E1
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2008 22:10:37 +0000
-Received: from www by leatherhead.bath.ac.uk with local id 1JKL8d-0006zS-Lh
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2008 22:10:35 +0000
-Received: from host-84-13-249-232.opaltelecom.net.249.13.84.in-addr.arpa
-	(host-84-13-249-232.opaltelecom.net.249.13.84.in-addr.arpa
-	[84.13.249.232])
-	by webmail.bath.ac.uk (Horde MIME library) with HTTP; Wed, 30 Jan 2008
-	22:10:35 +0000
-Message-ID: <20080130221035.4a4dh8n7dwk88gwc@webmail.bath.ac.uk>
-Date: Wed, 30 Jan 2008 22:10:35 +0000
-From: Simon Pickering <S.G.Pickering@bath.ac.uk>
+	Thu, 31 Jan 2008 00:43:25 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so451667ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jan 2008 15:43:32 -0800 (PST)
+Received: by 10.67.100.12 with SMTP id c12mr3382170ugm.28.1201736612847;
+	Wed, 30 Jan 2008 15:43:32 -0800 (PST)
+Received: from widy.localdomain ( [88.231.64.33])
+	by mx.google.com with ESMTPS id 5sm2366897ugc.25.2008.01.30.15.43.31
+	(version=SSLv3 cipher=OTHER); Wed, 30 Jan 2008 15:43:31 -0800 (PST)
+Date: Thu, 31 Jan 2008 01:56:06 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) H3 (4.1.5)
-X-BUCS: enpsgp
-X-Scanner: 734e1550494ffbeeacd25fa63017588e02a05319
-Subject: Missing OE.mtn snapshots and old Monotone version recommended in	wiki
+Message-ID: <20080131015606.481c0eb7@widy.localdomain>
+In-Reply-To: <fnqqtt$e5o$1@ger.gmane.org>
+References: <fnqakr$ffa$1@ger.gmane.org>
+	<20080130203832.31fd5919@widy.localdomain>
+	<fnqqtt$e5o$1@ger.gmane.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: RFC: aggressive usurpation of bugs.oe.net by Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,30 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2008 22:10:29 -0000
-Content-Type: text/plain;
-	charset=ISO-8859-1;
-	DelSp="Yes";
-	format="flowed"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Jan 2008 23:43:25 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-I was just looking for a Monotone 0.32 snapshot and note that the wiki  
-(http://www.openembedded.org/wiki/GettingStarted) still lists 0.32 as  
-the minimum version to have (but the snapshot also listed in the wiki   
-http://www.openembedded.org/snapshots/OE.mtn.bz2 is for a later  
-version of monotone).
+On Wed, 30 Jan 2008 22:41:18 +0100
+Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
 
-Looking on the http://openembedded.org/snapshots/ page there are a few  
-0-byte sized snapshots, one of which is for Monotone 0.32. Not sure if  
-this is the desired result.
+> Paul Sokolovsky schrieb:
+> > Let's descend a bit into past then.
+> 
+> No.  Please don't do that.  And certainly not at this length.  It does
+> not bring us one step closer to a solution.
+> 
+> And as koen has already pointed out, several distros using the same
+> bug tracker creates problems of its own.  Let's try to solve them
+> this time.
+> 
+> No use arguing about the past.  Let's argue about the future.
 
-In any case I'm going to update Monotone, but hrw suggested I point it  
-out to the list.
+One good solution we worked towards for a long time was to have a common
+distro which saved us from all this headache. Now you have
+another distro and special needs due to it, way to you to settle them.
+Otherwise, I'm, as an Ansgtrom core team members, interested in
+providing users actual status of support and list of known issues which
+are currently done via tracker, using dependencies to link issues
+together. And I do this not because I like that, but because it must be
+done and noone else yet stepped for that. To keep the list clean,
+there're special procedures, for example, bug first triaged and
+confirmed, and only then associated to the meta-bug, not the other way
+around.
 
-Cheers,
+Machine bugs are indeed vague matter and the way it was RFCed (sic!)
+assumed that there's one common distro and that machine mentors
+maintain the list well. After all, bugs are there for not to be, even
+well organized, but to be maintained and resolved.
 
-
-Simon
 
 
