@@ -1,26 +1,22 @@
-Received: from [64.233.166.181] (helo=py-out-1112.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <xjqian@gmail.com>) id 1JKEjv-0004kD-Lk
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2008 16:20:41 +0100
-Received: by py-out-1112.google.com with SMTP id y77so295127pyg.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2008 07:20:46 -0800 (PST)
-Received: by 10.35.90.1 with SMTP id s1mr736311pyl.53.1201695776173;
-	Wed, 30 Jan 2008 04:22:56 -0800 (PST)
-Received: from ?192.168.1.207? ( [24.107.189.117])
-	by mx.google.com with ESMTPS id u6sm728874pyb.23.2008.01.30.04.22.55
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 30 Jan 2008 04:22:55 -0800 (PST)
-Message-ID: <47A06C1C.10205@gmail.com>
-Date: Wed, 30 Jan 2008 06:22:52 -0600
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
+	(envelope-from <openembedded@haerwu.biz>) id 1JKFXk-0002Cm-Nm
+	for openembedded-devel@openembedded.org; Wed, 30 Jan 2008 17:12:08 +0100
+Received: (qmail 12808 invoked by uid 813007); 30 Jan 2008 16:12:14 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 30 Jan 2008 16:12:14 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: angstrom-distro-devel@linuxtogo.org
+Date: Wed, 30 Jan 2008 17:11:39 +0100
+User-Agent: KMail/1.9.7
 References: <47A05B52.6000202@gmail.com>
 	<200801301223.17721.openembedded@haerwu.biz>
-In-Reply-To: <200801301223.17721.openembedded@haerwu.biz>
+	<47A06C1C.10205@gmail.com>
+In-Reply-To: <47A06C1C.10205@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200801301711.44503.openembedded@haerwu.biz>
 Cc: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [Angstrom-devel] [RFC] add kernel-module-loop to roofs for	collie and tosa
@@ -37,41 +33,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2008 15:20:42 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 30 Jan 2008 16:12:08 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 01/30/2008 05:23 AM, Marcin Juszkiewicz wrote:
-> Dnia Wednesday, 30 of January 2008, Junqian Gordon Xu napisa³:
->> altboot-console-image needs loopback file support either in the kernel
->> or as kernel module. 
-> 
-> It is not 'altboot-console-image' which needs it but altboot. 
+Dnia Wednesday, 30 of January 2008, Junqian Gordon Xu napisa=B3:
+> On 01/30/2008 05:23 AM, Marcin Juszkiewicz wrote:
+> > Dnia Wednesday, 30 of January 2008, Junqian Gordon Xu napisa=B3:
+> >> altboot-console-image needs loopback file support either in the
+> >> kernel or as kernel module.
+> >
+> > It is not 'altboot-console-image' which needs it but altboot.
+>
+> You are right, but practically it's not nice to have users to go find
+> kernel-module-loop before they can install roofs as a loopback image at
+> SD/CF. For tosa, the typical case is to install altboot-console-image
+> first then use altboot to install another image.
 
-You are right, but practically it's not nice to have users to go find 
-kernel-module-loop before they can install roofs as a loopback image at 
-SD/CF. For tosa, the typical case is to install altboot-console-image 
-first then use altboot to install another image.
+Users does not have to go and find it. OE will take care of it and=20
+installing altboot into image will also adds kernel-module-loop package.=20
+Thats how dependencies works.
 
->> CONFIG_BLK_DEV_LOOP=m were set for both collie and tosa. Other Z deviced
->> has loopback file support built into the kernel. 
-> 
-> Probably not for long as kernel size increase with each version ;(
+> >> I would propose the following change [both dev and stable] to pack
+> >> kernel-module-loop into the default rootfs for collie and tosa; and
+> >> bump PR for task-base.
+> >
+> > As altboot needs it then it has to be added as RRECOMMENDS to altboot
+> > recipe rather.
+>
+> The point is to have it available with altboot at the very beginning.
+> Although it's not techinically RDEPENDS, should we set it as RDEPENDS
+> to altboot recipe?
 
-We can set it as module for all devices, sooner or later.
+RRECOMMENDS is proper for kernel modules as it does not break if package=20
+is not available (which is a case when loop is in kernel not module).
 
->> I would propose the following change [both dev and stable] to pack 
->> kernel-module-loop into the default rootfs for collie and tosa; and
->> bump PR for task-base.
-> 
-> As altboot needs it then it has to be added as RRECOMMENDS to altboot 
-> recipe rather.
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-The point is to have it available with altboot at the very beginning. 
-Although it's not techinically RDEPENDS, should we set it as RDEPENDS to 
-altboot recipe?
+                            It is your destiny.
+                            		-- Darth Vader
 
-Regards
-Gordon
+
 
 
