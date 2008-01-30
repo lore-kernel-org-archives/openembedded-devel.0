@@ -1,27 +1,32 @@
-Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JKGTs-0001cc-OF
-	for openembedded-devel@openembedded.org; Wed, 30 Jan 2008 18:12:12 +0100
-Received: by ug-out-1314.google.com with SMTP id q7so367114uge.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JKHW5-0002aj-57
+	for openembedded-devel@openembedded.org; Wed, 30 Jan 2008 19:18:34 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JKHW8-0008Sc-6p
+	for openembedded-devel@openembedded.org; Wed, 30 Jan 2008 18:18:36 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 30 Jan 2008 18:18:36 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 30 Jan 2008 09:12:20 -0800 (PST)
-Received: by 10.66.245.12 with SMTP id s12mr2999963ugh.26.1201713140280;
-	Wed, 30 Jan 2008 09:12:20 -0800 (PST)
-Received: from widy.localdomain ( [88.231.64.33])
-	by mx.google.com with ESMTPS id 19sm6054826ugl.13.2008.01.30.09.12.18
-	(version=SSLv3 cipher=OTHER); Wed, 30 Jan 2008 09:12:19 -0800 (PST)
-Date: Wed, 30 Jan 2008 19:24:52 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: angstrom-distro-devel@linuxtogo.org
-Message-ID: <20080130192452.3b85b1e9@widy.localdomain>
-In-Reply-To: <47A0A895.9070004@student.utwente.nl>
-References: <20080130173351.08571987@widy.localdomain>
-	<47A0A895.9070004@student.utwente.nl>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
+	Wed, 30 Jan 2008 18:18:36 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 30 Jan 2008 19:18:29 +0100
+Message-ID: <fnqf1l$no$1@ger.gmane.org>
+References: <fnqakr$ffa$1@ger.gmane.org>
 Mime-Version: 1.0
-Cc: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-Subject: Re: [Angstrom-devel] Tracking proposed changes to linux-handhelds-2.6 kernel (PocketPCs)
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <fnqakr$ffa$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: RFC: aggressive usurpation of bugs.oe.net by Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,45 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2008 17:12:12 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Wed, 30 Jan 2008 18:18:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Wed, 30 Jan 2008 17:40:53 +0100
-Koen Kooi <k.kooi@student.utwente.nl> wrote:
+Rolf Leggewie schrieb:
+> specific distro.  launchpad for example does this much better, but
+> generally sucks even more with regards to fields and searchability.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Paul Sokolovsky schreef:
-> | Hello,
-> |
-> | I've finally opened a ticket to track changes for the next upgrade
-> of | linux-handhelds-2.6. If you have an idea what to enable, or made
-> such a | proposal before, please add a comment to that bug.
-> 
-> How did you manage to do that? The bugtracker has been down for a few
-> days now, and nothing is mentioned on openembedded.org or the oe
-> mailinglists about the problem or a solution....
+tags might be a way to deal with this.  But
 
-	Heh. Or is it a joke? ;-) I find funny things happen to
-bugtracker. It didn't work for me for few weeks, several days ago I
-posted to oe-dev about that, with zero response. I wanted to contact
-Greg of treke.net directly, just when I hit a
-http://bugs.openembedded.net URL somewhere, and that works for me.
+a) when I tested them out for this purpose some time ago, the bugzilla
+   way of doing things did not immediately become clear to me
+b) the considerably clutter up the UI
 
-> 
-> regards,
-> 
-> Koen
-> 
-> 
-> |
-> | Specific requests ("enable option CONFIG_XXX because it allows Y")
-> are | preferred to vague ("make support for my card!!!!").
-> |
-> | http://bugs.openembedded.net/show_bug.cgi?id=3724
-
-[]
 
 
