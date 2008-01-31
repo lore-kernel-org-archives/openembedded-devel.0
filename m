@@ -1,28 +1,25 @@
-Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
+Received: from [72.14.220.159] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JKYA4-0007EJ-SQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Jan 2008 13:04:56 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so522689ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jan 2008 04:05:05 -0800 (PST)
-Received: by 10.67.98.15 with SMTP id a15mr3984333ugm.69.1201781105007;
-	Thu, 31 Jan 2008 04:05:05 -0800 (PST)
-Received: from widy.localdomain ( [88.231.86.1])
-	by mx.google.com with ESMTPS id t35sm2702577uge.81.2008.01.31.04.05.02
-	(version=SSLv3 cipher=OTHER); Thu, 31 Jan 2008 04:05:04 -0800 (PST)
-Date: Thu, 31 Jan 2008 14:17:32 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
+	(envelope-from <philipp.zabel@gmail.com>) id 1JKYBl-0007Lo-4Z
+	for openembedded-devel@openembedded.org; Thu, 31 Jan 2008 13:06:41 +0100
+Received: by fg-out-1718.google.com with SMTP id e12so585016fga.0
+	for <openembedded-devel@openembedded.org>;
+	Thu, 31 Jan 2008 04:06:49 -0800 (PST)
+Received: by 10.82.134.12 with SMTP id h12mr3609630bud.29.1201781209295;
+	Thu, 31 Jan 2008 04:06:49 -0800 (PST)
+Received: by 10.82.120.17 with HTTP; Thu, 31 Jan 2008 04:06:49 -0800 (PST)
+Message-ID: <74d0deb30801310406p71480902w6907b9e63575e8f0@mail.gmail.com>
+Date: Thu, 31 Jan 2008 13:06:49 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080131141732.2e80019d@widy.localdomain>
-In-Reply-To: <1201608452.5017.52.camel@localhost.localdomain>
-References: <E1JJdLv-000623-Uv@linuxtogo.org>
-	<20080129110934.3c3441da@widy.localdomain>
-	<20080129111521.7f3c76de@widy.localdomain>
-	<1201608452.5017.52.camel@localhost.localdomain>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [oe-commits] org.oe.dev gcc-native-3.4.4: Add PROVIDES gcc-native3
+In-Reply-To: <1201393407.4717.30.camel@localhost.localdomain>
+MIME-Version: 1.0
+References: <fnchem$8v4$1@ger.gmane.org>
+	<200801260151.13034.mickey@vanille-media.de>
+	<1201355021.4717.16.camel@localhost.localdomain>
+	<1201393407.4717.30.camel@localhost.localdomain>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: RFC: strip "-native" from $S for native packages automatically (bug 1856)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,27 +33,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2008 12:04:57 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 31 Jan 2008 12:06:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, 29 Jan 2008 12:07:32 +0000
-Richard Purdie <rpurdie@rpsys.net> wrote:
+On Jan 27, 2008 1:23 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Sat, 2008-01-26 at 13:43 +0000, Richard Purdie wrote:
+> > On Sat, 2008-01-26 at 01:51 +0100, Michael 'Mickey' Lauer wrote:
+> > > If we really want to have that (I'm -0 on that), I would rather propose
+> > >
+> > > S = ${@"%s/%s" % ( bb.data.getVar("WORKDIR", d, 1), bb.data.getVar("P", d, 1).replace( "-native", "" ) ) }
+> >
+> > Would it be worth adding syntax to bitbake for this kind of operation,
+> > something like:
+> >
+> > S *= "${S}-native"
+> >
+> > ?
+>
+> This syntax doesn't solve the original problem of course.
+>
+> People have requested -= and I've been wondering if we should add that
+> as a search and remove operator. To match the existing language that
+> would have to work on space delimited lists though so its of no use to
+> this use case. We could pair this with a *= or operator which worked the
+> same way without the space delimiter like .= does...
+>
+> S *= "-native"
+>
+> ?
+>
+> maybe ~= would be a better pairing with -=?
+>
+> Having syntax which allowed variable reuse like the original example
+> above could also be useful:
+>
+> S = "foo"
+> S *= "${S}-native"
+> print bb.data.getVar("S", d, 1)
+>     foo-native
+>
+> Does anyone have any other language enhancement requests for bitbake
+> while I'm thinking about it (or any thoughts on the above)?
 
-[]
-> 
-> To be honest I'm more worried about getting the functionality right
-> and getting rid of the gcc 3.x barrier to entry once and for all.
-> 
-> If you want to do a s/gcc-native3/gcc3-native/, please feel free.
+While you're already busy proposing obscure syntax enhancements :)
+What about allowing bashisms/dashisms in the ${...} variable expansion?
+We could write
+S = "${S%-native}"
+or
+S = "${S/-native/}"
+then.
 
-Done. Just if we want to clean up OE, worth paying attention even to
-such small things in new stuff going in.
-
-> 
-> Cheers,
-> 
-> Richard
-> 
+regards
+Philipp
 
 
