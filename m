@@ -1,25 +1,33 @@
-Received: from [72.14.220.159] (helo=fg-out-1718.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philipp.zabel@gmail.com>) id 1JKYBl-0007Lo-4Z
-	for openembedded-devel@openembedded.org; Thu, 31 Jan 2008 13:06:41 +0100
-Received: by fg-out-1718.google.com with SMTP id e12so585016fga.0
-	for <openembedded-devel@openembedded.org>;
-	Thu, 31 Jan 2008 04:06:49 -0800 (PST)
-Received: by 10.82.134.12 with SMTP id h12mr3609630bud.29.1201781209295;
-	Thu, 31 Jan 2008 04:06:49 -0800 (PST)
-Received: by 10.82.120.17 with HTTP; Thu, 31 Jan 2008 04:06:49 -0800 (PST)
-Message-ID: <74d0deb30801310406p71480902w6907b9e63575e8f0@mail.gmail.com>
-Date: Thu, 31 Jan 2008 13:06:49 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1201393407.4717.30.camel@localhost.localdomain>
-MIME-Version: 1.0
-References: <fnchem$8v4$1@ger.gmane.org>
-	<200801260151.13034.mickey@vanille-media.de>
-	<1201355021.4717.16.camel@localhost.localdomain>
-	<1201393407.4717.30.camel@localhost.localdomain>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: RFC: strip "-native" from $S for native packages automatically (bug 1856)
+	(envelope-from <rpurdie@rpsys.net>) id 1JKYXG-000557-KF
+	for openembedded-devel@openembedded.org; Thu, 31 Jan 2008 13:28:54 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0VCT2Px003257
+	for <openembedded-devel@openembedded.org>; Thu, 31 Jan 2008 12:29:02 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 02820-10 for <openembedded-devel@openembedded.org>;
+	Thu, 31 Jan 2008 12:28:58 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0VCSrGt003240
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Thu, 31 Jan 2008 12:28:53 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <fnsa6j$gt9$1@ger.gmane.org>
+References: <fnqakr$ffa$1@ger.gmane.org>
+	<20080130203832.31fd5919@widy.localdomain>	<fnqqtt$e5o$1@ger.gmane.org>
+	<20080131015606.481c0eb7@widy.localdomain>	<fns5k4$ti$1@ger.gmane.org>
+	<20080131130015.6770440b@widy.localdomain> <fnsa6j$gt9$1@ger.gmane.org>
+Date: Thu, 31 Jan 2008 12:28:52 +0000
+Message-Id: <1201782532.4996.36.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: RFC: aggressive usurpation of bugs.oe.net by Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,59 +41,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2008 12:06:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 31 Jan 2008 12:28:55 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Jan 27, 2008 1:23 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Sat, 2008-01-26 at 13:43 +0000, Richard Purdie wrote:
-> > On Sat, 2008-01-26 at 01:51 +0100, Michael 'Mickey' Lauer wrote:
-> > > If we really want to have that (I'm -0 on that), I would rather propose
-> > >
-> > > S = ${@"%s/%s" % ( bb.data.getVar("WORKDIR", d, 1), bb.data.getVar("P", d, 1).replace( "-native", "" ) ) }
-> >
-> > Would it be worth adding syntax to bitbake for this kind of operation,
-> > something like:
-> >
-> > S *= "${S}-native"
-> >
-> > ?
->
-> This syntax doesn't solve the original problem of course.
->
-> People have requested -= and I've been wondering if we should add that
-> as a search and remove operator. To match the existing language that
-> would have to work on space delimited lists though so its of no use to
-> this use case. We could pair this with a *= or operator which worked the
-> same way without the space delimiter like .= does...
->
-> S *= "-native"
->
-> ?
->
-> maybe ~= would be a better pairing with -=?
->
-> Having syntax which allowed variable reuse like the original example
-> above could also be useful:
->
-> S = "foo"
-> S *= "${S}-native"
-> print bb.data.getVar("S", d, 1)
->     foo-native
->
-> Does anyone have any other language enhancement requests for bitbake
-> while I'm thinking about it (or any thoughts on the above)?
+Hi Paul/Rolf,
 
-While you're already busy proposing obscure syntax enhancements :)
-What about allowing bashisms/dashisms in the ${...} variable expansion?
-We could write
-S = "${S%-native}"
-or
-S = "${S/-native/}"
-then.
+I've mostly read this thread and I have a few comments to make as an
+observer:
 
-regards
-Philipp
+a) it is good to see Rolf working on OE again
+
+b) Angstrom is not the only distro OE supports and never will be. It was
+started as a means to merge several very similar distributions and focus
+various developer's efforts. It was also an opportunity to try and show
+how a distro should work since lots of people didn't understand the
+things a distro should control.
+
+It therefore serves as a kind of role model in OE but that doesn't mean
+it will always serve that role or that its preferred over everything
+else. Angstrom needs to keep in mind that at least in theory if it drops
+the ball, OE could choose a different "role model" ;-). Other distros
+are welcome in OE and are welcome to use the bugzilla since a lot of bug
+reports have implications outside a given distribution.
+
+c) Rolf is perfectly right to ask if there is a better way to handle
+this. "Can we do X better?" is always a good valid question. 
+
+d) Saying OE should only have one distro is not a way to solve the
+problem.
+
+e) If nobody has useful for suggestions for improving things, lets wait
+for Rolf to propose any better ways for handling things. We can then
+discuss those improvements based on technical merit, not character
+assassination.
+
+Cheers,
+
+Richard
+
 
 
