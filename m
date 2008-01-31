@@ -1,29 +1,22 @@
-Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
+Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JKZOV-0004ut-Dw
+	(envelope-from <pmiscml@gmail.com>) id 1JKZsl-00078a-1W
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Jan 2008 14:23:55 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so723839fks.12
+	Thu, 31 Jan 2008 14:55:11 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so535166ugd.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jan 2008 05:24:03 -0800 (PST)
-Received: by 10.78.171.20 with SMTP id t20mr3262013hue.41.1201785843184;
-	Thu, 31 Jan 2008 05:24:03 -0800 (PST)
+	Thu, 31 Jan 2008 05:55:19 -0800 (PST)
+Received: by 10.66.243.2 with SMTP id q2mr4118290ugh.14.1201787719136;
+	Thu, 31 Jan 2008 05:55:19 -0800 (PST)
 Received: from widy.localdomain ( [88.231.86.1])
-	by mx.google.com with ESMTPS id t12sm12082099gvd.2.2008.01.31.05.24.00
-	(version=SSLv3 cipher=OTHER); Thu, 31 Jan 2008 05:24:02 -0800 (PST)
-Date: Thu, 31 Jan 2008 15:36:31 +0200
+	by mx.google.com with ESMTPS id 19sm8233791ugl.13.2008.01.31.05.55.17
+	(version=SSLv3 cipher=OTHER); Thu, 31 Jan 2008 05:55:18 -0800 (PST)
+Date: Thu, 31 Jan 2008 16:07:50 +0200
 From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080131153631.44580eb5@widy.localdomain>
-In-Reply-To: <1201782532.4996.36.camel@localhost.localdomain>
+Message-ID: <20080131160750.7601fa5d@widy.localdomain>
+In-Reply-To: <fnqakr$ffa$1@ger.gmane.org>
 References: <fnqakr$ffa$1@ger.gmane.org>
-	<20080130203832.31fd5919@widy.localdomain>
-	<fnqqtt$e5o$1@ger.gmane.org>
-	<20080131015606.481c0eb7@widy.localdomain>
-	<fns5k4$ti$1@ger.gmane.org>
-	<20080131130015.6770440b@widy.localdomain>
-	<fnsa6j$gt9$1@ger.gmane.org>
-	<1201782532.4996.36.camel@localhost.localdomain>
 X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
 Mime-Version: 1.0
 Subject: Re: RFC: aggressive usurpation of bugs.oe.net by Angstrom
@@ -40,70 +33,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2008 13:23:55 -0000
+X-List-Received-Date: Thu, 31 Jan 2008 13:55:11 -0000
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
 Hello,
 
-On Thu, 31 Jan 2008 12:28:52 +0000
-Richard Purdie <rpurdie@rpsys.net> wrote:
-
-> Hi Paul/Rolf,
-> 
-> I've mostly read this thread and I have a few comments to make as an
-> observer:
-> 
-> a) it is good to see Rolf working on OE again
-
-By all means!
-
-> b) Angstrom is not the only distro OE supports and never will be. It
-> was started as a means to merge several very similar distributions
-> and focus various developer's efforts. It was also an opportunity to
-> try and show how a distro should work since lots of people didn't
-> understand the things a distro should control.
-> 
-> It therefore serves as a kind of role model in OE but that doesn't
-> mean it will always serve that role or that its preferred over
-> everything else. Angstrom needs to keep in mind that at least in
-> theory if it drops the ball, OE could choose a different "role
-> model" ;-). Other distros are welcome in OE and are welcome to use
-> the bugzilla since a lot of bug reports have implications outside a
-> given distribution.
-
-Well, the problem (see subject) started with that Rolf, not an Angstrom
-developer, started to intervene with how special kind of bugs - "known
-release issues" are managed for Angstrom (rather transparently as for
-OE). And that's the same issue which caused previous squall of flame in
-December, but seemingly was settled then. Now it happens again. Strange.
-So, it's more about making additional hardnesses for maintaining bugs
-for one distro, than one distro not letting other distros maintain bugs.
-
-> 
-> c) Rolf is perfectly right to ask if there is a better way to handle
-> this. "Can we do X better?" is always a good valid question.
-
-Not only ask, do if he has better ideas! But in such way that don't
-overrule other people's needs, please. I'd be glad to move to his
-scheme or just leave all that to him - once it's clear that his scheme
-works well, made for good transition, and maintained sustainably.
-
-> d) Saying OE should only have one distro is not a way to solve the
-> problem.
-
-Dunno who said that. Heard only someone saying that having such an
-idyll picture would not call in such pressing way for any problems like
-being raised now.
-
-> e) If nobody has useful for suggestions for improving things, lets
-> wait for Rolf to propose any better ways for handling things. We can
-> then discuss those improvements based on technical merit, not
-> character assassination.
-
-> Cheers,
-> 
-> Richard
+I've renamed several meta-bugs to include "Angstrom 2007.12" so it was
+clear that they apply to specific release only. As for machine
+meta-bugs, ideally each distro (and release) would have their own, with
+actual machine bugs attached to those as applicable. As that's not
+going to work (machine mentors who should take care of that imho, and
+we don't have signs of them to be too active), one solution could be to
+remove distro-specific designators from meta-bug names, and treat them
+as common machine-specific bugs, and put distro version(s) into subject
+for those bugs which apply only to specific release (for those
+distros/releases which use bugtracker for the list of known issues, so
+must be user-friendly).
 
 -- 
 Best regards,
