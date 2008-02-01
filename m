@@ -1,28 +1,29 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [64.233.166.177] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JKjC0-0007Pu-7D
-	for openembedded-devel@openembedded.org; Fri, 01 Feb 2008 00:51:40 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0VNpn1b010402
-	for <openembedded-devel@openembedded.org>; Thu, 31 Jan 2008 23:51:49 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 10366-01 for <openembedded-devel@openembedded.org>;
-	Thu, 31 Jan 2008 23:51:45 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m0VNpeJY010396
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Thu, 31 Jan 2008 23:51:40 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Thu, 31 Jan 2008 23:51:39 +0000
-Message-Id: <1201823499.20311.26.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Monotone issues
+	(envelope-from <xjqian@gmail.com>) id 1JKnOw-0005Sk-Ua
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Feb 2008 05:21:20 +0100
+Received: by py-out-1112.google.com with SMTP id y77so944111pyg.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Jan 2008 20:21:27 -0800 (PST)
+Received: by 10.35.60.15 with SMTP id n15mr3344014pyk.33.1201839686824;
+	Thu, 31 Jan 2008 20:21:26 -0800 (PST)
+Received: from ?192.168.1.207? ( [24.107.189.117])
+	by mx.google.com with ESMTPS id y64sm3239143pyg.22.2008.01.31.20.21.25
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 31 Jan 2008 20:21:26 -0800 (PST)
+Message-ID: <47A29E42.8020504@gmail.com>
+Date: Thu, 31 Jan 2008 22:21:22 -0600
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
+MIME-Version: 1.0
+To: angstrom-distro-devel@linuxtogo.org
+References: <47A05B52.6000202@gmail.com>	<200801301223.17721.openembedded@haerwu.biz>	<47A06C1C.10205@gmail.com>
+	<200801301711.44503.openembedded@haerwu.biz>
+In-Reply-To: <200801301711.44503.openembedded@haerwu.biz>
+Cc: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [Angstrom-devel] [RFC] add kernel-module-loop to roofs for collie and tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,50 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2008 23:51:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Feb 2008 04:21:20 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Just so everyone is aware, it became apparent that a newer version of
-strace in OE.dev had disappeared. This was traced back to something from
-tmbinc which shouldn't have been merged but accidentally was.
+On 01/30/2008 10:11 AM, Marcin Juszkiewicz wrote:
+> Users does not have to go and find it. OE will take care of it and 
+> installing altboot into image will also adds kernel-module-loop package. 
+> Thats how dependencies works.
+> 
+> 
+> RRECOMMENDS is proper for kernel modules as it does not break if package 
+> is not available (which is a case when loop is in kernel not module).
+> 
 
-A disapprove wouldn't work since the automerger had merged it. I asked
-the monotone devs for advice on irc and was told I should be able to
-suspend that revision and work from and older one.
+Thanks. If CoreDump doesn't object, I will add kernel-module-loop as an 
+RRECOMMENDS to altboot recipies.
 
-I ran:
-
-mtn suspend 50d03f17a42a3854cd87f47ef75084da297d194e
-
-and then 
-
-mtn up -r e651c4fa9a5d1fc6120cc2309e9cba1388cecc52
-
-and then committed something to form a new head revision.
-
-This appeared to work for me locally, I pushed it, pulled on another
-machine and all seemed well, it would only affect anyone who'd actually
-checked out the bad revision (50d03f17a42a3854cd87f47ef75084da297d194e)
-who would then need to run 
-mtn up -r11d1a9e6662c57de089d25a6900d5325f85d282e
-and we ran the risk of someone merging this again but it could be worse.
-
-monotone 0.37 wouldn't show the other head but I suspect older monotones
-do and don't support the suspend certificate. I suspect the automerger
-runs on a machine with an older monotone since it then merged the
-problematic head back and put us back to square one.
-
-So I've applied a reverse diff to restore the broken files and damaged
-the history :(. I was thinking it was a larger scale problem than it is,
-only about 12 files were affected. Its amazingly hard to work this out
-though.
-
-The difficulty in fixing this simple problem along with the speed issues
-make me wonder if monotone is right for the future though? I do get put
-off making commits due to the lack of speed too...
-
-Richard
-
+Regards
+Gordon
 
 
