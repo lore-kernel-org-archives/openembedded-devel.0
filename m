@@ -1,21 +1,25 @@
-Received: from [213.46.255.22] (helo=viefep24-int.chello.at)
+Received: from [209.85.146.178] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mailinglist@miromico.ch>) id 1JL1Ug-0007ti-6W
+	(envelope-from <pmiscml@gmail.com>) id 1JL3gr-0001ro-PU
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Feb 2008 20:24:10 +0100
-Received: from [192.168.1.102] (really [217.162.164.39])
-	by viefep24-int.chello.at
-	(InterMail vM.7.08.02.00 201-2186-121-20061213) with ESMTP
-	id <20080201192416.FYBY5971.viefep24-int.chello.at@[192.168.1.102]>
+	Fri, 01 Feb 2008 22:44:53 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so862507waf.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Feb 2008 20:24:16 +0100
-Message-ID: <47A3720F.1060303@miromico.ch>
-Date: Fri, 01 Feb 2008 20:25:03 +0100
-From: Alex <mailinglist@miromico.ch>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
-MIME-Version: 1.0
+	Fri, 01 Feb 2008 13:45:02 -0800 (PST)
+Received: by 10.114.176.1 with SMTP id y1mr4563950wae.86.1201902301975;
+	Fri, 01 Feb 2008 13:45:01 -0800 (PST)
+Received: from widy.localdomain ( [88.231.86.1])
+	by mx.google.com with ESMTPS id f4sm433249nfh.31.2008.02.01.13.44.59
+	(version=SSLv3 cipher=OTHER); Fri, 01 Feb 2008 13:45:00 -0800 (PST)
+Date: Fri, 1 Feb 2008 23:44:57 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Solution for AVR32 kernel link problem
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20080201234457.19bdfada@widy.localdomain>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Cc: Michal Panczyk <mpanczyk@gmail.com>
+Subject: Global Maillist hiccups,a t least for gmail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,66 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2008 19:24:10 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+X-List-Received-Date: Fri, 01 Feb 2008 21:44:54 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-Hi
+Hello,
 
-I played around with OE for AVR32.
+Last message I received on oe-commits was 30 Jan 2008 12:05:16 +0100
+Then, I haven't received anything on oe-* and angstrom-distro-* for
+today. Archives for all lists show there were messages. Finally, I
+received mail below from another gentleman @gmail.com, which makes me
+think that not only I experience such issues. I checked that the
+messages in questions are not in gmail spam.
 
-I think I found a solution for the kernel linking problem. A known 
-workaround was to use an external linker.
-I tried both, the one from Atmel's toolchain package and the one created 
-by Atmel's buildroot. The one created
-by buildroot should be the same version as the one created by OE.
+Anyone can confirm/has ideas what's up?
 
-I copied binutils patches from builtroot to OE. Even though, they have 
-the same "patch number" (500, 501) they are different
-from those OE will download during build.
+Thanks.
 
-I changed binutils_2.17.bb receipt to use the files from buildroot:
 
---- snipp ---
-#patches from 
-http://svn.uclibc.org/cgi-bin/viewcvs.cgi/trunk/buildroot/toolchain/binutils/2.17/
+Begin forwarded message:
 
-SRC_URI += "\
-    file://100-uclibc-conf.patch;patch=1 \
-    file://300-006_better_file_error.patch;patch=1 \
-    file://702-binutils-skip-comments.patch;patch=1 \
-    file://110-arm-eabi-conf.patch;patch=1 \
-    file://300-012_check_ldrunpath_length.patch;patch=1 \
-    file://300-001_ld_makefile_patch.patch;patch=1 \
-    file://400-mips-ELF_MAXPAGESIZE-4K.patch;patch=1 \
-        file://500-avr32-atmel.1.3.0.patch;patch=1 \
-      file://501-avr32-fix-pool-alignment.patch;patch=1 \
-"
-#        
-http://avr32linux.org/twiki/pub/Main/DevelopmentTools/502-avr32-bfd-dont-allow-direct-refs-to-bss.patch.gz;patch=1 
-\
-#        file://503-avr32-fix-got-offset-init.patch;patch=1 \
----- snapp ------
+Date: Fri, 1 Feb 2008 20:51:05 +0100
+From: "Michal Panczyk" <mpanczyk at gmail.com>
 
-Like this kernel will compile and link.
+[]
 
-I don't have enough knowledge about OE to say this fix works. I don't 
-know why and how the patches are different?
-I will try to include the other two patches which are currently 
-commented out. The above receipt applies exactly the same patches as the 
-buildroot.
-
-Finally, I couldn't test it, as I can't boot the kernel. Something is 
-wrong with my load address and entry point. It is set to 0x20008000. I 
-tried to
-add UBOOT_ENTRYPOINT = "90000000" to atngw100.conf and just recompile 
-the kernel by "bitbake virtual/kernel -c clean" and "bitbake 
-virtual/kernel".
-This didn't change the entry point, but maybe I have to recompile 
-everything..
-
-Hope this helps
-Alex
--
+PS.  I tried registering to angstrom-devel but the confirmation email
+has not reached my mailbox for more than 24h, so I am unable to post
+(or at least get full access to all its features ) there, so at the
+moment I can not move the discussion there.....
 
 
