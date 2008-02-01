@@ -1,28 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JKszQ-0002Lv-PZ
-	for openembedded-devel@openembedded.org; Fri, 01 Feb 2008 11:19:20 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m11AJUxg017487
-	for <openembedded-devel@openembedded.org>; Fri, 1 Feb 2008 10:19:30 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 17377-03 for <openembedded-devel@openembedded.org>;
-	Fri,  1 Feb 2008 10:19:26 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m11AJQtj017481
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 1 Feb 2008 10:19:26 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Fri, 01 Feb 2008 10:19:24 +0000
-Message-Id: <1201861164.4660.23.camel@localhost.localdomain>
+	(envelope-from <pmiscml@gmail.com>) id 1JL0Ar-00063k-EY
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Feb 2008 18:59:37 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so797947ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Feb 2008 09:59:46 -0800 (PST)
+Received: by 10.67.30.6 with SMTP id h6mr5756113ugj.6.1201888783498;
+	Fri, 01 Feb 2008 09:59:43 -0800 (PST)
+Received: from widy.localdomain ( [88.231.86.1])
+	by mx.google.com with ESMTPS id k1sm12055172ugf.29.2008.02.01.09.59.41
+	(version=SSLv3 cipher=OTHER); Fri, 01 Feb 2008 09:59:42 -0800 (PST)
+Date: Fri, 1 Feb 2008 20:12:12 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20080201201212.2e08a5c2@widy.localdomain>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Monotone issues
+Subject: Re: [oe-commits] org.oe.dev gcc-native-3.4.4: Add PROVIDES gcc-native3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,50 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2008 10:19:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Feb 2008 17:59:37 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-Just so everyone is aware, it became apparent that a newer version of
-strace in OE.dev had disappeared. This was traced back to something from
-tmbinc which shouldn't have been merged but accidentally was.
+Hello,
 
-A disapprove wouldn't work since the automerger had merged it. I asked
-the monotone devs for advice on irc and was told I should be able to
-suspend that revision and work from and older one.
+> On Thu, 2008-01-31 at 14:17 +0200, Paul Sokolovsky wrote:
+> > On Tue, 29 Jan 2008 12:07:32 +0000
+> > Richard Purdie <rpurdie at rpsys.net> wrote:
+> > 
+> > []
+> > > 
+> > > To be honest I'm more worried about getting the functionality
+> > > right and getting rid of the gcc 3.x barrier to entry once and
+> > > for all.
+> > > 
+> > > If you want to do a s/gcc-native3/gcc3-native/, please feel free.
+> > 
+> > Done. Just if we want to clean up OE, worth paying attention even to
+> > such small things in new stuff going in.
+> 
+> You didn't change all the references though, hence breaking the user
+> experience :(
+> 
+> I'll fix it...
 
-I ran:
+Sorry, I intended to run grep -r on the entire tree, but apparently
+missed that. Thanks for fixing that.
 
-mtn suspend 50d03f17a42a3854cd87f47ef75084da297d194e
-
-and then 
-
-mtn up -r e651c4fa9a5d1fc6120cc2309e9cba1388cecc52
-
-and then committed something to form a new head revision.
-
-This appeared to work for me locally, I pushed it, pulled on another
-machine and all seemed well, it would only affect anyone who'd actually
-checked out the bad revision (50d03f17a42a3854cd87f47ef75084da297d194e)
-who would then need to run 
-mtn up -r11d1a9e6662c57de089d25a6900d5325f85d282e
-and we ran the risk of someone merging this again but it could be worse.
-
-monotone 0.37 wouldn't show the other head but I suspect older monotones
-do and don't support the suspend certificate. I suspect the automerger
-runs on a machine with an older monotone since it then merged the
-problematic head back and put us back to square one.
-
-So I've applied a reverse diff to restore the broken files and damaged
-the history :(. I was thinking it was a larger scale problem than it is,
-only about 12 files were affected. Its amazingly hard to work this out
-though.
-
-The difficulty in fixing this simple problem along with the speed issues
-make me wonder if monotone is right for the future though? I do get put
-off making commits due to the lack of speed too...
-
-Richard
-
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
