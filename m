@@ -1,29 +1,26 @@
-Received: from [64.233.166.177] (helo=py-out-1112.google.com)
+Received: from [209.85.198.191] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <xjqian@gmail.com>) id 1JKnOw-0005Sk-Ua
+	(envelope-from <xjqian@gmail.com>) id 1JKpaX-0006Px-HI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Feb 2008 05:21:20 +0100
-Received: by py-out-1112.google.com with SMTP id y77so944111pyg.28
+	Fri, 01 Feb 2008 07:41:26 +0100
+Received: by rv-out-0910.google.com with SMTP id c24so741771rvf.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jan 2008 20:21:27 -0800 (PST)
-Received: by 10.35.60.15 with SMTP id n15mr3344014pyk.33.1201839686824;
-	Thu, 31 Jan 2008 20:21:26 -0800 (PST)
+	Thu, 31 Jan 2008 22:41:32 -0800 (PST)
+Received: by 10.141.161.6 with SMTP id n6mr2241403rvo.41.1201848092754;
+	Thu, 31 Jan 2008 22:41:32 -0800 (PST)
 Received: from ?192.168.1.207? ( [24.107.189.117])
-	by mx.google.com with ESMTPS id y64sm3239143pyg.22.2008.01.31.20.21.25
+	by mx.google.com with ESMTPS id 10sm2184738wrl.0.2008.01.31.22.41.31
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 31 Jan 2008 20:21:26 -0800 (PST)
-Message-ID: <47A29E42.8020504@gmail.com>
-Date: Thu, 31 Jan 2008 22:21:22 -0600
+	Thu, 31 Jan 2008 22:41:31 -0800 (PST)
+Message-ID: <47A2BF16.1060702@gmail.com>
+Date: Fri, 01 Feb 2008 00:41:26 -0600
 From: Junqian Gordon Xu <xjqian@gmail.com>
 User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
 MIME-Version: 1.0
-To: angstrom-distro-devel@linuxtogo.org
-References: <47A05B52.6000202@gmail.com>	<200801301223.17721.openembedded@haerwu.biz>	<47A06C1C.10205@gmail.com>
-	<200801301711.44503.openembedded@haerwu.biz>
-In-Reply-To: <200801301711.44503.openembedded@haerwu.biz>
-Cc: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [Angstrom-devel] [RFC] add kernel-module-loop to roofs for collie and tosa
+To: openembedded-devel@lists.openembedded.org
+References: <1201531952.5882.32.camel@hammer.suse.cz>
+In-Reply-To: <1201531952.5882.32.camel@hammer.suse.cz>
+Subject: Re: [patch commit request] kernel fixes for Zaurus akita+spitz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,22 +34,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2008 04:21:20 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
+X-List-Received-Date: Fri, 01 Feb 2008 06:41:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 01/30/2008 10:11 AM, Marcin Juszkiewicz wrote:
-> Users does not have to go and find it. OE will take care of it and 
-> installing altboot into image will also adds kernel-module-loop package. 
-> Thats how dependencies works.
+On 01/28/2008 08:52 AM, Stanislav Brabec wrote:
+> Hallo.
 > 
-> 
-> RRECOMMENDS is proper for kernel modules as it does not break if package 
-> is not available (which is a case when loop is in kernel not module).
-> 
+> Would be anybody with commit privileges to OE mtn so kind and review and
+> commit attached fixes regarding Akita and Spitz kernel for rp kernels?
+> Thanks.
 
-Thanks. If CoreDump doesn't object, I will add kernel-module-loop as an 
-RRECOMMENDS to altboot recipies.
+committed revision 2e6be4e7332d4b8bb42dcb17a0838f9beb8de2d6
+
+Please feel free to test/comment or disapprove.
 
 Regards
 Gordon
