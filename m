@@ -1,23 +1,30 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <scvalex@gmail.com>) id 1JLa6A-0004sQ-6l
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Feb 2008 09:21:11 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so1834862fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Feb 2008 00:21:19 -0800 (PST)
-Received: by 10.86.71.1 with SMTP id t1mr5215836fga.69.1202026879912;
-	Sun, 03 Feb 2008 00:21:19 -0800 (PST)
-Received: from ?192.168.0.102? ( [86.121.99.100])
-	by mx.google.com with ESMTPS id j10sm2673954muh.16.2008.02.03.00.21.19
-	(version=SSLv3 cipher=OTHER); Sun, 03 Feb 2008 00:21:19 -0800 (PST)
-From: Alexandru Scvortov <scvalex@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 3 Feb 2008 10:14:47 +0200
-User-Agent: KMail/1.9.7
-MIME-Version: 1.0
-Message-Id: <200802031014.52470.scvalex@gmail.com>
-Subject: Manually setting up a cross-compiler
+	(envelope-from <rpurdie@rpsys.net>) id 1JLlZC-0005d9-9l
+	for openembedded-devel@openembedded.org; Sun, 03 Feb 2008 21:35:54 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m13Ka2lP030180
+	for <openembedded-devel@openembedded.org>; Sun, 3 Feb 2008 20:36:02 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29769-09 for <openembedded-devel@openembedded.org>;
+	Sun,  3 Feb 2008 20:35:58 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m13KZsLM030174
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Sun, 3 Feb 2008 20:35:54 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <47A1D8D4.9010009@spesonline.com>
+References: <47A1D8D4.9010009@spesonline.com>
+Date: Sun, 03 Feb 2008 20:35:53 +0000
+Message-Id: <1202070953.4596.10.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Big Problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,40 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Feb 2008 08:21:13 -0000
-X-Groupsio-MsgNum: 4039
-Content-Type: multipart/signed; boundary="nextPart1350302.LVYsZrUh86";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Sun, 03 Feb 2008 20:35:54 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
---nextPart1350302.LVYsZrUh86
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+On Thu, 2008-01-31 at 15:19 +0100, ohviey1 wrote:
+> When i try to cross compile with an elf toolchain i have this error:
+> 
+> arm-elf-ld: no machine record defined
+> 
+> Sameone could help me?
 
-Hi,
+Based on that information, almost certainly not. There is no description
+of what you're actually doing, the single error message line is near
+enough useless.
 
-I'm trying to set up an ARM cross-toolchain *without* bitbake or openembedd=
-ed.=20
-But, so far, every how-to, wiki or tutorial I've tried to follow results in=
- a=20
-build error (usually glibc or gcc).
+Assuming there are not two people with this problem, you've already been
+told the problem is due to incorrect setup in your kernel defconfig (no
+machines are enabled).
 
-Can you recommend a book or a site that has some useful instructions/tips.
+Regards,
 
-Thanks
+Richard
 
---nextPart1350302.LVYsZrUh86
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.7 (GNU/Linux)
 
-iD8DBQBHpXf84qKEznSRAuYRAvKWAJ4qH69z0cjXvRt+TzBfgv8VrxoGVACgoxsQ
-Xx7o7AXof00lapIfKXHMbBI=
-=FvwD
------END PGP SIGNATURE-----
-
---nextPart1350302.LVYsZrUh86--
