@@ -1,30 +1,21 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JLlZC-0005d9-9l
-	for openembedded-devel@openembedded.org; Sun, 03 Feb 2008 21:35:54 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m13Ka2lP030180
-	for <openembedded-devel@openembedded.org>; Sun, 3 Feb 2008 20:36:02 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 29769-09 for <openembedded-devel@openembedded.org>;
-	Sun,  3 Feb 2008 20:35:58 +0000 (GMT)
-Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m13KZsLM030174
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 3 Feb 2008 20:35:54 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <47A1D8D4.9010009@spesonline.com>
-References: <47A1D8D4.9010009@spesonline.com>
-Date: Sun, 03 Feb 2008 20:35:53 +0000
-Message-Id: <1202070953.4596.10.camel@localhost.localdomain>
+	(envelope-from <dp@xora.org.uk>) id 1JLlxy-0006o8-Er
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Feb 2008 22:01:38 +0100
+Received: from cimmeria ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Sun, 03 Feb 2008 21:01:39 +0000
+	id 00038586.47A62BB3.000011DE
+Date: Sun, 3 Feb 2008 21:03:53 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080203210353.438dffaf@cimmeria>
+In-Reply-To: <1201823499.20311.26.camel@localhost.localdomain>
+References: <1201823499.20311.26.camel@localhost.localdomain>
+X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Big Problem
+Subject: Re: Monotone issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,28 +29,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Feb 2008 20:35:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 03 Feb 2008 21:01:47 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2008-01-31 at 15:19 +0100, ohviey1 wrote:
-> When i try to cross compile with an elf toolchain i have this error:
+On Thu, 31 Jan 2008 23:51:39 +0000
+Richard Purdie <rpurdie@rpsys.net> wrote:
+> The difficulty in fixing this simple problem along with the speed
+> issues make me wonder if monotone is right for the future though? I
+> do get put off making commits due to the lack of speed too...
 > 
-> arm-elf-ld: no machine record defined
-> 
-> Sameone could help me?
+Sounds like it is time for our regular re-assessment of the use
+of monotone. Maybe we should start another round of testing other
+SCM systems again. I know your not the only person seeing mtn start
+to creak.
 
-Based on that information, almost certainly not. There is no description
-of what you're actually doing, the single error message line is near
-enough useless.
-
-Assuming there are not two people with this problem, you've already been
-told the problem is due to incorrect setup in your kernel defconfig (no
-machines are enabled).
-
-Regards,
-
-Richard
-
+Graeme
 
 
