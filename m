@@ -1,33 +1,24 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <utx@penguin.cz>) id 1JLmpp-000843-SP
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JLmu7-0008Bg-MU
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Feb 2008 22:57:09 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 27F9E1422AA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Feb 2008 22:57:20 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XRzOX6bffi6y
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Feb 2008 22:57:20 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id DFFE414171BE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Feb 2008 22:57:19 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Sun, 03 Feb 2008 23:01:38 +0100
+Received: from [78.54.209.103] (helo=[192.168.1.152])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1JLnLu-0004eN-Ak; Sun, 03 Feb 2008 23:30:18 +0100
+Message-ID: <47A639C3.3080003@kernelconcepts.de>
+Date: Sun, 03 Feb 2008 23:01:39 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47A2D217.7070000@gmail.com>
-References: <1201544344.5882.45.camel@hammer.suse.cz>
-	<20080130124544.1f562944@widy.localdomain>
-	<1201695196.27523.52.camel@hammer.suse.cz> <47A2D217.7070000@gmail.com>
-Date: Sun, 03 Feb 2008 22:57:19 +0100
-Message-Id: <1202075839.17746.11.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-Subject: Re: [patch commit request] kdrive xserver: support	for	key	codes 128-255
+References: <20080201234457.19bdfada@widy.localdomain>
+In-Reply-To: <20080201234457.19bdfada@widy.localdomain>
+X-Enigmail-Version: 0.95.0
+Cc: Michal Panczyk <mpanczyk@gmail.com>
+Subject: Re: Global Maillist hiccups,a t least for gmail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,36 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Feb 2008 21:57:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 03 Feb 2008 22:01:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Junqian Gordon Xu wrote:
-> On 01/30/2008 06:13 AM, Stanislav Brabec wrote:
-> >> Paul Sokolovsky wrote:
-> >> Can you please elaborate what the application of this patch would mean
-> >> for OE (besides fixing support for one specific obscure peripheral)? 
-> 
-> I guess I probably would be yelled at for not raising this before 
-> committing your patch.
-> 
-> Is this patch specific to Zaurus clamshells, akita/spitz/c7x0? In other 
-> words, are there any other devices benifiting from the extended keycode. 
->   I vaguely remember Dmitry asked about extended keycode for tosa, but 
-> I'm not sure he's talking about the same thing.
+Hi,
 
-No. It adds support for key codes 128-255 in general.
+Paul Sokolovsky wrote:
+> Anyone can confirm/has ideas what's up?
 
-Let he test to assign these key codes in the kernel driver. He should
-see them non-mangled in X.
+for some reason the mailman application that is responsible for all these lists
+was dead. It is working again but I guess it will take quite some time for all
+mails to get delivered because the queue is really long right now.
 
-Note that is cannot provide codes above 255 - it is a major limitation
-of X11 protocol.
+Sorry for that inconvenience.
 
+Greetings
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Florian
 
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-14
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
