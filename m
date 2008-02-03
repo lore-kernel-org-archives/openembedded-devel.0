@@ -1,24 +1,23 @@
-Received: from [212.27.42.30] (helo=smtp4-g19.free.fr)
+Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcasse@oralux.org>) id 1JLLAz-00009d-4W
+	(envelope-from <scvalex@gmail.com>) id 1JLa6A-0004sQ-6l
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Feb 2008 17:25:09 +0100
-Received: from smtp4-g19.free.fr (localhost.localdomain [127.0.0.1])
-	by smtp4-g19.free.fr (Postfix) with ESMTP id B958B3EA0FB
+	Sun, 03 Feb 2008 09:21:11 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so1834862fge.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Feb 2008 17:25:18 +0100 (CET)
-Received: from [192.168.0.10] (bdy93-1-82-67-223-79.fbx.proxad.net
-	[82.67.223.79])
-	by smtp4-g19.free.fr (Postfix) with ESMTP id 9802B3EA0CC
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Feb 2008 17:25:18 +0100 (CET)
-Message-ID: <47A4996E.3010309@oralux.org>
-Date: Sat, 02 Feb 2008 17:25:18 +0100
-From: Gilles Casse <gcasse@oralux.org>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071008)
-MIME-Version: 1.0
+	Sun, 03 Feb 2008 00:21:19 -0800 (PST)
+Received: by 10.86.71.1 with SMTP id t1mr5215836fga.69.1202026879912;
+	Sun, 03 Feb 2008 00:21:19 -0800 (PST)
+Received: from ?192.168.0.102? ( [86.121.99.100])
+	by mx.google.com with ESMTPS id j10sm2673954muh.16.2008.02.03.00.21.19
+	(version=SSLv3 cipher=OTHER); Sun, 03 Feb 2008 00:21:19 -0800 (PST)
+From: Alexandru Scvortov <scvalex@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Package proposal: Emacspeak
+Date: Sun, 3 Feb 2008 10:14:47 +0200
+User-Agent: KMail/1.9.7
+MIME-Version: 1.0
+Message-Id: <200802031014.52470.scvalex@gmail.com>
+Subject: Manually setting up a cross-compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,30 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Feb 2008 16:25:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 03 Feb 2008 08:21:13 -0000
+X-Groupsio-MsgNum: 4039
+Content-Type: multipart/signed; boundary="nextPart1350302.LVYsZrUh86";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+--nextPart1350302.LVYsZrUh86
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Could you please welcome Emacspeak in OE?
+Hi,
 
-Emacspeak is a "talking emacs", the audio desktop written by TV Raman:
-http://emacspeak.sf.net
+I'm trying to set up an ARM cross-toolchain *without* bitbake or openembedd=
+ed.=20
+But, so far, every how-to, wiki or tutorial I've tried to follow results in=
+ a=20
+build error (usually glibc or gcc).
 
-It firstly concerns visually impaired users, and could be appreciated by 
-sighted users as well for editing long files (I am testing it on the Neo 
-with an external keyboard).
+Can you recommend a book or a site that has some useful instructions/tips.
 
-The current proposed bitbake recipes are:
-* tcltk (#3733)
-http://bugs.openembedded.net/show_bug.cgi?id=3733
+Thanks
 
-* emacspeak (#3734)
-http://bugs.openembedded.net/show_bug.cgi?id=3734
+--nextPart1350302.LVYsZrUh86
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-Thank you!
-Gilles
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.7 (GNU/Linux)
 
+iD8DBQBHpXf84qKEznSRAuYRAvKWAJ4qH69z0cjXvRt+TzBfgv8VrxoGVACgoxsQ
+Xx7o7AXof00lapIfKXHMbBI=
+=FvwD
+-----END PGP SIGNATURE-----
 
-
+--nextPart1350302.LVYsZrUh86--
