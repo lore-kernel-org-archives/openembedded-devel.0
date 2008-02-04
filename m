@@ -1,26 +1,24 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1JLwjO-0007Ug-1i
-	for openembedded-devel@openembedded.org; Mon, 04 Feb 2008 09:31:10 +0100
-Received: from Powerbook-2.local (vpn006017.vpn.utwente.nl [130.89.6.17])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	m148VEnr019976 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 4 Feb 2008 09:31:15 +0100
-Message-ID: <47A6CD53.5020203@student.utwente.nl>
-Date: Mon, 04 Feb 2008 09:31:15 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JLx9w-0007pa-TT
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Feb 2008 09:58:37 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.163])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JLxbr-0005aO-FH
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Feb 2008 10:27:27 +0100
+Message-ID: <47A6D3C2.10304@kernelconcepts.de>
+Date: Mon, 04 Feb 2008 09:58:42 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1201823499.20311.26.camel@localhost.localdomain>	<20080203210353.438dffaf@cimmeria>
-	<200802040336.13498.mickey@vanille-media.de>
-In-Reply-To: <200802040336.13498.mickey@vanille-media.de>
-X-Enigmail-Version: 0.95.6
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
+To: openembedded-devel@lists.openembedded.org
+References: <1201823499.20311.26.camel@localhost.localdomain>
+	<20080203210353.438dffaf@cimmeria>
+In-Reply-To: <20080203210353.438dffaf@cimmeria>
+X-Enigmail-Version: 0.95.0
 Subject: Re: Monotone issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -35,59 +33,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2008 08:31:10 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 04 Feb 2008 08:58:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Michael 'Mickey' Lauer schreef:
-| On Sunday 03 February 2008 22:03:53 Graeme Gregory wrote:
-|> On Thu, 31 Jan 2008 23:51:39 +0000
-|>
-|> Richard Purdie <rpurdie@rpsys.net> wrote:
-|>> The difficulty in fixing this simple problem along with the speed
-|>> issues make me wonder if monotone is right for the future though? I
-|>> do get put off making commits due to the lack of speed too...
-|
-| Agreed. It's starting to be unbearable again.
-|
-|> Sounds like it is time for our regular re-assessment of the use
-|> of monotone. Maybe we should start another round of testing other
-|> SCM systems again.
-|
-| Agreed. To add up on that, last month Graydon Hoare officially
-announced his
-| retiring from the monotone project. Not that this would have any short
-term
-| effect, but it adds up to general feeling of re-evaluation.
+Graeme Gregory schrieb:
+> Sounds like it is time for our regular re-assessment of the use
+> of monotone. Maybe we should start another round of testing other
+> SCM systems again. I know your not the only person seeing mtn start
+> to creak.
 
-Since this all was triggered by a bad commit, we should evaluate commit
-and review policy as well and ideally end up with something that can be
-hooked up to http://review-board.org/.
+I agree... I have never been a friend of monotone but got used to it. But it
+reminds you that it is still not ready for complex projects. Just to mention the
+pain that updates are not atomic operations and problems during an update end up
+in the pain of a broken repository.
+Another major problem is that a monotone update sometimes causes a very time
+consuming database update. Waiting half a day on a really fast machine for the
+database to become usable again is a real showstopper.
 
-| Ideally, we would collect candidates and experience reports pretty
-soon and
-| make a decision at or shortly after the next OE meeting (FOSDEM).
+Greetings
 
-After, since at least 3 core developers won't be at FOSDEM.
+Florian
 
-regards,
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
-Koen
-
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHps1TMkyGM64RGpERAj6NAJ9Q2hFba+aVBro12iBnV0PWUh1S0gCeNxd5
-AQWY1x22VXHYj1yuBt+WjeU=
-=Uyow
------END PGP SIGNATURE-----
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
