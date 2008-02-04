@@ -1,43 +1,27 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <stefano.regno@spesonline.com>) id 1JLzne-0007Qh-HG
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Feb 2008 12:47:46 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id D21E795B41
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2008 12:47:56 +0100 (CET)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 16326-01-2 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 4 Feb 2008 12:47:56 +0100 (CET)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id B514D95B35
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2008 12:47:56 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 8FA6E1D944D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2008 12:47:56 +0100 (CET)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 19717-01-7 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 4 Feb 2008 12:47:56 +0100 (CET)
-Received: from [192.168.1.163]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 5494A1D71E3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2008 12:47:56 +0100 (CET)
-Message-ID: <47A6FB6B.2010106@spesonline.com>
-Date: Mon, 04 Feb 2008 12:47:55 +0100
-From: ohviey1 <stefano.regno@spesonline.com>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1JM0D9-0007qz-L9
+	for openembedded-devel@openembedded.org; Mon, 04 Feb 2008 13:14:07 +0100
+Received: from Powerbook-2.local (vpn006017.vpn.utwente.nl [130.89.6.17])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	m14CEDnr025871 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 4 Feb 2008 13:14:13 +0100
+Message-ID: <47A70195.5060205@student.utwente.nl>
+Date: Mon, 04 Feb 2008 13:14:13 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-Subject: Problem with Kermit
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <47A3720F.1060303@miromico.ch>
+In-Reply-To: <47A3720F.1060303@miromico.ch>
+X-Enigmail-Version: 0.95.6
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: Solution for AVR32 kernel link problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -51,25 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2008 11:47:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 04 Feb 2008 12:14:10 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-After listen how configure kermit i have found this problem:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I have Ubuntu with  2.6.22-14-generic #1 SMP Tue Dec 18 08:02:57 UTC 
-2007 i686 GNU/Linux
-i try to configure kermit but when i try to assing an ip to my usb0 i 
-have this error:
+Alex schreef:
+| Hi
+|
+| I played around with OE for AVR32.
+|
+| I think I found a solution for the kernel linking problem.
 
-stefano@stefano:~$ sudo ifconfig usb0 192.168.1.1
-SIOCSIFADDR: No such device
-usb0: ERROR while getting interface flags: No such device
+<snip>
 
-with ifconfig -a i don't find usb0.
+Great catch! This also fixes the build of alsa, it is applied in OE now.
 
-Sameone could help me?
+|
+| Finally, I couldn't test it, as I can't boot the kernel. Something is
+| wrong with my load address and entry point. It is set to 0x20008000. I
+| tried to
+| add UBOOT_ENTRYPOINT = "90000000" to atngw100.conf and just recompile
+| the kernel by "bitbake virtual/kernel -c clean" and "bitbake
+| virtual/kernel".
+| This didn't change the entry point, but maybe I have to recompile
+| everything..
 
-Stefano
+For my ngw with uboot from git (3 week old) the following works:
+
+mkimage -A avr32 -O linux -T kernel -C none -a 0x10000000 -e 0x90000000
+- -n 'koen 24rcgit' -d arch/avr32/boot/images/vmlinux.bin uImage
+
+I changed linux.inc and atngw100.conf to allow the loadadress to be
+different from the entry point.
+
+regards,
+
+Koen
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHpwGVMkyGM64RGpERAtxkAKCnqnup+rV12sisqk8oMO7hkxYfogCdGTFG
+zlIWKrqpDk8Tx8kQeoCvzE4=
+=eIAw
+-----END PGP SIGNATURE-----
 
 
