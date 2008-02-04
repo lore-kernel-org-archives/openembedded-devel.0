@@ -1,34 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JLpsf-0006V6-Oa
-	for openembedded-devel@openembedded.org; Mon, 04 Feb 2008 02:12:17 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JLpsl-00055i-4y
-	for openembedded-devel@openembedded.org; Mon, 04 Feb 2008 01:12:23 +0000
-Received: from ppp78-37-139-107.pppoe.avangarddsl.ru ([78.37.139.107])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 04 Feb 2008 01:12:23 +0000
-Received: from dbaryshkov by ppp78-37-139-107.pppoe.avangarddsl.ru with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 04 Feb 2008 01:12:23 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Dmitry Baryshkov <dbaryshkov@gmail.com>
-Date: Mon, 4 Feb 2008 01:12:17 +0000 (UTC)
-Message-ID: <fo5oph$rre$2@ger.gmane.org>
-References: <1201544344.5882.45.camel@hammer.suse.cz>
-	<20080130124544.1f562944@widy.localdomain>
-	<1201695196.27523.52.camel@hammer.suse.cz> <47A2D217.7070000@gmail.com>
-	<1202075839.17746.11.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ppp78-37-139-107.pppoe.avangarddsl.ru
-User-Agent: Pan/0.132 (Waxed in Black)
-Sender: news <news@ger.gmane.org>
-Subject: Re: [patch commit request] kdrive xserver:	support	for	key	codes 128-255
+	(envelope-from <mickey@vanille-media.de>) id 1JLrBc-0008NY-Kl
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Feb 2008 03:35:56 +0100
+Received: from andromeda (e180132202.adsl.alicedsl.de [85.180.132.202])
+	by drlauer-research.com (Postfix) with ESMTP id A1557584C1A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Feb 2008 03:40:15 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 4 Feb 2008 03:36:13 +0100
+User-Agent: KMail/1.9.7
+References: <1201823499.20311.26.camel@localhost.localdomain>
+	<20080203210353.438dffaf@cimmeria>
+In-Reply-To: <20080203210353.438dffaf@cimmeria>
+MIME-Version: 1.0
+Message-Id: <200802040336.13498.mickey@vanille-media.de>
+Subject: Re: Monotone issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,48 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2008 01:12:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 04 Feb 2008 02:35:56 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On Sunday 03 February 2008 22:03:53 Graeme Gregory wrote:
+> On Thu, 31 Jan 2008 23:51:39 +0000
+>
+> Richard Purdie <rpurdie@rpsys.net> wrote:
+> > The difficulty in fixing this simple problem along with the speed
+> > issues make me wonder if monotone is right for the future though? I
+> > do get put off making commits due to the lack of speed too...
 
-Stanislav Brabec wrote:
+Agreed. It's starting to be unbearable again.
 
-> Junqian Gordon Xu wrote:
->> On 01/30/2008 06:13 AM, Stanislav Brabec wrote:
->> >> Paul Sokolovsky wrote:
->> >> Can you please elaborate what the application of this patch would
->> >> mean for OE (besides fixing support for one specific obscure
->> >> peripheral)?
->> 
->> I guess I probably would be yelled at for not raising this before
->> committing your patch.
->> 
->> Is this patch specific to Zaurus clamshells, akita/spitz/c7x0? In other
->> words, are there any other devices benifiting from the extended
->> keycode.
->>   I vaguely remember Dmitry asked about extended keycode for tosa, but
->> I'm not sure he's talking about the same thing.
-> 
-> No. It adds support for key codes 128-255 in general.
-> 
-> Let he test to assign these key codes in the kernel driver. He should
-> see them non-mangled in X.
+> Sounds like it is time for our regular re-assessment of the use
+> of monotone. Maybe we should start another round of testing other
+> SCM systems again.
 
-Thanks. I'll test. Should I use -keybd keyboard or -keybd evdev... ?
+Agreed. To add up on that, last month Graydon Hoare officially announced his 
+retiring from the monotone project. Not that this would have any short term 
+effect, but it adds up to general feeling of re-evaluation.
 
-> 
-> Note that is cannot provide codes above 255 - it is a major limitation
-> of X11 protocol.
-
-Hmmm. According to the <linux/input.h> there are a plenty of keys with 
-keycodes 0x160 -- 0x1ff. They can't be handled by the X11?
+Ideally, we would collect candidates and experience reports pretty soon and 
+make a decision at or shortly after the next OE meeting (FOSDEM).
 
 -- 
-With best wishes
-Dmitry
-
-
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
