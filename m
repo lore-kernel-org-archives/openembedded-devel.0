@@ -1,28 +1,32 @@
-Received: from [209.85.134.189] (helo=mu-out-0910.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JMJEp-0008Jo-W9
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Feb 2008 09:33:08 +0100
-Received: by mu-out-0910.google.com with SMTP id w9so1647356mue.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Feb 2008 00:33:15 -0800 (PST)
-Received: by 10.78.132.2 with SMTP id f2mr14281717hud.19.1202200395725;
-	Tue, 05 Feb 2008 00:33:15 -0800 (PST)
-Received: from widy.localdomain ( [88.231.85.196])
-	by mx.google.com with ESMTPS id b33sm3902205ika.5.2008.02.05.00.33.13
-	(version=SSLv3 cipher=OTHER); Tue, 05 Feb 2008 00:33:14 -0800 (PST)
-Date: Tue, 5 Feb 2008 10:45:43 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080205104543.393a2d96@widy.localdomain>
-In-Reply-To: <47A6CD53.5020203@student.utwente.nl>
-References: <1201823499.20311.26.camel@localhost.localdomain>
-	<20080203210353.438dffaf@cimmeria>
-	<200802040336.13498.mickey@vanille-media.de>
-	<47A6CD53.5020203@student.utwente.nl>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
+	(envelope-from <rpurdie@rpsys.net>) id 1JMVsz-0005qv-8y
+	for openembedded-devel@openembedded.org; Tue, 05 Feb 2008 23:03:25 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m15M3a4u007382
+	for <openembedded-devel@openembedded.org>; Tue, 5 Feb 2008 22:03:36 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07019-09-2 for <openembedded-devel@openembedded.org>;
+	Tue,  5 Feb 2008 22:03:28 +0000 (GMT)
+Received: from [192.168.1.15] (max.rpnet.com [192.168.1.15])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m15M3Cjb007281
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>; Tue, 5 Feb 2008 22:03:12 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <47A7CBE6.70401@palm.com>
+References: <47A78C40.8000308@palm.com>
+	<1202166317.4788.105.camel@localhost.localdomain>
+	<47A7CBE6.70401@palm.com>
+Date: Tue, 05 Feb 2008 22:03:11 +0000
+Message-Id: <1202248991.4619.5.camel@localhost.localdomain>
 Mime-Version: 1.0
-Subject: Re: Monotone issues
+X-Mailer: Evolution 2.10.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: getVar. setVar, "d", etc.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,38 +40,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2008 08:33:09 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 05 Feb 2008 22:03:25 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello,
-
-On Mon, 04 Feb 2008 09:31:15 +0100
-Koen Kooi <k.kooi@student.utwente.nl> wrote:
-
-[]
-
-> Since this all was triggered by a bad commit, 
-
-Was it? I got impression it was kinda bug in mtn?
-
-> we should evaluate
-> commit and review policy as well and ideally end up with something
-> that can be hooked up to http://review-board.org/.
-
-Oh, new toys are always sooo sweet! ;-) In the meantime, may I ask if
-your exams are over and we can expect to see weekly commit/bug activity
-summaries again? ;-) Maybe they even will be crontabbed?
-
-[]
+On Mon, 2008-02-04 at 18:37 -0800, Rich Pixley wrote:
+> Let me try this again.
 > 
-> regards,
+> I have a class.  My class is listed in the INHERIT in my local.conf.
 > 
-> Koen
+> My class intends to set a variable, SUBMISSION_busybox, which will be 
+> used by a bb file as "PR = ${SUBMISSION_busybox}".
 > 
+> I'm setting the variable via setVar, and pretty printing "d" shows me 
+> that it's in p.dict.
+> 
+> However, attempting to bitbake yields:
+> 
+> NOTE: <type 'exceptions.SyntaxError'>:EOL while scanning single-quoted 
+> string (<string>, line 1) while evaluating:
+> ${@base_set_filespath([ 
+> "/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/busybox-1.7.2-${SUBMISSION_busybox}", 
+> "/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/busybox-1.7.2", 
+> "/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/busybox", 
+> "/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/files", 
+> "/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox" ], d)}
+> ERROR: Error in executing:
+> ERROR: Exception:<type 'exceptions.SyntaxError'> Message:EOL while 
+> scanning single-quoted string (<string>, line 1)
+> ERROR: Printing the environment of the function
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+The problem is the point at which some variables are accessed. How,
+where and when your class sets this variable SUBMISSION_busybox is very
+important. 
+
+In this case bitbake is trying to evaluate FILESPATH set in
+base.bbclass. To do this it references the ${PF} variable which in turn
+contains ${PR} which in turn contains ${SUBMISSION_busybox}. At this
+point ${SUBMISSION_busybox} isn't set so it errors.
+
+> And I'm totally confused.  It would appear to me as though 
+> SUBMISSION_busybox isn't being found and thus isn't being expanded.  I'm 
+> assuming that my understanding of the various "d"'s is my conceptual 
+> weakness here.
+
+At the point in time where bitbake is trying to evaluate FILESPATH which
+indirectly includes SUBMISSION_busybox, SUBMISSION_busybox isn't in d.
+
+Regards,
+
+Richard
+
 
 
