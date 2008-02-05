@@ -1,25 +1,27 @@
-Received: from [64.28.152.243] (helo=smtp-relay2.palm.com)
+Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rich.pixley@palm.com>) id 1JMDge-0000TN-T1
-	for openembedded-devel@openembedded.org; Tue, 05 Feb 2008 03:37:29 +0100
-X-IronPort-AV: E=Sophos;i="4.25,304,1199692800"; 
-   d="scan'208";a="4597333"
-Received: from unknown (HELO mailhost02.palm.com) ([148.92.223.90])
-	by smtp-relay2.palm.com with ESMTP; 04 Feb 2008 18:37:37 -0800
-Received: from flamingo.palm1.palmone.com (flamingo.palm1.palmone.com
-	[148.92.248.89])
-	by mailhost02.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
-	m152bQ3P024308; Mon, 4 Feb 2008 18:37:36 -0800 (PST)
-Message-ID: <47A7CBE6.70401@palm.com>
-Date: Mon, 04 Feb 2008 18:37:26 -0800
-From: Rich Pixley <rich.pixley@palm.com>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
-To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-References: <47A78C40.8000308@palm.com>
-	<1202166317.4788.105.camel@localhost.localdomain>
-In-Reply-To: <1202166317.4788.105.camel@localhost.localdomain>
-Subject: Re: getVar. setVar, "d", etc.
+	(envelope-from <pmiscml@gmail.com>) id 1JMJ71-00088P-Sy
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Feb 2008 09:25:03 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so140705ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Feb 2008 00:25:14 -0800 (PST)
+Received: by 10.67.19.13 with SMTP id w13mr1022667ugi.19.1202199914568;
+	Tue, 05 Feb 2008 00:25:14 -0800 (PST)
+Received: from widy.localdomain ( [88.231.85.196])
+	by mx.google.com with ESMTPS id q1sm2315808uge.7.2008.02.05.00.25.12
+	(version=SSLv3 cipher=OTHER); Tue, 05 Feb 2008 00:25:13 -0800 (PST)
+Date: Tue, 5 Feb 2008 10:37:42 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080205103742.5280e2e7@widy.localdomain>
+In-Reply-To: <47A6D6E6.4030700@whitby.id.au>
+References: <1201823499.20311.26.camel@localhost.localdomain>
+	<20080203210353.438dffaf@cimmeria>
+	<47A6D3C2.10304@kernelconcepts.de> <47A6D6E6.4030700@whitby.id.au>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.1; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: Monotone issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,51 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2008 02:37:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 05 Feb 2008 08:25:04 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-Let me try this again.
+Hello,
 
-I have a class.  My class is listed in the INHERIT in my local.conf.
+On Mon, 04 Feb 2008 19:42:06 +1030
+Rod Whitby <rod@whitby.id.au> wrote:
 
-My class intends to set a variable, SUBMISSION_busybox, which will be 
-used by a bb file as "PR = ${SUBMISSION_busybox}".
+> > Graeme Gregory schrieb:
+> >> Sounds like it is time for our regular re-assessment of the use
+> >> of monotone. Maybe we should start another round of testing other
+> >> SCM systems again.
+> 
+> Let's just cut to the chase and discuss why we're not using git ...
 
-I'm setting the variable via setVar, and pretty printing "d" shows me 
-that it's in p.dict.
+Probably because git is a "stupid content tracker" according to its
+very authors, and we want some real SCM? ;-)
 
-However, attempting to bitbake yields:
+> 
+> -- Rod (who started using git recently to push kernel patches
+> upstream)
 
-NOTE: <type 'exceptions.SyntaxError'>:EOL while scanning single-quoted 
-string (<string>, line 1) while evaluating:
-${@base_set_filespath([ 
-"/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/busybox-1.7.2-${SUBMISSION_busybox}", 
-"/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/busybox-1.7.2", 
-"/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/busybox", 
-"/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/files", 
-"/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox" ], d)}
-ERROR: Error in executing:
-ERROR: Exception:<type 'exceptions.SyntaxError'> Message:EOL while 
-scanning single-quoted string (<string>, line 1)
-ERROR: Printing the environment of the function
 
-...
 
-  File "<string>", line 1
-    base_set_filespath([ 
-"/home/rich/projects/nova/oe-bom/nova/oe/packages/busybox/busybox-1.7.2-${SUBMISSION_busybox
-
-(The caret is under the last "o").
-
-And I'm totally confused.  It would appear to me as though 
-SUBMISSION_busybox isn't being found and thus isn't being expanded.  I'm 
-assuming that my understanding of the various "d"'s is my conceptual 
-weakness here.
-
-Could someone please point out my obvious flaw?  Or point me toward 
-relevant doc or code which might help clarify this for me?
-
---rich
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
