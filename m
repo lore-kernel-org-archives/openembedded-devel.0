@@ -1,33 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JMjE6-00083c-2Q
-	for openembedded-devel@openembedded.org; Wed, 06 Feb 2008 13:18:06 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m16CIHs2030206
-	for <openembedded-devel@openembedded.org>; Wed, 6 Feb 2008 12:18:17 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 29808-09 for <openembedded-devel@openembedded.org>;
-	Wed,  6 Feb 2008 12:18:13 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m16CIAuj030189
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 6 Feb 2008 12:18:10 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <47A91B74.9040605@palm.com>
-References: <47A78C40.8000308@palm.com>
-	<1202166317.4788.105.camel@localhost.localdomain>	<47A7CBE6.70401@palm.com>
-	<1202248991.4619.5.camel@localhost.localdomain>
-	<47A91B74.9040605@palm.com>
-Date: Wed, 06 Feb 2008 12:18:10 +0000
-Message-Id: <1202300290.8393.6.camel@dax.rpnet.com>
+	(envelope-from <pmiscml@gmail.com>) id 1JMnJc-0003Hi-U4
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Feb 2008 17:40:08 +0100
+Received: by nf-out-0910.google.com with SMTP id h3so783143nfh.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Feb 2008 08:40:16 -0800 (PST)
+Received: by 10.78.160.2 with SMTP id i2mr18035086hue.53.1202316016118;
+	Wed, 06 Feb 2008 08:40:16 -0800 (PST)
+Received: from widy.localdomain ( [88.231.85.196])
+	by mx.google.com with ESMTPS id c22sm7572458ika.3.2008.02.06.08.40.14
+	(version=SSLv3 cipher=OTHER); Wed, 06 Feb 2008 08:40:15 -0800 (PST)
+Date: Wed, 6 Feb 2008 18:40:15 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080206184015.40bf51c1@widy.localdomain>
+In-Reply-To: <1201565225.4687.98.camel@localhost.localdomain>
+References: <20080129014117.60ed9f77@widy.localdomain>
+	<1201565225.4687.98.camel@localhost.localdomain>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: getVar. setVar, "d", etc.
+Subject: [ann] Utils for converting rootfs images to other formats
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,59 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2008 12:18:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 06 Feb 2008 16:40:10 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2008-02-05 at 18:29 -0800, Rich Pixley wrote:
-> When does d change?
-> 
-> I've got the following bb file which produces results which puzzle me.  
-> What I'm seeing is that the two values for d are different instances and 
-> that the second function doesn't see the variable which was set in the 
-> first because they're using different dictionaries.
-> 
-> --rich
-> 
-> def setting(d):
-> 
->     import bb
-> 
->     print "setting sets in ", d, "\n"
-> 
->     bb.data.setVar('FOO', 'bar', d)
-> 
->     return "setting"
-> 
-> X := ${@setting(d)}
-> 
-> def getting(d):
-> 
->     import bb
-> 
->     got = bb.data.getVar('FOO', d)
-> 
->     print "getting gets %s from " % (got), d, "\n"
-> 
->     return "getting"
-> 
-> Y := ${@getting(d)}
+Hello,
 
-The problem is that you're doing this in ":=" context. The immediate
-expansion operator means we have to expand the data overrides before
-parsing the variables so overrides work as expected. This makes a copy
-of the data object so the result of the setVar is lost inside the
-setting function.
+[]
 
-Using "X = ${@setting(d)}" instead should make the above example work if
-I remember how this works correctly.
+> > Oh, and btw, I have a bunch of standalone filesystem conversion
+> > scripts which I can't find time to RFC for addition to contrib/.
+> > While OE has ability to generate images in different formats,
+> > sometimes there's a need/easier to convert one existing flexible
+> > format. 
+> 
+> I'd say feel free to add them...
 
-Once again I should remind people that := is usually a bad idea (see
-recent discussions).
+Added as contrib/image-convert/ . Of course, they mostly include
+ability to convert generic archive formats (cpio/tar) to something ;-).
 
-Regards,
+> 
+> Regards,
+> 
+> Richard
+> 
+> 
 
-Richard
 
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
