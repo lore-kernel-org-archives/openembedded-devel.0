@@ -1,33 +1,21 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [213.46.255.22] (helo=viefep23-int.chello.at)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JMv9v-0006Ae-SE
-	for openembedded-devel@openembedded.org; Thu, 07 Feb 2008 02:02:36 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1712m6x013707
-	for <openembedded-devel@openembedded.org>; Thu, 7 Feb 2008 01:02:48 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13602-01-4 for <openembedded-devel@openembedded.org>;
-	Thu,  7 Feb 2008 01:02:40 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m170scYH012301
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Thu, 7 Feb 2008 00:54:38 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <47AA0276.6020100@palm.com>
-References: <47A78C40.8000308@palm.com>
-	<1202166317.4788.105.camel@localhost.localdomain>	<47A7CBE6.70401@palm.com>
-	<1202248991.4619.5.camel@localhost.localdomain>	<47A91B74.9040605@palm.com>
-	<1202300290.8393.6.camel@dax.rpnet.com>  <47AA0276.6020100@palm.com>
-Date: Thu, 07 Feb 2008 00:54:40 +0000
-Message-Id: <1202345680.8393.51.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: getVar. setVar, "d", etc.
+	(envelope-from <mailinglist@miromico.ch>) id 1JN6XK-0004Q5-Is
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Feb 2008 14:11:30 +0100
+Received: from [192.168.1.192] (really [77.57.15.173])
+	by viefep23-int.chello.at
+	(InterMail vM.7.08.02.00 201-2186-121-20061213) with ESMTP
+	id <20080207131140.BEDH19244.viefep23-int.chello.at@[192.168.1.192]>
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 7 Feb 2008 14:11:40 +0100
+Message-ID: <47AB02C4.4060202@miromico.ch>
+Date: Thu, 07 Feb 2008 14:08:20 +0100
+From: Alex <mailinglist@miromico.ch>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Subject: Init fails with segfault on AVR32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,67 +29,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2008 01:02:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Feb 2008 13:11:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2008-02-06 at 10:54 -0800, K. Richard Pixley wrote:
-> Richard Purdie wrote:
-> > Once again I should remind people that := is usually a bad idea (see
-> > recent discussions).
-> That's counterintuitive and backwards from other build systems.  
+Hi
 
-Counterintuitive, yes, backwards, no. It does this differently since
-bitbake works differently in general to other build systems. The
-overrides syntax OE/bitbake uses is extremely powerful but has some
-costs and this is one of them.
+I finally got minimal-image compiled in OE for AVR32 and the kernel can 
+boot just to the point where it tries to load init.
 
-> I've often pulled significant savings out of makefile based systems by 
-> switching from = to :=.  
+This will fail with a segfault. Last messages on boot log:
 
-This isn't a makefile based system.
+VFS: Mounted root (jffs2 
+filesystem).                                          
+Freeing init memory: 68K (90000000 - 
+90011000)                                 
+init[1]: segfault at 00000008 pc 2aaabbe8 sp 7fabbf40 ecr 
+24                   
+init has generated signal 11 but has no handler for 
+it                         
+Kernel panic - not syncing: Attempted to kill init!   
 
-> The problem being that "x = ${@ 
-> a_long_running_function() }" is a killer, especially when 
-> a_long_running_function is deterministic.  In that case, := requires 
-> exactly one call during assignment while = requires a fresh call for 
-> each and every reference. 
+I tried NFS boot and boot from flash which both produced the same 
+result. I am using U-Boot 1.3.0.atmel.2 (from Atmel buildroot).
 
-You need to think carefully about when bitbake will execute these
-expressions. If a variable is never used, the code in it will never be
-run. Most variables are not expanded and hence any functions are not run
-during initial parsing. They may run when the recipe is executed but any
-time taken at this point isn't usually a problem.
+Anyone an idea what could be wrong?
 
-> I used := in this situation specifically because of the sequence 
-> ordering.   The assignments in my example are dummies whose sole purpose 
-> is to force the side effects to happen at a predictable and early point 
-> in the run - specifically, before the assignment to SRC_URI.  If I don't 
-> force the side effects to happen at := time, then there's no reason to 
-> believe that they will have occurred prior to the expansion of ${PR} in 
-> ${SRC_URI}.  (And, in fact, changing this doesn't affect my results).
-> 
-> I have discovered that converting the constructions into "python 
-> setting() {" seem to give them consistent contexts.  I don't understand 
-> why ${@ ... } lacks that context, but at least I have a way to proceed. 
+To find the problem I did the following:
 
-The "anonymous" functions are run after the file is parsed but before
-the data is used.
+I have a working rootfs (from AVR buildroot). Booting with OE-Kernel and 
+Buildroot rootfs works. I can mount OE-rootfs via NFS and then I can 
+execute programs such as sbin/init => this seems to be valid AVR32 
+binaries.
 
-${@...} runs when the variable is expanded.
+I copied init.sysvinit into my buildroot-rootfs. Now the system doesn't 
+segfault anymore.
 
-> Event handlers also seem to have consistent context so if I can reverse 
-> engineer what events actually exist, or force one to occur at the right 
-> time, then I should be able to get my assignments done early enough.
-> 
-> Neither these differences nor event handlers are very well described in 
-> the manual, btw.
+Thanks for any hint
 
-Patches welcome!
-
-Regards,
-
-Richard
-
+Alex
 
 
