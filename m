@@ -1,22 +1,23 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <dp@xora.org.uk>) id 1JNQaf-00051r-6r
+	(envelope-from <philipp.zabel@gmail.com>) id 1JNSHw-0003se-IG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2008 11:36:17 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Fri, 08 Feb 2008 10:36:29 +0000
-	id 000385BD.47AC30AD.00006135
-Date: Fri, 8 Feb 2008 10:36:28 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Fri, 08 Feb 2008 13:25:04 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so3308881fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Feb 2008 04:25:15 -0800 (PST)
+Received: by 10.82.116.15 with SMTP id o15mr22939385buc.3.1202473514683;
+	Fri, 08 Feb 2008 04:25:14 -0800 (PST)
+Received: by 10.82.118.18 with HTTP; Fri, 8 Feb 2008 04:25:14 -0800 (PST)
+Message-ID: <74d0deb30802080425s7c69bf95y4725bb48bc9088f6@mail.gmail.com>
+Date: Fri, 8 Feb 2008 13:25:14 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080208103628.22c8fcc9@cimmeria>
-In-Reply-To: <200802081101.33733.mickey@vanille-media.de>
-References: <20080208093258.291966f4@cimmeria>
-	<200802081101.33733.mickey@vanille-media.de>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: FOSDEM
+In-Reply-To: <E1JNHzO-0001Y7-HO@linuxtogo.org>
+MIME-Version: 1.0
+References: <E1JNHzO-0001Y7-HO@linuxtogo.org>
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev mkbold-mkitalic-native: initial commit. partly closes 1362 (incorporate stuff from openzaurus-ja project)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,198 +31,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2008 10:36:19 -0000
-X-Groupsio-MsgNum: 4076
-Content-Type: multipart/mixed;
-	boundary="=_xora.vm.bytemark.co.uk-24885-1202466989-0001-2"
-
---=_xora.vm.bytemark.co.uk-24885-1202466989-0001-2
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 08 Feb 2008 12:25:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Fri, 8 Feb 2008 11:01:33 +0100
-Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
+Hi,
 
-> On Friday 08 February 2008 10:32:58 Graeme Gregory wrote:
-> > Hey guys, whats happening for FOSDEM? What goodies do we wish to
-> > show?
-> >
-> > What goodies do we need to bring?
-> 
-> This time we really _need_ an attractive poster and flyers to
-> giveaway. Who has time to come up with a text for an A4 flyer?
-> Who is artist enough to come up with an A3 poster?
-> Who can print? Who will bring it?
-> 
-Im no artist, but this was the play around I had with the OE logo
-a while ago.
+I think this should not live in xorg-app but in its own directory.
+xorg-app is meant to
+contain the X.org applications from
+http://xorg.freedesktop.org/archive/individual/app.
 
-Graeme
+regards
+Philipp
 
---=_xora.vm.bytemark.co.uk-24885-1202466989-0001-2
-Content-Type: image/svg+xml; name="oe-fun.svg"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename=oe-fun.svg
+On Feb 8, 2008 2:25 AM, Laibsch commit
+<openembedded-commits@lists.openembedded.org> wrote:
+> mkbold-mkitalic-native: initial commit.  partly closes 1362 (incorporate stuff from openzaurus-ja project)
+>
+> Author: Laibsch@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 452a82218384d46f3ac39581fe8409623ec425a1
+> ViewMTN: http://monotone.openembedded.org/revision/info/452a82218384d46f3ac39581fe8409623ec425a1
+> Files:
+> 1
+> packages/xorg-app/mkbold-mkitalic-native
+> packages/xorg-app/mkbold-mkitalic-native/makebifonts
+> packages/xorg-app/mkbold-mkitalic-native_0.11.bb
+> MAINTAINERS
+> Diffs:
+>
+> #
+> # mt diff -rc16a7c07dd072a99d1ed6c919f9148f89d806120 -r452a82218384d46f3ac39581fe8409623ec425a1
+> #
+> #
+> #
+> # add_dir "packages/xorg-app/mkbold-mkitalic-native"
+> #
+> # add_file "packages/xorg-app/mkbold-mkitalic-native/makebifonts"
+> #  content [7a8ebd352640695cd996b481d7454b0ea18e8ba3]
+> #
+> # add_file "packages/xorg-app/mkbold-mkitalic-native_0.11.bb"
+> #  content [b1aea18de213f27a02dd941931cb2b273cdc0922]
+> #
+> # patch "MAINTAINERS"
+> #  from [2d658538b876a6f91e54cd29e826ef15185add02]
+> #    to [155ffaa8b1c7c3d0b95f6e30e55feaa7f3530a0f]
+> #
+> ============================================================
+> --- packages/xorg-app/mkbold-mkitalic-native/makebifonts        7a8ebd352640695cd996b481d7454b0ea18e8ba3
+> +++ packages/xorg-app/mkbold-mkitalic-native/makebifonts        7a8ebd352640695cd996b481d7454b0ea18e8ba3
+> @@ -0,0 +1,5 @@
+> +#!/bin/sh
+> +cat $1.bdf | bdftopcf | gzip -c -3 > $2/$3.pcf.gz
+> +cat $1.bdf | mkbold | bdftopcf | gzip -c -3 > $2/$3_b.pcf.gz
+> +cat $1.bdf | mkitalic | bdftopcf | gzip -c -3 > $2/$3_i.pcf.gz
+> +cat $1.bdf | mkbolditalic | bdftopcf | gzip -c -3 > $2/$3_bi.pcf.gz
+> ============================================================
+> --- packages/xorg-app/mkbold-mkitalic-native_0.11.bb    b1aea18de213f27a02dd941931cb2b273cdc0922
+> +++ packages/xorg-app/mkbold-mkitalic-native_0.11.bb    b1aea18de213f27a02dd941931cb2b273cdc0922
+> @@ -0,0 +1,21 @@
+> +DESCRIPTION = "mkbold-mkitalic : make bold and italic fonts from normal fonts"
+> +HOMEPAGE = "http://hp.vector.co.jp/authors/VA013651/freeSoftware/mkbold-mkitalic.html"
+> +PRIORITY = "optional"
+> +LICENSE = "MIT/X"
+> +PR = "r2"
+> +
+> +SRC_URI = "http://hp.vector.co.jp/authors/VA013651/lib/mkbold-mkitalic-${PV}.tar.bz2 \
+> +           file://makebifonts"
+> +
+> +S = "${WORKDIR}/mkbold-mkitalic-${PV}"
+> +
+> +inherit native
+> +
+> +do_stage() {
+> +       install -d ${STAGING_DIR}/${BUILD_ARCH}-${BUILD_OS}/bin
+> +       install -m 755 mkbold ${STAGING_DIR}/${BUILD_ARCH}-${BUILD_OS}/bin/
+> +       install -m 755 mkitalic ${STAGING_DIR}/${BUILD_ARCH}-${BUILD_OS}/bin/
+> +       install -m 755 mkbolditalic ${STAGING_DIR}/${BUILD_ARCH}-${BUILD_OS}/bin/
+> +       install -m 755 ${WORKDIR}/makebifonts ${STAGING_DIR}/${BUILD_ARCH}-${BUILD_OS}/bin/
+> +}
+> +
+> ============================================================
+> --- MAINTAINERS 2d658538b876a6f91e54cd29e826ef15185add02
+> +++ MAINTAINERS 155ffaa8b1c7c3d0b95f6e30e55feaa7f3530a0f
+> @@ -229,6 +229,10 @@ Recipes:    icecc.bbclass, ppc toolchain
+>  Interest:   Cross-machine development
+>  Recipes:    icecc.bbclass, ppc toolchain, asterisk,perl,php
+>
+> +Person:     Takashi Nemoto
+> +Mail:       tnemoto@sourceforge.jp
+> +Recipes:    mkbold-mkitalic
+> +
+>  Person:     Tim Sander
+>  Mail:       oe@iss.tu-darmstadt.de
+>  Receipes:   fxload
+>
+>
+>
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+>
 
-PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjwh
-LS0gQ3JlYXRlZCB3aXRoIFNvZGlwb2RpICgiaHR0cDovL3d3dy5zb2RpcG9kaS5jb20vIikgLS0+
-CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4
-bWxuczpjYz0iaHR0cDovL3dlYi5yZXNvdXJjZS5vcmcvY2MvIgogICB4bWxuczpyZGY9Imh0dHA6
-Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0
-cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw
-L3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9pbmtzY2FwZS5zb3VyY2Vmb3JnZS5uZXQv
-RFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2Fw
-ZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgaWQ9InN2ZzEiCiAgIHNvZGlwb2RpOnZlcnNp
-b249IjAuMzIiCiAgIGlua3NjYXBlOnZlcnNpb249IjAuNDMiCiAgIHdpZHRoPSI4LjAwMDAwMDBj
-bSIKICAgaGVpZ2h0PSI2LjAwMDAwMDBjbSIKICAgc29kaXBvZGk6ZG9jbmFtZT0ib2UtZnVuLnN2
-ZyIKICAgc29kaXBvZGk6ZG9jYmFzZT0iL2hvbWUvVUtCMDEvZ3JhZW1lLmdyZWdvcnkvRGVza3Rv
-cCIKICAgaW5rc2NhcGU6ZXhwb3J0LWZpbGVuYW1lPSIvVXNlcnMva29lbi9EZXNrdG9wL09FLWxv
-Z28ucG5nIgogICBpbmtzY2FwZTpleHBvcnQteGRwaT0iMTUyLjIiCiAgIGlua3NjYXBlOmV4cG9y
-dC15ZHBpPSIxNTIuMiI+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMTU2OSI+CiAgICA8
-cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxk
-Yzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAg
-ICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFn
-ZSIgLz4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGRl
-ZnMKICAgICBpZD0iZGVmczMiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJiYXNl
-IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAg
-ICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAg
-ICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnpvb209IjIuNDU1OTcwNiIK
-ICAgICBpbmtzY2FwZTpjeD0iMTM2LjkyNDYyIgogICAgIGlua3NjYXBlOmN5PSIxMDcuNTM2MDci
-CiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxMDE0IgogICAgIGlua3NjYXBlOndpbmRvdy1o
-ZWlnaHQ9IjY4MCIKICAgICBzaG93Z3VpZGVzPSJ0cnVlIgogICAgIHNuYXB0b2d1aWRlcz0idHJ1
-ZSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMjUi
-CiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ic3ZnMSIgLz4KICA8dGV4dAogICAgIHNvZGlw
-b2RpOmxpbmVzcGFjaW5nPSIxMDAlIgogICAgIGlkPSJ0ZXh0OTAyIgogICAgIHk9IjE3NC45MTAy
-IgogICAgIHg9IjQuMTM1NjY4OCIKICAgICBzdHlsZT0iZm9udC1zaXplOjMwLjMwMjY2MzhweDts
-aW5lLWhlaWdodDoxMDAlO2ZpbGw6I2QxMDAwMDtmaWxsLW9wYWNpdHk6MTtzdHJva2Utd2lkdGg6
-M3B0O2ZvbnQtZmFtaWx5OlZlcmRhbmEiCiAgICAgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+b3BlbiA8
-L3RleHQ+CiAgPHRleHQKICAgICBzb2RpcG9kaTpsaW5lc3BhY2luZz0iMTAwJSIKICAgICBpZD0i
-dGV4dDkwNSIKICAgICB5PSIyMDcuNDgzOSIKICAgICB4PSIzLjM3ODIxMzkiCiAgICAgc3R5bGU9
-ImZvbnQtc2l6ZTozMC4zMDI2NjM4cHg7bGluZS1oZWlnaHQ6MTAwJTtmaWxsOiNkMTAwMDA7Zmls
-bC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjNwdDtmb250LWZhbWlseTpWZXJkYW5hIgogICAgIHht
-bDpzcGFjZT0icHJlc2VydmUiPmVtYmVkZGVkPC90ZXh0PgogIDxwYXRoCiAgICAgaWQ9InBhdGg5
-NDMiCiAgICAgZD0iTSAxNDQuMjc4NjIsOTIuMTM5MDY3IEMgMTMzLjI3NjM1LDEyMS44ODIwOCAx
-MDAuMjA3NywxMzcuMDkxOTUgNzAuNDY0NzAzLDEyNi4wODk2OCBDIDQwLjcyMTY5NSwxMTUuMDg3
-NDEgMjUuNTExODMsODIuMDE4Nzc2IDM2LjUxNDEwNiw1Mi4yNzU3NjEgQyA0Ny41MTYzNzgsMjIu
-NTMyNzUzIDgwLjU4NTAwMiw3LjMyMjg4NTYgMTEwLjMyODAxLDE4LjMyNTE1OCBDIDE0MC4wNzEw
-MSwyOS4zMjc0MjggMTU1LjI4MDksNjIuMzk2MDU5IDE0NC4yNzg2Miw5Mi4xMzkwNjcgeiAiCiAg
-ICAgc3R5bGU9ImZpbGw6bm9uZTtmaWxsLXJ1bGU6ZXZlbm9kZDtzdHJva2U6IzAwMDAwMDtzdHJv
-a2Utd2lkdGg6Mi4xMjU5ODQxOTtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGlt
-aXQ6NDtzdHJva2UtZGFzaGFycmF5OjQuMjUxOTY4NSwgMi4xMjU5ODQyNTtzdHJva2UtZGFzaG9m
-ZnNldDowO3N0cm9rZS1vcGFjaXR5OjAuMTIwMDAwMDIiIC8+CiAgPHBhdGgKICAgICBzb2RpcG9k
-aTpub2RldHlwZXM9ImNjIgogICAgIGlkPSJwYXRoODQwIgogICAgIGQ9Ik0gMTguNzA3MTgxLDQ1
-LjY4ODYxNCBMIDI2Ny43MDk4NiwxMzcuNzk3NSIKICAgICBzdHlsZT0iZmlsbDpub25lO2ZpbGwt
-b3BhY2l0eTowLjc1O2ZpbGwtcnVsZTpldmVub2RkO3N0cm9rZTojOTI5MjkyO3N0cm9rZS13aWR0
-aDoxLjU7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5OjMsIDEuNTtzdHJva2Ut
-ZGFzaG9mZnNldDowO3N0cm9rZS1vcGFjaXR5OjAuNTcyNTQ5MDIiIC8+CiAgPHBhdGgKICAgICBp
-ZD0icGF0aDg0OSIKICAgICBkPSJNIDI1My4wMTUxNywxMzIuMzYxNzYgQyAyNDAuODE0NzUsMTY1
-LjM0Mzc3IDIwNC4xNDQ5NiwxODIuMjEgMTcxLjE2Mjk1LDE3MC4wMDk1OCBDIDEzOC4xODA5NCwx
-NTcuODA5MTcgMTIxLjMxNDcyLDEyMS4xMzkzNyAxMzMuNTE1MTQsODguMTU3MzYgQyAxNDUuNzE1
-NTUsNTUuMTc1MzQ5IDE4Mi4zODUzNSwzOC4zMDkxMjcgMjE1LjM2NzM2LDUwLjUwOTU0MyBDIDI0
-OC4zNDkzNiw2Mi43MDk5NTggMjY1LjIxNTU4LDk5LjM3OTc1MyAyNTMuMDE1MTcsMTMyLjM2MTc2
-IHogIgogICAgIHN0eWxlPSJmaWxsOm5vbmU7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOiM5Mjky
-OTI7c3Ryb2tlLXdpZHRoOjEuNTtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGlt
-aXQ6NDtzdHJva2UtZGFzaGFycmF5OjMsIDEuNTtzdHJva2UtZGFzaG9mZnNldDowO3N0cm9rZS1v
-cGFjaXR5OjAuNTcyNTQ5MDIiIC8+CiAgPHBhdGgKICAgICBpZD0icGF0aDgzOSIKICAgICBkPSJN
-IDEyNS45ODUzNSw4NS4zNzIwMDEgQyAxMTguNzE4NDIsMTA1LjAxNzA3IDk2Ljg3NjgwNSwxMTUu
-MDYzMDkgNzcuMjMxNzUsMTA3Ljc5NjE2IEMgNTcuNTg2Njc4LDEwMC41MjkyMyA0Ny41NDA2NTIs
-NzguNjg3NjA3IDU0LjgwNzU4Miw1OS4wNDI1NDQgQyA2Mi4wNzQ1MTUsMzkuMzk3NDcxIDgzLjkx
-NjEzNCwyOS4zNTE0NTkgMTAzLjU2MTIxLDM2LjYxODM5MiBDIDEyMy4yMDYyNiw0My44ODUzMTkg
-MTMzLjI1MjI5LDY1LjcyNjkyOSAxMjUuOTg1MzUsODUuMzcyMDAxIHogIgogICAgIHN0eWxlPSJm
-aWxsOm5vbmU7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOiM5MjkyOTI7c3Ryb2tlLXdpZHRoOjEu
-NTtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFy
-cmF5OjMsIDEuNTtzdHJva2UtZGFzaG9mZnNldDowO3N0cm9rZS1vcGFjaXR5OjAuNTcyNTQ5MDIi
-IC8+CiAgPHBhdGgKICAgICBzb2RpcG9kaTpub2RldHlwZXM9ImNjIgogICAgIGlkPSJwYXRoODQx
-IgogICAgIGQ9Ik0gMTE1LjI3ODY5LDQuOTQxODkzMyBMIDY1LjUxNDI0OCwxMzkuNDcyNjYiCiAg
-ICAgc3R5bGU9ImZpbGw6bm9uZTtmaWxsLW9wYWNpdHk6MC43NTtmaWxsLXJ1bGU6ZXZlbm9kZDtz
-dHJva2U6IzkyOTI5MjtzdHJva2Utd2lkdGg6MS41O3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJv
-a2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6MywgMS41O3N0cm9rZS1kYXNob2Zmc2V0
-OjA7c3Ryb2tlLW9wYWNpdHk6MC41NzI1NDkwMiIgLz4KICA8cGF0aAogICAgIGlkPSJwYXRoODUw
-IgogICAgIGQ9Ik0gMjI4Ljg1NDA0LDEyMy40MjQyOSBDIDIyMS41ODcxMSwxNDMuMDY5MzYgMTk5
-Ljc0NTQ5LDE1My4xMTUzOCAxODAuMTAwNDMsMTQ1Ljg0ODQ1IEMgMTYwLjQ1NTM2LDEzOC41ODE1
-MiAxNTAuNDA5MzQsMTE2LjczOTkgMTU3LjY3NjI3LDk3LjA5NDgzNSBDIDE2NC45NDMyMSw3Ny40
-NDk3NjIgMTg2Ljc4NDgyLDY3LjQwMzc1IDIwNi40Mjk4OSw3NC42NzA2ODEgQyAyMjYuMDc0OTUs
-ODEuOTM3NjA5IDIzNi4xMjA5OCwxMDMuNzc5MjIgMjI4Ljg1NDA0LDEyMy40MjQyOSB6ICIKICAg
-ICBzdHlsZT0iZmlsbDpub25lO2ZpbGwtcnVsZTpldmVub2RkO3N0cm9rZTojOTI5MjkyO3N0cm9r
-ZS13aWR0aDoxLjU7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ry
-b2tlLWRhc2hhcnJheTozLCAxLjU7c3Ryb2tlLWRhc2hvZmZzZXQ6MDtzdHJva2Utb3BhY2l0eTow
-LjU3MjU0OTAyIiAvPgogIDxwYXRoCiAgICAgc29kaXBvZGk6bm9kZXR5cGVzPSJjYyIKICAgICBp
-ZD0icGF0aDg1MSIKICAgICBkPSJNIDIxOC4xNDczOCw0Mi45OTQxNzggTCAxNjguMzgyOTQsMTc3
-LjUyNDk1IgogICAgIHN0eWxlPSJmaWxsOm5vbmU7ZmlsbC1vcGFjaXR5OjAuNzU7ZmlsbC1ydWxl
-OmV2ZW5vZGQ7c3Ryb2tlOiM5MjkyOTI7c3Ryb2tlLXdpZHRoOjEuNTtzdHJva2UtbGluZWpvaW46
-cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5OjMsIDEuNTtzdHJva2Ut
-ZGFzaG9mZnNldDowO3N0cm9rZS1vcGFjaXR5OjAuNTcyNTQ5MDIiIC8+CiAgPHBhdGgKICAgICBz
-dHlsZT0iZmlsbDojOWNhM2MyO2ZpbGwtcnVsZTpldmVub2RkO3N0cm9rZTojMDAwMDAwO3N0cm9r
-ZS13aWR0aDowLjg2MjUwMDAxO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpy
-b3VuZDtzdHJva2UtZGFzaGFycmF5Om5vbmUiCiAgICAgZD0iTSAxODEuNjIxMzksNzQuMzczMTky
-IEMgMTk0Ljc1MzM5LDc4LjkxNDQ4NyAyMDAuMjExNzUsOTYuMDYxOTYzIDE5NC45NzI0NCwxMTAu
-NzAxODEgQyAxODkuNjIxOTksMTI1LjM5MjgxIDE3NC43NDc5MSwxMzUuMzM3MTEgMTYxLjEyODk5
-LDEyOS43MDA0MiBDIDE3Ny45NDY1NSwxMjYuMzUzMTMgMTg0LjQ0NjQ5LDEwOS45MjA5MSAxODUu
-NDExNDYsMTA3LjIxOTE1IEMgMTg2LjQwNjM3LDEwNC40MzYxOCAxOTEuOTg4MzIsODcuMzkxOTQ4
-IDE4MS42MjEzOSw3NC4zNzMxOTIgeiAiCiAgICAgaWQ9InBhdGg4NzciCiAgICAgc29kaXBvZGk6
-bm9kZXR5cGVzPSJjemN6YyIgLz4KICA8cGF0aAogICAgIGlkPSJwYXRoOTQ0IgogICAgIGQ9Ik0g
-MjQ3LjE0NzQyLDEzMC4xOTEyMSBDIDIzNi4xNDUxNCwxNTkuOTM0MjMgMjAzLjA3NjUsMTc1LjE0
-NDEgMTczLjMzMzUsMTY0LjE0MTgzIEMgMTQzLjU5MDQ5LDE1My4xMzk1NiAxMjguMzgwNjEsMTIw
-LjA3MDkyIDEzOS4zODI4OSw5MC4zMjc5MDUgQyAxNTAuMzg1MTYsNjAuNTg0ODk4IDE4My40NTM4
-LDQ1LjM3NTAzMyAyMTMuMTk2OCw1Ni4zNzczMDYgQyAyNDIuOTM5OCw2Ny4zNzk1NzYgMjU4LjE0
-OTY5LDEwMC40NDgyMSAyNDcuMTQ3NDIsMTMwLjE5MTIxIHogIgogICAgIHN0eWxlPSJmaWxsOm5v
-bmU7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOiM5MjkyOTI7c3Ryb2tlLXdpZHRoOjEuNTtzdHJv
-a2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5OjMs
-IDEuNTtzdHJva2UtZGFzaG9mZnNldDowO3N0cm9rZS1vcGFjaXR5OjAuNTcyNTQ5MDIiIC8+CiAg
-PHBhdGgKICAgICBzdHlsZT0iZmlsbDojOWNhM2MyO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpl
-dmVub2RkO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjg2MjUwMDAxO3N0cm9rZS1saW5l
-Y2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ry
-b2tlLW9wYWNpdHk6MSIKICAgICBkPSJNIDEzMy41MzUxLDg3Ljc1MjUxIEMgMTQyLjgyMjk5LDYy
-Ljk5ODY0MyAxNzMuMzYyNDksMzQuNzgyMzIxIDIxNS40OTMsNTAuMzQxNjc1IEMgMjI1LjYxNjgy
-LDU0LjE0NTg2MyAyMzguMjA5Miw2Ni43NTM4MTggMjM3Ljg2OTgxLDczLjIwNzEwNiBDIDIwNC40
-MzE4MSw0My4zNTE0NzUgMTYxLjk5NTA0LDY0LjQ0MTUzNiAxNTAuNzIxNzQsOTQuNjUyNzI3IEMg
-MTM5LjU5ODgzLDEyNS4xOTA4OCAxNTkuMDU2MjYsMTY4Ljk3OTYxIDIwMy4xODI1NiwxNjcuMjgy
-NzcgQyAxOTguNDY1MTcsMTcxLjg1NzM4IDE4Mi41NzU1NiwxNzQuMzg0MDEgMTcxLjAyMDgyLDE3
-MC4xNzA3OSBDIDEyOS4wNjQ2NiwxNTQuODczNTEgMTI0LjE1ODkzLDExMi43NDUwNSAxMzMuNTM1
-MSw4Ny43NTI1MSB6ICIKICAgICBpZD0icGF0aDg2OSIKICAgICBzb2RpcG9kaTpub2RldHlwZXM9
-ImNzY3pjc3oiIC8+CiAgPHBhdGgKICAgICBzdHlsZT0iZmlsbDojOWNhM2MyO2ZpbGwtcnVsZTpl
-dmVub2RkO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjg2MjUwMDAxO3N0cm9rZS1saW5l
-Y2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtZGFzaGFycmF5Om5vbmUiCiAg
-ICAgZD0iTSAxNTAuMTQ2NCw5NC4zMDk2MiBDIDEzNy45NDU5OCwxMjcuMjkxNjYgMTAxLjI3NjE4
-LDE0NC4xNTc4NyA2OC4yOTQxNTgsMTMxLjk1NzQ2IEMgMzUuMzEyMTMyLDExOS43NTcwMyAxOC40
-NDU5MDcsODMuMDg3MjM5IDMwLjY0NjMzNCw1MC4xMDUyMDEgQyA0Mi44NDY3NSwxNy4xMjMxOTEg
-NzkuNTE2NTQ5LDAuMjU2OTY2MjYgMTEyLjQ5ODU4LDEyLjQ1NzM4OCBDIDE0NS40ODA1OSwyNC42
-NTc4MDcgMTYyLjM0NjgyLDYxLjMyNzYwOSAxNTAuMTQ2NCw5NC4zMDk2MiB6IE0gMTI2LjY4NTA3
-LDg1LjYzMTAyNiBDIDExNS44MzY2MSwxMTQuOTU4MjMgOTAuNzc0NzIsMTMyLjc0NjI1IDcwLjc0
-MzM2OSwxMjUuMzM2NDIgQyA1MC43MTIwMDEsMTE3LjkyNjYgNDMuMjU5MjE2LDg4LjExMTAzNCA1
-NC4xMDc2NzcsNTguNzgzODMzIEMgNjQuOTU2MTQsMjkuNDU2NjI1IDkwLjAxODAyMiwxMS42Njg2
-MTMgMTEwLjA0OTM5LDE5LjA3ODQ0MSBDIDEzMC4wODA3NCwyNi40ODgyNjMgMTM3LjUzMzUzLDU2
-LjMwMzgxOCAxMjYuNjg1MDcsODUuNjMxMDI2IHogIgogICAgIGlkPSJwYXRoODYxIiAvPgogIDxw
-YXRoCiAgICAgc3R5bGU9ImZpbGw6I2QxMTIwMDtmaWxsLW9wYWNpdHk6MTtmaWxsLXJ1bGU6ZXZl
-bm9kZDtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MXB4O3N0cm9rZS1saW5lY2FwOmJ1dHQ7
-c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgZD0iTSAyMDUuNjIx
-MzUsMTczLjkxNzE3IEwgMjQ3Ljk2NzE0LDE5NS4wOTAwNyBMIDI0Mi4yNjY3NCwxNzcuOTg4ODgg
-TCAyNzIuMzk3NCwxODguNTc1MzMgTCAyNjUuODgyNjYsMTc2LjM2MDIgTCAyNzYuNDY5MTEsMTc2
-LjM2MDIgTCAyNjcuNTExMzUsMTYwLjA3MzM2IEwgMjc2LjQ2OTExLDE2MC44ODc3IEwgMjcwLjc2
-ODcxLDE0Ny4wNDM4OSBMIDI4MS4zNTUxNiwxNTAuMzAxMjYgTCAyNzMuMjExNzQsMTMxLjU3MTM5
-IEwgMjgxLjM1NTE2LDEzMS41NzEzOSBMIDI3Mi4zOTc0LDExNS4yODQ1NSBMIDI4Mi4xNjk1LDEx
-NS4yODQ1NSBMIDI1Ny43MzkyNCwxMDEuNDQwNzQgTCAyNzUuNjU0NzcsOTYuNTU0Njg1IEwgMjM4
-LjE5NTAzLDc2LjE5NjEzNSBMIDIwNS42MjEzNSwxNzMuOTE3MTcgeiAiCiAgICAgaWQ9InBhdGgx
-MzYzIiAvPgogIDxwYXRoCiAgICAgc3R5bGU9ImZpbGw6I2NkZDEwMDtmaWxsLW9wYWNpdHk6MTtm
-aWxsLXJ1bGU6ZXZlbm9kZDtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MXB4O3N0cm9rZS1s
-aW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAg
-ZD0iTSAyNDIuMjY2NzQsODguNDExMjY1IEwgMjE0LjU3OTEyLDE2OC4yMTY3OCBMIDIzNC45Mzc2
-NywxNzguODAzMjMgTCAyMzIuNDk0NjQsMTY2LjU4ODEgTCAyNTUuMjk2MjIsMTc1LjU0NTg2IEwg
-MjUyLjg1MzE5LDE2NC4xNDUwNyBMIDI2NC4yNTM5OCwxNjcuNDAyNDQgTCAyNTYuMTEwNTYsMTUw
-LjMwMTI2IEwgMjY1Ljg4MjY2LDE1Mi43NDQyOCBMIDI2MC4xODIyNywxMzcuMjcxNzggTCAyNzAu
-NzY4NzEsMTQxLjM0MzQ5IEwgMjYyLjYyNTI5LDEyNS4wNTY2NSBMIDI3Mi4zOTc0LDEyNS4wNTY2
-NSBMIDI2Mi42MjUyOSwxMTMuNjU1ODcgTCAyNjcuNTExMzUsMTEyLjg0MTUyIEwgMjQ3LjE1Mjgs
-OTkuODEyMDUzIEwgMjYxLjgxMDk1LDk0LjkyNjAwMSBMIDI0Mi4yNjY3NCw4OC40MTEyNjUgeiAi
-CiAgICAgaWQ9InBhdGgxMzY1IiAvPgogIDx0ZXh0CiAgICAgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIK
-ICAgICBzdHlsZT0iZm9udC1zaXplOjI0LjI0OTM4Nzc0cHg7Zm9udC1zdHlsZTpub3JtYWw7Zm9u
-dC13ZWlnaHQ6bm9ybWFsO2ZpbGw6I2ViMDAwMDtmaWxsLW9wYWNpdHk6MTtzdHJva2U6I2ViMDAw
-MDtzdHJva2Utd2lkdGg6MXB4O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1p
-dGVyO3N0cm9rZS1vcGFjaXR5OjE7Zm9udC1mYW1pbHk6Qml0c3RyZWFtIFZlcmEgU2FucyIKICAg
-ICB4PSIxNzcuNzIyMzIiCiAgICAgeT0iMjAuMzkwNjQiCiAgICAgaWQ9InRleHQyMjQwIgogICAg
-IHRyYW5zZm9ybT0ic2NhbGUoMC44NDA5NTQsMS4xODkxMjUpIj48dHNwYW4KICAgICAgIHNvZGlw
-b2RpOnJvbGU9ImxpbmUiCiAgICAgICBpZD0idHNwYW4yMjQyIgogICAgICAgeD0iMTc3LjcyMjMy
-IgogICAgICAgeT0iMjAuMzkwNjQiPlRha2Ugb2ZmIHdpdGg8L3RzcGFuPjwvdGV4dD4KPC9zdmc+
-Cg==
 
---=_xora.vm.bytemark.co.uk-24885-1202466989-0001-2--
