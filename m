@@ -1,21 +1,28 @@
-Received: from [213.46.255.22] (helo=viefep23-int.chello.at)
+Received: from [64.233.166.183] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mailinglist@miromico.ch>) id 1JN6XK-0004Q5-Is
+	(envelope-from <xjqian@gmail.com>) id 1JNMbG-0006OF-8j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Feb 2008 14:11:30 +0100
-Received: from [192.168.1.192] (really [77.57.15.173])
-	by viefep23-int.chello.at
-	(InterMail vM.7.08.02.00 201-2186-121-20061213) with ESMTP
-	id <20080207131140.BEDH19244.viefep23-int.chello.at@[192.168.1.192]>
+	Fri, 08 Feb 2008 07:20:38 +0100
+Received: by py-out-1112.google.com with SMTP id y77so3476376pyg.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Feb 2008 14:11:40 +0100
-Message-ID: <47AB02C4.4060202@miromico.ch>
-Date: Thu, 07 Feb 2008 14:08:20 +0100
-From: Alex <mailinglist@miromico.ch>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	Thu, 07 Feb 2008 22:20:50 -0800 (PST)
+Received: by 10.35.65.17 with SMTP id s17mr13580371pyk.19.1202451650491;
+	Thu, 07 Feb 2008 22:20:50 -0800 (PST)
+Received: from ?192.168.1.207? ( [24.107.189.117])
+	by mx.google.com with ESMTPS id y45sm16060801pyg.9.2008.02.07.22.20.49
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 07 Feb 2008 22:20:49 -0800 (PST)
+Message-ID: <47ABF4BE.4060603@gmail.com>
+Date: Fri, 08 Feb 2008 00:20:46 -0600
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: Init fails with segfault on AVR32
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+References: <49bdfd00802070537t38c658f8h1abb3323e6470c18@mail.gmail.com>
+In-Reply-To: <49bdfd00802070537t38c658f8h1abb3323e6470c18@mail.gmail.com>
+Cc: Using OE <openembedded-users@lists.openembedded.org>
+Subject: Re: Problems building konqueror embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,44 +36,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2008 13:11:31 -0000
+X-List-Received-Date: Fri, 08 Feb 2008 06:20:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi
+On 02/07/2008 07:37 AM, Piero Pezzin wrote:
+> Hello everyone.
+> 
+> I'm trying to build konqueror embedded for ARM platform using openembedded.
+> I've correctly configured OE (I succesfully built nano for ARM), but 
+> when I run
+> 
+> bitbake konqueror-embedded
+> 
+> I get the following error:
+> 
+> NOTE: package uicmoc3-native-3.3.5: started
+> NOTE: package uicmoc3-native-3.3.5-r3: task do_configure: started
+> ERROR: function do_configure failed
+> ERROR: log data follows 
+> (/home/piero/work/openembedded-nobk/build/tmp/work/x86_64-linux/uicmoc3-native-3.3.5-r3/temp/log.do_configure.20299)
+> | cp: cannot stat 
+> `/home/piero/work/openembedded-nobk/build/tmp/staging/x86_64-linux/share/qmake/linux-oe-g++/*': 
+> No such file or directory
+> NOTE: Task failed: 
+> /home/piero/work/openembedded-nobk/build/tmp/work/x86_64-linux/uicmoc3-native-3.3.5-r3/temp/log.do_configure.20299
+> NOTE: package uicmoc3-native-3.3.5-r3: task do_configure: failed
+> ERROR: TaskFailed event exception, aborting
+> NOTE: package uicmoc3-native-3.3.5: failed
+> ERROR: Build of 
+> /home/piero/work/openembedded-nobk/org.openembedded.dev/packages/uicmoc/uicmoc3-native_3.3.5.bb 
+> do_configure failed
+> ERROR: Task 255 
+> (/home/piero/work/openembedded-nobk/org.openembedded.dev/packages/uicmoc/uicmoc3-native_3.3.5.bb, 
+> do_configure) failed
+> NOTE: Tasks Summary: Attempted 205 tasks of which 0 didn't need to be 
+> rerun and 1 failed.
 
-I finally got minimal-image compiled in OE for AVR32 and the kernel can 
-boot just to the point where it tries to load init.
+Forwarding to dev list. You probably would like to file a bug report, 
+describe your build environment and attach the log file.
 
-This will fail with a segfault. Last messages on boot log:
+btw, uicmoc3-native-3.3.5-r3 builds fine for me for Angstrom-2008.1@tosa
 
-VFS: Mounted root (jffs2 
-filesystem).                                          
-Freeing init memory: 68K (90000000 - 
-90011000)                                 
-init[1]: segfault at 00000008 pc 2aaabbe8 sp 7fabbf40 ecr 
-24                   
-init has generated signal 11 but has no handler for 
-it                         
-Kernel panic - not syncing: Attempted to kill init!   
-
-I tried NFS boot and boot from flash which both produced the same 
-result. I am using U-Boot 1.3.0.atmel.2 (from Atmel buildroot).
-
-Anyone an idea what could be wrong?
-
-To find the problem I did the following:
-
-I have a working rootfs (from AVR buildroot). Booting with OE-Kernel and 
-Buildroot rootfs works. I can mount OE-rootfs via NFS and then I can 
-execute programs such as sbin/init => this seems to be valid AVR32 
-binaries.
-
-I copied init.sysvinit into my buildroot-rootfs. Now the system doesn't 
-segfault anymore.
-
-Thanks for any hint
-
-Alex
+Regards
+Gordon
 
 
