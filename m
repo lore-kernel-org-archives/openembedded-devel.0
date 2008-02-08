@@ -1,20 +1,22 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <dp@xora.org.uk>) id 1JNZmG-0000ts-Hu
+	(envelope-from <philipp.zabel@gmail.com>) id 1JNa1h-0001Ov-Ty
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2008 21:24:52 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Fri, 08 Feb 2008 20:25:05 +0000
-	id 000385BA.47ACBAA1.00006DE1
-Date: Fri, 8 Feb 2008 20:25:07 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Fri, 08 Feb 2008 21:40:49 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so4249746fks.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Feb 2008 12:41:03 -0800 (PST)
+Received: by 10.82.108.9 with SMTP id g9mr23824119buc.34.1202503262865;
+	Fri, 08 Feb 2008 12:41:02 -0800 (PST)
+Received: by 10.82.118.18 with HTTP; Fri, 8 Feb 2008 12:41:02 -0800 (PST)
+Message-ID: <74d0deb30802081241gb07cfcic8c2fe56c93bf16b@mail.gmail.com>
+Date: Fri, 8 Feb 2008 21:41:02 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080208202507.2a4d6f6e@cimmeria>
 In-Reply-To: <47ACB4BE.9080705@nospam.arcornews.de>
+MIME-Version: 1.0
 References: <47ACB4BE.9080705@nospam.arcornews.de>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
+Cc: openembedded-devel@openembedded.org
 Subject: Re: [RFC] thesing RW access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -29,24 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2008 20:24:52 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 08 Feb 2008 20:40:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Fri, 08 Feb 2008 20:59:58 +0100
-Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
-
+On 2/8/08, Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
 > Hi,
-> 
-> most of you should know that Thomas 'thesing' Kunze has recently
-> become the kernel hacker in OE when it comes to the Zaurus collie.  I
-> have oftentimes committed his work, but I think the time has come for
-> him to get full RW access.
-> 
+>
+> most of you should know that Thomas 'thesing' Kunze has recently become
+> the kernel hacker in OE when it comes to the Zaurus collie.  I have
+> oftentimes committed his work, but I think the time has come for him to
+> get full RW access.
+>
 > objections?  votes in favor?
-> 
-Aye +1
 
-G
+No and yes, respectively.
+
+regards
+Philipp
 
 
