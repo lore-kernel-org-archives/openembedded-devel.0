@@ -1,18 +1,22 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <dp@xora.org.uk>) id 1JNPbH-00034O-5Y
-	for openembedded-devel@openembedded.org; Fri, 08 Feb 2008 10:32:54 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Fri, 08 Feb 2008 09:33:02 +0000
-	id 000385BD.47AC21CF.00005C55
-Date: Fri, 8 Feb 2008 09:32:58 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@openembedded.org
-Message-ID: <20080208093258.291966f4@cimmeria>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: FOSDEM
+	(envelope-from <mickey@vanille-media.de>) id 1JNQ2g-0003rx-Hp
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Feb 2008 11:01:12 +0100
+Received: from andromeda (e180148159.adsl.alicedsl.de [85.180.148.159])
+	by drlauer-research.com (Postfix) with ESMTP id 7CDCB584BEB
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Feb 2008 11:05:54 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 8 Feb 2008 11:01:33 +0100
+User-Agent: KMail/1.9.7
+References: <20080208093258.291966f4@cimmeria>
+In-Reply-To: <20080208093258.291966f4@cimmeria>
+MIME-Version: 1.0
+Message-Id: <200802081101.33733.mickey@vanille-media.de>
+Subject: Re: FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -26,19 +30,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2008 09:33:06 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 08 Feb 2008 10:01:14 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hey guys, whats happening for FOSDEM? What goodies do we wish to show?
+On Friday 08 February 2008 10:32:58 Graeme Gregory wrote:
+> Hey guys, whats happening for FOSDEM? What goodies do we wish to show?
+>
+> What goodies do we need to bring?
 
-What goodies do we need to bring?
+This time we really _need_ an attractive poster and flyers to giveaway.
+Who has time to come up with a text for an A4 flyer?
+Who is artist enough to come up with an A3 poster?
+Who can print? Who will bring it?
 
-I ask now as Im on holiday without internet connection next week and
-that only leaves 4 days if I need to prepare anything for the show.
+> Lets really sell OE this year, especially as emdebian is there.
 
-Lets really sell OE this year, especially as emdebian is there.
-
-Graeme
+Right!
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
