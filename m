@@ -1,25 +1,21 @@
-Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philipp.zabel@gmail.com>) id 1JNaNk-0001sL-3b
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2008 22:03:36 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so4257289fks.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2008 13:03:49 -0800 (PST)
-Received: by 10.82.182.1 with SMTP id e1mr23836741buf.27.1202504629115;
-	Fri, 08 Feb 2008 13:03:49 -0800 (PST)
-Received: by 10.82.118.18 with HTTP; Fri, 8 Feb 2008 13:03:49 -0800 (PST)
-Message-ID: <74d0deb30802081303m60fafee3t6b6ca4aacce894ca@mail.gmail.com>
-Date: Fri, 8 Feb 2008 22:03:49 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1JNamK-00082R-KI
+	for openembedded-devel@openembedded.org; Fri, 08 Feb 2008 22:29:00 +0100
+Received: (qmail 30520 invoked by uid 813007); 8 Feb 2008 21:29:13 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 8 Feb 2008 21:29:13 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <foic69$d7f$1@ger.gmane.org>
+Date: Fri, 8 Feb 2008 22:29:08 +0100
+User-Agent: KMail/1.9.7
+References: <47ACB4BE.9080705@nospam.arcornews.de>
+In-Reply-To: <47ACB4BE.9080705@nospam.arcornews.de>
 MIME-Version: 1.0
-References: <E1JNHzO-0001Y7-HO@linuxtogo.org>
-	<74d0deb30802080425s7c69bf95y4725bb48bc9088f6@mail.gmail.com>
-	<foic69$d7f$1@ger.gmane.org>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev mkbold-mkitalic-native: initial commit. partly closes 1362 (incorporate stuff from openzaurus-ja project)
+Message-Id: <200802082229.09950.openembedded@haerwu.biz>
+Subject: Re: [RFC] thesing RW access - also RW for Stanislav Brabec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,35 +29,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2008 21:03:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Feb 2008 21:29:00 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On 2/8/08, Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
-> pHilipp Zabel schrieb:
-> > Hi,
-> >
-> > I think this should not live in xorg-app but in its own directory.
->
-> Well, something as minimal as this native tool does not warrant its own
-> directory, I think.  I think the right thing to do is to group together
-> with other bdf fonts and their tools (I will try to integrate the bdf
-> fonts into the font-update-common framework when I have the time).  That
-> is also the reason it has so far landed in xorg-app: other bdf-related
-> stuff is there.
+Dnia Friday, 8 of February 2008, Rolf Leggewie napisa=B3:
 
-Yes, it might make sense to group those tools together.
-I only objected because in the xorg-* case, the recipes are already
-grouped by another criterion, their source.
-As this so far appears to make maintenance a lot easier, I'd like not
-to mix that up.
+> most of you should know that Thomas 'thesing' Kunze has recently become
+> the kernel hacker in OE when it comes to the Zaurus collie.  I have
+> oftentimes committed his work, but I think the time has come for him to
+> get full RW access.
 
-> Would you object to move them out into something like packages/bdf-fonts/?
+> objections? =20
 
-No, not at all.
+No
 
-regards
-Philipp
+> votes in favor?=20
+
++1 from me
+
+I would like to also get opinion on RW for Stanislav Brabec - he works on=20
+sl-cxx00 support (kernel and kernel related userspace).
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+   Programming consists of 50% planning, 50% coding and 30% mathematics
+
+
 
 
