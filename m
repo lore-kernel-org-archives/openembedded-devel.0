@@ -1,27 +1,21 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1JNZkm-0000sl-D6
+Received: from [80.68.91.202] (helo=xora.org.uk)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <dp@xora.org.uk>) id 1JNZmG-0000ts-Hu
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2008 21:23:20 +0100
-Received: (qmail invoked by alias); 08 Feb 2008 20:23:31 -0000
-Received: from e179066205.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.179.66.205]
-	by mail.gmx.net (mp016) with SMTP; 08 Feb 2008 21:23:31 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+km9gBPg2kn/igRele6nmLsE4ky7fWZx185x93tq
-	7QKdaD1stG/7B0
-Message-ID: <47ACBA42.4030800@gmx.net>
-Date: Fri, 08 Feb 2008 21:23:30 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
+	Fri, 08 Feb 2008 21:24:52 +0100
+Received: from cimmeria ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Fri, 08 Feb 2008 20:25:05 +0000
+	id 000385BA.47ACBAA1.00006DE1
+Date: Fri, 8 Feb 2008 20:25:07 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-References: <20080208093258.291966f4@cimmeria>	<200802081101.33733.mickey@vanille-media.de>
-	<20080208103628.22c8fcc9@cimmeria>
-In-Reply-To: <20080208103628.22c8fcc9@cimmeria>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: Re: FOSDEM
+Message-ID: <20080208202507.2a4d6f6e@cimmeria>
+In-Reply-To: <47ACB4BE.9080705@nospam.arcornews.de>
+References: <47ACB4BE.9080705@nospam.arcornews.de>
+X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: [RFC] thesing RW access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,43 +29,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2008 20:23:20 -0000
-X-Groupsio-MsgNum: 4080
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig3AE7D70C53596B3195CE690D"
+X-List-Received-Date: Fri, 08 Feb 2008 20:24:52 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
---------------enig3AE7D70C53596B3195CE690D
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On Fri, 08 Feb 2008 20:59:58 +0100
+Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
 
-Hi.
+> Hi,
+> 
+> most of you should know that Thomas 'thesing' Kunze has recently
+> become the kernel hacker in OE when it comes to the Zaurus collie.  I
+> have oftentimes committed his work, but I think the time has come for
+> him to get full RW access.
+> 
+> objections?  votes in favor?
+> 
+Aye +1
 
-Graeme Gregory schrieb:
->> Who is artist enough to come up with an A3 poster?
->> Who can print? Who will bring it?
-
-> Im no artist, but this was the play around I had with the OE logo
-> a while ago.
-I like it and negotiate possibilities to get it printed and take it
-along to FOSDEM.
-
-Regards
-Robert
+G
 
 
---------------enig3AE7D70C53596B3195CE690D
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHrLpCG9cfwmwwEtoRCF8HAJ96UrK6ntmHSmmcy++vUrhW2wBrGQCdHUkm
-Pv451993InYUufrbpXaxco0=
-=GYc5
------END PGP SIGNATURE-----
-
---------------enig3AE7D70C53596B3195CE690D--
