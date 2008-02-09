@@ -1,26 +1,27 @@
-Received: from [64.233.166.180] (helo=py-out-1112.google.com)
+Received: from [64.233.166.182] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JNo9u-00037T-41
-	for openembedded-devel@openembedded.org; Sat, 09 Feb 2008 12:46:14 +0100
-Received: by py-out-1112.google.com with SMTP id p76so6679480pyb.2
-	for <openembedded-devel@openembedded.org>;
-	Sat, 09 Feb 2008 03:46:27 -0800 (PST)
-Received: by 10.65.216.19 with SMTP id t19mr27075021qbq.95.1202557586692;
-	Sat, 09 Feb 2008 03:46:26 -0800 (PST)
-Received: from widy.localdomain ( [88.231.85.196])
-	by mx.google.com with ESMTPS id 35sm4450116nfu.12.2008.02.09.03.46.23
-	(version=SSLv3 cipher=OTHER); Sat, 09 Feb 2008 03:46:24 -0800 (PST)
-Date: Sat, 9 Feb 2008 13:48:50 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
+	(envelope-from <xjqian@gmail.com>) id 1JNpJh-0001WX-I1
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Feb 2008 14:00:25 +0100
+Received: by py-out-1112.google.com with SMTP id y77so3890330pyg.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 09 Feb 2008 05:00:38 -0800 (PST)
+Received: by 10.35.70.17 with SMTP id x17mr15409722pyk.43.1202562038703;
+	Sat, 09 Feb 2008 05:00:38 -0800 (PST)
+Received: from ?192.168.1.207? ( [24.107.189.117])
+	by mx.google.com with ESMTPS id n29sm43564793pyh.41.2008.02.09.05.00.36
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 09 Feb 2008 05:00:37 -0800 (PST)
+Message-ID: <47ADA3F2.1000500@gmail.com>
+Date: Sat, 09 Feb 2008 07:00:34 -0600
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080209134850.13fe8d93@widy.localdomain>
-In-Reply-To: <1201565225.4687.98.camel@localhost.localdomain>
-References: <20080129014117.60ed9f77@widy.localdomain>
-	<1201565225.4687.98.camel@localhost.localdomain>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [RFC] Setting default IMAGE_FSTYPES to tar.gz in bitbake.conf
+References: <1201544344.5882.45.camel@hammer.suse.cz>	<20080130124544.1f562944@widy.localdomain>	<1201695196.27523.52.camel@hammer.suse.cz>
+	<47A2D217.7070000@gmail.com> <1202075839.17746.11.camel@utx.utx.cz>
+In-Reply-To: <1202075839.17746.11.camel@utx.utx.cz>
+Subject: Re: [patch commit request] kdrive xserver:	support	for	key	codes 128-255
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,90 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Feb 2008 11:46:14 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Sat, 09 Feb 2008 13:00:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
-
-On Tue, 29 Jan 2008 00:07:05 +0000
-Richard Purdie <rpurdie@rpsys.net> wrote:
-
-> On Tue, 2008-01-29 at 01:41 +0200, Paul Sokolovsky wrote:
-> > Currently, we have in bitbake.conf:
-> > 
-> > IMAGE_FSTYPES ?= "jffs2"
-> > 
-> > jffs2 is a special filesystem format, suitable for limited number of
-> > hardware on the global scale. So I would like to propose to replace
-> > that default with some neutral and well-know format, say tar.gz.
+On 02/03/2008 03:57 PM, Stanislav Brabec wrote:
+> Junqian Gordon Xu wrote:
+>> On 01/30/2008 06:13 AM, Stanislav Brabec wrote:
+>>>> Paul Sokolovsky wrote:
+>>>> Can you please elaborate what the application of this patch would mean
+>>>> for OE (besides fixing support for one specific obscure peripheral)? 
+>> I guess I probably would be yelled at for not raising this before 
+>> committing your patch.
+>>
+>> Is this patch specific to Zaurus clamshells, akita/spitz/c7x0? In other 
+>> words, are there any other devices benifiting from the extended keycode. 
+>>   I vaguely remember Dmitry asked about extended keycode for tosa, but 
+>> I'm not sure he's talking about the same thing.
 > 
-> This has been discussed before and I'd like to see that changed. The
-> complication is that "bitbake image" is meant to give a sane default
-> image for a given machine without any tweaking by the user and a load
-> of machines depend on the jffs2 default. 
+> No. It adds support for key codes 128-255 in general.
 
-Unfortunately, this is not achievable and not sustainable goal. It's
-not achievable because there's no single criteria for "sane", it
-depends first of all on user's needs. So, trying to make adhoc choices
-instead of user would mean that for some group of users they will be
-unpredictable and thus insane. So, it would make more sense to use "not
-insane" criteria instead and use some neutral, well-known format, which
-is why this RFC is being made.
+I understand this patch is general. But could you educate me that except 
+for the Z clamshells, what's the use case for other devices? I guess my 
+question is more in line with Paul's challenge. Is this patch just a 
+why-not for other devices or something might be helpful?
 
-> 
-> I'm not an ipaq expert but I'd guess a number of them use jffs2, as
-> probably do some of the htcs, the at91 board and the motorola phones.
-> Someone needs to go through and check the machines. Since this is
-> pretty daunting to fix, I've just gone through and I think the
-> following files need that line adding as they appear to use jffs2 in
-> some form:
+Regards
+Gordon
 
-[]
-
-> 
-> I'm unsure of the following machines:
-
-And those above is why it's not sustainable - now it comes that to
-achieve that goal it takes to be a machine expert, etc. etc. Of course,
-noone is expert in all machines, some people are not experts in the
-machine they add/hack on, all people can not know something, make
-mistakes and wrong choices, etc. In the end and overall, presence of
-jffs2 in specific machine's config turns out to be rather random
-matter. We may want to rethink that to be based on more firm grounds.
-One possible way:
-
-1. IMAGE_FSTYPES is not a machine config variable.
-2. IMAGE_FSTYPES is a top-level parameter specified by user. User needs
-specific format, user requests it. There's a default though offering
-least surprise as integrated over user base - i.e. neutral, well-known
-format.
-3. Alternatively, a *distro* may constrain a way in which images are
-used, and thus force a particular image format. So, for a dumb headless
-router machine, one distro will try to follow vendor's way and generate
-images in an adhoc format. Yet another for the same machine will assume
-that bootloader was replaced with some generic one and will use generic
-flash image format like jffs2. And yet another will be intended for the
-people who soldered few wires at the appropriate place and use bit-bang
-to boot from SD.
-
-
-Well, as usual, thoughts aloud. I'm going to add 
-IMAGE_FSTYPES ?= "jffs2" to the machines from your 1st list to get
-matter going.
-
-
-[]
-> 
-> Regards,
-> 
-> Richard
-> 
-
-
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
