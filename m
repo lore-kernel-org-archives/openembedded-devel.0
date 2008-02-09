@@ -1,23 +1,25 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JNnXN-0005zR-U5
+	(envelope-from <pmiscml@gmail.com>) id 1JNnhW-0006KH-3V
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Feb 2008 12:06:25 +0100
-Received: from andromeda (e180177149.adsl.alicedsl.de [85.180.177.149])
-	by drlauer-research.com (Postfix) with ESMTP id 0A4CF584C1C
+	Sat, 09 Feb 2008 12:16:54 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so50748ugd.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Feb 2008 12:11:16 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Sat, 09 Feb 2008 03:17:07 -0800 (PST)
+Received: by 10.66.237.14 with SMTP id k14mr6539207ugh.72.1202555827590;
+	Sat, 09 Feb 2008 03:17:07 -0800 (PST)
+Received: from widy.localdomain ( [88.231.85.196])
+	by mx.google.com with ESMTPS id m1sm1418096uge.69.2008.02.09.03.17.04
+	(version=SSLv3 cipher=OTHER); Sat, 09 Feb 2008 03:17:06 -0800 (PST)
+Date: Sat, 9 Feb 2008 13:19:35 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 9 Feb 2008 12:06:47 +0100
-User-Agent: KMail/1.9.7
-References: <47ACB4BE.9080705@nospam.arcornews.de>
-	<200802082229.09950.openembedded@haerwu.biz>
-In-Reply-To: <200802082229.09950.openembedded@haerwu.biz>
-MIME-Version: 1.0
-Message-Id: <200802091206.47599.mickey@vanille-media.de>
-Subject: Re: [RFC] thesing RW access - also RW for Stanislav Brabec
+Message-ID: <20080209131935.795df89c@widy.localdomain>
+In-Reply-To: <E1JNg11-0007uM-FU@linuxtogo.org>
+References: <E1JNg11-0007uM-FU@linuxtogo.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: [oe-commits] org.oe.dev rxtx: New recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,34 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Feb 2008 11:06:26 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sat, 09 Feb 2008 11:16:54 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Friday 08 February 2008 22:29:08 Marcin Juszkiewicz wrote:
-> Dnia Friday, 8 of February 2008, Rolf Leggewie napisa=B3:
-> > most of you should know that Thomas 'thesing' Kunze has recently become
-> > the kernel hacker in OE when it comes to the Zaurus collie.  I have
-> > oftentimes committed his work, but I think the time has come for him to
-> > get full RW access.
-> >
-> > objections?
->
-> No
->
-> > votes in favor?
->
-> +1 from me
->
-> I would like to also get opinion on RW for Stanislav Brabec - he works on
-> sl-cxx00 support (kernel and kernel related userspace).
+Hello,
 
-+1 for both people. Make them send <nickname>@openembedded.org keys to koen=
-=20
-and me.
-=2D-=20
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+On Sat, 09 Feb 2008 04:04:31 +0100
+"thebohemian commit" <openembedded-commits@lists.openembedded.org>
+wrote:
+
+> rxtx: New recipe.
+> logic-analyzer: New recipe that uses rxtx.
+> 
+> Author: thebohemian@openembedded.org
+[]
+> ============================================================
+> --- packages/logic-analyzer/logic-analyzer_0.8.bb
+> 1ee8013dcfa98eec177fbdfbfbb2ecb8167f8dad +++
+> packages/logic-analyzer/logic-analyzer_0.8.bb
+> 1ee8013dcfa98eec177fbdfbfbb2ecb8167f8dad @@ -0,0 +1,38 @@
+> +DESCRIPTION = "A Java-based logical analyzer for home use." +LICENSE
+> = "GPL" 
+> +MAINTAINER = "Robert Schuster, tarent GmbH Bonn <robert.schuster@tarent.de>" 
+
+MAINTAINER field is deprecated in recipes. It's a distro setting
+meaning an entity who is responsible for binary packages shipped to
+users. To note maintainreship of recipe, add it to your entry in
+MAINTAINERS file at top-level OE dir.
+
+
+[]
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
