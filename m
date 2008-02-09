@@ -1,29 +1,35 @@
-Received: from [66.249.92.174] (helo=ug-out-1314.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JNpuD-0007qC-DW
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Feb 2008 14:38:09 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so60977ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Feb 2008 05:38:23 -0800 (PST)
-Received: by 10.67.24.11 with SMTP id b11mr6696453ugj.2.1202564303166;
-	Sat, 09 Feb 2008 05:38:23 -0800 (PST)
-Received: from widy.localdomain ( [88.231.85.196])
-	by mx.google.com with ESMTPS id 27sm1780877ugp.19.2008.02.09.05.38.21
-	(version=SSLv3 cipher=OTHER); Sat, 09 Feb 2008 05:38:22 -0800 (PST)
-Date: Sat, 9 Feb 2008 15:40:53 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080209154053.5904037f@widy.localdomain>
-In-Reply-To: <47ADA3F2.1000500@gmail.com>
-References: <1201544344.5882.45.camel@hammer.suse.cz>
-	<20080130124544.1f562944@widy.localdomain>
-	<1201695196.27523.52.camel@hammer.suse.cz>
-	<47A2D217.7070000@gmail.com> <1202075839.17746.11.camel@utx.utx.cz>
-	<47ADA3F2.1000500@gmail.com>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+	(envelope-from <rpurdie@rpsys.net>) id 1JNuew-00041U-Qj
+	for openembedded-devel@openembedded.org; Sat, 09 Feb 2008 19:42:43 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m19IgtH3028509;
+	Sat, 9 Feb 2008 18:42:55 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 28109-08; Sat,  9 Feb 2008 18:42:51 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m19IgnKS028501
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sat, 9 Feb 2008 18:42:51 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Paul Sokolovsky <pmiscml@gmail.com>
+In-Reply-To: <20080209115607.23cb1fbf@widy.localdomain>
+References: <20080129011635.42467fc9@widy.localdomain>
+	<1201562570.4687.79.camel@localhost.localdomain>
+	<20080129023105.1a0cf354@widy.localdomain>
+	<1201568452.4687.123.camel@localhost.localdomain>
+	<20080131144417.58877daf@widy.localdomain>
+	<20080209115607.23cb1fbf@widy.localdomain>
+Date: Sat, 09 Feb 2008 18:42:49 +0000
+Message-Id: <1202582569.7981.4.camel@dax.rpnet.com>
 Mime-Version: 1.0
-Subject: Re: [patch commit request] kdrive xserver:	support	for	key codes 128-255
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [RFC] A case of distro config overriding DISTRO var
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,49 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Feb 2008 13:38:09 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Sat, 09 Feb 2008 18:42:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Hi,
 
-On Sat, 09 Feb 2008 07:00:34 -0600
-Junqian Gordon Xu <xjqian@gmail.com> wrote:
+On Sat, 2008-02-09 at 11:56 +0200, Paul Sokolovsky wrote:
+> ============================================================
+> --- classes/image.bbclass	4d92381733b09bae07a07da35bd0024744924c3c
+> +++ classes/image.bbclass	6eeae6a01c36465bc36cc737d42ea6b8ab09b152
+> @@ -90,6 +90,7 @@ fakeroot do_rootfs () {
+>  	${IMAGE_PREPROCESS_COMMAND}
+>  		
+>  	export TOPDIR=${TOPDIR}
+> +	export DISTRO=${USERDISTRO}
+>  	export MACHINE=${MACHINE}
 
-> On 02/03/2008 03:57 PM, Stanislav Brabec wrote:
-> > Junqian Gordon Xu wrote:
-> >> On 01/30/2008 06:13 AM, Stanislav Brabec wrote:
-> >>>> Paul Sokolovsky wrote:
-> >>>> Can you please elaborate what the application of this patch
-> >>>> would mean for OE (besides fixing support for one specific
-> >>>> obscure peripheral)? 
-> >> I guess I probably would be yelled at for not raising this before 
-> >> committing your patch.
-> >>
-> >> Is this patch specific to Zaurus clamshells, akita/spitz/c7x0? In
-> >> other words, are there any other devices benifiting from the
-> >> extended keycode. I vaguely remember Dmitry asked about extended
-> >> keycode for tosa, but I'm not sure he's talking about the same
-> >> thing.
-> > 
-> > No. It adds support for key codes 128-255 in general.
-> 
-> I understand this patch is general. But could you educate me that
-> except for the Z clamshells, what's the use case for other devices? I
-> guess my question is more in line with Paul's challenge. Is this
-> patch just a why-not for other devices or something might be helpful?
+This could be rather confusing, can we not have:
 
-Something which might be helpful. What exactly do you want to know, or
-what implications you want to make from that?
+USERDISTRO=${USERDISTRO}
 
-> 
-> Regards
-> Gordon
+then its obvious which variable we mean?
 
+Otherwise its fine with me.
 
+Cheers,
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+Richard
+
 
 
