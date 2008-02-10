@@ -1,27 +1,25 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <theBohemian@gmx.net>) id 1JO01d-0005QU-8D
+Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <daniel@totalueberwachung.de>) id 1JODpy-0006uK-L2
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Feb 2008 01:26:29 +0100
-Received: (qmail invoked by alias); 10 Feb 2008 00:26:41 -0000
-Received: from e178097129.adsl.alicedsl.de (EHLO [192.168.4.101])
-	[85.178.97.129]
-	by mail.gmx.net (mp056) with SMTP; 10 Feb 2008 01:26:41 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/1Uc9GVID1YQMD23zUon2nRv19h2CK1PsAtx8nAy
-	zLfUpQEvm0UQVQ
-Message-ID: <47AE44BC.7000801@gmx.net>
-Date: Sun, 10 Feb 2008 01:26:36 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
+	Sun, 10 Feb 2008 16:11:23 +0100
+Received: from themisto.orbit.homelinux.net (themisto.dyn.totalueberwachung.de
+	[192.168.0.7])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by thebe.totalueberwachung.de (Postfix) with ESMTP id 35517D8087
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Feb 2008 16:19:57 +0100 (CET)
+Date: Sun, 10 Feb 2008 16:11:33 +0100
+From: Daniel Willmann <daniel@totalueberwachung.de>
 To: openembedded-devel@lists.openembedded.org
-References: <E1JNg11-0007uM-FU@linuxtogo.org>
-	<20080209131935.795df89c@widy.localdomain>
-In-Reply-To: <20080209131935.795df89c@widy.localdomain>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] org.oe.dev rxtx: New recipe.
+Message-ID: <20080210161133.677e89ef@themisto.orbit.homelinux.net>
+In-Reply-To: <200802081101.33733.mickey@vanille-media.de>
+References: <20080208093258.291966f4@cimmeria>
+	<200802081101.33733.mickey@vanille-media.de>
+X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.7; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,47 +33,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Feb 2008 00:26:29 -0000
-X-Groupsio-MsgNum: 4097
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig4B095C3020DCA075BB9B6117"
+X-List-Received-Date: Sun, 10 Feb 2008 15:11:25 -0000
+X-Groupsio-MsgNum: 4098
+Content-Type: multipart/signed; boundary="Sig_/9AvK8TE0lo/u4fFJTQgEOJ=";
+	protocol="application/pgp-signature"; micalg=PGP-SHA1
 
---------------enig4B095C3020DCA075BB9B6117
-Content-Type: text/plain; charset=ISO-8859-1
+--Sig_/9AvK8TE0lo/u4fFJTQgEOJ=
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-Paul Sokolovsky schrieb:
->> +MAINTAINER =3D "Robert Schuster, tarent GmbH Bonn <robert.schuster@ta=
-rent.de>"=20
+On Fri, 8 Feb 2008 11:01:33 +0100
+Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
+
+> On Friday 08 February 2008 10:32:58 Graeme Gregory wrote:
+> > Hey guys, whats happening for FOSDEM? What goodies do we wish to
+> > show?
+> >
+> > What goodies do we need to bring?
 >=20
-> MAINTAINER field is deprecated in recipes. It's a distro setting
-> meaning an entity who is responsible for binary packages shipped to
-> users. To note maintainreship of recipe, add it to your entry in
-> MAINTAINERS file at top-level OE dir.
-Fixed (and this and other recipes).
+> This time we really _need_ an attractive poster and flyers to
+> giveaway. Who has time to come up with a text for an A4 flyer?
+> Who is artist enough to come up with an A3 poster?
+> Who can print? Who will bring it?
 
-Thanks for the pointer.
+I can print up to A0 and get them laminated at our university.
 
-Regards
-Robert
+Regards,
+Daniel Willmann
 
-
-
---------------enig4B095C3020DCA075BB9B6117
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+--Sig_/9AvK8TE0lo/u4fFJTQgEOJ=
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Version: GnuPG v2.0.7 (GNU/Linux)
 
-iD8DBQFHrkTAG9cfwmwwEtoRCBWEAJ4upyjkB5EkqXdcmC5W7MUGs05OSQCeM2j2
-D22vKJIrxtlf9l8jPff0YZY=
-=4fln
+iD8DBQFHrxQnZ2fhlIqbZ1gRAn9qAJwKw1f8z0Ud5rL0oZShOQuwdwwLNgCfR6gd
+5uhvmNod0G05KG8/HMtW+D0=
+=SW/j
 -----END PGP SIGNATURE-----
 
---------------enig4B095C3020DCA075BB9B6117--
+--Sig_/9AvK8TE0lo/u4fFJTQgEOJ=--
