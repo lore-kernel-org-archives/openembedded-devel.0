@@ -1,32 +1,23 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <utx@penguin.cz>) id 1JOJnj-0000SP-2m
+	(envelope-from <mickey@vanille-media.de>) id 1JOKhK-000648-3x
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Feb 2008 22:33:27 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id E228C14171BF;
-	Sun, 10 Feb 2008 22:33:40 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id r1BnaulfynGn; Sun, 10 Feb 2008 22:33:40 +0100 (CET)
-Received: from zaurus.lan (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7])
-	by ns.penguin.cz (Postfix) with ESMTP id 6893D1417196;
-	Sun, 10 Feb 2008 22:33:40 +0100 (CET)
-Date: Sun, 10 Feb 2008 22:33:47 +0100
-From: Stanislav Brabec <utx@penguin.cz>
+	Sun, 10 Feb 2008 23:30:54 +0100
+Received: from andromeda (e180132137.adsl.alicedsl.de [85.180.132.137])
+	by drlauer-research.com (Postfix) with ESMTP id E5780584C28
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Feb 2008 23:35:51 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080210223347.7a151067@zaurus.lan>
-In-Reply-To: <47ADA3F2.1000500@gmail.com>
-References: <1201544344.5882.45.camel@hammer.suse.cz>
-	<20080130124544.1f562944@widy.localdomain>
-	<1201695196.27523.52.camel@hammer.suse.cz>
-	<47A2D217.7070000@gmail.com> <1202075839.17746.11.camel@utx.utx.cz>
-	<47ADA3F2.1000500@gmail.com>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.0; arm-angstrom-linux-gnueabi)
-Mime-Version: 1.0
-Subject: Re: [patch commit request] kdrive xserver:	support	for	key codes 128-255
+Date: Sun, 10 Feb 2008 23:31:20 +0100
+User-Agent: KMail/1.9.7
+References: <E1JO1gA-000658-1E@linuxtogo.org>
+	<20080210220226.27a2612f@widy.localdomain>
+In-Reply-To: <20080210220226.27a2612f@widy.localdomain>
+MIME-Version: 1.0
+Message-Id: <200802102331.20332.mickey@vanille-media.de>
+Subject: Re: [oe-commits] org.oe.dev SlugOS: make "turnup nfs" work correctly with the new network driver (loads
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,47 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Feb 2008 21:33:27 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Sun, 10 Feb 2008 22:30:55 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Sat, 09 Feb 2008 07:00:34 -0600 Junqian Gordon Xu wrote:
+On Sunday 10 February 2008 21:02:26 Paul Sokolovsky wrote:
+> > ============================================================
+> > --- packages/netbase/netbase/slugos/if-pre-up.d/test-nfsroot
+> > 225fbcdfa332608a2c8f1360fc922261f28ba694 +++
+> > packages/netbase/netbase/slugos/if-pre-up.d/test-nfsroot
+> > 225fbcdfa332608a2c8f1360fc922261f28ba694 @@ -0,0 +1,10 @@ +#!/bin/sh
+> > +#
+> > +if [ X"$IFACE" == "Xeth0" ] ; then
+> > +  nfsroot=`grep ' / nfs ' /proc/mounts`
+> > +  if [ -n "$nfsroot" ]; then
+> > +    echo "WARNING: Refusing to ifup eth0 when booted to a
+> > nfs-mounted rootfs."
+> > +    exit 1
+> > +  fi
+> > +fi
+> > +exit 0
+>
+> 	Is this something which can be readily applied as general
+> feature - NFS boot doesn't work out of the box for any ditsro since
+> that eth0 dhcp change.
 
-> On 02/03/2008 03:57 PM, Stanislav Brabec wrote:
++1 from me, I'm using nfsroot a lot -- it's invaluable for rapid distro 
+debugging.
 
-> > It adds support for key codes 128-255 in general.
-> 
-> I understand this patch is general. But could you educate me that
-> except for the Z clamshells, what's the use case for other devices? I
-> guess my question is more in line with Paul's challenge. Is this
-> patch just a why-not for other devices or something might be helpful?
-
-Many devices have special keys with (input.h) keycodes outside 1-127
-(e. g. Mail - KEY_MAIL).
-
-Now you have to map them to a random keys from range 1-127, otherwise
-it will not work. In particular it invalidates key interpretation in
-the kernel - kernel knows, that the key is Mail and not F11 but it has
-to send KEY_F11, because KEY_MAIL is lost.
-
-Even after this patch the situation will not be ideal - for example
-KEY_OK has keycode 352 and cannot pass through X11 protocol. That is
-why it is only a partial solution. Final solution could be: upgrade to
-X12 (rewrite X and give up 20 years of compatibility; in proposal
-collection stage) or at least write X Evdev Extension and Xlib keyboard
-code rewrite (simpler to implement, but not yet started to work on).
-
-The opinion of kernel people: We have a good and modern keyboard
-layer, which can provide exact key meaning. We don't want to be limited
-to 1-127 and mangle our keycodes. Let userspace fix their broken
-drivers.
-
-And hardware manufacturers don't make things easier. Many USB keyboards
-identify themselves as devices including keys defined in the HID
-standard (it allows them to recycle the same chip).
-
+:M:
 -- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
