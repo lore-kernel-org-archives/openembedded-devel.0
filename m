@@ -1,25 +1,23 @@
-Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
+Received: from [81.169.146.189] (helo=mo-p07-ob.rzone.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <daniel@totalueberwachung.de>) id 1JODpy-0006uK-L2
+	(envelope-from <hns@computer.org>) id 1JOFdX-0002iQ-4o
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Feb 2008 16:11:23 +0100
-Received: from themisto.orbit.homelinux.net (themisto.dyn.totalueberwachung.de
-	[192.168.0.7])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by thebe.totalueberwachung.de (Postfix) with ESMTP id 35517D8087
+	Sun, 10 Feb 2008 18:06:39 +0100
+X-RZG-CLASS-ID: mo07
+X-RZG-AUTH: iojXUX2iu8lIbkehSGf3jGQYOvXUDskiVntSGy8EdRNO67K0
+Received: from [192.168.2.175] (p57AE3C28.dip.t-dialin.net [87.174.60.40])
+	by post.webmailer.de (klopstock mo51) (RZmta 16.5)
+	with ESMTP id a0338bk1AFW3q8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Feb 2008 16:19:57 +0100 (CET)
-Date: Sun, 10 Feb 2008 16:11:33 +0100
-From: Daniel Willmann <daniel@totalueberwachung.de>
+	Sun, 10 Feb 2008 18:06:53 +0100 (MET)
+	(envelope-from: <hns@computer.org>)
+Mime-Version: 1.0 (Apple Message framework v753)
+Message-Id: <75A74BC0-4CCC-44E8-BABE-A41508970838@computer.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080210161133.677e89ef@themisto.orbit.homelinux.net>
-In-Reply-To: <200802081101.33733.mickey@vanille-media.de>
-References: <20080208093258.291966f4@cimmeria>
-	<200802081101.33733.mickey@vanille-media.de>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.7; i686-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: FOSDEM
+From: "Dr. H. Nikolaus Schaller" <hns@computer.org>
+Date: Sun, 10 Feb 2008 18:06:52 +0100
+X-Mailer: Apple Mail (2.753)
+Subject: Some questions on configuring OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,46 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Feb 2008 15:11:25 -0000
-X-Groupsio-MsgNum: 4098
-Content-Type: multipart/signed; boundary="Sig_/9AvK8TE0lo/u4fFJTQgEOJ=";
-	protocol="application/pgp-signature"; micalg=PGP-SHA1
+X-List-Received-Date: Sun, 10 Feb 2008 17:06:39 -0000
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
---Sig_/9AvK8TE0lo/u4fFJTQgEOJ=
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+I am trying to use OE and the MokoMakefile to build an OABI OpenMoko  
+version for the Neo GTA01 - and for the Acer n30 PDA.
 
-Hi,
+So far I succeeded in building everything without errors on a Debian  
+Etch machine but it does not run.
+The Neo does not complete booting to X11 and the last message  on the  
+boot screen is
 
-On Fri, 8 Feb 2008 11:01:33 +0100
-Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
+mcblk0: mmc0:e624 SU512 495488KiB
+  mmcblk0: p1
 
-> On Friday 08 February 2008 10:32:58 Graeme Gregory wrote:
-> > Hey guys, whats happening for FOSDEM? What goodies do we wish to
-> > show?
-> >
-> > What goodies do we need to bring?
->=20
-> This time we really _need_ an attractive poster and flyers to
-> giveaway. Who has time to come up with a text for an A4 flyer?
-> Who is artist enough to come up with an A3 poster?
-> Who can print? Who will bring it?
+Pressing the power key produces messages like:
+pcf50606_irq:entering(irq=53, pcf=c0555800): scheduling work
+pcf50606_work: INT=0x42 INT2=0x00 INT3=0x00:ONKEYF SECOND
+pcf50606_irq:entering(irq=53, pcf=c0555800): scheduling work
+pcf50606_work: INT=0x01 INT2=0x00 INT3=0x00:ONKEYR
 
-I can print up to A0 and get them laminated at our university.
+but nothing else... The AUX button produces a ^@ on the console.
 
-Regards,
-Daniel Willmann
+Before that there are some messages about initializing Bluetooth, CDC  
+Ethernet, mouting the .jffs2 as root but no error messages.
 
---Sig_/9AvK8TE0lo/u4fFJTQgEOJ=
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Disposition: attachment; filename=signature.asc
+The Acer n30 hangs in the X11 touchscreen calibration because the  
+touch does not work. And the power management is worse than the one  
+in the old Letux kernel. So I suspect that not all patches are  
+applied when using the default machine/acern30.conf of OE.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.7 (GNU/Linux)
+What I need is some help how to configure the build system properly  
+(unfortunately, chapters 7&8 of  http://www.uv-ac.de/openembedded/ 
+openembedded-7.html are not completed).
 
-iD8DBQFHrxQnZ2fhlIqbZ1gRAn9qAJwKw1f8z0Ud5rL0oZShOQuwdwwLNgCfR6gd
-5uhvmNod0G05KG8/HMtW+D0=
-=SW/j
------END PGP SIGNATURE-----
+Questions:
+1. I could not find out if and which of the Letux n30 patches have  
+been included to the MACHINE = "acern30" so far
+2. if not, I have some patch files from the Letux project - but how  
+and where should I configure those?
+3. What do I need to change to compile OpenMoko for OABI so that it  
+really boots?
 
---Sig_/9AvK8TE0lo/u4fFJTQgEOJ=--
+Many thanks for any hints how to proceed,
+Nikolaus
+
+
