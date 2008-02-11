@@ -1,23 +1,24 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JOKhK-000648-3x
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JObe1-0004nr-55
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Feb 2008 23:30:54 +0100
-Received: from andromeda (e180132137.adsl.alicedsl.de [85.180.132.137])
-	by drlauer-research.com (Postfix) with ESMTP id E5780584C28
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Feb 2008 23:35:51 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Feb 2008 23:31:20 +0100
-User-Agent: KMail/1.9.7
-References: <E1JO1gA-000658-1E@linuxtogo.org>
-	<20080210220226.27a2612f@widy.localdomain>
-In-Reply-To: <20080210220226.27a2612f@widy.localdomain>
+	Mon, 11 Feb 2008 17:36:37 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JOc6S-0001i1-UB
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Feb 2008 18:06:00 +0100
+Message-ID: <47B079AA.2000400@kernelconcepts.de>
+Date: Mon, 11 Feb 2008 17:36:58 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
 MIME-Version: 1.0
-Message-Id: <200802102331.20332.mickey@vanille-media.de>
-Subject: Re: [oe-commits] org.oe.dev SlugOS: make "turnup nfs" work correctly with the new network driver (loads
+To: openembedded-devel@lists.openembedded.org
+References: <75A74BC0-4CCC-44E8-BABE-A41508970838@computer.org>
+In-Reply-To: <75A74BC0-4CCC-44E8-BABE-A41508970838@computer.org>
+X-Enigmail-Version: 0.95.0
+Subject: Re: Some questions on configuring OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,38 +32,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Feb 2008 22:30:55 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 11 Feb 2008 16:36:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Sunday 10 February 2008 21:02:26 Paul Sokolovsky wrote:
-> > ============================================================
-> > --- packages/netbase/netbase/slugos/if-pre-up.d/test-nfsroot
-> > 225fbcdfa332608a2c8f1360fc922261f28ba694 +++
-> > packages/netbase/netbase/slugos/if-pre-up.d/test-nfsroot
-> > 225fbcdfa332608a2c8f1360fc922261f28ba694 @@ -0,0 +1,10 @@ +#!/bin/sh
-> > +#
-> > +if [ X"$IFACE" == "Xeth0" ] ; then
-> > +  nfsroot=`grep ' / nfs ' /proc/mounts`
-> > +  if [ -n "$nfsroot" ]; then
-> > +    echo "WARNING: Refusing to ifup eth0 when booted to a
-> > nfs-mounted rootfs."
-> > +    exit 1
-> > +  fi
-> > +fi
-> > +exit 0
->
-> 	Is this something which can be readily applied as general
-> feature - NFS boot doesn't work out of the box for any ditsro since
-> that eth0 dhcp change.
+Hi,
 
-+1 from me, I'm using nfsroot a lot -- it's invaluable for rapid distro 
-debugging.
+Dr. H. Nikolaus Schaller schrieb:
+> The Acer n30 hangs in the X11 touchscreen calibration because the  
+> touch does not work. And the power management is worse than the one  
+> in the old Letux kernel. So I suspect that not all patches are  
+> applied when using the default machine/acern30.conf of OE.
 
-:M:
+If the touchscreen issue is not a kernel problem check your /etc/X11/Xserver
+script (from xserver-(kdrive-)common package) if it has support for your device.
+
+> Questions:
+> 1. I could not find out if and which of the Letux n30 patches have  
+> been included to the MACHINE = "acern30" so far
+
+The acern30.conf defines that the linux_2.6.14.bb is used. So unless something
+else overrides this (your local.conf or the distro maybe) you will get 2.6.14
+which applies a lot of patches for the n30. You would have to check
+linux_2.6.14.bb what these patches are and where they come from.
+
+> 2. if not, I have some patch files from the Letux project - but how  
+> and where should I configure those?
+
+Just add them to the linux kernel bb. The default linux_2.6.14.bb is a good
+example how additional machine dependent patches are applied.
+
+> 3. What do I need to change to compile OpenMoko for OABI so that it  
+> really boots?
+
+I don't think there are special needs for OpenMoko, its a setting in the distro
+definition you use. angstrom-2008.1-legacy.conf should contain the bits doing
+the right thing.
+
+Greetings
+
+Florian
+
 -- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
