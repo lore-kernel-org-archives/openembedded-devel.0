@@ -1,25 +1,32 @@
-Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JPELC-0004TB-82
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Feb 2008 10:55:46 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so848784ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Feb 2008 01:56:02 -0800 (PST)
-Received: by 10.78.182.17 with SMTP id e17mr4430159huf.67.1202896561117;
-	Wed, 13 Feb 2008 01:56:01 -0800 (PST)
-Received: from widy.localdomain ( [78.164.233.103])
-	by mx.google.com with ESMTPS id h4sm2781220nfh.8.2008.02.13.01.55.59
-	(version=SSLv3 cipher=OTHER); Wed, 13 Feb 2008 01:56:00 -0800 (PST)
-Date: Wed, 13 Feb 2008 11:59:05 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080213115905.32bfd696@widy.localdomain>
-In-Reply-To: <foteat$i6s$1@ger.gmane.org>
-References: <foteat$i6s$1@ger.gmane.org>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JPEsT-0001FD-7B
+	for openembedded-devel@openembedded.org; Wed, 13 Feb 2008 11:30:10 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JPEsc-0003cp-BS
+	for openembedded-devel@openembedded.org; Wed, 13 Feb 2008 10:30:18 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 13 Feb 2008 10:30:18 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 13 Feb 2008 10:30:18 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 13 Feb 2008 11:30:07 +0100
+Message-ID: <fougrf$bi6$1@ger.gmane.org>
+References: <E1JPEWV-0004fP-TA@linuxtogo.org>
 Mime-Version: 1.0
-Subject: Re: [RFC] push those patches, push'em up
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <E1JPEWV-0004fP-TA@linuxtogo.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: org.oe.dev gpe-login, keylaunch: Annotate patches submitted upstream as RFCed on the list.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,54 +40,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2008 09:55:46 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Wed, 13 Feb 2008 10:30:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+pfalcon commit wrote:
+> gpe-login, keylaunch: Annotate patches submitted upstream as RFCed on the list.
 
-On Wed, 13 Feb 2008 01:41:02 +0100
-Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
+Hey, cool to see somebody already *doing* it.
 
-> Hi,
-> 
-> OE has quite many patches that are just too valuable to keep to
-> ourselves.  In the spirit of our bug sprint weekends, I want to
-> propose patch-pushing weekends.  Maybe we can even replace the former
-> with the latter.  I'd like to propose the coming weekend as the first
-> of this kind.
-> 
-> To get everybody on the same page and to make sure this is a
-> sustainable effort, I'd also like to propose some soft policy for
-> patches committed to OE.  This should help us quickly find those
-> patches still in need of some pushing.
-> 
->  1) first line in a patch starts with upstream: and goes on to list
-> the URL where the bug has been reported upstream.
->  2) further information can optionally be listed in the following
-> fields
->     * status: pending, accepted in XXX, rejected
->     * origin: where the patch has been stolen ;-)
->     * comment: any further detail such as description or reason for
->                application of the patch
-> 
-> Comments?  Volunteers to join the cause?
+Way to go, Paul! :-)
 
-Nice idea. Unfortunately, I cannot join at full force, as have my queue
-filled with lots of other stuff, by I submitted another GPE patch made
-during Angstrom release, and sent nag letter to the GPE list (previous
-patches are without response for almost 3 months now).
-
-> 
-> Regards
-> 
-> Rolf
-
-[]
-
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
