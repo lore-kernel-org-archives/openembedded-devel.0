@@ -1,33 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JPEwz-0001Kv-Ul
-	for openembedded-devel@openembedded.org; Wed, 13 Feb 2008 11:34:50 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1JPExC-0003qF-Vx
-	for openembedded-devel@openembedded.org; Wed, 13 Feb 2008 10:35:02 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 13 Feb 2008 10:35:02 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 13 Feb 2008 10:35:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 13 Feb 2008 11:31:44 +0100
-Message-ID: <fougug$bi6$2@ger.gmane.org>
-References: <foteat$i6s$1@ger.gmane.org>
-	<20080213115905.32bfd696@widy.localdomain>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <20080213115905.32bfd696@widy.localdomain>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] push those patches, push'em up
+	(envelope-from <mickey@vanille-media.de>) id 1JPGtl-00067M-HO
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Feb 2008 13:39:37 +0100
+Received: from andromeda (e180166131.adsl.alicedsl.de [85.180.166.131])
+	by drlauer-research.com (Postfix) with ESMTP id 5E02E584BEB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Feb 2008 13:44:50 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Feb 2008 13:40:02 +0100
+User-Agent: KMail/1.9.7
+MIME-Version: 1.0
+Message-Id: <200802131340.02616.mickey@vanille-media.de>
+Subject: tinylogin vs. busybox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,14 +28,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2008 10:34:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 Feb 2008 12:39:37 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Paul Sokolovsky wrote:
-> I submitted another GPE patch made during Angstrom release
+I just realized that we are still using tinylogin which has bugs and is dead. 
+Newer busybox releases contain all the functionality. Anyone know a 
+compelling reason to keep using tinylogin as the default in task-base? If 
+not, I'd like to switch to busybox (after changing its defconfig) soon.
 
-Yeah, I just saw that.  Great and many thanks.
-
+:M:
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
