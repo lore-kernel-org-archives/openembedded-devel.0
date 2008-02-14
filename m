@@ -1,22 +1,22 @@
-Received: from [64.233.182.186] (helo=nf-out-0910.google.com)
+Received: from [209.85.128.188] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philipp.zabel@gmail.com>) id 1JPbkg-0001CO-Cm
+	(envelope-from <philipp.zabel@gmail.com>) id 1JPg8N-0003ss-JZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2008 11:55:38 +0100
-Received: by nf-out-0910.google.com with SMTP id h3so215583nfh.22
+	Thu, 14 Feb 2008 16:36:23 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so447220fks.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2008 02:55:29 -0800 (PST)
-Received: by 10.82.112.3 with SMTP id k3mr2143282buc.15.1202986528589;
-	Thu, 14 Feb 2008 02:55:28 -0800 (PST)
-Received: by 10.82.118.18 with HTTP; Thu, 14 Feb 2008 02:55:28 -0800 (PST)
-Message-ID: <74d0deb30802140255k6c16bafeq6771d572fd7c542c@mail.gmail.com>
-Date: Thu, 14 Feb 2008 11:55:28 +0100
+	Thu, 14 Feb 2008 07:36:14 -0800 (PST)
+Received: by 10.82.187.2 with SMTP id k2mr2665229buf.19.1203003374235;
+	Thu, 14 Feb 2008 07:36:14 -0800 (PST)
+Received: by 10.82.118.18 with HTTP; Thu, 14 Feb 2008 07:36:14 -0800 (PST)
+Message-ID: <74d0deb30802140736j45e629dfr717549c267c0db53@mail.gmail.com>
+Date: Thu, 14 Feb 2008 16:36:14 +0100
 From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080214045433.02de68cd@widy.localdomain>
+In-Reply-To: <E1JPfZq-0006fI-Ky@linuxtogo.org>
 MIME-Version: 1.0
-References: <20080214045433.02de68cd@widy.localdomain>
-Subject: Re: Building a kernel with builtin initramfs
+References: <E1JPfZq-0006fI-Ky@linuxtogo.org>
+Subject: Re: [oe-commits] org.oe.dev angstrom 2008: start lockdown file based on openmoko versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,50 +30,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2008 10:55:38 -0000
+X-List-Received-Date: Thu, 14 Feb 2008 15:36:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thu, Feb 14, 2008 at 3:54 AM, Paul Sokolovsky <pmiscml@gmail.com> wrote:
-> Hello,
+On Thu, Feb 14, 2008 at 4:00 PM, koen commit
+<openembedded-commits@lists.openembedded.org> wrote:
+> angstrom 2008: start lockdown file based on openmoko versions
+>  * awaits bitbake support to get generated automatically
 >
->  Sometimes, it may be necessary to have a kernel with builtin initramfs.
->  Initramfs commonly kernel modules, so we have kernel build recursion.
->  Standard way to break this loop is to split procedure causing recursion
->  into independent steps, so we'd first build kernel modules, then build
->  initramfs, then build a kernel image.
+>  Author: koen@openembedded.org
+>  Branch: org.openembedded.dev
+>  Revision: 9f227060931d6ef3c46ac867c9d5ab6f7ff4c7b8
+>  ViewMTN: http://monotone.openembedded.org/revision/info/9f227060931d6ef3c46ac867c9d5ab6f7ff4c7b8
+>  Files:
+>  1
+>  conf/distro/include/angstrom-2008-preferred-versions.inc
+>  conf/distro/angstrom-2008.1.conf
+>  Diffs:
 >
->  The question, is how to express this with bitbake and OE. Skipping
->  various ideas, here's the one which promise viability:
+>  #
+>  # mt diff -r9d7c2a8ce1e28ac215be4fd94fbde27112c167bb -r9f227060931d6ef3c46ac867c9d5ab6f7ff4c7b8
+>  #
+>  #
+>  #
+>  # add_file "conf/distro/include/angstrom-2008-preferred-versions.inc"
+>  #  content [ebf743b8e6427e99a80a69e6d3b9c91f88e89d8d]
+>  #
+>  # patch "conf/distro/angstrom-2008.1.conf"
+>  #  from [7ea86daa05508d4bd45a3e6eeba28b45153de9fe]
+>  #    to [68d8c62fce1fc4da0724773e540d24dd355ccaeb]
+>  #
+>  ============================================================
+>  --- conf/distro/include/angstrom-2008-preferred-versions.inc    ebf743b8e6427e99a80a69e6d3b9c91f88e89d8d
+>  +++ conf/distro/include/angstrom-2008-preferred-versions.inc    ebf743b8e6427e99a80a69e6d3b9c91f88e89d8d
+>  @@ -0,0 +1,8 @@
+>  +PREFERRED_VERSION_dbus = "1.1.4"
+>  +PREFERRED_VERSION_busybox = "1.9.1"
+>  +PREFERRED_VERSION_gst-pulse = "0.9.7"
+>  +PREFERRED_VERSION_libtool = "1.2.14"
+>  +PREFERRED_VERSION_pulseaudio = "0.9.9"
+>  +PREFERRED_VERSION_udev = "118"
+>  +PREFERRED_VERSION_vte = "0.16.10"
+>  +
+>  ============================================================
+>  --- conf/distro/angstrom-2008.1.conf    7ea86daa05508d4bd45a3e6eeba28b45153de9fe
+>  +++ conf/distro/angstrom-2008.1.conf    68d8c62fce1fc4da0724773e540d24dd355ccaeb
+>  @@ -22,6 +22,7 @@ require conf/distro/include/sane-srcrevs
 >
->  1. Have a kernel-modules.bb, which will execute bitbake recursively to
->  build a PREFERRED_PROVIDER_virtual/kernel, and will pass a special flag
->  variable.
+>   require conf/distro/include/sane-srcdates.inc
+>   require conf/distro/include/sane-srcrevs.inc
+>  +require conf/distro/include/angstrom-2008-preferred-versions.inc
 >
->  2. Detecting that flag, kernel.bbclass will build/package only modules.
->
->  3. Then, have a kernel-initramfs.bb (DEPENDS=kernel-modules) which will
->  take a variable defining which initramfs image to build, if any, and
->  execute bitbake recursively with IMAGE_FSTYPES=cpio.gz on that.
->
->  4. Make a task in kernel.bbclass depend on kernel-initramfs.bb (build
->  task of it).
+>   #Images built can have to modes:
+>   # 'debug': empty rootpassword, strace included
+>  @@ -71,16 +72,10 @@ PREFERRED_VERSION_uclibc-initial ?= "0.9
 >
 >
->  Again, that appears to be something working, at least from 1st look.
->  However, it introduces new trick - recursive execution of bitbake,
->  what, as far as I know, never happened so far. Well, for "make" such
->  usage is commodity, and the fact that it is required 2 times in the
->  above scenario show that it is useful ;-).
->
->
->  Other ideas?
+>   #Prefer a newer GTK+ and friends
+>  -PREFERRED_VERSION_gtk+                 = "2.12.3"
+>  -PREFERRED_VERSION_glib-2.0              = "2.14.4"
+>  -PREFERRED_VERSION_pango                 = "1.18.1"
+>  +PREFERRED_VERSION_gtk+                 ?= "2.12.3"
+>  +PREFERRED_VERSION_glib-2.0              ?= "2.14.4"
+>  +PREFERRED_VERSION_pango                 ?= "1.18.1"
 
-Split the module generation out of the main compile/install/package
-tasks in kernel.bbclass and have kernel-initrmfs.bb's do_initramfs
-depend on that.
-Can we have conditional inter-task dependencies in bitbake recipes?
+Why the change to ?= and why are those not in -preferred-versions.inc?
 
 regards
 Philipp
