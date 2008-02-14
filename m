@@ -1,17 +1,24 @@
-Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
+Received: from [209.85.128.186] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <jin@mediatomb.cc>) id 1JPgQh-0004KK-Au
+	(envelope-from <philipp.zabel@gmail.com>) id 1JPgdu-0004oW-1K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2008 16:55:19 +0100
-Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
-	id 937A183900; Thu, 14 Feb 2008 16:55:08 +0100 (CET)
-Date: Thu, 14 Feb 2008 16:55:08 +0100
-From: Sergey 'Jin' Bostandzhyan <jin@mediatomb.cc>
+	Thu, 14 Feb 2008 17:08:58 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so459093fks.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Feb 2008 08:08:49 -0800 (PST)
+Received: by 10.82.165.13 with SMTP id n13mr978273bue.30.1203005328788;
+	Thu, 14 Feb 2008 08:08:48 -0800 (PST)
+Received: by 10.82.118.18 with HTTP; Thu, 14 Feb 2008 08:08:48 -0800 (PST)
+Message-ID: <74d0deb30802140808k4258f05bgdc37602c16448d4d@mail.gmail.com>
+Date: Thu, 14 Feb 2008 17:08:48 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080214155508.GA4163@deadlock.dhs.org>
+In-Reply-To: <47B463E8.303@student.utwente.nl>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.15 (2007-04-06)
-Subject: building uClinux using OE
+References: <E1JPfZq-0006fI-Ky@linuxtogo.org>
+	<74d0deb30802140736j45e629dfr717549c267c0db53@mail.gmail.com>
+	<47B463E8.303@student.utwente.nl>
+Subject: Re: [oe-commits] org.oe.dev angstrom 2008: start lockdown file based on openmoko versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -25,52 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2008 15:55:19 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 14 Feb 2008 16:08:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi,
+On Thu, Feb 14, 2008 at 4:53 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+>  Hash: SHA1
+>
+>  pHilipp Zabel schreef:
+>
+> | On Thu, Feb 14, 2008 at 4:00 PM, koen commit
+>
+>
+> |>   #Prefer a newer GTK+ and friends
+>  |>  -PREFERRED_VERSION_gtk+                 = "2.12.3"
+>  |>  -PREFERRED_VERSION_glib-2.0              = "2.14.4"
+>  |>  -PREFERRED_VERSION_pango                 = "1.18.1"
+>  |>  +PREFERRED_VERSION_gtk+                 ?= "2.12.3"
+>  |>  +PREFERRED_VERSION_glib-2.0              ?= "2.14.4"
+>  |>  +PREFERRED_VERSION_pango                 ?= "1.18.1"
+>  |
+>  | Why the change to ?= and why are those not in -preferred-versions.inc?
+>
+>  Because they will be in the -preferred-versions.inc in the future
+>  (volunteers?).
 
-I'd like to be able to build uClinux using OE and I hope to gather some
-pointers to the right direction.
+:) Good, so it's just for historical reasons?
+I think I just volunteered involuntarily, then.
 
-I think it would generally be a nice thing to have, so I would like to do
-the work in a way that it could be incorporated in OE, provided that you 
-guys are interested.
-
-According to the post below the toolchain should not be a problem:
-http://mailman.uclinux.org/pipermail/uclinux-dev/2007-May/042993.html
-"uClinux development on ARM now uses a standard arm-linux targeted tool chain. 
- We add the elf2flt tool, but it is otherwise a standard arm-linux toolchain."
-
-As far as I know the uClinux/ARM kernel patches are already in the mainline:
-http://opensrc.sec.samsung.com/
-
-uClibc is also already supported by OE, not sure if I would have to add
-an option for uC-libc.
-
-So basically it seems that almost everything that is needed is already there.
-
-What is missing?
-
-- applying elf2flt processing to produced binaries
-
-- have a way of knowing that the particular build is done for the uClinux
-  targets (maybe for some tweaks in .bb files if required or to apply patches
-  only when necessary, allthough ifdef __uClinux__ defines could be used)
-
-- not sure what else?
-
-I do not have any uClinux experience yet, and it seems to be quite difficult
-to gather all the bits and pieces of information, so I'd appreciate comments 
-and suggestions, especially if you see that I am missing something.
-
-I'd also be interested in your thoughts on what would be the best way to
-integrate it into OE.
-
-Kind regards,
-Jin
-
-
+regards
+Philipp
 
 
