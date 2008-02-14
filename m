@@ -1,27 +1,20 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1JPhF5-00021T-4A
-	for openembedded-devel@openembedded.org; Thu, 14 Feb 2008 17:47:23 +0100
-Received: from Powerbook-2.local (vpn006019.vpn.utwente.nl [130.89.6.19])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	m1EGl9nr018966 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2008 17:47:09 +0100
-Message-ID: <47B4708B.6050008@student.utwente.nl>
-Date: Thu, 14 Feb 2008 17:47:07 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JPkQz-0003Yb-1s
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Feb 2008 21:11:53 +0100
+Received: by an-out-0708.google.com with SMTP id b33so89311ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Feb 2008 12:11:42 -0800 (PST)
+Received: by 10.100.173.18 with SMTP id v18mr1913403ane.69.1203019902051;
+	Thu, 14 Feb 2008 12:11:42 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Thu, 14 Feb 2008 12:11:42 -0800 (PST)
+Message-ID: <c384c5ea0802141211i3622faa4o1c18103b485edc39@mail.gmail.com>
+Date: Thu, 14 Feb 2008 21:11:42 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <20080214155508.GA4163@deadlock.dhs.org>
-In-Reply-To: <20080214155508.GA4163@deadlock.dhs.org>
-X-Enigmail-Version: 0.95.6
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: building uClinux using OE
+Subject: [RFC] New OpenEmbedded Logo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,87 +28,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2008 16:47:23 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 14 Feb 2008 20:11:55 -0000
+X-Groupsio-MsgNum: 4130
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_1386_19811912.1203019902040"
+
+------=_Part_1386_19811912.1203019902040
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-Sergey 'Jin' Bostandzhyan schreef:
-| Hi,
-|
-| I'd like to be able to build uClinux using OE and I hope to gather some
-| pointers to the right direction.
-|
-| I think it would generally be a nice thing to have, so I would like to do
-| the work in a way that it could be incorporated in OE, provided that you
-| guys are interested.
-|
-| According to the post below the toolchain should not be a problem:
-| http://mailman.uclinux.org/pipermail/uclinux-dev/2007-May/042993.html
-| "uClinux development on ARM now uses a standard arm-linux targeted
-tool chain.
-|  We add the elf2flt tool, but it is otherwise a standard arm-linux
-toolchain."
-|
-| As far as I know the uClinux/ARM kernel patches are already in the
-mainline:
-| http://opensrc.sec.samsung.com/
-|
-| uClibc is also already supported by OE, not sure if I would have to add
-| an option for uC-libc.
-|
-| So basically it seems that almost everything that is needed is already
-there.
-|
-| What is missing?
-|
-| - applying elf2flt processing to produced binaries
+playing with a simple idea, I thought of embedding the 'e' of embedded
+into the O of Open, as a modern OpenEmbedded logo.
 
-That should happen automagically, we just need to stage some more
-binutils-cross headers for elf2flt to build
-
-| - have a way of knowing that the particular build is done for the uClinux
-|   targets (maybe for some tweaks in .bb files if required or to apply
-patches
-|   only when necessary, allthough ifdef __uClinux__ defines could be used)
-|
-| - not sure what else?
-
-Since you can't (practically) do shared libraries, all packaging (and
-probably staging) will be wrong, since you won't have libfoo.so.1, but
-something different.
-
-| I do not have any uClinux experience yet, and it seems to be quite
-difficult
-| to gather all the bits and pieces of information, so I'd appreciate
-comments
-| and suggestions, especially if you see that I am missing something.
-|
-| I'd also be interested in your thoughts on what would be the best way to
-| integrate it into OE.
-
-I had a go at this a while ago, but I had to halt working on it since
-the uboot on the blackfin site refuses to load the uImage on the
-blackfin site, leaving me without a good testing target.
-I think forcing static linking would be the fastest way to get an image
-built, we can work on details (flat, shared-flat, fdpic, etc) after that.
-
-regards,
-
-Koen
-
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHtHCLMkyGM64RGpERAl7KAJ4sD85YqG+OrTVUx+eLuCb9js4TvQCffI35
-7wUmhJZu6YpoBfu6e4kbEg0=
-=Ez6i
------END PGP SIGNATURE-----
+(See PNG attachment).
 
 
+
+Throughts, rants?
+
+Regards,
+-- 
+Leon
+
+------=_Part_1386_19811912.1203019902040
+Content-Type: image/png; name=text2164.png
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_fcnqz5a50
+Content-Disposition: attachment; filename=text2164.png
+
+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
+
+------=_Part_1386_19811912.1203019902040--
