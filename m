@@ -1,24 +1,23 @@
-Received: from [209.85.128.186] (helo=fk-out-0910.google.com)
+Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philipp.zabel@gmail.com>) id 1JPgdu-0004oW-1K
+	(envelope-from <philipp.zabel@gmail.com>) id 1JPglr-00058I-6U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2008 17:08:58 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so459093fks.12
+	Thu, 14 Feb 2008 17:17:11 +0100
+Received: by nf-out-0910.google.com with SMTP id h3so267043nfh.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2008 08:08:49 -0800 (PST)
-Received: by 10.82.165.13 with SMTP id n13mr978273bue.30.1203005328788;
-	Thu, 14 Feb 2008 08:08:48 -0800 (PST)
-Received: by 10.82.118.18 with HTTP; Thu, 14 Feb 2008 08:08:48 -0800 (PST)
-Message-ID: <74d0deb30802140808k4258f05bgdc37602c16448d4d@mail.gmail.com>
-Date: Thu, 14 Feb 2008 17:08:48 +0100
+	Thu, 14 Feb 2008 08:17:02 -0800 (PST)
+Received: by 10.82.112.3 with SMTP id k3mr2768371buc.15.1203005821400;
+	Thu, 14 Feb 2008 08:17:01 -0800 (PST)
+Received: by 10.82.118.18 with HTTP; Thu, 14 Feb 2008 08:17:01 -0800 (PST)
+Message-ID: <74d0deb30802140817g153c4fe3if16cd9eabe67c9f3@mail.gmail.com>
+Date: Thu, 14 Feb 2008 17:17:01 +0100
 From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47B463E8.303@student.utwente.nl>
+In-Reply-To: <E1JPfb1-0006hO-Ll@linuxtogo.org>
 MIME-Version: 1.0
-References: <E1JPfZq-0006fI-Ky@linuxtogo.org>
-	<74d0deb30802140736j45e629dfr717549c267c0db53@mail.gmail.com>
-	<47B463E8.303@student.utwente.nl>
-Subject: Re: [oe-commits] org.oe.dev angstrom 2008: start lockdown file based on openmoko versions
+References: <E1JPfb1-0006hO-Ll@linuxtogo.org>
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev anki: fix parse error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,35 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2008 16:08:58 -0000
+X-List-Received-Date: Thu, 14 Feb 2008 16:17:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thu, Feb 14, 2008 at 4:53 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
->  Hash: SHA1
+On Thu, Feb 14, 2008 at 4:01 PM, hrw commit
+<openembedded-commits@lists.openembedded.org> wrote:
+> anki: fix parse error
 >
->  pHilipp Zabel schreef:
+>  Author: hrw@openembedded.org
+>  Branch: org.openembedded.dev
+>  Revision: a33b3d19ac330b59af9dbbb80b1410d4579bba26
+>  ViewMTN: http://monotone.openembedded.org/revision/info/a33b3d19ac330b59af9dbbb80b1410d4579bba26
+>  Files:
+>  1
+>  packages/anki/anki_0.4.3.bb
+>  Diffs:
 >
-> | On Thu, Feb 14, 2008 at 4:00 PM, koen commit
+>  #
+>  # mt diff -r75f2dc6b3a783a084bf013ce7dc072992561a9bd -ra33b3d19ac330b59af9dbbb80b1410d4579bba26
+>  #
+>  #
+>  #
+>  # patch "packages/anki/anki_0.4.3.bb"
+>  #  from [bbc71d5b420649c30e0f4e7ca986a9f3516be13e]
+>  #    to [de5cc8560fa7d2401299249253867146486bcf24]
+>  #
+>  ============================================================
+>  --- packages/anki/anki_0.4.3.bb bbc71d5b420649c30e0f4e7ca986a9f3516be13e
+>  +++ packages/anki/anki_0.4.3.bb de5cc8560fa7d2401299249253867146486bcf24
+>  @@ -1,9 +1,9 @@ PR = "r0"
+>   require anki.inc
 >
+>   RDEPENDS += "libanki"
+>   PR = "r0"
 >
-> |>   #Prefer a newer GTK+ and friends
->  |>  -PREFERRED_VERSION_gtk+                 = "2.12.3"
->  |>  -PREFERRED_VERSION_glib-2.0              = "2.14.4"
->  |>  -PREFERRED_VERSION_pango                 = "1.18.1"
->  |>  +PREFERRED_VERSION_gtk+                 ?= "2.12.3"
->  |>  +PREFERRED_VERSION_glib-2.0              ?= "2.14.4"
->  |>  +PREFERRED_VERSION_pango                 ?= "1.18.1"
->  |
->  | Why the change to ?= and why are those not in -preferred-versions.inc?
->
->  Because they will be in the -preferred-versions.inc in the future
->  (volunteers?).
+>  -export PV
+>  +export PV="${PV}"
 
-:) Good, so it's just for historical reasons?
-I think I just volunteered involuntarily, then.
+ERROR: variable PV references itself!
+
+rolling that patch back fixes this bitbake parsing error for me (I
+didn't try to build anki)
 
 regards
 Philipp
