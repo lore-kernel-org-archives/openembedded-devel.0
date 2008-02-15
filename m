@@ -1,35 +1,35 @@
-Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JQ5na-0000aS-5j
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2008 20:00:46 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so1630387ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2008 11:00:20 -0800 (PST)
-Received: by 10.150.54.6 with SMTP id c6mr1128867yba.77.1203100562769;
-	Fri, 15 Feb 2008 10:36:02 -0800 (PST)
-Received: from widy.localdomain ( [88.252.162.97])
-	by mx.google.com with ESMTPS id h1sm9002478nfh.20.2008.02.15.10.35.59
-	(version=SSLv3 cipher=OTHER); Fri, 15 Feb 2008 10:36:01 -0800 (PST)
-Date: Fri, 15 Feb 2008 20:36:18 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080215203618.39582412@widy.localdomain>
-In-Reply-To: <47B5C6DB.6030500@gmx.net>
-References: <20080215175032.545c9b9a@widy.localdomain>
-	<47B5C6DB.6030500@gmx.net>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 66.249.92.175
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+	(envelope-from <k.kooi@student.utwente.nl>) id 1JQ61B-0000ky-BN
+	for openembedded-devel@openembedded.org; Fri, 15 Feb 2008 20:14:43 +0100
+Received: from Powerbook-2.local (vpn006019.vpn.utwente.nl [130.89.6.19])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	m1FJEHtS012455 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Feb 2008 20:14:17 +0100
+Message-ID: <47B5E488.4010902@student.utwente.nl>
+Date: Fri, 15 Feb 2008 20:14:16 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+MIME-Version: 1.0
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <20080214045433.02de68cd@widy.localdomain>	<74d0deb30802140255k6c16bafeq6771d572fd7c542c@mail.gmail.com>	<20080215110230.526ea6a1@widy.localdomain>	<74d0deb30802150141q71e844esd6185bf52b1e79ae@mail.gmail.com>	<20080215133238.7d8f7887@widy.localdomain>	<1203076695.8636.30.camel@dax.rpnet.com>	<20080215182949.053c3d3a@widy.localdomain>
+	<1203095510.8636.92.camel@dax.rpnet.com>
+In-Reply-To: <1203095510.8636.92.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-SA-Exim-Connect-IP: 130.89.2.9
+X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: theBohemian@gmx.net
-Subject: Re: [RFC] PKGPV/PKGPR of the PKG fame
+Subject: Re: Building a kernel with builtin initramfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,42 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2008 19:00:46 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 15 Feb 2008 19:14:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Fri, 15 Feb 2008 18:07:39 +0100
-Robert Schuster <theBohemian@gmx.net> wrote:
+Richard Purdie schreef:
 
-> Hi,
-> while I like the general idea the proposed implemented is not so nice
-> IMHO because
-> 	- it works only for ipk packaging (should be agnostic)
+| I'm actually going to go as far as proposing any recursive bitbake
+| recipes are removed from OE.dev ASAP for the reasons I've mentioned
+| above. We *need* to find a better way. I will try and help you find that
+| and will extend bitbake if needed.
 
-That's just a sample of implementation. As it is now, it seems that
-each format-specific package class needs to handle it on its own.
+While I agree on what Paul is saying, I don't think having recursive
+bitbake is a good idea, and a recursive bitbake that assumes a sane
+distro even worse, so realistically I'll have to back up Richard with
+the removal policy.
 
-> 	- for dependency resolution the original version values are
-> used
+regards,
 
-If you mean version under which this package will be dependent
-upon, then for sure yes, I didn't even consider that area. My usecase
-is to create "proxy" packages which would already fit into existing
-dependency chains - just exactly need to set PV to match external
-expectations.
+Koen
 
-> 
-> IMHO this stuff should be done in packaging.bbclass instead.
-> 
-> Regards
-> Robert
-> 
-[]
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHteSIMkyGM64RGpERAqfeAJ9J4tRGU50ISjuWLksNctZi5gt4IQCbBQyU
+sJLLn+fcLx/ujXln45T+23s=
+=d5xx
+-----END PGP SIGNATURE-----
 
 
