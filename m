@@ -1,34 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.145.245.199] (helo=mx03.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JQ1uj-0002xB-Er
-	for openembedded-devel@openembedded.org; Fri, 15 Feb 2008 15:51:55 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JQ1uN-000531-9T
-	for openembedded-devel@openembedded.org; Fri, 15 Feb 2008 14:51:23 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 15 Feb 2008 14:51:23 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 15 Feb 2008 14:51:23 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 15 Feb 2008 15:51:15 +0100
-Message-ID: <fp48t2$i8$1@ger.gmane.org>
-References: <E1JPfb1-0006hO-Ll@linuxtogo.org>	<74d0deb30802140817g153c4fe3if16cd9eabe67c9f3@mail.gmail.com>
-	<200802151245.30040.mickey@vanille-media.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <200802151245.30040.mickey@vanille-media.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <mwester@dls.net>) id 1JQ263-00035x-8e
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Feb 2008 16:03:29 +0100
+Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
+	by mx03.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1JQ25k-0007Zq-69
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Feb 2008 09:03:08 -0600
+Message-ID: <47B5A9A4.3040400@dls.net>
+Date: Fri, 15 Feb 2008 09:03:00 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <E1JPfb1-0006hO-Ll@linuxtogo.org>	<74d0deb30802140817g153c4fe3if16cd9eabe67c9f3@mail.gmail.com>	<200802151245.30040.mickey@vanille-media.de>
+	<fp48t2$i8$1@ger.gmane.org>
+In-Reply-To: <fp48t2$i8$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 216.145.245.199
+X-SA-Exim-Mail-From: mwester@dls.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -49,21 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2008 14:51:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 15 Feb 2008 15:03:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Michael 'Mickey' Lauer wrote:
-> export PV is valid syntax, but needs bitbake >= 1.8.8.
-> 
-> If you think it's too early to depend on this, then you can substitute with
-> 
-> export PV := "${PV}"
+Rolf Leggewie wrote:
+> Michael 'Mickey' Lauer wrote:
+>   
+>> export PV is valid syntax, but needs bitbake >= 1.8.8.
+>>
+>> If you think it's too early to depend on this, then you can substitute with
+>>
+>> export PV := "${PV}"
+>>     
+>
+> I think depending on 1.8.10 is fine and indeed, this might be a good
+> test to make sure everybody updates ;-)
+>
+>   
 
-I think depending on 1.8.10 is fine and indeed, this might be a good
-test to make sure everybody updates ;-)
+I recall a series of discussions some months ago regarding the topic of 
+making OE an easier tool for other distro developers, companies, or 
+individuals to use.  Requiring a bitbake upgrade to accommodate a 
+single-line in a single recipe that can easily be expressed in a fashion 
+compatible with the existing bitbake versions installed, well that just 
+seem to fly in the face of that earlier discussion.
 
-Thanks for clarifying why some people saw this while most did not.
+Here's one vote for against forcing a complete bitbake upgrade on other 
+communities:
+-1 from me!
 
+> Thanks for clarifying why some people saw this while most did not.
+>
+>   
+
+Mike (mwester)
 
 
