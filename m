@@ -1,22 +1,23 @@
 Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JPz0W-0003AD-Eb
+	(envelope-from <mickey@vanille-media.de>) id 1JPz1f-0003BP-Qi
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2008 12:45:35 +0100
+	Fri, 15 Feb 2008 12:46:46 +0100
 Received: from andromeda (e180186145.adsl.alicedsl.de [85.180.186.145])
-	by drlauer-research.com (Postfix) with ESMTP id 09CD0584BC8
+	by drlauer-research.com (Postfix) with ESMTP id E9115584BC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2008 12:50:24 +0100 (CET)
+	Fri, 15 Feb 2008 12:51:34 +0100 (CET)
 From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Feb 2008 12:45:29 +0100
+Date: Fri, 15 Feb 2008 12:46:44 +0100
 User-Agent: KMail/1.9.7
-References: <E1JPfb1-0006hO-Ll@linuxtogo.org>
-	<74d0deb30802140817g153c4fe3if16cd9eabe67c9f3@mail.gmail.com>
-In-Reply-To: <74d0deb30802140817g153c4fe3if16cd9eabe67c9f3@mail.gmail.com>
+References: <200802131340.02616.mickey@vanille-media.de>
+	<200802131432.42455.mickey@vanille-media.de>
+	<47B3075F.4000703@student.utwente.nl>
+In-Reply-To: <47B3075F.4000703@student.utwente.nl>
 MIME-Version: 1.0
-Message-Id: <200802151245.30040.mickey@vanille-media.de>
+Message-Id: <200802151246.44196.mickey@vanille-media.de>
 X-SA-Exim-Connect-IP: 78.47.116.26
 X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
@@ -25,7 +26,7 @@ X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] org.oe.dev anki: fix parse error
+Subject: Re: tinylogin vs. busybox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,59 +40,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2008 11:45:35 -0000
+X-List-Received-Date: Fri, 15 Feb 2008 11:46:46 -0000
 Content-Type: text/plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thursday 14 February 2008 17:17:01 pHilipp Zabel wrote:
-> On Thu, Feb 14, 2008 at 4:01 PM, hrw commit
+On Wednesday 13 February 2008 16:06:07 Koen Kooi wrote:
+> Michael 'Mickey' Lauer schreef:
+> | On Wednesday 13 February 2008 13:53:18 Koen Kooi wrote:
+> |> Michael 'Mickey' Lauer schreef:
+> |> | I just realized that we are still using tinylogin which has bugs and
+> |>
+> |> is dead.
+> |>
+> |> | Newer busybox releases contain all the functionality. Anyone know a
+> |> | compelling reason to keep using tinylogin as the default in
 >
-> <openembedded-commits@lists.openembedded.org> wrote:
-> > anki: fix parse error
-> >
-> >  Author: hrw@openembedded.org
-> >  Branch: org.openembedded.dev
-> >  Revision: a33b3d19ac330b59af9dbbb80b1410d4579bba26
-> >  ViewMTN:
-> > http://monotone.openembedded.org/revision/info/a33b3d19ac330b59af9dbbb80b
-> >1410d4579bba26 Files:
-> >  1
-> >  packages/anki/anki_0.4.3.bb
-> >  Diffs:
-> >
-> >  #
-> >  # mt diff -r75f2dc6b3a783a084bf013ce7dc072992561a9bd
-> > -ra33b3d19ac330b59af9dbbb80b1410d4579bba26 #
-> >  #
-> >  #
-> >  # patch "packages/anki/anki_0.4.3.bb"
-> >  #  from [bbc71d5b420649c30e0f4e7ca986a9f3516be13e]
-> >  #    to [de5cc8560fa7d2401299249253867146486bcf24]
-> >  #
-> >  ============================================================
-> >  --- packages/anki/anki_0.4.3.bb bbc71d5b420649c30e0f4e7ca986a9f3516be13e
-> >  +++ packages/anki/anki_0.4.3.bb de5cc8560fa7d2401299249253867146486bcf24
-> >  @@ -1,9 +1,9 @@ PR = "r0"
-> >   require anki.inc
-> >
-> >   RDEPENDS += "libanki"
-> >   PR = "r0"
-> >
-> >  -export PV
-> >  +export PV="${PV}"
+> task-base? If
 >
-> ERROR: variable PV references itself!
+> |> | not, I'd like to switch to busybox (after changing its defconfig)
+> |> | soon.
+> |>
+> |> Using busybox as login requires it being setuid root, with all the nasty
+> |> security implications stemming from that.
+> |
+> | http://www.busybox.net/lists/busybox/2004-May/011551.html give me the
 >
-> rolling that patch back fixes this bitbake parsing error for me (I
-> didn't try to build anki)
+> opinion
+>
+> | that this is not a problem.
+>
+> If that email is true, we could dump tinylogin
 
-export PV is valid syntax, but needs bitbake >= 1.8.8.
+Excellent. I will look into this and do some tests.
 
-If you think it's too early to depend on this, then you can substitute with
+> , but frankly, I trust 
+> busybox as far as I can throw a piano (and toybox as far as I can throw
+> a 21" crt) and SUID root binaries make my skin crawl, so we must be very
+> carefull and do thorough tests before making this change.
+> The last thing we want is $bigcompany to blame OE for the exploitabilty
+> of their devices.
 
-export PV := "${PV}"
+Sure, better safe than sorry. Of course this would not be the default in 
+OE.dev without being tested for quite some time.
 
 :M:
 -- 
