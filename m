@@ -1,41 +1,30 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JQ3ds-0005Y9-OB
-	for openembedded-devel@openembedded.org; Fri, 15 Feb 2008 17:42:39 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1FGfweH017864
-	for <openembedded-devel@openembedded.org>; Fri, 15 Feb 2008 16:41:58 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 17484-08 for <openembedded-devel@openembedded.org>;
-	Fri, 15 Feb 2008 16:41:53 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1FGfoPR017854
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 15 Feb 2008 16:41:50 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <fp4dk4$kgh$1@ger.gmane.org>
-References: <E1JPfb1-0006hO-Ll@linuxtogo.org>
-	<74d0deb30802140817g153c4fe3if16cd9eabe67c9f3@mail.gmail.com>
-	<200802151245.30040.mickey@vanille-media.de>	<fp48t2$i8$1@ger.gmane.org>
-	<47B5A9A4.3040400@dls.net>  <fp4dk4$kgh$1@ger.gmane.org>
-Date: Fri, 15 Feb 2008 16:41:51 +0000
-Message-Id: <1203093711.8636.72.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	(envelope-from <mickey@vanille-media.de>) id 1JQ3yS-0005y6-62
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Feb 2008 18:03:47 +0100
+Received: from andromeda (e180186145.adsl.alicedsl.de [85.180.186.145])
+	by drlauer-research.com (Postfix) with ESMTP id 2259F584BF4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Feb 2008 18:08:35 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 15 Feb 2008 18:03:43 +0100
+User-Agent: KMail/1.9.7
+References: <foteat$i6s$1@ger.gmane.org>
+In-Reply-To: <foteat$i6s$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200802151803.43307.mickey@vanille-media.de>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: RFD: is bitbake 1.8.10 minimum supported standard? (was:	[oe-commits] org.oe.dev anki: fix parse error)
+Subject: Re: [RFC] push those patches, push'em up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,40 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2008 16:42:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Feb 2008 17:03:47 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Fri, 2008-02-15 at 17:11 +0100, Rolf Leggewie wrote:
-> Mike (mwester) wrote:
-> > Requiring a bitbake upgrade to accommodate a 
-> > single-line in a single recipe that can easily be expressed in a fashion 
-> > compatible with the existing bitbake versions installed, well that just 
-> > seem to fly in the face of that earlier discussion.
-> 
-> Well, seen from that angle that seems to hold.  But that was not my
-> angle and I hope I was not being mistaken in this regard.
-> 
-> IIRC bitbake 1.8.10 has quite many bug fixes as well (RP?).  So, that is
-> more what I was getting at.  AFAIK, .dev and bitbake were meant to be
-> closely coupled.  IOW, don't run bleeding edge .dev with an old bitbake
-> and expect things to work.
-> 
-> I am open to extend the time until 1.8.8 is officially dead for .dev
-> What do others think about this question of timing?
+On Wednesday 13 February 2008 01:41:02 Rolf Leggewie wrote:
+> Hi,
+>
+> OE has quite many patches that are just too valuable to keep to
+> ourselves.  In the spirit of our bug sprint weekends, I want to propose
+> patch-pushing weekends.  Maybe we can even replace the former with the
+> latter.  I'd like to propose the coming weekend as the first of this kind.
 
-Yes, 1.8.10 has lots of other fixes and improvements and I'd like to
-see .dev switch to it at some point. Once we do that there are some
-simplifications of code in OE.dev that can be made too.
+This is an awesome idea, we really need to get this started sooner than later.
 
-I appreciate the bitbake 1.8.6 -> 1.8.8 change was bumpy due to sqlite
-but 1.8.8 -> 1.8.10 should just be a drop in replacement so I don't see
-any reason not to...
+> To get everybody on the same page and to make sure this is a sustainable
+>  effort, I'd also like to propose some soft policy for patches committed
+> to OE.  This should help us quickly find those patches still in need of
+> some pushing.
+>
+>  1) first line in a patch starts with upstream: and goes on to list the
+>     URL where the bug has been reported upstream.
+>  2) further information can optionally be listed in the following fields
+>     * status: pending, accepted in XXX, rejected
+>     * origin: where the patch has been stolen ;-)
+>     * comment: any further detail such as description or reason for
+>                application of the patch
 
-Cheers,
+Sounds pretty good to me.
 
-Richard
-
-
+:M:
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
