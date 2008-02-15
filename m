@@ -1,41 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JQ3Ac-0000Lg-I7
-	for openembedded-devel@openembedded.org; Fri, 15 Feb 2008 17:12:26 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JQ3AL-0001Bk-8C
-	for openembedded-devel@openembedded.org; Fri, 15 Feb 2008 16:11:57 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 15 Feb 2008 16:11:57 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 15 Feb 2008 16:11:57 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 15 Feb 2008 17:11:47 +0100
-Message-ID: <fp4dk4$kgh$1@ger.gmane.org>
-References: <E1JPfb1-0006hO-Ll@linuxtogo.org>	<74d0deb30802140817g153c4fe3if16cd9eabe67c9f3@mail.gmail.com>	<200802151245.30040.mickey@vanille-media.de>	<fp48t2$i8$1@ger.gmane.org>
-	<47B5A9A4.3040400@dls.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <47B5A9A4.3040400@dls.net>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1JQ3FL-0000SR-TG
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Feb 2008 17:17:10 +0100
+Received: (qmail invoked by alias); 15 Feb 2008 16:16:48 -0000
+Received: from e178096112.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.96.112]
+	by mail.gmx.net (mp051) with SMTP; 15 Feb 2008 17:16:48 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/56l5Pj5P5Fu6bVBdoXY7iH4gdecs03WE4LZrw3T
+	CCL0hg3NYo4I+u
+Message-ID: <47B5BAEF.4010305@gmx.net>
+Date: Fri, 15 Feb 2008 17:16:47 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: theBohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: RFD: is bitbake 1.8.10 minimum supported standard? (was: [oe-commits] org.oe.dev anki: fix parse error)
+Subject: Mobilinux 4.0/5.0 experience
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,26 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2008 16:12:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Feb 2008 16:17:10 -0000
+X-Groupsio-MsgNum: 4150
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigBAF07352AFCAEFDD69AEFAA5"
 
-Mike (mwester) wrote:
-> Requiring a bitbake upgrade to accommodate a 
-> single-line in a single recipe that can easily be expressed in a fashion 
-> compatible with the existing bitbake versions installed, well that just 
-> seem to fly in the face of that earlier discussion.
+--------------enigBAF07352AFCAEFDD69AEFAA5
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Well, seen from that angle that seems to hold.  But that was not my
-angle and I hope I was not being mistaken in this regard.
+Hi,
+I got a request from someone who wants our Jalimo packages on Mobilinux.
 
-IIRC bitbake 1.8.10 has quite many bug fixes as well (RP?).  So, that is
-more what I was getting at.  AFAIK, .dev and bitbake were meant to be
-closely coupled.  IOW, don't run bleeding edge .dev with an old bitbake
-and expect things to work.
+Who knows a bit about this distribution? Can we already build packages
+for it like we do it for Maemo?
 
-I am open to extend the time until 1.8.8 is officially dead for .dev
-What do others think about this question of timing?
+If not who else is interested to have such a distro configuration?
+
+Regards
+Robert
 
 
+--------------enigBAF07352AFCAEFDD69AEFAA5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHtbrvG9cfwmwwEtoRCKEsAJ9Tn4lHD8SXj5/2tbPImVhI2nkdVwCfXMjT
+Q4GhS+xzQ2S/oK3XR5Are5U=
+=qxzC
+-----END PGP SIGNATURE-----
+
+--------------enigBAF07352AFCAEFDD69AEFAA5--
