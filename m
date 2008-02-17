@@ -1,34 +1,27 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [195.121.247.7] (helo=smtp16.wxs.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JQqYJ-0003mv-9B
-	for openembedded-devel@openembedded.org; Sun, 17 Feb 2008 21:56:01 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1HKtPcg032340
-	for <openembedded-devel@openembedded.org>; Sun, 17 Feb 2008 20:55:25 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 32309-02 for <openembedded-devel@openembedded.org>;
-	Sun, 17 Feb 2008 20:55:21 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1HKtG13032319
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 17 Feb 2008 20:55:16 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
+	(envelope-from <gerwin@vanderkruis.net>) id 1JQqdI-0003sO-0d
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Feb 2008 22:01:09 +0100
+Received: from battlestation.lan (ip5457b30e.direct-adsl.nl [84.87.179.14])
+	by smtp16.wxs.nl
+	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006)) with
+	ESMTP id <0JWE00E05ICVX4@smtp16.wxs.nl> for
+	openembedded-devel@lists.openembedded.org; 
+	Sun, 17 Feb 2008 22:00:31 +0100 (CET)
+Date: Sun, 17 Feb 2008 22:00:31 +0100
+From: Gerwin van der Kruis <gerwin@vanderkruis.net>
+In-reply-to: <DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <200802172200.31272.gerwin@vanderkruis.net>
+Organization: GO-2K
+MIME-version: 1.0
+User-Agent: KMail/1.9.6 (enterprise 0.20070907.709405)
 References: <200802171526.21023.mickey@vanille-media.de>
-	<47B85DB0.2080905@gmx.net> <fpa0ut$cbd$1@ger.gmane.org>
 	<311E5157-C3B9-4890-90F0-CD7611030D52@vanille-media.de>
 	<DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
-Date: Sun, 17 Feb 2008 20:55:18 +0000
-Message-Id: <1203281718.8272.79.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 195.121.247.7
+X-SA-Exim-Mail-From: gerwin@vanderkruis.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -49,21 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2008 20:56:01 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Feb 2008 21:01:10 -0000
+Content-type: text/plain; charset=utf-8
+Content-transfer-encoding: 7BIT
+Content-disposition: inline
 
-On Sun, 2008-02-17 at 21:34 +0100, Michael Lauer wrote:
+On Sunday 17 February 2008 21:34:14 Michael Lauer wrote:
 > And now the attachment... ;)
 
-It looks really good, nice work!
+I can let this translate into chinese as well 
 
-Dare I ask if Poky could get a mention in the OE derived distros/users
-section? :)
+Looks good to me , I think an important point is that oe makes the maintanance 
+of the software of an embedded device much easier !!!
 
-Cheers,
+Regards, 
 
-Richard
+Gerwin
 
+
+-- 
+Gerwin@battlestation1(laptop)
 
 
