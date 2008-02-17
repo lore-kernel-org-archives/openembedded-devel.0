@@ -1,30 +1,34 @@
-Received: from [64.233.166.178] (helo=py-out-1112.google.com)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <acassis@gmail.com>) id 1JQlRt-0004Ur-9z
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <theBohemian@gmx.net>) id 1JQlXi-0004bO-01
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Feb 2008 16:29:07 +0100
-Received: by py-out-1112.google.com with SMTP id y77so1313110pyg.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Feb 2008 07:28:28 -0800 (PST)
-Received: by 10.142.201.3 with SMTP id y3mr3636162wff.120.1203262107886;
-	Sun, 17 Feb 2008 07:28:27 -0800 (PST)
-Received: by 10.142.127.2 with HTTP; Sun, 17 Feb 2008 07:28:27 -0800 (PST)
-Message-ID: <37367b3a0802170728r226edd39r5e8fd7c2f4fa869b@mail.gmail.com>
-Date: Sun, 17 Feb 2008 12:28:27 -0300
-From: "Alan Carvalho de Assis" <acassis@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080214155508.GA4163@deadlock.dhs.org>
+	Sun, 17 Feb 2008 16:35:06 +0100
+Received: (qmail invoked by alias); 17 Feb 2008 15:34:22 -0000
+Received: from e178090193.adsl.alicedsl.de (EHLO [192.168.4.101])
+	[85.178.90.193]
+	by mail.gmx.net (mp022) with SMTP; 17 Feb 2008 16:34:22 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18M5X54dRIMvVlrucdELC9ZLblC1dwh+Xs/WCO2w5
+	oP2YCBnvkBi0Xk
+Message-ID: <47B853FA.5060206@gmx.net>
+Date: Sun, 17 Feb 2008 16:34:18 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
 MIME-Version: 1.0
-References: <20080214155508.GA4163@deadlock.dhs.org>
-X-SA-Exim-Connect-IP: 64.233.166.178
-X-SA-Exim-Mail-From: acassis@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <foteat$i6s$1@ger.gmane.org>
+In-Reply-To: <foteat$i6s$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: theBohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: building uClinux using OE
+Subject: Re: [RFC] push those patches, push'em up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,57 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2008 15:29:08 -0000
+X-List-Received-Date: Sun, 17 Feb 2008 15:35:16 -0000
+X-Groupsio-MsgNum: 4187
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigDCB40929EAFE90A10FADBA5D"
+
+--------------enigDCB40929EAFE90A10FADBA5D
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hi Jin,
+Hi,
+while I like the idea I wonder what we do with patches taken from other
+famous distributions.
 
-2008/2/14, Sergey 'Jin' Bostandzhyan <jin@mediatomb.cc>:
+E.g. I like apt-get source <package> to see which flaws the Debianistas
+already found and worked-around/fixed and often just include their
+patches into OE. Since the Debian team is often interested to get their
+patches merged upstream, that means less work for us. :)
+
+Regards
+Robert
+
+Rolf Leggewie schrieb:
 > Hi,
-sic
->
-> uClibc is also already supported by OE, not sure if I would have to add
-> an option for uC-libc.
->
-Although uC-libc is not so "up to date" I think it can be important to
-device with small flash memory (like Netburn MOD5272) since it create
-smallest binary footprint.
+>=20
+> OE has quite many patches that are just too valuable to keep to
+> ourselves.  In the spirit of our bug sprint weekends, I want to propose=
 
-> So basically it seems that almost everything that is needed is already there.
->
-> What is missing?
->
-> - applying elf2flt processing to produced binaries
->
-> - have a way of knowing that the particular build is done for the uClinux
->   targets (maybe for some tweaks in .bb files if required or to apply patches
->   only when necessary, allthough ifdef __uClinux__ defines could be used)
->
-> - not sure what else?
->
-> I do not have any uClinux experience yet, and it seems to be quite difficult
-> to gather all the bits and pieces of information, so I'd appreciate comments
-> and suggestions, especially if you see that I am missing something.
->
-> I'd also be interested in your thoughts on what would be the best way to
-> integrate it into OE.
->
-
-Do you add all kernels supported by uClinux distro (2.0.x, 2.4.x and 2.6.x) ?
-
-I think your idea to add uClinux support on OE is fantastic!
-
-> Kind regards,
-> Jin
->
->
->
+> patch-pushing weekends.  Maybe we can even replace the former with the
+> latter.  I'd like to propose the coming weekend as the first of this ki=
+nd.
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+>=20
 
 
+
+--------------enigDCB40929EAFE90A10FADBA5D
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHuFP9G9cfwmwwEtoRCO8XAKCWXt47bA46lTvhHG7lwKYfWwK3NwCghClH
+bClnx2e8v/txnLQztTJRf7A=
+=F0TE
+-----END PGP SIGNATURE-----
+
+--------------enigDCB40929EAFE90A10FADBA5D--
