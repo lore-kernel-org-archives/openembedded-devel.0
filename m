@@ -1,31 +1,27 @@
-Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
-	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rod@whitby.id.au>) id 1JQsPA-0006KX-8m
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.68)
+	(envelope-from <thommycheck@gmx.de>) id 1JQsdN-0006W2-3T
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Feb 2008 23:54:42 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 33CFC916AD
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Feb 2008 17:54:05 -0500 (EST)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Sun, 17 Feb 2008 17:54:05 -0500
-X-Sasl-enc: MdAMKOdQlx4tLwf9nWQgr2ULQMIvAv7iBfHpidZpENi6 1203288844
-Received: from [192.168.76.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTP id 6F0DC2AA1B
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Feb 2008 17:54:04 -0500 (EST)
-Message-ID: <47B8BAEE.8010504@whitby.id.au>
-Date: Mon, 18 Feb 2008 09:23:34 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
+	Mon, 18 Feb 2008 00:09:26 +0100
+Received: (qmail invoked by alias); 17 Feb 2008 23:08:44 -0000
+Received: from BAA22f9.baa.pppool.de (EHLO [192.168.178.23]) [77.128.34.249]
+	by mail.gmx.net (mp042) with SMTP; 18 Feb 2008 00:08:44 +0100
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX18Rw745i+URCyucFC/Glnh3R2O9l9fe2aeVc299Sp
+	Ds01ugEZd5guPC
+Message-ID: <47B8BE7A.8090306@gmx.de>
+Date: Mon, 18 Feb 2008 00:08:42 +0100
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080109)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <200802171526.21023.mickey@vanille-media.de>	<47B85DB0.2080905@gmx.net>
 	<fpa0ut$cbd$1@ger.gmane.org>	<311E5157-C3B9-4890-90F0-CD7611030D52@vanille-media.de>
 	<DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
 In-Reply-To: <DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
-X-SA-Exim-Connect-IP: 66.111.4.27
-X-SA-Exim-Mail-From: rod@whitby.id.au
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: thommycheck@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -46,19 +42,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2008 22:54:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 17 Feb 2008 23:09:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Michael Lauer wrote:
-> And now the attachment... ;)
+Hi,
 
-s/recipies/recipes/
-s/5.000/5000/
+there should be more than one application in the "Dozens of productivity 
+applications like AbiWord, " line. Or the comma should be deleted.
 
-The shadow under the "Embedded" word in the OE logo tends to blur out
-the word - can it be made lighter (or make the word darker)?
+Regards,
+Thomas
 
--- Rod
+
 
 
