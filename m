@@ -1,32 +1,34 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+Received: from [209.85.128.185] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philipp.zabel@gmail.com>) id 1JQUIi-0008IW-Ox
+	(envelope-from <pmiscml@gmail.com>) id 1JQg8z-0001Hm-Sx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Feb 2008 22:10:29 +0100
-Received: by fg-out-1718.google.com with SMTP id 13so1035670fge.20
+	Sun, 17 Feb 2008 10:49:12 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so1535988fks.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Feb 2008 13:09:58 -0800 (PST)
-Received: by 10.82.187.2 with SMTP id k2mr8066750buf.16.1203196198111;
-	Sat, 16 Feb 2008 13:09:58 -0800 (PST)
-Received: by 10.82.118.18 with HTTP; Sat, 16 Feb 2008 13:09:58 -0800 (PST)
-Message-ID: <74d0deb30802161309tc81cbe4g47435374aadef465@mail.gmail.com>
-Date: Sat, 16 Feb 2008 22:09:58 +0100
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080216185445.22199031@widy.localdomain>
-MIME-Version: 1.0
-References: <E1JQBXb-0008Gs-HR@linuxtogo.org>
-	<200802161730.36669.openembedded@haerwu.biz>
-	<20080216185445.22199031@widy.localdomain>
-X-SA-Exim-Connect-IP: 72.14.220.156
-X-SA-Exim-Mail-From: philipp.zabel@gmail.com
+	Sun, 17 Feb 2008 01:48:39 -0800 (PST)
+Received: by 10.78.162.4 with SMTP id k4mr6697323hue.71.1203241719191;
+	Sun, 17 Feb 2008 01:48:39 -0800 (PST)
+Received: from widy.localdomain ( [88.231.76.37])
+	by mx.google.com with ESMTPS id d24sm1146622nfh.29.2008.02.17.01.48.37
+	(version=SSLv3 cipher=OTHER); Sun, 17 Feb 2008 01:48:37 -0800 (PST)
+Date: Sun, 17 Feb 2008 11:48:46 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-commits@lists.openembedded.org
+Message-ID: <20080217114846.0352fd91@widy.localdomain>
+In-Reply-To: <E1JQfDo-0001p4-TE@linuxtogo.org>
+References: <E1JQfDo-0001p4-TE@linuxtogo.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 209.85.128.185
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] org.oe.dev devimage 0.1: Up a usb0 on load, now that we're modular.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev h5000: ship all kernel-modules and at76_usb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,31 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Feb 2008 21:10:32 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+X-List-Received-Date: Sun, 17 Feb 2008 09:49:12 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-T24gRmViIDE2LCAyMDA4IDU6NTQgUE0sIFBhdWwgU29rb2xvdnNreSA8cG1pc2NtbEBnbWFpbC5j
-b20+IHdyb3RlOgo+IEhlbGxvLAo+Cj4gT24gU2F0LCAxNiBGZWIgMjAwOCAxNzozMDozNSArMDEw
-MAo+IE1hcmNpbiBKdXN6a2lld2ljeiA8b3BlbmVtYmVkZGVkQGhhZXJ3dS5iaXo+IHdyb3RlOgo+
-Cj4gPiBEbmlhIFNhdHVyZGF5LCAxNiBvZiBGZWJydWFyeSAyMDA4LCBwZmFsY29uIGNvbW1pdCBu
-YXBpc2GzOgo+ID4gPiBkZXZpbWFnZSAwLjE6IFVwIGEgdXNiMCBvbiBsb2FkLCBub3cgdGhhdCB3
-ZSdyZSBtb2R1bGFyLgo+ID4KPiA+ID4gK21vZHByb2JlIGdfZXRoZXIKPiA+ID4gK2lmY29uZmln
-IHVzYjAgMTkyLjE2OC4yLjIwMgo+ID4KPiA+IEkgYW0gY3VyaW91cyB3aGVuIHNvbWVvbmUgd2ls
-bCBwdXNoIHVzYjAgdG8gMTkyLjE2OC4zLjIwMi4uLiBQbGVhc2UKPiA+IHVzZSBuZXRiYXNlIHN0
-YW5kYXJkOiAxOTIuMTY4LjAuMjAyIGluIHlvdXIgcmVjaXBlLgo+Cj4gMTkyLjE2OC4wLjAvMjQs
-IDE5Mi4xNjguMS4wLzI0IGFyZSBub3QgZ29vZCBjaG9pY2VzIGFzIHRob3NlIGFyZQo+IG9mdGVu
-dGltZXMgcmVmZXIgdG8gZXhpc3RpbmcgbmV0d29ya3MgKHllcywgdGhvc2UgdmVuZG9ycyBsb3Zl
-IHRvIHVzZQo+ICJzdGFuZGFyZCIgdmFsdWVzIHRvbykuIDIgaXMgb2YgY291cnNlIG5vdCBnb29k
-IGVpdGhlciwgc29tZXRoaW5nIG1vcmUKPiByYW5kb20gc2hvdWxkIGJlIHVzZWQuIFdoaWNoIGV4
-YWN0bHkgc2hvdWxkIGJlIHN1YmplY3Qgb2YgUkZDLiAoQW5kCj4gbm8sIHRoaXMgaXMgbm90IHJl
-bGF0ZWQgdG8gbmV0YmFzZSB3aGljaCBvZmZlcnMgc29tZSB2YWx1ZSBmb3IgdXNlciB0bwo+IGVk
-aXQuIFRoaXMgb25lIGlzIG5vdCBzdXBwb3NlZCB0byBiZSBlZGl0YWJsZSBieSBlbmQgdXNlci4p
-CgpJIHdvbid0IGFyZ3VlIGZvciBvciBhZ2FpbnN0IGEgY2VydGFpbiB2YWx1ZSwgYmVjYXVzZSBu
-b25lIG9mIHRoZW0gaXMKYSBiZXR0ZXIgY2hvaWNlIHRoYW4gYW55IG90aGVyLgooSSB1c2Ugc3Vi
-bmV0cyAxOTIuMTY4LnguMC8yNCBmb3IgeCBpbiAxLDIsMyw0LDEwLDE3OCBmb3Igb3RoZXIKcHVy
-cG9zZXMgYWxyZWFkeSwgMCBpcyBmcmVlIGZvciB1c2IpLgpCdXQgcGxlYXNlIG1ha2UgdGhpcyBh
-bmQgdGhlIG5ldGJhc2Ugb25lIGhhdmUgdGhlIHNhbWUgdmFsdWUuCgpyZWdhcmRzClBoaWxpcHAK
+Hello,
+
+On Sun, 17 Feb 2008 09:50:04 +0100
+"koen commit" <openembedded-commits@lists.openembedded.org> wrote:
+
+> h5000: ship all kernel-modules and at76_usb
+> 
+> Author: koen@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 6448d171f98047531cbca187171b0d2bdd62a261
+> ViewMTN:
+> http://monotone.openembedded.org/revision/info/6448d171f98047531cbca187171b0d2bdd62a261
+> Files: 1
+> conf/machine/h5000.conf
+> Diffs:
+> 
+> +# Ship complete set of modules ('kernel-modules') for easier debug
+> purposes 
+> -MACHINE_EXTRA_RRECOMMENDS = " kernel-module-h5400-lcd \
+> +MACHINE_EXTRA_RRECOMMENDS = " kernel-modules \
+[]
+
+I hope that when debug purposes will finish, this will be removed,
+because it's not good at all, as more and more modules are being
+enabled, and there're already quite a few megs of them. Plus even just
+having some modules around will cause them load, taking away memory and
+potentially changing behavior (e.g., dropbear pulls ipv6 taking 200Kb+).
+
+P.S. For debugging purposes, there's devimage-image. It does include
+kernel-images for every machine. It also offers kind of clean room for
+testing, booting into raw shell with pristine overall kernel
+environment, but having most (the aim - as much as possible) needed
+tools at fingertips.
+
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
