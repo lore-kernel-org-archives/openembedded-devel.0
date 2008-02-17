@@ -1,26 +1,26 @@
-Received: from [64.233.166.182] (helo=py-out-1112.google.com)
+Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <sakoman@gmail.com>) id 1JQswz-00033i-Bn
+	(envelope-from <daniel@totalueberwachung.de>) id 1JQtH5-0003Wq-EL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2008 00:29:39 +0100
-Received: by py-out-1112.google.com with SMTP id y77so1435036pyg.28
+	Mon, 18 Feb 2008 00:50:25 +0100
+Received: from elara.dyn.totalueberwachung.de (unknown [192.168.0.61])
+	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by thebe.totalueberwachung.de (Postfix) with ESMTP id 25839D81AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Feb 2008 15:29:02 -0800 (PST)
-Received: by 10.35.117.5 with SMTP id u5mr5991134pym.56.1203290941939;
-	Sun, 17 Feb 2008 15:29:01 -0800 (PST)
-Received: by 10.35.52.10 with HTTP; Sun, 17 Feb 2008 15:29:01 -0800 (PST)
-Message-ID: <5e088bd90802171529l16abb491icf507adb0a354e87@mail.gmail.com>
-Date: Sun, 17 Feb 2008 15:29:01 -0800
-From: "Steve Sakoman" <sakoman@gmail.com>
+	Mon, 18 Feb 2008 00:59:17 +0100 (CET)
+Date: Mon, 18 Feb 2008 00:49:11 +0100
+From: Daniel Willmann <daniel@totalueberwachung.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
-MIME-Version: 1.0
+Message-ID: <20080218004911.28920242@elara.dyn.totalueberwachung.de>
+In-Reply-To: <311E5157-C3B9-4890-90F0-CD7611030D52@vanille-media.de>
 References: <200802171526.21023.mickey@vanille-media.de>
 	<47B85DB0.2080905@gmx.net> <fpa0ut$cbd$1@ger.gmane.org>
 	<311E5157-C3B9-4890-90F0-CD7611030D52@vanille-media.de>
-	<DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
-X-SA-Exim-Connect-IP: 64.233.166.182
-X-SA-Exim-Mail-From: sakoman@gmail.com
+X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.5; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 134.169.172.64
+X-SA-Exim-Mail-From: daniel@totalueberwachung.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -41,24 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2008 23:29:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sun, 17 Feb 2008 23:50:25 -0000
+X-Groupsio-MsgNum: 4204
+Content-Type: multipart/signed; boundary="Sig_/wMGfNM3HkPPLnXKBYzkV/oA";
+	protocol="application/pgp-signature"; micalg=PGP-SHA1
 
-If it isn't too late and you think it adds to the OE "story", you
-might mention that Gumstix Inc. is using OE as the development
-environment for its products.
+--Sig_/wMGfNM3HkPPLnXKBYzkV/oA
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Steve
+Hi,
 
-On Feb 17, 2008 12:34 PM, Michael Lauer <mickey@vanille-media.de> wrote:
-> And now the attachment... ;)
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+On Sun, 17 Feb 2008 21:31:33 +0100
+Michael Lauer <mickey@vanille-media.de> wrote:
 
+> Who could print 500 (if possible, in color) and bring it to FOSDEM?
 
+I'll see how many copies I can print out tomorrow.
+
+Regards,
+Daniel Willmann
+
+--Sig_/wMGfNM3HkPPLnXKBYzkV/oA
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.7 (GNU/Linux)
+
+iD8DBQFHuMf8Z2fhlIqbZ1gRAuvSAJ9tRvX5p0Dh7R9WcJ8mWyVSLhCPuwCfTBd1
+05J7yRrcMu20M2XK/cM+oAU=
+=YY7z
+-----END PGP SIGNATURE-----
+
+--Sig_/wMGfNM3HkPPLnXKBYzkV/oA--
