@@ -1,26 +1,22 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <thommycheck@gmx.de>) id 1JQnyj-0007qU-QY
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Feb 2008 19:11:07 +0100
-Received: (qmail invoked by alias); 17 Feb 2008 18:10:30 -0000
-Received: from BAA22f9.baa.pppool.de (EHLO [192.168.178.23]) [77.128.34.249]
-	by mail.gmx.net (mp056) with SMTP; 17 Feb 2008 19:10:30 +0100
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX1897tcE7ZE9tvZvMYuSivqO6bpJmz0qrOBPZv34pz
-	2Y865Ryx+9j/sr
-Message-ID: <47B87895.709@gmx.de>
-Date: Sun, 17 Feb 2008 19:10:29 +0100
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080109)
-MIME-Version: 1.0
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <openembedded@haerwu.biz>) id 1JQonU-00017Y-GW
+	for openembedded-devel@openembedded.org; Sun, 17 Feb 2008 20:03:34 +0100
+Received: (qmail 14187 invoked by uid 813007); 17 Feb 2008 19:02:58 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 17 Feb 2008 19:02:57 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Feb 2008 20:02:35 +0100
+User-Agent: KMail/1.9.7
 References: <200802171526.21023.mickey@vanille-media.de>
-	<47B85DB0.2080905@gmx.net>
-In-Reply-To: <47B85DB0.2080905@gmx.net>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: thommycheck@gmx.de
+In-Reply-To: <200802171526.21023.mickey@vanille-media.de>
+MIME-Version: 1.0
+Message-Id: <200802172002.36543.openembedded@haerwu.biz>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: openembedded@haerwu.biz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -41,16 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2008 18:11:08 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Feb 2008 19:03:34 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi,
+Dnia Sunday, 17 of February 2008, Michael 'Mickey' Lauer napisa=B3:
+> Hi folks,
+>
+> since it seems I'm the only one interested in PR material, there's no
+> point in waiting until someone else does it ;) I have attached a
+> proposal, please at least give me some input to make this a) include
+> the most important points and b) read like english.
 
-it might be worth to mention that we have mono as well.
+1. it is #oe not #openembedded
 
-Regards,
-Thomas
+2. we have over 5000 recipes now
+
+3. mention Qtopia in display subsystems/UI toolkits
+
+4. mention building software for external distributions like Maemo,=20
+OpenWRT
+
+I like layout and idea.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+               Beware of Programmers who carry screwdrivers.
+               		-- Leonard Brandwein
+
 
 
 
