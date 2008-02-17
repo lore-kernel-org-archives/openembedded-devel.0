@@ -1,27 +1,26 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.68)
-	(envelope-from <thommycheck@gmx.de>) id 1JQsdN-0006W2-3T
+Received: from [64.233.166.182] (helo=py-out-1112.google.com)
+	by linuxtogo.org with esmtp (Exim 4.68)
+	(envelope-from <sakoman@gmail.com>) id 1JQswz-00033i-Bn
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2008 00:09:26 +0100
-Received: (qmail invoked by alias); 17 Feb 2008 23:08:44 -0000
-Received: from BAA22f9.baa.pppool.de (EHLO [192.168.178.23]) [77.128.34.249]
-	by mail.gmx.net (mp042) with SMTP; 18 Feb 2008 00:08:44 +0100
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX18Rw745i+URCyucFC/Glnh3R2O9l9fe2aeVc299Sp
-	Ds01ugEZd5guPC
-Message-ID: <47B8BE7A.8090306@gmx.de>
-Date: Mon, 18 Feb 2008 00:08:42 +0100
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080109)
-MIME-Version: 1.0
+	Mon, 18 Feb 2008 00:29:39 +0100
+Received: by py-out-1112.google.com with SMTP id y77so1435036pyg.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Feb 2008 15:29:02 -0800 (PST)
+Received: by 10.35.117.5 with SMTP id u5mr5991134pym.56.1203290941939;
+	Sun, 17 Feb 2008 15:29:01 -0800 (PST)
+Received: by 10.35.52.10 with HTTP; Sun, 17 Feb 2008 15:29:01 -0800 (PST)
+Message-ID: <5e088bd90802171529l16abb491icf507adb0a354e87@mail.gmail.com>
+Date: Sun, 17 Feb 2008 15:29:01 -0800
+From: "Steve Sakoman" <sakoman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <200802171526.21023.mickey@vanille-media.de>	<47B85DB0.2080905@gmx.net>
-	<fpa0ut$cbd$1@ger.gmane.org>	<311E5157-C3B9-4890-90F0-CD7611030D52@vanille-media.de>
-	<DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
 In-Reply-To: <DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: thommycheck@gmx.de
+MIME-Version: 1.0
+References: <200802171526.21023.mickey@vanille-media.de>
+	<47B85DB0.2080905@gmx.net> <fpa0ut$cbd$1@ger.gmane.org>
+	<311E5157-C3B9-4890-90F0-CD7611030D52@vanille-media.de>
+	<DFC8A5E8-0436-401B-9DCF-558FA30642AA@vanille-media.de>
+X-SA-Exim-Connect-IP: 64.233.166.182
+X-SA-Exim-Mail-From: sakoman@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -42,18 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2008 23:09:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 17 Feb 2008 23:29:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+If it isn't too late and you think it adds to the OE "story", you
+might mention that Gumstix Inc. is using OE as the development
+environment for its products.
 
-there should be more than one application in the "Dozens of productivity 
-applications like AbiWord, " line. Or the comma should be deleted.
+Steve
 
-Regards,
-Thomas
-
-
+On Feb 17, 2008 12:34 PM, Michael Lauer <mickey@vanille-media.de> wrote:
+> And now the attachment... ;)
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
