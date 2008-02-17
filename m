@@ -1,22 +1,34 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1JQonU-00017Y-GW
-	for openembedded-devel@openembedded.org; Sun, 17 Feb 2008 20:03:34 +0100
-Received: (qmail 14187 invoked by uid 813007); 17 Feb 2008 19:02:58 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 17 Feb 2008 19:02:57 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Feb 2008 20:02:35 +0100
-User-Agent: KMail/1.9.7
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JQowo-0001K6-Ui
+	for openembedded-devel@openembedded.org; Sun, 17 Feb 2008 20:13:12 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JQowG-0003zj-Hu
+	for openembedded-devel@openembedded.org; Sun, 17 Feb 2008 19:12:36 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 17 Feb 2008 19:12:36 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 17 Feb 2008 19:12:36 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sun, 17 Feb 2008 20:12:30 +0100
+Message-ID: <fpa0ut$cbd$1@ger.gmane.org>
 References: <200802171526.21023.mickey@vanille-media.de>
-In-Reply-To: <200802171526.21023.mickey@vanille-media.de>
-MIME-Version: 1.0
-Message-Id: <200802172002.36543.openembedded@haerwu.biz>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: openembedded@haerwu.biz
+	<47B85DB0.2080905@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <47B85DB0.2080905@gmx.net>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -37,38 +49,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2008 19:03:34 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sun, 17 Feb 2008 19:13:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia Sunday, 17 of February 2008, Michael 'Mickey' Lauer napisa=B3:
-> Hi folks,
->
-> since it seems I'm the only one interested in PR material, there's no
-> point in waiting until someone else does it ;) I have attached a
-> proposal, please at least give me some input to make this a) include
-> the most important points and b) read like english.
+>  - can be used to build package for foreign (non OE-made) distributions
+> like Maemo, OpenWRT, ...
 
-1. it is #oe not #openembedded
-
-2. we have over 5000 recipes now
-
-3. mention Qtopia in display subsystems/UI toolkits
-
-4. mention building software for external distributions like Maemo,=20
-OpenWRT
-
-I like layout and idea.
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-               Beware of Programmers who carry screwdrivers.
-               		-- Leonard Brandwein
-
+Sharp ROM?  Not sure if that is still very important as a selling point
+for OE, though.  But I just "sold" it this week on exactly this proposition.
 
 
 
