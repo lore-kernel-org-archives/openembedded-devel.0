@@ -1,24 +1,29 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1JR6V6-0004Iv-LJ
-	for openembedded-devel@openembedded.org; Mon, 18 Feb 2008 14:57:46 +0100
-Received: (qmail 19873 invoked by uid 813007); 18 Feb 2008 13:57:03 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 18 Feb 2008 13:57:03 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <pmiscml@gmail.com>) id 1JR6ih-0004mx-BY
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Feb 2008 15:12:03 +0100
+Received: by nf-out-0910.google.com with SMTP id h3so552345nfh.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Feb 2008 06:11:07 -0800 (PST)
+Received: by 10.78.186.9 with SMTP id j9mr9071459huf.75.1203343866677;
+	Mon, 18 Feb 2008 06:11:06 -0800 (PST)
+Received: from widy.localdomain ( [88.231.76.37])
+	by mx.google.com with ESMTPS id m5sm7360628gve.11.2008.02.18.06.11.03
+	(version=SSLv3 cipher=OTHER); Mon, 18 Feb 2008 06:11:04 -0800 (PST)
+Date: Mon, 18 Feb 2008 16:11:33 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Feb 2008 14:56:37 +0100
-User-Agent: KMail/1.9.7
+Message-ID: <20080218161133.4729e068@widy.localdomain>
+In-Reply-To: <200802181456.38813.openembedded@haerwu.biz>
 References: <200802171526.21023.mickey@vanille-media.de>
 	<5e088bd90802171529l16abb491icf507adb0a354e87@mail.gmail.com>
 	<47B97588.5020807@balister.org>
-In-Reply-To: <47B97588.5020807@balister.org>
-MIME-Version: 1.0
-Message-Id: <200802181456.38813.openembedded@haerwu.biz>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: openembedded@haerwu.biz
+	<200802181456.38813.openembedded@haerwu.biz>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 64.233.182.190
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -39,32 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2008 13:57:46 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Mon, 18 Feb 2008 14:12:06 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia Monday, 18 of February 2008, Philip Balister napisa=B3:
+Hello,
 
-> In a more general sense, should we list hardware that we support?
+On Mon, 18 Feb 2008 14:56:37 +0100
+Marcin Juszkiewicz <openembedded@haerwu.biz> wrote:
 
-I am against it.=20
+> Dnia Monday, 18 of February 2008, Philip Balister napisa=C5=82:
+>=20
+> > In a more general sense, should we list hardware that we support?
+>=20
+> I am against it.=20
+>=20
+> We have machine configs which no one tests (like some of omap
+> devboards for example or progear) and adding new ones is quite easy.
+> Flyer already lists architectures available in OE (including avr32
+> which situation in .dev is not resolved yet(?)).
+>=20
+> And listing all machines will take half of page ;D
 
-We have machine configs which no one tests (like some of omap devboards=20
-for example or progear) and adding new ones is quite easy. Flyer already=20
-lists architectures available in OE (including avr32 which situation=20
-in .dev is not resolved yet(?)).
+It still might be worth adding that OE supports all of: 1) HW vendor
+development boards, 2) device prototypes IHV/research groups work on, 3)
+on- or close-to- market devices from vendors, 4) consumer-level devices
+with community support.
 
-And listing all machines will take half of page ;D
+Though it's pretty good without that too ;-).
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+>=20
+> --=20
+> JID: hrw-jabber.org
+> OpenEmbedded developer/consultant
+[]
 
-      catholic god himself invented autotools just for amusement
-      first there was the great flood, then the plague, now autotools
 
-
+--=20
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
