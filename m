@@ -1,23 +1,21 @@
 Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JR9Tf-00051t-4l
+	(envelope-from <mickey@vanille-media.de>) id 1JR9WD-00056Z-6M
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2008 18:08:28 +0100
+	Mon, 18 Feb 2008 18:11:07 +0100
 Received: from [192.168.1.15] (e180166148.adsl.alicedsl.de [85.180.166.148])
-	by drlauer-research.com (Postfix) with ESMTP id B5FF3584BEB
+	by drlauer-research.com (Postfix) with ESMTP id BFC56584BEA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2008 18:13:09 +0100 (CET)
-Message-Id: <9815A63F-028C-4BA6-8FA3-A8D732B02F6E@vanille-media.de>
+	Mon, 18 Feb 2008 18:15:47 +0100 (CET)
+Message-Id: <AC5B87E6-0096-4574-8104-DF276F43DA64@vanille-media.de>
 From: Michael Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0802180848u7914bc1dna2895d405f887bae@mail.gmail.com>
+In-Reply-To: <47B9BA73.9090108@balister.org>
 Mime-Version: 1.0 (Apple Message framework v919.2)
-Date: Mon, 18 Feb 2008 18:07:45 +0100
-References: <200802171526.21023.mickey@vanille-media.de>
-	<311E5157-C3B9-4890-90F0-CD7611030D52@vanille-media.de>
-	<20080218004911.28920242@elara.dyn.totalueberwachung.de>
-	<200802181612.25712.mickey@vanille-media.de>
-	<c384c5ea0802180848u7914bc1dna2895d405f887bae@mail.gmail.com>
+Date: Mon, 18 Feb 2008 18:10:23 +0100
+References: <200802171526.21023.mickey@vanille-media.de>	<5e088bd90802171529l16abb491icf507adb0a354e87@mail.gmail.com>	<47B97588.5020807@balister.org>
+	<200802181456.38813.openembedded@haerwu.biz>
+	<47B9BA73.9090108@balister.org>
 X-Mailer: Apple Mail (2.919.2)
 X-SA-Exim-Connect-IP: 78.47.116.26
 X-SA-Exim-Mail-From: mickey@vanille-media.de
@@ -41,30 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2008 17:08:28 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Feb 2008 17:11:08 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed; delsp=yes
+Content-Transfer-Encoding: quoted-printable
 
-Am 18.02.2008 um 17:48 schrieb Leon Woestenberg:
+Am 18.02.2008 um 18:03 schrieb Philip Balister:
 
-> Michael,
+> Marcin Juszkiewicz wrote:
+>> Dnia Monday, 18 of February 2008, Philip Balister napisa=B3:
+>>> In a more general sense, should we list hardware that we support?
+>> I am against it.
 >
-> On Feb 18, 2008 4:12 PM, Michael 'Mickey' Lauer <mickey@vanille-media.de 
-> > wrote:
->> On Monday 18 February 2008 00:49:11 Daniel Willmann wrote:
->> That would be cool. Please wait for the final version though, I  
->> want to take
->> some more comments into account.
->>
-> Not critical, but please use European spacing, not American.
-> That is, use word spacing only, not intercharacter spacing.
+> How about mentioning hw vendors that have shown support by supplying =20=
 
-Ah, that was actually an artefact of using center justification, which  
-does not make much sense for small columns like this. I have now  
-switched the main text to using ragged margins, this works better.
+> HW or by using OE in their products.
+>
+> I realize the flyer is basically full.
 
-Thanks.
+This, and my time slot for working on it ;)
+
+
+> I'm glad we have a start on the flyer, even if we haven't worked out =20=
+
+> all the issues. Updating an existing flyer is much easier than =20
+> starting from scratch.
+
+Right. We can iterate more after FOSDEM.
 
 :M:
+
+
 
 
