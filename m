@@ -1,23 +1,23 @@
 Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JR7ef-00023T-Hf
+	(envelope-from <mickey@vanille-media.de>) id 1JR7fs-000242-4A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2008 16:11:43 +0100
+	Mon, 18 Feb 2008 16:13:01 +0100
 Received: from andromeda (e180166148.adsl.alicedsl.de [85.180.166.148])
-	by drlauer-research.com (Postfix) with ESMTP id 626FE584394
+	by drlauer-research.com (Postfix) with ESMTP id ED460584394
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2008 16:16:24 +0100 (CET)
+	Mon, 18 Feb 2008 16:17:38 +0100 (CET)
 From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Feb 2008 16:11:10 +0100
+Date: Mon, 18 Feb 2008 16:12:25 +0100
 User-Agent: KMail/1.9.7
 References: <200802171526.21023.mickey@vanille-media.de>
 	<311E5157-C3B9-4890-90F0-CD7611030D52@vanille-media.de>
-	<47B8B09C.5070108@gmx.net>
-In-Reply-To: <47B8B09C.5070108@gmx.net>
+	<20080218004911.28920242@elara.dyn.totalueberwachung.de>
+In-Reply-To: <20080218004911.28920242@elara.dyn.totalueberwachung.de>
 MIME-Version: 1.0
-Message-Id: <200802181611.10978.mickey@vanille-media.de>
+Message-Id: <200802181612.25712.mickey@vanille-media.de>
 X-SA-Exim-Connect-IP: 78.47.116.26
 X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
@@ -40,27 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2008 15:11:43 -0000
+X-List-Received-Date: Mon, 18 Feb 2008 15:13:01 -0000
 Content-Type: text/plain;
   charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Sunday 17 February 2008 23:09:32 Robert Schuster wrote:
+On Monday 18 February 2008 00:49:11 Daniel Willmann wrote:
 > Hi,
 >
+> On Sun, 17 Feb 2008 21:31:33 +0100
+>
+> Michael Lauer <mickey@vanille-media.de> wrote:
 > > Who could print 500 (if possible, in color) and bring it to FOSDEM?
 >
-> if those companies/freelancers who want to print part of the batch could
-> add a sponsoring line below the text that would make it easier. :)
->
-> Ok, for that?
+> I'll see how many copies I can print out tomorrow.
 
-Sure!
+That would be cool. Please wait for the final version though, I want to take 
+some more comments into account.
 
-I'll do some further tweaks and will post the final version tomorrow.
+Thanks,
 
 :M:
-
 
 
