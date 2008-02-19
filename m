@@ -1,39 +1,37 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>)
-	id 1JRV7c-0004Kk-Eh; Tue, 19 Feb 2008 17:15:13 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1JGEKEY018333;
-	Tue, 19 Feb 2008 16:14:20 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18298-01; Tue, 19 Feb 2008 16:14:16 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1JGEDpL018323
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 19 Feb 2008 16:14:13 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20080219161100.02282dfe@widy.localdomain>
-References: <E1JRSFH-0007Gx-36@linuxtogo.org>
-	<20080219161100.02282dfe@widy.localdomain>
-Date: Tue, 19 Feb 2008 16:14:13 +0000
-Message-Id: <1203437653.21824.58.camel@dax.rpnet.com>
+	(envelope-from <daniel@totalueberwachung.de>) id 1JRY9z-0000IV-74
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Feb 2008 20:29:51 +0100
+Received: from themisto.orbit.homelinux.net (themisto.dyn.totalueberwachung.de
+	[192.168.0.7])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by thebe.totalueberwachung.de (Postfix) with ESMTP id AC48CD8071
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Feb 2008 20:38:43 +0100 (CET)
+Date: Tue, 19 Feb 2008 20:28:53 +0100
+From: Daniel Willmann <daniel@totalueberwachung.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080219202853.4995e3d4@themisto.orbit.homelinux.net>
+In-Reply-To: <4228D117-CF9B-46A9-832A-709DB38F6C0B@vanille-media.de>
+References: <200802171526.21023.mickey@vanille-media.de>
+	<5e088bd90802171529l16abb491icf507adb0a354e87@mail.gmail.com>
+	<47B97588.5020807@balister.org>
+	<200802181456.38813.openembedded@haerwu.biz>
+	<47B9BA73.9090108@balister.org>
+	<4228D117-CF9B-46A9-832A-709DB38F6C0B@vanille-media.de>
+X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.7; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 134.169.172.64
+X-SA-Exim-Mail-From: daniel@totalueberwachung.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] org.oe.dev package_ipkg.bbclass: Remove	uneeded line, the anonymous python function sets this only in the case its	needed (PACKAGES isnt empty)
+Subject: Re: FOSDEM (1 week left)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -47,34 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2008 16:15:13 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Feb 2008 19:29:52 -0000
+X-Groupsio-MsgNum: 4236
+Content-Type: multipart/signed; boundary="Sig_/cPxnpf=ZSDr0BIR/Yp4SDqw";
+	protocol="application/pgp-signature"; micalg=PGP-SHA1
 
-On Tue, 2008-02-19 at 16:11 +0200, Paul Sokolovsky wrote:
-> On Tue, 19 Feb 2008 14:10:51 +0100
-> > package_ipkg.bbclass: Remove uneeded line, the anonymous python
-> > function sets this only in the case its needed (PACKAGES isnt empty)
+--Sig_/cPxnpf=ZSDr0BIR/Yp4SDqw
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-> > --- classes/package_ipk.bbclass
-> > 1094aec718c676ccf9d8083a10b5fedde8494c1e +++
-> > classes/package_ipk.bbclass
-> > fdf9fdf2855198b24b017026dd3777995b2977d2 @@ -313,5 +313,4 @@
-> > do_package_write_ipk[dirs] = "${D}"
-> > bb.build.exec_func("do_package_ipk", d) } do_package_write_ipk[dirs]= "${D}" 
-> > -do_package_write_ipk[depends]="ipkg-utils-native:do_populate_staging" 
-> > addtask package_write_ipk before do_package_write after do_package
-> 
-> And still I somehow hit a case when for 'generic'-based distro there
-> was some trouble with that. Just FYI, I don't remember details. Will
-> retry later.
+On Mon, 18 Feb 2008 18:17:51 +0100
+Michael Lauer <mickey@vanille-media.de> wrote:
 
-If that is the case there is something wrong with the dependency chains
-and we need to identify what and fix it properly.
+> Final version now. Logo changed, ragged margins, some typos fixed. =20
+> NOTE: There is now a 15% transparent OE logo composited over the
+> full page, please check whether your PDF rasterizer honors this
+> setting, _before_ printing 1K or so ;) If you experience problems
+> printing this, I can remove it again.
 
-Cheers,
+After some wrestling with the 7 year old CUPS running on an even
+older HPUX in our university I've now printed a poster, a rather funny
+interpretation of the handout as well as 200 copies of it - correctly
+rendered.
+Half of these copies have the handout on the front and back because the
+printer didn't honor my Duplex=3DNone option or I'm stupid.
 
-Richard
+Regards,
+Daniel Willmann
 
+--Sig_/cPxnpf=ZSDr0BIR/Yp4SDqw
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.7 (GNU/Linux)
 
+iD8DBQFHuy34Z2fhlIqbZ1gRArNUAKCAEelD/vBBY/0KXsXjyC9DyW8AaQCgs4ec
+lrtcz0alDGrRSGorg25QX2E=
+=ajb4
+-----END PGP SIGNATURE-----
+
+--Sig_/cPxnpf=ZSDr0BIR/Yp4SDqw--
