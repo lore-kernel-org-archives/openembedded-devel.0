@@ -1,35 +1,33 @@
-Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
+Received: from [209.85.128.184] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <daniel@totalueberwachung.de>) id 1JRbT8-0000Rg-0z
+	(envelope-from <pmiscml@gmail.com>) id 1JRcM7-0005u0-BP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2008 00:01:48 +0100
-Received: from themisto.orbit.homelinux.net (themisto.dyn.totalueberwachung.de
-	[192.168.0.7])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by thebe.totalueberwachung.de (Postfix) with ESMTP id E3FAFD8071
+	Wed, 20 Feb 2008 00:58:37 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so2888109fks.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Feb 2008 00:10:41 +0100 (CET)
-Date: Wed, 20 Feb 2008 00:00:50 +0100
-From: Paperninja <daniel@totalueberwachung.de>
+	Tue, 19 Feb 2008 15:57:44 -0800 (PST)
+Received: by 10.82.174.20 with SMTP id w20mr15383750bue.21.1203465464361;
+	Tue, 19 Feb 2008 15:57:44 -0800 (PST)
+Received: from widy.localdomain ( [88.231.76.37])
+	by mx.google.com with ESMTPS id b33sm15142463ika.5.2008.02.19.15.57.41
+	(version=SSLv3 cipher=OTHER); Tue, 19 Feb 2008 15:57:42 -0800 (PST)
+Date: Wed, 20 Feb 2008 01:58:17 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080220000050.74834a8d@themisto.orbit.homelinux.net>
-In-Reply-To: <200802192112.30791.zecke@selfish.org>
-References: <200802171526.21023.mickey@vanille-media.de>
-	<4228D117-CF9B-46A9-832A-709DB38F6C0B@vanille-media.de>
-	<20080219202853.4995e3d4@themisto.orbit.homelinux.net>
-	<200802192112.30791.zecke@selfish.org>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.7; i686-pc-linux-gnu)
+Message-ID: <20080220015817.1e33f547@widy.localdomain>
+In-Reply-To: <E1JRbhB-0000nu-DN@linuxtogo.org>
+References: <E1JRbhB-0000nu-DN@linuxtogo.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 134.169.172.64
-X-SA-Exim-Mail-From: daniel@totalueberwachung.de
+X-SA-Exim-Connect-IP: 209.85.128.184
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: FOSDEM (1 week left)
+Subject: Re: [oe-commits] org.oe.dev - Ignore false toggle signals (work-around for OE#3390).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,39 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2008 23:01:48 -0000
-X-Groupsio-MsgNum: 4239
-Content-Type: multipart/signed; boundary="Sig_/fkC4QG8n/99BK_I5ZTJC=Xv";
-	protocol="application/pgp-signature"; micalg=PGP-SHA1
-
---Sig_/fkC4QG8n/99BK_I5ZTJC=Xv
+X-List-Received-Date: Tue, 19 Feb 2008 23:58:38 -0000
 Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Tue, 19 Feb 2008 21:12:30 +0100
-Holger Freyther <zecke@selfish.org> wrote:
+Hello,
 
-> On Tuesday 19 February 2008 20:28:53 Daniel Willmann wrote:
-> > On Mon, 18 Feb 2008 18:17:51 +0100
-> >
-> > Half of these copies have the handout on the front and back because
-> > the printer didn't honor my Duplex=3DNone option or I'm stupid.
->=20
-> A true Ninja would separate the pages with nothing but his hands. Are
-> you a true Ninja?
+On Wed, 20 Feb 2008 00:16:17 +0100
+"utx commit" <openembedded-commits@lists.openembedded.org> wrote:
 
-Just watch me at the oe booth :-)
+> - Ignore false toggle signals (work-around for OE#3390).
+> - Fixed default ALSA state for SL-Cxx00 (OE#2617).
+> - Do not alter incorrect mixer levels by zaurus-mixer-callback.
+> - Allow to disable rotation by touch ~/.norot.
+> - Fixed detection of panel_user.
+> 
+> Author: utx@openembedded.org
 
---Sig_/fkC4QG8n/99BK_I5ZTJC=Xv
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Disposition: attachment; filename=signature.asc
+Stanislav, congratulations on getting commit access to OE! There're few
+guidelines for developers at
+http://www.openembedded.org/wiki/Policies . In particular, adhering to
+http://www.openembedded.org/wiki/CommitPolicy allows for easy peer
+review and per-package commit search.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.7 (GNU/Linux)
+[]
 
-iD8DBQFHu1+lZ2fhlIqbZ1gRAofwAJ9Mck5Wqi0r+wouPGM0WVvbpGwdQgCcDa4N
-Jzx+EyhbRCtYKUf8+/YQ4LI=
-=PZKC
------END PGP SIGNATURE-----
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
---Sig_/fkC4QG8n/99BK_I5ZTJC=Xv--
+
