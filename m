@@ -1,47 +1,34 @@
-Received: from [213.91.4.211] (helo=bart.wifirst.net)
+Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JRRGR-0001WL-44
+	(envelope-from <pmiscml@gmail.com>) id 1JRRkD-0006ZK-DY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2008 13:08:01 +0100
-Received: from bart.wifirst.net (localhost [127.0.0.1])
-	by bart.wifirst.net (Postfix) with ESMTP id 1260D5FF8A
+	Tue, 19 Feb 2008 13:38:47 +0100
+Received: by fg-out-1718.google.com with SMTP id 13so2095618fge.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2008 13:07:10 +0100 (CET)
-Received: from bart.wifirst.net (localhost [127.0.0.1])
-	by bart.wifirst.net (Postfix) with ESMTP id 9EE945FFD7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2008 13:07:06 +0100 (CET)
-Received: from blini.bolloretelecom.eu (smtp.bolloretelecom.eu
-	[62.210.194.121])
-	by bart.wifirst.net (Postfix) with ESMTP id 84BA75FF8A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2008 13:07:06 +0100 (CET)
-Received: from [192.168.95.68] (unknown [192.168.95.68])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id 5416823E46
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2008 13:07:06 +0100 (CET)
-Message-ID: <47BAC66A.8090700@bolloretelecom.eu>
-Date: Tue, 19 Feb 2008 13:07:06 +0100
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.0.13pre) Gecko/20080208 Thunderbird/1.5.0.14pre
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1203419692.21824.35.camel@dax.rpnet.com>
-	<20080219113024.32ba3368@cimmeria>
-In-Reply-To: <20080219113024.32ba3368@cimmeria>
-X-Enigmail-Version: 0.94.2.0
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 213.91.4.211
-X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
+	Tue, 19 Feb 2008 04:37:58 -0800 (PST)
+Received: by 10.82.107.15 with SMTP id f15mr12399672buc.9.1203424678190;
+	Tue, 19 Feb 2008 04:37:58 -0800 (PST)
+Received: from widy.localdomain ( [88.231.76.37])
+	by mx.google.com with ESMTPS id z37sm14136313ikz.1.2008.02.19.04.37.53
+	(version=SSLv3 cipher=OTHER); Tue, 19 Feb 2008 04:37:57 -0800 (PST)
+Date: Tue, 19 Feb 2008 14:38:18 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-commits@lists.openembedded.org
+Message-ID: <20080219143818.7e62fa44@widy.localdomain>
+In-Reply-To: <E1JRMHZ-0002K4-Sk@linuxtogo.org>
+References: <E1JRMHZ-0002K4-Sk@linuxtogo.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 72.14.220.152
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE.dev roadworks notification
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev ipkg: Enable debian revision comparing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -55,37 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2008 12:08:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Feb 2008 12:38:47 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
+
+On Tue, 19 Feb 2008 07:48:49 +0100
+"rpurdie commit" <openembedded-commits@lists.openembedded.org> wrote:
+
+> ipkg: Enable debian revision comparing
+> 
+> Author: rpurdie@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: d4732f85d42b87e990dd3cdfed1c9d40f04ff5e8
+> ViewMTN:
+> http://monotone.openembedded.org/revision/info/d4732f85d42b87e990dd3cdfed1c9d40f04ff5e8
+> Files: 1
+> packages/ipkg/files/enable_debversion.patch
+> packages/ipkg/files/update_version_comparision.patch
+> packages/ipkg/ipkg-native_0.99.163.bb
+> packages/ipkg/ipkg.inc
+> packages/ipkg/ipkg_0.99.163.bb
+
+It's nice to see ipkg to be cleaned up, but I wonder how scalable is
+this? How this relates to opkg effort? I'm sure there's some plan,
+but I happen to not know about it (== it's wasn't mentioned on
+oe-devel), so would be nice to get some insight ;-).
 
 
-> My feeling is opt-out. That way you have to read the docs to get
-> out and that means you have to understand why you are swimming
-> upstream.
->
-> One of the most common problems in OE for beginners seems to be
-> building packages that conflict in staging. Having the no breaking
-> system be the default would be the best.
-I would also prefer to see packaged staging as the default.
-It will go a long way towards making builds deterministic as
-opposed to the current situation where you may or may not
-have cruft leftover in your staging directory, depending on
-what you built in the past.
+[]
 
-- --
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFHusZpCL1n3lVB9EYRApO1AJ4lgLwI5o9dVhYEgDMTAtiYv8UJJwCcCuF2
-Bo2NZKJ5CNw/9TdCaIanuUQ=3D
-=3D8yhs
------END PGP SIGNATURE-----
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
