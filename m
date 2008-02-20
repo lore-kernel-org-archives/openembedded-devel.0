@@ -1,31 +1,34 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <utx@penguin.cz>) id 1JRm0H-0001vt-9F
+	(envelope-from <pmiscml@gmail.com>) id 1JRmYQ-000761-Fz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2008 11:16:46 +0100
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id 7F59E628091;
-	Wed, 20 Feb 2008 11:15:46 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: Paul Sokolovsky <pmiscml@gmail.com>
-In-Reply-To: <20080220020418.1e4dda5a@widy.localdomain>
-References: <E1JRbhB-0000nu-DN@linuxtogo.org>
-	<20080220015817.1e33f547@widy.localdomain>
-	<20080220020418.1e4dda5a@widy.localdomain>
-Date: Wed, 20 Feb 2008 11:15:45 +0100
-Message-Id: <1203502545.6860.13.camel@hammer.suse.cz>
+	Wed, 20 Feb 2008 11:52:03 +0100
+Received: by fg-out-1718.google.com with SMTP id 13so2391151fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Feb 2008 02:51:04 -0800 (PST)
+Received: by 10.78.69.7 with SMTP id r7mr12981804hua.1.1203504664003;
+	Wed, 20 Feb 2008 02:51:04 -0800 (PST)
+Received: from widy.localdomain ( [88.231.76.37])
+	by mx.google.com with ESMTPS id z37sm15783329ikz.1.2008.02.20.02.51.02
+	(version=SSLv3 cipher=OTHER); Wed, 20 Feb 2008 02:51:03 -0800 (PST)
+Date: Wed, 20 Feb 2008 12:52:47 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080220125247.6e1319f4@widy.localdomain>
+In-Reply-To: <200802200859.39017.openembedded@haerwu.biz>
+References: <E1JRaSm-0003Nt-SZ@linuxtogo.org>
+	<200802200859.39017.openembedded@haerwu.biz>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-X-SA-Exim-Connect-IP: 82.119.242.94
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-SA-Exim-Connect-IP: 72.14.220.156
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] org.oe.dev - Ignore false toggle signals	(work-around for OE#3390).
+Subject: Re: [oe-commits] org.oe.dev ipkg-utils*: Re-add support for openwrt-style .ipk's.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,43 +42,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2008 10:16:47 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Feb 2008 10:52:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Paul Sokolovsky wrote:
+Hello,
 
-> > On Wed, 20 Feb 2008 00:16:17 +0100
-> > "utx commit" <openembedded-commits@lists.openembedded.org> wrote:
-> > 
-> > > - Ignore false toggle signals (work-around for OE#3390).
-> > > - Fixed default ALSA state for SL-Cxx00 (OE#2617).
-> > > - Do not alter incorrect mixer levels by zaurus-mixer-callback.
-> > > - Allow to disable rotation by touch ~/.norot.
-> > > - Fixed detection of panel_user.
-> > > 
-> > > Author: utx@openembedded.org
-> > 
-> > Stanislav, congratulations on getting commit access to OE! There're
-> > few guidelines for developers at
-> > http://www.openembedded.org/wiki/Policies . In particular, adhering to
-> > http://www.openembedded.org/wiki/CommitPolicy allows for easy peer
-> > review and per-package commit search.
+On Wed, 20 Feb 2008 08:59:37 +0100
+Marcin Juszkiewicz <openembedded@haerwu.biz> wrote:
 
-I seen bad formatting in http://monotone.openembedded.org/ and gathered
-bad format of the message. Further messages will be correct (I hope).
+> Dnia Tuesday, 19 of February 2008, pfalcon commit napisa=C5=82:
+> > ipkg-utils*: Re-add support for openwrt-style .ipk's.
+> > * There're two .ipk formats: one with ar top-level wrapping
+> > (essentially, .deb format, native OE format) and with tar.gz
+> > top-level wrap, used by OpenWRT and some tiny distros. When I did
+> > performance optimization work on ipkg-make-index, I just blocked
+> > support of tar.gz-style ipk's, as it was unclear if those are used
+> > in OE at all. Now support is readded, with the old code to handle
+> > them (i.e. not as optimal as ar-style ones).
+> > * This makes DISTRO=3Dopenwrt-sdk usable for producing compatible
+> > packages and deploy-feed for them. But there're still some issues to
+> > resolve before OE can be said to provide seamless support for
+> > building packages for OpenWRT.
+>=20
+> OpenWRT use tar.gz type but on device it handle both types. I am
+> using OpenWRT 'whiterussian' rc5 (last jffs2 one) and 'ar type'
+> packages generated by OE were working for me (ipkg 0.99.149 on
+> device).
+>=20
+> But I do not know how situation looks in Kamikaze (OpenWRT devel
+> tree).=20
 
-My current fixes were done long time ago and ported several times, so I
-no more had one patch per particular change. All future changes will
-follow the rule "each change as separate changeset".
+OpenWRT Kamikaze is for quite some time the latest
+production branch of OpenWRT, with at least 2 releases made for that
+(they use ubuntu versioning now too, so latest 7.09). They did a lot
+of /etc cleanup there, and we even can learn from them ;-). For example,
+I find it very convenient to use /etc/init.d/<service> enable/disable
+to add/remove service to autoload on boot ;-).
 
-Note that the policy is missing "Closing bugs policy". Bug was reported
-against Angstrom, now it is fixed in OE.dev. Should the bug be closed
-now, or after backporting the fix to stable Angstrom?
+Back to topic, .deb-style .ipk's didn't work for me with it.
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+> From what I see they indeed use old shell version of ipkg in
+> SDK.
 
+root@OpenWrt:~# which ipkg
+/usr/bin/ipkg
+root@OpenWrt:~# ipkg -version
+ipkg: version 0.99.162
+
+So, they either hacked it, or ..., or ... In either case, ipk's they
+ship are tar.gz-wrapped, and openwrt-sdk is intended to follow all
+official conventions, to be as much drop-in replacement for their
+buildroot as possible.
+
+
+I'd appreciate comments on ldconfig issue.
+
+
+
+
+--=20
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
