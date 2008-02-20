@@ -1,41 +1,37 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JRp99-0006w3-HA
-	for openembedded-devel@openembedded.org; Wed, 20 Feb 2008 14:38:10 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1KDb3oO031021;
-	Wed, 20 Feb 2008 13:37:03 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30892-05; Wed, 20 Feb 2008 13:36:59 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1KDar39031011
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 20 Feb 2008 13:36:53 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20080220131153.6dc67355@widy.localdomain>
-References: <20080216150111.3737b02b@widy.localdomain>
-	<74d0deb30802160739o7aafbbbdo4093d7c9ef38beb9@mail.gmail.com>
-	<20080216175242.724b75a6@widy.localdomain>
-	<20080220131153.6dc67355@widy.localdomain>
-Date: Wed, 20 Feb 2008 13:36:52 +0000
-Message-Id: <1203514612.8040.21.camel@dax.rpnet.com>
+	(envelope-from <pmiscml@gmail.com>) id 1JRpNa-00077F-Sz
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Feb 2008 14:53:01 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so4116505ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Feb 2008 05:52:01 -0800 (PST)
+Received: by 10.67.22.2 with SMTP id z2mr2557554ugi.1.1203515521413;
+	Wed, 20 Feb 2008 05:52:01 -0800 (PST)
+Received: from widy.localdomain ( [88.231.76.37])
+	by mx.google.com with ESMTPS id e1sm9103614ugf.34.2008.02.20.05.51.59
+	(version=SSLv3 cipher=OTHER); Wed, 20 Feb 2008 05:52:00 -0800 (PST)
+Date: Wed, 20 Feb 2008 15:53:39 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: Stanislav Brabec <utx@penguin.cz>
+Message-ID: <20080220155339.67aed5d4@widy.localdomain>
+In-Reply-To: <1203502545.6860.13.camel@hammer.suse.cz>
+References: <E1JRbhB-0000nu-DN@linuxtogo.org>
+	<20080220015817.1e33f547@widy.localdomain>
+	<20080220020418.1e4dda5a@widy.localdomain>
+	<1203502545.6860.13.camel@hammer.suse.cz>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 66.249.92.175
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Re: [Angstrom-devel] [RFC] Per-ANGSTROM_MODE caches for	Angstrom
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.dev - Ignore false toggle signals (work-around for OE#3390).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,57 +45,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2008 13:38:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 20 Feb 2008 13:53:01 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2008-02-20 at 13:11 +0200, Paul Sokolovsky wrote:
-> So, no objections? I'll add it then, and RFC adding to stable branch
-> too. I'd like to keep that extra check for ANGSTROM_MODE being set - it
-> at least consistent with existing MACHINE check.
+Hello,
 
-See below.
+On Wed, 20 Feb 2008 11:15:45 +0100
+Stanislav Brabec <utx@penguin.cz> wrote:
 
-> On Sat, 16 Feb 2008 17:52:42 +0200
-> Paul Sokolovsky <pmiscml@gmail.com> wrote:
+> Paul Sokolovsky wrote:
 > 
-> > > > --- conf/distro/include/angstrom.inc
-> > > > b86b952c90304d1fd39f1415f6af7f71d02e00df +++
-> > > > conf/distro/include/angstrom.inc
-> > > > e7921869d30b7e5df3fd39fbd4bec5d2495b5d31 @@ -12,6 +12,7 @@
-> > > > ANGSTROM_MODE ?= "glibc" # Can be "glibc", "eglibc" or "uclibc"
-> > > > ANGSTROM_MODE ?= "glibc"
-> > > >
-> > > > +CACHE = "${TMPDIR}/cache${@['', '/' +
-> > > > str(bb.data.getVar('ANGSTROM_MODE', d,
-> > > > 1))][bool(bb.data.getVar('ANGSTROM_MODE', d, 1))]}${@['', '/' +
-> > > > str(bb.data.getVar('MACHINE', d,
-> > > > 1))][bool(bb.data.getVar('MACHINE', d, 1))]}" DEPLOY_DIR =
-> > > > "${TMPDIR}/deploy/${ANGSTROM_MODE}" require
-> > > > conf/distro/include/angstrom-${ANGSTROM_MODE}.inc
+> > > On Wed, 20 Feb 2008 00:16:17 +0100
+> > > "utx commit" <openembedded-commits@lists.openembedded.org> wrote:
 > > > 
-> > > +1, for the  idea, but why not just
-> > > ${TMPDIR}/cache/${ANGSTROM_MODE} ?
-> > 
-> > Well, nice question ;-). To be generic and putable even in
-> > bitbake.conf ;-)
+> > > > - Ignore false toggle signals (work-around for OE#3390).
+> > > > - Fixed default ALSA state for SL-Cxx00 (OE#2617).
+> > > > - Do not alter incorrect mixer levels by zaurus-mixer-callback.
+> > > > - Allow to disable rotation by touch ~/.norot.
+> > > > - Fixed detection of panel_user.
+> > > > 
+> > > > Author: utx@openembedded.org
+> > > 
+> > > Stanislav, congratulations on getting commit access to OE!
+> > > There're few guidelines for developers at
+> > > http://www.openembedded.org/wiki/Policies . In particular,
+> > > adhering to http://www.openembedded.org/wiki/CommitPolicy allows
+> > > for easy peer review and per-package commit search.
+> 
+> I seen bad formatting in http://monotone.openembedded.org/ and
+> gathered bad format of the message. Further messages will be correct
+> (I hope).
+> 
+> My current fixes were done long time ago and ported several times, so
+> I no more had one patch per particular change. All future changes will
+> follow the rule "each change as separate changeset".
+> 
+> Note that the policy is missing "Closing bugs policy". Bug was
+> reported against Angstrom, now it is fixed in OE.dev. Should the bug
+> be closed now, or after backporting the fix to stable Angstrom?
 
-Please use the latter form, not the one with all the python in it. You
-also need MACHINE in there.
+The idea of Angstrom Release bugs (rooted at
+http://bugs.openembedded.org/show_bug.cgi?id=1573 ) is to provide list
+of known issues to the end user. End user sees only release images and
+feeds. So, if bug is fixed in source, but corresponding package hasn't
+made to feeds, then per above idea (hopefully pretty obvious and
+no-nonsense), the bug should not be closed.
 
-> > > And I don't understand why you need to include MACHINE there.
-> > > I've never needed to rebuild caches when switching MACHINE, and I
-> > > shouldn't have to.
-> > 
-> > Heh, multimachine puts it there ;-)
+It practice that means that developers should annotate the bug with
+"pushed to .dev", "RFCed for merging to stable", "pushed to stable",
+and ultimately, "package in feed, closing".
 
-In order to set MACHINE on the commandline, you need MACHINE in CACHE
-and bitbake.conf does that for exactly this reason.
+There're possibly other ways to make process more explicit, for
+example, there're FIXED and CLOSED status in bugzilla, so it could be
+FIXED when fix committed to main branch, and closed once fix is
+confirmed to have solved the issue on user system. But CLOSED is not
+used in existing OE bug process, and I'm in no authority to propose it
+specifically for Angstrom - even the workflow above is pretty complex,
+not really followed much and used to raise misunderstandings with other
+bug maintainers.
 
-Cheers,
+> 
+> -- 
+> Stanislav Brabec
+> http://www.penguin.cz/~utx/zaurus
+> 
 
-Richard
 
 
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
