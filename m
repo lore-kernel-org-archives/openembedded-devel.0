@@ -1,32 +1,34 @@
-Received: from [209.85.128.187] (helo=fk-out-0910.google.com)
+Received: from [72.14.246.241] (helo=ag-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JRe0b-00085j-4L
+	(envelope-from <xjqian@gmail.com>) id 1JRfP0-0005JS-7y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2008 02:44:30 +0100
-Received: by fk-out-0910.google.com with SMTP id 18so2925956fks.12
+	Wed, 20 Feb 2008 04:13:48 +0100
+Received: by ag-out-0708.google.com with SMTP id 31so3777881agc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2008 17:43:37 -0800 (PST)
-Received: by 10.82.186.5 with SMTP id j5mr13867337buf.12.1203471814364;
-	Tue, 19 Feb 2008 17:43:34 -0800 (PST)
-Received: from widy.localdomain ( [88.231.76.37])
-	by mx.google.com with ESMTPS id z37sm15313789ikz.1.2008.02.19.17.43.32
-	(version=SSLv3 cipher=OTHER); Tue, 19 Feb 2008 17:43:32 -0800 (PST)
-Date: Wed, 20 Feb 2008 03:44:07 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
+	Tue, 19 Feb 2008 19:12:53 -0800 (PST)
+Received: by 10.100.168.18 with SMTP id q18mr15923422ane.47.1203477173811;
+	Tue, 19 Feb 2008 19:12:53 -0800 (PST)
+Received: from ?192.168.1.129? ( [71.16.230.132])
+	by mx.google.com with ESMTPS id o29sm14495536elf.18.2008.02.19.19.12.52
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 19 Feb 2008 19:12:52 -0800 (PST)
+Message-ID: <47BB9AB1.4040804@gmail.com>
+Date: Tue, 19 Feb 2008 22:12:49 -0500
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20080220034407.649326ee@widy.localdomain>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.128.187
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+References: <1203419692.21824.35.camel@dax.rpnet.com>
+In-Reply-To: <1203419692.21824.35.camel@dax.rpnet.com>
+X-SA-Exim-Connect-IP: 72.14.246.241
+X-SA-Exim-Mail-From: xjqian@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Issue: ldconfig postinst and uclibc
+Subject: Re: OE.dev roadworks notification
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,29 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2008 01:44:31 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Wed, 20 Feb 2008 03:13:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+On 02/19/2008 06:14 AM, Richard Purdie wrote:
+> On a similar note, I'll be doing some work on packaged staging over the
+> next few weeks. Again, its been agreed that its in the interests of
+> OE.dev on many occasions and now I/we have a chance for action which I'm
+> planing to make good use of it. 
 
-It appears that ldconfig is not available / optional for uclibc. And
-yet currently package.bbclass adds calling it unconditionally to lib
-packages' postinst, which causes error messages during install.
+The following bug (typo) was detected only with INHERIT += 
+"packaged-staging2", which is good, however the error message is too 
+misleading to decipher. As you are on it, you may want to take a look to 
+see if there is a way to provide a saner error message.
 
-Two solutions:
+http://lists.linuxtogo.org/pipermail/openembedded-commits/2008-January/011276.html
 
-1. Add corresponding logic to package.bbclass. But it appears to be
-hacky to encode such facts there.
-
-2. Use "[ -x /sbin/ldconfig ] && /sbin/ldconfig" in postinst. Note:
-currently ldconfig is called without a path.
-
-
-Thoughts?
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+Regards
+Gordon
 
 
