@@ -1,34 +1,35 @@
-Received: from [64.233.182.186] (helo=nf-out-0910.google.com)
+Received: from [66.249.92.172] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JSExY-0004oW-89
+	(envelope-from <pmiscml@gmail.com>) id 1JSK5h-0008E0-QB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2008 18:11:52 +0100
-Received: by nf-out-0910.google.com with SMTP id h3so111417nfh.22
+	Thu, 21 Feb 2008 23:40:37 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so4602276ugd.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2008 09:11:43 -0800 (PST)
-Received: by 10.78.204.20 with SMTP id b20mr16143485hug.64.1203613902840;
-	Thu, 21 Feb 2008 09:11:42 -0800 (PST)
+	Thu, 21 Feb 2008 14:40:27 -0800 (PST)
+Received: by 10.67.30.6 with SMTP id h6mr1560939ugj.6.1203633627530;
+	Thu, 21 Feb 2008 14:40:27 -0800 (PST)
 Received: from widy.localdomain ( [78.164.227.166])
-	by mx.google.com with ESMTPS id h1sm347176nfh.20.2008.02.21.09.11.41
-	(version=SSLv3 cipher=OTHER); Thu, 21 Feb 2008 09:11:42 -0800 (PST)
-Date: Thu, 21 Feb 2008 19:13:27 +0200
+	by mx.google.com with ESMTPS id e23sm509082ugd.56.2008.02.21.14.40.21
+	(version=SSLv3 cipher=OTHER); Thu, 21 Feb 2008 14:40:22 -0800 (PST)
+Date: Fri, 22 Feb 2008 00:42:09 +0200
 From: Paul Sokolovsky <pmiscml@gmail.com>
-To: angstrom-distro-devel@linuxtogo.org
-Message-ID: <20080221191327.63b6bc9a@widy.localdomain>
-In-Reply-To: <47BCEECA.9000102@gmail.com>
-References: <47BCEECA.9000102@gmail.com>
+To: Using OE <openembedded-users@lists.openembedded.org>
+Message-ID: <20080222004209.1e620727@widy.localdomain>
+In-Reply-To: <e5e16330802211323s32c8d7d4g8456d5192740344b@mail.gmail.com>
+References: <1203623870.13925.82.camel@MP-L057.nanofluidics.com>
+	<e5e16330802211323s32c8d7d4g8456d5192740344b@mail.gmail.com>
 X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 64.233.182.186
+X-SA-Exim-Connect-IP: 66.249.92.172
 X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Angstrom-devel] [RFC] Streamline the process of getting fixes from .dev --> feed
+Subject: Re: x86_64 multilib system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,98 +43,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2008 17:11:52 -0000
+X-List-Received-Date: Thu, 21 Feb 2008 22:40:37 -0000
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
 Hello,
 
-On Wed, 20 Feb 2008 22:23:54 -0500
-Junqian Gordon Xu <xjqian@gmail.com> wrote:
+On Thu, 21 Feb 2008 22:23:20 +0100
+"Kees Jongenburger" <kees.jongenburger@gmail.com> wrote:
 
-> As invoked in the other discussion about the landmark for closing
-> bug, I think the current process of getting fixes from .dev -->
-> stable --> feed leaves a lot to be desired. Here is my 2 cents.
+> Hello Casey,
 > 
-> 1. We should make the process as transparent as possible to everybody 
-> (even users, so they will hate Angstrom dev less or at least respect
-> us as organized mob). Koen and Paul have sent out couple of emails
-> about this. However I don't see a summary in the Angstrom/Developer
-> page. If I had the rw access to the page, I would have at least put
-> the following information in there:
+> I played with getting mamona to compile "native" on my amd64 machine
+> (I was quite far but gave up at one point). Here a some notes that
+> might or might not be helpfull
+> they where certainly not checked against somebody with positive OE
+> karma. but who knows
 
-If I had, I'd probably do that too, even though I think that current
-process is still an RFC, subject for assessment how performant it is,
-and open for proposals for improvements. So, IMHO it would be to just
-open a usual wiki page for now.
+Thanks for the patches below, but for full use from them they'd rather
+be submitted to bugtracker where they have more chance to improve
+situation.
 
 > 
-> [1] send email with subject [Review] to angstrom-devel list with 
-> cumulative diff:
 > 
-> mtn diff packages/<path> -r $(mtn head -b
-> org.openembedded.angstrom-2007.12-stable | tail -n1 | awk '{print
-> $1}') -r $(mtn head -b org.openembedded.dev| tail -n1 | awk '{print
-> $1}')
+> in kernel-arch I I removed the "," between x81_64 and i386 I think
+> this was a bug causing
+> some flags to not be set correctly
 > 
-> [2] Once approved by at least two core dev, 
+> ============================================================
+> --- classes/kernel-arch.bbclass
+> 2c3267a2a81eb0cb438cf4a9c97de95535bedf94 +++
+> classes/kernel-arch.bbclass 7ea458d4d49227e7004dac30da9b196af78b7adc
+> @@ -5,7 +5,7 @@ valid_archs = "alpha cris ia64 \ #
+> 
+>  valid_archs = "alpha cris ia64 \
+> -               x86_64,i386 \
+> +               x86_64 i386 \
+>                 m68knommu m68k ppc powerpc ppc64  \
+>                sparc sparc64 \
+>                 arm  arm26 \
 
-This is crucial point. Original post from Koen is here:
-http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2007-December/001249.html
 
-Quoting as is:
-======
-org.openembedded.angstrom-2007.12-stable
+Committed.
 
-  which will only get changes that have been approved by at least 2
-angstrom developers, anything else will get disapproved. Sounds ok?
-======
-
-*Angstrom developers*, not *core angstrom developers*. And that's how I
-used to interpret it during this time already. Because otherwise we
-have gross chore and bottleneck. So who's "angstrom developer"? Anyone
-who is interested in Angstrom stable and follows this procedure, IMHO.
-In particular, I consider Altboot patches to be ready for merge,
-approved by yourself and Koen.
-
-Note that "approve" means "sign-off", so parties should perform all due
-diligence on reviewing changes they ack. Remember, all this bureaucracy
-here is to ensure that we know answers to questions "Does it build?"
-and "Does it work?" at all times, and that answer was "Yes".
-
-Well, as not many people yet fully get used to this procedure, it would
-be nice if we worked in "at least 1 core dev should ack" mode for
-the time being, but long-term, it would be nice to minimize bus- and
-wait- factors.
-
-> update the BACKPORTS.txt
-> in the stable branch. This file holds all the revision from .dev we
-> want in this stable branch. To quickly lookup any revision from
-> below, use http://www.openembedded.org/viewmtn/revision/info/<rev>
 > 
-> [Koen and Paul, please help complete the following. I know these have 
-> been mentioned before in this list, but I forgot exactly which files
-> and what policies]
+> glibc (I think the scripts where not ready for x86_64 ) they do some
+> magic with the header files but not in this situation (therefore I
+> pointed to the "running" headers
+> ============================================================
+> --- packages/glibc/glibc_2.6.1.bb
+> 1753994ceec7d4c54e81239f486d92052e46c752 +++
+> packages/glibc/glibc_2.6.1.bb
+> b10038068973152df71cda0d5b20ba23c8db5dbd @@ -80,7 +80,7 @@
+> EXTRA_OECONF = "--enable-kernel=${OLDEST --without-cvs
+> --disable-profile --disable-debug --without-gd \ --enable-clocale=gnu
+> \ --enable-add-ons=${GLIBC_ADDONS} \
+> -               --with-headers=${STAGING_INCDIR} \
+> +               --with-headers=${STAGING_DIR_TARGET}/kernel/include \
+>                 --without-selinux \
+>                 ${GLIBC_EXTRA_OECONF}"
 > 
-> [3] how to update which packages to be added to the feed and autobuilt
->      how to update which machine/images to be autobuilt.
->      where are the scripts located to initiate the autobuilding
-> process
+> I was missing a site file for the amd64 therefore I copied pasted
+> until it all worked
+> ============================================================
+> --- site/ix86-common    d8fa481822d52ac3e2192ceabc012ca07c564206
+> +++ site/ix86-common    cf3e197d35f354997be356fc45deb95c81d66aff
+> @@ -262,3 +262,5 @@ ac_cv_have_abstract_sockets=${ac_cv_have
 > 
-> [4] what's the frequency of refreshing the feed (I am not aware of
-> this being mentioned, but preferably as frequent as possible).
->      what's the frequency of autobuilding -rX machin/image. If I 
-> remember correctly, this is every other week.
+>  #dbus
+>  ac_cv_have_abstract_sockets=${ac_cv_have_abstract_sockets=yes}
+> +
+> +ac_cv_func_shmat=${ac_cv_func_shmat=no}
+> ============================================================
+> --- site/x86_64-linux   05744d78da6f03499c0638db01b23ffc637b18b2
+> +++ site/x86_64-linux   e102617a308de8f8fe7d7bfd738b26bfb0b0426a
+> @@ -1,8 +1,10 @@ ac_cv_func_malloc_0_nonnull=${ac_cv_func
+>  ac_cv_func_getpgrp_void=${ac_cv_func_getpgrp_void=yes}
+>  ac_cv_func_getpwuid_r=${ac_cv_func_getpwuid_r=yes}
+>  ac_cv_func_lstat_dereferences_slashed_symlink=${ac_cv_func_lstat_dereferences_slashed_symlink=yes}
+>  ac_cv_func_lstat_empty_string_bug=${ac_cv_func_lstat_empty_string_bug=no}
+>  ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
+> +ac_cv_func_realloc_works=${ac_cv_func_realloc_works=yes}
+> +ac_cv_func_realloc_0_nonnull=${ac_cv_func_realloc_0_nonnull=yes}
+>  ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
+>  ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+>  ac_cv_func_setpgrp_void=${ac_cv_func_setpgrp_void=yes}
+> @@ -48,6 +50,7 @@ glib_cv_sane_realloc=${glib_cv_sane_real
+>  glib_cv_long_long_format=${glib_cv_long_long_format=ll}
+>  glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=yes}
+>  glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
+> +lf_cv_sane_realloc=${lf_cv_sane_realloc=yes}
+>  glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=40}
+>  glib_cv_sizeof_intmax_t=${glib_cv_sizeof_intmax_t=8}
+>  glib_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=8}
+> @@ -78,5 +81,14 @@ am_cv_func_working_getline=${am_cv_func_
+>  # gettext
+>  am_cv_func_working_getline=${am_cv_func_working_getline=yes}
 > 
-> [5] etc...
+> +#gstreamer
+> +as_cv_unaligned_access=${as_cv_unaligned_access=no}
+> +
+>  #gcc
+>  ac_cv_lib_m_sin=${ac_cv_lib_m_sin=yes}
+> +
+> +apr_cv_process_shared_works=${apr_cv_process_shared_works=no}
+> +apr_cv_tcp_nodelay_with_cork=${apr_cv_tcp_nodelay_with_cork=yes}
+> +
+> +dpkg_cv_va_copy=${ac_cv_va_copy=yes}
+> +dpkg_cv___va_copy=${ac_cv___va_copy=yes}
 > 
-> 2. The current review process is not efficient as either, depending
-> on whether core dev's availability, their interests and experiences
-> on the particular fixes, etc. But I have no better suggestions.
-> Comments are welcome.
 > 
-> Regards
-> Gordon
+> 
 
 []
 
