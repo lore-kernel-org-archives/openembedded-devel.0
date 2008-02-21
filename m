@@ -1,36 +1,41 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JS8YV-0006DV-8G
-	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 11:21:43 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1LALR33002243
-	for <openembedded-devel@openembedded.org>; Thu, 21 Feb 2008 10:21:27 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 01988-08 for <openembedded-devel@openembedded.org>;
-	Thu, 21 Feb 2008 10:21:22 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1LALGZ9002236
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Thu, 21 Feb 2008 10:21:17 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Thu, 21 Feb 2008 10:21:16 +0000
-Message-Id: <1203589276.9329.6.camel@dax.rpnet.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JS97G-00031n-0m
+	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 11:57:28 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JS973-0001eV-R3
+	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 10:57:13 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 21 Feb 2008 10:57:13 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 21 Feb 2008 10:57:13 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 21 Feb 2008 11:57:06 +0100
+Message-ID: <fpjle1$p10$1@ger.gmane.org>
+References: <E1JRbhB-0000nu-DN@linuxtogo.org>	<20080220015817.1e33f547@widy.localdomain>	<20080220020418.1e4dda5a@widy.localdomain>	<1203502545.6860.13.camel@hammer.suse.cz>	<20080220155339.67aed5d4@widy.localdomain>	<fphs3l$jcj$1@ger.gmane.org>
+	<20080220212639.6e24e7ab@widy.localdomain>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <20080220212639.6e24e7ab@widy.localdomain>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: RFC: Library file extensions
+Subject: Re: what is a fixed bug?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,72 +49,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2008 10:21:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 Feb 2008 10:57:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Junqian Gordon Xu wrote:
+> I prefer this approach to opening a separate dup ticket.
 
-As some may have gathered I made some experiments with using Poky to
-cross compile things to run on the iPodTouch which is arm-apple-darwin.
-THe good news is they were successful however Darwin creates some
-interesting challenges for OE, one of them is the dynamic libraries
-being called *.dylib, not *.so.
+This will and has led to problems in that some A* dev has in the past
+repeatedly closed valid bugs as invalid because his interpration was
+"not an A* RC bug".  The bug of course was a perfectly valid one, if not
+for A* (they are free to choose) it was for OE.
 
-I've had the following patch in Poky to assist with this problem. It
-would need to be rolled out over all .bb files with custom FILES
-eventually but it has the advantage that can happen over time so the
-question is more whether this is a good idea and whether the approach is
-acceptable?
+Furthermore, I don't see why my already long list of open bugs shall be
+made any longer (I have a search function defined in bugzilla) without
+merit.  Essentially, Angstrom is demanding that only they can close bugs
+because how is anyone to know whether A* intends to push a fix into
+stable?  This aggressive behaviour of Angstrom is essentially what I
+mean by "usurpation of bugs.oe.net".  Why should the folks interested in
+OE-derived SharpROM not be afforded that luxury of "don't you dare to
+close bugs unless you have the OK from us"?
 
-We would probably hit the same issue with windows .dll files and this
-solution would solve that too.
+I am sorry, but I have to maintain that Distro bugs/tasks and OE
+bugs/tasks are different animals and while our tools are not ideal to
+reflect this, we need to properly represent that.  The only way I see to
+do that is to have two tickets which is right, it is two issues.  The
+chain is "fix it in dev" and then Angstrom or any other distro not made
+from .dev can decide whether they want to propagate the fix.
 
-Comments welcome...
+Cloning a ticket and titling it with "push bug #123 into A* stable" is 5
+seconds work at most, link back to original bug automatically included.
+ Too much?
 
-Cheers,
+Paul wrote:
+> that's simply how it is, and let's not go thru that again.
 
-Richard
+My impression was that we had already established that bugs.oe.net was
+not Angstrom property.  Does not look like your interpretation.
 
-#
-# old_revision [5fb8cfe19138b98226fe92044d302c9379dad84d]
-#
-# patch "conf/bitbake.conf"
-#  from [a605bd5d4d48054b72d21c74a922a9a0a2d12a76]
-#    to [1655c26111af10134f07eafd1e29ef00d8cd8f5f]
-#
-============================================================
---- conf/bitbake.conf	a605bd5d4d48054b72d21c74a922a9a0a2d12a76
-+++ conf/bitbake.conf	1655c26111af10134f07eafd1e29ef00d8cd8f5f
-@@ -157,12 +157,17 @@ MULTI_PROVIDER_WHITELIST = "virtual/libi
- 
- MULTI_PROVIDER_WHITELIST = "virtual/libintl"
- 
-+SOLIBS = ".so.*"
-+SOLIBS_darwin = ".*.dylib"
-+SOLIBSDEV = ".so"
-+SOLIBSDEV_darwin = ".dylib"
-+
- PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-dev ${PN}-locale"
- FILES = ""
- 
--FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
-+FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
-             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
--            ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/*.so* ${datadir}/${PN} ${libdir}/${PN}/* \
-+            ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/${SOLIBS} ${datadir}/${PN} ${libdir}/${PN}/* \
-             ${datadir}/pixmaps ${datadir}/applications \
-             ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
-             ${libdir}/bonobo/servers"
-@@ -171,7 +176,7 @@ SECTION_${PN}-doc = "doc"
-             ${datadir}/gnome/help"
- SECTION_${PN}-doc = "doc"
- 
--FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
-+FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/*.la \
-                 ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
-                 ${base_libdir}/*.a ${base_libdir}/*.o ${datadir}/aclocal"
- SECTION_${PN}-dev = "devel"
+I think A* should fully embrace the proposed clone-solution because
+AFAICS it is the only proper one for them to have a list of tickets open
+for  A* 2007 vs. A* 2008.  The solution serves their interest.
 
 
 
