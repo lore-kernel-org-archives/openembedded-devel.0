@@ -1,42 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JS8BT-0001GM-Q0
-	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 10:57:49 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JS8BL-00079i-6M
-	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 09:57:35 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 21 Feb 2008 09:57:35 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 21 Feb 2008 09:57:35 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Thu, 21 Feb 2008 10:57:28 +0100
-Message-ID: <fpjhu8$d3l$1@ger.gmane.org>
-References: <1203419692.21824.35.camel@dax.rpnet.com>	<20080219113024.32ba3368@cimmeria>	<47BAC66A.8090700@bolloretelecom.eu>
-	<c384c5ea0802201437l5a15ddbcu13904422f9bf7aa6@mail.gmail.com>
+	(envelope-from <rpurdie@rpsys.net>) id 1JS8YV-0006DV-8G
+	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 11:21:43 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1LALR33002243
+	for <openembedded-devel@openembedded.org>; Thu, 21 Feb 2008 10:21:27 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 01988-08 for <openembedded-devel@openembedded.org>;
+	Thu, 21 Feb 2008 10:21:22 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1LALGZ9002236
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Thu, 21 Feb 2008 10:21:17 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Thu, 21 Feb 2008 10:21:16 +0000
+Message-Id: <1203589276.9329.6.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-In-Reply-To: <c384c5ea0802201437l5a15ddbcu13904422f9bf7aa6@mail.gmail.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=5.0 tests=AWL,RDNS_NONE,WEIRD_PORT
-	autolearn=no version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE.dev roadworks notification
+Subject: RFC: Library file extensions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,45 +44,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2008 09:57:50 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 21 Feb 2008 10:21:50 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Leon Woestenberg schreef:
+As some may have gathered I made some experiments with using Poky to
+cross compile things to run on the iPodTouch which is arm-apple-darwin.
+THe good news is they were successful however Darwin creates some
+interesting challenges for OE, one of them is the dynamic libraries
+being called *.dylib, not *.so.
 
-| To what stage is .stable synchronized with current .dev?
+I've had the following patch in Poky to assist with this problem. It
+would need to be rolled out over all .bb files with custom FILES
+eventually but it has the advantage that can happen over time so the
+question is more whether this is a good idea and whether the approach is
+acceptable?
 
-People propose revisions from .dev to get backported and 2 core
-developers have to ACK them to get applied, and BACKPORTS.txt[1] is
-updated with those revisions. That way the stable branch is a 'subset'
-of .dev, and we aim to keep 'branch-only' fixes to an absoulute minimum
-('zero' is our goal).
+We would probably hit the same issue with windows .dll files and this
+solution would solve that too.
 
-| I would like
-| to move all my running projects across both branches so that I can
-| both
-| (1) continue working on them
-| (2) test Richard's efforts on .dev
+Comments welcome...
 
-That shouldn't be a problem, if you find something missing, apply the
-change locally or propose it for inclusion.
+Cheers,
 
-regards,
+Richard
 
-Koen
-
-[1] e.g.
-http://www.openembedded.org:1081/revision/file/4ade39d8fb840c136daf5a450ece76d6b7280dea/BACKPORTS.txt
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHvUsIMkyGM64RGpERAv4ZAKCZOfIdj6ykpiRh/pOo5bul3yCFOgCfSXCt
-gkMYa6UTiNYgEnOoZHiIM8g=
-=8o1N
------END PGP SIGNATURE-----
+#
+# old_revision [5fb8cfe19138b98226fe92044d302c9379dad84d]
+#
+# patch "conf/bitbake.conf"
+#  from [a605bd5d4d48054b72d21c74a922a9a0a2d12a76]
+#    to [1655c26111af10134f07eafd1e29ef00d8cd8f5f]
+#
+============================================================
+--- conf/bitbake.conf	a605bd5d4d48054b72d21c74a922a9a0a2d12a76
++++ conf/bitbake.conf	1655c26111af10134f07eafd1e29ef00d8cd8f5f
+@@ -157,12 +157,17 @@ MULTI_PROVIDER_WHITELIST = "virtual/libi
+ 
+ MULTI_PROVIDER_WHITELIST = "virtual/libintl"
+ 
++SOLIBS = ".so.*"
++SOLIBS_darwin = ".*.dylib"
++SOLIBSDEV = ".so"
++SOLIBSDEV_darwin = ".dylib"
++
+ PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-dev ${PN}-locale"
+ FILES = ""
+ 
+-FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
++FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
+             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+-            ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/*.so* ${datadir}/${PN} ${libdir}/${PN}/* \
++            ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/${SOLIBS} ${datadir}/${PN} ${libdir}/${PN}/* \
+             ${datadir}/pixmaps ${datadir}/applications \
+             ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
+             ${libdir}/bonobo/servers"
+@@ -171,7 +176,7 @@ SECTION_${PN}-doc = "doc"
+             ${datadir}/gnome/help"
+ SECTION_${PN}-doc = "doc"
+ 
+-FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
++FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/*.la \
+                 ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
+                 ${base_libdir}/*.a ${base_libdir}/*.o ${datadir}/aclocal"
+ SECTION_${PN}-dev = "devel"
 
 
 
