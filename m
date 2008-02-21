@@ -1,35 +1,42 @@
-Received: from [72.14.204.225] (helo=qb-out-0506.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <xjqian@gmail.com>) id 1JS1Gy-0005Ls-70
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2008 03:35:02 +0100
-Received: by qb-out-0506.google.com with SMTP id p30so3561937qba.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Feb 2008 18:34:54 -0800 (PST)
-Received: by 10.141.34.12 with SMTP id m12mr6312836rvj.26.1203561294212;
-	Wed, 20 Feb 2008 18:34:54 -0800 (PST)
-Received: from ?192.168.1.129? ( [71.16.230.132])
-	by mx.google.com with ESMTPS id h17sm1343037wxd.24.2008.02.20.18.34.49
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 20 Feb 2008 18:34:52 -0800 (PST)
-Message-ID: <47BCE343.7060600@gmail.com>
-Date: Wed, 20 Feb 2008 21:34:43 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <E1JRbhB-0000nu-DN@linuxtogo.org>	<20080220015817.1e33f547@widy.localdomain>	<20080220020418.1e4dda5a@widy.localdomain>	<1203502545.6860.13.camel@hammer.suse.cz>
-	<20080220155339.67aed5d4@widy.localdomain>
-In-Reply-To: <20080220155339.67aed5d4@widy.localdomain>
-X-SA-Exim-Connect-IP: 72.14.204.225
-X-SA-Exim-Mail-From: xjqian@gmail.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JS8BT-0001GM-Q0
+	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 10:57:49 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JS8BL-00079i-6M
+	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 09:57:35 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 21 Feb 2008 09:57:35 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 21 Feb 2008 09:57:35 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Thu, 21 Feb 2008 10:57:28 +0100
+Message-ID: <fpjhu8$d3l$1@ger.gmane.org>
+References: <1203419692.21824.35.camel@dax.rpnet.com>	<20080219113024.32ba3368@cimmeria>	<47BAC66A.8090700@bolloretelecom.eu>
+	<c384c5ea0802201437l5a15ddbcu13904422f9bf7aa6@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
+In-Reply-To: <c384c5ea0802201437l5a15ddbcu13904422f9bf7aa6@mail.gmail.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Status: No, score=0.8 required=5.0 tests=AWL,RDNS_NONE,WEIRD_PORT
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] org.oe.dev - Ignore false toggle signals (work-around for OE#3390).
+Subject: Re: OE.dev roadworks notification
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,26 +50,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2008 02:35:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 21 Feb 2008 09:57:50 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/20/2008 08:53 AM, Paul Sokolovsky wrote:
-> It practice that means that developers should annotate the bug with
-> "pushed to .dev", "RFCed for merging to stable", "pushed to stable",
-> and ultimately, "package in feed, closing".
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I prefer this approach to opening a separate dup ticket. If we can 
-streamline the process of "RFCed for merging to stable" and "package in 
-feed", we only need the "pushed to .dev" and/or "pushed to stable" as 
-sufficient landmarks for closing a bug.
+Leon Woestenberg schreef:
 
-IMHO, whatever definition for closing a bug is not that much a big deal. 
-Instead we should focus on how to streamline the process of getting 
-fixes from .dev --->  feed.
+| To what stage is .stable synchronized with current .dev?
 
-Regards
-Gordon
+People propose revisions from .dev to get backported and 2 core
+developers have to ACK them to get applied, and BACKPORTS.txt[1] is
+updated with those revisions. That way the stable branch is a 'subset'
+of .dev, and we aim to keep 'branch-only' fixes to an absoulute minimum
+('zero' is our goal).
+
+| I would like
+| to move all my running projects across both branches so that I can
+| both
+| (1) continue working on them
+| (2) test Richard's efforts on .dev
+
+That shouldn't be a problem, if you find something missing, apply the
+change locally or propose it for inclusion.
+
+regards,
+
+Koen
+
+[1] e.g.
+http://www.openembedded.org:1081/revision/file/4ade39d8fb840c136daf5a450ece76d6b7280dea/BACKPORTS.txt
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHvUsIMkyGM64RGpERAv4ZAKCZOfIdj6ykpiRh/pOo5bul3yCFOgCfSXCt
+gkMYa6UTiNYgEnOoZHiIM8g=
+=8o1N
+-----END PGP SIGNATURE-----
 
 
 
