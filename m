@@ -1,40 +1,39 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [72.14.220.153] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JSAKi-0000nR-Md
-	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 13:15:30 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JSAKc-0005f6-I0
-	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 12:15:18 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 21 Feb 2008 12:15:18 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 21 Feb 2008 12:15:18 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 21 Feb 2008 13:15:01 +0100
-Message-ID: <fpjq04$8hf$1@ger.gmane.org>
-References: <fb8538570802200452r5d4360f2ld6330218f4c5c0b6@mail.gmail.com>	<20080220213121.69007f37@widy.localdomain>	<1203591205.6860.103.camel@hammer.suse.cz>	<20080221131810.2f58c40e@widy.localdomain>	<fpjo00$218$1@ger.gmane.org>
+	(envelope-from <pmiscml@gmail.com>) id 1JSAWv-0005dM-9J
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Feb 2008 13:28:03 +0100
+Received: by fg-out-1718.google.com with SMTP id 13so29422fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Feb 2008 04:27:57 -0800 (PST)
+Received: by 10.86.71.1 with SMTP id t1mr9456975fga.7.1203596877697;
+	Thu, 21 Feb 2008 04:27:57 -0800 (PST)
+Received: from widy.localdomain ( [78.164.227.166])
+	by mx.google.com with ESMTPS id 4sm12177822fgg.4.2008.02.21.04.27.54
+	(version=SSLv3 cipher=OTHER); Thu, 21 Feb 2008 04:27:56 -0800 (PST)
+Date: Thu, 21 Feb 2008 14:29:38 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080221142938.57fcecd7@widy.localdomain>
+In-Reply-To: <fpjq04$8hf$1@ger.gmane.org>
+References: <fb8538570802200452r5d4360f2ld6330218f4c5c0b6@mail.gmail.com>
+	<20080220213121.69007f37@widy.localdomain>
+	<1203591205.6860.103.camel@hammer.suse.cz>
+	<20080221131810.2f58c40e@widy.localdomain>
+	<fpjo00$218$1@ger.gmane.org>
 	<20080221140821.6c5ec794@widy.localdomain>
+	<fpjq04$8hf$1@ger.gmane.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <20080221140821.6c5ec794@widy.localdomain>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 72.14.220.153
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Cc: no2spam@nospam.arcornews.de, openembedded-devel@openembedded.org
 Subject: Re: [Angstrom-devel] Best place to send new/updated bb files?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -49,19 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2008 12:15:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Feb 2008 12:28:03 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-Paul Sokolovsky wrote:
-> Like that, except not "core devs", but just "devs". If OE must depend
-> on core devs for each sneeze, then it's feet-tied. Core devs should
-> work on general problems and rules for OE, not on mundane recipes.
+Hello,
 
-you still mix up bug 2228 and 2194
+On Thu, 21 Feb 2008 13:15:01 +0100
+Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
 
-And, recipes are anything but mundane.  How about some respect for the
-people that maintain them, including the core devs?
+> Paul Sokolovsky wrote:
+> > Like that, except not "core devs", but just "devs". If OE must
+> > depend on core devs for each sneeze, then it's feet-tied. Core devs
+> > should work on general problems and rules for OE, not on mundane
+> > recipes.
+> 
+> you still mix up bug 2228 and 2194
 
+I didn't even talk about specific bugs, but about general idea. If you
+made even a specific place for coredevs to poke at, good for you, keep
+maintaining that.
+
+> 
+> And, recipes are anything but mundane.  How about some respect for the
+> people that maintain them, including the core devs?
+
+Let me guess, now we'll have another dictionary usage discussion?
+
+
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
