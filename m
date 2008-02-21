@@ -1,41 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.128.190] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JS97G-00031n-0m
-	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 11:57:28 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JS973-0001eV-R3
-	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 10:57:13 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 21 Feb 2008 10:57:13 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 21 Feb 2008 10:57:13 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 21 Feb 2008 11:57:06 +0100
-Message-ID: <fpjle1$p10$1@ger.gmane.org>
-References: <E1JRbhB-0000nu-DN@linuxtogo.org>	<20080220015817.1e33f547@widy.localdomain>	<20080220020418.1e4dda5a@widy.localdomain>	<1203502545.6860.13.camel@hammer.suse.cz>	<20080220155339.67aed5d4@widy.localdomain>	<fphs3l$jcj$1@ger.gmane.org>
-	<20080220212639.6e24e7ab@widy.localdomain>
+	(envelope-from <pmiscml@gmail.com>) id 1JS9Pk-0003TA-W6
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Feb 2008 12:16:36 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so3523981fks.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Feb 2008 03:16:29 -0800 (PST)
+Received: by 10.78.97.7 with SMTP id u7mr15439984hub.50.1203592589404;
+	Thu, 21 Feb 2008 03:16:29 -0800 (PST)
+Received: from widy.localdomain ( [78.164.227.166])
+	by mx.google.com with ESMTPS id y34sm1273453iky.6.2008.02.21.03.16.27
+	(version=SSLv3 cipher=OTHER); Thu, 21 Feb 2008 03:16:28 -0800 (PST)
+Date: Thu, 21 Feb 2008 13:18:10 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: angstrom-distro-devel@linuxtogo.org
+Message-ID: <20080221131810.2f58c40e@widy.localdomain>
+In-Reply-To: <1203591205.6860.103.camel@hammer.suse.cz>
+References: <fb8538570802200452r5d4360f2ld6330218f4c5c0b6@mail.gmail.com>
+	<20080220213121.69007f37@widy.localdomain>
+	<1203591205.6860.103.camel@hammer.suse.cz>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <20080220212639.6e24e7ab@widy.localdomain>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.128.190
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: what is a fixed bug?
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [Angstrom-devel] Best place to send new/updated bb files?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,47 +44,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2008 10:57:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Feb 2008 11:16:36 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-Junqian Gordon Xu wrote:
-> I prefer this approach to opening a separate dup ticket.
+Hello,
 
-This will and has led to problems in that some A* dev has in the past
-repeatedly closed valid bugs as invalid because his interpration was
-"not an A* RC bug".  The bug of course was a perfectly valid one, if not
-for A* (they are free to choose) it was for OE.
+On Thu, 21 Feb 2008 11:53:25 +0100
+Stanislav Brabec <utx@penguin.cz> wrote:
 
-Furthermore, I don't see why my already long list of open bugs shall be
-made any longer (I have a search function defined in bugzilla) without
-merit.  Essentially, Angstrom is demanding that only they can close bugs
-because how is anyone to know whether A* intends to push a fix into
-stable?  This aggressive behaviour of Angstrom is essentially what I
-mean by "usurpation of bugs.oe.net".  Why should the folks interested in
-OE-derived SharpROM not be afforded that luxury of "don't you dare to
-close bugs unless you have the OK from us"?
+> Paul Sokolovsky wrote:
+> > Hello,
+> > 
+> > On Wed, 20 Feb 2008 06:52:18 -0600
+> > "Capn_Fish Zaurus" <capn.fish.zaurus@gmail.com> wrote:
+> > 
+> > > Is there a protocol for submitting new/updated bb files to the
+> > > bugtracker (eg, importance markings, etc)? Or is there a better
+> > > place to submit them?
+> > 
+> > Bugtracker is *the* place to submit .bb's in all cases. There's no
+> > special meaning (from submitter's point of view) for priority, etc.
+> > except common sense. In other words, in most cases default values
+> > should be left as is.
+> 
+> In theory...
+> 
+> Simple search shows 50 potential open bugs with new recipes:
+> http://bugs.openembedded.org/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&long_desc_type=substring&long_desc=&bug_file_loc_type=allwordssubstr&bug_file_loc=&keywords_type=allwords&keywords=&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&emailassigned_to1=1&emailtype1=substring&email1=&emailassigned_to2=1&emailreporter2=1&emailcc2=1&emailtype2=substring&email2=&bugidtype=include&bug_id=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&field0-0-0=attachments.filename&type0-0-0=substring&value0-0-0=.bb
 
-I am sorry, but I have to maintain that Distro bugs/tasks and OE
-bugs/tasks are different animals and while our tools are not ideal to
-reflect this, we need to properly represent that.  The only way I see to
-do that is to have two tickets which is right, it is two issues.  The
-chain is "fix it in dev" and then Angstrom or any other distro not made
-from .dev can decide whether they want to propagate the fix.
 
-Cloning a ticket and titling it with "push bug #123 into A* stable" is 5
-seconds work at most, link back to original bug automatically included.
- Too much?
+We even have http://bugs.openembedded.net/show_bug.cgi?id=2194 ,
+maintained by Rolf.
 
-Paul wrote:
-> that's simply how it is, and let's not go thru that again.
+> 
+> I am not expert on monotone, but it supports submitting changes after
+> peer review:
+> http://monotone.ca/docs/Quality-Assurance.html
 
-My impression was that we had already established that bugs.oe.net was
-not Angstrom property.  Does not look like your interpretation.
+Oh, that must be zecke's favorite "wanna one sweet day in the
+bright future" toy ;-).
 
-I think A* should fully embrace the proposed clone-solution because
-AFAICS it is the only proper one for them to have a list of tickets open
-for  A* 2007 vs. A* 2008.  The solution serves their interest.
+But let's just be real about all this - all "process improvements" are
+just those shiny toys, nothing more. For them to work, *people* should
+use them. But if we talk about committing new recipes, then they would
+need to be committed in the end, no matter what additional procedure is
+built on top of that. And then, nothing precludes people with doing
+that with the current procedure, which includes pre-review.
 
+So, the way to improve this, IMHO, is raising awareness among the
+developers with OE commit rights, that having the commit access is not
+just to let them commit own stuff more easily, but entails
+responsibility before community - just as before someone reviewed and
+pushed their patches, the same way they should join with this important
+service for new contributors.
+
+And of course, people with newly acquired commit rights are in the best
+position to actually help with that, because older developers
+oftentimes acquire additional responsibilities and/or work areas which
+precludes them from timely participation in new submission
+processing ;-(.
+
+> 
+> Could it provide a better way?
+> 
+> -- 
+> Stanislav Brabec
+> http://www.penguin.cz/~utx/zaurus
+
+[]
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
