@@ -1,30 +1,34 @@
-Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JSADB-0000US-KP
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2008 13:07:52 +0100
-Received: by fg-out-1718.google.com with SMTP id 13so24138fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2008 04:07:32 -0800 (PST)
-Received: by 10.82.152.16 with SMTP id z16mr16723472bud.38.1203595650968;
-	Thu, 21 Feb 2008 04:07:30 -0800 (PST)
-Received: from widy.localdomain ( [78.164.227.166])
-	by mx.google.com with ESMTPS id c22sm3469606ika.3.2008.02.21.04.07.27
-	(version=SSLv3 cipher=OTHER); Thu, 21 Feb 2008 04:07:27 -0800 (PST)
-Date: Thu, 21 Feb 2008 14:09:12 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080221140912.02a407b6@widy.localdomain>
-In-Reply-To: <fpjof1$366$1@ger.gmane.org>
-References: <fb8538570802200452r5d4360f2ld6330218f4c5c0b6@mail.gmail.com>
-	<20080220213121.69007f37@widy.localdomain>
-	<1203591205.6860.103.camel@hammer.suse.cz>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JSADt-0000Vb-7l
+	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 13:08:50 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JSADi-0005JH-0r
+	for openembedded-devel@openembedded.org; Thu, 21 Feb 2008 12:08:10 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 21 Feb 2008 12:08:10 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 21 Feb 2008 12:08:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 21 Feb 2008 13:07:59 +0100
+Message-ID: <fpjpiv$7l9$1@ger.gmane.org>
+References: <fb8538570802200452r5d4360f2ld6330218f4c5c0b6@mail.gmail.com>	<20080220213121.69007f37@widy.localdomain>	<1203591205.6860.103.camel@hammer.suse.cz>
 	<20080221131810.2f58c40e@widy.localdomain>
-	<fpjo00$218$1@ger.gmane.org> <fpjof1$366$1@ger.gmane.org>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 72.14.220.155
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <20080221131810.2f58c40e@widy.localdomain>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -45,30 +49,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2008 12:08:06 -0000
-X-List-Received-Date: Thu, 21 Feb 2008 12:08:06 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 21 Feb 2008 12:08:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+I have just added the bb and patch keywords to the keyword list
+http://bugs.openembedded.org/editkeywords.cgi
 
-On Thu, 21 Feb 2008 12:48:50 +0100
-Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
+keywords are essentially tags and can help us with the multi-dimension
+problems we have.  But then again, unlike meta-bugs they don't have
+email notification.  They are a tool for aiding bugzilla search.  AFAIK,
+it is possible to restrict power to change those tags to certain groups
+of bugzilla users which is something we might want to use (if we had a
+triaged keyword, for example.  Thinking about it, I'll add that keyword,
+too, for experimenting with it)
 
-> Rolf Leggewie wrote:
-> > Thanks for bringing that up.  I'd like to see more core devs pay
-> > attention to 2194 [...] 2228
-> 
-> I believe mickeyl was in a mood these days that might indicate his
-> interest in adding himself to the cc list of 2228 and 2194 (hint,
-> hint) ;-)
-
-Yeah, I even started to wonder if OpenMoko finished ;-).
-
-[]
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
