@@ -1,24 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <openembedded@haerwu.biz>) id 1JT28I-0000li-50
-	for openembedded-devel@openembedded.org; Sat, 23 Feb 2008 22:42:11 +0100
-Received: (qmail 10737 invoked by uid 813007); 23 Feb 2008 21:41:50 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from v813.rev.tld.pl (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by smtp.host4.kei.pl with ESMTPA; 23 Feb 2008 21:41:50 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Feb 2008 22:40:59 +0100
-User-Agent: KMail/1.9.7
-References: <1203793457.8255.5.camel@dax.rpnet.com>
-	<fppt2j$thh$1@ger.gmane.org>
-	<20080223223439.528c6997@widy.localdomain>
-In-Reply-To: <20080223223439.528c6997@widy.localdomain>
+	(envelope-from <mwester@dls.net>) id 1JT2Jb-0000vh-QH
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Feb 2008 22:53:53 +0100
+Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
+	by mx01.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1JT2JI-0002Sq-7X
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Feb 2008 15:53:32 -0600
+Message-ID: <47C095CA.6060407@dls.net>
+Date: Sat, 23 Feb 2008 15:53:14 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Thunderbird 2.0.0.9 (Windows/20071031)
 MIME-Version: 1.0
-Message-Id: <200802232241.01317.openembedded@haerwu.biz>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: openembedded@haerwu.biz
+To: openembedded-devel@lists.openembedded.org
+References: <1203793457.8255.5.camel@dax.rpnet.com>	<fppt2j$thh$1@ger.gmane.org>	<20080223223439.528c6997@widy.localdomain>
+	<200802232241.01317.openembedded@haerwu.biz>
+In-Reply-To: <200802232241.01317.openembedded@haerwu.biz>
+X-SA-Exim-Connect-IP: 216.145.245.197
+X-SA-Exim-Mail-From: mwester@dls.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -39,29 +39,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Feb 2008 21:42:12 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sat, 23 Feb 2008 21:53:53 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Dnia Saturday, 23 of February 2008, Paul Sokolovsky napisa=B3:
-> Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-
-> > Didn't we also agree that variable names shouldn't include '_' at
-> > all?
+Marcin Juszkiewicz wrote:
+> Dnia Saturday, 23 of February 2008, Paul Sokolovsky napisa³:
+>   
+>> Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+>>     
 >
-> How is that achievable? LETSUSEITLIKETHIS? Maybe exclude 'A' too? ;-)
+>   
+>>> Didn't we also agree that variable names shouldn't include '_' at
+>>> all?
+>>>       
+>> How is that achievable? LETSUSEITLIKETHIS? Maybe exclude 'A' too? ;-)
+>>     
+>
+> LETS-USE-IT-LIKE-THIS was one of suggestions.
+>
+>   
 
-LETS-USE-IT-LIKE-THIS was one of suggestions.
+Oh come on, now - you can't be serious.  It's just not difficult enough 
+or arcane enough with any of those choices!  We need to insist on this 
+syntax for variables:
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+LET\'S\ USE\ IT\ LIKE\ THIS
 
-      Ludzie dziel=B1 si=EA na tych, kt=F3rzy maj=B1 co=B6 do powiedzenia
-      i na tych, kt=F3rzy m=F3wi=B1 bez przerwy.       [Robert Frost]
+;-) :-P
 
+Didn't there used to be some recommendation for a variable naming 
+convention that encoded the type into the name?  Somehow all these 
+restrictions on the use of case and underscores reminds me of that 
+notation  -- that idea seems to have faded away (thank goodness for 
+that, too), and I don't think we should let OE go there either.  I'd 
+rather take a small performance hit instead of having to remember even 
+more rules about upper/lower case and other naming conventions.  I vote 
+to leave well enough alone... JMO.
 
+Mike (mwester)
 
 
