@@ -1,35 +1,32 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.85.132.242] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <rpurdie@rpsys.net>) id 1JT2ND-00010l-73
-	for openembedded-devel@openembedded.org; Sat, 23 Feb 2008 22:57:37 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1NLvIPZ007489
-	for <openembedded-devel@openembedded.org>; Sat, 23 Feb 2008 21:57:18 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 06903-09 for <openembedded-devel@openembedded.org>;
-	Sat, 23 Feb 2008 21:57:14 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m1NLvBPT007479
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sat, 23 Feb 2008 21:57:11 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20080223223439.528c6997@widy.localdomain>
+	(envelope-from <pmiscml@gmail.com>) id 1JT2O7-00011m-Qt
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Feb 2008 22:58:33 +0100
+Received: by an-out-0708.google.com with SMTP id b33so203708ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Feb 2008 13:58:13 -0800 (PST)
+Received: by 10.100.131.3 with SMTP id e3mr2245205and.49.1203803893158;
+	Sat, 23 Feb 2008 13:58:13 -0800 (PST)
+Received: from widy.localdomain ( [78.164.227.166])
+	by mx.google.com with ESMTPS id 2sm572207nfv.5.2008.02.23.13.57.53
+	(version=SSLv3 cipher=OTHER); Sat, 23 Feb 2008 13:58:01 -0800 (PST)
+Date: Sun, 24 Feb 2008 00:00:31 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080224000031.363e2031@widy.localdomain>
+In-Reply-To: <200802232241.01317.openembedded@haerwu.biz>
 References: <1203793457.8255.5.camel@dax.rpnet.com>
-	<fppt2j$thh$1@ger.gmane.org> <20080223223439.528c6997@widy.localdomain>
-Date: Sat, 23 Feb 2008 21:57:11 +0000
-Message-Id: <1203803831.8255.9.camel@dax.rpnet.com>
+	<fppt2j$thh$1@ger.gmane.org>
+	<20080223223439.528c6997@widy.localdomain>
+	<200802232241.01317.openembedded@haerwu.biz>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 209.85.132.242
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -47,28 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Feb 2008 21:57:37 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Feb 2008 21:58:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+Hello,
 
-On Sat, 2008-02-23 at 22:34 +0200, Paul Sokolovsky wrote:
-> On Sat, 23 Feb 2008 20:44:19 +0100 Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> > Didn't we also agree that variable names shouldn't include '_' at all?
-> 
-> How is that achievable? LETSUSEITLIKETHIS? Maybe exclude 'A' too? ;-)
-> Isn't there was a hint that using '_' as an override operator is funky?
+On Sat, 23 Feb 2008 22:40:59 +0100
+Marcin Juszkiewicz <openembedded@haerwu.biz> wrote:
 
-Changing the override operator involves a flag day and is painful,
-changing the variable names isn't quite as invasive and it would be
-possible to upgrade to over time.
+> Dnia Saturday, 23 of February 2008, Paul Sokolovsky napisa=C5=82:
+> > Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+>=20
+> > > Didn't we also agree that variable names shouldn't include '_' at
+> > > all?
+> >
+> > How is that achievable? LETSUSEITLIKETHIS? Maybe exclude 'A'
+> > too? ;-)
+>=20
+> LETS-USE-IT-LIKE-THIS was one of suggestions.
 
-FWIW, there isn't as much improvement as I'd hoped. I mentioned the
-benchmark result since I had it and I thought it interesting...
+And still, rethinking the override marker is another choice, with a dot
+being obvious candidate. Both syntaxes can be made coexist in
+bitbake for some time, and transition made gradual.
 
-Cheers,
+>=20
+> --=20
+> JID: hrw-jabber.org
+> OpenEmbedded developer/consultant
+>=20
+[]
 
-Richard
-
+--=20
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
