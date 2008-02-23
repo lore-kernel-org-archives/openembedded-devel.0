@@ -1,37 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JT0Ig-0006HC-3g
-	for openembedded-devel@openembedded.org; Sat, 23 Feb 2008 20:44:49 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JT0IN-0007ah-41
-	for openembedded-devel@openembedded.org; Sat, 23 Feb 2008 19:44:27 +0000
-Received: from ip51cca9fc.adsl-surfen.hetnet.nl ([81.204.169.252])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 23 Feb 2008 19:44:27 +0000
-Received: from koen by ip51cca9fc.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 23 Feb 2008 19:44:27 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Sat, 23 Feb 2008 20:44:19 +0100
-Message-ID: <fppt2j$thh$1@ger.gmane.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1JT0y3-0003fA-4r
+	for openembedded-devel@openembedded.org; Sat, 23 Feb 2008 21:27:32 +0100
+Received: (qmail 10325 invoked by uid 813007); 23 Feb 2008 20:27:09 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 23 Feb 2008 20:27:09 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 23 Feb 2008 21:26:18 +0100
+User-Agent: KMail/1.9.7
 References: <1203793457.8255.5.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip51cca9fc.adsl-surfen.hetnet.nl
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-In-Reply-To: <1203793457.8255.5.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<fppt2j$thh$1@ger.gmane.org>
+In-Reply-To: <fppt2j$thh$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200802232126.19584.openembedded@haerwu.biz>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: openembedded@haerwu.biz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -49,32 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Feb 2008 19:44:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Feb 2008 20:27:33 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia Saturday, 23 of February 2008, Koen Kooi napisa=B3:
+> Richard Purdie schreef:
+> | Hi,
+> |
+> | At OEDEM I mentioned that we might have some speed gain if bitbake
+> | could more easily tell what constituted an override. All current
+> | overrides are lower case and we don't have any in upper case.
+>
+> Didn't we also agree that variable names shouldn't include '_' at all?
 
-Richard Purdie schreef:
-| Hi,
-|
-| At OEDEM I mentioned that we might have some speed gain if bitbake could
-| more easily tell what constituted an override. All current overrides are
-| lower case and we don't have any in upper case.
+We did, but this patch from Richard improves current situation without=20
+doing search/replace on whole metadata and users configs.
 
-Didn't we also agree that variable names shouldn't include '_' at all?
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-regards,
+         Someday I'm gonna die but it won't be from boredom [Pink]
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHwHeSMkyGM64RGpERAiHbAJ9uielvYaBj3SADU4wpHc6oXguG6wCeNxRX
-6xwioyyoHnNqlTsOzZrdLPo=
-=YF7a
------END PGP SIGNATURE-----
 
 
 
