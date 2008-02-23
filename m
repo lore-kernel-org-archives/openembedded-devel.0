@@ -1,27 +1,24 @@
-Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JT12h-0003kV-Jg
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Feb 2008 21:32:24 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so301554ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Feb 2008 12:32:02 -0800 (PST)
-Received: by 10.66.243.4 with SMTP id q4mr874207ugh.5.1203798721889;
-	Sat, 23 Feb 2008 12:32:01 -0800 (PST)
-Received: from widy.localdomain ( [78.164.227.166])
-	by mx.google.com with ESMTPS id 18sm1930435ugk.18.2008.02.23.12.31.59
-	(version=SSLv3 cipher=OTHER); Sat, 23 Feb 2008 12:32:00 -0800 (PST)
-Date: Sat, 23 Feb 2008 22:34:39 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1JT28I-0000li-50
+	for openembedded-devel@openembedded.org; Sat, 23 Feb 2008 22:42:11 +0100
+Received: (qmail 10737 invoked by uid 813007); 23 Feb 2008 21:41:50 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 23 Feb 2008 21:41:50 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080223223439.528c6997@widy.localdomain>
-In-Reply-To: <fppt2j$thh$1@ger.gmane.org>
+Date: Sat, 23 Feb 2008 22:40:59 +0100
+User-Agent: KMail/1.9.7
 References: <1203793457.8255.5.camel@dax.rpnet.com>
 	<fppt2j$thh$1@ger.gmane.org>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 66.249.92.175
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+	<20080223223439.528c6997@widy.localdomain>
+In-Reply-To: <20080223223439.528c6997@widy.localdomain>
+MIME-Version: 1.0
+Message-Id: <200802232241.01317.openembedded@haerwu.biz>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: openembedded@haerwu.biz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -42,39 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Feb 2008 20:32:24 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Feb 2008 21:42:12 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello,
+Dnia Saturday, 23 of February 2008, Paul Sokolovsky napisa=B3:
+> Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
 
-On Sat, 23 Feb 2008 20:44:19 +0100
-Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> > Didn't we also agree that variable names shouldn't include '_' at
+> > all?
+>
+> How is that achievable? LETSUSEITLIKETHIS? Maybe exclude 'A' too? ;-)
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Richard Purdie schreef:
-> | Hi,
-> |
-> | At OEDEM I mentioned that we might have some speed gain if bitbake
-> could | more easily tell what constituted an override. All current
-> overrides are | lower case and we don't have any in upper case.
-> 
-> Didn't we also agree that variable names shouldn't include '_' at all?
+LETS-USE-IT-LIKE-THIS was one of suggestions.
 
-How is that achievable? LETSUSEITLIKETHIS? Maybe exclude 'A' too? ;-)
-Isn't there was a hint that using '_' as an override operator is funky?
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-> 
-> regards,
-> 
-> Koen
+      Ludzie dziel=B1 si=EA na tych, kt=F3rzy maj=B1 co=B6 do powiedzenia
+      i na tych, kt=F3rzy m=F3wi=B1 bez przerwy.       [Robert Frost]
 
-[]
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
