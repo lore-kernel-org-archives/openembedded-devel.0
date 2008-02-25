@@ -1,35 +1,40 @@
-Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <pmiscml@gmail.com>) id 1JTaRL-0002QY-GF
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Feb 2008 11:20:13 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so861199ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2008 02:19:40 -0800 (PST)
-Received: by 10.67.106.13 with SMTP id i13mr2928827ugm.49.1203934780472;
-	Mon, 25 Feb 2008 02:19:40 -0800 (PST)
-Received: from widy.localdomain ( [78.164.227.166])
-	by mx.google.com with ESMTPS id k30sm4963268ugc.53.2008.02.25.02.19.37
-	(version=SSLv3 cipher=OTHER); Mon, 25 Feb 2008 02:19:38 -0800 (PST)
-Date: Mon, 25 Feb 2008 12:22:34 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080225122234.5a02ee72@widy.localdomain>
-In-Reply-To: <fpu0uv$oi8$1@ger.gmane.org>
-References: <20080225014825.36e60782@widy.localdomain>
-	<fpu0uv$oi8$1@ger.gmane.org>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JTbde-0004MC-EB
+	for openembedded-devel@openembedded.org; Mon, 25 Feb 2008 12:37:00 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JTbd8-0006Ze-Lj
+	for openembedded-devel@openembedded.org; Mon, 25 Feb 2008 11:36:22 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 25 Feb 2008 11:36:22 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 25 Feb 2008 11:36:22 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 25 Feb 2008 12:36:14 +0100
+Message-ID: <fpu97e$k6t$1@ger.gmane.org>
+References: <fpmn1u$53v$1@ger.gmane.org> <47C252DE.501@gmail.com>
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 66.249.92.171
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <47C252DE.501@gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Re: [RFC] initramfs support for linux-handhelds-2.6
+Subject: Re: autobuilds and bug tracker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,125 +48,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2008 10:20:13 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Mon, 25 Feb 2008 11:37:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Junqian Gordon Xu wrote:
+> I would also like to be able to opt out of receiving emails from 
+> autobuilder bugs. 
 
-On Mon, 25 Feb 2008 10:15:11 +0100
-Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+I am not sure what you mean.  I don't receive any of those mails for
+example.  The autobuilder always opens a new bug.  So you won't get
+mails about that unless you either read all mails to oe-issues (which is
+really not a good idea IMHO) or you have added yourself to cc (in which
+case the fix should be obvious).
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Paul Sokolovsky schreef:
-> | Hello,
-> |
-> | Failing to add generic and fully automated kernel-with-initramfs
-> build, | I have patch to add external initramfs to kernel for
-> linux-hh. I'd | still like to establish conventions for other kernel
-> recipes to follow, | so here're the patch for suggestion. The idea is
-> simple: |
-> | 1. KERNEL_INITRAMFS_PATH is set to the full path of cpio.gz image to
-> | use as initramfs. Empty value (default) means don't use initramfs.
-> If | file doesn't exist, build fails with an error message (content
-> is left | to specific recipe - there unfortunately doesn't seem to be
-> a way to | sensibly provide detailed one in generic case).
-> |
-> | 2. KERNEL_INITRAMFS_PATH is considered a distro realm, like for
-> example | kernel PREFERRED_VERSION. Below, angstrom distro config
-> sets it.
-> 
-> | +KERNEL_INITRAMFS_PATH =
-> "${TMPDIR}/deploy/uclibc/images/${MACHINE}/initramfs-bootmenu-image-${MACHINE}.cpio.gz"
-> 
-> | +	if [ -n "${KERNEL_INITRAMFS_PATH}" -a "${ANGSTROM_MODE}"
-> == "glibc" ]; then
-> 
-> A number of things:
-> 
-> 1) Make the initramfs generation a seperate function (or task) that
-> can be called at will, instead of always being called in
-> do_compile_prepend 
+I suggest
+a) http://bugs.openembedded.org/userprefs.cgi?tab=email
+b) using saved search functions in bugzilla instead of "drinking from
+   the firehose".  The search is very powerful.
 
-Initramfs *generation* is a separate task. With this scheme, it is
-completely external, binary blob drop. Except by setting initramfs path
-to point to OE's deploy dir, one can use previous OE build result. So,
-for our case, it would be:
-
-ANGSTROM_MODE=uclibc IMAGE_FSTYPES="cpio.gz" bitbake \
-	initramfs-bootmenu-image
-bitbake x11-image
-
-and everything will magically work.
-
-
-> 2) Keep it simple and keep the kernel and
-> initramfs in the same libc realm, so a uclibc based initramfs needs a
-> uclibc kernel (I known there is no such thing, but you get the idea).
-
-Keeping it separate is exactly *the simple* thing. Trying to do it
-otherwise calls for hard-to-resolve-in-good-way complications. Again,
-there's recursion in the job of building kernel with initramfs:
-
-To build kernel, you need to have initramfs. To build initramfs, you
-need modules. To build modules, you need to build kernel.
-
-You saw one solution for breaking this vicious cycle - the recursion
-was lashed into OE's own blackbox where it was kept under control under
-given, real-world achievable circumstances. That was rejected.
-
-Current solution splits cycle the other way: 1) "uclibc" kernel is never
-built with initramfs; 2) that means that its build finishes without
-recursion, giving out modules; 3) uclibc initramfs is built with that
-modules; 4) then "glibc" kernel recipes pulls it automatically(!) from
-uclibc deploy dir, builds kernel with it, and more importantly
-*packages* it w/o any dirty magic.
-
-> That way you can just fish it out of DEPLOY_DIR_IMAGE
-
-The main problem is not kernel image, but kernel package.
-
-> 3) Add an initramfs-<kernel-name_version>.bb that does
-> 
-> ~  require <kernel-name_version>.bb
-> ~  FILESPATH = "/path/magic/whatever"
-> ~  do_compile_prepend() { do_initramfs}
-> 
-> This involves some extra build time ('uclibc' kernel build and a
-> 'uclibc' initramfs kernel build), but is more transparent and less
-> error prone than your plan. I think it even avoids the dependency
-> problems :)
-
-Packaging. 
-
-Besides, it's conceptually not very correct. For a given
-configuration (distro+machine), there used to be one kernel, right?
-Now, there're two, one of which is not supposed to be used, nor it's
-even working (now that we rely on initramfs, a kernel w/o it is dead
-beef). One way to ensure transparency is to not confuse people with
-giving out build results which are not intended to be there. My patch
-works exactly that way - if Angstrom currently really supports glibc as
-"production" config, and thus "glibc" kernel is production one, then it
-will be always built with initramfs, and non-initramfs (== broken)
-kernel won't be built at all, to not make all this prone to errors like
-it getting into rootfs, picked up by users, etc.
-
-Yes, that's not too general. But as I told, the correct way to solve
-this is to have zImage vs modules split for kernel recipe. (Currently
-tried splits - user level vs OE balckbox; uclibc vs glibc - are just
-hacks around the issue).
-
-> 
-> regards,
-> 
-> Koen
-> 
-[]
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
