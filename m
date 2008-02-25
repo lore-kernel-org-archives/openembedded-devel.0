@@ -1,36 +1,34 @@
-Received: from [64.233.166.181] (helo=py-out-1112.google.com)
+Received: from [64.233.178.241] (helo=hs-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <summatusmentis@gmail.com>) id 1JTkAX-0008FO-74
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JTkWj-0000Eb-AI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Feb 2008 21:43:30 +0100
-Received: by py-out-1112.google.com with SMTP id y77so2138128pyg.28
+	Mon, 25 Feb 2008 22:06:23 +0100
+Received: by hs-out-0708.google.com with SMTP id 23so1823781hsn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2008 12:42:53 -0800 (PST)
-Received: by 10.35.106.1 with SMTP id i1mr4290684pym.62.1203972172846;
-	Mon, 25 Feb 2008 12:42:52 -0800 (PST)
-Received: from rn083002.morris.umn.edu ( [146.57.83.2])
-	by mx.google.com with ESMTPS id x56sm13637881pyg.36.2008.02.25.12.42.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 25 Feb 2008 12:42:51 -0800 (PST)
-Message-ID: <47C32843.8010302@gmail.com>
-Date: Mon, 25 Feb 2008 14:42:43 -0600
-From: Jacob Thebault-Spieker <summatusmentis@gmail.com>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
+	Mon, 25 Feb 2008 13:05:50 -0800 (PST)
+Received: by 10.100.205.9 with SMTP id c9mr8205918ang.46.1203973550892;
+	Mon, 25 Feb 2008 13:05:50 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Mon, 25 Feb 2008 13:05:50 -0800 (PST)
+Message-ID: <c384c5ea0802251305s41fdb2d7k7a75226360397aa4@mail.gmail.com>
+Date: Mon, 25 Feb 2008 22:05:50 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <47C313E7.4080202@gmail.com>
-	<c384c5ea0802251236t51f5d708yad496c69e13ccb99@mail.gmail.com>
-In-Reply-To: <c384c5ea0802251236t51f5d708yad496c69e13ccb99@mail.gmail.com>
-X-Enigmail-Version: 0.95.6
-X-SA-Exim-Connect-IP: 64.233.166.181
-X-SA-Exim-Mail-From: summatusmentis@gmail.com
+In-Reply-To: <fpjhu8$d3l$1@ger.gmane.org>
+MIME-Version: 1.0
+References: <1203419692.21824.35.camel@dax.rpnet.com>
+	<20080219113024.32ba3368@cimmeria>
+	<47BAC66A.8090700@bolloretelecom.eu>
+	<c384c5ea0802201437l5a15ddbcu13904422f9bf7aa6@mail.gmail.com>
+	<fpjhu8$d3l$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 64.233.178.241
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Google Summer of Code
+Subject: Re: OE.dev roadworks notification
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,75 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2008 20:43:30 -0000
-X-Groupsio-MsgNum: 4315
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig29EFF772FDFDAF4E4E41A2A6"
+X-List-Received-Date: Mon, 25 Feb 2008 21:06:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---------------enig29EFF772FDFDAF4E4E41A2A6
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Hello Koen,
 
-I can see how my idea may not fit openembedded exactly. I guess I just=20
-decided to try here first, as OE is not only the build-system, but also=20
-the base for many distros, most of which work closely with OE. If OE is=20
-not the right place, I will most definitely check with Angstrom, I just=20
-thought I should check here first. Thanks for the input.
+On Thu, Feb 21, 2008 at 10:57 AM, Koen Kooi
+<koen@dominion.kabel.utwente.nl> wrote:
+>
+>  Leon Woestenberg schreef:
+>
+>  | To what stage is .stable synchronized with current .dev?
+>
+>  People propose revisions from .dev to get backported and 2 core
+>  developers have to ACK them to get applied, and BACKPORTS.txt[1] is
 
---
-Jacob Thebault-Spieker
-Cell: (207) 717-5114
+Thanks. Now that you explained it, I remember you already explained
+this policy earlier.
 
+I should really RTFB (Retrain the fscking brain).
 
-Leon Woestenberg wrote:
-> Hello,
->=20
-> On Mon, Feb 25, 2008 at 8:15 PM, Jacob Thebault-Spieker
-> <summatusmentis@gmail.com> wrote:
->> I'm a first year Computer Science major interested in participating in=
-
->>  Google Summer of Code. What's the process for doing this in OE? Is th=
-ere
->>  a process? Who should I talk to about mentoring? Are there any projec=
-ts
->>  that I could do? I'm relatively familiar with OE, specifically Angstr=
-om,
->>  as I have a two Zaurii, a C3200 and an SL-5500.
->>
->>  I don't know of anything specific about OE that's not fully functiona=
-l,
->>  although, one project I was thinking about was a GUI video player, as=
- a
->>  frontend for mplayer.
->=20
-> Your idea sounds great, and there happens a lot of
-> kernel/drivers/library/application programming, but your idea does not
-> fit OpenEmbedded itself very well, because OpenEmbedded is the build
-> system.
->=20
-> However, one of the developers or maintainers might be interested to
-> mentor you, who knows.
->=20
-> I would suggest to also ask around elsewhere though, at least bring
-> this up on the related handhelds mailing lists, angstrom might already
-> be more on topic then oe.
->=20
-> Good luck!!
+Regards,
+-- 
+Leon
 
 
---------------enig29EFF772FDFDAF4E4E41A2A6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.8 (Darwin)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkfDKEkACgkQtXjjJ1zu9YCARwCfYYrBfsfeQ6icxpuuhqMbJ4zV
-q/wAoJGnxxDWR842DtIGbjr47Hmjma+Y
-=jqz4
------END PGP SIGNATURE-----
-
---------------enig29EFF772FDFDAF4E4E41A2A6--
