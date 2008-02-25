@@ -1,33 +1,30 @@
-Received: from [64.233.166.178] (helo=py-out-1112.google.com)
+Received: from [66.249.82.226] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <summatusmentis@gmail.com>) id 1JTioU-0005ri-U8
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JTk41-000831-1d
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Feb 2008 20:16:44 +0100
-Received: by py-out-1112.google.com with SMTP id y77so2082172pyg.28
+	Mon, 25 Feb 2008 21:36:44 +0100
+Received: by wx-out-0506.google.com with SMTP id h27so1733849wxd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2008 11:16:03 -0800 (PST)
-Received: by 10.35.47.10 with SMTP id z10mr4164009pyj.15.1203966962691;
-	Mon, 25 Feb 2008 11:16:02 -0800 (PST)
-Received: from rn083002.morris.umn.edu ( [146.57.83.2])
-	by mx.google.com with ESMTPS id n80sm4002428pyh.7.2008.02.25.11.16.01
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 25 Feb 2008 11:16:02 -0800 (PST)
-Message-ID: <47C313E7.4080202@gmail.com>
-Date: Mon, 25 Feb 2008 13:15:51 -0600
-From: Jacob Thebault-Spieker <summatusmentis@gmail.com>
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-MIME-Version: 1.0
+	Mon, 25 Feb 2008 12:36:08 -0800 (PST)
+Received: by 10.100.248.9 with SMTP id v9mr7957554anh.61.1203971767082;
+	Mon, 25 Feb 2008 12:36:07 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Mon, 25 Feb 2008 12:36:07 -0800 (PST)
+Message-ID: <c384c5ea0802251236t51f5d708yad496c69e13ccb99@mail.gmail.com>
+Date: Mon, 25 Feb 2008 21:36:07 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.6
-X-SA-Exim-Connect-IP: 64.233.166.178
-X-SA-Exim-Mail-From: summatusmentis@gmail.com
+In-Reply-To: <47C313E7.4080202@gmail.com>
+MIME-Version: 1.0
+References: <47C313E7.4080202@gmail.com>
+X-SA-Exim-Connect-IP: 66.249.82.226
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Google Summer of Code
+Subject: Re: Google Summer of Code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,53 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2008 19:16:45 -0000
-X-Groupsio-MsgNum: 4312
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig29979DCF2DB31E413D4033ED"
+X-List-Received-Date: Mon, 25 Feb 2008 20:36:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---------------enig29979DCF2DB31E413D4033ED
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-I'm a first year Computer Science major interested in participating in=20
-Google Summer of Code. What's the process for doing this in OE? Is there =
+On Mon, Feb 25, 2008 at 8:15 PM, Jacob Thebault-Spieker
+<summatusmentis@gmail.com> wrote:
+> I'm a first year Computer Science major interested in participating in
+>  Google Summer of Code. What's the process for doing this in OE? Is there
+>  a process? Who should I talk to about mentoring? Are there any projects
+>  that I could do? I'm relatively familiar with OE, specifically Angstrom,
+>  as I have a two Zaurii, a C3200 and an SL-5500.
+>
+>  I don't know of anything specific about OE that's not fully functional,
+>  although, one project I was thinking about was a GUI video player, as a
+>  frontend for mplayer.
 
-a process? Who should I talk to about mentoring? Are there any projects=20
-that I could do? I'm relatively familiar with OE, specifically Angstrom, =
+Your idea sounds great, and there happens a lot of
+kernel/drivers/library/application programming, but your idea does not
+fit OpenEmbedded itself very well, because OpenEmbedded is the build
+system.
 
-as I have a two Zaurii, a C3200 and an SL-5500.
+However, one of the developers or maintainers might be interested to
+mentor you, who knows.
 
-I don't know of anything specific about OE that's not fully functional,=20
-although, one project I was thinking about was a GUI video player, as a=20
-frontend for mplayer. This would incorporate the accelerated video that=20
-some of the Zaurii have, and would be full screen. Ideally, it'd be able =
+I would suggest to also ask around elsewhere though, at least bring
+this up on the related handhelds mailing lists, angstrom might already
+be more on topic then oe.
 
-to recognize that the screen is flipped, and potentially still allow for =
-
-landscape mode(where the zaurus would be in vertical position, but the=20
-video would play in landscape/widescreen mode).
-
-This is just a preliminary idea, I don't know how feasible it actually=20
-is. Thanks
---=20
-Jacob Thebault-Spieker
-Cell: (207) 717-5114
+Good luck!!
+-- 
+Leon
 
 
---------------enig29979DCF2DB31E413D4033ED
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.8 (Darwin)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkfDE+8ACgkQtXjjJ1zu9YBPdgCggpE3S4+nKeJDMUKP9D7VfEkf
-48gAoId/2hwkV60yzPKCDpZ7mVdnNeJP
-=yTmv
------END PGP SIGNATURE-----
-
---------------enig29979DCF2DB31E413D4033ED--
