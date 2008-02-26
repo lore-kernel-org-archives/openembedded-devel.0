@@ -1,19 +1,19 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <philip@balister.org>) id 1JTzdV-0000G0-GX
-	for openembedded-devel@openembedded.org; Tue, 26 Feb 2008 14:14:56 +0100
-Received: (qmail 28558 invoked by uid 1003); 26 Feb 2008 13:13:45 -0000
+	(envelope-from <philip@balister.org>) id 1JTzii-0000Mk-DZ
+	for openembedded-devel@openembedded.org; Tue, 26 Feb 2008 14:19:46 +0100
+Received: (qmail 6943 invoked by uid 1003); 26 Feb 2008 13:19:08 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 26 Feb 2008 13:13:44 -0000
-Message-ID: <47C41082.9070107@balister.org>
-Date: Tue, 26 Feb 2008 08:13:38 -0500
+	by mail.geekisp.com with SMTP; 26 Feb 2008 13:19:07 -0000
+Message-ID: <47C411C8.5030204@balister.org>
+Date: Tue, 26 Feb 2008 08:19:04 -0500
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.9 (X11/20071115)
 MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-References: <c67f1650802251755t37cda022y48a0c52c9a3c4ad5@mail.gmail.com>
-In-Reply-To: <c67f1650802251755t37cda022y48a0c52c9a3c4ad5@mail.gmail.com>
+References: <47C3D204.9090908@dominion.kabel.utwente.nl>
+In-Reply-To: <47C3D204.9090908@dominion.kabel.utwente.nl>
 X-SA-Exim-Connect-IP: 216.168.135.169
 X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
@@ -22,7 +22,7 @@ X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Fwd: Android on OMAP wiki page]
+Subject: Re: commit 9b9a2409c7e2ddb2caf0a5aba74549f65c52b503
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,28 +36,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2008 13:14:59 -0000
-X-Groupsio-MsgNum: 4327
+X-List-Received-Date: Tue, 26 Feb 2008 13:19:46 -0000
+X-Groupsio-MsgNum: 4328
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060508040308050307000505"
+	micalg=sha1; boundary="------------ms080902070904080905010802"
 
---------------ms060508040308050307000505
+--------------ms080902070904080905010802
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-QMan wrote:
->
-> Anyone know how hard getting Android into the OE build system would be?
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> - --- packages/netsurf/netsurf_svn.bb 
+> c00865f4500c29a5271184c5babd7fc2a83ef465
+> +++ packages/netsurf/netsurf_svn.bb	c00865f4500c29a5271184c5babd7fc2a83ef465
+> @@ -0,0 +1,43 @@
+> 
+> +PV = "1.1+svn${SRCDATE}"
+> 
+> That's bogus, svn repos must use SRCREV with an entry in
+> sane-srcrevs.inc in OE.
 
-I'm not sure how hard it would be, but as others have noted, it is not 
-straight forward. There are a couple of threads on the OMAP list where 
-they discuss "gory details".
+Basically this should be:
 
-http://marc.info/?l=linux-omap&r=1&b=200802&w=2
++PV = "1.1+svnr${SRCREV}"
+
+and the sane-srcrevs files should add an entry for a rev that will build.
+
+When I build svn based stuff and want to use the latest rev, I put 
+something like:
+
+SRCREV_pn-linux-davinci ?= ${AUTOREV}
+
+in local.conf. Do not put AUTOREV in the sane-srcrev file. The AUTOREV 
+forces bitbake to check the current version in the repo and this gets 
+really slow.
+
+And yes, I really should write a FAQ entry on this ....
 
 Philip
 
---------------ms060508040308050307000505
+--------------ms080902070904080905010802
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -109,17 +130,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDIyNjEz
-MTMzOFowIwYJKoZIhvcNAQkEMRYEFJpfvIl3sTKKxxQRzLNH3YZF+VH/MFIGCSqGSIb3DQEJDzFF
+MTkwNFowIwYJKoZIhvcNAQkEMRYEFEzaEi98b1kuA0THQNcs4auYosKkMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
-qTANBgkqhkiG9w0BAQEFAASCAQCw5Yq6uLpnU5VzeGUBkdda62XP47rDLD0xIW8R1dW50bee2xLz
-hBHVU0Mnmy5nNZGKlfsQkGScl7/f52dzfu585pfU9mXgJBWIS1kBBOjdDYcFdbpxiN29+trsjtaQ
-jdkykPEg3zYoAXFACLCdYBKkVxuBuqMdv6vsiSWbENkYu0iauqFFHv9VVF8cJz7ZYHk7C6VviJwM
-2m2xdVeKKRwe9eDyXsJ1k3ZbidoyqpRBL/JWFGD8J82do8lsF095hlT1fyfZMTlKDDL5CZ+uuM+O
-3KEUYIqX4dlwuegSiodYcV0SRPESyb7DpdcCJjMMQFZ0g+gKcOB/+BPSDEqpm1/WAAAAAAAA
+qTANBgkqhkiG9w0BAQEFAASCAQBb+3BK2WzGRdjMTHAP2VDMdDYthBx0QzpOiAzH7NhDQ4ixGQeZ
+Lxs0BYiOBzxsqyKeOmvB0sC+n3Kq24JeT3oWui54RzGCJxdedcVgHnLGsI6TjK/eEaXI+sENC8oN
+asjkxjZ9y6+MYuFXNvvxiqEqDU/IXWFx9I8o+CADkc7yuwCw4qAhJiUvIFolC/mgQ+wo3S2vhvuD
+xp4bE4H5pKRlHQoQH3KCpjKu9mPvy2z9ZZ1Ug5qHKe2zA5JznqtZXEYKHeRprmhuZ77peCgiwQ1M
+SkeF9PUhoO+KKlYZSKIoDbR2Lq1pmK6uM9YDCdl8tgePV6jdmCvyRFErDnvpkrgFAAAAAAAA
 
---------------ms060508040308050307000505--
+--------------ms080902070904080905010802--
