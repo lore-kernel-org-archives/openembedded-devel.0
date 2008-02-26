@@ -1,36 +1,32 @@
-Received: from [64.233.166.183] (helo=py-out-1112.google.com)
+Received: from [130.89.2.9] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <summatusmentis@gmail.com>) id 1JTsMl-00067v-B7
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Feb 2008 06:28:41 +0100
-Received: by py-out-1112.google.com with SMTP id y77so2349398pyg.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2008 21:28:03 -0800 (PST)
-Received: by 10.35.10.13 with SMTP id n13mr4906121pyi.29.1204003682980;
-	Mon, 25 Feb 2008 21:28:02 -0800 (PST)
-Received: from umm-yrless170.morris.umn.edu ( [146.57.21.170])
-	by mx.google.com with ESMTPS id a70sm14974137pye.4.2008.02.25.21.28.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 25 Feb 2008 21:28:02 -0800 (PST)
-Message-ID: <47C3A35D.3000605@gmail.com>
-Date: Mon, 25 Feb 2008 23:27:57 -0600
-From: Jacob Thebault-Spieker <summatusmentis@gmail.com>
+	(envelope-from <koen@dominion.kabel.utwente.nl>) id 1JTvTO-0003Jv-Ku
+	for openembedded-devel@openembedded.org; Tue, 26 Feb 2008 09:47:43 +0100
+Received: from Powerbook-2.local (vpn006021.vpn.utwente.nl [130.89.6.21])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	m1Q8l13x004408 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Feb 2008 09:47:01 +0100
+Message-ID: <47C3D204.9090908@dominion.kabel.utwente.nl>
+Date: Tue, 26 Feb 2008 09:47:00 +0100
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
 User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <47C313E7.4080202@gmail.com>	<c384c5ea0802251236t51f5d708yad496c69e13ccb99@mail.gmail.com>	<47C32843.8010302@gmail.com>
-	<47C35E7F.10907@balister.org>
-In-Reply-To: <47C35E7F.10907@balister.org>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
 X-Enigmail-Version: 0.95.6
-X-SA-Exim-Connect-IP: 64.233.166.183
-X-SA-Exim-Mail-From: summatusmentis@gmail.com
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: koen@dominion.kabel.utwente.nl
+X-SA-Exim-Connect-IP: 130.89.2.9
+X-SA-Exim-Mail-From: koen@dominion.kabel.utwente.nl
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Google Summer of Code
+Subject: commit 9b9a2409c7e2ddb2caf0a5aba74549f65c52b503
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,69 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2008 05:28:41 -0000
-X-Groupsio-MsgNum: 4322
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig04D677C2480FC435B655C8A6"
+X-List-Received-Date: Tue, 26 Feb 2008 08:47:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig04D677C2480FC435B655C8A6
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Erik Hovland wrote:
+- --- packages/netsurf/netsurf_svn.bb 
+c00865f4500c29a5271184c5babd7fc2a83ef465
++++ packages/netsurf/netsurf_svn.bb	c00865f4500c29a5271184c5babd7fc2a83ef465
+@@ -0,0 +1,43 @@
 
- > You would have a better chance of submitting this idea to the Maemo
- > or Mplayer groups.
- >
- > I am not likely to administer the hh.org SoC again this year. So I can=
-'t
- > say whether you should submit your idea there.
- >
- > E
- >
++PV = "1.1+svn${SRCDATE}"
 
-The difference is, I don't feel like this idea really fits with MPlayer, =
+That's bogus, svn repos must use SRCREV with an entry in
+sane-srcrevs.inc in OE.
 
-and I don't have a Maemo device to test it. I'm sure there's some sort=20
-of virtualization, but I'm familiar enough with OE/Angstrom, that I felt =
+regards,
 
-like this would be a good place to start.
-
-Philip Balister wrote:
- > What are the deadlines for SoC? I'm not sure if we will have the
- > infrastructure in place to do direct OE SoC projects this year. I'll
- > ping the board though.
- >
- > Philip
-
-Mentoring Organizations apply between March 3 and March 12, and then the =
-
-students apply later in March, between March 24 and March 31. This needs =
-
-to happen soon, otherwise OE/whatever OE based distro won't be able to=20
-apply. Perhaps it's partially on me, and not bringing this up earlier,=20
-but I was kinda waiting for the dates to be released.
-
-Jacob Thebault-Spieker
-Cell: (207) 717-5114
-
-
-
-
-
---------------enig04D677C2480FC435B655C8A6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.8 (Darwin)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAkfDo2EACgkQtXjjJ1zu9YCImgCgrAebbSqacgBelDrZTwCAnhmL
-sxQAnAiGgVN7nrG4ylfU0FrbR1b7+85h
-=BycY
+iD8DBQFHw9IDMkyGM64RGpERAuAsAJ9s6CrUywbxOMF7JE6EAWErtiOgsACbB7eg
+YmqcwR+y7Xgok/7S1PewElE=
+=Ep46
 -----END PGP SIGNATURE-----
 
---------------enig04D677C2480FC435B655C8A6--
+
