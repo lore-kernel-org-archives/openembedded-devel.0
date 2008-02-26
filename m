@@ -1,42 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JTwNI-0000D7-Np
-	for openembedded-devel@openembedded.org; Tue, 26 Feb 2008 10:45:32 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JTwMj-0004Y8-T0
-	for openembedded-devel@openembedded.org; Tue, 26 Feb 2008 09:44:49 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 26 Feb 2008 09:44:49 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 26 Feb 2008 09:44:49 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Tue, 26 Feb 2008 10:44:43 +0100
-Message-ID: <fq0n2c$jl5$1@ger.gmane.org>
-References: <c67f1650802251755t37cda022y48a0c52c9a3c4ad5@mail.gmail.com>
-	<1204018153.8150.15.camel@dax.rpnet.com>
+	(envelope-from <pmiscml@gmail.com>) id 1JTxCx-0005do-Q8
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Feb 2008 11:38:55 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so1377499ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Feb 2008 02:38:14 -0800 (PST)
+Received: by 10.67.23.5 with SMTP id a5mr4602128ugj.8.1204022294180;
+	Tue, 26 Feb 2008 02:38:14 -0800 (PST)
+Received: from widy.localdomain ( [78.164.227.166])
+	by mx.google.com with ESMTPS id l22sm2322836uga.30.2008.02.26.02.38.10
+	(version=SSLv3 cipher=OTHER); Tue, 26 Feb 2008 02:38:10 -0800 (PST)
+Date: Tue, 26 Feb 2008 12:41:05 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080226124105.2ae8126a@widy.localdomain>
+In-Reply-To: <47C3A35D.3000605@gmail.com>
+References: <47C313E7.4080202@gmail.com>
+	<c384c5ea0802251236t51f5d708yad496c69e13ccb99@mail.gmail.com>
+	<47C32843.8010302@gmail.com> <47C35E7F.10907@balister.org>
+	<47C3A35D.3000605@gmail.com>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.9 (Macintosh/20071031)
-In-Reply-To: <1204018153.8150.15.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 66.249.92.168
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Fwd: Android on OMAP wiki page]
+Subject: Re: Google Summer of Code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,54 +44,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2008 09:45:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 26 Feb 2008 10:38:55 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-Richard Purdie schreef:
-| On Mon, 2008-02-25 at 17:55 -0800, QMan wrote:
-|>> -----Original Message-----
-|>> From: openembedded-devel-bounces@lists.openembedded.org
-|>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
-|>> Behalf Of Philip Balister
-|>> Sent: Monday, February 25, 2008 4:57 PM
-|>> To: openembedded-devel@openembedded.org
-|>> Subject: [oe] [Fwd: Android on OMAP wiki page]
-|>>
-|>> I'm not up on the Android situation, but some of you might be
-|>> interestes in this web page.
-|>>
-|>> Philip
-|> Anyone know how hard getting Android into the OE build system would be?
-|
-| The only public source code image wise is the goldfish kernel. I added
-| that to Poky and was able to run Poky images inside the android
-| emulator:
-|
-|
-http://svn.o-hand.com/view/poky/trunk/meta-extras/conf/machine/android-goldfish.conf?rev=3143&view=auto
-|
-http://svn.o-hand.com/view/poky/trunk/meta-extras/packages/linux/linux-android-goldfish_2.6.23-rc20.bb?rev=3144&view=auto
-|
-| Since Android is a binary release other than this, I'm not sure what
-| else you want to do with OE?
+On Mon, 25 Feb 2008 23:27:57 -0600
+Jacob Thebault-Spieker <summatusmentis@gmail.com> wrote:
 
-Maybe extracted goldfish patches (e.g. for /dev/binder) applied to
-linux*_2.6.2*.bb?
+> Erik Hovland wrote:
+> 
+>  > You would have a better chance of submitting this idea to the Maemo
+>  > or Mplayer groups.
+>  >
+>  > I am not likely to administer the hh.org SoC again this year. So I
+>  > can't say whether you should submit your idea there.
 
-regards,
+That's sad news ;-I.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+>  >
+>  > E
+>  >
+> 
+> The difference is, I don't feel like this idea really fits with
+> MPlayer, and I don't have a Maemo device to test it. I'm sure there's
+> some sort of virtualization, but I'm familiar enough with
+> OE/Angstrom, that I felt like this would be a good place to start.
 
-iD8DBQFHw9+LMkyGM64RGpERAgD4AJ9LvtEVAgF61SZhTsPuxhOZvt0BSgCgkX21
-SfYKgLLyIL8mUy+rHFLqd9M=
-=rMdG
------END PGP SIGNATURE-----
+If you're still on the idea on the player frontend, then for MPlayer
+there's gnome-mplayer, which suits smallscreen devices quite well
+(works OOB even on qvga), provides good functionality and is
+maintained. That doesn't mean that you can't come up with the idea of
+better player, just that it's not the brightest of things which could
+be done for GSoC.
 
+> 
+> Philip Balister wrote:
+>  > What are the deadlines for SoC? I'm not sure if we will have the
+>  > infrastructure in place to do direct OE SoC projects this year.
+>  > I'll ping the board though.
+>  >
+>  > Philip
+> 
+> Mentoring Organizations apply between March 3 and March 12, and then
+> the students apply later in March, between March 24 and March 31.
+> This needs to happen soon, otherwise OE/whatever OE based distro
+> won't be able to apply. Perhaps it's partially on me, and not
+> bringing this up earlier, but I was kinda waiting for the dates to be
+> released.
+
+By comments above I gather that GSoC participation wasn't discussed on
+OpenEmbedded e.V. (quoting that just to hint that OE now should have
+all bureaucratic infrastructure to participate directly) meeting held
+just 2 days ago... Sad again.
+
+OpenMoko participated last year, so may be a good place to hang on. And
+there're plenty things to do there, even skipping application-level
+stuff. Just let me point to the problem of having a standard device
+control daemon, to which OpenMoko people, per their own words, can't
+get by years:
+http://www.vanille-media.de/site/index.php/2007/11/27/collaboration-launch-on-phoneserver-and-devicedaemon/
+
+> 
+> Jacob Thebault-Spieker
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
