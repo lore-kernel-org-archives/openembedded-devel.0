@@ -1,41 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.132.246] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JU1Ag-0002lD-O5
-	for openembedded-devel@openembedded.org; Tue, 26 Feb 2008 15:52:52 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JU1A7-0003ws-GY
-	for openembedded-devel@openembedded.org; Tue, 26 Feb 2008 14:52:07 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 26 Feb 2008 14:52:07 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 26 Feb 2008 14:52:07 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 26 Feb 2008 15:52:03 +0100
-Message-ID: <fq192i$nqe$1@ger.gmane.org>
-References: <47C3D204.9090908@dominion.kabel.utwente.nl>
-	<47C411C8.5030204@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <47C411C8.5030204@balister.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JU5yf-000318-FS
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Feb 2008 21:00:47 +0100
+Received: by an-out-0708.google.com with SMTP id b33so546617ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Feb 2008 11:59:59 -0800 (PST)
+Received: by 10.100.201.16 with SMTP id y16mr10603810anf.33.1204055999361;
+	Tue, 26 Feb 2008 11:59:59 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Tue, 26 Feb 2008 11:59:59 -0800 (PST)
+Message-ID: <c384c5ea0802261159i1e21611ax92c8516f7839a7ea@mail.gmail.com>
+Date: Tue, 26 Feb 2008 20:59:59 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 209.85.132.246
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: commit 9b9a2409c7e2ddb2caf0a5aba74549f65c52b503
+Subject: libzvbi didn't stage .pc for me due to missing pkgconfig inheritance, something for QA to pick up these cases?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,19 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2008 14:52:52 -0000
+X-List-Received-Date: Tue, 26 Feb 2008 20:01:12 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Philip Balister wrote:
-> And yes, I really should write a FAQ entry on this ....
+Hello,
 
-You are lucky, I just did and committed it in
-64b95f1878ea8c82433db9c21cef7267916c9113
+I found that libzvbi didn't stage the .pc files (for pkgconfig) simply
+because the recipe didn't inherit from "pkgconfig" bbclass.
 
-I hope I did not write too much non-sense.  Please review
-http://www.openembedded.org/user-manual&dpage=commonuse_new_package once
-my changes are incorporated.
+More packages might suffer from this (although I doubt it). It might
+be a candidate for automatic QA, but that's out of my league.
+The idea would be that QA class tests if .pc files are present in the
+source dir, but the recipe does not inherit from pkgconfig.
 
+Only a minor issue.
+
+Regards,
+-- 
+Leon
 
 
