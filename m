@@ -1,34 +1,32 @@
-Received: from [66.249.82.239] (helo=wx-out-0506.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <xjqian@gmail.com>) id 1JUDT8-0003cT-0u
-	for openembedded-devel@openembedded.org; Wed, 27 Feb 2008 05:00:39 +0100
-Received: by wx-out-0506.google.com with SMTP id t16so3138398wxc.6
-	for <openembedded-devel@openembedded.org>;
-	Tue, 26 Feb 2008 19:59:56 -0800 (PST)
-Received: by 10.140.144.4 with SMTP id r4mr4081488rvd.15.1204084795214;
-	Tue, 26 Feb 2008 19:59:55 -0800 (PST)
-Received: from ?192.168.35.4? ( [128.252.118.150])
-	by mx.google.com with ESMTPS id a68sm9645389rnc.14.2008.02.26.19.59.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 26 Feb 2008 19:59:54 -0800 (PST)
-Message-ID: <47C4E02E.10409@gmail.com>
-Date: Tue, 26 Feb 2008 22:59:42 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
+	(envelope-from <mickey@vanille-media.de>) id 1JULcH-0001Kt-Nm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Feb 2008 13:42:35 +0100
+Received: from andromeda (e180175164.adsl.alicedsl.de [85.180.175.164])
+	by drlauer-research.com (Postfix) with ESMTP id 38B3E584C77
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Feb 2008 13:48:02 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 27 Feb 2008 13:42:12 +0100
+User-Agent: KMail/1.9.9
+References: <1203793457.8255.5.camel@dax.rpnet.com>
+	<200802232241.01317.openembedded@haerwu.biz>
+	<20080224000031.363e2031@widy.localdomain>
+In-Reply-To: <20080224000031.363e2031@widy.localdomain>
 MIME-Version: 1.0
-To: bitbake-dev <bitbake-dev@lists.berlios.de>
-References: <1203982094.16921.65.camel@dax.rpnet.com>
-In-Reply-To: <1203982094.16921.65.camel@dax.rpnet.com>
-X-SA-Exim-Connect-IP: 66.249.82.239
-X-SA-Exim-Mail-From: xjqian@gmail.com
+Message-Id: <200802271342.12423.mickey@vanille-media.de>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Re: [Bitbake-dev] bitbake exec_task functionality changes
+Subject: Re: Uppercase overrides and parsing speed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,20 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Feb 2008 04:00:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 27 Feb 2008 12:42:35 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 02/25/2008 06:28 PM, Richard Purdie wrote:
-> There are various current use cases which are known to cause problems or
-> don't have a desired behaviour in certain circumstances:
-> 
-> 1. "-c rebuild" doesn't build dependencies outside the specified package
+On Saturday 23 February 2008 23:00:31 Paul Sokolovsky wrote:
+> Hello,
+>
+> On Sat, 23 Feb 2008 22:40:59 +0100
+>
+> Marcin Juszkiewicz <openembedded@haerwu.biz> wrote:
+> > Dnia Saturday, 23 of February 2008, Paul Sokolovsky napisa=C5=82:
+> > > Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+> > > > Didn't we also agree that variable names shouldn't include '_' at
+> > > > all?
+> > >
+> > > How is that achievable? LETSUSEITLIKETHIS? Maybe exclude 'A'
+> > > too? ;-)
+> >
+> > LETS-USE-IT-LIKE-THIS was one of suggestions.
+>
+> And still, rethinking the override marker is another choice, with a dot
+> being obvious candidate.
 
-Glad to know this is being taken care of.
+Agreed. I like that idea. Richard, is there an obvious reason why we didn't=
+=20
+consider this instead?
 
-Thanks
-Gordon
-
+=2D-=20
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
