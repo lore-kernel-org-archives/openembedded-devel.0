@@ -1,32 +1,35 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.132.250] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JULcH-0001Kt-Nm
+	(envelope-from <xjqian@gmail.com>) id 1JUag0-0000Ut-5I
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Feb 2008 13:42:35 +0100
-Received: from andromeda (e180175164.adsl.alicedsl.de [85.180.175.164])
-	by drlauer-research.com (Postfix) with ESMTP id 38B3E584C77
+	Thu, 28 Feb 2008 05:47:29 +0100
+Received: by an-out-0708.google.com with SMTP id b33so770947ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2008 13:48:02 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Feb 2008 13:42:12 +0100
-User-Agent: KMail/1.9.9
-References: <1203793457.8255.5.camel@dax.rpnet.com>
-	<200802232241.01317.openembedded@haerwu.biz>
-	<20080224000031.363e2031@widy.localdomain>
-In-Reply-To: <20080224000031.363e2031@widy.localdomain>
+	Wed, 27 Feb 2008 20:46:39 -0800 (PST)
+Received: by 10.100.92.9 with SMTP id p9mr5425108anb.3.1204173999756;
+	Wed, 27 Feb 2008 20:46:39 -0800 (PST)
+Received: from ?192.168.1.179? ( [71.16.230.132])
+	by mx.google.com with ESMTPS id y56sm10401023hsb.6.2008.02.27.20.46.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 27 Feb 2008 20:46:32 -0800 (PST)
+Message-ID: <47C63CA5.1060403@gmail.com>
+Date: Wed, 27 Feb 2008 23:46:29 -0500
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
 MIME-Version: 1.0
-Message-Id: <200802271342.12423.mickey@vanille-media.de>
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+To: openembedded-devel@lists.openembedded.org
+References: <fpmn1u$53v$1@ger.gmane.org> <47C252DE.501@gmail.com>
+	<fpu97e$k6t$1@ger.gmane.org>
+In-Reply-To: <fpu97e$k6t$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 209.85.132.250
+X-SA-Exim-Mail-From: xjqian@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Uppercase overrides and parsing speed
+Subject: Re: autobuilds and bug tracker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,36 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Feb 2008 12:42:35 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 28 Feb 2008 04:47:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Saturday 23 February 2008 23:00:31 Paul Sokolovsky wrote:
-> Hello,
->
-> On Sat, 23 Feb 2008 22:40:59 +0100
->
-> Marcin Juszkiewicz <openembedded@haerwu.biz> wrote:
-> > Dnia Saturday, 23 of February 2008, Paul Sokolovsky napisa=C5=82:
-> > > Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
-> > > > Didn't we also agree that variable names shouldn't include '_' at
-> > > > all?
-> > >
-> > > How is that achievable? LETSUSEITLIKETHIS? Maybe exclude 'A'
-> > > too? ;-)
-> >
-> > LETS-USE-IT-LIKE-THIS was one of suggestions.
->
-> And still, rethinking the override marker is another choice, with a dot
-> being obvious candidate.
+On 02/25/2008 06:36 AM, Rolf Leggewie wrote:
+> I am not sure what you mean.  I don't receive any of those mails for
+> example.  The autobuilder always opens a new bug.  So you won't get
+> mails about that unless you either read all mails to oe-issues (which is
+> really not a good idea IMHO) 
+> I suggest
+> a) http://bugs.openembedded.org/userprefs.cgi?tab=email
 
-Agreed. I like that idea. Richard, is there an obvious reason why we didn't=
-=20
-consider this instead?
+Thanks. This helps.
 
-=2D-=20
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+> b) using saved search functions in bugzilla instead of "drinking from
+>    the firehose".  The search is very powerful.
+
+comparing to oe-commit, oe-issues is really just a faucet. And seems
+there ARE people drinking from the oe-issues firehose, let alone oe-issues.
+
+Regards
+Gordon
+
 
 
