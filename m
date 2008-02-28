@@ -1,41 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JUfsf-0002tR-14
-	for openembedded-devel@openembedded.org; Thu, 28 Feb 2008 11:20:54 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1JUfru-0002M7-NS
-	for openembedded-devel@openembedded.org; Thu, 28 Feb 2008 10:20:02 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 28 Feb 2008 10:20:02 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 28 Feb 2008 10:20:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 28 Feb 2008 11:16:55 +0100
-Message-ID: <fq61mn$h36$2@ger.gmane.org>
-References: <fb8538570802200452r5d4360f2ld6330218f4c5c0b6@mail.gmail.com>	<20080220213121.69007f37@widy.localdomain>	<1203591205.6860.103.camel@hammer.suse.cz>	<20080221131810.2f58c40e@widy.localdomain>	<fpjpiv$7l9$1@ger.gmane.org>	<47BE486F.6020604@gmail.com>	<fpm5ro$6de$1@ger.gmane.org>
-	<47C64396.2080500@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <47C64396.2080500@gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <mickey@vanille-media.de>) id 1JUn2N-0004g7-Mz
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Feb 2008 18:59:21 +0100
+Received: from andromeda (e180130242.adsl.alicedsl.de [85.180.130.242])
+	by drlauer-research.com (Postfix) with ESMTP id 0DE71584C98
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Feb 2008 19:04:47 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 28 Feb 2008 18:58:44 +0100
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200802281858.44698.mickey@vanille-media.de>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Angstrom-devel] Best place to send new/updated bb files?
+Subject: who's creating /var and why no longer?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,18 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Feb 2008 10:20:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 28 Feb 2008 17:59:21 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Junqian Gordon Xu wrote:
->> Junqian, can you tell me if you can add or remove a keyword from a bug?
-> 
-> Yeah, I can. The keywords are very helpful.
+Hi,
 
+in the attempt to take care of 
+http://bugs.openembedded.org/show_bug.cgi?id=3886 , I booted without psplash 
+for the first time in months. I noticed populate-volatiles not working 
+correctly because at the point of it running, /var is not there. This leads 
+to /var/run/utmp not created etc. Anyone knows what's going on there?
 
-Thank you for the feedback.  Of course, I was hoping that tampering with
-keywords can be restricted to a group of bugzilla users.
-
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
