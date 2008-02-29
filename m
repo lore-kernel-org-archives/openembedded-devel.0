@@ -1,30 +1,40 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <mickey@vanille-media.de>) id 1JUslb-0005N2-Jk
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Feb 2008 01:06:30 +0100
-Received: from andromeda (e180130242.adsl.alicedsl.de [85.180.130.242])
-	by drlauer-research.com (Postfix) with ESMTP id CD975584BEB;
-	Fri, 29 Feb 2008 01:11:50 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Feb 2008 01:05:46 +0100
-User-Agent: KMail/1.9.9
-References: <47C6F5D3.8040608@westmont.edu>
-	<a7f8874a0802281038w6ebce65ar6da8a4b62eac211f@mail.gmail.com>
-In-Reply-To: <a7f8874a0802281038w6ebce65ar6da8a4b62eac211f@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200802290105.46827.mickey@vanille-media.de>
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JUtRq-0002BY-IA
+	for openembedded-devel@openembedded.org; Fri, 29 Feb 2008 01:50:05 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JUtR0-0005EW-0j
+	for openembedded-devel@openembedded.org; Fri, 29 Feb 2008 00:49:10 +0000
+Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 29 Feb 2008 00:49:10 +0000
+Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 29 Feb 2008 00:49:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 29 Feb 2008 01:49:02 +0100
+Message-ID: <fq7kpt$i32$1@ger.gmane.org>
+References: <E1JUnSE-0001P7-E7@linuxtogo.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
+In-Reply-To: <E1JUnSE-0001P7-E7@linuxtogo.org>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Opie] Greg "Gerg" Gilbert
+Subject: Re: org.oe.dev pwc: Improve staging variables
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,21 +48,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Feb 2008 00:06:31 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 29 Feb 2008 00:50:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Thanks for notifying, Hans.
+rpurdie commit wrote:
+> pwc: Improve staging variables
+et al.
 
-This is very sad.
+Just wanted to say: Awesome work on the "(packaged) staging"-front,
+Richard.  Thanks, very much appreciated.
 
-Guys, all of you who new Greg, please give your condolences on that page.
-
-:(
-
--- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
