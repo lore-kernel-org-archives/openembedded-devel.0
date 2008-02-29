@@ -1,33 +1,27 @@
-Received: from [209.85.198.186] (helo=rv-out-0910.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <bernardo@bandos.net>) id 1JUzi2-0005jG-0m
+	(envelope-from <dp@xora.org.uk>) id 1JV1gZ-0007mX-PJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Feb 2008 08:31:16 +0100
-Received: by rv-out-0910.google.com with SMTP id c24so3378467rvf.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2008 23:30:16 -0800 (PST)
-Received: by 10.140.169.6 with SMTP id r6mr6164330rve.210.1204270216338;
-	Thu, 28 Feb 2008 23:30:16 -0800 (PST)
-Received: by 10.140.252.14 with HTTP; Thu, 28 Feb 2008 23:30:16 -0800 (PST)
-Message-ID: <3ef3a7ad0802282330m6d745c97x9840afac25068db5@mail.gmail.com>
-Date: Fri, 29 Feb 2008 07:30:16 +0000
-From: "=?ISO-8859-1?Q?Jos=E9_Bernardo_Bandos_Rodrigues?=" <bernardo@bandos.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200802290105.46827.mickey@vanille-media.de>
-MIME-Version: 1.0
-References: <47C6F5D3.8040608@westmont.edu>
-	<a7f8874a0802281038w6ebce65ar6da8a4b62eac211f@mail.gmail.com>
-	<200802290105.46827.mickey@vanille-media.de>
-X-SA-Exim-Connect-IP: 209.85.198.186
-X-SA-Exim-Mail-From: bernardo@bandos.net
+	Fri, 29 Feb 2008 10:37:51 +0100
+Received: from cimmeria ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Fri, 29 Feb 2008 09:36:55 +0000
+	id 000301C2.47C7D238.00006DEC
+Date: Fri, 29 Feb 2008 09:36:52 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+To: oe-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20080229093652.17ad566a@cimmeria>
+X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=HTML_MESSAGE,RDNS_NONE
-	autolearn=no version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Re: [Opie] Greg "Gerg" Gilbert
+Subject: New Developer Access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,32 +35,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Feb 2008 07:31:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 29 Feb 2008 09:37:52 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-The little I knew of Greg was from his messages in Opie mailing lists. He
-always seemed a nice guy, it's sad to know he died, and so young.
+I would like to propose a new developer to OE, John Lee.
 
-On 2/29/08, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
->
-> Thanks for notifying, Hans.
->
-> This is very sad.
->
-> Guys, all of you who new Greg, please give your condolences on that page.
->
-> :(
->
->
-> --
-> Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+He already has commit access to OE through the openmoko key but I think
+it is time we welcomed him as his own developer. His work is upto the
+quality we expect of a developer.
+
+I am doing this with my OE hat on, not my OM hat.
+
+Graeme
+
 
