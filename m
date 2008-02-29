@@ -1,40 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.198.186] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JUtRq-0002BY-IA
-	for openembedded-devel@openembedded.org; Fri, 29 Feb 2008 01:50:05 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JUtR0-0005EW-0j
-	for openembedded-devel@openembedded.org; Fri, 29 Feb 2008 00:49:10 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 29 Feb 2008 00:49:10 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 29 Feb 2008 00:49:10 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 29 Feb 2008 01:49:02 +0100
-Message-ID: <fq7kpt$i32$1@ger.gmane.org>
-References: <E1JUnSE-0001P7-E7@linuxtogo.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <E1JUnSE-0001P7-E7@linuxtogo.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <bernardo@bandos.net>) id 1JUzi2-0005jG-0m
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Feb 2008 08:31:16 +0100
+Received: by rv-out-0910.google.com with SMTP id c24so3378467rvf.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Feb 2008 23:30:16 -0800 (PST)
+Received: by 10.140.169.6 with SMTP id r6mr6164330rve.210.1204270216338;
+	Thu, 28 Feb 2008 23:30:16 -0800 (PST)
+Received: by 10.140.252.14 with HTTP; Thu, 28 Feb 2008 23:30:16 -0800 (PST)
+Message-ID: <3ef3a7ad0802282330m6d745c97x9840afac25068db5@mail.gmail.com>
+Date: Fri, 29 Feb 2008 07:30:16 +0000
+From: "=?ISO-8859-1?Q?Jos=E9_Bernardo_Bandos_Rodrigues?=" <bernardo@bandos.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200802290105.46827.mickey@vanille-media.de>
+MIME-Version: 1.0
+References: <47C6F5D3.8040608@westmont.edu>
+	<a7f8874a0802281038w6ebce65ar6da8a4b62eac211f@mail.gmail.com>
+	<200802290105.46827.mickey@vanille-media.de>
+X-SA-Exim-Connect-IP: 209.85.198.186
+X-SA-Exim-Mail-From: bernardo@bandos.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=HTML_MESSAGE,RDNS_NONE
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: org.oe.dev pwc: Improve staging variables
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: [Opie] Greg "Gerg" Gilbert
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -48,16 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Feb 2008 00:50:07 -0000
+X-List-Received-Date: Fri, 29 Feb 2008 07:31:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-rpurdie commit wrote:
-> pwc: Improve staging variables
-et al.
+The little I knew of Greg was from his messages in Opie mailing lists. He
+always seemed a nice guy, it's sad to know he died, and so young.
 
-Just wanted to say: Awesome work on the "(packaged) staging"-front,
-Richard.  Thanks, very much appreciated.
-
-
+On 2/29/08, Michael 'Mickey' Lauer <mickey@vanille-media.de> wrote:
+>
+> Thanks for notifying, Hans.
+>
+> This is very sad.
+>
+> Guys, all of you who new Greg, please give your condolences on that page.
+>
+> :(
+>
+>
+> --
+> Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
