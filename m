@@ -1,27 +1,41 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.68)
-	(envelope-from <dp@xora.org.uk>) id 1JV1gZ-0007mX-PJ
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Feb 2008 10:37:51 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Fri, 29 Feb 2008 09:36:55 +0000
-	id 000301C2.47C7D238.00006DEC
-Date: Fri, 29 Feb 2008 09:36:52 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: oe-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20080229093652.17ad566a@cimmeria>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JV2SF-0004dl-Hs
+	for openembedded-devel@openembedded.org; Fri, 29 Feb 2008 11:27:10 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JV2RM-0004is-6v
+	for openembedded-devel@openembedded.org; Fri, 29 Feb 2008 10:26:08 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 29 Feb 2008 10:26:08 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 29 Feb 2008 10:26:08 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Fri, 29 Feb 2008 11:26:01 +0100
+Message-ID: <fq8mjp$co6$1@ger.gmane.org>
+References: <20080229093652.17ad566a@cimmeria>
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <20080229093652.17ad566a@cimmeria>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: New Developer Access
+Subject: Re: New Developer Access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,18 +49,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Feb 2008 09:37:52 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 29 Feb 2008 10:27:10 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I would like to propose a new developer to OE, John Lee.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-He already has commit access to OE through the openmoko key but I think
-it is time we welcomed him as his own developer. His work is upto the
-quality we expect of a developer.
+Graeme Gregory schreef:
+| I would like to propose a new developer to OE, John Lee.
+|
+| He already has commit access to OE through the openmoko key but I think
+| it is time we welcomed him as his own developer. His work is upto the
+| quality we expect of a developer.
 
-I am doing this with my OE hat on, not my OM hat.
+Have him send a mtn key to Mickey and me according to the instructions
+in http://www.openembedded.org/monotonephrasebook.
 
-Graeme
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHx924MkyGM64RGpERAiT1AJ4wgba8qY31ss7S7dx4zoji3u0YWgCfW/JE
+/rSrBQk0mKEEmHGgSOF5tR0=
+=kDeJ
+-----END PGP SIGNATURE-----
+
 
 
