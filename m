@@ -1,31 +1,28 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [64.233.184.238] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JVNPF-0001jx-21
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JVs25-0008OE-JU
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Mar 2008 09:49:26 +0100
-Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1JVNOK-0005iG-AB
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Mar 2008 09:48:24 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 1 Mar 2008 09:48:19 +0100
-User-Agent: KMail/1.9.9
-References: <47C8065C.2040105@gmx.net>
-In-Reply-To: <47C8065C.2040105@gmx.net>
+	Sun, 02 Mar 2008 18:31:43 +0100
+Received: by wr-out-0506.google.com with SMTP id c30so16102379wra.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Mar 2008 09:30:24 -0800 (PST)
+Received: by 10.100.135.16 with SMTP id i16mr18104880and.9.1204479024186;
+	Sun, 02 Mar 2008 09:30:24 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Sun, 2 Mar 2008 09:30:24 -0800 (PST)
+Message-ID: <c384c5ea0803020930s27303ee1q2719373db77fd8ba@mail.gmail.com>
+Date: Sun, 2 Mar 2008 18:30:24 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Message-Id: <200803010948.19774.zecke@selfish.org>
-X-SA-Exim-Connect-IP: 81.169.183.159
-X-SA-Exim-Mail-From: zecke@selfish.org
+X-SA-Exim-Connect-IP: 64.233.184.238
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded@LinuxTag 2008
+Subject: Multiple bitbake and a shared DL_DIR location - race conditions?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,30 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Mar 2008 08:49:26 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Sun, 02 Mar 2008 17:31:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Friday 29 February 2008 14:19:24 Robert Schuster wrote:
-> Hi all,
-> LinuxTag 2008 is due in May 28-31. The event is happening in Berlin,
-> Germany like last year. I already registered a talk about OpenEmbedded
-> (in English, of course).
+Hello,
 
+in setting up a few automated builds, I have shared the DL_DIR amongst
+the builds.
 
-> LinuxTag also offers the possibility to do workshops. I think it would
-> be really great I we could do that and teach those who are interested
-> how nice, flexible and superior ;) OE is. I am willing to do such a
-> workshop but I would *really* *really* like to do this together with
-> someone having more in-depth knowledge. I for instance am totally
-> helpless when it comes to gcc, kernel or glibc recipes. If you feel
-> sufficiently experienced with those consider yourself the one I meant
-> with 'someone having more in-depth knowledge'.
+I would like to allow the builds to overlap in time, at least make
+sure the builds are robust to this, but I doubt this is possible at
+all.
 
-Workshop? Cool, where to sign up?
+Are there any race conditions with the current approach?
 
-z.
+I.e. what if two fetch tasks from concurrent instances of bitbake
+decide to download a package?
+
+Regards,
+-- 
+Leon
 
 
