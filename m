@@ -1,32 +1,37 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JVujm-0005RW-L8
+	(envelope-from <utx@penguin.cz>) id 1JVw2g-0002cb-O0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Mar 2008 21:24:48 +0100
-Received: from [78.48.33.154] (helo=[192.168.1.152])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JVvD8-0004zb-9Q
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Mar 2008 21:55:06 +0100
-Message-ID: <47CB0CC6.2010308@kernelconcepts.de>
-Date: Sun, 02 Mar 2008 21:23:34 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-MIME-Version: 1.0
+	Sun, 02 Mar 2008 22:48:29 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 67DFB14023C4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 Mar 2008 22:46:49 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id eG4QR3m0mxSV
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 Mar 2008 22:46:49 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 28F6314171BB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 Mar 2008 22:46:48 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <47C8065C.2040105@gmx.net> <200803010948.19774.zecke@selfish.org>
-In-Reply-To: <200803010948.19774.zecke@selfish.org>
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+Date: Sun, 02 Mar 2008 22:47:15 +0100
+Message-Id: <1204494435.17068.23.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded@LinuxTag 2008
+Subject: iwwmmxt optimization and soft float in OE on PXA270
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,26 +45,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Mar 2008 20:24:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 02 Mar 2008 21:48:29 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Hallo.
 
-> Workshop? Cool, where to sign up?
+What is your opinion on enabling of iwmmxt optimization on >=PXA270
+devices, and optionally also soft floats?
 
-ah wait - first we should sign up OE to LinuxTag. I'll try to do that now...
+I read old posts talking regarding broken iwmmxt support in gcc.
 
-Greetings
+I also read something about float emulation options for PXA270, its
+speed and ABI breakage. It seems, that soft float should be the fastest
+option for devices without hardware FPU.
 
-Florian
+I wanted to test it and I have recompiled everything I am using with:
+-march=iwmmxt -mcpu=iwmmxt -mtune=iwmmxt -Os -funswitch-loops -fgcse-after-reload -msoft-float
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-14
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+It should be the best possible optimization for PXA270 (compiled for
+iwmmxt, use soft float instead of exception based kernel driver, use -Os
+to make binaries as small as possible and add optimizations from -O3).
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Then I have created a spitz feed based on the latest OE.dev and
+installed.
+
+Here is iwmmxt soft float Spitz feed:
+http://www.penguin.cz/~utx/zaurus/feed/
+(You have to degrade or remove xorg-kdrive before boot - known bug. You
+have to replace the default feed by the experimental one. And finally,
+2.6.24 is available in the feed and you can upgrade.)
+
+Problems relevant to iwmmxt:
+- qemu does not work properly and fails to compile locales, timezones
+  and emacs.
+- minimo compilation fails (not yet analyzed)
+
+Problems relevant to soft float:
+- Breaks ABI of applications using math.
+
+I am now using it for several days, and I don't see any problems, which
+were not known with the default compiler.
+
+Other results:
+- Os does not create significantly smaller binaries when compared with
+  the default -O2.
+- Some applications seems to run a bit faster (MPlayer).
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
