@@ -1,34 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.233.184.228] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JVt5O-0002uJ-9u
-	for openembedded-devel@openembedded.org; Sun, 02 Mar 2008 19:39:03 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JVt4F-0007Rs-NB
-	for openembedded-devel@openembedded.org; Sun, 02 Mar 2008 18:37:47 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 02 Mar 2008 18:37:47 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 02 Mar 2008 18:37:47 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Sun, 02 Mar 2008 19:37:40 +0100
-Message-ID: <fqes5j$v3q$1@ger.gmane.org>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JVtJN-00039s-7z
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 02 Mar 2008 19:53:30 +0100
+Received: by wr-out-0506.google.com with SMTP id c30so16145670wra.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Mar 2008 10:52:17 -0800 (PST)
+Received: by 10.100.254.18 with SMTP id b18mr26940113ani.21.1204483937375;
+	Sun, 02 Mar 2008 10:52:17 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Sun, 2 Mar 2008 10:52:17 -0800 (PST)
+Message-ID: <c384c5ea0803021052k551c89abq93ef572189760f6b@mail.gmail.com>
+Date: Sun, 2 Mar 2008 19:52:17 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <fqes5j$v3q$1@ger.gmane.org>
+MIME-Version: 1.0
 References: <c384c5ea0803020930s27303ee1q2719373db77fd8ba@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <c384c5ea0803020930s27303ee1q2719373db77fd8ba@mail.gmail.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<fqes5j$v3q$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 64.233.184.228
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
@@ -49,41 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Mar 2008 18:39:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 02 Mar 2008 18:53:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Leon Woestenberg schreef:
-| Hello,
-|
-| in setting up a few automated builds, I have shared the DL_DIR amongst
-| the builds.
-|
-| I would like to allow the builds to overlap in time, at least make
-| sure the builds are robust to this, but I doubt this is possible at
-| all.
-|
-| Are there any race conditions with the current approach?
-|
-| I.e. what if two fetch tasks from concurrent instances of bitbake
-| decide to download a package?
+>  | I would like to allow the builds to overlap in time, at least make
+>  | sure the builds are robust to this, but I doubt this is possible at
+>  | all.
+>  |
+>  | Are there any race conditions with the current approach?
+>  |
+>  | I.e. what if two fetch tasks from concurrent instances of bitbake
+>  | decide to download a package?
+>
+>  Isn't that what the .lock files are supposed to do? If you have multiple
+>  bitbake threads (in one bitbake instance) it has to solve the same problem.
+>
+Maybe, I did not fully understand how the go() function in
+"lib/bb/fetch/__init__.py" could handle this case:
 
-Isn't that what the .lock files are supposed to do? If you have multiple
-bitbake threads (in one bitbake instance) it has to solve the same problem.
+Suppose at time T one bitbake instance #1 is downloading/fetching
+package A, and bitbake instance #2 at time T would like to fetch the
+same package, what will #2 do?
 
-regards,
+Will it wait for the lock to be released, then check?
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHyvP0MkyGM64RGpERAj7vAJ9KmIc0oFcjHPAnjgTz7r6ZUTreoQCeOPQe
-DTwR/YsH45qrnBCL9tOme7A=
-=E8Ty
------END PGP SIGNATURE-----
-
+Regards,
+-- 
+Leon
 
 
