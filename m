@@ -1,29 +1,33 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1JW8Ej-0006a8-TE
+	(envelope-from <zecke@selfish.org>) id 1JW9Xr-00051B-Uv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Mar 2008 11:49:43 +0100
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id CAF6C146C002
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Mar 2008 11:48:28 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Mon, 03 Mar 2008 13:13:29 +0100
+Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JW9Wk-00054Q-FQ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Mar 2008 13:12:18 +0100
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fqg9c0$g00$1@ger.gmane.org>
-References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
-Date: Mon, 03 Mar 2008 11:48:28 +0100
-Message-Id: <1204541308.5725.10.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-X-SA-Exim-Connect-IP: 82.119.242.94
-X-SA-Exim-Mail-From: utx@penguin.cz
+Date: Mon, 3 Mar 2008 13:12:15 +0100
+User-Agent: KMail/1.9.9
+References: <1204303564.8126.38.camel@dax.rpnet.com>
+	<200803030207.40083.zecke@selfish.org>
+	<1204537079.8095.19.camel@dax.rpnet.com>
+In-Reply-To: <1204537079.8095.19.camel@dax.rpnet.com>
+MIME-Version: 1.0
+Message-Id: <200803031312.15859.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 81.169.183.159
+X-SA-Exim-Mail-From: zecke@selfish.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.5 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: iwwmmxt optimization and soft float in OE on PXA270
+Subject: Re: OE Staging ABI Change Warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,28 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Mar 2008 10:49:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 03 Mar 2008 12:13:30 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi wrote:
+On Monday 03 March 2008 10:37:59 Richard Purdie wrote:
+> Hi Holger,
+>
+> On Mon, 2008-03-03 at 02:07 +0100, Holger Freyther wrote:
+> > On Friday 29 February 2008 17:46:04 Richard Purdie wrote:
+> > > OE.dev is now just about ready to switch to using sysroot. The
+> > > compilers have been updated to activate sysroot and the fixes I/Poky
+> > > have for various pkgconfig issues have been committed. The final change
+> > > is to actually change the layout.
+> >
+> > one small question, how does this impact:
+> > 	-The sharp rom and their crappy and ancient 2.95.x toolchain?
+> > 	-Any other prebuilt toolchain.
+>
+> It means they'll need to play a game with symlinks just as we currently
+> have in cross-linkage and the "hack" I added into gcc-cross temporarily
+> to add a usr symlink in staging.
 
-> Angstrom already enables softfloat (for FPU-less systems) and -Os by
-> default *and* enables iwmmxt (if you have MACHINE_FEATURES = "iwmmxt")
-> for apps which have been proven to benefit from iwmmxt (e.g. mplayer).
+This needs documentation (updates). I don't see any of us volunteering though.
 
-Ah, I see. ABI-compatible softfp mode is enabled by patching gcc, not in
-conf files.
 
-> I still get mysterious segfaults when running an all iwmmxt glibc system
-> (uclibc is even worse), so I don't think flipping the global switch is a
-> good idea.
+> Having looked at some old parts of the metadata when fixing up staging
+> references, we already have a ton of broken .bb files :(. I was really
+> disappointed with the quality in some areas and I honestly don't know
+> what to do about this.
 
-Which applications are failing for you?
+There is proposal to start with an empty repository and move things over, 
+testing and compiling world, clean up weekends.... more review on checking 
+things in.
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Back to the point, feel free to check things in.
 
+
+z.
 
 
