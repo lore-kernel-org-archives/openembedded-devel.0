@@ -1,37 +1,31 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1JVw2g-0002cb-O0
+	(envelope-from <zecke@selfish.org>) id 1JVzAh-0001pO-Vd
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Mar 2008 22:48:29 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 67DFB14023C4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Mar 2008 22:46:49 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eG4QR3m0mxSV
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Mar 2008 22:46:49 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 28F6314171BB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Mar 2008 22:46:48 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Mon, 03 Mar 2008 02:08:54 +0100
+Received: from 118-166-80-22.dynamic.hinet.net ([118.166.80.22]
+	helo=tamarin.local) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JVz9d-0000rA-2S
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Mar 2008 02:07:45 +0100
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 02 Mar 2008 22:47:15 +0100
-Message-Id: <1204494435.17068.23.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+Date: Mon, 3 Mar 2008 02:07:39 +0100
+User-Agent: KMail/1.9.9
+References: <1204303564.8126.38.camel@dax.rpnet.com>
+In-Reply-To: <1204303564.8126.38.camel@dax.rpnet.com>
+MIME-Version: 1.0
+Message-Id: <200803030207.40083.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 81.169.183.159
+X-SA-Exim-Mail-From: zecke@selfish.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: iwwmmxt optimization and soft float in OE on PXA270
+Subject: Re: OE Staging ABI Change Warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -45,57 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Mar 2008 21:48:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 03 Mar 2008 01:08:56 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hallo.
+On Friday 29 February 2008 17:46:04 Richard Purdie wrote:
+> Hi,
+>
+> OE.dev is now just about ready to switch to using sysroot. The compilers
+> have been updated to activate sysroot and the fixes I/Poky have for
+> various pkgconfig issues have been committed. The final change is to
+> actually change the layout.
 
-What is your opinion on enabling of iwmmxt optimization on >=PXA270
-devices, and optionally also soft floats?
+Hi Richard,
 
-I read old posts talking regarding broken iwmmxt support in gcc.
+one small question, how does this impact:
+	-The sharp rom and their crappy and ancient 2.95.x toolchain?
+	-Any other prebuilt toolchain.
 
-I also read something about float emulation options for PXA270, its
-speed and ABI breakage. It seems, that soft float should be the fastest
-option for devices without hardware FPU.
-
-I wanted to test it and I have recompiled everything I am using with:
--march=iwmmxt -mcpu=iwmmxt -mtune=iwmmxt -Os -funswitch-loops -fgcse-after-reload -msoft-float
-
-It should be the best possible optimization for PXA270 (compiled for
-iwmmxt, use soft float instead of exception based kernel driver, use -Os
-to make binaries as small as possible and add optimizations from -O3).
-
-Then I have created a spitz feed based on the latest OE.dev and
-installed.
-
-Here is iwmmxt soft float Spitz feed:
-http://www.penguin.cz/~utx/zaurus/feed/
-(You have to degrade or remove xorg-kdrive before boot - known bug. You
-have to replace the default feed by the experimental one. And finally,
-2.6.24 is available in the feed and you can upgrade.)
-
-Problems relevant to iwmmxt:
-- qemu does not work properly and fails to compile locales, timezones
-  and emacs.
-- minimo compilation fails (not yet analyzed)
-
-Problems relevant to soft float:
-- Breaks ABI of applications using math.
-
-I am now using it for several days, and I don't see any problems, which
-were not known with the default compiler.
-
-Other results:
-- Os does not create significantly smaller binaries when compared with
-  the default -O2.
-- Some applications seems to run a bit faster (MPlayer).
+and honestly I'm a bit scared of silently breaking thousands of packages/BB 
+files.
 
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+regards
+	z.
 
 
