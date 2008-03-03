@@ -1,31 +1,37 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JVzAh-0001pO-Vd
+	(envelope-from <rod@whitby.id.au>) id 1JW3Qk-0002gr-Mn
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Mar 2008 02:08:54 +0100
-Received: from 118-166-80-22.dynamic.hinet.net ([118.166.80.22]
-	helo=tamarin.local) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1JVz9d-0000rA-2S
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Mar 2008 02:07:45 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 3 Mar 2008 02:07:39 +0100
-User-Agent: KMail/1.9.9
-References: <1204303564.8126.38.camel@dax.rpnet.com>
-In-Reply-To: <1204303564.8126.38.camel@dax.rpnet.com>
+	Mon, 03 Mar 2008 06:41:47 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 9DD52AC7E8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  3 Mar 2008 00:40:33 -0500 (EST)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Mon, 03 Mar 2008 00:40:33 -0500
+X-Sasl-enc: 2s+hci1+O2GZC8xXVzmo1sGftLWyxVI53KDSEIaS+Y3n 1204522833
+Received: from [192.168.248.18] (98.mue2.phnx.la6ca01r1.dsl.att.net
+	[12.102.2.98])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 3EC3631A54
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  3 Mar 2008 00:40:33 -0500 (EST)
+Message-ID: <47CB8F2D.2060704@whitby.id.au>
+Date: Mon, 03 Mar 2008 16:09:57 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
 MIME-Version: 1.0
-Message-Id: <200803030207.40083.zecke@selfish.org>
-X-SA-Exim-Connect-IP: 81.169.183.159
-X-SA-Exim-Mail-From: zecke@selfish.org
+To: openembedded-devel@lists.openembedded.org
+References: <c384c5ea0803021104s4470cb31o45e1295b7564e876@mail.gmail.com>
+In-Reply-To: <c384c5ea0803021104s4470cb31o45e1295b7564e876@mail.gmail.com>
+X-SA-Exim-Connect-IP: 66.111.4.28
+X-SA-Exim-Mail-From: rod@whitby.id.au
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE Staging ABI Change Warning
+Subject: Re: content addressable fetching of packages, through MD5SUM or SHA1SUM?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,31 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Mar 2008 01:08:56 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 03 Mar 2008 05:41:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 29 February 2008 17:46:04 Richard Purdie wrote:
-> Hi,
->
-> OE.dev is now just about ready to switch to using sysroot. The compilers
-> have been updated to activate sysroot and the fixes I/Poky have for
-> various pkgconfig issues have been committed. The final change is to
-> actually change the layout.
+Leon Woestenberg wrote:
+> I wonder if someone knows about a content addressable file server, or
+> content addressable URL server?
+> 
+> The idea is that the bitbake fetcher does not use the SRC_URI provided
+> URL per se, but can fall back to use the SHA1SUM or MD5SUM to ask
+> "something" for alternative locations of the package.
 
-Hi Richard,
+Perhaps just put all the sources in a big git repository.  Then you can 
+get them directly by SHA1.
 
-one small question, how does this impact:
-	-The sharp rom and their crappy and ancient 2.95.x toolchain?
-	-Any other prebuilt toolchain.
-
-and honestly I'm a bit scared of silently breaking thousands of packages/BB 
-files.
-
-
-regards
-	z.
+-- Rod
 
 
