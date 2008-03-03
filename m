@@ -1,32 +1,26 @@
-Received: from [64.233.178.241] (helo=hs-out-0708.google.com)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JWDiE-00076J-Om
+	(envelope-from <mwester@dls.net>) id 1JWELz-00088n-03
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Mar 2008 17:42:58 +0100
-Received: by hs-out-0708.google.com with SMTP id 23so85315hsn.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Mar 2008 08:39:12 -0800 (PST)
-Received: by 10.100.133.2 with SMTP id g2mr223295and.113.1204562352873;
-	Mon, 03 Mar 2008 08:39:12 -0800 (PST)
-Received: by 10.100.190.7 with HTTP; Mon, 3 Mar 2008 08:39:12 -0800 (PST)
-Message-ID: <c384c5ea0803030839l72abd21fj74690ea95b4e2dc5@mail.gmail.com>
-Date: Mon, 3 Mar 2008 17:39:12 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0803030814m5b680a85qa64eb90f17ab161b@mail.gmail.com>
+	Mon, 03 Mar 2008 18:21:51 +0100
+Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
+	by mx01.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1JWEKn-0003Od-PS
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Mar 2008 11:20:18 -0600
+Message-ID: <47CC3350.8010209@dls.net>
+Date: Mon, 03 Mar 2008 11:20:16 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
 MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
 References: <1204303564.8126.38.camel@dax.rpnet.com>
-	<200803030207.40083.zecke@selfish.org>
-	<1204537079.8095.19.camel@dax.rpnet.com>
-	<200803031312.15859.zecke@selfish.org> <fqgs03$f44$1@ger.gmane.org>
-	<1204554867.8095.61.camel@dax.rpnet.com>
-	<47CC1D49.3000605@whitby.id.au>
-	<c384c5ea0803030814m5b680a85qa64eb90f17ab161b@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.233.178.241
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+In-Reply-To: <1204303564.8126.38.camel@dax.rpnet.com>
+X-SA-Exim-Connect-IP: 216.145.245.197
+X-SA-Exim-Mail-From: mwester@dls.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -44,29 +38,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Mar 2008 16:43:10 -0000
-X-List-Received-Date: Mon, 03 Mar 2008 16:43:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 03 Mar 2008 17:22:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Correction,
 
-On Mon, Mar 3, 2008 at 5:14 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Hello all,
->
->
->  I assume, the broken packages usually are due to developers now
->  knowing the details of what is fully correct, and subsequent
->  copy-pasting.
->
-I assume, the broken packages usually are due to developers *not*
-knowing the details of what is fully correct, and subsequent
-copy-pasting.
 
-Regards,
--- 
-Leon
+Richard Purdie wrote:
+> Hi,
+>
+> OE.dev is now just about ready to switch to using sysroot. The compilers
+> have been updated to activate sysroot and the fixes I/Poky have for
+> various pkgconfig issues have been committed....
+
+Unslung now fails when building gcc-cross.  I presume this is a result 
+of this activity (it build before the Feb 28 commits), but I do not 
+understand the issues about sysroot and all well enough to even begin to 
+be able to troubleshoot.  Is the patch attached to this original email 
+supposed to fix this?  Is there something broken in the recipe, as 
+implied by this thread, that I need to fix?  If so, what would that be?
+
+[skipping over the normal compilation output in the logs...]
+gcc -DIN_GCC -DHAVE_CONFIG_H 
+-isystem/stuff/slug/unslung/tmp/staging/i686-linux/include -O2 -DIN_GCC 
+-DCROSS_\
+COMPILE -W -Wall -Wwrite-strings -Wstrict-prototypes 
+-Wmissing-prototypes -pedantic -Wno-long-long -Wno-error\
+ -DHAVE_CONFIG_H -DGENERATOR_FILE 
+-isystem/stuff/slug/unslung/tmp/staging/i686-linux/include -W -Wall -Wwrite\
+-strings -Wstrict-prototypes -Wmissing-prototypes -pedantic 
+-Wno-long-long  -Wno-error -I. -I.. -I/stuff/slug\
+/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/gcc/fixinc 
+-I/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/g\
+cc-3.4.4/gcc/fixinc/.. 
+-I/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/gcc/fixinc/../config 
+-I/st\
+uff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/gcc/fixinc/../../include  
+-o fixincl fixincl.o fixtest\
+s.o fixfixes.o server.o procopen.o fixlib.o 
+/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/build.i\
+686-linux.armeb-linux/gcc/../libiberty/libiberty.a
+echo timestamp > full-stamp
+./fixincl -v < /dev/null
+'fixincl version 1.1'
+chmod 755 ../fixinc.sh
+make[4]: Leaving directory 
+`/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/build.i686-linux.armeb-\
+linux/gcc/fixinc'
+The directory that should contain system headers does not exist:
+  /stuff/slug/unslung/tmp/staging/armeb-linux/usr/include
+make[3]: *** [stmp-fixinc] Error 1
+make[3]: Leaving directory 
+`/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/build.i686-linux.armeb-\
+linux/gcc'
+make[2]: *** [all-gcc] Error 2
+make[2]: Leaving directory 
+`/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/build.i686-linux.armeb-\
+linux'
+FATAL: oe_runmake failed
+
+
+
+In particular, note the error message which claims that the 
+...gcc-3.4.4/usr/include file does not exist.  No, it does not -- it's 
+at ...gcc-3.4.4/include instead.
+
+Thanks,
+Mike (mwester)
 
 
