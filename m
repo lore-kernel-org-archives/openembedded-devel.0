@@ -1,30 +1,38 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1JWELz-00088n-03
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Mar 2008 18:21:51 +0100
-Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
-	by mx01.dls.net with esmtpa (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1JWEKn-0003Od-PS
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Mar 2008 11:20:18 -0600
-Message-ID: <47CC3350.8010209@dls.net>
-Date: Mon, 03 Mar 2008 11:20:16 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1204303564.8126.38.camel@dax.rpnet.com>
-In-Reply-To: <1204303564.8126.38.camel@dax.rpnet.com>
-X-SA-Exim-Connect-IP: 216.145.245.197
-X-SA-Exim-Mail-From: mwester@dls.net
+	(envelope-from <rpurdie@rpsys.net>) id 1JWF20-0004up-8S
+	for openembedded-devel@openembedded.org; Mon, 03 Mar 2008 19:04:59 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m23I3js7011160
+	for <openembedded-devel@openembedded.org>; Mon, 3 Mar 2008 18:03:45 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11064-03 for <openembedded-devel@openembedded.org>;
+	Mon,  3 Mar 2008 18:03:41 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m23I3bvw011148
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Mon, 3 Mar 2008 18:03:37 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Mon, 03 Mar 2008 18:03:36 +0000
+Message-Id: <1204567416.9002.5.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	m23I3js7011160
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE Staging ABI Change Warning
+Subject: Poky Version 3.1 (Pinky) Released
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,72 +46,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Mar 2008 17:22:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 03 Mar 2008 18:05:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+I thought I'd mention the new Poky release (Pinky 3.1) here in case
+anyone is interested. The release notes follow.
+
+This release has seen many major improvements to the core of the build
+system and in the usability of Poky output as a development environment.
+
+A quick summary of the major changes is:
+
+ * Development of Anjuta integration with Poky=E2=80=99s SDK and QEMU, ma=
+king=20
+   cross development of applications simple.
+ * Addition of a users manual.
+ * New machine support: Compulab EM-X270, Zylonite, Freescale MX31ADS,=20
+   Phytec PhyCORE-iMX31, Logic iMX31 Lite and the HTC Universal=20
+   (experimental).
+ * Improved existing machine support, particularly the experimental=20
+   Nokia tablet support.
+ * Standalone toolchain and SDK application developers can develop=20
+   against.
+ * Addition of new tools to the SDK such as QEMU
+ * Conversion to use the sysroot mode of gcc, making cross compiling=20
+   both easier and more robust.
+ * Conversion to use pkgconfig in sysroot mode
+ * Updates to recent versions of almost all packages
+ * Addition of NetworkManager to standard images
+ * Addition of a Webkit based browser
+ * uclibc support
+
+The release also includes many bugfixes and other smaller tweaks and
+updates.
+
+The release tarball:
+http://pokylinux.org/releases/poky-pinky-3.1.tgz
+
+Device Images:
+http://pokylinux.org/releases/pinky-3.1/
+
+The (new) Poky Website:
+http://pokylinux.org
 
 
-
-Richard Purdie wrote:
-> Hi,
->
-> OE.dev is now just about ready to switch to using sysroot. The compilers
-> have been updated to activate sysroot and the fixes I/Poky have for
-> various pkgconfig issues have been committed....
-
-Unslung now fails when building gcc-cross.  I presume this is a result 
-of this activity (it build before the Feb 28 commits), but I do not 
-understand the issues about sysroot and all well enough to even begin to 
-be able to troubleshoot.  Is the patch attached to this original email 
-supposed to fix this?  Is there something broken in the recipe, as 
-implied by this thread, that I need to fix?  If so, what would that be?
-
-[skipping over the normal compilation output in the logs...]
-gcc -DIN_GCC -DHAVE_CONFIG_H 
--isystem/stuff/slug/unslung/tmp/staging/i686-linux/include -O2 -DIN_GCC 
--DCROSS_\
-COMPILE -W -Wall -Wwrite-strings -Wstrict-prototypes 
--Wmissing-prototypes -pedantic -Wno-long-long -Wno-error\
- -DHAVE_CONFIG_H -DGENERATOR_FILE 
--isystem/stuff/slug/unslung/tmp/staging/i686-linux/include -W -Wall -Wwrite\
--strings -Wstrict-prototypes -Wmissing-prototypes -pedantic 
--Wno-long-long  -Wno-error -I. -I.. -I/stuff/slug\
-/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/gcc/fixinc 
--I/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/g\
-cc-3.4.4/gcc/fixinc/.. 
--I/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/gcc/fixinc/../config 
--I/st\
-uff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/gcc/fixinc/../../include  
--o fixincl fixincl.o fixtest\
-s.o fixfixes.o server.o procopen.o fixlib.o 
-/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/build.i\
-686-linux.armeb-linux/gcc/../libiberty/libiberty.a
-echo timestamp > full-stamp
-./fixincl -v < /dev/null
-'fixincl version 1.1'
-chmod 755 ../fixinc.sh
-make[4]: Leaving directory 
-`/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/build.i686-linux.armeb-\
-linux/gcc/fixinc'
-The directory that should contain system headers does not exist:
-  /stuff/slug/unslung/tmp/staging/armeb-linux/usr/include
-make[3]: *** [stmp-fixinc] Error 1
-make[3]: Leaving directory 
-`/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/build.i686-linux.armeb-\
-linux/gcc'
-make[2]: *** [all-gcc] Error 2
-make[2]: Leaving directory 
-`/stuff/slug/unslung/tmp/work/gcc-cross-3.4.4-r8/gcc-3.4.4/build.i686-linux.armeb-\
-linux'
-FATAL: oe_runmake failed
-
-
-
-In particular, note the error message which claims that the 
-...gcc-3.4.4/usr/include file does not exist.  No, it does not -- it's 
-at ...gcc-3.4.4/include instead.
-
-Thanks,
-Mike (mwester)
 
 
