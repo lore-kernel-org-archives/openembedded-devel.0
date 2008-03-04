@@ -1,23 +1,24 @@
-Received: from [209.85.132.244] (helo=an-out-0708.google.com)
+Received: from [209.85.132.246] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JWTK3-0002rO-Bk
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JWU5i-00083W-1t
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Mar 2008 10:20:39 +0100
-Received: by an-out-0708.google.com with SMTP id b33so134405ana.83
+	Tue, 04 Mar 2008 11:09:50 +0100
+Received: by an-out-0708.google.com with SMTP id b33so139055ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Mar 2008 01:19:06 -0800 (PST)
-Received: by 10.100.132.2 with SMTP id f2mr2027412and.65.1204622346368;
-	Tue, 04 Mar 2008 01:19:06 -0800 (PST)
-Received: by 10.100.190.7 with HTTP; Tue, 4 Mar 2008 01:19:06 -0800 (PST)
-Message-ID: <c384c5ea0803040119u47de4827ib0b173cd09a39297@mail.gmail.com>
-Date: Tue, 4 Mar 2008 10:19:06 +0100
+	Tue, 04 Mar 2008 02:08:23 -0800 (PST)
+Received: by 10.100.127.18 with SMTP id z18mr2247215anc.39.1204625299505;
+	Tue, 04 Mar 2008 02:08:19 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Tue, 4 Mar 2008 02:08:19 -0800 (PST)
+Message-ID: <c384c5ea0803040208g54d59ffenf53b467fef4745da@mail.gmail.com>
+Date: Tue, 4 Mar 2008 11:08:19 +0100
 From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fqevf6$8tq$1@ger.gmane.org>
+In-Reply-To: <c384c5ea0803040119u47de4827ib0b173cd09a39297@mail.gmail.com>
 MIME-Version: 1.0
 References: <c384c5ea0803021104s4470cb31o45e1295b7564e876@mail.gmail.com>
 	<fqevf6$8tq$1@ger.gmane.org>
-X-SA-Exim-Connect-IP: 209.85.132.244
+	<c384c5ea0803040119u47de4827ib0b173cd09a39297@mail.gmail.com>
+X-SA-Exim-Connect-IP: 209.85.132.246
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
@@ -39,44 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Mar 2008 09:20:41 -0000
+X-List-Received-Date: Tue, 04 Mar 2008 10:09:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello Koen,
+As a quick proof-of-concept for the package crawler that builds a
+table of URI's:
 
-On Sun, Mar 2, 2008 at 8:33 PM, Koen Kooi
-<koen@dominion.kabel.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
->
->  for archive in * ; do
->  ~   ln -sf $archive $(md5sum $archive)
->  ~   ln -sf $archive $(sha256sum $archive)
->  done
->
-Neat, but this is a one-to-one mapping from a single hash to a single URI.
+#!/bin/bash
 
-I meant an extra level of indirection, where
+# Requires links, sed, grep and Google :-)
+# Given a file name as argument, Google's for alternative links
+# @todo Add MD5SUM,SHA1SUM to check against, reject false URI's etc
 
-(md5sum,sha1sum) => table of URIs
+FILE=$1
 
-I think this means the fetcher class must be changed so that it first
-tries the proposed SRC_URI,
-and then falls back to quering the above database for alternative URIs.
+LIST=`links -dump
+'http://www.google.com/search?q=intitle%3A%22index+of%22+'$FILE | grep
+-e 'Cached' | sed 's@[ \t]*\(.*\)/[ ^t]\(.*\)@\1/@' | grep -v Cached`
 
-The neat thing would be to have a crawler, that Google's on the file
-name for alternate locations,
-fetches them, md5sums them, and inserts them into the URI table once
-it matches the (md5sum,sha1sum).
-
->  That's the quick and dirty way :) If someone comes up with a script, I
->  can run in on the angstrom source mirror for people to test against.
->
-In fact, your approach is how we track datasheets here :-)
-
-Regards,
--- 
-Leon
+for URI in $LIST
+do
+  echo -n $URI$FILE -
+  wget --timeout=2 -t1 -O- $URI$FILE 2>/dev/null | md5sum
+done
 
 
