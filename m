@@ -1,34 +1,31 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [64.233.184.234] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JWV0W-0000ew-Kz
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JWV6v-00013g-RU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Mar 2008 12:08:33 +0100
-Received: by an-out-0708.google.com with SMTP id b33so144617ana.83
+	Tue, 04 Mar 2008 12:15:10 +0100
+Received: by wr-out-0506.google.com with SMTP id 57so1313782wri.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Mar 2008 03:07:09 -0800 (PST)
-Received: by 10.100.125.12 with SMTP id x12mr2431543anc.34.1204628828885;
-	Tue, 04 Mar 2008 03:07:08 -0800 (PST)
-Received: by 10.100.190.7 with HTTP; Tue, 4 Mar 2008 03:07:08 -0800 (PST)
-Message-ID: <c384c5ea0803040307o19bf8a34m65ac79dcf0979c75@mail.gmail.com>
-Date: Tue, 4 Mar 2008 12:07:08 +0100
+	Tue, 04 Mar 2008 03:13:48 -0800 (PST)
+Received: by 10.100.93.19 with SMTP id q19mr2402927anb.4.1204629228171;
+	Tue, 04 Mar 2008 03:13:48 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Tue, 4 Mar 2008 03:13:48 -0800 (PST)
+Message-ID: <c384c5ea0803040313g4e5bc379oa54d245c19eb1b6e@mail.gmail.com>
+Date: Tue, 4 Mar 2008 12:13:48 +0100
 From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0803040231s735efcb5yfe8aecf71bd94f5a@mail.gmail.com>
+In-Reply-To: <1204485449.8223.36.camel@dax.rpnet.com>
 MIME-Version: 1.0
-References: <c384c5ea0803021104s4470cb31o45e1295b7564e876@mail.gmail.com>
-	<fqevf6$8tq$1@ger.gmane.org>
-	<c384c5ea0803040119u47de4827ib0b173cd09a39297@mail.gmail.com>
-	<c384c5ea0803040208g54d59ffenf53b467fef4745da@mail.gmail.com>
-	<c384c5ea0803040231s735efcb5yfe8aecf71bd94f5a@mail.gmail.com>
-X-SA-Exim-Connect-IP: 209.85.132.250
+References: <c384c5ea0803020930s27303ee1q2719373db77fd8ba@mail.gmail.com>
+	<1204485449.8223.36.camel@dax.rpnet.com>
+X-SA-Exim-Connect-IP: 64.233.184.234
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: content addressable fetching of packages, through MD5SUM or SHA1SUM?
+Subject: Re: Multiple bitbake and a shared DL_DIR location - race conditions?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,20 +39,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Mar 2008 11:08:33 -0000
+X-List-Received-Date: Tue, 04 Mar 2008 11:15:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Using a much enhanced script that iterates over my downloads/ has
-resulted in my IP address from temporarely being blocked from Google.
+Richard,
 
-Do not try this at home.
+On Sun, Mar 2, 2008 at 8:17 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+>  repository which would go to different files in DL_DIR but use the same
+>  scm directory. One solution is to override SVNDIR/GITDIR/CVSDIR.
+>
+bitbake.conf:143:DL_DIR = "${TMPDIR}/downloads"
+bitbake.conf:144:CVSDIR = "${DL_DIR}/cvs"
+bitbake.conf:145:SVNDIR = "${DL_DIR}/svn"
+bitbake.conf:146:GITDIR = "${DL_DIR}/git"
 
-The idea works though, and we will spend some time on trying to optimize this.
+Can we change this into:
+
+DL_DIR = "${TMPDIR}/downloads"
+CO_DIR = "${DL_DIR}"
+CVSDIR = "${CO_DIR}/cvs"
+SVNDIR = "${CO_DIR}/svn"
+GITDIR = "${CO_DIR}/git"
+
+So that I can override CO_DIR robustly, even when a fourth revision
+control system comes into play?
+
+(CO_DIR as in checkout directory)
 
 Regards,
-
-Leon.
+-- 
+Leon
 
 
