@@ -1,34 +1,31 @@
-Received: from [130.89.2.12] (helo=mx.utwente.nl)
+Received: from [209.85.198.188] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1JWaQV-0000fM-5s
-	for openembedded-devel@openembedded.org; Tue, 04 Mar 2008 17:55:44 +0100
-Received: from Powerbook-2.local (vpn006038.vpn.utwente.nl [130.89.6.38])
-	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id m24GrNXs010824
+	(envelope-from <hvontres@gmail.com>) id 1JWbQT-0006FP-8g
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 Mar 2008 18:59:47 +0100
+Received: by rv-out-0910.google.com with SMTP id c24so693186rvf.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Mar 2008 17:53:24 +0100
-Message-ID: <47CD7E84.9010603@student.utwente.nl>
-Date: Tue, 04 Mar 2008 17:53:24 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+	Tue, 04 Mar 2008 09:58:18 -0800 (PST)
+Received: by 10.140.192.9 with SMTP id p9mr807870rvf.193.1204653497529;
+	Tue, 04 Mar 2008 09:58:17 -0800 (PST)
+Received: by 10.140.170.12 with HTTP; Tue, 4 Mar 2008 09:58:17 -0800 (PST)
+Message-ID: <a7f8874a0803040958u50445374td3584fd0514cb97@mail.gmail.com>
+Date: Tue, 4 Mar 2008 09:58:17 -0800
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+To: oe-devel <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <47CD5A7B.1030203@westmont.edu>
 MIME-Version: 1.0
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <1204303564.8126.38.camel@dax.rpnet.com>
-In-Reply-To: <1204303564.8126.38.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.6
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-SA-Exim-Connect-IP: 130.89.2.12
-X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
+References: <47CD5A7B.1030203@westmont.edu>
+X-SA-Exim-Connect-IP: 209.85.198.188
+X-SA-Exim-Mail-From: hvontres@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,HTML_MESSAGE,RDNS_NONE
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE Staging ABI Change Warning
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: [Opie] Gerg Foundation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,46 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Mar 2008 16:55:44 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 04 Mar 2008 17:59:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Just FYI for those that don't read the opie-ml:
 
-Richard Purdie schreef:
-| Hi,
-|
-| OE.dev is now just about ready to switch to using sysroot. The compilers
-| have been updated to activate sysroot and the fixes I/Poky have for
-| various pkgconfig issues have been committed. The final change is to
-| actually change the layout.
-|
-| I've attached the patch I have locally for doing this. Since it changes
-| the layout of staging I've gone for changing the ABI and warning users
-| using the newly added mechanism.
-|
-| insane.bbclass will warn about potentially problematic .pc files and I
-| suspect a few people will hit that since there are a lot of broken ones
-| around. I'll give a summary of the problem and the way to solve it:
+---------- Forwarded message ----------
+From: John Rodkey <rodkey@westmont.edu>
+Date: Tue, Mar 4, 2008 at 6:19 AM
+Subject: [Opie] Gerg Foundation
+To: fac@westmont.edu, staff@westmont.edu, opie@handhelds.org, Rodkeyfam <
+rodkeyfam@westmont.edu>
 
-When are we going to make insane halt on .la files referring to
-${WORKDIR}? Right now those are the biggest problem for packaged-staging
-and rm_work.
 
-regards,
+Greg Gilbert's father has established a foundation in Greg's honor.  The
+funds received by the foundation will be allocated to Computer Science
+students at Westmont.
+The website for the foundation can be found at
+http://www.gergfoundation.org/wp/
 
-Koen
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
+John Rodkey
+_______________________________________________
+Open Source User Interface and Apps built on Qt Embedded
+Opie mailing list
+Opie@handhelds.org
+https://handhelds.org/mailman/listinfo/opie
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFHzX6DMkyGM64RGpERAuy8AJ4xZS1LJgLstnz6NjEg3Tw3QPkHXgCcDBUw
-Ffldpcorfw2FpBT52t9YfWA=
-=btjD
------END PGP SIGNATURE-----
 
+-- 
+Henry von Tresckow (hvontres)
 
