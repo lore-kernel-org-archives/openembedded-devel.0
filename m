@@ -1,45 +1,35 @@
-Received: from [62.70.27.150] (helo=hoat.troll.no)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tcooksey@trolltech.com>) id 1JWZzI-0000Ar-7E
-	for openembedded-devel@openembedded.org; Tue, 04 Mar 2008 17:27:37 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1JWaCo-0000Nz-91
+	for openembedded-devel@openembedded.org; Tue, 04 Mar 2008 17:41:32 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by hoat.troll.no (Postfix) with ESMTP id 80104581A8
-	for <openembedded-devel@openembedded.org>;
-	Tue,  4 Mar 2008 17:25:31 +0100 (CET)
-Received: from hoat.troll.no ([127.0.0.1])
-	by localhost (hoat.troll.no [127.0.0.1]) (amavisd-maia,
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m24GeDJ1018930
+	for <openembedded-devel@openembedded.org>; Tue, 4 Mar 2008 16:40:13 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 12125-07 for <openembedded-devel@openembedded.org>;
-	Tue,  4 Mar 2008 17:25:30 +0100 (CET)
-Received: from sx01.troll.no (sx01.troll.no [62.70.27.21])
-	by hoat.troll.no (Postfix) with ESMTP id 384EF581A4
-	for <openembedded-devel@openembedded.org>;
-	Tue,  4 Mar 2008 17:25:30 +0100 (CET)
-Received: from sx01.troll.no (localhost.localdomain [127.0.0.1])
-	by sx01.troll.no (8.13.8/8.13.8) with ESMTP id m24GQCv9023049
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Mar 2008 17:26:12 +0100
-Received: from tomdev.troll.no (tomdev.troll.no [10.3.5.39])
-	by sx01.troll.no (Scalix SMTP Relay 11.3.0.11339)
-	via ESMTP; Tue, 04 Mar 2008 17:26:12 +0100 (CET)
-Date: Tue, 4 Mar 2008 17:29:55 +0100
-From: Tom Cooksey <thomas.cooksey@trolltech.com>
+	id 18782-04 for <openembedded-devel@openembedded.org>;
+	Tue,  4 Mar 2008 16:40:09 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m24Ge6th018922
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Tue, 4 Mar 2008 16:40:06 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-Message-ID: <200803041729.55760.thomas.cooksey@trolltech.com>
-In-Reply-To: <1204646709.8117.3.camel@dax.rpnet.com>
+In-Reply-To: <200803041729.55760.thomas.cooksey@trolltech.com>
 References: <200803041240.17891.thomas.cooksey@trolltech.com>
-References: <200803041356.51830.thomas.cooksey@trolltech.com>
-References: <1204646709.8117.3.camel@dax.rpnet.com>
-x-scalix-Hops: 1
-Organization: Trolltech
-User-Agent: KMail/1.9.7
-MIME-Version: 1.0
-X-Virus-Scanned: Maia Mailguard 1.0.2a
-X-SA-Exim-Connect-IP: 62.70.27.150
-X-SA-Exim-Mail-From: tcooksey@trolltech.com
+	<200803041729.55760.thomas.cooksey@trolltech.com>
+Date: Tue, 04 Mar 2008 16:40:05 +0000
+Message-Id: <1204648806.8117.6.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -57,32 +47,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Mar 2008 16:27:37 -0000
-Content-Type: text/plain;
-	charset="US-ASCII"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 04 Mar 2008 16:41:32 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tuesday 04 March 2008 17:05:09 Richard Purdie wrote:
-> On Tue, 2008-03-04 at 13:56 +0100, Tom Cooksey wrote:
-> > Yup, we like pkgconfig too, saves us a lot of work. :-) Sadly, we have to support 
-> > qt being built on 3rd party toolchains we have no access to and therefore no
-> > way to modify. pkg-config caused a headache for support so we've dropped it
-> > by default when cross-compiling. Hopefully we'll re-enable it in the future as
-> > the pkg-config devs seem to be working on the problem, providing an env 
-> > variable you can use to set a sysroot prefix (PKG_CONFIG_SYSROOT).
+On Tue, 2008-03-04 at 17:29 +0100, Tom Cooksey wrote:
+> On Tuesday 04 March 2008 17:05:09 Richard Purdie wrote:
+> > On Tue, 2008-03-04 at 13:56 +0100, Tom Cooksey wrote:
+> > > Yup, we like pkgconfig too, saves us a lot of work. :-) Sadly, we have to support 
+> > > qt being built on 3rd party toolchains we have no access to and therefore no
+> > > way to modify. pkg-config caused a headache for support so we've dropped it
+> > > by default when cross-compiling. Hopefully we'll re-enable it in the future as
+> > > the pkg-config devs seem to be working on the problem, providing an env 
+> > > variable you can use to set a sysroot prefix (PKG_CONFIG_SYSROOT).
+> > 
+> > Just for reference, it was OE users (well, Poky) who argued for that to
+> > be introduced into pkgconfig to escape the mangling that we used to
+> > do[1] ;-)
+> > 
+> > [1] We're literally in the process of removing that today.
 > 
-> Just for reference, it was OE users (well, Poky) who argued for that to
-> be introduced into pkgconfig to escape the mangling that we used to
-> do[1] ;-)
-> 
-> [1] We're literally in the process of removing that today.
+> Awesome! Well argued. :-) Does that mean PKG_CONFIG_SYSROOT is stable
+> enough now to be used in anger?
 
-Awesome! Well argued. :-) Does that mean PKG_CONFIG_SYSROOT is stable
-enough now to be used in anger?
-
+Poky has been using it for a while without too many problems and OE has
+just switched to it. It seems to work well although it does highlight
+there are some badly written pkgconfig files around...
 
 Cheers,
 
-Tom
+Richard
+
+
 
 
