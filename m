@@ -1,42 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.239.58.189] (helo=gv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JWMUA-0006Sx-HN
-	for openembedded-devel@openembedded.org; Tue, 04 Mar 2008 03:02:32 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JWMSw-0002AY-AJ
-	for openembedded-devel@openembedded.org; Tue, 04 Mar 2008 02:01:14 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 04 Mar 2008 02:01:14 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 04 Mar 2008 02:01:14 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 04 Mar 2008 03:01:06 +0100
-Message-ID: <fqiah1$uja$1@ger.gmane.org>
-References: <fpmn1u$53v$1@ger.gmane.org>
-	<fqhsvd$mdm$1@ger.gmane.org>	<fqi1q5$77t$1@ger.gmane.org>
-	<fqi970$rdg$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <fqi970$rdg$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <raj.khem@gmail.com>) id 1JWRZ3-0004ni-Su
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 Mar 2008 08:27:56 +0100
+Received: by gv-out-0910.google.com with SMTP id l14so693817gvf.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 Mar 2008 23:26:39 -0800 (PST)
+Received: by 10.114.112.1 with SMTP id k1mr1579305wac.24.1204615597632;
+	Mon, 03 Mar 2008 23:26:37 -0800 (PST)
+Received: by 10.114.234.12 with HTTP; Mon, 3 Mar 2008 23:26:37 -0800 (PST)
+Message-ID: <19c1b8a90803032326s57ce6e5cic48a157e353dfb53@mail.gmail.com>
+Date: Mon, 3 Mar 2008 23:26:37 -0800
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1204541308.5725.10.camel@hammer.suse.cz>
+MIME-Version: 1.0
+References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
+	<1204541308.5725.10.camel@hammer.suse.cz>
+X-SA-Exim-Connect-IP: 216.239.58.189
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: autobuilds and bug tracker
+Subject: Re: iwwmmxt optimization and soft float in OE on PXA270
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,20 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Mar 2008 02:02:32 -0000
+X-List-Received-Date: Tue, 04 Mar 2008 07:27:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Rolf Leggewie wrote:
-> Furthermore, I don't see why the changes in question would need any
-> changes to bugzilla itself.  
+Stanislav,
 
-From what I can gather, only seppuku.bbclass would have to be altered.
-http://oz.leggewie.org/wip/seppuku.diff.txt may or may not achieve the
-result I proposed.
+What ABI breakage are you seeing ?
+Aren't you using EABI ?
 
-So let me ask again why you need an escalation of privileges before you
-can proceed.
+Thanks
 
+-Khem
+
+On Mon, Mar 3, 2008 at 2:48 AM, Stanislav Brabec <utx@penguin.cz> wrote:
+> Koen Kooi wrote:
+>
+>  > Angstrom already enables softfloat (for FPU-less systems) and -Os by
+>  > default *and* enables iwmmxt (if you have MACHINE_FEATURES = "iwmmxt")
+>  > for apps which have been proven to benefit from iwmmxt (e.g. mplayer).
+>
+>  Ah, I see. ABI-compatible softfp mode is enabled by patching gcc, not in
+>  conf files.
+>
+>
+>  > I still get mysterious segfaults when running an all iwmmxt glibc system
+>  > (uclibc is even worse), so I don't think flipping the global switch is a
+>  > good idea.
+>
+>  Which applications are failing for you?
+>
+>  --
+>
+> Stanislav Brabec
+>  http://www.penguin.cz/~utx/zaurus
+>
+>
+>  _______________________________________________
+>
+>
+> Openembedded-devel mailing list
+>  Openembedded-devel@lists.openembedded.org
+>  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
