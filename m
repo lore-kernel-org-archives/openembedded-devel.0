@@ -1,35 +1,36 @@
-Received: from [130.89.2.14] (helo=mx.utwente.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1JWxKg-0003GB-Do
-	for openembedded-devel@openembedded.org; Wed, 05 Mar 2008 18:23:26 +0100
-Received: from Powerbook-2.local (vpn006013.vpn.utwente.nl [130.89.6.13])
-	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id m25HLEBl026043; 
-	Wed, 5 Mar 2008 18:21:14 +0100
-Message-ID: <47CED68A.3070907@student.utwente.nl>
-Date: Wed, 05 Mar 2008 18:21:14 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-MIME-Version: 1.0
-To: "angstrom-distro-devel@linuxtogo.org"
-	<angstrom-distro-devel@linuxtogo.org>, 
-	Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-References: <2d18958c0803050843g23717b75g4466913c22c0ca10@mail.gmail.com>
-In-Reply-To: <2d18958c0803050843g23717b75g4466913c22c0ca10@mail.gmail.com>
-X-Enigmail-Version: 0.95.6
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-SA-Exim-Connect-IP: 130.89.2.14
-X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
+	(envelope-from <rpurdie@rpsys.net>) id 1JWy6R-00049b-45
+	for openembedded-devel@openembedded.org; Wed, 05 Mar 2008 19:12:37 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m25IB7Qc007432
+	for <openembedded-devel@openembedded.org>; Wed, 5 Mar 2008 18:11:07 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 06976-10 for <openembedded-devel@openembedded.org>;
+	Wed,  5 Mar 2008 18:11:03 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m25IAx8x007421
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Wed, 5 Mar 2008 18:10:59 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Wed, 05 Mar 2008 18:11:01 +0000
+Message-Id: <1204740661.8110.135.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Google Summer of Code ideas for Angstrom
+Subject: sdk.bbclass and gcc-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,64 +44,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Mar 2008 17:23:45 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 05 Mar 2008 18:12:37 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I've been banging my head against a wall with the rather strange things
+gcc-cross-sdk is doing in OE.dev. I will write down my thoughts since I
+will forget and others may find this useful in future.
 
-Jake Thebault-Spieker schreef:
-| I've been working on coming up with ideas that Angstrom could use for it's
-| Google Summer of Code application. These are the ideas I came up with,
-some
-| of which were suggested by some people in the community(I think mickeyl,
-| possibly others as well).
-|
-| The ideas are:
-|
-| First time install wizard/config wizard:
-|         -Walks through initial configuration/includes explanations
-|         -More Timezones
-|         -Pretty-fied to me more user friendly
-| GUI package manager
-|         -One that functions(doesn't crash when trying to install more than
-| one package)
-|         -Maybe w/ opkg
-| GUI installation tool(from NAND?)
-|         -For ease of install
-|         -Is this possible?
-| GUI network config(smart)
-|         -Only configures interfaces it detects, non-generic
-|         -Easy for beginners, so as not to get confused
-|
-|
-| Any feedback would be appreciated. I don't know if this is functionality
-| Angstrom is looking for, but it's what I came up with.
+I think most of the problem comes from people having different
+expectations from the sdk classes. Our current sdk class is really a
+"cross-sdk" and is not suitable for building sdk packages. What's the
+difference?
 
-Thanks for the ideas, could you add them to the wiki?
+qemu is a good example of an sdk package, it runs in /usr/local/foo/...
+but doesn't have anything to do with the target.
 
-Now onto the orginazational side of things:
+gcc-cross-sdk is a good example of a "cross-sdk" package since it runs
+in /usr/local/foo/... but is target specific.
 
-Which organizations are going to apply for GSoC? Openmoko, OE, Angstrom
-come to mind. And who of those organizations will be the GSoC dude? And
-who will mentor the students?
+When we build gcc-cross, our build triplet is made to equal the host
+triplet. In this configuration, gcc takes a shortcut and uses its own
+internal compiler to do the compiling (xgcc). If build != host, we're
+into the situation where we have a Canadian cross and we need a separate
+cross compiler. If gcc-cross is in staging already, we have this and it
+does work but it is a fundamental change in behaviour to who things were
+'designed'.
 
-regards,
+One of the changes I made to sdk.bbclass was to make the HOST_VENDOR =
+TARGET_VENDOR to avoid problems with pollution of native staging when
+building things like qemu-sdk and its dependencies. This meant that
+build != host and caused the above problem. gcc-cross is not depended on
+by gcc-cross-sdk but would work if it was present in staging. OE.dev is
+therefore working from some people but since the dependencies aren't
+setup to ensure gcc-cross builds first, it doesn't work for everyone.
 
-Koen
+gcc is filled with "build == host" checks. When that is the case it
+makes assumptions which turn out to be dangerous since it assumes that
+it can look in exec_prefix for things. Using build == host for
+gcc-cross-sdk therefore makes me very nervous as whilst it works, its
+likely to break
+
+I don't doubt the usefulness of being able generate standalone compilers
+with OE and the ability to add tools like pkgconfig and qemu to them.
+Poky and its SDK has already shown how well these can work and its
+hacked sdk class does remarkably well. 
+
+I have to wonder how we should generate things properly though.
+Currently our SDK approach can only generate SDK tools which will run on
+the same architecture as it was built on. If we go for the Canadian
+cross approach we should be able to support building an SDK for a
+different arch (e.g. build i686 on x86_64 and vice versa). You then
+start to wonder if there shouldn't be a machine/distro to do this
+instead since its cross compiling although the idea doesn't quite fit.
+You then start to wonder about automating sdk/native/whatever flavours
+of packages at the bitbake level too.
+
+There are also some other issues to do with ARCH_FLAGS_FOR_TARGET but I
+won't complicate this with them.
+
+What do I propose as a solution? I think the simplest thing is to would
+be to do some/all of:
+
+a) revert my sdk.bbclass changes
+b) continue with our build == host assumption for gcc-cross-sdk for now
+c) rename sdk.bbclass cross-sdk.bbclass
+d) add a "real" sdk.bbclass
+
+These aren't major changes, shouldn't cause much "fallout" and means OE
+could still have Poky style sdk tool generation. We need to give the
+whole thing some careful thought beyond this though...
+
+Cheers,
+
+Richard
 
 
-- --
-koen@dominion.kabel.utwente.nl will go go away in december 2007, please
-use k.kooi@student.utwente.nl instead.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHztaKMkyGM64RGpERAg/zAJ9/OSDJKuPL8CiCfd2pUA8UC+RRUQCgvAfx
-rwFZDdMxZmylOcE+BVRBRFU=
-=pW7i
------END PGP SIGNATURE-----
 
 
