@@ -1,28 +1,30 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.162.178] (helo=el-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1JWyaB-0000oM-K4
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JWyxk-00017Q-0j
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Mar 2008 19:43:17 +0100
-Received: from andromeda (e180172199.adsl.alicedsl.de [85.180.172.199])
-	by drlauer-research.com (Postfix) with ESMTP id 84C33584BEE
+	Wed, 05 Mar 2008 20:07:39 +0100
+Received: by el-out-1112.google.com with SMTP id r23so2031863elf.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Mar 2008 19:48:33 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Wed, 05 Mar 2008 11:06:10 -0800 (PST)
+Received: by 10.141.87.13 with SMTP id p13mr1672212rvl.62.1204743969553;
+	Wed, 05 Mar 2008 11:06:09 -0800 (PST)
+Received: by 10.140.250.18 with HTTP; Wed, 5 Mar 2008 11:06:09 -0800 (PST)
+Message-ID: <c384c5ea0803051106he199460k7c9eaf232977e564@mail.gmail.com>
+Date: Wed, 5 Mar 2008 20:06:09 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 5 Mar 2008 19:42:12 +0100
-User-Agent: KMail/1.9.9
+In-Reply-To: <1204740661.8110.135.camel@dax.rpnet.com>
 MIME-Version: 1.0
-Message-Id: <200803051942.12586.mickey@vanille-media.de>
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+References: <1204740661.8110.135.camel@dax.rpnet.com>
+X-SA-Exim-Connect-IP: 209.85.162.178
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: sysroot vs. finding header files
+Subject: Re: sdk.bbclass and gcc-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,52 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Mar 2008 18:43:17 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Wed, 05 Mar 2008 19:07:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi,
+Richard,
 
-with the new sysroot stuff in, we have a problem when autotoolized packages 
-like xorg-lib/libx11_*.bb abuse pkgconfig like that:
+On Wed, Mar 5, 2008 at 7:11 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+>  What do I propose as a solution? I think the simplest thing is to would
+>  be to do some/all of:
+>
+>  a) revert my sdk.bbclass changes
+>  b) continue with our build == host assumption for gcc-cross-sdk for now
+>  c) rename sdk.bbclass cross-sdk.bbclass
+>  d) add a "real" sdk.bbclass
+>
+Before a), I would like to see a description of what we expect the
+different classes to do, simply because I have lost track. I
+understood we never  supported building Canadian cross-compilers, BTW.
 
-PKG_CHECK_MODULES(XPROTO, [xproto >= 7.0.6])
-AC_SUBST(XPROTO_CFLAGS)
+There are other projects that focus on the correctness of building
+cross toolchains*, canadian or non-canadian, and if we have clear
+requirements for each of our classes, I would like to see if I can
+understand what we do (correctly or not).
 
-...
+Regards,
 
-# Find keysymdef.h
-#
-KEYSYMDEF=""
-AC_MSG_CHECKING([keysymdef.h])
-for flag in $XPROTO_CFLAGS -I/usr/include; do
-        case "$KEYSYMDEF" in
-        "")
-                case "$flag" in
-                *-I*)
-                        dir=`echo "$flag" | sed 's/ *-I//'`
-                        file="$dir/X11/keysymdef.h"
-                        if test -f "$file"; then
-                                KEYSYMDEF="$file"
-                        fi
-                        ;;
-                esac
-                ;;
-        esac
-done
+Leon.
 
-With pkgconfig now pointing to /usr (and friends), this no longer finds a 
-keysymdef.h until you have X on your buildhost.
+*diy-linux.org is the most pedantic about correctness in the toolchain
+bootstrap, AFAIK.
 
-Any ideas how to fix that in the best way? (I hope there are not more of these 
-things hidden)
-
-Cheers,
-
-:M:
+Regards,
 -- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Leon
 
 
