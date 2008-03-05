@@ -1,32 +1,35 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [130.89.2.14] (helo=mx.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JWwSE-0005V4-Ha
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Mar 2008 17:28:03 +0100
-Received: from 118-166-71-147.dynamic.hinet.net ([118.166.71.147]
-	helo=tamarin.local) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1JWwQt-00039w-Im
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Mar 2008 17:25:32 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 5 Mar 2008 17:25:24 +0100
-User-Agent: KMail/1.9.9
-References: <47CBAD93.3080005@student.utwente.nl>
-	<47CE854A.7060200@student.utwente.nl>
-In-Reply-To: <47CE854A.7060200@student.utwente.nl>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1JWxKg-0003GB-Do
+	for openembedded-devel@openembedded.org; Wed, 05 Mar 2008 18:23:26 +0100
+Received: from Powerbook-2.local (vpn006013.vpn.utwente.nl [130.89.6.13])
+	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id m25HLEBl026043; 
+	Wed, 5 Mar 2008 18:21:14 +0100
+Message-ID: <47CED68A.3070907@student.utwente.nl>
+Date: Wed, 05 Mar 2008 18:21:14 +0100
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
 MIME-Version: 1.0
-Message-Id: <200803051725.24570.zecke@selfish.org>
-X-SA-Exim-Connect-IP: 81.169.183.159
-X-SA-Exim-Mail-From: zecke@selfish.org
+To: "angstrom-distro-devel@linuxtogo.org"
+	<angstrom-distro-devel@linuxtogo.org>, 
+	Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+References: <2d18958c0803050843g23717b75g4466913c22c0ca10@mail.gmail.com>
+In-Reply-To: <2d18958c0803050843g23717b75g4466913c22c0ca10@mail.gmail.com>
+X-Enigmail-Version: 0.95.6
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-SA-Exim-Connect-IP: 130.89.2.14
+X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] upgrading webkit-gtk SRCREV and switch to autotools
+Subject: Re: Google Summer of Code ideas for Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,20 +43,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Mar 2008 16:28:43 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 05 Mar 2008 17:23:45 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday 05 March 2008 12:34:34 Koen Kooi wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Webkit has been updated and switched to autotools, midori, epiphany and
-> openmoko-browser2 have been updated to build against it, feed-reader2
-> has been removed from task-openmoko-pim.bb till it gets updated.
-> All needed patched have either come from upstream or have been sent there.
+Jake Thebault-Spieker schreef:
+| I've been working on coming up with ideas that Angstrom could use for it's
+| Google Summer of Code application. These are the ideas I came up with,
+some
+| of which were suggested by some people in the community(I think mickeyl,
+| possibly others as well).
+|
+| The ideas are:
+|
+| First time install wizard/config wizard:
+|         -Walks through initial configuration/includes explanations
+|         -More Timezones
+|         -Pretty-fied to me more user friendly
+| GUI package manager
+|         -One that functions(doesn't crash when trying to install more than
+| one package)
+|         -Maybe w/ opkg
+| GUI installation tool(from NAND?)
+|         -For ease of install
+|         -Is this possible?
+| GUI network config(smart)
+|         -Only configures interfaces it detects, non-generic
+|         -Easy for beginners, so as not to get confused
+|
+|
+| Any feedback would be appreciated. I don't know if this is functionality
+| Angstrom is looking for, but it's what I came up with.
 
-thanks
-z.
+Thanks for the ideas, could you add them to the wiki?
+
+Now onto the orginazational side of things:
+
+Which organizations are going to apply for GSoC? Openmoko, OE, Angstrom
+come to mind. And who of those organizations will be the GSoC dude? And
+who will mentor the students?
+
+regards,
+
+Koen
+
+
+- --
+koen@dominion.kabel.utwente.nl will go go away in december 2007, please
+use k.kooi@student.utwente.nl instead.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFHztaKMkyGM64RGpERAg/zAJ9/OSDJKuPL8CiCfd2pUA8UC+RRUQCgvAfx
+rwFZDdMxZmylOcE+BVRBRFU=
+=pW7i
+-----END PGP SIGNATURE-----
 
 
