@@ -1,30 +1,39 @@
-Received: from [209.85.162.178] (helo=el-out-1112.google.com)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JWyxk-00017Q-0j
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Mar 2008 20:07:39 +0100
-Received: by el-out-1112.google.com with SMTP id r23so2031863elf.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Mar 2008 11:06:10 -0800 (PST)
-Received: by 10.141.87.13 with SMTP id p13mr1672212rvl.62.1204743969553;
-	Wed, 05 Mar 2008 11:06:09 -0800 (PST)
-Received: by 10.140.250.18 with HTTP; Wed, 5 Mar 2008 11:06:09 -0800 (PST)
-Message-ID: <c384c5ea0803051106he199460k7c9eaf232977e564@mail.gmail.com>
-Date: Wed, 5 Mar 2008 20:06:09 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1204740661.8110.135.camel@dax.rpnet.com>
+	(envelope-from <geoffrey@pager.net>) id 1JWzdk-0006LY-27
+	for Openembedded-devel@lists.openembedded.org;
+	Wed, 05 Mar 2008 20:51:05 +0100
+X-ASG-Debug-ID: 1204746575-6cc7009c0000-3ce4Sv
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id C1BEB8EA21
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed,  5 Mar 2008 13:49:35 -0600 (CST)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id ds2Hdv7grzVHOkX5 for
+	<Openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Mar 2008 13:49:35 -0600 (CST)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
+To: Openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: AVR32 + OpenEmbedded: Problems with uclibc-initial
+	do_populate_staging()
+Date: Wed, 5 Mar 2008 13:49:39 -0600
+User-Agent: KMail/1.9.7
 MIME-Version: 1.0
-References: <1204740661.8110.135.camel@dax.rpnet.com>
-X-SA-Exim-Connect-IP: 209.85.162.178
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Message-Id: <200803051349.39583.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1204746575
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+X-SA-Exim-Connect-IP: 209.253.16.26
+X-SA-Exim-Mail-From: geoffrey@pager.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: sdk.bbclass and gcc-cross-sdk
+Subject: AVR32 + OpenEmbedded: Problems with uclibc-initial do_populate_staging()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,40 +47,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Mar 2008 19:07:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 05 Mar 2008 19:51:06 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Richard,
+Hi all,
 
-On Wed, Mar 5, 2008 at 7:11 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
->  What do I propose as a solution? I think the simplest thing is to would
->  be to do some/all of:
->
->  a) revert my sdk.bbclass changes
->  b) continue with our build == host assumption for gcc-cross-sdk for now
->  c) rename sdk.bbclass cross-sdk.bbclass
->  d) add a "real" sdk.bbclass
->
-Before a), I would like to see a description of what we expect the
-different classes to do, simply because I have lost track. I
-understood we never  supported building Canadian cross-compilers, BTW.
+I'm working on getting OpenEmbeddded to build for an AVR32 system.  Right now 
+I'm using an AT32STK1000, although eventually I'll be running on custom 
+hardware.
 
-There are other projects that focus on the correctness of building
-cross toolchains*, canadian or non-canadian, and if we have clear
-requirements for each of our classes, I would like to see if I can
-understand what we do (correctly or not).
+I've been having problems getting past the uclibc-initial (0.9.28).  I get an 
+error when it attempts do_populate_staging().  Here's the error I've been 
+getting.
 
-Regards,
+--begin--
+NOTE: package uclibc-initial-0.9.28-r10: task do_populate_staging: started
+ERROR: function do_stage failed
+ERROR: log data follows 
+(/home/geoff/lrs/playpaq/tmp/work/avr32-angstrom-linux-uclibc/uclibc-initial-0.9.28-r10/temp/log.do_stage.17824)
+| make: avr32-angstrom-linux-uclibc-gcc: Command not found
+| make: avr32-angstrom-linux-uclibc-gcc: Command not found
+| 
++ ./extra/scripts/fix_includes.sh -k /home/geoff/lrs/playpaq/tmp/cross/avr32-angstrom-linux-uclibc -t 
+avr32
+|
+|
+| The 
+file /home/geoff/lrs/playpaq/tmp/cross/avr32-angstrom-linux-uclibc/Makefile 
+or /home/geoff/lrs/playpaq/tmp/cross/avr32-angstrom-linux-uclibc/include/linux/version.h 
+is missing!
+| Perhaps your kernel source is broken?
+|
+|
+| make: *** [headers] Error 1
+NOTE: Task 
+failed: /home/geoff/lrs/playpaq/tmp/work/avr32-angstrom-linux-uclibc/uclibc-initial-0.9.28-r10/temp/log.do_stage.17824
+NOTE: package uclibc-initial-0.9.28-r10: task do_populate_staging: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package uclibc-initial-0.9.28: failed
+--end--
 
-Leon.
 
-*diy-linux.org is the most pedantic about correctness in the toolchain
-bootstrap, AFAIK.
+I was able to get past this by modifying uclibc_0.9.28.bb so that 
+KERNEL_SOURCE is now getting to what I think is correct.  It was:
+KERNEL_SOURCE = "${CROSS_DIR}/${TARGET_SYS}"
+and I changed it to:
+KERNEL_SOURCE = "${STAGING_DIR_HOST}/${exec_prefix}"
 
-Regards,
--- 
-Leon
+It also looks like I could have re-enabled the nokernelheader.patch.  Any 
+comments on what the "proper" fix is here?
+
+
+With that change made, the do_populate_staging went further, but not much 
+further.  In uclibc-initial_0.9.28.bb, there is the following command:
+	make PREFIX= DEVEL_PREFIX=${UCLIBC_PREFIX}/ \
+		RUNTIME_PREFIX=${UCLIBC_PREFIX}/ \
+		pregen install_dev
+
+UCLIBC_PREFIX used to be defined in uclibc.inc, but that was changed about a 
+week ago.  Changing uclibc-initial_0.9.28.bb to use UCLIBC_STAGING_PREFIX 
+instead of UCLIBC_PREFIX got me past this issue.  Any comments about 
+the "correct" fix here?
+
+Thanks,
+---
+Geoffrey
+
 
 
