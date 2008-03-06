@@ -1,42 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.233.178.248] (helo=hs-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JXFhi-0003AK-MC
-	for openembedded-devel@openembedded.org; Thu, 06 Mar 2008 14:01:52 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JXFgG-0006rZ-Gg
-	for openembedded-devel@openembedded.org; Thu, 06 Mar 2008 12:58:40 +0000
-Received: from wlan140002.mobiel.utwente.nl ([130.89.140.2])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 06 Mar 2008 12:58:40 +0000
-Received: from koen by wlan140002.mobiel.utwente.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 06 Mar 2008 12:58:40 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Thu, 06 Mar 2008 13:58:32 +0100
-Message-ID: <fqoppp$2c9$1@ger.gmane.org>
-References: <1204303564.8126.38.camel@dax.rpnet.com>	<47CD7E84.9010603@student.utwente.nl>
-	<1204807332.8034.0.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: wlan140002.mobiel.utwente.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <1204807332.8034.0.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JXKHG-0002oJ-EL
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Mar 2008 18:53:16 +0100
+Received: by hs-out-0708.google.com with SMTP id 23so1671536hsn.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Mar 2008 09:51:39 -0800 (PST)
+Received: by 10.100.255.10 with SMTP id c10mr92019ani.84.1204825899069;
+	Thu, 06 Mar 2008 09:51:39 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Thu, 6 Mar 2008 09:51:39 -0800 (PST)
+Message-ID: <c384c5ea0803060951o5045ce7bu38b97cb4eff23b39@mail.gmail.com>
+Date: Thu, 6 Mar 2008 18:51:39 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1204750034.8110.181.camel@dax.rpnet.com>
+MIME-Version: 1.0
+References: <c384c5ea0803020930s27303ee1q2719373db77fd8ba@mail.gmail.com>
+	<1204485449.8223.36.camel@dax.rpnet.com>
+	<c384c5ea0803040313g4e5bc379oa54d245c19eb1b6e@mail.gmail.com>
+	<1204750034.8110.181.camel@dax.rpnet.com>
+X-SA-Exim-Connect-IP: 64.233.178.248
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE Staging ABI Change Warning
+Subject: Re: Multiple bitbake and a shared DL_DIR location - race conditions?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,52 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Mar 2008 13:02:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 06 Mar 2008 17:53:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Richard,
 
-Richard Purdie schreef:
-| On Tue, 2008-03-04 at 17:53 +0100, Koen Kooi wrote:
-|> Richard Purdie schreef:
-|> | Hi,
-|> |
-|> | OE.dev is now just about ready to switch to using sysroot. The
-compilers
-|> | have been updated to activate sysroot and the fixes I/Poky have for
-|> | various pkgconfig issues have been committed. The final change is to
-|> | actually change the layout.
-|> |
-|> | I've attached the patch I have locally for doing this. Since it changes
-|> | the layout of staging I've gone for changing the ABI and warning users
-|> | using the newly added mechanism.
-|> |
-|> | insane.bbclass will warn about potentially problematic .pc files and I
-|> | suspect a few people will hit that since there are a lot of broken ones
-|> | around. I'll give a summary of the problem and the way to solve it:
-|>
-|> When are we going to make insane halt on .la files referring to
-|> ${WORKDIR}? Right now those are the biggest problem for packaged-staging
-|> and rm_work.
-|
-| I don't remember seeing too many warnings about these? Are there many
-| problematic packages?
+On Wed, Mar 5, 2008 at 9:47 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+>
+> On Tue, 2008-03-04 at 12:13 +0100, Leon Woestenberg wrote:
+>  > bitbake.conf:143:DL_DIR = "${TMPDIR}/downloads"
+>  > bitbake.conf:144:CVSDIR = "${DL_DIR}/cvs"
+>  > bitbake.conf:145:SVNDIR = "${DL_DIR}/svn"
+>  > bitbake.conf:146:GITDIR = "${DL_DIR}/git"
+>  >
+>  > Can we change this into:
+>  >
+>  > DL_DIR = "${TMPDIR}/downloads"
+>  > CO_DIR = "${DL_DIR}"
+>  > CVSDIR = "${CO_DIR}/cvs"
+>  > SVNDIR = "${CO_DIR}/svn"
+>  > GITDIR = "${CO_DIR}/git"
+>  >
+>  > So that I can override CO_DIR robustly, even when a fourth revision
+>  > control system comes into play?
+>  >
+>  > (CO_DIR as in checkout directory)
+>
+>  I agree with that change, it makes sense. Do you want to check it in or
+>  should I?
+>
+I will test it first, then check-in (unless you have done so already,
+lacking my response).
 
-Almost every native package suffers from it, which is why the efl stuff
-fails, since that is needing the native evas, edje, etc tools.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFHz+p4MkyGM64RGpERAqA+AKCIBCY03/myptRoMYuB5S1/KOoNrwCginMe
-gD2gozgUxlmFAPcrPJEY/z0=
-=uG24
------END PGP SIGNATURE-----
-
+Regards,
+-- 
+Leon
 
 
