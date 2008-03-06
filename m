@@ -1,22 +1,24 @@
-Received: from [64.233.178.248] (helo=hs-out-0708.google.com)
+Received: from [209.85.132.250] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JXN7S-0002A6-Cp
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JXP3t-0004mX-0r
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Mar 2008 21:55:21 +0100
-Received: by hs-out-0708.google.com with SMTP id 23so57529hsn.12
+	Thu, 06 Mar 2008 23:59:42 +0100
+Received: by an-out-0708.google.com with SMTP id b33so31756ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Mar 2008 12:53:40 -0800 (PST)
-Received: by 10.100.205.9 with SMTP id c9mr569524ang.97.1204836819602;
-	Thu, 06 Mar 2008 12:53:39 -0800 (PST)
-Received: by 10.100.190.7 with HTTP; Thu, 6 Mar 2008 12:53:39 -0800 (PST)
-Message-ID: <c384c5ea0803061253p467a1afdw123c41d4dff82aaa@mail.gmail.com>
-Date: Thu, 6 Mar 2008 21:53:39 +0100
+	Thu, 06 Mar 2008 14:58:06 -0800 (PST)
+Received: by 10.100.43.13 with SMTP id q13mr1005648anq.18.1204844286373;
+	Thu, 06 Mar 2008 14:58:06 -0800 (PST)
+Received: by 10.100.190.7 with HTTP; Thu, 6 Mar 2008 14:58:06 -0800 (PST)
+Message-ID: <c384c5ea0803061458x79980e7cvf369d3baf5960adb@mail.gmail.com>
+Date: Thu, 6 Mar 2008 23:58:06 +0100
 From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080305215110.GB30267@ibawizard.net>
+In-Reply-To: <1204748655.8110.174.camel@dax.rpnet.com>
 MIME-Version: 1.0
-References: <20080305215110.GB30267@ibawizard.net>
-X-SA-Exim-Connect-IP: 64.233.178.248
+References: <1204740661.8110.135.camel@dax.rpnet.com>
+	<c384c5ea0803051106he199460k7c9eaf232977e564@mail.gmail.com>
+	<1204748655.8110.174.camel@dax.rpnet.com>
+X-SA-Exim-Connect-IP: 209.85.132.250
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
@@ -24,7 +26,7 @@ X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Broken linux_2.6.24
+Subject: Re: sdk.bbclass and gcc-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,53 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Mar 2008 20:55:23 -0000
+X-List-Received-Date: Thu, 06 Mar 2008 22:59:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Petr,
+Hello Richard,
 
-On Wed, Mar 5, 2008 at 10:51 PM, Petr Stetiar <ynezz@true.cz> wrote:
+On Wed, Mar 5, 2008 at 9:24 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Wed, 2008-03-05 at 20:06 +0100, Leon Woestenberg wrote:
+>  > On Wed, Mar 5, 2008 at 7:11 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+
+
 >
->  commit with revision e59bb6421b1fc172baaf3ce9670eead297e0ad5d probably done by
->  Koen broke linux_2.6.24 package. It adds four patches to global SRC_URI, which
->  are missing in repository.
+>  The 'normal' situation for OE is:
 >
-Please do not blame the wrong people. Use tools like "mtn" or
-"monotone-viz" to easily see who added or broke stuff.
-
->  Pls can somebody explain me, why are those patches needed for all platforms? I
+>   build = "build system"
+>   host = target = "set by machine config"
 >
-Let me see:
-
-           http://kamikaze.waninkoko.info/patches/2.6.24/kamikaze1/broken-out/squashfs-lzma-2.6.24.patch;patch=1
-\
-           file://powerpc-clockres.patch;patch=1 \
-           file://leds-cpu-activity.patch;patch=1 \
-           file://leds-cpu-activity-powerpc.patch;patch=1 \
-
-1. The first one is machine independent and architecture independent.
-It should work for everyone, but only if they enable the filesystem in
-the kernel configuration.
-2. The second is machine independent but architecture dependent. It
-unbreaks things if you build for powerpc, does nothing if you build
-for other architectures.
-3. The third one is machine independent and architecture independent.
-You need a architecture dependent patch to make this work.
-4. The  fourth patch is machine independent and architecture depedent.
-
->  think, that these patches are machine specific and shouldn't be aplied to all
+>  cross.bbclass:
 >
-None of the patches are machine specific.
+>   build = host = "build system"
+>   target = "set by machine config"
+>
+>  native.bbclass:
+>
+>   build = host = target = "build system"
+>
+>  sdk.bbclass (previously)
+>
+>   build = host = "build system"
+>   target = "set by machine config"
+>
+>  sdk.bbclass (previously)
+>
+>   build = "build system"
+>   host = "build system with modified vendor"
+>   target = "set by machine config"
+>
+OK, so you meant that this last instance in fact was a Canadian cross
+toolchain?
 
-However, adding them here did break the build, and that was *my*
-mistake, for which I am truly sorry.
+> Does that cover what you wanted?
+>
+Your answers covered my questions, thanks!
 
-I committed the patches to linux-rt-2.6.24 (the hard real-time
-scheduling kernel), but not 2.6.24.
+I don't need a Canadian cross toolchain myself, btw.
 
-I'll try to fix this mess,
+Regards,
 -- 
 Leon
 
