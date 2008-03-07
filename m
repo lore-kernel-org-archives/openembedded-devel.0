@@ -1,25 +1,34 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JXP3t-0004mX-0r
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Mar 2008 23:59:42 +0100
-Received: by an-out-0708.google.com with SMTP id b33so31756ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Mar 2008 14:58:06 -0800 (PST)
-Received: by 10.100.43.13 with SMTP id q13mr1005648anq.18.1204844286373;
-	Thu, 06 Mar 2008 14:58:06 -0800 (PST)
-Received: by 10.100.190.7 with HTTP; Thu, 6 Mar 2008 14:58:06 -0800 (PST)
-Message-ID: <c384c5ea0803061458x79980e7cvf369d3baf5960adb@mail.gmail.com>
-Date: Thu, 6 Mar 2008 23:58:06 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1204748655.8110.174.camel@dax.rpnet.com>
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1JXZaQ-0000vG-46
+	for openembedded-devel@openembedded.org; Fri, 07 Mar 2008 11:14:00 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m27ACHNK009663
+	for <openembedded-devel@openembedded.org>; Fri, 7 Mar 2008 10:12:17 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 09620-01 for <openembedded-devel@openembedded.org>;
+	Fri,  7 Mar 2008 10:12:13 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m27AC9gP009651
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 7 Mar 2008 10:12:09 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <c384c5ea0803061458x79980e7cvf369d3baf5960adb@mail.gmail.com>
 References: <1204740661.8110.135.camel@dax.rpnet.com>
 	<c384c5ea0803051106he199460k7c9eaf232977e564@mail.gmail.com>
 	<1204748655.8110.174.camel@dax.rpnet.com>
-X-SA-Exim-Connect-IP: 209.85.132.250
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+	<c384c5ea0803061458x79980e7cvf369d3baf5960adb@mail.gmail.com>
+Date: Fri, 07 Mar 2008 10:12:07 +0000
+Message-Id: <1204884727.8161.9.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
@@ -40,55 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Mar 2008 22:59:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 Mar 2008 10:14:01 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Richard,
+On Thu, 2008-03-06 at 23:58 +0100, Leon Woestenberg wrote:
+> On Wed, Mar 5, 2008 at 9:24 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> >  sdk.bbclass (previously)
+> >
+> >   build = "build system"
+> >   host = "build system with modified vendor"
+> >   target = "set by machine config"
+> >
+> OK, so you meant that this last instance in fact was a Canadian cross
+> toolchain?
 
-On Wed, Mar 5, 2008 at 9:24 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Wed, 2008-03-05 at 20:06 +0100, Leon Woestenberg wrote:
->  > On Wed, Mar 5, 2008 at 7:11 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+Yes, it had turned into one but that wasn't the intent.
 
+Cheers,
 
->
->  The 'normal' situation for OE is:
->
->   build = "build system"
->   host = target = "set by machine config"
->
->  cross.bbclass:
->
->   build = host = "build system"
->   target = "set by machine config"
->
->  native.bbclass:
->
->   build = host = target = "build system"
->
->  sdk.bbclass (previously)
->
->   build = host = "build system"
->   target = "set by machine config"
->
->  sdk.bbclass (previously)
->
->   build = "build system"
->   host = "build system with modified vendor"
->   target = "set by machine config"
->
-OK, so you meant that this last instance in fact was a Canadian cross
-toolchain?
+Richard
 
-> Does that cover what you wanted?
->
-Your answers covered my questions, thanks!
-
-I don't need a Canadian cross toolchain myself, btw.
-
-Regards,
--- 
-Leon
 
 
