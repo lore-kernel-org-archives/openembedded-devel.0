@@ -1,41 +1,29 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JXcqR-0005ha-NH
-	for openembedded-devel@openembedded.org; Fri, 07 Mar 2008 14:42:48 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JXcov-0002PU-5G
-	for openembedded-devel@openembedded.org; Fri, 07 Mar 2008 13:41:09 +0000
-Received: from ip-62-143-227-114.1411n-cud12k-01.ish.de ([62.143.227.114])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 07 Mar 2008 13:41:09 +0000
-Received: from no2spam by ip-62-143-227-114.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 07 Mar 2008 13:41:09 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 07 Mar 2008 14:41:03 +0100
-Message-ID: <fqrglf$3pg$1@ger.gmane.org>
-References: <fpmn1u$53v$1@ger.gmane.org>	<fqhsvd$mdm$1@ger.gmane.org>	<fqi1q5$77t$1@ger.gmane.org>	<fqi970$rdg$1@ger.gmane.org>
-	<fqiah1$uja$1@ger.gmane.org>
+	(envelope-from <dp@xora.org.uk>)
+	id 1JXdkV-00030c-1D; Fri, 07 Mar 2008 15:40:41 +0100
+Received: from cimmeria ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Fri, 07 Mar 2008 14:39:03 +0000
+	id 00030435.47D15388.00003A77
+Date: Fri, 7 Mar 2008 14:39:03 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-commits@lists.openembedded.org
+Message-ID: <20080307143903.0df8f8b9@cimmeria>
+In-Reply-To: <E1JXdfA-0002tB-NY@linuxtogo.org>
+References: <E1JXdfA-0002tB-NY@linuxtogo.org>
+X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-227-114.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.6 (X11/20071022)
-In-Reply-To: <fqiah1$uja$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: autobuilds and bug tracker
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] org.oe.angstrom-2007.12-stable linux-rp 2.6.24: disable rc patch for akita - it doesn't apply and only handles spitz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,17 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2008 13:42:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Mar 2008 14:40:43 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Rolf Leggewie wrote:
-> From what I can gather, only seppuku.bbclass would have to be altered.
-> http://oz.leggewie.org/wip/seppuku.diff.txt may or may not achieve the
-> result I proposed.
+On Fri, 07 Mar 2008 15:35:08 +0100
+"koen commit" <openembedded-commits@lists.openembedded.org> wrote:
 
-Now that I have done the work to prepare this patch, I wonder if there
-is any reason not to apply it.  I'd like to get the issue at hand resolved.
+> linux-rp 2.6.24: disable rc patch for akita - it doesn't apply and
+> only handles spitz
+> * again, no backport, since this is unsuitable for .dev
+>=20
+If one of the akita maintainers want to fix this then the OE RH-2 remote
+is currently sitting on my desk unused.
 
+=46rom what I remeber akita is just a couple of gpio different for the
+remote than spitz so this should be low hanging fruit.
+
+Graeme
 
 
