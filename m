@@ -1,44 +1,33 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JXmIW-0002NV-0G
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JY1I1-0004GS-NI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 Mar 2008 00:48:22 +0100
-X-ASG-Debug-ID: 1204933600-3d1400140000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id B576B10DFF
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Mar 2008 17:46:40 -0600 (CST)
-Received: from [192.168.1.71] (LRS-CiscoRouter [192.168.1.1]) by
-	barracuda.pager.net with ESMTP id hTlRQo1ltjOaS3Ey for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Mar 2008 17:46:40 -0600 (CST)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] AVR32 + OpenEmbedded:
-	=?iso-8859-1?q?Problems=09with=09uclibc-initial=09do=5Fpopulate=5Fstagi?=
-	=?iso-8859-1?q?ng?= ()
-Date: Fri, 7 Mar 2008 17:46:46 -0600
-User-Agent: KMail/1.9.7
-References: <200803051349.39583.geoffrey@pager.net>
-	<200803071656.41738.geoffrey@pager.net>
-	<1204932800.8161.45.camel@dax.rpnet.com>
-In-Reply-To: <1204932800.8161.45.camel@dax.rpnet.com>
+	Sat, 08 Mar 2008 16:48:51 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JY1lR-0007o6-M0
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 08 Mar 2008 17:19:13 +0100
+Message-ID: <47D2B500.4040709@kernelconcepts.de>
+Date: Sat, 08 Mar 2008 16:47:12 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
 MIME-Version: 1.0
-Message-Id: <200803071746.46288.geoffrey@pager.net>
-X-Barracuda-Connect: LRS-CiscoRouter[192.168.1.1]
-X-Barracuda-Start-Time: 1204933600
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-X-SA-Exim-Connect-IP: 209.253.16.26
-X-SA-Exim-Mail-From: geoffrey@pager.net
+To: openembedded-devel@lists.openembedded.org
+References: <1204740661.8110.135.camel@dax.rpnet.com>	<c384c5ea0803051106he199460k7c9eaf232977e564@mail.gmail.com>	<1204748655.8110.174.camel@dax.rpnet.com>
+	<47D1C285.2000703@gmail.com>
+In-Reply-To: <47D1C285.2000703@gmail.com>
+X-Enigmail-Version: 0.95.0
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: AVR32 + OpenEmbedded: Problems	with	uclibc-initial	do_populate_staging ()
+Subject: Re: sdk.bbclass and gcc-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -52,42 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2008 23:48:22 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 08 Mar 2008 15:48:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 07 March 2008 05:33:20 pm Richard Purdie wrote:
-> On Fri, 2008-03-07 at 16:56 -0600, Geoffrey Wossum wrote:
-> > Checking the log.do_configure for gcc-cross-initial, --with-sysroot was
+Hi,
 
-> I was meaning to ask what changed you'd have to make to get your image
-> to build.
->
-> By strange coincidence I was looking at gcc-cross-initial today and
-> wondered about this. I concluded that gcc-cross-initial does not need
-> sysroot support though. gcc-cross-initial is only used to build the libc
-> for gcc-cross "proper" and for that you don't need anything in staging.
->
-> So the question is why would gcc-cross-initial need to find things in
-> staging?
+Esben Haabendal schrieb:
 
-I'm using currently uClibc 0.9.28.  glibc doesn't currently support the AVR32.  
-It's during uclibc-initial-0.9.28's do_populate_staging() step that this 
-whole sysroot issue pops up.  Something about that step causes something to 
-get linked, and that's when you the problem occurs.  I recreated the problem 
-today.  Should have saved the log.
+> I would love to see canadian cross support in OE. It would save me the 
+> effort maintaining an OE hacked up to build a standard meta-toolchain 
+> target.
 
-Maybe uClibc 0.9.29 fixes this issue.  I need to move to it anyway.  Koen 
-suggested it as a fix for my init segfault issue, plus I think avahi needs 
-it, and I need avahi in my final product.
+that would be a good feature. It might be useful for solving a similar situation
+I ran into several times: Building more compatible toolchains. This solution
+could be used to build a toolchain that runs on multiple distributions without
+the need to choose a particular distribution on the build machine.
 
-It looks like Atmel's AVR32 patches for uClibc 0.9.29 are already in 
-OpenEmbedded.  Looks like I just need to create a uClibc.machine file for the 
-AVR32.  I'll try out building against uClibc 0.9.29 on Monday.
+> If there is interest in it, I wouldn't mind working on this issue.  And 
+> if I am the only one interested in it, I might want to do it anyway. 
+> Just for fun :-)
 
----
-Geoffrey
+I'm quite sure that there are quite some people out there who would appreciate
+this. These poor guys who have to develop for Linux devices using Windows just
+come to my mind - I guess they would love to see others building shiny new
+crosstoolchains for their Windows :-)
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
