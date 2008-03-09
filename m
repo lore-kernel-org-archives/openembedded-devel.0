@@ -1,29 +1,28 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>)
-	id 1JYMpg-0007Ct-0u; Sun, 09 Mar 2008 15:49:01 +0100
-Received: from cimmeria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Sun, 09 Mar 2008 14:47:13 +0000
-	id 00030435.47D3F871.00007BC6
-Date: Sun, 9 Mar 2008 14:47:17 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-issues@lists.openembedded.org
-Message-ID: <20080309144717.101d44d1@cimmeria>
-In-Reply-To: <bug-3990-13@http.bugs.openembedded.net/>
-References: <bug-3990-13@http.bugs.openembedded.net/>
-X-Mailer: Claws Mail 3.2.0 (GTK+ 2.12.0; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JYMst-0007Ib-HH
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Mar 2008 15:52:23 +0100
+Received: by an-out-0708.google.com with SMTP id b33so339376ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 09 Mar 2008 07:50:33 -0700 (PDT)
+Received: by 10.100.106.1 with SMTP id e1mr8914085anc.109.1205074232811;
+	Sun, 09 Mar 2008 07:50:32 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Sun, 9 Mar 2008 07:50:32 -0700 (PDT)
+Message-ID: <c384c5ea0803090750jba077bld01cad88f051ba45@mail.gmail.com>
+Date: Sun, 9 Mar 2008 15:50:32 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 209.85.132.240
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Bug 3990] New: SanDisk ConnectPlus not working correctly
+Subject: [ANNOUNCE] witpa - content addressable package URL maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,23 +36,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Mar 2008 14:49:02 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Sun, 09 Mar 2008 14:52:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Sun,  9 Mar 2008 14:40:24 +0000 (UTC)
-bugzilla-daemon@treke.net wrote:
-> there seem to be patches at
-> http://www.openembedded.org/repo/org.openembedded.dev/packages/linux/linux-rp-2.6.24/connectplus-prevent-oops-HACK.patch
-> http://www.openembedded.org/repo/org.openembedded.dev/packages/linux/linux-rp-2.6.24/connectplus-remove-ide-HACK.patch
-> but they seem to remove functionality
-> 
-> 
+Hello,
 
-They are my patches, they prevent IDE and wifi system simultaneously
-accessing the cards which with linux 2.6 just ends in neither subsystem
-working. They are essential to getting the card working in wifi mode.
+The result of a weekend code sprint, as an excuse to learn sqlite3 but
+mostly because OpenEmbedded builds often break if downloads/ is empty.
 
-Graeme
+http://www.sidebranch.com/witpa/
+
+A package URL maintenance tool. See usage and example below. Would be
+neat to have this as a web service.
+
+./witpa -h
+
+witpa - where is that package at?
+Maintains a list with valid URLs for a package, has Google capabilities.
+
+create       - Create new database 'package.db'.
+add <url>    - Add known good URL.
+google <pkg> - Find/validate/add package URLs.
+where <pkg>  - Print all URLs of a package.
+delete <pkg> - Delete package data.
+show <pkg>   - Show all info of given package.
+list         - Show all packages with sums.
+import       - Import known-good data from (OpenEmbedded) checksums.ini.
+
+
+Example:
+
+
+./witpa create
+Creating database 'packages.db'.
+
+./witpa import ~/sandbox/openembedded/org.openembedded.dev/conf/checksums.ini
+Importing package data from 'checksums.ini'...
+(This may take a minute.)
+Imported 3265 packages.
+
+./witpa add http://bitshrine.org/gpp/dtc-1.0.0.tgz
+Inserting new package.
+http://bitshrine.org/gpp/dtc-1.0.0.tgz
+cca7b9219bc6e39926480f651c30d67a
+8228023bb787460e33f6e63ab8cc032599b0ca2f54db4db97dd3e9006f983c59[NEW ADDED ]
+
+./witpa google http://bitshrine.org/gpp/dtc-1.0.0.tgz
+
+./witpa where http://bitshrine.org/gpp/dtc-1.0.0.tgz
+http://bitshrine.org/gpp/dtc-1.0.0.tgz
+http://kambing.ui.edu/gentoo/distfiles/dtc-1.0.0.tgz
+http://gentoo.netnitco.net/distfiles/dtc-1.0.0.tgz
+http://distfiles.gentoo.org/distfiles/dtc-1.0.0.tgz
+http://www.las.ic.unicamp.br/pub/gentoo/distfiles/dtc-1.0.0.tgz
+http://tldp.etf.bg.ac.yu/gentoo/distfiles/dtc-1.0.0.tgz
+http://gentoo.mirrors.pair.com/distfiles/dtc-1.0.0.tgz
+http://cudlug.cudenver.edu/gentoo/distfiles/dtc-1.0.0.tgz
+http://ftp.cgu.edu.tw/Linux/Gentoo/gentoo/distfiles/dtc-1.0.0.tgz
+http://gentoo.modulix.net/gentoo/distfiles/dtc-1.0.0.tgz
+http://gentoo.llarian.net/distfiles/dtc-1.0.0.tgz
+
+
+Waiting for feedback,
+
+
+Regards,
+-- 
+Leon
 
 
