@@ -1,33 +1,29 @@
-Received: from [66.249.82.235] (helo=wx-out-0506.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1JYE87-0006lk-0n
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Mar 2008 06:31:28 +0100
-Received: by wx-out-0506.google.com with SMTP id h27so1137136wxd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Mar 2008 21:29:42 -0800 (PST)
-Received: by 10.150.177.20 with SMTP id z20mr1662267ybe.118.1205040582895;
-	Sat, 08 Mar 2008 21:29:42 -0800 (PST)
-Received: from ?192.168.1.204? ( [24.107.189.117])
-	by mx.google.com with ESMTPS id 61sm8903929wry.13.2008.03.08.21.29.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 08 Mar 2008 21:29:42 -0800 (PST)
-Message-ID: <47D375BD.6010009@gmail.com>
-Date: Sat, 08 Mar 2008 23:29:33 -0600
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
+	(envelope-from <openembedded@haerwu.biz>) id 1JYLyN-0001lr-TO
+	for openembedded-devel@openembedded.org; Sun, 09 Mar 2008 14:53:57 +0100
+Received: (qmail 16950 invoked by uid 813007); 9 Mar 2008 13:52:08 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 9 Mar 2008 13:52:08 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 9 Mar 2008 14:52:05 +0100
+User-Agent: KMail/1.9.9
+References: <47D2B73F.7070905@gmx.de>
+In-Reply-To: <47D2B73F.7070905@gmx.de>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 66.249.82.235
-X-SA-Exim-Mail-From: xjqian@gmail.com
+Message-Id: <200803091452.06972.openembedded@haerwu.biz>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: openembedded@haerwu.biz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: htcuni.patch generic for all devices?
+Subject: Re: RFC: move do_deploy to kernel.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,46 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Mar 2008 05:31:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 09 Mar 2008 13:53:58 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-htcuni.patch is not clean in .dev and breaks linux-rp_2.6.24 for all 
-devices. My questions is why this patch was applied to all devices in 
-thefirst place. Shouldn't this patch be put under the htcuniversal 
-section, regardless if it's broken or not?
+Dnia Saturday 08 of March 2008, Thomas Kunze napisa=B3:
+> Hi,
+>
+> currently nearly every kernel recipe implements do_deploy and nearly
+> all implementations are the same. This patch moved do_deploy to
+> kernel.bbclass and updates all kernel recipes to use or override it.
+> Please have a look if the change this makes to your kernel recipe is ok
+> for you. IMO it would be best if you modify your kernel recipe how you
+> need it after this is commited. If nobody objects I will commit this
+> next Friday (mar 14th).
 
-Regards
-Gordon
++1 from me
 
-#
-# old_revision [b61252165c378556cbcf99189fda2993232e1c3e]
-#
-# patch "packages/linux/linux-rp_2.6.24.bb"
-#  from [9e6dea22aa706ffd224579092a86fb5572432109]
-#    to [f0a3a1d140b091261e05dbd98aab07db9a786aac]
-#
-============================================================
---- packages/linux/linux-rp_2.6.24.bb 
-9e6dea22aa706ffd224579092a86fb5572432109
-+++ packages/linux/linux-rp_2.6.24.bb 
-f0a3a1d140b091261e05dbd98aab07db9a786aac
-@@ -56,7 +56,6 @@ SRC_URI = "${KERNELORG_MIRROR}pub/linux/
-             file://pxa-serial-hack.patch;patch=1;status=hack \
-             file://connectplus-remove-ide-HACK.patch;patch=1;status=hack \
- 
-file://connectplus-prevent-oops-HACK.patch;patch=1;status=hack \
--           file://htcuni.patch;patch=1 \
-             file://binutils-buildid-arm.patch;patch=1 \
-             file://versatile-armv6.patch;patch=1 \
-             file://defconfig-c7x0 \
-@@ -194,6 +193,7 @@ SRC_URI_append_htcuniversal ="\
+I did this move in Poky some time ago and forgot to RFC it for OE. So you=20
+can also look how it is done in Poky.
 
-  SRC_URI_append_htcuniversal ="\
-  	file://htcuni-acx.patch;patch=1;status=external \
-+#       file://htcuni.patch;patch=1 \
-  	"
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-  SRC_URI_append_zylonite ="\
+Do you have any idea how lucky you are that I don't have telekinetic=20
+powers?
+
+
 
 
