@@ -1,39 +1,29 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [64.233.166.180] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1JY91f-0008H0-4j
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Mar 2008 01:04:30 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id A4AD01417180;
-	Sun,  9 Mar 2008 01:01:57 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hW3z1e2W8h5Z; Sun,  9 Mar 2008 01:01:57 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7])
-	by ns.penguin.cz (Postfix) with ESMTP id A007E1416BDE;
-	Sun,  9 Mar 2008 01:01:56 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1204903807.23228.91.camel@hammer.suse.cz>
-References: <E1JXdfA-0002tB-NY@linuxtogo.org>
-	<20080307143903.0df8f8b9@cimmeria>
-	<1204903807.23228.91.camel@hammer.suse.cz>
-Date: Sun, 09 Mar 2008 01:02:42 +0100
-Message-Id: <1205020963.15970.26.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+	(envelope-from <loudawgucr@gmail.com>) id 1JYE7Y-0006lT-IS
+	for Openembedded-devel@lists.openembedded.org;
+	Sun, 09 Mar 2008 06:30:59 +0100
+Received: by py-out-1112.google.com with SMTP id y77so1333853pyg.28
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 08 Mar 2008 21:29:08 -0800 (PST)
+Received: by 10.64.142.10 with SMTP id p10mr5772226qbd.69.1205040548154;
+	Sat, 08 Mar 2008 21:29:08 -0800 (PST)
+Received: by 10.64.156.3 with HTTP; Sat, 8 Mar 2008 21:29:08 -0800 (PST)
+Message-ID: <5e50ac960803082129k8f520ax4a1b773b579e1f3d@mail.gmail.com>
+Date: Sat, 8 Mar 2008 21:29:08 -0800
+From: "Louie Ilievski" <loudawgucr@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 64.233.166.180
+X-SA-Exim-Mail-From: loudawgucr@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=HTML_MESSAGE,RDNS_NONE
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: angstrom-distro-users <angstrom-distro-users@linuxtogo.org>
-Subject: Sharp CE-RH1 CE-RH2 remote support for Akita, please test (was:	...disable rc patch for akita...)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: aximx50v build failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -47,57 +37,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Mar 2008 00:04:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 09 Mar 2008 05:31:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-As I promised, there is a new version of sharpsl_rc drive, which should
-support:
-CE-RH2 on spitz (tested and works)
-CE-RH2 on akita (status unknown)
-CE-RH1 on c7x0 (status unknown)
+Hi everyone,
 
-Images, modules, patches (temporary URL):
-http://www.penguin.cz/~utx/zaurus/images_ce-rhx/
+I'm very new to OE and am trying to get my first image created for my Axim
+x51v.  I've followed the getting started guide and all that, and the build
+goes for quite a while until it hits the kernel.  I have MACHINE set to
+"aximx50v" and DISTRO to "angstrom-2008.1".  There may be multiple problems
+here so I'll paste the entire output:
 
-Please test and let me know the result.
+loudawg@loudawg-mac:~/openembedded/build$ bitbake gpe-image
+NOTE: Handling BitBake files: \ (5252/5252) [100 %]
+NOTE: Parsing finished. 5025 cached, 0 parsed, 227 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+NOTE: build 200803082105: started
 
-c7x0 users and users of older akita/spitz kernels has to reflash kernel,
-others need only replace sharpsl_rc module by a new one.
+OE Build Configuration:
+BB_VERSION     = "1.8.11"
+OE_REVISION    = "ba724a0becdb79c011648d06fc0906fa6368511f"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux-gnueabi"
+MACHINE        = "aximx50v"
+DISTRO         = "angstrom"
+DISTRO_VERSION = "2008.1-test-20080309"
+TARGET_FPU     = "soft"
 
-To test it, you should see key numbers in syslog (dmesg -c; their
-meaning should correspond with /usr/include/linux/input.h).
+NOTE: Resolving any missing task queue dependencies
+NOTE: preferred version 1.4 of xserver-xorg not available (for item
+virtual/xserver)
+NOTE: preferred version 1.18.1 of pango not available (for item
+pango-module-basic-x)
+NOTE: preferred version 1.18.1 of pango not available (for item
+pango-module-basic-fc)
+NOTE: preferred version 1.4 of xserver-xorg not available (for item
+xserver-xorg)
+NOTE: preferred version 2.6.1 of glibc not available (for item
+virtual/arm-angstrom-linux-gnueabi-libc-for-gcc)
+NOTE: preferred version 1.1.4 of dbus not available (for item dbus)
+NOTE: preferred version 1.18.1 of pango not available (for item pango)
+ERROR:
+'['/home/loudawg/openembedded/org.openembedded.dev/packages/gtk+/gtk+-directfb_2.10.14.bb']'
+RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity
+'gtk+-directfb' but it wasn't found in any PACKAGE or RPROVIDES variables of
+any buildable targets.
+Enable debugging and see earlier logs to find unbuildable targets.
+NOTE: Runtime target 'gtk+-directfb' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['gtk+-directfb']
+NOTE: preferred version 1.18.1 of pango not available (for item pango)
+NOTE: preferred version 1.1.4 of dbus not available (for item dbus)
+NOTE: multiple providers are available for virtual/libqte2 (qte-mt-static,
+qte, qte-mt);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/libqte2
+NOTE: Preparing runqueue
+ERROR: Multiple .bb files are due to be built which each provide
+bluez-utils-dbus
+(/home/loudawg/openembedded/org.openembedded.dev/packages/bluez/bluez-utils_3.24.bb
+/home/loudawg/openembedded/org.openembedded.dev/packages/bluez/bluez-cups-backend_3.24.bb).
+ This usually means one provides something the other doesn't and should.
+NOTE: Executing runqueue
+NOTE: Running task 976 of 3754 (ID: 658,
+/home/loudawg/openembedded/org.openembedded.dev/packages/linux/linux-
+handhelds-2.6_2.6.21-hh20.bb, do_compile)
+NOTE: package linux-handhelds-2.6-2.6.21-hh20: started
+NOTE: package linux-handhelds-2.6-2.6.21-hh20-r14: task do_compile: started
+ERROR: function do_compile failed
+ERROR: log data follows
+(/home/loudawg/openembedded/build/tmp/work/aximx50v-angstrom-linux-gnueabi/linux-
+handhelds-2.6-2.6.21-hh20-r14/temp/log.do_compile.26760)
+|
+/home/loudawg/openembedded/build/tmp/deploy/uclibc/images/aximx50v/initramfs-
+bootmenu-image-aximx50v.cpio.gz does not exist, you may need to bitbake it
+separately
+NOTE: Task failed:
+/home/loudawg/openembedded/build/tmp/work/aximx50v-angstrom-linux-gnueabi/linux-
+handhelds-2.6-2.6.21-hh20-r14/temp/log.do_compile.26760
+NOTE: package linux-handhelds-2.6-2.6.21-hh20-r14: task do_compile: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package linux-handhelds-2.6-2.6.21-hh20: failed
+ERROR: Build of
+/home/loudawg/openembedded/org.openembedded.dev/packages/linux/linux-
+handhelds-2.6_2.6.21-hh20.bb do_compile failed
+ERROR: Task 658
+(/home/loudawg/openembedded/org.openembedded.dev/packages/linux/linux-
+handhelds-2.6_2.6.21-hh20.bb, do_compile) failed
+NOTE: Tasks Summary: Attempted 975 tasks of which 975 didn't need to be
+rerun and 1 failed.
+ERROR:
+'/home/loudawg/openembedded/org.openembedded.dev/packages/linux/linux-
+handhelds-2.6_2.6.21-hh20.bb' failed
 
-If you have latest build of X, you should also see them in xev.
+Any ideas on what I need to do?
 
-Graeme Gregory wrote:
-> On Fri, 07 Mar 2008 15:35:08 +0100
-> "koen commit" <openembedded-commits@lists.openembedded.org> wrote:
-> 
-> > linux-rp 2.6.24: disable rc patch for akita - it doesn't apply and
-> > only handles spitz
+Thanks,
 
-There is actual only a one-line conflict depending on status of
-htcuni.patch, trivial to fix. I can move conflicting line few lines away
-to not be dependent on htcuni. I would like to move remote patches to
-the generic part of RP kernels, as they can't break other platforms.
-
-> > * again, no backport, since this is unsuitable for .dev
-> > 
-> If one of the akita maintainers want to fix this then the OE RH-2 remote
-> is currently sitting on my desk unused.
-Stanislav Brabec wrote:
-> Oops. SPITZ_SCP2_AKIN_PULLUP is Spitz specific.
-
-I used AKITA_IOEXP_AKIN_PULLUP for Akita and for c7x0 backported button
-levels from 2.4 kernel, so CE-RH1 sould be working there as well.
-
-I guess that tosa has no remote support, and collie/poodle may it have.
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
-
+Lou
 
