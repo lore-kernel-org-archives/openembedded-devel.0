@@ -1,29 +1,39 @@
-Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1JY5AR-00039l-FL
+	(envelope-from <utx@penguin.cz>) id 1JY91f-0008H0-4j
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 Mar 2008 20:57:17 +0100
-Received: by ug-out-1314.google.com with SMTP id i24so4625184ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Mar 2008 11:55:34 -0800 (PST)
-Received: by 10.66.221.6 with SMTP id t6mr2523233ugg.0.1205006134295;
-	Sat, 08 Mar 2008 11:55:34 -0800 (PST)
-Received: by 10.67.25.4 with HTTP; Sat, 8 Mar 2008 11:55:34 -0800 (PST)
-Message-ID: <a7f8874a0803081155x5de899eega4ef5903f165c174@mail.gmail.com>
-Date: Sat, 8 Mar 2008 11:55:34 -0800
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
-To: oe-devel <openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.249.92.175
-X-SA-Exim-Mail-From: hvontres@gmail.com
+	Sun, 09 Mar 2008 01:04:30 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id A4AD01417180;
+	Sun,  9 Mar 2008 01:01:57 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id hW3z1e2W8h5Z; Sun,  9 Mar 2008 01:01:57 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7])
+	by ns.penguin.cz (Postfix) with ESMTP id A007E1416BDE;
+	Sun,  9 Mar 2008 01:01:56 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1204903807.23228.91.camel@hammer.suse.cz>
+References: <E1JXdfA-0002tB-NY@linuxtogo.org>
+	<20080307143903.0df8f8b9@cimmeria>
+	<1204903807.23228.91.camel@hammer.suse.cz>
+Date: Sun, 09 Mar 2008 01:02:42 +0100
+Message-Id: <1205020963.15970.26.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=HTML_MESSAGE,RDNS_NONE
-	autolearn=no version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.9
-Subject: Is MACHINE_TASK_PROVIDER still being used or should it be phased out?
+Cc: angstrom-distro-users <angstrom-distro-users@linuxtogo.org>
+Subject: Sharp CE-RH1 CE-RH2 remote support for Akita, please test (was:	...disable rc patch for akita...)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,30 +47,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Mar 2008 19:57:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 09 Mar 2008 00:04:30 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-I am trying to fix http://bugs.openembedded.net/show_bug.cgi?id=3969. I
-basicaly have two options here:
-1) simply replace MACHINE_TASK_PROVIDER with task-base-extended in the
-affected recipie
+As I promised, there is a new version of sharpsl_rc drive, which should
+support:
+CE-RH2 on spitz (tested and works)
+CE-RH2 on akita (status unknown)
+CE-RH1 on c7x0 (status unknown)
 
-2) come up with a different solution that preserves MACHINE_TASK_PROVIDER
-and adds a suitable definition
+Images, modules, patches (temporary URL):
+http://www.penguin.cz/~utx/zaurus/images_ce-rhx/
 
-It seems that a lot of recent image recipies have used approach #1 and I was
-wondering if MACHINE_TASK_PROVIDER  was still actively being used or if it
-is mostly left over from the initial task-base switchover.
+Please test and let me know the result.
 
-also, if it is still in use, do any of the current users care about
-opie-image in particular?
+c7x0 users and users of older akita/spitz kernels has to reflash kernel,
+others need only replace sharpsl_rc module by a new one.
 
-Thank you very much,
+To test it, you should see key numbers in syslog (dmesg -c; their
+meaning should correspond with /usr/include/linux/input.h).
 
--- 
-Henry von Tresckow (hvontres)
+If you have latest build of X, you should also see them in xev.
 
-Poodle life support team
+Graeme Gregory wrote:
+> On Fri, 07 Mar 2008 15:35:08 +0100
+> "koen commit" <openembedded-commits@lists.openembedded.org> wrote:
+> 
+> > linux-rp 2.6.24: disable rc patch for akita - it doesn't apply and
+> > only handles spitz
+
+There is actual only a one-line conflict depending on status of
+htcuni.patch, trivial to fix. I can move conflicting line few lines away
+to not be dependent on htcuni. I would like to move remote patches to
+the generic part of RP kernels, as they can't break other platforms.
+
+> > * again, no backport, since this is unsuitable for .dev
+> > 
+> If one of the akita maintainers want to fix this then the OE RH-2 remote
+> is currently sitting on my desk unused.
+Stanislav Brabec wrote:
+> Oops. SPITZ_SCP2_AKIN_PULLUP is Spitz specific.
+
+I used AKITA_IOEXP_AKIN_PULLUP for Akita and for c7x0 backported button
+levels from 2.4 kernel, so CE-RH1 sould be working there as well.
+
+I guess that tosa has no remote support, and collie/poodle may it have.
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
+
 
