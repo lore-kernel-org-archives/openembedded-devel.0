@@ -1,27 +1,27 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [209.85.132.251] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JYOEK-0004qE-HO
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JYOdE-0001Sb-PW
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Mar 2008 17:18:35 +0100
-Received: from 118-166-68-156.dynamic.hinet.net ([118.166.68.156]
-	helo=tamarin.local) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1JYOCb-000524-Rv
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Mar 2008 17:16:46 +0100
-From: Holger Freyther <zecke@selfish.org>
+	Sun, 09 Mar 2008 17:44:20 +0100
+Received: by an-out-0708.google.com with SMTP id b33so347390ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 09 Mar 2008 09:42:28 -0700 (PDT)
+Received: by 10.100.58.2 with SMTP id g2mr9131071ana.75.1205080947567;
+	Sun, 09 Mar 2008 09:42:27 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Sun, 9 Mar 2008 09:42:27 -0700 (PDT)
+Message-ID: <c384c5ea0803090942h63638a5j7dfbecaaf1b39a39@mail.gmail.com>
+Date: Sun, 9 Mar 2008 17:42:27 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 9 Mar 2008 17:16:40 +0100
-User-Agent: KMail/1.9.9
-References: <c384c5ea0803090750jba077bld01cad88f051ba45@mail.gmail.com>
-In-Reply-To: <c384c5ea0803090750jba077bld01cad88f051ba45@mail.gmail.com>
+In-Reply-To: <200803091716.40438.zecke@selfish.org>
 MIME-Version: 1.0
-Message-Id: <200803091716.40438.zecke@selfish.org>
-X-SA-Exim-Connect-IP: 81.169.183.159
-X-SA-Exim-Mail-From: zecke@selfish.org
+References: <c384c5ea0803090750jba077bld01cad88f051ba45@mail.gmail.com>
+	<200803091716.40438.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 209.85.132.251
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -39,25 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Mar 2008 16:18:36 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sun, 09 Mar 2008 16:44:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Sunday 09 March 2008 15:50:32 Leon Woestenberg wrote:
-> Hello,
->
-> The result of a weekend code sprint, as an excuse to learn sqlite3 but
-> mostly because OpenEmbedded builds often break if downloads/ is empty.
->
-> http://www.sidebranch.com/witpa/
->
-> A package URL maintenance tool. See usage and example below. Would be
-> neat to have this as a web service.
+Hello Holger,
 
-Cool! How is CDT of Eclipse? Did it help you?
+On Sun, Mar 9, 2008 at 5:16 PM, Holger Freyther <zecke@selfish.org> wrote:
+> On Sunday 09 March 2008 15:50:32 Leon Woestenberg wrote:
+>  > http://www.sidebranch.com/witpa/
+>  >
+>  > A package URL maintenance tool. See usage and example below. Would be
+>  > neat to have this as a web service.
+>
+>  Cool! How is CDT of Eclipse? Did it help you?
+>
+I'm quite editor-agnostic, I switch between nano/gedit/eclipse mostly
+depending on how remotely I am :-)
 
-z.
+Yes, Eclipse helps me in a number of ways, but I guess that goes for
+every editor you have learned to love.
+
+On my todo is still an Eclipse plugin for bitbake but my Java
+programming is too shallow.
+
+Regards,
+-- 
+Leon
 
 
