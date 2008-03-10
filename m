@@ -1,34 +1,40 @@
-Received: from [209.85.132.247] (helo=an-out-0708.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1JYqNp-0007N3-6h
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Mar 2008 23:22:15 +0100
-Received: by an-out-0708.google.com with SMTP id b33so484314ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Mar 2008 15:20:17 -0700 (PDT)
-Received: by 10.100.38.3 with SMTP id l3mr2233032anl.14.1205187616919;
-	Mon, 10 Mar 2008 15:20:16 -0700 (PDT)
-Received: from ?10.39.211.130? ( [128.252.210.40])
-	by mx.google.com with ESMTPS id 9sm14015960agc.33.2008.03.10.15.20.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 10 Mar 2008 15:20:16 -0700 (PDT)
-Message-ID: <47D5C22B.4090308@gmail.com>
-Date: Mon, 10 Mar 2008 18:20:11 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1205081794.8432.15.camel@localhost>
-In-Reply-To: <1205081794.8432.15.camel@localhost>
-X-SA-Exim-Connect-IP: 209.85.132.247
-X-SA-Exim-Mail-From: xjqian@gmail.com
+	(envelope-from <rpurdie@rpsys.net>) id 1JYqUW-0007Sy-6G
+	for openembedded-devel@openembedded.org; Mon, 10 Mar 2008 23:29:10 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2AMREVb004002
+	for <openembedded-devel@openembedded.org>; Mon, 10 Mar 2008 22:27:14 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 03624-10 for <openembedded-devel@openembedded.org>;
+	Mon, 10 Mar 2008 22:27:06 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2AMR3Bf003989
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Mon, 10 Mar 2008 22:27:03 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <c384c5ea0803101056y50cdbd18mf39818f746fa3152@mail.gmail.com>
+References: <c384c5ea0803091149g321e7086qec5b54499c7ecbc@mail.gmail.com>
+	<fr3oom$clq$1@ger.gmane.org>
+	<c384c5ea0803101056y50cdbd18mf39818f746fa3152@mail.gmail.com>
+Date: Mon, 10 Mar 2008 22:27:05 +0000
+Message-Id: <1205188025.4529.27.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Perl modules: Cannot compile due to wrong dependency in Makefile
+Subject: Re: gcc-cross-initial.inc DEPENDS on libc-initial, but why	conditionally on TARGET_ARCH?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,51 +48,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Mar 2008 22:22:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 10 Mar 2008 22:29:10 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 03/09/2008 11:56 AM, Thomas Reitmayr wrote:
-> Hi,
-> I have a problem building perl modules which have their own recipe and
-> are built outside of the original perl tree, eg. libwww-perl. It looks
-> like there is a wrong dependency in the Makefile of such a module. The
-> Makefile is created from Makefile.PL and includes the following:
+On Mon, 2008-03-10 at 18:56 +0100, Leon Woestenberg wrote:
+> On Mon, Mar 10, 2008 at 5:48 PM, Koen Kooi
+> <koen@dominion.kabel.utwente.nl> wrote:
+> >  | OE toolchain question: any reason why the list below includes arm*,
+> >  | mips* but nothing else?
+> >  |
+> >  | gcc-cross-initial.inc:
+> >  |
+> >  "${@['virtual/${TARGET_PREFIX}libc-initial',''][bb.data.getVar('TARGET_ARCH',
+> >  | d, 1) in ['arm', 'armeb', 'mips', 'mipsel']]}"
+> >
+> >  I think that's because we only supported nptl for arm and mips when the
+> >  earth was still young and glibc even nastier than today. I asked this
+> >  before and never got a conclusive answer :(
+> >
+> I suspected this to be NPTL related, and I vaguely remember you
+> explaining the initial-intermediate dependencies.
+> 
+> RP answered on #oe that my logic was inverse: gcc-cross-initial *does*
+> depend on libc-initial *only* when arm/mips is the target, not for
+> other architectures.
+> 
+> Indeed, when building powerpc/glibc no libc-initial is involved.
+> However, when I switch to ulibc, there is a libc-initial involved, but
+> it is not depended on, and a parallel build fails.
+> 
+> Argh, if only I understood the whole complete picture, I could fix it,
 
-These are definitely overlooked host path pollution.
+I tried asking Phil who is/was one of our glibc gurus and he said "those
+two architectures are more classically 'embedded'" than, say, i386 or
+powerpc and they might well have more self-hosting runtimes." but he
+wasn't sure what the exact reason was.
 
-> 
-> [...]
-> PERL_LIB = /usr/share/perl/5.8
-> PERL_ARCHLIB = /usr/lib/perl/5.8
-> [...]
-> # Where is the Config information that we are using/depend on
-> CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
-> [...]
-> $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
-> 	$(NOECHO) $(ECHO) "Makefile out-of-date with respect to $?"
-> [...]
-> 
-> As there is no /usr/lib/perl/5.8 on my build host (a Gentoo system), the
-> reported error in log.do_compile.ZZZ is
-> 
-> make: *** No rule to make target `/usr/lib/perl/5.8/Config.pm', needed
-> by `Makefile'.  Stop.
-> 
-> The only Config.pm I can find
-> is /home/nslu2/slugos/tmp/staging/i686-linux/usr/lib/perl/5.8.8/Config.pm, but I am not sure if it would be correct to just set the PERL_LIB to its directory path. I traced back the origin of PERL_LIB and found it is coming from a %Config setting 'archlibexp'. Its contents is read from tmp/staging/i686-linux/usr/lib/perl/5.8.8/Config_heavy-target.pl.
-> 
-> I am not sure whether the contents of the variable is wrong or its
-> usage, and of course how to fix it.
-> [My quick fix was to modify the MakeMaker (MM_Unix.pm) to not create
-> this dependency.]
-> 
-> Has anyone an idea what's wrong?
+I've become fuzzy about how the different toolchain bits fit together so
+I mapped out the chains below. I've missed out references to
+TARGET_PREFIX since they just confuse things:
 
-The common fix for hard coded path in configure or Makefile is to patch 
-those with the appropriate ${STAGINGDIR}.
+gcc-initial depends on virtual/libc-initial for arch != (arm|mips).
+glibc-initial provides this and it looks like it just stages headers
+which presumably gcc-initial needs to build.
 
-Regards
-Gordon
+gcc-initial is the compiler used to build the libc used by gcc-cross
+which is called virtual/libc-for-gcc.
+
+virtual/libc-for-gcc is provided either by glibc or by
+glibc-intermediate depending on whether we're using NPTL.
+
+In the case NPTL isn't used, glibc depends on gcc-initial and provides
+virtual/libc-for-gcc so we have:
+
+For arm/mips:
+linux-libc-headers <- gcc-initial <- glibc <- gcc-cross
+For everything else:
+linux-libc-headers <- glibc-initial <- gcc-initial <- glibc <- gcc-cross
+
+When NPTL is used for arm/mips:
+linux-libc-headers <- gcc-initial <- glibc-intermediate <- gcc-cross <- glibc
+For everything else:
+linux-libc-headers <- glibc-initial <- gcc-initial <- glibc-intermediate <- gcc-cross <- glibc
+
+So its all a bit complex...
+
+What was the problem you were seeing with glibc-initial?
+
+Cheers,
+
+Richard
+
+
 
 
