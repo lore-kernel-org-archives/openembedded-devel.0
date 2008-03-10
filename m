@@ -1,39 +1,44 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JYfh1-0000cf-Va
-	for openembedded-devel@openembedded.org; Mon, 10 Mar 2008 11:57:21 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2AAtTmL019273;
-	Mon, 10 Mar 2008 10:55:29 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 19254-01; Mon, 10 Mar 2008 10:55:21 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2AAtKiu019261
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Mon, 10 Mar 2008 10:55:20 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Stanislav Brabec <utx@penguin.cz>
-In-Reply-To: <1205144527.3728.16.camel@hammer.suse.cz>
-References: <47D375BD.6010009@gmail.com>
-	<1205144527.3728.16.camel@hammer.suse.cz>
-Date: Mon, 10 Mar 2008 10:55:19 +0000
-Message-Id: <1205146519.4529.2.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	(envelope-from <geoffrey@pager.net>) id 1JYiZO-00012Z-7C
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Mar 2008 15:01:43 +0100
+X-ASG-Debug-ID: 1205157577-33b000570000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 64E6890795
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Mar 2008 08:59:38 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id nMS43LhzaYmayJrp for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Mar 2008 08:59:38 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
+To: openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: Re: [oe] AVR32 + OpenEmbedded:
+	=?iso-8859-1?q?Problems=09with=09uclibc-initial=09do=5Fpopulate=5Fstagi?=
+	=?iso-8859-1?q?ng?= ()
+Date: Mon, 10 Mar 2008 08:59:33 -0500
+User-Agent: KMail/1.9.7
+References: <200803051349.39583.geoffrey@pager.net>
+	<1204932800.8161.45.camel@dax.rpnet.com>
+	<200803071746.46288.geoffrey@pager.net>
+In-Reply-To: <200803071746.46288.geoffrey@pager.net>
+MIME-Version: 1.0
+Message-Id: <200803100859.34113.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1205157578
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+X-SA-Exim-Connect-IP: 209.253.16.26
+X-SA-Exim-Mail-From: geoffrey@pager.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: htcuni.patch generic for all devices?
+Subject: Re: AVR32 + OpenEmbedded: Problems	with	uclibc-initial	do_populate_staging ()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -47,42 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Mar 2008 10:57:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 10 Mar 2008 14:01:44 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+On Friday 07 March 2008 05:46:46 pm Geoffrey Wossum wrote:
+> On Friday 07 March 2008 05:33:20 pm Richard Purdie wrote:
+> > On Fri, 2008-03-07 at 16:56 -0600, Geoffrey Wossum wrote:
+> > > Checking the log.do_configure for gcc-cross-initial, --with-sysroot was
+> >
+> > I was meaning to ask what changed you'd have to make to get your image
+> > to build.
+> >
+> > By strange coincidence I was looking at gcc-cross-initial today and
+> > wondered about this. I concluded that gcc-cross-initial does not need
+> > sysroot support though. gcc-cross-initial is only used to build the libc
+> > for gcc-cross "proper" and for that you don't need anything in staging.
+> >
+> > So the question is why would gcc-cross-initial need to find things in
+> > staging?
 
-On Mon, 2008-03-10 at 11:22 +0100, Stanislav Brabec wrote:
-> Junqian Gordon Xu wrote:
-> > htcuni.patch is not clean in .dev and breaks linux-rp_2.6.24 for all 
-> > devices. My questions is why this patch was applied to all devices in 
-> > thefirst place. Shouldn't this patch be put under the htcuniversal 
-> > section, regardless if it's broken or not?
-> 
-> I am not a HTC Universal user, so I cannot test its function, but from
-> aspect of other devices, it looks clean and does not break my Zaurus
-> kernel.
-> 
-> Consequent reject in another patch sharpsl-rc is another problem,
-> trivial to fix.
-> 
-> Richard, what is your opinion? Do you prefer device specific patch sets
-> or making all clean enough patches generic?
+> Maybe uClibc 0.9.29 fixes this issue.  I need to move to it anyway.  Koen
+> suggested it as a fix for my init segfault issue, plus I think avahi needs
+> it, and I need avahi in my final product.
 
-I favour making clean generic patches which are applied on all machines.
-Anything intending to head for mainline needs to cope with this and the
-patches are in linux-rp are mainly intended for mainline.
+uClibc 0.9.29 does indeed fix these strange build issues I was having.  I can 
+build everything with uClibc 0.9.29 without any mods to the files in 
+packages/gcc.  So that's good.
 
-I know I didn't do that with the tosa checkin but I do hope to find time
-to resolve that soon :)
+Still getting the segfault when init starts up, though.
 
-I will try and test out the status of 2.6.24 and fix the various issues
-I'm aware of today.
-
-Cheers,
-
-Richard
-
-
+---
+Geoffrey
 
 
