@@ -1,41 +1,29 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JYlTE-0005Ay-Gn
-	for openembedded-devel@openembedded.org; Mon, 10 Mar 2008 18:07:38 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1JYlCM-0006QL-8A
-	for openembedded-devel@openembedded.org; Mon, 10 Mar 2008 16:50:02 +0000
-Received: from wlan143218.mobiel.utwente.nl ([130.89.143.218])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 10 Mar 2008 16:50:02 +0000
-Received: from koen by wlan143218.mobiel.utwente.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 10 Mar 2008 16:50:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Mon, 10 Mar 2008 17:48:22 +0100
-Message-ID: <fr3oom$clq$1@ger.gmane.org>
-References: <c384c5ea0803091149g321e7086qec5b54499c7ecbc@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: wlan143218.mobiel.utwente.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <c384c5ea0803091149g321e7086qec5b54499c7ecbc@mail.gmail.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <hvontres@gmail.com>) id 1JYlyA-0002Ec-Rd
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Mar 2008 18:39:31 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so4998111ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Mar 2008 10:37:34 -0700 (PDT)
+Received: by 10.67.102.6 with SMTP id e6mr4039595ugm.67.1205170654249;
+	Mon, 10 Mar 2008 10:37:34 -0700 (PDT)
+Received: by 10.67.25.4 with HTTP; Mon, 10 Mar 2008 10:37:34 -0700 (PDT)
+Message-ID: <a7f8874a0803101037p1e156eedx32eddf87c45fb890@mail.gmail.com>
+Date: Mon, 10 Mar 2008 10:37:34 -0700
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+To: oe-devel <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.249.92.170
+X-SA-Exim-Mail-From: hvontres@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,HTML_MESSAGE,RDNS_NONE
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gcc-cross-initial.inc DEPENDS on libc-initial, but why conditionally on TARGET_ARCH?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: [RFC]: Is MACHINE_TASK_PROVIDER still being used or should it be phased out?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,45 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Mar 2008 17:07:39 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 10 Mar 2008 17:39:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+(sorry for the repost, but I forgot the RFC tag the first time)
 
-Leon Woestenberg schreef:
-| Hello,
-|
-| OE toolchain question: any reason why the list below includes arm*,
-| mips* but nothing else?
-|
-| gcc-cross-initial.inc:
-|
-| DEPENDS = "virtual/${TARGET_PREFIX}binutils"
-| DEPENDS +=
-"${@['virtual/${TARGET_PREFIX}libc-initial',''][bb.data.getVar('TARGET_ARCH',
-| d, 1) in ['arm', 'armeb', 'mips', 'mipsel']]}"
-| PROVIDES = "virtual/${TARGET_PREFIX}gcc-initial"
-| PACKAGES = ""
-|
-| (I'm tracking down a parallel make issue, this seems to cause/trigger
-| it as I build for powerpc).
+I am trying to fix http://bugs.openembedded.net/show_bug.cgi?id=3969.
 
-I think that's because we only supported nptl for arm and mips when the
-earth was still young and glibc even nastier than today. I asked this
-before and never got a conclusive answer :(
+I basicaly have two options here:
 
-regards,
+1) simply replace MACHINE_TASK_PROVIDER with task-base-extended in the
+affected recipie
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+2) come up with a different solution that preserves MACHINE_TASK_PROVIDER
+and adds a suitable definition
 
-iD8DBQFH1WZWMkyGM64RGpERAiclAKC86eWW8nzBnK7qXIsSnpRbdifdZQCeL2fV
-LJmhpyxT15Hm854ErQYmJtg=
-=9ahN
------END PGP SIGNATURE-----
+It seems that a lot of recent image recipies have used approach #1 and I was
+wondering if MACHINE_TASK_PROVIDER  was still actively being used or if it
+is mostly left over from the initial task-base switchover.
 
+Also, if it is still in use, do any of the current users care about
+opie-image in particular?
 
+(I will use #1 if I don't hear back soon)
+
+Thank you very much,
+
+-- 
+Henry von Tresckow (hvontres)
+
+Poodle life support team
 
