@@ -1,42 +1,29 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JYtbb-0007wk-Ek
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 02:48:41 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JYtZg-0000ge-Na
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 01:46:40 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 01:46:40 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 01:46:40 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Tue, 11 Mar 2008 02:46:31 +0100
-Message-ID: <fr4o9n$r3s$1@ger.gmane.org>
-References: <c384c5ea0803091149g321e7086qec5b54499c7ecbc@mail.gmail.com>	<fr3oom$clq$1@ger.gmane.org>	<c384c5ea0803101056y50cdbd18mf39818f746fa3152@mail.gmail.com>	<1205188025.4529.27.camel@dax.rpnet.com>
-	<c384c5ea0803101601o6e76d53eo469e218766241aa@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <c384c5ea0803101601o6e76d53eo469e218766241aa@mail.gmail.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <zecke@selfish.org>) id 1JYybo-0001Zw-K0
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 08:09:14 +0100
+Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JYyZw-0000lD-1T
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 08:07:16 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Mar 2008 08:07:10 +0100
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200803110807.11368.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 81.169.183.159
+X-SA-Exim-Mail-From: zecke@selfish.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gcc-cross-initial.inc DEPENDS on libc-initial, but why conditionally on TARGET_ARCH?
+Subject: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,63 +37,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 01:48:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 11 Mar 2008 07:09:14 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hey,
 
-Leon Woestenberg schreef:
-| Hello Richard,
-|
-| On Mon, Mar 10, 2008 at 11:27 PM, Richard Purdie <rpurdie@rpsys.net>
-wrote:
-|> On Mon, 2008-03-10 at 18:56 +0100, Leon Woestenberg wrote:
-|>  > On Mon, Mar 10, 2008 at 5:48 PM, Koen Kooi
-|>  > <koen@dominion.kabel.utwente.nl> wrote:
-|>  > Indeed, when building powerpc/glibc no libc-initial is involved.
-|>  > However, when I switch to ulibc, there is a libc-initial involved, but
-|>  > it is not depended on, and a parallel build fails.
-|>  >
-|>  > Argh, if only I understood the whole complete picture, I could fix it,
-|>
-|>  I tried asking Phil who is/was one of our glibc gurus and he said "those
-|>  two architectures are more classically 'embedded'" than, say, i386 or
-|>  powerpc and they might well have more self-hosting runtimes." but he
-|>  wasn't sure what the exact reason was.
-|>
-|>  I've become fuzzy about how the different toolchain bits fit together so
-|>  I mapped out the chains below. I've missed out references to
-|>
-|>  <excellent summary>
-|>
-|>  So its all a bit complex...
-|>
-|>  What was the problem you were seeing with glibc-initial?
-|>
-| LOL, now to add further variables, it was with uclibc :-)
-|
-| Apparently, uclibc for powerpc does need libc-initial (provided by
-| uclibc-initial?) as well.
+I'm anything but happy with the way we work with our repository. We have a 
+dreambox branch that is not mergable due issues with our SCM system, the 
+OpenMoko guys have to go back to diffing and applying the diff and merging by 
+hand, we just commit fundamental changes like sysroot, packaged-staging, RFCs 
+in one go and then do weeks of fixing. And I can continue with this list.
 
-There's a comment about that in one of the angstrom files about
-(possible) needing a uclibc-initial as well. Since uclibc is rather
-'dumb' and doesn't do nptl i hasn't been a problem yet, but 0.9.30 is
-scheduled to have nptl support for arm, ppc and sh, so we probably need
-to revamp uclibc support...
+What: I think we should use more branches
+	- As many shortlived and medium lived branches as developers want
+	- Shared branches for stuff like packaged staging, RFCs, sysroot. Were you
+	  start the development, add features, other people will compile their stuff, 
+	  other compile and then you rebase and merge!
+	- Basicly you develop a feature in a branch until it is ready and not 
+	  impacting other things, then you rebase/cleanup, propose it for inclusion 
+	  and wait for feedback, then merge.
+	- Stable distributions and vendors get their own branch, they can merge, 
+	  cherry-pick what ever they want.
 
 
-regards,
+The issue:
+	- mtn can not merge. Forcing me to manually delete files in one copy to do a 
+	  merge is not acceptable.
+	- mtn has not the concept of short-lived branches (e.g. deleting their 
+	  existence once done), mtn suspend does not work as witnessed by our 
+	  automerger.
+	- mtn pluck is not making me happy
+	- I lack a GUI to easily browse the repository
+	- I can not clean up changes before I push them!
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFH1eR3MkyGM64RGpERAp2gAJ9QmhzayJvzzxYJceAyCbPzj18fDwCfR4VA
-sN1QuQ4KCbkpFYKlyll54WQ=
-=evJc
------END PGP SIGNATURE-----
+I want that we use more branches for development, apply review on them, 
+land/merge/push these branches after review, pull peoples changes from other 
+hosts, work on perfetch patch series before landing patches. I believe we 
+need to deploy this kind of development in OE again and as mtn is the 
+obstacle to this kind of development I propose to switch to another SCM 
+system that allows us to develop OpenEmbedded the way it should be developed.
 
+My criteria:
+	- Should have branches, easy merging, easy merging of merges
+	- Branches and merging should be cheap
+	- Make it easy to put the OE tree into another SCM and still be able
+	  to merge (git-svn and such)
+	- A good graphical tool to browse the repository
+	- A good and maintained web frontend
+	- A good set of builtin tools (e.g. like git-add -i and git-rebase -i)
+
+I think the two options are hg and git, I tend to favor git due the size of 
+its community. I want to switch OE to one of these systems by the end of this 
+month and start using more branches and creating perfect patch series again.
+
+
+comments? agreement?
+
+	z.
+
+
+PS: It is not the speed of mtn, it is the lack of development in areas like 
+branches, merging, rebasing, we need to use these in OE!
 
 
