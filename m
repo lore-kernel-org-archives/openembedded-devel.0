@@ -1,33 +1,22 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZ1h9-00075V-IA
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 11:26:57 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BAOuaY008193
-	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 10:24:56 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 07969-05 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 10:24:52 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BAOmox008181
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 10:24:48 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <fr5l5o$cmg$1@ger.gmane.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1JZ1iZ-00079l-Ph
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 11:28:25 +0100
+Received: (qmail 21386 invoked by uid 813007); 11 Mar 2008 10:26:19 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from v813.rev.tld.pl (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by smtp.host4.kei.pl with ESMTPA; 11 Mar 2008 10:26:19 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Mar 2008 11:25:59 +0100
+User-Agent: KMail/1.9.9
 References: <200803110807.11368.zecke@selfish.org>
-	<fr5egp$jbl$1@ger.gmane.org> <200803111042.39028.zecke@selfish.org>
-	<fr5l5o$cmg$1@ger.gmane.org>
-Date: Tue, 11 Mar 2008 10:24:48 +0000
-Message-Id: <1205231088.4521.7.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+In-Reply-To: <200803110807.11368.zecke@selfish.org>
+MIME-Version: 1.0
+Message-Id: <200803111126.04715.openembedded@haerwu.biz>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: openembedded@haerwu.biz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -48,44 +37,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 10:26:57 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Mar 2008 10:28:25 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Tue, 2008-03-11 at 10:59 +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Holger Freyther schreef:
-> 
-> | Also you have witnessed the issue with suspending branches and the
-> automerger
-> | making them live again... there is enough evidence...
-> 
-> That was because the automerger was running an mtn version that didn't
-> have suspend cert support (0.30, it now is running 0.39). Also, as
-> maintainer of said automerger I haven't heard *anything* about suspend
-> certs being used by OE nor about them not working for OE. So I think you
-> should blame bad communication for this, not the tool. I would have
-> happily upgraded the automerger if someone had bothered to tell me[1].
+Dnia Tuesday 11 of March 2008, Holger Freyther napisa=B3:
 
-We had a situation where some bad changes propagated into OE.dev
-accidentally and I took steps to try and revert them. On advice from the
-monotone devs, I suspended the current head and tried to move us back to
-an older one. As the automerger didn't support them it just resurrected
-the suspended branch. It was something that needed to be sorted ASAP
-since anyone making a checkout during the "bad head" time would have to
-manually change their head. In the end I just merged the heads and
-corrupted our history since the damage wasn't as bad as originally
-thought.
+> I'm anything but happy with the way we work with our repository. We
+> have a dreambox branch that is not mergable due issues with our SCM
+> system, the OpenMoko guys have to go back to diffing and applying the
+> diff and merging by hand, we just commit fundamental changes like
+> sysroot, packaged-staging, RFCs in one go and then do weeks of fixing.
+> And I can continue with this list.
 
-> [1] Or sent a mail to the mailinglist!
+In short: our SCM situation suxx.
 
-I did, Subject:[oe] Monotone issues, Thu, 31 Jan 2008 23:51:39 +0000
+> What: I think we should use more branches
+> 	- As many shortlived and medium lived branches as developers want
+> 	- Shared branches for stuff like packaged staging, RFCs, sysroot. Were
+> you start the development, add features, other people will compile
+> their stuff, other compile and then you rebase and merge!
+> 	- Basicly you develop a feature in a branch until it is ready and not
+> 	  impacting other things, then you rebase/cleanup, propose it for
+> inclusion and wait for feedback, then merge.
+> 	- Stable distributions and vendors get their own branch, they can
+> merge, cherry-pick what ever they want.
 
-Cheers,
+Agreed on that.
 
-Richard
+> The issue:
+> 	- mtn can not merge. Forcing me to manually delete files in one copy
+> to do a merge is not acceptable.
+
+argh on that too
+
+> 	- I lack a GUI to easily browse the repository
+
+Does Mercurial has such one? GIT has gitk, qgit and probably something=20
+more.
+
+> 	- I can not clean up changes before I push them!
+
+I do not know what exactly you mean here but from what I know it is doable=
+=20
+with GIT (exporting and re-importing patchsets).
+
+> I want that we use more branches for development, apply review on them,
+> land/merge/push these branches after review, pull peoples changes from
+> other hosts, work on perfetch patch series before landing patches.=20
+
+I like idea.
+
+> I believe we need to deploy this kind of development in OE again and as
+> mtn is the obstacle to this kind of development I propose to switch to
+> another SCM system that allows us to develop OpenEmbedded the way it
+> should be developed.
+
+> My criteria:
+
+> 	- Should have branches, easy merging, easy merging of merges
+> 	- Branches and merging should be cheap
+> 	- Make it easy to put the OE tree into another SCM and still be able
+> 	  to merge (git-svn and such)
+> 	- A good graphical tool to browse the repository
+> 	- A good and maintained web frontend
+> 	- A good set of builtin tools (e.g. like git-add -i and git-rebase -i)
+
+Sounds like GIT :)
+
+> I think the two options are hg and git, I tend to favor git due the
+> size of its community. I want to switch OE to one of these systems by
+> the end of this month and start using more branches and creating
+> perfect patch series again.
+
+When I have to choose between Mercurial (hg) and GIT I prefer to choose=20
+GIT. It is because this one is more known to me and I know that it has=20
+large users base. I also knew developers with lot of git experience so it=20
+is easier to seek for help.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+ Learn the facts and make up your own damn mind. That's why you have one.
 
 
 
