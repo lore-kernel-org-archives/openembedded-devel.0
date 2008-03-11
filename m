@@ -1,32 +1,41 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1JZ4UN-0000zR-Mp; Tue, 11 Mar 2008 14:26:05 +0100
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1JZ4xq-0003sq-CJ; Tue, 11 Mar 2008 14:56:22 +0100
-Message-ID: <47D687F5.90604@kernelconcepts.de>
-Date: Tue, 11 Mar 2008 14:24:05 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <200803110807.11368.zecke@selfish.org>	<200803111126.04715.openembedded@haerwu.biz>	<fr5ntp$n0v$1@ger.gmane.org>
-	<20080311114938.GM30267@ibawizard.net>
-	<20080311142330.35139ee1@widy.localdomain>
-In-Reply-To: <20080311142330.35139ee1@widy.localdomain>
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JZ4jQ-0001nK-GE
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 14:41:49 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JZ4hU-00081F-T8
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 13:39:28 +0000
+Received: from wlan141019.mobiel.utwente.nl ([130.89.141.19])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 11 Mar 2008 13:39:28 +0000
+Received: from koen by wlan141019.mobiel.utwente.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 11 Mar 2008 13:39:28 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Tue, 11 Mar 2008 14:39:16 +0100
+Message-ID: <fr6224$r42$1@ger.gmane.org>
+References: <200803110807.11368.zecke@selfish.org>	<200803111126.04715.openembedded@haerwu.biz>	<fr5ntp$n0v$1@ger.gmane.org>	<20080311114938.GM30267@ibawizard.net>	<20080311142330.35139ee1@widy.localdomain>
+	<47D687F5.90604@kernelconcepts.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: wlan141019.mobiel.utwente.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <47D687F5.90604@kernelconcepts.de>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
 Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,31 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 13:26:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Mar 2008 13:41:52 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Paul Sokolovsky schrieb:
-> 
-> That's because you don't know hg. Scientific studies has proven it to
-> be 27.92% easier.
+Florian Boor schreef:
+| Hi,
+|
+| Paul Sokolovsky schrieb:
+|> That's because you don't know hg. Scientific studies has proven it to
+|> be 27.92% easier.
+|
+| I'm tempted to agree blindly ;) Where did you find this?
+| *If* the user interaction of hg is much better than git then this
+would be a
+| reason to prefer hg.
 
-I'm tempted to agree blindly ;) Where did you find this?
-*If* the user interaction of hg is much better than git then this would be a
-reason to prefer hg.
+When I tested hg during the previous scm round it was way easier to use
+than git, most likely because it's modeled after mtn, without the
+annoying bugs like non-content conflicts and slowness.
 
-Greetings
+Have a look at
+http://www.ivy.fr/mercurial/ref/v1.0/Mercurial-QuickStart-v1.0-120dpi.png
 
-Florian
+btw, sun picked hg for their opensolaris stuff.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+regards,
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH1ouDMkyGM64RGpERAjstAJ99n8IfV0DX2zpVcri9nZbDGH3PQwCgrpCI
+ZR7nyf2/jXJtOUfo05Ltk8Q=
+=wUS/
+-----END PGP SIGNATURE-----
+
 
 
