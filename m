@@ -1,38 +1,26 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pmiscml@gmail.com>) id 1JZEFF-0005bx-O6
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 00:50:59 +0100
-Received: by fg-out-1718.google.com with SMTP id e12so2098413fga.0
-	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 16:48:57 -0700 (PDT)
-Received: by 10.82.121.15 with SMTP id t15mr17929525buc.8.1205279337552;
-	Tue, 11 Mar 2008 16:48:57 -0700 (PDT)
-Received: from widy.localdomain ( [78.164.227.166])
-	by mx.google.com with ESMTPS id z40sm855348ikz.4.2008.03.11.16.48.55
-	(version=SSLv3 cipher=OTHER); Tue, 11 Mar 2008 16:48:56 -0700 (PDT)
-Date: Wed, 12 Mar 2008 01:49:45 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080312014945.4783ae6a@widy.localdomain>
-In-Reply-To: <1205250588.4521.111.camel@dax.rpnet.com>
-References: <200803110807.11368.zecke@selfish.org>
-	<200803111126.04715.openembedded@haerwu.biz>
-	<fr5ntp$n0v$1@ger.gmane.org> <20080311114938.GM30267@ibawizard.net>
-	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>
-	<20080311145739.GN30267@ibawizard.net>
-	<1205250588.4521.111.camel@dax.rpnet.com>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 72.14.220.152
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+	(envelope-from <philip@balister.org>) id 1JZEKC-0005js-Qf
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 00:56:06 +0100
+Received: (qmail 8727 invoked by uid 1003); 11 Mar 2008 23:54:02 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 11 Mar 2008 23:54:00 -0000
+Message-ID: <47D71B8F.1030108@balister.org>
+Date: Tue, 11 Mar 2008 19:53:51 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.12 (X11/20080226)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Reconsidering the work flow and how the SCM system fits in
+Subject: Git versus Hg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -46,71 +34,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 23:51:00 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 11 Mar 2008 23:56:07 -0000
+X-Groupsio-MsgNum: 4549
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms010700040506050300000102"
+
+--------------ms010700040506050300000102
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Given the only serious contenders for possible SCM's for OE appear to be 
+git or Hg, I am curious about the expertise level available on this list.
 
-On Tue, 11 Mar 2008 15:49:48 +0000
-Richard Purdie <rpurdie@rpsys.net> wrote:
+Basically, let us know if you use git or Hg on a regular basis in a two 
+way workflow and consider yourself knowledgeable on sorting out problems 
+that crop up.
 
-> 
-> On Tue, 2008-03-11 at 15:57 +0100, Petr Stetiar wrote:
-> > Cliff Brake <cliff.brake@gmail.com> [2008-03-11 10:12:52]:
-> > 
-> > > On Tue, Mar 11, 2008 at 7:49 AM, Petr Stetiar <ynezz@true.cz>
-> > > wrote:
-> > > 
-> > > >  My reason for using Git, is, that I could drop my local
-> > > > overlays maintained in SVN, and could easily use Git's branches
-> > > > for it. It's then really easy to try out and build different
-> > > > braches and also easier to send patches back to OE.
-> > > 
-> > > I'm really pleased with how easy it is to maintain multiple
-> > > branches and quickly switch between branches in one working
-> > > directory using git when doing kernel work.  I'm not sure how hg
-> > > compares as I've not used it yet. This is important to me because
-> > > I work on OE in small,
-> > 
-> > As I've understood it, Hg don't use simple branches inside local
-> > repository, but you've to branch it in another directory outside
-> > your repository.  Since it's using hardlinks it won't waste too
-> > much disk space, but it's not as cheap and easy as in Git probably.
-> 
-> I asked around about hg and this did come up, you don't get cheap
-> branching like you do with git, you have to use a separate
-> directory/checkout per branch.
-> 
-> For anyone who's used git, cheap branching is a wonderful thing[1].
+Philip
 
-I personally don't see anything wonderful in that, and glad that some
-orthodoxes share this point of view. Kernel people have it because they
-are poor, poor people who created hundreds of megabytes of entities and
-don't have big enough hdds to deal with them comfortably (and if they
-have, their users don't), so they must play such weird tricks as the
-need to evaporate current branch to work on another.
+--------------ms010700040506050300000102
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-I can call svn as witness - it supports both models. But I yet need to
-see someone who in sober mind and given a choice, would use "svn
-switch" back and forth instead of checking out needed branches to have
-them side by side.
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHzDFPOZ2p8t9T4wm358rqkwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA3MDQxNDEzMTkyOVoXDTA4MDQxMzEzMTky
+OVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvJS5tUVsXVRltIKV57mvyOnqjrDpQX8YvC35MubnQf7RctFZ
+65G/JPVfYuJzo0956WHCLCSPC1mhaA5bVNCogPweIYq9EoZZsTijl3qrP6AkCdfr47S5fwIps4vZ
+X3zFZ1BXZ7up+wrl+s0Xp3i6IJrdVysiAbz5oUF1Fl7Go0SzLgwQa+m7LL2XqFaMM3jIH+qUxu72
+tDt43Jjl97/8YGsdNWQRipOWA+VvK6JS5yse1IxEI73mWZWeQMe4y6TEtp/8kcWxCB7aIjrMNQMN
+szDZVB2pvaRXapwf5HKxY7zLuScR94reAR0hBmusQ2xPuhDGbbjEdkvgcST2yR0ZlwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAbLC8HLx4GoPVKDTTePeZ6Atrqtro0XmJi/Nqw7DJyWG5mzqAS2HdIFnxOuAk9srp
+nbYSpM8lXwnRtLaIrlnawIMDtCrvBQ4RSnrUsxxDVVa+FJYDP2nzYFFul8eXoZfCUiYil1flfdYN
+U5QulSNRWJZkmYvowYVfU81qKnZ0TFAwggL9MIICZqADAgECAhB8wxTzmdqfLfU+MJt+fK6pMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wNzA0MTQxMzE5MjlaFw0wODA0MTMxMzE5MjlaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALyUubVFbF1U
+ZbSClee5r8jp6o6w6UF/GLwt+TLm50H+0XLRWeuRvyT1X2Lic6NPeelhwiwkjwtZoWgOW1TQqID8
+HiGKvRKGWbE4o5d6qz+gJAnX6+O0uX8CKbOL2V98xWdQV2e7qfsK5frNF6d4uiCa3VcrIgG8+aFB
+dRZexqNEsy4MEGvpuyy9l6hWjDN4yB/qlMbu9rQ7eNyY5fe//GBrHTVkEYqTlgPlbyuiUucrHtSM
+RCO95lmVnkDHuMukxLaf/JHFsQge2iI6zDUDDbMw2VQdqb2kV2qcH+RysWO8y7knEfeK3gEdIQZr
+rENsT7oQxm24xHZL4HEk9skdGZcCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAGywvBy8eBqD1Sg003j3megLa6ra
+6NF5iYvzasOwyclhuZs6gEth3SBZ8TrgJPbK6Z22EqTPJV8J0bS2iK5Z2sCDA7Qq7wUOEUp61LMc
+Q1VWvhSWAz9p82BRbpfHl6GXwlImIpdX5X3WDVOULpUjUViWZJmL6MGFX1PNaip2dExQMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB8wxTzmdqfLfU+MJt+fK6pMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDMxMTIz
+NTM1MVowIwYJKoZIhvcNAQkEMRYEFCb29IrJOdc3W0lsDwaqLrLX0AgXMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyuqTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQfMMU85nany31PjCbfnyu
+qTANBgkqhkiG9w0BAQEFAASCAQCwnedYIXtGx66bMzme4O3CtvVfEJ8n+ADyntUNrksw3sW7M/xB
+94nsMJL4lr5S0pu6iThpq1hyeTplSr6CduUyq0HvnzDPzNzrFj1SpMy7MDk+m0hiE1MDxtEV4Pxv
+iMS4QKmf3/Rd4XqJI1npEleNazYXiIIuna3eZkLUWz5stymoLfB9aqUyU1fXqEwjwEQKXUgGzm+a
+C3zoXOj8z6gseaMLsp/bYKoJHK4VhU9O2KDGiucYD0WKcQpK6zEm2nB4BywKFf3QVzMc1CbKQkqx
+92NEiqYqbFJKwqFL+0ae1y75rRj10OwoChYeCMzffq+6y4aNYgTxTufCPJOJ+/5oAAAAAAAA
 
-> This is enough to swing things for me since its one feature of git
-> I'd love to be able to use with OE.
-> 
-> [1] unless you're dwmw2[2]
-> [2] don't go there ;-)
-> 
-> Cheers,
-> 
-> Richard
-
-[]
-
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
-
-
+--------------ms010700040506050300000102--
