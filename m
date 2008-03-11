@@ -1,31 +1,43 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1JZ1kw-0007DR-Ga
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Mar 2008 11:30:53 +0100
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id BED7E6280C9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2008 11:28:53 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200803110959.59702.zecke@selfish.org>
-References: <200803051942.12586.mickey@vanille-media.de>
-	<1204748132.8110.165.camel@dax.rpnet.com>
-	<200803110959.59702.zecke@selfish.org>
-Date: Tue, 11 Mar 2008 11:29:00 +0100
-Message-Id: <1205231340.4210.10.camel@hammer.suse.cz>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JZ1u5-0007Ui-JG
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 11:40:23 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JZ1sC-0007JO-87
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 10:38:20 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 11 Mar 2008 10:38:20 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 11 Mar 2008 10:38:20 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Tue, 11 Mar 2008 11:38:07 +0100
+Message-ID: <fr5neg$l26$1@ger.gmane.org>
+References: <200803110807.11368.zecke@selfish.org>
+	<47D64717.3050804@gmail.com>	<20080311113256.461ad5d1@widy.localdomain>	<200803111045.12166.zecke@selfish.org>	<20080311120056.748ec358@widy.localdomain>
+	<20080311101433.77a09fd2@cimmeria>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.21.91 
-X-SA-Exim-Connect-IP: 82.119.242.94
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <20080311101433.77a09fd2@cimmeria>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: sysroot vs. finding header files
+Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,55 +51,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 10:30:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 11 Mar 2008 10:40:24 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Holger Freyther wrote:
-> On Wednesday 05 March 2008 21:15:32 Richard Purdie wrote:
-> > Hi Mickey,
-> >
-> > On Wed, 2008-03-05 at 19:42 +0100, Michael 'Mickey' Lauer wrote:
-> > [...]
-> >
-> > > With pkgconfig now pointing to /usr (and friends), this no longer finds a
-> > > keysymdef.h until you have X on your buildhost.
-> > >
-> 
-> > b) I've not seen any other package do anything that insane
-> 
-> aeh? finding a certain header file is quite common.. let us see how things 
-> work here. also I'm just slowly groking sysroot. It would be nice to know 
-> when and where certain path's get mapped away from /usr/include to something 
-> else...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Here is a small difference:
-Most configure.in authors are happy with AC_CHECK_HEADER and
-AC_CHECK_HEADERS. These works with sysroot out of the box, as the check
-uses compiler flags.
+Graeme Gregory schreef:
+|> Nice, your argumentation is pretty convincing. I just guess that we're
+|> going to have lots of "I'd love to see branches in OE" votes in this
+|> thread, and I'd just love to see them treated separately from "I need
+|> branches", "I'm ok with using branches for my changes", "Branches are
+|> going to complicate my work, but I might try", and "I hate branches -
+|> I already barely have time to do real work" votes.
+|>
+|
+| I need branches.
 
-But here it is searching for the exact location of keysymdef.h, not
-supported by AC_CHECK*. It actually needs to process it by a different
-tool than C compiler to generate custom header. So they need own check.
+Heh, I feel an "told you so" moment coming. The 'frozen revision'
+approach could have more easily been a branch with no changes (except
+for the branchpoint) that you or John only update (mtn propagate
+org.openembedde.dev org.openmoko.lag) when you think .dev is buildable.
+And it would also have been a natural place to stash things like your
+qtopia stuff.
 
-I see few clean fixes:
+| I need to be able to have an openmoko branch which follows .dev closely
+| but has some stuff that hasnt reached QA level required to allow in
+| .dev yet.
+|
+| I probably need the openmoko branch to be only served by the openmoko
+| servers.
+|
+| What I don't know is how this works with monotone, and I haven't had
+| time to sit down with the manual and trial it.
 
-1) Do some cpp magic and preprocess the output. Such approach will not
-need any notice about sysroot, but looks like an overkill.
+The q&d way:
 
-2) Tell them that sysroot is a good feature and they should support it
-in this check.
+* create a local diff by editing or adding a file
+* commit -b org.openmoko.needmorebru
+* checkout the branch into a new dir: mtn co -b org.openmoko.needmorebru
+* go wild in that branch
+* track .dev: mtn propagate org.openembedded.dev org.openmoko.needmorebru
 
-3) Introduce official support of sysroot in autotools. For example for
-AC_CHECK_FILE it is the only solution. Ideally, all configure files
-should have --sysroot option automatically and should be aware of
-SYSROOT (or similar) variable in exactly the same way it is now aware of
-CFLAGS et co.
+and once the stuff reached a good QA point:
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+mtn propagate org.openmoko.needmorebru org.openembedded.dev
 
+That what stelios and I did with the avr32 branch and it works great.
+The thing that stops the branch from being unmergable is the regular
+propagate from .dev to org.openmoko.needmorebru.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH1mEPMkyGM64RGpERAkaDAJ0ZptVecmhKw+yLg3/j7I7I9YVo4ACfSpkB
+aCJd/THz7BPIHwcH/5Ns2SI=
+=m7A8
+-----END PGP SIGNATURE-----
 
 
 
