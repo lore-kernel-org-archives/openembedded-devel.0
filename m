@@ -1,31 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZ291-0007tX-Mc
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 11:55:46 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BArlPq009918
-	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 10:53:47 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09692-06 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 10:53:42 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BArgls009905
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 10:53:42 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200803110807.11368.zecke@selfish.org>
+	(envelope-from <zecke@selfish.org>) id 1JZ2C7-0007zB-HU
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 11:59:00 +0100
+Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JZ2AE-0006NY-FK
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 11:56:58 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Mar 2008 11:56:55 +0100
+User-Agent: KMail/1.9.9
 References: <200803110807.11368.zecke@selfish.org>
-Date: Tue, 11 Mar 2008 10:53:41 +0000
-Message-Id: <1205232821.4521.25.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	<20080311101433.77a09fd2@cimmeria> <fr5neg$l26$1@ger.gmane.org>
+In-Reply-To: <fr5neg$l26$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200803111156.55481.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 81.169.183.159
+X-SA-Exim-Mail-From: zecke@selfish.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
@@ -46,57 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 10:55:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 11 Mar 2008 10:59:00 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, 2008-03-11 at 08:07 +0100, Holger Freyther wrote:
-> I'm anything but happy with the way we work with our repository. We have a 
-> dreambox branch that is not mergable due issues with our SCM system, the 
-> OpenMoko guys have to go back to diffing and applying the diff and merging by 
-> hand, we just commit fundamental changes like sysroot, packaged-staging, RFCs 
-> in one go and then do weeks of fixing. And I can continue with this list.
-[...]
-> I think the two options are hg and git, I tend to favor git due the size of 
-> its community. I want to switch OE to one of these systems by the end of this 
-> month and start using more branches and creating perfect patch series again.
-
-Thanks for raising this, I think one by one we're all getting frustrated
-with monotone as my email at the end of January showed in my case.
-
-One major concern I have is the amount of 'pointless' merging we're
-doing. Each developers commits should just have a maximum of one merge
-at the end of each commit series and we have way more than that going
-on.
-
-I also worry that we don't have decent visualisation tools with monotone
-and our website is often broken. By contrast http://git.o-hand.com/ has
-worked since I set it up and there are alternatives out there too for
-git (competition is good).
-
-I don't think git is the perfect SCM, its syntax is insane. I do think
-its powerful and now has widespread enough use creating a momentum that
-monotone never had. I also think you could write a nice UI around it,
-the backend is sound and I remain optimistic this will happen in time.
-
-I don't really know hg but to me thats a good reason to favour git, its
-has a bigger userbase. I'd not like to see OE making the "mistake" we
-made with monotone and picking something which isn't widely understood
-or used :/.
-
-My concern with git is how we'll run the server. OH has been thinking
-about using git but the server setup is tricky for "push" access which
-is the model OE would use. The two choices seem to be ssh or webdav and
-the latter isn't something I've found time to look into setting up but
-people keep telling me its possible.
-
-Anyhow, my vote is for git...
-
-Cheers,
-
-Richard
+On Tuesday 11 March 2008 11:38:07 Koen Kooi wrote:
+> Graeme Gregory schreef:
 
 
+> * track .dev: mtn propagate org.openembedded.dev org.openmoko.needmorebru
 
+Non content conflict. ugh! What to do now?
+
+And this has happened with the dreambox branch and this is why I can't 
+encourage anyone to use branches with monotone. Even if there is some kind of 
+management issue with whatever branch, the tool should not punish this by not 
+being able to manage, it is a tool and it should do what it is meant ot be: 
+Allow distributed development, and not being able to merge is defeating this 
+purpose.
 
 
