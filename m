@@ -1,42 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JZ76T-0005Yx-HU
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 17:13:58 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JZ74X-0007TN-F5
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 16:11:25 +0000
-Received: from wlan141019.mobiel.utwente.nl ([130.89.141.19])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 16:11:25 +0000
-Received: from koen by wlan141019.mobiel.utwente.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 16:11:25 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Tue, 11 Mar 2008 17:11:12 +0100
-Message-ID: <fr6av0$voj$1@ger.gmane.org>
-References: <200803110807.11368.zecke@selfish.org>	<20080311120056.748ec358@widy.localdomain>	<20080311101433.77a09fd2@cimmeria>
-	<200803111514.49573.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: wlan141019.mobiel.utwente.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <200803111514.49573.zecke@selfish.org>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <hvontres@gmail.com>) id 1JZ77P-0005Zz-5a
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 17:14:52 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so58431ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Mar 2008 09:12:24 -0700 (PDT)
+Received: by 10.67.20.11 with SMTP id x11mr61299ugi.29.1205251944831;
+	Tue, 11 Mar 2008 09:12:24 -0700 (PDT)
+Received: by 10.67.25.4 with HTTP; Tue, 11 Mar 2008 09:12:24 -0700 (PDT)
+Message-ID: <a7f8874a0803110912u22c4148v1a3817164b932069@mail.gmail.com>
+Date: Tue, 11 Mar 2008 09:12:24 -0700
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <3ef3a7ad0803110028u416f9ad1y2d4929bb4da9aa8f@mail.gmail.com>
+MIME-Version: 1.0
+References: <a7f8874a0803101037p1e156eedx32eddf87c45fb890@mail.gmail.com>
+	<3ef3a7ad0803110028u416f9ad1y2d4929bb4da9aa8f@mail.gmail.com>
+X-SA-Exim-Connect-IP: 66.249.92.168
+X-SA-Exim-Mail-From: hvontres@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=HTML_MESSAGE,RDNS_NONE
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Reconsidering the work flow and how the SCM system fits in
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: Re: [RFC]: Is MACHINE_TASK_PROVIDER still being used or should it be phased out?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,38 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 16:14:07 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Mar 2008 16:14:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, Mar 11, 2008 at 12:28 AM, Jos=E9 Bernardo Bandos Rodrigues <
+bernardo@bandos.net> wrote:
 
-Holger Freyther schreef:
-
-| PS: git-add -i and git-rebase -i really won me over
-
-That's the fundamental difference between git and other (D)SCMs: git is
-for generating clean patches ready for e-mail, the others are for
-recording history. So the real questions are:
-
-- - Are we going to mail around patches, or are we going to pull changes
-from (remote) branches directly?
-
-- - Do we want to keep an accurate record of our tries to get things right
-or do we want a clean, compact (and technically incomplete) history?
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFH1q8gMkyGM64RGpERAu3kAKCu1egI5CMdAHNQWDYk0nA4W7nxXACfcag3
-gDTbF9G9lDlAZirw8TRQP0U=
-=PSs/
------END PGP SIGNATURE-----
+> I do use and build for personal use opie-image frequently. Will this brea=
+k
+> it, or the replace should go smoothly?
 
 
+This should not break anything. It should fix some packaging issues for
+machines without builtin wi-fi.
+
+
+
+--=20
+Henry von Tresckow (hvontres)
 
