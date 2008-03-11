@@ -1,32 +1,40 @@
-Received: from [72.14.220.153] (helo=fg-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pmiscml@gmail.com>) id 1JZ0s3-0000xT-T5
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 10:34:09 +0100
-Received: by fg-out-1718.google.com with SMTP id e12so1849205fga.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JZ11C-0001FE-BV
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 10:43:40 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JZ0zH-0004FJ-1b
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 09:41:35 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 11 Mar 2008 09:41:35 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 02:32:11 -0700 (PDT)
-Received: by 10.86.50.8 with SMTP id x8mr1316449fgx.30.1205227931426;
-	Tue, 11 Mar 2008 02:32:11 -0700 (PDT)
-Received: from widy.localdomain ( [78.164.227.166])
-	by mx.google.com with ESMTPS id e20sm10255607fga.1.2008.03.11.02.32.09
-	(version=SSLv3 cipher=OTHER); Tue, 11 Mar 2008 02:32:10 -0700 (PDT)
-Date: Tue, 11 Mar 2008 11:32:56 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080311113256.461ad5d1@widy.localdomain>
-In-Reply-To: <47D64717.3050804@gmail.com>
-References: <200803110807.11368.zecke@selfish.org> <47D64717.3050804@gmail.com>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+	Tue, 11 Mar 2008 09:41:35 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Tue, 11 Mar 2008 10:41:28 +0100
+Message-ID: <fr5k49$8o0$1@ger.gmane.org>
+References: <200803110807.11368.zecke@selfish.org>
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 72.14.220.153
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <200803110807.11368.zecke@selfish.org>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
 Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,66 +49,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 09:34:10 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 11 Mar 2008 09:43:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Tue, 11 Mar 2008 09:47:19 +0100
-Esben Haabendal <EsbenHaabendal@gmail.com> wrote:
+Holger Freyther schreef:
+| Hey,
+|
+| I'm anything but happy with the way we work with our repository. We
+have a
+| dreambox branch that is not mergable due issues with our SCM system, the
+| OpenMoko guys have to go back to diffing and applying the diff and
+merging by
+| hand, we just commit fundamental changes like sysroot,
+packaged-staging, RFCs
+| in one go and then do weeks of fixing. And I can continue with this list.
+|
+| What: I think we should use more branches
+| 	- As many shortlived and medium lived branches as developers want
+| 	- Shared branches for stuff like packaged staging, RFCs, sysroot.
+Were you
+| 	  start the development, add features, other people will compile
+their stuff,
+| 	  other compile and then you rebase and merge!
+| 	- Basicly you develop a feature in a branch until it is ready and not
+| 	  impacting other things, then you rebase/cleanup, propose it for
+inclusion
+| 	  and wait for feedback, then merge.
+| 	- Stable distributions and vendors get their own branch, they can merge,
+| 	  cherry-pick what ever they want.
+|
+|
+| The issue:
+| 	- mtn can not merge. Forcing me to manually delete files in one copy
+to do a
+| 	  merge is not acceptable.
+| 	- mtn has not the concept of short-lived branches (e.g. deleting their
+| 	  existence once done), mtn suspend does not work as witnessed by our
+| 	  automerger.
+| 	- mtn pluck is not making me happy
+| 	- I lack a GUI to easily browse the repository
+| 	- I can not clean up changes before I push them!
+|
+|
+| I want that we use more branches for development, apply review on them,
+| land/merge/push these branches after review, pull peoples changes from
+other
+| hosts, work on perfetch patch series before landing patches. I believe we
+| need to deploy this kind of development in OE again and as mtn is the
+| obstacle to this kind of development I propose to switch to another SCM
+| system that allows us to develop OpenEmbedded the way it should be
+developed.
+|
+| My criteria:
+| 	- Should have branches, easy merging, easy merging of merges
+| 	- Branches and merging should be cheap
+| 	- Make it easy to put the OE tree into another SCM and still be able
+| 	  to merge (git-svn and such)
+| 	- A good graphical tool to browse the repository
+| 	- A good and maintained web frontend
+| 	- A good set of builtin tools (e.g. like git-add -i and git-rebase -i)
+|
+| I think the two options are hg and git, I tend to favor git due the
+size of
+| its community. I want to switch OE to one of these systems by the end
+of this
+| month and start using more branches and creating perfect patch series
+again.
 
-[]
+If we switch, my vote would be for hg.
 
-> > comments? agreement?
-> >   
-> Without going into the specifics of the SCM tools discussion, I would
-> just like to say that I would REALLY REALLY love to see branches being
-> used actively in OE development, 
+regards,
 
-Oh really? Because I would think that loving to see them makes little
-sense. It makes sense only to use them. And who will use them?
-Because if people wanted to use them, they would do that already.
-Actually, people who want, do.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-> especially for feature development
-> (such as sysroot, packaged-staging, and so on) and for release
-> engineering.
-> 
-> For OE to really reach it's potential we have to be able add even more
-> features while at the same time delivering stable releases/branches
-> for distro and product developers to work from.
-> 
-> When Joe-average-embedded-product-developer comes along, shopping for
-> which embedded Linux tool to use for his embedded product, he really
-> should be able to checkout a stable version of OE and be able to
-> build a toolchain and a simple image for all supported targets. And
-> this is certainly not the situation right now.
+iD8DBQFH1lPIMkyGM64RGpERAutoAJ44F/prApfsKU+QcHzCV5fuGunv/wCgmeg5
+HVUPl5aPPXoA62PzychJLJA=
+=jz3J
+-----END PGP SIGNATURE-----
 
-Typical mistake. There's stable branch in OE, and based on the
-experience with the previous branches, best-practices change control
-procedure was applied to it. Now, based on 2.5 month existence of that
-branch, I have following observations:
-
-1. People don't know about that branch.
-2. Once made known, people still pretend that there's none, and
-continue to complain about stability.
-3. Most of the rest of people don't put slightest effort into
-maintenance of that branch.
-4. Those who try, complain that the change control procedure is ...
-complex! But it is only a separate branch + pre-review of changes + "all
-changes are merged from main branch" rule of thumb.
-
-
-Having more branches is not going to help with this at all. 
-
-> 
-> /Esben
-
-[]
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
