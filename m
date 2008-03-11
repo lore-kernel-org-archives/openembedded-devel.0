@@ -1,23 +1,22 @@
 Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JZ4Nu-0004Xw-HU
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Mar 2008 14:19:19 +0100
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1JZ4UN-0000zR-Mp; Tue, 11 Mar 2008 14:26:05 +0100
 Received: from [212.60.202.194] (helo=[192.168.2.131])
 	by mail.kernelconcepts.de with esmtpsa
 	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JZ4rN-0003n9-71
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Mar 2008 14:49:41 +0100
-Message-ID: <47D68664.70408@kernelconcepts.de>
-Date: Tue, 11 Mar 2008 14:17:24 +0100
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1JZ4xq-0003sq-CJ; Tue, 11 Mar 2008 14:56:22 +0100
+Message-ID: <47D687F5.90604@kernelconcepts.de>
+Date: Tue, 11 Mar 2008 14:24:05 +0100
 From: Florian Boor <florian.boor@kernelconcepts.de>
 User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <200803110807.11368.zecke@selfish.org>	<1205232821.4521.25.camel@dax.rpnet.com>
-	<20080311111902.2b8adecb@cimmeria>
-In-Reply-To: <20080311111902.2b8adecb@cimmeria>
+References: <200803110807.11368.zecke@selfish.org>	<200803111126.04715.openembedded@haerwu.biz>	<fr5ntp$n0v$1@ger.gmane.org>
+	<20080311114938.GM30267@ibawizard.net>
+	<20080311142330.35139ee1@widy.localdomain>
+In-Reply-To: <20080311142330.35139ee1@widy.localdomain>
 X-Enigmail-Version: 0.95.0
 X-SA-Exim-Connect-IP: 212.60.202.196
 X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
@@ -27,6 +26,7 @@ X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Cc: openembedded-devel@openembedded.org
 Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,19 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 13:19:19 -0000
+X-List-Received-Date: Tue, 11 Mar 2008 13:26:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-Graeme Gregory schrieb:
-> There is somewhere a method of running git using ssh auth, but without
-> granting shell access. Im sure some searching would turn it up.
+Paul Sokolovsky schrieb:
+> 
+> That's because you don't know hg. Scientific studies has proven it to
+> be 27.92% easier.
 
-it should work like for svn: Use a special login shell for the users that are
-expected to use the access for scm purposes only. You could even use GForge to
-manage users and permissions.
+I'm tempted to agree blindly ;) Where did you find this?
+*If* the user interaction of hg is much better than git then this would be a
+reason to prefer hg.
 
 Greetings
 
