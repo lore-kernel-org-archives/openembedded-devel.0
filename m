@@ -1,32 +1,40 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1JZ5Pd-0002jr-GG; Tue, 11 Mar 2008 15:26:14 +0100
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1JZ5t6-0004ZE-67; Tue, 11 Mar 2008 15:55:32 +0100
-Message-ID: <47D695D3.8070909@kernelconcepts.de>
-Date: Tue, 11 Mar 2008 15:23:15 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
-MIME-Version: 1.0
+	(envelope-from <geoffrey@pager.net>) id 1JZ5qA-0007u6-Cl
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 15:52:43 +0100
+X-ASG-Debug-ID: 1205247030-34cf00010000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 2856115971
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Mar 2008 09:50:31 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id M02B7PoQoktEZjFp for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Mar 2008 09:50:31 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-References: <200803110807.11368.zecke@selfish.org>	<200803111156.55481.zecke@selfish.org>	<fr5puv$tsr$1@ger.gmane.org>
-	<200803111325.56068.zecke@selfish.org> <fr5ugl$dc2$1@ger.gmane.org>
-In-Reply-To: <fr5ugl$dc2$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+X-ASG-Orig-Subj: Re: [oe] [Announce] OpenEmbedded stable branch
+Date: Tue, 11 Mar 2008 09:50:28 -0500
+User-Agent: KMail/1.9.7
+References: <fr5mkp$h1b$1@ger.gmane.org>
+In-Reply-To: <fr5mkp$h1b$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200803110950.29059.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1205247031
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+X-SA-Exim-Connect-IP: 209.253.16.26
+X-SA-Exim-Mail-From: geoffrey@pager.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Reconsidering the work flow and how the SCM system fits in
+Subject: Re: [Announce] OpenEmbedded stable branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,32 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 14:26:41 -0000
-X-List-Received-Date: Tue, 11 Mar 2008 14:26:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Mar 2008 14:52:56 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On Tuesday 11 March 2008 05:24:24 am Koen Kooi wrote:
 
-Koen Kooi schrieb:
-> And I still for for hg, which every developer has installed already,
-> since we all tested it in the previous round of SCM discussion, haven't we?
+> It seems a lot of people are unaware that there is a stable branch where
+> only review patches get applied:
+>
+> org.openembedded.angstrom-2007.12-stable
+>
+> So I don't want to hear anymore of those "OE is unstable" or "There is
+> no stable branch" complaints anymore, mmmmkay ;)
 
-yes we did - that's why I have it installed ;) the main reason not to decide to
-move to it was the lack of experience with it and if it is really reliable. In
-fact the list of projects using hg is quite impressive by now and I did not
-manage to find many people complaining about it.
+It might be a good idea to package up a tarball of the stable version, if only 
+because it gives potential users warm fuzzies.  I have the same basic 
+complaint about buildroot.  There's no "version" to download.  The difference 
+is I've never had a buildroot daily snapshot just work for me.  I have had 
+openembedded.dev checkouts just work :)  
 
-Greetings
+Also, having to mess with monotone just to scope out the project could turn 
+some potential users off.
 
-Florian
+2 cents from an outsider...
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+---
+Geoffrey
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
