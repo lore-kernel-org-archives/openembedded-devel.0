@@ -1,26 +1,28 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZ2JS-0008B2-ON
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 12:06:38 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1JZ2NO-0008IR-T3
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 12:10:39 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BB4Ya7010774
-	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 11:04:34 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BB8cTs011105
+	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 11:08:38 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 10631-04 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 11:04:30 +0000 (GMT)
+	id 10996-04 for <openembedded-devel@openembedded.org>;
+	Tue, 11 Mar 2008 11:08:30 +0000 (GMT)
 Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BB4RnT010763
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BB8SQG011089
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 11:04:27 GMT
+	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 11:08:28 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <fr5mkp$h1b$1@ger.gmane.org>
-References: <fr5mkp$h1b$1@ger.gmane.org>
-Date: Tue, 11 Mar 2008 11:04:26 +0000
-Message-Id: <1205233466.4521.35.camel@dax.rpnet.com>
+In-Reply-To: <200803110959.59702.zecke@selfish.org>
+References: <200803051942.12586.mickey@vanille-media.de>
+	<1204748132.8110.165.camel@dax.rpnet.com>
+	<200803110959.59702.zecke@selfish.org>
+Date: Tue, 11 Mar 2008 11:08:27 +0000
+Message-Id: <1205233707.4521.40.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.12.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -28,11 +30,11 @@ X-SA-Exim-Connect-IP: 194.106.48.114
 X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Announce] OpenEmbedded stable branch
+Subject: Re: sysroot vs. finding header files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -46,27 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 11:06:38 -0000
+X-List-Received-Date: Tue, 11 Mar 2008 11:10:40 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-
-On Tue, 2008-03-11 at 11:24 +0100, Koen Kooi wrote:
-> It seems a lot of people are unaware that there is a stable branch where
-> only review patches get applied:
+On Tue, 2008-03-11 at 09:59 +0100, Holger Freyther wrote:
+> On Wednesday 05 March 2008 21:15:32 Richard Purdie wrote:
+> > Hi Mickey,
+> >
+> > On Wed, 2008-03-05 at 19:42 +0100, Michael 'Mickey' Lauer wrote:
+> > [...]
+> >
+> > > With pkgconfig now pointing to /usr (and friends), this no longer finds a
+> > > keysymdef.h until you have X on your buildhost.
+> > >
 > 
-> org.openembedded.angstrom-2007.12-stable
+> > b) I've not seen any other package do anything that insane
 > 
-> So I don't want to hear anymore of those "OE is unstable" or "There is
-> no stable branch" complaints anymore, mmmmkay ;)
+> aeh? finding a certain header file is quite common.. let us see how things 
+> work here. also I'm just slowly groking sysroot. It would be nice to know 
+> when and where certain path's get mapped away from /usr/include to something 
+> else...
 
-This is a long running topic on irc at the moment since I "broke" OE.dev
-with the ABI change. I've been trying to point out that OE.dev *is* the
-development branch, I just think that people have got too
-comfortable :/.
+That X code wants to know what the actual path to the header is. This
+isn't the usual autofoo requirement of checking a header exists or
+knowing what -I flags to use.
 
-I don't think we're doing too badly given the fundamental nature of the
-change though...
+Needing to know the absolute path to the header is not as common a
+requirement as you'd expect. There are ways and means but pulling it
+from pkg-config the way that package did isn't a good one.
 
 Cheers,
 
