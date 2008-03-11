@@ -1,29 +1,22 @@
-Received: from [72.14.204.237] (helo=qb-out-0506.google.com)
+Received: from [72.14.204.230] (helo=qb-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1JZBdG-0007nW-0P
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1JZBhl-0007qO-EB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Mar 2008 22:04:10 +0100
-Received: by qb-out-0506.google.com with SMTP id p30so2332797qba.14
+	Tue, 11 Mar 2008 22:08:40 +0100
+Received: by qb-out-0506.google.com with SMTP id p30so2333696qba.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2008 14:01:33 -0700 (PDT)
-Received: by 10.114.198.1 with SMTP id v1mr5507678waf.130.1205269292278;
-	Tue, 11 Mar 2008 14:01:32 -0700 (PDT)
-Received: by 10.114.147.11 with HTTP; Tue, 11 Mar 2008 14:01:32 -0700 (PDT)
-Message-ID: <bdb0025f0803111401o5dcc3de8l97cd875b66f4337f@mail.gmail.com>
-Date: Tue, 11 Mar 2008 18:01:32 -0300
+	Tue, 11 Mar 2008 14:06:13 -0700 (PDT)
+Received: by 10.115.54.1 with SMTP id g1mr2704998wak.140.1205269569893;
+	Tue, 11 Mar 2008 14:06:09 -0700 (PDT)
+Received: by 10.114.147.11 with HTTP; Tue, 11 Mar 2008 14:06:09 -0700 (PDT)
+Message-ID: <bdb0025f0803111406p7ee059cbw461e38b2c496b857@mail.gmail.com>
+Date: Tue, 11 Mar 2008 18:06:09 -0300
 From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47D6AF65.1020007@am.sony.com>
+In-Reply-To: <pan.2008.03.11.19.54.14@gmail.com>
 MIME-Version: 1.0
-References: <200803110807.11368.zecke@selfish.org>
-	<200803111126.04715.openembedded@haerwu.biz>
-	<fr5ntp$n0v$1@ger.gmane.org> <1205233201.4521.30.camel@dax.rpnet.com>
-	<20080311143030.68d6341b@widy.localdomain>
-	<1205239153.4521.53.camel@dax.rpnet.com>
-	<20080311150320.7c31b2f6@widy.localdomain>
-	<1205243052.4521.82.camel@dax.rpnet.com>
-	<47D6AF65.1020007@am.sony.com>
-X-SA-Exim-Connect-IP: 72.14.204.237
+References: <pan.2008.03.11.19.54.14@gmail.com>
+X-SA-Exim-Connect-IP: 72.14.204.230
 X-SA-Exim-Mail-From: rodrigo.vivi@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
@@ -31,7 +24,7 @@ X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Reconsidering the work flow and how the SCM system fits in
+Subject: Re: Cellwriter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -45,77 +38,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 21:05:01 -0000
+X-List-Received-Date: Tue, 11 Mar 2008 21:09:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-I'd like to tell you that we (Mamona) has just migrate to git
-repository. We are pulling the OE's changes from Holger's git tree
-since last week.
+CellWriter seems nice for embedded devices.
 
-We've decided to migrate because we were having lots of problems with
-monotone propagate. We had problems that neither monotone developers
-could help us to figure them out. It was so annoying. Most of our
-problems was related to "Non content conflicts".
+Some time ago I've tried to compile CellWriter for Mamona on N800 but
+I couldn't get it working.
+After some seg faults I gave up.
 
-At last OEDEM we talked a lot about Monotone x Git but I couldn't
-contribute because I had never used git before. I remember Koen
-complaining about git documentation and all.
+I admit that I didn't spend so much time on this task.
 
-Nowdays I'm using git to work on linux-omap, Xorg and Mamona and I can
-tell that git is so much better. It is easier, faster and simplest.
+It would be great to see it running on my N800.
 
-What about documentation? Amazing. The man pages are complete and
-there are many big projects already using git whose has lots of
-documentations about how to deal with unexpected issues (edit old
-commits, conflicts, etc)
-
-So we believe that migrate to git is the best option.
-
-Cheers
-
-On Tue, Mar 11, 2008 at 1:12 PM, Tim Bird <tim.bird@am.sony.com> wrote:
-> Richard Purdie wrote:
->  > On Tue, 2008-03-11 at 15:03 +0200, Paul Sokolovsky wrote:
+On Tue, Mar 11, 2008 at 4:54 PM, Ken Bloom <kbloom@gmail.com> wrote:
+> I'm very surprised that CellWriter isn't in OpenEmbedded yet. This is a
+>  GPL handwriting recognition system that can be used on keyboardless
+>  systems, for example the Nokia 770, for input. Please add this if you
+>  can, and encourage distributions for keyboardless devices (e.g. Poky
+>  Linux, and Mamona) to include it in their images.
 >
-> >> It's nice to have that said explicit - different. Supposedly it's more
->  >> powerful for developers, but how good it is for end users? How many
->  >> industry entities select git as their in-house SCM? I doubt that too
->  >> many, knowing too well that many still select just CVS.
+>  $ cat org.openembedded.dev/packages/cellwriter/cellwriter_1.3.3.bb
+>  DESCRIPTION = "A grid-entry natural handwriting input panel. As you write
+>  characters into the cells, your writing is instantly recognized at the
+>  character level. When you press Enter on the panel, the input you entered
+>  is sent to the currently focused application as if typed on the keyboard."
+>  SECTION = "x11/input"
+>  AUTHOR = "Michael Levin"
+>  LICENSE = "GNU General Public License"
+>  DEPENDS = "gtk+"
 >
+>  SRC_URI = "http://pub.risujin.org/cellwriter/cellwriter-1.3.3.tar.gz"
+>  EXTRA_OECONF = "--without-gnome"
 >
->
->
-> > Regarding industrial entities, hopefully we call agree CVS is a pretty
->  > bad SCM and that proves said industrial entities don't know what they're
->  > doing, usually since it often it comes down to politics rather than
->  > technical merit. I know of a few surprising companies using git FWIW
->  > although I know of a few abominations in use too.
->
->  Just a data point...
->  Sony uses git as its in-house SCM for Linux-related work.
->  We also use quilt.
+>  inherit autotools
 >
 >
->   > Also, I think more end users coming fresh to OE will know how to do this
->   > with git in the current climate than with monotone, hg or any other
->   > distributed SCM.
->
->  I would agree with this.  monotone is a big reason I'm still
->  an observer of OE rather than an active participant.
->  As such, I shouldn't really have a vote.  But if I did it would
->  be for git, purely for personal economy of training.
->
->   -- Tim
->
->  =============================
->  Tim Bird
->  Architecture Group Chair, CE Linux Forum
->  Senior Staff Engineer, Sony Corporation of America
->  =============================
 >
 >
+>
+>  --
+>  Ken (Chanoch) Bloom. PhD candidate. Linguistic Cognition Laboratory.
+>  Department of Computer Science. Illinois Institute of Technology.
+>  http://www.iit.edu/~kbloom1/
 >
 >
 >  _______________________________________________
