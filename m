@@ -1,35 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.145.245.199] (helo=mx03.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JZ4jQ-0001nK-GE
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 14:41:49 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JZ4hU-00081F-T8
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 13:39:28 +0000
-Received: from wlan141019.mobiel.utwente.nl ([130.89.141.19])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 13:39:28 +0000
-Received: from koen by wlan141019.mobiel.utwente.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 13:39:28 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Tue, 11 Mar 2008 14:39:16 +0100
-Message-ID: <fr6224$r42$1@ger.gmane.org>
-References: <200803110807.11368.zecke@selfish.org>	<200803111126.04715.openembedded@haerwu.biz>	<fr5ntp$n0v$1@ger.gmane.org>	<20080311114938.GM30267@ibawizard.net>	<20080311142330.35139ee1@widy.localdomain>
-	<47D687F5.90604@kernelconcepts.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: wlan141019.mobiel.utwente.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <47D687F5.90604@kernelconcepts.de>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <mwester@dls.net>) id 1JZ4kx-0001oo-KB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 14:43:11 +0100
+Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
+	by mx03.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1JZ4j2-0004uC-2Z
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 08:41:04 -0500
+Message-ID: <47D68C67.1010306@dls.net>
+Date: Tue, 11 Mar 2008 08:43:03 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <200803110807.11368.zecke@selfish.org> <47D64717.3050804@gmail.com>
+	<20080311113256.461ad5d1@widy.localdomain>
+In-Reply-To: <20080311113256.461ad5d1@widy.localdomain>
+X-SA-Exim-Connect-IP: 216.145.245.199
+X-SA-Exim-Mail-From: mwester@dls.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -50,44 +39,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 13:41:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 11 Mar 2008 13:43:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Paul Sokolovsky wrote:
+> Hello,
+> 
+> On Tue, 11 Mar 2008 09:47:19 +0100
+> Esben Haabendal <EsbenHaabendal@gmail.com> wrote:
+> 
+> []
+> 
+>>> comments? agreement?
+>>>   
+>> Without going into the specifics of the SCM tools discussion, I would
+>> just like to say that I would REALLY REALLY love to see branches being
+>> used actively in OE development, 
+> 
+> Oh really? Because I would think that loving to see them makes little
+> sense. It makes sense only to use them. And who will use them?
+> Because if people wanted to use them, they would do that already.
+> Actually, people who want, do.
 
-Florian Boor schreef:
-| Hi,
-|
-| Paul Sokolovsky schrieb:
-|> That's because you don't know hg. Scientific studies has proven it to
-|> be 27.92% easier.
-|
-| I'm tempted to agree blindly ;) Where did you find this?
-| *If* the user interaction of hg is much better than git then this
-would be a
-| reason to prefer hg.
+Hogwash!  It is true that there are a set of people who do not and will 
+not use SCM tools.  However, there are numerous others, right here on 
+this list, who have *attempted* to use that abomination known as "mtn" 
+and discovered that branching with mtn is easy, but merging anything 
+"real" is an absolute nightmare.  I will not go into the specific list, 
+but merging with mtn is a "cross your fingers and pray" experience.
 
-When I tested hg during the previous scm round it was way easier to use
-than git, most likely because it's modeled after mtn, without the
-annoying bugs like non-content conflicts and slowness.
+This is made worse by the fact that there is no culture around mtn. 
+Hence there's no sense of "mtn is goodness" as there is developing 
+around git.  That's important.  Perhaps not for you, but for many others 
+the community help and wisdom around git that's lacking for mtn is what 
+will make using branches practical and make merges sucessful.
 
-Have a look at
-http://www.ivy.fr/mercurial/ref/v1.0/Mercurial-QuickStart-v1.0-120dpi.png
+>> especially for feature development
+>> (such as sysroot, packaged-staging, and so on) and for release
+>> engineering.
+>>
+>> For OE to really reach it's potential we have to be able add even more
+>> features while at the same time delivering stable releases/branches
+>> for distro and product developers to work from.
+>>
+>> When Joe-average-embedded-product-developer comes along, shopping for
+>> which embedded Linux tool to use for his embedded product, he really
+>> should be able to checkout a stable version of OE and be able to
+>> build a toolchain and a simple image for all supported targets. And
+>> this is certainly not the situation right now.
+> 
+> Typical mistake. There's stable branch in OE, and based on the
+> experience with the previous branches, best-practices change control
+> procedure was applied to it. Now, based on 2.5 month existence of that
+> branch, I have following observations:
+> 
+> 1. People don't know about that branch.
+> 2. Once made known, people still pretend that there's none, and
+> continue to complain about stability.
+> 3. Most of the rest of people don't put slightest effort into
+> maintenance of that branch.
+> 4. Those who try, complain that the change control procedure is ...
+> complex! But it is only a separate branch + pre-review of changes + "all
+> changes are merged from main branch" rule of thumb.
 
-btw, sun picked hg for their opensolaris stuff.
+The issue is *not* the stable branch; the issue is that individual 
+developers cannot reasonably go off an work on a branch, merge when they 
+are satisified, and expect that it will just work.  This is NOT about 
+the stable branch.
 
-regards,
+> 
+> Having more branches is not going to help with this at all. 
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Quite wrong!  Unstable broken stuff happens in .dev because developers 
+dare not venture into the dark horrors of mtn to make their 
+destabilizing changes in isolation on a private branch.
 
-iD8DBQFH1ouDMkyGM64RGpERAjstAJ99n8IfV0DX2zpVcri9nZbDGH3PQwCgrpCI
-ZR7nyf2/jXJtOUfo05Ltk8Q=
-=wUS/
------END PGP SIGNATURE-----
+>> /Esben
+> 
+> []
+> 
 
+Mike (mwester)
 
 
