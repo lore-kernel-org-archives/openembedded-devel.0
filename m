@@ -1,31 +1,31 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JZ2Zf-0004tT-Ic
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 12:23:21 +0100
+	id 1JZ2qR-0005Pb-1H
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 12:40:40 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JZ2Xh-00017Z-6S
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 11:21:14 +0000
+	id 1JZ2oW-0002Aw-KO
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 11:38:36 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 11:21:13 +0000
+	Tue, 11 Mar 2008 11:38:36 +0000
 Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 11:21:13 +0000
+	Tue, 11 Mar 2008 11:38:36 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Tue, 11 Mar 2008 12:21:03 +0100
-Message-ID: <fr5puv$tsr$1@ger.gmane.org>
-References: <200803110807.11368.zecke@selfish.org>	<20080311101433.77a09fd2@cimmeria>
-	<fr5neg$l26$1@ger.gmane.org> <200803111156.55481.zecke@selfish.org>
+Date: Tue, 11 Mar 2008 12:38:27 +0100
+Message-ID: <fr5qvj$1f1$1@ger.gmane.org>
+References: <fr5mkp$h1b$1@ger.gmane.org>
+	<1205233466.4521.35.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <200803111156.55481.zecke@selfish.org>
+In-Reply-To: <1205233466.4521.35.camel@dax.rpnet.com>
 X-Enigmail-Version: 0.95.6
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.2
@@ -36,7 +36,7 @@ X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Reconsidering the work flow and how the SCM system fits in
+Subject: Re: [Announce] OpenEmbedded stable branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,54 +50,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 11:23:22 -0000
+X-List-Received-Date: Tue, 11 Mar 2008 11:40:41 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Holger Freyther schreef:
-| On Tuesday 11 March 2008 11:38:07 Koen Kooi wrote:
-|> Graeme Gregory schreef:
+Richard Purdie schreef:
+| On Tue, 2008-03-11 at 11:24 +0100, Koen Kooi wrote:
+|> It seems a lot of people are unaware that there is a stable branch where
+|> only review patches get applied:
+|>
+|> org.openembedded.angstrom-2007.12-stable
+|>
+|> So I don't want to hear anymore of those "OE is unstable" or "There is
+|> no stable branch" complaints anymore, mmmmkay ;)
 |
-|
-|> * track .dev: mtn propagate org.openembedded.dev org.openmoko.needmorebru
-|
-| Non content conflict. ugh! What to do now?
+| This is a long running topic on irc at the moment since I "broke" OE.dev
+| with the ABI change. I've been trying to point out that OE.dev *is* the
+| development branch, I just think that people have got too
+| comfortable :/.
 
-Since the delta between the two branches is not more than a few
-days/revisions it's easy to find out what happened and move conflict out
-of the way in your branch, finish the merge and if needed reapply a diff
-needed.
+And now there is a maintained stable branch. Actually, it has been there
+~ for almost 3 months now :)
 
-| And this has happened with the dreambox branch and this is why I can't
-| encourage anyone to use branches with monotone. Even if there is some
-kind of
-| management issue with whatever branch, the tool should not punish this
-by not
-| being able to manage, it is a tool and it should do what it is meant
-ot be:
-| Allow distributed development, and not being able to merge is
-defeating this
-| purpose.
+| I don't think we're doing too badly given the fundamental nature of the
+| change though...
 
-The non-content conflict handling is absolutely atrocious in monotone,
-and the monotone devs aren't doing anything to make it easier (they
-changed the error message to offer some more test) because they never
-have such conflicts. Which stinks, because we *do* have them.
+Certainly not, I was amazed at how few problems there were. I suspect
+the nastiest form of problems is the renamed webkit pkgconfig file,
+which means people have to manually delete WebKit*pc to get their build
+to continue.
 
-With git 1.4 everything is much easier, it just deletes any changes you
-made :)
+And looking back at how the stable branch has been doing I can say that
+OE really *needs* .dev since the act of posting a diff for review is
+already too much for most people, let alone review another.
 
-But what I'm trying to get at, and doesn't seem to be getting through,
-is that our problems are being caused by people not knowing (and not
-wanting to know!) the limitations (quirks/bugs/etc) of the tools they
-are using. With monotone we are relatively safe, since short of using
-the sqlite3 tool we can't loose data or history when there is a cock-up.
-I fear that with other tools that weren't written with data retention in
-mind (git) we will lose a big chunk of history every now and then
-because someone typed git-quxl instead of git-qux1.
+That is why Holger and I want to properly use things like
+insane.bbclass, sepukku.bbclass and testlab.bbclass to take the
+gruntwork out of regression tracking and QA. Sadly we both are short on
+time to work on it properly nowadays :(
 
 regards,
 
@@ -105,9 +98,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFH1msfMkyGM64RGpERAqWmAJ4yh2rHWEemUYrkaXBnhGYvqHV28QCdHpMx
-wbSBUgWj+QNCEIEHudiierY=
-=vXv6
+iD8DBQFH1m8zMkyGM64RGpERAgPHAJ0aO5E11ts66PXloJU1cLRKK/mVxACffZdo
+CTACXRqLVPuG1WQtVvFsTuM=
+=fOqt
 -----END PGP SIGNATURE-----
 
 
