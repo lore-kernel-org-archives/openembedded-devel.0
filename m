@@ -1,37 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [193.201.35.47] (helo=bq8.dotserv.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JYzWb-00075f-LJ
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 09:07:58 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JYzUi-000838-Jk
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 08:05:56 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 08:05:56 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 08:05:56 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <EsbenHaabendal@gmail.com>) id 1JZ0Aj-0003tj-PU
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 09:49:26 +0100
+Received: from [192.168.18.42] ([77.233.226.18]) (authenticated bits=0)
+	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id m2B8lJW5025308
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Mar 2008 09:47:25 +0100
+Message-ID: <47D64717.3050804@gmail.com>
+Date: Tue, 11 Mar 2008 09:47:19 +0100
+From: Esben Haabendal <EsbenHaabendal@gmail.com>
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Tue, 11 Mar 2008 09:05:45 +0100
-Message-ID: <fr5egp$jbl$1@ger.gmane.org>
 References: <200803110807.11368.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
 In-Reply-To: <200803110807.11368.zecke@selfish.org>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 193.201.35.47
+X-SA-Exim-Mail-From: EsbenHaabendal@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -49,38 +36,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 08:07:58 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 11 Mar 2008 08:49:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Holger Freyther wrote:
+> Hey,
+>
+> I'm anything but happy with the way we work with our repository. We have a 
+> dreambox branch that is not mergable due issues with our SCM system, the 
+> OpenMoko guys have to go back to diffing and applying the diff and merging by 
+> hand, we just commit fundamental changes like sysroot, packaged-staging, RFCs 
+> in one go and then do weeks of fixing. And I can continue with this list.
+>
+> What: I think we should use more branches
+> 	- As many shortlived and medium lived branches as developers want
+> 	- Shared branches for stuff like packaged staging, RFCs, sysroot. Were you
+> 	  start the development, add features, other people will compile their stuff, 
+> 	  other compile and then you rebase and merge!
+> 	- Basicly you develop a feature in a branch until it is ready and not 
+> 	  impacting other things, then you rebase/cleanup, propose it for inclusion 
+> 	  and wait for feedback, then merge.
+> 	- Stable distributions and vendors get their own branch, they can merge, 
+> 	  cherry-pick what ever they want.
+>
+>
+> The issue:
+> 	- mtn can not merge. Forcing me to manually delete files in one copy to do a 
+> 	  merge is not acceptable.
+> 	- mtn has not the concept of short-lived branches (e.g. deleting their 
+> 	  existence once done), mtn suspend does not work as witnessed by our 
+> 	  automerger.
+> 	- mtn pluck is not making me happy
+> 	- I lack a GUI to easily browse the repository
+> 	- I can not clean up changes before I push them!
+>
+>
+> I want that we use more branches for development, apply review on them, 
+> land/merge/push these branches after review, pull peoples changes from other 
+> hosts, work on perfetch patch series before landing patches. I believe we 
+> need to deploy this kind of development in OE again and as mtn is the 
+> obstacle to this kind of development I propose to switch to another SCM 
+> system that allows us to develop OpenEmbedded the way it should be developed.
+>
+> My criteria:
+> 	- Should have branches, easy merging, easy merging of merges
+> 	- Branches and merging should be cheap
+> 	- Make it easy to put the OE tree into another SCM and still be able
+> 	  to merge (git-svn and such)
+> 	- A good graphical tool to browse the repository
+> 	- A good and maintained web frontend
+> 	- A good set of builtin tools (e.g. like git-add -i and git-rebase -i)
+>
+> I think the two options are hg and git, I tend to favor git due the size of 
+> its community. I want to switch OE to one of these systems by the end of this 
+> month and start using more branches and creating perfect patch series again.
+>
+>
+> comments? agreement?
+>   
+Without going into the specifics of the SCM tools discussion, I would
+just like to say that I would REALLY REALLY love to see branches being
+used actively in OE development, especially for feature development
+(such as sysroot, packaged-staging, and so on) and for release engineering.
 
-Holger Freyther schreef:
+For OE to really reach it's potential we have to be able add even more
+features while at the same time delivering stable releases/branches for
+distro and product developers to work from.
 
-| PS: It is not the speed of mtn, it is the lack of development in areas
-like
-| branches, merging, rebasing, we need to use these in OE!
+When Joe-average-embedded-product-developer comes along, shopping for
+which embedded Linux tool to use for his embedded product, he really
+should be able to checkout a stable version of OE and be able to build a
+toolchain and a simple image for all supported targets. And this is
+certainly not the situation right now.
 
-How many people have actually used a branch when developing OE stuff? I
-did for the avr32 work and didn't have any problem, merging back only
-took one 'mtn propagate' and a push. Regardless if we should switch or
-not, I would like to see some 'evidence' of people trying to use a
-branch and fail. Switching tools on a "We haven't actually tried to use
-the functions, be we hear they are pretty bad" basis would be a bad
-thing. It's the same problem OE is facing with all the buildroot and
-denx apologists.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFH1j1ZMkyGM64RGpERAmuJAJ9TC2Uf/n4o3YVuuE0uzzRYwAx9cgCeLTXV
-a7y4brDJE8FNzd/W499tZ4U=
-=Qul3
------END PGP SIGNATURE-----
-
+/Esben
 
 
