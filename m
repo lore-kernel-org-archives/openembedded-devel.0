@@ -1,29 +1,29 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JZ5GS-0002ZU-D1
+	(envelope-from <zecke@selfish.org>) id 1JZ5Hf-0002bF-S1
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Mar 2008 15:15:43 +0100
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JZ5jv-0004RZ-0j
+	Tue, 11 Mar 2008 15:17:10 +0100
+Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JZ5Fl-0002Zf-Lo
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Mar 2008 15:46:03 +0100
-Message-ID: <47D6939A.8000708@kernelconcepts.de>
-Date: Tue, 11 Mar 2008 15:13:46 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
-MIME-Version: 1.0
+	Tue, 11 Mar 2008 15:14:54 +0100
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-References: <200803110807.11368.zecke@selfish.org>	<200803111126.04715.openembedded@haerwu.biz>	<fr5ntp$n0v$1@ger.gmane.org>	<1205233201.4521.30.camel@dax.rpnet.com>
-	<20080311143030.68d6341b@widy.localdomain>
-In-Reply-To: <20080311143030.68d6341b@widy.localdomain>
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+Date: Tue, 11 Mar 2008 15:14:49 +0100
+User-Agent: KMail/1.9.9
+References: <200803110807.11368.zecke@selfish.org>
+	<20080311120056.748ec358@widy.localdomain>
+	<20080311101433.77a09fd2@cimmeria>
+In-Reply-To: <20080311101433.77a09fd2@cimmeria>
+MIME-Version: 1.0
+Message-Id: <200803111514.49573.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 81.169.183.159
+X-SA-Exim-Mail-From: zecke@selfish.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -41,43 +41,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 14:15:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Mar 2008 14:17:25 -0000
+X-List-Received-Date: Tue, 11 Mar 2008 14:17:25 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On Tuesday 11 March 2008 11:14:33 Graeme Gregory wrote:
+> > Nice, your argumentation is pretty convincing. I just guess that we're
+> > going to have lots of "I'd love to see branches in OE" votes in this
+> > thread, and I'd just love to see them treated separately from "I need
+> > branches", "I'm ok with using branches for my changes", "Branches are
+> > going to complicate my work, but I might try", and "I hate branches -
+> > I already barely have time to do real work" votes.
+>
+> I need branches.
 
-Paul Sokolovsky schrieb:
-> Yeah, I'd say, *every* git user hit your problem before - that
-> git is inconsistent, poorly implemented set of hacks. And if they grow
-> to love it, why that can't happen to yourself, right?
+The way I would do it with git:
 
-in this discussion I really miss information and arguments *for* a particular
-solution.
-I found some input for the decision here:
-http://www.selenic.com/pipermail/mercurial/2005-May/000334.html
-(quite old, but easy to read)
-http://texagon.blogspot.com/2008/02/use-mercurial-you-git.html
-http://www.jukie.net/~bart/blog/git-vs-hg
 
-... and some more.
+- Upstream has a git repository
+	- master is what org.openembedded.dev is currently
 
-From what I have read so far it looks like we would have a good solution with
-both git and hg. The features seem to be more or less the same. The key
-advantage of git is that it is more familiar to many developers. The key
-advantage of hg would be a much cleaner and well designed user interface which
-is more attractive for people who need to get used to it.
+- Openmoko has a git repository
+	- (moko-)master for Openmoko
 
-Greetings
 
-Florian
+OpenEmbedded =>  Openmoko
+	a) cherry-pick (git-fetch openembedded && git-cherry-pick rev)
+	b) merge/pull (git-merge openembedded)
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+none-automergable conflicts are resolvable with git-mergetool and then use 
+kdiff3, meld, whatever and you can ignore that git is playing with the files, 
+none of these changes automatically end in your index.
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+
+Openmoko => OpenEmbedded
+	# Create a short lived submit branch
+	git-checkout -b submit-branch origin/master
+
+	# Rebase your changes to sit on top of OpenEmbedded
+	git-rebase openembedded/master
+
+	# Now throw away non ready recipes or edit some hunks
+	git-rebase -i openembedded/master
+
+	# Check what changed from this branch to the master of openembedded
+	git-rev-list openmebedded/master..
+
+	# Or use gitk to browse your changes
+	gitk
+
+	# Publish your branch
+	git-push origin submit-branch
+
+	# Ask people to review and do changes/rebase
+
+	# Push your branch to OpenEmbedded
+	git-push openembedded submit-branch:master
+
+	# Delete your submit-branch (you are done)
+	git-push origin :submit-branch
+
+	# Delete your branch locally
+	git-checkout master
+	git-branch -D submit-branch
+
+	# Merge the upstream into your dev tree. With mtn you would get non content 
+	# conflicts here, with git you might need to fire up git-mergetool while 
+	# doing the merge but both kdiff3 and meld are clever enough to automatically
+	# merge these files.
+	git-pull openembedded
+
+Such a work flow helps to make bugfixes immediately available, allows long 
+lived branches and is working. And I know this can not be done with mtn, and 
+I have no hope this will work within the next two or three month and I know 
+git can do the job and that corporate users of OE want that and I want it as 
+well (my main motivation).
+
+z.
+
+PS: git-add -i and git-rebase -i really won me over
 
 
