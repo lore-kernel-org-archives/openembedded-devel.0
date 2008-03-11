@@ -1,41 +1,32 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [212.75.37.82] (helo=dottedmag.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZ4o8-0001uT-9W
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 14:46:28 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BDiLTm022589;
-	Tue, 11 Mar 2008 13:44:21 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 22331-07; Tue, 11 Mar 2008 13:44:17 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BDiCEp022574
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 11 Mar 2008 13:44:12 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Paul Sokolovsky <pmiscml@gmail.com>,
-	openembedded-devel <openembedded-devel@openembedded.org>
-In-Reply-To: <20080311150320.7c31b2f6@widy.localdomain>
+	(envelope-from <dottedmag@dottedmag.net>) id 1JZ4yU-0002C4-Pp
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 14:57:04 +0100
+Received: from frontier.dottedmag.net (unknown [92.125.214.233])
+	by dottedmag.net (Postfix) with ESMTP id 662D88C005
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Mar 2008 19:54:22 +0000 (UTC)
+Received: from frontier.dottedmag.net (localhost [127.0.0.1])
+	by frontier.dottedmag.net (Postfix) with ESMTP id B597B1C4CF
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Mar 2008 19:55:02 +0600 (NOVT)
+From: Mikhail Gusarov <dottedmag@dottedmag.net>
+To: openembedded-devel@lists.openembedded.org
 References: <200803110807.11368.zecke@selfish.org>
 	<200803111126.04715.openembedded@haerwu.biz>
-	<fr5ntp$n0v$1@ger.gmane.org>
-	<1205233201.4521.30.camel@dax.rpnet.com>
-	<20080311143030.68d6341b@widy.localdomain>
-	<1205239153.4521.53.camel@dax.rpnet.com>
-	<20080311150320.7c31b2f6@widy.localdomain>
-Date: Tue, 11 Mar 2008 13:44:12 +0000
-Message-Id: <1205243052.4521.82.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Date: Tue, 11 Mar 2008 19:55:02 +0600
+In-Reply-To: <200803111126.04715.openembedded@haerwu.biz> (Marcin
+	Juszkiewicz's message of "Tue, 11 Mar 2008 11:25:59 +0100")
+Message-ID: <87hcfd9xhl.fsf@frontier.dottedmag.net>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.60 (gnu/linux)
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 212.75.37.82
+X-SA-Exim-Mail-From: dottedmag@dottedmag.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Level: **
+X-Spam-Status: No, score=2.2 required=5.0 tests=DNS_FROM_RFC_BOGUSMX, RDNS_NONE
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Reconsidering the work flow and how the SCM system fits in
@@ -52,107 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 13:46:28 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Mar 2008 13:57:04 -0000
+X-Groupsio-MsgNum: 4521
+Content-Type: multipart/signed; boundary="=-=-=";
+	micalg=pgp-sha1; protocol="application/pgp-signature"
 
-On Tue, 2008-03-11 at 15:03 +0200, Paul Sokolovsky wrote:
-> On Tue, 11 Mar 2008 12:39:13 +0000 Richard Purdie <rpurdie@rpsys.net> wrote:
-> > You will never have seen me argue git has a nice UI. I've said quite
-> > the opposite on many occasions. I have said its powerful but thats
-> > different.
-> 
-> It's nice to have that said explicit - different. Supposedly it's more
-> powerful for developers, but how good it is for end users? How many
-> industry entities select git as their in-house SCM? I doubt that too
-> many, knowing too well that many still select just CVS.
+--=-=-=
+Content-Transfer-Encoding: quoted-printable
 
-OE is there to serve a multitude of people, both developers and end
-users. For the end user, hopefully we can document the basics of "git
-clone", "git pull" and "git diff" or documentation already exists for
-this. 
+Twas brillig at 11:25:59 11.03.2008 UTC+01 when Marcin Juszkiewicz did gyre=
+ and gimble:
 
-Also, I think more end users coming fresh to OE will know how to do this
-with git in the current climate than with monotone, hg or any other
-distributed SCM.
+ >> - I lack a GUI to easily browse the repository
 
-Regarding industrial entities, hopefully we call agree CVS is a pretty
-bad SCM and that proves said industrial entities don't know what they're
-doing, usually since it often it comes down to politics rather than
-technical merit. I know of a few surprising companies using git FWIW
-although I know of a few abominations in use too.
- 
-> > I'm assuming we're considering distributed scms but you know this ;-)
-> 
-> Yes, I'm trying to hint that arguments like having something already
-> installed, or some niche, but big project already using it, are not
-> necessarily valid for the topic of selecting SCM for OE.
+ MJ> Does Mercurial has such one? GIT has gitk, qgit and probably
+ MJ> something more.
 
-You're asking about end users and how we should represent them above
-then you claim its irrelevant?
+'hg view' is direct port of gitk.
 
-I'm not saying this is the only factor to consider but I am arguing that
-its a valid factor to consider.
+=2D-=20
 
-> I'd really like someone who lead this idea to actually try few
-> "advanced" usecases with both git and hg. But if that's not going to
-> happen, at least let's not pretend that git is going to be "better"
-> than hg or even mtn. It will be just different, possibly, bringing more
-> issues overall.
+--=-=-=
+Content-Type: application/pgp-signature
 
-Well, we have use cases explained where mtn has failed and we know git
-is better. Some of us use git for other projects like kernel work and in
-my/their opinion, we *know* it can do some things better.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
 
-Personally my hg knowledge is weak. If thats the case for me, it
-probably is for a lot of other people and I think its valid to use that
-as a factor. I'm not against learning hg if it solves all our problems,
-I just don't think it will.
+iD8DBQFH1o82vse/O6JvVMgRAm8/AJ4oGhTLPF+jWmNlXifz088Yn0i0gACeKGok
+desOFsjGjjbB02R0DgoGoVw=
+=vAex
+-----END PGP SIGNATURE-----
 
-So, firstly, is anyone else willing to propose any other distributed
-SCMs or is this just a choice between hg and git? If so, we have three
-options:
-
-1. Continue as we are with monotone
-2. Switch to git
-3. Switch to hg
-
-We've talked about whether 1 is a good idea or not and assuming its not,
-what are the pros/cons of 2/3?
-
-git
----
-
-* Most likely to to be installed on a given newcommer's machine
-* Most likely to have been used before by a newcommer
-* Has lots of documentation
-* Has a lot of users
-* Powerful web and visualisation tools
-* Very actively growing
-[I've not listed the other git features since I don't know how they
-compare to hg, help?]
-
-hg
---
-
-* Has a nicer commandline?
-
-
-These are just the issues I can know for near enough certain. Could one
-of the hg proponents please put together a list of what makes its great,
-and compare its branching/merge handling features with git?
-
-Another thing we should consider is whether something is likely to
-improve over time. This is something we hoped would happen with monotone
-and whilst it has to an extent, it hasn't as much as we'd have liked.
-Personally I think someone will write a nice frontend (porcelain) for
-git eventually but we don't have a guarantee of that. The strength of
-the communities in question plays a part here.
-
-Cheers,
-
-Richard
-
-
-
-
+--=-=-=--
