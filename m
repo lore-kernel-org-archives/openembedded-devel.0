@@ -1,37 +1,29 @@
-Received: from [64.233.182.190] (helo=nf-out-0910.google.com)
+Received: from [216.145.245.198] (helo=mx02.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pmiscml@gmail.com>) id 1JZ4AF-0004Cw-TG
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 14:05:12 +0100
-Received: by nf-out-0910.google.com with SMTP id c7so930032nfi.20
-	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 06:03:10 -0700 (PDT)
-Received: by 10.78.148.8 with SMTP id v8mr17729342hud.31.1205240589776;
-	Tue, 11 Mar 2008 06:03:09 -0700 (PDT)
-Received: from widy.localdomain ( [78.164.227.166])
-	by mx.google.com with ESMTPS id i5sm35012293mue.7.2008.03.11.06.03.03
-	(version=SSLv3 cipher=OTHER); Tue, 11 Mar 2008 06:03:05 -0700 (PDT)
-Date: Tue, 11 Mar 2008 15:03:20 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
+	(envelope-from <mwester@dls.net>) id 1JZ4EJ-0004Km-8f
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 14:09:26 +0100
+Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
+	by mx02.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1JZ4CM-0002ak-UV
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 08:07:19 -0500
+Message-ID: <47D6847D.5070007@dls.net>
+Date: Tue, 11 Mar 2008 08:09:17 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080311150320.7c31b2f6@widy.localdomain>
-In-Reply-To: <1205239153.4521.53.camel@dax.rpnet.com>
 References: <200803110807.11368.zecke@selfish.org>
-	<200803111126.04715.openembedded@haerwu.biz>
-	<fr5ntp$n0v$1@ger.gmane.org>
-	<1205233201.4521.30.camel@dax.rpnet.com>
-	<20080311143030.68d6341b@widy.localdomain>
-	<1205239153.4521.53.camel@dax.rpnet.com>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 64.233.182.190
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+In-Reply-To: <200803110807.11368.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 216.145.245.198
+X-SA-Exim-Mail-From: mwester@dls.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
 Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -46,60 +38,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 13:05:12 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 11 Mar 2008 13:09:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+[top posting to save readers time]
 
-On Tue, 11 Mar 2008 12:39:13 +0000
-Richard Purdie <rpurdie@rpsys.net> wrote:
++100 from me (can I do that?) --- as a long time SCM proponent (SCM 
+consulting has clothed and fed my family and put a roof over our heads 
+for many years), I am hugely in favor of switching to another tool and 
+using features such as branching!
 
-> On Tue, 2008-03-11 at 14:30 +0200, Paul Sokolovsky wrote:
-> > Yeah, I'd say, *every* git user hit your problem before - that
-> > git is inconsistent, poorly implemented set of hacks. And if they
-> > grow to love it, why that can't happen to yourself, right?
+I haven't used git myself, but from what I've read, it seems to be the 
+logical choice, so I concur with that choice as well.
+
+(It would be so incredible to have a proper tool for branching and 
+merging - this would make me rather happy!)
+
+Mike (mwester)
+
+
+
+Holger Freyther wrote:
+> Hey,
 > 
-> You will never have seen me argue git has a nice UI. I've said quite
-> the opposite on many occasions. I have said its powerful but thats
-> different.
-
-It's nice to have that said explicit - different. Supposedly it's more
-powerful for developers, but how good it is for end users? How many
-industry entities select git as their in-house SCM? I doubt that too
-many, knowing too well that many still select just CVS.
-
+> I'm anything but happy with the way we work with our repository. We have a 
+> dreambox branch that is not mergable due issues with our SCM system, the 
+> OpenMoko guys have to go back to diffing and applying the diff and merging by 
+> hand, we just commit fundamental changes like sysroot, packaged-staging, RFCs 
+> in one go and then do weeks of fixing. And I can continue with this list.
 > 
-> > > There is also an advantage if someone doesn't have to know yet
-> > > another SCM to check out OE. I don't have hg installed, I do have
-> > > git and if we conducted a poll of other OE devs/users I think
-> > > we'd see a pattern. 
-> > 
-> > I probably dumb, but that pattern would be CVS? SVN? no? Nevermind,
-> > of course.
+> What: I think we should use more branches
+> 	- As many shortlived and medium lived branches as developers want
+> 	- Shared branches for stuff like packaged staging, RFCs, sysroot. Were you
+> 	  start the development, add features, other people will compile their stuff, 
+> 	  other compile and then you rebase and merge!
+> 	- Basicly you develop a feature in a branch until it is ready and not 
+> 	  impacting other things, then you rebase/cleanup, propose it for inclusion 
+> 	  and wait for feedback, then merge.
+> 	- Stable distributions and vendors get their own branch, they can merge, 
+> 	  cherry-pick what ever they want.
 > 
-> I'm assuming we're considering distributed scms but you know this ;-)
-
-Yes, I'm trying to hint that arguments like having something already
-installed, or some niche, but big project already using it, are not
-necessarily valid for the topic of selecting SCM for OE.
-
-I'd really like someone who lead this idea to actually try few
-"advanced" usecases with both git and hg. But if that's not going to
-happen, at least let's not pretend that git is going to be "better"
-than hg or even mtn. It will be just different, possibly, bringing more
-issues overall.
-
 > 
-> Cheers,
+> The issue:
+> 	- mtn can not merge. Forcing me to manually delete files in one copy to do a 
+> 	  merge is not acceptable.
+> 	- mtn has not the concept of short-lived branches (e.g. deleting their 
+> 	  existence once done), mtn suspend does not work as witnessed by our 
+> 	  automerger.
+> 	- mtn pluck is not making me happy
+> 	- I lack a GUI to easily browse the repository
+> 	- I can not clean up changes before I push them!
 > 
-> Richard
-
-[]
-
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+> 
+> I want that we use more branches for development, apply review on them, 
+> land/merge/push these branches after review, pull peoples changes from other 
+> hosts, work on perfetch patch series before landing patches. I believe we 
+> need to deploy this kind of development in OE again and as mtn is the 
+> obstacle to this kind of development I propose to switch to another SCM 
+> system that allows us to develop OpenEmbedded the way it should be developed.
+> 
+> My criteria:
+> 	- Should have branches, easy merging, easy merging of merges
+> 	- Branches and merging should be cheap
+> 	- Make it easy to put the OE tree into another SCM and still be able
+> 	  to merge (git-svn and such)
+> 	- A good graphical tool to browse the repository
+> 	- A good and maintained web frontend
+> 	- A good set of builtin tools (e.g. like git-add -i and git-rebase -i)
+> 
+> I think the two options are hg and git, I tend to favor git due the size of 
+> its community. I want to switch OE to one of these systems by the end of this 
+> month and start using more branches and creating perfect patch series again.
+> 
+> 
+> comments? agreement?
+> 
+> 	z.
+> 
+> 
+> PS: It is not the speed of mtn, it is the lack of development in areas like 
+> branches, merging, rebasing, we need to use these in OE!
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 
