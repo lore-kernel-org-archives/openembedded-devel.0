@@ -1,35 +1,32 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZ3nA-0003dT-0R
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 13:41:22 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BCdIZb017664
-	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 12:39:18 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 17597-02 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 12:39:14 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BCdDS2017649
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 12:39:13 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20080311143030.68d6341b@widy.localdomain>
-References: <200803110807.11368.zecke@selfish.org>
-	<200803111126.04715.openembedded@haerwu.biz>
-	<fr5ntp$n0v$1@ger.gmane.org>
-	<1205233201.4521.30.camel@dax.rpnet.com>
-	<20080311143030.68d6341b@widy.localdomain>
-Date: Tue, 11 Mar 2008 12:39:13 +0000
-Message-Id: <1205239153.4521.53.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	(envelope-from <john_lee@openmoko.com>) id 1JZ3vY-0003wv-Nr
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 13:50:06 +0100
+Received: from [172.16.23.102] (helo=buddha.tw.openmoko.com)
+	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
+	id 1JZ3tQ-0005in-CY for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 20:47:57 +0800
+Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
+	(envelope-from <john_lee@openmoko.com>) id 1JZ3tK-000718-Qb
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Mar 2008 20:47:38 +0800
+Date: Tue, 11 Mar 2008 20:47:38 +0800
+From: John Lee <john_lee@openmoko.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080311124738.GG26297@buddha.tw.openmoko.com>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <200803110807.11368.zecke@selfish.org> <47D64717.3050804@gmail.com>
+	<20080311113256.461ad5d1@widy.localdomain>
+	<200803111045.12166.zecke@selfish.org>
+	<20080311120056.748ec358@widy.localdomain>
+	<20080311101433.77a09fd2@cimmeria> <fr5neg$l26$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <fr5neg$l26$1@ger.gmane.org>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+X-SA-Exim-Connect-IP: 124.219.5.209
+X-SA-Exim-Mail-From: john_lee@openmoko.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -50,33 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 12:41:22 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Mar 2008 12:50:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, 2008-03-11 at 14:30 +0200, Paul Sokolovsky wrote:
-> Yeah, I'd say, *every* git user hit your problem before - that
-> git is inconsistent, poorly implemented set of hacks. And if they grow
-> to love it, why that can't happen to yourself, right?
-
-You will never have seen me argue git has a nice UI. I've said quite the
-opposite on many occasions. I have said its powerful but thats
-different.
-
-> > There is also an advantage if someone doesn't have to know yet another
-> > SCM to check out OE. I don't have hg installed, I do have git and if
-> > we conducted a poll of other OE devs/users I think we'd see a
-> > pattern. 
+On Tue, Mar 11, 2008 at 11:38:07AM +0100, Koen Kooi wrote:
 > 
-> I probably dumb, but that pattern would be CVS? SVN? no? Nevermind, of
-> course.
+> The q&d way:
+> 
+> * create a local diff by editing or adding a file
+> * commit -b org.openmoko.needmorebru
+> * checkout the branch into a new dir: mtn co -b org.openmoko.needmorebru
+> * go wild in that branch
+> * track .dev: mtn propagate org.openembedded.dev org.openmoko.needmorebru
 
-I'm assuming we're considering distributed scms but you know this ;-)
+That's what I'm considering to do now.  But I have the following problem:
 
-Cheers,
+> and once the stuff reached a good QA point:
+> 
+> mtn propagate org.openmoko.needmorebru org.openembedded.dev
 
-Richard
+Most of the time I cannot do that.  There are stuffs not appropriate
+for OE.dev in OM, and I suspect there will always be.  However, I have
+to push my fixes upstream.  If I didn't do that and someone else did,
+it's unnecessary effort plus I will need to manually merge it next
+time I sync.
+
+So, I can only pluck.  However, next time when I propagate from OE.dev
+to OM, very likely I will get conflicts.
+
+What we're trying to do is having a branch with local changes but
+always following the master branch OE.dev.  I think mtn is not very
+satisfying in this situation.
 
 
+Regards,
+John
 
 
