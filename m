@@ -1,25 +1,29 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [209.85.198.191] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JZ3aG-0003AL-HO
+	(envelope-from <pmiscml@gmail.com>) id 1JZ3dv-0003J2-6a
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Mar 2008 13:28:02 +0100
-Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1JZ3YM-0000BU-Rs
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Mar 2008 13:25:59 +0100
-From: Holger Freyther <zecke@selfish.org>
+	Tue, 11 Mar 2008 13:31:48 +0100
+Received: by rv-out-0910.google.com with SMTP id c24so2463120rvf.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Mar 2008 05:29:44 -0700 (PDT)
+Received: by 10.141.20.7 with SMTP id x7mr4158227rvi.82.1205238584151;
+	Tue, 11 Mar 2008 05:29:44 -0700 (PDT)
+Received: from widy.localdomain ( [78.164.227.166])
+	by mx.google.com with ESMTPS id j4sm10197629ugf.49.2008.03.11.05.29.42
+	(version=SSLv3 cipher=OTHER); Tue, 11 Mar 2008 05:29:42 -0700 (PDT)
+Date: Tue, 11 Mar 2008 14:30:30 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Mar 2008 13:25:55 +0100
-User-Agent: KMail/1.9.9
+Message-ID: <20080311143030.68d6341b@widy.localdomain>
+In-Reply-To: <1205233201.4521.30.camel@dax.rpnet.com>
 References: <200803110807.11368.zecke@selfish.org>
-	<200803111156.55481.zecke@selfish.org> <fr5puv$tsr$1@ger.gmane.org>
-In-Reply-To: <fr5puv$tsr$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200803111325.56068.zecke@selfish.org>
-X-SA-Exim-Connect-IP: 81.169.183.159
-X-SA-Exim-Mail-From: zecke@selfish.org
+	<200803111126.04715.openembedded@haerwu.biz>
+	<fr5ntp$n0v$1@ger.gmane.org>
+	<1205233201.4521.30.camel@dax.rpnet.com>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 209.85.198.191
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -40,68 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 12:28:03 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 11 Mar 2008 12:31:49 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tuesday 11 March 2008 12:21:03 Koen Kooi wrote:
-> Holger Freyther schreef:
-> | On Tuesday 11 March 2008 11:38:07 Koen Kooi wrote:
-> |> Graeme Gregory schreef:
-> |>
-> |>
-> |> * track .dev: mtn propagate org.openembedded.dev
-> |> org.openmoko.needmorebru
-> |
-> | Non content conflict. ugh! What to do now?
->
-> Since the delta between the two branches is not more than a few
-> days/revisions it's easy to find out what happened and move conflict out
-> of the way in your branch, finish the merge and if needed reapply a diff
-> needed.
+Hello,
 
-You can not make this assumption of few days/revs and even in a few days/revs 
-one can create many non content conflicts.
-Move the conflict out means:
-	-Finding the file with mtn au
-	-Moving it on one side of the branch
-	-Comitting it
-	-Merge again and then are done or back to the first item for each non content 
-conflict. This adds artificial history, is complicated and stupid and all my 
-monkeys are busy doing stuff so I would have to do this...
+On Tue, 11 Mar 2008 11:00:01 +0000
+Richard Purdie <rpurdie@rpsys.net> wrote:
 
-I want something were this is easy to do. With git I know it is possible (if 
-you know to use git-mergetool....). With mtn it is not hard, it is 
-impossible, so I can not use branches with mtn nor encourage anyone to do so. 
-Specially with my webkit development in a git you start to love cheap, short 
-lived feature branches.
+[]
 
+> Whilst I agree we should give a lot of weight to technical arguments,
+> a large active userbase is a good thing for an SCM. It means there are
+> more howto guides out there, more people who've probably hit your
+> problem before, 
 
-> The non-content conflict handling is absolutely atrocious in monotone,
-> and the monotone devs aren't doing anything to make it easier (they
-> changed the error message to offer some more test) because they never
-> have such conflicts. Which stinks, because we *do* have them.
+Yeah, I'd say, *every* git user hit your problem before - that
+git is inconsistent, poorly implemented set of hacks. And if they grow
+to love it, why that can't happen to yourself, right?
 
+> more people you can go and ask for advice when
+> something breaks etc.
+> 
+> There is also an advantage if someone doesn't have to know yet another
+> SCM to check out OE. I don't have hg installed, I do have git and if
+> we conducted a poll of other OE devs/users I think we'd see a
+> pattern. 
 
-Small excercise: try to merge .dev with .dreambox with mtn and git, see which 
-one is barfing out with non obvious error messages (hint: in this case it is 
-mtn)
+I probably dumb, but that pattern would be CVS? SVN? no? Nevermind, of
+course.
 
+> So it is valid to consider it.
+> 
+> Cheers,
+> 
+> Richard
 
-> But what I'm trying to get at, and doesn't seem to be getting through,
-> is that our problems are being caused by people not knowing (and not
-> wanting to know!) the limitations (quirks/bugs/etc) of the tools they
-> are using. With monotone we are relatively safe, since short of using
-> the sqlite3 tool we can't loose data or history when there is a cock-up.
-> I fear that with other tools that weren't written with data retention in
-> mind (git) we will lose a big chunk of history every now and then
-> because someone typed git-quxl instead of git-qux1.
+[]
 
-With QtWebKit we had a machine with bad memory, on checkouts certain errors 
-started to happen. Know what? They were catched on checkout, we had the 
-objects distributed anyway, so the checksums (even if not for crypto) are 
-pretty good.
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
