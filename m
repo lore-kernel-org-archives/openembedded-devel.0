@@ -1,39 +1,40 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JZ1gl-00074c-GV
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 11:26:33 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JZ1eq-0006a9-QE
-	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 10:24:32 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 10:24:32 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 11 Mar 2008 10:24:32 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <rpurdie@rpsys.net>) id 1JZ1h9-00075V-IA
+	for openembedded-devel@openembedded.org; Tue, 11 Mar 2008 11:26:57 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BAOuaY008193
+	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 10:24:56 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07969-05 for <openembedded-devel@openembedded.org>;
+	Tue, 11 Mar 2008 10:24:52 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2BAOmox008181
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Tue, 11 Mar 2008 10:24:48 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Tue, 11 Mar 2008 11:24:24 +0100
-Message-ID: <fr5mkp$h1b$1@ger.gmane.org>
+In-Reply-To: <fr5l5o$cmg$1@ger.gmane.org>
+References: <200803110807.11368.zecke@selfish.org>
+	<fr5egp$jbl$1@ger.gmane.org> <200803111042.39028.zecke@selfish.org>
+	<fr5l5o$cmg$1@ger.gmane.org>
+Date: Tue, 11 Mar 2008 10:24:48 +0000
+Message-Id: <1205231088.4521.7.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [Announce] OpenEmbedded stable branch
+Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -47,33 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2008 10:26:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 11 Mar 2008 10:26:57 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, 2008-03-11 at 10:59 +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Holger Freyther schreef:
+> 
+> | Also you have witnessed the issue with suspending branches and the
+> automerger
+> | making them live again... there is enough evidence...
+> 
+> That was because the automerger was running an mtn version that didn't
+> have suspend cert support (0.30, it now is running 0.39). Also, as
+> maintainer of said automerger I haven't heard *anything* about suspend
+> certs being used by OE nor about them not working for OE. So I think you
+> should blame bad communication for this, not the tool. I would have
+> happily upgraded the automerger if someone had bothered to tell me[1].
 
-Hi,
+We had a situation where some bad changes propagated into OE.dev
+accidentally and I took steps to try and revert them. On advice from the
+monotone devs, I suspended the current head and tried to move us back to
+an older one. As the automerger didn't support them it just resurrected
+the suspended branch. It was something that needed to be sorted ASAP
+since anyone making a checkout during the "bad head" time would have to
+manually change their head. In the end I just merged the heads and
+corrupted our history since the damage wasn't as bad as originally
+thought.
 
-It seems a lot of people are unaware that there is a stable branch where
-only review patches get applied:
+> [1] Or sent a mail to the mailinglist!
 
-org.openembedded.angstrom-2007.12-stable
+I did, Subject:[oe] Monotone issues, Thu, 31 Jan 2008 23:51:39 +0000
 
-So I don't want to hear anymore of those "OE is unstable" or "There is
-no stable branch" complaints anymore, mmmmkay ;)
+Cheers,
 
-regards,
+Richard
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFH1l3YMkyGM64RGpERAsPtAJ9xHztFYsSa5N0OyS4dqwC7ofakMACfa3Ih
-MyFZSOWWvafRcB1bvpwLcPI=
-=F3Nc
------END PGP SIGNATURE-----
 
 
 
