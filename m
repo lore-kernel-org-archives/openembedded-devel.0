@@ -1,22 +1,23 @@
-Received: from [195.170.0.77] (helo=kane.otenet.gr ident=OTEnet-mail-system)
+Received: from [64.233.184.231] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1JZXwL-0002Mb-41
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 21:52:47 +0100
-Received: from dias (athedsl-387391.home.otenet.gr [79.131.65.61])
-	by kane.otenet.gr (8.13.8/8.13.8/Debian-3) with ESMTP id m2CKodU4010442
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 22:50:39 +0200
-Message-Id: <200803122050.m2CKodU4010442@kane.otenet.gr>
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Wed, 12 Mar 2008 22:50:17 +0200
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1JZY4e-0002a3-8X
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Mar 2008 22:01:22 +0100
+Received: by wr-out-0506.google.com with SMTP id 57so2610496wri.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Mar 2008 13:59:14 -0700 (PDT)
+Received: by 10.114.144.1 with SMTP id r1mr7879067wad.53.1205355553398;
+	Wed, 12 Mar 2008 13:59:13 -0700 (PDT)
+Received: by 10.114.147.11 with HTTP; Wed, 12 Mar 2008 13:59:13 -0700 (PDT)
+Message-ID: <bdb0025f0803121359j4bb1698eoef41106809923503@mail.gmail.com>
+Date: Wed, 12 Mar 2008 17:59:13 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <87myp31xgr.fsf@frontier.dottedmag.net>
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook, Build 11.0.5510
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
-In-Reply-To: <c384c5ea0803121326r631bf595v72126de8c7905835@mail.gmail.com>
-thread-index: AciEgCyoEInJZJhoQMiyLDIEPoTI+gAAlBGw
-X-SA-Exim-Connect-IP: 195.170.0.77
-X-SA-Exim-Mail-From: skoroneos@digital-opsis.com
+References: <3908.1205354089@dls.net> <87myp31xgr.fsf@frontier.dottedmag.net>
+X-SA-Exim-Connect-IP: 64.233.184.231
+X-SA-Exim-Mail-From: rodrigo.vivi@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -37,28 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 20:52:47 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Wed, 12 Mar 2008 21:01:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> 
-> Proposal: Can we work with MTN and GIT, or MTN and HG in parallel?
-> I.e. each developer has to do everything DOUBLE, has two 
-> checkouts against two SCM systems, and then learn in practise 
-> what works best?
-> :-)
+How to setup a git server over http:
 
-The reasons we should not do something like that are better described here
-:)
-http://en.wikipedia.org/wiki/Sadism_and_masochism
+hhtp: http://www.kernel.org/pub/software/scm/git/docs/howto/setup-git-server-over-http.txt
 
-Stelios S. Koroneos
+How to public git repositories:
 
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
- 
+http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#public-repositories
+
+On Wed, Mar 12, 2008 at 5:47 PM, Mikhail Gusarov
+<dottedmag@dottedmag.net> wrote:
+> Twas brillig at 15:34:49 12.03.2008 UTC-05 when Mike Westerhof did gyre and gimble:
+>
+>   MW> How many people _NEED_ to know how to set up a server, versus how
+>   MW> many people need to know how to use the client tools?
+>
+>  Everyone who wants to publish changes.
+>
+>  --
+>
+> _______________________________________________
+>  Openembedded-devel mailing list
+>  Openembedded-devel@lists.openembedded.org
+>  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
+
+-- 
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
