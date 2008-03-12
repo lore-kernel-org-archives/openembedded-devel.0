@@ -1,36 +1,32 @@
-Received: from [216.239.58.190] (helo=gv-out-0910.google.com)
+Received: from [212.227.126.174] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pmiscml@gmail.com>) id 1JZXAb-0004hP-W4
+	(envelope-from <robert@linuxdevelopment.de>) id 1JZXEA-0004md-SD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Mar 2008 21:03:31 +0100
-Received: by gv-out-0910.google.com with SMTP id l14so1065933gvf.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2008 13:01:18 -0700 (PDT)
-Received: by 10.150.197.8 with SMTP id u8mr4764030ybf.182.1205352077215;
-	Wed, 12 Mar 2008 13:01:17 -0700 (PDT)
-Received: from widy.localdomain ( [88.231.54.215])
-	by mx.google.com with ESMTPS id j9sm7071527mue.6.2008.03.12.13.01.13
-	(version=SSLv3 cipher=OTHER); Wed, 12 Mar 2008 13:01:15 -0700 (PDT)
-Date: Wed, 12 Mar 2008 22:02:47 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: angstrom-distro-devel@linuxtogo.org
-Message-ID: <20080312220247.2d1891fd@widy.localdomain>
-In-Reply-To: <47D828CB.9080900@opensimpad.org>
-References: <47D8134C.5010704@opensimpad.org> <fr95ov$s0f$1@ger.gmane.org>
-	<20080312201143.32eb13d2@widy.localdomain>
-	<47D828CB.9080900@opensimpad.org>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 216.239.58.190
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+	Wed, 12 Mar 2008 21:07:12 +0100
+Received: from [10.0.0.200] (X135b.x.pppool.de [89.59.19.91])
+	by mrelayeu.kundenserver.de (node=mrelayeu2) with ESMTP (Nemesis)
+	id 0MKwtQ-1JZXC60gbJ-0003xU; Wed, 12 Mar 2008 21:04:59 +0100
+Message-ID: <47D83769.5020405@linuxdevelopment.de>
+Date: Wed, 12 Mar 2008 21:04:57 +0100
+From: =?ISO-8859-1?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
+User-Agent: Thunderbird 2.0.0.9 (X11/20070801)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <200803121450.09688.geoffrey@pager.net>
+In-Reply-To: <200803121450.09688.geoffrey@pager.net>
+X-Enigmail-Version: 0.95.5
+X-Provags-ID: V01U2FsdGVkX19L/azIT1FEdqlKnKOG9Rf4GghRGHEbU+NRr7a
+	+XYXHjh8uaRfYDwkbDUJ1Nb5ZOjGHjpeBFjbBvgXgQzk7/OWLa
+	dTI0SGs3MbRm+6xgOfS+YAs5IE4n4pwxIyUOkqCpnA=
+X-SA-Exim-Connect-IP: 212.227.126.174
+X-SA-Exim-Mail-From: robert@linuxdevelopment.de
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.9 required=5.0 tests=AWL,RDNS_NONE,WEIRD_PORT
-	autolearn=no version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Angstrom-devel] [RFC] backport base_version_less_or_equal() (base.bbclass) from .dev to stable branch
+Subject: Re: Eureka! AVR32 ld-uClibc.so segfault solved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,63 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 20:03:31 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Wed, 12 Mar 2008 20:07:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello,
 
-On Wed, 12 Mar 2008 20:02:35 +0100
-Bernhard Guillon <Bernhard.Guillon@opensimpad.org> wrote:
 
-> Paul Sokolovsky wrote:
-> >
-> > Well, it's about base_version_less_or_equal() which indeed was added
-> > recently. I hope Bernhard will look up exact revision to pluck.
-> >
-> >
-> >   
-> Hello,
-> I am not sure about the exact revision. I am not that familiar with 
-> monotone. 
 
-Well, it's not that much about monotone as about revision control.
-Dealing with revisions is essence of it, and no matter what tool we'll
-use, we, humans, using these tools, will still deal with revisions.
-
-> While searching *ViewMTN* on openembedded.org I found this 
-> entry [1].  so revision is* *
-> 38f8ae6418f23fd2c13f29ecf5b41628ff3dedcd ?
-
-Well, why 38f... ? Your link contains 437..., and that's what the page
-has at the top (I might agree that ViewMTN UI is not the best, but
-it's not a reason to not read stuff it has).
-
-So, the revision is 43753505f023f7853afdd0f497c28ef65c4b2509 and you
-can verify that it contains the change you need with 
-
-mtn log --diffs --from 43753505f023f7853afdd0f497c28ef65c4b2509 --next 1
-
-The next step is to submit output of that command to
-angstrom-distro-devel list, with subject starting with "[Review]".
-Please do so next time - change control procedures work well if
-everyone follows them, not when few people do it for everyone else.
-
-For this time, let's assume that was done, +1 from me on the change, we
-have required 2 votes, and I push it next time I do plucks, if noone
-else will do that before.
-
+> So I now have a working OE based AVR32 build system, using binutils 
+> 2.17.atmel.0.0.99 20060623, gcc 4.2.1-atmel.1.0.3, and uClibc 0.9.29-atmel.1.  
+> This is essentially the same as Atmel's buildroot-avr32-v2.1.0.  As soon as I 
+> clean stuff up a little, I'll submit patches for this via bugzilla.  Minus 
+> this uclibc.inc diff.  I need more expert opinion on this.
 > 
-> best regards
-> Bernhard Guillon
-> 
-> 1 
-> http://www.openembedded.org:1081/revision/info/43753505f023f7853afdd0f497c28ef65c4b2509?q=viewmtn/revision/info/43753505f023f7853afdd0f497c28ef65c4b2509
+> Thanks to all those who helped!
+> ---
 
-[]
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+excellent job, can you supply any patches you have already, i would be
+more then happy to bring this up ( again !)
+
+rob_w
 
 
