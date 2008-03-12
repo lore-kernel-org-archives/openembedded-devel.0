@@ -1,33 +1,29 @@
-Received: from [212.227.126.179] (helo=moutng.kundenserver.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <robert@linuxdevelopment.de>)
-	id 1JZKFt-0004NG-DD; Wed, 12 Mar 2008 07:16:03 +0100
-Received: from [10.0.0.200] (M92b1.m.pppool.de [89.49.146.177])
-	by mrelayeu.kundenserver.de (node=mrelayeu7) with ESMTP (Nemesis)
-	id 0ML2xA-1JZKDt0phR-0002xG; Wed, 12 Mar 2008 07:13:57 +0100
-Message-ID: <47D774A4.3040207@linuxdevelopment.de>
-Date: Wed, 12 Mar 2008 07:13:56 +0100
-From: =?ISO-8859-1?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
-User-Agent: Thunderbird 2.0.0.9 (X11/20070801)
-MIME-Version: 1.0
+	(envelope-from <zecke@selfish.org>) id 1JZLP4-0006VI-Am
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Mar 2008 08:29:40 +0100
+Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JZLN6-0007Iv-4X
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Mar 2008 08:27:32 +0100
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-References: <200803111746.59194.geoffrey@pager.net>
-	<1205277784.16531.18.camel@dax.rpnet.com>
-In-Reply-To: <1205277784.16531.18.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.5
-X-Provags-ID: V01U2FsdGVkX18Z4qJcjqKJgdBmg3oYYBIhpSOPG226oW7VFsh
-	puqMnBI8PG/WBod/5uB5nhQjezUPVXxTG1xWSHU655qmxKWqT1
-	ggPDo7Ox+Irb/BhRcvdw0Mwu4GAweiHPJBUwCfMFq4=
-X-SA-Exim-Connect-IP: 212.227.126.179
-X-SA-Exim-Mail-From: robert@linuxdevelopment.de
+Date: Wed, 12 Mar 2008 08:27:28 +0100
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200803120827.29003.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 81.169.183.159
+X-SA-Exim-Mail-From: zecke@selfish.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Stuck with AVR32 segfaults in init
+Subject: staging ABI changes and broken idium
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,43 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 06:16:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 12 Mar 2008 07:29:40 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Hey,
+I was a bit stupid and fought with this issue:
+
+do_compile_prepend() {
+	sed -i s,/usr/include,${STAGING_INCDIR},g Makefile
+}
 
 
-> 
-> If you take an OE binary and run it within a working filesystem from
-> whereever, what happens? If it segfaults there you may be able to debug
-> it. If it doesn't, try copying libs from OE into that system until it
-> breaks? That should at least tell you where the problem is.
+What is wrong with this? STAGING_INCDIR is now ending with /usr/include. I 
+have grepped through our bb files and searched for this and found quite some 
+files doing this.
 
-Dear all
-I was starting a oe build the day koen announced the merge and it went
-with some obstacles and finished the major libs nicely but i cant tell
-what i had to do to get past the uclibc parts.
-
-I did then get a 0.9.28 based libs and apps which i now merge with a
-atmel bsp kernel and uClibc.
-So i can now run all oe libs ( beside uClibc) with that and it feels
-wonderful. I am currently running the ngw100 with a 5.7 lcd attached and
-can get up a Xfbdev + gtk+ + x11vnc within the nand and nor ( totale of
-16 mb)  Hurray the power if footprinting of oe !!
+How to tackle this issue:
+	a) Fix the autotools/Makefile.am to not have $(includedir) there
+	b) change the sed to be 'absolute' -I/usr/include
 
 
-But i am also stuck now redoing this and rebuilding a new oe toolchain
-for avr32 . I cant get pass the external-toolchain ERROR mentioned in
-some earlier mails.
-I tried both oe uclibc 0.9.28 and 0.9.29
-So i now have one tool chain up and running and i can go on to develop
-my target application but nobody is allowed to touch my laptop with that
-toolchain or he dies !!
+This is the command I use to search for it (many places are correct):
+	find . -name '*.bb' -exec grep -H "sed " {} \; | grep "/usr/include"
 
-Maybe we need some of the guru`s here to help us poor avr32 small users
-to get the basic oe toolchain up and running and stable at least for the
-ucLibc part.
+A helping hand fixing these would be appreciated. Something like this might 
+exist for other dirs (e.g. libdir) as well and need further checking.
 
-Robert
->
+
+z.
 
 
