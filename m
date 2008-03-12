@@ -1,42 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZYrk-000074-4U
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 22:52:06 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2CLnwjI001904
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 21:49:58 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 01703-06 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 21:49:54 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2CLnrDr001898
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 21:49:54 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <fr9hg6$9us$2@ger.gmane.org>
-References: <200803110807.11368.zecke@selfish.org>
-	<200803111126.04715.openembedded@haerwu.biz>	<fr5ntp$n0v$1@ger.gmane.org>
-	<20080311114938.GM30267@ibawizard.net>
-	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>
-	<20080311145739.GN30267@ibawizard.net>
-	<1205250588.4521.111.camel@dax.rpnet.com>
-	<20080312014945.4783ae6a@widy.localdomain>
-	<1205280598.16531.26.camel@dax.rpnet.com>
-	<20080312024408.44d9192e@widy.localdomain>
-	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>
-	<fr997r$aat$1@ger.gmane.org> <1205356290.4530.7.camel@dax.rpnet.com>
-	<fr9hg6$9us$2@ger.gmane.org>
-Date: Wed, 12 Mar 2008 21:49:55 +0000
-Message-Id: <1205358595.4530.17.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	(envelope-from <broonie@sirena.org.uk>)
+	id 1JZYtp-000094-LT; Wed, 12 Mar 2008 22:54:18 +0100
+Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.63)
+	(envelope-from <broonie@sirena.org.uk>)
+	id 1JZYrn-0005l1-R0; Wed, 12 Mar 2008 21:52:07 +0000
+Date: Wed, 12 Mar 2008 21:52:07 +0000
+From: Mark Brown <broonie@sirena.org.uk>
+To: openembedded-devel@lists.openembedded.org,
+	openembedded-devel@openembedded.org
+Message-ID: <20080312215207.GA21155@sirena.org.uk>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
+	openembedded-devel@openembedded.org
+References: <3908.1205354089@dls.net> <87myp31xgr.fsf@frontier.dottedmag.net>
+	<bdb0025f0803121359j4bb1698eoef41106809923503@mail.gmail.com>
+	<fr9heg$9us$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <fr9heg$9us$1@ger.gmane.org>
+X-Cookie: Think big.  Pollute the Mississippi.
+User-Agent: Mutt/1.5.13 (2006-08-11)
+X-SA-Exim-Connect-IP: 80.68.93.111
+X-SA-Exim-Mail-From: broonie@sirena.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -57,26 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 21:52:07 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Mar 2008 21:54:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, 2008-03-12 at 22:21 +0100, Koen Kooi wrote:
-> Richard Purdie schreef:
-> | On Wed, 2008-03-12 at 20:00 +0100, Koen Kooi wrote:
-> 
-> |> while with hg it's just 'hg serve'.
-> |
-> | How do two hg servers interact?
-> 
-> I don't get your question, could you eloborate?
+On Wed, Mar 12, 2008 at 10:20:16PM +0100, Koen Kooi wrote:
 
-How does the hg server on oe.org interact with the one nslu2 or any
-other project may setup?
+> So either apache or sshd, which means you can't setup a 'server' quickly
+> during e.g. a conference.
 
-Cheers,
+Yes, git has nothing matching the single commands of mtn or hg if you
+need to set up a temporary server in a hurry.
 
-Richard
+If you're looking for something you can do instantly on your laptop or
+similar then serving it over git:// might do the job but it requires
+inetd and flipping a switch to enable unauthenticated access:
 
+  http://www.kernel.org/pub/software/scm/git/docs/everyday.html#Repository%20Administration
+
+If you're actually talking to the person you're trying to share with
+(presumably if you don't have sensible net access) there's also the
+option of using a SSH server on your laptop (possibly in conjunction
+with git-shell) to give them read-only access.
+
+You can also just copy the entire repo to a machine, though that's not
+going to be the most efficient thing in the world.  There's also the
+option of using git-send-email plus git-am if you can transmit over
+mail, but that's not guaranteed either and not everyone's mail setup can
+deal with large volumes of patches gracefully.
+
+Like I say, none of these options quite match the server options of hg
+or mtn.
+
+-- 
+"You grabbed my hand and we fell into it, like a daydream - or a fever."
 
 
