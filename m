@@ -1,34 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JZLuX-0007GA-TK
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 09:02:10 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1JZLsY-0000TV-KA
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 08:00:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 08:00:02 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 08:00:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Wed, 12 Mar 2008 08:59:47 +0100
-Message-ID: <fr82hj$l2n$2@ger.gmane.org>
-References: <200803120827.29003.zecke@selfish.org> <fr828g$l2n$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <fr828g$l2n$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <zecke@selfish.org>) id 1JZMCD-0007jY-CA
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Mar 2008 09:20:23 +0100
+Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JZMAE-0008JP-5V
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Mar 2008 09:18:18 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 12 Mar 2008 09:18:08 +0100
+User-Agent: KMail/1.9.9
+References: <200803120827.29003.zecke@selfish.org>
+	<fr828g$l2n$1@ger.gmane.org> <fr82hj$l2n$2@ger.gmane.org>
+In-Reply-To: <fr82hj$l2n$2@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200803120918.09502.zecke@selfish.org>
+X-SA-Exim-Connect-IP: 81.169.183.159
+X-SA-Exim-Mail-From: zecke@selfish.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
@@ -49,51 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 08:02:13 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 12 Mar 2008 08:20:24 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wednesday 12 March 2008 08:59:47 Koen Kooi wrote:
+> Koen Kooi schreef:
 
-Koen Kooi schreef:
-| Holger Freyther schreef:
-| | Hey,
-| | I was a bit stupid and fought with this issue:
-| |
-| | do_compile_prepend() {
-| | 	sed -i s,/usr/include,${STAGING_INCDIR},g Makefile
-| | }
-| |
-| |
-| | What is wrong with this? STAGING_INCDIR is now ending with
-| /usr/include. I
-| | have grepped through our bb files and searched for this and found
-| quite some
-| | files doing this.
-| |
-| | How to tackle this issue:
-| | 	a) Fix the autotools/Makefile.am to not have $(includedir) there
-|
-| If that was the case, the sed would have been:
-|
-| (from gimp.inc)
-| do_configure_append() {
-| ~    find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
-| }
+> | (from gimp.inc)
+> | do_configure_append() {
+> | ~    find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+> | }
+>
+> Switching on my brain, the above isn't needed anymore, right?
 
-Switching on my brain, the above isn't needed anymore, right?
+-I/usr/include is still bad (assuming it holds your system headers).
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFH141zMkyGM64RGpERAsJyAJoCeDv9wn+e+CEEfDS/IluJeebXiACgvGac
-Y7d//G8OIotQHTTcfTmVBSU=
-=U397
------END PGP SIGNATURE-----
 
 
 
