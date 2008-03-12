@@ -1,38 +1,29 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [195.170.0.94] (helo=rosebud.otenet.gr ident=OTEnet-mail-system)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JZWzn-0004Qc-9M
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Mar 2008 20:52:21 +0100
-X-ASG-Debug-ID: 1205351407-552800190000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 0B4F21D6D7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2008 14:50:07 -0500 (CDT)
-Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
-	ESMTP id xbCAcNy0NQ9JTf3g for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2008 14:50:07 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Eureka!  AVR32 ld-uClibc.so segfault solved
-Date: Wed, 12 Mar 2008 14:50:09 -0500
-User-Agent: KMail/1.9.7
+	(envelope-from <skoroneos@digital-opsis.com>) id 1JZX2X-0004US-6p
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 20:55:12 +0100
+Received: from dias (athedsl-387391.home.otenet.gr [79.131.65.61])
+	by rosebud.otenet.gr (8.13.8/8.13.8/Debian-3) with ESMTP id
+	m2CJqwGG032458 for <openembedded-devel@openembedded.org>;
+	Wed, 12 Mar 2008 21:52:59 +0200
+Message-Id: <200803121952.m2CJqwGG032458@rosebud.otenet.gr>
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Wed, 12 Mar 2008 21:52:36 +0200
 MIME-Version: 1.0
-Message-Id: <200803121450.09688.geoffrey@pager.net>
-X-Barracuda-Connect: UNKNOWN[192.168.1.1]
-X-Barracuda-Start-Time: 1205351408
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-X-SA-Exim-Connect-IP: 209.253.16.26
-X-SA-Exim-Mail-From: geoffrey@pager.net
+X-Mailer: Microsoft Office Outlook, Build 11.0.5510
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
+In-Reply-To: <47D774A4.3040207@linuxdevelopment.de>
+thread-index: AciECRJ/j0DWAwgVROOX0dbIMd3hzwAb80gg
+X-SA-Exim-Connect-IP: 195.170.0.94
+X-SA-Exim-Mail-From: skoroneos@digital-opsis.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Eureka! AVR32 ld-uClibc.so segfault solved
+Subject: Re: Stuck with AVR32 segfaults in init
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -46,51 +37,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 19:52:21 -0000
+X-List-Received-Date: Wed, 12 Mar 2008 19:55:12 -0000
 Content-Type: text/plain;
-  charset="utf-8"
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi all,
-
-I just tracked down the culprit for my AVR32 system always segfaulting 
-whenever ld-uClibc.so ran (usually as soon as the kernel attempted to run the 
-init process).
-
-Turns out that while most of uClibc is not particularly sensitive to the 
-CFLAGS, ld-uClibc.so is extremely sensitive.  The uclibc.inc file was doing 
-some things that screwed up the CFLAGS being used to compile ld-uClibc.so.
-
-Here's the diff that made it all work:
---- uclibc.inc  7 Mar 2008 21:50:53 -0000       1.3
-+++ uclibc.inc  12 Mar 2008 20:35:44 -0000
-@@ -70,7 +70,7 @@
-
- # do_stage barfs on a CC with whitepspace, therefore put the 'HOST_CC_ARCH' 
-in
- # the CFLAGS (for when building the utils).
--OEMAKE_NO_CC= "'OPTIMIZATION=' 'CPU_CFLAGS=${CFLAGS}' 'STRIPTOOL=true' 'LD=${LD}'\
-+OEMAKE_NO_CC = "'STRIPTOOL=true' 'LD=${LD}' \
-                'LOCALE_DATA_FILENAME=${UCLIBC_LOCALE_FILE}'"
- EXTRA_OEMAKE = "${OEMAKE_NO_CC} 'CC=${CC}'"
- EXTRA_OEMAKE_task_do_populate_staging = "${OEMAKE_NO_CC}"
+FYI I won't be able to even look at avr32/OE for at least a month a half and
+Koen's stk1000 is in my office waiting to be unbricked :(
+With the amount (and type) of changes going into .dev these days it would
+have been a miracle if something was working without problems.
+Probably this could also be connected to the SCM issue but I think it would
+be wise in the future, to create separate branches when these kind of
+"infrastacture" changes are to be pushed to OE, so they could be tested
+before been merged with .dev.
 
 
-Now, I'm not sure what consequences this has to the overall system and other 
-platforms.  I'm not exactly sure why you'd always want to wipe out the 
-OPTIMIZATION and CPU_CFLAGS that the uClibc Rules.mak sets up, either.  
-Comments on these points?
+Stelios S. Koroneos
+
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+ 
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@openembedded.org 
+> [mailto:openembedded-devel-bounces@openembedded.org] On 
+> Behalf Of Robert Worle
+> Sent: Wednesday, March 12, 2008 8:14 AM
+> To: openembedded-devel@openembedded.org
+> Cc: openembedded-devel@openembedded.org
+> Subject: Re: [oe] Stuck with AVR32 segfaults in init
+> 
+> 
+> > 
+> > If you take an OE binary and run it within a working 
+> filesystem from 
+> > whereever, what happens? If it segfaults there you may be able to 
+> > debug it. If it doesn't, try copying libs from OE into that system 
+> > until it breaks? That should at least tell you where the problem is.
+> 
+> Dear all
+> I was starting a oe build the day koen announced the merge 
+> and it went with some obstacles and finished the major libs 
+> nicely but i cant tell what i had to do to get past the uclibc parts.
+> 
+> I did then get a 0.9.28 based libs and apps which i now merge 
+> with a atmel bsp kernel and uClibc.
+> So i can now run all oe libs ( beside uClibc) with that and 
+> it feels wonderful. I am currently running the ngw100 with a 
+> 5.7 lcd attached and can get up a Xfbdev + gtk+ + x11vnc 
+> within the nand and nor ( totale of
+> 16 mb)  Hurray the power if footprinting of oe !!
+> 
+> 
+> But i am also stuck now redoing this and rebuilding a new oe 
+> toolchain for avr32 . I cant get pass the external-toolchain 
+> ERROR mentioned in some earlier mails.
+> I tried both oe uclibc 0.9.28 and 0.9.29 So i now have one 
+> tool chain up and running and i can go on to develop my 
+> target application but nobody is allowed to touch my laptop 
+> with that toolchain or he dies !!
+> 
+> Maybe we need some of the guru`s here to help us poor avr32 
+> small users to get the basic oe toolchain up and running and 
+> stable at least for the ucLibc part.
+> 
+> Robert
+> >
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 
-So I now have a working OE based AVR32 build system, using binutils 
-2.17.atmel.0.0.99 20060623, gcc 4.2.1-atmel.1.0.3, and uClibc 0.9.29-atmel.1.  
-This is essentially the same as Atmel's buildroot-avr32-v2.1.0.  As soon as I 
-clean stuff up a little, I'll submit patches for this via bugzilla.  Minus 
-this uclibc.inc diff.  I need more expert opinion on this.
-
-Thanks to all those who helped!
----
-Geoffrey
 
 
