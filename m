@@ -1,24 +1,38 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1JZZml-0006FC-Ke
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Mar 2008 23:51:02 +0100
-Received: from localhost ([127.0.0.1]) by mx01.dls.net with esmtp (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1JZZkh-0002n6-Li
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Mar 2008 17:48:51 -0500
-MIME-Version: 1.0
-X-Mailer: AtMail PHP 5.2
-Message-ID: <1718.1205362131@dls.net>
-To: <openembedded-devel@lists.openembedded.org>
-X-Origin: 209.242.5.110
-Date: Wed, 12 Mar 2008 17:48:51 -0500
-From: Mike Westerhof <mwester@dls.net>
-X-SA-Exim-Connect-IP: 216.145.245.197
-X-SA-Exim-Mail-From: mwester@dls.net
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JZZsx-0006MM-2D
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 23:57:24 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JZZqs-0003C1-KO
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 22:55:14 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 12 Mar 2008 22:55:14 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 12 Mar 2008 22:55:14 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Wed, 12 Mar 2008 23:54:53 +0100
+Message-ID: <fr9n05$sm7$1@ger.gmane.org>
+References: <200803110807.11368.zecke@selfish.org>	<20080311114938.GM30267@ibawizard.net>	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>	<20080311145739.GN30267@ibawizard.net>	<1205250588.4521.111.camel@dax.rpnet.com>	<20080312014945.4783ae6a@widy.localdomain>	<1205280598.16531.26.camel@dax.rpnet.com>	<20080312024408.44d9192e@widy.localdomain>	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>	<fr997r$aat$1@ger.gmane.org>	<c384c5ea0803121326r631bf595v72126de8c7905835@mail.gmail.com>
+	<1205358843.4530.22.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <1205358843.4530.22.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -36,75 +50,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 22:51:02 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Mar 2008 22:57:24 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
- On Wed 12/03/08  5:32 PM , Paul Sokolovsky pmiscml@gmail.com sent:
-> Hello,
->=20
-> On Wed, 12 Mar 2008 23:07:03 +0100
-> "Leon Woestenberg" le
-> on.woestenberg@gmail.com> wrote:
-> > Hello Paul,
-> >=20
-> > On Wed, Mar 12, 2008 at 10:40 PM, Paul Sokolovsky pmiscml@gma
-> il.com>> wrote:
-> > >  mirroring, but Monotone with its super-cool concept
-> of unbelievably> >  cheap branches (so-called heads), make it just well
-> robust - even> > if
-> > >
-> > Multiple heads and lightweight branches are two
-> different things.
-> Probably also because of different numbers of hexadecimal digits?
->=20
-> >=20
-> > A branch has a name/tag that tells me what is happening
-> in that branch> or who is making it happen.
->=20
-> And heads have head revision and change logs too!
->=20
-> >=20
-> > In contrast, multiple heads does not help me in any way
-> as a tool for> branching, nor can I easily track someone else's work
-> in his "head".
-> That's because you've stuck with that old and boring concept of
-> "lightweight branches". People who grasped heads novelty enjoy it very
-> much. Well, the same can be said about the people who didn't drop
-> everything to endeavor into those "lightweight branches" - they enjoy
-> classy branches with not the lesser passion than the other two groups.
->=20
->=20
-> Well, but the talk was about mirroring and syncing potentially
-> incompatible changes. Do lightweight branches help with this?
->=20
-> >=20
-> > Regards,
-> > --=20
-> > Leon
->=20
-> []
->=20
->=20
-> --=20
-> Best regards,
-> Paul                          pmiscml@gma
-> il.com
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think this has gotten to the point where the arguments is for the sake of=
- arguing, and little else.  I'm surprised that it hasn't been mentioned tha=
-t "hg" has the advantage that its name is only two characters, a 33% saving=
-s in overhead compared to most other scm tools we've discussed.
+Richard Purdie schreef:
 
+| Whilst I think OE will always have a central master .dev repository I
+| see a lot of gain from having branches. I would have happily put the
+| sysroot changes into a branch and likewise the packaged-staging stuff
+| I'm working on. As it is I'm keeping it locally uncommitted with no
+| version tracking since I don't really want to play games with monotone.
 
-So, who makes this decision, and what's the timeframe?
+Thank you for saying it right out: "I haven't tried to use branches in
+mtn, ever".
+So we only have Holger saying mtn can't merge the dreambox branch, and
+people ignoring what I said about the avr32 branch.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Mike  (mwester)
-
-Oh - btw, lightweight branching implies working, reliable tools to identify=
- diffs and merge them, that's the part that really needs to be considered r=
-ather than how easy it is to just create a branch.
-
+iD8DBQFH2F89MkyGM64RGpERAt5yAKC4TXk04x3gf7MIooWMKYyH2qcqZQCgroTe
+l2F7QyUkBClceQpoJ4cU/cI=
+=ssbV
+-----END PGP SIGNATURE-----
 
 
 
