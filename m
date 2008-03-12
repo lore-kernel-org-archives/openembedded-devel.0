@@ -1,42 +1,30 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.85.128.187] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZMyY-0003NL-DQ
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 10:10:25 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2C98FEr018837
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 09:08:15 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18797-01 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 09:08:11 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2C988MC018827
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 09:08:08 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <47D774A4.3040207@linuxdevelopment.de>
-References: <200803111746.59194.geoffrey@pager.net>
-	<1205277784.16531.18.camel@dax.rpnet.com>
-	<47D774A4.3040207@linuxdevelopment.de>
-Date: Wed, 12 Mar 2008 09:08:07 +0000
-Message-Id: <1205312887.4530.1.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
-	m2C98FEr018837
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	(envelope-from <philipp.zabel@gmail.com>) id 1JZN70-0003jL-E8
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 10:19:04 +0100
+Received: by fk-out-0910.google.com with SMTP id 18so3231700fks.12
+	for <openembedded-devel@openembedded.org>;
+	Wed, 12 Mar 2008 02:17:00 -0700 (PDT)
+Received: by 10.82.161.19 with SMTP id j19mr4329102bue.12.1205313419409;
+	Wed, 12 Mar 2008 02:16:59 -0700 (PDT)
+Received: by 10.82.118.18 with HTTP; Wed, 12 Mar 2008 02:16:59 -0700 (PDT)
+Message-ID: <74d0deb30803120216y65be1b2cmaaaa9b2acf98ecee@mail.gmail.com>
+Date: Wed, 12 Mar 2008 10:16:59 +0100
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <47D71B8F.1030108@balister.org>
+MIME-Version: 1.0
+References: <47D71B8F.1030108@balister.org>
+X-SA-Exim-Connect-IP: 209.85.128.187
+X-SA-Exim-Mail-From: philipp.zabel@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Stuck with AVR32 segfaults in init
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Git versus Hg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,21 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 09:10:29 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Mar 2008 09:19:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2008-03-12 at 07:13 +0100, Robert W=C3=B6rle wrote:
-> But i am also stuck now redoing this and rebuilding a new oe toolchain
-> for avr32 . I cant get pass the external-toolchain ERROR mentioned in
-> some earlier mails.
+On Wed, Mar 12, 2008 at 12:53 AM, Philip Balister <philip@balister.org> wrote:
+> Given the only serious contenders for possible SCM's for OE appear to be
+>  git or Hg, I am curious about the expertise level available on this list.
+>
+>  Basically, let us know if you use git or Hg on a regular basis in a two
+>  way workflow and consider yourself knowledgeable on sorting out problems
+>  that crop up.
 
-Can you remind us which error this is and what MACHINE/DISTRO and other
-setup you're using please?
+I have Hg installed since the last round of SCM discussion but never
+used it seriously.
+My git experience is mainly restricted to porcelain (add commit rebase
+cherry-pick, etc.).
+I'm using it for kernel work and for a handful of local repositiories
+with linear history.
 
-Thanks,
+As I'm working under what one could today call serious resource
+constraints (laptop w/ one 60GB hdd), git clone --reference and inline
+branches are important features to me. And besides catching up with
+mainline linux, git-rebase -i gives me the ability to check in every
+stupid thought and easily clean up once I'm satisfied, whereas with
+monotone I currently have to experiment outside of version control.
 
-Richard
+What is still unclear to me is how well a shared git repository with
+push access for multiple parties is going to work. The mobile-linux
+repository on serenity had some kind of permission trouble before we
+added the group permission fixup in the post-update hook.
 
+regards
+Philipp
 
 
