@@ -1,35 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.134.184] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JZZsx-0006MM-2D
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 23:57:24 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JZZqs-0003C1-KO
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 22:55:14 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 22:55:14 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 22:55:14 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Wed, 12 Mar 2008 23:54:53 +0100
-Message-ID: <fr9n05$sm7$1@ger.gmane.org>
-References: <200803110807.11368.zecke@selfish.org>	<20080311114938.GM30267@ibawizard.net>	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>	<20080311145739.GN30267@ibawizard.net>	<1205250588.4521.111.camel@dax.rpnet.com>	<20080312014945.4783ae6a@widy.localdomain>	<1205280598.16531.26.camel@dax.rpnet.com>	<20080312024408.44d9192e@widy.localdomain>	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>	<fr997r$aat$1@ger.gmane.org>	<c384c5ea0803121326r631bf595v72126de8c7905835@mail.gmail.com>
-	<1205358843.4530.22.camel@dax.rpnet.com>
+	(envelope-from <pmiscml@gmail.com>) id 1JZa5v-0006cK-9k
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Mar 2008 00:10:51 +0100
+Received: by mu-out-0910.google.com with SMTP id w9so3345419mue.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Mar 2008 16:08:41 -0700 (PDT)
+Received: by 10.78.172.20 with SMTP id u20mr23719904hue.12.1205363321045;
+	Wed, 12 Mar 2008 16:08:41 -0700 (PDT)
+Received: from widy.localdomain ( [88.231.54.215])
+	by mx.google.com with ESMTPS id e8sm768425muf.8.2008.03.12.16.08.37
+	(version=SSLv3 cipher=OTHER); Wed, 12 Mar 2008 16:08:39 -0700 (PDT)
+Date: Thu, 13 Mar 2008 01:10:02 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080313011002.215206d7@widy.localdomain>
+In-Reply-To: <1718.1205362131@dls.net>
+References: <1718.1205362131@dls.net>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <1205358843.4530.22.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.134.184
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
@@ -50,32 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 22:57:24 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 12 Mar 2008 23:10:55 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-Richard Purdie schreef:
+On Wed, 12 Mar 2008 17:48:51 -0500
+Mike Westerhof <mwester@dls.net> wrote:
 
-| Whilst I think OE will always have a central master .dev repository I
-| see a lot of gain from having branches. I would have happily put the
-| sysroot changes into a branch and likewise the packaged-staging stuff
-| I'm working on. As it is I'm keeping it locally uncommitted with no
-| version tracking since I don't really want to play games with monotone.
+[]
 
-Thank you for saying it right out: "I haven't tried to use branches in
-mtn, ever".
-So we only have Holger saying mtn can't merge the dreambox branch, and
-people ignoring what I said about the avr32 branch.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> I think this has gotten to the point where the arguments is for the
+> sake of arguing, and little else.  
 
-iD8DBQFH2F89MkyGM64RGpERAt5yAKC4TXk04x3gf7MIooWMKYyH2qcqZQCgroTe
-l2F7QyUkBClceQpoJ4cU/cI=
-=ssbV
------END PGP SIGNATURE-----
+Maybe, and on git's side, there's surprisingly little variety of
+arguments - 1) "it has lightweight branches" (hg has too, as was pointed
+out, but as plugin (which is good) of experimental state (with
+obvious entailments)); 2) "I use git, and it works well for me" - it's
+hard to respond without calling CVS ghost; 3) "Don't make people learn
+more stuff" - and nobody appears to care about people who *don't* know
+git - there're still more such potential OE users - is it fair to force
+them to learn its quirks, or leave out people who don't want to learn
+quirks?
 
+> I'm surprised that it hasn't been
+> mentioned that "hg" has the advantage that its name is only two
+> characters, a 33% savings in overhead compared to most other scm
+> tools we've discussed.
+
+Actually, there's almost noone argues for hg too insistently. Mostly,
+there're calls to think better about git.
+
+> So, who makes this decision, and what's the timeframe?
+
+Apparently, core team? Original proposal named end of month?
+
+> 
+> Mike  (mwester)
+> 
+> Oh - btw, lightweight branching implies working, reliable tools to
+> identify diffs and merge them, that's the part that really needs to
+> be considered rather than how easy it is to just create a branch.
+
+Aha, good. But not only that. We really should think are lightweight
+branches so useful for OE, and do they really fit well into *our*
+*current* infrastructure.
+
+[]
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
