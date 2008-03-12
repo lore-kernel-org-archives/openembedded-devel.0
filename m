@@ -1,26 +1,44 @@
-Received: from [64.233.184.231] (helo=wr-out-0506.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1JZY4e-0002a3-8X
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Mar 2008 22:01:22 +0100
-Received: by wr-out-0506.google.com with SMTP id 57so2610496wri.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2008 13:59:14 -0700 (PDT)
-Received: by 10.114.144.1 with SMTP id r1mr7879067wad.53.1205355553398;
-	Wed, 12 Mar 2008 13:59:13 -0700 (PDT)
-Received: by 10.114.147.11 with HTTP; Wed, 12 Mar 2008 13:59:13 -0700 (PDT)
-Message-ID: <bdb0025f0803121359j4bb1698eoef41106809923503@mail.gmail.com>
-Date: Wed, 12 Mar 2008 17:59:13 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <87myp31xgr.fsf@frontier.dottedmag.net>
-MIME-Version: 1.0
-References: <3908.1205354089@dls.net> <87myp31xgr.fsf@frontier.dottedmag.net>
-X-SA-Exim-Connect-IP: 64.233.184.231
-X-SA-Exim-Mail-From: rodrigo.vivi@gmail.com
+	(envelope-from <rpurdie@rpsys.net>) id 1JZYGa-0002xp-Ev
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 22:13:42 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2CLBYVY031866
+	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 21:11:34 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 31479-09 for <openembedded-devel@openembedded.org>;
+	Wed, 12 Mar 2008 21:11:30 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2CLBSTX031859
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 21:11:28 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <fr997r$aat$1@ger.gmane.org>
+References: <200803110807.11368.zecke@selfish.org>
+	<200803111126.04715.openembedded@haerwu.biz>	<fr5ntp$n0v$1@ger.gmane.org>
+	<20080311114938.GM30267@ibawizard.net>
+	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>
+	<20080311145739.GN30267@ibawizard.net>
+	<1205250588.4521.111.camel@dax.rpnet.com>
+	<20080312014945.4783ae6a@widy.localdomain>
+	<1205280598.16531.26.camel@dax.rpnet.com>
+	<20080312024408.44d9192e@widy.localdomain>
+	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>
+	<fr997r$aat$1@ger.gmane.org>
+Date: Wed, 12 Mar 2008 21:11:30 +0000
+Message-Id: <1205356290.4530.7.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -38,43 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 21:01:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 12 Mar 2008 21:13:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-How to setup a git server over http:
+On Wed, 2008-03-12 at 20:00 +0100, Koen Kooi wrote:
+> Actually it shows that hg fits better into the OE way of using a DSCM:
+> central repo (and mirrors) with distributed developers.
+> 
+> I keep hearing people saying that they have no clue on how to setup a
+> git-server for OE where we can commit things as usual, 
 
-hhtp: http://www.kernel.org/pub/software/scm/git/docs/howto/setup-git-server-over-http.txt
+Thats not quite true, we've just wondered what the best way to do it
+is...
 
-How to public git repositories:
+> while with hg it's just 'hg serve'.
 
-http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#public-repositories
+How do two hg servers interact?
 
-On Wed, Mar 12, 2008 at 5:47 PM, Mikhail Gusarov
-<dottedmag@dottedmag.net> wrote:
-> Twas brillig at 15:34:49 12.03.2008 UTC-05 when Mike Westerhof did gyre and gimble:
->
->   MW> How many people _NEED_ to know how to set up a server, versus how
->   MW> many people need to know how to use the client tools?
->
->  Everyone who wants to publish changes.
->
->  --
->
-> _______________________________________________
->  Openembedded-devel mailing list
->  Openembedded-devel@lists.openembedded.org
->  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Cheers,
+
+Richard
 
 
-
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
