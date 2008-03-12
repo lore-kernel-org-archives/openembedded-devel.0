@@ -1,35 +1,30 @@
-Received: from [62.70.27.150] (helo=hoat.troll.no)
+Received: from [209.85.132.244] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tcooksey@trolltech.com>) id 1JZT0u-0001X1-2h
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 16:37:50 +0100
-Received: from hoat.troll.no (tedur.troll.no [62.70.27.154])
-	by hoat.troll.no (Postfix) with SMTP id 8663A4000D
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JZVt1-00006D-6b
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 19:41:17 +0100
+Received: by an-out-0708.google.com with SMTP id b38so743395ana.6
 	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 16:35:02 +0100 (CET)
-Received: from sx01.troll.no (sx01.troll.no [62.70.27.21])
-	by hoat.troll.no (Postfix) with ESMTP id 7EA6B40002
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 16:35:02 +0100 (CET)
-Received: from sx01.troll.no (localhost.localdomain [127.0.0.1])
-	by sx01.troll.no (8.13.8/8.13.8) with ESMTP id m2CFZ1t4021402;
-	Wed, 12 Mar 2008 16:35:01 +0100
-Received: from tomdev.troll.no (tomdev.troll.no [10.3.5.39])
-	by sx01.troll.no (Scalix SMTP Relay 11.3.0.11339)
-	via ESMTP; Wed, 12 Mar 2008 16:35:01 +0100 (CET)
-Date: Wed, 12 Mar 2008 16:35:02 +0100
-From: Tom Cooksey <thomas.cooksey@trolltech.com>
-To: openembedded-devel@openembedded.org
-Message-ID: <200803121635.02741.thomas.cooksey@trolltech.com>
-In-Reply-To: <20080312172200.47c01671@widy.localdomain>
-References: <47D71B8F.1030108@balister.org>
-References: <200803121551.50037.thomas.cooksey@trolltech.com>
-References: <20080312172200.47c01671@widy.localdomain>
-x-scalix-Hops: 1
-Organization: Trolltech
-User-Agent: KMail/1.9.7
+	Wed, 12 Mar 2008 11:39:01 -0700 (PDT)
+Received: by 10.100.211.8 with SMTP id j8mr16894287ang.21.1205347141823;
+	Wed, 12 Mar 2008 11:39:01 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Wed, 12 Mar 2008 11:38:31 -0700 (PDT)
+Message-ID: <c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>
+Date: Wed, 12 Mar 2008 19:38:31 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20080312024408.44d9192e@widy.localdomain>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 62.70.27.150
-X-SA-Exim-Mail-From: tcooksey@trolltech.com
+References: <200803110807.11368.zecke@selfish.org>
+	<200803111126.04715.openembedded@haerwu.biz>
+	<fr5ntp$n0v$1@ger.gmane.org> <20080311114938.GM30267@ibawizard.net>
+	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>
+	<20080311145739.GN30267@ibawizard.net>
+	<1205250588.4521.111.camel@dax.rpnet.com>
+	<20080312014945.4783ae6a@widy.localdomain>
+	<1205280598.16531.26.camel@dax.rpnet.com>
+	<20080312024408.44d9192e@widy.localdomain>
+X-SA-Exim-Connect-IP: 209.85.132.244
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
@@ -37,7 +32,7 @@ X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openembedded-devel@openembedded.org
-Subject: Re: Git versus Hg
+Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -51,34 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 15:38:16 -0000
-Content-Type: text/plain;
-	charset="US-ASCII"
+X-List-Received-Date: Wed, 12 Mar 2008 18:41:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-> > If you choose a well-known SCM system, it's one less 
-> > thing new potential developers need to learn. They have enough to 
-> > learn as it is.
-> > 
-> > Cheers,
-> > 
-> > Tom
-> > 
-> > PS: Personally, I'd never heard of Hg until reading threads on this
-> > list.
-> 
-> And you won't believe, but many people never heard about Perforce, even
-> though it has been alternative (commercial, plus OpenSource loyalty
-> program) to CVS for something like decade (cannot be exact, but 7
-> years ago it was there for sure). Many large entities still selected
-> CVS and spent money on "reduced development productivity and extra
-> maintenance costs" (forgive my corporate-speak), just because it was so
-> familiar.
+Hello all,
 
-Yep, I was one of them. Never heard of perforce before starting at Trolltech. :-)
+having very little experience with both git and hg, I needed to look
+for other people's thoughts on this.
+I found this e-mail from Carl Worth extremely insightfull in the
+decision for either hg or git:
 
-I think I have limited SCM knowledge. CVS, SVN, Git, Starteam (eeek) were 
-the only ones I really knew about, until fairly recently.
+http://lists.freedesktop.org/archives/cairo/2006-February/006255.html
 
+His arguments on the (main two) differences strongly favors me to move
+to GIT, not HG.
+
+
+Regards,
+-- 
+Leon 'likewise'
 
 
