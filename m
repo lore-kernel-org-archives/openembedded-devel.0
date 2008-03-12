@@ -1,29 +1,34 @@
-Received: from [209.85.134.184] (helo=mu-out-0910.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pmiscml@gmail.com>) id 1JZa5v-0006cK-9k
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Mar 2008 00:10:51 +0100
-Received: by mu-out-0910.google.com with SMTP id w9so3345419mue.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2008 16:08:41 -0700 (PDT)
-Received: by 10.78.172.20 with SMTP id u20mr23719904hue.12.1205363321045;
-	Wed, 12 Mar 2008 16:08:41 -0700 (PDT)
-Received: from widy.localdomain ( [88.231.54.215])
-	by mx.google.com with ESMTPS id e8sm768425muf.8.2008.03.12.16.08.37
-	(version=SSLv3 cipher=OTHER); Wed, 12 Mar 2008 16:08:39 -0700 (PDT)
-Date: Thu, 13 Mar 2008 01:10:02 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080313011002.215206d7@widy.localdomain>
+	(envelope-from <rpurdie@rpsys.net>) id 1JZaF9-0006tb-5t
+	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 00:20:21 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2CNIDxK006661
+	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 23:18:13 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 06356-09 for <openembedded-devel@openembedded.org>;
+	Wed, 12 Mar 2008 23:18:09 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2CNHxHr006631
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 23:17:59 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
 In-Reply-To: <1718.1205362131@dls.net>
 References: <1718.1205362131@dls.net>
-X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+Date: Wed, 12 Mar 2008 23:18:02 +0000
+Message-Id: <1205363882.4530.35.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.134.184
-X-SA-Exim-Mail-From: pmiscml@gmail.com
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -41,57 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 23:10:55 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Wed, 12 Mar 2008 23:20:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello,
-
-On Wed, 12 Mar 2008 17:48:51 -0500
-Mike Westerhof <mwester@dls.net> wrote:
-
-[]
-
+On Wed, 2008-03-12 at 17:48 -0500, Mike Westerhof wrote:
 > I think this has gotten to the point where the arguments is for the
-> sake of arguing, and little else.  
-
-Maybe, and on git's side, there's surprisingly little variety of
-arguments - 1) "it has lightweight branches" (hg has too, as was pointed
-out, but as plugin (which is good) of experimental state (with
-obvious entailments)); 2) "I use git, and it works well for me" - it's
-hard to respond without calling CVS ghost; 3) "Don't make people learn
-more stuff" - and nobody appears to care about people who *don't* know
-git - there're still more such potential OE users - is it fair to force
-them to learn its quirks, or leave out people who don't want to learn
-quirks?
-
-> I'm surprised that it hasn't been
+> sake of arguing, and little else.  I'm surprised that it hasn't been
 > mentioned that "hg" has the advantage that its name is only two
-> characters, a 33% savings in overhead compared to most other scm
-> tools we've discussed.
+> characters, a 33% savings in overhead compared to most other scm tools
+> we've discussed.
 
-Actually, there's almost noone argues for hg too insistently. Mostly,
-there're calls to think better about git.
+Agreed, some of the replies are just getting silly now :/.
 
 > So, who makes this decision, and what's the timeframe?
 
-Apparently, core team? Original proposal named end of month?
+Good question. We have a core team and I guess the first step would be
+to put it to a vote there and see where we stand? I'm open to other
+ideas and possibly to representations from non core team developers with
+a case for a vote too. I would like to get this resolved quickly if we
+can though.
 
-> 
-> Mike  (mwester)
-> 
+Timeframe wise, I liked Holger's end of the month deadline for actually
+doing things.
+
 > Oh - btw, lightweight branching implies working, reliable tools to
-> identify diffs and merge them, that's the part that really needs to
-> be considered rather than how easy it is to just create a branch.
+> identify diffs and merge them, that's the part that really needs to be
+> considered rather than how easy it is to just create a branch.
 
-Aha, good. But not only that. We really should think are lightweight
-branches so useful for OE, and do they really fit well into *our*
-*current* infrastructure.
+Agreed, although Holger has already compared git's merging capabilities
+to monotone...
 
-[]
+Cheers,
 
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
+Richard
+
 
 
