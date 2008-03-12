@@ -1,34 +1,34 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [64.233.178.243] (helo=hs-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZaF9-0006tb-5t
-	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 00:20:21 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2CNIDxK006661
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 23:18:13 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 06356-09 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 23:18:09 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2CNHxHr006631
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 23:17:59 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1718.1205362131@dls.net>
-References: <1718.1205362131@dls.net>
-Date: Wed, 12 Mar 2008 23:18:02 +0000
-Message-Id: <1205363882.4530.35.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JZaLL-0003Bf-Tx
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Mar 2008 00:26:45 +0100
+Received: by hs-out-0708.google.com with SMTP id 23so2576831hsn.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Mar 2008 16:24:37 -0700 (PDT)
+Received: by 10.100.48.16 with SMTP id v16mr17720503anv.67.1205364277332;
+	Wed, 12 Mar 2008 16:24:37 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Wed, 12 Mar 2008 16:24:37 -0700 (PDT)
+Message-ID: <c384c5ea0803121624m2992d688scdefefc2e3caba79@mail.gmail.com>
+Date: Thu, 13 Mar 2008 00:24:37 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <fr9n05$sm7$1@ger.gmane.org>
+MIME-Version: 1.0
+References: <200803110807.11368.zecke@selfish.org>
+	<1205250588.4521.111.camel@dax.rpnet.com>
+	<20080312014945.4783ae6a@widy.localdomain>
+	<1205280598.16531.26.camel@dax.rpnet.com>
+	<20080312024408.44d9192e@widy.localdomain>
+	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>
+	<fr997r$aat$1@ger.gmane.org>
+	<c384c5ea0803121326r631bf595v72126de8c7905835@mail.gmail.com>
+	<1205358843.4530.22.camel@dax.rpnet.com> <fr9n05$sm7$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 64.233.178.243
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -46,40 +46,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 23:20:22 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Mar 2008 23:26:46 -0000
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Wed, 2008-03-12 at 17:48 -0500, Mike Westerhof wrote:
-> I think this has gotten to the point where the arguments is for the
-> sake of arguing, and little else.  I'm surprised that it hasn't been
-> mentioned that "hg" has the advantage that its name is only two
-> characters, a 33% savings in overhead compared to most other scm tools
-> we've discussed.
+Hello,
 
-Agreed, some of the replies are just getting silly now :/.
+On Wed, Mar 12, 2008 at 11:54 PM, Koen Kooi
+<koen@dominion.kabel.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+>  | Whilst I think OE will always have a central master .dev repository I
+>  | see a lot of gain from having branches. I would have happily put the
+>  | sysroot changes into a branch and likewise the packaged-staging stuff
+>  | I'm working on. As it is I'm keeping it locally uncommitted with no
+>  | version tracking since I don't really want to play games with monotone=
+.
+>
+>  Thank you for saying it right out: "I haven't tried to use branches in
+>  mtn, ever".
+>
+mtn will handle branches, no issue. But how easy can a branch be
+merged back if it has been branching off for too long? I guess we end
+up in the same situation as the dreambox branch?
 
-> So, who makes this decision, and what's the timeframe?
+Paul, *yes* a head is like a branch in the revision control system,
+but I cannot use it as a branch! Unless you can explain me how I could
+*easily track or pluck from* the AVR work if it wasn't branched but a
+different head.
 
-Good question. We have a core team and I guess the first step would be
-to put it to a vote there and see where we stand? I'm open to other
-ideas and possibly to representations from non core team developers with
-a case for a vote too. I would like to get this resolved quickly if we
-can though.
+>  So we only have Holger saying mtn can't merge the dreambox branch, and
+>  people ignoring what I said about the avr32 branch.
+>
+We would like to merge easily and branch cheaply. Obviously, mtn can
+cope with the latter and lacks in the first. Is that alone enough to
+move to hg or git?
 
-Timeframe wise, I liked Holger's end of the month deadline for actually
-doing things.
+I found this: http://utsl.gen.nz/talks/git-svn/intro.html, and I quote belo=
+w:
 
-> Oh - btw, lightweight branching implies working, reliable tools to
-> identify diffs and merge them, that's the part that really needs to be
-> considered rather than how easy it is to just create a branch.
+What Mercurial (=3DHg) has over git
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Agreed, although Holger has already compared git's merging capabilities
-to monotone...
+Mercurial is missing lightweight branches that makes git so powerful,
+and there is no content hashing, so it doesn't really do the whole
+"revision protocol" thing like git. This is why people like Ted T'so
+say "git has more legs".
 
-Cheers,
+However as a version control system in its own right, it's certainly
+one of the best. And if you consider that it is almost a twin brother
+of git, being written in response to Larry McVoy's Great Temper
+Tantrum=99 and its first release only a couple of weeks later than git's
+first release, and given all that it has achieved, it's an outstanding
+accomplishment.
 
-Richard
+Here are some of the reasons why.
 
+Portability and Consistency
+
+Mercurial, like Bazaar-NG, is written completely in Python (with some
+performance critical parts in C). So, if you like Python you might
+find that good. If you're on Windows it's probably a lot easier to get
+going. Hey, maybe it will even one day run on IronPython on .NET.
+Optimisation for the Cold Cache case
+
+In the "cold cache" case, git typically needs to load a lot of blocks
+to do some operations. Mercurial, on the other hand, gets away with
+far fewer seeks for them. This means it can be a lot faster - for
+instance, one use case that Mercurial is a lot faster is applying a
+ton of patches.
+
+In the "hot cache" case, git typically blows Mercurial out of the
+water, except for operations where git is having to do searches to get
+the data, like annotate.
+
+Bundle efficiency
+
+Mercurial's hg bundle does a really, really good job of making small
+packs. With the e2fsprogs repository, it managed to make a pack that
+was 50% smaller than the default git pack, and its default bundle was
+20% smaller than an agressively (and expensively) packed git pack.
+
+
+Regards,
+--=20
+Leon
 
 
