@@ -1,29 +1,36 @@
-Received: from [195.170.0.94] (helo=rosebud.otenet.gr ident=OTEnet-mail-system)
+Received: from [216.239.58.190] (helo=gv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1JZX2X-0004US-6p
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 20:55:12 +0100
-Received: from dias (athedsl-387391.home.otenet.gr [79.131.65.61])
-	by rosebud.otenet.gr (8.13.8/8.13.8/Debian-3) with ESMTP id
-	m2CJqwGG032458 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 21:52:59 +0200
-Message-Id: <200803121952.m2CJqwGG032458@rosebud.otenet.gr>
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Wed, 12 Mar 2008 21:52:36 +0200
-MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook, Build 11.0.5510
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
-In-Reply-To: <47D774A4.3040207@linuxdevelopment.de>
-thread-index: AciECRJ/j0DWAwgVROOX0dbIMd3hzwAb80gg
-X-SA-Exim-Connect-IP: 195.170.0.94
-X-SA-Exim-Mail-From: skoroneos@digital-opsis.com
+	(envelope-from <pmiscml@gmail.com>) id 1JZXAb-0004hP-W4
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Mar 2008 21:03:31 +0100
+Received: by gv-out-0910.google.com with SMTP id l14so1065933gvf.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Mar 2008 13:01:18 -0700 (PDT)
+Received: by 10.150.197.8 with SMTP id u8mr4764030ybf.182.1205352077215;
+	Wed, 12 Mar 2008 13:01:17 -0700 (PDT)
+Received: from widy.localdomain ( [88.231.54.215])
+	by mx.google.com with ESMTPS id j9sm7071527mue.6.2008.03.12.13.01.13
+	(version=SSLv3 cipher=OTHER); Wed, 12 Mar 2008 13:01:15 -0700 (PDT)
+Date: Wed, 12 Mar 2008 22:02:47 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: angstrom-distro-devel@linuxtogo.org
+Message-ID: <20080312220247.2d1891fd@widy.localdomain>
+In-Reply-To: <47D828CB.9080900@opensimpad.org>
+References: <47D8134C.5010704@opensimpad.org> <fr95ov$s0f$1@ger.gmane.org>
+	<20080312201143.32eb13d2@widy.localdomain>
+	<47D828CB.9080900@opensimpad.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 216.239.58.190
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Status: No, score=0.9 required=5.0 tests=AWL,RDNS_NONE,WEIRD_PORT
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Stuck with AVR32 segfaults in init
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [Angstrom-devel] [RFC] backport base_version_less_or_equal() (base.bbclass) from .dev to stable branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,79 +44,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 19:55:12 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Wed, 12 Mar 2008 20:03:31 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-FYI I won't be able to even look at avr32/OE for at least a month a half and
-Koen's stk1000 is in my office waiting to be unbricked :(
-With the amount (and type) of changes going into .dev these days it would
-have been a miracle if something was working without problems.
-Probably this could also be connected to the SCM issue but I think it would
-be wise in the future, to create separate branches when these kind of
-"infrastacture" changes are to be pushed to OE, so they could be tested
-before been merged with .dev.
+Hello,
 
+On Wed, 12 Mar 2008 20:02:35 +0100
+Bernhard Guillon <Bernhard.Guillon@opensimpad.org> wrote:
 
-Stelios S. Koroneos
-
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
- 
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@openembedded.org 
-> [mailto:openembedded-devel-bounces@openembedded.org] On 
-> Behalf Of Robert Worle
-> Sent: Wednesday, March 12, 2008 8:14 AM
-> To: openembedded-devel@openembedded.org
-> Cc: openembedded-devel@openembedded.org
-> Subject: Re: [oe] Stuck with AVR32 segfaults in init
-> 
-> 
-> > 
-> > If you take an OE binary and run it within a working 
-> filesystem from 
-> > whereever, what happens? If it segfaults there you may be able to 
-> > debug it. If it doesn't, try copying libs from OE into that system 
-> > until it breaks? That should at least tell you where the problem is.
-> 
-> Dear all
-> I was starting a oe build the day koen announced the merge 
-> and it went with some obstacles and finished the major libs 
-> nicely but i cant tell what i had to do to get past the uclibc parts.
-> 
-> I did then get a 0.9.28 based libs and apps which i now merge 
-> with a atmel bsp kernel and uClibc.
-> So i can now run all oe libs ( beside uClibc) with that and 
-> it feels wonderful. I am currently running the ngw100 with a 
-> 5.7 lcd attached and can get up a Xfbdev + gtk+ + x11vnc 
-> within the nand and nor ( totale of
-> 16 mb)  Hurray the power if footprinting of oe !!
-> 
-> 
-> But i am also stuck now redoing this and rebuilding a new oe 
-> toolchain for avr32 . I cant get pass the external-toolchain 
-> ERROR mentioned in some earlier mails.
-> I tried both oe uclibc 0.9.28 and 0.9.29 So i now have one 
-> tool chain up and running and i can go on to develop my 
-> target application but nobody is allowed to touch my laptop 
-> with that toolchain or he dies !!
-> 
-> Maybe we need some of the guru`s here to help us poor avr32 
-> small users to get the basic oe toolchain up and running and 
-> stable at least for the ucLibc part.
-> 
-> Robert
+> Paul Sokolovsky wrote:
 > >
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+> > Well, it's about base_version_less_or_equal() which indeed was added
+> > recently. I hope Bernhard will look up exact revision to pluck.
+> >
+> >
+> >   
+> Hello,
+> I am not sure about the exact revision. I am not that familiar with 
+> monotone. 
 
+Well, it's not that much about monotone as about revision control.
+Dealing with revisions is essence of it, and no matter what tool we'll
+use, we, humans, using these tools, will still deal with revisions.
 
+> While searching *ViewMTN* on openembedded.org I found this 
+> entry [1].  so revision is* *
+> 38f8ae6418f23fd2c13f29ecf5b41628ff3dedcd ?
+
+Well, why 38f... ? Your link contains 437..., and that's what the page
+has at the top (I might agree that ViewMTN UI is not the best, but
+it's not a reason to not read stuff it has).
+
+So, the revision is 43753505f023f7853afdd0f497c28ef65c4b2509 and you
+can verify that it contains the change you need with 
+
+mtn log --diffs --from 43753505f023f7853afdd0f497c28ef65c4b2509 --next 1
+
+The next step is to submit output of that command to
+angstrom-distro-devel list, with subject starting with "[Review]".
+Please do so next time - change control procedures work well if
+everyone follows them, not when few people do it for everyone else.
+
+For this time, let's assume that was done, +1 from me on the change, we
+have required 2 votes, and I push it next time I do plucks, if noone
+else will do that before.
+
+> 
+> best regards
+> Bernhard Guillon
+> 
+> 1 
+> http://www.openembedded.org:1081/revision/info/43753505f023f7853afdd0f497c28ef65c4b2509?q=viewmtn/revision/info/43753505f023f7853afdd0f497c28ef65c4b2509
+
+[]
+
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
