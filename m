@@ -1,31 +1,26 @@
-Received: from [212.75.37.82] (helo=dottedmag.net)
+Received: from [195.170.0.77] (helo=kane.otenet.gr ident=OTEnet-mail-system)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dottedmag@dottedmag.net>) id 1JZXt6-0002Cg-Lp
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Mar 2008 21:49:26 +0100
-Received: from frontier.dottedmag.net (unknown [92.125.214.233])
-	by dottedmag.net (Postfix) with ESMTP id 4DDDF8C005
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Mar 2008 02:46:26 +0000 (UTC)
-Received: from frontier.dottedmag.net (localhost [127.0.0.1])
-	by frontier.dottedmag.net (Postfix) with ESMTP id 232B91C4CF
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Mar 2008 02:47:17 +0600 (NOVT)
-From: Mikhail Gusarov <dottedmag@dottedmag.net>
-To: openembedded-devel@lists.openembedded.org
-References: <3908.1205354089@dls.net>
-Date: Thu, 13 Mar 2008 02:47:16 +0600
-In-Reply-To: <3908.1205354089@dls.net> (Mike Westerhof's message of "Wed, 12
-	Mar 2008 15:34:49 -0500")
-Message-ID: <87myp31xgr.fsf@frontier.dottedmag.net>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.60 (gnu/linux)
+	(envelope-from <skoroneos@digital-opsis.com>) id 1JZXwL-0002Mb-41
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 21:52:47 +0100
+Received: from dias (athedsl-387391.home.otenet.gr [79.131.65.61])
+	by kane.otenet.gr (8.13.8/8.13.8/Debian-3) with ESMTP id m2CKodU4010442
+	for <openembedded-devel@openembedded.org>;
+	Wed, 12 Mar 2008 22:50:39 +0200
+Message-Id: <200803122050.m2CKodU4010442@kane.otenet.gr>
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Wed, 12 Mar 2008 22:50:17 +0200
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.75.37.82
-X-SA-Exim-Mail-From: dottedmag@dottedmag.net
+X-Mailer: Microsoft Office Outlook, Build 11.0.5510
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
+In-Reply-To: <c384c5ea0803121326r631bf595v72126de8c7905835@mail.gmail.com>
+thread-index: AciEgCyoEInJZJhoQMiyLDIEPoTI+gAAlBGw
+X-SA-Exim-Connect-IP: 195.170.0.77
+X-SA-Exim-Mail-From: skoroneos@digital-opsis.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
-X-Spam-Level: **
-X-Spam-Status: No, score=2.2 required=5.0 tests=DNS_FROM_RFC_BOGUSMX, RDNS_NONE
-	autolearn=no version=3.2.3
+X-Spam-Level: 
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Reconsidering the work flow and how the SCM system fits in
@@ -42,33 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 20:49:26 -0000
-X-Groupsio-MsgNum: 4588
-Content-Type: multipart/signed; boundary="=-=-=";
-	micalg=pgp-sha1; protocol="application/pgp-signature"
+X-List-Received-Date: Wed, 12 Mar 2008 20:52:47 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
---=-=-=
-Content-Transfer-Encoding: quoted-printable
+> 
+> Proposal: Can we work with MTN and GIT, or MTN and HG in parallel?
+> I.e. each developer has to do everything DOUBLE, has two 
+> checkouts against two SCM systems, and then learn in practise 
+> what works best?
+> :-)
 
-Twas brillig at 15:34:49 12.03.2008 UTC-05 when Mike Westerhof did gyre and=
- gimble:
+The reasons we should not do something like that are better described here
+:)
+http://en.wikipedia.org/wiki/Sadism_and_masochism
 
- MW> How many people _NEED_ to know how to set up a server, versus how
- MW> many people need to know how to use the client tools?
+Stelios S. Koroneos
 
-Everyone who wants to publish changes.
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+ 
 
-=2D-=20
 
---=-=-=
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFH2EFVvse/O6JvVMgRAlwCAJ9MN819Nll7p2szVgCGRZvOSNq2bwCfXCjW
-Pyou1D8uyAORht74XoRli3w=
-=0Xop
------END PGP SIGNATURE-----
-
---=-=-=--
