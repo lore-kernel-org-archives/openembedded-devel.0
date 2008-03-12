@@ -1,45 +1,39 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZEcr-00068z-AU
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 01:15:23 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2C0DLcj029473
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 00:13:21 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 29440-01 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 00:13:16 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2C0DEZq029465
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 00:13:14 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20080312014043.572c6a26@widy.localdomain>
+	(envelope-from <pmiscml@gmail.com>) id 1JZF5t-0002vw-OM
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 01:45:23 +0100
+Received: by ug-out-1314.google.com with SMTP id q7so155232uge.0
+	for <openembedded-devel@openembedded.org>;
+	Tue, 11 Mar 2008 17:43:21 -0700 (PDT)
+Received: by 10.66.221.6 with SMTP id t6mr361578ugg.0.1205282600550;
+	Tue, 11 Mar 2008 17:43:20 -0700 (PDT)
+Received: from widy.localdomain ( [78.164.227.166])
+	by mx.google.com with ESMTPS id 19sm1692011ugl.13.2008.03.11.17.43.18
+	(version=SSLv3 cipher=OTHER); Tue, 11 Mar 2008 17:43:19 -0700 (PDT)
+Date: Wed, 12 Mar 2008 02:44:08 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: Richard Purdie <rpurdie@rpsys.net>
+Message-ID: <20080312024408.44d9192e@widy.localdomain>
+In-Reply-To: <1205280598.16531.26.camel@dax.rpnet.com>
 References: <200803110807.11368.zecke@selfish.org>
 	<200803111126.04715.openembedded@haerwu.biz>
-	<fr5ntp$n0v$1@ger.gmane.org>
-	<1205233201.4521.30.camel@dax.rpnet.com>
-	<20080311143030.68d6341b@widy.localdomain>
-	<1205239153.4521.53.camel@dax.rpnet.com>
-	<20080311150320.7c31b2f6@widy.localdomain>
-	<1205243052.4521.82.camel@dax.rpnet.com> <47D6AF65.1020007@am.sony.com>
-	<20080312014043.572c6a26@widy.localdomain>
-Date: Wed, 12 Mar 2008 00:13:17 +0000
-Message-Id: <1205280797.16531.29.camel@dax.rpnet.com>
+	<fr5ntp$n0v$1@ger.gmane.org> <20080311114938.GM30267@ibawizard.net>
+	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>
+	<20080311145739.GN30267@ibawizard.net>
+	<1205250588.4521.111.camel@dax.rpnet.com>
+	<20080312014945.4783ae6a@widy.localdomain>
+	<1205280598.16531.26.camel@dax.rpnet.com>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 66.249.92.175
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Cc: openembedded-devel@openembedded.org
 Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -54,41 +48,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 00:15:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 12 Mar 2008 00:45:23 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
+Hello,
 
-On Wed, 2008-03-12 at 01:40 +0200, Paul Sokolovsky wrote:
-> On Tue, 11 Mar 2008 09:12:21 -0700 Tim Bird <tim.bird@am.sony.com> wrote:
-> > Just a data point...
-> > Sony uses git as its in-house SCM for Linux-related work.
+On Wed, 12 Mar 2008 00:09:58 +0000
+Richard Purdie <rpurdie@rpsys.net> wrote:
+
+> On Wed, 2008-03-12 at 01:49 +0200, Paul Sokolovsky wrote:
+> > On Tue, 11 Mar 2008 15:49:48 +0000
+> > Richard Purdie <rpurdie@rpsys.net> wrote:
+> > > I asked around about hg and this did come up, you don't get cheap
+> > > branching like you do with git, you have to use a separate
+> > > directory/checkout per branch.
+> > > 
+> > > For anyone who's used git, cheap branching is a wonderful
+> > > thing[1].
+> > 
+> > I personally don't see anything wonderful in that, and glad that
+> > some orthodoxes share this point of view. Kernel people have it
+> > because they are poor, poor people who created hundreds of
+> > megabytes of entities and don't have big enough hdds to deal with
+> > them comfortably (and if they have, their users don't), so they
+> > must play such weird tricks as the need to evaporate current branch
+> > to work on another.
+> >
+> > I can call svn as witness - it supports both models. But I yet need
+> > to see someone who in sober mind and given a choice, would use "svn
+> > switch" back and forth instead of checking out needed branches to
+> > have them side by side.
 > 
-> Well, that's no wonder. Linux uses git, so everyone who does Linux
-> development uses git. But now people think that: 1) if Linux kernel
-> uses it, that everyone else must use it; 2) just as for many years
-> before people have been thinking that there's no other SCM except CVS
-> which can do better, then now they think there's no other DSCM except
-> GIT which can do better. 
+> svn switch is in no way similar to the way git's cheap branching
+> works.
+
+Doesn't it? That must be only due to my naivete regarding git's cheap
+branching. Because otherwise they would seem oh so similar to me - svn
+revisions are lightweight, any of them can be a tag, a branch, and you
+can do arbitrary travels in time and space with svn, all using one
+consistent interface.
+
+Well, eager to fix aforementioned naivete, I proceeded to google, and
+the first hit on the matter I got was good blog-talk we just recently
+discussed: http://blog.madism.org/index.php/2008/02/19/150-git-branches
+
+"but because they are a cheap operation, not in the SVN sense at all,
+but because a branch in git is a name, and 40 hexadecimal bytes". Yeah,
+that must be it! The reason why svn branches are in no way similar to
+git's!
+
+I did stop with this hit, preferring to stay with my naivete - it's
+just more comfortable to think of git as just yet another SCM with
+its own set of known issues, than as the center of the world, a magic
+tool to solve all development needs. Just my 2 cent opinion.
+
+
 > 
-> The last similarity is very striking, and let's just hope that we won't
-> have reasons to say something like "hopefully we can agree CVS is a
-> pretty bad SCM and that proves said entities don't know what
-> they're doing" in regard to GIT.
-
-In 10 years time we probably will have a better alternative. Thats fine,
-my computer is a bit different to the one I had 10 years ago too.
-
-Here and now, CVS is bad, git has a lot of positives.
-
-How about we goes back to the discussion at hand? Technical merits of
-git vs. hg or votes for not switching.
-
-Cheers,
-
-Richard
+> Cheers,
+> 
+> Richard
+> 
+> 
+> 
 
 
 
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
