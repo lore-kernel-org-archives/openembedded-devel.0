@@ -1,40 +1,33 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZN81-0003n4-CB
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 10:20:11 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2C9I2QD019244
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 09:18:02 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 19051-05 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 09:17:58 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2C9HtXd019235
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Wed, 12 Mar 2008 09:17:55 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200803120918.09502.zecke@selfish.org>
-References: <200803120827.29003.zecke@selfish.org>
-	<fr828g$l2n$1@ger.gmane.org> <fr82hj$l2n$2@ger.gmane.org>
-	<200803120918.09502.zecke@selfish.org>
-Date: Wed, 12 Mar 2008 09:17:54 +0000
-Message-Id: <1205313475.4530.4.camel@dax.rpnet.com>
+	(envelope-from <pmiscml@gmail.com>) id 1JZNEI-0000Jb-20
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Mar 2008 10:26:43 +0100
+Received: by ug-out-1314.google.com with SMTP id i24so332924ugd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Mar 2008 02:24:31 -0700 (PDT)
+Received: by 10.67.86.5 with SMTP id o5mr636944ugl.50.1205313871140;
+	Wed, 12 Mar 2008 02:24:31 -0700 (PDT)
+Received: from widy.localdomain ( [78.164.227.166])
+	by mx.google.com with ESMTPS id m1sm2631264uge.69.2008.03.12.02.24.28
+	(version=SSLv3 cipher=OTHER); Wed, 12 Mar 2008 02:24:29 -0700 (PDT)
+Date: Wed, 12 Mar 2008 11:25:08 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080312112508.6a963f28@widy.localdomain>
+In-Reply-To: <fr5mkp$h1b$1@ger.gmane.org>
+References: <fr5mkp$h1b$1@ger.gmane.org>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.5; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 66.249.92.175
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: staging ABI changes and broken idium
+Subject: Re: [Announce] OpenEmbedded stable branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -48,32 +41,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 09:20:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 12 Mar 2008 09:26:43 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2008-03-12 at 09:18 +0100, Holger Freyther wrote:
-> On Wednesday 12 March 2008 08:59:47 Koen Kooi wrote:
-> > Koen Kooi schreef:
+Hello,
+
+On Tue, 11 Mar 2008 11:24:24 +0100
+Koen Kooi <koen@dominion.kabel.utwente.nl> wrote:
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> > | (from gimp.inc)
-> > | do_configure_append() {
-> > | ~    find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
-> > | }
-> >
-> > Switching on my brain, the above isn't needed anymore, right?
+> Hi,
 > 
-> -I/usr/include is still bad (assuming it holds your system headers).
+> It seems a lot of people are unaware that there is a stable branch
+> where only review patches get applied:
+> 
+> org.openembedded.angstrom-2007.12-stable
 
-We want the -I/usr/include removed since we must not use system headers
-but we don't need any such include since sysroot or our standard CFLAGS
-will pick up staging. s:'-I$(includedir)'::g should therefore be ok.
+And this stable branch is not present at
+http://www.openembedded.org/filebrowser (which is
+http://www.openembedded.org -> "browse tree" in left navbar). I sent
+mail about this few weeks ago to the list and oe-core, with nor
+response or action.
 
-Cheers,
+And that "browse tree" link is inconsistently capitalized with respect
+to the other menu items, which on its own creates sloppy impression ;-).
 
-Richard
+> 
+> So I don't want to hear anymore of those "OE is unstable" or "There is
+> no stable branch" complaints anymore, mmmmkay ;)
+> 
+> regards,
+> 
+> Koen
+
+[]
 
 
-
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
