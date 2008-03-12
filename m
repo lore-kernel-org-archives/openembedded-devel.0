@@ -1,38 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [62.70.27.150] (helo=hoat.troll.no)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JZRyR-00057v-0X
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 15:30:44 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JZRwL-0002RM-47
-	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 14:28:21 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 14:28:21 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <tcooksey@trolltech.com>) id 1JZSL6-0001kk-9C
+	for openembedded-devel@openembedded.org; Wed, 12 Mar 2008 15:54:10 +0100
+Received: from hoat.troll.no (tedur.troll.no [62.70.27.154])
+	by hoat.troll.no (Postfix) with SMTP id BBBC540002
 	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Mar 2008 14:28:21 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 12 Mar 2008 15:51:50 +0100 (CET)
+Received: from sx01.troll.no (sx01.troll.no [62.70.27.21])
+	by hoat.troll.no (Postfix) with ESMTP id B5E47205F5
+	for <openembedded-devel@openembedded.org>;
+	Wed, 12 Mar 2008 15:51:50 +0100 (CET)
+Received: from sx01.troll.no (localhost.localdomain [127.0.0.1])
+	by sx01.troll.no (8.13.8/8.13.8) with ESMTP id m2CEpoJ9028955
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Mar 2008 15:51:50 +0100
+Received: from tomdev.troll.no (tomdev.troll.no [10.3.5.39])
+	by sx01.troll.no (Scalix SMTP Relay 11.3.0.11339)
+	via ESMTP; Wed, 12 Mar 2008 15:51:50 +0100 (CET)
+Date: Wed, 12 Mar 2008 15:51:49 +0100
+From: Tom Cooksey <thomas.cooksey@trolltech.com>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Wed, 12 Mar 2008 15:28:13 +0100
-Message-ID: <fr8p9u$8s0$1@ger.gmane.org>
+Message-ID: <200803121551.50037.thomas.cooksey@trolltech.com>
+In-Reply-To: <74d0deb30803120216y65be1b2cmaaaa9b2acf98ecee@mail.gmail.com>
 References: <47D71B8F.1030108@balister.org>
-	<f96d234e0803120708r3286e264w6fbd21e6381bc235@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <f96d234e0803120708r3286e264w6fbd21e6381bc235@mail.gmail.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <74d0deb30803120216y65be1b2cmaaaa9b2acf98ecee@mail.gmail.com>
+x-scalix-Hops: 1
+Organization: Trolltech
+User-Agent: KMail/1.9.7
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 62.70.27.150
+X-SA-Exim-Mail-From: tcooksey@trolltech.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -50,51 +50,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2008 14:30:50 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 12 Mar 2008 14:54:17 -0000
+Content-Type: text/plain;
+	charset="US-ASCII"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Cliff Brake schreef:
+> What is still unclear to me is how well a shared git repository with
+> push access for multiple parties is going to work. The mobile-linux
+> repository on serenity had some kind of permission trouble before we
+> added the group permission fixup in the post-update hook.
 
-| Mercurial looks very interesting and nice in many aspects, but I have
-| not used it yet.  It seems to me one of the fundamental differences is
-| the concept of cheap/easy local branches.  Mercurial is working on
-| something like that
-| (http://www.selenic.com/mercurial/wiki/index.cgi/LocalBranches), but
-| it is obviously not central to its philosophy like git .  The idea of
-| creating many local branches a normal port of your development
-| workflow seems unique to git.  As the gitmagic link below states, it
-| makes it very easy to switch context to fix a bug, and then resume
-| work on another feature.  This is a lot more than just "being good at
-| generating patches"; it is a change in the way we work.
+In Trolltech, we are currently "migrating" from perforce to git. At the
+moment my work-flow is to use git-p4 script to pull in changes from
+the central p4 repo. Then I use git locally with several different 
+branches (one for each area I'm working on). When I'm happy with
+something and want to push it into our main repo, I again use the
+git-p4 script.
 
-I can see how that's a good thing for what I call "traditional
-application development" where a bunch of source files get compiled into
-a single application (kernel, u-boot, xserver etc) where working on
-multiple things at once doesn't work, since it makes building and
-testing a nightmare. Easy branching solves that.
+This kindof hybrid style of working suits me pretty well as I know I
+can't mess anything up in the central repo with just git. :-) The git-p4
+script integrates the change history etc. so it's like working nativly
+with git. 
 
-But OE isn't like that, it's a collection of build descriptions, which
-makes it possible to be working on a 1000 different recipes at the same
-time. This also is one of the reasons why mtn is so slow for us: lots of
-files with a shortlived life spam and ±30 commits per day.
+I've also tried to push things with git and found it's pretty tough to 
+get right the first time you try.
 
-I like hg so much because it's the svn to monotones cvs: virtually
-identical UI, without the crap.
+I've noticed there are similar integration scripts for svn. Perhaps 
+there could be a "central" svn repo, then individual developers can use 
+git locally. You can still setup git remotes to cherry pick other people's 
+commits, if you need that.
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+As an OpenEmbedded newbie, one more thing I would say is this:
 
-iD8DBQFH1+h9MkyGM64RGpERAjc6AKCF0CIEIJml44MVR8xhuCxw4PwHIACfSnMh
-rMWrhQTsv+0T6E6f7qWDT8U=
-=lmbo
------END PGP SIGNATURE-----
+The learning curve for OpenEmbedded is huge. The documentation
+is rather sparce and I personally found trying to understand what's
+going on very difficult (I'm also a python newbie which probably 
+didn't help!). If you choose a well-known SCM system, it's one less 
+thing new potential developers need to learn. They have enough to 
+learn as it is.
 
+
+
+Cheers,
+
+Tom
+
+PS: Personally, I'd never heard of Hg until reading threads on this list.
 
 
