@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JZpP4-0001Fv-Ly
-	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 16:31:56 +0100
+	id 1JZpax-0001Wk-Vb
+	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 16:43:53 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JZpMw-0004R2-1u
-	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 15:29:22 +0000
+	id 1JZpYq-00050C-16
+	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 15:41:40 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 13 Mar 2008 15:29:22 +0000
+	Thu, 13 Mar 2008 15:41:40 +0000
 Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 13 Mar 2008 15:29:22 +0000
+	Thu, 13 Mar 2008 15:41:40 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Thu, 13 Mar 2008 16:29:01 +0100
-Message-ID: <frbh7t$cta$1@ger.gmane.org>
+Date: Thu, 13 Mar 2008 16:41:32 +0100
+Message-ID: <frbhvc$gg8$1@ger.gmane.org>
 References: <47D71B8F.1030108@balister.org>	<f96d234e0803120708r3286e264w6fbd21e6381bc235@mail.gmail.com>	<20080313101513.3e72ca08@widy.localdomain>
 	<f96d234e0803130726q446bb89dg3698e2cec8c675e3@mail.gmail.com>
 Mime-Version: 1.0
@@ -50,7 +50,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Mar 2008 15:32:01 -0000
+X-List-Received-Date: Thu, 13 Mar 2008 15:43:54 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -58,22 +58,37 @@ Content-Transfer-Encoding: 7bit
 Hash: SHA1
 
 Cliff Brake schreef:
-| matter of fact, I would love a good
-| excuse to learn hg.
 
-Hg has virtually the same UI as mtn, so "learning" is too big a word for
-it. "Stop my fingers from typing mtn" would be a better description :)
+| I still maintain that that tools do impact developer workflow, and
+| this should be a serious consideration when selecting tools.  What is
+| the workflow that will maximize the productivity and output of the OE
+| community?  The tool selection should follow.
+
+Having been through the bk->mtn switchover and the re-evaluation I
+noticed that people who said "I will start contributing (much more) to
+OE if you weren't using bitkeeper" didn't actually start contributing
+*at all*, so I'm extremely sceptical of the promised influx of a
+gazillion ISVs, OEMs, ODMs and users with a switch to hg/git/vss.
+
+All I can see is that the people taking care of the OE infrastructure
+(Mickey and me) will have to allocate some weeks to do a good
+changeover[1], and we both aren't known for our copious amounts of spare
+time that would be needed.
 
 regards,
 
 Koen
 
+[1] As it is, we were(are?) beginning the move of large parts of the
+existing infrastructure to a new machine, but that's put on hold[2] due
+to this discussion.
+[2] Yes, that's why you haven't seen any commits mails lately.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFH2Ug9MkyGM64RGpERAp2/AJ40JGyVn3WA8j1HTAsaD/AHEYntrQCfU8QP
-+bCNtz4VNbbsSbWJYkga5xU=
-=dmLn
+iD8DBQFH2UsrMkyGM64RGpERAlvcAJ92SgGXGs8amaDIN1ef+JAlxXtqmgCgqTkF
+4vrvx1JEyVXseQRAp7D2w1o=
+=594a
 -----END PGP SIGNATURE-----
 
 
