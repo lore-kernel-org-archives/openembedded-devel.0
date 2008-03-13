@@ -1,36 +1,44 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1JZtgf-0007ej-L4
-	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 21:06:04 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20080313200346.DGQC17042.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Thu, 13 Mar 2008 16:03:46 -0400
-Received: from opus ([68.230.58.230]) by fed1rmimpo03.cox.net with bizsmtp
-	id 0k371Z0064y2VvG0000000; Thu, 13 Mar 2008 16:03:07 -0400
-Date: Thu, 13 Mar 2008 13:03:47 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20080313200346.GJ30966@smtp.west.cox.net>
-References: <47D71B8F.1030108@balister.org>
-	<f96d234e0803120708r3286e264w6fbd21e6381bc235@mail.gmail.com>
-	<20080313101513.3e72ca08@widy.localdomain>
-	<f96d234e0803130726q446bb89dg3698e2cec8c675e3@mail.gmail.com>
-	<frbhvc$gg8$1@ger.gmane.org>
+	(envelope-from <gwossum@pager.net>) id 1JZu2J-0002SE-Vc
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Mar 2008 21:28:31 +0100
+X-ASG-Debug-ID: 1205439970-351000390000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from mail.pager.net (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 312911ECC8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Mar 2008 15:26:10 -0500 (CDT)
+Received: from mail.pager.net ([192.168.1.254]) by barracuda.pager.net with
+	ESMTP id QLm0MhhP9XGGGu3g for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Mar 2008 15:26:10 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by mail.pager.net with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 13 Mar 2008 14:21:15 -0500
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
+To: openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: Re: [oe] Eureka!  AVR32 ld-uClibc.so segfault solved
+Date: Thu, 13 Mar 2008 14:17:52 -0500
+User-Agent: KMail/1.9.7
+References: <200803121450.09688.geoffrey@pager.net>
+In-Reply-To: <200803121450.09688.geoffrey@pager.net>
 MIME-Version: 1.0
-In-Reply-To: <frbhvc$gg8$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-SA-Exim-Connect-IP: 68.230.241.43
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+Message-Id: <200803131417.52399.geoffrey@pager.net>
+X-OriginalArrivalTime: 13 Mar 2008 19:21:15.0484 (UTC)
+	FILETIME=[6807E1C0:01C8853F]
+X-Barracuda-Connect: UNKNOWN[192.168.1.254]
+X-Barracuda-Start-Time: 1205439970
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+X-SA-Exim-Connect-IP: 209.253.16.26
+X-SA-Exim-Mail-From: gwossum@pager.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Git versus Hg
+Subject: Re: Eureka! AVR32 ld-uClibc.so segfault solved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -44,33 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Mar 2008 20:06:05 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 13 Mar 2008 20:28:31 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thu, Mar 13, 2008 at 04:41:32PM +0100, Koen Kooi wrote:
-> Cliff Brake schreef:
-> 
-> | I still maintain that that tools do impact developer workflow, and
-> | this should be a serious consideration when selecting tools.  What is
-> | the workflow that will maximize the productivity and output of the OE
-> | community?  The tool selection should follow.
-> 
-> Having been through the bk->mtn switchover and the re-evaluation I
-> noticed that people who said "I will start contributing (much more) to
-> OE if you weren't using bitkeeper" didn't actually start contributing
-> *at all*, so I'm extremely sceptical of the promised influx of a
-> gazillion ISVs, OEMs, ODMs and users with a switch to hg/git/vss.
+On Wednesday 12 March 2008 02:50:09 pm Geoffrey Wossum wrote:
 
-As someone who (a) doesn't use / know mtn and (b) should submit more, or
-at least quicker, our changes, I can say you're right here.  I've been
-quite happy to grab current, whip out quilt, patch, file bugzilla &
-attach.  Now, if OE switches to git, I might make drop quilt in favor of
-git patch (since I still need to get better git-fu under my belt), and
-probably the same with hg.  But it won't impact how much / often I
-contribute at all.
+> I just tracked down the culprit for my AVR32 system always segfaulting
+> whenever ld-uClibc.so ran (usually as soon as the kernel attempted to run
+> the init process).
 
--- 
-Tom Rini
+I just submitted all my patches for the AVR32 to OE's bugzilla.  They are 
+attachments under bug #4062.
+
+These patches should let you build a bootable Angstrom 2008.1 AVR32 image 
+using gcc-4.2.1-atmel.1.3.0 and uClibc-0.9.29-atmel.1.
+
+All of the patches are straight forward, except for patch to uclibc.inc 
+(attachment #8196).  Some one who knows more about why CPU_CFLAGS and 
+OPTIMIZATION were being overridden by uclibc.inc needs to comment about the 
+effect this change would have on other platforms.  This is really the 
+important patch, since without it you can't build a working ld-uClibc.so.
+
+---
+Geoffrey
+
+
+
 
 
