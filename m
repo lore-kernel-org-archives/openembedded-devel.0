@@ -1,44 +1,42 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gwossum@pager.net>) id 1JZu2J-0002SE-Vc
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Mar 2008 21:28:31 +0100
-X-ASG-Debug-ID: 1205439970-351000390000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from mail.pager.net (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 312911ECC8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Mar 2008 15:26:10 -0500 (CDT)
-Received: from mail.pager.net ([192.168.1.254]) by barracuda.pager.net with
-	ESMTP id QLm0MhhP9XGGGu3g for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Mar 2008 15:26:10 -0500 (CDT)
-Received: from [192.168.1.71] ([192.168.1.1]) by mail.pager.net with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 13 Mar 2008 14:21:15 -0500
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] Eureka!  AVR32 ld-uClibc.so segfault solved
-Date: Thu, 13 Mar 2008 14:17:52 -0500
-User-Agent: KMail/1.9.7
-References: <200803121450.09688.geoffrey@pager.net>
-In-Reply-To: <200803121450.09688.geoffrey@pager.net>
-MIME-Version: 1.0
-Message-Id: <200803131417.52399.geoffrey@pager.net>
-X-OriginalArrivalTime: 13 Mar 2008 19:21:15.0484 (UTC)
-	FILETIME=[6807E1C0:01C8853F]
-X-Barracuda-Connect: UNKNOWN[192.168.1.254]
-X-Barracuda-Start-Time: 1205439970
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-X-SA-Exim-Connect-IP: 209.253.16.26
-X-SA-Exim-Mail-From: gwossum@pager.net
+	(envelope-from <rpurdie@rpsys.net>) id 1JZuLH-0002qw-Ag
+	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 21:48:02 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2DKjkq3011890;
+	Thu, 13 Mar 2008 20:45:46 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11787-03; Thu, 13 Mar 2008 20:45:42 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2DKjaBm011883
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 13 Mar 2008 20:45:37 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Paul Sokolovsky <pmiscml@gmail.com>
+In-Reply-To: <20080313210052.0878a0b7@widy.localdomain>
+References: <47D71B8F.1030108@balister.org>
+	<f96d234e0803120708r3286e264w6fbd21e6381bc235@mail.gmail.com>
+	<20080313101513.3e72ca08@widy.localdomain>
+	<1205407690.4547.29.camel@dax.rpnet.com>
+	<20080313210052.0878a0b7@widy.localdomain>
+Date: Thu, 13 Mar 2008 20:45:37 +0000
+Message-Id: <1205441137.4547.149.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Eureka! AVR32 ld-uClibc.so segfault solved
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Git versus Hg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -52,33 +50,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Mar 2008 20:28:31 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 13 Mar 2008 20:48:02 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday 12 March 2008 02:50:09 pm Geoffrey Wossum wrote:
+On Thu, 2008-03-13 at 21:00 +0200, Paul Sokolovsky wrote:
+> Sounds good. What I'm failing to grasp is where thresholds and tipping
+> points of this logic. Why feature1 which potentially risky but was
+> bound and restricted for specific usecase considered harmful, while
+> feature2 with similar characteristics don't raise much concern? As
+> usual for out-of-band questions, it's mostly rhetoric one.
 
-> I just tracked down the culprit for my AVR32 system always segfaulting
-> whenever ld-uClibc.so ran (usually as soon as the kernel attempted to run
-> the init process).
+I don't 100% follow, you mean when new features should be put on a
+branch and when they can be directly committed?
 
-I just submitted all my patches for the AVR32 to OE's bugzilla.  They are 
-attachments under bug #4062.
+> > An OE checkout here appears to weigh in at ~222MB. 
+> 
+> Aha, so I'm getting anachronic with this stuff - I kinda worn pink
+> glasses that our codebase still/is some tens of megabytes. Well, 200Mb
+> add weight to lightweight branches priority.
 
-These patches should let you build a bootable Angstrom 2008.1 AVR32 image 
-using gcc-4.2.1-atmel.1.3.0 and uClibc-0.9.29-atmel.1.
+Right :)
 
-All of the patches are straight forward, except for patch to uclibc.inc 
-(attachment #8196).  Some one who knows more about why CPU_CFLAGS and 
-OPTIMIZATION were being overridden by uclibc.inc needs to comment about the 
-effect this change would have on other platforms.  This is really the 
-important patch, since without it you can't build a working ld-uClibc.so.
+> I'm not that much of proposing to have multiple copies around, than
+> point that it's the most obvious way to deal with that, which people
+> have been using all the time. You rejected SVN parallel, but make me
+> come back to it in more explicit example:
+> 
+> Do you, or someone else of O-Hand folks have following setup:
+> 
+> -------
+> svn co http://svn.o-hand.com/repos/poky/trunk
+> then:
+> svn switch http://svn.o-hand.com/repos/poky/branches/blinky
+> or
+> svn switch http://svn.o-hand.com/repos/poky/branches/clyde
+> ...
+> then again
+> svn switch http://svn.o-hand.com/repos/poky/trunk
+> -------
+> 
+> vs
+> -------
+> svn co http://svn.o-hand.com/repos/poky/trunk
+> # Yes, all branches - customers may use any, so you probably want all
+> # branches easily accessible, right?
+> svn co http://svn.o-hand.com/repos/poky/branches
+> -------
 
----
-Geoffrey
+I actually have a full checkout and some symlinks which are kind of my
+"svn switch" :).
 
+> The 1st *is* the same in-place branch switching paradigm as git
+> (except that it of course won't blow your uncommitted changes, etc.)
+> Would you at least consider such workflow with SVN?
+
+I think you'd find "svn switch" explodes fairly easily since its not
+really designed to be used like that. Ignoring that, the IO (disk and
+net) involved in svn switch is very heavy and it takes a comparative age
+to run.
+
+> So, it the case that we need lightweight in-place branches and select
+> git, or select git, and use lightweight branches just becasue git
+> postulates (forces by authority?) such workflow?
+
+I use light weight branches in other projects (kernel work) and would
+love to be able to use them for OE. git doesn't force that way of
+working and you can still have multiple checkouts, just not many people
+actually do that. Why? Because its actually a really useful feature :).
+
+> And finally, there's still other alternative - for developers, to
+> moderate their appetite, choosing only some healthy food subset, giving
+> up on delicatessen which are so tasty for them, but can give stomach
+> problems to users. That's the hg alternative. And developers won't
+> necessary lose - they will skip the need to learn too complex and
+> peculiar stuff (As was pointed several times by Koen and me, one
+> doesn't really need to "learn" hg, at least to start working in
+> similar manner to what we have now, and more advanced use should come
+> in naturally either).
+> 
+> So, if you considered all these (and those) alternatives, compromises,
+> and criteria, and think that what git offers worth more complicated
+> learning and use curve for everyone in OE community, then that must be
+> it. It's different from assuming that git will win anyway, and not
+> caring about what entailments such choice will bring.
+
+I don't deny the git UI is horrible. I've just said I consider git's
+benefits in branching and the possible advantages an SCM in widespread
+use has enough to outweight the UI.
+
+> > This is why we now have things like staging ABI versioning. The user
+> > gets warned of the incompatibility. No its not perfect but some of us
+> > are already trying to address this kind of problem which already
+> > exists without the SCM consideration.
+> 
+> I'm glad that we're moving in that direction. That kinda shows that
+> we're not ready for that lightweight branches fully, but I'm glad
+> people are ready to make required changes fast, as empty dirs issue
+> shows. I just hope we're moving in that direction in consistent way. 
+>
+> In that regard, do you remember myself once proposing to make bitbake
+> cache files to contain cache version suffix, so concurrent bitbake
+> version can be used? You rejected that idea on the basis that
+> concurrent bitbake version usage shouldn't be supported at all. I hope
+> we see evolution in treating such cases. Not that the specific issue is
+> relevant now - we're long out of 1.6 vs 1.8 move, but one day there may
+> be 2.0, and it may become important again.
+
+There will be a 2.0 someday if I have anything to do with it :)
+
+On the subject of cache versioning, you would never want to run two
+bitbakes on the same work directory at the same time. The cache file
+acted as a kind of lock file against that although with the things in
+the path to the cache file we have now, that doesn't work as well as it
+once did.
+
+If you switch between two bitbake versions, a cache rebuild isn't likely
+to be too problematic or unreasonable though and that is the only real
+result.
+
+Just is case you don't realise, all recent versions of bitbake embed a
+version number in the cache and will ignore it and rebuild if that
+version isn't one they understand. This is part of the ongoing usability
+drive I'm doing my best to push.
+
+Cheers,
+
+Richard
 
 
 
