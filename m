@@ -1,27 +1,39 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1JZj9F-0003iP-Hq
-	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 09:50:54 +0100
-Received: (qmail 27445 invoked by uid 813007); 13 Mar 2008 08:48:40 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 13 Mar 2008 08:48:40 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Mar 2008 09:48:34 +0100
-User-Agent: KMail/1.9.9
-References: <200803110807.11368.zecke@selfish.org>
-	<1205358843.4530.22.camel@dax.rpnet.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JZjDh-0003qS-3d
+	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 09:55:27 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JZjBc-0002Dh-10
+	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 08:53:16 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Mar 2008 08:53:16 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 13 Mar 2008 08:53:16 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Thu, 13 Mar 2008 09:53:06 +0100
+Message-ID: <fraq1i$k6k$1@ger.gmane.org>
+References: <200803110807.11368.zecke@selfish.org>	<20080311114938.GM30267@ibawizard.net>	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>	<20080311145739.GN30267@ibawizard.net>	<1205250588.4521.111.camel@dax.rpnet.com>	<20080312014945.4783ae6a@widy.localdomain>	<1205280598.16531.26.camel@dax.rpnet.com>	<20080312024408.44d9192e@widy.localdomain>	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>	<fr997r$aat$1@ger.gmane.org>	<c384c5ea0803121326r631bf595v72126de8c7905835@mail.gmail.com>	<1205358843.4530.22.camel@dax.rpnet.com>
 	<fr9n05$sm7$1@ger.gmane.org>
-In-Reply-To: <fr9n05$sm7$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200803130948.35511.openembedded@haerwu.biz>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: openembedded@haerwu.biz
+	<1205369061.4530.65.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <1205369061.4530.65.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -39,44 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Mar 2008 08:50:55 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 13 Mar 2008 08:55:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia Wednesday 12 of March 2008, Koen Kooi napisa=B3:
-> Richard Purdie schreef:
-> | Whilst I think OE will always have a central master .dev repository I
-> | see a lot of gain from having branches. I would have happily put the
-> | sysroot changes into a branch and likewise the packaged-staging stuff
-> | I'm working on. As it is I'm keeping it locally uncommitted with no
-> | version tracking since I don't really want to play games with
-> | monotone.
->
-> Thank you for saying it right out: "I haven't tried to use branches in
-> mtn, ever".
-> So we only have Holger saying mtn can't merge the dreambox branch, and
-> people ignoring what I said about the avr32 branch.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I maintained MTN branches for quite long time (.oz354fam083 and .oz345x).=20
-I did not merged them with .dev (as they were for other stuff) but only=20
-cherrypicked some revisions .dev <> .oz354x/.oz345fam083.=20
+Richard Purdie schreef:
 
-There was one thing which I did not liked - MTN cared more about files and=
-=20
-their history then about content of those files. I remember situations=20
-when it was not possible to cherrypick one line change because there was=20
-few revisions difference between .oz354x and .dev versions.=20
-Patching .oz354x by hand was the only solution then.
+| You basically said that if you hadn't run "mtn propagate" every X days
+| you would have had an unmergable mess?
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+I didn't say that, because that isn't true
 
-     Free speech includes the right not to listen, if not interested=20
-                                                [Robert A. Heinlein]
+| The dreambox branch is unmergable because this hasn't been done?
 
+Actually the dreambox branch *is* mergable once you fix up the
+non-content conflicts[1].
+
+How do you get a non-content conflict: a file gets added on both
+branches seperately, so on each branch it gets a different node-id.
+Solution: 'mtn mv' or 'mtn drop' the file.
+
+What has happened in the dreambox branch: updates weren't done with
+propagate, but by copying over files and 'mtn add -R ; mtn commit'-ing them.
+
+The problem is that mtn developers fail to accept that silently merging
+node-ids is OK when the *contents* are the same.
+
+regards,
+
+Koen
+
+[1] there are a lot of them
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH2OtyMkyGM64RGpERAmKFAJwLaMVc8G9bJuiYu2R39e7uIsOCEgCgsS+N
+4wJwVmPa50Rj5cDiTuebTV4=
+=2ccG
+-----END PGP SIGNATURE-----
 
 
 
