@@ -1,42 +1,39 @@
-Received: from [193.33.178.145] (helo=inhex.net)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dion@inhex.net>) id 1JZvxl-0005aX-UY
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Mar 2008 23:31:54 +0100
-Received: from laptop.vpn ([192.168.250.6]:44327 helo=laptop.deb)
-	by inhex.net with esmtp (Exim 4.63) (envelope-from <dion@inhex.net>)
-	id 1JZvt8-0005HF-LN for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Mar 2008 00:27:04 +0200
-Received: from dion by laptop.deb with local (Exim 4.69)
-	(envelope-from <dion@inhex.net>) id 1JZvvl-0005un-0M
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Mar 2008 00:29:45 +0200
-Date: Fri, 14 Mar 2008 00:29:44 +0200
-From: Dmitry Nezhevenko <dion@inhex.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080313222944.GA17236@laptop.deb>
-References: <f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>
-	<20080311145739.GN30267@ibawizard.net>
-	<1205250588.4521.111.camel@dax.rpnet.com>
-	<20080312014945.4783ae6a@widy.localdomain>
-	<1205280598.16531.26.camel@dax.rpnet.com>
-	<20080312024408.44d9192e@widy.localdomain>
-	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>
-	<fr997r$aat$1@ger.gmane.org>
-	<1205356290.4530.7.camel@dax.rpnet.com>
-	<87ejaf1v4x.fsf@frontier.dottedmag.net>
-MIME-Version: 1.0
-In-Reply-To: <87ejaf1v4x.fsf@frontier.dottedmag.net>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-X-SA-Exim-Connect-IP: 193.33.178.145
-X-SA-Exim-Mail-From: dion@inhex.net
+	(envelope-from <rpurdie@rpsys.net>) id 1JZwlc-0002bE-2l
+	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 00:23:23 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2DNL83E022144
+	for <openembedded-devel@openembedded.org>; Thu, 13 Mar 2008 23:21:08 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 21742-10 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Mar 2008 23:21:02 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2DNL0bW022134
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Thu, 13 Mar 2008 23:21:00 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <frc8h9$auq$1@ger.gmane.org>
+References: <1205444019.4547.192.camel@dax.rpnet.com>
+	<frc8h9$auq$1@ger.gmane.org>
+Date: Thu, 13 Mar 2008 23:21:02 +0000
+Message-Id: <1205450462.4547.232.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Reconsidering the work flow and how the SCM system fits in
+Subject: Re: Packaged Staging - 'Current' Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,45 +47,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Mar 2008 22:31:55 -0000
-X-Groupsio-MsgNum: 4645
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LQksG6bCIzRHxTLp"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 13 Mar 2008 23:23:25 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---LQksG6bCIzRHxTLp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 2008-03-13 at 23:06 +0100, Koen Kooi wrote:
+> Richard Purdie schreef:
+> | As has been mentioned, I'm working on integrating packaged staging and
+> | its about time I mentioned the current status. I say 'current' as it
+> | applies to what I have offline, not what's in OE.dev.
+> 
+> I have a few questions that I can't deduce an answer to from your
+> description:
+> 
+> ~ * How does packaged-staging handle switching ANGSTROM_MODE?
+> 
+> If the packaged-staging-packages (p-s-ps) get seperated by target tuple
+> it should be ok, and if the p-s-ps dir can be overriden (e.g.
+> PS_STAGING_DIR = foo/bar/${ANGSTROM_MODE}) we should be safe as well.
 
-On Thu, Mar 13, 2008 at 03:37:34AM +0600, Mikhail Gusarov wrote:
-> Twas brillig at 21:11:30 12.03.2008 UTC+00 when Richard Purdie did gyre a=
-nd gimble:
->=20
->  >> while with hg it's just 'hg serve'.
->  RP> How do two hg servers interact?
->=20
-> They don't. It's a pull-, not push-model.
->=20
+To lift code from my copy of the .bbclass:
 
-However it's possible to create hook that will send command to remote
-server after repository update (for example via ssh with public-key auth.)
-to pull changes from master.
+PSTAGE_PKGVERSION = "${PV}-${PR}"
+PSTAGE_PKGARCH    = "${MULTIMACH_ARCH}"
+PSTAGE_EXTRAPATH  = ""
+PSTAGE_PKGPATH    = "${DISTRO}${PSTAGE_EXTRAPATH}"
+PSTAGE_PKGNAME 	  = "staging-${PN}_${PSTAGE_PKGVERSION}_${PSTAGE_PKGARCH}.ipk"
+PSTAGE_PKG        = "${DEPLOY_DIR_PSTAGE}/${PSTAGE_PKGPATH}/${PSTAGE_PKGNAME}"
 
---=20
-WBR, Dmitry
+I'm 100% sure this isn't right yet :). The intent of PSTAGE_EXTRAPATH is
+extra things needed can be injected by the distros. -cross and -native
+are handled by the class itself appending the tmpdir path into that
+variable (with / changed to -).
 
---LQksG6bCIzRHxTLp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
+So yes, overrides are available but if we can make it work out the box
+for everyone I will do that.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
+> ~ * do we have 'one' staging dir as we have now, or can each package have
+> its own staging dir built from its DEPENDS?
+>
+> I know that this largely depends on how fast/well we debug sysroot
+> stuff, but I'm curious how this is in your current design.
 
-iD8DBQFH2arY0T/aIlRaJQYRAqJzAJ4oRoNPPVoAicff9hWUTIFJAagmqwCdFEPp
-rDKxsxV5caUSmZZckoQq9cw=
-=tKFZ
------END PGP SIGNATURE-----
+One staging dir at the moment. Multiple staging directories are a
+headache for another time :).
 
---LQksG6bCIzRHxTLp--
+> ~ * will p-s.bbclass be package format agnostic, or are we going to
+> insist on opkg?
+> 
+> I know from experience that making it format agnostic isn't hard, only
+> tedious, but most of all subject to combinatorial explosion for
+> unit-testing. It also doesn't really matter, since p-s-ps are orthogonal
+> to the ones in deploy, but I can image OE-newbies freaking out over this.
+
+Good question. We're actually using so little of the package managers
+features I'm nearly tempted to write something custom in python. The
+benefit of that would be that no -native packages were needed as special
+cases.
+
+The current plan is to use ipkg/opkg and get something working, then
+consider optimisations from there. I might find ipkg.py and rip that
+apart...
+
+Cheers,
+
+Richard
+
+
+
+
