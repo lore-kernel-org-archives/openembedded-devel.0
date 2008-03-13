@@ -1,45 +1,32 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JZbab-0000jy-QW
-	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 01:46:35 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2D0iRgK010183
-	for <openembedded-devel@openembedded.org>; Thu, 13 Mar 2008 00:44:27 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09970-06 for <openembedded-devel@openembedded.org>;
-	Thu, 13 Mar 2008 00:44:23 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2D0iINh010174
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Thu, 13 Mar 2008 00:44:18 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <fr9n05$sm7$1@ger.gmane.org>
-References: <200803110807.11368.zecke@selfish.org>
-	<20080311114938.GM30267@ibawizard.net>
-	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>
-	<20080311145739.GN30267@ibawizard.net>
-	<1205250588.4521.111.camel@dax.rpnet.com>
-	<20080312014945.4783ae6a@widy.localdomain>
-	<1205280598.16531.26.camel@dax.rpnet.com>
-	<20080312024408.44d9192e@widy.localdomain>
-	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>
-	<fr997r$aat$1@ger.gmane.org>
-	<c384c5ea0803121326r631bf595v72126de8c7905835@mail.gmail.com>
-	<1205358843.4530.22.camel@dax.rpnet.com> <fr9n05$sm7$1@ger.gmane.org>
-Date: Thu, 13 Mar 2008 00:44:21 +0000
-Message-Id: <1205369061.4530.65.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	(envelope-from <rod@whitby.id.au>) id 1JZbcd-0000lk-7w
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Mar 2008 01:48:41 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id ACF1FC4F7C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Mar 2008 20:46:32 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Wed, 12 Mar 2008 20:46:32 -0400
+X-Sasl-enc: gibU0ziBFqgMXOZLyvg2pbt97A7/R04sdVKeKFHfoBzd 1205369191
+Received: from [172.18.92.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 3526FD1B7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Mar 2008 20:46:30 -0400 (EDT)
+Message-ID: <47D8793C.2050507@whitby.id.au>
+Date: Thu, 13 Mar 2008 11:15:48 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1718.1205362131@dls.net> <1205363882.4530.35.camel@dax.rpnet.com>
+In-Reply-To: <1205363882.4530.35.camel@dax.rpnet.com>
+X-SA-Exim-Connect-IP: 66.111.4.28
+X-SA-Exim-Mail-From: rod@whitby.id.au
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -57,66 +44,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Mar 2008 00:46:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 13 Mar 2008 00:48:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2008-03-12 at 23:54 +0100, Koen Kooi wrote:
-> Richard Purdie schreef:
-> | Whilst I think OE will always have a central master .dev repository I
-> | see a lot of gain from having branches. I would have happily put the
-> | sysroot changes into a branch and likewise the packaged-staging stuff
-> | I'm working on. As it is I'm keeping it locally uncommitted with no
-> | version tracking since I don't really want to play games with monotone.
-> 
-> Thank you for saying it right out: "I haven't tried to use branches in
-> mtn, ever".
+Richard Purdie wrote:
+> We have a core team and I guess the first step would be
+> to put it to a vote there and see where we stand? I'm open to other
+> ideas and possibly to representations from non core team developers with
+> a case for a vote too.
 
-That is not what I said. 
+The nslu2-linux project votes for git, for the following reasons:
 
-Branches in OE have stigma attached to them. Incidents like the zecke
-branch that made it onto the server which we had trouble removing didn't
-encourage people to experiment and personally I'm slightly paranoid
-about what I do in case things end up outside my local system which
-shouldn't. 
+1) Most of the nslu2 core team developers are already exposed to git due 
+to kernel work.  None of them that I know of are exposed to hg.  Yes, 
+that's a selfish position, and yes that means that we're arguing from a 
+position of ignorance with respect to hg.
 
-Steps may have been taken server side to reduce the chances of these
-things making it in. If so, that means creating and sharing a branch
-isn't easy (server side config has to be changed). If not, it means
-creation of branches on our master server isn't restricted and that
-could be an equal worry.
+2) None of the nslu2 core team developers have the bandwidth to learn 
+yet another SCM, purely for OE.  OE is a means to an end, not an end in 
+itself.  Yes, that's a selfish position.
 
-As for playing with branches, I did that as illustrated in the mail I
-sent at the end of January with total failure as I couldn't do what I
-needed. I have also played at other times but have never had enough
-confidence to use them.
+3) Git can support the multiple disconnected-but-syncing servers that 
+currently exist in the way that monotone.nslu2-linux.org and 
+monotone.openembedded.org work.  We cannot accept a single central 
+server model, and I haven't seen anyone state how hg supports the 
+multiple equal servers model yet.  But even if hg can support that 
+model, we've already dealt with multiple git servers and know how that 
+works, so we'd prefer not to need to set up a new system.  Yes, that's a 
+selfish position.
 
-I appreciate we now have suspend certificates which would be useful for
-solving some of the past problems and yes, the situation may be better
-now but the branch support isn't comparable to that in git. I also
-didn't know the main server supported suspend certificates until the
-start of this thread!
+4) All arguments against git so far seem to be either "an old version of 
+git ate my data" or "git used to be poorly documented".  None of these 
+arguments presented seem to be valid going forward in my opinion.
 
-I'm not actually that keen on git, monotone has just pushed too many of
-us over the edge, me included and this time around I'd like to see
-something in more widespread use being chosen. If you believe various
-arguments, git and hg are heading for convergence so in the long run it
-probably doesn't matter too much which we pick. Short term, git has
-features I'd like to use hg doesn't have.
+5) I've personally used git, and it does everything I would need it to 
+do for OE development.  I haven't used hg, and prefer not to need to 
+learn it, even if it did turn out to be technically better.  Yes, that's 
+a selfish position.
 
-> So we only have Holger saying mtn can't merge the dreambox branch, and
-> people ignoring what I said about the avr32 branch.
+So the summary is:
 
-You basically said that if you hadn't run "mtn propagate" every X days
-you would have had an unmergable mess? The dreambox branch is unmergable
-because this hasn't been done? This isn't an example of the SCM working
-well...
+Git is good enough, we already use it, so let's just use it for one more 
+purpose and get on with the real work.
 
-Cheers,
-
-Richard
-
-
-
+-- Rod
 
 
