@@ -1,29 +1,43 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1JZbcd-0000lk-7w
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Mar 2008 01:48:41 +0100
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id ACF1FC4F7C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2008 20:46:32 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Wed, 12 Mar 2008 20:46:32 -0400
-X-Sasl-enc: gibU0ziBFqgMXOZLyvg2pbt97A7/R04sdVKeKFHfoBzd 1205369191
-Received: from [172.18.92.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 3526FD1B7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2008 20:46:30 -0400 (EDT)
-Message-ID: <47D8793C.2050507@whitby.id.au>
-Date: Thu, 13 Mar 2008 11:15:48 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1718.1205362131@dls.net> <1205363882.4530.35.camel@dax.rpnet.com>
-In-Reply-To: <1205363882.4530.35.camel@dax.rpnet.com>
-X-SA-Exim-Connect-IP: 66.111.4.28
-X-SA-Exim-Mail-From: rod@whitby.id.au
+	(envelope-from <rpurdie@rpsys.net>) id 1JZbpb-0000xt-N7
+	for openembedded-devel@openembedded.org; Thu, 13 Mar 2008 02:02:09 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2D0xv0h010785
+	for <openembedded-devel@openembedded.org>; Thu, 13 Mar 2008 00:59:57 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 10574-05 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Mar 2008 00:59:53 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2D0xqBG010777
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Thu, 13 Mar 2008 00:59:52 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <47D872D7.4060404@whitby.id.au>
+References: <200803110807.11368.zecke@selfish.org>
+	<20080311114938.GM30267@ibawizard.net>
+	<f96d234e0803110712t6d88dfc6t521fdf39081e2c76@mail.gmail.com>
+	<20080311145739.GN30267@ibawizard.net>
+	<1205250588.4521.111.camel@dax.rpnet.com>
+	<20080312014945.4783ae6a@widy.localdomain>
+	<1205280598.16531.26.camel@dax.rpnet.com>
+	<20080312024408.44d9192e@widy.localdomain>
+	<c384c5ea0803121138r4bf89729t18c530b67e80c107@mail.gmail.com>
+	<fr997r$aat$1@ger.gmane.org>
+	<c384c5ea0803121326r631bf595v72126de8c7905835@mail.gmail.com>
+	<1205358843.4530.22.camel@dax.rpnet.com>
+	<47D872D7.4060404@whitby.id.au>
+Date: Thu, 13 Mar 2008 00:59:54 +0000
+Message-Id: <1205369994.4530.82.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
@@ -44,50 +58,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Mar 2008 00:48:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 13 Mar 2008 01:02:24 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> We have a core team and I guess the first step would be
-> to put it to a vote there and see where we stand? I'm open to other
-> ideas and possibly to representations from non core team developers with
-> a case for a vote too.
+On Thu, 2008-03-13 at 10:48 +1030, Rod Whitby wrote:
+> Richard Purdie wrote:
+> > Whilst I've argued against it in the past I would consider a move of
+> > bitbake from svn to git too.
+> 
+> I'd like to see bitbake made part of the *same* repository, since 
+> bitbake and OE are so intimately linked, and no-one uses bitbake for 
+> anything other than OE, and no-one uses OE with anything other than bitbake.
 
-The nslu2-linux project votes for git, for the following reasons:
+As I've said before I'm dead set against this. Bitbake was split from OE
+for good reason.
 
-1) Most of the nslu2 core team developers are already exposed to git due 
-to kernel work.  None of them that I know of are exposed to hg.  Yes, 
-that's a selfish position, and yes that means that we're arguing from a 
-position of ignorance with respect to hg.
+1. The code separation forces people to recognise the metadata and the
+tool parsing it are two separate things. One of OE's problems in the
+past has been the lack of clear definition between layers and keeping
+them separate makes the boundaries clear.
 
-2) None of the nslu2 core team developers have the bandwidth to learn 
-yet another SCM, purely for OE.  OE is a means to an end, not an end in 
-itself.  Yes, that's a selfish position.
+2. Assuming we have more branches for OE in the future, having a
+potentially different and incompatible copy of bitbake for each branch
+is a really bad idea.
 
-3) Git can support the multiple disconnected-but-syncing servers that 
-currently exist in the way that monotone.nslu2-linux.org and 
-monotone.openembedded.org work.  We cannot accept a single central 
-server model, and I haven't seen anyone state how hg supports the 
-multiple equal servers model yet.  But even if hg can support that 
-model, we've already dealt with multiple git servers and know how that 
-works, so we'd prefer not to need to set up a new system.  Yes, that's a 
-selfish position.
+3. Bitbake is its own project with releases and branches. It can't do
+that effectively if you combine it with OE. Different people use
+different branches of bitbake with OE.dev.
 
-4) All arguments against git so far seem to be either "an old version of 
-git ate my data" or "git used to be poorly documented".  None of these 
-arguments presented seem to be valid going forward in my opinion.
+4. Whilst its not happened, you could use bitbake for different metadata
+and I would welcome anyone doing that.
 
-5) I've personally used git, and it does everything I would need it to 
-do for OE development.  I haven't used hg, and prefer not to need to 
-learn it, even if it did turn out to be technically better.  Yes, that's 
-a selfish position.
+I'm not adverse to people having branches where bitbake and OE metadata
+are combined for ease of end user use, Poky would be an example. I agree
+there is a problem if the end user has to download multiple tools as it
+complicates the setup. I also agree the combining does create technical
+challenges with updating but with poky it is literally a case of copying
+the latest 1.8 release or sometimes 1.8 svn branch in.
 
-So the summary is:
+If we produce stable release tarballs, merging in a copy of bitbake
+would be something I'd support.
 
-Git is good enough, we already use it, so let's just use it for one more 
-purpose and get on with the real work.
+Cheers,
 
--- Rod
+Richard
+
 
 
