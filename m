@@ -1,30 +1,31 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JaFrU-0001AS-Mk
-	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 20:46:43 +0100
+	id 1JaHjx-0004LP-9r
+	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 22:47:06 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JaFpF-0000Kc-Vz
-	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 19:44:22 +0000
+	id 1JaHhi-0006s6-NI
+	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 21:44:42 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 14 Mar 2008 19:44:21 +0000
+	Fri, 14 Mar 2008 21:44:42 +0000
 Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 14 Mar 2008 19:44:21 +0000
+	Fri, 14 Mar 2008 21:44:42 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Fri, 14 Mar 2008 20:44:04 +0100
-Message-ID: <freki4$mko$1@ger.gmane.org>
-References: <47D71B8F.1030108@balister.org>
+Date: Fri, 14 Mar 2008 22:44:37 +0100
+Message-ID: <frerk5$fd5$1@ger.gmane.org>
+References: <1205444019.4547.192.camel@dax.rpnet.com>
+	<freb8c$k1p$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <47D71B8F.1030108@balister.org>
+In-Reply-To: <freb8c$k1p$1@ger.gmane.org>
 X-Enigmail-Version: 0.95.6
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.2
@@ -35,7 +36,7 @@ X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Git versus Hg
+Subject: Re: Packaged Staging - 'Current' Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,23 +50,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2008 19:46:43 -0000
+X-List-Received-Date: Fri, 14 Mar 2008 21:47:06 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Philip Balister schreef:
-| Given the only serious contenders for possible SCM's for OE appear to be
-| git or Hg, I am curious about the expertise level available on this list.
+Koen Kooi schreef:
+| Richard Purdie schreef:
+| | As has been mentioned, I'm working on integrating packaged staging and
+| | its about time I mentioned the current status. I say 'current' as it
+| | applies to what I have offline, not what's in OE.dev. I aim to commit
+| | some of it tomorrow but I also have some changes which should first be
+| | discussed, more on that below.
+| |
+| | Basically the current status is good.
 |
-| Basically, let us know if you use git or Hg on a regular basis in a two
-| way workflow and consider yourself knowledgeable on sorting out problems
-| that crop up.
+| There is a small problem with generating the ipkg arch file properly,
+| Richard and I are thinking about a solution.
 
-Hg can support git style local branches:
-http://www.selenic.com/mercurial/wiki/index.cgi/LocalbranchExtension
+A workaround is to change the staging_helper() method to something like
+this:
+
+staging_helper () {
+~        # Assemble appropriate ipkg.conf
+~        conffile=${PSTAGE_MACHCONFIG}
+~        mkdir -p ${DEPLOY_DIR_PSTAGE}/pstaging_lists
+~        if [ ! -e $conffile ]; then
+	  rm $conffile
+	fi
+~        ipkgarchs="${BUILD_ARCH} all any noarch ${TARGET_ARCH}
+${PACKAGE_ARCHS} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}"
+~        priority=1
+~        for arch in $ipkgarchs; do
+~                echo "arch $arch $priority" >> $conffile
+~                priority=$(expr $priority + 5)
+~        done
+}
+
+Attentive readers will notice that ${TARGET_ARCH} doesn't always hold
+the value we want.
 
 regards,
 
@@ -73,9 +98,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFH2tWEMkyGM64RGpERAgJaAJ9Y4DyCcyDvKVBYVkVWS8RGFoIFLQCgh2nB
-/ZNlKbbs2r+hkpctgQSnR5I=
-=9cPZ
+iD8DBQFH2vHFMkyGM64RGpERAu0KAKCyiD1o1JGKipSrvY7Dt6BPYqovxACgkxei
+KbZn4Mb+OZXJAP84Ra6Uo+s=
+=UR5q
 -----END PGP SIGNATURE-----
 
 
