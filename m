@@ -1,42 +1,41 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JaENd-0002cS-NG
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Mar 2008 19:11:53 +0100
-X-ASG-Debug-ID: 1205518168-570401160000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 2DD6E1FFC4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2008 13:09:28 -0500 (CDT)
-Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
-	ESMTP id 07XBwjHOt7gZYtzJ for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2008 13:09:28 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] Eureka! AVR32 ld-uClibc.so segfault solved
-Date: Fri, 14 Mar 2008 13:09:27 -0500
-User-Agent: KMail/1.9.7
-References: <200803121450.09688.geoffrey@pager.net>
-	<200803131417.52399.geoffrey@pager.net>
-	<c384c5ea0803141036w4f7254e6k28e0e7482487acb0@mail.gmail.com>
-In-Reply-To: <c384c5ea0803141036w4f7254e6k28e0e7482487acb0@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200803141309.27673.geoffrey@pager.net>
-X-Barracuda-Connect: UNKNOWN[192.168.1.1]
-X-Barracuda-Start-Time: 1205518168
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-X-SA-Exim-Connect-IP: 209.253.16.26
-X-SA-Exim-Mail-From: geoffrey@pager.net
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JaFrU-0001AS-Mk
+	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 20:46:43 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JaFpF-0000Kc-Vz
+	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 19:44:22 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 14 Mar 2008 19:44:21 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 14 Mar 2008 19:44:21 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Fri, 14 Mar 2008 20:44:04 +0100
+Message-ID: <freki4$mko$1@ger.gmane.org>
+References: <47D71B8F.1030108@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <47D71B8F.1030108@balister.org>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Eureka! AVR32 ld-uClibc.so segfault solved
+Subject: Re: Git versus Hg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,53 +49,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2008 18:11:54 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 14 Mar 2008 19:46:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 14 March 2008 12:36:46 pm Leon Woestenberg wrote:
-> Hello Geoffrey,
->
-> On Thu, Mar 13, 2008 at 8:17 PM, Geoffrey Wossum <geoffrey@pager.net> wrote:
-> > On Wednesday 12 March 2008 02:50:09 pm Geoffrey Wossum wrote:
-> > ...
-> >  I just submitted all my patches for the AVR32 to OE's bugzilla.  They
-> > are ...
-> >  All of the patches are straight forward, except for patch to uclibc.inc
-> >  (attachment #8196).  Some one who knows more about why CPU_CFLAGS and
-> >  OPTIMIZATION were being overridden by uclibc.inc needs to comment about
-> > the effect this change would have on other platforms.  This is really the
-> > important patch, since without it you can't build a working ld-uClibc.so.
->
-> Good question. I had a similar question about something that wasn't
-> trivial in the (uclibc) bitbake recipe.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm beginning to think no one actually remembers why this change was made.  I 
-located the comment for this change in monotone (it's from 2005-08-11):
+Philip Balister schreef:
+| Given the only serious contenders for possible SCM's for OE appear to be
+| git or Hg, I am curious about the expertise level available on this list.
+|
+| Basically, let us know if you use git or Hg on a regular basis in a two
+| way workflow and consider yourself knowledgeable on sorting out problems
+| that crop up.
 
----begin--
-This set of changes ensures that TARGET_CC_ARCH is passed reliably to all 
-packages in a build.  The change fixes problems in the following packages:
-<snip>
- | |   uclibc{,-initial}_0.9.27
-| | | TARGET_CC_ARCH added to the do_compile.  For the do_stage step the
-| | | build actually compiles target code (make utils), but this will not
-| | | accept a CC with whitespace.  The TARGET_CC_ARCH flags have therefore
-| | | been added to CFLAGS (a bit ugly, but it works).
----end---
+Hg can support git style local branches:
+http://www.selenic.com/mercurial/wiki/index.cgi/LocalbranchExtension
 
-My current opinion is that this may have been change made to help debug this 
-problem, but wasn't really part of the solution and wasn't intended to be in 
-the patch.
- 
-Even if this was really a fix for a problem on another platform, since it 
-breaks at least one platform (AVR32), it wasn't an optimal solution.   Since 
-the patch to stop overriding CPU_CFLAGS and OPTIMIZATIONS was applied, I 
-guess we'll found out soon if another platform need this :)
+regards,
 
----
-Geoffrey
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH2tWEMkyGM64RGpERAgJaAJ9Y4DyCcyDvKVBYVkVWS8RGFoIFLQCgh2nB
+/ZNlKbbs2r+hkpctgQSnR5I=
+=9cPZ
+-----END PGP SIGNATURE-----
+
 
 
