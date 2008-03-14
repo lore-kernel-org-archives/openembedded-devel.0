@@ -1,42 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JaHjx-0004LP-9r
-	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 22:47:06 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JaHhi-0006s6-NI
-	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 21:44:42 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 14 Mar 2008 21:44:42 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <trini@kernel.crashing.org>) id 1JaIAs-0004nS-UK
+	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 23:14:56 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20080314221230.XSOM17893.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Fri, 14 Mar 2008 21:44:42 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 14 Mar 2008 18:12:30 -0400
+Received: from opus ([68.230.58.230]) by fed1rmimpo01.cox.net with bizsmtp
+	id 1ACD1Z00S4y2VvG0000000; Fri, 14 Mar 2008 18:12:14 -0400
+Date: Fri, 14 Mar 2008 15:12:29 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Fri, 14 Mar 2008 22:44:37 +0100
-Message-ID: <frerk5$fd5$1@ger.gmane.org>
-References: <1205444019.4547.192.camel@dax.rpnet.com>
-	<freb8c$k1p$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <freb8c$k1p$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20080314221229.GX30966@smtp.west.cox.net>
+References: <200801131718.55872.risto@wapice.com>
+	<478A2F3A.4090402@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <478A2F3A.4090402@balister.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.13 (2006-08-11)
+X-SA-Exim-Connect-IP: 68.230.241.44
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Packaged Staging - 'Current' Status
+Subject: Re: large uImage size
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -50,58 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2008 21:47:06 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 Mar 2008 22:14:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sun, Jan 13, 2008 at 10:33:14AM -0500, Philip Balister wrote:
+> Risto Pajula wrote:
+> >Hello.
+> >
+> >I am getting very large kernel image size (~4,5 MB) when using the 
+> >cross-compiler built with a recent version of openembedded. Normal kernel 
+> >image size is around 1,5 MB. The large kernel image size only happens when 
+> >building the kernel outside the openembedded build environment, when 
+> >building with the normal OE build (bitbake minimal-image) the resulting 
+> >kernel image size is normal.
+> 
+> The newer version of binutils does this. This patch should solve the 
+> problem. I put this copy in linux/linux-davinci. I believe it has been 
+> sent upstream ...
 
-Koen Kooi schreef:
-| Richard Purdie schreef:
-| | As has been mentioned, I'm working on integrating packaged staging and
-| | its about time I mentioned the current status. I say 'current' as it
-| | applies to what I have offline, not what's in OE.dev. I aim to commit
-| | some of it tomorrow but I also have some changes which should first be
-| | discussed, more on that below.
-| |
-| | Basically the current status is good.
-|
-| There is a small problem with generating the ipkg arch file properly,
-| Richard and I are thinking about a solution.
+Old message, I know.  But, the upstream answer is a little different and
+is:
+http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=commit;h=1e621a8e3752367d4aae78a8ab00a18fb2793f34
 
-A workaround is to change the staging_helper() method to something like
-this:
-
-staging_helper () {
-~        # Assemble appropriate ipkg.conf
-~        conffile=${PSTAGE_MACHCONFIG}
-~        mkdir -p ${DEPLOY_DIR_PSTAGE}/pstaging_lists
-~        if [ ! -e $conffile ]; then
-	  rm $conffile
-	fi
-~        ipkgarchs="${BUILD_ARCH} all any noarch ${TARGET_ARCH}
-${PACKAGE_ARCHS} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}"
-~        priority=1
-~        for arch in $ipkgarchs; do
-~                echo "arch $arch $priority" >> $conffile
-~                priority=$(expr $priority + 5)
-~        done
-}
-
-Attentive readers will notice that ${TARGET_ARCH} doesn't always hold
-the value we want.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFH2vHFMkyGM64RGpERAu0KAKCyiD1o1JGKipSrvY7Dt6BPYqovxACgkxei
-KbZn4Mb+OZXJAP84Ra6Uo+s=
-=UR5q
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
 
 
