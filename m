@@ -1,31 +1,34 @@
-Received: from [64.233.178.242] (helo=hs-out-0708.google.com)
+Received: from [213.160.40.50] (helo=popeye1.ggamaur.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JaDrz-0007kB-Tr
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Mar 2008 18:39:11 +0100
-Received: by hs-out-0708.google.com with SMTP id 23so3323810hsn.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2008 10:36:46 -0700 (PDT)
-Received: by 10.100.248.9 with SMTP id v9mr23339788anh.64.1205516206762;
-	Fri, 14 Mar 2008 10:36:46 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Fri, 14 Mar 2008 10:36:46 -0700 (PDT)
-Message-ID: <c384c5ea0803141036w4f7254e6k28e0e7482487acb0@mail.gmail.com>
-Date: Fri, 14 Mar 2008 18:36:46 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200803131417.52399.geoffrey@pager.net>
+	(envelope-from <roger@bufferoverflow.ch>) id 1JaEAn-00085l-A0
+	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 18:58:36 +0100
+Received: from automat.bufferoverflow.ch (c-82-192-224-61.customer.ggaweb.ch
+	[82.192.224.61])
+	by popeye1.ggamaur.net (8.13.7/8.13.7/Submit) with ESMTP id
+	m2EHu95m045835 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Mar 2008 18:56:10 +0100 (CET)
+	(envelope-from roger@bufferoverflow.ch)
+Received: by automat.bufferoverflow.ch (Postfix, from userid 33)
+	id B159DF3F4; Fri, 14 Mar 2008 18:55:30 +0100 (CET)
+Received: from 194.56.133.3 ([194.56.133.3]) by www.bufferoverflow.ch
+	(Horde MIME library) with HTTP; Fri, 14 Mar 2008 18:55:30 +0100
+Message-ID: <20080314185530.bpxvumogsowc0s80@www.bufferoverflow.ch>
+X-Priority: 3 (Normal)
+Date: Fri, 14 Mar 2008 18:55:30 +0100
+From: Roger Meier <roger@bufferoverflow.ch>
+To: openembedded-devel@openembedded.org
 MIME-Version: 1.0
-References: <200803121450.09688.geoffrey@pager.net>
-	<200803131417.52399.geoffrey@pager.net>
-X-SA-Exim-Connect-IP: 64.233.178.242
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+User-Agent: Internet Messaging Program (IMP) H3 (4.1.3)
+X-Scanned-By: MIMEDefang 2.62 on 213.160.40.60
+X-SA-Exim-Connect-IP: 213.160.40.50
+X-SA-Exim-Mail-From: roger@bufferoverflow.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Eureka! AVR32 ld-uClibc.so segfault solved
+Subject: [PATCH]add missing backtrace support to arm gcc 4.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,35 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2008 17:39:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 Mar 2008 17:58:36 -0000
+Content-Type: text/plain;
+	charset=UTF-8;
+	DelSp="Yes";
+	format="flowed"
 Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-Hello Geoffrey,
+Do you like backtrace ? => that patch is for you!
+<http://www.gnu.org/software/libtool/manual/libc/Backtraces.html>
 
-On Thu, Mar 13, 2008 at 8:17 PM, Geoffrey Wossum <geoffrey@pager.net> wrote:
-> On Wednesday 12 March 2008 02:50:09 pm Geoffrey Wossum wrote:
-> ...
->  I just submitted all my patches for the AVR32 to OE's bugzilla.  They are
-> ...
->  All of the patches are straight forward, except for patch to uclibc.inc
->  (attachment #8196).  Some one who knows more about why CPU_CFLAGS and
->  OPTIMIZATION were being overridden by uclibc.inc needs to comment about the
->  effect this change would have on other platforms.  This is really the
->  important patch, since without it you can't build a working ld-uClibc.so.
->
-Good question. I had a similar question about something that wasn't
-trivial in the (uclibc) bitbake recipe.
+get it: http://bugs.openembedded.org/show_bug.cgi?id=4072
 
-Obviously, we need to comment the non-trivial parts a bit better while
-we review and/or commit to the more complex parts of the OE metadata,
-such as the toolchain.
+greetings
+roger
 
-Thanks for the work on the AVR32,
 
-Regards,
--- 
-Leon
+further information about the patch is here available:
+<http://sources.redhat.com/ml/libc-ports/2006-06/msg00045.html>
+<http://gcc.gnu.org/ml/gcc-patches/2006-06/msg00357.html>
+
+
+----------------------------------------------------------------
+This message was sent using IMP, the Internet Messaging Program.
+
 
 
