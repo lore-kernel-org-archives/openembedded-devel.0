@@ -1,34 +1,42 @@
-Received: from [213.160.40.50] (helo=popeye1.ggamaur.net)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roger@bufferoverflow.ch>) id 1JaEAn-00085l-A0
-	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 18:58:36 +0100
-Received: from automat.bufferoverflow.ch (c-82-192-224-61.customer.ggaweb.ch
-	[82.192.224.61])
-	by popeye1.ggamaur.net (8.13.7/8.13.7/Submit) with ESMTP id
-	m2EHu95m045835 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2008 18:56:10 +0100 (CET)
-	(envelope-from roger@bufferoverflow.ch)
-Received: by automat.bufferoverflow.ch (Postfix, from userid 33)
-	id B159DF3F4; Fri, 14 Mar 2008 18:55:30 +0100 (CET)
-Received: from 194.56.133.3 ([194.56.133.3]) by www.bufferoverflow.ch
-	(Horde MIME library) with HTTP; Fri, 14 Mar 2008 18:55:30 +0100
-Message-ID: <20080314185530.bpxvumogsowc0s80@www.bufferoverflow.ch>
-X-Priority: 3 (Normal)
-Date: Fri, 14 Mar 2008 18:55:30 +0100
-From: Roger Meier <roger@bufferoverflow.ch>
-To: openembedded-devel@openembedded.org
+	(envelope-from <geoffrey@pager.net>) id 1JaENd-0002cS-NG
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Mar 2008 19:11:53 +0100
+X-ASG-Debug-ID: 1205518168-570401160000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 2DD6E1FFC4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Mar 2008 13:09:28 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id 07XBwjHOt7gZYtzJ for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Mar 2008 13:09:28 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
+To: openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: Re: [oe] Eureka! AVR32 ld-uClibc.so segfault solved
+Date: Fri, 14 Mar 2008 13:09:27 -0500
+User-Agent: KMail/1.9.7
+References: <200803121450.09688.geoffrey@pager.net>
+	<200803131417.52399.geoffrey@pager.net>
+	<c384c5ea0803141036w4f7254e6k28e0e7482487acb0@mail.gmail.com>
+In-Reply-To: <c384c5ea0803141036w4f7254e6k28e0e7482487acb0@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) H3 (4.1.3)
-X-Scanned-By: MIMEDefang 2.62 on 213.160.40.60
-X-SA-Exim-Connect-IP: 213.160.40.50
-X-SA-Exim-Mail-From: roger@bufferoverflow.ch
+Message-Id: <200803141309.27673.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1205518168
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+X-SA-Exim-Connect-IP: 209.253.16.26
+X-SA-Exim-Mail-From: geoffrey@pager.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH]add missing backtrace support to arm gcc 4.1.2
+Subject: Re: Eureka! AVR32 ld-uClibc.so segfault solved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,30 +50,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2008 17:58:36 -0000
+X-List-Received-Date: Fri, 14 Mar 2008 18:11:54 -0000
 Content-Type: text/plain;
-	charset=UTF-8;
-	DelSp="Yes";
-	format="flowed"
-Content-Disposition: inline
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Do you like backtrace ? => that patch is for you!
-<http://www.gnu.org/software/libtool/manual/libc/Backtraces.html>
+On Friday 14 March 2008 12:36:46 pm Leon Woestenberg wrote:
+> Hello Geoffrey,
+>
+> On Thu, Mar 13, 2008 at 8:17 PM, Geoffrey Wossum <geoffrey@pager.net> wrote:
+> > On Wednesday 12 March 2008 02:50:09 pm Geoffrey Wossum wrote:
+> > ...
+> >  I just submitted all my patches for the AVR32 to OE's bugzilla.  They
+> > are ...
+> >  All of the patches are straight forward, except for patch to uclibc.inc
+> >  (attachment #8196).  Some one who knows more about why CPU_CFLAGS and
+> >  OPTIMIZATION were being overridden by uclibc.inc needs to comment about
+> > the effect this change would have on other platforms.  This is really the
+> > important patch, since without it you can't build a working ld-uClibc.so.
+>
+> Good question. I had a similar question about something that wasn't
+> trivial in the (uclibc) bitbake recipe.
 
-get it: http://bugs.openembedded.org/show_bug.cgi?id=4072
+I'm beginning to think no one actually remembers why this change was made.  I 
+located the comment for this change in monotone (it's from 2005-08-11):
 
-greetings
-roger
+---begin--
+This set of changes ensures that TARGET_CC_ARCH is passed reliably to all 
+packages in a build.  The change fixes problems in the following packages:
+<snip>
+ | |   uclibc{,-initial}_0.9.27
+| | | TARGET_CC_ARCH added to the do_compile.  For the do_stage step the
+| | | build actually compiles target code (make utils), but this will not
+| | | accept a CC with whitespace.  The TARGET_CC_ARCH flags have therefore
+| | | been added to CFLAGS (a bit ugly, but it works).
+---end---
 
+My current opinion is that this may have been change made to help debug this 
+problem, but wasn't really part of the solution and wasn't intended to be in 
+the patch.
+ 
+Even if this was really a fix for a problem on another platform, since it 
+breaks at least one platform (AVR32), it wasn't an optimal solution.   Since 
+the patch to stop overriding CPU_CFLAGS and OPTIMIZATIONS was applied, I 
+guess we'll found out soon if another platform need this :)
 
-further information about the patch is here available:
-<http://sources.redhat.com/ml/libc-ports/2006-06/msg00045.html>
-<http://gcc.gnu.org/ml/gcc-patches/2006-06/msg00357.html>
-
-
-----------------------------------------------------------------
-This message was sent using IMP, the Internet Messaging Program.
-
+---
+Geoffrey
 
 
