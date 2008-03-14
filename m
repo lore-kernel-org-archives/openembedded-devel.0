@@ -1,41 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.233.178.242] (helo=hs-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JaDNm-0002XS-OH
-	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 18:07:56 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JaDLV-0000nd-JF
-	for openembedded-devel@openembedded.org; Fri, 14 Mar 2008 17:05:29 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 14 Mar 2008 17:05:29 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 14 Mar 2008 17:05:29 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Fri, 14 Mar 2008 18:05:16 +0100
-Message-ID: <freb8c$k1p$1@ger.gmane.org>
-References: <1205444019.4547.192.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <1205444019.4547.192.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JaDrz-0007kB-Tr
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Mar 2008 18:39:11 +0100
+Received: by hs-out-0708.google.com with SMTP id 23so3323810hsn.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Mar 2008 10:36:46 -0700 (PDT)
+Received: by 10.100.248.9 with SMTP id v9mr23339788anh.64.1205516206762;
+	Fri, 14 Mar 2008 10:36:46 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Fri, 14 Mar 2008 10:36:46 -0700 (PDT)
+Message-ID: <c384c5ea0803141036w4f7254e6k28e0e7482487acb0@mail.gmail.com>
+Date: Fri, 14 Mar 2008 18:36:46 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200803131417.52399.geoffrey@pager.net>
+MIME-Version: 1.0
+References: <200803121450.09688.geoffrey@pager.net>
+	<200803131417.52399.geoffrey@pager.net>
+X-SA-Exim-Connect-IP: 64.233.178.242
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Packaged Staging - 'Current' Status
+Subject: Re: Eureka! AVR32 ld-uClibc.so segfault solved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,35 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2008 17:07:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 14 Mar 2008 17:39:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Geoffrey,
 
-Richard Purdie schreef:
-| As has been mentioned, I'm working on integrating packaged staging and
-| its about time I mentioned the current status. I say 'current' as it
-| applies to what I have offline, not what's in OE.dev. I aim to commit
-| some of it tomorrow but I also have some changes which should first be
-| discussed, more on that below.
-|
-| Basically the current status is good.
+On Thu, Mar 13, 2008 at 8:17 PM, Geoffrey Wossum <geoffrey@pager.net> wrote:
+> On Wednesday 12 March 2008 02:50:09 pm Geoffrey Wossum wrote:
+> ...
+>  I just submitted all my patches for the AVR32 to OE's bugzilla.  They are
+> ...
+>  All of the patches are straight forward, except for patch to uclibc.inc
+>  (attachment #8196).  Some one who knows more about why CPU_CFLAGS and
+>  OPTIMIZATION were being overridden by uclibc.inc needs to comment about the
+>  effect this change would have on other platforms.  This is really the
+>  important patch, since without it you can't build a working ld-uClibc.so.
+>
+Good question. I had a similar question about something that wasn't
+trivial in the (uclibc) bitbake recipe.
 
-There is a small problem with generating the ipkg arch file properly,
-Richard and I are thinking about a solution.
+Obviously, we need to comment the non-trivial parts a bit better while
+we review and/or commit to the more complex parts of the OE metadata,
+such as the toolchain.
 
-regards,
+Thanks for the work on the AVR32,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFH2rBMMkyGM64RGpERAqwqAJ4iGz6sfKZ0TU4Kon1ryeUP96k/3gCeMpqg
-uxAhUi26/OsGBQYWGPgXJjE=
-=pzoj
------END PGP SIGNATURE-----
-
+Regards,
+-- 
+Leon
 
 
