@@ -1,30 +1,31 @@
-Received: from [209.85.132.251] (helo=an-out-0708.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JairY-0006CP-2j
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Mar 2008 03:44:42 +0100
-Received: by an-out-0708.google.com with SMTP id b33so1052391ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Mar 2008 19:42:14 -0700 (PDT)
-Received: by 10.101.1.7 with SMTP id d7mr27997365ani.40.1205635334693;
-	Sat, 15 Mar 2008 19:42:14 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Sat, 15 Mar 2008 19:42:14 -0700 (PDT)
-Message-ID: <c384c5ea0803151942l7d944fd6u534fd1df4d730037@mail.gmail.com>
-Date: Sun, 16 Mar 2008 03:42:14 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1Janme-0008BW-7s
+	for openembedded-devel@openembedded.org; Sun, 16 Mar 2008 08:59:58 +0100
+Received: (qmail 9636 invoked by uid 813007); 16 Mar 2008 07:57:29 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 16 Mar 2008 07:57:29 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1205629164.4551.20.camel@dax.rpnet.com>
+Date: Sun, 16 Mar 2008 08:57:13 +0100
+User-Agent: KMail/1.9.9
+References: <19c1b8a90803132350x14a3496en8e921fae09cf9aff@mail.gmail.com>
+	<47DA38DF.6020307@adtelecom.es>
+	<19c1b8a90803151021g7d0eb612j1f37ce818c50ac47@mail.gmail.com>
+In-Reply-To: <19c1b8a90803151021g7d0eb612j1f37ce818c50ac47@mail.gmail.com>
 MIME-Version: 1.0
-References: <1205629164.4551.20.camel@dax.rpnet.com>
-X-SA-Exim-Connect-IP: 209.85.132.251
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Message-Id: <200803160857.14602.openembedded@haerwu.biz>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: openembedded@haerwu.biz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=-0.0 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gcc recipes cleanup
+Subject: Re: gnome-vfs-2.20.0 needs glib-2.0-2.14.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,21 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Mar 2008 02:44:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 16 Mar 2008 07:59:58 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Hello Richard,
+Dnia Saturday 15 of March 2008, Khem Raj napisa=B3:
+> Joaquim,
+>
+> I tried with 2.16.1 and it does not help either I end up in the same
+> message compiling gnome-vfs 2.20.0. I think we should stick to 2.14.x
+> if we are using gnome-2.20
+>
+> With newer version of gnome it might be ok.
 
-On Sun, Mar 16, 2008 at 1:59 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
->  I've threatened for a long time to clean up the mess the gcc recipes
->  were in.
+Poky has same problem after glib 2.16.1 upgrade. Upgrading gnome-vfs to=20
+2.22.0 resolved problem.
 
-Best threath ever, or should I say treat? :-)
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Regards,
--- 
-Leon
+                        If it works, don't fix it.
+                        		-- Sam Rayburn
+
+
 
 
