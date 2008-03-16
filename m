@@ -1,35 +1,39 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1JanyT-0008OA-Ax
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Mar 2008 09:12:11 +0100
-Received: by py-out-1112.google.com with SMTP id y77so4705447pyg.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Mar 2008 01:09:41 -0700 (PDT)
-Received: by 10.65.224.11 with SMTP id b11mr27632447qbr.42.1205654981614;
-	Sun, 16 Mar 2008 01:09:41 -0700 (PDT)
-Received: from ?192.168.1.204? ( [24.107.189.117])
-	by mx.google.com with ESMTPS id e16sm17526424qba.30.2008.03.16.01.09.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 16 Mar 2008 01:09:41 -0700 (PDT)
-Message-ID: <47DCD5BE.5010902@gmail.com>
-Date: Sun, 16 Mar 2008 03:09:34 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <19c1b8a90803132350x14a3496en8e921fae09cf9aff@mail.gmail.com>	<47DA38DF.6020307@adtelecom.es>	<19c1b8a90803151021g7d0eb612j1f37ce818c50ac47@mail.gmail.com>
-	<200803160857.14602.openembedded@haerwu.biz>
-In-Reply-To: <200803160857.14602.openembedded@haerwu.biz>
-X-SA-Exim-Connect-IP: 64.233.166.179
-X-SA-Exim-Mail-From: xjqian@gmail.com
+	(envelope-from <rpurdie@rpsys.net>) id 1JapeW-0000qx-DL
+	for openembedded-devel@openembedded.org; Sun, 16 Mar 2008 10:59:42 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2G9vE1r015456
+	for <openembedded-devel@openembedded.org>; Sun, 16 Mar 2008 09:57:14 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15296-06 for <openembedded-devel@openembedded.org>;
+	Sun, 16 Mar 2008 09:57:09 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2G9v6Wd015444
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Sun, 16 Mar 2008 09:57:06 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <19c1b8a90803151937i6a7113abxdd4452db2d2eaa4a@mail.gmail.com>
+References: <1205629164.4551.20.camel@dax.rpnet.com>
+	<19c1b8a90803151937i6a7113abxdd4452db2d2eaa4a@mail.gmail.com>
+Date: Sun, 16 Mar 2008 09:57:05 +0000
+Message-Id: <1205661425.4524.3.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 194.106.48.114
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.0 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gnome-vfs-2.20.0 needs glib-2.0-2.14.x
+Subject: Re: gcc recipes cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,33 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Mar 2008 08:12:11 -0000
-Content-Type: text/plain; charset=ISO-8859-2; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 16 Mar 2008 09:59:43 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On 03/16/2008 02:57 AM, Marcin Juszkiewicz wrote:
-> Dnia Saturday 15 of March 2008, Khem Raj napisa³:
->> Joaquim,
->>
->> I tried with 2.16.1 and it does not help either I end up in the same
->> message compiling gnome-vfs 2.20.0. I think we should stick to 2.14.x
->> if we are using gnome-2.20
->>
->> With newer version of gnome it might be ok.
+Hi,
+
+On Sat, 2008-03-15 at 19:37 -0700, Khem Raj wrote:
+> Here is what I am getting
 > 
-> Poky has same problem after glib 2.16.1 upgrade. Upgrading gnome-vfs to 
-> 2.22.0 resolved problem.
-> 
+> ERROR: Could not include required file gcc-cross-kernel.inc while
+> parsing /local/sandbox/openembedded/org.openembedded.dev/packages/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb
 
-hrw,
+Sorry, I'd missed out and mtn add. The missing file has now made it into
+the repository.
 
-Would you take a look at oebug 4061 and apply?
+Cheers,
 
-http://bugs.openembedded.net/show_bug.cgi?id=4061
-
-Regards
-Gordon
-
+Richard
 
 
 
