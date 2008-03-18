@@ -1,32 +1,37 @@
-Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <summatusmentis@gmail.com>) id 1Jba5Y-00031x-QV
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Mar 2008 12:34:42 +0100
-Received: by wa-out-1112.google.com with SMTP id l24so8698145waf.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2008 04:34:37 -0700 (PDT)
-Received: by 10.114.13.1 with SMTP id 1mr1430532wam.4.1205840077569;
-	Tue, 18 Mar 2008 04:34:37 -0700 (PDT)
-Received: from beatitas.local ( [72.168.202.219])
-	by mx.google.com with ESMTPS id 62sm31115745wri.30.2008.03.18.04.34.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 18 Mar 2008 04:34:36 -0700 (PDT)
-Message-ID: <47DFA8BB.7000902@gmail.com>
-Date: Tue, 18 Mar 2008 07:34:19 -0400
-From: Jacob Thebault-Spieker <summatusmentis@gmail.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JbaDh-0003AE-N0
+	for openembedded-devel@openembedded.org; Tue, 18 Mar 2008 12:43:10 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JbaDc-0001ab-Ss
+	for openembedded-devel@openembedded.org; Tue, 18 Mar 2008 11:43:00 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 18 Mar 2008 11:43:00 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 18 Mar 2008 11:43:00 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Tue, 18 Mar 2008 12:42:48 +0100
+Message-ID: <fro9ro$gv6$1@ger.gmane.org>
+References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>	<200803181056.43273.openembedded@haerwu.biz>	<fro4dk$tut$1@ger.gmane.org>
-	<fro6b3$4qo$1@ger.gmane.org>
-In-Reply-To: <fro6b3$4qo$1@ger.gmane.org>
+In-Reply-To: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>
 X-Enigmail-Version: 0.95.6
-X-SA-Exim-Connect-IP: 209.85.146.179
-X-SA-Exim-Mail-From: summatusmentis@gmail.com
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -44,79 +49,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2008 11:34:43 -0000
-X-Groupsio-MsgNum: 4675
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig3CFF82B369138B4F81108688"
+X-List-Received-Date: Tue, 18 Mar 2008 11:43:10 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig3CFF82B369138B4F81108688
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Don't know if my opinion matters that much, but +1 from me
+Koen Kooi schreef:
+| Hi,
+|
+| Poky just switched to opkg and removed ipkg completely, which I think is
+| a good thing, but here's a less drastic patch for OE.
+|
+| Executive summary: you still get .ipk packages, just as before, only
+| your rootfs ends up with opkg.  Things like sharprom-compat and
+| wrt54g-oe will continue to work just as before.
 
---
-Jacob Thebault-Spieker
-Cell: (207) 717-5114
+Current version with comments from Richard and Marcin addressed:
 
+http://dominion.thruhere.net/koen/OE/opkg/opkg-r7.patch
 
-Koen Kooi wrote:
-> Koen Kooi schreef:
-> | Marcin Juszkiewicz schreef:
-> |
-> | | Few things:
-> | |
-> | | 1. There is no such thing as 'opkg-utils' - we still use
-> | ipkg-utils-native
-> | |    for creating packages.
-> |
-> | fixed
-> |
-> | | 2. You missed image.bbclass change:
-> | |
-> | | --- a/trunk/meta/classes/image.bbclass
-> | | +++ b/trunk/meta/classes/image.bbclass
-> | | @@ -85,8 +85,6 @@ fakeroot do_rootfs () {
-> | |
-> | |      insert_feed_uris
-> | |
-> | | -    rm -f ${IMAGE_ROOTFS}${libdir}/ipkg/lists/*
-> | | -
-> | |      ${IMAGE_PREPROCESS_COMMAND}
-> | |
-> | |      export TOPDIR=3D${TOPDIR}
-> | |
-> | | 3. Meta/meta-toolchain.bb recipe also use ipkg and this also was ch=
-anged
-> | |    in Poky.
-> | |
-> | | 4. You did not set SRCREV for opkg-sdk recipe.
-> |
-> | attached is a version with a less restricted diff.
->=20
-> And as a bonus:
->=20
-> http://rafb.net/p/mDhfsf98.txt
+regards,
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
---------------enig3CFF82B369138B4F81108688
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.8 (Darwin)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAkffqMAACgkQtXjjJ1zu9YCWsQCdGsU7HF+6E9GFbumnUvxQ4bBR
-hwsAoKtbR8cj5onPmw9sxaKx4bhpOn9U
-=yzcg
+iD8DBQFH36q4MkyGM64RGpERAqPSAJ0acfcg7amBlmepC8G/U5Hqe/H/GwCfVaEq
+InhHTygWuDEDeSdwYzN14gQ=
+=d8at
 -----END PGP SIGNATURE-----
 
---------------enig3CFF82B369138B4F81108688--
+
+
