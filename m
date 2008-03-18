@@ -1,33 +1,40 @@
-Received: from [212.75.37.82] (helo=dottedmag.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dottedmag@dottedmag.net>) id 1JbgOJ-0007cx-EW
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Mar 2008 19:18:29 +0100
-Received: from frontier.dottedmag.net (unknown [92.125.214.233])
-	by dottedmag.net (Postfix) with ESMTP id 8E7958C005
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Mar 2008 00:16:45 +0000 (UTC)
-Received: from frontier.dottedmag.net (localhost [127.0.0.1])
-	by frontier.dottedmag.net (Postfix) with ESMTP id 0B1251C4B7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Mar 2008 00:18:26 +0600 (NOVT)
-From: Mikhail Gusarov <dottedmag@dottedmag.net>
-To: openembedded-devel@lists.openembedded.org
-References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>
-	<200803180849.21108.geoffrey@pager.net> <frojpb$m6j$1@ger.gmane.org>
-	<20080318181236.GF30966@smtp.west.cox.net>
-Date: Wed, 19 Mar 2008 00:18:25 +0600
-In-Reply-To: <20080318181236.GF30966@smtp.west.cox.net> (Tom Rini's message of
-	"Tue, 18 Mar 2008 11:12:36 -0700")
-Message-ID: <87fxunkia6.fsf@frontier.dottedmag.net>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.60 (gnu/linux)
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.75.37.82
-X-SA-Exim-Mail-From: dottedmag@dottedmag.net
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JbgjX-00049w-Ll
+	for openembedded-devel@openembedded.org; Tue, 18 Mar 2008 19:40:29 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JbgjT-0007KL-3W
+	for openembedded-devel@openembedded.org; Tue, 18 Mar 2008 18:40:19 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 18 Mar 2008 18:40:19 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 18 Mar 2008 18:40:19 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Tue, 18 Mar 2008 19:40:11 +0100
+Message-ID: <frp2aa$2j5$1@ger.gmane.org>
+References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>	<200803180849.21108.geoffrey@pager.net>
+	<frojpb$m6j$1@ger.gmane.org>	<20080318181236.GF30966@smtp.west.cox.net>
+	<87fxunkia6.fsf@frontier.dottedmag.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <87fxunkia6.fsf@frontier.dottedmag.net>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
-X-Spam-Level: **
-X-Spam-Status: No, score=2.2 required=5.0 tests=DNS_FROM_RFC_BOGUSMX, RDNS_NONE
-	autolearn=no version=3.2.3
+X-Spam-Level: 
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] move to opkg
@@ -44,42 +51,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2008 18:18:30 -0000
-X-Groupsio-MsgNum: 4683
-Content-Type: multipart/signed; boundary="=-=-=";
-	micalg=pgp-sha1; protocol="application/pgp-signature"
+X-List-Received-Date: Tue, 18 Mar 2008 18:40:29 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-=-=
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Twas brillig at 11:12:36 18.03.2008 UTC-07 when Tom Rini did gyre and gimbl=
-e:
+Mikhail Gusarov schreef:
+| Twas brillig at 11:12:36 18.03.2008 UTC-07 when Tom Rini did gyre and
+gimble:
+|
+|  TR> So:
+|  TR> - Maintained system (yay)
+|  TR> - PGP signing
+|
+|  TR> Anything else, yet?
+|
+| http://wiki.openmoko.org/wiki/Opkg
+|
+| From "New Features":
+|
+| * Mark packages that were installed to satisfy dependancies (auto
+installed)
+| * Additional command line option to remove "auto installed" packages
+| * Support for faceted classification (similar to debtags)
 
- TR> So:
- TR> - Maintained system (yay)
- TR> - PGP signing
+And medium-term I hope this patch gets ported to ipkg:
 
- TR> Anything else, yet?
+https://dev.openwrt.org/browser/trunk/package/busybox/patches/524-memory_usage.patch?rev=10125
 
-http://wiki.openmoko.org/wiki/Opkg
+regards,
 
-From=20"New Features":
-
-* Mark packages that were installed to satisfy dependancies (auto installed)
-* Additional command line option to remove "auto installed" packages
-* Support for faceted classification (similar to debtags)
-
-=2D-=20
-
---=-=-=
-Content-Type: application/pgp-signature
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFH4Adxvse/O6JvVMgRAg/2AKCisM8rvI22AH5wqbb/9+GzNhossACaAyYD
-V7uFICTy8D4GlqD8Jp671PA=
-=wH0s
+iD8DBQFH4AyLMkyGM64RGpERAqUpAJ4iokTOFFhXStpP59lszHoEqxPIlgCePyMu
+p4CUez+wnMnNUqk61zdQtFs=
+=gopi
 -----END PGP SIGNATURE-----
 
---=-=-=--
+
+
