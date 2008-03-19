@@ -1,33 +1,41 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Jc2yL-0003Qe-4U
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Mar 2008 19:25:14 +0100
-Received: from [212.23.103.42] (helo=[10.129.170.101])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1Jc2yK-000887-K9
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Mar 2008 19:25:09 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Mar 2008 16:10:47 +0100
-User-Agent: KMail/1.9.9
-References: <200803182311.01445.zecke@selfish.org>
-	<200803191143.05167.zecke@selfish.org> <frqri1$9l5$1@ger.gmane.org>
-In-Reply-To: <frqri1$9l5$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200803191610.48074.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.42
-X-SA-Exim-Connect-IP: 81.169.183.159
-X-SA-Exim-Mail-From: zecke@selfish.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Jc7LC-0007xz-BN
+	for openembedded-devel@openembedded.org; Thu, 20 Mar 2008 00:05:08 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Jc6je-00009b-LM
+	for openembedded-devel@openembedded.org; Wed, 19 Mar 2008 22:26:15 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 19 Mar 2008 22:26:14 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 19 Mar 2008 22:26:14 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Wed, 19 Mar 2008 23:26:04 +0100
+Message-ID: <frs3tr$a48$1@ger.gmane.org>
+References: <3D9ECBB5-7C37-4D62-8D15-F2F0673EB867@student.utwente.nl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <3D9ECBB5-7C37-4D62-8D15-F2F0673EB867@student.utwente.nl>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
-X-Spam-Level: *
-X-Spam-Status: No, score=1.9 required=5.0 tests=AWL,DATE_IN_PAST_03_06,
-	RCVD_IN_BL_SPAMCOP_NET,RDNS_NONE autolearn=no version=3.2.3
+X-Spam-Level: 
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The tzdata package and a bug with tzdata-dbg
+Subject: Re: [RFC] error out on .la files pointing to ${WORKDIR}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,21 +49,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Mar 2008 18:25:14 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 19 Mar 2008 23:05:13 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday 19 March 2008 11:57:05 Koen Kooi wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> It won't, unless you removed this from bitbake.conf:
->
-> ALLOW_EMPTY_${PN}-dbg = "1"
+Koen Kooi schreef:
+| Hi,
+|
+| Things in stagin (e.g. .la files) point to ${WORKDIR} are broken and
+| should die. If we want packaged-staging and rm_work to function we
+| need to fix them. Since we are all lazy we need some incentive:
+|
+| #
+| # old_revision [85e676eb4b64d66cb74acf6220f10c3942e2bd29]
+| #
+| # patch "classes/insane.bbclass"
+| #  from [0712df99743c442ed311e6b4d4be0d28f29d525f]
+| #    to [fa6b704f402965c8123dfa90527b5a11a8cd3288]
+| #
+| ============================================================
+| --- classes/insane.bbclass      0712df99743c442ed311e6b4d4be0d28f29d525f
+| +++ classes/insane.bbclass      fa6b704f402965c8123dfa90527b5a11a8cd3288
+| @@ -178,7 +178,7 @@ def package_qa_make_fatal_error(error_cl
+|
+|       TODO: Load a whitelist of known errors
+|       """
+| -    return not error_class in [0, 5, 7, 8]
+| +    return not error_class in [0, 5, 7]
+|
+|   def package_qa_write_error(error_class, name, path, d):
+|       """
 
-eeek, thank you! I hope you merged it the right way. :)
+I'm confident that the work done today catches the most used offenders,
+so the patch has been pushed:
+
+Commit by koen on org.oe.dev :: r0b604857... / :
+insane bbclass: add '8' (.la references workdir) to list of fatal errors
+this will also trigger on broken libtool archives already present in
+staging. If you get hit by this: rebuild the offending recipes or do a
+clean rebuild
 
 
-z.
+
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH4ZL7MkyGM64RGpERAre3AKCc7wXSp20R2o3QIeZt6CsVtgUcwwCcCt9G
+4f6/cyes/PAY3Me99kqzdx8=
+=40eF
+-----END PGP SIGNATURE-----
+
 
 
