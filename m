@@ -1,29 +1,41 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1JbxyZ-0002qa-50
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Mar 2008 14:05:10 +0100
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id EC8146280DF;
-	Wed, 19 Mar 2008 14:05:02 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <frr19p$t15$1@ger.gmane.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Jc0Ar-0002vq-Kl
+	for openembedded-devel@openembedded.org; Wed, 19 Mar 2008 16:26:01 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Jc0An-0004qL-NT
+	for openembedded-devel@openembedded.org; Wed, 19 Mar 2008 15:25:49 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 19 Mar 2008 15:25:49 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 19 Mar 2008 15:25:49 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Wed, 19 Mar 2008 16:25:43 +0100
+Message-ID: <frrb9n$5eh$1@ger.gmane.org>
 References: <3D9ECBB5-7C37-4D62-8D15-F2F0673EB867@student.utwente.nl>
-	<1205928049.29700.7.camel@hammer.suse.cz> <frr19p$t15$1@ger.gmane.org>
-Date: Wed, 19 Mar 2008 14:06:07 +0100
-Message-Id: <1205931967.31039.6.camel@hammer.suse.cz>
+	<1205929346.4555.34.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.0 
-X-SA-Exim-Connect-IP: 82.119.242.94
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <1205929346.4555.34.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
 Subject: Re: [RFC] error out on .la files pointing to ${WORKDIR}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -38,46 +50,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Mar 2008 13:05:14 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 19 Mar 2008 15:26:02 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Stanislav Brabec schreef:
-> | Koen Kooi wrote:
-> |
-> |> Things in stagin (e.g. .la files) point to ${WORKDIR} are broken and
-> |> should die. If we want packaged-staging and rm_work to function we
-> |> need to fix them. Since we are all lazy we need some incentive:
-> |
-> | This policy is applied in OpenSUSE for several years. So if any packa=
-ges
-> | are broken upstream, you will find a fix in OpenSUSE nearly for sure.
->=20
-> Great! Do you have a link to the patch repository?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-It is still in TODO of the OpenSUSE team. Now you have two chances:
+Richard Purdie schreef:
+| Hi,
+|
+| On Wed, 2008-03-19 at 11:50 +0100, Koen Kooi wrote:
+|> Things in stagin (e.g. .la files) point to ${WORKDIR} are broken and
+|> should die. If we want packaged-staging and rm_work to function we
+|> need to fix them. Since we are all lazy we need some incentive:
+| [...]
+|> --- classes/insane.bbclass      0712df99743c442ed311e6b4d4be0d28f29d525f
+|> +++ classes/insane.bbclass      fa6b704f402965c8123dfa90527b5a11a8cd3288
+|> @@ -178,7 +178,7 @@ def package_qa_make_fatal_error(error_cl
+|>
+|>       TODO: Load a whitelist of known errors
+|>       """
+|> - -    return not error_class in [0, 5, 7, 8]
+|> +    return not error_class in [0, 5, 7]
+|>
+|>   def package_qa_write_error(error_class, name, path, d):
+|>       """
+|
+| I'm ok with applying that since we do really need to sort out these
+| issues.
+|
+| I did a load of cleanup in this area in poky and found in a lot of cases
+| this happened since we weren't using oe_libinstall which mangles the .la
+| files if it notices anything wrong with them.
 
-1) Download the whole source and extract patches:
-http://download.opensuse.org/distribution/SL-OSS-factory/inst-source/suse=
-/src/
+Richard and I have now finally fixed the native.bbclass staging logic
+for autotoolws packages. This means virtually all -native autotooled
+recipes now get sanitized automagically.
 
-And then unpacking (for RPM non-native platforms you can use alien or
-rpm2cpio).
+regards,
 
-2) With (free) OpenSUSE Build Service account you can access:
-https://build.opensuse.org/project/show?project=3DopenSUSE%3AFactory
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
---=20
-Best Regards / S pozdravem,
-
-Stanislav Brabec
-software developer
----------------------------------------------------------------------
-SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse.cz
-Lihovarsk=E1 1060/12           tel: +420 284 028 966, +49 911 740538747
-190 00 Praha 9                                  fax: +420 284 028 951
-Czech Republic                                    http://www.suse.cz/
+iD8DBQFH4TB3MkyGM64RGpERAnvLAKC0++o3ntLzOjqv5pmrbcLrFl4pQwCgmRAj
+9EL16VVjDtR54mR2axB8dPA=
+=FemV
+-----END PGP SIGNATURE-----
 
 
 
