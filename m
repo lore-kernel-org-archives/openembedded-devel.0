@@ -1,31 +1,29 @@
-Received: from [64.233.170.190] (helo=rn-out-0910.google.com)
+Received: from [82.119.242.94] (helo=mail.suse.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Jbwmj-0002I1-8k
+	(envelope-from <utx@penguin.cz>) id 1JbwxN-0002Ww-5m
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Mar 2008 12:48:48 +0100
-Received: by rn-out-0910.google.com with SMTP id s46so211272rnb.14
+	Wed, 19 Mar 2008 12:59:47 +0100
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id ED05C6280DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Mar 2008 04:48:42 -0700 (PDT)
-Received: by 10.151.85.20 with SMTP id n20mr117997ybl.79.1205927321841;
-	Wed, 19 Mar 2008 04:48:41 -0700 (PDT)
-Received: by 10.151.83.11 with HTTP; Wed, 19 Mar 2008 04:48:41 -0700 (PDT)
-Message-ID: <d1b08f940803190448r453770f6q611a1c14b7dd59c9@mail.gmail.com>
-Date: Wed, 19 Mar 2008 12:48:41 +0100
-From: "Andrea Adami" <andrea.adami@gmail.com>
+	Wed, 19 Mar 2008 12:59:44 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <frqri1$9l5$1@ger.gmane.org>
-MIME-Version: 1.0
-References: <200803182311.01445.zecke@selfish.org> <frpftj$p9s$1@ger.gmane.org>
-	<200803191143.05167.zecke@selfish.org> <frqri1$9l5$1@ger.gmane.org>
-X-SA-Exim-Connect-IP: 64.233.170.190
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+In-Reply-To: <3D9ECBB5-7C37-4D62-8D15-F2F0673EB867@student.utwente.nl>
+References: <3D9ECBB5-7C37-4D62-8D15-F2F0673EB867@student.utwente.nl>
+Date: Wed, 19 Mar 2008 13:00:49 +0100
+Message-Id: <1205928049.29700.7.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.0 
+X-SA-Exim-Connect-IP: 82.119.242.94
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=RDNS_NONE autolearn=no
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The tzdata package and a bug with tzdata-dbg
+Subject: Re: [RFC] error out on .la files pointing to ${WORKDIR}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,19 +37,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Mar 2008 11:48:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 Mar 2008 11:59:47 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-Holger, Koen,
+Koen Kooi wrote:
 
-talking about tzdata, the file /etc/localtime is missing.
+> Things in stagin (e.g. .la files) point to ${WORKDIR} are broken and =20
+> should die. If we want packaged-staging and rm_work to function we =20
+> need to fix them. Since we are all lazy we need some incentive:
 
-I'd suggest you to look at the gentoo-ebuild here for some tips (pkg_config):
+This policy is applied in OpenSUSE for several years. So if any packages
+are broken upstream, you will find a fix in OpenSUSE nearly for sure.
 
-http://www.gentoo-portage.com/AJAX/Ebuild/62372/View
+--=20
+Best Regards / S pozdravem,
 
-Andrea
+Stanislav Brabec
+software developer
+---------------------------------------------------------------------
+SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse.cz
+Lihovarsk=E1 1060/12           tel: +420 284 028 966, +49 911 740538747
+190 00 Praha 9                                  fax: +420 284 028 951
+Czech Republic                                    http://www.suse.cz/
+
 
 
