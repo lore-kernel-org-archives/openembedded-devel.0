@@ -1,31 +1,42 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Jbvtb-0004wo-EJ
-	for openembedded-devel@openembedded.org; Wed, 19 Mar 2008 11:51:49 +0100
-Received: from [172.20.1.5] (vpn006013.vpn.utwente.nl [130.89.6.13])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	m2JAp1eE026626 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Mar 2008 11:51:05 +0100
-Message-Id: <3D9ECBB5-7C37-4D62-8D15-F2F0673EB867@student.utwente.nl>
-From: Koen Kooi <k.kooi@student.utwente.nl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Jbvz1-00052j-0t
+	for openembedded-devel@openembedded.org; Wed, 19 Mar 2008 11:57:24 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Jbvyu-0008Nx-Fb
+	for openembedded-devel@openembedded.org; Wed, 19 Mar 2008 10:57:16 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 19 Mar 2008 10:57:16 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 19 Mar 2008 10:57:16 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Mime-Version: 1.0 (Apple Message framework v919.2)
-Date: Wed, 19 Mar 2008 11:50:58 +0100
-X-Pgp-Agent: GPGMail d51 (Leopard)
-X-Mailer: Apple Mail (2.919.2)
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-SA-Exim-Connect-IP: 130.89.2.8
-X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Wed, 19 Mar 2008 11:57:05 +0100
+Message-ID: <frqri1$9l5$1@ger.gmane.org>
+References: <200803182311.01445.zecke@selfish.org> <frpftj$p9s$1@ger.gmane.org>
+	<200803191143.05167.zecke@selfish.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <200803191143.05167.zecke@selfish.org>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
 	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] error out on .la files pointing to ${WORKDIR}
+Subject: Re: The tzdata package and a bug with tzdata-dbg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,45 +50,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Mar 2008 10:51:49 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Wed, 19 Mar 2008 10:57:24 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Hi,
+Holger Freyther schreef:
+| On Tuesday 18 March 2008 23:32:18 Koen Kooi wrote:
+| Hey Koen,
+| thanks for the fast answer
+|
+|
+|> Yes: Change RPROVIDES = "foo" to RPROVIDES_<package> and bump PR.
+| Yes, this part is obvious. Now to the hard part tzdata-dbg has no
+content, now
+| that the RPROVIDES are different the tzdata-dbg package will be gone.
 
-Things in stagin (e.g. .la files) point to ${WORKDIR} are broken and  
-should die. If we want packaged-staging and rm_work to function we  
-need to fix them. Since we are all lazy we need some incentive:
+It won't, unless you removed this from bitbake.conf:
 
-#
-# old_revision [85e676eb4b64d66cb74acf6220f10c3942e2bd29]
-#
-# patch "classes/insane.bbclass"
-#  from [0712df99743c442ed311e6b4d4be0d28f29d525f]
-#    to [fa6b704f402965c8123dfa90527b5a11a8cd3288]
-#
-============================================================
-- --- classes/insane.bbclass      0712df99743c442ed311e6b4d4be0d28f29d525f
-+++ classes/insane.bbclass      fa6b704f402965c8123dfa90527b5a11a8cd3288
-@@ -178,7 +178,7 @@ def package_qa_make_fatal_error(error_cl
+ALLOW_EMPTY_${PN}-dbg = "1"
 
-      TODO: Load a whitelist of known errors
-      """
-- -    return not error_class in [0, 5, 7, 8]
-+    return not error_class in [0, 5, 7]
+| The
+| tricky question is:
+|
+| 	ipkg update
+| 	ipkg upgrade
 
-  def package_qa_write_error(error_class, name, path, d):
-      """
+opkg ;)
 
+|
+|
+| tzdata-dbg should be gone, tzdata should be installed. How to achieve
+this? My
+| attempt was to have an empty tzdata-dbg package that is not providing
+tzdata
+| anymore, so on update ipkg should try to install tzdata again....
+
+That should work with opkg. But in your case (OM), bump PR on eds-dbus
+to make sure tzdata gets pulled in.
+
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFH4PAUMkyGM64RGpERAvkBAJ94969GpNP8493ezmnmV/wkkKd7mgCgqGNG
-OKIsbKTFKRQbNI06cnE/32A=
-=0rQM
+iD8DBQFH4PGBMkyGM64RGpERAgpUAJ9nDVIXVXSJnHr3iWJw4de8RrLVPwCgkAX1
+scmEducy/7eUqpLJkCn7Zdo=
+=Xw9a
 -----END PGP SIGNATURE-----
+
 
 
