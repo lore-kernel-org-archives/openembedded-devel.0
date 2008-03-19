@@ -1,41 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.75.37.82] (helo=dottedmag.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jc7LC-0007xz-BN
-	for openembedded-devel@openembedded.org; Thu, 20 Mar 2008 00:05:08 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jc6je-00009b-LM
-	for openembedded-devel@openembedded.org; Wed, 19 Mar 2008 22:26:15 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 19 Mar 2008 22:26:14 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dottedmag@dottedmag.net>) id 1Jc7kU-0004XJ-Of
+	for openembedded-devel@openembedded.org; Thu, 20 Mar 2008 00:31:12 +0100
+Received: from frontier.dottedmag.net (unknown [92.125.214.233])
+	by dottedmag.net (Postfix) with ESMTP id F35BA8C005
 	for <openembedded-devel@openembedded.org>;
-	Wed, 19 Mar 2008 22:26:14 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 20 Mar 2008 05:29:18 +0000 (UTC)
+Received: from frontier.dottedmag.net (localhost [127.0.0.1])
+	by frontier.dottedmag.net (Postfix) with ESMTP id D54B41C4C2
+	for <openembedded-devel@openembedded.org>;
+	Thu, 20 Mar 2008 05:31:08 +0600 (NOVT)
+From: Mikhail Gusarov <dottedmag@dottedmag.net>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Wed, 19 Mar 2008 23:26:04 +0100
-Message-ID: <frs3tr$a48$1@ger.gmane.org>
-References: <3D9ECBB5-7C37-4D62-8D15-F2F0673EB867@student.utwente.nl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <3D9ECBB5-7C37-4D62-8D15-F2F0673EB867@student.utwente.nl>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 20 Mar 2008 05:31:08 +0600
+Message-ID: <878x0emgub.fsf@frontier.dottedmag.net>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.60 (gnu/linux)
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 212.75.37.82
+X-SA-Exim-Mail-From: dottedmag@dottedmag.net
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Level: **
+X-Spam-Status: No, score=2.2 required=5.0 tests=DNS_FROM_RFC_BOGUSMX, RDNS_NONE
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] error out on .la files pointing to ${WORKDIR}
+Subject: Default SRCREV value
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -49,61 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Mar 2008 23:05:13 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Mar 2008 23:31:12 -0000
+X-Groupsio-MsgNum: 4708
+Content-Type: multipart/signed; boundary="=-=-=";
+	micalg=pgp-sha1; protocol="application/pgp-signature"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-=-=
+Content-Transfer-Encoding: quoted-printable
 
-Koen Kooi schreef:
-| Hi,
-|
-| Things in stagin (e.g. .la files) point to ${WORKDIR} are broken and
-| should die. If we want packaged-staging and rm_work to function we
-| need to fix them. Since we are all lazy we need some incentive:
-|
-| #
-| # old_revision [85e676eb4b64d66cb74acf6220f10c3942e2bd29]
-| #
-| # patch "classes/insane.bbclass"
-| #  from [0712df99743c442ed311e6b4d4be0d28f29d525f]
-| #    to [fa6b704f402965c8123dfa90527b5a11a8cd3288]
-| #
-| ============================================================
-| --- classes/insane.bbclass      0712df99743c442ed311e6b4d4be0d28f29d525f
-| +++ classes/insane.bbclass      fa6b704f402965c8123dfa90527b5a11a8cd3288
-| @@ -178,7 +178,7 @@ def package_qa_make_fatal_error(error_cl
-|
-|       TODO: Load a whitelist of known errors
-|       """
-| -    return not error_class in [0, 5, 7, 8]
-| +    return not error_class in [0, 5, 7]
-|
-|   def package_qa_write_error(error_class, name, path, d):
-|       """
+Hello,
 
-I'm confident that the work done today catches the most used offenders,
-so the patch has been pushed:
+I've stumbled upon SRCREV=3D"1" setting if bitbake.conf today, debugging
+misterious mis-build of pkg-native.
 
-Commit by koen on org.oe.dev :: r0b604857... / :
-insane bbclass: add '8' (.la references workdir) to list of fatal errors
-this will also trigger on broken libtool archives already present in
-staging. If you get hit by this: rebuild the offending recipes or do a
-clean rebuild
+Shouldn't SRCREV default to ${AUTOREV} or something like
+${sys.write("Please define SRCREV"}; sys.exit(1)} ? Default value of "1"
+is hardly useful.
 
+=2D-=20
 
-
-
-
+--=-=-=
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFH4ZL7MkyGM64RGpERAre3AKCc7wXSp20R2o3QIeZt6CsVtgUcwwCcCt9G
-4f6/cyes/PAY3Me99kqzdx8=
-=40eF
+iD8DBQFH4aI8vse/O6JvVMgRAuh/AJ9oZcyrHy1dyI1YH/xXXbiwYy1vbwCglCa/
+WliB5W61eZI9jGHF9BB+ijI=
+=wSJ6
 -----END PGP SIGNATURE-----
 
-
-
+--=-=-=--
