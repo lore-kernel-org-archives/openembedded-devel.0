@@ -1,29 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.162.183] (helo=el-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1JcPSw-0007Pl-Q3
-	for openembedded-devel@openembedded.org; Thu, 20 Mar 2008 19:26:17 +0100
-Received: (qmail 18949 invoked by uid 813007); 20 Mar 2008 18:26:10 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 20 Mar 2008 18:26:10 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <pmiscml@gmail.com>) id 1JcPyD-0007oD-Ie
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Mar 2008 19:58:35 +0100
+Received: by el-out-1112.google.com with SMTP id r23so918346elf.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Mar 2008 11:58:32 -0700 (PDT)
+Received: by 10.114.156.1 with SMTP id d1mr3948398wae.120.1206039512223;
+	Thu, 20 Mar 2008 11:58:32 -0700 (PDT)
+Received: from widy.localdomain ( [88.252.175.177])
+	by mx.google.com with ESMTPS id 1sm3428666nfv.3.2008.03.20.11.58.28
+	(version=SSLv3 cipher=OTHER); Thu, 20 Mar 2008 11:58:30 -0700 (PDT)
+Date: Thu, 20 Mar 2008 21:00:20 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Mar 2008 19:25:54 +0100
-User-Agent: KMail/1.9.9
-References: <200803201727.17485.zecke@selfish.org>
-In-Reply-To: <200803201727.17485.zecke@selfish.org>
-MIME-Version: 1.0
-Message-Id: <200803201925.55664.openembedded@haerwu.biz>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: openembedded@haerwu.biz
+Message-ID: <20080320210020.1fc57e44@widy.localdomain>
+In-Reply-To: <d46153c40803200540h522b735cq483a8f510020fe09@mail.gmail.com>
+References: <d46153c40803200540h522b735cq483a8f510020fe09@mail.gmail.com>
+X-Mailer: Claws Mail 3.0.2 (GTK+ 2.12.8; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 209.85.162.183
+X-SA-Exim-Mail-From: pmiscml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
 	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded entity and some clarification
+Subject: Re: [RFC] ipaq-sleep backlight control
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,44 +41,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2008 18:26:17 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Mar 2008 18:58:35 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Dnia Thursday 20 of March 2008, Holger Freyther napisa=B3:
+Hello,
 
-> At FOSDEM we sat together and hold the required founding assembly,
-> according to my notes Florian, Mickeyl, Robert and me are part of the
-> first board. We four still have to do the necessary things to register
-> the association.
+On Thu, 20 Mar 2008 07:40:27 -0500
+"Andrew Paulsen" <andrew.paulsen@gmail.com> wrote:
 
-> Goal of the OpenEmbedded:
+> I did a code cleanup on ipaq-sleep and added the option to use your
+> own backlight control script instead of gpe-conf to adjust brightness.
+> 
+> http://bugs.openembedded.org/show_bug.cgi?id=4101
+> 
+> I have since heard that all 2.6 devices use the standard
+> /sys/class/backlight/*/ method to control brightness and that we don't
+> need/want to support others.
+> 
+> So I have three options and I'd like some opinions:
+> 1) Leave ipaq-sleep the way it is and ship a standard backlight
+> control script that can be overridden/changed per machine.  This still
+> allows the legacy gpe-conf method (the default right now)
+> 2) Have ipaq-sleep write directly to /sys/class/backlight/*/ to tweak
+> the brightness and skip this whole mess
+> 3) Have the option to select between 1&2 via conf file entry
 
-Goal of the OpenEmbedded e.V.:
+IMHO, ipaq-sleep should go to /dev/null. Long-term, it should be
+replaced by that mythical "machine daemon" which sometimes appear in
+blogs and ML conversations. Short-time, I wrote another, sane
+and efficient backlight control daemon, packages/backsaver/ in OE. That
+still leaves question on suspending device after timeout open though.
+My plan was to do gradual conversion (disable backlight control in
+ipaq-sleep, use backsaver for that, with it still using ipaq-sleep's
+config), but I had to put that on hold, as there're just too many
+things I have in works already...
 
-> The primary goal is to support the development of OpenEmbedded. This
-> can include providing/paying infrastructure, sponsor developer
-> gatherings, fly people to conferences etc.. Or might even be paying a
-> doc writer to... help us.
+> 
+> Thanks!
+> Andrew
 
-Will it cover target devices or part of their costs?
-
-> It will not be a steering comittee, it will not engage in business
-> activities (well hopefully we have a list of OE friendly companies,
-> where we can point to if we get some kind of requests)
-
-Do we have any written rules for it? How companies can support OE e.V.,=20
-how they contact to be on a list of 'blessed ones' and how e.V. will sort=20
-commercial job requests.
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-  Alcohol may not solve any problems, but then again, neither does milk.
+[]
 
 
+-- 
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
