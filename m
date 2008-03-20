@@ -1,32 +1,28 @@
-Received: from [212.75.37.82] (helo=dottedmag.net)
+Received: from [64.233.178.247] (helo=hs-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dottedmag@dottedmag.net>) id 1JcFnQ-0004Qw-Q8
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JcHM2-0006dt-MA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Mar 2008 09:06:50 +0100
-Received: from frontier.dottedmag.net (unknown [92.125.214.233])
-	by dottedmag.net (Postfix) with ESMTP id CCE118C005
+	Thu, 20 Mar 2008 10:46:36 +0100
+Received: by hs-out-0708.google.com with SMTP id 23so734969hsn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2008 14:04:48 +0000 (UTC)
-Received: from frontier.dottedmag.net (localhost [127.0.0.1])
-	by frontier.dottedmag.net (Postfix) with ESMTP id 802191C4C2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2008 14:06:41 +0600 (NOVT)
-From: Mikhail Gusarov <dottedmag@dottedmag.net>
+	Thu, 20 Mar 2008 02:46:33 -0700 (PDT)
+Received: by 10.100.93.19 with SMTP id q19mr4508074anb.4.1206006393741;
+	Thu, 20 Mar 2008 02:46:33 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Thu, 20 Mar 2008 02:46:33 -0700 (PDT)
+Message-ID: <c384c5ea0803200246o192a449dh4ecc6cbfd7eb4e16@mail.gmail.com>
+Date: Thu, 20 Mar 2008 10:46:33 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200803200120.47119.zecke@selfish.org>
+MIME-Version: 1.0
 References: <878x0emgub.fsf@frontier.dottedmag.net>
 	<47E1A6CB.4010708@balister.org> <200803200120.47119.zecke@selfish.org>
-Date: Thu, 20 Mar 2008 14:06:40 +0600
-In-Reply-To: <200803200120.47119.zecke@selfish.org> (Holger Freyther's message
-	of "Thu, 20 Mar 2008 01:20:47 +0100")
-Message-ID: <87tzj1lsz3.fsf@frontier.dottedmag.net>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.60 (gnu/linux)
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.75.37.82
-X-SA-Exim-Mail-From: dottedmag@dottedmag.net
+X-SA-Exim-Connect-IP: 64.233.178.247
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
-X-Spam-Level: **
-X-Spam-Status: No, score=2.2 required=5.0 tests=DNS_FROM_RFC_BOGUSMX, RDNS_NONE
-	autolearn=no version=3.2.3
+X-Spam-Level: 
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
+	version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Default SRCREV value
@@ -43,38 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2008 08:06:55 -0000
-X-Groupsio-MsgNum: 4713
-Content-Type: multipart/signed; boundary="=-=-=";
-	micalg=pgp-sha1; protocol="application/pgp-signature"
+X-List-Received-Date: Thu, 20 Mar 2008 09:46:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---=-=-=
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-Twas brillig at 01:20:47 20.03.2008 UTC+01 when Holger Freyther did gyre an=
-d gimble:
+On Thu, Mar 20, 2008 at 1:20 AM, Holger Freyther <zecke@selfish.org> wrote:
+>  Or as Mikhail suggested:
+>  ${@bb.fatal("You want to specify a sane srvrev")}
+>
+>  The only down-side I can think of, now parsing will fail for a recipe you do
+>  not even care for in your distribution, with having a default value 1 you
+>  just parse fine.
+>
+I am +1 for this, it's another step to more robustness IMHO.
 
- HF> The only down-side I can think of, now parsing will fail for a
- HF> recipe you do not even care for in your distribution, with having a
- HF> default value 1 you just parse fine.
+(And if you don't care with the version, then just live with a sane
+revision *we* chose).
 
-Is it possible to handle recipies a bit lazier, to avoid recipies which
-are not interesting?
+Regards,
+-- 
+Leon
 
-Hmm... In other hand, until recipie is not parsed, it is not possible to
-say whether it is needed for build or not, so it can be tricky.
 
-=2D-=20
-
---=-=-=
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-
-iD8DBQFH4hsQvse/O6JvVMgRAhS8AJ40Ukf0ETgE+I5nuxAcSSgPSB6m4ACgpCEM
-oXy2weYO02kbPm0WERoK/CA=
-=wQs4
------END PGP SIGNATURE-----
-
---=-=-=--
