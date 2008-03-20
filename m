@@ -1,31 +1,28 @@
-Received: from [64.233.178.247] (helo=hs-out-0708.google.com)
+Received: from [64.233.166.181] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JcHM2-0006dt-MA
+	(envelope-from <andrew.paulsen@gmail.com>) id 1JcK4M-0008Fg-Ge
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Mar 2008 10:46:36 +0100
-Received: by hs-out-0708.google.com with SMTP id 23so734969hsn.12
+	Thu, 20 Mar 2008 13:40:38 +0100
+Received: by py-out-1112.google.com with SMTP id y77so892849pyg.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2008 02:46:33 -0700 (PDT)
-Received: by 10.100.93.19 with SMTP id q19mr4508074anb.4.1206006393741;
-	Thu, 20 Mar 2008 02:46:33 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Thu, 20 Mar 2008 02:46:33 -0700 (PDT)
-Message-ID: <c384c5ea0803200246o192a449dh4ecc6cbfd7eb4e16@mail.gmail.com>
-Date: Thu, 20 Mar 2008 10:46:33 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	Thu, 20 Mar 2008 05:40:27 -0700 (PDT)
+Received: by 10.64.153.4 with SMTP id a4mr3533698qbe.15.1206016827157;
+	Thu, 20 Mar 2008 05:40:27 -0700 (PDT)
+Received: by 10.65.249.15 with HTTP; Thu, 20 Mar 2008 05:40:27 -0700 (PDT)
+Message-ID: <d46153c40803200540h522b735cq483a8f510020fe09@mail.gmail.com>
+Date: Thu, 20 Mar 2008 07:40:27 -0500
+From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200803200120.47119.zecke@selfish.org>
 MIME-Version: 1.0
-References: <878x0emgub.fsf@frontier.dottedmag.net>
-	<47E1A6CB.4010708@balister.org> <200803200120.47119.zecke@selfish.org>
-X-SA-Exim-Connect-IP: 64.233.178.247
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+X-SA-Exim-Connect-IP: 64.233.166.181
+X-SA-Exim-Mail-From: andrew.paulsen@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,RDNS_NONE autolearn=no
-	version=3.2.3
+X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,RDNS_NONE
+	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Default SRCREV value
+Subject: [RFC] ipaq-sleep backlight control
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,28 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2008 09:46:36 -0000
+X-List-Received-Date: Thu, 20 Mar 2008 12:40:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello,
+I did a code cleanup on ipaq-sleep and added the option to use your
+own backlight control script instead of gpe-conf to adjust brightness.
 
-On Thu, Mar 20, 2008 at 1:20 AM, Holger Freyther <zecke@selfish.org> wrote:
->  Or as Mikhail suggested:
->  ${@bb.fatal("You want to specify a sane srvrev")}
->
->  The only down-side I can think of, now parsing will fail for a recipe you do
->  not even care for in your distribution, with having a default value 1 you
->  just parse fine.
->
-I am +1 for this, it's another step to more robustness IMHO.
+http://bugs.openembedded.org/show_bug.cgi?id=4101
 
-(And if you don't care with the version, then just live with a sane
-revision *we* chose).
+I have since heard that all 2.6 devices use the standard
+/sys/class/backlight/*/ method to control brightness and that we don't
+need/want to support others.
 
-Regards,
--- 
-Leon
+So I have three options and I'd like some opinions:
+1) Leave ipaq-sleep the way it is and ship a standard backlight
+control script that can be overridden/changed per machine.  This still
+allows the legacy gpe-conf method (the default right now)
+2) Have ipaq-sleep write directly to /sys/class/backlight/*/ to tweak
+the brightness and skip this whole mess
+3) Have the option to select between 1&2 via conf file entry
+
+Thanks!
+Andrew
 
 
