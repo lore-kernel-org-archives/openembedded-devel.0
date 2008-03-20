@@ -1,27 +1,36 @@
-Received: from [209.85.132.247] (helo=an-out-0708.google.com)
+Received: from [66.111.4.26] (helo=out2.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1JcSSt-0003pz-MD
-	for openembedded-devel@openembedded.org; Thu, 20 Mar 2008 22:38:25 +0100
-Received: by an-out-0708.google.com with SMTP id b38so258570ana.6
-	for <openembedded-devel@openembedded.org>;
-	Thu, 20 Mar 2008 14:38:16 -0700 (PDT)
-Received: by 10.100.133.20 with SMTP id g20mr6829503and.2.1206049096929;
-	Thu, 20 Mar 2008 14:38:16 -0700 (PDT)
-Received: by 10.101.71.14 with HTTP; Thu, 20 Mar 2008 14:38:16 -0700 (PDT)
-Message-ID: <bdb0025f0803201438v1950602ci25b2b4d54ad359f@mail.gmail.com>
-Date: Thu, 20 Mar 2008 18:38:16 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
-To: openembedded-devel@openembedded.org
+	(envelope-from <openembedded-devel@lists.futaris.org>)
+	id 1JcT1d-0004Ts-7g for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Mar 2008 23:14:19 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id C6315D9EBE
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Mar 2008 18:14:16 -0400 (EDT)
+Received: from web5.messagingengine.com ([10.202.2.214])
+	by compute1.internal (MEProxy); Thu, 20 Mar 2008 18:14:16 -0400
+Received: by web5.messagingengine.com (Postfix, from userid 99)
+	id 931C0420D8; Thu, 20 Mar 2008 18:14:16 -0400 (EDT)
+Message-Id: <1206051256.5975.1243541279@webmail.messagingengine.com>
+X-Sasl-Enc: kXcxp2L0zPGiYgyCPL3nHklnazp83wijFD+7O33K2n46 1206051256
+From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.132.247
-X-SA-Exim-Mail-From: rodrigo.vivi@gmail.com
+X-Mailer: MessagingEngine.com Webmail Interface
+References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
+	<1205992995.25920.1243400709@webmail.messagingengine.com>
+	<1206017175.4700.8.camel@hammer.suse.cz>
+In-Reply-To: <1206017175.4700.8.camel@hammer.suse.cz>
+Date: Fri, 21 Mar 2008 08:14:16 +1000
+X-SA-Exim-Connect-IP: 66.111.4.26
+X-SA-Exim-Mail-From: openembedded-devel@lists.futaris.org
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,RDNS_NONE
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
 	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: problems when using overrides...
+Subject: Re: iwmmxt optimization and soft float in OE on PXA270
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,45 +44,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2008 21:38:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Mar 2008 22:14:19 -0000
 Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="ISO-8859-1"
 
-Hi there,
 
-I'm trying without success to use
-BB_NUMBER_THREADS_icecc = "8" in my local.conf
+On Thu, 20 Mar 2008 13:46:15 +0100, "Stanislav Brabec" <utx@penguin.cz>
+said:
+> Hasjim Williams wrote:
+> 
+> > You won't be able to use iwmmxt with everything.  The unwind / exception
+> > support for iwxmmt isn't there in gcc.  Anything using C++ exceptions
+> > won't work correctly.
+> 
+> So plain C binaries (e. g. kernel) are OK? And
+> c++ -march=iwmmxt -fno-exceptions as well?
 
-I've already checked with mickeyl help that all variables are set correctly:
+You can try this for C++ with -fno-exceptions, but I've never tried
+it...
 
-OVERRIDES="local:icecc:nokia800:mamona:linux-gnueabi:arm:build-linux:fail-fast:pn-bitbake"
+> > I could write/test these patches, I guess, but the only PXA270 machine
+> > that I have access to is a HTC Magician (XDA Mini).
+> 
+> It would be very nice. I could test them on my Zaurus, if you send me
+> some C++ testcase (or name of application to test it on).
 
-BB_NUMBER_THREADS="8"
+It'd be good if you could run the tests, before we generate the
+patches... 
 
-but it is not working...
+gcc has a built in testcase system, dejagnu:
+http://lists.gnu.org/archive/html/dejagnu/2006-04/msg00008.html explains
+how to set it up and run it.
+http://gcc.gnu.org/onlinedocs/libstdc++/test.html and 
 
-It starts only one thread. But when I remove the "_icecc" it really
-starts 8 threads.
+e.g. FROM:
+openembedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/gcc-cross-4.1.2-r13/gcc-4.1.2/build.i686-linux.arm-angstrom-linux.arm-angstrom-linux-gnueabi
+$ make check-gcc RUNTESTFLAGS="normal.exp --target_board=pxa270-linux"
 
-Does someone have any idea?
+I think the C++ support you're looking to test is in "normal.exp" .  You
+should get a gcc.log and gcc.sum at the end, saying what tests
+passed/failed.
 
-Holger? Richard?
+$ make check
+Will do a complete test of everything, and will probably take at least 8
+hrs - day on a pxa270, I would think.
 
-btw I'm trying to set up other 3 variables with this icecc overrides:
+You'll only need dropbear or some other ssh server, so even a
+minimal-image should be enough on your pxa27x machine.
+ 
+> The last missing thing - iwmmxt support in qemu - was already written by
+> Andrzej Zaborowski.
 
-PARALLEL_MAKE_icecc
-INHERIT_append_icecc
-ICECC_ENV_EXEC_icecc
+Is this "qemu-pxa270-and-more.patch" or is there something newer?  Has
+this been put into OE's buildtree?
 
-but no one seems to be working...
+NB, Not sure what you're using to profile the speedups, but there is:
 
-Thanks in advance
+gcov:
+http://gcc.gnu.org/onlinedocs/gcc/Gcov.html#Gcov
 
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+and gprof:
+http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html
 
 
