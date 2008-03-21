@@ -1,38 +1,31 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JcVcG-0004Tc-7N
-	for openembedded-devel@openembedded.org; Fri, 21 Mar 2008 02:00:19 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2L10FA1002016
-	for <openembedded-devel@openembedded.org>; Fri, 21 Mar 2008 01:00:15 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 01883-02 for <openembedded-devel@openembedded.org>;
-	Fri, 21 Mar 2008 01:00:06 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2L103Gp002007
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 21 Mar 2008 01:00:03 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Jcdic-0004KT-W6
+	for openembedded-devel@openembedded.org; Fri, 21 Mar 2008 10:39:57 +0100
+Received: from [172.20.1.5] (vpn006010.vpn.utwente.nl [130.89.6.10])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	m2L9cneE032164 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Mar 2008 10:38:51 +0100
+Message-Id: <F4CE5C74-22A4-4616-BE98-DD104EF609AC@student.utwente.nl>
+From: Koen Kooi <k.kooi@student.utwente.nl>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <bdb0025f0803201438v1950602ci25b2b4d54ad359f@mail.gmail.com>
-References: <bdb0025f0803201438v1950602ci25b2b4d54ad359f@mail.gmail.com>
-Date: Fri, 21 Mar 2008 01:00:05 +0000
-Message-Id: <1206061205.4549.125.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 194.106.48.114
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Mime-Version: 1.0 (Apple Message framework v919.2)
+Date: Fri, 21 Mar 2008 10:38:45 +0100
+X-Pgp-Agent: GPGMail d51 (Leopard)
+X-Mailer: Apple Mail (2.919.2)
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-SA-Exim-Connect-IP: 130.89.2.8
+X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
 X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
 	autolearn=no version=3.2.3
 X-SA-Exim-Version: 4.2.1 (built Tue, 21 Aug 2007 23:39:36 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: problems when using overrides...
+Subject: Kernel developers strike again - aka "why wpa is broken" aka "why I have 2 kernels installed"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -46,51 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2008 01:00:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Mar 2008 09:40:27 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
 Hi,
 
-On Thu, 2008-03-20 at 18:38 -0300, Rodrigo Vivi wrote:
-> I'm trying without success to use
-> BB_NUMBER_THREADS_icecc = "8" in my local.conf
-> 
-> I've already checked with mickeyl help that all variables are set correctly:
-> 
-> OVERRIDES="local:icecc:nokia800:mamona:linux-gnueabi:arm:build-linux:fail-fast:pn-bitbake"
-> 
-> BB_NUMBER_THREADS="8"
-> 
-> but it is not working...
-> 
-> It starts only one thread. But when I remove the "_icecc" it really
-> starts 8 threads.
-> 
-> Does someone have any idea?
-> 
-> Holger? Richard?
-> 
-> btw I'm trying to set up other 3 variables with this icecc overrides:
-> 
-> PARALLEL_MAKE_icecc
-> INHERIT_append_icecc
-> ICECC_ENV_EXEC_icecc
-> 
-> but no one seems to be working...
+In their supreme genius the kernel people have renamed the aes crypto  
+module in 2.6.24, which leads to a lot of problems for people using  
+feeds. The old modules doesn't get replaced by the new one (different  
+name), so task-base will pull in the old aes-module and hence the old  
+kernel. It doesn't pull in the new aes module, so your crypto is broken.
 
-Override expansion only takes place at a certain point in bitbake
-execution. I suspect some of these variables are being accessed without
-override expansion taking place, I'm nearly sure of that happening in
-the BB_NUMBER_THREADS case since its a bitbake internal variable.
+A good solution would be for task-base to check the kernel version and  
+adjust RRECOMMENDS accordingly.
 
-PARALLEL_MAKE_icecc should work
-INHERIT_append_icecc could be problematic, since bitbake handles INHERIT as a special case
-ICECC_ENV_EXEC_icecc should work
+regards,
 
-Regards,
+KOen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Richard
-
+iD8DBQFH44IoMkyGM64RGpERArl5AKCi2WRksiNUxt/0OKH160jYUBN+/QCglS+i
+e3kERYhrZVPAvM1JDAr/kKw=
+=5Vi7
+-----END PGP SIGNATURE-----
 
 
