@@ -1,31 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JcmC4-0008PS-2r
-	for openembedded-devel@openembedded.org; Fri, 21 Mar 2008 19:42:20 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2LIgKvc024378
-	for <openembedded-devel@openembedded.org>; Fri, 21 Mar 2008 18:42:20 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 24348-01 for <openembedded-devel@openembedded.org>;
-	Fri, 21 Mar 2008 18:42:16 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2LIgBsb024362
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 21 Mar 2008 18:42:11 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <47E3DBFD.7050609@gmail.com>
-References: <47E3C6F7.8030902@gmail.com>
-	<200803211646.29107.zecke@selfish.org>  <47E3DBFD.7050609@gmail.com>
-Date: Fri, 21 Mar 2008 18:42:09 +0000
-Message-Id: <1206124930.4538.7.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: RPROVIDES problem for kdepimpi
+	(envelope-from <raj.khem@gmail.com>) id 1Jcq6g-0007J2-DG
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Mar 2008 23:53:02 +0100
+Received: by wa-out-1112.google.com with SMTP id l24so2458400waf.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Mar 2008 15:52:59 -0700 (PDT)
+Received: by 10.114.78.1 with SMTP id a1mr6910003wab.36.1206139979381;
+	Fri, 21 Mar 2008 15:52:59 -0700 (PDT)
+Received: by 10.114.234.12 with HTTP; Fri, 21 Mar 2008 15:52:59 -0700 (PDT)
+Message-ID: <19c1b8a90803211552gdc8ed5cr3c9b3f55528c1e8b@mail.gmail.com>
+Date: Fri, 21 Mar 2008 15:52:59 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1206051256.5975.1243541279@webmail.messagingengine.com>
+MIME-Version: 1.0
+References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
+	<1205992995.25920.1243400709@webmail.messagingengine.com>
+	<1206017175.4700.8.camel@hammer.suse.cz>
+	<1206051256.5975.1243541279@webmail.messagingengine.com>
+Subject: Re: iwmmxt optimization and soft float in OE on PXA270
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,43 +33,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2008 18:42:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Mar 2008 22:53:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Fri, 2008-03-21 at 11:02 -0500, Junqian Gordon Xu wrote:
-> On 03/21/2008 10:46 AM, Holger Freyther wrote:
-> > On Friday 21 March 2008 15:32:23 Junqian Gordon Xu wrote:
-> >> Similar to the tzdata problem. kdepimpi recipe does not define a package
-> >> ${PN}, and bitbake doesn't like the fact that ${PN} is missing in
-> >> RPROVIDES.
-> > 
-> > Where is the issue? Why should there be a RPROVIDES=kdepimpi?
-> 
-> bitbake kdepimpi
-> 
-> ERROR: 
-> '['/home/gordon/oe/org.openembedded.dev/packages/kdepimpi/kdepimpi_2.2.7.bb']' 
-> RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'kdepimpi' 
-> but it wasn't found in any PACKAGE or RPROVIDES variables
-> NOTE: Runtime target 'kdepimpi' is unbuildable, removing...
+On Thu, Mar 20, 2008 at 3:14 PM, Hasjim Williams
+<openembedded-devel@lists.futaris.org> wrote:
+>
+>  On Thu, 20 Mar 2008 13:46:15 +0100, "Stanislav Brabec" <utx@penguin.cz>
+>  said:
+>
+> > Hasjim Williams wrote:
+>  >
+>  > > You won't be able to use iwmmxt with everything.  The unwind / exception
+>  > > support for iwxmmt isn't there in gcc.  Anything using C++ exceptions
+>  > > won't work correctly.
+>  >
+>  > So plain C binaries (e. g. kernel) are OK? And
+>  > c++ -march=iwmmxt -fno-exceptions as well?
+>
+>  You can try this for C++ with -fno-exceptions, but I've never tried
+>  it...
+>
+>
+>  > > I could write/test these patches, I guess, but the only PXA270 machine
+>  > > that I have access to is a HTC Magician (XDA Mini).
+>  >
+>  > It would be very nice. I could test them on my Zaurus, if you send me
+>  > some C++ testcase (or name of application to test it on).
+>
+>  It'd be good if you could run the tests, before we generate the
+>  patches...
+>
+>  gcc has a built in testcase system, dejagnu:
+>  http://lists.gnu.org/archive/html/dejagnu/2006-04/msg00008.html explains
+>  how to set it up and run it.
+>  http://gcc.gnu.org/onlinedocs/libstdc++/test.html and
+>
+>  e.g. FROM:
+>  openembedded/build/tmp/work/armv4t-angstrom-linux-gnueabi/gcc-cross-4.1.2-r13/gcc-4.1.2/build.i686-linux.arm-angstrom-linux.arm-angstrom-linux-gnueabi
+>  $ make check-gcc RUNTESTFLAGS="normal.exp --target_board=pxa270-linux"
+>
+>  I think the C++ support you're looking to test is in "normal.exp" .  You
+>  should get a gcc.log and gcc.sum at the end, saying what tests
+>  passed/failed.
+>
+>  $ make check
+>  Will do a complete test of everything, and will probably take at least 8
+>  hrs - day on a pxa270, I would think.
+>
+>  You'll only need dropbear or some other ssh server, so even a
+>  minimal-image should be enough on your pxa27x machine.
 
-It comes from bitbake.conf:
+yeah and also setup a passwordless entry into the target from host.
+Otherwise it will ask for password everytime
+it wants to talk to target. Dropbear asks for return carriage key for
+empty passwords too. I havent figured to disable that
+openssh works.
 
-RDEPENDS_${PN}-dev = "${PN} (= ${DEBPV})"
-RRECOMMENDS_${PN}-dbg = "${PN} (= ${DEBPV})"
-
-If ${PN} doesn't exist these entries upset bitbake.
-
-The usual solution is to override these with something which makes sense
-for the packages. The -dev abd -dbg package should always exist
-otherwise the depchain magic for pulling in dev and dbg packages will
-break.
-
-Cheers,
-
-Richard
-
-
+Khem
 
 
