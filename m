@@ -1,32 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jcigz-0008At-9S
-	for openembedded-devel@openembedded.org; Fri, 21 Mar 2008 15:58:01 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jcigy-0006hq-G4
-	for openembedded-devel@openembedded.org; Fri, 21 Mar 2008 14:58:00 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 21 Mar 2008 14:58:00 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 21 Mar 2008 14:58:00 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Fri, 21 Mar 2008 15:57:52 +0100
-Message-ID: <fs0idg$j6$1@ger.gmane.org>
+	(envelope-from <zecke@selfish.org>) id 1JcjTN-0006Ov-QW
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Mar 2008 16:48:01 +0100
+Received: from [212.23.103.61] (helo=[10.129.246.98])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JcjTN-0005TG-8R
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Mar 2008 16:48:01 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 21 Mar 2008 16:46:28 +0100
+User-Agent: KMail/1.9.9
 References: <47E3C6F7.8030902@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
 In-Reply-To: <47E3C6F7.8030902@gmail.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200803211646.29107.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.61
 Subject: Re: RPROVIDES problem for kdepimpi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,57 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2008 14:58:01 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 21 Mar 2008 15:48:01 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Friday 21 March 2008 15:32:23 Junqian Gordon Xu wrote:
+> Similar to the tzdata problem. kdepimpi recipe does not define a package
+> ${PN}, and bitbake doesn't like the fact that ${PN} is missing in
+> RPROVIDES.
 
-Junqian Gordon Xu schreef:
-| Similar to the tzdata problem. kdepimpi recipe does not define a package
-| ${PN}, and bitbake doesn't like the fact that ${PN} is missing in
-RPROVIDES.
-|
-| Should we ship an empty kdepimpi? Or any better solution?
+Where is the issue? Why should there be a RPROVIDES=kdepimpi?
 
-kdepimpi-x11 does:
-
-PACKAGES = "libmicrokcal-x11 libmicrokabc-x11 kopi-applet-x11 kopi-x11
-kapi-x11 libmicrokdelibs-x11 kammu-x11 libmicrokammu-x11"
-
-Which is buggy, since it will break the -dev and -dbg depchains (and
-ships no .debug files).
-
-Change that to:
-
-PACKAGES += " \
-libmicrokcal-x11 libmicrokcal-x11-dbg libmicrokcal-x11-dev \
-libmicrokabc-x11 libmicrokabc-x11-dbg libmicrokabc-x11-dev\
-kopi-applet-x11 kopi-applet-x11-dbg kopi-applet-x11-dev\
-kopi-x11 kopi-x11-dbg kopi-x11-dev\
-kapi-x11 kapi-x11-dbg kapi-x11-dev\
-libmicrokdelibs-x11 libmicrokdelibs-x11-dbg libmicrokdelibs-x11-dev\
-kammu-x11 kammu-x11-dbg\
-libmicrokammu-x11 libmicrokammu-x11-dbg libmicrokammu-x11-dev"
-
-ALLOW_EMPTY_${PN} = "1"
-RDEPENDS_${PN} = "kopi-applet-x11 kopi-x11 kapi-x11 kammu-x11"
-
-FILES_....-dev
-FILES_....-dbg
-etc.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFH48zwMkyGM64RGpERAq/fAJ9J9UHDj/GWLoxLn+39CUFnG6XdtACgqvZP
-PfvptGphDh4wh1dbRBofUgQ=
-=fUrC
------END PGP SIGNATURE-----
-
+z.
 
 
