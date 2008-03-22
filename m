@@ -1,23 +1,32 @@
-Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
+Received: from [212.27.42.30] (helo=smtp4-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1JcqEf-0007W9-4y
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JdAS2-00005h-KN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Mar 2008 00:01:17 +0100
-Received: by wa-out-1112.google.com with SMTP id l24so2464347waf.22
+	Sat, 22 Mar 2008 21:36:27 +0100
+Received: from smtp4-g19.free.fr (localhost.localdomain [127.0.0.1])
+	by smtp4-g19.free.fr (Postfix) with ESMTP id 7865F3EA0CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2008 16:01:16 -0700 (PDT)
-Received: by 10.115.111.1 with SMTP id o1mr6874785wam.87.1206140476044;
-	Fri, 21 Mar 2008 16:01:16 -0700 (PDT)
-Received: by 10.114.234.12 with HTTP; Fri, 21 Mar 2008 16:01:15 -0700 (PDT)
-Message-ID: <19c1b8a90803211601r39c27fddx67d1fab239a81f84@mail.gmail.com>
-Date: Fri, 21 Mar 2008 16:01:15 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1206124717.4538.3.camel@dax.rpnet.com>
+	Sat, 22 Mar 2008 21:36:26 +0100 (CET)
+Received: from sharky.jerryweb.org (vau75-7-82-234-248-119.fbx.proxad.net
+	[82.234.248.119])
+	by smtp4-g19.free.fr (Postfix) with ESMTP id 5BC6E3EA0BA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Mar 2008 21:36:26 +0100 (CET)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by sharky.jerryweb.org (Postfix) with ESMTP id 347451840DA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Mar 2008 21:38:00 +0100 (CET)
+Message-ID: <47E56E28.2070800@bolloretelecom.eu>
+Date: Sat, 22 Mar 2008 21:38:00 +0100
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.8.1.9) Gecko/20080109 Thunderbird/2.0.0.9 Mnenhy/0.7.5.0
 MIME-Version: 1.0
-References: <F4CE5C74-22A4-4616-BE98-DD104EF609AC@student.utwente.nl>
-	<1206124717.4538.3.camel@dax.rpnet.com>
-Subject: Re: Kernel developers strike again - aka "why wpa is broken" aka "why I have 2 kernels installed"
+To: openembedded-devel@lists.openembedded.org
+References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>
+	<47E152DB.4050208@bolloretelecom.eu>
+In-Reply-To: <47E152DB.4050208@bolloretelecom.eu>
+Subject: Re: [RFC] move to opkg / md5 error on big-endian machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,39 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2008 23:01:17 -0000
+X-List-Received-Date: Sat, 22 Mar 2008 20:36:28 -0000
+Content-Type: multipart/mixed; boundary="------------060406090503020101030604"
+
+--------------060406090503020101030604
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Fri, Mar 21, 2008 at 11:38 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> Hi,
->
->
->  On Fri, 2008-03-21 at 10:38 +0100, Koen Kooi wrote:
->  > In their supreme genius the kernel people have renamed the aes crypto
->  > module in 2.6.24, which leads to a lot of problems for people using
->  > feeds. The old modules doesn't get replaced by the new one (different
->  > name), so task-base will pull in the old aes-module and hence the old
->  > kernel. It doesn't pull in the new aes module, so your crypto is broken.
->  >
->  > A good solution would be for task-base to check the kernel version and
->  > adjust RRECOMMENDS accordingly.
->
->  This isn't a good solution since we have no way of handling package A
->  requires to know which version of package B was built.
->
->  Yes, the kernel can write a file to staging which task-base then reads
->  but this will only work with very precise ordering and I'm not keen on
->  promoting that.
->
->  How about we set:
->
->  RREPLACES_kernel-module-new-name = "kernel-module-old-name"
->  RCONFLICTS_kernel-module-new-name = "kernel-module-old-name"
+Thanks for applying the patch to SVN! Unfortunately a typo crept into my
+previous patch, attached is a diff against SVN which fixes it.
 
-something like "Obsoletes" feature of rpm
+Cheers,
+Jeremy
 
-Khem
+--------------060406090503020101030604
+Content-Type: text/x-diff;
+ name="fix-endianness.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="fix-endianness.patch"
 
+Index: configure.ac
+===================================================================
+--- configure.ac	(revision 4241)
++++ configure.ac	(working copy)
+@@ -94,7 +94,7 @@
+ AC_CHECK_MEMBERS([struct stat.st_rdev])
+ 
+ # Checks endianness
+-AC_C_BIGENDIAN(ENDIAN_CFLAGS="-DWORDS_BIGENDIAN=1",)
++AC_C_BIGENDIAN(BIGENDIAN_CFLAGS="-DWORDS_BIGENDIAN=1",)
+ AC_SUBST(BIGENDIAN_CFLAGS)
+ 
+ # Don't do annoying tests that don't work when cross-compiling, just trust them.
 
+--------------060406090503020101030604--
