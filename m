@@ -1,21 +1,30 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [212.27.42.30] (helo=smtp4-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1JdNfz-0005u1-LC
-	for openembedded-devel@openembedded.org; Sun, 23 Mar 2008 11:43:43 +0100
-Received: (qmail 3290 invoked by uid 813007); 23 Mar 2008 10:43:42 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Mar 2008 10:43:42 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Mar 2008 11:43:13 +0100
-User-Agent: KMail/1.9.9
-References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>
-	<47E5A67B.5030809@dls.net> <47E5E7DD.4030304@dls.net>
-In-Reply-To: <47E5E7DD.4030304@dls.net>
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JdNts-0006IH-2c
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 23 Mar 2008 11:58:04 +0100
+Received: from smtp4-g19.free.fr (localhost.localdomain [127.0.0.1])
+	by smtp4-g19.free.fr (Postfix) with ESMTP id E8F043EA0AC
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Mar 2008 11:58:03 +0100 (CET)
+Received: from sharky.jerryweb.org (vau75-7-82-234-248-119.fbx.proxad.net
+	[82.234.248.119])
+	by smtp4-g19.free.fr (Postfix) with ESMTP id 562B73EA0E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Mar 2008 11:58:03 +0100 (CET)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by sharky.jerryweb.org (Postfix) with ESMTP id ED37B184147
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Mar 2008 11:59:37 +0100 (CET)
+Message-ID: <47E63819.9060806@bolloretelecom.eu>
+Date: Sun, 23 Mar 2008 11:59:37 +0100
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.8.1.9) Gecko/20080109 Thunderbird/2.0.0.9 Mnenhy/0.7.5.0
 MIME-Version: 1.0
-Message-Id: <200803231143.14538.openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>
+In-Reply-To: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>
 Subject: Re: [RFC] move to opkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,50 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Mar 2008 10:43:43 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sun, 23 Mar 2008 10:58:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia Sunday 23 of March 2008, Mike (mwester) napisa=B3:
-> Here's what it has started to add to the image (there may be more than
-> this):
->
-> libgpg
-> libgpg-error
-> libcrypt
-> lzo
-> pth
-> libassuan
-> gnutls
+Some comments concerning the two following recipes:
 
-> In the short term:
->
-> A) Where are the docs on opkg?
+- opkg-native_svn.bb
+- opkg-sdk_svn.bb
 
-I do not have idea is there any at all ;(
+They both add "-disable-gpg" (note the single dash) to EXTRA_OECONF. I
+think this should be --disable-gpg if we actually want to disable GPG.
 
-> C) How much "fat" can we trim off of opkg, and how do we do that, so
-> that we don't have to throw out other niceties that users appreciate?
+opkg-sdk_svn.bb also adds "--with-opkglibdir=${target_libdir}/opkg" to
+EXTRA_OECONF, which looks wrong (I don't think the "opkg" bit should be
+there). From the configure.ac:
 
-Someone can add "opkg-lowfat_svn.bb":
+--with-opkglibdir=DIR   specifies directory to put status and info
+files. "/opkg" is always added so if you want your files to be in
+/usr/lib/opkg you should indicate --with-opkglibdir=/usr/lib
 
-=2D-code--
-require opkg_svn.bb
-EXTRA_OECONF +=3D "--disable-gpg"
-=2D-code--
-
-And proper PREFERRED_PROVIDER stuff. This recipe will not fetch all those=20
-libraries which you listed - only libcurl with dependencies will be=20
-added.
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-      I don't know. I don't care. And it doesn't make any difference.
-
-
+Cheers,
+Jeremy
 
 
