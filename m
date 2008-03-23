@@ -1,28 +1,35 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1JdUmR-0006hj-7e
-	for openembedded-devel@openembedded.org; Sun, 23 Mar 2008 19:18:51 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20080323181848.PEKE20794.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JdVMC-0003rn-1N
+	for openembedded-devel@openembedded.org; Sun, 23 Mar 2008 19:55:48 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JdVM6-0004zx-Nl
+	for openembedded-devel@openembedded.org; Sun, 23 Mar 2008 18:55:42 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 23 Mar 2008 18:55:42 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sun, 23 Mar 2008 14:18:48 -0400
-Received: from opus ([68.230.58.230]) by fed1rmimpo02.cox.net with bizsmtp
-	id 4iJn1Z00R4y2VvG04iJneK; Sun, 23 Mar 2008 14:18:47 -0400
-Date: Sun, 23 Mar 2008 11:18:47 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	Sun, 23 Mar 2008 18:55:42 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Message-ID: <20080323181847.GD11817@smtp.west.cox.net>
-References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>
-	<200803180849.21108.geoffrey@pager.net>
-	<frojpb$m6j$1@ger.gmane.org>
-	<1205858910.7500.39.camel@dax.rpnet.com>
-	<frosov$c0b$1@ger.gmane.org> <47E5A67B.5030809@dls.net>
-	<47E5E7DD.4030304@dls.net> <fs5dbl$n1g$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <fs5dbl$n1g$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.13 (2006-08-11)
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Sun, 23 Mar 2008 19:55:28 +0100
+Message-ID: <fs6930$cg0$1@ger.gmane.org>
+References: <BDAD3E9D-ACB9-433B-81C7-F727545ACCFE@student.utwente.nl>	<200803180849.21108.geoffrey@pager.net>	<frojpb$m6j$1@ger.gmane.org>	<1205858910.7500.39.camel@dax.rpnet.com>	<frosov$c0b$1@ger.gmane.org>
+	<47E5A67B.5030809@dls.net>	<47E5E7DD.4030304@dls.net>
+	<fs5dbl$n1g$1@ger.gmane.org>
+	<20080323181847.GD11817@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <20080323181847.GD11817@smtp.west.cox.net>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
 Subject: Re: [RFC] move to opkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -37,22 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Mar 2008 18:18:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 23 Mar 2008 18:55:48 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Mar 23, 2008 at 12:02:13PM +0100, Koen Kooi wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Or use the stable branch? The stable branch seems to fit your needs:
-> It's available, it's maintained and changes can only go in through a
-> public and open review process.
+Tom Rini schreef:
+| On Sun, Mar 23, 2008 at 12:02:13PM +0100, Koen Kooi wrote:
+|
+|> Or use the stable branch? The stable branch seems to fit your needs:
+|> It's available, it's maintained and changes can only go in through a
+|> public and open review process.
+|
+| So you're saying that opkg will move to the stable branch once someone
+| documents how to update distros for it?
 
-So you're saying that opkg will move to the stable branch once someone
-documents how to update distros for it?  Great!  Now that the first two
-(Angstrom and Poky) are done, you guys can all work together on getting
-SlugOS and Unslung updated, and make some notes of that as you go along.
+No, it can go into the stable branch once the steps in
+http://linuxtogo.org/gowiki/Angstrom/Backport_from_dev_to_stable have
+been satisfied.
 
--- 
-Tom Rini
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH5qegMkyGM64RGpERAvD8AKCXe8Hb6jG/z+Wy58ZHq3IEaxh2qACcC5Vg
+D8hGNopYpN2AK4g7pEu9Pkg=
+=Z2cj
+-----END PGP SIGNATURE-----
+
 
 
