@@ -1,23 +1,16 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [216.145.245.200] (helo=mx04.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1JdZu5-0007mz-80
+	(envelope-from <mwester@dls.net>) id 1JdeKN-0002J0-Tq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Mar 2008 00:47:05 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id CC22FDB270
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Mar 2008 19:47:04 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Sun, 23 Mar 2008 19:47:04 -0400
-X-Sasl-enc: foAINwih23msoTVObthqz0namPTP3dIYB01v1AfuYQxX 1206316024
-Received: from [192.168.18.11] (CPE-121-209-21-249.sa.bigpond.net.au
-	[121.209.21.249])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id DD4992F718
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Mar 2008 19:47:03 -0400 (EDT)
-Message-ID: <47E6EBC0.7070004@whitby.id.au>
-Date: Mon, 24 Mar 2008 10:16:08 +1030
-From: Rod Whitby <rod@whitby.id.au>
+	Mon, 24 Mar 2008 05:30:32 +0100
+Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
+	by mx04.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1JdeKN-0005kC-8n
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 23 Mar 2008 23:30:31 -0500
+Message-ID: <47E72E65.3030609@dls.net>
+Date: Sun, 23 Mar 2008 23:30:29 -0500
+From: "Mike (mwester)" <mwester@dls.net>
 User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
@@ -39,47 +32,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Mar 2008 23:47:05 -0000
+X-List-Received-Date: Mon, 24 Mar 2008 04:30:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Richard Purdie wrote:
-> Judging from the comments we have some people who want to continue to
-> use ipkg, is OE.dev going to support that? I know what several people
-> are going to answer and there is going to be a conflict here :(. There
-> is no technical reason both ipkg and opkg can't be in OE.dev with the
-> appropriate magic.
+> I'm not going to comment specifically on the various aspects of this
+> thread, it makes depressing reading and I can sympathise with the
+> various sides.
 
-I personally would be happy to use opkg on .dev, if the transition to it 
-was managed properly.  ipkg has been stagnant for some years now.
+Yes, it's depressing.  So something needs to be done.
+
+> Yes, there is a strong desire to remove ipkg from OE entirely from
+> certain parties and the reasons are political and complicated since
+> there is a lot of history involved. Personally I'm on the fence, ipkg is
+> a known quantity, bugs and all but I can see benefits of opkg.
+
+ From what I know, I suspect opkg would be desirable as well, but we 
+lack any information to determine what the cost would be.
+
+Here's my proposed solution: let's revert the opkg changes.  And then 
+let's do it right.  I'll be more than happy to drop all project 
+activities I have going on right now to assist in a re-do of the opkg 
+implementation.
+
+(Conversely, and regrettably, I just don't see that someone telling me 
+to reverse-engineer another distro in order for me to get the 
+information necessary is going to be accurate, productive, or 
+particularly beneficial to me or the community, so that's just not a 
+solution.)
+
+
+But let's leave the ipkg/opkg specifics aside for the moment...
+
+[snip for brevity]
 
 > This does raise the question of whether basing a distribution directly
 > off .dev is a good idea? I know some people do, I also know its called
 > the OE development branch for a reason.
 
-If you don't base the unstable HEAD of your distribution off .dev, then 
-.dev will never get the testing it requires, and you will never be able 
-to get your distribution included in the next stable branch.
+Dev moves too fast; if a distro is not constantly at the tip of the dev 
+branch, it is nearly impossible to get it working again. I know this 
+because twice now I've let .dev get ahead of me too far, and it's been a 
+real job to catch up.  In fact, if it wasn't for folks like rwhitby who 
+took on a lot of the work, we wouldn't have ever caught up from the 
+situation where I let several months elapse.
 
 > The thing is I don't think this is a technical problem, its more a
 > question about how OE.dev is managed and who can do what and how. If we
 > all had to write down the aims and objectives of OE.dev, every one would
 > be different :/.
 
-I think here it is simply a case of some people being unable to say 
-"sorry, I made a mistake, lets see how we can fix it" and instead trying 
-to point the blame at others.
+This is probably the root of the problem.
 
-We all realise that pushing .dev forward will cause breakage, and that 
-there should be no stigma associated with that breakage as long as there 
-is a transition proposal reviewed on the ML first.  In this instance, 
-(as I remember it), there was a proposal to move, but no transition plan 
-reviewed.  If there is a transition plan, and implementing that reviewed 
-plan causes breakage, then no-one should complain about that, and 
-everyone should just put their egos aside and pitch in and help fix the 
-problems.  The escalation occurs when people try to deflect the issue on 
-to others instead of dealing with it directly in a technical manner.
+I make an assumption about the gating criteria for entry of a change 
+into the .dev branch; it seems this assumption is not shared.
 
--- Rod
+But I did not form these assumptions in a vacuum -- they came from this 
+very place -- this mailing list.  Specifically, from the several commits 
+I made that upset certain people, who clarified (some more helpfully and 
+politely than others, but that's life) what I should have done: to 
+ensure that I properly communicated my intent to commit, and that I 
+didn't break anyone else's stuff when I finally committed the change. 
+I'm merely applying the criteria I was given (multiple times) to this 
+situation.
+
+Have we altered this thinking?  Can I now relax my criteria for 
+committing changes, too?  Please don't tell me that this is a case where 
+special dispensation has been granted for certain distros?
+
+> I could wade into this discussion as I've done in others but I don't
+> particularly want to and I'd prefer to let someone else deal with it.
+> I've already wasted far too much time trying to type this so far, this
+> is about the 3rd version since I'm not getting across what I think is
+> the right message to all parties :/.
+> 
+> The battering I've had recently on list, off list and on irc are enough
+> to make me seriously consider why I do what I do and whether I want to
+> continue doing it.
+
+I don't see where this is your problem.  In fact, you've been 
+extraordinarily helpful in resolving past issues with changes.  You've 
+gone above and beyond the call of duty in that regard -- for which I'm 
+very grateful.
+
+But where (and who) is the OE core team?  Why are they not enforcing 
+some of the rules (or if they prefer, clarifying that .dev is a 
+free-for-all)?  Either way would have resolved this issue, which 
+primarily resulted from a different expectations of the completeness and 
+quality of known-to-be-disruptive changes made on the branch.
+
+> Richard - wishing everyone could coexist
+
+Regards,
+Mike (mwester) - wishing for consistency
+
 
 
