@@ -1,21 +1,31 @@
-Received: from [66.249.82.228] (helo=wx-out-0506.google.com)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1JeBCY-0008F9-VI
+	(envelope-from <geoffrey@pager.net>) id 1JeBN7-00006d-9g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Mar 2008 16:36:39 +0100
-Received: by wx-out-0506.google.com with SMTP id h27so3667729wxd.3
+	Tue, 25 Mar 2008 16:47:33 +0100
+X-ASG-Debug-ID: 1206460051-3fbf000e0000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 116F62A045
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Mar 2008 08:36:38 -0700 (PDT)
-Received: by 10.141.50.17 with SMTP id c17mr3424783rvk.146.1206459397471;
-	Tue, 25 Mar 2008 08:36:37 -0700 (PDT)
-Received: by 10.114.234.12 with HTTP; Tue, 25 Mar 2008 08:36:37 -0700 (PDT)
-Message-ID: <19c1b8a90803250836o4651b44u69037448bcb333c8@mail.gmail.com>
-Date: Tue, 25 Mar 2008 08:36:37 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
+	Tue, 25 Mar 2008 10:47:32 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id 6IozBB4fqAVGKHpl for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Mar 2008 10:47:32 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: Re: [oe] AVR32 can build "base-image" target
+Date: Tue, 25 Mar 2008 10:47:36 -0500
+User-Agent: KMail/1.9.7
+References: <200803251023.51386.geoffrey@pager.net>
 In-Reply-To: <200803251023.51386.geoffrey@pager.net>
 MIME-Version: 1.0
-References: <200803251023.51386.geoffrey@pager.net>
+Message-Id: <200803251047.36750.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1206460052
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
 Subject: Re: AVR32 can build "base-image" target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -30,33 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Mar 2008 15:36:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 25 Mar 2008 15:47:33 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-you can apply it to all as well.
-
-On Tue, Mar 25, 2008 at 8:23 AM, Geoffrey Wossum <geoffrey@pager.net> wrote:
+On Tuesday 25 March 2008 10:23:51 am Geoffrey Wossum wrote:
 > Hi all,
 >
->  I just submitted patches to the OpenEmbedded Bugzilla that will allow you to
->  build the Angstrom 2008.1 "base-image" target for the AVR32.  Bug #4123
->  (http://bugs.openembedded.net/show_bug.cgi?id=4123).
->
->
->  One of the patches is actually for gcc bug #32388 (ICE in reload1.c), which
->  may be affecting other architectures.  I only applied the patch for the AVR32
->  target.  This patch is included in the mainline gcc 4.2.3 release.  See
->  http://gcc.gnu.org/bugzilla/show_bug.cgi?id=32889 for more info.
->
->  ---
->  Geoffrey
->
->  _______________________________________________
->  Openembedded-devel mailing list
->  Openembedded-devel@lists.openembedded.org
->  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> I just submitted patches to the OpenEmbedded Bugzilla that will allow you
+> to build the Angstrom 2008.1 "base-image" target for the AVR32.  Bug #4123
+> (http://bugs.openembedded.net/show_bug.cgi?id=4123).
+
+For anyone interested, here's my local.conf for the AVR32, minus all comments 
+and blank lines:
+
+---begin---
+DL_DIR = "${PRJROOT}/sources"
+BBFILES = "${PRJROOT}/org.openembedded.dev/packages/*/*.bb"
+BBMASK = ""
+PREFERRED_PROVIDERS = "virtual/qte:qte virtual/libqpe:libqpe-opie"
+PREFERRED_PROVIDERS += " virtual/libsdl:libsdl-x11"
+PREFERRED_PROVIDERS += " 
+virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
+PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc:gcc-cross"
+PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
+PREFERRED_VERSION_linux = "2.6.23"
+MACHINE = "at32stk1000"
+TARGET_OS = "linux-uclibc"
+DISTRO = "angstrom-2008.1"
+ANGSTROM_MODE = "uclibc"
+IMAGE_FSTYPES = "ext3 jffs2 tar"
+BBDEBUG = "yes"
+PARALLEL_MAKE = "-j 3"
+BBINCLUDELOGS = "yes"
+---end---
+
+
+---
+Geoffrey
 
 
