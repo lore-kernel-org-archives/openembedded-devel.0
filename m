@@ -1,30 +1,22 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [66.249.82.228] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JeB08-0007sx-Qb
+	(envelope-from <raj.khem@gmail.com>) id 1JeBCY-0008F9-VI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Mar 2008 16:23:49 +0100
-X-ASG-Debug-ID: 1206458626-33b800050000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 0E3A529FC9
+	Tue, 25 Mar 2008 16:36:39 +0100
+Received: by wx-out-0506.google.com with SMTP id h27so3667729wxd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Mar 2008 10:23:47 -0500 (CDT)
-Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
-	ESMTP id 34qKvpobZhsaCXqo for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Mar 2008 10:23:47 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
+	Tue, 25 Mar 2008 08:36:38 -0700 (PDT)
+Received: by 10.141.50.17 with SMTP id c17mr3424783rvk.146.1206459397471;
+	Tue, 25 Mar 2008 08:36:37 -0700 (PDT)
+Received: by 10.114.234.12 with HTTP; Tue, 25 Mar 2008 08:36:37 -0700 (PDT)
+Message-ID: <19c1b8a90803250836o4651b44u69037448bcb333c8@mail.gmail.com>
+Date: Tue, 25 Mar 2008 08:36:37 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: AVR32 can build "base-image" target
-Date: Tue, 25 Mar 2008 10:23:51 -0500
-User-Agent: KMail/1.9.7
+In-Reply-To: <200803251023.51386.geoffrey@pager.net>
 MIME-Version: 1.0
-Message-Id: <200803251023.51386.geoffrey@pager.net>
-X-Barracuda-Connect: UNKNOWN[192.168.1.1]
-X-Barracuda-Start-Time: 1206458627
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: AVR32 can build "base-image" target
+References: <200803251023.51386.geoffrey@pager.net>
+Subject: Re: AVR32 can build "base-image" target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,25 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Mar 2008 15:23:49 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Tue, 25 Mar 2008 15:36:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi all,
+you can apply it to all as well.
 
-I just submitted patches to the OpenEmbedded Bugzilla that will allow you to 
-build the Angstrom 2008.1 "base-image" target for the AVR32.  Bug #4123 
-(http://bugs.openembedded.net/show_bug.cgi?id=4123).
-
-
-One of the patches is actually for gcc bug #32388 (ICE in reload1.c), which 
-may be affecting other architectures.  I only applied the patch for the AVR32 
-target.  This patch is included in the mainline gcc 4.2.3 release.  See 
-http://gcc.gnu.org/bugzilla/show_bug.cgi?id=32889 for more info.
-
----
-Geoffrey
+On Tue, Mar 25, 2008 at 8:23 AM, Geoffrey Wossum <geoffrey@pager.net> wrote:
+> Hi all,
+>
+>  I just submitted patches to the OpenEmbedded Bugzilla that will allow you to
+>  build the Angstrom 2008.1 "base-image" target for the AVR32.  Bug #4123
+>  (http://bugs.openembedded.net/show_bug.cgi?id=4123).
+>
+>
+>  One of the patches is actually for gcc bug #32388 (ICE in reload1.c), which
+>  may be affecting other architectures.  I only applied the patch for the AVR32
+>  target.  This patch is included in the mainline gcc 4.2.3 release.  See
+>  http://gcc.gnu.org/bugzilla/show_bug.cgi?id=32889 for more info.
+>
+>  ---
+>  Geoffrey
+>
+>  _______________________________________________
+>  Openembedded-devel mailing list
+>  Openembedded-devel@lists.openembedded.org
+>  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
