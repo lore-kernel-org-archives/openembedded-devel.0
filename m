@@ -1,23 +1,22 @@
 Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1JeCu3-0003yh-74
+	(envelope-from <mickey@vanille-media.de>) id 1JeD0S-00049p-Am
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Mar 2008 18:25:39 +0100
+	Tue, 25 Mar 2008 18:32:16 +0100
 Received: from andromeda (e180141169.adsl.alicedsl.de [85.180.141.169])
-	by drlauer-research.com (Postfix) with ESMTP id 6FC4F584C99
+	by drlauer-research.com (Postfix) with ESMTP id 22A37584C9A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Mar 2008 18:34:04 +0100 (CET)
+	Tue, 25 Mar 2008 18:40:42 +0100 (CET)
 From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Mar 2008 18:26:15 +0100
+Date: Tue, 25 Mar 2008 18:32:52 +0100
 User-Agent: KMail/1.9.9
-References: <d46153c40803200540h522b735cq483a8f510020fe09@mail.gmail.com>
-	<20080320210020.1fc57e44@widy.localdomain>
-In-Reply-To: <20080320210020.1fc57e44@widy.localdomain>
+References: <200803201727.17485.zecke@selfish.org>
+In-Reply-To: <200803201727.17485.zecke@selfish.org>
 MIME-Version: 1.0
-Message-Id: <200803251826.15557.mickey@vanille-media.de>
-Subject: Re: [RFC] ipaq-sleep backlight control
+Message-Id: <200803251832.53035.mickey@vanille-media.de>
+Subject: Re: OpenEmbedded entity and some clarification
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,20 +30,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Mar 2008 17:25:39 -0000
+X-List-Received-Date: Tue, 25 Mar 2008 17:32:16 -0000
 Content-Type: text/plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thursday 20 March 2008 20:00:20 Paul Sokolovsky wrote:
-> IMHO, ipaq-sleep should go to /dev/null. Long-term, it should be 
-> replaced by that mythical "machine daemon" which sometimes appear in
-> blogs and ML conversations. Short-time, I wrote another, sane
-> and efficient backlight control daemon, packages/backsaver/ in OE.
+Thanks for the update, Holger.
 
-I fully agree to all points. I'll work on the long-term solution :)
+To add up on this, you may know that we currently have the mailing list 
+openembedded-private -- this one will be renamed to openembedded-ev as soon 
+as the e.V. has been installed. All e.V. members will automatically be 
+subscribed to this mailing list.
 
+:M:
 -- 
 Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
