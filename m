@@ -1,22 +1,28 @@
-Received: from [64.233.166.182] (helo=py-out-1112.google.com)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrew.paulsen@gmail.com>) id 1Jdu8H-0006qe-MZ
+	(envelope-from <rod@whitby.id.au>) id 1JdxcL-0000jQ-DZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Mar 2008 22:23:05 +0100
-Received: by py-out-1112.google.com with SMTP id y77so2785204pyg.28
+	Tue, 25 Mar 2008 02:06:21 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id B2207E2701
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Mar 2008 14:23:01 -0700 (PDT)
-Received: by 10.65.180.9 with SMTP id h9mr14422004qbp.31.1206393780207;
-	Mon, 24 Mar 2008 14:23:00 -0700 (PDT)
-Received: by 10.65.249.15 with HTTP; Mon, 24 Mar 2008 14:23:00 -0700 (PDT)
-Message-ID: <d46153c40803241423n4a6a7de3offb5ef8d0da4abca@mail.gmail.com>
-Date: Mon, 24 Mar 2008 16:23:00 -0500
-From: "Andrew Paulsen" <andrew.paulsen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d46153c40803200540h522b735cq483a8f510020fe09@mail.gmail.com>
+	Mon, 24 Mar 2008 21:06:20 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Mon, 24 Mar 2008 21:06:20 -0400
+X-Sasl-enc: 35Ge2izwN5osQMU7GKYiZp545pGdGnxYL3OimbjxcCIP 1206407180
+Received: from [192.168.124.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id B868EDB6D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Mar 2008 21:06:19 -0400 (EDT)
+Message-ID: <47E84FD1.3030401@whitby.id.au>
+Date: Tue, 25 Mar 2008 11:35:21 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
 MIME-Version: 1.0
-References: <d46153c40803200540h522b735cq483a8f510020fe09@mail.gmail.com>
-Subject: Re: [RFC] ipaq-sleep backlight control
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 0.95.6
+Subject: Fix for ipkg->opkg transition breakage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,39 +36,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Mar 2008 21:23:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 25 Mar 2008 01:06:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thu, Mar 20, 2008 at 7:40 AM, Andrew Paulsen
-<andrew.paulsen@gmail.com> wrote:
-> I did a code cleanup on ipaq-sleep and added the option to use your
->  own backlight control script instead of gpe-conf to adjust brightness.
->
->  http://bugs.openembedded.org/show_bug.cgi?id=4101
->
->  I have since heard that all 2.6 devices use the standard
->  /sys/class/backlight/*/ method to control brightness and that we don't
->  need/want to support others.
->
->  So I have three options and I'd like some opinions:
->  1) Leave ipaq-sleep the way it is and ship a standard backlight
->  control script that can be overridden/changed per machine.  This still
->  allows the legacy gpe-conf method (the default right now)
->  2) Have ipaq-sleep write directly to /sys/class/backlight/*/ to tweak
->  the brightness and skip this whole mess
->  3) Have the option to select between 1&2 via conf file entry
+I have added the following line to rootfs_ipk.bbclass to allow distros 
+that have not transitioned to using opkg in the target rootfs (as 
+opposed to opkg being used by the build system to create the rootfs) to 
+continue working as they did before with only an additional symlink's 
+worth of space used in the rootfs and no change to the user experience.
 
-I made a generic backlight control script that emulates the old
-gpe-conf methods and enabled it by default.  It can easily be
-overridden to the old behavior by changing ipaq-sleep.conf to point at
-/usr/bin/bl instead of /usr/bin/bl-ctrl.  The code and recipe are in
-the bugtracker.
+============================================================
+--- classes/rootfs_ipk.bbclass  c319cef6215ceb9e757092d0eb6ea8303cbaacad
++++ classes/rootfs_ipk.bbclass  f2e739e3ef76b513c9eded6b230ecdd3e8f71886
+@@ -60,6 +60,9 @@ fakeroot rootfs_ipk_do_rootfs () {
 
->
->  Thanks!
->  Andrew
->
+         rm -f ${IMAGE_ROOTFS}${libdir}/opkg/lists/*
+
++       # Keep this line until package manager selection is implemented
++       ln -s opkg ${IMAGE_ROOTFS}${sysconfdir}/ipkg
++
+         ${ROOTFS_POSTPROCESS_COMMAND}
+
+         log_check rootfs
+
+-- Rod
 
 
