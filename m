@@ -1,30 +1,32 @@
-Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded-devel@lists.futaris.org>)
-	id 1JeKc3-0000Hr-Nd for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Mar 2008 02:39:35 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 4DC6FE3E0B
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Mar 2008 21:39:35 -0400 (EDT)
-Received: from web7.messagingengine.com ([10.202.2.216])
-	by compute1.internal (MEProxy); Tue, 25 Mar 2008 21:39:35 -0400
-Received: by web7.messagingengine.com (Postfix, from userid 99)
-	id 0E1953F708; Tue, 25 Mar 2008 21:39:35 -0400 (EDT)
-Message-Id: <1206495575.1924.1244289243@webmail.messagingengine.com>
-X-Sasl-Enc: Nj5U2KA1fQ65Q8N24Z/s0kaC0ZoPDE5tsxe/eybz44nG 1206495575
-From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
+	(envelope-from <geoffrey@pager.net>) id 1JeaUR-0001zb-Pq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Mar 2008 19:36:48 +0100
+X-ASG-Debug-ID: 1206556606-328900040000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP
+	id 900512CB0E; Wed, 26 Mar 2008 13:36:46 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id f6VEntrEHcj9sT3G; Wed, 26 Mar 2008 13:36:46 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: Re: [oe] AVR32 - stops at gcc-cross-4.2.1 configure
+	GCC_NO_EXECUTABLES
+Date: Wed, 26 Mar 2008 13:36:38 -0500
+User-Agent: KMail/1.9.7
+References: <47E7757A.6080807@linuxdevelopment.de>
+	<47E8D99B.8060701@linuxdevelopment.de>
+	<200803250855.45366.geoffrey@pager.net>
+In-Reply-To: <200803250855.45366.geoffrey@pager.net>
 MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
-	<1205992995.25920.1243400709@webmail.messagingengine.com>
-	<1206017175.4700.8.camel@hammer.suse.cz>
-	<1206051256.5975.1243541279@webmail.messagingengine.com>
-	<1206295294.6914.7.camel@utx.utx.cz>
-In-Reply-To: <1206295294.6914.7.camel@utx.utx.cz>
-Date: Wed, 26 Mar 2008 11:39:35 +1000
-Subject: Re: iwmmxt optimization on PXA270 (dejagnu test report)
+Message-Id: <200803261336.38640.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1206556606
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: Re: AVR32 - stops at gcc-cross-4.2.1 configure GCC_NO_EXECUTABLES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,49 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2008 01:39:36 -0000
+X-List-Received-Date: Wed, 26 Mar 2008 18:36:48 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="ISO-8859-1"
 
+On Tuesday 25 March 2008 08:55:45 am Geoffrey Wossum wrote:
+> On Tuesday 25 March 2008 05:53:15 am Robert W=F6rle wrote:
 
-On Sun, 23 Mar 2008 19:01:33 +0100, "Stanislav Brabec" <utx@penguin.cz>
-said:
+> I think I submitted a patch to OE for the bzero() problem.  I know I
+> submitted it to the uClibc mailing list, and it was picked up by the Atmel
+> guy working on the port.  I'll put at the bottom of this email so you can
+> check if you have it.
 
-> I tested gcc-4.2.2-r6 with -march=iwmmxt -mcpu=iwmmxt -mtune=iwmmxt on
-> my image compiled for iwmmxt.
-> 
-> Results seems to be promising. 99.99% tests passed. Results for Fortran
-> are invalid (I had not libgfortran in the system). Surprisingly, all
-> g++.dg/eh (exception handling) tests PASSed.
+I submitted the actual patch to uClibc, but I must not have submitted the=20
+patch that makes the patch get used :)  But I've submitted that now.
 
-I was a bit surprised that all the exception handling tests PASSed, but
-then I realised that there is no code to test exceptions on iwmmxt in
-that directory:
-
-tmp/work/ep9312-angstrom-linux-gnueabi/gcc-cross-4.2.2-r6/gcc-4.2.6/gcc/testsuite/g++.dg/eh/
-
-The only unwind tester is arm-vfp-unwind.C , which is for the VFP
-coprocessor and floats, doubles, etc on VFP.
-
-iwmmxt should make use of uint64 / uint32, and simd .  I think simd-1 &
-simd-2 are only run for x86 machines with MMX.  We probably need
-something similar to test the popping of iwmmx data/control registers.
-
-I suspect we may need to write a quick test app to check for this error
-/ testcase...
-
-The other reason why some iwmmxt compiled apps are segfaulting is that
-something in iwmmxt support is missing.  Whilst the gcc testcases cover
-most of the major tests, sometimes we need to add extra test cases for
-100% test visibility.  I suspect that if gcc tries to do a
-Unwind_VRS_Pop and get the NOT_IMPLEMENTED signal, it causes the
-segfault.
-
-Not sure if there are many extra bugs introduced by compiling for iwmmxt
-vs armv5t, but I suspect this is the only "major" one.  It would be good
-if someone has already done these tests (or arm/armv5), so we can do a
-simple diff against the files to see what regression there is for
-iwmmxt...
+=2D--
+Geoffrey
 
 
