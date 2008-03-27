@@ -1,24 +1,25 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Jew6D-0005w4-OH
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 18:41:13 +0100
-Received: from [212.23.103.122] (helo=[10.161.239.33])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1Jew6D-0008Jo-Av
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 18:41:13 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Mar 2008 18:40:49 +0100
-User-Agent: KMail/1.9.9
+	(envelope-from <trini@kernel.crashing.org>) id 1JewAK-00066H-B0
+	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 18:45:28 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20080327174524.YWFX28792.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Thu, 27 Mar 2008 13:45:24 -0400
+Received: from opus ([68.230.58.230]) by fed1rmimpo01.cox.net with bizsmtp
+	id 6HlQ1Z00C4y2VvG03HlQZG; Thu, 27 Mar 2008 13:45:24 -0400
+Date: Thu, 27 Mar 2008 10:45:24 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20080327174524.GG4938@smtp.west.cox.net>
 References: <200803271217.41967.thomas.cooksey@trolltech.com>
 	<200803271752.07855.thomas.cooksey@trolltech.com>
-In-Reply-To: <200803271752.07855.thomas.cooksey@trolltech.com>
+	<1206638031.4514.53.camel@dax.rpnet.com>
 MIME-Version: 1.0
-Message-Id: <200803271840.49202.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.122
+In-Reply-To: <1206638031.4514.53.camel@dax.rpnet.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.13 (2006-08-11)
 Subject: Re: LEAD_SONAME?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,48 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 17:41:13 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Mar 2008 17:45:28 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thursday 27 March 2008 17:52:07 Tom Cooksey wrote:
+On Thu, Mar 27, 2008 at 05:13:51PM +0000, Richard Purdie wrote:
+> On Thu, 2008-03-27 at 17:52 +0100, Tom Cooksey wrote:
+[snip]
+> > > Your options are:
+> > > 	- Ignore the warning
+> > My prefered option, but only if this is not causing my dissappearing library issue.
+> > 
+> > > 	- Define a LEAD_SONAME of your primary lib
+> > > 	- More finegrained packaging.
+> > Do you mean doing having LEAD_SONAME_foo, LEAD_SONAME_bar, etc. ? That
+> > could work?
+> 
+> No, select one e.g. if libfoo is the most "important", LEAD_SONAME =
+> "libfoo".
 
-> Ok, well I'm not sure I like the idea of packages being renamed outside my
-> control, I wouldn't know which name to use in DEPENDS in other recipies.
-> There is also the issue of image recipies not knowing about the new name,
-> so I can't just add my package to the list in the image recipie.
+Ah, but what's up with wildcards in the field (ie glib-2.0) ?  Or ones
+that say "libfoo.so" (postgresql) or "libfoo.so.1" (uim) ?  People guessing
+incorrectly at the value?  Thanks!
 
-Hehe. For DEPENDS this is not an issue, for RDEPENDS it is not an issue as 
-well and this is the reason why I ask you to create a task in between, 
-because the renaming is failing/not done on image creation. ;)
-
-
-
->
-> > Your options are:
-> > 	- Ignore the warning
->
-> My prefered option, but only if this is not causing my dissappearing
-> library issue.
-
-Unlikely
-
-
->
-> > 	- Define a LEAD_SONAME of your primary lib
-> > 	- More finegrained packaging.
->
-> Do you mean doing having LEAD_SONAME_foo, LEAD_SONAME_bar, etc. ? That
-> could work?
-
-I assume this is with Qt? So you still have separate packages for qtcore, 
-qtxml, ...? Why do you have more than one library in these packages anyway? 
-But yes LEAD_SONAME_qtcore, LEAD_SONAME_qtxml would clarify things. But again 
-findout why there is more than one lib in the package.
-
-
-z.
+-- 
+Tom Rini
 
 
