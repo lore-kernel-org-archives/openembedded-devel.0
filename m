@@ -1,24 +1,33 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JewYL-0005qk-Rf
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 19:10:18 +0100
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Jex5T-0003ak-72
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 19:44:31 +0100
-Message-ID: <47EBE31A.3010602@kernelconcepts.de>
-Date: Thu, 27 Mar 2008 19:10:34 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <47E99679.3050606@kernelconcepts.de>
-In-Reply-To: <47E99679.3050606@kernelconcepts.de>
-X-Enigmail-Version: 0.95.0
-Subject: Re: OE booth at LinuxTag
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Jexj2-0000mG-VE
+	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 20:25:25 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Jexiz-0006DS-8U
+	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 19:25:21 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 27 Mar 2008 19:25:21 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 27 Mar 2008 19:25:21 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Thu, 27 Mar 2008 20:25:13 +0100
+Message-ID: <fsgsaq$nqf$1@ger.gmane.org>
+References: <1206638249.4514.57.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <1206638249.4514.57.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+Subject: Re: ipkg/opkg offical response
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,30 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 18:10:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 27 Mar 2008 19:25:25 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> We might want to collect information using the wiki like:
+Richard Purdie schreef:
 
-The wiki is there:
+| * Adding do_deploy to packaged-staging's knowledge. This is best done
+| with the patch for kernel.bbclass that thesing was been working on. I've
+| made some suggestions for tweaks (looking at the version already in
+| poky) and suggested he commits it after that.
 
-http://www.openembedded.org/linuxtag2008
+That patch broke uImage kernels *real bad*, I just pushed a fix for it.
 
-It contains a minimum of structure and event information already.
+Proper review on mailinglist first next time?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Greetings
+iD8DBQFH6/SZMkyGM64RGpERAlQqAJ9TQZ14UlkUvuJGALQaw6cshS01gACgkWkd
+HtY0P54Pk5HXV+qPkEGmxtw=
+=4YKa
+-----END PGP SIGNATURE-----
 
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
