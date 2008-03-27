@@ -1,23 +1,22 @@
 Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Jeqz7-0001fN-Vv
+	(envelope-from <zecke@selfish.org>) id 1JeqzK-0001ft-HJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 13:13:33 +0100
+	Thu, 27 Mar 2008 13:13:46 +0100
 Received: from [212.23.103.62] (helo=[10.129.250.21])
 	by coruscant.onosendai.de with esmtpsa
 	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1Jeqz3-0007sW-BP
+	(envelope-from <zecke@selfish.org>) id 1JeqzI-0007sW-5x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 13:13:33 +0100
+	Thu, 27 Mar 2008 13:13:46 +0100
 From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Mar 2008 03:26:14 +0100
+Date: Thu, 27 Mar 2008 03:49:59 +0100
 User-Agent: KMail/1.9.9
 References: <47EAEB1D.9060004@xora.org.uk>
-	<200803270150.46085.mickey@vanille-media.de>
-In-Reply-To: <200803270150.46085.mickey@vanille-media.de>
+In-Reply-To: <47EAEB1D.9060004@xora.org.uk>
 MIME-Version: 1.0
-Message-Id: <200803270326.15080.zecke@selfish.org>
+Message-Id: <200803270349.59619.zecke@selfish.org>
 X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.62
 Subject: Re: SCM scorecards
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -33,55 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 12:13:34 -0000
+X-List-Received-Date: Thu, 27 Mar 2008 12:13:46 -0000
+Content-Disposition: inline
 Content-Type: text/plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thursday 27 March 2008 01:50:46 Michael 'Mickey' Lauer wrote:
-> Let me add up on that and slightly change:
-> > Ease of Branch Merging Git 4 Monotone 3
+On Thursday 27 March 2008 01:32:29 Graeme Gregory wrote:
+> Moving a private discussion public I started to add a quick score card for
+> SCM's
 >
-> Holger?
-That is probably me?
+> This is currently how I see feature support.
+>
+> So far we seem to have this list where goodness is 1-5 (5 being good)
+>
+> CPU Load Git 5 Monotone 3
+> Ease of branching Git 5 Monotone 5
+> Ease of Branch Merging Git 4 Monotone 3
+> Ease of Serving Git 1 Monotone 5
+> Ease of Distributed SCM Git 2 Monotone 5
+>
+>
+> Im sure there is more scores we can add to this list. And you might not
+> agree with my scores, but it seems pretty close so far.
 
-Merging: As Linus pointed out branching is not the problem, merging is:
+Ease of publishing branches Git 5 Monotone 0:
+	Reasoning:
+		With git, I push and transfer the number of bytes that I have changed
+		to the server. So a small change is a small upload.
 
-1.) mtn and git are equally good in doing conflict free merges
-2.) merges with conflicts:
-	Both git and mtn allow you to use kdiff3, meld.. to do the merge.
+		With mtn (0.37 here) in contrast it wants to upload every revision to the 
+		server. I'm on a GPRS/UMTS/CDMA line and after ~48MB of upload I got 
+		disconnected, twice. The revs still reside on my disk only, I'm not able
+		to share it. The database is locked during this operation, I can not do 
+		diffs, commits, checkouts during this time.
 
-	Git is changing files in the workdir but this doesn't matter as you
-	resolve the conflict with git-mergetool anyway.
-
-	Git has the concept of the index, which is really cool and makes
-	things easy. You can set the file state to anything you want during
-	the merge and once you are happy continue.
-
-	Also git is a content tracker, so if I got this right. If I have the same
-	bb file (content hash the same, path the same) in two branches mtn
-	would go to NCC and refuse to work, git will not have a merge conflict at 
-	all.
-
-3.) Things related to merging:
-	git-reset HEAD^1 to undo your merge if you didn't like the result (in cases 
-where you know you made an accident and disapprove makes little sense)
-
-	git-cherry-pick to pick a change and then pull/rebase without getting a NCC
-	conflict.
-
-	git-rebase to change your patchset after some of the patches have been merged
-	upstream (effectively what Openmoko is doing on OE).
+		Publishing means uploading what we have created, which is a lot bigger than 
+		just my small change.
 
 
-with git there is little more I could ask for, with mtn I have two unmergable 
-things right now. git-rebase is the best thing since sliced bread. So it is 
-either a 5:3 or 4:2.
-
-
-PS: I talk about recent versions of git, with git-mergetool and such...
-PPS: I recognize that mtn has served us well, the pace of development is IMHO 
-just too slow.
+z.
 
 
