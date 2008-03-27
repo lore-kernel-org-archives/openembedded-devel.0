@@ -1,33 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jevby-00005r-Gj
-	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 18:09:58 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jevbs-0006aM-Cu
-	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 17:09:52 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 17:09:52 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 17:09:52 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <rpurdie@rpsys.net>) id 1Jevfo-0000MH-6x
+	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 18:13:56 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2RHDttl012617
+	for <openembedded-devel@openembedded.org>; Thu, 27 Mar 2008 17:13:55 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 12496-04 for <openembedded-devel@openembedded.org>;
+	Thu, 27 Mar 2008 17:13:51 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2RHDocK012610
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Thu, 27 Mar 2008 17:13:50 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Thu, 27 Mar 2008 18:09:43 +0100
-Message-ID: <fsgkcn$n1t$1@ger.gmane.org>
+In-Reply-To: <200803271752.07855.thomas.cooksey@trolltech.com>
 References: <200803271217.41967.thomas.cooksey@trolltech.com>
 	<200803271752.07855.thomas.cooksey@trolltech.com>
+Date: Thu, 27 Mar 2008 17:13:51 +0000
+Message-Id: <1206638031.4514.53.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <200803271752.07855.thomas.cooksey@trolltech.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: LEAD_SONAME?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -42,43 +39,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 17:09:58 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 27 Mar 2008 17:13:56 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, 2008-03-27 at 17:52 +0100, Tom Cooksey wrote:
+> Ok, well I'm not sure I like the idea of packages being renamed outside my control,
+> I wouldn't know which name to use in DEPENDS in other recipies. There is also the
+> issue of image recipies not knowing about the new name, so I can't just add my
+> package to the list in the image recipie.
 
-Tom Cooksey schreef:
-| On Thursday 27 March 2008 15:44:02 Holger Freyther wrote:
-|> On Thursday 27 March 2008 12:17:41 Tom Cooksey wrote:
-|>> I get a warning saying:
-|>>
-|>> NOTE: Multiple libraries (...) found and LEAD_SONAME not defined
-|> this has to do with debian package renaming. This happens when
-someone (e.g.
-|> your distro as part of its policies) INHERITS the debian bbclass.
-|>
-|> What is happening:
-|> 	Imagine I have a package foo and only install a libfoo.so.1.0.0 in the
-|> libdir. AFAIK according to debian packaging policies the package gets
-renamed
-|> from foo to libfoo1. If you have more than one lib installed OE does
-not know
-|> which lib name to pick and will print the warning (debian.bbclass:83).
-|
-| Ok, well I'm not sure I like the idea of packages being renamed
-outside my control,
-| I wouldn't know which name to use in DEPENDS in other recipies.
+There used to be this problem but it doesn't exist these days. In
+DEPENDS you use the recipe PN. In R* varaibles like RDEPENDS you use the
+name as it is in PACKAGES. Any renaming will automatically be taken into
+account.
 
-OE takes care of that automagically.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+debian.bbclass is the typical example of this and probably where your
+LEAD_SONAME warning is coming from.
 
-iD8DBQFH69TXMkyGM64RGpERAky5AKCc5MQXVV0RxJNA4e5hlG3AaNjONgCfaSOo
-vaKGmC/9xBygCzMToyC8DPY=
-=Mnqv
------END PGP SIGNATURE-----
+> > Your options are:
+> > 	- Ignore the warning
+> My prefered option, but only if this is not causing my dissappearing library issue.
+> 
+> > 	- Define a LEAD_SONAME of your primary lib
+> > 	- More finegrained packaging.
+> Do you mean doing having LEAD_SONAME_foo, LEAD_SONAME_bar, etc. ? That
+> could work?
+
+No, select one e.g. if libfoo is the most "important", LEAD_SONAME =
+"libfoo".
+
+Cheers,
+
+Richard
 
 
 
