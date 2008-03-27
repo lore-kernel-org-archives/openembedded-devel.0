@@ -1,33 +1,28 @@
-Received: from [62.70.27.150] (helo=hoat.troll.no)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tcooksey@trolltech.com>) id 1JerFZ-0006sW-Rc
-	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 13:30:34 +0100
-Received: from hoat.troll.no (tedur.troll.no [62.70.27.154])
-	by hoat.troll.no (Postfix) with SMTP id 195E720962
-	for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 13:30:32 +0100 (CET)
-Received: from sx01.troll.no (sx01.troll.no [62.70.27.21])
-	by hoat.troll.no (Postfix) with ESMTP id 12E8D2046F
-	for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 13:30:32 +0100 (CET)
-Received: from sx01.troll.no (localhost.localdomain [127.0.0.1])
-	by sx01.troll.no (8.13.8/8.13.8) with ESMTP id m2RCUVDk010537
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Mar 2008 13:30:31 +0100
-Received: from tomdev.troll.no (tomdev.troll.no [10.3.5.39])
-	by sx01.troll.no (Scalix SMTP Relay 11.3.0.11339)
-	via ESMTP; Thu, 27 Mar 2008 13:30:31 +0100 (CET)
-Date: Thu, 27 Mar 2008 13:30:49 +0100
-From: Tom Cooksey <thomas.cooksey@trolltech.com>
-To: openembedded-devel@openembedded.org
-Message-ID: <200803271330.49774.thomas.cooksey@trolltech.com>
-In-Reply-To: <200803271217.41967.thomas.cooksey@trolltech.com>
-References: <200803271217.41967.thomas.cooksey@trolltech.com>
-x-scalix-Hops: 1
-Organization: Trolltech
-User-Agent: KMail/1.9.7
-MIME-Version: 1.0
-Subject: Re: LEAD_SONAME?
+	(envelope-from <rpurdie@rpsys.net>) id 1JerHl-0006yp-9z
+	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 13:32:49 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2RCWnqx027021
+	for <openembedded-devel@openembedded.org>; Thu, 27 Mar 2008 12:32:49 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 26761-08 for <openembedded-devel@openembedded.org>;
+	Thu, 27 Mar 2008 12:32:44 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2RCWeMj027010
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Thu, 27 Mar 2008 12:32:40 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Thu, 27 Mar 2008 12:32:41 +0000
+Message-Id: <1206621161.4514.19.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Monotone server issues?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,42 +36,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 12:30:38 -0000
-Content-Type: text/plain;
-	charset="US-ASCII"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Mar 2008 12:32:49 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thursday 27 March 2008 12:17:41 Tom Cooksey wrote:
-> I'm guessing it's got something to do with automatic 
-> dependency tracking? Do I just list the shared libraries my package 
-> provides? If so, which version? The .so, .so.major, .so.major.minor or 
-> the complete .so.major.minor.patch?
+Hi Guys,
 
-Ok, I've tried adding all the libraries the package contains to LEAD_SONAME,
-but now it's complaining with this:
+Can someone who knows what they're doing see what the various monotone
+servers are doing?
 
-NOTE: Multiple matches (...) for LEAD_SONAME 'libQt*'
+I spent all of yesterday trying to find a window to push some changes
+and failed since the connection kept stalling. This morning I pulled
+from the wolfson and nslu2 mirrors, merged and pushed back. Something
+like 400 revisions flowed from me to nslu2 which now won't speak to me
+with:
 
-So I guess it's only designed for a single .so file? What about packages with
-multiple .so files?
+mtn: connecting to monotone.nslu2-linux.org
+mtn: finding items to synchronize:
+mtn: certificates | keys | revisions
+mtn:       69,681 |   72 |    22,954
+mtn: warning: protocol error while processing peer monotone.nslu2-linux.org: 'received network error: not serving branch 'org.openembedded.angstrom-2007.12-stable''
+mtn:  bytes in | bytes out | certs in | revs in
+mtn:        85 |       251 |        0 |       0
+mtn: error: processing failure while talking to peer monotone.nslu2-linux.org, disconnecting
 
-I see this is all going on in debian.bbclass. Does this mean .ipkgs are now
-debs?
+so its not carrying the stable branch which is fine but I don't know
+where the 401 revisions came from or why it used to communicate with me
+and now won't.
 
-I am actually splitting off all the individual libraries into seperate packages,
-so should I be defining LEAD_SONAME_foo?
+Just to try and clear things up I've also pushed to the wolfson mirror
+has taken 221 revisions and is currently "hanging"...
 
-I'm also getting a truely bizzare problem, possibly related, where .so files are
-missing from the packages. If I look in ${WORKDIR}/install I get a directory
-for each package I've defined. The packages which should have .so files in
-${libdir} are missing these files. However, I also have some .so files (plugins)
-in a different directory, and they are fine?
-
-I'm very confused, please could someone shed some light for me?
-
+Is this related to the Openmoko branching or something else? Something
+feels very wrong :/
 
 Cheers,
 
-Tom
+Richard
+
+
 
 
