@@ -1,25 +1,34 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [62.70.27.150] (helo=hoat.troll.no)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JevJu-00081K-Lt
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 17:51:18 +0100
-Received: from [212.23.103.122] (helo=[10.161.239.33])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1JevJu-0006YX-27
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 17:51:18 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Mar 2008 17:50:49 +0100
-User-Agent: KMail/1.9.9
-References: <47EAEB1D.9060004@xora.org.uk>
-	<200803270349.59619.zecke@selfish.org> <fsggcu$5i8$1@ger.gmane.org>
-In-Reply-To: <fsggcu$5i8$1@ger.gmane.org>
+	(envelope-from <tcooksey@trolltech.com>) id 1JevKP-00081f-8q
+	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 17:51:49 +0100
+Received: from hoat.troll.no (tedur.troll.no [62.70.27.154])
+	by hoat.troll.no (Postfix) with SMTP id A6A0C20AD3
+	for <openembedded-devel@openembedded.org>;
+	Thu, 27 Mar 2008 17:51:47 +0100 (CET)
+Received: from sx01.troll.no (sx01.troll.no [62.70.27.21])
+	by hoat.troll.no (Postfix) with ESMTP id A0DAB20ACE
+	for <openembedded-devel@openembedded.org>;
+	Thu, 27 Mar 2008 17:51:47 +0100 (CET)
+Received: from sx01.troll.no (localhost.localdomain [127.0.0.1])
+	by sx01.troll.no (8.13.8/8.13.8) with ESMTP id m2RGpkbD008974
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Mar 2008 17:51:46 +0100
+Received: from tomdev.troll.no (tomdev.troll.no [10.3.5.39])
+	by sx01.troll.no (Scalix SMTP Relay 11.3.0.11339)
+	via ESMTP; Thu, 27 Mar 2008 17:51:46 +0100 (CET)
+Date: Thu, 27 Mar 2008 17:52:07 +0100
+From: Tom Cooksey <thomas.cooksey@trolltech.com>
+To: openembedded-devel@openembedded.org
+Message-ID: <200803271752.07855.thomas.cooksey@trolltech.com>
+In-Reply-To: <200803271544.02819.zecke@selfish.org>
+References: <200803271217.41967.thomas.cooksey@trolltech.com>
+References: <200803271544.02819.zecke@selfish.org>
+x-scalix-Hops: 1
+Organization: Trolltech
+User-Agent: KMail/1.9.7
 MIME-Version: 1.0
-Message-Id: <200803271750.49583.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.122
-Subject: Re: SCM scorecards
+Subject: Re: LEAD_SONAME?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,45 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 16:51:18 -0000
+X-List-Received-Date: Thu, 27 Mar 2008 16:51:49 -0000
 Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+	charset="US-ASCII"
 Content-Disposition: inline
 
-On Thursday 27 March 2008 17:01:34 Koen Kooi wrote:
-> Holger Freyther schreef:
+On Thursday 27 March 2008 15:44:02 Holger Freyther wrote:
+> On Thursday 27 March 2008 12:17:41 Tom Cooksey wrote:
+> > I get a warning saying:
+> >
+> > NOTE: Multiple libraries (...) found and LEAD_SONAME not defined
+> 
+> this has to do with debian package renaming. This happens when someone (e.g. 
+> your distro as part of its policies) INHERITS the debian bbclass.
+> 
+> What is happening:
+> 	Imagine I have a package foo and only install a libfoo.so.1.0.0 in the 
+> libdir. AFAIK according to debian packaging policies the package gets renamed 
+> from foo to libfoo1. If you have more than one lib installed OE does not know 
+> which lib name to pick and will print the warning (debian.bbclass:83).
 
-> That's because you used the wrong branch include pattern when pushing,
-> you did:
->
-> ~  mtn push host org.foo.zecke1
->
-> you want:
+Ok, well I'm not sure I like the idea of packages being renamed outside my control,
+I wouldn't know which name to use in DEPENDS in other recipies. There is also the
+issue of image recipies not knowing about the new name, so I can't just add my
+package to the list in the image recipie.
 
-Why would I want to push my changes to the original branch? In this case I 
-don't want to because they contain untested changes.
+> Your options are:
+> 	- Ignore the warning
+My prefered option, but only if this is not causing my dissappearing library issue.
 
-This means I have to pull a 'virgin' org.openmoko.dev tree, pull my branches 
-from the other db and publish. Or kill the revisions in the org.openmoko.dev 
-branch I don't want to push.
+> 	- Define a LEAD_SONAME of your primary lib
+> 	- More finegrained packaging.
+Do you mean doing having LEAD_SONAME_foo, LEAD_SONAME_bar, etc. ? That
+could work?
 
+> helpful?
+Always. :-)
 
->
-> ~  mtn push host org.foo.{original,zecke1}
->
-> the second will only transfer new revs, instead of marking all revs with
-> the new branch cert and (re)transferring them.
-
-Interesting. I thought the certs say which revision they are attached to, so I 
-would have to upload ~25.000 branch certs. The revisions should be unchanged 
-and only certs should be uploaded. I assume this is a bug and unnoticed due 
-the use of broadband. :)
-
-thanks for the fish-slap, I was able to publish my two branches. So it is not 
-zero points on the scoreboard, but I hit one limitiation and one bug or just 
-two bugs. I will get my act together and report them.
-
-	z.
 
 
