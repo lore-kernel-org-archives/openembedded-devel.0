@@ -1,30 +1,22 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [209.85.142.191] (helo=ti-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1JesL0-000568-71
+	(envelope-from <lvcargnini@gmail.com>) id 1Jet44-0002hp-CC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 14:40:14 +0100
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.63)
-	(envelope-from <broonie@sirena.org.uk>) id 1JesKy-0008M6-PD
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Mar 2008 13:40:13 +0000
-Date: Thu, 27 Mar 2008 13:40:12 +0000
-From: Mark Brown <broonie@sirena.org.uk>
+	Thu, 27 Mar 2008 15:26:49 +0100
+Received: by ti-out-0910.google.com with SMTP id a6so2113087tib.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Mar 2008 07:26:44 -0700 (PDT)
+Received: by 10.110.20.17 with SMTP id 17mr981673tit.47.1206628003824;
+	Thu, 27 Mar 2008 07:26:43 -0700 (PDT)
+Received: by 10.70.109.5 with HTTP; Thu, 27 Mar 2008 07:26:43 -0700 (PDT)
+Message-ID: <ae36f8040803270726i68376dd9o315a47d5aebed6c7@mail.gmail.com>
+Date: Thu, 27 Mar 2008 11:26:43 -0300
+From: "=?UTF-8?Q?Lu=C3=ADs_Vit=C3=B3rio_Cargnini?=" <lvcargnini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080327134009.GA20399@sirena.org.uk>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <47EAEB1D.9060004@xora.org.uk>
-	<200803270150.46085.mickey@vanille-media.de>
-	<47EAF1E0.8090401@xora.org.uk>
-	<200803270311.47461.zecke@selfish.org>
+In-Reply-To: <1206621161.4514.19.camel@dax.rpnet.com>
 MIME-Version: 1.0
-In-Reply-To: <200803270311.47461.zecke@selfish.org>
-X-Cookie: You're using a keyboard!  How quaint!
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
-X-SA-Exim-Scanned: No (on cassiel.sirena.org.uk);
-	SAEximRunCond expanded to false
-Subject: Re: SCM scorecards
+References: <1206621161.4514.19.camel@dax.rpnet.com>
+Subject: Re: Monotone server issues?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,29 +30,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 13:40:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 27 Mar 2008 14:26:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
 Content-Disposition: inline
 
-On Thu, Mar 27, 2008 at 03:11:47AM +0100, Holger Freyther wrote:
-> On Thursday 27 March 2008 02:01:20 Graeme Gregory wrote:
-
-> > The methods of syncing two git trees seem to be hacks or alter
-> > data. master becomes origin/master for example.
-
-> repo.or.cz supports a mirror mode so it can't be too hard. My approach would 
-> consist out of two shell commands:
-
-That's a read-only mirror with one master server where writes happen.
-What monotone supports is having multiple masters - users can push
-changes to any of the servers and have the servers sort things out.
-You'd also have to jump through a small hoop to make all the branches
-visible on the child - by default it will not create local branches for
-all remote branches, it will represent the remote branches as
-remote/branch tags (where remote is the name of the remote, origin by
-default).
-
--- 
-"You grabbed my hand and we fell into it, like a daydream - or a fever."
+Z3V5cyAuLi4gbGV0J3MgbW92ZSB0byBHSVQsIGhlcmUgaXMgbXkgdm90ZQoKT24gVGh1LCBNYXIg
+MjcsIDIwMDggYXQgOTozMiBBTSwgUmljaGFyZCBQdXJkaWUgPHJwdXJkaWVAcnBzeXMubmV0PiB3
+cm90ZToKPiBIaSBHdXlzLAo+Cj4gQ2FuIHNvbWVvbmUgd2hvIGtub3dzIHdoYXQgdGhleSdyZSBk
+b2luZyBzZWUgd2hhdCB0aGUgdmFyaW91cyBtb25vdG9uZQo+IHNlcnZlcnMgYXJlIGRvaW5nPwo+
+Cj4gSSBzcGVudCBhbGwgb2YgeWVzdGVyZGF5IHRyeWluZyB0byBmaW5kIGEgd2luZG93IHRvIHB1
+c2ggc29tZSBjaGFuZ2VzCj4gYW5kIGZhaWxlZCBzaW5jZSB0aGUgY29ubmVjdGlvbiBrZXB0IHN0
+YWxsaW5nLiBUaGlzIG1vcm5pbmcgSSBwdWxsZWQKPiBmcm9tIHRoZSB3b2xmc29uIGFuZCBuc2x1
+MiBtaXJyb3JzLCBtZXJnZWQgYW5kIHB1c2hlZCBiYWNrLiBTb21ldGhpbmcKPiBsaWtlIDQwMCBy
+ZXZpc2lvbnMgZmxvd2VkIGZyb20gbWUgdG8gbnNsdTIgd2hpY2ggbm93IHdvbid0IHNwZWFrIHRv
+IG1lCj4gd2l0aDoKPgo+IG10bjogY29ubmVjdGluZyB0byBtb25vdG9uZS5uc2x1Mi1saW51eC5v
+cmcKPiBtdG46IGZpbmRpbmcgaXRlbXMgdG8gc3luY2hyb25pemU6Cj4gbXRuOiBjZXJ0aWZpY2F0
+ZXMgfCBrZXlzIHwgcmV2aXNpb25zCj4gbXRuOiAgICAgICA2OSw2ODEgfCAgIDcyIHwgICAgMjIs
+OTU0Cj4gbXRuOiB3YXJuaW5nOiBwcm90b2NvbCBlcnJvciB3aGlsZSBwcm9jZXNzaW5nIHBlZXIg
+bW9ub3RvbmUubnNsdTItbGludXgub3JnOiAncmVjZWl2ZWQgbmV0d29yayBlcnJvcjogbm90IHNl
+cnZpbmcgYnJhbmNoICdvcmcub3BlbmVtYmVkZGVkLmFuZ3N0cm9tLTIwMDcuMTItc3RhYmxlJycK
+PiBtdG46ICBieXRlcyBpbiB8IGJ5dGVzIG91dCB8IGNlcnRzIGluIHwgcmV2cyBpbgo+IG10bjog
+ICAgICAgIDg1IHwgICAgICAgMjUxIHwgICAgICAgIDAgfCAgICAgICAwCj4gbXRuOiBlcnJvcjog
+cHJvY2Vzc2luZyBmYWlsdXJlIHdoaWxlIHRhbGtpbmcgdG8gcGVlciBtb25vdG9uZS5uc2x1Mi1s
+aW51eC5vcmcsIGRpc2Nvbm5lY3RpbmcKPgo+IHNvIGl0cyBub3QgY2FycnlpbmcgdGhlIHN0YWJs
+ZSBicmFuY2ggd2hpY2ggaXMgZmluZSBidXQgSSBkb24ndCBrbm93Cj4gd2hlcmUgdGhlIDQwMSBy
+ZXZpc2lvbnMgY2FtZSBmcm9tIG9yIHdoeSBpdCB1c2VkIHRvIGNvbW11bmljYXRlIHdpdGggbWUK
+PiBhbmQgbm93IHdvbid0Lgo+Cj4gSnVzdCB0byB0cnkgYW5kIGNsZWFyIHRoaW5ncyB1cCBJJ3Zl
+IGFsc28gcHVzaGVkIHRvIHRoZSB3b2xmc29uIG1pcnJvcgo+IGhhcyB0YWtlbiAyMjEgcmV2aXNp
+b25zIGFuZCBpcyBjdXJyZW50bHkgImhhbmdpbmciLi4uCj4KPiBJcyB0aGlzIHJlbGF0ZWQgdG8g
+dGhlIE9wZW5tb2tvIGJyYW5jaGluZyBvciBzb21ldGhpbmcgZWxzZT8gU29tZXRoaW5nCj4gZmVl
+bHMgdmVyeSB3cm9uZyA6Lwo+Cj4gQ2hlZXJzLAo+Cj4gUmljaGFyZAo+Cj4KPgo+IF9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gT3BlbmVtYmVkZGVkLWRl
+dmVsIG1haWxpbmcgbGlzdAo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
+b3JnCj4gaHR0cDovL2xpc3RzLmxpbnV4dG9nby5vcmcvY2dpLWJpbi9tYWlsbWFuL2xpc3RpbmZv
+L29wZW5lbWJlZGRlZC1kZXZlbAo+CgoKCi0tIAotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KVGhhbmtz
+ICYmIFJlZ2FyZHMKTS5TYy4gQi5TYy4gTHXDrXMgVml0w7NyaW8gQ2FyZ25pbmkKSUVFRSBNZW1i
+ZXIKRWxlY3RyaWNhbCBFbmdpbmVlciBGYWN1bHR5IEAgUFVDUlMKSXBpcmFuZ2EgQXZlbnVlLCA2
+NjgxIOKAkyBCdWlsZGluZyAzMApQLk8uIEJveDogOTA2MTktOTAwIOKAkyBQb3J0byBBbGVncmUv
+UlMKUGhvbmU6ICs1NSA1MSAzMzIwIDM1MDAgZXh0ZW5zaW9uOiA3Njk2Ci0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLQo=
 
 
