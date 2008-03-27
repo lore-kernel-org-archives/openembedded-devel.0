@@ -1,31 +1,25 @@
-Received: from [62.70.27.150] (helo=hoat.troll.no)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tcooksey@trolltech.com>) id 1Jeq6p-0004He-25
-	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 12:17:27 +0100
-Received: from hoat.troll.no (tedur.troll.no [62.70.27.154])
-	by hoat.troll.no (Postfix) with SMTP id 744D220A1C
-	for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 12:17:25 +0100 (CET)
-Received: from sx01.troll.no (sx01.troll.no [62.70.27.21])
-	by hoat.troll.no (Postfix) with ESMTP id 647522028C
-	for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 12:17:25 +0100 (CET)
-Received: from sx01.troll.no (localhost.localdomain [127.0.0.1])
-	by sx01.troll.no (8.13.8/8.13.8) with ESMTP id m2RBHOoY018199
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Mar 2008 12:17:24 +0100
-Received: from tomdev.troll.no (tomdev.troll.no [10.3.5.39])
-	by sx01.troll.no (Scalix SMTP Relay 11.3.0.11339)
-	via ESMTP; Thu, 27 Mar 2008 12:17:24 +0100 (CET)
-Date: Thu, 27 Mar 2008 12:17:41 +0100
-From: Tom Cooksey <thomas.cooksey@trolltech.com>
-To: openembedded-devel@openembedded.org
-Message-ID: <200803271217.41967.thomas.cooksey@trolltech.com>
-x-scalix-Hops: 1
-Organization: Trolltech
-User-Agent: KMail/1.9.7
+	(envelope-from <zecke@selfish.org>) id 1Jeqz7-0001fN-Vv
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Mar 2008 13:13:33 +0100
+Received: from [212.23.103.62] (helo=[10.129.250.21])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1Jeqz3-0007sW-BP
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Mar 2008 13:13:33 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Mar 2008 03:26:14 +0100
+User-Agent: KMail/1.9.9
+References: <47EAEB1D.9060004@xora.org.uk>
+	<200803270150.46085.mickey@vanille-media.de>
+In-Reply-To: <200803270150.46085.mickey@vanille-media.de>
 MIME-Version: 1.0
-Subject: LEAD_SONAME?
+Message-Id: <200803270326.15080.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.62
+Subject: Re: SCM scorecards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,32 +33,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 11:17:27 -0000
+X-List-Received-Date: Thu, 27 Mar 2008 12:13:34 -0000
 Content-Type: text/plain;
-	charset="us-ascii"
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-I get a warning saying:
+On Thursday 27 March 2008 01:50:46 Michael 'Mickey' Lauer wrote:
+> Let me add up on that and slightly change:
+> > Ease of Branch Merging Git 4 Monotone 3
+>
+> Holger?
+That is probably me?
 
-NOTE: Multiple libraries (...) found and LEAD_SONAME not defined
+Merging: As Linus pointed out branching is not the problem, merging is:
 
-The only documentation I can find is on:
+1.) mtn and git are equally good in doing conflict free merges
+2.) merges with conflicts:
+	Both git and mtn allow you to use kdiff3, meld.. to do the merge.
 
-http://www.openembedded.org/user-manual&dpage=recipes_misc
+	Git is changing files in the workdir but this doesn't matter as you
+	resolve the conflict with git-mergetool anyway.
 
-in a section described as: "This section is to be completed."
+	Git has the concept of the index, which is really cool and makes
+	things easy. You can set the file state to anything you want during
+	the merge and once you are happy continue.
+
+	Also git is a content tracker, so if I got this right. If I have the same
+	bb file (content hash the same, path the same) in two branches mtn
+	would go to NCC and refuse to work, git will not have a merge conflict at 
+	all.
+
+3.) Things related to merging:
+	git-reset HEAD^1 to undo your merge if you didn't like the result (in cases 
+where you know you made an accident and disapprove makes little sense)
+
+	git-cherry-pick to pick a change and then pull/rebase without getting a NCC
+	conflict.
+
+	git-rebase to change your patchset after some of the patches have been merged
+	upstream (effectively what Openmoko is doing on OE).
 
 
-The other recipies which use it don't have any comments indicating
-what it does or how it should be used? I also can't find anything in 
-the archives. I'm guessing it's got something to do with automatic 
-dependency tracking? Do I just list the shared libraries my package 
-provides? If so, which version? The .so, .so.major, .so.major.minor or 
-the complete .so.major.minor.patch?
+with git there is little more I could ask for, with mtn I have two unmergable 
+things right now. git-rebase is the best thing since sliced bread. So it is 
+either a 5:3 or 4:2.
 
 
-Cheers,
-
-Tom
+PS: I talk about recent versions of git, with git-mergetool and such...
+PPS: I recognize that mtn has served us well, the pace of development is IMHO 
+just too slow.
 
 
