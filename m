@@ -1,26 +1,24 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1JewAK-00066H-B0
-	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 18:45:28 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20080327174524.YWFX28792.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 13:45:24 -0400
-Received: from opus ([68.230.58.230]) by fed1rmimpo01.cox.net with bizsmtp
-	id 6HlQ1Z00C4y2VvG03HlQZG; Thu, 27 Mar 2008 13:45:24 -0400
-Date: Thu, 27 Mar 2008 10:45:24 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20080327174524.GG4938@smtp.west.cox.net>
-References: <200803271217.41967.thomas.cooksey@trolltech.com>
-	<200803271752.07855.thomas.cooksey@trolltech.com>
-	<1206638031.4514.53.camel@dax.rpnet.com>
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JewYL-0005qk-Rf
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Mar 2008 19:10:18 +0100
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Jex5T-0003ak-72
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Mar 2008 19:44:31 +0100
+Message-ID: <47EBE31A.3010602@kernelconcepts.de>
+Date: Thu, 27 Mar 2008 19:10:34 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
 MIME-Version: 1.0
-In-Reply-To: <1206638031.4514.53.camel@dax.rpnet.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Subject: Re: LEAD_SONAME?
+To: openembedded-devel@lists.openembedded.org
+References: <47E99679.3050606@kernelconcepts.de>
+In-Reply-To: <47E99679.3050606@kernelconcepts.de>
+X-Enigmail-Version: 0.95.0
+Subject: Re: OE booth at LinuxTag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,30 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 17:45:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Mar 2008 18:10:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Mar 27, 2008 at 05:13:51PM +0000, Richard Purdie wrote:
-> On Thu, 2008-03-27 at 17:52 +0100, Tom Cooksey wrote:
-[snip]
-> > > Your options are:
-> > > 	- Ignore the warning
-> > My prefered option, but only if this is not causing my dissappearing library issue.
-> > 
-> > > 	- Define a LEAD_SONAME of your primary lib
-> > > 	- More finegrained packaging.
-> > Do you mean doing having LEAD_SONAME_foo, LEAD_SONAME_bar, etc. ? That
-> > could work?
-> 
-> No, select one e.g. if libfoo is the most "important", LEAD_SONAME =
-> "libfoo".
+Hi!
 
-Ah, but what's up with wildcards in the field (ie glib-2.0) ?  Or ones
-that say "libfoo.so" (postgresql) or "libfoo.so.1" (uim) ?  People guessing
-incorrectly at the value?  Thanks!
+> We might want to collect information using the wiki like:
+
+The wiki is there:
+
+http://www.openembedded.org/linuxtag2008
+
+It contains a minimum of structure and event information already.
+
+Greetings
+
+Florian
 
 -- 
-Tom Rini
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
