@@ -1,28 +1,30 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JerHl-0006yp-9z
-	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 13:32:49 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2RCWnqx027021
-	for <openembedded-devel@openembedded.org>; Thu, 27 Mar 2008 12:32:49 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 26761-08 for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 12:32:44 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2RCWeMj027010
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Thu, 27 Mar 2008 12:32:40 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Thu, 27 Mar 2008 12:32:41 +0000
-Message-Id: <1206621161.4514.19.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Monotone server issues?
+	(envelope-from <broonie@sirena.org.uk>) id 1JesL0-000568-71
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Mar 2008 14:40:14 +0100
+Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.63)
+	(envelope-from <broonie@sirena.org.uk>) id 1JesKy-0008M6-PD
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Mar 2008 13:40:13 +0000
+Date: Thu, 27 Mar 2008 13:40:12 +0000
+From: Mark Brown <broonie@sirena.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080327134009.GA20399@sirena.org.uk>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <47EAEB1D.9060004@xora.org.uk>
+	<200803270150.46085.mickey@vanille-media.de>
+	<47EAF1E0.8090401@xora.org.uk>
+	<200803270311.47461.zecke@selfish.org>
+MIME-Version: 1.0
+In-Reply-To: <200803270311.47461.zecke@selfish.org>
+X-Cookie: You're using a keyboard!  How quaint!
+User-Agent: Mutt/1.5.13 (2006-08-11)
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: broonie@sirena.org.uk
+X-SA-Exim-Scanned: No (on cassiel.sirena.org.uk);
+	SAEximRunCond expanded to false
+Subject: Re: SCM scorecards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,44 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 12:32:49 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Mar 2008 13:40:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi Guys,
+On Thu, Mar 27, 2008 at 03:11:47AM +0100, Holger Freyther wrote:
+> On Thursday 27 March 2008 02:01:20 Graeme Gregory wrote:
 
-Can someone who knows what they're doing see what the various monotone
-servers are doing?
+> > The methods of syncing two git trees seem to be hacks or alter
+> > data. master becomes origin/master for example.
 
-I spent all of yesterday trying to find a window to push some changes
-and failed since the connection kept stalling. This morning I pulled
-from the wolfson and nslu2 mirrors, merged and pushed back. Something
-like 400 revisions flowed from me to nslu2 which now won't speak to me
-with:
+> repo.or.cz supports a mirror mode so it can't be too hard. My approach would 
+> consist out of two shell commands:
 
-mtn: connecting to monotone.nslu2-linux.org
-mtn: finding items to synchronize:
-mtn: certificates | keys | revisions
-mtn:       69,681 |   72 |    22,954
-mtn: warning: protocol error while processing peer monotone.nslu2-linux.org: 'received network error: not serving branch 'org.openembedded.angstrom-2007.12-stable''
-mtn:  bytes in | bytes out | certs in | revs in
-mtn:        85 |       251 |        0 |       0
-mtn: error: processing failure while talking to peer monotone.nslu2-linux.org, disconnecting
+That's a read-only mirror with one master server where writes happen.
+What monotone supports is having multiple masters - users can push
+changes to any of the servers and have the servers sort things out.
+You'd also have to jump through a small hoop to make all the branches
+visible on the child - by default it will not create local branches for
+all remote branches, it will represent the remote branches as
+remote/branch tags (where remote is the name of the remote, origin by
+default).
 
-so its not carrying the stable branch which is fine but I don't know
-where the 401 revisions came from or why it used to communicate with me
-and now won't.
-
-Just to try and clear things up I've also pushed to the wolfson mirror
-has taken 221 revisions and is currently "hanging"...
-
-Is this related to the Openmoko branching or something else? Something
-feels very wrong :/
-
-Cheers,
-
-Richard
-
-
+-- 
+"You grabbed my hand and we fell into it, like a daydream - or a fever."
 
 
