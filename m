@@ -1,32 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jexj2-0000mG-VE
-	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 20:25:25 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jexiz-0006DS-8U
-	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 19:25:21 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 19:25:21 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 27 Mar 2008 19:25:21 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Thu, 27 Mar 2008 20:25:13 +0100
-Message-ID: <fsgsaq$nqf$1@ger.gmane.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1JeyKu-0001sF-D2
+	for openembedded-devel@openembedded.org; Thu, 27 Mar 2008 21:04:32 +0100
+Received: (qmail 18894 invoked by uid 813007); 27 Mar 2008 20:04:30 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 Mar 2008 20:04:30 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Mar 2008 21:04:26 +0100
+User-Agent: KMail/1.9.9
 References: <1206638249.4514.57.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
 In-Reply-To: <1206638249.4514.57.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200803272104.30232.openembedded@haerwu.biz>
 Subject: Re: ipkg/opkg offical response
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,30 +29,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2008 19:25:25 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Mar 2008 20:04:32 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia Thursday 27 of March 2008, Richard Purdie napisa=B3:
 
-Richard Purdie schreef:
+> Where do we go from here?
+>
+> I think Marcin has a nogpg version opkg he will commit so people don't
+> have any issues with the increased size of ipkg.=20
 
-| * Adding do_deploy to packaged-staging's knowledge. This is best done
-| with the patch for kernel.bbclass that thesing was been working on. I've
-| made some suggestions for tweaks (looking at the version already in
-| poky) and suggested he commits it after that.
+Opkg can be made smaller by two changes:
 
-That patch broke uImage kernels *real bad*, I just pushed a fix for it.
+1. disable GPG support in opkg (--disable-gpg)
+2. disable GnuTLS support in curl
 
-Proper review on mailinglist first next time?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+=46irst step gains ~350KB of uncompressed storage. Second step gains ~1MB a=
+s=20
+libcurl is 20K smaller and we get rid of gnutls and gcrypt libraries. But=20
+even then it is bigger then ipkg.
 
-iD8DBQFH6/SZMkyGM64RGpERAlQqAJ9TQZ14UlkUvuJGALQaw6cshS01gACgkWkd
-HtY0P54Pk5HXV+qPkEGmxtw=
-=4YKa
------END PGP SIGNATURE-----
+So creation of "opkg-nogpg":
+
+require opkg_svn.bb
+EXTRA_OECONF +=3D "--disable-gpg"
+
+would be nice addon. Creation of "curl-nossl" and selecting it is=20
+something which should be rather DISTRO choice as it generate same=20
+packages as "curl" recipe.
+
+> Does that and rwhitby's symlink fix address everyone's concerns? If not
+> can we document the remaining issues and then hopefully address them.
+
+> Do we need something to select between opkg and ipkg or is everyone ok
+> with the symlinks?
+
+Solution would be creating DISTRO_IPK_PACKAGE_MANAGER ?=3D "opkg" and using=
+=20
+it in package_ipk/rootfs_ipk and other places. Then staging=20
+ipkg-cl/opkg-cl as ipkg/opkg so we can use "${DISTRO_IPK_PACKAGE_MANAGER}=20
+update". Distros which prefer to use ipkg will stay with it, others will=20
+move to opkg.
+
+Opinions?
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+    I used to think the brain is the most wonderfull organ in my body,=20
+    till I realised what was telling me that
+
 
 
 
