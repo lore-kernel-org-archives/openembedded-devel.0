@@ -1,22 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1Jf682-0003cy-BN
-	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 05:23:46 +0100
-Received: (qmail 7262 invoked by uid 813007); 28 Mar 2008 04:23:45 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 28 Mar 2008 04:23:45 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Mar 2008 05:23:48 +0100
-User-Agent: KMail/1.9.9
-References: <1206638249.4514.57.camel@dax.rpnet.com>
-	<47EC2661.90702@bolloretelecom.eu>
-	<20080327230928.GD11881@smtp.west.cox.net>
-In-Reply-To: <20080327230928.GD11881@smtp.west.cox.net>
-MIME-Version: 1.0
-Message-Id: <200803280523.49244.openembedded@haerwu.biz>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Jf8WN-0007M3-J9
+	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 07:57:03 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Jf8WM-0003DS-9t
+	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 06:57:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 28 Mar 2008 06:57:02 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 28 Mar 2008 06:57:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Fri, 28 Mar 2008 07:56:55 +0100
+Message-ID: <fsi4ro$6d9$1@ger.gmane.org>
+References: <1206638249.4514.57.camel@dax.rpnet.com>	<200803272104.30232.openembedded@haerwu.biz>
+	<47EC3893.80908@whitby.id.au>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <47EC3893.80908@whitby.id.au>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
 Subject: Re: ipkg/opkg offical response
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,39 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2008 04:23:46 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 28 Mar 2008 06:57:03 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia Friday 28 of March 2008, Tom Rini napisa=B3:
-> > I changed the DEPENDS to u-boot-mkimage-openmoko-native in
-> > kernel.bbclass and removed the DEPENDS from linux.inc. The assumption
-> > here is that u-boot-mkimage-openmoko-native is a strict superset of
-> > u-boot-mkimage-native.
->
-> I'll ask the silly qustion. =A0Given that mkimage hasn't changed in I
-> don't know how long, why are both providing it? =A0Just to save on
-> sources downloaded? =A0Did OM really change mkimage?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-It was other way. We had u-boot recipes (target ones) which staged=20
-mkimage. This was wrong as it mixed target and host in one run. Then=20
-Openmoko guys started to use u-boot and one day someone created recipe=20
-just for mkimage from their overpatched version.
+Rod Whitby schreef:
 
-u-boot-mkimage-native was created by me in Poky few days ago to get rid of=
-=20
-overpatched Openmoko version. I used 1.3.2 (latest upstream) version as a=20
-base. Now I see that u-boot-tools-native (1.2.0) is in OE and do the=20
-same.
+|
+| Can we simplify to DISTRO_PACKAGE_MANAGER?  Will we ever want ipks and
+| debs to be produced at the same time?
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+No, yes
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-          Monday is a hard way to spend one-seventh of your life.
-
+iD8DBQFH7Ja3MkyGM64RGpERAgOJAJ9yvm2/eqwhKtiti/Y/UvAL4FbT1QCfZ5f2
+yYqY0EZanGzybtMLOswNxwY=
+=EvSA
+-----END PGP SIGNATURE-----
 
 
 
