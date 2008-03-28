@@ -1,29 +1,29 @@
-Received: from [213.36.80.91] (helo=mail.libertysurf.net)
+Received: from [212.27.42.30] (helo=smtp4-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JfHH2-00009l-PY
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JfJYI-0001Oq-IS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Mar 2008 17:17:48 +0100
-Received: from blini.bolloretelecom.eu (62.210.194.121) by
-	mail.libertysurf.net (7.3.118.8)
-	id 479F73A8017F041D for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Mar 2008 18:13:54 +0100
-Received: from [192.168.95.62] (unknown [192.168.95.62])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id 07CD223E57
+	Fri, 28 Mar 2008 19:43:46 +0100
+Received: from smtp4-g19.free.fr (localhost.localdomain [127.0.0.1])
+	by smtp4-g19.free.fr (Postfix) with ESMTP id 56BBD3EA0C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2008 17:17:46 +0100 (CET)
-Message-ID: <47ED1A29.5090109@bolloretelecom.eu>
-Date: Fri, 28 Mar 2008 17:17:45 +0100
-From: =?ISO-8859-2?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.0.13pre) Gecko/20080208 Thunderbird/1.5.0.14pre
-	Mnenhy/0.7.5.0
+	Fri, 28 Mar 2008 19:43:46 +0100 (CET)
+Received: from sharky.jerryweb.org (vau75-7-82-234-248-119.fbx.proxad.net
+	[82.234.248.119])
+	by smtp4-g19.free.fr (Postfix) with ESMTP id 3AD823EA0EB
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Mar 2008 19:43:46 +0100 (CET)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by sharky.jerryweb.org (Postfix) with ESMTP id D716018405E
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Mar 2008 19:45:53 +0100 (CET)
+Message-ID: <47ED3CE1.7020000@bolloretelecom.eu>
+Date: Fri, 28 Mar 2008 19:45:53 +0100
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.8.1.9) Gecko/20080109 Thunderbird/2.0.0.9 Mnenhy/0.7.5.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1206638249.4514.57.camel@dax.rpnet.com>
-	<200803272104.30232.openembedded@haerwu.biz>
-In-Reply-To: <200803272104.30232.openembedded@haerwu.biz>
-X-Enigmail-Version: 0.94.2.0
-Subject: Re: ipkg/opkg offical response
+Subject: uImage generation: kernel.bbclass vs linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,38 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2008 16:17:48 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Fri, 28 Mar 2008 18:43:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+With the recent changes to kernel.bbclass it seems that uboot-mkimage is
+called twice:
+
+linux.inc: do_compile_append()
+
+1/ uses uboot-mkimage to generate generates arch/${ARCH}/boot/uImage
 
 
->
-> So creation of "opkg-nogpg":
->
-> require opkg_svn.bb EXTRA_OECONF +=3D "--disable-gpg"
-+1 for providing a gpg-less opkg
+kernel.bbclass: do_deploy()
 
-My main reason for not wanting gpg is not size (in my case gcrypt &
-friends
-get pulled into my image anyhow), it's that there is no indication of how
-Packages.sig should be generated!
+1/ copies arch/${ARCH}/boot/uImage to
+${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
 
-=3D> does package_ipk.bbclass need updating to generate Packages.sig?
+2/ does package_stagefile_shell
+${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
 
-- --
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+3/ uses uboot-mkimage to generate
+${DEPLOY_DIR_IMAGE}/uImage-${PV}-${PR}-${MACHINE}.bin
 
-iD8DBQFH7RopCL1n3lVB9EYRAkHkAKCrqjdCAdHw6QAZ72L3XzyATJN2hQCgw6uP
-lotiZINAIi0I4mQr15gUxEs=3D
-=3D8anQ
------END PGP SIGNATURE-----
+This seems pretty inconsistent! Also, why the hard-coded uImage-xyz file
+name, shouldn't we be using KERNEL_IMAGE_BASE_NAME?
 
+To make things a bit more interesting, KERNEL_IMAGE_BASE_NAME is set
+differently in kernel.bbclass and linux.inc:
+
+kernel.bbclass :
+KERNEL_IMAGE_BASE_NAME =
+${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}-${DATETIME}"
+
+linux.inc:
+KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}"
+
+Where do we go from here?
+
+Cheers,
+Jeremy
 
 
