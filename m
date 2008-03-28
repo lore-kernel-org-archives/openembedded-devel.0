@@ -1,29 +1,24 @@
-Received: from [212.27.42.30] (helo=smtp4-g19.free.fr)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JfJYI-0001Oq-IS
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thommycheck@gmx.de>) id 1JfJuG-0001sS-SV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Mar 2008 19:43:46 +0100
-Received: from smtp4-g19.free.fr (localhost.localdomain [127.0.0.1])
-	by smtp4-g19.free.fr (Postfix) with ESMTP id 56BBD3EA0C7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2008 19:43:46 +0100 (CET)
-Received: from sharky.jerryweb.org (vau75-7-82-234-248-119.fbx.proxad.net
-	[82.234.248.119])
-	by smtp4-g19.free.fr (Postfix) with ESMTP id 3AD823EA0EB
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2008 19:43:46 +0100 (CET)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by sharky.jerryweb.org (Postfix) with ESMTP id D716018405E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2008 19:45:53 +0100 (CET)
-Message-ID: <47ED3CE1.7020000@bolloretelecom.eu>
-Date: Fri, 28 Mar 2008 19:45:53 +0100
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.1.9) Gecko/20080109 Thunderbird/2.0.0.9 Mnenhy/0.7.5.0
+	Fri, 28 Mar 2008 20:06:30 +0100
+Received: (qmail invoked by alias); 28 Mar 2008 19:06:26 -0000
+Received: from BAA0881.baa.pppool.de (EHLO [192.168.178.31]) [77.128.8.129]
+	by mail.gmx.net (mp034) with SMTP; 28 Mar 2008 20:06:26 +0100
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX1/sVVE7uVLs0REHP9bqVANjwC9/QT6QaaeFsaaLc9
+	4mKhOrY4F/x/A7
+Message-ID: <47ED41B3.9050403@gmx.de>
+Date: Fri, 28 Mar 2008 20:06:27 +0100
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080109)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: uImage generation: kernel.bbclass vs linux.inc
+References: <47ED3CE1.7020000@bolloretelecom.eu>
+In-Reply-To: <47ED3CE1.7020000@bolloretelecom.eu>
+X-Y-GMX-Trusted: 0
+Subject: Re: uImage generation: kernel.bbclass vs linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -37,45 +32,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2008 18:43:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 28 Mar 2008 19:06:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-With the recent changes to kernel.bbclass it seems that uboot-mkimage is
-called twice:
-
-linux.inc: do_compile_append()
-
-1/ uses uboot-mkimage to generate generates arch/${ARCH}/boot/uImage
-
-
-kernel.bbclass: do_deploy()
-
-1/ copies arch/${ARCH}/boot/uImage to
-${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-
-2/ does package_stagefile_shell
-${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-
-3/ uses uboot-mkimage to generate
-${DEPLOY_DIR_IMAGE}/uImage-${PV}-${PR}-${MACHINE}.bin
-
-This seems pretty inconsistent! Also, why the hard-coded uImage-xyz file
-name, shouldn't we be using KERNEL_IMAGE_BASE_NAME?
-
-To make things a bit more interesting, KERNEL_IMAGE_BASE_NAME is set
-differently in kernel.bbclass and linux.inc:
-
-kernel.bbclass :
-KERNEL_IMAGE_BASE_NAME =
-${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}-${DATETIME}"
-
-linux.inc:
-KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}"
-
-Where do we go from here?
-
-Cheers,
-Jeremy
+Jeremy Lainé wrote:
+>
+> To make things a bit more interesting, KERNEL_IMAGE_BASE_NAME is set
+> differently in kernel.bbclass and linux.inc:
+>
+> kernel.bbclass :
+> KERNEL_IMAGE_BASE_NAME =
+> ${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}-${DATETIME}"
+>
+> linux.inc:
+> KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}"
+>   
+This one is easy:
+KERNEL_IMAGE_BASE_NAME and KERNEL_IMAGE_SYMLINK_NAME should be '?=' so 
+that kernel recipes can overide it.
 
 
