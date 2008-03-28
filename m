@@ -1,33 +1,35 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JfAw1-0008Bb-TZ
-	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 10:31:42 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2S9VfSp009106
-	for <openembedded-devel@openembedded.org>; Fri, 28 Mar 2008 09:31:41 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 08752-09 for <openembedded-devel@openembedded.org>;
-	Fri, 28 Mar 2008 09:31:37 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2S9VW9k009100
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 28 Mar 2008 09:31:32 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JfB00-0008Jn-Hh
+	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 10:35:48 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JfAzy-0001e8-JJ
+	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 09:35:46 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 28 Mar 2008 09:35:46 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 28 Mar 2008 09:35:46 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <20080327174524.GG4938@smtp.west.cox.net>
-References: <200803271217.41967.thomas.cooksey@trolltech.com>
-	<200803271752.07855.thomas.cooksey@trolltech.com>
-	<1206638031.4514.53.camel@dax.rpnet.com>
-	<20080327174524.GG4938@smtp.west.cox.net>
-Date: Fri, 28 Mar 2008 09:31:32 +0000
-Message-Id: <1206696692.5029.22.camel@dax.rpnet.com>
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Fri, 28 Mar 2008 10:35:38 +0100
+Message-ID: <fsie5b$1ck$1@ger.gmane.org>
+References: <1206638249.4514.57.camel@dax.rpnet.com>	<fsgsaq$nqf$1@ger.gmane.org>
+	<1206659222.4514.59.camel@dax.rpnet.com>	<fsi58m$7j8$1@ger.gmane.org>
+	<1206695863.5029.5.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: LEAD_SONAME?
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <1206695863.5029.5.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+Subject: Re: kernel breackage, was Re: ipkg/opkg offical response
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,46 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2008 09:31:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 28 Mar 2008 09:35:48 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2008-03-27 at 10:45 -0700, Tom Rini wrote:
-> On Thu, Mar 27, 2008 at 05:13:51PM +0000, Richard Purdie wrote:
-> > On Thu, 2008-03-27 at 17:52 +0100, Tom Cooksey wrote:
-> [snip]
-> > > > Your options are:
-> > > > 	- Ignore the warning
-> > > My prefered option, but only if this is not causing my dissappearing library issue.
-> > > 
-> > > > 	- Define a LEAD_SONAME of your primary lib
-> > > > 	- More finegrained packaging.
-> > > Do you mean doing having LEAD_SONAME_foo, LEAD_SONAME_bar, etc. ? That
-> > > could work?
-> > 
-> > No, select one e.g. if libfoo is the most "important", LEAD_SONAME =
-> > "libfoo".
-> 
-> Ah, but what's up with wildcards in the field (ie glib-2.0) ?  Or ones
-> that say "libfoo.so" (postgresql) or "libfoo.so.1" (uim) ?  People guessing
-> incorrectly at the value?  Thanks!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-If in doubt, use the source (debian.bbclass):
+Richard Purdie schreef:
+| On Fri, 2008-03-28 at 08:03 +0100, Koen Kooi wrote:
+|> You're being deliberatly obtuse.
+|
+| Pot, kettle, black? ;-)
 
-lead = bb.data.getVar('LEAD_SONAME', d, 1)
-if lead:
-	r = re.compile(lead)
-	filtered = []
-	for s in sonames:
-	if r.match(s):
-		filtered.append(s)
+SCNR :)
 
-so its being used as a regexp against the sonames. A valid contents of
-the field is something which provides a unique match.
+|
+|>
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2008-March/004613.html
+|> looks nothing like the patch that was committed, it doesn't have bugs
+|> Jeremy and I fixed.
+|> Or are you saying it's okay that people commit something different than
+|> what was reviewed?
+|
+| I hadn't realised it was quite as different, sorry :/. The main thing is
+| its in, we've moved forwards and the bugs are hopefully fixed. If there
+| are any more issues, let me know and I'll try and take care of them.
+|
+| I'll follow up about Jeremy's change in the appropriate thread.
+|
+| Cheers,
+|
+| Richard
 
-Cheers,
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Richard
+iD8DBQFH7LvqMkyGM64RGpERAkZJAJ404NJDQt4UmbQ03R/FXV9+nPBtnwCgolte
+gmgL0fiv6v8vOwARXaFiog8=
+=u0oh
+-----END PGP SIGNATURE-----
 
 
 
