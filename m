@@ -1,21 +1,34 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1JfCXP-00015I-7h
-	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 12:14:23 +0100
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id 1259C62805E;
-	Fri, 28 Mar 2008 12:14:23 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: Richard Purdie <rpurdie@rpsys.net>
-In-Reply-To: <1206700621.5029.50.camel@dax.rpnet.com>
+	(envelope-from <rpurdie@rpsys.net>) id 1JfCn5-0006K8-Nb
+	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 12:30:37 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2SBUaK9016112;
+	Fri, 28 Mar 2008 11:30:36 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 16019-03; Fri, 28 Mar 2008 11:30:31 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2SBUTax016104
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 28 Mar 2008 11:30:29 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Stanislav Brabec <utx@penguin.cz>
+In-Reply-To: <1206702966.3790.22.camel@hammer.suse.cz>
 References: <20080328011211.7c66e00b@zaurus>
 	<1206696274.5029.14.camel@dax.rpnet.com>
 	<1206699605.18251.39.camel@hammer.suse.cz>
 	<1206700621.5029.50.camel@dax.rpnet.com>
-Date: Fri, 28 Mar 2008 12:16:05 +0100
-Message-Id: <1206702966.3790.22.camel@hammer.suse.cz>
+	<1206702966.3790.22.camel@hammer.suse.cz>
+Date: Fri, 28 Mar 2008 11:30:28 +0000
+Message-Id: <1206703828.5029.60.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.0 
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	m2SBUaK9016112
 Cc: Using the OpenEmbedded metadata to build Distributions
 	<openembedded-devel@openembedded.org>
 Subject: Re: binconfig.bbclass breaks packages QA
@@ -32,52 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2008 11:14:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 28 Mar 2008 11:30:42 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Richard Purdie wrote:
-
-> I don't think you understand the way sysroot works properly. It changes
-> the way gcc works internally, it looks in the sysroot instead
-> of /usr/include. It does not mangle paths passed in externally though.
-
-Sorry. =EF=BB=BFYou are true. It's sad non-feature.
-
-> I've had a quick look and the problem is from cups which doesn't have
-> a .pc file. The two solutions that spring to mind are:
+On Fri, 2008-03-28 at 12:16 +0100, Stanislav Brabec wrote:
+> Richard Purdie wrote:
+> > I've had a quick look and the problem is from cups which doesn't have
+> > a .pc file. The two solutions that spring to mind are:
+> >=20
+> > 1. Add a .pc file to cups and have libgnomecups use it
+> > 2. Add some sed to the libgnomecups recipe to fix the bad paths after
+> > the compile completes.
 >=20
-> 1. Add a .pc file to cups and have libgnomecups use it
-> 2. Add some sed to the libgnomecups recipe to fix the bad paths after
-> the compile completes.
+> =EF=BB=BFWe have many foo-config files embedded to other fooo-config or=
+ .pc.
+> System wide solution would be nicer.
 
-=EF=BB=BFWe have many foo-config files embedded to other fooo-config or .=
-pc.
-System wide solution would be nicer.
+Before we start discussing invasive system wide solutions, can you
+define "many"? How big is this problem?
 
-=EF=BB=BF3. Wrap gcc.
+A quick glance at my local build shows 217 .pc files and 14 binconfig
+ones. Of the 14 binconfigs I can spot several that also have .pc files.
+binconfig is being replaced by pkgconfig so this number will only shrink
+with time.
 
-Never call cross-gcc directly, but use small wrapper, which will replace
-any -I dir by -I sysroot/dir (if sysroot is not already a part of dir)
-etc.
+Secondly if we wrap gcc that doesn't solve the underlying problem of
+bad .pc files. The neat thing now is that we can move the .pc files
+in/out of a sysroot, onto the target system or into different staging
+directories since there are no hardcoded path problems in them anymore.
+yes we have hardcoded paths in .la files and in the binconfig ones but
+that issue is more manageable than having to hack .pc files as well.=20
 
-I am ready to write such wrapper, either in bash, or in shell+sed, or
-possibly in C. I already sent one in bash to the list last year.
+Cheers,
 
-4. Move to -isysroot for cross builds and change the mangling style:
-Replace -Idir by -I=3Ddir and -I dir by -I =3Ddir.
+Richard
 
-=EF=BB=BF       -I dir
-           ... If dir begins
-           with "=3D", then the "=3D" will be replaced by the sysroot pre=
-fix; see
-           --sysroot and -isysroot.
-
-5. Patch gcc to implement 3 on gcc level.
-
---=20
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
 
 
 
