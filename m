@@ -1,32 +1,33 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JfArv-00086E-Jf
-	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 10:27:27 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1JfAw1-0008Bb-TZ
+	for openembedded-devel@openembedded.org; Fri, 28 Mar 2008 10:31:42 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2S9RRqj008928
-	for <openembedded-devel@openembedded.org>; Fri, 28 Mar 2008 09:27:27 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2S9VfSp009106
+	for <openembedded-devel@openembedded.org>; Fri, 28 Mar 2008 09:31:41 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 08848-03 for <openembedded-devel@openembedded.org>;
-	Fri, 28 Mar 2008 09:27:22 +0000 (GMT)
+	id 08752-09 for <openembedded-devel@openembedded.org>;
+	Fri, 28 Mar 2008 09:31:37 +0000 (GMT)
 Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2S9RMg0008919
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m2S9VW9k009100
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 28 Mar 2008 09:27:22 GMT
+	for <openembedded-devel@openembedded.org>; Fri, 28 Mar 2008 09:31:32 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <47EC3893.80908@whitby.id.au>
-References: <1206638249.4514.57.camel@dax.rpnet.com>
-	<200803272104.30232.openembedded@haerwu.biz>
-	<47EC3893.80908@whitby.id.au>
-Date: Fri, 28 Mar 2008 09:27:21 +0000
-Message-Id: <1206696441.5029.18.camel@dax.rpnet.com>
+In-Reply-To: <20080327174524.GG4938@smtp.west.cox.net>
+References: <200803271217.41967.thomas.cooksey@trolltech.com>
+	<200803271752.07855.thomas.cooksey@trolltech.com>
+	<1206638031.4514.53.camel@dax.rpnet.com>
+	<20080327174524.GG4938@smtp.west.cox.net>
+Date: Fri, 28 Mar 2008 09:31:32 +0000
+Message-Id: <1206696692.5029.22.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.12.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: ipkg/opkg offical response
+Subject: Re: LEAD_SONAME?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,38 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2008 09:27:27 -0000
+X-List-Received-Date: Fri, 28 Mar 2008 09:31:42 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2008-03-28 at 10:45 +1030, Rod Whitby wrote:
-> Marcin Juszkiewicz wrote:
-> > So creation of "opkg-nogpg":
+On Thu, 2008-03-27 at 10:45 -0700, Tom Rini wrote:
+> On Thu, Mar 27, 2008 at 05:13:51PM +0000, Richard Purdie wrote:
+> > On Thu, 2008-03-27 at 17:52 +0100, Tom Cooksey wrote:
+> [snip]
+> > > > Your options are:
+> > > > 	- Ignore the warning
+> > > My prefered option, but only if this is not causing my dissappearing library issue.
+> > > 
+> > > > 	- Define a LEAD_SONAME of your primary lib
+> > > > 	- More finegrained packaging.
+> > > Do you mean doing having LEAD_SONAME_foo, LEAD_SONAME_bar, etc. ? That
+> > > could work?
 > > 
-> > require opkg_svn.bb
-> > EXTRA_OECONF += "--disable-gpg"
-> > 
-> > would be nice addon. Creation of "curl-nossl" and selecting it is 
-> > something which should be rather DISTRO choice as it generate same 
-> > packages as "curl" recipe.
+> > No, select one e.g. if libfoo is the most "important", LEAD_SONAME =
+> > "libfoo".
 > 
-> +1
+> Ah, but what's up with wildcards in the field (ie glib-2.0) ?  Or ones
+> that say "libfoo.so" (postgresql) or "libfoo.so.1" (uim) ?  People guessing
+> incorrectly at the value?  Thanks!
 
-Creation of that has my backing too.
+If in doubt, use the source (debian.bbclass):
 
-> > Solution would be creating DISTRO_IPK_PACKAGE_MANAGER ?= "opkg" and using 
-> > it in package_ipk/rootfs_ipk and other places. Then staging 
-> > ipkg-cl/opkg-cl as ipkg/opkg so we can use "${DISTRO_IPK_PACKAGE_MANAGER} 
-> > update". Distros which prefer to use ipkg will stay with it, others will 
-> > move to opkg.
-> 
-> Can we simplify to DISTRO_PACKAGE_MANAGER?  Will we ever want ipks and 
-> debs to be produced at the same time?
+lead = bb.data.getVar('LEAD_SONAME', d, 1)
+if lead:
+	r = re.compile(lead)
+	filtered = []
+	for s in sonames:
+	if r.match(s):
+		filtered.append(s)
 
-This is useful and I'd like to continue to be able to do that. Its
-useful in automated test configurations since dpkg is a lot more strict
-about its control field contents and I've seen it fail when ipkg-build
-has been happy. Poky's autobuilder therefore builds both.
+so its being used as a regexp against the sonames. A valid contents of
+the field is something which provides a unique match.
 
 Cheers,
 
