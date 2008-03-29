@@ -1,27 +1,25 @@
-Received: from [64.233.178.248] (helo=hs-out-0708.google.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JfLPY-0004zC-SL
+	(envelope-from <zecke@selfish.org>) id 1JfQRi-0000jU-28
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Mar 2008 21:42:53 +0100
-Received: by hs-out-0708.google.com with SMTP id 23so419192hsn.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2008 13:42:50 -0700 (PDT)
-Received: by 10.100.225.19 with SMTP id x19mr7849934ang.5.1206736969864;
-	Fri, 28 Mar 2008 13:42:49 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Fri, 28 Mar 2008 13:42:49 -0700 (PDT)
-Message-ID: <c384c5ea0803281342j3f836b8cibbf1b9030a5d2859@mail.gmail.com>
-Date: Fri, 28 Mar 2008 21:42:49 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: angstrom-distro-devel@linuxtogo.org, 
-	openembedded-devel@lists.openembedded.org
-In-Reply-To: <fsjbi5$hak$1@ger.gmane.org>
-MIME-Version: 1.0
+	Sat, 29 Mar 2008 03:05:26 +0100
+Received: from [212.23.103.123] (helo=[10.161.240.174])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>)
+	id 1JfQRT-0007vF-7R; Sat, 29 Mar 2008 03:05:25 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 29 Mar 2008 03:03:11 +0100
+User-Agent: KMail/1.9.9
 References: <022890FE-5E72-489F-B64C-03593101E508@student.utwente.nl>
-	<47E83808.5060501@balister.org>
-	<c384c5ea0803271304i4739ea3bpee3ace5854384f4c@mail.gmail.com>
-	<fsgvoq$545$1@ger.gmane.org>
-	<c384c5ea0803271622i59f5e3bai2a9606e749a0611b@mail.gmail.com>
 	<fsjbi5$hak$1@ger.gmane.org>
+	<c384c5ea0803281342j3f836b8cibbf1b9030a5d2859@mail.gmail.com>
+In-Reply-To: <c384c5ea0803281342j3f836b8cibbf1b9030a5d2859@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200803290303.12580.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.123
+Cc: angstrom-distro-devel@linuxtogo.org
 Subject: Re: [Angstrom-devel] [RFC] Changing stable branch commit policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -36,54 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2008 20:42:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 29 Mar 2008 02:05:26 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello all,
+On Friday 28 March 2008 21:42:49 Leon Woestenberg wrote:
+> Hello all,
+>
+> > Do you want to write a short blurb on this we can stick on the oe and
+> > angstrom websites? regards, Koen
+>
+> Sure, a first shot at that (and sorry for cross-posting, but this
+> really is OE related :-)
 
-> Do you want to write a short blurb on this we can stick on the oe and angstrom websites? regards, Koen
+Leon, Koen, cool and thanks for kicking this off!
 
-Sure, a first shot at that (and sorry for cross-posting, but this
-really is OE related :-)
-
----
-The OpenEmbedded project has started to maintain a stable branch, next
-to its development branch, on March 28th 2007. Besides
-"org.openembedded.dev" there now is the "org.openembedded.stable"
-branch.
-
-The plumbing work on the development branch (long-term improvements
-such as packaged staging, creating stand-alone SDK toolchains and a
-new package manager) colides with the goal of offering a stable base
-for OpenEmbedded-derived distributions. Some projects, most notably
-the Angstrom distribution, already maintained a stable branch for this
-reason.
-
-The effort of maintaining a stable branch is now centralized back into
-the OpenEmbedded project. The main goal of the stable branch is to
-provide a branch that progresses in time with a minimum of disruptive
-changes, especially to the framework, which include classes,
-configuration namespace, package management, and tooling such as the
-bitbake tool. Changes to the stable branch are selected and reviewed
-according to an agreed upon policy before being committed to the
-stable branch. This will require extra effort from the OpenEmbedded
-developer community.
-
-The stable branch is not intended to keep up with the pace of
-development on the development branch. Planned is to create new stable
-branches every year; the next stable branch is scheduled to branch of
-the development tree during 2008.12. Old stable branches will go in
-unmaintained mode 3 months after a new stable branch is created; the
-current stable will retire 2009.2.
-
-OpenEmbedded projects and distributions now have the choice of at
-least a .dev and .stable branch and the OpenEmbedded developers can
-keep on plumbing.
----
-
-
-Leon.
+	z.
 
 
