@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.132.241] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jfdfz-0005Oc-JM
-	for openembedded-devel@openembedded.org; Sat, 29 Mar 2008 17:13:03 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jfdfw-0000Px-Md
-	for openembedded-devel@openembedded.org; Sat, 29 Mar 2008 16:13:00 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 29 Mar 2008 16:13:00 +0000
-Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 29 Mar 2008 16:13:00 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <koen@dominion.kabel.utwente.nl>
-Date: Sat, 29 Mar 2008 17:12:52 +0100
-Message-ID: <fslpq4$5dq$1@ger.gmane.org>
-References: <200803291626.09506.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <200803291626.09506.zecke@selfish.org>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-Subject: Re: Request for help on daggy fixes and NCC
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JfxP0-0001ic-2z
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 30 Mar 2008 15:16:50 +0200
+Received: by an-out-0708.google.com with SMTP id b33so328664ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Mar 2008 06:16:33 -0700 (PDT)
+Received: by 10.101.69.10 with SMTP id w10mr12736077ank.68.1206882991313;
+	Sun, 30 Mar 2008 06:16:31 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Sun, 30 Mar 2008 06:16:31 -0700 (PDT)
+Message-ID: <c384c5ea0803300616k3a3219ek6d48878f57ed4ef9@mail.gmail.com>
+Date: Sun, 30 Mar 2008 14:16:31 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.9
+Subject: base.bbclass: Enable overwrite flag for unzip command
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,45 +29,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Mar 2008 16:13:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 30 Mar 2008 13:16:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-Holger Freyther schreef:
+During rebuilds I noticed unpacking a zip a second time fails, whereas tar
+silently succeeds, overwriting files.
 
-| Sadly this merge triggers another NCC and I think the danger of breaking
-| something in manually fixing the NCC is higher than the use of a daggy
-fix.
-| So what is your opinion on this? Would you do daggy fixes? Would you
-avoid
-| them? Would you first try and see if the result is mergable?
-|
-| Thankfully I could use mtn db to kill the daggy fix rev manually and
-now need
-| to apply the fix on top. And I love the concept of the daggy fix :(
+A manual test confirms this:
 
-My experience with OE developers is that daggy fixed is such a non-cvs
-concept that if one would do a daggy fix, people would start bitching on
-IRC about creating multiple heads and a 'bogus' merge for working of an
-'old' OE tree.
+leon@witty:/tmp$ unzip -q
+/home/leon/sandbox/efika/openembedded/downloads/faad2-2.0.zip
+leon@witty:/tmp$ unzip -q
+/home/leon/sandbox/efika/openembedded/downloads/faad2-2.0.zip
+replace faad2/aacDECdrop/aacDECdrop/aacDECdrop.dsp? [y]es, [n]o, [A]ll,
+[N]one, [r]ename: leon@witty:/tmp$
 
-If only monotone had something like 'hg transplant'....
+leon@witty:/tmp$ tar xzf ~/sandbox/efika/openembedded/downloads/zeroconf-
+0.9.tar.gz
+leon@witty:/tmp$ tar xzf ~/sandbox/efika/openembedded/downloads/zeroconf-
+0.9.tar.gz
 
-regards,
+I will shortly commit the following change (after a test), which enables
+overwrite behaviour for unzip:
 
-Koen
+-base.bbclass:574:               cmd = 'unzip -q'
++base.bbclass:574:               cmd = 'unzip -q -o'
 
-PS: daggy fixes rock!
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFH7mqEMkyGM64RGpERAk31AJ9o7mvrhEGSOEebHyAJLE7xR3ldeACeMNGT
-+ombgToVwHZ4lo0cV9n3G3g=
-=5I31
------END PGP SIGNATURE-----
-
-
+Regards,
+-- 
+Leon
 
