@@ -1,28 +1,33 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1JfxpV-0008QD-5k
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Mar 2008 15:44:13 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 11474A8BA1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Mar 2008 09:44:12 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Sun, 30 Mar 2008 09:44:12 -0400
-X-Sasl-enc: Bh3seru7rfwXq+qWbArwa9yXG/1eSBD/TXy4INjksXlf 1206884651
-Received: from [192.168.18.11] (unknown [121.209.24.91])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 35D69E204
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Mar 2008 09:44:10 -0400 (EDT)
-Message-ID: <47EF991C.2040001@whitby.id.au>
-Date: Mon, 31 Mar 2008 00:13:56 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <c384c5ea0803300616k3a3219ek6d48878f57ed4ef9@mail.gmail.com>
-In-Reply-To: <c384c5ea0803300616k3a3219ek6d48878f57ed4ef9@mail.gmail.com>
-Subject: Re: base.bbclass: Enable overwrite flag for unzip command
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JfyH6-0000Za-71
+	for openembedded-devel@openembedded.org; Sun, 30 Mar 2008 16:12:44 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JfyH1-00081y-Lt
+	for openembedded-devel@openembedded.org; Sun, 30 Mar 2008 14:12:39 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 30 Mar 2008 14:12:39 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 30 Mar 2008 14:12:39 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Sun, 30 Mar 2008 16:12:26 +0200
+Message-ID: <fso74a$8is$1@ger.gmane.org>
+References: <c384c5ea0803300622p72792646uc0f84190c878454b@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <c384c5ea0803300622p72792646uc0f84190c878454b@mail.gmail.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+Subject: Re: Distro maintainers: consider switching from util-linux to util-linux-ng
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,22 +41,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Mar 2008 13:44:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 30 Mar 2008 14:12:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Leon Woestenberg wrote:
-> During rebuilds I noticed unpacking a zip a second time fails, whereas tar
-> silently succeeds, overwriting files.
-...
-> I will shortly commit the following change (after a test), which enables
-> overwrite behaviour for unzip:
-> 
-> -base.bbclass:574:               cmd = 'unzip -q'
-> +base.bbclass:574:               cmd = 'unzip -q -o'
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-+1 - I had the same problem arise today with ixp4xx-npe-native.
+Leon Woestenberg schreef:
+| Hello all,
+|
+| consider switching to util-linux-ng, util-linux-ng is the maintained
+fork of
+| util-linux, whereas the latter is now dead AFAIK.
+|
+| http://userweb.kernel.org/~kzak/util-linux-ng/
 
--- Rod
+Looks nice, maintained software is almost always nicer than unmaintained
+~ sw.
+
+| I have committed it a while ago, and tested it to work ok for me.
+Needs more
+| testers, so I propose to switch over.
+|
+| The Changelist:
+|
+|
+http://git.kernel.org/?p=utils/util-linux-ng/util-linux-ng.git;a=blob;f=docs/v2.14-ReleaseNotes;h=c8ca19de79947d21dfbb16b1db4393881a93e47f;hb=915b80830b61264d4b3d3e52797054078595a003
+|
+| whichs shows me that 2.14 has arrived. Volunteers?
+
+If people add 2.14, please check all the u-a's, since 2.14 includes
+ionice, which used to be in the schedutils package (or still is), and
+busybox might have grown a few more applets.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH75/JMkyGM64RGpERAk2rAJ9jZmEoxosyF0dx9YdH/k9GYkIU6QCgnXB+
+gAYrYW4di1d+q0On3sNlO1U=
+=YO40
+-----END PGP SIGNATURE-----
+
 
 
