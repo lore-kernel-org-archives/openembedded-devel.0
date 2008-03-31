@@ -1,32 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JgHLp-0005vF-Bl
-	for openembedded-devel@openembedded.org; Mon, 31 Mar 2008 12:34:53 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JgHLj-00013X-MO
-	for openembedded-devel@openembedded.org; Mon, 31 Mar 2008 10:34:47 +0000
-Received: from ip-62-143-23-251.1411n-cud12k-01.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 31 Mar 2008 10:34:47 +0000
-Received: from no2spam by ip-62-143-23-251.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 31 Mar 2008 10:34:47 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 31 Mar 2008 12:34:39 +0200
-Message-ID: <fsqenu$gr7$1@ger.gmane.org>
-References: <c384c5ea0803301459l3d808b51v64bad3155b7b3b86@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.1411n-cud12k-01.ish.de
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JgJIr-0002dx-1H
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Mar 2008 14:39:57 +0200
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1JgHlW-0004Wd-Vs; Mon, 31 Mar 2008 13:01:27 +0200
+Message-ID: <47F0BC6E.3020007@kernelconcepts.de>
+Date: Mon, 31 Mar 2008 12:26:54 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
 User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
-In-Reply-To: <c384c5ea0803301459l3d808b51v64bad3155b7b3b86@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Behaviour when bitbaking a specific version with DEFAULT_PREFERENCE = "-1"
+MIME-Version: 1.0
+To: Jonathan Wilson <jfwfreo@tpgi.com.au>
+References: <505311.45541.qm@web43131.mail.sp1.yahoo.com>
+	<47ED883F.9090102@tpgi.com.au>
+In-Reply-To: <47ED883F.9090102@tpgi.com.au>
+X-Enigmail-Version: 0.95.0
+Cc: openezx-devel@lists.openezx.org,
+	Canadian Doctor Lou <openembedded-devel@lists.openembedded.org>
+Subject: Re: Which of the EZX phones should OpenEZX focus on in the future?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,15 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2008 10:34:53 -0000
+X-List-Received-Date: Mon, 31 Mar 2008 12:39:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Leon Woestenberg wrote:
-> when I perform a bitbake package-version.bb, whilst that package has
-> DEFAULT_PREFERENCE -1, weird things happen.
+Hi,
 
-example?
+Jonathan Wilson schrieb:
+> My vote also goes to the MOTOMAGX phones. They are the only linux phones
+> still being made by moto. The kernel is a 2.6.x kernel and if a method
+> can be found to overcome the signature checks, it should be fairly
+> simple to migrate up to a newer kernel. The tricky part will again be
+> the various userspace binaries needed to make everything work (audio,
+> USB, phonecalls etc)
 
+I call it a good idea to support the MOTOMAGX phones as well. They are produced
+in higher volumes than the EZX phones and sold worldwide. On the other hand
+there are many many EZX phones out there that need better software - so the main
+problem is still to attract developers that help getting the devices into a
+state where we can actually use them.
+
+Greetings
+
+Florian
+
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
