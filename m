@@ -1,17 +1,17 @@
-Received: from [64.233.170.187] (helo=rn-out-0910.google.com)
+Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1JgM0j-0004eO-BO
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JgMBv-0004tM-Qy
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Mar 2008 17:33:26 +0200
-Received: by rn-out-0910.google.com with SMTP id j40so668480rnf.12
+	Mon, 31 Mar 2008 17:45:04 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so1918563wxd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2008 08:33:22 -0700 (PDT)
-Received: by 10.114.158.1 with SMTP id g1mr10195652wae.111.1206977590474;
-	Mon, 31 Mar 2008 08:33:10 -0700 (PDT)
-Received: by 10.114.190.2 with HTTP; Mon, 31 Mar 2008 08:33:10 -0700 (PDT)
-Message-ID: <f96d234e0803310833g4565e51u2abbc47312c05f07@mail.gmail.com>
-Date: Mon, 31 Mar 2008 11:33:10 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Mon, 31 Mar 2008 08:44:56 -0700 (PDT)
+Received: by 10.100.122.8 with SMTP id u8mr16304711anc.46.1206978296835;
+	Mon, 31 Mar 2008 08:44:56 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Mon, 31 Mar 2008 08:44:56 -0700 (PDT)
+Message-ID: <c384c5ea0803310844l1e91faa0m86a699174afeabf7@mail.gmail.com>
+Date: Mon, 31 Mar 2008 17:44:56 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <200803310907.56781.e.robertson.svg@gmail.com>
 MIME-Version: 1.0
@@ -30,50 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2008 15:33:26 -0000
+X-List-Received-Date: Mon, 31 Mar 2008 15:45:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Mar 31, 2008 at 10:07 AM, E Robertson <e.robertson.svg@gmail.com> wrote:
+On Mon, Mar 31, 2008 at 4:07 PM, E Robertson <e.robertson.svg@gmail.com> wrote:
 > Hi All,
 >
 >  I'm brand new to OE and I've been following the documentation steps along the
 >  way. I notice the documentation is either missing sections or not clear and
->  as I learn how to use this tool, I would like to update the documentation
->  sections. It's probably the least I could do as I figure out how this works.
->  I'm referirng to the user manual wiki. Both configuring and building sections
->  are missing clarity.
->  Who is responsible for the manual and how do I submit info to the sections?
 
-The "User Manual" is maintained in the monotone repo, and can be
-checked out and edited.
+Good catch, our default example seems to be unmaintained.  Probably
+the "generic" distribution lacks good maintenance, at least for this
+configuration.
 
-http://amethyst.openembedded.net/oe/viewmtn/viewmtn.py/branch/changes/org.openembedded.documentation
+DISTRO         = "generic-uclibc"
 
-Patches welcome.
+The error which stops your build is:
 
-The rest of the documentation is in a Drupal wiki, and can be edited.
-You may need a user account.
+>  | Unable to determine version for kernel headers
+>  |       provided in
 
->  I got the tools built and running bitbake 1.8.10 and pulled
->  org.openembedded.dev branch. I tried to build both nano and helloworld and
->  couldn't get pass the following error. I have chosen the generic-uclibc
->  DISTRO for starters.
+Can someone suggest a saner distribution for this Samsung chip? angstrom maybe?
 
-Try the angstrom distro first, as I don't think generic is currently
-maintained.  Sigh -- the OeFaq page has been spammed :-(
-
-This older page will tell you how to set Angstrom to uclibc until I
-figure out how to restore the correct page.
-http://www.openembedded.org/node/28/diff/964/1042
-
-Cliff
-
-
+Regards,
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Leon
 
 
