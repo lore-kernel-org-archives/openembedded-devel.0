@@ -1,24 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1Jg78J-0000yb-A4
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Mar 2008 01:40:15 +0200
-Received: (qmail invoked by alias); 30 Mar 2008 23:40:12 -0000
-Received: from BAA089a.baa.pppool.de (EHLO [192.168.178.31]) [77.128.8.154]
-	by mail.gmx.net (mp011) with SMTP; 31 Mar 2008 01:40:12 +0200
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX19L/ioqa8dL3jZlf8TCrlc/ZPLr8ro5u7/+dIeXyT
-	XdmrsDL7xmVdMA
-Message-ID: <47F024DA.5020502@gmx.de>
-Date: Mon, 31 Mar 2008 01:40:10 +0200
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080109)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1206911981.4838.12.camel@dax.rpnet.com>
-In-Reply-To: <1206911981.4838.12.camel@dax.rpnet.com>
-X-Y-GMX-Trusted: 0
-Subject: Re: libgcc not being pulled into OABI images
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JgEF1-0008DO-Ql
+	for openembedded-devel@openembedded.org; Mon, 31 Mar 2008 09:15:39 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JgEEx-00008Q-09
+	for openembedded-devel@openembedded.org; Mon, 31 Mar 2008 07:15:35 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 31 Mar 2008 07:15:34 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 31 Mar 2008 07:15:34 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Mon, 31 Mar 2008 09:15:25 +0200
+Message-ID: <fsq32d$6ds$1@ger.gmane.org>
+References: <1206919092.4838.23.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <1206919092.4838.23.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+Subject: Re: Old bitkeeper repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,36 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Mar 2008 23:40:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 31 Mar 2008 07:15:39 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I tested on my host machine (AMD64) and libgcc is not it NEEDED but is 
-installed anyway. So it seems to be no problem that libgcc is not in 
-needed. So I investigated libpthread and found out that it tries to 
-dlopen libgcc and fails if it can't. Our shlibs code can't detect this 
-so libgcc does not get pulled into image. So I suggest something like:
+Richard Purdie schreef:
+| Hi,
+|
+| I've been experimenting with the bitkeeper cvs dump we have of the OE
+| repository that was there. I'm planning on turning this into a git
+| repository so we can more easily see what was in there.
 
---- packages/glibc/glibc.inc    e9a2a880277298ca08e7f53a4e5c69127415a5ed
-+++ packages/glibc/glibc.inc    3aa1e1a80cf9f0f899b5a79b857bfa5427f5d54e
-@@ -7,6 +7,8 @@ DEPENDS = "${@['virtual/${TARGET_PREFIX}
- DEPENDS = "${@['virtual/${TARGET_PREFIX}gcc-initial', 
-'virtual/${TARGET_PREFIX}gcc']['nptl' in '${GLIBC_ADDONS}']} 
-linux-libc-headers"
- #this leads to circular deps, so lets not add it yet
- #RDEPENDS_ldd += " bash"
-+# nptl needs libgcc but dlopens it, so our shlibs code doesn't detect this
-+RDEPENDS += "${@['','libgcc']['ntpl' in '${GLIBC_ADDONS}']}"
- PROVIDES = "virtual/libc ${@['virtual/${TARGET_PREFIX}libc-for-gcc', 
-'']['nptl' in '${GLIBC_ADDONS}']}"
- PROVIDES += "virtual/libintl virtual/libiconv"
+I did that for hg a while ago: http://ewi546.ewi.utwente.nl:8000/
 
 
-Is it ok if I comit this (and bump PRs of all packages that use this file?)
+| If we did switch to git/hg/scm of the month, what commit ids would we
+| want to be using?
 
-Regards,
-Thomas
+I'd say we stick the the current ones and turn those into working email
+addresses for everyone.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH8I+NMkyGM64RGpERAi3QAJ9bQxDGO6o2Wutx5xD4UnYzBJUJVgCfXaap
+wOunXG9pWE7mkK7RvPHDTkA=
+=MoEP
+-----END PGP SIGNATURE-----
+
 
 
