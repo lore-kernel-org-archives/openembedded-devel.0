@@ -1,24 +1,20 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [64.233.178.245] (helo=hs-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JgS0O-0008Kr-DC
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JgS2r-0008Qo-5U
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Mar 2008 23:57:28 +0200
-Received: from [212.23.103.84] (helo=[10.161.84.136])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1JgS0N-0007Bk-Hi
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Mar 2008 23:57:28 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Mar 2008 23:07:51 +0200
-User-Agent: KMail/1.9.9
-References: <200803311438.09825.e.robertson.svg@gmail.com>
-In-Reply-To: <200803311438.09825.e.robertson.svg@gmail.com>
+	Tue, 01 Apr 2008 00:00:01 +0200
+Received: by hs-out-0708.google.com with SMTP id 23so2087267hsn.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Mar 2008 15:00:00 -0700 (PDT)
+Received: by 10.100.140.15 with SMTP id n15mr17120070and.87.1207000800055;
+	Mon, 31 Mar 2008 15:00:00 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Mon, 31 Mar 2008 15:00:00 -0700 (PDT)
+Message-ID: <c384c5ea0803311500r15a7b84fp2515f3b54ad747a4@mail.gmail.com>
+Date: Tue, 1 Apr 2008 00:00:00 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Message-Id: <200803312307.51210.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.84
-Subject: Re: stable branch checksum missmatch for quilt-0.45
+Subject: [Review] Remove /xorg-lib/pixman_* in favor of /libpixman/libpixman_*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,60 +28,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2008 21:57:29 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Mon, 31 Mar 2008 22:00:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Monday 31 March 2008 21:38:05 E Robertson wrote:
+Hello,
 
-> NOTE: package quilt-native-0.45: started
-> NOTE: package quilt-native-0.45-r1: task do_fetch: started
-> sh: oe_sha256sum: command not found
-> NOTE: The SHA256 Sums do not match.
-> Wanted: 'de7290f334baf631a14d031df304ee94cfb550aa69e7512aa589d21c2381c7d8'
-> Got: ''
+(lib)pixman is present at two locations:
 
-My prolog knowledge is pretty weak but let us analys this:
+/libpixman/libpixman_*
+/xorg-lib/pixman_*
 
-1. sh: oe_sha256sum: command not found
+The latter has a false/redundant DEPENDS = "util-macros
+xorg-headers-native" as it includes xorg-lib/xorg-lib-common.inc.
 
-So executing a command called oe_sha256sum failed
+That these are redundant can be tested with the latest 0.9.6 recipes,
+present in both directories, which have been *identical* and present
+since 2007-11-10.
 
+* I propose to remove the xorg-lib/ ones, as pixman is independent of
+X. That's also the way I use it.
 
-2. > NOTE: The SHA256 Sums do not match.
- > Wanted: 'de7290f334baf631a14d031df304ee94cfb550aa69e7512aa589d21c2381c7d8'
- > Got: ''
-
-So the SHA256 did not match? "" vs. long number (every sha256 hash has the 
-same size)
+* I would like to hear if anyone using X and /libpixman/libpixman
+0.9.6 found any problems so far, as I don't use X on my targets (yet).
 
 
-Resolving facts:
-	sha256 might be equal to SHA256
-
-	oe_sha256sum might be an OpenEmbedded (oe) program to calculate a
-	sha256. It was not able to execute it
-
-	It was not able to execute oe_sha256sum, the stuff printed on the console
-	was "".
-
-	This could explain the mismatch?
-
-Applying knowledge:
-	You have a failure because oe_sha256sum failed to be executed.
-
-Possible next steps:
-	- Check if you have a oe_sha256sum
-	- Check if your home partition allows execution of binaries
-	- Check your build logs if oe_sha256sum was attempted to be built
-	- Check the dep graph if there is a oe_sha256sum in it (bitbake -g and then 
-	  read the files and search for sha256)
-
-oe_sha256sum is supposed to be built before everything else, and normally is. 
-So good luck and please provide more feedback (you seem to get started)
-
-z.
+Regards,
+-- 
+Leon
 
 
