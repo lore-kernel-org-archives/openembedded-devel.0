@@ -1,24 +1,24 @@
-Received: from [64.233.178.242] (helo=hs-out-0708.google.com)
+Received: from [66.249.82.229] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JgO6d-0000x3-1G
+	(envelope-from <e.robertson.svg@gmail.com>) id 1JgP70-0006jn-Kk
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Mar 2008 19:47:39 +0200
-Received: by hs-out-0708.google.com with SMTP id 23so1988809hsn.12
+	Mon, 31 Mar 2008 20:52:06 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so2006227wxd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2008 10:47:33 -0700 (PDT)
-Received: by 10.100.229.12 with SMTP id b12mr16582734anh.60.1206985653348;
-	Mon, 31 Mar 2008 10:47:33 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Mon, 31 Mar 2008 10:47:33 -0700 (PDT)
-Message-ID: <c384c5ea0803311047g1665c14fqfe6fc2417abfb969@mail.gmail.com>
-Date: Mon, 31 Mar 2008 19:47:33 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	Mon, 31 Mar 2008 11:52:05 -0700 (PDT)
+Received: by 10.100.3.4 with SMTP id 4mr1134944anc.81.1206989525394;
+	Mon, 31 Mar 2008 11:52:05 -0700 (PDT)
+Received: from debian ( [74.254.162.162])
+	by mx.google.com with ESMTPS id 6sm4083499agb.13.2008.03.31.11.52.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 31 Mar 2008 11:52:03 -0700 (PDT)
+From: E Robertson <e.robertson.svg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200803311134.26764.geoffrey@pager.net>
+Date: Mon, 31 Mar 2008 13:51:47 -0500
+User-Agent: KMail/1.9.7
 MIME-Version: 1.0
-References: <200803310907.56781.e.robertson.svg@gmail.com>
-	<c384c5ea0803310844l1e91faa0m86a699174afeabf7@mail.gmail.com>
-	<fsr2gk$t6o$1@ger.gmane.org> <200803311134.26764.geoffrey@pager.net>
-Subject: Re: New OE user question
+Message-Id: <200803311351.54378.e.robertson.svg@gmail.com>
+Subject: OE.mtn snapshot md5sum incorrect
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,35 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2008 17:47:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 31 Mar 2008 18:52:07 -0000
+X-Groupsio-MsgNum: 4862
+Content-Type: multipart/signed; boundary="nextPart1877645.fPojQgsnWJ";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart1877645.fPojQgsnWJ
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello,
+I think the md5sum for the _current_ snapshot needs updating.
 
-On Mon, Mar 31, 2008 at 6:34 PM, Geoffrey Wossum <geoffrey@pager.net> wrote:
-> On Monday 31 March 2008 11:12:03 am Koen Kooi wrote:
->
-> > Leon Woestenberg schreef:
-> > | Can someone suggest a saner distribution for this Samsung chip?
->  > It's an atmel chip, and atmel itself recommends angstrom:
->  > http://www.linux4sam.org/twiki/bin/view/Linux4SAM/OpenEmbeddedAngstrom
->
-Whoops on the chip, and yes they do recommend Angstrom when choosing
-OpenEmbedded.
+$md5sum -c OE.mtn.bz2.md5
+md5sum: OE-this-is-for-mtn-0.35.mtn.bz2: No such file or directory
+OE-this-is-for-mtn-0.35.mtn.bz2: FAILED open or read
+md5sum: WARNING: 1 of 1 listed file could not be read
 
-Now it seems so far Atmel seems to use buildroot a lot as well.
+--nextPart1877645.fPojQgsnWJ
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
->  recommend against OE / Angstrom.  Interesting side note, it seems they
->  recently had to rollback some of their AVR32 gcc patches in the buildroot
->  mainline because they were breaking stuff there.
->
-I saw that. I wonder if "there" means uclibc (in case we are affected
-as well), or buildroot specifics (where they break other archs)?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
 
-Regards,
--- 
-Leon
+iD8DBQBH8TLK2sS31XKVICURAnJrAJsFZKrynpygbdVRg2FH5LVQri+aOQCgjzWm
+v4SXQ97OIjImLvoDjPpnXys=
+=WuQG
+-----END PGP SIGNATURE-----
 
-
+--nextPart1877645.fPojQgsnWJ--
