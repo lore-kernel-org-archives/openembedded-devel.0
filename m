@@ -1,28 +1,32 @@
-Received: from [213.36.80.91] (helo=mail.libertysurf.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JgGAO-0002Qa-EP
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Mar 2008 11:19:00 +0200
-Received: from blini.bolloretelecom.eu (62.210.194.121) by
-	mail.libertysurf.net (7.3.118.8)
-	id 479F73A801899E91 for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Mar 2008 12:14:57 +0200
-Received: from [192.168.95.62] (unknown [192.168.95.62])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id A42BA23E58
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2008 11:18:57 +0200 (CEST)
-Message-ID: <47F0AC84.6080005@bolloretelecom.eu>
-Date: Mon, 31 Mar 2008 11:19:00 +0200
-From: =?UTF-8?B?SmVyZW15IExhaW7DqQ==?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.0.13pre) Gecko/20080208 Thunderbird/1.5.0.14pre
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <47ED3CE1.7020000@bolloretelecom.eu> <fsjh0h$6k1$1@ger.gmane.org>
-In-Reply-To: <fsjh0h$6k1$1@ger.gmane.org>
-X-Enigmail-Version: 0.94.2.0
-Subject: Re: uImage generation: kernel.bbclass vs linux.inc
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JgHLp-0005vF-Bl
+	for openembedded-devel@openembedded.org; Mon, 31 Mar 2008 12:34:53 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JgHLj-00013X-MO
+	for openembedded-devel@openembedded.org; Mon, 31 Mar 2008 10:34:47 +0000
+Received: from ip-62-143-23-251.1411n-cud12k-01.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 31 Mar 2008 10:34:47 +0000
+Received: from no2spam by ip-62-143-23-251.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 31 Mar 2008 10:34:47 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 31 Mar 2008 12:34:39 +0200
+Message-ID: <fsqenu$gr7$1@ger.gmane.org>
+References: <c384c5ea0803301459l3d808b51v64bad3155b7b3b86@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
+In-Reply-To: <c384c5ea0803301459l3d808b51v64bad3155b7b3b86@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Behaviour when bitbaking a specific version with DEFAULT_PREFERENCE = "-1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -36,54 +40,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2008 09:19:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Mon, 31 Mar 2008 10:34:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Leon Woestenberg wrote:
+> when I perform a bitbake package-version.bb, whilst that package has
+> DEFAULT_PREFERENCE -1, weird things happen.
 
-Koen Kooi wrote:
-> Jeremy Lain=C3=A9 schreef: | With the recent changes to kernel.bbclass
-> it seems that uboot-mkimage is | called twice: | | linux.inc:
-> do_compile_append() | | 1/ uses uboot-mkimage to generate generates
-> arch/${ARCH}/boot/uImage
->
-> That's needed to get the correct uImage packaged, some machines
-> have the uImage in the rootfs (don't turn on lzo in jffs2, uboot
-> doesn't like that).
->
-I totally agree, the change to uImage needs to be done in time for it
-to be picked up by packaging. My point is I think we should:
-
-a/ move do_compile_append() into kernel.bbclass
-b/ in do_deploy() : not run uboot-mkimage since this has already been
-done during do_compile_append()
-
-> That raises the question how kexec handles uImage files and how we
-> can make it easy for people to generate uImage for flashing and
-> zImage for kexecing in the same build.
->
-OK, we will have to look into this.
-> DATETIME in version strings should die, we have PR for that. If the
->  output changed, PR should have been bumped. Lazyness is not a
-> valid excuse for littering my deploydir with identical files with a
-> different timestamp each build. Your filesystem has mtime if you
-> really want to see a date.
->
-I agree, I have commited this change.
-
-- --
-Jeremy LAINE
-Bollor=C3=A9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFH8KyDCL1n3lVB9EYRAl2IAJ9sqVBp4OAgg55zzKCGuhyLk5Gq5QCfdrxB
-Ghj+IYQbuVPITyMIxR3DFc4=3D
-=3Dr441
------END PGP SIGNATURE-----
+example?
 
 
 
