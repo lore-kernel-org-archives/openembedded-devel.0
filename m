@@ -1,23 +1,20 @@
-Received: from [209.85.132.240] (helo=an-out-0708.google.com)
+Received: from [64.233.184.226] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Jgdo4-0003a9-3x
+	(envelope-from <will.newton@gmail.com>) id 1Jge2a-0004HR-JK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 12:33:32 +0200
-Received: by an-out-0708.google.com with SMTP id b33so552239ana.83
+	Tue, 01 Apr 2008 12:48:32 +0200
+Received: by wr-out-0506.google.com with SMTP id 36so1215136wra.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2008 03:33:22 -0700 (PDT)
-Received: by 10.101.70.15 with SMTP id x15mr17543339ank.109.1207046002850;
-	Tue, 01 Apr 2008 03:33:22 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Tue, 1 Apr 2008 03:33:22 -0700 (PDT)
-Message-ID: <c384c5ea0804010333i4c63c490n2f5f48db5dcf9bec@mail.gmail.com>
-Date: Tue, 1 Apr 2008 12:33:22 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	Tue, 01 Apr 2008 03:48:31 -0700 (PDT)
+Received: by 10.142.240.9 with SMTP id n9mr4524080wfh.214.1207046910573;
+	Tue, 01 Apr 2008 03:48:30 -0700 (PDT)
+Received: by 10.142.163.5 with HTTP; Tue, 1 Apr 2008 03:48:30 -0700 (PDT)
+Message-ID: <87a5b0800804010348g778bb897g73841e870da58d00@mail.gmail.com>
+Date: Tue, 1 Apr 2008 11:48:30 +0100
+From: "Will Newton" <will.newton@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fssll5$uhe$1@ger.gmane.org>
 MIME-Version: 1.0
-References: <c384c5ea0803311500r15a7b84fp2515f3b54ad747a4@mail.gmail.com>
-	<fssll5$uhe$1@ger.gmane.org>
-Subject: Re: [Review] Remove /xorg-lib/pixman_* in favor of /libpixman/libpixman_*
+Subject: Getting started with OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,21 +28,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 10:33:32 -0000
+X-List-Received-Date: Tue, 01 Apr 2008 10:48:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello Koen,
+Hi,
 
-On Tue, Apr 1, 2008 at 8:44 AM, Koen Kooi
-<koen@dominion.kabel.utwente.nl> wrote:
->  How about dropping the xorg-lib one and renaming libpixman to pixman?
->
-+1 on both. I'll commit tomorrow if nobody beat me to it.
+I'm trying to follow the getting started guide on the OE wiki, and
+I've run into a few problems.
 
-Regards,
--- 
-Leon
+I'm using the OE tree from Holger's git mirror because monotone is
+having problems updating the tree for me (slow speed and eventual
+connection drop).
+
+I can get as far as the "bitbake nano" step. First I get this error:
+
+ERROR: 'module' object has no attribute 'get_srcrev' while parsing
+/home/wnewton/src/oe/org.openembedded.dev/packages/packagekit/packagekit_git.bb
+
+It doesn't seem to be fatal though as the build continues.
+
+Then I get this:
+
+NOTE: Preparing Runqueue
+Traceback (most recent call last):
+  File "/usr/bin/bitbake", line 117, in <module>
+    main()
+  File "/usr/bin/bitbake", line 113, in main
+    cooker.cook()
+  File "/var/lib/python-support/python2.5/bb/cooker.py", line 525, in cook
+    return self.buildTargets(pkgs_to_build)
+  File "/var/lib/python-support/python2.5/bb/cooker.py", line 437, in
+buildTargets
+    rq.prepare_runqueue()
+  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 258,
+in prepare_runqueue
+    mark_active(listid, 1)
+  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 234,
+in mark_active
+    mark_active(depend, depth+1)
+  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 234,
+in mark_active
+    mark_active(depend, depth+1)
+  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 234,
+in mark_active
+    mark_active(depend, depth+1)
+  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 227,
+in mark_active
+    if runq_build[listid] == 1:
+IndexError: list index out of range
+
+I suspect using the git mirror is probably not supported, but I was
+wondering if anyone could help me debug this?
+
+Thanks,
 
 
