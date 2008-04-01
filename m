@@ -1,22 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1JgiNq-0002wO-Iu
-	for openembedded-devel@openembedded.org; Tue, 01 Apr 2008 17:26:46 +0200
-Received: (qmail 21476 invoked by uid 813007); 1 Apr 2008 15:26:45 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 1 Apr 2008 15:26:45 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 1 Apr 2008 16:27:07 +0100
-User-Agent: KMail/1.9.9
-References: <200803310907.56781.e.robertson.svg@gmail.com>
-	<47F215BF.1060004@bolloretelecom.eu>
-	<c384c5ea0804010608v53808279u2a800a8a3964202f@mail.gmail.com>
-In-Reply-To: <c384c5ea0804010608v53808279u2a800a8a3964202f@mail.gmail.com>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Jgioc-0003im-RE
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Apr 2008 17:54:26 +0200
+Received: (qmail invoked by alias); 01 Apr 2008 15:54:23 -0000
+Received: from e179070024.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.179.70.24]
+	by mail.gmx.net (mp058) with SMTP; 01 Apr 2008 17:54:23 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19pO8ZCmslpR09mRydcyZb2jL4idM6DeWhUWh657c
+	DqkaqY/uZcMljZ
+Message-ID: <47F25AAA.8020705@gmx.net>
+Date: Tue, 01 Apr 2008 17:54:18 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
 MIME-Version: 1.0
-Message-Id: <200804011727.08441.openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+References: <200803310907.56781.e.robertson.svg@gmail.com>	<200803311101.39141.geoffrey@pager.net>
+	<200804010840.42271.openembedded@haerwu.biz>
+In-Reply-To: <200804010840.42271.openembedded@haerwu.biz>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
 Subject: Re: OE Manual: License change?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -31,37 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 15:26:46 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Tue, 01 Apr 2008 15:54:27 -0000
+X-Groupsio-MsgNum: 4886
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig384D3F869A87ED430003D4AF"
+
+--------------enig384D3F869A87ED430003D4AF
+Content-Type: text/plain; charset=ISO-8859-2
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia Tuesday 01 of April 2008, Leon Woestenberg napisa=B3:
-> Hello,
->
-> 2008/4/1 Jeremy Lain=E9 <jeremy.laine@bolloretelecom.eu>:
-> > =A0Sorry to nitpick but I'd vote against changing to CC-NC-SA, the
-> > =A0"Non-Commercial" limitation makes in non-free in the "Debian Free
-> > =A0Software Guidelines" sense. Unless I am mistaken it means that if
-> > you build a commercial product based on OpenEmbedded it prevents you
-> > from distributing the documentation along with a snapshot of OE (say
-> > you want to provide an SDK to your users).
->
-> Good point, at least something to find out before we make a change.
->
-> (Worst case, the Poky documentation itself *might* then be even under
-> a chicken and egg situation :-)
+Hi.
 
-What do you mean by 'a chicken and egg situation'?
+Marcin Juszkiewicz schrieb:
+> Dnia Monday 31 of March 2008, Geoffrey Wossum napisa=B3:
+> That reminds me one thing.=20
+>=20
+> OpenEmbedded documentation use "Creative Commons Attribution License 2.=
+0",=20
+> Poky Handbook use "Creative Commons Attribution Non-Commercial Share=20
+> Alike 2.0" license. Copying from Poky Handbook to OpenEmbedded manual=20
+> require change on OE doc license to CC-NC-SA.
+>=20
+> I vote for changing OE manual license to CC-NC-SA as there is lot of go=
+od=20
+> stuff in Poky handbook which would be nice to have also in OE manual.
+OMG not any of these broken *-NC licenses. ;)
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+A manual is a functional work and therefore should IMHO not restrict the
+uses.
 
-       Wszystko, co naprawd=EA lubi=EA robi=E6, jest albo niemoralne,=20
-       albo nielegalne, albo tucz=B1ce.      [Alexander Woolcott]
+Any chance of changing poky manual's license to something less
+restrictive? CC-BY-SA/CC-BY preferably?
 
-
+Regards
+Robert
 
 
+
+--------------enig384D3F869A87ED430003D4AF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFH8lqtG9cfwmwwEtoRCICwAJwLXTx6TgMWS5qA2GfRZ54bdGnvjgCdFQvy
+264eW7JLQo27RiPBLJhbvqY=
+=gQAz
+-----END PGP SIGNATURE-----
+
+--------------enig384D3F869A87ED430003D4AF--
