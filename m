@@ -1,24 +1,23 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded-devel@lists.futaris.org>)
-	id 1JgZhk-00076I-9L for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 08:10:44 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id D5281E4999
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2008 02:10:42 -0400 (EDT)
-Received: from web7.messagingengine.com ([10.202.2.216])
-	by compute1.internal (MEProxy); Tue, 01 Apr 2008 02:10:42 -0400
-Received: by web7.messagingengine.com (Postfix, from userid 99)
-	id 9E17F38C5E; Tue,  1 Apr 2008 02:10:42 -0400 (EDT)
-Message-Id: <1207030242.29161.1245367579@webmail.messagingengine.com>
-X-Sasl-Enc: b6nJcA+piEB/gUom43WJJ/kz3ha5ohk3vDJnxWWK6p4T 1207030242
-From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1JgaAZ-0004ru-DE
+	for openembedded-devel@openembedded.org; Tue, 01 Apr 2008 08:40:31 +0200
+Received: (qmail 4442 invoked by uid 813007); 1 Apr 2008 06:40:30 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Apr 2008 06:40:30 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
+Date: Tue, 1 Apr 2008 07:40:40 +0100
+User-Agent: KMail/1.9.9
+References: <200803310907.56781.e.robertson.svg@gmail.com>
+	<200803311101.39141.geoffrey@pager.net>
+In-Reply-To: <200803311101.39141.geoffrey@pager.net>
 MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-Date: Tue, 01 Apr 2008 16:10:42 +1000
-Subject: gcc disable-libunwind-exceptions, VFP, iWMMXt, crunch - nokia800, mx31ads, etc
+Message-Id: <200804010840.42271.openembedded@haerwu.biz>
+Cc: Matthew Allum <mallum@openedhand.com>
+Subject: OE Manual: License change? (was: Re: New OE user question)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,38 +31,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 06:10:44 -0000
+X-List-Received-Date: Tue, 01 Apr 2008 06:40:31 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="ISO-8859-1"
 
-Hi All,
+Dnia Monday 31 of March 2008, Geoffrey Wossum napisa=B3:
+> On Monday 31 March 2008 09:07:48 am E Robertson wrote:
 
-I was recently looking in gcc-cross-4.2.2.bb and 4.3.0.bb and noticed
-that in our EXTRA_OECONF we have:
+> > I'm brand new to OE and I've been following the documentation steps
+> > along the way. I notice the documentation is either missing sections
+> > or not clear and as I learn how to use this tool, I would like to
+> > update the documentation sections. It's probably the least I could do
+> > as I figure out how this works. I'm referirng to the user manual
+> > wiki. Both configuring and building sections are missing clarity.
+> > Who is responsible for the manual and how do I submit info to the
+> > sections?
+>
+> May not help you with your current issue, but I've discovered that the
+> Poky handbook is a better source of OpenEmbedded info than the
+> OpenEmbedded documetation.
+>
+> http://www.pokylinux.org/doc/poky-handbook.html
 
---disable-libunwind-exceptions
+That reminds me one thing.=20
 
-Won't this cause a problem for a VFP system (when an exception occurs),
-i.e. mx31ads, nokia800?  
-e.g. libunwind.S in gcc/config/arm has some specific functions to
-save/restore VFP and iWMMXt registers...
+OpenEmbedded documentation use "Creative Commons Attribution License 2.0",=
+=20
+Poky Handbook use "Creative Commons Attribution Non-Commercial Share=20
+Alike 2.0" license. Copying from Poky Handbook to OpenEmbedded manual=20
+require change on OE doc license to CC-NC-SA.
 
-Also, I couldn't build glibc-intermediate (with system-wide iwmmxt) with
-the tag enabled, when building with binutils-2.18, gcc-4.3.0 and
-glibc-2.6.1 ...
+I vote for changing OE manual license to CC-NC-SA as there is lot of good=20
+stuff in Poky handbook which would be nice to have also in OE manual.
 
-How does the TARGET_FPU_arm = "hard" overcome this on nokia800, mx31ads,
-etc?  Are we only building with-float in certain packages, and using
-softfp float-abi otherwise?
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
 
-Does this mean for a MaverickCrunch system (with system-wide FPU
-enabled), we should be setting TARGET_FPU_arm = "hard" too?
+          UseNet News. Learn what you know. Share what you don't.
 
-What about for a PXA27x system with a iWMMXt coprocessor (and
-system-wide iwmmxt) ???  It should be using soft-float, but it should
-have libunwind-exceptions enabled (I think) because of the code in
-libunwind.S...
 
 
 
