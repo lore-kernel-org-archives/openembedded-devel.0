@@ -1,26 +1,34 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Jgn9v-0000sU-2g
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 22:32:43 +0200
-Received: from [212.23.103.106] (helo=[10.161.175.249])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
-	(envelope-from <zecke@selfish.org>) id 1Jgn9u-0005fW-AZ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 22:32:42 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 1 Apr 2008 22:32:28 +0200
-User-Agent: KMail/1.9.9
-References: <200803311438.09825.e.robertson.svg@gmail.com>
-	<200804011648.57903.zecke@selfish.org>
-	<200804011053.07102.e.robertson.svg@gmail.com>
-In-Reply-To: <200804011053.07102.e.robertson.svg@gmail.com>
-MIME-Version: 1.0
-Message-Id: <200804012232.28549.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 212.23.103.106
-Subject: Re: stable branch checksum missmatch for quilt-0.45
+	(envelope-from <rpurdie@rpsys.net>) id 1JgnOw-0001GR-EO
+	for openembedded-devel@openembedded.org; Tue, 01 Apr 2008 22:48:14 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m31KmELv019090
+	for <openembedded-devel@openembedded.org>;
+	Tue, 1 Apr 2008 21:48:14 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 18748-08 for <openembedded-devel@openembedded.org>;
+	Tue,  1 Apr 2008 21:48:10 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m31Km8Vi019084
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Tue, 1 Apr 2008 21:48:08 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <47F25AAA.8020705@gmx.net>
+References: <200803310907.56781.e.robertson.svg@gmail.com>
+	<200803311101.39141.geoffrey@pager.net>
+	<200804010840.42271.openembedded@haerwu.biz> <47F25AAA.8020705@gmx.net>
+Date: Tue, 01 Apr 2008 21:48:09 +0100
+Message-Id: <1207082889.4916.25.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: OE Manual: License change?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,28 +42,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 20:32:43 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Tue, 01 Apr 2008 20:48:14 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tuesday 01 April 2008 17:52:56 E Robertson wrote:
+On Tue, 2008-04-01 at 17:54 +0200, Robert Schuster wrote:
+> Marcin Juszkiewicz schrieb:
+> > OpenEmbedded documentation use "Creative Commons Attribution License 2.0", 
+> > Poky Handbook use "Creative Commons Attribution Non-Commercial Share 
+> > Alike 2.0" license. Copying from Poky Handbook to OpenEmbedded manual 
+> > require change on OE doc license to CC-NC-SA.
+> > 
+> > I vote for changing OE manual license to CC-NC-SA as there is lot of good 
+> > stuff in Poky handbook which would be nice to have also in OE manual.
+> OMG not any of these broken *-NC licenses. ;)
 
->
-> Thanks. I created a new TMPDIR and rebuild successfully.
->
-> Unless their are any objections, I'll add this to the user manual along
-> with a note that the best way to do a _clean_ build is to delete tmp dir
-> contents(?).
+Why 'broken'? What does it stop you doing which you want to do?
 
-Sure, this would be appreciated. You might want to attempt to come up with a 
-patch to check this condition (of downgrading). 
+> A manual is a functional work and therefore should IMHO not restrict the
+> uses.
+> 
+> Any chance of changing poky manual's license to something less
+> restrictive? CC-BY-SA/CC-BY preferably?
 
-You might want to backport changes to classes/sanity.bbclass.
+Not really. We went around in circles with the manual licence and on the
+one hand we want it open, we want people to be able to make changes and
+we want it to be useful for everyone. How you protect work invested in
+something like Poky is very tricky however, particularly when we're keen
+on giving back to the community. At the end of the day, Poky is
+commercial to some degree and what we don't want is someone to rebadge
+Poky and its manual and then make money on the result and this approach
+gives us some protection.
+
+I'm relatively happy with the outcome and whilst its a shame the
+licenses aren't compatible, I don't think this will be too much of an
+issue. People are free to submit to one, the other or both and may the
+best manual win :) Don't underestimate the amount of work involved in
+writing these things...
+
+For the record I personally don't think -NC is appropriate for OE's
+manual.
+
+Cheers,
+
+Richard
 
 
-take care
-	z.
 
 
