@@ -1,24 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1JgUe6-0000Na-3e
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 02:46:38 +0200
-Received: (qmail invoked by alias); 01 Apr 2008 00:46:34 -0000
-Received: from brln-4db98571.pool.einsundeins.de (EHLO [192.168.4.110])
-	[77.185.133.113]
-	by mail.gmx.net (mp001) with SMTP; 01 Apr 2008 02:46:34 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19hOvpZUa5hRnAmT+7Xkb3e1pCUgXHArc+Hh8mnS4
-	zktc844uaC8cAW
-Message-ID: <47F185E1.9070307@gmx.net>
-Date: Tue, 01 Apr 2008 02:46:25 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <openembedded-devel@lists.futaris.org>)
+	id 1JgX4R-00005K-B5 for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Apr 2008 05:21:59 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id A1A21E42D7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Mar 2008 23:21:58 -0400 (EDT)
+Received: from web7.messagingengine.com ([10.202.2.216])
+	by compute2.internal (MEProxy); Mon, 31 Mar 2008 23:21:58 -0400
+Received: by web7.messagingengine.com (Postfix, from userid 99)
+	id 79C5E3894C; Mon, 31 Mar 2008 23:21:58 -0400 (EDT)
+Message-Id: <1207020118.3961.1245353213@webmail.messagingengine.com>
+X-Sasl-Enc: 0QpbrVmwC2we2XknDByySQeJt64+kQFB8Ww7irHDGtVM 1207020118
+From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: trouble with cp command in autotools.bbclass
+MIME-Version: 1.0
+X-Mailer: MessagingEngine.com Webmail Interface
+References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
+	<1205992995.25920.1243400709@webmail.messagingengine.com>
+	<1206017175.4700.8.camel@hammer.suse.cz>
+	<1206051256.5975.1243541279@webmail.messagingengine.com>
+	<1206295294.6914.7.camel@utx.utx.cz>
+	<1206495575.1924.1244289243@webmail.messagingengine.com>
+	<1207009644.9370.1245329833@webmail.messagingengine.com>
+In-Reply-To: <1207009644.9370.1245329833@webmail.messagingengine.com>
+Date: Tue, 01 Apr 2008 13:21:58 +1000
+Subject: Re: iwmmxt optimization on PXA270 (dejagnu test report)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,56 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 00:46:38 -0000
-X-Groupsio-MsgNum: 4870
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig714C4AAC387E5B9610CDA8CC"
-
---------------enig714C4AAC387E5B9610CDA8CC
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-lately the following copy operation has been added to autotools.bbclass:
-
-# Otherwise libtool wasn't used, and lib/ can be copied
-# directly.
-echo "cp -fpPR ${STAGE_TEMP}/${libdir}/* ${STAGING_LIBDIR}"
-cp -fpPR ${STAGE_TEMP}/${libdir}/* ${STAGING_LIBDIR}
-
-I have trouble with this and a package that creates an empty ${libdir}.
-Shell globbing (*) wont find a file and instead tries to copy a file
-named "*" ... and fails and so does my built.
-
-I would like to replace this with the following lines which uses find
-and is more robust:
-
-# (The find command handles an empty ${STAGE_TEMP/${libdir} correctly)
-echo "find ${STAGE_TEMP}/${libdir} -mindepth 1 -maxdepth 1 -exec cp
--fpPR {} ${STAGING_LIBDIR}" \;
-
-find ${STAGE_TEMP}/${libdir} -mindepth 1 -maxdepth 1 -exec cp -fpPR {}
-${STAGING_LIBDIR} \;
-
-Ok for commit?
-
-Regards
-Robert
+X-List-Received-Date: Tue, 01 Apr 2008 03:21:59 -0000
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="ISO-8859-1"
 
 
---------------enig714C4AAC387E5B9610CDA8CC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+On Tue, 01 Apr 2008 10:27:24 +1000, "Hasjim Williams"
+<openembedded-devel@lists.futaris.org> said:
+> 
+> Joseph S Myers just replied to my post on the gcc mailing list, about
+> this:
+> http://www.nabble.com/Re%3A-wot-to-do-with-the-Maverick-Crunch-patches--p16397272.html
+> 
+> gcc 4.2.2 doesn't have the patch for iwmmxt unwind support applied:
+> http://gcc.gnu.org/ml/gcc-patches/2007-01/msg00049.html
+> 
+> It should be in gcc 4.3.0.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+We could also go to gcc 4.2.3, as I think the patch is in there.  Also,
+gcc-4.2.4 is supposed to be released soon.
 
-iD8DBQFH8YXkG9cfwmwwEtoRCHz1AJ4mUeR+E2oQlnp00IjOv49HBAHEHACfcKLu
-fGIZhJ7A+7N9WGNQH+jj7TA=
-=DPPQ
------END PGP SIGNATURE-----
 
---------------enig714C4AAC387E5B9610CDA8CC--
