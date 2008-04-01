@@ -1,20 +1,28 @@
-Received: from [64.233.184.226] (helo=wr-out-0506.google.com)
+Received: from [213.36.80.91] (helo=mail.libertysurf.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <will.newton@gmail.com>) id 1Jge2a-0004HR-JK
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JgeDy-0004WZ-G2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 12:48:32 +0200
-Received: by wr-out-0506.google.com with SMTP id 36so1215136wra.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2008 03:48:31 -0700 (PDT)
-Received: by 10.142.240.9 with SMTP id n9mr4524080wfh.214.1207046910573;
-	Tue, 01 Apr 2008 03:48:30 -0700 (PDT)
-Received: by 10.142.163.5 with HTTP; Tue, 1 Apr 2008 03:48:30 -0700 (PDT)
-Message-ID: <87a5b0800804010348g778bb897g73841e870da58d00@mail.gmail.com>
-Date: Tue, 1 Apr 2008 11:48:30 +0100
-From: "Will Newton" <will.newton@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Tue, 01 Apr 2008 13:00:19 +0200
+Received: from blini.bolloretelecom.eu (62.210.194.121) by
+	mail.libertysurf.net (7.3.118.8)
+	id 47F1FE370000D201; Tue, 1 Apr 2008 14:01:43 +0200
+Received: from [192.168.95.62] (unknown [192.168.95.62])
+	by blini.bolloretelecom.eu (Postfix) with ESMTP id 787A923E54;
+	Tue,  1 Apr 2008 13:00:15 +0200 (CEST)
+Message-ID: <47F215BF.1060004@bolloretelecom.eu>
+Date: Tue, 01 Apr 2008 13:00:15 +0200
+From: =?ISO-8859-2?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.0.13pre) Gecko/20080208 Thunderbird/1.5.0.14pre
+	Mnenhy/0.7.5.0
 MIME-Version: 1.0
-Subject: Getting started with OE
+To: openembedded-devel@lists.openembedded.org
+References: <200803310907.56781.e.robertson.svg@gmail.com>	<200803311101.39141.geoffrey@pager.net>
+	<200804010840.42271.openembedded@haerwu.biz>
+In-Reply-To: <200804010840.42271.openembedded@haerwu.biz>
+X-Enigmail-Version: 0.94.2.0
+Cc: Matthew Allum <mallum@openedhand.com>
+Subject: Re: OE Manual: License change?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,60 +36,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 10:48:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Apr 2008 11:00:20 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: Quoted-Printable
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm trying to follow the getting started guide on the OE wiki, and
-I've run into a few problems.
 
-I'm using the OE tree from Holger's git mirror because monotone is
-having problems updating the tree for me (slow speed and eventual
-connection drop).
+> OpenEmbedded documentation use "Creative Commons Attribution License 2.=
+0",
+> Poky Handbook use "Creative Commons Attribution Non-Commercial Share
+> Alike 2.0" license. Copying from Poky Handbook to OpenEmbedded manual
+> require change on OE doc license to CC-NC-SA.
+>
+> I vote for changing OE manual license to CC-NC-SA as there is lot of go=
+od
+> stuff in Poky handbook which would be nice to have also in OE manual.
+Sorry to nitpick but I'd vote against changing to CC-NC-SA, the
+"Non-Commercial" limitation makes in non-free in the "Debian Free
+Software Guidelines" sense. Unless I am mistaken it means that if you
+build a commercial product based on OpenEmbedded it prevents you from
+distributing the documentation along with a snapshot of OE (say you
+want to provide an SDK to your users).
 
-I can get as far as the "bitbake nano" step. First I get this error:
+- --
+Jeremy LAINE
+Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-ERROR: 'module' object has no attribute 'get_srcrev' while parsing
-/home/wnewton/src/oe/org.openembedded.dev/packages/packagekit/packagekit_git.bb
+iD8DBQFH8hW/CL1n3lVB9EYRAqa1AJ0YbeE/gB7Ze3agEHfhvETDf6ylfgCeOVFC
+8vflNs2oFirHTLMcJDZR5mY=3D
+=3D+k6w
+-----END PGP SIGNATURE-----
 
-It doesn't seem to be fatal though as the build continues.
-
-Then I get this:
-
-NOTE: Preparing Runqueue
-Traceback (most recent call last):
-  File "/usr/bin/bitbake", line 117, in <module>
-    main()
-  File "/usr/bin/bitbake", line 113, in main
-    cooker.cook()
-  File "/var/lib/python-support/python2.5/bb/cooker.py", line 525, in cook
-    return self.buildTargets(pkgs_to_build)
-  File "/var/lib/python-support/python2.5/bb/cooker.py", line 437, in
-buildTargets
-    rq.prepare_runqueue()
-  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 258,
-in prepare_runqueue
-    mark_active(listid, 1)
-  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 234,
-in mark_active
-    mark_active(depend, depth+1)
-  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 234,
-in mark_active
-    mark_active(depend, depth+1)
-  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 234,
-in mark_active
-    mark_active(depend, depth+1)
-  File "/var/lib/python-support/python2.5/bb/runqueue.py", line 227,
-in mark_active
-    if runq_build[listid] == 1:
-IndexError: list index out of range
-
-I suspect using the git mirror is probably not supported, but I was
-wondering if anyone could help me debug this?
-
-Thanks,
 
 
