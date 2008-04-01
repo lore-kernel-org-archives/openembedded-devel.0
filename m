@@ -1,31 +1,24 @@
-Received: from [68.230.240.46] (helo=eastrmmtao104.cox.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <loudawgucr@gmail.com>) id 1JgUMd-00006u-C0
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1JgUe6-0000Na-3e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 02:28:35 +0200
-Received: from eastrmimpo02.cox.net ([68.1.16.120]) by eastrmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20080401002832.GQVK27061.eastrmmtao104.cox.net@eastrmimpo02.cox.net>
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2008 20:28:32 -0400
-Received: from veronica.jetheaddev.com ([70.164.99.62])
-	by eastrmimpo02.cox.net with bizsmtp
-	id 80UX1Z00E1Llurq020UXJC; Mon, 31 Mar 2008 20:28:31 -0400
-Received: from veronica.jetheaddev.com ([192.168.13.7]
-	helo=veronica.jetheaddev.com)
-	by superfreak.jetheaddev.com; 31 Mar 2008 17:28:31 -0700
-Received: from lou-jethead.jetheaddev.com ([192.168.13.87]) by
-	veronica.jetheaddev.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 31 Mar 2008 17:28:31 -0700
-From: Louie Ilievski <loudawgucr@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Mar 2008 17:27:49 -0700
-User-Agent: KMail/1.9.6 (enterprise 0.20070907.709405)
+	Tue, 01 Apr 2008 02:46:38 +0200
+Received: (qmail invoked by alias); 01 Apr 2008 00:46:34 -0000
+Received: from brln-4db98571.pool.einsundeins.de (EHLO [192.168.4.110])
+	[77.185.133.113]
+	by mail.gmx.net (mp001) with SMTP; 01 Apr 2008 02:46:34 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19hOvpZUa5hRnAmT+7Xkb3e1pCUgXHArc+Hh8mnS4
+	zktc844uaC8cAW
+Message-ID: <47F185E1.9070307@gmx.net>
+Date: Tue, 01 Apr 2008 02:46:25 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
 MIME-Version: 1.0
-Message-Id: <200803311727.49709.loudawgucr@gmail.com>
-X-OriginalArrivalTime: 01 Apr 2008 00:28:31.0221 (UTC)
-	FILETIME=[50059A50:01C8938F]
-Subject: Bug 3977: old autobuild format?
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: trouble with cp command in autotools.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,26 +32,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 00:28:35 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Apr 2008 00:46:38 -0000
+X-Groupsio-MsgNum: 4870
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig714C4AAC387E5B9610CDA8CC"
 
-Hi all,
+--------------enig714C4AAC387E5B9610CDA8CC
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-I'm new to OE and have a build failure when trying to build the angstrom 
-2008.1 for aximx50v, using uclibc.  I have the exact compile failure 
-described in bug #3977, however, it got closed like so many others with the 
-same resolution of having an old autobuild format.  Can someone tell me what 
-we're talking about here exactly?  I haven't been able to find out what has 
-changed and what I need to do to fix these issues.
+Hi,
+lately the following copy operation has been added to autotools.bbclass:
 
-If someone can point me in the right direction I'd be glad to try making the 
-necessary changes to fix this build issue.
+# Otherwise libtool wasn't used, and lib/ can be copied
+# directly.
+echo "cp -fpPR ${STAGE_TEMP}/${libdir}/* ${STAGING_LIBDIR}"
+cp -fpPR ${STAGE_TEMP}/${libdir}/* ${STAGING_LIBDIR}
 
-Thanks,
+I have trouble with this and a package that creates an empty ${libdir}.
+Shell globbing (*) wont find a file and instead tries to copy a file
+named "*" ... and fails and so does my built.
 
-~Lou
+I would like to replace this with the following lines which uses find
+and is more robust:
+
+# (The find command handles an empty ${STAGE_TEMP/${libdir} correctly)
+echo "find ${STAGE_TEMP}/${libdir} -mindepth 1 -maxdepth 1 -exec cp
+-fpPR {} ${STAGING_LIBDIR}" \;
+
+find ${STAGE_TEMP}/${libdir} -mindepth 1 -maxdepth 1 -exec cp -fpPR {}
+${STAGING_LIBDIR} \;
+
+Ok for commit?
+
+Regards
+Robert
 
 
+--------------enig714C4AAC387E5B9610CDA8CC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFH8YXkG9cfwmwwEtoRCHz1AJ4mUeR+E2oQlnp00IjOv49HBAHEHACfcKLu
+fGIZhJ7A+7N9WGNQH+jj7TA=
+=DPPQ
+-----END PGP SIGNATURE-----
+
+--------------enig714C4AAC387E5B9610CDA8CC--
