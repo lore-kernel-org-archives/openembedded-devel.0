@@ -1,23 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1JgaAZ-0004ru-DE
-	for openembedded-devel@openembedded.org; Tue, 01 Apr 2008 08:40:31 +0200
-Received: (qmail 4442 invoked by uid 813007); 1 Apr 2008 06:40:30 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 1 Apr 2008 06:40:30 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 1 Apr 2008 07:40:40 +0100
-User-Agent: KMail/1.9.9
-References: <200803310907.56781.e.robertson.svg@gmail.com>
-	<200803311101.39141.geoffrey@pager.net>
-In-Reply-To: <200803311101.39141.geoffrey@pager.net>
-MIME-Version: 1.0
-Message-Id: <200804010840.42271.openembedded@haerwu.biz>
-Cc: Matthew Allum <mallum@openedhand.com>
-Subject: OE Manual: License change? (was: Re: New OE user question)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JgaFA-0005G7-7g
+	for openembedded-devel@openembedded.org; Tue, 01 Apr 2008 08:45:16 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JgaF4-0007aI-HV
+	for openembedded-devel@openembedded.org; Tue, 01 Apr 2008 06:45:10 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 01 Apr 2008 06:45:10 +0000
+Received: from koen by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 01 Apr 2008 06:45:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <koen@dominion.kabel.utwente.nl>
+Date: Tue, 01 Apr 2008 08:44:53 +0200
+Message-ID: <fssll5$uhe$1@ger.gmane.org>
+References: <c384c5ea0803311500r15a7b84fp2515f3b54ad747a4@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
+In-Reply-To: <c384c5ea0803311500r15a7b84fp2515f3b54ad747a4@mail.gmail.com>
+X-Enigmail-Version: 0.95.6
+Sender: news <news@ger.gmane.org>
+Subject: Re: [Review] Remove /xorg-lib/pixman_* in favor of /libpixman/libpixman_*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,47 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 06:40:31 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Apr 2008 06:45:16 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia Monday 31 of March 2008, Geoffrey Wossum napisa=B3:
-> On Monday 31 March 2008 09:07:48 am E Robertson wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> > I'm brand new to OE and I've been following the documentation steps
-> > along the way. I notice the documentation is either missing sections
-> > or not clear and as I learn how to use this tool, I would like to
-> > update the documentation sections. It's probably the least I could do
-> > as I figure out how this works. I'm referirng to the user manual
-> > wiki. Both configuring and building sections are missing clarity.
-> > Who is responsible for the manual and how do I submit info to the
-> > sections?
->
-> May not help you with your current issue, but I've discovered that the
-> Poky handbook is a better source of OpenEmbedded info than the
-> OpenEmbedded documetation.
->
-> http://www.pokylinux.org/doc/poky-handbook.html
+Leon Woestenberg schreef:
+| Hello,
+|
+| (lib)pixman is present at two locations:
+|
+| /libpixman/libpixman_*
+| /xorg-lib/pixman_*
+|
+| The latter has a false/redundant DEPENDS = "util-macros
+| xorg-headers-native" as it includes xorg-lib/xorg-lib-common.inc.
+|
+| That these are redundant can be tested with the latest 0.9.6 recipes,
+| present in both directories, which have been *identical* and present
+| since 2007-11-10.
+|
+| * I propose to remove the xorg-lib/ ones, as pixman is independent of
+| X. That's also the way I use it.
+|
+| * I would like to hear if anyone using X and /libpixman/libpixman
+| 0.9.6 found any problems so far, as I don't use X on my targets (yet).
 
-That reminds me one thing.=20
+How about dropping the xorg-lib one and renaming libpixman to pixman?
 
-OpenEmbedded documentation use "Creative Commons Attribution License 2.0",=
-=20
-Poky Handbook use "Creative Commons Attribution Non-Commercial Share=20
-Alike 2.0" license. Copying from Poky Handbook to OpenEmbedded manual=20
-require change on OE doc license to CC-NC-SA.
+regards,
 
-I vote for changing OE manual license to CC-NC-SA as there is lot of good=20
-stuff in Poky handbook which would be nice to have also in OE manual.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-          UseNet News. Learn what you know. Share what you don't.
-
+iD8DBQFH8dnlMkyGM64RGpERAigbAJ4541CA5X/zMvP1WOzYWJWIJaYzcACeKwgD
+59VCHHpCF2mR/2Rrxs0QMGs=
+=6hH/
+-----END PGP SIGNATURE-----
 
 
 
