@@ -1,20 +1,31 @@
-Received: from [64.233.178.245] (helo=hs-out-0708.google.com)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JgS2r-0008Qo-5U
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 00:00:01 +0200
-Received: by hs-out-0708.google.com with SMTP id 23so2087267hsn.12
+	(envelope-from <openembedded-devel@lists.futaris.org>)
+	id 1JgULV-00006O-PG for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Apr 2008 02:27:25 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 216ECE4537
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2008 15:00:00 -0700 (PDT)
-Received: by 10.100.140.15 with SMTP id n15mr17120070and.87.1207000800055;
-	Mon, 31 Mar 2008 15:00:00 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Mon, 31 Mar 2008 15:00:00 -0700 (PDT)
-Message-ID: <c384c5ea0803311500r15a7b84fp2515f3b54ad747a4@mail.gmail.com>
-Date: Tue, 1 Apr 2008 00:00:00 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	Mon, 31 Mar 2008 20:27:25 -0400 (EDT)
+Received: from web7.messagingengine.com ([10.202.2.216])
+	by compute2.internal (MEProxy); Mon, 31 Mar 2008 20:27:25 -0400
+Received: by web7.messagingengine.com (Postfix, from userid 99)
+	id E870B4F362; Mon, 31 Mar 2008 20:27:24 -0400 (EDT)
+Message-Id: <1207009644.9370.1245329833@webmail.messagingengine.com>
+X-Sasl-Enc: zFrukR5Z11EkGnPUz8x/GJKgeGitpmL/GDYN6KDWbqIi 1207009644
+From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Subject: [Review] Remove /xorg-lib/pixman_* in favor of /libpixman/libpixman_*
+X-Mailer: MessagingEngine.com Webmail Interface
+References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
+	<1205992995.25920.1243400709@webmail.messagingengine.com>
+	<1206017175.4700.8.camel@hammer.suse.cz>
+	<1206051256.5975.1243541279@webmail.messagingengine.com>
+	<1206295294.6914.7.camel@utx.utx.cz>
+	<1206495575.1924.1244289243@webmail.messagingengine.com>
+In-Reply-To: <1206495575.1924.1244289243@webmail.messagingengine.com>
+Date: Tue, 01 Apr 2008 10:27:24 +1000
+Subject: Re: iwmmxt optimization on PXA270 (dejagnu test report)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,34 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2008 22:00:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 Apr 2008 00:27:25 -0000
 Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="ISO-8859-1"
 
-Hello,
+On Wed, 26 Mar 2008 11:39:35 +1000, "Hasjim Williams"
+<openembedded-devel@lists.futaris.org> said:
+> 
+> On Sun, 23 Mar 2008 19:01:33 +0100, "Stanislav Brabec" <utx@penguin.cz>
+> said:
+> 
+> > I tested gcc-4.2.2-r6 with -march=iwmmxt -mcpu=iwmmxt -mtune=iwmmxt on
+> > my image compiled for iwmmxt.
+> > 
+> > Results seems to be promising. 99.99% tests passed. Results for Fortran
+> > are invalid (I had not libgfortran in the system). Surprisingly, all
+> > g++.dg/eh (exception handling) tests PASSed.
+> 
+> I was a bit surprised that all the exception handling tests PASSed, but
+> then I realised that there is no code to test exceptions on iwmmxt in
+> that directory:
 
-(lib)pixman is present at two locations:
+Joseph S Myers just replied to my post on the gcc mailing list, about
+this:
+http://www.nabble.com/Re%3A-wot-to-do-with-the-Maverick-Crunch-patches--p16397272.html
 
-/libpixman/libpixman_*
-/xorg-lib/pixman_*
+gcc 4.2.2 doesn't have the patch for iwmmxt unwind support applied:
+http://gcc.gnu.org/ml/gcc-patches/2007-01/msg00049.html
 
-The latter has a false/redundant DEPENDS = "util-macros
-xorg-headers-native" as it includes xorg-lib/xorg-lib-common.inc.
+It should be in gcc 4.3.0.
 
-That these are redundant can be tested with the latest 0.9.6 recipes,
-present in both directories, which have been *identical* and present
-since 2007-11-10.
+binutils 2.18 should have this patch applied already:
+http://sourceware.org/ml/binutils/2006-08/msg00207.html
 
-* I propose to remove the xorg-lib/ ones, as pixman is independent of
-X. That's also the way I use it.
-
-* I would like to hear if anyone using X and /libpixman/libpixman
-0.9.6 found any problems so far, as I don't use X on my targets (yet).
-
-
-Regards,
--- 
-Leon
+binutils 2.17 doesn't have the patch applied.
 
 
