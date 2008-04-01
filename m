@@ -1,32 +1,25 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [81.228.11.159] (helo=pne-smtpout2-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded-devel@lists.futaris.org>)
-	id 1JgX4R-00005K-B5 for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 05:21:59 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id A1A21E42D7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2008 23:21:58 -0400 (EDT)
-Received: from web7.messagingengine.com ([10.202.2.216])
-	by compute2.internal (MEProxy); Mon, 31 Mar 2008 23:21:58 -0400
-Received: by web7.messagingengine.com (Postfix, from userid 99)
-	id 79C5E3894C; Mon, 31 Mar 2008 23:21:58 -0400 (EDT)
-Message-Id: <1207020118.3961.1245353213@webmail.messagingengine.com>
-X-Sasl-Enc: 0QpbrVmwC2we2XknDByySQeJt64+kQFB8Ww7irHDGtVM 1207020118
-From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <ulf@atmel.com>) id 1JgZSB-0006KK-35
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Apr 2008 07:54:39 +0200
+Received: from aeglos (217.214.137.124) by pne-smtpout2-sn1.fre.skanova.net
+	(7.3.129) (authenticated as 0706224457)
+	id 47A77FC401371CAB for openembedded-devel@lists.openembedded.org;
+	Tue, 1 Apr 2008 07:54:36 +0200
+Message-ID: <005201c893bc$e53f8860$c973fea9@atmel.com>
+From: "Ulf Samuelsson" <ulf@atmel.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <200803310907.56781.e.robertson.svg@gmail.com><c384c5ea0803310844l1e91faa0m86a699174afeabf7@mail.gmail.com><fsr2gk$t6o$1@ger.gmane.org>
+	<200803311134.26764.geoffrey@pager.net>
+	<c384c5ea0803311047g1665c14fqfe6fc2417abfb969@mail.gmail.com>
+Date: Tue, 1 Apr 2008 07:45:12 +0200
 MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
-	<1205992995.25920.1243400709@webmail.messagingengine.com>
-	<1206017175.4700.8.camel@hammer.suse.cz>
-	<1206051256.5975.1243541279@webmail.messagingengine.com>
-	<1206295294.6914.7.camel@utx.utx.cz>
-	<1206495575.1924.1244289243@webmail.messagingengine.com>
-	<1207009644.9370.1245329833@webmail.messagingengine.com>
-In-Reply-To: <1207009644.9370.1245329833@webmail.messagingengine.com>
-Date: Tue, 01 Apr 2008 13:21:58 +1000
-Subject: Re: iwmmxt optimization on PXA270 (dejagnu test report)
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.3138
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
+Subject: Re: New OE user question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,25 +33,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 03:21:59 -0000
-Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Tue, 01 Apr 2008 05:54:39 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
 
-On Tue, 01 Apr 2008 10:27:24 +1000, "Hasjim Williams"
-<openembedded-devel@lists.futaris.org> said:
-> 
-> Joseph S Myers just replied to my post on the gcc mailing list, about
-> this:
-> http://www.nabble.com/Re%3A-wot-to-do-with-the-Maverick-Crunch-patches--p16397272.html
-> 
-> gcc 4.2.2 doesn't have the patch for iwmmxt unwind support applied:
-> http://gcc.gnu.org/ml/gcc-patches/2007-01/msg00049.html
-> 
-> It should be in gcc 4.3.0.
 
-We could also go to gcc 4.2.3, as I think the patch is in there.  Also,
-gcc-4.2.4 is supposed to be released soon.
+> Hello,
+>=20
+> On Mon, Mar 31, 2008 at 6:34 PM, Geoffrey Wossum <geoffrey@pager.net> =
+wrote:
+>> On Monday 31 March 2008 11:12:03 am Koen Kooi wrote:
+>>
+>> > Leon Woestenberg schreef:
+>> > | Can someone suggest a saner distribution for this Samsung chip?
+>>  > It's an atmel chip, and atmel itself recommends angstrom:
+>>  > =
+http://www.linux4sam.org/twiki/bin/view/Linux4SAM/OpenEmbeddedAngstrom
+>>
+> Whoops on the chip, and yes they do recommend Angstrom when choosing
+> OpenEmbedded.
+>=20
+> Now it seems so far Atmel seems to use buildroot a lot as well.
+>=20
+>>  recommend against OE / Angstrom.  Interesting side note, it seems =
+they
+>>  recently had to rollback some of their AVR32 gcc patches in the =
+buildroot
+>>  mainline because they were breaking stuff there.
+>>
+
+There was some minor conflict with the x86, which could probably
+be resolved quite easily, but that is not the reason for removing the=20
+AVR32 patched.
+
+The main problem for the last month is that AVR32 patches are =
+duplicated.
+The toolchain patches area about 6-7 MB and it does not make
+sense to add bloat for all the buildroot users.
+
+I extended buildroot last year to allow building the AVR32 toolchain =
+using
+prepatched sources downloaded separately for the AVR32.
+The AVR32 patches recently added, duplicated the prepatched
+toolchain, and it is simply not worth it, so I reverted it back to
+only support the prepatched toolchain.
+
+The AVR32 linux patches were also duplicated in each board directory,=20
+and that has also been fixed
+
+
+> I saw that. I wonder if "there" means uclibc (in case we are affected
+> as well), or buildroot specifics (where they break other archs)?
+
+
+Best Regards
+Ulf Samuelsson
 
 
