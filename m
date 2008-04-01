@@ -1,25 +1,24 @@
-Received: from [81.228.11.159] (helo=pne-smtpout2-sn1.fre.skanova.net)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf@atmel.com>) id 1JgZSB-0006KK-35
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 07:54:39 +0200
-Received: from aeglos (217.214.137.124) by pne-smtpout2-sn1.fre.skanova.net
-	(7.3.129) (authenticated as 0706224457)
-	id 47A77FC401371CAB for openembedded-devel@lists.openembedded.org;
-	Tue, 1 Apr 2008 07:54:36 +0200
-Message-ID: <005201c893bc$e53f8860$c973fea9@atmel.com>
-From: "Ulf Samuelsson" <ulf@atmel.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <200803310907.56781.e.robertson.svg@gmail.com><c384c5ea0803310844l1e91faa0m86a699174afeabf7@mail.gmail.com><fsr2gk$t6o$1@ger.gmane.org>
-	<200803311134.26764.geoffrey@pager.net>
-	<c384c5ea0803311047g1665c14fqfe6fc2417abfb969@mail.gmail.com>
-Date: Tue, 1 Apr 2008 07:45:12 +0200
+	(envelope-from <openembedded-devel@lists.futaris.org>)
+	id 1JgZhk-00076I-9L for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Apr 2008 08:10:44 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id D5281E4999
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 Apr 2008 02:10:42 -0400 (EDT)
+Received: from web7.messagingengine.com ([10.202.2.216])
+	by compute1.internal (MEProxy); Tue, 01 Apr 2008 02:10:42 -0400
+Received: by web7.messagingengine.com (Postfix, from userid 99)
+	id 9E17F38C5E; Tue,  1 Apr 2008 02:10:42 -0400 (EDT)
+Message-Id: <1207030242.29161.1245367579@webmail.messagingengine.com>
+X-Sasl-Enc: b6nJcA+piEB/gUom43WJJ/kz3ha5ohk3vDJnxWWK6p4T 1207030242
+From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.3138
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
-Subject: Re: New OE user question
+X-Mailer: MessagingEngine.com Webmail Interface
+Date: Tue, 01 Apr 2008 16:10:42 +1000
+Subject: gcc disable-libunwind-exceptions, VFP, iWMMXt, crunch - nokia800, mx31ads, etc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -33,62 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 05:54:39 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 Apr 2008 06:10:44 -0000
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="ISO-8859-1"
 
+Hi All,
 
+I was recently looking in gcc-cross-4.2.2.bb and 4.3.0.bb and noticed
+that in our EXTRA_OECONF we have:
 
-> Hello,
->=20
-> On Mon, Mar 31, 2008 at 6:34 PM, Geoffrey Wossum <geoffrey@pager.net> =
-wrote:
->> On Monday 31 March 2008 11:12:03 am Koen Kooi wrote:
->>
->> > Leon Woestenberg schreef:
->> > | Can someone suggest a saner distribution for this Samsung chip?
->>  > It's an atmel chip, and atmel itself recommends angstrom:
->>  > =
-http://www.linux4sam.org/twiki/bin/view/Linux4SAM/OpenEmbeddedAngstrom
->>
-> Whoops on the chip, and yes they do recommend Angstrom when choosing
-> OpenEmbedded.
->=20
-> Now it seems so far Atmel seems to use buildroot a lot as well.
->=20
->>  recommend against OE / Angstrom.  Interesting side note, it seems =
-they
->>  recently had to rollback some of their AVR32 gcc patches in the =
-buildroot
->>  mainline because they were breaking stuff there.
->>
+--disable-libunwind-exceptions
 
-There was some minor conflict with the x86, which could probably
-be resolved quite easily, but that is not the reason for removing the=20
-AVR32 patched.
+Won't this cause a problem for a VFP system (when an exception occurs),
+i.e. mx31ads, nokia800?  
+e.g. libunwind.S in gcc/config/arm has some specific functions to
+save/restore VFP and iWMMXt registers...
 
-The main problem for the last month is that AVR32 patches are =
-duplicated.
-The toolchain patches area about 6-7 MB and it does not make
-sense to add bloat for all the buildroot users.
+Also, I couldn't build glibc-intermediate (with system-wide iwmmxt) with
+the tag enabled, when building with binutils-2.18, gcc-4.3.0 and
+glibc-2.6.1 ...
 
-I extended buildroot last year to allow building the AVR32 toolchain =
-using
-prepatched sources downloaded separately for the AVR32.
-The AVR32 patches recently added, duplicated the prepatched
-toolchain, and it is simply not worth it, so I reverted it back to
-only support the prepatched toolchain.
+How does the TARGET_FPU_arm = "hard" overcome this on nokia800, mx31ads,
+etc?  Are we only building with-float in certain packages, and using
+softfp float-abi otherwise?
 
-The AVR32 linux patches were also duplicated in each board directory,=20
-and that has also been fixed
+Does this mean for a MaverickCrunch system (with system-wide FPU
+enabled), we should be setting TARGET_FPU_arm = "hard" too?
 
+What about for a PXA27x system with a iWMMXt coprocessor (and
+system-wide iwmmxt) ???  It should be using soft-float, but it should
+have libunwind-exceptions enabled (I think) because of the code in
+libunwind.S...
 
-> I saw that. I wonder if "there" means uclibc (in case we are affected
-> as well), or buildroot specifics (where they break other archs)?
-
-
-Best Regards
-Ulf Samuelsson
 
 
