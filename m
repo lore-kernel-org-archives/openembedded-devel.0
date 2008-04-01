@@ -1,31 +1,31 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [68.230.240.46] (helo=eastrmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded-devel@lists.futaris.org>)
-	id 1JgULV-00006O-PG for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Apr 2008 02:27:25 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 216ECE4537
+	(envelope-from <loudawgucr@gmail.com>) id 1JgUMd-00006u-C0
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Apr 2008 02:28:35 +0200
+Received: from eastrmimpo02.cox.net ([68.1.16.120]) by eastrmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20080401002832.GQVK27061.eastrmmtao104.cox.net@eastrmimpo02.cox.net>
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2008 20:27:25 -0400 (EDT)
-Received: from web7.messagingengine.com ([10.202.2.216])
-	by compute2.internal (MEProxy); Mon, 31 Mar 2008 20:27:25 -0400
-Received: by web7.messagingengine.com (Postfix, from userid 99)
-	id E870B4F362; Mon, 31 Mar 2008 20:27:24 -0400 (EDT)
-Message-Id: <1207009644.9370.1245329833@webmail.messagingengine.com>
-X-Sasl-Enc: zFrukR5Z11EkGnPUz8x/GJKgeGitpmL/GDYN6KDWbqIi 1207009644
-From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
-To: openembedded-devel@lists.openembedded.org
+	Mon, 31 Mar 2008 20:28:32 -0400
+Received: from veronica.jetheaddev.com ([70.164.99.62])
+	by eastrmimpo02.cox.net with bizsmtp
+	id 80UX1Z00E1Llurq020UXJC; Mon, 31 Mar 2008 20:28:31 -0400
+Received: from veronica.jetheaddev.com ([192.168.13.7]
+	helo=veronica.jetheaddev.com)
+	by superfreak.jetheaddev.com; 31 Mar 2008 17:28:31 -0700
+Received: from lou-jethead.jetheaddev.com ([192.168.13.87]) by
+	veronica.jetheaddev.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 31 Mar 2008 17:28:31 -0700
+From: Louie Ilievski <loudawgucr@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+Date: Mon, 31 Mar 2008 17:27:49 -0700
+User-Agent: KMail/1.9.6 (enterprise 0.20070907.709405)
 MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-References: <1204494435.17068.23.camel@utx.utx.cz> <fqg9c0$g00$1@ger.gmane.org>
-	<1205992995.25920.1243400709@webmail.messagingengine.com>
-	<1206017175.4700.8.camel@hammer.suse.cz>
-	<1206051256.5975.1243541279@webmail.messagingengine.com>
-	<1206295294.6914.7.camel@utx.utx.cz>
-	<1206495575.1924.1244289243@webmail.messagingengine.com>
-In-Reply-To: <1206495575.1924.1244289243@webmail.messagingengine.com>
-Date: Tue, 01 Apr 2008 10:27:24 +1000
-Subject: Re: iwmmxt optimization on PXA270 (dejagnu test report)
+Message-Id: <200803311727.49709.loudawgucr@gmail.com>
+X-OriginalArrivalTime: 01 Apr 2008 00:28:31.0221 (UTC)
+	FILETIME=[50059A50:01C8938F]
+Subject: Bug 3977: old autobuild format?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,40 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 00:27:25 -0000
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Apr 2008 00:28:35 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="ISO-8859-1"
+Content-Disposition: inline
 
-On Wed, 26 Mar 2008 11:39:35 +1000, "Hasjim Williams"
-<openembedded-devel@lists.futaris.org> said:
-> 
-> On Sun, 23 Mar 2008 19:01:33 +0100, "Stanislav Brabec" <utx@penguin.cz>
-> said:
-> 
-> > I tested gcc-4.2.2-r6 with -march=iwmmxt -mcpu=iwmmxt -mtune=iwmmxt on
-> > my image compiled for iwmmxt.
-> > 
-> > Results seems to be promising. 99.99% tests passed. Results for Fortran
-> > are invalid (I had not libgfortran in the system). Surprisingly, all
-> > g++.dg/eh (exception handling) tests PASSed.
-> 
-> I was a bit surprised that all the exception handling tests PASSed, but
-> then I realised that there is no code to test exceptions on iwmmxt in
-> that directory:
+Hi all,
 
-Joseph S Myers just replied to my post on the gcc mailing list, about
-this:
-http://www.nabble.com/Re%3A-wot-to-do-with-the-Maverick-Crunch-patches--p16397272.html
+I'm new to OE and have a build failure when trying to build the angstrom 
+2008.1 for aximx50v, using uclibc.  I have the exact compile failure 
+described in bug #3977, however, it got closed like so many others with the 
+same resolution of having an old autobuild format.  Can someone tell me what 
+we're talking about here exactly?  I haven't been able to find out what has 
+changed and what I need to do to fix these issues.
 
-gcc 4.2.2 doesn't have the patch for iwmmxt unwind support applied:
-http://gcc.gnu.org/ml/gcc-patches/2007-01/msg00049.html
+If someone can point me in the right direction I'd be glad to try making the 
+necessary changes to fix this build issue.
 
-It should be in gcc 4.3.0.
+Thanks,
 
-binutils 2.18 should have this patch applied already:
-http://sourceware.org/ml/binutils/2006-08/msg00207.html
-
-binutils 2.17 doesn't have the patch applied.
+~Lou
 
 
