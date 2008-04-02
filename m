@@ -1,25 +1,21 @@
-Received: from [209.85.198.187] (helo=rv-out-0910.google.com)
+Received: from [82.119.242.94] (helo=mail.suse.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1JgwQs-0000H2-E4
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Apr 2008 08:26:50 +0200
-Received: by rv-out-0910.google.com with SMTP id c24so1698408rvf.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2008 23:26:49 -0700 (PDT)
-Received: by 10.141.34.12 with SMTP id m12mr4844274rvj.26.1207117608994;
-	Tue, 01 Apr 2008 23:26:48 -0700 (PDT)
-Received: by 10.140.125.10 with HTTP; Tue, 1 Apr 2008 23:26:48 -0700 (PDT)
-Message-ID: <19c1b8a90804012326na52fee5hedef00c3a12390c4@mail.gmail.com>
-Date: Tue, 1 Apr 2008 23:26:48 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fsihmm$dr3$1@ger.gmane.org>
-MIME-Version: 1.0
+	(envelope-from <utx@penguin.cz>) id 1JgyE7-0006C6-H4
+	for openembedded-devel@openembedded.org; Wed, 02 Apr 2008 10:21:47 +0200
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id EAA466280F5
+	for <openembedded-devel@openembedded.org>;
+	Wed,  2 Apr 2008 10:21:46 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel@openembedded.org>
+In-Reply-To: <1206696274.5029.14.camel@dax.rpnet.com>
 References: <20080328011211.7c66e00b@zaurus>
 	<1206696274.5029.14.camel@dax.rpnet.com>
-	<1206699605.18251.39.camel@hammer.suse.cz>
-	<fsihmm$dr3$1@ger.gmane.org>
-Cc: openembedded-devel@openembedded.org
+Date: Wed, 02 Apr 2008 10:23:45 +0200
+Message-Id: <1207124626.4010.96.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.0 
 Subject: Re: binconfig.bbclass breaks packages QA
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,66 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Apr 2008 06:26:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 02 Apr 2008 08:21:48 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Fri, Mar 28, 2008 at 3:36 AM, Koen Kooi
-<koen@dominion.kabel.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
->  Hash: SHA1
->
->  Stanislav Brabec schreef:
->
-> | Richard Purdie wrote:
->  |> On Fri, 2008-03-28 at 01:12 +0100, Stanislav Brabec wrote:
->  |
->  |>> After the fix, maybe binconfig files could be moved to the
->  |>> standard staging directory (it must be in build path then).
->  |>>
->  |>> Could anybody with deeper insight confirm it or do this change?
->  |> We still need that mangling unfortunately.
->  |
->  | Grr.
->  |
->  | | CROSS COMPILE Badness: /usr/include in INCLUDEPATH:
->  /usr/include/freetype2
->  | | cc1: internal compiler error: in add_path, at c-incpath.c:371
->  |
->  | We may want -isysroot instead of -isystem (and report bug above to gcc
->  | developers, as the report advices), but only for cross builds.
->
->  We patch gcc to ICE on including /usr/include, /opt/include, etc, so we
->  shouldn't report them to the gcc people, but spank the application
->  authors where appropriate.
+Richard Purdie wrote:
 
-Actually there is a patch which will issue warning on such poisoning
-when using cross gcc. but sometimes it becomes annoyance for build
-systems like scratchbox which pretend to be native.
+> > After the fix, maybe binconfig files could be moved to the
+> > standard staging directory (it must be in build path then).
+> > 
+> > Could anybody with deeper insight confirm it or do this change?
+> 
+> We still need that mangling unfortunately. The problem is that package b
+> should not be injecting the results from binconfig directly into a .pc
+> file, it should be using things like -L${libdir}/foo, not
+> -L/some/hardcoded/path.
+> 
+> I'll have a look at that package and see if I can fix it.
 
-google for poison-system-directories. I can post a patch if thats desired.
+OK. I did a per-package patch for libgnomecups and wv.
 
+libgnomecups was confused by binconfig mangling.
 
->
->  regards,
->
->  Koen
->  -----BEGIN PGP SIGNATURE-----
->  Version: GnuPG v1.4.5 (Darwin)
->
->  iD8DBQFH7MoVMkyGM64RGpERAonaAJ9f8dqydelLPQc93nD0n1Qh+856cwCfeNNu
->  0BoSRuHZyQA4zwMnDGf6R44=
->  =UJik
->  -----END PGP SIGNATURE-----
->
->
->
->
->  _______________________________________________
->  Openembedded-devel mailing list
->  Openembedded-devel@lists.openembedded.org
->  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+wv was confused by a non-standard use of .pc files (use of @FOO_CFLAGS@
+instead of Requires: foo).
+
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
