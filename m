@@ -1,22 +1,22 @@
-Received: from [209.85.146.180] (helo=wa-out-1112.google.com)
+Received: from [209.85.198.188] (helo=rv-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1JgtBH-0002NZ-KQ
+	(envelope-from <raj.khem@gmail.com>) id 1JgwHg-0003o2-5T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Apr 2008 04:58:31 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so4979370waf.22
+	Wed, 02 Apr 2008 08:17:20 +0200
+Received: by rv-out-0910.google.com with SMTP id c24so1696621rvf.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2008 19:58:22 -0700 (PDT)
-Received: by 10.115.92.2 with SMTP id u2mr13782012wal.139.1207105102764;
-	Tue, 01 Apr 2008 19:58:22 -0700 (PDT)
-Received: by 10.114.234.12 with HTTP; Tue, 1 Apr 2008 19:58:22 -0700 (PDT)
-Message-ID: <19c1b8a90804011958t469f7c3cxc0bb9ee109dd2a27@mail.gmail.com>
-Date: Tue, 1 Apr 2008 19:58:22 -0700
+	Tue, 01 Apr 2008 23:17:18 -0700 (PDT)
+Received: by 10.141.22.1 with SMTP id z1mr4838440rvi.67.1207117038596;
+	Tue, 01 Apr 2008 23:17:18 -0700 (PDT)
+Received: by 10.140.125.10 with HTTP; Tue, 1 Apr 2008 23:17:18 -0700 (PDT)
+Message-ID: <19c1b8a90804012317l201ddad6xd2f62c5f35c370f8@mail.gmail.com>
+Date: Tue, 1 Apr 2008 23:17:18 -0700
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1207030242.29161.1245367579@webmail.messagingengine.com>
+In-Reply-To: <47F024DA.5020502@gmx.de>
 MIME-Version: 1.0
-References: <1207030242.29161.1245367579@webmail.messagingengine.com>
-Subject: Re: gcc disable-libunwind-exceptions, VFP, iWMMXt, crunch - nokia800, mx31ads, etc
+References: <1206911981.4838.12.camel@dax.rpnet.com> <47F024DA.5020502@gmx.de>
+Subject: Re: libgcc not being pulled into OABI images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,55 +30,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Apr 2008 02:58:31 -0000
+X-List-Received-Date: Wed, 02 Apr 2008 06:17:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Mar 31, 2008 at 11:10 PM, Hasjim Williams
-<openembedded-devel@lists.futaris.org> wrote:
-> Hi All,
+On Sun, Mar 30, 2008 at 4:40 PM, Thomas Kunze <thommycheck@gmx.de> wrote:
+> Hi,
 >
->  I was recently looking in gcc-cross-4.2.2.bb and 4.3.0.bb and noticed
->  that in our EXTRA_OECONF we have:
+>  I tested on my host machine (AMD64) and libgcc is not it NEEDED but is
+>  installed anyway. So it seems to be no problem that libgcc is not in
+>  needed. So I investigated libpthread and found out that it tries to
+>  dlopen libgcc and fails if it can't. Our shlibs code can't detect this
+>  so libgcc does not get pulled into image. So I suggest something like:
 >
->  --disable-libunwind-exceptions
+>  --- packages/glibc/glibc.inc    e9a2a880277298ca08e7f53a4e5c69127415a5ed
+>  +++ packages/glibc/glibc.inc    3aa1e1a80cf9f0f899b5a79b857bfa5427f5d54e
+>  @@ -7,6 +7,8 @@ DEPENDS = "${@['virtual/${TARGET_PREFIX}
+>   DEPENDS = "${@['virtual/${TARGET_PREFIX}gcc-initial',
+>  'virtual/${TARGET_PREFIX}gcc']['nptl' in '${GLIBC_ADDONS}']}
+>  linux-libc-headers"
+>   #this leads to circular deps, so lets not add it yet
+>   #RDEPENDS_ldd += " bash"
+>  +# nptl needs libgcc but dlopens it, so our shlibs code doesn't detect this
+>  +RDEPENDS += "${@['','libgcc']['ntpl' in '${GLIBC_ADDONS}']}"
+>   PROVIDES = "virtual/libc ${@['virtual/${TARGET_PREFIX}libc-for-gcc',
+>  '']['nptl' in '${GLIBC_ADDONS}']}"
+>   PROVIDES += "virtual/libintl virtual/libiconv"
 >
->  Won't this cause a problem for a VFP system (when an exception occurs),
-
-AFAIK this option is used if you want gcc to use libunwind to handle exceptions.
-
->  i.e. mx31ads, nokia800?
->  e.g. libunwind.S in gcc/config/arm has some specific functions to
->  save/restore VFP and iWMMXt registers...
 >
+>  Is it ok if I comit this (and bump PRs of all packages that use this file?)
 
-that should work on EABI. I am not so sure about OABI.
-
->  Also, I couldn't build glibc-intermediate (with system-wide iwmmxt) with
->  the tag enabled, when building with binutils-2.18, gcc-4.3.0 and
->  glibc-2.6.1 ...
-
-what was the error ?
+nptl glibc dlopens libgcc (e.g. code using exceptions) so this fix
+creating an explicit dependency looks ok to me.
+it does not have it in DT_NEEDED section may be because it links with
+-static-libgcc when build
 
 >
->  How does the TARGET_FPU_arm = "hard" overcome this on nokia800, mx31ads,
-
-Its machine specific  e.g. look at ./machine/nokia800.conf
-thats where it sets the fpu type which is then used by glibc
-"get_glibc_fpu_setting" to determine if it use use hard or soft fp.
-
-
->  etc?  Are we only building with-float in certain packages, and using
->  softfp float-abi otherwise?
+>  Regards,
+>  Thomas
 >
->  Does this mean for a MaverickCrunch system (with system-wide FPU
->  enabled), we should be setting TARGET_FPU_arm = "hard" too?
->
->  What about for a PXA27x system with a iWMMXt coprocessor (and
->  system-wide iwmmxt) ???  It should be using soft-float, but it should
->  have libunwind-exceptions enabled (I think) because of the code in
->  libunwind.S...
 >
 >
 >  _______________________________________________
