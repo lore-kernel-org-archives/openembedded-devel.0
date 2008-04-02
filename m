@@ -1,25 +1,21 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [209.85.146.180] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded-devel@lists.futaris.org>)
-	id 1Jgq3M-0001oy-NT for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Apr 2008 01:38:08 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 02BA3AEC67
+	(envelope-from <raj.khem@gmail.com>) id 1JgtBH-0002NZ-KQ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Apr 2008 04:58:31 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so4979370waf.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2008 19:38:08 -0400 (EDT)
-Received: from web7.messagingengine.com ([10.202.2.216])
-	by compute1.internal (MEProxy); Tue, 01 Apr 2008 19:38:07 -0400
-Received: by web7.messagingengine.com (Postfix, from userid 99)
-	id CF5793A063; Tue,  1 Apr 2008 19:38:07 -0400 (EDT)
-Message-Id: <1207093087.11184.1245545471@webmail.messagingengine.com>
-X-Sasl-Enc: EsE8CDg/ulnDZ7G24mgsC8hjvINCkb5WZGK6eNTv7ZHb 1207093087
-From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
+	Tue, 01 Apr 2008 19:58:22 -0700 (PDT)
+Received: by 10.115.92.2 with SMTP id u2mr13782012wal.139.1207105102764;
+	Tue, 01 Apr 2008 19:58:22 -0700 (PDT)
+Received: by 10.114.234.12 with HTTP; Tue, 1 Apr 2008 19:58:22 -0700 (PDT)
+Message-ID: <19c1b8a90804011958t469f7c3cxc0bb9ee109dd2a27@mail.gmail.com>
+Date: Tue, 1 Apr 2008 19:58:22 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-References: <1207030242.29161.1245367579@webmail.messagingengine.com>
 In-Reply-To: <1207030242.29161.1245367579@webmail.messagingengine.com>
-Date: Wed, 02 Apr 2008 09:38:07 +1000
+MIME-Version: 1.0
+References: <1207030242.29161.1245367579@webmail.messagingengine.com>
 Subject: Re: gcc disable-libunwind-exceptions, VFP, iWMMXt, crunch - nokia800, mx31ads, etc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -34,51 +30,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2008 23:38:08 -0000
-Content-Disposition: inline
+X-List-Received-Date: Wed, 02 Apr 2008 02:58:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="ISO-8859-1"
+Content-Disposition: inline
 
-
-On Tue, 01 Apr 2008 16:10:42 +1000, "Hasjim Williams"
-<openembedded-devel@lists.futaris.org> said:
+On Mon, Mar 31, 2008 at 11:10 PM, Hasjim Williams
+<openembedded-devel@lists.futaris.org> wrote:
 > Hi All,
-> 
-> I was recently looking in gcc-cross-4.2.2.bb and 4.3.0.bb and noticed
-> that in our EXTRA_OECONF we have:
-> 
-> --disable-libunwind-exceptions
+>
+>  I was recently looking in gcc-cross-4.2.2.bb and 4.3.0.bb and noticed
+>  that in our EXTRA_OECONF we have:
+>
+>  --disable-libunwind-exceptions
+>
+>  Won't this cause a problem for a VFP system (when an exception occurs),
 
-Sorry all, this is due to my misunderstanding of what this does. 
-gcc-cross can be compiled with libunwind extensions:
+AFAIK this option is used if you want gcc to use libunwind to handle exceptions.
 
-http://www.nongnu.org/libunwind/
+>  i.e. mx31ads, nokia800?
+>  e.g. libunwind.S in gcc/config/arm has some specific functions to
+>  save/restore VFP and iWMMXt registers...
+>
 
-Obviously we don't have anything in the oe tree that uses this (to
-determine the call-chain of a program), and there is no libunwind.bb. 
-Would it be possible to build gcc with libunwind support?  AFAIK, only
-the git development tree has support for ARM.
+that should work on EABI. I am not so sure about OABI.
 
-I guess it would mean another stage after or that replaces gcc-cross,
-and a different glibc?  Or could we have some sort of
-TARGET_UNWIND_SUPPORT variable or something similar?
+>  Also, I couldn't build glibc-intermediate (with system-wide iwmmxt) with
+>  the tag enabled, when building with binutils-2.18, gcc-4.3.0 and
+>  glibc-2.6.1 ...
 
-Incidentally, someone wanted to put a patch to disable some other libs
-in gcc:
-http://projects.linuxtogo.org/pipermail/openembedded-commits/2007-November/010465.html
+what was the error ?
 
-It would be good if we could figure out a nice way to enable/disable
-certain libraries, much like the way TARGET_FPU affects certain
-packages.
+>
+>  How does the TARGET_FPU_arm = "hard" overcome this on nokia800, mx31ads,
 
-> Also, I couldn't build glibc-intermediate (with system-wide iwmmxt) with
-> the tag enabled, when building with binutils-2.18, gcc-4.3.0 and
-> glibc-2.6.1 ...
-
-NB, this is also why yesterday I couldn't build glibc as I hadn't
-installed libunwind, i.e. created a libunwind bb.
+Its machine specific  e.g. look at ./machine/nokia800.conf
+thats where it sets the fpu type which is then used by glibc
+"get_glibc_fpu_setting" to determine if it use use hard or soft fp.
 
 
-
+>  etc?  Are we only building with-float in certain packages, and using
+>  softfp float-abi otherwise?
+>
+>  Does this mean for a MaverickCrunch system (with system-wide FPU
+>  enabled), we should be setting TARGET_FPU_arm = "hard" too?
+>
+>  What about for a PXA27x system with a iWMMXt coprocessor (and
+>  system-wide iwmmxt) ???  It should be using soft-float, but it should
+>  have libunwind-exceptions enabled (I think) because of the code in
+>  libunwind.S...
+>
+>
+>  _______________________________________________
+>  Openembedded-devel mailing list
+>  Openembedded-devel@lists.openembedded.org
+>  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
