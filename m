@@ -1,32 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JhOWs-0006aY-1d
-	for openembedded-devel@openembedded.org; Thu, 03 Apr 2008 14:26:54 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JhOWq-0000Hf-Pj
-	for openembedded-devel@openembedded.org; Thu, 03 Apr 2008 12:26:52 +0000
-Received: from ip-62-143-23-251.1411n-cud12k-01.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 03 Apr 2008 12:26:52 +0000
-Received: from no2spam by ip-62-143-23-251.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 03 Apr 2008 12:26:52 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 03 Apr 2008 14:26:44 +0200
-Message-ID: <ft2ie3$ip6$1@ger.gmane.org>
-References: <1206911981.4838.12.camel@dax.rpnet.com> <47F024DA.5020502@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.1411n-cud12k-01.ish.de
-User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
-In-Reply-To: <47F024DA.5020502@gmx.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: libgcc not being pulled into OABI images
+	(envelope-from <zecke@selfish.org>) id 1JhknR-0004Zs-Hn
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Apr 2008 14:13:29 +0200
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=abughraib.localdomain) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.60)
+	(envelope-from <zecke@selfish.org>) id 1JhknR-00074P-3y
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Apr 2008 14:13:29 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Fri, 4 Apr 2008 14:13:28 +0200
+User-Agent: KMail/1.9.9
+References: <20080403083605.GG28970@buddha.tw.openmoko.com>
+In-Reply-To: <20080403083605.GG28970@buddha.tw.openmoko.com>
+MIME-Version: 1.0
+Message-Id: <200804041413.28784.zecke@selfish.org>
+Subject: Re: cvs date & timezone problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,23 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Apr 2008 12:26:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Apr 2008 12:13:29 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Thomas Kunze wrote:
-> So I suggest something like:
+On Thursday 03 April 2008 10:36:05 John Lee wrote:
+> Hi,
+>
 
-Thomas,
 
-thanks for your work on this.  Unfortunately, the issue remains the same
-for me, even with that change.  I added the lines you suggested, cleaned
-out tmp and compiled an altboot-console-image.  The boot process hangs
-with "libgcc_so.1 must be installed for pthread_cancel to work"
+> However, if I build the e-wm in Taiwan, `enlightenment.pc.in' does not
+> exist yet on 20080328 Taiwan time.  The build will fail.
+>
+> I would suggest set cvs fetch in bitbake to always use UTC+0 for this
+> matter and we set the min and max date according to UTC+0 instead of
+> our own timezone.  Enclosed please find the patch to the bitbake 1.8
+> branch.
 
-Regards
+patch looks sane, I will apply it.
 
-Rolf
+thank you
 
+	z.
+
+
+PS: I always assumed the server's time will be used...
 
 
