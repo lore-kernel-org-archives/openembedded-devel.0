@@ -1,32 +1,22 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [209.85.132.251] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JhqvF-0006AJ-6g
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Jhsvv-0001Px-UL
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Apr 2008 20:45:57 +0200
-X-ASG-Debug-ID: 1207334755-70f200390000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id B5EC237C43
+	Fri, 04 Apr 2008 22:54:48 +0200
+Received: by an-out-0708.google.com with SMTP id b33so52270ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Apr 2008 13:45:55 -0500 (CDT)
-Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
-	ESMTP id pYUBIOMQaS8w85Wb for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Apr 2008 13:45:55 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
+	Fri, 04 Apr 2008 13:54:36 -0700 (PDT)
+Received: by 10.100.5.16 with SMTP id 16mr3908065ane.102.1207342476669;
+	Fri, 04 Apr 2008 13:54:36 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Fri, 4 Apr 2008 13:54:36 -0700 (PDT)
+Message-ID: <c384c5ea0804041354m576977a8he7b3a20acb99a3f5@mail.gmail.com>
+Date: Fri, 4 Apr 2008 22:54:36 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] Building multiple gdb-cross targets
-Date: Fri, 4 Apr 2008 13:46:08 -0500
-User-Agent: KMail/1.9.7
-References: <200804041057.55738.geoffrey@pager.net>
-	<47F66A0B.1000904@gmail.com>
-In-Reply-To: <47F66A0B.1000904@gmail.com>
+In-Reply-To: <200804041346.08584.geoffrey@pager.net>
 MIME-Version: 1.0
-Message-Id: <200804041346.08584.geoffrey@pager.net>
-X-Barracuda-Connect: UNKNOWN[192.168.1.1]
-X-Barracuda-Start-Time: 1207334755
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+References: <200804041057.55738.geoffrey@pager.net>
+	<47F66A0B.1000904@gmail.com> <200804041346.08584.geoffrey@pager.net>
 Subject: Re: Building multiple gdb-cross targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -41,45 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Apr 2008 18:45:57 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 Apr 2008 20:54:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Friday 04 April 2008 12:48:59 pm Khem Raj wrote:
-> Geoffrey Wossum wrote:
+Hello,
 
-> > How can I get OE to build just an avr32-gdb?  How can I get OE to build
-> > both avr32-gdb and avr32-linux-gdb (aka avr32-angstrom-linux-uclibc-gdb=
-)?
+On 4/4/08, Geoffrey Wossum <geoffrey@pager.net> wrote:
+> On Friday 04 April 2008 12:48:59 pm Khem Raj wrote:
+> > Why would avr-linux gdb not work ?
 >
-> They are two different configurations of gdb the one OE will build for
-> you is the cross gdb which is supposed to cross debug linux applications
-> (e.g. arm-*-linux-gnueabi). The one you are intending to have is what I
-> call baremetal (e.g. arm-eabi)  debugger. I dont think you will be able
-> to build this with ease using OE as they are really two different
-> targets for OE to build.
+Probably because we set the target tripplet only once, and it's
+*linux*. (Am I correct?)
 
-It was easy enough to build the bare metal debugger outside OE.  Just seems=
-=20
-like you should be able to build this with OE, too.  It seems like it might=
-=20
-need a separate .bb file to pull it off.  Not exactly sure how you'd force=
-=20
-bitbake to use a different target setting.  Maybe setting the TARGET_OS to =
-be=20
-blank in the bitbake file?
+> From the avr32linux wiki entry on kernel debugging:
+> avr32-gdb (the standalone debugger) or avr32-linux-gdb. Preferably the former
+> since it has the ability to read and write system registers.
+>
+Why would the linux-gdb not be able to touch those registers?
 
-> Why would avr-linux gdb not work ?
-
-=46rom the avr32linux wiki entry on kernel debugging:
-avr32-gdb (the standalone debugger) or avr32-linux-gdb. Preferably the form=
-er=20
-since it has the ability to read and write system registers.
-
-=2D--
-Geoffrey
-
+Regards,
+-- 
+Leon
 
 
