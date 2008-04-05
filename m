@@ -1,23 +1,24 @@
-Received: from [209.85.132.251] (helo=an-out-0708.google.com)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Jhsvv-0001Px-UL
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Apr 2008 22:54:48 +0200
-Received: by an-out-0708.google.com with SMTP id b33so52270ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Apr 2008 13:54:36 -0700 (PDT)
-Received: by 10.100.5.16 with SMTP id 16mr3908065ane.102.1207342476669;
-	Fri, 04 Apr 2008 13:54:36 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Fri, 4 Apr 2008 13:54:36 -0700 (PDT)
-Message-ID: <c384c5ea0804041354m576977a8he7b3a20acb99a3f5@mail.gmail.com>
-Date: Fri, 4 Apr 2008 22:54:36 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200804041346.08584.geoffrey@pager.net>
-MIME-Version: 1.0
-References: <200804041057.55738.geoffrey@pager.net>
-	<47F66A0B.1000904@gmail.com> <200804041346.08584.geoffrey@pager.net>
-Subject: Re: Building multiple gdb-cross targets
+	(envelope-from <k.kooi@student.utwente.nl>) id 1JiAUq-0007jh-TU
+	for openembedded-devel@openembedded.org; Sat, 05 Apr 2008 17:40:00 +0200
+Received: from [172.20.1.5] (vpn006158.vpn.utwente.nl [130.89.6.158])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	m35FMoZk032717 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 5 Apr 2008 17:22:50 +0200
+Message-Id: <4327AE2D-6FA1-4BFE-BA07-059B0FC09BBE@student.utwente.nl>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: openembedded-devel@openembedded.org
+Mime-Version: 1.0 (Apple Message framework v919.2)
+Date: Sat, 5 Apr 2008 17:22:50 +0200
+X-Pgp-Agent: GPGMail d51 (Leopard)
+X-Mailer: Apple Mail (2.919.2)
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Adjusting staging for gcc >= 4.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,28 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Apr 2008 20:54:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 05 Apr 2008 15:40:01 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 4/4/08, Geoffrey Wossum <geoffrey@pager.net> wrote:
-> On Friday 04 April 2008 12:48:59 pm Khem Raj wrote:
-> > Why would avr-linux gdb not work ?
->
-Probably because we set the target tripplet only once, and it's
-*linux*. (Am I correct?)
+- -----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> From the avr32linux wiki entry on kernel debugging:
-> avr32-gdb (the standalone debugger) or avr32-linux-gdb. Preferably the former
-> since it has the ability to read and write system registers.
->
-Why would the linux-gdb not be able to touch those registers?
+Hi,
 
-Regards,
--- 
-Leon
+In order to build glibc with gcc 4.3.0 I needed to do:
+
+ln -sf /OE/angstrom-tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.3.0/ 
+include-fixed/* /OE/angstrom-tmp/cross/lib/gcc/arm-angstrom-linux- 
+gnueabi/4.3.0/include/
+
+The question I have is:
+
+Should be do this symlinking in the recipe or find a way to add  
+include-fixed to the includepath?
+
+regards,
+
+Koen
+- -----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH95kdMkyGM64RGpERAvyhAKComwcyySoXRkWJGhp5Jdll6a6J6QCfWc3t
+ZTSQWf+aOfMAoQEPfmc0hHM=
+=2xSy
+- -----END PGP SIGNATURE-----
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFH95lKMkyGM64RGpERAs1PAKCjSfeU1KpJO3+UMQf4FoNgsSO4fgCfUcxw
+yGbSKkKDrQb84iNLTDfCZIk=
+=M3IT
+-----END PGP SIGNATURE-----
 
 
