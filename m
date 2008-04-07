@@ -1,26 +1,23 @@
-Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philipp.zabel@gmail.com>) id 1JiwhP-0001zp-1W
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JixsJ-0004lI-Id
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Apr 2008 21:08:11 +0200
-Received: by fg-out-1718.google.com with SMTP id 13so1256215fge.20
+	Mon, 07 Apr 2008 22:23:31 +0200
+Received: by an-out-0708.google.com with SMTP id b33so405402ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Apr 2008 12:08:06 -0700 (PDT)
-Received: by 10.82.165.5 with SMTP id n5mr19975bue.39.1207595285661;
-	Mon, 07 Apr 2008 12:08:05 -0700 (PDT)
-Received: by 10.82.119.15 with HTTP; Mon, 7 Apr 2008 12:08:05 -0700 (PDT)
-Message-ID: <74d0deb30804071208x39ba3705x816bdc15820830ce@mail.gmail.com>
-Date: Mon, 7 Apr 2008 21:08:05 +0200
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	Mon, 07 Apr 2008 13:23:29 -0700 (PDT)
+Received: by 10.100.241.17 with SMTP id o17mr921073anh.152.1207599809570;
+	Mon, 07 Apr 2008 13:23:29 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Mon, 7 Apr 2008 13:23:29 -0700 (PDT)
+Message-ID: <c384c5ea0804071323w32061b6dp460a44021ab17603@mail.gmail.com>
+Date: Mon, 7 Apr 2008 22:23:29 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0804071129o7c6415b6s4b4b3c19e5af0059@mail.gmail.com>
+In-Reply-To: <200804071354.23859.geoffrey@pager.net>
 MIME-Version: 1.0
-References: <c384c5ea0803311500r15a7b84fp2515f3b54ad747a4@mail.gmail.com>
-	<fssll5$uhe$1@ger.gmane.org>
-	<c384c5ea0804010333i4c63c490n2f5f48db5dcf9bec@mail.gmail.com>
-	<74d0deb30804070745s3f55564fo7f8f2112cfa5f1f2@mail.gmail.com>
-	<c384c5ea0804071129o7c6415b6s4b4b3c19e5af0059@mail.gmail.com>
-Subject: Re: [Review] Remove /xorg-lib/pixman_* in favor of /libpixman/libpixman_*
+References: <200804071759.m37HxD8J010059@aiolos.otenet.gr>
+	<200804071354.23859.geoffrey@pager.net>
+Subject: Re: Building multiple gdb-cross targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,71 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Apr 2008 19:08:11 -0000
+X-List-Received-Date: Mon, 07 Apr 2008 20:23:31 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Apr 7, 2008 at 8:29 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Hello Philipp,
->
->
->
->  On Mon, Apr 7, 2008 at 4:45 PM, pHilipp Zabel <philipp.zabel@gmail.com> wrote:
->  > On Tue, Apr 1, 2008 at 12:33 PM, Leon Woestenberg
->  >  <leon.woestenberg@gmail.com> wrote:
->  >  > Hello Koen,
->  >  >  On Tue, Apr 1, 2008 at 8:44 AM, Koen Kooi
->  >  >  <koen@dominion.kabel.utwente.nl> wrote:
->  >  >  >  How about dropping the xorg-lib one and renaming libpixman to pixman?
->  >  >  >
->  >  >  +1 on both. I'll commit tomorrow if nobody beat me to it.
+Hello,
+
+On Mon, Apr 7, 2008 at 8:54 PM, Geoffrey Wossum <geoffrey@pager.net> wrote:
+> On Monday 07 April 2008 12:58:42 pm Stelios Koroneos wrote:
+>  > I think you are missing the point
 >  >
->  >  Sorry I'm late, but I kind of maybe disagree a bit. I might be
->  >  confused about the cairo/xorg source locations, but as I understand
->  >  it, xorg.freedesktop.org/releases/individual/lib is the canonical
->  >  upstream version. So why not put it in xorg-lib and make use of
->  >  xorg-lib-common.inc?
->  >
->  Putting it in xorg-lib is not the big issue. However including
->  xorg-lib-common.inc is a big issue.
+>  > "bare-metal" gdb does not have any bindings with
+>  > glibc/uclibc/eglibc/whatever-libc because its (usually) used to build a
+>  > system with no OS (standalone apps).
+>  > You also need a "bare-metal" toolchain i.e toolchain that generates code
+>  > that can run on the board without any OS (this was the case in most
+>  > embedded designs before linux become "embedded")
 >
->  For a system that only uses pixman, and not anything else, it starts
->  building a complete X server etc. etc. because the xorg include adds
->  those dependencies.
+>  Yeah, needing a baremetal gdb to debug makes perfect sense when you stop and
 
-Argh, I didn't see that.
-I guess we could start including xorg-lib-common.inc and overwriting
-DEPENDS = "" in pixman.bb, but that's a bit hackish...
-As pixman doesn't gain too much from xorg-lib-common.inc, I'm just as
-fine with putting it outside xorg-lib.
+I think we should try to achieve the other-way-around-approach, which is:
 
->  These dependencies are NOT in pixman. Maybe in upper libraries, but
->  even then it depends on their configuration etc. etc.
->
->  I'ld like to keep the "embedded" in OpenEmbedded, also for small
->  embedded Linux systems.
+Add system register support to the Linux GDB for AVR32.
 
-Sure thing. Especially as this is not even an optional dependency, but
-just plain wrong :)
+This way, we are done and don't need the bare-metal stuff. I'll look
+into that some more once I start on AVR32 myself.
 
->  What would be the good reason to keep pixman in the xorg-lib
->  directory? Why do we have this directory, we don't have a gnome/
->  directory where gtk+ lives, I do not really see the benefit?
-
-The main reason was to group the common fields of many very similar
-recipes into -common.inc files so they wouldn't have to be duplicated
-all the time. This also decreased the number of entries in the
-packages dir quite a bit. And I figured it's just easier to check for
-updates / new xorg packages by running some scripts against the xorg-*
-dirs and $XORG_MIRROR/.../index.html than to maintain a list of xorg
-packages or even watch them manually.
-The only reason left I see for putting pixman in xorg-lib is a)
-consistency and b) I have to add an exception for pixman to my shell
-script so it doesn't show up as missing :)
-
-regards
-Philipp
+Regards,
+-- 
+Leon
 
 
