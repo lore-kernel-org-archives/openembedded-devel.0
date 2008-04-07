@@ -1,24 +1,34 @@
-Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philipp.zabel@gmail.com>) id 1Jisat-0001U5-Vd
+	(envelope-from <geoffrey@pager.net>) id 1JisjD-0001hJ-4c
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Apr 2008 16:45:12 +0200
-Received: by fg-out-1718.google.com with SMTP id 13so1171617fge.20
+	Mon, 07 Apr 2008 16:53:47 +0200
+X-ASG-Debug-ID: 1207580024-4c0c001f0000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id ECC103A27F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Apr 2008 07:45:09 -0700 (PDT)
-Received: by 10.82.185.12 with SMTP id i12mr1131138buf.56.1207579508359;
-	Mon, 07 Apr 2008 07:45:08 -0700 (PDT)
-Received: by 10.82.119.15 with HTTP; Mon, 7 Apr 2008 07:45:07 -0700 (PDT)
-Message-ID: <74d0deb30804070745s3f55564fo7f8f2112cfa5f1f2@mail.gmail.com>
-Date: Mon, 7 Apr 2008 16:45:07 +0200
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
+	Mon,  7 Apr 2008 09:53:44 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id MEX0nDJCpMlHjaRj for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Apr 2008 09:53:44 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0804010333i4c63c490n2f5f48db5dcf9bec@mail.gmail.com>
+X-ASG-Orig-Subj: Re: [oe] Building multiple gdb-cross targets
+Date: Mon, 7 Apr 2008 09:53:49 -0500
+User-Agent: KMail/1.9.7
+References: <200804041057.55738.geoffrey@pager.net>
+	<200804041346.08584.geoffrey@pager.net>
+	<c384c5ea0804041354m576977a8he7b3a20acb99a3f5@mail.gmail.com>
+In-Reply-To: <c384c5ea0804041354m576977a8he7b3a20acb99a3f5@mail.gmail.com>
 MIME-Version: 1.0
-References: <c384c5ea0803311500r15a7b84fp2515f3b54ad747a4@mail.gmail.com>
-	<fssll5$uhe$1@ger.gmane.org>
-	<c384c5ea0804010333i4c63c490n2f5f48db5dcf9bec@mail.gmail.com>
-Subject: Re: [Review] Remove /xorg-lib/pixman_* in favor of /libpixman/libpixman_*
+Message-Id: <200804070953.49658.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1207580024
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: Re: Building multiple gdb-cross targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,31 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Apr 2008 14:45:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 07 Apr 2008 14:53:47 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Tue, Apr 1, 2008 at 12:33 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Hello Koen,
+On Friday 04 April 2008 03:54:36 pm Leon Woestenberg wrote:
+
+> > From the avr32linux wiki entry on kernel debugging:
+> > avr32-gdb (the standalone debugger) or avr32-linux-gdb. Preferably the
+> > former since it has the ability to read and write system registers.
 >
->
->  On Tue, Apr 1, 2008 at 8:44 AM, Koen Kooi
->  <koen@dominion.kabel.utwente.nl> wrote:
->  >  How about dropping the xorg-lib one and renaming libpixman to pixman?
->  >
->  +1 on both. I'll commit tomorrow if nobody beat me to it.
+> Why would the linux-gdb not be able to touch those registers?
 
-Sorry I'm late, but I kind of maybe disagree a bit. I might be
-confused about the cairo/xorg source locations, but as I understand
-it, xorg.freedesktop.org/releases/individual/lib is the canonical
-upstream version. So why not put it in xorg-lib and make use of
-xorg-lib-common.inc?
+Don't know for sure, but I'd guess it has something to do with how Atmel 
+patched gdb.
 
-+1 on the libpixman -> pixman part though.
+---
+Geoffrey
 
-regards
-Philipp
+
 
 
