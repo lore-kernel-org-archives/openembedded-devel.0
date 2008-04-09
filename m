@@ -1,24 +1,33 @@
-Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1JjbtV-0006Dz-VH
+	(envelope-from <geoffrey@pager.net>) id 1JjcYe-0003ik-BA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Apr 2008 17:07:26 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so551605ywk.42
+	Wed, 09 Apr 2008 17:49:56 +0200
+X-ASG-Debug-ID: 1207756193-72d3000d0000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 5064B3CB41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Apr 2008 08:07:24 -0700 (PDT)
-Received: by 10.142.72.4 with SMTP id u4mr56081wfa.327.1207753643721;
-	Wed, 09 Apr 2008 08:07:23 -0700 (PDT)
-Received: from ?192.168.1.71? ( [71.146.14.115])
-	by mx.google.com with ESMTPS id 22sm482703wfd.4.2008.04.09.08.07.22
-	(version=SSLv3 cipher=RC4-MD5); Wed, 09 Apr 2008 08:07:22 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed,  9 Apr 2008 10:49:53 -0500 (CDT)
+Received: from [192.168.1.71] (LRS-CiscoRouter [192.168.1.1]) by
+	barracuda.pager.net with ESMTP id MwYHImXoqJLMiAi2 for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Apr 2008 10:49:53 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200804090920.02871.geoffrey@pager.net>
+X-ASG-Orig-Subj: Re: [oe] avr32-*-gdb requires modifying gdb.inc /
+	gdb-cross.inc
+Date: Wed, 9 Apr 2008 10:49:58 -0500
+User-Agent: KMail/1.9.7
 References: <200804090920.02871.geoffrey@pager.net>
-Date: Wed, 09 Apr 2008 08:07:21 -0700
-Message-Id: <1207753641.7368.20.camel@isis>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1 
+	<1207753641.7368.20.camel@isis>
+In-Reply-To: <1207753641.7368.20.camel@isis>
+MIME-Version: 1.0
+Message-Id: <200804091049.58718.geoffrey@pager.net>
+X-Barracuda-Connect: LRS-CiscoRouter[192.168.1.1]
+X-Barracuda-Start-Time: 1207756193
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
 Subject: Re: avr32-*-gdb requires modifying gdb.inc / gdb-cross.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
@@ -33,129 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2008 15:07:26 -0000
-X-Groupsio-MsgNum: 4930
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="=-+/6fFlxz1SDZFTQnjF1R"
+X-List-Received-Date: Wed, 09 Apr 2008 15:49:56 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---=-+/6fFlxz1SDZFTQnjF1R
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+On Wednesday 09 April 2008 10:07:21 am Khem Raj wrote:
+> Hi Geoffrey
+>
+> I think it will be good to make this step arch specific to AVR only.
+> and best is to identify what changes are done in configure that needs it
+> to be regenerated. You can regenerate these and include them in the
+> patch itself instead of doing it at compile time.
 
-Hi Geoffrey
+Here's Atmel's reasoning for not including all the generated source / 
+autotools cruft in the patch:
+"The reason why these changes aren't included with the patch is that it would 
+have increased its size by several megabytes, and the actual AVR32 changes 
+would have been lost in the noise."
 
-I think it will be good to make this step arch specific to AVR only.
-and best is to identify what changes are done in configure that needs it
-to be regenerated. You can regenerate these and include them in the
-patch itself instead of doing it at compile time.
+Those are good points on their part, plus I don't want to have to create and 
+maintain my own patch.  When Atmel comes out with their next gdb, I don't 
+want to have to create a new patch based on theirs to include in OE.  I want 
+to download their patch and copy it into the OE tree.
 
-Thanks
+This leaves running these extra steps only for the AVR32.  What would I put 
+around these extra steps in do_configure() and do_stage() so that they are 
+only run when building for the AVR32.
 
--Khem
+---
+Geoffrey
 
-On Wed, 2008-04-09 at 09:20 -0500, Geoffrey Wossum wrote:
-> Hi all,
->=20
-> I currently have a BitBake recipe that can build gdb 6.4 for the AVR32, a=
-nd=20
-> I'm about to make one that can build the gdb 6.7 using Atmel's newly rele=
-ased=20
-> patches for the AVR32.
->=20
-> According to this page, http://avr32linux.org/twiki/bin/view/Main/GDBPatc=
-hes,=20
-> you must do some extra steps to build gdb if you patch it.  My experience=
-=20
-> with Atmel's gdb 6.4 release was that even though they claim you don't ha=
-ve=20
-> to do these steps if you use the full source tarball, you have to anyway.
->=20
-> This requires modifying gdb.inc / gdb-cross.inc.  I think the modificatio=
-ns=20
-> are safe for all platforms, but I was hoping someone could comment before=
- I=20
-> roll a patchset to submit. =20
->=20
-> TIA,
-> ---
-> Geoffrey
->=20
->=20
-> --- packages/gdb/gdb-cross.inc  2008-03-04 14:30:27.000000000 -0600
-> +++ /home/geoff/lrs/playpaq/org.openembedded.dev/packages/gdb/gdb-cross.i=
-nc   =20
-> 2008-04-09 09:09:50.000000000 -0500
-> @@ -10,9 +10,38 @@ do_configure () {
->  # override this function to avoid the autoconf/automake/aclocal/autohead=
-er
->  # calls for now
->         (cd ${S} && gnu-configize) || die "failure in running gnu-configi=
-ze"
-> +
-> +
-> +        # This stuff is required to build Atmel's patched gdb for the AV=
-R32.
-> +        # See http://avr32linux.org/twiki/bin/view/Main/GDBPatches
-> +        (cd ${S}/bfd && autoreconf) || die "failure running autoreconf i=
-n bfd/"
-> +        (cd ${S}/opcodes && autoreconf) || die "failure running autoreco=
-nf in opcodes/"
-> +
->         oe_runconf
-> +
-> +
-> +        # Also required according to the avr32linux GDBPatches page
-> +        make configure-bfd || die "Error running configure-bfd"
-> +        (cd bfd && make headers && cd "$OLDPWD") || \
-> +                die "error running 'make headers' in bfd"
->  }
->=20
->  do_stage () {
-> +        # Left to fend for itself, "make install" will fail, saying that
-> +        # makeinfo is missing.  I don't know if this is because my syste=
-m
-> +        # makeinfo isn't available inside the bitbake build, or if this =
-is
-> +        # due to the texinfo version detection bug that has plagued some
-> +        # packages (see https://bugzilla.redhat.com/show_bug.cgi?id=3D34=
-5621).
-> +        # Either way, we want to keep "make install"from wanting to run
-> +        # makeinfo.  By copying over all the .info files before hand,
-> +        # the files will exist in the build tree and have shiny new
-> +        # timestamps, thus preventing "make install" from using makeinfo=
-.
-> +        cd ${S}
-> +        for infofile in `find . -name "*.info"`; do
-> +            cp "$infofile" ${B}/"$infofile"
-> +        done
-> +        cd "$OLDPWD"
-> +
-> +
->         oe_runmake install
->  }
->=20
->=20
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
---=20
-Khem Raj <raj.khem@gmail.com>
 
---=-+/6fFlxz1SDZFTQnjF1R
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-
-iD8DBQBH/NupHnJKy6V6em4RAiXCAJ0UqT5PfSsPYfu1TI0a/FAmC1yqfQCfYr2D
-bQEoR4fdrSZ9WDLAaz+tm6c=
-=EYaX
------END PGP SIGNATURE-----
-
---=-+/6fFlxz1SDZFTQnjF1R--
