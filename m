@@ -1,23 +1,30 @@
-Received: from [66.249.82.230] (helo=wx-out-0506.google.com)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1JjFLI-0004Bm-DZ
+	(envelope-from <geoffrey@pager.net>) id 1Jjb9k-0004xC-H0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Apr 2008 17:02:37 +0200
-Received: by wx-out-0506.google.com with SMTP id h27so2154022wxd.3
+	Wed, 09 Apr 2008 16:20:09 +0200
+X-ASG-Debug-ID: 1207750804-278400270000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 5DEB53C979
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Apr 2008 08:02:34 -0700 (PDT)
-Received: by 10.100.125.12 with SMTP id x12mr19788anc.154.1207666954054;
-	Tue, 08 Apr 2008 08:02:34 -0700 (PDT)
-Received: by 10.101.71.14 with HTTP; Tue, 8 Apr 2008 08:02:34 -0700 (PDT)
-Message-ID: <bdb0025f0804080802n58cc3ca8r4368347d9a2f18e0@mail.gmail.com>
-Date: Tue, 8 Apr 2008 12:02:34 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+	Wed,  9 Apr 2008 09:20:05 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id OWsAnHq4enQvHKeT for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Apr 2008 09:20:05 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <47EBE31A.3010602@kernelconcepts.de>
+X-ASG-Orig-Subj: avr32-*-gdb requires modifying gdb.inc / gdb-cross.inc
+Date: Wed, 9 Apr 2008 09:20:02 -0500
+User-Agent: KMail/1.9.7
 MIME-Version: 1.0
-References: <47E99679.3050606@kernelconcepts.de>
-	<47EBE31A.3010602@kernelconcepts.de>
-Subject: Re: OE booth at LinuxTag
+Message-Id: <200804090920.02871.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1207750805
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: avr32-*-gdb requires modifying gdb.inc / gdb-cross.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,64 +38,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Apr 2008 15:02:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Apr 2008 14:20:15 -0000
 Content-Disposition: inline
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-how is is going?
-are you really going to linuxtag?
+Hi all,
 
-I'm not sure but maybe one of us (mamona/INdT) will go. In that case
-we can help you.
+I currently have a BitBake recipe that can build gdb 6.4 for the AVR32, and 
+I'm about to make one that can build the gdb 6.7 using Atmel's newly released 
+patches for the AVR32.
 
-Just let me know how the organization is going that it will make
-things easier to get one of us there.
+According to this page, http://avr32linux.org/twiki/bin/view/Main/GDBPatches, 
+you must do some extra steps to build gdb if you patch it.  My experience 
+with Atmel's gdb 6.4 release was that even though they claim you don't have 
+to do these steps if you use the full source tarball, you have to anyway.
 
-Thanks,
-Best Regards,
-vivijim
+This requires modifying gdb.inc / gdb-cross.inc.  I think the modifications 
+are safe for all platforms, but I was hoping someone could comment before I 
+roll a patchset to submit.  
 
-On Thu, Mar 27, 2008 at 3:10 PM, Florian Boor
-<florian.boor@kernelconcepts.de> wrote:
-> Hi!
->
->
->  > We might want to collect information using the wiki like:
->
->  The wiki is there:
->
->  http://www.openembedded.org/linuxtag2008
->
->  It contains a minimum of structure and event information already.
->
->
->  Greetings
->
->  Florian
->
->  --
->  The dream of yesterday                  Florian Boor
->  is the hope of today                    Tel: +49 271-771091-15
->
->
-> and the reality of tomorrow.            Fax: +49 271-771091-19
->  [Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
->
->  1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
->
->  _______________________________________________
->  Openembedded-devel mailing list
->  Openembedded-devel@lists.openembedded.org
->  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+TIA,
+---
+Geoffrey
 
 
+--- packages/gdb/gdb-cross.inc  2008-03-04 14:30:27.000000000 -0600
++++ /home/geoff/lrs/playpaq/org.openembedded.dev/packages/gdb/gdb-cross.inc    
+2008-04-09 09:09:50.000000000 -0500
+@@ -10,9 +10,38 @@ do_configure () {
+ # override this function to avoid the autoconf/automake/aclocal/autoheader
+ # calls for now
+        (cd ${S} && gnu-configize) || die "failure in running gnu-configize"
++
++
++        # This stuff is required to build Atmel's patched gdb for the AVR32.
++        # See http://avr32linux.org/twiki/bin/view/Main/GDBPatches
++        (cd ${S}/bfd && autoreconf) || die "failure running autoreconf in bfd/"
++        (cd ${S}/opcodes && autoreconf) || die "failure running autoreconf in opcodes/"
++
+        oe_runconf
++
++
++        # Also required according to the avr32linux GDBPatches page
++        make configure-bfd || die "Error running configure-bfd"
++        (cd bfd && make headers && cd "$OLDPWD") || \
++                die "error running 'make headers' in bfd"
+ }
 
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+ do_stage () {
++        # Left to fend for itself, "make install" will fail, saying that
++        # makeinfo is missing.  I don't know if this is because my system
++        # makeinfo isn't available inside the bitbake build, or if this is
++        # due to the texinfo version detection bug that has plagued some
++        # packages (see https://bugzilla.redhat.com/show_bug.cgi?id=345621).
++        # Either way, we want to keep "make install"from wanting to run
++        # makeinfo.  By copying over all the .info files before hand,
++        # the files will exist in the build tree and have shiny new
++        # timestamps, thus preventing "make install" from using makeinfo.
++        cd ${S}
++        for infofile in `find . -name "*.info"`; do
++            cp "$infofile" ${B}/"$infofile"
++        done
++        cd "$OLDPWD"
++
++
+        oe_runmake install
+ }
+
+
+
+
 
 
