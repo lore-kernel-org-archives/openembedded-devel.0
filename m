@@ -1,24 +1,24 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1JjrUh-0004UM-3M
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Apr 2008 09:46:51 +0200
-Received: (qmail invoked by alias); 10 Apr 2008 07:46:47 -0000
-Received: from brln-4db998e3.pool.einsundeins.de (EHLO [192.168.4.110])
-	[77.185.152.227]
-	by mail.gmx.net (mp013) with SMTP; 10 Apr 2008 09:46:47 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+RtDgQMriRDIj8PK66SjXN8bKtdHiaZJWoq4dgjI
-	D9JXmq+d/Y5BvC
-Message-ID: <47FDC5E6.8000809@gmx.net>
-Date: Thu, 10 Apr 2008 09:46:46 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
-MIME-Version: 1.0
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <openembedded-devel@lists.futaris.org>)
+	id 1JjrYl-0004pL-6N for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Apr 2008 09:51:03 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 4F3CEEC5C6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2008 03:51:00 -0400 (EDT)
+Received: from web7.messagingengine.com ([10.202.2.216])
+	by compute2.internal (MEProxy); Thu, 10 Apr 2008 03:51:00 -0400
+Received: by web7.messagingengine.com (Postfix, from userid 99)
+	id 289F32206C; Thu, 10 Apr 2008 03:51:00 -0400 (EDT)
+Message-Id: <1207813860.21919.1247100073@webmail.messagingengine.com>
+X-Sasl-Enc: kO6q0RDDhMzJybVBOSxqZbcJd43gdKIysNuoycMzjm1e 1207813860
+From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: OE booth at LinuxTag
+MIME-Version: 1.0
+X-Mailer: MessagingEngine.com Webmail Interface
+Date: Thu, 10 Apr 2008 17:51:00 +1000
+Subject: gcc-4.3.0 based toolchain (needed for ep93xx crunch)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,43 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2008 07:46:52 -0000
-X-Groupsio-MsgNum: 4933
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig3661F790102BC228F3CC6A0B"
+X-List-Received-Date: Thu, 10 Apr 2008 07:51:03 -0000
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="ISO-8859-1"
 
---------------enig3661F790102BC228F3CC6A0B
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Has anyone gotten a gcc 4.3.0 toolchain working on OE yet?
 
-Hi,
-again the booth topic. :)
+I need to go to gcc 4.3.0 to properly implement ep93xx crunch support,
+since I need to call optab_libfunc from gcc/optabs.c.  Unfortunately,
+this isn't in 4.2.3.
 
-LinuxTag is from 2008-05-28 till 2008-05-31.
+I get problems compiling glibc-intermediate 2.6.1 or 2.7:
 
-Who has time to be at the booth on May 30. and 31.?
+| make[2]: *** Waiting for unfinished jobs....
+| In file included from ../nptl/descr.h:23,
+|                  from ../ports/sysdeps/arm/nptl/tls.h:63,
+|                  from ../include/tls.h:6,
+|                  from ../include/link.h:45,
+|                  from ../include/dlfcn.h:3,
+|                  from ../sysdeps/generic/ldsodefs.h:32,
+|                  from ../ports/sysdeps/arm/ldsodefs.h:39,
+|                  from ../sysdeps/unix/sysv/linux/ldsodefs.h:25,
+|                  from <stdin>:2:
+| ../include/limits.h:125:26: error: limits.h: No such file or directory
+| make[2]: ***
+[/home/hwilliams/openembedded-latest/build-dev/tmp/work/ep9312-angstrom-linux-gnueabi/glibc-intermediate-2.7-r1/build-arm-angstrom-linux-gnueabi/tcb-offsets.h]
+Error 1
 
-I can be there the first two days - except one hour on Wednesday because
-that is when I have my talk.
+I saw Koen's E-mail titled "Adjusting staging for gcc >= 4.3.0", to do a
+soft-link:
 
-Regards
-Robert
+> ln -sf /OE/angstrom-tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.3.0/
+> include-fixed/* /OE/angstrom-tmp/cross/lib/gcc/arm-angstrom-linux-
+> gnueabi/4.3.0/include/
+
+Any chance someone can push a (temporary?) change into bb, so others do
+this automatically, or are we going to go down the path suggested by
+Sergey:
+
+> C_SYSTEM_INCLUDE :=$(shell $(CC) -print-file-name=include || echo)
+> CFLAGS+= -isystem $(C_SYSTEM_INCLUDE) -isystem $(C_SYSTEM_INCLUDE)-fixed
+
+Thoughts?
+
+I'm in the process of making changes to gcc and glibc so I'd rather not
+have to do this every build.
 
 
-
---------------enig3661F790102BC228F3CC6A0B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFH/cXmG9cfwmwwEtoRCFaNAJ9oqQbVJ/gn3EH7V0C0XeLuyfWXHgCfVA08
-LC9rG42jQuHQsRW1bLeRhA4=
-=Y5R/
------END PGP SIGNATURE-----
-
---------------enig3661F790102BC228F3CC6A0B--
