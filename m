@@ -1,24 +1,22 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [209.85.128.185] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded-devel@lists.futaris.org>)
-	id 1JjrYl-0004pL-6N for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Apr 2008 09:51:03 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 4F3CEEC5C6
+	(envelope-from <philipp.zabel@gmail.com>) id 1JjveW-0007NF-J8
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Apr 2008 14:13:16 +0200
+Received: by fk-out-0910.google.com with SMTP id 18so4645293fks.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2008 03:51:00 -0400 (EDT)
-Received: from web7.messagingengine.com ([10.202.2.216])
-	by compute2.internal (MEProxy); Thu, 10 Apr 2008 03:51:00 -0400
-Received: by web7.messagingengine.com (Postfix, from userid 99)
-	id 289F32206C; Thu, 10 Apr 2008 03:51:00 -0400 (EDT)
-Message-Id: <1207813860.21919.1247100073@webmail.messagingengine.com>
-X-Sasl-Enc: kO6q0RDDhMzJybVBOSxqZbcJd43gdKIysNuoycMzjm1e 1207813860
-From: "Hasjim Williams" <openembedded-devel@lists.futaris.org>
+	Thu, 10 Apr 2008 05:13:15 -0700 (PDT)
+Received: by 10.82.180.10 with SMTP id c10mr1082592buf.85.1207829594908;
+	Thu, 10 Apr 2008 05:13:14 -0700 (PDT)
+Received: by 10.82.119.15 with HTTP; Thu, 10 Apr 2008 05:13:14 -0700 (PDT)
+Message-ID: <74d0deb30804100513ybe5827gd4cf07ee0f48232e@mail.gmail.com>
+Date: Thu, 10 Apr 2008 14:13:14 +0200
+From: "pHilipp Zabel" <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <47FDC5E6.8000809@gmx.net>
 MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-Date: Thu, 10 Apr 2008 17:51:00 +1000
-Subject: gcc-4.3.0 based toolchain (needed for ep93xx crunch)
+References: <47FDC5E6.8000809@gmx.net>
+Subject: Re: OE booth at LinuxTag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,51 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2008 07:51:03 -0000
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Apr 2008 12:13:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="ISO-8859-1"
+Content-Disposition: inline
 
-Has anyone gotten a gcc 4.3.0 toolchain working on OE yet?
+On Thu, Apr 10, 2008 at 9:46 AM, Robert Schuster <theBohemian@gmx.net> wrote:
+> Hi,
+>  again the booth topic. :)
+>
+>  LinuxTag is from 2008-05-28 till 2008-05-31.
+>
+>  Who has time to be at the booth on May 30. and 31.?
 
-I need to go to gcc 4.3.0 to properly implement ep93xx crunch support,
-since I need to call optab_libfunc from gcc/optabs.c.  Unfortunately,
-this isn't in 4.2.3.
+I could be there on 31. Not sure about friday, because I don't know
+yet if I can (or even want to) take the whole day off.
 
-I get problems compiling glibc-intermediate 2.6.1 or 2.7:
-
-| make[2]: *** Waiting for unfinished jobs....
-| In file included from ../nptl/descr.h:23,
-|                  from ../ports/sysdeps/arm/nptl/tls.h:63,
-|                  from ../include/tls.h:6,
-|                  from ../include/link.h:45,
-|                  from ../include/dlfcn.h:3,
-|                  from ../sysdeps/generic/ldsodefs.h:32,
-|                  from ../ports/sysdeps/arm/ldsodefs.h:39,
-|                  from ../sysdeps/unix/sysv/linux/ldsodefs.h:25,
-|                  from <stdin>:2:
-| ../include/limits.h:125:26: error: limits.h: No such file or directory
-| make[2]: ***
-[/home/hwilliams/openembedded-latest/build-dev/tmp/work/ep9312-angstrom-linux-gnueabi/glibc-intermediate-2.7-r1/build-arm-angstrom-linux-gnueabi/tcb-offsets.h]
-Error 1
-
-I saw Koen's E-mail titled "Adjusting staging for gcc >= 4.3.0", to do a
-soft-link:
-
-> ln -sf /OE/angstrom-tmp/cross/lib/gcc/arm-angstrom-linux-gnueabi/4.3.0/
-> include-fixed/* /OE/angstrom-tmp/cross/lib/gcc/arm-angstrom-linux-
-> gnueabi/4.3.0/include/
-
-Any chance someone can push a (temporary?) change into bb, so others do
-this automatically, or are we going to go down the path suggested by
-Sergey:
-
-> C_SYSTEM_INCLUDE :=$(shell $(CC) -print-file-name=include || echo)
-> CFLAGS+= -isystem $(C_SYSTEM_INCLUDE) -isystem $(C_SYSTEM_INCLUDE)-fixed
-
-Thoughts?
-
-I'm in the process of making changes to gcc and glibc so I'd rather not
-have to do this every build.
+cheers
+Philipp
 
 
