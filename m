@@ -1,20 +1,24 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [64.233.166.177] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1JkF8X-0007O2-Fh
-	for openembedded-devel@openembedded.org; Fri, 11 Apr 2008 11:01:33 +0200
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id 5F0096280BB;
-	Fri, 11 Apr 2008 11:01:32 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-In-Reply-To: <47F96AD4.8010502@gmail.com>
-References: <47F96AD4.8010502@gmail.com>
-Date: Fri, 11 Apr 2008 11:04:14 +0200
-Message-Id: <1207904654.25732.112.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.0 
-Subject: Re: Error building ... ARG_MAX
+	(envelope-from <xjqian@gmail.com>) id 1JkYoh-00006I-Pt
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Apr 2008 08:02:25 +0200
+Received: by py-out-1112.google.com with SMTP id y77so774412pyg.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Apr 2008 23:02:22 -0700 (PDT)
+Received: by 10.35.65.17 with SMTP id s17mr6398964pyk.37.1207980138615;
+	Fri, 11 Apr 2008 23:02:18 -0700 (PDT)
+Received: from ?192.168.1.209? ( [24.107.189.117])
+	by mx.google.com with ESMTPS id w43sm4572017pyg.42.2008.04.11.23.02.16
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 11 Apr 2008 23:02:17 -0700 (PDT)
+Message-ID: <48005066.4010903@gmail.com>
+Date: Sat, 12 Apr 2008 01:02:14 -0500
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Subject: [RFC] Drop wlan-ng recipes < 0.2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -28,91 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Apr 2008 09:01:34 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 12 Apr 2008 06:02:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Khem Raj wrote:
+Are there any objection to dropping wlan-ng recipes before 0.2.7? 
+wlan-ng recipes used to be maintained by Dirk, but he is not active 
+anymore. wlan-ng 0.2.7 and 0.2.8 works well for tosa with current kernel.
 
-> +| gtester.c: In function 'launch_test_binary':
-> +| gtester.c:276: error: 'ARG_MAX' undeclared (first use in this functi=
-on)
-> +| gtester.c:276: error: (Each undeclared identifier is reported only o=
-nce
-> +| gtester.c:276: error: for each function it appears in.)
-> +| gtester.c:276: warning: unused variable 'argv'
-> +| make[4]: *** [gtester.o] Error 1
+I found only tosa, angstrom-2007-for-openmoko-versions.inc, and 
+nylon-feed.bb, needs wlan-ng. I'm sure this change are safe for these, 
+Are there any other affected entities that I'm not aware of?
 
-
-This is a mail which appeared today on the opensuse-packaging list:
-
-From: Cristian Rodr=EDguez <...>
-Subject: [opensuse-packaging] FYI:  glibc 2.8 may break some of your pack=
-ages
-Date: Fri, 11 Apr 2008 01:03:51 -0400 (07:03 CEST)
-
-HI all :
-
-
-Factory currenlty has glibc 2.8 which may break some of your packages,=20
-Im going to describe just one possible breakage, and hope someone else=20
-can contribute information about other breakages.
-
-
-glibc 2.8 no longer defines ARG_MAX constant in linux, so you may see:
-
-
-foobar.c:N: error: 'ARG_MAX' undeclared (first use in this function)
-
-To fix this problem you can use something like this
-
-#include <unistd.h> /* only if not already there !! */
-
-#if defined(_SC_ARG_MAX)
-# if defined(ARG_MAX)
-#    undef ARG_MAX
-# endif
-# define ARG_MAX sysconf (_SC_ARG_MAX)
-#endif
-
-HTH.
-
-Cristian.
-
-
-
---=20
-"Freedom of religion also means freedom **from** religion" - Anonymous
-
-Cristian Rodr=EDguez R.
-Platform/OpenSUSE - Core Services
-SUSE LINUX Products GmbH
-Research & Development
-http://www.opensuse.org/
-
--------
-
-And from reply from Stephan Kulow:
-
-> foobar.c:N: error: 'ARG_MAX' undeclared (first use in this function)
->
-> To fix this problem you can use something like this
->
-Note, that the code should have done that before too, as the glibc info=20
-pages say:
-
-   Each of the following limit parameters has a macro that is defined in
-`limits.h' only if the system has a fixed, uniform limit for the
-parameter in question.  If the system allows different file systems or
-files to have different limits, then the macro is undefined; use
-`sysconf' to find out the limit that applies at a particular time on a
-particular machine. =20
-
-Greetings, Stephan
-
---=20
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+Regards
+Gordon
 
 
