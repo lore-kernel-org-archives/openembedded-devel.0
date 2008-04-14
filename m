@@ -1,22 +1,30 @@
-Received: from [216.145.245.198] (helo=mx02.dls.net)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1JlRtg-00044x-IC
+	(envelope-from <geoffrey@pager.net>) id 1JlSyR-0001MI-No
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Apr 2008 18:51:12 +0200
-Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
-	by mx02.dls.net with esmtpa (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1JlRtb-0003eL-IG
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Apr 2008 11:51:08 -0500
-Message-ID: <48038AFE.2030904@dls.net>
-Date: Mon, 14 Apr 2008 11:49:02 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
-MIME-Version: 1.0
+	Mon, 14 Apr 2008 20:00:16 +0200
+X-ASG-Debug-ID: 1208196009-42e7000d0000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 463F840851
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Apr 2008 13:00:09 -0500 (CDT)
+Received: from [192.168.1.71] (LRS-CiscoBackup [192.168.1.1]) by
+	barracuda.pager.net with ESMTP id 06bxD58HY0T4XDah for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Apr 2008 13:00:09 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-References: <E1JlNXj-0008DF-Mt@daffy.sipo.nl>
-In-Reply-To: <E1JlNXj-0008DF-Mt@daffy.sipo.nl>
-Subject: Re: union fs
+X-ASG-Orig-Subj: binutils 2.17.atmel.1.2.6 and gcc 4.2.2.atmel.1.0.8 for AVR32
+Date: Mon, 14 Apr 2008 13:00:16 -0500
+User-Agent: KMail/1.9.7
+MIME-Version: 1.0
+Message-Id: <200804141300.16904.geoffrey@pager.net>
+X-Barracuda-Connect: LRS-CiscoBackup[192.168.1.1]
+X-Barracuda-Start-Time: 1208196009
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: binutils 2.17.atmel.1.2.6 and gcc 4.2.2.atmel.1.0.8 for AVR32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,30 +38,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Apr 2008 16:51:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 14 Apr 2008 18:00:16 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-RvP wrote:
-> Hi,
-> 
-> Support for unionfs-modules with recent kernels is broken in oe, see
-> http://bugs.openembedded.org/show_bug.cgi?id=1189.
-> 
-> Are there plans to fix this?
+For anyone interested in the AVR32, I just submitted patches to upgrade gcc to 
+4.2.2.atmel.1.0.8 and binutils 2.17.atmel.1.2.6.  See 
+http://bugs.openembedded.net/show_bug.cgi?id=4178
 
-The unionfs modules are part of the 2.6 kernel now.  Do you really need 
-them?
+Yes, I know OE contains binutils 2.17.atmel.1.3.0, but this 2.17.atmel.1.2.6 
+is actually newer.  It's also required to assemble the output of the new gcc 
+4.2.2.atmel.1.0.8.
 
-Unslung is the only distro AFAIK that is still based on a 2.4 kernel; 
-and unionfs is not very useful (the obvious use, which is to use ntfs-3g 
-to replace the buggy Linksys proprietary ntfs driver is not write-safe, 
-and thus isn't useful).
+There's also a fix in the binutils patch for having a texinfo version >= 4.10.  
+See https://bugzilla.redhat.com/show_bug.cgi?id=345621 for more info.
 
-I would suspect that we can simply drop the modules build from unionfs. 
-  (But perhaps leave the recipe present in case someone else wants very 
-much to try to get ntfs-3g working on unslung.)
-
-Mike (mwester)
+---
+Geoffrey
 
 
