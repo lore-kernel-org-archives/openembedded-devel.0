@@ -1,21 +1,30 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1JlUtO-0004h6-TY
-	for openembedded-devel@openembedded.org; Mon, 14 Apr 2008 22:03:07 +0200
-Received: (qmail 5435 invoked by uid 813007); 14 Apr 2008 20:03:04 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 14 Apr 2008 20:03:04 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Apr 2008 21:55:01 +0200
-User-Agent: KMail/1.9.9
-References: <200804141300.16904.geoffrey@pager.net>
-In-Reply-To: <200804141300.16904.geoffrey@pager.net>
+	(envelope-from <geoffrey@pager.net>) id 1JlUua-0004iM-O6
+	for Openembedded-devel@lists.openembedded.org;
+	Mon, 14 Apr 2008 22:04:20 +0200
+X-ASG-Debug-ID: 1208203458-546c00ac0000-3ce4Sv
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 92C26408AB
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Apr 2008 15:04:18 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id 9BYHdfXnO3ethTUI for
+	<Openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Apr 2008 15:04:18 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
+To: Openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: Building gdbserver only
+Date: Mon, 14 Apr 2008 15:04:29 -0500
+User-Agent: KMail/1.9.7
 MIME-Version: 1.0
-Message-Id: <200804142155.03848.openembedded@haerwu.biz>
-Subject: Re: binutils 2.17.atmel.1.2.6 and gcc 4.2.2.atmel.1.0.8 for AVR32
+Message-Id: <200804141504.29481.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1208203458
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: Building gdbserver only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,28 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Apr 2008 20:03:07 -0000
+X-List-Received-Date: Mon, 14 Apr 2008 20:04:21 -0000
 Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia Monday 14 of April 2008, Geoffrey Wossum napisa=B3:
-> There's also a fix in the binutils patch for having a texinfo version
-> >=3D 4.10. =A0 See https://bugzilla.redhat.com/show_bug.cgi?id=3D345621 f=
-or
-> more info.
+Hi all,
 
-Iirc most (if not all) versions of binutils in OE were already patched for=
-=20
-this problem.
+I'm working on getting OE to build gdb-6.7.1.atmel.1.0.3 for the AVR32.  I 
+have the gdb-cross working, but gdb is a little tricker.  gdb has not been 
+ported to be hosted on the AVR32, so do_compile() quits when running the 
+gdb/configure script.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+It does support building gdbserver for the AVR32, though.  Trouble is, there 
+doesn't seem to be an "easy" way to build just gdbserver.  To build just 
+gdbserver, you run the gdb-${PV}/gdb/gdbserver/configure instead of 
+gdb-${PV}/configure.  oe_runconf() substitutes the value of ${S} in.  If you 
+try to modify ${S} so that oe_runconf() executes the correct configure 
+script, then ${S} is screwed  up for do_patch() and the patches won't apply.  
 
-                                Forty-Two?
+Any ideas on how to solve this dillemma?
 
-
+---
+Geoffrey
 
 
