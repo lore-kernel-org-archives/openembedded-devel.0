@@ -1,30 +1,31 @@
 Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JlUua-0004iM-O6
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 14 Apr 2008 22:04:20 +0200
-X-ASG-Debug-ID: 1208203458-546c00ac0000-3ce4Sv
+	(envelope-from <geoffrey@pager.net>) id 1JlV34-0004xm-Le
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Apr 2008 22:13:06 +0200
+X-ASG-Debug-ID: 1208203984-05fd003b0000-aWHRdb
 X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
 Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 92C26408AB
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2008 15:04:18 -0500 (CDT)
+	by barracuda.pager.net (Spam Firewall) with ESMTP
+	id 76D4A409BD; Mon, 14 Apr 2008 15:13:04 -0500 (CDT)
 Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
-	ESMTP id 9BYHdfXnO3ethTUI for
-	<Openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2008 15:04:18 -0500 (CDT)
+	ESMTP id bj3QRPfPEBZHjjjW; Mon, 14 Apr 2008 15:13:04 -0500 (CDT)
 From: Geoffrey Wossum <geoffrey@pager.net>
 Organization: Long Range Systems
-To: Openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Building gdbserver only
-Date: Mon, 14 Apr 2008 15:04:29 -0500
+To: openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: Re: [oe] binutils 2.17.atmel.1.2.6 and gcc 4.2.2.atmel.1.0.8
+	for AVR32
+Date: Mon, 14 Apr 2008 15:13:15 -0500
 User-Agent: KMail/1.9.7
+References: <200804141300.16904.geoffrey@pager.net>
+	<200804142155.03848.openembedded@haerwu.biz>
+In-Reply-To: <200804142155.03848.openembedded@haerwu.biz>
 MIME-Version: 1.0
-Message-Id: <200804141504.29481.geoffrey@pager.net>
+Message-Id: <200804141513.15303.geoffrey@pager.net>
 X-Barracuda-Connect: UNKNOWN[192.168.1.1]
-X-Barracuda-Start-Time: 1208203458
+X-Barracuda-Start-Time: 1208203984
 X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: Building gdbserver only
+Subject: Re: binutils 2.17.atmel.1.2.6 and gcc 4.2.2.atmel.1.0.8 for AVR32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -38,29 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Apr 2008 20:04:21 -0000
+X-List-Received-Date: Mon, 14 Apr 2008 20:13:06 -0000
 Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Hi all,
+On Monday 14 April 2008 02:55:01 pm Marcin Juszkiewicz wrote:
+> Dnia Monday 14 of April 2008, Geoffrey Wossum napisa=B3:
+> > There's also a fix in the binutils patch for having a texinfo version
+> >
+> > >=3D 4.10. =A0 See https://bugzilla.redhat.com/show_bug.cgi?id=3D345621=
+ for
+> >
+> > more info.
+>
+> Iirc most (if not all) versions of binutils in OE were already patched for
+> this problem.
 
-I'm working on getting OE to build gdb-6.7.1.atmel.1.0.3 for the AVR32.  I 
-have the gdb-cross working, but gdb is a little tricker.  gdb has not been 
-ported to be hosted on the AVR32, so do_compile() quits when running the 
-gdb/configure script.
+binutils 2.18 does indeed seem to be patched for this=20
+(binutils-2.18/binutils-configure-texinfo-version.patch).  I didn't notice=
+=20
+this patch.
 
-It does support building gdbserver for the AVR32, though.  Trouble is, there 
-doesn't seem to be an "easy" way to build just gdbserver.  To build just 
-gdbserver, you run the gdb-${PV}/gdb/gdbserver/configure instead of 
-gdb-${PV}/configure.  oe_runconf() substitutes the value of ${S} in.  If you 
-try to modify ${S} so that oe_runconf() executes the correct configure 
-script, then ${S} is screwed  up for do_patch() and the patches won't apply.  
+The AVR32 still has to use the older 2.17, which did not have a patch for t=
+his=20
+in OE.  I stole a sed expression from an in-house script for building an AV=
+R=20
+(not AVR32) toolchain.  It looks for the bad texinfo check (actually any=20
+texinfo check) and replaces it with a good one.
 
-Any ideas on how to solve this dillemma?
-
----
+=2D--
 Geoffrey
+
 
 
