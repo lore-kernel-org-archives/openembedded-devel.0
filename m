@@ -1,27 +1,19 @@
-Received: from [81.169.146.190] (helo=mo-p07-ob.rzone.de)
+Received: from [213.207.90.162] (helo=daffy.sipo.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hns@computer.org>) id 1JlJa4-0000Hr-3W
-	for openembedded-devel@openembedded.org; Mon, 14 Apr 2008 09:58:24 +0200
-X-RZG-CLASS-ID: mo07
-X-RZG-AUTH: iojXUX2iu8lIbkehSGf3jGQYOvXUDskiVntSGy8EdALrPAzy
-Received: from [192.168.2.175] (p57AE4828.dip.t-dialin.net [87.174.72.40])
-	by post.webmailer.de (klopstock mo18) (RZmta 16.19)
-	with ESMTP id 500ea0k3E4jSda for <openembedded-devel@openembedded.org>; 
-	Mon, 14 Apr 2008 09:58:21 +0200 (MEST)
-	(envelope-from: <hns@computer.org>)
-Message-Id: <AAB4E9C9-5897-4F23-BD16-F06E5132F4CD@computer.org>
-From: "Dr. H. Nikolaus Schaller" <hns@computer.org>
+	(envelope-from <lists@t3i.nl>) id 1JlKdU-0006kX-2X
+	for openembedded-devel@openembedded.org; Mon, 14 Apr 2008 11:06:00 +0200
+Received: from nobody by daffy.sipo.nl with local (Exim 4.63)
+	(envelope-from <lists@t3i.nl>) id 1JlKdS-0003do-UZ
+	for openembedded-devel@openembedded.org; Mon, 14 Apr 2008 11:05:58 +0200
 To: openembedded-devel@openembedded.org
-In-Reply-To: <19c1b8a90804012326na52fee5hedef00c3a12390c4@mail.gmail.com>
-Mime-Version: 1.0 (Apple Message framework v919.2)
-Date: Mon, 14 Apr 2008 09:58:21 +0200
-References: <20080328011211.7c66e00b@zaurus>
-	<1206696274.5029.14.camel@dax.rpnet.com>
-	<1206699605.18251.39.camel@hammer.suse.cz>
-	<fsihmm$dr3$1@ger.gmane.org>
-	<19c1b8a90804012326na52fee5hedef00c3a12390c4@mail.gmail.com>
-X-Mailer: Apple Mail (2.919.2)
-Subject: still some unused Acer n30 devices available
+From: "RvP" <lists@t3i.nl>
+Mime-Version: 1.0
+X-Mailer: Mr.Mail 0.6alpha
+X-Originating-IP: 83.83.2.224
+X-MsgID: php48031e76ddcb5
+Message-Id: <E1JlKdS-0003do-UZ@daffy.sipo.nl>
+Date: Mon, 14 Apr 2008 11:05:58 +0200
+Subject: task configuration not evaluated?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -35,49 +27,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Apr 2008 07:58:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed; delsp=yes
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Apr 2008 09:06:00 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
 
-Hi all,
-I just would like to let you know that we still have a very limited =20
-number original and unused Acer n30 PDAs and want to clear our stock. =20=
+Hi,
 
-Since the n30 is defined well as a MACHINE in OE, you might be =20
-interested to get a different device to experiment with. It is quite =20
-similar in operation to the Openmoko device (except display resolution =20=
+I asked this question about configuring the image and task bb files last
+week, but don't have an answer yet.
 
-and GSM...).
+I modified the packages/tasks/task-slugos.bb file after building the SlugOS
+image and did a bb slugos-image'. A new image was built, but the changes I
+put in the task-slugos.bb were not taken into account. More specifically: I
+removed the via-velocity kernel module from the SLUGOS_STANDARD_RRECOMMENDS
+and added another (fs) module. However, after building the new image, the
+via-velocity module was still included in the rootfs, and the module I added
+was not. I tried to run several tasks (a.o. 'bb slugos-image -c configure')
+but that didn't work.
 
-Acer n30 support is described here:
-
-	http://handhelds.org/moin/moin.cgi/AcerN30
-
-And, if you want to order one:
-
-	http://www.handheld-linux.com/wiki.php?page=3DAcer%20n30
-
-Best regards,
-Nikolaus
-
-
---------------------------------------------------------------------
-Golden Delicious Computers GmbH&Co. KG
-Buchenstr. 3
-D-82041 Oberhaching
-+49-89-54290367
-http://www.goldelico.com
-
-AG M=FCnchen, HRA 89571
-VAT DE253626266
-Komplement=E4r:
-Golden Delicious Computers Verwaltungs GmbH
-Oberhaching, AG M=FCnchen, HRB 16602
-Gesch=E4ftsf=FChrer: Dr. Nikolaus Schaller
-
-Digital Tools for Independent People
---------------------------------------------------------------------
-
+What should I do to make changes in the task file effective (except for
+rebuiling everyting...)?
 
 
 
