@@ -1,34 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.146.190] (helo=mo-p07-ob.rzone.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jkjrh-000331-Pa
-	for openembedded-devel@openembedded.org; Sat, 12 Apr 2008 19:50:14 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1Jkjrb-0006SH-FH
-	for openembedded-devel@openembedded.org; Sat, 12 Apr 2008 17:50:07 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 12 Apr 2008 17:50:07 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 12 Apr 2008 17:50:07 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <hns@computer.org>) id 1JlJa4-0000Hr-3W
+	for openembedded-devel@openembedded.org; Mon, 14 Apr 2008 09:58:24 +0200
+X-RZG-CLASS-ID: mo07
+X-RZG-AUTH: iojXUX2iu8lIbkehSGf3jGQYOvXUDskiVntSGy8EdALrPAzy
+Received: from [192.168.2.175] (p57AE4828.dip.t-dialin.net [87.174.72.40])
+	by post.webmailer.de (klopstock mo18) (RZmta 16.19)
+	with ESMTP id 500ea0k3E4jSda for <openembedded-devel@openembedded.org>; 
+	Mon, 14 Apr 2008 09:58:21 +0200 (MEST)
+	(envelope-from: <hns@computer.org>)
+Message-Id: <AAB4E9C9-5897-4F23-BD16-F06E5132F4CD@computer.org>
+From: "Dr. H. Nikolaus Schaller" <hns@computer.org>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 12 Apr 2008 19:13:13 +0200
-Message-ID: <ftqqja$qdg$1@ger.gmane.org>
-References: <35a670560804100650w7de4cec0gae583d5ae73b8fad@mail.gmail.com>	<47FE2530.2@gmx.net>	<35a670560804101007m1d787b4ai97927bb42fcbfe5d@mail.gmail.com>
-	<4800DC3B.9080007@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-In-Reply-To: <4800DC3B.9080007@gmx.net>
-X-Enigmail-Version: 0.95.6
-Sender: news <news@ger.gmane.org>
-Subject: gcc 4.3.0 status, was: Re: Building ubuntu/gcc-4_2-branch to get GCJ for arm EABI
+In-Reply-To: <19c1b8a90804012326na52fee5hedef00c3a12390c4@mail.gmail.com>
+Mime-Version: 1.0 (Apple Message framework v919.2)
+Date: Mon, 14 Apr 2008 09:58:21 +0200
+References: <20080328011211.7c66e00b@zaurus>
+	<1206696274.5029.14.camel@dax.rpnet.com>
+	<1206699605.18251.39.camel@hammer.suse.cz>
+	<fsihmm$dr3$1@ger.gmane.org>
+	<19c1b8a90804012326na52fee5hedef00c3a12390c4@mail.gmail.com>
+X-Mailer: Apple Mail (2.919.2)
+Subject: still some unused Acer n30 devices available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -42,54 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Apr 2008 17:50:15 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 Apr 2008 07:58:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed; delsp=yes
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi all,
+I just would like to let you know that we still have a very limited =20
+number original and unused Acer n30 PDAs and want to clear our stock. =20=
 
-Robert Schuster schreef:
+Since the n30 is defined well as a MACHINE in OE, you might be =20
+interested to get a different device to experiment with. It is quite =20
+similar in operation to the Openmoko device (except display resolution =20=
 
-| Which perhaps it makes sense then to get everything working from GCJ
-| 4.3.0 onwards. AFAIK this release contains all the ARM GCJ stuff we need
-| and we can ask Andrew Haley if important GCJ patches have been
-| introduced after the 4.3.0 release.
-|
-| GCC 4.3.0 support in OE is still in its infancy and requires some
-| workarounds. Keep an eye on this list for news about that.
+and GSM...).
 
-I had a look at gcc 4.3.0 last week (I need it for armv7-a[1] support),
-and the situation has improved a bit:
+Acer n30 support is described here:
 
-* armv4t works again
-* all debian and fedora patches were imported into OE
+	http://handhelds.org/moin/moin.cgi/AcerN30
 
-Debian has a few libjava patches that I didn't apply (they use a mixture
-of p0 and p1 patches which I was too lazy to sort out, they are in
-packages/gcc/gcc-4.3.0/debian/), so you could have a look at those.
+And, if you want to order one:
 
-There are still a few problems, one of which is the includes-fixed
-problem, the other that gcc refuses to find stdlib.h even when passed
-the correct -I${STAGING_INCDIR}. Gcc also likes to ICE like crazy on
-*_Load.c in libmikmod. It's also lacking the uclibc patches.
+	http://www.handheld-linux.com/wiki.php?page=3DAcer%20n30
 
-regards,
+Best regards,
+Nikolaus
 
-Koen
 
-[1] Starting with armv7 gcc distinguishes between various modes (arm,
-thumb, etc), so you need to pass -march=armv7-a (the cortex-a8 tunefile
-does that for you) if you want regular ARM mode and set PACKAGE_ARCH to
-armv7a (without any hyphen, the cortex-a8 tunefile does that for you as
-well).
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+--------------------------------------------------------------------
+Golden Delicious Computers GmbH&Co. KG
+Buchenstr. 3
+D-82041 Oberhaching
++49-89-54290367
+http://www.goldelico.com
 
-iD8DBQFIAO2pMkyGM64RGpERAuafAJ9Vy39Qhs53IWBPww3PmBvyIPpsQQCfSTIC
-NYTbeqatKb/vJL0RiQ8fbTI=
-=rIdj
------END PGP SIGNATURE-----
+AG M=FCnchen, HRA 89571
+VAT DE253626266
+Komplement=E4r:
+Golden Delicious Computers Verwaltungs GmbH
+Oberhaching, AG M=FCnchen, HRB 16602
+Gesch=E4ftsf=FChrer: Dr. Nikolaus Schaller
+
+Digital Tools for Independent People
+--------------------------------------------------------------------
+
 
 
 
