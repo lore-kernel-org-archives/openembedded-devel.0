@@ -1,31 +1,26 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [64.233.182.187] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JlmNT-00063y-QX
+	(envelope-from <matthijs.van.de.water@gmail.com>) id 1JlmoF-0006rq-Dl
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Apr 2008 16:43:20 +0200
-X-ASG-Debug-ID: 1208270587-6b06001f0000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP
-	id 8102E41856; Tue, 15 Apr 2008 09:43:07 -0500 (CDT)
-Received: from [192.168.1.71] (LRS-CiscoBackup [192.168.1.1]) by
-	barracuda.pager.net with ESMTP id s2AOqTeBvcCprflw;
-	Tue, 15 Apr 2008 09:43:07 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
+	Tue, 15 Apr 2008 17:10:59 +0200
+Received: by nf-out-0910.google.com with SMTP id h3so877139nfh.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Apr 2008 08:10:53 -0700 (PDT)
+Received: by 10.78.200.20 with SMTP id x20mr5857952huf.55.1208272253281;
+	Tue, 15 Apr 2008 08:10:53 -0700 (PDT)
+Received: by 10.78.160.9 with HTTP; Tue, 15 Apr 2008 08:10:53 -0700 (PDT)
+Message-ID: <35a670560804150810k603d1986t4e02eefa7f411728@mail.gmail.com>
+Date: Tue, 15 Apr 2008 17:10:53 +0200
+From: "Matthijs van de Water" <matthijs.van.de.water@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] Building gdbserver only
-Date: Tue, 15 Apr 2008 09:43:13 -0500
-User-Agent: KMail/1.9.7
-References: <200804141504.29481.geoffrey@pager.net>
-	<4803E192.6040501@gmail.com>
-In-Reply-To: <4803E192.6040501@gmail.com>
+In-Reply-To: <35a670560804140932s53231dcj1adfa6bc21e0353e@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <200804150943.14448.geoffrey@pager.net>
-X-Barracuda-Connect: LRS-CiscoBackup[192.168.1.1]
-X-Barracuda-Start-Time: 1208270587
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: Re: Building gdbserver only
+References: <35a670560804100650w7de4cec0gae583d5ae73b8fad@mail.gmail.com>
+	<47FE2530.2@gmx.net>
+	<35a670560804101007m1d787b4ai97927bb42fcbfe5d@mail.gmail.com>
+	<4800DC3B.9080007@gmx.net>
+	<35a670560804140932s53231dcj1adfa6bc21e0353e@mail.gmail.com>
+Subject: Re: Building ubuntu/gcc-4_2-branch to get GCJ for arm EABI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -39,37 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Apr 2008 14:43:20 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 15 Apr 2008 15:10:59 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Monday 14 April 2008 05:58:26 pm Khem Raj wrote:
-> Geoffrey Wossum wrote:
-> > It does support building gdbserver for the AVR32, though.  Trouble is,
-> > there doesn't seem to be an "easy" way to build just gdbserver.  To build
-> > just gdbserver, you run the gdb-${PV}/gdb/gdbserver/configure instead of
-> > gdb-${PV}/configure.  oe_runconf() substitutes the value of ${S} in.  If
-> > you try to modify ${S} so that oe_runconf() executes the correct
-> > configure script, then ${S} is screwed  up for do_patch() and the patches
-> > won't apply.
-> >
-> > Any ideas on how to solve this dillemma?
->
-> How about building gdb completely but package only gdbserver.
+Status update: I managed to get everything (also gcc-cross-sdk) to
+compile (needed only 1 additional patch and 1GB of extra memory)
+I now still need to:
+1) Make sure that the relevant GCJ stuff gets packaged (in the current
+state it's at least missing the java include files and the
+libgcj-4.2.3.jar)
+2) Split out all GCJ related stuff to compile in a separate set of
+tasks so that it does not always get build, because this takes ages
+and loads of memory.
 
-The problem is that gdb does not build, only gdbserver.  I can't figure out a 
-way to get OE to build just gdbserver for me.  oe_doconf() always wants to 
-run ${S}/configure, but I need it to run ${S}/gdb/gdbserver/configure.  If I 
-change S, then the patching fails.  
+I'm not sure about the best way to get (2)... any suggestions are welcome.
 
-What would be cool is if oe_doconf() took an optional parameter telling it 
-where the configure script is, instead of always using ${S}/configure.
-
----
-Geoffrey
-
-
+Regards,
+Matthijs
 
 
