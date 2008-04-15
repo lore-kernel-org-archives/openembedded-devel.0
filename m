@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.170.0.94] (helo=rosebud.otenet.gr ident=OTEnet-mail-system)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jlghx-0004GG-Um
-	for openembedded-devel@openembedded.org; Tue, 15 Apr 2008 10:40:09 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1Jlghu-0007dT-Kq
-	for openembedded-devel@openembedded.org; Tue, 15 Apr 2008 08:40:02 +0000
-Received: from 62-237-10-64.dial.tdcsong.fi ([62.237.10.64])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 15 Apr 2008 08:40:02 +0000
-Received: from szaka by 62-237-10-64.dial.tdcsong.fi with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 15 Apr 2008 08:40:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Szabolcs Szakacsits <szaka@ntfs-3g.org>
-Date: Tue, 15 Apr 2008 08:36:42 +0000 (UTC)
-Message-ID: <loom.20080415T082706-746@post.gmane.org>
-References: <E1JlNXj-0008DF-Mt@daffy.sipo.nl> <48038AFE.2030904@dls.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 62.237.10.64 (Mozilla/4.0 (compatible; MSIE 5.5; Windows 98;
-	YComp 5.0.2.6))
-Sender: news <news@ger.gmane.org>
-Subject: Re: union fs
+	(envelope-from <skoroneos@digital-opsis.com>) id 1JlisT-0008Hx-9z
+	for openembedded-devel@openembedded.org; Tue, 15 Apr 2008 12:59:17 +0200
+Received: from dias (athedsl-4396616.home.otenet.gr [79.130.134.56])
+	by rosebud.otenet.gr (8.13.8/8.13.8/Debian-3) with ESMTP id
+	m3FAx28r003923 for <openembedded-devel@openembedded.org>;
+	Tue, 15 Apr 2008 13:59:02 +0300
+Message-Id: <200804151059.m3FAx28r003923@rosebud.otenet.gr>
+From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
+To: <openembedded-devel@openembedded.org>
+Date: Tue, 15 Apr 2008 13:58:27 +0300
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook, Build 11.0.5510
+X-MIMEOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
+Thread-Index: Acie1o+hEyM6kCo0RxCi0njeRJCungADdc6w
+In-Reply-To: <loom.20080415T082706-746@post.gmane.org>
+Subject: Package_arch for x86 architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -41,31 +29,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Apr 2008 08:40:10 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 15 Apr 2008 10:59:31 -0000
+Content-Type: text/plain;
+	charset="US-ASCII"
 Content-Transfer-Encoding: 7bit
 
-Mike (mwester <mwester <at> dls.net> writes:
-> 
-> Unslung is the only distro AFAIK that is still based on a 2.4 kernel; 
-> and unionfs is not very useful (the obvious use, which is to use ntfs-3g 
-> to replace the buggy Linksys proprietary ntfs driver is not write-safe, 
-> and thus isn't useful).
-> 
-> I would suspect that we can simply drop the modules build from unionfs. 
->   (But perhaps leave the recipe present in case someone else wants very 
-> much to try to get ntfs-3g working on unslung.)
+It has been discussed in the past on the irc also, but it seems we are
+reaching a "limit" with the existing package_arch namespace for the x86
+variant.
+The x86 architecture is generaly a mess as hrw has pointed in his blog.
+This creates a problem as we now have package arches like
+i486,i586,i686,geode, (just to name a few) with different gcc -march and
+-mtune settings and there also a  couple lile x86-32-nocona that use a
+different -march but still use i686 as the package_arch
+This could lead to troubles if you maintain a multimachine feed as you are
+going to mix packages build with different optimizations that migh not run
+well (or at all) 
 
-What do you mean ntfs-3g is not write safe? Nobody ever told us.
+There are also new embedded (and non embedded) boards coming that will
+require also a package_arch.
 
-It's certainly used and certified on several ARM and MIPS embedded devices 
-regularly.
+For example I am working on an intel D201gly2 machine definition. This is a
+P4 Celleron architecture cpu so I need to use -march=pentium4 mtune=celeron
+How should this package_arch be named ?  i686p4c ? p4c ?
+Should we have a "common" namespace ? How about geode based machines ?
 
-Regards,  Szaka
+Looking for input from interested parties before we move to rfc something
+like that
 
---
-NTFS-3G: http://ntfs-3g.org
+Stelios S. Koroneos
 
+Digital OPSiS - Embedded Intelligence
+http://www.digital-opsis.com
+ 
 
 
 
