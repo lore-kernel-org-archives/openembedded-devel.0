@@ -1,35 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.233.166.179] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jlt1Q-0006iy-Qe
-	for openembedded-devel@openembedded.org; Tue, 15 Apr 2008 23:49:00 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jlt1P-0007AH-Ef
-	for openembedded-devel@openembedded.org; Tue, 15 Apr 2008 21:48:59 +0000
-Received: from 62-237-10-71.dial.tdcsong.fi ([62.237.10.71])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 15 Apr 2008 21:48:59 +0000
-Received: from szaka by 62-237-10-71.dial.tdcsong.fi with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 15 Apr 2008 21:48:59 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Szabolcs Szakacsits <szaka@ntfs-3g.org>
-Date: Tue, 15 Apr 2008 21:48:52 +0000 (UTC)
-Message-ID: <loom.20080415T212907-239@post.gmane.org>
-References: <E1JlNXj-0008DF-Mt@daffy.sipo.nl> <48038AFE.2030904@dls.net>
-	<loom.20080415T082706-746@post.gmane.org>
-	<4804CA41.7050800@dls.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 62.237.10.71 (Mozilla/4.0 (compatible; MSIE 5.5; Windows 98;
-	YComp 5.0.2.6))
-Sender: news <news@ger.gmane.org>
-Subject: Re: union fs
+	(envelope-from <xjqian@gmail.com>) id 1JluaH-0001K2-S3
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Apr 2008 01:29:05 +0200
+Received: by py-out-1112.google.com with SMTP id y77so2133802pyg.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Apr 2008 16:29:00 -0700 (PDT)
+Received: by 10.35.92.18 with SMTP id u18mr14009218pyl.33.1208302140184;
+	Tue, 15 Apr 2008 16:29:00 -0700 (PDT)
+Received: from ?192.168.199.91? ( [128.252.220.109])
+	by mx.google.com with ESMTPS id x56sm22694424pyg.36.2008.04.15.16.28.58
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 15 Apr 2008 16:28:59 -0700 (PDT)
+Message-ID: <48053A37.6050605@gmail.com>
+Date: Tue, 15 Apr 2008 18:28:55 -0500
+From: Junqian Gordon Xu <xjqian@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <20080415034950.982CC189218@amethyst.openembedded.net>
+	<48048B4C.5090805@gmx.net>
+In-Reply-To: <48048B4C.5090805@gmx.net>
+Subject: Re: [oe-commits] org.oe.dev libtomcrypt: fix SRC_URI (close oebug 4159), bump to 1.17, fix staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -43,36 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Apr 2008 21:49:01 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 15 Apr 2008 23:29:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Mike (mwester <mwester <at> dls.net> writes:
+On 04/15/2008 06:02 AM, Robert Schuster wrote:
+> Hi.
 > 
-> According to the official docs, due to limitations of the fuse driver 
-> for 2.4 kernels, ntfs-3g on such old kernels is prone to data loss. 
-> This is a fuse problem, but effectively if you value your NTFS 
-> partition's consistency, it means that ntfs-3g on such old kernels 
-> should be read-only.
+> xjqian commit schrieb:
+>> libtomcrypt: fix SRC_URI (close oebug 4159), bump to 1.17, fix staging
 > 
-> On 2.6, ntfs-3g works wonderfully on all the devices in read and write 
-> modes, and is the driver I recommend for NTFS support on the SlugOS 
-> (ARM) distro.
+>> * no idea why the previous maintainer leave do_install empty, but assuming there is a legit reason.
+> I recently stumbled upon libtomcrypt in another project may provide an
+> answer to this: libtomcrypt can be customized in many ways and chances
+> are good that if you just compile and install the library with default
+> settings those are wrong for the package that wants to use it.
 > 
-> Sorry for not being more clear.
+> The library's source is usually directly put into the package that uses
+> it (see asterisk, OpenTNL) and I am wondering whether it really makes
+> sense to have it in OE as a package.
 
-I see, thank you for the explanation. I think we should have better documented 
-this ntfs-3g issue, sorry about it.
+Thanks. so the recipe is just a template for people who wants to use it. 
+   I will just leave it there until somebody with strong opinion 
+suggests otherwise.
 
-Everything is as safe with the 2.4 kernels as with the 2.6 ones if after umount 
-one makes sure that the ntfs-3g process is terminated before a device is 
-detached or the box is powered down. This can be ensured automatic e.g. by a 
-few shell commands. 
-
-Regards,  Szaka
-
---
-NTFS-3G: http://ntfs-3g.org
-
+Regards
+Gordon
 
 
