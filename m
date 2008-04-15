@@ -1,21 +1,26 @@
-Received: from [195.170.0.94] (helo=rosebud.otenet.gr ident=OTEnet-mail-system)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1JlisT-0008Hx-9z
-	for openembedded-devel@openembedded.org; Tue, 15 Apr 2008 12:59:17 +0200
-Received: from dias (athedsl-4396616.home.otenet.gr [79.130.134.56])
-	by rosebud.otenet.gr (8.13.8/8.13.8/Debian-3) with ESMTP id
-	m3FAx28r003923 for <openembedded-devel@openembedded.org>;
-	Tue, 15 Apr 2008 13:59:02 +0300
-Message-Id: <200804151059.m3FAx28r003923@rosebud.otenet.gr>
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Tue, 15 Apr 2008 13:58:27 +0300
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Jliw8-0008L6-5v
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Apr 2008 13:03:04 +0200
+Received: (qmail invoked by alias); 15 Apr 2008 11:02:48 -0000
+Received: from e179076104.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.179.76.104]
+	by mail.gmx.net (mp057) with SMTP; 15 Apr 2008 13:02:48 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+H8kwnF02H8oKC/QrAw14Vs9ILQ8ZYXKykMHWCLX
+	4Dmecf915ufU6V
+Message-ID: <48048B4C.5090805@gmx.net>
+Date: Tue, 15 Apr 2008 13:02:36 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.9 (X11/20080110)
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook, Build 11.0.5510
-X-MIMEOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
-Thread-Index: Acie1o+hEyM6kCo0RxCi0njeRJCungADdc6w
-In-Reply-To: <loom.20080415T082706-746@post.gmane.org>
-Subject: Package_arch for x86 architectures
+To: openembedded-devel@lists.openembedded.org
+References: <20080415034950.982CC189218@amethyst.openembedded.net>
+In-Reply-To: <20080415034950.982CC189218@amethyst.openembedded.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: Re: [oe-commits] org.oe.dev libtomcrypt: fix SRC_URI (close oebug 4159), bump to 1.17, fix staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -29,40 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Apr 2008 10:59:31 -0000
-Content-Type: text/plain;
-	charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Apr 2008 11:04:12 -0000
+X-Groupsio-MsgNum: 4961
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig5C2EED4893501D378697D7F7"
 
-It has been discussed in the past on the irc also, but it seems we are
-reaching a "limit" with the existing package_arch namespace for the x86
-variant.
-The x86 architecture is generaly a mess as hrw has pointed in his blog.
-This creates a problem as we now have package arches like
-i486,i586,i686,geode, (just to name a few) with different gcc -march and
--mtune settings and there also a  couple lile x86-32-nocona that use a
-different -march but still use i686 as the package_arch
-This could lead to troubles if you maintain a multimachine feed as you are
-going to mix packages build with different optimizations that migh not run
-well (or at all) 
+--------------enig5C2EED4893501D378697D7F7
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-There are also new embedded (and non embedded) boards coming that will
-require also a package_arch.
+Hi.
 
-For example I am working on an intel D201gly2 machine definition. This is a
-P4 Celleron architecture cpu so I need to use -march=pentium4 mtune=celeron
-How should this package_arch be named ?  i686p4c ? p4c ?
-Should we have a "common" namespace ? How about geode based machines ?
+xjqian commit schrieb:
+> libtomcrypt: fix SRC_URI (close oebug 4159), bump to 1.17, fix staging
 
-Looking for input from interested parties before we move to rfc something
-like that
+> * no idea why the previous maintainer leave do_install empty, but assum=
+ing there is a legit reason.
+I recently stumbled upon libtomcrypt in another project may provide an
+answer to this: libtomcrypt can be customized in many ways and chances
+are good that if you just compile and install the library with default
+settings those are wrong for the package that wants to use it.
 
-Stelios S. Koroneos
+The library's source is usually directly put into the package that uses
+it (see asterisk, OpenTNL) and I am wondering whether it really makes
+sense to have it in OE as a package.
 
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
- 
+Regards
+Robert
 
 
+--------------enig5C2EED4893501D378697D7F7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iD8DBQFIBItQG9cfwmwwEtoRCI3IAJ0Zy0n/VUKxLw22WFNbOrEwcDB2NACgnNfh
+KHf+/IpqDkzUfBgBIKxcirs=
+=v4sJ
+-----END PGP SIGNATURE-----
+
+--------------enig5C2EED4893501D378697D7F7--
