@@ -1,26 +1,23 @@
-Received: from [64.233.182.187] (helo=nf-out-0910.google.com)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <matthijs.van.de.water@gmail.com>) id 1JlmoF-0006rq-Dl
+	(envelope-from <mwester@dls.net>) id 1Jln9x-0003y1-7e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Apr 2008 17:10:59 +0200
-Received: by nf-out-0910.google.com with SMTP id h3so877139nfh.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Apr 2008 08:10:53 -0700 (PDT)
-Received: by 10.78.200.20 with SMTP id x20mr5857952huf.55.1208272253281;
-	Tue, 15 Apr 2008 08:10:53 -0700 (PDT)
-Received: by 10.78.160.9 with HTTP; Tue, 15 Apr 2008 08:10:53 -0700 (PDT)
-Message-ID: <35a670560804150810k603d1986t4e02eefa7f411728@mail.gmail.com>
-Date: Tue, 15 Apr 2008 17:10:53 +0200
-From: "Matthijs van de Water" <matthijs.van.de.water@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <35a670560804140932s53231dcj1adfa6bc21e0353e@mail.gmail.com>
+	Tue, 15 Apr 2008 17:33:25 +0200
+Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
+	by mx01.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1Jln9s-0002Hp-9W
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Apr 2008 10:33:20 -0500
+Message-ID: <4804CA41.7050800@dls.net>
+Date: Tue, 15 Apr 2008 10:31:13 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Thunderbird 2.0.0.12 (Windows/20080213)
 MIME-Version: 1.0
-References: <35a670560804100650w7de4cec0gae583d5ae73b8fad@mail.gmail.com>
-	<47FE2530.2@gmx.net>
-	<35a670560804101007m1d787b4ai97927bb42fcbfe5d@mail.gmail.com>
-	<4800DC3B.9080007@gmx.net>
-	<35a670560804140932s53231dcj1adfa6bc21e0353e@mail.gmail.com>
-Subject: Re: Building ubuntu/gcc-4_2-branch to get GCJ for arm EABI
+To: openembedded-devel@lists.openembedded.org
+References: <E1JlNXj-0008DF-Mt@daffy.sipo.nl> <48038AFE.2030904@dls.net>
+	<loom.20080415T082706-746@post.gmane.org>
+In-Reply-To: <loom.20080415T082706-746@post.gmane.org>
+Subject: Re: union fs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -34,24 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Apr 2008 15:10:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Apr 2008 15:33:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Status update: I managed to get everything (also gcc-cross-sdk) to
-compile (needed only 1 additional patch and 1GB of extra memory)
-I now still need to:
-1) Make sure that the relevant GCJ stuff gets packaged (in the current
-state it's at least missing the java include files and the
-libgcj-4.2.3.jar)
-2) Split out all GCJ related stuff to compile in a separate set of
-tasks so that it does not always get build, because this takes ages
-and loads of memory.
+Szabolcs Szakacsits wrote:
 
-I'm not sure about the best way to get (2)... any suggestions are welcome.
+> What do you mean ntfs-3g is not write safe? Nobody ever told us.
+> 
+> It's certainly used and certified on several ARM and MIPS embedded devices 
+> regularly.
+> 
+> Regards,  Szaka
 
-Regards,
-Matthijs
+According to the official docs, due to limitations of the fuse driver 
+for 2.4 kernels, ntfs-3g on such old kernels is prone to data loss. 
+This is a fuse problem, but effectively if you value your NTFS 
+partition's consistency, it means that ntfs-3g on such old kernels 
+should be read-only.
+
+On 2.6, ntfs-3g works wonderfully on all the devices in read and write 
+modes, and is the driver I recommend for NTFS support on the SlugOS 
+(ARM) distro.
+
+Sorry for not being more clear.
+
+Mike (mwester)
 
 
