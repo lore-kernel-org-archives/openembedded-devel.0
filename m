@@ -1,22 +1,35 @@
-Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jin@mediatomb.cc>) id 1Jm4A9-00077Q-7N
+	(envelope-from <john_lee@openmoko.com>) id 1JmYHP-00040k-Eq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Apr 2008 11:42:45 +0200
-Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
-	id 99772838FA; Wed, 16 Apr 2008 11:42:40 +0200 (CEST)
-Date: Wed, 16 Apr 2008 11:42:40 +0200
-From: Sergey 'Jin' Bostandzhyan <jin@mediatomb.cc>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080416094240.GA15886@deadlock.dhs.org>
-References: <20080415122902.GA13726@deadlock.dhs.org>
-	<4804D346.50809@gmail.com>
-	<20080415163930.GA14446@deadlock.dhs.org>
-	<19c1b8a90804150947y484520a2j726123713ff216fa@mail.gmail.com>
+	Thu, 17 Apr 2008 19:52:15 +0200
+Received: from [172.16.23.111] (helo=buddha.tw.openmoko.com)
+	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
+	id 1JmYHB-0003UU-DN for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Apr 2008 01:52:11 +0800
+Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
+	(envelope-from <john_lee@openmoko.com>) id 1JmYH0-0006rk-FL
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Apr 2008 01:51:50 +0800
+Date: Fri, 18 Apr 2008 01:51:50 +0800
+From: John Lee <john_lee@openmoko.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20080417175150.GJ31895@buddha.tw.openmoko.com>
+Mail-Followup-To: openembedded-devel
+	<openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-In-Reply-To: <19c1b8a90804150947y484520a2j726123713ff216fa@mail.gmail.com>
-User-Agent: Mutt/1.5.15 (2007-04-06)
-Subject: Re: How to properly enforce an ARM OABI build?
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+X-SA-Exim-Connect-IP: 172.16.23.111
+X-SA-Exim-Mail-From: john_lee@openmoko.com
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: RDEPENDS_${PN}-dev = ${PN} badness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,63 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Apr 2008 09:42:45 -0000
+X-List-Received-Date: Thu, 17 Apr 2008 17:52:15 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, Apr 15, 2008 at 09:47:35AM -0700, Khem Raj wrote:
-> you can also try to comment out
-> 
-> ARM_ABI ?= "${@['','oabi'][bb.data.getVar('MACHINE',d) in
-> ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
-> 
-> and check
+Hi,
 
-tried this without any luck, but then it struck me - someone was rewriting my
-TARGET_OS! 
+Take gtk-doc-dev for example:
 
-this someone is angstrom-uclibc.inc:
+The gtk-doc package is empty, so it will not be created.  However, if
+you install gtk-doc-dev, it RDEPENDS on gtk-doc, which cannot be
+found.  The install will fail.
 
-TARGET_OS_UC = "linux${@['-uclibc','-uclibcgnueabi'][bb.data.getVar('TARGET_ARCH',d,1) in ['arm', 'armeb'] and bb.data.getVar('MACHINE',d) not in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
-TARGET_OS = "${@['${TARGET_OS_UC}', 'uclinux-uclibc'][bb.data.getVar('TARGET_ARCH',d)  in ['bfin']]}"
+I think we should use
 
-So I tried to set TARGET_OS to "linux-uclibc" in my local.conf and I 
-commented out the lines in  angstrom-uclibc.inc - and it worked.
+RRECOMMENDS_${PN}-dev = "${PN} (= ${DEBPV})"
 
-The question now is - how could this be solved cleanly in Angstrom?
+instead.
 
-Would this be an option:
-TARGET_OS ?= "${@['${TARGET_OS_UC}', 'uclinux-uclibc'][bb.data.getVar('TARGET_ARCH',d)  in ['bfin']]}"
+We (Julian Chu and me) found this when digging the cause of
+meta-toolchain-openmoko build failure.  task-openmoko-toolchain-target
+contains quite a few -dev packages in it, so the opkg-cl install will
+fail.  The log looks something like this:
 
-Kind regards,
-Jin
+ERROR: Cannot satisfy the following dependencies for
+         task-openmoko-toolchain-target: gtk-doc (= 1.0-r1)
+         util-macros (= 1:1.1.5-r1) renderproto (= 1:0.9.3-r0) xproto
+         (= 1:7.0.10-r1) bigreqsproto (= 1:1.0.2-r1) xextproto (=
+         1:7.0.2-r1) xtrans (= 1:1.0.4-r0) xcmiscproto (= 1:1.1.2-r1)
+         xf86bigfontproto (= 1:1.1.2-r1) kbproto (= 1:1.0.3-r1)
+         inputproto (= 1:1.4.2.1-r0) fixesproto (= 1:4.0-r1)
+         xineramaproto (= 1:1.1.2-r1) randrproto (= 1:1.2.1-r1)
+         compositeproto (= 1:0.4-r0) damageproto (= 1:1.1.0-r1)
 
-> 
-> On Tue, Apr 15, 2008 at 9:39 AM, Sergey 'Jin' Bostandzhyan
-> <jin@mediatomb.cc> wrote:
-> > On Tue, Apr 15, 2008 at 09:09:42AM -0700, Khem Raj wrote:
-> >  > > MACHINE="armv4t"
-> >  > > DISTRO="angstrom-2007.1"
-> >  > > TARGET_OS :="linux"
-> >  > > ARM_ABI := "oabi"
-> >  >
-> >  > may be use '=' instead of ':='
-> >
-> >  I did try that before trying := but there was no difference...
-> >
-> >
-> >
-> >
-> >
-> >  _______________________________________________
-> >  Openembedded-devel mailing list
-> >  Openembedded-devel@lists.openembedded.org
-> >  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Similiar symptoms can be found in the packages above.
+
+Regards,
+John
 
 
