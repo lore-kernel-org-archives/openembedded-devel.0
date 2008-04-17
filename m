@@ -1,32 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.46.152] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JmaHs-0007sK-Jh
-	for openembedded-devel@openembedded.org; Thu, 17 Apr 2008 22:00:53 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JmaHq-0001Tx-1q
-	for openembedded-devel@openembedded.org; Thu, 17 Apr 2008 20:00:50 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 17 Apr 2008 20:00:50 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 17 Apr 2008 20:00:50 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 17 Apr 2008 22:00:43 +0200
-Message-ID: <fu8a9b$ces$1@ger.gmane.org>
-References: <20080417175150.GJ31895@buddha.tw.openmoko.com>
+	(envelope-from <raj.khem@gmail.com>) id 1JmdAH-0000C0-EV
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Apr 2008 01:05:13 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so188477ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Apr 2008 16:05:09 -0700 (PDT)
+Received: by 10.151.157.8 with SMTP id j8mr2498795ybo.86.1208473509475;
+	Thu, 17 Apr 2008 16:05:09 -0700 (PDT)
+Received: from ?192.168.1.71? ( [71.146.14.115])
+	by mx.google.com with ESMTPS id c78sm10202160hsa.19.2008.04.17.16.05.06
+	(version=SSLv3 cipher=RC4-MD5); Thu, 17 Apr 2008 16:05:06 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 17 Apr 2008 16:05:04 -0700
+Message-Id: <1208473504.21779.3.camel@isis>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008040803)
-In-Reply-To: <20080417175150.GJ31895@buddha.tw.openmoko.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: RDEPENDS_${PN}-dev = ${PN} badness
+X-Mailer: Evolution 2.22.1 
+Subject: patch base-files /etc/profile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -40,53 +31,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Apr 2008 20:00:55 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Apr 2008 23:05:13 -0000
+X-Groupsio-MsgNum: 4976
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-tJiSLJS/vdIBX/xCrJVX"
 
-John Lee wrote:
-> Hi,
->
-> Take gtk-doc-dev for example:
->
-> The gtk-doc package is empty, so it will not be created.  However, if
-> you install gtk-doc-dev, it RDEPENDS on gtk-doc, which cannot be
-> found.  The install will fail.
->
-> I think we should use
->
-> RRECOMMENDS_${PN}-dev = "${PN} (= ${DEBPV})"
->
-> instead.
+--=-tJiSLJS/vdIBX/xCrJVX
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-ALLOW_EMPTY_${PN} = "1" would be a better idea, and in line without 
-other depchain workarounds.
+Hi=20
 
-regards,
+I was seeing that on Angstrom.2008 I was not getting TSLIB_TSDEVICE
+environment variable set though it should be as it was
+invoking /etc/profile.d/tslib.sh in /etc/profile. However the 'ls'
+command in there was not really working well.
 
-Koen
+This patch fixes the problem. Now I see TALIB_TSDEVICE variable set
+everytime.
 
->
-> We (Julian Chu and me) found this when digging the cause of
-> meta-toolchain-openmoko build failure.  task-openmoko-toolchain-target
-> contains quite a few -dev packages in it, so the opkg-cl install will
-> fail.  The log looks something like this:
->
-> ERROR: Cannot satisfy the following dependencies for
->           task-openmoko-toolchain-target: gtk-doc (= 1.0-r1)
->           util-macros (= 1:1.1.5-r1) renderproto (= 1:0.9.3-r0) xproto
->           (= 1:7.0.10-r1) bigreqsproto (= 1:1.0.2-r1) xextproto (=
->           1:7.0.2-r1) xtrans (= 1:1.0.4-r0) xcmiscproto (= 1:1.1.2-r1)
->           xf86bigfontproto (= 1:1.1.2-r1) kbproto (= 1:1.0.3-r1)
->           inputproto (= 1:1.4.2.1-r0) fixesproto (= 1:4.0-r1)
->           xineramaproto (= 1:1.1.2-r1) randrproto (= 1:1.2.1-r1)
->           compositeproto (= 1:0.4-r0) damageproto (= 1:1.1.0-r1)
->
-> Similiar symptoms can be found in the packages above.
->
-> Regards,
-> John
+OK for .dev ?
+
+Thanks
+
+-Khem
+
+#
+# old_revision [cc8daafda388ec1e484dc2e68e1599944893bc76]
+#
+# patch "packages/base-files/base-files/profile"
+#  from [c1afd65b969f708eab144ec909358f3c8f22a411]
+#    to [e24b90b96edb24d3af735f32c72528e6a01d617d]
+#=20
+# patch "packages/base-files/base-files_3.0.14.bb"
+#  from [a35cae8a2aa502d9f36ce35fcd2dddd9a86ce2c4]
+#    to [3b4da947c2b76133142ee113622e6986e653f14a]
+#
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+--- packages/base-files/base-files/profile
+c1afd65b969f708eab144ec909358f3c8f22a411
++++ packages/base-files/base-files/profile
+e24b90b96edb24d3af735f32c72528e6a01d617d
+@@ -20,8 +20,10 @@ if [ -d /etc/profile.d ]; then
+ fi
+=20
+ if [ -d /etc/profile.d ]; then
+-  for i in `ls /etc/profile.d/`; do
+-    . /etc/profile.d/$i
++  for i in /etc/profile.d/*.sh; do
++    if [ -r $i ]; then
++      . $i
++    fi
+   done
+   unset i
+ fi
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+--- packages/base-files/base-files_3.0.14.bb
+a35cae8a2aa502d9f36ce35fcd2dddd9a86ce2c4
++++ packages/base-files/base-files_3.0.14.bb
+3b4da947c2b76133142ee113622e6986e653f14a
+@@ -1,7 +1,7 @@ PRIORITY =3D "required"
+ DESCRIPTION =3D "Miscellaneous files for the base system."
+ SECTION =3D "base"
+ PRIORITY =3D "required"
+-PR =3D "r77"
++PR =3D "r78"
+ LICENSE =3D "GPL"
+=20
+ SRC_URI =3D " \
 
 
+--=-tJiSLJS/vdIBX/xCrJVX
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
 
+iD8DBQBIB9egHnJKy6V6em4RAsYdAJ98iKO5kBYEaOJw4jit7FGwq+MV9gCfX9W2
+SJYwN7DeRcYTnKti2NYpjVA=
+=z1Ds
+-----END PGP SIGNATURE-----
+
+--=-tJiSLJS/vdIBX/xCrJVX--
