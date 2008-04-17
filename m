@@ -1,23 +1,33 @@
-Received: from [74.125.46.152] (helo=yw-out-1718.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1JmdAH-0000C0-EV
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Apr 2008 01:05:13 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so188477ywk.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Apr 2008 16:05:09 -0700 (PDT)
-Received: by 10.151.157.8 with SMTP id j8mr2498795ybo.86.1208473509475;
-	Thu, 17 Apr 2008 16:05:09 -0700 (PDT)
-Received: from ?192.168.1.71? ( [71.146.14.115])
-	by mx.google.com with ESMTPS id c78sm10202160hsa.19.2008.04.17.16.05.06
-	(version=SSLv3 cipher=RC4-MD5); Thu, 17 Apr 2008 16:05:06 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Apr 2008 16:05:04 -0700
-Message-Id: <1208473504.21779.3.camel@isis>
+	(envelope-from <rpurdie@rpsys.net>) id 1JmdTH-0005tH-1t
+	for openembedded-devel@openembedded.org; Fri, 18 Apr 2008 01:24:51 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m3HNOoU8020444
+	for <openembedded-devel@openembedded.org>;
+	Fri, 18 Apr 2008 00:24:50 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20293-03 for <openembedded-devel@openembedded.org>;
+	Fri, 18 Apr 2008 00:24:45 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m3HNOiqW020438
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Fri, 18 Apr 2008 00:24:44 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <fu8a9b$ces$1@ger.gmane.org>
+References: <20080417175150.GJ31895@buddha.tw.openmoko.com>
+	<fu8a9b$ces$1@ger.gmane.org>
+Date: Fri, 18 Apr 2008 00:24:46 +0100
+Message-Id: <1208474686.4993.182.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1 
-Subject: patch base-files /etc/profile
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: RDEPENDS_${PN}-dev = ${PN} badness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -31,91 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Apr 2008 23:05:13 -0000
-X-Groupsio-MsgNum: 4976
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="=-tJiSLJS/vdIBX/xCrJVX"
-
---=-tJiSLJS/vdIBX/xCrJVX
+X-List-Received-Date: Thu, 17 Apr 2008 23:24:51 -0000
 Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi=20
+On Thu, 2008-04-17 at 22:00 +0200, Koen Kooi wrote:
+> John Lee wrote:
+> > Take gtk-doc-dev for example:
+> >
+> > The gtk-doc package is empty, so it will not be created.  However, if
+> > you install gtk-doc-dev, it RDEPENDS on gtk-doc, which cannot be
+> > found.  The install will fail.
+> >
+> > I think we should use
+> >
+> > RRECOMMENDS_${PN}-dev = "${PN} (= ${DEBPV})"
+> >
+> > instead.
+> 
+> ALLOW_EMPTY_${PN} = "1" would be a better idea, and in line without 
+> other depchain workarounds.
 
-I was seeing that on Angstrom.2008 I was not getting TSLIB_TSDEVICE
-environment variable set though it should be as it was
-invoking /etc/profile.d/tslib.sh in /etc/profile. However the 'ls'
-command in there was not really working well.
+If ${PN} is empty and its existence makes no sense I think its
+acceptable to do:
 
-This patch fixes the problem. Now I see TALIB_TSDEVICE variable set
-everytime.
+RDEPENDS_${PN}-dev = ""
+RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${DEBPV})"
 
-OK for .dev ?
+in the recipe itself. linux-libc-headers.inc does this for example since
+${PN} makes no sense there.
 
-Thanks
+There really aren't that many packages like this although there may be
+some that have been dealt with in Poky but not in OE.
 
--Khem
+Cheers,
 
-#
-# old_revision [cc8daafda388ec1e484dc2e68e1599944893bc76]
-#
-# patch "packages/base-files/base-files/profile"
-#  from [c1afd65b969f708eab144ec909358f3c8f22a411]
-#    to [e24b90b96edb24d3af735f32c72528e6a01d617d]
-#=20
-# patch "packages/base-files/base-files_3.0.14.bb"
-#  from [a35cae8a2aa502d9f36ce35fcd2dddd9a86ce2c4]
-#    to [3b4da947c2b76133142ee113622e6986e653f14a]
-#
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
---- packages/base-files/base-files/profile
-c1afd65b969f708eab144ec909358f3c8f22a411
-+++ packages/base-files/base-files/profile
-e24b90b96edb24d3af735f32c72528e6a01d617d
-@@ -20,8 +20,10 @@ if [ -d /etc/profile.d ]; then
- fi
-=20
- if [ -d /etc/profile.d ]; then
--  for i in `ls /etc/profile.d/`; do
--    . /etc/profile.d/$i
-+  for i in /etc/profile.d/*.sh; do
-+    if [ -r $i ]; then
-+      . $i
-+    fi
-   done
-   unset i
- fi
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
---- packages/base-files/base-files_3.0.14.bb
-a35cae8a2aa502d9f36ce35fcd2dddd9a86ce2c4
-+++ packages/base-files/base-files_3.0.14.bb
-3b4da947c2b76133142ee113622e6986e653f14a
-@@ -1,7 +1,7 @@ PRIORITY =3D "required"
- DESCRIPTION =3D "Miscellaneous files for the base system."
- SECTION =3D "base"
- PRIORITY =3D "required"
--PR =3D "r77"
-+PR =3D "r78"
- LICENSE =3D "GPL"
-=20
- SRC_URI =3D " \
+Richard
 
 
---=-tJiSLJS/vdIBX/xCrJVX
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-
-iD8DBQBIB9egHnJKy6V6em4RAsYdAJ98iKO5kBYEaOJw4jit7FGwq+MV9gCfX9W2
-SJYwN7DeRcYTnKti2NYpjVA=
-=z1Ds
------END PGP SIGNATURE-----
-
---=-tJiSLJS/vdIBX/xCrJVX--
