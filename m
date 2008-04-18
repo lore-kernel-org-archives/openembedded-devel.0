@@ -1,22 +1,26 @@
-Received: from [209.85.146.181] (helo=wa-out-1112.google.com)
+Received: from [213.36.80.91] (helo=mail.libertysurf.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1JmkWz-00075O-Ic
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JmoyB-0003xv-HY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Apr 2008 08:57:10 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so644105waf.22
+	Fri, 18 Apr 2008 13:41:31 +0200
+Received: from blini.bolloretelecom.eu (62.210.194.121) by
+	mail.libertysurf.net (7.3.118.8)
+	id 47F1FEBB00617F0D for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Apr 2008 14:36:28 +0200
+Received: from [192.168.95.63] (unknown [192.168.95.63])
+	by blini.bolloretelecom.eu (Postfix) with ESMTP id AF29823E31
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Apr 2008 23:57:07 -0700 (PDT)
-Received: by 10.114.53.1 with SMTP id b1mr2212124waa.165.1208501827125;
-	Thu, 17 Apr 2008 23:57:07 -0700 (PDT)
-Received: by 10.114.234.12 with HTTP; Thu, 17 Apr 2008 23:57:07 -0700 (PDT)
-Message-ID: <19c1b8a90804172357r753c3683rbc015abc9268212b@mail.gmail.com>
-Date: Thu, 17 Apr 2008 23:57:07 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48081A44.4000008@gmail.com>
+	Fri, 18 Apr 2008 13:41:26 +0200 (CEST)
+Message-ID: <480888E7.7050307@bolloretelecom.eu>
+Date: Fri, 18 Apr 2008 13:41:27 +0200
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.0.13pre) Gecko/20080208 Thunderbird/1.5.0.14pre
+	Mnenhy/0.7.5.0
 MIME-Version: 1.0
-References: <1208473504.21779.3.camel@isis> <48081A44.4000008@gmail.com>
-Subject: Re: patch base-files /etc/profile
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.94.2.0
+Subject: drop dtc/dtc-native 20070216?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -30,64 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Apr 2008 06:57:10 -0000
+X-List-Received-Date: Fri, 18 Apr 2008 11:41:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Content-Transfer-Encoding: Quoted-Printable
 
-On Thu, Apr 17, 2008 at 8:49 PM, Junqian Gordon Xu <xjqian@gmail.com> wrote:
-> On 04/17/2008 06:05 PM, Khem Raj wrote:
->  > Hi
->  >
->  > I was seeing that on Angstrom.2008 I was not getting TSLIB_TSDEVICE
->  > environment variable set though it should be as it was
->  > invoking /etc/profile.d/tslib.sh in /etc/profile. However the 'ls'
->  > command in there was not really working well.
->  >
->  > This patch fixes the problem. Now I see TALIB_TSDEVICE variable set
->  > everytime.
->  >
->  > OK for .dev ?
->  >
->  > Thanks
->  >
->  > -Khem
->
-> > ============================================================
->  > --- packages/base-files/base-files/profile
->  > c1afd65b969f708eab144ec909358f3c8f22a411
->  > +++ packages/base-files/base-files/profile
->  > e24b90b96edb24d3af735f32c72528e6a01d617d
->  > @@ -20,8 +20,10 @@ if [ -d /etc/profile.d ]; then
->  >  fi
->  >
->  >  if [ -d /etc/profile.d ]; then
->  > -  for i in `ls /etc/profile.d/`; do
->  > -    . /etc/profile.d/$i
->  > +  for i in /etc/profile.d/*.sh; do
->  > +    if [ -r $i ]; then
->  > +      . $i
->  > +    fi
->  >    done
->  >    unset i
->  >  fi
->
->  looks good to me, but why not keep the absolute path:
->
->  . /etc/profile.d/$i
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Its already in $i
+I have recently added dtc and dtc-native 1.1.0, is there any
+compelling reason to keep the dtc and dtc-native 20070216 snapshots?
 
->
->  Regards
->  Gordon
->
->
->
->  _______________________________________________
->  Openembedded-devel mailing list
->  Openembedded-devel@lists.openembedded.org
->  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Cheers,
+
+- --
+Jeremy LAINE
+Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFICIjnCL1n3lVB9EYRAo3fAJwNwAaIpWDqKyJfQxAOQ/CXOTKDeACdGeba
+cyzjgN/6RNR3hGo7lcvB1/Q=3D
+=3DNf0p
+-----END PGP SIGNATURE-----
+
 
 
