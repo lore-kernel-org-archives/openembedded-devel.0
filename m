@@ -1,24 +1,25 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1JnAty-00089B-GQ
+	(envelope-from <raj.khem@gmail.com>) id 1JnLz4-0005wB-Tl
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Apr 2008 13:06:38 +0200
-Received: from andromeda (e180169073.adsl.alicedsl.de [85.180.169.73])
-	by drlauer-research.com (Postfix) with ESMTP id C990D584390
+	Sun, 20 Apr 2008 00:56:39 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so1834224waf.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2008 13:17:08 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Sat, 19 Apr 2008 15:56:36 -0700 (PDT)
+Received: by 10.114.110.12 with SMTP id i12mr4250653wac.73.1208645796409;
+	Sat, 19 Apr 2008 15:56:36 -0700 (PDT)
+Received: by 10.114.234.12 with HTTP; Sat, 19 Apr 2008 15:56:36 -0700 (PDT)
+Message-ID: <19c1b8a90804191556k41e0413dhaca3ebcdbefdeedb@mail.gmail.com>
+Date: Sat, 19 Apr 2008 15:56:36 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Apr 2008 12:07:39 +0100
-User-Agent: KMail/1.9.9
-References: <20080417175150.GJ31895@buddha.tw.openmoko.com>
-	<fu8a9b$ces$1@ger.gmane.org>
-	<1208474686.4993.182.camel@dax.rpnet.com>
-In-Reply-To: <1208474686.4993.182.camel@dax.rpnet.com>
+In-Reply-To: <20080416094240.GA15886@deadlock.dhs.org>
 MIME-Version: 1.0
-Message-Id: <200804191307.39153.mickey@vanille-media.de>
-Subject: Re: RDEPENDS_${PN}-dev = ${PN} badness
+References: <20080415122902.GA13726@deadlock.dhs.org>
+	<4804D346.50809@gmail.com> <20080415163930.GA14446@deadlock.dhs.org>
+	<19c1b8a90804150947y484520a2j726123713ff216fa@mail.gmail.com>
+	<20080416094240.GA15886@deadlock.dhs.org>
+Subject: Re: How to properly enforce an ARM OABI build?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.9
 Precedence: list
@@ -32,46 +33,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Apr 2008 11:06:38 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 19 Apr 2008 22:56:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Friday 18 April 2008 01:24:46 Richard Purdie wrote:
-> On Thu, 2008-04-17 at 22:00 +0200, Koen Kooi wrote:
-> > John Lee wrote:
-> > > Take gtk-doc-dev for example:
-> > >
-> > > The gtk-doc package is empty, so it will not be created.  However, if
-> > > you install gtk-doc-dev, it RDEPENDS on gtk-doc, which cannot be
-> > > found.  The install will fail.
-> > >
-> > > I think we should use
-> > >
-> > > RRECOMMENDS_${PN}-dev = "${PN} (= ${DEBPV})"
-> > >
-> > > instead.
-> >
-> > ALLOW_EMPTY_${PN} = "1" would be a better idea, and in line without
-> > other depchain workarounds.
+>  The question now is - how could this be solved cleanly in Angstrom?
 >
-> If ${PN} is empty and its existence makes no sense I think its
-> acceptable to do:
+>  Would this be an option:
+>  TARGET_OS ?= "${@['${TARGET_OS_UC}', 'uclinux-uclibc'][bb.data.getVar('TARGET_ARCH',d)  in ['bfin']]}"
 >
-> RDEPENDS_${PN}-dev = ""
-> RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${DEBPV})"
->
-> in the recipe itself. linux-libc-headers.inc does this for example since
-> ${PN} makes no sense there.
->
-> There really aren't that many packages like this although there may be
-> some that have been dealt with in Poky but not in OE.
 
-How much noise would a poky/OE diff contain? I guess more of us should try to 
-merge things from Poky.
-
-:M:
-
+looks ok.
 
 
