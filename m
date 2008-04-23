@@ -1,21 +1,29 @@
-Received: from [213.207.90.162] (helo=daffy.sipo.nl)
+Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lists@t3i.nl>) id 1JolyS-0003BE-7b
+	(envelope-from <raj.khem@gmail.com>) id 1JomJm-0003iS-OK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Apr 2008 22:53:52 +0200
-Received: from nobody by daffy.sipo.nl with local (Exim 4.63)
-	(envelope-from <lists@t3i.nl>) id 1JolyI-0002vH-TM
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Apr 2008 22:53:42 +0200
+	Wed, 23 Apr 2008 23:15:54 +0200
+Received: by wa-out-1112.google.com with SMTP id l24so4705294waf.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Apr 2008 14:15:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=RBwuAVDGhJajQEbwE2BdEFfLyJY85uOM+1gimA4hffM=;
+	b=mITlpuFfZHNTdYpQLt67k7mnrJQCRTQBfbmUky3Gz6+LiJZdcXyQHxuOgNYnFnFev2TN0ViBYQvrm2vUT/W66MtmlUZLLIxG1gO8mxkK/WQ+Bx3/fEsoYJU1AbWxDfItpZnPRlZTE5QOMoXkYQkvCZMuCru3EhRtB0n2Xnng5e4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=cx23S7ARRM+nSMqlvNHteR18gR5Cq+NptnTvyZtOX54LO4Mfq1FXz2Bqi7kzYJI7YfSUelU4oz54io/EEuJLKcp0QpvQclyIzme1GRXJLsBI2aqUhNyM7TWmCgFAEjskrYCLaya6gONvYrpLZwKtiGyGp2OzPZsIdixC8xnbcsE=
+Received: by 10.114.179.1 with SMTP id b1mr1035456waf.42.1208985341579;
+	Wed, 23 Apr 2008 14:15:41 -0700 (PDT)
+Received: by 10.114.234.12 with HTTP; Wed, 23 Apr 2008 14:15:41 -0700 (PDT)
+Message-ID: <19c1b8a90804231415q510604ffkb071438a716bdff4@mail.gmail.com>
+Date: Wed, 23 Apr 2008 14:15:41 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: "RvP" <lists@t3i.nl>
-Mime-Version: 1.0
-X-Mailer: Mr.Mail 0.6alpha
-X-Originating-IP: 83.83.2.224
-X-MsgID: php480fa1d6c4360
-Message-Id: <E1JolyI-0002vH-TM@daffy.sipo.nl>
-Date: Wed, 23 Apr 2008 22:53:42 +0200
-Subject: gcc & libssp disabled by default?
+In-Reply-To: <E1JolyI-0002vH-TM@daffy.sipo.nl>
+MIME-Version: 1.0
+References: <E1JolyI-0002vH-TM@daffy.sipo.nl>
+Subject: Re: gcc & libssp disabled by default?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -29,26 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2008 20:53:52 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 23 Apr 2008 21:15:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+You need to edit the recipe.
 
-gcc versions 4.0.0 and later are currently being built without libssp
-support: EXTRA_OECONF_BASE contains "--disable-libssp" in those recipes.
+Khem
 
-Why is that? E.g. mpd (music player daemon) needs libssp. As a work-around I
-manually changed the .bb files for gcc 4.1.2 in paclages/gcc/ and removed the
---disable-libssp switch. Gcc now builds with libssp and all seems to run
-without problems (on a NSLU2).
-
-BTW. did I really need to edit the recipes in packages/gcc/ or could I have
-set a variable elsewhere to enable libssp?
-
-Cheers,
-
-Richard.
-
+On Wed, Apr 23, 2008 at 1:53 PM, RvP <lists@t3i.nl> wrote:
+> Hi,
+>
+>  gcc versions 4.0.0 and later are currently being built without libssp
+>  support: EXTRA_OECONF_BASE contains "--disable-libssp" in those recipes.
+>
+>  Why is that? E.g. mpd (music player daemon) needs libssp. As a work-around I
+>  manually changed the .bb files for gcc 4.1.2 in paclages/gcc/ and removed the
+>  --disable-libssp switch. Gcc now builds with libssp and all seems to run
+>  without problems (on a NSLU2).
+>
+>  BTW. did I really need to edit the recipes in packages/gcc/ or could I have
+>  set a variable elsewhere to enable libssp?
+>
+>  Cheers,
+>
+>  Richard.
+>
+>
+>  _______________________________________________
+>  Openembedded-devel mailing list
+>  Openembedded-devel@lists.openembedded.org
+>  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
