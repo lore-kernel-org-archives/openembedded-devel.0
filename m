@@ -1,36 +1,29 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1Joe9m-0001bV-4l
+	(envelope-from <geoffrey@pager.net>) id 1JofjV-0001Hz-FP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Apr 2008 14:33:02 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.63)
-	(envelope-from <broonie@sirena.org.uk>) id 1Joe9f-0001Er-Ag
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Apr 2008 13:32:55 +0100
-Date: Wed, 23 Apr 2008 13:32:55 +0100
-From: Mark Brown <broonie@sirena.org.uk>
+	Wed, 23 Apr 2008 16:14:01 +0200
+X-ASG-Debug-ID: 1208960026-794100160000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP
+	id D5E9149384; Wed, 23 Apr 2008 09:13:48 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id pdkHwBo4sQjp5zA2; Wed, 23 Apr 2008 09:13:48 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080423123254.GC28337@sirena.org.uk>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <35a670560804100650w7de4cec0gae583d5ae73b8fad@mail.gmail.com>
-	<47FE2530.2@gmx.net>
-	<35a670560804101007m1d787b4ai97927bb42fcbfe5d@mail.gmail.com>
-	<4800DC3B.9080007@gmx.net>
-	<35a670560804140932s53231dcj1adfa6bc21e0353e@mail.gmail.com>
-	<35a670560804150810k603d1986t4e02eefa7f411728@mail.gmail.com>
-	<480596E2.7030906@gmx.net>
-	<35a670560804210337x73d63394t3e6b4feb0ee5118e@mail.gmail.com>
-	<480EE63D.8070208@gmx.net>
-	<35a670560804230444j7706a535u818d812d72f77649@mail.gmail.com>
+X-ASG-Orig-Subj: Re: [oe] Getting started with AVR32
+Date: Wed, 23 Apr 2008 09:13:50 -0500
+User-Agent: KMail/1.9.7
+References: <20080423110716.f4oj3azjkssc0co8@webmail.buarnada.ch>
+In-Reply-To: <20080423110716.f4oj3azjkssc0co8@webmail.buarnada.ch>
 MIME-Version: 1.0
-In-Reply-To: <35a670560804230444j7706a535u818d812d72f77649@mail.gmail.com>
-X-Cookie: The best things in life are for a fee.
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
-X-SA-Exim-Scanned: No (on cassiel.sirena.org.uk);
-	SAEximRunCond expanded to false
-Subject: Re: Building ubuntu/gcc-4_2-branch to get GCJ for arm EABI
+Message-Id: <200804230913.51687.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1208960028
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: Re: Getting started with AVR32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -44,28 +37,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2008 12:33:02 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 23 Apr 2008 14:14:02 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Apr 23, 2008 at 01:44:26PM +0200, Matthijs van de Water wrote:
-> On Wed, Apr 23, 2008 at 9:33 AM, Robert Schuster <theBohemian@gmx.net> wrote:
+On Wednesday 23 April 2008 04:07:16 am list_2008@buarnada.ch wrote:
 
-> >  Btw: Your statement that 4.3 is not widely in use is not quite right:
-> >  Fedora 9 and Debian Lenny are build with it or are in the process of
-> >  transition.
+> I'd like to build OE for Atmel's ATNGW100 board.
+>
+> Can you give me some hints where to start?
+> Which distro, branch, etc. should I use?
 
-> Ok. I'm not sure how widely deployed the Fedora and Debian ARM
-> distro's are, but that sounds at least positive.
-> I'm going to give GCC 4.3 a spin and report back.
+The org.openembedded.dev branch should be able to build an AVR32 image for 
+you.  I submitted some patches which haven't been applied yet that will give 
+you a newer toolchain.  See 
+http://bugs.openembedded.net/show_bug.cgi?id=4178.  With these patches 
+applied, I can build x11-image (haven't gotten a chance to try X out yet, 
+though).
 
-Debian ARM gets a reasonable amount of use, especially now that various
-NAS devices are supported by the installer, though it's currently
-transitioning to armel.  From the point of view of building Java stuff
-it certainly gets a lot of exercise since pretty much all packages are
-built for all architectures.
+I had an AT32STK1000 board.  This board came with an ancient version of u-boot 
+that had the wrong architecture number for the AVR32.  If the ATNGW100 ships 
+the same way, you'll need to upgrade u-boot before it will boot any recent 
+image.  The 2.0.0 BSP CD contains a bootloader that will work 
+(http://www.atmel.com/dyn/resources/prod_documents/AVR32_Linux_BSP_CD_Image_2.0.0.zip).  
+Beware, everything else on this CD is horribly outdated.
 
--- 
-"You grabbed my hand and we fell into it, like a daydream - or a fever."
+I'm writing the OE generated image to an SD card, and then having u-boot boot 
+from the SD card.
+
+Here's my local.conf file for my custom AVR32 board, minus comments and blank 
+lines:
+--begin--
+DL_DIR = "${PRJROOT}/sources"
+BBFILES = "${PRJROOT}/org.openembedded.dev/packages/*/*.bb"
+BBMASK = ""
+PREFERRED_PROVIDERS = "virtual/qte:qte virtual/libqpe:libqpe-opie"
+PREFERRED_PROVIDERS += " virtual/libsdl:libsdl-x11"
+PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
+PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc:gcc-cross"
+PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
+PREFERRED_VERSION_linux = "2.6.23"
+MACHINE = "at32stk1000"
+TARGET_OS = "linux-uclibc"
+DISTRO = "angstrom-2008.1"
+ANGSTROM_MODE = "uclibc"
+IMAGE_FSTYPES = "ext3 jffs2 tar"
+BBDEBUG = "yes"
+PARALLEL_MAKE = "-j 3"
+BBINCLUDELOGS = "yes"
+--end--
+
+You'll need to change the MACHINE to "atngw100".  This also assumes you have 
+PRJROOT defined in your environment.  Eiether edit out the references to 
+PRJROOT, or export PRJROOT before you run bitbake.
+
+Good luck!
+---
+Geoffrey
 
 
