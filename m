@@ -1,27 +1,32 @@
-Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1JpAde-00057d-U7
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Apr 2008 01:14:03 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so5467185waf.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Apr 2008 16:13:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:mime-version:content-type:content-transfer-encoding:content-disposition;
-	bh=HnLqVot9rw8FT4qP42p6TfZaY77Dy5DYbQNx29BoIgU=;
-	b=A99WmiHONfsIH8UUxXh54BzV8o0TPVTplCw76Lc1sG9K1Av/SgqF2PuBMYGFgVasql/gc93I27r2NjcqpXIckMd65iuXE5++dZma+GTRz6nmk3bov+kAIXGEfcdIZMebiXQS2oY+n4wxQoB7WjJgDNafPExnGQjTYcmnp3w+76c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type:content-transfer-encoding:content-disposition;
-	b=PhqmlZBt78UMM5Dt9tdl9rSF2C2OqRB6lzCWPQNyABK5jzk/bEDDVn/OuLuH1NBiJKefEW6GeAPWlhatxRqCXbpMVlp5qfUyV0oJUEB7g/ZytHsobu4Gex3VoVdk2lAZ90HX8PyfIRBm6nPOPxmLnXm2JevITi1Va+XS9QooWG4=
-Received: by 10.114.204.7 with SMTP id b7mr2511765wag.129.1209078830719;
-	Thu, 24 Apr 2008 16:13:50 -0700 (PDT)
-Received: by 10.114.190.2 with HTTP; Thu, 24 Apr 2008 16:13:50 -0700 (PDT)
-Message-ID: <f96d234e0804241613j604a4283ofe32c1a8b64ad940@mail.gmail.com>
-Date: Thu, 24 Apr 2008 19:13:50 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: xfonts, mapfile dir, and pkg-config issue
+	(envelope-from <rpurdie@rpsys.net>) id 1JpAty-0001nJ-RE
+	for openembedded-devel@openembedded.org; Fri, 25 Apr 2008 01:30:55 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m3ONUhTA028377
+	for <openembedded-devel@openembedded.org>;
+	Fri, 25 Apr 2008 00:30:43 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 28090-08 for <openembedded-devel@openembedded.org>;
+	Fri, 25 Apr 2008 00:30:36 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m3ONUYSd028370
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Fri, 25 Apr 2008 00:30:34 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <f96d234e0804241613j604a4283ofe32c1a8b64ad940@mail.gmail.com>
+References: <f96d234e0804241613j604a4283ofe32c1a8b64ad940@mail.gmail.com>
+Date: Fri, 25 Apr 2008 00:30:36 +0100
+Message-Id: <1209079836.28694.1.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: xfonts, mapfile dir, and pkg-config issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -35,51 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Apr 2008 23:14:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Apr 2008 23:30:55 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Currently, many of the xfont builds fail something like this:
 
-| /build/bhthermal/bht_build/oe/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/bdftopcf
--t UTRG__24.bdf | gzip > UTRG__24.pcf.gz
-| /build/bhthermal/bht_build/oe/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/ucs2any
-UTB___10.bdf /usr/lib/X11/fonts/util/map-ISO8859-1 ISO8859-1
-| /build/bhthermal/bht_build/oe/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/ucs2any:
-Can't read mapping file '/usr/lib/X11/fonts/util/map-ISO8859-1': No
-such file or directory!
-| make[1]: *** [UTB___10-ISO8859-1.bdf] Error 1
-| make[1]: Leaving directory
-`/build/bhthermal/bht_build/oe/build/angstrom-2008.1/tmp/work/geode-angstrom-linux/font-adobe-utopia-100dpi-1_1.0.1-r0/font-adobe-utopia-100dpi-1.0.1'
-| FATAL: oe_runmake failed
+On Thu, 2008-04-24 at 19:13 -0400, Cliff Brake wrote: 
+> This issue is that "pkg-config --variable=mapdir fontutil" returns:
+> 
+> /usr/lib/X11/fonts/util
+> 
+> which is correct if mapdir is used on the target system, but in this
+> case mapdir is used on the host system during the build, so it really
+> needs the path to staging.
+> 
+> We can't modify font-util to put the staging path in fontutil.pc or
+> insane.class complains about tmdir's in a *.pc file.
+> 
+> What is the correct solution in this case?
+> 
+> 1) hardcode EXTRA_OECONF with the MAPFILES_PATH (would require
+> patching font packages -- bad)
 
-This issue is that "pkg-config --variable=mapdir fontutil" returns:
+If you can override from the commandline this may be an option,
+particularly if all font packages accept the same option and we can use
+a .inc file.
 
-/usr/lib/X11/fonts/util
+The alternative is to patch the configure.ac files so it uses something
+like:
 
-which is correct if mapdir is used on the target system, but in this
-case mapdir is used on the host system during the build, so it really
-needs the path to staging.
+$PKG_CONFIG_SYSROOT_DIR`pkg-config --variable=mapdir fontutil`
 
-We can't modify font-util to put the staging path in fontutil.pc or
-insane.class complains about tmdir's in a *.pc file.
+which in theory should be accepted upstream too...
 
-What is the correct solution in this case?
+> 2) convince insane.class that this tmpdir is really OK in fontutil.pc
 
-1) hardcode EXTRA_OECONF with the MAPFILES_PATH (would require
-patching font packages -- bad)
+From what you said above, this wouldn't help.
 
-2) convince insane.class that this tmpdir is really OK in fontutil.pc
+Cheers,
 
-Any suggestions on how to best solve this?
+Richard
 
-Thanks,
-Cliff
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+
 
 
