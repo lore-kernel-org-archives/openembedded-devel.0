@@ -1,29 +1,18 @@
-Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
+Received: from [82.119.242.94] (helo=mail.suse.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1JomJm-0003iS-OK
+	(envelope-from <utx@penguin.cz>) id 1Jozwk-0002J0-DE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Apr 2008 23:15:54 +0200
-Received: by wa-out-1112.google.com with SMTP id l24so4705294waf.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2008 14:15:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=RBwuAVDGhJajQEbwE2BdEFfLyJY85uOM+1gimA4hffM=;
-	b=mITlpuFfZHNTdYpQLt67k7mnrJQCRTQBfbmUky3Gz6+LiJZdcXyQHxuOgNYnFnFev2TN0ViBYQvrm2vUT/W66MtmlUZLLIxG1gO8mxkK/WQ+Bx3/fEsoYJU1AbWxDfItpZnPRlZTE5QOMoXkYQkvCZMuCru3EhRtB0n2Xnng5e4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=cx23S7ARRM+nSMqlvNHteR18gR5Cq+NptnTvyZtOX54LO4Mfq1FXz2Bqi7kzYJI7YfSUelU4oz54io/EEuJLKcp0QpvQclyIzme1GRXJLsBI2aqUhNyM7TWmCgFAEjskrYCLaya6gONvYrpLZwKtiGyGp2OzPZsIdixC8xnbcsE=
-Received: by 10.114.179.1 with SMTP id b1mr1035456waf.42.1208985341579;
-	Wed, 23 Apr 2008 14:15:41 -0700 (PDT)
-Received: by 10.114.234.12 with HTTP; Wed, 23 Apr 2008 14:15:41 -0700 (PDT)
-Message-ID: <19c1b8a90804231415q510604ffkb071438a716bdff4@mail.gmail.com>
-Date: Wed, 23 Apr 2008 14:15:41 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
+	Thu, 24 Apr 2008 13:49:02 +0200
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id CF9536280B1;
+	Thu, 24 Apr 2008 13:48:52 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1JolyI-0002vH-TM@daffy.sipo.nl>
-MIME-Version: 1.0
-References: <E1JolyI-0002vH-TM@daffy.sipo.nl>
-Subject: Re: gcc & libssp disabled by default?
+Date: Thu, 24 Apr 2008 13:52:20 +0200
+Message-Id: <1209037940.21700.107.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.0 
+Subject: brokenness of native builds by cross-compile site scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -37,38 +26,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2008 21:15:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Apr 2008 11:49:02 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-You need to edit the recipe.
+Hallo.
 
-Khem
+I have just searching for reason, why a lot of native build started to
+fail with strange errors.
 
-On Wed, Apr 23, 2008 at 1:53 PM, RvP <lists@t3i.nl> wrote:
-> Hi,
->
->  gcc versions 4.0.0 and later are currently being built without libssp
->  support: EXTRA_OECONF_BASE contains "--disable-libssp" in those recipes.
->
->  Why is that? E.g. mpd (music player daemon) needs libssp. As a work-around I
->  manually changed the .bb files for gcc 4.1.2 in paclages/gcc/ and removed the
->  --disable-libssp switch. Gcc now builds with libssp and all seems to run
->  without problems (on a NSLU2).
->
->  BTW. did I really need to edit the recipes in packages/gcc/ or could I have
->  set a variable elsewhere to enable libssp?
->
->  Cheers,
->
->  Richard.
->
->
->  _______________________________________________
->  Openembedded-devel mailing list
->  Openembedded-devel@lists.openembedded.org
->  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I started with debugging of glib-2.0-native:
+/bin/sh: line 6: 20886 Segmentation fault      ./glib-genmarshal --nostdinc --prefix=g_cclosure_marshal ./gmarshal.list --header >> xgen-gmh
+
+Looking info config.log:
+configure:1952: loading site script /OE/org.openembedded.dev/site/endian-little
+...
+configure:1952: loading site script /OE/org.openembedded.dev/site/arm-common
+...
+configure:1952: loading site script /OE/org.openembedded.dev/site/arm-linux
+
+It loads totally confusing site values valid for arm instead of correct
+x86_64-linux, and leads to miscompilation and crash.
+
+If I empty upper mentioned site files, compilation succeeds.
+
+As it seems to be deeper in the build engine, I was not yet able to find
+and fix the problem.
+
+If somebody could help with fixing of it, I would be glad.
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
