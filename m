@@ -1,30 +1,31 @@
-Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1JpUnI-0002Gr-CI
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Apr 2008 22:45:20 +0200
-Received: by ug-out-1314.google.com with SMTP id i24so183356ugd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2008 13:45:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:references;
-	bh=PFgpsPxZXb5pMtsRmUBHKGjYnJOytclkIwSoLVKwluw=;
-	b=fugAiYDSlART0K0BrpnaCHqHjjU5GAVuRpHQqfFCOqlAkcHwOHW+i/xTeBDVQL+JVoeDZqVj9Myl7vh7+JtVBL1SQ/eqkOXgQeaZ152Bo0bDYP1WaPzwms7nnGNogYCHyEACjq7vreDZgwC1CVIny+TuNNQoi/CvkgQRTT7M2cU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:references;
-	b=sIqjJpe9DVxjaFMLe1+PinMpEZ6c3AKAqh6PQOwYRe1zOHXr8xR1G6d+aA4tRg7lP55vDebdvcrPviSyfEMTYiEyn/K26vii4aDJBUIZQWc6Xa7rnF1SIPp8IECLCLdEWVq2/ifmrahxpEvl4B58xNB3r4McAJl1PfQgAjziOH4=
-Received: by 10.66.251.3 with SMTP id y3mr665979ugh.88.1209156305581;
-	Fri, 25 Apr 2008 13:45:05 -0700 (PDT)
-Received: by 10.67.25.4 with HTTP; Fri, 25 Apr 2008 13:45:05 -0700 (PDT)
-Message-ID: <a7f8874a0804251345n29ad7668q1a6e170b1064765a@mail.gmail.com>
-Date: Fri, 25 Apr 2008 13:45:05 -0700
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90804251309n14dba345r93b0c5f82f18a320@mail.gmail.com>
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JpWNQ-0005g7-7P
+	for openembedded-devel@openembedded.org; Sat, 26 Apr 2008 00:26:44 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JpWN8-0005Ak-8k
+	for openembedded-devel@openembedded.org; Fri, 25 Apr 2008 22:26:26 +0000
+Received: from ip-62-143-23-251.1411n-cud12k-01.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 25 Apr 2008 22:26:26 +0000
+Received: from no2spam by ip-62-143-23-251.1411n-cud12k-01.ish.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 25 Apr 2008 22:26:26 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sat, 26 Apr 2008 00:26:22 +0200
+Message-ID: <futlqa$1q9$1@ger.gmane.org>
 References: <a7f8874a0804251149w4d740b1ftc40e41703de334da@mail.gmail.com>
-	<19c1b8a90804251309n14dba345r93b0c5f82f18a320@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.10b4
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.1411n-cud12k-01.ish.de
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
+In-Reply-To: <a7f8874a0804251149w4d740b1ftc40e41703de334da@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: OE on Ubuntu 8.04?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -39,22 +40,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2008 20:45:20 -0000
+X-List-Received-Date: Fri, 25 Apr 2008 22:26:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Fri, Apr 25, 2008 at 1:09 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Hans Henry von Tresckow wrote:
+> Now that Ubuntu 8.04 has been released, I would like to upgrade my build
+> laptop. I was wondering if anybody has had any experience with 8.04 and
+> knows of any OE specific pitfalls to watch for. Thanks,
 
-> I have been using 8.04 (beta) for about a month now without any
-> issues. Go ahead
->
-> -Khem<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
-
-Thanks. I'll give it a whirl this weekend :)
+No issues here.  A great release.
 
 
-
--- 
-Henry von Tresckow (hvontres)
 
