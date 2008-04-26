@@ -1,20 +1,29 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.132.249] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Jpk7b-00081G-6v
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Jpll9-0003Yf-T0
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Apr 2008 15:07:20 +0200
-Received: from andromeda (e180150176.adsl.alicedsl.de [85.180.150.176])
-	by drlauer-research.com (Postfix) with ESMTP id C8109584BEE
+	Sat, 26 Apr 2008 16:52:16 +0200
+Received: by an-out-0708.google.com with SMTP id b33so998143ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Apr 2008 15:18:09 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Sat, 26 Apr 2008 07:51:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=qoE8P4jxecQN+58spIcY09f+zMtM76xmwTGQJw29eqo=;
+	b=As+7hc2LRB1Wk8BafByE/KP9h+FF5o26nwoQBKus35vWjOZq11jxRZRsEAgNzGCMwpsaQ4Lw7/jw2JD0UzWA9UFGQ49ogRONeDOGIa6M/5S5X/JIovsFGQM1F71Nz8zZJLRhmA+vwxPJuqS1xBhD1SvHt4FF82SNKS0yI0lZp2U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=VfQVyp6ig58bpIwUtOl/1jkhgE8hjfPDAP3JIICx8uf8SRYTBbwRVyEvKuWZwD0qeHxki0KaHY8NUx17V0O/iD+JUIhi5tAjesX4dYdFaoEDCbIxIcRTWK5KP7aR/1ZcV7TX0NztLNrP7R8JJolMvL2AZZPFvT8YE8W/tHXa3ow=
+Received: by 10.101.68.19 with SMTP id v19mr9367848ank.75.1209221509047;
+	Sat, 26 Apr 2008 07:51:49 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Sat, 26 Apr 2008 07:51:48 -0700 (PDT)
+Message-ID: <c384c5ea0804260751o12ee60des921c17f6ba8e6f24@mail.gmail.com>
+Date: Sat, 26 Apr 2008 16:51:48 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Apr 2008 15:08:00 +0200
-User-Agent: KMail/1.9.9
+In-Reply-To: <200804261508.00101.mickey@vanille-media.de>
 MIME-Version: 1.0
-Message-Id: <200804261508.00101.mickey@vanille-media.de>
-Subject: (admin) infrastructure status
+References: <200804261508.00101.mickey@vanille-media.de>
+Subject: Re: (admin) infrastructure status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -28,47 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Apr 2008 13:07:24 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 26 Apr 2008 14:52:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Hi guys,
+Hello Michael,
 
-I'm not feeling to well, so I need to keep this brief.
+On Sat, Apr 26, 2008 at 3:08 PM, Michael 'Mickey' Lauer
+<mickey@vanille-media.de> wrote:
+>  We went through a series of hardware problems lately. First, our =FCbers=
+erver
+>  linuxtogo.org was completely unresponsive for more than 24h. In an attem=
+pt to
+>
+First, thanks for explaining the situation and resolving it.
 
-We went through a series of hardware problems lately. First, our =FCberserv=
-er=20
-linuxtogo.org was completely unresponsive for more than 24h. In an attempt =
-to=20
-fix that, I requested to change www.openembedded.org and=20
-monotone.openembedded.org to the new server that already hosts the monotone=
-=20
-database since weeks (we had a transparent ssh forward so people did not=20
-notice that they were actually talking to amethyst.openembedded.net).
+Can we improve on the server situation somehow to have a much more
+reliable infrastructure?
 
-Unfortunately during this process, also lists.openembedded.org was changed =
-to=20
-the new server (which is not supposed to host a listserver), hence e-mail=20
-stopped to work for a while. This was fixed 24h later.
+Having full control of the server (even physically) seems to be a
+requirement, as well as more than a few admins that can unbreak stuff.
 
-Everything now should be back as usual except bugs.openembedded.org which=20
-stopped responding a couple of days ago. As you might know, this server was=
-=20
-in control of the late Greg Gilbert. We had been told we can continue to us=
-e=20
-these services, however we are (again) in contact with his friends to find=
-=20
-out what happened.
+I.e. what would we need in the ideal world?
 
-Sorry for any inconvenience.
-
-Cheers,
-
-Mickey.
-
-=2D-=20
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Regards,
+--=20
+Leon
 
 
