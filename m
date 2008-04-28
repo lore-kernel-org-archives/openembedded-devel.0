@@ -1,32 +1,29 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [66.249.82.227] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JqbfR-0008BZ-Ek
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Jqbhb-0008G4-SX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Apr 2008 00:17:49 +0200
-X-ASG-Debug-ID: 1209421033-512f001a0000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id DBEA64EBC6
+	Tue, 29 Apr 2008 00:20:04 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so4971130wxd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Apr 2008 17:17:13 -0500 (CDT)
-Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
-	ESMTP id 63zHJphGB8SGWYkb for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Apr 2008 17:17:13 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
+	Mon, 28 Apr 2008 15:19:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=2BgbKR88fU8U91POb5HpgfcplYtaDqAlGOFKFEJ5JAE=;
+	b=hG08XmN7Xh7N+vyiM97nu8hhp6r+q2iXVw7eLGqzGOzR/7rIARcFJ+S4znaSPGWVtf12Tkmv9ozStOBFhS5aheqsLJ0iXxurwiIL2EZOsZbEW1M8w8bJj9uVGWQnId7JS8h0zBnSYg6ijTu65LqQgVY4t83JDKEicWSIjoHQTFI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=c3Zend2FSfvFemM7d1eov4XfB+0ZHMFcIuU0/6rzmuJCzJyGfBN+ahIVLKqHUxiF8gKT1U7pOLQzuR3e/OuPKCjSXW8HhKMkjQppr4vvwggU5qlReWmRVvBYfddoQfOAiwZnLOWkwaTT7Xx3PKSh5f8YmAldT9ZZqLNT6tpBBrA=
+Received: by 10.100.140.15 with SMTP id n15mr370931and.94.1209421170693;
+	Mon, 28 Apr 2008 15:19:30 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Mon, 28 Apr 2008 15:19:30 -0700 (PDT)
+Message-ID: <c384c5ea0804281519o596e224bw252bbac9cca4abc6@mail.gmail.com>
+Date: Tue, 29 Apr 2008 00:19:30 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] Mixed up STAGING_INCDIR's in uclibc.inc?
-Date: Mon, 28 Apr 2008 17:17:32 -0500
-User-Agent: KMail/1.9.7
-References: <200804281451.05548.geoffrey@pager.net>
-	<200804282349.46539.zecke@selfish.org>
 In-Reply-To: <200804282349.46539.zecke@selfish.org>
 MIME-Version: 1.0
-Message-Id: <200804281717.33209.geoffrey@pager.net>
-X-Barracuda-Connect: UNKNOWN[192.168.1.1]
-X-Barracuda-Start-Time: 1209421033
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+References: <200804281451.05548.geoffrey@pager.net>
+	<200804282349.46539.zecke@selfish.org>
 Subject: Re: Mixed up STAGING_INCDIR's in uclibc.inc?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -41,47 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2008 22:17:49 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Apr 2008 22:20:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Monday 28 April 2008 04:49:46 pm Holger Freyther wrote:
+Hello,
+
+On Mon, Apr 28, 2008 at 11:49 PM, Holger Freyther <zecke@selfish.org> wrote:
 > On Monday 28 April 2008 21:51:05 Geoffrey Wossum wrote:
-
-> > I think the problem is the following line in packages/uclibc/uclibc.inc:
-> > EXTRA_OEMAKE =3D "${OEMAKE_NO_CC} 'CC=3D${CC}'
-> > HOSTCFLAGS=3D'-I${STAGING_INCDIR}'"
-> >
-> > Seems to me like that should be STAGING_INCDIR_NATIVE instead of
-> > STAGING_INCDIR.  If I make that change, then everything works again.
-> >
-> > Does this seem correct?
+>  hmm, in autoconf terminology host is:
+>  "  --host=HOST       cross-compile to build programs to run on HOST [BUILD]"
 >
-> hmm, in autoconf terminology host is:
-> "  --host=3DHOST       cross-compile to build programs to run on HOST
-> [BUILD]"
+>  if uclibc has the same terminology your patch is wrong, I don't know it
+>  though.
 >
-> if uclibc has the same terminology your patch is wrong, I don't know it
-> though.
+I think uclibc's usage is that HOST is the build machine.
 
-Ah, autotools, my old nemesis.  How have you been?  This new plot of yours =
-to=20
-corrupt projects which don't use you by confusing people is indeed fiendish=
-=2E =20
-But then, I would expect no less of such a worthy adversary.
+Adding DEPENDS ncurses-native for both uclibc.inc and
+uclibc-initial.inc together with Geoffrey's patch looks the sane
+solution to me, but hey, I might misunderstand something here.
 
-uClibc uses Kconfig/kbuild, which uses HOST to mean the machine we are=20
-currently building on. =20
+The confusion started with commit "3afb4ffc02c1e4bde1031645cfa9f8e5465f2138".
 
-=46rom linux/Documentation/kbuild/makefiles.txt:
-Kbuild supports building executables on the host for use during the
-compilation stage.
+Could you guys please see into that commit, and follow-up from there?
 
-Yes, it is very confusing.=20
+I hate to unbreak things into the wrong direction.
 
-=2D--
-Geoffrey
+Regards,
+-- 
+Leon
 
 
