@@ -1,28 +1,23 @@
-Received: from [66.249.82.230] (helo=wx-out-0506.google.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Jqb4f-0006y3-8u
+	(envelope-from <zecke@selfish.org>) id 1JqbEx-0007KI-8Y
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Apr 2008 23:39:49 +0200
-Received: by wx-out-0506.google.com with SMTP id h27so4953019wxd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Apr 2008 14:39:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=XK4YA1OAhPiQYjX4QxjNE6Rh2VrRn8CshHjwQn7Jv2I=;
-	b=llq3pxp6ZKfUtyeClEit4rfHLFu8iZtuudrlrA77J7kBIDOaEkcs48rEGT5td8dQb71C8XG4n3u8t9blC3Mh1eljVQ7V69eZdgPzAgCLe8FTJpP4u7CztF8PLEwdj7ctto7z0RijjRNui09IWeYQzsDsLczZ3bjA6RQvGE4Ho1E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=f/29qSOrzNdiS5+oFJ5qky1GnPQjH0u4tfNk2rz6x49icYGhGD81ddaJbHxlZxi+lChMrjHfvxKaZmTTmc5fsiS4cNE/qY1ZnvGQE+naVtUlQL7AoiQp399gPPcsf3fg38nKLNVGhkUAM6pBphavwh/FDDjQx12yzXD3Ga9uYDY=
-Received: by 10.100.121.12 with SMTP id t12mr285674anc.141.1209418763132;
-	Mon, 28 Apr 2008 14:39:23 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Mon, 28 Apr 2008 14:39:23 -0700 (PDT)
-Message-ID: <c384c5ea0804281439h1602ad7dvaa317f64efd3bd35@mail.gmail.com>
-Date: Mon, 28 Apr 2008 23:39:23 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	Mon, 28 Apr 2008 23:50:27 +0200
+Received: from [92.117.75.129] (helo=[10.161.75.129])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1JqbEX-0002oY-HZ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Apr 2008 23:50:01 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Apr 2008 23:49:46 +0200
+User-Agent: KMail/1.9.9
+References: <200804281451.05548.geoffrey@pager.net>
 In-Reply-To: <200804281451.05548.geoffrey@pager.net>
 MIME-Version: 1.0
-References: <200804281451.05548.geoffrey@pager.net>
+Message-Id: <200804282349.46539.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.117.75.129
 Subject: Re: Mixed up STAGING_INCDIR's in uclibc.inc?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -37,34 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2008 21:39:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 28 Apr 2008 21:50:27 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello Geoffrey, Marcin, Richard,
-
-(I think Marcin committed the original change, and I think from Poky)
-
-On Mon, Apr 28, 2008 at 9:51 PM, Geoffrey Wossum <geoffrey@pager.net> wrote:
->  Seems to me like that should be STAGING_INCDIR_NATIVE instead of
->  STAGING_INCDIR.  If I make that change, then everything works again.
+On Monday 28 April 2008 21:51:05 Geoffrey Wossum wrote:
+> Hi all,
 >
+> I'm having a brand new issue building uClibc-0.9.29 for the AVR32.  When
+> running do_configure for uclibc, it gets a bunch of errors like:
+>
+>
+> gcc -DCURSES_LOC="<ncurses.h>" -DLOCALE
+> -I/home/geoff/lrs/playpaq/tmp/staging/avr32-angstrom-linux-uclibc/usr/inclu
+>de  -lncursesw conf.o  zconf.tab.o -o conf
+>
+> | conf.o: In function `strip':
+> | conf.c:(.text+0x20): undefined reference to `__ctype_b'
+> | conf.c:(.text+0x97): undefined reference to `__ctype_b'
+> | conf.o: In function `conf_sym':
+> | conf.c:(.text+0x5bf): undefined reference to `__stdout'
+>
+> ...continues on...
+>
+> I think the problem is the following line in packages/uclibc/uclibc.inc:
+> EXTRA_OEMAKE = "${OEMAKE_NO_CC} 'CC=${CC}'
+> HOSTCFLAGS='-I${STAGING_INCDIR}'"
+>
+> Seems to me like that should be STAGING_INCDIR_NATIVE instead of
+> STAGING_INCDIR.  If I make that change, then everything works again.
+>
+> Does this seem correct?
 
-Additionally, there is another issue:
 
-The original patch Changelog entry described this patch was done as
-uclibc needs ncurses-native instead of host provided ncurses.
-Now, it seems the committer forgot to add this to the DEPENDS.
+hmm, in autoconf terminology host is:
+"  --host=HOST       cross-compile to build programs to run on HOST [BUILD]"
 
-I have a freshly installed Ubuntu 8.04, and I probably don't have the
-ncurses-dev, whereas Geoffrey probably does, which explains the
-difference.
-
-Does this make sense?
-
-Regards,
--- 
-Leon
+if uclibc has the same terminology your patch is wrong, I don't know it 
+though.
 
 
