@@ -1,23 +1,16 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JqUVv-0002Of-2d
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Apr 2008 16:39:31 +0200
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=abughraib.localdomain) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1JqUVW-00027W-RN
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Apr 2008 16:39:07 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Apr 2008 16:39:04 +0200
-User-Agent: KMail/1.9.9
-References: <200804281344.32507.zecke@selfish.org>
-In-Reply-To: <200804281344.32507.zecke@selfish.org>
+	(envelope-from <jin@mediatomb.cc>) id 1JqYzi-0002wC-Dc
+	for openembedded-devel@openembedded.org; Mon, 28 Apr 2008 21:26:34 +0200
+Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
+	id 6BBED832CA; Mon, 28 Apr 2008 21:26:07 +0200 (CEST)
+Date: Mon, 28 Apr 2008 21:26:07 +0200
+From: Sergey 'Jin' Bostandzhyan <jin@mediatomb.cc>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Message-ID: <20080428192607.GB28476@deadlock.dhs.org>
 MIME-Version: 1.0
-Message-Id: <200804281639.04704.zecke@selfish.org>
-Subject: Re: Summary of an unwanted merge and what I did
+User-Agent: Mutt/1.5.15 (2007-04-06)
+Subject: problem building meta-toolchain for arm/uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -31,41 +24,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2008 14:39:31 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Apr 2008 19:26:34 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Monday 28 April 2008 13:44:32 Holger Freyther wrote:
-> Hey,
+Hi everyone,
 
-> ideas? I'm tempted to say sorry but I think I'm not the one to blame (a
-> tool is) :)
+I keep struggling with meta-toolchain and I hope to get some input on this.
 
-I went with a "mtn diff -r merge -r good head | 
-patch -p0 -R --remove-empty-files; mtn drop --missing; mtn ci" and ask 
-everyone helping to fix the fallout, e.g., this removed new versions of 
-gnash, multitab-pad and other things, don't blame me.
+I'm on oe stable, angstrom-2007.1, ARM9, uclibc, EABI
 
+I start with a clean build: bitbake meta-toolchain
 
-mtn disapprove and mtn suspend are pretty cool concepts but they come with 
-shortcomings I don't see fixed within the next year or two:
+Unfortunately gcc-cross-sdk fails to build:
+NOTE: package gcc-cross-sdk-4.1.2-r11: task do_compile: failed
 
-	- mtn disapprove does not work on merges
-	- mtn suspend and other certs only work with if all people on this planet 
-have a mtn >= the introduction of this cert. Some sort of flag day (talks are 
-ongoing on this) or some sort of semantic to don't use this rev if you don't 
-understand the 'systems' certs is needed.
+And here's the most interesting part:
+| /opt/44296fe048e6bdbb2da959e5d681dfdf/etcb/OE/build/angstrom/cross/bin/arm-angstrom-linux-uclibcgnueabi-ld: cannot find libc.so.6
+| collect2: ld returned 1 exit status
+| make[3]: *** [libgcc_s.so] Error 1
 
-I don't think these issues, a working graphical front end, new features are 
-getting finished within a year or two and instead of entering the SCM 
-development I would prefer to go with the best one.
+Is it looking for libc.so.6 on a uclibc build?
 
-it is about time to switch and I'm tempted to say to not contribute to OE as 
-long as we use mtn, I'm not sure on this though. I will make up my mind on 
-it.
+Here is the full log:
+http://www.deadlock.dhs.org/jin/log_do_compile_uclibcgnueabi_gcc_cross_sdk.txt
 
-z.
+I started to poke around, looking for differences between the configuration
+options of the sdk and non-sdk versions.
+
+Apart of the directories most things are the same, the only other additonal
+options were in the gcc-cross-sdk (vs. gcc-cross)  configuration:
+--enable-clocale=generic and --disable-nls (the non-sdk gcc-cross did not have
+those).
+
+I also looked at binutils-cross and binutils-cross-sdk, here binutils-cross
+had two more options: --enable-install-libbfd --disable-werror The rest,
+except for the paths was the same.
+
+I also noticed that the sdk variants use the already available tools from
+the cross directory, not sure if that can be related to my problem
+binutils-cross:
+checking for arm-angstrom-linux-uclibcgnueabi-gcc... no
+
+binutils-cross-sdk:
+checking for arm-angstrom-linux-uclibcgnueabi-gcc... arm-angstrom-linux-uclibcgnueabi-gcc
+
+At this point I am sort of stuck, so if anyone has an idea or a clue - I'll
+be happy to hear about it. Thanks!
+
+Kind regards,
+Jin
+
+P.S. I'd submit a bug... but the bugtracker is still down :(
+
 
 
