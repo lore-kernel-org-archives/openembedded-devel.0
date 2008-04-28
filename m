@@ -1,30 +1,29 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [66.249.82.230] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1JqZNm-0003SH-Bc
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Jqb4f-0006y3-8u
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Apr 2008 21:51:27 +0200
-X-ASG-Debug-ID: 1209412251-461c007b0000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 8CD8B4EAF8
+	Mon, 28 Apr 2008 23:39:49 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so4953019wxd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Apr 2008 14:50:51 -0500 (CDT)
-Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
-	ESMTP id 3YNZpeKJnVxAEDHt for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Apr 2008 14:50:51 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
+	Mon, 28 Apr 2008 14:39:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=XK4YA1OAhPiQYjX4QxjNE6Rh2VrRn8CshHjwQn7Jv2I=;
+	b=llq3pxp6ZKfUtyeClEit4rfHLFu8iZtuudrlrA77J7kBIDOaEkcs48rEGT5td8dQb71C8XG4n3u8t9blC3Mh1eljVQ7V69eZdgPzAgCLe8FTJpP4u7CztF8PLEwdj7ctto7z0RijjRNui09IWeYQzsDsLczZ3bjA6RQvGE4Ho1E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=f/29qSOrzNdiS5+oFJ5qky1GnPQjH0u4tfNk2rz6x49icYGhGD81ddaJbHxlZxi+lChMrjHfvxKaZmTTmc5fsiS4cNE/qY1ZnvGQE+naVtUlQL7AoiQp399gPPcsf3fg38nKLNVGhkUAM6pBphavwh/FDDjQx12yzXD3Ga9uYDY=
+Received: by 10.100.121.12 with SMTP id t12mr285674anc.141.1209418763132;
+	Mon, 28 Apr 2008 14:39:23 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Mon, 28 Apr 2008 14:39:23 -0700 (PDT)
+Message-ID: <c384c5ea0804281439h1602ad7dvaa317f64efd3bd35@mail.gmail.com>
+Date: Mon, 28 Apr 2008 23:39:23 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Mixed up STAGING_INCDIR's in uclibc.inc?
-Date: Mon, 28 Apr 2008 14:51:05 -0500
-User-Agent: KMail/1.9.7
+In-Reply-To: <200804281451.05548.geoffrey@pager.net>
 MIME-Version: 1.0
-Message-Id: <200804281451.05548.geoffrey@pager.net>
-X-Barracuda-Connect: UNKNOWN[192.168.1.1]
-X-Barracuda-Start-Time: 1209412251
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: Mixed up STAGING_INCDIR's in uclibc.inc?
+References: <200804281451.05548.geoffrey@pager.net>
+Subject: Re: Mixed up STAGING_INCDIR's in uclibc.inc?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -38,74 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2008 19:51:27 -0000
-Content-Disposition: inline
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Mon, 28 Apr 2008 21:39:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi all,
+Hello Geoffrey, Marcin, Richard,
 
-I'm having a brand new issue building uClibc-0.9.29 for the AVR32.  When 
-running do_configure for uclibc, it gets a bunch of errors like:
+(I think Marcin committed the original change, and I think from Poky)
 
- 
-gcc -DCURSES_LOC="<ncurses.h>" -DLOCALE -I/home/geoff/lrs/playpaq/tmp/staging/avr32-angstrom-linux-uclibc/usr/include  -lncursesw 
-conf.o  zconf.tab.o -o conf
-| conf.o: In function `strip':
-| conf.c:(.text+0x20): undefined reference to `__ctype_b'
-| conf.c:(.text+0x97): undefined reference to `__ctype_b'
-| conf.o: In function `conf_sym':
-| conf.c:(.text+0x5bf): undefined reference to `__stdout'
-...continues on...
+On Mon, Apr 28, 2008 at 9:51 PM, Geoffrey Wossum <geoffrey@pager.net> wrote:
+>  Seems to me like that should be STAGING_INCDIR_NATIVE instead of
+>  STAGING_INCDIR.  If I make that change, then everything works again.
+>
 
-I think the problem is the following line in packages/uclibc/uclibc.inc:
-EXTRA_OEMAKE = "${OEMAKE_NO_CC} 'CC=${CC}' HOSTCFLAGS='-I${STAGING_INCDIR}'"
+Additionally, there is another issue:
 
-Seems to me like that should be STAGING_INCDIR_NATIVE instead of 
-STAGING_INCDIR.  If I make that change, then everything works again.
+The original patch Changelog entry described this patch was done as
+uclibc needs ncurses-native instead of host provided ncurses.
+Now, it seems the committer forgot to add this to the DEPENDS.
 
-Does this seem correct? 
+I have a freshly installed Ubuntu 8.04, and I probably don't have the
+ncurses-dev, whereas Geoffrey probably does, which explains the
+difference.
 
----
-Geoffrey
+Does this make sense?
 
-
-#
-# old_revision [b5af291fa9dc074af84727684ddae1efa9c1be0d]
-#
-# patch "packages/uclibc/uclibc.inc"
-#  from [472f8824981d2a69ea009b1b57d42dfed1044151]
-#    to [cc6432f05133f71d7aae488e59eb8a4423482666]
-#
-# patch "packages/uclibc/uclibc_0.9.29.bb"
-#  from [e670b8966480e150375aa74c2bd62de6c8e5315b]
-#    to [0eac903c662c67108b358b1ad2c6d1d976cc5419]
-#
-============================================================
---- packages/uclibc/uclibc.inc  472f8824981d2a69ea009b1b57d42dfed1044151
-+++ packages/uclibc/uclibc.inc  cc6432f05133f71d7aae488e59eb8a4423482666
-@@ -72,7 +72,7 @@ OEMAKE_NO_CC = "'STRIPTOOL=true' 'LD=${L
- # the CFLAGS (for when building the utils).
- OEMAKE_NO_CC = "'STRIPTOOL=true' 'LD=${LD}' \
-                'LOCALE_DATA_FILENAME=${UCLIBC_LOCALE_FILE}'"
--EXTRA_OEMAKE = "${OEMAKE_NO_CC} 'CC=${CC}' HOSTCFLAGS='-I${STAGING_INCDIR}'"
-+EXTRA_OEMAKE = "${OEMAKE_NO_CC} 'CC=${CC}' HOSTCFLAGS='-I${STAGING_INCDIR_NATIVE}'"
- EXTRA_OEMAKE_task_do_populate_staging = "${OEMAKE_NO_CC}"
- EXTRA_OEMAKE_task_do_package = "${OEMAKE_NO_CC}"
-
-============================================================
---- packages/uclibc/uclibc_0.9.29.bb    e670b8966480e150375aa74c2bd62de6c8e5315b
-+++ packages/uclibc/uclibc_0.9.29.bb    0eac903c662c67108b358b1ad2c6d1d976cc5419
-@@ -7,7 +7,7 @@ UCLIBC_BASE ?= "0.9.29"
- # on whether the base patches apply to the selected (SRCDATE) svn release.
- #
- UCLIBC_BASE ?= "0.9.29"
--PR = "r13"
-+PR = "r14"
-
- require uclibc.inc
-
-
+Regards,
+-- 
+Leon
 
 
