@@ -1,30 +1,21 @@
-Received: from [203.199.93.25] (helo=omta2.indiatimes.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <pavan_savoy@indiatimes.com>) id 1JqN8O-00021X-I8
-	for openembedded-devel@openembedded.org; Mon, 28 Apr 2008 08:46:44 +0200
-Received: (qmail 14423 invoked by uid 509); 28 Apr 2008 06:24:09 -0000
-Comment: DomainKeys? See http://antispam.yahoo.com/domainkeys
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=private; d=indiatimes.com;
-	b=Ua1ZUABw9oGfs2+HmsV/YA+9BY+sKCaVcYMGNRSBujlt4mNWYWuajNtg6FGC9xKS  ;
-Received: from 192.168.58.231 by omta2.indiatimes.com (envelope-from
-	<pavan_savoy@indiatimes.com>, uid 502) with qmail-scanner-1.25st 
-	(clamdscan: 0.91.2/4015. spamassassin: 3.2.3. perlscan: 1.25st.  
-	Clear:RC:1(192.168.58.231):SA:0(0.0/4.9):. 
-	Processed in 0.09675 secs); 28 Apr 2008 06:24:09 -0000
-X-Spam-Status: No, hits=0.0 required=4.9
-X-Indiatimes-Scanner-Mail-From: pavan_savoy@indiatimes.com via
-	omta2.indiatimes.com
-X-Indiatimes-Scanner: 1.25st (Clear:RC:1(192.168.58.231):SA:0(0.0/4.9):.
-	Processed in 0.09675 secs Process 14414)
-Received: from unknown (HELO mb7.indiatimes.com) (192.168.58.231)
-	by omta2.indiatimes.com with SMTP; 28 Apr 2008 06:24:09 -0000
-Date: Mon, 28 Apr 2008 12:05:02 +0530 (IST)
-From: pavan_savoy@indiatimes.com
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1JqRn2-00080E-Jc
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Apr 2008 13:45:00 +0200
+Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
+	helo=abughraib.localdomain) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1JqRme-0006av-K8
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Apr 2008 13:44:36 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <2093257597.87241209364502228.JavaMail.root@mbv7.indiatimes.com>
+Date: Mon, 28 Apr 2008 13:44:32 +0200
+User-Agent: KMail/1.9.9
 MIME-Version: 1.0
-X-Originating-IP: [127.0.0.1]
-Subject: Problems adding Input device.
+Message-Id: <200804281344.32507.zecke@selfish.org>
+Subject: Summary of an unwanted merge and what I did
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -38,26 +29,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2008 06:46:45 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Mon, 28 Apr 2008 11:45:00 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Hey,
+
+I love countries where they block the SMTP port and somehow even if I did sent 
+two mails on this.
+
+So here my summary:
+	I had both Openembedded and Openmoko in the same database and innocently 
+typed mtn merge, got annoyed with the ncc on gsmhandset.state files, 
+completed the merge, pushed. I only had a look at the last rev of the two 
+heads and it was a DEPENDS fixlet to neod which looked about right, so 
+decided to do the merge. Only afterwards I saw I just merged the qtopia-phone 
+crap.
 
 
-
-Hi,
-
-
-I have the open-embedded jffs2 image provided in linux4sam for the atmel sam9261ek evaluation board, and the ads7846 touchscreen controller works well on that.
-
-What should I do, if I want to add another touchscreen controller to it, or an usb mouse, or any other input device, how can I make X pick up events from a particular device such as /dev/input/touchscreen0
-
-Thanks
-
-_______________________________________________
-Openembedded-users mailing list
-Openembedded-users@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+So what did I learn about mtn:
+	- You can not disapprove a merge!
+	- So I decided to suspend the merge, the ncc preparation and the head of OM. 
+This lead to a tree without any heads. :)
+	- Then I used the last not OM head I had (one ancestor of the merge) and did 
+a change and created a new head.
 
 
+I assumed this situation was fixed, we have OM history in the OE.db which is 
+not bad, but still the Qtopia phone recipes are not within OE. Everything 
+looked fine until I got poked on irc.
+
+It looks like someone is using a mtn without the support for the suspend cert, 
+and he did the merge again.
+
+I could suspend the merge, create a new head without the merge but then 
+someone without a mtn with the suspend cert support will do a merge... and I 
+could suspend the merge, create a new head wihtout the merge but then someone 
+without a mtn with the suspend will do a merge... I love infinite recursion.
+
+I have no idea how to fix this situation without ditching monotone. E.g. If 
+mtn would transfer the client version number and we could reject this with a 
+lua hook we would be set, but I don't remember seing such thing.
+
+
+ideas? I'm tempted to say sorry but I think I'm not the one to blame (a tool 
+is) :)
+
+	z.
 
 
