@@ -1,21 +1,33 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.132.247] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Jqoc0-00033U-Dr
-	for openembedded-devel@openembedded.org; Tue, 29 Apr 2008 14:07:08 +0200
-Received: (qmail 6165 invoked by uid 1003); 29 Apr 2008 12:06:38 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 29 Apr 2008 12:06:37 -0000
-Message-ID: <48170F3C.7040409@balister.org>
-Date: Tue, 29 Apr 2008 08:06:20 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.12 (X11/20080226)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Jqocb-000359-T5
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Apr 2008 14:07:46 +0200
+Received: by an-out-0708.google.com with SMTP id b33so1272641ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Apr 2008 05:07:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=ybtYSfuhnN5QJF6X0yDArsqlWs2Jh4Z8EreacglA/x4=;
+	b=Uz4HfHnYszJFvgM4mLEFrEOtS/IZjbZQCNMHk9d8wiExFeVaAxE3FpsQfuATi+uReXyJhg3sUAtgtvmEYy/S7RoxopqllE7OAMZEIbxr1AGK2GkrHCwX0kH2t0gl/0WLLMF4qcjHvGVb/jgYFvr1kFeTtKVHHYrz9lzs7Gst/Fo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=sX7JOoHKU/qBO1SLL43rR7/WTGBnCZVjH/G0+zYe54n7TysjZvVtrK7h1P4ankz1Y4V6ZfPEsgdxttbuo4UN6yCmqvqKB5DrHritMitLs7W6pQjzvRlpbH9aISOIOeN1DWuk35UaU3rmKMaMOF8A3Vty4GkqBPr7UH/EixHIi6o=
+Received: by 10.100.164.10 with SMTP id m10mr1369611ane.33.1209470837824;
+	Tue, 29 Apr 2008 05:07:17 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Tue, 29 Apr 2008 05:07:17 -0700 (PDT)
+Message-ID: <c384c5ea0804290507t66765c59w2fbc82366bec675d@mail.gmail.com>
+Date: Tue, 29 Apr 2008 14:07:17 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <19c1b8a90804290048g7618e76dw65ad0273504c9c74@mail.gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <200804281344.32507.zecke@selfish.org>	<200804281639.04704.zecke@selfish.org>	<fv5nfj$3pg$1@ger.gmane.org>	<1209457156.5642.9.camel@dax.rpnet.com>
-	<fv7289$ovv$1@ger.gmane.org>
-In-Reply-To: <fv7289$ovv$1@ger.gmane.org>
-Subject: Re: Summary of an unwanted merge and what I did
+References: <200804281451.05548.geoffrey@pager.net>
+	<200804282349.46539.zecke@selfish.org>
+	<c384c5ea0804281519o596e224bw252bbac9cca4abc6@mail.gmail.com>
+	<c384c5ea0804282203n7b743ed7w41e5e4c201b81a13@mail.gmail.com>
+	<19c1b8a90804290048g7618e76dw65ad0273504c9c74@mail.gmail.com>
+Subject: Re: Mixed up STAGING_INCDIR's in uclibc.inc?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -29,106 +41,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2008 12:07:08 -0000
-X-Groupsio-MsgNum: 5040
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms090108090807060402060706"
-
---------------ms090108090807060402060706
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 29 Apr 2008 12:07:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-There are lots of good feature and bad features to all the choices. What 
-it boils down to is many people want to use git because everyone else 
-does (I fall into the category), but git is a pain in the hind-quarters 
-to learn (I also fall into this category, ask me about git revert 
-sometime). Hg is the closest replacement for monotone, but it suffers 
-from a small (but expanding) user base. Then there are "technical" 
-reasons that I'll skip :)
+Hello Khem,
 
-Then there is the school of thought that we should just make everyone 
-unhappy and use Visual Source Safe or ClearCase.
+On Tue, Apr 29, 2008 at 9:48 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> uclibc-initial recipe has this
+>  require uclibc_${PV}.bb
+>
+I saw that, indeed.
 
-Philip
+>  That should pull the dependency. but this line
+>
+>  DEPENDS = "linux-libc-headers"
+>
+>  should be changed to
+>
+>  DEPENDS += "linux-libc-headers"
+>
+>  I think.
+>
+No, I think the DEPENDS was *intended* to be overridden with a small
+*sub*set that is enough for -initial (to prevent cyclic dependencies).
 
-Rolf Leggewie wrote:
-> Thanks, Richard, for the update.
-> 
-> Richard Purdie wrote:
->> The 'core' team discussed it and didn't reach a consensus.
-> 
-> You mean a unanimous vote?  Or was there really wide disagreement?
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+However, I suspect it should DEPEND on ncurses-native now as well.
 
---------------ms090108090807060402060706
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+You know, I'll fire off a Poky Linux build on a system without
+ncurses-dev on the host to verify my thesis,
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDQyOTEy
-MDYyMFowIwYJKoZIhvcNAQkEMRYEFFE+wyhHvtImTDbNK1TqRgd5GBgMMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBhHgLHzyOupRWPZGQeYKcoGlpknIDH3YhR2VtzypkQ7kIaxQ/y
-bAIWtn97Go3lGkp9UvwYxXVSnoR29K3ArqfwW/Eqq3aaSL+RqX+2HrFgy3hRqKYpUOs+kKioWPvj
-fnJ7OQz/0XdGBd30g8mm/w47RgrEePwBCJCroBd/QU4w20KkzpYsTuE1vxYK9OKWXNr6UNeN2WW7
-bhZXMFV4+cpBjXFtvyp3TOD0GxcKsxk13Gtm9x1dQ2PLEEjb4AMzLBjbQXPkmHKhaOdw1/6+Yw9m
-PyXLgm6SUGye/FZ4vAlMfbmkqJk7Fj98VSJDVf41+NBO323uiwLMrgNDtboqbAFAAAAAAAAA
+Regards,
 
---------------ms090108090807060402060706--
+Leon.
+>  -Khem
+>
+>  On Mon, Apr 28, 2008 at 10:03 PM, Leon Woestenberg
+>
+>
+> <leon.woestenberg@gmail.com> wrote:
+>  > Hello,
+>  >
+>  >  On Tue, Apr 29, 2008 at 12:19 AM, Leon Woestenberg
+>  >
+>  > <leon.woestenberg@gmail.com> wrote:
+>  >
+>  > >  On Mon, Apr 28, 2008 at 11:49 PM, Holger Freyther <zecke@selfish.org> wrote:
+>  >  >  > On Monday 28 April 2008 21:51:05 Geoffrey Wossum wrote:
+>  >  >
+>  >
+>  > >  The confusion started with commit "3afb4ffc02c1e4bde1031645cfa9f8e5465f2138".
+>  >  >  Could you guys please see into that commit, and follow-up from there?
+>  >  >
+>  >  FWIW, by reading the intention of the patch commit, I checked with the
+>  >  source (Poky), and indeed _NATIVE is used, and uclibc.inc DEPENDS on
+>  >  ncurses-native.
+>  >
+>  >  One question remaining for me (and I think Poky might be broken in
+>  >  that respect?) is that uclibc-initial_0.9.29.bb in Poky does not
+>  >  DEPEND on ncurses-native (and does not re-use the .inc DEPENDS btw).
+>  >
+>  >  I have committed the _NATIVE, on both DEPENDS to the .dev branch.
+>  >
+>  >
+>  >
+>  >  Regards,
+>  >  --
+>  >  Leon
+>  >
+>
+>
+> >  _______________________________________________
+>  >  Openembedded-devel mailing list
+>  >  Openembedded-devel@lists.openembedded.org
+>  >  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>  >
+>
+>  _______________________________________________
+>  Openembedded-devel mailing list
+>  Openembedded-devel@lists.openembedded.org
+>  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+-- 
+Leon
+
+
