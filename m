@@ -1,21 +1,22 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1JqpPc-0001X7-9o
+	(envelope-from <jin@mediatomb.cc>) id 1JqpZa-0001jd-Dh
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Apr 2008 14:58:24 +0200
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id 9902C6280D5;
-	Tue, 29 Apr 2008 14:57:56 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080429123310.GA30664@deadlock.dhs.org>
+	Tue, 29 Apr 2008 15:08:44 +0200
+Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
+	id D8501832CA; Tue, 29 Apr 2008 15:08:12 +0200 (CEST)
+Date: Tue, 29 Apr 2008 15:08:12 +0200
+From: Sergey Jin' Bostandzhyan <jin@mediatomb.cc>
+To: Stanislav Brabec <utx@penguin.cz>
+Message-ID: <20080429130812.GB30664@deadlock.dhs.org>
 References: <20080428192607.GB28476@deadlock.dhs.org>
 	<19c1b8a90804281454m3e3ea43fv2d84596976c0487@mail.gmail.com>
 	<20080429123310.GA30664@deadlock.dhs.org>
-Date: Tue, 29 Apr 2008 15:01:38 +0200
-Message-Id: <1209474099.3949.136.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.0 
+	<1209474099.3949.136.camel@hammer.suse.cz>
+MIME-Version: 1.0
+In-Reply-To: <1209474099.3949.136.camel@hammer.suse.cz>
+User-Agent: Mutt/1.5.15 (2007-04-06)
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: problem building meta-toolchain for arm/uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -30,27 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2008 12:58:24 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Apr 2008 13:08:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Sergey 'Jin' Bostandzhyan wrote:
+On Tue, Apr 29, 2008 at 03:01:38PM +0200, Stanislav Brabec wrote:
+> > libc.so.6 in the whole work directory I found this:
+> 
+> You could check your config.log for site script inclusion.
 
-> And there it was staring at me: the -lc thing. When I was grepping for 
-> libc.so.6 in the whole work directory I found this:
+Thanks for the hint, let's see...
 
-You could check your config.log for site script inclusion.
+binutils-cross-sdk loads these scripts to that looks ok:
+org.openembedded.stable/site/endian-little
+org.openembedded.stable/site/common-glibc
+org.openembedded.stable/site/ix86-common
+org.openembedded.stable/site/common
+org.openembedded.stable/site/common
 
-If you will see, that site scripts .../site/arm-* are included, it is be
-the same problem I described five days ago in the mail "brokenness of
-native builds by cross-compile site scripts".
+same for gcc-cross SDK
+ 
+> If you will see, that site scripts .../site/arm-* are included, it is be
+> the same problem I described five days ago in the mail "brokenness of
+> native builds by cross-compile site scripts".
+> 
+> It needs a fox of class/siteinfo.bbclass. Probably don't include
+> anything if compiling native packages.
 
-It needs a fox of class/siteinfo.bbclass. Probably don't include
-anything if compiling native packages.
+Seems that I am not hitting this particular problem... must be something else.
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Kind regards,
+Jin
 
 
 
