@@ -1,37 +1,20 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JqotD-0000I0-Fd
-	for openembedded-devel@openembedded.org; Tue, 29 Apr 2008 14:24:55 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m3TCORv4006318
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Apr 2008 13:24:27 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 06198-02 for <openembedded-devel@openembedded.org>;
-	Tue, 29 Apr 2008 13:24:23 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m3TCOIIj006296
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Apr 2008 13:24:18 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <c384c5ea0804290507t66765c59w2fbc82366bec675d@mail.gmail.com>
-References: <200804281451.05548.geoffrey@pager.net>
-	<200804282349.46539.zecke@selfish.org>
-	<c384c5ea0804281519o596e224bw252bbac9cca4abc6@mail.gmail.com>
-	<c384c5ea0804282203n7b743ed7w41e5e4c201b81a13@mail.gmail.com>
-	<19c1b8a90804290048g7618e76dw65ad0273504c9c74@mail.gmail.com>
-	<c384c5ea0804290507t66765c59w2fbc82366bec675d@mail.gmail.com>
-Date: Tue, 29 Apr 2008 13:24:19 +0100
-Message-Id: <1209471859.5642.16.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Mixed up STAGING_INCDIR's in uclibc.inc?
+	(envelope-from <jin@mediatomb.cc>) id 1Jqp1g-0000W9-IQ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Apr 2008 14:33:40 +0200
+Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
+	id CAF51832CA; Tue, 29 Apr 2008 14:33:10 +0200 (CEST)
+Date: Tue, 29 Apr 2008 14:33:10 +0200
+From: Sergey 'Jin' Bostandzhyan <jin@mediatomb.cc>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080429123310.GA30664@deadlock.dhs.org>
+References: <20080428192607.GB28476@deadlock.dhs.org>
+	<19c1b8a90804281454m3e3ea43fv2d84596976c0487@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <19c1b8a90804281454m3e3ea43fv2d84596976c0487@mail.gmail.com>
+User-Agent: Mutt/1.5.15 (2007-04-06)
+Subject: Re: problem building meta-toolchain for arm/uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -45,42 +28,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2008 12:24:55 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Apr 2008 12:33:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, 2008-04-29 at 14:07 +0200, Leon Woestenberg wrote:
-> On Tue, Apr 29, 2008 at 9:48 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> >  That should pull the dependency. but this line
-> >
-> >  DEPENDS = "linux-libc-headers"
-> >
-> >  should be changed to
-> >
-> >  DEPENDS += "linux-libc-headers"
-> >
-> >  I think.
-> >
-> No, I think the DEPENDS was *intended* to be overridden with a small
-> *sub*set that is enough for -initial (to prevent cyclic dependencies).
+Hi,
+
+On Mon, Apr 28, 2008 at 02:54:34PM -0700, Khem Raj wrote:
+> try running the link step alone manually
+
+[...]
+
+did that, -v did not tell anything that seemed useful but then I noticed
+one thing:
+
+> libgcc/./_udiv_w_sdiv_s.o libgcc/./_udivmoddi4_s.o libgcc/./bpabi_s.o
+> libgcc/./unaligned-funcs_s.o libgcc/./unwind-arm_s.o
+> libgcc/./libunwind_s.o libgcc/./pr-support_s.o libgcc/./unwind-c_s.o
+> -lc && rm -f ./libgcc_s.so && if [ -f ./libgcc_s.so.1 ]; then mv -f
+> ./libgcc_s.so.1 ./libgcc_s.so.1.backup; else true; fi && mv
+> ./libgcc_s.so.1.tmp ./libgcc_s.so.1 && ln -s libgcc_s.so.1
+> ./libgcc_s.so
+
+actually, for this test, I should have stopped here:
+...
+> libgcc/./_udiv_w_sdiv_s.o libgcc/./_udivmoddi4_s.o libgcc/./bpabi_s.o
+> libgcc/./unaligned-funcs_s.o libgcc/./unwind-arm_s.o
+> libgcc/./libunwind_s.o libgcc/./pr-support_s.o libgcc/./unwind-c_s.o
+> -lc
+
+the stuff after it is just moving around and so on.
+
+> and pass options to generate verbose output. It could be related to binutils.
+
+And there it was staring at me: the -lc thing. When I was grepping for 
+libc.so.6 in the whole work directory I found this:
+
+binutils-2.18/build.i686-linux.arm-angstrom-linux-uclibcgnueabi/ld/earmelf_linux_eabi.c:494
+
+  /* We issue a warning if it looks like we are including two
+     different versions of the same shared library.  For example,
+     there may be a problem if -lc picks up libc.so.6 but some other
+     shared library has a DT_NEEDED entry of libc.so.5.  This is a
+     heuristic test, and it will only work if the name looks like
+     NAME.so.VERSION.  FIXME: Depending on file names is error-prone.
+     If we really want to issue warnings about mixing version numbers
+     of shared libraries, we need to find a better way.  */
+
+Can this be somehow related to the issue that I am experiencing?
+
+Btw, just for the fun of it, I tried simply removing the -lc parameter - and
+then it linked without error. But then of course I am not sure if that
+is correct or if by doing that I produced garbage...
+
+Any further ideas?
+
+Kind regards,
+Jin
+
+
+
+
 > 
-> However, I suspect it should DEPEND on ncurses-native now as well.
 > 
-> You know, I'll fire off a Poky Linux build on a system without
-> ncurses-dev on the host to verify my thesis,
-
-This was a recent fix to Poky. I removed all the -dev packages from our
-build machine and my desktop and can confirm it worked without the -dev
-package installed after the fix. I don't think its needed for -initial,
-just for the main version but I could be wrong. Be sure to use "bitbake
-uclibc-initial" when you test.
-
-Cheers,
-
-Richard
-
-
-
-
+> 
+> 
+> On Mon, Apr 28, 2008 at 12:26 PM, Sergey 'Jin' Bostandzhyan
+> <jin@mediatomb.cc> wrote:
+> > Hi everyone,
+> >
+> > I keep struggling with meta-toolchain and I hope to get some input on this.
+> >
+> > I'm on oe stable, angstrom-2007.1, ARM9, uclibc, EABI
+> >
+> > I start with a clean build: bitbake meta-toolchain
+> >
+> > Unfortunately gcc-cross-sdk fails to build:
+> > NOTE: package gcc-cross-sdk-4.1.2-r11: task do_compile: failed
+> >
+> > And here's the most interesting part:
+> > | /opt/44296fe048e6bdbb2da959e5d681dfdf/etcb/OE/build/angstrom/cross/bin/arm-angstrom-linux-uclibcgnueabi-ld: cannot find libc.so.6
+> > | collect2: ld returned 1 exit status
+> > | make[3]: *** [libgcc_s.so] Error 1
+> >
+> > Is it looking for libc.so.6 on a uclibc build?
+> >
+> > Here is the full log:
+> > http://www.deadlock.dhs.org/jin/log_do_compile_uclibcgnueabi_gcc_cross_sdk.txt
+> >
+> > I started to poke around, looking for differences between the configuration
+> > options of the sdk and non-sdk versions.
+> >
+> > Apart of the directories most things are the same, the only other additonal
+> > options were in the gcc-cross-sdk (vs. gcc-cross)  configuration:
+> > --enable-clocale=generic and --disable-nls (the non-sdk gcc-cross did not have
+> > those).
+> >
+> > I also looked at binutils-cross and binutils-cross-sdk, here binutils-cross
+> > had two more options: --enable-install-libbfd --disable-werror The rest,
+> > except for the paths was the same.
+> >
+> > I also noticed that the sdk variants use the already available tools from
+> > the cross directory, not sure if that can be related to my problem
+> > binutils-cross:
+> > checking for arm-angstrom-linux-uclibcgnueabi-gcc... no
+> >
+> > binutils-cross-sdk:
+> > checking for arm-angstrom-linux-uclibcgnueabi-gcc... arm-angstrom-linux-uclibcgnueabi-gcc
+> >
+> > At this point I am sort of stuck, so if anyone has an idea or a clue - I'll
+> > be happy to hear about it. Thanks!
+> >
+> > Kind regards,
+> > Jin
+> >
+> > P.S. I'd submit a bug... but the bugtracker is still down :(
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
