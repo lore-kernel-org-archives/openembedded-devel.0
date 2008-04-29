@@ -1,23 +1,35 @@
-Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
+Received: from [209.85.132.244] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jin@mediatomb.cc>) id 1JqpZa-0001jd-Dh
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JqpaH-0001kq-Ra
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Apr 2008 15:08:44 +0200
-Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
-	id D8501832CA; Tue, 29 Apr 2008 15:08:12 +0200 (CEST)
-Date: Tue, 29 Apr 2008 15:08:12 +0200
-From: Sergey Jin' Bostandzhyan <jin@mediatomb.cc>
-To: Stanislav Brabec <utx@penguin.cz>
-Message-ID: <20080429130812.GB30664@deadlock.dhs.org>
-References: <20080428192607.GB28476@deadlock.dhs.org>
-	<19c1b8a90804281454m3e3ea43fv2d84596976c0487@mail.gmail.com>
-	<20080429123310.GA30664@deadlock.dhs.org>
-	<1209474099.3949.136.camel@hammer.suse.cz>
+	Tue, 29 Apr 2008 15:09:26 +0200
+Received: by an-out-0708.google.com with SMTP id b33so1277782ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Apr 2008 06:08:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=D3aXTxK1NeD1E+vm7ITmkYTbQ+et3hUeCnNhr5kW3ts=;
+	b=MuY+KCom+sgyEtg2lhjCmualcstRUh3P3pIgXs9uDm4ItQjZbZBOIw71v/1aIMMvoi5aObmExbg/0M2fQFEF6cyjRodCIo94lPSflAUliEIeZ/GtkvioRBUxOx7U+JzzDuU0zY2KFNXMwavdTOURMARLs46crMp4xWRDgBDNv1Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=VaCYWZFYo9GVAdxEsHCdIwOr6rtZtGbYqBS4/nkAxZFkDpjGG8fA1qrcHKryIkiQFMAQcQUdxtAYqyrfyJVpm8py/rBz7Sgj9Ouc2t6gfekUnsTxWm0q8SS3TPnVeCpUMws2tiVGvz8ReSG3pxlbBRLsSpjDZOLLnbDVdZ4pE1g=
+Received: by 10.100.11.7 with SMTP id 7mr1475199ank.56.1209474537700;
+	Tue, 29 Apr 2008 06:08:57 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Tue, 29 Apr 2008 06:08:57 -0700 (PDT)
+Message-ID: <c384c5ea0804290608s1be8bb21mc9aa72e49b883f72@mail.gmail.com>
+Date: Tue, 29 Apr 2008 15:08:57 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1209471859.5642.16.camel@dax.rpnet.com>
 MIME-Version: 1.0
-In-Reply-To: <1209474099.3949.136.camel@hammer.suse.cz>
-User-Agent: Mutt/1.5.15 (2007-04-06)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: problem building meta-toolchain for arm/uclibc
+References: <200804281451.05548.geoffrey@pager.net>
+	<200804282349.46539.zecke@selfish.org>
+	<c384c5ea0804281519o596e224bw252bbac9cca4abc6@mail.gmail.com>
+	<c384c5ea0804282203n7b743ed7w41e5e4c201b81a13@mail.gmail.com>
+	<19c1b8a90804290048g7618e76dw65ad0273504c9c74@mail.gmail.com>
+	<c384c5ea0804290507t66765c59w2fbc82366bec675d@mail.gmail.com>
+	<1209471859.5642.16.camel@dax.rpnet.com>
+Subject: Re: Mixed up STAGING_INCDIR's in uclibc.inc?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -31,37 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2008 13:08:47 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 29 Apr 2008 13:09:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Tue, Apr 29, 2008 at 03:01:38PM +0200, Stanislav Brabec wrote:
-> > libc.so.6 in the whole work directory I found this:
-> 
-> You could check your config.log for site script inclusion.
+Hello Richard,
 
-Thanks for the hint, let's see...
+On Tue, Apr 29, 2008 at 2:24 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Tue, 2008-04-29 at 14:07 +0200, Leon Woestenberg wrote:
+>  > On Tue, Apr 29, 2008 at 9:48 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>  > However, I suspect it should DEPEND on ncurses-native now as well.
+>  >
+>  > You know, I'll fire off a Poky Linux build on a system without
+>  > ncurses-dev on the host to verify my thesis,
+>
+>  This was a recent fix to Poky. I removed all the -dev packages from our
+>  build machine and my desktop and can confirm it worked without the -dev
+>  package installed after the fix. I don't think its needed for -initial,
+>
+Uhm, *what* worked exactly?
 
-binutils-cross-sdk loads these scripts to that looks ok:
-org.openembedded.stable/site/endian-little
-org.openembedded.stable/site/common-glibc
-org.openembedded.stable/site/ix86-common
-org.openembedded.stable/site/common
-org.openembedded.stable/site/common
+I just did a "bitbake uclibc-initial" SVN with POKYLIBC=uclibc and it fails.
 
-same for gcc-cross SDK
- 
-> If you will see, that site scripts .../site/arm-* are included, it is be
-> the same problem I described five days ago in the mail "brokenness of
-> native builds by cross-compile site scripts".
-> 
-> It needs a fox of class/siteinfo.bbclass. Probably don't include
-> anything if compiling native packages.
+>  just for the main version but I could be wrong. Be sure to use "bitbake
+>  uclibc-initial" when you test.
+>
+I just checked; uclibc-initial_0.9.29.bb needs a DEPEND on ncurses-native.
 
-Seems that I am not hitting this particular problem... must be something else.
+That fixes it. I committed this to OE yesterday.
 
-Kind regards,
-Jin
-
+Regards,
+-- 
+Leon
 
 
