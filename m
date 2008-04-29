@@ -1,24 +1,39 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.200.175] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1JqqGh-0008K8-HE
+	(envelope-from <raj.khem@gmail.com>) id 1Jqqjc-0005OT-UC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Apr 2008 15:53:15 +0200
-Received: from andromeda (e180169177.adsl.alicedsl.de [85.180.169.177])
-	by drlauer-research.com (Postfix) with ESMTP id EFEC758438F
+	Tue, 29 Apr 2008 16:23:09 +0200
+Received: by wf-out-1314.google.com with SMTP id 25so21545wfc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2008 16:04:10 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Tue, 29 Apr 2008 07:22:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:subject:from:to:cc:in-reply-to:references:content-type:date:message-id:mime-version:x-mailer;
+	bh=ExInnOL8N0x7P83+HtA7NM7Qt0GddCSNqTnkfLhYU5E=;
+	b=dDGYh24/AZo+DgzDRIgVg1Ez7vxmjn1ZZu8ELfIGVYaS/+vwHcFx+RqLHywTBlmfM3vgE04DODylFEnLODDgFNjiX7ZRbu0JbJvs/u0RjeZyD1UmVYHVbvQlUvoEVMb+LIOibPesSD2QKr/l4BP/mVH0ozdBCmxfvIte9N+H8uQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=subject:from:to:cc:in-reply-to:references:content-type:date:message-id:mime-version:x-mailer;
+	b=IwAPsEQALJePyLoohtRhTf/EsFAYMXbqMCATXtYKvtRBi5RhL8GCwMtpzpL6VIeAEDuobcytaZwkwNb5aXwQ9KrJ9CrZ1M2geFCFaVB/n60SzZ+Q9SwHgkj9rJPhexPMO1SB80sOCyAl7hVXvo4mHplfs8vmiJRDlmH930Ymr/Y=
+Received: by 10.143.156.15 with SMTP id i15mr331664wfo.276.1209478960328;
+	Tue, 29 Apr 2008 07:22:40 -0700 (PDT)
+Received: from ?192.168.1.71? ( [71.146.12.15])
+	by mx.google.com with ESMTPS id 29sm15228190wfg.9.2008.04.29.07.22.39
+	(version=SSLv3 cipher=RC4-MD5); Tue, 29 Apr 2008 07:22:39 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Apr 2008 15:54:02 +0200
-User-Agent: KMail/1.9.9
-References: <200804281344.32507.zecke@selfish.org>
-	<48170F3C.7040409@balister.org>
-	<c384c5ea0804290643p709b6b18qdf9581ffd744e5f7@mail.gmail.com>
-In-Reply-To: <c384c5ea0804290643p709b6b18qdf9581ffd744e5f7@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200804291554.02863.mickey@vanille-media.de>
-Subject: Re: Summary of an unwanted merge and what I did
+In-Reply-To: <1209471859.5642.16.camel@dax.rpnet.com>
+References: <200804281451.05548.geoffrey@pager.net>
+	<200804282349.46539.zecke@selfish.org>
+	<c384c5ea0804281519o596e224bw252bbac9cca4abc6@mail.gmail.com>
+	<c384c5ea0804282203n7b743ed7w41e5e4c201b81a13@mail.gmail.com>
+	<19c1b8a90804290048g7618e76dw65ad0273504c9c74@mail.gmail.com>
+	<c384c5ea0804290507t66765c59w2fbc82366bec675d@mail.gmail.com>
+	<1209471859.5642.16.camel@dax.rpnet.com>
+Date: Tue, 29 Apr 2008 07:22:38 -0700
+Message-Id: <1209478958.30327.1.camel@isis>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1 
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Mixed up STAGING_INCDIR's in uclibc.inc?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -32,34 +47,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2008 13:53:15 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 29 Apr 2008 14:23:09 -0000
+X-Groupsio-MsgNum: 5049
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-gQY0DoVLLIx74rUOidIX"
 
-On Tuesday 29 April 2008 15:43:32 Leon Woestenberg wrote:
-> On Tue, Apr 29, 2008 at 2:06 PM, Philip Balister <philip@balister.org> 
-wrote:
-> >  Then there is the school of thought that we should just make everyone
-> > unhappy and use Visual Source Safe or ClearCase.
->
-> And then, the vice versa approach:
->
-> Did we reach agreement that the move to GIT or Hg will make us happy,
-> regardless of which one?
+--=-gQY0DoVLLIx74rUOidIX
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-At the risk of being flamed, I will step forward and say:
+On Tue, 2008-04-29 at 13:24 +0100, Richard Purdie wrote:
+> On Tue, 2008-04-29 at 14:07 +0200, Leon Woestenberg wrote:
+> > On Tue, Apr 29, 2008 at 9:48 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> > >  That should pull the dependency. but this line
+> > >
+> > >  DEPENDS =3D "linux-libc-headers"
+> > >
+> > >  should be changed to
+> > >
+> > >  DEPENDS +=3D "linux-libc-headers"
+> > >
+> > >  I think.
+> > >
+> > No, I think the DEPENDS was *intended* to be overridden with a small
+> > *sub*set that is enough for -initial (to prevent cyclic dependencies).
+> >=20
+> > However, I suspect it should DEPEND on ncurses-native now as well.
+> >=20
+> > You know, I'll fire off a Poky Linux build on a system without
+> > ncurses-dev on the host to verify my thesis,
+>=20
+> This was a recent fix to Poky. I removed all the -dev packages from our
+> build machine and my desktop and can confirm it worked without the -dev
+> package installed after the fix. I don't think its needed for -initial,
+> just for the main version but I could be wrong. Be sure to use "bitbake
+> uclibc-initial" when you test.
 
-Yes. I'm seeing an overwhelming majority supporting a move to git or hg, with 
-a strong tend towards git. At the moment, we are working on test 
-installations to see how that would fit into our workflow.
+if you are doing anything with kconfig in the recipe you will need
+libncurses-dev which I think uclibc-initial is doing.
 
-The days of us solely using monotone are counted. As opposed to last time 
-though, this time we do and will not rush it.
+>=20
+> Cheers,
+>=20
+> Richard
+>=20
+>=20
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-:M:
--- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+--=-gQY0DoVLLIx74rUOidIX
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
 
+iD8DBQBIFy8uHnJKy6V6em4RAreIAKCvMk1MioslgI4hpTK/P5GjJyRrpgCfYbEu
+HZU9NHY2w3uiIXT5Vvosnmk=
+=gEj2
+-----END PGP SIGNATURE-----
+
+--=-gQY0DoVLLIx74rUOidIX--
