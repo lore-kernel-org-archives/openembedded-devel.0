@@ -1,23 +1,27 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [66.249.82.225] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nils.faerber@kernelconcepts.de>) id 1Jr7Ek-0005WO-Pw
+	(envelope-from <jpaechnatz@gmail.com>) id 1Jr8HK-0003Z4-9R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Apr 2008 10:00:23 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.28])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nils.faerber@kernelconcepts.de>) id 1Jr7ki-0000yd-0J
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Apr 2008 10:33:24 +0200
-Message-ID: <481826F7.5070504@kernelconcepts.de>
-Date: Wed, 30 Apr 2008 09:59:51 +0200
-From: Nils Faerber <nils.faerber@kernelconcepts.de>
-Organization: kernel concepts
-User-Agent: Thunderbird 1.5.0.14ubu (X11/20080306)
-MIME-Version: 1.0
+	Wed, 30 Apr 2008 11:07:06 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so471450wxd.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Apr 2008 02:06:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:mime-version:content-type:content-transfer-encoding:content-disposition;
+	bh=+0ofI9HEIQNlH3czrKGFDaxHHwGR9dliYzw5atkypWM=;
+	b=fun6pVnMhLiuiK06hEfq65lx9feguteH8enJWIKrJbajSN77ODFvSgDvdlnu6hQSPpb4zps4V/3btksCDtiSf2YCz+FIQaQuH70JpJH1rn26GXkHtJmSUUkfCUcebWPsQhq7FDqOxnPe41i3/cikLI37qI9wp0jK2iMKQE3ZAGM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type:content-transfer-encoding:content-disposition;
+	b=AplDO/8n3doMXAeUM8XB+5F0cZkZwb4C59UxiXqmkjVkjmSHA3I/iSVSdFmOEQAXiIRFDxBKmrZa8vsCYpNAh+w78DDRcH+irp90zmN0T/gBPVLd0I05YKMvEUMOFOyqGWUw64wjHRVr5xhyGWUKEbGTPWJyUCf6QbpU2txCzmA=
+Received: by 10.90.29.13 with SMTP id c13mr751856agc.114.1209546395098;
+	Wed, 30 Apr 2008 02:06:35 -0700 (PDT)
+Received: by 10.90.97.16 with HTTP; Wed, 30 Apr 2008 02:06:35 -0700 (PDT)
+Message-ID: <8609a9b90804300206o7e36c62ap7e28b82b26ab84e9@mail.gmail.com>
+Date: Wed, 30 Apr 2008 11:06:35 +0200
+From: "Johannes Paechnatz" <jpaechnatz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.94.2.0
-Subject: OT: Developer contact @ NVidia for mobile GPU?
+MIME-Version: 1.0
+Subject: pxa machine conf?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -31,31 +35,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2008 08:00:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 30 Apr 2008 09:07:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi!
-This is a little off-topic. sorry for that, but I know that a lot of
-embedded developers are around here and I have become quite desperate
-about that issue by now...
-We might be getting hands on a mobile device for which we may develop a
-Linux port. Most parts in it ar OK but the GPU is a NVidia GoForce 4800
-for which nobody seems to be able to get *any* documentation.
+I try to compile a package for a specific machine, but even searching
+in the machine.conf files doesn't helped to figure out the right
+config.
 
-So what I am looking for is either an existing Linux kernel framebuffer
-driver (non accelerated) or documentation for the 2D part to write one.
+Machine: Pocket Loox 718/720, PXA272. I tried htcuniversal.conf but it
+seems to build arm5... binaries?
 
-Any hint is very much appreciated!
-Many thanks!
-
-Cheers
-  nils faerber
-
--- 
-kernel concepts GbR        Tel: +49-271-771091-12
-Sieghuetter Hauptweg 48    Fax: +49-271-771091-19
-D-57072 Siegen             Mob: +49-176-21024535
---
+thanks.
 
 
