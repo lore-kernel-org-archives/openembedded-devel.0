@@ -1,31 +1,32 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [66.249.82.239] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <julian_chu@openmoko.com>) id 1JrfGA-0006qt-MC
+	(envelope-from <papercrane@gmail.com>) id 1JrhEf-0006vY-8U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 May 2008 22:20:07 +0200
-Received: from 123-193-248-182.dynamic.kbronet.com.tw ([123.193.248.182]
-	helo=Macintosh.local) by aakash.openmoko.org with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <julian_chu@openmoko.com>) id 1JrfFP-0008U8-Ed
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 May 2008 04:19:29 +0800
-Message-ID: <481A2641.30609@openmoko.com>
-Date: Fri, 02 May 2008 04:21:21 +0800
-From: Julian <julian_chu@openmoko.com>
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-MIME-Version: 1.0
+	Fri, 02 May 2008 00:26:41 +0200
+Received: by wx-out-0506.google.com with SMTP id h27so1261864wxd.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 May 2008 15:26:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:reply-to:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=l2Fc3r4Y3s9EQomk5f3Rz1BUTkOxyyp2hjTI9B2SAPs=;
+	b=t4QpzRqBaBZnjXLD3TS4zlVjRxVzhWR+ddyaXPldZf7ahGr3l+KI1VUXhvcLCHXZ+cajVwUZD4waL4lEAZUh089n8IzroleUhxvO4LwiDVTv02YMHFvCJH3sL+qFxDW3DjI2VRE0vnbBsQLpysAfEQK2xQrWiOd8wTe9li8nX2Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:reply-to:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=BBgIR8SyB/uKoFQMhXzBDjj1Y/xUzCO+FrTaitfdF8BOMJQQyhM6gdqL6Y7fNEkzmCEv/D3dNCavfl1Ztygb8Ncr5mdHnB5cr4QV0Xh5sqnMIYZJc3zeOCemRnm9Q1eDRLVUaN74LzVFvefA3TbpFjq3KUh2Cy+EzRZeCcRO1RY=
+Received: by 10.90.84.17 with SMTP id h17mr3580292agb.96.1209680764491;
+	Thu, 01 May 2008 15:26:04 -0700 (PDT)
+Received: by 10.90.95.14 with HTTP; Thu, 1 May 2008 15:26:04 -0700 (PDT)
+Message-ID: <432beae0805011526t12b05cbav9df7bc0be86c3a1b@mail.gmail.com>
+Date: Thu, 1 May 2008 15:26:04 -0700
+From: "Justin Patrin" <papercrane@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.6
-X-SA-Exim-Connect-IP: 123.193.248.182
-X-SA-Exim-Mail-From: julian_chu@openmoko.com
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: return value of package_qa_check_staged in insane.bbclass
+In-Reply-To: <200804291554.02863.mickey@vanille-media.de>
+MIME-Version: 1.0
+References: <200804281344.32507.zecke@selfish.org>
+	<48170F3C.7040409@balister.org>
+	<c384c5ea0804290643p709b6b18qdf9581ffd744e5f7@mail.gmail.com>
+	<200804291554.02863.mickey@vanille-media.de>
+Subject: Re: Summary of an unwanted merge and what I did
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -39,57 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 May 2008 20:20:07 -0000
-X-Groupsio-MsgNum: 5063
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigD36BBC82DECE504FFFED0A78"
+X-List-Received-Date: Thu, 01 May 2008 22:26:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---------------enigD36BBC82DECE504FFFED0A78
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On Tue, Apr 29, 2008 at 6:54 AM, Michael 'Mickey' Lauer
+<mickey@vanille-media.de> wrote:
+> On Tuesday 29 April 2008 15:43:32 Leon Woestenberg wrote:
+>  > On Tue, Apr 29, 2008 at 2:06 PM, Philip Balister <philip@balister.org>
+>  wrote:
+>  > >  Then there is the school of thought that we should just make everyone
+>  > > unhappy and use Visual Source Safe or ClearCase.
+>  >
+>  > And then, the vice versa approach:
+>  >
+>  > Did we reach agreement that the move to GIT or Hg will make us happy,
+>  > regardless of which one?
+>
+>  At the risk of being flamed, I will step forward and say:
+>
+>  Yes. I'm seeing an overwhelming majority supporting a move to git or hg, with
+>  a strong tend towards git. At the moment, we are working on test
+>  installations to see how that would fit into our workflow.
+>
+>  The days of us solely using monotone are counted. As opposed to last time
+>  though, this time we do and will not rush it.
+>
 
-Hi all,
+At the risk of being flamed myself I'll ask what many aeem to assume
+to be obvious: What does git or hg give OE over monotone? Admittedly
+the annoyance of the OP is genuine but that a new feature doesn't
+quite work as expected doesn't seem like a reason to switch to me.
 
-I got confused with the return value of package_qa_check_staged
-
-the code in insane.bbclass is
-
- if not package_qa_check_staged(bb.data.getVar('STAGING_LIBDIR',d,True), =
-d):
-        bb.fatal("QA staging was broken by the package built above")
-
-if return false, it cause a fatal, but in the body of the function
-the return value was came from the LATEST one.
-
-for example, if there are two sanity test fail.
-the first one is "installed", sane =3D True
-the second one is "tmpdir", sane =3D False
-finally it return False and cause fatal.
-
-but if the checking order changed, it return True and doesn't cause fatal=
-=2E
-
-
-it confused me, is anything wrong ?
-
-Thanks  :-)
-
--Julian
+-- 
+Justin Patrin
 
 
---------------enigD36BBC82DECE504FFFED0A78
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.8 (Darwin)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkgaJkcACgkQPvWtVv2QI0DUMACfVBtPKAIfSiwxs9IOrwvzuwJP
-J/oAoJbmB2lTL+WdO5ys0KYWk/L7sCPZ
-=WjIL
------END PGP SIGNATURE-----
-
---------------enigD36BBC82DECE504FFFED0A78--
