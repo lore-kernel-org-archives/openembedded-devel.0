@@ -1,31 +1,50 @@
-Received: from [66.249.82.239] (helo=wx-out-0506.google.com)
+Received: from [216.32.181.16] (helo=WA4EHSOBE001.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <papercrane@gmail.com>) id 1JrhEf-0006vY-8U
+	(envelope-from <Timothy.Bird@am.sony.com>) id 1JrhQM-00079q-QS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 May 2008 00:26:41 +0200
-Received: by wx-out-0506.google.com with SMTP id h27so1261864wxd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 May 2008 15:26:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:reply-to:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=l2Fc3r4Y3s9EQomk5f3Rz1BUTkOxyyp2hjTI9B2SAPs=;
-	b=t4QpzRqBaBZnjXLD3TS4zlVjRxVzhWR+ddyaXPldZf7ahGr3l+KI1VUXhvcLCHXZ+cajVwUZD4waL4lEAZUh089n8IzroleUhxvO4LwiDVTv02YMHFvCJH3sL+qFxDW3DjI2VRE0vnbBsQLpysAfEQK2xQrWiOd8wTe9li8nX2Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:reply-to:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=BBgIR8SyB/uKoFQMhXzBDjj1Y/xUzCO+FrTaitfdF8BOMJQQyhM6gdqL6Y7fNEkzmCEv/D3dNCavfl1Ztygb8Ncr5mdHnB5cr4QV0Xh5sqnMIYZJc3zeOCemRnm9Q1eDRLVUaN74LzVFvefA3TbpFjq3KUh2Cy+EzRZeCcRO1RY=
-Received: by 10.90.84.17 with SMTP id h17mr3580292agb.96.1209680764491;
-	Thu, 01 May 2008 15:26:04 -0700 (PDT)
-Received: by 10.90.95.14 with HTTP; Thu, 1 May 2008 15:26:04 -0700 (PDT)
-Message-ID: <432beae0805011526t12b05cbav9df7bc0be86c3a1b@mail.gmail.com>
-Date: Thu, 1 May 2008 15:26:04 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200804291554.02863.mickey@vanille-media.de>
+	Fri, 02 May 2008 00:38:46 +0200
+Received: from mail171-wa4-R.bigfish.com (10.8.14.250) by
+	WA4EHSOBE001.bigfish.com (10.8.40.21) with Microsoft SMTP Server id
+	8.1.240.5; Thu, 1 May 2008 22:38:07 +0000
+Received: from mail171-wa4 (localhost.localdomain [127.0.0.1])	by
+	mail171-wa4-R.bigfish.com (Postfix) with ESMTP id D630216400F3	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu,  1 May 2008 22:38:07 +0000 (UTC)
+X-BigFish: VP
+Received: by mail171-wa4 (MessageSwitch) id 1209681487858446_2206; Thu,  1 May
+	2008 22:38:07 +0000 (UCT)
+Received: from mail8.fw-sd.sony.com (mail8.fw-sd.sony.com [160.33.66.75])	by
+	mail171-wa4.bigfish.com (Postfix) with ESMTP id B819E928064	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu,  1 May 2008 22:38:07 +0000 (UTC)
+Received: from mail1.sgo.in.sel.sony.com (mail1.sgo.in.sel.sony.com
+	[43.130.1.111])	by mail8.fw-sd.sony.com (8.12.11/8.12.11) with ESMTP id
+	m41Mc7GJ016782	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 1 May 2008 22:38:07 GMT
+Received: from ussdixhub21.spe.sony.com ([43.130.141.76])	by
+	mail1.sgo.in.sel.sony.com (8.12.11/8.12.11) with ESMTP id
+	m41Mc7ev028001	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 1 May 2008 22:38:07 GMT
+Received: from USSDIXRG02.am.sony.com (43.130.140.32) by
+	ussdixhub21.spe.sony.com (43.130.141.76) with Microsoft SMTP Server id
+	8.1.240.5; Thu, 1 May 2008 15:38:07 -0700
+Received: from ussdixms03.am.sony.com ([43.130.140.23]) by
+	USSDIXRG02.am.sony.com with Microsoft SMTPSVC(5.0.2195.6713); Thu, 1 May
+	2008 15:38:06 -0700
+Received: from timdesk.am.sony.com ([43.135.148.222]) by
+	ussdixms03.am.sony.com with Microsoft SMTPSVC(5.0.2195.6713); Thu, 1 May
+	2008 15:38:01 -0700
+Message-ID: <481A453F.4040705@am.sony.com>
+Date: Thu, 1 May 2008 15:33:35 -0700
+From: Tim Bird <tim.bird@am.sony.com>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070926)
 MIME-Version: 1.0
-References: <200804281344.32507.zecke@selfish.org>
-	<48170F3C.7040409@balister.org>
-	<c384c5ea0804290643p709b6b18qdf9581ffd744e5f7@mail.gmail.com>
-	<200804291554.02863.mickey@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+References: <200804281344.32507.zecke@selfish.org>	<48170F3C.7040409@balister.org>	<c384c5ea0804290643p709b6b18qdf9581ffd744e5f7@mail.gmail.com>	<200804291554.02863.mickey@vanille-media.de>
+	<432beae0805011526t12b05cbav9df7bc0be86c3a1b@mail.gmail.com>
+In-Reply-To: <432beae0805011526t12b05cbav9df7bc0be86c3a1b@mail.gmail.com>
+X-OriginalArrivalTime: 01 May 2008 22:38:01.0824 (UTC)
+	FILETIME=[03662600:01C8ABDC]
 Subject: Re: Summary of an unwanted merge and what I did
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -40,40 +59,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 May 2008 22:26:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 01 May 2008 22:38:47 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tue, Apr 29, 2008 at 6:54 AM, Michael 'Mickey' Lauer
-<mickey@vanille-media.de> wrote:
-> On Tuesday 29 April 2008 15:43:32 Leon Woestenberg wrote:
->  > On Tue, Apr 29, 2008 at 2:06 PM, Philip Balister <philip@balister.org>
->  wrote:
->  > >  Then there is the school of thought that we should just make everyone
->  > > unhappy and use Visual Source Safe or ClearCase.
->  >
->  > And then, the vice versa approach:
->  >
->  > Did we reach agreement that the move to GIT or Hg will make us happy,
->  > regardless of which one?
->
->  At the risk of being flamed, I will step forward and say:
->
->  Yes. I'm seeing an overwhelming majority supporting a move to git or hg, with
->  a strong tend towards git. At the moment, we are working on test
->  installations to see how that would fit into our workflow.
->
->  The days of us solely using monotone are counted. As opposed to last time
->  though, this time we do and will not rush it.
->
+Justin Patrin wrote:
+> At the risk of being flamed myself I'll ask what many seem to assume
+> to be obvious: What does git or hg give OE over monotone? Admittedly
+> the annoyance of the OP is genuine but that a new feature doesn't
+> quite work as expected doesn't seem like a reason to switch to me.
 
-At the risk of being flamed myself I'll ask what many aeem to assume
-to be obvious: What does git or hg give OE over monotone? Admittedly
-the annoyance of the OP is genuine but that a new feature doesn't
-quite work as expected doesn't seem like a reason to switch to me.
+In order to avoid a re-hash of a rather long discussion, please
+read the thread starting here:
+http://projects.linuxtogo.org/pipermail/openembedded-devel/2008-March/004642.html
 
--- 
-Justin Patrin
+=============================
+Tim Bird
+Architecture Group Chair, CE Linux Forum
+Senior Staff Engineer, Sony Corporation of America
+=============================
+
 
 
