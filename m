@@ -1,23 +1,31 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1JrWFu-0004ra-9F; Thu, 01 May 2008 12:43:14 +0200
-Received: from andromeda (e180137166.adsl.alicedsl.de [85.180.137.166])
-	by drlauer-research.com (Postfix) with ESMTP id 80CBF584BEF;
-	Thu,  1 May 2008 12:54:12 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 1 May 2008 12:43:56 +0200
-User-Agent: KMail/1.9.9
-References: <12c2e32e0804300521u4149d575tb3cfde6456b2919e@mail.gmail.com>
-	<200804301441.47249.openembedded@haerwu.biz>
-	<12c2e32e0805010329p43c30249m670c23999e890431@mail.gmail.com>
-In-Reply-To: <12c2e32e0805010329p43c30249m670c23999e890431@mail.gmail.com>
+	(envelope-from <julian_chu@openmoko.com>) id 1JrfGA-0006qt-MC
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 May 2008 22:20:07 +0200
+Received: from 123-193-248-182.dynamic.kbronet.com.tw ([123.193.248.182]
+	helo=Macintosh.local) by aakash.openmoko.org with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <julian_chu@openmoko.com>) id 1JrfFP-0008U8-Ed
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 02 May 2008 04:19:29 +0800
+Message-ID: <481A2641.30609@openmoko.com>
+Date: Fri, 02 May 2008 04:21:21 +0800
+From: Julian <julian_chu@openmoko.com>
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
 MIME-Version: 1.0
-Message-Id: <200805011243.56809.mickey@vanille-media.de>
-Cc: Using OE <openembedded-users@lists.openembedded.org>
-Subject: Re: yet another OE manual
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.6
+X-SA-Exim-Connect-IP: 123.193.248.182
+X-SA-Exim-Mail-From: julian_chu@openmoko.com
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: return value of package_qa_check_staged in insane.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -31,38 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 May 2008 10:43:14 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Thu, 01 May 2008 20:20:07 -0000
+X-Groupsio-MsgNum: 5063
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigD36BBC82DECE504FFFED0A78"
+
+--------------enigD36BBC82DECE504FFFED0A78
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-On Thursday 01 May 2008 12:29:10 Javi Roman wrote:
-> 2008/4/30 Marcin Juszkiewicz <openembedded@haerwu.biz>:
-> > Dnia Wednesday 30 of April 2008, Javi Roman napisa=B3:
-> >  >  I have just released a new manual (for beginners) about OE in the
-> >  > following URL:
-> >  >
-> >  >  http://www.kernel-labs.org/openembedded-guide
-> >  >
-> >  >  I hope you found it useful. I ask you for feedback, comments,
-> >  >  suggestions, ..., flames ;-)
-> >
-> >  Why not merge this into official OE documentation?
->
-> Hello,
->
-> it would be an honour to me include a link into OE documentation page.
-> I suppose I cannot update the wiki, OE wiki accounts are only for OE
-> members, isn't it?
+Hi all,
 
-I guess Marcin was talking about merging (not linking) it into the official=
- OE=20
-documentation, which is maintained in the org.oe.documentation branch.
+I got confused with the return value of package_qa_check_staged
 
-:M:
+the code in insane.bbclass is
 
-=2D-=20
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+ if not package_qa_check_staged(bb.data.getVar('STAGING_LIBDIR',d,True), =
+d):
+        bb.fatal("QA staging was broken by the package built above")
+
+if return false, it cause a fatal, but in the body of the function
+the return value was came from the LATEST one.
+
+for example, if there are two sanity test fail.
+the first one is "installed", sane =3D True
+the second one is "tmpdir", sane =3D False
+finally it return False and cause fatal.
+
+but if the checking order changed, it return True and doesn't cause fatal=
+=2E
 
 
+it confused me, is anything wrong ?
+
+Thanks  :-)
+
+-Julian
+
+
+--------------enigD36BBC82DECE504FFFED0A78
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.8 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAkgaJkcACgkQPvWtVv2QI0DUMACfVBtPKAIfSiwxs9IOrwvzuwJP
+J/oAoJbmB2lTL+WdO5ys0KYWk/L7sCPZ
+=WjIL
+-----END PGP SIGNATURE-----
+
+--------------enigD36BBC82DECE504FFFED0A78--
