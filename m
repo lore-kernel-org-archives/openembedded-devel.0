@@ -1,31 +1,21 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [82.119.242.94] (helo=mail.suse.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <julian_chu@openmoko.com>) id 1JrsWw-0003bW-DN
+	(envelope-from <utx@penguin.cz>) id 1JrtGY-0004f5-W4
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 May 2008 12:30:19 +0200
-Received: from [172.16.23.119] (helo=Macintosh.local)
-	by aakash.openmoko.org with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <julian_chu@openmoko.com>) id 1JrsW8-0001uK-PH
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 May 2008 18:29:38 +0800
-Message-ID: <481AED81.9040203@openmoko.com>
-Date: Fri, 02 May 2008 18:31:29 +0800
-From: Julian <julian_chu@openmoko.com>
-User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
-MIME-Version: 1.0
+	Fri, 02 May 2008 13:17:27 +0200
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id 076DA6280C2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 May 2008 13:16:49 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.6
-X-SA-Exim-Connect-IP: 172.16.23.119
-X-SA-Exim-Mail-From: julian_chu@openmoko.com
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: qa_staging failed with recipe which inherit sdk.bbclass
+In-Reply-To: <1209037940.21700.107.camel@hammer.suse.cz>
+References: <1209037940.21700.107.camel@hammer.suse.cz>
+Date: Fri, 02 May 2008 13:20:40 +0200
+Message-Id: <1209727240.4120.34.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.0 
+Subject: Re: brokenness of native builds by cross-compile site scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -39,58 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 May 2008 10:30:19 -0000
-X-Groupsio-MsgNum: 5068
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigAD11671E76E0E47B45A2CCEA"
+X-List-Received-Date: Fri, 02 May 2008 11:17:27 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---------------enigAD11671E76E0E47B45A2CCEA
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Stanislav Brabec wrote:
 
-Hi all,
+> I have just searching for reason, why a lot of native build started to
+> fail with strange errors.
+> 
+> I started with debugging of glib-2.0-native:
+> /bin/sh: line 6: 20886 Segmentation fault      ./glib-genmarshal --nostdinc --prefix=g_cclosure_marshal ./gmarshal.list --header >> xgen-gmh
+> 
+> Looking info config.log:
+> configure:1952: loading site script /OE/org.openembedded.dev/site/endian-little
 
-I found that if there is a recipe which inherit sdk.bbclass, it always
-fail in qa_staging.
+Problem (partially) solved:
+CONFIG_SITE must not be set, when running bitbake.
 
-for example, bitbake gdb-cross-sdk, the variables are
+I don't know, why native class does not reset it as expected.
 
-   STAGING_LIBDIR=3D${STAGING_DIR_HOST}${layout_libdir}
-   STAGING_DIR_HOST=3D${STAGING_DIR}/${HOST_SYS}
-   HOST_SYS=3D${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}
+I started a shell from inside the run_do... script several week ago,
+forgot about it and started bitbake inside.
 
-in sdk.bbclass, I saw
-
-   HOST_ARCH =3D "${BUILD_ARCH}"
-
-in my case, qa_staging will test ${STAGING_DIR}/i686-linux
-However, the .pc files placed in ${STAGING_DIR}/i686-linux were made by
-another recipe which inherit native.bbclass. the .pc file contains
-${TMPDIR} (ie.
-prefix=3D/home/walkingice/OpenMoko/build/tmp/staging/i686-linux/usr)
-
-Finally, it could not pass qa_staging.
-
-How can I solve this problem ?
-
-Thanks :-)
-
--Julian
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
---------------enigAD11671E76E0E47B45A2CCEA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.8 (Darwin)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkga7YcACgkQPvWtVv2QI0CI2ACgr6WozxtUEEeUcJifwS+hxrsJ
-CDcAoIB0GySHsZuKbTPGGTUGTdBM7aiO
-=vVMO
------END PGP SIGNATURE-----
-
---------------enigAD11671E76E0E47B45A2CCEA--
