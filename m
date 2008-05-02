@@ -1,30 +1,31 @@
-Received: from [64.233.178.247] (helo=hs-out-0708.google.com)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <papercrane@gmail.com>) id 1Jro6q-0006YL-By
+	(envelope-from <julian_chu@openmoko.com>) id 1JrsWw-0003bW-DN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 May 2008 07:47:04 +0200
-Received: by hs-out-0708.google.com with SMTP id 23so1266569hsn.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 May 2008 22:46:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:reply-to:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=B+Hs5PZtbb2v8EcDnl6M62cTccUfzXz1FRoJ6ZXbLeI=;
-	b=UsSZjRDAeqoxGkxuHmUs7pZ1skM/PJvxp4VqhQtMtJHT2UVTowPzltd2Wc5hI6bAsIXElpZmQkbQUy/YIBCXFpa97KL6jSS+U7JuU7VcrkJHNZKIBKkcTa88+BDSjJdtKdfJ5W3O3a9K5Ta2OrMtZvEuhOM1YUQGWv4RwR3pq6Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:reply-to:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=lc703RQ6ZNufPMWWhk9D6u3RgfKi/6XeTLy2k3GFqa5Pfry0y5C30GcXLsW8tlv8cs+jL6S3c6qIueXiacRLF5baK+LvmbvDTmpDhz4jjCvhuKe0tOQZ/dB0MWMU/eHB93OeMOM9wpR47nBmpuZDvNTGYTXXw2hB74iN9qMQl1M=
-Received: by 10.90.86.10 with SMTP id j10mr4121379agb.104.1209707186569;
-	Thu, 01 May 2008 22:46:26 -0700 (PDT)
-Received: by 10.90.95.14 with HTTP; Thu, 1 May 2008 22:46:26 -0700 (PDT)
-Message-ID: <432beae0805012246u5de21481vf98787f54c7a0480@mail.gmail.com>
-Date: Thu, 1 May 2008 22:46:26 -0700
-From: "Justin Patrin" <papercrane@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080313002145.17479f07@widy.localdomain>
+	Fri, 02 May 2008 12:30:19 +0200
+Received: from [172.16.23.119] (helo=Macintosh.local)
+	by aakash.openmoko.org with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <julian_chu@openmoko.com>) id 1JrsW8-0001uK-PH
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 02 May 2008 18:29:38 +0800
+Message-ID: <481AED81.9040203@openmoko.com>
+Date: Fri, 02 May 2008 18:31:29 +0800
+From: Julian <julian_chu@openmoko.com>
+User-Agent: Thunderbird 2.0.0.12 (Macintosh/20080213)
 MIME-Version: 1.0
-References: <1138.1205359393@dls.net>
-	<20080313002145.17479f07@widy.localdomain>
-Subject: Re: Reconsidering the work flow and how the SCM system fits in
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.6
+X-SA-Exim-Connect-IP: 172.16.23.119
+X-SA-Exim-Mail-From: julian_chu@openmoko.com
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: qa_staging failed with recipe which inherit sdk.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -38,47 +39,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 May 2008 05:47:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 02 May 2008 10:30:19 -0000
+X-Groupsio-MsgNum: 5068
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigAD11671E76E0E47B45A2CCEA"
 
-On Wed, Mar 12, 2008 at 3:21 PM, Paul Sokolovsky <pmiscml@gmail.com> wrote:
-> Hello,
->
->
->  On Wed, 12 Mar 2008 17:03:13 -0500
->  Mike Westerhof <mwester@dls.net> wrote:
->
->  >  On Wed 12/03/08  4:40 PM , Paul Sokolovsky pmiscml@gmail.com sent:
->  > ...
->  > > With mtn we seem to have very cheap and robust mirroring and
->  > > high-availability. Well, any DSCM lean on possibility of easy
->  > > mirroring, but Monotone with its super-cool concept of unbelievably
->  > > cheap branches (so-called heads), ...
->  >
->  > Hehe! Yes, and I could describe an automobile spinning out-of-control
->  > on a patch of ice as "unbelievably cheap steering" just as well.
->  > Let's not overlook the fact that the multiple-heads issue with
->  > monotone is very seldom because the person doing it *wished* for that
->  > to happen.
->
->  Vice-versa, as was noted already, we have separate head created
->  almost on each commit (i.e. mtn merge almost always has something to
->  do on each run after commit). So, can one imagine more lightweight
->  branches - they are being created even without any explicit command!
->  Poor git is left far behind with its heavy branch commands! ;-D
->
+--------------enigAD11671E76E0E47B45A2CCEA
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-And just to add insult to injury, this also points out that mtn also
-merges very well, with no extra help. The non-content conflicts which
-are trotted out again and again are due more to incorrect use of mtn
-(read: not reading documentation) than to any problems in mtn itself.
-It really depends on what you want. Reliable, correct, and impeccable
-revision history or history through interchange of patches with an
-implicit web of trust.
+Hi all,
 
--- 
-Justin Patrin
+I found that if there is a recipe which inherit sdk.bbclass, it always
+fail in qa_staging.
+
+for example, bitbake gdb-cross-sdk, the variables are
+
+   STAGING_LIBDIR=3D${STAGING_DIR_HOST}${layout_libdir}
+   STAGING_DIR_HOST=3D${STAGING_DIR}/${HOST_SYS}
+   HOST_SYS=3D${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}
+
+in sdk.bbclass, I saw
+
+   HOST_ARCH =3D "${BUILD_ARCH}"
+
+in my case, qa_staging will test ${STAGING_DIR}/i686-linux
+However, the .pc files placed in ${STAGING_DIR}/i686-linux were made by
+another recipe which inherit native.bbclass. the .pc file contains
+${TMPDIR} (ie.
+prefix=3D/home/walkingice/OpenMoko/build/tmp/staging/i686-linux/usr)
+
+Finally, it could not pass qa_staging.
+
+How can I solve this problem ?
+
+Thanks :-)
+
+-Julian
 
 
+--------------enigAD11671E76E0E47B45A2CCEA
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.8 (Darwin)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAkga7YcACgkQPvWtVv2QI0CI2ACgr6WozxtUEEeUcJifwS+hxrsJ
+CDcAoIB0GySHsZuKbTPGGTUGTdBM7aiO
+=vVMO
+-----END PGP SIGNATURE-----
+
+--------------enigAD11671E76E0E47B45A2CCEA--
