@@ -1,31 +1,29 @@
-Received: from [64.233.178.240] (helo=hs-out-0708.google.com)
+Received: from [64.233.178.247] (helo=hs-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <papercrane@gmail.com>) id 1Jrnra-0005xL-4p
+	(envelope-from <papercrane@gmail.com>) id 1Jro6q-0006YL-By
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 May 2008 07:31:19 +0200
-Received: by hs-out-0708.google.com with SMTP id 23so1262464hsn.12
+	Fri, 02 May 2008 07:47:04 +0200
+Received: by hs-out-0708.google.com with SMTP id 23so1266569hsn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 May 2008 22:30:40 -0700 (PDT)
+	Thu, 01 May 2008 22:46:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:reply-to:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=ZJYQhg4kriTfv0NsMhQQ3C/q9bFSdT8xd8TZiFQu0sA=;
-	b=kINNWny7zFvjedXWSVhw2JTD9fnOgWvbWv31wzXAkO1YcN5xy0F74//3ma41kHqZ583aDa5WIAYAHb2iTF5amG2ajIuTW/OUpwwZqPjlCZot+J1pF/JxWg1ff0QRAcnB7pItw14WyVayyBIbQRRZoZMzPNpkHb/IyaE/8HHlsvw=
+	bh=B+Hs5PZtbb2v8EcDnl6M62cTccUfzXz1FRoJ6ZXbLeI=;
+	b=UsSZjRDAeqoxGkxuHmUs7pZ1skM/PJvxp4VqhQtMtJHT2UVTowPzltd2Wc5hI6bAsIXElpZmQkbQUy/YIBCXFpa97KL6jSS+U7JuU7VcrkJHNZKIBKkcTa88+BDSjJdtKdfJ5W3O3a9K5Ta2OrMtZvEuhOM1YUQGWv4RwR3pq6Q=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:reply-to:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=SWJFfCNKYh77NQgRmm3w72lvxZzJ9dCHE7JV232aU2omRUzhQa6vH0nFUsIg7xzqD2XDLF0DNr2gttzBl7MiDQ832dby2AHht/rOALzh8Qs5CrMJaJO+ApajsUsyPhHYFwbuwfQXQ8b52jDbBLsoWV4+zLw/Rbs/HkVMj1fKvmo=
-Received: by 10.90.119.20 with SMTP id r20mr4125689agc.60.1209706240390;
-	Thu, 01 May 2008 22:30:40 -0700 (PDT)
-Received: by 10.90.95.14 with HTTP; Thu, 1 May 2008 22:30:40 -0700 (PDT)
-Message-ID: <432beae0805012230q2e5ccf5ejdf49ee69231f3bea@mail.gmail.com>
-Date: Thu, 1 May 2008 22:30:40 -0700
+	b=lc703RQ6ZNufPMWWhk9D6u3RgfKi/6XeTLy2k3GFqa5Pfry0y5C30GcXLsW8tlv8cs+jL6S3c6qIueXiacRLF5baK+LvmbvDTmpDhz4jjCvhuKe0tOQZ/dB0MWMU/eHB93OeMOM9wpR47nBmpuZDvNTGYTXXw2hB74iN9qMQl1M=
+Received: by 10.90.86.10 with SMTP id j10mr4121379agb.104.1209707186569;
+	Thu, 01 May 2008 22:46:26 -0700 (PDT)
+Received: by 10.90.95.14 with HTTP; Thu, 1 May 2008 22:46:26 -0700 (PDT)
+Message-ID: <432beae0805012246u5de21481vf98787f54c7a0480@mail.gmail.com>
+Date: Thu, 1 May 2008 22:46:26 -0700
 From: "Justin Patrin" <papercrane@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200803131229.38083.openembedded@haerwu.biz>
+In-Reply-To: <20080313002145.17479f07@widy.localdomain>
 MIME-Version: 1.0
-References: <200803110807.11368.zecke@selfish.org>
-	<c384c5ea0803121507j60b949dtc704c316b561a5ac@mail.gmail.com>
-	<20080313003228.6a4c8ad4@widy.localdomain>
-	<200803131229.38083.openembedded@haerwu.biz>
+References: <1138.1205359393@dls.net>
+	<20080313002145.17479f07@widy.localdomain>
 Subject: Re: Reconsidering the work flow and how the SCM system fits in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -40,44 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 May 2008 05:31:20 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 02 May 2008 05:47:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-MjAwOC8zLzEzIE1hcmNpbiBKdXN6a2lld2ljeiA8b3BlbmVtYmVkZGVkQGhhZXJ3dS5iaXo+Ogo+
-IERuaWEgV2VkbmVzZGF5IDEyIG9mIE1hcmNoIDIwMDgsIFBhdWwgU29rb2xvdnNreSBuYXBpc2Gz
-Ogo+Cj4gPiAiTGVvbiBXb2VzdGVuYmVyZyIgPGxlb24ud29lc3RlbmJlcmdAZ21haWwuY29tPiB3
-cm90ZToKPgo+Cj4gPiA+IE11bHRpcGxlIGhlYWRzIGFuZCBsaWdodHdlaWdodCBicmFuY2hlcyBh
-cmUgdHdvIGRpZmZlcmVudCB0aGluZ3MuCj4gID4KPiAgPiBQcm9iYWJseSBhbHNvIGJlY2F1c2Ug
-b2YgZGlmZmVyZW50IG51bWJlcnMgb2YgaGV4YWRlY2ltYWwgZGlnaXRzPwo+ICA+Cj4gID4gPiBB
-IGJyYW5jaCBoYXMgYSBuYW1lL3RhZyB0aGF0IHRlbGxzIG1lIHdoYXQgaXMgaGFwcGVuaW5nIGlu
-IHRoYXQKPiAgPiA+IGJyYW5jaCBvciB3aG8gaXMgbWFraW5nIGl0IGhhcHBlbi4KPiAgPgo+ICA+
-IEFuZCBoZWFkcyBoYXZlIGhlYWQgcmV2aXNpb24gYW5kIGNoYW5nZSBsb2dzIHRvbyEKPgo+ICBB
-bmQgZ2V0cyBhdXRvbWVyZ2VkIGJ5IG91ciBtb25vdG9uZSBzZXJ2ZXIuCj4KPgo+ICA+IFdlbGws
-IGJ1dCB0aGUgdGFsayB3YXMgYWJvdXQgbWlycm9yaW5nIGFuZCBzeW5jaW5nIHBvdGVudGlhbGx5
-Cj4gID4gaW5jb21wYXRpYmxlIGNoYW5nZXMuIERvIGxpZ2h0d2VpZ2h0IGJyYW5jaGVzIGhlbHAg
-d2l0aCB0aGlzPwo+Cj4gIFRoZXkgZG8uIEFmdGVyIFBva3kgcmVsZWFzZSBJIHB1c2hlZCBsb3Qg
-b2Ygc3R1ZmYgd2hpY2ggSSBoYWQgcmVhZHkgb24gbXkKPiAgaGFyZGRpc2sgKHVudmVyc2lvbmVk
-KS4gV2l0aCBHSVQgSSB3b3VsZCBqdXN0IGRvICdwb2t5LWFmdGVyLTMuMS1yZWxlYXNlJwo+ICBi
-cmFuY2ggd2hpY2ggd291bGQgZGllIGFmdGVyIG1lcmdpbmcgd2l0aCAndHJ1bmsnLgo+Cj4gIEZv
-ciBtYWtpbmcgZXhwZXJpbWVudHMgd2l0aCBQb2t5IEkgY2FuIGNyZWF0ZSBicmFuY2ggKHZpYSBn
-aXQtc3ZuIGZvciBub3cpCj4gIHdoaWNoIHdpbGwgaGF2ZSBmZXcgZGF5cyBvZiB3b3JrIGluc2lk
-ZSB3aGljaCB3aWxsIHRoZW4gYmUgbWVyZ2VkIGFuZAo+ICBwdXNoZWQuCj4KCldoaWNoIHlvdSBj
-YW4gYWxzbyBkbyB3aXRoIG10bi4gTWFrZSBhIGxvY2FsIGJyYW5jaCwgbWFrZSB5b3VyCmNoYW5n
-ZXMsIGNvbW1pdCB0aGVtIGxvY2FsbHkuIFdoZW4geW91IHN5bmMvcHVzaCB5b3VyIGxvY2FsIGJy
-YW5jaAp3b24ndCBiZSBwdXNoZWQgdG8gdGhlIHNlcnZlci4gV2hlbiB5b3UncmUgZmluaXNoZWQg
-c2ltcGx5IHByb3BhZ2F0ZQpiYWNrIHRvIHRoZSBtYXN0ZXIgYnJhbmNoICguZGV2KS4gV2hlbiB5
-b3UgbmV4dCBzeW5jL3B1c2ggeW91ciBsb2NhbApyZXZpc2lvbnMgd2lsbCBnbyB1cCBhcyB0aGV5
-IGFyZSBhbmNlc3RvcnMgb2YgdGhlIHByb3BhZ2F0ZSBidXQgdGhlCmJyYW5jaCBjZXJ0cyB3b24n
-dCBzaW5jZSB0aGUgc2VydmVyIGRvZXNuJ3QgYWxsb3cgdGhhdCBicmFuY2guIE5vdApvbmx5IGRv
-IHlvdSBoYXZlIHlvdXIgb3duIGxvY2FsIGJyYW5jaCB3aGljaCBpcyBuZXZlciBwdXNoZWQgdG8g
-dGhlCnNlcnZlciwgYnV0IHlvdSBhbHNvIGdldCB0byBrZWVwIGVhY2ggb2Z5b3VyIGNvbW1pdHMu
-IE1vcmUgcmV2aXNpb24KaGlzdG9yeSwgbW9yZSBjb21taXQgbWVzc2FnZXMsIG1vcmUgaW5zaWdo
-dCBpbnRvIGRldmVsb3BtZW50LiBPZgpjb3Vyc2UsIHlvdXIgbG9jYWwgZGF0YWJhc2Ugc3RpbGwg
-aGFzIHRoZSBicmFuY2ggY2VydHMgZm9yIHlvdSBsb2NhbApicmFuY2guIElmIHlvdSB3YW50IHRv
-IGdldCByaWQgb2YgdGhlc2UgdGhlcmUgYXJlIGNvbW1hbmRzIHRoYXQgd2lsbApyZW1vdmUgdGhl
-bSB0aGF0IGFyZSBzdXJlbHkgbm8gbW9yIGVjb21wbGljYXRlZCB0aGFuIG1vc3Qgb2YgZ2l0J3MK
-Y29tbWFuZHMuCgotLSAKSnVzdGluIFBhdHJpbgo=
+On Wed, Mar 12, 2008 at 3:21 PM, Paul Sokolovsky <pmiscml@gmail.com> wrote:
+> Hello,
+>
+>
+>  On Wed, 12 Mar 2008 17:03:13 -0500
+>  Mike Westerhof <mwester@dls.net> wrote:
+>
+>  >  On Wed 12/03/08  4:40 PM , Paul Sokolovsky pmiscml@gmail.com sent:
+>  > ...
+>  > > With mtn we seem to have very cheap and robust mirroring and
+>  > > high-availability. Well, any DSCM lean on possibility of easy
+>  > > mirroring, but Monotone with its super-cool concept of unbelievably
+>  > > cheap branches (so-called heads), ...
+>  >
+>  > Hehe! Yes, and I could describe an automobile spinning out-of-control
+>  > on a patch of ice as "unbelievably cheap steering" just as well.
+>  > Let's not overlook the fact that the multiple-heads issue with
+>  > monotone is very seldom because the person doing it *wished* for that
+>  > to happen.
+>
+>  Vice-versa, as was noted already, we have separate head created
+>  almost on each commit (i.e. mtn merge almost always has something to
+>  do on each run after commit). So, can one imagine more lightweight
+>  branches - they are being created even without any explicit command!
+>  Poor git is left far behind with its heavy branch commands! ;-D
+>
+
+And just to add insult to injury, this also points out that mtn also
+merges very well, with no extra help. The non-content conflicts which
+are trotted out again and again are due more to incorrect use of mtn
+(read: not reading documentation) than to any problems in mtn itself.
+It really depends on what you want. Reliable, correct, and impeccable
+revision history or history through interchange of patches with an
+implicit web of trust.
+
+-- 
+Justin Patrin
 
 
