@@ -1,30 +1,32 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Js08A-0004rI-6l
-	for openembedded-devel@openembedded.org; Fri, 02 May 2008 20:37:14 +0200
+	id 1Js6bh-0004hY-7j
+	for openembedded-devel@openembedded.org; Sat, 03 May 2008 03:32:09 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Js07V-0001s5-Pv
-	for openembedded-devel@openembedded.org; Fri, 02 May 2008 18:36:33 +0000
+	id 1Js6aq-0003PD-Py
+	for openembedded-devel@openembedded.org; Sat, 03 May 2008 01:31:16 +0000
 Received: from ip-62-143-23-251.1411n-cud12k-01.ish.de ([62.143.23.251])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 02 May 2008 18:36:33 +0000
+	Sat, 03 May 2008 01:31:16 +0000
 Received: from no2spam by ip-62-143-23-251.1411n-cud12k-01.ish.de with local
 	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 02 May 2008 18:36:33 +0000
+	Sat, 03 May 2008 01:31:16 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 02 May 2008 20:36:30 +0200
-Message-ID: <fvfmva$n6t$1@ger.gmane.org>
+Date: Sat, 03 May 2008 03:31:11 +0200
+Message-ID: <fvgf8q$rnr$1@ger.gmane.org>
+References: <20080501081117.0166F1880C5@amethyst.openembedded.net>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.1411n-cud12k-01.ish.de
 User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
+In-Reply-To: <20080501081117.0166F1880C5@amethyst.openembedded.net>
 Sender: news <news@ger.gmane.org>
-Subject: Angstrom stable bugs fixed in .dev
+Subject: Re: org.oe.dev packages/gpsd/gpsd_2.37.bb : Add gpsd 2.37
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -38,21 +40,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 May 2008 18:37:14 -0000
+X-List-Received-Date: Sat, 03 May 2008 01:32:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+ifaistos commit wrote:
+> packages/gpsd/gpsd_2.37.bb : Add gpsd 2.37
+[...]
+> # add_file "packages/gpsd/gpsd_2.37.bb"
+
 Hi,
 
-can the Angstrom folks please go through their autobuilder bugs against
-2007.12 which are apparently fixed in .dev?  I have gone through quite a
-few of them and either verified or rejected the compile failure in .dev.
- http://tinyurl.com/5th9yj and the blockers I added for your meta-bugs
-should give you a good start.  Please also make liberal use of bug 3388.
+thanks for the update.  It is generally preferrable to update to a new
+version with "mtn mv" to preserve history.
 
-Regards
+http://oe.linuxtogo.org/wiki/UpgradingPackages
 
-Rolf
+Thank you everybody, for your attention.  Now get back to work ;-)
 
 
 
