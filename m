@@ -1,32 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Js6bh-0004hY-7j
-	for openembedded-devel@openembedded.org; Sat, 03 May 2008 03:32:09 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Js6aq-0003PD-Py
-	for openembedded-devel@openembedded.org; Sat, 03 May 2008 01:31:16 +0000
-Received: from ip-62-143-23-251.1411n-cud12k-01.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 03 May 2008 01:31:16 +0000
-Received: from no2spam by ip-62-143-23-251.1411n-cud12k-01.ish.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 03 May 2008 01:31:16 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 03 May 2008 03:31:11 +0200
-Message-ID: <fvgf8q$rnr$1@ger.gmane.org>
-References: <20080501081117.0166F1880C5@amethyst.openembedded.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.1411n-cud12k-01.ish.de
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JsQAo-0003lk-OA
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 04 May 2008 00:25:43 +0200
+Received: from [78.49.9.92] (helo=[192.168.1.152])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JsQhc-0007cA-NN
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 04 May 2008 00:59:36 +0200
+Message-ID: <481CE65F.9040301@kernelconcepts.de>
+Date: Sun, 04 May 2008 00:25:35 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
 User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
-In-Reply-To: <20080501081117.0166F1880C5@amethyst.openembedded.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: org.oe.dev packages/gpsd/gpsd_2.37.bb : Add gpsd 2.37
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+Subject: LinuxTag OE booth
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -40,23 +30,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 May 2008 01:32:09 -0000
+X-List-Received-Date: Sat, 03 May 2008 22:25:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-ifaistos commit wrote:
-> packages/gpsd/gpsd_2.37.bb : Add gpsd 2.37
-[...]
-> # add_file "packages/gpsd/gpsd_2.37.bb"
+Hello folks,
 
-Hi,
+I still miss a little bit of help for the OE booth a LinuxTag. Currently it
+looks like T2 will have more people at their booth than OpenEmbedded ;-)
 
-thanks for the update.  It is generally preferrable to update to a new
-version with "mtn mv" to preserve history.
+Please take a look at the wiki page and check where you can fill some gaps.
 
-http://oe.linuxtogo.org/wiki/UpgradingPackages
+http://oe.linuxtogo.org/wiki/LinuxTag2008
 
-Thank you everybody, for your attention.  Now get back to work ;-)
+One important deadline affects everyone who wants to help at the booth: We have
+to order exhibitor passes till May 11th. (I'll do this, but I need names and
+numbers :)
 
+Flyers and a press release would be good to have too. I could take care about
+printing things too, but I have some fear that my free time for preparations
+will be very limited.
+
+Do we still have the OE poster from FOSDEM or will we have to print a new one?
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
