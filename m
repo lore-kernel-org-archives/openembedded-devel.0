@@ -1,20 +1,32 @@
-Received: from [195.170.0.77] (helo=kane.otenet.gr ident=OTEnet-mail-system)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <skoroneos@digital-opsis.com>) id 1JsmO5-0006Rf-F0
-	for openembedded-devel@openembedded.org; Mon, 05 May 2008 00:08:53 +0200
-Received: from dias (athedsl-14177.home.otenet.gr [87.202.55.207])
-	by kane.otenet.gr (8.13.8/8.13.8/Debian-3) with ESMTP id m44M8gJv031100
+	(envelope-from <rpurdie@rpsys.net>) id 1Jt409-0004SI-W9
+	for openembedded-devel@openembedded.org; Mon, 05 May 2008 18:57:22 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m45Gv6gN020881
 	for <openembedded-devel@openembedded.org>;
-	Mon, 5 May 2008 01:08:43 +0300
-Message-Id: <200805042208.m44M8gJv031100@kane.otenet.gr>
-From: "Stelios Koroneos" <skoroneos@digital-opsis.com>
-To: <openembedded-devel@openembedded.org>
-Date: Mon, 5 May 2008 01:07:59 +0300
-MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook, Build 11.0.5510
-Thread-Index: AciuM1Aime3iC5lwRviS5u7XTulV5g==
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
-Subject: Merging .dreambox to .dev
+	Mon, 5 May 2008 17:57:06 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20575-08 for <openembedded-devel@openembedded.org>;
+	Mon,  5 May 2008 17:56:57 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m45GuquJ020853
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 5 May 2008 17:56:52 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1209250940.5086.46.camel@dax.rpnet.com>
+References: <1209250940.5086.46.camel@dax.rpnet.com>
+Date: Mon, 05 May 2008 17:56:52 +0100
+Message-Id: <1210006612.5113.21.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Proposed rebuild task fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -28,42 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 May 2008 22:08:54 -0000
-Content-Type: text/plain;
-	charset="US-ASCII"
+X-List-Received-Date: Mon, 05 May 2008 16:57:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-I found some time today to work on getting .dreambox branch merged to .dev
-This was more of an exercise on mtn and branches, as I am planning to work
-on local branch for oplinux-0.3, that hopefully will get merged back to .dev
-one day.
+On Sun, 2008-04-27 at 00:02 +0100, Richard Purdie wrote:
+> As mentioned recently the rebuild task has issues. The attached patch is
+> the fix I'd like to propose for this. It adds a "setscene" task which
+> runs before fetch and does housekeeping style activities like cleaning
+> up work areas. I've written it so the existing packaged-staging
+> "do_prepackaged_stage" task is also brought under the umbrella of this
+> new task. One useful advantage to this is you can then enable/disable
+> packaged staging within a given build and it won't rebuild everything
+> which is a drawback of the current setup.
+> 
+> The main drawback to this proposed change is that it will force a full
+> rebuild of everything equivalent to a 'wipe tmp/'.
 
-There are 2 problems with .dreambox (actually there are 3 but the last one
-was expected) that mtn refers as non-content confilcts.
-The first has to do with a number of files from the toolchain, that were
-actually copied from .dev and not propagaded.
-This results in having 2 files with the same name and no ansestor and mtn
-does not like it at all.
-The other problem is with files that were removed from .dev but still exist
-on .dreambox
-The third issue are the 3 way merges that need to be perfomed in order to
-sync .dreambox to .dev in things like classes and some of the packages.
+I've just committed this. People should be aware this will cause an
+effective rebuild and anyone wishing to avoid that should not upgrade
+until its more convenient.
 
-1 was handled by renaming the problematic files so they could servive the
-merge and not create any problems
-Most of the files in this case include toolchain related files.
-2 was handled by removing/droping a few files from .dreambox. Fortunatelly
-these files are some old buybox configs,so loosing their history I can
-assume won't be a big issue
-The 3rd issue and the one that could take a lot of time and effort are the 3
-way merges required,which might be several
+Regards,
 
-
-Stelios S. Koroneos
-
-Digital OPSiS - Embedded Intelligence
-http://www.digital-opsis.com
-
+Richard
 
 
 
