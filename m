@@ -1,32 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Jt45i-0004ju-EU
-	for openembedded-devel@openembedded.org; Mon, 05 May 2008 19:03:06 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m45H2pcA021359
-	for <openembedded-devel@openembedded.org>;
-	Mon, 5 May 2008 18:02:51 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 21288-03 for <openembedded-devel@openembedded.org>;
-	Mon,  5 May 2008 18:02:46 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m45H2gOW021353
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 5 May 2008 18:02:42 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <481AED81.9040203@openmoko.com>
-References: <481AED81.9040203@openmoko.com>
-Date: Mon, 05 May 2008 18:02:41 +0100
-Message-Id: <1210006961.5113.25.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: qa_staging failed with recipe which inherit sdk.bbclass
+	(envelope-from <zecke@selfish.org>) id 1JtIaP-00018v-50
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 May 2008 10:31:45 +0200
+Received: from world203.mi.fu-berlin.de ([160.45.115.203])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1JtIa3-0007EJ-0J
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 May 2008 10:31:23 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 6 May 2008 10:31:19 +0200
+User-Agent: KMail/1.9.9
+References: <1209250940.5086.46.camel@dax.rpnet.com>
+	<1210006612.5113.21.camel@dax.rpnet.com>
+In-Reply-To: <1210006612.5113.21.camel@dax.rpnet.com>
+MIME-Version: 1.0
+Message-Id: <200805061031.20342.zecke@selfish.org>
+Subject: Re: Proposed rebuild task fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -40,48 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 May 2008 17:03:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 06 May 2008 08:31:45 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On Monday 05 May 2008 18:56:52 Richard Purdie wrote:
 
-On Fri, 2008-05-02 at 18:31 +0800, Julian wrote:
-> I found that if there is a recipe which inherit sdk.bbclass, it always
-> fail in qa_staging.
-> 
-> for example, bitbake gdb-cross-sdk, the variables are
-> 
->    STAGING_LIBDIR=${STAGING_DIR_HOST}${layout_libdir}
->    STAGING_DIR_HOST=${STAGING_DIR}/${HOST_SYS}
->    HOST_SYS=${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}
-> 
-> in sdk.bbclass, I saw
-> 
->    HOST_ARCH = "${BUILD_ARCH}"
-> 
-> in my case, qa_staging will test ${STAGING_DIR}/i686-linux
-> However, the .pc files placed in ${STAGING_DIR}/i686-linux were made by
-> another recipe which inherit native.bbclass. the .pc file contains
-> ${TMPDIR} (ie.
-> prefix=/home/walkingice/OpenMoko/build/tmp/staging/i686-linux/usr)
-> 
-> Finally, it could not pass qa_staging.
-> 
-> How can I solve this problem ?
+> I've just committed this. People should be aware this will cause an
+> effective rebuild and anyone wishing to avoid that should not upgrade
+> until its more convenient.
 
-This happens when your BUILD_ARCH and your TARGET_ARCH are the same and
-its a known issue. Previously Poky worked around this by setting
-HOST_VENDOR to TARGET_VENDOR but that causes subtle problems with the
-toolchain building (it becomes a Canadian Cross).
-
-I made a change in Poky recently to sdk.bbclass which will probably
-help, I'll sync that to OE...
-
-Regards,
-
-Richard
-
-
+thanks
+	z.
 
 
