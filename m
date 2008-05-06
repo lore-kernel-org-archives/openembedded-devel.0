@@ -1,30 +1,30 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JtRD8-0006dq-MP
-	for openembedded-devel@openembedded.org; Tue, 06 May 2008 19:44:19 +0200
+	id 1JtRI9-0006is-Ae
+	for openembedded-devel@openembedded.org; Tue, 06 May 2008 19:49:29 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JtRCg-0002cH-QF
-	for openembedded-devel@openembedded.org; Tue, 06 May 2008 17:43:50 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1JtRHe-0002sf-9F
+	for openembedded-devel@openembedded.org; Tue, 06 May 2008 17:48:58 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 06 May 2008 17:43:50 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Tue, 06 May 2008 17:48:58 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 06 May 2008 17:43:50 +0000
+	Tue, 06 May 2008 17:48:58 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 06 May 2008 19:43:34 +0200
-Message-ID: <fvq5c7$alo$1@ger.gmane.org>
-References: <fvpr9t$4vh$1@ger.gmane.org>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 06 May 2008 19:48:49 +0200
+Message-ID: <fvq5m1$c02$1@ger.gmane.org>
+References: <fvpr9t$4vh$1@ger.gmane.org> <fvpt7u$ch8$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008040803)
-In-Reply-To: <fvpr9t$4vh$1@ger.gmane.org>
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
+In-Reply-To: <fvpt7u$ch8$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
 Subject: Re: bp flag added to bug tracker (org.openembedded.stable)
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,38 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 May 2008 17:44:20 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 06 May 2008 17:49:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Rolf Leggewie wrote:
-> Hi,
->
-> it appears that org.openembedded.stable is not in addition to but a
-> replacement for org.oe.angstrom-2007.12-stable.  It also seems that the
-> policy so far of "two A* devs ACK any commit" has been thus replaced by
-> "two OE devs ACK any commit".  Correct so far?
+> Rolf Leggewie wrote:
+>> request the bp flag (which should trigger an email to oe-devel)
+> 
+> It appears the mail is not yet sent which is unfortunate but not a real
+> problem IMHO.  I'll look into making the mail trigger work correctly,
+> but I think we can start with this.
 
-"two stable branch developers" would be more like it.
-
-
->
-> I believe the BTS should help us out with flagging, granting and
-> documenting backport requests.  Which is why I have just added the bp
-> flag which can be applied to attachments in our BTS.  Anybody can
-> request the bp flag (which should trigger an email to oe-devel), but
-> only members of the OE group can grant it.  I am yet somewhat unfamiliar
-> with flags, but I guess we'll learn as we go.  My understanding is that
-> a grant can be given more than once.
->
-> IOW, very elegant solution that is tightly integrated with current
-> processes.
-
-Thanks for working on this.
-
-regards,
-
-Koen
+looks like a problem on the receiving end.  I added my personal mail to
+the bp queue CC list and am receiving the mails just fine.
 
 
 
