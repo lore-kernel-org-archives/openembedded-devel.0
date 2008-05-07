@@ -1,33 +1,30 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [64.233.184.225] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JtmM7-0000ai-3m
+	(envelope-from <raj.khem@gmail.com>) id 1JtmOl-0007KZ-H4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 May 2008 18:18:59 +0200
-Received: by an-out-0708.google.com with SMTP id b38so79510ana.83
+	Wed, 07 May 2008 18:21:45 +0200
+Received: by wr-out-0506.google.com with SMTP id 36so155023wra.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2008 09:18:19 -0700 (PDT)
+	Wed, 07 May 2008 09:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:cc:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=QInGWZj0C8V8oSXqvd2E6uKy8kxZhhQCHJmno1sHyfY=;
-	b=hrq3nvEfuBxJk92HI5xKQ7zq5BbDBYjrmbMqBVM18NdjI5wM2MRGaFdKz1U9HhK7mPmKmEcjPoomeHxPH9uzX3erEXXc6hy5DOP9PgUtpDCrJuee83wXqNiGxY/MjpQ6b44oLGKyAvdgFRwPrrfP49sioCTy5i1xn+1noK5HTp4=
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:references;
+	bh=HSfsQHYq/2Y1vp86pj30aqLjz0CutbpIU+0nud+Z1zI=;
+	b=LLTgTQm+YVIUQO+cO0n+DtYPSZ7aMqe4ZZUY250CLPqinpDPJq8V0Crp+0C9M4EUhgr700E2rxcYESfRLI1rPE/nbRf4Xd8ImekSMEkNBbQ2rFVui35Fd/qm+0yBQE89OM+dnIEyXv4GOZQnt9kGP5tu/b7AiRIv86fk8xRMznY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=XiIiEUXvd+OLSQrMVy11M6iBmI6k3ENYX0Oiqnnaom4VqAoCbS7E0QY3uTY1tTV7RiTH74r5gq/DbaxnT0NIxN0JHkmg9Ds8aXtWL2s+pidBD9TgVklHTsAWnsjc7DJus3CIOlzSBNkR37UfiBEHJQaz6/2tpUEYGnk0udrQsk4=
-Received: by 10.100.232.13 with SMTP id e13mr2997051anh.89.1210177099028;
-	Wed, 07 May 2008 09:18:19 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Wed, 7 May 2008 09:18:18 -0700 (PDT)
-Message-ID: <c384c5ea0805070918g55d59baamad7c66acf8fe7877@mail.gmail.com>
-Date: Wed, 7 May 2008 18:18:18 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:references;
+	b=Uwb8YRB5YTNklSmfxcsiqP8EeyYSo4867Uhkc5aJz5RBvfBLYBQjpJCLuH1WdbTNyVPwTu+3bL4TdmnPQ0YHyqr5trBYoJMWOYlviURnL8QYiFt4bxv8q3y7cKPd4MLaAmb0hx71SOm26xZ2G1E7kbKdHb5K5c19F3DF174tGO0=
+Received: by 10.115.76.1 with SMTP id d1mr2072125wal.228.1210177268648;
+	Wed, 07 May 2008 09:21:08 -0700 (PDT)
+Received: by 10.114.149.20 with HTTP; Wed, 7 May 2008 09:21:08 -0700 (PDT)
+Message-ID: <19c1b8a90805070921j7e4355a6vd2ff2bb4649e3a25@mail.gmail.com>
+Date: Wed, 7 May 2008 09:21:08 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fvseuj$6jt$1@ger.gmane.org>
+In-Reply-To: <35a670560805070733s30f077dcu92729e5f2356f0c1@mail.gmail.com>
 MIME-Version: 1.0
-References: <fvpr9t$4vh$1@ger.gmane.org> <fvq5c7$alo$1@ger.gmane.org>
-	<fvrtn6$93p$1@ger.gmane.org> <fvs0bo$h8r$1@ger.gmane.org>
-	<fvs8g9$de9$1@ger.gmane.org> <4821B0B5.6060701@balister.org>
-	<fvseuj$6jt$1@ger.gmane.org>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: bp flag added to bug tracker (org.openembedded.stable)
+References: <35a670560805070733s30f077dcu92729e5f2356f0c1@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.10b4
+Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -41,67 +38,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2008 16:19:00 -0000
+X-List-Received-Date: Wed, 07 May 2008 16:21:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello all,
+any compiler ICE is a compiler problem. You can reduce the testcase and may
+file a bug in gcc bugzilla.
 
-On Wed, May 7, 2008 at 4:39 PM, Rolf Leggewie
-<no2spam@nospam.arcornews.de> wrote:
->  > Can you remind me what the stable branch mailing list is?
+Khem
+
+On Wed, May 7, 2008 at 7:33 AM, Matthijs van de Water <
+matthijs.van.de.water@gmail.com> wrote:
+
+> Hi,
 >
->  You should really ask koen ;-)  I didn't know about it until this
->  morning either and had to google for it.  Since I already did:
+> I'm trying to get an ARM EABI build based on gcc 4.3 working. I'm not
+> having much luck with that so-far.
 >
-1) Stuff had been discussed on multiple mailing lists (oe/angstrom).
-2) There is that news item trying to be seen on www.openembedded.org.
-
-Summary: stable is mostly for having a set of metadata that works
-within a set of parameters, and the ability to fix any outstanding
-bugs in there. Mostly useful for basing off product development (third
-parties to us). Also, third parties and newbies can be pointed to
-stable.
-
-> > Pplease remember we are all very busy and have a great deal of trouble
->  > keeping up with all of our responsibilities.
+> The build fails at glibc-internal (tried both 2.6.1 and 2.7) with an
+> internal compiler error:
+> ../iconv/skeleton.c: In function '__gconv_transform_ucs4_internal':
+> ../iconv/skeleton.c:801: internal compiler error: Segmentation fault
 >
->  I'm 100% with you there.  Which is exactly why IMHO it makes so much
->  sense to move away the review process from mailing lists into something
->  we *all* already use and where we can collaborate better.  A bug tracker
->  is just so much more appropriate than a mailing list to manage the workflow.
+> Am I missing something? Any ideas?
 >
-Intention is that we should really prevent (heavy) breakage on the
-stable branch and reviews are necessary to have more eyes on commits.
-
-Yes, we could do this in the bugtracker. I'm OK with that but we need
-to define a proper workflow.
-
->  But, I guess that is neither up to you or me to decide, since we are
->  both mostly by-standers.
+> Regards,
 >
-Frankly me too, as at this moment I'm not using stable, simply because
-I did not base new products off 'stable' yet. So my personal interest
-is not so much in the current stable tree, but in the process of
-getting the next stable tree base point. (I have to spend my limited
-time wisely, like everybody else, and that means putting some effort
-in a future stable tree instead of the current, for me.)
-
-Despite everyone's limited time, I think OE is gaining momentum again
-on getting our workflow and new ideas going, and I would like to thank
-everyone on OpenEmbedded for that.
-
-In response to Richard:
-
-When we have a stabilized .dev tree, we could branch off a stable
-tree, but not to often please.
-
-The plan was for 2008.12 but responding to RP: maybe we should
-consider a 2008.6 base?
-
-Regards,
-
-Leon.
-
+> Matthijs van de Water
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
