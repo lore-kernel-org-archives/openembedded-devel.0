@@ -1,21 +1,18 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Jtjqv-0003vZ-Fj
-	for openembedded-devel@openembedded.org; Wed, 07 May 2008 15:38:37 +0200
-Received: (qmail 15094 invoked by uid 1003); 7 May 2008 13:38:02 -0000
+	(envelope-from <philip@balister.org>) id 1JtkHg-0004be-Eg
+	for openembedded-devel@openembedded.org; Wed, 07 May 2008 16:06:16 +0200
+Received: (qmail 11591 invoked by uid 1003); 7 May 2008 14:05:41 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 7 May 2008 13:38:01 -0000
-Message-ID: <4821B0B5.6060701@balister.org>
-Date: Wed, 07 May 2008 09:37:57 -0400
+	by mail.geekisp.com with SMTP; 7 May 2008 14:05:40 -0000
+Message-ID: <4821B731.50101@balister.org>
+Date: Wed, 07 May 2008 10:05:37 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.12 (X11/20080226)
 MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-References: <fvpr9t$4vh$1@ger.gmane.org>	<fvq5c7$alo$1@ger.gmane.org>	<fvrtn6$93p$1@ger.gmane.org>	<fvs0bo$h8r$1@ger.gmane.org>
-	<fvs8g9$de9$1@ger.gmane.org>
-In-Reply-To: <fvs8g9$de9$1@ger.gmane.org>
-Subject: Re: bp flag added to bug tracker (org.openembedded.stable)
+Subject: Neuros and TO bounty program
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -29,45 +26,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2008 13:38:38 -0000
-X-Groupsio-MsgNum: 5087
+X-List-Received-Date: Wed, 07 May 2008 14:06:16 -0000
+X-Groupsio-MsgNum: 5088
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020900090506030905040600"
+	micalg=sha1; boundary="------------ms090708040802020506060808"
 
---------------ms020900090506030905040600
+--------------ms090708040802020506060808
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie wrote:
-
-> Let me ask a blunt question: Is there really any activity on the stable
-> branch?  The mailing list (which I just found out about) seems rather
-> quiet to say the least.  And what I see in the bug tracker is mostly
-> just a bot dumping a lot of stuff that apparently nobody cares sh!t
-> about.  Bugs verified as WFM in .dev and claimed to exist in .stable are
-> completely ignored even after nagging oe-devel.
-
-Rolf,
-
-Can you remind me what the stable branch mailing list is? I suspect many 
-devs are more interested in .dev than .stable and are not on the list.
-
-I would guess that most users of .stable are more focused on their 
-product work than keeping up with listservs.
-
-Another case you should think of is that it is likely that .stable will 
-start to have changes that do not make sense for .dev. Also with time 
-.stable will be "replaced" with a new branch from .dev. (I use the 
-quotes, because the original branch may have users for a long time).
-
-Pplease remember we are all very busy and have a great deal of trouble 
-keeping up with all of our responsibilities.
+http://open.neurostechnology.com/content/neuros-and-texas-instruments-create-new-bounty-program-next-gen-open-internet-television-pla
 
 Philip
 
-
-
---------------ms020900090506030905040600
+--------------ms090708040802020506060808
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -118,18 +90,18 @@ HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
 rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDUwNzEz
-Mzc1N1owIwYJKoZIhvcNAQkEMRYEFJYHVAs+dL9Svm6GtXaKs5Eh6tiHMFIGCSqGSIb3DQEJDzFF
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDUwNzE0
+MDUzN1owIwYJKoZIhvcNAQkEMRYEFH43UWkHerDXdH38c2N3FLkF4WvHMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQCf4cwK4w0eYqy4wJW67rpK5nF7DseH7kxCiIBfkcdX40gCNcep
-GP7IPD3dPElyUVvSGN4kvafomhqVN6i4ILvLDh7ynNjEn9op2a5XGcVQanv6d7AnIhvudJ9VygWn
-ynxLCUikMX9nRF+KgfMM0cran4derV1bNVaj+j8FNq24s48sfQK7bfzORt9kuK2gfbb5FgTg5zim
-FD7K7n894x5Lt42AVJLFlB1fNqSnSyLcpRwO5hRPOSU4KeWg8lEsw2nGSJIdikBeHiXyh1JezwNY
-jYONioVRLVGOSk9VhylCGuo9uoOSvcQy2nR73H8vbCX6yo60LM9utPWClcbb3xriAAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQAOfsdmf1Pca45lQP88XnpFBB1on7bHTSzT0d6LSb+RAXTIgh6h
+fNSMFKmtmNn+O732d/FYjmVI8cGQ5dzbo6OWOgCpV5FbkO7zNVQf7dGIuz+CN1MdTem+4YdjvqHh
+WnElyjZwXu5O6oEG70ogRx18WDcIO+vsrPoqhvaHeNfR93/yMebpyzBzM8nkZH+zTCNYM4U8RO/S
+KqSzjILTUNYQmsXN3d70gmNdkKJG3VF2IGQ57muWQVfXLMq94Sen3SAqK2e0I1/zpZb1nFw98DtX
+Z4CMHHHeqdTQqnSWgxbzUQjSEf9Wvh62kS0qmJg+Cp7zNOQkPUgd4RR+MVk5IciaAAAAAAAA
 
---------------ms020900090506030905040600--
+--------------ms090708040802020506060808--
