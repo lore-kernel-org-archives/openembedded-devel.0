@@ -1,32 +1,31 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jtj5u-0006Tg-9f
-	for openembedded-devel@openembedded.org; Wed, 07 May 2008 14:50:02 +0200
+	id 1Jtjp2-0003uP-Gg
+	for openembedded-devel@openembedded.org; Wed, 07 May 2008 15:36:40 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jtj5H-0002Nu-QD
-	for openembedded-devel@openembedded.org; Wed, 07 May 2008 12:49:23 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	id 1JtjoV-0004pz-0s
+	for openembedded-devel@openembedded.org; Wed, 07 May 2008 13:36:07 +0000
+Received: from wlan137219.mobiel.utwente.nl ([130.89.137.219])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 07 May 2008 12:49:23 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	Wed, 07 May 2008 13:36:07 +0000
+Received: from k.kooi by wlan137219.mobiel.utwente.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 07 May 2008 12:49:23 +0000
+	Wed, 07 May 2008 13:36:07 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 07 May 2008 14:49:12 +0200
-Message-ID: <fvs8g9$de9$1@ger.gmane.org>
-References: <fvpr9t$4vh$1@ger.gmane.org>
-	<fvq5c7$alo$1@ger.gmane.org>	<fvrtn6$93p$1@ger.gmane.org>
-	<fvs0bo$h8r$1@ger.gmane.org>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 07 May 2008 15:35:56 +0200
+Message-ID: <fvsb7t$nk1$1@ger.gmane.org>
+References: <fvpr9t$4vh$1@ger.gmane.org>	<fvq5c7$alo$1@ger.gmane.org>	<fvrtn6$93p$1@ger.gmane.org>	<fvs0bo$h8r$1@ger.gmane.org>
+	<fvs8g9$de9$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
-In-Reply-To: <fvs0bo$h8r$1@ger.gmane.org>
+X-Gmane-NNTP-Posting-Host: wlan137219.mobiel.utwente.nl
+User-Agent: Thunderbird 3.0a1pre (Macintosh/2008040803)
+In-Reply-To: <fvs8g9$de9$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
 Subject: Re: bp flag added to bug tracker (org.openembedded.stable)
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -42,35 +41,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2008 12:50:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 07 May 2008 13:36:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello Koen,
+Rolf Leggewie wrote:
+> Hello Koen,
+>
+> thank you for the answer.
+>
+> Koen Kooi wrote:
+>> That isn't a problem right now, since a patch requires review and
+>> approval on the stable-branch *mailinglist*.
+>
+> Well, I guess it was clear this whole thing is about the possibility of
+> circumventing that medium
 
-thank you for the answer.
+Sorry, that wasn't clear to me, it took me a while to realise that 'bp' 
+means 'backport'. I thought you where cataloging bugs for Angstrom 
+developers to review, which I think is very cool. The thing is that "OE 
+stable branch patch process" is different from "Angstrom patch process", 
+even if it involves largely the same people. Ideally angstrom developers 
+review a patch and post a "ready to commit" one for review on the stable 
+branch mailinglist.
+If you don't use angstrom, or even no distro at all, you post your 
+(hopefully "ready to commit") patch to the stablebranch mailinglist.
+The main point is that your patch applies cleanly and has been tested 
+before you post it (unless it's an RFC).
 
-Koen Kooi wrote:
-> That isn't a problem right now, since a patch requires review and
-> approval on the stable-branch *mailinglist*.
+> Let me ask a blunt question: Is there really any activity on the stable
+> branch?
 
-Well, I guess it was clear this whole thing is about the possibility of
-circumventing that medium break and using the tools for what they are
-meant to be.
+There hasn't been much traffic on the mailinglist lately since I was on 
+holiday and PaulS still is on holiday and Leon is swamped at work.
+I am however currently cleaning up my patch queue to send them for 
+review, but I need to test things on actual devices first, which takes 
+time. I take "stable" seriously, sorry if that gets mistaken for sloth.
 
-Let me ask a blunt question: Is there really any activity on the stable
-branch?  The mailing list (which I just found out about) seems rather
-quiet to say the least.  And what I see in the bug tracker is mostly
-just a bot dumping a lot of stuff that apparently nobody cares sh!t
-about.  Bugs verified as WFM in .dev and claimed to exist in .stable are
-completely ignored even after nagging oe-devel.
+If you think you have patches that should get applied to the 
+stablebranch, please post them for review on the stablebranch 
+mailinglist. I can't speak for other developers, but I aim for a "same 
+day review" timeframe.
 
-I don't see how the current setup helps.  I *do* see how having all that
-in the bug tracker would help a lot.
+Sorry if I caused confusion about this.
 
-Regards
+regards,
 
-Rolf
+Koen
 
 
 
