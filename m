@@ -1,20 +1,31 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1JtRda-000794-EN
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 May 2008 20:11:40 +0200
-Received: from xora.org.uk ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
-	by xora.org.uk with esmtp; Tue, 06 May 2008 19:11:12 +0100
-	id 00064120.48209F40.00005CC2
-Date: Tue, 6 May 2008 19:11:42 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080506181142.GD4078@cimmeria.hyboria>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JtgDf-00016o-Q3
+	for openembedded-devel@openembedded.org; Wed, 07 May 2008 11:45:51 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JtgD7-0001XK-9b
+	for openembedded-devel@openembedded.org; Wed, 07 May 2008 09:45:17 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 07 May 2008 09:45:17 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 07 May 2008 09:45:17 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 07 May 2008 11:45:10 +0200
+Message-ID: <fvrtn6$93p$1@ger.gmane.org>
 References: <fvpr9t$4vh$1@ger.gmane.org> <fvq5c7$alo$1@ger.gmane.org>
 Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
 In-Reply-To: <fvq5c7$alo$1@ger.gmane.org>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Sender: news <news@ger.gmane.org>
 Subject: Re: bp flag added to bug tracker (org.openembedded.stable)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -29,26 +40,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 May 2008 18:11:42 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 07 May 2008 09:45:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tue, May 06, 2008 at 07:43:34PM +0200, Koen Kooi wrote:
-> Rolf Leggewie wrote:
->> Hi,
->>
->> it appears that org.openembedded.stable is not in addition to but a
->> replacement for org.oe.angstrom-2007.12-stable.  It also seems that the
->> policy so far of "two A* devs ACK any commit" has been thus replaced by
->> "two OE devs ACK any commit".  Correct so far?
->
+[resent as requested by list admin]
+
+Koen Kooi wrote:
 > "two stable branch developers" would be more like it.
->
-Yeah that makes sense, I'm an OE dev, but I never play with stable so
-its pointless asking me to do backports.
 
-Graeme
+Who defines that?
+
+We already have an OE group in bugzilla and could use it if the
+distinction was unnecessary.  Otherwise, it would certainly be easy to
+add another group for this purpose once it is clear who should be a
+member of that group.
 
 
 
