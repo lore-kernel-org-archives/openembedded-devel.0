@@ -1,30 +1,25 @@
-Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philipp.zabel@gmail.com>) id 1Ju5Kd-0006iH-BE
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Ju5Tt-00071j-IS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 May 2008 14:34:43 +0200
-Received: by fk-out-0910.google.com with SMTP id 19so861957fkr.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 May 2008 05:34:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:cc:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=1XUFxfITsqfRPWOXhULjjO1fm2hEF9sGoJCDebHBVV8=;
-	b=aJrhzGYOmUOwZhXijnhhYem5M6K02dV9qwq7UACHHOKF9amQUjfeJpiP9mz2OlAtZhWn+VvNVSl4J104+dOFc3obU1aDJpolGLGGAsk32BtVBLlFZkPxlbnRvRK/T/HqIG7GO+ezOk1Rq7Xg5q3PgTd+HFhoc2QF0VuKiMfFOyg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=BpybQpjU5JarGnXe1+NFKAH15e+8kEP5/Hp7d4B8a7efm7gO9NY7zRsxOMj3utwXaMnxRKiL8hVkCSwl3UvGyLNn3k12DnqGYBJBxZ0Gs5pzl1JRumr2/os79XKem/Eha3z1YOU7IGkPQhB0ps8mlSSISreWWvdh6iWwodSthXI=
-Received: by 10.82.167.9 with SMTP id p9mr382180bue.40.1210250042220;
-	Thu, 08 May 2008 05:34:02 -0700 (PDT)
-Received: by 10.82.119.15 with HTTP; Thu, 8 May 2008 05:34:02 -0700 (PDT)
-Message-ID: <74d0deb30805080534v6be5f293xa14fe5c159968555@mail.gmail.com>
-Date: Thu, 8 May 2008 14:34:02 +0200
-From: "pHilipp Zabel" <philipp.zabel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fvunn9$73m$1@ger.gmane.org>
+	Thu, 08 May 2008 14:44:17 +0200
+Received: (qmail invoked by alias); 08 May 2008 12:43:34 -0000
+Received: from brln-4db884d9.pool.einsundeins.de (EHLO [192.168.4.110])
+	[77.184.132.217]
+	by mail.gmx.net (mp010) with SMTP; 08 May 2008 14:43:34 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+cHgpPTVycLiYn55iQN2XjoFVXKhEJgY18D4KR+R
+	u8APtMX9pDG5bS
+Message-ID: <4822F56F.4010304@gmx.net>
+Date: Thu, 08 May 2008 14:43:27 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.12 (X11/20080420)
 MIME-Version: 1.0
-References: <fvu8b8$kl2$1@ger.gmane.org> <fvunn9$73m$1@ger.gmane.org>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Disapproval of revision b8e46b797b32111526a2116d020fdd9e1c079965
+To: Using OE <openembedded-users@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: add midpath 0.3 soon and then dump midpath 0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -38,58 +33,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2008 12:34:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 May 2008 12:44:18 -0000
+X-Groupsio-MsgNum: 5120
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig5A7017FBB01809A7D0F9F81E"
 
-On Thu, May 8, 2008 at 1:21 PM, Rolf Leggewie
-<no2spam@nospam.arcornews.de> wrote:
-> Koen,
->
->  thank you for continuing to keep such a close watch on every single
->  commit I make and raising hell every time you find a chance.
+--------------enig5A7017FBB01809A7D0F9F81E
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Actually, I was just about to do the same thing (reverting, sending a
-notification, wouldn't call that raising hell) when I noticed Koen's
-disapproval, so thanks for the quick fix.
-Just saying, this is because gmp is a pretty prominent package, not
-because Koen is closely watching your every step. Of course the latter
-part is only an assumption.
+Hi,
+I was helping Guillaume Legris with their build script. This work will
+make it trivial to write proper recipes in OE.
 
->  My apologies for the breakage.  I did md5sum those files, but I must
->  have overlooked the odd-man out.
+I would like to include MIDPath 0.3 when it is released and get rid of
+version 0.1. The reason is that the midpath recipes are effectively
+rewriting the its build system and are a nightmare to maintain. This
+would be worse when we have eg. midpath-cldc_0.1 and midpath-cldc_0.3
+which would look very different.
 
-The good thing is that you kept that odd-man out by accident, because
-otherwise it probably wouldn't have been noticed so quickly.
+Please speak out loudly if you are against removing midpath 0.1 from the
+development branch of OE (I will move the 0.1 recipes (and patches) to
+obsolete/ first, of course.).
 
->  I don't take breaking things lightly and you all know that I put in
->  great effort to get OE into better shape every time I touch it.  But
->  additional breakage will happen from time to time (and yes, cleaning up
->  after others is *NOT* the greatest fun in the world!).  What's important
->  is that breakage is dealt with after it occurred and I guess my record
->  is clean there.
->
->  So, yes, thank you, too.
->
->  Regards
->
->  Rolf
->
->
->  PS: As you are all aware, my CPU resources are quite limited and all the
->  time in the world spent compiling will still let some things slip through.
->
->
->
->
->  _______________________________________________
->  Openembedded-devel mailing list
->  Openembedded-devel@lists.openembedded.org
->  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Btw: There are midpath 0.2 recipes in our Jalimo overlay. I did not
+manage to merge those into OE because they are also very complicated
+(but more structured) and I could not get agreement on removing 0.1 for
+them. The good news is that the things I learned while doing the 0.2
+recipes have been applied when changing the upstream build script. So
+from 0.3 on it will be much easier to maintain midpath recipes.
 
-regards
-Philipp
+Regards
+Robert
 
 
+--------------enig5A7017FBB01809A7D0F9F81E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFIIvVyG9cfwmwwEtoRCDQeAJ4z5ewG/Ou3fTrFNHg3QIV4aq1zQACeOq9/
+uby54ZMNvMs8c6gkBMy9sbs=
+=YIDU
+-----END PGP SIGNATURE-----
+
+--------------enig5A7017FBB01809A7D0F9F81E--
