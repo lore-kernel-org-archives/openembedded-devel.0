@@ -1,30 +1,33 @@
-Received: from [209.85.132.249] (helo=an-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Ju3A8-00015N-Sj
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 May 2008 12:15:45 +0200
-Received: by an-out-0708.google.com with SMTP id b38so149213ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 May 2008 03:15:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=C8BSl2BLWMnfrvbqivenjtfblizMpQPG69JRVPFmKRk=;
-	b=mxx89+9aF8s71JpaJPDYgXEtL4tiiBtslya21llr9xzbr0+1HYgJ7uounqdXyZBwCkpCtPkdR+rSpbHFtVATk9o9/AQN7Cykktr6h/2c0rNltfgWUrKnEreY9h6/ZSEv//84YQYpKAA/IHGLeLwUPtg01v3yyba5bcboqMq+I/M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=niIm23C0dOHEQ+WzgGTnUGHg4w7QvVCjZ+MhqF3r6HuUnOBP0XfTBc8DQu7nwRbU2nhXbv86QNBzUfXTZPdoCZJKpX20DRRx8ChIn10qel0KfVXMePBHYg9BJIL83tXJwO8H0W1dN+eFMo+yCdpoih10rwsjPdGlrPliwXr2XbU=
-Received: by 10.100.152.19 with SMTP id z19mr3976538and.80.1210241704485;
-	Thu, 08 May 2008 03:15:04 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Thu, 8 May 2008 03:15:04 -0700 (PDT)
-Message-ID: <c384c5ea0805080315o4aea668av311a9a6374db68e1@mail.gmail.com>
-Date: Thu, 8 May 2008 12:15:04 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fvuc31$vci$1@ger.gmane.org>
-MIME-Version: 1.0
-References: <c384c5ea0805071507u747f820fga7e797c26243a367@mail.gmail.com>
-	<fvuc31$vci$1@ger.gmane.org>
-Subject: Re: [RFC] Auto bi-sect build server idea
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ju3rZ-0003LK-3B
+	for openembedded-devel@openembedded.org; Thu, 08 May 2008 13:00:37 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ju3qv-0003tS-6x
+	for openembedded-devel@openembedded.org; Thu, 08 May 2008 10:59:57 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 08 May 2008 10:59:57 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 08 May 2008 10:59:57 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 08 May 2008 12:59:45 +0200
+Message-ID: <fvumf4$2te$1@ger.gmane.org>
+References: <fvpr9t$4vh$1@ger.gmane.org>	<fvq5c7$alo$1@ger.gmane.org>	<fvrtn6$93p$1@ger.gmane.org>	<fvs0bo$h8r$1@ger.gmane.org>	<fvs8g9$de9$1@ger.gmane.org>	<fvsb7t$nk1$1@ger.gmane.org>	<fvseh7$53i$1@ger.gmane.org>	<fvsj9q$nk0$1@ger.gmane.org>
+	<fvsm39$2r2$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
+In-Reply-To: <fvsm39$2r2$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: bp flag added to bug tracker (org.openembedded.stable)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -38,37 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2008 10:15:45 -0000
+X-List-Received-Date: Thu, 08 May 2008 11:00:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Koen,
+Rolf Leggewie wrote:
+> Koen Kooi wrote:
+>> mail folder. I'm sure I can configure bugzilla to mail me and all that,
+>> but I honestly have no time or inclination to look into that right now.
+> 
+> Done ;-)
+> 
+> For now, I added both oe-stablebranch and you to the list to cc whenever
+> the bp flag is requested.
 
-On Thu, May 8, 2008 at 10:02 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> > Define a few local.conf's that are known-good.
->  What is different between those confs? I haven't edited my local.conf in
-> months and still build different configurations every day.
->
-Ah yes, you specify stuff on the command line prior to building?
+It doesn't look like the mails make it to the list.  Can you please
+white-list bugzilla-daemon@amethyst.openembedded.net?
 
-MACHINE=foobar bitbake etc.?
+Koen, do you receive the notification mails?  We have quite a list of
+backport request by now.  Most of them easily applicable.
 
-> > if the build completes, tag the revision as "last known good".
-> > if the build fails, tag the revision as "latest known bad", and
-> >
->
->  Tags would be a bad idea, we can use certs with monotone, which allow a
-> free-from key:value structure, so you can do
->
-I didn't mean tagging in the SCM context, just local to the build
-server (i.e. local to the bisect script). Should have made this more
-clear, as I don't intend to clutter the OE mtn db.
+http://bugs.openembedded.net/request.cgi?action=queue&requester=&product=&type=all&requestee=&component=&group=type
 
-Should check if mtn supports bi-sect, otherwise cook up a script that does this.
-
-Regards,
- --
-Leon
 
 
