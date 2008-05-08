@@ -1,29 +1,33 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>)
-	id 1Ju5bm-0007L7-Mz; Thu, 08 May 2008 14:52:26 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.63)
-	(envelope-from <broonie@sirena.org.uk>)
-	id 1Ju5b7-00007T-JI; Thu, 08 May 2008 13:51:45 +0100
-Date: Thu, 8 May 2008 13:51:45 +0100
-From: Mark Brown <broonie@sirena.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080508125144.GB23041@sirena.org.uk>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	openembedded-devel@openembedded.org
-References: <200805080215.23729.zecke@selfish.org> <fvuj9i$nt9$1@ger.gmane.org>
-	<200805081306.37230.zecke@selfish.org>
-	<1210246170.5006.34.camel@dax.rpnet.com>
-MIME-Version: 1.0
-In-Reply-To: <1210246170.5006.34.camel@dax.rpnet.com>
-X-Cookie: He who hesitates is sometimes saved.
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
-X-SA-Exim-Scanned: No (on cassiel.sirena.org.uk);
-	SAEximRunCond expanded to false
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Creating a pristine environment?
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ju68u-0004ea-FP
+	for openembedded-devel@openembedded.org; Thu, 08 May 2008 15:26:40 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ju68F-000358-Fw
+	for openembedded-devel@openembedded.org; Thu, 08 May 2008 13:25:59 +0000
+Received: from wlan140130.mobiel.utwente.nl ([130.89.140.130])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 08 May 2008 13:25:59 +0000
+Received: from k.kooi by wlan140130.mobiel.utwente.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 08 May 2008 13:25:59 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 08 May 2008 15:25:50 +0200
+Message-ID: <fvuv0v$16v$1@ger.gmane.org>
+References: <fvu8b8$kl2$1@ger.gmane.org> <fvunn9$73m$1@ger.gmane.org>
+	<74d0deb30805080534v6be5f293xa14fe5c159968555@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: wlan140130.mobiel.utwente.nl
+User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
+In-Reply-To: <74d0deb30805080534v6be5f293xa14fe5c159968555@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Disapproval of revision b8e46b797b32111526a2116d020fdd9e1c079965
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -37,22 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2008 12:52:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 May 2008 13:26:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 08, 2008 at 12:29:30PM +0100, Richard Purdie wrote:
+pHilipp Zabel wrote:
+> On Thu, May 8, 2008 at 1:21 PM, Rolf Leggewie
+> <no2spam@nospam.arcornews.de>  wrote:
+>> Koen,
+>>
+>>   thank you for continuing to keep such a close watch on every single
+>>   commit I make and raising hell every time you find a chance.
+>
+> Actually, I was just about to do the same thing (reverting, sending a
+> notification, wouldn't call that raising hell) when I noticed Koen's
+> disapproval, so thanks for the quick fix.
+> Just saying, this is because gmp is a pretty prominent package, not
+> because Koen is closely watching your every step. Of course the latter
+> part is only an assumption.
 
-> that capability. Perhaps we clean by default but allow a user to
-> override and claim their starting environment is clean at their own
-> risk?
+I've been (trying) to build x11-image from scratch for various targets 
+the past week and fix any breakages I encounter. If you check the commit 
+messages you'll see that I'm also raising hell for the breakage Mickeyl 
+was so kind to add (removing packages that angstrom has as 
+PREFERRED_VERSION, etc).
+It's nothing personal, Rolf just happened to be the person that made the 
+same mistake twice in a week.
 
-That's roughly how SCons handles a similar feature - it defaults to
-cleaning the environment but makes the original environment availiable
-to the build system so it can either be referred to or imported
-wholesale as desired.
+FWIW: bitbake -c patch is IO limited, no cpu limited.
 
--- 
-"You grabbed my hand and we fell into it, like a daydream - or a fever."
 
 
