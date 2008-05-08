@@ -1,32 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ju16E-0004js-GD
-	for openembedded-devel@openembedded.org; Thu, 08 May 2008 10:03:34 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ju15X-0003X4-6d
-	for openembedded-devel@openembedded.org; Thu, 08 May 2008 08:02:51 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 08 May 2008 08:02:51 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 08 May 2008 08:02:51 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 08 May 2008 10:02:41 +0200
-Message-ID: <fvuc31$vci$1@ger.gmane.org>
-References: <c384c5ea0805071507u747f820fga7e797c26243a367@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
-In-Reply-To: <c384c5ea0805071507u747f820fga7e797c26243a367@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Auto bi-sect build server idea
+	(envelope-from <zecke@selfish.org>) id 1Ju1p2-0002AR-MB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 May 2008 10:49:52 +0200
+Received: from world202.mi.fu-berlin.de ([160.45.115.202])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>)
+	id 1Ju1oP-0001jc-9p; Thu, 08 May 2008 10:49:13 +0200
+To: bitbake-dev@lists.berlios.de
+From: Holger Freyther <zecke@selfish.org>
+Date: Thu, 8 May 2008 02:15:23 +0200
+MIME-Version: 1.0
+Message-Id: <200805080215.23729.zecke@selfish.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Creating a pristine environment?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -40,66 +28,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2008 08:03:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 08 May 2008 08:49:53 -0000
+X-Groupsio-MsgNum: 5109
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_bYkII5F3DT6JtuZ"
+
+--Boundary-00=_bYkII5F3DT6JtuZ
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Leon Woestenberg wrote:
-> Hello all,
->
->
-> I typically run a from scratch build once a day, typically a
-> combination of {uc,eg,g}libc and targets {ixp4xx, powerpc, avr32}.
->
-> Today my avr32/uclibc build stopped with bug #1380 which has been
-> reported 2 months ago but never occurred to me.
->
-> When I fixed that, I then ran into bug #4065 which has been
-> opened/fixed/closed and reopened.
->
-> So, I think we have a regression at hand (which might be already fixed
-> when I send this email, but that's not the point).
->
-> Then I thought about the idea of having a build server automatically
-> doing an automatic bi-sect towards the commit that breaks things.
->
-> Define a few local.conf's that are known-good.
-> Build each of them,
+Hey,
 
-What is different between those confs? I haven't edited my local.conf in 
-months and still build different configurations every day.
+I have seen raster's environment breaking various buildsystems and we might 
+want to really start having a clean environment before starting to build.
 
-> if the build completes, tag the revision as "last known good".
-> if the build fails, tag the revision as "latest known bad", and
-
-Tags would be a bad idea, we can use certs with monotone, which allow a 
-free-from key:value structure, so you can do
-
-mtn cert 8759384591ada9304319403 bug4530 bad
-mtn cert 3123424905903affeaf0232 bug4530 good
-
-This way you can do multiple bisects in parallel, and you don't clutter 
-the tags list (which is db global and permanent).
-
-> bi-sect, selecting a "candidate" and iterate to the breaking commit.
->
-> I'm mainly interested in a helloworld-image, I'm not much interested
-> in package recipes, but mostly in the toolchain/libc
-> stuff/rootfs/image stuff, for now.
->
-> Has this been done earlier? Ideas?
-
-It would be easy to extend seppuku.bbclass to add a 'bug#:bad' cert each 
-time it falls over. That would catch buildproblems. For bisecting we 
-would probably need a small wrapper script.
-
-Any volunteers for extending seppuku.bbclass and/or writing such a 
-wrapper script?
-
-regards,
-
-Koen
+the patch below should implement it. Should we do this in OE? I'm aware of the 
+unexport inside OE but we really should do this the otherway around.
 
 
+comments?
 
+	z.
 
+--Boundary-00=_bYkII5F3DT6JtuZ
+Content-Type: text/x-diff;
+  charset="us-ascii";
+  name="clean_environment.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="clean_environment.patch"
+
+Index: bin/bitbake
+===================================================================
+--- bin/bitbake	(Revision 1063)
++++ bin/bitbake	(Arbeitskopie)
+@@ -42,6 +42,56 @@
+ 
+ 
+ #============================================================================#
++# clean_environment 
++#============================================================================#
++def clean_environment():
++    """
++    Create a pristine environment for bitbake. This will remove variables that
++    are not known and may influence the build in a negative way.
++    """
++    good_keys = [
++        "BBPATH",
++        "COLORTERM",
++        "DBUS_SESSION_BUS_ADDRESS",
++        "DESKTOP_SESSION",
++        "DESKTOP_STARTUP_ID",
++        "DISPLAY",
++        "GNOME_KEYRING_PID",
++        "GNOME_KEYRING_SOCKET",
++        "GPG_AGENT_INFO",
++        "GTK_RC_FILES",
++        "HOME",
++        "LANG",
++        "LOGNAME",
++        "PATH",
++        "PWD",
++        "SESSION_MANAGER",
++        "SHELL",
++        "SSH_AUTH_SOCK",
++        "TERM",
++        "USER",
++        "USERNAME",
++        "_",
++        "XAUTHORITY",
++        "XDG_DATA_DIRS",
++        "XDG_SESSION_COOKIE",
++    ]
++
++
++    removed_vars = []
++    for key in os.environ.keys():
++        if key in good_keys:
++            continue
++        
++        removed_vars.append(key)
++        os.unsetenv(key)
++        del os.environ[key]
++
++    if len(removed_vars):
++        bb.note("Removed the following variables from the environment:", ",".join(removed_vars))
++
++
++#============================================================================#
+ # main
+ #============================================================================#
+ 
+@@ -111,6 +161,8 @@
+     configuration.pkgs_to_build = []
+     configuration.pkgs_to_build.extend(args[1:])
+ 
++    clean_environment()
++
+     cooker = bb.cooker.BBCooker(configuration)
+ 
+     if configuration.profile:
+
+--Boundary-00=_bYkII5F3DT6JtuZ--
