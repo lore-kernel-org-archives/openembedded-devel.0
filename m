@@ -1,32 +1,39 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1Ju6pY-0005hN-UU
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1Ju7Qr-00031G-En
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 May 2008 16:10:45 +0200
-X-ASG-Debug-ID: 1210255784-119601120000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id BE6265852E
+	Thu, 08 May 2008 16:49:17 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E8A508400D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 May 2008 09:09:44 -0500 (CDT)
-Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
-	ESMTP id xL8GHdVglNKfnl19 for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 08 May 2008 09:09:44 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
+	Thu,  8 May 2008 16:48:35 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A4C778400CC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 May 2008 16:48:35 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.4 (2008-01-01) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.4
+Received: from rhein.familie-heinold.de (e178087219.adsl.alicedsl.de
+	[85.178.87.219]) by mail.familie-heinold.de (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 May 2008 16:48:35 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 1F4132546; Thu,  8 May 2008 16:48:35 +0200 (CEST)
+Date: Thu, 8 May 2008 16:48:35 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] Creating a pristine environment?
-Date: Thu, 8 May 2008 09:10:16 -0500
-User-Agent: KMail/1.9.7
-References: <200805080215.23729.zecke@selfish.org>
-In-Reply-To: <200805080215.23729.zecke@selfish.org>
+Message-ID: <20080508144834.GA23255@rhein.zuhause.netz>
+References: <4822F56F.4010304@gmx.net>
 MIME-Version: 1.0
-Message-Id: <200805080910.16677.geoffrey@pager.net>
-X-Barracuda-Connect: UNKNOWN[192.168.1.1]
-X-Barracuda-Start-Time: 1210255784
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: Re: Creating a pristine environment?
+In-Reply-To: <4822F56F.4010304@gmx.net>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: add midpath 0.3 soon and then dump midpath 0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -40,29 +47,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2008 14:10:45 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 08 May 2008 14:49:17 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wednesday 07 May 2008 07:15:23 pm Holger Freyther wrote:
+Hi,
 
-> I have seen raster's environment breaking various buildsystems and we might
-> want to really start having a clean environment before starting to build.
->
-> the patch below should implement it. Should we do this in OE? I'm aware of
-> the unexport inside OE but we really should do this the otherway around.
+please go for it.
 
-Using some variables from the users environment is good, as others have 
-mentioned.  But some (I'm looking at you, CPATH) really need to be unset.  My 
-Gentoo system automatically sets CPATH, and having that set results in "CROSS 
-COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/libffi".  
+Bye
 
----
-Geoffrey
-
-
-
+Henning
 
 
