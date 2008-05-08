@@ -1,27 +1,30 @@
-Received: from [209.85.132.242] (helo=an-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Jtrnx-0003Rl-Tw
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 May 2008 00:08:06 +0200
-Received: by an-out-0708.google.com with SMTP id b38so105405ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2008 15:07:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:mime-version:content-type:content-transfer-encoding:content-disposition;
-	bh=bUQe6n1HTUgkevzrP4zQmYLQZy/10iqk2L5onEe2dDI=;
-	b=E1nJQxc3ttRzu/xNzIf11IIXyd2v2eJSDjaDbREgiuWp+k3SzdZUkJwQufocP96fy+EF0HVp9uJFjGtc2BMSbs2yDgsUvda8+Io0MaWP/bIJCr/tBksg7qzobr+eFtk44gxbxQfL8RI50JTo6YGR9MmajN2a+rrpD1d2c3XRMdY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type:content-transfer-encoding:content-disposition;
-	b=ug1BZSnXrwKuFfLLnLj9LPYORi1drgDKOWHWd6oJyt3/BK7tldBRc0UoNO2iv491mAlvHtlPOLXF8+pcWztCZM2Ay5qC6QVUnK6qMggC8Db9VxiqP2+vGvm/6c3p+8a2Hf54GMUa/aw+BmFvTj0rkc2rKD2AnGIw6UkKMNvpDKA=
-Received: by 10.100.122.8 with SMTP id u8mr3607479anc.103.1210198049855;
-	Wed, 07 May 2008 15:07:29 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Wed, 7 May 2008 15:07:29 -0700 (PDT)
-Message-ID: <c384c5ea0805071507u747f820fga7e797c26243a367@mail.gmail.com>
-Date: Thu, 8 May 2008 00:07:29 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-Subject: [RFC] Auto bi-sect build server idea
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ju06M-0006vQ-BD
+	for openembedded-devel@openembedded.org; Thu, 08 May 2008 08:59:38 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ju05h-0000Y1-JU
+	for openembedded-devel@openembedded.org; Thu, 08 May 2008 06:58:57 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 08 May 2008 06:58:57 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 08 May 2008 06:58:57 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 08 May 2008 08:58:48 +0200
+Message-ID: <fvu8b8$kl2$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
+Sender: news <news@ger.gmane.org>
+Subject: Disapproval of revision b8e46b797b32111526a2116d020fdd9e1c079965
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -35,43 +38,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2008 22:08:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 08 May 2008 06:59:38 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello all,
+Hello,
+
+This morning I get:
+
+  File "/OE/bitbake/lib/bb/build.py", line 136, in exec_func_python
+     utils.better_exec(comp, g, tmp, bbfile)
+   File "/OE/bitbake/lib/bb/utils.py", line 144, in better_exec
+     exec code in context
+   File "patch_do_patch", line 100, in <module>
+   File "patch_do_patch", line 98, in patch_do_patch
+   File "<bb>", line 339, in Resolve
+__builtin__.CmdError: Command Error: exit status: 1  Output:
+Applying patch amd64.patch
+patching file longlong.h
+Hunk #1 FAILED at 715.
+1 out of 1 hunk FAILED -- rejects in file longlong.h
+Patch amd64.patch does not apply (enforce with -f)
+
+So I look at the commits:
+
+Commit by Laibsch on org.oe.dev :: rb8e46b79... / (14 files in 7 dirs):
+gmp: consolidate common patches unchanged across versions into files/
+
+koen@lieve:/OE/org.openembedded.dev/packages/gmp$ find . | grep amd64
+./files/amd64.patch
+
+Ok, so there really is only one patch. Let's do an experiment:
+
+koen@lieve:/OE/org.openembedded.dev/packages/gmp$ mtn up -r f3aafac3
+mtn: expanded selector 'f3aafac3' -> 'i:f3aafac3'
+mtn: expanding selection 'f3aafac3'
+mtn: expanded to 'f3aafac33dd3d98133bfd91efdee783ccd8da959'
+mtn: selected update target f3aafac33dd3d98133bfd91efdee783ccd8da959
+mtn: [left]  71c3bbc5e67f712d2f13eedc29e54d1d2e9c64c8
+mtn: [right] f3aafac33dd3d98133bfd91efdee783ccd8da959
+mtn: renaming packages/gmp/files/amd64.patch to 
+packages/gmp/gmp-4.1.2/amd64.patch
+mtn: adding packages/gmp/gmp-4.1.4/amd64.patch
+mtn: renaming packages/gmp/files/sh4-asmfix.patch to 
+packages/gmp/gmp-4.1.4/sh4-asmfix.patch
+mtn: adding packages/gmp/gmp-4.2.1/amd64.patch
+mtn: adding packages/gmp/gmp-4.2.1/sh4-asmfix.patch
+mtn: renaming packages/gmp/files/x86-fat.diff to 
+packages/gmp/gmp-4.2.1/x86-fat.diff
+mtn: adding packages/gmp/gmp-4.2.2/amd64.patch
+mtn: adding packages/gmp/gmp-4.2.2/sh4-asmfix.patch
+mtn: adding packages/gmp/gmp-4.2.2/x86-fat.diff
+mtn: dropping packages/gmp/files
+mtn: updated to base revision f3aafac33dd3d98133bfd91efdee783ccd8da959
+
+koen@lieve:/OE/org.openembedded.dev/packages/gmp$ find . | grep amd64
+./gmp-4.1.2/amd64.patch
+./gmp-4.1.4/amd64.patch
+./gmp-4.2.1/amd64.patch
+./gmp-4.2.2/amd64.patch
+
+OK, so I have the patches back, now see if they are all the same, as 
+claimed by the commit:
+
+koen@lieve:/OE/org.openembedded.dev/packages/gmp$ find . | grep amd64 | 
+xargs md5sum
+9c015f16636e1fd0d2f374672b7004a5  ./gmp-4.1.2/amd64.patch
+a9876747e7ae95ee64f505022b92bb10  ./gmp-4.1.4/amd64.patch
+a9876747e7ae95ee64f505022b92bb10  ./gmp-4.2.1/amd64.patch
+a9876747e7ae95ee64f505022b92bb10  ./gmp-4.2.2/amd64.patch
+
+Nope they aren't. Revision disapproved to unbreak my build.
+This is the second time this week[1] that a 'cleanup' breaks the build. 
+Please pay more attention (e.g. 'for bb in *.bb ; do bitbake -b $bb -c 
+patch ; done') when doing things like this.
 
 
-I typically run a from scratch build once a day, typically a
-combination of {uc,eg,g}libc and targets {ixp4xx, powerpc, avr32}.
+[1] 
+http://lists.linuxtogo.org/pipermail/openembedded-commits/2008-May/014437.html
 
-Today my avr32/uclibc build stopped with bug #1380 which has been
-reported 2 months ago but never occurred to me.
-
-When I fixed that, I then ran into bug #4065 which has been
-opened/fixed/closed and reopened.
-
-So, I think we have a regression at hand (which might be already fixed
-when I send this email, but that's not the point).
-
-Then I thought about the idea of having a build server automatically
-doing an automatic bi-sect towards the commit that breaks things.
-
-Define a few local.conf's that are known-good.
-Build each of them,
-if the build completes, tag the revision as "last known good".
-if the build fails, tag the revision as "latest known bad", and
-bi-sect, selecting a "candidate" and iterate to the breaking commit.
-
-I'm mainly interested in a helloworld-image, I'm not much interested
-in package recipes, but mostly in the toolchain/libc
-stuff/rootfs/image stuff, for now.
-
-Has this been done earlier? Ideas?
-
-Regards,
--- 
-Leon
 
 
