@@ -1,33 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ju68u-0004ea-FP
-	for openembedded-devel@openembedded.org; Thu, 08 May 2008 15:26:40 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ju68F-000358-Fw
-	for openembedded-devel@openembedded.org; Thu, 08 May 2008 13:25:59 +0000
-Received: from wlan140130.mobiel.utwente.nl ([130.89.140.130])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 08 May 2008 13:25:59 +0000
-Received: from k.kooi by wlan140130.mobiel.utwente.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 08 May 2008 13:25:59 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 08 May 2008 15:25:50 +0200
-Message-ID: <fvuv0v$16v$1@ger.gmane.org>
-References: <fvu8b8$kl2$1@ger.gmane.org> <fvunn9$73m$1@ger.gmane.org>
-	<74d0deb30805080534v6be5f293xa14fe5c159968555@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: wlan140130.mobiel.utwente.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
-In-Reply-To: <74d0deb30805080534v6be5f293xa14fe5c159968555@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Disapproval of revision b8e46b797b32111526a2116d020fdd9e1c079965
+	(envelope-from <cliff.brake@gmail.com>) id 1Ju6dj-0005Lh-PT
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 May 2008 15:58:31 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so1747332rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 May 2008 06:57:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=DmVQJbZGKmfQueNeV1wjMVfyO5psqdhQavyqteIpyaQ=;
+	b=hUzvSJjCbC4OkeRGoASUTIXavwJNdCfjUnQ7vniRBP+3LIjFWVf+79fFcRmiEXxNTpFhyAERz1twG/i3xvKZ3nfTVUlq2yTGxLluzJ0lJhVILuhTQrf2dl9wIaxgFA66b63kuKBjEgAxOphNTD5kvD7ZgAkhl2Fbs3FeCUy+1Kw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=auTKhLMJefyuOpohKAiP1G4uKt4/TBfi6O2xxOjko1yTT27FOTwwoG3kInjXqmUU7n9zooCRgmX+OrAS3Ftkp99Cl9eTCWVupMGUfcOnpsGAxak9RaN7pdJLBdrVBRBt4DxSukh91oJeUWveDWQGdN1SWB2G9Af+FPOh4tOj+Z0=
+Received: by 10.141.88.3 with SMTP id q3mr1547852rvl.46.1210255069808;
+	Thu, 08 May 2008 06:57:49 -0700 (PDT)
+Received: by 10.141.129.10 with HTTP; Thu, 8 May 2008 06:57:49 -0700 (PDT)
+Message-ID: <f96d234e0805080657j76d5b8cfhd280bc6dcb1d9b45@mail.gmail.com>
+Date: Thu, 8 May 2008 09:57:49 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <c384c5ea0805080514s6561aff8t273eff90fca1db85@mail.gmail.com>
+MIME-Version: 1.0
+References: <200805080215.23729.zecke@selfish.org>
+	<f96d234e0805080506t458743b8g7ea65ab4dcb15525@mail.gmail.com>
+	<c384c5ea0805080514s6561aff8t273eff90fca1db85@mail.gmail.com>
+Subject: Re: Creating a pristine environment?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -41,34 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2008 13:26:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 08 May 2008 13:58:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-pHilipp Zabel wrote:
-> On Thu, May 8, 2008 at 1:21 PM, Rolf Leggewie
-> <no2spam@nospam.arcornews.de>  wrote:
->> Koen,
->>
->>   thank you for continuing to keep such a close watch on every single
->>   commit I make and raising hell every time you find a chance.
+On Thu, May 8, 2008 at 8:14 AM, Leon Woestenberg
+<leon.woestenberg@gmail.com> wrote:
+>  On Thu, May 8, 2008 at 2:06 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+>  >  export TOPDIR="${OEDIR}/build/angstrom-2007.1"
 >
-> Actually, I was just about to do the same thing (reverting, sending a
-> notification, wouldn't call that raising hell) when I noticed Koen's
-> disapproval, so thanks for the quick fix.
-> Just saying, this is because gmp is a pretty prominent package, not
-> because Koen is closely watching your every step. Of course the latter
-> part is only an assumption.
+>  A warning here, I have seen breakage with some environment variables.
+>
+>  I think TOPDIR is used by u-boot or some such.
+>
+>  Think of a better (more uniquer) namespace, such as OE_TOPDIR.
 
-I've been (trying) to build x11-image from scratch for various targets 
-the past week and fix any breakages I encounter. If you check the commit 
-messages you'll see that I'm also raising hell for the breakage Mickeyl 
-was so kind to add (removing packages that angstrom has as 
-PREFERRED_VERSION, etc).
-It's nothing personal, Rolf just happened to be the person that made the 
-same mistake twice in a week.
+Good point.  TOPDIR is currently coded in bitbake:
 
-FWIW: bitbake -c patch is IO limited, no cpu limited.
+./lib/bb/parse/parse_py/ConfHandler.py:    if not
+bb.data.getVar('TOPDIR', data):
+./lib/bb/parse/parse_py/ConfHandler.py:
+bb.data.setVar('TOPDIR', os.getcwd(), data)
+./lib/bb/build.py:        prevdir = data.expand('${TOPDIR}', d)
 
+so, it won't be trivial to change without breaking existing build environments.
+
+Thanks,
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
