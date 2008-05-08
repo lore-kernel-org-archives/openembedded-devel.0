@@ -1,23 +1,32 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Ju3y3-0003b7-Qm
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 May 2008 13:07:19 +0200
-Received: from world82.mi.fu-berlin.de ([160.45.115.82])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Ju3xP-0005Co-Ta
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 May 2008 13:06:39 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 8 May 2008 13:06:36 +0200
-User-Agent: KMail/1.9.9
-References: <200805080215.23729.zecke@selfish.org> <fvuj9i$nt9$1@ger.gmane.org>
-In-Reply-To: <fvuj9i$nt9$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200805081306.37230.zecke@selfish.org>
-Subject: Re: Creating a pristine environment?
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ju4CH-0004pi-1M
+	for openembedded-devel@openembedded.org; Thu, 08 May 2008 13:22:01 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ju4Bc-0004rm-5s
+	for openembedded-devel@openembedded.org; Thu, 08 May 2008 11:21:20 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 08 May 2008 11:21:20 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 08 May 2008 11:21:20 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 08 May 2008 13:21:14 +0200
+Message-ID: <fvunn9$73m$1@ger.gmane.org>
+References: <fvu8b8$kl2$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.12 (X11/20080227)
+In-Reply-To: <fvu8b8$kl2$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Disapproval of revision b8e46b797b32111526a2116d020fdd9e1c079965
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -31,33 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2008 11:07:20 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 08 May 2008 11:22:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thursday 08 May 2008 12:05:38 Koen Kooi wrote:
-> Holger Freyther wrote:
-> > Hey,
-> >
-> > I have seen raster's environment breaking various buildsystems and we
-> > might want to really start having a clean environment before starting to
-> > build.
-> >
-> > the patch below should implement it. Should we do this in OE? I'm aware
-> > of the unexport inside OE but we really should do this the otherway
-> > around.
->
-> While this is a good idea, your current implementation breaks:
->
-> MACHINE=foo ANGSTROM_MODE=bar bitbake foo-bar-image
+Koen,
 
-Well, that would make a case for keeping the unexport feature in OE. Or we 
-could move the unsetting to after having parsed the configuration. I will 
-give the 2nd idea a go...
+thank you for continuing to keep such a close watch on every single
+commit I make and raising hell every time you find a chance.
+
+My apologies for the breakage.  I did md5sum those files, but I must
+have overlooked the odd-man out.
+
+I don't take breaking things lightly and you all know that I put in
+great effort to get OE into better shape every time I touch it.  But
+additional breakage will happen from time to time (and yes, cleaning up
+after others is *NOT* the greatest fun in the world!).  What's important
+is that breakage is dealt with after it occurred and I guess my record
+is clean there.
+
+So, yes, thank you, too.
+
+Regards
+
+Rolf
 
 
-z.
+PS: As you are all aware, my CPU resources are quite limited and all the
+time in the world spent compiling will still let some things slip through.
+
 
 
