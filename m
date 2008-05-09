@@ -1,39 +1,24 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Ju7Qr-00031G-En
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1JuLCT-0004I0-66
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 May 2008 16:49:17 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E8A508400D6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 May 2008 16:48:35 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A4C778400CC
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 May 2008 16:48:35 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.4 (2008-01-01) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.4
-Received: from rhein.familie-heinold.de (e178087219.adsl.alicedsl.de
-	[85.178.87.219]) by mail.familie-heinold.de (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 May 2008 16:48:35 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 1F4132546; Thu,  8 May 2008 16:48:35 +0200 (CEST)
-Date: Thu, 8 May 2008 16:48:35 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080508144834.GA23255@rhein.zuhause.netz>
-References: <4822F56F.4010304@gmx.net>
+	Fri, 09 May 2008 07:31:22 +0200
+Received: (qmail invoked by alias); 09 May 2008 05:30:32 -0000
+Received: from brln-4db88ba4.pool.einsundeins.de (EHLO [192.168.4.110])
+	[77.184.139.164]
+	by mail.gmx.net (mp053) with SMTP; 09 May 2008 07:30:32 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+OlZgMt7GOGelm1xAfwMp7wWCldTsBtsIR37Spm2
+	M8KRJYA6moXQkd
+Message-ID: <4823E170.90308@gmx.net>
+Date: Fri, 09 May 2008 07:30:24 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.12 (X11/20080420)
 MIME-Version: 1.0
-In-Reply-To: <4822F56F.4010304@gmx.net>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: add midpath 0.3 soon and then dump midpath 0.1
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: DCVS comparison article
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -47,16 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2008 14:49:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 09 May 2008 05:31:22 -0000
+X-Groupsio-MsgNum: 5126
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig41E0777E01B894F9C4176DAF"
 
-Hi,
+--------------enig41E0777E01B894F9C4176DAF
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-please go for it.
+Hi all,
+there is an article comparing git, mercurial and bzr. Hope you find that
+interesting: http://www.infoq.com/articles/dvcs-guide
 
-Bye
+Regards
+Robert
 
-Henning
 
+--------------enig41E0777E01B894F9C4176DAF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFII+F1G9cfwmwwEtoRCEPRAJ9ZF7GMFxLNbzkJETPYQpfSS5R+bwCgnKmZ
+ZDgSo0oZtJQ6feFzDM/H5Tw=
+=rZSm
+-----END PGP SIGNATURE-----
+
+--------------enig41E0777E01B894F9C4176DAF--
