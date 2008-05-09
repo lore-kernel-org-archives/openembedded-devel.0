@@ -1,29 +1,24 @@
-Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JuOOX-0005JB-NI
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Patrick_Fischer@gmx.de>) id 1JuU7c-0007i8-HN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 May 2008 10:56:01 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so2549246rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 May 2008 01:55:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=1xisE+AIW57JhoTvpv9LgpnkL9DIbek2o57kdLz0Isc=;
-	b=hg3/kT26TEwtom/tE3cJy8zEZd+bgZ36O5gtHdmcVG9LflwKnLc0XO54c0mXkNhAJds0V0QzIJaRu2rKEqTn4TPbGcRbt+m9ccBvXgMtLAjJVHw8XLMaDdRuBbzzHkqwXOwS8FZ6bTvacYhvEpZ8Xvc7EvtHlsmPMB43QEk7HyE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=QVZKmIFNjbeEDqOyZBrbPka4PQMG/g17AkAFSz5beXd6hPkpAn6NR515l8pT2Xfo4Y6tgwMc33LXD0TVHUrnGcC/0zifC4Hruz3Ku2YFFcJuowFDAxKplBHpHN1pGTOoowNLsI/LYu7xaU+gqB9k/uP/rkiWSvXGPlUAOcOC19U=
-Received: by 10.141.171.6 with SMTP id y6mr2047934rvo.143.1210323312958;
-	Fri, 09 May 2008 01:55:12 -0700 (PDT)
-Received: by 10.140.250.18 with HTTP; Fri, 9 May 2008 01:55:12 -0700 (PDT)
-Message-ID: <c384c5ea0805090155t752cc7d1w177ae0ffdb3fe679@mail.gmail.com>
-Date: Fri, 9 May 2008 10:55:12 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200805080215.23729.zecke@selfish.org>
+	Fri, 09 May 2008 17:02:56 +0200
+Received: (qmail 32570 invoked by uid 0); 9 May 2008 15:02:03 -0000
+Received: from 213.39.239.91 by www172.gmx.net with HTTP;
+	Fri, 09 May 2008 17:02:03 +0200 (CEST)
+Date: Fri, 09 May 2008 17:02:04 +0200
+From: "Patrick Fischer" <Patrick_Fischer@gmx.de>
+Message-ID: <20080509150204.118180@gmx.net>
 MIME-Version: 1.0
-References: <200805080215.23729.zecke@selfish.org>
-Subject: Re: Creating a pristine environment?
+To: openembedded-devel@lists.openembedded.org
+X-Authenticated: #1735141
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX1/y20JshtryY7p5r3f89VDBkveY/qDMCA612rCqX9
+	1+AfooeIWtgt7N/tsNDuU25BcS4uF6gz4f7g== 
+X-GMX-UID: PxNBOEJPZCEEWYsDf2whDEl4IGhpZcYK
+Subject: do_rootfs file or not to file....
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -37,23 +32,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 May 2008 08:56:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 May 2008 15:02:58 -0000
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+Hello oe
 
-On Thu, May 8, 2008 at 2:15 AM, Holger Freyther <zecke@selfish.org> wrote:
-> comments?
->
-How about in the insanity checker?
+maybe i have a email problem. so sorry if you receive this email double.
 
-We would like the user to make sure his environment is sane for
-OpenEmbedded, and not try to fix it up ourselves.
+We have a strange do_rootfs problem.
+After update to Ubuntu 8.04 and debian testing we can't run do_rootfs anymore.
 
-Regards,
+Sometimes it is a file which is no file or a dir which is not a dir:
+
+In this case a dir was created with mkdir and the next ls -l line shows that 
+it is a file:
+
+######
++ rm -rf /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
++ mkdir -p /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
++ ls -l /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
+-rwxr-xr-x 2 root root 4096 May  8 
+14:03 /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
++ 
+cp -r /usr/src/trunk/projects/base/build/tmp/rootfs/usr/local/ /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
+cp: target `/usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/' is not 
+a directory
+######
+
+Also it could be inverted. A file copied by cp is a dir.
+
+######
+mkfs.jffs2 -x 
+lzo --root=/usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/ --faketime --output=/usr/src/trunk/projects/base/build/tmp/deploy/images/rootfs.jffs2 --little-endian -e 
+128 --pad=27131904 
+mkfs.jffs2: opening 
+directory /usr/src/trunk/projects/base/build/tmp/rootfs_2/lib/libblaconfig.so.0: 
+Not a directory 
+######
+
+The really strange thing is that if I run 
+the /usr/src/trunk/projects/base/build/tmp/work/boxr5-1.0-r0/temp/run.do_rootfs.12648 
+by hand, it works fine. The Problem is not always at the same line!!
+
+I read something about "switch from RiserFS to ext3" but I have ext3.
+/bin/sh is bash
+
+I'm not sure but the scripts are called from within python??
+The workstation which failed are using Python 2.5.2.
+Python 2.4.4 -> works
+Python 2.5.2 -> fails 
+
+I'm not allown, in this Forum some people have the same problem: 
+http://www.dream-multimedia-tv.de/board/thread.php?postid=17280#post17280
+
+Maybe somebody knows a fix.
+
+Best Regards
+Patrick Fischer
+
 -- 
-Leon
+GMX startet ShortView.de. Hier findest Du Leute mit Deinen Interessen!
+Jetzt dabei sein: http://www.shortview.de/?mc=sv_ext_mf@gmx
 
 
