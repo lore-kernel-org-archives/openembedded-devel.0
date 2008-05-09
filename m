@@ -1,24 +1,29 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1JuLCT-0004I0-66
+Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JuOOX-0005JB-NI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 May 2008 07:31:22 +0200
-Received: (qmail invoked by alias); 09 May 2008 05:30:32 -0000
-Received: from brln-4db88ba4.pool.einsundeins.de (EHLO [192.168.4.110])
-	[77.184.139.164]
-	by mail.gmx.net (mp053) with SMTP; 09 May 2008 07:30:32 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+OlZgMt7GOGelm1xAfwMp7wWCldTsBtsIR37Spm2
-	M8KRJYA6moXQkd
-Message-ID: <4823E170.90308@gmx.net>
-Date: Fri, 09 May 2008 07:30:24 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.12 (X11/20080420)
-MIME-Version: 1.0
+	Fri, 09 May 2008 10:56:01 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so2549246rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 May 2008 01:55:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=1xisE+AIW57JhoTvpv9LgpnkL9DIbek2o57kdLz0Isc=;
+	b=hg3/kT26TEwtom/tE3cJy8zEZd+bgZ36O5gtHdmcVG9LflwKnLc0XO54c0mXkNhAJds0V0QzIJaRu2rKEqTn4TPbGcRbt+m9ccBvXgMtLAjJVHw8XLMaDdRuBbzzHkqwXOwS8FZ6bTvacYhvEpZ8Xvc7EvtHlsmPMB43QEk7HyE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=QVZKmIFNjbeEDqOyZBrbPka4PQMG/g17AkAFSz5beXd6hPkpAn6NR515l8pT2Xfo4Y6tgwMc33LXD0TVHUrnGcC/0zifC4Hruz3Ku2YFFcJuowFDAxKplBHpHN1pGTOoowNLsI/LYu7xaU+gqB9k/uP/rkiWSvXGPlUAOcOC19U=
+Received: by 10.141.171.6 with SMTP id y6mr2047934rvo.143.1210323312958;
+	Fri, 09 May 2008 01:55:12 -0700 (PDT)
+Received: by 10.140.250.18 with HTTP; Fri, 9 May 2008 01:55:12 -0700 (PDT)
+Message-ID: <c384c5ea0805090155t752cc7d1w177ae0ffdb3fe679@mail.gmail.com>
+Date: Fri, 9 May 2008 10:55:12 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: DCVS comparison article
+In-Reply-To: <200805080215.23729.zecke@selfish.org>
+MIME-Version: 1.0
+References: <200805080215.23729.zecke@selfish.org>
+Subject: Re: Creating a pristine environment?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -32,36 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 May 2008 05:31:22 -0000
-X-Groupsio-MsgNum: 5126
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig41E0777E01B894F9C4176DAF"
+X-List-Received-Date: Fri, 09 May 2008 08:56:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---------------enig41E0777E01B894F9C4176DAF
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-Hi all,
-there is an article comparing git, mercurial and bzr. Hope you find that
-interesting: http://www.infoq.com/articles/dvcs-guide
+On Thu, May 8, 2008 at 2:15 AM, Holger Freyther <zecke@selfish.org> wrote:
+> comments?
+>
+How about in the insanity checker?
 
-Regards
-Robert
+We would like the user to make sure his environment is sane for
+OpenEmbedded, and not try to fix it up ourselves.
+
+Regards,
+-- 
+Leon
 
 
---------------enig41E0777E01B894F9C4176DAF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFII+F1G9cfwmwwEtoRCEPRAJ9ZF7GMFxLNbzkJETPYQpfSS5R+bwCgnKmZ
-ZDgSo0oZtJQ6feFzDM/H5Tw=
-=rZSm
------END PGP SIGNATURE-----
-
---------------enig41E0777E01B894F9C4176DAF--
