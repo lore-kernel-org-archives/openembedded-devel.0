@@ -1,32 +1,18 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JuUF2-0007vX-AP
-	for openembedded-devel@openembedded.org; Fri, 09 May 2008 17:10:36 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JuUEE-00084J-QV
-	for openembedded-devel@openembedded.org; Fri, 09 May 2008 15:09:46 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 09 May 2008 15:09:46 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 09 May 2008 15:09:46 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philip@balister.org>) id 1JuUK3-000865-73
+	for openembedded-devel@openembedded.org; Fri, 09 May 2008 17:15:47 +0200
+Received: (qmail 13391 invoked by uid 1003); 9 May 2008 15:14:53 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 9 May 2008 15:14:50 -0000
+Message-ID: <48246A67.4030800@balister.org>
+Date: Fri, 09 May 2008 11:14:47 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.12 (X11/20080226)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 09 May 2008 17:09:39 +0200
-Message-ID: <g01pfj$o6j$1@ger.gmane.org>
-References: <20080509150204.118180@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
-In-Reply-To: <20080509150204.118180@gmx.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: do_rootfs file or not to file....
+Subject: Change ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -40,78 +26,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 May 2008 15:10:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 09 May 2008 15:15:47 -0000
+X-Groupsio-MsgNum: 5130
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms020801010602040605000902"
+
+--------------ms020801010602040605000902
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Patrick Fischer wrote:
-> Hello oe
->
-> maybe i have a email problem. so sorry if you receive this email double.
->
-> We have a strange do_rootfs problem.
-> After update to Ubuntu 8.04 and debian testing we can't run do_rootfs anymore.
->
-> Sometimes it is a file which is no file or a dir which is not a dir:
+I'd like to change the variable used for the user to add packages to a 
+standard image from ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL. This 
+is an image property, and not Angstrom specific.
 
-Sound like fakeroot issues, you have 2 options to 'fix' it:
+Is there anything wrong with this idea?
 
-* cat /dev/urandom > /dev/zero while doing do_rootfs
-* upgrade the fakeroot-native recipe
+Philip
 
-regards,
+PS: I'd also like to add this to minimal image, objections?
 
-Koen
+--------------ms020801010602040605000902
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDUwOTE1
+MTQ0N1owIwYJKoZIhvcNAQkEMRYEFIEK0kOyBNI3HrQVK9uq4XBeKQUFMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQBZBq4CaLm/VSChaZQo8zEF7jk37hY/iW8Li9hM3I/Qf/7cc2Rg
+9+nKm6RZBhEWHSX/zWquOTYcltkb1VxgZQdNyr8bbIo8l3mTfIUg94LLIzVgPYeoxSLGKE0GIr2e
+L/pVZQFYVS0r50J/0yiDCTJx/eXc92TM3tqodaTG/hxuZPPHakJYAapMrz5xkYOBV0ovtfSbmQQZ
++9Og0Y+TeyiKcA3JY3ofAmkpwXEdpaAwfAJYx9aCQG77s4ubhR9Au18bMiFwHufDJ6lgPt+RY8S0
+zN9JV9AaAZ+S4fObTvv+cpOuXAjFvK/tAJrINPU3XaEPCZvAiTcWoJux1K0qi5WtAAAAAAAA
 
->
-> In this case a dir was created with mkdir and the next ls -l line shows that
-> it is a file:
->
-> ######
-> + rm -rf /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
-> + mkdir -p /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
-> + ls -l /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
-> -rwxr-xr-x 2 root root 4096 May  8
-> 14:03 /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
-> +
-> cp -r /usr/src/trunk/projects/base/build/tmp/rootfs/usr/local/ /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
-> cp: target `/usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/' is not
-> a directory
-> ######
->
-> Also it could be inverted. A file copied by cp is a dir.
->
-> ######
-> mkfs.jffs2 -x
-> lzo --root=/usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/ --faketime --output=/usr/src/trunk/projects/base/build/tmp/deploy/images/rootfs.jffs2 --little-endian -e
-> 128 --pad=27131904
-> mkfs.jffs2: opening
-> directory /usr/src/trunk/projects/base/build/tmp/rootfs_2/lib/libblaconfig.so.0:
-> Not a directory
-> ######
->
-> The really strange thing is that if I run
-> the /usr/src/trunk/projects/base/build/tmp/work/boxr5-1.0-r0/temp/run.do_rootfs.12648
-> by hand, it works fine. The Problem is not always at the same line!!
->
-> I read something about "switch from RiserFS to ext3" but I have ext3.
-> /bin/sh is bash
->
-> I'm not sure but the scripts are called from within python??
-> The workstation which failed are using Python 2.5.2.
-> Python 2.4.4 ->  works
-> Python 2.5.2 ->  fails
->
-> I'm not allown, in this Forum some people have the same problem:
-> http://www.dream-multimedia-tv.de/board/thread.php?postid=17280#post17280
->
-> Maybe somebody knows a fix.
->
-> Best Regards
-> Patrick Fischer
->
-
-
-
-
+--------------ms020801010602040605000902--
