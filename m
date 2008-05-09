@@ -1,28 +1,32 @@
-Received: from [66.249.82.225] (helo=wx-out-0506.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JuUSD-00015r-Mj
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 May 2008 17:24:13 +0200
-Received: by wx-out-0506.google.com with SMTP id i29so1104708wxd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 May 2008 08:23:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=4bEdW66ZZUAwbt8lOiiZkZlpbzshGEUnVv1APTSlGEQ=;
-	b=qlQp3uuq1Imfks+Sz2kpIniTbqV1siGLlcdvMzSI3myGAoGciE/tgp0vz8EKe54Ar1Ubd6OGidbNQlhiidmsGCnrrN7BK4a3wv4esZTYypl09iWRNRdenZ6quld83D6bEx4WJKcDnq3YgAqr1xuMCrEQDRSgPK4TxTVDogD70do=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=FR4R1pQU+ea2KtpDIbASPlDOcWCFRnVkff7rm6JbIkbwhQXIW2P3hJ2CrZnuhG+s4xqQaV1pz4UP9XxdrbXfh96B3okYxc6HCjdXR4vc9Y/dh7AR41xUgx3wvMuGi4UZzafvl/K4yyhkLo4asI3xNIXG13GEuPaJvtB9gPV9cIQ=
-Received: by 10.100.120.6 with SMTP id s6mr5888330anc.72.1210346602907;
-	Fri, 09 May 2008 08:23:22 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Fri, 9 May 2008 08:23:22 -0700 (PDT)
-Message-ID: <c384c5ea0805090823p6531cf7cuc02a25c5684ef911@mail.gmail.com>
-Date: Fri, 9 May 2008 17:23:22 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48246A67.4030800@balister.org>
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JuVuf-00085o-61
+	for openembedded-devel@openembedded.org; Fri, 09 May 2008 18:57:41 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JuVtp-00053H-Q7
+	for openembedded-devel@openembedded.org; Fri, 09 May 2008 16:56:49 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 09 May 2008 16:56:49 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 09 May 2008 16:56:49 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 09 May 2008 18:56:42 +0200
+Message-ID: <g01vo9$fb9$1@ger.gmane.org>
 References: <48246A67.4030800@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
+In-Reply-To: <48246A67.4030800@balister.org>
+Sender: news <news@ger.gmane.org>
+Cc: angstrom-distro-devel@linuxtogo.org
 Subject: Re: Change ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -37,24 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 May 2008 15:24:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 May 2008 16:57:41 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Philip,
-
-On Fri, May 9, 2008 at 5:14 PM, Philip Balister <philip@balister.org> wrote:
+Philip Balister wrote:
 > I'd like to change the variable used for the user to add packages to a
-> standard image from ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL. This is
-> an image property, and not Angstrom specific.
+> standard image from ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL. This
+> is an image property, and not Angstrom specific.
 >
 > Is there anything wrong with this idea?
->
-No, except I guess you ask the Angstrom guys'n'gals as well?
 
-Regards,
--- 
-Leon
+Yes, since it is intended to put angstrom specific stuff inside the 
+image. It is there because it got fed up receiving hate-mail everytime I 
+edited an image recipe. Since we seem to have a couple of resident 
+angstrom-haters nowadays, I vote for leaving it as-is.
+
+>
+> Philip
+>
+> PS: I'd also like to add this to minimal image, objections?
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 
 
