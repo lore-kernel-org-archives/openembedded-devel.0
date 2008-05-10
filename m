@@ -1,32 +1,18 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [128.131.95.14] (helo=belief.htu.tuwien.ac.at)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JurGw-0004tT-SD
-	for openembedded-devel@openembedded.org; Sat, 10 May 2008 17:46:06 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JurFy-0005dT-I9
-	for openembedded-devel@openembedded.org; Sat, 10 May 2008 15:45:06 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 10 May 2008 15:45:06 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 10 May 2008 15:45:06 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 10 May 2008 17:44:57 +0200
-Message-ID: <g04ftr$krb$1@ger.gmane.org>
+	(envelope-from <jin@mediatomb.cc>) id 1Jut4F-0001AJ-B5
+	for openembedded-devel@openembedded.org; Sat, 10 May 2008 19:41:08 +0200
+Received: by belief.htu.tuwien.ac.at (Postfix, from userid 10004)
+	id 8F98E83755; Sat, 10 May 2008 19:40:05 +0200 (CEST)
+Date: Sat, 10 May 2008 19:40:05 +0200
+From: Sergey 'Jin' Bostandzhyan <jin@mediatomb.cc>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080510174005.GA28630@deadlock.dhs.org>
 References: <g049dg$2ks$1@ger.gmane.org>
-	<c384c5ea0805100820t64c75e41qde797bfb3245b7ed@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
-In-Reply-To: <c384c5ea0805100820t64c75e41qde797bfb3245b7ed@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <g049dg$2ks$1@ger.gmane.org>
+User-Agent: Mutt/1.5.15 (2007-04-06)
+Cc: openembedded-devel@openembedded.org
 Subject: Re: RFC: reverse the name change for org.oe.stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -41,65 +27,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 May 2008 15:46:07 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 10 May 2008 17:41:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Leon Woestenberg wrote:
-> Hello,
+Hi,
+
+On Sat, May 10, 2008 at 03:53:52PM +0200, Rolf Leggewie wrote:
+> I am concerned about the loss of reputation that OE is incurring because
+> the .stable guys are willfully ignoring the official bug tracker.  I
+> think it should be renamed back to angstrom$whateveritwasbefore.  We
+> can't seriously be telling guys all the time "report your problems to
+> the BTS" and then have the "official" stable branch completely and
+> willfully ignore it.  I'd go as far as requesting it should be denied
+> the org.openembedded.* namespace in monotone.
+> 
+> http://thread.gmane.org/gmane.comp.handhelds.openembedded/18400/focus=18462
 >
-> On Sat, May 10, 2008 at 3:53 PM, Rolf Leggewie
-> <no2spam@nospam.arcornews.de>  wrote:
->
->> I am concerned about the loss of reputation that OE is incurring because
->> the .stable guys are willfully ignoring the official bug tracker.  I
->
-> I'm not ignoring the bug tracker, I just don't have time to work on
-> stable currently.
->
->> think it should be renamed back to angstrom$whateveritwasbefore.  We
->> can't seriously be telling guys all the time "report your problems to
->> the BTS" and then have the "official" stable branch completely and
->> willfully ignore it.  I'd go as far as requesting it should be denied
->> the org.openembedded.* namespace in monotone.
->>
-> I understand your problem. Some thoughts:
->
-> The only way to have the OE community to maintain .stable, is to have
-> the OE community use it. Currently, we are in a chicken and egg
-> situation there.
 
-Not quite, we already have a number of vendors releasing products based 
-on the stable branch. They just prefer be anonymous and push patches 
-through developers instead of mail/bugzilla/whatever. Since "loss of 
-reputation" was mentioned: stabbing vendors in the eye is one way of 
-accomplishing that.
+I've been following the threads on oe.stable and this leads to some questions:
 
-> Personally, I do not have the time to maintain .stable, but I will
-> probably use the next stable branch and maintain it.
+what is the "official" definition of the oe.stable branch?
 
-I have enough time to review patches people send to the stable mailing 
-list. The time has decreased a bit since I started using a faster 
-computer for the simulations I need to run during daytime :)
+at first I had the impression that it is intended for product development
+(hence - stable), is this the case or was this a misconception?
 
-> Telling people to report problems to the bugtracker is sane, whether
-> we have a stable branch or not.
+is there any point in submitting bugs to BTS vs. oe.stable (i.e. can at least
+some help regarding those bugs be expected)?
 
-There was never any question where to report problems, the bugtracker is 
-the canonical place for that. The 'question' was how to get the 
-resulting patches applied to the stable branch. The answer is simple and 
-documented:
+is the stable branch actively maintained (well, the answer to this probably
+results from the anwer to the previous question)?
 
-Send them to the stablebranch mailinglist for review.
 
-It's not rocket science.
+Please don't get me wrong, it is not my intention to get in the middle of the
+discussion about reversing names or whatever. I use OE for product development
+and I ultimately need to know what branch I should base my work on.
 
-> Maintaining recipes that are _cvs or _svn are not feature freeze.
-> Stable does not match with the SCM versions and should not be chosen
-> in any stable distro.
+It would also be nice if the status of the branches gets clearly communicated
+once this discussion is over. I think it's important that people who do 
+product dev know where to start and what to expect.
 
-I have trouble parsing that statement. Are you saying "do not use _<scm> 
-recipes in a stable distro" or something else?
+Again, just to make it clear: my argument is not about usage of 
+BTS/maintenance/naming/etc., it's about a clear communication on the status
+of things, so that people know what branch to choose.
+
+Kind regards,
+Jin
 
 
 
