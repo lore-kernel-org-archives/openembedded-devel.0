@@ -1,32 +1,31 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [209.85.132.249] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JvHHg-0006cE-ND
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 May 2008 21:32:37 +0200
-Received: by an-out-0708.google.com with SMTP id b38so417360ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 May 2008 12:31:27 -0700 (PDT)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JvKKh-0000Wc-27
+	for openembedded-devel@openembedded.org; Mon, 12 May 2008 00:47:55 +0200
+Received: by an-out-0708.google.com with SMTP id b21so449897ana.6
+	for <openembedded-devel@openembedded.org>;
+	Sun, 11 May 2008 15:46:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=/aXp2iMOi6N6CHEt75Ft3UoERq4GED1YehiahsQ4XXo=;
-	b=W8tIQmIZsmbP3WllKOV+vpRGD5gDEvyTIadBeqApzJa4sJtBEB8ek/RNKprYcTnVNoBzOh4ImQ5LwmqLk/dYizzIqmCmN0ejdGU+3/u/WfeYFMHsqZHuehWFNp3iW/6WBp8uNerG2xOp0gE3QQwEUgOjZDM+DuOMJ/3/MimKxzM=
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:cc:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=7X2T1WGHfZI2S2fCL1pX++/gdxsh1VUHDBm9el2+ELQ=;
+	b=eYfSsBgQQw1AIz/sDzvE5Kp8VrM7Jl4Wazm2/ZVKVnbL5+inBWH+CtDXxH6xPmlkipJtEInhuSazMonUfHY3X7gmYjhp8rpK2eshg1+wstjuRyvCio8AAvol/XaHzDubULTxuDS+C2abUiTDqIfcCjPBO1RbkFROHGb21XCtCNQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=d0HM0muI2VTRDS1ZEvEdNKls/TqeZBjJ8PEHOhUQ1SPlxRy9R3p2lXmnnz+IsCizVDXzaPL1ReRjoFjspoTxj7lng5M2Tv44mf63JiUlDhIIYoSlcCGSJcXKaTpdGBFT89Q03Hqo7PakH0qasVu88n13VxPYfdcC1Vs4gzfMXt4=
-Received: by 10.100.121.12 with SMTP id t12mr7573084anc.154.1210534287287;
-	Sun, 11 May 2008 12:31:27 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Sun, 11 May 2008 12:31:27 -0700 (PDT)
-Message-ID: <c384c5ea0805111231s3590a8d9rfb0bb06c0466686d@mail.gmail.com>
-Date: Sun, 11 May 2008 21:31:27 +0200
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=vIHo+zqzDBz0Rb4VjEuF7YuY9W25gUq5MXQXPlHpvrX7zDry3b5afQdePFwGXmNEgvM1x+ZI0ctpxMGhaKD0n2NFq6yAngdkgMrmggZ3BP8yOO1l/3eAHUJcRrNS/cE0cNPD7xlrtfMjxF5PXjJGHIl4w5FUsXIjJ7O8qCBc/ZQ=
+Received: by 10.100.8.10 with SMTP id 10mr7676895anh.54.1210546004556;
+	Sun, 11 May 2008 15:46:44 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Sun, 11 May 2008 15:46:44 -0700 (PDT)
+Message-ID: <c384c5ea0805111546g62514fd0r484f57471997c958@mail.gmail.com>
+Date: Mon, 12 May 2008 00:46:44 +0200
 From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48262D56.7060401@kernelconcepts.de>
+In-Reply-To: <g04ftr$krb$1@ger.gmane.org>
 MIME-Version: 1.0
-References: <fvpr9t$4vh$1@ger.gmane.org> <fvq5c7$alo$1@ger.gmane.org>
-	<fvrtn6$93p$1@ger.gmane.org> <fvs0bo$h8r$1@ger.gmane.org>
-	<fvs8g9$de9$1@ger.gmane.org> <4821B0B5.6060701@balister.org>
-	<48262D56.7060401@kernelconcepts.de>
-Subject: Re: bp flag added to bug tracker (org.openembedded.stable)
+References: <g049dg$2ks$1@ger.gmane.org>
+	<c384c5ea0805100820t64c75e41qde797bfb3245b7ed@mail.gmail.com>
+	<g04ftr$krb$1@ger.gmane.org>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: RFC: reverse the name change for org.oe.stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -40,35 +39,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 May 2008 19:32:38 -0000
+X-List-Received-Date: Sun, 11 May 2008 22:47:55 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello,
+Hello Koen,
 
-On Sun, May 11, 2008 at 1:18 AM, Florian Boor
-<florian.boor@kernelconcepts.de> wrote:
-
->  > I would guess that most users of .stable are more focused on their
->  > product work than keeping up with listservs.
+On Sat, May 10, 2008 at 5:44 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> Leon Woestenberg wrote:
+> > Maintaining recipes that are _cvs or _svn are not feature freeze.
+> > Stable does not match with the SCM versions and should not be chosen
+> > in any stable distro.
 >
->  I suppose this is the key problem with .stable. Its quite likely that people
->  will take it, modify it to fit their needs and do not send patches because it
->  takes too much of their precious time.
+>  I have trouble parsing that statement. Are you saying "do not use _<scm>
+> recipes in a stable distro" or something else?
 >
-I think the model that works is as follows:
 
-- there are some dev's using (1) and maintaining (2) a stable branch.
-A subset of the people reporting the bugs should be able to fix them.
-- there are additional users doing the same.
+Yes, do not use _<scm> recipes in stable stuff, a known checkout of
+the OE stable branch should either build or not for a particular
+machine/distro/... combo.
 
-Note that there is a chicken and egg (or catch22) situation, as I
-based my work of .dev currently, not having any other choices.
+If I checkout today's stable tree in one year time, it should build. Period.
 
-Regards,
+That isn't going to work with _<scm> recipes being active in stable.
+
+(and sorry for the badly formed statement - I don't take enough time
+to write down what I would like to say - maybe I should just shut up).
 
 Leon.
+
+
+
+
 
 -- 
 Leon
