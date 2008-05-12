@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JvYV3-0000In-HN
-	for openembedded-devel@openembedded.org; Mon, 12 May 2008 15:55:33 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JvYTk-0002Vc-Im
-	for openembedded-devel@openembedded.org; Mon, 12 May 2008 13:54:12 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 12 May 2008 13:54:12 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 12 May 2008 13:54:12 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 12 May 2008 15:54:01 +0200
-Message-ID: <g09i5q$vuv$1@ger.gmane.org>
-References: <g049dg$2ks$1@ger.gmane.org>	<c384c5ea0805100820t64c75e41qde797bfb3245b7ed@mail.gmail.com>	<g04ftr$krb$1@ger.gmane.org>	<c384c5ea0805111546g62514fd0r484f57471997c958@mail.gmail.com>	<1210576761.4981.1.camel@dax.rpnet.com>
-	<c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
-In-Reply-To: <c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: RFC: reverse the name change for org.oe.stable
+	(envelope-from <openembedded@haerwu.biz>) id 1Jvf8V-00028s-VK
+	for openembedded-devel@openembedded.org; Mon, 12 May 2008 23:00:45 +0200
+Received: (qmail 12154 invoked by uid 813007); 12 May 2008 20:59:25 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 12 May 2008 20:59:25 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 12 May 2008 22:58:40 +0200
+User-Agent: KMail/1.9.9
+References: <48246A67.4030800@balister.org> <g01vo9$fb9$1@ger.gmane.org>
+In-Reply-To: <g01vo9$fb9$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200805122258.40698.openembedded@haerwu.biz>
+Subject: Re: Change ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -41,18 +29,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2008 13:55:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 May 2008 21:00:47 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Leon Woestenberg wrote:
+Dnia Friday, 9 of May 2008, Koen Kooi napisa=B3:
+> Philip Balister wrote:
+> > I'd like to change the variable used for the user to add packages to
+> > a standard image from ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL.
+> > This is an image property, and not Angstrom specific.
+> >
+> > Is there anything wrong with this idea?
+>
+> Yes, since it is intended to put angstrom specific stuff inside the
+> image.=20
 
-> That reminds me, we should lock-down (and include) the corresponding
-> bitbake version in the stable tree as well.
+If you want to have own images - create them. Otherwise we have people=20
+which builds random images and can not be supported (why does=20
+my 'minimal-image' does not have working touchscreen when I start Abiword=20
+from icon after booting to full X.org with E17?).
 
-I proposed that a while ago, but it got NAKed, time to propose it again? 
-I see no reason why we shouldn't have a known working bitbake copy 
-inside the stable tree
+> It is there because it got fed up receiving hate-mail everytime=20
+> I edited an image recipe. Since we seem to have a couple of resident
+> angstrom-haters nowadays, I vote for leaving it as-is.
+
+I vote against IMAGE_EXTRA_INSTALL. Let it live as ugly Angstrom hack for=20
+breaking sane images into unsupportable ones.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+     If you can't learn to do it well, learn to enjoy doing it badly.
+     		-- Ashleigh Brilliant
+
 
 
 
