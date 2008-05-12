@@ -1,34 +1,33 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JvY9u-0007w2-Mq
-	for openembedded-devel@openembedded.org; Mon, 12 May 2008 15:33:44 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4CDWDNP024481
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JvYV3-0000In-HN
+	for openembedded-devel@openembedded.org; Mon, 12 May 2008 15:55:33 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JvYTk-0002Vc-Im
+	for openembedded-devel@openembedded.org; Mon, 12 May 2008 13:54:12 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 12 May 2008 13:54:12 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 12 May 2008 14:32:13 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 24374-03 for <openembedded-devel@openembedded.org>;
-	Mon, 12 May 2008 14:32:08 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4CDW6be024474
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 12 May 2008 14:32:06 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Mon, 12 May 2008 13:54:12 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <1210586903.4981.26.camel@dax.rpnet.com>
-References: <20080512001723.81DEF1892C6@amethyst.openembedded.net>
-	<20080512092007.GC3841@cimmeria.hyboria>
-	<1210586903.4981.26.camel@dax.rpnet.com>
-Date: Mon, 12 May 2008 14:32:07 +0100
-Message-Id: <1210599127.4981.54.camel@dax.rpnet.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 12 May 2008 15:54:01 +0200
+Message-ID: <g09i5q$vuv$1@ger.gmane.org>
+References: <g049dg$2ks$1@ger.gmane.org>	<c384c5ea0805100820t64c75e41qde797bfb3245b7ed@mail.gmail.com>	<g04ftr$krb$1@ger.gmane.org>	<c384c5ea0805111546g62514fd0r484f57471997c958@mail.gmail.com>	<1210576761.4981.1.camel@dax.rpnet.com>
+	<c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [oe-commits] org.oe.dev autotools.bbclass: from	OM.	Needed as	commit 85a5e185b6a21e42e4243ad17befe40373025e0e alone	will	break	uclibc/gettext builds.
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a1pre (Macintosh/2008042803)
+In-Reply-To: <c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: RFC: reverse the name change for org.oe.stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -42,22 +41,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2008 13:33:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 12 May 2008 13:55:33 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2008-05-12 at 11:08 +0100, Richard Purdie wrote:
-> I think the proper fix will be to stop using oe_libinstall entirely here
-> and instead do something like:
-> 
-> http://www.rpsys.net/openzaurus/temp/autotools.patch
+Leon Woestenberg wrote:
 
-In the interests of getting this sorted I've committed something along
-the lines of the above...
+> That reminds me, we should lock-down (and include) the corresponding
+> bitbake version in the stable tree as well.
 
-Cheers,
-
-Richard
+I proposed that a while ago, but it got NAKed, time to propose it again? 
+I see no reason why we shouldn't have a known working bitbake copy 
+inside the stable tree
 
 
 
