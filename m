@@ -1,33 +1,33 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.85.132.247] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JvUzg-0000Mi-2Z
-	for openembedded-devel@openembedded.org; Mon, 12 May 2008 12:10:56 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4CA9g39012934
-	for <openembedded-devel@openembedded.org>;
-	Mon, 12 May 2008 11:09:42 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 12745-02 for <openembedded-devel@openembedded.org>;
-	Mon, 12 May 2008 11:09:33 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4CA8NbN012809
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 12 May 2008 11:08:23 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20080512092007.GC3841@cimmeria.hyboria>
-References: <20080512001723.81DEF1892C6@amethyst.openembedded.net>
-	<20080512092007.GC3841@cimmeria.hyboria>
-Date: Mon, 12 May 2008 11:08:23 +0100
-Message-Id: <1210586903.4981.26.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [oe-commits] org.oe.dev autotools.bbclass: from OM.	Needed as	commit 85a5e185b6a21e42e4243ad17befe40373025e0e alone will	break	uclibc/gettext builds.
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JvY2w-0007df-9w
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 May 2008 15:26:30 +0200
+Received: by an-out-0708.google.com with SMTP id b38so470163ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 May 2008 06:25:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=BwKeyIlgNcuZsluRSnupywww3/9WtWzjxDWgmJmb1bM=;
+	b=L0DnTeWSLZWn/pMMBuoglFKnptJPxBf/DaXRK9ZiC1dW6zyv8pH6935VTwm+p3xh2PJE51WOZc2xidkELH/1lkxCpGx+h0XU4y/h4aUdDForYAzLYCZtcX3FOVIkpVFpjlXk5Nbn1f29p+JMnPO+EU2PpyiN8YLbq4gg08WDCoU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=Ae8ASgGlJcBcCs8LplWv4lUEh+V06QEokdMaempIH7sOsLYd7peNiPINRiYCKtFcf0m6eCBvgzJJT0WYJpqPBbPpI5kUD2afFfQbe7Q8AyqesEgZpZVod7SVVacZgYtd0d0phy5NippyVu3Bx+hQdz8XYbIyfjzlwtX9zPN5n+A=
+Received: by 10.100.91.17 with SMTP id o17mr8098391anb.90.1210598714470;
+	Mon, 12 May 2008 06:25:14 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Mon, 12 May 2008 06:25:14 -0700 (PDT)
+Message-ID: <c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
+Date: Mon, 12 May 2008 15:25:14 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1210576761.4981.1.camel@dax.rpnet.com>
+MIME-Version: 1.0
+References: <g049dg$2ks$1@ger.gmane.org>
+	<c384c5ea0805100820t64c75e41qde797bfb3245b7ed@mail.gmail.com>
+	<g04ftr$krb$1@ger.gmane.org>
+	<c384c5ea0805111546g62514fd0r484f57471997c958@mail.gmail.com>
+	<1210576761.4981.1.camel@dax.rpnet.com>
+Subject: Re: RFC: reverse the name change for org.oe.stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -41,54 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2008 10:10:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 12 May 2008 13:26:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, 2008-05-12 at 10:20 +0100, Graeme Gregory wrote:
-> On Mon, May 12, 2008 at 02:17:23AM +0200, likewise commit wrote:
-> > autotools.bbclass: from OM. Needed as commit 85a5e185b6a21e42e4243ad17befe40373025e0e alone will break uclibc/gettext builds.
-> > 
-> I was specifically asked not to merge this from OM to OE until more
-> investigation was carried out.
-> 
-> > -		cp -fpPR "$from"/* "$to"
-> > +		cp -fpPR -t "$to" "$from"/*
-> >  
-> Isnt this a reverse diff of a previous change for no real reason?
+Hello,
 
-Yes, that reverts a fix that was made and is unrelated to the problem
-you're trying to fix :(
+On Mon, May 12, 2008 at 9:19 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Mon, 2008-05-12 at 00:46 +0200, Leon Woestenberg wrote:
+>  > Yes, do not use _<scm> recipes in stable stuff, a known checkout of
+>  > the OE stable branch should either build or not for a particular
+>  > machine/distro/... combo.
+>  >
+>  > If I checkout today's stable tree in one year time, it should build. Period.
+>  >
+>  > That isn't going to work with _<scm> recipes being active in stable.
+>
+>  Floating SCM versions won't be reproducible, fixed SCM versions will. If
+>  SCM versions are used they need to be locked to a version.
+>
 
-> > -				echo "oe_libinstall -C ${S} -so $(basename $i .la) ${STAGING_LIBDIR}/${dir}"
-> > -				oe_libinstall -C ${S} -so $(basename $i .la) ${STAGING_LIBDIR}/${dir}
-> > +				echo "oe_libinstall -C ${STAGE_TEMP}/${libdir}/${dir} -so $(basename $i .la) ${STAGING_LIBDIR}/${dir}"
-> > +				oe_libinstall -C ${STAGE_TEMP}/${libdir}/${dir} -so $(basename $i .la) ${STAGING_LIBDIR}/${dir}
-> 
-> And this section was under discussion with Holger, RP and myself.
-> 
-> I dont think this commit should have gone in without discussion.
+Agreed, so I would like to propose the stable branch should not need
+to support floating SCM versions.
 
-and whilst this "fixes" certain issues, it will cause all kinds of other
-subtle changes. What we don't know is whether that will result in
-breakage or not. It hasn't for OpenMoko but that doesn't mean its the
-right thing to do.  I doubt you've taken the time to understand what
-this does and what the potential implications are :(.
+Only full lock-down (and tarball mirrors) will make our stable trees
+useful in the long term.
 
-I think the proper fix will be to stop using oe_libinstall entirely here
-and instead do something like:
+It's an important property of a stable tree, that third parties using
+them can rely on them to be able to perform a bug fix in say, one year
+time.
 
-http://www.rpsys.net/openzaurus/temp/autotools.patch
+That reminds me, we should lock-down (and include) the corresponding
+bitbake version in the stable tree as well.
 
-This patch is as yet untested but I'll try and give it some testing...
-
-Cheers,
-
-Richard
-
-
-
-
-
+Regards,
+-- 
+Leon
 
 
