@@ -1,21 +1,23 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1Jvf8V-00028s-VK
-	for openembedded-devel@openembedded.org; Mon, 12 May 2008 23:00:45 +0200
-Received: (qmail 12154 invoked by uid 813007); 12 May 2008 20:59:25 -0000
+	(envelope-from <openembedded@haerwu.biz>) id 1JvfOy-0002ZC-Mo
+	for openembedded-devel@openembedded.org; Mon, 12 May 2008 23:17:44 +0200
+Received: (qmail 685 invoked by uid 813007); 12 May 2008 21:16:26 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO home.lan)
 	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 May 2008 20:59:25 -0000
+	by 195.149.226.213 with ESMTPA; 12 May 2008 21:16:26 -0000
 From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 May 2008 22:58:40 +0200
+Date: Mon, 12 May 2008 23:15:41 +0200
 User-Agent: KMail/1.9.9
-References: <48246A67.4030800@balister.org> <g01vo9$fb9$1@ger.gmane.org>
-In-Reply-To: <g01vo9$fb9$1@ger.gmane.org>
+References: <g049dg$2ks$1@ger.gmane.org>
+	<1210576761.4981.1.camel@dax.rpnet.com>
+	<c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
+In-Reply-To: <c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <200805122258.40698.openembedded@haerwu.biz>
-Subject: Re: Change ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL
+Message-Id: <200805122315.41830.openembedded@haerwu.biz>
+Subject: Re: RFC: reverse the name change for org.oe.stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -29,41 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2008 21:00:47 -0000
+X-List-Received-Date: Mon, 12 May 2008 21:17:44 -0000
 Content-Type: text/plain;
   charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Dnia Friday, 9 of May 2008, Koen Kooi napisa=B3:
-> Philip Balister wrote:
-> > I'd like to change the variable used for the user to add packages to
-> > a standard image from ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL.
-> > This is an image property, and not Angstrom specific.
-> >
-> > Is there anything wrong with this idea?
+Dnia Monday, 12 of May 2008, Leon Woestenberg napisa=B3:
+
+> Agreed, so I would like to propose the stable branch should not need
+> to support floating SCM versions.
 >
-> Yes, since it is intended to put angstrom specific stuff inside the
-> image.=20
+> Only full lock-down (and tarball mirrors) will make our stable trees
+> useful in the long term.
 
-If you want to have own images - create them. Otherwise we have people=20
-which builds random images and can not be supported (why does=20
-my 'minimal-image' does not have working touchscreen when I start Abiword=20
-from icon after booting to full X.org with E17?).
+What define which recipe in stable is supported? For example -=20
+does "asleap 2.1" supported? It is not listed in conf/checksums.ini so I=20
+suppose that it is not maintained by anyone and that no one tried to=20
+build it.
 
-> It is there because it got fed up receiving hate-mail everytime=20
-> I edited an image recipe. Since we seem to have a couple of resident
-> angstrom-haters nowadays, I vote for leaving it as-is.
+Keeping sources mirrored is one thing - but what use if of mirroring if=20
+there is no way to check does files are proper ones? Who will tell does=20
+asleap-2.1.tgz has md5 starting with "1234" or with "f38b" if it is not=20
+fetchable from other place then 3 random mirrors?
 
-I vote against IMAGE_EXTRA_INSTALL. Let it live as ugly Angstrom hack for=20
-breaking sane images into unsupportable ones.
+I think that for stable branch someone whould at least fetch all sources=20
+to generate checksums so it will be known that asleap-2.1.tgz md5sum=20
+really starts with "1234".
 
 =2D-=20
 JID: hrw-jabber.org
 OpenEmbedded developer/consultant
 
-     If you can't learn to do it well, learn to enjoy doing it badly.
-     		-- Ashleigh Brilliant
+   Programming consists of 50% planning, 50% coding and 30% mathematics
 
 
 
