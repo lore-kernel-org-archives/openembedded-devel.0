@@ -1,22 +1,29 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1JvfOy-0002ZC-Mo
-	for openembedded-devel@openembedded.org; Mon, 12 May 2008 23:17:44 +0200
-Received: (qmail 685 invoked by uid 813007); 12 May 2008 21:16:26 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 May 2008 21:16:26 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 May 2008 23:15:41 +0200
-User-Agent: KMail/1.9.9
-References: <g049dg$2ks$1@ger.gmane.org>
-	<1210576761.4981.1.camel@dax.rpnet.com>
-	<c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
-In-Reply-To: <c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
+	(envelope-from <rod@whitby.id.au>) id 1JvgJL-0008U0-4X
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 May 2008 00:16:00 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 81E1C109056
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 May 2008 18:14:40 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Mon, 12 May 2008 18:14:40 -0400
+X-Sasl-enc: YQ4p8OwTxvCtBDJBJQm0W3sg/wGdQzUHLEu6gsYrejs8 1210630479
+Received: from [192.168.15.11] (CPE-121-209-16-132.sa.bigpond.net.au
+	[121.209.16.132])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id ACAA0321D6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 May 2008 18:14:39 -0400 (EDT)
+Message-ID: <4828C13C.1070509@whitby.id.au>
+Date: Tue, 13 May 2008 07:44:20 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.14 (Windows/20080421)
 MIME-Version: 1.0
-Message-Id: <200805122315.41830.openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+References: <g049dg$2ks$1@ger.gmane.org>	<c384c5ea0805100820t64c75e41qde797bfb3245b7ed@mail.gmail.com>	<g04ftr$krb$1@ger.gmane.org>	<c384c5ea0805111546g62514fd0r484f57471997c958@mail.gmail.com>	<1210576761.4981.1.camel@dax.rpnet.com>	<c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
+	<g09i5q$vuv$1@ger.gmane.org>
+In-Reply-To: <g09i5q$vuv$1@ger.gmane.org>
 Subject: Re: RFC: reverse the name change for org.oe.stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
@@ -31,40 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2008 21:17:44 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 12 May 2008 22:16:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia Monday, 12 of May 2008, Leon Woestenberg napisa=B3:
+Koen Kooi wrote:
+> Leon Woestenberg wrote:
+> 
+>> That reminds me, we should lock-down (and include) the corresponding
+>> bitbake version in the stable tree as well.
+> 
+> I proposed that a while ago, but it got NAKed, time to propose it again? 
+> I see no reason why we shouldn't have a known working bitbake copy 
+> inside the stable tree
 
-> Agreed, so I would like to propose the stable branch should not need
-> to support floating SCM versions.
->
-> Only full lock-down (and tarball mirrors) will make our stable trees
-> useful in the long term.
++1 from me - when nslu2-linux creates a binary release source tarball we 
+always include bitbake in the tarball.
 
-What define which recipe in stable is supported? For example -=20
-does "asleap 2.1" supported? It is not listed in conf/checksums.ini so I=20
-suppose that it is not maintained by anyone and that no one tried to=20
-build it.
-
-Keeping sources mirrored is one thing - but what use if of mirroring if=20
-there is no way to check does files are proper ones? Who will tell does=20
-asleap-2.1.tgz has md5 starting with "1234" or with "f38b" if it is not=20
-fetchable from other place then 3 random mirrors?
-
-I think that for stable branch someone whould at least fetch all sources=20
-to generate checksums so it will be known that asleap-2.1.tgz md5sum=20
-really starts with "1234".
-
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
-
-   Programming consists of 50% planning, 50% coding and 30% mathematics
-
-
+-- Rod
 
 
