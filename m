@@ -1,23 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1JvuEx-000577-0Z
-	for openembedded-devel@openembedded.org; Tue, 13 May 2008 15:08:23 +0200
-Received: (qmail 7005 invoked by uid 813007); 13 May 2008 13:06:57 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.lan)
-	(marcin@hrw.one.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 13 May 2008 13:06:56 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 May 2008 15:05:52 +0200
-User-Agent: KMail/1.9.9
-References: <48246A67.4030800@balister.org>
-	<200805122258.40698.openembedded@haerwu.biz>
-	<g0br8u$3g1$1@ger.gmane.org>
-In-Reply-To: <g0br8u$3g1$1@ger.gmane.org>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Jw3fF-00006M-Qd
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 May 2008 01:12:09 +0200
+Received: (qmail invoked by alias); 13 May 2008 23:10:40 -0000
+Received: from e178124085.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.124.85]
+	by mail.gmx.net (mp025) with SMTP; 14 May 2008 01:10:40 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19w5Kg0j/xwNFpYgdxS09h9BJbzbNu8jgrH1MZDFm
+	N4Z6Vm9C/JgpCR
+Message-ID: <482A1FEC.5000804@gmx.net>
+Date: Wed, 14 May 2008 01:10:36 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.12 (X11/20080420)
 MIME-Version: 1.0
-Message-Id: <200805131505.56176.openembedded@haerwu.biz>
-Subject: Re: Change ANGSTROM_EXTRA_INSTALL to IMAGE_EXTRA_INSTALL
+To: openembedded-devel@lists.openembedded.org
+References: <20080509153032.79D501892D4@amethyst.openembedded.net>
+In-Reply-To: <20080509153032.79D501892D4@amethyst.openembedded.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: Re: [oe-commits] org.oe.dev classpath-native_0.97.1.bb : add from OM mtn
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -31,38 +34,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2008 13:08:24 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Tue, 13 May 2008 23:12:10 -0000
+X-Groupsio-MsgNum: 5170
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig57098732EB13F255C30A0EB9"
+
+--------------enig57098732EB13F255C30A0EB9
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia Tuesday, 13 of May 2008, Rolf Leggewie napisa=B3:
-> Marcin Juszkiewicz wrote:
-> > I vote against IMAGE_EXTRA_INSTALL. Let it live as ugly Angstrom hack
-> > for breaking sane images into unsupportable ones.
->
-> How would the correct way to do this look like?
->
-> I regularly want to include package X for testing it out.  I don't want
-> to create a new image definition every time.
+Hi,
+I would like this commit to be reverted. While it may look logical to go
+from one below 1.0 release to another something important changed in
+classpath in that release and makes bootstrapping far more complicated.
 
-Create rolf-test-image.bb which will do anything you want and also will=20
-have:
+The problem is that from 0.97 onwards, a classpath build needs a working
+javah tool. this program is a header generator which creates C header
+files from compiled Java classes. Such a javah program is provided by
+the classpath tools but needs a working runtime and class library first.
 
-IMAGE_INSTALL +=3D "${ROLF_EXTRA_IMAGE_INSTALL}"
+Earlier classpath releases had pre-generated header files and needed no
+javah program.
 
-This way you have own image which contain anything you want and is based=20
-on anything you want. And it is clearly your image so you are the only=20
-one who supports it.
+There are multiple ways to fix this issue. One way would involve
+upstream allowing the just built javah application being run with a
+provided java executable. This would be less pain for us and would also
+benefit other cross compilation efforts.
 
-=2D-=20
-JID: hrw-jabber.org
-OpenEmbedded developer/consultant
+Regards
+Robert
 
-      I'm trying to decide if I should kill you or simply feign death
-      until you feel awkward and leave.
+xora commit schrieb:
+> classpath-native_0.97.1.bb : add from OM mtn
+>=20
+> Author: xora@openembedded.org
+> Branch: org.openembedded.dev
+> Revision: 3607c00052ba968a5052e6b5f44f6cb522a38d8b
+> ViewMTN: http://monotone.openembedded.org/revision/info/3607c00052ba968=
+a5052e6b5f44f6cb522a38d8b
+> Files:
+> 1
+> packages/classpath/classpath-native_0.97.1.bb
+> Diffs:
+>=20
+> #
+> # mt diff -r471eef0dd55e52c8e89d42f17ff7a3c920452d9f -r3607c00052ba968a=
+5052e6b5f44f6cb522a38d8b
+> #
+> #
+> #
+> # add_file "packages/classpath/classpath-native_0.97.1.bb"
+> #  content [4b052ebae756323751932779865b45cf50a920fa]
+> #
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> --- packages/classpath/classpath-native_0.97.1.bb	4b052ebae756323751932=
+779865b45cf50a920fa
+> +++ packages/classpath/classpath-native_0.97.1.bb	4b052ebae756323751932=
+779865b45cf50a920fa
+> @@ -0,0 +1,3 @@
+> +require classpath-native.inc
+> +
+> +PR =3D "r0"
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commit=
+s
+>=20
 
 
 
+--------------enig57098732EB13F255C30A0EB9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFIKh/vG9cfwmwwEtoRCJEBAJ9qOjnJlaOPLgNG/bq7jtg6fATlkACePLGX
+Vvzbshjh3QogTO7v9FlxpL8=
+=pdSF
+-----END PGP SIGNATURE-----
+
+--------------enig57098732EB13F255C30A0EB9--
