@@ -1,33 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jvqy4-000388-0G
-	for openembedded-devel@openembedded.org; Tue, 13 May 2008 11:38:44 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jvqwj-0005Cr-Bh
-	for openembedded-devel@openembedded.org; Tue, 13 May 2008 09:37:21 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 13 May 2008 09:37:21 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 13 May 2008 09:37:21 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 13 May 2008 11:37:05 +0200
-Message-ID: <g0bng7$mtg$1@ger.gmane.org>
-References: <g049dg$2ks$1@ger.gmane.org> <4826A3B9.3050103@balister.org>
-	<1210577770.4981.13.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <1210577770.4981.13.camel@dax.rpnet.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: RFC: reverse the name change for org.oe.stable
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Patrick_Fischer@gmx.de>) id 1JvrYR-00040T-Di
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 May 2008 12:16:19 +0200
+Received: (qmail 5099 invoked by uid 0); 13 May 2008 10:14:54 -0000
+Received: from 213.39.239.91 by www137.gmx.net with HTTP;
+	Tue, 13 May 2008 12:14:53 +0200 (CEST)
+Date: Tue, 13 May 2008 12:14:54 +0200
+From: "Patrick Fischer" <Patrick_Fischer@gmx.de>
+In-Reply-To: <g01pfj$o6j$1@ger.gmane.org>
+Message-ID: <20080513101454.160080@gmx.net>
+MIME-Version: 1.0
+References: <20080509150204.118180@gmx.net> <g01pfj$o6j$1@ger.gmane.org>
+To: openembedded-devel@lists.openembedded.org
+X-Authenticated: #1735141
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX19iIlx2YHpiZkdfjGS8uZuhBUL+ZqtDPHEFrMFVqR
+	OVYQeJOUmH7IK5GpTUs9xQ8y3QhofNoRCc2g== 
+X-GMX-UID: LFMacL0KMmA6W44VcWFnUZ85MjQ1N93V
+Subject: Re: do_rootfs file or not to file....
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -41,63 +34,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2008 09:38:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 13 May 2008 10:16:19 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
 
-Richard Purdie wrote:
-> We do need a stable branch.
+> > We have a strange do_rootfs problem.
+> > After update to Ubuntu 8.04 and debian testing we can't run do_rootfs
+> anymore.
+> >
+> > Sometimes it is a file which is no file or a dir which is not a dir:
+> 
+> Sound like fakeroot issues, you have 2 options to 'fix' it:
+> 
+> * cat /dev/urandom > /dev/zero while doing do_rootfs
+> * upgrade the fakeroot-native recipe
 
-I guess so.  And I don't question that.  I just raise the flag that if
-nobody is indeed interested in actually fixing bugs, we should
-reconsider having it.  Right now, we have a snapshot with virtually no
-activity, not a stable, actively maintained branch.  IMNSHO, OE should
-be honest or it will loose credibility.  If we can't support a stable
-branch (because supposedly people are too busy), we should not be
-suggesting we do.  The openembedded-stable ml and the bug tracker,
-together with the many people here who say "We should have a stable
-branch, *but* right now I can't work on it" tell a clear story.
+fakeroot 1.7.1 seems to work fine.
 
-> The stable branch people have commented on the use of the bugzilla and I
-> can't really see a problem there. 
+Thanks
+Patrick
 
-They say they want mail, fine.
 
-The problem is that they both block mail from bugzilla to the oe-stbale
-list (and I am not going to play human gateway) and ignoring it in the
-case of koen (who I added specifically as cc for bp flags raised).  I
-don't think I should even be doing this.  If people are supporting
-stable as the claim stands, there should be at least some activity in
-the bug tracker wrt fixing bugs.
 
-* several weeks if not months of no bug triaging from .stable
-  causes concern
-* no activity after some bug triaging is done for them
-  causes real concern
-* still no activity after blocking their meta bugs about a month ago
-  causes serious concern
-* still no activity after sending several reminder mails to the ml
-  causes grave concern
-* a "do as you please"-attitude after issuing a last warning and still
-  no activity after providing them the patches the stable guys should
-  have derived themselves if claims of support are to be taken serious
 
-  this falls back on OE
 
-BTW, still no bug triaging and not even the simple activity of looking
-through the bugs that have been meticulously prepared.
+> 
+> regards,
+> 
+> Koen
+> 
+> 
+> >
+> > In this case a dir was created with mkdir and the next ls -l line shows
+> that
+> > it is a file:
+> >
+> > ######
+> > + rm -rf /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
+> > + mkdir -p /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
+> > + ls -l /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
+> > -rwxr-xr-x 2 root root 4096 May  8
+> > 14:03 /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
+> > +
+> > cp -r /usr/src/trunk/projects/base/build/tmp/rootfs/usr/local/
+> /usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
+> > cp: target `/usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/'
+> is not
+> > a directory
+> > ######
+> >
+> > Also it could be inverted. A file copied by cp is a dir.
+> >
+> > ######
+> > mkfs.jffs2 -x
+> > lzo --root=/usr/src/trunk/projects/base/build/tmp/rootfs/../rootfs_2/
+> --faketime
+> --output=/usr/src/trunk/projects/base/build/tmp/deploy/images/rootfs.jffs2 --little-endian -e
+> > 128 --pad=27131904
+> > mkfs.jffs2: opening
+> > directory
+> /usr/src/trunk/projects/base/build/tmp/rootfs_2/lib/libblaconfig.so.0:
+> > Not a directory
+> > ######
+> >
+> > The really strange thing is that if I run
+> > the
+> /usr/src/trunk/projects/base/build/tmp/work/boxr5-1.0-r0/temp/run.do_rootfs.12648
+> > by hand, it works fine. The Problem is not always at the same line!!
+> >
+> > I read something about "switch from RiserFS to ext3" but I have ext3.
+> > /bin/sh is bash
+> >
+> > I'm not sure but the scripts are called from within python??
+> > The workstation which failed are using Python 2.5.2.
+> > Python 2.4.4 ->  works
+> > Python 2.5.2 ->  fails
+> >
+> > I'm not allown, in this Forum some people have the same problem:
+> >
+> http://www.dream-multimedia-tv.de/board/thread.php?postid=17280#post17280
+> >
+> > Maybe somebody knows a fix.
+> >
+> > Best Regards
+> > Patrick Fischer
+> >
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-> technical rather than emotive and discuss the problems before proposing
-> inflammatory solutions.
-
-I am absolutely technical.  The choice is simple
-
-a) support it, including at least some work in the bug tracker
-b) rename it
-c) risk loss of reputation for OE as not living up to claims made
-
-It is one of the three and really that easy.  Unfortunately, it looks
-like everybody choosing c) because "we want stable".
-
+-- 
+Der GMX SmartSurfer hilft bis zu 70% Ihrer Onlinekosten zu sparen! 
+Ideal für Modem und ISDN: http://www.gmx.net/de/go/smartsurfer
 
 
