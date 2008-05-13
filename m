@@ -1,30 +1,24 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1JvgJL-0008U0-4X
+	(envelope-from <zecke@selfish.org>) id 1Jvq8F-0005V4-Qe
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 May 2008 00:16:00 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 81E1C109056
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2008 18:14:40 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Mon, 12 May 2008 18:14:40 -0400
-X-Sasl-enc: YQ4p8OwTxvCtBDJBJQm0W3sg/wGdQzUHLEu6gsYrejs8 1210630479
-Received: from [192.168.15.11] (CPE-121-209-16-132.sa.bigpond.net.au
-	[121.209.16.132])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id ACAA0321D6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2008 18:14:39 -0400 (EDT)
-Message-ID: <4828C13C.1070509@whitby.id.au>
-Date: Tue, 13 May 2008 07:44:20 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.14 (Windows/20080421)
-MIME-Version: 1.0
+	Tue, 13 May 2008 10:45:11 +0200
+Received: from world195.mi.fu-berlin.de ([160.45.115.195])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Jvq6v-0007Tm-WE
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 May 2008 10:43:50 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-References: <g049dg$2ks$1@ger.gmane.org>	<c384c5ea0805100820t64c75e41qde797bfb3245b7ed@mail.gmail.com>	<g04ftr$krb$1@ger.gmane.org>	<c384c5ea0805111546g62514fd0r484f57471997c958@mail.gmail.com>	<1210576761.4981.1.camel@dax.rpnet.com>	<c384c5ea0805120625m4176d6eay57e08304d6e76923@mail.gmail.com>
-	<g09i5q$vuv$1@ger.gmane.org>
-In-Reply-To: <g09i5q$vuv$1@ger.gmane.org>
-Subject: Re: RFC: reverse the name change for org.oe.stable
+Date: Tue, 13 May 2008 10:43:50 +0200
+User-Agent: KMail/1.9.9
+References: <200805080215.23729.zecke@selfish.org>
+	<200805101405.38789.zecke@selfish.org> <g044dn$kot$1@ger.gmane.org>
+In-Reply-To: <g044dn$kot$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200805131043.50899.zecke@selfish.org>
+Subject: Re: Creating a pristine environment?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -38,23 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2008 22:16:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 13 May 2008 08:45:12 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> Leon Woestenberg wrote:
-> 
->> That reminds me, we should lock-down (and include) the corresponding
->> bitbake version in the stable tree as well.
-> 
-> I proposed that a while ago, but it got NAKed, time to propose it again? 
-> I see no reason why we shouldn't have a known working bitbake copy 
-> inside the stable tree
+On Saturday 10 May 2008 14:28:39 Koen Kooi wrote:
+> Holger Freyther wrote:
+> > Okay. I added an option, I clean the environment after having parsed the
+> > configuration. This means everything used from conf/local.conf (TOPDIR,
+> > BBPATH, BBFILES, MACHINE...) will be inside the configuration data of
+> > bitbake but not be exported.
+>
+> Implementation question: who will fix all the shell based functions in
+> OE that rely on things like MACHINE being exported?
 
-+1 from me - when nslu2-linux creates a binary release source tarball we 
-always include bitbake in the tarball.
+To my understanding there is nothing to fix. Bitbake will unexport the 
+environment after having parsed the configuration. If you have export FOO 
+inside a Bitbake file. data.py:emit_var will put an "export FOO=.." into the 
+shell script.
 
--- Rod
+comments.
+
+	z.
 
 
