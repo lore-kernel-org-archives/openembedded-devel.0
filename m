@@ -1,25 +1,29 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JwCv5-0001eJ-Uq
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 May 2008 11:05:08 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1JwDRZ-000441-20
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 May 2008 11:38:41 +0200
-Message-ID: <482AAAE1.6080305@kernelconcepts.de>
-Date: Wed, 14 May 2008 11:03:29 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <47C8065C.2040105@gmx.net>
-	<20080229235338.0204c70d@elara.dyn.totalueberwachung.de>
-In-Reply-To: <20080229235338.0204c70d@elara.dyn.totalueberwachung.de>
-X-Enigmail-Version: 0.95.0
-Subject: Re: OpenEmbedded@LinuxTag 2008
+	(envelope-from <rpurdie@rpsys.net>) id 1JwI3Q-0006Wn-F3
+	for openembedded-devel@openembedded.org; Wed, 14 May 2008 16:34:04 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4EEWV0k022706
+	for <openembedded-devel@openembedded.org>;
+	Wed, 14 May 2008 15:32:31 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 22520-06 for <openembedded-devel@openembedded.org>;
+	Wed, 14 May 2008 15:32:27 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4EEWN22022700
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 14 May 2008 15:32:24 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Wed, 14 May 2008 15:32:23 +0100
+Message-Id: <1210775543.7097.29.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.8.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Stable Branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -33,32 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 May 2008 09:05:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 14 May 2008 14:34:04 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Just to make things clear the stable branch has the full support of the
+OE core team. We're aware some members of the community are vocal in
+their dislike of the way its being run but these do not reflect the
+views of the majority. To clarify the position with the bugzilla, it
+remains the place to submit and track OE bugs, be them in .dev, stable
+or any other branch. If any branch has a submission procedure for
+changes in addition to that, that is up to the maintainers of the
+branch.
 
-yes, I know I'm slow ;-)
-
-Daniel Willmann schrieb:
-> I'll be at LinuxTag 2008, though I'll probably be busy with the
-> OpenMoko booth there. I can bring you the poster (A0) I printed for
-> FOSDEM and the leftover handouts. The handouts are probably not enough,
-> though.
-
-How many handouts do we have right now? Where can I find the latest version of it?
-
-Greetings
-
-Florian
+We'd like to ask people to work together to make the stable branch a
+success and make best use of our limited resources.
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+The OE Core Team
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
