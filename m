@@ -1,22 +1,25 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1JwB34-0005vO-7u
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JwCv5-0001eJ-Uq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 May 2008 09:05:14 +0200
-Received: from xora.org.uk ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
-	by xora.org.uk with esmtp; Wed, 14 May 2008 08:03:43 +0100
-	id 0006D035.482A8ECF.000043EF
-Date: Wed, 14 May 2008 08:04:52 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	Wed, 14 May 2008 11:05:08 +0200
+Received: from [212.60.202.194] (helo=[192.168.2.131])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1JwDRZ-000441-20
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 May 2008 11:38:41 +0200
+Message-ID: <482AAAE1.6080305@kernelconcepts.de>
+Date: Wed, 14 May 2008 11:03:29 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080514070452.GA3730@cimmeria.hyboria>
-References: <20080509153032.79D501892D4@amethyst.openembedded.net>
-	<482A1FEC.5000804@gmx.net>
-Mime-Version: 1.0
-In-Reply-To: <482A1FEC.5000804@gmx.net>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Re: [oe-commits] org.oe.dev classpath-native_0.97.1.bb : add	from OM mtn
+References: <47C8065C.2040105@gmx.net>
+	<20080229235338.0204c70d@elara.dyn.totalueberwachung.de>
+In-Reply-To: <20080229235338.0204c70d@elara.dyn.totalueberwachung.de>
+X-Enigmail-Version: 0.95.0
+Subject: Re: OpenEmbedded@LinuxTag 2008
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -30,33 +33,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 May 2008 07:05:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 14 May 2008 09:05:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wed, May 14, 2008 at 01:10:36AM +0200, Robert Schuster wrote:
-> Hi,
-> I would like this commit to be reverted. While it may look logical to go
-> from one below 1.0 release to another something important changed in
-> classpath in that release and makes bootstrapping far more complicated.
-> 
-> The problem is that from 0.97 onwards, a classpath build needs a working
-> javah tool. this program is a header generator which creates C header
-> files from compiled Java classes. Such a javah program is provided by
-> the classpath tools but needs a working runtime and class library first.
-> 
-> Earlier classpath releases had pre-generated header files and needed no
-> javah program.
-> 
-> There are multiple ways to fix this issue. One way would involve
-> upstream allowing the just built javah application being run with a
-> provided java executable. This would be less pain for us and would also
-> benefit other cross compilation efforts.
-> 
-This is fine with me if you wish to dissaprove this one.
+Hi,
 
-Graeme
+yes, I know I'm slow ;-)
 
+Daniel Willmann schrieb:
+> I'll be at LinuxTag 2008, though I'll probably be busy with the
+> OpenMoko booth there. I can bring you the poster (A0) I printed for
+> FOSDEM and the leftover handouts. The handouts are probably not enough,
+> though.
+
+How many handouts do we have right now? Where can I find the latest version of it?
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
