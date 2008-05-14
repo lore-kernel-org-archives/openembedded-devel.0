@@ -1,29 +1,32 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JwI3Q-0006Wn-F3
-	for openembedded-devel@openembedded.org; Wed, 14 May 2008 16:34:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4EEWV0k022706
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JwK7P-0003M9-D4
+	for openembedded-devel@openembedded.org; Wed, 14 May 2008 18:46:19 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JwK5s-0003XT-DQ
+	for openembedded-devel@openembedded.org; Wed, 14 May 2008 16:44:44 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 14 May 2008 16:44:44 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 14 May 2008 15:32:31 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 22520-06 for <openembedded-devel@openembedded.org>;
-	Wed, 14 May 2008 15:32:27 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4EEWN22022700
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 14 May 2008 15:32:24 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Wed, 14 May 2008 15:32:23 +0100
-Message-Id: <1210775543.7097.29.camel@localhost.localdomain>
+	Wed, 14 May 2008 16:44:44 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 14 May 2008 18:44:32 +0200
+Message-ID: <g0f4tl$6a9$1@ger.gmane.org>
+References: <1210775543.7097.29.camel@localhost.localdomain>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.8.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Stable Branch
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+In-Reply-To: <1210775543.7097.29.camel@localhost.localdomain>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Stable Branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -37,24 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 May 2008 14:34:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 14 May 2008 16:46:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Just to make things clear the stable branch has the full support of the
-OE core team. We're aware some members of the community are vocal in
-their dislike of the way its being run but these do not reflect the
-views of the majority. To clarify the position with the bugzilla, it
-remains the place to submit and track OE bugs, be them in .dev, stable
-or any other branch. If any branch has a submission procedure for
-changes in addition to that, that is up to the maintainers of the
-branch.
+Richard Purdie wrote:
+> We'd like to ask people to work together to make the stable branch a
+> success and make best use of our limited resources.
 
-We'd like to ask people to work together to make the stable branch a
-success and make best use of our limited resources.
+I have done my part and added the org.openembedded.stable component to
+the OE product in bugzilla.  The bugs shall be waiting there for people
+interested in maintaining the stable branch (good thing, thanks a lot!)
+whenever they should start becoming interested in looking through them.
 
--- 
-The OE Core Team
+Should there any further changes necessary, just holler.
 
 
 
