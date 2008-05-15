@@ -1,25 +1,30 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [209.85.132.244] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1JwiNZ-00065R-IP
-	for openembedded-devel@openembedded.org; Thu, 15 May 2008 20:43:09 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20080515183851.DCIJ45.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Thu, 15 May 2008 14:38:51 -0400
-Received: from opus ([68.230.59.19]) by fed1rmimpo03.cox.net with bizsmtp
-	id Ruep1Z00d0QtwrG04uepSJ; Thu, 15 May 2008 14:38:51 -0400
-Date: Thu, 15 May 2008 11:38:49 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20080515183849.GA8281@smtp.west.cox.net>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JwiZl-0006DG-GX
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 May 2008 20:53:14 +0200
+Received: by an-out-0708.google.com with SMTP id b38so119120ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 May 2008 11:51:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=0tBN99aZdgQY+ncPg8JbJg5SzatjPWM4XQx5MIn7a34=;
+	b=uxvlR66RjG+MdUMnpirsJwvysSnV/jp3E0XsNnCXaV1Y+B02ORxTLHtSE7DIKJZkHIBfWdA234e+4fY1tNeTukZrc36HsspTSCH4U7MaMnUHOhblQudMOGRZL2v4Ibn1azgdnj1gw+L9dDOs9j77a4oZ9XT3HtBLCiCAxdHuxt4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=AfnORaCTdDIdycnaQOixXDUJEyX9SSUgBc34ewi0WaOeghgovW6ss+gC6B2TeGc/kz7p2fpBycLYQ7Z7unSQMtG2H1HTQNxwcePNVwnlgG1V2YTEICEq0aoq5GdvAb43j2FnT+4raQ+vgiWSHkczDPfTXdWEfLQ+dQ7rAsQcwu4=
+Received: by 10.100.37.20 with SMTP id k20mr3607398ank.5.1210877489992;
+	Thu, 15 May 2008 11:51:29 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Thu, 15 May 2008 11:51:29 -0700 (PDT)
+Message-ID: <c384c5ea0805151151v35e28a99i2ccb39157d5d47f6@mail.gmail.com>
+Date: Thu, 15 May 2008 20:51:29 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1210869726.7097.93.camel@localhost.localdomain>
+MIME-Version: 1.0
 References: <c384c5ea0805141436m9f5151dje832c2da95379127@mail.gmail.com>
 	<1210869726.7097.93.camel@localhost.localdomain>
-MIME-Version: 1.0
-In-Reply-To: <1210869726.7097.93.camel@localhost.localdomain>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Subject: Re: [RFC] Stop on multiple providers but none explicitly	specified
+Subject: Re: [RFC] Stop on multiple providers but none explicitly specified
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -33,38 +38,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 May 2008 18:44:20 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 15 May 2008 18:53:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thu, May 15, 2008 at 05:42:06PM +0100, Richard Purdie wrote:
-> On Wed, 2008-05-14 at 23:36 +0200, Leon Woestenberg wrote:
-> > Hello all,
-> > 
-> > in trying to explain a new user why his build fails, it was the
-> > classic situation of multiple providers available but non specified:
-> > 
-> > NOTE: multiple providers are available for virtual/libc
-> > (external-toolchain, uclibc);
-> > NOTE: consider defining PREFERRED_PROVIDER_virtual/libc
-> > 
-> > Now, as far as I know, this makes the build non-deterministic, because
-> > bitbake "just" chooses one.
-> > 
-> > Why do we want this behaviour? I cannot see any benefit in this situation.
-> > 
-> > We should at least prefer one over the other, or just bail out in my opinion.
-> 
+Hello Richard,
+
+thanks for your reply.
+
+On Thu, May 15, 2008 at 6:42 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
 > Bitbake will pick one, the options in brackets are in the order bitbake
 > will choose them. We sort them alphabetically iirc since that is more
 > deterministic than depending on parsing order which was the previous
 > approach.
+>
+I agree it's more deterministic seen from the BitBake point-of-view
+and that's an improvement.
 
-There's still a problem here.  I've sometimes seen external-toolchain
-picked for one thing I've forgotten when setting up for uclibc.  Having
-the build just fail here would be nice.
+However, is it intuitive from the *user's* point-of-view to have
+BitBake make this decision?
+I think not; at least in the case of OpenEmbedded, there is at least a
+50% chance this is not what the user intended.
 
+1) Besides fixing this in BitBake (by bailing out, my first proposal),
+2) an alternative solution is to set the preferred provider for the
+toolchain/libc elements to a built..
+a) ..in each distro file
+b) ..globally where we can build the toolchain/libc elements in
+OpenEmbedded for the target.
+
+I think 2a)  is not the way OpenEmbedded should work. The distro is
+not the authorative component that decides whether we can build a
+toolchain/libc for each target (like Angstrom does now).
+
+Shouldn't we do (2b), where the distribution can *optionally* override
+the preferred provider if it knows better?
+
+Greetings,
 -- 
-Tom Rini
+Leon
 
 
