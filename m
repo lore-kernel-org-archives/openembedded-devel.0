@@ -1,34 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.132.247] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jx7S6-0005QV-5U
-	for openembedded-devel@openembedded.org; Fri, 16 May 2008 23:26:58 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jx7QH-0003qX-9I
-	for openembedded-devel@openembedded.org; Fri, 16 May 2008 21:25:05 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 16 May 2008 21:25:05 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 16 May 2008 21:25:05 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 16 May 2008 23:24:54 +0200
-Message-ID: <g0ku37$m4g$1@ger.gmane.org>
-References: <200805161611.50480.geoffrey@pager.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008050803)
-In-Reply-To: <200805161611.50480.geoffrey@pager.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: AVR32 segfaults / Disablng virtual/libintl?
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Jx7kx-0005xe-Cu
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 May 2008 23:46:27 +0200
+Received: by an-out-0708.google.com with SMTP id b38so237823ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 May 2008 14:44:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=oKQRrucAzjXb3TT/F6SYOzcAu45kYFJ/xGCmda/OjMU=;
+	b=fp0I+BBhEtCCJW1BBLec3OFOUF/pNZ2jGkyja2qnVgA3/8VmbBgnA96Q5T0mjoESo1QBB102YtZlKnfkLli69+4kMkV0EKXZIicBSqUleZVnuZhsEY29K4Em4ybsvEe11Ed6yaaE1oPbAEiQPaWWn+f+2756pKpwHe8SqUb+xRA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=eM2+mDlykpdibGMM0mEgIGcFs/8K/SP9aNiX9rU29yqqeFzTPUwI1bpOQo+KBfcD26Y7EClEetLSliy/6G++d/uNBDMJcuzw1K/O6dJ0AQtgnRSuxa0AwLyxtS9+n8+B5QKDDTZK6pU6SYk+ebOuhX/GonI2giAFYAavElfEIdQ=
+Received: by 10.100.41.9 with SMTP id o9mr5325671ano.84.1210974274241;
+	Fri, 16 May 2008 14:44:34 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Fri, 16 May 2008 14:44:34 -0700 (PDT)
+Message-ID: <c384c5ea0805161444m831aa10pdd558b05990f258d@mail.gmail.com>
+Date: Fri, 16 May 2008 23:44:34 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1210887932.7097.107.camel@localhost.localdomain>
+MIME-Version: 1.0
+References: <c384c5ea0805141436m9f5151dje832c2da95379127@mail.gmail.com>
+	<1210869726.7097.93.camel@localhost.localdomain>
+	<c384c5ea0805151151v35e28a99i2ccb39157d5d47f6@mail.gmail.com>
+	<1210887932.7097.107.camel@localhost.localdomain>
+Subject: Re: [RFC] Stop on multiple providers but none explicitly specified
 X-BeenThere: openembedded-devel@lists.openembedded.org
-X-Mailman-Version: 2.1.10
+X-Mailman-Version: 2.1.10b4
 Precedence: list
 Reply-To: openembedded-devel@lists.openembedded.org
 List-Id: Using the OpenEmbedded metadata to build Distributions
@@ -40,46 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 May 2008 21:26:58 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 16 May 2008 21:46:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Geoffrey Wossum wrote:
-> Hi all,
+Hello all,
+
+On Thu, May 15, 2008 at 11:45 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Thu, 2008-05-15 at 20:51 +0200, Leon Woestenberg wrote:
+>> On Thu, May 15, 2008 at 6:42 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+>>
+>> However, is it intuitive from the *user's* point-of-view to have
+>> BitBake make this decision?
+>> I think not; at least in the case of OpenEmbedded, there is at least a
+>> 50% chance this is not what the user intended.
 >
-> I've had some odd segfaults on my AVR32 system, mostly involving avahi (always
-> on startup) and the occasional Xfbdev crash.  I didn't bother looking into it
-> until now, because aplay was always crashing before it even got to main(),
-> which was making difficult to test my sound CODEC.
+> You're making this sound clear cut and its not quite that easy :).
+> Firstly, 50% isn't a good figure, there is no limit to the number of
+> different packages which provide a given target so it could be 33%, 25%
+> or worse.
 >
-> I found that both avahi-daemon and aplay were both crashing before they got to
-> main(), and they both crashed due to infinite recursion calling the function
-> _pthread_cleanup_push_defer().
+No in fact, the chance of making the wrong decision is 50%, 67%, 75%
+(or worse) for n = 2, 3, 4 etc.
+
+(but I think you meant this).
+
+> Secondly, there often is a good default choice its just bitbake doesn't
+> have the information to make it.
 >
-> Due to the crash being in a thread related function, I focused my initial
-> attention there, but now I think the problem is related to gettext.  If I
-> hand compile aplay and keep it from linking against libintl, it doesn't
-> crash.  Haven't tried the same thing on avahi, but I suspect libintl/gettext
-> is also the problem there since they were crashing exactly the same way.
->
-> I don't need any i18n any these types of applications.  As a workaround, can I
-> keep gettext from being built and use the libintl stubs provided by uClibc?
-> How do I do this?  PREFERRED_PROVIDER_virtual/libintl = ""?
-> PREFERRED_PROVIDER_virtual/libintl = "uclibc"?
+Well this is exactly my point; Let's give bitbake that information for
+the remaining cases.
 
-That should work as long as you have wchar and intl stubs in uclibc. I 
-would *very* much like to use the uclibc ones instead of the gettext 
-ones, if only to get cleaner builds :)
+PROVIDER_PREFERENCE seems a bridge too far for me, but hey, any
+solution that solves it is better then the current situation.
 
-regards,
-
-Koen
-
->
-> TIA,
-> ---
-> Geoffrey
-
-
+Regards,
+-- 
+Leon
 
 
