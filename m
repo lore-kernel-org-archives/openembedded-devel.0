@@ -1,23 +1,32 @@
-Received: from [213.36.80.91] (helo=mail.libertysurf.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1Jx43q-0005wW-Gl
-	for openembedded-devel@openembedded.org; Fri, 16 May 2008 19:49:42 +0200
-Received: from blini.bolloretelecom.eu (62.210.194.121) by
-	mail.libertysurf.net (7.3.118.8)
-	id 482DD1D9000047C7; Fri, 16 May 2008 20:55:18 +0200
-Received: from [192.168.95.168] (unknown [192.168.95.168])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id 4C0EC23EBA;
-	Fri, 16 May 2008 19:25:35 +0200 (CEST)
-Message-ID: <482DC38E.1040809@bolloretelecom.eu>
-Date: Fri, 16 May 2008 19:25:34 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.0.14eol) Gecko/20080509 Thunderbird/1.5.0.14eol
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
-To: k.kooi@student.utwente.nl,  openembedded-devel@openembedded.org
-X-Enigmail-Version: 0.94.2.0
-Subject: disapproval of revision '462968658bdc2a3c48a8d634f9be59d450259f49'
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Jx4tt-0003kg-MY
+	for openembedded-devel@openembedded.org; Fri, 16 May 2008 20:43:29 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Jx4s2-0004CY-S9
+	for openembedded-devel@openembedded.org; Fri, 16 May 2008 18:41:34 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 16 May 2008 18:41:34 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 16 May 2008 18:41:34 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 16 May 2008 20:41:26 +0200
+Message-ID: <g0kkgn$kc8$1@ger.gmane.org>
+References: <g0ke5t$s9n$1@ger.gmane.org> <482DC846.1040301@bolloretelecom.eu>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a1pre (Macintosh/2008050803)
+In-Reply-To: <482DC846.1040301@bolloretelecom.eu>
+Sender: news <news@ger.gmane.org>
+Subject: Re: disapproval or revision 462968658bdc2a3c48a8d634f9be59d450259f49
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -31,41 +40,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 May 2008 17:49:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Fri, 16 May 2008 18:43:29 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Jeremy Lainé wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Hi Koen,
+>
+> I guess our messages missed each other..
+>
+> Koen Kooi wrote:
+>> Some days ago I fixed openssl-native so it doesn't put target flags
+>>   into the host build anymore:
+>>
+>> openssl-native: stop leaking target compile flags
+>> (FULL_OPTIMIZATION) into native build, it kills kittens.
+>>
+>> r462968658bdc2a3c48a8d634f9be59d450259f49 reverses that fix and
+>> breaks my build. So it has been disapproved.
+>>
+> My commit did *not* reverse your fix, I kept your FULL_OPTIMIZATION =
+> "", so these do not end up in the CFLAG variable.
 
-Hi Koen,
+Ah, while I was trying to get rid of FULL_OPTIMIZATION, it wasn't enough 
+to set it to "", but it seems I probably had a broken bitbake cache, 
+since now everything works as expected (including a correct 
+FULL_OPTIMIZATION[1]!).
 
-Could you please explain why you disapproved this commit? I removed
-the "export CFLAG" because it is not the correct way of setting flags
-when building openssl. If you do "export CFLAG" you unconditionally
-override the flags, dropping some flags which are set by the Configure
-script and which are needed internally by openssl. What we want to do
-is to set additional flags, which is what do_configure() does in
-openssl.inc.
+Sorry for the mess, I committed a new revision that removes the exports 
+and makes 0.9.8m the default again, since it now builds (probably due to 
+having correct CFLAG this time *cough*).
 
-If for some reason you feel the CFLAG defined in openssl.inc is not
-appropriate for openssl-native, please at least just do a "CFLAG =3D .."
-not "export CFLAG". Since you reverted my commit, openssl-native is
-broken on x86_64 (both 0.9.7m nor 0.9.8g).
+regards,
 
-Cheers,
+Koen
 
-- --
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+[1] I kept it empty just to be complete sure. It's not like we're going 
+to do heavy crypto during builds.
 
-iD8DBQFILcOOCL1n3lVB9EYRAhVUAKCIvIHaz/7Wm/W3xBfsHgFQpSKeLQCeL4kn
-p32tuciTBmjMtThj3wOmCyM=3D
-=3DIGi7
------END PGP SIGNATURE-----
+> As explained in my
+> other email, CFLAG mustn't be exported, it breaks things as it
+> forcibly replace the compilation flags.
+>
+> - --
+> Jeremy LAINE
+> Bolloré telecom | 11bis, rue Scribe | F-75009 Paris
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.6 (GNU/Linux)
+> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+>
+> iD8DBQFILchGCL1n3lVB9EYRAmkrAJ0aEZgrcN0AXsgdMZqVBizwzoecjQCgxzlO
+> x/cYM0HMpWrK1NVaRzSzuoE=
+> =Jhkw
+> -----END PGP SIGNATURE-----
+
 
 
 
