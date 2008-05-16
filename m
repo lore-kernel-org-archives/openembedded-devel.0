@@ -1,32 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jx4tt-0003kg-MY
-	for openembedded-devel@openembedded.org; Fri, 16 May 2008 20:43:29 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jx4s2-0004CY-S9
-	for openembedded-devel@openembedded.org; Fri, 16 May 2008 18:41:34 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 16 May 2008 18:41:34 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 16 May 2008 18:41:34 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 16 May 2008 20:41:26 +0200
-Message-ID: <g0kkgn$kc8$1@ger.gmane.org>
-References: <g0ke5t$s9n$1@ger.gmane.org> <482DC846.1040301@bolloretelecom.eu>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a1pre (Macintosh/2008050803)
-In-Reply-To: <482DC846.1040301@bolloretelecom.eu>
-Sender: news <news@ger.gmane.org>
-Subject: Re: disapproval or revision 462968658bdc2a3c48a8d634f9be59d450259f49
+	(envelope-from <geoffrey@pager.net>) id 1Jx7Eu-0000GJ-4R
+	for Openembedded-devel@lists.openembedded.org;
+	Fri, 16 May 2008 23:13:20 +0200
+X-ASG-Debug-ID: 1210972261-598b00100000-3ce4Sv
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 13D34ADE87
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 16 May 2008 16:11:02 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id p7J5OpF0r2dQFEZZ for
+	<Openembedded-devel@lists.openembedded.org>;
+	Fri, 16 May 2008 16:11:02 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
+To: Openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: AVR32 segfaults / Disablng virtual/libintl?
+Date: Fri, 16 May 2008 16:11:50 -0500
+User-Agent: KMail/1.9.7
+MIME-Version: 1.0
+Message-Id: <200805161611.50480.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1210972262
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: AVR32 segfaults / Disablng virtual/libintl?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10b4
 Precedence: list
@@ -40,63 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 May 2008 18:43:29 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 16 May 2008 21:13:20 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Jeremy Lainé wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi Koen,
->
-> I guess our messages missed each other..
->
-> Koen Kooi wrote:
->> Some days ago I fixed openssl-native so it doesn't put target flags
->>   into the host build anymore:
->>
->> openssl-native: stop leaking target compile flags
->> (FULL_OPTIMIZATION) into native build, it kills kittens.
->>
->> r462968658bdc2a3c48a8d634f9be59d450259f49 reverses that fix and
->> breaks my build. So it has been disapproved.
->>
-> My commit did *not* reverse your fix, I kept your FULL_OPTIMIZATION =
-> "", so these do not end up in the CFLAG variable.
+Hi all,
 
-Ah, while I was trying to get rid of FULL_OPTIMIZATION, it wasn't enough 
-to set it to "", but it seems I probably had a broken bitbake cache, 
-since now everything works as expected (including a correct 
-FULL_OPTIMIZATION[1]!).
+I've had some odd segfaults on my AVR32 system, mostly involving avahi (always 
+on startup) and the occasional Xfbdev crash.  I didn't bother looking into it 
+until now, because aplay was always crashing before it even got to main(), 
+which was making difficult to test my sound CODEC.
 
-Sorry for the mess, I committed a new revision that removes the exports 
-and makes 0.9.8m the default again, since it now builds (probably due to 
-having correct CFLAG this time *cough*).
+I found that both avahi-daemon and aplay were both crashing before they got to 
+main(), and they both crashed due to infinite recursion calling the function 
+_pthread_cleanup_push_defer().
 
-regards,
+Due to the crash being in a thread related function, I focused my initial 
+attention there, but now I think the problem is related to gettext.  If I 
+hand compile aplay and keep it from linking against libintl, it doesn't 
+crash.  Haven't tried the same thing on avahi, but I suspect libintl/gettext 
+is also the problem there since they were crashing exactly the same way.
 
-Koen
+I don't need any i18n any these types of applications.  As a workaround, can I 
+keep gettext from being built and use the libintl stubs provided by uClibc?  
+How do I do this?  PREFERRED_PROVIDER_virtual/libintl = ""?   
+PREFERRED_PROVIDER_virtual/libintl = "uclibc"?  
 
-[1] I kept it empty just to be complete sure. It's not like we're going 
-to do heavy crypto during builds.
-
-> As explained in my
-> other email, CFLAG mustn't be exported, it breaks things as it
-> forcibly replace the compilation flags.
->
-> - --
-> Jeremy LAINE
-> Bolloré telecom | 11bis, rue Scribe | F-75009 Paris
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.6 (GNU/Linux)
-> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
->
-> iD8DBQFILchGCL1n3lVB9EYRAmkrAJ0aEZgrcN0AXsgdMZqVBizwzoecjQCgxzlO
-> x/cYM0HMpWrK1NVaRzSzuoE=
-> =Jhkw
-> -----END PGP SIGNATURE-----
-
+TIA,
+---
+Geoffrey
 
 
 
