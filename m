@@ -1,33 +1,32 @@
-Received: from [212.27.42.30] (helo=smtp4-g19.free.fr)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JxGHj-0005WN-Nm
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 May 2008 08:52:51 +0200
-Received: from smtp4-g19.free.fr (localhost.localdomain [127.0.0.1])
-	by smtp4-g19.free.fr (Postfix) with ESMTP id 403EC3EA0DB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 May 2008 08:50:56 +0200 (CEST)
-Received: from sharky.jerryweb.org (vau75-7-82-234-248-119.fbx.proxad.net
-	[82.234.248.119])
-	by smtp4-g19.free.fr (Postfix) with ESMTP id 277B03EA0CD
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 May 2008 08:50:56 +0200 (CEST)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by sharky.jerryweb.org (Postfix) with ESMTP id CCF6A1840B9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 May 2008 08:51:06 +0200 (CEST)
-Message-ID: <482E805A.6010506@bolloretelecom.eu>
-Date: Sat, 17 May 2008 08:51:06 +0200
-From: =?UTF-8?B?SmVyZW15IExhaW7DqQ==?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.1.14) Gecko/20080509 Lightning/0.8 Thunderbird/2.0.0.14
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <g0ke5t$s9n$1@ger.gmane.org> <482DC846.1040301@bolloretelecom.eu>
-	<g0kkgn$kc8$1@ger.gmane.org>
-In-Reply-To: <g0kkgn$kc8$1@ger.gmane.org>
-Subject: Re: disapproval or revision	462968658bdc2a3c48a8d634f9be59d450259f49
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JxHY4-0003qS-Qi
+	for openembedded-devel@openembedded.org; Sat, 17 May 2008 10:13:49 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JxHW9-0003vH-QO
+	for openembedded-devel@openembedded.org; Sat, 17 May 2008 08:11:49 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 17 May 2008 08:11:49 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 17 May 2008 08:11:49 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 17 May 2008 10:11:36 +0200
+Message-ID: <g0m3vp$7qm$1@ger.gmane.org>
+References: <20080516214710.GA21911@rhein.zuhause.netz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a1pre (Macintosh/2008050803)
+In-Reply-To: <20080516214710.GA21911@rhein.zuhause.netz>
+Sender: news <news@ger.gmane.org>
+Subject: Re: MIPS machine.confs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,21 +40,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 May 2008 06:52:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 17 May 2008 08:13:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
->> Sorry for the mess, I committed a new revision that removes the exports
->> and makes 0.9.8m the default again, since it now builds (probably due to
->> having correct CFLAG this time *cough*).
+Henning Heinold wrote:
+> Hi,
+>
+> there are serval .conf under machine/ (rb500.conf,wrt54,wl500g.conf)
+> which using TARGET_CC_ARCH = "-Os". I suggest this should be not set
+> there, becaue it's a distribution-thingie. If no one minds I will clean it up.
 
-Cool... well, nearly! openssl-native_0.9.8g.bb still contains
-DEFAULT_PREFERENCE = "-1".
+I certainly don't mind, it a thing I missed in my previous machine/tune 
+cleanup :)
 
-If it's OK with you I'd like to see 0.9.8g as the default for native
-builds too, so we only download one .tar.gz by default.
+regards,
 
-Cheers,
-Jeremy
+Koen
+
 
 
