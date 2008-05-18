@@ -1,32 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JxmTl-0006Gb-2X
-	for openembedded-devel@openembedded.org; Sun, 18 May 2008 19:15:25 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JxmRf-0002k3-2H
-	for openembedded-devel@openembedded.org; Sun, 18 May 2008 17:13:15 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 18 May 2008 17:13:15 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 18 May 2008 17:13:15 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 18 May 2008 19:13:07 +0200
-Message-ID: <g0po33$t9c$1@ger.gmane.org>
-References: <1211081495.8550.60.camel@isis>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <1211081495.8550.60.camel@isis>
-Sender: news <news@ger.gmane.org>
-Subject: Re: scp-argument-fix.patch is not needed for dropbear 0.50
+	(envelope-from <mickey@vanille-media.de>) id 1Jxqqe-0002wq-St
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 18 May 2008 23:55:20 +0200
+Received: from andromeda (e180151064.adsl.alicedsl.de [85.180.151.64])
+	by drlauer-research.com (Postfix) with ESMTP id E86E7584C3A
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 May 2008 23:53:27 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 18 May 2008 23:53:10 +0200
+User-Agent: KMail/1.9.9
+References: <47C8065C.2040105@gmx.net>
+	<20080229235338.0204c70d@elara.dyn.totalueberwachung.de>
+	<482AAAE1.6080305@kernelconcepts.de>
+In-Reply-To: <482AAAE1.6080305@kernelconcepts.de>
+MIME-Version: 1.0
+Message-Id: <200805182353.10539.mickey@vanille-media.de>
+Subject: Re: OpenEmbedded@LinuxTag 2008
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,15 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 May 2008 17:15:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 18 May 2008 21:55:21 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Khem Raj wrote:
-> applied scp-argument-fix.patch to all versions of dropbear. However this
-> patch is not needed for dropbear 0.50 e.g. Only 0.49 requires it.
+On Wednesday 14 May 2008 11:03:29 Florian Boor wrote:
+> Where can I find the latest version of it?
 
-Thanks.  Updated in 3690cf9a949f76acaa2b247794d6ee00339acd46
+I just commited contrib/marketing/oe-{flyer|poster}.pdf
 
+:M:
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
