@@ -1,34 +1,40 @@
-Received: from [209.85.132.240] (helo=an-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1JxriB-0000lU-Cl
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 May 2008 00:50:40 +0200
-Received: by an-out-0708.google.com with SMTP id b38so374928ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 May 2008 15:48:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=qhTvhZnOwwl9zP7SCfLU6+HbSrx7is0L2LjAV20IKMo=;
-	b=L1vhIfYi2ltD7DhGSqVsITDMkZPhfrATE0hVfTfQARRsXsVo+q/YZOD1Cq1ADk6/Ckt2b+9d7/SfhM/Mzaa3iyJSOHQO3/kJ9mqSTOWyxI6v7VfRAxJlt+Cszlwdjr77ux7A8zIN6zJGIvZvS5+gb4QgYI2NdbOjbxVdbzuujQg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=IBDnW0jCdbrz0ob1ZQGitoUEU6cDn49NwpcFC4pEIzOXw4b/mo3mAJsVF6y14KAgGnk8QQY9+tFqR9wEGEQzJHWaO6H2Uvd/cb6O5YohHYh8qCTgGqRFya2Y8VXNOsTck9NjGQiDXa+9F9Y8b4UDqflBshMbMEM1qUou5AJuTCg=
-Received: by 10.100.166.9 with SMTP id o9mr7042742ane.91.1211150909063;
-	Sun, 18 May 2008 15:48:29 -0700 (PDT)
-Received: by 10.100.190.7 with HTTP; Sun, 18 May 2008 15:48:29 -0700 (PDT)
-Message-ID: <c384c5ea0805181548o7efe0dc5h5c79b0dccc0d4300@mail.gmail.com>
-Date: Mon, 19 May 2008 00:48:29 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+Received: from [65.254.253.234] (helo=mailout08.yourhostingaccount.com)
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from
+	<SRS0=/VCUjl=WB=thegnar.org=markgross@yourhostingaccount.com>)
+	id 1Jxsl4-0006c5-7K; Mon, 19 May 2008 01:57:42 +0200
+Received: from mailscan16.yourhostingaccount.com ([10.1.15.16]
+	helo=mailscan16.yourhostingaccount.com)
+	by mailout08.yourhostingaccount.com with esmtp (Exim)
+	id 1Jxsix-0004X2-Po; Sun, 18 May 2008 19:55:31 -0400
+Received: from impout02.yourhostingaccount.com ([10.1.55.2]
+	helo=impout02.yourhostingaccount.com)
+	by mailscan16.yourhostingaccount.com with esmtp (Exim)
+	id 1Jxsix-0001Fp-HU; Sun, 18 May 2008 19:55:31 -0400
+Received: from authsmtp11.yourhostingaccount.com ([10.1.18.11])
+	by impout02.yourhostingaccount.com with NO UCE
+	id TBvL1Z0010EKrUA0000000; Sun, 18 May 2008 19:55:20 -0400
+X-EN-OrigOutIP: 10.1.18.11
+X-EN-IMPSID: TBvL1Z0010EKrUA0000000
+Received: from pool-71-117-215-48.ptldor.fios.verizon.net ([71.117.215.48]
+	helo=desktop) by authsmtp11.yourhostingaccount.com with esmtpa (Exim)
+	id 1Jxsil-0008Pp-4K; Sun, 18 May 2008 19:55:20 -0400
+Received: by desktop (sSMTP sendmail emulation);
+	Sun, 18 May 2008 16:56:08 -0700
+Date: Sun, 18 May 2008 16:56:08 -0700
+From: mark gross <markgross@thegnar.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1211061548.5272.21.camel@dax.rpnet.com>
+Message-ID: <20080518235608.GB11599@thegnar.org>
+References: <1210775543.7097.29.camel@localhost.localdomain>
 MIME-Version: 1.0
-References: <c384c5ea0805141436m9f5151dje832c2da95379127@mail.gmail.com>
-	<1210869726.7097.93.camel@localhost.localdomain>
-	<c384c5ea0805151151v35e28a99i2ccb39157d5d47f6@mail.gmail.com>
-	<1210887932.7097.107.camel@localhost.localdomain>
-	<c384c5ea0805161444m831aa10pdd558b05990f258d@mail.gmail.com>
-	<1211061548.5272.21.camel@dax.rpnet.com>
-Subject: Re: [RFC] Stop on multiple providers but none explicitly specified
+In-Reply-To: <1210775543.7097.29.camel@localhost.localdomain>
+User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
+X-EN-UserInfo: 797c2c580f2f40de3d8825fee4eaf462:2545611f8b0606d1227160eb92fd62ea
+X-EN-AuthUser: markgross
+Sender: mark gross <markgross@thegnar.org>
+X-EN-OrigIP: 71.117.215.48
+X-EN-OrigHost: pool-71-117-215-48.ptldor.fios.verizon.net
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Re: Stable Branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -42,32 +48,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 May 2008 22:50:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 18 May 2008 23:57:42 -0000
+X-Groupsio-MsgNum: 5211
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="+pHx0qQiF2pBVqBT"
 Content-Disposition: inline
 
-Richard,
+--+pHx0qQiF2pBVqBT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, May 17, 2008 at 11:59 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Fri, 2008-05-16 at 23:44 +0200, Leon Woestenberg wrote:
->> PROVIDER_PREFERENCE seems a bridge too far for me, but hey, any
->> solution that solves it is better then the current situation.
->
-> Its the only solution I can see which addresses the problem but it does
-> further complicate the providers logic in bitbake which is already
-> painful and in need of rewriting :/. Other solutions welcome...
->
-The idea of bailing out when no preferred provider has been set is
-(1) simple
-(2) deterministic
-(3) simple
+NSLU2 build deltas between
+--branch org. org.openembedded.stable and
+--branch org. org.openembedded.dev
 
-Why make it harder then necessary? The stuff is complicated enough as
-it is, especially for new ppl.
+I think this is more of a bug report against org.openembedded.dev than
+anything.  Basically I can add python and python-pyseral to the
+RDEPENDS fro the stable branch and end up with a slugos-image that
+builds and boots on my nslu2, where if I do tthe same thing with the
+dev branch I end up with a root file system bloated too much to fit.
 
-Regards,
--- 
-Leon
+I've done a little debugging and it seems that the culprit is term
+info sucked in by implicit dependencies on terminfo that result in a
+lot of rootfs bloat.
+
+--mgross
 
 
+On Wed, May 14, 2008 at 03:32:23PM +0100, Richard Purdie wrote:
+> Just to make things clear the stable branch has the full support of the
+> OE core team. We're aware some members of the community are vocal in
+> their dislike of the way its being run but these do not reflect the
+> views of the majority. To clarify the position with the bugzilla, it
+> remains the place to submit and track OE bugs, be them in .dev, stable
+> or any other branch. If any branch has a submission procedure for
+> changes in addition to that, that is up to the maintainers of the
+> branch.
+>=20
+> We'd like to ask people to work together to make the stable branch a
+> success and make best use of our limited resources.
+>=20
+> --=20
+> The OE Core Team
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--+pHx0qQiF2pBVqBT
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFIMMIYhK5OsmQOmSARAsgMAJ4+9yc7satm8iMXV15YRG61uaIMMACgjAf9
+x9NHnF6WDb1X2fQQn+jZZ9o=
+=5M6i
+-----END PGP SIGNATURE-----
+
+--+pHx0qQiF2pBVqBT--
