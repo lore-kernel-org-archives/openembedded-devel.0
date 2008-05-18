@@ -1,36 +1,34 @@
-Received: from [152.78.68.129] (helo=owl.ecs.soton.ac.uk)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mas@ecs.soton.ac.uk>) id 1JxrH4-0000D1-64
-	for openembedded-devel@openembedded.org; Mon, 19 May 2008 00:22:41 +0200
-X-ECS-MailScanner-Watermark: 1211754027.13708@QNGWa07lFIsJ5g41cRmTKw
-Received: from gander.ecs.soton.ac.uk
-	([IPv6:2001:630:d0:f102:21d:9ff:fe22:9fc])
-	by owl.ecs.soton.ac.uk (8.13.1/8.13.1) with ESMTP id m4IMKMUO032290
-	for <openembedded-devel@openembedded.org>;
-	Sun, 18 May 2008 23:20:22 +0100
-X-ECS-MailScanner-Watermark: 1211754008.41978@9gl6Ls0UucURNQxy7BejJQ
-Received: from Macintosh-2.local (mattaw.plus.com [212.56.102.26])
-	(authenticated bits=0)
-	by gander.ecs.soton.ac.uk (8.13.8/8.13.8) with ESMTP id m4IMJwul016114
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Sun, 18 May 2008 23:20:08 +0100
-Message-ID: <4830AB85.80406@ecs.soton.ac.uk>
-Date: Sun, 18 May 2008 23:19:49 +0100
-From: Matthew Swabey <mas@ecs.soton.ac.uk>
-User-Agent: Thunderbird 2.0.0.14 (Macintosh/20080421)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1JxriB-0000lU-Cl
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 May 2008 00:50:40 +0200
+Received: by an-out-0708.google.com with SMTP id b38so374928ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 May 2008 15:48:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=qhTvhZnOwwl9zP7SCfLU6+HbSrx7is0L2LjAV20IKMo=;
+	b=L1vhIfYi2ltD7DhGSqVsITDMkZPhfrATE0hVfTfQARRsXsVo+q/YZOD1Cq1ADk6/Ckt2b+9d7/SfhM/Mzaa3iyJSOHQO3/kJ9mqSTOWyxI6v7VfRAxJlt+Cszlwdjr77ux7A8zIN6zJGIvZvS5+gb4QgYI2NdbOjbxVdbzuujQg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=IBDnW0jCdbrz0ob1ZQGitoUEU6cDn49NwpcFC4pEIzOXw4b/mo3mAJsVF6y14KAgGnk8QQY9+tFqR9wEGEQzJHWaO6H2Uvd/cb6O5YohHYh8qCTgGqRFya2Y8VXNOsTck9NjGQiDXa+9F9Y8b4UDqflBshMbMEM1qUou5AJuTCg=
+Received: by 10.100.166.9 with SMTP id o9mr7042742ane.91.1211150909063;
+	Sun, 18 May 2008 15:48:29 -0700 (PDT)
+Received: by 10.100.190.7 with HTTP; Sun, 18 May 2008 15:48:29 -0700 (PDT)
+Message-ID: <c384c5ea0805181548o7efe0dc5h5c79b0dccc0d4300@mail.gmail.com>
+Date: Mon, 19 May 2008 00:48:29 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1211061548.5272.21.camel@dax.rpnet.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <20080516214710.GA21911@rhein.zuhause.netz>
-	<200805182358.50192.mickey@vanille-media.de>
-In-Reply-To: <200805182358.50192.mickey@vanille-media.de>
-X-Enigmail-Version: 0.95.6
-X-ECS-MailScanner: Found to be clean, Found to be clean
-X-Spam-Status: No
-X-ECS-MailScanner-Information: Please contact the ISP for more information
-X-MailScanner-ID: m4IMKMUO032290
-X-ECS-MailScanner-From: mas@ecs.soton.ac.uk
-Subject: Getting a tested patch into Angstrom stable
+References: <c384c5ea0805141436m9f5151dje832c2da95379127@mail.gmail.com>
+	<1210869726.7097.93.camel@localhost.localdomain>
+	<c384c5ea0805151151v35e28a99i2ccb39157d5d47f6@mail.gmail.com>
+	<1210887932.7097.107.camel@localhost.localdomain>
+	<c384c5ea0805161444m831aa10pdd558b05990f258d@mail.gmail.com>
+	<1211061548.5272.21.camel@dax.rpnet.com>
+Subject: Re: [RFC] Stop on multiple providers but none explicitly specified
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -44,45 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 May 2008 22:22:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 18 May 2008 22:50:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Richard,
 
-I have developed a backport for 2.6.24-rp to fix the zaurus' pxa2xx-udc
-clock bug.
+On Sat, May 17, 2008 at 11:59 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Fri, 2008-05-16 at 23:44 +0200, Leon Woestenberg wrote:
+>> PROVIDER_PREFERENCE seems a bridge too far for me, but hey, any
+>> solution that solves it is better then the current situation.
+>
+> Its the only solution I can see which addresses the problem but it does
+> further complicate the providers logic in bitbake which is already
+> painful and in need of rewriting :/. Other solutions welcome...
+>
+The idea of bailing out when no preferred provider has been set is
+(1) simple
+(2) deterministic
+(3) simple
 
-If I want it to get into the current angstrom stable who do I bug
-(chortle, pun :) )?
+Why make it harder then necessary? The stuff is complicated enough as
+it is, especially for new ppl.
 
-I am correct in thinking that Angstrom stable is part of OE aren't I?
-
-Cheers, nice to be working with OE again after all this time! I haven't
-used it since I owned a SL-5600 and bitbake didn't exist. Neither did
-OE, just OZ.
-
-Impressive, impressive work.
-
-- --
-Dr Matthew Swabey
-Rm3229, Bldg59 New Zepler
-School of ECS
-University of Southampton
-University Road
-Southampton, SO17 1BJ
-England
-
-Tel: 02380 597381
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.8 (Darwin)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkgwq4UACgkQsoSsB2Ynk1AJfgCeIgR2W4RY7BlZfNku+IZGBeNn
-ABsAoLXIRwUe28q3HFdF/McDkhRJl1RN
-=xqoW
------END PGP SIGNATURE-----
+Regards,
+-- 
+Leon
 
 
