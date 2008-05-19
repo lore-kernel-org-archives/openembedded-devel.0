@@ -1,25 +1,33 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Jy2fN-0004hZ-QC
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 May 2008 12:32:29 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Jy3Bj-00054Y-Ik
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 May 2008 13:05:55 +0200
-Message-ID: <483156B2.3000202@kernelconcepts.de>
-Date: Mon, 19 May 2008 12:30:10 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <47C8065C.2040105@gmx.net>	<200805182353.10539.mickey@vanille-media.de>	<200805191026.59885.openembedded@haerwu.biz>
-	<200805191209.05964.mickey@vanille-media.de>
-In-Reply-To: <200805191209.05964.mickey@vanille-media.de>
-X-Enigmail-Version: 0.95.0
-Subject: Re: OpenEmbedded@LinuxTag 2008
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Jy48W-00032m-Iv
+	for openembedded-devel@openembedded.org; Mon, 19 May 2008 14:06:40 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Jy46H-0002fj-8i
+	for openembedded-devel@openembedded.org; Mon, 19 May 2008 12:04:21 +0000
+Received: from wlan137171.mobiel.utwente.nl ([130.89.137.171])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 19 May 2008 12:04:21 +0000
+Received: from k.kooi by wlan137171.mobiel.utwente.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 19 May 2008 12:04:21 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 19 May 2008 14:04:11 +0200
+Message-ID: <g0rqbs$fa5$1@ger.gmane.org>
+References: <c384c5ea0805141505r451510dar128090c7fc3d270@mail.gmail.com>	<200805182355.25777.mickey@vanille-media.de>
+	<200805191026.10545.openembedded@haerwu.biz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: wlan137171.mobiel.utwente.nl
+User-Agent: Thunderbird 3.0a2pre (Macintosh/2008051303)
+In-Reply-To: <200805191026.10545.openembedded@haerwu.biz>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Who is the wrt54oe maintainer?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -33,28 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 May 2008 10:32:30 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 19 May 2008 12:06:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Marcin Juszkiewicz wrote:
+> Dnia niedziela, 18 maja 2008, Michael 'Mickey' Lauer napisał:
+>> On Thursday 15 May 2008 00:05:25 Leon Woestenberg wrote:
+>>> who is the wrt54oe distro maintainer?
+>> Unfortunately, there's no one. I always had the hope we could get one
+>> of the openwrt-fork-maintainers on board. Marcin and me once did some
+>> work towards having this popular device in OE, but we both could not
+>> find enough time to keep it up.
+>
+> wrt54 + wrt54oe was working combo to build packages for OpenWRT
+> installation. Today we also have distro config to build such ones with
+> OpenWRT provided toolchain.
+>
+>>> It needs love in conf/distro/wrt54oe.conf, as it  isn't up to date
+>>> with our external toolchain opt-in, binutils-cross is not locked
+>>> down, and the c library was not chosen, nor its version.
+>> Indeed. Could I talk you into adding the necessary bits?
+>
+> It should be uclibc 0.9.27 (or newer if binary compatible), binutils 2.18,
+> gcc 3.4.4.
 
-> Well...the source format is Apple Pages *cough*. I also used a commercial font 
-> that I bought. I can try to export this to some other format when I have a 
-> chance.
+Note that "binary compatible" doesn't mean a lot when using uClibc. If 
+you change the defconfig within the same version you can get "binary 
+incompatible"[1] results on some or all depending applications.
 
-yes that would be great!
+regards,
 
-Greetings
+Koen
 
-Florian
+[1] I'm not sure how that effects our site files for autotools.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
