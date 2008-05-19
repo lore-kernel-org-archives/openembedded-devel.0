@@ -1,40 +1,22 @@
-Received: from [65.254.253.234] (helo=mailout08.yourhostingaccount.com)
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from
-	<SRS0=/VCUjl=WB=thegnar.org=markgross@yourhostingaccount.com>)
-	id 1Jxsl4-0006c5-7K; Mon, 19 May 2008 01:57:42 +0200
-Received: from mailscan16.yourhostingaccount.com ([10.1.15.16]
-	helo=mailscan16.yourhostingaccount.com)
-	by mailout08.yourhostingaccount.com with esmtp (Exim)
-	id 1Jxsix-0004X2-Po; Sun, 18 May 2008 19:55:31 -0400
-Received: from impout02.yourhostingaccount.com ([10.1.55.2]
-	helo=impout02.yourhostingaccount.com)
-	by mailscan16.yourhostingaccount.com with esmtp (Exim)
-	id 1Jxsix-0001Fp-HU; Sun, 18 May 2008 19:55:31 -0400
-Received: from authsmtp11.yourhostingaccount.com ([10.1.18.11])
-	by impout02.yourhostingaccount.com with NO UCE
-	id TBvL1Z0010EKrUA0000000; Sun, 18 May 2008 19:55:20 -0400
-X-EN-OrigOutIP: 10.1.18.11
-X-EN-IMPSID: TBvL1Z0010EKrUA0000000
-Received: from pool-71-117-215-48.ptldor.fios.verizon.net ([71.117.215.48]
-	helo=desktop) by authsmtp11.yourhostingaccount.com with esmtpa (Exim)
-	id 1Jxsil-0008Pp-4K; Sun, 18 May 2008 19:55:20 -0400
-Received: by desktop (sSMTP sendmail emulation);
-	Sun, 18 May 2008 16:56:08 -0700
-Date: Sun, 18 May 2008 16:56:08 -0700
-From: mark gross <markgross@thegnar.org>
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <openembedded@haerwu.biz>) id 1Jy0kJ-0000uB-1u
+	for openembedded-devel@openembedded.org; Mon, 19 May 2008 10:29:27 +0200
+Received: (qmail 9320 invoked by uid 813007); 19 May 2008 08:27:09 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.lan)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 19 May 2008 08:27:09 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080518235608.GB11599@thegnar.org>
-References: <1210775543.7097.29.camel@localhost.localdomain>
+Date: Mon, 19 May 2008 10:26:10 +0200
+User-Agent: KMail/1.9.9
+References: <c384c5ea0805141505r451510dar128090c7fc3d270@mail.gmail.com>
+	<200805182355.25777.mickey@vanille-media.de>
+In-Reply-To: <200805182355.25777.mickey@vanille-media.de>
 MIME-Version: 1.0
-In-Reply-To: <1210775543.7097.29.camel@localhost.localdomain>
-User-Agent: Mutt/1.5.15+20070412 (2007-04-11)
-X-EN-UserInfo: 797c2c580f2f40de3d8825fee4eaf462:2545611f8b0606d1227160eb92fd62ea
-X-EN-AuthUser: markgross
-Sender: mark gross <markgross@thegnar.org>
-X-EN-OrigIP: 71.117.215.48
-X-EN-OrigHost: pool-71-117-215-48.ptldor.fios.verizon.net
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Re: Stable Branch
+Message-Id: <200805191026.10545.openembedded@haerwu.biz>
+Subject: Re: Who is the wrt54oe maintainer?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -48,67 +30,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 May 2008 23:57:42 -0000
-X-Groupsio-MsgNum: 5211
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+pHx0qQiF2pBVqBT"
-Content-Disposition: inline
-
---+pHx0qQiF2pBVqBT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 19 May 2008 08:29:27 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
-
-NSLU2 build deltas between
---branch org. org.openembedded.stable and
---branch org. org.openembedded.dev
-
-I think this is more of a bug report against org.openembedded.dev than
-anything.  Basically I can add python and python-pyseral to the
-RDEPENDS fro the stable branch and end up with a slugos-image that
-builds and boots on my nslu2, where if I do tthe same thing with the
-dev branch I end up with a root file system bloated too much to fit.
-
-I've done a little debugging and it seems that the culprit is term
-info sucked in by implicit dependencies on terminfo that result in a
-lot of rootfs bloat.
-
---mgross
-
-
-On Wed, May 14, 2008 at 03:32:23PM +0100, Richard Purdie wrote:
-> Just to make things clear the stable branch has the full support of the
-> OE core team. We're aware some members of the community are vocal in
-> their dislike of the way its being run but these do not reflect the
-> views of the majority. To clarify the position with the bugzilla, it
-> remains the place to submit and track OE bugs, be them in .dev, stable
-> or any other branch. If any branch has a submission procedure for
-> changes in addition to that, that is up to the maintainers of the
-> branch.
->=20
-> We'd like to ask people to work together to make the stable branch a
-> success and make best use of our limited resources.
->=20
-> --=20
-> The OE Core Team
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---+pHx0qQiF2pBVqBT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 Content-Disposition: inline
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
+Dnia niedziela, 18 maja 2008, Michael 'Mickey' Lauer napisa=B3:
+> On Thursday 15 May 2008 00:05:25 Leon Woestenberg wrote:
+> > who is the wrt54oe distro maintainer?
+>
+> Unfortunately, there's no one. I always had the hope we could get one
+> of the openwrt-fork-maintainers on board. Marcin and me once did some
+> work towards having this popular device in OE, but we both could not
+> find enough time to keep it up.
 
-iD8DBQFIMMIYhK5OsmQOmSARAsgMAJ4+9yc7satm8iMXV15YRG61uaIMMACgjAf9
-x9NHnF6WDb1X2fQQn+jZZ9o=
-=5M6i
------END PGP SIGNATURE-----
+wrt54 + wrt54oe was working combo to build packages for OpenWRT=20
+installation. Today we also have distro config to build such ones with=20
+OpenWRT provided toolchain.
 
---+pHx0qQiF2pBVqBT--
+> > It needs love in conf/distro/wrt54oe.conf, as it  isn't up to date
+> > with our external toolchain opt-in, binutils-cross is not locked
+> > down, and the c library was not chosen, nor its version.
+>
+> Indeed. Could I talk you into adding the necessary bits?=20
+
+It should be uclibc 0.9.27 (or newer if binary compatible), binutils 2.18,=
+=20
+gcc 3.4.4.
+
+> If not, feel free to move it to nonworking/conf/machine/.
+
+You mean conf/distro/ dir? I would rather remove it at all if no one is=20
+going to use it.
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+           Could you please speak more slowly? I'm a masochist
+           and I want to prolong the agony of this conversation.
+
+
+
+
