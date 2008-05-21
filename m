@@ -1,33 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [213.36.80.91] (helo=mail.libertysurf.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1JyCkK-0000KH-5X
-	for openembedded-devel@openembedded.org; Mon, 19 May 2008 23:18:16 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4JLFbK7018556;
-	Mon, 19 May 2008 22:15:37 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18457-02; Mon, 19 May 2008 22:15:32 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4JLFSw2018546
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Mon, 19 May 2008 22:15:28 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200805101405.38789.zecke@selfish.org>
-References: <200805080215.23729.zecke@selfish.org>
-	<200805081306.37230.zecke@selfish.org>
-	<1210246170.5006.34.camel@dax.rpnet.com>
-	<200805101405.38789.zecke@selfish.org>
-Date: Mon, 19 May 2008 22:15:30 +0100
-Message-Id: <1211231730.20390.18.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: bitbake-dev@lists.berlios.de
-Subject: Re: Creating a pristine environment?
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JysSi-0002iV-A8
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 May 2008 19:50:52 +0200
+Received: from blini.bolloretelecom.eu (62.210.194.121) by
+	mail.libertysurf.net (7.3.118.8)
+	id 482DD26E001E8FBE for openembedded-devel@lists.openembedded.org;
+	Wed, 21 May 2008 20:56:52 +0200
+Received: from [192.168.95.64] (unknown [192.168.95.64])
+	by blini.bolloretelecom.eu (Postfix) with ESMTP id 39F1F23E38
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 May 2008 19:48:16 +0200 (CEST)
+Message-ID: <48346060.1030101@bolloretelecom.eu>
+Date: Wed, 21 May 2008 19:48:16 +0200
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.0.14eol) Gecko/20080509 Thunderbird/1.5.0.14eol
+	Mnenhy/0.7.5.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.94.2.0
+Subject: oestats: build statistics for OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,139 +34,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 May 2008 21:18:16 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 21 May 2008 17:50:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: Quoted-Printable
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Sat, 2008-05-10 at 14:05 +0200, Holger Freyther wrote:
-> Okay. I added an option, I clean the environment after having parsed the 
-> configuration. This means everything used from conf/local.conf (TOPDIR, 
-> BBPATH, BBFILES, MACHINE...) will be inside the configuration data of bitbake 
-> but not be exported. I also updated the documentation (man page and 
-> usermanual).
+Hi all!
 
-I merged the manual bits of this so they no longer complicate the
-equation. 
+I happy to announce the availability of "oestats", a web application
+for collecting and viewing OpenEmbedded build reports. In keeping with
+OE / bitbake it is written in Python and uses the Django web framework.
 
-I've given this patch some thought and I'd like to propose the following
-rehashed version of it. It has bitbake look at three different
-environmental variables which whilst complicated, does keep everyone
-happy:
+A live demo is available at:
 
-BB_PRESERVE_ENV - if set don't touch the environment
-BB_ENV_WHITELIST - a list of variables to whitelist overriding the default
-BB_ENV_EXTRAWHITE - extra variables to whitelist (not touch)
+http://oestats.jerryweb.org/
 
-So in Poky I can add MACHINE and POKYMODE to the whitelist by default in
-the environment setup script and in my personal case, I can preserve my
-environment since I trust myself to do this :).
+If you want to add your build stats, make sure your copy of OE is up
+to date and add the following to your build/conf/local.conf:
 
-Any thoughts on this?
+|INHERITS +=3D "oestats-client"
+OESTATS_SERVER =3D "oestats.jerryweb.org"
+OESTATS_BUILDER =3D "your_nickname"|
+
+Fair warning: this is a test server, no promises on availability
+though I'll do my best :)
+
+Source code and setup notes for the server are available at:
+
+http://opensource.bolloretelecom.eu/projects/oestats/
+
+Your feedback and improvements are most welcome!
 
 Cheers,
 
-Richard
+- --
+Jeremy LAINE
+Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-Index: lib/bb/utils.py
-===================================================================
---- lib/bb/utils.py	(revision 4503)
-+++ lib/bb/utils.py	(working copy)
-@@ -268,3 +268,56 @@
-     for line in open(filename):
-         s.update(line)
-     return s.hexdigest()
-+
-+def preserved_envvars_list():
-+    return [
-+        "BBPATH",
-+        "COLORTERM",
-+        "DBUS_SESSION_BUS_ADDRESS",
-+        "DESKTOP_SESSION",
-+        "DESKTOP_STARTUP_ID",
-+        "DISPLAY",
-+        "GNOME_KEYRING_PID",
-+        "GNOME_KEYRING_SOCKET",
-+        "GPG_AGENT_INFO",
-+        "GTK_RC_FILES",
-+        "HOME",
-+        "LANG",
-+        "LOGNAME",
-+        "PATH",
-+        "PWD",
-+        "SESSION_MANAGER",
-+        "SHELL",
-+        "SSH_AUTH_SOCK",
-+        "TERM",
-+        "USER",
-+        "USERNAME",
-+        "_",
-+        "XAUTHORITY",
-+        "XDG_DATA_DIRS",
-+        "XDG_SESSION_COOKIE",
-+    ]
-+
-+def filter_environment(good_vars):
-+    """
-+    Create a pristine environment for bitbake. This will remove variables that
-+    are not known and may influence the build in a negative way.
-+    """
-+
-+    import bb
-+
-+    removed_vars = []
-+    for key in os.environ.keys():
-+        if key in good_vars:
-+            continue
-+        
-+        removed_vars.append(key)
-+        os.unsetenv(key)
-+        del os.environ[key]
-+
-+    #if len(removed_vars):
-+    #    bb.debug(1, "Removed the following variables from the environment:", ",".join(removed_vars))
-+
-+    return removed_vars
-+
-+
-Index: lib/bb/cooker.py
-===================================================================
---- lib/bb/cooker.py	(revision 4504)
-+++ lib/bb/cooker.py	(working copy)
-@@ -59,6 +59,8 @@
- 
-         self.configuration.data = bb.data.init()
- 
-+    def parseConfiguration(self):
-+
-         for f in self.configuration.file:
-             self.parseConfigurationFile( f )
- 
-Index: bin/bitbake
-===================================================================
---- bin/bitbake	(revision 4460)
-+++ bin/bitbake	(working copy)
-@@ -113,6 +113,19 @@
- 
-     cooker = bb.cooker.BBCooker(configuration)
- 
-+    # Optionally clean up the environment
-+    if 'BB_PRESERVE_ENV' not in os.environ:
-+        if 'BB_ENV_WHITELIST' in os.environ:
-+            good_vars = os.environ['BB_ENV_WHITELIST'].split()
-+        else:
-+            good_vars = bb.utils.preserved_envvars_list()
-+        if 'BB_ENV_EXTRAWHITE' in os.environ:
-+            good_vars.extend(os.environ['BB_ENV_EXTRAWHITE'].split())
-+            print "here %s" % good_vars
-+        bb.utils.filter_environment(good_vars)
-+
-+    cooker.parseConfiguration()
-+
-     if configuration.profile:
-         try:
-             import cProfile as profile
+iD8DBQFINGBfCL1n3lVB9EYRAgN4AJ0aU1hluvgh76/WyMwR9u7XrneHDgCguVys
+1e0yZ08ryOf0f48HOGFUmVU=3D
+=3DkCuy
+-----END PGP SIGNATURE-----
 
 
 
