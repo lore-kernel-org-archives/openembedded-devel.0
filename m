@@ -1,26 +1,34 @@
-Received: from [213.36.80.91] (helo=mail.libertysurf.net)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JysSi-0002iV-A8
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 May 2008 19:50:52 +0200
-Received: from blini.bolloretelecom.eu (62.210.194.121) by
-	mail.libertysurf.net (7.3.118.8)
-	id 482DD26E001E8FBE for openembedded-devel@lists.openembedded.org;
-	Wed, 21 May 2008 20:56:52 +0200
-Received: from [192.168.95.64] (unknown [192.168.95.64])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id 39F1F23E38
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2008 19:48:16 +0200 (CEST)
-Message-ID: <48346060.1030101@bolloretelecom.eu>
-Date: Wed, 21 May 2008 19:48:16 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.0.14eol) Gecko/20080509 Thunderbird/1.5.0.14eol
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.94.2.0
-Subject: oestats: build statistics for OpenEmbedded
+	(envelope-from <rpurdie@rpsys.net>) id 1Jyw3q-0001fS-Sw
+	for openembedded-devel@openembedded.org; Wed, 21 May 2008 23:41:27 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4LLcoGT002445;
+	Wed, 21 May 2008 22:38:50 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 02419-01; Wed, 21 May 2008 22:38:45 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m4LLcfDS002428
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Wed, 21 May 2008 22:38:41 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1211231730.20390.18.camel@dax.rpnet.com>
+References: <200805080215.23729.zecke@selfish.org>
+	<200805081306.37230.zecke@selfish.org>
+	<1210246170.5006.34.camel@dax.rpnet.com>
+	<200805101405.38789.zecke@selfish.org>
+	<1211231730.20390.18.camel@dax.rpnet.com>
+Date: Wed, 21 May 2008 22:38:44 +0100
+Message-Id: <1211405924.5005.9.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: bitbake-dev@lists.berlios.de
+Subject: Re: Creating a pristine environment?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -34,52 +42,218 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2008 17:50:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Wed, 21 May 2008 21:41:27 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Hi all!
+I talked to Holger about the previous patch and he rightly IMO didn't
+like some aspects of it. In the discussion we concluded (I think,
+correct me if I'm wrong!) the best idea was to:
 
-I happy to announce the availability of "oestats", a web application
-for collecting and viewing OpenEmbedded build reports. In keeping with
-OE / bitbake it is written in Python and uses the Django web framework.
+Take the original environment and process it as I proposed cleaning
+completely by default apart from the standard whitelist and allowing
+this behaviour to be overridden with:
 
-A live demo is available at:
+BB_PRESERVE_ENV - if set don't touch the environment
+BB_ENV_WHITELIST - a list of variables to whitelist overriding the default
+BB_ENV_EXTRAWHITE - extra variables to whitelist (not touch)
 
-http://oestats.jerryweb.org/
+Any variables still in the environment after this process are added into
+the data dictionary. The difference is that whilst we used to export
+everything in the original environment when executing shell tasks we now
+will only export anything explicitly marked as an export.
 
-If you want to add your build stats, make sure your copy of OE is up
-to date and add the following to your build/conf/local.conf:
+I ran some tests and various things did break, specifically, PATH went
+missing, devshell was missing some variables and bbimage broke badly. I
+did fix up bbimage but then I decided to remove it entirely, something
+long planned we've just never got around to it. I've added fixes for the
+PATH and devshell issues although devshell could perhaps use some
+further variables.
 
-|INHERITS +=3D "oestats-client"
-OESTATS_SERVER =3D "oestats.jerryweb.org"
-OESTATS_BUILDER =3D "your_nickname"|
+One side effect of this is we can throw the 'matchesenv' flag away which
+might actually give a small parsing speedup.
 
-Fair warning: this is a test server, no promises on availability
-though I'll do my best :)
+So, any further comments?
 
-Source code and setup notes for the server are available at:
-
-http://opensource.bolloretelecom.eu/projects/oestats/
-
-Your feedback and improvements are most welcome!
+I should probably s/BB_PRESERVE_ENV/BB_ENV_PRESERVE/ for consistency.
 
 Cheers,
 
-- --
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Richard
 
-iD8DBQFINGBfCL1n3lVB9EYRAgN4AJ0aU1hluvgh76/WyMwR9u7XrneHDgCguVys
-1e0yZ08ryOf0f48HOGFUmVU=3D
-=3DkCuy
------END PGP SIGNATURE-----
+Index: lib/bb/utils.py
+===================================================================
+--- lib/bb/utils.py	(revision 4517)
++++ lib/bb/utils.py	(working copy)
+@@ -268,3 +268,59 @@
+     for line in open(filename):
+         s.update(line)
+     return s.hexdigest()
++
++def preserved_envvars_list():
++    return [
++        'BBPATH',
++        'BB_PRESERVE_ENV',
++        'BB_ENV_WHITELIST',
++        'BB_ENV_EXTRAWHITE',
++        'COLORTERM',
++        'DBUS_SESSION_BUS_ADDRESS',
++        'DESKTOP_SESSION',
++        'DESKTOP_STARTUP_ID',
++        'DISPLAY',
++        'GNOME_KEYRING_PID',
++        'GNOME_KEYRING_SOCKET',
++        'GPG_AGENT_INFO',
++        'GTK_RC_FILES',
++        'HOME',
++        'LANG',
++        'LOGNAME',
++        'PATH',
++        'PWD',
++        'SESSION_MANAGER',
++        'SHELL',
++        'SSH_AUTH_SOCK',
++        'TERM',
++        'USER',
++        'USERNAME',
++        '_',
++        'XAUTHORITY',
++        'XDG_DATA_DIRS',
++        'XDG_SESSION_COOKIE',
++    ]
++
++def filter_environment(good_vars):
++    """
++    Create a pristine environment for bitbake. This will remove variables that
++    are not known and may influence the build in a negative way.
++    """
++
++    import bb
++
++    removed_vars = []
++    for key in os.environ.keys():
++        if key in good_vars:
++            continue
++        
++        removed_vars.append(key)
++        os.unsetenv(key)
++        del os.environ[key]
++
++    if len(removed_vars):
++        bb.debug(1, "Removed the following variables from the environment:", ",".join(removed_vars))
++
++    return removed_vars
++
++
+Index: lib/bb/data.py
+===================================================================
+--- lib/bb/data.py	(revision 4517)
++++ lib/bb/data.py	(working copy)
+@@ -324,22 +324,16 @@
+         if val != expanded:
+             setVar(key, expanded, alterdata)
+ 
+-import os
+-
+ def inheritFromOS(d):
+     """Inherit variables from the environment."""
+-#   fakeroot needs to be able to set these
+-    non_inherit_vars = [ "LD_LIBRARY_PATH", "LD_PRELOAD" ]
+     for s in os.environ.keys():
+-        if not s in non_inherit_vars:
+-            try:
+-                setVar(s, os.environ[s], d)
+-                setVarFlag(s, 'matchesenv', '1', d)
+-            except TypeError:
+-                pass
++        try:
++            setVar(s, os.environ[s], d)
++        except TypeError:
++            pass
++        os.unsetenv(s)
++        del os.environ[s]
+ 
+-import sys
+-
+ def emit_var(var, o=sys.__stdout__, d = init(), all=False):
+     """Emit a variable to be sourced by a shell."""
+     if getVarFlag(var, "python", d):
+@@ -379,9 +373,6 @@
+         o.write('unset %s\n' % varExpanded)
+         return 1
+ 
+-    if getVarFlag(var, 'matchesenv', d):
+-        return 0
+-
+     val.rstrip()
+     if not val:
+         return 0
+Index: lib/bb/data_smart.py
+===================================================================
+--- lib/bb/data_smart.py	(revision 4517)
++++ lib/bb/data_smart.py	(working copy)
+@@ -149,9 +149,6 @@
+ 
+         if not var in self.dict:
+             self._makeShadowCopy(var)
+-        if self.getVarFlag(var, 'matchesenv'):
+-            self.delVarFlag(var, 'matchesenv')
+-            self.setVarFlag(var, 'export', 1)
+ 
+         # more cookies for the cookie monster
+         if '_' in var:
+Index: lib/bb/cooker.py
+===================================================================
+--- lib/bb/cooker.py	(revision 4517)
++++ lib/bb/cooker.py	(working copy)
+@@ -59,6 +59,10 @@
+ 
+         self.configuration.data = bb.data.init()
+ 
++    def parseConfiguration(self):
++
++        bb.data.inheritFromOS(self.configuration.data)
++
+         for f in self.configuration.file:
+             self.parseConfigurationFile( f )
+ 
+Index: lib/bb/parse/parse_py/ConfHandler.py
+===================================================================
+--- lib/bb/parse/parse_py/ConfHandler.py	(revision 4517)
++++ lib/bb/parse/parse_py/ConfHandler.py	(working copy)
+@@ -118,7 +118,6 @@
+     init(data)
+ 
+     if include == 0:
+-        bb.data.inheritFromOS(data)
+         oldfile = None
+     else:
+         oldfile = bb.data.getVar('FILE', data)
+Index: bin/bitbake
+===================================================================
+--- bin/bitbake	(revision 4517)
++++ bin/bitbake	(working copy)
+@@ -113,6 +113,18 @@
+ 
+     cooker = bb.cooker.BBCooker(configuration)
+ 
++    # Optionally clean up the environment
++    if 'BB_PRESERVE_ENV' not in os.environ:
++        if 'BB_ENV_WHITELIST' in os.environ:
++            good_vars = os.environ['BB_ENV_WHITELIST'].split()
++        else:
++            good_vars = bb.utils.preserved_envvars_list()
++        if 'BB_ENV_EXTRAWHITE' in os.environ:
++            good_vars.extend(os.environ['BB_ENV_EXTRAWHITE'].split())
++        bb.utils.filter_environment(good_vars)
++
++    cooker.parseConfiguration()
++
+     if configuration.profile:
+         try:
+             import cProfile as profile
 
 
 
