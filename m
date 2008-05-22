@@ -1,31 +1,33 @@
-Received: from [209.85.142.185] (helo=ti-out-0910.google.com)
+Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eballetbo@gmail.com>) id 1JzBYt-00013V-Hy
+	(envelope-from <raj.khem@gmail.com>) id 1JzD0c-0004EQ-Ur
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 May 2008 16:14:34 +0200
-Received: by ti-out-0910.google.com with SMTP id d10so64186tib.22
+	Thu, 22 May 2008 17:47:21 +0200
+Received: by wa-out-1112.google.com with SMTP id j37so125256waf.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 May 2008 07:11:46 -0700 (PDT)
+	Thu, 22 May 2008 08:44:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:sender:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references:x-google-sender-auth;
-	bh=dwJEshEgzFezcYToodR2TgXu0t2bW5W0pq817VkcxGg=;
-	b=QgklBjxB1RZyVQkg4aNEdpgnj9zg+qBaS1QXGyNoTr/UKEwLZ3sdWMeVJfBo+a6qObjX3rulzKmbQtnmd/fpuvYd+zLlifZ2RvJnvTZKa+LSlTGYUVtGcvFeGXg3djgSUUrzv/Svlr3OpbrMSAGOeqzlFKnRzafvFVDs/EWzCTA=
+	h=domainkey-signature:received:received:subject:from:to:in-reply-to:references:content-type:date:message-id:mime-version:x-mailer;
+	bh=vPI3P3EHi4HXPY0494BUMgro8flduH8rTDSkBFBtVSY=;
+	b=d3p1xcd2R402vWIFRTA7Jq5sUCf/dW36MUDlhP93UUz0gfrrgGBKfS4YvA6iUumAZGedB32TyLFUe4sfc69lDLsg2yfU+LxE2Ip2UAPTzIFh0wPitdYlyTDArFJitondyfSnVnlUPUCSsM0Oh+74b9dT6barPpfgvFCLAuVaPBA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:sender:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references:x-google-sender-auth;
-	b=ZWRx+q4Pv4XZPdcdLCN+KJ7jr1LWtTIwCAsw5X8LJNywxR0NCj7zatM911lU1h/9JJ7En4Zp0xYE5yYXM6g7wSogi5LWFEnPy/n/7vbluMb/J9aoQod/qkTz5FJBv3jBspSbGQpQF2yEHXG9gM4uxfW03DwT6mmCesUTSPe0TTI=
-Received: by 10.150.84.41 with SMTP id h41mr252530ybb.215.1211465505323;
-	Thu, 22 May 2008 07:11:45 -0700 (PDT)
-Received: by 10.150.181.18 with HTTP; Thu, 22 May 2008 07:11:45 -0700 (PDT)
-Message-ID: <70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
-Date: Thu, 22 May 2008 16:11:45 +0200
-From: "=?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?=" <enric.balletbo@telefonica.net>
-Sender: eballetbo@gmail.com
+	h=subject:from:to:in-reply-to:references:content-type:date:message-id:mime-version:x-mailer;
+	b=TP21oEgn9KgH2TY+zbmbgCQ0MKdQPUc3k/2vcH86FX+QaJuYE19Bwu9C9HSxbJV5bdnB8OqjmoBIgk4loPpBqx9Uj53jtOCkEG1X06L9W8g4S+A+5YrI35tWft1tLzvDXfxTkRQrbW85vRlL9jNhDwLxhWzBOXgkrM7w3ETXXKE=
+Received: by 10.115.106.7 with SMTP id i7mr262461wam.131.1211471072442;
+	Thu, 22 May 2008 08:44:32 -0700 (PDT)
+Received: from ?192.168.1.71? ( [71.146.23.244])
+	by mx.google.com with ESMTPS id z15sm5414965pod.13.2008.05.22.08.44.31
+	(version=SSLv3 cipher=RC4-MD5); Thu, 22 May 2008 08:44:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>
-MIME-Version: 1.0
+In-Reply-To: <70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
 References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>
-X-Google-Sender-Auth: be7fc1bba9218472
-Subject: GCC 4.3 fails to build glibc(-intermediate)
+	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
+Date: Thu, 22 May 2008 08:44:30 -0700
+Message-Id: <1211471070.8550.89.camel@isis>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1 
+Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -39,26 +41,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2008 14:14:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 May 2008 15:47:37 -0000
+X-Groupsio-MsgNum: 5229
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-wCmhkDFpzrIYFUXA5cTC"
 
-SGksCgpJIGhhdmUgdGhlIHNhbWUgcHJvYmxlbSwgYnV0IGF0IHRoaXMgbW9tZW50IEkgZG9uJ3Qg
-aGF2ZSBpZGVhIGFib3V0IHNvbHV0aW9uLgoKUmVnYXJkcywKIEVucmljIEJhbGxldGJvIGkgU2Vy
-cmEKCk9uIFdlZCwgTWF5IDcsIDIwMDggYXQgNzozMyBBTSwgTWF0dGhpanMgdmFuIGRlIFdhdGVy
-Cm1hdHRoaWpzLnZhbi5kZS53YXRlciBhdCBnbWFpbC5jb20gd3JvdGU6Cgo+IEhpLAo+Cj4gSSdt
-IHRyeWluZyB0byBnZXQgYW4gQVJNIEVBQkkgYnVpbGQgYmFzZWQgb24gZ2NjIDQuMyB3b3JraW5n
-LiBJJ20gbm90Cj4gaGF2aW5nIG11Y2ggbHVjayB3aXRoIHRoYXQgc28tZmFyLgo+Cj4gVGhlIGJ1
-aWxkIGZhaWxzIGF0IGdsaWJjLWludGVybmFsICh0cmllZCBib3RoIDIuNi4xIGFuZCAyLjcpIHdp
-dGggYW4KPiBpbnRlcm5hbCBjb21waWxlciBlcnJvcjoKPiAuLi9pY29udi9za2VsZXRvbi5jOiBJ
-biBmdW5jdGlvbiAnX19nY29udl90cmFuc2Zvcm1fdWNzNF9pbnRlcm5hbCc6Cj4gLi4vaWNvbnYv
-c2tlbGV0b24uYzo4MDE6IGludGVybmFsIGNvbXBpbGVyIGVycm9yOiBTZWdtZW50YXRpb24gZmF1
-bHQKPgo+IEFtIEkgbWlzc2luZyBzb21ldGhpbmc/IEFueSBpZGVhcz8KPgo+IFJlZ2FyZHMsCj4K
-PiBNYXR0aGlqcyB2YW4gZGUgV2F0ZXIKPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdAo+IE9w
-ZW5lbWJlZGRlZC1kZXZlbCBhdCBsaXN0cy5vcGVuZW1iZWRkZWQub3JnCj4gaHR0cDovL2xpc3Rz
-LmxpbnV4dG9nby5vcmcvY2dpLWJpbi9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZl
-bAo+CgoKCi0tIApFbnJpYyBCYWxsZXRiw7IgaSBTZXJyYQo=
+--=-wCmhkDFpzrIYFUXA5cTC
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, 2008-05-22 at 16:11 +0200, Enric Balletb=C3=B2 i Serra wrote:
+> Hi,
+>=20
+> I have the same problem, but at this moment I don't have idea about solut=
+ion.
+>=20
+> Regards,
+>  Enric Balletbo i Serra
+>=20
+> On Wed, May 7, 2008 at 7:33 AM, Matthijs van de Water
+> matthijs.van.de.water at gmail.com wrote:
+>=20
+> > Hi,
+> >
+> > I'm trying to get an ARM EABI build based on gcc 4.3 working. I'm not
+> > having much luck with that so-far.
+> >
+> > The build fails at glibc-internal (tried both 2.6.1 and 2.7) with an
+> > internal compiler error:
+> > ../iconv/skeleton.c: In function '__gconv_transform_ucs4_internal':
+> > ../iconv/skeleton.c:801: internal compiler error: Segmentation fault
+> >
+> > Am I missing something? Any ideas?
 
+if you can create a preprocessed file from skeleton.c and commandline
+options to reproduce this ICE that will be helpful.
+
+-Khem
+
+--=-wCmhkDFpzrIYFUXA5cTC
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQBINZTeHnJKy6V6em4RArjOAJsHMxEp7T+c3mN/dKdbMY5YaJM8IQCghi2b
+lI51QMhBprrUztNP8QLePho=
+=1PrH
+-----END PGP SIGNATURE-----
+
+--=-wCmhkDFpzrIYFUXA5cTC--
