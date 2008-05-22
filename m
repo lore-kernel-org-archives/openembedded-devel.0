@@ -1,29 +1,33 @@
-Received: from [213.36.80.91] (helo=mail.libertysurf.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1JzEYr-0000eZ-Nn
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 May 2008 19:26:41 +0200
-Received: from blini.bolloretelecom.eu (62.210.194.121) by
-	mail.libertysurf.net (7.3.118.8)
-	id 482DD1D90025E404 for openembedded-devel@lists.openembedded.org;
-	Thu, 22 May 2008 20:31:04 +0200
-Received: from [192.168.95.168] (unknown [192.168.95.168])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id 6F90023E36
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 May 2008 19:23:57 +0200 (CEST)
-Message-ID: <4835AC2D.1070805@bolloretelecom.eu>
-Date: Thu, 22 May 2008 19:23:57 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.0.14eol) Gecko/20080509 Thunderbird/1.5.0.14eol
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <48346060.1030101@bolloretelecom.eu>
-	<48352F30.1070202@linuxdevelopment.de>
-In-Reply-To: <48352F30.1070202@linuxdevelopment.de>
-X-Enigmail-Version: 0.94.2.0
-Subject: Re: oestats: build statistics for OpenEmbedded
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JzFVA-0007Zo-Mi
+	for openembedded-devel@openembedded.org; Thu, 22 May 2008 20:27:19 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JzFSV-0007sY-SR
+	for openembedded-devel@openembedded.org; Thu, 22 May 2008 18:24:12 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 22 May 2008 18:24:11 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 22 May 2008 18:24:11 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 22 May 2008 20:24:04 +0200
+Message-ID: <g14do2$eur$1@ger.gmane.org>
+References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>
+	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+In-Reply-To: <70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -37,41 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2008 17:26:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Thu, 22 May 2008 18:27:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Enric Balletbò i Serra wrote:
+> I have the same problem, but at this moment I don't have idea about solution.
 
+I am also experiencing similar problems for a spitz build.  The problem
+started to appear about a week ago.
+f2497299e919cb94e12fc8690a709479451e5510 still builds fine.  I think the
+most likely candidates that triggered this problem are to be found among
+the changes to gcc that were made after that revision.  I see changes
+from koen and RP in the commit-ml.  It would be nice if the people who
+understand this stuff took a look to spot a possible regression.  I will
+try and narrow the revision down further.
 
-> Is it possible to sort the buildreports on machine`s and also add
-> which host was used ( i686 or i686-64 ) ? and which target was
-> build ( gpe-image - task-boot ) ???
->
-For now you can filter by the following criteria:
-
-- - build machine (e.g.: http://oestats.jerryweb.org/builders/waffle/)
-- - package (e.g. http://oestats.jerryweb.org/builders/task-boot/)
-
-Custom sorting is not yet implemented.
-
-I will add some other variables like the architecture of the build
-machine ASAP.
-
-Cheers,
-
-- --
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFINawtCL1n3lVB9EYRAv6jAKDeZBxQg6B4APC+4Ga7GWqtL4zIVACdEfwQ
-vHSEY0IaOwFelV8Wv3422hg=3D
-=3DpqPl
------END PGP SIGNATURE-----
+http://oss.leggewie.org/wip/f2497299e919cb94e12fc8690a709479451e5510_vs_HEAD.txt
 
 
 
