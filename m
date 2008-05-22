@@ -1,33 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.233.184.226] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Jz8UH-0006Ba-Ir
-	for openembedded-devel@openembedded.org; Thu, 22 May 2008 12:57:33 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Jz8Rf-0008KA-Ad
-	for openembedded-devel@openembedded.org; Thu, 22 May 2008 10:54:51 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 22 May 2008 10:54:51 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 22 May 2008 10:54:51 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 22 May 2008 12:54:38 +0200
-Message-ID: <g13jdf$b55$1@ger.gmane.org>
-References: <20080521120136.903A91892F8@amethyst.openembedded.net>	<483509EA.4080902@gmx.net>
-	<200805221159.10056.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008051303)
-In-Reply-To: <200805221159.10056.zecke@selfish.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [oe-commits] org.oe.dev cacao: add hg version 8190 and the corresponding cacaoh-native.
+	(envelope-from <bart.cerneels@gmail.com>) id 1Jz8ba-0006S4-Rc
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 May 2008 13:05:06 +0200
+Received: by wr-out-0506.google.com with SMTP id 36so1737676wra.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 May 2008 04:02:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:sender:to:subject:mime-version:content-type:content-transfer-encoding:content-disposition:x-google-sender-auth;
+	bh=Cf7ykWzAMOOYULpJUGKMGFFmhNWBEeJ2cDEZnk34vLk=;
+	b=EYR56PJah1mM4z4sxAPVFLX/jyoFkEGw15uXus6c1xSn6I04Knrf7v39eEt7iaHo/ltQuwrNGtfDinuPZls0oeO3ERTJYSS9K307aDzhjBXmpLkHgMRxw+3m5w0jjTr/CCDmFKwDyA+ZNoTDpM66VFyQhoYCC1ytLnKZHO6SgPc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:sender:to:subject:mime-version:content-type:content-transfer-encoding:content-disposition:x-google-sender-auth;
+	b=vTEnNl8/x6CJbaqC/Pl32PAB294t2f097avA+8HQ5AUJCALhUlj9IK+9YS5mNH+2CHGiRICrz0azFJvH2grFGr6ZTtUkd+MvzmU5LdSiB9K5ZnsypS412syYTw6zOSSo+UdQORJvYEuI5jNQK7GEpUlnQb5C//KJd+RUyB0ghTo=
+Received: by 10.114.150.1 with SMTP id x1mr11947796wad.109.1211454146278;
+	Thu, 22 May 2008 04:02:26 -0700 (PDT)
+Received: by 10.114.74.4 with HTTP; Thu, 22 May 2008 04:02:26 -0700 (PDT)
+Message-ID: <dd7ac1430805220402y7818f2b5l4bd977e727b4317b@mail.gmail.com>
+Date: Thu, 22 May 2008 13:02:26 +0200
+From: "Bart Cerneels" <bart.cerneels@kde.org>
+Sender: bart.cerneels@gmail.com
+To: community@lists.openmoko.org, openmoko-devel@lists.openmoko.org, 
+	openembedded-devel@lists.openembedded.org, 
+	openembedded-users@lists.openembedded.org
+MIME-Version: 1.0
+X-Google-Sender-Auth: e8107f14d55357d4
+Subject: Join the "Embedded and Mobile Day" at Akademy 2008, August 12, Belgium
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,21 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2008 10:57:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 22 May 2008 11:05:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Holger Freyther wrote:
-> On Thursday 22 May 2008 07:51:38 Robert Schuster wrote:
->> Hi John Lee,
->> please use the corresponding date instead of the hg revision number.
->> Reason is that in mercurial revision numbers are local and not equal
->> between different users.
->
-> can one checkout by sha1 hash?
+Hello,
 
-yes, the sha1 is global, the "user friendly" numbers are indeed only local.
+In the time honored tradition of the KDE community we organize special
+side-events during our yearly World Summit.
+A big part of the mind share in the Open Source world the past year
+has gone to Mobile and Embedded platforms; where the technical and
+Freedom aspects seem to favor our preferred software development model
+over proprietary methods. This is the reason why the EmSys research
+group and KDE organize this meeting of interested parties in the
+context of the major community event, Akademy 2008.
 
+The "Embedded and Mobile Day" will feature several talks and a closing
+panel discussion about the achievements and opportunities of Open
+Desktop and other Open Source projects in the Small Form-Factor world.
+The presentations should be oriented towards an audience
+"knowledgeable" about embedded development, not the general KDE
+developers. Meanwhile KDE and other Open Source hackers will be
+testing consumer devices and the desktop applications they are meant
+to interface with during a "plugfest", for which anyone is most
+welcome to provide hardware contributions.
 
+Topics can include, but are in no way limited to:
+   * Embedded Linux
+   * Mobile and integrated GUI's
+   * System Integration
+   * Embedded Development tools and distro's
+   * Innovation based on Open Source and Open Desktop technology
+
+More details on the website at http://akademy.kde.org/events/emmobile.php .
+Visit http://akademy2008.kde.org for info about Akademy 2008.
+
+This is your chance to contribute and share your ideas, project or
+demonstrations by sending a topic proposal to
+akademy-emmobile@lists.denayer.wenk.be before June 16th.
+
+Feel free to forward this email to as many people as possible.
+
+Bart Cerneels
+bart.cerneels@kde.org
+irc: Stecchino on freenode
+Akademy 2008 organizer
+First point of contact for everything venue related
+cellphone +32496100633
 
 
