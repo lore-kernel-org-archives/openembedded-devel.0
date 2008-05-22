@@ -1,33 +1,40 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [38.98.186.166] (helo=smtp.01.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JzFVA-0007Zo-Mi
-	for openembedded-devel@openembedded.org; Thu, 22 May 2008 20:27:19 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JzFSV-0007sY-SR
-	for openembedded-devel@openembedded.org; Thu, 22 May 2008 18:24:12 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 22 May 2008 18:24:11 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ken@buglabs.net>) id 1JzI0r-0003bS-Rr
+	for openembedded-devel@openembedded.org; Thu, 22 May 2008 23:07:50 +0200
+Received: from asav-2.01.com (localhost.localdomain [127.0.0.1])
+	by asav-2.01.com (8.13.1/8.13.1) with SMTP id m4ML52K1005210
 	for <openembedded-devel@openembedded.org>;
-	Thu, 22 May 2008 18:24:11 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 22 May 2008 16:05:02 -0500
+Received: from smtp-2.01.com (smtp-2.01.com [38.98.186.158])
+	by asav-2.01.com (asav-2.01.com [10.25.1.12])
+	id k4LG520360420608EZ ret-id none; Thu, 22 May 2008 16:05:02 -0500
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by smtp-2.01.com (Postfix) with ESMTP id 330C11AD3C1
+	for <openembedded-devel@openembedded.org>;
+	Thu, 22 May 2008 16:05:02 -0500 (CDT)
+Received: from smtp-2.01.com ([127.0.0.1])
+	by localhost (smtp-2.01.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id LmyG7qSsob3K for <openembedded-devel@openembedded.org>;
+	Thu, 22 May 2008 16:05:02 -0500 (CDT)
+Received: from [192.168.20.184] (ip-64-32-229-194.dsl.nyc.megapath.net
+	[64.32.229.194]) by smtp-2.01.com (Postfix) with ESMTP id EBA591AD390
+	for <openembedded-devel@openembedded.org>;
+	Thu, 22 May 2008 16:05:01 -0500 (CDT)
+Message-ID: <4835DFFD.80702@buglabs.net>
+Date: Thu, 22 May 2008 17:05:01 -0400
+From: Ken Gilmer <ken@buglabs.net>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080518)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 22 May 2008 20:24:04 +0200
-Message-ID: <g14do2$eur$1@ger.gmane.org>
-References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>
-	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
+References: <mailman.5128.1211185830.10988.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.5128.1211185830.10988.openembedded-devel@lists.openembedded.org>
+X-FSL-MailScanner-Information: Please contact postmaster@01.com for more
+	information
+X-FSL-MailScanner: Found to be clean
+X-FSL-MailScanner-SpamCheck: 
+X-FSL-MailScanner-From: ken@buglabs.net
+Subject: Kernel Dependency Issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,23 +48,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2008 18:27:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 May 2008 21:07:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Enric Balletbò i Serra wrote:
-> I have the same problem, but at this moment I don't have idea about solution.
 
-I am also experiencing similar problems for a spitz build.  The problem
-started to appear about a week ago.
-f2497299e919cb94e12fc8690a709479451e5510 still builds fine.  I think the
-most likely candidates that triggered this problem are to be found among
-the changes to gcc that were made after that revision.  I see changes
-from koen and RP in the commit-ml.  It would be nice if the people who
-understand this stuff took a look to spot a possible regression.  I will
-try and narrow the revision down further.
+Hello :)
 
-http://oss.leggewie.org/wip/f2497299e919cb94e12fc8690a709479451e5510_vs_HEAD.txt
+  I've been having an issue with dependency resolution.  I have taken
+stock org.openembedded.stable from last week, and added my own machine
+and kernel recipie.  My conf/local references my machine:
 
+> MACHINE = "bug"
+
+My machine specifies my preferred kernel:
+
+> PREFERRED_PROVIDER_virtual/kernel = "linux-bug"
+
+And my kernel recipie inherets from kernel such that the PROVIDES
+variable is set.  Despite this, I get this message when trying to build
+the kernel:
+
+kgilmer@t61 ~/dev/sandbox/oe-stable $ bitbake linux
+NOTE: Out of date cache found, rebuilding...
+NOTE: Handling BitBake files: - (4978/4978) [100 %]
+NOTE: Parsing finished. 0 cached, 4738 parsed, 240 skipped, 0 masked.
+NOTE: build 200805221644: started
+
+OE Build Configuration:
+BB_VERSION     = "1.8.11"
+OE_REVISION    = "0a63e1d7756e807c77d989e9473d42567671c819"
+TARGET_ARCH    = "arm"
+TARGET_OS      = "linux-gnueabi"
+MACHINE        = "bug"
+DISTRO         = "angstrom"
+DISTRO_VERSION = "2007.12-r14"
+TARGET_FPU     = "soft"
+
+NOTE: Resolving any missing task queue dependencies
+NOTE: preferred version 2.5 of glibc not available (for item
+virtual/arm-angstrom-linux-gnueabi-libc-for-gcc)
+NOTE: Preparing runqueue
+ERROR: Multiple .bb files are due to be built which each provide
+virtual/kernel
+(/home/kgilmer/dev/sandbox/oe-stable/org.openembedded.stable/packages/linux/linux_2.6.21.bb
+/home/kgilmer/dev/sandbox/oe-stable/org.openembedded.stable/packages/linux/linux-bug_2.6.19.2.bb).
+ This usually means one provides something the other doesn't and should.
+...
+
+
+I've asked some questions on IRC and thanks to the folks on there for
+giving me suggestions.  Running with "-DDD" or getting the dependency
+tree "-g" does not seem to tell me anything on how to determine what I'm
+missing.  A similar machine/kernel configuration works in Poky/Pinky
+3.1.  What could I be missing?
+
+TIA
+ken
 
 
