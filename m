@@ -1,40 +1,34 @@
-Received: from [38.98.186.166] (helo=smtp.01.com)
+Received: from [209.85.132.243] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ken@buglabs.net>) id 1JzI0r-0003bS-Rr
-	for openembedded-devel@openembedded.org; Thu, 22 May 2008 23:07:50 +0200
-Received: from asav-2.01.com (localhost.localdomain [127.0.0.1])
-	by asav-2.01.com (8.13.1/8.13.1) with SMTP id m4ML52K1005210
+	(envelope-from <raj.khem@gmail.com>) id 1JzKmw-0005ud-9s
+	for openembedded-devel@openembedded.org; Fri, 23 May 2008 02:05:39 +0200
+Received: by an-out-0708.google.com with SMTP id b21so74001ana.6
 	for <openembedded-devel@openembedded.org>;
-	Thu, 22 May 2008 16:05:02 -0500
-Received: from smtp-2.01.com (smtp-2.01.com [38.98.186.158])
-	by asav-2.01.com (asav-2.01.com [10.25.1.12])
-	id k4LG520360420608EZ ret-id none; Thu, 22 May 2008 16:05:02 -0500
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by smtp-2.01.com (Postfix) with ESMTP id 330C11AD3C1
-	for <openembedded-devel@openembedded.org>;
-	Thu, 22 May 2008 16:05:02 -0500 (CDT)
-Received: from smtp-2.01.com ([127.0.0.1])
-	by localhost (smtp-2.01.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LmyG7qSsob3K for <openembedded-devel@openembedded.org>;
-	Thu, 22 May 2008 16:05:02 -0500 (CDT)
-Received: from [192.168.20.184] (ip-64-32-229-194.dsl.nyc.megapath.net
-	[64.32.229.194]) by smtp-2.01.com (Postfix) with ESMTP id EBA591AD390
-	for <openembedded-devel@openembedded.org>;
-	Thu, 22 May 2008 16:05:01 -0500 (CDT)
-Message-ID: <4835DFFD.80702@buglabs.net>
-Date: Thu, 22 May 2008 17:05:01 -0400
-From: Ken Gilmer <ken@buglabs.net>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080518)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <mailman.5128.1211185830.10988.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.5128.1211185830.10988.openembedded-devel@lists.openembedded.org>
-X-FSL-MailScanner-Information: Please contact postmaster@01.com for more
-	information
-X-FSL-MailScanner: Found to be clean
-X-FSL-MailScanner-SpamCheck: 
-X-FSL-MailScanner-From: ken@buglabs.net
-Subject: Kernel Dependency Issue
+	Thu, 22 May 2008 17:02:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:subject:from:to:cc:in-reply-to:references:content-type:date:message-id:mime-version:x-mailer;
+	bh=giFSQCkasczMhoq632ViqAQRzu1gRG6zjBGYFWjoV9c=;
+	b=BlSYwf9J6MoSfmFrL7i5GFAUswPczE+E8Yq0jzRnIYwpDu/chMK9unjBrcPJvSjyuQPryoC6/318avRkUBhKcIfuCbW/8jFOOxPvmPqj+xZMDVCGxRnU0qgaTJOG4qau+3j//VylO2HnRFRbjrn0zkDmIe9q7Ss15WAKXAWIxeI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=subject:from:to:cc:in-reply-to:references:content-type:date:message-id:mime-version:x-mailer;
+	b=lyTNIyjSr8GEv1LrueBzMr2Q6ribsWsPAoTBX3Qoe1o9Erh5zQGaYj/5L3dvtZFpSLX/VdtRY5WRgclx68M6g+MfcycW4uhiNKhbjBdmC//EBalENGl3KiifWgenIXyvuSE71syIi3JL/l7n5ONb9YIps64WfG/U6zu54H4+pYU=
+Received: by 10.143.160.6 with SMTP id m6mr303403wfo.162.1211500972727;
+	Thu, 22 May 2008 17:02:52 -0700 (PDT)
+Received: from ?192.168.1.71? ( [71.146.23.244])
+	by mx.google.com with ESMTPS id 32sm7640872wfc.16.2008.05.22.17.02.51
+	(version=SSLv3 cipher=RC4-MD5); Thu, 22 May 2008 17:02:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <g14do2$eur$1@ger.gmane.org>
+References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>
+	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
+	<g14do2$eur$1@ger.gmane.org>
+Date: Thu, 22 May 2008 17:02:50 -0700
+Message-Id: <1211500970.10806.14.camel@isis>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1 
+Cc: openembedded-devel@openembedded.org
+Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -48,62 +42,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2008 21:07:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 May 2008 00:05:39 -0000
+X-Groupsio-MsgNum: 5233
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-6JgUfnVwTO8ctwOzVKdq"
+
+--=-6JgUfnVwTO8ctwOzVKdq
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2008-05-22 at 20:24 +0200, Rolf Leggewie wrote:
+> Enric Balletb=C3=B2 i Serra wrote:
+> > I have the same problem, but at this moment I don't have idea about sol=
+ution.
+>=20
+> I am also experiencing similar problems for a spitz build.  The problem
+> started to appear about a week ago.
+> f2497299e919cb94e12fc8690a709479451e5510 still builds fine.  I think the
+> most likely candidates that triggered this problem are to be found among
+> the changes to gcc that were made after that revision.  I see changes
+> from koen and RP in the commit-ml.  It would be nice if the people who
+> understand this stuff took a look to spot a possible regression.  I will
+> try and narrow the revision down further.
+>=20
+> http://oss.leggewie.org/wip/f2497299e919cb94e12fc8690a709479451e5510_vs_H=
+EAD.txt
+
+Looking at this file. I dont see any obvious problem unless you are
+using armv7a and angstrom-2008.1
+
+in this changeset the preferred gcc version has been changed from=20
+4.2.3+csl-arm-2008q1-126 to 4.2.1+csl-arm-2007q3-53
+
+Otherwise these changes look only like new gcc recipe has been added and
+no common code is modified which could affect gcc 4.3
+
+glibc changes also seems specific to armv7a
 
 
-Hello :)
 
-  I've been having an issue with dependency resolution.  I have taken
-stock org.openembedded.stable from last week, and added my own machine
-and kernel recipie.  My conf/local references my machine:
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-> MACHINE = "bug"
+--=-6JgUfnVwTO8ctwOzVKdq
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: This is a digitally signed message part
 
-My machine specifies my preferred kernel:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
 
-> PREFERRED_PROVIDER_virtual/kernel = "linux-bug"
+iD8DBQBINgmqHnJKy6V6em4RAq8LAJ9aYBgqZ88LKnhzkRX/aOrP/7SE6gCfWau6
+bJWy2LOboVO4xXsEHMiaIH4=
+=Kaqb
+-----END PGP SIGNATURE-----
 
-And my kernel recipie inherets from kernel such that the PROVIDES
-variable is set.  Despite this, I get this message when trying to build
-the kernel:
-
-kgilmer@t61 ~/dev/sandbox/oe-stable $ bitbake linux
-NOTE: Out of date cache found, rebuilding...
-NOTE: Handling BitBake files: - (4978/4978) [100 %]
-NOTE: Parsing finished. 0 cached, 4738 parsed, 240 skipped, 0 masked.
-NOTE: build 200805221644: started
-
-OE Build Configuration:
-BB_VERSION     = "1.8.11"
-OE_REVISION    = "0a63e1d7756e807c77d989e9473d42567671c819"
-TARGET_ARCH    = "arm"
-TARGET_OS      = "linux-gnueabi"
-MACHINE        = "bug"
-DISTRO         = "angstrom"
-DISTRO_VERSION = "2007.12-r14"
-TARGET_FPU     = "soft"
-
-NOTE: Resolving any missing task queue dependencies
-NOTE: preferred version 2.5 of glibc not available (for item
-virtual/arm-angstrom-linux-gnueabi-libc-for-gcc)
-NOTE: Preparing runqueue
-ERROR: Multiple .bb files are due to be built which each provide
-virtual/kernel
-(/home/kgilmer/dev/sandbox/oe-stable/org.openembedded.stable/packages/linux/linux_2.6.21.bb
-/home/kgilmer/dev/sandbox/oe-stable/org.openembedded.stable/packages/linux/linux-bug_2.6.19.2.bb).
- This usually means one provides something the other doesn't and should.
-...
-
-
-I've asked some questions on IRC and thanks to the folks on there for
-giving me suggestions.  Running with "-DDD" or getting the dependency
-tree "-g" does not seem to tell me anything on how to determine what I'm
-missing.  A similar machine/kernel configuration works in Poky/Pinky
-3.1.  What could I be missing?
-
-TIA
-ken
-
-
+--=-6JgUfnVwTO8ctwOzVKdq--
