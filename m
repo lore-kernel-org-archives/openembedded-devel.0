@@ -1,33 +1,16 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [207.193.159.253] (helo=lngw02.BJSERVICES.COM)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1JzQvr-0002o2-CC
-	for openembedded-devel@openembedded.org; Fri, 23 May 2008 08:39:15 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1JzQtA-0005Ax-5a
-	for openembedded-devel@openembedded.org; Fri, 23 May 2008 06:36:28 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 23 May 2008 06:36:28 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 23 May 2008 06:36:28 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 23 May 2008 08:36:23 +0200
-Message-ID: <g15ol4$1kd$1@ger.gmane.org>
-References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>
-	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
+	(envelope-from <Frank_Putnam@bjservices.com>) id 1JzU6z-0001TA-ND
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 May 2008 12:02:58 +0200
+From: Frank_Putnam@bjservices.com
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <OFA6A0E677.BBA11DE6-ON86257452.0036DF23-86257452.0036DF23@BJSERVICES.COM>
+Date: Fri, 23 May 2008 04:59:20 -0500
+X-MIMETrack: Serialize by Router on LnGW02/BJSUSA/BJSERVICES(Release
+	6.5.6FP2|October 17, 2007) at 05/23/2008 04:59:24
+MIME-Version: 1.0
+Subject: Frank Putnam is out of the office.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,12 +24,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 May 2008 06:39:15 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 May 2008 10:02:58 -0000
+Content-type: text/plain; charset=US-ASCII
 
-Let's continue this discussion in
-http://bugs.openembedded.net/show_bug.cgi?id=4288
+
+I will be out of the office starting  05/23/2008 and will not return until
+05/27/2008.
+
+I will respond to your message when I return.
 
 
 
