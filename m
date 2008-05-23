@@ -1,16 +1,30 @@
-Received: from [207.193.159.253] (helo=lngw02.BJSERVICES.COM)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Frank_Putnam@bjservices.com>) id 1JzU6z-0001TA-ND
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 May 2008 12:02:58 +0200
-From: Frank_Putnam@bjservices.com
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <OFA6A0E677.BBA11DE6-ON86257452.0036DF23-86257452.0036DF23@BJSERVICES.COM>
-Date: Fri, 23 May 2008 04:59:20 -0500
-X-MIMETrack: Serialize by Router on LnGW02/BJSUSA/BJSERVICES(Release
-	6.5.6FP2|October 17, 2007) at 05/23/2008 04:59:24
-MIME-Version: 1.0
-Subject: Frank Putnam is out of the office.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1JzV7Q-00083q-Cw
+	for openembedded-devel@openembedded.org; Fri, 23 May 2008 13:07:29 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1JzV4c-00021A-T0
+	for openembedded-devel@openembedded.org; Fri, 23 May 2008 11:04:34 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 23 May 2008 11:04:34 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 23 May 2008 11:04:34 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 23 May 2008 13:04:22 +0200
+Message-ID: <g168bn$lij$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a2pre (Macintosh/2008051303)
+Sender: news <news@ger.gmane.org>
+Subject: OEstats test deployment on amethyst
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -24,14 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 May 2008 10:02:58 -0000
-Content-type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 23 May 2008 11:07:32 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+Hi,
 
-I will be out of the office starting  05/23/2008 and will not return until
-05/27/2008.
+We are working on an official OEstats server for the oe project and have 
+set up a testing server at:
 
-I will respond to your message when I return.
+http://amethyst.openembedded.net:8000
+
+You can have your builder report to there by putting:
+
+INHERIT += "oestats-client"
+OESTATS_SERVER = "amethyst.openembedded.net:8000"
+OESTATS_BUILDER = "your name"
+
+in your local.conf. If you inherit seppuku _before_ oestats-client it 
+will include the bugnumber as well:
+
+http://amethyst.openembedded.net:8000/packages/apex-env/
+
+The server is currently using the django standalone mode + sqlite3, but 
+will move to apache + postgresql in the near future.
+
+regards,
+
+Koen
 
 
 
