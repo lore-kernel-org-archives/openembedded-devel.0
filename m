@@ -1,22 +1,30 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1K0dqI-0007RG-FZ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 May 2008 16:38:30 +0200
-Received: from andromeda (e180149017.adsl.alicedsl.de [85.180.149.17])
-	by drlauer-research.com (Postfix) with ESMTP id CA08C584C88
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 16:36:07 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 May 2008 16:35:11 +0200
-User-Agent: KMail/1.9.9
-References: <483AA611.1040008@nospam.arcornews.de>
-In-Reply-To: <483AA611.1040008@nospam.arcornews.de>
-MIME-Version: 1.0
-Message-Id: <200805261635.11585.mickey@vanille-media.de>
-Subject: Re: RFC: RW for Paul Eggleton
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1K0hGT-0004d8-1m
+	for openembedded-devel@openembedded.org; Mon, 26 May 2008 20:17:45 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1K0hDE-0002XP-Df
+	for openembedded-devel@openembedded.org; Mon, 26 May 2008 18:14:24 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 26 May 2008 18:14:24 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 26 May 2008 18:14:24 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 26 May 2008 20:14:18 +0200
+Message-ID: <g1eulp$skn$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+Sender: news <news@ger.gmane.org>
+Subject: RFC: restart wiki from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -30,18 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2008 14:38:30 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 26 May 2008 18:17:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Actually I'm surprised -- I thought he had commit access already.
+Hi,
 
-Have him send monotone and ssh pubkeys to me and koen.
+the openembedded website is in rather bad shape lately.  This includes
+the wiki which has both technical and content problems.  I suggest to
+start anew.
 
-:M:
--- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+I'd like to go with mediawiki instead this time for the simple reason
+that there are more of us who are actually familiar with this software
+both from an admin and a user perspective.  Mediawiki was the software
+for the OZ wiki which at its time wasn't doing too badly.
+
+Whatever we do, I think we should not allow the current state to exist
+much longer.
+
+Regards
+
+Rolf
+
 
 
