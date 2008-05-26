@@ -1,23 +1,21 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1K0daL-00070O-QY
+	(envelope-from <mickey@vanille-media.de>) id 1K0dqI-0007RG-FZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 May 2008 16:22:01 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1K0e6S-0005Wh-F8
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 May 2008 16:55:12 +0200
-Message-ID: <483AC6C5.7050806@kernelconcepts.de>
-Date: Mon, 26 May 2008 16:18:45 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-MIME-Version: 1.0
+	Mon, 26 May 2008 16:38:30 +0200
+Received: from andromeda (e180149017.adsl.alicedsl.de [85.180.149.17])
+	by drlauer-research.com (Postfix) with ESMTP id CA08C584C88
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 May 2008 16:36:07 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 May 2008 16:35:11 +0200
+User-Agent: KMail/1.9.9
 References: <483AA611.1040008@nospam.arcornews.de>
 In-Reply-To: <483AA611.1040008@nospam.arcornews.de>
-X-Enigmail-Version: 0.95.0
+MIME-Version: 1.0
+Message-Id: <200805261635.11585.mickey@vanille-media.de>
 Subject: Re: RFC: RW for Paul Eggleton
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -32,30 +30,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2008 14:22:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 26 May 2008 14:38:30 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+Actually I'm surprised -- I thought he had commit access already.
 
-Rolf Leggewie schrieb:
-> for quite some time, I have been doing a number of commits for Paul
-> 'bluelightning' Eggleton.  He maintains opie upstream which he also very
-> actively supports for us in OE.  I think he should be able to do that by
-> himself.
+Have him send monotone and ssh pubkeys to me and koen.
 
-+1 from me
-
-Greetings
-
-Florian
-
+:M:
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
