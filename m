@@ -1,30 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [69.17.117.8] (helo=mail6.sea5.speakeasy.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K0hGT-0004d8-1m
-	for openembedded-devel@openembedded.org; Mon, 26 May 2008 20:17:45 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K0hDE-0002XP-Df
-	for openembedded-devel@openembedded.org; Mon, 26 May 2008 18:14:24 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 26 May 2008 18:14:24 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 26 May 2008 18:14:24 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 26 May 2008 20:14:18 +0200
-Message-ID: <g1eulp$skn$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-Sender: news <news@ger.gmane.org>
-Subject: RFC: restart wiki from scratch
+	(envelope-from <erik@hovland.org>) id 1K0hQN-0001e1-Rf
+	for openembedded-devel@openembedded.org; Mon, 26 May 2008 20:28:00 +0200
+Received: (qmail 3272 invoked from network); 26 May 2008 18:24:42 -0000
+Received: from dsl092-045-201.lax1.dsl.speakeasy.net (HELO speakeasy.net)
+	([66.92.45.201]) (envelope-sender <erik@hovland.org>)
+	by mail6.sea5.speakeasy.net (qmail-ldap-1.03) with SMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	26 May 2008 18:24:42 -0000
+Received: by speakeasy.net (nbSMTP-1.00) for uid 1000
+	erik@hovland.org; Mon, 26 May 2008 11:24:42 -0700 (PDT)
+Date: Mon, 26 May 2008 11:24:36 -0700
+From: Erik Hovland <erik@hovland.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080526182436.GH14494@hovland.org>
+References: <483AA611.1040008@nospam.arcornews.de>
+MIME-Version: 1.0
+In-Reply-To: <483AA611.1040008@nospam.arcornews.de>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Cc: openembedded-devel@openembedded.org
+Subject: Re: RFC: RW for Paul Eggleton
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -38,27 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2008 18:17:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 May 2008 18:28:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
+On Mon, May 26, 2008 at 01:59:13PM +0200, Rolf Leggewie wrote:
+> Hi,
+> 
+> for quite some time, I have been doing a number of commits for Paul
+> 'bluelightning' Eggleton.  He maintains opie upstream which he also very
+> actively supports for us in OE.  I think he should be able to do that by
+> himself.
+> 
+> Some of his patches to OE (I am not sure, I always used --author):
+> http://cia.vc/stats/author/bluelightning
+> 
+> Paul's activity in the bug tracker:
+> http://tinyurl.com/5nr9ow
 
-the openembedded website is in rather bad shape lately.  This includes
-the wiki which has both technical and content problems.  I suggest to
-start anew.
+I know I am a very quiet OE person. But I second Rolf's request. Paul is
+a competent and level headed developer.
 
-I'd like to go with mediawiki instead this time for the simple reason
-that there are more of us who are actually familiar with this software
-both from an admin and a user perspective.  Mediawiki was the software
-for the OZ wiki which at its time wasn't doing too badly.
+E
 
-Whatever we do, I think we should not allow the current state to exist
-much longer.
-
-Regards
-
-Rolf
+-- 
+Erik Hovland
+mail: erik@hovland.org
+web: http://hovland.org/
+PGP/GPG public key available on request
 
 
 
