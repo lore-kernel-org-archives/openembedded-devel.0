@@ -1,30 +1,30 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K0l9V-0004BD-Hy
-	for openembedded-devel@openembedded.org; Tue, 27 May 2008 00:26:49 +0200
+	id 1K0lVf-0004w6-QU
+	for openembedded-devel@openembedded.org; Tue, 27 May 2008 00:49:43 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K0l6H-0005X8-D7
-	for openembedded-devel@openembedded.org; Mon, 26 May 2008 22:23:29 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1K0lSN-0006rg-5E
+	for openembedded-devel@openembedded.org; Mon, 26 May 2008 22:46:19 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 26 May 2008 22:23:29 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Mon, 26 May 2008 22:46:19 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 26 May 2008 22:23:29 +0000
+	Mon, 26 May 2008 22:46:19 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 27 May 2008 00:23:19 +0200
-Message-ID: <g1fd8n$cl9$1@ger.gmane.org>
-References: <g1eulp$skn$1@ger.gmane.org>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 27 May 2008 00:46:01 +0200
+Message-ID: <g1fej8$fv9$1@ger.gmane.org>
+References: <g1eulp$skn$1@ger.gmane.org> <g1fd8n$cl9$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008052003)
-In-Reply-To: <g1eulp$skn$1@ger.gmane.org>
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+In-Reply-To: <g1fd8n$cl9$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
 Subject: Re: RFC: restart wiki from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,37 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2008 22:26:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 26 May 2008 22:49:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie wrote:
-> Hi,
->
-> the openembedded website is in rather bad shape lately.  This includes
-> the wiki which has both technical and content problems.  I suggest to
-> start anew.
->
-> I'd like to go with mediawiki instead this time for the simple reason
-> that there are more of us who are actually familiar with this software
-> both from an admin and a user perspective.  Mediawiki was the software
-> for the OZ wiki which at its time wasn't doing too badly.
->
-> Whatever we do, I think we should not allow the current state to exist
-> much longer.
+Hi Koen,
 
-Wouldn't it be better to switch the complete website to something like 
-ikiwiki[1]? That way every developer has the complete site and history 
-available offline for editing and non-developers can edit it using their 
-webbrowsers. Both http://monotone.ca/ and http://cairographics.org/ are 
-very happy after their transition to ikiwiki.
+Koen Kooi wrote:
+> Wouldn't it be better to switch the complete website to something like
+> ikiwiki[1]?
 
-regards,
+Thank you for the suggestion.  I admit, I have never before heard about
+ikiwiki.  Having offline editing capabilities certainly sounds
+interesting.  But a quick look around google suggests that spam
+protection is hard to come by.  If that is the case, I don't think it
+would be a good choice for that reason alone.
 
-Koen
+On the other hand, a really quick google scan (just skimming the results
+without actually visiting the pages) of "mediawiki offline OR git"
+indicates that others have thought about using mediawiki offline.  Going
+with the biggest project here will likely open up the biggest pool of
+plugins, tweaks, etc.  Possibly including an offline or SCM integration.
 
-[1] ikiwiki has mtn/svn/hg/git backends, so we can keep it in our 
-scm-du-jour.
+Regards
+
+Rolf
 
 
 
