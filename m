@@ -1,45 +1,21 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefano.regno@spesonline.com>) id 1K0bfK-0005HL-FI
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 May 2008 14:19:02 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 385B595B0F
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 14:15:48 +0200 (CEST)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 09552-01-10 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 14:15:48 +0200 (CEST)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 1C06595A34
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 14:15:48 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id D7A4D1D945D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 14:15:47 +0200 (CEST)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 07927-01-3 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 14:15:47 +0200 (CEST)
-Received: from [192.168.1.162]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 3146F1D945B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 14:15:46 +0200 (CEST)
-Message-ID: <483AAA04.8040406@spesonline.com>
-Date: Mon, 26 May 2008 14:16:04 +0200
-From: Stefano Regno <stefano.regno@spesonline.com>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-MIME-Version: 1.0
+	(envelope-from <openembedded@haerwu.biz>) id 1K0cIn-0002nY-AV
+	for openembedded-devel@openembedded.org; Mon, 26 May 2008 14:59:49 +0200
+Received: (qmail 22834 invoked by uid 813007); 26 May 2008 12:56:33 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO maluch.local)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 26 May 2008 12:56:33 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 May 2008 14:56:06 +0200
+User-Agent: KMail/1.9.9
 References: <483AA611.1040008@nospam.arcornews.de>
 In-Reply-To: <483AA611.1040008@nospam.arcornews.de>
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-Subject: sh7763 problem
+MIME-Version: 1.0
+Message-Id: <200805261456.24460.openembedded@haerwu.biz>
+Subject: Re: RFC: RW for Paul Eggleton
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -53,34 +29,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2008 12:19:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 May 2008 12:59:49 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi all.
-Im tryng to configure my renesas SH7763, but i have same problem with 
-frame buffer driver could sameone if there is a fix around to solve this 
-problem? the motherboard have 2 output one VGA and another on the 
-touchscreen  thet is a philips  but if i mount the module about 
-framebuff i see the output regards VGA but the touchscreen is white 
-could sameone tell me if it is a driver's problem or probably an 
-hardware problem how i suppose?
-
-Tnx
-
--- 
-Peace cannot be kept by force; it can only be achieved by understanding -
-> _________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Dnia Monday 26 of May 2008, Rolf Leggewie napisa=B3:
+> Hi,
 >
->
->   
+> for quite some time, I have been doing a number of commits for Paul
+> 'bluelightning' Eggleton.  He maintains opie upstream which he also
+> very actively supports for us in OE.  I think he should be able to do
+> that by himself.
 
+I vote to give him R/W permissions to OpenEmbedded.
 
--- 
-Peace cannot be kept by force; it can only be achieved by understanding --Albert Einstein
 
 
 
