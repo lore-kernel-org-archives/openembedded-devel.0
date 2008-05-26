@@ -1,28 +1,32 @@
-Received: from [209.85.132.241] (helo=an-out-0708.google.com)
+Received: from [209.85.198.247] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1K0jlV-00008v-B2
+	(envelope-from <raj.khem@gmail.com>) id 1K0k2p-0000cu-6A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 May 2008 22:57:57 +0200
-Received: by an-out-0708.google.com with SMTP id b38so446455ana.83
+	Mon, 26 May 2008 23:15:51 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so2554215rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 13:54:39 -0700 (PDT)
+	Mon, 26 May 2008 14:12:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=SOurGp7n2E+KnKFhmBVkn5SecHE2qKVT3TO1TwgvP0E=;
-	b=S/MKcbciT9y5bBQ9JGaIwc5C7whIfKDfjoxqdej9XRisWcFhE++MFVcjKSrQehv5IRWKa3EgW19wX6g1Pu7ew3BXWPQyEtrOW6e1q36DRdIqFR997DwKBF8BgD4FessgU0dL5x41/N7LB5V1UJn+Cy+WuF8jsFfKPIReg7FJgf8=
+	h=domainkey-signature:received:received:subject:from:to:in-reply-to:references:content-type:date:message-id:mime-version:x-mailer;
+	bh=llm7fH23wpeR6lMEf71Q6jIKFoTiu/Vvt4qO+3ihSII=;
+	b=nqrUt+f65Z73YbiGvA7gmJN7N1EOJsAn0GBfztV+phWa4hAjCVb9wmZq8o8snn/SgxTgvAzM3GRxphC0nzSprrKgSrGHtT+NIe+8O1tlHfsAXW5oYHpIaO9pn9UUQsk5yR0DUWg4JTr86FtyeRad91UlGmFZj98lxYlS7CV1GvE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=VZ6CTiEos+rI3QIT1g/Oa5lfc4qrOUWOky7zyGJ5v1ZYTEgOHDNLsDUSXpR4ZezJ16HiEfvDv3h7DdOX4haiN5NxmQNRimg5zHsfMmJZah7MAKe1c1kDbFa4iWjlORk69IkeODFTJ9pXWf57b827B/9lpOqSvsyvxqJMWHvS4xg=
-Received: by 10.101.67.15 with SMTP id u15mr730428ank.19.1211835279510;
-	Mon, 26 May 2008 13:54:39 -0700 (PDT)
-Received: by 10.100.189.9 with HTTP; Mon, 26 May 2008 13:54:39 -0700 (PDT)
-Message-ID: <c384c5ea0805261354i1e72a973i3efbb20681e00f03@mail.gmail.com>
-Date: Mon, 26 May 2008 22:54:39 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	h=subject:from:to:in-reply-to:references:content-type:date:message-id:mime-version:x-mailer;
+	b=NeGGpLAWFgIhhYG5nOyKQp1FJgw5gpTV+7mhQsUvOANdqm8gGDfNg3VOynEY1W97aBiprir6+o/qY8OvU8cBbRChn77DaHl6LAWbW3m8SMibwoRzLt0CdiAzl+sEwYRhK9VF0zDS/O6tUlpsUKVyADWWtu1dW7ZDUdNzQmrhGT0=
+Received: by 10.141.63.20 with SMTP id q20mr181859rvk.258.1211836352390;
+	Mon, 26 May 2008 14:12:32 -0700 (PDT)
+Received: from ?192.168.1.71? ( [71.146.2.3])
+	by mx.google.com with ESMTPS id g22sm10821625rvb.7.2008.05.26.14.12.31
+	(version=SSLv3 cipher=RC4-MD5); Mon, 26 May 2008 14:12:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1211780824.10806.52.camel@isis>
-MIME-Version: 1.0
+In-Reply-To: <c384c5ea0805261354i1e72a973i3efbb20681e00f03@mail.gmail.com>
 References: <1211780824.10806.52.camel@isis>
+	<c384c5ea0805261354i1e72a973i3efbb20681e00f03@mail.gmail.com>
+Date: Mon, 26 May 2008 14:12:30 -0700
+Message-Id: <1211836350.10806.54.camel@isis>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1 
 Subject: Re: [PATCH] glibc staging puts .a files in /lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -37,36 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2008 20:57:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 26 May 2008 21:15:51 -0000
+X-Groupsio-MsgNum: 5253
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="=-YbKdZadKOidrJsVmrlI8"
 
-Hello Khem,
+--=-YbKdZadKOidrJsVmrlI8
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 26, 2008 at 7:47 AM, Khem Raj <raj.khem@gmail.com> wrote:
->
-> I have been seeing this problem where link would fail for libgcc when
-> building libgcc with some weird messages like
->
-> also Leon was seeing same issue on eglibc. I tracked this problem to
->
-Kudos Khem! Thank you very much for investigating this; I would not
-have been able to track it down so quickly.
+On Mon, 2008-05-26 at 22:54 +0200, Leon Woestenberg wrote:
+> Hello Khem,
+>=20
+> On Mon, May 26, 2008 at 7:47 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > I have been seeing this problem where link would fail for libgcc when
+> > building libgcc with some weird messages like
+> >
+> > also Leon was seeing same issue on eglibc. I tracked this problem to
+> >
+> Kudos Khem! Thank you very much for investigating this; I would not
+> have been able to track it down so quickly.
+>=20
+> It's good to have your toolchain expertise around, very much appreciated.
+>=20
+> > The attached patch fixes it for glibc. Eglibc also needs similar fix bu=
+t
+> > I decided to use make install in eglibc which makes it much easier.
+> >
+> > OK ?
+> >
+> I just wonder why we didn't see this issue on glibc yet? Even with my
+> machine (mpc8313e-rdb) this didn't show up earlier.
+> Could it be the (older) version of glibc I used?
 
-It's good to have your toolchain expertise around, very much appreciated.
+yes. The 2.6.1 glibc's libc.a does link silently. Thats why it was still
+working there.
 
-> The attached patch fixes it for glibc. Eglibc also needs similar fix but
-> I decided to use make install in eglibc which makes it much easier.
->
-> OK ?
->
-I just wonder why we didn't see this issue on glibc yet? Even with my
-machine (mpc8313e-rdb) this didn't show up earlier.
-Could it be the (older) version of glibc I used?
+>=20
+> Regards,
 
-Regards,
--- 
-Leon
+--=-YbKdZadKOidrJsVmrlI8
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
 
+iD8DBQBIOye+HnJKy6V6em4RAl5eAJ0dKmmIFSJiyVxnjp7cyZjQy2CXLwCgmDyu
+yT23KjXHP416d7CYs/9X4Po=
+=QgYD
+-----END PGP SIGNATURE-----
+
+--=-YbKdZadKOidrJsVmrlI8--
