@@ -1,22 +1,31 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [68.230.240.8] (helo=eastrmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1K16I0-0006ll-9E
+	(envelope-from <loudawgucr@gmail.com>) id 1K16dS-00041v-4g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 May 2008 23:01:00 +0200
-Received: from [88.73.16.203] (helo=[192.168.7.102])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1K16o4-00073N-2X; Tue, 27 May 2008 23:34:08 +0200
-Message-ID: <483C75B7.4080501@kernelconcepts.de>
-Date: Tue, 27 May 2008 22:57:27 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+	Tue, 27 May 2008 23:23:10 +0200
+Received: from eastrmimpo01.cox.net ([68.1.16.119]) by eastrmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20080527211941.FZXW26184.eastrmmtao102.cox.net@eastrmimpo01.cox.net>
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 May 2008 17:19:41 -0400
+Received: from veronica.jetheaddev.com ([70.164.99.62])
+	by eastrmimpo01.cox.net with bizsmtp
+	id WlKg1Z00W1Llurq02lKgql; Tue, 27 May 2008 17:19:41 -0400
+Received: from veronica.jetheaddev.com ([192.168.13.7]
+	helo=veronica.jetheaddev.com)
+	by mail.jetheaddev.com; 27 May 2008 14:19:40 -0700
+Received: from lou-jethead.jetheaddev.com ([192.168.13.87]) by
+	veronica.jetheaddev.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 27 May 2008 14:19:40 -0700
+From: Louie Ilievski <loudawgucr@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+Date: Tue, 27 May 2008 14:20:02 -0700
+User-Agent: KMail/1.9.9
 MIME-Version: 1.0
-To: gpe-list <gpe-list@linuxtogo.org>, 
-	openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-Subject: OpenEmbedded and GPE at LinuxTag
+Message-Id: <200805271420.02174.loudawgucr@gmail.com>
+X-OriginalArrivalTime: 27 May 2008 21:19:40.0531 (UTC)
+	FILETIME=[5FF34430:01C8C03F]
+Subject: Kernel not booting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -30,30 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 May 2008 21:01:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 May 2008 21:23:10 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+All,
 
-both OpenEmbedded and GPE are present at LinuxTag fair and conference taking
-place in Berlin/Germany from tomorrow May 28th till May 31st.
+I have successfully built x11-gpe-image and console-image for my Dell Axim 
+x51v with the following:
 
-The booth is the same for both projects: 7.2b 112 - the big Mobile and Embedded one.
+DISTRO = "angstrom.2008.1"
+MACHINE = "aximx50v"
+ANGSTROM_MODE = "uclibc"
 
-We have a few tickets left we can give to interested community members. If you
-need one please drop me a mail.
+When trying to boot this with Haret, the last message I see is "Jumping to 
+kernel" and then it sits there until I reset the device.  I don't know where 
+to go from here to find out what is wrong with the kernel.
 
-Greetings
+Where do I go from here?
 
-Florian
+Thanks,
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+~Lou
 
 
