@@ -1,28 +1,20 @@
-Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1K0nKY-00017x-IF
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 May 2008 02:46:22 +0200
-Received: by wa-out-1112.google.com with SMTP id j37so2424022waf.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2008 17:43:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=uegHbdOSbDMcc1OD88wry/iWOzRPnOyB1AoutSdKSvk=;
-	b=HSjKHg6VurtHgkMz/0xkyngWfetMTBXXQzfe5CF4M//WuKoiWG2U9+msAxCZcln02O3RpZ475o0AyCA/hVvqmKmFuyZnQU5daDQD82znm6gRZr8PvqbqkAmgj5LY1zZlWBdwNFyv3KQzStGtV706AydBORC4a+QXFVqTlODg1oI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=m9bj7rivnzZl/06kof+D/H3gptxsGGOvO0p8g9lygZzv2+wOcOLrLideu7rJZHrG+/Y5DRIAvDfMdYaEccrv1iPb0Qt/Ew2ngHIZ11liQJqPEAidRY40dU0lPzokKvoLmoqf6oKLc+9sQuCl1jLywJm7KLsIOVnu8Re19CFZTAA=
-Received: by 10.115.32.1 with SMTP id k1mr679113waj.107.1211848982287;
-	Mon, 26 May 2008 17:43:02 -0700 (PDT)
-Received: by 10.114.184.13 with HTTP; Mon, 26 May 2008 17:43:02 -0700 (PDT)
-Message-ID: <f96d234e0805261743t77560223k2b1a95fabee6f29d@mail.gmail.com>
-Date: Mon, 26 May 2008 20:43:02 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1K0tu3-0007g9-HX
+	for openembedded-devel@openembedded.org; Tue, 27 May 2008 09:47:27 +0200
+Received: (qmail 17566 invoked by uid 813007); 27 May 2008 07:44:05 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO maluch.local)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 May 2008 07:44:05 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
+Date: Tue, 27 May 2008 09:44:04 +0200
+User-Agent: KMail/1.9.9
+References: <g1eulp$skn$1@ger.gmane.org>
 In-Reply-To: <g1eulp$skn$1@ger.gmane.org>
 MIME-Version: 1.0
-References: <g1eulp$skn$1@ger.gmane.org>
+Message-Id: <200805270944.04922.openembedded@haerwu.biz>
 Subject: Re: RFC: restart wiki from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -37,15 +29,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 May 2008 00:46:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 May 2008 07:47:27 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Mon, May 26, 2008 at 2:14 PM, Rolf Leggewie
-<no2spam@nospam.arcornews.de> wrote:
-> Hi,
->
+Dnia Monday 26 of May 2008, Rolf Leggewie napisa=B3:
+
 > the openembedded website is in rather bad shape lately.  This includes
 > the wiki which has both technical and content problems.  I suggest to
 > start anew.
@@ -58,32 +49,26 @@ On Mon, May 26, 2008 at 2:14 PM, Rolf Leggewie
 > Whatever we do, I think we should not allow the current state to exist
 > much longer.
 
-Agreed, we should do something.  While the current site with all the
-plugins like file browsing is neat, I wonder if we would be better off
-implementing the main site in a rock solid wiki that offers:
+Agree - what we have now is hard to maintain and require Drupal experience=
+=20
+which many people lack (I am one of them). Every time when I have to edit=20
+current OE wiki I feel that this is too complicated and too many options=20
+are present. Also there is always a problem with creating new pages as=20
+current situation looks like only registered users can create new pages=20
+but anyone can edit them.
 
-1) RSS feeds on changes
-2) a decent recent changes page
-3) SPAM protection and easy to revert spam.
+Will it be MediaWiki or ikiwiki does not matter too much for me. We need=20
+system which has:
 
-I look at the sites like:
-http://www.mono-project.com/Main_Page
-http://wiki.openzaurus.org/Main_Page
-http://wiki.openmoko.org/wiki/Main_Page
+=2D spam protection
+=2D protecting pages (so only admins can edit)
+=2D registering users (I would prefer to not have anonymous edits)
+=2D blocking users (spammers)
+=2D sane syntax for content
 
-as good examples.
+We have to decide which way we will go. One wiki for website and=20
+documentation or website (drupal, wordpress) + documentation in wiki.
 
-The wiki model is well understood, easy to use, and might be a good
-foundation for a main site.
 
-I'd be glad to assist where I can if man-power is needed on the setup
-side of things.
-
-Cliff
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
 
 
