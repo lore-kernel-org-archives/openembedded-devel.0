@@ -1,33 +1,30 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K1JnA-0002WM-Vk
-	for openembedded-devel@openembedded.org; Wed, 28 May 2008 13:26:05 +0200
+	id 1K1LWe-0002eO-S6
+	for openembedded-devel@openembedded.org; Wed, 28 May 2008 15:17:09 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K1Jjj-0007nh-J0
-	for openembedded-devel@openembedded.org; Wed, 28 May 2008 11:22:31 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	id 1K1LTF-0005K5-6h
+	for openembedded-devel@openembedded.org; Wed, 28 May 2008 13:13:37 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 28 May 2008 11:22:31 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	Wed, 28 May 2008 13:13:37 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 28 May 2008 11:22:31 +0000
+	Wed, 28 May 2008 13:13:37 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 28 May 2008 13:22:26 +0200
-Message-ID: <g1jf9e$ltq$1@ger.gmane.org>
-References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>	<1211958108.27777.15.camel@isis>
-	<35a670560805280252o3fc348d1x7b7cf51b01f209e9@mail.gmail.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 28 May 2008 15:13:27 +0200
+Message-ID: <g1jlpn$f7f$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <35a670560805280252o3fc348d1x7b7cf51b01f209e9@mail.gmail.com>
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a2pre (Macintosh/2008052003)
 Sender: news <news@ger.gmane.org>
-Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
+Subject: BB_STAMP_POLICY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,15 +38,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 May 2008 11:26:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 28 May 2008 13:17:11 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Matthijs van de Water wrote:
-> One of these days I'll gather my GCC 4.3 patches and put them in
-> Bugzilla
+FYI:
 
-Please do!
+11:37:33 Koen: is BB_STAMP_POLICY documented somewhere?
+11:37:47 Richard Purdie: Not really
+11:38:03 Richard Purdie: Takes the values "file" "whitelist" or "full"
+11:38:35 Richard Purdie: "file" is the traditional behaviour with stamps 
+just checked within a given recipe
+11:38:46 Richard Purdie: "full" checks all the dependencies are consistent
+11:39:12 Richard Purdie: "whitelist" allows some packages to be excluded 
+from the stamp checking basically so packages staging can work
 
 
 
