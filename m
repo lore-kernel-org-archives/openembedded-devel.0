@@ -1,24 +1,24 @@
 Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1K2q9O-0005ht-6R; Sun, 01 Jun 2008 18:11:18 +0200
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1K2qHV-0005rh-M4
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 01 Jun 2008 18:19:41 +0200
 Received: from [92.227.192.107] (helo=[192.168.1.156])
 	by mail.kernelconcepts.de with esmtpsa
 	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1K2qfI-0002CK-Oo; Sun, 01 Jun 2008 18:44:16 +0200
-Message-ID: <4842C92B.1020208@kernelconcepts.de>
-Date: Sun, 01 Jun 2008 18:07:07 +0200
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1K2qnS-0002HJ-QW
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 01 Jun 2008 18:52:42 +0200
+Message-ID: <4842CB25.5000305@kernelconcepts.de>
+Date: Sun, 01 Jun 2008 18:15:33 +0200
 From: Florian Boor <florian.boor@kernelconcepts.de>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <g1eulp$skn$1@ger.gmane.org>	<200805270944.04922.openembedded@haerwu.biz>
-	<483BEBD0.4070707@balister.org>
-In-Reply-To: <483BEBD0.4070707@balister.org>
+References: <200805271420.02174.loudawgucr@gmail.com>
+In-Reply-To: <200805271420.02174.loudawgucr@gmail.com>
 X-Enigmail-Version: 0.95.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: RFC: restart wiki from scratch
+Subject: Re: Kernel not booting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -32,25 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jun 2008 16:11:18 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Sun, 01 Jun 2008 16:19:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-Philip Balister wrote:
-> Rather than worry about what wiki software to use, shouldn't we identify
-> the people who will maintain the website, then let them decide what
-> software will work best for the people maintaining it? 
+Louie Ilievski wrote:
+> When trying to boot this with Haret, the last message I see is "Jumping to 
+> kernel" and then it sits there until I reset the device.  I don't know where 
+> to go from here to find out what is wrong with the kernel.
 
-that's the only way maintaining the website can be successful in future.
-
-> It would be
-> really nice spread the workload of maintaining the OE website beyond
-> just the core developers.
-
-Yes indeed, judging from the current situation having the same people as
-developer, webmaster and administrator does not really work.
+I have seen the same effect with the HTC Universal which uses the same kernel
+(2.6.21-hh20). So it seems to be broken for other devices as well. Kernel
+2.6.20-hh10 works for the Universal.
 
 Greetings
 
