@@ -1,32 +1,28 @@
-Received: from [209.85.132.241] (helo=an-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1K2wXp-0007OS-2R
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1K2wnF-0007ga-LZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Jun 2008 01:00:57 +0200
-Received: by an-out-0708.google.com with SMTP id b38so218162ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Jun 2008 15:56:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:cc:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=Fnef+sJniNPrcg0Ei5jnJXs71CaJ2ZmsQrUB44/flns=;
-	b=YuRK4qmX18WjZ5Fth7C4+n8g9oBRRzp06YZCOcoTdmy1D2gQS84VKOldlhB/E1AgUK7Vaj6Q2VamOczh/fjeIHx29/uS3GF26V3sggtXmOQRqpCiJLjeMtjWkVCv0O3NduPZuoBl7doQvgNJ0hL46EWgq7cvdGRg0itbZie9HQs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=o3pjJpgQP28+kqW3R8tyrYJCSnbeuPqjH0eQsw9L3sdclOVTouEWyWk5F5W3lDP0Ep4z7dsYDzrJMzuWvHVdCQt+Sbsc61nxRTCI5ZghMYoNPu2WjqhJHNc2+cyRygnqV+Ilc4dwVlHDw582ycMQVSl0ySBK/KdKS4bXtCnIRr8=
-Received: by 10.100.13.5 with SMTP id 5mr13669473anm.86.1212361006979;
-	Sun, 01 Jun 2008 15:56:46 -0700 (PDT)
-Received: by 10.100.189.9 with HTTP; Sun, 1 Jun 2008 15:56:46 -0700 (PDT)
-Message-ID: <c384c5ea0806011556s3983e0dcq6f887698341b17c1@mail.gmail.com>
-Date: Mon, 2 Jun 2008 00:56:46 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4842C92B.1020208@kernelconcepts.de>
+	Mon, 02 Jun 2008 01:16:53 +0200
+Received: (qmail invoked by alias); 01 Jun 2008 23:12:42 -0000
+Received: from brln-4db88d3f.pool.einsundeins.de (EHLO [192.168.4.110])
+	[77.184.141.63]
+	by mail.gmx.net (mp038) with SMTP; 02 Jun 2008 01:12:42 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/ACVI0UcHAAWA7vlg6vxNrxqCuMhlwMP9YjjtDBG
+	gWdKH4IP4Lop1A
+Message-ID: <48432CE8.8080508@gmx.net>
+Date: Mon, 02 Jun 2008 01:12:40 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
 MIME-Version: 1.0
-References: <g1eulp$skn$1@ger.gmane.org>
-	<200805270944.04922.openembedded@haerwu.biz>
-	<483BEBD0.4070707@balister.org> <4842C92B.1020208@kernelconcepts.de>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: RFC: restart wiki from scratch
+To: openembedded-devel@lists.openembedded.org, 
+	John Lee <john_lee@openmoko.com>
+References: <20080509153032.79D501892D4@amethyst.openembedded.net>
+	<482A1FEC.5000804@gmx.net>
+In-Reply-To: <482A1FEC.5000804@gmx.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+Subject: Re: [oe-commits] org.oe.dev classpath-native_0.97.1.bb : add from OM mtn
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,28 +36,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jun 2008 23:00:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sun, 01 Jun 2008 23:16:53 -0000
+X-Groupsio-MsgNum: 5270
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig81C57451C76C1036D6DD1E50"
 
-Hello,
+--------------enig81C57451C76C1036D6DD1E50
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jun 1, 2008 at 6:07 PM, Florian Boor
-<florian.boor@kernelconcepts.de> wrote:
-> Hi,
->
-> Philip Balister wrote:
->> Rather than worry about what wiki software to use, shouldn't we identify
->> the people who will maintain the website, then let them decide what
->> software will work best for the people maintaining it?
->
-> that's the only way maintaining the website can be successful in future.
->
-Why not give every committer full Wiki page edit rights?
+Hi all, John
+good news!
+
+The Classpath team will soon do a 0.97.2 bugfix release which will
+contain pre-generated headers. Classpath' includence in Debian depends
+on this decision so we are going to profit from it, too. :)
 
 Regards
--- 
-Leon
+Robert
+
+Robert Schuster schrieb:
+> Hi,
+> I would like this commit to be reverted. While it may look logical to g=
+o
+> from one below 1.0 release to another something important changed in
+> classpath in that release and makes bootstrapping far more complicated.=
+
+>=20
+> The problem is that from 0.97 onwards, a classpath build needs a workin=
+g
+> javah tool. this program is a header generator which creates C header
+> files from compiled Java classes. Such a javah program is provided by
+> the classpath tools but needs a working runtime and class library first=
+=2E
+>=20
+> Earlier classpath releases had pre-generated header files and needed no=
+
+> javah program.
+>=20
+> There are multiple ways to fix this issue. One way would involve
+> upstream allowing the just built javah application being run with a
+> provided java executable. This would be less pain for us and would also=
+
+> benefit other cross compilation efforts.
+>=20
+> Regards
+> Robert
+>=20
+> xora commit schrieb:
+>> classpath-native_0.97.1.bb : add from OM mtn
+>>
+>> Author: xora@openembedded.org
+>> Branch: org.openembedded.dev
+>> Revision: 3607c00052ba968a5052e6b5f44f6cb522a38d8b
+>> ViewMTN: http://monotone.openembedded.org/revision/info/3607c00052ba96=
+8a5052e6b5f44f6cb522a38d8b
+>> Files:
+>> 1
+>> packages/classpath/classpath-native_0.97.1.bb
+>> Diffs:
+>>
+>> #
+>> # mt diff -r471eef0dd55e52c8e89d42f17ff7a3c920452d9f -r3607c00052ba968=
+a5052e6b5f44f6cb522a38d8b
+>> #
+>> #
+>> #
+>> # add_file "packages/classpath/classpath-native_0.97.1.bb"
+>> #  content [4b052ebae756323751932779865b45cf50a920fa]
+>> #
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> --- packages/classpath/classpath-native_0.97.1.bb	4b052ebae75632375193=
+2779865b45cf50a920fa
+>> +++ packages/classpath/classpath-native_0.97.1.bb	4b052ebae75632375193=
+2779865b45cf50a920fa
+>> @@ -0,0 +1,3 @@
+>> +require classpath-native.inc
+>> +
+>> +PR =3D "r0"
+>>
+>>
+>>
+>> _______________________________________________
+>> Openembedded-commits mailing list
+>> Openembedded-commits@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commi=
+ts
+>>
+>=20
+>=20
+>=20
+> -----------------------------------------------------------------------=
+-
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
+
+--------------enig81C57451C76C1036D6DD1E50
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFIQyzoG9cfwmwwEtoRCG5GAJ93LSrw6YNUA6GxSkaifQd+O1dN2QCfapwM
+iQHP9Y2HkbhG44jFQ27nOP0=
+=GOBS
+-----END PGP SIGNATURE-----
+
+--------------enig81C57451C76C1036D6DD1E50--
