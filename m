@@ -1,20 +1,24 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1K2lmX-0003B1-Gi
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Jun 2008 13:31:25 +0200
-Received: from andromeda (e180158078.adsl.alicedsl.de [85.180.158.78])
-	by drlauer-research.com (Postfix) with ESMTP id 4E358584C2C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Jun 2008 13:28:44 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 1 Jun 2008 13:27:17 +0200
-User-Agent: KMail/1.9.9
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1K2q9O-0005ht-6R; Sun, 01 Jun 2008 18:11:18 +0200
+Received: from [92.227.192.107] (helo=[192.168.1.156])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1K2qfI-0002CK-Oo; Sun, 01 Jun 2008 18:44:16 +0200
+Message-ID: <4842C92B.1020208@kernelconcepts.de>
+Date: Sun, 01 Jun 2008 18:07:07 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
 MIME-Version: 1.0
-Message-Id: <200806011327.18151.mickey@vanille-media.de>
-Subject: Back from LinuxTag
+To: openembedded-devel@lists.openembedded.org
+References: <g1eulp$skn$1@ger.gmane.org>	<200805270944.04922.openembedded@haerwu.biz>
+	<483BEBD0.4070707@balister.org>
+In-Reply-To: <483BEBD0.4070707@balister.org>
+X-Enigmail-Version: 0.95.0
+Cc: openembedded-devel@openembedded.org
+Subject: Re: RFC: restart wiki from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -28,37 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jun 2008 11:31:25 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Sun, 01 Jun 2008 16:11:18 -0000
+Content-Type: text/plain; charset=ISO-8859-2
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi guys,
+Hi,
 
-as expected I had zero time to stand at the OpenEmbedded booth, however I 
-stood two meters away at the Openmoko booth and praised OE whenever I had a 
-chance to :)
+Philip Balister wrote:
+> Rather than worry about what wiki software to use, shouldn't we identify
+> the people who will maintain the website, then let them decide what
+> software will work best for the people maintaining it? 
 
-I want to mention two things:
+that's the only way maintaining the website can be successful in future.
 
-e.V.: Florian, Robert, Holger and me had an appointment with a lawyer and we 
-officially signed the submission for e.V. This week, we will get all 
-submission documents and will then apply for the e.V. at the authorities.
+> It would be
+> really nice spread the workload of maintaining the OE website beyond
+> just the core developers.
 
-LinuxTag: Florian more or less managed the whole booth appeareance on its own 
-(thanks to all those who helped him, of course), so I want drop a BIG BIG 
-              
-                 T H A N K S    F L O R I A N !
+Yes indeed, judging from the current situation having the same people as
+developer, webmaster and administrator does not really work.
 
-If you have a minute, please tell us about the most remarkable questions or 
-comments.
+Greetings
 
-Cheers,
-
-Mickey.
+Florian
 
 -- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
