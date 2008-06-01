@@ -1,30 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K1LWe-0002eO-S6
-	for openembedded-devel@openembedded.org; Wed, 28 May 2008 15:17:09 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K1LTF-0005K5-6h
-	for openembedded-devel@openembedded.org; Wed, 28 May 2008 13:13:37 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 28 May 2008 13:13:37 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 28 May 2008 13:13:37 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 28 May 2008 15:13:27 +0200
-Message-ID: <g1jlpn$f7f$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008052003)
-Sender: news <news@ger.gmane.org>
-Subject: BB_STAMP_POLICY
+	(envelope-from <mickey@vanille-media.de>) id 1K2lmX-0003B1-Gi
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 01 Jun 2008 13:31:25 +0200
+Received: from andromeda (e180158078.adsl.alicedsl.de [85.180.158.78])
+	by drlauer-research.com (Postfix) with ESMTP id 4E358584C2C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  1 Jun 2008 13:28:44 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 1 Jun 2008 13:27:17 +0200
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200806011327.18151.mickey@vanille-media.de>
+Subject: Back from LinuxTag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -38,20 +28,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 May 2008 13:17:11 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 01 Jun 2008 11:31:25 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-FYI:
+Hi guys,
 
-11:37:33 Koen: is BB_STAMP_POLICY documented somewhere?
-11:37:47 Richard Purdie: Not really
-11:38:03 Richard Purdie: Takes the values "file" "whitelist" or "full"
-11:38:35 Richard Purdie: "file" is the traditional behaviour with stamps 
-just checked within a given recipe
-11:38:46 Richard Purdie: "full" checks all the dependencies are consistent
-11:39:12 Richard Purdie: "whitelist" allows some packages to be excluded 
-from the stamp checking basically so packages staging can work
+as expected I had zero time to stand at the OpenEmbedded booth, however I 
+stood two meters away at the Openmoko booth and praised OE whenever I had a 
+chance to :)
 
+I want to mention two things:
+
+e.V.: Florian, Robert, Holger and me had an appointment with a lawyer and we 
+officially signed the submission for e.V. This week, we will get all 
+submission documents and will then apply for the e.V. at the authorities.
+
+LinuxTag: Florian more or less managed the whole booth appeareance on its own 
+(thanks to all those who helped him, of course), so I want drop a BIG BIG 
+              
+                 T H A N K S    F L O R I A N !
+
+If you have a minute, please tell us about the most remarkable questions or 
+comments.
+
+Cheers,
+
+Mickey.
+
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
