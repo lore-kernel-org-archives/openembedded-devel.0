@@ -1,28 +1,26 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1K2wnF-0007ga-LZ
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1K36dJ-0000Q9-C2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Jun 2008 01:16:53 +0200
-Received: (qmail invoked by alias); 01 Jun 2008 23:12:42 -0000
-Received: from brln-4db88d3f.pool.einsundeins.de (EHLO [192.168.4.110])
-	[77.184.141.63]
-	by mail.gmx.net (mp038) with SMTP; 02 Jun 2008 01:12:42 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/ACVI0UcHAAWA7vlg6vxNrxqCuMhlwMP9YjjtDBG
-	gWdKH4IP4Lop1A
-Message-ID: <48432CE8.8080508@gmx.net>
-Date: Mon, 02 Jun 2008 01:12:40 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
+	Mon, 02 Jun 2008 11:47:53 +0200
+Received: from [78.48.33.60] (helo=[192.168.1.156])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1K36ZD-0004WR-QD
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Jun 2008 11:43:03 +0200
+Message-ID: <4843C0A6.3050909@kernelconcepts.de>
+Date: Mon, 02 Jun 2008 11:43:02 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	John Lee <john_lee@openmoko.com>
-References: <20080509153032.79D501892D4@amethyst.openembedded.net>
-	<482A1FEC.5000804@gmx.net>
-In-Reply-To: <482A1FEC.5000804@gmx.net>
+To: openembedded-devel@lists.openembedded.org
+References: <g1eulp$skn$1@ger.gmane.org>	<200805270944.04922.openembedded@haerwu.biz>	<483BEBD0.4070707@balister.org>
+	<4842C92B.1020208@kernelconcepts.de>
+	<c384c5ea0806011556s3983e0dcq6f887698341b17c1@mail.gmail.com>
+In-Reply-To: <c384c5ea0806011556s3983e0dcq6f887698341b17c1@mail.gmail.com>
 X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] org.oe.dev classpath-native_0.97.1.bb : add from OM mtn
+Subject: Re: RFC: restart wiki from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -36,121 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jun 2008 23:16:53 -0000
-X-Groupsio-MsgNum: 5270
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig81C57451C76C1036D6DD1E50"
+X-List-Received-Date: Mon, 02 Jun 2008 09:49:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---------------enig81C57451C76C1036D6DD1E50
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Hi all, John
-good news!
+Leon Woestenberg wrote:
 
-The Classpath team will soon do a 0.97.2 bugfix release which will
-contain pre-generated headers. Classpath' includence in Debian depends
-on this decision so we are going to profit from it, too. :)
+> Why not give every committer full Wiki page edit rights?
 
-Regards
-Robert
+iirc you can edit pages even without an account, but creating new pages is
+restricted to people with an account. And it is not obvious how to get one...
+In fact I would not tie up SCM access with wiki access - these are two different
+things. A wiki should be open to everyone...  The latest experience with the
+wiki at LinuxToGo which allows most tasks even anonymously is pretty good. It is
+using textchas for spam protection.
 
-Robert Schuster schrieb:
-> Hi,
-> I would like this commit to be reverted. While it may look logical to g=
-o
-> from one below 1.0 release to another something important changed in
-> classpath in that release and makes bootstrapping far more complicated.=
+Greetings
 
->=20
-> The problem is that from 0.97 onwards, a classpath build needs a workin=
-g
-> javah tool. this program is a header generator which creates C header
-> files from compiled Java classes. Such a javah program is provided by
-> the classpath tools but needs a working runtime and class library first=
-=2E
->=20
-> Earlier classpath releases had pre-generated header files and needed no=
+Florian
 
-> javah program.
->=20
-> There are multiple ways to fix this issue. One way would involve
-> upstream allowing the just built javah application being run with a
-> provided java executable. This would be less pain for us and would also=
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
-> benefit other cross compilation efforts.
->=20
-> Regards
-> Robert
->=20
-> xora commit schrieb:
->> classpath-native_0.97.1.bb : add from OM mtn
->>
->> Author: xora@openembedded.org
->> Branch: org.openembedded.dev
->> Revision: 3607c00052ba968a5052e6b5f44f6cb522a38d8b
->> ViewMTN: http://monotone.openembedded.org/revision/info/3607c00052ba96=
-8a5052e6b5f44f6cb522a38d8b
->> Files:
->> 1
->> packages/classpath/classpath-native_0.97.1.bb
->> Diffs:
->>
->> #
->> # mt diff -r471eef0dd55e52c8e89d42f17ff7a3c920452d9f -r3607c00052ba968=
-a5052e6b5f44f6cb522a38d8b
->> #
->> #
->> #
->> # add_file "packages/classpath/classpath-native_0.97.1.bb"
->> #  content [4b052ebae756323751932779865b45cf50a920fa]
->> #
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> --- packages/classpath/classpath-native_0.97.1.bb	4b052ebae75632375193=
-2779865b45cf50a920fa
->> +++ packages/classpath/classpath-native_0.97.1.bb	4b052ebae75632375193=
-2779865b45cf50a920fa
->> @@ -0,0 +1,3 @@
->> +require classpath-native.inc
->> +
->> +PR =3D "r0"
->>
->>
->>
->> _______________________________________________
->> Openembedded-commits mailing list
->> Openembedded-commits@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commi=
-ts
->>
->=20
->=20
->=20
-> -----------------------------------------------------------------------=
--
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
-
---------------enig81C57451C76C1036D6DD1E50
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFIQyzoG9cfwmwwEtoRCG5GAJ93LSrw6YNUA6GxSkaifQd+O1dN2QCfapwM
-iQHP9Y2HkbhG44jFQ27nOP0=
-=GOBS
------END PGP SIGNATURE-----
-
---------------enig81C57451C76C1036D6DD1E50--
