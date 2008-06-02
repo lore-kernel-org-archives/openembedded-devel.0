@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [194.158.229.90] (helo=smtp-auth-be-05.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K3D8r-0002hH-Ms
-	for openembedded-devel@openembedded.org; Mon, 02 Jun 2008 18:44:17 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K3D4f-0002qn-8e
-	for openembedded-devel@openembedded.org; Mon, 02 Jun 2008 16:39:57 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 02 Jun 2008 16:39:57 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 02 Jun 2008 16:39:57 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <dv@vollmann.ch>) id 1K3IIF-0001ub-4X
+	for openembedded-devel@openembedded.org; Tue, 03 Jun 2008 00:14:19 +0200
+Received: from [192.168.26.12] (212-98-43-140.static.adslpremium.ch
+	[212.98.43.140]) (authenticated bits=0)
+	by smtp-auth-be-05.sunrise.ch (8.13.1/8.13.5) with ESMTP id
+	m52MA7RZ021588; Tue, 3 Jun 2008 00:10:07 +0200
+Message-ID: <48446FB3.8000201@vollmann.ch>
+Date: Tue, 03 Jun 2008 00:09:55 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080502)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 02 Jun 2008 18:39:50 +0200
-Message-ID: <g217om$hae$1@ger.gmane.org>
-References: <20080531171735.3C118189300@amethyst.openembedded.net>	<200806021649.15159.mickey@vanille-media.de>	<g212at$qtm$1@ger.gmane.org>
-	<200806021805.03241.mickey@vanille-media.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008052003)
-In-Reply-To: <200806021805.03241.mickey@vanille-media.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: org.oe.dev dbus 1.2.1: fix pidfile location
+References: <g1jlpn$f7f$1@ger.gmane.org> <4843CCD6.8070601@vollmann.ch>
+	<1212404836.5008.16.camel@dax.rpnet.com>
+In-Reply-To: <1212404836.5008.16.camel@dax.rpnet.com>
+Subject: Re: BB_STAMP_POLICY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,45 +29,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jun 2008 16:44:17 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 02 Jun 2008 22:14:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Michael 'Mickey' Lauer wrote:
-> On Monday 02 June 2008 17:07:10 Koen Kooi wrote:
->> Michael 'Mickey' Lauer wrote:
->>> On Saturday 31 May 2008 19:17:35 koen commit wrote:
->>>> dbus 1.2.1: fix pidfile location
->>> I'm afraid this patch breaks restartability which I fixed a couple of
->>> weeks ago. Can you double check whether you can use the init script and
->>> restart dbus still works?
->> Heh :) The fix makes this work for me:
->>
->> /etc/init.d/dbus-1 stop ; /etc/init.d/dbus-1 start
->>
->> Is that what you meant?
->
-> I was using /etc/init.d/dbus-1 restart, but I think that should have the same
-> semantics.
+Richard Purdie wrote:
+> The correct solution from a bitbake/OE perspective is to have multiple
+> providers, one for set of options combination and to switch between them
+> using PREFERRED_PROVIDER.
+I understand, and that's why I started that way.
+But it starts to explode, and I have some uncomfortable feeling about
+breaking changes going unnoticed...
 
-root@beagleboard:~# /etc/init.d/dbus-1 restart
-Stopping Hardware abstraction layer hald
-Stopping system message bus: stopped process in pidfile 
-'/var/run/dbus/pid' (pid 1602)
-dbus.
-Starting system message bus: dbus.
-Starting Hardware abstraction layer hald
-root@beagleboard:~#
+> The biggest challenge you find when doing this is lots of recipes use
+> ${PN} internally and by creating a new package you then need to hardcode
+> that variable.
+Another problem is the hardcoded name of packages inside recipes
+(glibc-package.bbclass is a prominent example for that).
 
-> Is that working for you with ash or bash?
+> Since thats the main barrier to doing this
+I wouldn't say that's the main barrier.  It's annoying, but once
+you know what to look for it's just some search and replace.
 
-That's with
+The biggest problem I see are silent breaks, because of changes in
+some configuration files that are not tracked by dependency checking.
 
-lrwxrwxrwx  1 root root 7 May 28 17:23 /bin/sh -> busybox
+ > I'd propose trying to remove
+> that obstacle. We could do this by having:
+> 
+> bitbake.conf:
+> 
+> PKGPN ?= "${PN}"
+> 
+> and then using PKGPN in recipes instead of PN. If you then create a
+> glibc-some-extra-option you can just add a line which says:
+> 
+> PKGPN = "glibc"
+> 
+> and it should all work. This would also be useful for -sdk and -native
+> recipes for example which currently have nastier workarounds for this
+> problem.
+> 
+> Would this solve the problem?
+It would make the the setup of the additional recipes easier, but
+it doesn't solve the main problem of breaking changes.
+For that maybe something in insane.bbclass could check and complain
+about settings like EXTRA_OECONF_xyz in a conig file when
+BB_STAMP_POLICY is set.
 
-regards,
-
-Koen
+   Detlef
 
 
 
