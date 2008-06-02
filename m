@@ -1,33 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K3Bof-0007DH-Q9
-	for openembedded-devel@openembedded.org; Mon, 02 Jun 2008 17:19:21 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1K3BkU-0006Th-6X
-	for openembedded-devel@openembedded.org; Mon, 02 Jun 2008 15:15:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 02 Jun 2008 15:15:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 02 Jun 2008 15:15:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 02 Jun 2008 17:10:48 +0200
-Message-ID: <g212ho$s5t$1@ger.gmane.org>
-References: <20080602143920.A10231892EC@amethyst.openembedded.net>
-	<200806021649.49116.mickey@vanille-media.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008052003)
-In-Reply-To: <200806021649.49116.mickey@vanille-media.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: org.oe.dev hal: sync with poky
+	(envelope-from <mickey@vanille-media.de>) id 1K3Cb1-0004dy-Ir
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Jun 2008 18:09:23 +0200
+Received: from andromeda (e180179024.adsl.alicedsl.de [85.180.179.24])
+	by drlauer-research.com (Postfix) with ESMTP id 2EE40584C92
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Jun 2008 18:06:35 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 2 Jun 2008 18:05:02 +0200
+User-Agent: KMail/1.9.9
+References: <20080531171735.3C118189300@amethyst.openembedded.net>
+	<200806021649.15159.mickey@vanille-media.de>
+	<g212at$qtm$1@ger.gmane.org>
+In-Reply-To: <g212at$qtm$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200806021805.03241.mickey@vanille-media.de>
+Subject: Re: org.oe.dev dbus 1.2.1: fix pidfile location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,24 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jun 2008 15:19:21 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 02 Jun 2008 16:09:34 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Michael 'Mickey' Lauer wrote:
-> On Monday 02 June 2008 16:39:20 koen commit wrote:
->> hal: sync with poky
+On Monday 02 June 2008 17:07:10 Koen Kooi wrote:
+> Michael 'Mickey' Lauer wrote:
+> > On Saturday 31 May 2008 19:17:35 koen commit wrote:
+> >> dbus 1.2.1: fix pidfile location
+> >
+> > I'm afraid this patch breaks restartability which I fixed a couple of
+> > weeks ago. Can you double check whether you can use the init script and
+> > restart dbus still works?
 >
-> This commit breaks dbus/hal restartability which I fixed a couple of weeks
-> ago.
+> Heh :) The fix makes this work for me:
 >
-> Can you double check whether it still works for you?
+> /etc/init.d/dbus-1 stop ; /etc/init.d/dbus-1 start
+>
+> Is that what you meant?
 
-Ah, I missed the PIDFILE hunk, reverted.
+I was using /etc/init.d/dbus-1 restart, but I think that should have the same 
+semantics.
 
-regards,
+Is that working for you with ash or bash?
 
-Koen
-
+-- 
+Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
 
 
