@@ -1,33 +1,30 @@
-Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <matthijs.van.de.water@gmail.com>) id 1K3QpP-0004OJ-2h
+	(envelope-from <geoffrey@pager.net>) id 1K3foq-0007b1-5j
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Jun 2008 09:21:08 +0200
-Received: by fk-out-0910.google.com with SMTP id 19so1332011fkr.12
+	Wed, 04 Jun 2008 01:21:33 +0200
+X-ASG-Debug-ID: 1212535024-75b4000e0000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 94FD5C24E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jun 2008 00:16:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	bh=tZMyEMhiZxNTqdrfK2OgIUAtpCpJD2LaPUGft8RmM0E=;
-	b=Bh8YWaQi0hoTJYAFzX1s/yVkHN4V+7TOXbvx891QJv6TDhlTUc/uC0Nn0jwOIwRrSVbZUyVIB+40fjK148Dq8UAo68fThTCurYL6wbLyNovAdZ3X+Y0k0D2cLJoa7OlFID2I+Qjvg2G2ih8AkmSMcf0rAO/qexVvbBElh8QPITc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
-	b=xpW95sJVxaf+SZI4BZD3vM/j73uXnzKefhare3LDS5SQqThnHQtRh9JSls+rl6HR3UkPQ3hSdIfm+++5mT6jcKO1xWjt9AeXAh5txZbUbyTLMyECHwY8IYEwUnd1A2xINq1wqlycPsW+tNZidEJyGmGJpDg8KA3x7RFelKYffnw=
-Received: by 10.78.144.11 with SMTP id r11mr744396hud.78.1212477405748;
-	Tue, 03 Jun 2008 00:16:45 -0700 (PDT)
-Received: by 10.78.160.4 with HTTP; Tue, 3 Jun 2008 00:16:45 -0700 (PDT)
-Message-ID: <35a670560806030016y4fab1071pd7843d2736b32943@mail.gmail.com>
-Date: Tue, 3 Jun 2008 09:16:45 +0200
-From: "Matthijs van de Water" <matthijs.van.de.water@gmail.com>
+	Tue,  3 Jun 2008 18:17:04 -0500 (CDT)
+Received: from [192.168.1.71] (LRS-CiscoRouter [192.168.1.1]) by
+	barracuda.pager.net with ESMTP id czyMlFNrc16JcM1G for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Jun 2008 18:17:04 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <g1jf9e$ltq$1@ger.gmane.org>
+X-ASG-Orig-Subj: autoconf and --program-prefix insanity
+Date: Tue, 3 Jun 2008 18:17:41 -0500
+User-Agent: KMail/1.9.9
 MIME-Version: 1.0
-References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>
-	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
-	<1211958108.27777.15.camel@isis>
-	<35a670560805280252o3fc348d1x7b7cf51b01f209e9@mail.gmail.com>
-	<g1jf9e$ltq$1@ger.gmane.org>
-Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
+Message-Id: <200806031817.42038.geoffrey@pager.net>
+X-Barracuda-Connect: LRS-CiscoRouter[192.168.1.1]
+X-Barracuda-Start-Time: 1212535024
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: autoconf and --program-prefix insanity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,38 +38,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jun 2008 07:21:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Jun 2008 23:21:35 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Did anyone working with GCC 4.3 have any problems with the C++
-compiler in the SDK?
+Hi all,
 
-With the current setup, my include path search order is such that for
-instance the <cstdlib> header is trying to #include_next<stdlib.h>,
-which fails because the normal include paths precede the C++ include
-paths.
-If I change the #include_next to #include the headers work fine, but
-that is obviously no solution. It looks like this is broken for all
-sysroot builds, because the compiler will put the sysroot include
-before the C++ ones and get rid of any duplicates.
+I thought I'd drag ya'll into my current autoconf hell, and hopefully someone 
+would know where the exit is located.
 
-Did anyone see this before? Any suggestions? I think I can solve this
-by changing back to --enable-cheaders=c_std instead of c_global (which
-was the default previously and which is why pre-4.3 toolchains work
-fine for me), but I'm not sure of the implications of that.
+The packages/binutils/binutils-avr32.inc got changed so that instead of 
+explicitly invoking autoconf-2.13 (which comes from outside OE) in the 
+top-level binutils directory, it just invokes autoconf.  This will use OE's 
+autoconf, which happens to be autoconf 2.61.  Makes good sense.
 
-Regards,
+So somewhere between autoconf 2.13 and 2.61, the handling of 
+the "--program-prefix" and how it interacts with cross compilation changed.  
+I've personally almost never used "--program-prefix", just specifying cross 
+compilation seems to always set the prefix correctly.  However, 
+binutils-cross.inc explicitly specifies "--program-prefix" when configuring 
+binutils, in addition to specifying cross compilation.  
 
-Matthijs
+This worked fine when the configure script was built by autoconf 2.13.  But 
+when configure is built by autoconf 2.61, I get binaries named 
+avr32-angstrom-linux-uclibc-avr32-angstrom-linux-uclibc-ar and similar, which 
+obviously won't work when you need to use them.  Modifying binutils-cross.inc 
+to not put "--program-prefix" in EXTRA_OECONF fixes the issue.
 
---enable-cheaders=OPTION
+So, is there really a need to specify "--program-prefix"?  Will this break 
+when configure is built by an older autoconf?  I don't think it would, but I 
+really can't guess why "--program-prefix" was specified.
 
-    This allows the user to define the approach taken for C header
-compatibility with C++. Options are c, c_std, and c_global. These
-correspond to the source directory's include/c, include/c_std, and
-include/c_global, and may also include include/c_compatibility. The
-default is c_global.
+---
+Geoffrey
+
+#
+# old_revision [0b3a1625ab319665b65cdff67a448a4657c6a3b1]
+#
+# patch "packages/binutils/binutils-cross.inc"
+#  from [06c8460191f6e42d0bb389ff55a7ed29314fa2a6]
+#    to [602bfb4f4c4561234706c9de42730c6b3825d724]
+#
+============================================================
+--- packages/binutils/binutils-cross.inc        
+06c8460191f6e42d0bb389ff55a7ed29314fa2a6
++++ packages/binutils/binutils-cross.inc        
+602bfb4f4c4561234706c9de42730c6b3825d724
+@@ -1,10 +1,9 @@ EXTRA_OECONF = "--with-sysroot=${STAGING
+ SECTION = "devel"
+ inherit cross
+ DEPENDS += "flex-native bison-native"
+ PROVIDES = "virtual/${TARGET_PREFIX}binutils"
+ PACKAGES = ""
+ EXTRA_OECONF = "--with-sysroot=${STAGING_DIR_TARGET} \
+-               --program-prefix=${TARGET_PREFIX} \
+                --enable-install-libbfd \
+                 --disable-werror"
+
 
 
