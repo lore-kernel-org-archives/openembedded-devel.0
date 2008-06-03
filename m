@@ -1,23 +1,33 @@
-Received: from [194.158.229.90] (helo=smtp-auth-be-05.sunrise.ch)
+Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dv@vollmann.ch>) id 1K3OmO-0005ic-02
-	for openembedded-devel@openembedded.org; Tue, 03 Jun 2008 07:09:52 +0200
-Received: from [192.168.26.12] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140]) (authenticated bits=0)
-	by smtp-auth-be-05.sunrise.ch (8.13.1/8.13.5) with ESMTP id
-	m5355bed002991; Tue, 3 Jun 2008 07:05:38 +0200
-Message-ID: <4844D115.9070209@vollmann.ch>
-Date: Tue, 03 Jun 2008 07:05:25 +0200
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080502)
+	(envelope-from <matthijs.van.de.water@gmail.com>) id 1K3QpP-0004OJ-2h
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Jun 2008 09:21:08 +0200
+Received: by fk-out-0910.google.com with SMTP id 19so1332011fkr.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Jun 2008 00:16:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	bh=tZMyEMhiZxNTqdrfK2OgIUAtpCpJD2LaPUGft8RmM0E=;
+	b=Bh8YWaQi0hoTJYAFzX1s/yVkHN4V+7TOXbvx891QJv6TDhlTUc/uC0Nn0jwOIwRrSVbZUyVIB+40fjK148Dq8UAo68fThTCurYL6wbLyNovAdZ3X+Y0k0D2cLJoa7OlFID2I+Qjvg2G2ih8AkmSMcf0rAO/qexVvbBElh8QPITc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:content-transfer-encoding:content-disposition:references;
+	b=xpW95sJVxaf+SZI4BZD3vM/j73uXnzKefhare3LDS5SQqThnHQtRh9JSls+rl6HR3UkPQ3hSdIfm+++5mT6jcKO1xWjt9AeXAh5txZbUbyTLMyECHwY8IYEwUnd1A2xINq1wqlycPsW+tNZidEJyGmGJpDg8KA3x7RFelKYffnw=
+Received: by 10.78.144.11 with SMTP id r11mr744396hud.78.1212477405748;
+	Tue, 03 Jun 2008 00:16:45 -0700 (PDT)
+Received: by 10.78.160.4 with HTTP; Tue, 3 Jun 2008 00:16:45 -0700 (PDT)
+Message-ID: <35a670560806030016y4fab1071pd7843d2736b32943@mail.gmail.com>
+Date: Tue, 3 Jun 2008 09:16:45 +0200
+From: "Matthijs van de Water" <matthijs.van.de.water@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <g1jf9e$ltq$1@ger.gmane.org>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <g1jlpn$f7f$1@ger.gmane.org>
-	<4843CCD6.8070601@vollmann.ch>	<1212404836.5008.16.camel@dax.rpnet.com>
-	<48446FB3.8000201@vollmann.ch>
-	<1212450339.5008.49.camel@dax.rpnet.com>
-In-Reply-To: <1212450339.5008.49.camel@dax.rpnet.com>
-Subject: Re: BB_STAMP_POLICY
+References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>
+	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>
+	<1211958108.27777.15.camel@isis>
+	<35a670560805280252o3fc348d1x7b7cf51b01f209e9@mail.gmail.com>
+	<g1jf9e$ltq$1@ger.gmane.org>
+Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -31,69 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jun 2008 05:09:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 03 Jun 2008 07:21:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Richard Purdie wrote:
-> On Tue, 2008-06-03 at 00:09 +0200, Detlef Vollmann wrote:
->> The biggest problem I see are silent breaks, because of changes in
->> some configuration files that are not tracked by dependency checking.
-> 
-> I not 100% sure what you're getting at here but I'll try and follow this
-> to its logical conclusion.
-> 
-> If you change something in some recipe, say EXTRA_OECONF you then need
-> to force a rebuild of the recipe either by bumping PR, using the --force
-> option etc. to make the change take effect. This means package A would
-> rebuild and the way BB_STAMP_POLICY full/whitelist works means that
-> since A rebuilt, anything depending on A will also rebuild. So this case
-> is covered.
-Correct, this is the way as it should be.
-But this way it's something manual, and that will get forgotten at
-some time.  In our environment we sometimes build different projects
-at the same time (using different chroot environments for that).
-So if you want to change something for a project, you do the change
-and start the build, and then you go to some other work and come
-back after 20 minutes to do a short test and then publish the release
-for the testers.  In such an environment, things like a forced build
-easily get forgotten.
-In our current build system, for switches between NPTL and linuxthreads
-we have to exchange toolchain manually, and we had more than one case
-where the image didn't contain the version that we expected, leading
-to nasty, hard to track down errors.
+Did anyone working with GCC 4.3 have any problems with the C++
+compiler in the SDK?
 
-> Perhaps you mean that you change some variable in say bitbake.conf and
-> you then don't know which recipes it may have an effect on. You
-> therefore don't know which to rebuild?
-No, that's not the real problem.
+With the current setup, my include path search order is such that for
+instance the <cstdlib> header is trying to #include_next<stdlib.h>,
+which fails because the normal include paths precede the C++ include
+paths.
+If I change the #include_next to #include the headers work fine, but
+that is obviously no solution. It looks like this is broken for all
+sysroot builds, because the compiler will put the sysroot include
+before the C++ ones and get rid of any duplicates.
 
-> Bitbake can't know whether a given change in some conf file changes a
-> given package. What it can in theory tell is whether the some
-> conf/class/bb/inc file has changed or not since a given package was
-> built. We already have this cache logic in place but it currently has no
-> influence on stamp validity decisions. It would be possible to wire that
-> into the stamp logic so if you touch bitbake.conf anything which could
-> be influenced by that file (everything) would rebuild. If you touch a
-> class file like kernel.bbclass, just the kernel would rebuild (and
-> anything depending on it). Any change to local.conf would rebuild
-> everything.
-That would be the same as rebuilding a whole project because the
-Makefile has changed.  I know people who do that, but I don't like this
-approach.
+Did anyone see this before? Any suggestions? I think I can solve this
+by changing back to --enable-cheaders=c_std instead of c_global (which
+was the default previously and which is why pre-4.3 toolchains work
+fine for me), but I'm not sure of the implications of that.
 
-> For comparison note that your USE variables just cover the EXTRA_OECONF
-> variable. There are hundreds of other variables which can influence the
-> build and trying to build a definitive list of them would be difficult.
-> What makes EXTRA_OECONF special?
-Sorry, but it seems that I didn't make myself very clear.
-What I proposed is a naming scheme like:
-USE_package_VARIABLE
-where 'USE' is the marker for bitbake that this is something to track,
-'package' is the package for which this needs to be tracked, and
-'VARIABLE' is the name of the variable as it is used in the package's
-recipe.
+Regards,
 
-   Detlef
+Matthijs
+
+--enable-cheaders=OPTION
+
+    This allows the user to define the approach taken for C header
+compatibility with C++. Options are c, c_std, and c_global. These
+correspond to the source directory's include/c, include/c_std, and
+include/c_global, and may also include include/c_compatibility. The
+default is c_global.
 
 
