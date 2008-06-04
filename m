@@ -1,34 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K3w0P-0005ne-FO
-	for openembedded-devel@openembedded.org; Wed, 04 Jun 2008 18:38:33 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K3vvz-0001E6-7A
-	for openembedded-devel@openembedded.org; Wed, 04 Jun 2008 16:33:59 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 04 Jun 2008 16:33:59 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 04 Jun 2008 16:33:59 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 04 Jun 2008 18:33:48 +0200
-Message-ID: <g26g5d$n9n$1@ger.gmane.org>
-References: <g1eulp$skn$1@ger.gmane.org>	<200805270944.04922.openembedded@haerwu.biz>	<483BEBD0.4070707@balister.org>	<4842C92B.1020208@kernelconcepts.de>	<c384c5ea0806011556s3983e0dcq6f887698341b17c1@mail.gmail.com>	<4843D763.4080307@balister.org>
-	<g265th$bv3$1@ger.gmane.org>
-	<20080604140801.GB3683@cimmeria.hyboria>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <20080604140801.GB3683@cimmeria.hyboria>
-Sender: news <news@ger.gmane.org>
-Subject: Re: RFC: restart wiki from scratch
+	(envelope-from <loudawgucr@gmail.com>) id 1K3xVH-0004Bg-8f
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Jun 2008 20:14:39 +0200
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20080604180953.JCNG6602.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>;
+	Wed, 4 Jun 2008 14:09:53 -0400
+Received: from veronica.jetheaddev.com ([70.164.99.62])
+	by fed1rmimpo01.cox.net with bizsmtp
+	id Zu9u1Z0061Llurq03u9vas; Wed, 04 Jun 2008 14:09:55 -0400
+Received: from veronica.jetheaddev.com ([192.168.13.7]
+	helo=veronica.jetheaddev.com)
+	by mail.jetheaddev.com; 4 Jun 2008 11:09:54 -0700
+Received: from lou-jethead.jetheaddev.com ([192.168.13.87]) by
+	veronica.jetheaddev.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 4 Jun 2008 11:03:14 -0700
+From: Louie Ilievski <loudawgucr@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 4 Jun 2008 11:03:48 -0700
+User-Agent: KMail/1.9.9
+References: <200805271420.02174.loudawgucr@gmail.com>
+	<4842CB25.5000305@kernelconcepts.de>
+In-Reply-To: <4842CB25.5000305@kernelconcepts.de>
+MIME-Version: 1.0
+Message-Id: <200806041103.48229.loudawgucr@gmail.com>
+X-OriginalArrivalTime: 04 Jun 2008 18:03:14.0239 (UTC)
+	FILETIME=[4213D4F0:01C8C66D]
+Subject: Re: Kernel not booting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -42,39 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2008 16:38:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 04 Jun 2008 18:14:45 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Graeme Gregory wrote:
-> Can we have this official with an announcement of the OE docs team
-> forming? I cant see it being a problem with oe core dudes.
-> 
-> Just to cut down on bickering later in the day lets have it all now.
+Florian,
 
-Hm, I am a bit irritated as to what kind of bickering you and RP seem to
-expect.  People's voices were heard and I think the discussion came to a
-conclusion.  Things continued from there with me taking the lead on the
-proposed solution.
+Thanks for the input.  I've been trying different kernel versions like the one 
+you recommended and so far when I have set the PREFERRED_VERSION to anything 
+other than the default, I have had build problems. LoL.  Just my luck, eh?  
+So I'll try to work those out and see if I can get a working build 
+someday  :-P
 
-If there is the need for one more official announcement (why yet another
-one?) then that should wait until the site is up, DNS updated and some
-content in.
+Thanks,
 
-Furthermore, I am not sure what OE doc team we are talking about.  I had
-prepared a lengthy reply today to Philip's "let the guys who do the work
-form first and decide on software then".  I scrapped that because a)
-there is no doc team and nobody stood up and volunteered and b) because
-I understood his message
-http://thread.gmane.org/gmane.comp.handhelds.openembedded/18575/focus=18602
- as "let the wiki admin team decide".  The wiki admin team is not the
-same as the doc team, I just want to make sure that is not misinterpreted.
+~Lou
 
-BTW, a growth from 0 admins to 5 admins in about 1 hour should squash
-any possible bickering IMHO.  And maybe we should start giving the
-people who take the initiative more credit instead of burdening them
-with ever more thoughts about some *possible* bickering.  If ever there
-was a need for that, time was amply provided during the RFC phase.
+On Sunday 01 June 2008 09:15:33 am Florian Boor wrote:
+> Hi,
+>
+> Louie Ilievski wrote:
+> > When trying to boot this with Haret, the last message I see is "Jumping
+> > to kernel" and then it sits there until I reset the device.  I don't know
+> > where to go from here to find out what is wrong with the kernel.
+>
+> I have seen the same effect with the HTC Universal which uses the same
+> kernel (2.6.21-hh20). So it seems to be broken for other devices as well.
+> Kernel 2.6.20-hh10 works for the Universal.
+>
+> Greetings
+>
+> Florian
 
 
 
