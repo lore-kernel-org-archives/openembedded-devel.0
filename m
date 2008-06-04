@@ -1,30 +1,33 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1K3foq-0007b1-5j
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Jun 2008 01:21:33 +0200
-X-ASG-Debug-ID: 1212535024-75b4000e0000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.71] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 94FD5C24E2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Jun 2008 18:17:04 -0500 (CDT)
-Received: from [192.168.1.71] (LRS-CiscoRouter [192.168.1.1]) by
-	barracuda.pager.net with ESMTP id czyMlFNrc16JcM1G for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jun 2008 18:17:04 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: autoconf and --program-prefix insanity
-Date: Tue, 3 Jun 2008 18:17:41 -0500
-User-Agent: KMail/1.9.9
-MIME-Version: 1.0
-Message-Id: <200806031817.42038.geoffrey@pager.net>
-X-Barracuda-Connect: LRS-CiscoRouter[192.168.1.1]
-X-Barracuda-Start-Time: 1212535024
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: autoconf and --program-prefix insanity
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1K3r1P-0001o0-Ir
+	for openembedded-devel@openembedded.org; Wed, 04 Jun 2008 13:19:15 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1K3qx2-0000my-1C
+	for openembedded-devel@openembedded.org; Wed, 04 Jun 2008 11:14:44 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 04 Jun 2008 11:14:44 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 04 Jun 2008 11:14:44 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 04 Jun 2008 13:14:36 +0200
+Message-ID: <g25tes$bdb$1@ger.gmane.org>
+References: <70c9a9110805220710x6663f582lc5d6b75744960d08@mail.gmail.com>	<70c9a9110805220711i33fd397k518855a05773edf0@mail.gmail.com>	<1211958108.27777.15.camel@isis>	<35a670560805280252o3fc348d1x7b7cf51b01f209e9@mail.gmail.com>	<g1jf9e$ltq$1@ger.gmane.org>
+	<35a670560806030016y4fab1071pd7843d2736b32943@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a2pre (Macintosh/2008052703)
+In-Reply-To: <35a670560806030016y4fab1071pd7843d2736b32943@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: GCC 4.3 fails to build glibc(-intermediate)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -38,64 +41,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jun 2008 23:21:35 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Wed, 04 Jun 2008 11:19:15 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi all,
+Matthijs van de Water wrote:
+> Did anyone working with GCC 4.3 have any problems with the C++
+> compiler in the SDK?
+>
+> With the current setup, my include path search order is such that for
+> instance the<cstdlib>  header is trying to #include_next<stdlib.h>,
+> which fails because the normal include paths precede the C++ include
+> paths.
+> If I change the #include_next to #include the headers work fine, but
+> that is obviously no solution. It looks like this is broken for all
+> sysroot builds, because the compiler will put the sysroot include
+> before the C++ ones and get rid of any duplicates.
+>
+> Did anyone see this before?
 
-I thought I'd drag ya'll into my current autoconf hell, and hopefully someone 
-would know where the exit is located.
+I did see that before as well.
 
-The packages/binutils/binutils-avr32.inc got changed so that instead of 
-explicitly invoking autoconf-2.13 (which comes from outside OE) in the 
-top-level binutils directory, it just invokes autoconf.  This will use OE's 
-autoconf, which happens to be autoconf 2.61.  Makes good sense.
+> Any suggestions? I think I can solve this
+> by changing back to --enable-cheaders=c_std instead of c_global (which
+> was the default previously and which is why pre-4.3 toolchains work
+> fine for me), but I'm not sure of the implications of that.
 
-So somewhere between autoconf 2.13 and 2.61, the handling of 
-the "--program-prefix" and how it interacts with cross compilation changed.  
-I've personally almost never used "--program-prefix", just specifying cross 
-compilation seems to always set the prefix correctly.  However, 
-binutils-cross.inc explicitly specifies "--program-prefix" when configuring 
-binutils, in addition to specifying cross compilation.  
+Maybe we try something like this:
 
-This worked fine when the configure script was built by autoconf 2.13.  But 
-when configure is built by autoconf 2.61, I get binaries named 
-avr32-angstrom-linux-uclibc-avr32-angstrom-linux-uclibc-ar and similar, which 
-obviously won't work when you need to use them.  Modifying binutils-cross.inc 
-to not put "--program-prefix" in EXTRA_OECONF fixes the issue.
+--- packages/gcc/gcc-4.3.0.inc  7dac0d4ea94fbc3071cf13542d7afc9c97598920
++++ packages/gcc/gcc-4.3.0.inc  d4ceae7672f475a16184235ac603437f86c3079e
+@@ -68,5 +68,5 @@ JAVA = ""
+  FORTRAN = ""
+  JAVA = ""
 
-So, is there really a need to specify "--program-prefix"?  Will this break 
-when configure is built by an older autoconf?  I don't think it would, but I 
-really can't guess why "--program-prefix" was specified.
+-EXTRA_OECONF_BASE = " --enable-libssp --disable-bootstrap 
+--disable-libgomp --disable-libmudflap"
++EXTRA_OECONF_BASE = "  --enable-cheaders=c_std --enable-libssp 
+--disable-bootstrap --disable-libgomp --disable-libmudflap"
 
----
-Geoffrey
-
-#
-# old_revision [0b3a1625ab319665b65cdff67a448a4657c6a3b1]
-#
-# patch "packages/binutils/binutils-cross.inc"
-#  from [06c8460191f6e42d0bb389ff55a7ed29314fa2a6]
-#    to [602bfb4f4c4561234706c9de42730c6b3825d724]
-#
 ============================================================
---- packages/binutils/binutils-cross.inc        
-06c8460191f6e42d0bb389ff55a7ed29314fa2a6
-+++ packages/binutils/binutils-cross.inc        
-602bfb4f4c4561234706c9de42730c6b3825d724
-@@ -1,10 +1,9 @@ EXTRA_OECONF = "--with-sysroot=${STAGING
- SECTION = "devel"
- inherit cross
- DEPENDS += "flex-native bison-native"
- PROVIDES = "virtual/${TARGET_PREFIX}binutils"
- PACKAGES = ""
- EXTRA_OECONF = "--with-sysroot=${STAGING_DIR_TARGET} \
--               --program-prefix=${TARGET_PREFIX} \
-                --enable-install-libbfd \
-                 --disable-werror"
+--- packages/gcc/gcc-cross_4.3.0.bb 
+1ed2f60e65e1b09e4a5637ab29c85ad02338061f
++++ packages/gcc/gcc-cross_4.3.0.bb 
+cc76abacb299b51bb7da2b6bc0a6f7bec093ebeb
+@@ -7,6 +7,12 @@ SRC_URI_append_fail-fast = " file://zeck
+
+  SRC_URI_append_fail-fast = " file://zecke-no-host-includes.patch;patch=1 "
+
+-EXTRA_OECONF += "--disable-libunwind-exceptions 
+--with-mpfr=${STAGING_DIR_NATIVE}${layout_exec_prefix}"
++EXTRA_OECONF += "  --enable-cheaders=c_std 
+--disable-libunwind-exceptions 
+--with-mpfr=${STAGING_DIR_NATIVE}${layout_exec_prefix}"
+
+
+regards,
+
+Koen
+
+
+>
+> Regards,
+>
+> Matthijs
+>
+> --enable-cheaders=OPTION
+>
+>      This allows the user to define the approach taken for C header
+> compatibility with C++. Options are c, c_std, and c_global. These
+> correspond to the source directory's include/c, include/c_std, and
+> include/c_global, and may also include include/c_compatibility. The
+> default is c_global.
+
 
 
 
