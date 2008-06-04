@@ -1,33 +1,30 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <loudawgucr@gmail.com>) id 1K3xVH-0004Bg-8f
+	(envelope-from <geoffrey@pager.net>) id 1K3zYO-00051L-7s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Jun 2008 20:14:39 +0200
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20080604180953.JCNG6602.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>;
-	Wed, 4 Jun 2008 14:09:53 -0400
-Received: from veronica.jetheaddev.com ([70.164.99.62])
-	by fed1rmimpo01.cox.net with bizsmtp
-	id Zu9u1Z0061Llurq03u9vas; Wed, 04 Jun 2008 14:09:55 -0400
-Received: from veronica.jetheaddev.com ([192.168.13.7]
-	helo=veronica.jetheaddev.com)
-	by mail.jetheaddev.com; 4 Jun 2008 11:09:54 -0700
-Received: from lou-jethead.jetheaddev.com ([192.168.13.87]) by
-	veronica.jetheaddev.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 4 Jun 2008 11:03:14 -0700
-From: Louie Ilievski <loudawgucr@gmail.com>
+	Wed, 04 Jun 2008 22:25:52 +0200
+X-ASG-Debug-ID: 1212610874-2ef400330000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 2F903C4155
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Jun 2008 15:21:15 -0500 (CDT)
+Received: from [192.168.1.71] ([192.168.1.1]) by barracuda.pager.net with
+	ESMTP id ZIwLiFDxwJbaU02b for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Jun 2008 15:21:15 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 4 Jun 2008 11:03:48 -0700
+X-ASG-Orig-Subj: No Python in STAGING_INCDIR. Forgot to build python-native ?
+Date: Wed, 4 Jun 2008 15:21:47 -0500
 User-Agent: KMail/1.9.9
-References: <200805271420.02174.loudawgucr@gmail.com>
-	<4842CB25.5000305@kernelconcepts.de>
-In-Reply-To: <4842CB25.5000305@kernelconcepts.de>
 MIME-Version: 1.0
-Message-Id: <200806041103.48229.loudawgucr@gmail.com>
-X-OriginalArrivalTime: 04 Jun 2008 18:03:14.0239 (UTC)
-	FILETIME=[4213D4F0:01C8C66D]
-Subject: Re: Kernel not booting
+Message-Id: <200806041521.47324.geoffrey@pager.net>
+X-Barracuda-Connect: UNKNOWN[192.168.1.1]
+X-Barracuda-Start-Time: 1212610875
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: No Python in STAGING_INCDIR. Forgot to build python-native ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,39 +38,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2008 18:14:45 -0000
+X-List-Received-Date: Wed, 04 Jun 2008 20:25:52 -0000
 Content-Type: text/plain;
-  charset="iso-8859-1"
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Florian,
+I was just watching an OE build, and it spat out the message:
 
-Thanks for the input.  I've been trying different kernel versions like the one 
-you recommended and so far when I have set the PREFERRED_VERSION to anything 
-other than the default, I have had build problems. LoL.  Just my luck, eh?  
-So I'll try to work those out and see if I can get a working build 
-someday  :-P
+NOTE: package libxml2-native-2.6.29-r3: task do_setscene: started
+NOTE: No Python in STAGING_INCDIR. Forgot to build python-native ?:None while 
+evaluating:
+--with-python=/home/geoff/lrs/playpaq/tmp/staging/i686-linux/usr/include/${@libxml2_native_python_dir(d)}                 --without-debug --without-legacy --without-catalog --without-docbook --with-c14n
+NOTE: No Python in STAGING_INCDIR. Forgot to build python-native ?:None while 
+evaluating:
+        if [ -x ${S}/configure ] ; then
+                cfgcmd="${S}/configure \
+                    --build=${BUILD_SYS} \
+                    --host=${HOST_SYS} \
+                    --target=${TARGET_SYS} \
+                    --prefix=${prefix} \
+                    --exec_prefix=${exec_prefix} \
+                    --bindir=${bindir} \
+                    --sbindir=${sbindir} \
+                    --libexecdir=${libexecdir} \
+                    --datadir=${datadir} \
+                    --sysconfdir=${sysconfdir} \
+                    --sharedstatedir=${sharedstatedir} \
+                    --localstatedir=${localstatedir} \
+                    --libdir=${libdir} \
+                    --includedir=${includedir} \
+                    --oldincludedir=${oldincludedir} \
+                    --infodir=${infodir} \
+                    --mandir=${mandir} \
+                        ${EXTRA_OECONF} \
+                    $@"
+                oenote "Running $cfgcmd..."
+                $cfgcmd || oefatal "oe_runconf failed"
+        else
+                oefatal "no configure script found"
+        fi
 
-Thanks,
+NOTE: Checking if staging package installed
+NOTE: No. Manually removing any installed files
+NOTE: package libxml2-native-2.6.29-r3: task do_setscene: completed
 
-~Lou
+And then it kept on truckin'.  What does that mean?  Is it important?
 
-On Sunday 01 June 2008 09:15:33 am Florian Boor wrote:
-> Hi,
->
-> Louie Ilievski wrote:
-> > When trying to boot this with Haret, the last message I see is "Jumping
-> > to kernel" and then it sits there until I reset the device.  I don't know
-> > where to go from here to find out what is wrong with the kernel.
->
-> I have seen the same effect with the HTC Universal which uses the same
-> kernel (2.6.21-hh20). So it seems to be broken for other devices as well.
-> Kernel 2.6.20-hh10 works for the Universal.
->
-> Greetings
->
-> Florian
+TIA,
+---
+Geoffrey
 
+
+
+And then
 
 
