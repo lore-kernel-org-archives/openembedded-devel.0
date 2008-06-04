@@ -1,32 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K3tfF-0003PD-R1
-	for openembedded-devel@openembedded.org; Wed, 04 Jun 2008 16:08:33 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K3tao-0000iU-S3
-	for openembedded-devel@openembedded.org; Wed, 04 Jun 2008 14:03:58 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 04 Jun 2008 14:03:58 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 04 Jun 2008 14:03:58 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 04 Jun 2008 16:03:44 +0200
-Message-ID: <g267bv$hvi$1@ger.gmane.org>
-References: <g1eulp$skn$1@ger.gmane.org>	<200805270944.04922.openembedded@haerwu.biz>	<483BEBD0.4070707@balister.org>	<4842C92B.1020208@kernelconcepts.de>	<c384c5ea0806011556s3983e0dcq6f887698341b17c1@mail.gmail.com>	<4843D763.4080307@balister.org>	<g265th$bv3$1@ger.gmane.org>
-	<48469E26.7010008@gmail.com>
+	(envelope-from <dp@xora.org.uk>) id 1K3tgh-0003So-8I
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Jun 2008 16:10:04 +0200
+Received: from xora.org.uk ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Wed, 04 Jun 2008 15:05:31 +0100
+	id 00084576.4846A12B.00002668
+Date: Wed, 4 Jun 2008 15:08:01 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080604140801.GB3683@cimmeria.hyboria>
+References: <g1eulp$skn$1@ger.gmane.org>
+	<200805270944.04922.openembedded@haerwu.biz>
+	<483BEBD0.4070707@balister.org>
+	<4842C92B.1020208@kernelconcepts.de>
+	<c384c5ea0806011556s3983e0dcq6f887698341b17c1@mail.gmail.com>
+	<4843D763.4080307@balister.org> <g265th$bv3$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <48469E26.7010008@gmail.com>
-Sender: news <news@ger.gmane.org>
+In-Reply-To: <g265th$bv3$1@ger.gmane.org>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
 Subject: Re: RFC: restart wiki from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -41,20 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2008 14:08:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 04 Jun 2008 14:10:05 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Jacob Thebault-Spieker wrote:
-> I don't have very much OE dev experience, but I've been a user for
-> years. I do have a decent amount of web experience, so if help is
-> needed, I would be willing to contribute some of my time towards this
-> effort.
+On Wed, Jun 04, 2008 at 03:38:58PM +0200, Rolf Leggewie wrote:
+> Philip Balister wrote:
+> > I mean that the people responsible for the management tasks, like what
+> > backups, and figuring out who to give access to, should make the
+> > decision regarding what software to use.
+> 
+> Great.  So, it's agreed.  I'll start implementation soon.  Currently, we
+> have cbrake and me as main admins, hrw and mickey for standby in case
+> the mysql server needs a kick or some such.
+> 
+Can we have this official with an announcement of the OE docs team
+forming? I cant see it being a problem with oe core dudes.
 
-Great.  Count yourself in.
+Just to cut down on bickering later in the day lets have it all now.
 
-We'll do some testing initially and then if members of this list are
-satisfied, switch the lever.
+Graeme
 
 
 
