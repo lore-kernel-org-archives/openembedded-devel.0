@@ -1,21 +1,31 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1K4NxG-0006sE-0U; Fri, 06 Jun 2008 00:29:10 +0200
-Received: from andromeda (e180185196.adsl.alicedsl.de [85.180.185.196])
-	by drlauer-research.com (Postfix) with ESMTP id CB09B584C53;
-	Fri,  6 Jun 2008 00:26:11 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-users@lists.openembedded.org
-Date: Fri, 6 Jun 2008 00:24:22 +0200
-User-Agent: KMail/1.9.9
-References: <200806060643.37332.p_blacquiere@yahoo.co.uk>
-In-Reply-To: <200806060643.37332.p_blacquiere@yahoo.co.uk>
-MIME-Version: 1.0
-Message-Id: <200806060024.23268.mickey@vanille-media.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Exception.ValueError during build
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1K4OLI-0007Ry-Qy
+	for openembedded-devel@openembedded.org; Fri, 06 Jun 2008 00:54:00 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1K4OGg-0004xg-Sl
+	for openembedded-devel@openembedded.org; Thu, 05 Jun 2008 22:49:14 +0000
+Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 05 Jun 2008 22:49:14 +0000
+Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 05 Jun 2008 22:49:14 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 06 Jun 2008 00:48:59 +0200
+Message-ID: <48486D5B.4060000@nospam.arcornews.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+Sender: news <news@ger.gmane.org>
+Cc: otavio@debian.org
+Subject: RFC: RW for otavio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -29,64 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jun 2008 22:29:10 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 05 Jun 2008 22:54:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thursday 05 June 2008 20:43:37 Paul Blacquiere wrote:
-> Hi,
->
-> While trying to build (independent of what machine or distro) I get the
-> following error almost immediately.
->
-> ********************************************************************
-> $>  bitbake helloworld-image
->
-> NOTE: Out of date cache found, rebuilding...
-> NOTE: Handling BitBake files: | (0001/0001) [100 %]
-> NOTE: Parsing finished. 0 cached, 1 parsed, 0 skipped, 0 masked.
+Hi,
 
-This looks like either BitBake does not find your configuration directory 
-(double check BBPATH) or you are missing the path to your BitBake files 
-(double check BBFILES in your local.conf).
+I'd like to propose rw access for another contributor, Otavio Salvador.
+ Otavio is a Debian developper, so I guess the issue should be already
+settled right there ;-)  Some of his commit history can be seen at CIA
 
-[...]
+http://cia.vc/stats/author/otavio
 
-> NOTE: build 200806060630: started
-> NOTE: <type 'exceptions.ValueError'>:substring not found while evaluating:
-> ${@base_get_metadata_monotone_revision(d)}
-> Traceback (most recent call last):
->   File "/stuff/bitbake/bin/bitbake", line 134, in <module>
->     main()
->   File "/stuff/bitbake/bin/bitbake", line 131, in main
->     cooker.cook()
->   File "/stuff/bitbake/lib/bb/cooker.py", line 636, in cook
->     return self.buildTargets(pkgs_to_build)
->   File "/stuff/bitbake/lib/bb/cooker.py", line 527, in buildTargets
->     bb.event.fire(bb.event.BuildStarted(buildname, targets,
-> self.configuration.event_data))
->   File "/stuff/bitbake/lib/bb/event.py", line 67, in fire
->     if tmpHandler(event) == Handled:
->   File "tmpHandler(e)", line 31, in tmpHandler
->   File "/stuff/bitbake/lib/bb/data.py", line 97, in getVar
->     return d.getVar(var,exp)
->   File "/stuff/bitbake/lib/bb/data_smart.py", line 170, in getVar
->     return self.expand(value,var)
->   File "/stuff/bitbake/lib/bb/data_smart.py", line 85, in expand
->     s = __expand_python_regexp__.sub(python_sub, s)
->   File "/stuff/bitbake/lib/bb/data_smart.py", line 71, in python_sub
->     s = eval(code)
->   File "<string>", line 1, in <module>
->   File "<bb>", line 4, in base_get_metadata_monotone_revision
->   File "<bb>", line 4, in base_get_scmbasepath
-> ValueError: substring not found
+Some of his work has already made it into OE (bugs 3342, 3371, 3372,
+3373 and the all-otavio-bug 4340).  Lately, his patches have been coming
+in faster than I can look at and verify them and it would be a shame to
+slow him down or build up a queue.
 
-Fwiw, we should catch this error and put something more sane out.
+The solution is simple: RW access for otavio.
 
-:M:
--- 
-Dr. Michael 'Mickey' Lauer | IT-Freelancer | http://www.vanille-media.de
+Regards
+
+Rolf
+
 
 
