@@ -1,33 +1,30 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1K4k0P-00028p-K2
-	for openembedded-devel@openembedded.org; Sat, 07 Jun 2008 00:01:53 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m56Lv2ei031005
-	for <openembedded-devel@openembedded.org>;
-	Fri, 6 Jun 2008 22:57:02 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30475-07 for <openembedded-devel@openembedded.org>;
-	Fri,  6 Jun 2008 22:56:55 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m56LuroT030984
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Fri, 6 Jun 2008 22:56:53 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200806061502.02821.mickey@vanille-media.de>
-References: <48486D5B.4060000@nospam.arcornews.de>
-	<200806061502.02821.mickey@vanille-media.de>
-Date: Fri, 06 Jun 2008 22:56:55 +0100
-Message-Id: <1212789415.6840.30.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: RFC: RW for otavio
+	(envelope-from <geoffrey@pager.net>) id 1K4k8i-0002LV-79
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Jun 2008 00:10:31 +0200
+X-ASG-Debug-ID: 1212789933-787a000d0000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from [192.168.1.71] (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 1FCBDC7061
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  6 Jun 2008 17:05:35 -0500 (CDT)
+Received: from [192.168.1.71] (LRS-CiscoRouter [192.168.1.1]) by
+	barracuda.pager.net with ESMTP id 5mXoXgMaNuYAfIs2 for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Jun 2008 17:05:35 -0500 (CDT)
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
+To: openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: DEPENDS="gettext" vs. DEPENDS="virtual/libintl"
+Date: Fri, 6 Jun 2008 17:06:11 -0500
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200806061706.11880.geoffrey@pager.net>
+X-Barracuda-Connect: LRS-CiscoRouter[192.168.1.1]
+X-Barracuda-Start-Time: 1212789935
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: DEPENDS="gettext" vs. DEPENDS="virtual/libintl"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,51 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2008 22:01:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 06 Jun 2008 22:10:35 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Fri, 2008-06-06 at 15:02 +0200, Michael 'Mickey' Lauer wrote:
-> Ok, seems people are convinced this is a good idea.
-> 
-> Otavio, please send your mtn and ssh keys to
-> Koen <k.kooi@student.utwente.nl> and me <mlauer@vanille-media.de>.
+Hi all,
 
-I have no objection to Otavio having access so please don't
-misunderstand this email in that regard. This is more a general issue I
-want to raise.
+I'm working on exorcizing gettext as a requirement for building OE.  Since 
+glib-2.0 absolutely has to have libintl, I've found an alternate way of 
+providing.  uClibc's libintl stub has a pretty bad case of bitrot, but I 
+found proxy-libintl, which was written to get GNOME onto Windows.  By setting 
+proxy-libintl up as the PREFERRED_PROVIDER for virtual/libintl, I can get 
+past glib-2.0 now.
 
-What I'd like to see is some kind of code of conduct for developers,
-particularly new ones to ensure changes get appropriate review and we
-don't see cause any conflict.
+The problem now is that some packages explicitly list "gettext" in their 
+DEPENDS.  Is this just legacy from before virtual/libintl was created?  Is 
+there any reason why these can't all be changed to "virtual/libintl"?
 
-As guidelines:
-
-* Changes to class files need review on the mailing list
-* Changes to more global .conf files need review (e.g. bitbake.conf)
-* Changes to core toolchain components need review (gcc, binutils, 
-  libtool, pkgconfig, automake, autoconf etc.)
-* Machine configs are less sensitive but machine maintainers should be 
-  consulted where present and known
-* Distro config changes should be reviewed by the distro maintainers 
-  where known
-* Recipe changes are less sensitive but maintainers should be consulted 
-  where known
-
-The point here is to let people build up gradually. Changing the core
-infrastructure can influence a lot of people and whilst I don't want to
-discourage people hacking on it, we do need to take more care on those
-changes than ones in "lower" level recipes. I'm fairly sure most of the
-devs know and respect this, I just wonder if having some kind of more
-formal policy written down would be a good idea so people know where
-they stand?
-
-Opinions?
-
-Cheers,
-
-Richard
-
-
+TIA,
+---
+Geoffrey
 
 
