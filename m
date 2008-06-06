@@ -1,38 +1,20 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1K4ZRG-0007wJ-Ne
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Jun 2008 12:44:54 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id DFA348400BE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jun 2008 12:40:06 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 74CA38400B2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jun 2008 12:40:06 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.4 (2008-01-01) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_40 autolearn=ham
-	version=3.2.4
-Received: from rhein.familie-heinold.de (e178090106.adsl.alicedsl.de
-	[85.178.90.106]) by mail.familie-heinold.de (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jun 2008 12:40:06 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id E493E3C1A7; Fri,  6 Jun 2008 12:40:05 +0200 (CEST)
-Date: Fri, 6 Jun 2008 12:40:05 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <openembedded@haerwu.biz>) id 1K4ZqR-0008UR-Uk
+	for openembedded-devel@openembedded.org; Fri, 06 Jun 2008 13:10:58 +0200
+Received: (qmail 31401 invoked by uid 813007); 6 Jun 2008 11:06:07 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.local)
+	(marcin@hrw.one.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 6 Jun 2008 11:06:07 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080606104005.GA23792@rhein.zuhause.netz>
-References: <48486D5B.4060000@nospam.arcornews.de> <4848F830.8030008@gmx.net>
+Date: Fri, 6 Jun 2008 13:06:05 +0200
+User-Agent: KMail/1.9.9
+References: <48486D5B.4060000@nospam.arcornews.de>
+In-Reply-To: <48486D5B.4060000@nospam.arcornews.de>
 MIME-Version: 1.0
-In-Reply-To: <4848F830.8030008@gmx.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Message-Id: <200806061306.06360.openembedded@haerwu.biz>
 Subject: Re: RFC: RW for otavio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -47,33 +29,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2008 10:44:54 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 06 Jun 2008 11:11:02 -0000
+Content-Type: text/plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Fri, Jun 06, 2008 at 10:41:20AM +0200, Robert Schuster wrote:
-> Hi.
-> 
-> Rolf Leggewie schrieb:
-> > I'd like to propose rw access for another contributor, Otavio Salvador.
-> >  Otavio is a Debian developper,
-> We need more DDs to convince them to use OE later. ;) ;)
-> 
-I agree.
+Dnia pi=B1tek, 6 czerwca 2008, Rolf Leggewie napisa=B3:
+> The solution is simple: RW access for otavio.
 
->  > Some of his work has already made it into OE (bugs 3342, 3371, 3372,
-> > 3373 and the all-otavio-bug 4340).  Lately, his patches have been coming
-> > in faster than I can look at and verify them and it would be a shame to
-> > slow him down or build up a queue.
-> Sounds good.
-> 
-> > The solution is simple: RW access for otavio.
-> +1
-+1 from me too.
++1 from me
+
+=2D-=20
+JID: hrw-jabber.org
+OpenEmbedded developer/consultant
+
+             I do not fear computers. I fear the lack of them.
+             		-- Isaac Asimov
 
 
-Bye,
-
-Henning
 
 
