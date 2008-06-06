@@ -1,39 +1,40 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [201.35.65.91] (helo=freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1K4kRL-0007ll-Rx
+	(envelope-from <otavio@freedom.ind.br>) id 1K4lSy-0005wU-9G
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Jun 2008 00:29:43 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E36138400BE
+	Sat, 07 Jun 2008 01:35:28 +0200
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 0FFDA8ADD09
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jun 2008 00:24:51 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7CEA38400B2
+	Fri,  6 Jun 2008 20:30:36 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id C26218ADD07
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jun 2008 00:24:51 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.4 (2008-01-01) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_40 autolearn=ham
-	version=3.2.4
-Received: from rhein.familie-heinold.de (e178090106.adsl.alicedsl.de
-	[85.178.90.106]) by mail.familie-heinold.de (Postfix) with ESMTP
+	Fri,  6 Jun 2008 20:30:35 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 6 Jun 2008 20:30:35 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 2B8C9C1F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jun 2008 00:24:51 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id F053E3C1A7; Sat,  7 Jun 2008 00:24:50 +0200 (CEST)
-Date: Sat, 7 Jun 2008 00:24:50 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Fri,  6 Jun 2008 17:30:44 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id AD728610055; Fri,  6 Jun 2008 20:32:29 -0300 (BRT)
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080606222450.GA6145@rhein.zuhause.netz>
-References: <200806061706.11880.geoffrey@pager.net>
+References: <48486D5B.4060000@nospam.arcornews.de>
+	<200806061502.02821.mickey@vanille-media.de>
+	<1212789415.6840.30.camel@dax.rpnet.com>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Fri, 06 Jun 2008 20:32:29 -0300
+In-Reply-To: <1212789415.6840.30.camel@dax.rpnet.com> (Richard Purdie's
+	message of "Fri\, 06 Jun 2008 22\:56\:55 +0100")
+Message-ID: <878wxib0mq.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-In-Reply-To: <200806061706.11880.geoffrey@pager.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: DEPENDS="gettext" vs. DEPENDS="virtual/libintl"
+Subject: Re: RFC: RW for otavio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -47,35 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2008 22:29:44 -0000
+X-List-Received-Date: Fri, 06 Jun 2008 23:35:28 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 
-On Fri, Jun 06, 2008 at 05:06:11PM -0500, Geoffrey Wossum wrote:
-> Hi all,
-> 
-> I'm working on exorcizing gettext as a requirement for building OE.  Since 
-> glib-2.0 absolutely has to have libintl, I've found an alternate way of 
-> providing.  uClibc's libintl stub has a pretty bad case of bitrot, but I 
-> found proxy-libintl, which was written to get GNOME onto Windows.  By setting 
-> proxy-libintl up as the PREFERRED_PROVIDER for virtual/libintl, I can get 
-> past glib-2.0 now.
-> 
-> The problem now is that some packages explicitly list "gettext" in their 
-> DEPENDS.  Is this just legacy from before virtual/libintl was created?  Is 
-> there any reason why these can't all be changed to "virtual/libintl"?
-> 
-> TIA,
-> ---
-> Geoffrey
-> 
-Hi,
+Richard Purdie <rpurdie@rpsys.net> writes:
 
-I suggest looking into this packages to see why they need gettext, maybee
-they need special tools, which only gettext provides.
+> The point here is to let people build up gradually. Changing the core
+> infrastructure can influence a lot of people and whilst I don't want to
+> discourage people hacking on it, we do need to take more care on those
+> changes than ones in "lower" level recipes. I'm fairly sure most of the
+> devs know and respect this, I just wonder if having some kind of more
+> formal policy written down would be a good idea so people know where
+> they stand?
 
-Bye,
+This is usual in most projects.
 
-Henning
+I fully agree that this should be a policy and would be nice to have a
+cannonical place to look for maintainers. That avoids mistakes from
+begginers (like me).
+
+I also believe this makes easier and avoid stupid mistakes to get in
+SCM. More people checking is always good and I see no problem in
+requiring it.
+
+Cheers,
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
