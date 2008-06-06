@@ -1,25 +1,38 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1K4XaQ-000496-Mx
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1K4ZRG-0007wJ-Ne
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Jun 2008 10:46:14 +0200
-Received: (qmail invoked by alias); 06 Jun 2008 08:41:25 -0000
-Received: from brln-4db8886a.pool.einsundeins.de (EHLO [192.168.4.110])
-	[77.184.136.106]
-	by mail.gmx.net (mp015) with SMTP; 06 Jun 2008 10:41:25 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/DjgoLWJHDCvUU/nvsfSRwcqXKNzhunYC4Lqo22O
-	Qk7k27t6tkr8zF
-Message-ID: <4848F830.8030008@gmx.net>
-Date: Fri, 06 Jun 2008 10:41:20 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
-MIME-Version: 1.0
+	Fri, 06 Jun 2008 12:44:54 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id DFA348400BE
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  6 Jun 2008 12:40:06 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 74CA38400B2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  6 Jun 2008 12:40:06 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.4 (2008-01-01) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_40 autolearn=ham
+	version=3.2.4
+Received: from rhein.familie-heinold.de (e178090106.adsl.alicedsl.de
+	[85.178.90.106]) by mail.familie-heinold.de (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  6 Jun 2008 12:40:06 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id E493E3C1A7; Fri,  6 Jun 2008 12:40:05 +0200 (CEST)
+Date: Fri, 6 Jun 2008 12:40:05 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <48486D5B.4060000@nospam.arcornews.de>
-In-Reply-To: <48486D5B.4060000@nospam.arcornews.de>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
+Message-ID: <20080606104005.GA23792@rhein.zuhause.netz>
+References: <48486D5B.4060000@nospam.arcornews.de> <4848F830.8030008@gmx.net>
+MIME-Version: 1.0
+In-Reply-To: <4848F830.8030008@gmx.net>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: RFC: RW for otavio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -34,51 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2008 08:46:14 -0000
-X-Groupsio-MsgNum: 5310
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig71E22B28B32AC75F728D3B64"
+X-List-Received-Date: Fri, 06 Jun 2008 10:44:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------enig71E22B28B32AC75F728D3B64
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+On Fri, Jun 06, 2008 at 10:41:20AM +0200, Robert Schuster wrote:
+> Hi.
+> 
+> Rolf Leggewie schrieb:
+> > I'd like to propose rw access for another contributor, Otavio Salvador.
+> >  Otavio is a Debian developper,
+> We need more DDs to convince them to use OE later. ;) ;)
+> 
+I agree.
 
-Hi.
-
-Rolf Leggewie schrieb:
-> I'd like to propose rw access for another contributor, Otavio Salvador.=
-
->  Otavio is a Debian developper,
-We need more DDs to convince them to use OE later. ;) ;)
-
- > Some of his work has already made it into OE (bugs 3342, 3371, 3372,
-> 3373 and the all-otavio-bug 4340).  Lately, his patches have been comin=
-g
-> in faster than I can look at and verify them and it would be a shame to=
-
-> slow him down or build up a queue.
-Sounds good.
-
-> The solution is simple: RW access for otavio.
-+1
-
-Regards
-Robert
+>  > Some of his work has already made it into OE (bugs 3342, 3371, 3372,
+> > 3373 and the all-otavio-bug 4340).  Lately, his patches have been coming
+> > in faster than I can look at and verify them and it would be a shame to
+> > slow him down or build up a queue.
+> Sounds good.
+> 
+> > The solution is simple: RW access for otavio.
+> +1
++1 from me too.
 
 
---------------enig71E22B28B32AC75F728D3B64
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Bye,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Henning
 
-iD8DBQFISPgzG9cfwmwwEtoRCOVCAJ9zr9w+pg5/h7p/HPx/TZrirI3kZQCeJQ7q
-XEQULsr2jo8+JFpkpuk4o0E=
-=UyGA
------END PGP SIGNATURE-----
 
---------------enig71E22B28B32AC75F728D3B64--
