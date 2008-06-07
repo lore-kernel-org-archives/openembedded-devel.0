@@ -1,33 +1,43 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K4vaD-0003Kt-SH
-	for openembedded-devel@openembedded.org; Sat, 07 Jun 2008 12:23:37 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K4vVO-00074C-Gv
-	for openembedded-devel@openembedded.org; Sat, 07 Jun 2008 10:18:38 +0000
-Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 07 Jun 2008 10:18:38 +0000
-Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 07 Jun 2008 10:18:38 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 07 Jun 2008 12:18:21 +0200
-Message-ID: <g2dn9e$bb9$1@ger.gmane.org>
-References: <48486D5B.4060000@nospam.arcornews.de>	<200806061502.02821.mickey@vanille-media.de>
-	<1212789415.6840.30.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <1212789415.6840.30.camel@dax.rpnet.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: RFC: RW for otavio
+	(envelope-from <cliff.brake@gmail.com>) id 1K4wb9-0001FM-S5
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Jun 2008 13:28:40 +0200
+Received: by wa-out-1112.google.com with SMTP id j37so1045561waf.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 07 Jun 2008 04:23:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=R7bgwfcqj+ML4NOPpBS9M9cdQYjb3Z/qortjdDxfvpU=;
+	b=ZRIh1toZtA+wwPiQw40mgxy+YE59hO0w0MrsY7iOWQPhOrb4HILiOVn7Wxv2awx0WB
+	+mT1FJILC3TNDOwqIubQqQ2xZEOft2kuY+v2NtmhqGpKKtKio86onXDsXap0Zrx/jXDb
+	MD8UOzO4NQBxhENvBXRVjDCv5EHLQKbzVD+Ws=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=LVqNd8d0WnWRnrsPnVBTcW5C841xNtRFoz4JVf4/1PwqZksGAQaH0GF5tlWDMMm5YQ
+	PYwN7/yDf1aK00F4SiOJgy/vQ0ehBntAFk/feH/yr/15WaUzgtdipzpzROkDhYURs4gz
+	zavjxyUaYdFqCSkGWOUB3OstbIv/dNqkG31Qg=
+Received: by 10.114.112.1 with SMTP id k1mr1362784wac.10.1212837821429;
+	Sat, 07 Jun 2008 04:23:41 -0700 (PDT)
+Received: by 10.114.184.13 with HTTP; Sat, 7 Jun 2008 04:23:41 -0700 (PDT)
+Message-ID: <f96d234e0806070423k5361f4a7g2b48cee0f8f0a659@mail.gmail.com>
+Date: Sat, 7 Jun 2008 07:23:41 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: "Using OE" <openembedded-users@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org
+In-Reply-To: <f96d234e0806060651g12575666k2699643198a78262@mail.gmail.com>
+MIME-Version: 1.0
+References: <f96d234e0805301122s1b48445ardf7d268fcebdec50@mail.gmail.com>
+	<200806021019.50397.openembedded@haerwu.biz>
+	<f96d234e0806020753l21423d51kef19c7bc00f02244@mail.gmail.com>
+	<loom.20080605T225939-65@post.gmane.org>
+	<loom.20080606T002255-512@post.gmane.org>
+	<f96d234e0806060651g12575666k2699643198a78262@mail.gmail.com>
+Subject: Re: adding German local files to an image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,27 +51,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jun 2008 10:23:38 -0000
+X-List-Received-Date: Sat, 07 Jun 2008 11:28:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi Richard
+On Fri, Jun 6, 2008 at 9:51 AM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> Another observation, I can install glibc-locale-de on a device using
+> opkg, but not at rootfs time:
+>
+> Works on device:
+>
+> root@:~# opkg install glibc-locale-de
+> Installing glibc-locale-de (2.6.1-r4) to root...
+> Downloading http://hq.bec-systems.com/feeds/armv5te/glibc-locale-de_2.6.1-r4_armv5te.ipk
+> 100% |========================================================================|
+> Configuring glibc-locale-de
+> root@:~# opkg files glibc-locale-de
+> Package glibc-locale-de (2.6.1-r4) is installed on root and has the
+> following files:
+> /usr/share/locale/de/LC_MESSAGES/libc.mo
+>
+> But not at rootfs build time if I add glibc-locale-de to IMAGE_INSTALL
+>
+> NOTE: Resolving any missing task queue dependencies
+> ERROR: '['/build//_build/oe/oe/custom/packages/images/rootfs-vac-table-image.bb']'
+> RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity
+> 'glibc-locale-de' but it wasn't found in any PACKAGE or RPROVIDES
+> variables
+> NOTE: Runtime target 'glibc-locale-de' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['glibc-locale-de']
+> ERROR: Required build target 'rootfs-vac-table-image' has no buildable
+> providers.
+> Missing or unbuildable dependency chain was:
+> ['rootfs-vac-table-image', 'glibc-locale-de']
+> cbrake@happy:/build//_build/oe$
 
-Richard Purdie wrote:
-> What I'd like to see is some kind of code of conduct for developers,
-> particularly new ones
+The reason for the above behavior is locale packages are created
+dynamically, so bitbake has no knowledge of them.  Adding the
+following to bitbake.conf as as suggested on IRC last night would fix
+that:
 
-Good point.
+PACKAGES_DYNAMIC = "${PN}-locale-*"
 
-In fact, I've been thinking about how to get new devs up to speed more
-quickly as well.  I thought the new wiki would be a good place to have
-this and so I started http://wiki.openembedded.net/index.php/New_Dev
-Right now, there is nothing there yet, except a list of things to touch
-on.  I guess the points you and Koen raised would make good additions.
+Any objections to adding this?
 
-Regards
+Thanks,
+Cliff
 
-Rolf
-
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
