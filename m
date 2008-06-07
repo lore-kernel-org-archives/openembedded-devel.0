@@ -1,40 +1,41 @@
-Received: from [74.125.46.155] (helo=yw-out-1718.google.com)
+Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1K4qt5-0000Pb-B6
+	(envelope-from <xjqian@gmail.com>) id 1K4sJv-00044n-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Jun 2008 07:22:48 +0200
-Received: by yw-out-1718.google.com with SMTP id 5so814895ywr.42
+	Sat, 07 Jun 2008 08:54:35 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so825332ywr.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jun 2008 22:17:52 -0700 (PDT)
+	Fri, 06 Jun 2008 23:49:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:reply-to
-	:user-agent:mime-version:to:cc:subject:content-type
-	:content-transfer-encoding;
-	bh=AwYb7yfbF8fDmxMPP9ltGke7+gZi4FXJ67SmqQRpcdk=;
-	b=dqZrf8V+RJB3MtAWegmYDyJfKatITyRQpFE01MUUIBpHg+0uiFOg/cnKrvzwQZ3UdD
-	2WBw/UyQEx0I4H0iQHI0y5IO+CDtBEFzLWWPqjOsgUimghc6aKR+XXzVA8zG0UY5Zz+w
-	WHtACWVEL8YVfnnTeTBzVu6wrlEn5N6IZ0FxU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:reply-to:user-agent:mime-version:to:cc:subject
+	:user-agent:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding;
-	b=KuIhndJnuMUPIjKbxWHcEvf6CUwxnR5Qcb+uv3Fm2JmgF4Qlq29w2HdmJVxz91EeEM
-	gcnWTRxd6xmXJ38DP1LfS3uQjaSvzcKVWGoXjenb97HH9KFr96jHxiG44g/v5YswOz0y
-	wDSPD03xD4GsqDVuKHSYU2krHty/H6oqODvg0=
-Received: by 10.150.49.1 with SMTP id w1mr1625203ybw.26.1212815872389;
-	Fri, 06 Jun 2008 22:17:52 -0700 (PDT)
+	bh=tEeXqq/HyYQ2lOiJZWeYr00S53Vgh59B34vOSLK2z1Y=;
+	b=oRLp6BmDJBCz6Y12TTh/HviIM+U/VDXAOQ86mPq+43r4s/tSUS+A2vY4Fn13JPbN9z
+	Q9xXsO9YvMokm00NHv6oqYVtKKI9maPMjzAu0CApHYIdFFhp8Krz3Pvt0m0lpdCCE9di
+	mipuLS2yRxB5eMoBzVXOZN8y7lkDP3p8ZPmzs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:reply-to:user-agent:mime-version:to:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	b=W0+sKhXNhkQ7DkhScEBMjw3QdrO9/46iaEoGSltxcrWJQeVwA+MzBXmwfM0rsVV2NL
+	zhtW3hyyXk1DiuTn96yG9Y66GQqg6NiW2gn2HroSfOV3NP07KsT2m8ZHujAmZGU7rnEQ
+	hLufPqkwdQ3/iMQKNlztI4RjQgWwZn3NW2wO0=
+Received: by 10.150.58.1 with SMTP id g1mr1744834yba.85.1212821379842;
+	Fri, 06 Jun 2008 23:49:39 -0700 (PDT)
 Received: from ?192.168.1.204? ( [68.188.71.196])
-	by mx.google.com with ESMTPS id s59sm8430697pyh.13.2008.06.06.22.17.50
+	by mx.google.com with ESMTPS id x48sm8488332pyg.18.2008.06.06.23.49.36
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 06 Jun 2008 22:17:51 -0700 (PDT)
-Message-ID: <484A19EE.3020609@gmail.com>
-Date: Sat, 07 Jun 2008 00:17:34 -0500
+	Fri, 06 Jun 2008 23:49:37 -0700 (PDT)
+Message-ID: <484A2F7E.9020402@gmail.com>
+Date: Sat, 07 Jun 2008 01:49:34 -0500
 From: Gordon <xjqian@gmail.com>
 User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Cc: Discussion and review of changes to the stable branch and its policy
-	<openembedded-stablebranch@openembedded.org>
-Subject: stable branch commits not logged by oe-commits
+References: <20080516214710.GA21911@rhein.zuhause.netz>	<200805182358.50192.mickey@vanille-media.de>
+	<4830AB85.80406@ecs.soton.ac.uk>
+In-Reply-To: <4830AB85.80406@ecs.soton.ac.uk>
+Subject: Re: Getting a tested patch into Angstrom stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -48,15 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jun 2008 05:22:49 -0000
+X-List-Received-Date: Sat, 07 Jun 2008 06:54:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-This appears to happen after the stable branch name switching from 
-.angstrom-2007.1 to .stable. Maybe the mtn server hook script needs an 
-update?
+On 05/18/2008 05:19 PM, Matthew Swabey wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> I have developed a backport for 2.6.24-rp to fix the zaurus' pxa2xx-udc
+> clock bug.
+> 
+> If I want it to get into the current angstrom stable who do I bug
+> (chortle, pun :) )?
+
+This patch conflicts with two udc patches for tosa, as you aware in your 
+bug report. We need to either conditionally apply this for machines 
+other than tosa or find a way to solve the conflict.
 
 Regards
 Gordon
+
 
 
