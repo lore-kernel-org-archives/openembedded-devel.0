@@ -1,33 +1,20 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <geoffrey@pager.net>) id 1K52Kw-0006uE-Vx
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Jun 2008 19:36:19 +0200
-X-ASG-Debug-ID: 1212859878-556c00300000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from [192.168.1.103] (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 30ECDC78DE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jun 2008 12:31:19 -0500 (CDT)
-Received: from [192.168.1.103] (adsl-68-94-31-106.dsl.rcsntx.swbell.net
-	[68.94.31.106]) by barracuda.pager.net with ESMTP id
-	Ozw9CWlVU0xadDbp for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Jun 2008 12:31:19 -0500 (CDT)
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] DEPENDS="gettext" vs. DEPENDS="virtual/libintl"
-Date: Sat, 7 Jun 2008 12:31:54 -0500
-User-Agent: KMail/1.9.9
-References: <200806061706.11880.geoffrey@pager.net>
-	<20080606222450.GA6145@rhein.zuhause.netz>
-In-Reply-To: <20080606222450.GA6145@rhein.zuhause.netz>
+Received: from [75.127.235.98] (helo=breezy.kfctristate.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <tom@openhardware.net>) id 1K558H-00052d-Ri
+	for openembedded-devel@openembedded.org; Sat, 07 Jun 2008 22:35:26 +0200
+Received: (qmail 25773 invoked from network); 7 Jun 2008 20:30:23 -0000
+Received: from unknown (HELO slushy.openhardware.net) (172.29.4.2)
+	by breezy.kfctristate.com with SMTP; 7 Jun 2008 20:30:23 -0000
+Message-ID: <484AEFDE.4040500@openhardware.net>
+Date: Sat, 07 Jun 2008 16:30:22 -0400
+From: Tom Walsh <tom@openhardware.net>
+User-Agent: Thunderbird 2.0.0.12 (X11/20080306)
 MIME-Version: 1.0
-Message-Id: <200806071231.54955.geoffrey@pager.net>
-X-Barracuda-Connect: adsl-68-94-31-106.dsl.rcsntx.swbell.net[68.94.31.106]
-X-Barracuda-Start-Time: 1212859879
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: Re: DEPENDS="gettext" vs. DEPENDS="virtual/libintl"
+To: openembedded-devel@lists.openembedded.org
+References: <200806060643.37332.p_blacquiere@yahoo.co.uk>
+	<200806060024.23268.mickey@vanille-media.de>
+In-Reply-To: <200806060024.23268.mickey@vanille-media.de>
+Subject: Re: Exception.ValueError during build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,39 +28,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jun 2008 17:36:19 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 07 Jun 2008 20:35:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 06 June 2008 05:24:50 pm Henning Heinold wrote:
-> On Fri, Jun 06, 2008 at 05:06:11PM -0500, Geoffrey Wossum wrote:
-> > I'm working on exorcizing gettext as a requirement for building OE. 
-> > Since glib-2.0 absolutely has to have libintl, I've found an alternate
-> > way of providing.  uClibc's libintl stub has a pretty bad case of bitrot,
-> > but I found proxy-libintl, which was written to get GNOME onto Windows. 
-> > By setting proxy-libintl up as the PREFERRED_PROVIDER for
-> > virtual/libintl, I can get past glib-2.0 now.
-> >
-> > The problem now is that some packages explicitly list "gettext" in their
-> > DEPENDS.  Is this just legacy from before virtual/libintl was created? 
-> > Is there any reason why these can't all be changed to "virtual/libintl"?
+Michael 'Mickey' Lauer wrote:
+> On Thursday 05 June 2008 20:43:37 Paul Blacquiere wrote:
+>   
+>> Hi,
+>>
+>> While trying to build (independent of what machine or distro) I get the
+>> following error almost immediately.
+>>
+>> ********************************************************************
+>> $>  bitbake helloworld-image
+>>
+>> NOTE: Out of date cache found, rebuilding...
+>> NOTE: Handling BitBake files: | (0001/0001) [100 %]
+>> NOTE: Parsing finished. 0 cached, 1 parsed, 0 skipped, 0 masked.
+>>     
+>
+> This looks like either BitBake does not find your configuration directory 
+> (double check BBPATH) or you are missing the path to your BitBake files 
+> (double check BBFILES in your local.conf).
+>
+> [...]
+>
+>   
+something broken, I see it too.  This "corrects the problem":
 
-> I suggest looking into this packages to see why they need gettext, maybee
-> they need special tools, which only gettext provides.
+--- org.openembedded.dev/classes/base.bbclass~  2008-06-07 
+11:11:04.000000000 -0400
++++ org.openembedded.dev/classes/base.bbclass   2008-06-07 
+16:26:24.000000000 -0400
+@@ -718,7 +718,8 @@
+        return monotone_branch
 
-I masked out the gettext package, and it turned out the only package my 
-current system needs that had a DEPENDS for gettext was popt.  I changed 
-popt's DEPENDS from gettext to virtual/libintl, and it built fine.  I won't 
-be able to test out my gettext free build on hardware until Monday, though.
+ def base_get_metadata_monotone_revision(d):
+-       monotone_revision = "<unknown>"
++       monotone_revision = "1"
++       return monotone_revision
+        try:
+                monotone_revision = file( "%s/_MTN/revision" % 
+base_get_scmbasepath(d) ).read().strip()
+                if monotone_revision.startswith( "format_version" ):
 
-It seems to me that if a package needs headers or libraries from gettext, a 
-DEPENDS of "virtual/libintl" would be fine.  If a package needs tools from 
-gettext to be built, then it should be depending on "gettext-native" instead 
-of "gettext", I would think.  
+>> NOTE: build 200806060630: started
+>> NOTE: <type 'exceptions.ValueError'>:substring not found while evaluating:
+>> ${@base_get_metadata_monotone_revision(d)}
+>> Traceback (most recent call last):
+>>   File "/stuff/bitbake/bin/bitbake", line 134, in <module>
+>>     main()
+>>   File "/stuff/bitbake/bin/bitbake", line 131, in main
+>>     cooker.cook()
+>>   File "/stuff/bitbake/lib/bb/cooker.py", line 636, in cook
+>>     return self.buildTargets(pkgs_to_build)
+>>   File "/stuff/bitbake/lib/bb/cooker.py", line 527, in buildTargets
+>>     bb.event.fire(bb.event.BuildStarted(buildname, targets,
+>> self.configuration.event_data))
+>>   File "/stuff/bitbake/lib/bb/event.py", line 67, in fire
+>>     if tmpHandler(event) == Handled:
+>>   File "tmpHandler(e)", line 31, in tmpHandler
+>>   File "/stuff/bitbake/lib/bb/data.py", line 97, in getVar
+>>     return d.getVar(var,exp)
+>>   File "/stuff/bitbake/lib/bb/data_smart.py", line 170, in getVar
+>>     return self.expand(value,var)
+>>   File "/stuff/bitbake/lib/bb/data_smart.py", line 85, in expand
+>>     s = __expand_python_regexp__.sub(python_sub, s)
+>>   File "/stuff/bitbake/lib/bb/data_smart.py", line 71, in python_sub
+>>     s = eval(code)
+>>   File "<string>", line 1, in <module>
+>>   File "<bb>", line 4, in base_get_metadata_monotone_revision
+>>   File "<bb>", line 4, in base_get_scmbasepath
+>> ValueError: substring not found
+>>     
+>
+> Fwiw, we should catch this error and put something more sane out.
+>
+> :M:
+>   
 
----
-Geoffrey
+
+-- 
+Tom Walsh - WN3L - Embedded Systems Consultant
+http://openhardware.net http://cyberiansoftware.com http://openzipit.org
+"Windows? No thanks, I have work to do..."
+----------------------------------------------------
+
+
 
 
