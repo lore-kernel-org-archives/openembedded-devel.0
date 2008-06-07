@@ -1,20 +1,20 @@
-Received: from [75.127.235.98] (helo=breezy.kfctristate.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <tom@openhardware.net>) id 1K558H-00052d-Ri
-	for openembedded-devel@openembedded.org; Sat, 07 Jun 2008 22:35:26 +0200
-Received: (qmail 25773 invoked from network); 7 Jun 2008 20:30:23 -0000
-Received: from unknown (HELO slushy.openhardware.net) (172.29.4.2)
-	by breezy.kfctristate.com with SMTP; 7 Jun 2008 20:30:23 -0000
-Message-ID: <484AEFDE.4040500@openhardware.net>
-Date: Sat, 07 Jun 2008 16:30:22 -0400
-From: Tom Walsh <tom@openhardware.net>
-User-Agent: Thunderbird 2.0.0.12 (X11/20080306)
-MIME-Version: 1.0
+Received: from [58.28.4.13] (helo=titania.wxnz.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <tkemp@klc.net.nz>) id 1K58LH-0007Qj-IL
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 Jun 2008 02:01:04 +0200
+Received: from [192.168.10.2] (ip-118-90-48-148.xdsl.xnet.co.nz
+	[118.90.48.148])
+	by titania.wxnz.net (Postfix) with ESMTP id 1FCEE1098BC8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  8 Jun 2008 11:54:50 +1200 (NZST)
+From: Terry Kemp <tkemp@klc.net.nz>
 To: openembedded-devel@lists.openembedded.org
-References: <200806060643.37332.p_blacquiere@yahoo.co.uk>
-	<200806060024.23268.mickey@vanille-media.de>
-In-Reply-To: <200806060024.23268.mickey@vanille-media.de>
-Subject: Re: Exception.ValueError during build
+Date: Sun, 08 Jun 2008 11:55:57 +1200
+Message-Id: <1212882957.7163.12.camel@sulphur.klc>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.2 (2.22.2-2.fc9) 
+Subject: perl native + intltool probs Fedora 9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -28,92 +28,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jun 2008 20:35:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 08 Jun 2008 00:01:06 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-Michael 'Mickey' Lauer wrote:
-> On Thursday 05 June 2008 20:43:37 Paul Blacquiere wrote:
->   
->> Hi,
->>
->> While trying to build (independent of what machine or distro) I get the
->> following error almost immediately.
->>
->> ********************************************************************
->> $>  bitbake helloworld-image
->>
->> NOTE: Out of date cache found, rebuilding...
->> NOTE: Handling BitBake files: | (0001/0001) [100 %]
->> NOTE: Parsing finished. 0 cached, 1 parsed, 0 skipped, 0 masked.
->>     
->
-> This looks like either BitBake does not find your configuration directory 
-> (double check BBPATH) or you are missing the path to your BitBake files 
-> (double check BBFILES in your local.conf).
->
-> [...]
->
->   
-something broken, I see it too.  This "corrects the problem":
+intltool-native and others fail on...
 
---- org.openembedded.dev/classes/base.bbclass~  2008-06-07 
-11:11:04.000000000 -0400
-+++ org.openembedded.dev/classes/base.bbclass   2008-06-07 
-16:26:24.000000000 -0400
-@@ -718,7 +718,8 @@
-        return monotone_branch
+checking for XML::Parser... configure: error: XML::Parser perl module is
+required for intltool
 
- def base_get_metadata_monotone_revision(d):
--       monotone_revision = "<unknown>"
-+       monotone_revision = "1"
-+       return monotone_revision
-        try:
-                monotone_revision = file( "%s/_MTN/revision" % 
-base_get_scmbasepath(d) ).read().strip()
-                if monotone_revision.startswith( "format_version" ):
+log follows...
+---------------------------------------------------------------------------=
+--
+automake (GNU automake) 1.10
+Written by Tom Tromey <tromey@redhat.com>
+       and Alexandre Duret-Lutz <adl@gnu.org>.
 
->> NOTE: build 200806060630: started
->> NOTE: <type 'exceptions.ValueError'>:substring not found while evaluating:
->> ${@base_get_metadata_monotone_revision(d)}
->> Traceback (most recent call last):
->>   File "/stuff/bitbake/bin/bitbake", line 134, in <module>
->>     main()
->>   File "/stuff/bitbake/bin/bitbake", line 131, in main
->>     cooker.cook()
->>   File "/stuff/bitbake/lib/bb/cooker.py", line 636, in cook
->>     return self.buildTargets(pkgs_to_build)
->>   File "/stuff/bitbake/lib/bb/cooker.py", line 527, in buildTargets
->>     bb.event.fire(bb.event.BuildStarted(buildname, targets,
->> self.configuration.event_data))
->>   File "/stuff/bitbake/lib/bb/event.py", line 67, in fire
->>     if tmpHandler(event) == Handled:
->>   File "tmpHandler(e)", line 31, in tmpHandler
->>   File "/stuff/bitbake/lib/bb/data.py", line 97, in getVar
->>     return d.getVar(var,exp)
->>   File "/stuff/bitbake/lib/bb/data_smart.py", line 170, in getVar
->>     return self.expand(value,var)
->>   File "/stuff/bitbake/lib/bb/data_smart.py", line 85, in expand
->>     s = __expand_python_regexp__.sub(python_sub, s)
->>   File "/stuff/bitbake/lib/bb/data_smart.py", line 71, in python_sub
->>     s = eval(code)
->>   File "<string>", line 1, in <module>
->>   File "<bb>", line 4, in base_get_metadata_monotone_revision
->>   File "<bb>", line 4, in base_get_scmbasepath
->> ValueError: substring not found
->>     
->
-> Fwiw, we should catch this error and put something more sane out.
->
-> :M:
->   
+Copyright 2006 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is
+NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+AUTOV is 1
+NOTE: Executing autoreconf --verbose --install --force
+--exclude=3Dautopoint
+-I /build/OE/gumstix-verdex/build/tmp/angstrom/work/i686-linux/intltool-nat=
+ive-0.37.1-r0/intltool-0.37.1/ -I/build/OE/gumstix-verdex/build/tmp/angstro=
+m/staging/i686-linux/usr/share/aclocal-1 -I /build/OE/gumstix-verdex/build/=
+tmp/angstrom/staging/i686-linux/usr/share/aclocal
+autoreconf: Entering directory `.'
+autoreconf: configure.in: not using Gettext
+autoreconf: running: aclocal
+-I /build/OE/gumstix-verdex/build/tmp/angstrom/work/i686-linux/intltool-nat=
+ive-0.37.1-r0/intltool-0.37.1/ -I /build/OE/gumstix-verdex/build/tmp/angstr=
+om/staging/i686-linux/usr/share/aclocal-1 -I /build/OE/gumstix-verdex/build=
+/tmp/angstrom/staging/i686-linux/usr/share/aclocal --force=20
+autoreconf: configure.in: tracing
+autoreconf: configure.in: not using Libtool
+autoreconf:
+running: /build/OE/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/usr=
+/bin/autoconf --include=3D/build/OE/gumstix-verdex/build/tmp/angstrom/work/=
+i686-linux/intltool-native-0.37.1-r0/intltool-0.37.1/ --include=3D/build/OE=
+/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/usr/share/aclocal-1 -=
+-include=3D/build/OE/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/u=
+sr/share/aclocal --force --warnings=3Dcross
+autoreconf: configure.in: not using Autoheader
+autoreconf: running: automake --foreign --add-missing --copy
+--force-missing --warnings=3Dcross
+automake: unknown warning category `cross'
+autoreconf: running: gnu-configize
+autoreconf: Leaving directory `.'
+NOTE:
+Running /build/OE/gumstix-verdex/build/tmp/angstrom/work/i686-linux/intltoo=
+l-native-0.37.1-r0/intltool-0.37.1/configure 		    --build=3Di686-linux 		 =
+   --host=3Di686-linux 		    --target=3Di686-linux 		    --prefix=3D/build/=
+OE/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/usr 		    --exec_pr=
+efix=3D/build/OE/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/usr 	=
+	    --bindir=3D/build/OE/gumstix-verdex/build/tmp/angstrom/staging/i686-li=
+nux/usr/bin 		    --sbindir=3D/build/OE/gumstix-verdex/build/tmp/angstrom/s=
+taging/i686-linux/usr/sbin 		    --libexecdir=3D/build/OE/gumstix-verdex/bu=
+ild/tmp/angstrom/staging/i686-linux/usr/libexec 		    --datadir=3D/build/OE=
+/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/usr/share 		    --sys=
+confdir=3D/build/OE/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/et=
+c 		    --sharedstatedir=3D/build/OE/gumstix-verdex/build/tmp/angstrom/stag=
+ing/i686-linux/usr/com 		    --localstatedir=3D/build/OE/gumstix-verdex/bui=
+ld/tmp/angstrom/staging/i686-linux/var 		    --libdir=3D/build/OE/gumstix-v=
+erdex/build/tmp/angstrom/staging/i686-linux/usr/lib 		    --includedir=3D/b=
+uild/OE/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/usr/include 		=
+    --oldincludedir=3D/build/OE/gumstix-verdex/build/tmp/angstrom/staging/i=
+686-linux/usr/include 		    --infodir=3D/build/OE/gumstix-verdex/build/tmp/=
+angstrom/staging/i686-linux/usr/share/info 		    --mandir=3D/build/OE/gumst=
+ix-verdex/build/tmp/angstrom/staging/i686-linux/usr/share/man 			 		    ...
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for perl... /usr/bin/env perl
+checking for XML::Parser... configure: error: XML::Parser perl module is
+required for intltool
+FATAL: oe_runconf failed
+-----------------------------------------------------------------
 
+looking at the error output for the test (if `$PERL -e "require
+XML::Parser" 2>/dev/null`; then) I found...
 
--- 
-Tom Walsh - WN3L - Embedded Systems Consultant
-http://openhardware.net http://cyberiansoftware.com http://openzipit.org
-"Windows? No thanks, I have work to do..."
-----------------------------------------------------
+perl: symbol lookup
+error: /usr/lib/perl5/vendor_perl/5.10.0/i386-linux-thread-multi/auto/XML/P=
+arser/Expat/Expat.so: undefined symbol: Perl_Istack_sp_ptr
+
+It should be compiling perl-5.8.8 but its picking up the Fedora 9 host
+perl-5.10.0 and staging it...
+
+[tmk@sulphur perl-native-5.8.8-r13]$ cd $OLDPWD
+[tmk@sulphur perl5]$ tree
+.
+|-- 5.10.0
+|   `-- i386-linux-thread-multi
+|       `-- perllocal.pod
+`-- site_perl
+    `-- 5.10.0
+        |-- Error.pm
+        |-- Git.pm
+        `-- i386-linux-thread-multi
+            `-- auto
+                `-- Git
+
+7 directories, 3 files
+[tmk@sulphur perl5]$ pwd
+/build/OE/gumstix-verdex/build/tmp/angstrom/staging/i686-linux/usr/lib/perl=
+5
+
+I am 98% sure this is not happening on an x86_64 build but I do need to
+recheck.
+
+I am looking at making a recipe for perl-5.10.0 but this will only mask
+the real problem being host inclusion.
+
+pointers?
+
+Thanks
+
+Terry
+=20
 
 
 
