@@ -1,41 +1,33 @@
-Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1K4sJv-00044n-Bx
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Jun 2008 08:54:35 +0200
-Received: by yw-out-1718.google.com with SMTP id 5so825332ywr.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jun 2008 23:49:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:reply-to
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=tEeXqq/HyYQ2lOiJZWeYr00S53Vgh59B34vOSLK2z1Y=;
-	b=oRLp6BmDJBCz6Y12TTh/HviIM+U/VDXAOQ86mPq+43r4s/tSUS+A2vY4Fn13JPbN9z
-	Q9xXsO9YvMokm00NHv6oqYVtKKI9maPMjzAu0CApHYIdFFhp8Krz3Pvt0m0lpdCCE9di
-	mipuLS2yRxB5eMoBzVXOZN8y7lkDP3p8ZPmzs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:reply-to:user-agent:mime-version:to:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	b=W0+sKhXNhkQ7DkhScEBMjw3QdrO9/46iaEoGSltxcrWJQeVwA+MzBXmwfM0rsVV2NL
-	zhtW3hyyXk1DiuTn96yG9Y66GQqg6NiW2gn2HroSfOV3NP07KsT2m8ZHujAmZGU7rnEQ
-	hLufPqkwdQ3/iMQKNlztI4RjQgWwZn3NW2wO0=
-Received: by 10.150.58.1 with SMTP id g1mr1744834yba.85.1212821379842;
-	Fri, 06 Jun 2008 23:49:39 -0700 (PDT)
-Received: from ?192.168.1.204? ( [68.188.71.196])
-	by mx.google.com with ESMTPS id x48sm8488332pyg.18.2008.06.06.23.49.36
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 06 Jun 2008 23:49:37 -0700 (PDT)
-Message-ID: <484A2F7E.9020402@gmail.com>
-Date: Sat, 07 Jun 2008 01:49:34 -0500
-From: Gordon <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20080516214710.GA21911@rhein.zuhause.netz>	<200805182358.50192.mickey@vanille-media.de>
-	<4830AB85.80406@ecs.soton.ac.uk>
-In-Reply-To: <4830AB85.80406@ecs.soton.ac.uk>
-Subject: Re: Getting a tested patch into Angstrom stable
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1K4uHp-0008L8-6g
+	for openembedded-devel@openembedded.org; Sat, 07 Jun 2008 11:00:34 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1K4uCz-0003Vs-8L
+	for openembedded-devel@openembedded.org; Sat, 07 Jun 2008 08:55:33 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 07 Jun 2008 08:55:33 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 07 Jun 2008 08:55:33 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 07 Jun 2008 10:55:20 +0200
+Message-ID: <g2didp$ul2$1@ger.gmane.org>
+References: <48486D5B.4060000@nospam.arcornews.de>	<200806061502.02821.mickey@vanille-media.de>
+	<1212789415.6840.30.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a2pre (Macintosh/2008052703)
+In-Reply-To: <1212789415.6840.30.camel@dax.rpnet.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: RFC: RW for otavio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -49,26 +41,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jun 2008 06:54:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 07 Jun 2008 09:00:36 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 05/18/2008 05:19 PM, Matthew Swabey wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> I have developed a backport for 2.6.24-rp to fix the zaurus' pxa2xx-udc
-> clock bug.
-> 
-> If I want it to get into the current angstrom stable who do I bug
-> (chortle, pun :) )?
+Richard Purdie wrote:
+> On Fri, 2008-06-06 at 15:02 +0200, Michael 'Mickey' Lauer wrote:
+>> Ok, seems people are convinced this is a good idea.
+>>
+>> Otavio, please send your mtn and ssh keys to
+>> Koen<k.kooi@student.utwente.nl>  and me<mlauer@vanille-media.de>.
+>
+> I have no objection to Otavio having access so please don't
+> misunderstand this email in that regard. This is more a general issue I
+> want to raise.
+>
+> What I'd like to see is some kind of code of conduct for developers,
+> particularly new ones to ensure changes get appropriate review and we
+> don't see cause any conflict.
+>
+> As guidelines:
+>
+> * Changes to class files need review on the mailing list
+> * Changes to more global .conf files need review (e.g. bitbake.conf)
+> * Changes to core toolchain components need review (gcc, binutils,
+>    libtool, pkgconfig, automake, autoconf etc.)
+> * Machine configs are less sensitive but machine maintainers should be
+>    consulted where present and known
+> * Distro config changes should be reviewed by the distro maintainers
+>    where known
+> * Recipe changes are less sensitive but maintainers should be consulted
+>    where known
+>
+> The point here is to let people build up gradually. Changing the core
+> infrastructure can influence a lot of people and whilst I don't want to
+> discourage people hacking on it, we do need to take more care on those
+> changes than ones in "lower" level recipes. I'm fairly sure most of the
+> devs know and respect this, I just wonder if having some kind of more
+> formal policy written down would be a good idea so people know where
+> they stand?
+>
+> Opinions?
 
-This patch conflicts with two udc patches for tosa, as you aware in your 
-bug report. We need to either conditionally apply this for machines 
-other than tosa or find a way to solve the conflict.
+Developers that get access trough proper channels get this text sent to 
+them after their key has been added:
 
-Regards
-Gordon
+---
+Hi,
+
+If you are reading this, you have been granted commit access to the 
+award winning OpenEmbedded Project. To make things go smoothly we have 
+some basic rules:
+
+  1) Everything outside org.openembedded.dev/packages/ should be treated 
+with extreme care. Please communicate with other developers first if you 
+want to touch that area. If you are a distro maintainer you are of 
+course free to touch your distro config files without asking. If you are 
+a machine maintainer, please communicate first, since it's easy to get 
+things wrong and not all machines are good examples to copy from.
+
+  2) Think twice before using an override, usually overrides can be 
+avoided, especially ones like these:
+
+      do_compile() {
+          oe_runmake
+      }	
+
+      do_compile_myfirstdisto() {
+          oe_runmake -D_GNU_SOURCE
+      }
+
+     You may think "I don't want to break other distributions", but in 
+99% of the cases your fix will unbreak other distros as well, so using 
+an override will cause more work for other developers, since they have 
+to work out the fix by themselves. You don't want other people to spend 
+weeks trying to solve a problem which solution is masked by a bogus 
+override.
+
+  3) It's fine to fix a recipe you don't maintain, but if you are unsure 
+of your change, try to contact the maintainer or, if no maintainer is 
+listed, send a note to the OE developer mailinglist.
+
+  4) Split your changes into their logical subparts. It's easier to 
+track down problems afterwards with a binary search.
+
+  5) Have a clear commit messages, and mention the affected bugnumbers 
+if appropriate.
+
+  6) Sync early, sync often. Nobody likes to reinvent the wheel. Merging 
+is easy with monotone, so don't hesitate to run sync just before your 
+plane takes off and your wifi gets disconnected.
+
+You can view our policies and cheatsheets at:
+
+  * http://www.openembedded.org/wiki/Policies
+  * http://www.openembedded.org/wiki/MonotonePhrasebook
+
+---
+
+I think we discussed the above text at the first OEDEM :)
 
 
 
