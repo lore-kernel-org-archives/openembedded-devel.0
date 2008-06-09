@@ -1,38 +1,23 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gwossum@pager.net>) id 1K5nBj-0006ti-6W
+	(envelope-from <dp@xora.org.uk>) id 1K5nn3-00081L-K0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jun 2008 21:37:55 +0200
-X-ASG-Debug-ID: 1213039957-596d00550000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from mail.pager.net (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 9D286C98DE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jun 2008 14:32:37 -0500 (CDT)
-Received: from mail.pager.net ([192.168.1.254]) by barracuda.pager.net with
-	ESMTP id h1XDg68dOGCGoucL for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jun 2008 14:32:37 -0500 (CDT)
-X-ASG-Whitelist: Sender
-Received: from [192.168.1.71] ([192.168.1.71]) by mail.pager.net with
-	Microsoft SMTPSVC(6.0.3790.1830); Mon, 9 Jun 2008 14:37:23 -0500
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
+	Mon, 09 Jun 2008 22:16:29 +0200
+Received: from xora.org.uk ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Mon, 09 Jun 2008 21:11:12 +0100
+	id 0007110D.484D8E60.00003495
+Date: Mon, 9 Jun 2008 21:11:10 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] DEPENDS="gettext" vs. DEPENDS="virtual/libintl"
-Date: Mon, 9 Jun 2008 14:32:37 -0500
-User-Agent: KMail/1.9.9
+Message-ID: <20080609201110.GA2975@aesgaard.hyboria>
 References: <200806061706.11880.geoffrey@pager.net>
 	<20080606222450.GA6145@rhein.zuhause.netz>
 	<200806071231.54955.geoffrey@pager.net>
-In-Reply-To: <200806071231.54955.geoffrey@pager.net>
-MIME-Version: 1.0
-Message-Id: <200806091432.37869.geoffrey@pager.net>
-X-OriginalArrivalTime: 09 Jun 2008 19:37:23.0328 (UTC)
-	FILETIME=[3D432800:01C8CA68]
-X-Barracuda-Connect: UNKNOWN[192.168.1.254]
-X-Barracuda-Start-Time: 1213039957
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+	<200806091432.37869.geoffrey@pager.net>
+Mime-Version: 1.0
+In-Reply-To: <200806091432.37869.geoffrey@pager.net>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
 Subject: Re: DEPENDS="gettext" vs. DEPENDS="virtual/libintl"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -47,34 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jun 2008 19:37:55 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 09 Jun 2008 20:16:29 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Saturday 07 June 2008 12:31:54 pm Geoffrey Wossum wrote:
-> On Friday 06 June 2008 05:24:50 pm Henning Heinold wrote:
-> > On Fri, Jun 06, 2008 at 05:06:11PM -0500, Geoffrey Wossum wrote:
-> > > I'm working on exorcizing gettext as a requirement for building OE.
-> > > Since glib-2.0 absolutely has to have libintl, I've found an alternate
-> > > way of providing.  uClibc's libintl stub has a pretty bad case of
-> > > bitrot, but I found proxy-libintl, which was written to get GNOME onto
-> > > Windows. By setting proxy-libintl up as the PREFERRED_PROVIDER for
-> > > virtual/libintl, I can get past glib-2.0 now.
+On Mon, Jun 09, 2008 at 02:32:37PM -0500, Geoffrey Wossum wrote:
+> It works!  I got rid of gettext.  It didn't fix all my problems, but it fixed 
+> crashes with aplay and Xfbdev.  avahi still crashes, must be a separate 
+> issue...
+> 
+avahi segfaults if you dont have a /etc/resolv.conf which a lot of
+machines dont by default.
 
-It works!  I got rid of gettext.  It didn't fix all my problems, but it fixed 
-crashes with aplay and Xfbdev.  avahi still crashes, must be a separate 
-issue...
+G
 
-Submitted patches for this as bug #4370:
-http://bugs.openembedded.net/show_bug.cgi?id=4370
-
-You'll need to add PREFERRED_PROVIDER_virtual/libintl = "proxy-libintl" and 
-USE_NLS = "no" (if you didn't already have it from somewhere like 
-angstrom-uclibc.inc) to actually make use of proxy-libintl.
-
----
-Geoffrey
 
 
