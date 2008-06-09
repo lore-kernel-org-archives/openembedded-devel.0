@@ -1,33 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [210.54.141.245] (helo=fep01.xtra.co.nz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K5QUK-00074a-7p
-	for openembedded-devel@openembedded.org; Sun, 08 Jun 2008 21:23:36 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K5QPL-000144-KM
-	for openembedded-devel@openembedded.org; Sun, 08 Jun 2008 19:18:27 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 08 Jun 2008 19:18:27 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 08 Jun 2008 19:18:27 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 08 Jun 2008 21:18:20 +0200
-Message-ID: <g2hb9s$eg3$1@ger.gmane.org>
-References: <g2h415$pk1$1@ger.gmane.org>
-	<20080608185242.GA3463@cimmeria.hyboria>
+	(envelope-from <tkemp@klc.net.nz>) id 1K5XP1-0005ZE-CF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Jun 2008 04:46:35 +0200
+Received: from mta03.xtra.co.nz ([172.23.11.31]) by fep01.xtra.co.nz with ESMTP
+	id <20080609024115.KXGN11434.fep01.xtra.co.nz@mta03.xtra.co.nz>
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Jun 2008 14:41:15 +1200
+Received: from [10.0.0.98] (really [210.86.26.251]) by mta03.xtra.co.nz
+	with SMTP id <20080609024115.YXAJ3583.mta03.xtra.co.nz@[10.0.0.98]>
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Jun 2008 14:41:15 +1200
+From: Terry Kemp <tkemp@klc.net.nz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1212882957.7163.12.camel@sulphur.klc>
+References: <1212882957.7163.12.camel@sulphur.klc>
+Date: Mon, 09 Jun 2008 14:41:14 +1200
+Message-Id: <1212979274.16966.20.camel@sulphur.internal.mercers.co.nz>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008052703)
-In-Reply-To: <20080608185242.GA3463@cimmeria.hyboria>
-Sender: news <news@ger.gmane.org>
-Subject: Re: pkg_postinst_* not working anymore -> broken packages
+X-Mailer: Evolution 2.22.2 (2.22.2-1.fc9) 
+Subject: Re: perl native + intltool probs Fedora 9 [solved]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,25 +33,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jun 2008 19:23:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 09 Jun 2008 02:46:35 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Graeme Gregory wrote:
-> On Sun, Jun 08, 2008 at 07:14:13PM +0200, Koen Kooi wrote:
->> Hi,
->>
->> Lately I have been wondering why things like avahi and umount don't work
->> properly any more in angstrom 2008, and I found out why:
->>
-> This is http://bugs.openembedded.net/show_bug.cgi?id=4316 ??
+On Sun, 2008-06-08 at 11:55 +1200, Terry Kemp wrote:
+> intltool-native and others fail on...
+> 
+> checking for XML::Parser... configure: error: XML::Parser perl module is
+> required for intltool
+> 
 
-That is exactly the problem I'm seeing. It also narrows down which 
-packages need a PR bump after it gets fixed.
 
-regards,
+> pointers?
+> 
+> Thanks
+> 
+> Terry
+>  
 
-Koen
+arrrrrrrrrrrrgh!
+
+export PERL5LIB=
+
+fixes it.
+
+for some reason my home machine i686 had a bunch of directories listed
+in this env variable and my work machine x86_64 didn't have the PERL5LIB
+env var at all.
+
+Should I simply add this to the 'sourceme' script that sets up my
+environment prior to building or is it something that should be added to
+perl et al bbs. If so whats the correct syntax to delete env vars from a
+bb recipe?
+
+Thanks
+
+Terry
+
+
 
 
 
