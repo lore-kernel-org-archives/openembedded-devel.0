@@ -1,24 +1,25 @@
-Received: from [210.54.141.245] (helo=fep01.xtra.co.nz)
+Received: from [194.109.24.32] (helo=smtp-vbr12.xs4all.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tkemp@klc.net.nz>) id 1K5XP1-0005ZE-CF
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jun 2008 04:46:35 +0200
-Received: from mta03.xtra.co.nz ([172.23.11.31]) by fep01.xtra.co.nz with ESMTP
-	id <20080609024115.KXGN11434.fep01.xtra.co.nz@mta03.xtra.co.nz>
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Jun 2008 14:41:15 +1200
-Received: from [10.0.0.98] (really [210.86.26.251]) by mta03.xtra.co.nz
-	with SMTP id <20080609024115.YXAJ3583.mta03.xtra.co.nz@[10.0.0.98]>
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Jun 2008 14:41:15 +1200
-From: Terry Kemp <tkemp@klc.net.nz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1212882957.7163.12.camel@sulphur.klc>
+	(envelope-from <udovdh@xs4all.nl>) id 1K5XhA-00061i-1J
+	for openembedded-devel@openembedded.org; Mon, 09 Jun 2008 05:05:22 +0200
+Received: from surfplank2.hierzo (a80-101-128-228.adsl.xs4all.nl
+	[80.101.128.228]) (authenticated bits=0)
+	by smtp-vbr12.xs4all.nl (8.13.8/8.13.8) with ESMTP id m59308Wv045488
+	for <openembedded-devel@openembedded.org>;
+	Mon, 9 Jun 2008 05:00:09 +0200 (CEST)
+	(envelope-from udovdh@xs4all.nl)
+Message-ID: <484C9CB8.4040307@xs4all.nl>
+Date: Mon, 09 Jun 2008 05:00:08 +0200
+From: Udo van den Heuvel <udovdh@xs4all.nl>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
 References: <1212882957.7163.12.camel@sulphur.klc>
-Date: Mon, 09 Jun 2008 14:41:14 +1200
-Message-Id: <1212979274.16966.20.camel@sulphur.internal.mercers.co.nz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.2 (2.22.2-1.fc9) 
+	<1212979274.16966.20.camel@sulphur.internal.mercers.co.nz>
+In-Reply-To: <1212979274.16966.20.camel@sulphur.internal.mercers.co.nz>
+X-Enigmail-Version: 0.95.2
+OpenPGP: id=8300CC02
+X-Virus-Scanned: by XS4ALL Virus Scanner
 Subject: Re: perl native + intltool probs Fedora 9 [solved]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -33,45 +34,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jun 2008 02:46:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 Jun 2008 03:05:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2008-06-08 at 11:55 +1200, Terry Kemp wrote:
-> intltool-native and others fail on...
+Terry Kemp wrote:
+> export PERL5LIB=
 > 
-> checking for XML::Parser... configure: error: XML::Parser perl module is
-> required for intltool
-> 
+> fixes it.
 
-
-> pointers?
-> 
-> Thanks
-> 
-> Terry
->  
-
-arrrrrrrrrrrrgh!
-
-export PERL5LIB=
-
-fixes it.
-
-for some reason my home machine i686 had a bunch of directories listed
-in this env variable and my work machine x86_64 didn't have the PERL5LIB
-env var at all.
-
-Should I simply add this to the 'sourceme' script that sets up my
-environment prior to building or is it something that should be added to
-perl et al bbs. If so whats the correct syntax to delete env vars from a
-bb recipe?
-
-Thanks
-
-Terry
-
-
-
+Hmmm!
+I will want to test this.
 
 
