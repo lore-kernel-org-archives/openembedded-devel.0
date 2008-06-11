@@ -1,37 +1,33 @@
-Received: from [209.85.132.241] (helo=an-out-0708.google.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1K6Lhf-0001mK-In
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jun 2008 10:29:11 +0200
-Received: by an-out-0708.google.com with SMTP id b38so596152ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2008 01:23:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=FuWHDwIIIeMyuU18SP9GFPZamrij/wkymZFc71hHg14=;
-	b=BBlq3IGviAAuzklFjO92UJVGqul4lNX21VvfZEtOEmkj7YvDt0EpS6L6OuxZx0b80w
-	i4/u2XhGUDt8901hBp9mXAjdfxVxcQGnBAnRimPfMOniPawrkhIXq61JGO/198KfQ1+R
-	ysnHZmwDHcIB5PfMCzf1a1F4kFcF80MfJtxFk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=CHBVqe+UenKql7JKFk55/pWeEl4fXoHTjhiQbcdrEoYpd5eH50tXQ5dxYGxAErig1v
-	1TVw7Fyaqp65Tu6z+rpcxhrNIEhupo4cFdR+SHipiyBMU+nWmmZ/hok4IGNpvISVm66i
-	eNc4p1x/khb1DKwH+X9yIbTmaHeGiiV/vmDx0=
-Received: by 10.100.127.15 with SMTP id z15mr7046505anc.80.1213172621340;
-	Wed, 11 Jun 2008 01:23:41 -0700 (PDT)
-Received: by 10.100.174.18 with HTTP; Wed, 11 Jun 2008 01:23:41 -0700 (PDT)
-Message-ID: <c384c5ea0806110123k4682543btfd87a864f374741f@mail.gmail.com>
-Date: Wed, 11 Jun 2008 10:23:41 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1213135673.5013.60.camel@dax.rpnet.com>
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1K6N1o-0001MQ-0m
+	for openembedded-devel@openembedded.org; Wed, 11 Jun 2008 11:54:06 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m5B9m5h6030154
+	for <openembedded-devel@openembedded.org>;
+	Wed, 11 Jun 2008 10:48:05 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 30137-01 for <openembedded-devel@openembedded.org>;
+	Wed, 11 Jun 2008 10:48:00 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m5B9lxLJ030147
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 11 Jun 2008 10:47:59 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <c384c5ea0806110123k4682543btfd87a864f374741f@mail.gmail.com>
 References: <g2h415$pk1$1@ger.gmane.org> <484ED558.7070907@bolloretelecom.eu>
 	<1213135673.5013.60.camel@dax.rpnet.com>
+	<c384c5ea0806110123k4682543btfd87a864f374741f@mail.gmail.com>
+Date: Wed, 11 Jun 2008 10:47:58 +0100
+Message-Id: <1213177678.5010.9.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: pkg_postinst_* not working anymore -> broken packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -46,31 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jun 2008 08:29:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Jun 2008 09:54:06 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hello Richard,
 
-On Wed, Jun 11, 2008 at 12:07 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Tue, 2008-06-10 at 21:26 +0200, Jeremy Lain=E9 wrote:
-> Are there any other open bitbake issues we need to account for before we
-> make a new release?
->
-I would like to re-issue the problem where bitbake gives an ERROR that
-multiple packages provide something and that bitbake then happily
-starts building two packages.
+On Wed, 2008-06-11 at 10:23 +0200, Leon Woestenberg wrote:
+> I would like to re-issue the problem where bitbake gives an ERROR that
+> multiple packages provide something and that bitbake then happily
+> starts building two packages.
+> 
+> Even though the user has specified one.
+> In one case this happens even when the user has specified a specific
+> provider but that provider is somehow not fully "providing something
+> but should".
+> 
+> After the two packages built, there is no way to get rid of this behaviour.
 
-Even though the user has specified one.
-In one case this happens even when the user has specified a specific
-provider but that provider is somehow not fully "providing something
-but should".
+This last bit is no longer true, bitbake now no longer looks for the
+populate_staging stamps to influence its choice of providers making
+builds more deterministic. To put this another way, bitbake no longer
+cares whether packages have built or not, it no longer influences it.
 
-After the two packages built, there is no way to get rid of this behaviour.
+I guess what you're suggesting is that the "multiple packages provide
+something" error should be fatal. I seem to remember trying this and
+people were not happy. That warning is still experimental and I'd
+probably prefer to leave it as an error for now, perhaps considering
+making it fatal for the release after next?
 
-Regards,
---=20
-Leon
+Cheers,
+
+Richard
+
+
 
 
