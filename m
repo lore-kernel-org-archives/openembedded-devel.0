@@ -1,22 +1,38 @@
-Received: from [58.28.6.13] (helo=oberon.wxnz.net)
+Received: from [209.85.132.241] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tkemp@klc.net.nz>) id 1K6Etp-0005DN-Uw
+	(envelope-from <leon.woestenberg@gmail.com>) id 1K6Lhf-0001mK-In
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jun 2008 03:13:18 +0200
-Received: from [192.168.10.2] (ip-118-90-48-148.xdsl.xnet.co.nz
-	[118.90.48.148])
-	by oberon.wxnz.net (Postfix) with ESMTP id 46BDE46409D
+	Wed, 11 Jun 2008 10:29:11 +0200
+Received: by an-out-0708.google.com with SMTP id b38so596152ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2008 13:09:33 +1200 (NZST)
-From: Terry Kemp <tkemp@klc.net.nz>
+	Wed, 11 Jun 2008 01:23:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=FuWHDwIIIeMyuU18SP9GFPZamrij/wkymZFc71hHg14=;
+	b=BBlq3IGviAAuzklFjO92UJVGqul4lNX21VvfZEtOEmkj7YvDt0EpS6L6OuxZx0b80w
+	i4/u2XhGUDt8901hBp9mXAjdfxVxcQGnBAnRimPfMOniPawrkhIXq61JGO/198KfQ1+R
+	ysnHZmwDHcIB5PfMCzf1a1F4kFcF80MfJtxFk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=CHBVqe+UenKql7JKFk55/pWeEl4fXoHTjhiQbcdrEoYpd5eH50tXQ5dxYGxAErig1v
+	1TVw7Fyaqp65Tu6z+rpcxhrNIEhupo4cFdR+SHipiyBMU+nWmmZ/hok4IGNpvISVm66i
+	eNc4p1x/khb1DKwH+X9yIbTmaHeGiiV/vmDx0=
+Received: by 10.100.127.15 with SMTP id z15mr7046505anc.80.1213172621340;
+	Wed, 11 Jun 2008 01:23:41 -0700 (PDT)
+Received: by 10.100.174.18 with HTTP; Wed, 11 Jun 2008 01:23:41 -0700 (PDT)
+Message-ID: <c384c5ea0806110123k4682543btfd87a864f374741f@mail.gmail.com>
+Date: Wed, 11 Jun 2008 10:23:41 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1213098621.16999.94.camel@sulphur.klc>
-References: <1213098621.16999.94.camel@sulphur.klc>
-Date: Wed, 11 Jun 2008 13:07:46 +1200
-Message-Id: <1213146466.20679.16.camel@sulphur.klc>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.2 (2.22.2-2.fc9) 
-Subject: Re: tar & ar native vs host (Fedora 9 issues)
+In-Reply-To: <1213135673.5013.60.camel@dax.rpnet.com>
+MIME-Version: 1.0
+References: <g2h415$pk1$1@ger.gmane.org> <484ED558.7070907@bolloretelecom.eu>
+	<1213135673.5013.60.camel@dax.rpnet.com>
+Subject: Re: pkg_postinst_* not working anymore -> broken packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -30,95 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jun 2008 01:13:18 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Wed, 11 Jun 2008 08:29:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Tue, 2008-06-10 at 23:50 +1200, Terry Kemp wrote:
-> Hello devs,
->=20
-> I have been working on
-> http://bugs.openembedded.net/show_bug.cgi?id=3D4350
-> and I have attached my recipe mods to this for review should someone
-> care to look at them.=20
->=20
+Hello Richard,
 
-Just to confirm...
+On Wed, Jun 11, 2008 at 12:07 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Tue, 2008-06-10 at 21:26 +0200, Jeremy Lain=E9 wrote:
+> Are there any other open bitbake issues we need to account for before we
+> make a new release?
+>
+I would like to re-issue the problem where bitbake gives an ERROR that
+multiple packages provide something and that bitbake then happily
+starts building two packages.
 
-same deal with building latest mtn pull of dev...
+Even though the user has specified one.
+In one case this happens even when the user has specified a specific
+provider but that provider is somehow not fully "providing something
+but should".
 
-[tmk@sulphur org.openembedded.dev]$ mtn status
-Current branch: org.openembedded.dev
-Changes against parent 30fc86774a3da064f530c39eeff1e97d6a7020a0
-  patched  packages/linux/gumstix-kernel_2.6.21.bb
-  patched  packages/linux/gumstix-linux.inc
-  patched  site/common-glibc
+After the two packages built, there is no way to get rid of this behaviour.
 
-
-[tmk@sulphur build]$
-cat /build/OE/gumstix-connex/build/tmp/angstrom/work/gumstix-connex-angst=
-rom-linux-gnueabi/minimal-image-1.0-r0/temp/log.do_rootfs.13586
-+ rm -rf /build/OE/gumstix-connex/build/tmp/angstrom/rootfs
-+ mkdir -p /build/OE/gumstix-connex/build/tmp/angstrom/rootfs
-+ '[' 0 '!=3D' 1 ']'
-+ for devtable
-in /build/OE/org.openembedded.dev/files/device_table-minimal.txt
-+ makedevs -r /build/OE/gumstix-connex/build/tmp/angstrom/rootfs
--D /build/OE/org.openembedded.dev/files/device_table-minimal.txt
-+ rootfs_ipk_do_rootfs
-+ set -x
-+ package_update_index_ipk
-+ set -x
-+ ipkgarchs=3D'all any noarch arm armv4 armv4t armv5e armv5te
-gumstix-connex'
-+ '[' '!' -z '' ']'
-+
-touch /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/Packag=
-es
-+ ipkg-make-index
--r /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/Packages
--p /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/Packages
--l /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/Packages.=
-filelist -m /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk
-
-+ for arch in '$ipkgarchs'
-+ '['
--e /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/all/ ']'
-+
-touch /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/all/Pa=
-ckages
-+ ipkg-make-index
--r /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/all/Packa=
-ges -p /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/all/P=
-ackages -l /build/OE/gumstix-connex/build/tmp/angstrom/deploy/glibc/ipk/a=
-ll/Packages.filelist -m /build/OE/gumstix-connex/build/tmp/angstrom/deplo=
-y/glibc/ipk/all/
-Traceback (most recent call last):
-  File
-"/build/OE/gumstix-connex/build/tmp/angstrom/staging/i686-linux/usr/bin/i=
-pkg-make-index", line 114, in <module>
-    pkg =3D ipkg.Package(filename)
-  File
-"/build/OE/gumstix-connex/build/tmp/angstrom/staging/i686-linux/usr/bin/i=
-pkg.py", line 161, in __init__
-    tarStream =3D ar.open("control.tar.gz")
-  File
-"/build/OE/gumstix-connex/build/tmp/angstrom/staging/i686-linux/usr/bin/a=
-rfile.py", line 59, in open
-    f =3D self._scan(fname)
-  File
-"/build/OE/gumstix-connex/build/tmp/angstrom/staging/i686-linux/usr/bin/a=
-rfile.py", line 79, in _scan
-    size =3D int(descriptor[5])
-IndexError: list index out of range
-[tmk@sulphur build]$=20
-
-
-Same fix being tested now.
-
-=EF=BB=BF
-Terry
-
-
+Regards,
+--=20
+Leon
 
 
