@@ -1,32 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K7DF7-0003GR-9k
-	for openembedded-devel@openembedded.org; Fri, 13 Jun 2008 19:39:21 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K7DEq-0005Ae-UJ
-	for openembedded-devel@openembedded.org; Fri, 13 Jun 2008 17:39:00 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 13 Jun 2008 17:39:00 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <trini@kernel.crashing.org>) id 1K7DPI-0001mI-VL
+	for openembedded-devel@openembedded.org; Fri, 13 Jun 2008 19:50:11 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20080613174931.LRJG2752.fed1rmmtao104.cox.net@fed1rmimpo02.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Fri, 13 Jun 2008 17:39:00 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 13 Jun 2008 13:49:31 -0400
+Received: from localhost ([68.230.59.19]) by fed1rmimpo02.cox.net with bizsmtp
+	id dVpV1Z00P0QtwrG04VpVEX; Fri, 13 Jun 2008 13:49:32 -0400
+Date: Fri, 13 Jun 2008 10:49:29 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 13 Jun 2008 19:38:50 +0200
-Message-ID: <g2ubb9$a55$1@ger.gmane.org>
-References: <1213345201.13942.3.camel@dax.rpnet.com>	<74d0deb30806130306tf5ca604t7238ab26d715e03@mail.gmail.com>	<g2tv3m$t5l$1@ger.gmane.org>
-	<74d0deb30806130925u7ec0c1e4sfdf2144e703f2b9a@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008060303)
-In-Reply-To: <74d0deb30806130925u7ec0c1e4sfdf2144e703f2b9a@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
+Message-ID: <20080613174929.GG29216@smtp.west.cox.net>
+References: <1213345201.13942.3.camel@dax.rpnet.com>
+	<74d0deb30806130306tf5ca604t7238ab26d715e03@mail.gmail.com>
+	<f96d234e0806130543u7fb1e71an1f75c50a76c0d859@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <f96d234e0806130543u7fb1e71an1f75c50a76c0d859@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.13 (2006-08-11)
 Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -41,32 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jun 2008 17:39:29 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Jun 2008 17:51:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-pHilipp Zabel wrote:
+On Fri, Jun 13, 2008 at 08:43:49AM -0400, Cliff Brake wrote:
 
->>> Personally, I'd like to see every patch to OE being sent to and
->>> reviewed on the mailing list.
->> I'd like to see that every commit has at least 2 SOBs, I care less on how
->> they get there. Having the review out in the open should be the end goal,
->> though.
->
->  From Documentation/SubmittingPatches:
-> "The Signed-off-by: tag indicates that the signer was involved in the
-> development of the patch, or that he/she was in the patch's delivery path."
->
-> In the kernel Signed-off-by is primarily used to mark the way a patch
-> took into the kernel. If we do this, maybe we should use the same
-> nomenclature and have Acked-by for statements of approval. (And
-> eventually Tested-by/Reviewed-by, too?)
+[snip]
+> One of the differences with the OE meta data is that its structure is
+> rather flat instead of a nice hierarchy like the kernel.  Another
+> problem is an update in one of the core components can often have
+> unforeseen consequences in other packages.  So I don't think there is
+> any substitute for a lot of testing.  A lot of the work to keep it all
+> going is simply busy-work -- updating URI's, adding new versions of
+> packages, etc, so I would hate to slow that down.  How about coming up
+> with a list of directories/files that need mail list review:
 
-That is probably a good idea.
+Here's my 2 cents, as occasional contributor without write access and
+without a good friend with write access.  Whatever the process, things
+need to not get "lost" either in the ML noise or in the bugzilla,
+possibly waiting for the "maintainer" to speak up.
 
-regards,
-
-Koen
-
+-- 
+Tom Rini
 
 
