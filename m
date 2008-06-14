@@ -1,40 +1,26 @@
-Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1K7VuB-0006gu-MY
+	(envelope-from <dp@xora.org.uk>) id 1K7ZAT-0001ri-5T
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Jun 2008 15:35:01 +0200
-Received: by yw-out-1718.google.com with SMTP id 5so2776049ywr.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jun 2008 06:34:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=XpbzIqf92T5pBfGHf7NueoD5JrLnoIspAadbBp6rABM=;
-	b=unvDYY4oKZoxeF5/BXdV8WzyDhEz0Up/Rt3RZC8PI6gcyHwGg+ANd9qLyE9xHZLCGm
-	Uh1c3lxmd72FmGgwiwrFdZ1l3c1nGviEp0M6pGr+Bcf94Kx9Lo9+YaDj7cR3VP23MxeI
-	HVInAhNu/h8NmeFF0RwK/eMnmZV7KItFRbu8k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=toWUSz2o8YEc32gWBlMyoeCom6Pq6qtLNJA4NtW5AOKcCgmUXGDGMl0AaLYNOErP52
-	bZK2bQAMUHi8Ds7pfT4s43SR6OGYNwsQLaDMDmTPpFv/MWqXeCcpnytPQUr0DczqSE8v
-	DZftp4NQp1loTTrwcJW43F175BmJoN5t5uTQ4=
-Received: by 10.151.106.7 with SMTP id i7mr6578970ybm.176.1213450474446;
-	Sat, 14 Jun 2008 06:34:34 -0700 (PDT)
-Received: by 10.150.178.1 with HTTP; Sat, 14 Jun 2008 06:34:34 -0700 (PDT)
-Message-ID: <d1b08f940806140634k47bfb782hef80608e39e23c5b@mail.gmail.com>
-Date: Sat, 14 Jun 2008 15:34:34 +0200
-From: "Andrea Adami" <andrea.adami@gmail.com>
+	Sat, 14 Jun 2008 19:03:57 +0200
+Received: from xora.org.uk ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Sat, 14 Jun 2008 18:03:34 +0100
+	id 00088054.4853F9E6.0000547E
+Date: Sat, 14 Jun 2008 18:06:47 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <g305u5$jbi$1@ger.gmane.org>
-MIME-Version: 1.0
+Message-ID: <20080614170647.GA3428@cimmeria.hyboria>
 References: <20080613225643.86B4D1881B6@amethyst.openembedded.net>
-	<20080613231709.GB3606@cimmeria.hyboria> <g2vvg5$3hh$1@ger.gmane.org>
+	<20080613231709.GB3606@cimmeria.hyboria>
+	<g2vvg5$3hh$1@ger.gmane.org>
 	<d1b08f940806140210o54897e92wbcf5e7962c0c49a3@mail.gmail.com>
 	<g305u5$jbi$1@ger.gmane.org>
-Subject: Re: [oe-commits] org.oe.dev udev-118: go back in time to udev-115 which seems to work slightly better on some Zaurus models
+	<d1b08f940806140634k47bfb782hef80608e39e23c5b@mail.gmail.com>
+Mime-Version: 1.0
+In-Reply-To: <d1b08f940806140634k47bfb782hef80608e39e23c5b@mail.gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [oe-commits] org.oe.dev udev-118: go back in time to	udev-115 which seems to work slightly better on some Zaurus models
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -48,19 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jun 2008 13:35:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 14 Jun 2008 17:03:57 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Koen,
+On Sat, Jun 14, 2008 at 03:34:34PM +0200, Andrea Adami wrote:
+> Koen,
+> 
+> no evident problems == same behaviour as 118
+> 
+> could you keep an eye on the oebug 4118?
+> 
+Well I tried to build for tosa, but Im falling over on the fact the
+kernel doesnt build and libtool seems to be busted :-(
 
-no evident problems == same behaviour as 118
+G
 
-could you keep an eye on the oebug 4118?
-
-TIA
-
-Andrea
 
 
