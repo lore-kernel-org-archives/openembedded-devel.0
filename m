@@ -1,33 +1,18 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K7aHZ-0004i8-An
-	for openembedded-devel@openembedded.org; Sat, 14 Jun 2008 20:15:23 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K7aH9-00086k-CQ
-	for openembedded-devel@openembedded.org; Sat, 14 Jun 2008 18:14:55 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 14 Jun 2008 18:14:55 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 14 Jun 2008 18:14:55 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <dp@xora.org.uk>) id 1K7e2V-00030g-2B
+	for openembedded-devel@openembedded.org; Sun, 15 Jun 2008 00:16:03 +0200
+Received: from xora.org.uk ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Sat, 14 Jun 2008 23:15:38 +0100
+	id 00088045.4854430A.000059E5
+Date: Sat, 14 Jun 2008 23:18:57 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 14 Jun 2008 20:14:43 +0200
-Message-ID: <g311qk$q73$1@ger.gmane.org>
-References: <20080613225643.86B4D1881B6@amethyst.openembedded.net>	<20080613231709.GB3606@cimmeria.hyboria>	<g2vvg5$3hh$1@ger.gmane.org>	<d1b08f940806140210o54897e92wbcf5e7962c0c49a3@mail.gmail.com>	<g305u5$jbi$1@ger.gmane.org>	<d1b08f940806140634k47bfb782hef80608e39e23c5b@mail.gmail.com>
-	<20080614170647.GA3428@cimmeria.hyboria>
+Message-ID: <20080614221857.GB3428@cimmeria.hyboria>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008060303)
-In-Reply-To: <20080614170647.GA3428@cimmeria.hyboria>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [oe-commits] org.oe.dev udev-118: go back in time to udev-115 which seems to work slightly better on some Zaurus models
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Packaged Staging Problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,38 +26,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jun 2008 18:15:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 14 Jun 2008 22:16:03 -0000
+X-Groupsio-MsgNum: 5373
+Content-Type: multipart/mixed;
+	boundary="=_xora.vm.bytemark.co.uk-23013-1213481738-0001-2"
+Content-Disposition: inline
+
+--=_xora.vm.bytemark.co.uk-23013-1213481738-0001-2
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Graeme Gregory wrote:
-> On Sat, Jun 14, 2008 at 03:34:34PM +0200, Andrea Adami wrote:
->> Koen,
->>
->> no evident problems == same behaviour as 118
->>
->> could you keep an eye on the oebug 4118?
->>
-> Well I tried to build for tosa, but Im falling over on the fact the
-> kernel doesnt build and libtool seems to be busted :-(
+I get the problem in packaged staging that it repeatedly issues the
+error.
 
-I tracked this problem down to the fact that both libtool-cross and 
-libtool install stuff into staging.
+NOTE: Checking if staging package installed
+head: `-1' option is obsolete; use `-n 1'
+Try `head --help' for more information.
+sed: couldn't flush stdout: Broken pipe
+NOTE: No. Manually removing any installed files
 
-A possible solution would be to mimic gcc(-cross) so libtool-cross 
-creates libltdl packages and stages things and libtool doesn't. This 
-does mean that both libtool-cross and libtool need to be the same version.
+I suspect the attached patch is the fix for this. But this is scary core
+stuff so I thought I would send it for review.
 
-To get around the current problem:
-
-bitbake -b packages/libtool/libtool-cross_2.2.4.bb
-
-That will tell packaged-staging to (re)stage the correct headers and m4 
-files.
-
-regards,
-
-Koen
+Graeme
 
 
+--=_xora.vm.bytemark.co.uk-23013-1213481738-0001-2
+Content-Type: text/x-diff; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="stage-manager.patch"
 
+#
+# old_revision [6ff295c2536e27dfcb4ab565a0592a3dc502d6aa]
+#
+# patch "packages/stage-manager/files/stage-manager-ipkg"
+#  from [7593166519513f8e516b14d394e2d3576854f946]
+#    to [039533c80c39c7ad92cf0d47b2a4df052ab060fa]
+#
+============================================================
+--- packages/stage-manager/files/stage-manager-ipkg	7593166519513f8e516b14d394e2d3576854f946
++++ packages/stage-manager/files/stage-manager-ipkg	039533c80c39c7ad92cf0d47b2a4df052ab060fa
+@@ -33,7 +33,7 @@ ipkg_src_byname() {
+ 
+ ipkg_src_byname() {
+ 	local src="$1"
+-	ipkg_srcs $src | head -1
++	ipkg_srcs $src | head -n1
+ }
+ 
+ ipkg_dests() {
+@@ -58,16 +58,16 @@ ipkg_dest_default() {
+ }
+ 
+ ipkg_dest_default() {
+-	ipkg_dests_all | head -1
++	ipkg_dests_all | head -n1
+ }
+ 
+ ipkg_dest_default_name() {
+-	ipkg_dest_names | head -1
++	ipkg_dest_names | head -n1
+ }
+ 
+ ipkg_dest_byname() {
+ 	local dest="$1"
+-	ipkg_dests $dest | head -1
++	ipkg_dests $dest | head -n1
+ }
+ 
+ ipkg_option() {
+@@ -975,7 +975,7 @@ ipkg_upgrade_pkg() {
+ 
+ ipkg_upgrade_pkg() {
+ 	local pkg="$1"
+-	local avail_ver=`ipkg_info $pkg Version | ipkg_extract_value | head -1`
++	local avail_ver=`ipkg_info $pkg Version | ipkg_extract_value | head -n1`
+ 
+ 	is_installed=
+ 	for dest_name in `ipkg_dest_names`; do
+
+--=_xora.vm.bytemark.co.uk-23013-1213481738-0001-2--
