@@ -1,32 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K7R8Q-00082R-J2
-	for openembedded-devel@openembedded.org; Sat, 14 Jun 2008 10:29:18 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K7R88-0002pL-VP
-	for openembedded-devel@openembedded.org; Sat, 14 Jun 2008 08:29:00 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 14 Jun 2008 08:29:00 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 14 Jun 2008 08:29:00 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 14 Jun 2008 10:28:53 +0200
-Message-ID: <g2vvg5$3hh$1@ger.gmane.org>
+	(envelope-from <andrea.adami@gmail.com>) id 1K7Rmm-00014F-HG
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 14 Jun 2008 11:11:00 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so2747605ywr.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Jun 2008 02:10:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=JSJ2KOii8TMkqmcwsNG824XZur7fV9QYnQ3IHJb4yik=;
+	b=p9OOYIR9ZDezC4z5pblBRtHe853Y5445dTA6sFZAJjNct9uiYz8LoKC/jN1YF1pfMa
+	c/AmXsevRaulmu/wkFHtCUWgVnJjMy5QSWa24i+Vgasym9CUxRcZ5jXQqmJSlS8dLeYj
+	FusGqStNF50vOLsqwQ7n3LMRDSVqywOMw97AY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=QPz7Jnowel2HEpizxqMqEhgSQDHZ0E3CLDQrX2qk9oAG05FfdrPOSKxIUaqHVEjjCe
+	6PRpt7GQq5eH1K9eq6rxYagvP2db+qnhRzsIdV9vzGaQHTor/w0b22urRYS00VqD7oFJ
+	6DeYrPZspiTNsdD5/ozxmGjt89VTkcgxM15Pw=
+Received: by 10.150.144.9 with SMTP id r9mr6219174ybd.200.1213434641184;
+	Sat, 14 Jun 2008 02:10:41 -0700 (PDT)
+Received: by 10.150.178.1 with HTTP; Sat, 14 Jun 2008 02:10:41 -0700 (PDT)
+Message-ID: <d1b08f940806140210o54897e92wbcf5e7962c0c49a3@mail.gmail.com>
+Date: Sat, 14 Jun 2008 11:10:41 +0200
+From: "Andrea Adami" <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <g2vvg5$3hh$1@ger.gmane.org>
+MIME-Version: 1.0
 References: <20080613225643.86B4D1881B6@amethyst.openembedded.net>
-	<20080613231709.GB3606@cimmeria.hyboria>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008060303)
-In-Reply-To: <20080613231709.GB3606@cimmeria.hyboria>
-Sender: news <news@ger.gmane.org>
+	<20080613231709.GB3606@cimmeria.hyboria> <g2vvg5$3hh$1@ger.gmane.org>
 Subject: Re: [oe-commits] org.oe.dev udev-118: go back in time to udev-115 which seems to work slightly better on some Zaurus models
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -41,27 +46,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jun 2008 08:29:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 14 Jun 2008 09:11:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Graeme Gregory wrote:
-> On Sat, Jun 14, 2008 at 12:56:43AM +0200, mickeyl commit wrote:
->> udev-118: go back in time to udev-115 which seems to work slightly better on some Zaurus models
->> Zaurus models: need to force downgrade, I don't want to raise PE here.
->>
->> # rename "packages/udev/udev-118"
->> #     to "packages/udev/udev-115"
->> #
->> # rename "packages/udev/udev_118.bb"
->> #     to "packages/udev/udev_115.bb"
->> #
->
-> Im sorry I have to call for a dissaprove on this one, there is no way
-> in hell this is the correct way to deal with a small problem on a couple
-> of machines.
+>with a small problem on a couple
+>of machines.
 
-Same here, that is absolutely the wrong way to 'fix' the problem.
+small problem = no touchscreen!
 
+BTW you could even move to 119 (no evident problems).
+
+Andrea
 
 
