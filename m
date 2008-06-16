@@ -1,31 +1,32 @@
-Received: from [192.115.104.18] (helo=sa4.bezeqint.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mike@compulab.co.il>) id 1K89Dt-0001uE-LY
-	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 09:34:05 +0200
-Received: from localhost (sa4 [127.0.0.1])
-	by sa4.bezeqint.net (Bezeq International SMTP out Mail Server) with
-	ESMTP id 47A9530036 for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jun 2008 10:21:47 +0300 (IDT)
-X-Virus-Scanned: amavisd-new at bezeqint.net
-Received: from sa4.bezeqint.net ([127.0.0.1])
-	by localhost (sa4.bezeqint.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VrGUN1nzKHOj for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jun 2008 10:21:46 +0300 (IDT)
-Received: from mail.linux-boards.com (mail.linux-boards.com [192.114.83.142])
-	by sa4.bezeqint.net (Bezeq International SMTP out Mail Server) with
-	ESMTP for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jun 2008 10:21:46 +0300 (IDT)
-Received: from [10.1.1.95] (mike-pc.compulab.local [10.1.1.95])
-	by mail.linux-boards.com (8.12.5/8.12.8) with ESMTP id m5G6Mxes019810
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1K8Ac1-00033R-Rr
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 11:03:00 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1K8AbM-0001he-Vb
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 09:02:12 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jun 2008 09:02:12 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jun 2008 09:23:01 +0300
-Message-ID: <48561735.5030700@compulab.co.il>
-Date: Mon, 16 Jun 2008 10:33:09 +0300
-From: Mike Rapoport <mike@compulab.co.il>
-User-Agent: Thunderbird 2.0.0.6 (X11/20070822)
-MIME-Version: 1.0
+	Mon, 16 Jun 2008 09:02:12 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Subject: Different EXTRA_INSTALL for different machines
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 16 Jun 2008 11:01:59 +0200
+Message-ID: <g35a67$r1a$1@ger.gmane.org>
+References: <48561735.5030700@compulab.co.il>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird 3.0a2pre (Macintosh/2008061003)
+In-Reply-To: <48561735.5030700@compulab.co.il>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Different EXTRA_INSTALL for different machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -39,19 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2008 07:34:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Jun 2008 09:03:09 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Mike Rapoport wrote:
+> Hi,
+>
+> I'm building Angstrom images for different machines and I need to include
+> different sets of extra packages in the images. Is it possible to make
+> EXTRA_INSTALL dependent on the machine in the same local.conf?
 
-I'm building Angstrom images for different machines and I need to include
-different sets of extra packages in the images. Is it possible to make
-EXTRA_INSTALL dependent on the machine in the same local.conf?
+EXTRA_INSTALL_machine1 = "foo"
+EXTRA_INSTALL_machine2 = "bar"
+EXTRA_INSTALL_machine3 = "qux"
 
--- 
-Sincerely yours,
-Mike.
+regards,
+
+Koen
 
 
 
