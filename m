@@ -1,39 +1,31 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [192.115.104.18] (helo=sa4.bezeqint.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1K7wmk-0002H6-Fj
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Jun 2008 20:17:31 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 45E448400BE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jun 2008 20:16:30 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 1372B8400B2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jun 2008 20:16:30 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.4 (2008-01-01) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_20,RDNS_NONE
-	autolearn=no version=3.2.4
-Received: from rhein.familie-heinold.de (unknown [78.52.65.7])
-	by mail.familie-heinold.de (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jun 2008 20:16:30 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 968BC3C04C; Sun, 15 Jun 2008 20:16:29 +0200 (CEST)
-Date: Sun, 15 Jun 2008 20:16:29 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080615181629.GA4886@rhein.zuhause.netz>
-References: <1213441674.30583.3.camel@localhost.localdomain>
+	(envelope-from <mike@compulab.co.il>) id 1K89Dt-0001uE-LY
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 09:34:05 +0200
+Received: from localhost (sa4 [127.0.0.1])
+	by sa4.bezeqint.net (Bezeq International SMTP out Mail Server) with
+	ESMTP id 47A9530036 for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jun 2008 10:21:47 +0300 (IDT)
+X-Virus-Scanned: amavisd-new at bezeqint.net
+Received: from sa4.bezeqint.net ([127.0.0.1])
+	by localhost (sa4.bezeqint.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VrGUN1nzKHOj for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jun 2008 10:21:46 +0300 (IDT)
+Received: from mail.linux-boards.com (mail.linux-boards.com [192.114.83.142])
+	by sa4.bezeqint.net (Bezeq International SMTP out Mail Server) with
+	ESMTP for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jun 2008 10:21:46 +0300 (IDT)
+Received: from [10.1.1.95] (mike-pc.compulab.local [10.1.1.95])
+	by mail.linux-boards.com (8.12.5/8.12.8) with ESMTP id m5G6Mxes019810
+	for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jun 2008 09:23:01 +0300
+Message-ID: <48561735.5030700@compulab.co.il>
+Date: Mon, 16 Jun 2008 10:33:09 +0300
+From: Mike Rapoport <mike@compulab.co.il>
+User-Agent: Thunderbird 2.0.0.6 (X11/20070822)
 MIME-Version: 1.0
-In-Reply-To: <1213441674.30583.3.camel@localhost.localdomain>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [PATCH, RFC] gettext 0.17
+To: openembedded-devel@openembedded.org
+Subject: Different EXTRA_INSTALL for different machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -47,17 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jun 2008 18:18:12 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 Jun 2008 07:34:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
 Hi,
 
-as I looked at gettext 0.17 too. I saw that the disable_java patch isnt
-necessary anymore there is now a configure option to disable it.
+I'm building Angstrom images for different machines and I need to include
+different sets of extra packages in the images. Is it possible to make
+EXTRA_INSTALL dependent on the machine in the same local.conf?
 
-Bye,
+-- 
+Sincerely yours,
+Mike.
 
-Henning
+
 
 
