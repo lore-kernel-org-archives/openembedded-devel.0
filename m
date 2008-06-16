@@ -1,24 +1,25 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1K8NPm-0007eR-AV; Tue, 17 Jun 2008 00:43:06 +0200
-Received: from [78.54.175.96] (helo=[192.168.1.156])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1K8NQX-0004xZ-WD; Tue, 17 Jun 2008 00:43:54 +0200
-Message-ID: <4856EC43.8090007@kernelconcepts.de>
-Date: Tue, 17 Jun 2008 00:42:11 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-MIME-Version: 1.0
+	(envelope-from <mickey@vanille-media.de>) id 1K8Nek-0007z8-1U
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Jun 2008 00:58:34 +0200
+Received: from andromeda.vanille.de (e180145204.adsl.alicedsl.de
+	[85.180.145.204])
+	by drlauer-research.com (Postfix) with ESMTP id DFB1A584C32
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Jun 2008 01:00:32 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-References: <1213345201.13942.3.camel@dax.rpnet.com>	<g2ubb9$a55$1@ger.gmane.org>	<87od65rxi8.fsf@neumann.lab.ossystems.com.br>	<200806132137.51103.zecke@selfish.org>	<87mylpqccr.fsf@neumann.lab.ossystems.com.br>
-	<g35sln$rc9$1@ger.gmane.org>
-In-Reply-To: <g35sln$rc9$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Switching SCM to git and commit/review policy
+Date: Tue, 17 Jun 2008 00:57:47 +0200
+User-Agent: KMail/1.9.9
+References: <20080616142816.5346618928D@amethyst.openembedded.net>
+	<200806161641.50186.mickey@vanille-media.de>
+	<g360lp$bkf$2@ger.gmane.org>
+In-Reply-To: <g360lp$bkf$2@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200806170057.47876.mickey@vanille-media.de>
+Subject: Re: org.oe.dev sane-srcrev: wind back opkg-native to 4452 *again*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -32,38 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2008 22:43:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Jun 2008 22:58:34 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+Am Montag 16 Juni 2008 17:25:44 schrieb Koen Kooi:
+> Michael 'Mickey' Lauer wrote:
+> > Am Montag 16 Juni 2008 16:28:16 schrieb koen commit:
+> >> sane-srcrev: wind back opkg-native to 4452 *again*
+> >
+> > Koen, what kind of problem are you seeing? If it's the "could not create
+> > administrative lock", this has been fixed by me days ago.
+>
+> The "could not create administrative lock" is still present with
+> packaged-staging yesterday evening.
 
-Rolf Leggewie wrote:
-> With the huge number of open bugs and things that need fixing which have
-> been untouched for ages, I am not convinced that slowing things down
-> even further is a step in the right direction.
+Ok, then I suggest fixing it modelled after the fix I did to 
+rootfs_ipk.bbclass: 
+http://git.openembedded.net/?p=org.openembedded.dev.git;a=commitdiff;h=91b5ad2ddfa2322165d90e6cedece480bd38d18b                
 
-thanks! :) I share this opinion. In fact we had a lot of good ideas how to
-improve the OE quality, but in my opinion this all is not realistic. Things in
-the development branch can break - this is one reason why we have such a branch.
-I would not want to trade OE's main advantages (agility, development speed and
-the huge contributor community) for a semi-stable development branch.
+The alternative is pinpointing it 4452 forever since it's unlikely the 
+behaviour of needing its libdir during 'update' will be changed.
 
-If we have enough resources some time we could create such a semi-stable
-'testing' branch with its own QA and commit policies. But for people with write
-access no additional policies or review rules should apply. (Except for some
-critical pieces such as classes and libc maybe.)
+> > If not, please point me to the bug entry for your problem?
+>
+> No bug entry, since bugs get closed on an arbitrary basis anyway
 
-Greetings
-
-Florian
+Oh, sure. *yawn*
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+:M:
 
 
