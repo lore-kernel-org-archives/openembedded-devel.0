@@ -1,22 +1,33 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1K8Fui-0005sC-JG; Mon, 16 Jun 2008 16:42:32 +0200
-Received: from andromeda.vanille.de (e180145204.adsl.alicedsl.de
-	[85.180.145.204])
-	by drlauer-research.com (Postfix) with ESMTP id 09087584C27;
-	Mon, 16 Jun 2008 16:44:34 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-commits@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jun 2008 16:41:50 +0200
-User-Agent: KMail/1.9.9
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1K8GbP-0003yG-6W
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 17:26:39 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1K8Gah-0001uA-N1
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 15:25:55 +0000
+Received: from vestingbar.student.utwente.nl ([130.89.119.192])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jun 2008 15:25:55 +0000
+Received: from k.kooi by vestingbar.student.utwente.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 16 Jun 2008 15:25:55 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 16 Jun 2008 17:25:44 +0200
+Message-ID: <g360lp$bkf$2@ger.gmane.org>
 References: <20080616142816.5346618928D@amethyst.openembedded.net>
-In-Reply-To: <20080616142816.5346618928D@amethyst.openembedded.net>
-MIME-Version: 1.0
-Message-Id: <200806161641.50186.mickey@vanille-media.de>
-Subject: Re: [oe-commits] org.oe.dev sane-srcrev: wind back opkg-native to 4452 *again*
+	<200806161641.50186.mickey@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: vestingbar.student.utwente.nl
+User-Agent: Thunderbird 3.0a2pre (Macintosh/2008061003)
+In-Reply-To: <200806161641.50186.mickey@vanille-media.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: org.oe.dev sane-srcrev: wind back opkg-native to 4452 *again*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -30,21 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2008 14:42:33 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 16 Jun 2008 15:26:39 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Am Montag 16 Juni 2008 16:28:16 schrieb koen commit:
-> sane-srcrev: wind back opkg-native to 4452 *again*
+Michael 'Mickey' Lauer wrote:
+> Am Montag 16 Juni 2008 16:28:16 schrieb koen commit:
+>> sane-srcrev: wind back opkg-native to 4452 *again*
+>
+> Koen, what kind of problem are you seeing? If it's the "could not create
+> administrative lock", this has been fixed by me days ago.
 
-Koen, what kind of problem are you seeing? If it's the "could not create 
-administrative lock", this has been fixed by me days ago.
+The "could not create administrative lock" is still present with 
+packaged-staging yesterday evening.
 
-If not, please point me to the bug entry for your problem?
+> If not, please point me to the bug entry for your problem?
 
--- 
-:M:
+No bug entry, since bugs get closed on an arbitrary basis anyway
+
+
 
 
