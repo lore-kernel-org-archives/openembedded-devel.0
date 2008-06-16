@@ -1,33 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K8GzU-0004ba-7v
-	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 17:51:32 +0200
+	id 1K8HZ5-0002A3-NY
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 18:28:19 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K8Gyo-00030G-KQ
-	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 15:50:50 +0000
+	id 1K8HYO-0004i5-2D
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 16:27:36 +0000
 Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jun 2008 15:50:50 +0000
+	Mon, 16 Jun 2008 16:27:36 +0000
 Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jun 2008 15:50:50 +0000
+	Mon, 16 Jun 2008 16:27:36 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 16 Jun 2008 17:50:45 +0200
-Message-ID: <g3624i$i6g$1@ger.gmane.org>
-References: <20080616142816.5346618928D@amethyst.openembedded.net>	<200806161641.50186.mickey@vanille-media.de>
-	<g360lp$bkf$2@ger.gmane.org>
+Date: Mon, 16 Jun 2008 18:27:30 +0200
+Message-ID: <g3649g$qnj$1@ger.gmane.org>
+References: <1213345201.13942.3.camel@dax.rpnet.com>	<g2ubb9$a55$1@ger.gmane.org>	<87od65rxi8.fsf@neumann.lab.ossystems.com.br>	<200806132137.51103.zecke@selfish.org>	<87mylpqccr.fsf@neumann.lab.ossystems.com.br>	<g35hnj$k46$1@ger.gmane.org>	<87zlplldul.fsf@neumann.lab.ossystems.com.br>	<g35tdc$upb$1@ger.gmane.org>
+	<87myllz8gp.fsf@neumann.lab.ossystems.com.br>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
 User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <g360lp$bkf$2@ger.gmane.org>
+In-Reply-To: <87myllz8gp.fsf@neumann.lab.ossystems.com.br>
 Sender: news <news@ger.gmane.org>
-Subject: Re: org.oe.dev sane-srcrev: wind back opkg-native to 4452 *again*
+Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,19 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2008 15:51:32 -0000
+X-List-Received-Date: Mon, 16 Jun 2008 16:28:19 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> No bug entry, since bugs get closed on an arbitrary basis anyway
+Otavio,
 
-Are they?
+thank you for clarifying.
 
-I'd be interested to learn about who you are accusing of doing such
-things.  Please point out some examples, so I can take a look at the
-history and make sure the user in question respects the well-being of
-the OE bug tracker.
+Otavio Salvador wrote:
+> The revisions will be a moving target. To tag a commit as "not-ok"
+> you'd need to amend it and  them change it rev number.
+
+I was talking about a possible workflow with absolute disregard as to
+how it is supported by tools out there, git in particular.  I think, at
+this point in time it is OK to build your castle in the sky and worry
+about how to implement that with tools later (and possibly make
+necessary adjustments, then)
+
+>> Modules?  Are you talking kernel?  Or are you using modules as a synonym
+>> for recipe?
+> 
+> recipe, sorry.
+
+Well, that is certainly nice, but not sufficient.  bitbake will not
+necessarily rebuild an app if a lib changes IIRC.
+
+> human. I think that a sort of compile tests are enough to kill most of
+> problems.
+
+NACK.  I don't agree.  They are necessary and good to be done.  They are
+still insufficient.  Otherwise, we could fully automate the review
+process and have a compile firm to automatically reject changesets that
+lead to compile failures.
+
+Regards
+
+Rolf
 
 
 
