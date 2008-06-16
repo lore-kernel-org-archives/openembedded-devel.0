@@ -1,31 +1,31 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K8HZ5-0002A3-NY
-	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 18:28:19 +0200
+	id 1K8Hgy-0002SD-6X
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 18:36:29 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K8HYO-0004i5-2D
-	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 16:27:36 +0000
+	id 1K8HgF-000539-Dz
+	for openembedded-devel@openembedded.org; Mon, 16 Jun 2008 16:35:43 +0000
 Received: from ip-62-143-23-251.hsi.ish.de ([62.143.23.251])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jun 2008 16:27:36 +0000
+	Mon, 16 Jun 2008 16:35:43 +0000
 Received: from no2spam by ip-62-143-23-251.hsi.ish.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 16 Jun 2008 16:27:36 +0000
+	Mon, 16 Jun 2008 16:35:43 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 16 Jun 2008 18:27:30 +0200
-Message-ID: <g3649g$qnj$1@ger.gmane.org>
-References: <1213345201.13942.3.camel@dax.rpnet.com>	<g2ubb9$a55$1@ger.gmane.org>	<87od65rxi8.fsf@neumann.lab.ossystems.com.br>	<200806132137.51103.zecke@selfish.org>	<87mylpqccr.fsf@neumann.lab.ossystems.com.br>	<g35hnj$k46$1@ger.gmane.org>	<87zlplldul.fsf@neumann.lab.ossystems.com.br>	<g35tdc$upb$1@ger.gmane.org>
-	<87myllz8gp.fsf@neumann.lab.ossystems.com.br>
+Date: Mon, 16 Jun 2008 18:35:35 +0200
+Message-ID: <g364ol$sdn$1@ger.gmane.org>
+References: <1213345201.13942.3.camel@dax.rpnet.com>	<74d0deb30806130306tf5ca604t7238ab26d715e03@mail.gmail.com>	<f96d234e0806130543u7fb1e71an1f75c50a76c0d859@mail.gmail.com>
+	<g2tvgn$unq$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: ip-62-143-23-251.hsi.ish.de
 User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <87myllz8gp.fsf@neumann.lab.ossystems.com.br>
+In-Reply-To: <g2tvgn$unq$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
 Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -41,43 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2008 16:28:19 -0000
+X-List-Received-Date: Mon, 16 Jun 2008 16:36:31 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Otavio,
+Koen Kooi wrote:
+> That won't work, since people will 'accidentally' misread the list to
+> avoid review.
 
-thank you for clarifying.
+That implies ill-will.  I don't agree with that assumption.
 
-Otavio Salvador wrote:
-> The revisions will be a moving target. To tag a commit as "not-ok"
-> you'd need to amend it and  them change it rev number.
+I'd also assume that somebody who misread the list (accidentally or
+otherwise) and who then actually breaks something will get a powerful
+reminder ;-)  Repeat offenders should also be easy to spot.
 
-I was talking about a possible workflow with absolute disregard as to
-how it is supported by tools out there, git in particular.  I think, at
-this point in time it is OK to build your castle in the sky and worry
-about how to implement that with tools later (and possibly make
-necessary adjustments, then)
+We should not reject a white/blacklist prematurely.
 
->> Modules?  Are you talking kernel?  Or are you using modules as a synonym
->> for recipe?
-> 
-> recipe, sorry.
-
-Well, that is certainly nice, but not sufficient.  bitbake will not
-necessarily rebuild an app if a lib changes IIRC.
-
-> human. I think that a sort of compile tests are enough to kill most of
-> problems.
-
-NACK.  I don't agree.  They are necessary and good to be done.  They are
-still insufficient.  Otherwise, we could fully automate the review
-process and have a compile firm to automatically reject changesets that
-lead to compile failures.
-
-Regards
-
-Rolf
+As far as getting maintainers involved, I agree that probably this will
+be a difficult part since it can become complicated quickly (too many
+things to check before making a commit)
 
 
 
