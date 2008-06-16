@@ -1,43 +1,22 @@
-Received: from [201.35.65.91] (helo=freedom.ind.br)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1K8I6N-000385-8u
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jun 2008 19:02:44 +0200
-Received: from freedom.ind.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id 28D8D8AE87D;
-	Mon, 16 Jun 2008 14:02:00 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id D78C31C60D2;
-	Mon, 16 Jun 2008 14:01:59 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 16 Jun 2008 14:01:59 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 2FD3DC1F9;
-	Mon, 16 Jun 2008 11:03:10 -0300 (BRT)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id DBCC9610052; Mon, 16 Jun 2008 14:03:52 -0300 (BRT)
-To: openembedded-devel@lists.openembedded.org
-References: <1213345201.13942.3.camel@dax.rpnet.com>
-	<g2ubb9$a55$1@ger.gmane.org>
-	<87od65rxi8.fsf@neumann.lab.ossystems.com.br>
-	<200806132137.51103.zecke@selfish.org>
-	<87mylpqccr.fsf@neumann.lab.ossystems.com.br>
-	<g35hnj$k46$1@ger.gmane.org>
-	<87zlplldul.fsf@neumann.lab.ossystems.com.br>
-	<g35tdc$upb$1@ger.gmane.org>
-	<87myllz8gp.fsf@neumann.lab.ossystems.com.br>
-	<g3649g$qnj$1@ger.gmane.org>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Mon, 16 Jun 2008 14:03:52 -0300
-In-Reply-To: <g3649g$qnj$1@ger.gmane.org> (Rolf Leggewie's message of "Mon\,
-	16 Jun 2008 18\:27\:30 +0200")
-Message-ID: <87r6axxqfb.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1K8NPm-0007eR-AV; Tue, 17 Jun 2008 00:43:06 +0200
+Received: from [78.54.175.96] (helo=[192.168.1.156])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1K8NQX-0004xZ-WD; Tue, 17 Jun 2008 00:43:54 +0200
+Message-ID: <4856EC43.8090007@kernelconcepts.de>
+Date: Tue, 17 Jun 2008 00:42:11 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
 MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1213345201.13942.3.camel@dax.rpnet.com>	<g2ubb9$a55$1@ger.gmane.org>	<87od65rxi8.fsf@neumann.lab.ossystems.com.br>	<200806132137.51103.zecke@selfish.org>	<87mylpqccr.fsf@neumann.lab.ossystems.com.br>
+	<g35sln$rc9$1@ger.gmane.org>
+In-Reply-To: <g35sln$rc9$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.0
 Cc: openembedded-devel@openembedded.org
 Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -53,65 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2008 17:02:44 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 16 Jun 2008 22:43:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie <no2spam@nospam.arcornews.de> writes:
+Hi,
 
-> Otavio,
->
-> thank you for clarifying.
->
-> Otavio Salvador wrote:
->> The revisions will be a moving target. To tag a commit as "not-ok"
->> you'd need to amend it and  them change it rev number.
->
-> I was talking about a possible workflow with absolute disregard as to
-> how it is supported by tools out there, git in particular.  I think, at
-> this point in time it is OK to build your castle in the sky and worry
-> about how to implement that with tools later (and possibly make
-> necessary adjustments, then)
+Rolf Leggewie wrote:
+> With the huge number of open bugs and things that need fixing which have
+> been untouched for ages, I am not convinced that slowing things down
+> even further is a step in the right direction.
 
-I don't think so. What's the point in thinking a perfect solution that
-will be problematic with the available tools?
+thanks! :) I share this opinion. In fact we had a lot of good ideas how to
+improve the OE quality, but in my opinion this all is not realistic. Things in
+the development branch can break - this is one reason why we have such a branch.
+I would not want to trade OE's main advantages (agility, development speed and
+the huge contributor community) for a semi-stable development branch.
 
->>> Modules?  Are you talking kernel?  Or are you using modules as a synonym
->>> for recipe?
->> 
->> recipe, sorry.
->
-> Well, that is certainly nice, but not sufficient.  bitbake will not
-> necessarily rebuild an app if a lib changes IIRC.
+If we have enough resources some time we could create such a semi-stable
+'testing' branch with its own QA and commit policies. But for people with write
+access no additional policies or review rules should apply. (Except for some
+critical pieces such as classes and libc maybe.)
 
-Sure but will rebuild the lib ... and a from scratch build when all
-trees are merged in oe-next can be an nice way to find those problems
-out too.
+Greetings
 
->> human. I think that a sort of compile tests are enough to kill most of
->> problems.
->
-> NACK.  I don't agree.  They are necessary and good to be done.  They are
-> still insufficient.  Otherwise, we could fully automate the review
-> process and have a compile firm to automatically reject changesets that
-> lead to compile failures.
-
-Well, this is the most important part of my proposal. oe-next would be
-an auto-nack process. If it fails to compile, nack and notify the
-commiter.
-
-Any other test will be need to be done case by case. Obviously that
-something that touches a class is much more important to be carefully
-tested then another patch that includes a new version of package
-foobar used by a single user.
+Florian
 
 -- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
