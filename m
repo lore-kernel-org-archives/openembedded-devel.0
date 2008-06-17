@@ -1,24 +1,32 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1K8O1K-00040z-Jf
+	(envelope-from <jluebbe@lasnet.de>) id 1K8Xr7-0001dd-9m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Jun 2008 01:21:54 +0200
-Received: from andromeda.vanille.de (e180145204.adsl.alicedsl.de
-	[85.180.145.204])
-	by drlauer-research.com (Postfix) with ESMTP id 7DF9C584C32
+	Tue, 17 Jun 2008 11:52:01 +0200
+Received: from a061.apm.etc.tu-bs.de ([134.169.172.61])
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1K8XqI-0006WY-Do by authid <jluebbe@lasnet.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jun 2008 01:23:54 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Tue, 17 Jun 2008 11:51:13 +0200
+From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jluebbe@lasnet.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Jun 2008 01:21:04 +0200
-User-Agent: KMail/1.9.9
+In-Reply-To: <20080616130932.GA22229@sirena.org.uk>
 References: <1213345201.13942.3.camel@dax.rpnet.com>
-	<87mylpqccr.fsf@neumann.lab.ossystems.com.br>
-	<g35sln$rc9$1@ger.gmane.org>
-In-Reply-To: <g35sln$rc9$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200806170121.04385.mickey@vanille-media.de>
+	<74d0deb30806130306tf5ca604t7238ab26d715e03@mail.gmail.com>
+	<g2tv3m$t5l$1@ger.gmane.org>
+	<74d0deb30806130925u7ec0c1e4sfdf2144e703f2b9a@mail.gmail.com>
+	<g2ubb9$a55$1@ger.gmane.org>
+	<87od65rxi8.fsf@neumann.lab.ossystems.com.br>
+	<20080616130932.GA22229@sirena.org.uk>
+Date: Tue, 17 Jun 2008 11:51:13 +0200
+Message-Id: <1213696273.28438.50.camel@localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.2 
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
 Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -33,40 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2008 23:21:55 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Jun 2008 09:52:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Am Montag 16 Juni 2008 16:17:30 schrieb Rolf Leggewie:
-> Sounds good to me, at least the most realistic proposal I saw so far.
-> Because it deals better with some short-comings in the "have every patch
-> touched by two devs"
->
-> 1) we already have a *HUGE* backlog of patches in our bug tracker[1].
->    This will only grow bigger if we require even more human intervention
-> 2) it does not treat every patch the same, differentiation is needed
->    IMHO, as well as efficiency and (semi)-automatic processes
->
-> Basically, I am fine with "commit to dev, test out, fix regressions if
-> present".  OTOH, "prevent regressions up front by reviewing everything"
-> will slow down .dev to a crawl, I am afraid.  Don't we have stable for
-> that very reason (less volatile code) and with exactly the "2 ACKs per
-> commit"-policy?   I am all for review for big changes and where
-> efficiently possibly, but I fail to see the value of it for example for
-> the type of work that I often do (the busy-work that Cliff Brake so
-> eloquently described on June 13th).
->
-> With the huge number of open bugs and things that need fixing which have
-> been untouched for ages, I am not convinced that slowing things down
-> even further is a step in the right direction.
+On Mon, 2008-06-16 at 14:09 +0100, Mark Brown wrote:
+> On Fri, Jun 13, 2008 at 03:38:23PM -0300, Otavio Salvador wrote:
+>=20
+> > I don't know how kernel people do to amend the patch to add the
+> > acked-by/whatever data into each patch. It can be a big amount of work
+> > to do an iteractive rebase for every ack given on ml for each patch
+> > and with a high risk of human mistake while doing it.
+>=20
+> For the most part everything except the Signed-off-by is added by the
+> patch submitter as they submit and resubmit the patch - often that
+> information will just get dropped on the floor otherwise.
 
-I have to agree here. Rather than becoming overbeaurocratic I'd like us to use 
-the less painful branching and merging to implement changes to critical 
-sections in the metadata.
+Instead of having the "acked-by" in the changeset, we could have it
+implicit in the history:
 
--- 
-:M:
+* Everyone with commit access has their own branch
+  - org.openembedded.dev.<username>
+* Someone else reviewes/compiletestes the changes and then merges the=20
+  branch into .dev
+  - The name of the reviewer then appears in the merge
+
+Trivial changes might go into .dev directly...
+
+--=20
+Jan L=C3=BCbbe <jluebbe@lasnet.de>            http://sicherheitsschwankung.=
+de
+ gpg-key      1024D/D8480F2E 2002-03-20
+ fingerprint  1B25 F91F 9E7B 5D4F 1282  02D6 8A83 8BE4 D848 0F2E
+
 
 
