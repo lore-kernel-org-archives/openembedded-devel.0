@@ -1,33 +1,30 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jluebbe@lasnet.de>) id 1K8Xr7-0001dd-9m
+	(envelope-from <rod@whitby.id.au>) id 1K8ZyM-0008Mz-77
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Jun 2008 11:52:01 +0200
-Received: from a061.apm.etc.tu-bs.de ([134.169.172.61])
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1K8XqI-0006WY-Do by authid <jluebbe@lasnet.de> with cram_md5
+	Tue, 17 Jun 2008 14:07:38 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 4DCB311BF77
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jun 2008 11:51:13 +0200
-From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jluebbe@lasnet.de>
+	Tue, 17 Jun 2008 08:06:49 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Tue, 17 Jun 2008 08:06:49 -0400
+X-Sasl-enc: UTP0oLHSNjv1suq7yn6zImfWZjXxM11w2P4I6mlV1ngN 1213704408
+Received: from [192.168.15.11] (CPE-121-209-16-132.sa.bigpond.net.au
+	[121.209.16.132])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 76F5438EE5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Jun 2008 08:06:48 -0400 (EDT)
+Message-ID: <4857A8A7.2040707@whitby.id.au>
+Date: Tue, 17 Jun 2008 21:35:59 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.14 (Windows/20080421)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080616130932.GA22229@sirena.org.uk>
-References: <1213345201.13942.3.camel@dax.rpnet.com>
-	<74d0deb30806130306tf5ca604t7238ab26d715e03@mail.gmail.com>
-	<g2tv3m$t5l$1@ger.gmane.org>
-	<74d0deb30806130925u7ec0c1e4sfdf2144e703f2b9a@mail.gmail.com>
-	<g2ubb9$a55$1@ger.gmane.org>
-	<87od65rxi8.fsf@neumann.lab.ossystems.com.br>
-	<20080616130932.GA22229@sirena.org.uk>
-Date: Tue, 17 Jun 2008 11:51:13 +0200
-Message-Id: <1213696273.28438.50.camel@localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.2 
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Re: Switching SCM to git and commit/review policy
+References: <20080616142816.5346618928D@amethyst.openembedded.net>	<200806161641.50186.mickey@vanille-media.de>
+	<g360lp$bkf$2@ger.gmane.org>
+In-Reply-To: <g360lp$bkf$2@ger.gmane.org>
+Subject: Re: org.oe.dev sane-srcrev: wind back opkg-native to 4452	*again*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,38 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jun 2008 09:52:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Jun 2008 12:07:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, 2008-06-16 at 14:09 +0100, Mark Brown wrote:
-> On Fri, Jun 13, 2008 at 03:38:23PM -0300, Otavio Salvador wrote:
->=20
-> > I don't know how kernel people do to amend the patch to add the
-> > acked-by/whatever data into each patch. It can be a big amount of work
-> > to do an iteractive rebase for every ack given on ml for each patch
-> > and with a high risk of human mistake while doing it.
->=20
-> For the most part everything except the Signed-off-by is added by the
-> patch submitter as they submit and resubmit the patch - often that
-> information will just get dropped on the floor otherwise.
+Koen Kooi wrote:
+> Michael 'Mickey' Lauer wrote:
+>> If not, please point me to the bug entry for your problem?
+> 
+> No bug entry, since bugs get closed on an arbitrary basis anyway
 
-Instead of having the "acked-by" in the changeset, we could have it
-implicit in the history:
+ From http://dominion.thruhere.net/koen/cms/community-interaction
+(Koen's Blog):
 
-* Everyone with commit access has their own branch
-  - org.openembedded.dev.<username>
-* Someone else reviewes/compiletestes the changes and then merges the=20
-  branch into .dev
-  - The name of the reviewer then appears in the merge
+<quote author=Koen>
+I have given up on trying to get people to file bugs at the right 
+bugtracker and have adopted the rather cynical filosophy of "If you 
+don't care enough to file a bug, I don't care enough to look into your 
+supposed problem".
+</quote>
 
-Trivial changes might go into .dev directly...
+Classic.
 
---=20
-Jan L=C3=BCbbe <jluebbe@lasnet.de>            http://sicherheitsschwankung.=
-de
- gpg-key      1024D/D8480F2E 2002-03-20
- fingerprint  1B25 F91F 9E7B 5D4F 1282  02D6 8A83 8BE4 D848 0F2E
-
+-- Rod
 
 
