@@ -1,21 +1,21 @@
-Received: from [212.227.126.174] (helo=moutng.kundenserver.de)
+Received: from [212.227.126.179] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <robert@linuxdevelopment.de>) id 1K8rgR-0004wv-EN
+	(envelope-from <robert@linuxdevelopment.de>) id 1K8rhv-0004yS-LS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jun 2008 09:02:19 +0200
+	Wed, 18 Jun 2008 09:03:51 +0200
 Received: from [10.0.0.9] (Mbd5c.m.pppool.de [89.49.189.92])
-	by mrelayeu.kundenserver.de (node=mrelayeu6) with ESMTP (Nemesis)
-	id 0ML29c-1K8rfU1C2v-0004nM; Wed, 18 Jun 2008 09:01:20 +0200
-Message-ID: <4858B2BF.2000405@linuxdevelopment.de>
-Date: Wed, 18 Jun 2008 09:01:19 +0200
+	by mrelayeu.kundenserver.de (node=mrelayeu5) with ESMTP (Nemesis)
+	id 0ML25U-1K8rgB2ODU-0000iW; Wed, 18 Jun 2008 09:02:04 +0200
+Message-ID: <4858B2EB.7080807@linuxdevelopment.de>
+Date: Wed, 18 Jun 2008 09:02:03 +0200
 From: =?ISO-8859-15?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080421)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Provags-ID: V01U2FsdGVkX184z2/GC8uzdbirHNkF3gDb0N281dmDXC2B4sv
-	HVWwykAE/7zBW66Y2nILfAeDSkGJ09EKNLPrUc5mOyXjB2KZLE
-	rEq2Q6HvVSl5z16SXH98kHMsElviDGlmLPr5vwyb1k=
-Subject: glibc-intermidiate: undefined reference to `__sync_fetch_and_add_4 -> FIXED
+X-Provags-ID: V01U2FsdGVkX19QHyzGGpX1F15kaYZxzqMOWXmOn2FCD+t/y8w
+	ylMmtqchvzGi7tHFxhwx+KWBGPpmUSCCJ7eAbLUKW7upenZGdt
+	ddHUkIzdXCsiUwULLPefm+ClmQlz1N+zNFokXZ1NDs=
+Subject: glibc-intermediate: undefined reference to `__sync_fetch_and_add_4 -> FIXED
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -29,14 +29,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jun 2008 07:02:19 -0000
+X-List-Received-Date: Wed, 18 Jun 2008 07:03:51 -0000
 Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
 
 I am trying to get good stable i686 images now for a long time.
 
 Using .stable tree i tryed again yesterday and i got stuck on 
-glibc-intermidiate with that error
+glibc-intermediate with that error
 undefined reference to `__sync_fetch_and_add_4
 i think that was an issue for me for a long time and  found that
 conf/machine/include/tune-pentiumpro.inc uses still -mcpu switch
