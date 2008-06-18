@@ -1,33 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [63.80.53.70] (helo=smtp-relay1.palm.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1K91oo-0006lf-0l
-	for openembedded-devel@openembedded.org; Wed, 18 Jun 2008 19:51:38 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1K91nn-0003Lj-KD
-	for openembedded-devel@openembedded.org; Wed, 18 Jun 2008 17:50:35 +0000
-Received: from p549c2803.dip0.t-ipconnect.de ([84.156.40.3])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 18 Jun 2008 17:50:35 +0000
-Received: from no2spam by p549c2803.dip0.t-ipconnect.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 18 Jun 2008 17:50:35 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 18 Jun 2008 19:50:23 +0200
-Message-ID: <g3bhsv$5l2$1@ger.gmane.org>
-References: <ae36f8040806180812j37bca53lf1e06722a8246a55@mail.gmail.com>	<200806181725.49146.mickey@vanille-media.de>
-	<ae36f8040806180956r7143e0eelc1adbf65112d9a3c@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p549c2803.dip0.t-ipconnect.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <ae36f8040806180956r7143e0eelc1adbf65112d9a3c@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: problems with bitbake
+	(envelope-from <rich.pixley@palm.com>) id 1K96LA-0007lj-T9
+	for openembedded-devel@openembedded.org; Thu, 19 Jun 2008 00:41:21 +0200
+X-IronPort-AV: E=Sophos;i="4.27,667,1204531200"; 
+   d="scan'208";a="5798721"
+Received: from unknown (HELO mailhost01.palm.com) ([148.92.223.30])
+	by smtp-relay1.palm.com with ESMTP; 18 Jun 2008 15:40:14 -0700
+Received: from flamingo.palm1.palmone.com (flamingo.palm1.palmone.com
+	[148.92.248.64])
+	by mailhost01.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
+	m5IMeE39018839; Wed, 18 Jun 2008 15:40:14 -0700 (PDT)
+Message-ID: <48598ECE.9030604@palm.com>
+Date: Wed, 18 Jun 2008 15:40:14 -0700
+From: Rich Pixley <rich.pixley@palm.com>
+User-Agent: Thunderbird 2.0.0.14 (Macintosh/20080421)
+MIME-Version: 1.0
+To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
+Subject: bitbake vs incremental builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,12 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jun 2008 17:51:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 18 Jun 2008 22:41:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Try http://blog.leggewie.org/?p=39 and you should have a correct
-configuration.
+I'm wondering if there's any reason that bitbake isn't using the time 
+stamps on it's stamp files to determine which recipe+task pairs should 
+be executed.
 
+If C depends on B depends on A...
+
+A first build will build A, B, C.
+A second build will build nothing since nothing has changed.  (this is 
+correct behavior).
+However, if I change A and rebuild, only A will be rebuilt, not B or C.
+
+This is a nuisance for developers who are using bitbake as a build 
+system.  It's a problem for continuous build systems since they must 
+necessarily build everything over from source in order to test whether 
+builds work.
+
+I'm thinking that it should be fairly easy to adjust which recipe+task 
+pairs are scheduled for execution by looking not only at stamp file 
+existence, but also at the comparative difference in stamp file times.  
+If the stamp file for A is more recent than the stamp file for B, then B 
+needs to be scheduled for execution as does C.
+
+Does anyone know of any reason why this cannot or should not be done?
+
+--rich
 
 
