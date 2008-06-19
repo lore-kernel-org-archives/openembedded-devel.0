@@ -1,32 +1,35 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1K9F3a-0000Kh-9c
-	for openembedded-devel@openembedded.org; Thu, 19 Jun 2008 09:59:46 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m5J7wejl023615
-	for <openembedded-devel@openembedded.org>;
-	Thu, 19 Jun 2008 08:58:40 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 23247-09-2 for <openembedded-devel@openembedded.org>;
-	Thu, 19 Jun 2008 08:58:35 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m5J7wMCF023583
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 19 Jun 2008 08:58:22 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <48598ECE.9030604@palm.com>
-References: <48598ECE.9030604@palm.com>
-Date: Thu, 19 Jun 2008 08:58:22 +0100
-Message-Id: <1213862302.5018.2.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: bitbake vs incremental builds
+	(envelope-from <gwossum@pager.net>) id 1K9MNa-00026L-5Y
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Jun 2008 17:48:54 +0200
+X-ASG-Debug-ID: 1213890450-23d1013f0000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from mail.pager.net (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 04521D472D
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2008 10:47:30 -0500 (CDT)
+Received: from mail.pager.net (lrs-ad1.longragesystems.local [192.168.1.254])
+	by barracuda.pager.net with ESMTP id O1FUKAGC03eImSsD for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2008 10:47:30 -0500 (CDT)
+X-ASG-Whitelist: Sender
+Received: from [192.168.1.71] ([192.168.1.71]) by mail.pager.net with
+	Microsoft SMTPSVC(6.0.3790.1830); Thu, 19 Jun 2008 10:52:25 -0500
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
+To: openembedded-devel@lists.openembedded.org
+X-ASG-Orig-Subj: gstreamer and po-makefile-fix.patch
+Date: Thu, 19 Jun 2008 10:47:26 -0500
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200806191047.27068.geoffrey@pager.net>
+X-OriginalArrivalTime: 19 Jun 2008 15:52:25.0531 (UTC)
+	FILETIME=[781448B0:01C8D224]
+X-Barracuda-Connect: lrs-ad1.longragesystems.local[192.168.1.254]
+X-Barracuda-Start-Time: 1213890451
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: gstreamer and po-makefile-fix.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,44 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2008 07:59:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 19 Jun 2008 15:48:54 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2008-06-18 at 15:40 -0700, Rich Pixley wrote:
-> If C depends on B depends on A...
-> 
-> A first build will build A, B, C.
-> A second build will build nothing since nothing has changed.  (this is 
-> correct behavior).
-> However, if I change A and rebuild, only A will be rebuilt, not B or C.
-> 
-> This is a nuisance for developers who are using bitbake as a build 
-> system.  It's a problem for continuous build systems since they must 
-> necessarily build everything over from source in order to test whether 
-> builds work.
-> 
-> I'm thinking that it should be fairly easy to adjust which recipe+task 
-> pairs are scheduled for execution by looking not only at stamp file 
-> existence, but also at the comparative difference in stamp file times.  
-> If the stamp file for A is more recent than the stamp file for B, then B 
-> needs to be scheduled for execution as does C.
-> 
-> Does anyone know of any reason why this cannot or should not be done?
+Hi,
 
-It wasn't done for a long time simply because nobody had taken the time
-to implement it. It has however recently been implemented, simply set:
+I ran into a problem with a patch to GStreamer with an AVR32 target.  My 
+coworker ran into the exact same problem with a GeodeLX target.
 
-BB_STAMP_POLICY = "full" 
-or
-BB_STAMP_POLICY = "whitelist" 
+The problem is the po-makefile-fix.patch, which looks like:
+--- gstreamer-0.10.17.orig/po/Makefile.in.in    2008-01-25 23:21:31.000000000 
++0800
++++ gstreamer-0.10.17/po/Makefile.in.in 2008-03-20 19:10:54.000000000 +0800
+@@ -30,7 +30,7 @@
+ INSTALL = @INSTALL@
+ INSTALL_DATA = @INSTALL_DATA@
+ MKINSTALLDIRS = @MKINSTALLDIRS@
+-mkinstalldirs = $(SHELL) `case "$(MKINSTALLDIRS)" in /*) 
+echo "$(MKINSTALLDIRS)" ;; *) echo "$(top_builddir)/$(MKINSTALLDIRS)" ;; 
+esac`
++mkinstalldirs = $(MKINSTALLDIRS)
 
-Whitelist allows you to exempt certain packages from stamp checking, see
-packaged-staging.bbclass for an example.
+ GMSGFMT = @GMSGFMT@
+ MSGFMT = @MSGFMT@
 
-Cheers,
 
-Richard
+"make install" fails in the po/ directory with this patch applied.  It works 
+great if don't apply the patch.  
+
+What is the purpose of this patch?  I don't see how GStreamer could 
+successfully build with this patch.  Is there a companion patch that is 
+missing?
+
+---
+Geoffrey
+
 
 
 
