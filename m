@@ -1,32 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.233.178.241] (helo=hs-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KBDMK-00033Z-FF
-	for openembedded-devel@openembedded.org; Tue, 24 Jun 2008 20:35:16 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KBDKO-0004uc-Jl
-	for openembedded-devel@openembedded.org; Tue, 24 Jun 2008 18:33:16 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 24 Jun 2008 18:33:16 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Jun 2008 18:33:16 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 24 Jun 2008 20:33:06 +0200
-Message-ID: <g3rel4$tko$1@ger.gmane.org>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KBDaj-0003R1-6s
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Jun 2008 20:50:14 +0200
+Received: by hs-out-0708.google.com with SMTP id 23so588672hsn.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Jun 2008 11:48:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=pm6us+IFtRzq18GUiAmvlTG31hhPN7q/PgTdWT4tn5A=;
+	b=L8az/jUhU2crZcaNdD6JOR5Dwh8mm4SKwwNZ2QFk60amzGBq5dTA53uVCxTYDb6HyN
+	uaOwfluKtA1ZEoamejSGSaZsNWIch5bzzfof8pdOE3o7h0BWFSmns8ckDgtHO8ov5Y5g
+	ZzpCf0Fd31zlcPMjzvo8TQi06QTXeYZWWVa5Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=n70tC4XW7R34JZ66LBq2P7hPja1pVd9+pKLoho/9BZ51OH2ackC5pknCOSAEUIOeWO
+	H+IB2H6CI/pZVc7tArrkgXAOLwbocRXoNfGaLU5+f61UROMTCyXO0AgOUs0Wbg5A+o6Y
+	RLxXBu13UuMBCbVTjVOtzzRUotZoVFtrwgRl0=
+Received: by 10.100.197.7 with SMTP id u7mr16410915anf.27.1214333285814;
+	Tue, 24 Jun 2008 11:48:05 -0700 (PDT)
+Received: by 10.100.174.18 with HTTP; Tue, 24 Jun 2008 11:48:05 -0700 (PDT)
+Message-ID: <c384c5ea0806241148r5f708f7bh38563da3c051229b@mail.gmail.com>
+Date: Tue, 24 Jun 2008 20:48:05 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4860FE33.5010804@pobox.com>
+MIME-Version: 1.0
 References: <1213345201.13942.3.camel@dax.rpnet.com>
-	<20080624095735.GB3500@aquilonia.hyboria>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008061003)
-In-Reply-To: <20080624095735.GB3500@aquilonia.hyboria>
-Sender: news <news@ger.gmane.org>
+	<20080624095735.GB3500@aquilonia.hyboria> <4860FE33.5010804@pobox.com>
 Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -41,56 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jun 2008 18:35:16 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 24 Jun 2008 18:50:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Graeme Gregory wrote:
->> We've not made any decisions on what the commit/review policy should be,
->> this is open for discussion. We're thinking it may take the form of some
->> kind of kernel style Signed-off-by: tags and a switch to a partially
->> pull based model rather than just push based as we use monotone so more
->> than one developer handles any given change.
->>
-> I have been thinking on this and here is my suggestion.
->
-> One thing that has been noted has been the high level of work required
-> to review every change to every package.
->
-> Every time more than two OE people get together we keep talking about
-> splitting OE into two. Maybe it is time to consider actually doing it.
-> My suggestion would be along the rough lines of the following.
->
-> 1) OE-core - everything needed to get upto a successful glibc build
-> completed so gcc, gcc-cross, binutils and support packages. Also most
-> stuff in classes/. Breakages in these two areas are what hurts the most
-> and the area we have the least manpower in.
+Hello all,
 
-I'd expand that area to the stuff task-boot covers (init, udev, busybox, 
-etc), and maybe even packages/linux.
+On Tue, Jun 24, 2008 at 4:01 PM, Alain M. <alainm@pobox.com> wrote:
+> Hi, I am really new here but I have one suggestion:
+> Graeme Gregory escreveu:
+>> 1) OE-core - everything needed to get upto a successful glibc build
+>> 2) OE-universe - all the other stuff, the recipes and distro configs.
 
->
-> In this section we would have proper reviews and I would suggest no
-> change without two OE-core developers signing off on it. (OE-core
-> developers being possible a different group than the political OE core).
->
-> 2) OE-universe - all the other stuff, the recipes and distro configs.
-> The stuff where breakage tends to be less painful we keep as is. With
-> people not being afraid to got git-revert on stupid changes. Yes you do
-> need to test building all users of a .inc file or patch when you change
-> them.
->
-> If we find this system is working and we think we can handle the extra
-> load we can always start to raise the bar. For example we could change
-> core to 3 signoffs and universe to 2. But I think a little of this
-> trying a new SCM will be seeing how peoples workflow changes. I know
-> from OM git usage I was suddenly spending less time on complex merges
-> and had more time to think.
->
-> Anyway thats my 2p.
->
-> Graeme
+Yes, but make this split only by means of convention, not in the scm
+(name)space please.
+Having a gentlemen's agreements that non-core developers should not
+"commit changes to classes/conf and all the core packages (udev,
+busybox, kernels)" is close to what we do nowadays and works fine.
 
+I agree with Michael that intrusive changes should be done in branches.
 
+My personal strong meaning is that we should first convert to GIT,
+without changing our current policy TOO much.
+
+Really, the change to GIT alone will already impact the productivity
+negatively, due to the dip in the developer commits resulting from
+that (people setting up their environment and workflow instead of
+maintaining stuff).
+If we crawled back up, let's improve on things.
+
+For later, -next is a good idea to merge new branches first, and see
+where the autobuilder/tests fail, and nack stuff if it got broken
+
+Regards,
+-- 
+Leon
 
 
