@@ -1,24 +1,21 @@
-Received: from [64.28.152.243] (helo=smtp-relay2.palm.com)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rich.pixley@palm.com>) id 1KAqix-0001O2-Le
-	for openembedded-devel@openembedded.org; Mon, 23 Jun 2008 20:25:07 +0200
-X-IronPort-AV: E=Sophos;i="4.27,691,1204531200"; d="scan'208";a="10346964"
-Received: from unknown (HELO mailhost01.palm.com) ([148.92.223.30])
-	by smtp-relay2.palm.com with ESMTP; 23 Jun 2008 11:23:17 -0700
-Received: from flamingo.palm1.palmone.com (flamingo.palm1.palmone.com
-	[148.92.248.64])
-	by mailhost01.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
-	m5NIN4jw005436; Mon, 23 Jun 2008 11:23:04 -0700 (PDT)
-Message-ID: <485FEA09.2010507@palm.com>
-Date: Mon, 23 Jun 2008 11:23:05 -0700
-From: Rich Pixley <rich.pixley@palm.com>
-User-Agent: Thunderbird 2.0.0.14 (Macintosh/20080421)
-MIME-Version: 1.0
-To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-References: <48598ECE.9030604@palm.com>	<1213862302.5018.2.camel@dax.rpnet.com>
-	<485B01CC.3000701@palm.com> <1213955086.5049.7.camel@dax.rpnet.com>
-In-Reply-To: <1213955086.5049.7.camel@dax.rpnet.com>
-Subject: Re: bitbake vs incremental builds
+	(envelope-from <dp@xora.org.uk>) id 1KB5JN-00052n-72
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Jun 2008 11:59:41 +0200
+Received: from xora.org.uk ([::ffff:78.86.128.56])
+	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,128bits,AES128-SHA)
+	by xora.org.uk with esmtp; Tue, 24 Jun 2008 10:57:45 +0100
+	id 00030341.4860C519.00006569
+Date: Tue, 24 Jun 2008 10:57:35 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080624095735.GB3500@aquilonia.hyboria>
+References: <1213345201.13942.3.camel@dax.rpnet.com>
+Mime-Version: 1.0
+In-Reply-To: <1213345201.13942.3.camel@dax.rpnet.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -32,18 +29,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2008 18:25:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 24 Jun 2008 09:59:41 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Richard Purdie wrote:
-> If you can show a more specific problem perhaps we can help but at the
-> moment you're tying our hands :(.
-And unfortunately, it must stay that way for a while longer.
+> We've not made any decisions on what the commit/review policy should be,
+> this is open for discussion. We're thinking it may take the form of some
+> kind of kernel style Signed-off-by: tags and a switch to a partially
+> pull based model rather than just push based as we use monotone so more
+> than one developer handles any given change.
+> 
+I have been thinking on this and here is my suggestion.
 
-I'll try to get myself up to speed on using top of tree OE this week.  
-That portion of our project was before my time so it'll be a learning curve.
+One thing that has been noted has been the high level of work required
+to review every change to every package.
 
---rich
+Every time more than two OE people get together we keep talking about
+splitting OE into two. Maybe it is time to consider actually doing it.
+My suggestion would be along the rough lines of the following.
+
+1) OE-core - everything needed to get upto a successful glibc build
+completed so gcc, gcc-cross, binutils and support packages. Also most
+stuff in classes/. Breakages in these two areas are what hurts the most
+and the area we have the least manpower in.
+
+In this section we would have proper reviews and I would suggest no
+change without two OE-core developers signing off on it. (OE-core
+developers being possible a different group than the political OE core).
+
+2) OE-universe - all the other stuff, the recipes and distro configs.
+The stuff where breakage tends to be less painful we keep as is. With
+people not being afraid to got git-revert on stupid changes. Yes you do
+need to test building all users of a .inc file or patch when you change
+them.
+
+If we find this system is working and we think we can handle the extra
+load we can always start to raise the bar. For example we could change
+core to 3 signoffs and universe to 2. But I think a little of this
+trying a new SCM will be seeing how peoples workflow changes. I know
+from OM git usage I was suddenly spending less time on complex merges
+and had more time to think.
+
+Anyway thats my 2p.
+
+Graeme
+
 
 
