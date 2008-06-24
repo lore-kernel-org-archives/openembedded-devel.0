@@ -1,18 +1,22 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1KBEmR-0005WH-Kt
-	for openembedded-devel@openembedded.org; Tue, 24 Jun 2008 22:06:19 +0200
-Received: (qmail 24222 invoked by uid 1003); 24 Jun 2008 20:04:17 -0000
+	(envelope-from <philip@balister.org>) id 1KBEvI-0005sc-AS
+	for openembedded-devel@openembedded.org; Tue, 24 Jun 2008 22:15:28 +0200
+Received: (qmail 26225 invoked by uid 1003); 24 Jun 2008 20:13:26 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 24 Jun 2008 20:04:17 -0000
-Message-ID: <4861533F.7020906@balister.org>
-Date: Tue, 24 Jun 2008 16:04:15 -0400
+	by mail.geekisp.com with SMTP; 24 Jun 2008 20:13:25 -0000
+Message-ID: <48615563.4050009@balister.org>
+Date: Tue, 24 Jun 2008 16:13:23 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-Subject: Building a rootfs, without building a kernel
+To: openembedded-devel@lists.openembedded.org
+References: <1213345201.13942.3.camel@dax.rpnet.com>	<20080624095735.GB3500@aquilonia.hyboria>
+	<4860FE33.5010804@pobox.com>
+	<c384c5ea0806241148r5f708f7bh38563da3c051229b@mail.gmail.com>
+In-Reply-To: <c384c5ea0806241148r5f708f7bh38563da3c051229b@mail.gmail.com>
+Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -26,31 +30,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jun 2008 20:06:20 -0000
-X-Groupsio-MsgNum: 5426
+X-List-Received-Date: Tue, 24 Jun 2008 20:15:28 -0000
+X-Groupsio-MsgNum: 5427
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020000030509000408030306"
+	micalg=sha1; boundary="------------ms020106000508040403050105"
 
---------------ms020000030509000408030306
+--------------ms020106000508040403050105
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I am trying to build a powerpc root file system for a xilinx ml403 
-board. Since we do not have a working kernel build for this machine, I 
-tried commenting out the PREFERRED_PROVIDER for virtual/linux. The build 
-then tries to build linux-rt. I tried ASSUME_PROVIDED for the kernel 
-when the preferred provider is not commented out and it still tries to 
-build the kernel.
+Leon Woestenberg wrote:
+> Hello all,
+> 
+> On Tue, Jun 24, 2008 at 4:01 PM, Alain M. <alainm@pobox.com> wrote:
+>> Hi, I am really new here but I have one suggestion:
+>> Graeme Gregory escreveu:
+>>> 1) OE-core - everything needed to get upto a successful glibc build
+>>> 2) OE-universe - all the other stuff, the recipes and distro configs.
+> 
+> Yes, but make this split only by means of convention, not in the scm
+> (name)space please.
+> Having a gentlemen's agreements that non-core developers should not
+> "commit changes to classes/conf and all the core packages (udev,
+> busybox, kernels)" is close to what we do nowadays and works fine.
+> 
+> I agree with Michael that intrusive changes should be done in branches.
+> 
+> My personal strong meaning is that we should first convert to GIT,
+> without changing our current policy TOO much.
 
-Looking at the dependency graphs seems to suggest the requirement comes 
-from the do_rootfs task.
+I agree. I also know we need to strengthen the gentlemen's agreement and 
+this is a very good time to do it.
 
-Does anyone know how to build an image, without building a kernel for a 
-machine?
+> Really, the change to GIT alone will already impact the productivity
+> negatively, due to the dip in the developer commits resulting from
+> that (people setting up their environment and workflow instead of
+> maintaining stuff).
+> If we crawled back up, let's improve on things.
+> 
+> For later, -next is a good idea to merge new branches first, and see
+> where the autobuilder/tests fail, and nack stuff if it got broken
+
+I'd like to see us have a set of machine/distro/image's that must build 
+after changes to "core OE". Breakage in .dev hurts a lot of people's 
+productivity.
+
+Do we have the resources and volunteers to help test changes to core?
 
 Philip
 
---------------ms020000030509000408030306
+--------------ms020106000508040403050105
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -102,17 +131,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDYyNDIw
-MDQxNVowIwYJKoZIhvcNAQkEMRYEFK2/bjRQpnJhDe+khvKFtqCVekqNMFIGCSqGSIb3DQEJDzFF
+MTMyM1owIwYJKoZIhvcNAQkEMRYEFBJna/9j6XSGT49Pqf4VwtW3BJg5MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQCRdSCO55bBUxJb9ZrV7O2AtAzXT9ps7TDi5Acu/zRpzeDC9AX0
-tj4rpq8m4v9aTSB6yjpp8LfNkDUpbnuuawqMhE5RfctFHb+UTtrR/vaEUvYFJrdKdvt8Xtpr1Z26
-Ixi43Q0QOCY8EiizG05La4WZ36MsjUVfcZMIGgLKoBfFYVYuleB/5v7gnJHrOlEIBT8w0iwGkCf8
-wYt6Z5xtB28+ZwSDfJJgO9Y9B06Puiom69mvGuOR4cAqS/6g5yLQsLIx99zTbvVVVTQn4Bczf5pr
-quE6m69IBXlmfOimJUhW/pBVCf5TgDjg36PsgVKkQn8Jw3Z8T7bYj9Sh8wr2zmw6AAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQCLFPQPdtAb8IwEm58hMwbxvGAIGgmuWoNjUsolHy1T7jYtX7FI
+q5AxGJ18LLFmswpcMk4Zv4/YlRYSIbBv7FocmVl1O9eW31J6GN2WiiL3qiXioiiFpvSSiRKLmEmz
+QPY8EmHlQvK1RZy58iAe+Aeh9ZpWpW5cAD4BC+Q/fUe4H6GQJR1TjUe6uvmvafTv42CUvLUl2bwj
+wXlNlxKjxeBFXkM+I4lRUwdmM9i0kjLpu7ED4OYHyDR6xEJSCJhxirRjd0wvfzGptLNYsoKcAxSB
+t/R+Ic4IWmr++PKoQVbUGbGaPzCnAB+eHdU9ootUMTM9xwLdM/iuBnMcSg9oGsowAAAAAAAA
 
---------------ms020000030509000408030306--
+--------------ms020106000508040403050105--
