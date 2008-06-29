@@ -1,21 +1,23 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1KCcOa-0000Qd-Ly
+	(envelope-from <mickey@vanille-media.de>) id 1KD5PZ-0000Zw-Ev
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Jun 2008 17:31:28 +0200
-Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
-	by mx01.dls.net with esmtpa (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1KCcM3-0005y3-SV
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Jun 2008 10:28:47 -0500
-Message-ID: <486658B8.2070403@dls.net>
-Date: Sat, 28 Jun 2008 10:28:56 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.14) Gecko/20080421 Thunderbird/2.0.0.14 Mnenhy/0.7.5.666
-MIME-Version: 1.0
+	Mon, 30 Jun 2008 00:30:22 +0200
+Received: from andromeda.vanille.de (e180179167.adsl.alicedsl.de
+	[85.180.179.167])
+	by drlauer-research.com (Postfix) with ESMTP id 83E4B584C35
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Jun 2008 00:31:22 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Subject: python-pygobject fails to build from scratch
+Date: Mon, 30 Jun 2008 00:27:22 +0200
+User-Agent: KMail/1.9.9
+References: <486658B8.2070403@dls.net>
+In-Reply-To: <486658B8.2070403@dls.net>
+MIME-Version: 1.0
+Message-Id: <200806300027.23029.mickey@vanille-media.de>
+Subject: Re: python-pygobject fails to build from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -29,52 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Jun 2008 15:31:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 29 Jun 2008 22:30:24 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-The patch below causes build failures for me :(
+Am Samstag 28 Juni 2008 17:28:56 schrieb Mike (mwester):
+> The patch below causes build failures for me :(
+>
+> Specifically, with an empty tmp directory (and parallel make specified,
+> but I don't think that makes a difference in this case),
+> gobject-generate-constants is not yet built and staged.  In fact, it is
+> both created and used by this makefile, so there's no way that this
+> recipe should use the one in staging (in fact, if it's working for folks
+> today, it's because their builds are finding (an older) one left around
+> in staging).
 
-Specifically, with an empty tmp directory (and parallel make specified,
-but I don't think that makes a difference in this case),
-gobject-generate-constants is not yet built and staged.  In fact, it is
-both created and used by this makefile, so there's no way that this
-recipe should use the one in staging (in fact, if it's working for folks
-today, it's because their builds are finding (an older) one left around
-in staging).
+That's strange. The situation is that pygobject 2.14.x compiles a helper which 
+it calls during the build process which fails. Since we already had a 
+pygobject-native for various other packages laying around, i made that stage 
+the necessary helper and made pygobject DEPEND on pygobject-native.
 
-Since I don't know what problem this patch and the others in the
-associated commit were solving, I can't provide a fix, other than to
-note that backing out just this patch makes it Work For Me(tm).
+Can you check whether pygobject-native is getting build and staged for you at 
+the time pygobject is going to be compiled?
 
-Thanks,
-Mike (mwester)
+Update: Sorry, forget what I said, I had a patch to pygobject-native to 
+commited :/
 
-
-
-
---- packages/python/python-pygobject/generate-constants.patch
-1726f18a8e65fb7fe7a860bd1bd79e09c0dd2de1
-+++ packages/python/python-pygobject/generate-constants.patch
-1726f18a8e65fb7fe7a860bd1bd79e09c0dd2de1
-@@ -0,0 +1,18 @@
-+Index: pygobject-2.14.2/gobject/Makefile.am
-+===================================================================
-+--- pygobject-2.14.2.orig/gobject/Makefile.am
-++++ pygobject-2.14.2/gobject/Makefile.am
-+@@ -21,11 +21,11 @@ if PLATFORM_WIN32
-+ common_ldflags += -no-undefined
-+ endif
-+
-+-constants.py: generate-constants$(EXEEXT) constants.py.in
-++constants.py: constants.py.in
-+ 	rm -f constants.py
-+ 	cp $(srcdir)/constants.py.in constants.py
-+ 	chmod 644 constants.py
-+-	$(top_builddir)/gobject/generate-constants$(EXEEXT) >> constants.py
-++	gobject-generate-constants$(EXEEXT) >> constants.py
-+ 	chmod 444 constants.py
-+
-+ generate_constants_CFLAGS = $(GLIB_CFLAGS)
+It should work now.
+-- 
+:M:
 
 
