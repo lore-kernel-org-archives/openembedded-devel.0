@@ -1,35 +1,35 @@
-Received: from [209.85.132.247] (helo=an-out-0708.google.com)
+Received: from [201.35.65.91] (helo=freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KDO00-000075-HT
+	(envelope-from <otavio@freedom.ind.br>) id 1KDOGJ-0005ad-GU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jun 2008 20:21:16 +0200
-Received: by an-out-0708.google.com with SMTP id b38so267719ana.83
+	Mon, 30 Jun 2008 20:38:04 +0200
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id A57261A5FA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jun 2008 11:18:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=RN75eyf0Vd1xLyGakHK93MwSbjPWEOFiWHLoCN9+Z6k=;
-	b=dOMetfiGokxPWmt3BdJaHiaFBqirQjK8qpdgQ1kRTOu3jDrpTi/wfhgJdxZqueh1fO
-	MNRdKpz52a+wUr4XefPfE8fvnEwLV+e6dap/gIy0tCYmzC9PFI7C2iEnmMOFtnsX9sht
-	3wnnHrCuKynSqIcehYz4leAOSwMlQ4W25lDVs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=Wo0INqWFtaqq6HoAl+LBY/Y0YDHtr6Eyc5ATKqGzFEC70wY4p5AJCZ/r5v+hdON6cI
-	ZsIYiwPKrFibu3oVqz84RAuEwSB9De1Lrox8Koz3Y41gHdcBUMqWp+cyEnChSIieFauL
-	6ldlhXTc7Hhe2q35/03lDsmAWw8iNz1Fa2VFM=
-Received: by 10.100.41.9 with SMTP id o9mr4523749ano.84.1214849896082;
-	Mon, 30 Jun 2008 11:18:16 -0700 (PDT)
-Received: by 10.100.174.18 with HTTP; Mon, 30 Jun 2008 11:18:16 -0700 (PDT)
-Message-ID: <c384c5ea0806301118s251c0088mc8983c4ff41e42b0@mail.gmail.com>
-Date: Mon, 30 Jun 2008 20:18:16 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	angstrom-distro-devel@linuxtogo.org
+	Mon, 30 Jun 2008 15:35:07 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id B31218AA4ED
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Jun 2008 15:35:06 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 30 Jun 2008 15:35:06 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id DC385C1F8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Jun 2008 12:35:05 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id A63C461001E; Mon, 30 Jun 2008 15:36:36 -0300 (BRT)
+To: openembedded-devel@lists.openembedded.org
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Mon, 30 Jun 2008 15:36:36 -0300
+Message-ID: <877ic6srbf.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-Subject: Treo 600 available for OE
+Subject: Problem with i18n (input)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -43,23 +43,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jun 2008 18:21:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Jun 2008 18:38:04 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
 Hello,
 
-Some friendly person is submitting a Treo 600 to an OpenEmbedded
-developer who intends to make run any OpenEmbedded distribution on it.
+I've been in trouble to get proper support for input in OE. We're
+having problem to support input of international charsets on X. We've
+include locale packages and we have the system properly translated,
+however the input of latin1 chars (e.g. =C3=A9=C3=A7=C3=B3=C3=A3...) doesn'=
+t work.
 
-Any takers for the sucker?
+Here goes the list of packages (locale related) that are installed on
+the testing image, for reference:
 
-If noone responds, I will volunteer myself. Others go first, as my
-spare time is limited.
+glibc-binary-localedata-pt-br_2.6.1-r6_i586.ipk
+glibc-charmap-iso-8859-1_2.6.1-r6_i586.ipk
+glibc-gconv_2.6.1-r6_i586.ipk
+glibc-gconv-iso8859-1_2.6.1-r6_i586.ipk
+glibc-localedata-i18n_2.6.1-r6_i586.ipk
+glibc-localedata-iso14651-t1_2.6.1-r6_i586.ipk
+glibc-localedata-iso14651-t1-common_2.6.1-r6_i586.ipk
+glibc-localedata-translit-circle_2.6.1-r6_i586.ipk
+glibc-localedata-translit-cjk-compat_2.6.1-r6_i586.ipk
+glibc-localedata-translit-compat_2.6.1-r6_i586.ipk
+glibc-localedata-translit-font_2.6.1-r6_i586.ipk
+glibc-localedata-translit-fraction_2.6.1-r6_i586.ipk
+glibc-localedata-translit-narrow_2.6.1-r6_i586.ipk
+glibc-localedata-translit-neutral_2.6.1-r6_i586.ipk
+glibc-localedata-translit-small_2.6.1-r6_i586.ipk
+glibc-localedata-translit-wide_2.6.1-r6_i586.ipk
+libx11-locale_1:1.1.3-r3_i586.ipk
+locale-base-pt-br_2.6.1-r6_i586.ipk
+thunar-locale-pt-br_0.9.0-r0_i586.ipk
+xfce-terminal-locale-pt-br_0.2.8-r0_i586.ipk
+xfce4-panel-locale-pt-br_4.4.2-r0_i586.ipk
+xfce4-session-locale-pt-br_4.4.2-r0_i586.ipk
+xfdesktop-locale-pt-br_4.4.2-r0_i586.ipk
+xfwm4-locale-pt-br_4.4.2-r0_i586.ipk
 
-Regards,
--- 
-Leon
+Any idea?
+
+--=20
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
