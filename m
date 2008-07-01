@@ -1,37 +1,22 @@
-Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
+Received: from [217.116.0.34] (helo=correo2.acens.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KDhXj-0004TI-Mh
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jul 2008 17:13:19 +0200
-Received: by yx-out-1718.google.com with SMTP id 4so434959yxp.42
+	(envelope-from <joaquimduran@adtelecom.es>) id 1KDiF8-0002Kp-Ox
+	for openembedded-devel@openembedded.org; Tue, 01 Jul 2008 17:58:10 +0200
+Received: (qmail 8244 invoked from network); 1 Jul 2008 15:55:04 -0000
+Received: from unknown (HELO [192.168.0.37])
+	(joaquimduran.adtelecom.es@[83.32.134.48])
+	(envelope-sender <joaquimduran@adtelecom.es>)
+	by correo2.acens.net (qmail-ldap-1.03) with SMTP
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Jul 2008 08:10:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=DE2UNe1HE4HyFm54uJUOT0zfyJ0Xd18oKQELCFGTcvo=;
-	b=trcbhBvnslkEJofxKBj3YWZI3kEVpoWAHqWwh9gMifGok4y0oAQBBVBwyx5KH6TVPP
-	m2w+wbVw/Ev5bhKjQULJLzKSjiYQW1UxUHOOULko/6U2/9EC4RUXjFSkQubqLrgBYDRv
-	jCsZcYIwi5dzvwl54MphqCDw3ANDrBW0cyQ44=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=ckOrP9qNPwpsMuV2W/QKKCPxb3o0/V01JyXs4qvId1DgiC+sK+Dx+RN/Ntl/kSXJ4Z
-	H39GqNPCyvIs7yUPWs4MAHPoAplTMzPkUy/dLr1fgVhJST8h4q2lEEGmJRw7lu2lgORJ
-	gqljIGi3qxD7M6q5PnrKcyBzB8wMmmGc4IQSk=
-Received: by 10.114.132.5 with SMTP id f5mr5710781wad.125.1214925013876;
-	Tue, 01 Jul 2008 08:10:13 -0700 (PDT)
-Received: by 10.114.184.13 with HTTP; Tue, 1 Jul 2008 08:10:13 -0700 (PDT)
-Message-ID: <f96d234e0807010810y7433f558n450464f77bb3b94f@mail.gmail.com>
-Date: Tue, 1 Jul 2008 11:10:13 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200807010953.02888.e.robertson.svg@gmail.com>
+	1 Jul 2008 15:55:03 -0000
+Message-ID: <486A524B.2080702@adtelecom.es>
+Date: Tue, 01 Jul 2008 17:50:35 +0200
+From: Joaquim Duran <joaquimduran@adtelecom.es>
+Organization: AD Telecom
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
 MIME-Version: 1.0
-References: <200807010953.02888.e.robertson.svg@gmail.com>
-Subject: Re: Having multiple bb files
+To: openembedded-devel@lists.openembedded.org
+Subject: Installation of a new locale in an installed image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -45,31 +30,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jul 2008 15:13:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 01 Jul 2008 15:58:11 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tue, Jul 1, 2008 at 10:53 AM, E Robertson <e.robertson.svg@gmail.com> wrote:
-> Hi,
-> Can I have multiple bb files for the same package (same version)?
-> If so, how do I separate them and how do I set a default one for bitbake to
-> build? (i.e without using the -b option).
+Dear all,
 
-There are several options -- virtual packages, or simply call the
-bitbake recipe by a different name.
+I know that to create an image with several locales, these locales 
+should be included in LINGUAS var. I'm interested in install a new 
+locale to an already installed image.
 
-see packages/opkg for an example of using different names for
-different variations of a package.
+For this new locale to install, I've installed the corresponding 
+glibc-localedata- and glibc-locale- packages, but the locale could not 
+be used.
 
-for information on virtual packages, see:
-http://www.pokylinux.org/doc/poky-handbook.html#ref-bitbake-providers
+Perphaps I'm wrong, but I think that a glibc-binary-localedata should be 
+installed. Could you confirm it?
 
-Cliff
+How can I generate these packages?
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Thanks and Best Regards,
+Joaquim Duran
 
 
