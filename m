@@ -1,37 +1,37 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mdarland@pager.net>) id 1KDSlb-0003U5-MT
+	(envelope-from <e.robertson.svg@gmail.com>) id 1KDhHN-0003zv-VN
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jul 2008 01:26:39 +0200
-X-ASG-Debug-ID: 1214868221-683000720000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from mail.pager.net (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 184B4E0FD7
+	Tue, 01 Jul 2008 16:56:26 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so2048683rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jun 2008 18:23:41 -0500 (CDT)
-Received: from mail.pager.net (lrs-ad1.longragesystems.local [192.168.1.254])
-	by barracuda.pager.net with ESMTP id ai9eXCxhAfaYMrHh for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jun 2008 18:23:41 -0500 (CDT)
-X-ASG-Whitelist: Sender
-Received: from [192.168.1.43] ([192.168.1.43]) by mail.pager.net with
-	Microsoft SMTPSVC(6.0.3790.1830); Mon, 30 Jun 2008 18:22:37 -0500
-From: Matt Darland <mdarland@pager.net>
-Organization: Long Range Systems
+	Tue, 01 Jul 2008 07:53:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:mime-version:content-type:content-transfer-encoding
+	:content-disposition:message-id;
+	bh=0CKOvWeg9j9ClpHduqIItnRfNoOq3SWcFf4HbLjwgoc=;
+	b=LGNnylFdYqvpPR2KrfS6aYOGsqYtHRNeYFB5cOyZNnsSnRwOBQpuTo1KZNhZKPMgkb
+	wvoaLHYn4obOA9VtId+fqBV412i0zx7vcKO+mcl+YBipimFSG2ulCe9/inD6n2ohSSWB
+	Ob75rOtqKvbtEQ9OkedHbcXzbpY6VIRdzhYuQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:mime-version:content-type
+	:content-transfer-encoding:content-disposition:message-id;
+	b=H0RatuYdOy48npLV29QfuGPsq44nHRTjqLoYJo13+5ZXdnsInz260A5mvmBD4xKQLg
+	MwZJ8/DxvwacjlWpsNZtdPMJIB9X1BonHjgOplF+UMgPYtKnpzIir6k6X3+Q0hemv3Ye
+	hPAoiyBkTaHaR7QXcWApl89CVSKmuul3lUqlY=
+Received: by 10.141.5.17 with SMTP id h17mr3605442rvi.8.1214923998792;
+	Tue, 01 Jul 2008 07:53:18 -0700 (PDT)
+Received: from vincy ( [74.254.162.162])
+	by mx.google.com with ESMTPS id 9sm1212166yxs.5.2008.07.01.07.53.17
+	(version=SSLv3 cipher=RC4-MD5); Tue, 01 Jul 2008 07:53:18 -0700 (PDT)
+From: E Robertson <e.robertson.svg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] opkg and libgnutls linkage
-Date: Mon, 30 Jun 2008 18:20:14 -0500
+Date: Tue, 1 Jul 2008 09:53:02 -0500
 User-Agent: KMail/1.9.9
-References: <200806301708.02305.mdarland@pager.net>
-In-Reply-To: <200806301708.02305.mdarland@pager.net>
 MIME-Version: 1.0
-Message-Id: <200806301820.14349.mdarland@pager.net>
-X-OriginalArrivalTime: 30 Jun 2008 23:22:38.0000 (UTC)
-	FILETIME=[2F4F3300:01C8DB08]
-X-Barracuda-Connect: lrs-ad1.longragesystems.local[192.168.1.254]
-X-Barracuda-Start-Time: 1214868221
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: Re: opkg and libgnutls linkage
+Message-Id: <200807010953.02888.e.robertson.svg@gmail.com>
+Subject: Having multiple bb files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -45,44 +45,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jun 2008 23:26:40 -0000
+X-List-Received-Date: Tue, 01 Jul 2008 14:56:26 -0000
 Content-Type: text/plain;
-  charset="iso-8859-1"
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Monday 30 June 2008 05:08:01 pm Matt Darland wrote:
-> When I install opkg-nogpg and try to run it on my target system I get the
-> error
->
-> "opkg: error while loading shared libraries: libgnutls.so.26: cannot open
-> shared object file: No such file or directory"
->
-> It appears that there is a libgnutls.so.13 installed on my system, but I
-> can't seem to figure out where a '26' might be....
->
-> Any insight?
->
-> ---
-> Thanks
-
-It looks like curl is linking against the gnutls on my build machine. It 
-happens that my build machine is an i686 and my target machine is an i586. 
-The staging/i686-linux/usr/bin/i586-linux/libgnutls-config seems to be 
-returning the version in my /usr/lib. Upon further investigation I noticed 
-this message when build gnutls.
-
-NOTE: package gnutls-1.6.3-r6: task do_package: started
-NOTE: Couldn't find shared library provider for libgnutls.so.26
-NOTE: Couldn't find shared library provider for libgnutls.so.26
-NOTE: Couldn't find shared library provider for libgnutls.so.26
-NOTE: Couldn't find shared library provider for libgnutls.so.26
-NOTE: Couldn't find shared library provider for libgnutls.so.26
-NOTE: Couldn't find shared library provider for libgnutls.so.26
-
-Any ideas on how to fix this?
-
-----
-Thanks
+Hi,
+Can I have multiple bb files for the same package (same version)?
+If so, how do I separate them and how do I set a default one for bitbake to 
+build? (i.e without using the -b option).
+Thanks. 
 
 
