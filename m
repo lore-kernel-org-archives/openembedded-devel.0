@@ -1,48 +1,39 @@
-Received: from [201.35.65.91] (helo=freedom.ind.br)
+Received: from [209.85.200.170] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KDqL3-00023p-PM
+	(envelope-from <xbenlau@gmail.com>) id 1KDwwE-0006ZJ-Ii
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jul 2008 02:36:50 +0200
-Received: from freedom.ind.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id 175584C4C79
+	Wed, 02 Jul 2008 09:39:38 +0200
+Received: by wf-out-1314.google.com with SMTP id 23so279063wfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Jul 2008 21:33:31 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id D4A914C4B75
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Jul 2008 21:33:30 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 1 Jul 2008 21:33:30 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 922B0C255
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Jul 2008 18:33:38 -0300 (BRT)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 83C47610047; Tue,  1 Jul 2008 21:33:25 -0300 (BRT)
+	Wed, 02 Jul 2008 00:36:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=KXDST9OmawGpa1CuuH8m0qAfh+p4TpqVHOypokQxf14=;
+	b=iWxkjugtxE11XnywzVQkIu3a4o0lPB0FANLndUw8OnFl6TlBS0EpgZOQL0c8U0b5Kf
+	NqduTPGb8K4bAvm+B+BBOXjsDl143pUI0KYCtW15NHPA29//HsCvFhDGAGQuxWiTMipR
+	drnuSxV6jWRUKitgD1HkzeEa7+HrF+ooIK+sM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=E1zbPiJif9vIHvsgrPsKZKselJvciPnjDeDslhQYlB8B3lsGPn2YK/XGFTxkIVdZJ9
+	JHLMSW/7tzsHKF3jLWjGBfx09xVz8T4HcrQH6WFmSGwAztabFWevtP53CghshcVBRB0v
+	cu0Phf/iv6+KBF+jK0CnRmPUgjzBtn/dstHSw=
+Received: by 10.142.51.4 with SMTP id y4mr2900610wfy.220.1214984186854;
+	Wed, 02 Jul 2008 00:36:26 -0700 (PDT)
+Received: by 10.143.48.1 with HTTP; Wed, 2 Jul 2008 00:36:26 -0700 (PDT)
+Message-ID: <f9a7555e0807020036g11261addn37530155264123b8@mail.gmail.com>
+Date: Wed, 2 Jul 2008 15:36:26 +0800
+From: "Ben Lau" <xbenlau@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <877ic6srbf.fsf@neumann.lab.ossystems.com.br>
-	<1214853946.21138.8.camel@lenovo.internal.reciva.com>
-	<87zlp2elny.fsf@neumann.lab.ossystems.com.br>
-	<1214858808.21138.20.camel@lenovo.internal.reciva.com>
-	<87r6aeabjb.fsf@neumann.lab.ossystems.com.br>
-	<1214861173.21138.24.camel@lenovo.internal.reciva.com>
-	<87od5i8urj.fsf@neumann.lab.ossystems.com.br>
-	<1214862651.21138.26.camel@lenovo.internal.reciva.com>
-	<871w2djwme.fsf@neumann.lab.ossystems.com.br>
-	<1214937507.21138.31.camel@lenovo.internal.reciva.com>
-	<87wsk5h1ai.fsf@neumann.lab.ossystems.com.br>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Tue, 01 Jul 2008 21:33:25 -0300
-In-Reply-To: <87wsk5h1ai.fsf@neumann.lab.ossystems.com.br> (Otavio Salvador's
-	message of "Tue\, 01 Jul 2008 16\:06\:29 -0300")
-Message-ID: <87d4lx9lbe.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+In-Reply-To: <486A73F5.2010906@balister.org>
 MIME-Version: 1.0
-Subject: Re: Problem with i18n (input)
+References: <4861533F.7020906@balister.org>
+	<440abda90806291608g2b4bdfbp71ed039b167e9aa9@mail.gmail.com>
+	<486A73F5.2010906@balister.org>
+Subject: Re: Building a rootfs, without building a kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -56,56 +47,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2008 00:36:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 02 Jul 2008 07:39:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Otavio Salvador <otavio@debian.org> writes:
-
-> Phil Blundell <pb@reciva.com> writes:
->
->> On Tue, 2008-07-01 at 15:19 -0300, Otavio Salvador wrote:
->>> Phil Blundell <pb@reciva.com> writes:
->>> 
->>> > On Mon, 2008-06-30 at 18:42 -0300, Otavio Salvador wrote:
->>> >> I've tryed it on both, a regular Debian system and it does load the
->>> >> Compose file. At OE image, it does not.
->>> >
->>> > Is it even loading compose.dir on your OE image?
->>> 
->>> It's not.
+On Wed, Jul 2, 2008 at 2:14 AM, Philip Balister <philip@balister.org> wrote:
+> David Baird wrote:
 >>
->> Hum.  How about locale.dir, does it load that one?
+>> 2008/6/24 Philip Balister <philip@balister.org>:
+>>>
+>>> I am trying to build a powerpc root file system for a xilinx ml403 board.
+>>> Since we do not have a working kernel build for this machine, I tried
+>>> commenting out the PREFERRED_PROVIDER for virtual/linux. The build then
+>>> tries to build linux-rt. I tried ASSUME_PROVIDED for the kernel when the
+>>> preferred provider is not commented out and it still tries to build the
+>>> kernel.
+>>>
+>>> Looking at the dependency graphs seems to suggest the requirement comes
+>>> from
+>>> the do_rootfs task.
+>>>
+>>> Does anyone know how to build an image, without building a kernel for a
+>>> machine?
+>>
+>> I have been using this pattern in my BBMASK:
+>>
+>>    BBMASK = "(linux-ml403-slab-2.6.x_git[.].*)"
+>>
+>> and then I made up my own task and image .bb files to establish what
+>> files I want in my rootfs.  I would also appreciate suggestions on a
+>> better way to do what to do this.
 >
-> It does.
+> I pushed changes to linux-ml403-slab (I think I renamed the recipe
+> linux-xilinx-slab) so the compile completes. I don't do anything to prepare
+> the kernel for actual use. This lets the images build. When I finally figure
+> out how to build kernels for Xilinx FPGA based PPC boards, I'll worry about
+> creating a bootable kernel. (Unless someone beats me to it)
+>
+> Possibly, we should create a dummy kernel bb file since this may be the best
+> solution for the general case of people building images without a working
+> kernel bb file.
+>
+> Philip
+>
 
-root@localhost:~# DISPLAY=:0 LC_ALL=pt_BR strace xev 2>&1 | grep X11
-open("/usr/lib/libX11.so.6", O_RDONLY)  = 3
-connect(3, {sa_family=AF_FILE, path="/tmp/.X11-unix/X0"}, 19) = 0
-open("/usr/share/X11/locale/locale.alias", O_RDONLY) = 4
-read(4, "#\t$XdotOrg: lib/X11/nls/locale.a"..., 1024) = 1024
-open("/usr/share/X11/locale/locale.dir", O_RDONLY) = 4
-read(4, "#\t$XdotOrg: lib/X11/nls/locale.d"..., 1024) = 1024
-access("/usr/share/X11/locale/iso8859-1/XLC_LOCALE", R_OK) = 0
-open("/usr/share/X11/locale/iso8859-1/XLC_LOCALE", O_RDONLY) = 4
-open("/usr/share/X11/locale/locale.alias", O_RDONLY) = 4
-read(4, "#\t$XdotOrg: lib/X11/nls/locale.a"..., 1024) = 1024
-open("/usr/share/X11/locale/locale.dir", O_RDONLY) = 4
-read(4, "#\t$XdotOrg: lib/X11/nls/locale.d"..., 1024) = 1024
-access("/usr/share/X11/locale/iso8859-1/XLC_LOCALE", R_OK) = 0
-open("/usr/share/X11/locale/iso8859-1/XLC_LOCALE", O_RDONLY) = 4
+I am not quite understand why OpenEmbedded force to generate kernel
+and the dependence would force it to be installed in the user land. As
+the kernel is usually installed on another partition. It should not be
+a part of the file system image.
 
-This is the whole output.
-
-I fail to see why it doesn't even tries to open compose.dir. Any idea?
-
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Therefore, I usually comment out few lines in task-base and task-boot
+to avoid the dependence.
 
 
