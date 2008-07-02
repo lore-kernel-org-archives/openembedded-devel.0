@@ -1,50 +1,35 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefano.regno@spesonline.com>) id 1KE08q-0005t6-Gu
+	(envelope-from <gwossum@pager.net>) id 1KE3sR-0002O8-A6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jul 2008 13:04:52 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 633EE95A74
+	Wed, 02 Jul 2008 17:04:11 +0200
+X-ASG-Debug-ID: 1215010856-07eb01870000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from mail.pager.net (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 1DD9CE33BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jul 2008 13:01:40 +0200 (CEST)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 10817-01-2 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 2 Jul 2008 13:01:40 +0200 (CEST)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id C8BD895B3E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jul 2008 13:01:28 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 65DD61D944E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jul 2008 13:01:28 +0200 (CEST)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 31688-01-3 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 2 Jul 2008 13:01:28 +0200 (CEST)
-Received: from [192.168.1.161]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 5EC1A1D9460
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jul 2008 13:01:25 +0200 (CEST)
-Message-ID: <486B6011.3050501@spesonline.com>
-Date: Wed, 02 Jul 2008 13:01:37 +0200
-From: Stefano Regno <stefano.regno@spesonline.com>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-MIME-Version: 1.0
+	Wed,  2 Jul 2008 10:00:56 -0500 (CDT)
+Received: from mail.pager.net (lrs-ad1.longragesystems.local [192.168.1.254])
+	by barracuda.pager.net with ESMTP id ZD8KUE6BHrsgYzz6 for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Jul 2008 10:00:56 -0500 (CDT)
+X-ASG-Whitelist: Sender
+Received: from [192.168.1.71] ([192.168.1.71]) by mail.pager.net with
+	Microsoft SMTPSVC(6.0.3790.1830); Wed, 2 Jul 2008 09:59:55 -0500
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-References: <877ic6srbf.fsf@neumann.lab.ossystems.com.br><1214853946.21138.8.camel@lenovo.internal.reciva.com><87zlp2elny.fsf@neu
-	mann.lab.ossystems.com.br><1214858808.21138.20.camel@lenovo.internal.reciva.com><87r6aeabjb.fsf@neumann.lab.ossystems.com.br><1
-	214861173.21138.24.camel@lenovo.internal.reciva.com><87od5i8urj.fsf@neumann.lab.ossystems.com.br><1214862651.21138.26.camel@len
-	ovo.internal.reciva.com><871w2djwme.fsf@neumann.lab.ossystems.com.br><1214937507.21138.31.camel@lenovo.internal.reciva.com><87w
-	sk5h1ai.fsf@neumann.lab.ossystems.com.br>
-	<87d4lx9lbe.fsf@neumann.lab.ossystems.com.br>
-In-Reply-To: <87d4lx9lbe.fsf@neumann.lab.ossystems.com.br>
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-Subject: Re: Problem with i18n (input)
+X-ASG-Orig-Subj: SVN Fetcher Makes Invalid Assumptions
+Date: Wed, 2 Jul 2008 10:00:52 -0500
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200807021000.52998.geoffrey@pager.net>
+X-OriginalArrivalTime: 02 Jul 2008 14:59:55.0343 (UTC)
+	FILETIME=[49CA7DF0:01C8DC54]
+X-Barracuda-Connect: lrs-ad1.longragesystems.local[192.168.1.254]
+X-Barracuda-Start-Time: 1215010856
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: SVN Fetcher Makes Invalid Assumptions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -58,19 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2008 11:04:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 02 Jul 2008 15:04:11 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I would study to learn how to build a toolchain, could sameone tell me 
-where is the file in openebedded project to read how you developped the 
-toolchain please?
+Hi all,
 
-Regrets Stefano
+I just ran into a problem using the SVN fetcher with a project that breaks the 
+fetchers assumptions about how an SVN repository is structured.  The project 
+in question is phonon-vlc-mplayer 
+(http://code.google.com/p/phonon-vlc-mplayer/), which has released no 
+tarballs of the source (although it has released compiled binaries, go 
+figure).
 
--- 
-Peace cannot be kept by force; it can only be achieved by understanding --Albert Einstein
+The SVN fetcher assumes that all SVN repositories can be checked out 
+with "proto://url/module module", in other words that the module name is at 
+then end of the URL.  However, phonon-vlc-mplayer requires 
+using "http://phonon-vlc-mplayer.googlecode.com/svn/trunk/ 
+phonon-vlc-mplayer", in other words the module name is NOT part of the URL.
 
+As a workaround, I'm checking out the SVN repository manually, tarring it up, 
+and putting into files/ for this package.  However, it seems like there 
+should be an option added to the SVN fetcher that will disable this module 
+appending behavior for projects like this.
 
+Comments?
+
+---
+Geoffrey
 
 
