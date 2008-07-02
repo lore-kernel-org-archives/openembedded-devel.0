@@ -1,24 +1,50 @@
-Received: from [217.116.0.34] (helo=correo2.acens.net)
+Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <joaquimduran@adtelecom.es>) id 1KDxjy-0004Cr-OV
-	for openembedded-devel@openembedded.org; Wed, 02 Jul 2008 10:31:02 +0200
-Received: (qmail 14013 invoked from network); 2 Jul 2008 08:27:49 -0000
-Received: from unknown (HELO [192.168.0.37])
-	(joaquimduran.adtelecom.es@[83.32.134.48])
-	(envelope-sender <joaquimduran@adtelecom.es>)
-	by correo2.acens.net (qmail-ldap-1.03) with SMTP
+	(envelope-from <stefano.regno@spesonline.com>) id 1KE08q-0005t6-Gu
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jul 2008 13:04:52 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 633EE95A74
 	for <openembedded-devel@lists.openembedded.org>;
-	2 Jul 2008 08:27:49 -0000
-Message-ID: <486B3AF3.90906@adtelecom.es>
-Date: Wed, 02 Jul 2008 10:23:15 +0200
-From: Joaquim Duran <joaquimduran@adtelecom.es>
-Organization: AD Telecom
+	Wed,  2 Jul 2008 13:01:40 +0200 (CEST)
+Received: from sirio.fastnet.it ([127.0.0.1])
+	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 10817-01-2 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 2 Jul 2008 13:01:40 +0200 (CEST)
+Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id C8BD895B3E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Jul 2008 13:01:28 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 65DD61D944E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Jul 2008 13:01:28 +0200 (CEST)
+Received: from sole.fastnet.it ([127.0.0.1])
+	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 31688-01-3 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 2 Jul 2008 13:01:28 +0200 (CEST)
+Received: from [192.168.1.161]
+	(host141-216-static.91-82-b.business.telecomitalia.it
+	[82.91.216.141])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 5EC1A1D9460
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Jul 2008 13:01:25 +0200 (CEST)
+Message-ID: <486B6011.3050501@spesonline.com>
+Date: Wed, 02 Jul 2008 13:01:37 +0200
+From: Stefano Regno <stefano.regno@spesonline.com>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <486A524B.2080702@adtelecom.es>
-In-Reply-To: <486A524B.2080702@adtelecom.es>
-Subject: Re: Installation of a new locale in an installed image
+References: <877ic6srbf.fsf@neumann.lab.ossystems.com.br><1214853946.21138.8.camel@lenovo.internal.reciva.com><87zlp2elny.fsf@neu
+	mann.lab.ossystems.com.br><1214858808.21138.20.camel@lenovo.internal.reciva.com><87r6aeabjb.fsf@neumann.lab.ossystems.com.br><1
+	214861173.21138.24.camel@lenovo.internal.reciva.com><87od5i8urj.fsf@neumann.lab.ossystems.com.br><1214862651.21138.26.camel@len
+	ovo.internal.reciva.com><871w2djwme.fsf@neumann.lab.ossystems.com.br><1214937507.21138.31.camel@lenovo.internal.reciva.com><87w
+	sk5h1ai.fsf@neumann.lab.ossystems.com.br>
+	<87d4lx9lbe.fsf@neumann.lab.ossystems.com.br>
+In-Reply-To: <87d4lx9lbe.fsf@neumann.lab.ossystems.com.br>
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+Subject: Re: Problem with i18n (input)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -32,30 +58,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2008 08:31:03 -0000
+X-List-Received-Date: Wed, 02 Jul 2008 11:04:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-En/na Joaquim Duran ha escrit:
-> Dear all,
-> 
-> I know that to create an image with several locales, these locales 
-> should be included in LINGUAS var. I'm interested in install a new 
-> locale to an already installed image.
-> 
-> For this new locale to install, I've installed the corresponding 
-> glibc-localedata- and glibc-locale- packages, but the locale could not 
-> be used.
-> 
-> Perphaps I'm wrong, but I think that a glibc-binary-localedata should be 
-> installed. Could you confirm it?
-> 
-> How can I generate these packages?
-> 
-> Thanks and Best Regards,
-> Joaquim Duran
-> 
+I would study to learn how to build a toolchain, could sameone tell me 
+where is the file in openebedded project to read how you developped the 
+toolchain please?
 
-Only rebuilding the glibc was enough.
+Regrets Stefano
+
+-- 
+Peace cannot be kept by force; it can only be achieved by understanding --Albert Einstein
+
+
 
 
