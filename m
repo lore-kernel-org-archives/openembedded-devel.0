@@ -1,37 +1,35 @@
-Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
+Received: from [209.253.16.26] (helo=barracuda.pager.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <e.robertson.svg@gmail.com>) id 1KEABh-0002J2-Cx
+	(envelope-from <gwossum@pager.net>) id 1KEPgS-0003Ue-9G
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jul 2008 23:48:29 +0200
-Received: by yx-out-1718.google.com with SMTP id 4so197969yxp.42
+	Thu, 03 Jul 2008 16:21:23 +0200
+X-ASG-Debug-ID: 1215094667-043a00150000-aWHRdb
+X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
+Received: from mail.pager.net (localhost [127.0.0.1])
+	by barracuda.pager.net (Spam Firewall) with ESMTP id 58605E48B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jul 2008 14:45:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:mime-version:content-type:content-transfer-encoding
-	:content-disposition:message-id;
-	bh=cwZrAYnjLI/5d7FMon/pRthKMI0UabbtPaUE5rlklC8=;
-	b=lrJBUHzDwnXtfhzvM/Adu2K059LnlNkBgjq0N42KFwJspWSIQd6xeYoUB/cLFiz+te
-	4yOIwOGJaccRmMklb+2ZnjtM+QC8Dndx+H/N6BFx8I8OmsPfE5UZ40qMnLaCEy5av1AJ
-	+Tsj9FFP+gQhLLOz6xyosyvWFbDzSie9diIFM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	b=RrNrvDqKlSUbF4v0RlObK4I+Xr/tnme3gZtO/lW6sUBMaJUG2t8cxSZ/PMLdI/CMH6
-	AZd+p1TPKeNrqXx0j/7BwB8Gu5uu0QZ8Z6zDD8HC8Rurugt5w0diDV1GSpdhAY1dJwZk
-	ohq2Ifk3i2BiCgNaQPDzynj0hNzEhUIqG2oOo=
-Received: by 10.151.108.10 with SMTP id k10mr5486018ybm.6.1215035112620;
-	Wed, 02 Jul 2008 14:45:12 -0700 (PDT)
-Received: from vincy ( [74.254.162.162])
-	by mx.google.com with ESMTPS id j63sm7287626rne.15.2008.07.02.14.45.11
-	(version=SSLv3 cipher=RC4-MD5); Wed, 02 Jul 2008 14:45:12 -0700 (PDT)
-From: E Robertson <e.robertson.svg@gmail.com>
+	Thu,  3 Jul 2008 09:17:47 -0500 (CDT)
+Received: from mail.pager.net (lrs-ad1.longragesystems.local [192.168.1.254])
+	by barracuda.pager.net with ESMTP id uAvQeEPsMH3GV8Vh for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Jul 2008 09:17:47 -0500 (CDT)
+X-ASG-Whitelist: Sender
+Received: from [192.168.1.71] ([192.168.1.71]) by mail.pager.net with
+	Microsoft SMTPSVC(6.0.3790.1830); Thu, 3 Jul 2008 09:16:47 -0500
+From: Geoffrey Wossum <geoffrey@pager.net>
+Organization: Long Range Systems
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 2 Jul 2008 16:44:56 -0500
+X-ASG-Orig-Subj: qt4x11 vs. uicmoc4-native vs. qmake2-native
+Date: Thu, 3 Jul 2008 09:17:45 -0500
 User-Agent: KMail/1.9.9
 MIME-Version: 1.0
-Message-Id: <200807021644.57438.e.robertson.svg@gmail.com>
-Subject: pthread issue with GNU_SOURCE
+Message-Id: <200807030917.45248.geoffrey@pager.net>
+X-OriginalArrivalTime: 03 Jul 2008 14:16:47.0921 (UTC)
+	FILETIME=[6DFAFA10:01C8DD17]
+X-Barracuda-Connect: lrs-ad1.longragesystems.local[192.168.1.254]
+X-Barracuda-Start-Time: 1215094667
+X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
+Subject: qt4x11 vs. uicmoc4-native vs. qmake2-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -45,24 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2008 21:48:29 -0000
+X-List-Received-Date: Thu, 03 Jul 2008 14:22:08 -0000
 Content-Type: text/plain;
-  charset="us-ascii"
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi,
-I haven't been able to explain this and I'm looking for some help.
-I'm building the microwindows package and always stuck with this error:
+Hi all,
 
- error: 'PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP' undeclared here (not in a 
-function)
+I've been doing some work with some Qt4 based applications, and I must say 
+that I'm confused by the relationship between OE's qt4x11, uicmoc4-native, 
+and qmake2-native packages.
 
-It is defined in pthread.h and after some checking the headers is included 
-properly. I explicitly defined _GNU_SOURCE to be true in the package for it 
-to compile.
+As far as I can tell, this is what each package provides:
 
-I checked the header files used by pthread.h and it is alredy defined. Does 
-anyone knows what could be the cause?
+qt4x11 - headers and libraries for target system
+uicmoc4-native - All Qt tools except qmake for host system
+qmake2-native - qmake and mkspecs for host system
+
+My main question is why can't uicmoc4-native and qmake2-native be combined 
+into a single package?  Let me share my pain.
+
+I need Qt 4.4 because I'm using Phonon.  So I make a new Bitbake recipe for 
+qt4x11-4.4.0.  uicmoc4-native is still from 4.3.3.  Oh, noes!  uic from 4.3.3 
+doesn't generate code that works with QT_NO_ACCESSIBILITY, but that was fixed 
+in 4.4.0.  So I make a uicmoc4-native recipe and patches for 4.4.0.  Now I'm 
+building a package that uses CMake (phonon-vlc-mplayer) and Qt.  CMake uses 
+qmake (NOOOOO!) to figure out how to build Qt based applications.  
+phonon-vlc-mplayer's build system punts because the qmake it finds from 
+qmake2-native is for 4.3.3, and it wants at least 4.4.0.  So now I'm creating 
+a qmake2-native recipe and patches that builds qmake from 4.4.0, and it feels 
+like deja vu all over again.  
+
+But it gets even worse.  uicmoc4-native gets its version number from the 
+version of Qt used to build it.  But qmake2-native gets it's version number 
+from the qmake version, which is independent of the Qt version.  Both Qt 
+4.3.3 and 4.4.0 include qmake 2.10a.  However, qmake also remembers the 
+version of Qt used to build it, which is what makes CMake unhappy.  So the 
+qmake version of 2.10a really isn't the whole story.
+
+I understand that Qt's build system doesn't really handle building host tools 
+and target libraries in one shot, so at least two recipes are almost 
+certainly necessary.  However, is there any good reason why uicmoc4-native 
+and qmake2-native couldn't be combined into a single package?
+
+TIA,
+---
+Geoffrey
 
 
