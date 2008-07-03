@@ -1,35 +1,38 @@
-Received: from [209.253.16.26] (helo=barracuda.pager.net)
+Received: from [63.210.253.238] (helo=ext-cn0ut-8.online-age.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gwossum@pager.net>) id 1KEPgS-0003Ue-9G
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jul 2008 16:21:23 +0200
-X-ASG-Debug-ID: 1215094667-043a00150000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from mail.pager.net (localhost [127.0.0.1])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 58605E48B6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jul 2008 09:17:47 -0500 (CDT)
-Received: from mail.pager.net (lrs-ad1.longragesystems.local [192.168.1.254])
-	by barracuda.pager.net with ESMTP id uAvQeEPsMH3GV8Vh for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Jul 2008 09:17:47 -0500 (CDT)
-X-ASG-Whitelist: Sender
-Received: from [192.168.1.71] ([192.168.1.71]) by mail.pager.net with
-	Microsoft SMTPSVC(6.0.3790.1830); Thu, 3 Jul 2008 09:16:47 -0500
-From: Geoffrey Wossum <geoffrey@pager.net>
-Organization: Long Range Systems
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: qt4x11 vs. uicmoc4-native vs. qmake2-native
-Date: Thu, 3 Jul 2008 09:17:45 -0500
-User-Agent: KMail/1.9.9
+	(envelope-from <martyn.welch@gefanuc.com>) id 1KEQPd-0001Hp-40
+	for openembedded-devel@openembedded.org; Thu, 03 Jul 2008 17:08:07 +0200
+Received: from int-cn0ut-6.online-age.net (int-cn0ut-6.online-age.net
+	[3.159.252.75])
+	by ext-cn0ut-8.online-age.net (8.13.6/8.13.6/20051114-SVVS-TLS-DNSBL)
+	with ESMTP id m63F4X2u019115
+	for <openembedded-devel@openembedded.org>;
+	Thu, 3 Jul 2008 11:04:31 -0400
+Received: from cinmlef06.e2k.ad.ge.com (int-cn0ut-6.online-age.net
+	[3.159.252.75])
+	by int-cn0ut-6.online-age.net (8.13.6/8.13.6/20050510-SVVS) with ESMTP
+	id m63F4UOU019209 for <openembedded-devel@openembedded.org>;
+	Thu, 3 Jul 2008 11:04:31 -0400
+Received: from LONMLVEM08.e2k.ad.ge.com ([3.159.240.73]) by
+	cinmlef06.e2k.ad.ge.com with Microsoft SMTPSVC(6.0.3790.2499); 
+	Thu, 3 Jul 2008 11:04:30 -0400
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Message-Id: <200807030917.45248.geoffrey@pager.net>
-X-OriginalArrivalTime: 03 Jul 2008 14:16:47.0921 (UTC)
-	FILETIME=[6DFAFA10:01C8DD17]
-X-Barracuda-Connect: lrs-ad1.longragesystems.local[192.168.1.254]
-X-Barracuda-Start-Time: 1215094667
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-Subject: qt4x11 vs. uicmoc4-native vs. qmake2-native
+Date: Thu, 3 Jul 2008 16:03:53 +0100
+Message-ID: <1CADFA951940554D86FBD8B24BBFF3A0018FA35F@LONMLVEM08.e2k.ad.ge.com>
+In-Reply-To: <f9a7555e0807020036g11261addn37530155264123b8@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Building a rootfs, without building a kernel
+Thread-Index: AcjcFtBk+cebUcFfSmqn+d+yUoI7jwBBsP9Q
+References: <4861533F.7020906@balister.org><440abda90806291608g2b4bdfbp71ed039b167e9aa9@mail.gmail.com><486A73F5.2010906@balister.org>
+	<f9a7555e0807020036g11261addn37530155264123b8@mail.gmail.com>
+From: "Welch, Martyn (GE EntSol,
+	Intelligent Platforms)" <martyn.welch@gefanuc.com>
+To: <openembedded-devel@openembedded.org>
+X-OriginalArrivalTime: 03 Jul 2008 15:04:30.0605 (UTC)
+	FILETIME=[1845E3D0:01C8DD1E]
+Subject: Re: Building a rootfs, without building a kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -43,52 +46,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jul 2008 14:22:08 -0000
+X-List-Received-Date: Thu, 03 Jul 2008 15:09:46 -0000
+Content-class: urn:content-classes:message
 Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+	charset="US-ASCII"
+Content-Transfer-Encoding: quoted-printable
 
-Hi all,
+Ben Lau wrote:
+>> Possibly, we should create a dummy kernel bb file since this may be
+>> the best solution for the general case of people building images
+>> without a working kernel bb file.=20
+>>=20
+>> Philip
+>>=20
+>=20
+> I am not quite understand why OpenEmbedded force to generate kernel
+> and the dependence would force it to be installed in the user land. As
+> the kernel is usually installed on another partition. It should not be
+> a part of the file system image.
+>=20
 
-I've been doing some work with some Qt4 based applications, and I must say 
-that I'm confused by the relationship between OE's qt4x11, uicmoc4-native, 
-and qmake2-native packages.
+But any drivers, etc. built as modules would need to be included in the
+system's image and that at least would be a dependence.
 
-As far as I can tell, this is what each package provides:
+Martyn
 
-qt4x11 - headers and libraries for target system
-uicmoc4-native - All Qt tools except qmake for host system
-qmake2-native - qmake and mkspecs for host system
+----
+Martyn Welch MEng MPhil MIET
+Principal Software Engineer
 
-My main question is why can't uicmoc4-native and qmake2-native be combined 
-into a single package?  Let me share my pain.
+GE Fanuc Intelligent Platforms
+Tove Valley Business Park, Towcester,
+Northants, NN12 6PF, United Kingdom
 
-I need Qt 4.4 because I'm using Phonon.  So I make a new Bitbake recipe for 
-qt4x11-4.4.0.  uicmoc4-native is still from 4.3.3.  Oh, noes!  uic from 4.3.3 
-doesn't generate code that works with QT_NO_ACCESSIBILITY, but that was fixed 
-in 4.4.0.  So I make a uicmoc4-native recipe and patches for 4.4.0.  Now I'm 
-building a package that uses CMake (phonon-vlc-mplayer) and Qt.  CMake uses 
-qmake (NOOOOO!) to figure out how to build Qt based applications.  
-phonon-vlc-mplayer's build system punts because the qmake it finds from 
-qmake2-native is for 4.3.3, and it wants at least 4.4.0.  So now I'm creating 
-a qmake2-native recipe and patches that builds qmake from 4.4.0, and it feels 
-like deja vu all over again.  
+Telephone: +44 (0) 1327 359444
+Direct Dial: +44 (0) 1327 322748
+Fax: +44 (0) 1327 322800
+email: martyn.welch@gefanuc.com
+web: www.gefanuc.com
 
-But it gets even worse.  uicmoc4-native gets its version number from the 
-version of Qt used to build it.  But qmake2-native gets it's version number 
-from the qmake version, which is independent of the Qt version.  Both Qt 
-4.3.3 and 4.4.0 include qmake 2.10a.  However, qmake also remembers the 
-version of Qt used to build it, which is what makes CMake unhappy.  So the 
-qmake version of 2.10a really isn't the whole story.
+GE Fanuc Intelligent Platforms Ltd, registered in England and Wales
+(3828642) at 100 Barbirolli Square, Manchester, M2 3AB, VAT GB 729 849
+476
 
-I understand that Qt's build system doesn't really handle building host tools 
-and target libraries in one shot, so at least two recipes are almost 
-certainly necessary.  However, is there any good reason why uicmoc4-native 
-and qmake2-native couldn't be combined into a single package?
-
-TIA,
----
-Geoffrey
+GE Fanuc Intelligent Platforms Confidential and Proprietary. If you
+have received this message in error please notify us immediately and
+permanently remove it from your system and destroy any printed
+hardcopies. =20
 
 
