@@ -1,32 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KFWmq-0001q2-0M
-	for openembedded-devel@openembedded.org; Sun, 06 Jul 2008 18:08:29 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KFWj6-0004Ap-3U
-	for openembedded-devel@openembedded.org; Sun, 06 Jul 2008 16:04:36 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 06 Jul 2008 16:04:36 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 06 Jul 2008 16:04:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 06 Jul 2008 18:04:26 +0200
-Message-ID: <g4qqea$355$1@ger.gmane.org>
-References: <4870DF7B.2050603@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird 3.0a2pre (Macintosh/2008061003)
-In-Reply-To: <4870DF7B.2050603@gmx.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: libtool issues with angstrom and classpath
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KGBws-0002Pi-1k
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Jul 2008 14:05:34 +0200
+Received: (qmail invoked by alias); 08 Jul 2008 12:05:26 -0000
+Received: from e178072014.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.72.14]
+	by mail.gmx.net (mp039) with SMTP; 08 Jul 2008 14:05:26 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18jqCcJHcwjkKmdzyH3B4iHFYZ7pof/U6cO3H1TwQ
+	MHa0l4ijsSI941
+Message-ID: <48735802.3070408@gmx.net>
+Date: Tue, 08 Jul 2008 14:05:22 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org, 
+ beagleboard@googlegroups.com
+References: <20080708092301.2A7AD189303@amethyst.openembedded.net>
+In-Reply-To: <20080708092301.2A7AD189303@amethyst.openembedded.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.71
+Subject: Re: [oe-commits] org.oe.dev linux-omap2: bump to rc9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,55 +36,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jul 2008 16:09:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Jul 2008 12:05:34 -0000
+X-Groupsio-MsgNum: 5478
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigE1B30976509C03F5F95A8664"
 
-Robert Schuster wrote:
-> hi,
-> koen already told me that there will be libtool problems when building
-> classpath in angstrom 2008.1.
->
-> what I get are the following error messages:
->
-> i686-linux-libtool: link: unsupported hardcode properties
-> i686-linux-libtool: link: See the libtool documentation for more
-> information.
-> i686-linux-libtool: link: Fatal configuration error.
->
-> Caused by the following command:
->
-> make[3]: Entering directory
-> `/home/rob/oe/beagle/tmp/work/i686-linux/classpath-initial-0.93-r1/classpath-0.93/native/jni/java-net'
-> /bin/sh ../../../i686-linux-libtool --tag=CC   --mode=link ccache gcc -W
-> -Wall -Wmissing-declarations -Wwrite-strings -Wmissing-prototypes
-> -Wno-long-long -Wstrict-prototypes -pedantic -Werror
-> -isystem/home/rob/oe/beagle/tmp/staging/i686-linux/usr/include -Os
-> -module -version-info 0:0:0 -no-undefined
-> -L/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib
-> -Wl,-rpath-link,/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib
-> -Wl,-rpath,/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib -Wl,-O1 -o
-> libjavanet.la -rpath
-> /home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib/classpath-initial
-> javanet.lo java_net_VMInetAddress.lo java_net_VMNetworkInterface.lo
-> java_net_VMURLConnection.lo gnu_java_net_VMPlainSocketImpl.lo
-> gnu_java_net_local_LocalSocketImpl.lo
-> ../../../native/jni/classpath/jcl.lo
-> ../../../native/jni/native-lib/libclasspathnative.la -lmagic
->
-> I debugged this problem to the point where I found out that it does not
-> like the '-lmagic'. If I remove that from the makefile the build
-> continues. However this cannot be the real fix.
->
-> What is wrong here and how should I fix it?
+--------------enigE1B30976509C03F5F95A8664
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I suspect that it doesn't like getting a lib directly (-lmagic), but 
-want a .la file instead. I don't know a lot about libtool, so please 
-speak up if this is nonsense :)
+Hi,
+a small step for koen, a big one for the beagleboard users: He just
+updated the omap kernel in openembedded ...
 
-regards,
+koen commit schrieb:
+> linux-omap2: bump to rc9
 
-Koen
+=2E.. which brings[0] support for usb video class devices[1] (e.g.
+webcams) to the beagleboard!
+
+Regards
+Robert
+
+[0] -
+https://lists.berlios.de/pipermail/linux-uvc-devel/2008-July/003751.html
+[1] - http://linux-uvc.berlios.de/
 
 
 
+--------------enigE1B30976509C03F5F95A8664
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFIc1gFG9cfwmwwEtoRCBsLAJ9A9yH9nVDiAIOM2Fxn9KgAvwOxAACgikRF
+hg+1Cbw3vRRHsc0f5run+zs=
+=xb1j
+-----END PGP SIGNATURE-----
+
+--------------enigE1B30976509C03F5F95A8664--
