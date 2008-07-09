@@ -1,28 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KGBws-0002Pi-1k
+Received: from [66.46.182.51] (helo=relay.ihostexchange.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <uris@activenas.com>) id 1KGbnm-0001bh-FW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jul 2008 14:05:34 +0200
-Received: (qmail invoked by alias); 08 Jul 2008 12:05:26 -0000
-Received: from e178072014.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.72.14]
-	by mail.gmx.net (mp039) with SMTP; 08 Jul 2008 14:05:26 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18jqCcJHcwjkKmdzyH3B4iHFYZ7pof/U6cO3H1TwQ
-	MHa0l4ijsSI941
-Message-ID: <48735802.3070408@gmx.net>
-Date: Tue, 08 Jul 2008 14:05:22 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
+	Wed, 09 Jul 2008 17:41:54 +0200
+Received: from VMBX107.ihostexchange.net ([192.168.3.7]) by
+	HUB101.ihostexchange.net ([192.168.4.1]) with mapi;
+	Wed, 9 Jul 2008 11:44:09 -0400
+From: Uri Simchoni <uris@activenas.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Jul 2008 11:41:19 -0400
+Thread-Topic: VPATH-like compilation
+Thread-Index: Acjh2jubu/HwBurvStuzNxe6albeiA==
+Message-ID: <D9011746E8D15B469C92543CC523C9AF1AE22D4C4C@VMBX107.ihostexchange.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-cr-hashedpuzzle: ABI/ ACzN At5r BIOC Bckr BjQ/ B3N6 Chml CpCF C1Qx DCKK
+	D6Vk FDed FTHL GW92 Gd+g; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {9B904B57-6B0A-4E54-BB47-C3869B741470};
+	dQByAGkAcwBAAGEAYwB0AGkAdgBlAG4AYQBzAC4AYwBvAG0A; Wed,
+	09 Jul 2008 15:41:20
+	GMT;VgBQAEEAVABIAC0AbABpAGsAZQAgAGMAbwBtAHAAaQBsAGEAdABpAG8AbgA=
+x-cr-puzzleid: {9B904B57-6B0A-4E54-BB47-C3869B741470}
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
- beagleboard@googlegroups.com
-References: <20080708092301.2A7AD189303@amethyst.openembedded.net>
-In-Reply-To: <20080708092301.2A7AD189303@amethyst.openembedded.net>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.71
-Subject: Re: [oe-commits] org.oe.dev linux-omap2: bump to rc9
+Subject: VPATH-like compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -36,47 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jul 2008 12:05:34 -0000
-X-Groupsio-MsgNum: 5478
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigE1B30976509C03F5F95A8664"
-
---------------enigE1B30976509C03F5F95A8664
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Jul 2008 15:41:54 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
-a small step for koen, a big one for the beagleboard users: He just
-updated the omap kernel in openembedded ...
 
-koen commit schrieb:
-> linux-omap2: bump to rc9
+Is it possible to create an autotools-based package where the sources sit o=
+utside WORKDIR, and are not copied? (but the makefiles and objects are in W=
+ORKDIR)
 
-=2E.. which brings[0] support for usb video class devices[1] (e.g.
-webcams) to the beagleboard!
+Likewise, is it possible to use the devshell package or a modification of i=
+t to create a build environment in which the sources are separated from the=
+ makefiles and objects?
 
-Regards
-Robert
-
-[0] -
-https://lists.berlios.de/pipermail/linux-uvc-devel/2008-July/003751.html
-[1] - http://linux-uvc.berlios.de/
+Thanks,
+Uri.
 
 
-
---------------enigE1B30976509C03F5F95A8664
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFIc1gFG9cfwmwwEtoRCBsLAJ9A9yH9nVDiAIOM2Fxn9KgAvwOxAACgikRF
-hg+1Cbw3vRRHsc0f5run+zs=
-=xb1j
------END PGP SIGNATURE-----
-
---------------enigE1B30976509C03F5F95A8664--
