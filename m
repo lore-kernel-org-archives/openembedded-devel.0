@@ -1,32 +1,28 @@
-Received: from [66.46.182.51] (helo=relay.ihostexchange.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <uris@activenas.com>) id 1KGbnm-0001bh-FW
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KGw3x-0004B9-3s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jul 2008 17:41:54 +0200
-Received: from VMBX107.ihostexchange.net ([192.168.3.7]) by
-	HUB101.ihostexchange.net ([192.168.4.1]) with mapi;
-	Wed, 9 Jul 2008 11:44:09 -0400
-From: Uri Simchoni <uris@activenas.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 9 Jul 2008 11:41:19 -0400
-Thread-Topic: VPATH-like compilation
-Thread-Index: Acjh2jubu/HwBurvStuzNxe6albeiA==
-Message-ID: <D9011746E8D15B469C92543CC523C9AF1AE22D4C4C@VMBX107.ihostexchange.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-cr-hashedpuzzle: ABI/ ACzN At5r BIOC Bckr BjQ/ B3N6 Chml CpCF C1Qx DCKK
-	D6Vk FDed FTHL GW92 Gd+g; 1;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
-	Sosha1_v1; 7; {9B904B57-6B0A-4E54-BB47-C3869B741470};
-	dQByAGkAcwBAAGEAYwB0AGkAdgBlAG4AYQBzAC4AYwBvAG0A; Wed,
-	09 Jul 2008 15:41:20
-	GMT;VgBQAEEAVABIAC0AbABpAGsAZQAgAGMAbwBtAHAAaQBsAGEAdABpAG8AbgA=
-x-cr-puzzleid: {9B904B57-6B0A-4E54-BB47-C3869B741470}
-acceptlanguage: en-US
+	Thu, 10 Jul 2008 15:19:57 +0200
+Received: (qmail invoked by alias); 10 Jul 2008 13:19:41 -0000
+Received: from e178089121.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.89.121]
+	by mail.gmx.net (mp056) with SMTP; 10 Jul 2008 15:19:41 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/T6Ko18PzTJOzKNfxlDh57lT3NtvciAtIBszsbxU
+	/hkha2fCah/zpe
+Message-ID: <48760C72.8090608@gmx.net>
+Date: Thu, 10 Jul 2008 15:19:46 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
 MIME-Version: 1.0
-Subject: VPATH-like compilation
+To: openembedded-devel@lists.openembedded.org
+References: <20080706092603.9E5F3189303@amethyst.openembedded.net>
+In-Reply-To: <20080706092603.9E5F3189303@amethyst.openembedded.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.67
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: [oe-commits] org.oe.dev glibc 2.6.1: change optimizations flags for	armv7a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,22 +36,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jul 2008 15:41:54 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 10 Jul 2008 13:19:57 -0000
+X-Groupsio-MsgNum: 5480
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig8A1457D5282065E0F31A7A97"
+
+--------------enig8A1457D5282065E0F31A7A97
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+koen commit schrieb:
+> glibc 2.6.1: change optimizations flags for armv7a
+> * If the rebuild fails in do_configure, build glibc-initial to get limi=
+ts.h in a place where glibc can find it. Builds from scratch works great,=
+ though
 
-Is it possible to create an autotools-based package where the sources sit o=
-utside WORKDIR, and are not copied? (but the makefiles and objects are in W=
-ORKDIR)
+Just for the records
 
-Likewise, is it possible to use the devshell package or a modification of i=
-t to create a build environment in which the sources are separated from the=
- makefiles and objects?
+If you see this error:
 
-Thanks,
-Uri.
+checking how to run the C preprocessor... arm-angstrom-linux-gnueabi-gcc =
+-E
+configure: error: C preprocessor "arm-angstrom-linux-gnueabi-gcc -E"
+fails sanity check
+See `config.log' for more details.
+FATAL: oe_runconf failed
+
+you need to run:
+
+bitbake -f -c fetch gcc-cross-initial && bitbake gcc-cross-initial
+
+and then glibc intermediate to fix this.
+
+In short rebuild gcc-cross-initial not glibc-initial. :)
+
+Regards
+Robert
 
 
+--------------enig8A1457D5282065E0F31A7A97
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFIdgxyG9cfwmwwEtoRCOEjAJ9bilj738QHFT19fhGZSleX3bvXHwCgiAh/
+AZvyA4D5V91e2z+0Wo4T6n0=
+=jqEc
+-----END PGP SIGNATURE-----
+
+--------------enig8A1457D5282065E0F31A7A97--
