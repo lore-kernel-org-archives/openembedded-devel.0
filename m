@@ -1,35 +1,39 @@
-Received: from [216.68.135.106] (helo=silverton.cliftonlabs.com)
+Received: from [74.125.44.156] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <blaine@cliftonlabs.com>) id 1KHJ0J-0002nb-Nf
+	(envelope-from <cliff.brake@gmail.com>) id 1KHL9T-0003Je-8H
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jul 2008 15:49:43 +0200
-Received: from 107.135.68.216.ded-dsl.fuse.net ([216.68.135.107]
-	helo=arcadia.cliftonlabs.lan)
-	by silverton.cliftonlabs.com with esmtps
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <blaine@cliftonlabs.com>) id 1KHIzz-0005jx-4Y
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jul 2008 09:49:25 -0400
-From: Blaine Booher <blaine@cliftonlabs.com>
-Organization: Clifton Labs
+	Fri, 11 Jul 2008 18:07:19 +0200
+Received: by yx-out-1718.google.com with SMTP id 4so1324928yxp.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jul 2008 09:07:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=rSsRv3r26M6aIgbgTKaGB9J/s74CI36Qhfgi4IIyaCA=;
+	b=pUwzrWMFUex+CweUWvb0tz7uLdNirkmoxp4UyJA9sG1pFamaeJk7IPlVox+rJkZXT+
+	ZMGbFkwShZeFEjiAlhIg3fM5FaqQwttswuHLVmmwf/d3+Y+Ehvs0Vat0gf37Z7Nh8rOj
+	XWHe1Fax+rvG4L/3zpptsgoO8Q4TjqwgiM/vQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=Y6MZRTHFZ2ifZwZWSogd3hpE96U30TfrSim+vB5wFNv1cZ0i8a5/51Edp+ZJE07nw9
+	3v0g2ON9AB5ChWkuXNQJuMmFTsb8KKFe7qi0QGZZbqG4XFFU9MYYmCb0TxzVraNyts4o
+	7uV3a0r/hGEMipBWY2/8zIJRpfqxk5qTR4xQw=
+Received: by 10.114.13.10 with SMTP id 10mr14116732wam.106.1215792419625;
+	Fri, 11 Jul 2008 09:06:59 -0700 (PDT)
+Received: by 10.114.184.13 with HTTP; Fri, 11 Jul 2008 09:06:59 -0700 (PDT)
+Message-ID: <f96d234e0807110906k25f44f8dqbedac2b6ea9fe548@mail.gmail.com>
+Date: Fri, 11 Jul 2008 12:06:59 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Jul 2008 09:49:07 -0400
-User-Agent: KMail/1.9.5
+In-Reply-To: <200807110949.07500.blaine@cliftonlabs.com>
+MIME-Version: 1.0
 References: <48761569.4080304@gmx.net> <1215703284.32070.6.camel@isis>
 	<4876A7DD.8090608@palm.com>
-In-Reply-To: <4876A7DD.8090608@palm.com>
-MIME-Version: 1.0
-Message-Id: <200807110949.07500.blaine@cliftonlabs.com>
-X-SA-Exim-Connect-IP: 216.68.135.107
-X-SA-Exim-Mail-From: blaine@cliftonlabs.com
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	silverton.cliftonlabs.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on silverton.cliftonlabs.com)
-Subject: Compiling a custom kernel module
+	<200807110949.07500.blaine@cliftonlabs.com>
+Subject: Re: Compiling a custom kernel module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -43,28 +47,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2008 13:49:44 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 11 Jul 2008 16:07:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hey guys,
-  I am very new to Open Embedded so please bare with me if I make it too 
-obvious :).  We are using a gumstix embedded system with open embedded (and 
-the angstrom release that gumstix provides).  We would like to use the kernel 
-module cp2101 with a usb device.  The default cp2101 module won't work, since 
-we have to edit the USB Device ID in the source code.  I'm having a hard time 
-figuring out:
-1.  How do I 'enable' the cp2101 module in the kernel?
-2.  How do I rebuild the kernel, once the source code is edited?
-3.  How to I ensure that the module is part of the final build, so that I can 
-do a 'modprove cp2101' on the gumstix and have it load successfully?
+On Fri, Jul 11, 2008 at 9:49 AM, Blaine Booher <blaine@cliftonlabs.com> wrote:
+> Hey guys,
+>  I am very new to Open Embedded so please bare with me if I make it too
+> obvious :).
 
-I have found a few references, including emails on this email list, but 
-nothing that explains it in a clear and concise manner (yet, at least).
+Welcome :-)
 
-Thank you in advance,
-Blaine
+> We are using a gumstix embedded system with open embedded (and
+> the angstrom release that gumstix provides).  We would like to use the kernel
+> module cp2101 with a usb device.  The default cp2101 module won't work, since
+> we have to edit the USB Device ID in the source code.  I'm having a hard time
+> figuring out:
+> 1.  How do I 'enable' the cp2101 module in the kernel?
+
+Copy an updated defconfig to:
+packages/linux/gumstix-kernel-2.6.21/gumstix-connex/defconfig
+
+Note, figure out what kernel you are building first, the above is just a guess.
+
+> 2.  How do I rebuild the kernel, once the source code is edited?
+
+bitbake -c rebuild virtual/kernel (rebuilds the kernel)
+
+For development, I usually keep a kernel tree separate from the OE
+kernel, and then just copy the defconfig and patches to the OE build
+when I get everything correct.
+
+Alternatively, you can:
+
+bitbake -c devshell virtual/kernel
+
+and do your development there in a development shell.  Once you get
+everything finished, create patch files/defconfig and copy to the OE
+recipe.
+
+> 3.  How to I ensure that the module is part of the final build, so that I can
+> do a 'modprove cp2101' on the gumstix and have it load successfully?
+
+look at the name of the *.ipk file generated by OE build system.  Then
+create a custom image file and add the ipk file name to the
+IMAGE_INSTALL variable.
+
+The following article has some examples:
+
+http://bec-systems.com/web/content/view/79/9/
+
+Cliff
+
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
