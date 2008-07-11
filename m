@@ -1,39 +1,25 @@
-Received: from [74.125.44.156] (helo=yx-out-1718.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KHL9T-0003Je-8H
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KHQ3J-0005GM-BK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jul 2008 18:07:19 +0200
-Received: by yx-out-1718.google.com with SMTP id 4so1324928yxp.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2008 09:07:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=rSsRv3r26M6aIgbgTKaGB9J/s74CI36Qhfgi4IIyaCA=;
-	b=pUwzrWMFUex+CweUWvb0tz7uLdNirkmoxp4UyJA9sG1pFamaeJk7IPlVox+rJkZXT+
-	ZMGbFkwShZeFEjiAlhIg3fM5FaqQwttswuHLVmmwf/d3+Y+Ehvs0Vat0gf37Z7Nh8rOj
-	XWHe1Fax+rvG4L/3zpptsgoO8Q4TjqwgiM/vQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=Y6MZRTHFZ2ifZwZWSogd3hpE96U30TfrSim+vB5wFNv1cZ0i8a5/51Edp+ZJE07nw9
-	3v0g2ON9AB5ChWkuXNQJuMmFTsb8KKFe7qi0QGZZbqG4XFFU9MYYmCb0TxzVraNyts4o
-	7uV3a0r/hGEMipBWY2/8zIJRpfqxk5qTR4xQw=
-Received: by 10.114.13.10 with SMTP id 10mr14116732wam.106.1215792419625;
-	Fri, 11 Jul 2008 09:06:59 -0700 (PDT)
-Received: by 10.114.184.13 with HTTP; Fri, 11 Jul 2008 09:06:59 -0700 (PDT)
-Message-ID: <f96d234e0807110906k25f44f8dqbedac2b6ea9fe548@mail.gmail.com>
-Date: Fri, 11 Jul 2008 12:06:59 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200807110949.07500.blaine@cliftonlabs.com>
+	Fri, 11 Jul 2008 23:21:19 +0200
+Received: (qmail invoked by alias); 11 Jul 2008 21:20:55 -0000
+Received: from e178115197.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.115.197]
+	by mail.gmx.net (mp053) with SMTP; 11 Jul 2008 23:20:55 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/inoRIQrPiTt4P5e2RzRwFonPJLlyJYsKt2S9LCR
+	pnnT4eQ88oq74I
+Message-ID: <4877CEC3.4080407@gmx.net>
+Date: Fri, 11 Jul 2008 23:21:07 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
 MIME-Version: 1.0
-References: <48761569.4080304@gmx.net> <1215703284.32070.6.camel@isis>
-	<4876A7DD.8090608@palm.com>
-	<200807110949.07500.blaine@cliftonlabs.com>
-Subject: Re: Compiling a custom kernel module
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.00
+Subject: RFC: space between -isystem and parameter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -47,63 +33,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2008 16:07:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 Jul 2008 21:21:19 -0000
+X-Groupsio-MsgNum: 5490
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig2D115BD6FC4575247989198E"
 
-On Fri, Jul 11, 2008 at 9:49 AM, Blaine Booher <blaine@cliftonlabs.com> wrote:
-> Hey guys,
->  I am very new to Open Embedded so please bare with me if I make it too
-> obvious :).
+--------------enig2D115BD6FC4575247989198E
+Content-Type: multipart/mixed;
+ boundary="------------010207070601000601090109"
 
-Welcome :-)
+--------------010207070601000601090109
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-> We are using a gumstix embedded system with open embedded (and
-> the angstrom release that gumstix provides).  We would like to use the kernel
-> module cp2101 with a usb device.  The default cp2101 module won't work, since
-> we have to edit the USB Device ID in the source code.  I'm having a hard time
-> figuring out:
-> 1.  How do I 'enable' the cp2101 module in the kernel?
+Hi,
+the gcc man page says that there should be a space between the -isystem
+option and the parameter. Is there a specific reason why we are not
+doing this in OpenEmbedded?
 
-Copy an updated defconfig to:
-packages/linux/gumstix-kernel-2.6.21/gumstix-connex/defconfig
+If it is not causing any problems I would like to change this (see
+patch, is there more to change?) since I people pointed this out when I
+posted a OE-made make output to the libtool mailing list.
 
-Note, figure out what kernel you are building first, the above is just a guess.
+Regards
+Robert
 
-> 2.  How do I rebuild the kernel, once the source code is edited?
+--------------010207070601000601090109
+Content-Type: text/x-patch;
+ name="isystem_space.diff"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline;
+ filename="isystem_space.diff"
 
-bitbake -c rebuild virtual/kernel (rebuilds the kernel)
+#
+# old_revision [c3c2fc52f60e174bdf9d1f52c795dc0bdcfb0958]
+#
+# patch "conf/bitbake.conf"
+#  from [d8122151bbc194ee830cb666879ae90585f1b985]
+#    to [e113fc3577094afd81f647bfe6068c6dc26b38c9]
+#
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+--- conf/bitbake.conf	d8122151bbc194ee830cb666879ae90585f1b985
++++ conf/bitbake.conf	e113fc3577094afd81f647bfe6068c6dc26b38c9
+@@ -355,9 +355,9 @@ PATCHRESOLVE =3D 'noop'
+ # Build flags and options.
+ ##################################################################
+=20
+-export BUILD_CPPFLAGS =3D "-isystem${STAGING_INCDIR_NATIVE}"
++export BUILD_CPPFLAGS =3D "-isystem ${STAGING_INCDIR_NATIVE}"
+ export CPPFLAGS =3D "${TARGET_CPPFLAGS}"
+-export TARGET_CPPFLAGS =3D "-isystem${STAGING_DIR_TARGET}${layout_includ=
+edir}"
++export TARGET_CPPFLAGS =3D "-isystem ${STAGING_DIR_TARGET}${layout_inclu=
+dedir}"
+=20
+ export BUILD_CFLAGS =3D "${BUILD_CPPFLAGS} ${BUILD_OPTIMIZATION}"
+ export CFLAGS =3D "${TARGET_CFLAGS}"
 
-For development, I usually keep a kernel tree separate from the OE
-kernel, and then just copy the defconfig and patches to the OE build
-when I get everything correct.
+--------------010207070601000601090109--
 
-Alternatively, you can:
+--------------enig2D115BD6FC4575247989198E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-bitbake -c devshell virtual/kernel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-and do your development there in a development shell.  Once you get
-everything finished, create patch files/defconfig and copy to the OE
-recipe.
+iD8DBQFId87DG9cfwmwwEtoRCI5rAJ9TolzaUdgTNBIpVADiBvO1Yp5bHACeMiRA
+bYwblmcH23rUUm8EiivYmlI=
+=N9V8
+-----END PGP SIGNATURE-----
 
-> 3.  How to I ensure that the module is part of the final build, so that I can
-> do a 'modprove cp2101' on the gumstix and have it load successfully?
-
-look at the name of the *.ipk file generated by OE build system.  Then
-create a custom image file and add the ipk file name to the
-IMAGE_INSTALL variable.
-
-The following article has some examples:
-
-http://bec-systems.com/web/content/view/79/9/
-
-Cliff
-
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
-
-
+--------------enig2D115BD6FC4575247989198E--
