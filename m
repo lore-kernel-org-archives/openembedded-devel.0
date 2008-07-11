@@ -1,41 +1,32 @@
-Received: from [209.85.198.247] (helo=rv-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KHCiO-0001EJ-4a
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jul 2008 09:06:48 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so4344594rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2008 00:06:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:reply-to:to:cc
-	:in-reply-to:references:content-type:date:message-id:mime-version
-	:x-mailer:content-transfer-encoding;
-	bh=giJIwWcTd73fXNzYmhpxVKfs8gWnl6UhkvJJlAO16EA=;
-	b=W1kVpA9VKFXUFBsrnAcnvXY6hJ9ZpecuG5YCcXKDZ++KP0O8+Oq/LNQm/96XfShCSv
-	B5N+2rPD2reHFZJzDjT9dYey7l3zYbm4Lns6orThgqlK/8sxgSBpxC1ABrSbdgp37NdX
-	bSNWuNG9NH998XJDZPsoldXvxFCRvMcmvaHCU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:reply-to:to:cc:in-reply-to:references:content-type
-	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
-	b=mMGUP7uJs/lgOs9AfwpS4DqkOfDEdVYZltN7OYvQ0aU1Jw6yslhQD7SGSG5KnE0+Bn
-	8p8Fy3HPcqi4SSCcZIjlwvCk1pG7WhgPIU8PHvMxTAmAV8dCJwJO775C9Ls9X1bDI8bw
-	eQK64Mc05v8QHU8CmJTtiF31tLrzUJVF+EDJ4=
-Received: by 10.114.153.18 with SMTP id a18mr13250529wae.161.1215759990692;
-	Fri, 11 Jul 2008 00:06:30 -0700 (PDT)
-Received: from ?192.168.1.71? ( [71.146.10.255])
-	by mx.google.com with ESMTPS id z20sm543925pod.11.2008.07.11.00.06.30
-	(version=SSLv3 cipher=RC4-MD5); Fri, 11 Jul 2008 00:06:30 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4876A7DD.8090608@palm.com>
-References: <48761569.4080304@gmx.net> <1215703284.32070.6.camel@isis>
-	<4876A7DD.8090608@palm.com>
-Date: Fri, 11 Jul 2008 00:06:29 -0700
-Message-Id: <1215759989.6248.1.camel@isis>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KHETJ-0004eF-JV
+	for openembedded-devel@openembedded.org; Fri, 11 Jul 2008 10:59:21 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KHET2-0001O9-Dw
+	for openembedded-devel@openembedded.org; Fri, 11 Jul 2008 08:59:04 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jul 2008 08:59:04 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 11 Jul 2008 08:59:04 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 11 Jul 2008 10:58:54 +0200
+Message-ID: <g577ce$6hu$1@ger.gmane.org>
+References: <4870DF7B.2050603@gmx.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.2 
-Cc: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-Subject: Re: bitbake man page typo
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
+In-Reply-To: <4870DF7B.2050603@gmx.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: libtool issues with angstrom and classpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -49,32 +40,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2008 07:06:48 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 11 Jul 2008 08:59:21 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, 2008-07-10 at 17:22 -0700, Rich Pixley wrote:
-> Index: bitbake.1
-> ===================================================================
-> --- bitbake.1    (revision 48512)
-> +++ bitbake.1    (working copy)
-> @@ -64,7 +64,7 @@
->  Specify task to execute. Note that this only executes the specified 
-> task for
->  the providee and the packages it depends on, i.e. 'compile' does not 
-> implicitly
->  call stage for the dependencies (IOW: use only if you know what you are 
-> doing).
-> -Depending on the base.bbclass a listtaks tasks is defined and will show
-> +Depending on the base.bbclass a listtasks tasks is defined and will show
->  available tasks.
->  .TP
->  .B \-rFILE, \-\-read=FILE
-> 
+Robert Schuster wrote:
+> hi,
+> koen already told me that there will be libtool problems when building
+> classpath in angstrom 2008.1.
+>
+> what I get are the following error messages:
+>
+> i686-linux-libtool: link: unsupported hardcode properties
+> i686-linux-libtool: link: See the libtool documentation for more
+> information.
+> i686-linux-libtool: link: Fatal configuration error.
+>
+> Caused by the following command:
+>
+> make[3]: Entering directory
+> `/home/rob/oe/beagle/tmp/work/i686-linux/classpath-initial-0.93-r1/classpath-0.93/native/jni/java-net'
+> /bin/sh ../../../i686-linux-libtool --tag=CC   --mode=link ccache gcc -W
+> -Wall -Wmissing-declarations -Wwrite-strings -Wmissing-prototypes
+> -Wno-long-long -Wstrict-prototypes -pedantic -Werror
+> -isystem/home/rob/oe/beagle/tmp/staging/i686-linux/usr/include -Os
+> -module -version-info 0:0:0 -no-undefined
+> -L/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib
+> -Wl,-rpath-link,/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib
+> -Wl,-rpath,/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib -Wl,-O1 -o
+> libjavanet.la -rpath
+> /home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib/classpath-initial
+> javanet.lo java_net_VMInetAddress.lo java_net_VMNetworkInterface.lo
+> java_net_VMURLConnection.lo gnu_java_net_VMPlainSocketImpl.lo
+> gnu_java_net_local_LocalSocketImpl.lo
+> ../../../native/jni/classpath/jcl.lo
+> ../../../native/jni/native-lib/libclasspathnative.la -lmagic
+>
+> I debugged this problem to the point where I found out that it does not
+> like the '-lmagic'. If I remove that from the makefile the build
+> continues. However this cannot be the real fix.
+>
+> What is wrong here and how should I fix it?
+>
+> What other program that uses libtool and links to an external library
+> can I look at and study their autotools files?
 
-Still there is one more left. It should be ﻿'listtasks task'  I think.
+It seems that the following bit causes the error:
 
-Khem
+./configure.ac:383:  AC_CHECK_LIB(magic, magic_open, LIBMAGIC=-lmagic)
+
+regards,
+
+Koen
+
+
+
+>
+> Regards
+> Robert
+>
+>
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
