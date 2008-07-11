@@ -1,32 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.68.135.106] (helo=silverton.cliftonlabs.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KHETJ-0004eF-JV
-	for openembedded-devel@openembedded.org; Fri, 11 Jul 2008 10:59:21 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KHET2-0001O9-Dw
-	for openembedded-devel@openembedded.org; Fri, 11 Jul 2008 08:59:04 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 11 Jul 2008 08:59:04 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 11 Jul 2008 08:59:04 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 11 Jul 2008 10:58:54 +0200
-Message-ID: <g577ce$6hu$1@ger.gmane.org>
-References: <4870DF7B.2050603@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
-In-Reply-To: <4870DF7B.2050603@gmx.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: libtool issues with angstrom and classpath
+	(envelope-from <blaine@cliftonlabs.com>) id 1KHJ0J-0002nb-Nf
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jul 2008 15:49:43 +0200
+Received: from 107.135.68.216.ded-dsl.fuse.net ([216.68.135.107]
+	helo=arcadia.cliftonlabs.lan)
+	by silverton.cliftonlabs.com with esmtps
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <blaine@cliftonlabs.com>) id 1KHIzz-0005jx-4Y
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jul 2008 09:49:25 -0400
+From: Blaine Booher <blaine@cliftonlabs.com>
+Organization: Clifton Labs
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 11 Jul 2008 09:49:07 -0400
+User-Agent: KMail/1.9.5
+References: <48761569.4080304@gmx.net> <1215703284.32070.6.camel@isis>
+	<4876A7DD.8090608@palm.com>
+In-Reply-To: <4876A7DD.8090608@palm.com>
+MIME-Version: 1.0
+Message-Id: <200807110949.07500.blaine@cliftonlabs.com>
+X-SA-Exim-Connect-IP: 216.68.135.107
+X-SA-Exim-Mail-From: blaine@cliftonlabs.com
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	silverton.cliftonlabs.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on silverton.cliftonlabs.com)
+Subject: Compiling a custom kernel module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,75 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2008 08:59:21 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 11 Jul 2008 13:49:44 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Robert Schuster wrote:
-> hi,
-> koen already told me that there will be libtool problems when building
-> classpath in angstrom 2008.1.
->
-> what I get are the following error messages:
->
-> i686-linux-libtool: link: unsupported hardcode properties
-> i686-linux-libtool: link: See the libtool documentation for more
-> information.
-> i686-linux-libtool: link: Fatal configuration error.
->
-> Caused by the following command:
->
-> make[3]: Entering directory
-> `/home/rob/oe/beagle/tmp/work/i686-linux/classpath-initial-0.93-r1/classpath-0.93/native/jni/java-net'
-> /bin/sh ../../../i686-linux-libtool --tag=CC   --mode=link ccache gcc -W
-> -Wall -Wmissing-declarations -Wwrite-strings -Wmissing-prototypes
-> -Wno-long-long -Wstrict-prototypes -pedantic -Werror
-> -isystem/home/rob/oe/beagle/tmp/staging/i686-linux/usr/include -Os
-> -module -version-info 0:0:0 -no-undefined
-> -L/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib
-> -Wl,-rpath-link,/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib
-> -Wl,-rpath,/home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib -Wl,-O1 -o
-> libjavanet.la -rpath
-> /home/rob/oe/beagle/tmp/staging/i686-linux/usr/lib/classpath-initial
-> javanet.lo java_net_VMInetAddress.lo java_net_VMNetworkInterface.lo
-> java_net_VMURLConnection.lo gnu_java_net_VMPlainSocketImpl.lo
-> gnu_java_net_local_LocalSocketImpl.lo
-> ../../../native/jni/classpath/jcl.lo
-> ../../../native/jni/native-lib/libclasspathnative.la -lmagic
->
-> I debugged this problem to the point where I found out that it does not
-> like the '-lmagic'. If I remove that from the makefile the build
-> continues. However this cannot be the real fix.
->
-> What is wrong here and how should I fix it?
->
-> What other program that uses libtool and links to an external library
-> can I look at and study their autotools files?
+Hey guys,
+  I am very new to Open Embedded so please bare with me if I make it too 
+obvious :).  We are using a gumstix embedded system with open embedded (and 
+the angstrom release that gumstix provides).  We would like to use the kernel 
+module cp2101 with a usb device.  The default cp2101 module won't work, since 
+we have to edit the USB Device ID in the source code.  I'm having a hard time 
+figuring out:
+1.  How do I 'enable' the cp2101 module in the kernel?
+2.  How do I rebuild the kernel, once the source code is edited?
+3.  How to I ensure that the module is part of the final build, so that I can 
+do a 'modprove cp2101' on the gumstix and have it load successfully?
 
-It seems that the following bit causes the error:
+I have found a few references, including emails on this email list, but 
+nothing that explains it in a clear and concise manner (yet, at least).
 
-./configure.ac:383:  AC_CHECK_LIB(magic, magic_open, LIBMAGIC=-lmagic)
-
-regards,
-
-Koen
-
-
-
->
-> Regards
-> Robert
->
->
->
->
-> ------------------------------------------------------------------------
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+Thank you in advance,
+Blaine
 
 
