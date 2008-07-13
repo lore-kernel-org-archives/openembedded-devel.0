@@ -1,33 +1,33 @@
-Received: from [72.14.246.247] (helo=ag-out-0708.google.com)
+Received: from [72.14.246.242] (helo=ag-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vneblx@gmail.com>) id 1KI3Hs-0003Fp-Mu
+	(envelope-from <vneblx@gmail.com>) id 1KI3ma-0005iT-Ew
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Jul 2008 17:14:57 +0200
-Received: by ag-out-0708.google.com with SMTP id 9so6522713agd.9
+	Sun, 13 Jul 2008 17:46:40 +0200
+Received: by ag-out-0708.google.com with SMTP id 9so6570787agd.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jul 2008 08:14:29 -0700 (PDT)
+	Sun, 13 Jul 2008 08:46:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:mime-version:content-type;
-	bh=dcCv0KMmcjf2AV/5KjxUYwpDzCu8BwzSVRxHYml0om0=;
-	b=YQhYx/whlT6LXnzny/UODHETrehbo1cIUDTavVgjYdVn6/juZK1cVsyAi36WdJzz9Y
-	NrM1IbqhCWkjrA6HJu2sizc02vhtaJh7mGXN0dKSzvF75OU7PAonYTUfG1+SXzg5xzCK
-	xqT4Ad8TCisTwauLU/4r2+M+P8lbvIySSh5Oc=
+	bh=eSXsk8a28kO2ZuHkcHbtN5MLhUGVTULdRuy0lFT+bF8=;
+	b=uP8eQCLeoPSz1v4qNohDK2QmT0rHIDIhmTQVXmUm6qXXod/IK0oekvzSBJPvXXG+e7
+	hfBzb3Tipc9tdEOJfjjs+fR2VcoBDdyPuLNgASnIulaQVe8nOsfrzHT0xFvbFArpbXk+
+	mywC/uCjb02XZT59QSrPvj5JZkjeu6UTRE770=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:mime-version:content-type;
-	b=a1GxxTeCls3vZlIcmiB1gulfHHPmS2N2PT8HjyU+Qq8WV+SazPKa1vcfS12pWcn3dz
-	fSYi2PgzrGU9xoO0Hyf+HFcTiqNcXF2pnsLX7RCkEepGPbXT24uCe5tnKstyg56yvHgk
-	cNynTd4CXQZ/3Px8EeUBmPEUyHZpMt5wE+02g=
-Received: by 10.90.65.5 with SMTP id n5mr13499543aga.110.1215962068992;
-	Sun, 13 Jul 2008 08:14:28 -0700 (PDT)
-Received: by 10.90.88.13 with HTTP; Sun, 13 Jul 2008 08:14:28 -0700 (PDT)
-Message-ID: <c38932520807130814n67204e17w83004499371c6f4d@mail.gmail.com>
-Date: Sun, 13 Jul 2008 22:14:28 +0700
+	b=H+g0QnLkhIYzhhVP7uf/qOyLh/EypPsXXs9h4UP64wtWbkDs7s63Fnu07uHekob2/q
+	jXt7bsBCwPrpYnndty5NnOsJHjnHTUHgrMeSrlWReYWXKjDFzv194chI5tWnLIAWyr9g
+	9M3JlbUGZN+vDJBMzyZ6fzqKhjhOoeMM7d/ok=
+Received: by 10.90.115.6 with SMTP id n6mr13571752agc.3.1215963972826;
+	Sun, 13 Jul 2008 08:46:12 -0700 (PDT)
+Received: by 10.90.88.13 with HTTP; Sun, 13 Jul 2008 08:46:12 -0700 (PDT)
+Message-ID: <c38932520807130846p2129e511qc96ca99b3dee0878@mail.gmail.com>
+Date: Sun, 13 Jul 2008 22:46:12 +0700
 From: "Hien Pham" <vneblx@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
 X-Content-Filtered-By: Mailman/MimeDel 2.1.10
-Subject: Preparing linux image problem
+Subject: bitbake problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,23 +41,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jul 2008 15:14:57 -0000
+X-List-Received-Date: Sun, 13 Jul 2008 15:46:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
 Hi all,
 
-After build u-boot and kernel for AT91SAM, I tried to "Preparing linux
-image" (http://www.linux4sam.org/twiki/bin/view/Linux4SAM/U-Boot) using
-below command:
+after installed Openembedded's tools, I tried bellow command:
+[root@localhost stuff]# bitbake nano
 
-mkimage -A arm -O linux -C none -T kernel -a 20008000 -e 20008000 -n
-linux-2.6 -d arch/arm/boot/zImage uImage
+I received following messages:
 
-but I received "mkimage: Can't map uImage: No such device".
+>NOTE: Handling BitBake files: | (0001/0001) [100 %]
+>NOTE: Parsing finished. 1 cached, 0 parsed, 0 skipped, 0 masked.
+>ERROR:  Openembedded's config sanity checker detected a potential
+misconfiguration.
+>    Either fix the cause of this error or at your own risk disable the
+checker (see sanity.conf).
+>    Following is the list of potential problems / advisories:
 
-How can I solve this problem?
+>    Do not use Bitbake as root.
 
-Best regards
+how can I solve this problem?
+
+Thanks and best regards,
 
