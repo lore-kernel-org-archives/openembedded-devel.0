@@ -1,25 +1,25 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KI3qn-0005sB-Ku
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Jul 2008 17:51:01 +0200
-Received: (qmail invoked by alias); 13 Jul 2008 15:50:32 -0000
-Received: from e178092237.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.92.237]
-	by mail.gmx.net (mp043) with SMTP; 13 Jul 2008 17:50:32 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18sY/Urx64sTwSrSeDZhdq+oazoJFG9KvMwGIW9Yu
-	HVkljM4omS6jPb
-Message-ID: <487A245D.6090502@gmx.net>
-Date: Sun, 13 Jul 2008 17:50:53 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
+Received: from [194.109.24.23] (helo=smtp-vbr3.xs4all.nl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <udovdh@xs4all.nl>) id 1KI3wb-00068h-IU
+	for openembedded-devel@openembedded.org; Sun, 13 Jul 2008 17:57:01 +0200
+Received: from surfplank2.hierzo (pindarots.xs4all.nl [80.101.128.228])
+	(authenticated bits=0)
+	by smtp-vbr3.xs4all.nl (8.13.8/8.13.8) with ESMTP id m6DFuWpJ062724
+	for <openembedded-devel@openembedded.org>;
+	Sun, 13 Jul 2008 17:56:34 +0200 (CEST)
+	(envelope-from udovdh@xs4all.nl)
+Message-ID: <487A25B0.5010707@xs4all.nl>
+Date: Sun, 13 Jul 2008 17:56:32 +0200
+From: Udo van den Heuvel <udovdh@xs4all.nl>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.67
-Subject: several versions of software packages not available in OpenEmbedded
+To: openembedded-devel@openembedded.org
+References: <c38932520807130846p2129e511qc96ca99b3dee0878@mail.gmail.com>
+In-Reply-To: <c38932520807130846p2129e511qc96ca99b3dee0878@mail.gmail.com>
+X-Enigmail-Version: 0.95.2
+OpenPGP: id=8300CC02
+X-Virus-Scanned: by XS4ALL Virus Scanner
+Subject: Re: bitbake problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -33,45 +33,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jul 2008 15:51:03 -0000
-X-Groupsio-MsgNum: 5497
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig223C18618401C9B098CC8970"
+X-List-Received-Date: Sun, 13 Jul 2008 15:57:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---------------enig223C18618401C9B098CC8970
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hien Pham wrote:
+>>    Do not use Bitbake as root.
+> 
+> how can I solve this problem?
 
-Hi,
-when building openmoko (using om-2007.2 as the distro) I get warnings
-about missing versions:
+By running bitbake as a user, not as root.
 
-NOTE: preferred version 0.16.999.041 of e-wm not available (for item e-wm=
-)
-NOTE: preferred version 0.9.5.1a of python-pyrex-native not available
-(for item python-pyrex-native)
-NOTE: preferred version 115 of udev not available (for item udev)
-
-Perhaps those recipes are in someones sandbox or OM's private repo. If
-so it would be nice if they could be placed in upstream OE, too.
-
-Regards
-Robert
+Udo
 
 
---------------enig223C18618401C9B098CC8970
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFIeiRdG9cfwmwwEtoRCNIwAJ0drP5QZ3F+Eu7GztPLS2bWAh/aZwCfUEsz
-gXEarVnIYoBQzvlPY9t+OBs=
-=ERUN
------END PGP SIGNATURE-----
-
---------------enig223C18618401C9B098CC8970--
