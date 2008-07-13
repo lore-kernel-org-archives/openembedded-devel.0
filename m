@@ -1,28 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KHjPy-0006R5-7j
+Received: from [72.14.246.247] (helo=ag-out-0708.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <vneblx@gmail.com>) id 1KI3Hs-0003Fp-Mu
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Jul 2008 20:01:58 +0200
-Received: (qmail invoked by alias); 12 Jul 2008 18:01:33 -0000
-Received: from e178116136.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.116.136]
-	by mail.gmx.net (mp034) with SMTP; 12 Jul 2008 20:01:33 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/nWxcMQLHnH7o86LQPlYZFZEt+kaXVSUeEgKquzz
-	8ygEIfpZa6X6Ly
-Message-ID: <4878F18C.2080404@gmx.net>
-Date: Sat, 12 Jul 2008 20:01:48 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
-MIME-Version: 1.0
+	Sun, 13 Jul 2008 17:14:57 +0200
+Received: by ag-out-0708.google.com with SMTP id 9so6522713agd.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Jul 2008 08:14:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type;
+	bh=dcCv0KMmcjf2AV/5KjxUYwpDzCu8BwzSVRxHYml0om0=;
+	b=YQhYx/whlT6LXnzny/UODHETrehbo1cIUDTavVgjYdVn6/juZK1cVsyAi36WdJzz9Y
+	NrM1IbqhCWkjrA6HJu2sizc02vhtaJh7mGXN0dKSzvF75OU7PAonYTUfG1+SXzg5xzCK
+	xqT4Ad8TCisTwauLU/4r2+M+P8lbvIySSh5Oc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type;
+	b=a1GxxTeCls3vZlIcmiB1gulfHHPmS2N2PT8HjyU+Qq8WV+SazPKa1vcfS12pWcn3dz
+	fSYi2PgzrGU9xoO0Hyf+HFcTiqNcXF2pnsLX7RCkEepGPbXT24uCe5tnKstyg56yvHgk
+	cNynTd4CXQZ/3Px8EeUBmPEUyHZpMt5wE+02g=
+Received: by 10.90.65.5 with SMTP id n5mr13499543aga.110.1215962068992;
+	Sun, 13 Jul 2008 08:14:28 -0700 (PDT)
+Received: by 10.90.88.13 with HTTP; Sun, 13 Jul 2008 08:14:28 -0700 (PDT)
+Message-ID: <c38932520807130814n67204e17w83004499371c6f4d@mail.gmail.com>
+Date: Sun, 13 Jul 2008 22:14:28 +0700
+From: "Hien Pham" <vneblx@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4870DF7B.2050603@gmx.net> <g577ce$6hu$1@ger.gmane.org>
-In-Reply-To: <g577ce$6hu$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.67
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: libtool issues with angstrom and classpath
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.10
+Subject: Preparing linux image problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -36,60 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Jul 2008 18:01:58 -0000
-X-Groupsio-MsgNum: 5494
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig263A4F9689F1ED9F6954C0C8"
-
---------------enig263A4F9689F1ED9F6954C0C8
+X-List-Received-Date: Sun, 13 Jul 2008 15:14:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi Koen,
+Hi all,
 
-Koen Kooi schrieb:
->>
->> I debugged this problem to the point where I found out that it does no=
-t
->> like the '-lmagic'. If I remove that from the makefile the build
->> continues. However this cannot be the real fix.
->>
->> What is wrong here and how should I fix it?
->>
->> What other program that uses libtool and links to an external library
->> can I look at and study their autotools files?
->=20
-> It seems that the following bit causes the error:
->=20
-> ./configure.ac:383:  AC_CHECK_LIB(magic, magic_open, LIBMAGIC=3D-lmagic=
-)
-Thanks for looking at this. I found a different 'solution'. In the
-current libtool scripts that are generated from ./configure the variable
-hardcode_direct is empty. For earlier libtool versions this was set to
-'no'. If I manually edit the script and set the variable to 'no' the
-build continues just fine.
+After build u-boot and kernel for AT91SAM, I tried to "Preparing linux
+image" (http://www.linux4sam.org/twiki/bin/view/Linux4SAM/U-Boot) using
+below command:
 
-I am currently discussing this on the libtool mailing list. If you know
-other packages that break with the 'invalid hardcode properties' error
-message you may try the above workaround.
+mkimage -A arm -O linux -C none -T kernel -a 20008000 -e 20008000 -n
+linux-2.6 -d arch/arm/boot/zImage uImage
 
-Regards
-Robert
+but I received "mkimage: Can't map uImage: No such device".
 
+How can I solve this problem?
 
---------------enig263A4F9689F1ED9F6954C0C8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Best regards
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFIePGMG9cfwmwwEtoRCEbuAJ9xP15JbKioG0ga3IKKOVcCZVZWXQCffN6g
-XiSocWb8X8y7DeRvf+DRQIw=
-=rVoV
------END PGP SIGNATURE-----
-
---------------enig263A4F9689F1ED9F6954C0C8--
