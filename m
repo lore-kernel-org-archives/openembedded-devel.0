@@ -1,24 +1,32 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1KILJ8-00088I-75
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jul 2008 12:29:26 +0200
-Received: from [212.60.202.194] (helo=[192.168.2.131])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1KILNA-0002Qa-J6
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jul 2008 12:33:36 +0200
-Message-ID: <487B2A67.1000400@kernelconcepts.de>
-Date: Mon, 14 Jul 2008 12:28:55 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KIN55-0006dY-Lt
+	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 14:23:03 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KIN4a-00060p-QR
+	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 12:22:32 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 14 Jul 2008 12:22:32 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 14 Jul 2008 12:22:32 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 14 Jul 2008 14:22:15 +0200
+Message-ID: <g5fge0$e5$1@ger.gmane.org>
+References: <1213345201.13942.3.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
 User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <487B180F.60309@adtelecom.es>
-In-Reply-To: <487B180F.60309@adtelecom.es>
-X-Enigmail-Version: 0.95.0
-Subject: Re: http://www.angstrom-distribution.org/ down?
+In-Reply-To: <1213345201.13942.3.camel@dax.rpnet.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -32,29 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2008 10:29:26 -0000
+X-List-Received-Date: Mon, 14 Jul 2008 12:23:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-Joaquim Duran schrieb:
-> I'm not able to open http://www.angstrom-distribution.org/. Is it down
-> or are you doing maintenance?
+the discussion has dried up a bit.  I guess everbody has said what
+needed to be said.  Now comes the hard time of trying to find a consensus.
 
-we had a few minutes maintenance break about half an hour ago, but it is back
-again already.
+I am having a go at it, starting with Leon's suggestion of continuing
+with the gentlemen's agreement plus a definition of "OE core" as
+suggested by Tom Rini.  My feeling was this kind of struck a chord and
+would be acceptable to most, if not all members of the community.
 
-Greetings
+http://wiki.openembedded.net/index.php/Category_talk:Policy is my
+attempt to make explicit what the gentlemen's agreement is (and isn't)
+about, what parts belong to OE core and how we verify its consistency.
+I suggest we clarify anything that still needs discussion with respect
+to these points and then have a vote soon (unless we have unanimity,
+which I hope).  Unless any major disagreements come up, I think we
+should be able to complete that by Friday.
 
-Florian
+Regards
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+Rolf
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
