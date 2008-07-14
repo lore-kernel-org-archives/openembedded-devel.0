@@ -1,25 +1,24 @@
-Received: from [194.109.24.23] (helo=smtp-vbr3.xs4all.nl)
+Received: from [216.239.128.26] (helo=smtp.omnis.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <udovdh@xs4all.nl>) id 1KI3wb-00068h-IU
-	for openembedded-devel@openembedded.org; Sun, 13 Jul 2008 17:57:01 +0200
-Received: from surfplank2.hierzo (pindarots.xs4all.nl [80.101.128.228])
-	(authenticated bits=0)
-	by smtp-vbr3.xs4all.nl (8.13.8/8.13.8) with ESMTP id m6DFuWpJ062724
-	for <openembedded-devel@openembedded.org>;
-	Sun, 13 Jul 2008 17:56:34 +0200 (CEST)
-	(envelope-from udovdh@xs4all.nl)
-Message-ID: <487A25B0.5010707@xs4all.nl>
-Date: Sun, 13 Jul 2008 17:56:32 +0200
-From: Udo van den Heuvel <udovdh@xs4all.nl>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <ml@e4net.com>) id 1KIBVr-0008B7-OU
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Jul 2008 02:01:55 +0200
+Received: from smtp-a.omnis.com (smtp-a.omnis.com [216.239.128.237])
+	by smtp.omnis.com (Postfix) with ESMTP id C4082565A
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Jul 2008 17:01:26 -0700 (PDT)
+Received: from [192.168.3.4] (99-139-75-113.lightspeed.snjsca.sbcglobal.net
+	[99.139.75.113]) (Authenticated sender: jmorris%e4net.com)
+	by smtp-a.omnis.com (Postfix) with ESMTP id 72490400851
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Jul 2008 17:01:26 -0700 (PDT)
+Message-ID: <487A9756.9090500@e4net.com>
+Date: Sun, 13 Jul 2008 17:01:26 -0700
+From: Jim Morris <ml@e4net.com>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080421)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <c38932520807130846p2129e511qc96ca99b3dee0878@mail.gmail.com>
-In-Reply-To: <c38932520807130846p2129e511qc96ca99b3dee0878@mail.gmail.com>
-X-Enigmail-Version: 0.95.2
-OpenPGP: id=8300CC02
-X-Virus-Scanned: by XS4ALL Virus Scanner
-Subject: Re: bitbake problem
+To: openembedded-devel@lists.openembedded.org
+Subject: Is Ruby being maintained by anyone?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -33,18 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jul 2008 15:57:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 14 Jul 2008 00:01:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hien Pham wrote:
->>    Do not use Bitbake as root.
-> 
-> how can I solve this problem?
+The current version of ruby in OE appears to be 1.8.5 which is pretty old, and it does not have the 
+socket or thread libraries installed which are pretty much standard and are required by various 
+useful libraries like dbus.
 
-By running bitbake as a user, not as root.
+Is anyone maintaining or working on updating this package?
 
-Udo
+If not I'm willing to have a crack at getting the stable release of ruby (1.8.6P111) working and 
+also work on the socket and thread libs.
 
+Anyone who may have started this and abandoned the project, if you have any patches lying around it 
+would help.
+
+Thanks
+Jim
+
+-- 
+Jim Morris, http://blog.wolfman.com
 
 
