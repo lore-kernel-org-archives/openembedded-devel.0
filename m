@@ -1,32 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KIOBv-0004aY-L2
-	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 15:34:11 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KIOBQ-0000u9-Mq
-	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 13:33:40 +0000
-Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 14 Jul 2008 13:33:40 +0000
-Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1KIQB5-0000dX-RC
+	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 17:41:27 +0200
+Received: by yx-out-1718.google.com with SMTP id 4so1443431yxp.30
 	for <openembedded-devel@openembedded.org>;
-	Mon, 14 Jul 2008 13:33:40 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 14 Jul 2008 15:33:32 +0200
-Message-ID: <g5fkjb$eqq$1@ger.gmane.org>
-References: <487A9756.9090500@e4net.com>
+	Mon, 14 Jul 2008 08:40:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:subject:from:reply-to:to
+	:content-type:date:message-id:mime-version:x-mailer
+	:content-transfer-encoding;
+	bh=S+hJDZOYDVccIQ8v36lN/GFUeOovWIoZR6qhWSrHde8=;
+	b=qsBxgBkRKcVA6j06obSQ7531iuQAdGT6ddXMnmJDrmBAMi8jQUoOuAXPzSDUl5Tfgd
+	hIXvK5/dkJX7uKhU9mw0DxwnOvz5xAlARcFcdZMpy2Kf8P9WJipckkPULTM+T30md3rg
+	7Az+gy12J/7FqWNuoRwXPiezKIz7vOVVgWtCc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=subject:from:reply-to:to:content-type:date:message-id:mime-version
+	:x-mailer:content-transfer-encoding;
+	b=Y/KAlARcmJSpQrVeybphQYX3Ui7haCI3YxyPyNqMK5I7uolNvqC6LUogEJb11hKSUo
+	6owPtuwpZ8MVEnM0BqvuPLNs4Yp4pcuwGQl5UnlN/RhZr47qJCLuRxcCpl+k7QXpBNfE
+	Xc6dmwSN+24aH3TFr+gsUq1PbXUnAI0CvKC40=
+Received: by 10.142.170.6 with SMTP id s6mr4263805wfe.153.1216050051976;
+	Mon, 14 Jul 2008 08:40:51 -0700 (PDT)
+Received: from ?192.168.1.71? ( [71.146.10.255])
+	by mx.google.com with ESMTPS id 28sm3609188wfd.4.2008.07.14.08.40.50
+	(version=SSLv3 cipher=RC4-MD5); Mon, 14 Jul 2008 08:40:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: Koen Kooi <k.kooi@student.utwente.nl>,
+	"openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
+Date: Mon, 14 Jul 2008 08:40:49 -0700
+Message-Id: <1216050049.1093.5.camel@isis>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <487A9756.9090500@e4net.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Is Ruby being maintained by anyone?
+X-Mailer: Evolution 2.22.2 
+Subject: versionsort() in util-linux-ng
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,25 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2008 13:34:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 14 Jul 2008 15:41:28 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi Jim,
+Hi Koen,
 
-Jim Morris wrote:
-> If not I'm willing to have a crack at getting the stable release of ruby
-> (1.8.6P111) working and also work on the socket and thread libs.
+You committed new 2.14 version of util-linux-ng. It seems its using
+versionsort() function. uclibc does not provide this function. We would
+need some alternative in util-linux-ng for this.
 
-Thank you for your offer.  I am not aware of any official ruby
-maintainer (you could check "mtn log" and MAINTAINERS if you want to be
-really sure).  I'd say, just have a go at it and let us have your
-patches via the bug tracker.  If there is not timely response, ping us
-in #oe.
+Thanks
 
-Regards
-
-Rolf
+-Khem
 
 
 
