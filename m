@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KIXPi-0005hI-2g
-	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 01:25:02 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KIXPB-0001Xr-BJ
-	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 23:24:29 +0000
+	id 1KIXQE-0005hV-MX
+	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 01:25:34 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1KIXPi-0001Zq-8b
+	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 23:25:02 +0000
 Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 14 Jul 2008 23:24:29 +0000
+	Mon, 14 Jul 2008 23:25:02 +0000
 Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 14 Jul 2008 23:24:29 +0000
+	Mon, 14 Jul 2008 23:25:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 15 Jul 2008 01:24:13 +0200
-Message-ID: <g5gn73$es4$1@ger.gmane.org>
+Date: Tue, 15 Jul 2008 01:24:36 +0200
+Message-ID: <g5gn7j$es4$2@ger.gmane.org>
 References: <1213345201.13942.3.camel@dax.rpnet.com>	<g5fge0$e5$1@ger.gmane.org>
 	<g5g7io$mu3$1@ger.gmane.org>
 Mime-Version: 1.0
@@ -41,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2008 23:25:02 -0000
+X-List-Received-Date: Mon, 14 Jul 2008 23:25:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
