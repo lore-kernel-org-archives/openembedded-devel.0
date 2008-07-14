@@ -1,33 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.132.241] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KITFR-0004uu-EN
-	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 20:58:10 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KITEu-0007OA-Jy
-	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 18:57:36 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 14 Jul 2008 18:57:36 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <e.robertson.svg@gmail.com>) id 1KIUC5-0002Xh-2T
+	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 21:58:45 +0200
+Received: by an-out-0708.google.com with SMTP id b21so971328ana.6
 	for <openembedded-devel@openembedded.org>;
-	Mon, 14 Jul 2008 18:57:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 14 Jul 2008 12:58:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=I67X5hmz5OSZ+0QtL4zJjhZh+nvVUFSbA0LIIJQ9W7Q=;
+	b=nZR958vcpnyhjBWJIcYf9TlZ8mX3ONtMnyPGoD5uToNtciEQnip0xnLJbZG+PXzke5
+	mJb9qwLffUkDuvs0ScoLrSYfuceETqORlYd/cdGCE/lXu5VAhUZajhOImuV3Df2LOLu2
+	dvq3wPDsBQt/dURDtcgcXsxTWPeVu/uiId+6Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=IIge8gF2Pr9p+7rpsvh0v4ZnCO8W2F/rP/ay34kzbGeKsXsw394rRD4nlRGSbUHN66
+	5rZT+k7IfGDTwIuy5JJsobPAlyH9wLc7TU1Zd2FUDYCvdG78/q5rfqO6lzGcVT1UqL4V
+	rsNGLgdbc+uM+QDjWQzUj1/3BJJSOTWIdsJ2w=
+Received: by 10.100.168.18 with SMTP id q18mr10681444ane.15.1216065492310;
+	Mon, 14 Jul 2008 12:58:12 -0700 (PDT)
+Received: by 10.100.137.1 with HTTP; Mon, 14 Jul 2008 12:58:12 -0700 (PDT)
+Message-ID: <3972542e0807141258i256cab38kb2023270a0aa14e9@mail.gmail.com>
+Date: Mon, 14 Jul 2008 14:58:12 -0500
+From: "E Robertson" <e.robertson.svg@gmail.com>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 14 Jul 2008 20:57:28 +0200
-Message-ID: <g5g7io$mu3$1@ger.gmane.org>
-References: <1213345201.13942.3.camel@dax.rpnet.com>
-	<g5fge0$e5$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
-In-Reply-To: <g5fge0$e5$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Switching SCM to git and commit/review policy
+MIME-Version: 1.0
+Subject: Strange header file error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,36 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2008 18:58:11 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 14 Jul 2008 19:58:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Rolf Leggewie wrote:
-> Hi,
->
-> the discussion has dried up a bit.  I guess everbody has said what
-> needed to be said.  Now comes the hard time of trying to find a consensus.
->
-> I am having a go at it, starting with Leon's suggestion of continuing
-> with the gentlemen's agreement plus a definition of "OE core" as
-> suggested by Tom Rini.  My feeling was this kind of struck a chord and
-> would be acceptable to most, if not all members of the community.
->
-> http://wiki.openembedded.net/index.php/Category_talk:Policy is my
-> attempt to make explicit what the gentlemen's agreement is (and isn't)
-> about, what parts belong to OE core and how we verify its consistency.
-> I suggest we clarify anything that still needs discussion with respect
-> to these points and then have a vote soon (unless we have unanimity,
-> which I hope).  Unless any major disagreements come up, I think we
-> should be able to complete that by Friday.
+Hi All,
+I'm trying to explain this pthread.h header file error.
+I include this header file in my program. The snip of interest is this:
 
-The core-team will set the policy, so there's no need to vote. We are 
-waiting for people to get back from guadec/holidays to polish up the 
-announcement.
+#ifndef _PTHREAD_H
+#define _PTHREAD_H  1
 
-regards,
+#include <features.h>
 
-Koen
+#include <sched.h>
+#include <time.h>
 
+#define __need_sigset_t
+#include <signal.h>
+#include <bits/pthreadtypes.h>
+#include <bits/initspin.h>
+
+__BEGIN_DECLS
+
+/* Initializers.  */
+
+#define PTHREAD_MUTEX_INITIALIZER \
+  {0, 0, 0, PTHREAD_MUTEX_ADAPTIVE_NP, __LOCK_INITIALIZER}
+#ifdef __USE_GNU
+# define PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP \
+  {0, 0, 0, PTHREAD_MUTEX_RECURSIVE_NP, __LOCK_INITIALIZER}
+# define PTHREAD_ERRORCHECK_MUTEX_INITIALIZER_NP \
+  {0, 0, 0, PTHREAD_MUTEX_ERRORCHECK_NP, __LOCK_INITIALIZER}
+# define PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP \
+  {0, 0, 0, PTHREAD_MUTEX_ADAPTIVE_NP, __LOCK_INITIALIZER}
+#endif
+
+
+This is included in another header file where I place some #ifdef
+statements for  _PTHREAD_H,
+PTHREAD_MUTEX_INITIALIZER, PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP, and
+__USE_GNU.
+I also defined __USE_GNU just before the header file and none of these
+are redefined anywhere else.
+
+From this I notice all these defines are valid and present _except_
+PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP.
+I haven't figured out why this is so wired I don't see any possible
+reason how this could be possible.
+Am I out of my mind here? Is this really possible? Unless my
+arm-uclibc is doing something strange, I don't see how this could be.
+Anyone seen this before?  Thanks much.
 
 
