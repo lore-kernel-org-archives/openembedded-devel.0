@@ -1,37 +1,33 @@
-Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KIQB5-0000dX-RC
-	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 17:41:27 +0200
-Received: by yx-out-1718.google.com with SMTP id 4so1443431yxp.30
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KITFR-0004uu-EN
+	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 20:58:10 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KITEu-0007OA-Jy
+	for openembedded-devel@openembedded.org; Mon, 14 Jul 2008 18:57:36 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 14 Jul 2008 18:57:36 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 14 Jul 2008 08:40:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:reply-to:to
-	:content-type:date:message-id:mime-version:x-mailer
-	:content-transfer-encoding;
-	bh=S+hJDZOYDVccIQ8v36lN/GFUeOovWIoZR6qhWSrHde8=;
-	b=qsBxgBkRKcVA6j06obSQ7531iuQAdGT6ddXMnmJDrmBAMi8jQUoOuAXPzSDUl5Tfgd
-	hIXvK5/dkJX7uKhU9mw0DxwnOvz5xAlARcFcdZMpy2Kf8P9WJipckkPULTM+T30md3rg
-	7Az+gy12J/7FqWNuoRwXPiezKIz7vOVVgWtCc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:reply-to:to:content-type:date:message-id:mime-version
-	:x-mailer:content-transfer-encoding;
-	b=Y/KAlARcmJSpQrVeybphQYX3Ui7haCI3YxyPyNqMK5I7uolNvqC6LUogEJb11hKSUo
-	6owPtuwpZ8MVEnM0BqvuPLNs4Yp4pcuwGQl5UnlN/RhZr47qJCLuRxcCpl+k7QXpBNfE
-	Xc6dmwSN+24aH3TFr+gsUq1PbXUnAI0CvKC40=
-Received: by 10.142.170.6 with SMTP id s6mr4263805wfe.153.1216050051976;
-	Mon, 14 Jul 2008 08:40:51 -0700 (PDT)
-Received: from ?192.168.1.71? ( [71.146.10.255])
-	by mx.google.com with ESMTPS id 28sm3609188wfd.4.2008.07.14.08.40.50
-	(version=SSLv3 cipher=RC4-MD5); Mon, 14 Jul 2008 08:40:51 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: Koen Kooi <k.kooi@student.utwente.nl>,
-	"openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-Date: Mon, 14 Jul 2008 08:40:49 -0700
-Message-Id: <1216050049.1093.5.camel@isis>
+	Mon, 14 Jul 2008 18:57:36 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 14 Jul 2008 20:57:28 +0200
+Message-ID: <g5g7io$mu3$1@ger.gmane.org>
+References: <1213345201.13942.3.camel@dax.rpnet.com>
+	<g5fge0$e5$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.2 
-Subject: versionsort() in util-linux-ng
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
+In-Reply-To: <g5fge0$e5$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Switching SCM to git and commit/review policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -45,19 +41,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2008 15:41:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 14 Jul 2008 18:58:11 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Koen,
+Rolf Leggewie wrote:
+> Hi,
+>
+> the discussion has dried up a bit.  I guess everbody has said what
+> needed to be said.  Now comes the hard time of trying to find a consensus.
+>
+> I am having a go at it, starting with Leon's suggestion of continuing
+> with the gentlemen's agreement plus a definition of "OE core" as
+> suggested by Tom Rini.  My feeling was this kind of struck a chord and
+> would be acceptable to most, if not all members of the community.
+>
+> http://wiki.openembedded.net/index.php/Category_talk:Policy is my
+> attempt to make explicit what the gentlemen's agreement is (and isn't)
+> about, what parts belong to OE core and how we verify its consistency.
+> I suggest we clarify anything that still needs discussion with respect
+> to these points and then have a vote soon (unless we have unanimity,
+> which I hope).  Unless any major disagreements come up, I think we
+> should be able to complete that by Friday.
 
-You committed new 2.14 version of util-linux-ng. It seems its using
-versionsort() function. uclibc does not provide this function. We would
-need some alternative in util-linux-ng for this.
+The core-team will set the policy, so there's no need to vote. We are 
+waiting for people to get back from guadec/holidays to polish up the 
+announcement.
 
-Thanks
+regards,
 
--Khem
+Koen
 
 
 
