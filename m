@@ -1,40 +1,23 @@
-Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KIZwF-0000zi-DQ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jul 2008 04:06:47 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so5854733rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2008 19:06:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:reply-to:to:cc
-	:in-reply-to:references:content-type:date:message-id:mime-version
-	:x-mailer:content-transfer-encoding;
-	bh=lzaFAT0SJygduJLl3vLecJLmc2UVOaMgS2q8vCw1CXI=;
-	b=QnDKHcAO01broXZYdmJdcB4CTZJOpgHefnpHo0rPkQ9tU8ULiXPGbdHpXqjjif7yvA
-	hRgIl6wqZI37FNsdz0ydJsB5OHJ5Hx30/mgqBC3+6T8QrWvFDTRPjZEEdyBlA2vijk+N
-	W7lsI5zfqzCPjRS1XVdandCp2g934FpFmftwU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:reply-to:to:cc:in-reply-to:references:content-type
-	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
-	b=JK2E5r9U8pCWRrfkVGeiIdLZDyKXlF4Z/A+YEQq2n5IXLVg9+mqpLx4k8mq7h7aTtd
-	jXy/H/hVxSW/bZtU6eHKvNhl4HiEho9yro/rZTO2gy5WzZwM1B+C9Bnfn+pUqFo/B0jg
-	wahHPZBp/bDeC44MZwu91qJtTIGXTa/mn2ep8=
-Received: by 10.141.176.6 with SMTP id d6mr7032605rvp.214.1216087573202;
-	Mon, 14 Jul 2008 19:06:13 -0700 (PDT)
-Received: from ?192.168.1.71? ( [71.146.10.255])
-	by mx.google.com with ESMTPS id c20sm9558262rvf.1.2008.07.14.19.06.12
-	(version=SSLv3 cipher=RC4-MD5); Mon, 14 Jul 2008 19:06:12 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <3972542e0807141258i256cab38kb2023270a0aa14e9@mail.gmail.com>
-References: <3972542e0807141258i256cab38kb2023270a0aa14e9@mail.gmail.com>
-Date: Mon, 14 Jul 2008 19:06:11 -0700
-Message-Id: <1216087571.10214.10.camel@isis>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.2 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Strange header file error
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mcbeagle@gmx.de>) id 1KIcet-00014Q-2s
+	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 07:01:03 +0200
+Received: (qmail invoked by alias); 15 Jul 2008 05:00:26 -0000
+Received: from dslb-084-061-005-085.pools.arcor-ip.net (EHLO sheik.priv.chaos)
+	[84.61.5.85]
+	by mail.gmx.net (mp025) with SMTP; 15 Jul 2008 07:00:26 +0200
+X-Authenticated: #432297
+X-Provags-ID: V01U2FsdGVkX1+HYXxiUSuHAa3BpDRpYzCGsUoOjHUDOXN6CB1oB0
+	PLTBiOxo2GPz8f
+From: Peter Klar <mcbeagle@gmx.de>
+To: openembedded-devel@openembedded.org
+Date: Tue, 15 Jul 2008 07:00:25 +0200
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200807150700.25195.mcbeagle@gmx.de>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.42
+Subject: qt-embedded-4.4 and bitbake-1.6.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -48,77 +31,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2008 02:06:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 15 Jul 2008 05:01:03 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+Hi,
 
+first I have to admit that I use oe and bb for a few days only, so pls let 
+me know if I missed some basics.
 
-On Mon, 2008-07-14 at 14:58 -0500, E Robertson wrote:
-> Hi All,
-> I'm trying to explain this pthread.h header file error.
-> I include this header file in my program. The snip of interest is this:
-> 
-> #ifndef _PTHREAD_H
-> #define _PTHREAD_H  1
-> 
-> #include <features.h>
-> 
-> #include <sched.h>
-> #include <time.h>
-> 
-> #define __need_sigset_t
-> #include <signal.h>
-> #include <bits/pthreadtypes.h>
-> #include <bits/initspin.h>
-> 
-> __BEGIN_DECLS
-> 
-> /* Initializers.  */
-> 
-> #define PTHREAD_MUTEX_INITIALIZER \
->   {0, 0, 0, PTHREAD_MUTEX_ADAPTIVE_NP, __LOCK_INITIALIZER}
-> #ifdef __USE_GNU
-> # define PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP \
->   {0, 0, 0, PTHREAD_MUTEX_RECURSIVE_NP, __LOCK_INITIALIZER}
-> # define PTHREAD_ERRORCHECK_MUTEX_INITIALIZER_NP \
->   {0, 0, 0, PTHREAD_MUTEX_ERRORCHECK_NP, __LOCK_INITIALIZER}
-> # define PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP \
->   {0, 0, 0, PTHREAD_MUTEX_ADAPTIVE_NP, __LOCK_INITIALIZER}
-> #endif
-> 
-> 
-> This is included in another header file where I place some #ifdef
-> statements for  _PTHREAD_H,
-> PTHREAD_MUTEX_INITIALIZER, PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP, and
-> __USE_GNU.
-> I also defined __USE_GNU just before the header file and none of these
-> are redefined anywhere else.
-> 
-> >From this I notice all these defines are valid and present _except_
-> PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP.
-> I haven't figured out why this is so wired I don't see any possible
-> reason how this could be possible.
-> Am I out of my mind here? Is this really possible? Unless my
-> arm-uclibc is doing something strange, I don't see how this could be.
-> Anyone seen this before?  Thanks much.
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+My goal is to compile qt-embedded-4.4 for the dreambox-7025 (mipsel).
 
+Therefore I setup an oe environment within debian etch - or more precisly a 
+dreambox developer environment which is mostly based on oe. The dreambox 
+community provides a makefile which setups the environment and builds an 
+image w/o any user input:
+http://schwerkraft.elitedvb.net/plugins/scmcvs/cvsweb.php/~checkout~/Makefile-opendreambox?content-type=text%2Fplain;cvsroot=opendreambox
 
+This environment does not provide the qt-embedded-4.4 package, so I got it 
+from the openembedded git:
+http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=tree;f=packages/qt4;hb=HEAD
+I did the required steps to run bitbake manually and tried to build it which 
+failed:
 
+$> bitbake -c rebuild qt-embedded
+NOTE: Using cache in '/home/dreambox/dreambox-7025/cache/oe-cache.dreambox'
+NOTE: Handling BitBake files: - (4096/4096) [100 %]
+NOTE: Parsing finished. 3908 cached, 0 parsed, 160 skipped, 28 masked.
 
-Its not clear from your email what you might be facing. You can
-preprocess your source file with -E and see whats getting included
+NOTE: build 200807150100: started
 
-what happens when you use  -D_GNU_SOURCE ?
+OE Build Configuration:
+BB_VERSION     = "1.6.8"
+OE_REVISION    = "format_version "1"
 
-Thx
+new_manifest [0000000000000000000000000000000000000004]
 
--Khem
+old_revision [3bf15b642ccda5728a4a42fec49cefe5a7439ab4]"
+TARGET_ARCH    = "mipsel"
+TARGET_OS      = "linux"
+MACHINE        = "dm7025"
+DISTRO         = "opendreambox"
+DISTRO_VERSION = "1.5.0"
+TARGET_FPU     = "soft"
 
+NOTE: package qt-embedded-4.4.0: started
+NOTE: package qt-embedded-4.4.0-r4: task do_rebuild: started
+NOTE: package qt-embedded-4.4.0-r4: task do_clean: started
+NOTE: 
+removing /home/dreambox/dreambox-7025/build/tmp/work/qt-embedded-4.4.0-r4
+NOTE: 
+removing /home/dreambox/dreambox-7025/build/tmp/stamps/qt-embedded-4.4.0-r4.*
+NOTE: package qt-embedded-4.4.0-r4: task do_clean: completed
+NOTE: package qt-embedded-4.4.0-r4: task do_fetch: started
+NOTE: package qt-embedded-4.4.0-r4: task do_fetch: completed
+NOTE: package qt-embedded-4.4.0-r4: task do_unpack: started
+NOTE: 
+Unpacking /home/dreambox/dreambox-7025/sources/qt-embedded-linux-opensource-src-4.4.0.tar.bz2 
+to /home/dreambox/dreambox-7025/build/tmp/work/qt-embedded-4.4.0-r4/
+NOTE: 
+Unpacking /home/dreambox/dreambox-7025/openembedded/packages/qt4/qt-embedded-4.4.0/qconfig-oe.h 
+to /home/dreambox/dreambox-7025/build/tmp/work/qt-embedded-4.4.0-r4/
+NOTE: package qt-embedded-4.4.0-r4: task do_unpack: completed
+NOTE: package qt-embedded-4.4.0-r4: task do_patch: started
+NOTE: Applying patch '0001-cross-compile.patch'
+NOTE: Applying patch '0003-no-tools.patch'
+NOTE: Applying patch '0004-no-qmake.patch'
+NOTE: Applying patch '0005-fix-mkspecs.patch'
+NOTE: Applying patch 'build-tools.patch'
+NOTE: Applying patch '0006-freetype-host-includes.patch'
+NOTE: Applying patch '0007-openssl-host-includes.patch'
+NOTE: package qt-embedded-4.4.0-r4: task do_patch: completed
+NOTE: package qt-embedded-4.4.0-r4: task do_configure: started
+NOTE: exceptions.AssertionError: while evaluating:
+${@qt_endian(d)}
+NOTE: exceptions.AssertionError: while evaluating:
+${@qt_endian(d)}
+NOTE: exceptions.AssertionError: while evaluating:
+    cp ${WORKDIR}/qconfig-oe.h ${S}/src/corelib/global
+    unset QMAKESPEC
+    unset QTDIR
+    ln -sf ${STAGING_BINDIR_NATIVE}/qmake2 bin/qmake
+    ln -s linux-g++ mkspecs/${TARGET_OS}-oe-g++
+
+    echo "[Paths]"                                 > $QT_CONF_PATH
+    echo "Prefix=${prefix}"                       >> $QT_CONF_PATH
+    echo "Documentation=${docdir}/${QT_DIR_NAME}" >> $QT_CONF_PATH
+    echo "Headers=${includedir}/${QT_DIR_NAME}"   >> $QT_CONF_PATH
+    echo "Libraries=${libdir}"                    >> $QT_CONF_PATH
+    echo "Binaries=${bindir}"                     >> $QT_CONF_PATH
+    echo "Plugins=${libdir}/${QT_DIR_NAME}/plugins" >> $QT_CONF_PATH
+    echo "Data=${datadir}/${QT_DIR_NAME}"         >> $QT_CONF_PATH
+    echo "Translations=${datadir}/${QT_DIR_NAME}/translations" >> 
+$QT_CONF_PATH
+    echo "Settings=${sysconfdir}/${QT_DIR_NAME}"  >> $QT_CONF_PATH
+    echo "Examples=${bindir}/${QT_DIR_NAME}/examples" >> $QT_CONF_PATH
+    echo "Demos=${bindir}/${QT_DIR_NAME}/demos"   >> $QT_CONF_PATH
+
+    echo yes | ./configure -v \
+            -prefix ${prefix} \
+            -bindir ${bindir} \
+            -libdir ${libdir} \
+            -datadir ${datadir}/${QT_DIR_NAME} \
+            -sysconfdir ${sysconfdir}/${QT_DIR_NAME} \
+            -docdir ${docdir}/${QT_DIR_NAME} \
+            -headerdir ${includedir}/${QT_DIR_NAME} \
+            -plugindir ${libdir}/${QT_DIR_NAME}/plugins \
+            -translationdir ${datadir}/${QT_DIR_NAME}/translations \
+            -examplesdir ${bindir}/${QT_DIR_NAME}/examples \
+            -demosdir ${bindir}/${QT_DIR_NAME}/demos \
+            -platform ${TARGET_OS}-oe-g++ \
+            -xplatform ${TARGET_OS}-oe-g++ \
+            -embedded ${QT_ARCH} ${QT_ENDIAN} -fast \
+            -crossarch ${QT_ARCH} \
+            ${QT_CONFIG_FLAGS} -fast \
+            -L${STAGING_LIBDIR} -I${STAGING_INCDIR} \
+            -I${STAGING_INCDIR}/freetype2
+
+ERROR: function do_configure failed
+ERROR: see log 
+in /home/dreambox/dreambox-7025/build/tmp/work/qt-embedded-4.4.0-r4/temp/log.do_configure.9253
+NOTE: Task 
+failed: /home/dreambox/dreambox-7025/build/tmp/work/qt-embedded-4.4.0-r4/temp/log.do_configure.9253
+NOTE: package qt-embedded-4.4.0-r4: task do_configure: failed
+ERROR: Error in 
+executing: /home/dreambox/dreambox-7025/openembedded/packages/qt4/qt-embedded_4.4.0.bb
+ERROR: Exception:bb.build.EventException Message:('Function failed in 
+task: /home/dreambox/dreambox-7025/build/tmp/work/qt-embedded-4.4.0-r4/temp/log.do_configure.9253', 
+<bb.build.TaskFailed instance at 0xb2911c6c>)
+ERROR: Printing the environment of the function
+ERROR: Error in 
+executing: /home/dreambox/dreambox-7025/openembedded/packages/qt4/qt-embedded_4.4.0.bb
+ERROR: Exception:bb.build.EventException Message:('Function failed in 
+task: /home/dreambox/dreambox-7025/build/tmp/work/qt-embedded-4.4.0-r4/temp/log.do_configure.9253', 
+<bb.build.TaskFailed instance at 0xb2911c6c>)
+ERROR: Printing the environment of the function
+ERROR: TaskFailed event exception, aborting
+NOTE: package qt-embedded-4.4.0: failed
+ERROR: Build of qt-embedded failed
+
+$> cat [...]/log.do_configure.9253
+[...]/run.do_configure.9253: line 587: do_configure: command not found
+
+I'm not sure but I think this is caused by an older bitbake version, the 
+dreambox environment supports only bitbake-1.6.8 and before, when using 
+bitbake-1.8.x it fails on parsing the bitbake files:
+
+$> bitbake dreambox-image
+NOTE: Invalid cache found, rebuilding...
+ERROR: Error in executing:
+ERROR: Exception:exceptions.UnboundLocalError Message:local variable 'bb' 
+referenced before assignment
+ERROR: Printing the environment of the function
+ERROR:  0001:def __anonfunc():
+ERROR:  0002:   import exceptions
+ERROR:  0003:   need_host = bb.data.getVar('COMPATIBLE_HOST', d, 1)
+ERROR:  0004:   if need_host:
+ERROR:  0005:           import re
+ERROR:  0006:           this_host = bb.data.getVar('HOST_SYS', d, 1)
+ERROR:  0007:           if not re.match(need_host, this_host):
+ERROR: local variable 'bb' referenced before assignment while 
+parsing /home/dreambox/dreambox-7025/openembedded/packages/gpe-bluetooth/gpe-bluetooth_0.52.bb
+[...]
+
+For me it looks like the dreambox setup uses bitbake metadata files which 
+are incompatible to the latest bitbake versions while the qt-embedded 
+package needs latest bitbake.
+
+Can you confirm this and/or do you have some hints how to solve this 
+problem?
+
+Thanks & Regards
+Peter
 
 
