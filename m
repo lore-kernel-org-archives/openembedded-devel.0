@@ -1,22 +1,32 @@
-Received: from [216.145.245.198] (helo=mx02.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1KIoWi-0001y4-7u
-	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 19:41:24 +0200
-Received: from gw.mwester.net ([209.242.5.110] helo=[192.168.1.111])
-	by mx02.dls.net with esmtpa (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1KIoW5-0002tw-VD
-	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 12:40:46 -0500
-Message-ID: <487CE113.4040502@dls.net>
-Date: Tue, 15 Jul 2008 12:40:35 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.14) Gecko/20080421 Thunderbird/2.0.0.14 Mnenhy/0.7.5.666
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KIoXd-0001za-Vf
+	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 19:42:22 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KIoX2-0003lP-7z
+	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 17:41:44 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 15 Jul 2008 17:41:44 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 15 Jul 2008 17:41:44 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-References: <d9a6586e0807150126w6ceb8a0aj5a5b6bab4cb42cfc@mail.gmail.com>	<g5i16r$tb9$1@ger.gmane.org>
-	<d9a6586e0807151033h46763394y622641365568c8a9@mail.gmail.com>
-In-Reply-To: <d9a6586e0807151033h46763394y622641365568c8a9@mail.gmail.com>
-Subject: Re: help with bitbake recipe
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 15 Jul 2008 19:41:37 +0200
+Message-ID: <g5ingg$jid$1@ger.gmane.org>
+References: <d1b08f940807150529k4c318da1h54d93ec13a010cfe@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+In-Reply-To: <d1b08f940807150529k4c318da1h54d93ec13a010cfe@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: RFC: udev_124
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -30,25 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2008 17:41:24 -0000
+X-List-Received-Date: Tue, 15 Jul 2008 17:42:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Shawn Rutledge wrote:
-> On Tue, Jul 15, 2008 at 4:20 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->> Try altering FILES_${PN}, since that gets packages before ${PN}-doc
+Andrea Adami wrote:
+> Trying to solve an apparent race condition I upgraded to udev_124.
 > 
-> So does it subtract the files it found in FILES_${PN} from being
-> available for the following packages?
+> The mtn diff is attached here:
+> http://bugs.openembedded.net/show_bug.cgi?id=4118
 
-Yes, so you need to alter the pattern matching so that it matches only
-what you want in the base package.
+Great work.  Thanks for sharing.  Very much appreciated.
 
->> bitbake -b chicken_3.3.0.bb -c install -f ; bitbake -b chicken_3.3.0.bb -c
->> package_write
-> 
-> Thanks.
-
-mike (mwester)
 
 
