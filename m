@@ -1,32 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.142.184] (helo=ti-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KIibQ-0001TL-Dg
-	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 13:21:53 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KIiak-0002nE-3O
-	for openembedded-devel@openembedded.org; Tue, 15 Jul 2008 11:21:10 +0000
-Received: from wlan142160.mobiel.utwente.nl ([130.89.142.160])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 15 Jul 2008 11:21:10 +0000
-Received: from k.kooi by wlan142160.mobiel.utwente.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 15 Jul 2008 11:21:10 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 15 Jul 2008 13:20:59 +0200
-Message-ID: <g5i16r$tb9$1@ger.gmane.org>
-References: <d9a6586e0807150126w6ceb8a0aj5a5b6bab4cb42cfc@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: wlan142160.mobiel.utwente.nl
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
-In-Reply-To: <d9a6586e0807150126w6ceb8a0aj5a5b6bab4cb42cfc@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: help with bitbake recipe
+	(envelope-from <andrea.adami@gmail.com>) id 1KIjfO-0008HX-V0
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Jul 2008 14:30:03 +0200
+Received: by ti-out-0910.google.com with SMTP id d10so2367283tib.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jul 2008 05:29:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=5ShGwWsCbBn03v4UiU90MtYkvdwePfz02Q6tT9pjqc0=;
+	b=ezxRY3aBDKKY+Y/pimmDgnKWdyVXn/fl0ILEd5lcAmKVPBI1SaU5NPShoSsBthjHsE
+	Ezi2+MzOrRid1IRbEmIJ4ubIi2wTUf37GOYQxYK4duuCELs266AfGtEJgMaeB3+mUYlb
+	ayWwR+lG/zr/lkl2OJ+/tESTI9ZiZzoKQiAcc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=GawWAO1+knXTP1gHCzw7uaasWCx5yjM6pfvmlSRgnr37MXmkpZMyHW4Os1TQ0mF0QA
+	FLtlqHZKl3sii7R9OULj1BQQHkLlLvHyldYiTp6WOZ/yBcagKT8JsU+/9yG7fDa6Q3JK
+	BtWfQOTiVWjeR0zpFDxwZgs1xLKPCdMlnB1JQ=
+Received: by 10.151.106.4 with SMTP id i4mr177008ybm.119.1216124964301;
+	Tue, 15 Jul 2008 05:29:24 -0700 (PDT)
+Received: by 10.150.178.1 with HTTP; Tue, 15 Jul 2008 05:29:24 -0700 (PDT)
+Message-ID: <d1b08f940807150529k4c318da1h54d93ec13a010cfe@mail.gmail.com>
+Date: Tue, 15 Jul 2008 14:29:24 +0200
+From: "Andrea Adami" <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: RFC: udev_124
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,58 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2008 11:21:53 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 15 Jul 2008 12:30:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Shawn Rutledge wrote:
-> I'm trying to build some Chicken Scheme ipk's for OpenMoko.  It's
-> making them, but putting some docs in the main package, and not enough
-> stuff in the chicken-doc package.  Judging from other bb files it
-> looks like the thing to do is something like this, at the end:
->
-> FILES_chicken-doc = "${prefix}/share/chicken/doc ${prefix}/share/info
-> ${prefix}/share/man"
->
-> or maybe
->
-> FILES_${PN}-doc = "${prefix}/share/chicken/doc ${prefix}/share/info
-> ${prefix}/share/man"
+Trying to solve an apparent race condition I upgraded to udev_124.
 
-Try altering FILES_${PN}, since that gets packages before ${PN}-doc
+The mtn diff is attached here:
+http://bugs.openembedded.net/show_bug.cgi?id=4118
 
->
-> However that's not taking effect:
->
-> /var/media/moko/build/tmp/work/armv4t-angstrom-linux-gnueabi/chicken-3.3.0-r0
-> [neutron][01:08:10 AM] grep -r FILES_chick * 2>/dev/null
-> staging-pkg/staging/pkgdata/armv4t-angstrom-linux-gnueabi/runtime/chicken:FILES_chicken:
-> /usr/bin/* /usr/sbin/* /usr/libexec/* /usr/lib/lib*.so.* /etc /usr/com
-> /var /bin/* /sbin/* /lib/*.so* /usr/share/chicken /usr/lib/chicken/*
-> /usr/share/pixmaps /usr/share/applications /usr/share/idl
-> /usr/share/omf /usr/share/sounds /usr/lib/bonobo/servers
-> staging-pkg/staging/pkgdata/armv4t-angstrom-linux-gnueabi/runtime/chicken-dbg:FILES_chicken-dbg:
-> /usr/bin/.debug /usr/sbin/.debug /usr/libexec/.debug /usr/lib/.debug
-> /bin/.debug /sbin/.debug /lib/.debug /usr/lib/chicken/.debug
-> /usr/lib/matchbox-panel/.debug
-> staging-pkg/staging/pkgdata/armv4t-angstrom-linux-gnueabi/runtime/chicken-dev:FILES_chicken-dev:
-> /usr/include /usr/lib/lib*.so /usr/lib/*.la /usr/lib/*.a /usr/lib/*.o
-> /usr/lib/pkgconfig /lib/*.a /lib/*.o /usr/share/aclocal
-> staging-pkg/staging/pkgdata/armv4t-angstrom-linux-gnueabi/runtime/chicken-doc:FILES_chicken-doc:
-> /usr/share/doc /usr/share/man /usr/share/info /usr/share/gtk-doc
-> /usr/share/gnome/help
-> staging-pkg/staging/pkgdata/armv4t-angstrom-linux-gnueabi/runtime/chicken-locale:FILES_chicken-locale:
-> /usr/share/locale
->
-> I keep trying by doing
-> bitbake -vD chicken -c rebuild
+Looking at http://git.kernel.org/?p=linux/hotplug/udev.git;a=summary
+there are a couple of interesting patches: I applied the 'udevadm:
+settle - add verbose output when running into timeout' but I'd apply
+the 'udev.conf: udevcontrol -> udevadm control' patch too.
 
-bitbake -b chicken_3.3.0.bb -c install -f ; bitbake -b chicken_3.3.0.bb 
--c package_write
+The recipe configures and compiles fine  (see
+http://tinderbox.openembedded.net/packages/73537/ )
 
-regards,
-
-Koen
-
+Ant
 
 
