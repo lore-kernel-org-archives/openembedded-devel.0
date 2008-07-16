@@ -1,37 +1,37 @@
-Received: from [64.233.178.243] (helo=hs-out-0708.google.com)
+Received: from [66.249.82.231] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KJDr6-0007OV-Qm
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KJEGn-0007qO-PO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jul 2008 22:44:08 +0200
-Received: by hs-out-0708.google.com with SMTP id 23so1682012hsn.12
+	Wed, 16 Jul 2008 23:10:41 +0200
+Received: by wx-out-0506.google.com with SMTP id i29so2763471wxd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2008 13:43:26 -0700 (PDT)
+	Wed, 16 Jul 2008 14:09:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:content-disposition:references;
-	bh=kKHswFTAlg8gZ+O6bx9I576/P/7B09v3LGX0O5JOqx8=;
-	b=c9dtPY44PXcR6jpADWiSwzmsWdsvUHy3t1qlVlp58DF03e4QQHnL8mIwT1BMnQ++fJ
-	sGwWNrCM8dpMjX61JJfmpt3XMO9CdgKLgS40kAr9zRnvrcbSDbInXcn80QHywgW0YbvV
-	2K9zqSYCzJCfv4LroyF9LLxsKveAR7d9OB/IU=
+	bh=QFKBODUAVoJ5W/5HDYNk56hTx0xfnn0Md0RdXgX6fOY=;
+	b=rkg8BuuprqgUCpnmJjGl9sYySS00UN+8l6bTavLZgQ/RDhQD+HlI3kS98ZZeoF1QNK
+	npIA0Q6wMmUT4Ndt3AwNXcgkXpBiqgspgtXH2zbLxyN6b80lTKfCywB2KDNBL8bjmN9D
+	84Rt1OlAgFUqP2x3urC7dJyXWqBJD/h8mytGg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:in-reply-to:mime-version
 	:content-type:content-transfer-encoding:content-disposition
 	:references;
-	b=mq+uxWdfMNOh+XllP9vDBmq1CTilpTIl3HOomTAZ4CIx7XRHYu8uKiw7FxHmu5AE1N
-	bUDjaX+bMCgUg4rkW28RbjPNtwSjc7FueowBBZNpV8T+58ZgF4w2PUoU6s3uAfR1+le1
-	i3avs7QzQtmaMQMwObLWpK1KrXiHU29Qj02GU=
-Received: by 10.100.167.14 with SMTP id p14mr2774654ane.121.1216241006745;
-	Wed, 16 Jul 2008 13:43:26 -0700 (PDT)
-Received: by 10.100.174.18 with HTTP; Wed, 16 Jul 2008 13:43:26 -0700 (PDT)
-Message-ID: <c384c5ea0807161343s2085dda5ua5f526967583e293@mail.gmail.com>
-Date: Wed, 16 Jul 2008 22:43:26 +0200
+	b=pv7L4K/GynHvxD6mX0wYi7Kv28hxKw/izxC6crVZjMRrcs/OMtIz9YmhhXJTEqpzLi
+	SJhE7WiWbp3eD7GAoBvc8WPC2M9oOQ7msIVpwongwXAWQLrK88GK1xkfDvyncJJhXWWq
+	g983wMlLwp9+H1rS3DCCwa2n4zR5AyNAdxaqs=
+Received: by 10.100.226.6 with SMTP id y6mr2827531ang.115.1216242583542;
+	Wed, 16 Jul 2008 14:09:43 -0700 (PDT)
+Received: by 10.100.174.18 with HTTP; Wed, 16 Jul 2008 14:09:43 -0700 (PDT)
+Message-ID: <c384c5ea0807161409w6cad679dp4e1ef3820b36666e@mail.gmail.com>
+Date: Wed, 16 Jul 2008 23:09:43 +0200
 From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <487DACFF.5010504@gmail.com>
+In-Reply-To: <g5kbqa$but$1@ger.gmane.org>
 MIME-Version: 1.0
-References: <1216087105.10214.7.camel@isis> <487DACFF.5010504@gmail.com>
-Subject: Re: [RFC]: Toolchain build sequence alteration.
+References: <735693612@web.de> <g5kbqa$but$1@ger.gmane.org>
+Subject: Re: squashfs-lzma bitbake recipe needed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -45,28 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2008 20:44:09 -0000
+X-List-Received-Date: Wed, 16 Jul 2008 21:10:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Khem,
+Hello,
 
-On Wed, Jul 16, 2008 at 10:10 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> I have not tested it on older compiler/library combinations but I think
->> it will work there too as I have build various combinations in the past
->> with same sequence outside OE.
->>
->> Comments and feedback is welcome.
->>
+On Wed, Jul 16, 2008 at 10:34 AM, Rolf Leggewie
+<no2spam@nospam.arcornews.de> wrote:
 
-I will try some combinations over the next few days.
+>> The most important ingredient for this to work is the use of the squashfs filesystem as the storage format as I did not want to create just another file format.
+>
+I have used squashfs-lzma with OpenEmbedded for years now, mostly on
+IXP4xx platforms.
 
-anyone: This would be a perfect candidate for some good testing
-outside of .dev, what would be the best approach for that currently
-besides the posted patch?
+I didn't know it was special, but it might be most of our kernels do
+not have the patches in place, so thanks for any pointers/work there.
 
-Excellent work by the way!
+Really, squashfs-lzma should be mainlined.
 
 Regards,
 -- 
