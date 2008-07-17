@@ -1,37 +1,35 @@
-Received: from [64.233.178.243] (helo=hs-out-0708.google.com)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KJEP1-00084Y-9m
+	(envelope-from <john_lee@openmoko.com>) id 1KJKu5-0007aW-RA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jul 2008 23:19:11 +0200
-Received: by hs-out-0708.google.com with SMTP id 23so1688130hsn.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2008 14:18:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=hsWoRlCyMZH6p2Tm60QwGFb5JD23Nz+RKgwzt6xedDk=;
-	b=m0O29vmU1OHBXBJBPE98H9+9kLlcsC6xyjFYfDKpVWkQNYgZC0mnKKO4cyS14dveZL
-	LyC2VuOjorOqiwS8PJB+gLgMZsD34Yd+FNHgx0ukNs0f+FFFJHB/C+Qnglx2bc+RlPuN
-	OUHS6QsP2+6LHy90X1zZlnCP6iOHqNZZcTwf4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=LMnq3inOKgRcwYkUTVK8u/j9Lx1iNLT6vIWjMfiLFeKbXoXNfUI3soyKsUElo8PR+3
-	0jPSPma8/iWVAU3HnqLCIgyxWWYlFa2L9xEhJJjVE/SQVClorwzYZe1ysfxZMwLlg5kF
-	S7r5Rs+FpnTdpiPIK2LXBJ8OxVec2v03w9DKs=
-Received: by 10.100.31.3 with SMTP id e3mr2909280ane.21.1216243109296;
-	Wed, 16 Jul 2008 14:18:29 -0700 (PDT)
-Received: by 10.100.174.18 with HTTP; Wed, 16 Jul 2008 14:18:29 -0700 (PDT)
-Message-ID: <c384c5ea0807161418w5e6fdd1cgceef7e4f5a165da6@mail.gmail.com>
-Date: Wed, 16 Jul 2008 23:18:29 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <735693612@web.de>
+	Thu, 17 Jul 2008 06:15:42 +0200
+Received: from [172.16.23.111] (helo=buddha.tw.openmoko.com)
+	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
+	id 1KJKtC-0005Gb-RG; Thu, 17 Jul 2008 12:14:55 +0800
+Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
+	(envelope-from <john_lee@openmoko.com>)
+	id 1KJKsB-000124-CH; Thu, 17 Jul 2008 12:13:43 +0800
+Date: Thu, 17 Jul 2008 12:13:43 +0800
+From: John Lee <john_lee@openmoko.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20080717041343.GA25710@buddha.tw.openmoko.com>
+Mail-Followup-To: openembedded-devel
+	<openembedded-devel@lists.openembedded.org>, 
+	Michael 'Mickey' Lauer <mickey@openmoko.org>
 MIME-Version: 1.0
-References: <735693612@web.de>
-Subject: Re: squashfs-lzma bitbake recipe needed
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 172.16.23.111
+X-SA-Exim-Mail-From: john_lee@openmoko.com
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Cc: Michael 'Mickey' Lauer <mickey@openmoko.org>
+Subject: doctest in python-misc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -45,26 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2008 21:19:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Jul 2008 04:15:42 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello,
+Hi,
 
-On Wed, Jul 16, 2008 at 9:52 AM, Johannes Schauer <j.schauer@email.de> wrote:
-> as they are a bit unmaintained i wrote this howto to natively compile them against a 2.6.24 kernel source: http://mokopedia.mister-muffin.de/wiki/BuildingSquashfsLzma
->
+I was trying to use doctest the other day and found out that it is in
+python-misc.  It requires python-{unittest,debugger,pprint} but since
+python-misc does not have rdepends in manifest.inc, these dependencies
+will not be installed automatically.
 
-I submitted my work agains the 2.6.24 and 2.6.25 trees of the IXP4xx
-kernel tree:
+I wonder if it's okay to make python-doctest a package?  I can do that
+if Mickey agrees.
 
-http://svn.nslu2-linux.org/svnroot/kernel/trunk/patches/2.6.25/squashfs/
-
-I am using it on other platforms as well.
 
 Regards,
--- 
-Leon
+John
 
 
