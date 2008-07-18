@@ -1,32 +1,40 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.134.187] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KJteF-0006dp-6O
-	for openembedded-devel@openembedded.org; Fri, 18 Jul 2008 19:21:39 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KJtdP-0007oy-8E
-	for openembedded-devel@openembedded.org; Fri, 18 Jul 2008 17:20:47 +0000
-Received: from host217-36-23-196.in-addr.btopenworld.com ([217.36.23.196])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 18 Jul 2008 17:20:47 +0000
-Received: from k.kooi by host217-36-23-196.in-addr.btopenworld.com with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 18 Jul 2008 17:20:47 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 18 Jul 2008 18:20:34 +0100
-Message-ID: <g5qjd2$5tg$1@ger.gmane.org>
-References: <4880715F.80707@atmel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: host217-36-23-196.in-addr.btopenworld.com
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
-In-Reply-To: <4880715F.80707@atmel.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: How update kernel recipe?
+	(envelope-from <shanevolpe@gmail.com>) id 1KJujE-0005hi-Th
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Jul 2008 20:30:52 +0200
+Received: by mu-out-0910.google.com with SMTP id g7so540212muf.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jul 2008 11:30:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:cc:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=DHfD5GSq3RTZvsS97LXDYQBh/QNlNM8ewBxRoAnFY5M=;
+	b=ggy1+cg5WMhZg/dk0brBc3j1T5gWR0KohXXFb5g9Tdi2Nz1bP8zh/ZXtgZA4LEu1/2
+	6F8hMN2Ri1Kf27O1sWSXof7CmdbL+QPrtCAAl5VT0EaCFGhVAzTRMdSz4niaTr+XrSGu
+	D2RkvmeP6NkNIhkjxpB5RYDj5NziMCLD7JDVQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=Q7cMSNf1kXpqZBZdpX34FsF2ZOt/GJLjT3DOWqXmze61rc3my7BVkQc9Sf9aFdhGMX
+	LNr24QcXbYDcaLZUquW/gkZIE5IQaW6b1VTTsBa6cbjB5j3Z8ywcSavPIRM0WKwmULkY
+	c4k897VeW6si5aAJI8VkTnaq7KhaXoEfrrNco=
+Received: by 10.103.137.5 with SMTP id p5mr356302mun.114.1216405802855;
+	Fri, 18 Jul 2008 11:30:02 -0700 (PDT)
+Received: by 10.103.225.18 with HTTP; Fri, 18 Jul 2008 11:30:02 -0700 (PDT)
+Message-ID: <8c7950360807181130k23859b50s7e8768608d509d3@mail.gmail.com>
+Date: Fri, 18 Jul 2008 14:30:02 -0400
+From: "Shane Volpe" <shanevolpe@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1216115118.5345.30.camel@dax.rpnet.com>
+MIME-Version: 1.0
+References: <1213345201.13942.3.camel@dax.rpnet.com>
+	<g5fge0$e5$1@ger.gmane.org> <g5g7io$mu3$1@ger.gmane.org>
+	<g5gn7j$es4$2@ger.gmane.org> <1216115118.5345.30.camel@dax.rpnet.com>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Core team (was: Switching SCM to git and commit/review policy)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,213 +48,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2008 17:21:39 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 18 Jul 2008 18:30:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Ulf Samuelsson wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> I have built "gpe-image" for AT91SAM9263EK
-> after fixing libsvg-cairo manually due to the LT_VERSION problem.
->
-> I would like to upgrade the kernel for AT91SAM9263EK.
-> I created a recipe for linux-2.6.25.10 called
-> "packages/linux/linux-atmel_2.6.25.10.bb" (found below)
+For what its worth, I think projects do much better with a core team.
+It seems projects that try to appease to everyone all the time never
+make much progress.  I'm not even close to being part of the core team
+and I feel any view point I have had in the past has been listened to,
+wether it was IRC conversations or email posts.  Quite a few times it
+has been the *core* members responding to my concerns and or
+questions.  I have been involved with several open source projects and
+I think OE is one of the better run ones and has the most interaction
+between the core developers and all other developers.
+Regards,
+Shane
+irc: svolpe: the one with a bad network connection and always drops on/off :-)
 
-Yuck! There is *absolutely* no need to define 
-linux-we-are-so-cool-we-have-our-company-name-the-kernel-recipe-filename.bb 
-files, you should be perfectly able to reuse the linux_2.6.25 recipe, as 
-avr32 already does.
-
-> with DEFAULT_PREFERENCE_at91sam9263ek = "30"
+On Tue, Jul 15, 2008 at 5:45 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Tue, 2008-07-15 at 01:24 +0200, Rolf Leggewie wrote:
+>> Well, after this dragged on for well over half a year now and things got
+>> stalled several times this was not the kind of response I was expecting.
+>>  But I'll gladly pick up the ball you passed here to ask a more general
+>> question or raise a more general concern I've been having lately.
 >
-> 2.6.25.10 is properly built when I run:
-> $ bitbake -b linux-atmel
+> Several of us feel bad that this has dragged on. There are various
+> reasons for that with no one thing or person being responsible. We were
+> kind of hoping the OE e.V. would solve some of the problems but whilst
+> that is moving forwards its not going to happen soon enough so we're
+> trying to move the SCM issue forwards without it. There are also large
+> time pressures on the people involved. Personally, I know I'm at risk of
+> totally cracking up if I try and do too much at once so I'm moving
+> slowly. I'd prefer to do that than totally burn out, sorry ;-).
 >
-> When I run
-> $ bitbake -b gpe-image
-> it still builds "packages/linux/linux_2.6.20.bb"
-> with DEFAULT_PREFERENCE_at91sam9263ek = "20"
+>> Quite frankly, as of late, when it comes to OE governance, I've been
+>> uneasy a lot.  For one, there's this ominous group of OE core that does
+>> a lot of things behind closed doors.
 >
-> The at91sam9263ek.conf file says:
-> PREFERRED_PROVIDER_virtual/kernel = "linux"
+> Firstly, there isn't that much discussion "behind closed doors". Some
+> discussion did happen there simply because we couldn't reach a consensus
+> on the -devel mailing list but there has been much less that you
+> probably think, see the time issues mentioned above.
 >
-> I have been trying to figure out how the recipe selection
-> process works, and I assume that all bb files starting
-> with "linux" will be considered, and then the
-> highest DEFAULT_PREFERENCE_<machine> will be used
-> to select linux.
+> The results of that discussion have been made clear - we want to switch
+> to git, that is unanimous. The question is what kind of commit policy
+> goes with the change. Even reaching that much of a decision is a major
+> step forwards but we need to finish things off.
 >
-> This obviously is not correct, since 2.6.20 is built.
+>> It is not completely clear when
+>> and why it was established, why the communication is not open, who is a
+>> member and how it relates to ordinary members of the community.  Is OE
+>> still an open project?  Is anybody outside core just a little-valued
+>> monkey from which we gladly take code but leave out of any kind of
+>> steering decision?
 >
-> Do I need to change PREFERRED_PROVIDER_virtual/kernel
-> to "linux-atmel"?
-> In that case, why?
+> For the record, as I understand it, the OE core team consists of:
 >
+>  - Holger Freyther
+>  - Marcin Juszkiewicz
+>  - Koen Kooi
+>  - Richard Purdie
+>  - Dr. Michael Lauer
+>  - Graeme Gregory
+>  - Philip Balister
 >
+> Why was this established and when? Good questions. When, I'm not sure
+> about, the above group of people are long standing devs who've tried to
+> guide the project at various times. Bar the last two people that group
+> of people have been guiding the project for several years. The last two
+> people were "invited" more recently to try and add more opinions and
+> remove any claims of bias.
 >
-> "conf/machine/at91wsam9263ek.conf"
-> ===================================================================
-> #@TYPE: Machine
-> #@Name: Atmel AT91SAM9263EK Development Platform
-> #@DESCRIPTION: Machine configuration for the at91sam9263ek development
-> board with a at91sam9263 processor
+> Why? The problem is how does OE make a decision? The above group has
+> tried to guide the project a bit and put some kind of organisation and
+> decicion making process in place. The plan is to hand over to the e.V.
+> and maybe elect a core team properly once we're in a position to do so.
+> We're not trying to grab power, steal the project or do anything else
+> "evil", we just want to move OE forwards and try and resolve some
+> ongoing problematic issues.
 >
-> TARGET_ARCH = "arm"
-> PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
+>> Is OE still an open project?
 >
-> PREFERRED_PROVIDER_virtual/kernel = "linux"
-> PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+> Yes. No decisions have been made without discussion on the -devel
+> mailing list.
 >
-> #don't try to access tty1
-> USE_VT = "0"
+>> Is anybody outside core just a little-valued
+>> monkey from which we gladly take code but leave out of any kind of
+>> steering decision?
 >
-> MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget screen"
+> See above. Nobody is under valued and we do try to listen to all view
+> points. The main reason the core team exists is to give some method of
+> actually making a final decision.
 >
-> # used by sysvinit_2
-> SERIAL_CONSOLE = "115200 ttyS0"
-> IMAGE_FSTYPES ?= "jffs2"
-> EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
+> Personally, in time I expect the core team to be replaced with something
+> elected by the e.V. with clear policies on what its responsible for.
+> This stuff does take time though...
 >
-> require conf/machine/include/tune-arm926ejs.inc
+> Cheers,
 >
-> KERNEL_IMAGETYPE = "uImage"
->
->
-> packages/linux/linux-atmel_2.6.25.10.bb
-> =================================================================
-> require linux.inc
->
-> DEFAULT_PREFERENCE = "-1"
-> DEFAULT_PREFERENCE_at91sam9rl64ek = "30"
-> DEFAULT_PREFERENCE_at91sam9263ek = "30"
-> DEFAULT_PREFERENCE_at91sam9261ek = "30"
-> DEFAULT_PREFERENCE_at91sam9260ek = "30"
-> DEFAULT_PREFERENCE_at91cap9adk = "30"
-> DEFAULT_PREFERENCE_kb9202 = "30"
-> DEFAULT_PREFERENCE_at32stk1000 = "2"
-> DEFAULT_PREFERENCE_atngw100 = "1"
->
-> BASE_KERNEL_VERSION = "2.6.25"
-> KERNEL_VERSION = "2.6.25.10"
-> KERNEL_RELEASE = "2.6.25.10"
->
-> PR = "r2"
->
-> SRC_URI =
-> "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${BASE_KERNEL_VERSION}.tar.bz2
->
-> \
->
-> ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${KERNEL_VERSION}.bz2;patch=1
->
-> \
-> ~ "
->
-> SRC_URI_append_at91sam9rl64ek = "
-> http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-> file://defconfig \
-> ~ "
->
-> SRC_URI_append_at91sam9263ek = "
-> http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-> file://defconfig \
-> ~ "
->
-> SRC_URI_append_at91sam9261ek = "
-> http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-> file://defconfig \
-> ~ "
->
-> SRC_URI_append_at91sam9260ek = "
-> http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-> file://defconfig \
-> ~ "
->
-> SRC_URI_append_at91cap9adk = "
-> http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-> file://defconfig \
-> ~ "
->
-> SRC_URI_append_kb9202 = "
-> http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-> file://defconfig \
-> ~ "
->
-> SRC_URI_append_at32stk1000 = " \
-> http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.25.10.atmel.2.patch.bz2;patch=1
->
-> \
-> file://defconfig \
-> "
-> SRC_URI_append_atngw100 = " \
-> http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.25.10.atmel.2.patch.bz2;patch=1
->
-> \
-> file://defconfig \
-> "
->
-> S = "${WORKDIR}/linux-${KERNEL_VERSION}"
->
-> packages/linux/linux_2.6.20.bb
-> =================================================================
-> require linux.inc
->
-> DEFAULT_PREFERENCE_at91sam9263ek = "20"
-> DEFAULT_PREFERENCE_at91sam9261ek = "20"
-> DEFAULT_PREFERENCE_at91sam9260ek = "20"
->
-> PR = "r8"
->
-> SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
-> ~ file://defconfig"
->
-> SRC_URI_append_n2100 = "\
-> file://n2100-r8169-parity.patch;patch=1 \
-> file://rtc-rs5c372-n2100.patch;patch=1 \
-> "
->
-> SRC_URI_append_at91sam9263ek = " \
->
-> http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;patch=1 \
->
-> http://www.at91.com/repFichier/Project-217/linux-${PV}-at91-exp.diff.bz2;patch=1
->
-> \
-> ~ "
-> SRC_URI_append_at91sam9261ek = " \
->
-> http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;patch=1 \
->
-> http://www.at91.com/repFichier/Project-217/linux-${PV}-at91-exp.diff.bz2;patch=1
->
-> \
-> ~ "
-> SRC_URI_append_at91sam9260ek = " \
->
-> http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;patch=1 \
->
-> http://www.at91.com/repFichier/Project-217/linux-${PV}-at91-exp.diff.bz2;patch=1
->
-> \
-> ~ "
+> Richard
 >
 >
 >
 >
-> BR
-> Ulf Samuelsson
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v2.0.4-svn0 (GNU/Linux)
-> Comment: Using GnuPG with SUSE - http://enigmail.mozdev.org
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> iD8DBQFIgHFfAyRRH5cXxqwRAvNAAJ9Q0LM1sRfCdXjCy+GAtm/VQNddtACfe4EK
-> pbQY5qpZCBJkbHhw3vx0WBg=
-> =3NzB
-> -----END PGP SIGNATURE-----
 
 
+
+-- 
+Registered Linux User: #293401
 
 
