@@ -1,27 +1,27 @@
-Received: from [81.228.8.182] (helo=av10-2-sn2.hy.skanova.net)
+Received: from [195.65.72.27] (helo=bagnes.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1KJnTG-0006VM-33
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jul 2008 12:45:54 +0200
-Received: by av10-2-sn2.hy.skanova.net (Postfix, from userid 502)
-	id EBA1437F18; Fri, 18 Jul 2008 12:45:03 +0200 (CEST)
-Received: from smtp4-1-sn2.hy.skanova.net (smtp4-1-sn2.hy.skanova.net
-	[81.228.8.92])
-	by av10-2-sn2.hy.skanova.net (Postfix) with ESMTP id D836C37E64
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2008 12:45:03 +0200 (CEST)
-Received: from [10.175.196.221] (213-67-42-101-no158.tbcn.telia.com
-	[213.67.42.101])
-	by smtp4-1-sn2.hy.skanova.net (Postfix) with ESMTP id B371837E44
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2008 12:45:03 +0200 (CEST)
-Message-ID: <48807326.90609@atmel.com>
-Date: Fri, 18 Jul 2008 12:40:38 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080421)
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1KJnXm-0006Za-IY
+	for openembedded-devel@openembedded.org; Fri, 18 Jul 2008 12:50:34 +0200
+Received: from fribh01.corp.atmel.com (FRIBH01 [10.175.30.10])
+	by bagnes.atmel.com (8.13.8+Sun/8.13.8) with ESMTP id m6IAkI2u004151
+	for <openembedded-devel@openembedded.org>;
+	Fri, 18 Jul 2008 03:46:18 -0700 (PDT)
+Received: from frimb01.corp.atmel.com ([10.175.30.12]) by
+	fribh01.corp.atmel.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 18 Jul 2008 12:49:44 +0200
+Received: from aeglos ([172.24.18.149]) by frimb01.corp.atmel.com with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 18 Jul 2008 12:49:42 +0200
+Message-ID: <86E7D4E2E8B444CB8C710993E2976AD2@aeglos>
+From: "Ulf Samuelsson" <ulf.samuelsson@atmel.com>
+To: <openembedded-devel@openembedded.org>
+Date: Fri, 18 Jul 2008 12:49:14 +0200
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.6
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.5512
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5512
+X-OriginalArrivalTime: 18 Jul 2008 10:49:43.0571 (UTC)
+	FILETIME=[FCAFDE30:01C8E8C3]
 Subject: How update kernel recipe??
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -36,13 +36,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2008 10:45:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 18 Jul 2008 10:50:34 -0000
+Content-Type: text/plain; format=flowed; charset="iso-8859-1";
+	reply-type=response
 Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
 
 I have built "gpe-image" for AT91SAM9263EK
 after fixing libsvg-cairo manually due to the LT_VERSION problem.
@@ -115,9 +112,9 @@ DEFAULT_PREFERENCE_at91sam9263ek = "30"
 DEFAULT_PREFERENCE_at91sam9261ek = "30"
 DEFAULT_PREFERENCE_at91sam9260ek = "30"
 DEFAULT_PREFERENCE_at91cap9adk   = "30"
-DEFAULT_PREFERENCE_kb9202	 = "30"
+DEFAULT_PREFERENCE_kb9202 = "30"
 DEFAULT_PREFERENCE_at32stk1000   = "2"
-DEFAULT_PREFERENCE_atngw100   	 = "1"
+DEFAULT_PREFERENCE_atngw100   = "1"
 
 BASE_KERNEL_VERSION = "2.6.25"
 KERNEL_VERSION = "2.6.25.10"
@@ -135,44 +132,44 @@ ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${KERNEL_VERSION}.bz2;patch=1
 
 SRC_URI_append_at91sam9rl64ek = "
 http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-		          file://defconfig \
+          file://defconfig \
 ~                               "
 
 SRC_URI_append_at91sam9263ek = "
 http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-		          file://defconfig \
+          file://defconfig \
 ~                               "
 
 SRC_URI_append_at91sam9261ek = "
 http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-		          file://defconfig \
+          file://defconfig \
 ~                               "
 
 SRC_URI_append_at91sam9260ek = "
 http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-		          file://defconfig \
+          file://defconfig \
 ~                               "
 
 SRC_URI_append_at91cap9adk = "
 http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-		          file://defconfig \
+          file://defconfig \
 ~                               "
 
 SRC_URI_append_kb9202 = "
 http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
-		          file://defconfig \
+          file://defconfig \
 ~                               "
 
 SRC_URI_append_at32stk1000 = " \
-	http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.25.10.atmel.2.patch.bz2;patch=1
+http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.25.10.atmel.2.patch.bz2;patch=1
 \
-		          file://defconfig \
-			       "
+          file://defconfig \
+       "
 SRC_URI_append_atngw100 = " \
-	http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.25.10.atmel.2.patch.bz2;patch=1
+http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.25.10.atmel.2.patch.bz2;patch=1
 \
-		          file://defconfig \
-			       "
+          file://defconfig \
+       "
 
 S = "${WORKDIR}/linux-${KERNEL_VERSION}"
 
@@ -190,9 +187,9 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
 ~           file://defconfig"
 
 SRC_URI_append_n2100 = "\
-	   file://n2100-r8169-parity.patch;patch=1 \
-	   file://rtc-rs5c372-n2100.patch;patch=1 \
-	   "
+   file://n2100-r8169-parity.patch;patch=1 \
+   file://rtc-rs5c372-n2100.patch;patch=1 \
+   "
 
 SRC_URI_append_at91sam9263ek = " \
 
@@ -221,13 +218,7 @@ http://www.at91.com/repFichier/Project-217/linux-${PV}-at91-exp.diff.bz2;patch=1
 
 BR
 Ulf Samuelsson
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.4-svn0 (GNU/Linux)
-Comment: Using GnuPG with SUSE - http://enigmail.mozdev.org
 
-iD8DBQFIgHMmAyRRH5cXxqwRAlpnAKCMB5YvHQZafSF7dTbB70B4+dtLzgCgo1JN
-UbLmPEJKuNARqEfFqMy5xyw=
-=T8dR
------END PGP SIGNATURE-----
+
 
 
