@@ -1,28 +1,28 @@
-Received: from [81.228.9.181] (helo=av7-1-sn3.vrr.skanova.net)
+Received: from [81.228.8.182] (helo=av10-2-sn2.hy.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1KJnLv-0006PS-7M
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1KJnTG-0006VM-33
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jul 2008 12:38:19 +0200
-Received: by av7-1-sn3.vrr.skanova.net (Postfix, from userid 502)
-	id 9DE9838004; Fri, 18 Jul 2008 12:24:24 +0200 (CEST)
-Received: from smtp3-1-sn3.vrr.skanova.net (smtp3-1-sn3.vrr.skanova.net
-	[81.228.9.101])
-	by av7-1-sn3.vrr.skanova.net (Postfix) with ESMTP id 5FE6E380F8
+	Fri, 18 Jul 2008 12:45:54 +0200
+Received: by av10-2-sn2.hy.skanova.net (Postfix, from userid 502)
+	id EBA1437F18; Fri, 18 Jul 2008 12:45:03 +0200 (CEST)
+Received: from smtp4-1-sn2.hy.skanova.net (smtp4-1-sn2.hy.skanova.net
+	[81.228.8.92])
+	by av10-2-sn2.hy.skanova.net (Postfix) with ESMTP id D836C37E64
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2008 12:24:24 +0200 (CEST)
+	Fri, 18 Jul 2008 12:45:03 +0200 (CEST)
 Received: from [10.175.196.221] (213-67-42-101-no158.tbcn.telia.com
 	[213.67.42.101])
-	by smtp3-1-sn3.vrr.skanova.net (Postfix) with ESMTP id 9870E37E45
+	by smtp4-1-sn2.hy.skanova.net (Postfix) with ESMTP id B371837E44
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2008 12:37:28 +0200 (CEST)
-Message-ID: <4880715F.80707@atmel.com>
-Date: Fri, 18 Jul 2008 12:33:03 +0200
+	Fri, 18 Jul 2008 12:45:03 +0200 (CEST)
+Message-ID: <48807326.90609@atmel.com>
+Date: Fri, 18 Jul 2008 12:40:38 +0200
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080421)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 X-Enigmail-Version: 0.95.6
-Subject: How update kernel recipe?
+Subject: How update kernel recipe??
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -36,12 +36,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2008 10:38:19 -0000
+X-List-Received-Date: Fri, 18 Jul 2008 10:45:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
+
 
 I have built "gpe-image" for AT91SAM9263EK
 after fixing libsvg-cairo manually due to the LT_VERSION problem.
@@ -224,9 +225,9 @@ Ulf Samuelsson
 Version: GnuPG v2.0.4-svn0 (GNU/Linux)
 Comment: Using GnuPG with SUSE - http://enigmail.mozdev.org
 
-iD8DBQFIgHFfAyRRH5cXxqwRAvNAAJ9Q0LM1sRfCdXjCy+GAtm/VQNddtACfe4EK
-pbQY5qpZCBJkbHhw3vx0WBg=
-=3NzB
+iD8DBQFIgHMmAyRRH5cXxqwRAlpnAKCMB5YvHQZafSF7dTbB70B4+dtLzgCgo1JN
+UbLmPEJKuNARqEfFqMy5xyw=
+=T8dR
 -----END PGP SIGNATURE-----
 
 
