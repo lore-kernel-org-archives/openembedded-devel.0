@@ -1,34 +1,28 @@
-Received: from [209.85.132.251] (helo=an-out-0708.google.com)
+Received: from [81.228.9.181] (helo=av7-1-sn3.vrr.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <e.robertson.svg@gmail.com>) id 1KJYGa-0000Ht-9B
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1KJnLv-0006PS-7M
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jul 2008 20:31:48 +0200
-Received: by an-out-0708.google.com with SMTP id b38so152340ana.83
+	Fri, 18 Jul 2008 12:38:19 +0200
+Received: by av7-1-sn3.vrr.skanova.net (Postfix, from userid 502)
+	id 9DE9838004; Fri, 18 Jul 2008 12:24:24 +0200 (CEST)
+Received: from smtp3-1-sn3.vrr.skanova.net (smtp3-1-sn3.vrr.skanova.net
+	[81.228.9.101])
+	by av7-1-sn3.vrr.skanova.net (Postfix) with ESMTP id 5FE6E380F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2008 11:31:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=mhP8n0QoghonIrgCttq9MgnsvWfsbTj+iL8lzGLf9vg=;
-	b=GCtLQ0N0WFFegYhNbDIsFqwuqznPd9ZlByf+QTVv1Kd1kksS9OC6V8OrEAETGf82xD
-	DT5pZ30AetU5LU/ediJUcNN5CCx0SOEvpDPbJ5+yArCWXYTWE1IEF5Eh0MX/k6UP/k8L
-	wFR8Akd2iIJS9eKz4LKbBq60Or4OvISyYCyBc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=Fdrc2G2uBFKcY/P4sZMYW77diP33D+89gVLcgOhNIJlB3Wp7DoKGN4U6P76RG9EioO
-	nqrPNJqdRX/IwjFMU+0OymYhLjqPMpYsLFHf0AaHT3UNuRWawXl+6d2JBAbH+iS4dx3O
-	t5s+DzP2wHKoeQF2hIeFV78hjaujfkYl4ZR20=
-Received: by 10.100.110.15 with SMTP id i15mr4547854anc.130.1216319462436;
-	Thu, 17 Jul 2008 11:31:02 -0700 (PDT)
-Received: by 10.100.137.1 with HTTP; Thu, 17 Jul 2008 11:31:02 -0700 (PDT)
-Message-ID: <3972542e0807171131t2928a73ex520179d526caccdd@mail.gmail.com>
-Date: Thu, 17 Jul 2008 13:31:02 -0500
-From: "E Robertson" <e.robertson.svg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Fri, 18 Jul 2008 12:24:24 +0200 (CEST)
+Received: from [10.175.196.221] (213-67-42-101-no158.tbcn.telia.com
+	[213.67.42.101])
+	by smtp3-1-sn3.vrr.skanova.net (Postfix) with ESMTP id 9870E37E45
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jul 2008 12:37:28 +0200 (CEST)
+Message-ID: <4880715F.80707@atmel.com>
+Date: Fri, 18 Jul 2008 12:33:03 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080421)
 MIME-Version: 1.0
-Subject: what is "No module named pstats"?
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.6
+Subject: How update kernel recipe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -42,29 +36,197 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jul 2008 18:31:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 18 Jul 2008 10:38:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi,
-I I go this error during the stage build it is always and only during
-the stage. so I use this comand "bitbake -vP -b touch257 -c stage.
-My stage routing in the bb file is ok just like any other.
-Do I need to add this to any other file to complete the last phase?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-NOTE: package touch257-2.0.8.0: started
-ERROR: InvalidTask event exception, aborting
-NOTE: package touch257-2.0.8.0: failed
-ERROR: Build of 'touch257' failed
-Traceback (most recent call last):
-  File "/usr/bin/bitbake", line 134, in <module>
-    main()
-  File "/usr/bin/bitbake", line 123, in main
-    import pstats
-ImportError: No module named pstats
+I have built "gpe-image" for AT91SAM9263EK
+after fixing libsvg-cairo manually due to the LT_VERSION problem.
+
+I would like to upgrade the kernel for AT91SAM9263EK.
+I created a recipe for linux-2.6.25.10 called
+"packages/linux/linux-atmel_2.6.25.10.bb" (found below)
+with DEFAULT_PREFERENCE_at91sam9263ek = "30"
+
+2.6.25.10 is properly built when I run:
+$ bitbake -b linux-atmel
+
+When I run
+$ bitbake -b gpe-image
+it still builds "packages/linux/linux_2.6.20.bb"
+with DEFAULT_PREFERENCE_at91sam9263ek = "20"
+
+The at91sam9263ek.conf file says:
+PREFERRED_PROVIDER_virtual/kernel = "linux"
+
+I have been trying to figure out how the recipe selection
+process works, and I assume that all bb files starting
+with "linux" will be considered, and then the
+highest DEFAULT_PREFERENCE_<machine> will be used
+to select linux.
+
+This obviously is not correct, since 2.6.20 is built.
+
+Do I need to change PREFERRED_PROVIDER_virtual/kernel
+to "linux-atmel"?
+In that case, why?
 
 
-Thanks.
+
+"conf/machine/at91wsam9263ek.conf"
+===================================================================
+#@TYPE: Machine
+#@Name: Atmel AT91SAM9263EK Development Platform
+#@DESCRIPTION: Machine configuration for the at91sam9263ek development
+board with a at91sam9263 processor
+
+TARGET_ARCH = "arm"
+PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
+
+PREFERRED_PROVIDER_virtual/kernel = "linux"
+PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+
+#don't try to access tty1
+USE_VT = "0"
+
+MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget screen"
+
+# used by sysvinit_2
+SERIAL_CONSOLE = "115200 ttyS0"
+IMAGE_FSTYPES ?= "jffs2"
+EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
+
+require conf/machine/include/tune-arm926ejs.inc
+
+KERNEL_IMAGETYPE = "uImage"
+
+
+packages/linux/linux-atmel_2.6.25.10.bb
+=================================================================
+require linux.inc
+
+DEFAULT_PREFERENCE = "-1"
+DEFAULT_PREFERENCE_at91sam9rl64ek = "30"
+DEFAULT_PREFERENCE_at91sam9263ek = "30"
+DEFAULT_PREFERENCE_at91sam9261ek = "30"
+DEFAULT_PREFERENCE_at91sam9260ek = "30"
+DEFAULT_PREFERENCE_at91cap9adk   = "30"
+DEFAULT_PREFERENCE_kb9202	 = "30"
+DEFAULT_PREFERENCE_at32stk1000   = "2"
+DEFAULT_PREFERENCE_atngw100   	 = "1"
+
+BASE_KERNEL_VERSION = "2.6.25"
+KERNEL_VERSION = "2.6.25.10"
+KERNEL_RELEASE = "2.6.25.10"
+
+PR = "r2"
+
+SRC_URI =
+"${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${BASE_KERNEL_VERSION}.tar.bz2
+\
+
+${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${KERNEL_VERSION}.bz2;patch=1
+\
+~           "
+
+SRC_URI_append_at91sam9rl64ek = "
+http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
+		          file://defconfig \
+~                               "
+
+SRC_URI_append_at91sam9263ek = "
+http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
+		          file://defconfig \
+~                               "
+
+SRC_URI_append_at91sam9261ek = "
+http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
+		          file://defconfig \
+~                               "
+
+SRC_URI_append_at91sam9260ek = "
+http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
+		          file://defconfig \
+~                               "
+
+SRC_URI_append_at91cap9adk = "
+http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
+		          file://defconfig \
+~                               "
+
+SRC_URI_append_kb9202 = "
+http://maxim.org.za/AT91RM9200/2.6/2.6.25-at91.patch.gz;patch=1 \
+		          file://defconfig \
+~                               "
+
+SRC_URI_append_at32stk1000 = " \
+	http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.25.10.atmel.2.patch.bz2;patch=1
+\
+		          file://defconfig \
+			       "
+SRC_URI_append_atngw100 = " \
+	http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.25.10.atmel.2.patch.bz2;patch=1
+\
+		          file://defconfig \
+			       "
+
+S = "${WORKDIR}/linux-${KERNEL_VERSION}"
+
+packages/linux/linux_2.6.20.bb
+=================================================================
+require linux.inc
+
+DEFAULT_PREFERENCE_at91sam9263ek = "20"
+DEFAULT_PREFERENCE_at91sam9261ek = "20"
+DEFAULT_PREFERENCE_at91sam9260ek = "20"
+
+PR = "r8"
+
+SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+~           file://defconfig"
+
+SRC_URI_append_n2100 = "\
+	   file://n2100-r8169-parity.patch;patch=1 \
+	   file://rtc-rs5c372-n2100.patch;patch=1 \
+	   "
+
+SRC_URI_append_at91sam9263ek = " \
+
+http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;patch=1 \
+
+http://www.at91.com/repFichier/Project-217/linux-${PV}-at91-exp.diff.bz2;patch=1
+\
+~                               "
+SRC_URI_append_at91sam9261ek = " \
+
+http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;patch=1 \
+
+http://www.at91.com/repFichier/Project-217/linux-${PV}-at91-exp.diff.bz2;patch=1
+\
+~                               "
+SRC_URI_append_at91sam9260ek = " \
+
+http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;patch=1 \
+
+http://www.at91.com/repFichier/Project-217/linux-${PV}-at91-exp.diff.bz2;patch=1
+\
+~                               "
+
+
+
+
+BR
+Ulf Samuelsson
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.4-svn0 (GNU/Linux)
+Comment: Using GnuPG with SUSE - http://enigmail.mozdev.org
+
+iD8DBQFIgHFfAyRRH5cXxqwRAvNAAJ9Q0LM1sRfCdXjCy+GAtm/VQNddtACfe4EK
+pbQY5qpZCBJkbHhw3vx0WBg=
+=3NzB
+-----END PGP SIGNATURE-----
 
 
