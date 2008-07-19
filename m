@@ -1,30 +1,23 @@
-Received: from [81.228.8.179] (helo=av9-1-sn2.hy.skanova.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1KJvAa-0006Im-2C
+	(envelope-from <mickey@openmoko.org>) id 1KK5UT-0007st-T5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jul 2008 20:59:08 +0200
-Received: by av9-1-sn2.hy.skanova.net (Postfix, from userid 502)
-	id 6349D3803F; Fri, 18 Jul 2008 20:58:16 +0200 (CEST)
-Received: from smtp4-1-sn2.hy.skanova.net (smtp4-1-sn2.hy.skanova.net
-	[81.228.8.92])
-	by av9-1-sn2.hy.skanova.net (Postfix) with ESMTP id 18B3638006
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2008 20:58:16 +0200 (CEST)
-Received: from [10.175.196.221] (213-67-42-101-no158.tbcn.telia.com
-	[213.67.42.101])
-	by smtp4-1-sn2.hy.skanova.net (Postfix) with ESMTP id 00C4B37E44
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2008 20:58:15 +0200 (CEST)
-Message-ID: <4880E6BF.3070102@atmel.com>
-Date: Fri, 18 Jul 2008 20:53:51 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080421)
+	Sat, 19 Jul 2008 08:00:22 +0200
+Received: from andromeda.vanille.de (e180154244.adsl.alicedsl.de
+	[85.180.154.244])
+	by drlauer-research.com (Postfix) with ESMTP id 8457D584354;
+	Sat, 19 Jul 2008 08:04:56 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@openmoko.org>
+Organization: Openmoko, Inc.
+To: John Lee <john_lee@openmoko.com>
+Date: Sat, 19 Jul 2008 07:59:28 +0200
+User-Agent: KMail/1.9.9
+References: <20080717041343.GA25710@buddha.tw.openmoko.com>
+In-Reply-To: <20080717041343.GA25710@buddha.tw.openmoko.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4880715F.80707@atmel.com> <g5qjd2$5tg$1@ger.gmane.org>
-In-Reply-To: <g5qjd2$5tg$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.6
-Subject: Re: How update kernel recipe?
+Message-Id: <200807190759.28671.mickey@openmoko.org>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: doctest in python-misc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -38,59 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2008 18:59:08 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
+X-List-Received-Date: Sat, 19 Jul 2008 06:00:23 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi John,
 
-Koen Kooi skrev:
-| Ulf Samuelsson wrote:
-| I have built "gpe-image" for AT91SAM9263EK
-| after fixing libsvg-cairo manually due to the LT_VERSION problem.
-|
-| I would like to upgrade the kernel for AT91SAM9263EK.
-| I created a recipe for linux-2.6.25.10 called
-| "packages/linux/linux-atmel_2.6.25.10.bb" (found below)
-|
-|> Yuck! There is *absolutely* no need to define
-|>
-linux-we-are-so-cool-we-have-our-company-name-the-kernel-recipe-filename.bb
-|> files, you should be perfectly able to reuse the linux_2.6.25 recipe, as
-|> avr32 already does.
-|
+> I was trying to use doctest the other day and found out that it is in
+> python-misc.  It requires python-{unittest,debugger,pprint} but since
+> python-misc does not have rdepends in manifest.inc, these dependencies
+> will not be installed automatically.
 
-You do not need to edit (and possibly destroy)
-work done and used by others, but I do not have any problem
-with using the linux_2.6.25 recipe, except is is 2.6.25
-and not 2.6.25.10.
+Right. python-misc right now is a catch-all for files that are not assigned to 
+individual packages.
 
-The AVR32 should be updated to patch with 2.6.25.10 as well...
+>
+> I wonder if it's okay to make python-doctest a package?
 
-If you have a number of linux_<version>, some with and some
-without support for your board, then it is harder to
-get an overview which kernels are supported.
+Yes, that would be helpful. Please enhance 
+contrib/python/generate-manifest-2.5.py to generate the new manifest.
 
-Drawback would be if you lose out on interesting features
-added by others by using a proprietary recipe.
-
-Very few machines seems to use the vanilla linux.
-Is there any move to merge current boards into vanilla linux_<version> ?
-
-
-BR
-Ulf Samuelsson
-
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.4-svn0 (GNU/Linux)
-Comment: Using GnuPG with SUSE - http://enigmail.mozdev.org
-
-iD8DBQFIgOa/AyRRH5cXxqwRAvyPAKCHZUsROJ9+dx59KslBd/zvxH2fkwCgjZsF
-1BnWC6QuiFRXZ7n+jX9Ga58=
-=EChk
------END PGP SIGNATURE-----
+Thanks,
+-- 
+:M:
 
 
