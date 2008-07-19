@@ -1,38 +1,33 @@
-Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KKAly-0002HL-Tb
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Jul 2008 13:38:47 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so700636rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jul 2008 04:37:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=l6WjJCEe5BGaO2xNtC2hqAmxjNxG4UjHMSiEoMEzsaQ=;
-	b=GuAmHFZNVqR/38jhDgpE71+h3TujeIpCtXp8vL4SbK/ZzK+Ro07QyqGKmREEF8SnUT
-	08Ifmb4URxzDAeTWFpKeu2+rScg99K8gxmZOJ2a6wNPOq0Nkf8C64rVIlVMZGiQCyQ82
-	MTiGVIf+YY/QPVyu0wpdRoUKRECFXt+91Q0pQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=mttBSjk1AlCdo3tRj2nYl2FaRc2PJXB//oUVKqRKCugFkoiGJsQ1ZosyRCI1Aq15PA
-	N+rJ/PJs4WuKNFMxcbXAkWz0m3+JhXX5ni8eBwZ0GnlxWtBxvyRYi+zETf+kW31jSSt8
-	5uvxK97DnIsMAdW3SBLN+kGu2IYwRYC6bwg48=
-Received: by 10.115.46.9 with SMTP id y9mr1012622waj.23.1216467473197;
-	Sat, 19 Jul 2008 04:37:53 -0700 (PDT)
-Received: by 10.114.184.13 with HTTP; Sat, 19 Jul 2008 04:37:53 -0700 (PDT)
-Message-ID: <f96d234e0807190437i439cd05ctc4fb8d51c653c640@mail.gmail.com>
-Date: Sat, 19 Jul 2008 07:37:53 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4880E6BF.3070102@atmel.com>
-MIME-Version: 1.0
-References: <4880715F.80707@atmel.com> <g5qjd2$5tg$1@ger.gmane.org>
-	<4880E6BF.3070102@atmel.com>
-Subject: Re: How update kernel recipe?
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KKDax-0004cf-Sl
+	for openembedded-devel@openembedded.org; Sat, 19 Jul 2008 16:39:35 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KKDa3-000120-9U
+	for openembedded-devel@openembedded.org; Sat, 19 Jul 2008 14:38:39 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 19 Jul 2008 14:38:39 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 19 Jul 2008 14:38:39 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sat, 19 Jul 2008 16:38:21 +0200
+Message-ID: <g5su8s$soq$1@ger.gmane.org>
+References: <g5pv9g$sss$1@ger.gmane.org>
+	<200807190854.13877.mickey@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+In-Reply-To: <200807190854.13877.mickey@vanille-media.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: bugs with open patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -46,34 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jul 2008 11:38:47 -0000
+X-List-Received-Date: Sat, 19 Jul 2008 14:39:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Fri, Jul 18, 2008 at 2:53 PM, Ulf Samuelsson
-<ulf.samuelsson@atmel.com> wrote:
+Hello,
 
-> If you have a number of linux_<version>, some with and some
-> without support for your board, then it is harder to
-> get an overview which kernels are supported.
->
-> Drawback would be if you lose out on interesting features
-> added by others by using a proprietary recipe.
->
-> Very few machines seems to use the vanilla linux.
-> Is there any move to merge current boards into vanilla linux_<version> ?
+thanks to everyone who heeded the call and combed through the list
+following my mail.
 
-I have been using generic kernels for the GESBC, and CM-X270 work, and
-it seems to work pretty well, so that would be my vote.  You're
-correct, it is less obvious what kernel supports what board, so
-perhaps a readme in the kernel directory would help?
+Michael 'Mickey' Lauer wrote:
+> Thanks for the heads up. Should we try to reinstanciate our bug
+> squashing weekends again?
 
-Cliff
+Yes, I think that would be a good idea.  We have a good number of
+straight-forward, well-triaged bugs in the tracker.  The number of open
+bugs overall increased by 50% year-on-year.
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+I'd also like to make you guys aware of the fact that bugzilla can save
+searches for you.  I have defined about 10 searches that I look through
+from time to time.  So, instead of getting the whole long list, I can
+look at what is of interest to me and see how that selection of issues
+develops over time. Highly recommended.
+
+Regards
+
+Rolf
+
 
 
