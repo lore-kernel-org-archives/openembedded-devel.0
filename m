@@ -1,32 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KKDh6-0004qx-9y
-	for openembedded-devel@openembedded.org; Sat, 19 Jul 2008 16:45:56 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1KKDgE-0001EZ-Ff
-	for openembedded-devel@openembedded.org; Sat, 19 Jul 2008 14:45:02 +0000
+	id 1KKEZW-0002EZ-QD
+	for openembedded-devel@openembedded.org; Sat, 19 Jul 2008 17:42:10 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KKEYf-00034o-KI
+	for openembedded-devel@openembedded.org; Sat, 19 Jul 2008 15:41:17 +0000
 Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 19 Jul 2008 14:45:02 +0000
+	Sat, 19 Jul 2008 15:41:17 +0000
 Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sat, 19 Jul 2008 14:45:02 +0000
+	Sat, 19 Jul 2008 15:41:17 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 19 Jul 2008 16:39:58 +0200
-Message-ID: <g5subt$soq$2@ger.gmane.org>
-References: <4880A8F5.1080501@aimao.org>
+Date: Sat, 19 Jul 2008 17:41:11 +0200
+Message-ID: <g5t1um$6kj$1@ger.gmane.org>
+References: <g5pv9g$sss$1@ger.gmane.org>	<200807190854.13877.mickey@vanille-media.de>
+	<g5su8s$soq$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
 User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-In-Reply-To: <4880A8F5.1080501@aimao.org>
+In-Reply-To: <g5su8s$soq$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
-Subject: Re: How to obtain commit right ?
+Subject: Re: bugs with open patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -40,29 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jul 2008 14:45:56 -0000
+X-List-Received-Date: Sat, 19 Jul 2008 15:42:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Ronan,
+Rolf Leggewie wrote:
+> Michael 'Mickey' Lauer wrote:
+>> Thanks for the heads up. Should we try to reinstanciate our bug
+>> squashing weekends again?
+> 
+> Yes, I think that would be a good idea.
 
-thank you for your contributions to OE.  They are much appreciated.
+... and even better if we integrated that with the push-'em initiative
 
-While it is true that we have a huge backlog and a lot of contributions
-don't make it into OE in a timely fashion, I was unable to verify this
-in your case.  Even though I told you about this in IRC, you still
-vehemently continue with this claim.  This behaviour, quite frankly,
-does not reassure me.  You are also the first person I am aware of that
-asks for rw access instead of being proposed by somebody else.
+http://wiki.openembedded.net/index.php/Push_patches_upstream#Push.27em-weekends
 
-I'd suggest you continue submitting your contributions through the bug
-tracker and bug people from time to time to commit your uncommitted
-stuff that they eventually become annoyed enough for them to propose
-your rw.  That is how it usually worked in the past.
-
-Regards
-
-Rolf
+When would be a good time?  When were the bug weekends usually scheduled
+previously?  First weekend of the month?
 
 
 
