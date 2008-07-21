@@ -1,30 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KL33C-0002sR-V6
-	for openembedded-devel@openembedded.org; Mon, 21 Jul 2008 23:36:11 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KL32A-0000Xe-KX
-	for openembedded-devel@openembedded.org; Mon, 21 Jul 2008 21:35:06 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 21 Jul 2008 21:35:06 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 21 Jul 2008 21:35:06 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 21 Jul 2008 23:34:59 +0200
-Message-ID: <g62ve3$baq$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
-Sender: news <news@ger.gmane.org>
-Subject: please stop updating efl SRCDATE, it breaks builds
+	(envelope-from <mickey@vanille-media.de>) id 1KL3ET-00035O-8X
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Jul 2008 23:47:49 +0200
+Received: from andromeda.vanille.de (e180148137.adsl.alicedsl.de
+	[85.180.148.137])
+	by drlauer-research.com (Postfix) with ESMTP id ECC0B5843E1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Jul 2008 23:52:25 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 Jul 2008 23:46:44 +0200
+User-Agent: KMail/1.9.9
+References: <g62ve3$baq$1@ger.gmane.org>
+In-Reply-To: <g62ve3$baq$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200807212346.44576.mickey@vanille-media.de>
+Subject: Re: please stop updating efl SRCDATE, it breaks builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -38,24 +31,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2008 21:36:11 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 21 Jul 2008 21:47:49 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+> Please think of all this when wanting to bump SRCDATE the next time.
 
-Everytime efl SRCDATE gets changed my builds start failing in do_fetch. 
-This is caused by the cvs server only allowing one connection per host, 
-so with using multithreaded bitbake I have to restart the build about 10 
-times to get everything fetched. I have to disable the autobuilder 
-everytime this happens since it would basically DoS bugzilla with 
-do_fetch error reports :(
+Uhm... in all earnest you want to request people to stop updating a software 
+because of upstream source fetching problems? Sorry, this won't work.
 
-Please think of all this when wanting to bump SRCDATE the next time.
+I understand your problem, but I would have expected a more constructive 
+proposal than a recommendation to stop updating software in OE.
 
-regards,
-
-Koen
-
+-- 
+:M:
 
 
