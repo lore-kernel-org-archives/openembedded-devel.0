@@ -1,38 +1,24 @@
-Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1KLPG2-0003vH-G6
+	(envelope-from <mickey@vanille-media.de>) id 1KLQ5o-0007Xm-Pf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jul 2008 23:18:54 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so2160461rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2008 14:17:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=S0+OtLtGfrZIWAfOFsVQZfTSQRWy1qC/oqCLlt2QvkA=;
-	b=VmGrcG0U5DdTvYMJLRFqQsLeJrlaq74hSxqp1o5FYTYqMRIxqB9BwrtxNBDNnk10+Y
-	YtT9NOma2JYnhoOXDKXkuQK89lXPl+StOfLPoavtA9qotVTY5Lz9IuZRCZiZSiZoZ8Pi
-	wQHVpUsRyh/U9Dt+zvn+XEb9drJmbgVQDhkJ0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=a8B1jJyQWfSNrfE72AjSOm5ia74qZ5K6ZpFXDveVtpT+Fa8XD/cWFifl+wuConlzEt
-	yksPJhvw8hDccKYi0QYNpfX47tj0+9/djl7RJ/LcBZJZohzWCNskP+4Y0v4QhnJ7pmlQ
-	udPyGyDAzcF++rbiUZahEm5eHR2lMHhwrBV+E=
-Received: by 10.140.170.12 with SMTP id s12mr165685rve.83.1216761465443;
-	Tue, 22 Jul 2008 14:17:45 -0700 (PDT)
-Received: by 10.141.116.18 with HTTP; Tue, 22 Jul 2008 14:17:45 -0700 (PDT)
-Message-ID: <d2b9ea600807221417j8f33dbfp1da7bfbce4868611@mail.gmail.com>
-Date: Tue, 22 Jul 2008 23:17:45 +0200
-From: "Esben Haabendal" <esbenhaabendal@gmail.com>
+	Wed, 23 Jul 2008 00:12:24 +0200
+Received: from andromeda.vanille.de (e180170058.adsl.alicedsl.de
+	[85.180.170.58])
+	by drlauer-research.com (Postfix) with ESMTP id CA8295847F4;
+	Wed, 23 Jul 2008 00:17:00 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <488634EA.4080001@balister.org>
+Date: Wed, 23 Jul 2008 00:11:12 +0200
+User-Agent: KMail/1.9.9
+References: <g62ve3$baq$1@ger.gmane.org>
+	<200807212346.44576.mickey@vanille-media.de>
+	<1216753841.11524.16.camel@localhost>
+In-Reply-To: <1216753841.11524.16.camel@localhost>
 MIME-Version: 1.0
-References: <d2b9ea600807220111i4c3adc1ekcb470034329e18f7@mail.gmail.com>
-	<48862F74.70504@palm.com> <488634EA.4080001@balister.org>
-Subject: Re: Stable source repository
+Message-Id: <200807230011.13612.mickey@vanille-media.de>
+Subject: Re: please stop updating efl SRCDATE, it breaks builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -46,21 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2008 21:18:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Jul 2008 22:12:25 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Tue, Jul 22, 2008 at 9:28 PM, Philip Balister <philip@balister.org> wrote:
-> The point that OE should make it easy to create and maintain source mirrors
-> is a very good point. What support exist in OE today? (I use Angstrom, so it
-> just works for me :)
+Am Dienstag 22 Juli 2008 21:10:41 schrieb Jan L=C3=BCbbe:
+> On Mon, 2008-07-21 at 23:46 +0200, Michael 'Mickey' Lauer wrote:
+> > > Please think of all this when wanting to bump SRCDATE the next time.
+> >
+> > Uhm... in all earnest you want to request people to stop updating a
+> > software because of upstream source fetching problems? Sorry, this won't
+> > work.
+> >
+> > I understand your problem, but I would have expected a more constructive
+> > proposal than a recommendation to stop updating software in OE.
+>
+> How about fetching the source from their git mirror
+> (http://staff.get-e.org/)?
 
-Perhaps the Angstrom autobuilder could be stripped down to
-sourcemirror tool, which could then be used for easy setup of
-sourcemirrors for any OE based distro wanting a stable development
-environment.
+Yes, this would be an option. I still hate git for not having incremental=20
+revisions, but I guess nothing is perfect in this world...
 
-/Esben
+=2D-=20
+:M:
 
 
