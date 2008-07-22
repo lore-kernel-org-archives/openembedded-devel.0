@@ -1,37 +1,22 @@
-Received: from [209.85.132.250] (helo=an-out-0708.google.com)
+Received: from [64.28.152.243] (helo=smtp-relay2.palm.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KLLtu-0006Io-Ma
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jul 2008 19:43:50 +0200
-Received: by an-out-0708.google.com with SMTP id b38so424937ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2008 10:42:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=IMCiyPYtnpLaoFBXG1ww3XMGdTRWBJiLBl+gX5cVBMY=;
-	b=CjuPst0yyE9bzyo54vBwlSxMSBrXuJZ888fTDYZELfEj2SRyZ3U23mn2yiQsgAUw3t
-	2NH2kwtW1SE6h+gI8NVZpMB9hhzWBtArB4pDWWxcl+kjO8YULb5c9h3eVhHSbGUN1sSQ
-	qj2Raqq/5iIiKeg0BR+kGsYqmFC0cmQ2K7mPE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=YtLOsktG4Rhx0sPmKNDOdE0RA0yUDdtfZoJLSYqVuRhpc1/cMXfA+t9zaF6v/ESpb+
-	3Hz93WXg8BxpWOz0qWFIGQK8KpclSyldsZ/qry0c8IYhddbN0njRb8HjjkamNKfM/weh
-	jshwXlL+TJAdRxnBhqfuJvhOjhD23P56/iTUQ=
-Received: by 10.100.32.8 with SMTP id f8mr2626739anf.124.1216748562630;
-	Tue, 22 Jul 2008 10:42:42 -0700 (PDT)
-Received: by 10.100.166.17 with HTTP; Tue, 22 Jul 2008 10:42:42 -0700 (PDT)
-Message-ID: <c384c5ea0807221042y5018e7f2ka7b2915e82e9a554@mail.gmail.com>
-Date: Tue, 22 Jul 2008 19:42:42 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4883BCB1.7020102@atmel.com>
+	(envelope-from <rich.pixley@palm.com>) id 1KLNBy-0004sW-Nz
+	for openembedded-devel@openembedded.org; Tue, 22 Jul 2008 21:06:34 +0200
+X-IronPort-AV: E=Sophos;i="4.31,232,1215414000"; d="scan'208";a="11419925"
+Received: from unknown (HELO mailhost02.palm.com) ([148.92.223.90])
+	by smtp-relay2.palm.com with ESMTP; 22 Jul 2008 12:05:24 -0700
+Received: from flamingo.palm.com (flamingo.palm.com [148.92.248.64])
+	by mailhost02.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
+	m6MJ5O7v006637; Tue, 22 Jul 2008 12:05:24 -0700 (PDT)
+Message-ID: <48862F74.70504@palm.com>
+Date: Tue, 22 Jul 2008 12:05:24 -0700
+From: Rich Pixley <rich.pixley@palm.com>
+User-Agent: Thunderbird 2.0.0.14 (Macintosh/20080421)
 MIME-Version: 1.0
-References: <4883BCB1.7020102@atmel.com>
-Subject: Re: binutils fails for AVR32
+To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
+References: <d2b9ea600807220111i4c3adc1ekcb470034329e18f7@mail.gmail.com>
+In-Reply-To: <d2b9ea600807220111i4c3adc1ekcb470034329e18f7@mail.gmail.com>
+Subject: Re: Stable source repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -45,30 +30,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2008 17:43:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 22 Jul 2008 19:06:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Ulf,
+Locally, we have a comparable problem.  Not only can we not rely on 
+external repositories for archiving code, but given the volume of 
+downloads we'd be placing, we can't really even rely on external 
+repositories for current versions due to bandwidth constraints, (most 
+facilities would resent the load our company would place on their servers).
 
-On Mon, Jul 21, 2008 at 12:31 AM, Ulf Samuelsson
-<ulf.samuelsson@atmel.com> wrote:
-> I managed to complete the AT91SAM9263 build, but
-> now I am caught in the configure hell when trying the AVR32.
->
-> ...
->
-> Anyone got the AVR32 toolchain to build properly using a recent version?
->
-Yes, I am building a AVR32 project using
-478afd231213fcf731ddefac0314beee5d95b5fb which works fine for me.
+What's been done locally is to place copies of the tarchives we use into 
+our "sources" directory in version control.  So when we check out our 
+local copy of OE metadata, we also get a huge, prepopulated sources 
+directory.  I've also hacked all of fetching methods in our local copy 
+of bitbake such that any attempt to reach outside our company for source 
+produces a fatal error.
 
-I upgrade every now and then. Will see about more recent revisions of OE.
+I don't like our solution because it make "mrproper" a problem and we 
+have no "mrproper" of our own.  I think a better solution would have 
+been for us to create a local repository aside from our source control 
+system.  Then people would check out OE metadata and in the process of 
+building, they'd fetch from the local repository.  But that would still 
+require hijacking the component URL's, which is ugly.
 
+As a general solution, I think OE needs to support a chain of such 
+repositories and I think the OE project itself needs to create and 
+maintain one.  The only way to be sure that a tarchive will be available 
+is if you own and manage the repository yourself.  There's precedent for 
+this - debian source packages encapsulate the upstream source so that 
+the source archive is complete on it's own.  This means that the debian 
+repositories each contain copies of the upstream tarchives and access to 
+the upstream repositories only need to be accessed by debian maintainers 
+when creating packaging for a new version.
 
-Regards,
--- 
-Leon
+--rich
 
 
