@@ -1,18 +1,32 @@
-Received: from [217.154.246.189] (helo=lon-gs4dmrelay.mistral.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bluelightning@bluelightning.org>) id 1KLo5O-0006qb-MV
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jul 2008 01:49:34 +0200
-Received: from [212.32.109.80] (helo=shodan.local)
-	by lon-gs4dmrelay.mistral.net with esmtp (Exim 4.51)
-	id 1KLnnd-0001bt-UF for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jul 2008 00:31:14 +0100
-To: openembedded-devel@lists.openembedded.org
-From: Paul Eggleton <bluelightning@bluelightning.org>
-Date: Thu, 24 Jul 2008 00:48:20 +0100
-MIME-Version: 1.0
-Message-Id: <200807240048.20980.bluelightning@bluelightning.org>
-Subject: PATCH: make h2200-bootloader load & depend on mtdblock
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KLpJ3-0005Ox-S4
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 03:07:46 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KLpHq-0004mT-4n
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 01:06:30 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 24 Jul 2008 01:06:30 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 24 Jul 2008 01:06:30 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 24 Jul 2008 03:06:31 +0200
+Message-ID: <g68kig$mam$1@ger.gmane.org>
+References: <200807240048.20980.bluelightning@bluelightning.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+In-Reply-To: <200807240048.20980.bluelightning@bluelightning.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: PATCH: make h2200-bootloader load & depend on mtdblock
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -26,63 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jul 2008 23:49:34 -0000
-X-Groupsio-MsgNum: 5582
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_EN8hIOy2xNi+9zb"
-
---Boundary-00=_EN8hIOy2xNi+9zb
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Thu, 24 Jul 2008 01:07:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi there,
+Hi Paul,
 
-The attached patch fixes bug 4451 by making h2200-bootloader depend on 
-kernel-module-mtdblock and load the mtdblock module before attempting to use 
-it.
+two very minor comments
 
-http://bugs.openembedded.net/show_bug.cgi?id=4451
+Paul Eggleton wrote:
+> +RDEPENDS = kernel-module-mtdblock
 
-Does this look OK?
+RDEPENDS = "kernel-module-mtdblock"
 
-Cheers,
-Paul
+> +PR="r3"
 
---Boundary-00=_EN8hIOy2xNi+9zb
-Content-Type: text/x-diff;
-  charset="utf-8";
-  name="h2200-suspend-dev.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="h2200-suspend-dev.patch"
+PR = "r3"
 
-#
-# old_revision [87bf384fc6b31f73e5ad8bbd29b113adcc5cd9e0]
-#
-# patch "packages/h2200-bootloader/h2200-bootloader.bb"
-#  from [d015a17dbeb17e4fef0f6d6df88a9ca9620cc88f]
-#    to [80838c3d05408a49597b6fad5a441fecf5af0af7]
-#
-============================================================
---- packages/h2200-bootloader/h2200-bootloader.bb	d015a17dbeb17e4fef0f6d6df88a9ca9620cc88f
-+++ packages/h2200-bootloader/h2200-bootloader.bb	80838c3d05408a49597b6fad5a441fecf5af0af7
-@@ -1,6 +1,7 @@ DESCRIPTION = "Bootloader firmware extra
- DESCRIPTION = "Bootloader firmware extractor for the h2200 iPAQ"
-+RDEPENDS = kernel-module-mtdblock
- ALLOW_EMPTY = "1"
--PR="r2"
-+PR="r3"
- 
- COMPATIBLE_MACHINE = "h2200"
- #it is a shell script, but lets protect the innocent some more
-@@ -9,5 +10,6 @@ mkdir -p /lib/firmware
- pkg_postinst() {
- #!/bin/sh
- mkdir -p /lib/firmware
-+modprobe mtdblock
- dd if=/dev/mtdblock0 of=/lib/firmware/h2200_bootloader.bin 2>/dev/null
- }
+Regards
 
---Boundary-00=_EN8hIOy2xNi+9zb--
+Rolf
+
+
+
