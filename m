@@ -1,29 +1,29 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KLpJ3-0005Ox-S4
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 03:07:46 +0200
+	id 1KLv8M-0001od-T7
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 09:21:07 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KLpHq-0004mT-4n
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 01:06:30 +0000
-Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
+	id 1KLv7A-00013y-MJ
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 07:19:52 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 01:06:30 +0000
-Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
+	Thu, 24 Jul 2008 07:19:52 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 01:06:30 +0000
+	Thu, 24 Jul 2008 07:19:52 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 24 Jul 2008 03:06:31 +0200
-Message-ID: <g68kig$mam$1@ger.gmane.org>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 24 Jul 2008 09:19:46 +0200
+Message-ID: <g69aeh$5cu$1@ger.gmane.org>
 References: <200807240048.20980.bluelightning@bluelightning.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
 In-Reply-To: <200807240048.20980.bluelightning@bluelightning.org>
 Sender: news <news@ger.gmane.org>
 Subject: Re: PATCH: make h2200-bootloader load & depend on mtdblock
@@ -40,26 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2008 01:07:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Jul 2008 07:21:07 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Paul,
-
-two very minor comments
-
 Paul Eggleton wrote:
-> +RDEPENDS = kernel-module-mtdblock
+> Hi there,
+>
+> The attached patch fixes bug 4451 by making h2200-bootloader depend on
+> kernel-module-mtdblock and load the mtdblock module before attempting to use
+> it.
+>
+> http://bugs.openembedded.net/show_bug.cgi?id=4451
+>
+> Does this look OK?
 
-RDEPENDS = "kernel-module-mtdblock"
+No
 
-> +PR="r3"
++RDEPENDS = kernel-module-mtdblock
 
-PR = "r3"
+Never ever rdepend on a kernelmodules, since it might be built in to the 
+kernel in the future (like it was in the past), only use
 
-Regards
+RRECOMMENDS_${PN} = "kernel-module-foo"
 
-Rolf
+regards,
+
+Koen
 
 
 
