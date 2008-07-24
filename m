@@ -1,31 +1,30 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1KLwtA-0005ze-JB
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 11:13:45 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6O9B2oU011843;
-	Thu, 24 Jul 2008 10:11:02 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11609-07; Thu, 24 Jul 2008 10:10:52 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6O9AkWK011836
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 24 Jul 2008 10:10:46 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KLwvb-00066o-Jn
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 11:16:03 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KLwuO-0005h7-56
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 09:14:48 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 24 Jul 2008 09:14:48 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 24 Jul 2008 09:14:48 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <20080723090416.GB24264@gmail.com>
-References: <1216087105.10214.7.camel@isis> <487DACFF.5010504@gmail.com>
-	<c384c5ea0807161343s2085dda5ua5f526967583e293@mail.gmail.com>
-	<20080720014112.GA13759@oberlord>  <20080723090416.GB24264@gmail.com>
-Date: Thu, 24 Jul 2008 10:10:46 +0100
-Message-Id: <1216890646.6103.5.camel@dax.rpnet.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 24 Jul 2008 11:14:40 +0200
+Message-ID: <g69h61$qvv$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [RFC]: Toolchain build sequence alteration.
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
+Sender: news <news@ger.gmane.org>
+Subject: [RFC] changing staging layout based on MULTIMACH_TARGET_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -39,29 +38,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2008 09:13:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Jul 2008 09:16:03 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-On Wed, 2008-07-23 at 02:04 -0700, Khem Raj wrote:
-> I have done some more builds particularly uclibc 0.9.27+ and had to fix
-> uclibc recipes. 
-> 
-> Here is next updated patch.
+Lately I've been encountering various build problems that are caused by 
+OE lumping all my ARM build together in 
+staging/arm-angstrom-linux-gnueabi, which isn't quite right for the 
+following reasons:
 
-Firstly, thanks for your work on this. It is is useful and appreciated,
-sorry I've not got to testing this sooner!
+* it mixes hard- and softfloat when doing armv5te and armv6 builds, 
+which introduces subtle compilation problems. The resulting binaries 
+work fine together on the target, as one would expect with EABI, but 
+mixing them in staging leads to troubles
 
-I've patched Poky with a patch similar to yours and am in the process of
-running some tests. So far its all looking good, I expect the final
-tests to complete later today and will report back when they complete.
-If they work out, I'm happy for this to be committed.
+* In an ideal world we would use a single compiler version for all 
+subarchs, but for arm we use 4.2.4 for armv4, armv4t, armv5te and armv6, 
+but 4.3.1 for armv7a. C++ apps don't like that
 
-Cheers,
+* You can end up statically linking an armv6 lib into an armv5te application
 
-Richard
+The same problems exist for powerpc (ppc405 vs ppc603e).
+
+The change basically boils down to this on bitbake.conf:
+
+-STAGING_BINDIR_CROSS  = "${STAGING_DIR_NATIVE}${layout_bindir}/${HOST_SYS}"
++STAGING_BINDIR_CROSS  = 
+"${STAGING_DIR_NATIVE}${layout_bindir}/${MULTIMACH_HOST_SYS}"
+
+-STAGING_DIR_HOST = "${STAGING_DIR}/${HOST_SYS}"
++STAGING_DIR_HOST = "${STAGING_DIR}/${MULTIMACH_HOST_SYS}"
+
+
+-STAGING_DIR_TARGET = "${STAGING_DIR}/${TARGET_SYS}"
++STAGING_DIR_TARGET = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}"
+
+Richard and I have been talking about this for a while now and the 
+change landed in Poky last week.
+
+This is however an ABI break for staging, so we need to do this as well:
+
+--- conf/sanity.conf	2008/07/19 11:57:00	4892
++++ conf/sanity.conf	2008/07/19 11:59:42	4893
+@@ -11,7 +11,7 @@
+  # that breaks the format and have been previously discussed on the 
+mailing list
+  # with general agreement from the core team.
+  #
+-SANITY_ABI = "1"
++SANITY_ABI = "2"
+  SANITY_ABIFILE = "${TMPDIR}/abi_version"
+
+And as the diff points out, ABI breaks have to be discussed on the 
+mailinglist.
+
+I'd like to apply this right after the toolchain build order changes to 
+minimize the number of full rebuilds people have to do.
+
+Comments, objections?
+
+regards,
+
+Koen
 
 
 
