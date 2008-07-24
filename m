@@ -1,30 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [194.109.24.36] (helo=smtp-vbr16.xs4all.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KLwvb-00066o-Jn
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 11:16:03 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KLwuO-0005h7-56
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 09:14:48 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 09:14:48 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <udovdh@xs4all.nl>) id 1KM0VW-0002uk-Uz
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 15:05:23 +0200
+Received: from surfplank2.hierzo (pindarots.xs4all.nl [80.101.128.228])
+	(authenticated bits=0)
+	by smtp-vbr16.xs4all.nl (8.13.8/8.13.8) with ESMTP id m6OD47Vh005179
 	for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 09:14:48 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 24 Jul 2008 15:04:08 +0200 (CEST)
+	(envelope-from udovdh@xs4all.nl)
+Message-ID: <48887DC7.3030603@xs4all.nl>
+Date: Thu, 24 Jul 2008 15:04:07 +0200
+From: Udo van den Heuvel <udovdh@xs4all.nl>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 24 Jul 2008 11:14:40 +0200
-Message-ID: <g69h61$qvv$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
-Sender: news <news@ger.gmane.org>
-Subject: [RFC] changing staging layout based on MULTIMACH_TARGET_SYS
+References: <200807240048.20980.bluelightning@bluelightning.org>	<g69aeh$5cu$1@ger.gmane.org>	<1404.78.86.188.127.1216886903.squirrel@webmail12.pair.com>
+	<1216890490.6103.1.camel@dax.rpnet.com>
+In-Reply-To: <1216890490.6103.1.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.2
+OpenPGP: id=8300CC02
+X-Virus-Scanned: by XS4ALL Virus Scanner
+Subject: Re: PATCH: make h2200-bootloader load & depend on mtdblock
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -38,70 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2008 09:16:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 24 Jul 2008 13:05:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Richard Purdie wrote:
+> Yes, its standard practise to RRECOMMEND kernel modules since if they're
+> built into the kernel you get build failures otherwise. The RRECOMMEND
+> is a standard approach and well tested.
 
-Lately I've been encountering various build problems that are caused by 
-OE lumping all my ARM build together in 
-staging/arm-angstrom-linux-gnueabi, which isn't quite right for the 
-following reasons:
+Apart from this discussion, sorry to interrupt, but does mtdchar
+9related to mtdblock I guess) actually work?
+On my H2200('s) it fails to properly flash a kernel.
+It doesn't matter much now because we boot from SD, but nevertheless it
+is strange.
+The mtd folks refuse to help me when I repeatedly queried them.
 
-* it mixes hard- and softfloat when doing armv5te and armv6 builds, 
-which introduces subtle compilation problems. The resulting binaries 
-work fine together on the target, as one would expect with EABI, but 
-mixing them in staging leads to troubles
-
-* In an ideal world we would use a single compiler version for all 
-subarchs, but for arm we use 4.2.4 for armv4, armv4t, armv5te and armv6, 
-but 4.3.1 for armv7a. C++ apps don't like that
-
-* You can end up statically linking an armv6 lib into an armv5te application
-
-The same problems exist for powerpc (ppc405 vs ppc603e).
-
-The change basically boils down to this on bitbake.conf:
-
--STAGING_BINDIR_CROSS  = "${STAGING_DIR_NATIVE}${layout_bindir}/${HOST_SYS}"
-+STAGING_BINDIR_CROSS  = 
-"${STAGING_DIR_NATIVE}${layout_bindir}/${MULTIMACH_HOST_SYS}"
-
--STAGING_DIR_HOST = "${STAGING_DIR}/${HOST_SYS}"
-+STAGING_DIR_HOST = "${STAGING_DIR}/${MULTIMACH_HOST_SYS}"
-
-
--STAGING_DIR_TARGET = "${STAGING_DIR}/${TARGET_SYS}"
-+STAGING_DIR_TARGET = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}"
-
-Richard and I have been talking about this for a while now and the 
-change landed in Poky last week.
-
-This is however an ABI break for staging, so we need to do this as well:
-
---- conf/sanity.conf	2008/07/19 11:57:00	4892
-+++ conf/sanity.conf	2008/07/19 11:59:42	4893
-@@ -11,7 +11,7 @@
-  # that breaks the format and have been previously discussed on the 
-mailing list
-  # with general agreement from the core team.
-  #
--SANITY_ABI = "1"
-+SANITY_ABI = "2"
-  SANITY_ABIFILE = "${TMPDIR}/abi_version"
-
-And as the diff points out, ABI breaks have to be discussed on the 
-mailinglist.
-
-I'd like to apply this right after the toolchain build order changes to 
-minimize the number of full rebuilds people have to do.
-
-Comments, objections?
-
-regards,
-
-Koen
-
+Udo
 
 
