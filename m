@@ -1,27 +1,35 @@
-Received: from [194.109.24.25] (helo=smtp-vbr5.xs4all.nl)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <udovdh@xs4all.nl>) id 1KM17n-0002ZZ-Fx
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 15:44:55 +0200
-Received: from surfplank2.hierzo (pindarots.xs4all.nl [80.101.128.228])
-	(authenticated bits=0)
-	by smtp-vbr5.xs4all.nl (8.13.8/8.13.8) with ESMTP id m6ODhcIq008882
+	(envelope-from <rpurdie@rpsys.net>) id 1KM3L3-0007HK-LM
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 18:06:45 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6OG5TNF007699
 	for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 15:43:40 +0200 (CEST)
-	(envelope-from udovdh@xs4all.nl)
-Message-ID: <48888709.40906@xs4all.nl>
-Date: Thu, 24 Jul 2008 15:43:37 +0200
-From: Udo van den Heuvel <udovdh@xs4all.nl>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+	Thu, 24 Jul 2008 17:05:29 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07487-06-2 for <openembedded-devel@openembedded.org>;
+	Thu, 24 Jul 2008 17:05:18 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6OG542V007653
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 24 Jul 2008 17:05:04 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-References: <200807240048.20980.bluelightning@bluelightning.org>	<g69aeh$5cu$1@ger.gmane.org>	<1404.78.86.188.127.1216886903.squirrel@webmail12.pair.com>	<1216890490.6103.1.camel@dax.rpnet.com>
-	<48887DC7.3030603@xs4all.nl>
-	<1216905807.6103.32.camel@dax.rpnet.com>
-In-Reply-To: <1216905807.6103.32.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.2
-OpenPGP: id=8300CC02
-X-Virus-Scanned: by XS4ALL Virus Scanner
-Subject: Re: PATCH: make h2200-bootloader load & depend on mtdblock
+In-Reply-To: <1216890646.6103.5.camel@dax.rpnet.com>
+References: <1216087105.10214.7.camel@isis> <487DACFF.5010504@gmail.com>
+	<c384c5ea0807161343s2085dda5ua5f526967583e293@mail.gmail.com>
+	<20080720014112.GA13759@oberlord>  <20080723090416.GB24264@gmail.com>
+	<1216890646.6103.5.camel@dax.rpnet.com>
+Date: Thu, 24 Jul 2008 17:05:06 +0100
+Message-Id: <1216915506.6103.40.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: [RFC]: Toolchain build sequence alteration.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -35,40 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2008 13:44:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Jul 2008 16:06:46 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Thu, 2008-07-24 at 15:04 +0200, Udo van den Heuvel wrote:
->> Richard Purdie wrote:
->>> Yes, its standard practise to RRECOMMEND kernel modules since if they're
->>> built into the kernel you get build failures otherwise. The RRECOMMEND
->>> is a standard approach and well tested.
->> Apart from this discussion, sorry to interrupt, but does mtdchar
->> 9related to mtdblock I guess) actually work?
->> On my H2200('s) it fails to properly flash a kernel.
->> It doesn't matter much now because we boot from SD, but nevertheless it
->> is strange.
->> The mtd folks refuse to help me when I repeatedly queried them.
-> 
-> Yes, mtdchar usually works.
+On Thu, 2008-07-24 at 10:10 +0100, Richard Purdie wrote:
+> I've patched Poky with a patch similar to yours and am in the process of
+> running some tests. So far its all looking good, I expect the final
+> tests to complete later today and will report back when they complete.
+> If they work out, I'm happy for this to be committed.
 
-'usually' sounds atypical here:
+My tests all worked out apart from some unrelated issues so I'm happy
+for this to be committed.
 
-http://bugs.openembedded.net/show_bug.cgi?id=4354
-but also:
-http://bugs.openembedded.net/show_bug.cgi?id=4324
-and:
-http://bugs.openembedded.net/show_bug.cgi?id=4362
+Cheers,
 
-So a whole slew of flash-related issues, all based on mtd-related code.
-My ipaq ran win2003 mobile fine.
+Richard
 
-> It may not do exactly what you expect though
-
-That is what I observe, others see similar issues.
-
-Udo
 
 
