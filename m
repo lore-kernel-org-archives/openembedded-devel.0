@@ -1,35 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KM3XP-0007pc-5H
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 18:19:31 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KM3WA-0008Gz-Pk
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 16:18:14 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 16:18:14 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 16:18:14 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 24 Jul 2008 18:18:04 +0200
-Message-ID: <g6a9vs$hok$1@ger.gmane.org>
-References: <1216087105.10214.7.camel@isis>
-	<487DACFF.5010504@gmail.com>	<c384c5ea0807161343s2085dda5ua5f526967583e293@mail.gmail.com>	<20080720014112.GA13759@oberlord>
-	<20080723090416.GB24264@gmail.com>	<1216890646.6103.5.camel@dax.rpnet.com>
-	<1216915506.6103.40.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
-In-Reply-To: <1216915506.6103.40.camel@dax.rpnet.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC]: Toolchain build sequence alteration.
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KM40k-0005ft-Rn
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Jul 2008 18:49:50 +0200
+Received: (qmail invoked by alias); 24 Jul 2008 16:48:31 -0000
+Received: from e178091018.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.91.18]
+	by mail.gmx.net (mp048) with SMTP; 24 Jul 2008 18:48:31 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18LY3VQCgkL62zu1+QqkNSThIFLzMgwtm3/StUUVb
+	SXU/0Mi8tfcJd1
+Message-ID: <4888B297.5070701@gmx.net>
+Date: Thu, 24 Jul 2008 18:49:27 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.7
+Subject: compiling buildhelper programs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -43,26 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2008 16:19:31 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Jul 2008 16:49:51 -0000
+X-Groupsio-MsgNum: 5595
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig427AE380D378B5A19D62BD6F"
 
-Richard Purdie wrote:
-> On Thu, 2008-07-24 at 10:10 +0100, Richard Purdie wrote:
->> I've patched Poky with a patch similar to yours and am in the process of
->> running some tests. So far its all looking good, I expect the final
->> tests to complete later today and will report back when they complete.
->> If they work out, I'm happy for this to be committed.
->
-> My tests all worked out apart from some unrelated issues so I'm happy
-> for this to be committed.
+--------------enig427AE380D378B5A19D62BD6F
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-My small test came out ok as well, so I'm happy for this to be committed 
-as well.
+Hi,
+I have a question regarding OE's build recipe policies. I am currently
+creating a recipe for the Netscape Security Service library (libnss3-1d
+on Debian) which builds a native 'nsinstall' binary.
 
-regards,
+Is it OK when the recipe provides the native CC via BUILD_CC to build
+those helper binaries while at the same time TARGET_CC compiles the real
+libraries and binaries or do we strictly want a separate -native recipe
+that builds the helpers and injects them?
 
-Koen
+Regards
+Robert
 
 
+--------------enig427AE380D378B5A19D62BD6F
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEUEAREIAAYFAkiIspcACgkQG9cfwmwwEtp0mgCghhxTNhc/EE6AOqdUPKXkqw1V
+5PsAmNtfiCfQmGT9VAFh9GGxkCzs69k=
+=uYpf
+-----END PGP SIGNATURE-----
+
+--------------enig427AE380D378B5A19D62BD6F--
