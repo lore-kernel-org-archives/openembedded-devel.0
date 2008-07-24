@@ -1,34 +1,31 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1KLwpR-0005pl-Og
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 11:09:42 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1KLwtA-0005ze-JB
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 11:13:45 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6O98HcJ011674
-	for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 10:08:17 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6O9B2oU011843;
+	Thu, 24 Jul 2008 10:11:02 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 11376-07 for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 10:08:12 +0100 (BST)
+	id 11609-07; Thu, 24 Jul 2008 10:10:52 +0100 (BST)
 Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6O98BKp011667
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 10:08:11 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6O9AkWK011836
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 24 Jul 2008 10:10:46 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <1404.78.86.188.127.1216886903.squirrel@webmail12.pair.com>
-References: <200807240048.20980.bluelightning@bluelightning.org>
-	<g69aeh$5cu$1@ger.gmane.org>
-	<1404.78.86.188.127.1216886903.squirrel@webmail12.pair.com>
-Date: Thu, 24 Jul 2008 10:08:10 +0100
-Message-Id: <1216890490.6103.1.camel@dax.rpnet.com>
+In-Reply-To: <20080723090416.GB24264@gmail.com>
+References: <1216087105.10214.7.camel@isis> <487DACFF.5010504@gmail.com>
+	<c384c5ea0807161343s2085dda5ua5f526967583e293@mail.gmail.com>
+	<20080720014112.GA13759@oberlord>  <20080723090416.GB24264@gmail.com>
+Date: Thu, 24 Jul 2008 10:10:46 +0100
+Message-Id: <1216890646.6103.5.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.12.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: PATCH: make h2200-bootloader load & depend on mtdblock
+Subject: Re: [RFC]: Toolchain build sequence alteration.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -42,28 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2008 09:09:42 -0000
+X-List-Received-Date: Thu, 24 Jul 2008 09:13:45 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+Hi,
 
-On Thu, 2008-07-24 at 20:08 +1200, Paul Eggleton wrote:
-> Koen Kooi wrote:
-> > Never ever rdepend on a kernelmodules, since it might be built in to the
-> > kernel in the future (like it was in the past), only use
-> >
-> > RRECOMMENDS_${PN} = "kernel-module-foo"
+On Wed, 2008-07-23 at 02:04 -0700, Khem Raj wrote:
+> I have done some more builds particularly uclibc 0.9.27+ and had to fix
+> uclibc recipes. 
 > 
-> OK, so please excuse my ignorance and I don't have OE in front of me to
-> test it, but does that mean that kernel-module-mtdblock will be included
-> in images where h2200-bootloader is included? If not, then it needs to be
-> done some other way.
+> Here is next updated patch.
 
-Yes, its standard practise to RRECOMMEND kernel modules since if they're
-built into the kernel you get build failures otherwise. The RRECOMMEND
-is a standard approach and well tested.
+Firstly, thanks for your work on this. It is is useful and appreciated,
+sorry I've not got to testing this sooner!
 
-Regards,
+I've patched Poky with a patch similar to yours and am in the process of
+running some tests. So far its all looking good, I expect the final
+tests to complete later today and will report back when they complete.
+If they work out, I'm happy for this to be committed.
+
+Cheers,
 
 Richard
 
