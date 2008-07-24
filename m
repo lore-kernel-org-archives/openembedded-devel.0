@@ -1,32 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [194.106.48.114] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KLwiU-0005Yy-Tq
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 11:02:30 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KLwhE-000516-R3
-	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 09:01:12 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 09:01:12 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <rpurdie@rpsys.net>) id 1KLwpR-0005pl-Og
+	for openembedded-devel@openembedded.org; Thu, 24 Jul 2008 11:09:42 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6O98HcJ011674
 	for <openembedded-devel@openembedded.org>;
-	Thu, 24 Jul 2008 09:01:12 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 24 Jul 2008 10:08:17 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11376-07 for <openembedded-devel@openembedded.org>;
+	Thu, 24 Jul 2008 10:08:12 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6O98BKp011667
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 24 Jul 2008 10:08:11 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 24 Jul 2008 11:01:01 +0200
-Message-ID: <g69gcd$nm3$1@ger.gmane.org>
-References: <200807240048.20980.bluelightning@bluelightning.org>	<g69aeh$5cu$1@ger.gmane.org>
-	<1404.78.86.188.127.1216886903.squirrel@webmail12.pair.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008062403)
 In-Reply-To: <1404.78.86.188.127.1216886903.squirrel@webmail12.pair.com>
-Sender: news <news@ger.gmane.org>
+References: <200807240048.20980.bluelightning@bluelightning.org>
+	<g69aeh$5cu$1@ger.gmane.org>
+	<1404.78.86.188.127.1216886903.squirrel@webmail12.pair.com>
+Date: Thu, 24 Jul 2008 10:08:10 +0100
+Message-Id: <1216890490.6103.1.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: PATCH: make h2200-bootloader load & depend on mtdblock
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -41,30 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2008 09:02:31 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 24 Jul 2008 09:09:42 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Paul Eggleton wrote:
+
+On Thu, 2008-07-24 at 20:08 +1200, Paul Eggleton wrote:
 > Koen Kooi wrote:
->> Never ever rdepend on a kernelmodules, since it might be built in to the
->> kernel in the future (like it was in the past), only use
->>
->> RRECOMMENDS_${PN} = "kernel-module-foo"
->
+> > Never ever rdepend on a kernelmodules, since it might be built in to the
+> > kernel in the future (like it was in the past), only use
+> >
+> > RRECOMMENDS_${PN} = "kernel-module-foo"
+> 
 > OK, so please excuse my ignorance and I don't have OE in front of me to
 > test it, but does that mean that kernel-module-mtdblock will be included
 > in images where h2200-bootloader is included? If not, then it needs to be
 > done some other way.
 
-It means that h2200-bootloader (but not the -dev and -dbg packages) with 
-have this in its opkg controlfile:
+Yes, its standard practise to RRECOMMEND kernel modules since if they're
+built into the kernel you get build failures otherwise. The RRECOMMEND
+is a standard approach and well tested.
 
-Recommends: kernel-module-foo
+Regards,
 
-regards,
-
-Koen
+Richard
 
 
 
