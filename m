@@ -1,26 +1,38 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1KMgPU-0001n9-OO
+Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1KMgap-0001yS-Eo
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jul 2008 11:49:56 +0200
-Received: (qmail invoked by alias); 26 Jul 2008 09:48:31 -0000
-Received: from BAA0a9b.baa.pppool.de (EHLO [192.168.178.36]) [77.128.10.155]
-	by mail.gmx.net (mp024) with SMTP; 26 Jul 2008 11:48:31 +0200
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX19c7oBQ2m5cGp4mly5BlSlyg48GMU0EuTuNrzeTp9
-	fEyRf2qmj0Aemp
-Message-ID: <488AF2ED.2030709@gmx.de>
-Date: Sat, 26 Jul 2008 11:48:29 +0200
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Sat, 26 Jul 2008 12:01:39 +0200
+Received: by wa-out-1112.google.com with SMTP id j37so2173090waf.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Jul 2008 03:00:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=wwwq/MPOs3xyYG145mpPGpCRFPWJPCXUB6YOz9V+Zt0=;
+	b=BF//y9leeYm2WAB1hekcWGAYNkPMuGiZkGKOVRuWYrp8GEpLSsnVi2nhwFliYqeAki
+	xCK47Rt8O50AT+rctqLG4bqBC+V/ZgiEo8Gh53T9BXBt2JUhyzBj+YNRuFrw3xR8xGj7
+	Rg3ZOgQ6m4t8IqaORIgRf8LzGZ/4UL+Sw6gLc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=hW03HyjCxa3oZI7tbT+v6bHhrtr/R+uM+xlCu4nnLTqwwii6bj9LfT9+hgLjIvCQ5g
+	VRCm7nIBNuFgNy5iW3tqxP/RVGExp5vIYubRGk++CnMGhxscLGugfvyO+gzekTBok/9D
+	e0febwct7eNowc8/s4TGgEQuXyXoDa09E0z4A=
+Received: by 10.114.151.13 with SMTP id y13mr3047505wad.134.1217066415155;
+	Sat, 26 Jul 2008 03:00:15 -0700 (PDT)
+Received: by 10.114.149.20 with HTTP; Sat, 26 Jul 2008 03:00:15 -0700 (PDT)
+Message-ID: <19c1b8a90807260300p51acb3f4u982953d86743de83@mail.gmail.com>
+Date: Sat, 26 Jul 2008 03:00:15 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4889169C.7040108@gmx.de>
-	<1217065082.22069.111.camel@mill.internal.reciva.com>
-In-Reply-To: <1217065082.22069.111.camel@mill.internal.reciva.com>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.67
-Subject: Re: RFC: kernel.bbclass and collie changes
+In-Reply-To: <200807261114.16844.openembedded@haerwu.biz>
+MIME-Version: 1.0
+References: <20080726072803.7129218930E@amethyst.openembedded.net>
+	<200807261114.16844.openembedded@haerwu.biz>
+Subject: Re: [oe-commits] org.oe.dev 1. Bump up the SVN revision.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -34,29 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jul 2008 09:49:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 26 Jul 2008 10:01:39 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Phil Blundell wrote:
-> On Fri, 2008-07-25 at 01:56 +0200, Thomas Kunze wrote:
->   
->> +/dev/mmcblk0p1	b	6600	0	6	179	1	-	-	-
->>     
+On Sat, Jul 26, 2008 at 2:14 AM, Marcin Juszkiewicz
+<openembedded@haerwu.biz> wrote:
+> On Saturday 26 of July 2008 09:28:03 khem commit wrote:
 >
-> Is that "6600" really correct?
->   
-Of course not. Just a typo.
-> It does also seem bit odd having an mmc device in the "minimal" device
-> table.  I can understand why you need it on collie but I am not sure it
-> is all that desirable for device-table-minimal.txt to become the union
-> of the devices that everybody needs on their favourite platform for
-> booting purposes.  Since this is truly a machine specific thing I would
-> be inclined to use a separate file, or a collie-specific catenation onto
-> the installed copy.
->   
-I see your point. But OTOH we have 20 hda*, 9 serial consoles and 16 mtd
-nodes in there. So its hardly minimal. In my opinion it doesn't hurt to add
-a further node.
+>> 1. Bump up the SVN revision.
+
+My bad.  But I thought svn revision number is in the commit so did not
+elaborate.
+
+>
+> Who will know what this changes is about? Please read CommitPolicy in
+> wiki.
+
+Thanks for pointer. Will keep in mind next time.
+
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
