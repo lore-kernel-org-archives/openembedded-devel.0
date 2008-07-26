@@ -1,27 +1,25 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1KMgFS-0001Zt-Lm
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thommycheck@gmx.de>) id 1KMgPU-0001n9-OO
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jul 2008 11:39:35 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KMgE1-0006Zb-0A
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jul 2008 10:38:05 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1KMgDz-0005lj-6b
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jul 2008 10:38:03 +0100
-From: Phil Blundell <pb@reciva.com>
+	Sat, 26 Jul 2008 11:49:56 +0200
+Received: (qmail invoked by alias); 26 Jul 2008 09:48:31 -0000
+Received: from BAA0a9b.baa.pppool.de (EHLO [192.168.178.36]) [77.128.10.155]
+	by mail.gmx.net (mp024) with SMTP; 26 Jul 2008 11:48:31 +0200
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX19c7oBQ2m5cGp4mly5BlSlyg48GMU0EuTuNrzeTp9
+	fEyRf2qmj0Aemp
+Message-ID: <488AF2ED.2030709@gmx.de>
+Date: Sat, 26 Jul 2008 11:48:29 +0200
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4889169C.7040108@gmx.de>
 References: <4889169C.7040108@gmx.de>
-Date: Sat, 26 Jul 2008 10:38:02 +0100
-Message-Id: <1217065082.22069.111.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.3 
+	<1217065082.22069.111.camel@mill.internal.reciva.com>
+In-Reply-To: <1217065082.22069.111.camel@mill.internal.reciva.com>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.67
 Subject: Re: RFC: kernel.bbclass and collie changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -36,25 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jul 2008 09:39:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 26 Jul 2008 09:49:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2008-07-25 at 01:56 +0200, Thomas Kunze wrote:
-> +/dev/mmcblk0p1	b	6600	0	6	179	1	-	-	-
-
-Is that "6600" really correct?
-
-It does also seem bit odd having an mmc device in the "minimal" device
-table.  I can understand why you need it on collie but I am not sure it
-is all that desirable for device-table-minimal.txt to become the union
-of the devices that everybody needs on their favourite platform for
-booting purposes.  Since this is truly a machine specific thing I would
-be inclined to use a separate file, or a collie-specific catenation onto
-the installed copy.
-
-p.
-
-
+Phil Blundell wrote:
+> On Fri, 2008-07-25 at 01:56 +0200, Thomas Kunze wrote:
+>   
+>> +/dev/mmcblk0p1	b	6600	0	6	179	1	-	-	-
+>>     
+>
+> Is that "6600" really correct?
+>   
+Of course not. Just a typo.
+> It does also seem bit odd having an mmc device in the "minimal" device
+> table.  I can understand why you need it on collie but I am not sure it
+> is all that desirable for device-table-minimal.txt to become the union
+> of the devices that everybody needs on their favourite platform for
+> booting purposes.  Since this is truly a machine specific thing I would
+> be inclined to use a separate file, or a collie-specific catenation onto
+> the installed copy.
+>   
+I see your point. But OTOH we have 20 hda*, 9 serial consoles and 16 mtd
+nodes in there. So its hardly minimal. In my opinion it doesn't hurt to add
+a further node.
 
 
