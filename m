@@ -1,28 +1,38 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KMqM0-0002Om-5n
+Received: from [209.85.132.251] (helo=an-out-0708.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KN4Xg-0000rH-MG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jul 2008 22:27:00 +0200
-Received: (qmail invoked by alias); 26 Jul 2008 20:25:32 -0000
-Received: from e178069098.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.69.98]
-	by mail.gmx.net (mp013) with SMTP; 26 Jul 2008 22:25:32 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18DDzwVS4oD7yNWqaCnJrcoCL+D5HYfi0MF97kLS8
-	9k6/3XC9CumSd/
-Message-ID: <488B8878.70905@gmx.net>
-Date: Sat, 26 Jul 2008 22:26:32 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
+	Sun, 27 Jul 2008 13:36:00 +0200
+Received: by an-out-0708.google.com with SMTP id b38so773854ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Jul 2008 04:34:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=cjhYmhbsTUFnHTyx8FdJIfwOv7rRdcqgL4bKk3xzwCo=;
+	b=Qr1lczjbCUGb5VAcg70iFO/5Qe32zHRtYJHhFPLA0NBKRVsXTz4qjcbBDx68ggMWHm
+	MAifqwwClRF/Ku2nqrj8df8S5LRe2qaW/BmxFZyMuPKqv81l3s9DKL5CuFfobY5HBUHi
+	PCV3Mn9Wyy8/1AjPFh/eM3Yh9Yj4hptHTZacA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=eNIa/Oi5plPdVIv7Z7R888tvEEbBZi8Bs2uCcK1IjjIp3kNRyU+Kw7Pi3H22M+WuNl
+	PKAnH9sKRvrl0k1H2i+UwHjh+JV1JiLaj/OwMgzdv1ITDhcR1MrAEpVMWfnU6vuOlxe2
+	4EpEkNOid0duuhZD6rzdJ/10CJwbTI9wkCpeU=
+Received: by 10.100.255.10 with SMTP id c10mr2526288ani.137.1217158471961;
+	Sun, 27 Jul 2008 04:34:31 -0700 (PDT)
+Received: by 10.100.166.17 with HTTP; Sun, 27 Jul 2008 04:34:31 -0700 (PDT)
+Message-ID: <c384c5ea0807270434s4a70f996r206725f29c4545f8@mail.gmail.com>
+Date: Sun, 27 Jul 2008 13:34:31 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200807252012.04831.mickey@vanille-media.de>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Henning Heinold <heinold@inf.fu-berlin.de>
-References: <20080726202735.E89F2189327@amethyst.openembedded.net>
-In-Reply-To: <20080726202735.E89F2189327@amethyst.openembedded.net>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.51
-Subject: Re: [oe-commits] org.oe.dev classpath-initial: fix libtool2 error
+References: <g6b7io$kun$1@ger.gmane.org>
+	<200807252012.04831.mickey@vanille-media.de>
+Subject: Re: bug & patch weekend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -36,70 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jul 2008 20:27:00 -0000
-X-Groupsio-MsgNum: 5619
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig7659D96C9592984729033256"
-
---------------enig7659D96C9592984729033256
+X-List-Received-Date: Sun, 27 Jul 2008 11:36:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi Henning,
-nice you found it finally!
+Hello,
 
-woglinde2 commit schrieb:
-> classpath-initial: fix libtool2 error
-> * when compiling with libtool2 config.rpath is needed and fix this erro=
-r
-> libtool: link: unsupported hardcode properties
-> libtool: link: See the libtool documentation for more information.
-> libtool: link: Fatal configuration error.
-> * config.rpath is coming from gettext so let depend on it
-> * bump PR
+On Fri, Jul 25, 2008 at 8:12 PM, Michael 'Mickey' Lauer
+<mickey@vanille-media.de> wrote:
+> Am Freitag 25 Juli 2008 02:43:06 schrieb Rolf Leggewie:
+>>
+>> how about a "bug & patch sprint" next weekend?  That is the first
+>> weekend in August and if I am not mistaken that's when our bug squashing
+>> used to happen.
+>
+> Agreed. I'm on board! Who else?
+>
 
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> --- packages/classpath/classpath-initial_0.93.bb	dcbd137250c9fd6e2ca0ca=
-88afc7404e9ede289c
-> +++ packages/classpath/classpath-initial_0.93.bb	e8d4723f96ff6828015eaf=
-cabc845d6122cf304f
-> @@ -5,7 +5,7 @@ DESCRIPTION=3D"Java1.4-compatible GNU Clas
-> =20
->  DESCRIPTION=3D"Java1.4-compatible GNU Classpath variant that is used a=
-s bootclasspath for jikes-native."
-> =20
-> -PR =3D "r0"
-> +PR =3D "r2"
-> =20
->  DEPENDS =3D "zip-native fastjar-native jikes-native"
-> =20
-> @@ -25,4 +25,3 @@ EXTRA_OECONF =3D "\
->    --with-native-libdir=3D${STAGING_LIBDIR}/classpath-initial \
->    --includedir=3D${STAGING_INCDIR}/classpath-initial \
->    "
-> -
->=20
-But I do not see any dramatic changes here ... ?!?
+Good idea Rolf. Cannot promise, but surely will try to join in.
 
-Regards
-Robert
+Regards,
+-- 
+Leon
 
 
---------------enig7659D96C9592984729033256
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkiLiHkACgkQG9cfwmwwEto21ACePGeWHlliROiiNLT2U51Rdq/B
-yGQAnR5ktxacuJKkLVTKpQmtNE7NqACy
-=+hn8
------END PGP SIGNATURE-----
-
---------------enig7659D96C9592984729033256--
