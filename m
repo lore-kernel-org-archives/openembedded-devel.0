@@ -1,27 +1,48 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KNAAU-0004g2-It
+Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <stefano.regno@spesonline.com>) id 1KNMCv-00087r-KI
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Jul 2008 19:36:26 +0200
-Received: (qmail invoked by alias); 27 Jul 2008 17:34:55 -0000
-Received: from e178111218.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.111.218]
-	by mail.gmx.net (mp006) with SMTP; 27 Jul 2008 19:34:55 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19Jb6Us6hdJj0DYkpZQjf/rWJyeJZAY9p+T6JTlcN
-	Hs6KRTD9MAneHO
-Message-ID: <488CB1FE.5090803@gmx.net>
-Date: Sun, 27 Jul 2008 19:35:58 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
+	Mon, 28 Jul 2008 08:27:45 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 9D18F95BB7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
+Received: from sirio.fastnet.it ([127.0.0.1])
+	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 04658-01-3 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
+Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 798A595BAD
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 69B9E1D945B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
+Received: from sole.fastnet.it ([127.0.0.1])
+	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 15108-01-8 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
+Received: from [192.168.1.160]
+	(host141-216-static.91-82-b.business.telecomitalia.it
+	[82.91.216.141])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 20AB41D9451
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
+Message-ID: <488D66C8.20405@spesonline.com>
+Date: Mon, 28 Jul 2008 08:27:20 +0200
+From: Stefano Regno <stefano.regno@spesonline.com>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20080727150318.ADD3B189328@amethyst.openembedded.net>
-In-Reply-To: <20080727150318.ADD3B189328@amethyst.openembedded.net>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.7
-Subject: Re: [oe-commits] org.oe.dev classpath-initial: fix libtool2 error
+References: <1216087105.10214.7.camel@isis>
+	<487DACFF.5010504@gmail.com><c384c5ea0807161343s2085dda5ua5f526967583e293@mail.gmail.com><20080720014112.GA13759@oberlord>
+	<20080723090416.GB24264@gmail.com>
+	<1216890646.6103.5.camel@dax.rpnet.com>
+In-Reply-To: <1216890646.6103.5.camel@dax.rpnet.com>
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+Subject: SH7760 Problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -35,46 +56,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jul 2008 17:36:26 -0000
-X-Groupsio-MsgNum: 5622
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig420E1D18BFCF8472FB06DAB7"
+X-List-Received-Date: Mon, 28 Jul 2008 06:27:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig420E1D18BFCF8472FB06DAB7
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
+> Hi all i have problem with some drivers of a motherboard SH7760 could sameone know where i could find video drivers and kernel about it?
+>   
 
-woglinde2 commit schrieb:
-> -DEPENDS =3D "ecj-initial fastjar-native zip-native"
-> +DEPENDS =3D "ecj-initial fastjar-native zip-nativei gettext-native"
-                                                   ^
-This introduced a typo.
+Tnx
+>
+>   
 
-I am committing a fix ASAP.
 
-Regards
-Robert
+-- 
+Peace cannot be kept by force; it can only be achieved by understanding --Albert Einstein
 
 
 
 
-
-
---------------enig420E1D18BFCF8472FB06DAB7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkiMsf4ACgkQG9cfwmwwEtoeLACfTgVE/kiAEKp3RtiyTJL2R5in
-WYsAn0LOZSRJ9ov/lFMsB1rJvQJDgXYq
-=beuB
------END PGP SIGNATURE-----
-
---------------enig420E1D18BFCF8472FB06DAB7--
