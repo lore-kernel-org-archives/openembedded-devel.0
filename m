@@ -1,48 +1,30 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefano.regno@spesonline.com>) id 1KNMCv-00087r-KI
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jul 2008 08:27:45 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 9D18F95BB7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 04658-01-3 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 798A595BAD
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 69B9E1D945B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 15108-01-8 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
-Received: from [192.168.1.160]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 20AB41D9451
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2008 08:26:09 +0200 (CEST)
-Message-ID: <488D66C8.20405@spesonline.com>
-Date: Mon, 28 Jul 2008 08:27:20 +0200
-From: Stefano Regno <stefano.regno@spesonline.com>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1216087105.10214.7.camel@isis>
-	<487DACFF.5010504@gmail.com><c384c5ea0807161343s2085dda5ua5f526967583e293@mail.gmail.com><20080720014112.GA13759@oberlord>
-	<20080723090416.GB24264@gmail.com>
-	<1216890646.6103.5.camel@dax.rpnet.com>
-In-Reply-To: <1216890646.6103.5.camel@dax.rpnet.com>
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-Subject: SH7760 Problems
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KNS1d-0003G0-RO
+	for openembedded-devel@openembedded.org; Mon, 28 Jul 2008 14:40:29 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KNS02-0000dN-Ux
+	for openembedded-devel@openembedded.org; Mon, 28 Jul 2008 12:38:51 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 28 Jul 2008 12:38:50 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 28 Jul 2008 12:38:50 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 28 Jul 2008 14:38:52 +0200
+Message-ID: <g6kekk$rc8$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
+Sender: news <news@ger.gmane.org>
+Subject: shorter git URLs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -56,22 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jul 2008 06:27:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 28 Jul 2008 12:40:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+Hi,
 
-> Hi all i have problem with some drivers of a motherboard SH7760 could sameone know where i could find video drivers and kernel about it?
->   
+it looks like the switch to git is coming nearer.  gitweb is nice and
+fast.  But it produces rather long URLs.  I assume we'll want to point
+to recipes and stuff often and gitweb is a convenient way to do that
+publicly.  I suggest we implement a couple of apache rewrite rules.
 
-Tnx
->
->   
+a) file access against .dev
+http://gitweb.openembedded.net/file/dev/$1
+http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=blob_plain;f=$1;hb=HEAD
+
+b) file access against .stable
+http://gitweb.openembedded.net/file/stable/$1
+http://gitweb.openembedded.net/?p=org.openembedded.stable.git;a=blob_plain;f=$1;hb=HEAD
+
+c) directory access against .dev
+http://gitweb.openembedded.net/dir/dev/$1
+http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=tree;f=$1;hb=HEAD
+
+d) directory access against .stable
+http://gitweb.openembedded.net/dir/stable/$1
+http://gitweb.openembedded.net/?p=org.openembedded.stable.git;a=tree;f=$1;hb=HEAD
 
 
--- 
-Peace cannot be kept by force; it can only be achieved by understanding --Albert Einstein
+I have not tested this out and I am not sure if this will be error-free.
+What I am sure about is that this would be a nice thing to have.
 
+Regards
+
+Rolf
 
 
 
