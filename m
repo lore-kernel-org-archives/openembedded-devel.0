@@ -1,22 +1,36 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [201.35.65.91] (helo=freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1KNr3j-000631-Sj
+	(envelope-from <otavio@freedom.ind.br>) id 1KNsHR-0004GQ-8u
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Jul 2008 17:24:19 +0200
-Received: from aquilonia.hyboria ([::ffff:78.86.128.56])
-	(AUTH: LOGIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Tue, 29 Jul 2008 16:22:41 +0100
-	id 000304F5.488F35C1.00000CED
-Date: Tue, 29 Jul 2008 16:22:39 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	Tue, 29 Jul 2008 18:42:33 +0200
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 3B51E8BB4CB;
+	Tue, 29 Jul 2008 13:40:55 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 016A91EAC25;
+	Tue, 29 Jul 2008 13:40:54 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 29 Jul 2008 13:40:54 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 36B3EC0DC;
+	Tue, 29 Jul 2008 10:41:01 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 779CE61006A; Tue, 29 Jul 2008 13:40:17 -0300 (BRT)
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080729162239.538c5ae7@aquilonia.hyboria>
-In-Reply-To: <g6naum$ure$1@ger.gmane.org>
 References: <1217340989.5482.10.camel@dax.rpnet.com>
 	<g6naum$ure$1@ger.gmane.org>
-X-Mailer: Claws Mail 3.5.0 (GTK+ 2.12.10; i486-pc-linux-gnu)
-Mime-Version: 1.0
-Cc: no2spam@nospam.arcornews.de
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Tue, 29 Jul 2008 13:40:17 -0300
+In-Reply-To: <g6naum$ure$1@ger.gmane.org> (Rolf Leggewie's message of "Tue\,
+	29 Jul 2008 16\:54\:23 +0200")
+Message-ID: <87abg0ej9q.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+MIME-Version: 1.0
+Cc: openembedded-devel@openembedded.org
 Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -31,33 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jul 2008 15:24:20 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Jul 2008 16:42:33 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On Tue, 29 Jul 2008 16:54:23 +0200
-Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
+Rolf Leggewie <no2spam@nospam.arcornews.de> writes:
 
 > Hi Richard,
-> 
+>
 > thank you for the update.
-> 
+>
 > Richard Purdie wrote:
-> > There is also the issue of commit ID naming. I'm tempted to propose
-> > we use commit IDs with a domain such as
-> > userid@developers.openembedded.org.
-> 
+>> There is also the issue of commit ID naming. I'm tempted to propose we
+>> use commit IDs with a domain such as userid@developers.openembedded.org.
+>
 > I think something under openembedded.org is a good idea for several
 > reasons.  But how about userid@dev.openembedded.org?
-> 
-> 1) I like short mail addies
-> 2) it corresponds to the dev branch
-> 
-> I think the IDs should be real (forwarded) mail addies so devs can be
-> contacted easily.
-> 
-But please run spam assassin before forwarding.
 
-Graeme
+I disagree. Using real mail address give a real view of who can be
+sponsoring work and using OE.  
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
