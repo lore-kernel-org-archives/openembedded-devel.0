@@ -1,24 +1,27 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1KNvGw-0002mI-Hh
-	for openembedded-devel@openembedded.org; Tue, 29 Jul 2008 21:54:14 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20080729195232.IAEO29505.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jul 2008 15:52:32 -0400
-Received: from localhost ([68.230.56.208]) by fed1rmimpo02.cox.net with bizsmtp
-	id vvsZ1Z0014VZ64s04vsZ4Z; Tue, 29 Jul 2008 15:52:33 -0400
-Date: Tue, 29 Jul 2008 12:52:32 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20080729195232.GE2795@smtp.west.cox.net>
-References: <1217340989.5482.10.camel@dax.rpnet.com> <488F6B5B.4090400@gmx.de>
-	<873als8p2d.fsf@neumann.lab.ossystems.com.br>
+	(envelope-from <rod@whitby.id.au>) id 1KNz7d-0006NB-5M
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jul 2008 02:00:53 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 9BC0E14DDC4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Jul 2008 19:59:13 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Tue, 29 Jul 2008 19:59:13 -0400
+X-Sasl-enc: wAPZHelx+k9WGkCYjVAjUY/ENSK1xhvYDqwoNcuWhyk2 1217375953
+Received: from [192.168.124.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id E456B21948
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Jul 2008 19:59:12 -0400 (EDT)
+Message-ID: <488FAE77.7050107@whitby.id.au>
+Date: Wed, 30 Jul 2008 09:27:43 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
 MIME-Version: 1.0
-In-Reply-To: <873als8p2d.fsf@neumann.lab.ossystems.com.br>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.13 (2006-08-11)
+To: openembedded-devel@lists.openembedded.org
+References: <1217340989.5482.10.camel@dax.rpnet.com>
+In-Reply-To: <1217340989.5482.10.camel@dax.rpnet.com>
 Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -33,55 +36,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jul 2008 19:54:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Jul 2008 00:00:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 29, 2008 at 04:31:38PM -0300, Otavio Salvador wrote:
-> Thomas Kunze <thommycheck@gmx.de> writes:
-> 
-> > Hi,
-> >
-> > just a minor question:
-> > Can we have the sender for commit messages as it is in monotone?
-> > e.g. "mickeyl commit" instead of  "OE GIT Trial"
-> >
-> > I find it very useful to be able to see who committed sth. with a
-> > short look
-> > into my mailbox.
-> 
-> You'll see the merge commit and the mail script could be changed to
-> post the commiter id too I guess.
+Richard Purdie wrote:
+> There is also the issue of commit ID naming. I'm tempted to propose we
+> use commit IDs with a domain such as userid@developers.openembedded.org.
+> This would allow email redirection should we ever want it without
+> interfering with the main domain. The alternative is to let people use
+> their own domains but this means the IDs change when people change email
+> address and isn't really consistent for the metadata and maintaining a
+> single identity. I'm really open to opinions on this though. 
 
-The following script is something I used to use years ago on the linux
-kernel git commit lists and triggered from procmail:
-#!/bin/sh
+Just use real email addresses.  If someone doesn't want to use their 
+current home or work email address, or has an address that they don't 
+own (and therefore will change in the future), they can easily get a 
+google mail or yahoo mail account purely for a commit email address.
 
-TMP=`mktemp /tmp/setfrom.XXXXXX`
-cat > $TMP
+The Linux kernel uses real email addresses.  Why would OE do something 
+different?
 
-## Old BitKeeper logic
-from=`grep '^ChangeSet' $TMP | head -1 | awk '{print $NF}'`
+Since the git commit Id is always "Real Name <email@address>" (not just 
+a raw email address) then the Real Name will usually stay the same 
+irrespective of the email address changing - this provides the desired 
+continuity of identification.
 
-## New git logic
-author=`sed -n '/^author /p' < $TMP | head -n 1`
-if [ ! -z "$author" ]; then
-  from=`echo $author | sed 's/author \(.*>\).*/\1/'`
-  date=`echo $author | sed 's/author.*> //'`
-fi
-if test -n "$from" -a -n "$date"; then
-  formail -I "From: $from" -I "Date: `date -d "$date" -R`" < $TMP
-else
-  if test -n "$from"; then
-    formail -I "From: $from" < $TMP
-  else
-    cat $TMP
-  fi
-fi
-
-rm $TMP
-
--- 
-Tom Rini
+-- Rod
 
 
