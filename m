@@ -1,30 +1,30 @@
 Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1KNq1h-0003Mr-Ub
-	for openembedded-devel@openembedded.org; Tue, 29 Jul 2008 16:18:10 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1KNq1p-0003N1-08
+	for openembedded-devel@openembedded.org; Tue, 29 Jul 2008 16:18:17 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6TEGWYN004597
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6TEGdBe004609
 	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jul 2008 15:16:32 +0100
+	Tue, 29 Jul 2008 15:16:39 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 04537-02 for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jul 2008 15:16:25 +0100 (BST)
+	id 04377-06 for <openembedded-devel@openembedded.org>;
+	Tue, 29 Jul 2008 15:16:33 +0100 (BST)
 Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6TEGOUX004586
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6TEGS7S004594
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jul 2008 15:16:24 +0100
+	Tue, 29 Jul 2008 15:16:28 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Tue, 29 Jul 2008 15:16:25 +0100
-Message-Id: <1217340985.5482.9.camel@dax.rpnet.com>
+Date: Tue, 29 Jul 2008 15:16:29 +0100
+Message-Id: <1217340989.5482.10.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.12.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: OE Commit Policy and other procedures
+Subject: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -38,55 +38,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jul 2008 14:18:10 -0000
+X-List-Received-Date: Tue, 29 Jul 2008 14:18:17 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-We've been conscious that the OE project has lacked direction and in
-some senses management. In an attempt to clear all this up the "core
-team" have put together some policies to try and give structure to the
-way we do things. These have been put onto the wiki and are linked off
-the http://wiki.openembedded.net/index.php/Category:Policy page.
+We've made the decision we want to switch to git so what happens now? We
+now have:
 
-The newly added pages are:
+* Agreed policies (pending no major objections from openembedded-devel)
+* A git server setup
+* Web browsing of the git server
+* Commit hooks for CIA and email notification of commits
 
-http://wiki.openembedded.net/index.php/Branching_Policy
-http://wiki.openembedded.net/index.php/Bug_days
-http://wiki.openembedded.net/index.php/Commit_Policy
-http://wiki.openembedded.net/index.php/Community_Servers
-http://wiki.openembedded.net/index.php/Documentation_Team
-http://wiki.openembedded.net/index.php/New_commit_rights
-http://wiki.openembedded.net/index.php/OE_core_team
-http://wiki.openembedded.net/index.php/User_contributions
+What remains:
 
-Of these, the ones of particular importance are the commit policy and
-the core and documentation teams. These formalise
-arrangements/agreements that have partially existed for a while.
+* A final mtn -> git conversion
+  - There is a known problem with the mtn -> git conversion which needs 
+    to be addressed. Holger has the details of this
+  - We also need to decide how to map the key names
+* Collection of keys for access to the git server
+* Creating a BKCVS history import and graft this onto the monotone 
+  history
+  - There are some conversion defects. Richard has the details and is 
+    trying to look into this
+  - We also need to decide on key name mappings, preferably consistent 
+    with the git ones.
+* Rename "gittrial" -> "git" on amethyst
 
-These policies pretty much reflect the way things have happened up until
-now so its hoped they're not too controversial and not too much
-discussion should be needed but obviously if anyone has any questions or
-issues please do raise them. Its hoped this clarifys the situation for
-everyone concerned.
+Of these the BKCVS import and be done and also redone at a later date so
+I'm not worried about this and it doesn't affect timescales. Renaming
+gittrial -> git is pretty much trivial and won't take long. Collection
+of keys is also relatively straightforward, we just need someone to
+document key generation and collect them. They're basically ssh public
+keys and gitosis makes them trivial to add so I can take on collection
+role if existing developers with access to monotone want to start
+sending me keys (ssh v2 keys please).
 
-Of key importance is the commit policy which should now give us a clear
-run on the changeover to git. I'll follow up this email with another
-about that.
+This leaves the mtn -> git conversion which isn't trivial. Holger is our
+expert in this area and I'd really like to let him have the time needed
+to sort this out to his satisfaction. I appreciate he has many time
+constraints so this may not happen immediately.
 
-Also listed here but slightly out of place is a proposal/RFC: 
+There is also the issue of commit ID naming. I'm tempted to propose we
+use commit IDs with a domain such as userid@developers.openembedded.org.
+This would allow email redirection should we ever want it without
+interfering with the main domain. The alternative is to let people use
+their own domains but this means the IDs change when people change email
+address and isn't really consistent for the metadata and maintaining a
+single identity. I'm really open to opinions on this though. 
 
-http://wiki.openembedded.net/index.php/Structure_of_.dev_branch
+Also documenting all users with access on the wiki might be a good idea
+(we used to do this but I think the data is stale).
 
-I've proposed this in various ways before and I think this is needed,
-not least to help with the commit policy and what is defined as a "core"
-component needing more careful review. Please consider this as a RFC and
-follow up on the list with any questions/issues/counter proposals etc.
+Once we have the mtn -> git conversion working to satisfaction I propose
+we give 1 weeks warning before monotone becomes readonly, the conversion
+is made and we open up git for read/write. This email serves as notice
+that people need to be ready to watch out for that time.
 
-Regards,
+I hope this covers everything but any questions just ask...
 
-Richard (on behalf of a unanimous core team decision)
+Cheers,
+
+Richard
 
 
 
