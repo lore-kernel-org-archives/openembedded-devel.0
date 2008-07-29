@@ -1,25 +1,23 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [63.80.53.70] (helo=smtp-relay1.palm.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1KNsaq-0004sa-Qh
-	for openembedded-devel@openembedded.org; Tue, 29 Jul 2008 19:02:37 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20080729170056.CPYY6482.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Jul 2008 13:00:56 -0400
-Received: from localhost ([68.230.56.208]) by fed1rmimpo03.cox.net with bizsmtp
-	id vt0v1Z00J4VZ64s04t0v9Y; Tue, 29 Jul 2008 13:00:56 -0400
-Date: Tue, 29 Jul 2008 10:00:55 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20080729170055.GC2795@smtp.west.cox.net>
-References: <1217340989.5482.10.camel@dax.rpnet.com>
-	<g6naum$ure$1@ger.gmane.org>
-	<87abg0ej9q.fsf@neumann.lab.ossystems.com.br>
+	(envelope-from <rich.pixley@palm.com>) id 1KNskc-0005Bz-1T
+	for openembedded-devel@openembedded.org; Tue, 29 Jul 2008 19:12:42 +0200
+X-IronPort-AV: E=Sophos;i="4.31,273,1215414000"; d="scan'208,217";a="6099246"
+Received: from unknown (HELO mailhost02.palm.com) ([148.92.223.90])
+	by smtp-relay1.palm.com with ESMTP; 29 Jul 2008 10:11:00 -0700
+Received: from flamingo.palm.com (flamingo.palm.com [148.92.248.64])
+	by mailhost02.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
+	m6THB0N8000882; Tue, 29 Jul 2008 10:11:00 -0700 (PDT)
+Message-ID: <488F4F24.3050405@palm.com>
+Date: Tue, 29 Jul 2008 10:11:00 -0700
+From: Rich Pixley <rich.pixley@palm.com>
+User-Agent: Thunderbird 2.0.0.16 (Macintosh/20080707)
 MIME-Version: 1.0
+To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
+References: <1217340989.5482.10.camel@dax.rpnet.com>	<g6naum$ure$1@ger.gmane.org>
+	<87abg0ej9q.fsf@neumann.lab.ossystems.com.br>
 In-Reply-To: <87abg0ej9q.fsf@neumann.lab.ossystems.com.br>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.13 (2006-08-11)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.10
 Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -34,33 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jul 2008 17:02:37 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 29 Jul 2008 17:12:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 29, 2008 at 01:40:17PM -0300, Otavio Salvador wrote:
-> Rolf Leggewie <no2spam@nospam.arcornews.de> writes:
-> 
-> > Hi Richard,
-> >
-> > thank you for the update.
-> >
-> > Richard Purdie wrote:
-> >> There is also the issue of commit ID naming. I'm tempted to propose we
-> >> use commit IDs with a domain such as userid@developers.openembedded.org.
-> >
-> > I think something under openembedded.org is a good idea for several
-> > reasons.  But how about userid@dev.openembedded.org?
-> 
+Otavio Salvador wrote:
+> Rolf Leggewie <no2spam@nospam.arcornews.de> writes
+>> Richard Purdie wrote:
+>>     
+>>> There is also the issue of commit ID naming. I'm tempted to propose we
+>>> use commit IDs with a domain such as userid@developers.openembedded.org.
+>>>       
+>> I think something under openembedded.org is a good idea for several
+>> reasons.  But how about userid@dev.openembedded.org?
+>>     
 > I disagree. Using real mail address give a real view of who can be
-> sponsoring work and using OE.  
+> sponsoring work and using OE.
+Seems to me the point is to have commit id's which encourage and support 
+responsibility.  Since we know each other primarily by email id's, (and 
+yes, these change periodically), it seems completely reasonable to me to 
+request that these be done using functional email addresses.  They may 
+or may not represent a, (potentially temporary), work assignment or 
+employment.  For someone who frequently changes work assignments or 
+employment, a more generic address, either a personal one, or a cut-out 
+or email forwarder like gmail intended specifically for that purpose 
+might be appropriate.
 
-One of the big problems there is what happens when developer X stops
-doing stuff for company Y?  Or does something on their own? Submission /
-Signed-off/Ack'ed by, that's fine.  But for commit work I think it's
-best that it's always the same and a can made functional email.
+I read the suggestion as meaning that it should, in general, be possible 
+for me as a developer and/or consumer to contact the author of a 
+particular commit, which sounds completely appropriate to me, at least 
+superficially.  If the commit id's aren't email addresses, then we'd 
+need to use some other mapping to figure out how to contact commit 
+authors.  Or are there other ways to handle this already?
 
--- 
-Tom Rini
-
+--rich
 
