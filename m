@@ -1,25 +1,34 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [74.125.46.158] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1KOELv-0005qo-0z
-	for openembedded-devel@openembedded.org; Wed, 30 Jul 2008 18:16:39 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6UGErYP025059
+	(envelope-from <cliff.brake@gmail.com>) id 1KOEMx-0005t4-3f
+	for openembedded-devel@openembedded.org; Wed, 30 Jul 2008 18:17:43 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so59311ywr.30
 	for <openembedded-devel@openembedded.org>;
-	Wed, 30 Jul 2008 17:14:53 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 24811-07 for <openembedded-devel@openembedded.org>;
-	Wed, 30 Jul 2008 17:14:47 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m6UGEk3U025053
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 30 Jul 2008 17:14:46 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Wed, 30 Jul 2008 09:16:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=rJjWzz37eOQCcjQ1pMHZjTAg9KkgUiE2IPYevLWnD8g=;
+	b=HMQmjHcA/UIxCkWB0Qa8Ot12W2+EKFBAB0eitOHxKTlGXoSPTW1XWj4FFWzvW2h2V9
+	e81VLsztVpNDCgGaf8oQO1slwObKLZtrtY0p11UXOArLe8dIEO1Ghxqte3i65clsJsp1
+	TcOlYk8Ky91vwk1kQiMjQYGOQ89T91hMOz7f0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=wbEFhxwRY4S6eLLMn9THb6/GghUd74uguav5gCfdIYklhvdZXal5B7PXvrXUZSvgRh
+	bkJAYUsAM7YXGHxMJUx1k2JWEGGTjbJGzGjh6qlK+1iOl9jaXSUgB6MIWYBSLarV66Ur
+	uh7gTt9UN3pnn88q8jcTB6U1HqidTWKNjKbjQ=
+Received: by 10.114.77.19 with SMTP id z19mr8771169waa.138.1217434558973;
+	Wed, 30 Jul 2008 09:15:58 -0700 (PDT)
+Received: by 10.114.184.13 with HTTP; Wed, 30 Jul 2008 09:15:58 -0700 (PDT)
+Message-ID: <f96d234e0807300915y48ffc027w14e5a37604141ab9@mail.gmail.com>
+Date: Wed, 30 Jul 2008 12:15:58 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <489084EE.9070407@whitby.id.au>
+In-Reply-To: <1217428116.5510.26.camel@dax.rpnet.com>
+MIME-Version: 1.0
 References: <1217340989.5482.10.camel@dax.rpnet.com>
 	<488FAE77.7050107@whitby.id.au>
 	<200807300920.37221.openembedded@haerwu.biz>
@@ -27,12 +36,6 @@ References: <1217340989.5482.10.camel@dax.rpnet.com>
 	<87myjz34uv.fsf@neumann.lab.ossystems.com.br>
 	<4890678A.5040005@balister.org>
 	<1217428116.5510.26.camel@dax.rpnet.com>
-	<489084EE.9070407@whitby.id.au>
-Date: Wed, 30 Jul 2008 17:14:47 +0100
-Message-Id: <1217434487.5510.64.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -47,86 +50,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2008 16:16:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 30 Jul 2008 16:17:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I'm going to skip the rest of your argument, I don't agree the other
-bits but this bit did does lead to something important: 
+On Wed, Jul 30, 2008 at 10:28 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Wed, 2008-07-30 at 09:07 -0400, Philip Balister wrote:
+>> Otavio Salvador wrote:
+>> > "Cliff Brake" <cliff.brake@gmail.com> writes:
+>> >
+>> >> Using real email addresses would also simplify server admin and be one
+>> >> less load on the server.  When the spam starts flowing, this can
+>> >> require a significant amount of network bandwidth.  Where I host my
+>> >> main web site and domain, the owner claims spam to email accounts is
+>> >> by far the greatest use of bandwidth, and he spends a lot of time
+>> >> implementing anti-spam measures.  With limited resources, simple is
+>> >> good!
+>> >
+>> > +1
+>> >
+>>
+>> I also agree. I would prefer to commit with my own address. I own all
+>> the domains, so they should last as long as I do.
+>
+> Before we all start jumping on this wagon let me explain some of the
+> background to what I proposed. I was trying to keep that announcement
+> brief and it assumes some understanding of git so let me explain
+> further:
 
-On Thu, 2008-07-31 at 00:42 +0930, Rod Whitby wrote:
-> Richard Purdie wrote:
-> > 2. The kernel uses a pull model for development and people check IDs for
-> > some sanity before pulling. With the push model we're going for we don't
-> > have that luxury.
-> 
-> That is true.  However, you also need to account for a multi-level push 
-> model, where the second and subsequent levels may not have the same 
-> restrictions on IDs that you are proposing for the master OE repository. 
->   In this case, the author and committer will really be two different 
-> people, and you want to have real contact email addresses for both.
+Thanks for explaining -- this provoked me to do a little more digging ...
 
-This isn't a problem as you describe as nowhere did I suggest making
-committer == author or require any changes to author. It does bring
-something else slightly related to mind though.
+We have a nomenclature issue -- "commit id" is typically referred to
+in the git documentation as the hash that defines a particular commit,
+so perhaps "committer" is slightly more correct.  Being on the doc
+team, I guess I'm supposed to be picky about stuff like this :-)
 
-Say I have some tree outside OE and I commit things to is as a developer
-with no access to OE directly. "We" then want to merge that into OE.
-Even assuming the commit hooks allow this (there are ways and means) we
-immediately lose our namespace protection. There are 101 other scenarios
-that would allow this to happen and they show that namespace protection
-is pointless with git.
+The following docs give a little more information:
 
-Note that your AUTHORS file would also break with this approach unless
-at merge time you grep the external tree for all email addresses and
-then add them which would be tedious at best.
+http://www.kernel.org/pub/software/scm/git/docs/git-config.html
+http://www.kernel.org/pub/software/scm/git/docs/git-commit-tree.html
 
-I think we've lost sight of the original problems so lets go back to
-them:
+GIT_AUTHOR_NAME
+GIT_AUTHOR_EMAIL
+GIT_AUTHOR_DATE
+GIT_COMMITTER_NAME
+GIT_COMMITTER_EMAIL
+GIT_COMMITTER_DATE
 
-The points I had in mind with this was to:
+Is env variables the only way to set these to be different than user.*?
 
-a) stop insane IDs entering the repository (ich@1.2.3.4)
-b) gain something we could feed into the final mtn -> git and bkcvs -> 
-   git conversions which would make more sense of the data. 
-   "crofton@openembedded.org" really isn't a useful identifier.
-c) ensure we have accurate records about our committers on the wiki
-d) remove problems trying to associate related commit IDs e.g.  when 
-   someone changes email address frequently and solve that problem once 
-   and for all.
+The following commands:
 
-We can prove d) is impossible above so lets forget it. c) below partly
-covers it though.
+git log --pretty=raw
+git show --pretty=raw
 
-For b) I'd propose making a list of the monotone IDs we have and asking
-for opinions of what to do with them. I'm happy for
-"rpurdie@openembedded.org" to become "Richard Purdie <rpurdie@rpsys.net>
-for example and that will increase the usefulness of the metadata (some
-username mappings are much harder to guess). I already have a list of
-bkcvs ids to monotone IDs so this just leaves the the monotone -> git
-mappings. Is anyone willing to volunteer to collect a list?
+can be used to show both committer and author id.  gitk also shows
+both author and committer ID.
 
-For c), we should make updating the wiki part of the procedure for
-having an ssh key added for access to the git server. Whilst some people
-have protested in the past I'd like to see people's email addresses
-listed there including any aliases they commit under. They're going to
-appear on the web representations of git anyway. This means if an
-address is dead we have an idea of what the live one might be. We can
-also probably collect this information from the wiki in a script about
-defunct addresses and have gitweb and cgit use it when displaying the
-IDs if I remember rightly.
+One thing that is useful is to be able to figure out who might have
+merged a change from another branch.  For example, I could have my own
+git repo where all the commit IDs are my ID (oops, I meant
+committer!!!!).  Someone else could merge this repo into the master OE
+repo.  In this case, the committer ID for a particular commit does not
+tell you who decided to merge my branch into the master OE repo, as my
+committer ID will still be listed in the commits.  You have to follow
+a graph of all the merges to know for sure what happened.
 
-For a) I guess the best we can do is add some checking for insane commit
-and author IDs like containing "localhost", not setting a name or
-containing an IP address. I'd also like to add something to the commit
-policy about only committing using sane IDs, commits with invalid IDs
-are at risk of being reverted.
+There are several ways to view this:
 
-How does that sound?
+git log --branch ... (my version of git does not have this :-(  )
+gitk $commit_id..$branch_name
 
-Richard
+The second option shows a simple graphical view of how something got
+into a branch and all the merge points.  The more I mess with git, the
+more impressed I am that you can just try stuff like "gitk
+$commit_id..$branch_name", and it just works.
 
+Cliff
 
-
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
