@@ -1,43 +1,37 @@
-Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
+Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1KOJMC-0004b3-My
+	(envelope-from <esbenhaabendal@gmail.com>) id 1KOJbu-0004xg-6j
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jul 2008 23:37:16 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so240435rvb.12
+	Wed, 30 Jul 2008 23:53:30 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so248350rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2008 14:35:32 -0700 (PDT)
+	Wed, 30 Jul 2008 14:51:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:content-disposition:references;
-	bh=HhVm5AT43+tRHcMsN022CEBaHG+Z3CN6yIIek5LgUlw=;
-	b=N48n5x9gewqQ6OoLRpbSkO2dysMflbcV032PAKgiFKM5A0NMNYdgTdkQn+4k8tU/Ho
-	J1SKuUWZ5Lfl7d3BoLk++tROutVjPph9VSV4wzSJuBZ0PPXZStgOd6ubi5uz1+fx5pNW
-	YKPejVDQ+GNb9b94q4piYqSzZQwzTFHjl3arw=
+	bh=pMHGl1aFGpXN/GmYScfcHtgdB3SoSstLMsx+5jSNmP8=;
+	b=wZpzihuX5JDbWF6J1hq+vRQkqHYLTuNk5P4AdqodvrXxeAFmA+oBynHhGSzGhwToEU
+	NI/Eqr+/QnQsLaZAb8rS0NAbGAVTcj/w7ak3w9vVz3bOiIPjw9t3z9VhAhoXdmjnqqL2
+	t01uoj+dzEd8MqDbjQWjORBALv7bufHNwzXps=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:in-reply-to:mime-version
 	:content-type:content-transfer-encoding:content-disposition
 	:references;
-	b=xeEHWQgep3gqSlg14S3pqIjjVO6lZcSBUn6BrPu/lhLyfShOplMJK/QrSEeBU4dagy
-	ZVn7NPBzv6LRA4L53kiMwWkQdYnGbATC3SJU1G1WPuXh4NqBrZnQZLKsJfNEc9px6EGQ
-	sb/2iaAjJSZFkyEr6hoTX3BWGpD9VZIryp+Bk=
-Received: by 10.141.193.1 with SMTP id v1mr4870106rvp.245.1217453732431;
-	Wed, 30 Jul 2008 14:35:32 -0700 (PDT)
-Received: by 10.141.116.18 with HTTP; Wed, 30 Jul 2008 14:35:32 -0700 (PDT)
-Message-ID: <d2b9ea600807301435l61cc91e3sadba66912bd45e3a@mail.gmail.com>
-Date: Wed, 30 Jul 2008 23:35:32 +0200
+	b=hPY8bEp6D5eFyqnLUVvi+jJ+VLx41U2RYR1DTAZeIJL3/OmYVPGg9iG5VxqFPY8ZbV
+	IkxONssyjzno9dPzIltoSYgR0SH9ytvWwJkMf/s272HCn9Kfrq++chw4bBhHfWX0qq9H
+	ldg7wN4kO/Z1lWQhpuEfEls8b5ldQ5xqHypwQ=
+Received: by 10.140.126.14 with SMTP id y14mr4878113rvc.96.1217454705695;
+	Wed, 30 Jul 2008 14:51:45 -0700 (PDT)
+Received: by 10.141.116.18 with HTTP; Wed, 30 Jul 2008 14:51:45 -0700 (PDT)
+Message-ID: <d2b9ea600807301451j1a303fadoe173657f6abc4f71@mail.gmail.com>
+Date: Wed, 30 Jul 2008 23:51:45 +0200
 From: "Esben Haabendal" <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1217428116.5510.26.camel@dax.rpnet.com>
+In-Reply-To: <c384c5ea0807300829s775020aej348bc06d62a47264@mail.gmail.com>
 MIME-Version: 1.0
-References: <1217340989.5482.10.camel@dax.rpnet.com>
-	<488FAE77.7050107@whitby.id.au>
-	<200807300920.37221.openembedded@haerwu.biz>
-	<f96d234e0807300429j2fff8df0oc494e4a5beb9f8ff@mail.gmail.com>
-	<87myjz34uv.fsf@neumann.lab.ossystems.com.br>
-	<4890678A.5040005@balister.org>
-	<1217428116.5510.26.camel@dax.rpnet.com>
-Subject: Re: Git Migration Status
+References: <c384c5ea0807300829s775020aej348bc06d62a47264@mail.gmail.com>
+Subject: Re: Tool for gathering/validating OE source package locations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -51,27 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2008 21:37:17 -0000
+X-List-Received-Date: Wed, 30 Jul 2008 21:53:30 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Jul 30, 2008 at 4:28 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
-
-> Also, "the kernel does this, why can't we" is a totally bogus argument:
+On Wed, Jul 30, 2008 at 5:29 PM, Leon Woestenberg
+<leon.woestenberg@gmail.com> wrote:
+> Hi Esben and all,
 >
-> 1. If the kernel jumped off a cliff, would you too?
-> 2. The kernel uses a pull model for development and people check IDs for
-> some sanity before pulling. With the push model we're going for we don't
-> have that luxury.
+>
+> This is a C application I wrote to keep a database (it uses sqlite) of
+> valid (source package) locations.
+>
+> http://www.sidebranch.com/leon/witpa_20080730.tar.bz2
+>
+>
+> Once you manually add a known-good package, it can use Google powers
+> to add new locations, after validating MD5 and SHA.
+>
+> http://www.sidebranch.com/leon/witpa_20080730.tar.bz2
+>
+> It could act as a OE fetcher back-end if we extend it a bit.
+>
+> The tool is called 'witpa' for "Where Is That Package At?".
 
-This raises another question I have been wondering. Does this push model
-fit OE better than pull?
-The pull model seems to work nicely for the Linux kernel, and as I see it, has
-the advantage that the "infrastructure" adapts automagically to the needs of
-the developers/community.
+Nice!  It would definitely be nice to have integrated as OE fetcher.
 
-I am just wondering...
+Depending on the situation, I would like to:
+
+1. Go through _ALL_ recipes, and check all sources.
+2. Go through all recipes needed for a specific configuration.
+3. Go through all sources already known by witpa.
+
+And as a result,
+
+a. Raise a warning for sources that could not be downloaded.
+   and which is not known by witpa
+b. Raise a warning for sources that could not be downloaded,
+   and which is known by witpa, but a usable alternative location
+   could not be found.
+c. For sources that could not be downloaded, and where witpa
+   is able to find an alternative usable location, send an email with
+   a patch which if applied, fixes the recipe.  These patches should
+   then be hand-carried to a commit.
+
+Without something like this, I fear that stable will not really be
+very stable.
+
+If only I had a bit more time or bitbake hacking experience...
 
 /Esben
 
