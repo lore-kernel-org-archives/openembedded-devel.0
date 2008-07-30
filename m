@@ -1,22 +1,42 @@
-Received: from [64.28.152.243] (helo=smtp-relay2.palm.com)
+Received: from [201.35.65.91] (helo=freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rich.pixley@palm.com>) id 1KOFcK-0003xy-PR
-	for openembedded-devel@openembedded.org; Wed, 30 Jul 2008 19:37:40 +0200
-X-IronPort-AV: E=Sophos;i="4.31,280,1215414000"; d="scan'208";a="11724672"
-Received: from unknown (HELO mailhost01.palm.com) ([148.92.223.30])
-	by smtp-relay2.palm.com with ESMTP; 30 Jul 2008 10:35:55 -0700
-Received: from ako.local ([10.100.2.132])
-	by mailhost01.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
-	m6UHZsj7013428; Wed, 30 Jul 2008 10:35:54 -0700 (PDT)
-Message-ID: <4890A67A.9080209@palm.com>
-Date: Wed, 30 Jul 2008 10:35:54 -0700
-From: "K. Richard Pixley" <rich.pixley@palm.com>
-User-Agent: Thunderbird 2.0.0.16 (Macintosh/20080707)
+	(envelope-from <otavio@freedom.ind.br>) id 1KOFcQ-0003yG-03
+	for openembedded-devel@openembedded.org; Wed, 30 Jul 2008 19:37:46 +0200
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 7DFC38BD5E2;
+	Wed, 30 Jul 2008 14:36:03 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 0E81F8BD5E0;
+	Wed, 30 Jul 2008 14:36:02 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 30 Jul 2008 14:36:02 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 8645BC0D4;
+	Wed, 30 Jul 2008 11:36:09 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id AF44961006A; Wed, 30 Jul 2008 14:35:18 -0300 (BRT)
+To: openembedded-devel@lists.openembedded.org
+References: <1217340989.5482.10.camel@dax.rpnet.com>
+	<488FAE77.7050107@whitby.id.au>
+	<200807300920.37221.openembedded@haerwu.biz>
+	<f96d234e0807300429j2fff8df0oc494e4a5beb9f8ff@mail.gmail.com>
+	<87myjz34uv.fsf@neumann.lab.ossystems.com.br>
+	<4890678A.5040005@balister.org>
+	<1217428116.5510.26.camel@dax.rpnet.com>
+	<489084EE.9070407@whitby.id.au>
+	<1217434487.5510.64.camel@dax.rpnet.com>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 30 Jul 2008 14:35:18 -0300
+In-Reply-To: <1217434487.5510.64.camel@dax.rpnet.com> (Richard Purdie's
+	message of "Wed\, 30 Jul 2008 17\:14\:47 +0100")
+Message-ID: <871w1b1dih.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-References: <1217340989.5482.10.camel@dax.rpnet.com>	<488FAE77.7050107@whitby.id.au>	<200807300920.37221.openembedded@haerwu.biz>	<f96d234e0807300429j2fff8df0oc494e4a5beb9f8ff@mail.gmail.com>	<87myjz34uv.fsf@neumann.lab.ossystems.com.br>	<4890678A.5040005@balister.org>	<1217428116.5510.26.camel@dax.rpnet.com>	<489084EE.9070407@whitby.id.au>	<1217434487.5510.64.camel@dax.rpnet.com>
-	<f96d234e0807301006x5fc528b8kf9a762021a0024f5@mail.gmail.com>
-In-Reply-To: <f96d234e0807301006x5fc528b8kf9a762021a0024f5@mail.gmail.com>
+Cc: openembedded-devel@openembedded.org
 Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -31,13 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2008 17:37:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Jul 2008 17:37:46 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Is there a wiki page somewhere which lists the rationale for switching 
-from mtn to git?
+Richard Purdie <rpurdie@rpsys.net> writes:
 
---rich
+> Note that your AUTHORS file would also break with this approach unless
+> at merge time you grep the external tree for all email addresses and
+> then add them which would be tedious at best.
+
+His proposal is for the commiters ID not the authors ID. We can assume
+that someone who has push right is also an OE author.
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
