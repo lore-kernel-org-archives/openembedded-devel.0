@@ -1,40 +1,30 @@
-Received: from [209.85.132.247] (helo=an-out-0708.google.com)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KODf7-0005Tv-HE
+	(envelope-from <rod@whitby.id.au>) id 1KODgV-0005WV-3l
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jul 2008 17:32:25 +0200
-Received: by an-out-0708.google.com with SMTP id b38so9717ana.83
+	Wed, 30 Jul 2008 17:33:51 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id BA7C014B44D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2008 08:30:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=FgpSAOPEWGxwPjcvuJLiGcdMaqLfRrG+6uXYQ6dvQws=;
-	b=dmEf5bmfv3fj5Q0U/HW8VyIgfS9OqivkM0rO/cqElxKK4ka+t2MEjx8nSQx4E0Xa1K
-	BdHezNsnPy51okfWHpIrWACOVCumA3XVJMTBmJ+ESpmFLdjGEHkPrUuG7xoGBD7cSRHW
-	VnR7fTWiFtk9TzEse7wRFSk4J+/+q6acXkXCg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=ml9Sz2eWpCKEXXfJSHYrGNA2o5iZJICqnBTT5byzHTHTa95iYUhlQMTi1mmhfZAO+M
-	Wq7ikj+j6OlsxYf+P9kJy6qOkdoFoF5+2YFU5wIq2XtNHqykkwL3KfVrtGX22Lbfl9rZ
-	v0rupLfY60TjwKOswajzYRarajRN3PJOdcJeA=
-Received: by 10.100.128.20 with SMTP id a20mr12945263and.153.1217431842737;
-	Wed, 30 Jul 2008 08:30:42 -0700 (PDT)
-Received: by 10.100.166.17 with HTTP; Wed, 30 Jul 2008 08:30:42 -0700 (PDT)
-Message-ID: <c384c5ea0807300830m5ba547b0k6956dca66b3713c8@mail.gmail.com>
-Date: Wed, 30 Jul 2008 17:30:42 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0807300807n43a86feax712a09a6a52d43ca@mail.gmail.com>
+	Wed, 30 Jul 2008 11:32:08 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Wed, 30 Jul 2008 11:32:08 -0400
+X-Sasl-enc: qk/EIU2Q5sJlko7gXjDJoaclzFL5qesTgaiIh+16492W 1217431928
+Received: from [192.168.1.100] (CPE-121-209-20-127.sa.bigpond.net.au
+	[121.209.20.127])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id F3906398B6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jul 2008 11:32:07 -0400 (EDT)
+Message-ID: <4890891E.7060705@whitby.id.au>
+Date: Thu, 31 Jul 2008 01:00:38 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
 MIME-Version: 1.0
-References: <d2b9ea600807220111i4c3adc1ekcb470034329e18f7@mail.gmail.com>
-	<c384c5ea0807220145n5a91d46eye0f00f15b95d01ee@mail.gmail.com>
-	<d2b9ea600807221407i2a429eacyd698ed42e55739af@mail.gmail.com>
-	<c384c5ea0807300807n43a86feax712a09a6a52d43ca@mail.gmail.com>
-Subject: Re: Stable source repository
+To: openembedded-devel@lists.openembedded.org
+References: <1217340989.5482.10.camel@dax.rpnet.com>
+In-Reply-To: <1217340989.5482.10.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -48,45 +38,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2008 15:32:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 30 Jul 2008 15:33:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+Richard Purdie wrote:
+> We've made the decision we want to switch to git so what happens now? We
+> now have:
+> 
+> * Agreed policies (pending no major objections from openembedded-devel)
+> * A git server setup
+> * Web browsing of the git server
+> * Commit hooks for CIA and email notification of commits
+> 
+> What remains:
+> 
+> * A final mtn -> git conversion
+>   - There is a known problem with the mtn -> git conversion which needs 
+>     to be addressed. Holger has the details of this
+>   - We also need to decide how to map the key names
+> * Collection of keys for access to the git server
+> * Creating a BKCVS history import and graft this onto the monotone 
+>   history
+>   - There are some conversion defects. Richard has the details and is 
+>     trying to look into this
+>   - We also need to decide on key name mappings, preferably consistent 
+>     with the git ones.
+> * Rename "gittrial" -> "git" on amethyst
 
-On Wed, Jul 30, 2008 at 5:07 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> On Tue, Jul 22, 2008 at 11:07 PM, Esben Haabendal
-> <esbenhaabendal@gmail.com> wrote:
->> On Tue, Jul 22, 2008 at 10:45 AM, Leon Woestenberg
->> <leon.woestenberg@gmail.com> wrote:
->>> On Tue, Jul 22, 2008 at 10:11 AM, Esben Haabendal
->>> <esbenhaabendal@gmail.com> wrote:
->>>>
->>>> Of-course, unless continous manual labor is to be required, we need to
->>>> write a script or something like that to maintain the mirror repository.
->>>>
->>> I have written a "where is that package at" ("witpa") tool to help me
->>> find old archives.
->>>
->> Hi Leon,
->>
->> Do you try to verify the validity of the new location of the
->> package/archive?  Like comparing with a stored md5 from the file from
->> the original/previous location?
->>
-> Yes, I do.
->
-> Let me get that thing online.
->
-> I'll post to this list soon.
-> --
+BTW, since I'm complaining so much about the identifiers in other 
+messages, I just want to say here that I really appreciate all the work 
+that Richard and others have put into the monotone to git transition.
 
-Done. See the new thread on OE-devel.
+I'm very excited by this transition, and have already updated the 
+nslu2-linux Master Makefile to use git and have begun the transition of 
+nslu2-linux monotone repositories to git so that we can be ready and 
+waiting for the OE flag day.
 
-Regards,
--- 
-Leon
+I look forward to the day when I can remove monotone from my laptop and 
+from the nslu2-linux project servers ...
+
+Thanks to all involved!
+
+-- Rod
 
 
