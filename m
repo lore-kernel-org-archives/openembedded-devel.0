@@ -1,17 +1,35 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>)
-	id 1KOFvT-00043R-Il; Wed, 30 Jul 2008 19:57:27 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.63)
-	(envelope-from <broonie@sirena.org.uk>)
-	id 1KOFto-0000LE-BB; Wed, 30 Jul 2008 18:55:44 +0100
-Date: Wed, 30 Jul 2008 18:55:44 +0100
-From: Mark Brown <broonie@sirena.org.uk>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-devel@openembedded.org
-Message-ID: <20080730175542.GH6813@sirena.org.uk>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	openembedded-devel@openembedded.org
+	(envelope-from <esbenhaabendal@gmail.com>) id 1KOJMC-0004b3-My
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jul 2008 23:37:16 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so240435rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jul 2008 14:35:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=HhVm5AT43+tRHcMsN022CEBaHG+Z3CN6yIIek5LgUlw=;
+	b=N48n5x9gewqQ6OoLRpbSkO2dysMflbcV032PAKgiFKM5A0NMNYdgTdkQn+4k8tU/Ho
+	J1SKuUWZ5Lfl7d3BoLk++tROutVjPph9VSV4wzSJuBZ0PPXZStgOd6ubi5uz1+fx5pNW
+	YKPejVDQ+GNb9b94q4piYqSzZQwzTFHjl3arw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=xeEHWQgep3gqSlg14S3pqIjjVO6lZcSBUn6BrPu/lhLyfShOplMJK/QrSEeBU4dagy
+	ZVn7NPBzv6LRA4L53kiMwWkQdYnGbATC3SJU1G1WPuXh4NqBrZnQZLKsJfNEc9px6EGQ
+	sb/2iaAjJSZFkyEr6hoTX3BWGpD9VZIryp+Bk=
+Received: by 10.141.193.1 with SMTP id v1mr4870106rvp.245.1217453732431;
+	Wed, 30 Jul 2008 14:35:32 -0700 (PDT)
+Received: by 10.141.116.18 with HTTP; Wed, 30 Jul 2008 14:35:32 -0700 (PDT)
+Message-ID: <d2b9ea600807301435l61cc91e3sadba66912bd45e3a@mail.gmail.com>
+Date: Wed, 30 Jul 2008 23:35:32 +0200
+From: "Esben Haabendal" <esbenhaabendal@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1217428116.5510.26.camel@dax.rpnet.com>
+MIME-Version: 1.0
 References: <1217340989.5482.10.camel@dax.rpnet.com>
 	<488FAE77.7050107@whitby.id.au>
 	<200807300920.37221.openembedded@haerwu.biz>
@@ -19,17 +37,6 @@ References: <1217340989.5482.10.camel@dax.rpnet.com>
 	<87myjz34uv.fsf@neumann.lab.ossystems.com.br>
 	<4890678A.5040005@balister.org>
 	<1217428116.5510.26.camel@dax.rpnet.com>
-	<489084EE.9070407@whitby.id.au>
-	<1217434487.5510.64.camel@dax.rpnet.com>
-	<871w1b1dih.fsf@neumann.lab.ossystems.com.br>
-MIME-Version: 1.0
-In-Reply-To: <871w1b1dih.fsf@neumann.lab.ossystems.com.br>
-X-Cookie: Those who can't write, write manuals.
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
-X-SA-Exim-Scanned: No (on cassiel.sirena.org.uk);
-	SAEximRunCond expanded to false
 Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -44,26 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2008 17:57:27 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 30 Jul 2008 21:37:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Jul 30, 2008 at 02:35:18PM -0300, Otavio Salvador wrote:
-> Richard Purdie <rpurdie@rpsys.net> writes:
+On Wed, Jul 30, 2008 at 4:28 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
 
-> > Note that your AUTHORS file would also break with this approach unless
-> > at merge time you grep the external tree for all email addresses and
-> > then add them which would be tedious at best.
+> Also, "the kernel does this, why can't we" is a totally bogus argument:
+>
+> 1. If the kernel jumped off a cliff, would you too?
+> 2. The kernel uses a pull model for development and people check IDs for
+> some sanity before pulling. With the push model we're going for we don't
+> have that luxury.
 
-> His proposal is for the commiters ID not the authors ID. We can assume
-> that someone who has push right is also an OE author.
+This raises another question I have been wondering. Does this push model
+fit OE better than pull?
+The pull model seems to work nicely for the Linux kernel, and as I see it, has
+the advantage that the "infrastructure" adapts automagically to the needs of
+the developers/community.
 
-Only if the person doing the push hasn't pulled commits from anywhere
-else - git protocol transfers don't change the committer so if patches
-enter the tree being pushed via a git pull then the committer may not be
-an OE person.
+I am just wondering...
 
--- 
-"You grabbed my hand and we fell into it, like a daydream - or a fever."
+/Esben
 
 
