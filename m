@@ -1,37 +1,30 @@
-Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1KOJbu-0004xg-6j
+	(envelope-from <rod@whitby.id.au>) id 1KOLgU-0000eX-Co
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jul 2008 23:53:30 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so248350rvb.12
+	Thu, 31 Jul 2008 02:06:23 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 1B64214B8E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2008 14:51:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=pMHGl1aFGpXN/GmYScfcHtgdB3SoSstLMsx+5jSNmP8=;
-	b=wZpzihuX5JDbWF6J1hq+vRQkqHYLTuNk5P4AdqodvrXxeAFmA+oBynHhGSzGhwToEU
-	NI/Eqr+/QnQsLaZAb8rS0NAbGAVTcj/w7ak3w9vVz3bOiIPjw9t3z9VhAhoXdmjnqqL2
-	t01uoj+dzEd8MqDbjQWjORBALv7bufHNwzXps=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=hPY8bEp6D5eFyqnLUVvi+jJ+VLx41U2RYR1DTAZeIJL3/OmYVPGg9iG5VxqFPY8ZbV
-	IkxONssyjzno9dPzIltoSYgR0SH9ytvWwJkMf/s272HCn9Kfrq++chw4bBhHfWX0qq9H
-	ldg7wN4kO/Z1lWQhpuEfEls8b5ldQ5xqHypwQ=
-Received: by 10.140.126.14 with SMTP id y14mr4878113rvc.96.1217454705695;
-	Wed, 30 Jul 2008 14:51:45 -0700 (PDT)
-Received: by 10.141.116.18 with HTTP; Wed, 30 Jul 2008 14:51:45 -0700 (PDT)
-Message-ID: <d2b9ea600807301451j1a303fadoe173657f6abc4f71@mail.gmail.com>
-Date: Wed, 30 Jul 2008 23:51:45 +0200
-From: "Esben Haabendal" <esbenhaabendal@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0807300829s775020aej348bc06d62a47264@mail.gmail.com>
+	Wed, 30 Jul 2008 20:04:38 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Wed, 30 Jul 2008 20:04:38 -0400
+X-Sasl-enc: cPcMu7F2nHikW1VPxu0ZtI5T1qkVHGhTAaXyQj6Nbg/d 1217462677
+Received: from [192.168.124.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 335CDFE28
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jul 2008 20:04:36 -0400 (EDT)
+Message-ID: <4891013A.5040005@whitby.id.au>
+Date: Thu, 31 Jul 2008 09:33:06 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
 MIME-Version: 1.0
-References: <c384c5ea0807300829s775020aej348bc06d62a47264@mail.gmail.com>
-Subject: Re: Tool for gathering/validating OE source package locations
+To: openembedded-devel@lists.openembedded.org
+References: <1217340989.5482.10.camel@dax.rpnet.com>	<488FAE77.7050107@whitby.id.au>	<200807300920.37221.openembedded@haerwu.biz>	<f96d234e0807300429j2fff8df0oc494e4a5beb9f8ff@mail.gmail.com>	<87myjz34uv.fsf@neumann.lab.ossystems.com.br>	<4890678A.5040005@balister.org>	<1217428116.5510.26.camel@dax.rpnet.com>	<489084EE.9070407@whitby.id.au>
+	<1217434487.5510.64.camel@dax.rpnet.com>
+In-Reply-To: <1217434487.5510.64.camel@dax.rpnet.com>
+X-Enigmail-Version: 0.95.6
+Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -45,56 +38,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2008 21:53:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 31 Jul 2008 00:06:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wed, Jul 30, 2008 at 5:29 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Hi Esben and all,
->
->
-> This is a C application I wrote to keep a database (it uses sqlite) of
-> valid (source package) locations.
->
-> http://www.sidebranch.com/leon/witpa_20080730.tar.bz2
->
->
-> Once you manually add a known-good package, it can use Google powers
-> to add new locations, after validating MD5 and SHA.
->
-> http://www.sidebranch.com/leon/witpa_20080730.tar.bz2
->
-> It could act as a OE fetcher back-end if we extend it a bit.
->
-> The tool is called 'witpa' for "Where Is That Package At?".
+Richard Purdie wrote:
+> I'm going to skip the rest of your argument, I don't agree the other
+> bits but this bit did does lead to something important: 
 
-Nice!  It would definitely be nice to have integrated as OE fetcher.
+Yeah, if we couldn't convince each other in an hour of IRC discussion, 
+then we're not going to do so via email.
 
-Depending on the situation, I would like to:
+> Say I have some tree outside OE and I commit things to is as a developer
+> with no access to OE directly. "We" then want to merge that into OE.
+> Even assuming the commit hooks allow this (there are ways and means) we
+> immediately lose our namespace protection. There are 101 other scenarios
+> that would allow this to happen and they show that namespace protection
+> is pointless with git.
 
-1. Go through _ALL_ recipes, and check all sources.
-2. Go through all recipes needed for a specific configuration.
-3. Go through all sources already known by witpa.
+Agreed.
 
-And as a result,
+> Note that your AUTHORS file would also break with this approach unless
+> at merge time you grep the external tree for all email addresses and
+> then add them which would be tedious at best.
 
-a. Raise a warning for sources that could not be downloaded.
-   and which is not known by witpa
-b. Raise a warning for sources that could not be downloaded,
-   and which is known by witpa, but a usable alternative location
-   could not be found.
-c. For sources that could not be downloaded, and where witpa
-   is able to find an alternative usable location, send an email with
-   a patch which if applied, fixes the recipe.  These patches should
-   then be hand-carried to a commit.
+Yes, I thought it would only check the final committer, but others have 
+pointed out that it checks each one in the imported tree.  So I withdraw 
+that proposal.
 
-Without something like this, I fear that stable will not really be
-very stable.
+> I think we've lost sight of the original problems so lets go back to
+> them:
+> 
+> The points I had in mind with this was to:
+> 
+> a) stop insane IDs entering the repository (ich@1.2.3.4)
 
-If only I had a bit more time or bitbake hacking experience...
+Agreed.
 
-/Esben
+> b) gain something we could feed into the final mtn -> git and bkcvs -> 
+>    git conversions which would make more sense of the data. 
+>    "crofton@openembedded.org" really isn't a useful identifier.
+
+I agree with your proposed solution on this one.
+
+> c) ensure we have accurate records about our committers on the wiki
+
+I agree with your proposed solution on this one.
+
+> d) remove problems trying to associate related commit IDs e.g.  when 
+>    someone changes email address frequently and solve that problem once 
+>    and for all.
+
+People will usually retain the same Real Name part of the ID, so we can 
+match quite well using that when the email address changes.
+
+> For a) I guess the best we can do is add some checking for insane commit
+> and author IDs like containing "localhost", not setting a name or
+> containing an IP address. I'd also like to add something to the commit
+> policy about only committing using sane IDs, commits with invalid IDs
+> are at risk of being reverted.
+
+I'm very happy with that solution, and fully agree that the policy must 
+mandate sane IDs and we must forcefully reject with extreme prejudice 
+any commits without a valid ID.
+
+> How does that sound?
+
+I'm very happy with your proposal.  Thanks for taking my views into account.
+
+-- Rod
 
 
