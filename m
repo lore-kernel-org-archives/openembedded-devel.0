@@ -1,29 +1,21 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [216.145.245.199] (helo=mx03.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1KOM7h-0005ze-6Q
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Jul 2008 02:34:30 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 2E89E150F01
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2008 20:32:45 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Wed, 30 Jul 2008 20:32:45 -0400
-X-Sasl-enc: TY2cqt+Cx0KNvs5t+UWrHcrR46XRQIRo1DHBV1B3rWw7 1217464364
-Received: from [192.168.124.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 3F3CF1041F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2008 20:32:43 -0400 (EDT)
-Message-ID: <489107D2.4070300@whitby.id.au>
-Date: Thu, 31 Jul 2008 10:01:14 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
+	(envelope-from <mwester@dls.net>) id 1KONhD-0004HQ-Eb
+	for openembedded-devel@openembedded.org; Thu, 31 Jul 2008 04:15:15 +0200
+Received: from [209.242.7.180] (helo=[192.168.1.111])
+	by mx03.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1KONfW-00081Q-Bn
+	for openembedded-devel@openembedded.org; Wed, 30 Jul 2008 21:13:30 -0500
+Message-ID: <48911FA9.5070809@dls.net>
+Date: Wed, 30 Jul 2008 21:12:57 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.16) Gecko/20080708 Thunderbird/2.0.0.16 Mnenhy/0.7.5.666
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@openembedded.org
 References: <1217340989.5482.10.camel@dax.rpnet.com>	<488FAE77.7050107@whitby.id.au>	<200807300920.37221.openembedded@haerwu.biz>	<f96d234e0807300429j2fff8df0oc494e4a5beb9f8ff@mail.gmail.com>	<87myjz34uv.fsf@neumann.lab.ossystems.com.br>	<4890678A.5040005@balister.org>	<1217428116.5510.26.camel@dax.rpnet.com>	<489084EE.9070407@whitby.id.au>	<1217434487.5510.64.camel@dax.rpnet.com>	<f96d234e0807301006x5fc528b8kf9a762021a0024f5@mail.gmail.com>
-	<f96d234e0807301026h3ee3d13eqc9cd9e05f7c6a15@mail.gmail.com>
-In-Reply-To: <f96d234e0807301026h3ee3d13eqc9cd9e05f7c6a15@mail.gmail.com>
-X-Enigmail-Version: 0.95.6
+	<4890A67A.9080209@palm.com>
+In-Reply-To: <4890A67A.9080209@palm.com>
 Subject: Re: Git Migration Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
@@ -38,17 +30,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2008 00:34:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 31 Jul 2008 02:15:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Cliff Brake wrote:
-> http://wiki.openembedded.net/index.php/Monotone_to_Git_ID_mapping
-> 
-> Please modify as you see fit, or if you need additional information.
+K. Richard Pixley wrote:
+> Is there a wiki page somewhere which lists the rationale for switching
+> from mtn to git?
 
-I have added information for all the @nslu2-linux.org keys.
+Gaah!  No!
 
--- Rod
+:D
+
+Please see the archives of this mailing list for all the gory details,
+if you really wish; it's been discussed "ad nauseum" more than once.
+
+Mike (mwester)
+
 
 
