@@ -1,26 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KOYQJ-0001wO-3e
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Jul 2008 15:42:31 +0200
-Received: (qmail invoked by alias); 31 Jul 2008 13:40:42 -0000
-Received: from e178116172.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.116.172]
-	by mail.gmx.net (mp059) with SMTP; 31 Jul 2008 15:40:42 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18jbt4WAZojKrNg590sglKcw2mxSXk/7mWLsihSno
-	F3DlsgK2AdZYGg
-Message-ID: <4891C125.8010207@gmx.net>
-Date: Thu, 31 Jul 2008 15:41:57 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Using OE <openembedded-users@lists.openembedded.org>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.75
-Subject: OpenEmbedded and Java
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KOZTa-0000c4-0M
+	for openembedded-devel@openembedded.org; Thu, 31 Jul 2008 16:49:58 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KOZRl-0003hf-FQ
+	for openembedded-devel@openembedded.org; Thu, 31 Jul 2008 14:48:05 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 31 Jul 2008 14:48:05 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 31 Jul 2008 14:48:05 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 31 Jul 2008 16:47:56 +0200
+Message-ID: <g6sjap$vsv$1@ger.gmane.org>
+References: <4891C125.8010207@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
+In-Reply-To: <4891C125.8010207@gmx.net>
+Sender: news <news@ger.gmane.org>
+Cc: openembedded-users@lists.openembedded.org
+Subject: Re: OpenEmbedded and Java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -34,44 +41,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2008 13:42:31 -0000
-X-Groupsio-MsgNum: 5668
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigFC377E3150CAB4466D37B726"
+X-List-Received-Date: Thu, 31 Jul 2008 14:49:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---------------enigFC377E3150CAB4466D37B726
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Robert Schuster wrote:
+> [0] - http://wiki.openembedded.net/index.php/Java
 
-Hi,
-some of you already found it but those who do not is this mail. Recently
-I put most of things dealing with Java + OpenEmbedded into the new OE
-Wiki[0].
-
-If you want to get updated about OE-Java related things just subscribe
-to that page.
-
-Of course, you can contribute to that page as well. :)
-
-Regards
-Robert
-
-[0] - http://wiki.openembedded.net/index.php/Java
+Thank you for sharing that information and in general keeping Java in OE
+in good shape!
 
 
---------------enigFC377E3150CAB4466D37B726
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkiRwSUACgkQG9cfwmwwEtpVTACfe1xikGjWE7OVOBzjOU4NpNfm
-LpUAn3ob0KbIOjqg9eejMZ1qhdF6cWKn
-=8yMi
------END PGP SIGNATURE-----
-
---------------enigFC377E3150CAB4466D37B726--
