@@ -1,33 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [128.198.1.214] (helo=uccs.edu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KOZTa-0000c4-0M
-	for openembedded-devel@openembedded.org; Thu, 31 Jul 2008 16:49:58 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KOZRl-0003hf-FQ
-	for openembedded-devel@openembedded.org; Thu, 31 Jul 2008 14:48:05 +0000
-Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 31 Jul 2008 14:48:05 +0000
-Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 31 Jul 2008 14:48:05 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 31 Jul 2008 16:47:56 +0200
-Message-ID: <g6sjap$vsv$1@ger.gmane.org>
-References: <4891C125.8010207@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-In-Reply-To: <4891C125.8010207@gmx.net>
-Sender: news <news@ger.gmane.org>
-Cc: openembedded-users@lists.openembedded.org
-Subject: Re: OpenEmbedded and Java
+	(envelope-from <skirkbri@uccs.edu>) id 1KObPZ-0005uJ-9e
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Jul 2008 18:53:57 +0200
+Received: from [71.219.172.19] (HELO ERICASERVER)
+	by uccs.edu (CommuniGate Pro SMTP 5.2.3)
+	with ESMTP id 77152799 for openembedded-devel@lists.openembedded.org;
+	Thu, 31 Jul 2008 10:52:09 -0600
+From: "Shane Kirkbride" <skirkbri@uccs.edu>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 31 Jul 2008 10:52:15 -0600
+Organization: UCCS
+Message-ID: <000101c8f32d$c96e5c30$4100a8c0@ERICASERVER>
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook 11
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3198
+Thread-Index: AcjzLckMt7ldYtOVQluiPHaMA5pIZA==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.10
+Subject: U-Boot cramfs config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -41,15 +31,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2008 14:49:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 31 Jul 2008 16:53:57 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Robert Schuster wrote:
-> [0] - http://wiki.openembedded.net/index.php/Java
+Hi,
 
-Thank you for sharing that information and in general keeping Java in OE
-in good shape!
+I am trying to compile a .cramfs for the gumstix in OpenEmbedded...I know
+what you're thinking: "good luck with that..." but does any one know the
+U-Boot set up for booting with a cramfs. I checked on some U-Boot sites and
+I know to change the rootfstype on bootargs line. Is there anything else I
+should change? Has anyone does this before? 
 
+Thanks!
+
+~Shane
+
+ 
 
 
