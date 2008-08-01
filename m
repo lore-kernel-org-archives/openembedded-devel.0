@@ -1,29 +1,29 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KOxR8-0001oY-Ah
-	for openembedded-devel@openembedded.org; Fri, 01 Aug 2008 18:25:02 +0200
+	id 1KOxW5-0001zy-Th
+	for openembedded-devel@openembedded.org; Fri, 01 Aug 2008 18:30:09 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KOxPL-0006RU-77
-	for openembedded-devel@openembedded.org; Fri, 01 Aug 2008 16:23:11 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1KOxUD-0006jw-Qh
+	for openembedded-devel@openembedded.org; Fri, 01 Aug 2008 16:28:13 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 01 Aug 2008 16:23:11 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Fri, 01 Aug 2008 16:28:13 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 01 Aug 2008 16:23:11 +0000
+	Fri, 01 Aug 2008 16:28:13 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 01 Aug 2008 18:23:00 +0200
-Message-ID: <g6vd96$ht3$1@ger.gmane.org>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 01 Aug 2008 18:28:13 +0200
+Message-ID: <g6vdim$isb$1@ger.gmane.org>
 References: <200808011750.12801.mickey@vanille-media.de>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0a2pre (Macintosh; 2008071203)
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
 In-Reply-To: <200808011750.12801.mickey@vanille-media.de>
 Sender: news <news@ger.gmane.org>
 Cc: openembedded-users@lists.openembedded.org
@@ -41,30 +41,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Aug 2008 16:25:02 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 01 Aug 2008 16:30:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Michael 'Mickey' Lauer wrote:
-> Hi,
->
-> amethyst.openembedded.net is no longer responding, it might be a problem with
-> a backbone that will be fixed without us intervening. If not, the earliest
-> possible chance to look at things will be early next week.
->
-> Until then, please use the monotone mirrors, e.g.
->
->   *  monotone.nslu2-linux.org
->   * opensource.wolfsonmicro.com
->
-> Sorry for any inconvenience.
+> amethyst.openembedded.net is no longer responding
 
-The monotone and tinderbox servers are working again.
-
-regards,
-
-Koen
-
+seems to be fixed now, I guess.  Thanks.
 
 
 
