@@ -1,30 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KOiVf-0003yi-AA
-	for openembedded-devel@openembedded.org; Fri, 01 Aug 2008 02:28:43 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KOiTs-0003RH-Kj
-	for openembedded-devel@openembedded.org; Fri, 01 Aug 2008 00:26:52 +0000
-Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 01 Aug 2008 00:26:52 +0000
-Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 01 Aug 2008 00:26:52 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 01 Aug 2008 02:26:49 +0200
-Message-ID: <g6tl85$fqs$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-Sender: news <news@ger.gmane.org>
-Subject: bug & patch weekend coming up
+	(envelope-from <mickey@vanille-media.de>)
+	id 1KOwvK-0004fq-0B; Fri, 01 Aug 2008 17:52:10 +0200
+Received: from andromeda.vanille.de (e180143108.adsl.alicedsl.de
+	[85.180.143.108])
+	by drlauer-research.com (Postfix) with ESMTP id B5633584C25;
+	Fri,  1 Aug 2008 17:56:51 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org,
+	openembedded-users@lists.openembedded.org
+Date: Fri, 1 Aug 2008 17:50:12 +0200
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200808011750.12801.mickey@vanille-media.de>
+Subject: [ADMIN] Server Problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -38,26 +28,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Aug 2008 00:28:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 01 Aug 2008 15:52:10 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 Hi,
 
-this is a reminder that we will have a bug & patch weekend starting from
-today.  Goals for this weekend:
+amethyst.openembedded.net is no longer responding, it might be a problem with 
+a backbone that will be fixed without us intervening. If not, the earliest 
+possible chance to look at things will be early next week.
 
- 1) get the count of bugs with open patches down
-    current tally is 161 bugs -> http://tinyurl.com/5b7xbo
- 2) get the count of bugs with new and updated bb files down
-    current tally is 42 -> http://tinyurl.com/6oxqzg
- 3) push as many of our patches upstream as possible
-    and mark others as OE-only.  There are literally thousands here.
-    http://wiki.openembedded.net/index.php/Push_patches_upstream
+Until then, please use the monotone mirrors, e.g.
 
-Regards
+ *  monotone.nslu2-linux.org
+ * opensource.wolfsonmicro.com 
 
-Rolf
+Sorry for any inconvenience.
 
+Mickey.
+-- 
+:M:
 
 
