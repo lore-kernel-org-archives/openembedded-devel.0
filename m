@@ -1,27 +1,30 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KOfUI-0005BN-6z
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Jul 2008 23:15:06 +0200
-Received: (qmail invoked by alias); 31 Jul 2008 21:13:16 -0000
-Received: from e178116172.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.116.172]
-	by mail.gmx.net (mp029) with SMTP; 31 Jul 2008 23:13:16 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18d54tdu9AdQ1OLSNwa31iLndWUF5C4t4AxLSKl/V
-	bzYhN7KTfiy8ZL
-Message-ID: <48922B37.9070807@gmx.net>
-Date: Thu, 31 Jul 2008 23:14:31 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4892166E.2050206@gmx.net>
-In-Reply-To: <4892166E.2050206@gmx.net>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.67
-Subject: Re: RFC: I want my <asm/ucontext.h>
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KOiVf-0003yi-AA
+	for openembedded-devel@openembedded.org; Fri, 01 Aug 2008 02:28:43 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KOiTs-0003RH-Kj
+	for openembedded-devel@openembedded.org; Fri, 01 Aug 2008 00:26:52 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 01 Aug 2008 00:26:52 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 01 Aug 2008 00:26:52 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 01 Aug 2008 02:26:49 +0200
+Message-ID: <g6tl85$fqs$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
+Sender: news <news@ger.gmane.org>
+Subject: bug & patch weekend coming up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.10
 Precedence: list
@@ -35,73 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2008 21:15:06 -0000
-X-Groupsio-MsgNum: 5675
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig9BE4CF4CFBD255E89F8533AB"
-
---------------enig9BE4CF4CFBD255E89F8533AB
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 01 Aug 2008 00:28:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
 Hi,
-forget these patches. asm/ucontext.h isnt needed so much. Newer Debian's
-do not have it also.
 
-I modified the source file to include <ucontext.h> (from glibc) instead
-and this works without problems.
+this is a reminder that we will have a bug & patch weekend starting from
+today.  Goals for this weekend:
+
+ 1) get the count of bugs with open patches down
+    current tally is 161 bugs -> http://tinyurl.com/5b7xbo
+ 2) get the count of bugs with new and updated bb files down
+    current tally is 42 -> http://tinyurl.com/6oxqzg
+ 3) push as many of our patches upstream as possible
+    and mark others as OE-only.  There are literally thousands here.
+    http://wiki.openembedded.net/index.php/Push_patches_upstream
 
 Regards
-Robert
 
-Robert Schuster schrieb:
-> Hi,
-> I am currently writing a recipe for Sun's phoneme and this wants to
->=20
-> #include <asm/ucontext.h>
->=20
-> Unfortunately this file is not part of our newer linux-libc-header
-> packages anymore. The problem is as follows:
->=20
-> In the recipes for versions earlier than 2.6.18 we copied the kernel's
-> include/asm-$ARCH/ files manually. In later kernels we relied upon 'mak=
-e
-> install_headers'. Now the kernels Kbuild files do not mention ucontext.=
-h
-> and as such it is not installed.
->=20
-> In the attached patch I added the installation of ucontext.h for all
-> newer linux-libc-headers recipes.
->=20
-> Please write if that is OK for .dev.
->=20
-> Regards
-> Robert
->=20
->=20
-> -----------------------------------------------------------------------=
--
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Rolf
 
 
 
---------------enig9BE4CF4CFBD255E89F8533AB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkiSKzcACgkQG9cfwmwwEtqsOgCfZ35FbjgaeX9dfekPaJQg9D+G
-mCgAn13WxCfuXPb01JRMWldkmRcsvaWd
-=9Za7
------END PGP SIGNATURE-----
-
---------------enig9BE4CF4CFBD255E89F8533AB--
