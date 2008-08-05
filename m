@@ -1,41 +1,23 @@
-Received: from [209.85.200.173] (helo=wf-out-1314.google.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dbaryshkov@gmail.com>) id 1KQLva-0004Fu-IG
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1KQMIh-0000Vf-ES
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Aug 2008 14:46:14 +0200
-Received: by wf-out-1314.google.com with SMTP id 23so2766520wfg.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Aug 2008 05:46:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=3pbftmTDCulVQUf80Nml48d/XuLU/jMwWpw354a6xAA=;
-	b=p7qK/xUDyuNxKLzxzw0qs/U+jLclmVlfp1eL8E19978BbEjtdtN6X0TR8FYPlrbh8w
-	xfpq8d4pIGqhrrSGMv1ZqkCN7lTbg4NWm9CKshIYS6bht3ZA5Azec+J8/h7d0Dk53dVO
-	hPaLi7Sy5kW/ilLg21mUngGpPUbVn3ZWna3SQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Fymt+OpbUkmfHoeMBeoIjUm3jrUZmlu0FVJxHGrYtD6khiSnKTKH4r43kQuqGpm/Uv
-	nKtZAMoZHLfKO0U1gbS4klGSKZIUIuDoBULLIneKiBWbu4x9GBC3qkgutno3XCTSFBhR
-	yBM55XBqMsVsxwizFtTnxwJ+HI6hZib7kweFw=
-Received: by 10.142.158.3 with SMTP id g3mr5432672wfe.344.1217940372892;
-	Tue, 05 Aug 2008 05:46:12 -0700 (PDT)
-Received: from doriath.ww600.siemens.net ( [212.248.25.26])
-	by mx.google.com with ESMTPS id 32sm12104487wfa.8.2008.08.05.05.46.09
-	(version=SSLv3 cipher=RC4-MD5); Tue, 05 Aug 2008 05:46:12 -0700 (PDT)
-Date: Tue, 5 Aug 2008 16:45:14 +0400
-From: Dmitry Baryshkov <dbaryshkov@gmail.com>
-To: Robert Schuster <theBohemian@gmx.net>
-Message-ID: <20080805124514.GA5131@doriath.ww600.siemens.net>
-References: <48239d390808040638r7a5e6351x4c8346497451adae@mail.gmail.com>
-	<48980E9D.8000709@gmx.net>
+	Tue, 05 Aug 2008 15:10:08 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1KQOBs-0001Tg-8S
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Aug 2008 17:11:12 +0200
+Message-ID: <4898512F.2060707@kernelconcepts.de>
+Date: Tue, 05 Aug 2008 15:10:07 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-In-Reply-To: <48980E9D.8000709@gmx.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: ppc64 host
+To: openembedded-devel@lists.openembedded.org
+References: <g69h61$qvv$1@ger.gmane.org>
+In-Reply-To: <g69h61$qvv$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.0
+Subject: Re: [RFC] changing staging layout based on MULTIMACH_TARGET_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,44 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Aug 2008 12:46:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 05 Aug 2008 13:10:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 05, 2008 at 10:26:05AM +0200, Robert Schuster wrote:
-> Hi,
-> 
-> Sergey Lapin schrieb:
-> > Hi, all!
-> > 
-> > Do anybody had any success running OE builds on ppc64 host?
-> just send this boxen over to me and I'll check it out.
-> 
-> 
-> Just kidding! :)
-> 
-> > If not, is there any advice regarding that?
-> You might run into trouble when qemu needs to execute some stuff from
-> the target platform as they do not list[0] ppc64 host cpu support
-> explicitly.
-> 
-> Otherwise follow the steps are applicable for other distros/CPUs as
-> well: /bin/sh needs to be bash etc.
-> 
-> Would be cool if you tell us whether you have success.
+Hi,
 
-I'm building the OE images on the ppc64 host (Apple xServe G5):
-Debian lenny (current), 64-bit kernel, 32-bit userspace.
-To successfully build packages for arm, I had to manually override
-BUILD_ARCH to be ppc (misdetected as ppc64) and disable binary locale
-generation (qemu segfaulted).
+Koen Kooi schrieb:
 
-I'm going to try to build OE image in fully 64 bit environment, but that
-is not going to happen soon.
+> Comments, objections?
+
++1 from me
+
+Greetings
+
+Florian
 
 -- 
-With best wishes
-Dmitry
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
 
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
