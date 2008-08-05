@@ -1,21 +1,28 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1KQHmx-0006gy-Ik
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KQHsd-0003GM-0e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Aug 2008 10:21:03 +0200
-Received: from 88-110-124-15.dynamic.dsl.as9105.com ([88.110.124.15]
-	helo=[192.168.2.156])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KQHkq-0005Da-PK
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Aug 2008 09:18:53 +0100
-From: Phil Blundell <pb@reciva.com>
+	Tue, 05 Aug 2008 10:26:55 +0200
+Received: (qmail invoked by alias); 05 Aug 2008 08:24:45 -0000
+Received: from e178070176.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.70.176]
+	by mail.gmx.net (mp029) with SMTP; 05 Aug 2008 10:24:45 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+fOHYaUNCfILPnp5akY5Dj0artlDMifOZRg74sFw
+	0Qts6ym4jyrBJO
+Message-ID: <48980E9D.8000709@gmx.net>
+Date: Tue, 05 Aug 2008 10:26:05 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 05 Aug 2008 09:19:02 +0100
-Message-Id: <1217924342.25732.163.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.3 
-Subject: openmp in gcc-cross
+References: <48239d390808040638r7a5e6351x4c8346497451adae@mail.gmail.com>
+In-Reply-To: <48239d390808040638r7a5e6351x4c8346497451adae@mail.gmail.com>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.66
+Cc: Dmitry <dbaryshkov@gmail.com>
+Subject: Re: ppc64 host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,20 +36,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Aug 2008 08:21:03 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 Aug 2008 08:26:55 -0000
+X-Groupsio-MsgNum: 5690
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig9E7CDF9E8D613F91127B3F10"
 
-At present gcc-4.2.4.inc sets:
+--------------enig9E7CDF9E8D613F91127B3F10
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-EXTRA_OECONF_BASE = "--enable-libssp --disable-bootstrap --disable-libgomp --disable-libmudflap"
+Hi,
 
-There doesn't seem to be any good reason to disable libgomp, and its
-absence is breaking gettext-0.16.1 at least.  Does anybody know why it
-was disabled, and/or know a good reason why it shouldn't be re-enabled?
-
-p.
-
-
+Sergey Lapin schrieb:
+> Hi, all!
+>=20
+> Do anybody had any success running OE builds on ppc64 host?
+just send this boxen over to me and I'll check it out.
 
 
+Just kidding! :)
+
+> If not, is there any advice regarding that?
+You might run into trouble when qemu needs to execute some stuff from
+the target platform as they do not list[0] ppc64 host cpu support
+explicitly.
+
+Otherwise follow the steps are applicable for other distros/CPUs as
+well: /bin/sh needs to be bash etc.
+
+Would be cool if you tell us whether you have success.
+
+Regards
+Robert
+
+[0] - http://bellard.org/qemu/status.html
+
+
+
+--------------enig9E7CDF9E8D613F91127B3F10
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkiYDqMACgkQG9cfwmwwEtqZNgCfV1NqcYjq8ku0z9VDuKZhPDcP
+LccAn32sIZw5l7QgGoN5Bz29v2uiV6Y5
+=oZt7
+-----END PGP SIGNATURE-----
+
+--------------enig9E7CDF9E8D613F91127B3F10--
