@@ -1,32 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KQMbs-0003Qe-V7
-	for openembedded-devel@openembedded.org; Tue, 05 Aug 2008 15:29:57 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KQMbs-00018P-GI
-	for openembedded-devel@openembedded.org; Tue, 05 Aug 2008 13:29:56 +0000
-Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 05 Aug 2008 13:29:56 +0000
-Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 05 Aug 2008 13:29:56 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 05 Aug 2008 15:29:49 +0200
-Message-ID: <g79kkd$dsl$1@ger.gmane.org>
-References: <g73osv$q5l$1@ger.gmane.org>
+	(envelope-from <pb@reciva.com>) id 1KQP93-0004Pu-IS
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Aug 2008 18:12:21 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KQP91-0003UT-9S
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Aug 2008 17:12:19 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1KQP91-0003o7-3t
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Aug 2008 17:12:19 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 05 Aug 2008 17:12:18 +0100
+Message-Id: <1217952738.24777.175.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-In-Reply-To: <g73osv$q5l$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: rrdtool: fixup in EXTRA_OECONF to get past error in do_configure. add do_stage. Closes 2524.
+X-Mailer: Evolution 2.12.3 
+Subject: enabling objc in gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,16 +34,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Aug 2008 13:29:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 05 Aug 2008 16:12:21 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> rd_cv_ieee_works=${rd_cv_ieee_works=yes}
+At the moment, Objective-C seems to be disabled in
+gcc-configure-common.inc.  Is there any particular reason for this, or
+alternatively are there any objections to enabling it?
 
-Thanks for noticing and providing an explanation
+p.
 
-Fixed in 9767e2c8632f709640f3b42264030553c9906cb2
 
 
 
