@@ -1,21 +1,37 @@
-Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
+Received: from [64.233.184.226] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <daniel@totalueberwachung.de>) id 1KQl4K-0004ua-G2
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KQlYA-0003kH-Ia
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Aug 2008 17:36:56 +0200
-Received: from elara.dyn.totalueberwachung.de (unknown [192.168.0.8])
-	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by thebe.totalueberwachung.de (Postfix) with ESMTP id 0A157D8286
+	Wed, 06 Aug 2008 18:07:47 +0200
+Received: by wr-out-0506.google.com with SMTP id c53so2219141wra.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2008 17:36:51 +0200 (CEST)
-Date: Wed, 6 Aug 2008 17:36:47 +0200
-From: Daniel Willmann <daniel@totalueberwachung.de>
+	Wed, 06 Aug 2008 09:07:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=00dB2ubu86mVJbn5TU98owMQUbXkrNsGDG1NAvVnUw4=;
+	b=KlREeeeiAPgPNqFU7NI+AHzvOmBMCTAUBTgEuB/IUPiPU2yRl73Z7M7al3yVl7stF/
+	/5vjcte0jwiP/Sa2WbhWeGMRUE5L6rNvLfOWK2yhAw2eJQWY/jPAgqOu3/dx3QYVmi6F
+	Wb23XT1EnzmkV9DZYnTxCDs/22qBSF9VLGJkA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=bOsG6vtyBUfWaQkNT8VMqneOV+WzzE5N/LuR+iKSKMkF5oaf5GO3GStkVCxM8ae7xS
+	zjUwZulCprvltG8dMhuIPKXmcsc3XX9bQX85nMbaO3G/iUfyGWVNWoDAgw9dYYeOjhUw
+	6o1hYQdvTQ4jpmsyY0jFFqqOry7qEwRbFRzTQ=
+Received: by 10.100.153.6 with SMTP id a6mr561286ane.88.1218038860180;
+	Wed, 06 Aug 2008 09:07:40 -0700 (PDT)
+Received: by 10.100.174.18 with HTTP; Wed, 6 Aug 2008 09:07:39 -0700 (PDT)
+Message-ID: <c384c5ea0808060907w143f8527ha37a4f8aeb492b1e@mail.gmail.com>
+Date: Wed, 6 Aug 2008 18:07:39 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080806173647.1c51a79c@elara.dyn.totalueberwachung.de>
-X-Mailer: Claws Mail 3.3.1 (GTK+ 2.12.8; i686-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: RFC deleting libpixman in favor of pixman
+In-Reply-To: <20080806173647.1c51a79c@elara.dyn.totalueberwachung.de>
+MIME-Version: 1.0
+References: <20080806173647.1c51a79c@elara.dyn.totalueberwachung.de>
+Subject: Re: RFC deleting libpixman in favor of pixman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,45 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2008 15:36:56 -0000
-X-Groupsio-MsgNum: 5706
-Content-Type: multipart/signed; boundary="Sig_/Y62IVsLvqdvxL9ZnOn_BCn1";
-	protocol="application/pgp-signature"; micalg=PGP-SHA1
+X-List-Received-Date: Wed, 06 Aug 2008 16:07:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---Sig_/Y62IVsLvqdvxL9ZnOn_BCn1
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Hello Daniel,
 
-Hi,
+On Wed, Aug 6, 2008 at 5:36 PM, Daniel Willmann
+<daniel@totalueberwachung.de> wrote:
+> So I would suggest that we remove libpixman and change the one
+> occurence of it in task-sdk-base to pixman instead.
+>
+> Any objections, something I overlooked?
+>
 
-I just noticed that both are the same library with different names.
-They are located in:
-packages/libpixman/libpixman*bb
-packages/xorg-lib/pixman*bb
+I had the opposite proposal but it doesn't matter to me which goes and
+which stays.
 
-libpixman includes versions 0.1.5 and 0.1.6, but a
-find packages/ |xargs grep libpixman shows me that libpixman isn't used
-anywhere except in:
-./packages/tasks/task-sdk-base.bb
+However the resulting bitbake needs some changes.
 
-So I would suggest that we remove libpixman and change the one
-occurence of it in task-sdk-base to pixman instead.
-
-Any objections, something I overlooked?
+See the April 7 discussion on the openembedded-devel mailing list.
 
 Regards,
-Daniel Willmann
+-- 
+Leon
 
---Sig_/Y62IVsLvqdvxL9ZnOn_BCn1
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Disposition: attachment; filename=signature.asc
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.9 (GNU/Linux)
-
-iEYEARECAAYFAkiZxREACgkQZ2fhlIqbZ1gXjACeOpYxTJ5SnQBoLc7Ux8s2K3Jf
-VssAoJKoIwq/IaBbtp50ounfYF+pm29Y
-=Jk+e
------END PGP SIGNATURE-----
-
---Sig_/Y62IVsLvqdvxL9ZnOn_BCn1--
