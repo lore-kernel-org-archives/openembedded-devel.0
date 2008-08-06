@@ -1,36 +1,31 @@
-Received: from [64.233.184.226] (helo=wr-out-0506.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KQlYA-0003kH-Ia
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Aug 2008 18:07:47 +0200
-Received: by wr-out-0506.google.com with SMTP id c53so2219141wra.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Aug 2008 09:07:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=00dB2ubu86mVJbn5TU98owMQUbXkrNsGDG1NAvVnUw4=;
-	b=KlREeeeiAPgPNqFU7NI+AHzvOmBMCTAUBTgEuB/IUPiPU2yRl73Z7M7al3yVl7stF/
-	/5vjcte0jwiP/Sa2WbhWeGMRUE5L6rNvLfOWK2yhAw2eJQWY/jPAgqOu3/dx3QYVmi6F
-	Wb23XT1EnzmkV9DZYnTxCDs/22qBSF9VLGJkA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=bOsG6vtyBUfWaQkNT8VMqneOV+WzzE5N/LuR+iKSKMkF5oaf5GO3GStkVCxM8ae7xS
-	zjUwZulCprvltG8dMhuIPKXmcsc3XX9bQX85nMbaO3G/iUfyGWVNWoDAgw9dYYeOjhUw
-	6o1hYQdvTQ4jpmsyY0jFFqqOry7qEwRbFRzTQ=
-Received: by 10.100.153.6 with SMTP id a6mr561286ane.88.1218038860180;
-	Wed, 06 Aug 2008 09:07:40 -0700 (PDT)
-Received: by 10.100.174.18 with HTTP; Wed, 6 Aug 2008 09:07:39 -0700 (PDT)
-Message-ID: <c384c5ea0808060907w143f8527ha37a4f8aeb492b1e@mail.gmail.com>
-Date: Wed, 6 Aug 2008 18:07:39 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080806173647.1c51a79c@elara.dyn.totalueberwachung.de>
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KQlqA-0004RW-GR
+	for openembedded-devel@openembedded.org; Wed, 06 Aug 2008 18:26:22 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KQlq5-0006Ak-9P
+	for openembedded-devel@openembedded.org; Wed, 06 Aug 2008 16:26:17 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 06 Aug 2008 16:26:17 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 06 Aug 2008 16:26:17 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 06 Aug 2008 18:26:09 +0200
+Message-ID: <g7cjb1$itm$1@ger.gmane.org>
 References: <20080806173647.1c51a79c@elara.dyn.totalueberwachung.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080100)
+In-Reply-To: <20080806173647.1c51a79c@elara.dyn.totalueberwachung.de>
+Sender: news <news@ger.gmane.org>
 Subject: Re: RFC deleting libpixman in favor of pixman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,30 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2008 16:07:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 06 Aug 2008 16:26:22 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Daniel,
+Daniel Willmann wrote:
+> Hi,
+>
+> I just noticed that both are the same library with different names.
+> They are located in:
+> packages/libpixman/libpixman*bb
+> packages/xorg-lib/pixman*bb
+>
+> libpixman includes versions 0.1.5 and 0.1.6, but a
+> find packages/ |xargs grep libpixman shows me that libpixman isn't used
+> anywhere except in:
+> ./packages/tasks/task-sdk-base.bb
 
-On Wed, Aug 6, 2008 at 5:36 PM, Daniel Willmann
-<daniel@totalueberwachung.de> wrote:
+That's a red herring, someone didn't understand debian renaming when 
+adding that :)
+
 > So I would suggest that we remove libpixman and change the one
 > occurence of it in task-sdk-base to pixman instead.
->
-> Any objections, something I overlooked?
->
 
-I had the opposite proposal but it doesn't matter to me which goes and
-which stays.
++1
 
-However the resulting bitbake needs some changes.
+regards,
 
-See the April 7 discussion on the openembedded-devel mailing list.
+Koen
 
-Regards,
--- 
-Leon
 
 
