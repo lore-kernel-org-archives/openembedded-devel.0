@@ -1,39 +1,33 @@
-Received: from [209.85.198.248] (helo=rv-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1KQeUf-0005ug-IH
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Aug 2008 10:35:41 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so3484449rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Aug 2008 01:35:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=JlMYtEkwewClY3CPHZQSIaw8M6QsuZveYZkz+Pf8ObQ=;
-	b=xpvg49EQBDS9K9vcBi8kuVtzDgDtU8ixWEVnyJg9yvY3BFRFP85snVQFF74h7ekCbN
-	Nw2QT52/qKbzBmnQXPlTMdPy+HPZBpVBOC9+lh3LmemWe/xy8US1zWsIPo+AzfYlhaic
-	rqSkKeSjlGcIax2UXLtkUpYTujQwTO9u8+uqs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=uQZ88ciZhVeNkqy0NH9VqjYLsZPtEZn/2QpEnlTRT85IiuFSBrCiT8Es9bablarx7D
-	+BxXRDOTEaGt6dTDEDCHck7VIZmbsB5R19wjPb37uI1SPaZ+YVCu8UgdKNypeQqyeq2v
-	/5GonD9SMIlNRtyPWLfB8JHrognC6cyWH0mdw=
-Received: by 10.141.176.4 with SMTP id d4mr8738419rvp.14.1218011736471;
-	Wed, 06 Aug 2008 01:35:36 -0700 (PDT)
-Received: by 10.141.156.18 with HTTP; Wed, 6 Aug 2008 01:35:36 -0700 (PDT)
-Message-ID: <d1b08f940808060135q61084849s713b6762268d2453@mail.gmail.com>
-Date: Wed, 6 Aug 2008 10:35:36 +0200
-From: "Andrea Adami" <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d1b08f940808060133l5c24d3f3w665361c418698e30@mail.gmail.com>
-MIME-Version: 1.0
-References: <bug-4393-13@http.bugs.openembedded.net/>
-	<20080805144949.9FB8D189354@amethyst.openembedded.net>
-	<d1b08f940808060133l5c24d3f3w665361c418698e30@mail.gmail.com>
-Subject: Re: [Bug 4393] mysql-4.1.18-r3 fails do_compile
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KQgSB-00041R-CG
+	for openembedded-devel@openembedded.org; Wed, 06 Aug 2008 12:41:16 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KQgS6-00087O-5l
+	for openembedded-devel@openembedded.org; Wed, 06 Aug 2008 10:41:10 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 06 Aug 2008 10:41:10 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 06 Aug 2008 10:41:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 06 Aug 2008 12:41:02 +0200
+Message-ID: <g7bv3u$9d0$1@ger.gmane.org>
+References: <1217924342.25732.163.camel@lenovo.internal.reciva.com>	<g79ade$amq$1@ger.gmane.org>	<1217938413.24777.148.camel@mill.internal.reciva.com>	<g79gss$vrd$1@ger.gmane.org>	<19c1b8a90808051757s7127b5eo5d289a667d732f69@mail.gmail.com>
+	<1218008960.25732.178.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080100)
+In-Reply-To: <1218008960.25732.178.camel@lenovo.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: openmp in gcc-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,13 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2008 08:35:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 06 Aug 2008 10:41:16 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Further findings on OpenWrt:
+Phil Blundell wrote:
+> The error with gettext is just a straightforward "-lgomp not found" kind
+> of thing.  Gettext will compile OK with older, non-OpenMP-capable
+> compilers: it checks for the -fopenmp flag during configure, but it
+> expects (not unreasonably) that if you have an OpenMP capable compiler
+> then you will also have the right libraries available.
+>
+> For people who don't want OpenMP I think the right thing is to have a
+> global "USE_OPENMP" variable to turn off OpenMP support at the package
+> level.  For most autotools-using packages this is going to mean adding
+> "--disable-openmp" to EXTRA_OECONF.
+>
+> You're right that OpenMP might indeed be overkill on some/most embedded
+> systems, but embedded multi-threading is by no means unheard of and I
+> guess it will become more popular as CPUs like the Cortex-A9 and newer
+> Pentiums start to show up in these systems.
 
-http://forum.openwrt.org/viewtopic.php?pid=46975#p46975
+Speaking of cortex-A9 MPCore (and arm11 MPCore as well), how well does 
+linux (kernel + c library) support MP on arm? I heard horror stories 
+about missing memory barriers, but that was over a year ago.
+
+> I verified that libgomp does compile OK with gcc 4.2.2, so I guess I'll
+> go ahead and re-enable it for that version at least.
+
+gcc 4.2.4 (re)built fine for me after your latest changes.
+
+regards,
+
+Koen
+
 
 
