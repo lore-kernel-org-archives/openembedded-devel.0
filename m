@@ -1,40 +1,27 @@
-Received: from [64.233.166.182] (helo=py-out-1112.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1KQblq-00055N-Dc
+	(envelope-from <pb@reciva.com>) id 1KQdlo-0000D2-5Z
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Aug 2008 07:41:14 +0200
-Received: by py-out-1112.google.com with SMTP id y77so1334040pyg.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Aug 2008 22:41:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=/hkxju+o9xg3RuObku9bKq3pBX4e6OBuVk0vF/VMHLY=;
-	b=q9B9W+Ekr6PHfEFk8F0Jcvtv/RGudgS60GQSwpW3rrNi7nNGoQPLiGS+3u0mWn8Ck3
-	drEdH2ZYUxl+nvoXqe/plrLliFAOCRHB3QchvUz8Ak7I1SB0rx76tyGV5yx8tQsZuB0a
-	NzhxymiKCi+JWN/vCsn/SP9Ndxj6arX2mlItQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=e47sK+K0eFekwJ/B+6CZaGDfs57HK7MvrBIbYG7fdrCUv90WiRBFWCXg8uWO0JWROl
-	5I2Ij6kO1A+0EBrGL2sLJx4a/Y6q1nUHWRu+Cp2ljlAG/HPpcyD7MWgu3rs1KJILYs1f
-	WGbhxVi02ec+41k2FntVbZNtQOemiurwqHXlw=
-Received: by 10.65.234.18 with SMTP id l18mr2660657qbr.1.1218001270171;
-	Tue, 05 Aug 2008 22:41:10 -0700 (PDT)
-Received: from ?192.168.1.204? ( [68.188.71.196])
-	by mx.google.com with ESMTPS id s35sm18892305qbs.13.2008.08.05.22.41.06
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 05 Aug 2008 22:41:08 -0700 (PDT)
-Message-ID: <48993971.6090103@gmail.com>
-Date: Wed, 06 Aug 2008 00:41:05 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.14 (X11/20080509)
-MIME-Version: 1.0
+	Wed, 06 Aug 2008 09:49:20 +0200
+Received: from 88-110-124-15.dynamic.dsl.as9105.com ([88.110.124.15]
+	helo=[192.168.2.156])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KQdle-0002XN-Ja
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Aug 2008 08:49:13 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1205081794.8432.15.camel@localhost>
-In-Reply-To: <1205081794.8432.15.camel@localhost>
-Subject: Re: Perl modules: Cannot compile due to wrong dependency in Makefile
+In-Reply-To: <19c1b8a90808051757s7127b5eo5d289a667d732f69@mail.gmail.com>
+References: <1217924342.25732.163.camel@lenovo.internal.reciva.com>
+	<g79ade$amq$1@ger.gmane.org>
+	<1217938413.24777.148.camel@mill.internal.reciva.com>
+	<g79gss$vrd$1@ger.gmane.org>
+	<19c1b8a90808051757s7127b5eo5d289a667d732f69@mail.gmail.com>
+Date: Wed, 06 Aug 2008 08:49:20 +0100
+Message-Id: <1218008960.25732.178.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.3 
+Subject: Re: openmp in gcc-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,56 +35,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2008 05:41:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 06 Aug 2008 07:49:20 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 03/09/2008 11:56 AM, Thomas Reitmayr wrote:
-> Hi,
-> I have a problem building perl modules which have their own recipe and
-> are built outside of the original perl tree, eg. libwww-perl. It looks
-> like there is a wrong dependency in the Makefile of such a module. The
-> Makefile is created from Makefile.PL and includes the following:
-> 
-> [...]
-> PERL_LIB = /usr/share/perl/5.8
-> PERL_ARCHLIB = /usr/lib/perl/5.8
-> [...]
-> # Where is the Config information that we are using/depend on
-> CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
-> [...]
-> $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
-> 	$(NOECHO) $(ECHO) "Makefile out-of-date with respect to $?"
-> [...]
-> 
-> As there is no /usr/lib/perl/5.8 on my build host (a Gentoo system), the
-> reported error in log.do_compile.ZZZ is
-> 
-> make: *** No rule to make target `/usr/lib/perl/5.8/Config.pm', needed
-> by `Makefile'.  Stop.
-> 
-> The only Config.pm I can find
-> is /home/nslu2/slugos/tmp/staging/i686-linux/usr/lib/perl/5.8.8/Config.pm, but I am not sure if it would be correct to just set the PERL_LIB to its directory path. I traced back the origin of PERL_LIB and found it is coming from a %Config setting 'archlibexp'. Its contents is read from tmp/staging/i686-linux/usr/lib/perl/5.8.8/Config_heavy-target.pl.
-> 
-> I am not sure whether the contents of the variable is wrong or its
-> usage, and of course how to fix it.
-> [My quick fix was to modify the MakeMaker (MM_Unix.pm) to not create
-> this dependency.]
-> 
-> Has anyone an idea what's wrong?
-> Regards,
-> -Thomas
-> 
-> PS: The repository was updated yesterday, the ABI version is '1', host
-> is an i686 Gentoo system, target is an Arm/BE (NSLU2).
+The error with gettext is just a straightforward "-lgomp not found" kind
+of thing.  Gettext will compile OK with older, non-OpenMP-capable
+compilers: it checks for the -fopenmp flag during configure, but it
+expects (not unreasonably) that if you have an OpenMP capable compiler
+then you will also have the right libraries available.
 
+For people who don't want OpenMP I think the right thing is to have a
+global "USE_OPENMP" variable to turn off OpenMP support at the package
+level.  For most autotools-using packages this is going to mean adding
+"--disable-openmp" to EXTRA_OECONF.
 
-should be fixed at least for the following two perl modules
+You're right that OpenMP might indeed be overkill on some/most embedded
+systems, but embedded multi-threading is by no means unheard of and I
+guess it will become more popular as CPUs like the Cortex-A9 and newer
+Pentiums start to show up in these systems.
 
-libwww-perl: revision 2873796e006d11d27cf466d502a70c2800820342
-liburi-perl: revision 8255feabebd04e228e5a0558f18f07b7e6c13dd9
+I verified that libgomp does compile OK with gcc 4.2.2, so I guess I'll
+go ahead and re-enable it for that version at least.
 
-Regards
-Gordon
+p.
+
+On Tue, 2008-08-05 at 17:57 -0700, Khem Raj wrote:
+> I also saw the error long back on arm I dont remember the error
+> anymore. This was with gcc 4.2.1 or some such. You can enable it may
+> be it builds now its been long. Open MP on an embedded system might be
+> overkill. What is the error you are getting ? Can gettext build
+> without libgomp. How will it compile with older compilers ?
+> 
+> Thanks
+> 
+> -Khem
+> 
+> On Tue, Aug 5, 2008 at 5:26 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> > Phil Blundell wrote:
+> >>
+> >> On Tue, 2008-08-05 at 12:35 +0200, Koen Kooi wrote:
+> >>>
+> >>> It broke builds for some people (but not all).
+> >>
+> >> What was the breakage?  It seems like it would be a better idea to fix
+> >> that than just to disable it.
+> >
+> > I wasn't one of the people seeing the breakage, so I'll leave it to the
+> > people that reported to respond.
+> >
+> > regards,
+> >
+> > Koen
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
