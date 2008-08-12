@@ -1,17 +1,17 @@
 Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KSoXc-0003zS-89
+	(envelope-from <theBohemian@gmx.net>) id 1KSokQ-0004Gk-9u
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Aug 2008 09:43:40 +0200
-Received: (qmail invoked by alias); 12 Aug 2008 07:43:07 -0000
+	Tue, 12 Aug 2008 09:56:54 +0200
+Received: (qmail invoked by alias); 12 Aug 2008 07:56:22 -0000
 Received: from e178072149.adsl.alicedsl.de (EHLO [192.168.4.110])
 	[85.178.72.149]
-	by mail.gmx.net (mp025) with SMTP; 12 Aug 2008 09:43:07 +0200
+	by mail.gmx.net (mp008) with SMTP; 12 Aug 2008 09:56:22 +0200
 X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+wh/M1ps6ws124Dm5SmRMo/PZqoaHi10sdKGtbry
-	b/CJn3Gz8cRoo8
-Message-ID: <48A13F74.2050909@gmx.net>
-Date: Tue, 12 Aug 2008 09:44:52 +0200
+X-Provags-ID: V01U2FsdGVkX18pXk9jvdQpujdIpaEhDmF3r+wFLIvXQCQwgzj/oP
+	k/0rWGebqBGM5p
+Message-ID: <48A1428F.3040009@gmx.net>
+Date: Tue, 12 Aug 2008 09:58:07 +0200
 From: Robert Schuster <theBohemian@gmx.net>
 User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
@@ -20,7 +20,7 @@ References: <48A13D3B.6040302@gmx.net>
 In-Reply-To: <48A13D3B.6040302@gmx.net>
 X-Enigmail-Version: 0.95.0
 X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.62
+X-FuHaFi: 0.64
 Subject: Re: outstanding avr32 issues (and their workarounds)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,52 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2008 07:43:40 -0000
-X-Groupsio-MsgNum: 5726
+X-List-Received-Date: Tue, 12 Aug 2008 07:56:54 -0000
+X-Groupsio-MsgNum: 5727
 Content-Type: multipart/signed; micalg=pgp-sha256;
 	protocol="application/pgp-signature";
-	boundary="------------enigFCFA09100C5FD4A0AE20F7EB"
+	boundary="------------enig712F585C44F3B7931DBCD52B"
 
---------------enigFCFA09100C5FD4A0AE20F7EB
+--------------enig712F585C44F3B7931DBCD52B
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
 Robert Schuster schrieb:
-> 5) linux
-> This is only important if you want to boot from SD/MCC like me. The
-> defconfig should say that ext2 or 3 (or both) is built-in. Otherwise yo=
-u
-> cannot boot from such a filesystem.
-Just in case someone wants to know how to do this. I use these commands:
-
-mmcinit
-ext2load mmc 0:1 0x10300000 /boot/uImage
-set bootargs console=3DttyS0 root=3D/dev/mmcblk0p1 rootdelay=3D1
-bootm 0x10300000
-
-"rootdelay=3D1" is important because otherwise the mmc card is not yet
-available.
-
-One can save a lot of typing by putting the above commands into a
-variable and run them later.
-
-Enter "askenv mmcboot"
-Paste the commands:
-mmcinit;ext2load mmc 0:1 0x10300000 /boot/uImage;set bootargs
-console=3DttyS0 root=3D/dev/mmcblk0p1 rootdelay=3D1;bootm 0x10300000
-
-(<Enter>)
-Run "saveenv".
-
-Later on run the commands by entering "run mmcboot".
+> 3) util-linux-ng 2.14 (when building console-image)
+> Needs UCLIBC_HAS_PROGRAM_INVOCATION_NAME=3Dy in uclibc.distro.
+This one is fixed by now by an updated uclibc 0.2.29 recipe. If your
+build has already run do_configure for util-linux-ng you need to 'clean'
+or 'rebuild' it.
 
 Regards
 Robert
 
 
---------------enigFCFA09100C5FD4A0AE20F7EB
+--------------enig712F585C44F3B7931DBCD52B
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -89,9 +65,9 @@ Content-Disposition: attachment; filename="signature.asc"
 Version: GnuPG v1.4.9 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iEYEAREIAAYFAkihP3QACgkQG9cfwmwwEto1AgCbBC+8PxftgVeea9a7/DriZ1+D
-Tg4AoJaV/HNPOVKMxKmMR0EE9D+uIj7e
-=aQdK
+iEYEAREIAAYFAkihQo8ACgkQG9cfwmwwEtrObQCfWcZrI7wprCNyLKxePNl+PXRA
+mkIAnj+7DbxprYntYbg6s45DXFrfhJNd
+=khZX
 -----END PGP SIGNATURE-----
 
---------------enigFCFA09100C5FD4A0AE20F7EB--
+--------------enig712F585C44F3B7931DBCD52B--
