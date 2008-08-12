@@ -1,24 +1,32 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1KStMo-0003rZ-6t
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Aug 2008 14:52:50 +0200
-Received: from andromeda.vanille.de (e180157096.adsl.alicedsl.de
-	[85.180.157.96])
-	by drlauer-research.com (Postfix) with ESMTP id F2F10584C2A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2008 14:59:48 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Aug 2008 14:52:17 +0200
-User-Agent: KMail/1.9.9
+	(envelope-from <rpurdie@rpsys.net>) id 1KStOH-0003uc-Ro
+	for openembedded-devel@openembedded.org; Tue, 12 Aug 2008 14:54:22 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m7CCrpq5003121
+	for <openembedded-devel@openembedded.org>;
+	Tue, 12 Aug 2008 13:53:51 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 02831-09 for <openembedded-devel@openembedded.org>;
+	Tue, 12 Aug 2008 13:53:45 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m7CCrgkj003106
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Tue, 12 Aug 2008 13:53:42 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200808121422.10430.mickey@vanille-media.de>
 References: <g7rt8e$ek9$1@ger.gmane.org>
 	<200808121422.10430.mickey@vanille-media.de>
-	<g7s07o$o5g$1@ger.gmane.org>
-In-Reply-To: <g7s07o$o5g$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200808121452.18203.mickey@vanille-media.de>
+Date: Tue, 12 Aug 2008 13:53:43 +0100
+Message-Id: <1218545623.6321.18.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: openembedded.net status?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,44 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2008 12:52:50 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 12 Aug 2008 12:54:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Am Dienstag 12 August 2008 14:38:16 schrieb Koen Kooi:
-> Michael 'Mickey' Lauer wrote:
-> > Am Dienstag 12 August 2008 13:47:26 schrieb Koen Kooi:
-> >> if so, why is it taking so *$($*(@$*(@ long?
-> >
-> > No idea. That's the drawback of using donated services. The one in charge
-> > of colocation is not in germany right now, according to him he notified
-> > the computing centre, but i have yet to get an update from them. Since I
-> > don't even have an account at the computing centre, it's a bit tough for
-> > me to put pressure on those guys.
->
-> Thanks, that clears things up a bit. All I knew that is was down and
-> that there were no messages what happened and what steps are being taken
-> to fix it.
->
-> Isn't there a remote powerswitch that can get flipped like strato has?
+On Tue, 2008-08-12 at 14:22 +0200, Michael 'Mickey' Lauer wrote:
+> Am Dienstag 12 August 2008 13:47:26 schrieb Koen Kooi:
+> > if so, why is it taking so *$($*(@$*(@ long?
+> 
+> No idea. That's the drawback of using donated services. The one in charge of 
+> colocation is not in germany right now, according to him he notified the 
+> computing centre, but i have yet to get an update from them. Since I don't 
+> even have an account at the computing centre, it's a bit tough for me to put 
+> pressure on those guys.
+> 
+> I know it's always annoying when a server goes down, but this arrangement was 
+> the best we could do and it worked well until now, so let's not freak out and 
+> hope it's coming back soon.
+> 
+> What about all the server offers we had in the past years, btw.? Was anything 
+> really accomplished there? If so, where are these servers, we should work on 
+> a mirroring system.
 
-There is probably, but I don't have an account there. Once Harald is back, 
-I'll do the necessary things to prepare a better response time if that may 
-happen again.
+This doesn't help now but I've just set things in motion to totally
+change my internet connectivity. Once that is done I should have a high
+bandwidth ADSL line with static IPs I can put servers on the end of. I'm
+more than happy to run a backup/mirror there which we can switch in to
+replace the main server in circumstances like this.
 
-Then again, the traceroute indicates it's not the machine that's not 
-responding (80.81.242.146), but rather some router craashed within the 
-computing centre. So even a powerswitch would not help in that case.
+Cheers,
 
-> Can we point DNS back to ltg in the meantime? Having a page saying we're
-> down is way better than having all website timeout.
+Richard
 
-I just pointed it back, but ltg needs to claim oe.net in apache2 and redirect 
-to oe.ltg.org, otherwise we only get the main page.
 
--- 
-:M:
 
 
