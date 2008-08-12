@@ -1,25 +1,25 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1KSy9f-0003zs-2r
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KSyEg-00047S-6f
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Aug 2008 19:59:35 +0200
-Received: from andromeda.vanille.de (e180152131.adsl.alicedsl.de
-	[85.180.152.131])
-	by drlauer-research.com (Postfix) with ESMTP id C7C0C5843CE
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2008 20:06:32 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Aug 2008 19:59:00 +0200
-User-Agent: KMail/1.9.9
-References: <g7rt8e$ek9$1@ger.gmane.org>
-	<200808121528.21809.mickey@vanille-media.de>
-	<1218553210.6321.25.camel@dax.rpnet.com>
-In-Reply-To: <1218553210.6321.25.camel@dax.rpnet.com>
+	Tue, 12 Aug 2008 20:04:47 +0200
+Received: (qmail invoked by alias); 12 Aug 2008 18:04:12 -0000
+Received: from e178072149.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.72.149]
+	by mail.gmx.net (mp050) with SMTP; 12 Aug 2008 20:04:12 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/LwtFxKzbLshgWAf9KSMIynzI5dqfbnP2yrmL75e
+	SnlfL2/8T7GCNX
+Message-ID: <48A1D100.8070102@gmx.net>
+Date: Tue, 12 Aug 2008 20:05:52 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-Message-Id: <200808121959.00884.mickey@vanille-media.de>
-Subject: Re: openembedded.net status?
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.66
+Subject: oprofile updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,37 +33,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2008 17:59:35 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Aug 2008 18:04:48 -0000
+X-Groupsio-MsgNum: 5738
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig7D7C6F8EB67F6B05D021CDD5"
 
-Am Dienstag 12 August 2008 17:00:10 schrieb Richard Purdie:
-> On Tue, 2008-08-12 at 15:28 +0200, Michael 'Mickey' Lauer wrote:
-> > Fwiw, my call to the computing centre seemed to have worked.
-> >
-> > Amethyst is back again.
->
-> Great news. Do we know what went wrong?
+--------------enig7D7C6F8EB67F6B05D021CDD5
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Not really. The computing centre claimed they have "restarted" it, which is 
-clearly bogus given its 10 days uptime. traceroute inspection rather makes me 
-suspect they had a faulty router which they've replaced or restarted.
+Hi,
+as you might have seen I committed a patch for oprofile 0.9.3 and added
+0.9.4.
 
->
-> > Richard, I think once we have a full mirror of it (synced daily or so),
-> > we should be fine in terms of redundance. Do you have any ETA for your
-> > new network?
->
-> I'm guessing about 2 weeks. I could do something in the meantime but
-> since I know the setup is going to change I'd prefer to wait until after
-> thats happened.
+0.9.3 was applying a patch that adds armv7 support but the CPU event
+files were not distributed because the patch modified a Makefile.in
+(which was overwritten since OE does autogen.sh/autoreconf).
 
-Sure. Sounds good.
+To my surprise the armv7 patch is still needed for 0.9.4 (although it
+was created months ago). So I adjusted it for this version.
 
-Cheers,
--- 
-:M:
+Oprofile 0.9.4 is interesting because it
+ - supports the avr32 CPUs
+ - provides libopagent
+
+The latter is hot stuff for JIT compilers: With the library you can tell
+oprofile that a JIT-created area of machine code has a certain name.
+With the name and the instruction sequence itself oprofile can then
+provide the same level of detailed information as it provides for normal
+C and C++ functions.
+
+Needless to say I would be happy if oprofile 0.9.4 could make it into
+angstrom 2008.1. :)
+
+Regards
+Robert
 
 
+--------------enig7D7C6F8EB67F6B05D021CDD5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkih0QUACgkQG9cfwmwwEtrIkQCfZ8oBwC0/9/b8/YAo2bKjIjzE
+Yd4Ani7alONn6Ec/McCTSP1jri5dWIZJ
+=ih6w
+-----END PGP SIGNATURE-----
+
+--------------enig7D7C6F8EB67F6B05D021CDD5--
