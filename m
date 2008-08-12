@@ -1,34 +1,24 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1KSvNI-0008Uq-0b
-	for openembedded-devel@openembedded.org; Tue, 12 Aug 2008 17:01:28 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m7CF0uih014206
-	for <openembedded-devel@openembedded.org>;
-	Tue, 12 Aug 2008 16:00:56 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13834-04-2 for <openembedded-devel@openembedded.org>;
-	Tue, 12 Aug 2008 16:00:44 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m7CF0AjF014101
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 12 Aug 2008 16:00:10 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200808121528.21809.mickey@vanille-media.de>
+	(envelope-from <mickey@vanille-media.de>) id 1KSy9f-0003zs-2r
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Aug 2008 19:59:35 +0200
+Received: from andromeda.vanille.de (e180152131.adsl.alicedsl.de
+	[85.180.152.131])
+	by drlauer-research.com (Postfix) with ESMTP id C7C0C5843CE
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Aug 2008 20:06:32 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Aug 2008 19:59:00 +0200
+User-Agent: KMail/1.9.9
 References: <g7rt8e$ek9$1@ger.gmane.org>
-	<200808121422.10430.mickey@vanille-media.de>
-	<1218545623.6321.18.camel@dax.rpnet.com>
 	<200808121528.21809.mickey@vanille-media.de>
-Date: Tue, 12 Aug 2008 16:00:10 +0100
-Message-Id: <1218553210.6321.25.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<1218553210.6321.25.camel@dax.rpnet.com>
+In-Reply-To: <1218553210.6321.25.camel@dax.rpnet.com>
+MIME-Version: 1.0
+Message-Id: <200808121959.00884.mickey@vanille-media.de>
 Subject: Re: openembedded.net status?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,28 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2008 15:01:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 12 Aug 2008 17:59:35 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, 2008-08-12 at 15:28 +0200, Michael 'Mickey' Lauer wrote:
-> Fwiw, my call to the computing centre seemed to have worked.
-> 
-> Amethyst is back again.
+Am Dienstag 12 August 2008 17:00:10 schrieb Richard Purdie:
+> On Tue, 2008-08-12 at 15:28 +0200, Michael 'Mickey' Lauer wrote:
+> > Fwiw, my call to the computing centre seemed to have worked.
+> >
+> > Amethyst is back again.
+>
+> Great news. Do we know what went wrong?
 
-Great news. Do we know what went wrong?
+Not really. The computing centre claimed they have "restarted" it, which is 
+clearly bogus given its 10 days uptime. traceroute inspection rather makes me 
+suspect they had a faulty router which they've replaced or restarted.
 
-> Richard, I think once we have a full mirror of it (synced daily or so), we 
-> should be fine in terms of redundance. Do you have any ETA for your new 
-> network?
+>
+> > Richard, I think once we have a full mirror of it (synced daily or so),
+> > we should be fine in terms of redundance. Do you have any ETA for your
+> > new network?
+>
+> I'm guessing about 2 weeks. I could do something in the meantime but
+> since I know the setup is going to change I'd prefer to wait until after
+> thats happened.
 
-I'm guessing about 2 weeks. I could do something in the meantime but
-since I know the setup is going to change I'd prefer to wait until after
-thats happened.
+Sure. Sounds good.
 
 Cheers,
-
-Richard
-
+-- 
+:M:
 
 
