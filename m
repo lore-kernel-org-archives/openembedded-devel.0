@@ -1,24 +1,24 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1KStvH-0001Af-0D
+	(envelope-from <mickey@vanille-media.de>) id 1KStvi-0001Bb-7m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Aug 2008 15:28:27 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id D9C711556C3;
-	Tue, 12 Aug 2008 09:27:55 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Tue, 12 Aug 2008 09:27:55 -0400
-X-Sasl-enc: RvUBh/z+3Zn11t+ZHoAb2jh1jdmUDa96wg0d0bePZHA9 1218547675
-Received: from [192.168.1.9] (CPE-121-209-20-127.sa.bigpond.net.au
-	[121.209.20.127])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 42681280FA;
-	Tue, 12 Aug 2008 09:27:53 -0400 (EDT)
-From: "Rod Whitby" <rod@whitby.id.au>
-Date: 12 Aug 2008 22:57:00 +0930
-To: <openembedded-devel@lists.openembedded.org>
-X-Mailer: ChatterEmail+ for Treo 6xx/700p (3.0.10)
-Message-ID: <3301426673.2387690@mail.messagingengine.com>
-Cc: ka6sox@gmail.com
+	Tue, 12 Aug 2008 15:28:54 +0200
+Received: from andromeda.vanille.de (e180157096.adsl.alicedsl.de
+	[85.180.157.96])
+	by drlauer-research.com (Postfix) with ESMTP id 095DD5847F2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Aug 2008 15:35:53 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Aug 2008 15:28:21 +0200
+User-Agent: KMail/1.9.9
+References: <g7rt8e$ek9$1@ger.gmane.org>
+	<200808121422.10430.mickey@vanille-media.de>
+	<1218545623.6321.18.camel@dax.rpnet.com>
+In-Reply-To: <1218545623.6321.18.camel@dax.rpnet.com>
+MIME-Version: 1.0
+Message-Id: <200808121528.21809.mickey@vanille-media.de>
 Subject: Re: openembedded.net status?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,18 +33,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2008 13:28:27 -0000
+X-List-Received-Date: Tue, 12 Aug 2008 13:28:55 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Mickey wrote:
->What about all the server offers we had in the past years, btw.? Was anything 
->really accomplished there? If so, where are these servers, we should work on 
->a mirroring system.
+Fwiw, my call to the computing centre seemed to have worked.
 
-The nslu2-linux.org project offered a shared server arrangement on our redundantly provisioned Xen machines at OSUOSL back then, and the offer still stands.
+Amethyst is back again.
 
-We could bring up an instance for *.openembedded.net in a matter of hours ... just contact Tom King (ka6sox).
+Richard, I think once we have a full mirror of it (synced daily or so), we 
+should be fine in terms of redundance. Do you have any ETA for your new 
+network?
 
--- Rod
-
+-- 
+:M:
 
 
