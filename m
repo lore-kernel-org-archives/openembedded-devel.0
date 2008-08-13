@@ -1,32 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KSzmA-000887-LV
-	for openembedded-devel@openembedded.org; Tue, 12 Aug 2008 21:43:26 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KSzld-0002fx-0l
-	for openembedded-devel@openembedded.org; Tue, 12 Aug 2008 19:42:53 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 12 Aug 2008 19:42:53 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 12 Aug 2008 19:42:53 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 12 Aug 2008 21:42:36 +0200
-Message-ID: <g7sp3d$kte$1@ger.gmane.org>
-References: <48A1D100.8070102@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080700)
-In-Reply-To: <48A1D100.8070102@gmx.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: oprofile updates
+	(envelope-from <john_lee@openmoko.com>) id 1KTBqC-0005tv-Kr
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Aug 2008 10:36:25 +0200
+Received: from [172.16.23.111] (helo=buddha.tw.openmoko.com)
+	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
+	id 1KTBpT-0008W0-0A for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Aug 2008 16:35:48 +0800
+Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
+	(envelope-from <john_lee@openmoko.com>) id 1KTBpL-0008UN-Gq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Aug 2008 16:35:31 +0800
+Date: Wed, 13 Aug 2008 16:35:31 +0800
+From: John Lee <john_lee@openmoko.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20080813083531.GB18074@buddha.tw.openmoko.com>
+Mail-Followup-To: openembedded-devel
+	<openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 172.16.23.111
+X-SA-Exim-Mail-From: john_lee@openmoko.com
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: DEPENDS gperf-native in xcb-util.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2008 19:43:26 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Aug 2008 08:36:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Robert Schuster wrote:
-> Hi,
-> as you might have seen I committed a patch for oprofile 0.9.3 and added
-> 0.9.4.
->
-> 0.9.3 was applying a patch that adds armv7 support but the CPU event
-> files were not distributed because the patch modified a Makefile.in
-> (which was overwritten since OE does autogen.sh/autoreconf).
->
-> To my surprise the armv7 patch is still needed for 0.9.4 (although it
-> was created months ago). So I adjusted it for this version.
->
-> Oprofile 0.9.4 is interesting because it
->   - supports the avr32 CPUs
->   - provides libopagent
->
-> The latter is hot stuff for JIT compilers: With the library you can tell
-> oprofile that a JIT-created area of machine code has a certain name.
-> With the name and the instruction sequence itself oprofile can then
-> provide the same level of detailed information as it provides for normal
-> C and C++ functions.
->
-> Needless to say I would be happy if oprofile 0.9.4 could make it into
-> angstrom 2008.1. :)
+hi,
 
-For which archs? It's already there for armv7a (it's part of the demo 
-image): 
-http://www.angstrom-distribution.org/repo/?action=details&pnm=oprofile
+I wonder why
 
-regards,
+DEPENDS += "gperf-native"
 
-Koen
+is commented out in xcb-util.inc?  I tried to build it today but the
+configure seems to depend on gperf.
 
+btw I need to add 
+
+acpaths = ""
+
+in xcb-util.inc to make it work.  that's because autotools.bbclass
+will automatically include /atom in acpaths but it's not necessary and
+will cause error.
+
+
+Regards,
+John
 
 
