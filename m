@@ -1,27 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KTCx8-0004Db-OD
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Aug 2008 11:47:38 +0200
-Received: (qmail invoked by alias); 13 Aug 2008 09:47:02 -0000
-Received: from e178124028.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.124.28]
-	by mail.gmx.net (mp039) with SMTP; 13 Aug 2008 11:47:02 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/Bt79i7QrBO3uPROacIa6jEOpzPBbdjat7Os6ANV
-	tn675n7hfnETmG
-Message-ID: <48A2ADFE.4090108@gmx.net>
-Date: Wed, 13 Aug 2008 11:48:46 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <48A1D100.8070102@gmx.net> <g7sp3d$kte$1@ger.gmane.org>
-In-Reply-To: <g7sp3d$kte$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.66
-Subject: Re: oprofile updates
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KTEKT-0002jU-0m
+	for openembedded-devel@openembedded.org; Wed, 13 Aug 2008 13:15:49 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KTEJq-0004J1-HG
+	for openembedded-devel@openembedded.org; Wed, 13 Aug 2008 11:15:10 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 13 Aug 2008 11:15:10 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 13 Aug 2008 11:15:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 13 Aug 2008 13:14:59 +0200
+Message-ID: <g7ufnj$67o$1@ger.gmane.org>
+References: <48A13D3B.6040302@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080700)
+In-Reply-To: <48A13D3B.6040302@gmx.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: outstanding avr32 issues (and their workarounds)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,45 +40,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Aug 2008 09:47:38 -0000
-X-Groupsio-MsgNum: 5741
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig80BE0DAAF921512E7938DF19"
+X-List-Received-Date: Wed, 13 Aug 2008 11:15:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig80BE0DAAF921512E7938DF19
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Robert Schuster wrote:
+> Hi,
+> for the last 4 days or so I am trying to build Angstrom 2008.1 (uclibc)
+> for Atmel's NGW100 board featuering an AVR32 CPU.
+>
+> I have not been able to boot the image I built with OE yet but these are
+> the issues I encountered so far:
+>
+> 1) binutils-cross 2.17
+> Something is b0rken with the configure script code that puts the
+> arguments to configure into a variable. The variable contains
+> environment variables. This in turn causes the binutils build to fail
+> afterwards. There is a workaround which does a little bit of sed magic
+> on the generated Makefile. This fixes the wrong variable and lets the
+> build succeed.
 
-Hi Koen,
+This should be 'solved' now
 
-Koen Kooi schrieb:
-> For which archs? It's already there for armv7a (it's part of the demo
-> image):
-> http://www.angstrom-distribution.org/repo/?action=3Ddetails&pnm=3Doprof=
-ile
-Interesting.
+> 2) gcc-cross 4.2.2
+> When the objective c language is enabled the build of gcc-cross will
+> fail because the compiler crashes when compiling some objective c source
+> file.
+> I have not examined this in detail. Maybe this is fixable with a patch
+> to gcc.
 
-I assumed there would be PREFFERRED_VERSION for oprofile in Angstrom but
-there is not (there is one for OpenMoko). Then bitbake chose the latest
-and highest version: 0.9.4. :)
+This should be 'solved' now as well (ugh, it overrides a variable and 
+unweaking it in the process :()
 
-Regards
-Robert
+> 3) util-linux-ng 2.14 (when building console-image)
+> Needs UCLIBC_HAS_PROGRAM_INVOCATION_NAME=y in uclibc.distro.
+
+Fixed
+
+> 4) console-image
+> When the rootfs is generated it will fail with:
+>
+> Collected errors:
+>   * ERROR: Cannot satisfy the following dependencies for task-base-extended:
+>     *  libgcc *
+>
+> There is no libgcc package because it is empty and OE normally does not
+> create empty packages. Unfortunately I am not experienced enough with
+> uclibc to say why there are no files for libgcc nor do I understand why
+> some package requests it. I did a very dirty workaround by declaring
+> ALLOW_EMPTY = "1" in gcc-cross.inc
+
+Try a clean rebuild, Khems toolchain changes should have fixed this.
+
+> and optional:
+>
+> 5) linux
+> This is only important if you want to boot from SD/MCC like me. The
+> defconfig should say that ext2 or 3 (or both) is built-in. Otherwise you
+> cannot boot from such a filesystem.
+
+I tried to update the stk1000 kernel a few weeks ago and ran into 
+'funny' issues. If you build in the ps/2 module (the board has 3.3V ps/2 
+connectors) the kernel fails to boot. If you enable keyboard drivers 
+(HID) the kernel fails to boot. If you enable scsi (for usb storage) the 
+kernel fails to boot. If you build in usb support (if have a cf-usb 
+adaptor) the kernel fails to boot. I now have a defconfig that builds 
+with the current kernel *and* manages to boot, but updating the avr32 
+patch makes it unbootable again.
+So changing the ngw defconfig is ok, but please test on a stk1000 before 
+updating kernel sources.
+
+regards,
+
+Koen
 
 
---------------enig80BE0DAAF921512E7938DF19
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkiirgAACgkQG9cfwmwwEto1OQCdE6y2d1AVa0llMxM3iS0XC4Q7
-zxgAnRwkGw/kXA/rGnZzQ/x0qfsuNfed
-=GRQF
------END PGP SIGNATURE-----
-
---------------enig80BE0DAAF921512E7938DF19--
