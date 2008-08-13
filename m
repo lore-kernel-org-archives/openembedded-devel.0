@@ -1,35 +1,27 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.com>) id 1KTBqC-0005tv-Kr
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KTCx8-0004Db-OD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Aug 2008 10:36:25 +0200
-Received: from [172.16.23.111] (helo=buddha.tw.openmoko.com)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
-	id 1KTBpT-0008W0-0A for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Aug 2008 16:35:48 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.com>) id 1KTBpL-0008UN-Gq
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Aug 2008 16:35:31 +0800
-Date: Wed, 13 Aug 2008 16:35:31 +0800
-From: John Lee <john_lee@openmoko.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20080813083531.GB18074@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
+	Wed, 13 Aug 2008 11:47:38 +0200
+Received: (qmail invoked by alias); 13 Aug 2008 09:47:02 -0000
+Received: from e178124028.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.124.28]
+	by mail.gmx.net (mp039) with SMTP; 13 Aug 2008 11:47:02 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/Bt79i7QrBO3uPROacIa6jEOpzPBbdjat7Os6ANV
+	tn675n7hfnETmG
+Message-ID: <48A2ADFE.4090108@gmx.net>
+Date: Wed, 13 Aug 2008 11:48:46 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.111
-X-SA-Exim-Mail-From: john_lee@openmoko.com
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: DEPENDS gperf-native in xcb-util.inc
+To: openembedded-devel@lists.openembedded.org
+References: <48A1D100.8070102@gmx.net> <g7sp3d$kte$1@ger.gmane.org>
+In-Reply-To: <g7sp3d$kte$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.66
+Subject: Re: oprofile updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +35,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Aug 2008 08:36:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 Aug 2008 09:47:38 -0000
+X-Groupsio-MsgNum: 5741
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig80BE0DAAF921512E7938DF19"
 
-hi,
+--------------enig80BE0DAAF921512E7938DF19
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I wonder why
+Hi Koen,
 
-DEPENDS += "gperf-native"
+Koen Kooi schrieb:
+> For which archs? It's already there for armv7a (it's part of the demo
+> image):
+> http://www.angstrom-distribution.org/repo/?action=3Ddetails&pnm=3Doprof=
+ile
+Interesting.
 
-is commented out in xcb-util.inc?  I tried to build it today but the
-configure seems to depend on gperf.
+I assumed there would be PREFFERRED_VERSION for oprofile in Angstrom but
+there is not (there is one for OpenMoko). Then bitbake chose the latest
+and highest version: 0.9.4. :)
 
-btw I need to add 
-
-acpaths = ""
-
-in xcb-util.inc to make it work.  that's because autotools.bbclass
-will automatically include /atom in acpaths but it's not necessary and
-will cause error.
-
-
-Regards,
-John
+Regards
+Robert
 
 
+--------------enig80BE0DAAF921512E7938DF19
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkiirgAACgkQG9cfwmwwEto1OQCdE6y2d1AVa0llMxM3iS0XC4Q7
+zxgAnRwkGw/kXA/rGnZzQ/x0qfsuNfed
+=GRQF
+-----END PGP SIGNATURE-----
+
+--------------enig80BE0DAAF921512E7938DF19--
