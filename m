@@ -1,33 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.249.82.234] (helo=wx-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KTbrr-0003K8-H8
-	for openembedded-devel@openembedded.org; Thu, 14 Aug 2008 14:23:53 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KTbr8-0007LF-8q
-	for openembedded-devel@openembedded.org; Thu, 14 Aug 2008 12:23:06 +0000
-Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 14 Aug 2008 12:23:06 +0000
-Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 14 Aug 2008 12:23:06 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 14 Aug 2008 14:22:56 +0200
-Message-ID: <g81830$r40$1@ger.gmane.org>
-References: <g7vqvs$3fi$1@ger.gmane.org>	<1218699665.10360.25.camel@lenovo.internal.reciva.com>	<g815ta$ca0$1@ger.gmane.org>
-	<48A41F24.1070507@dls.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-In-Reply-To: <48A41F24.1070507@dls.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: git and dir
+	(envelope-from <raj.khem@gmail.com>) id 1KTfRM-0008W9-Ou
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Aug 2008 18:12:44 +0200
+Received: by wx-out-0506.google.com with SMTP id i29so332972wxd.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Aug 2008 09:12:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=LrzWOGID0UIjmt6R+0rNgN+RC0ijVG2qwqVdrHgaBYU=;
+	b=IG93kw86Qiak9HTJfHeDibJjg0EUcMJr7cS7YZewfDtZ/1fJepATRmhDgCueuXN8kB
+	Mg7vYFZUOVEj0MUUenCUsnc2/8PfQaTAdhMMvx0qhVoJLKkNNnYaU6Kc3Dm325no6Tyi
+	CpZQEzfLdt9mhL6FdsKV9s7JTVwRNImeXgBF8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=xrZo54Ob7HeFv+rs7BSyvd6Ka3AismBeOFNVnWtUtkdu0io+ZaKwxRIR/4tiRKlV31
+	gV0L9tFCkxQFiD/u9OySAPhIaYWUzM4RMvpwiyfd4+RRgXDc1Ry73bJbmcNdORprwJCd
+	lolloBECXBjPB396VzHc4UTEQ6zrtob+JOjRk=
+Received: by 10.114.123.19 with SMTP id v19mr1393832wac.168.1218730323671;
+	Thu, 14 Aug 2008 09:12:03 -0700 (PDT)
+Received: by 10.114.241.11 with HTTP; Thu, 14 Aug 2008 09:12:03 -0700 (PDT)
+Message-ID: <19c1b8a90808140912i1130cc41te354a7becc6dceaf@mail.gmail.com>
+Date: Thu, 14 Aug 2008 09:12:03 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200808051841.39947.mickey@vanille-media.de>
+MIME-Version: 1.0
+References: <1217952738.24777.175.camel@mill.internal.reciva.com>
+	<200808051841.39947.mickey@vanille-media.de>
+Subject: Re: enabling objc in gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2008 12:23:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 14 Aug 2008 16:12:45 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Mike (mwester) wrote:
-> So can we consider a middle ground?
+I think it was disable to get over a libobjc build issue seen on uclibc. see
+http://gcc.gnu.org/bugzilla/show_bug.cgi?id=32332
 
-How about this?  If $GITBRANCH was available when defining TMPDIR it 
-would be just perfectly possible to define it as TMPDIR = 
-"${OEHOME}/tmp/${DISTRO}/${GITBRANCH}" and not have any issues.  For 
-those who want to share stuff and know what they are doing, it would be 
-possible to leave out DISTRO and GITBRANCH fi they want to.
+But I am still getting this issue even after this is disabled.
 
-The issue that I see is that although it may have been technically 
-possible to switch branches in the same directory with mtn, I would 
-consider that a very advanced technique (I consider myself rather 
-well-versed in mtn and didn't even know it was possible).  Whereas, this 
-is kind of the norm with git.  The easy switching is one of the reasons 
-we decided to go forward with git.  Just like Mike said, I think we are 
-going to see a lot of wasted time for everyone and I think now is a good 
-time to proactively prevent that.
+Thanks
 
+-Khem
+
+On Tue, Aug 5, 2008 at 9:41 AM, Michael 'Mickey' Lauer
+<mickey@vanille-media.de> wrote:
+> Am Dienstag 05 August 2008 18:12:18 schrieb Phil Blundell:
+>> At the moment, Objective-C seems to be disabled in
+>> gcc-configure-common.inc.  Is there any particular reason for this, or
+>> alternatively are there any objections to enabling it?
+>
+> Fwiw, I'd like to see that enabled as well.
+>
+> --
+> :M:
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
