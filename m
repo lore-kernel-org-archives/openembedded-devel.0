@@ -1,20 +1,37 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [74.125.44.154] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1KTuAO-0002z0-IL; Fri, 15 Aug 2008 09:56:12 +0200
-Received: from 88-111-45-211.dynamic.dsl.as9105.com ([88.111.45.211]
-	helo=[192.168.2.156])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1KTu9g-0004TU-El; Fri, 15 Aug 2008 08:55:28 +0100
-From: Phil Blundell <pb@reciva.com>
+	(envelope-from <raj.khem@gmail.com>) id 1KU4BC-0000Ks-KD
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Aug 2008 20:37:42 +0200
+Received: by yx-out-1718.google.com with SMTP id 4so713146yxp.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Aug 2008 11:36:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:cc:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=xi6AyQyxqicuxLIA8XVWgMURPiP0ybhvOZopkBjUVUU=;
+	b=hncV4lZOQ+jt95WUlkPzhS6eQFEHsYOdLzZU9Xuk3Q7OO8LmzuWO0uO8w5oV5SrO3D
+	6j+y3H7KW4ldz1nk2Le/o+jllk4x2dhi/G3BEDzO7m+NFFKEc3HvxH5E+oSR7enOgI/m
+	FzmPxdv8pqLjVHAAljSzLER0CgdZ9XH+wTMoo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=NwVG3PULTgYMjh8tYa9y88c8HHD0pXWvZ0hpYyejfawCQXOWvD44HWYj3jKX2CO0c4
+	L2T3Vju48Sm9uHUr1ve4XVQw1aCPcKWd9ZI5OBpeA3qCeIWEELjedUA7CPpzQXszZwTW
+	QOiCQa+zOITo5yAm8oyT5Qk5SS+As/RtyP0pI=
+Received: by 10.115.76.1 with SMTP id d1mr3002511wal.196.1218825416730;
+	Fri, 15 Aug 2008 11:36:56 -0700 (PDT)
+Received: by 10.114.241.11 with HTTP; Fri, 15 Aug 2008 11:36:56 -0700 (PDT)
+Message-ID: <19c1b8a90808151136h4c547845ua31b1a14bc9bf7c2@mail.gmail.com>
+Date: Fri, 15 Aug 2008 11:36:56 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90808150041s52abeb55m4bad75bcb03abd75@mail.gmail.com>
+In-Reply-To: <1218786973.10360.43.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
 References: <19c1b8a90808150041s52abeb55m4bad75bcb03abd75@mail.gmail.com>
-Date: Fri, 15 Aug 2008 08:56:13 +0100
-Message-Id: <1218786973.10360.43.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.3 
+	<1218786973.10360.43.camel@lenovo.internal.reciva.com>
 Cc: openembedded-devel@openembedded.org
 Subject: Re: Disable objc for arm uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -30,22 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Aug 2008 07:56:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Aug 2008 18:37:43 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Fri, 2008-08-15 at 00:41 -0700, Khem Raj wrote:
-> Hi
-> 
-> I am hitting a build issue while building gcc 4.2.4 for arm uclibc.
-> This patch disables objc selectively only for arm uclibc and avr
-> change is also merged in.
+On Fri, Aug 15, 2008 at 12:56 AM, Phil Blundell <pb@reciva.com> wrote:
+> On Fri, 2008-08-15 at 00:41 -0700, Khem Raj wrote:
+>> Hi
+>>
+>> I am hitting a build issue while building gcc 4.2.4 for arm uclibc.
+>> This patch disables objc selectively only for arm uclibc and avr
+>> change is also merged in.
+>
+> What's the issue?  I can't think of any fundamental reason why ObjC
+> shouldn't be able to work with uclibc.  It would be nice to fix it
+> rather than just turning it off.
 
-What's the issue?  I can't think of any fundamental reason why ObjC
-shouldn't be able to work with uclibc.  It would be nice to fix it
-rather than just turning it off.
+Its hitting
+http://gcc.gnu.org/bugzilla/show_bug.cgi?id=32332
 
-p.
+I would be happy if this is fixed.
 
+Thx
+
+-Khem
 
 
