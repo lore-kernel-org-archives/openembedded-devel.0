@@ -1,39 +1,37 @@
-Received: from [74.125.44.154] (helo=yx-out-1718.google.com)
+Received: from [209.85.134.187] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KU4BC-0000Ks-KD
+	(envelope-from <dbaryshkov@gmail.com>) id 1KUkWR-00025d-G7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Aug 2008 20:37:42 +0200
-Received: by yx-out-1718.google.com with SMTP id 4so713146yxp.42
+	Sun, 17 Aug 2008 17:50:27 +0200
+Received: by mu-out-0910.google.com with SMTP id w1so2461680mue.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Aug 2008 11:36:57 -0700 (PDT)
+	Sun, 17 Aug 2008 08:49:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=xi6AyQyxqicuxLIA8XVWgMURPiP0ybhvOZopkBjUVUU=;
-	b=hncV4lZOQ+jt95WUlkPzhS6eQFEHsYOdLzZU9Xuk3Q7OO8LmzuWO0uO8w5oV5SrO3D
-	6j+y3H7KW4ldz1nk2Le/o+jllk4x2dhi/G3BEDzO7m+NFFKEc3HvxH5E+oSR7enOgI/m
-	FzmPxdv8pqLjVHAAljSzLER0CgdZ9XH+wTMoo=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=vR7lJZSGfQL3L5XAjL/FoyndJSOca2TYMrpxXPWKxg8=;
+	b=ChII6PKmUEm3Ivl+YjbvGJS2Fh+cJ6k1k2COOXod7tIZHVSO25+ai0NcV+LBWoZuZS
+	EYEkyF67CwlM3VUaJbqYQ5rH6pVGP9qgzLpGhLdhk8570gjXzzqspCo8NJEaGatfc9S/
+	AwJiR03K8oahH56emnsvoO/ESGVGg8VxEdXGQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=NwVG3PULTgYMjh8tYa9y88c8HHD0pXWvZ0hpYyejfawCQXOWvD44HWYj3jKX2CO0c4
-	L2T3Vju48Sm9uHUr1ve4XVQw1aCPcKWd9ZI5OBpeA3qCeIWEELjedUA7CPpzQXszZwTW
-	QOiCQa+zOITo5yAm8oyT5Qk5SS+As/RtyP0pI=
-Received: by 10.115.76.1 with SMTP id d1mr3002511wal.196.1218825416730;
-	Fri, 15 Aug 2008 11:36:56 -0700 (PDT)
-Received: by 10.114.241.11 with HTTP; Fri, 15 Aug 2008 11:36:56 -0700 (PDT)
-Message-ID: <19c1b8a90808151136h4c547845ua31b1a14bc9bf7c2@mail.gmail.com>
-Date: Fri, 15 Aug 2008 11:36:56 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1218786973.10360.43.camel@lenovo.internal.reciva.com>
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=iSuNawPeAW+vIVGRmBASzDNqj2AT/wNtev2LQWb7VAJDmndUtBs9ZfkbMuybyPYy7f
+	50VdAxFeTJp131p9RI9PM298qzXlxf3O+PWfa6AZB6+D2lZw7rneEJN2u5Dv4a6ewxPD
+	+JTo2keT5jybDXd+FNKHAoFDJGwyoafzwQ5aw=
+Received: by 10.103.222.1 with SMTP id z1mr3327113muq.71.1218988174191;
+	Sun, 17 Aug 2008 08:49:34 -0700 (PDT)
+Received: from doriath.ww600.siemens.net ( [212.248.25.26])
+	by mx.google.com with ESMTPS id n10sm513911mue.0.2008.08.17.08.49.32
+	(version=SSLv3 cipher=RC4-MD5); Sun, 17 Aug 2008 08:49:33 -0700 (PDT)
+Date: Sun, 17 Aug 2008 19:48:06 +0400
+From: Dmitry Baryshkov <dbaryshkov@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, rpurdie@rpsys.net
+Message-ID: <20080817154806.GA15553@doriath.ww600.siemens.net>
 MIME-Version: 1.0
-References: <19c1b8a90808150041s52abeb55m4bad75bcb03abd75@mail.gmail.com>
-	<1218786973.10360.43.camel@lenovo.internal.reciva.com>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Disable objc for arm uclibc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: [RFC] Please test spitz changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,30 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Aug 2008 18:37:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Aug 2008 15:50:27 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Fri, Aug 15, 2008 at 12:56 AM, Phil Blundell <pb@reciva.com> wrote:
-> On Fri, 2008-08-15 at 00:41 -0700, Khem Raj wrote:
->> Hi
->>
->> I am hitting a build issue while building gcc 4.2.4 for arm uclibc.
->> This patch disables objc selectively only for arm uclibc and avr
->> change is also merged in.
->
-> What's the issue?  I can't think of any fundamental reason why ObjC
-> shouldn't be able to work with uclibc.  It would be nice to fix it
-> rather than just turning it off.
+Hi,
 
-Its hitting
-http://gcc.gnu.org/bugzilla/show_bug.cgi?id=32332
+I've put some results of spitz scoop and akita ioexp rework
+to the repository on the git.infradead.org. Please check it
+and test on the hw.
 
-I would be happy if this is fixed.
+The following changes since commit b09c3e3f1710b554348c98e78fbf4a661918779a:
+  Huang Weiyi (1):
+        removed unused #include <version.h>
 
-Thx
+are available in the git repository at:
 
--Khem
+  git://git.infradead.org/users/dbaryshkov/zaurus-2.6.git scoop
+
+Dmitry Baryshkov (21):
+      generic-bl: add startup and shutdown hooks
+      Akita: use pca953x instead of akita-ioexp
+      Scoop: provide setup/teardown and suspend/resume hooks
+      Tosa: use new scoop hooks for gpio setup
+      Spitz: register scoop2 devices as gpiolib chip
+      Spitz: use leds-gpio for led driving
+      Drop leds-spitz as they are now handled by leds-gpio
+      Corgi: register scoop2 device as gpiolib chip
+      Corgi: use leds-gpio for led driving
+      Drop leds-corgi as they are now handled by leds-gpio
+      Spitz: IrDA scoop to gpio conversion
+      Spitz: use gpio interface for backlight manipulation
+      Spitz: convert ASoC driver to use gpio api
+      Akita: merge ficp and bl functions with spitz ones
+      sharpsl_pm: permit init to fail
+      spitz: use generic GPIO API instead of set_scoop_gpio in pm code
+      Spitz: convert power regulator to use GPIO API instead of scoop_gpio
+      Spitz: as scoop devices are now unreferenced, unexport them
+      Spitz: register pm device from the proper place
+      spitz: cleanup several references
+      Scoop: compile-out obsolete parts if they aren't selected
+
+ arch/arm/common/Kconfig                    |    7 +
+ arch/arm/common/scoop.c                    |   36 +++-
+ arch/arm/common/sharpsl_pm.c               |   11 +-
+ arch/arm/include/asm/hardware/scoop.h      |   11 +
+ arch/arm/include/asm/hardware/sharpsl_pm.h |    2 +-
+ arch/arm/mach-pxa/Kconfig                  |    4 +
+ arch/arm/mach-pxa/Makefile                 |    1 -
+ arch/arm/mach-pxa/akita-ioexp.c            |  222 ------------------
+ arch/arm/mach-pxa/corgi.c                  |   32 +++-
+ arch/arm/mach-pxa/corgi_pm.c               |    4 +-
+ arch/arm/mach-pxa/include/mach/akita.h     |   22 +-
+ arch/arm/mach-pxa/include/mach/corgi.h     |    5 +-
+ arch/arm/mach-pxa/include/mach/spitz.h     |   58 ++---
+ arch/arm/mach-pxa/include/mach/tosa.h      |   17 +-
+ arch/arm/mach-pxa/spitz.c                  |  348 +++++++++++++++++++++-------
+ arch/arm/mach-pxa/spitz_pm.c               |  116 +++++----
+ arch/arm/mach-pxa/tosa.c                   |   75 ++++++-
+ arch/arm/mach-sa1100/Kconfig               |    1 +
+ arch/arm/mach-sa1100/collie_pm.c           |    8 +-
+ drivers/leds/Kconfig                       |   14 --
+ drivers/leds/Makefile                      |    2 -
+ drivers/leds/leds-corgi.c                  |  124 ----------
+ drivers/leds/leds-spitz.c                  |  131 -----------
+ drivers/video/backlight/corgi_bl.c         |   16 ++-
+ include/linux/backlight.h                  |    2 +
+ sound/soc/pxa/spitz.c                      |  112 +++++++---
+ 26 files changed, 634 insertions(+), 747 deletions(-)
+ delete mode 100644 arch/arm/mach-pxa/akita-ioexp.c
+ delete mode 100644 drivers/leds/leds-corgi.c
+ delete mode 100644 drivers/leds/leds-spitz.c
+
+-- 
+With best wishes
+Dmitry
+
 
 
