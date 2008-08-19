@@ -1,35 +1,31 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1KVWUI-000413-Gx
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Aug 2008 21:03:26 +0200
-Received: from p5b036708.dip.t-dialin.net ([91.3.103.8] helo=localhost)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1KVWTF-0002Do-E1 by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Aug 2008 21:02:24 +0200
-Received: from stefan by localhost with local (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1KVWWK-0003oX-4o
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Aug 2008 21:05:32 +0200
-Date: Tue, 19 Aug 2008 21:05:31 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080819190531.GA12385@datenfreihafen.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KVYP9-0001ab-Mk
+	for openembedded-devel@openembedded.org; Tue, 19 Aug 2008 23:06:15 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KVYO5-00074u-F9
+	for openembedded-devel@openembedded.org; Tue, 19 Aug 2008 21:05:09 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 19 Aug 2008 21:05:09 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 19 Aug 2008 21:05:09 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 19 Aug 2008 23:04:50 +0200
+Message-ID: <48AB3572.20804@student.utwente.nl>
 References: <1219122247.7224.337.camel@dfarning.desktop.org>
-	<20080819111339.GA19947@datenfreihafen.org>
-	<1219168580.7224.447.camel@dfarning.desktop.org>
-MIME-Version: 1.0
-In-Reply-To: <1219168580.7224.447.camel@dfarning.desktop.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080700)
+In-Reply-To: <1219122247.7224.337.camel@dfarning.desktop.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: Sugar Desktop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,68 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Aug 2008 19:03:26 -0000
-X-Groupsio-MsgNum: 5759
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jRHKVT23PllUwdXP"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 19 Aug 2008 21:06:15 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---jRHKVT23PllUwdXP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+David Farning wrote:
+> I am wondering if there is interest in creating OE packages for the
+> Sugar desktop [1].  Development of Sugar, which was originally designed
+> for the One Laptop Per Child, has been spun off to Sugar Labs.
+>
+> We are interest in expanding the number of devices which run Sugar.  Our
+> goals of running on inexpensive, low power machines aligns nicely with
+> those of embedded devices.
 
-Hello.
+Great! I've started on adding sugar stuff (sugar-toolkit and sugar are 
+already in), but then I stumbled across the usual wrong assumptions in 
+buildsystems:
 
-On Tue, 2008-08-19 at 12:56, David Farning wrote:
-> On Tue, 2008-08-19 at 13:13 +0200, Stefan Schmidt wrote:
-> >=20
-> > On Tue, 2008-08-19 at 00:04, David Farning wrote:
->=20
-> As of last week,  OLPC has started working directly with Fedora to make
-> a native Fedora desktop run on the XO.  I hope this leads to more
-> upstream interest porting more platforms to the XO.  Currently, OLPC is
-> working pretty hard to get 8.2 released.  Please remind me in a couple
-> of weeks (in case I forget) to set up some hardware contacts for you.
+sugar-artwork-0.82.0/cursor/cursorthemegen/.libs/lt-cursorthemegen: 
+cannot execute binary file
 
-Made a note. Not sure if this will be really neeed, but having a contact ha=
-ndy
-is always good.
+My opterons can't execute ARM code. Could you *please* fix those issues 
+upstream so that every sucrose part cross-compiles cleanly?
 
-> We are working with Jason Kridner from TI about doing a port to the
-> beagleboard using the OE toolkit.  We are setting up a colobration
-> infrastructure at http://elinux.org/BeagleBoardSugar .  From an upstream
-> perspective, is this list and the OE wiki the best places to have
-> OE/Sugar discussions.
+regards,
 
-For discussion the ml is indeed the best place. Wiki is of course fine for
-documenting your stuff.
+Koen
 
-How do you plan to work on OE? Do you have some people with commit rights o=
-r do
-you plan to do patches? While OE is on its way to git they also set up some
-policies for contributions.
-http://wiki.openembedded.net/index.php/Category:Policy
 
-I have commit right and can help to get easy patches applied. Bigger changes
-like bbclasses or other stuff needs review on the list as I'm not really
-familiar with it.
 
-regards
-Stefan Schmidt
-
---jRHKVT23PllUwdXP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: http://www.datenfreihafen.org/contact.html
-
-iEYEARECAAYFAkirGXsACgkQbNSsvd31FmVdWwCgsBksMeM8xB59Hac4xk3CdQC8
-v2QAnAwhJL+Q18P7rSGg0qmAdcy2GygE
-=tK13
------END PGP SIGNATURE-----
-
---jRHKVT23PllUwdXP--
