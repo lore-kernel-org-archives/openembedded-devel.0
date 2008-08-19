@@ -1,38 +1,34 @@
-Received: from [64.233.166.179] (helo=py-out-1112.google.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dfarning@gmail.com>) id 1KVJP4-0001Qt-Kw
+	(envelope-from <stefan@datenfreihafen.org>) id 1KVP7c-0000mH-B0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Aug 2008 07:05:10 +0200
-Received: by py-out-1112.google.com with SMTP id y77so1664162pyg.28
+	Tue, 19 Aug 2008 13:11:32 +0200
+Received: from p5b036708.dip.t-dialin.net ([91.3.103.8] helo=localhost)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1KVP6W-0004wG-61 by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2008 22:04:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:reply-to:to
-	:content-type:date:message-id:mime-version:x-mailer
-	:content-transfer-encoding:sender;
-	bh=o6zdA2enwgwdiyIjoX6l3wafTaHK+q9DEDzgYa6anuw=;
-	b=xMCF8VNNu16JTp/oWBf5X9+5qRf2X2hati70QCicSw0+iOR02+bc6mJRWm854khg+b
-	KHu9BlNcnuqX4TtpC2nCv0javd6w/lqkBRsxNlUbS2zYiAAVBzWTnOCNEFNluVl/JmHL
-	2YNmgX2ScA7XPXPAgpWz48l2bkM4GUj8A62Gs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:reply-to:to:content-type:date:message-id:mime-version
-	:x-mailer:content-transfer-encoding:sender;
-	b=NZ4OCjvaGbZOA9R86db0Eg+A/a2EJJaZVdTvwx3i6ehUxRP+O0O7MHa5EWGiOsDAP9
-	D6G9lxVKZHBo/3phv+aSKnFmfbmt04/jVSmCC6jwMtV0ZeyMMKs4GJ3OljziQ7+kIKWr
-	JeNBTciXOYpYRhSENwTleBfwCJ9b7Ip7CfyXQ=
-Received: by 10.65.126.16 with SMTP id d16mr12995544qbn.63.1219122250465;
-	Mon, 18 Aug 2008 22:04:10 -0700 (PDT)
-Received: from ?192.168.2.3? ( [75.121.143.78])
-	by mx.google.com with ESMTPS id k8sm14455943qba.5.2008.08.18.22.04.09
-	(version=SSLv3 cipher=RC4-MD5); Mon, 18 Aug 2008 22:04:09 -0700 (PDT)
-From: David Farning <dfarning@sugarlabs.org>
+	Tue, 19 Aug 2008 13:10:31 +0200
+Received: from stefan by localhost with local (Exim 4.69)
+	(envelope-from <stefan@datenfreihafen.org>) id 1KVP9g-0006zz-3i
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Aug 2008 13:13:40 +0200
+Date: Tue, 19 Aug 2008 13:13:39 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Aug 2008 00:04:07 -0500
-Message-Id: <1219122247.7224.337.camel@dfarning.desktop.org>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Sender: David Farning <dfarning@gmail.com>
-Subject: Sugar Desktop
+Message-ID: <20080819111339.GA19947@datenfreihafen.org>
+References: <1219122247.7224.337.camel@dfarning.desktop.org>
+MIME-Version: 1.0
+In-Reply-To: <1219122247.7224.337.camel@dfarning.desktop.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: Sugar Desktop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +42,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Aug 2008 05:05:10 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Aug 2008 11:11:32 -0000
+X-Groupsio-MsgNum: 5757
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gBBFr7Ir9EOA20Yy"
+Content-Disposition: inline
 
-I am wondering if there is interest in creating OE packages for the
-Sugar desktop [1].  Development of Sugar, which was originally designed
-for the One Laptop Per Child, has been spun off to Sugar Labs.
+--gBBFr7Ir9EOA20Yy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-We are interest in expanding the number of devices which run Sugar.  Our
-goals of running on inexpensive, low power machines aligns nicely with
-those of embedded devices.
+Hello.
 
-Please let me know if anyone is interested in this type of project.  If
-so, I will try to get something started.
+On Tue, 2008-08-19 at 00:04, David Farning wrote:
+> I am wondering if there is interest in creating OE packages for the
+> Sugar desktop [1].
 
-thanks
-dfarning
+There is interest. I got a XO laptop from the OLPC Germany at the linuxtag. The
+two goals are XO machine support in OE and packages for all kind of sugar
+applications. So far I worked on machine support in my small spare time. Machine
+is added, kernel compiles and boots fine, something is still worng when booting
+the rootfs. Once this is fixed I'll send the patches for review.
 
+> Please let me know if anyone is interested in this type of project.  If
+> so, I will try to get something started.
 
+Getting help on the sugar front wuld be great. So I you have someone who would
+like to help out here let us know.
 
-1. http://sugarlabs.org/go/Main_Page
+regards
+Stefan Schmidt
 
+--gBBFr7Ir9EOA20Yy
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: http://www.datenfreihafen.org/contact.html
 
+iEYEARECAAYFAkiqquMACgkQbNSsvd31FmVtDQCfQH5Ip3SwBXpOsQrSceLtBtWY
+9UMAnjiBN+NkMj76FgG04A++fNCG/WJH
+=51bu
+-----END PGP SIGNATURE-----
+
+--gBBFr7Ir9EOA20Yy--
