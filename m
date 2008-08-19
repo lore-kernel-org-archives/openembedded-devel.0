@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KVYP9-0001ab-Mk
-	for openembedded-devel@openembedded.org; Tue, 19 Aug 2008 23:06:15 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KVYO5-00074u-F9
-	for openembedded-devel@openembedded.org; Tue, 19 Aug 2008 21:05:09 +0000
+	id 1KVYTw-0003px-Ln
+	for openembedded-devel@openembedded.org; Tue, 19 Aug 2008 23:11:12 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1KVYSp-0007JE-3p
+	for openembedded-devel@openembedded.org; Tue, 19 Aug 2008 21:10:03 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 19 Aug 2008 21:05:09 +0000
+	Tue, 19 Aug 2008 21:10:03 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 19 Aug 2008 21:05:09 +0000
+	Tue, 19 Aug 2008 21:10:03 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 19 Aug 2008 23:04:50 +0200
-Message-ID: <48AB3572.20804@student.utwente.nl>
+Date: Tue, 19 Aug 2008 23:05:29 +0200
+Message-ID: <g8fcip$p2j$2@ger.gmane.org>
 References: <1219122247.7224.337.camel@dfarning.desktop.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
@@ -40,7 +40,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Aug 2008 21:06:15 -0000
+X-List-Received-Date: Tue, 19 Aug 2008 21:11:12 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
