@@ -1,32 +1,32 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KVYTw-0003px-Ln
-	for openembedded-devel@openembedded.org; Tue, 19 Aug 2008 23:11:12 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1KVYSp-0007JE-3p
-	for openembedded-devel@openembedded.org; Tue, 19 Aug 2008 21:10:03 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1KVbir-0007CV-80
+	for openembedded-devel@openembedded.org; Wed, 20 Aug 2008 02:38:49 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KVbhl-0007Qx-Cv
+	for openembedded-devel@openembedded.org; Wed, 20 Aug 2008 00:37:41 +0000
+Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 19 Aug 2008 21:10:03 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Wed, 20 Aug 2008 00:37:41 +0000
+Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 19 Aug 2008 21:10:03 +0000
+	Wed, 20 Aug 2008 00:37:41 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 19 Aug 2008 23:05:29 +0200
-Message-ID: <g8fcip$p2j$2@ger.gmane.org>
-References: <1219122247.7224.337.camel@dfarning.desktop.org>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 20 Aug 2008 02:37:38 +0200
+Message-ID: <g8fp0e$upk$1@ger.gmane.org>
+References: <20080819235307.DD481188083@amethyst.openembedded.net>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080700)
-In-Reply-To: <1219122247.7224.337.camel@dfarning.desktop.org>
+X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
+In-Reply-To: <20080819235307.DD481188083@amethyst.openembedded.net>
 Sender: news <news@ger.gmane.org>
-Subject: Re: Sugar Desktop
+Subject: Re: : gnash-minimal: Add libltdl DEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Aug 2008 21:11:12 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 20 Aug 2008 00:38:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-David Farning wrote:
-> I am wondering if there is interest in creating OE packages for the
-> Sugar desktop [1].  Development of Sugar, which was originally designed
-> for the One Laptop Per Child, has been spun off to Sugar Labs.
->
-> We are interest in expanding the number of devices which run Sugar.  Our
-> goals of running on inexpensive, low power machines aligns nicely with
-> those of embedded devices.
+OE GIT Trial wrote:
+> Author:  <likewise@openembedded.org>
+[...]
+> gnash-minimal: Add libltdl DEPENDS.
 
-Great! I've started on adding sugar stuff (sugar-toolkit and sugar are 
-already in), but then I stumbled across the usual wrong assumptions in 
-buildsystems:
-
-sugar-artwork-0.82.0/cursor/cursorthemegen/.libs/lt-cursorthemegen: 
-cannot execute binary file
-
-My opterons can't execute ARM code. Could you *please* fix those issues 
-upstream so that every sucrose part cross-compiles cleanly?
-
-regards,
-
-Koen
+That would be OK, I guess, if we had libltdl in OE, but we don't.  So 
+right now, it breaks.
 
 
 
