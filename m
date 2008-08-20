@@ -1,37 +1,33 @@
-Received: from [209.85.132.243] (helo=an-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KVwE2-0002Xo-Ht
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Aug 2008 00:32:22 +0200
-Received: by an-out-0708.google.com with SMTP id b38so108276ana.83
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2008 15:31:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=YsGedF0LyzpkineStJ9RJ1FsH3BisU50a2ywjxD3x3U=;
-	b=G9qteb+2EuSO5gLuhgXRZUrg0ff6FWUjYWHUwxWbkinXWWyYPxC20muqDi8BTnuM+/
-	yLry1LwKvJ+tRF9RnHKK6dOtX9FGJQqZzV1wqi5DxTiW5GTUHHmgBV9ok7T2evPi4Kvj
-	SUzTPOGhI1mgeUiHgejVmYcW0SmcIc/DLAOHw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=vmMMLHJrqgRE6Lg20SqnjbqrrY+ch17WV44C92lmk/mexq0cJZMjmbAev7ecc5Js++
-	f2/yiBDCY6MbAj7+Py/bEBKib7ait2qAHCwJWTq7h1srWMkNY119F/M5F6sacNnUguvV
-	N2+OZkggKJl39XAiI0ksK9M7VHS1EvH53/CSg=
-Received: by 10.100.214.19 with SMTP id m19mr1045946ang.1.1219271475105;
-	Wed, 20 Aug 2008 15:31:15 -0700 (PDT)
-Received: by 10.100.174.18 with HTTP; Wed, 20 Aug 2008 15:31:15 -0700 (PDT)
-Message-ID: <c384c5ea0808201531n9127e7cqdc7097d088e541f3@mail.gmail.com>
-Date: Thu, 21 Aug 2008 00:31:15 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48A135E2.2090606@gmx.net>
-MIME-Version: 1.0
-References: <48A135E2.2090606@gmx.net>
-Subject: Re: RFC: avr32 kernel - make ext2/3 builtin for mmc/sd boot
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KVwGZ-0002h6-BD
+	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 00:34:59 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KVwFT-0005YJ-6I
+	for openembedded-devel@openembedded.org; Wed, 20 Aug 2008 22:33:51 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 20 Aug 2008 22:33:51 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 20 Aug 2008 22:33:51 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 21 Aug 2008 00:33:44 +0200
+Message-ID: <g8i648$tfh$1@ger.gmane.org>
+References: <19c1b8a90808200142y33c5baa3uee2398d7f87b4cc6@mail.gmail.com>	<g8gmvc$cob$1@ger.gmane.org>
+	<19c1b8a90808200902i4a0d448chfcd591a708717177@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080700)
+In-Reply-To: <19c1b8a90808200902i4a0d448chfcd591a708717177@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: uclibc and uclibc-locale support in gcc 4.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,31 +41,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Aug 2008 22:32:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 20 Aug 2008 22:34:59 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Robert,
-
-On Tue, Aug 12, 2008 at 9:04 AM, Robert Schuster <theBohemian@gmx.net> wrote:
-> Hi,
-> in order to boot the ngw100 from mmc/sd it needs to have ext2/3 support
-> builtin instead of having it as a module.
+Khem Raj wrote:
+> Hi Koen
 >
-> I'd like to modify the defconfig in this regard. Is everyone OK with
-> that change?
+> Thanks for looking at it. While I see that what you mention is
+> logical. The construct I have worked ok on uclibc and eglibc angstrom
+> builds. But I will change to what you suggested and do builds again.
+
+I suspect we've hit a feature of bitbake again:
+
+FOO = "bar"
+FOO_xyz ?= "baz"
+
+=> FOO is now baz
+
+FOO_xyz = "bar"
+FOO_xyz ?= "baz"
+
+=> FOO is now bar
+
+I still think this is a bug and depending on it would not be a good idea :)
+
+regards,
+
+Koen
+
 >
-> Do we want ext2, ext3 or both?
+> Thanks
 >
+> -Khem
+>
+> On Wed, Aug 20, 2008 at 2:08 AM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>> Khem Raj wrote:
+>>> Hi
+>>>
+>>> I was trying to use gcc 4.3 for some uclibc stuff and found it broken.
+>>> This patch fixes it.
+>>>
+>>> 1. Fix target gcc build. The earlier patch I did to fix SDK build was
+>>> insufficient so I enhanced it.
+>>>
+>>> 2. uclibc Locale patches needed a facelift to be able to work with gcc 4.3
+>>>
+>>> 3. Fix uclibc 0.9.29 to get build using gcc 4.3
+>>>
+>>> 4. Disable libobjc for arm uclibc. If someone really needs some
+>>> packages on uclibc which need objc support then you better fix gcc
+>>> first :)
+>>>
+>>> I intend to apply it on .dev. comments are welcome
+>>>
+>>> I have tested it on arm uclibc and arm eglibc doing bitbake gcc
+>> Your patch has
+>>
+>> +OBJC ?= ",objc"
+>> +OBJC_linux-uclibcgnueabi ?= ""
+>> +OBJC_avr ?= ""
+>>
+>> That probably needs to be:
+>>
+>> +OBJC_avr32 ?= ""
+>> +OBJC_linux-uclibcgnueabi ?= ""
+>> +OBJC ?= ",objc"
+>>
+>> Note the '32' in avr32 and the order of weak assignments.
+>>
+>> regards,
+>>
+>> Koen
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 
-+1 on Both. ext3 is also desired for booting the rootfs of a SD card,
-like on the AT32STK1000 board.
 
-We want journalling (ext3) there.
-
-Regards
--- 
-Leon
 
 
