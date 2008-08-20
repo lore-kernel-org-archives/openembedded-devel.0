@@ -1,38 +1,39 @@
-Received: from [64.233.170.185] (helo=rn-out-0910.google.com)
+Received: from [209.85.132.251] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KVqAA-0007ne-PQ
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KVvZB-00050e-Vf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Aug 2008 18:03:58 +0200
-Received: by rn-out-0910.google.com with SMTP id v46so265609rnb.20
+	Wed, 20 Aug 2008 23:50:10 +0200
+Received: by an-out-0708.google.com with SMTP id b38so105553ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2008 09:02:52 -0700 (PDT)
+	Wed, 20 Aug 2008 14:49:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:content-disposition:references;
-	bh=Jl6v4cnLhummRg3ZdlzssTTm/noo5VfOSnbWaF64FOU=;
-	b=m6F8QZQdCNQd9iSHQNu4wrOI4AqJ2OUIclpaRj65UZI5YN7HdkA/L83qxZxhZPExJ9
-	TjC6CH3qAhF/93HEV97Y8pUQmPGH6IlWQla7iPn7qUs5Qy+uwsEqCI126GNoAuGg1YGm
-	YbvVm6miFh5HHo+EfZ298AeD3JKGMs1BGC/Kc=
+	bh=JhXGjmnhKgyh07cQX1mfeVsBSLTlWUMPdz86mPBOWBE=;
+	b=Nt0lpV8uo40uSsYxWamPyF+CfRtkc75rU6YqhHuXHMeRVWXFNkKosNYpN8exZ7pV4W
+	dUusUk7HHzUE0EJRNPvKqAaiOo7GrZZFO+xBxuHKLhbbgPWEK60pKJZ+KhRdqZEvD98u
+	Hd+Qrnqw7e51jG7ca57vzEElu01aaSCD8iKAM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:in-reply-to:mime-version
 	:content-type:content-transfer-encoding:content-disposition
 	:references;
-	b=Cm8GuNS+/PYsYbcxX57xASBuvcXoc6Kgztt9y8esvtDe0YxTeTEwzho+naHsrFAP71
-	u42SY1u7m/ss0wZcBQGI1ol3cdlq/QT+m/Hq7qDqqFo+mkROk2NDWg++cwlwQTz0eLSu
-	2vYiTDnGc31HllYlOGv1/a5mbFhfjFKlDQ+48=
-Received: by 10.114.184.7 with SMTP id h7mr338788waf.9.1219248171684;
-	Wed, 20 Aug 2008 09:02:51 -0700 (PDT)
-Received: by 10.114.241.11 with HTTP; Wed, 20 Aug 2008 09:02:51 -0700 (PDT)
-Message-ID: <19c1b8a90808200902i4a0d448chfcd591a708717177@mail.gmail.com>
-Date: Wed, 20 Aug 2008 09:02:51 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
+	b=H2+adJvQE5I5FCN1eFN3wTnlG+ZdJNecAENvg3uc7M87MwodZ3KYEQiYSe3sR6a1Mo
+	oE94/+I5z2xyMRoPpjJT0d9nYOJT3Q69dFfAGWcoQBj598W1ZBaw9YQ5h5XgFMo8XDKK
+	0EDwo/aJej0dqR1+ZpJo1tTeTp7LAZjcOnoqU=
+Received: by 10.100.91.17 with SMTP id o17mr995189anb.13.1219268942259;
+	Wed, 20 Aug 2008 14:49:02 -0700 (PDT)
+Received: by 10.100.174.18 with HTTP; Wed, 20 Aug 2008 14:49:02 -0700 (PDT)
+Message-ID: <c384c5ea0808201449i951a3fdwce3c3d91f4863861@mail.gmail.com>
+Date: Wed, 20 Aug 2008 23:49:02 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <g8gmvc$cob$1@ger.gmane.org>
+In-Reply-To: <1219219108.5479.0.camel@dax.rpnet.com>
 MIME-Version: 1.0
-References: <19c1b8a90808200142y33c5baa3uee2398d7f87b4cc6@mail.gmail.com>
-	<g8gmvc$cob$1@ger.gmane.org>
-Subject: Re: uclibc and uclibc-locale support in gcc 4.3.1
+References: <20080819235307.DD481188083@amethyst.openembedded.net>
+	<g8fp0e$upk$1@ger.gmane.org> <g8gej0$i1l$1@ger.gmane.org>
+	<1219219108.5479.0.camel@dax.rpnet.com>
+Subject: Re: : gnash-minimal: Add libltdl DEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,67 +47,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Aug 2008 16:03:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Aug 2008 21:50:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi Koen
+Hello,
 
-Thanks for looking at it. While I see that what you mention is
-logical. The construct I have worked ok on uclibc and eglibc angstrom
-builds. But I will change to what you suggested and do builds again.
+On Wed, Aug 20, 2008 at 9:58 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Wed, 2008-08-20 at 08:45 +0200, Koen Kooi wrote:
+>> Rolf Leggewie wrote:
+>> > OE GIT Trial wrote:
+>> >> Author: <likewise@openembedded.org>
+>> > [...]
+>> >> gnash-minimal: Add libltdl DEPENDS.
+>> >
+>> > That would be OK, I guess, if we had libltdl in OE, but we don't. So
+>> > right now, it breaks.
+>>
+Yes, but I think it was broken already. If it worked for you, let me
+know, because it did not for me (avr32).
 
-Thanks
+>> We do have libltdl in OE, it's part of libtool
+>
+> It should be a DEPENDS = "libtool"...
+>
+Indeed, my fix attempt was bogus. And DEPENDS on libtool was already there.
 
--Khem
+The problem is, the *R*DEPENDS to the library isn't picked up
+automatically. If I install libltdl manually afterwards, things work.
 
-On Wed, Aug 20, 2008 at 2:08 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> Khem Raj wrote:
->>
->> Hi
->>
->> I was trying to use gcc 4.3 for some uclibc stuff and found it broken.
->> This patch fixes it.
->>
->> 1. Fix target gcc build. The earlier patch I did to fix SDK build was
->> insufficient so I enhanced it.
->>
->> 2. uclibc Locale patches needed a facelift to be able to work with gcc 4.3
->>
->> 3. Fix uclibc 0.9.29 to get build using gcc 4.3
->>
->> 4. Disable libobjc for arm uclibc. If someone really needs some
->> packages on uclibc which need objc support then you better fix gcc
->> first :)
->>
->> I intend to apply it on .dev. comments are welcome
->>
->> I have tested it on arm uclibc and arm eglibc doing bitbake gcc
->
-> Your patch has
->
-> +OBJC ?= ",objc"
-> +OBJC_linux-uclibcgnueabi ?= ""
-> +OBJC_avr ?= ""
->
-> That probably needs to be:
->
-> +OBJC_avr32 ?= ""
-> +OBJC_linux-uclibcgnueabi ?= ""
-> +OBJC ?= ",objc"
->
-> Note the '32' in avr32 and the order of weak assignments.
->
-> regards,
->
-> Koen
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-rw-rw-rw- 1 leon leon 12280 2008-08-20 11:22
+tmp/deploy/uclibc/ipk/avr32/libltdl7_2.2.4-r14_avr32.ipk
+
+The real problem is, I currently lack enough knowledge of the
+libtool/autoconf/automake stuff to fix this properly. I thought
+toolchains were hard...
+
+The libtool upgrade has proven a very intrusive change for me from
+which I am still recovering. :-)
+
+Currently I am fighting the vnc/libvncserver packages and
+vnc/fbvncserver packages. They are broken due to the libtool upgrade.
+
+Regards,
+-- 
+Leon
 
 
