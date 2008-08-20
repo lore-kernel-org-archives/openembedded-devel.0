@@ -1,39 +1,37 @@
-Received: from [209.85.132.251] (helo=an-out-0708.google.com)
+Received: from [209.85.132.243] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KVvZB-00050e-Vf
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KVwE2-0002Xo-Ht
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Aug 2008 23:50:10 +0200
-Received: by an-out-0708.google.com with SMTP id b38so105553ana.83
+	Thu, 21 Aug 2008 00:32:22 +0200
+Received: by an-out-0708.google.com with SMTP id b38so108276ana.83
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2008 14:49:02 -0700 (PDT)
+	Wed, 20 Aug 2008 15:31:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:content-disposition:references;
-	bh=JhXGjmnhKgyh07cQX1mfeVsBSLTlWUMPdz86mPBOWBE=;
-	b=Nt0lpV8uo40uSsYxWamPyF+CfRtkc75rU6YqhHuXHMeRVWXFNkKosNYpN8exZ7pV4W
-	dUusUk7HHzUE0EJRNPvKqAaiOo7GrZZFO+xBxuHKLhbbgPWEK60pKJZ+KhRdqZEvD98u
-	Hd+Qrnqw7e51jG7ca57vzEElu01aaSCD8iKAM=
+	bh=YsGedF0LyzpkineStJ9RJ1FsH3BisU50a2ywjxD3x3U=;
+	b=G9qteb+2EuSO5gLuhgXRZUrg0ff6FWUjYWHUwxWbkinXWWyYPxC20muqDi8BTnuM+/
+	yLry1LwKvJ+tRF9RnHKK6dOtX9FGJQqZzV1wqi5DxTiW5GTUHHmgBV9ok7T2evPi4Kvj
+	SUzTPOGhI1mgeUiHgejVmYcW0SmcIc/DLAOHw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:in-reply-to:mime-version
 	:content-type:content-transfer-encoding:content-disposition
 	:references;
-	b=H2+adJvQE5I5FCN1eFN3wTnlG+ZdJNecAENvg3uc7M87MwodZ3KYEQiYSe3sR6a1Mo
-	oE94/+I5z2xyMRoPpjJT0d9nYOJT3Q69dFfAGWcoQBj598W1ZBaw9YQ5h5XgFMo8XDKK
-	0EDwo/aJej0dqR1+ZpJo1tTeTp7LAZjcOnoqU=
-Received: by 10.100.91.17 with SMTP id o17mr995189anb.13.1219268942259;
-	Wed, 20 Aug 2008 14:49:02 -0700 (PDT)
-Received: by 10.100.174.18 with HTTP; Wed, 20 Aug 2008 14:49:02 -0700 (PDT)
-Message-ID: <c384c5ea0808201449i951a3fdwce3c3d91f4863861@mail.gmail.com>
-Date: Wed, 20 Aug 2008 23:49:02 +0200
+	b=vmMMLHJrqgRE6Lg20SqnjbqrrY+ch17WV44C92lmk/mexq0cJZMjmbAev7ecc5Js++
+	f2/yiBDCY6MbAj7+Py/bEBKib7ait2qAHCwJWTq7h1srWMkNY119F/M5F6sacNnUguvV
+	N2+OZkggKJl39XAiI0ksK9M7VHS1EvH53/CSg=
+Received: by 10.100.214.19 with SMTP id m19mr1045946ang.1.1219271475105;
+	Wed, 20 Aug 2008 15:31:15 -0700 (PDT)
+Received: by 10.100.174.18 with HTTP; Wed, 20 Aug 2008 15:31:15 -0700 (PDT)
+Message-ID: <c384c5ea0808201531n9127e7cqdc7097d088e541f3@mail.gmail.com>
+Date: Thu, 21 Aug 2008 00:31:15 +0200
 From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1219219108.5479.0.camel@dax.rpnet.com>
+In-Reply-To: <48A135E2.2090606@gmx.net>
 MIME-Version: 1.0
-References: <20080819235307.DD481188083@amethyst.openembedded.net>
-	<g8fp0e$upk$1@ger.gmane.org> <g8gej0$i1l$1@ger.gmane.org>
-	<1219219108.5479.0.camel@dax.rpnet.com>
-Subject: Re: : gnash-minimal: Add libltdl DEPENDS.
+References: <48A135E2.2090606@gmx.net>
+Subject: Re: RFC: avr32 kernel - make ext2/3 builtin for mmc/sd boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,50 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Aug 2008 21:50:10 -0000
+X-List-Received-Date: Wed, 20 Aug 2008 22:32:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello,
+Hello Robert,
 
-On Wed, Aug 20, 2008 at 9:58 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Wed, 2008-08-20 at 08:45 +0200, Koen Kooi wrote:
->> Rolf Leggewie wrote:
->> > OE GIT Trial wrote:
->> >> Author: <likewise@openembedded.org>
->> > [...]
->> >> gnash-minimal: Add libltdl DEPENDS.
->> >
->> > That would be OK, I guess, if we had libltdl in OE, but we don't. So
->> > right now, it breaks.
->>
-Yes, but I think it was broken already. If it worked for you, let me
-know, because it did not for me (avr32).
-
->> We do have libltdl in OE, it's part of libtool
+On Tue, Aug 12, 2008 at 9:04 AM, Robert Schuster <theBohemian@gmx.net> wrote:
+> Hi,
+> in order to boot the ngw100 from mmc/sd it needs to have ext2/3 support
+> builtin instead of having it as a module.
 >
-> It should be a DEPENDS = "libtool"...
+> I'd like to modify the defconfig in this regard. Is everyone OK with
+> that change?
 >
-Indeed, my fix attempt was bogus. And DEPENDS on libtool was already there.
+> Do we want ext2, ext3 or both?
+>
 
-The problem is, the *R*DEPENDS to the library isn't picked up
-automatically. If I install libltdl manually afterwards, things work.
++1 on Both. ext3 is also desired for booting the rootfs of a SD card,
+like on the AT32STK1000 board.
 
--rw-rw-rw- 1 leon leon 12280 2008-08-20 11:22
-tmp/deploy/uclibc/ipk/avr32/libltdl7_2.2.4-r14_avr32.ipk
+We want journalling (ext3) there.
 
-The real problem is, I currently lack enough knowledge of the
-libtool/autoconf/automake stuff to fix this properly. I thought
-toolchains were hard...
-
-The libtool upgrade has proven a very intrusive change for me from
-which I am still recovering. :-)
-
-Currently I am fighting the vnc/libvncserver packages and
-vnc/fbvncserver packages. They are broken due to the libtool upgrade.
-
-Regards,
+Regards
 -- 
 Leon
 
