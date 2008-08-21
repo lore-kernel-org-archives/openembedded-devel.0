@@ -1,22 +1,33 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1KW40u-0007cL-Fw
-	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 08:51:20 +0200
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx01.dls.net with esmtpa (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1KW3zm-0004y7-94
-	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 01:50:10 -0500
-Message-ID: <48AD0FD9.4010104@dls.net>
-Date: Thu, 21 Aug 2008 01:48:57 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.16) Gecko/20080708 Thunderbird/2.0.0.16 Mnenhy/0.7.5.666
-MIME-Version: 1.0
-References: <1206638249.4514.57.camel@dax.rpnet.com>	<200803272104.30232.openembedded@haerwu.biz>	<47EC3893.80908@whitby.id.au>
-	<1206696441.5029.18.camel@dax.rpnet.com>
-In-Reply-To: <1206696441.5029.18.camel@dax.rpnet.com>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: ipkg/opkg offical response
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KW4pX-0005Jk-KB
+	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 09:43:39 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KW4oP-0001Vy-PT
+	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 07:42:29 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 21 Aug 2008 07:42:29 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 21 Aug 2008 07:42:29 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 21 Aug 2008 09:42:21 +0200
+Message-ID: <g8j68u$cst$1@ger.gmane.org>
+References: <1219122247.7224.337.camel@dfarning.desktop.org>	<48AB3572.20804@student.utwente.nl>
+	<1219278854.7197.5.camel@dfarning.desktop.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080700)
+In-Reply-To: <1219278854.7197.5.camel@dfarning.desktop.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Sugar Desktop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,35 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2008 06:51:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Aug 2008 07:43:39 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Fri, 2008-03-28 at 10:45 +1030, Rod Whitby wrote:
->> Marcin Juszkiewicz wrote:
->>> So creation of "opkg-nogpg":
->>>
->>> require opkg_svn.bb
->>> EXTRA_OECONF += "--disable-gpg"
->>>
->>> would be nice addon. Creation of "curl-nossl" and selecting it is 
->>> something which should be rather DISTRO choice as it generate same 
->>> packages as "curl" recipe.
->> +1
-> 
-> Creation of that has my backing too.
+David Farning wrote:
+> On Tue, 2008-08-19 at 23:04 +0200, Koen Kooi wrote:
+>> David Farning wrote:
+>>> I am wondering if there is interest in creating OE packages for the
+>>> Sugar desktop [1].  Development of Sugar, which was originally designed
+>>> for the One Laptop Per Child, has been spun off to Sugar Labs.
+>
+>
+>> sugar-artwork-0.82.0/cursor/cursorthemegen/.libs/lt-cursorthemegen:
+>> cannot execute binary file
+>>
+>> My opterons can't execute ARM code. Could you *please* fix those issues
+>> upstream so that every sucrose part cross-compiles cleanly?
+>>
+> Koen,
+>
+> Would you please file a bug in the tracker at http://dev.laptop.org/ .
+> We will try to get the situation sorted out.  If You cc me, I will try
+> to push it along.
 
-The first part of this has been done, and opkg builds.  I'm not sure the
-no-gpg version works yet, but that's another issue.
+Done: http://dev.laptop.org/ticket/8076
 
-The second part of the proposal above seems to not yet exist
-(curl-nossl) -- unless I'm missing something.  There's no bb recipe, and
-the existing curl bb file has no DISTRO-specific overrides to remove the
->1MB of stuff it hauls in to replace wget.  Hints anyone?  Is this
-supposed to be a separate recipe, that perhaps never got committed?  Or
-is there some other magic config stuff that needs to be created?
+regards,
 
-Mike (mwester)
+Koen
+
 
 
