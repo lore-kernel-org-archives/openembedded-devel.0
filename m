@@ -1,42 +1,22 @@
-Received: from [64.233.166.181] (helo=py-out-1112.google.com)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dfarning@gmail.com>) id 1KVy98-0008JO-2O
-	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 02:35:26 +0200
-Received: by py-out-1112.google.com with SMTP id a73so1138731pye.2
-	for <openembedded-devel@openembedded.org>;
-	Wed, 20 Aug 2008 17:34:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:reply-to:to:cc
-	:in-reply-to:references:content-type:date:message-id:mime-version
-	:x-mailer:content-transfer-encoding:sender;
-	bh=r8RNyYI3ZZudjOdij3AYcvzZ/+0GYUF68L5LX1TdiGU=;
-	b=yC8NHX9EPYT+GRjWFS/VI8fFYXsiXf/PJfdnVhjKfhbsKh/mzF5COLjRyE2lE/nSTq
-	dyexuGSiA4a9eGAGs9ypvLTlCu4zcGcA5pBxIZsecNmFkv2d7Df5Pw3zz2RB/RO6rJBm
-	eQwDdIGjc8i70YzncevV5k8Z4QizNi5qJ+QUY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:reply-to:to:cc:in-reply-to:references:content-type
-	:date:message-id:mime-version:x-mailer:content-transfer-encoding
-	:sender;
-	b=vV/RQ12OBSTpOVc3x2K9jQuM3EQ9oD5a7o6iyLHvm8rodU7FQoXNrqpwAySGRXUG2L
-	t42Mp6Q8wGIiIZGAv2aRG1ReeVdL6RfdyJrh2qZz/ueNZlQfMnZ0gm9GMgAQSG//kpkA
-	np5ZavD227o6cda3SsOdvX4neAspv6e1r9nns=
-Received: by 10.65.73.15 with SMTP id a15mr1328377qbl.66.1219278857949;
-	Wed, 20 Aug 2008 17:34:17 -0700 (PDT)
-Received: from ?192.168.2.3? ( [75.121.143.78])
-	by mx.google.com with ESMTPS id 9sm3543047qbw.6.2008.08.20.17.34.16
-	(version=SSLv3 cipher=RC4-MD5); Wed, 20 Aug 2008 17:34:17 -0700 (PDT)
-From: David Farning <dfarning@sugarlabs.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48AB3572.20804@student.utwente.nl>
-References: <1219122247.7224.337.camel@dfarning.desktop.org>
-	<48AB3572.20804@student.utwente.nl>
-Date: Wed, 20 Aug 2008 19:34:14 -0500
-Message-Id: <1219278854.7197.5.camel@dfarning.desktop.org>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Sender: David Farning <dfarning@gmail.com>
+	(envelope-from <mwester@dls.net>) id 1KW40u-0007cL-Fw
+	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 08:51:20 +0200
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx01.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1KW3zm-0004y7-94
+	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 01:50:10 -0500
+Message-ID: <48AD0FD9.4010104@dls.net>
+Date: Thu, 21 Aug 2008 01:48:57 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.16) Gecko/20080708 Thunderbird/2.0.0.16 Mnenhy/0.7.5.666
+MIME-Version: 1.0
+References: <1206638249.4514.57.camel@dax.rpnet.com>	<200803272104.30232.openembedded@haerwu.biz>	<47EC3893.80908@whitby.id.au>
+	<1206696441.5029.18.camel@dax.rpnet.com>
+In-Reply-To: <1206696441.5029.18.camel@dax.rpnet.com>
 Cc: openembedded-devel@openembedded.org
-Subject: Re: Sugar Desktop
+Subject: Re: ipkg/opkg offical response
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +30,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2008 00:35:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 Aug 2008 06:51:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2008-08-19 at 23:04 +0200, Koen Kooi wrote:
-> David Farning wrote:
-> > I am wondering if there is interest in creating OE packages for the
-> > Sugar desktop [1].  Development of Sugar, which was originally designed
-> > for the One Laptop Per Child, has been spun off to Sugar Labs.
-
-
-> sugar-artwork-0.82.0/cursor/cursorthemegen/.libs/lt-cursorthemegen: 
-> cannot execute binary file
+Richard Purdie wrote:
+> On Fri, 2008-03-28 at 10:45 +1030, Rod Whitby wrote:
+>> Marcin Juszkiewicz wrote:
+>>> So creation of "opkg-nogpg":
+>>>
+>>> require opkg_svn.bb
+>>> EXTRA_OECONF += "--disable-gpg"
+>>>
+>>> would be nice addon. Creation of "curl-nossl" and selecting it is 
+>>> something which should be rather DISTRO choice as it generate same 
+>>> packages as "curl" recipe.
+>> +1
 > 
-> My opterons can't execute ARM code. Could you *please* fix those issues 
-> upstream so that every sucrose part cross-compiles cleanly?
-> 
-Koen,
+> Creation of that has my backing too.
 
-Would you please file a bug in the tracker at http://dev.laptop.org/ .
-We will try to get the situation sorted out.  If You cc me, I will try
-to push it along.
+The first part of this has been done, and opkg builds.  I'm not sure the
+no-gpg version works yet, but that's another issue.
 
-thanks
-dfarning
+The second part of the proposal above seems to not yet exist
+(curl-nossl) -- unless I'm missing something.  There's no bb recipe, and
+the existing curl bb file has no DISTRO-specific overrides to remove the
+>1MB of stuff it hauls in to replace wget.  Hints anyone?  Is this
+supposed to be a separate recipe, that perhaps never got committed?  Or
+is there some other magic config stuff that needs to be created?
 
-
+Mike (mwester)
 
 
