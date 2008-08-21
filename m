@@ -1,35 +1,44 @@
-Received: from [64.14.54.240] (helo=ext-nj2ut-10.online-age.net)
+Received: from [64.233.184.234] (helo=wr-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>) id 1KW74Q-0002wN-HQ
-	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 12:07:10 +0200
-Received: from int-nj2ut-5.online-age.net (int-nj2ut-5.online-age.net
-	[3.159.237.74])
-	by ext-nj2ut-10.online-age.net (8.13.6/8.13.6/20051114-SVVS-TLS-DNSBL)
-	with ESMTP id m7LA5xvL009190
+	(envelope-from <dfarning@gmail.com>) id 1KWCAZ-0008NX-Ub
+	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 17:33:52 +0200
+Received: by wr-out-0506.google.com with SMTP id c53so37343wra.20
 	for <openembedded-devel@openembedded.org>;
-	Thu, 21 Aug 2008 06:05:59 -0400
-Received: from cinmlef12.e2k.ad.ge.com (int-nj2ut-5.online-age.net
-	[3.159.237.74])
-	by int-nj2ut-5.online-age.net (8.13.6/8.13.6/20050510-SVVS) with ESMTP
-	id m7LA5wC9022788 for <openembedded-devel@openembedded.org>;
-	Thu, 21 Aug 2008 06:05:58 -0400
-Received: from LONMLVEM08.e2k.ad.ge.com ([3.159.240.72]) by
-	cinmlef12.e2k.ad.ge.com with Microsoft SMTPSVC(6.0.3790.2499); 
-	Thu, 21 Aug 2008 06:05:58 -0400
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Thu, 21 Aug 2008 11:06:52 +0100
-Message-ID: <1CADFA951940554D86FBD8B24BBFF3A001E739A4@LONMLVEM08.e2k.ad.ge.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: OpenEmbedded Stable in GIT
-Thread-Index: AckDdaIH8wZ3sv+MR0666n68LAFLnA==
-From: "Welch, Martyn (GE EntSol,
-	Intelligent Platforms)" <martyn.welch@gefanuc.com>
-To: <openembedded-devel@openembedded.org>
-X-OriginalArrivalTime: 21 Aug 2008 10:05:58.0822 (UTC)
-	FILETIME=[82427460:01C90375]
-Subject: OpenEmbedded Stable in GIT
+	Thu, 21 Aug 2008 08:32:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:subject:from:reply-to:to:cc
+	:in-reply-to:references:content-type:date:message-id:mime-version
+	:x-mailer:content-transfer-encoding:sender;
+	bh=5uvNcbrn81FKRRzwmKpYbtza6hOMZXgHkEIUm0aW4As=;
+	b=PU20dXBJy4kk62N285Ilp9WxRozi2Sp+TQjHfmhvrHuA0X3QrBRrt9YtHj2VHdBLAz
+	nE+K1iOIwMOLeRseWv/8NjC8v+PwuSVuWLD05GzMcc74i9ktnKc3FOhBUC+cpkVI3DZX
+	28a6FSO2m+mu2nGgQHsjBiRDIyiGE6d4e99ag=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=subject:from:reply-to:to:cc:in-reply-to:references:content-type
+	:date:message-id:mime-version:x-mailer:content-transfer-encoding
+	:sender;
+	b=guxobWqBqZMT4mgLpXMnlSS4fuZgmRASuofnGTITPLJAVQF187Qth8QHwdYf9NK401
+	bcQGaWxmOmMF1z2gGtOTsF+rjoOXaG6otO6mwn00MBLYnYImYSTsv5RrqUtoHYfCedSt
+	BN5cPhzA3o+rkJLC5tm6xhecuODsRHvR8T1yU=
+Received: by 10.90.65.5 with SMTP id n5mr2013695aga.44.1219332761322;
+	Thu, 21 Aug 2008 08:32:41 -0700 (PDT)
+Received: from ?192.168.2.3? ( [75.121.174.99])
+	by mx.google.com with ESMTPS id 38sm62005aga.4.2008.08.21.08.32.39
+	(version=SSLv3 cipher=RC4-MD5); Thu, 21 Aug 2008 08:32:40 -0700 (PDT)
+From: David Farning <dfarning@sugarlabs.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <g8j68u$cst$1@ger.gmane.org>
+References: <1219122247.7224.337.camel@dfarning.desktop.org>
+	<48AB3572.20804@student.utwente.nl>
+	<1219278854.7197.5.camel@dfarning.desktop.org>
+	<g8j68u$cst$1@ger.gmane.org>
+Date: Thu, 21 Aug 2008 10:32:38 -0500
+Message-Id: <1219332758.7212.73.camel@dfarning.desktop.org>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Sender: David Farning <dfarning@gmail.com>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Sugar Desktop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2008 10:07:10 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 Aug 2008 15:33:52 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi Guys,
+On Thu, 2008-08-21 at 09:42 +0200, Koen Kooi wrote:
+> David Farning wrote:
+> > Would you please file a bug in the tracker at http://dev.laptop.org/ .
+> > We will try to get the situation sorted out.  If You cc me, I will try
+> > to push it along.
+> 
+> Done: http://dev.laptop.org/ticket/8076
+> 
+> regards,
+> 
+> Koen
 
-Unless I'm missing something, there isn't currently a GIT mirror for the
-stable release of openembedded.
+Thanks Koen,
 
-Is there any plan to provide one in the near future?
+Base on your role in the Open Embedded community, I have ask Marco, our
+lead developer, to treat your bugs as blockers to porting Sugar to other
+devices.
 
-Martyn
+Until quite recently, we only built for the XO.   Working with others is
+not something with which we have a lot of experience.
 
---=20
-Martyn Welch MEng MPhil MIET
-Principal Software Engineer
+Thanks
+dfarning 
 
-GE Fanuc Intelligent Platforms
-Tove Valley Business Park, Towcester,
-Northants, NN12 6PF, United Kingdom
-
-Telephone: +44 (0) 1327 359444
-Direct Dial: +44 (0) 1327 322748
-Fax: +44 (0) 1327 322800
-email: martyn.welch@gefanuc.com
-web: www.gefanuc.com
-
-GE Fanuc Intelligent Platforms Ltd, registered in England and Wales
-(3828642) at 100 Barbirolli Square, Manchester, M2 3AB, VAT GB 729 849
-476 =20
-
-GE Fanuc Intelligent Platforms Confidential and Proprietary. If you have
-received this message in error please notify us immediately and
-permanently remove it from your system and destroy any printed
-hardcopies.   =20
 
 
