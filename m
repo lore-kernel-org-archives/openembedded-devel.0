@@ -1,26 +1,35 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [64.14.54.240] (helo=ext-nj2ut-10.online-age.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1KW66C-0004FH-3i; Thu, 21 Aug 2008 11:04:56 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1KW653-0001ky-Mv; Thu, 21 Aug 2008 10:03:46 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>)
-	id 1KW653-000881-IU; Thu, 21 Aug 2008 10:03:45 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90808200142y33c5baa3uee2398d7f87b4cc6@mail.gmail.com>
-References: <19c1b8a90808200142y33c5baa3uee2398d7f87b4cc6@mail.gmail.com>
-Date: Thu, 21 Aug 2008 10:03:45 +0100
-Message-Id: <1219309425.21890.1.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: uclibc and uclibc-locale support in gcc 4.3.1
+	(envelope-from <martyn.welch@gefanuc.com>) id 1KW74Q-0002wN-HQ
+	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 12:07:10 +0200
+Received: from int-nj2ut-5.online-age.net (int-nj2ut-5.online-age.net
+	[3.159.237.74])
+	by ext-nj2ut-10.online-age.net (8.13.6/8.13.6/20051114-SVVS-TLS-DNSBL)
+	with ESMTP id m7LA5xvL009190
+	for <openembedded-devel@openembedded.org>;
+	Thu, 21 Aug 2008 06:05:59 -0400
+Received: from cinmlef12.e2k.ad.ge.com (int-nj2ut-5.online-age.net
+	[3.159.237.74])
+	by int-nj2ut-5.online-age.net (8.13.6/8.13.6/20050510-SVVS) with ESMTP
+	id m7LA5wC9022788 for <openembedded-devel@openembedded.org>;
+	Thu, 21 Aug 2008 06:05:58 -0400
+Received: from LONMLVEM08.e2k.ad.ge.com ([3.159.240.72]) by
+	cinmlef12.e2k.ad.ge.com with Microsoft SMTPSVC(6.0.3790.2499); 
+	Thu, 21 Aug 2008 06:05:58 -0400
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 21 Aug 2008 11:06:52 +0100
+Message-ID: <1CADFA951940554D86FBD8B24BBFF3A001E739A4@LONMLVEM08.e2k.ad.ge.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: OpenEmbedded Stable in GIT
+Thread-Index: AckDdaIH8wZ3sv+MR0666n68LAFLnA==
+From: "Welch, Martyn (GE EntSol,
+	Intelligent Platforms)" <martyn.welch@gefanuc.com>
+To: <openembedded-devel@openembedded.org>
+X-OriginalArrivalTime: 21 Aug 2008 10:05:58.0822 (UTC)
+	FILETIME=[82427460:01C90375]
+Subject: OpenEmbedded Stable in GIT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,21 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2008 09:04:56 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Aug 2008 10:07:10 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2008-08-20 at 01:42 -0700, Khem Raj wrote:
-> 4. Disable libobjc for arm uclibc. If someone really needs some
-> packages on uclibc which need objc support then you better fix gcc
-> first :)
+Hi Guys,
 
-Actually you seem to be disabling both libobjc and the Objective-C
-compiler itself for all uclibc systems, not just ARM.  Is that what you
-wanted?
+Unless I'm missing something, there isn't currently a GIT mirror for the
+stable release of openembedded.
 
-p.
+Is there any plan to provide one in the near future?
 
+Martyn
 
+--=20
+Martyn Welch MEng MPhil MIET
+Principal Software Engineer
+
+GE Fanuc Intelligent Platforms
+Tove Valley Business Park, Towcester,
+Northants, NN12 6PF, United Kingdom
+
+Telephone: +44 (0) 1327 359444
+Direct Dial: +44 (0) 1327 322748
+Fax: +44 (0) 1327 322800
+email: martyn.welch@gefanuc.com
+web: www.gefanuc.com
+
+GE Fanuc Intelligent Platforms Ltd, registered in England and Wales
+(3828642) at 100 Barbirolli Square, Manchester, M2 3AB, VAT GB 729 849
+476 =20
+
+GE Fanuc Intelligent Platforms Confidential and Proprietary. If you have
+received this message in error please notify us immediately and
+permanently remove it from your system and destroy any printed
+hardcopies.   =20
 
 
