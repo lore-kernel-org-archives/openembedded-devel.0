@@ -1,38 +1,39 @@
-Received: from [209.85.162.183] (helo=el-out-1112.google.com)
+Received: from [64.233.166.181] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KWCuV-0002FG-Hz
-	for openembedded-devel@openembedded.org; Thu, 21 Aug 2008 18:21:19 +0200
-Received: by el-out-1112.google.com with SMTP id y26so36000ele.21
+	(envelope-from <dfarning@gmail.com>) id 1KWKY4-0006xB-Bf
+	for openembedded-devel@openembedded.org; Fri, 22 Aug 2008 02:30:40 +0200
+Received: by py-out-1112.google.com with SMTP id a73so285966pye.2
 	for <openembedded-devel@openembedded.org>;
-	Thu, 21 Aug 2008 09:20:09 -0700 (PDT)
+	Thu, 21 Aug 2008 17:29:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=jCb0J7FVTLFgAFAhNS45i3RhhORQ76FAjf8I0BGl3gY=;
-	b=iPPguzw9y045kr26BXWFXpeZt+iXXjZYS6mVhQdw4pLzvSN9Ar1sW8Pn4nlxDxnos5
-	ttsIAvgum5/9LNHy9lY2ucC+BhfFxCJn+zzINag5EWaWiJkX52CJb//AAOu0ZLtbMuuR
-	OM3lkJFzVV47lWlAwOst+9AA/uWZgutm2cqpk=
+	h=domainkey-signature:received:received:subject:from:reply-to:to:cc
+	:content-type:date:message-id:mime-version:x-mailer
+	:content-transfer-encoding:sender;
+	bh=X6hbb8uTnoxPTpQl28dQqgkPP55hYZmSl9tlGpBDBaw=;
+	b=Hat0/oopHrXxjgTi5IYJy2zqtvO/AMWxleKpDuUmR3BmoHwmYCxuUFuB4208nNKgTB
+	3ziFekA8p55FiypLKPAQxX060YJ6tcqZwZ8CXKw074ynEI/YWLcY+JVoOsJrhaO7xXel
+	5sytd8orsa9MFOYcxm05GYWptu/8zT+cWMJv8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=jijKPLVuGfV+gwOEG+PC4uuLO66fhGl5YKTGK+K9dzdKnb5VN5Gf+GUik05lUBOxNf
-	EF6KO/sWiGCXUvxZQ4LHRyRIQz63i+QTe/EG2trIPX2smghjPkWCnvuhKGwdYuqcQ7Rl
-	Gwskvl+axrDSXORY2NuiP92eHtQdGzysgFBn8=
-Received: by 10.114.58.6 with SMTP id g6mr1642196waa.68.1219335608355;
-	Thu, 21 Aug 2008 09:20:08 -0700 (PDT)
-Received: by 10.114.241.11 with HTTP; Thu, 21 Aug 2008 09:20:08 -0700 (PDT)
-Message-ID: <19c1b8a90808210920j10545e21u874d18157b80f6d3@mail.gmail.com>
-Date: Thu, 21 Aug 2008 09:20:08 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1219309425.21890.1.camel@mill.internal.reciva.com>
-MIME-Version: 1.0
-References: <19c1b8a90808200142y33c5baa3uee2398d7f87b4cc6@mail.gmail.com>
-	<1219309425.21890.1.camel@mill.internal.reciva.com>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: uclibc and uclibc-locale support in gcc 4.3.1
+	h=subject:from:reply-to:to:cc:content-type:date:message-id
+	:mime-version:x-mailer:content-transfer-encoding:sender;
+	b=DHjSmn5NN8cUr3NdwAdXwNVSScPJ4vrQ1yaG10UZHieBLzOzY00cgdf75TefWH4hEa
+	YMvX9n8g8HcYhUvzUcsdn1Dm9MhnFOwW/1OuX2FpqK9Z7go4T57ni3j9b1ER9SWXUejy
+	wv7qsGC3/a6dn7RN4B8lectapSLUeUS1EFMqk=
+Received: by 10.65.158.19 with SMTP id k19mr805963qbo.94.1219364967920;
+	Thu, 21 Aug 2008 17:29:27 -0700 (PDT)
+Received: from ?192.168.2.3? ( [75.121.174.99])
+	by mx.google.com with ESMTPS id s27sm1063298qbs.12.2008.08.21.17.29.26
+	(version=SSLv3 cipher=RC4-MD5); Thu, 21 Aug 2008 17:29:27 -0700 (PDT)
+From: David Farning <dfarning@sugarlabs.org>
+To: beagleboard <beagleboard@googlegroups.com>
+Date: Thu, 21 Aug 2008 19:29:24 -0500
+Message-Id: <1219364965.7212.319.camel@dfarning.desktop.org>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Sender: David Farning <dfarning@gmail.com>
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	Sugar List <sugar@laptop.org>
+Subject: Sugar on the BeagleBoard using the OpenEmbedded toolkit.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +47,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2008 16:21:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 Aug 2008 00:30:40 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thu, Aug 21, 2008 at 2:03 AM, Phil Blundell <pb@reciva.com> wrote:
-> On Wed, 2008-08-20 at 01:42 -0700, Khem Raj wrote:
->> 4. Disable libobjc for arm uclibc. If someone really needs some
->> packages on uclibc which need objc support then you better fix gcc
->> first :)
->
-> Actually you seem to be disabling both libobjc and the Objective-C
-> compiler itself for all uclibc systems, not just ARM.  Is that what you
-> wanted?
+Welcome to the Sugar on the BeagleBoard project.  It seems that we have
+all of the pieces in place to do a port.
 
-Yes because  I saw it failing for x86 uclibc as well.
+First, some background.
 
->
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+The initial port will be getting Sugar[1] to run on the Beagleboard[2]
+using the Open Embedded[3] toolkit.
+
+For a collaboration point, Jason has set up the sugar on beagle wiki[4].
+
+For Sugar related bug, Sugar Labs uses the OLPC trac[5]. Open Embedded
+uses bugzilla[6].
+
+If you are interested come introduce yourself on the beagleboard[7]
+mailing list.
+
+thanks
+dfarning
+
+
+1. http://sugarlabs.org/go/Main_Page
+2. http://beagleboard.org/
+3. http://wiki.openembedded.net/index.php/Main_Page
+
+4. http://elinux.org/BeagleBoardSugar
+
+5. http://dev.laptop.org/wiki
+6. http://bugs.openembedded.net/
+
+7. http://groups.google.com/group/beagleboard?hl=en
+
+
+
+
 
 
