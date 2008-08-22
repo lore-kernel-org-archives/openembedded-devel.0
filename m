@@ -1,39 +1,31 @@
-Received: from [64.233.166.181] (helo=py-out-1112.google.com)
+Received: from [64.233.166.178] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dfarning@gmail.com>) id 1KWKY4-0006xB-Bf
-	for openembedded-devel@openembedded.org; Fri, 22 Aug 2008 02:30:40 +0200
-Received: by py-out-1112.google.com with SMTP id a73so285966pye.2
+	(envelope-from <raj.khem@gmail.com>) id 1KWLQk-0004tE-Vi
+	for openembedded-devel@openembedded.org; Fri, 22 Aug 2008 03:27:11 +0200
+Received: by py-out-1112.google.com with SMTP id a73so305850pye.2
 	for <openembedded-devel@openembedded.org>;
-	Thu, 21 Aug 2008 17:29:28 -0700 (PDT)
+	Thu, 21 Aug 2008 18:25:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:reply-to:to:cc
-	:content-type:date:message-id:mime-version:x-mailer
-	:content-transfer-encoding:sender;
-	bh=X6hbb8uTnoxPTpQl28dQqgkPP55hYZmSl9tlGpBDBaw=;
-	b=Hat0/oopHrXxjgTi5IYJy2zqtvO/AMWxleKpDuUmR3BmoHwmYCxuUFuB4208nNKgTB
-	3ziFekA8p55FiypLKPAQxX060YJ6tcqZwZ8CXKw074ynEI/YWLcY+JVoOsJrhaO7xXel
-	5sytd8orsa9MFOYcxm05GYWptu/8zT+cWMJv8=
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type;
+	bh=X8t54RfcyXcxj9jYXrj4ecECr3ZG1uk0dZfvmitTZGw=;
+	b=jlQYNcIJPF+zddGltIZI6SF+GxC7y0Pm7/1i0ni08/hHVLWbGw02Hh/45X9cH9eYru
+	6abhFJnM9fneK6a5lYm/GYKp9DG/3emZmNTPmf1LFse5WARYbb/+10v9nmHkq2Cm6uCs
+	KGc6r1sAxrYxDVAQn/wG/4NwZsgD4oKAJsgv8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:reply-to:to:cc:content-type:date:message-id
-	:mime-version:x-mailer:content-transfer-encoding:sender;
-	b=DHjSmn5NN8cUr3NdwAdXwNVSScPJ4vrQ1yaG10UZHieBLzOzY00cgdf75TefWH4hEa
-	YMvX9n8g8HcYhUvzUcsdn1Dm9MhnFOwW/1OuX2FpqK9Z7go4T57ni3j9b1ER9SWXUejy
-	wv7qsGC3/a6dn7RN4B8lectapSLUeUS1EFMqk=
-Received: by 10.65.158.19 with SMTP id k19mr805963qbo.94.1219364967920;
-	Thu, 21 Aug 2008 17:29:27 -0700 (PDT)
-Received: from ?192.168.2.3? ( [75.121.174.99])
-	by mx.google.com with ESMTPS id s27sm1063298qbs.12.2008.08.21.17.29.26
-	(version=SSLv3 cipher=RC4-MD5); Thu, 21 Aug 2008 17:29:27 -0700 (PDT)
-From: David Farning <dfarning@sugarlabs.org>
-To: beagleboard <beagleboard@googlegroups.com>
-Date: Thu, 21 Aug 2008 19:29:24 -0500
-Message-Id: <1219364965.7212.319.camel@dfarning.desktop.org>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Sender: David Farning <dfarning@gmail.com>
-Cc: openembedded-devel <openembedded-devel@openembedded.org>,
-	Sugar List <sugar@laptop.org>
-Subject: Sugar on the BeagleBoard using the OpenEmbedded toolkit.
+	h=message-id:date:from:to:subject:mime-version:content-type;
+	b=pYV37cB7C2gFPrKs4/xjdGOaNeOxWWCBtYAZiD5eYqnohyaAWdniCWyOqVM5q2Ve6F
+	9lbijKUEiRWhlC83ZQGmjEelONc8QCIJwuoUbN3JHPnM5WC9YvoU4B2zls+pfPWiExCq
+	12/6KrX02GDDyk1j5paT0X6ZfSExfLMACfX8I=
+Received: by 10.114.53.1 with SMTP id b1mr489069waa.165.1219368358285;
+	Thu, 21 Aug 2008 18:25:58 -0700 (PDT)
+Received: by 10.114.241.11 with HTTP; Thu, 21 Aug 2008 18:25:58 -0700 (PDT)
+Message-ID: <19c1b8a90808211825v497fc98jaf9aa6af3a2881d0@mail.gmail.com>
+Date: Thu, 21 Aug 2008 18:25:58 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@openembedded.org
+MIME-Version: 1.0
+Subject: provide libc-dev in glibc eglibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +39,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Aug 2008 00:30:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Aug 2008 01:27:11 -0000
+X-Groupsio-MsgNum: 5786
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_52819_27966657.1219368358292"
+
+------=_Part_52819_27966657.1219368358292
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Welcome to the Sugar on the BeagleBoard project.  It seems that we have
-all of the pieces in place to do a port.
+Hi
 
-First, some background.
+This patch makes an alias for libc-dev which points to libc6-dev in
+glibc and eglibc. This makes this package have same name like uclibc.
+This helps in writing recipes which uses these dev packages to use
+just one name and do not worry about what system library is in use.
 
-The initial port will be getting Sugar[1] to run on the Beagleboard[2]
-using the Open Embedded[3] toolkit.
+This also fixes  Bug 4509
 
-For a collaboration point, Jason has set up the sugar on beagle wiki[4].
+OK for .dev?
 
-For Sugar related bug, Sugar Labs uses the OLPC trac[5]. Open Embedded
-uses bugzilla[6].
+Thanks
 
-If you are interested come introduce yourself on the beagleboard[7]
-mailing list.
+-Khem
 
-thanks
-dfarning
+------=_Part_52819_27966657.1219368358292
+Content-Type: application/octet-stream; name=diff
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_fk64fk730
+Content-Disposition: attachment; filename=diff
 
+IwojIG9sZF9yZXZpc2lvbiBbNGNlOGIwZTJlYjVlOGIwN2E1NGZlMjdmYzdmMWEwNTBjMWQyYjAw
+Nl0KIwojIHBhdGNoICJwYWNrYWdlcy9lZ2xpYmMvZWdsaWJjX3N2bi5iYiIKIyAgZnJvbSBbMTc1
+ODQ4ZDhlMzhiNTQ4ZDQ1NjcwNzEwMWYxNDE1OGEwYWVmMGM5Zl0KIyAgICB0byBbYmNlZGRmNzMw
+OGUwZjQxNGEwYTcyYzk2NzNiMGE1YzYwMTEzYWIzOF0KIyAKIyBwYXRjaCAicGFja2FnZXMvZ2xp
+YmMvZ2xpYmNfMi41LmJiIgojICBmcm9tIFsyOGYyZjlhM2E1NzgyOGI4NWJkZWNhZjA2YWNkMzI5
+ZmVlOWMwYjg2XQojICAgIHRvIFtlMWJhMjg1MzdkMTdkNzdlZjRkNDE0NTliMTZkZDdkMDNjMTA0
+ZWIzXQojIAojIHBhdGNoICJwYWNrYWdlcy9nbGliYy9nbGliY18yLjYuMS5iYiIKIyAgZnJvbSBb
+NTdiZjdlYjZkYWUxNDI5ODdhOWU4MWM1OTE2YTkxODFkN2VjNTU0YV0KIyAgICB0byBbY2ZhMGJm
+OTAyMmQ2NmY3NGNjM2JiZWY2NGIyMzI5YTRkNDI3MzdmNl0KIyAKIyBwYXRjaCAicGFja2FnZXMv
+Z2xpYmMvZ2xpYmNfMi43LmJiIgojICBmcm9tIFtlOTFlNDMzOTBjODI0MWVhYTMzM2FjYzU5Y2Zk
+NDkzNTlkNzk3OWZlXQojICAgIHRvIFs1MDk4N2UyZDgxM2IyZTkxM2EyOTdkM2MzYWQxOTQ1MjU4
+MmRlOThmXQojIAojIHBhdGNoICJwYWNrYWdlcy90YXNrcy90YXNrLW5hdGl2ZS1zZGsuYmIiCiMg
+IGZyb20gW2U5YWZmM2FmMDNmMzQyM2EzNGRjYjI4NTM1ODJlMDhmZGQ2NmE2YTVdCiMgICAgdG8g
+WzU5MWRlODg5NjI2OTk1MTgyMTNmMDU3ZjliODlmOTVjZGY1MDBmMTFdCiMKPT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci0tLSBwYWNr
+YWdlcy9lZ2xpYmMvZWdsaWJjX3N2bi5iYgkxNzU4NDhkOGUzOGI1NDhkNDU2NzA3MTAxZjE0MTU4
+YTBhZWYwYzlmCisrKyBwYWNrYWdlcy9lZ2xpYmMvZWdsaWJjX3N2bi5iYgliY2VkZGY3MzA4ZTBm
+NDE0YTBhNzJjOTY3M2IwYTVjNjAxMTNhYjM4CkBAIC0xLDkgKzEsOSBAQCBQViA9ICIyLjgrc3Zu
+ciR7U1JDUkVWfSIKIHJlcXVpcmUgZWdsaWJjLmluYwogCiAjIERFRkFVTFRfUFJFRkVSRU5DRSA9
+ICItMSIKIEZJTEVTRElSID0gIiR7QG9zLnBhdGguZGlybmFtZShiYi5kYXRhLmdldFZhcignRklM
+RScsZCwxKSl9L2VnbGliYy1zdm4iCiBQViA9ICIyLjgrc3ZuciR7U1JDUkVWfSIKLVBSID0gInI5
+IgorUFIgPSAicjEwIgogU1JDX1VSSSA9ICJzdm46Ly9zdm4uZWdsaWJjLm9yZzttb2R1bGU9dHJ1
+bmsgXAogICAgICAgICAgICBmaWxlOi8vZWdsaWJjLXN2bi1hcm0tbG93bGV2ZWxsb2NrLWluY2x1
+ZGUtdGxzLnBhdGNoO3BhdGNoPTEgXAogICAgICAgICAgICBmaWxlOi8vZXRjL2xkLnNvLmNvbmYg
+XApAQCAtMTIsNyArMTIsNyBAQCBQQUNLQUdFU19EWU5BTUlDID0gImxpYmM2KiIKIEIgPSAiJHtX
+T1JLRElSfS9idWlsZC0ke1RBUkdFVF9TWVN9IgogCiBQQUNLQUdFU19EWU5BTUlDID0gImxpYmM2
+KiIKLVJQUk9WSURFU18ke1BOfS1kZXYgPSAibGliYzYtZGV2IgorUlBST1ZJREVTXyR7UE59LWRl
+diA9ICJsaWJjNi1kZXYgbGliYy1kZXYiCiBQUk9WSURFU18ke1BOfS1kYmcgPSAiZ2xpYmMtZGJn
+IgogCiAjIHRoZSAtaXN5c3RlbSBpbiBiaXRiYWtlLmNvbmYgc2NyZXdzIHVwIGdsaWJjIGRvX3N0
+YWdlCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PQotLS0gcGFja2FnZXMvZ2xpYmMvZ2xpYmNfMi41LmJiCTI4ZjJmOWEzYTU3ODI4Yjg1
+YmRlY2FmMDZhY2QzMjlmZWU5YzBiODYKKysrIHBhY2thZ2VzL2dsaWJjL2dsaWJjXzIuNS5iYgll
+MWJhMjg1MzdkMTdkNzdlZjRkNDE0NTliMTZkZDdkMDNjMTA0ZWIzCkBAIC0xLDEwICsxLDEwIEBA
+IHJlcXVpcmUgZ2xpYmMuaW5jCiByZXF1aXJlIGdsaWJjLmluYwotUFIgPSAicjE2IgorUFIgPSAi
+cjE3IgogCiBBUk1fSU5TVFJVQ1RJT05fU0VUID0gImFybSIKIAogUEFDS0FHRVNfRFlOQU1JQyA9
+ICJsaWJjNioiCi1SUFJPVklERVNfJHtQTn0tZGV2ID0gImxpYmM2LWRldiIKK1JQUk9WSURFU18k
+e1BOfS1kZXYgPSAibGliYzYtZGV2IGxpYmMtZGV2IgogCiAjIHRoZSAtaXN5c3RlbSBpbiBiaXRi
+YWtlLmNvbmYgc2NyZXdzIHVwIGdsaWJjIGRvX3N0YWdlCiBCVUlMRF9DUFBGTEFHUyA9ICItSSR7
+U1RBR0lOR19JTkNESVJfTkFUSVZFfSIKPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci0tLSBwYWNrYWdlcy9nbGliYy9nbGliY18yLjYu
+MS5iYgk1N2JmN2ViNmRhZTE0Mjk4N2E5ZTgxYzU5MTZhOTE4MWQ3ZWM1NTRhCisrKyBwYWNrYWdl
+cy9nbGliYy9nbGliY18yLjYuMS5iYgljZmEwYmY5MDIyZDY2Zjc0Y2MzYmJlZjY0YjIzMjlhNGQ0
+MjczN2Y2CkBAIC0xLDggKzEsOCBAQCByZXF1aXJlIGdsaWJjLmluYwogcmVxdWlyZSBnbGliYy5p
+bmMKLVBSID0gInIxMCIKK1BSID0gInIxMSIKIAogUEFDS0FHRVNfRFlOQU1JQyA9ICJsaWJjNioi
+Ci1SUFJPVklERVNfJHtQTn0tZGV2ID0gImxpYmM2LWRldiIKK1JQUk9WSURFU18ke1BOfS1kZXYg
+PSAibGliYzYtZGV2IGxpYmMtZGV2IgogCiAjIHRoZSAtaXN5c3RlbSBpbiBiaXRiYWtlLmNvbmYg
+c2NyZXdzIHVwIGdsaWJjIGRvX3N0YWdlCiBCVUlMRF9DUFBGTEFHUyA9ICItSSR7U1RBR0lOR19J
+TkNESVJfTkFUSVZFfSIKPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09Ci0tLSBwYWNrYWdlcy9nbGliYy9nbGliY18yLjcuYmIJZTkxZTQz
+MzkwYzgyNDFlYWEzMzNhY2M1OWNmZDQ5MzU5ZDc5NzlmZQorKysgcGFja2FnZXMvZ2xpYmMvZ2xp
+YmNfMi43LmJiCTUwOTg3ZTJkODEzYjJlOTEzYTI5N2QzYzNhZDE5NDUyNTgyZGU5OGYKQEAgLTEs
+MTEgKzEsMTEgQEAgUEFDS0FHRVNfRFlOQU1JQyA9ICJsaWJjNioiCiByZXF1aXJlIGdsaWJjLmlu
+YwogCiBBUk1fSU5TVFJVQ1RJT05fU0VUID0gImFybSIKIAogUEFDS0FHRVNfRFlOQU1JQyA9ICJs
+aWJjNioiCi1SUFJPVklERVNfJHtQTn0tZGV2ID0gImxpYmM2LWRldiIKK1JQUk9WSURFU18ke1BO
+fS1kZXYgPSAibGliYzYtZGV2IGxpYmMtZGV2IgogCi1QUiA9ICJyNiIKK1BSID0gInI3IgogCiAj
+IHRoZSAtaXN5c3RlbSBpbiBiaXRiYWtlLmNvbmYgc2NyZXdzIHVwIGdsaWJjIGRvX3N0YWdlCiBC
+VUlMRF9DUFBGTEFHUyA9ICItSSR7U1RBR0lOR19JTkNESVJfTkFUSVZFfSIKPT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci0tLSBwYWNr
+YWdlcy90YXNrcy90YXNrLW5hdGl2ZS1zZGsuYmIJZTlhZmYzYWYwM2YzNDIzYTM0ZGNiMjg1MzU4
+MmUwOGZkZDY2YTZhNQorKysgcGFja2FnZXMvdGFza3MvdGFzay1uYXRpdmUtc2RrLmJiCTU5MWRl
+ODg5NjI2OTk1MTgyMTNmMDU3ZjliODlmOTVjZGY1MDBmMTEKQEAgLTEsMTAgKzEsMTEgQEAgTElD
+RU5TRSA9ICJNSVQiCiBERVNDUklQVElPTiA9ICJQYWNrYWdlcyByZXF1aXJlZCBmb3IgbmF0aXZl
+IChvbi1kZXZpY2UpIFNESyIKIExJQ0VOU0UgPSAiTUlUIgotREVQRU5EUyA9ICJnY2MgYmludXRp
+bHMgbWFrZSBwYXRjaCBwYXRjaHV0aWxzIGRpZmZzdGF0IGRpZmZ1dGlscyBhdXRvbWFrZSBmbGV4
+IGJpc29uIGdhd2sgc2VkIGdyZXAiCi1SREVQRU5EUyA9ICJnY2Mtc3ltbGlua3MgZysrLXN5bWxp
+bmtzIGJpbnV0aWxzLXN5bWxpbmtzIG1ha2UgbGliYzYtZGV2IFwKK0RFUEVORFMgPSAidmlydHVh
+bC9saWJjIGdjYyBiaW51dGlscyBtYWtlIHBhdGNoIHBhdGNodXRpbHMgZGlmZnN0YXQgZGlmZnV0
+aWxzIGF1dG9tYWtlIGZsZXggYmlzb24gZ2F3ayBzZWQgZ3JlcCIKK1JERVBFTkRTID0gImdjYy1z
+eW1saW5rcyBnKystc3ltbGlua3MgY3BwLXN5bWxpbmtzIGJpbnV0aWxzLXN5bWxpbmtzIFwKKwkg
+ICAgbWFrZSBsaWJjLWRldiBcCiAJICAgIGZsZXggZmxleC1kZXYgYmlzb24gZ2F3ayBzZWQgZ3Jl
+cCBhdXRvY29uZiBhdXRvbWFrZSBtYWtlIFwKIAkgICAgcGF0Y2ggcGF0Y2h1dGlscyBkaWZmc3Rh
+dCBkaWZmdXRpbHMgbGlic3RkYysrLWRldiIKLVBSID0gInIyIgorUFIgPSAicjMiCiAKIEFMTE9X
+X0VNUFRZID0gIjEiCiBQQUNLQUdFUyA9ICIke1BOfSIK
 
-1. http://sugarlabs.org/go/Main_Page
-2. http://beagleboard.org/
-3. http://wiki.openembedded.net/index.php/Main_Page
-
-4. http://elinux.org/BeagleBoardSugar
-
-5. http://dev.laptop.org/wiki
-6. http://bugs.openembedded.net/
-
-7. http://groups.google.com/group/beagleboard?hl=en
-
-
-
-
-
-
+------=_Part_52819_27966657.1219368358292--
