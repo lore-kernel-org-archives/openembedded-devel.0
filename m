@@ -1,30 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KXwee-0007cs-12
-	for openembedded-devel@openembedded.org; Tue, 26 Aug 2008 13:24:08 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KXwdA-0004Fr-HZ
-	for openembedded-devel@openembedded.org; Tue, 26 Aug 2008 11:22:36 +0000
-Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 26 Aug 2008 11:22:36 +0000
-Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 26 Aug 2008 11:22:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 26 Aug 2008 13:22:32 +0200
-Message-ID: <g90p1m$r3m$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-Sender: news <news@ger.gmane.org>
-Subject: disapprove 9cdbd45b5ff507c6e00fc91c08ec5e17929302f4
+	(envelope-from <mickey@vanille-media.de>) id 1KXxgG-0005jL-PJ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Aug 2008 14:29:52 +0200
+Received: from andromeda.vanille.de (e180173185.adsl.alicedsl.de
+	[85.180.173.185])
+	by drlauer-research.com (Postfix) with ESMTP id D7929584BD0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Aug 2008 14:37:01 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 26 Aug 2008 14:28:20 +0200
+User-Agent: KMail/1.9.9
+References: <g90p1m$r3m$1@ger.gmane.org>
+In-Reply-To: <g90p1m$r3m$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200808261428.20385.mickey@vanille-media.de>
+Subject: Re: disapprove 9cdbd45b5ff507c6e00fc91c08ec5e17929302f4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,32 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Aug 2008 11:24:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 26 Aug 2008 12:29:52 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen,
+Am Dienstag 26 August 2008 13:22:32 schrieb Rolf Leggewie:
+> Koen,
+>
+> may I suggest that instead of screaming "bogus" at the top of your lungs
+> all the time and thus discrediting your fellow contributors' work you
+> start pitching in with quality assurance?  There sure are an awful lot
+> of stale bugs and unbuildable stuff in OE.
+>
+> I am well aware that COMPATIBLE_MACHINE in the definition of fso-image
+> is not the best solution.  At the current state of affairs, it is
+> correct though.  The image relies on $XSERVER which is not defined for
+> all machines in OE.  Those machines are incompatible with that image
+> definition.
+>
+> You're heartily invited to help fix OE to have a sane default for
+> $XSERVER for *all* machines.  I've started work on this but have not yet
+> finished.  Until that is done, removing compatible machine from the
+> image definition is a step backwards which is why I have disapproved
+> commit 9cdbd45b5ff507c6e00fc91c08ec5e17929302f4.
 
-may I suggest that instead of screaming "bogus" at the top of your lungs 
-all the time and thus discrediting your fellow contributors' work you 
-start pitching in with quality assurance?  There sure are an awful lot 
-of stale bugs and unbuildable stuff in OE.
+Well, in this case I agree with Koen.  COMPATIBLE_MACHINE should never appear 
+in an image recipe, e.g. I used to happily build fso-image for the Motorola 
+EZX series and now i can no longer.
 
-I am well aware that COMPATIBLE_MACHINE in the definition of fso-image 
-is not the best solution.  At the current state of affairs, it is 
-correct though.  The image relies on $XSERVER which is not defined for 
-all machines in OE.  Those machines are incompatible with that image 
-definition.
+Lets fix the XServer issue instead.
 
-You're heartily invited to help fix OE to have a sane default for 
-$XSERVER for *all* machines.  I've started work on this but have not yet 
-finished.  Until that is done, removing compatible machine from the 
-image definition is a step backwards which is why I have disapproved 
-commit 9cdbd45b5ff507c6e00fc91c08ec5e17929302f4.
-
-Regards
-
-Rolf
-
+-- 
+:M:
 
 
