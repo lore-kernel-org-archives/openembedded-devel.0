@@ -1,34 +1,26 @@
-Received: from [74.125.44.156] (helo=yx-out-1718.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1KXNDg-0007tb-2g
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Aug 2008 23:33:56 +0200
-Received: by yx-out-1718.google.com with SMTP id 4so678552yxp.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2008 14:32:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=umn5oc3/JPC250+ama1u5/wZerni+giwVdItV8JVjgM=;
-	b=Fo9bTdPvdcNKxdY0alQv+Sq6oMBeuxky0SuxwDzJz999GgrJtDcVMs5mUUqNeCPj/g
-	yAP4gp+mI6VJVdrkzPqdTB/h42UNxn+NEtY54uGD3itWPinPG55v0WVHgkfPptQi93mC
-	Dw/eBAGG8ty0w71DrfVv1HGnzyH66kLKFBv8k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=SAVnugtD36aShRwm+b/yfSsKR29gdHWAkjwMO5Ymf+tH1rhkWyhQ87HnDj3vqKeXNP
-	Fc4qE/RwMnQUyVWb0OidIY3ZckoBcYvz8OM98XfvnjUtz8/q8Kyihbh6o3XS/canDnm1
-	LqDKTvFfFISWEyvGc41IlzVo5ModCfYuHX57o=
-Received: by 10.151.38.11 with SMTP id q11mr5901552ybj.68.1219613551465;
-	Sun, 24 Aug 2008 14:32:31 -0700 (PDT)
-Received: by 10.150.227.15 with HTTP; Sun, 24 Aug 2008 14:32:31 -0700 (PDT)
-Message-ID: <48239d390808241432t17087c09xf4c31185082ae829@mail.gmail.com>
-Date: Mon, 25 Aug 2008 01:32:31 +0400
-From: "Sergey Lapin" <slapinid@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: sato-image FTBFS
+Received: from [202.108.5.81] (helo=m5-81.163.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <xydarcher@163.com>) id 1KXokV-0006U4-E6
+	for openembedded-devel@openembedded.org; Tue, 26 Aug 2008 04:57:40 +0200
+Received: from Readons (unknown [218.194.60.218])
+	by smtp1 (Coremail) with SMTP id C9GowLDrj9m8cLNImfBCFg==.17287S2;
+	Tue, 26 Aug 2008 10:56:09 +0800 (CST)
+Date: Tue, 26 Aug 2008 10:56:00 +0800
+From: "Readon Shaw" <xydarcher@163.com>
+To: "OpenEmbedded" <openembedded-devel@openembedded.org>
+X-mailer: Foxmail 5.0 [cn]
+Mime-Version: 1.0
+X-Coremail-Antispam: 1Uf129KBjDUn29KB7ZKAUJUUUUUYxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUjI8YjsxI4VWUJwAYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1I0E4x80
+	FVCIwcAKzIAtM7C26IkvcIIF6IxKo4kEV4yl1IIY67AEw4v_Jr0_Jr4ln4vEF7Iv6F18KV
+	Aqrcv_GVWUtr1rJF1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j
+	6r18McIj6I8E87Iv67AKxVWUJVW8JwACY4xI67k04243AVAKzVAKj4xxM4xvF2IEb7IF0F
+	y26I8I3I1lFVAaXTZC67ZELSn0mTvEwaV2v3VFvVW8M4IE42xK82IY64kIx2x0424lw4CE
+	F2IF47xS0VAv8wCjxxvEw4Wlc2IjII80xcxEwVAKI48JMxCjnVAqn7xvrwC2zVAF1VAY17
+	CE14v26r1j6r15Ms8CjcxG0xvEn4CqF7xvrwCE64xvF2IEb7IF0Fy7YxBIdaVFxhVjvjDU
+	0xZFpf9x07UbyCXUUUUU=
+Message-Id: <48B370CC.18EC6B.26072@m5-81.163.com>
+Subject: Git server did not support http protocol.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +34,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Aug 2008 21:33:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 26 Aug 2008 02:57:40 -0000
+Content-Type: text/plain;
+	charset="gb2312"
+Content-Transfer-Encoding: base64
 
-Hi,
-I have this error during build of x11-sato-image:
-NOTE: Resolving any missing task queue dependencies
-ERROR: '['/home/slapin/OE/org.openembedded.dev/packages/images/x11-sato-image.bb']'
-RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity
-'ttf-liberation' but it wasn't found in any PACKAGE or RPROVIDES
-variables
-NOTE: Runtime target 'ttf-liberation' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['ttf-liberation']
-ERROR: Required build target 'x11-sato-image' has no buildable providers.
-Missing or unbuildable dependency chain was: ['x11-sato-image',
-'ttf-liberation']
+TWFueSBnaXQgc2VydmVycyBzdXBwb3J0IGh0dHAgYWNjZXNzLg0KDQp3aGVuIGkgZ2l0LWNsb25l
+IG9lJ3MgZ2l0IHJlcG9zaXRvcnkgd2l0aCBjb21tYW5kOg0KZ2l0IGNsb25lIGh0dHA6Ly9naXQu
+b3BlbmVtYmVkZGVkLm5ldC9vcmcub3BlbmVtYmVkZGVkLmRldiBvcGVuDQoNCml0IHJlcG9ydHMg
+dGhhdDoNCkNhbm5vdCBnZXQgcmVtb3RlIHJlcG9zaXRvcnkgaW5mb3JtYXRpb24uDQpQZXJoYXBz
+IGdpdC11cGRhdGUtc2VydmVyLWluZm8gbmVlZHMgdG8gYmUgcnVuIHRoZXJlPw0KDQp3b3VsZCBp
+dCBhcHBsaWNhcGFibGUgdG8gc3VwcG9ydCBodHRwIGFjY2VzcyBvZiBnaXQgc2VydmVyPw0KaSBo
+YXZlIHRvIGFjY2VzcyB0aGUgcmVwb3NpdG9yeSB0aHJvdWdoIHByb3h5Lg0KIAkJCQkNCg0KoaGh
+oaGhoaGhoaGhoaGhoVJlYWRvbiBTaGF3DQqhoaGhoaGhoaGhoaGhoaGheHlkYXJjaGVyQDE2My5j
+b20NCiAgICAgICAgICAgICAgICAgoaEyMDA4LTA4LTI2DQo=
 
-Is it bug? ttf-liberation_0.2,bb does not provide 'ttf-liberation
-package but various *-mono, *-serif, et al.
 
-What did original recipe author meant?
-
-All the best,
-S.
 
 
