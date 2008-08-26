@@ -1,33 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KXykv-0005Ho-Fm
-	for openembedded-devel@openembedded.org; Tue, 26 Aug 2008 15:38:45 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KXyjR-0002Fs-QA
-	for openembedded-devel@openembedded.org; Tue, 26 Aug 2008 13:37:13 +0000
-Received: from ip-62-143-12-162.hsi.ish.de ([62.143.12.162])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 26 Aug 2008 13:37:13 +0000
-Received: from no2spam by ip-62-143-12-162.hsi.ish.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 26 Aug 2008 13:37:13 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 26 Aug 2008 15:37:09 +0200
-Message-ID: <g910u2$t3k$1@ger.gmane.org>
-References: <g90p1m$r3m$1@ger.gmane.org>	<200808261428.20385.mickey@vanille-media.de>
-	<g90ugc$iqk$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip-62-143-12-162.hsi.ish.de
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1KY6BH-0006ej-02
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Aug 2008 23:34:27 +0200
+Received: from [192.168.1.103] (91-65-161-148-dynip.superkabel.de
+	[91.65.161.148])
+	by dd20204.kasserver.com (Postfix) with ESMTP id 11074183DA61C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Aug 2008 23:32:59 +0200 (CEST)
+Message-ID: <48B47684.5060909@opensimpad.org>
+Date: Tue, 26 Aug 2008 23:32:52 +0200
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
 User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-In-Reply-To: <g90ugc$iqk$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: disapprove 9cdbd45b5ff507c6e00fc91c08ec5e17929302f4
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Subject: Please have a look at my aufs bb file (oe bug 4524)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,25 +28,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Aug 2008 13:38:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 26 Aug 2008 21:34:27 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> If you look at other image recipes using $XSERVER you'll notice they all 
-> have a weak assignment to fbdev on top.
+Hi all,
+I am not used to write .bb files.
+I created a .bb file for aufs (another unionfs ) and tested it for 
+arm-oabi (SIMpad).
+It would help me a lot if you comment on my patch (oe bug 4524) and give 
+suggestions or if you like commit it to oe.
 
-Which is the wrong place to do this.  Work has been started to try and 
-fix all this "right".
-
-> The other smartphone people (magician, htc-universal, blueangel, etc) 
-> were wondering why they couldn't build fso-image anymore.
-
-Understood.  IMHO, until things have been fixed properly, it would have 
-been "more correct" to add other machines that have a correct XSERVER 
-definition to COMPATIBLE_MACHINE than to drop the line.  I agree it's 
-kind of silly and temporary work, so let's all hold our breath for a few 
-days until the XSERVER situation has been straightened out.
-
+best regards
+Bernhard Guillon
 
 
