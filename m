@@ -1,35 +1,27 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [130.89.2.13] (helo=mx.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.com>) id 1Ka71D-0007d6-Ag
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Sep 2008 12:52:23 +0200
-Received: from [172.16.23.144] (helo=buddha.tw.openmoko.com)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
-	id 1Ka6z8-0007Bf-Ao for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Sep 2008 18:50:24 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.com>) id 1Ka6z3-0007sF-E1
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Sep 2008 18:50:09 +0800
-Date: Mon, 1 Sep 2008 18:50:09 +0800
-From: John Lee <john_lee@openmoko.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20080901105009.GC24372@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.144
-X-SA-Exim-Mail-From: john_lee@openmoko.com
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: bitbake 1.8 badness in using same git for different bb
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Ka784-0007kQ-1R
+	for openembedded-devel@openembedded.org; Mon, 01 Sep 2008 12:59:28 +0200
+Received: from [172.20.1.5] (vpn006048.vpn.utwente.nl [130.89.6.48])
+	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id m81AvD1X029463; 
+	Mon, 1 Sep 2008 12:57:13 +0200
+Message-Id: <6051830F-D75C-4B5F-8509-1C06F23450FF@student.utwente.nl>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: beagleboard <beagleboard@googlegroups.com>
+In-Reply-To: <1219364965.7212.319.camel@dfarning.desktop.org>
+Mime-Version: 1.0 (Apple Message framework v926)
+Date: Mon, 1 Sep 2008 12:57:10 +0200
+References: <1219364965.7212.319.camel@dfarning.desktop.org>
+X-Pgp-Agent: GPGMail d51 (Leopard)
+X-Mailer: Apple Mail (2.926)
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	Jason Kridner <jdk@ti.com>, Sugar List <sugar@laptop.org>
+Subject: Re: Sugar on the BeagleBoard using the OpenEmbedded toolkit.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,57 +35,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Sep 2008 10:52:24 -0000
-X-Groupsio-MsgNum: 5815
-Content-Type: multipart/mixed; boundary="pWyiEgJYm5f9v55/"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Sep 2008 10:59:28 -0000
+X-Groupsio-MsgNum: 5816
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg=pgp-sha1; boundary="Apple-Mail-2--706221232"
+Content-Transfer-Encoding: 7bit
 
---pWyiEgJYm5f9v55/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-hi,
-
-in bitbake 1.8 git.py, _revision_key returns ud.host + ud.path, that
-means if two bb share the same git dir, the _revision_key will be the
-same.  that will cause problem if you use AUTOREV.  the local count
-will keep increasing everytime you call bitbake.
-
-for example, mickeydbus and mickeyterm shared the same dir in the same
-git repo, and they are both required for fso-image.  so everytime I
-run bitbake fso-image the local counts of them will both increase and
-I end up with some crazy package names like git24+xxx.  for some
-reason linux-openmoko has the same symptom but I didn't take time to
-find out.  maybe that's because linux-openmoko_2.6.24+git.bb and
-linux-openmoko-devel_git.bb shared the same git dir as well.
-
-this can be fixed by the attached patch (created by Holger in
-bitbake-om), but that will reset the local count thus make anyone uses
-the OM repo stop upgrading these packages.
-
-I wonder if anyone has the same problem as well and how does he/she
-fixes it.
+--Apple-Mail-2--706221232
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed; delsp=yes
+Content-Transfer-Encoding: quoted-printable
 
 
-Regards,
-John
+Op 22 aug 2008, om 02:29 heeft David Farning het volgende geschreven:
 
---pWyiEgJYm5f9v55/
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="bitbake1.8-fetch-rev.patch"
+> Welcome to the Sugar on the BeagleBoard project.  It seems that we =20
+> have
+> all of the pieces in place to do a port.
+>
+> First, some background.
+>
+> The initial port will be getting Sugar[1] to run on the Beagleboard[2]
+> using the Open Embedded[3] toolkit.
 
-Index: lib/bb/fetch/__init__.py
-===================================================================
---- lib/bb/fetch/__init__.py	(revision 1079)
-+++ lib/bb/fetch/__init__.py	(working copy)
-@@ -515,6 +515,8 @@
- 
-         pd = persist_data.PersistData(d)
-         key = self._revision_key(url, ud, d)
-+        key = "%s-%s" % (key, bb.data.getVar("PN", d, True) or "")
-+
-         latest_rev = self._build_revision(url, ud, d)
-         last_rev = pd.getValue("BB_URI_LOCALCOUNT", key + "_rev")
-         count = pd.getValue("BB_URI_LOCALCOUNT", key + "_count")
+The basics (sugar, sugar-base, sugar-toolkit, sugar-presence-services =20=
 
---pWyiEgJYm5f9v55/--
+and sugar-artwork) are now running on the beagleboard:
+
+http://www.angstrom-distribution.org/sugar-running-=E5ngstr=F6m
+
+To build it using OE: 'bitbake sugar'
+To install it in angstrom*: 'opkg install sugar'
+
+The Glucose pack is missing sugar-datastore (needs a lot of python =20
+modules that aren't in OE yet), etoys (haven't looked at that yet) and =20=
+
+journal (haven't looked at that either).
+The Fructose pack is completely missing in OE.
+
+The remaining tasks for people wanting to work on this are:
+
+1) add OE recipes for needed python-modules
+2) add OE recipes for remaining Glucose items
+3) add OE recipes for Fructose items
+4) build it
+5) install resulting packages and run them, see them crash due to =20
+missing python modules, goto 1
+6) make screenshots :)
+
+regards,
+
+Koen
+
+* only has armv7a packages at the moment=
+
+--Apple-Mail-2--706221232
+content-type: application/pgp-signature; x-mac-type=70674453;
+	name=PGP.sig
+content-description: This is a digitally signed message part
+content-disposition: inline; filename=PGP.sig
+content-transfer-encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFIu8qIMkyGM64RGpERAmdhAKCnNzoPOqCVmIoocHYhfaoKv49HkACgoDxr
+sIMSlAuZCbFSevOPVZB/g9o=
+=aPkA
+-----END PGP SIGNATURE-----
+
+--Apple-Mail-2--706221232--
