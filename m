@@ -1,22 +1,36 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1KaV8G-0005WB-A5
+	(envelope-from <andrea.adami@gmail.com>) id 1KaVGa-0002Cx-FM
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Sep 2008 14:37:16 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1KaV9t-0000YV-9J
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Sep 2008 14:38:57 +0200
-Message-ID: <48BD3303.8030501@kernelconcepts.de>
-Date: Tue, 02 Sep 2008 14:35:15 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Tue, 02 Sep 2008 14:45:52 +0200
+Received: by fg-out-1718.google.com with SMTP id l26so1437081fgb.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Sep 2008 05:43:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=e+FMefrQ3J3bCPo02irJ4Hw+HEHNBYbKjilZ8b4K45k=;
+	b=JfPKDoS5Qam0LlW7XhNYYXaqO/Iar/I/p5JzTCZ8/Gr3DoVbnhZF7WCXU0cfrQ1jfc
+	biTFjr42VylFyWU93LFCtL0AXJqJzq/nO7CKWtFGYVQJ5T6drXqTX2RBvBxDoGYX9DDc
+	DggaolF5lZ5evEshiQZc6Np7WGvPMc+LzEtT0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=t32NH8D6q3SFf0eQTX2GooXKeyZ15wOcxPv9nUnzcKixG05xsWVcRQQMPKUCBupaIm
+	ogesFm7hiTcF7XB0OVYoK3e1dJRl1/8LZ/njS5dV9Hdtxh3puyMGRuba47+1+7SHwzDD
+	19FKl5mk25XydLuOn0rIxa472yNl9Gv/KrSfA=
+Received: by 10.187.241.11 with SMTP id t11mr2025204far.101.1220359430917;
+	Tue, 02 Sep 2008 05:43:50 -0700 (PDT)
+Received: by 10.187.241.6 with HTTP; Tue, 2 Sep 2008 05:43:50 -0700 (PDT)
+Message-ID: <d1b08f940809020543j5f968156y80590035be9dba1f@mail.gmail.com>
+Date: Tue, 2 Sep 2008 14:43:50 +0200
+From: "Andrea Adami" <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1220355745.16745.1271706363@webmail.messagingengine.com>
 In-Reply-To: <1220355745.16745.1271706363@webmail.messagingengine.com>
-X-Enigmail-Version: 0.95.0
+MIME-Version: 1.0
+References: <1220355745.16745.1271706363@webmail.messagingengine.com>
 Subject: Re: Which distro for OE development?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,29 +45,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2008 12:37:16 -0000
+X-List-Received-Date: Tue, 02 Sep 2008 12:45:52 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+I think by popularity here:
 
-Eliyahu Skoczylas schrieb:
-> We are setting up a dedicated machine for doing OE development work.  I
-> assume that Debian Lenny would be the best distro to install as a
-> starting point.
+Debian / Ubuntu
+Gentoo
 
-yes, Lenny should be fine. I use it for our build boxes here too.
-
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Andrea
 
 
