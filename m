@@ -1,24 +1,23 @@
-Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <EliSko@FastMail.fm>) id 1KaUJ8-0000j6-SI
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1KaV8G-0005WB-A5
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Sep 2008 13:44:26 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 8706215C381
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Sep 2008 07:42:25 -0400 (EDT)
-Received: from web6.messagingengine.com ([10.202.2.215])
-	by compute2.internal (MEProxy); Tue, 02 Sep 2008 07:42:25 -0400
-Received: by web6.messagingengine.com (Postfix, from userid 99)
-	id 63A42BE9C3; Tue,  2 Sep 2008 07:42:25 -0400 (EDT)
-Message-Id: <1220355745.16745.1271706363@webmail.messagingengine.com>
-X-Sasl-Enc: Vd90gt65GdRqYsexrNDpPGq04x8xvAWKlMblS/k+Trxc 1220355745
-From: "Eliyahu Skoczylas" <EliSko@FastMail.fm>
-To: openembedded-devel@lists.openembedded.org
+	Tue, 02 Sep 2008 14:37:16 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1KaV9t-0000YV-9J
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Sep 2008 14:38:57 +0200
+Message-ID: <48BD3303.8030501@kernelconcepts.de>
+Date: Tue, 02 Sep 2008 14:35:15 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-Date: Tue, 02 Sep 2008 14:42:25 +0300
-Subject: Which distro for OE development?
+To: openembedded-devel@lists.openembedded.org
+References: <1220355745.16745.1271706363@webmail.messagingengine.com>
+In-Reply-To: <1220355745.16745.1271706363@webmail.messagingengine.com>
+X-Enigmail-Version: 0.95.0
+Subject: Re: Which distro for OE development?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,25 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2008 11:44:27 -0000
-Content-Disposition: inline
+X-List-Received-Date: Tue, 02 Sep 2008 12:37:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="UTF-8"
 
-We are setting up a dedicated machine for doing OE development work.  I
-assume that Debian Lenny would be the best distro to install as a
-starting point.
+Hi,
 
-I'd appreciate feedback, whether I am correct or whether you recommend
-something else.
+Eliyahu Skoczylas schrieb:
+> We are setting up a dedicated machine for doing OE development work.  I
+> assume that Debian Lenny would be the best distro to install as a
+> starting point.
+
+yes, Lenny should be fine. I use it for our build boxes here too.
 
 
-TIA,
+Greetings
 
--    Eliyahu
---
-Eliyahu Skoczylas    +972 (54) 214-1505
-While <EliSko@Eli-Sko.com> is temporarily down, please use <EliSko@FastMail.fm>, instead.
+Florian
 
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
