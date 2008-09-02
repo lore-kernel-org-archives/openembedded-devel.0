@@ -1,31 +1,40 @@
-Received: from [63.210.253.230] (helo=ext-cn0ut-1.online-age.net)
+Received: from [64.233.166.183] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>) id 1KaXi4-0005pz-Sb
-	for openembedded-devel@openembedded.org; Tue, 02 Sep 2008 17:22:25 +0200
-Received: from int-cn0ut-3.online-age.net (int-cn0ut-3.online-age.net
-	[3.159.252.72])
-	by ext-cn0ut-1.online-age.net (8.13.6/8.13.6/20051114-SVVS-TLS-DNSBL)
-	with ESMTP id m82FKKBO013917
-	for <openembedded-devel@openembedded.org>;
-	Tue, 2 Sep 2008 11:20:20 -0400
-Received: from alpmlip01.e2k.ad.ge.com (int-cn0ut-3.online-age.net
-	[3.159.252.72])
-	by int-cn0ut-3.online-age.net (8.13.6/8.13.6/20050510-SVVS) with ESMTP
-	id m82FKKYx012992 for <openembedded-devel@openembedded.org>;
-	Tue, 2 Sep 2008 11:20:20 -0400
-Received: from ind-3n4b83jh1.amer.consind.ge.com ([3.138.54.81])
-	by alpmlip01.e2k.ad.ge.com with ESMTP; 02 Sep 2008 11:20:19 -0400
-Date: Tue, 2 Sep 2008 16:19:15 +0100
-From: Martyn Welch <martyn.welch@gefanuc.com>
-To: openembedded-devel@openembedded.org
-Message-Id: <20080902161915.11dfe79c.martyn.welch@gefanuc.com>
-In-Reply-To: <48BD421B.9020404@balister.org>
+	(envelope-from <raj.khem@gmail.com>) id 1Kab9Y-0007jv-Ur
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Sep 2008 21:03:01 +0200
+Received: by py-out-1112.google.com with SMTP id y77so1340625pyg.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Sep 2008 12:00:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:cc:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=7Y4bC5kfYpCtVy3ztnVA0jA6CHrEszBIlJjKAeKAvnw=;
+	b=rmLJmW7/CaCQcPPQy3h8XATEeoENmrM+Aakjo+oux66IXgYFAomf1KsZZ81FBVyp5G
+	+i1vXYp6bnGo7Et1uqSw3jQPU5PfJoLgIHmNqL94lUuKHBhjuOTbtG7cy4r22BMxPq1n
+	EFXbDwOuG8+Z65RN5n+dr5lr7YW7s0vbeIXiQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=lxDBGGk1xSEalp7dYftCmZomFLJyOskxE5gs2tWvz2dZkiW9ru2hcovQg6tvdBFppE
+	50eqLqKjF7ks0n/KEdND+GqsjnceBbOWsRp7rwr/iBpfa096DtG0pj9K7ADJRJ5cD3ye
+	oV5oa93WunXFYJ2YHURxTeM8xfqaiAC1uPaOQ=
+Received: by 10.115.48.12 with SMTP id a12mr6790350wak.38.1220382057324;
+	Tue, 02 Sep 2008 12:00:57 -0700 (PDT)
+Received: by 10.114.241.11 with HTTP; Tue, 2 Sep 2008 12:00:56 -0700 (PDT)
+Message-ID: <19c1b8a90809021200g4dfc8f9amd1948acb66918244@mail.gmail.com>
+Date: Tue, 2 Sep 2008 12:00:56 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20080902161915.11dfe79c.martyn.welch@gefanuc.com>
+MIME-Version: 1.0
 References: <1220355745.16745.1271706363@webmail.messagingengine.com>
 	<d1b08f940809020543j5f968156y80590035be9dba1f@mail.gmail.com>
 	<48BD421B.9020404@balister.org>
-Organization: GE Fanuc Intelligent Platforms Ltd.
-X-Mailer: Sylpheed 2.5.0 (GTK+ 2.10.14; i686-pc-mingw32)
-Mime-Version: 1.0
+	<20080902161915.11dfe79c.martyn.welch@gefanuc.com>
+Cc: openembedded-devel@openembedded.org
 Subject: Re: Which distro for OE development?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,31 +49,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2008 15:22:25 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 02 Sep 2008 19:03:01 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, 02 Sep 2008 09:39:39 -0400
-Philip Balister <philip@balister.org> wrote:
+Ideally you can use the hosts which have these packages.
 
-> Andrea Adami wrote:
-> > I think by popularity here:
-> > 
-> > Debian / Ubuntu
-> > Gentoo
-> 
-> Fedora also works.
-> 
+http://wiki.openembedded.net/index.php/Required_Software
 
-Though I've got a collegue who has had trouble with the stable branch on Fedora 9. Fedora 8 is fine. The compiler in F9 fails to build dbus-native (1.0.1), though the older compiler in F8 has no problems. 
+Then there is a list of known working distros.
 
-Martyn
+http://wiki.openembedded.net/index.php/OEandYourDistro
 
--- 
-Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
-GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
-Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
-Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 729849476
+If your distro is not listed here and you have made it to work on it,
+feel free to contribute the prerquisites or any steps you did to make
+it work on that particular distro.
 
+Thanks
+
+-Khem
+
+On Tue, Sep 2, 2008 at 8:19 AM, Martyn Welch <martyn.welch@gefanuc.com> wrote:
+> On Tue, 02 Sep 2008 09:39:39 -0400
+> Philip Balister <philip@balister.org> wrote:
+>
+>> Andrea Adami wrote:
+>> > I think by popularity here:
+>> >
+>> > Debian / Ubuntu
+>> > Gentoo
+>>
+>> Fedora also works.
+>>
+>
+> Though I've got a collegue who has had trouble with the stable branch on Fedora 9. Fedora 8 is fine. The compiler in F9 fails to build dbus-native (1.0.1), though the older compiler in F8 has no problems.
+>
+> Martyn
+>
+> --
+> Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
+> GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
+> Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
+> Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 729849476
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
