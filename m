@@ -1,32 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ka7JT-00087q-89
-	for openembedded-devel@openembedded.org; Mon, 01 Sep 2008 13:11:15 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ka7Ha-0000oP-Kx
-	for openembedded-devel@openembedded.org; Mon, 01 Sep 2008 11:09:18 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 01 Sep 2008 11:09:18 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 01 Sep 2008 11:09:18 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 01 Sep 2008 13:09:11 +0200
-Message-ID: <g9gign$j27$1@ger.gmane.org>
-References: <20080901105009.GC24372@buddha.tw.openmoko.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Thunderbird/3.0b1pre (Macintosh; 2008080700)
-In-Reply-To: <20080901105009.GC24372@buddha.tw.openmoko.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: bitbake 1.8 badness in using same git for different bb
+	(envelope-from <EliSko@FastMail.fm>) id 1KaUJ8-0000j6-SI
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Sep 2008 13:44:26 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 8706215C381
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  2 Sep 2008 07:42:25 -0400 (EDT)
+Received: from web6.messagingengine.com ([10.202.2.215])
+	by compute2.internal (MEProxy); Tue, 02 Sep 2008 07:42:25 -0400
+Received: by web6.messagingengine.com (Postfix, from userid 99)
+	id 63A42BE9C3; Tue,  2 Sep 2008 07:42:25 -0400 (EDT)
+Message-Id: <1220355745.16745.1271706363@webmail.messagingengine.com>
+X-Sasl-Enc: Vd90gt65GdRqYsexrNDpPGq04x8xvAWKlMblS/k+Trxc 1220355745
+From: "Eliyahu Skoczylas" <EliSko@FastMail.fm>
+To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+X-Mailer: MessagingEngine.com Webmail Interface
+Date: Tue, 02 Sep 2008 14:42:25 +0300
+Subject: Which distro for OE development?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +32,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Sep 2008 11:11:15 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 02 Sep 2008 11:44:27 -0000
+Content-Disposition: inline
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
 
-John Lee wrote:
-> hi,
->
-> in bitbake 1.8 git.py, _revision_key returns ud.host + ud.path, that
-> means if two bb share the same git dir, the _revision_key will be the
-> same.  that will cause problem if you use AUTOREV.  the local count
-> will keep increasing everytime you call bitbake.
+We are setting up a dedicated machine for doing OE development work.  I
+assume that Debian Lenny would be the best distro to install as a
+starting point.
 
-Related to this: You can't do something like:
+I'd appreciate feedback, whether I am correct or whether you recommend
+something else.
 
-SRC_URI = "git://ffmpeg;protocol=git \
-            git://mplayer/swscale;protocol=git"
 
-since both checkouts will use the 'git' dir in ${WORKDIR}.
+TIA,
 
-regards,
-
-Koen
+-    Eliyahu
+--
+Eliyahu Skoczylas    +972 (54) 214-1505
+While <EliSko@Eli-Sko.com> is temporarily down, please use <EliSko@FastMail.fm>, instead.
 
 
 
