@@ -1,24 +1,34 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KbH4z-0005ji-Sp
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KbLdB-0003RQ-W1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Sep 2008 17:49:05 +0200
-Received: from dsl-62-220-14-162.berlikomm.net ([62.220.14.162]
-	helo=abughraib.localdomain) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KbH2t-0002Od-Lt
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Sep 2008 17:46:55 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 4 Sep 2008 17:46:44 +0200
-User-Agent: KMail/1.9.9
-References: <200809031554.52267.zecke@selfish.org>
-	<1220528603.10295.236.camel@mill.internal.reciva.com>
-In-Reply-To: <1220528603.10295.236.camel@mill.internal.reciva.com>
+	Thu, 04 Sep 2008 22:40:42 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so137433rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Sep 2008 13:38:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=u6G9+wCAW9LuiWPcVD/KhIJNBI1qhALkXR/tR1BB45M=;
+	b=CjVobxrXyF4u72VcPmqXlKhW7iuLNLRwKlHrNC+bFvnMwzQN0SGsQ5KvBFg/u+y8gs
+	SKSUAfYQ3X44mIWrsUBcwfU+WT+acwxSxb3/2ITgDIcrrHsnfKSx2t2nSKqE0f48uTcQ
+	WR8T47/oZIxSBmSZ3bRo17vy9VXupSOpGMbUM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=yIGhx4udQPwgQpHev9ZreccUJUJvlE3TmTpP9wSXwHlG7rXE4EtmoSsobK2wuSuCoJ
+	e/RDhlqsInkw0DpOl5MnhjwN6z974XDzCXa10vrTQVtKOvgjvxAX4VaKYeJKDvOdbmgp
+	ndvy8HuwW0VPpSX96vnPDIAvXlFBVxVmNZ7lg=
+Received: by 10.141.76.21 with SMTP id d21mr5999166rvl.242.1220560709684;
+	Thu, 04 Sep 2008 13:38:29 -0700 (PDT)
+Received: by 10.141.163.6 with HTTP; Thu, 4 Sep 2008 13:38:29 -0700 (PDT)
+Message-ID: <c384c5ea0809041338t15ff7146m42b94c3723410ce6@mail.gmail.com>
+Date: Thu, 4 Sep 2008 22:38:29 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Message-Id: <200809041746.44987.zecke@selfish.org>
-Subject: Re: Hash based SCMs and OpenEmbedded/Bitbake
+Subject: PREFERRED_PROVIDER_x/y = "z" versus PREFERRED_PROVIDER += " x/y:z"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,39 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2008 15:49:06 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 04 Sep 2008 20:40:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Thursday 04 September 2008 13:43:23 Phil Blundell wrote:
-> On Wed, 2008-09-03 at 15:54 +0200, Holger Freyther wrote:
-> > we have a couple of issues with hash based SCMs (like git) and how we
-> > handle them.
->
-> It's kind of tempting to say that you should just lean on your upstream
-> to make proper releases and use them, rather than trying to pull some
-> random bag of bits out of the SCM repository.  However, I guess this was
-> not the sort of advice you were looking for. :-}
->
-> Perhaps more constructively, my preference would be to use "git log" or
-> some such to extract the datestamp of the revision in question, and then
-> glue it into PV to make a version string that was sortable and hence
-> upgradeable.  So, if you had git revision
-> 5a5346dfbec459c10d9e61e16e125b83975a1ef1 or whatever, you'd end up with
-> PV = "1.0.0+git20080904T123500
-> +5a5346dfbec459c10d9e61e16e125b83975a1ef1".  Obviously you still have
-> the possibility of losing if you want to upgrade from one revision to
-> another one committed in the same second, but I imagine this does not
-> arise often in practice.
+Hello,
 
-What is happening is you cherry-pick from another branch and then you have an 
-older revision (by commit date) on top and would be able to upgrade. Nice 
-idea but I think it will not work. There is the author/comitter separation 
-but AFAIK no for the commit date.
+can someone explain the (subtle) differences between
 
+PREFERRED_PROVIDER_x/y = "z"
+PREFERRED_PROVIDER += " x/y:z"
+?
 
-z.
+And also (to be completely clear) when to use what?
+
+Thanks,
+-- 
+Leon
 
 
