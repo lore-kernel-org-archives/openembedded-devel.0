@@ -1,17 +1,18 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [216.145.245.199] (helo=mx03.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1KdNqW-0003oj-Uf
-	for openembedded-devel@openembedded.org; Wed, 10 Sep 2008 13:26:53 +0200
-Received: (qmail 1573 invoked by uid 1003); 10 Sep 2008 11:24:14 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 10 Sep 2008 11:24:12 -0000
-Message-ID: <48C7AE52.7080209@balister.org>
-Date: Wed, 10 Sep 2008 07:24:02 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <mwester@dls.net>) id 1KdPjJ-00088c-Bo
+	for openembedded-devel@openembedded.org; Wed, 10 Sep 2008 15:27:33 +0200
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx03.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1KdPgl-0000Se-Is
+	for openembedded-devel@openembedded.org; Wed, 10 Sep 2008 08:24:55 -0500
+Message-ID: <48C7CA95.2040708@dls.net>
+Date: Wed, 10 Sep 2008 08:24:37 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.16) Gecko/20080708 Thunderbird/2.0.0.16 Mnenhy/0.7.5.666
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@openembedded.org
 References: <48C72166.7030000@dls.net> <ga81it$e8i$1@ger.gmane.org>
 In-Reply-To: <ga81it$e8i$1@ger.gmane.org>
 Subject: Re: libusb and libusb-compat: conflict
@@ -28,133 +29,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Sep 2008 11:26:53 -0000
-X-Groupsio-MsgNum: 5847
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060608000902030103030209"
-
---------------ms060608000902030103030209
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 10 Sep 2008 13:27:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Koen Kooi wrote:
-> Mike (mwester) wrote:
->> There appears to be a conflict between libusb and libusb-compat -- both
->> stage usr/lib/libusb.a.
->>
->> Many packages in OE use libusb-compat; some others use libusb.  I can't
->> say why this conflict hasn't come up before -- perhaps its a build order
->> thing that has just popped up on my system -- but attempting to link
->> openocd or dfu-util (which DEPEND on libusb) against the libusb.a in
->> staging will fail, if it was libusb-compat that was staged overtop of
->> libusb.
->>
->> I think step one would be to put a "CONFLICTS" line in each of libusb
->> and libusb-compat's bb files -- but I suspect that will break a lot of
->> builds.  So I'll send an email out for comments and suggestions on how
->> to handle this little problem.
->>
->> It would be good if people can check their tmpdirs to see if both libusb
->> and libusb-compat are being built (libusb1 is fine - not the similarity
->> in name).  How big a problem is this?
-> 
-> Some background: libusb1 is the rewrite of libusb which brings up 
-> goodness as better performance and more powersaving, but its ABI is 
-> incompatible with libusb. That is why the libusb people create 
+...
+> Some background: libusb1 is the rewrite of libusb which brings up
+> goodness as better performance and more powersaving, but its ABI is
+> incompatible with libusb. That is why the libusb people create
 > libusb-compat, it's a drop-in replacement for libusb.
 > 
-> When I added it to OE I made sure the runtime situation worked and 
+> When I added it to OE I made sure the runtime situation worked and
 > changed all packages to libusb-compat. It seems I missed a few.
-> 
-> It should be safe to change everything over to libusb-compat, unless 
+
+Grep comes up with a bunch, but probably a lot of those are just older
+recipes -- dfu-util and openocd are definitely broken, though.
+
+> It should be safe to change everything over to libusb-compat, unless
 > your favourite apps abuses private libusb API (as gnuradio does).
-> 
+
+I encountered simple linker failures (symbols not found).  I'll get rid
+of libusb out of staging entirely and see if dfu-util and openocd will
+link correctly against libusb-compat.  I can test dfu-util, but I hope
+someone else can test openocd.
+
 > And there's no such thing as CONFLICTS in OE, only RCONFLICTS.
 
-Is there an easy way to select between the two? Until I get time to go 
-through the gnu radio code, I'm using a collection to keep the gnuradio 
-stuff in a state where it builds.
+Bummer.  That would mean that we would need to switch to
+"virtual/libusb" I guess.  That seems a lot of effort for something
+that's obsolete -- it might be better to warn people if libusb is being
+built instead of libusb-compat.  I wonder if this might be a use case
+for a "WARNING" metadata item in a bitbake recipe.
 
-I would really like to get the gnuradio stuff working with libusb1, 
-since I suspect it would benefit from the upgrade :)
+I will do nothing with any metadata then except attempt to build
+dfu-util and openocd with libusb-compat.
 
-Philip
-
-> 
 > regards,
 > 
 > Koen
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
 
---------------ms060608000902030103030209
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Mike (mwester)
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MDkxMDEx
-MjQwMlowIwYJKoZIhvcNAQkEMRYEFAB+qsvMVDAMeHWXAjDktQ1Ngi5cMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBQijiP9WIrftIaIxjMpRT1H9hey7bkCkDnhJ7YzTnztI38ND3l
-/qGy/l+QCKWtsSwEu4TBQGlxVzZNwFNGOvigXN1XHPxtlEZE/lfH88rCIcjjTV1dhjnUSKYO2bT5
-DyUlMjHgwZh2OkCCyV/YPnR5wWnhfjRHQj1zOpv0aMpPXtUWb7w+UV/3aVun27YLbgvZV2R4vO2J
-A+bPIgeiGxTC6NY6sANrXHwBliE+JTktSa89x+S4FQJVt1gc7HnNAvlslA6UtQ4CHO7ljQYhb63C
-Jq1u7PB2Npur68au6qqfslIhYxDr8FDElMGlMQA/mUazpS+fkfOTHooV6qQZ4NByAAAAAAAA
 
---------------ms060608000902030103030209--
