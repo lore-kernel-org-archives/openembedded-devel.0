@@ -1,48 +1,33 @@
-Received: from [209.253.16.30] (helo=barracuda.pager.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mdarland@pager.net>) id 1KdSRu-0001xj-Ku
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Sep 2008 18:21:47 +0200
-X-ASG-Debug-ID: 1221063534-5bf8000d0000-aWHRdb
-X-Barracuda-URL: http://192.168.1.240:8000/cgi-bin/mark.cgi
-Received: from mail.pager.net (lrs-ad1.longragesystems.local [192.168.1.254])
-	by barracuda.pager.net (Spam Firewall) with ESMTP id 72831102E34
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Sep 2008 11:18:54 -0500 (CDT)
-Received: from mail.pager.net (lrs-ad1.longragesystems.local [192.168.1.254])
-	by barracuda.pager.net with ESMTP id T6AwVa8xMT6bmxOC for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Sep 2008 11:18:54 -0500 (CDT)
-Received: from laptop-brad.longragesystems.local ([192.168.1.44]) by
-	mail.pager.net with Microsoft SMTPSVC(6.0.3790.1830); 
-	Wed, 10 Sep 2008 11:19:24 -0500
-From: Matt Darland <mdarland@pager.net>
-Organization: Long Range Systems
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] libusb and libusb-compat: conflict
-Date: Wed, 10 Sep 2008 11:18:55 -0500
-User-Agent: KMail/1.9.9
-References: <48C72166.7030000@dls.net> <ga81it$e8i$1@ger.gmane.org>
-	<48C7CA95.2040708@dls.net>
-In-Reply-To: <48C7CA95.2040708@dls.net>
-MIME-Version: 1.0
-Message-Id: <200809101118.55264.mdarland@pager.net>
-X-OriginalArrivalTime: 10 Sep 2008 16:19:24.0578 (UTC)
-	FILETIME=[FD648020:01C91360]
-X-TM-AS-Product-Ver: SMEX-7.0.0.1607-5.5.1027-16148.004
-X-TM-AS-Result: No--24.134200-4.000000-31
-X-Barracuda-Connect: lrs-ad1.longragesystems.local[192.168.1.254]
-X-Barracuda-Start-Time: 1221063534
-X-Barracuda-Virus-Scanned: by Barracuda Spam Firewall at pager.net
-X-Barracuda-Spam-Score: 0.00
-X-Barracuda-Spam-Status: No, SCORE=0.00 using global scores of TAG_LEVEL=1000.0
-	QUARANTINE_LEVEL=1000.0 KILL_LEVEL=3.0 tests=
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.1.5195
-	Rule breakdown below
-	pts rule name              description
-	---- ----------------------
-	--------------------------------------------------
-Subject: Re: libusb and libusb-compat: conflict
+Received: from [38.98.186.147] (helo=asav-1.01.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <ken@buglabs.net>) id 1KdV9E-0002zL-Dh
+	for openembedded-devel@openembedded.org; Wed, 10 Sep 2008 21:14:40 +0200
+Received: from asav-1.01.com (localhost.localdomain [127.0.0.1])
+	by asav-1.01.com (8.13.1/8.13.1) with SMTP id m8AJBqFs002726
+	for <openembedded-devel@openembedded.org>;
+	Wed, 10 Sep 2008 14:11:52 -0500
+Received: from smtp-1.01.com (smtp-1.01.com [38.98.186.157])
+	by asav-1.01.com (asav-1.01.com [10.25.1.11])
+	id k89EBq0518601015Di ret-id none; Wed, 10 Sep 2008 14:11:52 -0500
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by smtp-1.01.com (Postfix) with ESMTP id 2ACD0E08C2
+	for <openembedded-devel@openembedded.org>;
+	Wed, 10 Sep 2008 14:11:52 -0500 (CDT)
+Received: from smtp-1.01.com ([127.0.0.1])
+	by localhost (smtp-1.01.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id AZbDRzUrEZoV for <openembedded-devel@openembedded.org>;
+	Wed, 10 Sep 2008 14:11:52 -0500 (CDT)
+Received: from [192.168.0.119] (ip-66-80-197-243.atl.megapath.net
+	[66.80.197.243]) by smtp-1.01.com (Postfix) with ESMTP id E7994E08C0
+	for <openembedded-devel@openembedded.org>;
+	Wed, 10 Sep 2008 14:11:51 -0500 (CDT)
+Mime-Version: 1.0 (Apple Message framework v753.1)
+Message-Id: <7B70A592-0433-49A8-8FC9-7C2AC0CD0574@buglabs.net>
+To: openembedded-devel@openembedded.org
+From: Ken Gilmer <ken@buglabs.net>
+Date: Wed, 10 Sep 2008 15:11:50 -0400
+X-Mailer: Apple Mail (2.753.1)
+Subject: Offer of a visual refresh for OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,64 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Sep 2008 16:21:47 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 10 Sep 2008 19:14:40 -0000
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-FYI, libusb1 is broken on 2.6.26 kernels. If it tries to use sysfs, then it 
-will expect every USB device to have a 'descriptors' file in sysfs, but that 
-isn't necessarily the case in recent kernels.
-
-http://sourceforge.net/mailarchive/message.php?msg_name=20080731112725.55310%40gmx.net
+Content-Type: text/plain; charset=US-ASCII; delsp=yes; format=flowed
 
 
-On Wednesday 10 September 2008 08:24:37 am Mike (mwester) wrote:
-> Koen Kooi wrote:
-> ...
->
-> > Some background: libusb1 is the rewrite of libusb which brings up
-> > goodness as better performance and more powersaving, but its ABI is
-> > incompatible with libusb. That is why the libusb people create
-> > libusb-compat, it's a drop-in replacement for libusb.
-> >
-> > When I added it to OE I made sure the runtime situation worked and
-> > changed all packages to libusb-compat. It seems I missed a few.
->
-> Grep comes up with a bunch, but probably a lot of those are just older
-> recipes -- dfu-util and openocd are definitely broken, though.
->
-> > It should be safe to change everything over to libusb-compat, unless
-> > your favourite apps abuses private libusb API (as gnuradio does).
->
-> I encountered simple linker failures (symbols not found).  I'll get rid
-> of libusb out of staging entirely and see if dfu-util and openocd will
-> link correctly against libusb-compat.  I can test dfu-util, but I hope
-> someone else can test openocd.
->
-> > And there's no such thing as CONFLICTS in OE, only RCONFLICTS.
->
-> Bummer.  That would mean that we would need to switch to
-> "virtual/libusb" I guess.  That seems a lot of effort for something
-> that's obsolete -- it might be better to warn people if libusb is being
-> built instead of libusb-compat.  I wonder if this might be a use case
-> for a "WARNING" metadata item in a bitbake recipe.
->
-> I will do nothing with any metadata then except attempt to build
-> dfu-util and openocd with libusb-compat.
->
-> > regards,
-> >
-> > Koen
->
-> Mike (mwester)
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Hello ~
 
+   I'm wondering if there is any interest from the core OE  
+contributors for perhaps a new look for the OpenEmbedded project?  We  
+at Bug Labs are consuming great work from the OE project and would  
+like to give back if it's something you are interested in.  Our  
+graphic designer is Mateo Zlatar, he's worked on other FOSS projects,  
+adding logos or changing color schemes.  For example, he created the  
+Concierge logo: http://concierge.sourceforge.net.  Some of his other  
+work is at http://sourcelab.us.  To be clear, Mateo is an independent  
+contractor and any work that he did for the OpenEmbedded project  
+would be paid for by Bug, and any resulting IP would be owned/ 
+controlled by the OE team (foundation?), no strings attached.
 
+   So, if there is interest in a refresh of the logo, color scheme  
+changes, and other CSS elements to the wiki, please let me know.
+
+Regards,
+
+Ken Gilmer
+
+Bug Labs, Inc.
 
 
