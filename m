@@ -1,32 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KdVs8-0000iD-NL
-	for openembedded-devel@openembedded.org; Wed, 10 Sep 2008 22:01:04 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KdVpZ-00049h-BR
-	for openembedded-devel@openembedded.org; Wed, 10 Sep 2008 19:58:25 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 10 Sep 2008 19:58:25 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 10 Sep 2008 19:58:25 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 10 Sep 2008 21:58:11 +0200
-Message-ID: <ga98sj$9b1$1@ger.gmane.org>
+	(envelope-from <mickey@vanille-media.de>) id 1KdZcB-0001GV-U6
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Sep 2008 02:00:53 +0200
+Received: from andromeda.vanille.de (e180146210.adsl.alicedsl.de
+	[85.180.146.210])
+	by drlauer-research.com (Postfix) with ESMTP id 5DA1B584CD5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Sep 2008 02:08:12 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 11 Sep 2008 01:58:12 +0200
+User-Agent: KMail/1.9.10
 References: <7B70A592-0433-49A8-8FC9-7C2AC0CD0574@buglabs.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080901030016 Shredder/3.0b1pre
 In-Reply-To: <7B70A592-0433-49A8-8FC9-7C2AC0CD0574@buglabs.net>
-Sender: news <news@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200809110158.12618.mickey@vanille-media.de>
 Subject: Re: Offer of a visual refresh for OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,35 +31,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Sep 2008 20:01:05 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 11 Sep 2008 00:00:54 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Ken Gilmer wrote:
->
-> Hello ~
->
-> I'm wondering if there is any interest from the core OE contributors for
-> perhaps a new look for the OpenEmbedded project? We at Bug Labs are
-> consuming great work from the OE project and would like to give back if
-> it's something you are interested in. Our graphic designer is Mateo
-> Zlatar, he's worked on other FOSS projects, adding logos or changing
-> color schemes. For example, he created the Concierge logo:
-> http://concierge.sourceforge.net. Some of his other work is at
-> http://sourcelab.us. To be clear, Mateo is an independent contractor and
-> any work that he did for the OpenEmbedded project would be paid for by
-> Bug, and any resulting IP would be owned/controlled by the OE team
-> (foundation?), no strings attached.
->
-> So, if there is interest in a refresh of the logo, color scheme changes,
-> and other CSS elements to the wiki, please let me know.
+Hi Ken,
 
-People have been moaning about it for a long, long time, so the answer 
-is: Yes!
+this is an amazing offer, thanks a lot!
 
-regards,
+We have kind of lost hope on getting a good website -- as it stands, 
+buildsystem experts seem to be very bad in graphic design ;)
 
-Koen
+How can we proceed?
 
+Cheers,
+-- 
+:M:
 
 
