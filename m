@@ -1,38 +1,23 @@
-Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
+Received: from [206.46.252.42] (helo=vms042pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KdqE7-0003a0-4T
-	for openembedded-devel@openembedded.org; Thu, 11 Sep 2008 19:45:07 +0200
-Received: by rv-out-0708.google.com with SMTP id k29so436213rvb.0
-	for <openembedded-devel@openembedded.org>;
-	Thu, 11 Sep 2008 10:42:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=MBMP3/+JAaJtw6AwR3LUe+gXWlybjewf3Po4tu+8Wqo=;
-	b=Q09D+mzfWuq65IB3pQ8HB8qqLByg6O1PlBA++1qwAzWFaPmBdt/Z2qa07Cjw89schX
-	IMNtdDpWlSmwJsVrffKQErnXxci4KpU78S6K2B4x+iYbqZYiH3VJBvxoUtDaAJr6ENdQ
-	Tud/bhNnU5ppXduxAR559F6jsMPOBrTer0ijU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=rEu8x8bPzO8j/dPs1VeOYC2e56zxTaa++oyaW5RXPxa5pi8l6G8vehzfGyNmeA0FrD
-	ERMXvy4H70QWpKo2E6TRCA8JTPjOdsm1ScdAml6H7lma5zj7lrH1KYnhybnnfbkrz3NU
-	kPifKMSTca7MEUN1e4WE0kMIpcJAJ70RwL/PY=
-Received: by 10.141.88.3 with SMTP id q3mr1963521rvl.94.1221154945170;
-	Thu, 11 Sep 2008 10:42:25 -0700 (PDT)
-Received: by 10.140.174.2 with HTTP; Thu, 11 Sep 2008 10:42:25 -0700 (PDT)
-Message-ID: <19c1b8a90809111042s76a12114h9c0e61eb9fdfea1b@mail.gmail.com>
-Date: Thu, 11 Sep 2008 10:42:25 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
+	(envelope-from <denis@denix.org>) id 1KdsGR-0000JP-02
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Sep 2008 21:55:39 +0200
+Received: from gandalf.denix.org ([71.255.232.65])
+	by vms042.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
+	(built Apr
+	3 2006)) with ESMTPA id <0K71006TAR7WQ3J3@vms042.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	11 Sep 2008 14:52:45 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A0BA46B8008; Thu,
+	11 Sep 2008 15:52:43 -0400 (EDT)
+Date: Thu, 11 Sep 2008 15:52:43 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <7AC37AAD-1B22-47C4-8BE8-0EB28B331191@buglabs.net>
-MIME-Version: 1.0
-References: <mailman.7.1221127206.32053.openembedded-devel@lists.openembedded.org>
-	<7AC37AAD-1B22-47C4-8BE8-0EB28B331191@buglabs.net>
-Cc: openembedded-devel@openembedded.org, Mateo Zlatar <mateo@portable.cl>
-Subject: Re: Offer of a visual refresh for OpenEmbedded
+Message-id: <20080911195243.GA16359@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: RFC: SDK/external-toolchain fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,77 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Sep 2008 17:45:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 11 Sep 2008 19:55:39 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-You can also use #oe channel on freenode. Many OE devs are hanging out there.
+Hi,
 
--Khem
+I've been playing with OE's SDK and external-toolchain features lately and
+stumbled upon couple of issues. Thanks to Philip Balister for commiting
+trivial fixes in, now I have 2 more, which require wider review. Please let
+me know of any problems or comments. Thanks.
 
-On Thu, Sep 11, 2008 at 5:54 AM, Ken Gilmer <ken@buglabs.net> wrote:
->>
->
-> Excellent!  I think Mateo has some initial questions before he begins such
-> as thematic suggestions, etc..  I'll assume the ml is the appropriate place
-> for this discussion but LMK if there are other ideas.
->
-> thx
-> ken
->
->
->> People have been moaning about it for a long, long time, so the answer
->> is: Yes!
->>
->> regards,
->>
->> Koen
->>
->>
->>
->>
->> ------------------------------
->>
->> Message: 6
->> Date: Thu, 11 Sep 2008 01:58:12 +0200
->> From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
->> Subject: Re: [oe] Offer of a visual refresh for OpenEmbedded
->> To: openembedded-devel@lists.openembedded.org
->> Message-ID: <200809110158.12618.mickey@vanille-media.de>
->> Content-Type: text/plain;  charset="iso-8859-1"
->>
->> Hi Ken,
->>
->> this is an amazing offer, thanks a lot!
->>
->> We have kind of lost hope on getting a good website -- as it stands,
->> buildsystem experts seem to be very bad in graphic design ;)
->>
->> How can we proceed?
->>
->> Cheers,
->> --
->> :M:
->>
->>
->>
->> ------------------------------
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->>
->> End of Openembedded-devel Digest, Vol 26, Issue 8
->> *************************************************
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+#1 gcc-cross-sdk 4.3.1 missing include-fixed
+http://bugs.openembedded.net/show_bug.cgi?id=4536
+
+gcc 4.3.x has some GCC-provided headers in include-fixed (namely limits.h),
+which are missing in the gcc-cross-sdk version, rendering external toolchain
+unusable.
+
+Provided patch copies them in the include directory as a temporary solution.
+A similar temporary solution is present in gcc-cross_4.3.1, see
+do_stage_append()
+
+
+#2 external-toolchain misses providing runtime libgcc
+http://bugs.openembedded.net/show_bug.cgi?id=4542
+
+Since external-toolchain misses specifying libgcc as provided runtime library,
+dependency tree picks up either gcc-cross or even gcc-noemu...
+
+Attached patch fixes the problem.
+
+
+-- 
+Denys
 
 
