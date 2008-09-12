@@ -1,28 +1,40 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Ke5tU-0006s8-Mh
+	(envelope-from <jroman.espinar@gmail.com>) id 1Ke6D8-0007P4-G9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Sep 2008 12:28:52 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id EC11B16DEFE
+	Fri, 12 Sep 2008 12:49:10 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so999728rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2008 12:31:51 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 167C92A4211
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2008 12:33:02 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Fri, 12 Sep 2008 03:46:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:sender
+	:to:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references
+	:x-google-sender-auth;
+	bh=x/E7Evs/2CcEpzlLl6AMeYUctkPO0XK6p/LeoPnA7NY=;
+	b=U9M345lUvcPLNVDMqw1V/cRL6e/ogncP2aYQQv/GF5anMHYQeMlMKQdP+zzVAK9QRa
+	7z9tksR6NS44aivMKwZmrVFKl/6HI6Fc8ASSYiQDGUaSthyFty1c4pdJd/qqwnMjnuuJ
+	MwiFIp1DsAKpzoJOGg4SSfGMM9JJkvOQ7WQCY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:sender:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references:x-google-sender-auth;
+	b=W2jxom9Y4NlUDVTm9+Rlil3vNLMxq1y7zLTP9yE1iIZfukfHvgtHQqK8t14RVURwde
+	ufEpl+aR6tRuitvMhNXZR+6fLJbU9XWGvrM5csO6dRhBc9N77+pQNu+lUuPFtvHOtQwg
+	ScSYOJhRXXlF/nYylesNcZ60+MZ63mA/y1lhU=
+Received: by 10.141.34.12 with SMTP id m12mr2523751rvj.26.1221216384706;
+	Fri, 12 Sep 2008 03:46:24 -0700 (PDT)
+Received: by 10.140.187.13 with HTTP; Fri, 12 Sep 2008 03:46:24 -0700 (PDT)
+Message-ID: <12c2e32e0809120346g2745eff5ja0c85111f30bde25@mail.gmail.com>
+Date: Fri, 12 Sep 2008 12:46:24 +0200
+From: "Javi Roman" <javiroman@kernel-labs.org>
+Sender: jroman.espinar@gmail.com
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>
 MIME-Version: 1.0
-Date: Fri, 12 Sep 2008 12:26:08 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Some beginners problems
-Thread-Index: AckUwfhMj2SqOt9NSvStONucWMe/2g==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Some beginners problems
+References: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>
+X-Google-Sender-Auth: c34d3de8ccd5c913
+Subject: Re: Some beginners problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,33 +48,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2008 10:28:52 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 12 Sep 2008 10:49:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-SSdtIG5ldyB0byB0aGUgT3BlbkVtYmVkZGVkIHN5c3RlbSBzbyBwbGVhc2UgZm9yZ2l2ZSBtZSBp
-ZiBteSBxdWVzdGlvbnMgYXJlIEZBUSBvciB0aGlzIGlzIHRoZSB3cm9uZyBsaXN0Lg0KDQpPRSBp
-c3Qgc2V0IHVwIGFuZCBJJ20gYWJsZSB0byBidWlsZCBpbWFnZXMgcnVubmluZyBvbiB0aGUgdGFy
-Z2V0IG1hY2hpbmVzLiBCdXQgSSdtIGxvb2tpbmcgZm9yIHNvbWUgZ3VpZGFuY2UgZm9yIHRoZSBm
-b2xsb3dpbmcgcHJvYmxlbXMuDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0NCjEuIFByb2JsZW0NCg0KSSB3YW4ndCB0byBtYWtlIGFuIGltYWdlIChl
-LmcuIG1pbmltYWwtaW1hZ2UpIGZvciBhdG5ndzEwMCBidXQgd2l0aCBkaWZmZXJlbnQgbGludXgg
-a2VybmVsIGNvbmZpZ3VyYXRpb24gKGUuZy4gQ09ORklHX0VYVDJfRlM9eSkuIFdoYXQncyB0aCBy
-aWdodCB3YXkgdG8gZG8gdGhpcz8NCg0KKiBKdXN0IGVkaXQgcGFja2FnZXMvbGludXgvbGludXgt
-Mi42LjI0L2F0bmd3MTAwL2RlZmNvbmZpZz8NCiogQ3JlYXRlIGFuIGFkZGl0aW9uYWwgcGF0Y2gg
-YW5kIGEgbmV3IGJiZmlsZSAob3IgbW9kaWZ5IGV4aXN0aW5nIG9uZSk/DQoqIENoYW5nZSBzb21l
-dGhpbmcgaW4gbG9jYWwuY29uZj8NCiogU29tZXRoaW5nIGVsc2UgLi4uID8NCg0KLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KMi4gUHJvYmxlbQ0KDQpJ
-IHdhbnQndCBtYWtlIGEgc3BlY2lhbCBwYXRjaGVkIGRidXMgKGluIGFkZGl0aW9uIHRvIHRoZSBz
-dGFuZGFyZCBpbnN0YWxsYXRpb24pLiBXaGF0J3MgdGhlIGJlc3Qgd2F5IGhlcmU/DQoNCiogQ3Jl
-YXRlIGFuIG93biBwYWNrYWdlIGp1c3QgdXNpbmcgdGhlIHNhbWUgc291cmNlIGFyY2hpdmVzPw0K
-KiBBZGQgYSBwYXRjaCBmaWxlIHRvIHRoZSBleGlzdGluZyBwYWNrYWdlIGFuZCBtb2RpZnkgdGhl
-IGJiZmlsZT8NCiogU29tZXRoaW5nIGVsc2UgLi4uID8NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQpJdCB3b3VsZCBiZSBuaWNlIHRvIHNlcGFy
-YXRlIHRoZSBjaGFuZ2VzIG5vdCBtZW50aW9uZWQgdG8gYmVjb21lIHVwc3RyZWFtZWQgZnJvbSB0
-aGUgb3JnLm9wZW5lbWJlZGRlZC5kZXYgZ2l0IHRyZWUuDQoNClRoYW54IGZvciBoaW50cyBvbiB0
-aGlzLA0KU3RlZmZlbg0K
+On Fri, Sep 12, 2008 at 12:26 PM, Sledz, Steffen <sledz@dresearch.de> wrote:
+>
+> It would be nice to separate the changes not mentioned to become upstreamed from the org.openembedded.dev git tree.
+>
+
+
+Bitbake collections:
+
+http://www.kernel-labs.org/files/openembedded-guide/openembedded-guide-6.html
+
+-- 
+Javi Roman
 
 
