@@ -1,25 +1,32 @@
-Received: from [63.80.53.70] (helo=smtp-relay1.palm.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <prvs=rich.pixley=1345d411b@palm.com>)
-	id 1KeDw1-0007sJ-BI
-	for openembedded-devel@openembedded.org; Fri, 12 Sep 2008 21:04:01 +0200
-X-IronPort-AV: E=Sophos;i="4.32,390,1217833200"; d="scan'208,217";a="6467677"
-Received: from unknown (HELO mailhost02.palm.com) ([148.92.223.90])
-	by smtp-relay1.palm.com with ESMTP; 12 Sep 2008 12:01:12 -0700
-Received: from nara.local ([10.100.2.13])
-	by mailhost02.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
-	m8CJ1BA6015115; Fri, 12 Sep 2008 12:01:11 -0700 (PDT)
-Message-ID: <48CABC77.6090208@palm.com>
-Date: Fri, 12 Sep 2008 12:01:11 -0700
-From: Rich Pixley <rich.pixley@palm.com>
-User-Agent: Thunderbird 2.0.0.16 (Macintosh/20080707)
-MIME-Version: 1.0
-To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-References: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>	<48CA48B8.4060708@gmx.de>
-	<69E6C70090A0A14498CC98FAE5E06B6E2B3B04@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E2B3B04@hiob.intern.dresearch.de>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Some beginners problems
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KeDz3-0007us-8k
+	for openembedded-devel@openembedded.org; Fri, 12 Sep 2008 21:07:09 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KeDwJ-0001uh-VY
+	for openembedded-devel@openembedded.org; Fri, 12 Sep 2008 19:04:19 +0000
+Received: from ipgw-nl.telfort.nl ([212.41.157.237])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 12 Sep 2008 19:04:19 +0000
+Received: from k.kooi by ipgw-nl.telfort.nl with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 12 Sep 2008 19:04:19 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 12 Sep 2008 21:04:07 +0200
+Message-ID: <gaeef7$cvi$1@ger.gmane.org>
+References: <20080912160657.GE29676@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ipgw-nl.telfort.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080901030016 Shredder/3.0b1pre
+In-Reply-To: <20080912160657.GE29676@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [Bug 4549] A number of xorg dev packages are uninstallable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,29 +40,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2008 19:04:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 12 Sep 2008 19:07:09 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Sledz, Steffen wrote:
->>> I wan't to make an image (e.g. minimal-image) for atngw100
->>> but with different linux kernel configuration (e.g.
->>> CONFIG_EXT2_FS=y). What's th right way to do this?
->>>
->>> * Just edit packages/linux/linux-2.6.24/atngw100/defconfig?
->>>       
->> Yes. But don't forget to increase the PR. Otherwise bitbake
->> doesn't know that the recipe was changed and doesn't rebuild
->> it.
->>     
+Tom Rini wrote:
+> [ This is all also available at
+> http://bugs.openembedded.net/show_bug.cgi?id=4549 ]
 >
-> The change is not a bug fix or something like this. It's just a variant and not mentioned to become committed. So if i increase PR and someone else fixes a bug and increases PR too and I pull this fixes from git I have a conflict.  :(
-Try using the  debian name branching approach.
+> A number of xorg dev packages (both literally -dev and util-macros) are
+> uninstallable on the target.  The problem is that by default (with ipk)
+> any given -dev package will depend on the main package, for example
+> xproto-dev depends on xproto.  But in these packages case, there is no
+> main package (no xproto).  The following patch fixes the issue.
 
-"r6" -> "r6palm1"
+No, it doesn't, your patch actually *breaks* the depends chaining, the 
+real fix would be to do ALLOW_EMPTY_${PN} = "1" in the recipes.
 
-That way "r7" will take precedence and yet "r6palm1" is different and 
-lexically later than "r6".
+regards,
 
---rich
+Koen
+
+>
+> This is important in the case of SDK users.
+>
+> #
+> # old_revision [e5b917e5de77a3e1e649867986fdd33f141c7bd3]
+> #
+> # patch "packages/xorg-lib/xtrans_1.0.3.bb"
+> #  from [5adfa3a5c753b71a9a61e266569ccbd26e940b09]
+> #    to [6d46e0050d376534a486d2d6bbf3316fc0eea221]
+> #
+> # patch "packages/xorg-lib/xtrans_1.0.4.bb"
+> #  from [5adfa3a5c753b71a9a61e266569ccbd26e940b09]
+> #    to [6d46e0050d376534a486d2d6bbf3316fc0eea221]
+> #
+> # patch "packages/xorg-lib/xtrans_1.1.bb"
+> #  from [5adfa3a5c753b71a9a61e266569ccbd26e940b09]
+> #    to [6d46e0050d376534a486d2d6bbf3316fc0eea221]
+> #
+> # patch "packages/xorg-lib/xtrans_1.2.bb"
+> #  from [5adfa3a5c753b71a9a61e266569ccbd26e940b09]
+> #    to [6d46e0050d376534a486d2d6bbf3316fc0eea221]
+> #
+> # patch "packages/xorg-proto/xorg-proto-common.inc"
+> #  from [2f88e96e17c9a539cf5bf9383cad1500375eae86]
+> #    to [5c6754f960805e8352b7d28a498e98a4fb1a46be]
+> #
+> # patch "packages/xorg-util/util-macros_1.1.5.bb"
+> #  from [e4dba9f37b257cea60724c9fd34b82e27e27e349]
+> #    to [f33bcbd1e083dce6f243c7a9ca7b908c33868ad8]
+> #
+> # patch "packages/xorg-util/util-macros_1.1.6.bb"
+> #  from [9dd3c08d7715e6e845ab141fd67cbb4e3a962977]
+> #    to [0d3b638b2967a60b38c2603dad643c7325d70ae2]
+> #
+> ============================================================
+> --- packages/xorg-lib/xtrans_1.0.3.bb	5adfa3a5c753b71a9a61e266569ccbd26e940b09
+> +++ packages/xorg-lib/xtrans_1.0.3.bb	6d46e0050d376534a486d2d6bbf3316fc0eea221
+> @@ -1,5 +1,7 @@ require xorg-lib-common.inc
+>   require xorg-lib-common.inc
+>
+> +RDEPENDS_${PN}-dev = ""
+> +
+>   DESCRIPTION = "network API translation layer to insulate X applications and \
+>   libraries from OS network vageries."
+>   PE = "1"
+> ============================================================
+> --- packages/xorg-lib/xtrans_1.0.4.bb	5adfa3a5c753b71a9a61e266569ccbd26e940b09
+> +++ packages/xorg-lib/xtrans_1.0.4.bb	6d46e0050d376534a486d2d6bbf3316fc0eea221
+> @@ -1,5 +1,7 @@ require xorg-lib-common.inc
+>   require xorg-lib-common.inc
+>
+> +RDEPENDS_${PN}-dev = ""
+> +
+>   DESCRIPTION = "network API translation layer to insulate X applications and \
+>   libraries from OS network vageries."
+>   PE = "1"
+> ============================================================
+> --- packages/xorg-lib/xtrans_1.1.bb	5adfa3a5c753b71a9a61e266569ccbd26e940b09
+> +++ packages/xorg-lib/xtrans_1.1.bb	6d46e0050d376534a486d2d6bbf3316fc0eea221
+> @@ -1,5 +1,7 @@ require xorg-lib-common.inc
+>   require xorg-lib-common.inc
+>
+> +RDEPENDS_${PN}-dev = ""
+> +
+>   DESCRIPTION = "network API translation layer to insulate X applications and \
+>   libraries from OS network vageries."
+>   PE = "1"
+> ============================================================
+> --- packages/xorg-lib/xtrans_1.2.bb	5adfa3a5c753b71a9a61e266569ccbd26e940b09
+> +++ packages/xorg-lib/xtrans_1.2.bb	6d46e0050d376534a486d2d6bbf3316fc0eea221
+> @@ -1,5 +1,7 @@ require xorg-lib-common.inc
+>   require xorg-lib-common.inc
+>
+> +RDEPENDS_${PN}-dev = ""
+> +
+>   DESCRIPTION = "network API translation layer to insulate X applications and \
+>   libraries from OS network vageries."
+>   PE = "1"
+> ============================================================
+> --- packages/xorg-proto/xorg-proto-common.inc	2f88e96e17c9a539cf5bf9383cad1500375eae86
+> +++ packages/xorg-proto/xorg-proto-common.inc	5c6754f960805e8352b7d28a498e98a4fb1a46be
+> @@ -1,9 +1,10 @@ XORG_PN = "${PN}"
+>   DESCRIPTION = "X protocol headers: ${XORG_PN}"
+>   HOMEPAGE = "http://www.x.org"
+>   SECTION = "x11/libs"
+>   LICENSE = "MIT-X"
+>
+>   XORG_PN = "${PN}"
+> +RDEPENDS_${PN}-dev = ""
+>
+>   SRC_URI = "${XORG_MIRROR}/individual/proto/${XORG_PN}-${PV}.tar.bz2"
+>
+> ============================================================
+> --- packages/xorg-util/util-macros_1.1.5.bb	e4dba9f37b257cea60724c9fd34b82e27e27e349
+> +++ packages/xorg-util/util-macros_1.1.5.bb	f33bcbd1e083dce6f243c7a9ca7b908c33868ad8
+> @@ -1,5 +1,7 @@ require xorg-util-common.inc
+>   require xorg-util-common.inc
+>
+> +RDEPENDS_${PN}-dev = ""
+> +
+>   DESCRIPTION = "X autotools macros"
+>   PR = "r1"
+>   PE = "1"
+> ============================================================
+> --- packages/xorg-util/util-macros_1.1.6.bb	9dd3c08d7715e6e845ab141fd67cbb4e3a962977
+> +++ packages/xorg-util/util-macros_1.1.6.bb	0d3b638b2967a60b38c2603dad643c7325d70ae2
+> @@ -1,4 +1,6 @@ require xorg-util-common.inc
+>   require xorg-util-common.inc
+>
+> +RDEPENDS_${PN}-dev = ""
+> +
+>   DESCRIPTION = "X autotools macros"
+>   PE = "1"
+>
+
+
+
 
