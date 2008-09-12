@@ -1,30 +1,25 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Ke6VK-00080U-Bd
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thommycheck@gmx.de>) id 1Ke6qH-0004zE-EO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Sep 2008 13:07:58 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 9556816DEFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2008 13:10:57 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id BA3892A4211
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2008 13:12:07 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Fri, 12 Sep 2008 13:29:37 +0200
+Received: (qmail invoked by alias); 12 Sep 2008 11:26:51 -0000
+Received: from BAA3c82.baa.pppool.de (EHLO [192.168.178.38]) [77.128.60.130]
+	by mail.gmx.net (mp017) with SMTP; 12 Sep 2008 13:26:51 +0200
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX1/T+RtkVnLTOUTAwporTQ3/Da2L/vdMiLzTiDsv/g
+	hzu6bHdEv6iUUN
+Message-ID: <48CA51F5.2010704@gmx.de>
+Date: Fri, 12 Sep 2008 13:26:45 +0200
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-Date: Fri, 12 Sep 2008 13:05:12 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E2B3B04@hiob.intern.dresearch.de>
-In-Reply-To: <48CA48B8.4060708@gmx.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Some beginners problems
-Thread-Index: AckUxZMQjsAOnQYhSs6AckBkLzBurwAAPteA
-References: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>
-	<48CA48B8.4060708@gmx.de>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
+To: openembedded-devel@lists.openembedded.org
+References: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>	<48CA48B8.4060708@gmx.de>
+	<69E6C70090A0A14498CC98FAE5E06B6E2B3B04@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E2B3B04@hiob.intern.dresearch.de>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.62
 Subject: Re: Some beginners problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,28 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2008 11:07:58 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 12 Sep 2008 11:29:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> > I wan't to make an image (e.g. minimal-image) for atngw100=20
-> > but with different linux kernel configuration (e.g.=20
-> > CONFIG_EXT2_FS=3Dy). What's th right way to do this?
-> >
-> > * Just edit packages/linux/linux-2.6.24/atngw100/defconfig?
-> =20
-> Yes. But don't forget to increase the PR. Otherwise bitbake=20
-> doesn't know that the recipe was changed and doesn't rebuild
-> it.
-
-The change is not a bug fix or something like this. It's just a variant =
-and not mentioned to become committed. So if i increase PR and someone =
-else fixes a bug and increases PR too and I pull this fixes from git I =
-have a conflict.  :(
+Sledz, Steffen wrote:
+>>> I wan't to make an image (e.g. minimal-image) for atngw100 
+>>> but with different linux kernel configuration (e.g. 
+>>> CONFIG_EXT2_FS=y). What's th right way to do this?
+>>>
+>>> * Just edit packages/linux/linux-2.6.24/atngw100/defconfig?
+>>>       
+>>  
+>> Yes. But don't forget to increase the PR. Otherwise bitbake 
+>> doesn't know that the recipe was changed and doesn't rebuild
+>> it.
+>>     
+>
+> The change is not a bug fix or something like this. It's just a variant and not mentioned to become committed. So if i increase PR and someone else fixes a bug and increases PR too and I pull this fixes from git I have a conflict.  :(
+>   
+Yes but you will always have this problem with local changes and it 
+shouldn't be too hard to resolve such conflicts.
 
 Regards,
-Steffen
+Thomas
+
 
 
