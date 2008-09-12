@@ -1,39 +1,24 @@
-Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jroman.espinar@gmail.com>) id 1Ke6D8-0007P4-G9
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thommycheck@gmx.de>) id 1Ke6E4-0007RM-3e
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Sep 2008 12:49:10 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so999728rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2008 03:46:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:sender
-	:to:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references
-	:x-google-sender-auth;
-	bh=x/E7Evs/2CcEpzlLl6AMeYUctkPO0XK6p/LeoPnA7NY=;
-	b=U9M345lUvcPLNVDMqw1V/cRL6e/ogncP2aYQQv/GF5anMHYQeMlMKQdP+zzVAK9QRa
-	7z9tksR6NS44aivMKwZmrVFKl/6HI6Fc8ASSYiQDGUaSthyFty1c4pdJd/qqwnMjnuuJ
-	MwiFIp1DsAKpzoJOGg4SSfGMM9JJkvOQ7WQCY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:sender:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references:x-google-sender-auth;
-	b=W2jxom9Y4NlUDVTm9+Rlil3vNLMxq1y7zLTP9yE1iIZfukfHvgtHQqK8t14RVURwde
-	ufEpl+aR6tRuitvMhNXZR+6fLJbU9XWGvrM5csO6dRhBc9N77+pQNu+lUuPFtvHOtQwg
-	ScSYOJhRXXlF/nYylesNcZ60+MZ63mA/y1lhU=
-Received: by 10.141.34.12 with SMTP id m12mr2523751rvj.26.1221216384706;
-	Fri, 12 Sep 2008 03:46:24 -0700 (PDT)
-Received: by 10.140.187.13 with HTTP; Fri, 12 Sep 2008 03:46:24 -0700 (PDT)
-Message-ID: <12c2e32e0809120346g2745eff5ja0c85111f30bde25@mail.gmail.com>
-Date: Fri, 12 Sep 2008 12:46:24 +0200
-From: "Javi Roman" <javiroman@kernel-labs.org>
-Sender: jroman.espinar@gmail.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>
+	Fri, 12 Sep 2008 12:50:08 +0200
+Received: (qmail invoked by alias); 12 Sep 2008 10:47:21 -0000
+Received: from BAA3c82.baa.pppool.de (EHLO [192.168.178.38]) [77.128.60.130]
+	by mail.gmx.net (mp054) with SMTP; 12 Sep 2008 12:47:21 +0200
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX1/GlfYFrG7GrXlDI66kIUt+veVS4fdZ2rWJhJaDol
+	pNp2EFdX5xDoWl
+Message-ID: <48CA48B8.4060708@gmx.de>
+Date: Fri, 12 Sep 2008 12:47:20 +0200
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
 References: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>
-X-Google-Sender-Auth: c34d3de8ccd5c913
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E2B3B01@hiob.intern.dresearch.de>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.6
 Subject: Re: Some beginners problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,22 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2008 10:49:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 12 Sep 2008 10:50:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Fri, Sep 12, 2008 at 12:26 PM, Sledz, Steffen <sledz@dresearch.de> wrote:
+Sledz, Steffen wrote:
+> I'm new to the OpenEmbedded system so please forgive me if my questions are FAQ or this is the wrong list.
+>
+> OE ist set up and I'm able to build images running on the target machines. But I'm looking for some guidance for the following problems.
+>
+> -------------------------------------------------
+> 1. Problem
+>
+> I wan't to make an image (e.g. minimal-image) for atngw100 but with different linux kernel configuration (e.g. CONFIG_EXT2_FS=y). What's th right way to do this?
+>
+> * Just edit packages/linux/linux-2.6.24/atngw100/defconfig?
+>   
+Yes. But don't forget to increase the PR. Otherwise bitbake doesn't know 
+that the recipe was changed and doesn't rebuild it.
+> * Create an additional patch and a new bbfile (or modify existing one)?
+> * Change something in local.conf?
+> * Something else ... ?
+>
+> -------------------------------------------------
+> 2. Problem
+>
+> I want't make a special patched dbus (in addition to the standard installation). What's the best way here?
+>
+> * Create an own package just using the same source archives?
+> * Add a patch file to the existing package and modify the bbfile?
+> * Something else ... ?
+>   
+Depends if you need the original dbus package too or not. If you need it 
+create a new package and if not just add a patch to the old one
+(and don't forget to increase PR).
+> -------------------------------------------------
 >
 > It would be nice to separate the changes not mentioned to become upstreamed from the org.openembedded.dev git tree.
->
+>   
+The most effective way is to open a bug report for your patches. (and 
+poke people on irc if nobody reacts)
 
+Regards,
+Thomas
 
-Bitbake collections:
-
-http://www.kernel-labs.org/files/openembedded-guide/openembedded-guide-6.html
-
--- 
-Javi Roman
 
 
