@@ -1,22 +1,30 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1KeF1n-0005ve-UE; Fri, 12 Sep 2008 22:14:04 +0200
-Received: from ip-89-168-141-231.cust.homechoice.net ([89.168.141.231]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1KeEyo-0005pL-OP; Fri, 12 Sep 2008 21:11:02 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080912192123.GF29676@smtp.west.cox.net>
+	(envelope-from <trini@kernel.crashing.org>) id 1KeF6M-00067f-2w
+	for openembedded-devel@openembedded.org; Fri, 12 Sep 2008 22:18:46 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20080912201556.WBFA6526.fed1rmmtao104.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Fri, 12 Sep 2008 16:15:56 -0400
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id DwFx1a0021E665w04wFxvl; Fri, 12 Sep 2008 16:15:57 -0400
+X-Authority-Analysis: v=1.0 c=1 a=rCeM5v77lmsA:10 a=OZgQiQfKk9MA:10
+	a=b2ZvGRdsAAAA:8 a=aR16PxjQAAAA:8 a=aKtHT69KrXWaEuUFFQMA:9
+	a=_BjdvzpsXmzhfRYBjPgA:7 a=AX5WgomOXpHhZOlrxA4WnuBojiMA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Fri, 12 Sep 2008 13:15:57 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20080912201557.GG29676@smtp.west.cox.net>
 References: <20080912160657.GE29676@smtp.west.cox.net>
-	<gaeef7$cvi$1@ger.gmane.org> <20080912192123.GF29676@smtp.west.cox.net>
-Date: Fri, 12 Sep 2008 21:10:46 +0100
-Message-Id: <1221250246.4641.237.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
+	<gaeef7$cvi$1@ger.gmane.org>
+	<20080912192123.GF29676@smtp.west.cox.net>
+MIME-Version: 1.0
+In-Reply-To: <20080912192123.GF29676@smtp.west.cox.net>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: [Bug 4549] A number of xorg dev packages are uninstallable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,11 +39,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2008 20:14:04 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Sep 2008 20:18:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, 2008-09-12 at 12:21 -0700, Tom Rini wrote:
+On Fri, Sep 12, 2008 at 12:21:23PM -0700, Tom Rini wrote:
 > On Fri, Sep 12, 2008 at 09:04:07PM +0200, Koen Kooi wrote:
 > > Tom Rini wrote:
 > >> [ This is all also available at
@@ -53,20 +61,120 @@ On Fri, 2008-09-12 at 12:21 -0700, Tom Rini wrote:
 > Well, they did all suddenly actually install.  I'll rework the patch per
 > your suggestion, make sure that works too and re-post.  Thanks.
 
-Actually, I think your original patch was the right thing.  I can't
-think of any benefit from having a pile of empty ??proto packages; they
-obviously don't contain any files, and they won't have any meaningful
-dependencies either, so it seems like they would just be a waste of
-space.
+Same problem as before, Koen's solution instead:
 
-Of course, even better would be to teach package.bbclass to spot this
-situation and not output the spurious dependency in the first place.  I
-don't think that should be terribly difficult to arrange, since it knows
-by the time population is finished whether it is going to generate a
-binary for ${PN} or not, and this gives plenty of time to adjust the
-dependencies on ${PN}-dev.
+#
+# old_revision [e5b917e5de77a3e1e649867986fdd33f141c7bd3]
+#
+# patch "packages/xorg-lib/xtrans_1.0.3.bb"
+#  from [5adfa3a5c753b71a9a61e266569ccbd26e940b09]
+#    to [4326a8948884215174299f16364f47e8b6c07295]
+# 
+# patch "packages/xorg-lib/xtrans_1.0.4.bb"
+#  from [5adfa3a5c753b71a9a61e266569ccbd26e940b09]
+#    to [4326a8948884215174299f16364f47e8b6c07295]
+# 
+# patch "packages/xorg-lib/xtrans_1.1.bb"
+#  from [5adfa3a5c753b71a9a61e266569ccbd26e940b09]
+#    to [4326a8948884215174299f16364f47e8b6c07295]
+# 
+# patch "packages/xorg-lib/xtrans_1.2.bb"
+#  from [5adfa3a5c753b71a9a61e266569ccbd26e940b09]
+#    to [4326a8948884215174299f16364f47e8b6c07295]
+# 
+# patch "packages/xorg-proto/xorg-proto-common.inc"
+#  from [2f88e96e17c9a539cf5bf9383cad1500375eae86]
+#    to [aa528c4cf7863704e0d3ae2a0203fe669205bc06]
+# 
+# patch "packages/xorg-util/util-macros_1.1.5.bb"
+#  from [e4dba9f37b257cea60724c9fd34b82e27e27e349]
+#    to [4ba31d550f6c3a239d2a4ed31e41804281401a41]
+# 
+# patch "packages/xorg-util/util-macros_1.1.6.bb"
+#  from [9dd3c08d7715e6e845ab141fd67cbb4e3a962977]
+#    to [89aa974c4232d1c544e4924996946a514b924bb6]
+#
+============================================================
+--- packages/xorg-lib/xtrans_1.0.3.bb	5adfa3a5c753b71a9a61e266569ccbd26e940b09
++++ packages/xorg-lib/xtrans_1.0.3.bb	4326a8948884215174299f16364f47e8b6c07295
+@@ -1,5 +1,7 @@ require xorg-lib-common.inc
+ require xorg-lib-common.inc
+ 
++ALLOW_EMPTY_${PN} = "1"
++
+ DESCRIPTION = "network API translation layer to insulate X applications and \
+ libraries from OS network vageries."
+ PE = "1"
+============================================================
+--- packages/xorg-lib/xtrans_1.0.4.bb	5adfa3a5c753b71a9a61e266569ccbd26e940b09
++++ packages/xorg-lib/xtrans_1.0.4.bb	4326a8948884215174299f16364f47e8b6c07295
+@@ -1,5 +1,7 @@ require xorg-lib-common.inc
+ require xorg-lib-common.inc
+ 
++ALLOW_EMPTY_${PN} = "1"
++
+ DESCRIPTION = "network API translation layer to insulate X applications and \
+ libraries from OS network vageries."
+ PE = "1"
+============================================================
+--- packages/xorg-lib/xtrans_1.1.bb	5adfa3a5c753b71a9a61e266569ccbd26e940b09
++++ packages/xorg-lib/xtrans_1.1.bb	4326a8948884215174299f16364f47e8b6c07295
+@@ -1,5 +1,7 @@ require xorg-lib-common.inc
+ require xorg-lib-common.inc
+ 
++ALLOW_EMPTY_${PN} = "1"
++
+ DESCRIPTION = "network API translation layer to insulate X applications and \
+ libraries from OS network vageries."
+ PE = "1"
+============================================================
+--- packages/xorg-lib/xtrans_1.2.bb	5adfa3a5c753b71a9a61e266569ccbd26e940b09
++++ packages/xorg-lib/xtrans_1.2.bb	4326a8948884215174299f16364f47e8b6c07295
+@@ -1,5 +1,7 @@ require xorg-lib-common.inc
+ require xorg-lib-common.inc
+ 
++ALLOW_EMPTY_${PN} = "1"
++
+ DESCRIPTION = "network API translation layer to insulate X applications and \
+ libraries from OS network vageries."
+ PE = "1"
+============================================================
+--- packages/xorg-proto/xorg-proto-common.inc	2f88e96e17c9a539cf5bf9383cad1500375eae86
++++ packages/xorg-proto/xorg-proto-common.inc	aa528c4cf7863704e0d3ae2a0203fe669205bc06
+@@ -1,9 +1,10 @@ XORG_PN = "${PN}"
+ DESCRIPTION = "X protocol headers: ${XORG_PN}"
+ HOMEPAGE = "http://www.x.org"
+ SECTION = "x11/libs"
+ LICENSE = "MIT-X"
+ 
+ XORG_PN = "${PN}"
++ALLOW_EMPTY_${PN} = "1"
+ 
+ SRC_URI = "${XORG_MIRROR}/individual/proto/${XORG_PN}-${PV}.tar.bz2"
+ 
+============================================================
+--- packages/xorg-util/util-macros_1.1.5.bb	e4dba9f37b257cea60724c9fd34b82e27e27e349
++++ packages/xorg-util/util-macros_1.1.5.bb	4ba31d550f6c3a239d2a4ed31e41804281401a41
+@@ -1,5 +1,7 @@ require xorg-util-common.inc
+ require xorg-util-common.inc
+ 
++ALLOW_EMPTY_${PN} = "1"
++
+ DESCRIPTION = "X autotools macros"
+ PR = "r1"
+ PE = "1"
+============================================================
+--- packages/xorg-util/util-macros_1.1.6.bb	9dd3c08d7715e6e845ab141fd67cbb4e3a962977
++++ packages/xorg-util/util-macros_1.1.6.bb	89aa974c4232d1c544e4924996946a514b924bb6
+@@ -1,4 +1,6 @@ require xorg-util-common.inc
+ require xorg-util-common.inc
+ 
++ALLOW_EMPTY_${PN} = "1"
++
+ DESCRIPTION = "X autotools macros"
+ PE = "1"
 
-p.
-
+-- 
+Tom Rini
 
 
