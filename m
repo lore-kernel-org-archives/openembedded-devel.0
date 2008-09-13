@@ -1,42 +1,44 @@
 Received: from [209.85.198.246] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <felipe.contreras@gmail.com>) id 1KeZsq-0003de-Pp
+	(envelope-from <raj.khem@gmail.com>) id 1KeaUz-0001oD-5r
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Sep 2008 20:30:13 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so1790559rvb.12
+	Sat, 13 Sep 2008 21:09:37 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so1806591rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Sep 2008 11:27:22 -0700 (PDT)
+	Sat, 13 Sep 2008 12:06:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=dNdrOD4FDJzFUOLXSvL2GAFFek6oxnjIrimD4JePpyw=;
-	b=kQj6hwSTSmGRO9pif8VAJsIKw/GLFwAKyJjua982HQN8DFgqgk45SuSzv9gLH5M33c
-	F8DxLXS68aYYyry3McqjgAd30TwKjfJyaandxE9KeInBJKxe/NvBluBxMswktDn9+NMm
-	O3QiatEI4D+jQ1juMMAz7JBVIEpyoGEcqXXI0=
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=EI8hEkJT+roGufTPtbzc3N1ko15cYLNhiA+8fHEzqno=;
+	b=lSR5xipjN100Qc27wmlQoOhK552nZNptKfBiqPGWG8oTJCQbDmb/UYOM5GJZuYpqN8
+	dF+6n8h9op3ss0ATF/azGUruod8ionuE28Mird2v/bl8NWb4+0T60KR/+1NqKRp8A2D9
+	u+61n96LzNucA4Nsrp9N8J5dzmaJwV6wnYJuU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=FCcfboLROHwHwQZSnGtttKieqkrdFvGaBxbuXIIkN/ONBGn20HL8MK8Bvh55fUa0Pw
-	58DYdOnjEz4HuRvlzMELT00KY9bawAyZtIDI2Z4Qa4u2MvbsXEBmwCRU0OADJiR99Tjx
-	6rPquAdsT1bRxc4TvELUJJSmq1qrodSDkRyqg=
-Received: by 10.141.19.9 with SMTP id w9mr3533525rvi.202.1221330441947;
-	Sat, 13 Sep 2008 11:27:21 -0700 (PDT)
-Received: by 10.140.166.19 with HTTP; Sat, 13 Sep 2008 11:27:21 -0700 (PDT)
-Message-ID: <94a0d4530809131127w5b0e71ebib885b2c71c65480@mail.gmail.com>
-Date: Sat, 13 Sep 2008 21:27:21 +0300
-From: "Felipe Contreras" <felipe.contreras@gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=xB5SaC+YMo3unpcBP7T2LCALg57HanxTQidElUZ+l685xopKXufahScdAFJEnsNBdV
+	NwGFfpj6OZXvCv5R2kBkOsh2PM6iMNGP+Ty+g9j2jBetekxmQEDz1MFxexjxPYMfwKrW
+	M1uVC9t2vxl6KH01CPFc42rczr2ZAkRL8BtK8=
+Received: by 10.114.58.6 with SMTP id g6mr4637579waa.68.1221332806244;
+	Sat, 13 Sep 2008 12:06:46 -0700 (PDT)
+Received: from localhost ( [71.146.23.38])
+	by mx.google.com with ESMTPS id q20sm23469215pog.7.2008.09.13.12.06.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 13 Sep 2008 12:06:45 -0700 (PDT)
+Date: Sat, 13 Sep 2008 12:06:43 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48CC03F9.6090505@klever.net>
+Message-ID: <20080913190643.GA14530@gmail.com>
+References: <20080911195243.GA16359@denix.org>
+	<20080912000208.GA12469@gmail.com>
+	<20080912015320.GB17523@denix.org>
+	<20080912021136.GA20033@gmail.com> <gaggd6$86a$1@ger.gmane.org>
 MIME-Version: 1.0
-References: <94a0d4530809121559w5f644174j461ec61cb2327fd8@mail.gmail.com>
-	<48CBE436.9050500@laposte.net>
-	<94a0d4530809130942n3a6c2095t7018ecbfff9387f4@mail.gmail.com>
-	<48CBFBBC.7050102@klever.net>
-	<94a0d4530809131053u7c2f2c1chb33e5da39c4450aa@mail.gmail.com>
-	<48CC03F9.6090505@klever.net>
-Subject: Re: [ANN] mtn2git v0.1
+In-Reply-To: <gaggd6$86a$1@ger.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Cc: openembedded-devel@openembedded.org
+Subject: Re: RFC: SDK/external-toolchain fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,48 +52,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Sep 2008 18:30:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 13 Sep 2008 19:09:37 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Sat, Sep 13, 2008 at 9:18 PM, Michael Krelin <hacker@klever.net> wrote:
->> On Sat, Sep 13, 2008 at 8:43 PM, Michael Krelin <hacker@klever.net> wrote:
->>>>
->>>> I did look at it, but there are some issues. For starters it seems to
->>>> be using extensively the manifest, which would probably make it very
->>>> slow. Also, it seems to be keeping the trees of all the revisions.
+On (13/09/08 15:49), Koen Kooi wrote:
+> Khem Raj wrote:
+>> On (11/09/08 21:53), Denys Dmytriyenko wrote:
+>>> First of all, thanks for your review.
 >>>
->>> Back when mtn2git script was on the early stages of development and I've
->>> had
->>> some time I've started doing my own mtn2git gateway in c++ (never
->>> finished
->>> it, though). For what I remember using manifest was the only way, because
->>> the changes information mtn automate returns was incomplete or simply
->>> wrong,
->>> I don't remember the details... Do check your results carefully if you're
->>> trying to go this way. Luckily, being slow due to use of manifest should
->>> only matter on initial import.
+>>> On Thu, Sep 11, 2008 at 05:02:08PM -0700, Khem Raj wrote:
+>>>> On (11/09/08 15:52), Denys Dmytriyenko wrote:
+>>>>> #1 gcc-cross-sdk 4.3.1 missing include-fixed
+>>>>> http://bugs.openembedded.net/show_bug.cgi?id=4536
+>>>>>
+>>>>> gcc 4.3.x has some GCC-provided headers in include-fixed (namely limits.h),
+>>>>> which are missing in the gcc-cross-sdk version, rendering external toolchain
+>>>>> unusable.
+>>>> I do not like this fix. IMO Instead of copying them into include directory
+>>>> they should be let alone in include-fixed directory and packaged. You should
+>>>> add knowledge of this new directory to the failing package instead. What
+>>>> packages are broken because of this.
+>>> I agree that this is not a proper fix, but rather a hack. glibc has its own
+>>> limits.h, which wants to include gcc's limits.h like this:
+>>>
+>>>   /* Get the compiler's limits.h, which defines almost all the ISO constants.
+>>>      We put this #include_next outside the double inclusion check because
+>>>      it should be possible to include this file more than once and still get
+>>>      the definitions from gcc's header.  */
+>>> #if defined __GNUC__&&  !defined _GCC_LIMITS_H_
+>>> /* `_GCC_LIMITS_H_' is what GCC's file defines.  */
+>>> # include_next<limits.h>
+>>> #endif
+>>>
+>>> This issue was brought up before, but as far as I can tell, it wasn't fixed
+>>> properly.
+>>> This is initial Koen's post about the issue:
+>>> http://projects.linuxtogo.org/pipermail/openembedded-devel/2008-April/005108.html
+>>> And here is your own reply with one of the possible solutions:
+>>> http://projects.linuxtogo.org/pipermail/openembedded-devel/2008-April/005111.html
+>>>
 >>
->> It's complicated, but hopefully doable.
+>> right. So can you try this patch and see if this fixes the problem ?
 >>
->> That's why there are two methods; one that does a full checkout of the
->> revision and imports it into git, and the other one that uses mtn
->> automate and fast-import.
+>>> Here is how it's "solved" (i.e. worked around) in gcc-cross_4.3.1.bb (4.3.2):
+>>>
+>>> # Hack till we fix *libc properly
+>>> do_stage_append() {
+>>>          ln -sf ${CROSS_DIR}/lib/gcc/${TARGET_SYS}/${BINV}/include-fixed/* ${CROSS_DIR}/lib/gcc/${TARGET_SYS}/${BINV}/include/
+>>> }
+>>>
+>>> I'd love to see it fixed properly, but for now I'm trying to bring
+>>> gcc-cross-sdk on par with gcc-cross.
+>>>
+>>>>> Provided patch copies them in the include directory as a temporary solution.
+>>>>> A similar temporary solution is present in gcc-cross_4.3.1, see
+>>>>> do_stage_append()
+>>>>>
+>>>>>
+>>>>> #2 external-toolchain misses providing runtime libgcc
+>>>>> http://bugs.openembedded.net/show_bug.cgi?id=4542
+>>>>>
+>>>>> Since external-toolchain misses specifying libgcc as provided runtime library,
+>>>>> dependency tree picks up either gcc-cross or even gcc-noemu...
+>>>> This one seems ok to me.
+>>> Thanks! Whom should I ping to get it commited?
 >>
->> I'm able to import about 60% of the Pidgin code correctly, but after
->> that there are issues. That's the benefit of having two modes... I can
->> compare the fast one with the exact one and improve the fast one.
+>> I can do it.
 >
-> I ended up using some hybrid mode myself, but the point is - there's no way
-> to avoid pulling manifests all the time and that doesn't imply complete
-> checkout.
+> gcc_4.3.x.bb also needs a fix since I get all kinds of limits.h related  
+>, errors when trying to do native compilation on the beagle.
 
-Do you remember the problem?
+I only did cross build/testing no target gcc stuff so I did not see this problem thus far.
+I thought gcc driver should have added include-fixed to default search paths for includes unless you disable it to do so like glibc does in such a case the application should add it to include search paths manually. 
 
-From what I can see it's doable.
+If you can give more details about this failure on native build. I could try to dig more.
 
--- 
-Felipe Contreras
+Thanks
+-Khem
+
+>
+> regards,
+>
+> Koen
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
