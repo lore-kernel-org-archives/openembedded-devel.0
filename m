@@ -1,35 +1,39 @@
-Received: from [209.85.198.248] (helo=rv-out-0708.google.com)
+Received: from [209.85.198.241] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <felipe.contreras@gmail.com>) id 1KeHeL-00011e-NN
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Sep 2008 01:02:01 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so1313159rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2008 15:59:14 -0700 (PDT)
+	(envelope-from <felipe.contreras@gmail.com>) id 1KeSmn-00030e-Cx
+	for openembedded-devel@openembedded.org; Sat, 13 Sep 2008 12:55:29 +0200
+Received: by rv-out-0708.google.com with SMTP id k29so1245113rvb.0
+	for <openembedded-devel@openembedded.org>;
+	Sat, 13 Sep 2008 03:52:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=kdMstPvVPaHPmZLM9he3StwXICeu1ONzSteNDblrvt0=;
-	b=acC21TdIz53RKZm8lNgtrpC7MUZeTHV5W6N8htpF/Lz/kDV0MD1C4kFCWNynAh8zHc
-	cbUHG/NiNGzMGfNryuPkvCRDRlCg2InJfLTrY4QLVVW8BJSXK3vOJLI0f0ZmNewxnu8u
-	/CMXJvPz3n1hKz4dGnRSYILrWrCe4b24GdNZk=
+	:subject:cc:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=ZsO2JZekuvuhSac9wD5nkluAY2KJwpkD57FOsRRuVwY=;
+	b=Zs6yassuNikF+CHBwd4Vl2g4+2A2ppkHJQBHc1s4/LCClnFGajauyW5ITjiH52ipCa
+	rnb36BjOOG903Y0yoLQwNGEystsYNLPjxxL7HbObIKerBvHilu/Byh1/pj04VP+0TDPu
+	quqN1dg6A1A5AgjNJrCs/PFvbFNVhdzOBZRgs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=jI4TxsRXlRVOlraY6EZ4E+mL/diElMLhrn3yU1xblvfzkmC7ByFhd2g42+EeCJYDKz
-	D7bFCK7hqGw5JSVfKutjM0NMFvQWWCCTkWu+62yZfMQB1jb41NgirE1C/XebEBe3PWaB
-	eEuOuPK+Fq+4IilscR8wSyADq8t8exPXXNDlU=
-Received: by 10.141.88.3 with SMTP id q3mr2979983rvl.3.1221260354427;
-	Fri, 12 Sep 2008 15:59:14 -0700 (PDT)
-Received: by 10.140.166.19 with HTTP; Fri, 12 Sep 2008 15:59:14 -0700 (PDT)
-Message-ID: <94a0d4530809121559w5f644174j461ec61cb2327fd8@mail.gmail.com>
-Date: Sat, 13 Sep 2008 01:59:14 +0300
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=Sk9DwZoB94qg0dWrwU2ZIVhuIXdXKKllPlEhsxk6O01EE+FwVafJLWxWDUoF706JQa
+	VwoeHysG6W99Nj37qfQ0jlHt16Ka+o2o9/7OrOQeCnF6X7WJa0q4e55h26BJwxDxVUE6
+	jUI36A6yx+YRiT7njGtFWvBMzyslRx09II/yI=
+Received: by 10.140.201.8 with SMTP id y8mr3304415rvf.28.1221303159789;
+	Sat, 13 Sep 2008 03:52:39 -0700 (PDT)
+Received: by 10.140.166.19 with HTTP; Sat, 13 Sep 2008 03:52:39 -0700 (PDT)
+Message-ID: <94a0d4530809130352v5775be53sc14b354b8c1dae15@mail.gmail.com>
+Date: Sat, 13 Sep 2008 13:52:39 +0300
 From: "Felipe Contreras" <felipe.contreras@gmail.com>
-To: git@vger.kernel.org, monotone-devel@nongnu.org, devel@pidgin.im, 
-	openembedded-devel@lists.openembedded.org
+To: "Jakub Narebski" <jnareb@gmail.com>
+In-Reply-To: <m3d4j8nzy9.fsf@localhost.localdomain>
 MIME-Version: 1.0
-Subject: [ANN] mtn2git v0.1
+References: <94a0d4530809121559w5f644174j461ec61cb2327fd8@mail.gmail.com>
+	<m3d4j8nzy9.fsf@localhost.localdomain>
+Cc: devel@pidgin.im, openembedded-devel@openembedded.org,
+	monotone-devel@nongnu.org, git@vger.kernel.org
+Subject: Re: [ANN] mtn2git v0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +47,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2008 23:02:02 -0000
+X-List-Received-Date: Sat, 13 Sep 2008 10:55:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi,
+On Sat, Sep 13, 2008 at 12:45 PM, Jakub Narebski <jnareb@gmail.com> wrote:
+> "Felipe Contreras" <felipe.contreras@gmail.com> writes:
+>
+>> This is the result of various experiments I've been doing while trying
+>> to import mtn repositories into git. I've looked into other mtn2git
+>> scripts but none fitted my needs.
+>
+> mtn or mnt?
 
-This is the result of various experiments I've been doing while trying
-to import mtn repositories into git. I've looked into other mtn2git
-scripts but none fitted my needs.
+monotone = mtn
 
-After some rfcs on git and monotone mailing lists it seems now the
-script is going in the right direction.
+>> After some RFCs on git and monotone mailing lists it seems now that
+>> the script is going in the right direction.
+>
+> When you feel this script to be ready, could you add it to the
+> "Interaction with other Revision Control Systems" section on
+>  http://git.or.cz/gitwiki/InterfacesFrontendsAndTools
+> As far as I can see there ain't any Monotone to Git converter on this
+> list.
 
-There are two modes:
-
-== checkout ==
-
-In this mode each revision is checked out and imported directly into
-git. This means it's 100% sure that the result would be an exact
-clone.
-
-The disadvantage is that it's extremely slow (1 day for 25,000 commits).
-
-== fast-import ==
-
-This mode requires a few patches for git fast-import, it's very fast
-(40 min for 25,000 commits), but not 100% reliable yet.
-
-There are also some missing features like branch creation and updates.
-
-
-My plan is to keep these two modes in the code until fast-import
-method is reliable enough.
-
-I've tried this with Pidgin's repository. The result is here:
-http://github.com/felipec/pidgin-clone
-
-It would be interesting to do something similar with OE's repo. Any takers?
-
-Comments and patches are welcome :)
+Ok, done. I think it's ready if you can bare the slowness of the
+'checkout' method. The only missing feature is tags, but should be
+easy to implement.
 
 -- 
 Felipe Contreras
