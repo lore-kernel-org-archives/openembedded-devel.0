@@ -1,41 +1,28 @@
-Received: from [64.233.166.180] (helo=py-out-1112.google.com)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Kf19o-0006zp-4F
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Sep 2008 01:37:32 +0200
-Received: by py-out-1112.google.com with SMTP id y77so1341562pyg.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Sep 2008 16:34:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=4zs/rXTWs+wWNNyKUffH0xyk2xzC5SPCQoHjshf/w4I=;
-	b=U+7EoQZhE6m9UfhHK/JfEjnAAdOaDeVZ2CQoUms4QufY6TMDu4N5IAdrXv6VKkXZC/
-	PN+ol0/NufB4PkNTratsk6U28xRN4Ae63apLwTNNKPiYVEp33EPM+e6Fr+CzxbyNVLaB
-	Gzkp6G0BzTpuT0L9rMNfDrFMv8m7VWhDsVkII=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=v/JbVXxTyRQO7nV2KGfMEhAcOx9X75gsN+NBQ8uuOpi5UxK1q/PNdoN0Lbi4PFtY9s
-	REOBfEMjVDSR+XB/6Z8jU1oEpbWVbd5CPnBzc1phv40u70eWCXMXYWS4RJqjZLORpKSs
-	eaiLERXRGk9ZOR6HMQYj6IbpRFm4BlbOl1sSM=
-Received: by 10.142.237.19 with SMTP id k19mr2440462wfh.86.1221435276137;
-	Sun, 14 Sep 2008 16:34:36 -0700 (PDT)
-Received: from localhost ( [71.146.23.38])
-	by mx.google.com with ESMTPS id 22sm20591282wfd.7.2008.09.14.16.34.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 14 Sep 2008 16:34:35 -0700 (PDT)
-Date: Sun, 14 Sep 2008 16:34:33 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080914233433.GB8709@gmail.com>
-References: <20080914133128.GA21462@gmail.com>
-	<200809141728.54433.mickey@vanille-media.de>
+	(envelope-from <trini@kernel.crashing.org>) id 1Kf1Y7-0007Ri-Bq
+	for openembedded-devel@openembedded.org; Mon, 15 Sep 2008 02:02:39 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20080914235942.OLRI6684.fed1rmmtao102.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Sun, 14 Sep 2008 19:59:42 -0400
+Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
+	id Enze1a00c1E665w04nzfho; Sun, 14 Sep 2008 19:59:41 -0400
+X-Authority-Analysis: v=1.0 c=1 a=rCeM5v77lmsA:10 a=OZgQiQfKk9MA:10
+	a=b2ZvGRdsAAAA:8 a=LWtVJ2XzvaYoyJCM4l4A:9 a=PpxUCtxiL5S7z0G0V1sA:7
+	a=U2R0ukHFqxJnYLnQ_LoO-sDcaeoA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sun, 14 Sep 2008 16:59:38 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20080914235938.GH29676@smtp.west.cox.net>
+References: <20080912160657.GE29676@smtp.west.cox.net>
 MIME-Version: 1.0
-In-Reply-To: <200809141728.54433.mickey@vanille-media.de>
+In-Reply-To: <20080912160657.GE29676@smtp.west.cox.net>
+Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [patch] compile opkg-sdk-native with gcc 4.3
+Subject: Re: [Bug 4549] A number of xorg dev packages are uninstallable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,19 +36,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Sep 2008 23:37:32 -0000
+X-List-Received-Date: Mon, 15 Sep 2008 00:02:39 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (14/09/08 17:28), Michael 'Mickey' Lauer wrote:
-> Am Sunday 14 September 2008 15:31:28 schrieb Khem Raj:
-> No, please send it upstream (opkg-devel@lists.openmoko.org). We should really 
-> try to prevent adding patches where we have good contacts to upstream.
+On Fri, Sep 12, 2008 at 09:06:57AM -0700, Tom Rini wrote:
 
-OK sent the patch upstream.
+> [ This is all also available at
+> http://bugs.openembedded.net/show_bug.cgi?id=4549 ]
+> 
+> A number of xorg dev packages (both literally -dev and util-macros) are
+> uninstallable on the target.  The problem is that by default (with ipk)
+> any given -dev package will depend on the main package, for example
+> xproto-dev depends on xproto.  But in these packages case, there is no
+> main package (no xproto).  The following patch fixes the issue.
+> 
+> This is important in the case of SDK users.
 
-Thx
+So, there's three ways to fix this:
+- Fix these recipes to have RDEPENDS_${PN}-dev = ""
+- Fix these recipes to build empty main packages.
+- Fix package.bbclass to do the 1st option, automatically (not put the
+  dependency in to start with).
 
--Khem
+How do we get going ahead with one of these?  I could take a stab at the
+3rd option, with some hints.
+
+-- 
+Tom Rini
 
 
