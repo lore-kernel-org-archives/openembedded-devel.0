@@ -1,23 +1,41 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [64.233.166.180] (helo=py-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1Kew2F-0007k7-6Z
+	(envelope-from <raj.khem@gmail.com>) id 1Kf19o-0006zp-4F
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Sep 2008 20:09:23 +0200
-Received: from ip-89-168-141-231.cust.homechoice.net ([89.168.141.231]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KevzK-0005QW-Ll
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Sep 2008 19:06:23 +0100
-From: Phil Blundell <pb@reciva.com>
+	Mon, 15 Sep 2008 01:37:32 +0200
+Received: by py-out-1112.google.com with SMTP id y77so1341562pyg.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 14 Sep 2008 16:34:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=4zs/rXTWs+wWNNyKUffH0xyk2xzC5SPCQoHjshf/w4I=;
+	b=U+7EoQZhE6m9UfhHK/JfEjnAAdOaDeVZ2CQoUms4QufY6TMDu4N5IAdrXv6VKkXZC/
+	PN+ol0/NufB4PkNTratsk6U28xRN4Ae63apLwTNNKPiYVEp33EPM+e6Fr+CzxbyNVLaB
+	Gzkp6G0BzTpuT0L9rMNfDrFMv8m7VWhDsVkII=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=v/JbVXxTyRQO7nV2KGfMEhAcOx9X75gsN+NBQ8uuOpi5UxK1q/PNdoN0Lbi4PFtY9s
+	REOBfEMjVDSR+XB/6Z8jU1oEpbWVbd5CPnBzc1phv40u70eWCXMXYWS4RJqjZLORpKSs
+	eaiLERXRGk9ZOR6HMQYj6IbpRFm4BlbOl1sSM=
+Received: by 10.142.237.19 with SMTP id k19mr2440462wfh.86.1221435276137;
+	Sun, 14 Sep 2008 16:34:36 -0700 (PDT)
+Received: from localhost ( [71.146.23.38])
+	by mx.google.com with ESMTPS id 22sm20591282wfd.7.2008.09.14.16.34.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 14 Sep 2008 16:34:35 -0700 (PDT)
+Date: Sun, 14 Sep 2008 16:34:33 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200809141931.10414.torsten.sadowski@tu-berlin.de>
-References: <200809141931.10414.torsten.sadowski@tu-berlin.de>
-Date: Sun, 14 Sep 2008 19:06:14 +0100
-Message-Id: <1221415574.4641.269.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: Hibernating an OE device
+Message-ID: <20080914233433.GB8709@gmail.com>
+References: <20080914133128.GA21462@gmail.com>
+	<200809141728.54433.mickey@vanille-media.de>
+MIME-Version: 1.0
+In-Reply-To: <200809141728.54433.mickey@vanille-media.de>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [patch] compile opkg-sdk-native with gcc 4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,28 +49,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Sep 2008 18:09:23 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 14 Sep 2008 23:37:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sun, 2008-09-14 at 19:31 +0200, Torsten Sadowski wrote:
-> would it be possible to hibernate (suspend to disk) an OE device. I have a 
-> Simpad which might be usable as a gps navi but it should not drain the car 
-> battery. Obviously a large enough flash disk would be necessary but what else 
-> do I need?
+On (14/09/08 17:28), Michael 'Mickey' Lauer wrote:
+> Am Sunday 14 September 2008 15:31:28 schrieb Khem Raj:
+> No, please send it upstream (opkg-devel@lists.openmoko.org). We should really 
+> try to prevent adding patches where we have good contacts to upstream.
 
-This isn't really anything to do with OE.  You would probably do better
-to ask the kernel h4x0rs for your machine, and/or the
-swsusp/suspend2/uswsusp maintainers.
+OK sent the patch upstream.
 
-That aside, though, I would have thought that the power draw of a SIMpad
-in suspend-to-RAM mode would probably be low enough that you could reach
-an acceptable level of dark current that way without needing to get into
-suspend-to-disk.  Suspend to RAM is a whole lot simpler and should "just
-work" with any current kernel.
+Thx
 
-p.
-
-
+-Khem
 
 
