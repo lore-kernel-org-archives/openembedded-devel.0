@@ -1,27 +1,31 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [63.210.253.235] (helo=ext-cn0ut-6.online-age.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1KfA3P-0008FS-70; Mon, 15 Sep 2008 11:07:31 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1KfA0V-0001C6-Oh; Mon, 15 Sep 2008 10:04:32 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>)
-	id 1KfA0V-0002uN-Hh; Mon, 15 Sep 2008 10:04:31 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20080914235938.GH29676@smtp.west.cox.net>
-References: <20080912160657.GE29676@smtp.west.cox.net>
-	<20080914235938.GH29676@smtp.west.cox.net>
-Date: Mon, 15 Sep 2008 10:04:30 +0100
-Message-Id: <1221469471.24620.7.camel@mill.internal.reciva.com>
+	(envelope-from <martyn.welch@gefanuc.com>) id 1KfAPI-0005Yk-1A
+	for openembedded-devel@openembedded.org; Mon, 15 Sep 2008 11:30:10 +0200
+Received: from int-cn0ut-4.online-age.net (int-cn0ut-4.online-age.net
+	[3.159.252.73])
+	by ext-cn0ut-6.online-age.net (8.13.6/8.13.6/20051114-SVVS-TLS-DNSBL)
+	with ESMTP id m8F9R8ua019800
+	for <openembedded-devel@openembedded.org>;
+	Mon, 15 Sep 2008 05:27:08 -0400
+Received: from cinmlip01.e2k.ad.ge.com (int-cn0ut-4.online-age.net
+	[3.159.252.73])
+	by int-cn0ut-4.online-age.net (8.13.6/8.13.6/20050510-SVVS) with ESMTP
+	id m8F9R8jO005687 for <openembedded-devel@openembedded.org>;
+	Mon, 15 Sep 2008 05:27:08 -0400
+Received: from ind-3n4b83jh1.amer.consind.ge.com (HELO ubuntu8041.localdomain)
+	([3.138.54.81])
+	by cinmlip01.e2k.ad.ge.com with ESMTP; 15 Sep 2008 05:27:06 -0400
+Date: Mon, 15 Sep 2008 10:26:55 +0100
+From: Martyn Welch <martyn.welch@gefanuc.com>
+To: openembedded-devel@openembedded.org
+Message-ID: <20080915102655.3df1e733@ubuntu8041.localdomain>
+In-Reply-To: <1CADFA951940554D86FBD8B24BBFF3A001E739A4@LONMLVEM08.e2k.ad.ge.com>
+References: <1CADFA951940554D86FBD8B24BBFF3A001E739A4@LONMLVEM08.e2k.ad.ge.com>
+Organization: GE Fanuc Intelligent Platforms Ltd.
+X-Mailer: Claws Mail 3.3.1 (GTK+ 2.12.9; i486-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Subject: Re: [Bug 4549] A number of xorg dev packages are uninstallable
+Subject: Re: OpenEmbedded Stable in GIT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,42 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Sep 2008 09:07:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 15 Sep 2008 09:30:12 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2008-09-14 at 16:59 -0700, Tom Rini wrote:
-> So, there's three ways to fix this:
-> - Fix these recipes to have RDEPENDS_${PN}-dev = ""
-> - Fix these recipes to build empty main packages.
-> - Fix package.bbclass to do the 1st option, automatically (not put the
->   dependency in to start with).
+On Thu, 21 Aug 2008 11:06:52 +0100
+"Welch, Martyn (GE EntSol, Intelligent Platforms)"
+<martyn.welch@gefanuc.com> wrote:
+
+> Hi Guys,
 > 
-> How do we get going ahead with one of these?  I could take a stab at the
-> 3rd option, with some hints.
+> Unless I'm missing something, there isn't currently a GIT mirror for
+> the stable release of openembedded.
 
-For #3, I would start by looking at populate_packages().  This is where
-the files get moved into the individual packages, and is the first point
-at which you get to find out whether any given package is going to be
-empty or not.  As luck would have it this method also contains some
-existing code to bash RDEPENDS around, which you should be able to
-extend and adapt for your own purposes.
+To answer my own question - yes, I missed the fact that there is an
+"org.openembedded.stable" head in org.openembedded.dev.git.
 
-I suggest an approach along the lines of:
+Martyn
 
-- extend the loop that does the initial population to notice when it is
-populating ${PN}, and set a flag according to whether it has any files
-in it or not. 
-
-- then, add something along the lines of:
-
-if pn_was_empty and "${PN}" in rdepends:
-	rdepends.remove("${PN}")
-
-to the RDEPENDS-processing loop near the bottom of the function.
-
-p.
-
-
+-- 
+Martyn Welch MEng MPhil MIET (Principal Software Engineer)
+T:+44(0)1327322748 GE Fanuc Intelligent Platforms Ltd,
+|Registered in England and Wales Tove Valley Business Park,
+Towcester,      |(3828642) at 100 Barbirolli Square, Northants, NN12
+6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 729849476
 
 
