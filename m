@@ -1,27 +1,39 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KgFh8-0002ok-N8
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1KgP8D-0005Wr-7N
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Sep 2008 11:21:03 +0200
-Received: (qmail invoked by alias); 18 Sep 2008 09:17:50 -0000
-Received: from e178084174.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.84.174]
-	by mail.gmx.net (mp043) with SMTP; 18 Sep 2008 11:17:50 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX190Qc5yNQJ0eTzv3+OCB9s41TwRz1kQNszBI20qk+
-	I8Boc+YQboWbBN
-Message-ID: <48D21CBC.3050507@gmx.net>
-Date: Thu, 18 Sep 2008 11:17:48 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Thu, 18 Sep 2008 21:25:37 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 70B9F8400A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Sep 2008 21:22:25 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 868428400A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Sep 2008 21:22:24 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.8 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (e178068075.adsl.alicedsl.de
+	[85.178.68.75]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Sep 2008 21:22:24 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id EC1573C1D2; Thu, 18 Sep 2008 21:22:23 +0200 (CEST)
+Date: Thu, 18 Sep 2008 21:22:23 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF3DF@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF3DF@hiob.intern.dresearch.de>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.66
-Subject: Re: fetching gob2_2.0.14.bb failed :(
+Message-ID: <20080918192223.GA5316@rhein.zuhause.netz>
+References: <48D17F33.90805@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <48D17F33.90805@gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: Granting r/w access for Bernhard Guillon
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,46 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Sep 2008 09:21:03 -0000
-X-Groupsio-MsgNum: 5909
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigD4F1119B2445E4D877D95F45"
+X-List-Received-Date: Thu, 18 Sep 2008 19:25:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------enigD4F1119B2445E4D877D95F45
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+On Wed, Sep 17, 2008 at 05:05:39PM -0500, Junqian Gordon Xu wrote:
+> All,
+>
+> I'd like to propose to grant oe r/w access for Bernhard Guillon.
+>
+> He's the lead developer of SimPAD, working actively to help usability  
+> issues in the stable branch, and also a contributor to bring opie in  
+> shape in oe.
+>
+> Regards
+> Gordon
 
-Hi Steffen,
++1 from me. He bugged me a lot to include patches from bugtracker.
 
-Sledz, Steffen schrieb:
-> NOTE: fetch http://ftp.5z.com/pub/gob/gob2-2.0.14.tar.gz
-> --2008-09-17 12:57:03--  http://ftp.5z.com/pub/gob/gob2-2.0.14.tar.gz
-> Resolving ftp.5z.com... 66.135.50.158
-> Connecting to ftp.5z.com|66.135.50.158|:80... connected.
-> HTTP request sent, awaiting response... 404 Not Found
-> 2008-09-17 12:57:03 ERROR 404: Not Found.
->=20
-> It seems that the URL has changed to http://ftp.5z.com/pub/gob/old/gob2=
--2.0.14.tar.gz
-Fixed for .dev and .stable.
-
-Regards
-Robert
+Bye Henning
 
 
---------------enigD4F1119B2445E4D877D95F45
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkjSHL8ACgkQG9cfwmwwEtpyXgCdFF5E075tzLi0Bt7DZ7f4WqQz
-ulUAoI0h5mUfJTwqGF00WTx300xa30NI
-=MHBh
------END PGP SIGNATURE-----
-
---------------enigD4F1119B2445E4D877D95F45--
