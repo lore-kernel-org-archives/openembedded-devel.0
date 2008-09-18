@@ -1,40 +1,28 @@
-Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1Kg5Ce-00075c-Rs
+	(envelope-from <sledz@DResearch.DE>) id 1KgDec-0005Un-Au
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Sep 2008 00:08:52 +0200
-Received: by qw-out-1920.google.com with SMTP id 5so314734qwf.36
+	Thu, 18 Sep 2008 09:10:18 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 1465716DEFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2008 15:05:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:reply-to
-	:user-agent:mime-version:to:cc:subject:content-type
-	:content-transfer-encoding;
-	bh=12xJtZdvctPpaZxp4VoLwEMMsk/CQGxcobUcktN8spU=;
-	b=vmQb3Igd1BXtTKGpUdAKmBodtTJTZxjtoR2QAkD+qSWLcSSv3BrAtork71VrH0U7hK
-	0QcccvApml8ImHqQEFsCSyDh120sIJRMY65CmjDEdHfZMg58XLGByfy8jwKGYNgDY3Dh
-	1bhN19auD5wEj3oE6hcqdlcA5BM5zti8JAujM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:reply-to:user-agent:mime-version:to:cc:subject
-	:content-type:content-transfer-encoding;
-	b=qVtn8jN5Q/fnDl6t7gnxJdnuDziytRDt7wpJfIzDOicGS38G6DwWNH5H/xBzMrrLXS
-	/8dJfPTVv36UeTBgJZjLBVrMcLzal3A9TEAHmSRHtwryAO6JPNZYDxOwux6nKJxee249
-	kdqHmItaiaVSRyQhnNW8E6jCfYyk7PgoVTY9M=
-Received: by 10.214.12.19 with SMTP id 19mr3256253qal.43.1221689144097;
-	Wed, 17 Sep 2008 15:05:44 -0700 (PDT)
-Received: from ?192.168.35.5? ( [128.252.118.150])
-	by mx.google.com with ESMTPS id 7sm13380834qwb.7.2008.09.17.15.05.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 17 Sep 2008 15:05:43 -0700 (PDT)
-Message-ID: <48D17F33.90805@gmail.com>
-Date: Wed, 17 Sep 2008 17:05:39 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
+	Thu, 18 Sep 2008 09:13:08 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 46F182A4202
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Sep 2008 09:14:16 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Cc: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Granting r/w access for Bernhard Guillon
+Date: Thu, 18 Sep 2008 09:07:07 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF3DF@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: fetching gob2_2.0.14.bb failed   :(
+Thread-Index: AckYuoqYxe4+bTw/TOOSCEmsH9tDbAAoo+LQ
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: fetching gob2_2.0.14.bb failed :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,19 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2008 22:08:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Sep 2008 07:10:19 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-All,
+NOTE: fetch http://ftp.5z.com/pub/gob/gob2-2.0.14.tar.gz
+--2008-09-17 12:57:03--  http://ftp.5z.com/pub/gob/gob2-2.0.14.tar.gz
+Resolving ftp.5z.com... 66.135.50.158
+Connecting to ftp.5z.com|66.135.50.158|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2008-09-17 12:57:03 ERROR 404: Not Found.
 
-I'd like to propose to grant oe r/w access for Bernhard Guillon.
+It seems that the URL has changed to =
+http://ftp.5z.com/pub/gob/old/gob2-2.0.14.tar.gz
 
-He's the lead developer of SimPAD, working actively to help usability 
-issues in the stable branch, and also a contributor to bring opie in 
-shape in oe.
-
-Regards
-Gordon
 
 
