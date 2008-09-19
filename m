@@ -1,31 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KgfT7-0001xA-GK
-	for openembedded-devel@openembedded.org; Fri, 19 Sep 2008 14:52:17 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KgfPp-0005Is-FA
-	for openembedded-devel@openembedded.org; Fri, 19 Sep 2008 12:48:58 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 19 Sep 2008 12:48:53 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 19 Sep 2008 12:48:53 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 19 Sep 2008 14:48:40 +0200
-Message-ID: <gb0738$dcq$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080901030016 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: Math is hard, but please pay attention to PV
+	(envelope-from <zecke@selfish.org>) id 1KghHP-0003Bc-VL
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Sep 2008 16:48:19 +0200
+Received: from echelon.ext.c-base.org ([84.22.107.1]
+	helo=dynamic95.alien.c-base.org)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KghEG-0000GP-PW
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Sep 2008 16:45:04 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 Sep 2008 16:45:13 +0200
+User-Agent: KMail/1.9.9
+References: <gb0738$dcq$1@ger.gmane.org>
+In-Reply-To: <gb0738$dcq$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200809191645.13840.zecke@selfish.org>
+Subject: Re: Math is hard, but please pay attention to PV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Sep 2008 12:52:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 19 Sep 2008 14:48:20 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On Friday 19 September 2008 14:48:40 Koen Kooi wrote:
 
-I know math is hard and noone care about QA, but this shouldn't happen:
+> Anyway, PE has been bumped, things should work again this the next EFL
+> 'upgrade' happens. I just need to find a way to get the past 2 hours of
+> my life back.
 
-Old version:
-libedje0 1:0.9.9.043+cvs20080610-r0
-
-New version:
-libedje0 1:0.5.0.043+svnr35727-r1
-
-Hint: '9' > '5', so package upgrades just got broken.
-
-Now, normally someone would eventually get the math right and bump PE, 
-but this is the *second* time that EFL stuff goes backwards in PV.
-
-Some googling suggests that openmoko/fso 'solved' this by completely 
-deleting the package feeds and having people reflash their devices. That 
-is just wrong.
-
-Anyway, PE has been bumped, things should work again this the next EFL 
-'upgrade' happens. I just need to find a way to get the past 2 hours of 
-my life back.
+Thanks!
 
 
 
