@@ -1,31 +1,39 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ki6XL-0007FI-Qv
-	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 13:58:35 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1Ki6Tu-0001LB-HR
-	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 11:55:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 23 Sep 2008 11:55:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 23 Sep 2008 11:55:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 23 Sep 2008 13:54:23 +0200
-Message-ID: <gbaldf$39s$2@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080912030722 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: pkgconfig.bbclass changes
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1Ki6yS-0004L7-KO
+	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 14:26:36 +0200
+Received: (qmail 12102 invoked from network); 23 Sep 2008 14:23:04 +0200
+Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
+	by leibniz.math.fu-berlin.de with SMTP; 23 Sep 2008 14:23:04 +0200
+Received: (qmail 32477 invoked by uid 9804); 23 Sep 2008 14:23:03 +0200
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 23 Sep 2008 14:22:59 +0200
+Received: (qmail 32448 invoked by uid 9804); 23 Sep 2008 14:22:59 +0200
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by lusin.mi.fu-berlin.de with SMTP; 23 Sep 2008 14:22:59 +0200
+Received: (qmail 12085 invoked from network); 23 Sep 2008 14:22:59 +0200
+Received: from omsk.mi.fu-berlin.de (160.45.45.210)
+	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
+	23 Sep 2008 12:22:59 -0000
+Received: from heinold by omsk.mi.fu-berlin.de with local (Exim 4.63 #1
+	(Debian)) id 1Ki6ux-00006L-Fw
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Sep 2008 14:22:59 +0200
+Date: Tue, 23 Sep 2008 14:22:59 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080923122259.GA32730@mi.fu-berlin.de>
+References: <gbaldf$39s$2@ger.gmane.org>
+X-Envelope-Sender: heinold@mi.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L41+ClamAV[32451](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.210
+MIME-Version: 1.0
+In-Reply-To: <gbaldf$39s$2@ger.gmane.org>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Subject: Re: pkgconfig.bbclass changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 11:58:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Sep 2008 12:26:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Tue, Sep 23, 2008 at 01:54:23PM +0200, Koen Kooi wrote:
+> Hi,
+> 
+> Henning fixed up pkgconfig.bbclass (which should die, since 
+> autotools.bbclass does a much better job), but I think this:
+> 
+> -       for pc in `find ${S} -name '*.pc' -type f | grep -v -- 
+> '-uninstalled.pc$'`; do
+> +       for pc in `find ${D} -name '*.pc' -type f | grep -v -- 
+> '-uninstalled.pc$'`; do
+> 
+> breaks -native recipes.
+> 
+> regards,
+> 
+> Koen
 
 Hi,
 
-Henning fixed up pkgconfig.bbclass (which should die, since 
-autotools.bbclass does a much better job), but I think this:
+sorry you are right. This indeed breaks native packages I didnt
+thought of it, while fixing the pc file of xine. 
 
--       for pc in `find ${S} -name '*.pc' -type f | grep -v -- 
-'-uninstalled.pc$'`; do
-+       for pc in `find ${D} -name '*.pc' -type f | grep -v -- 
-'-uninstalled.pc$'`; do
+I think we can not let die pkgconfig.bbclass, because not all features are
+in autotools.class and there are cases where staging or install
+do not depend on the autotools install routines.
 
-breaks -native recipes.
-
-regards,
-
-Koen
-
+Bye Henning
 
 
