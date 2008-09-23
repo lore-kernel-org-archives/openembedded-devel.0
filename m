@@ -1,32 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [72.14.220.159] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KiFOA-0008GD-6X
-	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 23:25:42 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KiFKg-00024G-KG
-	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 21:22:06 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 23 Sep 2008 21:22:06 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 23 Sep 2008 21:22:06 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 23 Sep 2008 23:21:57 +0200
-Message-ID: <gbbmll$t6i$1@ger.gmane.org>
-References: <20080923211433.GA29169@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080912030722 Shredder/3.0b1pre
-In-Reply-To: <20080923211433.GA29169@denix.org>
-Sender: news <news@ger.gmane.org>
+	(envelope-from <andrea.adami@gmail.com>) id 1KiFYz-00008P-9v
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Sep 2008 23:36:53 +0200
+Received: by fg-out-1718.google.com with SMTP id l26so1969608fgb.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Sep 2008 14:33:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=rozbA+zZU+Q9YPg/STC3I+8CxW9qaGJ18+ei+RZNW6M=;
+	b=LRqbCwvQMX8czWrCGC4S0BhMAEw0uySLZzc8cXTsqK+KYih1Nt4qaWBFYEoJ8bWcfY
+	L16N2uCIEqTNd9+Fnoscc8jub6JyCRNzPHCzROIka9ZVXUJDBWt9LQ63f3AHhpVbocIF
+	KWyJcn4KGNZIXUOe8I7sZ+H70WZENmyaLjNoI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=c2Y5YJcop5cj61kCKjhpLZRfVH4rDwqBGtfNjNClGTVvoWFkMG95IFUsQj4/FKjg2L
+	fYppt9CWT3cC9ftED1GCybiNxTJo2F/OAlrLKqDzluWt6MfoAU06DEX4cETe4I3kybnQ
+	ofWSPH8AYVt1OI/DVMi2ArBwEJvG2PuFDtSTk=
+Received: by 10.187.168.15 with SMTP id v15mr918781fao.100.1222205599243;
+	Tue, 23 Sep 2008 14:33:19 -0700 (PDT)
+Received: by 10.187.224.10 with HTTP; Tue, 23 Sep 2008 14:33:19 -0700 (PDT)
+Message-ID: <d1b08f940809231433j6063c230wbd805140f40b69e@mail.gmail.com>
+Date: Tue, 23 Sep 2008 23:33:19 +0200
+From: "Andrea Adami" <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <gbbmll$t6i$1@ger.gmane.org>
+MIME-Version: 1.0
+References: <20080923211433.GA29169@denix.org> <gbbmll$t6i$1@ger.gmane.org>
 Subject: Re: libxml2_native_python_dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,28 +45,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 21:25:42 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 23 Sep 2008 21:36:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Denys Dmytriyenko wrote:
-> Hi,
->
-> Since couple of days ago I'm seeing this error message when bitbake rebuilds
-> its cache:
->
-> ERROR: Error Method already seen: libxml2_native_python_dir in' libxml2-native_2.6.29.bb' now in 'libxml2-native_2.6.32.bb'
->
-> Even though it says ERROR, it does not break the build.
+talking with zecke I could easily develop a patch:
 
-OE (or bitbake, I get confused easily) has a global method scope, so you 
-get warned when 2 files define the same method.
-The way to fix this would either be to drop .29 or create a .inc file 
-that can be shared between .29 and .32.
+http://www.pastebin.ca/1209737
 
-regards,
+Seems to work here.Please test.
 
-Koen
-
+Andrea
 
 
