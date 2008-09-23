@@ -1,23 +1,33 @@
-Received: from [206.46.252.42] (helo=vms042pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1KiFH3-00034S-GF
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Sep 2008 23:18:26 +0200
-Received: from gandalf.denix.org ([71.255.232.65])
-	by vms042.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
-	(built Apr
-	3 2006)) with ESMTPA id <0K7O007FA30AX8R5@vms042.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	23 Sep 2008 16:14:35 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 082656B83B5; Tue,
-	23 Sep 2008 17:14:34 -0400 (EDT)
-Date: Tue, 23 Sep 2008 17:14:34 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20080923211433.GA29169@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: libxml2_native_python_dir
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KiFOA-0008GD-6X
+	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 23:25:42 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KiFKg-00024G-KG
+	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 21:22:06 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 23 Sep 2008 21:22:06 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 23 Sep 2008 21:22:06 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 23 Sep 2008 23:21:57 +0200
+Message-ID: <gbbmll$t6i$1@ger.gmane.org>
+References: <20080923211433.GA29169@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080912030722 Shredder/3.0b1pre
+In-Reply-To: <20080923211433.GA29169@denix.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: libxml2_native_python_dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,21 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 21:18:26 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 23 Sep 2008 21:25:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Denys Dmytriyenko wrote:
+> Hi,
+>
+> Since couple of days ago I'm seeing this error message when bitbake rebuilds
+> its cache:
+>
+> ERROR: Error Method already seen: libxml2_native_python_dir in' libxml2-native_2.6.29.bb' now in 'libxml2-native_2.6.32.bb'
+>
+> Even though it says ERROR, it does not break the build.
 
-Since couple of days ago I'm seeing this error message when bitbake rebuilds 
-its cache:
+OE (or bitbake, I get confused easily) has a global method scope, so you 
+get warned when 2 files define the same method.
+The way to fix this would either be to drop .29 or create a .inc file 
+that can be shared between .29 and .32.
 
-ERROR: Error Method already seen: libxml2_native_python_dir in' libxml2-native_2.6.29.bb' now in 'libxml2-native_2.6.32.bb'
+regards,
 
-Even though it says ERROR, it does not break the build.
-Should I create a bug report for this?
+Koen
 
--- 
-Denys
 
 
