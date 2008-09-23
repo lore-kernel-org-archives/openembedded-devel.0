@@ -1,34 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ki89C-0002ar-0b
-	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 15:41:46 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ki85l-0005yp-1M
-	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 13:38:13 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 23 Sep 2008 13:38:13 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 23 Sep 2008 13:38:13 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 23 Sep 2008 15:38:04 +0200
-Message-ID: <gbarfs$otc$1@ger.gmane.org>
-References: <gbaldf$39s$2@ger.gmane.org>
-	<20080923122259.GA32730@mi.fu-berlin.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080912030722 Shredder/3.0b1pre
-In-Reply-To: <20080923122259.GA32730@mi.fu-berlin.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: pkgconfig.bbclass changes
+	(envelope-from <openembedded@haerwu.biz>) id 1Ki8vG-0002Xd-D1
+	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 16:31:26 +0200
+Received: (qmail 16376 invoked by uid 813007); 23 Sep 2008 14:27:53 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 23 Sep 2008 14:27:53 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-commits@lists.openembedded.org
+Date: Tue, 23 Sep 2008 16:27:53 +0200
+User-Agent: KMail/1.10.0 (Linux/2.6.27-rc6; KDE/4.1.1; x86_64; ; )
+References: <20080923140653.1363E18806B@amethyst.openembedded.net>
+In-Reply-To: <20080923140653.1363E18806B@amethyst.openembedded.net>
+MIME-Version: 1.0
+Message-Id: <200809231627.54581.openembedded@haerwu.biz>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] : wesnoth 1.4.5:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,47 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 13:41:46 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Sep 2008 14:31:26 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Henning Heinold wrote:
-> On Tue, Sep 23, 2008 at 01:54:23PM +0200, Koen Kooi wrote:
->> Hi,
->>
->> Henning fixed up pkgconfig.bbclass (which should die, since
->> autotools.bbclass does a much better job), but I think this:
->>
->> -       for pc in `find ${S} -name '*.pc' -type f | grep -v --
->> '-uninstalled.pc$'`; do
->> +       for pc in `find ${D} -name '*.pc' -type f | grep -v --
->> '-uninstalled.pc$'`; do
->>
->> breaks -native recipes.
->>
->> regards,
->>
->> Koen
+On Tuesday 23 of September 2008 16:06:53 OE GIT Trial wrote:
+> Author: =A0<thebohemian@openembedded.org>
+> Date: =A0 Tue Sep 23 13:36:09 2008 +0000
 >
-> Hi,
->
-> sorry you are right. This indeed breaks native packages I didnt
-> thought of it, while fixing the pc file of xine.
+> wesnoth 1.4.5:
+> =A0- remove --enable-lite so we can package music and sound on our own
+> =A0- added wesnoth-music, wesnoth-sounds, wesnoth-all-campaigns (all
+> optional) binary packages - added nice descriptions to base packages
 
-I've been there myself: fixing bugs and then hearing people about 
--native being broken.
+Can you read CommitPolicy and apply to it? I see lot of commits from you=20
+which are unreadable in "git shortlog" type of changelogs.
 
-> I think we can not let die pkgconfig.bbclass, because not all features are
-> in autotools.class and there are cases where staging or install
-> do not depend on the autotools install routines.
+=46irst line of commit message is for summary - not only for listing=20
+affected recipes.
 
-You are completely right about that, but we should move over autotools 
-based recipes to the autotools code and only use pkgconfig.bbclass for 
-non-autotooled recipes.
+"wesnoth: split packaging of music/sounds/campaings" would be better=20
+then your version.
+=2D-=20
+JID: hrw@jabber.org
 
-regards,
-
-Koen
 
 
 
