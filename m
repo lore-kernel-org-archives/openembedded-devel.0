@@ -1,25 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1Ki97d-0005GR-EI
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Sep 2008 16:44:13 +0200
-Received: (qmail invoked by alias); 23 Sep 2008 14:40:38 -0000
-Received: from e178113046.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.113.46]
-	by mail.gmx.net (mp050) with SMTP; 23 Sep 2008 16:40:38 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+rZxlEff2rd2PoTPKg29vw+izh4ZPBSQ41hjsuiv
-	lzxcKo6tp+DDJQ
-Message-ID: <48D8FFEF.5070002@gmx.net>
-Date: Tue, 23 Sep 2008 16:40:47 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
+Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1Ki9AR-0005MX-Mn
+	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 16:47:07 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so525016ywr.30
+	for <openembedded-devel@openembedded.org>;
+	Tue, 23 Sep 2008 07:43:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=Yqnb0+SodUcnqQbmlbfU54xPJLqk+EFMUJ66lHje7cA=;
+	b=OvEMw5cbQ1eE8Y8Y9Cu98vv6QqTr5zGa6cCYSa5dbcx9VMBhK2Co0aqkfg/TcQzP+q
+	T1YSw12la1rTO1tpD61Q7qurUaT65FMIPmSJ3K0l67KExXltP3qgYucU6yRdO5wt877f
+	pg3OphkR98WFU4KJo8ZRPI3Ns8wjVVHd5iFaE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=o3rSS6g7l3UEgJcJ5PEFBP7Y3FRalPQFYanJh3CvA/LsyJ0vxN3jPZxKHPkVlTgcAf
+	oLGAYd6eyG97qONRhLwidEQKJnLwmqZzOxEcDQGKN1rGHse0w+ivN8BVDU6ymEO53A60
+	p0TfJub49fZwph61tOBeMeyH5oa29tuSWKkm4=
+Received: by 10.100.206.15 with SMTP id d15mr4442008ang.29.1222181014071;
+	Tue, 23 Sep 2008 07:43:34 -0700 (PDT)
+Received: by 10.100.105.13 with HTTP; Tue, 23 Sep 2008 07:43:33 -0700 (PDT)
+Message-ID: <bdb0025f0809230743h425306bcu4b056aa9c4fc0097@mail.gmail.com>
+Date: Tue, 23 Sep 2008 11:43:33 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+To: openembedded-devel@openembedded.org
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.58
-Subject: Any N770s you are willing to spend?
+Subject: do you have this error when building kernel module? (KERNEL_VERSION)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,59 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 14:44:13 -0000
-X-Groupsio-MsgNum: 5931
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig4328912540CA1686C1DBF4F8"
+X-List-Received-Date: Tue, 23 Sep 2008 14:47:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---------------enig4328912540CA1686C1DBF4F8
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi there,
 
-Hi,
-in the past people here tend to ignore my posts regarding the dreaded
-Nokia internet tablets. I hope this will be different this time. :|
+I'm experiencing an strange error when building some kernel modules for Mamona.
 
-This post targets those of you who own a N770 and have no use for it.
+That's the error message:
+NOTE: Runtime target '()' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['()']
 
-First things first: Nokia has made STM *publish* the *specs*[0] for the
-STLC45xx wifi chipsets used in the N8x0 device series. This is nice and
-will make many people happy. Still this leaves those owning the old N770
-in the dust since those devices use the earlier STLC4370. Both chips are
-actually variants of the P54 for which free drivers exist.
+That's because we have on module.bbclass this:
+RDEPENDS += "kernel (${KERNEL_VERSION}) update-modules"
+but on the very begining $KERNEL_VERSION is null... After some builds
+it comes from  module-base.bbclass:
+export KERNEL_VERSION =
+"${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
+that gets from a already built kernel on STAGING_KERNEL_DIR.
 
-Nokia is also planning to release their 'dsme' program which manages the
-tablets hardware (along with 'bme', which will AFAIK remain closed).
+I believe that this is an structure problem that we need to solve, but
+I don't know what should be the best solution.
+* export an hardcoded KERNEL_VERSION?
+* remove KERNEL_VERSION from the rdepends?
 
-I think there have never been better times to get those tablets freed
-than now. The nice folks from Mamona already have a nice distribution
-which today gets stuffed with some proprietary parts and works on a
-kernel from the stoneage (aka 2.6.16).
+I was wondering as well why did no one has experienced it before.... any idea?
 
-If you would be willing to donate your N770 to someone who wants to
-write a driver for the stlc4370 please let me know.
+Thanks
 
-Thanks!
-Robert
-
-[0] -
-http://linuxwireless.org/en/developers/Documentation/specs?action=3DAttac=
-hFile&do=3Dview&target=3DSTSW45x0C_LMAC_API_ED1P4.pdf
+-- 
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
---------------enig4328912540CA1686C1DBF4F8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkjY/+8ACgkQG9cfwmwwEtoIewCeIxBdm+G5ep2oaog3m6WpQO/m
-rhQAoIdcFIbUxgxb9hHR2QglxtxxnxHP
-=BtHD
------END PGP SIGNATURE-----
-
---------------enig4328912540CA1686C1DBF4F8--
