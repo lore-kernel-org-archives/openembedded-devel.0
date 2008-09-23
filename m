@@ -1,33 +1,38 @@
-Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
+Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1Ki9AR-0005MX-Mn
-	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 16:47:07 +0200
-Received: by yw-out-1718.google.com with SMTP id 5so525016ywr.30
-	for <openembedded-devel@openembedded.org>;
-	Tue, 23 Sep 2008 07:43:34 -0700 (PDT)
+	(envelope-from <andrea.adami@gmail.com>) id 1KiA5g-0003Aj-9D
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Sep 2008 17:46:16 +0200
+Received: by fg-out-1718.google.com with SMTP id l26so1882001fgb.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Sep 2008 08:42:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=Yqnb0+SodUcnqQbmlbfU54xPJLqk+EFMUJ66lHje7cA=;
-	b=OvEMw5cbQ1eE8Y8Y9Cu98vv6QqTr5zGa6cCYSa5dbcx9VMBhK2Co0aqkfg/TcQzP+q
-	T1YSw12la1rTO1tpD61Q7qurUaT65FMIPmSJ3K0l67KExXltP3qgYucU6yRdO5wt877f
-	pg3OphkR98WFU4KJo8ZRPI3Ns8wjVVHd5iFaE=
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=x16u5AcLPIQIR2dk3rFp8t4Nug3IGUMr0l9cvFqLWVU=;
+	b=u/vA1jrDCtRPVw/Svy9jFBmyzqpXclEWwDRQoZJt29u5sVWhkXzzrYLwkAKthVpOIV
+	j32/6T+tyz2bTxQlQ/F5uXslVOFoxlJGseE7LWwTUHHFTseNVW84P7hCmBKdQGOO5Lrd
+	9WqzXnhBVAIVrNpYgg4yDKprm8dLjA9E2PzjU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=o3rSS6g7l3UEgJcJ5PEFBP7Y3FRalPQFYanJh3CvA/LsyJ0vxN3jPZxKHPkVlTgcAf
-	oLGAYd6eyG97qONRhLwidEQKJnLwmqZzOxEcDQGKN1rGHse0w+ivN8BVDU6ymEO53A60
-	p0TfJub49fZwph61tOBeMeyH5oa29tuSWKkm4=
-Received: by 10.100.206.15 with SMTP id d15mr4442008ang.29.1222181014071;
-	Tue, 23 Sep 2008 07:43:34 -0700 (PDT)
-Received: by 10.100.105.13 with HTTP; Tue, 23 Sep 2008 07:43:33 -0700 (PDT)
-Message-ID: <bdb0025f0809230743h425306bcu4b056aa9c4fc0097@mail.gmail.com>
-Date: Tue, 23 Sep 2008 11:43:33 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
-To: openembedded-devel@openembedded.org
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=CJPW330O5FT1MQgx4jH/CSMW8OA1A7wG5o1089LWIaGZxyjoZstr2AYnhJ28/UmOlu
+	lFxeMXDrFVI2YSWY0rel8q7vYBy4lQeBq7QNrr4nfpDZaCwT850sZQvNl45dy3f6CkUc
+	5ntPNqLNG1xnhcYQQBMzHIMul0AaKI5B5DMXc=
+Received: by 10.187.246.10 with SMTP id y10mr770902far.58.1222184563212;
+	Tue, 23 Sep 2008 08:42:43 -0700 (PDT)
+Received: by 10.187.224.10 with HTTP; Tue, 23 Sep 2008 08:42:43 -0700 (PDT)
+Message-ID: <d1b08f940809230842j78a43e64r6f2e43fcecd1f656@mail.gmail.com>
+Date: Tue, 23 Sep 2008 17:42:43 +0200
+From: "Andrea Adami" <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <gbaj23$rup$1@ger.gmane.org>
 MIME-Version: 1.0
-Subject: do you have this error when building kernel module? (KERNEL_VERSION)
+References: <d1b08f940809230158s78f04a4bq866bf586dce5cafe@mail.gmail.com>
+	<gbaj23$rup$1@ger.gmane.org>
+Subject: Re: QA Logs now on tinderbox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 14:47:08 -0000
+X-List-Received-Date: Tue, 23 Sep 2008 15:46:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hi there,
+>These two are the most common:
 
-I'm experiencing an strange error when building some kernel modules for Mamona.
+Well, it is clear to me these are 'cruft' in staging. Two wrong
+packages are tainting the whole staging area.
+(This phenomenon has been already seen with libmudflap, libc, ... in
+angstrom-stable [1])
 
-That's the error message:
-NOTE: Runtime target '()' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['()']
+But...why not fix these two immediately?
 
-That's because we have on module.bbclass this:
-RDEPENDS += "kernel (${KERNEL_VERSION}) update-modules"
-but on the very begining $KERNEL_VERSION is null... After some builds
-it comes from  module-base.bbclass:
-export KERNEL_VERSION =
-"${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
-that gets from a already built kernel on STAGING_KERNEL_DIR.
+Andrea
 
-I believe that this is an structure problem that we need to solve, but
-I don't know what should be the best solution.
-* export an hardcoded KERNEL_VERSION?
-* remove KERNEL_VERSION from the rdepends?
 
-I was wondering as well why did no one has experienced it before.... any idea?
-
-Thanks
-
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+[1]
+ERROR: QA Issue: libmudflap.la failed sanity test (installed) in path
+/OE/angstrom-tmp//staging/arm-angstrom-linux-gnueabi/lib
+NOTE: a QA error occured but will not be logged because QA_LOG is not set
+ERROR: QA Issue: libsupc++.la failed sanity test (installed) in path
+/OE/angstrom-tmp//staging/arm-angstrom-linux-gnueabi/lib
+NOTE: a QA error occured but will not be logged because QA_LOG is not set
+ERROR: QA Issue: libmudflapth.la failed sanity test (installed) in path
+/OE/angstrom-tmp//staging/arm-angstrom-linux-gnueabi/lib
+NOTE: a QA error occured but will not be logged because QA_LOG is not set
+ERROR: QA Issue: libstdc++.la failed sanity test (installed) in path
+/OE/angstrom-tmp//staging/arm-angstrom-linux-gnueabi/lib
+NOTE: a QA error occured but will not be logged because QA_LOG is not set
 
 
