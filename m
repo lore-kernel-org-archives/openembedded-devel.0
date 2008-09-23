@@ -1,22 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1Ki8vG-0002Xd-D1
-	for openembedded-devel@openembedded.org; Tue, 23 Sep 2008 16:31:26 +0200
-Received: (qmail 16376 invoked by uid 813007); 23 Sep 2008 14:27:53 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Sep 2008 14:27:53 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-commits@lists.openembedded.org
-Date: Tue, 23 Sep 2008 16:27:53 +0200
-User-Agent: KMail/1.10.0 (Linux/2.6.27-rc6; KDE/4.1.1; x86_64; ; )
-References: <20080923140653.1363E18806B@amethyst.openembedded.net>
-In-Reply-To: <20080923140653.1363E18806B@amethyst.openembedded.net>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Ki97d-0005GR-EI
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Sep 2008 16:44:13 +0200
+Received: (qmail invoked by alias); 23 Sep 2008 14:40:38 -0000
+Received: from e178113046.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.113.46]
+	by mail.gmx.net (mp050) with SMTP; 23 Sep 2008 16:40:38 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+rZxlEff2rd2PoTPKg29vw+izh4ZPBSQ41hjsuiv
+	lzxcKo6tp+DDJQ
+Message-ID: <48D8FFEF.5070002@gmx.net>
+Date: Tue, 23 Sep 2008 16:40:47 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-Message-Id: <200809231627.54581.openembedded@haerwu.biz>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] : wesnoth 1.4.5:
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.58
+Subject: Any N770s you are willing to spend?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,32 +33,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 14:31:26 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 23 Sep 2008 14:44:13 -0000
+X-Groupsio-MsgNum: 5931
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig4328912540CA1686C1DBF4F8"
+
+--------------enig4328912540CA1686C1DBF4F8
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-On Tuesday 23 of September 2008 16:06:53 OE GIT Trial wrote:
-> Author: =A0<thebohemian@openembedded.org>
-> Date: =A0 Tue Sep 23 13:36:09 2008 +0000
->
-> wesnoth 1.4.5:
-> =A0- remove --enable-lite so we can package music and sound on our own
-> =A0- added wesnoth-music, wesnoth-sounds, wesnoth-all-campaigns (all
-> optional) binary packages - added nice descriptions to base packages
+Hi,
+in the past people here tend to ignore my posts regarding the dreaded
+Nokia internet tablets. I hope this will be different this time. :|
 
-Can you read CommitPolicy and apply to it? I see lot of commits from you=20
-which are unreadable in "git shortlog" type of changelogs.
+This post targets those of you who own a N770 and have no use for it.
 
-=46irst line of commit message is for summary - not only for listing=20
-affected recipes.
+First things first: Nokia has made STM *publish* the *specs*[0] for the
+STLC45xx wifi chipsets used in the N8x0 device series. This is nice and
+will make many people happy. Still this leaves those owning the old N770
+in the dust since those devices use the earlier STLC4370. Both chips are
+actually variants of the P54 for which free drivers exist.
 
-"wesnoth: split packaging of music/sounds/campaings" would be better=20
-then your version.
-=2D-=20
-JID: hrw@jabber.org
+Nokia is also planning to release their 'dsme' program which manages the
+tablets hardware (along with 'bme', which will AFAIK remain closed).
+
+I think there have never been better times to get those tablets freed
+than now. The nice folks from Mamona already have a nice distribution
+which today gets stuffed with some proprietary parts and works on a
+kernel from the stoneage (aka 2.6.16).
+
+If you would be willing to donate your N770 to someone who wants to
+write a driver for the stlc4370 please let me know.
+
+Thanks!
+Robert
+
+[0] -
+http://linuxwireless.org/en/developers/Documentation/specs?action=3DAttac=
+hFile&do=3Dview&target=3DSTSW45x0C_LMAC_API_ED1P4.pdf
 
 
+--------------enig4328912540CA1686C1DBF4F8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iEYEAREIAAYFAkjY/+8ACgkQG9cfwmwwEtoIewCeIxBdm+G5ep2oaog3m6WpQO/m
+rhQAoIdcFIbUxgxb9hHR2QglxtxxnxHP
+=BtHD
+-----END PGP SIGNATURE-----
+
+--------------enig4328912540CA1686C1DBF4F8--
