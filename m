@@ -1,34 +1,27 @@
-Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Ki3m0-0004gk-4R
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Ki4Hx-0002H1-WE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Sep 2008 11:01:32 +0200
-Received: by fg-out-1718.google.com with SMTP id l26so1777380fgb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2008 01:58:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=4LeqbfPddgNd0z+00Rt1eAWMvbxeuis4zc4OydhQz90=;
-	b=EYqMzbGgP8XEfJzufoWThI26WYlTifSug6ZQPQ72Ww2+DzksQY1FZaYpGt0f/jVHHh
-	kZjFQxZhsG6LNz/WkAA2Oqs8nWx9OgoV5k6iwScNdQ++UTCd1uNONDeCXRhALK9a9NDZ
-	GVV4XjoSV80UJ1IjvnIrXCN/gCKyNrAL66xL8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=MznzzfekBsjJzLcTGwvWqgK3+Sx6Fut1QuRm89r4KD1dU9djH4ZSTUtmr0ln43q+Nq
-	BEjwDRKsf1G8xs4YFX+zizqJcwWSpJ2OjFPlVQt42I97GaRIY7CML2YR2MHXz6MD7Ypg
-	FavPYzcUEhmb3XhVm0u3xX8A37lf2515y+0+U=
-Received: by 10.187.210.10 with SMTP id m10mr679963faq.19.1222160280076;
-	Tue, 23 Sep 2008 01:58:00 -0700 (PDT)
-Received: by 10.187.224.10 with HTTP; Tue, 23 Sep 2008 01:58:00 -0700 (PDT)
-Message-ID: <d1b08f940809230158s78f04a4bq866bf586dce5cafe@mail.gmail.com>
-Date: Tue, 23 Sep 2008 10:58:00 +0200
-From: "Andrea Adami" <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Tue, 23 Sep 2008 11:34:34 +0200
+Received: (qmail invoked by alias); 23 Sep 2008 09:30:59 -0000
+Received: from e178113046.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.113.46]
+	by mail.gmx.net (mp025) with SMTP; 23 Sep 2008 11:30:59 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19lNj4VjrllUsnRBCqnGMrBOrCIDVkXvnNkG9mmaz
+	ijchIjtVMrpyH4
+Message-ID: <48D8B75D.7030302@gmx.net>
+Date: Tue, 23 Sep 2008 11:31:09 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-Subject: QA Logs now on tinderbox
+To: openembedded-devel@lists.openembedded.org
+References: <20080922205525.GA23908@rhein.zuhause.netz>
+In-Reply-To: <20080922205525.GA23908@rhein.zuhause.netz>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.62
+Subject: Re: Finer granularity for RSUGGEST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,65 +35,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 09:01:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Sep 2008 09:34:34 -0000
+X-Groupsio-MsgNum: 5921
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig0D64451CFFFB6924A96D4DB1"
 
-Hi,
+--------------enig0D64451CFFFB6924A96D4DB1
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-yesterday oestats was expanded and now the QA errors are logged.
+Henning Heinold schrieb:
+> Hi,
+>=20
+> after fiddling with a filesystem kernel modul and his tools I noticed
+> in package_ipk.bbclass that if we set RSUGGESTS Variable the suggest fi=
+eld
+> in the ipk is set for all packages even -doc -dbg -dev and self defined=
 
-Here a first bunch of QA:
+> packages.  I personal
+> think is not a good choice and way. In my example the kernel module onl=
+y needs
+> to suggest the tools package. And with the old method the tools package=
+ suggest
+> it self.
+>=20
+> I have prepared a patch for ipk and deb that let us set:
+>=20
+> ${PN}_RSUGGESTS =3D mooo
+I do not think this is a good idea. You can have the same effect just
+now by doing
 
-These two are the most common:
+RSUGGEST_${PN} =3D "mooo"
 
-evil hides inside the .pc, staging,
-/staging/armeb-angstrom-linux-gnueabi/usr/lib/pkgconfig/pycairo.pc
+Currently if you set a variable that affects the binary package you know
+it will end up in all of the binary packages declared in PACKAGES. E.g.
+MAINTAINER, DESCRIPTION, LICENSE and so on.
 
-evil hides inside the .pc, staging,
-/staging/armeb-angstrom-linux-gnueabi/usr/lib/pkgconfig/ORBit-2.0.pc
+You can easily prevent this by doing:
 
-########
+PACKAGES =3D "${PN} ${PN}-data"
 
-non dev contains .so, gcc,
-/work/armv5teb-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/gcc/usr/lib/gcc/armeb-angstrom-linux-gnueabi/4.2.4/libgcc_s.so
+LICENSE =3D "GPLv2"
+LICENSE_${PN}-data =3D "CC-BY-SA"
 
-non dev contains .so, lirc,
-/work/akita-angstrom-linux-gnueabi/lirc-0.8.1+cvs20070307-r1/install/lirc/usr/lib/liblirc_client.so
+Or am I missing an important point here?
 
-non dev contains .so, klibc,
-/work/c7x0-angstrom-linux-gnueabi/klibc-1.5-r9/install/klibc/lib/klibc.so
-
-non dev contains .so, libpython2,
-/work/armv5teb-angstrom-linux-gnueabi/python-2.5.2-ml10/install/libpython2/usr/lib/libpython2.5.so
-
-non dev contains .so, db,
-/work/avr32-angstrom-linux-uclibc/db-4.3.29-r10/install/db/usr/lib/libdb-4.so
-
-non dev contains .so, smpeg,
-/work/armv5te-angstrom-linux-gnueabi/smpeg-0.4.5+rsvn370-r0/install/smpeg/usr/lib/libsmpeg.so
-
-non dev contains .so, librfid,
-/work/i586-angstrom-linux/librfid-0.2.0+svnr2094-r0/install/librfid/usr/lib/librfid.so
-
-
-non dev contains .so, ewl-engines,
-/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_software_x11.so
-non dev contains .so, ewl-engines,
-/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/x11.so
-non dev contains .so, ewl-engines,
-/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas.so
-non dev contains .so, ewl-engines,
-/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_buffer.so
-non dev contains .so, ewl-engines,
-/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_fb.so
-non dev contains .so, ewl-engines,
-/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_xrender_x11.so
-non dev contains .so, ewl-engines,
-/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_software_16_x11.so
+Regards
+Robert
 
 
-Andrea
+--------------enig0D64451CFFFB6924A96D4DB1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iEYEAREIAAYFAkjYt10ACgkQG9cfwmwwEtrEJwCfYn/YsJBg1HOcRvwTf3NStaSk
+lrUAnigJSpAUWSooRfLhKXu+kND1a63j
+=j56C
+-----END PGP SIGNATURE-----
+
+--------------enig0D64451CFFFB6924A96D4DB1--
