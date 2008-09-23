@@ -1,37 +1,34 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1KhsUi-0007Jp-UY
+	(envelope-from <andrea.adami@gmail.com>) id 1Ki3m0-0004gk-4R
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Sep 2008 22:58:56 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 9257B8400A2
+	Tue, 23 Sep 2008 11:01:32 +0200
+Received: by fg-out-1718.google.com with SMTP id l26so1777380fgb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Sep 2008 22:55:27 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7233D8400A0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Sep 2008 22:55:26 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (e177084210.adsl.alicedsl.de
-	[85.177.84.210]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Sep 2008 22:55:26 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id CDDE43C1D7; Mon, 22 Sep 2008 22:55:25 +0200 (CEST)
-Date: Mon, 22 Sep 2008 22:55:25 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 23 Sep 2008 01:58:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=4LeqbfPddgNd0z+00Rt1eAWMvbxeuis4zc4OydhQz90=;
+	b=EYqMzbGgP8XEfJzufoWThI26WYlTifSug6ZQPQ72Ww2+DzksQY1FZaYpGt0f/jVHHh
+	kZjFQxZhsG6LNz/WkAA2Oqs8nWx9OgoV5k6iwScNdQ++UTCd1uNONDeCXRhALK9a9NDZ
+	GVV4XjoSV80UJ1IjvnIrXCN/gCKyNrAL66xL8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=MznzzfekBsjJzLcTGwvWqgK3+Sx6Fut1QuRm89r4KD1dU9djH4ZSTUtmr0ln43q+Nq
+	BEjwDRKsf1G8xs4YFX+zizqJcwWSpJ2OjFPlVQt42I97GaRIY7CML2YR2MHXz6MD7Ypg
+	FavPYzcUEhmb3XhVm0u3xX8A37lf2515y+0+U=
+Received: by 10.187.210.10 with SMTP id m10mr679963faq.19.1222160280076;
+	Tue, 23 Sep 2008 01:58:00 -0700 (PDT)
+Received: by 10.187.224.10 with HTTP; Tue, 23 Sep 2008 01:58:00 -0700 (PDT)
+Message-ID: <d1b08f940809230158s78f04a4bq866bf586dce5cafe@mail.gmail.com>
+Date: Tue, 23 Sep 2008 10:58:00 +0200
+From: "Andrea Adami" <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080922205525.GA23908@rhein.zuhause.netz>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Finer granularity for RSUGGEST
+Subject: QA Logs now on tinderbox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,74 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Sep 2008 20:58:57 -0000
-X-Groupsio-MsgNum: 5919
-Content-Type: multipart/mixed; boundary="Nq2Wo0NMKNjxTN9z"
-Content-Disposition: inline
-
---Nq2Wo0NMKNjxTN9z
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 23 Sep 2008 09:01:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
 Hi,
 
-after fiddling with a filesystem kernel modul and his tools I noticed
-in package_ipk.bbclass that if we set RSUGGESTS Variable the suggest field
-in the ipk is set for all packages even -doc -dbg -dev and self defined
-packages.  I personal
-think is not a good choice and way. In my example the kernel module only needs
-to suggest the tools package. And with the old method the tools package suggest
-it self.
+yesterday oestats was expanded and now the QA errors are logged.
 
-I have prepared a patch for ipk and deb that let us set:
+Here a first bunch of QA:
 
-${PN}_RSUGGESTS = mooo
+These two are the most common:
 
-I hope the patch do not break the old behavior.
+evil hides inside the .pc, staging,
+/staging/armeb-angstrom-linux-gnueabi/usr/lib/pkgconfig/pycairo.pc
 
-If I get positiv feedback I will check it in.
+evil hides inside the .pc, staging,
+/staging/armeb-angstrom-linux-gnueabi/usr/lib/pkgconfig/ORBit-2.0.pc
 
-Bye Henning
+########
 
---Nq2Wo0NMKNjxTN9z
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="package.patch"
+non dev contains .so, gcc,
+/work/armv5teb-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/gcc/usr/lib/gcc/armeb-angstrom-linux-gnueabi/4.2.4/libgcc_s.so
 
-#
-# old_revision [1cf701ebedabbcfca1fb1b88f2077258b1dfd000]
-#
-# patch "classes/package_deb.bbclass"
-#  from [a780e6f7dff8c1d720645d2b4f66b6f8e05d576d]
-#    to [962d33da2b1d4cb489270ad65397c5ce10adf8e7]
-# 
-# patch "classes/package_ipk.bbclass"
-#  from [74c1d60c5b62a72c229c78bd65e5a0a0cf6486f1]
-#    to [acf85c751b2bba622bd398108d70a8bc3854354f]
-#
-============================================================
---- classes/package_deb.bbclass	a780e6f7dff8c1d720645d2b4f66b6f8e05d576d
-+++ classes/package_deb.bbclass	962d33da2b1d4cb489270ad65397c5ce10adf8e7
-@@ -193,7 +193,7 @@ python do_package_deb () {
-         rdepends = [dep for dep in rdepends if not '*' in dep]
-         rrecommends = explode_deps(unicode(bb.data.getVar("RRECOMMENDS", localdata, 1) or ""))
-         rrecommends = [rec for rec in rrecommends if not '*' in rec]
--        rsuggests = (unicode(bb.data.getVar("RSUGGESTS", localdata, 1) or "")).split()
-+	rsuggests = (unicode(bb.data.getVar("RSUGGESTS", localdata, 1) or bb.data.getVar(pkgname + '_RSUGGESTS', localdata, 1) or "")).split()
-         rprovides = (unicode(bb.data.getVar("RPROVIDES", localdata, 1) or "")).split()
-         rreplaces = (unicode(bb.data.getVar("RREPLACES", localdata, 1) or "")).split()
-         rconflicts = (unicode(bb.data.getVar("RCONFLICTS", localdata, 1) or "")).split()
-============================================================
---- classes/package_ipk.bbclass	74c1d60c5b62a72c229c78bd65e5a0a0cf6486f1
-+++ classes/package_ipk.bbclass	acf85c751b2bba622bd398108d70a8bc3854354f
-@@ -229,7 +229,8 @@ python do_package_ipk () {
- 
- 		rdepends = explode_deps(bb.data.getVar("RDEPENDS", localdata, 1) or "")
- 		rrecommends = explode_deps(bb.data.getVar("RRECOMMENDS", localdata, 1) or "")
--		rsuggests = (bb.data.getVar("RSUGGESTS", localdata, 1) or "").split()
-+		rsuggests = (bb.data.getVar("RSUGGESTS", localdata, 1) or bb.data.getVar(pkgname + '_RSUGGESTS', localdata, 1) or "").split()
-+
- 		rprovides = (bb.data.getVar("RPROVIDES", localdata, 1) or "").split()
- 		rreplaces = (bb.data.getVar("RREPLACES", localdata, 1) or "").split()
- 		rconflicts = (bb.data.getVar("RCONFLICTS", localdata, 1) or "").split()
+non dev contains .so, lirc,
+/work/akita-angstrom-linux-gnueabi/lirc-0.8.1+cvs20070307-r1/install/lirc/usr/lib/liblirc_client.so
 
---Nq2Wo0NMKNjxTN9z--
+non dev contains .so, klibc,
+/work/c7x0-angstrom-linux-gnueabi/klibc-1.5-r9/install/klibc/lib/klibc.so
+
+non dev contains .so, libpython2,
+/work/armv5teb-angstrom-linux-gnueabi/python-2.5.2-ml10/install/libpython2/usr/lib/libpython2.5.so
+
+non dev contains .so, db,
+/work/avr32-angstrom-linux-uclibc/db-4.3.29-r10/install/db/usr/lib/libdb-4.so
+
+non dev contains .so, smpeg,
+/work/armv5te-angstrom-linux-gnueabi/smpeg-0.4.5+rsvn370-r0/install/smpeg/usr/lib/libsmpeg.so
+
+non dev contains .so, librfid,
+/work/i586-angstrom-linux/librfid-0.2.0+svnr2094-r0/install/librfid/usr/lib/librfid.so
+
+
+non dev contains .so, ewl-engines,
+/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_software_x11.so
+non dev contains .so, ewl-engines,
+/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/x11.so
+non dev contains .so, ewl-engines,
+/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas.so
+non dev contains .so, ewl-engines,
+/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_buffer.so
+non dev contains .so, ewl-engines,
+/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_fb.so
+non dev contains .so, ewl-engines,
+/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_xrender_x11.so
+non dev contains .so, ewl-engines,
+/work/armv5te-angstrom-linux-gnueabi/ewl-2_0.5.2.042+svnr35984-r3/install/ewl-engines/usr/lib/ewl/engines/evas_software_16_x11.so
+
+
+Andrea
+
+
