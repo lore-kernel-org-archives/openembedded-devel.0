@@ -1,21 +1,30 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [194.183.74.10] (helo=smtp.mesa-lab.it ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1KiQdj-0005gi-HV
+	(envelope-from <alex@amiran.it>) id 1KiQg0-0005pR-Uj
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Sep 2008 11:26:31 +0200
-Received: from [172.16.23.197] (firewall.tw.openmoko.org [124.219.5.210])
-	by drlauer-research.com (Postfix) with ESMTP id C1FAC584D38
+	Wed, 24 Sep 2008 11:28:52 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by smtp.mesa-lab.it (Postfix) with ESMTP id 395FF5F40E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2008 11:34:00 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Wed, 24 Sep 2008 11:25:15 +0200 (CEST)
+Received: from smtp.mesa-lab.it ([127.0.0.1])
+	by localhost (posta.mesa-lab.it [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id AYHJWnfgnbM6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Sep 2008 11:25:15 +0200 (CEST)
+Received: from [192.168.1.201]
+	(host146-91-static.34-85-b.business.telecomitalia.it [85.34.91.146])
+	by smtp.mesa-lab.it (Postfix) with ESMTP id D8C5F5F40E1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Sep 2008 11:25:14 +0200 (CEST)
+From: Alessandro Pellizzari <alex@amiran.it>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gbct33$rh4$1@ger.gmane.org>
+In-Reply-To: <gb0738$dcq$1@ger.gmane.org>
 References: <gb0738$dcq$1@ger.gmane.org>
-	<200809191645.13840.zecke@selfish.org>  <gbct33$rh4$1@ger.gmane.org>
-Date: Wed, 24 Sep 2008 17:21:40 +0800
-Message-Id: <1222248100.15974.4.camel@ip6-localhost>
+Date: Wed, 24 Sep 2008 11:24:24 +0200
+Message-Id: <1222248265.4350.11.camel@al.mesalab.lan>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.0-1mdv2009.0 
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: Math is hard, but please pay attention to PV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,30 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2008 09:26:31 -0000
+X-List-Received-Date: Wed, 24 Sep 2008 09:28:53 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Am Mittwoch, den 24.09.2008, 10:17 +0200 schrieb Koen Kooi:
-> Holger Freyther wrote:
-> > On Friday 19 September 2008 14:48:40 Koen Kooi wrote:
-> >
-> >> Anyway, PE has been bumped, things should work again this the next EFL
-> >> 'upgrade' happens. I just need to find a way to get the past 2 hours of
-> >> my life back.
-> >
-> > Thanks!
+Il giorno ven, 19/09/2008 alle 14.48 +0200, Koen Kooi ha scritto:
+
+> Old version:
+> libedje0 1:0.9.9.043+cvs20080610-r0
 > 
-> I just fixed linux-openmoko as well, '0' is _less_ than '7', so changing 
-> PR from 'r7' to 'r0' is *bad*, I've increased it to 'r8' now.
+> New version:
+> libedje0 1:0.5.0.043+svnr35727-r1
 
-> Seriously, is math that hard for openmoko people?
+Speaking of this, last weekend I tried to create a recipe for fbreader
+0.8.17, but bitbake insisted on compiling fbreader 0.8.2a because 2 > 1
+I had to remove the recipe for 0.8.2a from packages/fbreader.
 
-Much less the math but rather being used to reset PR on version updates.
-Alas this breaks with hash-based SCMs. I begin to regret the decision to
-use git in my projects.
+Bye.
 
-:M:
+P.S.: No, I didn't succeed. I must study bb recipes better and review
+some patches that don't apply.
+
+-- 
+Alessandro Pellizzari
 
 
 
