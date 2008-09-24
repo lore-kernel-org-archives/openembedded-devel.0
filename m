@@ -1,36 +1,37 @@
-Received: from [72.14.220.159] (helo=fg-out-1718.google.com)
+Received: from [209.85.198.248] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1KiFYz-00008P-9v
+	(envelope-from <raj.khem@gmail.com>) id 1KiHww-0005hm-7Z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Sep 2008 23:36:53 +0200
-Received: by fg-out-1718.google.com with SMTP id l26so1969608fgb.20
+	Wed, 24 Sep 2008 02:09:46 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so3075148rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2008 14:33:19 -0700 (PDT)
+	Tue, 23 Sep 2008 17:06:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:content-disposition:references;
-	bh=rozbA+zZU+Q9YPg/STC3I+8CxW9qaGJ18+ei+RZNW6M=;
-	b=LRqbCwvQMX8czWrCGC4S0BhMAEw0uySLZzc8cXTsqK+KYih1Nt4qaWBFYEoJ8bWcfY
-	L16N2uCIEqTNd9+Fnoscc8jub6JyCRNzPHCzROIka9ZVXUJDBWt9LQ63f3AHhpVbocIF
-	KWyJcn4KGNZIXUOe8I7sZ+H70WZENmyaLjNoI=
+	bh=4ZjZ5ja2QMdoxBpFk8zfoljsqwzDRqsyc3X9CxF2cCM=;
+	b=j6E4ftIx2Woq0v1ALxwyfqtvBAXPI3PkPtmSjyRYcnan+audyM1C2Xh5QMN4pSziuQ
+	4sb9nfQG3x1bS9Q3lTbxwlGXkeGKC7EByp+iwUof4pOVgaaLsgXiY8BnAEiSaZWQ2Wzj
+	2HT0WGnjlfp4fFi3M1yYhBYL6Yrvlkm3oakfE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:in-reply-to:mime-version
 	:content-type:content-transfer-encoding:content-disposition
 	:references;
-	b=c2Y5YJcop5cj61kCKjhpLZRfVH4rDwqBGtfNjNClGTVvoWFkMG95IFUsQj4/FKjg2L
-	fYppt9CWT3cC9ftED1GCybiNxTJo2F/OAlrLKqDzluWt6MfoAU06DEX4cETe4I3kybnQ
-	ofWSPH8AYVt1OI/DVMi2ArBwEJvG2PuFDtSTk=
-Received: by 10.187.168.15 with SMTP id v15mr918781fao.100.1222205599243;
-	Tue, 23 Sep 2008 14:33:19 -0700 (PDT)
-Received: by 10.187.224.10 with HTTP; Tue, 23 Sep 2008 14:33:19 -0700 (PDT)
-Message-ID: <d1b08f940809231433j6063c230wbd805140f40b69e@mail.gmail.com>
-Date: Tue, 23 Sep 2008 23:33:19 +0200
-From: "Andrea Adami" <andrea.adami@gmail.com>
+	b=EQwWAQAl6zpBoR2XKGtcYYpNl+J5YxHOok7Qp5dDYV+JI+MrwP9Aryl9bmlHieaV+p
+	K+zef4rI5a5WhTPrmwdT3K2Vc6ZCYpqlOuTn6qvPMBff3FmOb0cKbRpQ6wzw4ng3RM+p
+	aspWMQEwGD8Llhh6B6p+uMIAKfgkZ1H9sEpb4=
+Received: by 10.140.188.10 with SMTP id l10mr3098506rvf.6.1222214770829;
+	Tue, 23 Sep 2008 17:06:10 -0700 (PDT)
+Received: by 10.140.174.2 with HTTP; Tue, 23 Sep 2008 17:06:10 -0700 (PDT)
+Message-ID: <19c1b8a90809231706t75098d92pcd49608d6eee9b1e@mail.gmail.com>
+Date: Tue, 23 Sep 2008 17:06:10 -0700
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gbbmll$t6i$1@ger.gmane.org>
+In-Reply-To: <d1b08f940809231433j6063c230wbd805140f40b69e@mail.gmail.com>
 MIME-Version: 1.0
 References: <20080923211433.GA29169@denix.org> <gbbmll$t6i$1@ger.gmane.org>
+	<d1b08f940809231433j6063c230wbd805140f40b69e@mail.gmail.com>
 Subject: Re: libxml2_native_python_dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,17 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2008 21:36:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 24 Sep 2008 00:09:46 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-talking with zecke I could easily develop a patch:
+On Tue, Sep 23, 2008 at 2:33 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> talking with zecke I could easily develop a patch:
+>
+> http://www.pastebin.ca/1209737
+>
+> Seems to work here.Please test.
 
-http://www.pastebin.ca/1209737
+seems good. Bump up the PR numbers when you commit.
 
-Seems to work here.Please test.
-
-Andrea
+>
+> Andrea
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
