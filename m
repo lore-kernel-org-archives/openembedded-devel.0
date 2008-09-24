@@ -1,34 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [208.84.147.47] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KiROW-0007J6-Mj
-	for openembedded-devel@openembedded.org; Wed, 24 Sep 2008 12:14:52 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KiRKw-0005qg-UR
-	for openembedded-devel@openembedded.org; Wed, 24 Sep 2008 10:11:10 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 24 Sep 2008 10:11:10 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 24 Sep 2008 10:11:10 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 24 Sep 2008 12:11:00 +0200
-Message-ID: <gbd3nl$hsb$1@ger.gmane.org>
+	(envelope-from <hacker@klever.net>) id 1KiROn-0007Kv-Ms
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Sep 2008 12:15:09 +0200
+Received: from [85.183.207.43] (helo=[192.168.150.156])
+	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1KiRLI-0007Pw-Tl
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Sep 2008 12:11:33 +0200
+Message-ID: <48DA1251.30305@klever.net>
+Date: Wed, 24 Sep 2008 12:11:29 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
 References: <gb0738$dcq$1@ger.gmane.org>	<200809191645.13840.zecke@selfish.org>
 	<gbct33$rh4$1@ger.gmane.org>
 	<1222248100.15974.4.camel@ip6-localhost>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080912030722 Shredder/3.0b1pre
 In-Reply-To: <1222248100.15974.4.camel@ip6-localhost>
-Sender: news <news@ger.gmane.org>
 Subject: Re: Math is hard, but please pay attention to PV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,8 +32,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2008 10:14:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 24 Sep 2008 10:15:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Michael 'Mickey' Lauer wrote:
@@ -56,27 +45,19 @@ Michael 'Mickey' Lauer wrote:
 >>>> 'upgrade' happens. I just need to find a way to get the past 2 hours of
 >>>> my life back.
 >>> Thanks!
->> I just fixed linux-openmoko as well, '0' is _less_ than '7', so changing
+>> I just fixed linux-openmoko as well, '0' is _less_ than '7', so changing 
 >> PR from 'r7' to 'r0' is *bad*, I've increased it to 'r8' now.
->
+> 
 >> Seriously, is math that hard for openmoko people?
->
+> 
 > Much less the math but rather being used to reset PR on version updates.
 > Alas this breaks with hash-based SCMs. I begin to regret the decision to
 > use git in my projects.
 
-What I'm wondering (and according to google Rod is wondering the same), 
-are you actually testing package upgrades? My gta01 running angstrom 
-needs a reimaging almost every time after an upgrade since 
-openmoko/fso/efl stuff goes backwards in PV more that it goes forward.
-I'm trying to keep[1] FSO up-to-date and working in angstrom, but I'm 
-very close on giving up on that.
+What about using something like the output of `git describe --tags $(git 
+rev-parse HEAD)` as a sortable key?
 
-regards,
-
-Koen
-
-[1] I think I had it working a few months ago
-
+Love,
+H
 
 
