@@ -1,32 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KiRF4-0006we-53
-	for openembedded-devel@openembedded.org; Wed, 24 Sep 2008 12:05:06 +0200
+	id 1KiROW-0007J6-Mj
+	for openembedded-devel@openembedded.org; Wed, 24 Sep 2008 12:14:52 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KiRBU-0005Og-PE
-	for openembedded-devel@openembedded.org; Wed, 24 Sep 2008 10:01:24 +0000
+	id 1KiRKw-0005qg-UR
+	for openembedded-devel@openembedded.org; Wed, 24 Sep 2008 10:11:10 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 24 Sep 2008 10:01:24 +0000
+	Wed, 24 Sep 2008 10:11:10 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 24 Sep 2008 10:01:24 +0000
+	Wed, 24 Sep 2008 10:11:10 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 24 Sep 2008 12:01:12 +0200
-Message-ID: <gbd358$fe6$1@ger.gmane.org>
-References: <gb0738$dcq$1@ger.gmane.org>
-	<1222248265.4350.11.camel@al.mesalab.lan>
+Date: Wed, 24 Sep 2008 12:11:00 +0200
+Message-ID: <gbd3nl$hsb$1@ger.gmane.org>
+References: <gb0738$dcq$1@ger.gmane.org>	<200809191645.13840.zecke@selfish.org>
+	<gbct33$rh4$1@ger.gmane.org>
+	<1222248100.15974.4.camel@ip6-localhost>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b1pre) Gecko/20080912030722 Shredder/3.0b1pre
-In-Reply-To: <1222248265.4350.11.camel@al.mesalab.lan>
+In-Reply-To: <1222248100.15974.4.camel@ip6-localhost>
 Sender: news <news@ger.gmane.org>
 Subject: Re: Math is hard, but please pay attention to PV
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -42,29 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2008 10:05:06 -0000
+X-List-Received-Date: Wed, 24 Sep 2008 10:14:52 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Alessandro Pellizzari wrote:
-> Il giorno ven, 19/09/2008 alle 14.48 +0200, Koen Kooi ha scritto:
+Michael 'Mickey' Lauer wrote:
+> Am Mittwoch, den 24.09.2008, 10:17 +0200 schrieb Koen Kooi:
+>> Holger Freyther wrote:
+>>> On Friday 19 September 2008 14:48:40 Koen Kooi wrote:
+>>>
+>>>> Anyway, PE has been bumped, things should work again this the next EFL
+>>>> 'upgrade' happens. I just need to find a way to get the past 2 hours of
+>>>> my life back.
+>>> Thanks!
+>> I just fixed linux-openmoko as well, '0' is _less_ than '7', so changing
+>> PR from 'r7' to 'r0' is *bad*, I've increased it to 'r8' now.
 >
->> Old version:
->> libedje0 1:0.9.9.043+cvs20080610-r0
->>
->> New version:
->> libedje0 1:0.5.0.043+svnr35727-r1
+>> Seriously, is math that hard for openmoko people?
 >
-> Speaking of this, last weekend I tried to create a recipe for fbreader
-> 0.8.17, but bitbake insisted on compiling fbreader 0.8.2a because 2>  1
-> I had to remove the recipe for 0.8.2a from packages/fbreader.
+> Much less the math but rather being used to reset PR on version updates.
+> Alas this breaks with hash-based SCMs. I begin to regret the decision to
+> use git in my projects.
 
-The proper way to fix that is to set PE = "1" in 0.8.17 and upward 
-recipes. This will increase the package epoch making it always sort higher.
+What I'm wondering (and according to google Rod is wondering the same), 
+are you actually testing package upgrades? My gta01 running angstrom 
+needs a reimaging almost every time after an upgrade since 
+openmoko/fso/efl stuff goes backwards in PV more that it goes forward.
+I'm trying to keep[1] FSO up-to-date and working in angstrom, but I'm 
+very close on giving up on that.
 
 regards,
 
 Koen
+
+[1] I think I had it working a few months ago
 
 
 
