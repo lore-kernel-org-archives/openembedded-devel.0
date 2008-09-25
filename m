@@ -1,23 +1,27 @@
-Received: from [208.84.147.47] (helo=rhodos.klever.net)
+Received: from [206.46.252.46] (helo=vms046pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hacker@klever.net>) id 1KiZk4-0007Bz-8E
+	(envelope-from <denis@denix.org>) id 1KiiC2-0005NF-5S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Sep 2008 21:09:40 +0200
-Received: from pd953acdd.dip0.t-ipconnect.de ([217.83.172.221] ident=hacker)
-	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1KiZgX-0004cL-Pc
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Sep 2008 21:06:02 +0200
-Message-ID: <48DA8F98.9060404@klever.net>
-Date: Wed, 24 Sep 2008 21:06:00 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Thu, 25 Sep 2008 06:11:06 +0200
+Received: from gandalf.denix.org ([71.255.232.65])
+	by vms046.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
+	(built Apr
+	3 2006)) with ESMTPA id <0K7Q006EDGRI97Q2@vms046.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	24 Sep 2008 23:06:55 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 15C5A6B8008; Thu,
+	25 Sep 2008 00:06:54 -0400 (EDT)
+Date: Thu, 25 Sep 2008 00:06:53 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <19c1b8a90809231706t75098d92pcd49608d6eee9b1e@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <gb0738$dcq$1@ger.gmane.org>	<1222248100.15974.4.camel@ip6-localhost>	<48DA1251.30305@klever.net>
-	<200809241738.04573.zecke@selfish.org>
-In-Reply-To: <200809241738.04573.zecke@selfish.org>
-Subject: Re: Math is hard, but please pay attention to PV
+Message-id: <20080925040653.GB4510@denix.org>
+MIME-version: 1.0
+References: <20080923211433.GA29169@denix.org> <gbbmll$t6i$1@ger.gmane.org>
+	<d1b08f940809231433j6063c230wbd805140f40b69e@mail.gmail.com>
+	<19c1b8a90809231706t75098d92pcd49608d6eee9b1e@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: libxml2_native_python_dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,25 +35,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2008 19:09:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Sep 2008 04:11:06 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-> On Wednesday 24 September 2008 12:11:29 Michael Krelin wrote:
+On Tue, Sep 23, 2008 at 05:06:10PM -0700, Khem Raj wrote:
+> On Tue, Sep 23, 2008 at 2:33 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> > talking with zecke I could easily develop a patch:
+> >
+> > http://www.pastebin.ca/1209737
+> >
+> > Seems to work here.Please test.
 > 
->> What about using something like the output of `git describe --tags $(git
->> rev-parse HEAD)` as a sortable key?
-> 
-> this requires that there is a tag in the history, it is not always true. :)
+> seems good. Bump up the PR numbers when you commit.
 
-That's true. In fact, I'm not well acquainted with the problem (like I 
-thought it has to do with the sources fetched, but why would then 
-mickeyl regret using git for *own* projects?). My point is - perhaps 
-sometimes it's applicable and  then it could be used. A nice addition to 
-git-describe would be counting from initial commit or the oldest merge 
-if there's more than one ;-)
+When can we expect the fix to be commited? Thanks in advance.
 
-Love,
-H
+-- 
+Denys
 
 
