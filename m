@@ -1,26 +1,37 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1Kiq39-0008F5-LS
+Received: from [209.85.128.188] (helo=fk-out-0910.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <andrea.adami@gmail.com>) id 1Kir7i-000292-1W
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Sep 2008 14:34:27 +0200
-Received: (qmail invoked by alias); 25 Sep 2008 12:30:44 -0000
-Received: from p579E1A48.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.26.72]
-	by mail.gmx.net (mp038) with SMTP; 25 Sep 2008 14:30:44 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18h7KNY4/0hDMnUIesXhbgE0L1Zi+Iu+flv8KIdQJ
-	qTRn/DMJBg5opJ
-Message-ID: <48DB845A.20108@gmx.net>
-Date: Thu, 25 Sep 2008 14:30:18 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Thu, 25 Sep 2008 15:43:14 +0200
+Received: by fk-out-0910.google.com with SMTP id 19so438065fkr.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Sep 2008 06:39:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=3Z6R8Lv10AJWzF9aSFnRmPx7RdSs+ftrl7AKE3PrhLQ=;
+	b=GNpNU0G/Jcm2oLqh39DNBiIJBK4vOoFlt1/2cjbYL48QvcRparEIGko199eNpSzsw7
+	wgAqE6ARsjUNseAWdSze15umDRCO0WjNIU7YNGRj+Mjy38HNClITrdPUtGw8vQMq28Hw
+	FwmNh4K+k0/5fGIruDAsQlXQczFk3zmfYBoz0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=WXbkhAdoYu89kURd2h6CFSAiAqKfXT9ru5tytG4n1wTcvOmhh8oo32eJwOrqDre5U8
+	MK5g7PrzgVAtvuV73O+R5IZnS9pXVC3K/eNfWimChQIiRyPk6L1eH4ulUKS6iZlx5Ypg
+	TJAw1PX+UQEC4iKLYSfDdmFSO3wkGf9qQ49gs=
+Received: by 10.187.191.19 with SMTP id t19mr2367430fap.87.1222349972520;
+	Thu, 25 Sep 2008 06:39:32 -0700 (PDT)
+Received: by 10.187.224.10 with HTTP; Thu, 25 Sep 2008 06:39:32 -0700 (PDT)
+Message-ID: <d1b08f940809250639r35958158ue3c1236fcc9c0d0e@mail.gmail.com>
+Date: Thu, 25 Sep 2008 15:39:32 +0200
+From: "Andrea Adami" <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20080925105654.E495E18806C@amethyst.openembedded.net>
-In-Reply-To: <20080925105654.E495E18806C@amethyst.openembedded.net>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.00
-Subject: wrong URLs in commit logs
+In-Reply-To: <bug-4581-13@http.bugs.openembedded.net/>
+MIME-Version: 1.0
+References: <bug-4581-13@http.bugs.openembedded.net/>
+Subject: Re: [Bug 4581] New: libqpe-opie and OPIE_CVS_PV/SRCDATE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,69 +45,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2008 12:34:27 -0000
-X-Groupsio-MsgNum: 5966
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig81F2D367F1FF06296A591AA2"
-
---------------enig81F2D367F1FF06296A591AA2
-Content-Type: multipart/mixed;
- boundary="------------000905040008020308060407"
-
---------------000905040008020308060407
+X-List-Received-Date: Thu, 25 Sep 2008 13:43:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
-the URLs in the commit summaries are not working. Instead of
+Add "require conf/distro/include/preferred-opie-versions-1.2.4-pre.inc"
+in your local conf.
 
-> URL:    http://gitweb.openembedded.net//OE.dev.git/?a=3Dcommit;h=3Dd117=
-d60ee4811909f912a128d66bdefc2863e8ce
-It should be:
-http://gitweb.openembedded.net/?p=3Dorg.openembedded.dev.git;a=3Dcommit;h=
-=3Dd117d60ee4811909f912a128d66bdefc2863e8ce
+http://hentges.net/tmp/logs/irc/%23hentges.net/2008/September/20080912_hentges.net.log
 
-And instead of:
-> Diff:   http://gitweb.openembedded.net//OE.dev.git/?a=3Dcommitdiff;h=3D=
-d117d60ee4811909f912a128d66bdefc2863e8ce
-http://gitweb.openembedded.net/?p=3Dorg.openembedded.dev.git;a=3Dcommitdi=
-ff;h=3Dd117d60ee4811909f912a128d66bdefc2863e8ce
+Cheers
 
-File a bug?
-
-Regards
-Robert
+Andrea
 
 
-
---------------000905040008020308060407
-Content-Type: application/pgp-signature;
- name="signature.asc"
-Content-Transfer-Encoding: base64
-Content-Disposition: inline;
- filename="signature.asc"
-
-LS0tLS1CRUdJTiBQR1AgU0lHTkFUVVJFLS0tLS0KVmVyc2lvbjogR251UEcgdjEuNC42IChHTlUv
-TGludXgpCkNvbW1lbnQ6IFVzaW5nIEdudVBHIHdpdGggTW96aWxsYSAtIGh0dHA6Ly9lbmlnbWFp
-bC5tb3pkZXYub3JnCgppRDhEQlFGSTI0Uk1HOWNmd213d0V0b1JBbWdvQUo0bk1LYzhzWVhWNG51
-K3lOZHl6cFBKdEpOelVBQ2RGWXExCmVSZ0ljV2hJV0psTFFhVkQzUDdEZlVnPQo9blhBOQotLS0t
-LUVORCBQR1AgU0lHTkFUVVJFLS0tLS0KCg==
-
---------------000905040008020308060407--
-
---------------enig81F2D367F1FF06296A591AA2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFI24RaG9cfwmwwEtoRAkjFAJ0VDDJ8pkxuvZLYVYxc0TwQoi792QCfUt5B
-SO+x/ZkPQgPK05oj0vaWPhE=
-=HAuz
------END PGP SIGNATURE-----
-
---------------enig81F2D367F1FF06296A591AA2--
