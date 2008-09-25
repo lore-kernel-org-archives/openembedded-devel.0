@@ -1,34 +1,37 @@
-Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
+Received: from [74.125.46.152] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <maurizio.rottin@gmail.com>) id 1KisVz-00006v-Hd
+	(envelope-from <maurizio.rottin@gmail.com>) id 1Kisa0-0000FH-J3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Sep 2008 17:12:23 +0200
-Received: by yw-out-1718.google.com with SMTP id 5so92172ywr.42
+	Thu, 25 Sep 2008 17:16:32 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so92685ywr.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2008 08:08:41 -0700 (PDT)
+	Thu, 25 Sep 2008 08:12:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=l4K3hKcIbEeM3cDmXZThVpEEYQq3uCEXY2fFthsgbxg=;
-	b=l2Y4/ki0d+o9psOLD4gj0j47efuwM/Nuyg9axdcTjvPGliG+0LbDKn9mDzhtfa7NIn
-	s10fQBgscb2WiloWIlcUsSgHY+o4ujpIYMeb1cflk/jc/beVmtWzFhxCYTFXSZlndrx0
-	nBUOlFZIYGawIfufhqHTvbfSnhBUT0ruqWS9I=
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=BZ2Mz/MJsI5pGCWsCnM/n8mB2huGwzbA/Jn0eEGFtCE=;
+	b=pA51xuR3aWdi1mmI5Q1ahCIFJ/1wp6i8gey4awqJ9i3Ul1qD8XKkKCkyF18HwmBv2I
+	YYeHcQ95EqiptFmakaoMQr0ZCZEd9qbBB+tZS5i/YzAddfk5uOTeGjR/awM7zSTwZnoO
+	FuGpg6zp4Op4/Xas2lRvqjlI15FsgA7lFu26g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=njxnW3SXVAWMSE2YD5AKQWuKodBR3dUyuo5JulVHwJh1wZJ3rc7/cvR9dQwUXQgYkx
-	qbk6z4zc38cddUHl8JV5eYsF67UeellauxbskdOaNcDEPp5++X+YPz9d0rV0tkJP837n
-	uQ5OAPqAiJeTsfD9QWVgYWUTqrEXj+zvj0jRo=
-Received: by 10.151.141.16 with SMTP id t16mr32098ybn.167.1222355321356;
-	Thu, 25 Sep 2008 08:08:41 -0700 (PDT)
-Received: by 10.151.27.11 with HTTP; Thu, 25 Sep 2008 08:08:41 -0700 (PDT)
-Message-ID: <e83473390809250808h7ee77edeo8540ff1aff235c7e@mail.gmail.com>
-Date: Thu, 25 Sep 2008 17:08:41 +0200
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=l3jU5gPbKIC3Jy6Fzxin4ILA+CWaLyzxOQyMPmKCXNcVQpEgn4CdjF5IqDTdQ3P3uh
+	mX16CmhUhJ1IvkUR7XmRatJITe6doFBTKEZ58XlCiCxqEZcQIrU3dE6HJ6zFUXRTGZs4
+	NX8u0yJvrbznESIIxQf1r+ulPtCxZseVB2ars=
+Received: by 10.151.40.3 with SMTP id s3mr26043ybj.204.1222355570549;
+	Thu, 25 Sep 2008 08:12:50 -0700 (PDT)
+Received: by 10.151.27.11 with HTTP; Thu, 25 Sep 2008 08:12:50 -0700 (PDT)
+Message-ID: <e83473390809250812r1ce933b1nd528d3dcf8b3d777@mail.gmail.com>
+Date: Thu, 25 Sep 2008 17:12:50 +0200
 From: "Maurizio Rottin" <maurizio.rottin@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <e83473390809250808h7ee77edeo8540ff1aff235c7e@mail.gmail.com>
 MIME-Version: 1.0
-Subject: logrotate fails to install (while compiles)
+References: <e83473390809250808h7ee77edeo8540ff1aff235c7e@mail.gmail.com>
+Subject: Re: logrotate fails to install (while compiles)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,77 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2008 15:12:23 -0000
+X-List-Received-Date: Thu, 25 Sep 2008 15:16:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-hi all,
+2008/9/25 Maurizio Rottin <maurizio.rottin@gmail.com>:
+> logrotate fails to compile with this error:
+>
+> ERROR: log data follows
+> (/stuff/tmp/work/logrotate-3.7.1-r1/temp/log.do_install.12011)
+> | strip: Unable to recognise the format of the input file
+> `/stuff/tmp/work/logrotate-3.7.1-r1/image/sbin/logrotate'
+> | install: strip process terminated abnormally
 
-i did build a little system several times and i always have the same
-error with logrotate.
+if it helps i'm using gentoo, and /usr/bin/install is part of coreutils
 
-logrotate fails to compile with this error:
+my coreutils setup is
+sys-apps/coreutils-6.10-r2  USE="acl nls (-selinux) -static -vanilla -xattr"
 
-ERROR: log data follows
-(/stuff/tmp/work/logrotate-3.7.1-r1/temp/log.do_install.12011)
-| strip: Unable to recognise the format of the input file
-`/stuff/tmp/work/logrotate-3.7.1-r1/image/sbin/logrotate'
-| install: strip process terminated abnormally
-
-
-i post  also my distro config:
-
-DISTRO_NAME = "mau-oe-uclibc"
-DISTRO_VERSION = ".dev-snapshot-${SRCDATE}"
-DISTRO_TYPE = "debug"
-DISTRO_FEATURES = "uboot"
-
-INHERIT += "package_ipk"
-IMAGE_FSTYPES ?= "tar.gz jffs2"
-KERNEL = "kernel26"
-MACHINE_KERNEL_VERSION = "2.6"
-TARGET_OS = "linux-uclibc"
-TARGET_FPU_arm = "soft"
-PREFERRED_PROVIDER_virtual/libc = "uclibc"
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc = "uclibc"
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils = "binutils-cross"
-PREFERRED_PROVIDER_linux-libc-headers = "linux-libc-headers"
-PREFERRED_VERSION_linux-libc-headers ?= "2.6.23"
-PREFERRED_VERSION_libtool-native ?= "2.2.4"
-PREFERRED_VERSION_libtool-cross ?= "2.2.4"
-PREFERRED_VERSION_libtool-sdk ?= "2.2.4"
-PREFERRED_VERSION_libtool ?= "2.2.4"
-PREFERRED_VERSION_automake ?= "1.10"
-PREFERRED_VERSION_automake-native ?= "1.10"
-PREFERRED_VERSION_pkgconfig-native ?= "0.23"
-PREFERRED_VERSION_pkgconfig-sdk ?= "0.23"
-PREFERRED_VERSION_pkgconfig ?= "0.23"
-PREFERRED_PROVIDER_virtual/libiconv = "libiconv"
-PREFERRED_PROVIDER_virtual/libintl = "gettext"
-PREFERRED_VERSION_gcc ?= "4.2.4"
-PREFERRED_VERSION_gcc-cross ?= "4.2.4"
-PREFERRED_VERSION_gcc-cross-initial ?= "4.2.4"
-PREFERRED_VERSION_binutils ?= "2.18"
-PREFERRED_VERSION_binutils-cross ?= "2.18"
-PREFERRED_VERSION_binutils-sdk ?= "2.18"
-
-PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
-PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc:gcc-cross"
-PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
-PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}libc-for-gcc:glibc"
-
-USE_NLS ?= "no"
-USE_NLS_glib-2.0 = "yes"
-
-PREFERRED_PROVIDER_task-bootstrap = "task-bootstrap"
-
-require conf/distro/include/sane-srcdates.inc
-require conf/distro/include/sane-srcrevs.inc
-
-
-
-thanks in advance,
+bye,
 
 -- 
 mr
