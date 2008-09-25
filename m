@@ -1,37 +1,37 @@
-Received: from [74.125.46.152] (helo=yw-out-1718.google.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <maurizio.rottin@gmail.com>) id 1Kisa0-0000FH-J3
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1KiwMG-0001jV-68
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Sep 2008 17:16:32 +0200
-Received: by yw-out-1718.google.com with SMTP id 5so92685ywr.42
+	Thu, 25 Sep 2008 21:18:36 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 1DD248400AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2008 08:12:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=BZ2Mz/MJsI5pGCWsCnM/n8mB2huGwzbA/Jn0eEGFtCE=;
-	b=pA51xuR3aWdi1mmI5Q1ahCIFJ/1wp6i8gey4awqJ9i3Ul1qD8XKkKCkyF18HwmBv2I
-	YYeHcQ95EqiptFmakaoMQr0ZCZEd9qbBB+tZS5i/YzAddfk5uOTeGjR/awM7zSTwZnoO
-	FuGpg6zp4Op4/Xas2lRvqjlI15FsgA7lFu26g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=l3jU5gPbKIC3Jy6Fzxin4ILA+CWaLyzxOQyMPmKCXNcVQpEgn4CdjF5IqDTdQ3P3uh
-	mX16CmhUhJ1IvkUR7XmRatJITe6doFBTKEZ58XlCiCxqEZcQIrU3dE6HJ6zFUXRTGZs4
-	NX8u0yJvrbznESIIxQf1r+ulPtCxZseVB2ars=
-Received: by 10.151.40.3 with SMTP id s3mr26043ybj.204.1222355570549;
-	Thu, 25 Sep 2008 08:12:50 -0700 (PDT)
-Received: by 10.151.27.11 with HTTP; Thu, 25 Sep 2008 08:12:50 -0700 (PDT)
-Message-ID: <e83473390809250812r1ce933b1nd528d3dcf8b3d777@mail.gmail.com>
-Date: Thu, 25 Sep 2008 17:12:50 +0200
-From: "Maurizio Rottin" <maurizio.rottin@gmail.com>
+	Thu, 25 Sep 2008 21:14:54 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 283B58400A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Sep 2008 21:14:53 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (e178074016.adsl.alicedsl.de
+	[85.178.74.16]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Sep 2008 21:14:53 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 8AB323C1D7; Thu, 25 Sep 2008 21:14:52 +0200 (CEST)
+Date: Thu, 25 Sep 2008 21:14:52 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <e83473390809250808h7ee77edeo8540ff1aff235c7e@mail.gmail.com>
+Message-ID: <20080925191451.GA17447@rhein.zuhause.netz>
 MIME-Version: 1.0
-References: <e83473390809250808h7ee77edeo8540ff1aff235c7e@mail.gmail.com>
-Subject: Re: logrotate fails to install (while compiles)
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Discussion about gettext.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2008 15:16:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Sep 2008 19:18:36 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-2008/9/25 Maurizio Rottin <maurizio.rottin@gmail.com>:
-> logrotate fails to compile with this error:
->
-> ERROR: log data follows
-> (/stuff/tmp/work/logrotate-3.7.1-r1/temp/log.do_install.12011)
-> | strip: Unable to recognise the format of the input file
-> `/stuff/tmp/work/logrotate-3.7.1-r1/image/sbin/logrotate'
-> | install: strip process terminated abnormally
+Hi,
 
-if it helps i'm using gentoo, and /usr/bin/install is part of coreutils
+I want discuss another changes to a classes file. This time
+about gettext.bbclass I attached a patch which is simpler
+to understand and a little more powerfull.
 
-my coreutils setup is
-sys-apps/coreutils-6.10-r2  USE="acl nls (-selinux) -static -vanilla -xattr"
+So what I changed:
 
-bye,
+- put the DPENDS field on top, because its easier to understand
+  that this will parsed and set first, besides gettext_after_parse
+  is called after the parsing process
 
--- 
-mr
+- added virtual/libiconv virtual/libintl to DEPENDS, bescause they
+  are mostly needed anyway when you want NLS and do not harm
+  when you do not need libintl
+
+Second I want to make a propose to rename this bbclass, because
+it is not gettext depend only. We have libiconv either from
+libc or gnu and now proxy-libintl involed. So I would suggest
+to name it nls.bbclass . I wait for you comments.
+
+Bye Henning
 
 
