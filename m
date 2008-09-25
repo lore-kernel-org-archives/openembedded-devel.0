@@ -1,38 +1,39 @@
-Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Kintk-0006Lt-KX
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1KioDh-0003i2-AF
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Sep 2008 12:16:36 +0200
-Received: by fg-out-1718.google.com with SMTP id l26so263272fgb.20
+	Thu, 25 Sep 2008 12:37:13 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id C72A98400AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2008 03:12:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=vG0T9nqAJD2DiD3weZb/O18F9+s5E2ollyKagk7caW0=;
-	b=r7tMZZBQ6JlMV0iCyLbAZkA3wHv/km0Mg/e9J0/rrtNkvc5L6iiEHSP1Ud3X6FXJEl
-	r2myb/aL3MQ/4K2yMsAYeKgYGcf/vGmwlEZawXXS6gh+SsfyTcRybAh7QdlBUJFAe2Cg
-	hhP/dH9QMWQgzVsHLhyAtInsmIMqIlq839AvU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=rnkAKKDvAAC+4ZWvQm6fFnQvi/L+SvZeJEHPvVhNT2gF547ny3CtY4kUyXUiRm4iik
-	haaSaH2wgGldwDSPdMHuc8Xo6xZZE9Z2X/w+gmdqaSLU6QteiEfE13J933q3w4EwD5Ig
-	YQvwrjnzjydlPe6bH95ts2dXMbZKUCdSKcWe8=
-Received: by 10.187.167.18 with SMTP id u18mr2191076fao.70.1222337575613;
-	Thu, 25 Sep 2008 03:12:55 -0700 (PDT)
-Received: by 10.187.224.10 with HTTP; Thu, 25 Sep 2008 03:12:55 -0700 (PDT)
-Message-ID: <d1b08f940809250312h35eaa66cv2b1a9ec7856994d4@mail.gmail.com>
-Date: Thu, 25 Sep 2008 12:12:55 +0200
-From: "Andrea Adami" <andrea.adami@gmail.com>
+	Thu, 25 Sep 2008 12:33:32 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id C4C748400A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Sep 2008 12:33:31 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_20
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (e178074016.adsl.alicedsl.de
+	[85.178.74.16]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Sep 2008 12:33:31 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 42B783C1D7; Thu, 25 Sep 2008 12:33:31 +0200 (CEST)
+Date: Thu, 25 Sep 2008 12:33:31 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gbalaq$39s$1@ger.gmane.org>
+Message-ID: <20080925103330.GA19161@rhein.zuhause.netz>
+References: <gbfeov$m8g$1@ger.gmane.org>
 MIME-Version: 1.0
-References: <20080923110049.B007318806A@amethyst.openembedded.net>
-	<48D8D5B3.8010708@gmx.de> <gbalaq$39s$1@ger.gmane.org>
-Subject: Re: [oe-commits] : zaurus-2.6.inc: a string always is true, so test for the contents of it
+In-Reply-To: <gbfeov$m8g$1@ger.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: liboil softfloat fix questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2008 10:16:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Sep 2008 10:37:13 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-> I did not test that yet, since I want to get a 'normal' boot working first
-> on this &*$@*$(@ c700.
+On Thu, Sep 25, 2008 at 09:31:43AM +0200, Koen Kooi wrote:
+> Hi,
+>
+> I noticed liboil got patched:
+>
+> +if test x"${ENABLE_SOFTFLOAT}" = "xyes"; then
+> +      VFP_CFLAGS="$VFP_CFLAGS -mfloat-abi=softfp"
+> +else
+> +      VFP_CFLAGS="$VFP_CFLAGS -mfpu=vfp"
+>
+> That looks a bit wrong to me, since for EABI you'd want  
+> '-mfloat-abi=softfp -mfpu=vfp' to make it use the VFP coprocessor using  
+> softfloat calling conventions[1] and plain '-mfloat-abi=softfp' to do  
+> softfloat, and with OABI you don't want to pass '-mfloat-abi=softfp'
+> To make it even more complicated, on armv7a[2] you want to pass  
+> -mfpu=neon -mfloat-abi=softfp. If you look at the output of gcc -S  
+> you'll see that EABI won't use an FPU unless you pass in  
+> -mfloat-abi=softfp *and* -mfpu=<FPU>.
+>
+> AFAICT OE passes all the needed magic already in TARGET_CCFLAGS, so it  
+> seems that this entire construct can be removed.
+>
+> Robert, could you beat the cacao people with a cluebat so they get their  
+> stuff right?
 
-You mean even the normal zImage kernel does not boot?
+Hi,
 
-One user reported this to me about zImage-kexecboot on SL-C700:
+okay seems I have to learn more about fpu stuff.
 
-/*
-To my knowledge, it does not reboot. It says "Rebooting the system..."
-and then nothing happens. When I do a full power cycle (battery
-removal because it ignores the battery switch), I just get a dark
-screen and nothing indicating that it is in some sort of boot process.
+From cacao I only took the configure option. The Cflags comes from
+liboil itself.
 
-So, no, I don't see a boot menu.
+I will remove this cruft from the configure.ac and will try again.
 
-I'm betting that this is based on a difference between the C700 and the C860.
-*/
+Bye Henning
 
 
