@@ -1,35 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KioxH-0001Sq-GO
-	for openembedded-devel@openembedded.org; Thu, 25 Sep 2008 13:24:19 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Kiotg-0001UW-W2
-	for openembedded-devel@openembedded.org; Thu, 25 Sep 2008 11:20:37 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 25 Sep 2008 11:20:36 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 25 Sep 2008 11:20:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 25 Sep 2008 13:20:29 +0200
-Message-ID: <gbfs5t$umt$1@ger.gmane.org>
-References: <20080923110049.B007318806A@amethyst.openembedded.net>	<48D8D5B3.8010708@gmx.de>
-	<gbalaq$39s$1@ger.gmane.org>
-	<d1b08f940809250312h35eaa66cv2b1a9ec7856994d4@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080912030722 Shredder/3.0b1pre
-In-Reply-To: <d1b08f940809250312h35eaa66cv2b1a9ec7856994d4@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [oe-commits] : zaurus-2.6.inc: a string always is true, so test for the contents of it
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1Kiq39-0008F5-LS
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Sep 2008 14:34:27 +0200
+Received: (qmail invoked by alias); 25 Sep 2008 12:30:44 -0000
+Received: from p579E1A48.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.26.72]
+	by mail.gmx.net (mp038) with SMTP; 25 Sep 2008 14:30:44 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18h7KNY4/0hDMnUIesXhbgE0L1Zi+Iu+flv8KIdQJ
+	qTRn/DMJBg5opJ
+Message-ID: <48DB845A.20108@gmx.net>
+Date: Thu, 25 Sep 2008 14:30:18 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <20080925105654.E495E18806C@amethyst.openembedded.net>
+In-Reply-To: <20080925105654.E495E18806C@amethyst.openembedded.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.00
+Subject: wrong URLs in commit logs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,37 +34,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2008 11:24:19 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Sep 2008 12:34:27 -0000
+X-Groupsio-MsgNum: 5966
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig81F2D367F1FF06296A591AA2"
 
-Andrea Adami wrote:
->> I did not test that yet, since I want to get a 'normal' boot working first
->> on this&*$@*$(@ c700.
->
-> You mean even the normal zImage kernel does not boot?
+--------------enig81F2D367F1FF06296A591AA2
+Content-Type: multipart/mixed;
+ boundary="------------000905040008020308060407"
 
-It boots, but the c7x0 machine in OE suffered from massive bitrot. I am 
-now able to use installkits built with OE, but the c700 locks up hard 
-after a minute or 2.
+--------------000905040008020308060407
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-regards,
+Hi,
+the URLs in the commit summaries are not working. Instead of
 
-Koen
+> URL:    http://gitweb.openembedded.net//OE.dev.git/?a=3Dcommit;h=3Dd117=
+d60ee4811909f912a128d66bdefc2863e8ce
+It should be:
+http://gitweb.openembedded.net/?p=3Dorg.openembedded.dev.git;a=3Dcommit;h=
+=3Dd117d60ee4811909f912a128d66bdefc2863e8ce
 
-> One user reported this to me about zImage-kexecboot on SL-C700:
->
-> /*
-> To my knowledge, it does not reboot. It says "Rebooting the system..."
-> and then nothing happens. When I do a full power cycle (battery
-> removal because it ignores the battery switch), I just get a dark
-> screen and nothing indicating that it is in some sort of boot process.
->
-> So, no, I don't see a boot menu.
->
-> I'm betting that this is based on a difference between the C700 and the C860.
-> */
+And instead of:
+> Diff:   http://gitweb.openembedded.net//OE.dev.git/?a=3Dcommitdiff;h=3D=
+d117d60ee4811909f912a128d66bdefc2863e8ce
+http://gitweb.openembedded.net/?p=3Dorg.openembedded.dev.git;a=3Dcommitdi=
+ff;h=3Dd117d60ee4811909f912a128d66bdefc2863e8ce
+
+File a bug?
+
+Regards
+Robert
 
 
 
+--------------000905040008020308060407
+Content-Type: application/pgp-signature;
+ name="signature.asc"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+ filename="signature.asc"
 
+LS0tLS1CRUdJTiBQR1AgU0lHTkFUVVJFLS0tLS0KVmVyc2lvbjogR251UEcgdjEuNC42IChHTlUv
+TGludXgpCkNvbW1lbnQ6IFVzaW5nIEdudVBHIHdpdGggTW96aWxsYSAtIGh0dHA6Ly9lbmlnbWFp
+bC5tb3pkZXYub3JnCgppRDhEQlFGSTI0Uk1HOWNmd213d0V0b1JBbWdvQUo0bk1LYzhzWVhWNG51
+K3lOZHl6cFBKdEpOelVBQ2RGWXExCmVSZ0ljV2hJV0psTFFhVkQzUDdEZlVnPQo9blhBOQotLS0t
+LUVORCBQR1AgU0lHTkFUVVJFLS0tLS0KCg==
+
+--------------000905040008020308060407--
+
+--------------enig81F2D367F1FF06296A591AA2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFI24RaG9cfwmwwEtoRAkjFAJ0VDDJ8pkxuvZLYVYxc0TwQoi792QCfUt5B
+SO+x/ZkPQgPK05oj0vaWPhE=
+=HAuz
+-----END PGP SIGNATURE-----
+
+--------------enig81F2D367F1FF06296A591AA2--
