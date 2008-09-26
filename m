@@ -1,40 +1,24 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Kiwg6-00087v-Eu
+	(envelope-from <zecke@selfish.org>) id 1Kj2G6-0000TY-2t
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Sep 2008 21:39:06 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 5B3FD8400AC
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2008 21:35:24 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7208D8400A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2008 21:35:23 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (e178074016.adsl.alicedsl.de
-	[85.178.74.16]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2008 21:35:23 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 12C013C1D7; Thu, 25 Sep 2008 21:35:23 +0200 (CEST)
-Date: Thu, 25 Sep 2008 21:35:23 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Fri, 26 Sep 2008 03:36:38 +0200
+Received: from [92.117.66.116] (helo=[10.161.66.116])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Kj2CU-0007cX-2A
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Sep 2008 03:32:54 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080925193522.GA19302@rhein.zuhause.netz>
-References: <20080922205525.GA23908@rhein.zuhause.netz>
-	<48D8B75D.7030302@gmx.net>
+Date: Fri, 26 Sep 2008 03:32:33 +0200
+User-Agent: KMail/1.9.9
+References: <20080925191451.GA17447@rhein.zuhause.netz>
+In-Reply-To: <20080925191451.GA17447@rhein.zuhause.netz>
 MIME-Version: 1.0
-In-Reply-To: <48D8B75D.7030302@gmx.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Finer granularity for RSUGGEST
+Message-Id: <200809260332.35358.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.117.66.116
+Subject: Re: Discussion about gettext.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,23 +32,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2008 19:39:06 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 26 Sep 2008 01:36:38 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Tue, Sep 23, 2008 at 11:31:09AM +0200, Robert Schuster wrote:
-> RSUGGEST_${PN} = "mooo"
-> 
-> Regards
-> Robert
-> 
+On Thursday 25 September 2008 21:14:52 Henning Heinold wrote:
+> Hi,
+>
+> I want discuss another changes to a classes file. This time
+> about gettext.bbclass I attached a patch which is simpler
+> to understand and a little more powerfull.
 
+Maybe I'm too tired but I don't see a patch :)
 
-Ah,
-
-thanks this is what I did not know. So forget the patch and maybee time
-to add this to the oe manual.
-
-Bye Henning
+z.
 
 
