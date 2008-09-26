@@ -1,34 +1,40 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KjIx3-0005xJ-DC
-	for openembedded-devel@openembedded.org; Fri, 26 Sep 2008 21:26:05 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KjItO-00045s-IZ
-	for openembedded-devel@openembedded.org; Fri, 26 Sep 2008 19:22:18 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 26 Sep 2008 19:22:18 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 26 Sep 2008 19:22:18 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 26 Sep 2008 21:22:09 +0200
-Message-ID: <gbjcp1$mqv$1@ger.gmane.org>
-References: <20080925042321.GC4510@denix.org>
-	<20080926173901.GA16384@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-In-Reply-To: <20080926173901.GA16384@denix.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: base.bbclass problem? Was: package-stagefile-shell() breaks if DEPLOY_DIR is outside of TMPDIR
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1KjJB7-0006Nv-J1
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Sep 2008 21:40:37 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 1DAB88400AC
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Sep 2008 21:36:51 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 249C38400A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Sep 2008 21:36:50 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (e178098069.adsl.alicedsl.de
+	[85.178.98.69]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Sep 2008 21:36:50 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 61C173C1D7; Fri, 26 Sep 2008 21:36:49 +0200 (CEST)
+Date: Fri, 26 Sep 2008 21:36:49 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20080926193648.GA12460@rhein.zuhause.netz>
+References: <20080925191451.GA17447@rhein.zuhause.netz>
+	<200809260332.35358.zecke@selfish.org>
+MIME-Version: 1.0
+In-Reply-To: <200809260332.35358.zecke@selfish.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: Discussion about gettext.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,95 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Sep 2008 19:26:05 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Sep 2008 19:40:37 -0000
+X-Groupsio-MsgNum: 5980
+Content-Type: multipart/mixed; boundary="3V7upXqbjpZ4EhLz"
+Content-Disposition: inline
 
-On 26-09-2008 19:39, Denys Dmytriyenko wrote:
-> Does anybody have any comments? Am I doing something totally wrong? Or is it
-> too low-level so nobody wants to touch it? Please let me know. Thanks.
+--3V7upXqbjpZ4EhLz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+Here is the patch now.
 
-package_stagefile_shell is there to manually mark files that need to get 
-revived to make a build work, which as it happens is with bootloaders 
-and kernel images :)
-I don't think it's limited to deploy, but your patch is a step in the 
-right direction.
+Bye Henning
 
-regards,
+--3V7upXqbjpZ4EhLz
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="gettext.diff"
 
-Koen
+#
+# old_revision [6950cb0adadcf0fa171ec2fdd0751373a16fa294]
+#
+# patch "classes/gettext.bbclass"
+#  from [a0ba1057eaf6a5619d05a1d4fe7e262095b34168]
+#    to [46480807107b00b5b0a16442a461ddf95332bbb8]
+#
+============================================================
+--- classes/gettext.bbclass	a0ba1057eaf6a5619d05a1d4fe7e262095b34168
++++ classes/gettext.bbclass	46480807107b00b5b0a16442a461ddf95332bbb8
+@@ -1,16 +1,16 @@
++DEPENDS =+ "gettext-native virtual/libiconv virtual/libintl"
++EXTRA_OECONF += "--enable-nls"
++
+ def gettext_after_parse(d):
+     import bb
+     # Remove the NLS bits if USE_NLS is no.
+     if bb.data.getVar('USE_NLS', d, 1) == 'no':
+         cfg = oe_filter_out('^--(dis|en)able-nls$', bb.data.getVar('EXTRA_OECONF', d, 1) or "", d)
+         cfg += " --disable-nls"
+-        depends = bb.data.getVar('DEPENDS', d, 1) or ""
+-        bb.data.setVar('DEPENDS', oe_filter_out('^(virtual/libiconv|virtual/libintl)$', depends, d), d)
+         bb.data.setVar('EXTRA_OECONF', cfg, d)
++        depends = bb.data.getVar('DEPENDS', d, 1) or ""
++        bb.data.setVar('DEPENDS', oe_filter_out('^(gettext-native|virtual/libiconv|virtual/libintl)$', depends, d), d)
+ 
+ python () {
+     gettext_after_parse(d)
+ }
+-
+-DEPENDS =+ "gettext-native"
+-EXTRA_OECONF += "--enable-nls"
 
-
-> On Thu, Sep 25, 2008 at 12:23:21AM -0400, Denys Dmytriyenko wrote:
->> Hi,
->>
->> I just submitted a bug report #4580, but wanted to follow up here as my
->> description/fix maybe controversial or at least touches the low-level stuff.
->>
->> Here is the description from the ticket:
->>
->> When DEPLOY_DIR is configured to be outside of TMPDIR, building a kernel
->> breaks, as "cp" cannot copy a file into itself:
->>
->> cp: `/OE/deploy/glibc/images/omap3evm/uImage.bin' and `/OE/deploy/glibc/images/omap3evm/uImage.bin' are the same file
->>
->> What happens is inside the do_deploy() function of the kernel.bbclass it calls
->> package-stagefile-shell() with the uImage binary in DEPLOY_DIR as a parameter:
->>
->> package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
->>
->> That function is supposed to save a copy of the file in the staging directory
->> (packaged-staging magic):
->>
->> package_stagefile_shell() {
->>          if [ "$PSTAGING_ACTIVE" = "1" ]; then
->>                  srcfile=$1
->>                  destfile=`echo $srcfile | sed s#${TMPDIR}#${PSTAGE_TMPDIR_STAGE}#`
->>                  destdir=`dirname $destfile`
->>                  mkdir -p $destdir
->>                  cp -dp $srcfile $destfile
->>          fi
->> }
->>
->> The problem there is it substitutes (sed) TMPDIR with PSTAGE_TMPDIR_STAGE in
->> file's path. It works if DEPLOY_DIR is inside TMPDIR, but the path remains the
->> same if otherwise, leading to the mentioned error.
->>
->> The function above is a shell counterpart of the python package_stagefile(). I
->> grepped both of them and it appears the python function is used inside the
->> package.bbclass to do some actual staging, while the shell function is only
->> used in recipes for kernels and bootloaders (u-boot, x-load) and is always
->> called with files in DEPLOY_DIR.
->>
->> So, changing above sed command to:
->>
->> sed s#${DEPLOY_DIR}#${PSTAGE_TMPDIR_STAGE}#`
->>
->> makes it work and doesn't seem to break anything else for me. I think the
->> function maybe renamed to package_stagefile_deploy() to reflect its purpose,
->> but that would require changes in several recipes.
->>
->> I'm attaching the actual patch for review. It works for me, but I'm not sure
->> how correct it is, so I'm asking here. Thanks.
->>
->> --
->> Denys
->
->> diff --git a/classes/base.bbclass b/classes/base.bbclass
->> index 540b891..1172b8f 100644
->> --- a/classes/base.bbclass
->> +++ b/classes/base.bbclass
->> @@ -389,7 +389,7 @@ def package_stagefile(file, d):
->>   package_stagefile_shell() {
->>   	if [ "$PSTAGING_ACTIVE" = "1" ]; then
->>   		srcfile=$1
->> -		destfile=`echo $srcfile | sed s#${TMPDIR}#${PSTAGE_TMPDIR_STAGE}#`
->> +		destfile=`echo $srcfile | sed s#${DEPLOY_DIR}#${PSTAGE_TMPDIR_STAGE}#`
->>   		destdir=`dirname $destfile`
->>   		mkdir -p $destdir
->>   		cp -dp $srcfile $destfile
-
-
-
-
+--3V7upXqbjpZ4EhLz--
