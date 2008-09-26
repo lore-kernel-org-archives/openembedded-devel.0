@@ -1,40 +1,25 @@
-Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1Kj8IV-0000RP-MY
-	for openembedded-devel@openembedded.org; Fri, 26 Sep 2008 10:03:31 +0200
-Received: (qmail 18159 invoked from network); 26 Sep 2008 09:59:47 +0200
-Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
-	by leibniz.math.fu-berlin.de with SMTP; 26 Sep 2008 09:59:47 +0200
-Received: (qmail 12328 invoked by uid 9804); 26 Sep 2008 09:59:46 +0200
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 26 Sep 2008 09:59:40 +0200
-Received: (qmail 12273 invoked by uid 9804); 26 Sep 2008 09:59:40 +0200
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by lusin.mi.fu-berlin.de with SMTP; 26 Sep 2008 09:59:40 +0200
-Received: (qmail 18133 invoked from network); 26 Sep 2008 09:59:41 +0200
-Received: from omsk.mi.fu-berlin.de (160.45.45.210)
-	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
-	26 Sep 2008 07:59:40 -0000
-Received: from heinold by omsk.mi.fu-berlin.de with local (Exim 4.63 #1
-	(Debian)) id 1Kj8En-0002h8-6e
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Sep 2008 09:59:41 +0200
-Date: Fri, 26 Sep 2008 09:59:41 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080926075941.GA10338@mi.fu-berlin.de>
-References: <20080925191451.GA17447@rhein.zuhause.netz>
-	<200809260332.35358.zecke@selfish.org>
-X-Envelope-Sender: heinold@mi.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L41+ClamAV[12276](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.210
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1KjAM0-0008Nq-HS
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Sep 2008 12:15:16 +0200
+Received: (qmail invoked by alias); 26 Sep 2008 10:11:29 -0000
+Received: from p579E1BED.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.27.237]
+	by mail.gmx.net (mp020) with SMTP; 26 Sep 2008 12:11:29 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/E3OotJNbESPTNViMYIoq0xCrEyFxZnU3cKSUggd
+	hme/RQ6uSIdJjB
+Message-ID: <48DCB539.9000703@gmx.net>
+Date: Fri, 26 Sep 2008 12:11:05 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-In-Reply-To: <200809260332.35358.zecke@selfish.org>
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-Subject: Re: Discussion about gettext.bbclass
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-users@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.71
+Subject: Who wants to finish mysql 5.0.67 support?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +33,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Sep 2008 08:04:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 26 Sep 2008 10:15:17 -0000
+X-Groupsio-MsgNum: 5976
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig4F8AAD51679B95E146702EA3"
 
-On Fri, Sep 26, 2008 at 03:32:33AM +0200, Holger Freyther wrote:
-> On Thursday 25 September 2008 21:14:52 Henning Heinold wrote:
-> > Hi,
-> >
-> > I want discuss another changes to a classes file. This time
-> > about gettext.bbclass I attached a patch which is simpler
-> > to understand and a little more powerfull.
-> 
-> Maybe I'm too tired but I don't see a patch :)
-> 
-> z.
-> 
+--------------enig4F8AAD51679B95E146702EA3
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-Yepp,
+Hi,
+I recently worked on recipes for mysql 5.0.67 but was not able to finish
+them.
 
-sorry was to late yesterday and now I am at work. I will send the patch
-this evening.
+If you are interested in mysql 5 in OE or are new to OpenEmbedded recipe
+development and are looking for a low hanging fruit, you might want to
+check out this bug report:
 
-Bye Henning
+http://bugs.openembedded.org/show_bug.cgi?id=3D4577
+
+I uploaded a few things already so you won't start from zero. Details
+are in the PR.
+
+Regards
+Robert
 
 
+--------------enig4F8AAD51679B95E146702EA3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFI3LU5G9cfwmwwEtoRAkY/AJsFaV9hfOuyiOBPux6yXVNx6wrzKACfSLtA
+YCnX619ewAAztsMv9BbUT54=
+=Tgoj
+-----END PGP SIGNATURE-----
+
+--------------enig4F8AAD51679B95E146702EA3--
