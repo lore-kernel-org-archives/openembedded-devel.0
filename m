@@ -1,26 +1,41 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1Kjhfz-0002b9-Bf
+Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <otavio@freedom.ind.br>) id 1Kjhts-0006sO-Mb
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Sep 2008 23:50:08 +0200
-Received: (qmail invoked by alias); 27 Sep 2008 21:46:13 -0000
-Received: from p54BDBED3.dip0.t-ipconnect.de (EHLO [192.168.178.34])
-	[84.189.190.211]
-	by mail.gmx.net (mp039) with SMTP; 27 Sep 2008 23:46:13 +0200
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX1+YmsYRiEWYBmqvm6HYNiYCzNdl10tsJsQWyE1RhV
-	WDBx0fHDrK3H7G
-Message-ID: <48DEA994.2030607@gmx.de>
-Date: Sat, 27 Sep 2008 23:45:56 +0200
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
-MIME-Version: 1.0
+	Sun, 28 Sep 2008 00:04:28 +0200
+Received: from freedom.ind.br (unknown [10.99.0.10])
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id 709913343BE
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Sep 2008 19:00:33 -0300 (BRT)
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 2D9698C5DD0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Sep 2008 19:00:41 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id EE1B78C36BB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Sep 2008 19:00:40 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 27 Sep 2008 19:00:40 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id AB389C270
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Sep 2008 19:00:35 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 77E36C48B76; Sat, 27 Sep 2008 18:58:21 -0300 (BRT)
 To: openembedded-devel@lists.openembedded.org
 References: <200809272237.22810.zecke@selfish.org>
-	<48DE9EE0.8090000@balister.org>
-In-Reply-To: <48DE9EE0.8090000@balister.org>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.72
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Sat, 27 Sep 2008 18:58:21 -0300
+In-Reply-To: <200809272237.22810.zecke@selfish.org> (Holger Freyther's message
+	of "Sat\, 27 Sep 2008 22\:37\:19 +0200")
+Message-ID: <87ljxdb69u.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+MIME-Version: 1.0
 Subject: Re: git conversion and what is missing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,31 +50,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Sep 2008 21:50:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 27 Sep 2008 22:04:29 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Philip Balister schrieb:
-> Holger Freyther wrote:
->> Hey,
->>
->> I wonder what is missing until we finally switch to git? From my 
->> point of view it is:
->>
->>     - Finishing this table [1]
-NOTE: This table contains not only the people that have commit access 
-but everybody who has contibuted something. We
-should keep this in mind before running some scripts that give access to 
-the git repository.
->>
+Holger Freyther <zecke@selfish.org> writes:
+
+> Hey,
 >
-> How do we do this? In some cases the name is in the email address, but 
-> what about the rest?
-IMO we should just disable commit access for people who didn't bother to 
-add their e-mail address. If they come back to oe later
-we can reenable the accounts.
+> I wonder what is missing until we finally switch to git? From my point of view 
+> it is:
+>
+> 	- Finishing this table [1]
 
-Regards,
-Thomas
+It is obvious we should try to complete it as much as possible but I
+doubt we'll complete it. I think we should set a deadline and move it
+further. Otherwise we risk to stuck on it.
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
