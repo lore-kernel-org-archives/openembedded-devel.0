@@ -1,22 +1,39 @@
-Received: from [208.84.147.47] (helo=rhodos.klever.net)
+Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hacker@klever.net>) id 1Kjf8Y-0000oR-Kl
+	(envelope-from <otavio@freedom.ind.br>) id 1KjgCU-0007h8-P8
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Sep 2008 21:07:26 +0200
-Received: from pd953801d.dip0.t-ipconnect.de ([217.83.128.29] ident=hacker)
-	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1Kjf4o-0005lz-Ub
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Sep 2008 21:03:35 +0200
-Message-ID: <48DE8384.6070807@klever.net>
-Date: Sat, 27 Sep 2008 21:03:32 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
-MIME-Version: 1.0
+	Sat, 27 Sep 2008 22:15:34 +0200
+Received: from freedom.ind.br (unknown [10.99.0.10])
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id D789A3343BE
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Sep 2008 17:11:39 -0300 (BRT)
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 02E518C61BB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Sep 2008 17:11:47 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id CD5148C29D7
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Sep 2008 17:11:46 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 27 Sep 2008 17:11:46 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 90BCFC270
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Sep 2008 17:11:41 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id D20F7610045; Sat, 27 Sep 2008 17:09:30 -0300 (BRT)
 To: openembedded-devel@lists.openembedded.org
-References: <48DE38A3.7090300@gmx.ch> <20080927175317.GA12360@localhost>
-In-Reply-To: <20080927175317.GA12360@localhost>
-Subject: Re: OpenEmbedded on Multilib (64/32 bit) computers
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Sat, 27 Sep 2008 17:09:30 -0300
+Message-ID: <87abdtcpvp.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+MIME-Version: 1.0
+Subject: fennec fails to build when host system lacks autoconf2.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,34 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Sep 2008 19:07:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 27 Sep 2008 20:15:35 -0000
+Content-Type: text/plain; charset=us-ascii
 
-> 
-> Not sure what you meant by wasn't included upstream, but the [2] is
-> already in
-> 
-> http://git.openmoko.org/?p=openmoko.git;a=commit;h=313dd69d6e2be1636b81e42da8544395536616f6
+Hello,
 
-Perhaps, it's not in the stable branch?
+It takes a while until I found the reason fennec was failing to build;
+it needs autoconf2.13 but OE doesn't has it anymore.
 
-Love,
-H
-> 
->> Sincerely, Marc-André
->>
->>
->> [1] http://bugs.openembedded.net/show_bug.cgi?id=3988
->> [2] 
->> http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=commit;h=313dd69d6e2be1636b81e42da8544395536616f6
->>
->> [3] Attachment: pth-2.0.2-r0.log
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Does someone feels like fixing it?
+ 
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
