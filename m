@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.227.126.171] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KjKFv-0004Qk-Ff
-	for openembedded-devel@openembedded.org; Fri, 26 Sep 2008 22:49:39 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KjKCE-0007av-Ok
-	for openembedded-devel@openembedded.org; Fri, 26 Sep 2008 20:45:50 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 26 Sep 2008 20:45:50 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 26 Sep 2008 20:45:50 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 26 Sep 2008 22:45:43 +0200
-Message-ID: <gbjhln$8nr$1@ger.gmane.org>
-References: <48DCF3ED.1060809@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-In-Reply-To: <48DCF3ED.1060809@gmx.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Another low-hanging fruit: aisleriot
+	(envelope-from <robert@linuxdevelopment.de>) id 1KjaRW-0001nz-Am
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Sep 2008 16:06:43 +0200
+Received: from [10.0.0.200] (M9c31.m.pppool.de [89.49.156.49])
+	by mrelayeu.kundenserver.de (node=mrelayeu5) with ESMTP (Nemesis)
+	id 0ML25U-1KjaNm000K-0006TS; Sat, 27 Sep 2008 16:02:50 +0200
+Message-ID: <48DE3D09.4090608@linuxdevelopment.de>
+Date: Sat, 27 Sep 2008 16:02:49 +0200
+From: =?ISO-8859-15?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
+User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Provags-ID: V01U2FsdGVkX1+274TAqistHaFpIFdBG1/1tfwIYnUmQJ2vrh4
+	Us1JiBPuT7IpLz5gq1jOZpjbOUWrgOVmMOtvUwOkXiYVrPjseQ
+	Y+cAd9+MdPg032pzHoqjqx9a/98nCSnCcQ9xcLtoWA=
+Subject: x86_64 host -- never ending story
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +29,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Sep 2008 20:49:39 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 27 Sep 2008 14:06:43 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 26-09-2008 16:38, Robert Schuster wrote:
-> Hi,
-> our gnome-games recipe disables aisleriot because of some problems
-> described here:
->
-> http://bugs.openembedded.net/show_bug.cgi?id=4585
+Can one give a quick and brief explanation why using oe on a x86_64 host 
+is sooo difficult.
+I am having always a hard time to setup oe and build on that ... many 
+architectures break on glibc-native or such stuff lile avr32. 
+i686-generic or even arm sometimes ?
 
-I couldn't reproduce the problems anymore, so .dev now has 2.24 with 
-aisleriot enabled :)
+And maybe show a short example how to substitute the oe-native libs for 
+the hosts owns !
 
-regards,
-
-Koen
-
+Thanks Rob
 
 
