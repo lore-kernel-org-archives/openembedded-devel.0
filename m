@@ -1,25 +1,26 @@
 Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kjkgy-0007V0-N1
+	(envelope-from <zecke@selfish.org>) id 1KjlWS-0005Dn-7b
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Sep 2008 03:03:20 +0200
+	Sun, 28 Sep 2008 03:56:32 +0200
 Received: from [92.117.146.220] (helo=[10.161.146.220])
 	by coruscant.onosendai.de with esmtpsa
 	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KjkdD-0005b0-Sn
+	(envelope-from <zecke@selfish.org>) id 1KjlSh-0006xc-Ap
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Sep 2008 02:59:28 +0200
+	Sun, 28 Sep 2008 03:52:40 +0200
 From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Sep 2008 02:59:18 +0200
+Date: Sun, 28 Sep 2008 03:52:27 +0200
 User-Agent: KMail/1.9.9
-References: <200809272237.22810.zecke@selfish.org> <48DEA994.2030607@gmx.de>
-	<48DEAE43.5090407@balister.org>
-In-Reply-To: <48DEAE43.5090407@balister.org>
+References: <20080925191451.GA17447@rhein.zuhause.netz>
+	<200809260332.35358.zecke@selfish.org>
+	<20080926193648.GA12460@rhein.zuhause.netz>
+In-Reply-To: <20080926193648.GA12460@rhein.zuhause.netz>
 MIME-Version: 1.0
-Message-Id: <200809280259.18588.zecke@selfish.org>
+Message-Id: <200809280352.28293.zecke@selfish.org>
 X-Broken-Reverse-DNS: no host name found for IP address 92.117.146.220
-Subject: Re: git conversion and what is missing?
+Subject: Re: Discussion about gettext.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,27 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Sep 2008 01:03:20 -0000
+X-List-Received-Date: Sun, 28 Sep 2008 01:56:32 -0000
 Content-Type: text/plain;
   charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Sunday 28 September 2008 00:05:55 Philip Balister wrote:
-
-> I think the table is needed to properly fill out some of the commit
-> messages during the conversion.
+On Friday 26 September 2008 21:36:49 Henning Heinold wrote:
+> Here is the patch now.
 >
-> Holger, I am right about this?
+> Bye Henning
 
-Yes, you are. In git land the author has a name and mail address. People will 
-try to send email to the mail address so it should be correct. The other part 
-is there should be a name otherwise stuff like git-commit -c SHA1 will fail.
+When do you want to do the renaming to nls.bbclass? Besides that I don't see 
+anything wrong in your patch.
 
-I like Otavio's idea with the deadline. The question is what to do with 
-unknown names (coming from people using --author on mtn ci). Should we use 
-the comitter id and put the name from mtn inside the comment?
-
+When you propose the nls.bbclass we should also cleanup the existing recipes 
+putting virtual/libintl and virtual/libiconv into the DEPENDS.
 
 z.
 
