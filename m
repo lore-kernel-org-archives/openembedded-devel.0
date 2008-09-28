@@ -1,43 +1,24 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KjiWz-0002yJ-8U
+	(envelope-from <zecke@selfish.org>) id 1Kjkgy-0007V0-N1
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Sep 2008 00:44:53 +0200
-Received: from freedom.ind.br (unknown [10.99.0.10])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id CA3653343BE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Sep 2008 19:40:57 -0300 (BRT)
-Received: from freedom.ind.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id BD6FD8C2DB9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Sep 2008 19:41:05 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id 5142A8B9FC2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Sep 2008 19:41:05 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 27 Sep 2008 19:41:04 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 89500C270
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Sep 2008 19:40:59 -0300 (BRT)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 58B6CC48B76; Sat, 27 Sep 2008 19:38:48 -0300 (BRT)
+	Sun, 28 Sep 2008 03:03:20 +0200
+Received: from [92.117.146.220] (helo=[10.161.146.220])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KjkdD-0005b0-Sn
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Sep 2008 02:59:28 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-References: <200809272237.22810.zecke@selfish.org>
-	<48DE9EE0.8090000@balister.org> <48DEA994.2030607@gmx.de>
+Date: Sun, 28 Sep 2008 02:59:18 +0200
+User-Agent: KMail/1.9.9
+References: <200809272237.22810.zecke@selfish.org> <48DEA994.2030607@gmx.de>
 	<48DEAE43.5090407@balister.org>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Sat, 27 Sep 2008 19:38:48 -0300
-In-Reply-To: <48DEAE43.5090407@balister.org> (Philip Balister's message of
-	"Sat\, 27 Sep 2008 18\:05\:55 -0400")
-Message-ID: <87od299ptz.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+In-Reply-To: <48DEAE43.5090407@balister.org>
 MIME-Version: 1.0
+Message-Id: <200809280259.18588.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.117.146.220
 Subject: Re: git conversion and what is missing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,28 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Sep 2008 22:44:53 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 28 Sep 2008 01:03:20 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Philip Balister <philip@balister.org> writes:
+On Sunday 28 September 2008 00:05:55 Philip Balister wrote:
 
 > I think the table is needed to properly fill out some of the commit
 > messages during the conversion.
 >
 > Holger, I am right about this?
 
-Yes; it is used during conversion to properly set commits to the right
-author names however I believe we can't hold it forever. We need to
-set a deadline and if someone didn't fill it... so sorry. 
+Yes, you are. In git land the author has a name and mail address. People will 
+try to send email to the mail address so it should be correct. The other part 
+is there should be a name otherwise stuff like git-commit -c SHA1 will fail.
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+I like Otavio's idea with the deadline. The question is what to do with 
+unknown names (coming from people using --author on mtn ci). Should we use 
+the comitter id and put the name from mtn inside the comment?
+
+
+z.
 
 
