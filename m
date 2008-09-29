@@ -1,28 +1,20 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1KkIBi-0002IS-95
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Sep 2008 14:49:18 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.63)
-	(envelope-from <broonie@sirena.org.uk>) id 1KkI7r-0001MN-K5
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Sep 2008 13:45:19 +0100
-Date: Mon, 29 Sep 2008 13:45:19 +0100
-From: Mark Brown <broonie@sirena.org.uk>
+	(envelope-from <openembedded@haerwu.biz>) id 1KkJXM-0003PX-0e
+	for openembedded-devel@openembedded.org; Mon, 29 Sep 2008 16:15:44 +0200
+Received: (qmail 1030 invoked by uid 813007); 29 Sep 2008 14:11:45 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 29 Sep 2008 14:11:44 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080929124518.GE27647@sirena.org.uk>
+Date: Mon, 29 Sep 2008 16:11:46 +0200
+User-Agent: KMail/1.10.0 (Linux/2.6.27-rc7; KDE/4.1.1; x86_64; ; )
 References: <200809272237.22810.zecke@selfish.org>
-	<48DE9EE0.8090000@balister.org> <48DEA994.2030607@gmx.de>
-	<48DEAE43.5090407@balister.org>
-	<87od299ptz.fsf@neumann.lab.ossystems.com.br>
+In-Reply-To: <200809272237.22810.zecke@selfish.org>
 MIME-Version: 1.0
-In-Reply-To: <87od299ptz.fsf@neumann.lab.ossystems.com.br>
-X-Cookie: C for yourself.
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
-X-SA-Exim-Scanned: No (on cassiel.sirena.org.uk);
-	SAEximRunCond expanded to false
+Message-Id: <200809291611.47640.openembedded@haerwu.biz>
 Subject: Re: git conversion and what is missing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,20 +29,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Sep 2008 12:49:18 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 29 Sep 2008 14:15:44 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Sat, Sep 27, 2008 at 07:38:48PM -0300, Otavio Salvador wrote:
+On Saturday 27 of September 2008 22:37:19 Holger Freyther wrote:
 
-> Yes; it is used during conversion to properly set commits to the right
-> author names however I believe we can't hold it forever. We need to
-> set a deadline and if someone didn't fill it... so sorry. 
+> =A0- Finishing this table [1]
 
-If they miss the deadline they could still be added to .mailmap later
-which would fix up most of the interesting cases (eg, git log output).
+I filled some entries - now about 40 left.
+=2D-=20
+JID: hrw@jabber.org
 
--- 
-"You grabbed my hand and we fell into it, like a daydream - or a fever."
+
 
 
