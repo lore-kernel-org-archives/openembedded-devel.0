@@ -1,31 +1,36 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1KkNtm-0002Wr-3o
+	(envelope-from <felipe.contreras@gmail.com>) id 1KkPum-00074o-64
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Sep 2008 20:55:10 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.63)
-	(envelope-from <broonie@sirena.org.uk>) id 1KkNpu-0005u9-Bq
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Sep 2008 19:51:10 +0100
-Date: Mon, 29 Sep 2008 19:51:10 +0100
-From: Mark Brown <broonie@sirena.org.uk>
+	Mon, 29 Sep 2008 23:04:23 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so3087164rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Sep 2008 14:00:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=cKkM5cIW10QDH1czGSHv0zbq38I5bb3zpXAVAktTEqQ=;
+	b=Ij4BAUsgyagv8FFu7kg5fVtBCVwXsHApAjDZkUtAJYh+rBBeHOgxUoyI34couSo2Aa
+	aGe9/0qeg+HiZVKc9R68EImpASvi1md5XOapJ0HhJU8W/qKOJWGuurlL1heq44Et0n7/
+	uiDpIlTBgrGDueH4HahVEiLWapVXBBkAHPN+E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=hpVjEdj7RjOIBHIpTSevengKYP18MGtxbCSMPfLyxdDzZibj27pouYpuMEEyEy6J85
+	fOtvTYyEvQ9oj+XNHUQrWDY8ucEWoFTz9yylYW2n/KLnmlJiFgappgXQzKNgDsnnaAba
+	z1ixESTYcwztnAQkx8svprKJLN6nB7Sx1kqpc=
+Received: by 10.141.172.6 with SMTP id z6mr2912507rvo.47.1222722018948;
+	Mon, 29 Sep 2008 14:00:18 -0700 (PDT)
+Received: by 10.140.166.19 with HTTP; Mon, 29 Sep 2008 14:00:18 -0700 (PDT)
+Message-ID: <94a0d4530809291400g6b6df39cr3b74c109353fbdac@mail.gmail.com>
+Date: Tue, 30 Sep 2008 00:00:18 +0300
+From: "Felipe Contreras" <felipe.contreras@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20080929185109.GB21010@sirena.org.uk>
-References: <200809272237.22810.zecke@selfish.org>
-	<48DE9EE0.8090000@balister.org> <48DEA994.2030607@gmx.de>
-	<48DEAE43.5090407@balister.org>
-	<87od299ptz.fsf@neumann.lab.ossystems.com.br>
-	<20080929124518.GE27647@sirena.org.uk> <48E0E408.80805@klever.net>
-	<20080929151413.GI27647@sirena.org.uk>
-	<48E11E00.9080906@klever.net>
+In-Reply-To: <200809272237.22810.zecke@selfish.org>
 MIME-Version: 1.0
-In-Reply-To: <48E11E00.9080906@klever.net>
-X-Cookie: Do not write below this line.
-User-Agent: Mutt/1.5.13 (2006-08-11)
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
-X-SA-Exim-Scanned: No (on cassiel.sirena.org.uk);
-	SAEximRunCond expanded to false
+References: <200809272237.22810.zecke@selfish.org>
 Subject: Re: git conversion and what is missing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,15 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Sep 2008 18:55:10 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 29 Sep 2008 21:04:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Sep 29, 2008 at 08:27:12PM +0200, Michael Krelin wrote:
-> Commit '4232c25232afeb1e9c40200800577a6eb00246a3' by Laibsch. Perhaps, 
-> Rolf's got the patch from you on IRC?
+On Sat, Sep 27, 2008 at 11:37 PM, Holger Freyther <zecke@selfish.org> wrote:
+> Hey,
+>
+> I wonder what is missing until we finally switch to git? From my point of view
+> it is:
+>
+>        - Finishing this table [1]
+>        - Maybe fixing the script to get this one rev importer properly
+>        - Run the conversation...
 
-Nope, went via the bug tracker (I had to grovel out the commit in
-question to figure out if that was actually me).
+So there are no issues with the script?
+
+-- 
+Felipe Contreras
 
 
