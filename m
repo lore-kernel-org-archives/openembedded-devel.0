@@ -1,42 +1,23 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [208.84.147.47] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KkKjV-0007ic-LJ
+	(envelope-from <hacker@klever.net>) id 1KkNWq-0001xK-LY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Sep 2008 17:32:22 +0200
-Received: from freedom.ind.br (unknown [10.99.0.10])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 518AA33434A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2008 12:28:19 -0300 (BRT)
-Received: from freedom.ind.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id F19738DD8DF
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2008 12:28:19 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id BF71D8DD8DD
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2008 12:28:19 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 29 Sep 2008 12:28:19 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id C3030C2B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2008 12:28:28 -0300 (BRT)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 53CC5610045; Mon, 29 Sep 2008 12:26:08 -0300 (BRT)
-To: openembedded-devel@lists.openembedded.org
-References: <200809272237.22810.zecke@selfish.org> <48DEA994.2030607@gmx.de>
-	<48DEAE43.5090407@balister.org> <200809280259.18588.zecke@selfish.org>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Mon, 29 Sep 2008 12:26:08 -0300
-In-Reply-To: <200809280259.18588.zecke@selfish.org> (Holger Freyther's message
-	of "Sun\, 28 Sep 2008 02\:59\:18 +0200")
-Message-ID: <878wtb6kj3.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+	Mon, 29 Sep 2008 20:31:28 +0200
+Received: from pd953af89.dip0.t-ipconnect.de ([217.83.175.137] ident=hacker)
+	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1KkNSy-0004Zm-0V
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Sep 2008 20:27:29 +0200
+Message-ID: <48E11E00.9080906@klever.net>
+Date: Mon, 29 Sep 2008 20:27:12 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
 MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <200809272237.22810.zecke@selfish.org>	<48DE9EE0.8090000@balister.org>
+	<48DEA994.2030607@gmx.de>	<48DEAE43.5090407@balister.org>	<87od299ptz.fsf@neumann.lab.ossystems.com.br>	<20080929124518.GE27647@sirena.org.uk>
+	<48E0E408.80805@klever.net> <20080929151413.GI27647@sirena.org.uk>
+In-Reply-To: <20080929151413.GI27647@sirena.org.uk>
 Subject: Re: git conversion and what is missing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -51,26 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Sep 2008 15:32:22 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 29 Sep 2008 18:31:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Holger Freyther <zecke@selfish.org> writes:
+Commit '4232c25232afeb1e9c40200800577a6eb00246a3' by Laibsch. Perhaps, 
+Rolf's got the patch from you on IRC?
 
-> I like Otavio's idea with the deadline. The question is what to do with 
-> unknown names (coming from people using --author on mtn ci). Should we use 
-> the comitter id and put the name from mtn inside the comment?
+Love,
+H
 
-This looks like a good idea. This gives the credit to the author while
-doesn't block the migration. 
-
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Mark Brown wrote:
+> On Mon, Sep 29, 2008 at 04:19:52PM +0200, Michael Krelin wrote:
+>> Mark Brown wrote:
+> 
+>>>> Yes; it is used during conversion to properly set commits to the right
+>>>> author names however I believe we can't hold it forever. We need to
+>>>> set a deadline and if someone didn't fill it... so sorry. 
+> 
+>>> If they miss the deadline they could still be added to .mailmap later
+>>> which would fix up most of the interesting cases (eg, git log output).
+> 
+>> That should've been "we", not "they", no? :-)
+> 
+>>     ""                   : (["broonie"], ""),
+> 
+> Hrm, looks like that was me.  No idea why my e-mail address got dropped
+> from the commit...
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
