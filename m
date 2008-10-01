@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Kkvqx-0001Yp-Bm
-	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 09:10:31 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Kkvmz-0005RA-Eh
-	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 07:06:25 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 01 Oct 2008 07:06:25 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 01 Oct 2008 07:06:25 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 01 Oct 2008 09:06:15 +0200
-Message-ID: <gbv7h7$s6b$1@ger.gmane.org>
-References: <200810010447.44667.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-In-Reply-To: <200810010447.44667.zecke@selfish.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: RFC: Making it mandantory to have a checksums.ini entry
+	(envelope-from <zecke@selfish.org>) id 1Kkwxo-0000o0-J8
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Oct 2008 10:21:40 +0200
+Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Kkwto-0002HX-EE
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Oct 2008 10:17:33 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 1 Oct 2008 10:16:49 +0200
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200810011016.51128.zecke@selfish.org>
+Subject: [git] Sending ssh keys for the git access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,50 +29,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 07:10:31 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 01 Oct 2008 08:21:41 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 01-10-2008 04:47, Holger Freyther wrote:
-> Hey,
->
-> I constantly spend my day moving checksums from tmp/checksums.ini to the right
-> place and I would like to make it mandatory to have a checksums.ini entry
-> when adding new versions.
+Hey,
 
-+1
+everyone who has push access to our current infrastructure should be able to 
+push to our git servers as well. In order to have a smooth transition please 
+send your keys to mickey, richard, koen and me to make sure that we can grant 
+you access.
 
->
-> The spend time on copy and pasting a checksums.ini entry is really small and
-> the value is very high.
+I hope we can complete (most of) the migration while mickey and me are in 
+taipei.
 
-I added a bunch checksums from my buildmachines and poky a while ago, 
-Marcins scripts make that really easy.
-
-> Stuff like macports is forcing one to have checksums
-> as well.
->
-> The attached diff would force it.
-
-How that that patch affect things fetched for a CVS_TARBALL_STASH, e.g. 
-git_foo.bar.tar.gz, since that one is unversioned and prone to change?
-
-regards,
-
-Koen
-
->
-> comments appreciated
-> 	z.
->
->
-> ------------------------------------------------------------------------
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+regards
+	z.
 
 
