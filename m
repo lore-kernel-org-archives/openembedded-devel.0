@@ -1,28 +1,42 @@
-Received: from [91.198.206.2] (helo=mail.smartlink.ee)
+Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kalev@smartlink.ee>) id 1Kl0pM-0006jJ-0H
+	(envelope-from <otavio@freedom.ind.br>) id 1Kl1BQ-0007iZ-S7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 14:29:12 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.smartlink.ee (Postfix) with ESMTP id 8F65431030
+	Wed, 01 Oct 2008 14:52:01 +0200
+Received: from freedom.ind.br (unknown [10.99.0.10])
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id BD6FA33434D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2008 15:25:04 +0300 (EEST)
-Received: from mail.smartlink.ee ([127.0.0.1])
-	by localhost (mail.smartlink.ee [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ScrFdIqsV07W
+	Wed,  1 Oct 2008 09:47:50 -0300 (BRT)
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id CC86E8CA5F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2008 15:25:01 +0300 (EEST)
-Received: from [192.168.2.59] (wumpus.smartlink [192.168.2.245])
-	by mail.smartlink.ee (Postfix) with ESMTP id A16C930FCA
+	Wed,  1 Oct 2008 09:47:50 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id A01512445F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2008 15:25:01 +0300 (EEST)
-Message-ID: <48E36C18.4090504@smartlink.ee>
-Date: Wed, 01 Oct 2008 15:24:56 +0300
-From: Kalev Lember <kalev@smartlink.ee>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080926)
-MIME-Version: 1.0
+	Wed,  1 Oct 2008 09:47:50 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 1 Oct 2008 09:47:50 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 61CD0C1FB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 09:48:10 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 3A15961010F; Wed,  1 Oct 2008 09:45:38 -0300 (BRT)
 To: openembedded-devel@lists.openembedded.org
-Subject: git master not updating
+References: <48E36C18.4090504@smartlink.ee>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 01 Oct 2008 09:45:38 -0300
+In-Reply-To: <48E36C18.4090504@smartlink.ee> (Kalev Lember's message of "Wed\,
+	01 Oct 2008 15\:24\:56 +0300")
+Message-ID: <873ajglc0d.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+MIME-Version: 1.0
+Subject: Re: git master not updating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,18 +50,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 12:29:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Oct 2008 12:52:01 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hello,
+Kalev Lember <kalev@smartlink.ee> writes:
 
-http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=summary
-The master head of org.openembedded.dev is not updating. I already
-spotted two bug reports (4584 and 4590) which reported issues that were
-fixed in monotone 4 days ago, but never got into git master.
+> Hello,
+>
+> http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=summary
+> The master head of org.openembedded.dev is not updating. I already
+> spotted two bug reports (4584 and 4590) which reported issues that were
+> fixed in monotone 4 days ago, but never got into git master.
+
+org.openembedded.dev branch is up to date. I'm using it.
 
 -- 
-Kalev
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
