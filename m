@@ -1,38 +1,39 @@
-Received: from [74.125.78.144] (helo=ey-out-1920.google.com)
+Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicola.mfb@gmail.com>) id 1Kl1uN-0005kx-3c
+	(envelope-from <otavio@freedom.ind.br>) id 1Kl27k-0006FN-Jm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 15:38:27 +0200
-Received: by ey-out-1920.google.com with SMTP id 4so167663eyg.36
+	Wed, 01 Oct 2008 15:52:16 +0200
+Received: from freedom.ind.br (unknown [10.99.0.10])
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id 01E3533434D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Oct 2008 06:34:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type:references;
-	bh=LfQEYtrmuR+WcG+c7rqpSHnvwi/MIZJhFHoJS3vqBUQ=;
-	b=TVq2bFuC9klMvv1wO7i8v0rqmyCpT08u21pW6VeiA8eiaHnfa3NUwkNpxxcrFdShdi
-	usvin/8/MLRomaXi0T7K3ww6scPaRwIkvi7Df0XBuJ/Ez7aS7ugzH3tA7n8Wv9HbR1tr
-	wF4/09zf4wJ8QIGvyZ4lK+/b2vS1j3dbA9eM4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:references;
-	b=GGhi+6VyRWN+y39nGWblpzcmJXq1mIv7NgtxDQ3KzbYccOgpuU7msPwM8FuO1Smdja
-	ne5NUJLI8JRnO14F9jO0bYPOqo8h4pjocYPjiOE+nIqC+kIZTXL9lEXCq2AboHvuHBXy
-	3QaC0ZsmQwe9fjd9SplWfR9GUduID6c+Ob/Dg=
-Received: by 10.210.37.11 with SMTP id k11mr9667105ebk.136.1222868059465;
-	Wed, 01 Oct 2008 06:34:19 -0700 (PDT)
-Received: by 10.210.138.17 with HTTP; Wed, 1 Oct 2008 06:34:19 -0700 (PDT)
-Message-ID: <359c5480810010634m377ab993rd030d8c0c917b8b3@mail.gmail.com>
-Date: Wed, 1 Oct 2008 15:34:19 +0200
-From: "Nicola Mfb" <nicola.mfb@gmail.com>
+	Wed,  1 Oct 2008 10:48:05 -0300 (BRT)
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 4AA648DF03D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 10:48:06 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 139988DF03E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 10:48:06 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 1 Oct 2008 10:48:05 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 720C7C1FB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 10:48:23 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 300A061010F; Wed,  1 Oct 2008 10:45:51 -0300 (BRT)
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48E3762E.6000203@smartlink.ee>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 01 Oct 2008 10:45:51 -0300
+Message-ID: <87myhocttc.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-References: <48E36C18.4090504@smartlink.ee>
-	<873ajglc0d.fsf@neumann.lab.ossystems.com.br>
-	<48E3762E.6000203@smartlink.ee>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: git master not updating
+Subject: firefox 3.0.1 issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 13:38:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Oct 2008 13:52:16 -0000
+Content-Type: text/plain; charset=us-ascii
 
-2008/10/1 Kalev Lember <kalev@smartlink.ee>
-[...]
+Hello,
 
-> Well yes, but if you just do:
-> git clone git://git.openembedded.net/org.openembedded.dev
->
-> you'll end up on master branch, which is not updating.
+I've found few issues with Firefox 3.0.1. Those are:
 
+ - lack of theme icons (arrows and like)
+ - it is presented as mineshield instead of firefox
 
-Yes, the same here, i opened one of those bugs.
-I'm using a semiautomated makefile environment for fso/openmoko, this use
-git and not monotone, so this problem affects a lot of peoples, please fix!
+Do someone knows how to fix those two issues?
 
-Regards
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
-    Nicola
 
