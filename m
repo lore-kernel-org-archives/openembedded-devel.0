@@ -1,21 +1,32 @@
-Received: from [208.84.147.47] (helo=rhodos.klever.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hacker@klever.net>) id 1KkxAv-0005Tj-GQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 10:35:13 +0200
-Received: from [85.183.207.43] (helo=[192.168.150.156])
-	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1Kkx6w-0003fm-On
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 10:31:06 +0200
-Message-ID: <48E33546.8040406@klever.net>
-Date: Wed, 01 Oct 2008 10:31:02 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KkxmB-0006DN-Vh
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 11:13:44 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KkxiD-0001bx-3B
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 09:09:37 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 01 Oct 2008 09:09:37 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 01 Oct 2008 09:09:37 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 01 Oct 2008 11:09:29 +0200
+Message-ID: <gbveo9$i3k$1@ger.gmane.org>
 References: <200810011016.51128.zecke@selfish.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
 In-Reply-To: <200810011016.51128.zecke@selfish.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [git] Sending ssh keys for the git access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,40 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 08:35:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 01 Oct 2008 09:13:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I do have push access to monotone, but I am pushing like twice a year 
-nowadays, I wonder if it would make more sense to keep authorized_keys 
-store clean. Especially, taking into account that picking commits from 
-my public git branch is worse than easy. ;-)
-
-Not that I mind sending in my key, even though that would make one 
-excuse less for not pushing stuff ;-)
-
-Love,
-H
-
-
-Holger Freyther wrote:
+On 01-10-2008 10:16, Holger Freyther wrote:
 > Hey,
-> 
-> everyone who has push access to our current infrastructure should be able to 
-> push to our git servers as well. In order to have a smooth transition please 
-> send your keys to mickey, richard, koen and me to make sure that we can grant 
+>
+> everyone who has push access to our current infrastructure should be able to
+> push to our git servers as well. In order to have a smooth transition please
+> send your keys to mickey, richard, koen and me to make sure that we can grant
 > you access.
-> 
-> I hope we can complete (most of) the migration while mickey and me are in 
-> taipei.
-> 
-> regards
-> 	z.
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+that is:
+
+mickey@vanille-media.de
+rpurdie@rpsys.net
+koen@openembedded.org
+zecke@selfish.org
+
+Please prefix it with [OE git key] or something like that, so it doesn't 
+get lost in our inboxes.
+
+regards,
+
+Koen
+
 
 
 
