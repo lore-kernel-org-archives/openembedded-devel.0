@@ -1,41 +1,28 @@
-Received: from [72.14.220.154] (helo=fg-out-1718.google.com)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Kl4nz-0003u0-3c
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 18:44:03 +0200
-Received: by fg-out-1718.google.com with SMTP id l26so445859fgb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Oct 2008 09:39:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=dfJDkxvTwGnd5xo/EvgA1XRFIZWe2SKCYJbnzFrBat4=;
-	b=cTi5ByOyNJiUvxlfCOYGa7mabXMwzldJ2v4Pehiw9N75iU10EtcllqH6KU3UV0ZJgc
-	IklOsBrgm9UHPOitwsAb/d+SN+3a9N77+2O99NvY4Zh8Pd/i5/tiB7V8LeoiuK8zK6xE
-	Se6pnyMwlbxtcAO5fiXXw2aIQHOYbfv+FvxRk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=oig0n1m9A8YbCSoSXvBi5vklQbVpTJvLOYEJ+00rE2pjzQWLoqlvPWFTn20LIgJoQy
-	djNdIR/tS7NUqLXexMw/fcWDVud1rRs53/DfMga9nUe3SniYfuz2L23jzn21oEy+n2Hl
-	ZIgP+cnT/NZ3ikUsN5Cx3KOnWmwPnnGCHD6fc=
-Received: by 10.187.228.6 with SMTP id f6mr1500705far.59.1222879194428;
-	Wed, 01 Oct 2008 09:39:54 -0700 (PDT)
-Received: by 10.187.224.10 with HTTP; Wed, 1 Oct 2008 09:39:54 -0700 (PDT)
-Message-ID: <d1b08f940810010939k66d8abdrc3e7e12075b77562@mail.gmail.com>
-Date: Wed, 1 Oct 2008 18:39:54 +0200
-From: "Andrea Adami" <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48E39BC1.6080200@dls.net>
+	(envelope-from <trini@kernel.crashing.org>) id 1Kl4tv-0003zb-DK
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 18:50:11 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20081001164601.IKEO774.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 1 Oct 2008 12:46:01 -0400
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id MUm01a0091E665w04Um0w4; Wed, 01 Oct 2008 12:46:00 -0400
+X-Authority-Analysis: v=1.0 c=1 a=z1tr3TCxCQgA:10 a=I0JlbsZgvJAA:10
+	a=RQ9Spdt5BUDRD_feUN0A:9 a=OLWcXCAbq8gldNZChnM0Jyp9vuoA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Wed, 1 Oct 2008 09:45:59 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20081001164559.GB3010@smtp.west.cox.net>
+References: <gbvcad$aan$1@ger.gmane.org>
 MIME-Version: 1.0
-References: <48E36C18.4090504@smartlink.ee>
-	<873ajglc0d.fsf@neumann.lab.ossystems.com.br>
-	<48E3762E.6000203@smartlink.ee>
-	<359c5480810010634m377ab993rd030d8c0c917b8b3@mail.gmail.com>
-	<gc017m$gq4$1@ger.gmane.org> <48E39BC1.6080200@dls.net>
-Subject: Re: git master not updating
+In-Reply-To: <gbvcad$aan$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: Using angstrom with org.oe.dev and bitbake from svn
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,34 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 16:44:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Oct 2008 16:50:11 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-FYI this was briefly discussed on irc:
+On Wed, Oct 01, 2008 at 10:27:57AM +0200, Koen Kooi wrote:
 
-http://hentges.net/tmp/logs/irc/%23oe/2008/September/20080926_oe.log
-...
-[20080926 18:00:51] <mickey|tw>   zecke: did you see my request
-regarding combining CIAbot notifications for multiple branches? Would
-be a nice thing and reduce clutter
-[20080926 18:02:10] <zecke>   mickey|tw: yes, the ciabot runs on
-gitweb where I have no access to :)
-[20080926 18:02:29] <mickey|tw>   gitweb?
-[20080926 18:02:40] <zecke>   mickey|tw: git.openembedded.org
-[20080926 18:02:48] <mickey|tw>   oh, there it runs
-[20080926 18:02:49] <mickey|tw>   interesting
-[20080926 18:03:05] <zecke>   mickey|tw: a) I can stop pushing master.
-I did it because it was needed on repo.or.cz
-[20080926 18:03:39] <zecke>   mickey|tw: b) someone with access
-changes the post commit script to have if [ $branch != "master" ];
-then run_cia_script; fi
-[20080926 18:04:47] <mickey|tw>   hmm
-[20080926 18:04:51] <mickey|tw>   which option do you recommend?
-...
-20080926 18:15:21] <zecke>   mickey|tw: I will not push master anymore
-[20080926 18:16:30] <mickey|tw>   oki, cool
-...
+> Hi,
+>
+> The env filtering got committed last night, so to keep your build  
+> working do:
+>
+> export BB_ENV_EXTRAWHITE="MACHINE DISTRO ANGSTROM_MODE"
+>
+> or download the updated sourcing script[1]
+
+Is this an angstrom-only thing?  Or will other distros need to do:
+export BB_ENV_EXTRAWHITE="MACHINE DISTRO" now?  Thanks
+
+-- 
+Tom Rini
 
 
