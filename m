@@ -1,40 +1,31 @@
-Received: from [66.249.92.169] (helo=ug-out-1314.google.com)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicola.mfb@gmail.com>) id 1Kl6YY-0000Km-Tg
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 20:36:14 +0200
-Received: by ug-out-1314.google.com with SMTP id y2so930786uge.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Oct 2008 11:32:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type:references;
-	bh=Enuo4oWFVUmR78zyfpuxjysdCNVJhTRL5fFFNExvgGc=;
-	b=MimecKgSzmcWbIIJj4u5m955r1TBqQu1gQBOHHkKsqB2VRFSBX44TFi+HOJZhY/X9b
-	d55WfayGd5CFo1pSAzK8MWCz7nIXHls8/FGL54UAunVBebfG1zsBglcXKX38k1MEaIMj
-	BG8Ia01vgIwiTdj1EhZUc+mE/CzNvXNt9m0i0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:references;
-	b=iTDHF5+ChaYFlxrZfhuaMCk3AsUkj04QzOfHQlKmAoOQxAZOu4B5OKsWbERptDLmeA
-	rJQCqq6KFOqwaBStCgsBRJDtZHfu/TfYs5ouIqnXQ6Jr4sVfZVzoHA/bRUiNhf0nZv3H
-	ESD0C52vAjmaPvyaXzBzk2p9uaCOMYG7JLTiU=
-Received: by 10.210.56.7 with SMTP id e7mr10109202eba.5.1222885926297;
-	Wed, 01 Oct 2008 11:32:06 -0700 (PDT)
-Received: by 10.210.138.17 with HTTP; Wed, 1 Oct 2008 11:32:06 -0700 (PDT)
-Message-ID: <359c5480810011132h5ff6e32n14086cc77a3745d4@mail.gmail.com>
-Date: Wed, 1 Oct 2008 20:32:06 +0200
-From: "Nicola Mfb" <nicola.mfb@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48E3AFB5.5000600@balister.org>
-MIME-Version: 1.0
+	(envelope-from <trini@kernel.crashing.org>) id 1Kl6k3-0000fU-BS
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 20:48:07 +0200
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20081001184356.VUBX6175.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 1 Oct 2008 14:43:56 -0400
+Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
+	id MWju1a0021E665w03WjuUb; Wed, 01 Oct 2008 14:43:56 -0400
+X-Authority-Analysis: v=1.0 c=1 a=QRXn24UNWUWkOPM5b7cA:9
+	a=B0NSJOHO_KmjCo7JMl-4NNBw1dYA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Wed, 1 Oct 2008 11:43:53 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20081001184353.GD3010@smtp.west.cox.net>
 References: <48E36C18.4090504@smartlink.ee>
 	<873ajglc0d.fsf@neumann.lab.ossystems.com.br>
 	<48E3762E.6000203@smartlink.ee>
 	<359c5480810010634m377ab993rd030d8c0c917b8b3@mail.gmail.com>
 	<gc017m$gq4$1@ger.gmane.org> <48E39BC1.6080200@dls.net>
-	<48E3AFB5.5000600@balister.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<gc0bc5$o9o$2@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gc0bc5$o9o$2@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: git master not updating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,38 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 18:36:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Oct 2008 18:48:07 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-2008/10/1 Philip Balister <philip@balister.org>
-
-> [...]
->>
+On Wed, Oct 01, 2008 at 07:17:57PM +0200, Koen Kooi wrote:
+> On 01-10-2008 17:48, Mike (mwester) wrote:
+>> Koen Kooi wrote:
+>>> On 01-10-2008 15:34, Nicola Mfb wrote:
+>>>> 2008/10/1 Kalev Lember<kalev@smartlink.ee>
+>>>> [...]
+>>>>
+>>>>> Well yes, but if you just do:
+>>>>> git clone git://git.openembedded.net/org.openembedded.dev
+>>>>>
+>>>>> you'll end up on master branch, which is not updating.
+>>>>
+>>>> Yes, the same here, i opened one of those bugs.
+>>>> I'm using a semiautomated makefile environment for fso/openmoko, this use
+>>>> git and not monotone, so this problem affects a lot of peoples, please
+>>>> fix!
+>>> That's what you get for using makefiles....
 >>
 >> How does a makefile affect the branches not being updated?
->>
 >
-> The problem is that if someone has a problem and shows up in #oe asking why
-> there are not any updates. If they can't explain the actual command to do
-> the updates, most of the people in #oe cannot help.
->
-> Please have people using makefiles ask for help in the project specific
-> channels first.
->
+> All org.openembedded.* branches are still being updated.
 
-If an user does not understand that git pull does not updates, and that git
-log does report 26 september, how may he know that the git server is at
-openenembedded? it would report problems to openmoko, or fso!
-Peoples are asking here because they read git.openembedded.net in the
-Makefile, someone know that you are migrating to git, so it's normal to
-think that the git server at openembedded should work!
-The *only* problem is that the git server is a test installation as you may
-only derive from the wiki!
-So you may be gentle with peoples and update the oe wiki saying that using
-git is unsupported, so makefile authors may decide to not use it just now,
-and use it later!
+So is the answer that the "master" branch in git it not planned on being
+used?  Or it will have some other use, documented over in ... ?  It
+sounds like the problem is that the policy on what to use in the git
+tree isn't published yet.  Or it is, and someone didn't read it.
 
-     Nicola
+-- 
+Tom Rini
+
 
