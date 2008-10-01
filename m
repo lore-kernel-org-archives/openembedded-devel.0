@@ -1,24 +1,22 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1Kl3DU-0007eq-Hy
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 17:02:16 +0200
-Received: (qmail invoked by alias); 01 Oct 2008 14:58:07 -0000
-Received: from p579E18D9.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.24.217]
-	by mail.gmx.net (mp030) with SMTP; 01 Oct 2008 16:58:07 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18rvexPKjsrHYcR2xcyEC9jMP9n/RGOTurmZR5oj1
-	tSeElyCjd7dWPK
-Message-ID: <48E38FE1.2090800@gmx.net>
-Date: Wed, 01 Oct 2008 16:57:37 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
+Received: from [216.145.245.199] (helo=mx03.dls.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1Kl416-0005h0-Ut
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 17:53:33 +0200
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx03.dls.net with esmtpa (Exim 4.63)
+	(envelope-from <mwester@dls.net>) id 1Kl3x5-0004MU-Lg
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 10:49:23 -0500
+Message-ID: <48E39BC1.6080200@dls.net>
+Date: Wed, 01 Oct 2008 10:48:17 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.17) Gecko/20080914 Thunderbird/2.0.0.17 Mnenhy/0.7.5.666
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.71
-Subject: missing dbus-1.0.3 patch: sanitize-reply-timeout.patch
+To: openembedded-devel@openembedded.org
+References: <48E36C18.4090504@smartlink.ee>	<873ajglc0d.fsf@neumann.lab.ossystems.com.br>	<48E3762E.6000203@smartlink.ee>	<359c5480810010634m377ab993rd030d8c0c917b8b3@mail.gmail.com>
+	<gc017m$gq4$1@ger.gmane.org>
+In-Reply-To: <gc017m$gq4$1@ger.gmane.org>
+Subject: Re: git master not updating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,45 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 15:02:16 -0000
-X-Groupsio-MsgNum: 6026
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig79F31D416C0C9A07200A739B"
+X-List-Received-Date: Wed, 01 Oct 2008 15:53:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---------------enig79F31D416C0C9A07200A739B
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+Koen Kooi wrote:
+> On 01-10-2008 15:34, Nicola Mfb wrote:
+>> 2008/10/1 Kalev Lember<kalev@smartlink.ee>
+>> [...]
+>>
+>>> Well yes, but if you just do:
+>>> git clone git://git.openembedded.net/org.openembedded.dev
+>>>
+>>> you'll end up on master branch, which is not updating.
+>>
+>>
+>> Yes, the same here, i opened one of those bugs.
+>> I'm using a semiautomated makefile environment for fso/openmoko, this use
+>> git and not monotone, so this problem affects a lot of peoples, please
+>> fix!
+> 
+> That's what you get for using makefiles....
 
-Hi,
-the following patch is not in the repository:
+How does a makefile affect the branches not being updated?
 
-NOTE: Applying patch 'sanitize-reply-timeout.patch'
-(/home/rschus/oe/org.openembedded.dev/packages/dbus/dbus-1.0.3/./sanitize=
--reply-timeout.patch)
-NOTE: Task failed: Error:
-/home/rschus/oe/org.openembedded.dev/packages/dbus/dbus-1.0.3/./sanitize-=
-reply-timeout.patch
-not found.
-
-Please contribute. :)
-
-Regards
-Robert
+Mike (mwester)
 
 
---------------enig79F31D416C0C9A07200A739B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFI44/kG9cfwmwwEtoRAv3GAJ41gyJ0bDxT7WEgKoYXLUB1Hm0f0QCgkx1r
-NfZkDjqssgfqdEuBowvLeQ8=
-=5DQW
------END PGP SIGNATURE-----
-
---------------enig79F31D416C0C9A07200A739B--
