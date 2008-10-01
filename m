@@ -1,21 +1,32 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kkwxo-0000o0-J8
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 10:21:40 +0200
-Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kkwto-0002HX-EE
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2008 10:17:33 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 1 Oct 2008 10:16:49 +0200
-User-Agent: KMail/1.9.9
-MIME-Version: 1.0
-Message-Id: <200810011016.51128.zecke@selfish.org>
-Subject: [git] Sending ssh keys for the git access
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Kkx83-0005PT-T2
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 10:32:15 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Kkx45-0008PK-6I
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 08:28:09 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 01 Oct 2008 08:28:09 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 01 Oct 2008 08:28:09 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 01 Oct 2008 10:27:57 +0200
+Message-ID: <gbvcad$aan$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
+Sender: news <news@ger.gmane.org>
+Cc: angstrom-distro-devel@linuxtogo.org
+Subject: Using angstrom with org.oe.dev and bitbake from svn
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,23 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 08:21:41 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Wed, 01 Oct 2008 08:32:16 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hey,
+Hi,
 
-everyone who has push access to our current infrastructure should be able to 
-push to our git servers as well. In order to have a smooth transition please 
-send your keys to mickey, richard, koen and me to make sure that we can grant 
-you access.
+The env filtering got committed last night, so to keep your build 
+working do:
 
-I hope we can complete (most of) the migration while mickey and me are in 
-taipei.
+export BB_ENV_EXTRAWHITE="MACHINE DISTRO ANGSTROM_MODE"
 
-regards
-	z.
+or download the updated sourcing script[1]
+
+regards,
+
+Koen
+
+[1] http://www.angstrom-distribution.org/files/source-me.txt
+
 
 
