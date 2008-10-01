@@ -1,32 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [208.84.147.47] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Kkx83-0005PT-T2
-	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 10:32:15 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Kkx45-0008PK-6I
-	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 08:28:09 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 01 Oct 2008 08:28:09 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 01 Oct 2008 08:28:09 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 01 Oct 2008 10:27:57 +0200
-Message-ID: <gbvcad$aan$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Using angstrom with org.oe.dev and bitbake from svn
+	(envelope-from <hacker@klever.net>) id 1KkxAv-0005Tj-GQ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Oct 2008 10:35:13 +0200
+Received: from [85.183.207.43] (helo=[192.168.150.156])
+	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1Kkx6w-0003fm-On
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Oct 2008 10:31:06 +0200
+Message-ID: <48E33546.8040406@klever.net>
+Date: Wed, 01 Oct 2008 10:31:02 +0200
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <200810011016.51128.zecke@selfish.org>
+In-Reply-To: <200810011016.51128.zecke@selfish.org>
+Subject: Re: [git] Sending ssh keys for the git access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,24 +30,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 08:32:16 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 01 Oct 2008 08:35:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+I do have push access to monotone, but I am pushing like twice a year 
+nowadays, I wonder if it would make more sense to keep authorized_keys 
+store clean. Especially, taking into account that picking commits from 
+my public git branch is worse than easy. ;-)
 
-The env filtering got committed last night, so to keep your build 
-working do:
+Not that I mind sending in my key, even though that would make one 
+excuse less for not pushing stuff ;-)
 
-export BB_ENV_EXTRAWHITE="MACHINE DISTRO ANGSTROM_MODE"
+Love,
+H
 
-or download the updated sourcing script[1]
 
-regards,
-
-Koen
-
-[1] http://www.angstrom-distribution.org/files/source-me.txt
+Holger Freyther wrote:
+> Hey,
+> 
+> everyone who has push access to our current infrastructure should be able to 
+> push to our git servers as well. In order to have a smooth transition please 
+> send your keys to mickey, richard, koen and me to make sure that we can grant 
+> you access.
+> 
+> I hope we can complete (most of) the migration while mickey and me are in 
+> taipei.
+> 
+> regards
+> 	z.
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
