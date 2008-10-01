@@ -1,33 +1,28 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Kl9R9-0003Qs-Lp
-	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 23:40:48 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20081001213636.OVQX29505.fed1rmmtao107.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 1 Oct 2008 17:36:36 -0400
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id MZcb1a00B1E665w04ZcbQw; Wed, 01 Oct 2008 17:36:36 -0400
-X-Authority-Analysis: v=1.0 c=1 a=nnTFpJXoFXnr55DqAAsA:9
-	a=ba8-3uxP3yM7KltQpPhAUg_3l_AA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 1 Oct 2008 14:36:35 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20081001213635.GF3010@smtp.west.cox.net>
-References: <48E36C18.4090504@smartlink.ee>
-	<873ajglc0d.fsf@neumann.lab.ossystems.com.br>
-	<48E3762E.6000203@smartlink.ee>
-	<359c5480810010634m377ab993rd030d8c0c917b8b3@mail.gmail.com>
-	<gc017m$gq4$1@ger.gmane.org> <48E39BC1.6080200@dls.net>
-	<gc0bc5$o9o$2@ger.gmane.org>
-	<20081001184353.GD3010@smtp.west.cox.net>
-	<gc0lv9$46r$1@ger.gmane.org>
+	(envelope-from <rod@whitby.id.au>) id 1KlBDt-0002OP-B1
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Oct 2008 01:35:13 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id E95B2171525
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 19:31:01 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Wed, 01 Oct 2008 19:31:01 -0400
+X-Sasl-enc: sM4SvD/rkkJg5kqyhk1Rz0Ffwas4Yo8LdthD9RRacGhY 1222903861
+Received: from [192.168.1.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id D9D9B15B0E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 19:31:00 -0400 (EDT)
+Message-ID: <48E4082D.9030000@whitby.id.au>
+Date: Thu, 02 Oct 2008 09:00:53 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
 MIME-Version: 1.0
-In-Reply-To: <gc0lv9$46r$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+To: openembedded-devel@lists.openembedded.org
+References: <48E36C18.4090504@smartlink.ee>	<873ajglc0d.fsf@neumann.lab.ossystems.com.br>	<48E3762E.6000203@smartlink.ee>	<359c5480810010634m377ab993rd030d8c0c917b8b3@mail.gmail.com>
+	<gc017m$gq4$1@ger.gmane.org>
+In-Reply-To: <gc017m$gq4$1@ger.gmane.org>
 Subject: Re: git master not updating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,34 +37,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 21:40:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Oct 2008 23:35:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 01, 2008 at 10:18:49PM +0200, Koen Kooi wrote:
-> On 01-10-2008 20:43, Tom Rini wrote:
->> On Wed, Oct 01, 2008 at 07:17:57PM +0200, Koen Kooi wrote:
-[snip]
->>> All org.openembedded.* branches are still being updated.
+Koen Kooi wrote:
+> On 01-10-2008 15:34, Nicola Mfb wrote:
+>> 2008/10/1 Kalev Lember<kalev@smartlink.ee>
+>> [...]
 >>
->> So is the answer that the "master" branch in git it not planned on being
->> used?  Or it will have some other use, documented over in ... ?  It
->> sounds like the problem is that the policy on what to use in the git
->> tree isn't published yet.  Or it is, and someone didn't read it.
->
-> The only supported way to use OE is via monotone, if you are using a  
-> makefile that's using something else you are SOL
+>>> Well yes, but if you just do:
+>>> git clone git://git.openembedded.net/org.openembedded.dev
+>>>
+>>> you'll end up on master branch, which is not updating.
+>>
+>> Yes, the same here, i opened one of those bugs.
+>> I'm using a semiautomated makefile environment for fso/openmoko, this use
+>> git and not monotone, so this problem affects a lot of peoples, please fix!
+> 
+> That's what you get for using makefiles....
 
-I'm not using a Makefile.  I'd just like to know what part of git I
-should be look at checking out and attempting to work in, as the
-transition is apparently imminent.  I'm assuming that once the
-transition is complete, there'll be documentation saying "If you want
-the dev branch, do ...", "If you want the stable branch, do ...".  Does
-this type of documentation not yet exist?  Is there still some debate as
-to if the git master branch will be the dev branch, or if the naming
-scheme of org.openembedded.{dev,stable}, etc will continue?  Thanks.
+A typical response from Koen.  Sigh.  For once it would be good for him
+to focus on the problem at hand (which was reported correctly with no
+mention of makefiles) instead of trying to take childish potshots at
+things he has a personal vendetta against.
 
--- 
-Tom Rini
+A number of places on the internet (including
+http://elinux.org/BeagleBoardAndOpenEmbeddedGit,
+http://wiki.openembedded.net/index.php/Git,
+http://wiki.neurostechnology.com/index.php/OpenEmbedded_OSD2,
+http://linux.paduli.org/index.php?title=OpenEmbedded%2C_linux%2C_software_e_sviluppo_per_dispositivi_embedded!,
+ just for some examples) advise users to type the following command to
+clone the trial OE git repo, with no mention of needing a specific branch:
+
+   git clone git://git.openembedded.net/org.openembedded.dev/
+
+In fact, Koen himself advised users to use exactly that command (and no
+mention of needing to check out a specific branch) in the #beagle IRC
+channel on 14th June 2008 (see
+http://www.beagleboard.org/irclogs/index.php?date=2008-06-14 at [12:43:48]).
+
+That used to work, and now it doesn't, due to an unannounced change to
+the operation of the trial OE git repo.
+
+Note that I've been careful to say "trial OE git repo" everywhere, since
+it's still a trial and there is no official OE documentation on whether
+you should be pulling from the master branch or the org.openembedded.dev
+branch (and as can be seen from the BeagleBoard page above, and Koen's
+instructions to people on the #beagle IRC channel, the confusion exists
+independently of whether a makefile is used or not).  So anyone using
+the trial OE git repo does so at their own risk.
+
+The beauty of a makefile is that *everyone* using it can be migrated to
+the latest correct instructions for using the trial OE git repo
+automatically.
+
+Koen, are you going to go around and fix all the places on the internet
+that have propagated the obsolete instructions on how to use the trial
+OE git repo (including the IRC log where you yourself gave those
+obsolete instructions)?
+
+I'll be doing so today for all users of the Makefiles who are affected
+by this change in how the trial OE git repo should be accessed.
+
+-- Rod
 
 
