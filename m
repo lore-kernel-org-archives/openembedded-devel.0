@@ -1,22 +1,21 @@
-Received: from [216.145.245.199] (helo=mx03.dls.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Kl6FH-0003BX-RG
-	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 20:16:19 +0200
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx03.dls.net with esmtpa (Exim 4.63)
-	(envelope-from <mwester@dls.net>) id 1Kl6BG-0007gI-Fk
-	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 13:12:10 -0500
-Message-ID: <48E3BD38.2080708@dls.net>
-Date: Wed, 01 Oct 2008 13:11:04 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.17) Gecko/20080914 Thunderbird/2.0.0.17 Mnenhy/0.7.5.666
+	(envelope-from <openembedded@haerwu.biz>) id 1Kl6TX-0008Vf-Bp
+	for openembedded-devel@openembedded.org; Wed, 01 Oct 2008 20:31:03 +0200
+Received: (qmail 23284 invoked by uid 813007); 1 Oct 2008 18:26:54 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Oct 2008 18:26:54 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 1 Oct 2008 20:26:59 +0200
+User-Agent: KMail/1.10.0 (Linux/2.6.27-rc7; KDE/4.1.1; x86_64; ; )
+References: <20081001213206.1aume264o4gko4so@www.pochta.ru>
+In-Reply-To: <20081001213206.1aume264o4gko4so@www.pochta.ru>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <48E36C18.4090504@smartlink.ee>	<873ajglc0d.fsf@neumann.lab.ossystems.com.br>	<48E3762E.6000203@smartlink.ee>	<359c5480810010634m377ab993rd030d8c0c917b8b3@mail.gmail.com>	<gc017m$gq4$1@ger.gmane.org>	<48E39BC1.6080200@dls.net>
-	<gc0bc5$o9o$2@ger.gmane.org>
-In-Reply-To: <gc0bc5$o9o$2@ger.gmane.org>
-Subject: Re: git master not updating
+Message-Id: <200810012027.00278.openembedded@haerwu.biz>
+Subject: Re: I want to help with magician platform
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,48 +29,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2008 18:16:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 01 Oct 2008 18:31:03 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> On 01-10-2008 17:48, Mike (mwester) wrote:
->> Koen Kooi wrote:
->>> On 01-10-2008 15:34, Nicola Mfb wrote:
->>>> 2008/10/1 Kalev Lember<kalev@smartlink.ee>
->>>> [...]
->>>>
->>>>> Well yes, but if you just do:
->>>>> git clone git://git.openembedded.net/org.openembedded.dev
->>>>>
->>>>> you'll end up on master branch, which is not updating.
->>>>
->>>> Yes, the same here, i opened one of those bugs.
->>>> I'm using a semiautomated makefile environment for fso/openmoko,
->>>> this use
->>>> git and not monotone, so this problem affects a lot of peoples, please
->>>> fix!
->>> That's what you get for using makefiles....
->>
->> How does a makefile affect the branches not being updated?
-> 
-> All org.openembedded.* branches are still being updated.
->
+On Wednesday 01 of October 2008 19:32:06 linuxrulez@land.ru wrote:
+> Hi everyone!
 
-Yes?  And how does a wrapper of any sort, makefile or shell script,
-affect that?  Are you saying the bitbake and OE have code to detect if
-"make" is a parent process, and it behaves differently?  Or are you
-saying that "make" is broken?  Or are their unknown bugs in bitbake or
-OE recipes that seem to behave badly when bitbake is invoked by "make"?
+Hi unnamed poster
 
-Of course it's none of the above  -- it's that you despise the makefile
---  but a lot of other people might actually think you are making some
-technically-sound point, and wrongly determine that OE and make are
-incompatible in some way.
+> I want to help with supporting magician platform in oe/angstrom and
+> do what I can to help for building/testing/patching.
 
-So why not just say that the wrong branch is being pulled instead of
-making snide comments about the tools others use?
+Cool - it is nice to see user who is not afraid of testing ;)
 
-Mike (mwester)
+> Anyone who supports magician now, contact with me
+
+I think that better would be if You will contact Philipp Zabel who is 
+magician maintainer (as noted in MAINTAINERS file in OE metadata).
+
+-- 
+JID: hrw@jabber.org
+
+
 
 
