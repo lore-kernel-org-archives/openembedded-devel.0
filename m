@@ -1,28 +1,42 @@
-Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
+Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1KlDQN-0006RH-17
+	(envelope-from <otavio@freedom.ind.br>) id 1KlDQa-0006RO-M3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Oct 2008 03:56:15 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 41EBF171742;
-	Wed,  1 Oct 2008 21:52:05 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Wed, 01 Oct 2008 21:52:05 -0400
-X-Sasl-enc: 73c+ZqM3gEIvUbSDZ+noB4v5pJeaPfUIghscCWfsfDMX 1222912324
-Received: from [192.168.1.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id F18F4A5EE;
-	Wed,  1 Oct 2008 21:52:03 -0400 (EDT)
-Message-ID: <48E4293B.8000809@whitby.id.au>
-Date: Thu, 02 Oct 2008 11:21:55 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
+	Thu, 02 Oct 2008 03:56:28 +0200
+Received: from freedom.ind.br (unknown [10.99.0.10])
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id C1E703343AA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 22:52:14 -0300 (BRT)
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id E99288CADDA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 22:52:18 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id B5C778CADD9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 22:52:18 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 1 Oct 2008 22:52:18 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 2CC1EC1FB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2008 22:52:38 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id C1F9E61015C; Wed,  1 Oct 2008 22:50:02 -0300 (BRT)
+To: openembedded-devel@lists.openembedded.org
+References: <48E36C18.4090504@smartlink.ee> <gc017m$gq4$1@ger.gmane.org>
+	<48E4082D.9030000@whitby.id.au> <200810020243.50896.zecke@selfish.org>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 01 Oct 2008 22:50:02 -0300
+In-Reply-To: <200810020243.50896.zecke@selfish.org> (Holger Freyther's message
+	of "Thu\, 2 Oct 2008 02\:43\:50 +0200")
+Message-ID: <87vdwbsr3p.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-To: zecke@selfish.org
-References: <48E36C18.4090504@smartlink.ee>
-	<gc017m$gq4$1@ger.gmane.org>	<48E4082D.9030000@whitby.id.au>
-	<200810020243.50896.zecke@selfish.org>
-In-Reply-To: <200810020243.50896.zecke@selfish.org>
-Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: I'm sick of that Was Re: git master not updating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,35 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2008 01:56:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Oct 2008 01:56:29 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Holger Freyther wrote:
-> - I wrote mtn2git because I felt like, no one ever said thank you
-> - I run mtn2git on the OE metadata on a server provided by a company that has 
-> nothing todo with OpenEmbedded
-> - I maintain the running of the script over a GPRS line with a couple of 
-> seconds delay, no one ever said thank you.
-> 
+Holger Freyther <zecke@selfish.org> writes:
+
 > Instead I _always_ get complains for a service I do for the community that was 
 > announced as "experimental and might vanish every day". I'm sick of this 
 > attitude. I will discontinue this service as of now.
 
-Holger,
+I do believe that so many people relying in your service proves it is
+very useful. I do hope you continue the service since many people
+relies on it.
 
-I hope you didn't take any of my comments as complaints.  I was careful
-to note that this is an unofficial service that no-one should be relying
-upon, and that many people very much appreciate.
-
-It is because of your service that people building
-www.freesmartphone.org distro have never needed to worry about monotone.
- That in itself demands a huge gratitude.
-
-Please don't discontinue it.   If you would prefer to hand over the
-hosting or maintenance of the OE git server to someone else, I'm sure we
-could find a group of people (myself included) who would be happy to help.
-
--- Rod
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
