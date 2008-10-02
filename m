@@ -1,37 +1,32 @@
-Received: from [74.125.44.157] (helo=yx-out-1718.google.com)
+Received: from [91.198.206.2] (helo=mail.smartlink.ee)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KlMkM-0000Pd-KN
+	(envelope-from <kalev@smartlink.ee>) id 1KlNiu-0007AP-Gr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Oct 2008 13:53:30 +0200
-Received: by yx-out-1718.google.com with SMTP id 4so186217yxp.42
+	Thu, 02 Oct 2008 14:56:04 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mail.smartlink.ee (Postfix) with ESMTP id E189B30E07
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Oct 2008 04:49:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=UZql/OUF5lSh08p47tx5eFRm20ukFXIE0oTMjHwfm/g=;
-	b=WBaMySq4juVxnBCNg2A0J1aJy0VdeFSpHRKShiTL9XFyw2IS7g9xfoHlsE3lna3vyE
-	snrUxeQ7kDNOPJKBcS4lEN5kHAAo45hI4TLxv2wJCx7jAwCDw2KJx4mLQsaDeEp9Pnha
-	Slo2+gLHSN9lMqA8uAaJ3axKMzW43r/fscNQU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=WuZN/CAC1r6Jhd6hE7Mqy6ifPDw9ju7qxnz9Xk5DOzy9Hn7cEAFc5cOYDG/W6fiWKf
-	PmBBHofT6p+fErWNwqXtYPHNmW1fZvY+BQrZf1tDv06IpBLL64WSIB0+i1JlO2g/QmYX
-	KZ4+CYCGAbdx3OuGHeXznSIAAkLUe1qUC9OQM=
-Received: by 10.150.219.16 with SMTP id r16mr2015545ybg.172.1222948158769;
-	Thu, 02 Oct 2008 04:49:18 -0700 (PDT)
-Received: by 10.151.116.12 with HTTP; Thu, 2 Oct 2008 04:49:18 -0700 (PDT)
-Message-ID: <f96d234e0810020449p5f175b2ek8f3c46e321cdeb19@mail.gmail.com>
-Date: Thu, 2 Oct 2008 07:49:18 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200810020243.50896.zecke@selfish.org>
+	Thu,  2 Oct 2008 15:51:52 +0300 (EEST)
+Received: from mail.smartlink.ee ([127.0.0.1])
+	by localhost (mail.smartlink.ee [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cP+90BGOolv5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Oct 2008 15:51:52 +0300 (EEST)
+Received: from [192.168.2.59] (wumpus.smartlink [192.168.2.245])
+	by mail.smartlink.ee (Postfix) with ESMTP id 0FCC030D3A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Oct 2008 15:51:52 +0300 (EEST)
+Message-ID: <48E4C3E1.9040302@smartlink.ee>
+Date: Thu, 02 Oct 2008 15:51:45 +0300
+From: Kalev Lember <kalev@smartlink.ee>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080926)
 MIME-Version: 1.0
-References: <48E36C18.4090504@smartlink.ee> <gc017m$gq4$1@ger.gmane.org>
-	<48E4082D.9030000@whitby.id.au> <200810020243.50896.zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+References: <48E36C18.4090504@smartlink.ee>
+	<gc017m$gq4$1@ger.gmane.org>	<48E4082D.9030000@whitby.id.au>
+	<200810020243.50896.zecke@selfish.org>
+	<f96d234e0810020449p5f175b2ek8f3c46e321cdeb19@mail.gmail.com>
+In-Reply-To: <f96d234e0810020449p5f175b2ek8f3c46e321cdeb19@mail.gmail.com>
 Subject: Re: I'm sick of that Was Re: git master not updating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,35 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2008 11:53:30 -0000
+X-List-Received-Date: Thu, 02 Oct 2008 12:56:04 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wed, Oct 1, 2008 at 8:43 PM, Holger Freyther <zecke@selfish.org> wrote:
-> - I wrote mtn2git because I felt like, no one ever said thank you
-> - I run mtn2git on the OE metadata on a server provided by a company that has
-> nothing todo with OpenEmbedded
-> - I maintain the running of the script over a GPRS line with a couple of
-> seconds delay, no one ever said thank you.
->
-> Instead I _always_ get complains for a service I do for the community that was
-> announced as "experimental and might vanish every day". I'm sick of this
-> attitude. I will discontinue this service as of now.
+Cliff Brake wrote:
+> I would like to extend a big thank you, RP, and others for setting
+> this up and keeping this going.  Having the git mirror has made
+> supporting new OE users a _lot_ easier, and I am very dependent on it.
+>  It is my opinion that keeping this migration moving is fairly
+> important.  While monotone has served the active OE developers well,
+> it is fairly tedious explaining how it works to new users, and is
+> somewhat of a barrier to confidence in the project.
+>   
 
-I would like to extend a big thank you, RP, and others for setting
-this up and keeping this going.  Having the git mirror has made
-supporting new OE users a _lot_ easier, and I am very dependent on it.
- It is my opinion that keeping this migration moving is fairly
-important.  While monotone has served the active OE developers well,
-it is fairly tedious explaining how it works to new users, and is
-somewhat of a barrier to confidence in the project.
+I'd like to thank everyone who has kept git conversion going too.
 
-Cliff
+I've personally been using monotone, mostly because it was the only way
+to access OE repository a few years ago and it's still needed to get my
+patches into OE tree. However, I also think that git might make it
+easier to get new people to the project.
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+And thanks for getting rid of the master branch, the git tree layout is
+now much easier to understand.
+
+Thanks,
+Kalev
 
 
