@@ -1,38 +1,38 @@
-Received: from [209.85.198.247] (helo=rv-out-0708.google.com)
+Received: from [74.125.44.157] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KlMQV-0008K4-VJ
+	(envelope-from <cliff.brake@gmail.com>) id 1KlMkM-0000Pd-KN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Oct 2008 13:33:00 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so1443632rvb.12
+	Thu, 02 Oct 2008 13:53:30 +0200
+Received: by yx-out-1718.google.com with SMTP id 4so186217yxp.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Oct 2008 04:28:47 -0700 (PDT)
+	Thu, 02 Oct 2008 04:49:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:content-disposition:references;
-	bh=7ZHxG36y9Kk6bfWmVy6TjLzvrC1QXKszaCxsc5gplxY=;
-	b=FlkwIQiw7hPHjtOlz9trYY6X+Qe7HuCaaT9v/rihSoXswSxIVehGPUEj2qhNABIuzP
-	XXX7wa9SnNr1phQX+h0fobBuLntcevfs0DXviiupYbY/4w5+1/uBta6a2sWr2kwEbezM
-	CwEM+4WrBDsyjXjgqNZHa+sJ7dcNqWNjHaRcg=
+	bh=UZql/OUF5lSh08p47tx5eFRm20ukFXIE0oTMjHwfm/g=;
+	b=WBaMySq4juVxnBCNg2A0J1aJy0VdeFSpHRKShiTL9XFyw2IS7g9xfoHlsE3lna3vyE
+	snrUxeQ7kDNOPJKBcS4lEN5kHAAo45hI4TLxv2wJCx7jAwCDw2KJx4mLQsaDeEp9Pnha
+	Slo2+gLHSN9lMqA8uAaJ3axKMzW43r/fscNQU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:in-reply-to:mime-version
 	:content-type:content-transfer-encoding:content-disposition
 	:references;
-	b=ZwgoCBSUixGXTZXKlHdd47yDgGE1WYGcuTsnZl32ptcpw6YwHR26Unk1yne2ZLxMG6
-	FhUd7ffjlZm3A9l/K7HvNGY/6besueLzu1uisfWhVR9Xuj7m1GkjU8KdrK1TKOPXmJoj
-	CdwLyosU997cyaGafV4NgUrAOtr7fGLGyWu8E=
-Received: by 10.141.164.13 with SMTP id r13mr5184304rvo.53.1222946927421;
-	Thu, 02 Oct 2008 04:28:47 -0700 (PDT)
-Received: by 10.141.129.13 with HTTP; Thu, 2 Oct 2008 04:28:47 -0700 (PDT)
-Message-ID: <f96d234e0810020428g78256acfpdcf046cf9136fa27@mail.gmail.com>
-Date: Thu, 2 Oct 2008 07:28:47 -0400
+	b=WuZN/CAC1r6Jhd6hE7Mqy6ifPDw9ju7qxnz9Xk5DOzy9Hn7cEAFc5cOYDG/W6fiWKf
+	PmBBHofT6p+fErWNwqXtYPHNmW1fZvY+BQrZf1tDv06IpBLL64WSIB0+i1JlO2g/QmYX
+	KZ4+CYCGAbdx3OuGHeXznSIAAkLUe1qUC9OQM=
+Received: by 10.150.219.16 with SMTP id r16mr2015545ybg.172.1222948158769;
+	Thu, 02 Oct 2008 04:49:18 -0700 (PDT)
+Received: by 10.151.116.12 with HTTP; Thu, 2 Oct 2008 04:49:18 -0700 (PDT)
+Message-ID: <f96d234e0810020449p5f175b2ek8f3c46e321cdeb19@mail.gmail.com>
+Date: Thu, 2 Oct 2008 07:49:18 -0400
 From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200810020236.47828.zecke@selfish.org>
+In-Reply-To: <200810020243.50896.zecke@selfish.org>
 MIME-Version: 1.0
-References: <48E36C18.4090504@smartlink.ee>
-	<200810020236.47828.zecke@selfish.org>
-Subject: Re: git master not updating
+References: <48E36C18.4090504@smartlink.ee> <gc017m$gq4$1@ger.gmane.org>
+	<48E4082D.9030000@whitby.id.au> <200810020243.50896.zecke@selfish.org>
+Subject: Re: I'm sick of that Was Re: git master not updating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,45 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2008 11:33:00 -0000
+X-List-Received-Date: Thu, 02 Oct 2008 11:53:30 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Oct 1, 2008 at 8:36 PM, Holger Freyther <zecke@selfish.org> wrote:
-> On Wednesday 01 October 2008 14:24:56 Kalev Lember wrote:
->> Hello,
->>
->> http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=summary
->> The master head of org.openembedded.dev is not updating. I already
->> spotted two bug reports (4584 and 4590) which reported issues that were
->> fixed in monotone 4 days ago, but never got into git master.
+On Wed, Oct 1, 2008 at 8:43 PM, Holger Freyther <zecke@selfish.org> wrote:
+> - I wrote mtn2git because I felt like, no one ever said thank you
+> - I run mtn2git on the OE metadata on a server provided by a company that has
+> nothing todo with OpenEmbedded
+> - I maintain the running of the script over a GPRS line with a couple of
+> seconds delay, no one ever said thank you.
 >
-> That is on purpose. People complained on irc that CIAbot reports everything
-> twice (master, org.openembedded.dev)... and there is no real reason to have a
-> branch called master.
+> Instead I _always_ get complains for a service I do for the community that was
+> announced as "experimental and might vanish every day". I'm sick of this
+> attitude. I will discontinue this service as of now.
 
-Hmm, and someone must have just fixed the repo so that a clone
-automatically checks out the org.openembedded.dev branch, and there is
-no master branch :-)
-
-cbrake@happy:/build/tmp/org.openembedded.dev$ git branch
-* org.openembedded.dev
-cbrake@happy:/build/tmp/org.openembedded.dev$ git branch -r
-  origin/HEAD
-  origin/org.openembedded.dev
-  origin/org.openembedded.documentation
-  origin/org.openembedded.dreambox
-  origin/org.openembedded.entity
-  origin/org.openembedded.stable
-  origin/org.openmoko.april-update
-  origin/org.openmoko.dev
-  origin/org.openmoko.xora.qtopia
-  origin/org.openmoko.zecke.april-update
-  origin/org.openmoko.zecke.autotools-bustage
-  origin/org.openmoko.zecke.random-breakage
-
-http://wiki.openembedded.net/index.php/Git updated
+I would like to extend a big thank you, RP, and others for setting
+this up and keeping this going.  Having the git mirror has made
+supporting new OE users a _lot_ easier, and I am very dependent on it.
+ It is my opinion that keeping this migration moving is fairly
+important.  While monotone has served the active OE developers well,
+it is fairly tedious explaining how it works to new users, and is
+somewhat of a barrier to confidence in the project.
 
 Cliff
 
