@@ -1,33 +1,27 @@
-Received: from [91.198.206.2] (helo=mail.smartlink.ee)
+Received: from [207.172.157.102] (helo=smtp02.lnh.mail.rcn.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kalev@smartlink.ee>) id 1KlNiu-0007AP-Gr
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Oct 2008 14:56:04 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.smartlink.ee (Postfix) with ESMTP id E189B30E07
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2008 15:51:52 +0300 (EEST)
-Received: from mail.smartlink.ee ([127.0.0.1])
-	by localhost (mail.smartlink.ee [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cP+90BGOolv5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2008 15:51:52 +0300 (EEST)
-Received: from [192.168.2.59] (wumpus.smartlink [192.168.2.245])
-	by mail.smartlink.ee (Postfix) with ESMTP id 0FCC030D3A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2008 15:51:52 +0300 (EEST)
-Message-ID: <48E4C3E1.9040302@smartlink.ee>
-Date: Thu, 02 Oct 2008 15:51:45 +0300
-From: Kalev Lember <kalev@smartlink.ee>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080926)
-MIME-Version: 1.0
+	(envelope-from <tmtalpey@rcn.com>) id 1KlOI4-0004nf-Jb
+	for openembedded-devel@openembedded.org; Thu, 02 Oct 2008 15:32:24 +0200
+Received: from mr02.lnh.mail.rcn.net ([207.172.157.22])
+	by smtp02.lnh.mail.rcn.net with ESMTP; 02 Oct 2008 09:28:12 -0400
+Received: from smtp01.lnh.mail.rcn.net (smtp01.lnh.mail.rcn.net [207.172.4.11])
+	by mr02.lnh.mail.rcn.net (MOS 3.8.6-GA) with ESMTP id PCO87170;
+	Thu, 2 Oct 2008 09:28:12 -0400 (EDT)
+Message-Id: <77ts5u$jhr010@smtp01.lnh.mail.rcn.net>
+Received: from unknown (HELO tmt.rcn.com) ([216.240.30.23])
+	by smtp01.lnh.mail.rcn.net with ESMTP; 02 Oct 2008 09:28:12 -0400
+X-Mailer: QUALCOMM Windows Eudora Version 7.1.0.9
+Date: Thu, 02 Oct 2008 09:27:51 -0400
 To: openembedded-devel@lists.openembedded.org
-References: <48E36C18.4090504@smartlink.ee>
-	<gc017m$gq4$1@ger.gmane.org>	<48E4082D.9030000@whitby.id.au>
-	<200810020243.50896.zecke@selfish.org>
-	<f96d234e0810020449p5f175b2ek8f3c46e321cdeb19@mail.gmail.com>
-In-Reply-To: <f96d234e0810020449p5f175b2ek8f3c46e321cdeb19@mail.gmail.com>
-Subject: Re: I'm sick of that Was Re: git master not updating
+From: Tom Talpey <tmtalpey@rcn.com>
+In-Reply-To: <48E42F7E.3040802@balister.org>
+References: <48DCF3ED.1060809@gmx.net> <gbjhln$8nr$1@ger.gmane.org>
+	<gc0eck$64q$1@ger.gmane.org>
+	<77ts5u$jhlo1v@smtp01.lnh.mail.rcn.net>
+	<48E42F7E.3040802@balister.org>
+Mime-Version: 1.0
+X-Junkmail-Whitelist: YES (by domain whitelist at mr02.lnh.mail.rcn.net)
+Subject: Re: Another low-hanging fruit: aisleriot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,31 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2008 12:56:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Oct 2008 13:32:24 -0000
+Content-Type: text/plain; charset="us-ascii"
 
-Cliff Brake wrote:
-> I would like to extend a big thank you, RP, and others for setting
-> this up and keeping this going.  Having the git mirror has made
-> supporting new OE users a _lot_ easier, and I am very dependent on it.
->  It is my opinion that keeping this migration moving is fairly
-> important.  While monotone has served the active OE developers well,
-> it is fairly tedious explaining how it works to new users, and is
-> somewhat of a barrier to confidence in the project.
->   
+At 10:18 PM 10/1/2008, Philip Balister wrote:
+>Tom Talpey wrote:
+>> I broke out the individual games as packages, and (I think) have most of
+>> the rdepends down too. How would I send my recipe for comments, just
+>> post it on this list?
+>
+>Please add the recipe to bugs.openembedded.org (typed from memory) and I 
+>will try and commit it, provided it worlks for me :)
 
-I'd like to thank everyone who has kept git conversion going too.
+Ok, will do, soon. You probably want to check my work. :-)
 
-I've personally been using monotone, mostly because it was the only way
-to access OE repository a few years ago and it's still needed to get my
-patches into OE tree. However, I also think that git might make it
-easier to get new people to the project.
+I did have to patch the m4's in both gnome-games and ggz, because they
+insisted on adding "/usr" and "/usr/local" (no $prefix/$eprefix) to various
+include and library paths. These in turn silently broke the builds, as they
+cause cross-compile warnings from gcc. There didn't appear to be a way
+to override them, so I added a patch.
 
-And thanks for getting rid of the master branch, the git tree layout is
-now much easier to understand.
+Also, the apps create multiple desktop icon families, and install them in
+various places that matchbox doesn't look. I arbitrarily chose the 48x48
+one to install for matchbox. If there are other ways to do this, I'm all
+ears.
 
-Thanks,
-Kalev
+There are still a couple of icons missing, the "scores" menu item gets a
+red X for instance. I haven't found where those might be installed from.
+They appear to be harmless.
+
+I'll put some text in the submit comments.
+
+Tom.
+
 
 
