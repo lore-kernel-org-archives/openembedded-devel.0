@@ -1,24 +1,25 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [207.172.157.102] (helo=smtp02.lnh.mail.rcn.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KlCMu-0000Dk-4h
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Oct 2008 02:48:36 +0200
-Received: from 60-248-25-201.hinet-ip.hinet.net ([60.248.25.201]
-	helo=tamarin.local) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KlCIs-00068J-Mf
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Oct 2008 02:44:27 +0200
-From: Holger Freyther <zecke@selfish.org>
+	(envelope-from <tmtalpey@rcn.com>) id 1KlClL-0000hv-RW
+	for openembedded-devel@openembedded.org; Thu, 02 Oct 2008 03:13:51 +0200
+Received: from mr08.lnh.mail.rcn.net ([207.172.157.28])
+	by smtp02.lnh.mail.rcn.net with ESMTP; 01 Oct 2008 21:09:42 -0400
+Received: from smtp01.lnh.mail.rcn.net (smtp01.lnh.mail.rcn.net [207.172.4.11])
+	by mr08.lnh.mail.rcn.net (MOS 3.8.6-GA) with ESMTP id KIE64377;
+	Wed, 1 Oct 2008 21:09:41 -0400 (EDT)
+Message-Id: <77ts5u$jhlo1v@smtp01.lnh.mail.rcn.net>
+Received: from unknown (HELO tmt.rcn.com) ([216.240.30.23])
+	by smtp01.lnh.mail.rcn.net with ESMTP; 01 Oct 2008 21:09:42 -0400
+X-Mailer: QUALCOMM Windows Eudora Version 7.1.0.9
+Date: Wed, 01 Oct 2008 21:08:43 -0400
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 2 Oct 2008 02:43:50 +0200
-User-Agent: KMail/1.9.9
-References: <48E36C18.4090504@smartlink.ee> <gc017m$gq4$1@ger.gmane.org>
-	<48E4082D.9030000@whitby.id.au>
-In-Reply-To: <48E4082D.9030000@whitby.id.au>
-MIME-Version: 1.0
-Message-Id: <200810020243.50896.zecke@selfish.org>
-Subject: I'm sick of that Was Re: git master not updating
+From: Tom Talpey <tmtalpey@rcn.com>
+In-Reply-To: <gc0eck$64q$1@ger.gmane.org>
+References: <48DCF3ED.1060809@gmx.net> <gbjhln$8nr$1@ger.gmane.org>
+	<gc0eck$64q$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Junkmail-Whitelist: YES (by domain whitelist at mr08.lnh.mail.rcn.net)
+Subject: Re: Another low-hanging fruit: aisleriot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,23 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2008 00:48:36 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Oct 2008 01:13:54 -0000
+Content-Type: text/plain; charset="us-ascii"
 
-- I wrote mtn2git because I felt like, no one ever said thank you
-- I run mtn2git on the OE metadata on a server provided by a company that has 
-nothing todo with OpenEmbedded
-- I maintain the running of the script over a GPRS line with a couple of 
-seconds delay, no one ever said thank you.
+At 02:09 PM 10/1/2008, Koen Kooi wrote:
+>On 26-09-2008 22:45, Koen Kooi wrote:
+>> On 26-09-2008 16:38, Robert Schuster wrote:
+>>> Hi,
+>>> our gnome-games recipe disables aisleriot because of some problems
+>>> described here:
+>>>
+>>> http://bugs.openembedded.net/show_bug.cgi?id=4585
+>>
+>> I couldn't reproduce the problems anymore, so .dev now has 2.24 with
+>> aisleriot enabled :)
+>
+>It somehow got disabled again, but since there was no bug activity: it's 
+>enabled again.
 
-Instead I _always_ get complains for a service I do for the community that was 
-announced as "experimental and might vanish every day". I'm sick of this 
-attitude. I will discontinue this service as of now.
+I actually cooked up a recipe that builds the entire gnome-games suite,
+along with ggz, successfully. I got it running on my iPaq H1940 recently.
+A couple of them don't work well on the qvga (Aisleriot in particular looks
+really scrunched), but chess and sudoku are pretty nice. BTW, the full
+install plus rdepends, on ARM is about 40MB. :-(
 
-z.
+I broke out the individual games as packages, and (I think) have most of
+the rdepends down too. How would I send my recipe for comments, just
+post it on this list?
+
+Tom.
 
 
 
