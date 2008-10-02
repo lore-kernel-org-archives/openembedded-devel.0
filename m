@@ -1,29 +1,22 @@
-Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1KlBdK-0002hf-EJ
+	(envelope-from <zecke@selfish.org>) id 1KlCG7-0008VN-0J
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Oct 2008 02:01:35 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 4E4991722C6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2008 19:57:20 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Wed, 01 Oct 2008 19:57:20 -0400
-X-Sasl-enc: 3+inQU8BJWGCJlHWc7ySh182XkdE5HV4ZwaJT/pxi99U 1222905439
-Received: from [192.168.1.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 60A53A9CB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2008 19:57:19 -0400 (EDT)
-Message-ID: <48E40E58.6020702@whitby.id.au>
-Date: Thu, 02 Oct 2008 09:27:12 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
-MIME-Version: 1.0
+	Thu, 02 Oct 2008 02:41:35 +0200
+Received: from 60-248-25-201.hinet-ip.hinet.net ([60.248.25.201]
+	helo=tamarin.local) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KlCC5-00063V-HS
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Oct 2008 02:37:25 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-References: <48E36C18.4090504@smartlink.ee>	<873ajglc0d.fsf@neumann.lab.ossystems.com.br>	<48E3762E.6000203@smartlink.ee>	<359c5480810010634m377ab993rd030d8c0c917b8b3@mail.gmail.com>	<gc017m$gq4$1@ger.gmane.org>
-	<48E39BC1.6080200@dls.net>	<gc0bc5$o9o$2@ger.gmane.org>	<20081001184353.GD3010@smtp.west.cox.net>	<gc0lv9$46r$1@ger.gmane.org>
-	<20081001213635.GF3010@smtp.west.cox.net>
-In-Reply-To: <20081001213635.GF3010@smtp.west.cox.net>
+Date: Thu, 2 Oct 2008 02:36:46 +0200
+User-Agent: KMail/1.9.9
+References: <48E36C18.4090504@smartlink.ee>
+In-Reply-To: <48E36C18.4090504@smartlink.ee>
+MIME-Version: 1.0
+Message-Id: <200810020236.47828.zecke@selfish.org>
 Subject: Re: git master not updating
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,23 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2008 00:01:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 02 Oct 2008 00:41:37 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-For those people who are using the FSO Makefile, it has now been updated
- to match the new unofficial undocumented instructions on how to use the
-trial OE git repo.
+On Wednesday 01 October 2008 14:24:56 Kalev Lember wrote:
+> Hello,
+>
+> http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=summary
+> The master head of org.openembedded.dev is not updating. I already
+> spotted two bug reports (4584 and 4590) which reported issues that were
+> fixed in monotone 4 days ago, but never got into git master.
 
-"make update-makefile" followed by "make setup-openembedded" will
-automatically migrate your build environment to use the
-org.openembedded.dev branch.
+That is on purpose. People complained on irc that CIAbot reports everything 
+twice (master, org.openembedded.dev)... and there is no real reason to have a 
+branch called master.
 
-[Now let's see how quickly all the other places on the internet where
-the old instructions live are updated, and how many more bug reports and
-questions we get from people following them and not having a means to
-automatically migrate to the new way of doing things.]
-
--- Rod
+z.
 
 
