@@ -1,33 +1,24 @@
-Received: from [147.32.96.3] (helo=hades.mk.cvut.cz)
+Received: from [212.227.126.186] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Martin.Jansa@mk.cvut.cz>) id 1Klh4Y-00032S-Uc
+	(envelope-from <robert@linuxdevelopment.de>) id 1KljB9-0008BP-Lr
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Oct 2008 11:35:42 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by hades.mk.cvut.cz (Postfix) with ESMTP id AB6AF2E3EC2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Oct 2008 11:31:27 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mk.cvut.cz
-Received: from hades.mk.cvut.cz ([127.0.0.1])
-	by localhost (hades.mk.cvut.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id dhgeH0M805ty
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Oct 2008 11:31:25 +0200 (CEST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by hades.mk.cvut.cz (Postfix) with ESMTP id 8816B2E3EAC
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Oct 2008 11:31:25 +0200 (CEST)
-Date: Fri, 3 Oct 2008 11:31:09 +0200
-From: Martin Jansa <Martin.Jansa@mk.cvut.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081003093109.GA4383@jama.home.cz>
-References: <48E5857B.1070301@whitby.id.au>
+	Fri, 03 Oct 2008 13:50:39 +0200
+Received: from [10.0.0.200] (M9501.m.pppool.de [89.49.149.1])
+	by mrelayeu.kundenserver.de (node=mrelayeu5) with ESMTP (Nemesis)
+	id 0ML25U-1Klj6v1wOe-0006QS; Fri, 03 Oct 2008 13:46:18 +0200
+Message-ID: <48E60608.4060105@linuxdevelopment.de>
+Date: Fri, 03 Oct 2008 13:46:16 +0200
+From: =?ISO-8859-1?Q?Robert_W=F6rle?= <robert@linuxdevelopment.de>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080720)
 MIME-Version: 1.0
-In-Reply-To: <48E5857B.1070301@whitby.id.au>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: git fetcher failure?
+To: openembedded-devel@lists.openembedded.org, ulf.samuelsson@atmel.com
+References: <4883BCB1.7020102@atmel.com>
+In-Reply-To: <4883BCB1.7020102@atmel.com>
+X-Enigmail-Version: 0.95.7
+X-Provags-ID: V01U2FsdGVkX18uFPHEhpVxW103ZBK1/qfUUo3qKbMC1cjygpH
+	OGTNoDcMt7dX0FNet11wIl2HMhrfcl7oVxlbl3d/vWeHhQN5bM
+	sAf7caGXiUScOYfks1sXpZGkKlegsJyZzy7Uw54e6w=
+Subject: Re: binutils fails for AVR32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,56 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Oct 2008 09:35:43 -0000
-X-Groupsio-MsgNum: 6070
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="y0ulUmNC+osPPQO6"
-Content-Disposition: inline
-
---y0ulUmNC+osPPQO6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Oct 03, 2008 at 12:07:47PM +0930, Rod Whitby wrote:
-> Anyone know why this git fetch fails?
->=20
-> The git tarball is downloaded from the angstrom tarball stash, but then
-> when it is unpacked the specific git revision required can't be found:
->=20
-> > fatal: failed to unpack tree object daf0729351631f93f9f2f22af33d46658c6=
-f5d68
->=20
-> I have already tried blowing away anything in the downloads area related
-> to this git repo ...
-
-I dont know how bitbake figure out which ${SRCREV} to use, but this
-revision daf0729351631f93f9f2f22af33d46658c6f5d68 seems to be in
-framework.git not fso-gpsd.git
-http://git.freesmartphone.org/?p=3Dframework.git;a=3Dcommit;h=3Ddaf07293516=
-31f93f9f2f22af33d46658c6f5d68
-
-maybe its messed up be this commit message, where is broken link to
-this revision
-http://git.freesmartphone.org/?p=3Dfso-gpsd.git;a=3Dcommit;h=3Dfd1cd578d6ba=
-9fa13aadceb59a9b46345108583b
+X-List-Received-Date: Fri, 03 Oct 2008 11:50:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
 
---=20
-uin:136542059                jid:JaMa@jabber.mk.cvut.cz
-Jansa Martin                 sip:jamasip@voip.wengo.fr=20
-JaMa                        =20
+> | Configuring in ./intl
+> | configure: warning: build_alias=i686-linux: invalid host type
+> | configure: warning: host_alias=i686-linux: invalid host type
+> | configure: error: can only configure for one host and one target at a
+> time
+> | make[1]: *** [configure-intl] Error 1
+> | make[1]: Leaving directory
+> `/mnt/home/ulf/OpenEmbedded/build-avr32/tmp/work/avr32-angstrom-linux-uclibc/binutils-cross-2.17-r6/binutils-2.17/build.i686-linux.avr32-angstrom-linux-uclibc'
+> 
+> | make: *** [all] Error 2
+> | FATAL: oe_runmake failed
+> 
+> These problems seems to be caused by build_alias, host_alias and
+> target_alias beeing passed to "configure", but these are only
+> supported by binutils-2.18 and not 2.17 which is used by the AVR32.
+> 
+> I am adding
+> ~ (cd ${B} && sed -i -e "s,'host_alias=i686-linux',," Makefile)
+> ~ (cd ${B} && sed -i -e "s,'build_alias=i686-linux',," Makefile)
+> ~ (cd ${B} && sed -i -e "s,'target_alias=avr32-angstrom-linux-uclibc',,"
+> Makefile)
+> 
+> to the do_avr32_configure_bfd
+> 
+Did you add this as prepend to this stage ? in which bb file did you add
+it ?
+Did the whole toolchain work out for you now ?
 
---y0ulUmNC+osPPQO6
-Content-Type: application/pgp-signature
-Content-Disposition: inline
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.9 (GNU/Linux)
-
-iEYEARECAAYFAkjl5l0ACgkQN1Ujt2V2gBwzDwCgjMI7f7dE3x20MzM9Whq3REGr
-68wAoI/xvGCkw+q8KL18dcceCDsUSIhT
-=CGt/
------END PGP SIGNATURE-----
-
---y0ulUmNC+osPPQO6--
