@@ -1,43 +1,26 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KlX4M-00031x-C0
+	(envelope-from <rod@whitby.id.au>) id 1KlacM-0003OX-9y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Oct 2008 00:54:50 +0200
-Received: from freedom.ind.br (unknown [10.99.0.10])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 4E6093343A7
+	Fri, 03 Oct 2008 04:42:10 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 0B477172229
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2008 19:50:32 -0300 (BRT)
-Received: from freedom.ind.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id 03F798C5B8D
+	Thu,  2 Oct 2008 22:37:56 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Thu, 02 Oct 2008 22:37:56 -0400
+X-Sasl-enc: +dQ40OKXd18Mt213kVbTuh5qqes6ykor6+3sQ1izfDI5 1223001475
+Received: from [192.168.1.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id EACF42DACE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2008 19:50:35 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id AA4138C5B85
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2008 19:50:34 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 2 Oct 2008 19:50:34 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 047FCC2B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2008 19:50:44 -0300 (BRT)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 7C431610186; Thu,  2 Oct 2008 19:48:04 -0300 (BRT)
-To: openembedded-devel@lists.openembedded.org
-References: <87myhocttc.fsf@neumann.lab.ossystems.com.br>
-	<gc2vid$bro$1@ger.gmane.org>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Thu, 02 Oct 2008 19:48:04 -0300
-In-Reply-To: <gc2vid$bro$1@ger.gmane.org> (Koen Kooi's message of "Thu\,
-	02 Oct 2008 19\:14\:53 +0200")
-Message-ID: <87k5cqwr4r.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+	Thu,  2 Oct 2008 22:37:54 -0400 (EDT)
+Message-ID: <48E5857B.1070301@whitby.id.au>
+Date: Fri, 03 Oct 2008 12:07:47 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
 MIME-Version: 1.0
-Subject: Re: firefox 3.0.1 issues
+To: openembedded-devel@lists.openembedded.org
+Subject: git fetcher failure?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,82 +34,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2008 22:54:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 03 Oct 2008 02:42:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Koen Kooi <k.kooi@student.utwente.nl> writes:
+Anyone know why this git fetch fails?
 
-> On 01-10-2008 15:45, Otavio Salvador wrote:
->> Hello,
->>
->> I've found few issues with Firefox 3.0.1. Those are:
->>
->>   - lack of theme icons (arrows and like)
->
-> Actually, what I assumed to be some new-fangled GUI is a case of
-> missing icons[1]. So, yes, every OE built FF3 is missing those icons.
+The git tarball is downloaded from the angstrom tarball stash, but then
+when it is unpacked the specific git revision required can't be found:
 
-Exactly. Talking to Kalev Lember at #oe he suggested few changes to
-mozconfig he has using and those did fix this problem here. Dunno
-which one is the real fix...
+> fatal: failed to unpack tree object daf0729351631f93f9f2f22af33d46658c6f5d68
 
-diff --git a/packages/mozilla/firefox-3.0.1/mozconfig b/packages/mozilla/firefox-3.0.1/mozconfig
-index cd09716..06295ad 100644
---- a/packages/mozilla/firefox-3.0.1/mozconfig
-+++ b/packages/mozilla/firefox-3.0.1/mozconfig
-@@ -23,6 +23,7 @@ ac_add_options --disable-ldap
- ac_add_options --disable-mathml
- ac_add_options --disable-jsd
- ac_add_options --disable-installer
-+ac_add_options --disable-updater
- ac_add_options --disable-xprint
- ac_add_options --disable-necko-disk-cache
- 
-@@ -32,12 +33,14 @@ ac_add_options --enable-necko-small-buffers
- # disable debug logging and tests
- #ac_add_options --disable-dtd-debug
- ac_add_options --disable-logging
-+ac_add_options --disable-debug
- ac_add_options --disable-gtktest
- ac_add_options --disable-tests
--ac_add_options --disable-printing
-+#ac_add_options --disable-printing
- ac_add_options --disable-gnomevfs
- ac_add_options --disable-gnomeui
--ac_add_options --enable-debugger-info-modules
-+#ac_add_options --enable-debugger-info-modules
-+ac_add_options --disable-crashreporter
- 
- # build crypto module (PSM + NSS)
- ac_add_options --enable-crypto
-@@ -46,7 +49,7 @@ ac_add_options --enable-crypto
- ac_add_options --enable-necko-protocols=http,file,res,ftp,about,viewsource
- 
- # build minimal set of image decoders
--ac_add_options --enable-image-decoders=png,gif,jpeg
-+#ac_add_options --enable-image-decoders=png,gif,jpeg
- 
- #ac_add_options --enable-reorder
- #ac_add_options --enable-elf-dynstr-gc
-@@ -54,7 +57,7 @@ ac_add_options --enable-image-decoders=png,gif,jpeg
- # enable static build
- #ac_add_options --disable-shared
- #ac_add_options --enable-static
--ac_add_options --enable-optimize=-O2
-+#ac_add_options --enable-optimize=-O2
- 
- # Use cairo from system
- ac_add_options --enable-system-cairo
+I have already tried blowing away anything in the downloads area related
+to this git repo ...
 
+> NOTE: Running task 2336 of 5076 (ID: 950, /home/shr/fso-testing/openembedded/packages/freesmartphone/fso-gpsd_git.bb, do_fetch)
+> NOTE: package fso-gpsd-0.6+r3+gitrdaf0729351631f93f9f2f22af33d46658c6f5d68: started
+> NOTE: package fso-gpsd-0.6+r3+gitrdaf0729351631f93f9f2f22af33d46658c6f5d68-r3: task do_fetch: started
+> NOTE: fetch http://www.angstrom-distribution.org/unstable/sources/git_git.freesmartphone.org.fso-gpsd.git_daf0729351631f93f9f2f22af33d46658c6f5d68.tar.gz
+> --01:25:48--  http://www.angstrom-distribution.org/unstable/sources/git_git.freesmartphone.org.fso-gpsd.git_daf0729351631f93f9f2f22af33d46658c6f5d68.tar.gz
+>            => `/home/shr/fso-testing/downloads/git_git.freesmartphone.org.fso-gpsd.git_daf0729351631f93f9f2f22af33d46658c6f5d68.tar.gz'
+> Resolving www.angstrom-distribution.org... 85.214.40.226
+> Connecting to www.angstrom-distribution.org|85.214.40.226|:80... connected.
+> HTTP request sent, awaiting response... 404 Not Found
+> 01:25:49 ERROR 404: Not Found.
+> 
+> NOTE: fetch http://downloads.openmoko.org/sources/git_git.freesmartphone.org.fso-gpsd.git_daf0729351631f93f9f2f22af33d46658c6f5d68.tar.gz
+> --01:25:49--  http://downloads.openmoko.org/sources/git_git.freesmartphone.org.fso-gpsd.git_daf0729351631f93f9f2f22af33d46658c6f5d68.tar.gz
+>            => `/home/shr/fso-testing/downloads/git_git.freesmartphone.org.fso-gpsd.git_daf0729351631f93f9f2f22af33d46658c6f5d68.tar.gz'
+> Resolving downloads.openmoko.org... 88.198.93.219
+> Connecting to downloads.openmoko.org|88.198.93.219|:80... connected.
+> HTTP request sent, awaiting response... 404 Not Found
+> 01:25:49 ERROR 404: Not Found.
+> 
+> NOTE: fetch http://www.angstrom-distribution.org/unstable/sources/git_git.freesmartphone.org.fso-gpsd.git.tar.gz
+> --01:25:49--  http://www.angstrom-distribution.org/unstable/sources/git_git.freesmartphone.org.fso-gpsd.git.tar.gz
+>            => `/home/shr/fso-testing/downloads/git_git.freesmartphone.org.fso-gpsd.git.tar.gz'
+> Resolving www.angstrom-distribution.org... 85.214.40.226
+> Connecting to www.angstrom-distribution.org|85.214.40.226|:80... connected.
+> HTTP request sent, awaiting response... 200 OK
+> Length: 29,410 (29K) [application/x-gzip]
+> 
+> 100%[================================================================================================================================================================================>] 29,410        60.71K/s
+> 
+> 01:25:50 (60.64 KB/s) - `/home/shr/fso-testing/downloads/git_git.freesmartphone.org.fso-gpsd.git.tar.gz' saved [29410/29410]
+> 
+> NOTE: Fetched git_git.freesmartphone.org.fso-gpsd.git.tar.gz from tarball stash, skipping checkout
+> Unpacking 7 objects...
+>  100% (7/7) done
+> Warning: No merge candidate found because value of config option
+>          "branch.master.merge" does not match any remote branch fetched.
+> No changes.
+> Removing unused objects 100%...
+> Done.
+> NOTE: Creating tarball of git repository
+> fatal: failed to unpack tree object daf0729351631f93f9f2f22af33d46658c6f5d68
+> NOTE: Task failed: Fetch failed: Fetch command export PATH=/home/shr/fso-testing/tmp/staging/i686-linux/usr/bin/arm-angstrom-linux-gnueabi:/home/shr/fso-testing/tmp/staging/i686-linux/usr/sbin:/home/shr/fso-testing/tmp/staging/i686-linux/usr/bin:/home/shr/fso-testing/tmp/cross/bin:/home/shr/fso-testing/tmp/staging/i686-linux/sbin:/home/shr/fso-testing/bitbake/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games; git read-tree daf0729351631f93f9f2f22af33d46658c6f5d68 failed with signal 128, output:
+> 
+> NOTE: oestats: task failed, see http://tinderbox.openembedded.net/packages/155827/
+> NOTE: package fso-gpsd-0.6+r3+gitrdaf0729351631f93f9f2f22af33d46658c6f5d68-r3: task do_fetch: failed
+> ERROR: TaskFailed event exception, aborting
+> NOTE: package fso-gpsd-0.6+r3+gitrdaf0729351631f93f9f2f22af33d46658c6f5d68: failed
+> ERROR: Build of /home/shr/fso-testing/openembedded/packages/freesmartphone/fso-gpsd_git.bb do_fetch failed
+> ERROR: Task 950 (/home/shr/fso-testing/openembedded/packages/freesmartphone/fso-gpsd_git.bb, do_fetch) failed
+> NOTE: Tasks Summary: Attempted 2335 tasks of which 2335 didn't need to be rerun and 1 failed.
+> ERROR: '/home/shr/fso-testing/openembedded/packages/freesmartphone/fso-gpsd_git.bb' failed
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+-- Rod
+
 
 
