@@ -1,25 +1,34 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Klau1-0003hk-Ci
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Oct 2008 05:00:25 +0200
-Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Klapu-0001bY-U7
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Oct 2008 04:56:11 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 3 Oct 2008 04:55:39 +0200
-User-Agent: KMail/1.9.9
-References: <48E36C18.4090504@smartlink.ee>
-	<200810020236.47828.zecke@selfish.org>
-	<f96d234e0810020428g78256acfpdcf046cf9136fa27@mail.gmail.com>
-In-Reply-To: <f96d234e0810020428g78256acfpdcf046cf9136fa27@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200810030455.39524.zecke@selfish.org>
-Subject: Re: git master not updating
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KleuZ-0001mZ-UR
+	for openembedded-devel@openembedded.org; Fri, 03 Oct 2008 09:17:16 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KleqO-00074d-QL
+	for openembedded-devel@openembedded.org; Fri, 03 Oct 2008 07:12:56 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 03 Oct 2008 07:12:56 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 03 Oct 2008 07:12:56 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 03 Oct 2008 09:12:42 +0200
+Message-ID: <gc4gla$8ho$1@ger.gmane.org>
+References: <gc35ba$voi$1@ger.gmane.org>
+	<1222986336.5190.33.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
+In-Reply-To: <1222986336.5190.33.camel@dax.rpnet.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Heads up: staging changes are going to land
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,37 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Oct 2008 03:00:25 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 03 Oct 2008 07:17:16 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thursday 02 October 2008 13:28:47 Cliff Brake wrote:
-> On Wed, Oct 1, 2008 at 8:36 PM, Holger Freyther <zecke@selfish.org> wrote:
-> > On Wednesday 01 October 2008 14:24:56 Kalev Lember wrote:
-> >> Hello,
-> >>
-> >> http://gitweb.openembedded.net/?p=org.openembedded.dev.git;a=summary
-> >> The master head of org.openembedded.dev is not updating. I already
-> >> spotted two bug reports (4584 and 4590) which reported issues that were
-> >> fixed in monotone 4 days ago, but never got into git master.
-> >
-> > That is on purpose. People complained on irc that CIAbot reports
-> > everything twice (master, org.openembedded.dev)... and there is no real
-> > reason to have a branch called master.
+On 03-10-2008 00:25, Richard Purdie wrote:
+> Hi,
 >
-> Hmm, and someone must have just fixed the repo so that a clone
-> automatically checks out the org.openembedded.dev branch, and there is
-> no master branch :-)
+> On Thu, 2008-10-02 at 20:53 +0200, Koen Kooi wrote:
+>> The changed described in
+>> http://lists.linuxtogo.org/pipermail/openembedded-devel/2008-July/005819.html
+>> are about to get committed.
+>>
+>> The patch can be previewed at
+>> http://dominion.thruhere.net/koen/OE/staging-patch.txt
+>
+> I had a quick glance through that patch and you should probably rethink
+> the bits below:
+>
+> +BUILDSDK_CPPFLAGS = "-isystem${STAGING_INCDIR}"
+>   export CPPFLAGS = "${TARGET_CPPFLAGS}"
+>   export TARGET_CPPFLAGS = "-isystem${STAGING_DIR_TARGET}${layout_includedir}"
+>
+>   export BUILD_CFLAGS = "${BUILD_CPPFLAGS} ${BUILD_OPTIMIZATION}"
+> +BUILDSDK_CFLAGS = "${BUILDSDK_CPPFLAGS} ${BUILD_OPTIMIZATION}"
+>   export CFLAGS = "${TARGET_CFLAGS}"
+>   export TARGET_CFLAGS = "${TARGET_CPPFLAGS} ${SELECTED_OPTIMIZATION}"
+>
+>
+> These SDK things are a bit nuts and I suspect should be removed. I added
+> them to fix some problem in Poky and I think they may not be needed now
+> but I'm not 100% and need to find time to check. OE probably doesn't
+> want them, at least yet.
 
-magic? ;)
+OK
 
-master was just there for repo.or.cz... I removed it from the repo and made 
-the default branch org.openembedded.dev, people in the wild should know what 
-to do or execute git-checkout -b org.openembedded.dev 
-origin/org.openembedded.dev
+>
+> @@ -404,7 +414,7 @@ FULL_OPTIMIZATION = "-fexpensive-optimiz
+>   ##################################################################
+>
+>   FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
+> -DEBUG_OPTIMIZATION = "-O -g"
+> +DEBUG_OPTIMIZATION = "-O -fno-omit-frame-pointer -g"
+>
+>
+> I think OE changed this for a reason and Poky never merged that change?
+> Maybe I don't remember right though?
 
-z.
+AIUI you need -fno-omit-frame-pointer on ARM to do profiling, right?
+
+regards,
+
+Koen
+
+
 
 
