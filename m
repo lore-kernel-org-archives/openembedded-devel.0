@@ -1,22 +1,26 @@
-Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1Km5jt-0001MT-HW
+	(envelope-from <rod@whitby.id.au>) id 1KmHAS-0005ok-Bz
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Oct 2008 13:56:01 +0200
-Received: from [192.168.1.103] (91-65-152-238-dynip.superkabel.de
-	[91.65.152.238])
-	by dd20204.kasserver.com (Postfix) with ESMTP id D4D5D181883E0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Oct 2008 13:51:43 +0200 (CEST)
-Message-ID: <48E758CB.7040209@opensimpad.org>
-Date: Sat, 04 Oct 2008 13:51:39 +0200
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
+	Sun, 05 Oct 2008 02:08:12 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id C8263172DB5;
+	Sat,  4 Oct 2008 20:03:49 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Sat, 04 Oct 2008 20:03:49 -0400
+X-Sasl-enc: s0oi1IqXZlJ5nxcqu0tQvEkQG2YYDI7SY3+5Asoa8n2J 1223165029
+Received: from [192.168.1.11] (CPE-121-209-20-127.sa.bigpond.net.au
+	[121.209.20.127])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id B4C66BF0E;
+	Sat,  4 Oct 2008 20:03:48 -0400 (EDT)
+Message-ID: <48E8045C.6080907@whitby.id.au>
+Date: Sun, 05 Oct 2008 10:33:40 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.16 (Windows/20080708)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <48E6624C.7000409@opensimpad.org> <gc72hu$i8f$1@ger.gmane.org>
-In-Reply-To: <gc72hu$i8f$1@ger.gmane.org>
-Subject: Re: X/Qt2 opie integration (patches included)
+To: mickeyl@openembedded.org
+Cc: openembedded-devel@lists.openembedded.org
+Subject: fso-testing fails to build - can't find cross compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,49 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Oct 2008 11:56:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 05 Oct 2008 00:08:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi schrieb:
->
-> NACK!
->
-> +do_install() {
-> [..]
-> +    install -d ${D}/home/root
-> +    install -m 0600 .blackboxrc ${D}/home/root
->
-> A package NEVER EVER touches $HOME. NEVER! I wish ascii could produces 
-> some bigger capitals that blink and have baseballbats to get the point 
-> across, but sadly it can't.
->
-> Imagine I don't log in as root and fire up packagekit to install that 
-> packages. I don't get the .blackboxrc, but the root user suddenly has 
-> his .blackboxrc overwritten without notice.
->
-> So:
->
-> A package NEVER EVER touches $HOME. NEVER!
->
-> ${sysconfdir} exists for a reason.
->
-Ok, I added a second version of the patch to the bugtracker which 
-implements your suggestion.
+Mickey,
 
-I did use ${HOME} in the first version because it is the standard 
-location for blackbox configuration [1].
+I'm rebuilding FSO for downloads.freesmartphone.org repo after the
+TMPDIR ABI change, and it's failing on dbus where configure can't find
+the gcc cross compiler.
 
-Is there any way for a clean implementation to put the config to the 
-standard location? With e.g postinstall? I don't like the idea of not 
-using a standard location but I agree that hardcode to /home/root can 
-cause trouble.
+  http://tinderbox.openembedded.net/packages/159970/
 
+Is anyone else getting the same result?
 
-best regards
-Bernhard Guillon
+[copied to OE in case it's a systemic problem after the staging changes]
 
-1 
-http://blackboxwm.sourceforge.net/BlackboxDocumentation/BlackboxConfiguration#location
+-- Rod
 
 
