@@ -1,33 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.46.158] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Kmvz6-0003Hj-EX
-	for openembedded-devel@openembedded.org; Mon, 06 Oct 2008 21:43:12 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Kmvue-0007LD-Sh
-	for openembedded-devel@openembedded.org; Mon, 06 Oct 2008 19:38:36 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 06 Oct 2008 19:38:36 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 06 Oct 2008 19:38:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 06 Oct 2008 21:38:27 +0200
-Message-ID: <gcdpfj$hr0$1@ger.gmane.org>
-References: <gc35ba$voi$1@ger.gmane.org>	<c384c5ea0810061210l65b4178ay812a9681a4e86dda@mail.gmail.com>
-	<gcdokp$evo$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-In-Reply-To: <gcdokp$evo$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Kmz9g-0002ni-2B
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Oct 2008 01:06:20 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so532683ywr.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Oct 2008 16:01:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=TwfF5ontmH60Mx19XtlTjNI9LdwFQK027o5gYYmzdc8=;
+	b=FX3PQfI5lyMhSmPMO/nqmKOHM/2ZravgT5ZbOUQHHamuHrDfXaNmAldcCEMPJGDLK1
+	cjaJIZLPKNQiOJT3WZDIbq92/SE8d+1/yNWIf0zDMjMN5uJBkhMvZmIYp2kfEvpjVQwX
+	Wy6mCOWArrt5MXqaiVx7VveOj0s0NxO82mmB8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=WnlLGgKPUi4u1RRrTMkEJKyI8ul73wbsII2l046I2EfeTyn/CnyCMTFTr2XZ8LDcDW
+	7xxUoRKQAMKYF2diwQRpGik/ojTAeasbiBZLzEVjO/6pILMxYReJXcXKEuWMgzoFMipR
+	1RCklNayDuyR+NaN3GnsvpYPnWJi9/JZdzgMc=
+Received: by 10.100.205.15 with SMTP id c15mr5801710ang.67.1223334108684;
+	Mon, 06 Oct 2008 16:01:48 -0700 (PDT)
+Received: by 10.100.174.18 with HTTP; Mon, 6 Oct 2008 16:01:48 -0700 (PDT)
+Message-ID: <c384c5ea0810061601l382428a3rc8efc6c10fd928ca@mail.gmail.com>
+Date: Tue, 7 Oct 2008 01:01:48 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <gcdpfj$hr0$1@ger.gmane.org>
+MIME-Version: 1.0
+References: <gc35ba$voi$1@ger.gmane.org>
+	<c384c5ea0810061210l65b4178ay812a9681a4e86dda@mail.gmail.com>
+	<gcdokp$evo$1@ger.gmane.org> <gcdpfj$hr0$1@ger.gmane.org>
 Subject: Re: Heads up: staging changes are going to land
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,66 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Oct 2008 19:43:12 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 06 Oct 2008 23:06:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 06-10-2008 21:24, Koen Kooi wrote:
-> On 06-10-2008 21:10, Leon Woestenberg wrote:
->> Hello Koen,
->>
->> this change in that patch:
->>
->> +CROSS_DIR = "${TMPDIR}/cross/${BASE_PACKAGE_ARCH}"
->>
->> makes my OE PATH look like this:
->>
->> <...>/build/tmp/cross/ppce300c3/bin
->>
->> but my cross toolchain did not end up there, instead it ended up in
->> the usual place:<...>/build/tmp/cross/bin/
+Hello Koen,
+
+On Mon, Oct 6, 2008 at 9:38 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> I suspect packaged-staging is using the old staging packages (as can be seen
+> from the do_setscene in the gcc tinderbox log). Could you try it without
+> keeping pstage?
 >
-> My cross looks like this:
->
-> koen@dominion:/OE/angstrom-dev/cross$ ls
-> arm-oabi/ armv4t/ armv5te/ armv6/ armv7a/ avr32/ ppc405/ ppc603e/
->
->  > so I am getting:
->>
->> NOTE: make -j5 -e MAKEFLAGS= include/linux/version.h CC=ccache
->> powerpc-angstrom-linux-gcc LD=powerpc-angstrom-linux-ld
->> powerpc-angstrom-linux-gcc: No such file or directory
->>
->> So obviously for me the CROSS_DIR is not respected somehow for the
->> toolchain.
->>
->> Any ideas where it could leak away?
->>
->> I did a scratch build against HEAD using the latest stable bitbake
->> tree checkout, for MACHINE=mpc8313erdb.
->>
->> Some other details might still exist at
->> http://tinderbox.openembedded.net/builders/likewise/
->
-> I'm starting a build with that machine to see if I can reproduce it.
 
-I now have:
+Hmm, normally my Makefile clean target clean the complete TMPDIR.
+Maybe this project is misconfigured, thanks for the heads-up on the
+setscene step.
 
-koen@dominion:/OE/angstrom-dev/cross$ ls
-arm-oabi/  armv4t/  armv5te/  armv6/  armv7a/  avr32/  ppc405/  ppc603e/ 
-  ppce300c3/
-koen@dominion:/OE/angstrom-dev/cross$ find ppce300c3/ | grep -- -gcc
-ppce300c3/bin/powerpc-angstrom-linux-gcc
-ppce300c3/bin/powerpc-angstrom-linux-gccbug
-ppce300c3/bin/powerpc-angstrom-linux-gcc-4.2.4
-
-I suspect packaged-staging is using the old staging packages (as can be 
-seen from the do_setscene in the gcc tinderbox log). Could you try it 
-without keeping pstage?
-
-regards,
-
-Koen
-
+Thanks,
+-- 
+Leon
 
 
