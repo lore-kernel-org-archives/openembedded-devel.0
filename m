@@ -1,32 +1,39 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net)
+Received: from [64.233.182.187] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Kms7f-0006yV-1I
-	for openembedded-devel@openembedded.org; Mon, 06 Oct 2008 17:35:52 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m96F3YZO008888
-	for <openembedded-devel@openembedded.org>;
-	Mon, 6 Oct 2008 16:03:34 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 08569-07 for <openembedded-devel@openembedded.org>;
-	Mon,  6 Oct 2008 16:03:28 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m96F3Qqe008875
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 6 Oct 2008 16:03:26 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <gcd5mc$5hl$1@ger.gmane.org>
-References: <gcd5mc$5hl$1@ger.gmane.org>
-Date: Mon, 06 Oct 2008 16:03:28 +0100
-Message-Id: <1223305408.5235.39.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: [RFC] granular library packaging
+	(envelope-from <nicola.mfb@gmail.com>) id 1KmukA-0003kG-Ah
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Oct 2008 20:23:42 +0200
+Received: by nf-out-0910.google.com with SMTP id d21so1452380nfb.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Oct 2008 11:19:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type:references;
+	bh=0/PBt5463qHsb2GwxMMZSp5YyrwvinTWRL4tSUAYgSY=;
+	b=sHAD7yWluEp0i2WqZAVUs4sO0BmOjVfgAWw9K6phIrsYx5V/LsjSaPY3u/bh8Gd1WP
+	BFEJ3z5fPLHPoQ5AOe2PGTdOG3IRHRYLNp5CRUoLuM2dciwas5R45gF9Qfels/7Ym5FY
+	2i4Honqm/wdZSM0A4oSt+7+eSreC8cwsIDcCg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:references;
+	b=DzDl5AVk1QJ40H3MuIqjQdoJFc+gjWzfBFl4N/EKrxp8DorMxAKAXg0xnfYYgESEm7
+	U3ncUDGRyKoqUTPXigZce/l9CRUiygWA6pcqpsJGc+vrOhHKW8he+18ZaUYCqGpbiDJV
+	juhyOTGvEhmuQTKs9Wp1tgzicK5iC4LQtmIqE=
+Received: by 10.210.52.9 with SMTP id z9mr3806980ebz.70.1223317151786;
+	Mon, 06 Oct 2008 11:19:11 -0700 (PDT)
+Received: by 10.210.138.17 with HTTP; Mon, 6 Oct 2008 11:19:11 -0700 (PDT)
+Message-ID: <359c5480810061119o3504d462s3ad14e06e9129128@mail.gmail.com>
+Date: Mon, 6 Oct 2008 20:19:11 +0200
+From: "Nicola Mfb" <nicola.mfb@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200810060859.31045.zecke@selfish.org>
+MIME-Version: 1.0
+References: <359c5480810050806t6e368b2fta20d1edecd165757@mail.gmail.com>
+	<200810051937.40377.zecke@selfish.org>
+	<359c5480810051326k2e921048r17f6b93e00aa619c@mail.gmail.com>
+	<200810060859.31045.zecke@selfish.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Qt 4.4.1 and sqlite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,52 +47,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Oct 2008 15:35:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 06 Oct 2008 18:23:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, 2008-10-06 at 16:00 +0200, Koen Kooi wrote:
-> I had a chat with Richard about it and we agreed that this needs some 
-> more thought, especially wrt depencies and granular packaging. My 
-> motivation for splitting things is to make using gdb less space-heavy 
-> due to pulling in a huge -dbg package that depends on extra, unneeded 
-> libs. As I pointed out above, that is sadly the case here since do_strip 
-> runs too late.
+2008/10/6 Holger Freyther <zecke@selfish.org>
 
-There are various subtle problems with having multiple -dev and -dbg
-packages. There are assumptions made in parts of the code that of foo
-has bar as a build time dependency, foo-dev should RDEPEND on bar-dev.
-If we split into multiple -dev packages, foo-dev needs to RDEPEND on all
-the *-dev packages provided by bar-dev which gets a little more
-complicated (think about trying to implement that when the list of -dev
-packages is dynamic ;-).
+> On Sunday 05 October 2008 22:26:31 Nicola Mfb wrote:
+>
+> >
+> > I hope tomorrow I will be able to test a qt rebuild, and reports some
+> > feedback here.
+>
+> cool
+>
 
-For debugging or profiling, usually when you install foo-dbg you want
-symbols for every library that package might use and the dependencies of
-those libraries to ensure you get a meaningful stacktrace.
+Hi Zeche,
+I did some test and rebitbaked qt 4.4.1 in both modes, the first linking qt
+sqlite statically, the second building it as a plugin, in both cases I was
+able to use sqlite driver in my application that created a database and did
+some insert/select/delete encapsulated in transactions without problems.
 
-From what Koen's described he wants individual libs so he only has to
-install one lib and not the dependencies. In that case I'd suggesting
-telling the package manager to ignore the dependencies instead of trying
-to neuter the package dependencies which are actually useful. If we go
-with multiple libs, the depchain -dev and -dbg code will then have to
-catch up with the change somehow and we'll be back to square one.
+I think the better is to build sqlite as a plugin to preserve memory usage
+and space on device, this produces the extra package
+qt4-plugin-sqldriver-sqlite that is not installed by opkg install
+qt4-x11-free, that's fine as it has to be a dependency only for applications
+needing it! (as this policy does not waste resources, it my be interesting
+to consider to support other plugins too)
 
-In machines where you're going to extensively use -dev and -dbg packages
-you usually have enough space to install dependencies so my reasoning
-has always been this isn't as much of a problem as the general grangular
-packaging. Having tried to implement multiple -dev and -dbg in depchains
-I'm very nervous of that idea (I think the code may now partially handle
-it but there were problems, I don't recall exactly what offhand).
+I have the following configuration:
 
-Cheers,
+DISTRO = "openmoko"
+MACHINE = "om-gta02"
+IMAGE_TARGET = "fso-image"
+DISTRO_TARGET = "openmoko-feed"
+INHERIT += "rm_work"
+BBFILES += "/iscsi/local_recipies/*.bb"
+include conf/topdir.conf
+TMPDIR := "${TOPDIR}/tmp"
+CACHE := "${TMPDIR}/cache"
+DL_DIR := "${TOPDIR}/downloads"
+PKGDIR := "${TOPDIR}/openembedded"
+BBFILES := "${PKGDIR}/packages/*/*.bb"
+TOPDIR='/iscsi/qt-test/fso-unstable'
 
-Richard
+and git diff produces:
 
+diff --git a/conf/distro/include/preferred-om-2008-versions.inc
+b/conf/distro/include/preferred-om-2008-versions.inc
+index f420097..7767c5c 100644
+--- a/conf/distro/include/preferred-om-2008-versions.inc
++++ b/conf/distro/include/preferred-om-2008-versions.inc
+@@ -1621,7 +1621,7 @@ PREFERRED_VERSION_qpobox ?= "0.5.4"
+ PREFERRED_VERSION_qpphoto ?= "1.0.2"
+ PREFERRED_VERSION_qscintilla ?= "1.65-gpl-1.6"
+ PREFERRED_VERSION_qsvn ?= "0.3.0"
+-PREFERRED_VERSION_qt4-x11-free ?= "4.3.3"
++#PREFERRED_VERSION_qt4-x11-free ?= "4.3.3"
+ PREFERRED_VERSION_qtplot ?= "0.2"
+ PREFERRED_VERSION_qt-x11-free ?= "3.3.7"
+ PREFERRED_VERSION_qt-x11-free-native ?= "3.3.5"
+diff --git a/packages/qt4/qt_configuration.inc
+b/packages/qt4/qt_configuration.inc
+index 252a80a..9444e87 100644
+--- a/packages/qt4/qt_configuration.inc
++++ b/packages/qt4/qt_configuration.inc
+@@ -5,7 +5,7 @@ QT_ENDIAN = "${@qt_endian(d)}"
+ QT_CONFIG_FLAGS += "-release -no-cups -no-accessibility -reduce-relocations
+\
+                     -shared -no-nas-sound -no-sm -no-nis \
+                     -qt-gif -system-libjpeg -system-libpng -system-zlib \
+-                     -no-sql-ibase -no-sql-mysql -no-sql-odbc -no-sql-psql
+-no-sql-sqlite -no-sql-sqlite2 \
++                     -no-sql-ibase -no-sql-mysql -no-sql-odbc -no-sql-psql
+-plugin-sql-sqlite -no-sql-sqlite2 \
+                     -no-pch -qdbus -stl -glib"
 
+ EXTRA_OEMAKE = "-e"
 
+As you can note i commented preferred qt4 version to have 4.4.1
 
+Regards
 
-
-
+    Nicola
 
