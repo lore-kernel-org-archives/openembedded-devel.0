@@ -1,37 +1,36 @@
-Received: from [74.125.78.148] (helo=ey-out-1920.google.com)
+Received: from [72.14.220.157] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicola.mfb@gmail.com>) id 1KmaFl-0007sB-Pa
+	(envelope-from <nishantsoin12@gmail.com>) id 1Kmj6W-000536-Ay
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Oct 2008 22:30:57 +0200
-Received: by ey-out-1920.google.com with SMTP id 4so695464eyg.36
+	Mon, 06 Oct 2008 07:58:00 +0200
+Received: by fg-out-1718.google.com with SMTP id l26so1872676fgb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Oct 2008 13:26:31 -0700 (PDT)
+	Sun, 05 Oct 2008 22:53:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:in-reply-to:mime-version:content-type:references;
-	bh=p/2ugeg97rWpmKZAKdEDCowCFRmlF9Tp6W6K1vbIHVc=;
-	b=JhaxG8miG51BZCwQQ2J4pZZ/A6JHSqukz12Rc1CJFQHyrS7s4J3RdPsnYKR/KpS29P
-	1z8Mvhtxct/IW9//mBJrxfI4XKAlqMADm46/VYkS2pe8BR9eOgbPsYz26nRk06ow0Qyo
-	uOrVaBitl12d4ztkuv76EyLN0daBl4qOCZdmA=
+	bh=hIbQSVoW/GtRT7amHHctBat01geutdzMZo4xLlntARI=;
+	b=eQCUt8lKkpcEGJjR1SHcWPR5Qkkju8+wX+P6Wsno7Sd+/t+c8fI6aMafYFQIlY+AhM
+	poh4GQLf7Qvt2WA7rGxAJvIcUQLKydmUjNp+eguCo3frtc8y7XbpoGjN5bP684qznAIX
+	SqF7zb0qkcoCJV57suJ1/ChE0BTgToP/2SEs0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:in-reply-to:mime-version
 	:content-type:references;
-	b=ROtFtzCHXdIM2+8RR3+W8VJ22Xtqft11SJ53HdMqAMMTuO0dK9Telq+ef4oRzcRKfN
-	675UJc2pJN1DZa0ze36kafFP1U9fgEgZRSQT4RyIlxgGpx1O+zt7a7fV9rSJ05hI92D3
-	+jHi9RvpcXUDcvbpPzduFEbFfN+23PlkiB4IA=
-Received: by 10.210.72.14 with SMTP id u14mr5126477eba.179.1223238391478;
-	Sun, 05 Oct 2008 13:26:31 -0700 (PDT)
-Received: by 10.210.138.17 with HTTP; Sun, 5 Oct 2008 13:26:31 -0700 (PDT)
-Message-ID: <359c5480810051326k2e921048r17f6b93e00aa619c@mail.gmail.com>
-Date: Sun, 5 Oct 2008 22:26:31 +0200
-From: "Nicola Mfb" <nicola.mfb@gmail.com>
+	b=dJiX1Jsam2qHcy+HMoinAD3yJsE+1Bg38HRTkZDtB9rN4PxXA1k4QgOmE3YgvtYUxz
+	Onrrk68ag4h9Qv+Y0TD28SVVA2piQ9he91aooJ/fNiJdQtAdSgKZopoXgDP1h2huP3FG
+	ZrCmDTWDWzXaJwANZf2ceVKBGrI3vLOcAV4KI=
+Received: by 10.187.196.3 with SMTP id y3mr916665fap.74.1223272412448;
+	Sun, 05 Oct 2008 22:53:32 -0700 (PDT)
+Received: by 10.187.225.9 with HTTP; Sun, 5 Oct 2008 22:53:32 -0700 (PDT)
+Message-ID: <73a60a6a0810052253l5c281e45q82f7cb4a0a021390@mail.gmail.com>
+Date: Mon, 6 Oct 2008 11:23:32 +0530
+From: "nishant soin" <nishantsoin12@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200810051937.40377.zecke@selfish.org>
+In-Reply-To: <bug-4653-13@http.bugs.openembedded.net/>
 MIME-Version: 1.0
-References: <359c5480810050806t6e368b2fta20d1edecd165757@mail.gmail.com>
-	<200810051937.40377.zecke@selfish.org>
+References: <bug-4653-13@http.bugs.openembedded.net/>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Qt 4.4.1 and sqlite
+Subject: Re: [Bug 4653] New: evince-2.23.4-autobuild
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,46 +44,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Oct 2008 20:30:57 -0000
+X-List-Received-Date: Mon, 06 Oct 2008 05:58:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-2008/10/5 Holger Freyther <zecke@selfish.org>
+Hi
+        i want to create package for gcc-4.2.0 version. While compiling gcc
+i get the error that sys/types.h not found so it is not able to create
+libiberty.a file.
+        Help me resolve this error.
 
-> On Sunday 05 October 2008 17:06:53 Nicola Mfb wrote:
-> > Hi,
-> > while trying to port a custom qt/application to angstrom i noted that the
-> > qt sqlite driver is not available.
-> > May be it possible to have support for it?
->
-> sqlite2 or sqlite3? sqlite3 should always be part of Qt, and we do accept
-> patches too.
->
 
-I mean sqlite3, I simply rebuilded an applications that read all qt
-available sql drivers and show a dialog tho choose one of them. This was
-empty on angstrom  while on a desktop pc it usually shows sqlite and some
-others drivers (mysql and pgsql).
-In the file packages/qt4/qt_configuration.inc i read:
 
-QT_CONFIG_FLAGS += "-release -no-cups -no-accessibility -reduce-relocations
-\
-                    -shared -no-nas-sound -no-sm -no-nis \
-                    -qt-gif -system-libjpeg -system-libpng -system-zlib \
-                     -no-sql-ibase -no-sql-mysql -no-sql-odbc -no-sql-psql
--no-sql-sqlite -no-sql-sqlite2 \
-                    -no-pch -qdbus -stl -glib"
-
-So -no-sql-sqlite should be modified in qt-sql-sqlite (linked into the
-library) or plugin-sql-sqlite (build as plugin). I'm not sure if the second
-option loads the plugin only when needed or is a simple way to support
-external plugins in qt.
-
-I hope tomorrow I will be able to test a qt rebuild, and reports some
-feedback here.
-
-Regards
-
-    Nicola
+-- 
+Nishant Soin
+Embedded Engineer
+SQL Star International Ltd.
 
