@@ -1,20 +1,20 @@
 Received: from [193.201.35.47] (helo=bq8.dotserv.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1KnC77-0007Gq-80
+	(envelope-from <esbenhaabendal@gmail.com>) id 1KnC77-0007Gs-An
 	for openembedded-devel@openembedded.org; Tue, 07 Oct 2008 14:56:33 +0200
 Received: from localhost (077233226018.hef.nianet.dk [77.233.226.18] (may be
 	forged))
-	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id m97CpkPY021272;
+	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id m97Cpk6F021274;
 	Tue, 7 Oct 2008 14:51:51 +0200
 Received: from esben by localhost with local (Exim 4.69)
 	(envelope-from <esbenhaabendal@gmail.com>)
-	id 1KnC2U-00015G-Ef; Tue, 07 Oct 2008 14:51:46 +0200
+	id 1KnC2U-00015J-FF; Tue, 07 Oct 2008 14:51:46 +0200
 From: eha@doredevelopment.dk
 To: openembedded-devel@openembedded.org
-Date: Tue,  7 Oct 2008 14:51:41 +0200
-Message-Id: <93d0cbbfbf07239138d3b25f7a411ab8409fc67a.1223383759.git.eha@doredevelopment.dk>
+Date: Tue,  7 Oct 2008 14:51:42 +0200
+Message-Id: <8d921520e115ee5aeb40f0b1dc2b4fd2a6abea29.1223383759.git.eha@doredevelopment.dk>
 X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <5b160cf460453dfb437c1b2c8972e4f3678e6aad.1223383759.git.eha@doredevelopment.dk>
+In-Reply-To: <93d0cbbfbf07239138d3b25f7a411ab8409fc67a.1223383759.git.eha@doredevelopment.dk>
 References: <> <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
 	<c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 	<b011d8abd4dd7f517da3f835736cce56a1acd919.1223383759.git.eha@doredevelopment.dk>
@@ -23,10 +23,11 @@ References: <> <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
 	<d01d019899790eefd7fb6742174f2c359022b4fa.1223383759.git.eha@doredevelopment.dk>
 	<cc617cfc6a87cb5e145ace9c07d91a4cf4853600.1223383759.git.eha@doredevelopment.dk>
 	<5b160cf460453dfb437c1b2c8972e4f3678e6aad.1223383759.git.eha@doredevelopment.dk>
+	<93d0cbbfbf07239138d3b25f7a411ab8409fc67a.1223383759.git.eha@doredevelopment.dk>
 In-Reply-To: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 References: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 Cc: Esben Haabendal <eha@doredevelopment.dk>
-Subject: [PATCH 08/13] mingw-runtime, mingw-w32api, mingw-runtime-headers, mingw-w32api-headers
+Subject: [PATCH 09/13] mingw-binutils-canadian-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,124 +45,86 @@ X-List-Received-Date: Tue, 07 Oct 2008 12:56:33 -0000
 
 From: Esben Haabendal <eha@doredevelopment.dk>
 
-* mingw-runtime and mingw-w32api requires mingw-gcc-canadian-cross-initial
-  before they can be built
 
 Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
 ---
- packages/mingw/mingw-runtime-headers_3.14.bb |   20 ++++++++++++++++++++
- packages/mingw/mingw-runtime_3.14.bb         |   21 +++++++++++++++++++++
- packages/mingw/mingw-w32api-headers_3.11.bb  |   20 ++++++++++++++++++++
- packages/mingw/mingw-w32api_3.11.bb          |   17 +++++++++++++++++
- 4 files changed, 78 insertions(+), 0 deletions(-)
- create mode 100644 packages/mingw/mingw-runtime-headers_3.14.bb
- create mode 100644 packages/mingw/mingw-runtime_3.14.bb
- create mode 100644 packages/mingw/mingw-w32api-headers_3.11.bb
- create mode 100644 packages/mingw/mingw-w32api_3.11.bb
+ packages/binutils/binutils-canadian-cross.inc      |   28 ++++++++++++++++++++
+ ...w-binutils-canadian-cross_2.17.50-20060824-1.bb |   11 ++++++++
+ .../binutils/mingw-binutils_2.17.50-20060824-1.bb  |   12 ++++++++
+ 3 files changed, 51 insertions(+), 0 deletions(-)
+ create mode 100644 packages/binutils/binutils-canadian-cross.inc
+ create mode 100644 packages/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.bb
+ create mode 100644 packages/binutils/mingw-binutils_2.17.50-20060824-1.bb
 
-diff --git a/packages/mingw/mingw-runtime-headers_3.14.bb b/packages/mingw/mingw-runtime-headers_3.14.bb
+diff --git a/packages/binutils/binutils-canadian-cross.inc b/packages/binutils/binutils-canadian-cross.inc
 new file mode 100644
-index 0000000..88ee998
+index 0000000..1f2c21e
 --- /dev/null
-+++ b/packages/mingw/mingw-runtime-headers_3.14.bb
-@@ -0,0 +1,20 @@
-+require mingw-runtime_${PV}.bb
++++ b/packages/binutils/binutils-canadian-cross.inc
+@@ -0,0 +1,28 @@
++SECTION = "devel"
++inherit canadian-cross
++DEPENDS += "flex-native bison-native"
++PROVIDES = "virtual/${TARGET_PREFIX}binutils"
++PACKAGES = ""
++EXTRA_OECONF = "--with-sysroot=${CROSS_DIR}/${TARGET_SYS} \
++		--program-prefix=${TARGET_PREFIX} \
++		--enable-install-libbfd \
++                --disable-werror"
 +
-+DEPENDS = "mingw-w32api-headers"
-+PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
++do_stage () {
++	# ugly hack introduce to link cross with staging area
++	install -d ${CROSS_DIR}/${SDK_SYS}
++	ln -sf ${STAGING_DIR_SDK}${layout_includedir} \
++		${CROSS_DIR}/${SDK_SYS}/include
++	# FIXME: libdir should not be linked like this anymore
++	ln -sf ${STAGING_DIR_SDK}${layout_libdir} \
++		${CROSS_DIR}/${SDK_SYS}/lib
 +
-+do_configure() {
++	oe_runmake install
++
++	# We don't really need these, so we'll remove them...
++	rm -rf ${CROSS_DIR}/${SDK_SYS}/lib/ldscripts
++}
++
++do_install () {
 +	:
 +}
-+
-+do_compile() {
-+	:
-+}
-+
-+do_install() {
-+	:
-+}
-+
-+do_stage() {
-+	cp -r ${S}/include/* ${STAGING_INCDIR}/
-+}
-diff --git a/packages/mingw/mingw-runtime_3.14.bb b/packages/mingw/mingw-runtime_3.14.bb
+diff --git a/packages/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.bb b/packages/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.bb
 new file mode 100644
-index 0000000..f8f2e8e
+index 0000000..385aa1d
 --- /dev/null
-+++ b/packages/mingw/mingw-runtime_3.14.bb
-@@ -0,0 +1,21 @@
++++ b/packages/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.bb
+@@ -0,0 +1,11 @@
++require mingw-binutils_${PV}.bb
++require binutils-canadian-cross.inc
++
++DEFAULT_PREFERENCE_sdk-mingw32 = "1"
++DEFAULT_PREFERENCE_sdk-mingw64 = "1"
++
++require binutils-canadian-cross.inc
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
++
++S = "${WORKDIR}/binutils-${PV}-src"
+diff --git a/packages/binutils/mingw-binutils_2.17.50-20060824-1.bb b/packages/binutils/mingw-binutils_2.17.50-20060824-1.bb
+new file mode 100644
+index 0000000..9d17873
+--- /dev/null
++++ b/packages/binutils/mingw-binutils_2.17.50-20060824-1.bb
+@@ -0,0 +1,12 @@
 +PR = "r1"
 +
-+inherit canadian-native autotools
++require binutils.inc
 +
-+INHIBIT_DEFAULT_DEPS = "1"
-+DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial mingw-w32api"
++DESCRIPTION = "A GNU collection of binary utilities - MinGW port"
++HOMEPAGE = "http://www.mingw.org/"
 +
-+PROVIDES = "virtual/${TARGET_PREFIX}libc virtual/${TARGET_PREFIX}libc-for-gcc"
++SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
 +
-+DEFAULT_PREFERENCE = "0"
-+DEFAULT_PREFERENCE_sdk-mingw32 = "1"
-+
-+PACKAGES = ""
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/mingw-runtime-${PV}-src.tar.gz"
-+S = "${WORKDIR}/mingw-runtime-${PV}"
-+B = "${WORKDIR}/build-${TARGET_SYS}"
-+
-+do_configure() {
-+	oe_runconf
-+}
-\ No newline at end of file
-diff --git a/packages/mingw/mingw-w32api-headers_3.11.bb b/packages/mingw/mingw-w32api-headers_3.11.bb
-new file mode 100644
-index 0000000..25ef810
---- /dev/null
-+++ b/packages/mingw/mingw-w32api-headers_3.11.bb
-@@ -0,0 +1,20 @@
-+require mingw-w32api_${PV}.bb
-+
-+DEPENDS = ""
-+PROVIDES = "mingw-w32api-headers"
-+
-+do_configure() {
-+	:
-+}
-+
-+do_compile() {
-+	:
-+}
-+
-+do_install() {
-+	:
-+}
-+
-+do_stage() {
-+	cp -r ${S}/include/* ${STAGING_INCDIR}/
-+}
-diff --git a/packages/mingw/mingw-w32api_3.11.bb b/packages/mingw/mingw-w32api_3.11.bb
-new file mode 100644
-index 0000000..c0a4462
---- /dev/null
-+++ b/packages/mingw/mingw-w32api_3.11.bb
-@@ -0,0 +1,17 @@
-+PR = "r1"
-+
-+inherit canadian-native autotools
-+
-+INHIBIT_DEFAULT_DEPS = "1"
-+DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial"
-+
-+PROVIDES = "mingw-w32api"
++S = "${WORKDIR}/binutils-${PV}-src"
 +
 +DEFAULT_PREFERENCE = "0"
-+DEFAULT_PREFERENCE_sdk-mingw32 = "1"
-+
-+PACKAGES = ""
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/w32api-${PV}-src.tar.gz"
-+S = "${WORKDIR}/w32api-${PV}"
-+B = "${WORKDIR}/build-${TARGET_SYS}"
 -- 
 1.5.4.3
 
