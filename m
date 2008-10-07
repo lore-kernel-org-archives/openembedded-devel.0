@@ -1,39 +1,38 @@
-Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
+Received: from [209.85.198.246] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1KnCmy-0005vF-9t
-	for openembedded-devel@openembedded.org; Tue, 07 Oct 2008 15:39:48 +0200
-Received: (qmail 9789 invoked from network); 7 Oct 2008 15:35:14 +0200
-Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
-	by leibniz.math.fu-berlin.de with SMTP; 7 Oct 2008 15:35:14 +0200
-Received: (qmail 1201 invoked by uid 9804); 7 Oct 2008 15:35:14 +0200
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 7 Oct 2008 15:35:03 +0200
-Received: (qmail 585 invoked by uid 9804); 7 Oct 2008 15:35:02 +0200
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by lusin.mi.fu-berlin.de with SMTP; 7 Oct 2008 15:35:02 +0200
-Received: (qmail 9706 invoked from network); 7 Oct 2008 15:35:02 +0200
-Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
-	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
-	7 Oct 2008 13:35:02 -0000
-Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 4.63 #1
-	(Debian)) id 1KnCiM-00054S-O0
+	(envelope-from <esbenhaabendal@gmail.com>) id 1KnCvc-00067b-UB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Oct 2008 15:48:45 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so4937318rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Oct 2008 15:35:02 +0200
-Date: Tue, 7 Oct 2008 15:35:02 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 07 Oct 2008 06:44:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=UKMrWpTxRLZ4CmzGNJvk8y/zdkS6rUqho/L4AcK0VyQ=;
+	b=N7UwmWHk/8Vkb2jBpNGqDt6LblVckDVXrSEoPtLDvzhNfk3t1ZjwDw2nsAKhE3ckxd
+	5X9ebLNn7hvgT9iuxxMO2sktZRFNncVv9/DZCcCENl3hNRmZIvfjXWwcj0yQ5Kucp45q
+	xnTZlT4RvShrMHbiAgs6+DklVKu2/ME1P45X0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=mfyQGImNz4VqrFYD2bWVFIPuv9GRandAxzdw6vfcT/VevyJUVlgsaFA/Ed268tAkyG
+	cHLXTtj/afOkN6rFlKeg52MhvolIeeS/8WFGQarJFpKsdSxvaCCuNw+y/Gj18PiNMj4k
+	NtIW1Szn1z8psZSNHs5jD7sMKv0ob1J+Ax+X0=
+Received: by 10.140.136.6 with SMTP id j6mr3863667rvd.231.1223387050037;
+	Tue, 07 Oct 2008 06:44:10 -0700 (PDT)
+Received: by 10.140.204.9 with HTTP; Tue, 7 Oct 2008 06:44:09 -0700 (PDT)
+Message-ID: <d2b9ea600810070644n7e64574fs7db73a0f9b0cd1df@mail.gmail.com>
+Date: Tue, 7 Oct 2008 15:44:09 +0200
+From: "Esben Haabendal" <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081007133502.GA19220@mi.fu-berlin.de>
+In-Reply-To: <20081007133502.GA19220@mi.fu-berlin.de>
+MIME-Version: 1.0
 References: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 	<f2596b99780ea3954dc25884bf29704a5584c2f8.1223383759.git.eha@doredevelopment.dk>
-X-Envelope-Sender: heinold@mi.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L41+ClamAV[598](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.206
-MIME-Version: 1.0
-In-Reply-To: <f2596b99780ea3954dc25884bf29704a5584c2f8.1223383759.git.eha@doredevelopment.dk>
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+	<20081007133502.GA19220@mi.fu-berlin.de>
 Subject: Re: [PATCH 13/13] canadian-sdk.bb, task-sdk-canadian-host.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,17 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2008 13:39:48 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 07 Oct 2008 13:48:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Hi,
+On Tue, Oct 7, 2008 at 3:35 PM, Henning Heinold
+<heinold@inf.fu-berlin.de> wrote:
+>
+> thanks for the patches, but normaly we prefer to put the patches into the
+> bugtracker and mentioned here the bug id.
 
-thanks for the patches, but normaly we prefer to put the patches into the
-bugtracker and mentioned here the bug id.
+Well, I would like to have a discussion on this patch series, and were
+not suggesting to commit it as-is.
 
-Bye Henning
+Also, as you might have noticed it, I am sending the patches as git
+diff's, and not mtn diffs, so I assume
+I would be ill fated If I were to put them in bugzilla.
 
-PS: If no one is doing something on this bug ping the list from time to time.
+Anyway, I just hope that someone will take a look at this work, so I
+that I have a chance to move
+canadian sdk in the right direction for putting it into .dev some day.
+
+/Esben
+--=20
+Esben Haabendal, Senior Software Consultant
+Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
+Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
+WWW: http://www.doredevelopment.dk
 
 
