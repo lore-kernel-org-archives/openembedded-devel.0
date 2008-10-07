@@ -1,20 +1,20 @@
 Received: from [193.201.35.47] (helo=bq8.dotserv.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1KnC71-0007GM-9M
+	(envelope-from <esbenhaabendal@gmail.com>) id 1KnC71-0007GF-70
 	for openembedded-devel@openembedded.org; Tue, 07 Oct 2008 14:56:27 +0200
 Received: from localhost (077233226018.hef.nianet.dk [77.233.226.18] (may be
 	forged))
-	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id m97CpkAN021282;
+	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id m97CpkMt021281;
 	Tue, 7 Oct 2008 14:51:51 +0200
 Received: from esben by localhost with local (Exim 4.69)
 	(envelope-from <esbenhaabendal@gmail.com>)
-	id 1KnC2U-00015V-HI; Tue, 07 Oct 2008 14:51:46 +0200
+	id 1KnC2U-00015S-Gh; Tue, 07 Oct 2008 14:51:46 +0200
 From: eha@doredevelopment.dk
 To: openembedded-devel@openembedded.org
-Date: Tue,  7 Oct 2008 14:51:46 +0200
-Message-Id: <f2596b99780ea3954dc25884bf29704a5584c2f8.1223383759.git.eha@doredevelopment.dk>
+Date: Tue,  7 Oct 2008 14:51:45 +0200
+Message-Id: <6f8742b61ff8e48ed77c91bc9573711e0d3c6f53.1223383759.git.eha@doredevelopment.dk>
 X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <6f8742b61ff8e48ed77c91bc9573711e0d3c6f53.1223383759.git.eha@doredevelopment.dk>
+In-Reply-To: <dd0ef3bb331e249a81458281dabe93098943e0a3.1223383759.git.eha@doredevelopment.dk>
 References: <> <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
 	<c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 	<b011d8abd4dd7f517da3f835736cce56a1acd919.1223383759.git.eha@doredevelopment.dk>
@@ -27,11 +27,10 @@ References: <> <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
 	<8d921520e115ee5aeb40f0b1dc2b4fd2a6abea29.1223383759.git.eha@doredevelopment.dk>
 	<eb9f8974f6c3f5c6f86634656ccc0be509e9ad6f.1223383759.git.eha@doredevelopment.dk>
 	<dd0ef3bb331e249a81458281dabe93098943e0a3.1223383759.git.eha@doredevelopment.dk>
-	<6f8742b61ff8e48ed77c91bc9573711e0d3c6f53.1223383759.git.eha@doredevelopment.dk>
 In-Reply-To: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 References: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 Cc: Esben Haabendal <eha@doredevelopment.dk>
-Subject: [PATCH 13/13] canadian-sdk.bb, task-sdk-canadian-host.bb
+Subject: [PATCH 12/13] gcc-canadian-sdk_4.2.2.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,191 +51,206 @@ From: Esben Haabendal <eha@doredevelopment.dk>
 
 Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
 ---
- packages/meta/canadian-sdk.bb            |  143 ++++++++++++++++++++++++++++++
- packages/tasks/task-sdk-canadian-host.bb |   24 +++++
- 2 files changed, 167 insertions(+), 0 deletions(-)
- create mode 100644 packages/meta/canadian-sdk.bb
- create mode 100644 packages/tasks/task-sdk-canadian-host.bb
+ .../canadian-build-modules-configure.patch         |   22 +++++
+ packages/gcc/gcc-canadian-sdk-build.inc            |   81 ++++++++++++++++++++
+ packages/gcc/gcc-canadian-sdk-package.inc          |   36 +++++++++
+ packages/gcc/gcc-canadian-sdk_4.2.2.bb             |   27 +++++++
+ 4 files changed, 166 insertions(+), 0 deletions(-)
+ create mode 100644 packages/gcc/gcc-4.2.2/canadian-build-modules-configure.patch
+ create mode 100644 packages/gcc/gcc-canadian-sdk-build.inc
+ create mode 100644 packages/gcc/gcc-canadian-sdk-package.inc
+ create mode 100644 packages/gcc/gcc-canadian-sdk_4.2.2.bb
 
-diff --git a/packages/meta/canadian-sdk.bb b/packages/meta/canadian-sdk.bb
+diff --git a/packages/gcc/gcc-4.2.2/canadian-build-modules-configure.patch b/packages/gcc/gcc-4.2.2/canadian-build-modules-configure.patch
 new file mode 100644
-index 0000000..119b4b0
+index 0000000..8aede10
 --- /dev/null
-+++ b/packages/meta/canadian-sdk.bb
-@@ -0,0 +1,143 @@
-+DESCRIPTION = "Meta package for building a installable toolchain"
-+LICENSE = "MIT"
-+DEPENDS = "ipkg-native ipkg-utils-native fakeroot-native sed-native"
-+PR = "r2"
++++ b/packages/gcc/gcc-4.2.2/canadian-build-modules-configure.patch
+@@ -0,0 +1,22 @@
++diff -urN gcc-4.2.2-orig/gcc/configure gcc-4.2.2/gcc/configure
++--- gcc-4.2.2-orig/gcc/configure	2008-08-31 23:10:56.000000000 +0200
+++++ gcc-4.2.2/gcc/configure	2008-08-31 23:03:02.000000000 +0200
++@@ -12716,6 +12716,7 @@
++ 	esac
++ 	saved_CFLAGS="${CFLAGS}"
++ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
+++	CPP="${CPP_FOR_BUILD}" CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
++ 	CONFIG_SITE= ${realsrcdir}/configure --cache-file=./other.cache \
++ 		--enable-languages=${enable_languages-all} \
++ 		--target=$target_alias --host=$build_alias --build=$build_alias
++diff -urN gcc-4.2.2-orig/gcc/configure.ac gcc-4.2.2/gcc/configure.ac
++--- gcc-4.2.2-orig/gcc/configure.ac	2008-08-31 23:10:53.000000000 +0200
+++++ gcc-4.2.2/gcc/configure.ac	2008-08-31 23:03:29.000000000 +0200
++@@ -1490,6 +1490,7 @@
++ 	esac
++ 	saved_CFLAGS="${CFLAGS}"
++ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
+++	CPP="${CPP_FOR_BUILD}" CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
++ 	${realsrcdir}/configure \
++ 		--enable-languages=${enable_languages-all} \
++ 		--target=$target_alias --host=$build_alias --build=$build_alias
+diff --git a/packages/gcc/gcc-canadian-sdk-build.inc b/packages/gcc/gcc-canadian-sdk-build.inc
+new file mode 100644
+index 0000000..aba2067
+--- /dev/null
++++ b/packages/gcc/gcc-canadian-sdk-build.inc
+@@ -0,0 +1,81 @@
++USE_NLS = '${@base_conditional( "TARGET_OS", "linux-uclibc", "no", "", d )}'
++USE_NLS = '${@base_conditional( "TARGET_OS", "linux-uclibcgnueabi", "no", "", d )}'
 +
-+inherit canadian-sdk meta
++ARCH_FLAGS_FOR_TARGET=""
 +
-+SDK_DIR = "${WORKDIR}/sdk"
-+SDK_OUTPUT = "${SDK_DIR}/image"
-+SDK_DEPLOY = "${TMPDIR}/deploy/sdk"
-+SDK_SUFFIX = "toolchain"
++# Tools for build
++export CC_FOR_BUILD="${BUILD_CC}"
++export CFLAGS_FOR_BUILD="${BUILD_CFLAGS}"
++export CPP_FOR_BUILD="${BUILD_CPP}"
++export CPPFLAGS_FOR_BUILD="${BUILD_CPPFLAGS}"
++export CXX_FOR_BUILD="${BUILD_CXX}"
++export CXXFLAGS_FOR_BUILD="${BUILD_CXXFLAGS}"
++export LD_FOR_BUILD="${BUILD_LD}"
++export LDFLAGS_FOR_BUILD="${BUILD_LDFLAGS}"
++export AS_FOR_BUILD="${BUILD_PREFIX}as"
++export AR_FOR_BUILD="${BUILD_PREFIX}ar"
++export NM_FOR_BUILD="${BUILD_PREFIX}nm"
++export RANLIB_FOR_BUILD="${BUILD_PREFIX}ranlib"
++export GCJ_FOR_BUILD="${BUILD_PREFIX}gcj"
++export GFORTRAN_FOR_BUILD="${BUILD_PREFIX}gfortran"
++export DLLTOOL_FOR_BUILD="${BUILD_PREFIX}dlltool"
++export WINDRES_FOR_BUILD="${BUILD_PREFIX}windres"
 +
-+FEED_ARCH ?= "${TARGET_ARCH}"
++# Tools for host
++#CC
++#CFLAGS
++#CXX
++#CXXFLAGS
++#LD
++LDFLAGS=""
++#AS
++#AR
++#NM
++#RANLIB
++#GCJ
++#GFORTRAN
++export DLLTOOL="${HOST_PREFIX}dlltool"
++export WINDRES="${HOST_PREFIX}windres"
 +
-+IPKG_HOST = "ipkg-cl -f ${IPKGCONF_CANSDK} -o ${SDK_OUTPUT}"
-+IPKG_TARGET = "ipkg-cl -f ${IPKGCONF_TARGET} -o ${SDK_OUTPUT}${prefix}"
++# Tools for target
++export CC_FOR_TARGET="${TARGET_CC}"
++export CFLAGS_FOR_TARGET="${TARGET_CFLAGS}"
++export CXX_FOR_TARGET="${TARGET_CXX}"
++export CXXFLAGS_FOR_TARGET="${TARGET_CXXFLAGS}"
++export LD_FOR_TARGET="${TARGET_LD}"
++export LDFLAGS_FOR_TARGET="${TARGET_LDFLAGS}"
++export AS_FOR_TARGET="${TARGET_PREFIX}as"
++export AR_FOR_TARGET="${TARGET_PREFIX}ar"
++export NM_FOR_TARGET="${TARGET_PREFIX}nm"
++export RANLIB_FOR_TARGET="${TARGET_PREFIX}ranlib"
++export GCJ_FOR_TARGET="${TARGET_PREFIX}gcj"
++export GFORTRAN_FOR_TARGET="${TARGET_PREFIX}gfortran"
++export DLLTOOL_FOR_TARGET="${TARGET_PREFIX}dlltool"
++export WINDRES_FOR_TARGET="${TARGET_PREFIX}windres"
 +
-+TOOLCHAIN_CANADIAN_HOST_TASK ?= "task-sdk-canadian-host"
-+TOOLCHAIN_TARGET_TASK ?= "task-sdk-bare"
++EXTRA_OECONF_DEP ?= ""
 +
-+RDEPENDS = "${TOOLCHAIN_TARGET_TASK} ${TOOLCHAIN_CANADIAN_HOST_TASK}"
++SYSROOT = "${WORKDIR}/sysroot"
++EXTRA_OECONF += ""
++EXTRA_OECONF_PATHS = " \
++	--with-local-prefix=$dollar{prefix}/local \
++	--with-gxx-include-dir=$dollar{prefix}/${TARGET_SYS}/usr/include/c++/${BINV} \
++	--with-build-sysroot=${SYSROOT} \
++	--with-sysroot=${SDK_REALPATH}/${TARGET_SYS} \
++"
 +
-+do_populate_sdk() {
-+	rm -rf ${SDK_OUTPUT}
-+	mkdir -p ${SDK_OUTPUT}
++do_configure () {
++	# Work around Hardcoded path assumptions in gcc
++	mkdir -p ${SYSROOT}/usr
++	ln -sf ${STAGING_DIR_SDK}${layout_includedir} \
++		${SYSROOT}/usr/include
++	ln -sf ${STAGING_DIR_SDK}${layout_libdir} \
++		${SYSROOT}/usr/lib
++	(cd ${S} && gnu-configize) || die "failure running gnu-configize"
++	(cd ${S}/libstdc++-v3 && autoreconf)
++	canadian_sdk_runconf
++}
 +
-+	package_update_index_ipk
-+	package_generate_ipkg_conf
++do_compile () {
++	oe_runmake
++}
+diff --git a/packages/gcc/gcc-canadian-sdk-package.inc b/packages/gcc/gcc-canadian-sdk-package.inc
+new file mode 100644
+index 0000000..5889821
+--- /dev/null
++++ b/packages/gcc/gcc-canadian-sdk-package.inc
+@@ -0,0 +1,36 @@
++# Packages emitted by our gcc-cross builds.
++#
++INHIBIT_PACKAGE_STRIP ?= ""
++OLD_INHIBIT_PACKAGE_STRIP := "${INHIBIT_PACKAGE_STRIP}"
++INHIBIT_PACKAGE_STRIP = "1"
 +
-+	for arch in ${PACKAGE_ARCHS}; do
-+		revipkgarchs="$arch $revipkgarchs"
-+	done
++python do_package() {
++	if bb.data.getVar('DEBIAN_NAMES', d, 1):
++		bb.data.setVar('PKG_libgcc', 'libgcc1', d)
++	bb.build.exec_func('package_do_package', d)
++}
 +
-+	${IPKG_HOST} update
-+	${IPKG_HOST} -force-depends install ${TOOLCHAIN_CANADIAN_HOST_TASK}
++do_install () {
++	oe_runmake 'DESTDIR=${D}' 'prefix=${SDK_PATH}' install
 +
-+	${IPKG_TARGET} update
-+	${IPKG_TARGET} install ${TOOLCHAIN_TARGET_TASK}
-+
-+	mkdir -p ${SDK_OUTPUT}${prefix}/${TARGET_SYS}
-+	cp -pPR ${SDK_OUTPUT}${prefix}/usr ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/
-+	rm -rf ${SDK_OUTPUT}${prefix}/usr
-+
-+	cp -pPR ${SDK_OUTPUT}${prefix}/lib/* ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/
-+	rm -rf ${SDK_OUTPUT}${prefix}/lib/*
-+
-+	cp -pPR ${SDK_OUTPUT}/usr/lib/ipkg ${SDK_OUTPUT}${prefix}/lib/
-+	rm -rf ${SDK_OUTPUT}/usr/lib/ipkg/*
-+	rmdir -p --ignore-fail-on-non-empty ${SDK_OUTPUT}/usr/lib/ipkg
-+
-+	for fn in `ls ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/`; do
-+		if [ -h ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/$fn ]; then
-+			link=`readlink ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/$fn`
-+			bname=`basename $link`
-+			if [ ! -e $link -a -e ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/$bame ]; then
-+				rm ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/$fn
-+				ln -s $bname ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/$fn
-+			fi
-+		fi
-+	done
-+
-+	mv ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/gcc ${SDK_OUTPUT}${prefix}/lib
-+
-+	echo 'GROUP ( libpthread.so.0 libpthread_nonshared.a )' > ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/libpthread.so
-+	echo 'GROUP ( libc.so.6 libc_nonshared.a )' > ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/libc.so
-+
-+	# extract and store ipks, pkgdata and shlibs data
-+	target_pkgs=`cat ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/usr/lib/ipkg/status | grep Package: | cut -f 2 -d ' '`
-+	mkdir -p ${SDK_OUTPUT}${prefix}/ipk/
-+	mkdir -p ${SDK_OUTPUT}${prefix}/pkgdata/runtime/
-+	mkdir -p ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/shlibs/
-+	for pkg in $target_pkgs ; do
-+		for arch in $revipkgarchs; do
-+			pkgnames=${DEPLOY_DIR_IPK}/$arch/${pkg}_*_$arch.ipk
-+			if [ -e $pkgnames ]; then
-+				oenote "Found $pkgnames"
-+				cp $pkgnames ${SDK_OUTPUT}${prefix}/ipk/
-+				orig_pkg=`ipkg-list-fields $pkgnames | grep OE: | cut -d ' ' -f2`
-+				pkg_subdir_postfix=${TARGET_VENDOR}${@['-' + bb.data.getVar('TARGET_OS', d, 1), ''][bb.data.getVar('TARGET_OS', d, 1) == ('' or 'custom')]}
-+				for aarch in $revipkgarchs; do
-+					if [ -e "${STAGING_DIR}/pkgdata/${aarch}${pkg_subdir_postfix}/${orig_pkg}" ]; then
-+						pkg_subdir="${aarch}${pkg_subdir_postfix}"
-+						break
-+					fi
-+				done
-+				oenote "Original package in ${pkg_subdir}"
-+				mkdir -p ${SDK_OUTPUT}${prefix}/pkgdata/$pkg_subdir/runtime
-+				cp ${STAGING_DIR}/pkgdata/$pkg_subdir/$orig_pkg ${SDK_OUTPUT}${prefix}/pkgdata/$pkg_subdir/
-+				subpkgs=`cat ${STAGING_DIR}/pkgdata/$pkg_subdir/$orig_pkg | grep PACKAGES: | cut -b 10-`
-+				for subpkg in $subpkgs; do
-+					cp ${STAGING_DIR}/pkgdata/$pkg_subdir/runtime/$subpkg ${SDK_OUTPUT}${prefix}/pkgdata/$pkg_subdir/runtime/
-+					if [ -e ${STAGING_DIR}/pkgdata/$pkg_subdir/runtime/$subpkg.packaged ];then
-+						cp ${STAGING_DIR}/pkgdata/$pkg_subdir/runtime/$subpkg.packaged ${SDK_OUTPUT}${prefix}/pkgdata/$pkg_subdir/runtime/
-+					fi
-+					if [ -e ${STAGING_DIR_TARGET}/shlibs/$subpkg.list ]; then
-+						cp ${STAGING_DIR_TARGET}/shlibs/$subpkg.* ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/shlibs/
-+					fi
-+				done
-+				break
-+			fi
-+		done
-+	done
-+
-+	# add missing link to libgcc_s.so.1
-+	# libgcc-dev should be responsible for that, but it's not getting built
-+	# RP: it gets smashed up depending on the order that gcc, gcc-cross and 
-+	# gcc-cross-sdk get built :( (30/11/07)
-+	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/libgcc_s.so
-+
-+	# remove unwanted executables
-+	rm -rf ${SDK_OUTPUT}${prefix}/sbin ${SDK_OUTPUT}${prefix}/etc
-+
-+	# remove broken .la files
-+	rm -f ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/*.la
-+
-+	# fix pkgconfig data files
-+	if [ -e ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/pkgconfig ]; then
-+		cd ${SDK_OUTPUT}${prefix}/${TARGET_SYS}/lib/pkgconfig
-+		for f in *.pc ; do
-+			sed -i 's%=/usr%=${prefix}/${TARGET_SYS}%g' "$f"
-+		done
-+		for f in *.pc ; do
-+			sed -i 's%${STAGING_DIR}%${prefix}%g' "$f"
-+		done
++	# Manually run the target stripper since we won't get it run by
++	# the packaging.
++	if [ "x${OLD_INHIBIT_PACKAGE_STRIP}" != "x1" ]; then
++		${TARGET_PREFIX}strip ${D}${prefix}/${TARGET_SYS}/lib/libstdc++.so.*
++		${TARGET_PREFIX}strip ${D}${prefix}/${TARGET_SYS}/lib/libg2c.so.* || true
++		${TARGET_PREFIX}strip ${D}${prefix}/${TARGET_SYS}/lib/libgcc_s.so.*
 +	fi
 +}
 +
-+do_package_sdk() {
-+	# package it up
-+	mkdir -p ${SDK_DEPLOY}
-+	cd ${SDK_OUTPUT}
-+	fakeroot tar cfj ${SDK_DEPLOY}/${SDK_SYS}-sdk-${DISTRO}-${DISTRO_VERSION}-${FEED_ARCH}-${TARGET_OS}.tar.bz2 .${prefix}
-+	rm -f ${SDK_DEPLOY}/${SDK_SYS}-sdk-${DISTRO}-${DISTRO_VERSION}-${FEED_ARCH}-${TARGET_OS}.zip
-+	zip -r -D ${SDK_DEPLOY}/${SDK_SYS}-sdk-${DISTRO}-${DISTRO_VERSION}-${FEED_ARCH}-${TARGET_OS}.zip .${prefix}
-+}
++FILES_libgcc = "${prefix}/${TARGET_SYS}/lib/libgcc*.so.*"
++FILES_libgcc-dev = "${prefix}/${TARGET_SYS}/lib/libgcc*.so"
 +
-+do_populate_sdk[nostamp] = "1"
-+do_populate_sdk[recrdeptask] = "do_package_write"
-+addtask populate_sdk before do_build after do_install
++FILES_libstdc++ = "${prefix}/${TARGET_SYS}/lib/libstdc++.so.*"
++FILES_libstdc++-dev = "${prefix}/${TARGET_SYS}/usr/include/c++/${BINV} \
++                       ${prefix}/${TARGET_SYS}/lib/libstdc++.so \
++                       ${prefix}/${TARGET_SYS}/lib/libstdc++.a \
++                       ${prefix}/${TARGET_SYS}/lib/libsupc++.a"
 +
-+do_package_sdk[nostamp] = "1"
-+do_package_sdk[recrdeptask] = "do_populate_sdk"
-+addtask package_sdk before do_build after do_populate_sdk
-diff --git a/packages/tasks/task-sdk-canadian-host.bb b/packages/tasks/task-sdk-canadian-host.bb
++FILES_libmudflap = "${prefix}/${TARGET_SYS}/lib/libmudflap*.so.*"
++FILES_libmudflap-dev = "${prefix}/${TARGET_SYS}/lib/libmudflap*.so \
++                        ${prefix}/${TARGET_SYS}/lib/libmudflap*.a"
+diff --git a/packages/gcc/gcc-canadian-sdk_4.2.2.bb b/packages/gcc/gcc-canadian-sdk_4.2.2.bb
 new file mode 100644
-index 0000000..2f8c1e3
+index 0000000..f94863f
 --- /dev/null
-+++ b/packages/tasks/task-sdk-canadian-host.bb
-@@ -0,0 +1,24 @@
-+#
-+# Copyright (C) 2007 OpenedHand Ltd
-+#
-+
-+DESCRIPTION = "Host packages for the standalone SDK or external toolchain"
-+PR = "r1"
-+LICENSE = "MIT"
-+ALLOW_EMPTY = "1"
-+
++++ b/packages/gcc/gcc-canadian-sdk_4.2.2.bb
+@@ -0,0 +1,27 @@
 +inherit canadian-sdk
++
++DEPENDS="\
++	virtual/${HOST_PREFIX}binutils \
++	virtual/${HOST_PREFIX}gcc \
++	virtual/${TARGET_PREFIX}binutils \
++	virtual/${TARGET_PREFIX}gcc \
++	virtual/${TARGET_PREFIX}libc-for-gcc \
++	gmp-native mpfr-native \
++"
++
++FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/gcc-${PV}"
 +
 +PACKAGES = "${PN}"
 +
-+RDEPENDS_${PN} = "\
-+    binutils-canadian-sdk \
-+    gcc-canadian-sdk \
-+    g++ \
-+    cpp \
-+    libgcc \
-+    libgcc-dev \
-+    libstdc++ \
-+    libstdc++-dev \
-+    "
-+#    gdb-canadian-sdk \
++require gcc_${PV}.bb
++
++SRC_URI_append =+ "\
++	file://canadian-build-modules-configure.patch;patch=1 \
++"
++
++require gcc-canadian-sdk-build.inc
++require gcc-canadian-sdk-package.inc
++
++EXTRA_OECONF += "--disable-libunwind-exceptions --disable-libssp \
++		--disable-libgomp --disable-libmudflap \
++		--with-mpfr=${STAGING_DIR_NATIVE}${layout_exec_prefix}"
 -- 
 1.5.4.3
 
