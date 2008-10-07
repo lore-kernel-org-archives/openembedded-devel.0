@@ -1,34 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KnBk4-0006ez-0P
-	for openembedded-devel@openembedded.org; Tue, 07 Oct 2008 14:32:44 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KnBfe-000389-Ch
-	for openembedded-devel@openembedded.org; Tue, 07 Oct 2008 12:28:10 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 07 Oct 2008 12:28:10 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 07 Oct 2008 12:28:10 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 07 Oct 2008 14:28:02 +0200
-Message-ID: <gcfkki$o84$1@ger.gmane.org>
-References: <1223374579.21329.1277940603@webmail.messagingengine.com>	<gcffp7$7pm$1@ger.gmane.org>
-	<1223380608.10806.1277957855@webmail.messagingengine.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-In-Reply-To: <1223380608.10806.1277957855@webmail.messagingengine.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: PHP on PPC little-endian? Conflicts w/ ncurses big-endian
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1KnBpZ-0006lq-BP
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Oct 2008 14:38:25 +0200
+Received: from [192.168.1.103] (91-65-152-238-dynip.superkabel.de
+	[91.65.152.238])
+	by dd20204.kasserver.com (Postfix) with ESMTP id A4C49180445F5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  7 Oct 2008 14:33:54 +0200 (CEST)
+Message-ID: <48EB5730.8030700@opensimpad.org>
+Date: Tue, 07 Oct 2008 14:33:52 +0200
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <48E6624C.7000409@opensimpad.org>	<gc72hu$i8f$1@ger.gmane.org>	<48E758CB.7040209@opensimpad.org>	<48EB45F0.8080809@opensimpad.org>
+	<gcfi87$g4t$1@ger.gmane.org>
+In-Reply-To: <gcfi87$g4t$1@ger.gmane.org>
+Subject: Re: X/Qt2 opie integration (patches included)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,118 +31,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2008 12:32:44 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 07 Oct 2008 12:38:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 07-10-2008 13:56, Eliyahu Skoczylas wrote:
-> On Tue, 07 Oct 2008 13:05:11 +0200, "Koen Kooi"
-> <k.kooi@student.utwente.nl>  said:
->> Your host autoreconf (most likely i386) is trying to link with target
->> libncurses (ppc405). I'm not sure how you expect that to work when
->> changing that to LE ppc binaries.
->>
->> regards,
->>
->> Koen
+Koen Kooi schrieb:
+> On 07-10-2008 13:20, Bernhard Guillon wrote:
+>> Any obstacles left? Else I would like to ask if some of you can please
+>> commit it [2] [3] to .dev branch.
 >
-> Yes, I saw that.
->>> ...  The problem is that PHP (or at
->>> least autoreconf for PHP) wants little-endian.
+> I still dislike a single package handling so many different things 
+> *and* containing config files for other packages.
 >
-> Note the place that the log data is coming from:
->>>> ... (/tmp/OE_temp-new/work/ppc405-linux/php-5.2.6-r2/temp/log.do_configure.26285)
->
-> This is in the target stage (ppc405-linux) instead of the host stage
-> (i686-linux).
->
-> My question is better stated as:
->
-> +++ Why is php-5.2.6-r2 (and php-5.2.0-r1 before it) using a HOST
-> autoreconf when building (and linking to) a TARGET binary?
+It contains three different things:
 
-because your host can't run target binaries
+-a config for blackbox which may is useless without xqtlauncher. it puts 
+the taskbar from the bottom to the top of the screen.
 
+-a .desktop(opie compliant) file for xkbd which is useless without 
+xqtlauncher
 
->
-> Thanks for helping me to clarify that.
->
-> -    Eliyahu
->
->> On 07-10-2008 12:16, Eliyahu Skoczylas wrote:
->>> Hi!
->>>
->>> I'm building for PPC405 (using a new machine .conf that I'll upload when
->>> the board is released).
->>>
->>> So far, everything has built and run successfully, but I just tried
->>> adding in PHP.
->>>
->>> Every time it conflicts with libncurses:
->>>> NOTE: package php-5.2.6-r2: task do_configure: started
->>>> ERROR: function do_configure failed
->>>> ERROR: log data follows (/tmp/OE_temp-new/work/ppc405-linux/php-5.2.6-r2/temp/log.do_configure.26285)
->>>> | automake (GNU automake) 1.9.3
->>>>     <snip>
->>>> | AUTOV is 1.9
->>>> | NOTE: Executing autoreconf --verbose --install --force --exclude=autopoint -I/tmp/OE_temp-new/staging/powerpc-linux/usr/share/aclocal-1.9 -I /tmp/OE_temp-new/staging/powerpc-linux/usr/share/aclocal
->>>> | sh: error while loading shared libraries: /tmp/OE_temp-new/staging/powerpc-linux/usr/lib/libncurses.so.5: ELF file data encoding not little-endian
->>>> | autoreconf: Entering directory `.'
->>>> | autoreconf: configure.in: not using Gettext
->>>> | autoreconf: running: aclocal -I /tmp/OE_temp-new/staging/powerpc-linux/usr/share/aclocal-1.9 -I /tmp/OE_temp-new/staging/powerpc-linux/usr/share/aclocal --force
->>>> | acinclude.m4:1089: warning: underquoted definition of PHP_CHECK_SIZEOF
->>>> |   run info '(automake)Extending aclocal'
->>>> |   or see http://sources.redhat.com/automake/automake.html#Extending-aclocal
->>>> | sh: error while loading shared libraries: /tmp/OE_temp-new/staging/powerpc-linux/usr/lib/libncurses.so.5: ELF file data encoding not little-endian
->> Your host autoreconf (most likely i386) is trying to link with target
->> libncurses (ppc405). I'm not sure how you expect that to work when
->> changing that to LE ppc binaries.
->>
->> regards,
->>
->> Koen
->>
->>
->>
->>>> | aclocal: autom4te failed with exit status: 127
->>>> | autoreconf: aclocal failed with exit status: 127
->>>> | FATAL: autoreconf execution failed.
->>>> NOTE: Task failed: /tmp/OE_temp-new/work/ppc405-linux/php-5.2.6-r2/temp/log.do_configure.26285
->>>> NOTE: package php-5.2.6-r2: task do_configure: failed
->>>> ERROR: TaskFailed event exception, aborting
->>>> NOTE: package php-5.2.6: failed
->>>> ERROR: Build of /home/eliyahu/stuff/org.openembedded.dev/packages/php/php_5.2.6.bb do_configure failed
->>>> ERROR: Task 4 (/home/eliyahu/stuff/org.openembedded.dev/packages/php/php_5.2.6.bb, do_configure) failed
->>>> NOTE: Tasks Summary: Attempted 253 tasks of which 253 didn't need to be rerun and 1 failed.
->>>> ERROR: '/home/eliyahu/stuff/org.openembedded.dev/packages/php/php_5.2.6.bb' failed
->>> At first I thought it was a problem with ncurses, and I tried rebuilding
->>> using older recipes and version of ncurses, but no luck.
->>> (And why does PHP need ncurses, anyway?)
->>> But suddenly it hit me - this is the target version for ppc405, and
->>> libncurses.so.5 is CORRECTLY big-endian.  The problem is that PHP (or at
->>> least autoreconf for PHP) wants little-endian.
->>>
->>> Has no one built PHP recently for a big-endian platform?  Besides the
->>> php-5.2.6-r2 in .dev, I also tried php-5.2.0-r1 from .stable and got the
->>> same thing.
->>>
->>>
->>> TIA,
->>>
->>> -    Eliyahu
->>> --
->>> Eliyahu Skoczylas    +972 (54) 214-1505
->>> While<EliSko@Eli-Sko.com>   is temporarily down, please use<EliSko@FastMail.fm>, instead.
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> --
-> Eliyahu Skoczylas    +972 (54) 214-1505
-> While<EliSko@Eli-Sko.com>  is temporarily down, please use<EliSko@FastMail.fm>, instead.
+-xqtlauncher skripts
+--startxqt
+    checks if x/qt2 is already running, creates a run file set up 
+environment and starts x/qt2
+--startxqt-wrapper
+    starts startxqt in bg and also starts the wm (in this stage of 
+development only blackbox)
+--xqtlauncher
+    takes an X11 application as argument e.g. xkbd
+    check if this application is available
+    check if xqt2 is running and starting it
+    atomate count of the applications running +1
+    run application
+    atomate count of the applications running -1
+    if application counter <= 0 kill xqt2
 
+The symlink for xqtlauncher is needed because opie only takes the first 
+exec argument of the .desktop file to decide if the application is 
+already running and starts one application only once (discussed with 
+bluelightning). The alternatives to this are creating shell script 
+wrappers or change the code in opie. But changing the code in opie is no 
+option for me.
 
+For a useful xqt2 xkbd is currently needed because typing on opies 
+keyboard kills xqt2 except of this it is quite stable on my simpad.
+
+I can split the package.
+For that I need some advice for spliting and naming of the packages.
+
+What do you think about:
+
+xqtlauncher-blackbox-config.bb
+xqtlauncher-xkbd-desktop.bb
+xqtlauncher.bb having the above as rdepends?
+
+or
+xqtlauncher-blackbox-config.bb
+xqtlauncher-xkbd-desktop.bb
+xqtlauncher.bb no depends except X/Qt2
+and a task-xqtlauncher.
+With this we could provide support for different window managers later. 
+Currently only blackbox is supported.
+
+or same as above but
+xqt2-xqtlauncher-foo-bar.bb
+
+best regards
+Bernhard Guillon
 
 
