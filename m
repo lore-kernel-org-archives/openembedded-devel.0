@@ -1,24 +1,26 @@
 Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <EliSko@FastMail.fm>) id 1Kn9gS-00054Q-Kb
+	(envelope-from <EliSko@FastMail.fm>) id 1KnAEr-0002QX-Gy
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Oct 2008 12:20:53 +0200
+	Tue, 07 Oct 2008 12:56:25 +0200
 Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 89813178338
+	by out1.messagingengine.com (Postfix) with ESMTP id 5CAD21783F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2008 06:16:19 -0400 (EDT)
+	Tue,  7 Oct 2008 06:51:52 -0400 (EDT)
 Received: from web6.messagingengine.com ([10.202.2.215])
-	by compute1.internal (MEProxy); Tue, 07 Oct 2008 06:16:19 -0400
+	by compute1.internal (MEProxy); Tue, 07 Oct 2008 06:51:52 -0400
 Received: by web6.messagingengine.com (Postfix, from userid 99)
-	id 6F60CC3A20; Tue,  7 Oct 2008 06:16:19 -0400 (EDT)
-Message-Id: <1223374579.21329.1277940603@webmail.messagingengine.com>
-X-Sasl-Enc: LAJHbgwUGRrjj0qOE5IIGf9ULn0XXF3GyjBq2lJim/cC 1223374579
+	id 2B3A83430E; Tue,  7 Oct 2008 06:51:52 -0400 (EDT)
+Message-Id: <1223376712.29377.1277948719@webmail.messagingengine.com>
+X-Sasl-Enc: Adqe9wuTgHYac0r16UV2A0VSN3E9G/4aSh+dUqTidVfz 1223376712
 From: "Eliyahu Skoczylas" <EliSko@FastMail.fm>
 To: "Developers@OE.net" <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
 X-Mailer: MessagingEngine.com Webmail Interface
-Date: Tue, 07 Oct 2008 12:16:19 +0200
-Subject: PHP on PPC little-endian? Conflicts w/ ncurses big-endian
+References: <1223374579.21329.1277940603@webmail.messagingengine.com>
+In-Reply-To: <1223374579.21329.1277940603@webmail.messagingengine.com>
+Date: Tue, 07 Oct 2008 12:51:52 +0200
+Subject: Re: PHP on PPC little-endian? Conflicts w/ ncurses big-endian
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,10 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2008 10:20:53 -0000
+X-List-Received-Date: Tue, 07 Oct 2008 10:56:25 -0000
 Content-Disposition: inline
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="UTF-8"
+
+FWIW, php-5.1.4-r2 from .stable does NOT have this problem.
+So it seems like something might have broken w/ big-endian PHP in
+transition from 5.1.4 to 5.2.0.
+
+HTH,
+
+-    Eliyahu
+
+--
+Eliyahu Skoczylas    +972 (54) 214-1505
+While <EliSko@Eli-Sko.com> is temporarily down, please use <EliSko@FastMail.fm>, instead.
+
+----- Original message -----
+From: "Eliyahu Skoczylas" <EliSko@FastMail.fm>
+To: "Developers at OE.net" <openembedded-devel@lists.openembedded.org>
+Date: Tue, 07 Oct 2008 12:16:19 +0200
+Subject: [oe] PHP on PPC little-endian? Conflicts w/ ncurses big-endian
 
 Hi!
 
@@ -90,7 +110,13 @@ TIA,
 -    Eliyahu
 --
 Eliyahu Skoczylas    +972 (54) 214-1505
-While <EliSko@Eli-Sko.com> is temporarily down, please use <EliSko@FastMail.fm>, instead.
+While <EliSko@Eli-Sko.com> is temporarily down, please use
+<EliSko@FastMail.fm>, instead.
 
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
