@@ -1,43 +1,39 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KnDvf-0007j4-Vb
+	(envelope-from <esbenhaabendal@gmail.com>) id 1KnFoC-0001tb-CY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Oct 2008 16:52:52 +0200
-Received: from freedom.ind.br (unknown [10.99.0.10])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 6A485334919
+	Tue, 07 Oct 2008 18:53:16 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so5021994rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2008 11:48:12 -0300 (BRT)
-Received: from freedom.ind.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id 96FE419AB3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2008 11:48:11 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id 5A4C419AB2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2008 11:48:10 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 7 Oct 2008 11:48:08 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 33BA6C5A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2008 11:48:57 -0300 (BRT)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 5CD7561018B; Tue,  7 Oct 2008 11:45:50 -0300 (BRT)
+	Tue, 07 Oct 2008 09:48:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=YMLXBZQvQatXoJBGG2ao32FkVIQ2uNbviGHWOuVN7xM=;
+	b=F0TR3srV2mHgdEyEhe8A19rTMS4WvpFDTTg8I3bgPRu13U6AH3T0/qmcY+uyl4rEjg
+	xkuvFU26TBZdduJ6w1TQVfp3wpMp11z3ydfT4nc9lLGehxh/JZeaacUBsW76cC6FJmrt
+	rjMe1pjU1SIoRdWbmN6/vVxJe5sn8VZy54eNc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=Ta5jezzQ2cZsO7/NIVolvFibccJX5tCI8M7zIG1Dej5lFLIPqioKKc+WLn+aRTHAu0
+	hQHrorVFy+B0CNsaiuSbz2eDym8/57jGUBUovDjuJlliHG8jqPFh1rFAAjaqA5AY09wF
+	60RG4xrc9hnwpwm9qesSHK9bQI1U2sUcuzGrI=
+Received: by 10.141.79.12 with SMTP id g12mr4085217rvl.87.1223398120702;
+	Tue, 07 Oct 2008 09:48:40 -0700 (PDT)
+Received: by 10.140.204.9 with HTTP; Tue, 7 Oct 2008 09:48:40 -0700 (PDT)
+Message-ID: <d2b9ea600810070948n5387bdcdp67296fbd0ce4abf1@mail.gmail.com>
+Date: Tue, 7 Oct 2008 18:48:40 +0200
+From: "Esben Haabendal" <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <87prmcbh0h.fsf@neumann.lab.ossystems.com.br>
+MIME-Version: 1.0
 References: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 	<f2596b99780ea3954dc25884bf29704a5584c2f8.1223383759.git.eha@doredevelopment.dk>
 	<20081007133502.GA19220@mi.fu-berlin.de>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Tue, 07 Oct 2008 11:45:50 -0300
-In-Reply-To: <20081007133502.GA19220@mi.fu-berlin.de> (Henning Heinold's
-	message of "Tue\, 7 Oct 2008 15\:35\:02 +0200")
-Message-ID: <87prmcbh0h.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
-MIME-Version: 1.0
+	<87prmcbh0h.fsf@neumann.lab.ossystems.com.br>
 Subject: Re: [PATCH 13/13] canadian-sdk.bb, task-sdk-canadian-host.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,37 +48,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2008 14:52:52 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 07 Oct 2008 16:53:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Henning Heinold <heinold@inf.fu-berlin.de> writes:
+To make everybody happy, I have opened
+http://bugs.openembedded.net/show_bug.cgi?id=3D4664
+with all patches attached, and the local.conf I have used while developing.
 
-> Hi,
->
-> thanks for the patches, but normaly we prefer to put the patches into the
-> bugtracker and mentioned here the bug id.
->
-> Bye Henning
->
-> PS: If no one is doing something on this bug ping the list from time to time.
-
-It would be much better to open a bug just to point to the git
-tree. Otherwise it is really boring to submit a lot of patches to
-bugzilla.
-
-Besides that, reviewing the patches here are much easier and easy to
-others to spot mistakes too.
-
-My 2c.
-
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+/Esben
+--=20
+Esben Haabendal, Senior Software Consultant
+Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
+Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
+WWW: http://www.doredevelopment.dk
 
 
