@@ -1,29 +1,40 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
+Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <EliSko@FastMail.fm>) id 1KnCDL-0007WD-4D
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Oct 2008 15:03:04 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 957D7178399
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1KnCmy-0005vF-9t
+	for openembedded-devel@openembedded.org; Tue, 07 Oct 2008 15:39:48 +0200
+Received: (qmail 9789 invoked from network); 7 Oct 2008 15:35:14 +0200
+Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
+	by leibniz.math.fu-berlin.de with SMTP; 7 Oct 2008 15:35:14 +0200
+Received: (qmail 1201 invoked by uid 9804); 7 Oct 2008 15:35:14 +0200
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 7 Oct 2008 15:35:03 +0200
+Received: (qmail 585 invoked by uid 9804); 7 Oct 2008 15:35:02 +0200
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by lusin.mi.fu-berlin.de with SMTP; 7 Oct 2008 15:35:02 +0200
+Received: (qmail 9706 invoked from network); 7 Oct 2008 15:35:02 +0200
+Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
+	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
+	7 Oct 2008 13:35:02 -0000
+Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 4.63 #1
+	(Debian)) id 1KnCiM-00054S-O0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2008 08:58:25 -0400 (EDT)
-Received: from web6.messagingengine.com ([10.202.2.215])
-	by compute1.internal (MEProxy); Tue, 07 Oct 2008 08:58:25 -0400
-Received: by web6.messagingengine.com (Postfix, from userid 99)
-	id 7921D44FC1; Tue,  7 Oct 2008 08:58:25 -0400 (EDT)
-Message-Id: <1223384305.24707.1277967707@webmail.messagingengine.com>
-X-Sasl-Enc: VT91D/rsWYSyhYOxuozhnaEOGz0CV/jetErULUmdwi0F 1223384305
-From: "Eliyahu Skoczylas" <EliSko@FastMail.fm>
-To: "Developers@OE.net" <openembedded-devel@lists.openembedded.org>
+	Tue, 07 Oct 2008 15:35:02 +0200
+Date: Tue, 7 Oct 2008 15:35:02 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081007133502.GA19220@mi.fu-berlin.de>
+References: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
+	<f2596b99780ea3954dc25884bf29704a5584c2f8.1223383759.git.eha@doredevelopment.dk>
+X-Envelope-Sender: heinold@mi.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L41+ClamAV[598](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.206
 MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface
-References: <1223374579.21329.1277940603@webmail.messagingengine.com>
-	<gcffp7$7pm$1@ger.gmane.org>
-	<1223380608.10806.1277957855@webmail.messagingengine.com>
-	<gcfkki$o84$1@ger.gmane.org>
-In-Reply-To: <gcfkki$o84$1@ger.gmane.org>
-Date: Tue, 07 Oct 2008 14:58:25 +0200
-Subject: Re: PHP on PPC little-endian? Conflicts w/ ncurses big-endian
+In-Reply-To: <f2596b99780ea3954dc25884bf29704a5584c2f8.1223383759.git.eha@doredevelopment.dk>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Subject: Re: [PATCH 13/13] canadian-sdk.bb, task-sdk-canadian-host.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,36 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2008 13:03:48 -0000
+X-List-Received-Date: Tue, 07 Oct 2008 13:39:48 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 07 Oct 2008 14:28:02 +0200, "Koen Kooi"
-<k.kooi@student.utwente.nl> said:
-> On 07-10-2008 13:56, Eliyahu Skoczylas wrote:
-> > +++ Why is php-5.2.6-r2 (and php-5.2.0-r1 before it) using a HOST
-> > autoreconf when building (and linking to) a TARGET binary?
-> 
-> because your host can't run target binaries
+Hi,
 
-Thank you.  I know that.
+thanks for the patches, but normaly we prefer to put the patches into the
+bugtracker and mentioned here the bug id.
 
-I'm asking why several versions of PHP are trying to do what we all
-agree can NOT be done when all other builds in this environment, with
-the same site.conf, local.conf, minimal.conf, and MACHINE.conf did NOT
-do that and worked correctly.
+Bye Henning
 
-Also note that php-5.1.4-r2 does NOT do that.  (I just rebuilt the
-system with PHP 5.1.4 and am testing it.)
-
-This behavior started with php-5.2.0.-r1, AFAICT.
-
-
--    Eliyahu
---
-Eliyahu Skoczylas    +972 (54) 214-1505
-While <EliSko@Eli-Sko.com> is temporarily down, please use <EliSko@FastMail.fm>, instead.
-
+PS: If no one is doing something on this bug ping the list from time to time.
 
 
