@@ -1,24 +1,31 @@
 Received: from [193.201.35.47] (helo=bq8.dotserv.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1KnC76-0007Gj-VD
+	(envelope-from <esbenhaabendal@gmail.com>) id 1KnC77-0007Gk-5g
 	for openembedded-devel@openembedded.org; Tue, 07 Oct 2008 14:56:33 +0200
 Received: from localhost (077233226018.hef.nianet.dk [77.233.226.18] (may be
 	forged))
-	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id m97CpkWn021255;
+	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id m97CpkYp021269;
 	Tue, 7 Oct 2008 14:51:51 +0200
 Received: from esben by localhost with local (Exim 4.69)
 	(envelope-from <esbenhaabendal@gmail.com>)
-	id 1KnC2U-00014v-9X; Tue, 07 Oct 2008 14:51:46 +0200
+	id 1KnC2U-00015D-ED; Tue, 07 Oct 2008 14:51:46 +0200
 From: eha@doredevelopment.dk
 To: openembedded-devel@openembedded.org
-Date: Tue,  7 Oct 2008 14:51:34 +0200
-Message-Id: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
+Date: Tue,  7 Oct 2008 14:51:40 +0200
+Message-Id: <5b160cf460453dfb437c1b2c8972e4f3678e6aad.1223383759.git.eha@doredevelopment.dk>
 X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
-References: <>
- <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
+In-Reply-To: <cc617cfc6a87cb5e145ace9c07d91a4cf4853600.1223383759.git.eha@doredevelopment.dk>
+References: <> <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
+	<c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
+	<b011d8abd4dd7f517da3f835736cce56a1acd919.1223383759.git.eha@doredevelopment.dk>
+	<c00c0e996ed9eff33dae83236a28a88f6bcf9a73.1223383759.git.eha@doredevelopment.dk>
+	<2c0637f3c20a6f84ea03f1fdb9212b970ef9c371.1223383759.git.eha@doredevelopment.dk>
+	<d01d019899790eefd7fb6742174f2c359022b4fa.1223383759.git.eha@doredevelopment.dk>
+	<cc617cfc6a87cb5e145ace9c07d91a4cf4853600.1223383759.git.eha@doredevelopment.dk>
+In-Reply-To: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
+References: <c50b431758852b327e53d4de9de43173d439b36a.1223383759.git.eha@doredevelopment.dk>
 Cc: Esben Haabendal <eha@doredevelopment.dk>
-Subject: [PATCH 01/13] Add BUILD/HOST/TARGET _EXEEXT variables for (ab)use by canadian sdk
+Subject: [PATCH 07/13] insane.bbclass: add exceptions for canadian-* classes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,83 +46,40 @@ From: Esben Haabendal <eha@doredevelopment.dk>
 
 Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
 ---
- classes/cross.bbclass  |    1 +
- classes/native.bbclass |    2 ++
- classes/sdk.bbclass    |    1 +
- conf/bitbake.conf      |    3 +++
- 4 files changed, 7 insertions(+), 0 deletions(-)
+ classes/insane.bbclass |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/classes/cross.bbclass b/classes/cross.bbclass
-index a35f4df..5136236 100644
---- a/classes/cross.bbclass
-+++ b/classes/cross.bbclass
-@@ -13,6 +13,7 @@ HOST_VENDOR = "${BUILD_VENDOR}"
- HOST_OS = "${BUILD_OS}"
- HOST_PREFIX = "${BUILD_PREFIX}"
- HOST_CC_ARCH = "${BUILD_CC_ARCH}"
-+HOST_EXEEXT = "${BUILD_EXEEXT}"
+diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+index a599689..21ece16 100644
+--- a/classes/insane.bbclass
++++ b/classes/insane.bbclass
+@@ -280,7 +280,7 @@ def package_qa_check_arch(path,name,d):
+     target_arch = bb.data.getVar('TARGET_ARCH', d, True)
  
- CPPFLAGS = "${BUILD_CPPFLAGS}"
- CFLAGS = "${BUILD_CFLAGS}"
-diff --git a/classes/native.bbclass b/classes/native.bbclass
-index 4022cb0..0f3ada2 100644
---- a/classes/native.bbclass
-+++ b/classes/native.bbclass
-@@ -14,12 +14,14 @@ TARGET_OS = "${BUILD_OS}"
- TARGET_VENDOR = "${BUILD_VENDOR}"
- TARGET_PREFIX = "${BUILD_PREFIX}"
- TARGET_CC_ARCH = "${BUILD_CC_ARCH}"
-+TARGET_EXEEXT = "${BUILD_EXEEXT}"
+     # FIXME: Cross package confuse this check, so just skip them
+-    if bb.data.inherits_class('cross', d) or bb.data.inherits_class('sdk', d):
++    if bb.data.inherits_class('cross', d) or bb.data.inherits_class('sdk', d) or bb.data.inherits_class('canadian-cross', d) or bb.data.inherits_class('canadian-sdk', d):
+         return True
  
- HOST_ARCH = "${BUILD_ARCH}"
- HOST_OS = "${BUILD_OS}"
- HOST_VENDOR = "${BUILD_VENDOR}"
- HOST_PREFIX = "${BUILD_PREFIX}"
- HOST_CC_ARCH = "${BUILD_CC_ARCH}"
-+HOST_EXEEXT = "${BUILD_EXEEXT}"
+     # avoid following links to /usr/bin (e.g. on udev builds)
+@@ -339,7 +339,7 @@ def package_qa_check_staged(path,d):
+     workdir = os.path.join(tmpdir, "work")
  
- CPPFLAGS = "${BUILD_CPPFLAGS}"
- CFLAGS = "${BUILD_CFLAGS}"
-diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
-index a94332b..b746426 100644
---- a/classes/sdk.bbclass
-+++ b/classes/sdk.bbclass
-@@ -11,6 +11,7 @@ HOST_VENDOR = "${BUILD_VENDOR}"
- HOST_OS = "${BUILD_OS}"
- HOST_PREFIX = "${BUILD_PREFIX}"
- HOST_CC_ARCH = "${BUILD_CC_ARCH}"
-+HOST_EXEEXT = "${BUILD_EXEEXT}"
- 
- CPPFLAGS = "${BUILD_CPPFLAGS}"
- CFLAGS = "${BUILD_CFLAGS}"
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 75eab15..51a18fd 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -71,6 +71,7 @@ BUILD_VENDOR = ""
- BUILD_SYS = "${BUILD_ARCH}${BUILD_VENDOR}-${BUILD_OS}"
- BUILD_PREFIX = ""
- BUILD_CC_ARCH = ""
-+BUILD_EXEEXT = ""
- 
- HOST_ARCH = "${TARGET_ARCH}"
- HOST_OS = "${TARGET_OS}"
-@@ -78,6 +79,7 @@ HOST_VENDOR = "${TARGET_VENDOR}"
- HOST_SYS = "${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}"
- HOST_PREFIX = "${TARGET_PREFIX}"
- HOST_CC_ARCH = "${TARGET_CC_ARCH}"
-+HOST_EXEEXT = ""
- 
- TARGET_ARCH ?= "INVALID"
- TARGET_OS = "INVALID"
-@@ -85,6 +87,7 @@ TARGET_VENDOR = "${BUILD_VENDOR}"
- TARGET_SYS = "${TARGET_ARCH}${TARGET_VENDOR}${@['-' + bb.data.getVar('TARGET_OS', d, 1), ''][bb.data.getVar('TARGET_OS', d, 1) == ('' or 'custom')]}"
- TARGET_PREFIX = "${TARGET_SYS}-"
- TARGET_CC_ARCH = ""
-+TARGET_EXEEXT = ""
- 
- BASE_PACKAGE_ARCH = "${HOST_ARCH}"
- PACKAGE_ARCH = "${BASE_PACKAGE_ARCH}"
+     installed = "installed=yes"
+-    if bb.data.inherits_class("native", d) or bb.data.inherits_class("cross", d):
++    if bb.data.inherits_class("native", d) or bb.data.inherits_class("cross", d) or bb.data.inherits_class("canadian-native", d) or bb.data.inherits_class("canadian-cross", d):
+         pkgconfigcheck = workdir
+     else:
+         pkgconfigcheck = tmpdir
+@@ -353,7 +353,7 @@ def package_qa_check_staged(path,d):
+             if file[-2:] == "la":
+                 file_content = open(path).read()
+                 # Don't check installed status for native/cross packages
+-                if not bb.data.inherits_class("native", d) and not bb.data.inherits_class("cross", d):
++                if not bb.data.inherits_class("native", d) and not bb.data.inherits_class("cross", d) and not bb.data.inherits_class("canadian-native", d) and not bb.data.inherits_class("canadian-cross", d):
+                     if installed in file_content:
+                         error_msg = "%s failed sanity test (installed) in path %s" % (file,root)
+                         sane = package_qa_handle_error(5, error_msg, "staging", path, d)
 -- 
 1.5.4.3
 
