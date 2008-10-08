@@ -1,37 +1,29 @@
-Received: from [64.233.178.247] (helo=hs-out-0708.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1Knesy-00012V-QW
+	(envelope-from <utx@penguin.cz>) id 1KnfJq-0000fA-Do
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 21:39:52 +0200
-Received: by hs-out-0708.google.com with SMTP id 23so1369817hsn.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Oct 2008 12:35:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=ylQ+BomHmX9QMKK+4utzG2fl7D4D23vhNnaQdGuWjf0=;
-	b=d6JykDqZzDLAAhEtxW2jQ5OpQzvrWnoyQ9XFW49s9MymNtEPL+skhOh0kZVcQxIDHc
-	9GxF/vExGT95+seMKF/+ciEfpA6zADcIsu0adUH+huw7P2eZDT7a9hFMyn1pwL+Qiiqt
-	VmMePtFhDwkN0iBDz2euHSVeGZHueOA5j9Cx4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=U2gR3Df/tmJLLnMOIa760ggst7ZvWiLrGZfvMWd23ZJj4QEafGRcLKNy7n3fr0+o0S
-	A0CwsnStwWQlkWsp2TT5Fth2lSnYI+VCzQWE2I8HO0PXLTIjYfVlfv87WvDV7ZyusbdJ
-	xQZkK3XDo/tfd651JBNvK3LHKY2ihkMjvdrOA=
-Received: by 10.231.30.74 with SMTP id t10mr124189ibc.36.1223494512571;
-	Wed, 08 Oct 2008 12:35:12 -0700 (PDT)
-Received: by 10.150.212.20 with HTTP; Wed, 8 Oct 2008 12:34:42 -0700 (PDT)
-Message-ID: <48239d390810081234t2b5ea5c4g5fcb6f1900a274da@mail.gmail.com>
-Date: Wed, 8 Oct 2008 23:34:42 +0400
-From: "Sergey Lapin" <slapinid@gmail.com>
-To: "Stanislav Brabec" <utx@penguin.cz>
-In-Reply-To: <1223480224.9336.12.camel@hammer.suse.cz>
-MIME-Version: 1.0
+	Wed, 08 Oct 2008 22:07:38 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id CECCF1416BA9;
+	Wed,  8 Oct 2008 21:53:45 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Ekse8gq4LCVg; Wed,  8 Oct 2008 21:53:45 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7])
+	by ns.penguin.cz (Postfix) with ESMTP id 343D01416BA5;
+	Wed,  8 Oct 2008 21:53:44 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: Sergey Lapin <slapinid@gmail.com>
+In-Reply-To: <48239d390810081234t2b5ea5c4g5fcb6f1900a274da@mail.gmail.com>
 References: <48239d390810080715l700d1ce4i46c1e1cc97279b3@mail.gmail.com>
 	<1223480224.9336.12.camel@hammer.suse.cz>
+	<48239d390810081234t2b5ea5c4g5fcb6f1900a274da@mail.gmail.com>
+Date: Wed, 08 Oct 2008 22:03:02 +0200
+Message-Id: <1223496182.3549.7.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Locale support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -47,29 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 19:39:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Oct 2008 20:07:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 8, 2008 at 7:37 PM, Stanislav Brabec <utx@penguin.cz> wrote:
-> Sergey Lapin wrote:
-> If you have a problem with VFAT and similar file systems, than you need
-> an appropriate kernel fs/nls module and then edit /etc/fstab and/or
-> /etc/udev/scripts/mount.sh.
-Thanks, all this is already done.
+Sergey Lapin wrote:
+> On Wed, Oct 8, 2008 at 7:37 PM, Stanislav Brabec <utx@penguin.cz> wrote=
+:
+> > For historical reasons, HTTP characters are converted to 7 bits.
+> > If you see something like "%C5%BE%C5%99%C5%A1" after using wget, then=
+ it
+> > is not a bug, it is a feature.
+> No, it tries to convert, but fails.
+> So, as I see a problem is in wget itself.
 
->
-> For historical reasons, HTTP characters are converted to 7 bits.
-> If you see something like "%C5%BE%C5%99%C5%A1" after using wget, then it
-> is not a bug, it is a feature.
-No, it tries to convert, but fails.
-So, as I see a problem is in wget itself.
-using bash as shell, I can create directories fnd files with whatever
-names I like,
-so it seems this stuff is not locale-related.
+Are you using busybox wget or GNU wget?
 
-Thanks a lot,
-S.
+What exactly happens?
+
+With GNU wget you can try --restrict-file-names=3Dnocontrol
+
+I think that wget http:// should never produce files with names with
+accents, at least for most servers. =EF=BB=BFwget ftp:// can create such =
+files,
+but as FTP provides no support for charset, wget saves them as they are
+with no conversion and with no idea about charset.
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
