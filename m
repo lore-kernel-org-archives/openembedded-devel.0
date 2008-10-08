@@ -1,34 +1,34 @@
-Received: from [64.233.184.231] (helo=wr-out-0506.google.com)
+Received: from [66.249.92.170] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KnZR4-0002DJ-4h
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 15:50:42 +0200
-Received: by wr-out-0506.google.com with SMTP id c53so1752751wra.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Oct 2008 06:46:03 -0700 (PDT)
+	(envelope-from <chrisfriedt@gmail.com>) id 1KnZha-0000jw-3M
+	for Openembedded-devel@lists.openembedded.org;
+	Wed, 08 Oct 2008 16:07:46 +0200
+Received: by ug-out-1314.google.com with SMTP id y2so552916uge.4
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Oct 2008 07:03:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:mime-version:content-type:content-transfer-encoding
 	:content-disposition;
-	bh=duwfqDDvz1+JMophDQaAFStYuoF/4iXfjP3wyWkNa/4=;
-	b=jbfWpkKEgIjd1iOwFv5F6YGRMAnGsndkeEhqmqTmBtcTNmsVIy4L+ViTREsIjWTtBx
-	o0tKYSd264QbWrkAbslpK4uJJ8NtjFR8Q7TL8NjAx7QQB8CKgLn+1uM+72lcQ3gt+7+u
-	iuAvjCVCk12bOh2HAlZA3+4M9WqryqKAqS/8Y=
+	bh=qVJKMM84ld9n9J9wCtsElr89EvLWZjbnP67vtgS2aUA=;
+	b=FuJMC/yqoSZcLb6PqkMs2zTa+DbS62ozyl8H/nZPwVF0MB8Dva8Y/H1NHPt3XidMhE
+	q9NAxxp4O9qKXaeQv+wNR2ucolbwcqTIlO4Qjf9m3dM8qEDG0RRtS13fpYC3YvpxxKuN
+	3q3HBLVpSQiiw/ju18XQ0cNRTNOI6pLnZLXDE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:mime-version:content-type
 	:content-transfer-encoding:content-disposition;
-	b=CiBJn61qvXNr/MPLZws6vw5yyArjnM7Y55f3eL5OWOpewAZb/tu15Hdz/R7/GpRfUG
-	158BN92Jkmr8Xld2IzNp1DAp+duxM6NCet0IaXvf8A+hYI96PI1dc7oubCNFWwlUoBdf
-	j1w61S0Rnx95ZcDL7RsE1KOiGUVHS7bSBaa6I=
-Received: by 10.100.132.14 with SMTP id f14mr1595762and.107.1223473563714;
-	Wed, 08 Oct 2008 06:46:03 -0700 (PDT)
-Received: by 10.100.174.18 with HTTP; Wed, 8 Oct 2008 06:46:03 -0700 (PDT)
-Message-ID: <c384c5ea0810080646j6156c19ag284702150c5abe9f@mail.gmail.com>
-Date: Wed, 8 Oct 2008 15:46:03 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	b=NR1UqJgq5ADWVjgiWJMNKpuY3Kv3QW0wV4w4l8r46s9Da3CWR6CcmFY6RSAduxDEu4
+	Hv9TLsldGWCq7Ke9oulqTYlyobu8Fzk/5VjCA6pfaKPogyhj1+l9bGNDtbHm1P2kdXVh
+	g/AUJ/4G8NGsFPMSwLCUf4386sw0P51BQlZEo=
+Received: by 10.86.68.2 with SMTP id q2mr7560276fga.43.1223474587884;
+	Wed, 08 Oct 2008 07:03:07 -0700 (PDT)
+Received: by 10.86.79.12 with HTTP; Wed, 8 Oct 2008 07:03:07 -0700 (PDT)
+Message-ID: <3ea34a000810080703x5fa663a4h46e806b70fbf0af@mail.gmail.com>
+Date: Wed, 8 Oct 2008 10:03:07 -0400
+From: "Christopher Friedt" <chrisfriedt@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Subject: RFC: branch off the last stable branch under monotone?
+Subject: Re: Error building classpath-initial
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,24 +42,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 13:50:42 -0000
+X-List-Received-Date: Wed, 08 Oct 2008 14:07:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello all,
+Hi list,
 
-should we, or should we not, branch off a stable branch under
-monotone, i.e. the last stable using monotone?
+I just joined the list to follow up on a common error that I
+encountered a while ago, where building classpath-initial-0.93 failed,
+saying
 
-The argument would be to offer the existing use base (which typically
-lags behind much) a (last) monotone based branch.
+"libtool: link: unsupported hardcode properties".
 
-I can imagine the answer should be "no", as the number of maintainers
-is low (and I am to blame as well).
+I needed to get this compiled pretty desperately, so just grepping resulted in
 
-Regards,
--- 
-Leon
+aclocal.m4: hardcode_direct="$acl_cv_hardcode_direct"
+
+I modified classpath-initial-0.93.bb, very simply appending the following:
+
+do_configure()
+{
+    export acl_cv_hardcode_direct="no"
+    export hardcode_direct="no"
+
+    oe_runconf
+}
+
+And that built classpath-initial-0.93 without any errors. However, I
+later on ran into the same error with classpath-native-0.97.2 and the
+same fix did not work.
+
+Please post a solution, if one ever surfaces.
+
+Cheers,
+
+Chris
+
+> Recently I stepped upon this problem too and began discussing this on
+> the libtool mailing list. We do not have a concrete solution yet but
+> there is a workaround for now.
+
+> Edit the i686-linux-libtool file in your
+> /home/kgilmer/dev/sandbox/oe-dev/tmp/work/i686-linux/classpath-initial-0.93/classpath-0.93
+
+> and set the variable hardcode_direct to no. It should be empty before
+> and that is causing the problem.
 
 
