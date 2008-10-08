@@ -1,33 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [201.35.65.91] (helo=freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KnX8H-0004w1-0Q
-	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 13:23:09 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KnX3k-0006xC-Ij
-	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 11:18:28 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 08 Oct 2008 11:18:28 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 08 Oct 2008 11:18:28 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 08 Oct 2008 13:18:16 +0200
-Message-ID: <gci4to$pcf$1@ger.gmane.org>
-References: <200810080751.15817.zecke@selfish.org> <gchpoa$kal$1@ger.gmane.org>
-	<200810081303.35934.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-In-Reply-To: <200810081303.35934.zecke@selfish.org>
-Sender: news <news@ger.gmane.org>
+	(envelope-from <otavio@freedom.ind.br>) id 1KnYqj-00047b-G4
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Oct 2008 15:13:09 +0200
+Received: from freedom.ind.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id BC66916079
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Oct 2008 10:08:29 -0300 (BRT)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by freedom.ind.br (Postfix) with ESMTP id 9152F1466C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Oct 2008 10:08:29 -0300 (BRT)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 8 Oct 2008 10:08:29 -0300
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id EF9F7C2EA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Oct 2008 10:09:22 -0300 (BRT)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 9466661018B; Wed,  8 Oct 2008 10:06:10 -0300 (BRT)
+To: openembedded-devel@lists.openembedded.org
+References: <200810080751.15817.zecke@selfish.org>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 08 Oct 2008 10:06:10 -0300
+In-Reply-To: <200810080751.15817.zecke@selfish.org> (Holger Freyther's message
+	of "Wed\, 8 Oct 2008 07\:51\:15 +0200")
+Message-ID: <87ljwztewt.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+MIME-Version: 1.0
 Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,36 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 11:23:09 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 08 Oct 2008 13:13:09 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On 08-10-2008 13:03, Holger Freyther wrote:
-> On Wednesday 08 October 2008 10:07:38 Koen Kooi wrote:
->> On 08-10-2008 07:51, Holger Freyther wrote:
->>> Hey,
->>>
->>> we would like to switch to git by next wednesday. Jan Lübbe went through
->>> the hassle to fix two issues in my mtn2git.py and we are happy with the
->>> metadata and can even unite it with the data exported from bitkeeper.
->> Where's the OE git phrasebook mapping mtn commands to git ones? You
->> can't seriously mean to switch without such a document in the wiki.
->
-> got a link? I tried to search wiki.oe.net for mtn and monotone phrasebook but
-> didn't find anything. :)
+Holger Freyther <zecke@selfish.org> writes:
 
-The old wiki had one, dunno if the new wiki overlords decided to move it 
-to the new wiki. Ask them.
+> Thanks to Jan for wrestling with monotone, git, the script and the data and we 
+> will keep you informed about how the migration is going.
 
+Thanks to you all by all this migration work.
 
->
-> z.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
