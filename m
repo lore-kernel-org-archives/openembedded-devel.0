@@ -1,37 +1,40 @@
 Received: from [209.85.217.20] (helo=mail-gx0-f20.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1Knh6g-0007bT-1M
+	(envelope-from <slapinid@gmail.com>) id 1KnhFu-00018K-HX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Oct 2008 00:02:10 +0200
-Received: by gxk13 with SMTP id 13so8760498gxk.12
+	Thu, 09 Oct 2008 00:11:43 +0200
+Received: by gxk13 with SMTP id 13so8772794gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Oct 2008 14:57:28 -0700 (PDT)
+	Wed, 08 Oct 2008 15:07:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
+	:subject:cc:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:content-disposition:references;
-	bh=EWkbkIhqYhGCfUU1PYey1U7HyHazgcdREKighGB9ZFc=;
-	b=mJ7h37aNVK6k/zvKORxcBsAemeKPXC0ftilncJiH3K7IKa56N2269Rwrqsth9yQXMW
-	OFFqxTTUAJVTBKux5pYypJTFrlzsRvXV2kUqJ327ZdZL5XP9Cslr2rg00Z9xvG3guLie
-	6Ir1hskpU6nMdKTBBEVR6NeKflI9UNe/oyJNw=
+	bh=iP4aWr8C2wysnCyLY0/qHHKtLyzVgvvGyvNYk1Cnoho=;
+	b=jQszTTyZ6mG7daYFeTuKvShzp88OmYqVX/LB6G5T1cBHIGdNOj/ZS9AlNWo+ePzQV2
+	ye+fEDLAJS9krHWynzs5PMPVlM9BVdfOPZ3x0wKZztz598zAcg8zwZUF8ynXJPHqVsCA
+	D8zdz4Fvptxz+ikU3Ye2RykN4hYONJivhZxYo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
 	:content-type:content-transfer-encoding:content-disposition
 	:references;
-	b=VlJOSVGli3iiSCDRJEq3+DW5fM5swzVutnCaPV68Dytrce+aN11MQfgUrqn0GDQAyi
-	FqYswRF3pT2tHoV+88JJXjxgK+U+2jl0nZyPqW/klvsKX4b2zHNnj7bWoiGhBxxy+s1L
-	l53NLbhYh8kn/ZV8gRhoW0+c3yGk0S5PLsHTQ=
-Received: by 10.150.154.6 with SMTP id b6mr7142501ybe.226.1223503048248;
-	Wed, 08 Oct 2008 14:57:28 -0700 (PDT)
-Received: by 10.150.212.20 with HTTP; Wed, 8 Oct 2008 14:57:28 -0700 (PDT)
-Message-ID: <48239d390810081457o5d5a088cuda8c927871e30153@mail.gmail.com>
-Date: Thu, 9 Oct 2008 01:57:28 +0400
+	b=nn8ue94DzacYEtJKFptzABBffiT0td0fnbKXppZ0+oabkcVeBgFY7suzmLYovsY1On
+	LVNWeDePDiBqBwKPkJ1PKYsFODIrEpNiozM9KqfuRjBt+N/X28bG2EVwwKI/5+vNCl4W
+	y61V0npyBMA4xmw+d/NzZTSylrfFFJpItZxYg=
+Received: by 10.151.123.7 with SMTP id a7mr592635ybn.73.1223503620707;
+	Wed, 08 Oct 2008 15:07:00 -0700 (PDT)
+Received: by 10.150.212.20 with HTTP; Wed, 8 Oct 2008 15:07:00 -0700 (PDT)
+Message-ID: <48239d390810081507l19acd4ffg2f50cb3a77d140c1@mail.gmail.com>
+Date: Thu, 9 Oct 2008 02:07:00 +0400
 From: "Sergey Lapin" <slapinid@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1223501660.4426.376.camel@lenovo.internal.reciva.com>
+To: "Stanislav Brabec" <utx@penguin.cz>
+In-Reply-To: <1223496182.3549.7.camel@utx.utx.cz>
 MIME-Version: 1.0
 References: <48239d390810080715l700d1ce4i46c1e1cc97279b3@mail.gmail.com>
-	<1223501660.4426.376.camel@lenovo.internal.reciva.com>
+	<1223480224.9336.12.camel@hammer.suse.cz>
+	<48239d390810081234t2b5ea5c4g5fcb6f1900a274da@mail.gmail.com>
+	<1223496182.3549.7.camel@utx.utx.cz>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Locale support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,31 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 22:02:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Oct 2008 22:11:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
 Content-Disposition: inline
 
-On Thu, Oct 9, 2008 at 1:34 AM, Phil Blundell <pb@reciva.com> wrote:
-> On Wed, 2008-10-08 at 18:15 +0400, Sergey Lapin wrote:
->> But I have problems with lots of UTF-8 characters on file system
->> and applications. 'date' command works properly reporting according to locale.
->> wget, however have problems, inventing names which contain junk.
->> However, using scp, I'm able to store normal UTF-8-named files
->> from my desktop Debian. ASCII characters in names are always OK.
->> both wget and ls are stand-alone in my configuration.
->
-> Can you give some specific examples of what is going wrong for you?  Is
-> it just wget that has this issue, or is it all applications?
-I don't want to polute mailing list with garbled Russian strings.
-I just need to mention that some characters get garbled (some replaced
-with trash,
-some with %xx, which is weird. This is with GNU wget. I don't use busybox one.
-Other affected program is rtorrent (FTBFS at the moment, btw). LANG is
-set properly in both cases.
-date and bash work as expected. Most other apps work perfectly. I don't use
-any GUI at the moment though.
-
-S.
+T24gVGh1LCBPY3QgOSwgMjAwOCBhdCAxMjowMyBBTSwgU3RhbmlzbGF2IEJyYWJlYyA8dXR4QHBl
+bmd1aW4uY3o+IHdyb3RlOgo+IFNlcmdleSBMYXBpbiB3cm90ZToKPj4gT24gV2VkLCBPY3QgOCwg
+MjAwOCBhdCA3OjM3IFBNLCBTdGFuaXNsYXYgQnJhYmVjIDx1dHhAcGVuZ3Vpbi5jej4gd3JvdGU6
+Cj4+ID4gRm9yIGhpc3RvcmljYWwgcmVhc29ucywgSFRUUCBjaGFyYWN0ZXJzIGFyZSBjb252ZXJ0
+ZWQgdG8gNyBiaXRzLgo+PiA+IElmIHlvdSBzZWUgc29tZXRoaW5nIGxpa2UgIiVDNSVCRSVDNSU5
+OSVDNSVBMSIgYWZ0ZXIgdXNpbmcgd2dldCwgdGhlbiBpdAo+PiA+IGlzIG5vdCBhIGJ1ZywgaXQg
+aXMgYSBmZWF0dXJlLgo+PiBObywgaXQgdHJpZXMgdG8gY29udmVydCwgYnV0IGZhaWxzLgo+PiBT
+bywgYXMgSSBzZWUgYSBwcm9ibGVtIGlzIGluIHdnZXQgaXRzZWxmLgo+Cj4gQXJlIHlvdSB1c2lu
+ZyBidXN5Ym94IHdnZXQgb3IgR05VIHdnZXQ/CkdOVSB3Z2V0Lgo+Cj4gV2hhdCBleGFjdGx5IGhh
+cHBlbnM/ClNvbWUgY2hhcmFjdGVycyBvZiBmaWxlIG5hbWUgZWl0aGVyIHJlcGxhY2VkIHdpdGgg
+dHJhc2ggb3IgbGVmdCBhcyAleHgKc29tZXRpbWVzIGl0IGlzIG1vcmUgdGhhbiBhIGhhbGYgb2Yg
+ZmlsZSBuYW1lLiBBU0NJSSBjaGFyYWN0ZXJzIGFyZSBmaW5lLAp0aG91Z2guCj4KPiBXaXRoIEdO
+VSB3Z2V0IHlvdSBjYW4gdHJ5IC0tcmVzdHJpY3QtZmlsZS1uYW1lcz1ub2NvbnRyb2wKQWgsIHRo
+YW5rcyEgVGhpcyBvbmUgaXMgZXhhY3RseSB3aGF0IEkgbmVlZCEKCj4KPiBJIHRoaW5rIHRoYXQg
+d2dldCBodHRwOi8vIHNob3VsZCBuZXZlciBwcm9kdWNlIGZpbGVzIHdpdGggbmFtZXMgd2l0aAo+
+IGFjY2VudHMsIGF0IGxlYXN0IGZvciBtb3N0IHNlcnZlcnMuIO+7v3dnZXQgZnRwOi8vIGNhbiBj
+cmVhdGUgc3VjaCBmaWxlcywKPiBidXQgYXMgRlRQIHByb3ZpZGVzIG5vIHN1cHBvcnQgZm9yIGNo
+YXJzZXQsIHdnZXQgc2F2ZXMgdGhlbSBhcyB0aGV5IGFyZQo+IHdpdGggbm8gY29udmVyc2lvbiBh
+bmQgd2l0aCBubyBpZGVhIGFib3V0IGNoYXJzZXQuCldlbGwsIHNldHRpbmcgbWVudGlvbmVkIGFi
+b3ZlIHdvcmtzIGxpa2UgY2hhcm0uIFRoYW5rcyBhIGxvdCBmb3IgaW5mbyEK
 
 
