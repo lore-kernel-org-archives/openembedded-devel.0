@@ -1,22 +1,33 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KnWty-0007pA-Uh
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 13:08:22 +0200
-Received: from firewall.tw.openmoko.org ([124.219.5.210] helo=tamarin.local)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KnWpV-0008Af-G2
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 13:03:45 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 8 Oct 2008 13:03:35 +0200
-User-Agent: KMail/1.9.9
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KnX8H-0004w1-0Q
+	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 13:23:09 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KnX3k-0006xC-Ij
+	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 11:18:28 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 08 Oct 2008 11:18:28 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 08 Oct 2008 11:18:28 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 08 Oct 2008 13:18:16 +0200
+Message-ID: <gci4to$pcf$1@ger.gmane.org>
 References: <200810080751.15817.zecke@selfish.org> <gchpoa$kal$1@ger.gmane.org>
-In-Reply-To: <gchpoa$kal$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200810081303.35934.zecke@selfish.org>
+	<200810081303.35934.zecke@selfish.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
+In-Reply-To: <200810081303.35934.zecke@selfish.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,28 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 11:08:23 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Oct 2008 11:23:09 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wednesday 08 October 2008 10:07:38 Koen Kooi wrote:
-> On 08-10-2008 07:51, Holger Freyther wrote:
-> > Hey,
-> >
-> > we would like to switch to git by next wednesday. Jan L=C3=BCbbe went t=
-hrough
-> > the hassle to fix two issues in my mtn2git.py and we are happy with the
-> > metadata and can even unite it with the data exported from bitkeeper.
+On 08-10-2008 13:03, Holger Freyther wrote:
+> On Wednesday 08 October 2008 10:07:38 Koen Kooi wrote:
+>> On 08-10-2008 07:51, Holger Freyther wrote:
+>>> Hey,
+>>>
+>>> we would like to switch to git by next wednesday. Jan Lübbe went through
+>>> the hassle to fix two issues in my mtn2git.py and we are happy with the
+>>> metadata and can even unite it with the data exported from bitkeeper.
+>> Where's the OE git phrasebook mapping mtn commands to git ones? You
+>> can't seriously mean to switch without such a document in the wiki.
 >
-> Where's the OE git phrasebook mapping mtn commands to git ones? You
-> can't seriously mean to switch without such a document in the wiki.
+> got a link? I tried to search wiki.oe.net for mtn and monotone phrasebook but
+> didn't find anything. :)
 
-got a link? I tried to search wiki.oe.net for mtn and monotone phrasebook b=
-ut=20
-didn't find anything. :)
+The old wiki had one, dunno if the new wiki overlords decided to move it 
+to the new wiki. Ask them.
 
-z.
+
+>
+> z.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 
 
