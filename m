@@ -1,34 +1,20 @@
-Received: from [74.125.44.156] (helo=yx-out-1718.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1KnZtJ-0006NM-Oy
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 16:19:54 +0200
-Received: by yx-out-1718.google.com with SMTP id 4so703949yxp.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Oct 2008 07:15:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=UZs6HmFgh1Etq3+biQzRHVcFV7sPU7ut1vkh9Di6sOs=;
-	b=Uvvvwd3TpY+SfDkOHIr+IBamcnkPAMtj2IR8iY6rIrq3Nuf8EJ95puHn4Ndm4zi1jd
-	zQZlLiNvaHPcXsIyaQMoskilk0RTocSnl98Q+0TcfjvpqcnGRaloVxEDkE7k/oS+Gloq
-	kXczdcMdJWvwcw4Mun+AtH767FasDZCGjR7w4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=A7UWNiKC98tbylRSR0csr2eZ/CABBkEpM1PoJEFrLJ8FYUjW03djHjrrdnDZEjqhHM
-	INGF+k1RSeNoPuzgl7nZbf3/VZaK93OWYOcoveVsUSaVoN1Qm4p+Qpq4agSfgrTOK7Ze
-	uiJSh1VuaU2zj/A03fqZBnbY0JjG9VozmcIl0=
-Received: by 10.142.125.9 with SMTP id x9mr3482948wfc.89.1223475314764;
-	Wed, 08 Oct 2008 07:15:14 -0700 (PDT)
-Received: by 10.150.212.20 with HTTP; Wed, 8 Oct 2008 07:15:14 -0700 (PDT)
-Message-ID: <48239d390810080715l700d1ce4i46c1e1cc97279b3@mail.gmail.com>
-Date: Wed, 8 Oct 2008 18:15:14 +0400
-From: "Sergey Lapin" <slapinid@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <philip@balister.org>) id 1KnZxE-0004KZ-Pa
+	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 16:23:58 +0200
+Received: (qmail 11014 invoked by uid 1003); 8 Oct 2008 14:19:16 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 8 Oct 2008 14:19:15 -0000
+Message-ID: <48ECC162.4070607@balister.org>
+Date: Wed, 08 Oct 2008 10:19:14 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Subject: Locale support.
+To: openembedded-devel@lists.openembedded.org
+References: <c384c5ea0810080646j6156c19ag284702150c5abe9f@mail.gmail.com>
+In-Reply-To: <c384c5ea0810080646j6156c19ag284702150c5abe9f@mail.gmail.com>
+Subject: Re: RFC: branch off the last stable branch under monotone?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,66 +28,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 14:19:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Oct 2008 14:24:20 -0000
+X-Groupsio-MsgNum: 6146
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms020707040202090107040001"
+
+--------------ms020707040202090107040001
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi, all!
+Leon Woestenberg wrote:
+> Hello all,
+> 
+> should we, or should we not, branch off a stable branch under
+> monotone, i.e. the last stable using monotone?
+> 
+> The argument would be to offer the existing use base (which typically
+> lags behind much) a (last) monotone based branch.
+> 
+> I can imagine the answer should be "no", as the number of maintainers
+> is low (and I am to blame as well).
 
-I have locale problems with my images, so I try to figure-out what I'm
-doing wrong.
+My understanding is that we can make the branch in mtn now, and it will 
+be converted with the rest of the repository when it is converted to 
+git, so the stable branch will also convert to git at that time.
 
-So, 'locale' command output is
-LANG=ru_RU.UTF-8
-LC_CTYPE="ru_RU.UTF-8"
-LC_NUMERIC="ru_RU.UTF-8"
-LC_TIME="ru_RU.UTF-8"
-LC_COLLATE="ru_RU.UTF-8"
-LC_MONETARY="ru_RU.UTF-8"
-LC_MESSAGES="ru_RU.UTF-8"
-LC_PAPER="ru_RU.UTF-8"
-LC_NAME="ru_RU.UTF-8"
-LC_ADDRESS="ru_RU.UTF-8"
-LC_TELEPHONE="ru_RU.UTF-8"
-LC_MEASUREMENT="ru_RU.UTF-8"
-LC_IDENTIFICATION="ru_RU.UTF-8"
-LC_ALL=
+Philip
 
-# opkg list_installed|grep glibc
-glibc-binary-localedata-ru-ru - 2.6.1-r12 -
-glibc-charmap-utf-8 - 2.6.1-r12 -
-glibc-gconv - 2.6.1-r12 -
-glibc-gconv-iso8859-1 - 2.6.1-r12 -
-glibc-gconv-koi8-r - 2.6.1-r12 -
-glibc-gconv-unicode - 2.6.1-r12 -
-glibc-locale-ru - 2.6.1-r7 -
-glibc-localedata-i18n - 2.6.1-r12 -
-glibc-localedata-iso14651-t1 - 2.6.1-r12 -
-glibc-localedata-iso14651-t1-common - 2.6.1-r12 -
-glibc-localedata-ru-ru - 2.6.1-r12 -
-glibc-localedata-translit-circle - 2.6.1-r12 -
-glibc-localedata-translit-cjk-compat - 2.6.1-r12 -
-glibc-localedata-translit-combining - 2.6.1-r12 -
-glibc-localedata-translit-compat - 2.6.1-r12 -
-glibc-localedata-translit-font - 2.6.1-r12 -
-glibc-localedata-translit-fraction - 2.6.1-r12 -
-glibc-localedata-translit-narrow - 2.6.1-r12 -
-glibc-localedata-translit-neutral - 2.6.1-r12 -
-glibc-localedata-translit-small - 2.6.1-r12 -
-glibc-localedata-translit-wide - 2.6.1-r12 -
-glibc-utils - 2.6.1-r12 -
+--------------ms020707040202090107040001
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-But I have problems with lots of UTF-8 characters on file system
-and applications. 'date' command works properly reporting according to locale.
-wget, however have problems, inventing names which contain junk.
-However, using scp, I'm able to store normal UTF-8-named files
-from my desktop Debian. ASCII characters in names are always OK.
-both wget and ls are stand-alone in my configuration.
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAwODE0
+MTkxNFowIwYJKoZIhvcNAQkEMRYEFJsxnFoghTEgD9hK8HvabtuSRHMOMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQAqO12L78E7vv2WB2aDKKr9os48zB6FSTgdwKp+1UXgvIqxMyqE
+xvRqOZHbUHNTQ9lYXDtmWgCSjcXGMj11EAdyMS5Lm3+1Rc+QckbjdGcvr9zlpZ4N1vF6yHlX0O75
+peQIo9KjHaJ9q9gtg5X14F7gao6zND4GSHA7qckiq+I64FguKiFqCh+NwRWMBeV6qQRKCog0PMdH
+isR7fbqKw7NYHzCk/WcJh3s2NojMdmLpHVNk54dcvDJ6dE39h5Wz/l9V07+Wmj5HS7+2QNskjCXW
+KlxSyTit+TL4soQHZSEJMrTQ/BEcnx26oMxCQ5khDDPZxWbfr47Z6PtL0ku2JsddAAAAAAAA
 
-Any ideas where to look?
-
-All the best,
-S.
-
-
+--------------ms020707040202090107040001--
