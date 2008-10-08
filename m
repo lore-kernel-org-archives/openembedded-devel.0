@@ -1,31 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KnVio-0000a2-AF
-	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 11:52:46 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KnVeJ-0003Mp-3f
-	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 09:48:07 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 08 Oct 2008 09:48:07 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 08 Oct 2008 09:48:07 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 08 Oct 2008 11:47:58 +0200
-Message-ID: <gchvke$7nq$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: [oe-commits] : gpe-sketchbook: add missing dependency (patch by raster), stylize, convert SVN build to SRCREV
+	(envelope-from <openembedded@haerwu.biz>) id 1KnW3j-00018o-NP
+	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 12:14:23 +0200
+Received: (qmail 18479 invoked by uid 813007); 8 Oct 2008 10:09:45 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 8 Oct 2008 10:09:45 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 8 Oct 2008 12:10:00 +0200
+User-Agent: KMail/1.10.1 (Linux/2.6.27-rc7; KDE/4.1.2; x86_64; ; )
+References: <200810080751.15817.zecke@selfish.org>
+In-Reply-To: <200810080751.15817.zecke@selfish.org>
+MIME-Version: 1.0
+Message-Id: <200810081210.00494.openembedded@haerwu.biz>
+Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,49 +29,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 09:52:46 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Oct 2008 10:14:24 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Does gpe-sketchbook require a kernel and bootloader upgrade?
+Wednesday 08 of October 2008 07:51:15 Holger Freyther napisa=C5=82(a):
 
-diff --git a/conf/distro/include/sane-srcrevs.inc 
-b/conf/distro/include/sane-srcrevs.inc
-index 1675386..9a48bfa 100644
---- a/conf/distro/include/sane-srcrevs.inc
-+++ b/conf/distro/include/sane-srcrevs.inc
-@@ -50,6 +50,7 @@ SRCREV_pn-fstests ?= "204"
-  SRCREV_pn-gconf-dbus ?= "641"
-  SRCREV_pn-gnuradio ?= "9721"
-  SRCREV_pn-gpe-contacts ?= "9312"
-+SRCREV_pn-gpe-sketchbook ?= "9547"
-  SRCREV_pn-gsm0710muxd ?= "3ff86b129640b647ccba3d86eb243d864671b039"
-  SRCREV_pn-gsmd2 ?= "963f34df8fa3ff4b301079dcf86e9acea6b6fe0f"
-  SRCREV_pn-gtkhtml2 ?= "1158"
-@@ -80,8 +81,8 @@ SRCREV_pn-lightmediascanner ?= "68"
-  SRCREV_pn-linux-bfin ?= "3758"
-  SRCREV_pn-linux-hackndev-2.6 ?= "1308"
-  SRCREV_pn-linux-ixp4xx ?= "1066"
--SRCREV_pn-linux-openmoko ?= "968c41d0c32099d78927849a71e2ef3143cc05e7"
--SRCREV_pn-linux-openmoko-devel ?= 
-"e20ce2bd6fc6e711eed58a580ae117cb574abe96"
-+SRCREV_pn-linux-openmoko ?= "bc2caff9cdef8a16297a2cb196306f88fa5ea2c2"
-+SRCREV_pn-linux-openmoko-devel ?= 
-"8119fb41bf9cfd12964fa5e987ff6dbaf5729f75"
-  SRCREV_pn-llvm-gcc4 ?= "374"
-  SRCREV_pn-llvm-gcc4-cross ?= "374"
-  SRCREV_pn-maemo-mapper ?= "118"
-@@ -178,7 +179,7 @@ SRCREV_pn-sphyrna-python ?= "45"
-  SRCREV_pn-starling ?= "9574"
-  SRCREV_pn-tichy ?= "168"
-  SRCREV_pn-tmut ?= "60"
--SRCREV_pn-u-boot-openmoko ?= "ba029a1426bfca169572bf80d50a8b190a6b0e19"
-+SRCREV_pn-u-boot-openmoko ?= "414367bf5b65942947dd5d569c27d2a8e8e5e562"
-  SRCREV_pn-u-boot-openmoko-devel ?= 
-"ba029a1426bfca169572bf80d50a8b190a6b0e19"
-  SRCREV_pn-usbpath ?= "3172"
-  SRCREV_pn-usbpath-native ?= "3172"
+> we would like to switch to git by next wednesday. Jan L=C3=BCbbe went
+> through the hassle to fix two issues in my mtn2git.py and we are
+> happy with the metadata and can even unite it with the data exported
+> from bitkeeper.
 
+> The plans would be:
+> 	- Send your public ssh keys if you have not done so
+
+Send them to who? Mickeyl, Koen, Holger, Richard or someone other?
+
+> Tuesday:
+> 	- Set monotone readonly 16h german time
+> 	- merge the multiple heads (if they exist)
+> 	- Try to add the revs from now to tuesday to git
+
+> Wednesday:
+> 	- Be back up with git and use that as primary system.
+> 	- Disable monotone completely
+
+I would suggest leaving monotone read-only for two weeks so people will=20
+have a time to switch. Also adding file like README-THIS-IS-NOT-UPDATED-
+SINCE-WE-SWITCHED-TO-GIT with some info would be nice.
+
+> Thanks to Jan for wrestling with monotone, git, the script and the
+> data and we will keep you informed about how the migration is going.
+
+Thanks to all people envolved into this switch. My contributions to OE=20
+were smaller last time due to my work on Poky but now, when we will be=20
+using git I plan to merge some interesting stuff to the OE (my monotone=20
+knowledge is smaller then it was year ago).
+
+=2D-=20
+JID: hrw@jabber.org
 
 
 
