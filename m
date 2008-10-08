@@ -1,34 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KnWB3-0004oI-R9
-	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 12:21:57 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KnW6Z-0004Y4-Rs
-	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 10:17:19 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 08 Oct 2008 10:17:19 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 08 Oct 2008 10:17:19 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 08 Oct 2008 12:17:08 +0200
-Message-ID: <gci1b5$d57$1@ger.gmane.org>
-References: <200810080751.15817.zecke@selfish.org>
-	<200810081210.00494.openembedded@haerwu.biz>
+	(envelope-from <jluebbe@lasnet.de>) id 1KnWCw-0006SL-6p
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Oct 2008 12:23:54 +0200
+Received: from vpn.apm.etc.tu-bs.de ([134.169.172.70] helo=[172.30.2.1])
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1KnW8P-00007Z-SG by authid <jluebbe@lasnet.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Oct 2008 12:19:16 +0200
+From: Jan Luebbe <jluebbe@lasnet.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1206919092.4838.23.camel@dax.rpnet.com>
+References: <1206919092.4838.23.camel@dax.rpnet.com>
+Date: Wed, 08 Oct 2008 12:18:18 +0200
+Message-Id: <1223461098.6097.166.camel@polaris>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-In-Reply-To: <200810081210.00494.openembedded@haerwu.biz>
-Sender: news <news@ger.gmane.org>
-Subject: Re: ETA on git conversion
+X-Mailer: Evolution 2.22.3.1 
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: Old bitkeeper repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,56 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 10:21:58 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 08 Oct 2008 10:23:54 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On 08-10-2008 12:10, Marcin Juszkiewicz wrote:
-> Wednesday 08 of October 2008 07:51:15 Holger Freyther napisał(a):
->
->> we would like to switch to git by next wednesday. Jan Lübbe went
->> through the hassle to fix two issues in my mtn2git.py and we are
->> happy with the metadata and can even unite it with the data exported
->> from bitkeeper.
->
->> The plans would be:
->> 	- Send your public ssh keys if you have not done so
->
-> Send them to who? Mickeyl, Koen, Holger, Richard or someone other?
+On Mon, 2008-03-31 at 00:18 +0100, Richard Purdie wrote:
+> Hi,
+> 
+> I've been experimenting with the bitkeeper cvs dump we have of the OE
+> repository that was there. I'm planning on turning this into a git
+> repository so we can more easily see what was in there.
 
-As was said only 7 days ago, on this very list:
+Which scripts/tools and source data did you use to generate this
+repository
+(http://git.openembedded.net/?p=org.openembedded.rp-bkcvs.git;a=summary)?
 
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2008-October/006291.html
+I've been trying to reproduce it to be able to integrate it during the
+switch to git. I'm using a oe-bitkeeper-cvs-export.tar.bz2 with the
+md5sum fd83dccf5a74198f7e1417d97d6c6520 as source.
 
-We have received a grand total of 14 git keys since then.
-
-regards,
-
-Koen
-
->
->> Tuesday:
->> 	- Set monotone readonly 16h german time
->> 	- merge the multiple heads (if they exist)
->> 	- Try to add the revs from now to tuesday to git
->
->> Wednesday:
->> 	- Be back up with git and use that as primary system.
->> 	- Disable monotone completely
->
-> I would suggest leaving monotone read-only for two weeks so people will
-> have a time to switch. Also adding file like README-THIS-IS-NOT-UPDATED-
-> SINCE-WE-SWITCHED-TO-GIT with some info would be nice.
->
->> Thanks to Jan for wrestling with monotone, git, the script and the
->> data and we will keep you informed about how the migration is going.
->
-> Thanks to all people envolved into this switch. My contributions to OE
-> were smaller last time due to my work on Poky but now, when we will be
-> using git I plan to merge some interesting stuff to the OE (my monotone
-> knowledge is smaller then it was year ago).
->
-
+Jan
 
 
 
