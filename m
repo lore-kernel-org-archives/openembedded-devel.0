@@ -1,37 +1,37 @@
-Received: from [201.35.65.91] (helo=freedom.ind.br)
+Received: from [209.85.217.20] (helo=mail-gx0-f20.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KnYqj-00047b-G4
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KnZ1E-00015U-Ok
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 15:13:09 +0200
-Received: from freedom.ind.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id BC66916079
+	Wed, 08 Oct 2008 15:24:00 +0200
+Received: by gxk13 with SMTP id 13so7871306gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Oct 2008 10:08:29 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by freedom.ind.br (Postfix) with ESMTP id 9152F1466C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Oct 2008 10:08:29 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 8 Oct 2008 10:08:29 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id EF9F7C2EA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Oct 2008 10:09:22 -0300 (BRT)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 9466661018B; Wed,  8 Oct 2008 10:06:10 -0300 (BRT)
+	Wed, 08 Oct 2008 06:19:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=aRzHYrlH2oth0cKGjCR9zT5TETwTkEKmuOEueDtkxyo=;
+	b=UbmJSM81yKjSDJQApl2w5lkNcAoAysywVTtA1Nc/rH6krMVlOxnrgFDcLympbkgWD6
+	vnef2kYfqTEIaPbLgRJoL48HNde/5xe8OIEosyz7WBH7WSN3B6dHzloozbElYzeqSjMv
+	aFXsf75gGs6o9rjpy0wu+DPFcAeeAOLFvbwy4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=gRQEhOmM13+CDs+Esb5vzTKd9S6E4k/2hfLBJUrfynavntKDasHaPiaXOD0Lb/LCRK
+	wQcn311IobfeocOy8Le1zmOTjThwl0nlVQ0x9C7BuwBATrmZYxGAHsaT0nBtKC0tUWfB
+	v+J7BBT/txUFTVktLVJNqONiNsJaS/yW7fzNY=
+Received: by 10.100.178.15 with SMTP id a15mr648306anf.3.1223471960383;
+	Wed, 08 Oct 2008 06:19:20 -0700 (PDT)
+Received: by 10.100.174.18 with HTTP; Wed, 8 Oct 2008 06:19:20 -0700 (PDT)
+Message-ID: <c384c5ea0810080619w45ad0167x97c2b1f3b7c24a4b@mail.gmail.com>
+Date: Wed, 8 Oct 2008 15:19:20 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <200810080751.15817.zecke@selfish.org>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Wed, 08 Oct 2008 10:06:10 -0300
-In-Reply-To: <200810080751.15817.zecke@selfish.org> (Holger Freyther's message
-	of "Wed\, 8 Oct 2008 07\:51\:15 +0200")
-Message-ID: <87ljwztewt.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+In-Reply-To: <gci4to$pcf$1@ger.gmane.org>
 MIME-Version: 1.0
+References: <200810080751.15817.zecke@selfish.org> <gchpoa$kal$1@ger.gmane.org>
+	<200810081303.35934.zecke@selfish.org> <gci4to$pcf$1@ger.gmane.org>
 Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,24 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 13:13:09 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 08 Oct 2008 13:24:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Holger Freyther <zecke@selfish.org> writes:
+Hello,
 
-> Thanks to Jan for wrestling with monotone, git, the script and the data and we 
-> will keep you informed about how the migration is going.
+On Wed, Oct 8, 2008 at 1:18 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote=
+:
+> On 08-10-2008 13:03, Holger Freyther wrote:
+>> On Wednesday 08 October 2008 10:07:38 Koen Kooi wrote:
+>>> On 08-10-2008 07:51, Holger Freyther wrote:
+>>>>
+>>>> we would like to switch to git by next wednesday. Jan L=FCbbe went thr=
+ough
+>>>> the hassle to fix two issues in my mtn2git.py and we are happy with th=
+e
+>>>> metadata and can even unite it with the data exported from bitkeeper.
+>>>
+Thanks for all the efforts.
 
-Thanks to you all by all this migration work.
+Regarding the GIT phrasebook, as a starter:
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+I assume the GIT ssh public key must be generated with SSH, and not
+some git (sub) command?
+
+
+Regards,
+--=20
+Leon
 
 
