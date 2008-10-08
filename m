@@ -1,22 +1,33 @@
-Received: from [208.84.147.47] (helo=rhodos.klever.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hacker@klever.net>) id 1KncKn-0006uz-37
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 18:56:25 +0200
-Received: from pd953ac58.dip0.t-ipconnect.de ([217.83.172.88] ident=hacker)
-	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1KncGH-00035Q-RQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 18:51:46 +0200
-Message-ID: <48ECE511.3030006@klever.net>
-Date: Wed, 08 Oct 2008 18:51:29 +0200
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KncNb-00070q-Tv
+	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 18:59:19 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KncJ5-0004fi-HF
+	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 16:54:39 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 08 Oct 2008 16:54:39 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 08 Oct 2008 16:54:39 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 08 Oct 2008 18:54:30 +0200
+Message-ID: <gciok7$760$1@ger.gmane.org>
 References: <200810080751.15817.zecke@selfish.org>	<200810081303.35934.zecke@selfish.org>
 	<gci4to$pcf$1@ger.gmane.org> <200810081757.57676.zecke@selfish.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
 In-Reply-To: <200810081757.57676.zecke@selfish.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,36 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 16:56:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 08 Oct 2008 16:59:20 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
+On 08-10-2008 17:57, Holger Freyther wrote:
 > On Wednesday 08 October 2008 13:18:16 Koen Kooi wrote:
-> 
+>
 >> The old wiki had one, dunno if the new wiki overlords decided to move it
 >> to the new wiki. Ask them.
-> 
+>
 > http://wiki.openembedded.net/index.php/GitPhraseBook
-> 
+>
 > is this any good?
 
-IMO, more than a hacker may be asked for ;-)
+It's a start, but make sure people can paste the actual commands, so 
+don't comments in the textbox:
 
-A few notes, though - you only mention `git clone git:`, not sure where 
-would push remotes come from for subsequent push commands.
+Bad:
 
-How about adding `git config`s instead of --color and stuff? Of course, 
-it's fine to leave it for user's exercise ;-)
+  git pull --rebase -- Conflicts from here or something else
 
-Love,
-H
+Better:
 
-> 
+  git pull --rebase # Conflicts from here or something else
+
+Even better:
+  # use --rebase to work out conflicts from here or something else
+  git pull --rebase
+
+regards,
+
+Koen
+
+
+>
 > z.
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 
 
