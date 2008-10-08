@@ -1,36 +1,27 @@
-Received: from [209.85.198.241] (helo=rv-out-0708.google.com)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KnTGf-0006Ix-EA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Oct 2008 09:15:33 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so5437445rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Oct 2008 00:10:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=1ey3Eo1cEoixL91pjJJWofDx9cb/LHB+sabotShQhQ4=;
-	b=Ei8p95OUZWulfx2DdxBwDyipb1yuRPlQe/ggVUjT04GTM26efgF0IU4CcctJenW5mz
-	p+j7jV+UacShXhEWBk3gfwG1VAGKVerKKcjMY42pwRXt4JNmE1Emdrgv/ieCGm6/tKd/
-	5wyVdPv5KL8ROf0jt2nvXSd9niTDRd3ASTLd0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=xYcafyOIZ5PZZAeb2pvXFUK30yxhQ3AnPc9H+OJX5xqqgtmCJmHIxR/FBDxkYug/6/
-	tDRsJlbdpHfHJdstPee7gNKfTRJNeazHdFuFedzdSrHL/12HjqpdnEYLBQI+UvrfQoSp
-	I/dowRnxPcHt/oFP9/sSuxnZK1HFHPoS0RewA=
-Received: by 10.140.134.15 with SMTP id h15mr4652025rvd.65.1223449855890;
-	Wed, 08 Oct 2008 00:10:55 -0700 (PDT)
-Received: by 10.141.96.7 with HTTP; Wed, 8 Oct 2008 00:10:55 -0700 (PDT)
-Message-ID: <19c1b8a90810080010t7b21de2eh376a8693b64053a2@mail.gmail.com>
-Date: Wed, 8 Oct 2008 00:10:55 -0700
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200810080751.15817.zecke@selfish.org>
-MIME-Version: 1.0
+	(envelope-from <trini@kernel.crashing.org>) id 1KnTaR-0003U6-EW
+	for openembedded-devel@openembedded.org; Wed, 08 Oct 2008 09:35:59 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20081008073118.XQBO6175.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 8 Oct 2008 03:31:18 -0400
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id Q7XK1a00F1E665w047XKi8; Wed, 08 Oct 2008 03:31:20 -0400
+X-Authority-Analysis: v=1.0 c=1 a=dYWHU-MwCFke1KCWy5kA:9
+	a=aSbNgCJLC6WlOhGkffQviluVQXwA:4 a=toL_iAlXHfkA:10 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Wed, 8 Oct 2008 00:31:19 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20081008073119.GK14282@smtp.west.cox.net>
 References: <200810080751.15817.zecke@selfish.org>
+	<19c1b8a90810080010t7b21de2eh376a8693b64053a2@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <19c1b8a90810080010t7b21de2eh376a8693b64053a2@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,34 +36,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2008 07:15:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 08 Oct 2008 07:36:00 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-T24gVHVlLCBPY3QgNywgMjAwOCBhdCAxMDo1MSBQTSwgSG9sZ2VyIEZyZXl0aGVyIDx6ZWNrZUBz
-ZWxmaXNoLm9yZz4gd3JvdGU6Cj4gSGV5LAo+Cj4gd2Ugd291bGQgbGlrZSB0byBzd2l0Y2ggdG8g
-Z2l0IGJ5IG5leHQgd2VkbmVzZGF5LiBKYW4gTMO8YmJlIHdlbnQgdGhyb3VnaCB0aGUKPiBoYXNz
-bGUgdG8gZml4IHR3byBpc3N1ZXMgaW4gbXkgbXRuMmdpdC5weSBhbmQgd2UgYXJlIGhhcHB5IHdp
-dGggdGhlIG1ldGFkYXRhCj4gYW5kIGNhbiBldmVuIHVuaXRlIGl0IHdpdGggdGhlIGRhdGEgZXhw
-b3J0ZWQgZnJvbSBiaXRrZWVwZXIuCj4KPiBUaGUgcGxhbnMgd291bGQgYmU6Cj4gICAgICAgIC0g
-U2VuZCB5b3VyIHB1YmxpYyBzc2gga2V5cyBpZiB5b3UgaGF2ZSBub3QgZG9uZSBzbwo+Cj4gVHVl
-c2RheToKPiAgICAgICAgLSBTZXQgbW9ub3RvbmUgcmVhZG9ubHkgMTZoIGdlcm1hbiB0aW1lCj4g
-ICAgICAgIC0gbWVyZ2UgdGhlIG11bHRpcGxlIGhlYWRzIChpZiB0aGV5IGV4aXN0KQo+ICAgICAg
-ICAtIFRyeSB0byBhZGQgdGhlIHJldnMgZnJvbSBub3cgdG8gdHVlc2RheSB0byBnaXQKPgo+IFdl
-ZG5lc2RheToKPiAgICAgICAgLSBCZSBiYWNrIHVwIHdpdGggZ2l0IGFuZCB1c2UgdGhhdCBhcyBw
-cmltYXJ5IHN5c3RlbS4KPiAgICAgICAgLSBEaXNhYmxlIG1vbm90b25lIGNvbXBsZXRlbHkKPgo+
-Cj4gVGhpbmdzIHRvIG5vdGU6Cj4gICAgICAgIFRoZSBoaXN0b3J5IHdpbGwgYmUgZGlmZmVyZW50
-IGZyb20gdGhlIHRyaWFsLiBZb3Ugd2lsbCBuZWVkIHRvCj4gZ2l0LXJlYmFzZSAtLWZyb20gdHJp
-YWwtaGVhZCAtLXRvIG9mZmljaWFsLWhlYWQgb3IganVzdCBnaXQtcmVzZXQgdG8gZ2V0IHRvCj4g
-dGhlIG9mZmljaWFsIGhlYWQuCj4KPiBUaGFua3MgdG8gSmFuIGZvciB3cmVzdGxpbmcgd2l0aCBt
-b25vdG9uZSwgZ2l0LCB0aGUgc2NyaXB0IGFuZCB0aGUgZGF0YSBhbmQgd2UKPiB3aWxsIGtlZXAg
-eW91IGluZm9ybWVkIGFib3V0IGhvdyB0aGUgbWlncmF0aW9uIGlzIGdvaW5nLgo+Cj4gY29tbWVu
-dHMKCkdyZWF0IGpvYiEhCmlmIHdlIGFyZSByZWFkeSB0aGVuIGRvbnQgd2FpdCB0aWxsIG5leHQg
-d2Vlay4gV2UgY2FuIHVzZSB0aGlzIHRpbWUgdG8Kc3RhYmlsaXplIG9uIGdpdC4KClRoeAoKLUto
-ZW0KPgo+IHouCj4KPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdAo+IE9wZW5lbWJlZGRlZC1k
-ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnCj4gaHR0cDovL2xpc3RzLmxpbnV4dG9nby5vcmcv
-Y2dpLWJpbi9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbAo+Cg==
+On Wed, Oct 08, 2008 at 12:10:55AM -0700, Khem Raj wrote:
+> On Tue, Oct 7, 2008 at 10:51 PM, Holger Freyther <zecke@selfish.org> wrote:
+> > Hey,
+> >
+> > we would like to switch to git by next wednesday. Jan Lübbe went through the
+> > hassle to fix two issues in my mtn2git.py and we are happy with the metadata
+> > and can even unite it with the data exported from bitkeeper.
+> >
+> > The plans would be:
+> >        - Send your public ssh keys if you have not done so
+> >
+> > Tuesday:
+> >        - Set monotone readonly 16h german time
+> >        - merge the multiple heads (if they exist)
+> >        - Try to add the revs from now to tuesday to git
+> >
+> > Wednesday:
+> >        - Be back up with git and use that as primary system.
+> >        - Disable monotone completely
+> >
+> >
+> > Things to note:
+> >        The history will be different from the trial. You will need to
+> > git-rebase --from trial-head --to official-head or just git-reset to get to
+> > the official head.
+> >
+> > Thanks to Jan for wrestling with monotone, git, the script and the data and we
+> > will keep you informed about how the migration is going.
+> >
+> > comments
+> 
+> Great job!!
+
+Indeed!
+
+> if we are ready then dont wait till next week. We can use this time to
+> stabilize on git.
+
+Think of now until read-only as a last call for "push your outstanding
+changes already" :)
+
+... looking forward to seeing if moving to git makes getting patches in
+any easier.
+
+-- 
+Tom Rini
 
 
