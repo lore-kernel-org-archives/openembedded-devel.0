@@ -1,31 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KnqXY-0007ca-Ed
-	for openembedded-devel@openembedded.org; Thu, 09 Oct 2008 10:06:36 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KnqT0-0004cY-76
-	for openembedded-devel@openembedded.org; Thu, 09 Oct 2008 08:01:50 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 09 Oct 2008 08:01:50 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 09 Oct 2008 08:01:50 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 09 Oct 2008 10:01:37 +0200
-Message-ID: <gckdp2$qo7$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: .dev broken after gettext changes
+	(envelope-from <sledz@DResearch.DE>) id 1Kns46-0003Ou-Ej
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Oct 2008 11:44:14 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 4CD4216DF24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Oct 2008 11:46:30 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id B27E92A420D
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Oct 2008 11:47:32 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 9 Oct 2008 11:39:18 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF43D@hiob.intern.dresearch.de>
+In-Reply-To: <48ED467B.5080208@whitby.id.au>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: git and branches
+Thread-Index: AckpoHVBGEEFLcodROmAZsTSngyz+wAUQYpg
+References: <200810081757.57676.zecke@selfish.org>
+	<48ED467B.5080208@whitby.id.au>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: git and branches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,29 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Oct 2008 08:06:43 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Oct 2008 09:44:14 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+As an OE beginner I'm a bit confused with the different branches. Is =
+there an overview about all the branches available in the new git =
+system. I made some searches in wiki.openembedded.net but could not =
+found really helpful info.
 
-Somewhere last night OE started giving
+'git branch -r' lists these branches:
 
-ERROR: Unbuildable tasks were found.
-These are usually caused by circular dependencies and any circular 
-dependency chains found will be printed below. Increase the debug level 
-to see a list of unbuildable tasks.
+  origin/HEAD
+  origin/master
+  origin/org.openembedded.dev
+  origin/org.openembedded.documentation
+  origin/org.openembedded.dreambox
+  origin/org.openembedded.entity
+  origin/org.openembedded.stable
+  origin/org.openmoko.april-update
+  origin/org.openmoko.dev
+  origin/org.openmoko.xora.qtopia
+  origin/org.openmoko.zecke.april-update
+  origin/org.openmoko.zecke.autotools-bustage
+  origin/org.openmoko.zecke.random-breakage
 
-Thanks to the autobuild we can see that last good commit is:
+<http://wiki.openembedded.net/index.php/DevelopmentBranches> lists these =
+ones (without any description :( ):
 
-http://amethyst.openembedded.net/oe/viewmtn/viewmtn.py/revision/info/f2ebdb1826372581987a96a662d30d97b544c438
+  org.nslu2-linux.bitbake
+  org.nslu2-linux.dev
+  org.openembedded.dev
+  org.openembedded.documentation
+  org.openembedded.dreambox
+  org.openembedded.oetest
+  org.openembedded.oz354fam083
+  org.openembedded.oz354x
+  org.openembedded.packaged-staging
+  org.openembedded.stable
 
-and this one is bad:
+'master' ist used as the default when getting the data with 'git clone =
+git://git.openembedded.net/org.openembedded.dev' like described on =
+<http://wiki.openembedded.net/index.php/Git#OpenEmbedded_Git_repository>.=
+ But what branch is 'master'? And which branches should one use for =
+which purposes?
 
-http://amethyst.openembedded.net/oe/viewmtn/viewmtn.py/revision/info/9f79c6b2ba1ff673c6a3fa4d02579b720046d1cf
-
-So inbetween those commits OE became unbuildable.
-
-
+Steffen
 
 
