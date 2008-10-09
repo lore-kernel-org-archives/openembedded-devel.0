@@ -1,37 +1,40 @@
-Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
+Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Kns5G-0003S8-Rr
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Oct 2008 11:45:27 +0200
-Received: by qw-out-1920.google.com with SMTP id 5so1116605qwf.36
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1KnsJP-00046C-Gw
+	for openembedded-devel@openembedded.org; Thu, 09 Oct 2008 12:00:05 +0200
+Received: (qmail 21609 invoked from network); 9 Oct 2008 11:54:58 +0200
+Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
+	by leibniz.math.fu-berlin.de with SMTP; 9 Oct 2008 11:54:58 +0200
+Received: (qmail 16804 invoked by uid 9804); 9 Oct 2008 11:54:58 +0200
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 9 Oct 2008 11:54:14 +0200
+Received: (qmail 16646 invoked by uid 9804); 9 Oct 2008 11:54:14 +0200
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by lusin.mi.fu-berlin.de with SMTP; 9 Oct 2008 11:54:14 +0200
+Received: (qmail 14531 invoked from network); 9 Oct 2008 11:54:14 +0200
+Received: from omsk.mi.fu-berlin.de (160.45.45.210)
+	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
+	9 Oct 2008 09:54:14 -0000
+Received: from heinold by omsk.mi.fu-berlin.de with local (Exim 4.63 #1
+	(Debian)) id 1KnsDl-0002rh-DY
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Oct 2008 02:40:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=u4V4eT2I3IDPvyXNHW/tme1LliT3Sbn1yYLgt7wMuTE=;
-	b=eccaIYqrmPwDSMg/B3oLYLjOLvfjVjtgwLSexNb3H0izDnNXuRpJtDvCDN+qJMiFOr
-	b2YJXCoB3M1lFGbvGPKx/ciVKxoDeSJhMlJ2wkPa72kL9ltnYkO6KdhB+nAqWaIdEC82
-	gBd/XUZIZeE3v+dfhhzpQnzrekq0v9AqalfgA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=pgqYXyiuAC/Ta/cY+jOt9Mk1+RMO9yS0CgelbVUUM+sVxjinY9qfbS4FtdqXETi28N
-	Zy6KvdrKFjtgkVwMu7NvSJ2+Fk8EVSeO6aXT4HLzRZuIAbCaFlHH/f+XYHMkf25jW+0e
-	O9GDxRSlPdyueaml1e7KolMFPXWuB3UHLqEj0=
-Received: by 10.214.44.5 with SMTP id r5mr12489165qar.61.1223545244723;
-	Thu, 09 Oct 2008 02:40:44 -0700 (PDT)
-Received: by 10.214.12.10 with HTTP; Thu, 9 Oct 2008 02:40:44 -0700 (PDT)
-Message-ID: <c384c5ea0810090240l2adf1606h110236f88a101ed2@mail.gmail.com>
-Date: Thu, 9 Oct 2008 11:40:44 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+	Thu, 09 Oct 2008 11:54:13 +0200
+Date: Thu, 9 Oct 2008 11:54:13 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gckdp2$qo7$1@ger.gmane.org>
+Message-ID: <20081009095412.GA11002@mi.fu-berlin.de>
+References: <20081008233816.7410A189322@amethyst.openembedded.net>
+	<1223538745.4714.27.camel@ip6-localhost>
+X-Envelope-Sender: heinold@mi.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L41+ClamAV[16650](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.210
 MIME-Version: 1.0
-References: <gckdp2$qo7$1@ger.gmane.org>
-Subject: Re: .dev broken after gettext changes
+In-Reply-To: <1223538745.4714.27.camel@ip6-localhost>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Subject: Re: [oe-commits] : gettext.bbclass: make it simpler to understand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,20 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Oct 2008 09:45:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Oct 2008 10:00:05 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thu, Oct 9, 2008 at 10:01 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> So inbetween those commits OE became unbuildable.
->
+On Thu, Oct 09, 2008 at 03:52:25PM +0800, Michael 'Mickey' Lauer wrote:
+> Am Donnerstag, den 09.10.2008, 01:38 +0200 schrieb OE GIT Trial:
+> > Module: org.openembedded.dev.git
+> > Branch: org.openembedded.dev
+> > Commit: 80bdb16c9dbefb4d06fe1e1d714ba042c833b92f
+> > URL:    http://gitweb.openembedded.net/?p=org.openembedded.dev.git&a=commit;h=80bdb16c9dbefb4d06fe1e1d714ba042c833b92f
+> > 
+> > Author:  <woglinde2@openembedded.org>
+> > Date:   Wed Oct  8 22:06:39 2008 +0000
+> > 
+> > gettext.bbclass: make it simpler to understand
+> > * set the deps for package which can use NLS stuff
+> > * filter the deps out if NLS is not requested
+> 
+> I have just reverted this commit as it lead to a dependency loop here
+> rendering everything unbuildable.
+> 
+> Can you please recheck?
+> 
+> :M:
+> 
 
-See Michael message on the ml, I think he reverted the offending
-commit. Not sure if that resolves the problem completely, anyone?
 
-Regards,
+I can not check with out your configuration.
+
+Bye Henning
 -- 
-Leon
+IBM Certified Specialist - eserver i5 iSeries Technical Solutions Designer V5R3
 
 
