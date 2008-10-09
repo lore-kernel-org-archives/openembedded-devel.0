@@ -1,33 +1,27 @@
-Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
+Received: from [206.46.252.42] (helo=vms042pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicola.mfb@gmail.com>) id 1KnuHx-0000Gx-Ie
+	(envelope-from <denis@denix.org>) id 1Ko2Kf-0001la-DK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Oct 2008 14:06:41 +0200
-Received: by ug-out-1314.google.com with SMTP id y2so863457uge.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Oct 2008 05:01:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type;
-	bh=GRwdEnT4cZQfxBRo02iAjY0LXq1YbGYfkXBSk1lw/to=;
-	b=UaBnEE53HL5x+cDIb95qQrw+ajogCSwwQ1jJ2hscDDlZqjjXNNvX5vKGsevCzFNlZA
-	pyU+PXQ0DwTuZuhFo9b9cNHnQ0/RnU1aFceS91MFQkhJqzEwzXl+s4Ced1uZREIRemjn
-	0LjdHxYbQ//MoOhCorD0zVjFW5MxIXhLox0qs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type;
-	b=x4mDX0Dl3qt6p3mz/vTOsluz/Uw4bCO4/pMtqd7NqlGPyt2wVwiWhTDQXYghA5w0/s
-	2NoKLa0IHJJSihNq6tzMDTyIKEzhgBcVC8ZVMSwecTg7J0AWC+X1/20BB5PXO8u6F39O
-	ofpPg/LtJMZWhtACdCNYXEIk1wbVBJU1yBsVU=
-Received: by 10.210.67.20 with SMTP id p20mr11561180eba.174.1223553719427;
-	Thu, 09 Oct 2008 05:01:59 -0700 (PDT)
-Received: by 10.210.138.17 with HTTP; Thu, 9 Oct 2008 05:01:59 -0700 (PDT)
-Message-ID: <359c5480810090501k539d2479y7b36e8065ff0f775@mail.gmail.com>
-Date: Thu, 9 Oct 2008 14:01:59 +0200
-From: "Nicola Mfb" <nicola.mfb@gmail.com>
+	Thu, 09 Oct 2008 22:42:03 +0200
+Received: from gandalf.denix.org ([71.255.232.65])
+	by vms042.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
+	(built Apr
+	3 2006)) with ESMTPA id <0K8H005GENXSHP74@vms042.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	09 Oct 2008 15:37:05 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1F7B46B83B5; Thu,
+	09 Oct 2008 16:37:04 -0400 (EDT)
+Date: Thu, 09 Oct 2008 16:37:04 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <69E6C70090A0A14498CC98FAE5E06B6E3CF43D@hiob.intern.dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: A question about ccache
+Message-id: <20081009203704.GA2490@denix.org>
+MIME-version: 1.0
+References: <200810081757.57676.zecke@selfish.org>
+	<48ED467B.5080208@whitby.id.au>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF43D@hiob.intern.dresearch.de>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: git and branches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,22 +35,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Oct 2008 12:06:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 09 Oct 2008 20:42:07 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi!
-this morning I experienced a problem building python-native as an object
-file (compile.o) was in a wrong format for the linker.
-I deleted all my $HOME/.ccache and have it rebuild without problem. Is this
-a common issue?
-I have different build directory setupped for different machine/distro and
-some cron task that do dailly buildings, in this scenario sharing the common
-.ccache may results in problems or it differentiates about different
-compilers?
+On Thu, Oct 09, 2008 at 11:39:18AM +0200, Sledz, Steffen wrote:
+> As an OE beginner I'm a bit confused with the different branches. Is there an overview about all the branches available in the new git system. I made some searches in wiki.openembedded.net but could not found really helpful info.
+> 
+> 'git branch -r' lists these branches:
+> 
+>   origin/HEAD
+>   origin/master
+>   origin/org.openembedded.dev
+>   origin/org.openembedded.documentation
+>   origin/org.openembedded.dreambox
+>   origin/org.openembedded.entity
+>   origin/org.openembedded.stable
+>   origin/org.openmoko.april-update
+>   origin/org.openmoko.dev
+>   origin/org.openmoko.xora.qtopia
+>   origin/org.openmoko.zecke.april-update
+>   origin/org.openmoko.zecke.autotools-bustage
+>   origin/org.openmoko.zecke.random-breakage
+> 
+> <http://wiki.openembedded.net/index.php/DevelopmentBranches> lists these ones (without any description :( ):
+> 
+>   org.nslu2-linux.bitbake
+>   org.nslu2-linux.dev
+>   org.openembedded.dev
+>   org.openembedded.documentation
+>   org.openembedded.dreambox
+>   org.openembedded.oetest
+>   org.openembedded.oz354fam083
+>   org.openembedded.oz354x
+>   org.openembedded.packaged-staging
+>   org.openembedded.stable
+> 
+> 'master' ist used as the default when getting the data with 'git clone git://git.openembedded.net/org.openembedded.dev' like described on <http://wiki.openembedded.net/index.php/Git#OpenEmbedded_Git_repository>. But what branch is 'master'? And which branches should one use for which purposes?
 
-Regards
+Please don't hijack threads - replying with the new Subject usually does not 
+create a new thread.
 
-     Nicola
+As was discussed earlier, master was just another name for 
+org.openembedded.dev branch, which is checked out now by default.
+
+.dev is where all the latest development occurs, while .stable is the branch 
+supposedly good enough for production, i.e. for day to day use by end users.
+
+-- 
+Denys
+
 
