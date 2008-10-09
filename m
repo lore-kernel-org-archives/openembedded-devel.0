@@ -1,21 +1,31 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1KnqPi-0007SV-Lr
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Oct 2008 09:58:26 +0200
-Received: from [172.16.23.138] (firewall.tw.openmoko.org [124.219.5.210])
-	by drlauer-research.com (Postfix) with ESMTP id 4F1E0584392
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Oct 2008 10:06:06 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20081008233816.7410A189322@amethyst.openembedded.net>
-References: <20081008233816.7410A189322@amethyst.openembedded.net>
-Date: Thu, 09 Oct 2008 15:52:25 +0800
-Message-Id: <1223538745.4714.27.camel@ip6-localhost>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KnqXY-0007ca-Ed
+	for openembedded-devel@openembedded.org; Thu, 09 Oct 2008 10:06:36 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KnqT0-0004cY-76
+	for openembedded-devel@openembedded.org; Thu, 09 Oct 2008 08:01:50 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 09 Oct 2008 08:01:50 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 09 Oct 2008 08:01:50 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 09 Oct 2008 10:01:37 +0200
+Message-ID: <gckdp2$qo7$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.0-1mdv2009.0 
-Subject: Re: [oe-commits] : gettext.bbclass: make it simpler to understand
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
+Sender: news <news@ger.gmane.org>
+Subject: .dev broken after gettext changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,29 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Oct 2008 07:58:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 09 Oct 2008 08:06:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Am Donnerstag, den 09.10.2008, 01:38 +0200 schrieb OE GIT Trial:
-> Module: org.openembedded.dev.git
-> Branch: org.openembedded.dev
-> Commit: 80bdb16c9dbefb4d06fe1e1d714ba042c833b92f
-> URL:    http://gitweb.openembedded.net/?p=org.openembedded.dev.git&a=commit;h=80bdb16c9dbefb4d06fe1e1d714ba042c833b92f
-> 
-> Author:  <woglinde2@openembedded.org>
-> Date:   Wed Oct  8 22:06:39 2008 +0000
-> 
-> gettext.bbclass: make it simpler to understand
-> * set the deps for package which can use NLS stuff
-> * filter the deps out if NLS is not requested
+Hi,
 
-I have just reverted this commit as it lead to a dependency loop here
-rendering everything unbuildable.
+Somewhere last night OE started giving
 
-Can you please recheck?
+ERROR: Unbuildable tasks were found.
+These are usually caused by circular dependencies and any circular 
+dependency chains found will be printed below. Increase the debug level 
+to see a list of unbuildable tasks.
 
-:M:
+Thanks to the autobuild we can see that last good commit is:
+
+http://amethyst.openembedded.net/oe/viewmtn/viewmtn.py/revision/info/f2ebdb1826372581987a96a662d30d97b544c438
+
+and this one is bad:
+
+http://amethyst.openembedded.net/oe/viewmtn/viewmtn.py/revision/info/9f79c6b2ba1ff673c6a3fa4d02579b720046d1cf
+
+So inbetween those commits OE became unbuildable.
 
 
 
