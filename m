@@ -1,27 +1,33 @@
-Received: from [80.12.242.96] (helo=smtp27.orange.fr)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <c.romain@laposte.net>) id 1Kp9sp-0001sO-5G
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Oct 2008 00:57:55 +0200
-Received: from me-wanadoo.net (localhost [127.0.0.1])
-	by mwinf2722.orange.fr (SMTP Server) with ESMTP id 2EB351C00087
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Oct 2008 00:52:56 +0200 (CEST)
-Received: from [192.168.2.2] (AToulouse-157-1-125-72.w86-221.abo.wanadoo.fr
-	[86.221.84.72])
-	by mwinf2722.orange.fr (SMTP Server) with ESMTP id E53621C00086
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Oct 2008 00:52:55 +0200 (CEST)
-X-ME-UUID: 20081012225255938.E53621C00086@mwinf2722.orange.fr
-Message-ID: <48F281BB.3060908@laposte.net>
-Date: Mon, 13 Oct 2008 01:01:15 +0200
-From: cyril Romain <c.romain@laposte.net>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080726)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <200810111447.57212.zecke@selfish.org>
-In-Reply-To: <200810111447.57212.zecke@selfish.org>
-Subject: Re: Final call for updating the name mapping script
+	(envelope-from <rpurdie@rpsys.net>) id 1KpASs-0007np-FQ
+	for openembedded-devel@openembedded.org; Mon, 13 Oct 2008 01:35:10 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9CNUC8E019747
+	for <openembedded-devel@openembedded.org>;
+	Mon, 13 Oct 2008 00:30:12 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 19585-05 for <openembedded-devel@openembedded.org>;
+	Mon, 13 Oct 2008 00:30:06 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9CNU4en019740
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 13 Oct 2008 00:30:04 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200810130034.18105.zecke@selfish.org>
+References: <200809031554.52267.zecke@selfish.org>
+	<200810130034.18105.zecke@selfish.org>
+Date: Mon, 13 Oct 2008 00:30:06 +0100
+Message-Id: <1223854206.5230.6.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Hash based SCMs and OpenEmbedded/Bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,50 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Oct 2008 22:57:55 -0000
-Content-Type: multipart/mixed; boundary="------------050009010307000307040608"
-
---------------050009010307000307040608
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 12 Oct 2008 23:35:10 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hey,
 
-Holger Freyther wrote:
-> Patches welcome. Please send the output as diff -U 0... Otherwise this will be 
-> the list of mappings we use for the conversion.
->   
-Here is a patch with my correct email address.
+On Mon, 2008-10-13 at 00:34 +0200, Holger Freyther wrote:
+> On Wednesday 03 September 2008 15:54:52 Holger Freyther wrote:
+> > Hey guys,
+> 
+> okay, I merged these patches now.
 
-Hope git will draw new OE hackers,
+Hmm, that will teach me to take my eye off the mailing lists. So we do
+git checkouts now when parsing?
 
-Best regards,
-
-  Cyril
-From 48570489c16db23ca63d97842bd1b5524443c34a Mon Sep 17 00:00:00 2001
-From: Cyril Romain <cyril.romain@gmail.com>
-Date: Mon, 13 Oct 2008 00:05:20 +0200
-Subject: [PATCH] cyrilRomain
-
----
- email.py |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/email.py b/email.py
-index ab8a58b..4075a74 100644
---- a/email.py
-+++ b/email.py
-@@ -28,7 +28,7 @@ all_names = {
-     "Clement Hermann"    : (["clement.hermann@free.fr"], "clement.hermann@free.fr"),
-     "Cliff Brake"        : (["cbrake@openembedded.org"], "cbrake@bec-systems.com"),
-     "Craig Hughes"       : (["craig@gumstix.com"], "craig@gumstix.com"),
--    "Cyril Romain"       : (["c.romain@laposte.net", "CyrilRomain", "Cyril Romain", "cyril Romain <c.romain@laposte.net>", "Cyril Romain <c.romain@laposte.net>", "cyril.romain@gmail.com", "cyril.romain@laposte.net"], "cyril.romain@laposte.net"),
-+    "Cyril Romain"       : (["c.romain@laposte.net", "CyrilRomain", "Cyril Romain", "cyril Romain <c.romain@laposte.net>", "Cyril Romain <c.romain@laposte.net>", "cyril.romain@gmail.com"], "cyril.romain@gmail.com"),
-     "Dan Williams"       : (["Dan Williams <dan.j.williams@gmail.com>"], "dan.j.williams@gmail.com"),
-     "David Karlstrom"    : (["daka@nslu2-linux.org", "daka@thg.se"], "daka@thg.se"),
-     "Derek Young"        : (["dyoung@nslu2-linux.org"], "dyoung@nslu2-linux.org"),
--- 
-1.6.0.2
+Richard
 
 
---------------050009010307000307040608--
+
