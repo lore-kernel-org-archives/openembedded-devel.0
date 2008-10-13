@@ -1,34 +1,26 @@
-Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
+Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1KpAZc-0007yA-BL
+	(envelope-from <rod@whitby.id.au>) id 1KpE3t-00071t-HY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Oct 2008 01:42:08 +0200
-Received: by qw-out-1920.google.com with SMTP id 5so403528qwf.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Oct 2008 16:37:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type:references;
-	bh=hUjcrjJ0InLPvDLubu12gxU0ObHPVnezXWLseTVuQMk=;
-	b=lLHSASsaV5kQwK9RkjFJNyawv9GDEWcahMPlxgcLbiXWOpaB5VeHrDKhIETK6kDX53
-	1jP+ouWN21bvy6ktpKB0jlugk+SARQCeXkNQg4Fa6GsxXJLst75AfsIyjc0zzOrC31PT
-	uF3x3FENs0WJryjwQ0qNBNuhbPMeCfzOpEpjw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:references;
-	b=U/Ogp50bwBULa9uY93qY6Alr0Km3r45UW3u9DcScGC/ZtTJsFB5QYyHVEaWANVbPZI
-	EyOVqNHT/kMqHf4H8wwWBPxR9lS4tDHlbA6VVVWueMJl7riUb3oOtk0nHuxbdb8WtGo5
-	GDJigakjbpLySWLUtK+LefqAjZLLeXkGb7KRI=
-Received: by 10.214.60.11 with SMTP id i11mr4071645qaa.59.1223854630693;
-	Sun, 12 Oct 2008 16:37:10 -0700 (PDT)
-Received: by 10.214.12.10 with HTTP; Sun, 12 Oct 2008 16:37:10 -0700 (PDT)
-Message-ID: <c384c5ea0810121637q30dfeb17wbda7d82509d62205@mail.gmail.com>
-Date: Mon, 13 Oct 2008 01:37:10 +0200
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200810111447.57212.zecke@selfish.org>
+	Mon, 13 Oct 2008 05:25:37 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 920DF178E8B;
+	Sun, 12 Oct 2008 23:20:39 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Sun, 12 Oct 2008 23:20:39 -0400
+X-Sasl-enc: m2GqKKXXI2FjCizBEu31B9cnoD5ATNaSZuSi460JRGv1 1223868039
+Received: from [192.168.1.11] (secure.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 62323D522;
+	Sun, 12 Oct 2008 23:20:38 -0400 (EDT)
+Message-ID: <48F2BE7A.2050102@whitby.id.au>
+Date: Mon, 13 Oct 2008 13:50:26 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
 MIME-Version: 1.0
+To: Holger Freyther <zecke@openmoko.org>
 References: <200810111447.57212.zecke@selfish.org>
+In-Reply-To: <200810111447.57212.zecke@selfish.org>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Final call for updating the name mapping script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,39 +35,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Oct 2008 23:42:08 -0000
-X-Groupsio-MsgNum: 6174
-Content-Type: multipart/mixed; 
-	boundary="----=_Part_73939_10153130.1223854630678"
-
-------=_Part_73939_10153130.1223854630678
+X-List-Received-Date: Mon, 13 Oct 2008 03:25:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello Holger,
+Holger Freyther wrote:
+> However many of the OE and NSLu2 keynames have no proper mapping to any mail 
+> address. For OE I have mapped that keyname@unknown.openembedded.org and for 
+> nslu2 to keyname@nslu2-linux.org.
 
-merely changing my email address, which if I understand correctly is
-OK, as its MTN key/author to GIT real-name/email address.
+All the @nslu2-linux.org ones will work as real addresses.
 
-(the old email address is still valid in case this is not allowed).
+> There are also some author names without realname or mail address, and some 
+> real names without mail address, they got mapped to 
+> name.unknown@unknown.openembedded.org.
+> 
+> Patches welcome. Please send the output as diff -U 0... Otherwise this will be 
+> the list of mappings we use for the conversion.
+
+Do you want a patch with *all* the @unknown email addresses I know
+(without necessarily contacting those people to find out if they want
+that email address listed), or do you want each person to contact you
+with their own email address, or do you want me to send you the email
+addresses so that you can contact them?
+
+-- Rod
 
 
-Regards,
--- 
-Leon
-
-------=_Part_73939_10153130.1223854630678
-Content-Type: text/x-diff; name=likewise.patch
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_fm8bcwrv1
-Content-Disposition: attachment; filename=likewise.patch
-
-LS0tIG9yaWcvZW1haWwucHkJMjAwOC0xMC0xMyAwMTozMTowMy4wMDAwMDAwMDAgKzAyMDAKKysr
-IG1vZGlmaWVkL2VtYWlsLnB5CTIwMDgtMTAtMTMgMDE6MzM6MjUuMDAwMDAwMDAwICswMjAwCkBA
-IC03MCArNzAgQEAKLSAgICAiTGVvbiBXb2VzdGVuYmVyZyIgICA6IChbImxpa2V3aXNlQGdteC5u
-ZXQiLCAibGlrZXdpc2VAb3BlbmVtYmVkZGVkLm9yZyJdLCAibGlrZXdpc2VAZ214Lm5ldCIpLAor
-ICAgICJMZW9uIFdvZXN0ZW5iZXJnIiAgIDogKFsibGlrZXdpc2VAZ214Lm5ldCIsICJsaWtld2lz
-ZUBvcGVuZW1iZWRkZWQub3JnIl0sICJsZW9uLndvZXN0ZW5iZXJnQGdtYWlsLmNvbSIpLAo=
-
-------=_Part_73939_10153130.1223854630678--
