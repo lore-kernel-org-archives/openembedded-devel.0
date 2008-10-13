@@ -1,24 +1,34 @@
-Received: from [206.46.172.73] (helo=vms172073pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1KpQoe-0002CK-Eo
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Oct 2008 19:02:44 +0200
-Received: from gandalf.denix.org ([71.255.247.239]) by vms172073.mailsrvcs.net
-	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
-	with ESMTPA id <0K8O006UJSFVUOS0@vms172073.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	13 Oct 2008 11:57:31 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 128196B83A8; Mon,
-	13 Oct 2008 12:57:31 -0400 (EDT)
-Date: Mon, 13 Oct 2008 12:57:31 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <200810111447.57212.zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20081013165731.GA13656@denix.org>
-MIME-version: 1.0
-References: <200810111447.57212.zecke@selfish.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Final call for updating the name mapping script
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KpTJC-0004mL-Ru
+	for openembedded-devel@openembedded.org; Mon, 13 Oct 2008 21:42:26 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KpTEH-0004ft-8O
+	for openembedded-devel@openembedded.org; Mon, 13 Oct 2008 19:37:21 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 13 Oct 2008 19:37:21 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 13 Oct 2008 19:37:21 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 13 Oct 2008 21:37:13 +0200
+Message-ID: <gd0819$jp$1@ger.gmane.org>
+References: <200809031554.52267.zecke@selfish.org>	<200810130034.18105.zecke@selfish.org>	<1223854206.5230.6.camel@dax.rpnet.com>
+	<200810131852.34080.zecke@selfish.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20080922030535 Shredder/3.0b1pre
+In-Reply-To: <200810131852.34080.zecke@selfish.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Hash based SCMs and OpenEmbedded/Bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Oct 2008 17:02:44 -0000
-X-Groupsio-MsgNum: 6181
-Content-type: multipart/mixed; boundary=cWoXeonUoKmBZSoM
-Content-disposition: inline
+X-List-Received-Date: Mon, 13 Oct 2008 19:42:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---cWoXeonUoKmBZSoM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On 13-10-2008 18:52, Holger Freyther wrote:
+> On Monday 13 October 2008 01:30:06 Richard Purdie wrote:
+>> On Mon, 2008-10-13 at 00:34 +0200, Holger Freyther wrote:
+>>> On Wednesday 03 September 2008 15:54:52 Holger Freyther wrote:
+>>>> Hey guys,
+>>> okay, I merged these patches now.
+>> Hmm, that will teach me to take my eye off the mailing lists. So we do
+>> git checkouts now when parsing?
+>
+> No, nothing changes. If you want to use git-rev-list (e.g. I want that for the
+> openmoko distro) you put BB_GIT_CLONE_FOR_SRCREV=1 into your local.conf.
+>
+> I think this is a sane default, the next part will be implementing the idea
+> from werner.
 
-On Sat, Oct 11, 2008 at 02:47:56PM +0200, Holger Freyther wrote:
-> There are also some author names without realname or mail address, and some 
-> real names without mail address, they got mapped to 
-> name.unknown@unknown.openembedded.org.
-> 
-> Patches welcome. Please send the output as diff -U 0... Otherwise this will be 
-> the list of mappings we use for the conversion.
+But we can't actually use all this, since .dev can only depend on 
+released versions of bitbake, right?
 
-Thanks for taking care of this. I got into the category of lost realname, so 
-here is a patch to fix it. Thanks again.
+regards,
 
--- 
-Denys
+Koen
 
---cWoXeonUoKmBZSoM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename="denix-email.patch"
 
---- email.py-orig	2008-10-13 12:49:40.000000000 -0400
-+++ email.py	2008-10-13 12:52:12.000000000 -0400
-@@ -175 +175 @@
--    "denis"              : (["denis@denix.org"], "denis@denix.org"),
-+    "Denys Dmytriyenko"  : (["denix", "denis@denix.org"], "denis@denix.org"),
 
---cWoXeonUoKmBZSoM--
