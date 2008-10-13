@@ -1,28 +1,21 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KpKvS-0003MA-Hd
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KpMkM-0008P9-5Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Oct 2008 12:45:22 +0200
-Received: (qmail invoked by alias); 13 Oct 2008 10:40:20 -0000
-Received: from e178094106.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.94.106]
-	by mail.gmx.net (mp036) with SMTP; 13 Oct 2008 12:40:20 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/KZy8Xg2nKI3X54IpRWqJN8BSpzHxCol8xCFjFia
-	MCciOH1zn6af0I
-Message-ID: <48F325C6.9040206@gmx.net>
-Date: Mon, 13 Oct 2008 12:41:10 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Mon, 13 Oct 2008 14:42:02 +0200
+Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KpMfW-0005vS-Mq
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Oct 2008 14:37:02 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-References: <20081012031612.E518B189328@amethyst.openembedded.net>
-In-Reply-To: <20081012031612.E518B189328@amethyst.openembedded.net>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.63
-Cc: xjqian@openembedded.org
-Subject: Re: [oe-commits] : libxml2: bump to 2.7.2
+Date: Mon, 13 Oct 2008 14:37:07 +0200
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200810131437.09748.zecke@selfish.org>
+Subject: [school] Class 2, Package Versioning Policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,62 +29,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Oct 2008 10:45:22 -0000
-X-Groupsio-MsgNum: 6176
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig48C043454332B9F4AE990C65"
+X-List-Received-Date: Mon, 13 Oct 2008 12:42:02 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---------------enig48C043454332B9F4AE990C65
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Hey,
 
-Hi,
-first: I am completely open to updating to newer program and or library
-versions.
+after Koen's introduction to number theory (natural numbers and their order) 
+let me continue with a class on Package Versioning.
 
-However
+Let me start with examples
 
-OE GIT Trial schrieb:
+# git-grep "^PV" packages/ | grep "git\\$" | grep SRCREV
+packages/mesa/mesa-dri_git.bb:PV = "7.2+git${SRCREV}"
+packages/u-boot/u-boot-omap3_git.bb:PV = "2008.10-rc1+${PR}+git${SRCREV}"
+packages/xorg-driver/xf86-video-omapfb_git.bb:PV = "0.0.1+${PR}+git${SRCREV}"
 
->  packages/libxml/libxml2_2.6.27.bb                  |    3 ---
->  packages/libxml/libxml2_2.6.29.bb                  |    4 ----
+Let me go through the errors:
+	- As of policy and common standards we want to put a "r" in the revision. 
+This means "7.2+gitr${SRCREV}". The same applies to svn, hg, monotone and any 
+other scm system supporting a revision. If you checkout by date (SRCDATE) 
+remove the "r" or switch the recipe to use SRCREV (this does not work for 
+cvs).
 
-Running
+       - Okay, never ever put PR into the PV. This is an evil hack and we have 
+a known fix and it will land in the OpenEmbedded metadata. SRCPV will land in 
+the OE metadata and will solve these issues rendering this hack obsolete.
 
-	grep -r "libxml2" *
+thanks for listening, a bunch of fixes will come from OM.
 
-in conf/
-
-results in:
-
-distro/chinook-compat.conf:PREFERRED_VERSION_libxml2          =3D "2.6.27=
-"
-distro/include/preferred-om-2008-versions.inc:PREFERRED_VERSION_libxml2
-?=3D "2.6.29"
-distro/include/preferred-om-2008-versions.inc:PREFERRED_VERSION_libxml2-n=
-ative
-?=3D "2.6.29"
-
-I would like to be asked or informed before stuff is removed from the
-repository that is used by distros I maintain.
-
-Regards
-Robert
+	your janitor
 
 
---------------enig48C043454332B9F4AE990C65
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iEYEAREIAAYFAkjzJccACgkQG9cfwmwwEtpWywCgn+Y1heNMUOpvn51q2CNoykqG
-qRIAoIEXxZTfj0ut4NzAJRtGSoFE5Y/f
-=kzcm
------END PGP SIGNATURE-----
-
---------------enig48C043454332B9F4AE990C65--
