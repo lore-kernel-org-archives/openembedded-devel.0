@@ -1,26 +1,24 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [206.46.172.73] (helo=vms172073pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KpQjf-0001wF-2r
+	(envelope-from <denis@denix.org>) id 1KpQoe-0002CK-Eo
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Oct 2008 18:57:35 +0200
-Received: from [92.116.253.95] (helo=[10.129.253.95])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KpQeo-0002bT-DL
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Oct 2008 18:52:35 +0200
-From: Holger Freyther <zecke@selfish.org>
+	Mon, 13 Oct 2008 19:02:44 +0200
+Received: from gandalf.denix.org ([71.255.247.239]) by vms172073.mailsrvcs.net
+	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
+	with ESMTPA id <0K8O006UJSFVUOS0@vms172073.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	13 Oct 2008 11:57:31 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 128196B83A8; Mon,
+	13 Oct 2008 12:57:31 -0400 (EDT)
+Date: Mon, 13 Oct 2008 12:57:31 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <200810111447.57212.zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Oct 2008 18:52:33 +0200
-User-Agent: KMail/1.9.9
-References: <200809031554.52267.zecke@selfish.org>
-	<200810130034.18105.zecke@selfish.org>
-	<1223854206.5230.6.camel@dax.rpnet.com>
-In-Reply-To: <1223854206.5230.6.camel@dax.rpnet.com>
-MIME-Version: 1.0
-Message-Id: <200810131852.34080.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.116.253.95
-Subject: Re: Hash based SCMs and OpenEmbedded/Bitbake
+Message-id: <20081013165731.GA13656@denix.org>
+MIME-version: 1.0
+References: <200810111447.57212.zecke@selfish.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Final call for updating the name mapping script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Oct 2008 16:57:35 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 13 Oct 2008 17:02:44 -0000
+X-Groupsio-MsgNum: 6181
+Content-type: multipart/mixed; boundary=cWoXeonUoKmBZSoM
+Content-disposition: inline
+
+--cWoXeonUoKmBZSoM
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Monday 13 October 2008 01:30:06 Richard Purdie wrote:
-> On Mon, 2008-10-13 at 00:34 +0200, Holger Freyther wrote:
-> > On Wednesday 03 September 2008 15:54:52 Holger Freyther wrote:
-> > > Hey guys,
-> >
-> > okay, I merged these patches now.
->
-> Hmm, that will teach me to take my eye off the mailing lists. So we do
-> git checkouts now when parsing?
+On Sat, Oct 11, 2008 at 02:47:56PM +0200, Holger Freyther wrote:
+> There are also some author names without realname or mail address, and some 
+> real names without mail address, they got mapped to 
+> name.unknown@unknown.openembedded.org.
+> 
+> Patches welcome. Please send the output as diff -U 0... Otherwise this will be 
+> the list of mappings we use for the conversion.
 
-No, nothing changes. If you want to use git-rev-list (e.g. I want that for the 
-openmoko distro) you put BB_GIT_CLONE_FOR_SRCREV=1 into your local.conf.
+Thanks for taking care of this. I got into the category of lost realname, so 
+here is a patch to fix it. Thanks again.
 
-I think this is a sane default, the next part will be implementing the idea 
-from werner.
+-- 
+Denys
 
-z.
+--cWoXeonUoKmBZSoM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="denix-email.patch"
 
+--- email.py-orig	2008-10-13 12:49:40.000000000 -0400
++++ email.py	2008-10-13 12:52:12.000000000 -0400
+@@ -175 +175 @@
+-    "denis"              : (["denis@denix.org"], "denis@denix.org"),
++    "Denys Dmytriyenko"  : (["denix", "denis@denix.org"], "denis@denix.org"),
 
+--cWoXeonUoKmBZSoM--
