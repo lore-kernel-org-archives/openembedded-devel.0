@@ -1,27 +1,28 @@
-Received: from [66.111.4.28] (helo=out4.smtp.messagingengine.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1KpE3t-00071t-HY
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KpKvS-0003MA-Hd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Oct 2008 05:25:37 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 920DF178E8B;
-	Sun, 12 Oct 2008 23:20:39 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Sun, 12 Oct 2008 23:20:39 -0400
-X-Sasl-enc: m2GqKKXXI2FjCizBEu31B9cnoD5ATNaSZuSi460JRGv1 1223868039
-Received: from [192.168.1.11] (secure.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 62323D522;
-	Sun, 12 Oct 2008 23:20:38 -0400 (EDT)
-Message-ID: <48F2BE7A.2050102@whitby.id.au>
-Date: Mon, 13 Oct 2008 13:50:26 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
+	Mon, 13 Oct 2008 12:45:22 +0200
+Received: (qmail invoked by alias); 13 Oct 2008 10:40:20 -0000
+Received: from e178094106.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.94.106]
+	by mail.gmx.net (mp036) with SMTP; 13 Oct 2008 12:40:20 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/KZy8Xg2nKI3X54IpRWqJN8BSpzHxCol8xCFjFia
+	MCciOH1zn6af0I
+Message-ID: <48F325C6.9040206@gmx.net>
+Date: Mon, 13 Oct 2008 12:41:10 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-To: Holger Freyther <zecke@openmoko.org>
-References: <200810111447.57212.zecke@selfish.org>
-In-Reply-To: <200810111447.57212.zecke@selfish.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Final call for updating the name mapping script
+To: openembedded-devel@lists.openembedded.org
+References: <20081012031612.E518B189328@amethyst.openembedded.net>
+In-Reply-To: <20081012031612.E518B189328@amethyst.openembedded.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.63
+Cc: xjqian@openembedded.org
+Subject: Re: [oe-commits] : libxml2: bump to 2.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,30 +36,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Oct 2008 03:25:37 -0000
+X-List-Received-Date: Mon, 13 Oct 2008 10:45:22 -0000
+X-Groupsio-MsgNum: 6176
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig48C043454332B9F4AE990C65"
+
+--------------enig48C043454332B9F4AE990C65
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Holger Freyther wrote:
-> However many of the OE and NSLu2 keynames have no proper mapping to any mail 
-> address. For OE I have mapped that keyname@unknown.openembedded.org and for 
-> nslu2 to keyname@nslu2-linux.org.
+Hi,
+first: I am completely open to updating to newer program and or library
+versions.
 
-All the @nslu2-linux.org ones will work as real addresses.
+However
 
-> There are also some author names without realname or mail address, and some 
-> real names without mail address, they got mapped to 
-> name.unknown@unknown.openembedded.org.
-> 
-> Patches welcome. Please send the output as diff -U 0... Otherwise this will be 
-> the list of mappings we use for the conversion.
+OE GIT Trial schrieb:
 
-Do you want a patch with *all* the @unknown email addresses I know
-(without necessarily contacting those people to find out if they want
-that email address listed), or do you want each person to contact you
-with their own email address, or do you want me to send you the email
-addresses so that you can contact them?
+>  packages/libxml/libxml2_2.6.27.bb                  |    3 ---
+>  packages/libxml/libxml2_2.6.29.bb                  |    4 ----
 
--- Rod
+Running
+
+	grep -r "libxml2" *
+
+in conf/
+
+results in:
+
+distro/chinook-compat.conf:PREFERRED_VERSION_libxml2          =3D "2.6.27=
+"
+distro/include/preferred-om-2008-versions.inc:PREFERRED_VERSION_libxml2
+?=3D "2.6.29"
+distro/include/preferred-om-2008-versions.inc:PREFERRED_VERSION_libxml2-n=
+ative
+?=3D "2.6.29"
+
+I would like to be asked or informed before stuff is removed from the
+repository that is used by distros I maintain.
+
+Regards
+Robert
 
 
+--------------enig48C043454332B9F4AE990C65
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkjzJccACgkQG9cfwmwwEtpWywCgn+Y1heNMUOpvn51q2CNoykqG
+qRIAoIEXxZTfj0ut4NzAJRtGSoFE5Y/f
+=kzcm
+-----END PGP SIGNATURE-----
+
+--------------enig48C043454332B9F4AE990C65--
