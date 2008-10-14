@@ -1,23 +1,34 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KpkiI-0006II-7w
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Oct 2008 16:17:30 +0200
-Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KpkdO-0003OY-As
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Oct 2008 16:12:26 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Oct 2008 16:12:35 +0200
-User-Agent: KMail/1.9.9
-References: <200810080751.15817.zecke@selfish.org>
-In-Reply-To: <200810080751.15817.zecke@selfish.org>
-MIME-Version: 1.0
-Message-Id: <200810141612.36030.zecke@selfish.org>
-Subject: Re: ETA on git conversion
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Kpksv-0008KG-U5
+	for openembedded-devel@openembedded.org; Tue, 14 Oct 2008 16:28:31 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Kpko1-0005Na-93
+	for openembedded-devel@openembedded.org; Tue, 14 Oct 2008 14:23:25 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 14 Oct 2008 14:23:25 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 14 Oct 2008 14:23:25 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 14 Oct 2008 16:23:15 +0200
+Message-ID: <gd2a0k$7uu$1@ger.gmane.org>
+References: <1223989999.29816.56.camel@polaris>
+	<1223990240.29816.58.camel@polaris>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
+In-Reply-To: <1223990240.29816.58.camel@polaris>
+Sender: news <news@ger.gmane.org>
+Subject: Re: please check BK&MTN to GIT conversion dry-run repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,30 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Oct 2008 14:17:30 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 14 Oct 2008 14:28:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wednesday 08 October 2008 07:51:15 Holger Freyther wrote:
-> Hey,
->
-> we would like to switch to git by next wednesday. Jan L=FCbbe went through
-> the hassle to fix two issues in my mtn2git.py and we are happy with the
-> metadata and can even unite it with the data exported from bitkeeper.
->
-> The plans would be:
-> 	- Send your public ssh keys if you have not done so
->
-> Tuesday:
-> 	- Set monotone readonly 16h german time
-> 	- merge the multiple heads (if they exist)
-> 	- Try to add the revs from now to tuesday to git
+On 14-10-2008 15:17, Jan Luebbe wrote:
+> And here it is: http://git.sicherheitsschwankung.de/?p=jan/oetest.git
 
+Looks ok to me: 
+http://git.sicherheitsschwankung.de/?p=jan/oetest.git;a=history;f=conf/local.conf.sample;h=36407b015deecd76b60a9abf7246ac82fb266c4c;hb=HEAD
 
-Okay monotone.oe.org is read-only now.
+regards,
 
-z.
+Koen
+
 
 
