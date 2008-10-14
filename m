@@ -1,24 +1,37 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [209.85.217.24] (helo=mail-gx0-f24.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kprib-00007m-9a
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KpsT5-0000qq-0e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Oct 2008 23:46:17 +0200
-Received: from [92.117.17.189] (helo=[10.161.17.189])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kprdd-0003kg-Ly
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Oct 2008 23:41:11 +0200
-From: Holger Freyther <zecke@selfish.org>
+	Wed, 15 Oct 2008 00:34:19 +0200
+Received: by gxk5 with SMTP id 5so610851gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Oct 2008 15:29:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=4HdnnvD1cyL3WsZm4+lir5nno+qAZ0oeK0qDptQ9EmA=;
+	b=Z7tmyNe+e1MJNjJsDl0Ou1yvmBAZejrfgHyWFcQihjcTL2b90i8zNXTXdC9wzyInX6
+	fH5Th94BGL4jO0PgXj72c9owkV6EM9UlTcTd6Yn/8N2NTt+h2fgF1iDNcIpYGOgmz1xk
+	FsPo7GtXQ8vM4adtolpK0tZwjic/ZK+KxTkD4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=cDydJd5FvijS9P4kxwVSEBixJjNjgTndCirw7szUd6KtXICehrCbe/fRxcsL0oKd+I
+	k9jNGWPum7TnbFLJefEG+L0CNl0wlZBpY7aL7Y5dcaD1WtAudYLj3tE6vN5jo0SGL/aE
+	KkDwqEB8aQqPGRxUvH0y+jh+6+7+zW5Cmncb8=
+Received: by 10.214.183.7 with SMTP id g7mr249247qaf.10.1224023350557;
+	Tue, 14 Oct 2008 15:29:10 -0700 (PDT)
+Received: by 10.214.12.10 with HTTP; Tue, 14 Oct 2008 15:29:10 -0700 (PDT)
+Message-ID: <c384c5ea0810141529o2665a215xe1b58aae2aef122f@mail.gmail.com>
+Date: Wed, 15 Oct 2008 00:29:10 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Oct 2008 23:41:06 +0200
-User-Agent: KMail/1.9.9
-References: <200810080751.15817.zecke@selfish.org>
-In-Reply-To: <200810080751.15817.zecke@selfish.org>
+In-Reply-To: <200810131437.09748.zecke@selfish.org>
 MIME-Version: 1.0
-Message-Id: <200810142341.06945.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.117.17.189
-Subject: Re: ETA on git conversion
+References: <200810131437.09748.zecke@selfish.org>
+Subject: Re: [school] Class 2, Package Versioning Policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,89 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Oct 2008 21:46:17 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 14 Oct 2008 22:34:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wednesday 08 October 2008 07:51:15 Holger Freyther wrote:
+Hello,
 
-> Wednesday:
-> 	- Be back up with git and use that as primary system.
-> 	- Disable monotone completely
+On Mon, Oct 13, 2008 at 2:37 PM, Holger Freyther <zecke@selfish.org> wrote:
+> after Koen's introduction to number theory (natural numbers and their order)
+> let me continue with a class on Package Versioning.
+>
+I have skipped class*, sitting between a set of assimilated trolls who
+have entered from both .no/.fi to a country that goes by .de.
 
-1.) git user account created
-2.) gitosis setup
-3.) keys added and permissions added (see the end of the mail)
-4.) populated the repository with content
-5.) git-daemon is serving data
-6.) push/pull with git ssh works
-7.) notifications should work too
-8.) the GitPhraseBook got updated with the final git location
-9.) gitweb is nice and even tells you which URL to use
-10.) mail almost sent
+Could my co-students in the Documentation Team project make notes that
+I can bluntly copy for the price of a beer**?
 
-I think the conversion is complete and we can disable the mtn servers now or 
-leave them readonly for a while.
+Thanks,
+-- 
+Leon 'likewise wasn't there' Woestenberg
 
-
-Notes to people with commit access:
-git clone git@git.openembedded.net:openembedded to get the tree
-
-Notes to people:
-	DO NOT MERGE the old trial history and this history. We have no commit hook 
-yet to prevent this and solely depend on common sense...
-
-
-Notes to people using the trial git:
-  git-remote add new-origin git://git.openembedded.net/openembedded
-  git-fetch new-origin
-  git-rebase --onto new-origin/org.openembedded.dev 
-origin/org.openembedded.dev org.openembedded.dev (if i got this right from 
-the manpage)
-
-
-
-Thins for the near future:
-Remove the nslu2 branches once nslu2 folks have migrated to git as well and 
-created repositories for them.
-
-Consider renaming the branches, I kind of like the names though
-
-
-
-
-People with push access:
-	cbrake.pub
-	crofton.pub
-	daniel_willman.pub
-	dirk_opfer.pub
-	felix_domke.pub
-	florian_boor.txt
-	henning_heinold.pub
-	hrw.pub
-	jan_luebbe.pub
-	john_lee.pub
-	khem_raj1.pub
-	khem_raj2.pub
-	koen.pub
-	leon_woestenberg.pub
-	mickeyl.pub
-	mustafa_yuecel.pub
-	mwester.pub
-	otavio_salvador.pub
-	paul_eggleton.pub
-	phillip_zabel.pub
-	robert_schuster.pub
-	rodrigo_vivi.pub
-	rolf.pub
-	rpurdie.pub
-	rwhitby.pub
-	shane_volpe.pub
-	stanislav_brabec.pub
-	thomas_kunze.pub
-	xora.pub
-	zecke.pub
+*Don't let Professor Zecke hear please. He has harsh punishments.
+**to be paid by me at some next OE event.
 
 
