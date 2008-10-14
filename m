@@ -1,27 +1,23 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jluebbe@lasnet.de>) id 1Kpjs4-0004Wc-7e
+	(envelope-from <zecke@selfish.org>) id 1KpkiI-0006II-7w
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Oct 2008 15:23:32 +0200
-Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=[192.168.0.166])
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Kpjn2-000716-E2 by authid <jluebbe@lasnet.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2008 15:18:27 +0200
-From: Jan Luebbe <jluebbe@lasnet.de>
+	Tue, 14 Oct 2008 16:17:30 +0200
+Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KpkdO-0003OY-As
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Oct 2008 16:12:26 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1223989999.29816.56.camel@polaris>
-References: <1223989999.29816.56.camel@polaris>
-Date: Tue, 14 Oct 2008 15:17:20 +0200
-Message-Id: <1223990240.29816.58.camel@polaris>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Re: please check BK&MTN to GIT conversion dry-run repository
+Date: Tue, 14 Oct 2008 16:12:35 +0200
+User-Agent: KMail/1.9.9
+References: <200810080751.15817.zecke@selfish.org>
+In-Reply-To: <200810080751.15817.zecke@selfish.org>
+MIME-Version: 1.0
+Message-Id: <200810141612.36030.zecke@selfish.org>
+Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,11 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Oct 2008 13:23:32 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Oct 2008 14:17:30 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-And here it is: http://git.sicherheitsschwankung.de/?p=jan/oetest.git
+On Wednesday 08 October 2008 07:51:15 Holger Freyther wrote:
+> Hey,
+>
+> we would like to switch to git by next wednesday. Jan L=FCbbe went through
+> the hassle to fix two issues in my mtn2git.py and we are happy with the
+> metadata and can even unite it with the data exported from bitkeeper.
+>
+> The plans would be:
+> 	- Send your public ssh keys if you have not done so
+>
+> Tuesday:
+> 	- Set monotone readonly 16h german time
+> 	- merge the multiple heads (if they exist)
+> 	- Try to add the revs from now to tuesday to git
 
+
+Okay monotone.oe.org is read-only now.
+
+z.
 
 
