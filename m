@@ -1,24 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1KqBJs-0006CM-30
+	(envelope-from <zecke@selfish.org>) id 1KqCWR-0005Kf-Dh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 20:42:04 +0200
-Received: from 88-111-190-175.dynamic.dsl.as9105.com ([88.111.190.175]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KqBEq-0003sl-KX
+	Wed, 15 Oct 2008 21:59:07 +0200
+Received: from [92.116.127.219] (helo=[10.129.127.219])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KqCRR-0004Gs-81
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 19:36:53 +0100
-From: Phil Blundell <pb@reciva.com>
+	Wed, 15 Oct 2008 21:53:58 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200810152018.41691.zecke@selfish.org>
+Date: Wed, 15 Oct 2008 21:53:50 +0200
+User-Agent: KMail/1.9.9
 References: <200810151022.38477.zecke@selfish.org>
-	<1224060881.30790.15.camel@mill.internal.reciva.com>
-	<200810152018.41691.zecke@selfish.org>
-Date: Wed, 15 Oct 2008 19:36:47 +0100
-Message-Id: <1224095807.4235.74.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+	<200810152016.25038.zecke@selfish.org> <gd5cg8$osk$1@ger.gmane.org>
+In-Reply-To: <gd5cg8$osk$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200810152153.52020.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.127.219
 Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,30 +33,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 18:42:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 15 Oct 2008 19:59:07 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2008-10-15 at 20:18 +0200, Holger Freyther wrote:
-> Modern as in glibc 2.5? I think we could strip the .hash away. 
+On Wednesday 15 October 2008 20:24:07 Koen Kooi wrote:
 
-Right.  This was the glibc change that introduced gnu hash support:
+> I'm undecided about putting the linker stuff in angstrom.inc vs.
+> angstroom-<libc>.inc. Go for what you think is best :)
 
-2006-07-10  Ulrich Drepper  <drepper@redhat.com>
+Google couldn't tell me if uclibc supports GNU style hashes, so I only change 
+eglibc and glibc... happy rebuilding and I'm sorry when I broke things.
 
-        * elf/dl-lookup.c (dl_new_hash): New functions.
-        (_dl_lookup_symbol_x): Rename hash to old_hash and don't compute
-        value here.  Compute new-style hash value.  Pass new hash value
-        and reference to variable with the old value to do_lookup_x.
-        (_dl_setup_hash): If DT_GNU_HASH is defined, use it and not
-        old-style hash table.
+I decided to land now as PRs are changing all the time and keeping up with 
+things is pretty hard...
 
-I think it should even be fairly straightforward to backport that to
-older glibcs if anybody wanted to do so.  As far as I know there is no
-real reason for distros to require 2.4 or earlier though.
-
-p.
-
-
+z.
 
 
