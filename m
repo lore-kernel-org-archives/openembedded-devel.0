@@ -1,22 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1KqB14-0004wB-Ak
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 20:22:38 +0200
-Received: (qmail 18550 invoked by uid 813007); 15 Oct 2008 18:17:28 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 15 Oct 2008 18:17:28 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <zecke@selfish.org>) id 1KqB2G-00050l-0N
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 20:23:52 +0200
+Received: from [92.116.122.37] (helo=[10.129.122.37])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KqAxC-0002b4-Ru
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 20:18:43 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Oct 2008 20:17:33 +0200
-User-Agent: KMail/1.10.1 (Linux/2.6.27; KDE/4.1.2; x86_64; ; )
-References: <200810010447.44667.zecke@selfish.org>
-	<200810151934.46076.zecke@selfish.org> <gd5aj9$h8u$1@ger.gmane.org>
-In-Reply-To: <gd5aj9$h8u$1@ger.gmane.org>
+Date: Wed, 15 Oct 2008 20:18:41 +0200
+User-Agent: KMail/1.9.9
+References: <200810151022.38477.zecke@selfish.org>
+	<1224060881.30790.15.camel@mill.internal.reciva.com>
+In-Reply-To: <1224060881.30790.15.camel@mill.internal.reciva.com>
 MIME-Version: 1.0
-Message-Id: <200810152017.34100.openembedded@haerwu.biz>
-Subject: Re: RFC: Making it mandantory to have a checksums.ini entry
+Message-Id: <200810152018.41691.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.122.37
+Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,48 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 18:22:38 -0000
+X-List-Received-Date: Wed, 15 Oct 2008 18:23:52 -0000
 Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Wednesday 15 of October 2008 19:51:36 Koen Kooi napisa=C5=82(a):
-
-> Step 1)
-> 	go to TMPDIR and locate the checksums.ini there
+On Wednesday 15 October 2008 10:54:41 Phil Blundell wrote:
+> On Wed, 2008-10-15 at 10:22 +0200, Holger Freyther wrote:
+> > I would start linking everything with -Wl,--hash-style=both as this is
+> > said to speed up the loading of shared libraries by about 50% (google is
+> > your friend). This is an option for binutils and was introduced with
+> > binutils 2.17. Now there are two ways to achieve this:
 >
-> Step 2)
+> If you are using a modern GNU runtime then I think it should be safe to
+> just select --hash-style=gnu.  This will give you the speed improvement
+> without the space penalty of two hashes.
 
-This step can be ignored.
-
-> Step 3) combine the checksums.ini from OE and yours:
-
-$ cat TMPDIR/checksums.ini >>=20
-/OE/org.openembedded.dev/conf/checksums.ini
-
-> Step 4)
-> 	sort the result and apply it to OE
-
-$ cd /OE/org.openembedded.dev/conf/
-$ python ../contrib/source-checker/oe-checksums-sorter.py \
-  checksums.ini >tmp
-$ mv tmp checksums.ini
-
-> Step 5)
-
-inspect the results:
-
-$ git diff checksums.ini
-
-> The diff should only contain additions (removals and replacements are
-> a sign of corruption somewhere).
-
-Thats how I handle that stuff.
-
-=2D-=20
-JID: hrw@jabber.org
+Modern as in glibc 2.5? I think we could strip the .hash away. I'm waiting for 
+my build to finish to get some numbers about the actual size difference. But 
+I guess on (e)glibc 2.5 and above gnu would be good enough.
 
 
+z.
 
 
