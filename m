@@ -1,32 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Kq2BV-0007Ii-3P
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 10:56:49 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Kq26X-0005TV-3s
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 08:51:41 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 08:51:41 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 08:51:41 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 15 Oct 2008 10:51:33 +0200
-Message-ID: <gd4aul$sb5$1@ger.gmane.org>
-References: <200810151022.38477.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
+	(envelope-from <pb@reciva.com>) id 1Kq2EZ-0007VK-Bs
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 11:00:00 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Kq29U-0000ss-63
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 09:54:44 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87])
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1Kq29S-0008Q1-2C
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 09:54:42 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <200810151022.38477.zecke@selfish.org>
-Sender: news <news@ger.gmane.org>
+References: <200810151022.38477.zecke@selfish.org>
+Date: Wed, 15 Oct 2008 09:54:41 +0100
+Message-Id: <1224060881.30790.15.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,62 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 08:56:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 15 Oct 2008 09:00:00 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 15-10-2008 10:22, Holger Freyther wrote:
-> Hey guys,
->
-> I would start linking everything with -Wl,--hash-style=both as this is said to
-> speed up the loading of shared libraries by about 50%
-
-Also check the as-needed stuff from Poky:
-
-ASNEEDED = "-Wl,--as-needed"
-ASNEEDED_pn-console-tools = ""
-ASNEEDED_pn-distcc = ""
-ASNEEDED_pn-openobex = ""
-ASNEEDED_pn-icu = ""
-ASNEEDED_pn-xserver-kdrive-xomap = ""
-ASNEEDED_pn-minimo = ""
-ASNEEDED_pn-pciutils = ""
-ASNEEDED_pn-puzzles = ""
-ASNEEDED_pn-dialer = ""
-
-TARGET_LDFLAGS += "${ASNEEDED}"
-
-That should also reduce library load time *and* eliminate spurious deps.
-
-> (google is your
-> friend). This is an option for binutils and was introduced with binutils
+On Wed, 2008-10-15 at 10:22 +0200, Holger Freyther wrote:
+> I would start linking everything with -Wl,--hash-style=both as this is said to 
+> speed up the loading of shared libraries by about 50% (google is your 
+> friend). This is an option for binutils and was introduced with binutils 
 > 2.17. Now there are two ways to achieve this:
->
-> Change TARGET_LDFLAGS in e.g. the distro config (as this knows if binutils has
-> this option available) or to change the "specs" of gcc to enable this by
-> default. There is a patch from debian for gcc4.3 but it is leaving
+
+If you are using a modern GNU runtime then I think it should be safe to
+just select --hash-style=gnu.  This will give you the speed improvement
+without the space penalty of two hashes.
+
+> Change TARGET_LDFLAGS in e.g. the distro config (as this knows if binutils has 
+> this option available) or to change the "specs" of gcc to enable this by 
+> default. There is a patch from debian for gcc4.3 but it is leaving 
 > arm/armeabi out. What do you guys prefer?
 
-It seems that the TARGET_LDFLAGS in distro would be the best option forward.
+I guess you might as well put it in TARGET_LDFLAGS.  That's the less
+intrusive change and there are already plenty of other flags there.
 
-> I'm pretty sure that we will want to use the GNU hash style at Openmoko and
-> this is creating an interesting problem in regard to a full system upgrade
-> (which is supposed to work). Again there are two ways. Use force and bump PE
-> on each package but we should avoid this.
-
-PE is only there to fix versioning screwups (be it upstream or OE)
-
-> I propose to rename PR to FILE_PR
-> and change PR  to "${FILE_PR}${DISTRO_PR}" so everytime a distro is changing
-> something that effects every package we can bump (e.g. Setting DISTRO_PR
+> Again there are two ways. Use force and bump PE 
+> on each package but we should avoid this. I propose to rename PR to FILE_PR 
+> and change PR  to "${FILE_PR}${DISTRO_PR}" so everytime a distro is changing 
+> something that effects every package we can bump (e.g. Setting DISTRO_PR 
 > to .1 for Openmoko).
 
-That sounds like a good idea, it would make changing compiler versions a 
-lot safer.
+I think this is an excellent plan.  As you say, PE changes are not
+something to be done frivolously.
 
-regards,
+p.
 
-Koen
 
 
 
