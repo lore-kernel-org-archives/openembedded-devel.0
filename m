@@ -1,27 +1,23 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1Kq2EZ-0007VK-Bs
+	(envelope-from <zecke@selfish.org>) id 1Kq2Nz-0007sa-Lc
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 11:00:00 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Kq29U-0000ss-63
+	Wed, 15 Oct 2008 11:09:43 +0200
+Received: from [92.116.7.71] (helo=[10.129.7.71])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Kq2J1-0007hw-OA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 09:54:44 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87])
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1Kq29S-0008Q1-2C
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 09:54:42 +0100
-From: Phil Blundell <pb@reciva.com>
+	Wed, 15 Oct 2008 11:04:36 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200810151022.38477.zecke@selfish.org>
+Date: Wed, 15 Oct 2008 11:04:26 +0200
+User-Agent: KMail/1.9.9
 References: <200810151022.38477.zecke@selfish.org>
-Date: Wed, 15 Oct 2008 09:54:41 +0100
-Message-Id: <1224060881.30790.15.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+In-Reply-To: <200810151022.38477.zecke@selfish.org>
+MIME-Version: 1.0
+Message-Id: <200810151104.29672.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.7.71
 Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,39 +32,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 09:00:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 15 Oct 2008 09:09:43 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2008-10-15 at 10:22 +0200, Holger Freyther wrote:
-> I would start linking everything with -Wl,--hash-style=both as this is said to 
-> speed up the loading of shared libraries by about 50% (google is your 
-> friend). This is an option for binutils and was introduced with binutils 
-> 2.17. Now there are two ways to achieve this:
+On Wednesday 15 October 2008 10:22:36 Holger Freyther wrote:
 
-If you are using a modern GNU runtime then I think it should be safe to
-just select --hash-style=gnu.  This will give you the speed improvement
-without the space penalty of two hashes.
-
-> Change TARGET_LDFLAGS in e.g. the distro config (as this knows if binutils has 
-> this option available) or to change the "specs" of gcc to enable this by 
-> default. There is a patch from debian for gcc4.3 but it is leaving 
-> arm/armeabi out. What do you guys prefer?
-
-I guess you might as well put it in TARGET_LDFLAGS.  That's the less
-intrusive change and there are already plenty of other flags there.
-
-> Again there are two ways. Use force and bump PE 
-> on each package but we should avoid this. I propose to rename PR to FILE_PR 
-> and change PR  to "${FILE_PR}${DISTRO_PR}" so everytime a distro is changing 
-> something that effects every package we can bump (e.g. Setting DISTRO_PR 
-> to .1 for Openmoko).
-
-I think this is an excellent plan.  As you say, PE changes are not
-something to be done frivolously.
-
-p.
-
-
+Okay, I have pushed holger/hash-style and would like to test and then merge 
+this branch. Comments or better ideas welcome
+	z.
 
 
