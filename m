@@ -1,38 +1,28 @@
-Received: from [209.85.198.240] (helo=rv-out-0708.google.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Kq5j3-0005aN-9f
+	(envelope-from <jluebbe@lasnet.de>) id 1Kq6iZ-00047P-BD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 14:43:41 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so3114560rvb.12
+	Wed, 15 Oct 2008 15:47:15 +0200
+Received: from a061.apm.etc.tu-bs.de ([134.169.172.61])
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Kq6dV-00083i-6g by authid <jluebbe@lasnet.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Oct 2008 05:38:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=lEFUq6Zd0sLg0LbVMTSHqgoTj3G20vUfqlv6e932o3o=;
-	b=N11D9+F+b+/i+ZeJ3pjYvR7eOPUcJrEqP8WO5yWCpAkd+euBSwJrh5UBt/V7vLKml6
-	m+hFzWJZ7uAITwNrtSXmRMB0we4cNPX53oB4YCmE/iBY5W4rl/suavZGWJM4HDGmqyLa
-	ui7AuY3b7LMAuJGPY/uJG50aKRKbTrmxJ9zuo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=iArx6aZpxpCUFtxF1IamRU8ofmF3bo6h1rs5AnjvwmWobE7K8hl9db4N+ctb7qKkV2
-	XJwHvI8Ov1AnM8vMT15b7wXL5hDxYy7SD/ljSh2ZiY+CHMk9M/3XZD0To4jeOQdyJMcv
-	0KJVL70J61ttB/hosCyNcK4Nyy1+LeyrG/3Es=
-Received: by 10.140.203.9 with SMTP id a9mr558533rvg.203.1224074312099;
-	Wed, 15 Oct 2008 05:38:32 -0700 (PDT)
-Received: by 10.141.129.13 with HTTP; Wed, 15 Oct 2008 05:38:32 -0700 (PDT)
-Message-ID: <f96d234e0810150538r5d922c4bp7acbeffcd74d8f7@mail.gmail.com>
-Date: Wed, 15 Oct 2008 08:38:32 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Wed, 15 Oct 2008 15:42:07 +0200
+From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jluebbe@lasnet.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <359c5480810150511y27819388ufd52ee31b900550e@mail.gmail.com>
-MIME-Version: 1.0
-References: <loom.20081015T114959-488@post.gmane.org>
-	<359c5480810150511y27819388ufd52ee31b900550e@mail.gmail.com>
-Subject: Re: GIT server down?
+In-Reply-To: <1224062879.5189.49.camel@ted>
+References: <1223989999.29816.56.camel@polaris>
+	<1223990240.29816.58.camel@polaris>  <1224062879.5189.49.camel@ted>
+Date: Wed, 15 Oct 2008 15:42:00 +0200
+Message-Id: <1224078120.3653.40.camel@localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: please check BK&MTN to GIT conversion dry-run repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 12:43:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 15 Oct 2008 13:47:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 15, 2008 at 8:11 AM, Nicola Mfb <nicola.mfb@gmail.com> wrote:
-> 2008/10/15 Erland Lewin <erland@lewin.nu>
->
->> I'm having trouble using the git.openembedded.org server:
->>
->> erl@sol:~/src/oe$ git clone git://
->> git.openembedded.net/org.openembedded.dev
->> Initialized empty Git repository in
->> /home/erl/src/oe/org.openembedded.dev/.git/
->> fatal: The remote end hung up unexpectedly
->>
->
->
-> I had the same problem, following the proposed instructions failed for me so
-> I deleted the tree and recloned with:
-> git clone git://git.openembedded.net/openembedded org.openembedded.dev
->
-> But I'm absolutely not sure if this is correct!
-> Someone may illume?
+On Wed, 2008-10-15 at 10:27 +0100, Richard Purdie wrote:
+> The original plan was to add the BKCVS later as a git tree graft rather
+> than hardcoding it into the history now in a broken form. Is it too late
+> to do this now?
 
-Yes, git://git.openembedded.net/openembedded is the correct repository.
+It is not possible to change history in git without changing the commit
+hashes. (so a "graft" is impossible without rebasing)
 
-Cliff
+> The BKCVS conversion still has the problems I wanted to get resolved
+> before we did this for example:
+>=20
+> http://git.sicherheitsschwankung.de/?p=3Djan/oetest.git;a=3Dcommit;h=3D66=
+944efa040bdf36062522c7c33413fc1e039d83
+>=20
+> Where two commits have been rolled into one.
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+I tried to figure out how to solve this, but ran out of time. Adding the
+(somewhat mangled) bk history now doesn't have any disadvantages and
+still allows to find ot where the files come from. If someone figures
+out how to do a better conversion, we can still rebase, it that is
+desired.
+
+--=20
+Jan L=C3=BCbbe <jluebbe@lasnet.de>            http://sicherheitsschwankung.=
+de
+ gpg-key      1024D/D8480F2E 2002-03-20
+ fingerprint  1B25 F91F 9E7B 5D4F 1282  02D6 8A83 8BE4 D848 0F2E
+
 
 
