@@ -1,25 +1,34 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KqB2G-00050l-0N
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 20:23:52 +0200
-Received: from [92.116.122.37] (helo=[10.129.122.37])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KqAxC-0002b4-Ru
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 20:18:43 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Oct 2008 20:18:41 +0200
-User-Agent: KMail/1.9.9
-References: <200810151022.38477.zecke@selfish.org>
-	<1224060881.30790.15.camel@mill.internal.reciva.com>
-In-Reply-To: <1224060881.30790.15.camel@mill.internal.reciva.com>
-MIME-Version: 1.0
-Message-Id: <200810152018.41691.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.116.122.37
-Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KqB34-00054v-6v
+	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 20:24:42 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KqAy0-0004CX-GV
+	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 18:19:28 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 15 Oct 2008 18:19:28 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 15 Oct 2008 18:19:28 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 15 Oct 2008 20:19:21 +0200
+Message-ID: <gd5c79$nlk$1@ger.gmane.org>
+References: <gd58r2$940$1@ger.gmane.org> <gd5a32$e5v$1@ger.gmane.org>
+	<200810152013.52882.openembedded@haerwu.biz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
+In-Reply-To: <200810152013.52882.openembedded@haerwu.biz>
+Sender: news <news@ger.gmane.org>
+Subject: Re: OABI compat in EABI kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 18:23:52 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 15 Oct 2008 18:24:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wednesday 15 October 2008 10:54:41 Phil Blundell wrote:
-> On Wed, 2008-10-15 at 10:22 +0200, Holger Freyther wrote:
-> > I would start linking everything with -Wl,--hash-style=both as this is
-> > said to speed up the loading of shared libraries by about 50% (google is
-> > your friend). This is an option for binutils and was introduced with
-> > binutils 2.17. Now there are two ways to achieve this:
+On 15-10-2008 20:13, Marcin Juszkiewicz wrote:
+> Wednesday 15 of October 2008 19:42:57 Koen Kooi napisał(a):
 >
-> If you are using a modern GNU runtime then I think it should be safe to
-> just select --hash-style=gnu.  This will give you the speed improvement
-> without the space penalty of two hashes.
+>> Slightly related: atheros released their HAL as opensource, so
+>> madwifi doesn't need the blob and associated whackelf horrors anymore
+>
+> To be more exact - Atheros released other HAL as opensource.
+>
+> This is what madwifi has to say about it:
+> "It might be worth to mention that the HAL Atheros has released the
+> source for differs from the HAL versions we use in MadWifi, and thus
+> is no drop-in replacement. In theory it should be possible to
+> integrate the HAL and thus make MadWifi a fully open-source driver. "
 
-Modern as in glibc 2.5? I think we could strip the .hash away. I'm waiting for 
-my build to finish to get some numbers about the actual size difference. But 
-I guess on (e)glibc 2.5 and above gnu would be good enough.
+drat :(
 
 
-z.
 
 
