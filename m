@@ -1,35 +1,25 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Kq8GZ-0007bF-Cx
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 17:26:27 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9FFLJ28001396
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 16:21:19 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 01266-04 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 16:21:06 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9FFKqoo001366
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 16:21:01 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1224078120.3653.40.camel@localhost>
-References: <1223989999.29816.56.camel@polaris>
-	<1223990240.29816.58.camel@polaris>  <1224062879.5189.49.camel@ted>
-	<1224078120.3653.40.camel@localhost>
-Date: Wed, 15 Oct 2008 16:20:46 +0100
-Message-Id: <1224084046.5189.75.camel@ted>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
-	m9FFLJ28001396
-Subject: Re: please check BK&MTN to GIT conversion dry-run repository
+	(envelope-from <zecke@selfish.org>) id 1Kq9cd-0006XF-Q8
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 18:53:19 +0200
+Received: from [92.116.122.37] (helo=[10.129.122.37])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Kq9Xe-0000Oj-D8
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 18:48:11 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Oct 2008 18:39:02 +0200
+User-Agent: KMail/1.9.9
+References: <200810151022.38477.zecke@selfish.org>
+	<200810151104.29672.zecke@selfish.org> <gd4cie$16r$1@ger.gmane.org>
+In-Reply-To: <gd4cie$16r$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200810151839.03988.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.122.37
+Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,55 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 15:26:27 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Oct 2008 16:53:19 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2008-10-15 at 15:42 +0200, Jan L=C3=BCbbe wrote:
-> On Wed, 2008-10-15 at 10:27 +0100, Richard Purdie wrote:
-> > The original plan was to add the BKCVS later as a git tree graft rath=
-er
-> > than hardcoding it into the history now in a broken form. Is it too l=
-ate
-> > to do this now?
->=20
-> It is not possible to change history in git without changing the commit
-> hashes. (so a "graft" is impossible without rebasing)
+On Wednesday 15 October 2008 11:19:10 Koen Kooi wrote:
+> On 15-10-2008 11:04, Holger Freyther wrote:
+> > On Wednesday 15 October 2008 10:22:36 Holger Freyther wrote:
+> >
+> > Okay, I have pushed holger/hash-style and would like to test and then
+> > merge this branch. Comments or better ideas welcome
+> > 	z.
+>
+> Your PR split commit has some unrelated changes in it:
+>
+> +PKG_TAGS = ""
+> +DEPLOY_DIR_OPK = "${DEPLOY_DIR}/opk"
+> +SRCPV = "${@bb.fetch.get_srcrev(d)}"
+> +OPKGBUILDCMD = "opkg-build -O -o 0 -g 0"
 
-It is possible, you just do something like:
+thanks. I will remove that.
 
-echo "$commit-id $graft-id" >> .git/info/grafts
-
-which then adds some history to the start of the tree. Look up git tree
-grafts and you'll find further information about this feature.
-
-> > The BKCVS conversion still has the problems I wanted to get resolved
-> > before we did this for example:
-> >=20
-> > http://git.sicherheitsschwankung.de/?p=3Djan/oetest.git;a=3Dcommit;h=3D=
-66944efa040bdf36062522c7c33413fc1e039d83
-> >=20
-> > Where two commits have been rolled into one.
->=20
-> I tried to figure out how to solve this, but ran out of time. Adding th=
-e
-> (somewhat mangled) bk history now doesn't have any disadvantages=20
-
-It does since we can't now add a correct version at a later date using a
-tree graft.
-
-> and
-> still allows to find ot where the files come from. If someone figures
-> out how to do a better conversion, we can still rebase, it that is
-> desired.
-
-No, we don't want to ever rebase. I'd much prefer we had a graft for
-that point in time so we can just replace the history as and when we
-come up with a better version.
-
-Cheers,
-
-Richard
-
+z.
 
 
