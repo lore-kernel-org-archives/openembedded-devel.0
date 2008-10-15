@@ -1,31 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KqA99-0005Fj-FC
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 19:26:55 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KqA4A-0001qF-5X
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 17:21:46 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 17:21:46 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 17:21:46 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 15 Oct 2008 19:21:38 +0200
-Message-ID: <gd58r2$940$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: OABI compat in EABI kernels
+	(envelope-from <zecke@selfish.org>) id 1KqAN4-0005pD-FI
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 19:41:18 +0200
+Received: from [92.116.122.37] (helo=[10.129.122.37])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KqAI5-0001d0-3V
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 19:36:09 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Oct 2008 19:34:42 +0200
+User-Agent: KMail/1.9.9
+References: <200810010447.44667.zecke@selfish.org>
+In-Reply-To: <200810010447.44667.zecke@selfish.org>
+MIME-Version: 1.0
+Message-Id: <200810151934.46076.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.122.37
+Subject: Re: RFC: Making it mandantory to have a checksums.ini entry
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,26 +32,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 17:26:55 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 15 Oct 2008 17:41:18 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On Wednesday 01 October 2008 04:47:41 Holger Freyther wrote:
 
-Kernels based on linux.inc (as all kernels should be in an ideal world) 
-as well as kernels based on linux-rp.inc now have a switch to turn off 
-OABI compat:
+I have added the relevant checksums we had at Openmoko and made it mandatory 
+to have a checksum. See the previous mail on how to disable it.
 
-ARM_KEEP_OABI = "0"
 
-The default is "1", so there's no change unless your distro sets it to 
-"1" (as angstrom does).
-
-Enjoy the new legacy free kernels :)
-
-regards,
-
-Koen
-
+z.
 
 
