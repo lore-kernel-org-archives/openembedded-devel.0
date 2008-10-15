@@ -1,24 +1,33 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KqCWR-0005Kf-Dh
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 21:59:07 +0200
-Received: from [92.116.127.219] (helo=[10.129.127.219])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KqCRR-0004Gs-81
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 21:53:58 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Oct 2008 21:53:50 +0200
-User-Agent: KMail/1.9.9
-References: <200810151022.38477.zecke@selfish.org>
-	<200810152016.25038.zecke@selfish.org> <gd5cg8$osk$1@ger.gmane.org>
-In-Reply-To: <gd5cg8$osk$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200810152153.52020.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.116.127.219
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KqCb8-0005XB-Om
+	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 22:03:58 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KqCW9-00009S-8I
+	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 19:58:49 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 15 Oct 2008 19:58:49 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 15 Oct 2008 19:58:49 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 15 Oct 2008 21:58:40 +0200
+Message-ID: <gd5i1h$frs$1@ger.gmane.org>
+References: <200810151022.38477.zecke@selfish.org>	<200810152016.25038.zecke@selfish.org>
+	<gd5cg8$osk$1@ger.gmane.org> <200810152153.52020.zecke@selfish.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
+In-Reply-To: <200810152153.52020.zecke@selfish.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,23 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 19:59:07 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 15 Oct 2008 20:03:58 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday 15 October 2008 20:24:07 Koen Kooi wrote:
+On 15-10-2008 21:53, Holger Freyther wrote:
+> On Wednesday 15 October 2008 20:24:07 Koen Kooi wrote:
+>
+>> I'm undecided about putting the linker stuff in angstrom.inc vs.
+>> angstroom-<libc>.inc. Go for what you think is best :)
+>
+> Google couldn't tell me if uclibc supports GNU style hashes, so I only change
+> eglibc and glibc... happy rebuilding and I'm sorry when I broke things.
+>
+> I decided to land now as PRs are changing all the time and keeping up with
+> things is pretty hard...
 
-> I'm undecided about putting the linker stuff in angstrom.inc vs.
-> angstroom-<libc>.inc. Go for what you think is best :)
+You did change a S-O-B to an A-B, which AIUI is not how it should work. 
+Time to update teh commit policy to include SOB and ABs?
 
-Google couldn't tell me if uclibc supports GNU style hashes, so I only change 
-eglibc and glibc... happy rebuilding and I'm sorry when I broke things.
+regards,
 
-I decided to land now as PRs are changing all the time and keeping up with 
-things is pretty hard...
+Koen
 
-z.
 
 
