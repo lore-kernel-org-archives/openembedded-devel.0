@@ -1,33 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KqB8S-0005Ta-Ck
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 20:30:16 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1KqB3R-0004U9-GF
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 18:25:05 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 18:25:05 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 18:25:05 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 15 Oct 2008 20:24:07 +0200
-Message-ID: <gd5cg8$osk$1@ger.gmane.org>
-References: <200810151022.38477.zecke@selfish.org>	<200810151104.29672.zecke@selfish.org>
-	<gd4cie$16r$1@ger.gmane.org> <200810152016.25038.zecke@selfish.org>
+	(envelope-from <pb@reciva.com>) id 1KqBJs-0006CM-30
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 20:42:04 +0200
+Received: from 88-111-190-175.dynamic.dsl.as9105.com ([88.111.190.175]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KqBEq-0003sl-KX
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 19:36:53 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200810152018.41691.zecke@selfish.org>
+References: <200810151022.38477.zecke@selfish.org>
+	<1224060881.30790.15.camel@mill.internal.reciva.com>
+	<200810152018.41691.zecke@selfish.org>
+Date: Wed, 15 Oct 2008 19:36:47 +0100
+Message-Id: <1224095807.4235.74.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
-In-Reply-To: <200810152016.25038.zecke@selfish.org>
-Sender: news <news@ger.gmane.org>
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,41 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 18:30:16 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 15 Oct 2008 18:42:04 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 15-10-2008 20:16, Holger Freyther wrote:
-> On Wednesday 15 October 2008 11:19:10 Koen Kooi wrote:
->> On 15-10-2008 11:04, Holger Freyther wrote:
->>> On Wednesday 15 October 2008 10:22:36 Holger Freyther wrote:
->>>
->>> Okay, I have pushed holger/hash-style and would like to test and then
->>> merge this branch. Comments or better ideas welcome
->>> 	z.
->> Your PR split commit has some unrelated changes in it:
->>
->> +PKG_TAGS = ""
->> +DEPLOY_DIR_OPK = "${DEPLOY_DIR}/opk"
->> +SRCPV = "${@bb.fetch.get_srcrev(d)}"
->> +OPKGBUILDCMD = "opkg-build -O -o 0 -g 0"
->>
->> It's also missing the actual bump for distro PR in the angstrom configs.
->
-> Okay,
->
-> do you think this version is ready to be merged?
+On Wed, 2008-10-15 at 20:18 +0200, Holger Freyther wrote:
+> Modern as in glibc 2.5? I think we could strip the .hash away. 
 
-I'm undecided about putting the linker stuff in angstrom.inc vs. 
-angstroom-<libc>.inc. Go for what you think is best :)
+Right.  This was the glibc change that introduced gnu hash support:
 
-So, yes, it looks ready to get merged.
+2006-07-10  Ulrich Drepper  <drepper@redhat.com>
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
+        * elf/dl-lookup.c (dl_new_hash): New functions.
+        (_dl_lookup_symbol_x): Rename hash to old_hash and don't compute
+        value here.  Compute new-style hash value.  Pass new hash value
+        and reference to variable with the old value to do_lookup_x.
+        (_dl_setup_hash): If DT_GNU_HASH is defined, use it and not
+        old-style hash table.
 
-regards,
+I think it should even be fairly straightforward to backport that to
+older glibcs if anybody wanted to do so.  As far as I know there is no
+real reason for distros to require 2.4 or earlier though.
 
-Koen
+p.
+
 
 
 
