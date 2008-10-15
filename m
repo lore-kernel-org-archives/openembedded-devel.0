@@ -1,34 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KqAcD-0006MW-6o
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 19:56:57 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KqAXA-00031I-Nk
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 17:51:44 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 17:51:44 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 17:51:44 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 15 Oct 2008 19:51:36 +0200
-Message-ID: <gd5aj9$h8u$1@ger.gmane.org>
-References: <200810010447.44667.zecke@selfish.org>
-	<200810151934.46076.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
-In-Reply-To: <200810151934.46076.zecke@selfish.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: RFC: Making it mandantory to have a checksums.ini entry
+	(envelope-from <openembedded@haerwu.biz>) id 1KqAxV-0008Cn-CN
+	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 20:18:57 +0200
+Received: (qmail 13369 invoked by uid 813007); 15 Oct 2008 18:13:47 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 15 Oct 2008 18:13:47 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Oct 2008 20:13:52 +0200
+User-Agent: KMail/1.10.1 (Linux/2.6.27; KDE/4.1.2; x86_64; ; )
+References: <gd58r2$940$1@ger.gmane.org> <gd5a32$e5v$1@ger.gmane.org>
+In-Reply-To: <gd5a32$e5v$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200810152013.52882.openembedded@haerwu.biz>
+Subject: Re: OABI compat in EABI kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 17:56:57 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Oct 2008 18:18:57 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 15-10-2008 19:34, Holger Freyther wrote:
-> On Wednesday 01 October 2008 04:47:41 Holger Freyther wrote:
->
-> I have added the relevant checksums we had at Openmoko and made it mandatory
-> to have a checksum. See the previous mail on how to disable it.
+Wednesday 15 of October 2008 19:42:57 Koen Kooi napisa=C5=82(a):
 
-Instead of having people disabling the checks here's how you can help:
+> Slightly related: atheros released their HAL as opensource, so
+> madwifi doesn't need the blob and associated whackelf horrors anymore
 
+To be more exact - Atheros released other HAL as opensource.
 
-Step 1)
-	go to TMPDIR and locate the checksums.ini there
+This is what madwifi has to say about it:
+"It might be worth to mention that the HAL Atheros has released the
+source for differs from the HAL versions we use in MadWifi, and thus
+is no drop-in replacement. In theory it should be possible to
+integrate the HAL and thus make MadWifi a fully open-source driver. "
 
-Step 2)
-	sort the checksums.ini:	
-	python 
-/OE/org.openembedded.dev/contrib/source-checker/oe-checksums-sorter.py 
-checksums.ini > new
+=2D-=20
+JID: hrw@jabber.org
 
-Step 3) combine the checksums.ini from OE and yours:
-	cat /OE/org.openembedded.dev/conf/checksums.ini checksums.ini > 
-combined-sums
-
-Step 4)
-	sort the result and apply it to OE
-	python 
-/OE/org.openembedded.dev/contrib/source-checker/oe-checksums-sorter.py 
-combined-sums > /OE/org.openembedded.dev/conf/checksums.ini
-
-Step 5) go to your OE dir and inspect the results:
-	cd /OE/org.openembedded.dev
-	git diff conf/checksums.ini
-
-The diff should only contain additions (removals and replacements are a 
-sign of corruption somewhere).
-
-If you see no spurious changes, commit it and wait for people to bitch 
-if you added a corrupted checksum ;)
-
-regards,
-
-Koen
 
 
 
