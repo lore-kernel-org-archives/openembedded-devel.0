@@ -1,26 +1,27 @@
 Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1Kpw2O-0005bj-C6
+	(envelope-from <rod@whitby.id.au>) id 1KpwEY-0005rx-0e
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 04:23:00 +0200
+	Wed, 15 Oct 2008 04:35:34 +0200
 Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id D34DC17C43C;
-	Tue, 14 Oct 2008 22:17:53 -0400 (EDT)
+	by out1.messagingengine.com (Postfix) with ESMTP id 812D717CFE2;
+	Tue, 14 Oct 2008 22:30:27 -0400 (EDT)
 Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Tue, 14 Oct 2008 22:17:53 -0400
-X-Sasl-enc: ajMiY5/teBzEKfW/BOWpzu3f7Nl28xwyP7d6WTqjOrfM 1224037072
+	by compute1.internal (MEProxy); Tue, 14 Oct 2008 22:30:27 -0400
+X-Sasl-enc: w23Sy+vhQYppjzZzkqXV1rkNXdoKpmjf11KGXkbIOjt6 1224037826
 Received: from [172.18.93.11] (au2.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id EA20816953;
-	Tue, 14 Oct 2008 22:17:51 -0400 (EDT)
-Message-ID: <48F552C9.5090604@whitby.id.au>
-Date: Wed, 15 Oct 2008 12:47:45 +1030
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 169CF1F58D;
+	Tue, 14 Oct 2008 22:30:25 -0400 (EDT)
+Message-ID: <48F555BC.1010400@whitby.id.au>
+Date: Wed, 15 Oct 2008 13:00:20 +1030
 From: Rod Whitby <rod@whitby.id.au>
 User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
 MIME-Version: 1.0
 To: Holger Freyther <zecke@openmoko.org>
 References: <200810080751.15817.zecke@selfish.org>
 	<200810142341.06945.zecke@selfish.org>
-In-Reply-To: <200810142341.06945.zecke@selfish.org>
+	<48F552C9.5090604@whitby.id.au>
+In-Reply-To: <48F552C9.5090604@whitby.id.au>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -36,47 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 02:23:00 -0000
+X-List-Received-Date: Wed, 15 Oct 2008 02:35:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Holger Freyther wrote:
-> I think the conversion is complete and we can disable the mtn servers now or 
-> leave them readonly for a while.
+Rod Whitby wrote:
+> Please remove all org.nslu2-linux branches from the git.openembedded.net
+> server immediately.  They were never meant to end up on an OE server
+> anyway (and the Makefiles specifically prevented this, so someone must
+> have done it manually by accident).
 
-Thanks to all involved for completing the transition.
+I tried to do it myself, but (correctly) got rejected:
 
-Thanks to mwester for making monotone.nslu2-linux.org readonly while I
-slept.
+> rwhitby@take:/home/slug/openembedded$ git push git@git.openembedded.net:openembedded :heads/org.nslu2-linux.bitbake
+> *** Deleting a branch is not allowed in this repository
+> To git@git.openembedded.net:openembedded
+>  ! [remote rejected] org.nslu2-linux.bitbake (hook declined)
+> error: hooks/update exited with error code 1
+> error: hook declined to update refs/heads/org.nslu2-linux.bitbake
+> error: failed to push some refs to 'git@git.openembedded.net:openembedded'
+> rwhitby@take:/home/slug/openembedded$ git push git@git.openembedded.net:openembedded :heads/org.nslu2-linux.dev
+> *** Deleting a branch is not allowed in this repository
+> To git@git.openembedded.net:openembedded
+>  ! [remote rejected] org.nslu2-linux.dev (hook declined)
+> error: hooks/update exited with error code 1
+> error: hook declined to update refs/heads/org.nslu2-linux.dev
+> error: failed to push some refs to 'git@git.openembedded.net:openembedded'
+> rwhitby@take:/home/slug/openembedded$
 
-> Notes to people with commit access:
-> git clone git@git.openembedded.net:openembedded to get the tree
-> 
-> Notes to people:
-> 	DO NOT MERGE the old trial history and this history. We have no commit hook 
-> yet to prevent this and solely depend on common sense...
-
-I will put explicit checks in any Makefiles I maintain before I release
-updates that use git, to ensure that this cannot happen using one of my
-Makefiles.
-
-> Notes to people using the trial git:
->   git-remote add new-origin git://git.openembedded.net/openembedded
->   git-fetch new-origin
->   git-rebase --onto new-origin/org.openembedded.dev 
-> origin/org.openembedded.dev org.openembedded.dev (if i got this right from 
-> the manpage)
-
-(If it's not there already) Can we put this on the phrasebook page?
-
-> Thins for the near future:
-> Remove the nslu2 branches once nslu2 folks have migrated to git as well and 
-> created repositories for them.
-
-Please remove all org.nslu2-linux branches from the git.openembedded.net
-server immediately.  They were never meant to end up on an OE server
-anyway (and the Makefiles specifically prevented this, so someone must
-have done it manually by accident).
+A good hook to have!  Nicely done.
 
 -- Rod
 
