@@ -1,28 +1,36 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.217.20] (helo=mail-gx0-f20.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1Kq571-0007yi-88; Wed, 15 Oct 2008 14:04:24 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1Kq51r-0001sx-JQ; Wed, 15 Oct 2008 12:59:03 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87])
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>)
-	id 1Kq51o-0003oh-E2; Wed, 15 Oct 2008 12:59:00 +0100
-From: Phil Blundell <pb@reciva.com>
+	(envelope-from <nicola.mfb@gmail.com>) id 1Kq5IW-0008N1-NB
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 14:16:16 +0200
+Received: by gxk13 with SMTP id 13so6509377gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Oct 2008 05:11:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type:references;
+	bh=rD4pl3cv0Ep8l0EdTiJ4XHyLwVGrHwvDG6FKW8rFJ/w=;
+	b=B+JDsLkr4Gg9us5uX9ZocbcPzqk8fMOfF4ihfu9xB+785gFmTokTWJn0wV+C17yCU1
+	S+mU2DnCLhpZXRQASIR2Tm+xK3fBbVLzkr3c1M6lbfRzl1UkQyUDHAGKZW0yaSVBw4aR
+	7ZuOxTdOblb9jopMMJyutPo5e++KAh0bplxF8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:references;
+	b=wlV2M31ByZN3CR/Ct+JCwRsfdNoSitC9xWxwZ7D/thp6wr3KdNhde7dQFIueaZLKn3
+	8aTiB5NFoT02MMBh9cC10guqst4ISRNglgkdj6H3rZiOYSJGyrDT52pPEeygeIXj5iF8
+	WggvjLK5/yAncsYq/SW56ZBZsZys0zbWjt708=
+Received: by 10.142.125.9 with SMTP id x9mr455910wfc.66.1224072665487;
+	Wed, 15 Oct 2008 05:11:05 -0700 (PDT)
+Received: by 10.142.71.15 with HTTP; Wed, 15 Oct 2008 05:11:05 -0700 (PDT)
+Message-ID: <359c5480810150511y27819388ufd52ee31b900550e@mail.gmail.com>
+Date: Wed, 15 Oct 2008 14:11:05 +0200
+From: "Nicola Mfb" <nicola.mfb@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1224070299.5189.62.camel@ted>
-References: <200810151022.38477.zecke@selfish.org>
-	<c384c5ea0810150343i1ad5429aubf37b9bdef2165a6@mail.gmail.com>
-	<gd4j24$lq3$1@ger.gmane.org>  <1224070299.5189.62.camel@ted>
-Date: Wed, 15 Oct 2008 12:58:59 +0100
-Message-Id: <1224071940.30790.45.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
+In-Reply-To: <loom.20081015T114959-488@post.gmane.org>
+MIME-Version: 1.0
+References: <loom.20081015T114959-488@post.gmane.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: GIT server down?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,42 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 12:04:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 15 Oct 2008 12:16:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2008-10-15 at 12:31 +0100, Richard Purdie wrote:
-> I think what Leon is referring to is where different hardware
-> capabilities are checked. In Poky I ended up disabling this as at least
-> on ARM there were an insane number of different combinations of paths
-> being checked for. The patch I added to disable it was:
+2008/10/15 Erland Lewin <erland@lewin.nu>
 
-Right, the default set of hwcaps is probably a bit more inclusive than
-most folks want.  I don't think this issue is specific to ARM though
-it's possible that arm does have it worse than some other
-architectures.  
-
-As with so many things it is basically a DISTRO decision which hwcaps to
-include in the list for ld.so.  I suppose the ideal thing would be to
-have a variable LD_SO_CONSIDER_HWCAPS or some such, which could be set
-by DISTRO.conf to specify which ones should be included.  For the
-majority of single-target-platform DISTROs the answer is obviously going
-to be none.
-
-Another similar issue for embedded-type DISTROs to consider is
-minimising the length of the linker search path by, for example,
-eliminating /usr/lib in favour of putting everything in /lib.  (The same
-goes for /usr/bin and /bin, of course.)  And of course, not putting
-anything in /etc/ld.so.conf unless it's necessary: my openmoko install
-seems to have /usr/X11R6/lib and /usr/local/lib listed in that file even
-though neither directory actually exists in the filesystem, which will
-be causing another 2*N useless path lookups for every library.
-
-Plus of course, PACKAGE_SNAP_LIB_SYMLINKS will eliminate another source
-of indirection and hence another dentry name lookup.
-
-p.
+> I'm having trouble using the git.openembedded.org server:
+>
+> erl@sol:~/src/oe$ git clone git://
+> git.openembedded.net/org.openembedded.dev
+> Initialized empty Git repository in
+> /home/erl/src/oe/org.openembedded.dev/.git/
+> fatal: The remote end hung up unexpectedly
+>
 
 
+I had the same problem, following the proposed instructions failed for me so
+I deleted the tree and recloned with:
+git clone git://git.openembedded.net/openembedded org.openembedded.dev
 
+But I'm absolutely not sure if this is correct!
+Someone may illume?
+
+   Nicola
 
