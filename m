@@ -1,32 +1,26 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [85.10.209.111] (helo=mail.road.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Kq2kk-0005L3-JE
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 11:33:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9F9S7de009903
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 10:28:07 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09739-03 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 10:28:00 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9F9RxDT009896
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Oct 2008 10:28:00 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1223990240.29816.58.camel@polaris>
-References: <1223989999.29816.56.camel@polaris>
-	<1223990240.29816.58.camel@polaris>
-Date: Wed, 15 Oct 2008 10:27:59 +0100
-Message-Id: <1224062879.5189.49.camel@ted>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: please check BK&MTN to GIT conversion dry-run repository
+	(envelope-from <u.luckas@road.de>) id 1Kq2ne-0005Qr-5G
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 11:36:14 +0200
+Received: from slimfast.dyndns.org (unknown [192.168.254.1])
+	by mail.road.de (Postfix) with ESMTP id 7AF7C39001B;
+	Wed, 15 Oct 2008 11:31:04 +0200 (CEST)
+Received: from ulitu.localnet (ulitu.handy-pc.constin.de [192.168.116.44])
+	by slimfast.dyndns.org (Postfix) with ESMTP id 5462545404C;
+	Wed, 15 Oct 2008 11:31:04 +0200 (CEST)
+From: Uli Luckas <u.luckas@road.de>
+Organization: Road GmbH
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Oct 2008 11:31:02 +0200
+User-Agent: KMail/1.10.1 (Linux/2.6.26-1-686; KDE/4.1.1; i686; ; )
+References: <200810080751.15817.zecke@selfish.org>
+	<200810142341.06945.zecke@selfish.org>
+In-Reply-To: <200810142341.06945.zecke@selfish.org>
+MIME-Version: 1.0
+Message-Id: <200810151131.03357.u.luckas@road.de>
+Cc: Holger Freyther <zecke@selfish.org>
+Subject: Re: ETA on git conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,27 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 09:33:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 15 Oct 2008 09:36:14 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, 2008-10-14 at 15:17 +0200, Jan Luebbe wrote:
-> And here it is: http://git.sicherheitsschwankung.de/?p=jan/oetest.git
+> On Wednesday 08 October 2008 07:51:15 Holger Freyther wrote:
+> > Wednesday:
+> > 	- Be back up with git and use that as primary system.
+> > 	- Disable monotone completely
+>
+> 1.) git user account created
+> 2.) gitosis setup
+> 3.) keys added and permissions added (see the end of the mail)
+> 4.) populated the repository with content
+> 5.) git-daemon is serving data
+> 6.) push/pull with git ssh works
+> 7.) notifications should work too
+> 8.) the GitPhraseBook got updated with the final git location
+> 9.) gitweb is nice and even tells you which URL to use
+> 10.) mail almost sent
+>
+> I think the conversion is complete and we can disable the mtn servers now
+> or leave them readonly for a while.
+>
+To Holger and all involved, here is my big "thank you".
 
-The BKCVS conversion still has the problems I wanted to get resolved
-before we did this for example:
-
-http://git.sicherheitsschwankung.de/?p=jan/oetest.git;a=commit;h=66944efa040bdf36062522c7c33413fc1e039d83
-
-Where two commits have been rolled into one.
-
-The original plan was to add the BKCVS later as a git tree graft rather
-than hardcoding it into the history now in a broken form. Is it too late
-to do this now?
-
-Cheers,
-
-Richard
-
+Uli
 
 
