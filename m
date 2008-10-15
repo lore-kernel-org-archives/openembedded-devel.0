@@ -1,24 +1,40 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KqFAE-0007So-Ql
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1KqFRg-0007po-Gz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Oct 2008 00:48:22 +0200
-Received: from [92.116.127.219] (helo=[10.129.127.219])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KqF5D-0007bo-VW
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Oct 2008 00:43:12 +0200
-From: Holger Freyther <zecke@selfish.org>
+	Thu, 16 Oct 2008 01:06:24 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A23698400B0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Oct 2008 01:01:14 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id C8D7B8400A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Oct 2008 01:01:13 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (e178090112.adsl.alicedsl.de
+	[85.178.90.112]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Oct 2008 01:01:13 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 0F53A3C1DE; Thu, 16 Oct 2008 01:01:12 +0200 (CEST)
+Date: Thu, 16 Oct 2008 01:01:12 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Oct 2008 00:43:07 +0200
-User-Agent: KMail/1.9.9
+Message-ID: <20081015230112.GB5563@rhein.zuhause.netz>
 References: <200810151022.38477.zecke@selfish.org>
 	<200810152153.52020.zecke@selfish.org> <gd5i1h$frs$1@ger.gmane.org>
-In-Reply-To: <gd5i1h$frs$1@ger.gmane.org>
+	<200810160043.08202.zecke@selfish.org>
 MIME-Version: 1.0
-Message-Id: <200810160043.08202.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.116.127.219
+In-Reply-To: <200810160043.08202.zecke@selfish.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,34 +49,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 22:48:22 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Oct 2008 23:06:24 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wednesday 15 October 2008 21:58:40 Koen Kooi wrote:
-> On 15-10-2008 21:53, Holger Freyther wrote:
-> > On Wednesday 15 October 2008 20:24:07 Koen Kooi wrote:
-> >> I'm undecided about putting the linker stuff in angstrom.inc vs.
-> >> angstroom-<libc>.inc. Go for what you think is best :)
-> >
-> > Google couldn't tell me if uclibc supports GNU style hashes, so I only
-> > change eglibc and glibc... happy rebuilding and I'm sorry when I broke
-> > things.
-> >
-> > I decided to land now as PRs are changing all the time and keeping up
-> > with things is pretty hard...
->
-> You did change a S-O-B to an A-B, which AIUI is not how it should work.
-> Time to update teh commit policy to include SOB and ABs?
+Hi,
 
-Wow, I had to read that a couple of times. In Linux terms I would have to add  
-a S-O-B to the commit. If it goes through your hands you add your S-O-B as 
-well, if you just review and like the patch you ack?
+just checked for uclibc. It has the HASH support at least in the svn version
+I checked, but it is disabled in our configs.
 
-yes, the policy needs update... and I will sleep now
-
-z.
+Bye Henning
 
 
