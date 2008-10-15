@@ -1,22 +1,33 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kq1jT-0006Xk-Oz
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 10:27:51 +0200
-Received: from [92.116.174.84] (helo=[10.129.174.84])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kq1eV-0006nU-Q6
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 10:22:44 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Oct 2008 10:22:36 +0200
-User-Agent: KMail/1.9.9
-MIME-Version: 1.0
-Message-Id: <200810151022.38477.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.116.174.84
-Subject: [RFC] Enable --hash-style=both for all recent gcc4 targets
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Kq2BV-0007Ii-3P
+	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 10:56:49 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Kq26X-0005TV-3s
+	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 08:51:41 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 15 Oct 2008 08:51:41 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 15 Oct 2008 08:51:41 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 15 Oct 2008 10:51:33 +0200
+Message-ID: <gd4aul$sb5$1@ger.gmane.org>
+References: <200810151022.38477.zecke@selfish.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
+In-Reply-To: <200810151022.38477.zecke@selfish.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,33 +41,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 08:27:51 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Wed, 15 Oct 2008 08:56:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hey guys,
+On 15-10-2008 10:22, Holger Freyther wrote:
+> Hey guys,
+>
+> I would start linking everything with -Wl,--hash-style=both as this is said to
+> speed up the loading of shared libraries by about 50%
 
-I would start linking everything with -Wl,--hash-style=both as this is said to 
-speed up the loading of shared libraries by about 50% (google is your 
-friend). This is an option for binutils and was introduced with binutils 
-2.17. Now there are two ways to achieve this:
+Also check the as-needed stuff from Poky:
 
-Change TARGET_LDFLAGS in e.g. the distro config (as this knows if binutils has 
-this option available) or to change the "specs" of gcc to enable this by 
-default. There is a patch from debian for gcc4.3 but it is leaving 
-arm/armeabi out. What do you guys prefer?
+ASNEEDED = "-Wl,--as-needed"
+ASNEEDED_pn-console-tools = ""
+ASNEEDED_pn-distcc = ""
+ASNEEDED_pn-openobex = ""
+ASNEEDED_pn-icu = ""
+ASNEEDED_pn-xserver-kdrive-xomap = ""
+ASNEEDED_pn-minimo = ""
+ASNEEDED_pn-pciutils = ""
+ASNEEDED_pn-puzzles = ""
+ASNEEDED_pn-dialer = ""
 
-I'm pretty sure that we will want to use the GNU hash style at Openmoko and 
-this is creating an interesting problem in regard to a full system upgrade 
-(which is supposed to work). Again there are two ways. Use force and bump PE 
-on each package but we should avoid this. I propose to rename PR to FILE_PR 
-and change PR  to "${FILE_PR}${DISTRO_PR}" so everytime a distro is changing 
-something that effects every package we can bump (e.g. Setting DISTRO_PR 
-to .1 for Openmoko).
+TARGET_LDFLAGS += "${ASNEEDED}"
 
-comments?
-	z.
+That should also reduce library load time *and* eliminate spurious deps.
+
+> (google is your
+> friend). This is an option for binutils and was introduced with binutils
+> 2.17. Now there are two ways to achieve this:
+>
+> Change TARGET_LDFLAGS in e.g. the distro config (as this knows if binutils has
+> this option available) or to change the "specs" of gcc to enable this by
+> default. There is a patch from debian for gcc4.3 but it is leaving
+> arm/armeabi out. What do you guys prefer?
+
+It seems that the TARGET_LDFLAGS in distro would be the best option forward.
+
+> I'm pretty sure that we will want to use the GNU hash style at Openmoko and
+> this is creating an interesting problem in regard to a full system upgrade
+> (which is supposed to work). Again there are two ways. Use force and bump PE
+> on each package but we should avoid this.
+
+PE is only there to fix versioning screwups (be it upstream or OE)
+
+> I propose to rename PR to FILE_PR
+> and change PR  to "${FILE_PR}${DISTRO_PR}" so everytime a distro is changing
+> something that effects every package we can bump (e.g. Setting DISTRO_PR
+> to .1 for Openmoko).
+
+That sounds like a good idea, it would make changing compiler versions a 
+lot safer.
+
+regards,
+
+Koen
+
 
 
