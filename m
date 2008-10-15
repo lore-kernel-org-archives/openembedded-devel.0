@@ -1,35 +1,37 @@
-Received: from [209.85.217.20] (helo=mail-gx0-f20.google.com)
+Received: from [209.85.198.240] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicola.mfb@gmail.com>) id 1Kq5IW-0008N1-NB
+	(envelope-from <cliff.brake@gmail.com>) id 1Kq5j3-0005aN-9f
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 14:16:16 +0200
-Received: by gxk13 with SMTP id 13so6509377gxk.12
+	Wed, 15 Oct 2008 14:43:41 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so3114560rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Oct 2008 05:11:06 -0700 (PDT)
+	Wed, 15 Oct 2008 05:38:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type:references;
-	bh=rD4pl3cv0Ep8l0EdTiJ4XHyLwVGrHwvDG6FKW8rFJ/w=;
-	b=B+JDsLkr4Gg9us5uX9ZocbcPzqk8fMOfF4ihfu9xB+785gFmTokTWJn0wV+C17yCU1
-	S+mU2DnCLhpZXRQASIR2Tm+xK3fBbVLzkr3c1M6lbfRzl1UkQyUDHAGKZW0yaSVBw4aR
-	7ZuOxTdOblb9jopMMJyutPo5e++KAh0bplxF8=
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=lEFUq6Zd0sLg0LbVMTSHqgoTj3G20vUfqlv6e932o3o=;
+	b=N11D9+F+b+/i+ZeJ3pjYvR7eOPUcJrEqP8WO5yWCpAkd+euBSwJrh5UBt/V7vLKml6
+	m+hFzWJZ7uAITwNrtSXmRMB0we4cNPX53oB4YCmE/iBY5W4rl/suavZGWJM4HDGmqyLa
+	ui7AuY3b7LMAuJGPY/uJG50aKRKbTrmxJ9zuo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:references;
-	b=wlV2M31ByZN3CR/Ct+JCwRsfdNoSitC9xWxwZ7D/thp6wr3KdNhde7dQFIueaZLKn3
-	8aTiB5NFoT02MMBh9cC10guqst4ISRNglgkdj6H3rZiOYSJGyrDT52pPEeygeIXj5iF8
-	WggvjLK5/yAncsYq/SW56ZBZsZys0zbWjt708=
-Received: by 10.142.125.9 with SMTP id x9mr455910wfc.66.1224072665487;
-	Wed, 15 Oct 2008 05:11:05 -0700 (PDT)
-Received: by 10.142.71.15 with HTTP; Wed, 15 Oct 2008 05:11:05 -0700 (PDT)
-Message-ID: <359c5480810150511y27819388ufd52ee31b900550e@mail.gmail.com>
-Date: Wed, 15 Oct 2008 14:11:05 +0200
-From: "Nicola Mfb" <nicola.mfb@gmail.com>
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=iArx6aZpxpCUFtxF1IamRU8ofmF3bo6h1rs5AnjvwmWobE7K8hl9db4N+ctb7qKkV2
+	XJwHvI8Ov1AnM8vMT15b7wXL5hDxYy7SD/ljSh2ZiY+CHMk9M/3XZD0To4jeOQdyJMcv
+	0KJVL70J61ttB/hosCyNcK4Nyy1+LeyrG/3Es=
+Received: by 10.140.203.9 with SMTP id a9mr558533rvg.203.1224074312099;
+	Wed, 15 Oct 2008 05:38:32 -0700 (PDT)
+Received: by 10.141.129.13 with HTTP; Wed, 15 Oct 2008 05:38:32 -0700 (PDT)
+Message-ID: <f96d234e0810150538r5d922c4bp7acbeffcd74d8f7@mail.gmail.com>
+Date: Wed, 15 Oct 2008 08:38:32 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <loom.20081015T114959-488@post.gmane.org>
+In-Reply-To: <359c5480810150511y27819388ufd52ee31b900550e@mail.gmail.com>
 MIME-Version: 1.0
 References: <loom.20081015T114959-488@post.gmane.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<359c5480810150511y27819388ufd52ee31b900550e@mail.gmail.com>
 Subject: Re: GIT server down?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,29 +46,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 12:16:17 -0000
+X-List-Received-Date: Wed, 15 Oct 2008 12:43:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-2008/10/15 Erland Lewin <erland@lewin.nu>
-
-> I'm having trouble using the git.openembedded.org server:
+On Wed, Oct 15, 2008 at 8:11 AM, Nicola Mfb <nicola.mfb@gmail.com> wrote:
+> 2008/10/15 Erland Lewin <erland@lewin.nu>
 >
-> erl@sol:~/src/oe$ git clone git://
-> git.openembedded.net/org.openembedded.dev
-> Initialized empty Git repository in
-> /home/erl/src/oe/org.openembedded.dev/.git/
-> fatal: The remote end hung up unexpectedly
+>> I'm having trouble using the git.openembedded.org server:
+>>
+>> erl@sol:~/src/oe$ git clone git://
+>> git.openembedded.net/org.openembedded.dev
+>> Initialized empty Git repository in
+>> /home/erl/src/oe/org.openembedded.dev/.git/
+>> fatal: The remote end hung up unexpectedly
+>>
 >
+>
+> I had the same problem, following the proposed instructions failed for me so
+> I deleted the tree and recloned with:
+> git clone git://git.openembedded.net/openembedded org.openembedded.dev
+>
+> But I'm absolutely not sure if this is correct!
+> Someone may illume?
 
+Yes, git://git.openembedded.net/openembedded is the correct repository.
 
-I had the same problem, following the proposed instructions failed for me so
-I deleted the tree and recloned with:
-git clone git://git.openembedded.net/openembedded org.openembedded.dev
+Cliff
 
-But I'm absolutely not sure if this is correct!
-Someone may illume?
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
-   Nicola
 
