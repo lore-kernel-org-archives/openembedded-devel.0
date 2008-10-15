@@ -1,29 +1,22 @@
-Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1KpwEY-0005rx-0e
+	(envelope-from <zecke@selfish.org>) id 1Kq1jT-0006Xk-Oz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Oct 2008 04:35:34 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 812D717CFE2;
-	Tue, 14 Oct 2008 22:30:27 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Tue, 14 Oct 2008 22:30:27 -0400
-X-Sasl-enc: w23Sy+vhQYppjzZzkqXV1rkNXdoKpmjf11KGXkbIOjt6 1224037826
-Received: from [172.18.93.11] (au2.astc-design.com [203.122.250.137])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 169CF1F58D;
-	Tue, 14 Oct 2008 22:30:25 -0400 (EDT)
-Message-ID: <48F555BC.1010400@whitby.id.au>
-Date: Wed, 15 Oct 2008 13:00:20 +1030
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
+	Wed, 15 Oct 2008 10:27:51 +0200
+Received: from [92.116.174.84] (helo=[10.129.174.84])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Kq1eV-0006nU-Q6
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 10:22:44 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Oct 2008 10:22:36 +0200
+User-Agent: KMail/1.9.9
 MIME-Version: 1.0
-To: Holger Freyther <zecke@openmoko.org>
-References: <200810080751.15817.zecke@selfish.org>
-	<200810142341.06945.zecke@selfish.org>
-	<48F552C9.5090604@whitby.id.au>
-In-Reply-To: <48F552C9.5090604@whitby.id.au>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: ETA on git conversion
+Message-Id: <200810151022.38477.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.174.84
+Subject: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,36 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 02:35:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Oct 2008 08:27:51 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Rod Whitby wrote:
-> Please remove all org.nslu2-linux branches from the git.openembedded.net
-> server immediately.  They were never meant to end up on an OE server
-> anyway (and the Makefiles specifically prevented this, so someone must
-> have done it manually by accident).
+Hey guys,
 
-I tried to do it myself, but (correctly) got rejected:
+I would start linking everything with -Wl,--hash-style=both as this is said to 
+speed up the loading of shared libraries by about 50% (google is your 
+friend). This is an option for binutils and was introduced with binutils 
+2.17. Now there are two ways to achieve this:
 
-> rwhitby@take:/home/slug/openembedded$ git push git@git.openembedded.net:openembedded :heads/org.nslu2-linux.bitbake
-> *** Deleting a branch is not allowed in this repository
-> To git@git.openembedded.net:openembedded
->  ! [remote rejected] org.nslu2-linux.bitbake (hook declined)
-> error: hooks/update exited with error code 1
-> error: hook declined to update refs/heads/org.nslu2-linux.bitbake
-> error: failed to push some refs to 'git@git.openembedded.net:openembedded'
-> rwhitby@take:/home/slug/openembedded$ git push git@git.openembedded.net:openembedded :heads/org.nslu2-linux.dev
-> *** Deleting a branch is not allowed in this repository
-> To git@git.openembedded.net:openembedded
->  ! [remote rejected] org.nslu2-linux.dev (hook declined)
-> error: hooks/update exited with error code 1
-> error: hook declined to update refs/heads/org.nslu2-linux.dev
-> error: failed to push some refs to 'git@git.openembedded.net:openembedded'
-> rwhitby@take:/home/slug/openembedded$
+Change TARGET_LDFLAGS in e.g. the distro config (as this knows if binutils has 
+this option available) or to change the "specs" of gcc to enable this by 
+default. There is a patch from debian for gcc4.3 but it is leaving 
+arm/armeabi out. What do you guys prefer?
 
-A good hook to have!  Nicely done.
+I'm pretty sure that we will want to use the GNU hash style at Openmoko and 
+this is creating an interesting problem in regard to a full system upgrade 
+(which is supposed to work). Again there are two ways. Use force and bump PE 
+on each package but we should avoid this. I propose to rename PR to FILE_PR 
+and change PR  to "${FILE_PR}${DISTRO_PR}" so everytime a distro is changing 
+something that effects every package we can bump (e.g. Setting DISTRO_PR 
+to .1 for Openmoko).
 
--- Rod
+comments?
+	z.
 
 
