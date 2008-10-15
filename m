@@ -1,21 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1KqAxV-0008Cn-CN
-	for openembedded-devel@openembedded.org; Wed, 15 Oct 2008 20:18:57 +0200
-Received: (qmail 13369 invoked by uid 813007); 15 Oct 2008 18:13:47 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 15 Oct 2008 18:13:47 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <zecke@selfish.org>) id 1KqB06-0007UO-Ir
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 20:21:38 +0200
+Received: from [92.116.122.37] (helo=[10.129.122.37])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KqAv6-0002VR-Ll
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Oct 2008 20:16:29 +0200
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Oct 2008 20:13:52 +0200
-User-Agent: KMail/1.10.1 (Linux/2.6.27; KDE/4.1.2; x86_64; ; )
-References: <gd58r2$940$1@ger.gmane.org> <gd5a32$e5v$1@ger.gmane.org>
-In-Reply-To: <gd5a32$e5v$1@ger.gmane.org>
+Date: Wed, 15 Oct 2008 20:16:23 +0200
+User-Agent: KMail/1.9.9
+References: <200810151022.38477.zecke@selfish.org>
+	<200810151104.29672.zecke@selfish.org> <gd4cie$16r$1@ger.gmane.org>
+In-Reply-To: <gd4cie$16r$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200810152013.52882.openembedded@haerwu.biz>
-Subject: Re: OABI compat in EABI kernels
+Message-Id: <200810152016.25038.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.122.37
+Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,28 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 18:18:57 -0000
+X-List-Received-Date: Wed, 15 Oct 2008 18:21:39 -0000
 Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Wednesday 15 of October 2008 19:42:57 Koen Kooi napisa=C5=82(a):
+On Wednesday 15 October 2008 11:19:10 Koen Kooi wrote:
+> On 15-10-2008 11:04, Holger Freyther wrote:
+> > On Wednesday 15 October 2008 10:22:36 Holger Freyther wrote:
+> >
+> > Okay, I have pushed holger/hash-style and would like to test and then
+> > merge this branch. Comments or better ideas welcome
+> > 	z.
+>
+> Your PR split commit has some unrelated changes in it:
+>
+> +PKG_TAGS = ""
+> +DEPLOY_DIR_OPK = "${DEPLOY_DIR}/opk"
+> +SRCPV = "${@bb.fetch.get_srcrev(d)}"
+> +OPKGBUILDCMD = "opkg-build -O -o 0 -g 0"
+>
+> It's also missing the actual bump for distro PR in the angstrom configs.
 
-> Slightly related: atheros released their HAL as opensource, so
-> madwifi doesn't need the blob and associated whackelf horrors anymore
+Okay,
 
-To be more exact - Atheros released other HAL as opensource.
+do you think this version is ready to be merged?
 
-This is what madwifi has to say about it:
-"It might be worth to mention that the HAL Atheros has released the
-source for differs from the HAL versions we use in MadWifi, and thus
-is no drop-in replacement. In theory it should be possible to
-integrate the HAL and thus make MadWifi a fully open-source driver. "
+z
 
-=2D-=20
-JID: hrw@jabber.org
-
-
+PS: I forced an upgrade on the git branch
 
 
