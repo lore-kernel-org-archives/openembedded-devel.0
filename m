@@ -1,24 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1KqT85-0004LL-Nb
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Oct 2008 15:43:06 +0200
-Received: (qmail invoked by alias); 16 Oct 2008 13:37:50 -0000
-Received: from e178069006.adsl.alicedsl.de (EHLO [192.168.4.110]) [85.178.69.6]
-	by mail.gmx.net (mp006) with SMTP; 16 Oct 2008 15:37:50 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+AZ7Bn5cmA322ZyKCkmDP+U3Vko9uphEZcDIIa+A
-	hYHLEo81QUu4xD
-Message-ID: <48F743EF.90401@gmx.net>
-Date: Thu, 16 Oct 2008 15:38:55 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.79
-Subject: RFC: add BPN/BP to minimize boilerplate code for *-native (and similar) variants
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KqTIQ-0000QN-49
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 15:53:46 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KqTDI-0004jB-M5
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 13:48:28 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 16 Oct 2008 13:48:28 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 16 Oct 2008 13:48:28 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 16 Oct 2008 15:48:19 +0200
+Message-ID: <gd7gn3$esa$1@ger.gmane.org>
+References: <48F743EF.90401@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
+In-Reply-To: <48F743EF.90401@gmx.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: RFC: add BPN/BP to minimize boilerplate code for *-native (and similar) variants
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 13:43:07 -0000
-X-Groupsio-MsgNum: 6243
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig15CCB1FC5B2D8ADA682EE0E5"
+X-List-Received-Date: Thu, 16 Oct 2008 13:53:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig15CCB1FC5B2D8ADA682EE0E5
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On 16-10-2008 15:38, Robert Schuster wrote:
+> Hi,
+> please have a look at this bugzilla entry and the proposed patch:
+>
+> http://bugs.openembedded.net/show_bug.cgi?id=4735
 
-Hi,
-please have a look at this bugzilla entry and the proposed patch:
-
-http://bugs.openembedded.net/show_bug.cgi?id=3D4735
-
-Regards
-Robert
+Looks like it would save me from some repetetive monkey work :)
 
 
---------------enig15CCB1FC5B2D8ADA682EE0E5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+>
+> Regards
+> Robert
+>
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iEYEAREIAAYFAkj3Q/IACgkQG9cfwmwwEtqsCgCfeRChj+oh+qAueVa5dvPrlFvO
-mwoAn2oPrsc8fiErT5RhFqfbiLT4dkxV
-=ql9N
------END PGP SIGNATURE-----
 
---------------enig15CCB1FC5B2D8ADA682EE0E5--
+
