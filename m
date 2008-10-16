@@ -1,22 +1,31 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1KqRTs-00067i-TJ
-	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 13:57:29 +0200
-Received: (qmail 27678 invoked by uid 813007); 16 Oct 2008 11:52:15 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 16 Oct 2008 11:52:15 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Oct 2008 13:52:21 +0200
-User-Agent: KMail/1.10.1 (Linux/2.6.27; KDE/4.1.2; x86_64; ; )
-References: <200810151022.38477.zecke@selfish.org>
-	<200810152317.10733.zecke@selfish.org> <gd6p2t$th1$1@ger.gmane.org>
-In-Reply-To: <gd6p2t$th1$1@ger.gmane.org>
+	(envelope-from <sledz@DResearch.DE>) id 1KqRuu-0003SF-8w
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Oct 2008 14:25:24 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id D923E16DF7B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Oct 2008 14:27:28 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 6989B2A41F5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Oct 2008 14:28:31 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Message-Id: <200810161352.22110.openembedded@haerwu.biz>
-Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
+Date: Thu, 16 Oct 2008 14:20:11 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF45E@hiob.intern.dresearch.de>
+In-Reply-To: <200810152017.34100.openembedded@haerwu.biz>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] RFC: Making it mandantory to have a checksums.ini entry
+Thread-Index: Acku8mnJjBAE8KukRZaWLAui74dAvAAlq3DQ
+References: <gd5aj9$h8u$1@ger.gmane.org>
+	<200810152017.34100.openembedded@haerwu.biz>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: RFC: Making it mandantory to have a checksums.ini entry
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,22 +39,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 11:57:29 -0000
+X-List-Received-Date: Thu, 16 Oct 2008 12:25:24 -0000
+Content-class: urn:content-classes:message
 Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+	charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-Thursday 16 of October 2008 09:05:01 Koen Kooi napisa=C5=82(a):
-
-> Looks good, but I first would like to know how one can identify a
-> recipe that breaks with as-needed. Does it fail to link, does it
-
-=46ail to link.
-
-=2D-=20
-JID: hrw@jabber.org
-
-
+V291bGQgYmUgYSBnb29kIGlkZWEgdG8gdXBkYXRlIDxodHRwOi8vd2lraS5vcGVuZW1iZWRkZWQu
+bmV0L2luZGV4LnBocC9VcGRhdGVfY2hlY2tzdW1zLmluaT4sIHNvIHRoYXQgdGhpcyBpbmZvcm1h
+dGlvbiBpcyBhdmFpbGFibGUgb3V0c2lkZSB0aGlzIG1haWxpbmcgbGlzdC4NCg==
 
 
