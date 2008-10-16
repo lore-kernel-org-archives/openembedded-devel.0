@@ -1,44 +1,33 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KqZ6Q-0005s4-4f
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Oct 2008 22:05:48 +0200
-Received: from hostdime.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 48767334EC9;
-	Thu, 16 Oct 2008 17:05:40 -0300 (BRT)
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 7715D334E9D;
-	Thu, 16 Oct 2008 17:05:37 -0300 (BRT)
-Received: from mail.freedom.ind.br ([201.35.65.91] helo=mail.freedom.ind.br)
-	by mail.freedom.ind.br; 16 Oct 2008 17:05:36 -0300
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id CFA608E0538;
-	Thu, 16 Oct 2008 17:05:39 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 993718BD235;
-	Thu, 16 Oct 2008 17:05:39 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 16 Oct 2008 17:05:39 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 30F2FC1EC;
-	Thu, 16 Oct 2008 18:07:12 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id DCCE3610191; Thu, 16 Oct 2008 17:02:58 -0300 (BRT)
-To: openembedded-devel@lists.openembedded.org
-References: <1224184795.4235.133.camel@lenovo.internal.reciva.com>
-	<gd8630$66f$1@ger.gmane.org>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Thu, 16 Oct 2008 17:02:58 -0300
-In-Reply-To: <gd8630$66f$1@ger.gmane.org> (Koen Kooi's message of "Thu\,
-	16 Oct 2008 21\:53\:04 +0200")
-Message-ID: <87fxmwqpe5.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
-MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KqZHg-0006Eo-J5
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 22:17:24 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KqZHd-0004Jc-Qg
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 20:17:21 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 16 Oct 2008 20:17:21 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 16 Oct 2008 20:17:21 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 16 Oct 2008 22:17:14 +0200
+Message-ID: <gd87ga$b9n$1@ger.gmane.org>
+References: <1224184795.4235.133.camel@lenovo.internal.reciva.com>	<gd8630$66f$1@ger.gmane.org>
+	<87fxmwqpe5.fsf@neumann.lab.ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
+In-Reply-To: <87fxmwqpe5.fsf@neumann.lab.ossystems.com.br>
+Sender: news <news@ger.gmane.org>
 Subject: Re: xserver-xorg rdepends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -53,27 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 20:05:57 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 16 Oct 2008 20:17:25 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Koen Kooi <k.kooi@student.utwente.nl> writes:
-
->> Any objections?
+On 16-10-2008 22:02, Otavio Salvador wrote:
+> Koen Kooi<k.kooi@student.utwente.nl>  writes:
 >
-> Yes. Recent xservers need hal for various input systems to work
-> correctly. So instead of crippling the xserver you can keep a crippled
-> version in your personal tree or overlay.
+>>> Any objections?
+>> Yes. Recent xservers need hal for various input systems to work
+>> correctly. So instead of crippling the xserver you can keep a crippled
+>> version in your personal tree or overlay.
+>
+> Fully support to keep hal as rdepends.
 
-Fully support to keep hal as rdepends.
+Thinking about it some more, we should turn back the libhal split, so 
+every hal apps works, instead of adding rdepends when we encounter 
+broken apps.
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+regards,
+
+Koen
+
+PS: how can I merge your xfce work into .dev? The git phrasebook isn't 
+really clear on that.
+
+
 
 
