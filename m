@@ -1,41 +1,25 @@
-Received: from [209.85.162.182] (helo=el-out-1112.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1KqNJm-0007Di-Vw
+	(envelope-from <pb@reciva.com>) id 1KqNeO-0007wL-Gi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Oct 2008 09:30:47 +0200
-Received: by el-out-1112.google.com with SMTP id s27so1226373ele.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2008 00:25:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=+T6Vb9eJnVWveKsHjpB8tOuM8WgpLHRPNrsnTasHns0=;
-	b=vQ/x6HesABQPZ5spnycapFLoAdQ+qmexZva1M1eY6Dw/XdWSlwhc4NMXZBhQTUBBsB
-	mJF4ZjXz0WRZJoB4pebPgpfHLiz9BNqQKF8bqyN45yBda95/hT5RFpDWT1O+RPdLkBxI
-	AI60q/vfzoYxctkH9LtNAEB/l1C/jVUWU9TJ0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=LAMOMon/DgMoAdU2TarF4eHcalvYffuRF5qY0fhW0J4JbRDh3naWAUtjVzxuapVqtO
-	z7Qy6gLLJmuEnpkKT3NBRKidMib/ABGogap3cs39U7WEbbXNFaxcfa95ZzEXKrWv+Zui
-	GKR8ces+2ozJ8VAj1+2apFQSEvYcPa66hs1AE=
-Received: by 10.90.96.15 with SMTP id t15mr2592665agb.91.1224141934509;
-	Thu, 16 Oct 2008 00:25:34 -0700 (PDT)
-Received: from ?192.168.35.8? (mir-nil-pat-118-150.wustl.edu [128.252.118.150])
-	by mx.google.com with ESMTPS id c78sm1258737hsa.17.2008.10.16.00.25.32
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 16 Oct 2008 00:25:33 -0700 (PDT)
-Message-ID: <48F6EC69.6080007@gmail.com>
-Date: Thu, 16 Oct 2008 02:25:29 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Thu, 16 Oct 2008 09:52:04 +0200
+Received: from 88-111-190-175.dynamic.dsl.as9105.com ([88.111.190.175]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KqNZK-000897-E5
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Oct 2008 08:46:51 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20081012031612.E518B189328@amethyst.openembedded.net>
-	<48F325C6.9040206@gmx.net>
-In-Reply-To: <48F325C6.9040206@gmx.net>
-Subject: Re: [oe-commits] : libxml2: bump to 2.7.2
+In-Reply-To: <200810160043.08202.zecke@selfish.org>
+References: <200810151022.38477.zecke@selfish.org>
+	<200810152153.52020.zecke@selfish.org> <gd5i1h$frs$1@ger.gmane.org>
+	<200810160043.08202.zecke@selfish.org>
+Date: Thu, 16 Oct 2008 08:46:49 +0100
+Message-Id: <1224143209.4235.129.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,45 +33,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 07:30:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 16 Oct 2008 07:52:04 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 10/13/2008 05:41 AM, Robert Schuster wrote:
-> Hi,
-> first: I am completely open to updating to newer program and or library
-> versions.
+On Thu, 2008-10-16 at 00:43 +0200, Holger Freyther wrote:
+> Wow, I had to read that a couple of times. In Linux terms I would have to add  
+> a S-O-B to the commit. If it goes through your hands you add your S-O-B as 
+> well, if you just review and like the patch you ack?
 > 
-> However
-> 
-> OE GIT Trial schrieb:
-> 
->>  packages/libxml/libxml2_2.6.27.bb                  |    3 ---
->>  packages/libxml/libxml2_2.6.29.bb                  |    4 ----
-> 
-> Running
-> 
-> 	grep -r "libxml2" *
-> 
-> in conf/
-> 
-> results in:
-> 
-> distro/chinook-compat.conf:PREFERRED_VERSION_libxml2          = "2.6.27"
-> distro/include/preferred-om-2008-versions.inc:PREFERRED_VERSION_libxml2
-> ?= "2.6.29"
-> distro/include/preferred-om-2008-versions.inc:PREFERRED_VERSION_libxml2-native
-> ?= "2.6.29"
-> 
-> I would like to be asked or informed before stuff is removed from the
-> repository that is used by distros I maintain.
+> yes, the policy needs update... and I will sleep now
 
-Rob,
+I really don't think that we need to get into "Signed-off-by" and the
+like.  That sort of process has some value for the kernel people because
+they often have a lengthy chain of merge responsibility between the
+originator of a given patch and the person who ultimately commits it
+into the master tree.  Also, they are maintaining what is essentially a
+single, coherent work for copyright purposes and hence they need to be
+at least slightly careful about tracking ownership of IP rights.
 
-Sorry about that. Please revert that as you see fit. I'm not close to a 
-build machine any time soon.
+Neither of these considerations really applies to the OE metadata
+repository in its current form, and it's not clear what would be gained
+by using or requiring this kind of signoff procedure.
 
-Regards
-Gordon
+p.
+
+
 
 
