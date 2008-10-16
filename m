@@ -1,30 +1,25 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KqSIe-0004Ik-Al
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thommycheck@gmx.de>) id 1KqSQ3-0004Z3-Nz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Oct 2008 14:49:56 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id E286F16DF7B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2008 14:52:00 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 753872A41F5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2008 14:53:03 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Thu, 16 Oct 2008 14:57:35 +0200
+Received: (qmail invoked by alias); 16 Oct 2008 12:52:20 -0000
+Received: from p57BB6D3B.dip.t-dialin.net (EHLO [192.168.2.3]) [87.187.109.59]
+	by mail.gmx.net (mp042) with SMTP; 16 Oct 2008 14:52:20 +0200
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX1+iWqgbs2eiovqEwnSn+bbbfCqQisy6MU2vQ/B6fA
+	uNGiq13K6iqyij
+Message-ID: <48F738FD.60905@gmx.de>
+Date: Thu, 16 Oct 2008 14:52:13 +0200
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
 MIME-Version: 1.0
-Date: Thu, 16 Oct 2008 14:44:43 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF463@hiob.intern.dresearch.de>
-In-Reply-To: <48F73617.1040900@gmx.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] RFC: Making it mandantory to have a checksums.ini entry
-Thread-Index: AckvjISYqyjYy4p9RCSZl0lTaswALQAAC2Tw
-References: <gd5aj9$h8u$1@ger.gmane.org>	<200810152017.34100.openembedded@haerwu.biz><69E6C70090A0A14498CC98FAE5E06B6E3CF45E@hiob.intern.dresearch.de>
-	<48F73617.1040900@gmx.de>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
+To: openembedded-devel@lists.openembedded.org
+References: <gd5aj9$h8u$1@ger.gmane.org>	<200810152017.34100.openembedded@haerwu.biz><69E6C70090A0A14498CC98FAE5E06B6E3CF45E@hiob.intern.dresearch.de>	<48F73617.1040900@gmx.de>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF463@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF463@hiob.intern.dresearch.de>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.78
 Subject: Re: RFC: Making it mandantory to have a checksums.ini entry
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,20 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 12:49:56 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Oct 2008 12:57:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> > Would be a good idea to update=20
-> > <http://wiki.openembedded.net/index.php/Update_checksums.ini>,
-> > so that this information is available outside this mailing list.
->   =20
-> I added a new page http://wiki.openembedded.net/index.php/Checksums=20
-> because its not so much related to policy.
-
-Then the old page should be deleted to avoid confusions.
-
+Sledz, Steffen schrieb:
+>>> Would be a good idea to update 
+>>> <http://wiki.openembedded.net/index.php/Update_checksums.ini>,
+>>> so that this information is available outside this mailing list.
+>>>       
+>>    
+>> I added a new page http://wiki.openembedded.net/index.php/Checksums 
+>> because its not so much related to policy.
+>>     
+>
+> Then the old page should be deleted to avoid confusions.
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
+No. The new page is about how to add new chechsums and other page is 
+about what to do if a checksum is wrong.
 
 
