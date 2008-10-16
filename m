@@ -1,31 +1,24 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KqSjB-0002Xa-US
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1KqT85-0004LL-Nb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Oct 2008 15:17:25 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 7529A16DF7B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2008 15:19:26 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 081CC2A41F5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2008 15:20:29 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Thu, 16 Oct 2008 15:43:06 +0200
+Received: (qmail invoked by alias); 16 Oct 2008 13:37:50 -0000
+Received: from e178069006.adsl.alicedsl.de (EHLO [192.168.4.110]) [85.178.69.6]
+	by mail.gmx.net (mp006) with SMTP; 16 Oct 2008 15:37:50 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+AZ7Bn5cmA322ZyKCkmDP+U3Vko9uphEZcDIIa+A
+	hYHLEo81QUu4xD
+Message-ID: <48F743EF.90401@gmx.net>
+Date: Thu, 16 Oct 2008 15:38:55 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-Date: Thu, 16 Oct 2008 15:12:09 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF464@hiob.intern.dresearch.de>
-In-Reply-To: <48F738FD.60905@gmx.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] RFC: Making it mandantory to have a checksums.ini entry
-Thread-Index: AckvjjUpsj1YVvodR2CqIIBLa+mpkQAAmR6w
-References: <gd5aj9$h8u$1@ger.gmane.org>	<200810152017.34100.openembedded@haerwu.biz><69E6C70090A0A14498CC98FAE5E06B6E3CF45E@hiob.intern.dresearch.de>	<48F73617.1040900@gmx.de><69E6C70090A0A14498CC98FAE5E06B6E3CF463@hiob.intern.dresearch.de>
-	<48F738FD.60905@gmx.de>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: RFC: Making it mandantory to have a checksums.ini entry
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.79
+Subject: RFC: add BPN/BP to minimize boilerplate code for *-native (and similar) variants
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,20 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 13:17:31 -0000
-X-List-Received-Date: Thu, 16 Oct 2008 13:17:31 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Thu, 16 Oct 2008 13:43:07 -0000
+X-Groupsio-MsgNum: 6243
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig15CCB1FC5B2D8ADA682EE0E5"
+
+--------------enig15CCB1FC5B2D8ADA682EE0E5
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-> > Then the old page should be deleted to avoid confusions.
+Hi,
+please have a look at this bugzilla entry and the proposed patch:
 
-> No. The new page is about how to add new chechsums and other page is=20
-> about what to do if a checksum is wrong.
+http://bugs.openembedded.net/show_bug.cgi?id=3D4735
 
-Hmmmm? OK, but the names of both pages "Update checksums.ini" and =
-"Checksums" are really confusing then.
-
+Regards
+Robert
 
 
+--------------enig15CCB1FC5B2D8ADA682EE0E5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkj3Q/IACgkQG9cfwmwwEtqsCgCfeRChj+oh+qAueVa5dvPrlFvO
+mwoAn2oPrsc8fiErT5RhFqfbiLT4dkxV
+=ql9N
+-----END PGP SIGNATURE-----
+
+--------------enig15CCB1FC5B2D8ADA682EE0E5--
