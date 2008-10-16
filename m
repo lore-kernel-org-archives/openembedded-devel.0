@@ -1,26 +1,33 @@
-Received: from [207.172.157.102] (helo=smtp02.lnh.mail.rcn.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tmtalpey@rcn.com>) id 1KqJS4-0004jo-OG
-	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 05:23:04 +0200
-Received: from mr02.lnh.mail.rcn.net ([207.172.157.22])
-	by smtp02.lnh.mail.rcn.net with ESMTP; 15 Oct 2008 23:17:53 -0400
-Received: from smtp01.lnh.mail.rcn.net (smtp01.lnh.mail.rcn.net [207.172.4.11])
-	by mr02.lnh.mail.rcn.net (MOS 3.8.6-GA) with ESMTP id PDR76389;
-	Wed, 15 Oct 2008 23:17:53 -0400 (EDT)
-Message-Id: <77ts5u$jp3k1o@smtp01.lnh.mail.rcn.net>
-Received: from c-24-91-108-154.hsd1.ma.comcast.net (HELO tmt.rcn.com)
-	([24.91.108.154])
-	by smtp01.lnh.mail.rcn.net with ESMTP; 15 Oct 2008 23:17:54 -0400
-X-Mailer: QUALCOMM Windows Eudora Version 7.1.0.9
-Date: Wed, 15 Oct 2008 23:17:51 -0400
-To: openembedded-devel@lists.openembedded.org
-From: Tom Talpey <tmtalpey@rcn.com>
-In-Reply-To: <200810160043.08202.zecke@selfish.org>
-References: <200810151022.38477.zecke@selfish.org>
-	<200810152153.52020.zecke@selfish.org> <gd5i1h$frs$1@ger.gmane.org>
-	<200810160043.08202.zecke@selfish.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KqN07-0001Rq-9y
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 09:10:27 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KqMv1-0005Vn-8W
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 07:05:11 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 16 Oct 2008 07:05:11 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 16 Oct 2008 07:05:11 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 16 Oct 2008 09:05:01 +0200
+Message-ID: <gd6p2t$th1$1@ger.gmane.org>
+References: <200810151022.38477.zecke@selfish.org> <gd4aul$sb5$1@ger.gmane.org>
+	<200810152317.10733.zecke@selfish.org>
 Mime-Version: 1.0
-X-Junkmail-Whitelist: YES (by domain whitelist at mr02.lnh.mail.rcn.net)
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
+In-Reply-To: <200810152317.10733.zecke@selfish.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,28 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 03:23:05 -0000
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 16 Oct 2008 07:10:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-At 06:43 PM 10/15/2008, Holger Freyther wrote:
->Wow, I had to read that a couple of times. In Linux terms I would have to add  
->a S-O-B to the commit. If it goes through your hands you add your S-O-B as 
->well, if you just review and like the patch you ack?
+On 15-10-2008 23:17, Holger Freyther wrote:
+> On Wednesday 15 October 2008 10:51:33 Koen Kooi wrote:
+>> On 15-10-2008 10:22, Holger Freyther wrote:
+>>> Hey guys,
+>>>
+>>> I would start linking everything with -Wl,--hash-style=both as this is
+>>> said to speed up the loading of shared libraries by about 50%
+>> Also check the as-needed stuff from Poky:
+>>
+>> ASNEEDED = "-Wl,--as-needed"
+>> ASNEEDED_pn-console-tools = ""
+>> ASNEEDED_pn-distcc = ""
+>> ASNEEDED_pn-openobex = ""
+>> ASNEEDED_pn-icu = ""
+>> ASNEEDED_pn-xserver-kdrive-xomap = ""
+>> ASNEEDED_pn-minimo = ""
+>> ASNEEDED_pn-pciutils = ""
+>> ASNEEDED_pn-puzzles = ""
+>> ASNEEDED_pn-dialer = ""
+>>
+>> TARGET_LDFLAGS += "${ASNEEDED}"
+>>
+>> That should also reduce library load time *and* eliminate spurious deps.
+>
+> Thanks. holger/hash-style has my take on that. It attempts to keep the
+> enabling to the libc and distro and the blacklist can be shared among
+> everyone.
+>
+> comments?
 
-If you write code and add it to a patch, you generally sign it (S-O-B)
-because you're asserting that your addition adheres to the relevant
-license(s). If you merely approve of code and don't add any, then you
-ack it (A-B).
+Looks good, but I first would like to know how one can identify a recipe 
+that breaks with as-needed. Does it fail to link, does it crash at 
+runtime, etc?
 
-There are lots of other amusing lines that are often added, but the
-S-O-B one is the key, since it establishes the chain of responsibility.
-Beginning with the submitter!
+regards,
 
-Do OE recipes have any particular licensing to govern any S-O-B terms?
-If that's documented somewhere, I'd be interested to see it. There isn't
-a license in the tree, that I've found.
-
-Tom.
+Koen
 
 
 
