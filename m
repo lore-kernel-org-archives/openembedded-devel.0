@@ -1,40 +1,26 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [207.172.157.102] (helo=smtp02.lnh.mail.rcn.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1KqFRg-0007po-Gz
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Oct 2008 01:06:24 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A23698400B0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2008 01:01:14 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id C8D7B8400A0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2008 01:01:13 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (e178090112.adsl.alicedsl.de
-	[85.178.90.112]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2008 01:01:13 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 0F53A3C1DE; Thu, 16 Oct 2008 01:01:12 +0200 (CEST)
-Date: Thu, 16 Oct 2008 01:01:12 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <tmtalpey@rcn.com>) id 1KqJS4-0004jo-OG
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 05:23:04 +0200
+Received: from mr02.lnh.mail.rcn.net ([207.172.157.22])
+	by smtp02.lnh.mail.rcn.net with ESMTP; 15 Oct 2008 23:17:53 -0400
+Received: from smtp01.lnh.mail.rcn.net (smtp01.lnh.mail.rcn.net [207.172.4.11])
+	by mr02.lnh.mail.rcn.net (MOS 3.8.6-GA) with ESMTP id PDR76389;
+	Wed, 15 Oct 2008 23:17:53 -0400 (EDT)
+Message-Id: <77ts5u$jp3k1o@smtp01.lnh.mail.rcn.net>
+Received: from c-24-91-108-154.hsd1.ma.comcast.net (HELO tmt.rcn.com)
+	([24.91.108.154])
+	by smtp01.lnh.mail.rcn.net with ESMTP; 15 Oct 2008 23:17:54 -0400
+X-Mailer: QUALCOMM Windows Eudora Version 7.1.0.9
+Date: Wed, 15 Oct 2008 23:17:51 -0400
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081015230112.GB5563@rhein.zuhause.netz>
+From: Tom Talpey <tmtalpey@rcn.com>
+In-Reply-To: <200810160043.08202.zecke@selfish.org>
 References: <200810151022.38477.zecke@selfish.org>
 	<200810152153.52020.zecke@selfish.org> <gd5i1h$frs$1@ger.gmane.org>
 	<200810160043.08202.zecke@selfish.org>
-MIME-Version: 1.0
-In-Reply-To: <200810160043.08202.zecke@selfish.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Mime-Version: 1.0
+X-Junkmail-Whitelist: YES (by domain whitelist at mr02.lnh.mail.rcn.net)
 Subject: Re: [RFC] Enable --hash-style=both for all recent gcc4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,15 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2008 23:06:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Oct 2008 03:23:05 -0000
+Content-Type: text/plain; charset="us-ascii"
 
-Hi,
+At 06:43 PM 10/15/2008, Holger Freyther wrote:
+>Wow, I had to read that a couple of times. In Linux terms I would have to add  
+>a S-O-B to the commit. If it goes through your hands you add your S-O-B as 
+>well, if you just review and like the patch you ack?
 
-just checked for uclibc. It has the HASH support at least in the svn version
-I checked, but it is disabled in our configs.
+If you write code and add it to a patch, you generally sign it (S-O-B)
+because you're asserting that your addition adheres to the relevant
+license(s). If you merely approve of code and don't add any, then you
+ack it (A-B).
 
-Bye Henning
+There are lots of other amusing lines that are often added, but the
+S-O-B one is the key, since it establishes the chain of responsibility.
+Beginning with the submitter!
+
+Do OE recipes have any particular licensing to govern any S-O-B terms?
+If that's documented somewhere, I'd be interested to see it. There isn't
+a license in the tree, that I've found.
+
+Tom.
+
 
 
