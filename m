@@ -1,34 +1,19 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KqWkP-0000Sb-CO
-	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 19:34:53 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KqWkO-0006Fl-7K
-	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 17:34:52 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 16 Oct 2008 17:34:52 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 16 Oct 2008 17:34:52 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <pb@reciva.com>) id 1KqYOK-00086W-Jb
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 21:20:13 +0200
+Received: from 88-111-190-175.dynamic.dsl.as9105.com ([88.111.190.175]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KqYOB-0003Lv-HU
+	for openembedded-devel@openembedded.org; Thu, 16 Oct 2008 20:20:04 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 16 Oct 2008 19:34:43 +0200
-Message-ID: <gd7tvk$69e$1@ger.gmane.org>
-References: <gd7lda$3bi$1@ger.gmane.org>
-	<871vygv5fo.fsf@neumann.lab.ossystems.com.br>
+Date: Thu, 16 Oct 2008 20:19:55 +0100
+Message-Id: <1224184795.4235.133.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b1pre) Gecko/20081006 Shredder/3.0b1pre
-In-Reply-To: <871vygv5fo.fsf@neumann.lab.ossystems.com.br>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Commit policy violations
+X-Mailer: Evolution 2.22.3.1 
+Subject: xserver-xorg rdepends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +27,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 17:34:53 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 16 Oct 2008 19:20:13 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 16-10-2008 19:02, Otavio Salvador wrote:
-> Koen Kooi<k.kooi@student.utwente.nl>  writes:
->
->> Hi,
->>
->> We have had a commit policy for some years now, so it would be nice if
->> people would actually stick to it.
->>
->> So don't do things like this:
->>
->> "[PR] Change PR to FILE_PR and intro PR as FILE_PR + DISTRO_PR"
->>
->> or
->>
->> "[hal] Add latest hal and hal-info"
->>
->> or
->>
->> "add task-fonts-truetype"
->>
->> Those 3 are all *bad*.
->
-> Could you explain which would be the good ones?
+I discovered today that xorg-xserver-common.inc has:
 
-The git phrasebook has the format:
+RDEPENDS_${PN} = "hal"
 
-http://wiki.openembedded.net/index.php/GitPhraseBook
+which seems a bit undesirable.  I propose to remove this hard-wired
+dependency; any DISTRO who wants to keep it can specify that in their
+own config file.
 
-Examples of decent commit messages from today[1]:
+Any objections?
 
-"hal_0.5.11.bb : add new version from OM branch"
-
-"xmms: add sed magic to fix builds with gettext > 0.14.0"
-
-"hal 0.5.11: move to nonworking:
-* autoreconf fails
-* after fixing that it doesn't build"
-
-regards,
-
-Koen
-
-[1] That sentence no verb!
+p.
 
 
 
