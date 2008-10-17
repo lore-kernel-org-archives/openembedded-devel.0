@@ -1,28 +1,26 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KqliK-0004Wi-R5
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1KqnL9-0001Fb-8W
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Oct 2008 11:33:44 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 9132B16DF7B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2008 11:41:00 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 83F7B2A41F5
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2008 11:42:03 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Fri, 17 Oct 2008 13:17:55 +0200
+Received: (qmail invoked by alias); 17 Oct 2008 11:17:47 -0000
+Received: from p579E1958.dip.t-dialin.net (EHLO [192.168.10.3]) [87.158.25.88]
+	by mail.gmx.net (mp060) with SMTP; 17 Oct 2008 13:17:47 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+QYP1pNkCQBD/dXIcmvbXOrF/jAJIyp2qjFCIf02
+	5s94HoivIzcoA0
+Message-ID: <48F8745B.2030001@gmx.net>
+Date: Fri, 17 Oct 2008 13:17:47 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
 MIME-Version: 1.0
-Date: Fri, 17 Oct 2008 11:33:41 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF46B@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: grub - confusing build problem
-Thread-Index: AckwO3DUtvDhictCRdatvX3N6UxI3Q==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: grub - confusing build problem
+To: openembedded-devel@lists.openembedded.org
+References: <48F825DE.90104@miromico.ch>
+In-Reply-To: <48F825DE.90104@miromico.ch>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.6
+Subject: Re: Adding support for our
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,72 +34,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2008 09:33:45 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 17 Oct 2008 11:17:55 -0000
+X-Groupsio-MsgNum: 6258
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig65FB6FA8FFB0C6F0A29F93D3"
 
-SSd2ZSBhIHJlYWxseSBjb25mdXNpbmcgcHJvYmxlbSBjb21waWxpbmcgZ3J1YiB3aXRoIE9FLiAg
-OigNCg0KSSd2ZSB0byBtYWNoaW5lczogbXkgbm90ZWJvb2sgYW5kIGEgdm13YXJlLiBCb3RoIGFy
-ZSAzMi1iaXQgbWFjaGluZXMsIHJ1bm5pbmcgb3BlblNVU0UgMTEuMCAoc2FtZSB1cGRhdGUgbGV2
-ZWwpIGFuZCB1c2UgdGhlIHNhbWUgdmVyc2lvbiBmcm9tIG9yZy5vcGVuZW1iZWRkZWQuZGV2LiBJ
-IHRyaWVkIHRvIGJ1aWxkIGFuIEFuZ3N0cm9tIGltYWdlIGZvciB4ODYgd2l0aCBzYW1lIGNvbW1h
-bmQgbGluZXMgb25lIGJvdGggbWFjaGluZXMuIE9uIHRoZSBub3RlYm9vayBncnViXzAuOTcuYmIg
-YnVpbGRzIGZpbmUuIE9uIHRoZSB2bSB0aGUgY29tcGlsZSBzdGFnZSBmYWlscyB3aXRoOg0KDQpj
-Y2FjaGUgaTQ4Ni1hbmdzdHJvbS1saW51eC1nY2MgLW1hcmNoPWk0ODYgLURIQVZFX0NPTkZJR19I
-IC1JLiAtSS4uIC1JLi4vc3RhZ2UxICAtaXN5c3RlbS9ob21lL0RSRVNFQVJDSC9zbGVkei9vZS90
-bXAvc3RhZ2luZy9pNDg2LWFuZ3N0cm9tLWxpbnV4L3Vzci9pbmNsdWRlIC1XYWxsIC1XbWlzc2lu
-Zy1wcm90b3R5cGVzIC1XdW51c2VkIC1Xc2hhZG93IC1XcG9pbnRlci1hcml0aCAtZmFsaWduLWp1
-bXBzPTEgLWZhbGlnbi1sb29wcz0xIC1mYWxpZ24tZnVuY3Rpb25zPTEgLVd1bmRlZiAgLWZuby1i
-dWlsdGluIC1ub3N0ZGluYyAgLURTVVBQT1JUX1NFUklBTD0xIC1EU1VQUE9SVF9IRVJDVUxFUz0x
-IC1ESEFWRV9DT05GSUdfSCAtSS4gLUkuLiAtSS4uL3N0YWdlMSAtaXN5c3RlbS9ob21lL0RSRVNF
-QVJDSC9zbGVkei9vZS90bXAvc3RhZ2luZy9pNDg2LWFuZ3N0cm9tLWxpbnV4L3Vzci9pbmNsdWRl
-IC1XYWxsIC1XbWlzc2luZy1wcm90b3R5cGVzIC1XdW51c2VkIC1Xc2hhZG93IC1XcG9pbnRlci1h
-cml0aCAtZmFsaWduLWp1bXBzPTEgLWZhbGlnbi1sb29wcz0xIC1mYWxpZ24tZnVuY3Rpb25zPTEg
-LVd1bmRlZiAtaXN5c3RlbS9ob21lL0RSRVNFQVJDSC9zbGVkei9vZS90bXAvc3RhZ2luZy9pNDg2
-LWFuZ3N0cm9tLWxpbnV4L3Vzci9pbmNsdWRlIC1mZXhwZW5zaXZlLW9wdGltaXphdGlvbnMgLWZy
-ZW5hbWUtcmVnaXN0ZXJzIC1mb21pdC1mcmFtZS1wb2ludGVyIC1PMiAtTVQgc3RhcnRfZXhlYy1z
-dGFydC5vIC1NRCAtTVAgLU1GIC5kZXBzL3N0YXJ0X2V4ZWMtc3RhcnQuVHBvIC1jIC1vIHN0YXJ0
-X2V4ZWMtc3RhcnQubyBgdGVzdCAtZiAnc3RhcnQuUycgfHwgZWNobyAnLi8nYHN0YXJ0LlMNCnN0
-YXJ0LlM6IEFzc2VtYmxlciBtZXNzYWdlczoNCnN0YXJ0LlM6Mzk5OiBFcnJvcjogdW5kZWZpbmVk
-IHN5bWJvbCBgTDBeQScgaW4gb3BlcmF0aW9uDQptYWtlWzNdOiAqKiogW3N0YXJ0X2V4ZWMtc3Rh
-cnQub10gRXJyb3IgMQ0KbWFrZVszXTogTGVhdmluZyBkaXJlY3RvcnkgYC9ob21lL0RSRVNFQVJD
-SC9zbGVkei9vZS90bXAvd29yay9pNDg2LWFuZ3N0cm9tLWxpbnV4L2dydWItMC45Ny1yMy4xL2dy
-dWItMC45Ny9zdGFnZTInDQptYWtlWzJdOiAqKiogW2FsbF0gRXJyb3IgMg0KbWFrZVsyXTogTGVh
-dmluZyBkaXJlY3RvcnkgYC9ob21lL0RSRVNFQVJDSC9zbGVkei9vZS90bXAvd29yay9pNDg2LWFu
-Z3N0cm9tLWxpbnV4L2dydWItMC45Ny1yMy4xL2dydWItMC45Ny9zdGFnZTInDQptYWtlWzFdOiAq
-KiogW2FsbC1yZWN1cnNpdmVdIEVycm9yIDENCm1ha2VbMV06IExlYXZpbmcgZGlyZWN0b3J5IGAv
-aG9tZS9EUkVTRUFSQ0gvc2xlZHovb2UvdG1wL3dvcmsvaTQ4Ni1hbmdzdHJvbS1saW51eC9ncnVi
-LTAuOTctcjMuMS9ncnViLTAuOTcnDQptYWtlOiAqKiogW2FsbF0gRXJyb3IgMg0KDQpCdXQgdGhl
-cmUgaXMgbm8gc3ltYm9sIGBMMF5BJyBpbiB0aGUgbWVudGlvbmVkIGxpbmUuIFVudGlsIHRoaXMg
-cG9pbnQgYm90aCBsb2cuZG9fY29tcGlsZSBhcmUgY29tcGxldGVseSB0aGUgc2FtZS4gIDooDQoN
-Ckkgc3RhcnRlZCBkZXZzaGVsbCBvbiBib3RoIG1hY2hpbmVzIGFuZCBjYWxsZWQgdGhlIGNvbW1h
-bmQgbGluZSBhYm92ZSBtYW51YWxseSB3aXRoIGEgbGl0dGxlIGRpZmZlcmVuY2UuIEluc3RlYWQg
-b2YgY29tcGlsaW5nIHN0YXJ0LlMgaSBqdXN0IHJ1biB0aGUgcHJlcHJvY2Vzc29yOg0KDQppNDg2
-LWFuZ3N0cm9tLWxpbnV4LWdjYyAtbWFyY2g9aTQ4NiAtREhBVkVfQ09ORklHX0ggLUkuIC1JLi4g
-LUkuLi9zdGFnZTEgIC1pc3lzdGVtL2hvbWUvRFJFU0VBUkNIL3NsZWR6L29lL3RtcC9zdGFnaW5n
-L2k0ODYtYW5nc3Ryb20tbGludXgvdXNyL2luY2x1ZGUgLVdhbGwgLVdtaXNzaW5nLXByb3RvdHlw
-ZXMgLVd1bnVzZWQgLVdzaGFkb3cgLVdwb2ludGVyLWFyaXRoIC1mYWxpZ24tanVtcHM9MSAtZmFs
-aWduLWxvb3BzPTEgLWZhbGlnbi1mdW5jdGlvbnM9MSAtV3VuZGVmICAtZm5vLWJ1aWx0aW4gLW5v
-c3RkaW5jICAtRFNVUFBPUlRfU0VSSUFMPTEgLURTVVBQT1JUX0hFUkNVTEVTPTEgLURIQVZFX0NP
-TkZJR19IIC1JLiAtSS4uIC1JLi4vc3RhZ2UxIC1pc3lzdGVtL2hvbWUvRFJFU0VBUkNIL3NsZWR6
-L29lL3RtcC9zdGFnaW5nL2k0ODYtYW5nc3Ryb20tbGludXgvdXNyL2luY2x1ZGUgLVdhbGwgLVdt
-aXNzaW5nLXByb3RvdHlwZXMgLVd1bnVzZWQgLVdzaGFkb3cgLVdwb2ludGVyLWFyaXRoIC1mYWxp
-Z24tanVtcHM9MSAtZmFsaWduLWxvb3BzPTEgLWZhbGlnbi1mdW5jdGlvbnM9MSAtV3VuZGVmIC1p
-c3lzdGVtL2hvbWUvRFJFU0VBUkNIL3NsZWR6L29lL3RtcC9zdGFnaW5nL2k0ODYtYW5nc3Ryb20t
-bGludXgvdXNyL2luY2x1ZGUgLWZleHBlbnNpdmUtb3B0aW1pemF0aW9ucyAtZnJlbmFtZS1yZWdp
-c3RlcnMgLWZvbWl0LWZyYW1lLXBvaW50ZXIgLU1UIHN0YXJ0X2V4ZWMtc3RhcnQubyAtTUQgLU1Q
-IC1NRiAuZGVwcy9zdGFydF9leGVjLXN0YXJ0LlRwbyAtRSAtbyBzdGFydF9leGVjLXN0YXJ0LlMg
-c3RhcnQuUw0KDQpBZnRlciB0aGF0IGkgY29tcGFyZWQgYm90aCBzdGFydF9leGVjLXN0YXJ0LlMg
-ZmlsZXMgYW5kIGZvdW5kIHRoaXMgb25lIGRpZmZlcmVuY2U6DQoNCmRpZmYgLVUwIHN0YXJ0X2V4
-ZWMtc3RhcnQuUyBvay1zdGFydF9leGVjLXN0YXJ0LlMgDQotLS0gc3RhcnRfZXhlYy1zdGFydC5T
-ICAyMDA4LTEwLTE3IDEwOjMwOjE2LjAwMDAwMDAwMCArMDIwMA0KKysrIG9rLXN0YXJ0X2V4ZWMt
-c3RhcnQuUyAgICAgICAyMDA4LTEwLTE3IDEwOjI5OjMwLjAwMDAwMDAwMCArMDIwMA0KQEAgLTMy
-MyArMzIzIEBADQotIC53b3JkICgxMTM0ODIgKyA1MTEpID4+IDkNCisgLndvcmQgKHVzZXJzICsg
-NTExKSA+PiA5DQoNCkhtbW1tPyBBbnkgaWRlYSB3aGF0J3Mgd3JvbmcgaGVyZT8gV2hhdCBpcyAn
-dXNlcnMnPw0KU29ycnksIGJ1dCBpJ20gbm90IGFuIGFzc2VtYmxlciBzcGVjaWFsaXN0Lg0KDQpX
-b3VsZCBiZSByZWFsbHkgbmljZSBpZiBzb21lb25lIGNvdWxkIGhlbHAuDQoNClRoeCwNClN0ZWZm
-ZW4NCg==
+--------------enig65FB6FA8FFB0C6F0A29F93D3
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Hi Alexm
+
+Alex Raimondi schrieb:
+> We have a new AVR32 based embedded linux board (www.miromico.com/hammer=
+head), which is available now.=20
+That is a nice little board you have there. I personally like the AVR32
+architecture. Atmel also has the better policy when it comes to
+specifications. So I really like to see more AVR32 being used. :)
+
+> We would like to use OpenEmbedded as our major build system to allow ou=
+r customers to build their u-boot,=20
+> kernel and rootfs.
+Great stuff. OE already supports the ATNGW100 (have one here) and the
+AT32STK1000. If your board can boot with the same linux 2.6.24 (or with
+patches to that) it will be quite easy to support your device.
+
+> Of course we would like to contribute to oe, as well.=20
+Very nice!
+
+> Is there such a thing as a board maintainer in oe? If yes, how can we b=
+ecome one?
+We have a "MAINTAINERS" file. If you are a contributor you can add
+information about the machines you are maintaining. This mainly means
+that people will ask you when stuff breaks. In theory it should also
+mean that people will ask you *first* if things are changed in OE that
+affect your device but AFAIK we have no strict policies regarding this.
+
+> We allready adapted a few bb files to get oe building our u-boot and ke=
+rnel. Should we push out these changes?=20
+> How?
+Open a bug report.
+
+> We have two developers working at this project. Our board is AVR32 base=
+d.
+ So, if oe is our major build system we would have to take care that
+avr32 allway builds.
+ This means testing, fixing, extending support. I hope this would be
+benefit enough to endure our newbie questions
+ while we are getting known with the build system.
+OE has a very steep learning curve but when you managed it you will
+benefit very much from its great flexibility.
+
+Thanks for supporting our project!
+
+Regards
+Robert
 
 
+
+
+--------------enig65FB6FA8FFB0C6F0A29F93D3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFI+HRbG9cfwmwwEtoRAuXUAKCJezNkzNfUZQZwnu7WD/xTA8Pq4ACfaLXc
+Lz9E+k2gOA6n7GCrAYbXE04=
+=ucK5
+-----END PGP SIGNATURE-----
+
+--------------enig65FB6FA8FFB0C6F0A29F93D3--
