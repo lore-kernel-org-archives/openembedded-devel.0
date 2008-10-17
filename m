@@ -1,34 +1,26 @@
-Received: from [64.233.170.186] (helo=rn-out-0910.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elena.valhalla@gmail.com>) id 1KqoB7-0008NC-9o
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1Kqp6M-0002hk-Uq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Oct 2008 14:11:37 +0200
-Received: by rn-out-0910.google.com with SMTP id j66so202854rne.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2008 05:11:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=4QQMzXo8v9P0gk5mZ1RBi4QzaNshUW5EUih6G4Sxh1k=;
-	b=AoOVM5bK/7P+bPfblYlIEdGTJEF1JdaJvMbuAvRgEZ+45KxfFidWU9pXV3y2vmCaey
-	EkoVNEp0VP4P+efOfCNo0kOxc43dGsDzUuEM8AQdOo8bnfX77i3GBWjBLTuQrAogJlFX
-	lw5gfcNZBvmckK1b5AOuV78/jG6PKgObZ+Lak=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=MkTQZeIwmXPF/6ipyPVdByRF5p6R3fqClfksV6g3NF5x6YzWpx/h7JQftN39KeG3CH
-	tPjjU4toMyVFQ980GRU7JA6rVX7gocGq7Qmhbnzs+h3dKr0/phAyHMP3dD7NA2aOQ3ZD
-	TxHx5qj8ZEtOp+3ZWmIzvfigDtHgE1v4vFdN0=
-Received: by 10.100.96.9 with SMTP id t9mr5052003anb.109.1224245491918;
-	Fri, 17 Oct 2008 05:11:31 -0700 (PDT)
-Received: by 10.100.139.7 with HTTP; Fri, 17 Oct 2008 05:11:31 -0700 (PDT)
-Message-ID: <5c5e5c350810170511me79ab00ja268198b6d695dfb@mail.gmail.com>
-Date: Fri, 17 Oct 2008 14:11:31 +0200
-From: "Elena of Valhalla" <elena.valhalla@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Fri, 17 Oct 2008 15:10:47 +0200
+Received: (qmail invoked by alias); 17 Oct 2008 13:10:40 -0000
+Received: from p579E1958.dip.t-dialin.net (EHLO [192.168.10.3]) [87.158.25.88]
+	by mail.gmx.net (mp018) with SMTP; 17 Oct 2008 15:10:40 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18xX40j7+Axg+r1zGCsqBEHKrWsn2wL/tDlR01Lxf
+	OmEQVHPnjEJVim
+Message-ID: <48F88ECE.9010905@gmx.net>
+Date: Fri, 17 Oct 2008 15:10:38 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
 MIME-Version: 1.0
-Subject: git repository [was:Re: Adding support for our]
+To: openembedded-devel@lists.openembedded.org
+References: <48F743EF.90401@gmx.net> <gd7gn3$esa$1@ger.gmane.org>
+In-Reply-To: <gd7gn3$esa$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.67
+Subject: Re: RFC: add BPN/BP to minimize boilerplate code for *-native (and similar) variants
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +34,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2008 12:11:37 -0000
+X-List-Received-Date: Fri, 17 Oct 2008 13:10:48 -0000
+X-Groupsio-MsgNum: 6264
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig53AC8C48CDC40AB61B8C293A"
+
+--------------enig53AC8C48CDC40AB61B8C293A
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 17, 2008 at 1:19 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
-> [...]
-> 2) the better way: expose a git repo somewhere with your changes and
-> ask for review.
+Hi,
 
-is there a guide on the proper way to do this? I don't seem to have
-noticed it in the git phrasebook.
+Koen Kooi schrieb:
+On 16-10-2008 15:38, Robert Schuster wrote:
+>> Hi,
+>> please have a look at this bugzilla entry and the proposed patch:
+>>
+>> http://bugs.openembedded.net/show_bug.cgi?id=3D4735
+>=20
+> Looks like it would save me from some repetetive monkey work :)
+thats is what it was meant for. :)
 
-I've been able to find some informations on exposing a "standalone"
-git repo, but with "local" edits of someone else's repo I'm lost
+If no one objects I would like to commit this in say a week.
 
-thanks
+Existing recipes are not affected since BPN =3D=3D PN when the package na=
+me
+does not have one of the known suffixes and according to grep and find,
+no recipe in the repo uses a variable named BP or BPN yet.
 
--- 
-Elena of Valhalla
-
-homepage: http://www.trueelena.org
-email: elena.valhalla@gmail.com
+Regards
+Robert
 
 
+--------------enig53AC8C48CDC40AB61B8C293A
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFI+I7PG9cfwmwwEtoRAlG2AJ0WNa6CgUYyahvKrXS1DgplN6FgdQCgjt9b
+PNCigrXpsMcrEu2Vuh4hwFc=
+=Ko4o
+-----END PGP SIGNATURE-----
+
+--------------enig53AC8C48CDC40AB61B8C293A--
