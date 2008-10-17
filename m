@@ -1,29 +1,19 @@
-Received: from [212.27.42.27] (helo=smtp1-g19.free.fr)
+Received: from [217.150.241.29] (helo=smtp1.nine.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1Kqboi-00071w-JD
+	(envelope-from <mailinglist@miromico.ch>) id 1Kqi8k-0006RL-So
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Oct 2008 00:59:40 +0200
-Received: from smtp1-g19.free.fr (localhost.localdomain [127.0.0.1])
-	by smtp1-g19.free.fr (Postfix) with ESMTP id DD7BE1AB2B3;
-	Fri, 17 Oct 2008 00:59:38 +0200 (CEST)
-Received: from sharky.jerryweb.org (vau75-7-82-234-248-119.fbx.proxad.net
-	[82.234.248.119])
-	by smtp1-g19.free.fr (Postfix) with ESMTP id 9975E1AB2AF;
-	Fri, 17 Oct 2008 00:59:38 +0200 (CEST)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by sharky.jerryweb.org (Postfix) with ESMTP id 219EE18409C;
-	Fri, 17 Oct 2008 00:59:39 +0200 (CEST)
-Message-ID: <48F7C75A.606@bolloretelecom.eu>
-Date: Fri, 17 Oct 2008 00:59:38 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.1.16) Gecko/20080724 Lightning/0.8 Thunderbird/2.0.0.16
-	Mnenhy/0.7.5.0
+	Fri, 17 Oct 2008 07:44:47 +0200
+Received: from [192.168.1.190] (77-58-151-240.dclient.hispeed.ch
+	[77.58.151.240]) by smtp1.nine.ch (Postfix) with ESMTP id 23EDB9681B0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Oct 2008 07:44:42 +0200 (CEST)
+Message-ID: <48F825DE.90104@miromico.ch>
+Date: Fri, 17 Oct 2008 07:42:54 +0200
+From: Alex Raimondi <mailinglist@miromico.ch>
+User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, sledz@DResearch.DE
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF460@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF460@hiob.intern.dresearch.de>
-Subject: Re: checksums.ini Update
+To: openembedded-devel@lists.openembedded.org
+Subject: Adding support for our
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,15 +27,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2008 22:59:41 -0000
+X-List-Received-Date: Fri, 17 Oct 2008 05:44:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-> So here's my patch to checksums.ini:
+Hi, 
 
-Thanks, I have added the entries to checksums.ini.
+We have a new AVR32 based embedded linux board (www.miromico.com/hammerhead), which is available now. 
+We would like to use OpenEmbedded as our major build system to allow our customers to build their u-boot, 
+kernel and rootfs. 
+Of course we would like to contribute to oe, as well. 
 
-Cheers,
-Jeremy
+Is there such a thing as a board maintainer in oe? If yes, how can we become one?
+
+We allready adapted a few bb files to get oe building our u-boot and kernel. Should we push out these changes? 
+How?
+
+We have two developers working at this project. Our board is AVR32 based. So, if oe is our major build system we would have to take care that avr32 allway builds. This means testing, fixing, extending support. I hope this would be benefit enough to endure our newbie questions while we are getting known with the build system.
+
+Alex
 
 
