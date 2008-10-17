@@ -1,47 +1,34 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [64.233.170.186] (helo=rn-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1Kqo2D-0007ry-CB
+	(envelope-from <elena.valhalla@gmail.com>) id 1KqoB7-0008NC-9o
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Oct 2008 14:02:25 +0200
-Received: from hostdime.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id E0E0F334FE0;
-	Fri, 17 Oct 2008 09:02:17 -0300 (BRT)
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id C9C8F334FA8;
-	Fri, 17 Oct 2008 09:02:16 -0300 (BRT)
-Received: from mail.freedom.ind.br ([201.35.65.91] helo=mail.freedom.ind.br)
-	by mail.freedom.ind.br; 17 Oct 2008 09:02:15 -0300
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 7BAFB8E26FF;
-	Fri, 17 Oct 2008 09:02:15 -0300 (BRT)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 4CCD98E26F3;
-	Fri, 17 Oct 2008 09:02:15 -0300 (BRT)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 17 Oct 2008 09:02:15 -0300
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 3460FC2E3;
-	Fri, 17 Oct 2008 10:03:53 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 5DC1E610191; Fri, 17 Oct 2008 08:59:36 -0300 (BRT)
+	Fri, 17 Oct 2008 14:11:37 +0200
+Received: by rn-out-0910.google.com with SMTP id j66so202854rne.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Oct 2008 05:11:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=4QQMzXo8v9P0gk5mZ1RBi4QzaNshUW5EUih6G4Sxh1k=;
+	b=AoOVM5bK/7P+bPfblYlIEdGTJEF1JdaJvMbuAvRgEZ+45KxfFidWU9pXV3y2vmCaey
+	EkoVNEp0VP4P+efOfCNo0kOxc43dGsDzUuEM8AQdOo8bnfX77i3GBWjBLTuQrAogJlFX
+	lw5gfcNZBvmckK1b5AOuV78/jG6PKgObZ+Lak=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=MkTQZeIwmXPF/6ipyPVdByRF5p6R3fqClfksV6g3NF5x6YzWpx/h7JQftN39KeG3CH
+	tPjjU4toMyVFQ980GRU7JA6rVX7gocGq7Qmhbnzs+h3dKr0/phAyHMP3dD7NA2aOQ3ZD
+	TxHx5qj8ZEtOp+3ZWmIzvfigDtHgE1v4vFdN0=
+Received: by 10.100.96.9 with SMTP id t9mr5052003anb.109.1224245491918;
+	Fri, 17 Oct 2008 05:11:31 -0700 (PDT)
+Received: by 10.100.139.7 with HTTP; Fri, 17 Oct 2008 05:11:31 -0700 (PDT)
+Message-ID: <5c5e5c350810170511me79ab00ja268198b6d695dfb@mail.gmail.com>
+Date: Fri, 17 Oct 2008 14:11:31 +0200
+From: "Elena of Valhalla" <elena.valhalla@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1224184795.4235.133.camel@lenovo.internal.reciva.com>
-	<gd8630$66f$1@ger.gmane.org>
-	<87fxmwqpe5.fsf@neumann.lab.ossystems.com.br>
-	<1224233468.30790.125.camel@mill.internal.reciva.com>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Fri, 17 Oct 2008 08:59:36 -0300
-In-Reply-To: <1224233468.30790.125.camel@mill.internal.reciva.com> (Phil
-	Blundell's message of "Fri\, 17 Oct 2008 09\:51\:08 +0100")
-Message-ID: <871vyfph3r.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: xserver-xorg rdepends
+Subject: git repository [was:Re: Adding support for our]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,42 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2008 12:02:26 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 17 Oct 2008 12:11:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Phil Blundell <pb@reciva.com> writes:
+On Fri, Oct 17, 2008 at 1:19 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> [...]
+> 2) the better way: expose a git repo somewhere with your changes and
+> ask for review.
 
-> On Thu, 2008-10-16 at 17:02 -0300, Otavio Salvador wrote:
->> Koen Kooi <k.kooi@student.utwente.nl> writes:
->> 
->> >> Any objections?
->> >
->> > Yes. Recent xservers need hal for various input systems to work
->> > correctly. So instead of crippling the xserver you can keep a crippled
->> > version in your personal tree or overlay.
->> 
->> Fully support to keep hal as rdepends.
->
-> This seems like an odd point of view.  There are various other things
-> that the xserver requires for full operation (fonts, video drivers and
-> other modules for example), none of which are listed in RDEPENDS.  It
-> isn't obvious to me that hal is any more important than those.
+is there a guide on the proper way to do this? I don't seem to have
+noticed it in the git phrasebook.
 
-Point taken!
+I've been able to find some informations on exposing a "standalone"
+git repo, but with "local" edits of someone else's repo I'm lost
 
-Yes your argument changed my mind and I support the removal. This
-looks more logical to use same criterion for those packages.
-
-+1
+thanks
 
 -- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Elena of Valhalla
+
+homepage: http://www.trueelena.org
+email: elena.valhalla@gmail.com
 
 
