@@ -1,28 +1,28 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1Kql5s-0006cp-CH; Fri, 17 Oct 2008 10:54:00 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1Kql38-0005R8-5A; Fri, 17 Oct 2008 09:51:10 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87])
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>)
-	id 1Kql37-0005d6-VK; Fri, 17 Oct 2008 09:51:10 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <87fxmwqpe5.fsf@neumann.lab.ossystems.com.br>
-References: <1224184795.4235.133.camel@lenovo.internal.reciva.com>
-	<gd8630$66f$1@ger.gmane.org>
-	<87fxmwqpe5.fsf@neumann.lab.ossystems.com.br>
-Date: Fri, 17 Oct 2008 09:51:08 +0100
-Message-Id: <1224233468.30790.125.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: xserver-xorg rdepends
+	(envelope-from <sledz@DResearch.DE>) id 1KqliK-0004Wi-R5
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Oct 2008 11:33:44 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 9132B16DF7B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Oct 2008 11:41:00 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 83F7B2A41F5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Oct 2008 11:42:03 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Fri, 17 Oct 2008 11:33:41 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF46B@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: grub - confusing build problem
+Thread-Index: AckwO3DUtvDhictCRdatvX3N6UxI3Q==
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: grub - confusing build problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,40 +36,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2008 08:54:00 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 Oct 2008 09:33:45 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-On Thu, 2008-10-16 at 17:02 -0300, Otavio Salvador wrote:
-> Koen Kooi <k.kooi@student.utwente.nl> writes:
-> 
-> >> Any objections?
-> >
-> > Yes. Recent xservers need hal for various input systems to work
-> > correctly. So instead of crippling the xserver you can keep a crippled
-> > version in your personal tree or overlay.
-> 
-> Fully support to keep hal as rdepends.
-
-This seems like an odd point of view.  There are various other things
-that the xserver requires for full operation (fonts, video drivers and
-other modules for example), none of which are listed in RDEPENDS.  It
-isn't obvious to me that hal is any more important than those.
-
-Historically, the general policy for RDEPENDS has been that it should
-list only those packages which are absolutely required for the software
-in question to do anything useful.  For example, shared libraries
-without which you can't run the binary at all; interpreters without
-which you can't invoke the script; supporting datafiles without which
-the program will immediately crash, that kind of thing.  If the program
-can run and do at least something useful without a given package being
-installed, we have not usually considered it to be a hard dependency.
-These kinds of "soft dependencies" have traditionally been a matter of
-DISTRO and/or MACHINE policy, being handled either through task
-packages, PACKAGE_INSTALL, RRECOMMENDS, or some similar mechanism.
-
-p.
-
-
+SSd2ZSBhIHJlYWxseSBjb25mdXNpbmcgcHJvYmxlbSBjb21waWxpbmcgZ3J1YiB3aXRoIE9FLiAg
+OigNCg0KSSd2ZSB0byBtYWNoaW5lczogbXkgbm90ZWJvb2sgYW5kIGEgdm13YXJlLiBCb3RoIGFy
+ZSAzMi1iaXQgbWFjaGluZXMsIHJ1bm5pbmcgb3BlblNVU0UgMTEuMCAoc2FtZSB1cGRhdGUgbGV2
+ZWwpIGFuZCB1c2UgdGhlIHNhbWUgdmVyc2lvbiBmcm9tIG9yZy5vcGVuZW1iZWRkZWQuZGV2LiBJ
+IHRyaWVkIHRvIGJ1aWxkIGFuIEFuZ3N0cm9tIGltYWdlIGZvciB4ODYgd2l0aCBzYW1lIGNvbW1h
+bmQgbGluZXMgb25lIGJvdGggbWFjaGluZXMuIE9uIHRoZSBub3RlYm9vayBncnViXzAuOTcuYmIg
+YnVpbGRzIGZpbmUuIE9uIHRoZSB2bSB0aGUgY29tcGlsZSBzdGFnZSBmYWlscyB3aXRoOg0KDQpj
+Y2FjaGUgaTQ4Ni1hbmdzdHJvbS1saW51eC1nY2MgLW1hcmNoPWk0ODYgLURIQVZFX0NPTkZJR19I
+IC1JLiAtSS4uIC1JLi4vc3RhZ2UxICAtaXN5c3RlbS9ob21lL0RSRVNFQVJDSC9zbGVkei9vZS90
+bXAvc3RhZ2luZy9pNDg2LWFuZ3N0cm9tLWxpbnV4L3Vzci9pbmNsdWRlIC1XYWxsIC1XbWlzc2lu
+Zy1wcm90b3R5cGVzIC1XdW51c2VkIC1Xc2hhZG93IC1XcG9pbnRlci1hcml0aCAtZmFsaWduLWp1
+bXBzPTEgLWZhbGlnbi1sb29wcz0xIC1mYWxpZ24tZnVuY3Rpb25zPTEgLVd1bmRlZiAgLWZuby1i
+dWlsdGluIC1ub3N0ZGluYyAgLURTVVBQT1JUX1NFUklBTD0xIC1EU1VQUE9SVF9IRVJDVUxFUz0x
+IC1ESEFWRV9DT05GSUdfSCAtSS4gLUkuLiAtSS4uL3N0YWdlMSAtaXN5c3RlbS9ob21lL0RSRVNF
+QVJDSC9zbGVkei9vZS90bXAvc3RhZ2luZy9pNDg2LWFuZ3N0cm9tLWxpbnV4L3Vzci9pbmNsdWRl
+IC1XYWxsIC1XbWlzc2luZy1wcm90b3R5cGVzIC1XdW51c2VkIC1Xc2hhZG93IC1XcG9pbnRlci1h
+cml0aCAtZmFsaWduLWp1bXBzPTEgLWZhbGlnbi1sb29wcz0xIC1mYWxpZ24tZnVuY3Rpb25zPTEg
+LVd1bmRlZiAtaXN5c3RlbS9ob21lL0RSRVNFQVJDSC9zbGVkei9vZS90bXAvc3RhZ2luZy9pNDg2
+LWFuZ3N0cm9tLWxpbnV4L3Vzci9pbmNsdWRlIC1mZXhwZW5zaXZlLW9wdGltaXphdGlvbnMgLWZy
+ZW5hbWUtcmVnaXN0ZXJzIC1mb21pdC1mcmFtZS1wb2ludGVyIC1PMiAtTVQgc3RhcnRfZXhlYy1z
+dGFydC5vIC1NRCAtTVAgLU1GIC5kZXBzL3N0YXJ0X2V4ZWMtc3RhcnQuVHBvIC1jIC1vIHN0YXJ0
+X2V4ZWMtc3RhcnQubyBgdGVzdCAtZiAnc3RhcnQuUycgfHwgZWNobyAnLi8nYHN0YXJ0LlMNCnN0
+YXJ0LlM6IEFzc2VtYmxlciBtZXNzYWdlczoNCnN0YXJ0LlM6Mzk5OiBFcnJvcjogdW5kZWZpbmVk
+IHN5bWJvbCBgTDBeQScgaW4gb3BlcmF0aW9uDQptYWtlWzNdOiAqKiogW3N0YXJ0X2V4ZWMtc3Rh
+cnQub10gRXJyb3IgMQ0KbWFrZVszXTogTGVhdmluZyBkaXJlY3RvcnkgYC9ob21lL0RSRVNFQVJD
+SC9zbGVkei9vZS90bXAvd29yay9pNDg2LWFuZ3N0cm9tLWxpbnV4L2dydWItMC45Ny1yMy4xL2dy
+dWItMC45Ny9zdGFnZTInDQptYWtlWzJdOiAqKiogW2FsbF0gRXJyb3IgMg0KbWFrZVsyXTogTGVh
+dmluZyBkaXJlY3RvcnkgYC9ob21lL0RSRVNFQVJDSC9zbGVkei9vZS90bXAvd29yay9pNDg2LWFu
+Z3N0cm9tLWxpbnV4L2dydWItMC45Ny1yMy4xL2dydWItMC45Ny9zdGFnZTInDQptYWtlWzFdOiAq
+KiogW2FsbC1yZWN1cnNpdmVdIEVycm9yIDENCm1ha2VbMV06IExlYXZpbmcgZGlyZWN0b3J5IGAv
+aG9tZS9EUkVTRUFSQ0gvc2xlZHovb2UvdG1wL3dvcmsvaTQ4Ni1hbmdzdHJvbS1saW51eC9ncnVi
+LTAuOTctcjMuMS9ncnViLTAuOTcnDQptYWtlOiAqKiogW2FsbF0gRXJyb3IgMg0KDQpCdXQgdGhl
+cmUgaXMgbm8gc3ltYm9sIGBMMF5BJyBpbiB0aGUgbWVudGlvbmVkIGxpbmUuIFVudGlsIHRoaXMg
+cG9pbnQgYm90aCBsb2cuZG9fY29tcGlsZSBhcmUgY29tcGxldGVseSB0aGUgc2FtZS4gIDooDQoN
+Ckkgc3RhcnRlZCBkZXZzaGVsbCBvbiBib3RoIG1hY2hpbmVzIGFuZCBjYWxsZWQgdGhlIGNvbW1h
+bmQgbGluZSBhYm92ZSBtYW51YWxseSB3aXRoIGEgbGl0dGxlIGRpZmZlcmVuY2UuIEluc3RlYWQg
+b2YgY29tcGlsaW5nIHN0YXJ0LlMgaSBqdXN0IHJ1biB0aGUgcHJlcHJvY2Vzc29yOg0KDQppNDg2
+LWFuZ3N0cm9tLWxpbnV4LWdjYyAtbWFyY2g9aTQ4NiAtREhBVkVfQ09ORklHX0ggLUkuIC1JLi4g
+LUkuLi9zdGFnZTEgIC1pc3lzdGVtL2hvbWUvRFJFU0VBUkNIL3NsZWR6L29lL3RtcC9zdGFnaW5n
+L2k0ODYtYW5nc3Ryb20tbGludXgvdXNyL2luY2x1ZGUgLVdhbGwgLVdtaXNzaW5nLXByb3RvdHlw
+ZXMgLVd1bnVzZWQgLVdzaGFkb3cgLVdwb2ludGVyLWFyaXRoIC1mYWxpZ24tanVtcHM9MSAtZmFs
+aWduLWxvb3BzPTEgLWZhbGlnbi1mdW5jdGlvbnM9MSAtV3VuZGVmICAtZm5vLWJ1aWx0aW4gLW5v
+c3RkaW5jICAtRFNVUFBPUlRfU0VSSUFMPTEgLURTVVBQT1JUX0hFUkNVTEVTPTEgLURIQVZFX0NP
+TkZJR19IIC1JLiAtSS4uIC1JLi4vc3RhZ2UxIC1pc3lzdGVtL2hvbWUvRFJFU0VBUkNIL3NsZWR6
+L29lL3RtcC9zdGFnaW5nL2k0ODYtYW5nc3Ryb20tbGludXgvdXNyL2luY2x1ZGUgLVdhbGwgLVdt
+aXNzaW5nLXByb3RvdHlwZXMgLVd1bnVzZWQgLVdzaGFkb3cgLVdwb2ludGVyLWFyaXRoIC1mYWxp
+Z24tanVtcHM9MSAtZmFsaWduLWxvb3BzPTEgLWZhbGlnbi1mdW5jdGlvbnM9MSAtV3VuZGVmIC1p
+c3lzdGVtL2hvbWUvRFJFU0VBUkNIL3NsZWR6L29lL3RtcC9zdGFnaW5nL2k0ODYtYW5nc3Ryb20t
+bGludXgvdXNyL2luY2x1ZGUgLWZleHBlbnNpdmUtb3B0aW1pemF0aW9ucyAtZnJlbmFtZS1yZWdp
+c3RlcnMgLWZvbWl0LWZyYW1lLXBvaW50ZXIgLU1UIHN0YXJ0X2V4ZWMtc3RhcnQubyAtTUQgLU1Q
+IC1NRiAuZGVwcy9zdGFydF9leGVjLXN0YXJ0LlRwbyAtRSAtbyBzdGFydF9leGVjLXN0YXJ0LlMg
+c3RhcnQuUw0KDQpBZnRlciB0aGF0IGkgY29tcGFyZWQgYm90aCBzdGFydF9leGVjLXN0YXJ0LlMg
+ZmlsZXMgYW5kIGZvdW5kIHRoaXMgb25lIGRpZmZlcmVuY2U6DQoNCmRpZmYgLVUwIHN0YXJ0X2V4
+ZWMtc3RhcnQuUyBvay1zdGFydF9leGVjLXN0YXJ0LlMgDQotLS0gc3RhcnRfZXhlYy1zdGFydC5T
+ICAyMDA4LTEwLTE3IDEwOjMwOjE2LjAwMDAwMDAwMCArMDIwMA0KKysrIG9rLXN0YXJ0X2V4ZWMt
+c3RhcnQuUyAgICAgICAyMDA4LTEwLTE3IDEwOjI5OjMwLjAwMDAwMDAwMCArMDIwMA0KQEAgLTMy
+MyArMzIzIEBADQotIC53b3JkICgxMTM0ODIgKyA1MTEpID4+IDkNCisgLndvcmQgKHVzZXJzICsg
+NTExKSA+PiA5DQoNCkhtbW1tPyBBbnkgaWRlYSB3aGF0J3Mgd3JvbmcgaGVyZT8gV2hhdCBpcyAn
+dXNlcnMnPw0KU29ycnksIGJ1dCBpJ20gbm90IGFuIGFzc2VtYmxlciBzcGVjaWFsaXN0Lg0KDQpX
+b3VsZCBiZSByZWFsbHkgbmljZSBpZiBzb21lb25lIGNvdWxkIGhlbHAuDQoNClRoeCwNClN0ZWZm
+ZW4NCg==
 
 
