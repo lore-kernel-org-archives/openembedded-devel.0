@@ -1,42 +1,43 @@
 Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1Kqnx0-0007fG-AT
-	for openembedded-devel@openembedded.org; Fri, 17 Oct 2008 13:57:02 +0200
+	(envelope-from <otavio@freedom.ind.br>) id 1Kqo2D-0007ry-CB
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Oct 2008 14:02:25 +0200
 Received: from hostdime.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 031C2334D49;
-	Fri, 17 Oct 2008 08:56:55 -0300 (BRT)
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id E0E0F334FE0;
+	Fri, 17 Oct 2008 09:02:17 -0300 (BRT)
 Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 1F99E334B42;
-	Fri, 17 Oct 2008 08:56:53 -0300 (BRT)
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id C9C8F334FA8;
+	Fri, 17 Oct 2008 09:02:16 -0300 (BRT)
 Received: from mail.freedom.ind.br ([201.35.65.91] helo=mail.freedom.ind.br)
-	by mail.freedom.ind.br; 17 Oct 2008 08:56:53 -0300
+	by mail.freedom.ind.br; 17 Oct 2008 09:02:15 -0300
 Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 0B6DB8E26FF;
-	Fri, 17 Oct 2008 08:56:53 -0300 (BRT)
+	by mail.freedom.ind.br (Postfix) with ESMTP id 7BAFB8E26FF;
+	Fri, 17 Oct 2008 09:02:15 -0300 (BRT)
 Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id CEE958E26EC;
-	Fri, 17 Oct 2008 08:56:52 -0300 (BRT)
+	by mail.freedom.ind.br (Postfix) with ESMTP id 4CCD98E26F3;
+	Fri, 17 Oct 2008 09:02:15 -0300 (BRT)
 Received: from internet.ossystems.com.br ([201.40.162.47]
 	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 17 Oct 2008 08:56:52 -0300
+	by mail.freedom.ind.br; 17 Oct 2008 09:02:15 -0300
 Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id AF923C2E3;
-	Fri, 17 Oct 2008 09:58:30 -0200 (BRST)
+	by internet.ossystems.com.br (Postfix) with ESMTP id 3460FC2E3;
+	Fri, 17 Oct 2008 10:03:53 -0200 (BRST)
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 6D996610191; Fri, 17 Oct 2008 08:54:13 -0300 (BRT)
+	id 5DC1E610191; Fri, 17 Oct 2008 08:59:36 -0300 (BRT)
 To: openembedded-devel@lists.openembedded.org
 References: <1224184795.4235.133.camel@lenovo.internal.reciva.com>
 	<gd8630$66f$1@ger.gmane.org>
 	<87fxmwqpe5.fsf@neumann.lab.ossystems.com.br>
-	<gd87ga$b9n$1@ger.gmane.org>
+	<1224233468.30790.125.camel@mill.internal.reciva.com>
 From: Otavio Salvador <otavio@debian.org>
 Organization: O.S. Systems Ltda.
 X-URL: http://www.debian.org/~otavio/
 X-Attribution: O.S.
-Date: Fri, 17 Oct 2008 08:54:13 -0300
-In-Reply-To: <gd87ga$b9n$1@ger.gmane.org> (Koen Kooi's message of "Thu\,
-	16 Oct 2008 22\:17\:14 +0200")
-Message-ID: <87ej2fphcq.fsf@neumann.lab.ossystems.com.br>
+Date: Fri, 17 Oct 2008 08:59:36 -0300
+In-Reply-To: <1224233468.30790.125.camel@mill.internal.reciva.com> (Phil
+	Blundell's message of "Fri\, 17 Oct 2008 09\:51\:08 +0100")
+Message-ID: <871vyfph3r.fsf@neumann.lab.ossystems.com.br>
 User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
 Cc: openembedded-devel@openembedded.org
@@ -54,48 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2008 11:57:03 -0000
+X-List-Received-Date: Fri, 17 Oct 2008 12:02:26 -0000
 Content-Type: text/plain; charset=us-ascii
 
-Koen Kooi <k.kooi@student.utwente.nl> writes:
+Phil Blundell <pb@reciva.com> writes:
 
->>> Yes. Recent xservers need hal for various input systems to work
->>> correctly. So instead of crippling the xserver you can keep a crippled
->>> version in your personal tree or overlay.
->>
+> On Thu, 2008-10-16 at 17:02 -0300, Otavio Salvador wrote:
+>> Koen Kooi <k.kooi@student.utwente.nl> writes:
+>> 
+>> >> Any objections?
+>> >
+>> > Yes. Recent xservers need hal for various input systems to work
+>> > correctly. So instead of crippling the xserver you can keep a crippled
+>> > version in your personal tree or overlay.
+>> 
 >> Fully support to keep hal as rdepends.
 >
-> Thinking about it some more, we should turn back the libhal split, so
-> every hal apps works, instead of adding rdepends when we encounter
-> broken apps.
+> This seems like an odd point of view.  There are various other things
+> that the xserver requires for full operation (fonts, video drivers and
+> other modules for example), none of which are listed in RDEPENDS.  It
+> isn't obvious to me that hal is any more important than those.
 
-Personally I disagree with you. Even though few applications can still
-not work without the hal rdepends, some uses hal but not in a really
-non dependant way and the split allows a finner selection where to
-include or not it.
+Point taken!
 
-This allows also distros to select and change it by package.
+Yes your argument changed my mind and I support the removal. This
+looks more logical to use same criterion for those packages.
 
-> PS: how can I merge your xfce work into .dev? The git phrasebook isn't
-> really clear on that.
-
-I'm rebasing the branch against final repository and I'll send a
-patchset for acking here before pushing it. I guess I can send those
-patches later today and push it tomorrow if someone acks it before
-that.
-
-My idea is to split the patches in:
-
- - xfce-refactor-branch
-
-   where the inc files are droped and the packaging improved
-
- - xfce-4.2-branch
-
-   new version
-
-There're also a number of fixes that I'll be sending here for review
-and pushing together. 
++1
 
 -- 
         O T A V I O    S A L V A D O R
