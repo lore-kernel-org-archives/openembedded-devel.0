@@ -1,37 +1,26 @@
-Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KqnMK-0001H8-Ua
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1KqnbP-0006yX-Fs
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Oct 2008 13:19:09 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so570210rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2008 04:19:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=QF9jYu3NVmHQNd/Ru7OS7/xWUw5GtY8izw0vr+os/M0=;
-	b=sO2oiY1OcPMpiC8lxUek2znjhucxYUPzAwafHAsM8Q9ipekEe5NzAmXnPcWNXA1Bq5
-	gJ70MyPbjStN6UmCisetn1Pgo7mIuInro4w8KJmdBEcy5kKVpAJA0+vbgCpy5TpAYcZX
-	npfuxGKwS17SyTWIQlH9lu0jT8zoj+oF1bHnQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=Hl5Ez1grTNvu6c52rv2l2TOYsiidtFqLgBqeY6avs0ha1gnvW/fk2VVsw0fwAX8/DN
-	xQMYrzWjELMkRBvbtSmQo0sOCMuLUcSbOlyGu+xobIyENFkGCYA0IBrYASNUvEXXJjnL
-	I3WYYBfVQrTGrOl8RFGGJc/aigDFzYwNY9vXQ=
-Received: by 10.140.226.13 with SMTP id y13mr2455687rvg.2.1224242343475;
-	Fri, 17 Oct 2008 04:19:03 -0700 (PDT)
-Received: by 10.141.129.13 with HTTP; Fri, 17 Oct 2008 04:19:03 -0700 (PDT)
-Message-ID: <f96d234e0810170419r69e34fddt4494fa1cbda3baa@mail.gmail.com>
-Date: Fri, 17 Oct 2008 07:19:03 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48F825DE.90104@miromico.ch>
+	Fri, 17 Oct 2008 13:34:43 +0200
+Received: (qmail invoked by alias); 17 Oct 2008 11:34:37 -0000
+Received: from p579E1958.dip.t-dialin.net (EHLO [192.168.10.3]) [87.158.25.88]
+	by mail.gmx.net (mp008) with SMTP; 17 Oct 2008 13:34:37 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+idANwUMKi9BRjd6hF9sKOEoBzw9zM2vy2NoADSO
+	OhREYrvdxrNRgD
+Message-ID: <48F8784C.9010907@gmx.net>
+Date: Fri, 17 Oct 2008 13:34:36 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
 MIME-Version: 1.0
-References: <48F825DE.90104@miromico.ch>
-Subject: Re: Adding support for our
+To: openembedded-devel@lists.openembedded.org
+References: <200810131730.14114.zecke@selfish.org>
+In-Reply-To: <200810131730.14114.zecke@selfish.org>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.6
+Subject: Re: [RFC] File local variables
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,48 +34,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2008 11:19:09 -0000
+X-List-Received-Date: Fri, 17 Oct 2008 11:34:43 -0000
+X-Groupsio-MsgNum: 6260
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigF49A85262B8C4F871E1D7FC3"
+
+--------------enigF49A85262B8C4F871E1D7FC3
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 17, 2008 at 1:42 AM, Alex Raimondi <mailinglist@miromico.ch> wrote:
-> Hi,
->
-> We have a new AVR32 based embedded linux board (www.miromico.com/hammerhead), which is available now.
-> We would like to use OpenEmbedded as our major build system to allow our customers to build their u-boot,
-> kernel and rootfs.
-> Of course we would like to contribute to oe, as well.
+Hi,
 
-Great, welcome to the project.
+Holger Freyther schrieb:
+> imagine the following situation, I have the following files:
+> 	foo-native_1.2.3.bb
+> 	foo_1.2.2.bb
+> 	foo_1.2.3.bb
+> 	foo.inc
+>=20
+> now I'm forced to keep PR,PE inside the .inc file but in most of our ca=
+ses we=20
+> have the PR inside the final recipe file. This means when doing a chang=
+e to=20
+> an inc I need to open all other users to bump the right thing.
+Clear to this point.
 
-> Is there such a thing as a board maintainer in oe? If yes, how can we become one?
+> Have you experienced this as well?
+Sure. :)
 
-Yes, see MAINTAINERS in the root OE directory.
+> I have wondered if something like:
+> 	PE_${FN} =3D "0"
+> 	PR_${FN} =3D "0"
+What is ${FN}?
 
-> We allready adapted a few bb files to get oe building our u-boot and kernel. Should we push out these changes?
-> How?
+> in each separate file and then some Bitbake magic to build the sum from=
+ every=20
+> included file?
+>=20
+> comments? Am I just too lazy?
+Can you explain a bit how this is being supposed to being used.
 
-Yes, please do.  There are two ways:
-
-1) the old way: create patch files and post to the bugzilla
-2) the better way: expose a git repo somewhere with your changes and
-ask for review.  Once there are reviewed, someone with OE push access
-can easily merge them for you
-
-OE push access is typically granted after a person has made some
-contributions and seems to have a handle on how OE works.
-
-> We have two developers working at this project. Our board is AVR32 based. So, if oe is our major build system we would have to take care that avr32 allway builds. This means testing, fixing, extending support. I hope this would be benefit enough to endure our newbie questions while we are getting known with the build system.
-
-Excellent, contributions are appreciated.
-
-Thanks,
-Cliff
-
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Regards
+Robert
 
 
+--------------enigF49A85262B8C4F871E1D7FC3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFI+HhMG9cfwmwwEtoRAuClAJkBnXi6Pj24/xrHW9LafLngWohK5gCffn5d
+Szbrk+EVAjZ4ThI0RaH9XiM=
+=yjQP
+-----END PGP SIGNATURE-----
+
+--------------enigF49A85262B8C4F871E1D7FC3--
