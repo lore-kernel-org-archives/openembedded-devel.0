@@ -1,25 +1,36 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1KqnL9-0001Fb-8W
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <cliff.brake@gmail.com>) id 1KqnMK-0001H8-Ua
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Oct 2008 13:17:55 +0200
-Received: (qmail invoked by alias); 17 Oct 2008 11:17:47 -0000
-Received: from p579E1958.dip.t-dialin.net (EHLO [192.168.10.3]) [87.158.25.88]
-	by mail.gmx.net (mp060) with SMTP; 17 Oct 2008 13:17:47 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+QYP1pNkCQBD/dXIcmvbXOrF/jAJIyp2qjFCIf02
-	5s94HoivIzcoA0
-Message-ID: <48F8745B.2030001@gmx.net>
-Date: Fri, 17 Oct 2008 13:17:47 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
-MIME-Version: 1.0
+	Fri, 17 Oct 2008 13:19:09 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so570210rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Oct 2008 04:19:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=QF9jYu3NVmHQNd/Ru7OS7/xWUw5GtY8izw0vr+os/M0=;
+	b=sO2oiY1OcPMpiC8lxUek2znjhucxYUPzAwafHAsM8Q9ipekEe5NzAmXnPcWNXA1Bq5
+	gJ70MyPbjStN6UmCisetn1Pgo7mIuInro4w8KJmdBEcy5kKVpAJA0+vbgCpy5TpAYcZX
+	npfuxGKwS17SyTWIQlH9lu0jT8zoj+oF1bHnQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=Hl5Ez1grTNvu6c52rv2l2TOYsiidtFqLgBqeY6avs0ha1gnvW/fk2VVsw0fwAX8/DN
+	xQMYrzWjELMkRBvbtSmQo0sOCMuLUcSbOlyGu+xobIyENFkGCYA0IBrYASNUvEXXJjnL
+	I3WYYBfVQrTGrOl8RFGGJc/aigDFzYwNY9vXQ=
+Received: by 10.140.226.13 with SMTP id y13mr2455687rvg.2.1224242343475;
+	Fri, 17 Oct 2008 04:19:03 -0700 (PDT)
+Received: by 10.141.129.13 with HTTP; Fri, 17 Oct 2008 04:19:03 -0700 (PDT)
+Message-ID: <f96d234e0810170419r69e34fddt4494fa1cbda3baa@mail.gmail.com>
+Date: Fri, 17 Oct 2008 07:19:03 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <48F825DE.90104@miromico.ch>
 In-Reply-To: <48F825DE.90104@miromico.ch>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.6
+MIME-Version: 1.0
+References: <48F825DE.90104@miromico.ch>
 Subject: Re: Adding support for our
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,78 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2008 11:17:55 -0000
-X-Groupsio-MsgNum: 6258
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig65FB6FA8FFB0C6F0A29F93D3"
-
---------------enig65FB6FA8FFB0C6F0A29F93D3
+X-List-Received-Date: Fri, 17 Oct 2008 11:19:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi Alexm
-
-Alex Raimondi schrieb:
-> We have a new AVR32 based embedded linux board (www.miromico.com/hammer=
-head), which is available now.=20
-That is a nice little board you have there. I personally like the AVR32
-architecture. Atmel also has the better policy when it comes to
-specifications. So I really like to see more AVR32 being used. :)
-
-> We would like to use OpenEmbedded as our major build system to allow ou=
-r customers to build their u-boot,=20
+On Fri, Oct 17, 2008 at 1:42 AM, Alex Raimondi <mailinglist@miromico.ch> wrote:
+> Hi,
+>
+> We have a new AVR32 based embedded linux board (www.miromico.com/hammerhead), which is available now.
+> We would like to use OpenEmbedded as our major build system to allow our customers to build their u-boot,
 > kernel and rootfs.
-Great stuff. OE already supports the ATNGW100 (have one here) and the
-AT32STK1000. If your board can boot with the same linux 2.6.24 (or with
-patches to that) it will be quite easy to support your device.
+> Of course we would like to contribute to oe, as well.
 
-> Of course we would like to contribute to oe, as well.=20
-Very nice!
+Great, welcome to the project.
 
-> Is there such a thing as a board maintainer in oe? If yes, how can we b=
-ecome one?
-We have a "MAINTAINERS" file. If you are a contributor you can add
-information about the machines you are maintaining. This mainly means
-that people will ask you when stuff breaks. In theory it should also
-mean that people will ask you *first* if things are changed in OE that
-affect your device but AFAIK we have no strict policies regarding this.
+> Is there such a thing as a board maintainer in oe? If yes, how can we become one?
 
-> We allready adapted a few bb files to get oe building our u-boot and ke=
-rnel. Should we push out these changes?=20
+Yes, see MAINTAINERS in the root OE directory.
+
+> We allready adapted a few bb files to get oe building our u-boot and kernel. Should we push out these changes?
 > How?
-Open a bug report.
 
-> We have two developers working at this project. Our board is AVR32 base=
-d.
- So, if oe is our major build system we would have to take care that
-avr32 allway builds.
- This means testing, fixing, extending support. I hope this would be
-benefit enough to endure our newbie questions
- while we are getting known with the build system.
-OE has a very steep learning curve but when you managed it you will
-benefit very much from its great flexibility.
+Yes, please do.  There are two ways:
 
-Thanks for supporting our project!
+1) the old way: create patch files and post to the bugzilla
+2) the better way: expose a git repo somewhere with your changes and
+ask for review.  Once there are reviewed, someone with OE push access
+can easily merge them for you
 
-Regards
-Robert
+OE push access is typically granted after a person has made some
+contributions and seems to have a handle on how OE works.
+
+> We have two developers working at this project. Our board is AVR32 based. So, if oe is our major build system we would have to take care that avr32 allway builds. This means testing, fixing, extending support. I hope this would be benefit enough to endure our newbie questions while we are getting known with the build system.
+
+Excellent, contributions are appreciated.
+
+Thanks,
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
-
-
---------------enig65FB6FA8FFB0C6F0A29F93D3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFI+HRbG9cfwmwwEtoRAuXUAKCJezNkzNfUZQZwnu7WD/xTA8Pq4ACfaLXc
-Lz9E+k2gOA6n7GCrAYbXE04=
-=ucK5
------END PGP SIGNATURE-----
-
---------------enig65FB6FA8FFB0C6F0A29F93D3--
