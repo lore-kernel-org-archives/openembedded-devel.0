@@ -1,32 +1,28 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1KrDrz-0008RT-5U
-	for openembedded-devel@openembedded.org; Sat, 18 Oct 2008 17:37:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9IFbQQP005226
+	(envelope-from <trini@kernel.crashing.org>) id 1KrFL5-0007nO-JB
+	for openembedded-devel@openembedded.org; Sat, 18 Oct 2008 19:11:43 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20081018171132.WOBK29505.fed1rmmtao107.cox.net@fed1rmimpo03.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Sat, 18 Oct 2008 16:37:26 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 04945-07 for <openembedded-devel@openembedded.org>;
-	Sat, 18 Oct 2008 16:37:19 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9IFbJwD005216
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Sat, 18 Oct 2008 16:37:19 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Sat, 18 Oct 2008 13:11:32 -0400
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id UHBX1a0021E665w04HBXYg; Sat, 18 Oct 2008 13:11:31 -0400
+X-Authority-Analysis: v=1.0 c=1 a=1Le64-iiJ8FaIlgfSHUA:9
+	a=bHiJ6Hea4yRfZm4wLhBJWHBgwDMA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sat, 18 Oct 2008 10:11:30 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <1224341977.3140.112.camel@mill.internal.reciva.com>
+Message-ID: <20081018171130.GB2679@smtp.west.cox.net>
 References: <1224320609.5215.15.camel@dax.rpnet.com>
 	<1224341977.3140.112.camel@mill.internal.reciva.com>
-Date: Sat, 18 Oct 2008 16:37:20 +0100
-Message-Id: <1224344240.5215.48.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<1224344240.5215.48.camel@dax.rpnet.com>
+MIME-Version: 1.0
+In-Reply-To: <1224344240.5215.48.camel@dax.rpnet.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: Some open issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,49 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Oct 2008 15:37:35 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Oct 2008 17:11:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sat, 2008-10-18 at 15:59 +0100, Phil Blundell wrote:
-> I do struggle to see why this is such a pressing issue right now.  As I
-> understand it, the "corruption" in question is basically mangled data
-> from the BK history.  This doesn't seem like it is obviously going to
-> get any worse over time, nor does it seem like the contagion is likely
-> to spread to other data, nor is the corruption going to be visible at
-> the tip of any recent checkout.  Also, we have now had several days of
-> activity on the live git tree, and we would presumably want to preserve
-> those changesets on any putative re-import.
+On Sat, Oct 18, 2008 at 04:37:20PM +0100, Richard Purdie wrote:
+> On Sat, 2008-10-18 at 15:59 +0100, Phil Blundell wrote:
+[snip]
+> > i) why this is a terribly big issue in the first place (i.e. what the
+> > real-world impact of the corruption is going to be); or
 > 
-> Assuming the above to be the case, I don't fully understand either:
-> 
-> i) why this is a terribly big issue in the first place (i.e. what the
-> real-world impact of the corruption is going to be); or
+> There is no impact on the current metadata, just the history. It depends
+> how much value we place on that.
 
-There is no impact on the current metadata, just the history. It depends
-how much value we place on that.
+And with 'git bisect' good history is very valuable for fixing
+long-standing bugs.  Or at least can be.
 
-At present we can't at some future date add in a good version of the
-BKCVS data as easily as we could if it had been done by a tree graft
-originally. The data there at the moment is pretty useless for actually
-finding history (I know since I've tried to use it).
-
-> ii) why, if we don't act now, it might be "too late" to solve the
-> problem in the future
-
-As you point out, we have a certain number of commits already. At the
-moment we can probably deal with these but the longer we leave it, the
-more commits and the more I'd not want to rebase things. We also have
-the FILE_PR issue to consider and we need to revert that commit by some
-means and find a better solution (I think even zecke agrees with that
-but we'll discuss that in another thread).
-
-Cheers,
-
-Richard
-
-
-
-
+-- 
+Tom Rini
 
 
