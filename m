@@ -1,34 +1,39 @@
-Received: from [147.32.96.3] (helo=hades.mk.cvut.cz)
+Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Martin.Jansa@mk.cvut.cz>) id 1KrGa0-0002rB-Mh
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KrHnc-0001nm-PO
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Oct 2008 20:31:12 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by hades.mk.cvut.cz (Postfix) with ESMTP id 149DD2E4166
+	Sat, 18 Oct 2008 21:49:20 +0200
+Received: by qw-out-1920.google.com with SMTP id 5so330742qwf.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Oct 2008 20:31:03 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mk.cvut.cz
-Received: from hades.mk.cvut.cz ([127.0.0.1])
-	by localhost (hades.mk.cvut.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id fMc3Z2sZ3BbX
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Oct 2008 20:31:01 +0200 (CEST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by hades.mk.cvut.cz (Postfix) with ESMTPSA id DC9E32E4745
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Oct 2008 20:30:55 +0200 (CEST)
-Date: Sat, 18 Oct 2008 20:30:16 +0200
-From: Martin Jansa <Martin.Jansa@mk.cvut.cz>
+	Sat, 18 Oct 2008 12:49:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=CJ7DsTZfA3bq8vZ99wVvhO8R/zdyKAuNENHuuEezlCI=;
+	b=WPvUgDAqTH0UNC+vQzUQQAh9U9aYsIXPmZWFH+Kht9bYTo2K0YwniXGNK8PkSAaRND
+	18jboYLkD9ZVLphe6w+A/1HWhOX3CucnBcMLyCZdZDlzYyaAIQGV+Uir+aF9o4B7QA+z
+	C1BENZqix+ecbr2h9QPQS4mNYWZTbHbmHrvmM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=CTDdSD+x10AgbLV6BmETCVauZwWu6ZQYqxbGpGjUF6zoKroG5ypWr0f91Dh/IX+1LX
+	79pux/tUhYtb77dtRXabL7Ueyw4UAYrsZer1yuFliXh4e8yqRBNBuNywHS48U5ZB93mR
+	8fPvlU57T0IFGXQYH/4E387nw4VVl02XHNrfQ=
+Received: by 10.214.44.17 with SMTP id r17mr7601682qar.66.1224359349922;
+	Sat, 18 Oct 2008 12:49:09 -0700 (PDT)
+Received: by 10.214.12.10 with HTTP; Sat, 18 Oct 2008 12:49:09 -0700 (PDT)
+Message-ID: <c384c5ea0810181249x4d700cdbw2e409eb1fecefaab@mail.gmail.com>
+Date: Sat, 18 Oct 2008 21:49:09 +0200
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081018183016.GA4310@jama>
+In-Reply-To: <20081018183016.GA4310@jama>
+MIME-Version: 1.0
 References: <20081017131704.GA4334@jama>
 	<200810172041.10116.openembedded@haerwu.biz>
-MIME-Version: 1.0
-In-Reply-To: <200810172041.10116.openembedded@haerwu.biz>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: checksums.ini - should check only against filename not	uri_src
+	<20081018183016.GA4310@jama>
+Subject: Re: checksums.ini - should check only against filename not uri_src
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,68 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Oct 2008 18:31:12 -0000
-X-Groupsio-MsgNum: 6290
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qMm9M+Fa2AknHoGS"
+X-List-Received-Date: Sat, 18 Oct 2008 19:49:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
---qMm9M+Fa2AknHoGS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-On Fri, Oct 17, 2008 at 08:41:09PM +0200, Marcin Juszkiewicz wrote:
-> If they have different checksums then they are not same.
+On Sat, Oct 18, 2008 at 8:30 PM, Martin Jansa <Martin.Jansa@mk.cvut.cz> wrote:
+> On Fri, Oct 17, 2008 at 08:41:09PM +0200, Marcin Juszkiewicz wrote:
+> could be used. From discussion on irc it seemed like global checksums.ini
+> is not a good idea at all, at least because of high probability of merge
+> conflicts, and that checksums should be moved to .bb files or defined on
+> per-package files.
+>
+Yes, I agree the checksums solution should be redesigned.
 
-And they shouldn't be fetched to the same DL_DIR in the first place, so
-checksums.ini can define both with pn-filename, and then bitbake would
-show an error when the other file would be stored in DL_DIR.
 
-> Your patch lack part which would write simplified checksums.ini file.=20
->=20
-> I think that mirrors informations would be still handy as there were=20
-> ideas to write wget-like tool for fetching sources which would use own=20
-> database for informations about source locations. We could make use of=20
-> format like this:
->=20
-> [DirectFB-1.1.0.tar.gz]
-> url0=3Dhttp://www.directfb.org/download/DirectFB/DirectFB-1.1.0.tar.gz
-> url1=3Dhttp://www.directfb.org/downloads/Old/DirectFB-1.1.0.tar.gz
-> md5=3Dda30fa2748c7501913c8832a83e654ab
-> sha256=3D0ee87256a278079955d78e4f235c15a174afbb507b5434f1966cd3e5f5a3f23a
-> =20
-> And any change to checksums.ini format would require updating=20
-> contrib/source-checker/ scripts as they are used to check source mirrors=
-=20
-> integrity and to sort checksums.ini file.
+Note that I have written a package to help import, learn and
+automatically google for missing packages, from which some ideas might
+be ripped.
 
-Thanks for comments.
+Source here:
 
-I would like to improve the patch and add parts for scripts too, if you thi=
-nk it
-could be used. From discussion on irc it seemed like global checksums.ini
-is not a good idea at all, at least because of high probability of merge
-conflicts, and that checksums should be moved to .bb files or defined on
-per-package files.
+http://www.sidebranch.com/leon/witpa_20080730.tar.bz2
 
 Regards,
+-- 
+Leon
 
---=20
-uin:136542059                jid:JaMa@jabber.mk.cvut.cz
-Jansa Martin                 sip:jamasip@voip.wengo.fr=20
-JaMa                        =20
 
---qMm9M+Fa2AknHoGS
-Content-Type: application/pgp-signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.9 (GNU/Linux)
-
-iEYEARECAAYFAkj6KzgACgkQN1Ujt2V2gByxmgCbBux6q77wwBqC5G5U8wtypNet
-vU8An21fWjvNTQffQd8kmiS0Afzh8Gl7
-=kp6l
------END PGP SIGNATURE-----
-
---qMm9M+Fa2AknHoGS--
