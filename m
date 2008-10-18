@@ -1,26 +1,30 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kqztk-0000h8-KI
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Oct 2008 02:42:28 +0200
-Received: from [92.116.202.107] (helo=[10.129.202.107])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1Kqztd-0001QC-1t
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Oct 2008 02:42:22 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Oct 2008 02:42:31 +0200
-User-Agent: KMail/1.9.9
-References: <1224271803.4235.182.camel@lenovo.internal.reciva.com>
-	<19c1b8a90810171248n4c8bc46ax954a17e40caa812f@mail.gmail.com>
-	<1224273480.4235.186.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1224273480.4235.186.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-Message-Id: <200810180242.31716.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.116.202.107
-Subject: Re: remove ld.so.conf from glibc?
+	(envelope-from <rpurdie@rpsys.net>) id 1Kr7it-0008NX-Ed
+	for openembedded-devel@openembedded.org; Sat, 18 Oct 2008 11:03:47 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9I93dfh016151
+	for <openembedded-devel@openembedded.org>;
+	Sat, 18 Oct 2008 10:03:39 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 16062-03 for <openembedded-devel@openembedded.org>;
+	Sat, 18 Oct 2008 10:03:33 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9I93TuE016143
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Sat, 18 Oct 2008 10:03:29 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Sat, 18 Oct 2008 10:03:29 +0100
+Message-Id: <1224320609.5215.15.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Some open issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,26 +38,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Oct 2008 00:42:28 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 18 Oct 2008 09:03:47 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 17 October 2008 21:58:00 Phil Blundell wrote:
+Hi Guys,
 
-> That sounds like it would be overkill for most embedded DISTROs.  Making
-> a separate package to ship those bits seems like it would be a fine
-> idea, but I am not convinced we want them as standard fitment in libc6
-> itself.  Do you know of any existing package/DISTRO combinations in oe
-> that would actually benefit from this feature?
+I have a few issues with the way certain things have happened recently.
 
-I have done this for Openmoko. We install Qtopia into /opt/Qtopia and I didn't 
-want to play with fixed RPATHs inside the binary.
+1. The FILE_PR change.
 
-This means I can add Qtopia path's if Qtopia is installed and don't punish 
-people not having it.
+This was mentioned in an email on Wednesday with the title "[oe] [RFC]
+Enable --hash-style=both for all recent gcc4 targets" at 9am. At 8pm we
+have "I decided to land now as PRs are changing all the time and keeping
+up with things is pretty hard...". This is not in keeping with the major
+changes policy we agreed by any stretch of the imagination.
 
-z.
+This change breaks compatibility with everyone's overlays and creates
+the nightmare scenario of external OE "branches" being forced into the
+change or forever being unable to sync (Openmoko and Poky spring to
+mind).
+
+What is most annoying is that given a bit longer I think we could have
+done something that would have meant this was unnecessary, specifically
+inserted the revision into the package at package_*.bbclass time where
+we can manipulated PR as needed. This combined with a staging ABI change
+would have been all that was needed. If staging ABI isn't enough, we can
+insert the modified PR into STAMPS instead of the real PR or some other
+magic. My point is that there are better options than FILE_PR, it just
+needs some thought. The fact the testing branch had so many merge issues
+should have meant a better idea was sought, not that is should be
+committed ASAP.
+
+2. The Git conversion including the BKCVS data.
+
+I'd made it quite clear this should have been a tree graft and this
+wasn't done so we're now stuck with broken history :(. This is pretty
+frustrating since I'd repeatedly said not to include it and went to the
+effort of gathering my conversion data and sending it to Jan who then
+didn't realise what I meant by graft (though no fault of his own).
+
+3. Merging Bitbake into OE
+
+People are saying things like "Might be a chance to reconsider
+maintaining BitBake in the OE repository.". Could people please talk to
+the bitbake maintainer about things like this *before* encouraging it in
+public. If we need a release lets make one (which seems to be the real
+problem).
+
+4. Bitbake changes
+
+These should go to the bitbake list as well as the OE list and should be
+discussed. I've raised issues with patches which have been ignored and
+these patches have now just need committed. I'm not happy about the
+process that was used :(. I know people have various commitments but we
+need to try and stick to some kind of process for this kind of thing.
+
+
+Where from here?
+
+I'd actually like to a strong line on this and suggest we revert the
+FILE_PR change since its badly thought out and also that we consider
+redoing the git conversion ASAP and the replaying the recent commits
+before its too late to get rid of the corruption in there. This is
+probably going to have to go to a core team vote since its a pretty big
+change to suggest but opinions are welcome.
+
+Richard
+
+
 
 
