@@ -1,31 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Krat9-0003QF-Dg
-	for openembedded-devel@openembedded.org; Sun, 19 Oct 2008 18:12:19 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Krasv-0005Cw-NS
-	for openembedded-devel@openembedded.org; Sun, 19 Oct 2008 16:12:05 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 19 Oct 2008 16:12:05 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 19 Oct 2008 16:12:05 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 19 Oct 2008 18:11:57 +0200
-Message-ID: <gdfm8d$apg$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081015 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: busybox recipe isappearances
+	(envelope-from <mickey@vanille-media.de>) id 1KrbOk-00011b-Ll
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Oct 2008 18:44:58 +0200
+Received: from andromeda.vanille.de (e180135172.adsl.alicedsl.de
+	[85.180.135.172])
+	by drlauer-research.com (Postfix) with ESMTP id EBD50584708;
+	Sun, 19 Oct 2008 18:57:58 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 19 Oct 2008 18:44:41 +0200
+User-Agent: KMail/1.9.10
+References: <20081019161359.EC15F189329@amethyst.openembedded.net>
+In-Reply-To: <20081019161359.EC15F189329@amethyst.openembedded.net>
+MIME-Version: 1.0
+Message-Id: <200810191844.41901.mickey@vanille-media.de>
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : angstrom 2008 preferred versions: move busybox to 1.11. 3 since someone deleted the 1.11.1 version we want......
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,16 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Oct 2008 16:12:19 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 19 Oct 2008 16:44:58 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+Am Sunday 19 October 2008 18:13:59 schrieb GIT User account:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 44c937dc478236138cffe1e18a877a74f4a9f281
+> URL:   
+> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=44c937dc47823
+>6138cffe1e18a877a74f4a9f281
+>
+> Author: Koen Kooi <koen@openembedded.org>
+> Date:   Sun Oct 19 18:10:10 2008 +0200
+>
+> angstrom 2008 preferred versions: move busybox to 1.11.3 since someone
+> deleted the 1.11.1 version we want...... * I currently don't have the time
+> to trackdown and revert the commit that deleted it
 
-Why are people removing busybox recipes that angstrom has in 
-PREFERRED_VERSIONS? QA gets really hard to do if things in 
-PREFERRED_VERSIONS dissappear and unwanted versions get built....
+Sorry, seems my grep is broken. I really thought I was checking for that.
 
-
+-- 
+:M:
 
 
