@@ -1,23 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1KrVFW-0004hV-SK; Sun, 19 Oct 2008 12:11:03 +0200
-Received: from 88-111-190-175.dynamic.dsl.as9105.com ([88.111.190.175]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1KrVFD-0007oR-Qf; Sun, 19 Oct 2008 11:10:44 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1224322064.5215.17.camel@dax.rpnet.com>
-References: <1224271803.4235.182.camel@lenovo.internal.reciva.com>
-	<1224322064.5215.17.camel@dax.rpnet.com>
-Date: Sun, 19 Oct 2008 11:10:34 +0100
-Message-Id: <1224411034.4235.210.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KrabI-0002Zg-Dd
+	for openembedded-devel@openembedded.org; Sun, 19 Oct 2008 17:53:52 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Krab3-0004cZ-Bo
+	for openembedded-devel@openembedded.org; Sun, 19 Oct 2008 15:53:37 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 19 Oct 2008 15:53:37 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 19 Oct 2008 15:53:37 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 19 Oct 2008 17:53:29 +0200
+Message-ID: <gdfl5p$85r$1@ger.gmane.org>
+References: <1224320609.5215.15.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: remove ld.so.conf from glibc?
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081015 Shredder/3.0b1pre
+In-Reply-To: <1224320609.5215.15.camel@dax.rpnet.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Some open issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,25 +41,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Oct 2008 10:11:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 19 Oct 2008 15:53:52 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2008-10-18 at 10:27 +0100, Richard Purdie wrote:
-> I agree with this. Poky already removed cruft from this file and has a
-> modified version so splitting it into a separate package would be good
-> which distros can deal with as needed.
+On 18-10-2008 11:03, Richard Purdie wrote:
+> Hi Guys,
+>
+> I have a few issues with the way certain things have happened recently.
+>
+> 1. The FILE_PR change.
+>
+> This was mentioned in an email on Wednesday with the title "[oe] [RFC]
+> Enable --hash-style=both for all recent gcc4 targets" at 9am. At 8pm we
+> have "I decided to land now as PRs are changing all the time and keeping
+> up with things is pretty hard...". This is not in keeping with the major
+> changes policy we agreed by any stretch of the imagination.
+>
+> This change breaks compatibility with everyone's overlays and creates
+> the nightmare scenario of external OE "branches" being forced into the
+> change or forever being unable to sync (Openmoko and Poky spring to
+> mind).
+>
+> What is most annoying is that given a bit longer I think we could have
+> done something that would have meant this was unnecessary, specifically
+> inserted the revision into the package at package_*.bbclass time where
+> we can manipulated PR as needed. This combined with a staging ABI change
+> would have been all that was needed. If staging ABI isn't enough, we can
+> insert the modified PR into STAMPS instead of the real PR or some other
+> magic. My point is that there are better options than FILE_PR, it just
+> needs some thought. The fact the testing branch had so many merge issues
+> should have meant a better idea was sought, not that is should be
+> committed ASAP.
+>
+> 2. The Git conversion including the BKCVS data.
+>
+> I'd made it quite clear this should have been a tree graft and this
+> wasn't done so we're now stuck with broken history :(. This is pretty
+> frustrating since I'd repeatedly said not to include it and went to the
+> effort of gathering my conversion data and sending it to Jan who then
+> didn't realise what I meant by graft (though no fault of his own).
 
-Righto; I've removed /etc/ld.so.conf from the glibc package now.  Any
-DISTROs which want to ship their own version in a separate package
-should feel free to do so.
+I have no strong opinion on the BK stuff, but it would be nice to have 
+the history in the same repo.
 
-(There didn't seem to be any value in creating a package for the
-previous contents of ld.so.conf since, as I mentioned in my previous,
-the old file was apparently devoid of any value.  But it would be easy
-enough to do that if it does turn out to have been useful after all.)
+> 3. Merging Bitbake into OE
+>
+> People are saying things like "Might be a chance to reconsider
+> maintaining BitBake in the OE repository.". Could people please talk to
+> the bitbake maintainer about things like this *before* encouraging it in
+> public. If we need a release lets make one (which seems to be the real
+> problem).
 
-p.
+I do have a strong opinion on that :) Bitbake should be kept out of the 
+.dev branch. I can see how things like the new stable branch *might* 
+include a copy, but let's cross that bridge when we get there.
+
+> 4. Bitbake changes
+>
+> These should go to the bitbake list as well as the OE list and should be
+> discussed. I've raised issues with patches which have been ignored and
+> these patches have now just need committed. I'm not happy about the
+> process that was used :(. I know people have various commitments but we
+> need to try and stick to some kind of process for this kind of thing.
+
+I know very little about bitbake and don't contribute to it, so no 
+opinion there.
+
+> Where from here?
+>
+> I'd actually like to a strong line on this and suggest we revert the
+> FILE_PR change since its badly thought out and also that we consider
+> redoing the git conversion ASAP and the replaying the recent commits
+> before its too late to get rid of the corruption in there. This is
+> probably going to have to go to a core team vote since its a pretty big
+> change to suggest but opinions are welcome.
+
+<distro hat> The most important thing is the in the end distros can have 
+a way to increase a global PR</distro hat>
+
+<oe hat>I agree with your proposal</oe hat>
+
+regards,
+
+Koen
+
+
+
 
 
 
