@@ -1,28 +1,37 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [209.85.198.241] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Krwaj-0003EU-7h
+	(envelope-from <cliff.brake@gmail.com>) id 1KrxAa-0005ad-Gk
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Oct 2008 17:22:47 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 8069916DF7D
+	Mon, 20 Oct 2008 17:59:49 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so2284000rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2008 17:29:55 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 26DCA2A420A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2008 17:31:00 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Mon, 20 Oct 2008 08:59:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=AMyvmoX7hpI4eKa5nIfmJ8zqHO2wz02aYDJfxODvchE=;
+	b=rNDW7E9J4o5XjE6wbsxZ1Lo1Pa6XRMUW9NhvvIfG36tVvok+VN+3HJaBa9lIXG89Mb
+	MaPBuRp/5e4UT0ruBPPYKZA1BKlU4ALokaHBp0yVWLVqIp+jK4tuQaIhGU7wWhzqvU2v
+	q93Cg/yl4xKKxLttIeoYp8AEtGdFkhc6LCWWk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=WxF65F+j+X+7D2FP45q+AawF7JTQhxitX/YMlZqv5JP56LMinSxd5R4dxaIZzXGY4c
+	GjS0d5ZReSswU8uxYGAcopujQK5NKKkGl4S6YCmvwAAjUvAcEHIj4jm+TCETKwKnJwmL
+	wyuYCK1F+VMEVfd/IwTcs+UAXBvIzS370W1Mg=
+Received: by 10.140.166.21 with SMTP id o21mr4928489rve.167.1224518368607;
+	Mon, 20 Oct 2008 08:59:28 -0700 (PDT)
+Received: by 10.141.129.13 with HTTP; Mon, 20 Oct 2008 08:59:28 -0700 (PDT)
+Message-ID: <f96d234e0810200859p70d3e127qa41e01266e2efd47@mail.gmail.com>
+Date: Mon, 20 Oct 2008 11:59:28 -0400
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF479@hiob.intern.dresearch.de>
 MIME-Version: 1.0
-Date: Mon, 20 Oct 2008 17:22:11 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF479@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: support another hardware
-Thread-Index: Ackyx6kS1lO8CIhcSjaqDtTqnqcSug==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: support another hardware
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF479@hiob.intern.dresearch.de>
+Subject: Re: support another hardware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,27 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Oct 2008 15:22:58 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 20 Oct 2008 15:59:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-QWZ0ZXIgQWxleCBhbm5vdW5jZWQgc3VwcG9ydCBmb3IgdGhlIGhhbW1lcmhlYWQgYm9hcmQgd2Ug
-d291bGQgdHJ5IHRvIGFkZCBhbm90aGVyIGhhcmR3YXJlLiBJdCBpcyB0aGUgT1hFODEwU0UsIGFu
-IEFSTTkyNkVKLVMgYmFzZWQgY29uc3VtZXIgbmV0d29yay1hdHRhY2hlZCBzdG9yYWdlIChOQVMp
-IGRldmljZSAoc2VlIDxodHRwOi8vd3d3Lm94c2VtaS5jb20vcHJvZHVjdHMvc3RvcmFnZS9PWEU4
-MTBTRS5odG1sPikuDQoNCldlIGhhdmUgc29tZSBleHBlcmllbmNlIHdpdGggT0UsIG1hZGUgYW5k
-IGZpeGVkIHNvbWUgYmIgcmVjaXBlcywgYnV0IG1pc3MgdGhlIGV4cGVyaWVuY2UgaW4gYWRkaW5n
-IGEgY29tcGxldGUgbmV3IG1hY2hpbmUuIElzIHRoZXJlIGEgZ3VpZGUgbGluZSwgbWFudWFsLCB0
-dXRvcmlhbCBvciBzb21ldGhpbmcgbGlrZSB0aGlzIGdpdmluZyBzdGVwLWJ5LXN0ZXAgaGVscCBm
-b3IgdGhpcyAoYW5kIHdhcm5pbmcgb2YgdGhlIHBpdGZhbGxzKT8gSSBtaXNzZWQgaXQgaW4gdGhl
-IHdpa2kuIFRoZSBvbmx5IGRvY3VtZW50YXRpb24gaSBmb3VuZCBpcyB0aGlzIG9uZTogPGh0dHA6
-Ly9iZWMtc3lzdGVtcy5jb20vb2UvaHRtbC9pbmRleC5odG1sPi4gQnV0IHRoZSBwYXJ0ICJBZGRp
-bmcgYSBuZXcgTWFjaGluZSIgaXN0IGp1c3QgYSB0aHJlZSBidWxsZXQgbGlzdC4gOigNCg0KSSBi
-ZWxpZXZlLCB0aGUgZWFzaWVzdCBwYXJ0IGlzIHdyaXRpbmcgdGhlIG5ldyBtYWNoaW5lIGNvbmZp
-ZyBmaWxlLiBCdXQgYWxsIHRoZSBzdHVmZiBjaG9vc2luZyB0aGUgYmVzdCBrZXJuZWwgY29uZmln
-dXJhdGlvbiAoZGVyaXZlZC9pbnRlZ3JhdGVkIGZyb20vd2l0aCBvdGhlcnM/KSBzZWVtcyB0aGUg
-aGFyZGVzdCB0YXNrIGluIG15IG9waW5pb24uDQoNClN0ZWZmZW4NCg==
+On Mon, Oct 20, 2008 at 11:22 AM, Sledz, Steffen <sledz@dresearch.de> wrote:
+> After Alex announced support for the hammerhead board we would try to add another hardware. It is the OXE810SE, an ARM926EJ-S based consumer network-attached storage (NAS) device (see <http://www.oxsemi.com/products/storage/OXE810SE.html>).
+>
+> We have some experience with OE, made and fixed some bb recipes, but miss the experience in adding a complete new machine. Is there a guide line, manual, tutorial or something like this giving step-by-step help for this (and warning of the pitfalls)? I missed it in the wiki. The only documentation i found is this one: <http://bec-systems.com/oe/html/index.html>. But the part "Adding a new Machine" ist just a three bullet list. :(
+>
+> I believe, the easiest part is writing the new machine config file. But all the stuff choosing the best kernel configuration (derived/integrated from/with others?) seems the hardest task in my opinion.
+
+There is really not much more to it than create a machine conf, and a
+kernel configuration.  For the kernel, the preferred approach seems to
+be to use a generic linux-2.6.xx.bb recipe, and add your machine to
+the version you support.  Occasionally, other packages will have
+machine specific tweaks, but that is not required.
+
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
