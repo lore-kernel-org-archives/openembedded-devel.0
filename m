@@ -1,26 +1,18 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1Krsqh-000739-Hz
+Received: from [193.12.106.18] (helo=mail.southpole.se)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <jonas.bonn@gmail.com>) id 1KruZJ-0006ZR-LO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Oct 2008 13:22:59 +0200
-Received: (qmail invoked by alias); 20 Oct 2008 11:22:40 -0000
-Received: from BAA39f8.baa.pppool.de (EHLO [192.168.178.38]) [77.128.57.248]
-	by mail.gmx.net (mp038) with SMTP; 20 Oct 2008 13:22:40 +0200
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX19TnVx83xlTYRbshU1HJZUELaNQZlOuse4XK6bYKV
-	cEz5HdomJarOXF
-Message-ID: <48FC69FE.2020300@gmx.de>
-Date: Mon, 20 Oct 2008 13:22:38 +0200
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Mon, 20 Oct 2008 15:13:09 +0200
+Received: from localhost.localdomain
+	(ua-83-227-144-18.cust.bredbandsbolaget.se [83.227.144.18])
+	by mail.southpole.se (Postfix) with ESMTPSA id 18F9F4ED12D;
+	Mon, 20 Oct 2008 15:12:50 +0200 (CEST)
+From: Jonas Bonn <jonas.bonn@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <gdfm8d$apg$1@ger.gmane.org>	<200810191847.04533.mickey@vanille-media.de>	<1224438415.4235.266.camel@lenovo.internal.reciva.com>	<200810200002.25673.mickey@vanille-media.de>
-	<1224488828.4235.278.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1224488828.4235.278.camel@lenovo.internal.reciva.com>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.57
-Subject: Re: busybox recipe isappearances
+Date: Mon, 20 Oct 2008 15:12:49 +0200
+Message-Id: <1224508369-30155-1-git-send-email-jonas.bonn@gmail.com>
+X-Mailer: git-send-email 1.5.6.3
+Subject: [PATCH] File perms required when O_CREAT is used
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,53 +26,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Oct 2008 11:22:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Oct 2008 13:13:09 -0000
 
-Phil Blundell wrote:
-> On Mon, 2008-10-20 at 00:02 +0200, Michael 'Mickey' Lauer wrote:
->   
->> Am Sunday 19 October 2008 19:46:55 schrieb Phil Blundell:
->>     
->>> It's long been my view that we should just add newer ones and leave the
->>> old ones alone.  There's really no reason to delete old recipes and,
->>> even if you check for PREFERRED_VERSIONs in the git tree, there is no
->>> real way to know who else might be relying on the version you are about
->>> to delete.
->>>       
->> That's true, however I always feel the urge of cleaning up when I see dozens 
->> or recipes for the same software [besides the amount of increased parsing 
->> efforts if we really were to keep everything). I'd rather have the rough 
->> guideline of keeping major (trusted) releases. At the end of the day, 
->> everything is in the archives.
->>     
->
-> If parsing time were to become a big issue then one could imagine ways
-> to solve that in bitbake.  For example, one could arrange for a command
-> like "bitbake --disregard-old-versions" to parse all the files once,
-> identify those versions which are older than the PREFERRED ones (whether
-> set explicitly or automatically), and blacklist these old versions so
-> that they are never parsed again.  The effect would be a bit like having
-> an automatically-maintained BBMASK though of course the implementation
-> would probably be slightly different.
->
-> As for old versions being in the archives, that's true, but it seems
-> like one could easily get into a kind of ping-pong thing where you
-> delete an old version, I pull it out of the archives again, someone else
-> now notices this "old cruft" and deletes it again, and so on.  I can
-> imagine that being frustrating for all parties.
->   
-This could be avoided if both parties would read the commit messages ;)
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->   
+On Ubuntu Intrepid, D_FORTIFY_SOURCE is enabled by default, thus
+requiring file permissions when the O_CREAT flag is set on open.  This
+patch remedies this for gcc-3.4.6.
+
+Signed-off-by: Jonas Bonn <jonas.bonn@gmail.com>
+---
+ packages/gcc/gcc-3.4.6.inc                 |    3 ++-
+ packages/gcc/gcc-3.4.6/O_CREAT-perms.patch |   11 +++++++++++
+ 2 files changed, 13 insertions(+), 1 deletions(-)
+ create mode 100644 packages/gcc/gcc-3.4.6/O_CREAT-perms.patch
+
+diff --git a/packages/gcc/gcc-3.4.6.inc b/packages/gcc/gcc-3.4.6.inc
+index 1afd7a2..e90fe04 100644
+--- a/packages/gcc/gcc-3.4.6.inc
++++ b/packages/gcc/gcc-3.4.6.inc
+@@ -16,7 +16,8 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
+ 	   file://always-fixincperm.patch;patch=1 \
+ 	   file://GCOV_PREFIX_STRIP-cross-profile_3.4.patch;patch=1 \
+ 	   file://zecke-xgcc-cpp.patch;patch=1 \
+-	   file://gcc4-mtune-compat.patch;patch=1"
++	   file://gcc4-mtune-compat.patch;patch=1 \
++	   file://O_CREAT-perms.patch;patch=1"
+ 
+ SRC_URI += "file://gcc34-configure.in.patch;patch=1"
+ SRC_URI += "file://gcc34-thumb-support.patch;patch=1"
+diff --git a/packages/gcc/gcc-3.4.6/O_CREAT-perms.patch b/packages/gcc/gcc-3.4.6/O_CREAT-perms.patch
+new file mode 100644
+index 0000000..1c3af2e
+--- /dev/null
++++ b/packages/gcc/gcc-3.4.6/O_CREAT-perms.patch
+@@ -0,0 +1,11 @@
++--- gcc-3.4.6/gcc/collect2.c.orig	2008-10-20 14:47:56.000000000 +0200
+++++ gcc-3.4.6/gcc/collect2.c	2008-10-20 14:48:49.000000000 +0200
++@@ -1534,7 +1534,7 @@
++   if (redir)
++     {
++       /* Open response file.  */
++-      redir_handle = open (redir, O_WRONLY | O_TRUNC | O_CREAT);
+++      redir_handle = open (redir, O_WRONLY | O_TRUNC | O_CREAT, 0644);
++ 
++       /* Duplicate the stdout and stderr file handles
++ 	 so they can be restored later.  */
+-- 
+1.5.6.3
 
 
 
