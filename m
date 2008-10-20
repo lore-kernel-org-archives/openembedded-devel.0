@@ -1,22 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1Ks1pK-0006Dt-U9
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Oct 2008 22:58:11 +0200
-Received: from 88-111-190-175.dynamic.dsl.as9105.com ([88.111.190.175]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Ks1os-0006QM-He
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Oct 2008 21:57:45 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <48FCDCCD.4040704@dls.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ks3OA-0001LC-Gj
+	for openembedded-devel@openembedded.org; Tue, 21 Oct 2008 00:38:14 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ks3Nn-0000Kx-Rs
+	for openembedded-devel@openembedded.org; Mon, 20 Oct 2008 22:37:52 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 20 Oct 2008 22:37:51 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 20 Oct 2008 22:37:51 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 21 Oct 2008 00:37:42 +0200
+Message-ID: <gdj17m$9pg$1@ger.gmane.org>
 References: <48FCDCCD.4040704@dls.net>
-Date: Mon, 20 Oct 2008 21:57:27 +0100
-Message-Id: <1224536247.4235.282.camel@lenovo.internal.reciva.com>
+	<1224536247.4235.282.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081015 Shredder/3.0b1pre
+In-Reply-To: <1224536247.4235.282.camel@lenovo.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: git-native?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,23 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Oct 2008 20:58:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 20 Oct 2008 22:38:14 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2008-10-20 at 14:32 -0500, Mike (mwester) wrote:
-> Er, just a thought... but now that we've switched to git, should OE just
-> globally ASSUME_PROVIDED for git-native?
+On 20-10-2008 22:57, Phil Blundell wrote:
+> On Mon, 2008-10-20 at 14:32 -0500, Mike (mwester) wrote:
+>> Er, just a thought... but now that we've switched to git, should OE just
+>> globally ASSUME_PROVIDED for git-native?
+>
+> I'm not sure what that would really buy you.  It would be a pain for
+> downstream OE users who might be getting the metadata through some other
+> means (rather than checking it out directly from the OE git tree), and
+> it doesn't really seem like it would bring any great benefit.
+> Individual users can obviously set ASSUME_PROVIDED for git-native if
+> they want and I guess they should continue to do that.
 
-I'm not sure what that would really buy you.  It would be a pain for
-downstream OE users who might be getting the metadata through some other
-means (rather than checking it out directly from the OE git tree), and
-it doesn't really seem like it would bring any great benefit.
-Individual users can obviously set ASSUME_PROVIDED for git-native if
-they want and I guess they should continue to do that.
+IIRC git-native was added for people without git (e.g. RHEL) or people 
+only having old git versions (e.g. git 1.4) that the fetcher doesn't like.
+So removing it would have no positive effect other than shortening 
+initial build time with a few seconds.
 
-p.
 
+regards,
+
+Koen
 
 
 
