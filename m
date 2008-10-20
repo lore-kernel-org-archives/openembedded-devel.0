@@ -1,37 +1,29 @@
-Received: from [209.85.198.241] (helo=rv-out-0708.google.com)
+Received: from [129.104.30.34] (helo=mx1.polytechnique.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KrxAa-0005ad-Gk
+	(envelope-from <gregoire@gentil.com>) id 1Krz4H-0002VZ-TR
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Oct 2008 17:59:49 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so2284000rvb.12
+	Mon, 20 Oct 2008 20:01:25 +0200
+Received: from [192.168.0.2] (adsl-71-135-119-175.dsl.pltn13.pacbell.net
+	[71.135.119.175])
+	(using SSLv3 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by ssl.polytechnique.org (Postfix) with ESMTP id 69C143316C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2008 08:59:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=AMyvmoX7hpI4eKa5nIfmJ8zqHO2wz02aYDJfxODvchE=;
-	b=rNDW7E9J4o5XjE6wbsxZ1Lo1Pa6XRMUW9NhvvIfG36tVvok+VN+3HJaBa9lIXG89Mb
-	MaPBuRp/5e4UT0ruBPPYKZA1BKlU4ALokaHBp0yVWLVqIp+jK4tuQaIhGU7wWhzqvU2v
-	q93Cg/yl4xKKxLttIeoYp8AEtGdFkhc6LCWWk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=WxF65F+j+X+7D2FP45q+AawF7JTQhxitX/YMlZqv5JP56LMinSxd5R4dxaIZzXGY4c
-	GjS0d5ZReSswU8uxYGAcopujQK5NKKkGl4S6YCmvwAAjUvAcEHIj4jm+TCETKwKnJwmL
-	wyuYCK1F+VMEVfd/IwTcs+UAXBvIzS370W1Mg=
-Received: by 10.140.166.21 with SMTP id o21mr4928489rve.167.1224518368607;
-	Mon, 20 Oct 2008 08:59:28 -0700 (PDT)
-Received: by 10.141.129.13 with HTTP; Mon, 20 Oct 2008 08:59:28 -0700 (PDT)
-Message-ID: <f96d234e0810200859p70d3e127qa41e01266e2efd47@mail.gmail.com>
-Date: Mon, 20 Oct 2008 11:59:28 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Mon, 20 Oct 2008 20:01:06 +0200 (CEST)
+From: Gregoire Gentil <gregoire@gentil.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF479@hiob.intern.dresearch.de>
-MIME-Version: 1.0
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF479@hiob.intern.dresearch.de>
-Subject: Re: support another hardware
+In-Reply-To: <mailman.87260.1224514145.11663.openembedded-devel@lists.openembedded.org>
+References: <mailman.87260.1224514145.11663.openembedded-devel@lists.openembedded.org>
+Organization: Gregoire Gentil
+Date: Mon, 20 Oct 2008 11:00:50 -0700
+Message-Id: <1224525650.9626.62.camel@localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1 
+X-AV-Checked: ClamAV using ClamSMTP at djali.polytechnique.org (Mon Oct 20
+	20:01:07 2008 +0200 (CEST))
+X-Spam-Flag: No, tests=bogofilter, spamicity=0.001375, queueID=1454733171
+X-Org-Mail: gregoire.gentil.1992@polytechnique.org
+Subject: Firefox do_stage for gecko-mediaplayer package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +37,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Oct 2008 15:59:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Oct 2008 18:01:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 20, 2008 at 11:22 AM, Sledz, Steffen <sledz@dresearch.de> wrote:
-> After Alex announced support for the hammerhead board we would try to add another hardware. It is the OXE810SE, an ARM926EJ-S based consumer network-attached storage (NAS) device (see <http://www.oxsemi.com/products/storage/OXE810SE.html>).
->
-> We have some experience with OE, made and fixed some bb recipes, but miss the experience in adding a complete new machine. Is there a guide line, manual, tutorial or something like this giving step-by-step help for this (and warning of the pitfalls)? I missed it in the wiki. The only documentation i found is this one: <http://bec-systems.com/oe/html/index.html>. But the part "Adding a new Machine" ist just a three bullet list. :(
->
-> I believe, the easiest part is writing the new machine config file. But all the stuff choosing the best kernel configuration (derived/integrated from/with others?) seems the hardest task in my opinion.
+Hello,
 
-There is really not much more to it than create a machine conf, and a
-kernel configuration.  For the kernel, the preferred approach seems to
-be to use a generic linux-2.6.xx.bb recipe, and add your machine to
-the version you support.  Occasionally, other packages will have
-machine specific tweaks, but that is not required.
+I'm trying to create a recipe for gecko-mediaplayer which is a Firefox
+plugin.
 
-Cliff
+The recipe (http://pastebin.com/m5cd4d6ec) fails
+(http://pastebin.com/m5a2c6a16) because firefox-plugin has not been
+exported in the staging area:
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+configure: WARNING: firefox-plugin not found, trying another
+checking for GECKO... no
+...
+checking for xpidl... no
+configure: error: xpidl compiler not found
+
+
+From my investigations in the gecko-mediaplayer configure and hte
+compilation logs, it seems that we are missing:
+
+- firefox-plugin.pc and firefox-xpcom.pc
+(take a look at the gecko-mediaplayer configure:
+GECKO_HOME=3D`$PKG_CONFIG --variable=3Dlibdir firefox-plugin`
+GECKO_IDLDIR=3D`$PKG_CONFIG --variable=3Didldir firefox-xpcom`)
+
+- some headers
+=EF=BB=BFxpcom/base/*.idl
+nsprpub/pr/include/*.h
+
+- the xpidl program (host binary)
+
+
+I copy the original Firefox-3.0.1 staging function for reference:
+
+do_stage() {
+        install -d ${STAGING_INCDIR}/firefox-${PV}
+        cd dist/sdk/include
+		rm -rf obsolete
+        headers=3D`find . -name "*.h"`
+        for f in $headers
+        do
+                install -D -m 0644 $f ${STAGING_INCDIR}/firefox-${PV}/
+        done
+        # removes 2 lines that call absent headers
+        sed -e '178,179d'
+${STAGING_INCDIR}/firefox-${PV}/nsIServiceManager.h
+}
+
+
+
+I suggest the following:
+- remove the "rm -rf obsolete" as this folder contains important files
+needed during the gecko-mediaplayer compilation
+- add:
+
+=EF=BB=BF        cd ../../../=EF=BB=BFnsprpub/pr/include
+        headers=3D`find . -name "*.h"`
+        for f in $headers
+        do
+                install -D -m 0644 $f ${STAGING_INCDIR}/firefox-${PV}/
+        done
+=EF=BB=BF=EF=BB=BF        cd ../../../=EF=BB=BF=EF=BB=BF=EF=BB=BFxpcom/ba=
+se
+        headers=3D`find . -name "*.idl"`
+        for f in $headers
+        do
+                install -D -m 0644 $f ${STAGING_INCDIR}/firefox-${PV}/
+        done
+
+
+Now, I still have a couple of problems:
+- First, xpidl should be copied
+to =EF=BB=BF/OE/build/tmp/staging/i686-linux/usr/bin but it should be a h=
+ost
+binary. It's run at the last line of the configure to create a header
+file. The one I found here:
+tmp/work/armv7a-angstrom-linux-gnueabi/firefox-3.0.1-r7.1/mozilla/xpcom/t=
+ypelib/xpidl/xpidl seems to be an ARM binary so I'm confused. How should =
+I handle this situation?
+
+- Secondly, how do I create those =EF=BB=BFfirefox-plugin.pc and
+firefox-xpcom.pc so that it can be found by the gecko-mediaplayer
+configure?
+
+Perhaps, I'm not taking the problem on the right end. Any advice, code
+or help would be appreciated. Thanks in advance,
+
+Gr=C3=A9goire
+
+
+
+
 
 
