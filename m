@@ -1,25 +1,26 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1KrgNt-0002RB-9Y
+	(envelope-from <pb@reciva.com>) id 1KrpUT-0000AX-CX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Oct 2008 00:04:33 +0200
-Received: from andromeda.vanille.de (e180135172.adsl.alicedsl.de
-	[85.180.135.172])
-	by drlauer-research.com (Postfix) with ESMTP id 999E4584712
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2008 00:17:25 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Mon, 20 Oct 2008 09:47:50 +0200
+Received: from 88-111-190-175.dynamic.dsl.as9105.com ([88.111.190.175]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KrpU0-00080E-49
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Oct 2008 08:47:24 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Oct 2008 00:04:08 +0200
-User-Agent: KMail/1.9.10
-References: <1224320609.5215.15.camel@dax.rpnet.com>
-	<1224344240.5215.48.camel@dax.rpnet.com>
-	<1224439610.5211.11.camel@dax.rpnet.com>
-In-Reply-To: <1224439610.5211.11.camel@dax.rpnet.com>
-MIME-Version: 1.0
-Message-Id: <200810200004.09153.mickey@vanille-media.de>
-Subject: Re: Some open issues
+In-Reply-To: <200810200002.25673.mickey@vanille-media.de>
+References: <gdfm8d$apg$1@ger.gmane.org>
+	<200810191847.04533.mickey@vanille-media.de>
+	<1224438415.4235.266.camel@lenovo.internal.reciva.com>
+	<200810200002.25673.mickey@vanille-media.de>
+Date: Mon, 20 Oct 2008 08:47:08 +0100
+Message-Id: <1224488828.4235.278.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: busybox recipe isappearances
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,37 +34,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Oct 2008 22:04:39 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Oct 2008 07:47:50 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Am Sunday 19 October 2008 20:06:50 schrieb Richard Purdie:
-> The reason this is huge is that we seem to have ton of zero length
-> files. Given its so totally broken I'm keen to do the above so we need a
-> plan. I propose:
->
-> a) repo goes read only
-> b) checkout is made
-> c) conversion is run
-> d) sanity checks are made
-> e) new revisions are pushed
-> f) graft is added to the main OE repo
-> g) commits based on the old history are blocked
-> h) repo is made writable again
-> i) people are advised to rebase any unpushed changes
->
-> Is anyone strongly against this? If not, when should we do this?
+On Mon, 2008-10-20 at 00:02 +0200, Michael 'Mickey' Lauer wrote:
+> Am Sunday 19 October 2008 19:46:55 schrieb Phil Blundell:
+> > It's long been my view that we should just add newer ones and leave the
+> > old ones alone.  There's really no reason to delete old recipes and,
+> > even if you check for PREFERRED_VERSIONs in the git tree, there is no
+> > real way to know who else might be relying on the version you are about
+> > to delete.
+> 
+> That's true, however I always feel the urge of cleaning up when I see dozens 
+> or recipes for the same software [besides the amount of increased parsing 
+> efforts if we really were to keep everything). I'd rather have the rough 
+> guideline of keeping major (trusted) releases. At the end of the day, 
+> everything is in the archives.
 
-No objection. Please synchronize with Jan L=FCbbe, he has lots of experienc=
-e=20
-with the conversion. Feel free to chose the time/date when you (both) have=
-=20
-resources to do that. Please announce a day before though.
+If parsing time were to become a big issue then one could imagine ways
+to solve that in bitbake.  For example, one could arrange for a command
+like "bitbake --disregard-old-versions" to parse all the files once,
+identify those versions which are older than the PREFERRED ones (whether
+set explicitly or automatically), and blacklist these old versions so
+that they are never parsed again.  The effect would be a bit like having
+an automatically-maintained BBMASK though of course the implementation
+would probably be slightly different.
 
-Thanks,
+As for old versions being in the archives, that's true, but it seems
+like one could easily get into a kind of ping-pong thing where you
+delete an old version, I pull it out of the archives again, someone else
+now notices this "old cruft" and deletes it again, and so on.  I can
+imagine that being frustrating for all parties.
 
-Mickey.
+p.
+
+
 
 
