@@ -1,35 +1,39 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.85.217.20] (helo=mail-gx0-f20.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1KsFMV-000128-BM
-	for openembedded-devel@openembedded.org; Tue, 21 Oct 2008 13:25:19 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9LBOvWP018500
+	(envelope-from <slapinid@gmail.com>) id 1KsHFf-0006PT-2q
+	for openembedded-devel@openembedded.org; Tue, 21 Oct 2008 15:26:23 +0200
+Received: by gxk13 with SMTP id 13so6365891gxk.12
 	for <openembedded-devel@openembedded.org>;
-	Tue, 21 Oct 2008 12:24:57 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18368-02 for <openembedded-devel@openembedded.org>;
-	Tue, 21 Oct 2008 12:24:44 +0100 (BST)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9LBOilH018487
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 21 Oct 2008 12:24:44 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200810211225.27212.zecke@selfish.org>
-References: <1224320609.5215.15.camel@dax.rpnet.com>
-	<1224340544.3140.98.camel@mill.internal.reciva.com>
-	<1224350337.5215.58.camel@dax.rpnet.com>
-	<200810211225.27212.zecke@selfish.org>
-Date: Tue, 21 Oct 2008 12:24:43 +0100
-Message-Id: <1224588283.5170.0.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: FILE_PR and my requirements Re: Some open issues
+	Tue, 21 Oct 2008 06:25:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:cc:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=K0pIdrNrsOmawdZN+5J964Yzr0/rt1v7nHa7sx8/DBk=;
+	b=CSOLtBIlFjMlfNXHmhNuhJS3BRq+MgaqNcw1Op4fU3oZWtAkYEeUI2H02Ut5iUTy9i
+	5cD2/O35n0qts/+N7EPbnQ5sEIINRqocsmISp43/wemsOnBobUMrd1HMkEz2Qmpz9wNx
+	HchIVcbzKy63YLYgtNA/qhnymskpVTlOsjS+U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=eT009s2r1Gw/Q/jcjYW3da/P7lsuosF9Ps30v1uXiR0Z7+eAclpR8DPPwEPED3aAJ3
+	SaSPLsRFJ48Jcj4tGUfrk88esKJJenBnii0Fo2IAS3Eperdff26eQ1VRaMD6B+TDoOiv
+	yOD3az832cCjmQ4Zye+XAx6EB6xbWjGbmCtLc=
+Received: by 10.150.156.20 with SMTP id d20mr13397686ybe.204.1224595558634;
+	Tue, 21 Oct 2008 06:25:58 -0700 (PDT)
+Received: by 10.150.212.20 with HTTP; Tue, 21 Oct 2008 06:25:58 -0700 (PDT)
+Message-ID: <48239d390810210625t3725a5e6j56278e74f06ebdfa@mail.gmail.com>
+Date: Tue, 21 Oct 2008 17:25:58 +0400
+From: "Sergey Lapin" <slapinid@gmail.com>
+To: "Discussion of the angstrom distribution development"
+	<angstrom-distro-devel@linuxtogo.org>
+In-Reply-To: <gdkiis$9ig$1@ger.gmane.org>
+MIME-Version: 1.0
+References: <gdkiis$9ig$1@ger.gmane.org>
+Cc: angstrom-distro-users@linuxtogo.org, openembedded-devel@openembedded.org,
+	openembedded-users@lists.openembedded.org
+Subject: Re: [Angstrom-devel] Tosa testing kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,22 +47,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Oct 2008 11:25:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 21 Oct 2008 13:26:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-
-On Tue, 2008-10-21 at 12:25 +0200, Holger Freyther wrote:
-> On Saturday 18 October 2008 19:18:57 Richard Purdie wrote:
-> 
-> > http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/sha
-> >red/file-pr-revert
-> 
-> When should we merge this?
-
-Now?
-
-Richard	
-
+On Tue, Oct 21, 2008 at 4:39 PM, Dmitry Baryshkov <dbaryshkov@gmail.com> wrote:
+> Hi,
+>
+> I finally had some tome to build 2.6.24 kernel with debug info I'd need.
+Did you mean time?
 
 
