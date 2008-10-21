@@ -1,31 +1,35 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KsF7L-0003yu-1f
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Oct 2008 13:09:39 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 0B62D16DF7B
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Oct 2008 13:16:48 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 074E02A420E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Oct 2008 13:17:53 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Tue, 21 Oct 2008 13:09:17 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF47F@hiob.intern.dresearch.de>
-In-Reply-To: <f96d234e0810210353x38eced88u4d2407bd33afd4d3@mail.gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] support another hardware
-Thread-Index: Ackza38u7AxLSriUQK6K5BKiVy96AAAAeMiA
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF479@hiob.intern.dresearch.de><f96d234e0810200859p70d3e127qa41e01266e2efd47@mail.gmail.com><69E6C70090A0A14498CC98FAE5E06B6E3CF47B@hiob.intern.dresearch.de><gdk0so$7qm$1@ger.gmane.org><69E6C70090A0A14498CC98FAE5E06B6E3CF47D@hiob.intern.dresearch.de>
-	<f96d234e0810210353x38eced88u4d2407bd33afd4d3@mail.gmail.com>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: support another hardware
+	(envelope-from <rpurdie@rpsys.net>) id 1KsFMV-000128-BM
+	for openembedded-devel@openembedded.org; Tue, 21 Oct 2008 13:25:19 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9LBOvWP018500
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Oct 2008 12:24:57 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 18368-02 for <openembedded-devel@openembedded.org>;
+	Tue, 21 Oct 2008 12:24:44 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9LBOilH018487
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Oct 2008 12:24:44 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200810211225.27212.zecke@selfish.org>
+References: <1224320609.5215.15.camel@dax.rpnet.com>
+	<1224340544.3140.98.camel@mill.internal.reciva.com>
+	<1224350337.5215.58.camel@dax.rpnet.com>
+	<200810211225.27212.zecke@selfish.org>
+Date: Tue, 21 Oct 2008 12:24:43 +0100
+Message-Id: <1224588283.5170.0.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: FILE_PR and my requirements Re: Some open issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,17 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Oct 2008 11:09:39 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Oct 2008 11:25:19 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-> > I would start an "Adding Machine" page with this info in=20
-> > the wiki. OK?
->=20
-> Please do.
 
-I did: <http://wiki.openembedded.net/index.php/Adding_a_new_Machine>
+On Tue, 2008-10-21 at 12:25 +0200, Holger Freyther wrote:
+> On Saturday 18 October 2008 19:18:57 Richard Purdie wrote:
+> 
+> > http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/sha
+> >red/file-pr-revert
+> 
+> When should we merge this?
+
+Now?
+
+Richard	
+
 
 
