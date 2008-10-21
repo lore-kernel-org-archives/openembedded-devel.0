@@ -1,26 +1,35 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KsJlY-0002fb-TK
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Oct 2008 18:07:28 +0200
-Received: from [92.117.207.149] (helo=[10.161.207.149])
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1KsJlB-0004YR-Hn
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Oct 2008 18:07:06 +0200
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Oct 2008 18:07:22 +0200
-User-Agent: KMail/1.9.9
-References: <1224320609.5215.15.camel@dax.rpnet.com>
-	<200810211225.27212.zecke@selfish.org>
-	<1224588283.5170.0.camel@dax.rpnet.com>
-In-Reply-To: <1224588283.5170.0.camel@dax.rpnet.com>
-MIME-Version: 1.0
-Message-Id: <200810211807.22176.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.117.207.149
-Subject: Re: FILE_PR and my requirements Re: Some open issues
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KsLyP-0005Lx-Tn
+	for openembedded-devel@openembedded.org; Tue, 21 Oct 2008 20:28:53 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KsLy1-0000FX-6n
+	for openembedded-devel@openembedded.org; Tue, 21 Oct 2008 18:28:29 +0000
+Received: from ppp89-110-7-34.pppoe.avangarddsl.ru ([89.110.7.34])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 21 Oct 2008 18:28:29 +0000
+Received: from dbaryshkov by ppp89-110-7-34.pppoe.avangarddsl.ru with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Oct 2008 18:28:29 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Dmitry Baryshkov <dbaryshkov@gmail.com>
+Date: Tue, 21 Oct 2008 18:28:17 +0000 (UTC)
+Message-ID: <gdl701$v58$1@ger.gmane.org>
+References: <gdkiis$9ig$1@ger.gmane.org>
+	<48239d390810210625t3725a5e6j56278e74f06ebdfa@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ppp89-110-7-34.pppoe.avangarddsl.ru
+User-Agent: Pan/0.132 (Waxed in Black)
+Sender: news <news@ger.gmane.org>
+Cc: angstrom-distro-users@linuxtogo.org,
+	openembedded-users@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org
+Subject: Re: [Angstrom-devel] Tosa testing kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,25 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Oct 2008 16:07:29 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 21 Oct 2008 18:28:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tuesday 21 October 2008 13:24:43 Richard Purdie wrote:
-> On Tue, 2008-10-21 at 12:25 +0200, Holger Freyther wrote:
-> > On Saturday 18 October 2008 19:18:57 Richard Purdie wrote:
-> > > http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads
-> > >/sha red/file-pr-revert
-> >
-> > When should we merge this?
->
-> Now?
+Sergey Lapin wrote:
+
+> On Tue, Oct 21, 2008 at 4:39 PM, Dmitry Baryshkov <dbaryshkov@gmail.com>
+> wrote:
+>> Hi,
+>>
+>> I finally had some tome to build 2.6.24 kernel with debug info I'd
+>> need.
+> Did you mean time?
+
+Yes, of course.
+
+-- 
+With best wishes
+Dmitry
 
 
-Me or You?
-
-z.
 
 
