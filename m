@@ -1,31 +1,25 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KsDCd-0006UY-NI
+	(envelope-from <zecke@selfish.org>) id 1KsERR-0002Lf-6k
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Oct 2008 11:06:59 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id D18FC16DF7B
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Oct 2008 11:14:08 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id CABB92A420E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Oct 2008 11:15:13 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Tue, 21 Oct 2008 12:26:21 +0200
+Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KsER6-0005fE-2m
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Oct 2008 12:26:00 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Oct 2008 12:25:26 +0200
+User-Agent: KMail/1.9.9
+References: <1224320609.5215.15.camel@dax.rpnet.com>
+	<1224340544.3140.98.camel@mill.internal.reciva.com>
+	<1224350337.5215.58.camel@dax.rpnet.com>
+In-Reply-To: <1224350337.5215.58.camel@dax.rpnet.com>
 MIME-Version: 1.0
-Date: Tue, 21 Oct 2008 11:06:38 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF47D@hiob.intern.dresearch.de>
-In-Reply-To: <gdk0so$7qm$1@ger.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] support another hardware
-Thread-Index: AckzUDLSmJhk9yEzTtKOizjH+J+SQAAC8eWw
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF479@hiob.intern.dresearch.de>	<f96d234e0810200859p70d3e127qa41e01266e2efd47@mail.gmail.com><69E6C70090A0A14498CC98FAE5E06B6E3CF47B@hiob.intern.dresearch.de>
-	<gdk0so$7qm$1@ger.gmane.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: support another hardware
+Message-Id: <200810211225.27212.zecke@selfish.org>
+Subject: Re: FILE_PR and my requirements Re: Some open issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +33,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Oct 2008 09:06:59 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Tue, 21 Oct 2008 10:26:22 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> None of the above. As Cliff said in his earlier mail:
->=20
-> "For the kernel, the preferred approach seems to be to use=20
-> a generic linux-2.6.xx.bb recipe, and add your machine to the
-> version you support."
-> ...
+On Saturday 18 October 2008 19:18:57 Richard Purdie wrote:
 
-Thanx. That's a lot of help.
+> http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/sha
+>red/file-pr-revert
 
-I would start an "Adding Machine" page with this info in the wiki. OK?
+When should we merge this?
 
-Steffen
+z.
 
 
