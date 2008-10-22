@@ -1,21 +1,39 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.132.244] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1KsaGI-0005kq-Je
-	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 11:44:18 +0200
-Received: (qmail 27116 invoked by uid 813007); 22 Oct 2008 09:43:52 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Oct 2008 09:43:52 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <elena.valhalla@gmail.com>) id 1Ksb8j-00043F-H4
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Oct 2008 12:40:33 +0200
+Received: by an-out-0708.google.com with SMTP id b38so160530ana.83
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Oct 2008 03:40:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=vxMkf12MlFZmlWxNcgin2JCukeQyo5nYkHZQMdNe3VU=;
+	b=h+WxSP82J8/5B5nRfdDT70OFRiOe+2Ik2YVmpiDXqYDfDBembH2+iCyM73/1OFVB+8
+	A75LlUBrGSi4Ix17GTbOgRbGrlHM2KAUFTRxurBibaSPVcT5xoX8jil9+UxIZvoNiOEW
+	isbQxYpsfYVY/UX0EVC/xWsj29RhtbNdtqjV0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=OS4ecb51H3ufJoyJyTjb7uaRroa8+MdngRba3xeZhsEzg0My7npdFSGGGB106TBZEb
+	fElFSdIlKQpqKzs9UUKQAbWqXwKSdNjD9ZvCR/5WSFysoboP1rXrY3HaE4mbvp7Cbb2E
+	NMeb50dH82B6qjJya7TtUjGSqQjWlh5BVo8TM=
+Received: by 10.100.119.17 with SMTP id r17mr4529407anc.130.1224672007339;
+	Wed, 22 Oct 2008 03:40:07 -0700 (PDT)
+Received: by 10.100.139.7 with HTTP; Wed, 22 Oct 2008 03:40:07 -0700 (PDT)
+Message-ID: <5c5e5c350810220340k4b41b491n66c78559f1055bfd@mail.gmail.com>
+Date: Wed, 22 Oct 2008 12:40:07 +0200
+From: "Elena of Valhalla" <elena.valhalla@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Oct 2008 11:44:02 +0200
-User-Agent: KMail/1.10.1 (Linux/2.6.27; KDE/4.1.2; x86_64; ; )
-References: <gdmr6t$iq4$1@ger.gmane.org>
-In-Reply-To: <gdmr6t$iq4$1@ger.gmane.org>
+In-Reply-To: <20081022083006.GA23378@mi.fu-berlin.de>
 MIME-Version: 1.0
-Message-Id: <200810221144.04476.openembedded@haerwu.biz>
-Subject: Re: [RFC] Moving PACKAGE_EXTRA_ARCHS to include/tune-*
+References: <5c5e5c350810140623t33258c83i6f945b8212b44eb6@mail.gmail.com>
+	<5c5e5c350810220026o1adcbd70vad18af00ada90793@mail.gmail.com>
+	<20081022083006.GA23378@mi.fu-berlin.de>
+Subject: Re: ctorrent recipes, a mistake of mine in the bugtracker and problems with autotools versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,34 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2008 09:44:18 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Oct 2008 10:40:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Wednesday 22 of October 2008 11:19:25 Koen Kooi napisa=C5=82(a):
+On Wed, Oct 22, 2008 at 10:30 AM, Henning Heinold
+<heinold@inf.fu-berlin.de> wrote:
+> [...]
+>> ctorrent dies in the do_configure task with the error:
+>>
+>> aclocal.m4:14: error: this file was generated for autoconf dnh3.3.1.
+>> You have another version of autoconf.  If you want to use that,
+>> you should regenerate the build system entirely.
+>>[...]
+> normaly aclocal.m4 is overwritten by autoreconf. I do not know why it
+> yields here. So I would test to remove aclocal.m4 and try the build
+> again.
 
-> Currently we set PACKAGE_EXTRA_ARCH in each machine, but nearly all
-> entries could get moved to the tune-* files.
->
-> So
->
-> PACKAGE_EXTRA_ARCHS =3D "armv4 armv4t armv5te armv6 armv7 armv7a"
->
-> Will move from beagleboard.conf to tune-cortexa8.conf but it will use
-> '+=3D' instead of '=3D' so machines can still do PACKAGE_EXTRA_ARCHS =3D
-> "someleetarch"
+I've tried to remove aclocal.m4 as suggested, but it does not help
 
-+1 from me as this should make it easier for people who adds new=20
-machines.
+it seems that autoreconf does overwrite aclocal.m4, and the resulting
+file is not accepted in the next step
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://blog.haerwu.biz/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+in the generated aclocal.m4 the following lines look suspicious:
 
+m4_if(m4_PACKAGE_VERSION, [dnh3.3.1],,
+[m4_fatal([this file was generated for autoconf dnh3.3.1.
+You have another version of autoconf.  If you want to use that,
+you should regenerate the build system entirely.], [63])])
 
+could this help finding the problem? dnh3.3.1 is the version of the
+ctorrent package
+
+thanks
+
+-- 
+Elena ``of Valhalla''
+
+email: elena.valhalla@gmail.com
 
 
