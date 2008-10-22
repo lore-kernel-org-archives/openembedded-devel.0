@@ -1,21 +1,18 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [217.150.241.29] (helo=smtp1.nine.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1KsbbZ-0005GR-1j
-	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 13:10:21 +0200
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id 454FC6280CC;
-	Wed, 22 Oct 2008 13:09:55 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel@openembedded.org>
-In-Reply-To: <gdmr6t$iq4$1@ger.gmane.org>
-References: <gdmr6t$iq4$1@ger.gmane.org>
-Date: Wed, 22 Oct 2008 13:09:54 +0200
-Message-Id: <1224673794.22763.70.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.0 
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: [RFC] Moving PACKAGE_EXTRA_ARCHS to include/tune-*
+	(envelope-from <mailinglist@miromico.ch>) id 1KsdMw-00025i-RE
+	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 15:03:28 +0200
+Received: from [192.168.1.190] (77-58-151-240.dclient.hispeed.ch
+	[77.58.151.240]) by smtp1.nine.ch (Postfix) with ESMTP id BC439968188
+	for <openembedded-devel@openembedded.org>;
+	Wed, 22 Oct 2008 15:02:55 +0200 (CEST)
+Message-ID: <48FF2411.1030605@miromico.ch>
+Date: Wed, 22 Oct 2008 15:01:05 +0200
+From: Alex Raimondi <mailinglist@miromico.ch>
+User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+Subject: Openembedded for AVR32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,27 +26,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2008 11:10:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 22 Oct 2008 13:03:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> So
-> PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5te armv6 armv7 armv7a"
-> Will move from beagleboard.conf to tune-cortexa8.conf but it will use 
-> '+=' instead of '=' so machines can still do PACKAGE_EXTRA_ARCHS = 
-> "someleetarch"
+Hi, 
 
-This is a bit off topic, but we also need a way to include extra staging
-paths for these architectures to PATH and PKG_CONFIG_PATH (and maybe
-more). It would be nice to fix it on architecture or classes level.
+Does OE for AVR32 really work? 
 
-See my last week mail "mplayer: PATH=...STAGING_BINDIR_CROSS not
-sufficient with complex PACKAGE_ARCH".
+I had a working version about two month ago from the monotone repository. 
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+For about three weeks we try to get it running from the latest monotone repository and after the 
+transition to git from the latest git. 
+
+Just as of this morning I grabbed a fresh new clone from the git repository. 
+
+OE does compile (minimal-image). But I can't boot the image. 
+
+This is what I found out. 
+
+** Kernel **
+OE Kernel does boot. We included a newer version (2.6.25.10) into OE with our own patches. This version does boot as well. 
+Tested on ATNGW100 and our own hardware.
+
+** rootfs **
+Rootfs is mounted via NFS. From the server logs I can see, that the filesystem actually is mounted. See the last lines from my bootlog:
+
+------
+at32ap700x_rtc at32ap700x_rtc.0: setting system clock to 1970-01-01 00:00:00 UTC
+ (0)                                                                            
+Sending DHCP requests ., OK                                                     
+eth0: link up (10/Half)                                                         
+IP-Config: Got DHCP answer from 192.168.1.1, my address is 192.168.1.151        
+IP-Config: Complete:                                                            
+     device=eth0, addr=192.168.1.151, mask=255.255.255.0, gw=192.168.1.1,       
+     host=dhcppc1, domain=, nis-domain=(none),                                  
+     bootserver=192.168.1.1, rootserver=192.168.1.150, rootpath=                
+Looking up port of RPC 100003/2 on 192.168.1.150                                
+Looking up port of RPC 100005/1 on 192.168.1.150                                
+VFS: Mounted root (nfs filesystem).                                             
+Freeing init memory: 76K (90000000 - 90013000)                                  
+init[1]: segfault at 00000008 pc 2aaac620 sp 7f931f40 ecr 24                    
+init has generated signal 11 but has no handler for it                          
+Kernel panic - not syncing: Attempted to kill init!                             
+-------
+
+There is always a signal 11 in init (seg fault). 
+
+** init ** 
+We tried different init. 
+ - OE default sysvinit => segfault
+ - Busybox init => segfault
+ - No init => kernel tries to load sh => segfault
+ - Our own "hello world" app (compiled outside of OE) => segfault
+
+Can anyone confirm that OE for AVR32 does work?
+How can we debug and fix this problem?
+
+Thanks 
+
+Alex
+
 
 
 
