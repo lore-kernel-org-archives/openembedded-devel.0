@@ -1,26 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1KsfWH-0003mr-DL
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Oct 2008 17:21:09 +0200
-Received: (qmail invoked by alias); 22 Oct 2008 15:20:40 -0000
-Received: from p579E1974.dip.t-dialin.net (EHLO [192.168.10.21])
-	[87.158.25.116]
-	by mail.gmx.net (mp053) with SMTP; 22 Oct 2008 17:20:40 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+q/1llR6mqT2eIJKF0xM3OU0G5iTzFinsyuaf9Ex
-	MMMc2B71WhegCH
-Message-ID: <48FF44C8.2000604@gmx.net>
-Date: Wed, 22 Oct 2008 17:20:40 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-users@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.62
-Subject: reduce the monkey work: BPN/BP available
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KsgEB-0001ss-Ih
+	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 18:06:31 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KsgDe-0003Dk-IT
+	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 16:05:58 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 22 Oct 2008 16:05:58 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 22 Oct 2008 16:05:58 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 22 Oct 2008 18:05:46 +0200
+Message-ID: <gdnj0q$ei6$1@ger.gmane.org>
+References: <48FF2411.1030605@miromico.ch>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081015 Shredder/3.0b1pre
+In-Reply-To: <48FF2411.1030605@miromico.ch>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Openembedded for AVR32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,73 +41,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2008 15:21:10 -0000
-X-Groupsio-MsgNum: 6346
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig1F6C568376D148DAFC4DDB78"
+X-List-Received-Date: Wed, 22 Oct 2008 16:06:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig1F6C568376D148DAFC4DDB78
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+On 22-10-2008 15:01, Alex Raimondi wrote:
+> Hi,
+>
+> Does OE for AVR32 really work?
 
-Hi,
-I just pushed the patches that adds the BP (base package) and BPN (base
-package name) variables.
+It does work if you use DISTRO=angstrom-2008.1
 
-They are there to reduce the amount of 'monkey work' needed for a
--native recipe that has a corresponding (and very similar) non-native
-recipe.
+regards,
 
-I plan to add this to the manual soon but describe it here so you can
-use before it ends up there.
+Koen
 
-The problem with -native (also for -initial, -cross and -intermediate
-suffix) recipes ist that they do not work correctly in regard to
-SRC_URI, S and FILESPATH when those make use of P or PN.
+>
+> I had a working version about two month ago from the monotone repository.
+>
+> For about three weeks we try to get it running from the latest monotone repository and after the
+> transition to git from the latest git.
+>
+> Just as of this morning I grabbed a fresh new clone from the git repository.
+>
+> OE does compile (minimal-image). But I can't boot the image.
+>
+> This is what I found out.
+>
+> ** Kernel **
+> OE Kernel does boot. We included a newer version (2.6.25.10) into OE with our own patches. This version does boot as well.
+> Tested on ATNGW100 and our own hardware.
+>
+> ** rootfs **
+> Rootfs is mounted via NFS. From the server logs I can see, that the filesystem actually is mounted. See the last lines from my bootlog:
+>
+> ------
+> at32ap700x_rtc at32ap700x_rtc.0: setting system clock to 1970-01-01 00:00:00 UTC
+>   (0)
+> Sending DHCP requests ., OK
+> eth0: link up (10/Half)
+> IP-Config: Got DHCP answer from 192.168.1.1, my address is 192.168.1.151
+> IP-Config: Complete:
+>       device=eth0, addr=192.168.1.151, mask=255.255.255.0, gw=192.168.1.1,
+>       host=dhcppc1, domain=, nis-domain=(none),
+>       bootserver=192.168.1.1, rootserver=192.168.1.150, rootpath=
+> Looking up port of RPC 100003/2 on 192.168.1.150
+> Looking up port of RPC 100005/1 on 192.168.1.150
+> VFS: Mounted root (nfs filesystem).
+> Freeing init memory: 76K (90000000 - 90013000)
+> init[1]: segfault at 00000008 pc 2aaac620 sp 7f931f40 ecr 24
+> init has generated signal 11 but has no handler for it
+> Kernel panic - not syncing: Attempted to kill init!
+> -------
+>
+> There is always a signal 11 in init (seg fault).
+>
+> ** init **
+> We tried different init.
+>   - OE default sysvinit =>  segfault
+>   - Busybox init =>  segfault
+>   - No init =>  kernel tries to load sh =>  segfault
+>   - Our own "hello world" app (compiled outside of OE) =>  segfault
+>
+> Can anyone confirm that OE for AVR32 does work?
+> How can we debug and fix this problem?
+>
+> Thanks
+>
+> Alex
 
-Current workaround is to use the literal package name instead of the
-variable and/or redefine some variables in the -native recipe. The
-latter is what Koen called the 'monkey work'.
-
-For future recipes you should consider using BP when you want a P that
-does not change in recipes ending with -native, -initial, -cross or
--intermediate (more suffixes can be supported if needed, look at
-base.bbclass).
-
-I also added the neccessary things to make dealing with patches that
-should be applied to both the non-native and the native recipe easier.
-The search path includes BPN and then BP. I added them after the entries
-for P and PN.
-
-So for a recipe called foo-native_7.33.bb patches will be searched in
-this order automatically:
-=2E/foo-native-7.33
-=2E/foo-native
-=2E/foo-7.33
-=2E/foo
-(and the others like ./files and whatnot)
-
-The BP/BPN stuff does not affect existing recipes since they do not use
-those variables. Obviously it would be nice to simplify them when a new
-package version is added or such.
-
-Regards
-Robert
 
 
---------------enig1F6C568376D148DAFC4DDB78
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.6 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iD8DBQFI/0TIG9cfwmwwEtoRAvysAJ9vOGWXIs5twcAqPI4A1irlZ5u2FwCeJp6p
-jVc6+t2Mut4rxetAYiYnikU=
-=If/m
------END PGP SIGNATURE-----
-
---------------enig1F6C568376D148DAFC4DDB78--
