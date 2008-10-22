@@ -1,18 +1,31 @@
-Received: from [217.150.241.29] (helo=smtp1.nine.ch)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mailinglist@miromico.ch>) id 1KsdMw-00025i-RE
-	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 15:03:28 +0200
-Received: from [192.168.1.190] (77-58-151-240.dclient.hispeed.ch
-	[77.58.151.240]) by smtp1.nine.ch (Postfix) with ESMTP id BC439968188
+	(envelope-from <stefan@datenfreihafen.org>) id 1KseQd-00017J-Qa
+	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 16:11:15 +0200
+Received: from p5b0375ed.dip.t-dialin.net ([91.3.117.237]
+	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1KseQA-0003BW-HX by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@openembedded.org>;
-	Wed, 22 Oct 2008 15:02:55 +0200 (CEST)
-Message-ID: <48FF2411.1030605@miromico.ch>
-Date: Wed, 22 Oct 2008 15:01:05 +0200
-From: Alex Raimondi <mailinglist@miromico.ch>
-User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
-MIME-Version: 1.0
+	Wed, 22 Oct 2008 16:10:49 +0200
+Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1KseQL-00030h-NX
+	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 16:10:57 +0200
+Date: Wed, 22 Oct 2008 16:10:57 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@openembedded.org
-Subject: Openembedded for AVR32
+Message-ID: <20081022141057.GA8564@dodger.lab.datenfreihafen.org>
+MIME-Version: 1.0
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Some review for the stefan/xo-support branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,67 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2008 13:03:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Oct 2008 14:11:16 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi, 
+Hello.
 
-Does OE for AVR32 really work? 
+I just pushed a branch which adds a machine file for the XO, aka OLPC, laptop
+and a kernel recipe for it.
 
-I had a working version about two month ago from the monotone repository. 
+This allows me to build images for the xo machine in Angstrom.
 
-For about three weeks we try to get it running from the latest monotone repository and after the 
-transition to git from the latest git. 
+I don't see how these commits could break anything, but as it is my first
+machine I would like to get some review/acks before pushing it into the main
+tree.
 
-Just as of this morning I grabbed a fresh new clone from the git repository. 
+Only three commits:
+http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=f5fbcf7e4e0228e10fa2c29f802ea0eaabf7a202
+http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=eff435600359d5f13d846be1480de73e8837133d
+http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=ed58062633bdba98098044e94ffce9207300e4be
 
-OE does compile (minimal-image). But I can't boot the image. 
-
-This is what I found out. 
-
-** Kernel **
-OE Kernel does boot. We included a newer version (2.6.25.10) into OE with our own patches. This version does boot as well. 
-Tested on ATNGW100 and our own hardware.
-
-** rootfs **
-Rootfs is mounted via NFS. From the server logs I can see, that the filesystem actually is mounted. See the last lines from my bootlog:
-
-------
-at32ap700x_rtc at32ap700x_rtc.0: setting system clock to 1970-01-01 00:00:00 UTC
- (0)                                                                            
-Sending DHCP requests ., OK                                                     
-eth0: link up (10/Half)                                                         
-IP-Config: Got DHCP answer from 192.168.1.1, my address is 192.168.1.151        
-IP-Config: Complete:                                                            
-     device=eth0, addr=192.168.1.151, mask=255.255.255.0, gw=192.168.1.1,       
-     host=dhcppc1, domain=, nis-domain=(none),                                  
-     bootserver=192.168.1.1, rootserver=192.168.1.150, rootpath=                
-Looking up port of RPC 100003/2 on 192.168.1.150                                
-Looking up port of RPC 100005/1 on 192.168.1.150                                
-VFS: Mounted root (nfs filesystem).                                             
-Freeing init memory: 76K (90000000 - 90013000)                                  
-init[1]: segfault at 00000008 pc 2aaac620 sp 7f931f40 ecr 24                    
-init has generated signal 11 but has no handler for it                          
-Kernel panic - not syncing: Attempted to kill init!                             
--------
-
-There is always a signal 11 in init (seg fault). 
-
-** init ** 
-We tried different init. 
- - OE default sysvinit => segfault
- - Busybox init => segfault
- - No init => kernel tries to load sh => segfault
- - Our own "hello world" app (compiled outside of OE) => segfault
-
-Can anyone confirm that OE for AVR32 does work?
-How can we debug and fix this problem?
-
-Thanks 
-
-Alex
-
-
+regards
+Stefan Schmidt
 
 
