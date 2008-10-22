@@ -1,31 +1,40 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KsZ1c-0006Nj-Ip
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Oct 2008 10:25:04 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 2BE7816DEFE
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1KsZ77-0006YI-UZ
+	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 10:30:45 +0200
+Received: (qmail 23420 invoked from network); 22 Oct 2008 10:30:19 +0200
+Received: from lusin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.141)
+	by leibniz.math.fu-berlin.de with SMTP; 22 Oct 2008 10:30:19 +0200
+Received: (qmail 5077 invoked by uid 9804); 22 Oct 2008 10:30:19 +0200
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 22 Oct 2008 10:30:07 +0200
+Received: (qmail 5012 invoked by uid 9804); 22 Oct 2008 10:30:07 +0200
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by lusin.mi.fu-berlin.de with SMTP; 22 Oct 2008 10:30:07 +0200
+Received: (qmail 23364 invoked from network); 22 Oct 2008 10:30:06 +0200
+Received: from omsk.mi.fu-berlin.de (160.45.45.210)
+	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
+	22 Oct 2008 08:30:06 -0000
+Received: from heinold by omsk.mi.fu-berlin.de with local (Exim 4.63 #1
+	(Debian)) id 1KsZ6U-00067e-IP
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2008 10:32:12 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 748512A420E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2008 10:33:17 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Wed, 22 Oct 2008 10:30:06 +0200
+Date: Wed, 22 Oct 2008 10:30:06 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081022083006.GA23378@mi.fu-berlin.de>
+References: <5c5e5c350810140623t33258c83i6f945b8212b44eb6@mail.gmail.com>
+	<5c5e5c350810220026o1adcbd70vad18af00ada90793@mail.gmail.com>
+X-Envelope-Sender: heinold@mi.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L41+ClamAV[5015](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.210
 MIME-Version: 1.0
-Date: Wed, 22 Oct 2008 10:24:42 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF484@hiob.intern.dresearch.de>
-In-Reply-To: <gdknoe$186$2@ger.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] support another hardware
-Thread-Index: Ackzh4v7mVrEiBL1TzGcMeWTDyIGmAAk7hmw
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF480@hiob.intern.dresearch.de>
-	<gdknoe$186$2@ger.gmane.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: support another hardware
+In-Reply-To: <5c5e5c350810220026o1adcbd70vad18af00ada90793@mail.gmail.com>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Subject: Re: ctorrent recipes, a mistake of mine in the bugtracker and problems with autotools versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2008 08:25:04 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Oct 2008 08:30:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I've created/changed oxe810.conf and linux_2.6.24.bb in the described =
-way and tried to build the angstrom distro using minimal-image.bb.
+On Wed, Oct 22, 2008 at 09:26:35AM +0200, Elena of Valhalla wrote:
+> === PROBLEM 4 (help required) ===
+> 
+> The next problem seems to be related to the autotools version:
+> ctorrent dies in the do_configure task with the error:
+> 
+> aclocal.m4:14: error: this file was generated for autoconf dnh3.3.1.
+> You have another version of autoconf.  If you want to use that,
+> you should regenerate the build system entirely.
+> 
+> (full log attached - note that the same error happens also without icecc)
 
-The good news is that the kernel build without problems. :)
+Hm,
 
-The bad one that building the root_fs fails with:
+normaly aclocal.m4 is overwritten by autoreconf. I do not know why it
+yields here. So I would test to remove aclocal.m4 and try the build
+again. There are serval recipes which you can looking how to do this
+e.g.
+http://gitweb.openembedded.net/?p=openembedded.git;a=blob;f=packages/libsdl/libsdl-image_1.2.6.bb;h=b458e19dbaf4b65866355609b82ab529a2d5eac7;hb=HEAD
+> 
+> 
+> -- 
+> Elena of Valhalla
+> 
+> homepage: http://www.trueelena.org
+> email: elena.valhalla@gmail.com
 
-| Collected errors:
-|  * ERROR: Cannot satisfy the following dependencies for task-boot:
-|        *  base-passwd *  busybox *  initscripts *  =
-modutils-initscripts *  netbase *  udev *  sysvinit *  sysvinit-pidof *  =
-tinylogin *
-
-Hmmmm? What's wrong here? Building the same image for other machines =
-works fine.
-
-Steffen
+Bye Henning
 
 
