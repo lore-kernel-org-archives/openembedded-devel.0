@@ -1,33 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KsZ8K-0006aU-VN
-	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 10:32:01 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KsZ7t-0007cp-FS
-	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 08:31:33 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 22 Oct 2008 08:31:33 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 22 Oct 2008 08:31:33 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 22 Oct 2008 10:31:24 +0200
-Message-ID: <gdmocs$97j$1@ger.gmane.org>
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF480@hiob.intern.dresearch.de>	<gdknoe$186$2@ger.gmane.org>
-	<69E6C70090A0A14498CC98FAE5E06B6E3CF484@hiob.intern.dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081015 Shredder/3.0b1pre
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF484@hiob.intern.dresearch.de>
-Sender: news <news@ger.gmane.org>
+	(envelope-from <sledz@DResearch.DE>) id 1KsZCw-0006pH-5V
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Oct 2008 10:36:46 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id B76BF16DEFE
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Oct 2008 10:43:53 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 09FA62A420E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Oct 2008 10:44:59 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Wed, 22 Oct 2008 10:36:23 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF485@hiob.intern.dresearch.de>
+In-Reply-To: <gdmocs$97j$1@ger.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] support another hardware
+Thread-Index: Ack0IQMG5KpCAH/7Sg2oqlrmxDWO5AAACTWA
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF480@hiob.intern.dresearch.de>	<gdknoe$186$2@ger.gmane.org><69E6C70090A0A14498CC98FAE5E06B6E3CF484@hiob.intern.dresearch.de>
+	<gdmocs$97j$1@ger.gmane.org>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
 Subject: Re: support another hardware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,29 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2008 08:32:01 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Oct 2008 08:36:46 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 22-10-2008 10:24, Sledz, Steffen wrote:
-> I've created/changed oxe810.conf and linux_2.6.24.bb in the described way and tried to build the angstrom distro using minimal-image.bb.
->
-> The good news is that the kernel build without problems. :)
->
-> The bad one that building the root_fs fails with:
->
-> | Collected errors:
-> |  * ERROR: Cannot satisfy the following dependencies for task-boot:
-> |        *  base-passwd *  busybox *  initscripts *  modutils-initscripts *  netbase *  udev *  sysvinit *  sysvinit-pidof *  tinylogin *
->
-> Hmmmm? What's wrong here? Building the same image for other machines works fine.
+> Looks like a package arch problem, could you show the oxe810.conf?
 
-Looks like a package arch problem, could you show the oxe810.conf?
+#@TYPE: Machine
+#@NAME: OXE810(D)SE NAS devices
+#@DESCRIPTION: Machine configuration for Oxford OXE810(D)SE NAS devices =
+http://www.oxsemi.com/products/storage/nas.html
 
-regards,
+TARGET_ARCH =3D "arm"
 
-Koen
+MACHINE_FEATURES =3D "kernel26 ext2 pci ethernet serial"
 
+PREFERRED_PROVIDER_virtual/kernel =3D "linux"
 
+require conf/machine/include/tune-arm926ejs.inc
 
 
