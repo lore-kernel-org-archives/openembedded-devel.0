@@ -1,31 +1,25 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Ksa6k-0005MP-VR
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thommycheck@gmx.de>) id 1KsaFj-0005k5-GC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Oct 2008 11:34:27 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 7C10216DEFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2008 11:41:34 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id C88972A420E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2008 11:42:39 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Wed, 22 Oct 2008 11:43:43 +0200
+Received: (qmail invoked by alias); 22 Oct 2008 09:43:15 -0000
+Received: from BAA0299.baa.pppool.de (EHLO [192.168.178.38]) [77.128.2.153]
+	by mail.gmx.net (mp059) with SMTP; 22 Oct 2008 11:43:15 +0200
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX18eCNZtblMe+ExNO2s/+5DEMND4OVM8qp9hTZ/SbK
+	oBrikhlaE2rZ2a
+Message-ID: <48FEF5B2.4090905@gmx.de>
+Date: Wed, 22 Oct 2008 11:43:14 +0200
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Mozilla-Thunderbird 2.0.0.16 (X11/20080724)
 MIME-Version: 1.0
-Date: Wed, 22 Oct 2008 11:34:04 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF486@hiob.intern.dresearch.de>
-In-Reply-To: <gdmqut$htk$1@ger.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] support another hardware
-Thread-Index: Ack0J8mDkVVZnGVNRrCyaX3gbYPkuAAAWKjg
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF480@hiob.intern.dresearch.de>	<gdknoe$186$2@ger.gmane.org><69E6C70090A0A14498CC98FAE5E06B6E3CF484@hiob.intern.dresearch.de>	<gdmocs$97j$1@ger.gmane.org><69E6C70090A0A14498CC98FAE5E06B6E3CF485@hiob.intern.dresearch.de>
-	<gdmqut$htk$1@ger.gmane.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: support another hardware
+To: openembedded-devel@lists.openembedded.org
+References: <gdmr6t$iq4$1@ger.gmane.org>
+In-Reply-To: <gdmr6t$iq4$1@ger.gmane.org>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.7
+Subject: Re: [RFC] Moving PACKAGE_EXTRA_ARCHS to include/tune-*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,18 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2008 09:34:27 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Oct 2008 09:43:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> Try adding PACKAGE_EXTRA_ARCHS =3D "armv4 armv4t armv5te"
+Koen Kooi wrote:
+> Hi,
+>
+> Currently we set PACKAGE_EXTRA_ARCH in each machine, but nearly all 
+> entries could get moved to the tune-* files.
+>
+> So
+>
+> PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5te armv6 armv7 armv7a"
+>
+> Will move from beagleboard.conf to tune-cortexa8.conf but it will use 
+> '+=' instead of '=' so machines can still do PACKAGE_EXTRA_ARCHS = 
+> "someleetarch"
+>
+> Comments, suggestions?
+>
+> regards,
+>
+> Koen
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I think this is a good idea. We should aim to keep machine.conf files as 
+small as possible and PACKAGE_EXTRA_ARCH is more cpu specific than 
+machine specific.
 
-Thx, that works. ;-)
-
-Steffen
-
-PS: What's the exact meaning of these settings?
+Regards,
+Thomas
 
 
