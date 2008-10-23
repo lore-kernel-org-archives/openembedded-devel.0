@@ -1,28 +1,24 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KswNH-0008Od-OS
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 23 Oct 2008 11:20:59 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 9D90E16DF7F
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Oct 2008 11:28:05 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 4745B2A4213
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Oct 2008 11:29:11 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Kswfc-0005Rb-P3
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Oct 2008 11:39:56 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Kswpa-0006Rf-Uu
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Oct 2008 11:50:14 +0200
+Message-ID: <4900464A.9090009@kernelconcepts.de>
+Date: Thu, 23 Oct 2008 11:39:22 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
 MIME-Version: 1.0
-Date: Thu, 23 Oct 2008 11:20:32 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF490@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: build problem with angstrom-version.bb
-Thread-Index: Ack08JeGla/bReEfS1KVD82Sg7C03A==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <Openembedded-devel@lists.openembedded.org>
-Subject: build problem with angstrom-version.bb
+To: openembedded-devel@lists.openembedded.org
+References: <gdfm8d$apg$1@ger.gmane.org>	<200810191847.04533.mickey@vanille-media.de>
+	<1224438415.4235.266.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1224438415.4235.266.camel@lenovo.internal.reciva.com>
+X-Enigmail-Version: 0.95.0
+Subject: Re: busybox recipe isappearances
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,20 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Oct 2008 09:21:00 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 23 Oct 2008 09:39:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-QWZ0ZXIgdXBncmFkaW5nIHRvZGF5IGkgZ2V0IHRoaXM6DQoNCk5PVEU6IFJ1bm5pbmcgdGFzayAx
-MzQ0IG9mIDE2MTAgKElEOiAxNzIsIC9vcHQvb3BlbmVtYmVkZGVkL3BhY2thZ2VzL2FuZ3N0cm9t
-L2FuZ3N0cm9tLXZlcnNpb24uYmIsIGRvX3BhY2thZ2Vfd3JpdGVfaXBrKQ0KTk9URTogcGFja2Fn
-ZSBhbmdzdHJvbS12ZXJzaW9uLTIwMDguMS10ZXN0LTIwMDgxMDIzOiBzdGFydGVkDQpOT1RFOiBw
-YWNrYWdlIGFuZ3N0cm9tLXZlcnNpb24tMV8yMDA4LjEtdGVzdC0yMDA4MTAyMy1yMTogdGFzayBk
-b19wYWNrYWdlX3dyaXRlX2lwazogc3RhcnRlZA0KTk9URTogVGFzayBmYWlsZWQ6IE1pc3Npbmcg
-ZmllbGQgZm9yIGlwayBnZW5lcmF0aW9uOiAnRElTVFJPX1BSJw0KTk9URTogcGFja2FnZSBhbmdz
-dHJvbS12ZXJzaW9uLTFfMjAwOC4xLXRlc3QtMjAwODEwMjMtcjE6IHRhc2sgZG9fcGFja2FnZV93
-cml0ZV9pcGs6IGZhaWxlZA0KDQo6KA0K
+Hi,
+
+Phil Blundell schrieb:
+> It's long been my view that we should just add newer ones and leave the
+> old ones alone.  There's really no reason to delete old recipes and,
+> even if you check for PREFERRED_VERSIONs in the git tree, there is no
+> real way to know who else might be relying on the version you are about
+> to delete. 
+
+I share this opinion. Since we do not know what people are doing with OE there
+is no way to find out if a recipe is used or not. In fact I can imagine a lot of
+situations in which you might want to use an older recipe.
+
+Why do we delete old recipes? We do not do this with old software releases.
+
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
