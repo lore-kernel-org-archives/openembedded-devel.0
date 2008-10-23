@@ -1,34 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.200.168] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Kt1zI-0000Mc-HS
-	for openembedded-devel@openembedded.org; Thu, 23 Oct 2008 17:20:36 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1Kt1yk-0007oA-VF
-	for openembedded-devel@openembedded.org; Thu, 23 Oct 2008 15:20:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 23 Oct 2008 15:20:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 23 Oct 2008 15:20:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 23 Oct 2008 17:16:16 +0200
-Message-ID: <gdq4g0$sff$2@ger.gmane.org>
-References: <20081023124116.GA15082@datenfreihafen.org>	<gdpu80$25g$1@ger.gmane.org>
-	<20081023135504.GA16216@datenfreihafen.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081022 Shredder/3.0b1pre
-In-Reply-To: <20081023135504.GA16216@datenfreihafen.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Pidgin needs to RDEPENDS on pidgin-data?
+	(envelope-from <shanevolpe@gmail.com>) id 1Kt3Yt-0002fV-Va
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Oct 2008 19:01:28 +0200
+Received: by wf-out-1314.google.com with SMTP id 29so471925wff.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Oct 2008 10:00:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=Qzu4QjS6yjJ+lVxG4JHIQ+aFapnx4Y2ssX0mBwJsanQ=;
+	b=XZIMqTedJcLa8Ita/iXd/Udy1GVIYl4MhreCZFXc3UQ4CjBHCRqiND7NVzOAzYmuM7
+	1wtjsUnc+jdxkU2CbczybFp6EK1DbrhtpADa3C1+8fAH4Jgou1Dr+rTfsRXMob+fVPxr
+	tANtIL+ik7MbbYC869E4nmoXD7QtrwLVkIz3c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=vjaqhjHeKcFvdDxC7UK/ZSo6VesCqmsNFddByS8ddN6xSnnJb4/1hdxKVhLcDEQ97X
+	3hztMLfENwzJ2K8qkH48Ll6fmeQYGFba8JmB2By5l09uXE8fH6ja2ae5jNYSGmLyqR4G
+	TULHsoThSdF346cXERi78fpxctHP5uv638ZRQ=
+Received: by 10.114.13.10 with SMTP id 10mr890962wam.106.1224781255813;
+	Thu, 23 Oct 2008 10:00:55 -0700 (PDT)
+Received: by 10.114.24.11 with HTTP; Thu, 23 Oct 2008 10:00:55 -0700 (PDT)
+Message-ID: <8c7950360810231000l40dcaae9oe69ce4229cca7193@mail.gmail.com>
+Date: Thu, 23 Oct 2008 13:00:55 -0400
+From: "Shane Volpe" <shanevolpe@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <c384c5ea0810230753h58fbf106rdae7a2d613e8056b@mail.gmail.com>
+MIME-Version: 1.0
+References: <8c7950360810230631k530398dajbcbbf444a67333e5@mail.gmail.com>
+	<c384c5ea0810230753h58fbf106rdae7a2d613e8056b@mail.gmail.com>
+Subject: Re: LTP (Linux Test Project) better embedded support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,43 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Oct 2008 15:20:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 23 Oct 2008 17:01:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 23-10-2008 15:55, Stefan Schmidt wrote:
-> Hello.
->
-> On Thu, 2008-10-23 at 15:29, Koen Kooi wrote:
->> On 23-10-2008 14:41, Stefan Schmidt wrote:
->>> I have a user bug report here that pidgin segfaults without pidgin-data
->>> installed:
->>> http://trac.freesmartphone.org/ticket/170
->>>
->>> In pidgin.inc it only RRECOMMANDS pidgin-data, but not RDEPENDS on it.
->>> Patch below is what I would push if nobody objects.
->> That patch is no good. The real fix is to move the 2 files pidgin needs
->> from -data to the main package.
->
-> As you already know that two files are missing, can you name them so I can
-> cookup a patch?
+Leon,
 
-iirc it's the .desktop and some other file, I straced a few weeks ago, 
-but I'm fuzzy on the details
+>> Do you use LTP as-is from OE?
+I have modified the LTP in OE to use the latest version of LTP and
+apply patches for my system to allow LTP to run with out kernel dumps
+do to lack of memory (RAM).   Originally I was going to add the
+changes to OE but then decided LTP mainstream is were things need
+addressed.
 
->
->> Also: if pidgin-data is not getting installed when installing pidgin
->> something is wrong with your feeds.
->
-> Hmm, It seems I need a better understanding then. From where comes the dep from
-> pidgin on pidgin-data? Do I miss some OE magic here?
->
-> Besides that it could good be that the feed is broken in that regard. Time to
-> fix it.
->
-> regards
-> Stefan Schmidt
-
-
+>> Yet another list to join. Maybe I will pass my remarks through you :-)
+I will be more than willing to post any of your suggestions/ideas (or
+anyone elses for that matter) to the LTP mail list.
+Regards,
+Shane
 
 
