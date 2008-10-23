@@ -1,26 +1,28 @@
 Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Kt4FD-0001UJ-0b
+	(envelope-from <stefan@datenfreihafen.org>) id 1Kt4H7-0001ZU-DQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Oct 2008 19:45:11 +0200
+	Thu, 23 Oct 2008 19:47:09 +0200
 Received: from p5b0375ab.dip.t-dialin.net ([91.3.117.171]
 	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Kt4Ef-0003Ks-8B by authid <stefan@sostec.de> with cram_md5
+	id 1Kt4GZ-0003QB-GP by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Oct 2008 19:44:39 +0200
+	Thu, 23 Oct 2008 19:46:38 +0200
 Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
 	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
-	id 1Kt4Es-0003ky-Nu for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Oct 2008 19:44:51 +0200
-Date: Thu, 23 Oct 2008 19:44:50 +0200
+	id 1Kt4Gn-0003l4-OX for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Oct 2008 19:46:49 +0200
+Date: Thu, 23 Oct 2008 19:46:49 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081023174450.GB14304@dodger.lab.datenfreihafen.org>
+Message-ID: <20081023174649.GC14304@dodger.lab.datenfreihafen.org>
 References: <20081023124116.GA15082@datenfreihafen.org>
-	<gdq4f3$sff$1@ger.gmane.org>
+	<gdpu80$25g$1@ger.gmane.org>
+	<20081023135504.GA16216@datenfreihafen.org>
+	<gdq4g0$sff$2@ger.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <gdq4f3$sff$1@ger.gmane.org>
+In-Reply-To: <gdq4g0$sff$2@ger.gmane.org>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -43,34 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Oct 2008 17:45:11 -0000
+X-List-Received-Date: Thu, 23 Oct 2008 17:47:09 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Thu, 2008-10-23 at 17:15, Koen Kooi wrote:
-> On 23-10-2008 14:41, Stefan Schmidt wrote:
+On Thu, 2008-10-23 at 17:16, Koen Kooi wrote:
+> On 23-10-2008 15:55, Stefan Schmidt wrote:
 >>
->> diff --git a/packages/pidgin/pidgin.inc b/packages/pidgin/pidgin.inc
->> index db66d13..e3c35a7 100644
->> --- a/packages/pidgin/pidgin.inc
->> +++ b/packages/pidgin/pidgin.inc
->> @@ -44,7 +44,7 @@ FILES_finch-dbg     = "${bindir}/.debug/finch \
->>
->>   FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
->>   	       ${datadir}/applications"
->> -RRECOMMENDS_${PN{ += "${PN}-data "
+>> As you already know that two files are missing, can you name them so I can
+>> cookup a patch?
 >
-> Typo alert! it's ${PN} (note the closing bracket)
+> iirc it's the .desktop and some other file, I straced a few weeks ago,  
+> but I'm fuzzy on the details
 
-Darn, directly in front of my eyes and I missed it. Just pushed a fix for this.
-
->> +RDEPENDS_${PN{ += "${PN}-data "
->
-> Another typo alert!
-
-Sure, a stupid copy. :)
+For now I fixed the wrong bracket only. Not sure if I'll come to trace the files
+down. Let's see if I can get the user motivated doing it. :)
 
 regards
 Stefan Schmidt
