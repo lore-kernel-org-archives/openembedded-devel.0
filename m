@@ -1,21 +1,21 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [217.150.241.29] (helo=smtp1.nine.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1Kst81-0002QO-Mq
-	for openembedded-devel@openembedded.org; Thu, 23 Oct 2008 07:53:02 +0200
-Received: (qmail 6628 invoked by uid 813007); 23 Oct 2008 05:52:31 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Oct 2008 05:52:31 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Oct 2008 07:52:43 +0200
-User-Agent: KMail/1.10.1 (Linux/2.6.27; KDE/4.1.2; x86_64; ; )
-References: <bdb0025f0810222159ka9b7ab7q4088bd6a241e477a@mail.gmail.com>
-In-Reply-To: <bdb0025f0810222159ka9b7ab7q4088bd6a241e477a@mail.gmail.com>
+	(envelope-from <mailinglist@miromico.ch>) id 1Ksv13-0000uv-La
+	for openembedded-devel@openembedded.org; Thu, 23 Oct 2008 09:53:57 +0200
+Received: from [192.168.1.190] (77-58-151-240.dclient.hispeed.ch
+	[77.58.151.240])
+	by smtp1.nine.ch (Postfix) with ESMTP id DA1829681DF;
+	Thu, 23 Oct 2008 09:53:26 +0200 (CEST)
+Message-ID: <49002D08.1000905@miromico.ch>
+Date: Thu, 23 Oct 2008 09:51:36 +0200
+From: Alex Raimondi <mailinglist@miromico.ch>
+User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
 MIME-Version: 1.0
-Message-Id: <200810230752.44580.openembedded@haerwu.biz>
-Subject: Re: pushing mamona things upstream
+To: openembedded-devel@lists.openembedded.org
+References: <48FF2411.1030605@miromico.ch> <gdnj0q$ei6$1@ger.gmane.org>
+In-Reply-To: <gdnj0q$ei6$1@ger.gmane.org>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Openembedded for AVR32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,39 +29,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Oct 2008 05:53:02 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Oct 2008 07:53:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Thursday 23 of October 2008 06:59:11 Rodrigo Vivi napisa=C5=82(a):
-> Hi guys,
+Koen Kooi wrote:
+>> Does OE for AVR32 really work?
 >
-> I'm afraid we from Mamona are in debit with OE. It has been passed
-> long time without sending our things back upstream.
+> It does work if you use DISTRO=angstrom-2008.1
 >
-> But now that git migration has finished it will be easy to work
-> closer.
+My local.conf has the following entries:
+
+TARGET_OS = "linux-uclibc"
+DISTRO = "angstrom-2008.1"
+ANGSTROM_MODE = "uclibc
+
+My minimal-image does not boot. Still segfault at init....
+I am suspecting a library problem.
+
+Could you send me a tar of a minimal-image rootfs, please?
+
+The OE kernel does boot if we use a rootfs generated e.g. with atmel
+buildroot.
+OE rootfs has the same problem with all kernels compiled in all
+different ways..
+
+Any other hints?
+
+Alex
+>>
+>> I had a working version about two month ago from the monotone
+>> repository.
+>>
+>> For about three weeks we try to get it running from the latest
+>> monotone repository and after the
+>> transition to git from the latest git.
+>>
+>> Just as of this morning I grabbed a fresh new clone from the git
+>> repository.
+>>
+>> OE does compile (minimal-image). But I can't boot the image.
+>>
+>> This is what I found out.
+>>
+>> ** Kernel **
+>> OE Kernel does boot. We included a newer version (2.6.25.10) into OE
+>> with our own patches. This version does boot as well.
+>> Tested on ATNGW100 and our own hardware.
+>>
+>> ** rootfs **
+>> Rootfs is mounted via NFS. From the server logs I can see, that the
+>> filesystem actually is mounted. See the last lines from my bootlog:
+>>
+>> ------
+>> at32ap700x_rtc at32ap700x_rtc.0: setting system clock to 1970-01-01
+>> 00:00:00 UTC
+>>   (0)
+>> Sending DHCP requests ., OK
+>> eth0: link up (10/Half)
+>> IP-Config: Got DHCP answer from 192.168.1.1, my address is 192.168.1.151
+>> IP-Config: Complete:
+>>       device=eth0, addr=192.168.1.151, mask=255.255.255.0,
+>> gw=192.168.1.1,
+>>       host=dhcppc1, domain=, nis-domain=(none),
+>>       bootserver=192.168.1.1, rootserver=192.168.1.150, rootpath=
+>> Looking up port of RPC 100003/2 on 192.168.1.150
+>> Looking up port of RPC 100005/1 on 192.168.1.150
+>> VFS: Mounted root (nfs filesystem).
+>> Freeing init memory: 76K (90000000 - 90013000)
+>> init[1]: segfault at 00000008 pc 2aaac620 sp 7f931f40 ecr 24
+>> init has generated signal 11 but has no handler for it
+>> Kernel panic - not syncing: Attempted to kill init!
+>> -------
+>>
+>> There is always a signal 11 in init (seg fault).
+>>
+>> ** init **
+>> We tried different init.
+>>   - OE default sysvinit =>  segfault
+>>   - Busybox init =>  segfault
+>>   - No init =>  kernel tries to load sh =>  segfault
+>>   - Our own "hello world" app (compiled outside of OE) =>  segfault
+>>
+>> Can anyone confirm that OE for AVR32 does work?
+>> How can we debug and fix this problem?
+>>
+>> Thanks
+>>
+>> Alex
 >
-> My plan is to send directly all patches that change mamona packages,
-> tasks and configuration. This shouldn't break anyone's build. (Get
-> prepared for an avalanche of commits :) )
-
-This should fix some builds even - mamona tasks lack deps now iirc.
-
-> After that it will be easy for us to see what we have different.
-> We'll put these differences in a table and ask for permission by
-> email or reporting a bug.
-
-You can also push to own branch and ask for reviewing it.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://blog.haerwu.biz/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
