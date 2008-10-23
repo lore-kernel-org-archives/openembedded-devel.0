@@ -1,32 +1,33 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1KszVq-0000A9-0G
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Oct 2008 14:42:02 +0200
-Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=localhost)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1KszV7-0003p4-GH by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Oct 2008 14:41:31 +0200
-Received: from stefan by localhost with local (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1KszV6-0003y3-6o
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Oct 2008 14:41:16 +0200
-Date: Thu, 23 Oct 2008 14:41:16 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081023124116.GA15082@datenfreihafen.org>
-MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Pidgin needs to RDEPENDS on pidgin-data?
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Kt0Gf-0006pa-QR
+	for openembedded-devel@openembedded.org; Thu, 23 Oct 2008 15:30:25 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Kt0G6-0002v7-32
+	for openembedded-devel@openembedded.org; Thu, 23 Oct 2008 13:29:50 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 23 Oct 2008 13:29:50 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 23 Oct 2008 13:29:50 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 23 Oct 2008 15:29:36 +0200
+Message-ID: <gdpu80$25g$1@ger.gmane.org>
+References: <20081023124116.GA15082@datenfreihafen.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081022 Shredder/3.0b1pre
+In-Reply-To: <20081023124116.GA15082@datenfreihafen.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Pidgin needs to RDEPENDS on pidgin-data?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +41,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Oct 2008 12:42:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Oct 2008 13:30:25 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
+On 23-10-2008 14:41, Stefan Schmidt wrote:
+> Hello.
+>
+> I have a user bug report here that pidgin segfaults without pidgin-data
+> installed:
+> http://trac.freesmartphone.org/ticket/170
+>
+> In pidgin.inc it only RRECOMMANDS pidgin-data, but not RDEPENDS on it.
+> Patch below is what I would push if nobody objects.
 
-I have a user bug report here that pidgin segfaults without pidgin-data
-installed:
-http://trac.freesmartphone.org/ticket/170
+That patch is no good. The real fix is to move the 2 files pidgin needs 
+from -data to the main package.
+Also: if pidgin-data is not getting installed when installing pidgin 
+something is wrong with your feeds.
 
-In pidgin.inc it only RRECOMMANDS pidgin-data, but not RDEPENDS on it.
-Patch below is what I would push if nobody objects.
+regards,
 
-regards
-Stefan Schmidt
+Koen
 
-diff --git a/packages/pidgin/pidgin.inc b/packages/pidgin/pidgin.inc
-index db66d13..e3c35a7 100644
---- a/packages/pidgin/pidgin.inc
-+++ b/packages/pidgin/pidgin.inc
-@@ -44,7 +44,7 @@ FILES_finch-dbg     = "${bindir}/.debug/finch \
- 
- FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
- 	       ${datadir}/applications"
--RRECOMMENDS_${PN{ += "${PN}-data "
-+RDEPENDS_${PN{ += "${PN}-data "
- FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons"
- FILES_${PN}-dev += "${libdir}/${PN}/*.la"
- 
+
+>
+> regards
+> Stefan Schmidt
+>
+> diff --git a/packages/pidgin/pidgin.inc b/packages/pidgin/pidgin.inc
+> index db66d13..e3c35a7 100644
+> --- a/packages/pidgin/pidgin.inc
+> +++ b/packages/pidgin/pidgin.inc
+> @@ -44,7 +44,7 @@ FILES_finch-dbg     = "${bindir}/.debug/finch \
+>
+>   FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
+>   	       ${datadir}/applications"
+> -RRECOMMENDS_${PN{ += "${PN}-data "
+> +RDEPENDS_${PN{ += "${PN}-data "
+>   FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons"
+>   FILES_${PN}-dev += "${libdir}/${PN}/*.la"
+
+
 
 
