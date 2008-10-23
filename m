@@ -1,33 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.217.20] (helo=mail-gx0-f20.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KsgI1-00027O-RZ
-	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 18:10:29 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1KsgHa-0003QI-C0
-	for openembedded-devel@openembedded.org; Wed, 22 Oct 2008 16:10:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 22 Oct 2008 16:10:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <rodrigo.vivi@gmail.com>) id 1KssIR-0004IX-EL
+	for openembedded-devel@openembedded.org; Thu, 23 Oct 2008 06:59:43 +0200
+Received: by gxk13 with SMTP id 13so9739379gxk.12
 	for <openembedded-devel@openembedded.org>;
-	Wed, 22 Oct 2008 16:10:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 22 Oct 2008 21:59:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=Wn9jXP2O/iiQhiXLb0Bf8m21ViArDK/Nmd1xL5Di7qY=;
+	b=CpgUy2D5IvrY/tzD1i2vIRpQyGw0Z3KZ7YuebfEH6P0ICxt9uqfU8/XTKIexL3imzp
+	S+ZzckHOv268hesJsvdhqfNLBgtetKG6y0LAEBQDk9sv7IeUbgtWJq3Ivh0VDmup7mUJ
+	VtnAI+5uEsH2LoLZRNwo2Xy8a3kz54WaUSWcU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=gvB748XOf8u+u1bWzizE/dIsG2TSczJew9kPFhY23RdR1mu0FRMcF+d0TIIFBu7WBg
+	Ib+MytBgMYPOmou7yJ4/JHe+Hp4gfhhUXjeQIVqzxQF2PFbAid80fK6mV7KM+i1NvCCD
+	IAiNGkGSe6q7PX1Lan9p5ZuEU7bVDXnHL018E=
+Received: by 10.100.108.9 with SMTP id g9mr68225anc.137.1224737951911;
+	Wed, 22 Oct 2008 21:59:11 -0700 (PDT)
+Received: by 10.100.105.13 with HTTP; Wed, 22 Oct 2008 21:59:11 -0700 (PDT)
+Message-ID: <bdb0025f0810222159ka9b7ab7q4088bd6a241e477a@mail.gmail.com>
+Date: Thu, 23 Oct 2008 01:59:11 -0300
+From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 22 Oct 2008 18:07:22 +0200
-Message-ID: <gdnj3q$ei6$2@ger.gmane.org>
-References: <20081022141057.GA8564@dodger.lab.datenfreihafen.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081015 Shredder/3.0b1pre
-In-Reply-To: <20081022141057.GA8564@dodger.lab.datenfreihafen.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Some review for the stefan/xo-support branch
+MIME-Version: 1.0
+Subject: pushing mamona things upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,38 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2008 16:10:30 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 23 Oct 2008 04:59:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 22-10-2008 16:10, Stefan Schmidt wrote:
-> Hello.
->
-> I just pushed a branch which adds a machine file for the XO, aka OLPC, laptop
-> and a kernel recipe for it.
->
-> This allows me to build images for the xo machine in Angstrom.
->
-> I don't see how these commits could break anything, but as it is my first
-> machine I would like to get some review/acks before pushing it into the main
-> tree.
->
-> Only three commits:
-> http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=f5fbcf7e4e0228e10fa2c29f802ea0eaabf7a202
-> http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=eff435600359d5f13d846be1480de73e8837133d
-> http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=ed58062633bdba98098044e94ffce9207300e4be
+Hi guys,
 
-One comment:
+I'm afraid we from Mamona are in debit with OE. It has been passed
+long time without sending our things back upstream.
 
-+PV = "2.6-olpc+git${SRCREV}"
+But now that git migration has finished it will be easy to work closer.
 
-That should be:
+My plan is to send directly all patches that change mamona packages,
+tasks and configuration. This shouldn't break anyone's build. (Get
+prepared for an avalanche of commits :) )
 
-2.6.34+gitr${SRCREV}
+After that it will be easy for us to see what we have different. We'll
+put these differences in a table and ask for permission by email or
+reporting a bug.
 
-regards,
+Any concerns?
 
-Koen
+Cheers,
 
+-- 
+Rodrigo Vivi
+INdT - Instituto Nokia de Tecnologia
+Blog: http://blog.vivi.eng.br
+GPG: 0x905BE242 @ wwwkeys.pgp.net
 
 
