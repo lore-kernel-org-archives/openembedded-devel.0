@@ -1,25 +1,33 @@
-Received: from [207.172.157.102] (helo=smtp02.lnh.mail.rcn.net)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tmtalpey@rcn.com>) id 1KtN7a-0007z6-92
-	for openembedded-devel@openembedded.org; Fri, 24 Oct 2008 15:54:34 +0200
-Received: from mr02.lnh.mail.rcn.net ([207.172.157.22])
-	by smtp02.lnh.mail.rcn.net with ESMTP; 24 Oct 2008 09:53:58 -0400
-Received: from smtp01.lnh.mail.rcn.net (smtp01.lnh.mail.rcn.net [207.172.4.11])
-	by mr02.lnh.mail.rcn.net (MOS 3.8.6-GA) with ESMTP id PEH82168;
-	Fri, 24 Oct 2008 09:53:58 -0400 (EDT)
-Message-Id: <77ts5u$jtgmng@smtp01.lnh.mail.rcn.net>
-Received: from unknown (HELO tmt.rcn.com) ([216.240.30.23])
-	by smtp01.lnh.mail.rcn.net with ESMTP; 24 Oct 2008 09:53:27 -0400
-X-Mailer: QUALCOMM Windows Eudora Version 7.1.0.9
-Date: Fri, 24 Oct 2008 09:53:02 -0400
-To: openembedded-devel@lists.openembedded.org
-From: Tom Talpey <tmtalpey@rcn.com>
-In-Reply-To: <48239d390810240611i60e4acaaybf75b00f241d2c93@mail.gmail.co
- m>
-References: <48239d390810240611i60e4acaaybf75b00f241d2c93@mail.gmail.com>
+	(envelope-from <rpurdie@rpsys.net>) id 1KtOQH-0006Az-MY
+	for openembedded-devel@openembedded.org; Fri, 24 Oct 2008 17:17:57 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9OFHM0L002582
+	for <openembedded-devel@openembedded.org>;
+	Fri, 24 Oct 2008 16:17:22 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 02505-02 for <openembedded-devel@openembedded.org>;
+	Fri, 24 Oct 2008 16:17:16 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id m9OFHAYg002564
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Fri, 24 Oct 2008 16:17:10 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <f96d234e0810240638u1026aec9y6b258bba5708315f@mail.gmail.com>
+References: <20081023230928.GA21151@denix.org>
+	<f96d234e0810240638u1026aec9y6b258bba5708315f@mail.gmail.com>
+Date: Fri, 24 Oct 2008 16:17:10 +0100
+Message-Id: <1224861430.6356.20.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Junkmail-Whitelist: YES (by domain whitelist at mr02.lnh.mail.rcn.net)
-Subject: Re: busybox start-stop-daemon problems with recent kernels
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: RFC: Add http_proxy and ftp_proxy to BitBake white list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,31 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Oct 2008 13:54:34 -0000
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 24 Oct 2008 15:17:58 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-At 09:11 AM 10/24/2008, Sergey Lapin wrote:
->Hi, all!
->How do you people overcome problems with start-stop-daemon
->of busybox with recent kernels (seek error)?
->
->Is there any solution to this? I use vanilla git kernel with my images
->(I use out-of-tree .bb's for that) and have problems. This
->does not occur with kernels which are built by OE.
->
->Any ideas?
 
-It's a bug in busybox, which tries to seek on /proc/cpuinfo (or something)
-in a misguided attempt to determine the filesize. The kernel stopped allowing
-seeks on /proc entries back in 2.6.24:
-	<http://www.lkml.org/lkml/2008/4/16/185>
+On Fri, 2008-10-24 at 09:38 -0400, Cliff Brake wrote:
+> On Thu, Oct 23, 2008 at 7:09 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> > Hi,
+> >
+> > I'd like to propose to add http_proxy and ftp_proxy environment variables to
+> > BitBake's white list of preserved environment variables. They are usually set
+> > to be used by fetching tools like wget for users behind a firewall/proxy.
+> > Thanks.
+> 
+> In my latest tests, it does not seem like http_proxy is used by the bb
+> fetcher even when it is included in BB_ENV_EXTRAWHITE.  Has anyone
+> else seen this?
 
-I have hack-y patches for busybox 1.9.2 and 1.11.1, I notice the latest
-OE metadata is now 1.11.3, perhaps it's fixed upstream (which I can't
-believe it's not, having been in the kernel for 6 months). Let me know
-if you want them.
+Yes, I've just added some extra support for this to the bitbake in Poky.
+I'll aim to get that (and some other changes) pushed upstream this
+weekend.
 
-Tom.
+Cheers,
+
+Richard
 
 
 
