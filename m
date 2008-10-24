@@ -1,23 +1,25 @@
-Received: from [209.85.198.251] (helo=rv-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1KtDXU-0007NM-6v
-	for openembedded-devel@openembedded.org; Fri, 24 Oct 2008 05:40:40 +0200
-Received: by rv-out-0708.google.com with SMTP id k29so795539rvb.0
-	for <openembedded-devel@openembedded.org>;
-	Thu, 23 Oct 2008 20:40:06 -0700 (PDT)
-Received: by 10.142.13.13 with SMTP id 13mr753380wfm.127.1224819605949;
-	Thu, 23 Oct 2008 20:40:05 -0700 (PDT)
-Received: by 10.142.147.6 with HTTP; Thu, 23 Oct 2008 20:40:05 -0700 (PDT)
-Message-ID: <ae9c9a1c0810232040k4af9b61sed0522a203291a54@mail.gmail.com>
-Date: Fri, 24 Oct 2008 00:40:05 -0300
-From: "Ricardo Salveti" <ricardo.salveti@openbossa.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20081023231631.GB21151@denix.org>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1KtJ3i-0005aa-Du
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Oct 2008 11:34:18 +0200
+Received: (qmail invoked by alias); 24 Oct 2008 09:33:42 -0000
+Received: from p579E187A.dip.t-dialin.net (EHLO [192.168.10.21])
+	[87.158.24.122]
+	by mail.gmx.net (mp033) with SMTP; 24 Oct 2008 11:33:42 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19Ax5JsTTFA58e8Orccndv4goWZaIihxlXP4fXD9P
+	9wEw4nTJ97d/LY
+Message-ID: <49019671.10108@gmx.net>
+Date: Fri, 24 Oct 2008 11:33:37 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
 MIME-Version: 1.0
-References: <bdb0025f0810222159ka9b7ab7q4088bd6a241e477a@mail.gmail.com>
-	<20081023231631.GB21151@denix.org>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: pushing mamona things upstream
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.61
+Subject: OE write access for Elena Grandi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,44 +33,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Oct 2008 03:40:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Oct 2008 09:34:18 -0000
+X-Groupsio-MsgNum: 6373
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig2302603D704CBF6144522AA2"
 
-On Thu, Oct 23, 2008 at 8:16 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Thu, Oct 23, 2008 at 01:59:11AM -0300, Rodrigo Vivi wrote:
->> My plan is to send directly all patches that change mamona packages,
->> tasks and configuration.
->
-> Thanks for doing it.
->
->> This shouldn't break anyone's build. (Get prepared for an avalanche of
->> commits :) )
->
-> At least in theory. But in reality it got broken:
->
-> ERROR: Could not include required file ../gcc/gcc3-build.inc while parsing /OE/openembedded/packages/mamona/gcc-noemu_4.1.2.bb
->
-> You forgot the gcc/gcc3-build.inc and BitBake chokes on it while parsing the
-> tree.
+--------------enig2302603D704CBF6144522AA2
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-It seems to be fixed at 3a83d1fb3fd0fdbbf763e5f495ef9046f09e15b9
+Hi,
+I propose giving OE repository write access to Elena Grandi.
 
-We still have some issues to fix even at our commits, like we had with
-this one. We'll first try to push things that shouldn't be very
-related with other distros, mostly to avoid breaking every build.
+Here is a list of closed & fixed bug reports which Elena opened,
+provided good descriptions of the issues and sometimes the neccessary
+patches
 
-Probably we'll need some kind of Mamona branch at OE for the patches
-that needs review, like ones that touch any bbclass.
+http://bugs.openembedded.org/buglist.cgi?query_format=3Dadvanced&short_de=
+sc_type=3Dallwordssubstr&short_desc=3D&long_desc_type=3Dsubstring&long_de=
+sc=3D&bug_file_loc_type=3Dallwordssubstr&bug_file_loc=3D&keywords_type=3D=
+allwords&keywords=3D&bug_status=3DRESOLVED&bug_status=3DVERIFIED&bug_stat=
+us=3DCLOSED&emailtype1=3Dsubstring&email1=3D&emailassigned_to2=3D1&emailr=
+eporter2=3D1&emailcc2=3D1&emailtype2=3Dsubstring&email2=3Delena.valhalla%=
+40gmail.com&bugidtype=3Dinclude&bug_id=3D&votes=3D&chfieldfrom=3D&chfield=
+to=3DNow&chfieldvalue=3D&cmdtype=3Ddoit&order=3DReuse+same+sort+as+last+t=
+ime&field0-0-0=3Dnoop&type0-0-0=3Dnoop&value0-0-0=3D
 
-At the moment we'll try to track what we need to push in a page at our
-Trac, but let's see how it goes.
+That is why I think it granting commit access is a good idea. :)
 
-Thanks for the report.
-
-Cheers,
--- 
-Ricardo Salveti de Araujo
+Regards
+Robert
 
 
+--------------enig2302603D704CBF6144522AA2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFJAZZ1G9cfwmwwEtoRAj4gAJ44rPgQqAUJ0Vrfu9xiaB/cxmFaOwCfY33i
+VgF6wIe/E+2tnJRGz/kftzs=
+=Svy6
+-----END PGP SIGNATURE-----
+
+--------------enig2302603D704CBF6144522AA2--
