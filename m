@@ -1,25 +1,28 @@
 Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1KtJ3i-0005aa-Du
+	(envelope-from <thebohemian@gmx.net>) id 1KtJH1-00069T-49
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Oct 2008 11:34:18 +0200
-Received: (qmail invoked by alias); 24 Oct 2008 09:33:42 -0000
+	Fri, 24 Oct 2008 11:48:03 +0200
+Received: (qmail invoked by alias); 24 Oct 2008 09:47:27 -0000
 Received: from p579E187A.dip.t-dialin.net (EHLO [192.168.10.21])
 	[87.158.24.122]
-	by mail.gmx.net (mp033) with SMTP; 24 Oct 2008 11:33:42 +0200
+	by mail.gmx.net (mp032) with SMTP; 24 Oct 2008 11:47:27 +0200
 X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19Ax5JsTTFA58e8Orccndv4goWZaIihxlXP4fXD9P
-	9wEw4nTJ97d/LY
-Message-ID: <49019671.10108@gmx.net>
-Date: Fri, 24 Oct 2008 11:33:37 +0200
+X-Provags-ID: V01U2FsdGVkX1911LptmlR1/E3lHA5lhaw5etQAQFP7izRyhwD9Nn
+	1aN5VStvbsIkSV
+Message-ID: <490199AE.6070901@gmx.net>
+Date: Fri, 24 Oct 2008 11:47:26 +0200
 From: Robert Schuster <thebohemian@gmx.net>
 User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
+References: <48F825DE.90104@miromico.ch> <48F8745B.2030001@gmx.net>
+	<449dbc2c021997d20314e77536d2f770@mail.nine.ch>
+In-Reply-To: <449dbc2c021997d20314e77536d2f770@mail.nine.ch>
 X-Enigmail-Version: 0.95.0
 X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.61
-Subject: OE write access for Elena Grandi
+X-FuHaFi: 0.6899999999999999
+Subject: Re: Adding support for our
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,40 +36,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Oct 2008 09:34:18 -0000
-X-Groupsio-MsgNum: 6373
+X-List-Received-Date: Fri, 24 Oct 2008 09:48:03 -0000
+X-Groupsio-MsgNum: 6374
 Content-Type: multipart/signed; micalg=pgp-sha1;
 	protocol="application/pgp-signature";
-	boundary="------------enig2302603D704CBF6144522AA2"
+	boundary="------------enigB9E43A46D2A8F9D5E320CEF1"
 
---------------enig2302603D704CBF6144522AA2
+--------------enigB9E43A46D2A8F9D5E320CEF1
 Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
-I propose giving OE repository write access to Elena Grandi.
 
-Here is a list of closed & fixed bug reports which Elena opened,
-provided good descriptions of the issues and sometimes the neccessary
-patches
+mailinglist@miromico.ch schrieb:
+> Yes, I know. I have an ATNGW100 as well. The problem is, that the oe fo=
+r
+> atngw100=20
+> fails. It does compile (console-image), but I can't boot. I get a segfa=
+ult
+> in init (sysvinit).
+>=20
+That is too bad and should be considered a bug. Since there are so few
+AVR32-using people in OE toolchain changes (and I somehow believe this
+is again a toolchain issue) which broke that arch went in undetected.
 
-http://bugs.openembedded.org/buglist.cgi?query_format=3Dadvanced&short_de=
-sc_type=3Dallwordssubstr&short_desc=3D&long_desc_type=3Dsubstring&long_de=
-sc=3D&bug_file_loc_type=3Dallwordssubstr&bug_file_loc=3D&keywords_type=3D=
-allwords&keywords=3D&bug_status=3DRESOLVED&bug_status=3DVERIFIED&bug_stat=
-us=3DCLOSED&emailtype1=3Dsubstring&email1=3D&emailassigned_to2=3D1&emailr=
-eporter2=3D1&emailcc2=3D1&emailtype2=3Dsubstring&email2=3Delena.valhalla%=
-40gmail.com&bugidtype=3Dinclude&bug_id=3D&votes=3D&chfieldfrom=3D&chfield=
-to=3DNow&chfieldvalue=3D&cmdtype=3Ddoit&order=3DReuse+same+sort+as+last+t=
-ime&field0-0-0=3Dnoop&type0-0-0=3Dnoop&value0-0-0=3D
-
-That is why I think it granting commit access is a good idea. :)
+OTOH it would really help if Atmel would push their binutils et al
+patches upstream ...
 
 Regards
 Robert
 
 
---------------enig2302603D704CBF6144522AA2
+--------------enigB9E43A46D2A8F9D5E320CEF1
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -75,9 +76,9 @@ Content-Disposition: attachment; filename="signature.asc"
 Version: GnuPG v1.4.6 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFJAZZ1G9cfwmwwEtoRAj4gAJ44rPgQqAUJ0Vrfu9xiaB/cxmFaOwCfY33i
-VgF6wIe/E+2tnJRGz/kftzs=
-=Svy6
+iD8DBQFJAZmuG9cfwmwwEtoRApfAAJwIhitKjlYRkOwX7ubj4KN+gtpUvACeLyxa
+l3fLqpBDrYIZmHKO4WAPMK4=
+=Dnxb
 -----END PGP SIGNATURE-----
 
---------------enig2302603D704CBF6144522AA2--
+--------------enigB9E43A46D2A8F9D5E320CEF1--
