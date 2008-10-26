@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ku7hV-0007WY-CD
-	for openembedded-devel@openembedded.org; Sun, 26 Oct 2008 16:38:45 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ku7gm-0008MF-Ow
-	for openembedded-devel@openembedded.org; Sun, 26 Oct 2008 15:38:00 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 26 Oct 2008 15:38:00 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 26 Oct 2008 15:38:00 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 26 Oct 2008 16:37:53 +0100
-Message-ID: <ge22sh$mp8$1@ger.gmane.org>
-References: <200810261626.09315.zecke@selfish.org>
+	(envelope-from <mickey@vanille-media.de>) id 1Ku7if-0000ob-0U
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 26 Oct 2008 16:39:57 +0100
+Received: from [192.168.1.150] (e180172015.adsl.alicedsl.de [85.180.172.15])
+	by drlauer-research.com (Postfix) with ESMTP id E4A8758419D
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 26 Oct 2008 16:52:59 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ge211u$h4r$1@ger.gmane.org>
+References: <ge211u$h4r$1@ger.gmane.org>
+Date: Sun, 26 Oct 2008 16:39:05 +0100
+Message-Id: <1225035545.31634.9.camel@ip6-localhost>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081023 Shredder/3.0b1pre
-In-Reply-To: <200810261626.09315.zecke@selfish.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Randomly and massively reverting commits
+X-Mailer: Evolution 2.24.1-1mdv2009.1 
+Subject: Re: Reverting recent openmoko commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +29,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Oct 2008 15:38:45 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 26 Oct 2008 15:39:57 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 26-10-2008 16:26, Holger Freyther wrote:
-> Hey Koen,
->
-> could you please explain why you feel forced to revert anything I have merged
-> the last two hours? This looks like a hostile action and would qualify to
-> disable your account.
->
-> Please explain your behavior!
+Ok, Koen, you are going too far now.
 
-I already did 20 minutes ago:
+I have tolerated your self-elected-sheriff-behaviour over the years
+since you were important for OE, even if you scared people away and
+endangered OE's public relation through your disrespectful and hostile
+behaviour. I'm fed up with you and your attitude and this has to and
+will stop now in one way or the other.
 
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2008-October/006673.html
+Sincerely,
 
-And also 10 days ago:
-
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2008-October/006527.html
+Mickey.
 
 
 
